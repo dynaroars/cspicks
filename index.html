@@ -25,6 +25,31 @@
       <div class="search-container">
         <input type="text" id="main-search" placeholder="Search for professors or schools..." />
       </div>
+
+      <div class="filters-container">
+        <div class="filter-group">
+          <label for="region-select">Region</label>
+          <select id="region-select">
+            <option value="world">World</option>
+            <option value="us" selected>USA</option>
+            <option value="northamerica">North America</option>
+            <option value="europe">Europe</option>
+            <option value="asia">Asia</option>
+            <option value="australasia">Australasia</option>
+            <option value="southamerica">South America</option>
+            <option value="africa">Africa</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Year Range</label>
+          <div class="year-inputs">
+            <select id="start-year"></select>
+            <span class="year-separator">to</span>
+            <select id="end-year"></select>
+          </div>
+        </div>
+      </div>
     </div>
 
     <main class="unified-results">

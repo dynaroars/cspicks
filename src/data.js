@@ -1,5 +1,26 @@
 import Papa from 'papaparse';
 
+const currentYear = new Date().getFullYear();
+export const DEFAULT_START_YEAR = 2015;
+export const DEFAULT_END_YEAR = currentYear;
+
+const nextTier = {
+  'ase': true,
+  'issta': true,
+  'icde': true,
+  'pods': true,
+  'hpca': true,
+  'ndss': true,
+  'pets': true,
+  'eurosys': true,
+  'eurographics': true,
+  'fast': true,
+  'usenixatc': true,
+  'icfp': true,
+  'oopsla': true,
+  'kdd': true
+};
+
 export async function loadData() {
   const BASE = import.meta.env.BASE_URL;
   const [csrankings, authorInfo, institutions] = await Promise.all([
@@ -11,7 +32,6 @@ export async function loadData() {
   const professors = {};
   const schools = {};
 
-  // Process Professors Metadata
   csrankings.forEach(row => {
     if (row.name) {
       const name = row.name.trim();
@@ -20,49 +40,200 @@ export async function loadData() {
         affiliation: row.affiliation,
         homepage: row.homepage,
         scholarid: row.scholarid,
-        areas: {} // Will be populated from authorInfo
+        pubs: []
       };
+
+      if (!schools[row.affiliation]) {
+        schools[row.affiliation] = {
+          name: row.affiliation,
+          areas: {},
+          region: null,
+          country: null
+        };
+      }
     }
   });
 
-  // Process Publication Data & Build School Stats
   authorInfo.forEach(row => {
     const name = row.name.trim();
     if (professors[name]) {
-      // Add area count to professor
-      professors[name].areas[row.area] = parseFloat(row.count);
-
-      // Add to school stats
-      const schoolName = professors[name].affiliation;
-      if (!schools[schoolName]) {
-        schools[schoolName] = {
-          name: schoolName,
-          areas: {}
-        };
+      // Skip next-tier conferences (matches CSRankings default behavior)
+      if (nextTier[row.area]) {
+        return;
       }
 
-      if (!schools[schoolName].areas[row.area]) {
-        schools[schoolName].areas[row.area] = {
-          count: 0,
-          faculty: []
-        };
-      }
-
-      schools[schoolName].areas[row.area].count += parseFloat(row.count);
-      if (!schools[schoolName].areas[row.area].faculty.includes(name)) {
-        schools[schoolName].areas[row.area].faculty.push(name);
-      }
+      professors[name].pubs.push({
+        area: row.area,
+        year: parseInt(row.year),
+        count: parseFloat(row.count),
+        adjustedcount: parseFloat(row.adjustedcount)
+      });
     }
   });
 
-  // Filter out professors with no areas/publications
+  institutions.forEach(row => {
+    const name = row.institution.trim();
+    if (schools[name]) {
+      schools[name].region = row.region;
+      schools[name].country = row.countryabbrv;
+    }
+  });
+
   for (const name in professors) {
-    if (Object.keys(professors[name].areas).length === 0) {
+    if (professors[name].pubs.length === 0) {
       delete professors[name];
     }
   }
 
   return { professors, schools };
+}
+
+// Map conferences to top-level areas (from csrankings.ts)
+const parentMap = {
+  'aaai': 'ai', 'ijcai': 'ai',
+  'cvpr': 'vision', 'eccv': 'vision', 'iccv': 'vision',
+  'icml': 'mlmining', 'iclr': 'mlmining', 'kdd': 'mlmining', 'nips': 'mlmining',
+  'acl': 'nlp', 'emnlp': 'nlp', 'naacl': 'nlp',
+  'sigir': 'inforet', 'www': 'inforet',
+  'asplos': 'arch', 'isca': 'arch', 'micro': 'arch', 'hpca': 'arch',
+  'ccs': 'sec', 'oakland': 'sec', 'usenixsec': 'sec', 'ndss': 'sec', 'pets': 'sec',
+  'vldb': 'mod', 'sigmod': 'mod', 'icde': 'mod', 'pods': 'mod',
+  'dac': 'da', 'iccad': 'da',
+  'emsoft': 'bed', 'rtas': 'bed', 'rtss': 'bed',
+  'sc': 'hpc', 'hpdc': 'hpc', 'ics': 'hpc',
+  'mobicom': 'mobile', 'mobisys': 'mobile', 'sensys': 'mobile',
+  'imc': 'metrics', 'sigmetrics': 'metrics',
+  'osdi': 'ops', 'sosp': 'ops', 'eurosys': 'ops', 'fast': 'ops', 'usenixatc': 'ops',
+  'popl': 'plan', 'pldi': 'plan', 'oopsla': 'plan', 'icfp': 'plan',
+  'fse': 'soft', 'icse': 'soft', 'ase': 'soft', 'issta': 'soft',
+  'nsdi': 'comm', 'sigcomm': 'comm',
+  'siggraph': 'graph', 'siggraph-asia': 'graph', 'eurographics': 'graph',
+  'focs': 'act', 'soda': 'act', 'stoc': 'act',
+  'crypto': 'crypt', 'eurocrypt': 'crypt',
+  'cav': 'log', 'lics': 'log',
+  'ismb': 'bio', 'recomb': 'bio',
+  'ec': 'ecom', 'wine': 'ecom',
+  'chiconf': 'chi', 'ubicomp': 'chi', 'uist': 'chi',
+  'icra': 'robotics', 'iros': 'robotics', 'rss': 'robotics',
+  'vis': 'visualization', 'vr': 'visualization',
+  'sigcse': 'csed'
+};
+
+// Get unique top-level areas
+const topLevelAreas = [...new Set(Object.values(parentMap))];
+const numAreas = topLevelAreas.length;
+
+export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us') {
+  const { professors, schools } = data;
+  const filteredProfs = {};
+  const filteredSchools = {};
+
+  // Helper to check if school is in selected region
+  const isInRegion = (schoolName) => {
+    const school = schools[schoolName];
+    if (!school) return false;
+
+    if (region === 'world') return true;
+    if (region === 'us') return school.country === 'us';
+    // For continents, check region field
+    return school.region === region;
+  };
+
+  for (const name in professors) {
+    const prof = professors[name];
+
+    // Only include professors from schools in the selected region
+    if (!isInRegion(prof.affiliation)) {
+      continue;
+    }
+
+    const filteredPubs = prof.pubs.filter(p =>
+      p.year >= startYear && p.year <= endYear
+    );
+
+    if (filteredPubs.length > 0) {
+      const totalCount = filteredPubs.reduce((sum, p) => sum + p.count, 0);
+      const totalAdjusted = filteredPubs.reduce((sum, p) => sum + p.adjustedcount, 0);
+      const totalPapers = Math.ceil(totalCount);
+
+      const areaStats = {};
+      filteredPubs.forEach(pub => {
+        // Use top-level area for grouping if possible, otherwise fallback to pub area
+        const area = parentMap[pub.area] || pub.area;
+
+        if (!areaStats[area]) {
+          areaStats[area] = { count: 0, adjusted: 0 };
+        }
+        areaStats[area].count += pub.count;
+        areaStats[area].adjusted += pub.adjustedcount;
+      });
+
+      filteredProfs[name] = {
+        ...prof,
+        pubs: filteredPubs,
+        areas: areaStats,
+        totalCount,
+        totalAdjusted,
+        totalPapers
+      };
+
+      const schoolName = prof.affiliation;
+      if (!filteredSchools[schoolName]) {
+        filteredSchools[schoolName] = {
+          name: schoolName,
+          region: schools[schoolName]?.region,
+          country: schools[schoolName]?.country,
+          areas: {},
+          areaAdjustedCounts: {}, // For geometric mean calculation
+          totalCount: 0,
+          totalAdjusted: 0
+        };
+      }
+
+      const school = filteredSchools[schoolName];
+      school.totalCount += totalCount;
+      school.totalAdjusted += totalAdjusted;
+
+      Object.entries(areaStats).forEach(([area, stats]) => {
+        if (!school.areas[area]) {
+          school.areas[area] = { count: 0, adjusted: 0, faculty: [] };
+        }
+        school.areas[area].count += stats.count;
+        school.areas[area].adjusted += stats.adjusted;
+        if (!school.areas[area].faculty.includes(name)) {
+          school.areas[area].faculty.push(name);
+        }
+
+        // Accumulate for geometric mean (by top-level area)
+        if (!school.areaAdjustedCounts[area]) {
+          school.areaAdjustedCounts[area] = 0;
+        }
+        school.areaAdjustedCounts[area] += stats.adjusted;
+      });
+    }
+  }
+
+  // Compute Geometric Mean Score for Ranking
+  const schoolList = Object.values(filteredSchools);
+
+  schoolList.forEach(school => {
+    let score = 1.0;
+    topLevelAreas.forEach(area => {
+      const adjustedCount = school.areaAdjustedCounts[area] || 0;
+      score *= (adjustedCount + 1.0);
+    });
+    school.score = Math.pow(score, 1 / numAreas);
+  });
+
+  // Sort by Geometric Mean Score
+  schoolList.sort((a, b) => b.score - a.score);
+
+  schoolList.forEach((school, index) => {
+    school.rank = index + 1;
+    filteredSchools[school.name] = school;
+  });
+
+  return { professors: filteredProfs, schools: filteredSchools };
 }
 
 async function fetchCsv(url) {
