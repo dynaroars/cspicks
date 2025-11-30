@@ -152,6 +152,40 @@ function getDBLPUrl(name) {
   return str;
 }
 
+const areaLabels = {
+  'ai': 'AI',
+  'vision': 'Computer Vision',
+  'mlmining': 'Machine Learning & Data Mining',
+  'nlp': 'Natural Language Processing',
+  'inforet': 'Information Retrieval',
+  'arch': 'Computer Architecture',
+  'sec': 'Computer Security',
+  'mod': 'Databases',
+  'da': 'Design Automation',
+  'bed': 'Embedded & Real-Time Systems',
+  'hpc': 'High-Performance Computing',
+  'mobile': 'Mobile Computing',
+  'metrics': 'Measurement & Perf. Analysis',
+  'ops': 'Operating Systems',
+  'plan': 'Programming Languages',
+  'soft': 'Software Engineering',
+  'comm': 'Computer Networks',
+  'graph': 'Computer Graphics',
+  'act': 'Algorithms & Complexity',
+  'crypt': 'Cryptography',
+  'log': 'Logic & Verification',
+  'bio': 'Comp. Bio & Bioinformatics',
+  'ecom': 'Economics & Computation',
+  'chi': 'Human-Computer Interaction',
+  'robotics': 'Robotics',
+  'visualization': 'Visualization',
+  'csed': 'Computer Science Education'
+};
+
+function cleanName(name) {
+  return name.replace(/\s+\d+$/, '');
+}
+
 function renderProfessorCard(prof) {
   // Sort areas by adjusted count descending
   const sortedAreas = Object.entries(prof.areas)
@@ -160,7 +194,7 @@ function renderProfessorCard(prof) {
 
   return `
     <div class="card">
-      <h2>${prof.name}</h2>
+      <h2>${cleanName(prof.name)}</h2>
       <div class="card-subtitle">
         <a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}')" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>
       </div>
@@ -177,7 +211,7 @@ function renderProfessorCard(prof) {
       <div class="stats-list">
         ${sortedAreas.map(([area, stats]) => `
           <div class="stat-item">
-            <span class="stat-label">${area}</span>
+            <span class="stat-label">${areaLabels[area] || area}</span>
             <span class="stat-count">${Math.ceil(stats.count)} (${stats.adjusted.toFixed(1)})</span>
           </div>
         `).join('')}
@@ -216,12 +250,18 @@ function renderSchoolCard(school) {
         ${sortedAreas.map(([area, data]) => `
           <div class="school-area-section">
             <div class="school-area-header">
-              <span>${area}</span>
+              <span>${areaLabels[area] || area}</span>
               <span>${Math.ceil(data.count)} (${data.adjusted.toFixed(1)})</span>
             </div>
             <div class="faculty-list">
-              ${data.faculty.sort().map(name => `
-                <span class="faculty-tag" onclick="setSearchQuery('${name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${name}</span>
+              ${data.faculty
+      .sort((a, b) => {
+        const countA = appData.professors[a]?.areas[area]?.adjusted || 0;
+        const countB = appData.professors[b]?.areas[area]?.adjusted || 0;
+        return countB - countA;
+      })
+      .map(name => `
+                <span class="faculty-tag" onclick="setSearchQuery('${cleanName(name).replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}</span>
               `).join('')}
             </div>
           </div>
