@@ -1,0 +1,75 @@
+# CS Picks
+
+**CS Picks** is a JavaScript-based web application for exploring Computer Science professors and schools. It uses data from [CSrankings](https://github.com/emeryberger/CSrankings) to provide an interface for searching faculty publications and analyzing school strengths.
+
+## 🚀 Features
+
+### 1. Professor Search
+- **Search by Name**: Instantly find professors by name.
+- **Publication Stats**: View a breakdown of publication counts by research area, sorted by volume.
+- **Direct Links**: Quick access to the professor's:
+    - **Homepage**
+    - **Google Scholar Profile**
+    - **DBLP Profile**
+
+### 2. School Search
+- **Search by Name**: Find universities and research institutions.
+- **Area Analysis**: View the school's top research areas based on publication count.
+- **Faculty Lists**: See which faculty members are publishing in each area.
+
+## 🛠️ Technologies Used
+
+- **Frontend**: Vanilla JavaScript (ES6+), HTML5, CSS3.
+- **Build Tool**: [Vite](https://vitejs.dev/) (for fast development and bundling).
+- **CSV Parsing**: [PapaParse](https://www.papaparse.com/).
+- **HTML Encoding**: [he](https://github.com/mathiasbynens/he) (for DBLP URL generation).
+
+## 📦 Installation & Setup
+
+1.  **Clone the Repository**
+    ```bash
+    git clone <repository-url>
+    cd cspicks
+    ```
+
+2.  **Install Dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Run Development Server**
+    ```bash
+    npm run dev
+    ```
+    The application will be available at `http://localhost:5173`.
+
+## 📂 Project Structure
+
+```
+cspicks/
+├── public/
+│   ├── data/
+│   │   ├── csrankings.csv            # Core rankings data
+│   │   ├── author-info.csv           # Publication counts per author/area
+│   │   └── institutions.csv          # Institution metadata (region, country)
+│   └── favicon.png                   # Site favicon
+├── src/
+│   ├── data.js                       # Data loading and processing logic
+│   ├── main.js                       # Main application logic
+│   └── style.css                     # CSS styles
+├── index.html                        # Main HTML entry point
+├── package.json                      # dependencies and scripts
+└── README.md                         # documentation
+```
+
+## 📊 Data Sources
+
+The application uses public data from the [CSrankings](https://github.com/emeryberger/CSrankings) project:
+
+-   **`csrankings.csv`**: Contains author names, affiliations, homepages, and Google Scholar IDs.
+-   **`author-info.csv`**: Contains publication counts for each author in specific research areas (e.g., 'ai', 'systems', 'theory').
+-   **`institutions.csv`**: Contains mapping of institutions to regions and countries.
+
+## 📝 License
+
+This project is based on data from CSrankings, which is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS Picks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <h1>CS Picks</h1>
+      <p>Explore Computer Science Professors and Schools</p>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="professor">Search Professor</button>
+      <button class="tab-btn" data-tab="school">Search School</button>
+    </nav>
+
+    <main>
+      <div id="professor-view" class="view active">
+        <div class="search-container">
+          <input type="text" id="prof-search" placeholder="Enter professor name..." />
+        </div>
+        <div id="prof-results" class="results-grid"></div>
+      </div>
+
+      <div id="school-view" class="view">
+        <div class="search-container">
+          <input type="text" id="school-search" placeholder="Enter school name..." />
+        </div>
+        <div id="school-results" class="results-container"></div>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
