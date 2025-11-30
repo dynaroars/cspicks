@@ -57,46 +57,39 @@ header p {
   font-weight: 400;
 }
 
-/* Tabs */
-.tabs {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 3rem;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 1rem;
-}
-
-.tab-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  padding: 0.5rem 0;
-  cursor: pointer;
-  font-size: 1rem;
+/* Sections */
+.section-title {
   font-family: var(--font-heading);
-  font-weight: 500;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.unified-results {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+footer {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+}
+
+footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
   transition: color 0.2s;
-  position: relative;
 }
 
-.tab-btn:hover {
+footer a:hover {
   color: var(--text-primary);
-}
-
-.tab-btn.active {
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
-.tab-btn.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1.1rem;
-  /* Align with border-bottom of .tabs */
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--text-primary);
+  text-decoration: underline;
 }
 
 /* Search */

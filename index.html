@@ -21,26 +21,27 @@
       <p>Explore Computer Science Professors and Schools</p>
     </header>
 
-    <nav class="tabs">
-      <button class="tab-btn active" data-tab="professor">Search Professor</button>
-      <button class="tab-btn" data-tab="school">Search School</button>
-    </nav>
+    <div class="search-section">
+      <div class="search-container">
+        <input type="text" id="main-search" placeholder="Search for professors or schools..." />
+      </div>
+    </div>
 
-    <main>
-      <div id="professor-view" class="view active">
-        <div class="search-container">
-          <input type="text" id="prof-search" placeholder="Enter professor name..." />
-        </div>
+    <main class="unified-results">
+      <section id="prof-section">
+        <h2 class="section-title">Professors</h2>
         <div id="prof-results" class="results-grid"></div>
-      </div>
+      </section>
 
-      <div id="school-view" class="view">
-        <div class="search-container">
-          <input type="text" id="school-search" placeholder="Enter school name..." />
-        </div>
+      <section id="school-section">
+        <h2 class="section-title">Schools</h2>
         <div id="school-results" class="results-container"></div>
-      </div>
+      </section>
     </main>
+
+    <footer>
+      <a href="https://github.com/dynaroars/cspicks" target="_blank">View on GitHub</a>
+    </footer>
   </div>
   <script type="module" src="/src/main.js"></script>
 </body>
