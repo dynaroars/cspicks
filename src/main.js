@@ -12,7 +12,6 @@ async function init() {
     appData = data;
     console.log('Data loaded:', Object.keys(appData.professors).length, 'professors', Object.keys(appData.schools).length, 'schools');
 
-    setupTabs();
     setupSearch();
   } catch (err) {
     console.error('Failed to load data:', err);
@@ -20,44 +19,27 @@ async function init() {
   }
 }
 
-function setupTabs() {
-  const tabs = document.querySelectorAll('.tab-btn');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      // Remove active class from all tabs and views
-      document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-
-      // Add active class to clicked tab and corresponding view
-      tab.classList.add('active');
-      const viewId = `${tab.dataset.tab}-view`;
-      document.getElementById(viewId).classList.add('active');
-    });
-  });
-}
-
 function setupSearch() {
-  const profSearch = document.getElementById('prof-search');
-  const schoolSearch = document.getElementById('school-search');
+  const mainSearch = document.getElementById('main-search');
 
-  profSearch.addEventListener('input', (e) => {
+  mainSearch.addEventListener('input', (e) => {
     const query = e.target.value.toLowerCase();
     if (query.length < 3) {
       document.getElementById('prof-results').innerHTML = '';
-      return;
-    }
-    searchProfessors(query);
-  });
-
-  schoolSearch.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase();
-    if (query.length < 3) {
       document.getElementById('school-results').innerHTML = '';
       return;
     }
+    searchProfessors(query);
     searchSchools(query);
   });
 }
+
+window.setSearchQuery = function (query) {
+  const input = document.getElementById('main-search');
+  input.value = query;
+  input.dispatchEvent(new Event('input'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 
 function searchProfessors(query) {
   const allProfs = Object.values(appData.professors);
@@ -112,13 +94,14 @@ function renderProfessorCard(prof) {
   // Sort areas by count descending
   const sortedAreas = Object.entries(prof.areas)
     .sort(([, a], [, b]) => b - a);
-
   const dblpUrl = getDBLPUrl(prof.name);
 
   return `
     <div class="card">
       <h2>${prof.name}</h2>
-      <div class="card-subtitle">${prof.affiliation}</div>
+      <div class="card-subtitle">
+        <a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}')" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>
+      </div>
 
       <div class="card-links">
         ${prof.homepage ? `<a href="${prof.homepage}" target="_blank" class="card-link">Website</a>` : ''}
@@ -164,7 +147,7 @@ function renderSchoolCard(school) {
           </div>
           <div class="faculty-list">
             ${data.faculty.sort().map(name => `
-              <span class="faculty-tag">${name}</span>
+              <span class="faculty-tag" onclick="setSearchQuery('${name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${name}</span>
             `).join('')}
           </div>
         </div>

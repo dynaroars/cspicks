@@ -55,6 +55,13 @@ export async function loadData() {
     }
   });
 
+  // Filter out professors with no areas/publications
+  for (const name in professors) {
+    if (Object.keys(professors[name].areas).length === 0) {
+      delete professors[name];
+    }
+  }
+
   return { professors, schools };
 }
 
