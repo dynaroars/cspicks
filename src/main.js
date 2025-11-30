@@ -1,18 +1,20 @@
-import { loadData } from './data.js';
+import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR } from './data.js';
 import he from 'he';
 
-let appData = {
-  professors: {},
-  schools: {}
-};
+let rawData = { professors: {}, schools: {} };
+let appData = { professors: {}, schools: {} };
+let startYear = DEFAULT_START_YEAR;
+let endYear = DEFAULT_END_YEAR;
+let selectedRegion = 'us';
 
 async function init() {
   try {
-    const data = await loadData();
-    appData = data;
-    console.log('Data loaded:', Object.keys(appData.professors).length, 'professors', Object.keys(appData.schools).length, 'schools');
+    rawData = await loadData();
+    appData = filterByYears(rawData, startYear, endYear, selectedRegion);
+    console.log(`Data loaded (${startYear}-${endYear}, region: ${selectedRegion}):`, Object.keys(appData.professors).length, 'professors', Object.keys(appData.schools).length, 'schools');
 
     setupSearch();
+    setupFilters();
   } catch (err) {
     console.error('Failed to load data:', err);
     document.querySelector('main').innerHTML = '<p style="text-align:center; color: #ef4444;">Error loading data. Please try again.</p>';
@@ -46,6 +48,56 @@ window.toggleCard = function (header) {
   card.classList.toggle('collapsed');
 };
 
+function setupFilters() {
+  const regionSelect = document.getElementById('region-select');
+  const startYearSelect = document.getElementById('start-year');
+  const endYearSelect = document.getElementById('end-year');
+
+  // Populate years (1970 - Current Year + 1)
+  const currentYear = new Date().getFullYear();
+  for (let y = 1970; y <= currentYear + 1; y++) {
+    const optionStart = new Option(y, y);
+    const optionEnd = new Option(y, y);
+    startYearSelect.add(optionStart);
+    endYearSelect.add(optionEnd);
+  }
+
+  // Set defaults
+  startYearSelect.value = startYear;
+  endYearSelect.value = endYear;
+
+  const handleFilterChange = () => {
+    selectedRegion = regionSelect.value;
+    startYear = parseInt(startYearSelect.value);
+    endYear = parseInt(endYearSelect.value);
+
+    // Validate range
+    if (startYear > endYear) {
+      // Swap if invalid
+      [startYear, endYear] = [endYear, startYear];
+      startYearSelect.value = startYear;
+      endYearSelect.value = endYear;
+    }
+
+    appData = filterByYears(rawData, startYear, endYear, selectedRegion);
+    console.log(`Filtered: Region=${selectedRegion}, Years=${startYear}-${endYear}`);
+
+    // Re-run current search
+    const query = document.getElementById('main-search').value.toLowerCase();
+    if (query.length >= 3) {
+      searchProfessors(query);
+      searchSchools(query);
+    } else {
+      document.getElementById('prof-results').innerHTML = '';
+      document.getElementById('school-results').innerHTML = '';
+    }
+  };
+
+  regionSelect.addEventListener('change', handleFilterChange);
+  startYearSelect.addEventListener('change', handleFilterChange);
+  endYearSelect.addEventListener('change', handleFilterChange);
+}
+
 function searchProfessors(query) {
   const allProfs = Object.values(appData.professors);
   const tokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
@@ -55,6 +107,7 @@ function searchProfessors(query) {
       const name = p.name.toLowerCase();
       return tokens.every(token => name.includes(token));
     })
+    .sort((a, b) => b.totalAdjusted - a.totalAdjusted)
     .slice(0, 20); // Limit results
 
   const container = document.getElementById('prof-results');
@@ -100,9 +153,9 @@ function getDBLPUrl(name) {
 }
 
 function renderProfessorCard(prof) {
-  // Sort areas by count descending
+  // Sort areas by adjusted count descending
   const sortedAreas = Object.entries(prof.areas)
-    .sort(([, a], [, b]) => b - a);
+    .sort(([, a], [, b]) => b.adjusted - a.adjusted);
   const dblpUrl = getDBLPUrl(prof.name);
 
   return `
@@ -110,6 +163,9 @@ function renderProfessorCard(prof) {
       <h2>${prof.name}</h2>
       <div class="card-subtitle">
         <a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}')" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>
+      </div>
+      <div class="card-stats">
+        <strong>${prof.totalPapers}</strong> papers (<strong>${prof.totalAdjusted.toFixed(1)}</strong> adjusted)
       </div>
 
       <div class="card-links">
@@ -119,10 +175,10 @@ function renderProfessorCard(prof) {
       </div>
 
       <div class="stats-list">
-        ${sortedAreas.map(([area, count]) => `
+        ${sortedAreas.map(([area, stats]) => `
           <div class="stat-item">
             <span class="stat-label">${area}</span>
-            <span class="stat-count">${count.toFixed(1)}</span>
+            <span class="stat-count">${Math.ceil(stats.count)} (${stats.adjusted.toFixed(1)})</span>
           </div>
         `).join('')}
       </div>
@@ -145,14 +201,14 @@ function searchSchools(query) {
 }
 
 function renderSchoolCard(school) {
-  // descending SORT
+  // Sort by adjusted count descending
   const sortedAreas = Object.entries(school.areas)
-    .sort(([, a], [, b]) => b.count - a.count);
+    .sort(([, a], [, b]) => b.adjusted - a.adjusted);
 
   return `
     <div class="card" style="margin-bottom: 2rem;">
       <div class="card-header" onclick="toggleCard(this)">
-        <h2>${school.name}</h2>
+        <h2>${school.name} <span style="color: #888; font-size:0.8em;">#${school.rank}</span></h2>
         <span class="card-arrow">▼</span>
       </div>
       
@@ -161,7 +217,7 @@ function renderSchoolCard(school) {
           <div class="school-area-section">
             <div class="school-area-header">
               <span>${area}</span>
-              <span>${data.count.toFixed(1)} pubs</span>
+              <span>${Math.ceil(data.count)} (${data.adjusted.toFixed(1)})</span>
             </div>
             <div class="faculty-list">
               ${data.faculty.sort().map(name => `
