@@ -1,10 +1,11 @@
 import Papa from 'papaparse';
 
 export async function loadData() {
+  const BASE = import.meta.env.BASE_URL;
   const [csrankings, authorInfo, institutions] = await Promise.all([
-    fetchCsv('/data/csrankings.csv'),
-    fetchCsv('/data/author-info.csv'),
-    fetchCsv('/data/institutions.csv')
+    fetchCsv(`${BASE}data/csrankings.csv`),
+    fetchCsv(`${BASE}data/author-info.csv`),
+    fetchCsv(`${BASE}data/institutions.csv`)
   ]);
 
   const professors = {};
