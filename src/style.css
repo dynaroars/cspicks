@@ -70,7 +70,34 @@ header p {
 .unified-results {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
+}
+
+/* Collapsible Card Styles */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.card-arrow {
+  transition: transform 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.card.collapsed .card-arrow {
+  transform: rotate(-90deg);
+}
+
+.card-content {
+  margin-top: 1.5rem;
+  display: block;
+}
+
+.card.collapsed .card-content {
+  display: none;
 }
 
 footer {

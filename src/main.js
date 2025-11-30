@@ -41,6 +41,11 @@ window.setSearchQuery = function (query) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
+window.toggleCard = function (header) {
+  const card = header.parentElement;
+  card.classList.toggle('collapsed');
+};
+
 function searchProfessors(query) {
   const allProfs = Object.values(appData.professors);
   const tokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
@@ -48,7 +53,6 @@ function searchProfessors(query) {
   const results = allProfs
     .filter(p => {
       const name = p.name.toLowerCase();
-      // Check if ALL tokens are present in the name
       return tokens.every(token => name.includes(token));
     })
     .slice(0, 20); // Limit results
@@ -147,21 +151,26 @@ function renderSchoolCard(school) {
 
   return `
     <div class="card" style="margin-bottom: 2rem;">
-      <h2>${school.name}</h2>
+      <div class="card-header" onclick="toggleCard(this)">
+        <h2>${school.name}</h2>
+        <span class="card-arrow">▼</span>
+      </div>
       
-      ${sortedAreas.map(([area, data]) => `
-        <div class="school-area-section">
-          <div class="school-area-header">
-            <span>${area}</span>
-            <span>${data.count.toFixed(1)} pubs</span>
+      <div class="card-content">
+        ${sortedAreas.map(([area, data]) => `
+          <div class="school-area-section">
+            <div class="school-area-header">
+              <span>${area}</span>
+              <span>${data.count.toFixed(1)} pubs</span>
+            </div>
+            <div class="faculty-list">
+              ${data.faculty.sort().map(name => `
+                <span class="faculty-tag" onclick="setSearchQuery('${name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${name}</span>
+              `).join('')}
+            </div>
           </div>
-          <div class="faculty-list">
-            ${data.faculty.sort().map(name => `
-              <span class="faculty-tag" onclick="setSearchQuery('${name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${name}</span>
-            `).join('')}
-          </div>
-        </div>
-      `).join('')}
+        `).join('')}
+      </div>
     </div>
   `;
 }
