@@ -43,9 +43,14 @@ window.setSearchQuery = function (query) {
 
 function searchProfessors(query) {
   const allProfs = Object.values(appData.professors);
+  const tokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
 
   const results = allProfs
-    .filter(p => p.name.toLowerCase().includes(query))
+    .filter(p => {
+      const name = p.name.toLowerCase();
+      // Check if ALL tokens are present in the name
+      return tokens.every(token => name.includes(token));
+    })
     .slice(0, 20); // Limit results
 
   const container = document.getElementById('prof-results');
@@ -122,8 +127,13 @@ function renderProfessorCard(prof) {
 }
 
 function searchSchools(query) {
+  const tokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
+
   const results = Object.values(appData.schools)
-    .filter(s => s.name.toLowerCase().includes(query))
+    .filter(s => {
+      const name = s.name.toLowerCase();
+      return tokens.every(token => name.includes(token));
+    })
     .slice(0, 10); // Limit results
 
   const container = document.getElementById('school-results');
