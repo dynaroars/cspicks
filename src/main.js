@@ -26,7 +26,7 @@ function setupSearch() {
 
   mainSearch.addEventListener('input', (e) => {
     const query = e.target.value.toLowerCase();
-    if (query.length < 3) {
+    if (query.length < 1) {
       document.getElementById('prof-results').innerHTML = '';
       document.getElementById('school-results').innerHTML = '';
       return;
@@ -84,7 +84,8 @@ function setupFilters() {
 
     // Re-run current search
     const query = document.getElementById('main-search').value.toLowerCase();
-    if (query.length >= 3) {
+
+    if (query.length >= 1) {
       searchProfessors(query);
       searchSchools(query);
     } else {
@@ -220,33 +221,74 @@ function renderProfessorCard(prof) {
   `;
 }
 
-function searchSchools(query) {
-  const tokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
-
-  const results = Object.values(appData.schools)
-    .filter(s => {
-      const name = s.name.toLowerCase();
-      return tokens.every(token => name.includes(token));
-    })
-    .slice(0, 10); // Limit results
-
-  const container = document.getElementById('school-results');
-  container.innerHTML = results.map(renderSchoolCard).join('');
+function findMatchingArea(query) {
+  const q = query.toLowerCase();
+  // Check keys and values
+  for (const [key, label] of Object.entries(areaLabels)) {
+    if (key === q || label.toLowerCase().includes(q)) {
+      return key;
+    }
+  }
+  return null;
 }
 
-function renderSchoolCard(school) {
-  // Sort by adjusted count descending
-  const sortedAreas = Object.entries(school.areas)
-    .sort(([, a], [, b]) => b.adjusted - a.adjusted);
+function searchSchools(query) {
+  const matchedArea = findMatchingArea(query);
+  let results;
+
+  if (matchedArea) {
+    // Area Search Mode
+    results = Object.values(appData.schools)
+      .filter(school => school.areas[matchedArea] && school.areas[matchedArea].adjusted > 0)
+      .sort((a, b) => {
+        const countA = a.areas[matchedArea]?.adjusted || 0;
+        const countB = b.areas[matchedArea]?.adjusted || 0;
+        return countB - countA;
+      });
+  } else {
+    // Standard Search Mode
+    const allSchools = Object.values(appData.schools);
+    const tokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
+
+    results = allSchools
+      .filter(s => {
+        const name = s.name.toLowerCase();
+        return tokens.every(token => name.includes(token));
+      })
+      .sort((a, b) => a.rank - b.rank); // Default to rank sorting
+  }
+
+  const container = document.getElementById('school-results');
+  container.innerHTML = results
+    .slice(0, 20)
+    .map(school => renderSchoolCard(school, matchedArea))
+    .join('');
+}
+
+function renderSchoolCard(school, filterArea = null) {
+  // If filterArea is set, only show that area. Otherwise show top 5.
+  let sortedAreas;
+
+  if (filterArea) {
+    if (school.areas[filterArea]) {
+      sortedAreas = [[filterArea, school.areas[filterArea]]];
+    } else {
+      sortedAreas = [];
+    }
+  } else {
+    sortedAreas = Object.entries(school.areas)
+      .sort(([, a], [, b]) => b.adjusted - a.adjusted)
+      .slice(0, 5);
+  }
 
   return `
-    <div class="card" style="margin-bottom: 2rem;">
+    <div class="card collapsed">
       <div class="card-header" onclick="toggleCard(this)">
-        <h2>${school.name} <span style="color: #888; font-size:0.8em;">#${school.rank}</span></h2>
-        <span class="card-arrow">▼</span>
+        <h2>${school.name} <span style="color: var(--text-secondary); font-size: 0.8em;">#${school.rank}</span></h2>
+        <span class="toggle-icon">▼</span>
       </div>
-      
       <div class="card-content">
+        <div class="stats-list">
         ${sortedAreas.map(([area, data]) => `
           <div class="school-area-section">
             <div class="school-area-header">
@@ -266,6 +308,7 @@ function renderSchoolCard(school) {
             </div>
           </div>
         `).join('')}
+        </div>
       </div>
     </div>
   `;
