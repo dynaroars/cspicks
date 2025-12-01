@@ -81,22 +81,27 @@ header p {
   user-select: none;
 }
 
-.card-arrow {
+.toggle-icon {
   transition: transform 0.3s ease;
   font-size: 1.2rem;
 }
 
-.card.collapsed .card-arrow {
+.card.collapsed .toggle-icon {
   transform: rotate(-90deg);
 }
 
 .card-content {
   margin-top: 1.5rem;
-  display: block;
+  overflow: hidden;
+  max-height: 5000px;
+  opacity: 1;
+  transition: all 0.4s ease-in-out;
 }
 
 .card.collapsed .card-content {
-  display: none;
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
 }
 
 footer {
