@@ -35,17 +35,133 @@ async function init() {
 function setupSearch() {
   const mainSearch = document.getElementById('main-search');
 
+  let debounceTimer;
   mainSearch.addEventListener('input', (e) => {
+    clearTimeout(debounceTimer);
     const query = e.target.value.toLowerCase();
+
     if (query.length < 1) {
       document.getElementById('prof-results').innerHTML = '';
       document.getElementById('school-results').innerHTML = '';
+      document.getElementById('dblp-results').innerHTML = '';
       return;
     }
-    searchProfessors(query);
-    searchSchools(query);
+
+    debounceTimer = setTimeout(() => {
+      searchProfessors(query);
+      searchSchools(query);
+      searchAreaPeople(query);
+      searchDBLPAuthors(query);
+    }, 300);
   });
 }
+
+function searchAreaPeople(query) {
+  const container = document.getElementById('area-people-results');
+  container.innerHTML = '';
+
+  // Check if query matches an area
+  const areaMatch = Object.entries(areaLabels).find(([key, label]) =>
+    label.toLowerCase().includes(query) || key.toLowerCase() === query
+  );
+
+  if (!areaMatch) return;
+
+  const [areaKey, areaLabel] = areaMatch;
+
+  // Find top professors in this area
+  const topProfs = Object.values(appData.professors)
+    .filter(p => p.areas[areaKey] && p.areas[areaKey].adjusted > 0)
+    .sort((a, b) => b.areas[areaKey].adjusted - a.areas[areaKey].adjusted)
+    .slice(0, 12); // Top 12
+
+  if (topProfs.length === 0) return;
+
+  container.innerHTML = `
+    <div class="section-header" style="grid-column: 1/-1; margin-top: 2rem;">
+      <h3>Top Researchers in ${areaLabel}</h3>
+    </div>
+    ${topProfs.map(prof => renderProfessorCard(prof)).join('')}
+  `;
+}
+
+async function searchDBLPAuthors(query) {
+  if (query.length < 3) {
+    document.getElementById('dblp-results').innerHTML = '';
+    return;
+  }
+
+  const container = document.getElementById('dblp-results');
+
+  try {
+    const results = await window.dblp.search(query);
+
+    if (results.length === 0) {
+      container.innerHTML = '';
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="section-header" style="grid-column: 1/-1; margin-top: 2rem;">
+        <h3>Community Authors (DBLP)</h3>
+      </div>
+      ${results.slice(0, 8).map(a => `
+        <div class="card" onclick="showDBLPAuthorProfile(this, '${a.pid}', '${a.name.replace(/'/g, "\\'")}')">
+          <div class="card-header">
+            <h2>${a.name}</h2>
+            <span class="toggle-icon">➜</span>
+          </div>
+          <div class="card-content" style="padding: 1rem; color: var(--text-secondary);">
+            Click to load stats from DBLP...
+          </div>
+        </div>
+      `).join('')}
+    `;
+  } catch (e) {
+    console.error("DBLP Search failed", e);
+  }
+}
+
+window.showDBLPAuthorProfile = async (cardEl, pid, name) => {
+  const contentEl = cardEl.querySelector('.card-content');
+  contentEl.innerHTML = '<p>Loading stats...</p>';
+
+  try {
+    const stats = await window.dblp.stats(pid, startYear, endYear);
+    if (!stats) {
+      contentEl.innerHTML = '<p>No data found.</p>';
+      return;
+    }
+
+    const sortedAreas = Object.entries(stats.areas)
+      .sort(([, a], [, b]) => b - a);
+
+    const dblpUrl = `https://dblp.org/pid/${pid}.html`;
+
+    contentEl.innerHTML = `
+      <div class="card-subtitle">DBLP Author</div>
+      <div class="card-stats">
+        <strong>${stats.totalAdjusted.toFixed(1)}</strong> adjusted count
+      </div>
+
+      <div class="card-links">
+        <a href="${dblpUrl}" target="_blank" class="card-link">DBLP</a>
+      </div>
+
+      <div class="stats-list">
+        ${sortedAreas.map(([area, count]) => `
+          <div class="stat-item">
+            <span class="stat-label">${areaLabels[area] || area}</span>
+            <span class="stat-count">${count.toFixed(1)}</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    cardEl.classList.remove('collapsed');
+  } catch (e) {
+    contentEl.innerHTML = '<p>Error loading stats.</p>';
+  }
+};
 
 window.setSearchQuery = function (query) {
   const input = document.getElementById('main-search');
@@ -277,7 +393,6 @@ function searchSchools(query) {
 }
 
 function renderSchoolCard(school, filterArea = null) {
-  // If filterArea is set, only show that area. Otherwise show top 5.
   let sortedAreas;
 
   if (filterArea) {
@@ -288,8 +403,7 @@ function renderSchoolCard(school, filterArea = null) {
     }
   } else {
     sortedAreas = Object.entries(school.areas)
-      .sort(([, a], [, b]) => b.adjusted - a.adjusted)
-      .slice(0, 5);
+      .sort(([, a], [, b]) => b.adjusted - a.adjusted);
   }
 
   return `
@@ -331,28 +445,62 @@ function setupSimulation() {
   const closeBtn = document.querySelector('.close-modal');
   const authorSearch = document.getElementById('sim-author-search');
   const univSearch = document.getElementById('sim-univ-search');
+  const facultySearch = document.getElementById('sim-faculty-search');
   const resetBtn = document.getElementById('sim-reset-btn');
 
   let selectedAuthor = null;
   let selectedUniv = null;
+  let simMode = 'add';
+
+  document.querySelectorAll('input[name="sim-mode"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      simMode = e.target.value;
+      resetSimulation();
+    });
+  });
+  const checkHash = () => {
+    if (window.location.hash === '#simulate') {
+      openBtn.style.display = 'flex';
+    } else {
+      openBtn.style.display = 'none';
+    }
+  };
+  checkHash();
+  window.addEventListener('hashchange', checkHash);
 
   openBtn.addEventListener('click', () => {
     modal.classList.remove('hidden');
-    authorSearch.focus();
+    if (simMode === 'add') authorSearch.focus();
+    else univSearch.focus();
   });
   closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
 
-  resetBtn.addEventListener('click', () => {
+  const resetSimulation = () => {
     selectedAuthor = null;
     selectedUniv = null;
-    document.getElementById('step-author').classList.remove('hidden');
-    document.getElementById('step-univ').classList.add('hidden');
     document.getElementById('step-results').classList.add('hidden');
+    document.getElementById('step-faculty').classList.add('hidden');
+
+    if (simMode === 'add') {
+      document.getElementById('step-author').classList.remove('hidden');
+      document.getElementById('step-univ').classList.add('hidden');
+      document.getElementById('step-univ-title').textContent = '2. Select Target University';
+    } else {
+      document.getElementById('step-author').classList.add('hidden');
+      document.getElementById('step-univ').classList.remove('hidden');
+      document.getElementById('step-univ-title').textContent = '1. Select Target University';
+      univSearch.focus();
+    }
+
     authorSearch.value = '';
     univSearch.value = '';
+    facultySearch.value = '';
     document.getElementById('sim-author-results').innerHTML = '';
     document.getElementById('sim-univ-results').innerHTML = '';
-  });
+    document.getElementById('sim-faculty-results').innerHTML = '';
+  };
+
+  resetBtn.addEventListener('click', resetSimulation);
 
   authorSearch.addEventListener('input', async (e) => {
     const q = e.target.value;
@@ -400,28 +548,90 @@ function setupSimulation() {
       item.addEventListener('click', () => {
         selectedUniv = appData.schools[item.dataset.name];
 
-        document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name}`;
-        document.getElementById('step-univ').classList.add('hidden');
-        document.getElementById('step-results').classList.remove('hidden');
-        runSimulation(selectedAuthor, selectedUniv);
+        if (simMode === 'add') {
+          document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name}`;
+          document.getElementById('step-univ').classList.add('hidden');
+          document.getElementById('step-results').classList.remove('hidden');
+          runSimulation(selectedAuthor, selectedUniv, false);
+        } else {
+          // Remove Mode
+          document.getElementById('selected-univ-display-remove').textContent = `Target: ${selectedUniv.name}`;
+          document.getElementById('step-univ').classList.add('hidden');
+          document.getElementById('step-faculty').classList.remove('hidden');
+          renderFacultyList(selectedUniv);
+          facultySearch.focus();
+        }
       });
     });
   });
+
+  const renderFacultyList = (school) => {
+    const container = document.getElementById('sim-faculty-results');
+
+    const facultySet = new Set();
+    Object.values(school.areas).forEach(area => {
+      area.faculty.forEach(name => facultySet.add(name));
+    });
+
+    const faculty = Array.from(facultySet).sort();
+
+    const filterAndRender = (q) => {
+      const filtered = faculty.filter(f => f.toLowerCase().includes(q));
+      container.innerHTML = filtered.map(f => `
+        <div class="sim-item" data-name="${f.replace(/"/g, '&quot;')}">
+          <strong>${cleanName(f)}</strong>
+        </div>
+      `).join('');
+
+      container.querySelectorAll('.sim-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const profName = item.dataset.name;
+          const profObj = { name: profName, isFaculty: true };
+          document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name}`;
+          document.getElementById('step-faculty').classList.add('hidden');
+          document.getElementById('step-results').classList.remove('hidden');
+          runSimulation(profObj, selectedUniv, true);
+        });
+      });
+    };
+
+    filterAndRender('');
+
+    facultySearch.oninput = (e) => filterAndRender(e.target.value.toLowerCase());
+  };
 }
 
-async function runSimulation(author, school) {
+async function runSimulation(author, school, isRemove = false) {
   const loading = document.getElementById('sim-loading');
   const display = document.getElementById('sim-impact-display');
 
   loading.classList.remove('hidden');
   display.innerHTML = '';
 
-  const stats = await window.dblp.stats(author.pid, startYear, endYear);
+  let stats;
 
-  if (!stats) {
-    loading.classList.add('hidden');
-    display.innerHTML = '<p style="color:red">Failed to fetch author data.</p>';
-    return;
+  if (isRemove) {
+    const prof = appData.professors[author.name];
+    if (!prof) {
+      loading.classList.add('hidden');
+      display.innerHTML = '<p style="color:red">Professor data not found.</p>';
+      return;
+    }
+    const flatAreas = {};
+    for (const [k, v] of Object.entries(prof.areas)) {
+      flatAreas[k] = v.adjusted;
+    }
+    stats = {
+      totalAdjusted: prof.totalAdjusted,
+      areas: flatAreas
+    };
+  } else {
+    stats = await window.dblp.search(author.pid);
+    if (!stats) {
+      loading.classList.add('hidden');
+      display.innerHTML = '<p style="color:red">Failed to fetch author data.</p>';
+      return;
+    }
   }
 
   const schoolClone = JSON.parse(JSON.stringify(school));
@@ -430,9 +640,15 @@ async function runSimulation(author, school) {
     if (!schoolClone.areas[area]) {
       schoolClone.areas[area] = { count: 0, adjusted: 0, faculty: [] };
     }
-    schoolClone.areas[area].adjusted += val;
+
+    if (isRemove) {
+      schoolClone.areas[area].adjusted = Math.max(0, schoolClone.areas[area].adjusted - val);
+    } else {
+      schoolClone.areas[area].adjusted += val;
+    }
   }
 
+  // 3. Re-calculate Rank
   const allSchools = Object.values(appData.schools).map(s =>
     s.name === school.name ? schoolClone : s
   );
@@ -459,15 +675,19 @@ async function runSimulation(author, school) {
   const newRank = allSchools.findIndex(s => s.name === school.name) + 1;
   const oldRank = school.rank;
   const diff = oldRank - newRank;
+
   loading.classList.add('hidden');
 
   let arrow = diff > 0 ? '⬆' : (diff < 0 ? '⬇' : '➡');
   let color = diff > 0 ? '#10b981' : (diff < 0 ? '#ef4444' : 'var(--text-secondary)');
 
+  const actionText = isRemove ? `Removed ${author.name}` : `Added ${author.name}`;
+  const impactText = diff > 0 ? `Improved by ${diff} spots!` : (diff < 0 ? `Dropped by ${Math.abs(diff)} spots` : 'No change in rank');
+
   display.innerHTML = `
     <div class="impact-card">
-      <h3>${author.name}</h3>
-      <p>${stats.totalAdjusted.toFixed(1)} Adjusted Count</p>
+      <h3>${actionText}</h3>
+      <p>${isRemove ? '-' : '+'}${stats.totalAdjusted.toFixed(1)} Adjusted Count</p>
     </div>
     
     <div class="impact-card">
@@ -477,18 +697,20 @@ async function runSimulation(author, school) {
         <span>${arrow}</span>
         <span>#${newRank}</span>
       </div>
-      <p>${diff > 0 ? `Improved by ${diff} spots!` : 'No change in rank'}</p>
+      <p>${impactText}</p>
     </div>
 
     <div class="area-gains">
-      <h4>Top Area Contributions:</h4>
+      <h4>Top Area ${isRemove ? 'Losses' : 'Gains'}:</h4>
       ${Object.entries(stats.areas)
       .sort(([, a], [, b]) => b - a)
       .slice(0, 5)
       .map(([area, val]) => `
           <div class="gain-item">
             <span>${areaLabels[area] || area}</span>
-            <span class="gain-val">+${val.toFixed(1)}</span>
+            <span class="gain-val" style="color: ${isRemove ? '#ef4444' : '#10b981'}">
+              ${isRemove ? '-' : '+'}${val.toFixed(1)}
+            </span>
           </div>
         `).join('')}
     </div>

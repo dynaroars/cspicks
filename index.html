@@ -58,7 +58,9 @@
 
     <main>
       <section id="school-results" class="results-grid"></section>
+      <section id="area-people-results" class="results-grid"></section>
       <section id="prof-results" class="results-grid"></section>
+      <section id="dblp-results" class="results-grid"></section>
     </main>
 
     <div id="sim-modal" class="modal hidden">
@@ -68,6 +70,16 @@
           <button class="close-modal">&times;</button>
         </div>
         <div class="modal-body">
+          <div class="sim-mode-toggle"
+            style="margin-bottom: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
+            <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+              <input type="radio" name="sim-mode" value="add" checked> Add Author
+            </label>
+            <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+              <input type="radio" name="sim-mode" value="remove"> Remove Faculty
+            </label>
+          </div>
+
           <div class="sim-step" id="step-author">
             <h3>1. Find an Author (DBLP)</h3>
             <input type="text" id="sim-author-search" placeholder="Type name (e.g. Geoffrey Hinton)...">
@@ -75,10 +87,17 @@
           </div>
 
           <div class="sim-step hidden" id="step-univ">
-            <h3>2. Select Target University</h3>
+            <h3 id="step-univ-title">2. Select Target University</h3>
             <div class="selected-item" id="selected-author-display"></div>
             <input type="text" id="sim-univ-search" placeholder="Type university name...">
             <div id="sim-univ-results" class="sim-list"></div>
+          </div>
+
+          <div class="sim-step hidden" id="step-faculty">
+            <h3>2. Select Faculty to Remove</h3>
+            <div class="selected-item" id="selected-univ-display-remove"></div>
+            <input type="text" id="sim-faculty-search" placeholder="Search faculty name...">
+            <div id="sim-faculty-results" class="sim-list"></div>
           </div>
 
           <div class="sim-step hidden" id="step-results">
