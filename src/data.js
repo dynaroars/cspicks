@@ -4,7 +4,7 @@ const currentYear = new Date().getFullYear();
 export const DEFAULT_START_YEAR = 2015;
 export const DEFAULT_END_YEAR = currentYear;
 
-const nextTier = {
+export const nextTier = {
   'ase': true,
   'issta': true,
   'icde': true,
@@ -89,7 +89,7 @@ export async function loadData() {
 }
 
 // Map conferences to top-level areas (from csrankings.ts)
-const parentMap = {
+export const parentMap = {
   'aaai': 'ai', 'ijcai': 'ai',
   'cvpr': 'vision', 'eccv': 'vision', 'iccv': 'vision',
   'icml': 'mlmining', 'iclr': 'mlmining', 'kdd': 'mlmining', 'nips': 'mlmining',

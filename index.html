@@ -23,21 +23,19 @@
 
     <div class="search-section">
       <div class="search-container">
-        <input type="text" id="main-search" placeholder="Search for professors or schools..." />
+        <input type="text" id="main-search" placeholder="Search for professors, schools, or areas (e.g. 'graphics')..."
+          autofocus>
       </div>
 
-      <div class="filters-container">
+      <div class="filters">
         <div class="filter-group">
           <label for="region-select">Region</label>
           <select id="region-select">
             <option value="world">World</option>
             <option value="us" selected>USA</option>
-            <option value="northamerica">North America</option>
             <option value="europe">Europe</option>
-            <option value="asia">Asia</option>
+            <option value="canada">Canada</option>
             <option value="australasia">Australasia</option>
-            <option value="southamerica">South America</option>
-            <option value="africa">Africa</option>
           </select>
         </div>
 
@@ -45,17 +43,54 @@
           <label>Year Range</label>
           <div class="year-inputs">
             <select id="start-year"></select>
-            <span class="year-separator">to</span>
+            <span>to</span>
             <select id="end-year"></select>
           </div>
         </div>
       </div>
+
+      <div class="actions-container">
+        <button id="simulate-btn" class="btn-secondary" title="Simulate adding an author to a university">
+          Simulate
+        </button>
+      </div>
     </div>
 
-    <main class="unified-results">
-      <div id="school-results" class="results-container"></div>
-      <div id="prof-results" class="results-grid"></div>
+    <main>
+      <section id="school-results" class="results-grid"></section>
+      <section id="prof-results" class="results-grid"></section>
     </main>
+
+    <div id="sim-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Recruiting Simulator</h2>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="sim-step" id="step-author">
+            <h3>1. Find an Author (DBLP)</h3>
+            <input type="text" id="sim-author-search" placeholder="Type name (e.g. Geoffrey Hinton)...">
+            <div id="sim-author-results" class="sim-list"></div>
+          </div>
+
+          <div class="sim-step hidden" id="step-univ">
+            <h3>2. Select Target University</h3>
+            <div class="selected-item" id="selected-author-display"></div>
+            <input type="text" id="sim-univ-search" placeholder="Type university name...">
+            <div id="sim-univ-results" class="sim-list"></div>
+          </div>
+
+          <div class="sim-step hidden" id="step-results">
+            <h3>3. Impact Analysis</h3>
+            <div class="selected-item" id="selected-univ-display"></div>
+            <div id="sim-loading" class="hidden">Calculating... <span class="spinner">↻</span></div>
+            <div id="sim-impact-display"></div>
+            <button id="sim-reset-btn" class="btn-secondary">Start Over</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <footer>
       <p>This research uses data from <a href="https://csrankings.org" target="_blank">CSrankings.org</a>. <a

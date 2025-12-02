@@ -1,13 +1,24 @@
-import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR } from './data.js';
+import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap } from './data.js';
 import he from 'he';
 
-let rawData = { professors: {}, schools: {} };
+import { searchAuthor, fetchAuthorStats } from './dblp.js';
+
+window.dblp = {
+  search: searchAuthor,
+  stats: fetchAuthorStats
+};
+
+let rawData = null;
 let appData = { professors: {}, schools: {} };
 let startYear = DEFAULT_START_YEAR;
 let endYear = DEFAULT_END_YEAR;
 let selectedRegion = 'us';
 
 async function init() {
+  setupFilters();
+  setupSearch();
+  setupSimulation();
+
   try {
     rawData = await loadData();
     appData = filterByYears(rawData, startYear, endYear, selectedRegion);
@@ -313,4 +324,175 @@ function renderSchoolCard(school, filterArea = null) {
     </div>
   `;
 }
+
+function setupSimulation() {
+  const modal = document.getElementById('sim-modal');
+  const openBtn = document.getElementById('simulate-btn');
+  const closeBtn = document.querySelector('.close-modal');
+  const authorSearch = document.getElementById('sim-author-search');
+  const univSearch = document.getElementById('sim-univ-search');
+  const resetBtn = document.getElementById('sim-reset-btn');
+
+  let selectedAuthor = null;
+  let selectedUniv = null;
+
+  openBtn.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    authorSearch.focus();
+  });
+  closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+
+  resetBtn.addEventListener('click', () => {
+    selectedAuthor = null;
+    selectedUniv = null;
+    document.getElementById('step-author').classList.remove('hidden');
+    document.getElementById('step-univ').classList.add('hidden');
+    document.getElementById('step-results').classList.add('hidden');
+    authorSearch.value = '';
+    univSearch.value = '';
+    document.getElementById('sim-author-results').innerHTML = '';
+    document.getElementById('sim-univ-results').innerHTML = '';
+  });
+
+  authorSearch.addEventListener('input', async (e) => {
+    const q = e.target.value;
+    if (q.length < 3) return;
+
+    const results = await window.dblp.search(q);
+    const container = document.getElementById('sim-author-results');
+
+    container.innerHTML = results.map(a => `
+      <div class="sim-item" data-pid="${a.pid}" data-name="${a.name}">
+        <strong>${a.name}</strong> <small>(${a.pid})</small>
+      </div>
+    `).join('');
+
+    container.querySelectorAll('.sim-item').forEach(item => {
+      item.addEventListener('click', () => {
+        selectedAuthor = {
+          name: item.dataset.name,
+          pid: item.dataset.pid
+        };
+        document.getElementById('selected-author-display').textContent = `Selected: ${selectedAuthor.name}`;
+        document.getElementById('step-author').classList.add('hidden');
+        document.getElementById('step-univ').classList.remove('hidden');
+        univSearch.focus();
+      });
+    });
+  });
+
+  univSearch.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase();
+    if (q.length < 1) return;
+
+    const results = Object.values(appData.schools)
+      .filter(s => s.name.toLowerCase().includes(q))
+      .slice(0, 10);
+
+    const container = document.getElementById('sim-univ-results');
+    container.innerHTML = results.map(s => `
+      <div class="sim-item" data-name="${s.name}">
+        <strong>${s.name}</strong> <small>#${s.rank}</small>
+      </div>
+    `).join('');
+
+    container.querySelectorAll('.sim-item').forEach(item => {
+      item.addEventListener('click', () => {
+        selectedUniv = appData.schools[item.dataset.name];
+
+        document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name}`;
+        document.getElementById('step-univ').classList.add('hidden');
+        document.getElementById('step-results').classList.remove('hidden');
+        runSimulation(selectedAuthor, selectedUniv);
+      });
+    });
+  });
+}
+
+async function runSimulation(author, school) {
+  const loading = document.getElementById('sim-loading');
+  const display = document.getElementById('sim-impact-display');
+
+  loading.classList.remove('hidden');
+  display.innerHTML = '';
+
+  const stats = await window.dblp.stats(author.pid, startYear, endYear);
+
+  if (!stats) {
+    loading.classList.add('hidden');
+    display.innerHTML = '<p style="color:red">Failed to fetch author data.</p>';
+    return;
+  }
+
+  const schoolClone = JSON.parse(JSON.stringify(school));
+
+  for (const [area, val] of Object.entries(stats.areas)) {
+    if (!schoolClone.areas[area]) {
+      schoolClone.areas[area] = { count: 0, adjusted: 0, faculty: [] };
+    }
+    schoolClone.areas[area].adjusted += val;
+  }
+
+  const allSchools = Object.values(appData.schools).map(s =>
+    s.name === school.name ? schoolClone : s
+  );
+
+  const areas = new Set();
+  Object.values(parentMap).forEach(a => areas.add(a));
+  const areaList = Array.from(areas);
+
+  const calcScore = (s) => {
+    let product = 1;
+    for (const area of areaList) {
+      const adj = s.areas[area]?.adjusted || 0;
+      product *= (adj + 1);
+    }
+    return Math.pow(product, 1 / areaList.length) - 1;
+  };
+
+  allSchools.forEach(s => {
+    s._simScore = calcScore(s);
+  });
+
+  allSchools.sort((a, b) => b._simScore - a._simScore);
+
+  const newRank = allSchools.findIndex(s => s.name === school.name) + 1;
+  const oldRank = school.rank;
+  const diff = oldRank - newRank;
+  loading.classList.add('hidden');
+
+  let arrow = diff > 0 ? '⬆' : (diff < 0 ? '⬇' : '➡');
+  let color = diff > 0 ? '#10b981' : (diff < 0 ? '#ef4444' : 'var(--text-secondary)');
+
+  display.innerHTML = `
+    <div class="impact-card">
+      <h3>${author.name}</h3>
+      <p>${stats.totalAdjusted.toFixed(1)} Adjusted Count</p>
+    </div>
+    
+    <div class="impact-card">
+      <h3>${school.name}</h3>
+      <div class="rank-change" style="color: ${color}">
+        <span>#${oldRank}</span>
+        <span>${arrow}</span>
+        <span>#${newRank}</span>
+      </div>
+      <p>${diff > 0 ? `Improved by ${diff} spots!` : 'No change in rank'}</p>
+    </div>
+
+    <div class="area-gains">
+      <h4>Top Area Contributions:</h4>
+      ${Object.entries(stats.areas)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 5)
+      .map(([area, val]) => `
+          <div class="gain-item">
+            <span>${areaLabels[area] || area}</span>
+            <span class="gain-val">+${val.toFixed(1)}</span>
+          </div>
+        `).join('')}
+    </div>
+  `;
+}
+
 init();
