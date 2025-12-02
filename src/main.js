@@ -73,7 +73,6 @@ function searchAreaPeople(query) {
   const topProfs = Object.values(appData.professors)
     .filter(p => p.areas[areaKey] && p.areas[areaKey].adjusted > 0)
     .sort((a, b) => b.areas[areaKey].adjusted - a.areas[areaKey].adjusted)
-    .slice(0, 12); // Top 12
 
   if (topProfs.length === 0) return;
 
@@ -81,7 +80,53 @@ function searchAreaPeople(query) {
     <div class="section-header" style="grid-column: 1/-1; margin-top: 2rem;">
       <h3>Top Researchers in ${areaLabel}</h3>
     </div>
-    ${topProfs.map(prof => renderProfessorCard(prof)).join('')}
+    <div class="compact-list" style="grid-column: 1/-1; display: flex; flex-direction: column; gap: 0.5rem;">
+      ${topProfs.map(prof => `
+        <div class="card collapsed" style="margin: 0;">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div style="display: flex; align-items: baseline; gap: 1rem;">
+              <h2>${cleanName(prof.name)}</h2>
+              <span style="color: var(--text-secondary); font-size: 0.9rem;">${prof.affiliation}</span>
+              <span style="color: #10b981; font-weight: bold; font-size: 0.9rem;">${prof.areas[areaKey].adjusted.toFixed(1)} in ${areaLabel}</span>
+            </div>
+            <span class="toggle-icon">▼</span>
+          </div>
+          <div class="card-content">
+            ${renderProfessorCardContent(prof)}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderProfessorCardContent(prof) {
+  const sortedAreas = Object.entries(prof.areas)
+    .sort(([, a], [, b]) => b.adjusted - a.adjusted);
+  const dblpUrl = getDBLPUrl(prof.name);
+
+  return `
+      <div class="card-subtitle">
+        <a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}')" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>
+      </div>
+      <div class="card-stats">
+        <strong>${prof.totalPapers}</strong> papers (<strong>${prof.totalAdjusted.toFixed(1)}</strong> adjusted)
+      </div>
+
+      <div class="card-links">
+        ${prof.homepage ? `<a href="${prof.homepage}" target="_blank" class="card-link">Website</a>` : ''}
+        ${prof.scholarid ? `<a href="https://scholar.google.com/citations?user=${prof.scholarid}" target="_blank" class="card-link">Google Scholar</a>` : ''}
+        <a href="${dblpUrl}" target="_blank" class="card-link">DBLP</a>
+      </div>
+
+      <div class="stats-list">
+        ${sortedAreas.map(([area, stats]) => `
+          <div class="stat-item">
+            <span class="stat-label">${areaLabels[area] || area}</span>
+            <span class="stat-count">${Math.ceil(stats.count)} (${stats.adjusted.toFixed(1)})</span>
+          </div>
+        `).join('')}
+      </div>
   `;
 }
 
@@ -94,28 +139,78 @@ async function searchDBLPAuthors(query) {
   const container = document.getElementById('dblp-results');
 
   try {
-    const results = await window.dblp.search(query);
+    let results = await window.dblp.search(query);
+
+    const schoolNames = new Set(Object.values(appData.schools).map(s => s.name.toLowerCase()));
+    results = results.filter(a => !schoolNames.has(a.name.toLowerCase()));
 
     if (results.length === 0) {
       container.innerHTML = '';
       return;
     }
 
+    const candidates = results.slice(0, 6);
+
+    const validAuthors = [];
+
+    await Promise.all(candidates.map(async (a) => {
+      try {
+        const stats = await window.dblp.stats(a.pid, startYear, endYear);
+        if (stats && stats.totalAdjusted > 0) {
+          validAuthors.push({ ...a, stats });
+        }
+      } catch (e) {
+        // ignore failed fetches
+      }
+    }));
+
+    if (validAuthors.length === 0) {
+      container.innerHTML = '';
+      return;
+    }
+
+    validAuthors.sort((a, b) => b.stats.totalAdjusted - a.stats.totalAdjusted);
+
     container.innerHTML = `
       <div class="section-header" style="grid-column: 1/-1; margin-top: 2rem;">
-        <h3>Community Authors (DBLP)</h3>
+        <h3>Other Authors (DBLP)</h3>
       </div>
-      ${results.slice(0, 8).map(a => `
-        <div class="card" onclick="showDBLPAuthorProfile(this, '${a.pid}', '${a.name.replace(/'/g, "\\'")}')">
-          <div class="card-header">
-            <h2>${a.name}</h2>
-            <span class="toggle-icon">➜</span>
+      <div class="compact-list" style="grid-column: 1/-1; display: flex; flex-direction: column; gap: 0.5rem;">
+      ${validAuthors.map(a => {
+      const sortedAreas = Object.entries(a.stats.areas)
+        .sort(([, x], [, y]) => y - x);
+
+      const dblpUrl = `https://dblp.org/pid/${a.pid}.html`;
+
+      return `
+        <div class="card collapsed" style="margin: 0;">
+          <div class="card-header" onclick="toggleCard(this)">
+            <div style="display: flex; align-items: baseline; gap: 1rem;">
+              <h2>${a.name}</h2>
+              <span style="color: #10b981; font-weight: bold; font-size: 0.9rem;">${a.stats.totalAdjusted.toFixed(1)} Adjusted Count</span>
+            </div>
+            <span class="toggle-icon">▼</span>
           </div>
-          <div class="card-content" style="padding: 1rem; color: var(--text-secondary);">
-            Click to load stats from DBLP...
+          <div class="card-content">
+             <div class="card-subtitle">DBLP Author</div>
+             <div class="card-stats">
+               <strong>${a.stats.totalAdjusted.toFixed(1)}</strong> adjusted count
+             </div>
+             <div class="card-links">
+               <a href="${dblpUrl}" target="_blank" class="card-link">DBLP</a>
+             </div>
+             <div class="stats-list">
+               ${sortedAreas.map(([area, count]) => `
+                 <div class="stat-item">
+                   <span class="stat-label">${areaLabels[area] || area}</span>
+                   <span class="stat-count">${count.toFixed(1)}</span>
+                 </div>
+               `).join('')}
+             </div>
           </div>
         </div>
-      `).join('')}
+      `}).join('')}
+      </div>
     `;
   } catch (e) {
     console.error("DBLP Search failed", e);
@@ -235,8 +330,7 @@ function searchProfessors(query) {
       const name = p.name.toLowerCase();
       return tokens.every(token => name.includes(token));
     })
-    .sort((a, b) => b.totalAdjusted - a.totalAdjusted)
-    .slice(0, 20); // Limit results
+    .sort((a, b) => b.totalAdjusted - a.totalAdjusted);
 
   const container = document.getElementById('prof-results');
   container.innerHTML = results.map(renderProfessorCard).join('');
@@ -315,34 +409,14 @@ function cleanName(name) {
 }
 
 function renderProfessorCard(prof) {
-  // Sort areas by adjusted count descending
-  const sortedAreas = Object.entries(prof.areas)
-    .sort(([, a], [, b]) => b.adjusted - a.adjusted);
-  const dblpUrl = getDBLPUrl(prof.name);
-
   return `
-    <div class="card">
-      <h2>${cleanName(prof.name)}</h2>
-      <div class="card-subtitle">
-        <a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}')" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>
+    <div class="card collapsed">
+      <div class="card-header" onclick="toggleCard(this)">
+        <h2>${cleanName(prof.name)}</h2>
+        <span class="toggle-icon">▼</span>
       </div>
-      <div class="card-stats">
-        <strong>${prof.totalPapers}</strong> papers (<strong>${prof.totalAdjusted.toFixed(1)}</strong> adjusted)
-      </div>
-
-      <div class="card-links">
-        ${prof.homepage ? `<a href="${prof.homepage}" target="_blank" class="card-link">Website</a>` : ''}
-        ${prof.scholarid ? `<a href="https://scholar.google.com/citations?user=${prof.scholarid}" target="_blank" class="card-link">Google Scholar</a>` : ''}
-        <a href="${dblpUrl}" target="_blank" class="card-link">DBLP</a>
-      </div>
-
-      <div class="stats-list">
-        ${sortedAreas.map(([area, stats]) => `
-          <div class="stat-item">
-            <span class="stat-label">${areaLabels[area] || area}</span>
-            <span class="stat-count">${Math.ceil(stats.count)} (${stats.adjusted.toFixed(1)})</span>
-          </div>
-        `).join('')}
+      <div class="card-content">
+        ${renderProfessorCardContent(prof)}
       </div>
     </div>
   `;
