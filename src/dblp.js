@@ -67,6 +67,19 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
             if (!parentMap[confKey]) continue;
             if (nextTier[confKey]) continue;
 
+            const pagesNode = pub.getElementsByTagName("pages")[0];
+            if (!pagesNode) continue;
+
+            const pagesStr = pagesNode.textContent;
+            const rangeMatch = pagesStr.match(/(\d+)-(\d+)/);
+            if (rangeMatch) {
+                const start = parseInt(rangeMatch[1]);
+                const end = parseInt(rangeMatch[2]);
+                if ((end - start + 1) < 6) continue;
+            } else {
+                continue;
+            }
+
             const authors = pub.getElementsByTagName("author");
             const authorCount = authors.length || 1;
 
