@@ -78,7 +78,7 @@ function searchAreaPeople(query) {
 
   container.innerHTML = `
     <div class="section-header" style="grid-column: 1/-1; margin-top: 2rem;">
-      <h3>Top Researchers in ${areaLabel}</h3>
+      <h3>Top Researchers</h3>
     </div>
     <div class="compact-list" style="grid-column: 1/-1; display: flex; flex-direction: column; gap: 0.5rem;">
       ${topProfs.map(prof => `
@@ -321,7 +321,11 @@ function setupFilters() {
   endYearSelect.addEventListener('change', handleFilterChange);
 }
 
+let profRenderFrameId;
+
 function searchProfessors(query) {
+  if (profRenderFrameId) cancelAnimationFrame(profRenderFrameId);
+
   const allProfs = Object.values(appData.professors);
   const tokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
 
@@ -333,7 +337,25 @@ function searchProfessors(query) {
     .sort((a, b) => b.totalAdjusted - a.totalAdjusted);
 
   const container = document.getElementById('prof-results');
-  container.innerHTML = results.map(renderProfessorCard).join('');
+  container.innerHTML = '';
+
+  const CHUNK_SIZE = 20;
+  let renderedCount = 0;
+
+  function renderChunk() {
+    const chunk = results.slice(renderedCount, renderedCount + CHUNK_SIZE);
+    if (chunk.length === 0) return;
+
+    const html = chunk.map(renderProfessorCard).join('');
+    container.insertAdjacentHTML('beforeend', html);
+    renderedCount += CHUNK_SIZE;
+
+    if (renderedCount < results.length) {
+      profRenderFrameId = requestAnimationFrame(renderChunk);
+    }
+  }
+
+  renderChunk();
 }
 
 // DBLP URL generation
