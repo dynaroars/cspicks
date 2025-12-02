@@ -9,7 +9,7 @@ export async function searchAuthor(name) {
 
         if (!hits) return [];
 
-        const authorUrl = `https://dblp.org/search/author/api?q=${encodeURIComponent(name)}&format=json`;
+        const authorUrl = `https://dblp.org/search/author/api?q=${encodeURIComponent(name)}&format=json&h=60`;
         const authorRes = await fetch(authorUrl);
         const authorData = await authorRes.json();
         const authorHits = authorData.result.hits.hit;

@@ -149,7 +149,7 @@ async function searchDBLPAuthors(query) {
       return;
     }
 
-    const candidates = results.slice(0, 6);
+    const candidates = results.slice(0, 100);
 
     const validAuthors = [];
 
