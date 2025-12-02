@@ -609,3 +609,42 @@ input[type="text"]::placeholder {
   border-bottom: 1px solid #f5f5f5;
   font-size: 0.95rem;
 }
+
+.gain-val {
+  color: #10b981;
+  font-weight: bold;
+}
+
+/* DBLP Author Card Styles */
+.prof-stats {
+  margin-top: 0.5rem;
+}
+
+.stat-row {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.areas-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.area-tag {
+  background: #f5f5f5;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #eee;
+}
+
+.area-tag .count {
+  font-weight: 600;
+  color: #10b981;
+}
