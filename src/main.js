@@ -86,8 +86,6 @@ function searchAreaPeople(query) {
           <div class="card-header" onclick="toggleCard(this)">
             <div style="display: flex; align-items: baseline; gap: 1rem;">
               <h2>${cleanName(prof.name)}</h2>
-              <span style="color: var(--text-secondary); font-size: 0.9rem;">${prof.affiliation}</span>
-              <span style="color: #10b981; font-weight: bold; font-size: 0.9rem;">${prof.areas[areaKey].adjusted.toFixed(1)} in ${areaLabel}</span>
             </div>
             <span class="toggle-icon">▼</span>
           </div>
@@ -722,7 +720,7 @@ async function runSimulation(author, school, isRemove = false) {
       areas: flatAreas
     };
   } else {
-    stats = await window.dblp.search(author.pid);
+    stats = await window.dblp.stats(author.pid, startYear, endYear);
     if (!stats) {
       loading.classList.add('hidden');
       display.innerHTML = '<p style="color:red">Failed to fetch author data.</p>';
