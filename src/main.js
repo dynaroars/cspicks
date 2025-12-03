@@ -56,7 +56,14 @@ function setupSearch() {
   });
 }
 
+let areaPeopleObserver = null;
+
 function searchAreaPeople(query) {
+  if (areaPeopleObserver) {
+    areaPeopleObserver.disconnect();
+    areaPeopleObserver = null;
+  }
+
   const container = document.getElementById('area-people-results');
   container.innerHTML = '';
 
@@ -80,8 +87,21 @@ function searchAreaPeople(query) {
     <div class="section-header" style="grid-column: 1/-1; margin-top: 2rem;">
       <h3>Top Researchers</h3>
     </div>
-    <div class="compact-list" style="grid-column: 1/-1; display: flex; flex-direction: column; gap: 0.5rem;">
-      ${topProfs.map(prof => `
+    <div id="area-people-list" class="compact-list" style="grid-column: 1/-1; display: flex; flex-direction: column; gap: 0.5rem;"></div>
+  `;
+
+  const listContainer = document.getElementById('area-people-list');
+  const CHUNK_SIZE = 20;
+  let renderedCount = 0;
+
+  const renderChunk = () => {
+    const chunk = topProfs.slice(renderedCount, renderedCount + CHUNK_SIZE);
+    if (chunk.length === 0) return;
+
+    const oldSentinel = document.getElementById('area-sentinel');
+    if (oldSentinel) oldSentinel.remove();
+
+    const html = chunk.map(prof => `
         <div class="card collapsed" style="margin: 0;">
           <div class="card-header" onclick="toggleCard(this)">
             <div style="display: flex; align-items: baseline; gap: 1rem;">
@@ -93,9 +113,29 @@ function searchAreaPeople(query) {
             ${renderProfessorCardContent(prof)}
           </div>
         </div>
-      `).join('')}
-    </div>
-  `;
+      `).join('');
+
+    listContainer.insertAdjacentHTML('beforeend', html);
+    renderedCount += CHUNK_SIZE;
+
+    if (renderedCount < topProfs.length) {
+      const sentinel = document.createElement('div');
+      sentinel.id = 'area-sentinel';
+      sentinel.style.height = '50px';
+      listContainer.appendChild(sentinel);
+
+      if (areaPeopleObserver) areaPeopleObserver.observe(sentinel);
+    }
+  };
+
+  areaPeopleObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      areaPeopleObserver.unobserve(entries[0].target);
+      renderChunk();
+    }
+  }, { rootMargin: '400px' });
+
+  renderChunk();
 }
 
 function renderProfessorCardContent(prof) {
@@ -319,10 +359,13 @@ function setupFilters() {
   endYearSelect.addEventListener('change', handleFilterChange);
 }
 
-let profRenderFrameId;
+let profObserver = null;
 
 function searchProfessors(query) {
-  if (profRenderFrameId) cancelAnimationFrame(profRenderFrameId);
+  if (profObserver) {
+    profObserver.disconnect();
+    profObserver = null;
+  }
 
   const allProfs = Object.values(appData.professors);
   const tokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
@@ -340,18 +383,33 @@ function searchProfessors(query) {
   const CHUNK_SIZE = 20;
   let renderedCount = 0;
 
-  function renderChunk() {
+  const renderChunk = () => {
     const chunk = results.slice(renderedCount, renderedCount + CHUNK_SIZE);
     if (chunk.length === 0) return;
+
+    const oldSentinel = document.getElementById('prof-sentinel');
+    if (oldSentinel) oldSentinel.remove();
 
     const html = chunk.map(renderProfessorCard).join('');
     container.insertAdjacentHTML('beforeend', html);
     renderedCount += CHUNK_SIZE;
 
     if (renderedCount < results.length) {
-      profRenderFrameId = requestAnimationFrame(renderChunk);
+      const sentinel = document.createElement('div');
+      sentinel.id = 'prof-sentinel';
+      sentinel.style.height = '50px';
+      container.appendChild(sentinel);
+
+      if (profObserver) profObserver.observe(sentinel);
     }
-  }
+  };
+
+  profObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      profObserver.unobserve(entries[0].target);
+      renderChunk();
+    }
+  }, { rootMargin: '400px' });
 
   renderChunk();
 }
