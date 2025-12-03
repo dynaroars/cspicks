@@ -22,11 +22,10 @@ export const nextTier = {
 };
 
 export async function loadData() {
-  const BASE = import.meta.env.BASE_URL;
   const [csrankings, authorInfo, institutions] = await Promise.all([
-    fetchCsv(`${BASE}data/csrankings.csv`),
-    fetchCsv(`${BASE}data/author-info.csv`),
-    fetchCsv(`${BASE}data/institutions.csv`)
+    fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv'),
+    fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/generated-author-info.csv'),
+    fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/institutions.csv')
   ]);
 
   const professors = {};
