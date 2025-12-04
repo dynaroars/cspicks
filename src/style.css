@@ -141,13 +141,11 @@ footer a:hover {
   display: inline-block;
   border: 0 none;
   width: 100%;
-  /* Static full width */
   height: 3em;
   border-radius: 3em;
   outline: none;
   padding: 0 1.5em;
   cursor: text;
-  /* Text cursor by default */
   -webkit-appearance: none;
   font-weight: inherit;
   font-size: 1.1rem;

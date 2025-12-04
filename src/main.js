@@ -179,8 +179,8 @@ async function searchDBLPAuthors(query) {
   try {
     let results = await window.dblp.search(query);
 
-    const schoolNames = new Set(Object.values(appData.schools).map(s => s.name.toLowerCase()));
-    results = results.filter(a => !schoolNames.has(a.name.toLowerCase()));
+    const existingProfNames = new Set(Object.keys(appData.professors).map(n => n.toLowerCase()));
+    results = results.filter(a => !existingProfNames.has(a.name.toLowerCase()));
 
     if (results.length === 0) {
       container.innerHTML = '';
