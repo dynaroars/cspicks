@@ -67,12 +67,8 @@ cspicks/
 
 ## 📊 Data Sources
 
-The application uses public data from the [CSrankings](https://github.com/emeryberger/CSrankings) project:
+The application uses data from the [CSrankings](https://github.com/emeryberger/CSrankings) project. It does not modify or store these data and instead connects directly to them.
 
--   **`csrankings.csv`**: Contains author names, affiliations, homepages, and Google Scholar IDs.
--   **`author-info.csv`**: Contains publication counts for each author in specific research areas (e.g., 'ai', 'systems', 'theory').
--   **`institutions.csv`**: Contains mapping of institutions to regions and countries.
 
 ## 📝 License
-
-This project is based on data from CSrankings, which is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
