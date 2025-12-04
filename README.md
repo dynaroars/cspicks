@@ -13,9 +13,12 @@
     - **DBLP Profile**
 
 ### 2. School Search
-- **Search by Name**: Find universities and research institutions.
+- **Search by Name**: Find universities by name.
 - **Area Analysis**: View the school's top research areas based on publication count.
 - **Faculty Lists**: See which faculty members are publishing in each area.
+
+### 3. Area Search
+- **Search by Area Name**: Find universities and professors working on an area.
 
 ## 🛠️ Technologies Used
 
