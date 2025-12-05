@@ -1,6 +1,6 @@
 # CS Picks
 
-**CS Picks** is a JavaScript-based web application for exploring Computer Science professors and schools. It uses data from [CSrankings](https://github.com/emeryberger/CSrankings) to provide an interface for searching faculty publications and analyzing school strengths.
+**CS Picks** is a JavaScript-based web application for exploring Computer Science professors and schools. It uses data from [CSrankings](https://github.com/emeryberger/CSrankings) and DBLP to provide an interface for searching faculty publications and analyzing school strengths.
 
 ## 🚀 Features
 
@@ -13,9 +13,12 @@
     - **DBLP Profile**
 
 ### 2. School Search
-- **Search by Name**: Find universities and research institutions.
+- **Search by Name**: Find universities by name.
 - **Area Analysis**: View the school's top research areas based on publication count.
 - **Faculty Lists**: See which faculty members are publishing in each area.
+
+### 3. Area Search
+- **Search by Area Name**: Find universities and professors working on an area.
 
 ## 🛠️ Technologies Used
 
@@ -64,12 +67,8 @@ cspicks/
 
 ## 📊 Data Sources
 
-The application uses public data from the [CSrankings](https://github.com/emeryberger/CSrankings) project:
+The application uses data from the [CSrankings](https://github.com/emeryberger/CSrankings) project. It does not modify or store these data and instead connects directly to them.
 
--   **`csrankings.csv`**: Contains author names, affiliations, homepages, and Google Scholar IDs.
--   **`author-info.csv`**: Contains publication counts for each author in specific research areas (e.g., 'ai', 'systems', 'theory').
--   **`institutions.csv`**: Contains mapping of institutions to regions and countries.
 
 ## 📝 License
-
-This project is based on data from CSrankings, which is licensed under the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
