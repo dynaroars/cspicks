@@ -588,10 +588,44 @@ function findMatchingArea(query) {
 
 function searchSchools(query) {
   const effectiveQuery = schoolAliases[query] || query;
+  const confKeyRaw = conferenceAliases[query] || query;
+  const confKeyMatch = Object.keys(parentMap).find(k => k.toLowerCase() === confKeyRaw);
   const matchedArea = findMatchingArea(effectiveQuery);
   let results;
 
-  if (matchedArea) {
+  if (confKeyMatch) {
+    const schoolStats = {};
+
+    Object.entries(appData.professors).forEach(([profName, prof]) => {
+      const pubsInConf = prof.pubs.filter(p => p.area === confKeyMatch);
+      if (pubsInConf.length === 0) return;
+
+      const adjusted = pubsInConf.reduce((sum, p) => sum + p.adjustedcount, 0);
+      const count = pubsInConf.reduce((sum, p) => sum + p.count, 0);
+      if (adjusted === 0) return;
+
+      const schoolName = prof.affiliation;
+      if (!schoolStats[schoolName]) {
+        schoolStats[schoolName] = { adjusted: 0, count: 0, faculty: [] };
+      }
+      schoolStats[schoolName].adjusted += adjusted;
+      schoolStats[schoolName].count += count;
+      schoolStats[schoolName].faculty.push(profName);
+    });
+
+    results = Object.entries(schoolStats)
+      .map(([schoolName, stats]) => {
+        const school = appData.schools[schoolName];
+        if (!school) return null;
+
+        const sClone = { ...school, areas: { ...school.areas } };
+        sClone.areas[confKeyMatch] = { count: stats.count, adjusted: stats.adjusted, faculty: stats.faculty };
+        return sClone;
+      })
+      .filter(s => s)
+      .sort((a, b) => b.areas[confKeyMatch].adjusted - a.areas[confKeyMatch].adjusted);
+
+  } else if (matchedArea) {
     // Area Search Mode
     results = Object.values(appData.schools)
       .filter(school => school.areas[matchedArea] && school.areas[matchedArea].adjusted > 0)
@@ -610,13 +644,13 @@ function searchSchools(query) {
         const name = s.name.toLowerCase();
         return tokens.every(token => name.includes(token));
       })
-      .sort((a, b) => a.rank - b.rank); // Default to rank sorting
+      .sort((a, b) => a.rank - b.rank);
   }
 
   const container = document.getElementById('school-results');
   container.innerHTML = results
     .slice(0, 20)
-    .map(school => renderSchoolCard(school, matchedArea))
+    .map(school => renderSchoolCard(school, confKeyMatch || matchedArea))
     .join('');
 }
 
