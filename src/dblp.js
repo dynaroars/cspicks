@@ -87,8 +87,13 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
             const area = parentMap[confKey];
 
             stats.totalAdjusted += adjusted;
-            if (!stats.areas[area]) stats.areas[area] = 0;
-            stats.areas[area] += adjusted;
+            stats.totalPapers = (stats.totalPapers || 0) + 1;
+
+            if (!stats.areas[area]) {
+                stats.areas[area] = { count: 0, adjusted: 0 };
+            }
+            stats.areas[area].count += 1;
+            stats.areas[area].adjusted += adjusted;
         }
 
         return stats;
