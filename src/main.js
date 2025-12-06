@@ -864,7 +864,19 @@ async function runSimulation(author, school, isRemove = false) {
 
   const schoolClone = JSON.parse(JSON.stringify(school));
 
-  for (const [area, val] of Object.entries(stats.areas)) {
+  for (const [area, areaStats] of Object.entries(stats.areas)) {
+    // Handle both old format (if cached/prof data) and new format (DBLP stats)
+    // Actually standard prof data is still flattened? No, prof.areas is also { adjusted, count } usually?
+    // Let's check appData.professors structure. In data.js loadData:
+    // professors[name].areas[area] = { count: ..., adjusted: ... }
+    // So actually even 'isRemove' logic might have been relying on object access earlier? 
+    // Wait, let's look at `isRemove` block:
+    // `flatAreas[k] = v.adjusted` -> Here it was explicitly flattening to a number! (Lines 846-848)
+    // But `window.dblp.stats` now returns objects.
+
+    // So I just need to handle the case where `areaStats` is an object.
+    const val = typeof areaStats === 'number' ? areaStats : areaStats.adjusted;
+
     if (!schoolClone.areas[area]) {
       schoolClone.areas[area] = { count: 0, adjusted: 0, faculty: [] };
     }
@@ -931,6 +943,10 @@ async function runSimulation(author, school, isRemove = false) {
     <div class="area-gains">
       <h4>Top Area ${isRemove ? 'Losses' : 'Gains'}:</h4>
       ${Object.entries(stats.areas)
+      .map(([area, areaStats]) => {
+        const val = typeof areaStats === 'number' ? areaStats : areaStats.adjusted;
+        return [area, val];
+      })
       .sort(([, a], [, b]) => b - a)
       .slice(0, 5)
       .map(([area, val]) => `
