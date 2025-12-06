@@ -1,4 +1,4 @@
-import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap } from './data.js';
+import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, schoolAliases, conferenceAliases } from './data.js';
 import he from 'he';
 
 import { searchAuthor, fetchAuthorStats } from './dblp.js';
@@ -10,9 +10,15 @@ window.dblp = {
 
 let rawData = null;
 let appData = { professors: {}, schools: {} };
+
 let startYear = DEFAULT_START_YEAR;
 let endYear = DEFAULT_END_YEAR;
 let selectedRegion = 'us';
+
+const params = new URLSearchParams(window.location.search);
+if (params.has('start')) startYear = parseInt(params.get('start'));
+if (params.has('end')) endYear = parseInt(params.get('end'));
+if (params.has('region')) selectedRegion = params.get('region');
 
 async function init() {
   setupFilters();
@@ -27,6 +33,18 @@ async function init() {
     const searchInput = document.getElementById('main-search');
     searchInput.placeholder = "Search professors, universities, or areas (e.g., graphics)";
     searchInput.disabled = false;
+
+    document.getElementById('region-select').value = selectedRegion;
+
+    if (params.has('q')) {
+      searchInput.value = params.get('q');
+      const query = params.get('q').toLowerCase();
+      searchProfessors(query);
+      searchSchools(query);
+      searchAreaPeople(query);
+      searchDBLPAuthors(query);
+    }
+
     searchInput.focus();
 
     setupSearch();
@@ -37,6 +55,19 @@ async function init() {
   }
 }
 
+function updateURL() {
+  const params = new URLSearchParams();
+  params.set('start', startYear);
+  params.set('end', endYear);
+  params.set('region', selectedRegion);
+
+  const q = document.getElementById('main-search').value;
+  if (q) params.set('q', q);
+
+  const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, '', newUrl);
+}
+
 function setupSearch() {
   const mainSearch = document.getElementById('main-search');
 
@@ -44,6 +75,8 @@ function setupSearch() {
   mainSearch.addEventListener('input', (e) => {
     clearTimeout(debounceTimer);
     const query = e.target.value.toLowerCase();
+
+    updateURL();
 
     if (query.length < 1) {
       document.getElementById('prof-results').innerHTML = '';
@@ -72,25 +105,52 @@ function searchAreaPeople(query) {
   const container = document.getElementById('area-people-results');
   container.innerHTML = '';
 
-  // Check if query matches an area
-  const areaMatch = Object.entries(areaLabels).find(([key, label]) =>
-    label.toLowerCase().includes(query) || key.toLowerCase() === query
-  );
+  container.innerHTML = '';
 
-  if (!areaMatch) return;
+  let topProfs = [];
+  let title = 'Top Researchers';
 
-  const [areaKey, areaLabel] = areaMatch;
+  // 1. Check Conference Match
+  let effectiveQuery = conferenceAliases[query] || query;
+  const confKey = Object.keys(parentMap).find(k => k.toLowerCase() === effectiveQuery);
 
-  // Find top professors in this area
-  const topProfs = Object.values(appData.professors)
-    .filter(p => p.areas[areaKey] && p.areas[areaKey].adjusted > 0)
-    .sort((a, b) => b.areas[areaKey].adjusted - a.areas[areaKey].adjusted)
+  if (confKey) {
+    // If it was an alias (e.g. neurips -> nips), display the name user typed? Or the canonical key?
+    // Canonical key is 'nips'. User might prefer "NeurIPS". 
+    // I'll display the canonical key mapped back to uppercase, or alias if possible.
+    // For now, simple: `confKey.toUpperCase()`. "NIPS".
+    // Maybe better: `(Object.keys(conferenceAliases).find(key => conferenceAliases[key] === confKey) || confKey).toUpperCase()`
+    // But "nips" is historic. 
+    // I'll stick to confKey.toUpperCase() for now (NIPS).
+    title = `Top Researchers in ${confKey.toUpperCase()}`;
+    topProfs = Object.values(appData.professors)
+      .map(p => {
+        const confPubs = p.pubs.filter(pub => pub.area === confKey);
+        if (confPubs.length === 0) return null;
+        const adjusted = confPubs.reduce((sum, pub) => sum + pub.adjustedcount, 0);
+        return { ...p, confAdjusted: adjusted };
+      })
+      .filter(p => p && p.confAdjusted > 0)
+      .sort((a, b) => b.confAdjusted - a.confAdjusted);
+  } else {
+    const areaMatch = Object.entries(areaLabels).find(([key, label]) =>
+      label.toLowerCase().includes(query) || key.toLowerCase() === query
+    );
+
+    if (areaMatch) {
+      const [areaKey] = areaMatch;
+      // Find top professors in this area
+      topProfs = Object.values(appData.professors)
+        .filter(p => p.areas[areaKey] && p.areas[areaKey].adjusted > 0)
+        .sort((a, b) => b.areas[areaKey].adjusted - a.areas[areaKey].adjusted);
+    }
+  }
 
   if (topProfs.length === 0) return;
 
   container.innerHTML = `
     <div class="section-header" style="grid-column: 1/-1; margin-top: 2rem;">
-      <h3>Top Researchers</h3>
+      <h3>${title}</h3>
     </div>
     <div id="area-people-list" class="compact-list" style="grid-column: 1/-1; display: flex; flex-direction: column; gap: 0.5rem;"></div>
   `;
@@ -183,6 +243,7 @@ async function searchDBLPAuthors(query) {
 
   try {
     let results = await window.dblp.search(query);
+    console.log('DBLP Search Results:', results);
 
     const existingProfNames = new Set(Object.keys(appData.professors).map(n => n.toLowerCase()));
     results = results.filter(a => !existingProfNames.has(a.name.toLowerCase()));
@@ -193,6 +254,7 @@ async function searchDBLPAuthors(query) {
     }
 
     const candidates = results.slice(0, 100);
+    console.log(`Checking ${candidates.length} candidates...`);
 
     const validAuthors = [];
 
@@ -201,6 +263,8 @@ async function searchDBLPAuthors(query) {
         const stats = await window.dblp.stats(a.pid, startYear, endYear);
         if (stats && stats.totalAdjusted > 0) {
           validAuthors.push({ ...a, stats });
+        } else {
+          // console.log(`Skipping ${a.name}: 0 adjusted count`);
         }
       } catch (e) {
         // ignore failed fetches
@@ -221,7 +285,7 @@ async function searchDBLPAuthors(query) {
       <div class="compact-list" style="grid-column: 1/-1; display: flex; flex-direction: column; gap: 0.5rem;">
       ${validAuthors.map(a => {
       const sortedAreas = Object.entries(a.stats.areas)
-        .sort(([, x], [, y]) => y - x);
+        .sort(([, x], [, y]) => y.adjusted - x.adjusted);
 
       const dblpUrl = `https://dblp.org/pid/${a.pid}.html`;
 
@@ -237,16 +301,16 @@ async function searchDBLPAuthors(query) {
           <div class="card-content">
              <div class="card-subtitle">DBLP Author</div>
              <div class="card-stats">
-               <strong>${a.stats.totalAdjusted.toFixed(1)}</strong> adjusted count
+               <strong>${a.stats.totalPapers}</strong> papers (<strong>${a.stats.totalAdjusted.toFixed(1)}</strong> adjusted)
              </div>
              <div class="card-links">
                <a href="${dblpUrl}" target="_blank" class="card-link">DBLP</a>
              </div>
              <div class="stats-list">
-               ${sortedAreas.map(([area, count]) => `
+               ${sortedAreas.map(([area, stats]) => `
                  <div class="stat-item">
                    <span class="stat-label">${areaLabels[area] || area}</span>
-                   <span class="stat-count">${count.toFixed(1)}</span>
+                   <span class="stat-count">${stats.count} (${stats.adjusted.toFixed(1)})</span>
                  </div>
                `).join('')}
              </div>
@@ -347,15 +411,21 @@ function setupFilters() {
     appData = filterByYears(rawData, startYear, endYear, selectedRegion);
     console.log(`Filtered: Region=${selectedRegion}, Years=${startYear}-${endYear}`);
 
+    updateURL();
+
     // Re-run current search
     const query = document.getElementById('main-search').value.toLowerCase();
 
     if (query.length >= 1) {
       searchProfessors(query);
       searchSchools(query);
+      searchAreaPeople(query);
+      searchDBLPAuthors(query);
     } else {
       document.getElementById('prof-results').innerHTML = '';
       document.getElementById('school-results').innerHTML = '';
+      document.getElementById('area-people-results').innerHTML = '';
+      document.getElementById('dblp-results').innerHTML = '';
     }
   };
 
@@ -517,7 +587,8 @@ function findMatchingArea(query) {
 }
 
 function searchSchools(query) {
-  const matchedArea = findMatchingArea(query);
+  const effectiveQuery = schoolAliases[query] || query;
+  const matchedArea = findMatchingArea(effectiveQuery);
   let results;
 
   if (matchedArea) {
@@ -532,7 +603,7 @@ function searchSchools(query) {
   } else {
     // Standard Search Mode
     const allSchools = Object.values(appData.schools);
-    const tokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
+    const tokens = effectiveQuery.toLowerCase().split(/\s+/).filter(t => t.length > 0);
 
     results = allSchools
       .filter(s => {

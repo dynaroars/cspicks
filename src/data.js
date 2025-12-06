@@ -4,6 +4,37 @@ const currentYear = new Date().getFullYear();
 export const DEFAULT_START_YEAR = 2015;
 export const DEFAULT_END_YEAR = currentYear;
 
+export const schoolAliases = {
+  'gmu': 'George Mason University',
+  'cmu': 'Carnegie Mellon University',
+  'mit': 'Massachusetts Institute of Technology',
+  'nyu': 'New York University',
+  'uiuc': 'Univ. of Illinois at Urbana-Champaign',
+  'ucb': 'Univ. of California - Berkeley',
+  'ucla': 'Univ. of California - Los Angeles',
+  'ucsd': 'Univ. of California - San Diego',
+  'gatech': 'Georgia Institute of Technology',
+  'uw': 'Univ. of Washington',
+  'ut': 'Univ. of Texas at Austin',
+  'umd': 'Univ. of Maryland - College Park',
+  'unc': 'Univ. of North Carolina - Chapel Hill',
+  'usc': 'Univ. of Southern California',
+  'uci': 'Univ. of California - Irvine',
+  'ucd': 'Univ. of California - Davis',
+  'ucsb': 'Univ. of California - Santa Barbara',
+  'ucsc': 'Univ. of California - Santa Cruz',
+  'uva': 'University of Virginia',
+  'vt': 'Virginia Tech',
+  'wpi': 'Worcester Polytechnic Institute',
+  'wustl': 'Washington University in St. Louis',
+  // Add more as needed
+};
+
+export const conferenceAliases = {
+  'neurips': 'nips',
+  // Add more as needed
+};
+
 export const nextTier = {
   'ase': true,
   'issta': true,
