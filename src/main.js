@@ -372,6 +372,38 @@ window.setSearchQuery = function (query) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
+window.searchProfessorByAffiliation = function (name, affiliation) {
+  const input = document.getElementById('main-search');
+  input.value = name;
+
+  const query = name.toLowerCase();
+  const tokens = query.split(/\s+/).filter(t => t.length > 0);
+
+  const results = Object.values(appData.professors)
+    .filter(p => {
+      const profName = p.name.toLowerCase();
+      return tokens.every(token => profName.includes(token));
+    })
+    .sort((a, b) => {
+      const aMatch = a.affiliation === affiliation ? 1 : 0;
+      const bMatch = b.affiliation === affiliation ? 1 : 0;
+      if (aMatch !== bMatch) return bMatch - aMatch;
+      return b.totalAdjusted - a.totalAdjusted;
+    });
+
+  const container = document.getElementById('prof-results');
+  container.innerHTML = results
+    .slice(0, 50)
+    .map(prof => renderProfessorCard(prof))
+    .join('');
+
+  document.getElementById('school-results').innerHTML = '';
+  document.getElementById('area-people-results').innerHTML = '';
+  document.getElementById('dblp-results').innerHTML = '';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
 window.toggleCard = function (header) {
   const card = header.parentElement;
   card.classList.toggle('collapsed');
@@ -635,24 +667,70 @@ function searchSchools(query) {
         return countB - countA;
       });
   } else {
-    // Standard Search Mode
     const allSchools = Object.values(appData.schools);
     const tokens = effectiveQuery.toLowerCase().split(/\s+/).filter(t => t.length > 0);
+    const originalTokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
 
     results = allSchools
       .filter(s => {
         const name = s.name.toLowerCase();
-        return tokens.every(token => name.includes(token));
+        return tokens.every(token => name.includes(token)) ||
+          originalTokens.every(token => name.includes(token));
       })
       .sort((a, b) => a.rank - b.rank);
   }
 
   const container = document.getElementById('school-results');
-  container.innerHTML = results
-    .slice(0, 20)
-    .map(school => renderSchoolCard(school, confKeyMatch || matchedArea))
+  const filterKey = confKeyMatch || matchedArea;
+  const initialCount = 20;
+
+  window._schoolResults = { results, filterKey, shown: initialCount };
+
+  let html = results
+    .slice(0, initialCount)
+    .map(school => renderSchoolCard(school, filterKey))
     .join('');
+
+  if (results.length > initialCount) {
+    html += `
+      <div id="see-more-schools" style="grid-column: 1/-1; text-align: center; margin-top: 1rem;">
+        <button onclick="showMoreSchools()" class="btn-secondary" style="padding: 0.75rem 2rem;">
+          See more universities (${results.length - initialCount} remaining)
+        </button>
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
 }
+
+window.showMoreSchools = function () {
+  const { results, filterKey, shown } = window._schoolResults;
+  const nextBatch = 20;
+  const newShown = shown + nextBatch;
+
+  document.getElementById('see-more-schools')?.remove();
+
+  const container = document.getElementById('school-results');
+  const newCards = results
+    .slice(shown, newShown)
+    .map(school => renderSchoolCard(school, filterKey))
+    .join('');
+
+  container.insertAdjacentHTML('beforeend', newCards);
+
+  window._schoolResults.shown = newShown;
+
+  if (results.length > newShown) {
+    container.insertAdjacentHTML('beforeend', `
+      <div id="see-more-schools" style="grid-column: 1/-1; text-align: center; margin-top: 1rem;">
+        <button onclick="showMoreSchools()" class="btn-secondary" style="padding: 0.75rem 2rem;">
+          See more universities (${results.length - newShown} remaining)
+        </button>
+      </div>
+    `);
+  }
+};
 
 function renderSchoolCard(school, filterArea = null) {
   let sortedAreas;
@@ -690,7 +768,7 @@ function renderSchoolCard(school, filterArea = null) {
         return countB - countA;
       })
       .map(name => `
-                <span class="faculty-tag" onclick="setSearchQuery('${cleanName(name).replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}</span>
+                <span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}</span>
               `).join('')}
             </div>
           </div>
