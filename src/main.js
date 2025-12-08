@@ -231,7 +231,7 @@ function renderProfessorCardContent(prof) {
 }
 
 async function searchDBLPAuthors(query) {
-  if (query.length < 3) {
+  if (query.length < 2) {
     document.getElementById('dblp-results').innerHTML = '';
     return;
   }
