@@ -75,7 +75,7 @@ function setupSearch() {
 
     updateURL();
 
-    if (query.length < 1) {
+    if (query.length < 2) {
       document.getElementById('prof-results').innerHTML = '';
       document.getElementById('school-results').innerHTML = '';
       document.getElementById('dblp-results').innerHTML = '';
