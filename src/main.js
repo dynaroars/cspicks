@@ -13,7 +13,7 @@ let appData = { professors: {}, schools: {} };
 
 let startYear = DEFAULT_START_YEAR;
 let endYear = DEFAULT_END_YEAR;
-let selectedRegion = 'us';
+let selectedRegion = 'world';
 
 const params = new URLSearchParams(window.location.search);
 if (params.has('start')) startYear = parseInt(params.get('start'));
