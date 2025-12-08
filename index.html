@@ -18,8 +18,7 @@
   <div id="app">
     <header>
       <h1>CS Picks</h1>
-      <p>Explore Computer Science Professors and Schools <a href="https://github.com/dynaroars/cspicks" target="_blank"
-          style="color: inherit; opacity: 0.6; text-decoration: none; font-size: 0.9em;">(GitHub)</a></p>
+      <p>Explore Computer Science Professors, Schools, and Research Areas.</p>
     </header>
 
     <div class="search-section">
@@ -31,8 +30,8 @@
         <div class="filter-group">
           <label for="region-select">Region</label>
           <select id="region-select">
-            <option value="world">World</option>
-            <option value="us" selected>USA</option>
+            <option value="world" selected>World</option>
+            <option value="us">USA</option>
             <option value="europe">Europe</option>
             <option value="asia">Asia</option>
             <option value="canada">Canada</option>
@@ -114,6 +113,9 @@
 
   </div>
   <script type="module" src="/src/main.js"></script>
+  <footer>
+  <strong>Data & Acknowledgment</strong>: CSPicks is inspired by <a href="https://csrankings.org" target="_blank"><strong>CSRankings</strong></a> and uses its taxonomy and data to organize results. All information is fetched on demand; no data is stored. Report bugs and issues on <a href="https://github.com/dynaroars/cspicks" target="_blank"><strong>GitHub</strong></a>.
+  </footer>
 </body>
 
 </html>
