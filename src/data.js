@@ -130,7 +130,7 @@ export const conferenceAliases = {
 };
 
 export const nextTier = {
-  'ase': true,
+  /* 'ase': true,
   'issta': true,
   'icde': true,
   'pods': true,
@@ -143,7 +143,7 @@ export const nextTier = {
   'usenixatc': true,
   'icfp': true,
   'oopsla': true,
-  'kdd': true
+  'kdd': true */
 };
 
 export async function loadData() {
