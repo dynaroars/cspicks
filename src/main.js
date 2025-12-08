@@ -46,9 +46,6 @@ async function init() {
     }
 
     searchInput.focus();
-
-    setupSearch();
-    setupFilters();
   } catch (err) {
     console.error('Failed to load data:', err);
     document.querySelector('main').innerHTML = '<p style="text-align:center; color: #ef4444;">Error loading data. Please try again.</p>';
