@@ -20,6 +20,10 @@
 ### 3. Area Search
 - **Search by Area Name**: Find universities and professors working on an area.
 
+### 4. Conference Search
+- **Search by Conference Name**: Find universities and professors publishing in a specific conference.
+
+
 ## 🛠️ Technologies Used
 
 - **Frontend**: Vanilla JavaScript (ES6+), HTML5, CSS3.
@@ -51,10 +55,6 @@
 ```
 cspicks/
 ├── public/
-│   ├── data/
-│   │   ├── csrankings.csv            # Core rankings data
-│   │   ├── author-info.csv           # Publication counts per author/area
-│   │   └── institutions.csv          # Institution metadata (region, country)
 │   └── favicon.png                   # Site favicon
 ├── src/
 │   ├── data.js                       # Data loading and processing logic
