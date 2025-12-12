@@ -805,11 +805,13 @@ window.showMoreSchools = function () {
 
 function renderConferenceCard(confKey, sortedSchools) {
   const cardClass = 'card collapsed';
+  const parentArea = parentMap[confKey];
+  const areaLabel = areaLabels[parentArea] || parentArea || '';
 
   return `
     <div class="${cardClass}">
       <div class="card-header" onclick="toggleCard(this)">
-        <h2>${confKey.toUpperCase()}</h2>
+        <h2>${confKey.toUpperCase()} ${areaLabel ? `<span style="font-size: 0.7em; font-weight: 400; color: var(--text-secondary);">(<a href="#" onclick="event.stopPropagation(); setSearchQuery('${areaLabel.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${areaLabel}</a>)</span>` : ''}</h2>
         <span class="toggle-icon">▼</span>
       </div>
       <div class="card-content">
