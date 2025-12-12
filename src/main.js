@@ -591,8 +591,13 @@ function cleanName(name) {
 }
 
 function renderProfessorCard(prof) {
+  const searchInput = document.getElementById('main-search');
+  const currentQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
+  const isExactMatch = cleanName(prof.name).toLowerCase() === currentQuery;
+  const cardClass = isExactMatch ? 'card' : 'card collapsed';
+
   return `
-    <div class="card collapsed">
+    <div class="${cardClass}">
       <div class="card-header" onclick="toggleCard(this)">
         <h2>${cleanName(prof.name)}</h2>
         <span class="toggle-icon">▼</span>
@@ -606,21 +611,90 @@ function renderProfessorCard(prof) {
 
 function findMatchingArea(query) {
   const q = query.toLowerCase();
-  // Check keys and values
-  for (const [key, label] of Object.entries(areaLabels)) {
-    if (key === q || label.toLowerCase().includes(q)) {
-      return key;
-    }
+
+  if (areaLabels[q]) return q;
+
+  for (const key of Object.keys(areaLabels)) {
+    if (key.startsWith(q)) return key;
   }
+
+  for (const [key, label] of Object.entries(areaLabels)) {
+    if (label.toLowerCase().startsWith(q)) return key;
+  }
+  for (const [key, label] of Object.entries(areaLabels)) {
+    if (label.toLowerCase().includes(q)) return key;
+  }
+
   return null;
 }
 
 function searchSchools(query) {
   const effectiveQuery = schoolAliases[query] || query;
   const confKeyRaw = conferenceAliases[query] || query;
-  const confKeyMatch = Object.keys(parentMap).find(k => k.toLowerCase() === confKeyRaw);
+  const confKeyMatch = Object.keys(parentMap).find(k => k.toLowerCase().startsWith(confKeyRaw) || confKeyRaw.startsWith(k.toLowerCase()));
   const matchedArea = findMatchingArea(effectiveQuery);
   let results;
+
+  document.getElementById('conference-results').innerHTML = '';
+  const header = document.getElementById('search-context-header');
+
+  if (confKeyMatch) {
+    const allConfMatches = Object.keys(parentMap).filter(k =>
+      k.toLowerCase().startsWith(confKeyRaw) || confKeyRaw.startsWith(k.toLowerCase())
+    );
+
+    allConfMatches.sort((a, b) => {
+      if (a === confKeyRaw) return -1;
+      if (b === confKeyRaw) return 1;
+      return a.localeCompare(b);
+    });
+
+    header.textContent = `Results for Conference: ${allConfMatches.map(c => c.toUpperCase()).join(', ')}`;
+    header.style.display = 'block';
+
+    const confResultsContainer = document.getElementById('conference-results');
+
+    const confCardsHtml = allConfMatches.map(confKey => {
+      const schoolStats = {};
+      Object.entries(appData.professors).forEach(([profName, prof]) => {
+        const pubsInConf = prof.pubs.filter(p => p.area === confKey);
+        if (pubsInConf.length === 0) return;
+
+        const adjusted = pubsInConf.reduce((sum, p) => sum + p.adjustedcount, 0);
+        const count = pubsInConf.reduce((sum, p) => sum + p.count, 0);
+        if (adjusted === 0) return;
+
+        const schoolName = prof.affiliation;
+        if (!schoolStats[schoolName]) {
+          schoolStats[schoolName] = { adjusted: 0, count: 0, faculty: [] };
+        }
+        schoolStats[schoolName].adjusted += adjusted;
+        schoolStats[schoolName].count += count;
+        schoolStats[schoolName].faculty.push(profName);
+      });
+
+      const sortedSchools = Object.entries(schoolStats)
+        .map(([name, stats]) => ({ name, ...stats, rank: appData.schools[name]?.rank || 999 }))
+        .sort((a, b) => b.adjusted - a.adjusted);
+
+      if (sortedSchools.length === 0) return '';
+
+      return renderConferenceCard(confKey, sortedSchools);
+    }).join('');
+
+    confResultsContainer.innerHTML = confCardsHtml;
+
+    document.getElementById('school-results').innerHTML = '';
+    return;
+
+  }
+
+  if (matchedArea) {
+    header.textContent = `Results for Area: ${areaLabels[matchedArea]}`;
+    header.style.display = 'block';
+  } else {
+    header.style.display = 'none';
+  }
 
   if (confKeyMatch) {
     const schoolStats = {};
@@ -729,6 +803,44 @@ window.showMoreSchools = function () {
   }
 };
 
+function renderConferenceCard(confKey, sortedSchools) {
+  const cardClass = 'card collapsed';
+
+  return `
+    <div class="${cardClass}">
+      <div class="card-header" onclick="toggleCard(this)">
+        <h2>${confKey.toUpperCase()}</h2>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="card-content">
+        <div class="stats-list">
+        ${sortedSchools.map(school => `
+          <div class="school-area-section">
+            <div class="school-area-header">
+              <span onclick="setSearchQuery('${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${school.name} <small>#${school.rank}</small></span>
+              <span>${Math.ceil(school.count)} (${school.adjusted.toFixed(1)})</span>
+            </div>
+            <div class="faculty-list">
+              ${school.faculty
+      .sort((a, b) => {
+        const profA = appData.professors[a];
+        const profB = appData.professors[b];
+        const countA = profA?.pubs.filter(p => p.area === confKey).reduce((sum, p) => sum + p.adjustedcount, 0) || 0;
+        const countB = profB?.pubs.filter(p => p.area === confKey).reduce((sum, p) => sum + p.adjustedcount, 0) || 0;
+        return countB - countA;
+      })
+      .map(name => `
+                  <span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}</span>
+                `).join('')}
+            </div>
+          </div>
+        `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function renderSchoolCard(school, filterArea = null) {
   let sortedAreas;
 
@@ -743,8 +855,14 @@ function renderSchoolCard(school, filterArea = null) {
       .sort(([, a], [, b]) => b.adjusted - a.adjusted);
   }
 
+  const searchInput = document.getElementById('main-search');
+  const currentQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
+  const isExactMatch = school.name.toLowerCase() === currentQuery ||
+    (schoolAliases[currentQuery] && schoolAliases[currentQuery].toLowerCase() === school.name.toLowerCase());
+  const cardClass = isExactMatch ? 'card' : 'card collapsed';
+
   return `
-    <div class="card collapsed">
+    <div class="${cardClass}">
       <div class="card-header" onclick="toggleCard(this)">
         <h2>${school.name} <span style="color: var(--text-secondary); font-size: 0.8em;">#${school.rank}</span></h2>
         <span class="toggle-icon">▼</span>
@@ -754,7 +872,7 @@ function renderSchoolCard(school, filterArea = null) {
         ${sortedAreas.map(([area, data]) => `
           <div class="school-area-section">
             <div class="school-area-header">
-              <span>${areaLabels[area] || area}</span>
+              <span onclick="setSearchQuery('${areaLabels[area] ? areaLabels[area].replace(/'/g, "\\'") : area}')" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${areaLabels[area] || area}</span>
               <span>${Math.ceil(data.count)} (${data.adjusted.toFixed(1)})</span>
             </div>
             <div class="faculty-list">

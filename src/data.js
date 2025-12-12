@@ -57,70 +57,70 @@ export const schoolAliases = {
   'sfsu': 'San Francisco State University',
   'cpp': 'Cal Poly Pomona',
   'slo': 'Cal Poly San Luis Obispo',
-// Canada
-'uoft': 'University of Toronto',
-'ubc': 'University of British Columbia',
-'mcgill': 'McGill University',
-'waterloo': 'University of Waterloo',
-'sfu': 'Simon Fraser University',
-'alberta': 'University of Alberta',
-'mcmaster': 'McMaster University',
-'queensu': 'Queen\'s University',
+  // Canada
+  'uoft': 'University of Toronto',
+  'ubc': 'University of British Columbia',
+  'mcgill': 'McGill University',
+  'waterloo': 'University of Waterloo',
+  'sfu': 'Simon Fraser University',
+  'alberta': 'University of Alberta',
+  'mcmaster': 'McMaster University',
+  'queensu': 'Queen\'s University',
 
-// UK
-'oxford': 'University of Oxford',
-'cambridge': 'University of Cambridge',
-'imperial': 'Imperial College London',
-'ucl': 'University College London',
-'edinburgh': 'University of Edinburgh',
-'kcl': 'King\'s College London',
-'manchester': 'University of Manchester',
-'bristol': 'University of Bristol',
-'warwick': 'University of Warwick',
-'glasgow': 'University of Glasgow',
+  // UK
+  'oxford': 'University of Oxford',
+  'cambridge': 'University of Cambridge',
+  'imperial': 'Imperial College London',
+  'ucl': 'University College London',
+  'edinburgh': 'University of Edinburgh',
+  'kcl': 'King\'s College London',
+  'manchester': 'University of Manchester',
+  'bristol': 'University of Bristol',
+  'warwick': 'University of Warwick',
+  'glasgow': 'University of Glasgow',
 
-// Europe (non-UK)
-'eth': 'ETH Zurich',
-'epfl': 'École Polytechnique Fédérale de Lausanne',
-'tum': 'Technical University of Munich',
-'tu-berlin': 'Technical University of Berlin',
-'sorbonne': 'Sorbonne University',
-'ens': 'École Normale Supérieure',
-'tudelft': 'Delft University of Technology',
-'kth': 'KTH Royal Institute of Technology',
-'chalmers': 'Chalmers University of Technology',
-'upc': 'Polytechnic University of Catalonia',
-'polimi': 'Polytechnic University of Milan',
-'sapienza': 'Sapienza University of Rome',
+  // Europe (non-UK)
+  'eth': 'ETH Zurich',
+  'epfl': 'École Polytechnique Fédérale de Lausanne',
+  'tum': 'Technical University of Munich',
+  'tu-berlin': 'Technical University of Berlin',
+  'sorbonne': 'Sorbonne University',
+  'ens': 'École Normale Supérieure',
+  'tudelft': 'Delft University of Technology',
+  'kth': 'KTH Royal Institute of Technology',
+  'chalmers': 'Chalmers University of Technology',
+  'upc': 'Polytechnic University of Catalonia',
+  'polimi': 'Polytechnic University of Milan',
+  'sapienza': 'Sapienza University of Rome',
 
-// Asia
-'sjtu': 'Shanghai Jiao Tong University',
-'hkust': 'Hong Kong University of Science and Technology',
-'hku': 'University of Hong Kong',
-'cuhk': 'Chinese University of Hong Kong',
-'ntu': 'National Taiwan University',
-'ntu-sg': 'Nanyang Technological University',
-'nus': 'National University of Singapore',
-'kaist': 'Korea Advanced Institute of Science and Technology',
-'postech': 'Pohang University of Science and Technology',
-'iitb': 'Indian Institute of Technology Bombay',
-'iitd': 'Indian Institute of Technology Delhi',
-'iitk': 'Indian Institute of Technology Kanpur',
-'iisc': 'Indian Institute of Science',
+  // Asia
+  'sjtu': 'Shanghai Jiao Tong University',
+  'hkust': 'Hong Kong University of Science and Technology',
+  'hku': 'University of Hong Kong',
+  'cuhk': 'Chinese University of Hong Kong',
+  'ntu': 'National Taiwan University',
+  'ntu-sg': 'Nanyang Technological University',
+  'nus': 'National University of Singapore',
+  'kaist': 'Korea Advanced Institute of Science and Technology',
+  'postech': 'Pohang University of Science and Technology',
+  'iitb': 'Indian Institute of Technology Bombay',
+  'iitd': 'Indian Institute of Technology Delhi',
+  'iitk': 'Indian Institute of Technology Kanpur',
+  'iisc': 'Indian Institute of Science',
 
-// Australia
-'anu': 'Australian National University',
-'unsw': 'University of New South Wales',
-'usyd': 'University of Sydney',
-'unimelb': 'University of Melbourne',
-'uq': 'University of Queensland',
+  // Australia
+  'anu': 'Australian National University',
+  'unsw': 'University of New South Wales',
+  'usyd': 'University of Sydney',
+  'unimelb': 'University of Melbourne',
+  'uq': 'University of Queensland',
 
-// Middle East
-'weizmann': 'Weizmann Institute of Science',
-'technion': 'Technion-Israel Institute of Technology',
-'tau': 'Tel Aviv University',
-'kaust': 'King Abdullah University of Science and Technology',
-'aus': 'American University of Sharjah'
+  // Middle East
+  'weizmann': 'Weizmann Institute of Science',
+  'technion': 'Technion-Israel Institute of Technology',
+  'tau': 'Tel Aviv University',
+  'kaust': 'King Abdullah University of Science and Technology',
+  'aus': 'American University of Sharjah'
 
 };
 
@@ -181,9 +181,9 @@ export async function loadData() {
     const name = row.name.trim();
     if (professors[name]) {
       // Skip next-tier conferences (matches CSRankings default behavior)
-      if (nextTier[row.area]) {
-        return;
-      }
+      // if (nextTier[row.area]) {
+      //   return;
+      // }
 
       professors[name].pubs.push({
         area: row.area,

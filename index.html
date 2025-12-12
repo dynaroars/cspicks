@@ -56,7 +56,12 @@
       </div>
     </div>
 
+    <div id="search-context-header"
+      style="text-align: center; margin: 1.5rem 0; font-size: 1.5rem; font-weight: 600; color: var(--text-primary); display: none;">
+    </div>
+
     <main>
+      <section id="conference-results" class="results-grid"></section>
       <section id="school-results" class="results-grid"></section>
       <section id="area-people-results" class="results-grid"></section>
       <section id="prof-results" class="results-grid"></section>
@@ -114,8 +119,37 @@
   </div>
   <script type="module" src="/src/main.js"></script>
   <footer>
-  <strong>Data & Acknowledgment</strong>: CSPicks is inspired by <a href="https://csrankings.org" target="_blank"><strong>CSRankings</strong></a> and uses its taxonomy and data to organize results. All information is fetched on demand; no data is stored. Report bugs and issues on <a href="https://github.com/dynaroars/cspicks" target="_blank"><strong>GitHub</strong></a>.
+    <a href="#" id="open-ack-modal" style="color: inherit; text-decoration: underline;">Data & Acknowledgment</a>
   </footer>
+
+  <div id="ack-modal" class="modal hidden">
+    <div class="modal-content" style="max-width: 500px;">
+      <div class="modal-header">
+        <h2>Data & Acknowledgment</h2>
+        <button class="close-modal"
+          onclick="document.getElementById('ack-modal').classList.add('hidden')">&times;</button>
+      </div>
+      <div class="modal-body" style="text-align: left;">
+        <p>CSPicks is inspired by <a href="https://csrankings.org" target="_blank"><strong>CSRankings</strong></a> and
+          uses its taxonomy and data to organize results.</p>
+        <p>All information is fetched on demand; no data is stored.</p>
+        <p>Report bugs and issues on <a href="https://github.com/dynaroars/cspicks"
+            target="_blank"><strong>GitHub</strong></a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('open-ack-modal').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('ack-modal').classList.remove('hidden');
+    });
+    document.getElementById('ack-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'ack-modal') {
+        document.getElementById('ack-modal').classList.add('hidden');
+      }
+    });
+  </script>
 </body>
 
 </html>
