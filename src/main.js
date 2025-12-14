@@ -1,4 +1,4 @@
-import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, schoolAliases, conferenceAliases } from './data.js';
+import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, schoolAliases, conferenceAliases, nationalityAliases } from './data.js';
 import he from 'he';
 
 import { searchAuthor, fetchAuthorStats } from './dblp.js';
@@ -474,12 +474,32 @@ function searchProfessors(query) {
   const allProfs = Object.values(appData.professors);
   const tokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
 
-  const results = allProfs
-    .filter(p => {
-      const name = p.name.toLowerCase();
-      return tokens.every(token => name.includes(token));
-    })
-    .sort((a, b) => b.totalAdjusted - a.totalAdjusted);
+  // Check for nationality match
+  const nationalityMatch = Object.keys(nationalityAliases).find(key =>
+    query.toLowerCase().startsWith(key) || key.startsWith(query.toLowerCase())
+  );
+  const nationalityData = nationalityMatch ? nationalityAliases[nationalityMatch] : null;
+
+  let results;
+
+  if (nationalityData && nationalityData.lastNames && nationalityData.lastNames.length > 0) {
+    const lastNamesLower = nationalityData.lastNames.map(n => n.toLowerCase());
+    results = allProfs
+      .filter(p => {
+        const nameParts = p.name.split(/\s+/);
+        const lastName = nameParts[nameParts.length - 1].toLowerCase();
+        return lastNamesLower.includes(lastName);
+      })
+      .sort((a, b) => b.totalAdjusted - a.totalAdjusted);
+  } else {
+    // Standard search
+    results = allProfs
+      .filter(p => {
+        const name = p.name.toLowerCase();
+        return tokens.every(token => name.includes(token));
+      })
+      .sort((a, b) => b.totalAdjusted - a.totalAdjusted);
+  }
 
   const container = document.getElementById('prof-results');
   container.innerHTML = '';
@@ -633,6 +653,13 @@ function searchSchools(query) {
   const confKeyRaw = conferenceAliases[query] || query;
   const confKeyMatch = Object.keys(parentMap).find(k => k.toLowerCase().startsWith(confKeyRaw) || confKeyRaw.startsWith(k.toLowerCase()));
   const matchedArea = findMatchingArea(effectiveQuery);
+
+  // Check for nationality match
+  const nationalityMatch = Object.keys(nationalityAliases).find(key =>
+    query.toLowerCase().startsWith(key) || key.startsWith(query.toLowerCase())
+  );
+  const nationalityData = nationalityMatch ? nationalityAliases[nationalityMatch] : null;
+
   let results;
 
   document.getElementById('conference-results').innerHTML = '';
@@ -687,6 +714,23 @@ function searchSchools(query) {
     document.getElementById('school-results').innerHTML = '';
     return;
 
+  }
+
+  if (nationalityData && nationalityData.countries && nationalityData.countries.length > 0) {
+    const countryCodes = nationalityData.countries;
+    header.textContent = `Results for: ${nationalityMatch.charAt(0).toUpperCase() + nationalityMatch.slice(1)}`;
+    header.style.display = 'block';
+
+    results = Object.values(appData.schools)
+      .filter(school => countryCodes.includes(school.country))
+      .sort((a, b) => a.rank - b.rank);
+
+    const container = document.getElementById('school-results');
+    container.innerHTML = results
+      .slice(0, 20)
+      .map(school => renderSchoolCard(school, null))
+      .join('');
+    return;
   }
 
   if (matchedArea) {

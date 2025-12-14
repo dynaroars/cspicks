@@ -126,7 +126,113 @@ export const schoolAliases = {
 
 export const conferenceAliases = {
   'neurips': 'nips',
-  // Add more as needed
+};
+
+// Maps nationality keywords to { lastNames: [], countries: [] }
+// lastNames: common surnames for that ethnicity
+// countries: country codes to show schools from (optional)
+export const nationalityAliases = {
+  // --- ASIAN ---
+  'vietnam': {
+    lastNames: ['Nguyen', 'Tran', 'Le', 'Pham', 'Hoang', 'Vu', 'Vo', 'Dang', 'Bui', 'Do', 'Ho', 'Ngo', 'Duong', 'Ly'],
+    countries: ['vn']
+  },
+  'pakistan': {
+    lastNames: ['Khan', 'Ahmed', 'Ali', 'Hussain', 'Hassan', 'Shah', 'Malik', 'Iqbal', 'Raza', 'Syed', 'Qureshi', 'Mirza', 'Butt', 'Chaudhry', 'Sheikh', 'Aslam', 'Abbasi', 'Javed', 'Farooq', 'Rehman'],
+    countries: ['pk']
+  },
+  'indian': {
+    lastNames: ['Patel', 'Sharma', 'Singh', 'Kumar', 'Gupta', 'Reddy', 'Rao', 'Jain', 'Agarwal', 'Chopra', 'Mehta', 'Bhatia', 'Kapoor', 'Verma', 'Malhotra', 'Saxena', 'Nair', 'Iyer', 'Pillai', 'Menon'],
+    countries: ['in']
+  },
+  'chinese': {
+    lastNames: ['Wang', 'Li', 'Zhang', 'Liu', 'Chen', 'Yang', 'Huang', 'Zhao', 'Wu', 'Zhou', 'Xu', 'Sun', 'Ma', 'Zhu', 'Hu', 'Guo', 'Lin', 'He', 'Gao', 'Liang'],
+    countries: ['cn', 'hk', 'tw']
+  },
+  'korean': {
+    lastNames: ['Kim', 'Lee', 'Park', 'Choi', 'Jung', 'Kang', 'Cho', 'Yoon', 'Jang', 'Lim', 'Han', 'Shin', 'Seo', 'Kwon', 'Ko', 'Oh', 'Yoo', 'Moon', 'Song', 'Ahn'],
+    countries: ['kr']
+  },
+  'japanese': {
+    lastNames: ['Sato', 'Suzuki', 'Takahashi', 'Tanaka', 'Watanabe', 'Ito', 'Yamamoto', 'Nakamura', 'Kobayashi', 'Kato', 'Yoshida', 'Yamada', 'Sasaki', 'Yamaguchi', 'Matsumoto', 'Inoue', 'Kimura', 'Hayashi', 'Shimizu', 'Mori'],
+    countries: ['jp']
+  },
+  'iranian': {
+    lastNames: ['Ahmadi', 'Hosseini', 'Mohammadi', 'Karimi', 'Hashemi', 'Mousavi', 'Rahimi', 'Moradi', 'Jafari', 'Rezaei', 'Safari', 'Ebrahimi', 'Salehi', 'Sadeghi', 'Shirazi', 'Tehrani', 'Tabatabaei', 'Nasseri', 'Tavakoli', 'Najafi'],
+    countries: ['ir']
+  },
+
+  // --- ENGLISH / ANGLOSPHERE ---
+  'usa': {
+    lastNames: ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'],
+    countries: ['us']
+  },
+  'american': {
+    lastNames: ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'],
+    countries: ['us']
+  },
+  'british': {
+    lastNames: ['Smith', 'Jones', 'Taylor', 'Brown', 'Williams', 'Wilson', 'Johnson', 'Davies', 'Robinson', 'Wright', 'Thompson', 'Evans', 'Walker', 'White', 'Roberts', 'Green', 'Hall', 'Wood', 'Harris', 'Clarke'],
+    countries: ['gb']
+  },
+  'uk': {
+    lastNames: ['Smith', 'Jones', 'Taylor', 'Brown', 'Williams', 'Wilson', 'Johnson', 'Davies', 'Robinson', 'Wright', 'Thompson', 'Evans', 'Walker', 'White', 'Roberts', 'Green', 'Hall', 'Wood', 'Harris', 'Clarke'],
+    countries: ['gb']
+  },
+
+  // --- HISPANIC / LATIN AMERICA / SPAIN ---
+  'spanish': {
+    lastNames: ['Garcia', 'Rodriguez', 'Gonzalez', 'Fernandez', 'Lopez', 'Martinez', 'Sanchez', 'Perez', 'Gomez', 'Martin', 'Jimenez', 'Ruiz', 'Hernandez', 'Diaz', 'Moreno', 'Muñoz', 'Alvarez', 'Romero', 'Alonso', 'Gutierrez'],
+    countries: ['es', 'mx', 'co', 'ar', 'pe', 've', 'cl', 'ec', 'gt', 'cu']
+  },
+  'hispanic': {
+    lastNames: ['Garcia', 'Rodriguez', 'Gonzalez', 'Fernandez', 'Lopez', 'Martinez', 'Sanchez', 'Perez', 'Gomez', 'Martin', 'Jimenez', 'Ruiz', 'Hernandez', 'Diaz', 'Moreno', 'Muñoz', 'Alvarez', 'Romero', 'Alonso', 'Gutierrez'],
+    countries: ['es', 'mx', 'co', 'ar', 'pe', 've', 'cl', 'ec', 'gt', 'cu']
+  },
+
+  // --- EUROPEAN ---
+  'french': {
+    lastNames: ['Martin', 'Bernard', 'Thomas', 'Petit', 'Robert', 'Richard', 'Durand', 'Dubois', 'Moreau', 'Laurent', 'Simon', 'Michel', 'Lefebvre', 'Leroy', 'Roux', 'David', 'Bertrand', 'Morel', 'Fournier', 'Girard'],
+    countries: ['fr', 'be']
+  },
+  'german': {
+    lastNames: ['Müller', 'Schmidt', 'Schneider', 'Fischer', 'Weber', 'Meyer', 'Wagner', 'Becker', 'Schulz', 'Hoffmann', 'Schäfer', 'Koch', 'Bauer', 'Richter', 'Klein', 'Wolf', 'Schröder', 'Neumann', 'Schwarz', 'Zimmermann'],
+    countries: ['de', 'at', 'ch']
+  },
+  'italian': {
+    lastNames: ['Rossi', 'Russo', 'Ferrari', 'Esposito', 'Bianchi', 'Romano', 'Colombo', 'Ricci', 'Marino', 'Greco', 'Bruno', 'Gallo', 'Conti', 'De Luca', 'Mancini', 'Costa', 'Giordano', 'Rizzo', 'Lombardi', 'Moretti'],
+    countries: ['it']
+  },
+  'russian': {
+    lastNames: ['Ivanov', 'Smirnov', 'Kuznetsov', 'Popov', 'Sokolov', 'Lebedev', 'Kozlov', 'Novikov', 'Morozov', 'Petrov', 'Volkov', 'Solovyov', 'Vasilyev', 'Zaytsev', 'Pavlov', 'Semyonov', 'Golubev', 'Vinogradov', 'Bogdanov', 'Vorobyov'],
+    countries: ['ru', 'by']
+  },
+  'portuguese': {
+    lastNames: ['Silva', 'Santos', 'Oliveira', 'Souza', 'Rodrigues', 'Ferreira', 'Alves', 'Pereira', 'Lima', 'Gomes', 'Costa', 'Ribeiro', 'Martins', 'Carvalho', 'Almeida', 'Lopes', 'Soares', 'Fernandes', 'Vieira', 'Barbosa'],
+    countries: ['pt', 'br']
+  },
+  'brazilian': {
+    lastNames: ['Silva', 'Santos', 'Oliveira', 'Souza', 'Rodrigues', 'Ferreira', 'Alves', 'Pereira', 'Lima', 'Gomes', 'Costa', 'Ribeiro', 'Martins', 'Carvalho', 'Almeida', 'Lopes', 'Soares', 'Fernandes', 'Vieira', 'Barbosa'],
+    countries: ['br']
+  },
+
+  // --- MIDDLE EASTERN / ARABIC ---
+  'arabic': {
+    lastNames: ['Mohamed', 'Ahmed', 'Ali', 'Youssef', 'Ibrahim', 'Mahmoud', 'Hassan', 'Abdallah', 'Hussein', 'Saleh', 'Saad', 'Fawzi', 'Nasser', 'Khalil', 'Ismail', 'Zayed', 'Sultan', 'Mustafa', 'Osman', 'Hamad'],
+    countries: ['eg', 'sa', 'ae', 'kw', 'qa', 'jo', 'lb', 'om']
+  },
+
+  // --- AFRICAN ---
+  'nigerian': {
+    lastNames: ['Musa', 'Ibrahim', 'Abdullahi', 'Ali', 'Okafor', 'Adebayo', 'Okeke', 'Balogun', 'Eze', 'Obi', 'Olawale', 'Okonkwo', 'Nwachukwu', 'Abubakar', 'Danjuma', 'Bello', 'Okoro', 'Lawal', 'Umar', 'Sani'],
+    countries: ['ng']
+  },
+
+  // --- SOUTHEAST ASIAN (Additional) ---
+  'filipino': {
+    lastNames: ['De la Cruz', 'Garcia', 'Reyes', 'Ramos', 'Mendoza', 'Santos', 'Flores', 'Gonzales', 'Bautista', 'Villanueva', 'Fernandez', 'Cruz', 'De Guzman', 'Lopez', 'Perez', 'Castillo', 'Rivera', 'Aquino', 'Del Rosario', 'Sanchez'],
+    countries: ['ph']
+  }
 };
 
 export const nextTier = {
