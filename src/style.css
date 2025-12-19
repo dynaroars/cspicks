@@ -681,3 +681,98 @@ input[type="text"]::placeholder {
   font-weight: 600;
   color: #10b981;
 }
+
+/* Activity Graph */
+.activity-graph {
+  margin: 1rem 0;
+  padding: 0.8rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.activity-graph h4 {
+  margin: 0 0 0.8rem 0;
+  font-size: 0.85em;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.activity-bars {
+  display: flex;
+  align-items: flex-end;
+  height: 60px;
+  gap: 6px;
+  padding-bottom: 5px;
+}
+
+.year-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  cursor: help;
+}
+
+.year-column .bar {
+  width: 100%;
+  max-width: 20px;
+  background-color: #374151;
+  border-radius: 3px 3px 0 0;
+  transition: height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  min-height: 2px;
+}
+
+.year-column:hover .bar {
+  background-color: var(--accent-color);
+  opacity: 1 !important;
+}
+
+.year-label {
+  font-size: 10px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* Tooltip */
+.year-column::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background: #2d3748;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  white-space: normal;
+  max-width: 200px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  z-index: 9999;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  width: max-content;
+}
+
+.year-column:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}/* Fix for tooltip clipping and z-index */
+.card:not(.collapsed) {
+    z-index: 50;
+    position: relative;
+}
+
+.card:not(.collapsed) .card-content {
+    overflow: visible !important;
+}

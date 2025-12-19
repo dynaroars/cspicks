@@ -1,4 +1,5 @@
 import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, schoolAliases, conferenceAliases, nationalityAliases } from './data.js';
+import { nameOriginMap } from './name_map.js';
 import he from 'he';
 
 import { searchAuthor, fetchAuthorStats } from './dblp.js';
@@ -219,14 +220,72 @@ function renderProfessorCardContent(prof) {
         <a href="${dblpUrl}" target="_blank" class="card-link">DBLP</a>
       </div>
 
+      ${renderActivityGraph(prof)}
+
       <div class="stats-list">
-        ${sortedAreas.map(([area, stats]) => `
+        ${sortedAreas.map(([area, stats]) => {
+    const areaLabel = areaLabels[area] || area;
+    return `
           <div class="stat-item">
-            <span class="stat-label">${areaLabels[area] || area}</span>
+            <span class="stat-label" onclick="setSearchQuery('${areaLabel.replace(/'/g, "\\'")}')" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${areaLabel}</span>
             <span class="stat-count">${Math.ceil(stats.count)} (${stats.adjusted.toFixed(1)})</span>
           </div>
-        `).join('')}
+          `;
+  }).join('')}
       </div>
+  `;
+}
+
+function renderActivityGraph(prof) {
+  const start = startYear;
+  const end = endYear;
+  const yearStats = {};
+
+  for (let y = start; y <= end; y++) {
+    yearStats[y] = { total: 0, areas: {} };
+  }
+
+  prof.pubs.forEach(p => {
+    if (p.year >= start && p.year <= end) {
+      if (!yearStats[p.year]) return;
+      yearStats[p.year].total += p.count;
+
+      const parentArea = parentMap[p.area] || p.area;
+      if (!yearStats[p.year].areas[parentArea]) yearStats[p.year].areas[parentArea] = 0;
+      yearStats[p.year].areas[parentArea] += p.count;
+    }
+  });
+
+  let maxCount = 0;
+  Object.values(yearStats).forEach(s => {
+    if (s.total > maxCount) maxCount = s.total;
+  });
+
+  if (maxCount === 0) return '';
+
+  return `
+    <div class="activity-graph">
+      <h4>Recent Activity (${start}-${end})</h4>
+      <div class="activity-bars">
+        ${Object.keys(yearStats).sort().map(year => {
+    const stats = yearStats[year];
+    const height = maxCount > 0 ? (stats.total / maxCount) * 100 : 0;
+    const breakdown = Object.entries(stats.areas)
+      .sort(([, a], [, b]) => b - a)
+      .map(([area, count]) => `${Math.ceil(count)} ${areaLabels[area] || area}`)
+      .join(', ');
+
+    const tooltip = `${year}: ${breakdown || 'No papers'}`;
+
+    return `
+             <div class="year-column tooltip" data-tooltip="${tooltip}">
+               <div class="bar" style="height: ${Math.max(height, 1)}%; opacity: ${height > 0 ? 1 : 0.1};"></div>
+               <div class="year-label">'${year.toString().slice(-2)}</div>
+             </div>
+           `;
+  }).join('')}
+      </div>
+    </div>
   `;
 }
 
@@ -483,9 +542,20 @@ function searchProfessors(query) {
   let results;
 
   if (nationalityData && nationalityData.lastNames && nationalityData.lastNames.length > 0) {
+    // Nationality search: filter by last names + nameOriginMap override
     const lastNamesLower = nationalityData.lastNames.map(n => n.toLowerCase());
+    const allowedCountries = nationalityData.countries || [];
+
     results = allProfs
       .filter(p => {
+        // 1. Check exact map override first
+        if (nameOriginMap[p.name]) {
+          // If mapped, it MUST match one of the allowed countries for this nationality
+          // e.g. "Tsung-Yi Ho" -> "tw". Searching "viet" (['vn']) -> mismatch -> return false.
+          return allowedCountries.includes(nameOriginMap[p.name]);
+        }
+
+        // 2. Fallback to last name matching
         const nameParts = p.name.split(/\s+/);
         const lastName = nameParts[nameParts.length - 1].toLowerCase();
         return lastNamesLower.includes(lastName);
