@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/cspicks/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS Picks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+    rel="stylesheet">
+  <script type="module" crossorigin src="/cspicks/assets/index-38m-jt_c.js"></script>
+  <link rel="stylesheet" crossorigin href="/cspicks/assets/index-BuEVZl-Q.css">
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <h1>CS Picks</h1>
+      <p>Explore Computer Science Professors, Schools, and Research Areas.</p>
+    </header>
+
+    <div class="search-section">
+      <div class="search-container">
+        <input type="search" id="main-search" placeholder="Loading data..." disabled autofocus>
+      </div>
+
+      <div class="filters">
+        <div class="filter-group">
+          <label for="region-select">Region</label>
+          <select id="region-select">
+            <option value="world" selected>World</option>
+            <option value="us">USA</option>
+            <option value="europe">Europe</option>
+            <option value="asia">Asia</option>
+            <option value="canada">Canada</option>
+            <option value="australasia">Australasia</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Year Range</label>
+          <div class="year-inputs">
+            <select id="start-year"></select>
+            <span>to</span>
+            <select id="end-year"></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions-container">
+        <button id="simulate-btn" class="btn-secondary" title="Simulate adding an author to a university">
+          Simulate
+        </button>
+      </div>
+    </div>
+
+    <div id="search-context-header"
+      style="text-align: center; margin: 1.5rem 0; font-size: 1.5rem; font-weight: 600; color: var(--text-primary); display: none;">
+    </div>
+
+    <main>
+      <section id="conference-results" class="results-grid"></section>
+      <section id="school-results" class="results-grid"></section>
+      <section id="area-people-results" class="results-grid"></section>
+      <section id="prof-results" class="results-grid"></section>
+      <section id="dblp-results" class="results-grid"></section>
+    </main>
+
+    <div id="sim-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Recruiting Simulator</h2>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="sim-mode-toggle"
+            style="margin-bottom: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
+            <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+              <input type="radio" name="sim-mode" value="add" checked> Add Author
+            </label>
+            <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+              <input type="radio" name="sim-mode" value="remove"> Remove Faculty
+            </label>
+          </div>
+
+          <div class="sim-step" id="step-author">
+            <h3>1. Find an Author (DBLP)</h3>
+            <input type="text" id="sim-author-search" placeholder="Type name (e.g. Geoffrey Hinton)...">
+            <div id="sim-author-results" class="sim-list"></div>
+          </div>
+
+          <div class="sim-step hidden" id="step-univ">
+            <h3 id="step-univ-title">2. Select Target University</h3>
+            <div class="selected-item" id="selected-author-display"></div>
+            <input type="text" id="sim-univ-search" placeholder="Type university name...">
+            <div id="sim-univ-results" class="sim-list"></div>
+          </div>
+
+          <div class="sim-step hidden" id="step-faculty">
+            <h3>2. Select Faculty to Remove</h3>
+            <div class="selected-item" id="selected-univ-display-remove"></div>
+            <input type="text" id="sim-faculty-search" placeholder="Search faculty name...">
+            <div id="sim-faculty-results" class="sim-list"></div>
+          </div>
+
+          <div class="sim-step hidden" id="step-results">
+            <h3>3. Impact Analysis</h3>
+            <div class="selected-item" id="selected-univ-display"></div>
+            <div id="sim-loading" class="hidden">Calculating... <span class="spinner">↻</span></div>
+            <div id="sim-impact-display"></div>
+            <button id="sim-reset-btn" class="btn-secondary">Start Over</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <footer>
+    <a href="#" id="open-ack-modal" style="color: inherit; text-decoration: underline;">Data & Acknowledgment</a>
+  </footer>
+
+  <div id="ack-modal" class="modal hidden">
+    <div class="modal-content" style="max-width: 500px;">
+      <div class="modal-header">
+        <h2>Data & Acknowledgment</h2>
+        <button class="close-modal"
+          onclick="document.getElementById('ack-modal').classList.add('hidden')">&times;</button>
+      </div>
+      <div class="modal-body" style="text-align: left;">
+        <p>CSPicks is inspired by <a href="https://csrankings.org" target="_blank"><strong>CSRankings</strong></a> and
+          uses its taxonomy and data to organize results.</p>
+        <p>All information is fetched on demand; no data is stored.</p>
+        <p>Report bugs and issues on <a href="https://github.com/dynaroars/cspicks"
+            target="_blank"><strong>GitHub</strong></a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('open-ack-modal').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('ack-modal').classList.remove('hidden');
+    });
+    document.getElementById('ack-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'ack-modal') {
+        document.getElementById('ack-modal').classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+
+</html>
