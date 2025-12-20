@@ -672,7 +672,6 @@ const areaLabels = {
   'ecom': 'Economics & Computation',
   'chi': 'Human-Computer Interaction',
   'robotics': 'Robotics',
-  'pets': 'Privacy Enhancing Technologies',
   'visualization': 'Visualization',
   'csed': 'Computer Science Education'
 };
