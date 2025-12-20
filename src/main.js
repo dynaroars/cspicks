@@ -25,6 +25,7 @@ async function init() {
   setupFilters();
   setupSearch();
   setupSimulation();
+  setupTooltips();
 
   try {
     rawData = await loadData();
@@ -237,16 +238,30 @@ function renderProfessorCardContent(prof) {
 }
 
 function renderActivityGraph(prof) {
-  const start = startYear;
-  const end = endYear;
-  const yearStats = {};
+  const globalStart = startYear;
+  const globalEnd = endYear;
 
-  for (let y = start; y <= end; y++) {
+  let firstPubYear = globalEnd;
+  let lastPubYear = globalStart;
+  prof.pubs.forEach(p => {
+    if (p.year >= globalStart && p.year <= globalEnd) {
+      if (p.year < firstPubYear) firstPubYear = p.year;
+      if (p.year > lastPubYear) lastPubYear = p.year;
+    }
+  });
+
+  const effectiveStart = Math.max(globalStart, firstPubYear);
+  const effectiveEnd = Math.min(globalEnd, lastPubYear);
+
+  if (effectiveStart > effectiveEnd) return '';
+
+  const yearStats = {};
+  for (let y = effectiveStart; y <= effectiveEnd; y++) {
     yearStats[y] = { total: 0, areas: {} };
   }
 
   prof.pubs.forEach(p => {
-    if (p.year >= start && p.year <= end) {
+    if (p.year >= effectiveStart && p.year <= effectiveEnd) {
       if (!yearStats[p.year]) return;
       yearStats[p.year].total += p.count;
 
@@ -263,10 +278,14 @@ function renderActivityGraph(prof) {
 
   if (maxCount === 0) return '';
 
+  const yearCount = effectiveEnd - effectiveStart + 1;
+  // Use smaller bars if many years
+  const barWidth = yearCount > 20 ? 'minmax(12px, 1fr)' : 'minmax(18px, 1fr)';
+
   return `
     <div class="activity-graph">
-      <h4>Recent Activity (${start}-${end})</h4>
-      <div class="activity-bars">
+      <h4>Activity (${effectiveStart}-${effectiveEnd})</h4>
+      <div class="activity-bars" style="grid-template-columns: repeat(${yearCount}, ${barWidth});">
         ${Object.keys(yearStats).sort().map(year => {
     const stats = yearStats[year];
     const height = maxCount > 0 ? (stats.total / maxCount) * 100 : 0;
@@ -278,8 +297,8 @@ function renderActivityGraph(prof) {
     const tooltip = `${year}: ${breakdown || 'No papers'}`;
 
     return `
-             <div class="year-column tooltip" data-tooltip="${tooltip}">
-               <div class="bar" style="height: ${Math.max(height, 1)}%; opacity: ${height > 0 ? 1 : 0.1};"></div>
+             <div class="year-column" data-tooltip="${tooltip}" title="${tooltip}">
+               <div class="bar" style="height: ${Math.max(height, 2)}%;"></div>
                <div class="year-label">'${year.toString().slice(-2)}</div>
              </div>
            `;
@@ -1302,6 +1321,53 @@ async function runSimulation(author, school, isRemove = false) {
         `).join('')}
     </div>
   `;
+}
+
+
+function setupTooltips() {
+  // Create global tooltip element
+  let tooltip = document.getElementById('global-tooltip');
+  if (!tooltip) {
+    tooltip = document.createElement('div');
+    tooltip.id = 'global-tooltip';
+    document.body.appendChild(tooltip);
+  }
+
+  // Use event delegation for dynamic elements
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target.closest('.year-column');
+    if (target) {
+      const text = target.getAttribute('data-tooltip');
+      if (text) {
+        // Replace comma with newline for better readability
+        tooltip.textContent = text.replace(': ', ':\n');
+        tooltip.style.display = 'block';
+      }
+    }
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (tooltip.style.display === 'block') {
+      // Position slightly offset from cursor
+      const x = e.clientX + 15;
+      const y = e.clientY + 15;
+
+      // Prevent going off screen
+      const rect = tooltip.getBoundingClientRect();
+      const maxX = window.innerWidth - rect.width - 20;
+      const maxY = window.innerHeight - rect.height - 20;
+
+      tooltip.style.left = `${Math.min(x, maxX)}px`;
+      tooltip.style.top = `${Math.min(y, maxY)}px`;
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const target = e.target.closest('.year-column');
+    if (target) {
+      tooltip.style.display = 'none';
+    }
+  });
 }
 
 init();
