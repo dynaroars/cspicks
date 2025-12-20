@@ -310,8 +310,11 @@ input[type="text"]::placeholder {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text-primary);
+  user-select: text;
+  cursor: text;
 }
+
+
 
 .card-subtitle {
   color: var(--text-secondary);
@@ -767,12 +770,14 @@ input[type="text"]::placeholder {
 .year-column:hover::before {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-}/* Fix for tooltip clipping and z-index */
+}
+
+/* Fix for tooltip clipping and z-index */
 .card:not(.collapsed) {
-    z-index: 50;
-    position: relative;
+  z-index: 50;
+  position: relative;
 }
 
 .card:not(.collapsed) .card-content {
-    overflow: visible !important;
+  overflow: visible !important;
 }
