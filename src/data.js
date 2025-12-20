@@ -286,6 +286,8 @@ export async function loadData() {
   authorInfo.forEach(row => {
     const name = row.name.trim();
     if (professors[name]) {
+      if (row.area === 'pets') return;
+
       // Skip next-tier conferences (matches CSRankings default behavior)
       // if (nextTier[row.area]) {
       //   return;
