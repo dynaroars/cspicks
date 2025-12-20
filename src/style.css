@@ -93,7 +93,7 @@ header p {
 .card-content {
   margin-top: 1.5rem;
   overflow: hidden;
-  max-height: 5000px;
+  max-height: 90000px;
   opacity: 1;
   transition: all 0.5s ease-in-out;
 }
@@ -704,15 +704,17 @@ input[type="text"]::placeholder {
 }
 
 .activity-bars {
-  display: flex;
+  display: grid;
   align-items: flex-end;
-  height: 60px;
-  gap: 6px;
-  padding-bottom: 5px;
+  height: 140px;
+  gap: 4px;
+  padding-bottom: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
 }
 
 .year-column {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -720,6 +722,7 @@ input[type="text"]::placeholder {
   height: 100%;
   position: relative;
   cursor: help;
+  min-width: 0;
 }
 
 .year-column .bar {
@@ -742,35 +745,23 @@ input[type="text"]::placeholder {
   margin-top: 4px;
 }
 
-/* Tooltip */
-.year-column::before {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(5px);
-  background: #2d3748;
+#global-tooltip {
+  position: fixed;
+  background: #1f2937;
   color: white;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 6px;
   font-size: 11px;
-  white-space: normal;
-  max-width: 200px;
-  text-align: center;
-  opacity: 0;
+  white-space: nowrap;
   pointer-events: none;
-  transition: all 0.2s ease;
-  z-index: 9999;
-  margin-bottom: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  display: none;
   font-weight: 500;
-  width: max-content;
+  max-width: 300px;
+  white-space: pre-wrap;
 }
 
-.year-column:hover::before {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
 
 /* Fix for tooltip clipping and z-index */
 .card:not(.collapsed) {
