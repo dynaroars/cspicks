@@ -1,1 +1,0 @@
-# CSRankings test suite
