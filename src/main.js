@@ -297,7 +297,7 @@ function renderActivityGraph(prof) {
     const tooltip = `${year}: ${breakdown || 'No papers'}`;
 
     return `
-             <div class="year-column" data-tooltip="${tooltip}" title="${tooltip}">
+             <div class="year-column" data-tooltip="${tooltip}">
                <div class="bar" style="height: ${Math.max(height, 2)}%;"></div>
                <div class="year-label">'${year.toString().slice(-2)}</div>
              </div>
