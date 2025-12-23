@@ -253,9 +253,9 @@ export const nextTier = {
 
 export async function loadData() {
   const [csrankings, authorInfo, institutions] = await Promise.all([
-    fetchCsv('https://raw.githubusercontent.com/dynaroars/CSrankings/gh-pages/csrankings.csv'),
-    fetchCsv('https://raw.githubusercontent.com/dynaroars/CSrankings/gh-pages/generated-author-info.csv'),
-    fetchCsv('https://raw.githubusercontent.com/dynaroars/CSrankings/gh-pages/institutions.csv')
+    fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv'),
+    fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/generated-author-info.csv'),
+    fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/institutions.csv')
   ]);
 
   const professors = {};
