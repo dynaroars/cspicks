@@ -986,8 +986,13 @@ function renderSchoolCard(school, filterArea = null) {
       sortedAreas = [];
     }
   } else {
+    // Sort by area rank (ascending, so #1 first)
     sortedAreas = Object.entries(school.areas)
-      .sort(([, a], [, b]) => b.adjusted - a.adjusted);
+      .sort(([areaA], [areaB]) => {
+        const rankA = school.areaRanks?.[areaA] || 9999;
+        const rankB = school.areaRanks?.[areaB] || 9999;
+        return rankA - rankB;
+      });
   }
 
   const searchInput = document.getElementById('main-search');
@@ -1004,25 +1009,28 @@ function renderSchoolCard(school, filterArea = null) {
       </div>
       <div class="card-content">
         <div class="stats-list">
-        ${sortedAreas.map(([area, data]) => `
+        ${sortedAreas.map(([area, data]) => {
+    const areaRank = school.areaRanks?.[area];
+    const rankBadge = areaRank ? `<span style="color: var(--text-secondary); font-size: 0.85em; margin-left: 0.5rem;">#${areaRank}</span>` : '';
+    return `
           <div class="school-area-section">
             <div class="school-area-header">
-              <span onclick="setSearchQuery('${areaLabels[area] ? areaLabels[area].replace(/'/g, "\\'") : area}')" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${areaLabels[area] || area}</span>
+              <span onclick="setSearchQuery('${areaLabels[area] ? areaLabels[area].replace(/'/g, "\\'") : area}')" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${areaLabels[area] || area}${rankBadge}</span>
               <span>${Math.ceil(data.count)} (${data.adjusted.toFixed(1)})</span>
             </div>
             <div class="faculty-list">
               ${data.faculty
-      .sort((a, b) => {
-        const countA = appData.professors[a]?.areas[area]?.adjusted || 0;
-        const countB = appData.professors[b]?.areas[area]?.adjusted || 0;
-        return countB - countA;
-      })
-      .map(name => `
+        .sort((a, b) => {
+          const countA = appData.professors[a]?.areas[area]?.adjusted || 0;
+          const countB = appData.professors[b]?.areas[area]?.adjusted || 0;
+          return countB - countA;
+        })
+        .map(name => `
                 <span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}</span>
               `).join('')}
             </div>
           </div>
-        `).join('')}
+        `}).join('')}
         </div>
       </div>
     </div>

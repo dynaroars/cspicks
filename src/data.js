@@ -354,7 +354,7 @@ export const parentMap = {
 const topLevelAreas = [...new Set(Object.values(parentMap))];
 const numAreas = topLevelAreas.length;
 
-export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us') {
+export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null) {
   const { professors, schools } = data;
   const filteredProfs = {};
   const filteredSchools = {};
@@ -388,15 +388,61 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
       const totalPapers = Math.ceil(totalCount);
 
       const areaStats = {};
-      filteredPubs.forEach(pub => {
-        // Use top-level area for grouping if possible, otherwise fallback to pub area
-        const area = parentMap[pub.area] || pub.area;
 
+      filteredPubs.forEach(pub => {
+        // 1. Stats for Professor Object
+        const area = parentMap[pub.area] || pub.area;
         if (!areaStats[area]) {
           areaStats[area] = { count: 0, adjusted: 0 };
         }
         areaStats[area].count += pub.count;
         areaStats[area].adjusted += pub.adjustedcount;
+
+        // 2. Stats for School (Historical Attribution)
+        let pubSchoolName = prof.affiliation;
+
+        // Check history override
+        if (historyMap && historyMap[name]) {
+          const h = historyMap[name].find(seg => pub.year >= seg.start && pub.year <= seg.end);
+          if (h) {
+            pubSchoolName = h.school;
+          } else {
+            // History exists but year not covered -> Assume NOT current school (null)
+            pubSchoolName = null;
+          }
+        }
+
+        if (!filteredSchools[pubSchoolName]) {
+          filteredSchools[pubSchoolName] = {
+            name: pubSchoolName,
+            region: schools[pubSchoolName]?.region,
+            country: schools[pubSchoolName]?.country,
+            areas: {},
+            areaAdjustedCounts: {},
+            totalCount: 0,
+            totalAdjusted: 0
+          };
+        }
+
+        const school = filteredSchools[pubSchoolName];
+        school.totalCount += pub.count;
+        school.totalAdjusted += pub.adjustedcount;
+
+        if (!school.areas[area]) {
+          school.areas[area] = { count: 0, adjusted: 0, faculty: [] };
+        }
+        school.areas[area].count += pub.count;
+        school.areas[area].adjusted += pub.adjustedcount;
+
+        if (!school.areas[area].faculty.includes(name)) {
+          school.areas[area].faculty.push(name);
+        }
+
+        // Geometric mean accumulator
+        if (!school.areaAdjustedCounts[area]) {
+          school.areaAdjustedCounts[area] = 0;
+        }
+        school.areaAdjustedCounts[area] += pub.adjustedcount;
       });
 
       filteredProfs[name] = {
@@ -407,40 +453,6 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
         totalAdjusted,
         totalPapers
       };
-
-      const schoolName = prof.affiliation;
-      if (!filteredSchools[schoolName]) {
-        filteredSchools[schoolName] = {
-          name: schoolName,
-          region: schools[schoolName]?.region,
-          country: schools[schoolName]?.country,
-          areas: {},
-          areaAdjustedCounts: {}, // For geometric mean calculation
-          totalCount: 0,
-          totalAdjusted: 0
-        };
-      }
-
-      const school = filteredSchools[schoolName];
-      school.totalCount += totalCount;
-      school.totalAdjusted += totalAdjusted;
-
-      Object.entries(areaStats).forEach(([area, stats]) => {
-        if (!school.areas[area]) {
-          school.areas[area] = { count: 0, adjusted: 0, faculty: [] };
-        }
-        school.areas[area].count += stats.count;
-        school.areas[area].adjusted += stats.adjusted;
-        if (!school.areas[area].faculty.includes(name)) {
-          school.areas[area].faculty.push(name);
-        }
-
-        // Accumulate for geometric mean (by top-level area)
-        if (!school.areaAdjustedCounts[area]) {
-          school.areaAdjustedCounts[area] = 0;
-        }
-        school.areaAdjustedCounts[area] += stats.adjusted;
-      });
     }
   }
 
@@ -462,6 +474,20 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
   schoolList.forEach((school, index) => {
     school.rank = index + 1;
     filteredSchools[school.name] = school;
+  });
+
+  // Compute Per-Area Rankings
+  topLevelAreas.forEach(area => {
+    // Get all schools that have this area
+    const schoolsWithArea = schoolList
+      .filter(s => s.areas[area] && s.areas[area].adjusted > 0)
+      .sort((a, b) => (b.areas[area]?.adjusted || 0) - (a.areas[area]?.adjusted || 0));
+
+    // Assign ranks
+    schoolsWithArea.forEach((school, idx) => {
+      if (!school.areaRanks) school.areaRanks = {};
+      school.areaRanks[area] = idx + 1;
+    });
   });
 
   return { professors: filteredProfs, schools: filteredSchools };

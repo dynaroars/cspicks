@@ -33,14 +33,20 @@ const areaLabels = {
 
 // State
 let rawData = [];
+let affiliationHistory = {};
 let chartInstance = null;
 let currentTab = 'schools';
 
 async function init() {
     console.log('Initializing Analysis Dashboard...');
     try {
-        rawData = await loadData();
-        console.log('Data loaded for analysis:', rawData.length, 'records');
+        const [data, history] = await Promise.all([
+            loadData(),
+            fetch('professor_history.json').then(res => res.ok ? res.json() : {}).catch(e => ({})),
+        ]);
+        rawData = data;
+        affiliationHistory = history;
+        console.log('Data loaded:', rawData.length, 'records, history for', Object.keys(affiliationHistory).length, 'profs');
 
         populateSchoolSelect();
         setupTabs();
@@ -117,7 +123,7 @@ async function renderSchoolTrends() {
 
             const region = 'us';
 
-            const result = filterByYears({ ...rawData }, wStart, wEnd, region);
+            const result = filterByYears({ ...rawData }, wStart, wEnd, region, affiliationHistory);
             const school = result.schools[targetSchool];
 
             labels.push(y);
@@ -135,8 +141,8 @@ async function renderSchoolTrends() {
                     backgroundColor: 'rgba(16, 185, 129, 0.1)',
                     tension: 0.2,
                     fill: {
-                        target: { value: 100 },
-                        above: 'rgba(16, 185, 129, 0.1)'
+                        target: 'end',
+                        below: 'rgba(16, 185, 129, 0.1)'
                     },
                     pointRadius: 4,
                     pointHoverRadius: 6
@@ -197,9 +203,25 @@ function renderAreaTrends() {
 
     allPubs.forEach(pub => {
         if (pub.year >= startYear && pub.year <= currentYear) {
-            const area = parentMap[pub.area] || pub.area;
-            if (!stats[pub.year][area]) stats[pub.year][area] = 0;
-            stats[pub.year][area] += pub.adjustedcount;
+            // Check history for this specific pub
+            let isAtTargetSchool = true;
+            if (affiliationHistory && affiliationHistory[pub.name]) {
+                const h = affiliationHistory[pub.name].find(s => pub.year >= s.start && pub.year <= s.end);
+
+                if (h && h.school === targetSchool) {
+                    isAtTargetSchool = true;
+                } else {
+                    isAtTargetSchool = false;
+                }
+            } else {
+                // No history data for this prof, assume current affiliation (which matched targetSchool in filtering)
+            }
+
+            if (isAtTargetSchool) {
+                const area = parentMap[pub.area] || pub.area;
+                if (!stats[pub.year][area]) stats[pub.year][area] = 0;
+                stats[pub.year][area] += pub.adjustedcount;
+            }
         }
     });
 
@@ -304,6 +326,8 @@ function renderFacultyTrends() {
     const windowSize = 3; // 3-year window for diversity check
 
     const diversityRates = [];
+    const facultyCounts = [];
+    const multiAreaCounts = [];
 
     for (let y = startYear; y <= currentYear; y++) {
         years.push(y);
@@ -313,7 +337,6 @@ function renderFacultyTrends() {
 
         // Count distinct areas per author in this window
         const authorAreas = {};
-        let activeAuthors = 0;
 
         const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
         const schoolProfs = Object.entries(rawData.professors).filter(([, p]) => p.affiliation === targetSchool);
@@ -330,7 +353,7 @@ function renderFacultyTrends() {
 
         let multiAreaCount = 0;
         const authors = Object.keys(authorAreas);
-        activeAuthors = authors.length;
+        const activeAuthors = authors.length;
 
         if (activeAuthors > 0) {
             authors.forEach(name => {
@@ -340,37 +363,79 @@ function renderFacultyTrends() {
         } else {
             diversityRates.push(0);
         }
+
+        facultyCounts.push(activeAuthors);
+        multiAreaCounts.push(multiAreaCount);
     }
 
     chartInstance = new Chart(ctx, {
         type: 'line',
         data: {
             labels: years,
-            datasets: [{
-                label: '% Faculty Publishing in Multiple Areas (3-year rolling)',
-                data: diversityRates,
-                borderColor: '#8b5cf6',
-                backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                tension: 0.3,
-                fill: true,
-                pointRadius: 4
-            }]
+            datasets: [
+                {
+                    label: '% Multi-Area Faculty',
+                    data: diversityRates,
+                    borderColor: '#8b5cf6',
+                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    tension: 0.3,
+                    fill: true,
+                    pointRadius: 4,
+                    yAxisID: 'y'
+                },
+                {
+                    label: 'Active Faculty Count',
+                    data: facultyCounts,
+                    borderColor: '#f59e0b',
+                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    tension: 0.3,
+                    fill: false,
+                    pointRadius: 3,
+                    borderDash: [5, 5],
+                    yAxisID: 'y1'
+                }
+            ]
         },
         options: {
             devicePixelRatio: 2,
             responsive: true,
             maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
             scales: {
                 y: {
-                    title: { display: true, text: 'Percentage (%)' },
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    title: { display: true, text: '% Multi-Area' },
                     beginAtZero: true,
                     suggestedMax: 60
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    title: { display: true, text: 'Faculty Count' },
+                    beginAtZero: true,
+                    grid: {
+                        drawOnChartArea: false
+                    }
                 }
             },
             plugins: {
                 tooltip: {
                     callbacks: {
+                        afterBody: function (context) {
+                            const idx = context[0].dataIndex;
+                            return `Multi-Area: ${multiAreaCounts[idx]} of ${facultyCounts[idx]} faculty`;
+                        }
                     }
+                },
+                title: {
+                    display: true,
+                    text: 'Faculty publishing in 2+ research areas (3-year rolling window)'
                 }
             }
         }
