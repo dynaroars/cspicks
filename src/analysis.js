@@ -51,31 +51,6 @@ async function init() {
         affiliationHistory = history;
         schoolAliases = aliases;
 
-        if (rawData && affiliationHistory && schoolAliases) {
-            let patchedCount = 0;
-            Object.keys(rawData.professors).forEach(name => {
-                const history = affiliationHistory[name];
-                if (history && history.length > 0) {
-                    history.sort((a, b) => {
-                        if (b.end !== a.end) return b.end - a.end;
-                        return b.start - a.start;
-                    });
-                    const latest = history[0];
-                    const openAlexSchool = latest.school;
-                    let normalizedSchool = openAlexSchool;
-                    if (schoolAliases && Object.prototype.hasOwnProperty.call(schoolAliases, openAlexSchool)) {
-                        normalizedSchool = schoolAliases[openAlexSchool];
-                    }
-                    const currentAff = rawData.professors[name].affiliation;
-                    if (currentAff !== normalizedSchool) {
-                        rawData.professors[name].affiliation = normalizedSchool;
-                        patchedCount++;
-                    }
-                }
-            });
-            console.log(`Patched ${patchedCount} professor affiliations.`);
-        }
-
         console.log('Data loaded:', rawData.length, 'records, history for', Object.keys(affiliationHistory).length, 'profs, aliases for', Object.keys(schoolAliases).length, 'schools');
 
         populateSchoolSelect();
