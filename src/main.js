@@ -256,32 +256,69 @@ function renderProfessorCardContent(prof) {
   let affiliationsHtml = '';
   if (historicalMode && historyMap && historyMap[prof.name]) {
     const history = historyMap[prof.name];
-    const relevantSchools = new Set();
+    const currentYear = new Date().getFullYear();
+
+    // Only show affiliations for years where prof has actual papers
+    const affiliationMap = new Map();
+
+    // Get publication years from the professor's filtered pubs
+    const pubYears = new Set(prof.pubs.map(p => p.year));
+
     history.forEach(seg => {
-      if (seg.end >= startYear && seg.start <= endYear) {
+      let hasPapersInSegment = false;
+      for (let year = seg.start; year <= seg.end; year++) {
+        if (pubYears.has(year)) {
+          hasPapersInSegment = true;
+          break;
+        }
+      }
+
+      // Filter: require 2+ year duration OR current affiliation (reduces noise from short-term collaborations)
+      const duration = seg.end - seg.start + 1;
+      const currentYear = new Date().getFullYear();
+      const isSignificant = duration >= 2 || seg.end >= currentYear;
+
+      if (hasPapersInSegment && isSignificant && seg.end >= startYear && seg.start <= endYear) {
         let schoolName = seg.school;
         if (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, seg.school)) {
           schoolName = aliasMap[seg.school];
         }
         if (schoolName) {
-          relevantSchools.add(schoolName);
+          if (affiliationMap.has(schoolName)) {
+            const existing = affiliationMap.get(schoolName);
+            existing.start = Math.min(existing.start, seg.start);
+            existing.end = Math.max(existing.end, seg.end);
+          } else {
+            affiliationMap.set(schoolName, { start: seg.start, end: seg.end });
+          }
         }
       }
     });
 
-    if (relevantSchools.size > 0) {
-      const schoolsArray = Array.from(relevantSchools);
-      const firstSchool = schoolsArray[0];
-      const firstLink = `<a href="#" onclick="setSearchQuery('${firstSchool.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${firstSchool}</a>`;
+    if (affiliationMap.size > 0) {
+      // Sort by duration (longest first), then by end year
+      const sortedAffils = Array.from(affiliationMap.entries())
+        .sort((a, b) => {
+          const durA = a[1].end - a[1].start;
+          const durB = b[1].end - b[1].start;
+          if (durB !== durA) return durB - durA;
+          return b[1].end - a[1].end;
+        });
 
-      if (schoolsArray.length > 1) {
-        const restLinks = schoolsArray.slice(1)
-          .map(s => `<a href="#" onclick="setSearchQuery('${s.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${s}</a>`)
-          .join(', ');
+      const formatAffil = ([school, range]) => {
+        const endLabel = range.end >= currentYear ? 'current' : range.end;
+        const yearRange = range.start === range.end ? `${range.start}` : `${range.start}–${endLabel}`;
+        return `<a href="#" onclick="setSearchQuery('${school.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${school}</a> <span style="color: var(--text-secondary); font-size: 0.85em;">(${yearRange})</span>`;
+      };
+
+      const firstAffil = formatAffil(sortedAffils[0]);
+
+      if (sortedAffils.length > 1) {
+        const restAffils = sortedAffils.slice(1).map(formatAffil).join(', ');
         const uniqueId = prof.name.replace(/[^a-zA-Z0-9]/g, '_');
-        affiliationsHtml = `${firstLink} <span class="show-more-affil" onclick="document.getElementById('more-affil-${uniqueId}').style.display='inline'; this.style.display='none';" style="color: var(--primary-color); cursor: pointer; font-size: 0.9em;">(+${schoolsArray.length - 1} more)</span><span id="more-affil-${uniqueId}" style="display: none;">, ${restLinks}</span>`;
+        affiliationsHtml = `${firstAffil} <span class="show-more-affil" onclick="document.getElementById('more-affil-${uniqueId}').style.display='inline'; this.style.display='none';" style="color: var(--primary-color); cursor: pointer; font-size: 0.9em;">(+${sortedAffils.length - 1} more)</span><span id="more-affil-${uniqueId}" style="display: none;">, ${restAffils}</span>`;
       } else {
-        affiliationsHtml = firstLink;
+        affiliationsHtml = firstAffil;
       }
     } else {
       affiliationsHtml = `<a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>`;
