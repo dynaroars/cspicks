@@ -270,15 +270,23 @@ function renderProfessorCardContent(prof) {
     });
 
     if (relevantSchools.size > 0) {
-      affiliationsHtml = Array.from(relevantSchools)
-        .map(s => `<a href="#" onclick="setSearchQuery('${s.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${s}</a>`)
-        .join(', ');
+      const schoolsArray = Array.from(relevantSchools);
+      const firstSchool = schoolsArray[0];
+      const firstLink = `<a href="#" onclick="setSearchQuery('${firstSchool.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${firstSchool}</a>`;
+
+      if (schoolsArray.length > 1) {
+        const restLinks = schoolsArray.slice(1)
+          .map(s => `<a href="#" onclick="setSearchQuery('${s.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${s}</a>`)
+          .join(', ');
+        const uniqueId = prof.name.replace(/[^a-zA-Z0-9]/g, '_');
+        affiliationsHtml = `${firstLink} <span class="show-more-affil" onclick="document.getElementById('more-affil-${uniqueId}').style.display='inline'; this.style.display='none';" style="color: var(--primary-color); cursor: pointer; font-size: 0.9em;">(+${schoolsArray.length - 1} more)</span><span id="more-affil-${uniqueId}" style="display: none;">, ${restLinks}</span>`;
+      } else {
+        affiliationsHtml = firstLink;
+      }
     } else {
-      // Fallback to CSRankings
       affiliationsHtml = `<a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>`;
     }
   } else {
-    // Non-historical mode: show CSRankings affiliation
     affiliationsHtml = `<a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>`;
   }
 
