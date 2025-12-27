@@ -44,41 +44,6 @@ async function init() {
     historyMap = history;
     aliasMap = aliases;
 
-    if (rawData && historyMap && aliasMap) {
-      console.log('Patching current affiliations using OpenAlex data...');
-      let patchedCount = 0;
-
-      Object.keys(rawData.professors).forEach(name => {
-        const history = historyMap[name];
-        if (history && history.length > 0) {
-          history.sort((a, b) => {
-            if (b.end !== a.end) return b.end - a.end;
-            return b.start - a.start;
-          });
-
-          const latest = history[0];
-
-          const openAlexSchool = latest.school;
-
-          let normalizedSchool = openAlexSchool;
-          if (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, openAlexSchool)) {
-            normalizedSchool = aliasMap[openAlexSchool];
-          }
-
-          const currentAff = rawData.professors[name].affiliation;
-
-          if (currentAff !== normalizedSchool) {
-            if (!rawData.professors[name]._originalAffiliation) {
-              rawData.professors[name]._originalAffiliation = currentAff;
-            }
-            rawData.professors[name].affiliation = normalizedSchool;
-            patchedCount++;
-          }
-        }
-      });
-      console.log(`Patched ${patchedCount} professor affiliations.`);
-    }
-
     // Initialize toggle checkbox
     const historicalToggle = document.getElementById('historical-mode');
     if (historicalToggle) {
