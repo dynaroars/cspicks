@@ -401,53 +401,61 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
         areaStats[area].adjusted += pub.adjustedcount;
 
         // 2. Stats for School (Historical Attribution)
-        let pubSchoolName = prof.affiliation;
+        // Collect all schools this paper should be attributed to
+        let pubSchools = [prof.affiliation]; // Default to CSRankings
 
-        // Check history override
+        // Check history override, credit  matching affiliations
         if (historyMap && historyMap[name]) {
-          const h = historyMap[name].find(seg => pub.year >= seg.start && pub.year <= seg.end);
-          if (h) {
-            // Normalize OpenAlex school name using aliases
-            if (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, h.school)) {
-              pubSchoolName = aliasMap[h.school];
-            } else {
-              pubSchoolName = h.school;
+          const matches = historyMap[name].filter(seg => pub.year >= seg.start && pub.year <= seg.end);
+          if (matches.length > 0) {
+            pubSchools = matches.map(h => {
+              if (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, h.school)) {
+                return aliasMap[h.school];
+              }
+              return h.school;
+            }).filter(s => s !== null);
+
+            if (pubSchools.length === 0) {
+              pubSchools = [prof.affiliation];
             }
           }
           // If no history match, keep CSRankings affiliation
         }
 
-        if (!filteredSchools[pubSchoolName]) {
-          filteredSchools[pubSchoolName] = {
-            name: pubSchoolName,
-            region: schools[pubSchoolName]?.region,
-            country: schools[pubSchoolName]?.country,
-            areas: {},
-            areaAdjustedCounts: {},
-            totalCount: 0,
-            totalAdjusted: 0
-          };
-        }
+        // Credit each school
+        pubSchools.forEach(pubSchoolName => {
+          if (!filteredSchools[pubSchoolName]) {
+            filteredSchools[pubSchoolName] = {
+              name: pubSchoolName,
+              region: schools[pubSchoolName]?.region,
+              country: schools[pubSchoolName]?.country,
+              areas: {},
+              areaAdjustedCounts: {},
+              totalCount: 0,
+              totalAdjusted: 0
+            };
+          }
 
-        const school = filteredSchools[pubSchoolName];
-        school.totalCount += pub.count;
-        school.totalAdjusted += pub.adjustedcount;
+          const school = filteredSchools[pubSchoolName];
+          school.totalCount += pub.count;
+          school.totalAdjusted += pub.adjustedcount;
 
-        if (!school.areas[area]) {
-          school.areas[area] = { count: 0, adjusted: 0, faculty: [] };
-        }
-        school.areas[area].count += pub.count;
-        school.areas[area].adjusted += pub.adjustedcount;
+          if (!school.areas[area]) {
+            school.areas[area] = { count: 0, adjusted: 0, faculty: [] };
+          }
+          school.areas[area].count += pub.count;
+          school.areas[area].adjusted += pub.adjustedcount;
 
-        if (!school.areas[area].faculty.includes(name)) {
-          school.areas[area].faculty.push(name);
-        }
+          if (!school.areas[area].faculty.includes(name)) {
+            school.areas[area].faculty.push(name);
+          }
 
-        // Geometric mean accumulator
-        if (!school.areaAdjustedCounts[area]) {
-          school.areaAdjustedCounts[area] = 0;
-        }
-        school.areaAdjustedCounts[area] += pub.adjustedcount;
+          // Geometric mean accumulator
+          if (!school.areaAdjustedCounts[area]) {
+            school.areaAdjustedCounts[area] = 0;
+          }
+          school.areaAdjustedCounts[area] += pub.adjustedcount;
+        });
       });
 
       filteredProfs[name] = {

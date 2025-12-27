@@ -253,9 +253,38 @@ function renderProfessorCardContent(prof) {
     .sort(([, a], [, b]) => b.adjusted - a.adjusted);
   const dblpUrl = getDBLPUrl(prof.name);
 
+  let affiliationsHtml = '';
+  if (historicalMode && historyMap && historyMap[prof.name]) {
+    const history = historyMap[prof.name];
+    const relevantSchools = new Set();
+    history.forEach(seg => {
+      if (seg.end >= startYear && seg.start <= endYear) {
+        let schoolName = seg.school;
+        if (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, seg.school)) {
+          schoolName = aliasMap[seg.school];
+        }
+        if (schoolName) {
+          relevantSchools.add(schoolName);
+        }
+      }
+    });
+
+    if (relevantSchools.size > 0) {
+      affiliationsHtml = Array.from(relevantSchools)
+        .map(s => `<a href="#" onclick="setSearchQuery('${s.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${s}</a>`)
+        .join(', ');
+    } else {
+      // Fallback to CSRankings
+      affiliationsHtml = `<a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>`;
+    }
+  } else {
+    // Non-historical mode: show CSRankings affiliation
+    affiliationsHtml = `<a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>`;
+  }
+
   return `
       <div class="card-subtitle">
-        <a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}')" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>
+        ${affiliationsHtml}
       </div>
       <div class="card-stats">
         <strong>${prof.totalPapers}</strong> papers (<strong>${prof.totalAdjusted.toFixed(1)}</strong> adjusted)
