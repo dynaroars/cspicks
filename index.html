@@ -53,6 +53,18 @@
             <select id="end-year"></select>
           </div>
         </div>
+
+        <div class="filter-group">
+          <label for="historical-mode" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+            <input type="checkbox" id="historical-mode" style="width: 16px; height: 16px; cursor: pointer;">
+            <span>Historical Mode</span>
+            <span class="tooltip-trigger" style="color: var(--text-secondary); cursor: help; position: relative;">
+              ⓘ
+              <span class="tooltip-content">When enabled, publications are credited to the institution where the author
+                was affiliated at the time of publication, not their current institution.</span>
+            </span>
+          </label>
+        </div>
       </div>
 
       <div class="actions-container">
@@ -138,6 +150,9 @@
       <div class="modal-body" style="text-align: left;">
         <p>CSPicks is inspired by <a href="https://csrankings.org" target="_blank"><strong>CSRankings</strong></a> and
           uses its taxonomy and data to organize results.</p>
+        <p>Historical affiliation data is sourced from <a href="https://openalex.org"
+            target="_blank"><strong>OpenAlex</strong></a>,
+          an open catalog of the world's scholarly works.</p>
         <p>All information is fetched on demand; no data is stored.</p>
         <p>Report bugs and issues on <a href="https://github.com/dynaroars/cspicks"
             target="_blank"><strong>GitHub</strong></a>.</p>

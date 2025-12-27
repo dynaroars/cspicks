@@ -34,21 +34,51 @@ const areaLabels = {
 // State
 let rawData = [];
 let affiliationHistory = {};
+let schoolAliases = {};
 let chartInstance = null;
 let currentTab = 'schools';
 
 async function init() {
     console.log('Initializing Analysis Dashboard...');
     try {
-        const [data, history] = await Promise.all([
+        const [data, history, aliases] = await Promise.all([
             loadData(),
-            fetch('professor_history.json').then(res => res.ok ? res.json() : {}).catch(e => ({})),
+            fetch('professor_history_openalex.json').then(res => res.ok ? res.json() : {}).catch(e => ({})),
+            fetch('school-aliases.json').then(res => res.ok ? res.json() : {}).catch(e => ({})),
         ]);
         rawData = data;
         affiliationHistory = history;
-        console.log('Data loaded:', rawData.length, 'records, history for', Object.keys(affiliationHistory).length, 'profs');
+        schoolAliases = aliases;
+
+        if (rawData && affiliationHistory && schoolAliases) {
+            let patchedCount = 0;
+            Object.keys(rawData.professors).forEach(name => {
+                const history = affiliationHistory[name];
+                if (history && history.length > 0) {
+                    history.sort((a, b) => {
+                        if (b.end !== a.end) return b.end - a.end;
+                        return b.start - a.start;
+                    });
+                    const latest = history[0];
+                    const openAlexSchool = latest.school;
+                    let normalizedSchool = openAlexSchool;
+                    if (schoolAliases && Object.prototype.hasOwnProperty.call(schoolAliases, openAlexSchool)) {
+                        normalizedSchool = schoolAliases[openAlexSchool];
+                    }
+                    const currentAff = rawData.professors[name].affiliation;
+                    if (currentAff !== normalizedSchool) {
+                        rawData.professors[name].affiliation = normalizedSchool;
+                        patchedCount++;
+                    }
+                }
+            });
+            console.log(`Patched ${patchedCount} professor affiliations.`);
+        }
+
+        console.log('Data loaded:', rawData.length, 'records, history for', Object.keys(affiliationHistory).length, 'profs, aliases for', Object.keys(schoolAliases).length, 'schools');
 
         populateSchoolSelect();
+        setupYearSelectors();
         setupTabs();
         renderSchoolTrends();
     } catch (err) {
@@ -70,6 +100,24 @@ function populateSchoolSelect() {
         else if (currentTab === 'areas') renderAreaTrends();
         else if (currentTab === 'faculty') renderFacultyTrends();
     });
+}
+
+function setupYearSelectors() {
+    const startSelect = document.getElementById('analysis-start-year');
+    const endSelect = document.getElementById('analysis-end-year');
+    const currentYear = new Date().getFullYear();
+
+    for (let y = 2000; y <= currentYear; y++) {
+        startSelect.innerHTML += `<option value="${y}" ${y === 2015 ? 'selected' : ''}>${y}</option>`;
+        endSelect.innerHTML += `<option value="${y}" ${y === currentYear ? 'selected' : ''}>${y}</option>`;
+    }
+    const refresh = () => {
+        if (currentTab === 'schools') renderSchoolTrends();
+        else if (currentTab === 'areas') renderAreaTrends();
+        else if (currentTab === 'faculty') renderFacultyTrends();
+    };
+    startSelect.addEventListener('change', refresh);
+    endSelect.addEventListener('change', refresh);
 }
 
 function setupTabs() {
@@ -110,20 +158,21 @@ async function renderSchoolTrends() {
             return;
         }
         const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
+        const startYear = parseInt(document.getElementById('analysis-start-year')?.value) || 2015;
+        const endYear = parseInt(document.getElementById('analysis-end-year')?.value) || new Date().getFullYear();
 
-        const currentYear = new Date().getFullYear();
         const labels = [];
         const dataPoints = [];
+        const region = 'us';
 
-        console.log('Calculating trends for', targetSchool);
+        console.log('Calculating trends for', targetSchool, 'from', startYear, 'to', endYear);
 
-        for (let y = currentYear - 9; y <= currentYear; y++) {
-            const wStart = y - 9;
+        const windowSize = endYear - startYear;
+        for (let y = endYear - 9; y <= endYear; y++) {
+            const wStart = Math.max(startYear, y - windowSize);
             const wEnd = y;
 
-            const region = 'us';
-
-            const result = filterByYears({ ...rawData }, wStart, wEnd, region, affiliationHistory);
+            const result = filterByYears({ ...rawData }, wStart, wEnd, region, affiliationHistory, schoolAliases);
             const school = result.schools[targetSchool];
 
             labels.push(y);
@@ -208,13 +257,14 @@ function renderAreaTrends() {
             if (affiliationHistory && affiliationHistory[pub.name]) {
                 const h = affiliationHistory[pub.name].find(s => pub.year >= s.start && pub.year <= s.end);
 
-                if (h && h.school === targetSchool) {
-                    isAtTargetSchool = true;
+                if (h) {
+                    // Normalize the OpenAlex school name using aliases
+                    const normalizedSchool = schoolAliases[h.school] || h.school;
+                    isAtTargetSchool = normalizedSchool === targetSchool;
                 } else {
                     isAtTargetSchool = false;
                 }
             } else {
-                // No history data for this prof, assume current affiliation (which matched targetSchool in filtering)
             }
 
             if (isAtTargetSchool) {

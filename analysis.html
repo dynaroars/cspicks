@@ -76,11 +76,19 @@
             <p>Visualize trends in Computer Science academia over the last decade.</p>
         </header>
 
-        <div class="analysis-controls" style="margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center;">
+        <div class="analysis-controls"
+            style="margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
             <label for="analysis-school-select" style="font-weight: 600;">Focus School:</label>
             <select id="analysis-school-select"
                 style="padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc; width: 300px;">
                 <option value="George Mason University" selected>George Mason University</option>
+            </select>
+
+            <label style="font-weight: 600; margin-left: 1rem;">Year Range:</label>
+            <select id="analysis-start-year" style="padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc;">
+            </select>
+            <span>to</span>
+            <select id="analysis-end-year" style="padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc;">
             </select>
         </div>
 
