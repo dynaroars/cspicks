@@ -413,9 +413,8 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
             } else {
               pubSchoolName = h.school;
             }
-          } else {
-            pubSchoolName = null;
           }
+          // If no history match, keep CSRankings affiliation
         }
 
         if (!filteredSchools[pubSchoolName]) {
