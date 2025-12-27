@@ -354,7 +354,7 @@ export const parentMap = {
 const topLevelAreas = [...new Set(Object.values(parentMap))];
 const numAreas = topLevelAreas.length;
 
-export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null) {
+export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null) {
   const { professors, schools } = data;
   const filteredProfs = {};
   const filteredSchools = {};
@@ -362,7 +362,9 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
   // Helper to check if school is in selected region
   const isInRegion = (schoolName) => {
     const school = schools[schoolName];
-    if (!school) return false;
+    if (!school) {
+      return region === 'world';
+    }
 
     if (region === 'world') return true;
     if (region === 'us') return school.country === 'us';
@@ -405,9 +407,13 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
         if (historyMap && historyMap[name]) {
           const h = historyMap[name].find(seg => pub.year >= seg.start && pub.year <= seg.end);
           if (h) {
-            pubSchoolName = h.school;
+            // Normalize OpenAlex school name using aliases
+            if (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, h.school)) {
+              pubSchoolName = aliasMap[h.school];
+            } else {
+              pubSchoolName = h.school;
+            }
           } else {
-            // History exists but year not covered -> Assume NOT current school (null)
             pubSchoolName = null;
           }
         }
@@ -457,7 +463,7 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
   }
 
   // Compute Geometric Mean Score for Ranking
-  const schoolList = Object.values(filteredSchools);
+  const schoolList = Object.values(filteredSchools).filter(s => s.name);
 
   schoolList.forEach(school => {
     let score = 1.0;

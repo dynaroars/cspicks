@@ -11,15 +11,19 @@ window.dblp = {
 
 let rawData = null;
 let appData = { professors: {}, schools: {} };
+let historyMap = null;  // OpenAlex affiliation history
+let aliasMap = null;    // School name aliases
 
 let startYear = DEFAULT_START_YEAR;
 let endYear = DEFAULT_END_YEAR;
-let selectedRegion = 'world';
+let selectedRegion = 'us';
+let historicalMode = false;
 
 const params = new URLSearchParams(window.location.search);
 if (params.has('start')) startYear = parseInt(params.get('start'));
 if (params.has('end')) endYear = parseInt(params.get('end'));
 if (params.has('region')) selectedRegion = params.get('region');
+if (params.has('historical')) historicalMode = params.get('historical') === 'true';
 
 async function init() {
   setupFilters();
@@ -28,9 +32,71 @@ async function init() {
   setupTooltips();
 
   try {
-    rawData = await loadData();
-    appData = filterByYears(rawData, startYear, endYear, selectedRegion);
-    console.log(`Data loaded (${startYear}-${endYear}, region: ${selectedRegion}):`, Object.keys(appData.professors).length, 'professors', Object.keys(appData.schools).length, 'schools');
+    // Load main data and historical affiliation data in parallel
+    const [data, history, aliases] = await Promise.all([
+      loadData(),
+      fetch('professor_history_openalex.json').then(r => r.ok ? r.json() : null).catch(() => null),
+      fetch('school-aliases.json').then(r => r.ok ? r.json() : null).catch(() => null),
+    ]);
+
+    rawData = data;
+    historyMap = history;
+    aliasMap = aliases;
+
+    if (rawData && historyMap && aliasMap) {
+      console.log('Patching current affiliations using OpenAlex data...');
+      let patchedCount = 0;
+
+      Object.keys(rawData.professors).forEach(name => {
+        const history = historyMap[name];
+        if (history && history.length > 0) {
+          history.sort((a, b) => {
+            if (b.end !== a.end) return b.end - a.end;
+            return b.start - a.start;
+          });
+
+          const latest = history[0];
+
+          const openAlexSchool = latest.school;
+
+          let normalizedSchool = openAlexSchool;
+          if (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, openAlexSchool)) {
+            normalizedSchool = aliasMap[openAlexSchool];
+          }
+
+          const currentAff = rawData.professors[name].affiliation;
+
+          if (currentAff !== normalizedSchool) {
+            if (!rawData.professors[name]._originalAffiliation) {
+              rawData.professors[name]._originalAffiliation = currentAff;
+            }
+            rawData.professors[name].affiliation = normalizedSchool;
+            patchedCount++;
+          }
+        }
+      });
+      console.log(`Patched ${patchedCount} professor affiliations.`);
+    }
+
+    // Initialize toggle checkbox
+    const historicalToggle = document.getElementById('historical-mode');
+    if (historicalToggle) {
+      historicalToggle.checked = historicalMode;
+      historicalToggle.addEventListener('change', () => {
+        historicalMode = historicalToggle.checked;
+        refreshData();
+        updateURL();
+      });
+    }
+
+    // Apply filters
+    if (historicalMode && historyMap && aliasMap) {
+      appData = filterByYears(rawData, startYear, endYear, selectedRegion, historyMap, aliasMap);
+    } else {
+      appData = filterByYears(rawData, startYear, endYear, selectedRegion);
+    }
+
+    console.log(`Data loaded (${startYear}-${endYear}, region: ${selectedRegion}, historical: ${historicalMode}):`, Object.keys(appData.professors).length, 'professors', Object.keys(appData.schools).length, 'schools');
 
     const searchInput = document.getElementById('main-search');
     searchInput.placeholder = "Search professors, universities, areas (e.g., graphics), or conferences (e.g., pldi)";
@@ -59,6 +125,7 @@ function updateURL() {
   params.set('start', startYear);
   params.set('end', endYear);
   params.set('region', selectedRegion);
+  if (historicalMode) params.set('historical', 'true');
 
   const q = document.getElementById('main-search').value;
   if (q) params.set('q', q);
@@ -67,6 +134,26 @@ function updateURL() {
   window.history.replaceState({}, '', newUrl);
 }
 
+function refreshData() {
+  if (!rawData) return;
+
+  if (historicalMode && historyMap && aliasMap) {
+    appData = filterByYears(rawData, startYear, endYear, selectedRegion, historyMap, aliasMap);
+  } else {
+    appData = filterByYears(rawData, startYear, endYear, selectedRegion);
+  }
+
+  console.log(`Refreshed: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}`);
+
+  // Re-run current search
+  const query = document.getElementById('main-search').value.toLowerCase();
+  if (query.length >= 1) {
+    searchProfessors(query);
+    searchSchools(query);
+    searchAreaPeople(query);
+    searchDBLPAuthors(query);
+  }
+}
 function setupSearch() {
   const mainSearch = document.getElementById('main-search');
 
@@ -114,13 +201,6 @@ function searchAreaPeople(query) {
   const confKey = Object.keys(parentMap).find(k => k.toLowerCase() === effectiveQuery);
 
   if (confKey) {
-    // If it was an alias (e.g. neurips -> nips), display the name user typed? Or the canonical key?
-    // Canonical key is 'nips'. User might prefer "NeurIPS". 
-    // I'll display the canonical key mapped back to uppercase, or alias if possible.
-    // For now, simple: `confKey.toUpperCase()`. "NIPS".
-    // Maybe better: `(Object.keys(conferenceAliases).find(key => conferenceAliases[key] === confKey) || confKey).toUpperCase()`
-    // But "nips" is historic. 
-    // I'll stick to confKey.toUpperCase() for now (NIPS).
     title = `Top Researchers in ${confKey.toUpperCase()}`;
     topProfs = Object.values(appData.professors)
       .map(p => {
@@ -515,8 +595,12 @@ function setupFilters() {
       endYearSelect.value = endYear;
     }
 
-    appData = filterByYears(rawData, startYear, endYear, selectedRegion);
-    console.log(`Filtered: Region=${selectedRegion}, Years=${startYear}-${endYear}`);
+    if (historicalMode && historyMap && aliasMap) {
+      appData = filterByYears(rawData, startYear, endYear, selectedRegion, historyMap, aliasMap);
+    } else {
+      appData = filterByYears(rawData, startYear, endYear, selectedRegion);
+    }
+    console.log(`Filtered: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}`);
 
     updateURL();
 
@@ -871,7 +955,7 @@ function searchSchools(query) {
         return countB - countA;
       });
   } else {
-    const allSchools = Object.values(appData.schools);
+    const allSchools = Object.values(appData.schools).filter(s => s.name); // Filter out null names
     const tokens = effectiveQuery.toLowerCase().split(/\s+/).filter(t => t.length > 0);
     const originalTokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
 
