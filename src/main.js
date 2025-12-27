@@ -33,10 +33,11 @@ async function init() {
 
   try {
     // Load main data and historical affiliation data in parallel
+    const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
     const [data, history, aliases] = await Promise.all([
       loadData(),
-      fetch('professor_history_openalex.json').then(r => r.ok ? r.json() : null).catch(() => null),
-      fetch('school-aliases.json').then(r => r.ok ? r.json() : null).catch(() => null),
+      fetch(`${GITHUB_RAW}/professor_history_openalex.json`).then(r => r.ok ? r.json() : null).catch(() => null),
+      fetch(`${GITHUB_RAW}/school-aliases.json`).then(r => r.ok ? r.json() : null).catch(() => null),
     ]);
 
     rawData = data;
