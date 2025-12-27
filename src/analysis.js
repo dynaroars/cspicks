@@ -41,10 +41,11 @@ let currentTab = 'schools';
 async function init() {
     console.log('Initializing Analysis Dashboard...');
     try {
+        const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
         const [data, history, aliases] = await Promise.all([
             loadData(),
-            fetch('professor_history_openalex.json').then(res => res.ok ? res.json() : {}).catch(e => ({})),
-            fetch('school-aliases.json').then(res => res.ok ? res.json() : {}).catch(e => ({})),
+            fetch(`${GITHUB_RAW}/professor_history_openalex.json`).then(res => res.ok ? res.json() : {}).catch(e => ({})),
+            fetch(`${GITHUB_RAW}/school-aliases.json`).then(res => res.ok ? res.json() : {}).catch(e => ({})),
         ]);
         rawData = data;
         affiliationHistory = history;
