@@ -422,8 +422,11 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
           // If no history match, keep CSRankings affiliation
         }
 
-        // Credit each school
+        // Credit each school (only if in selected region)
         pubSchools.forEach(pubSchoolName => {
+          // Skip schools not in the selected region
+          if (!isInRegion(pubSchoolName)) return;
+
           if (!filteredSchools[pubSchoolName]) {
             filteredSchools[pubSchoolName] = {
               name: pubSchoolName,

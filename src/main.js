@@ -77,6 +77,9 @@ async function init() {
       searchSchools(query);
       searchAreaPeople(query);
       searchDBLPAuthors(query);
+    } else {
+      // Show top rankings on initial load
+      showTopRankings();
     }
 
     searchInput.focus();
@@ -113,11 +116,13 @@ function refreshData() {
 
   // Re-run current search
   const query = document.getElementById('main-search').value.toLowerCase();
-  if (query.length >= 1) {
+  if (query.length >= 2) {
     searchProfessors(query);
     searchSchools(query);
     searchAreaPeople(query);
     searchDBLPAuthors(query);
+  } else {
+    showTopRankings();
   }
 }
 function setupSearch() {
@@ -131,9 +136,7 @@ function setupSearch() {
     updateURL();
 
     if (query.length < 2) {
-      document.getElementById('prof-results').innerHTML = '';
-      document.getElementById('school-results').innerHTML = '';
-      document.getElementById('dblp-results').innerHTML = '';
+      showTopRankings();
       return;
     }
 
@@ -145,6 +148,86 @@ function setupSearch() {
     }, 300);
   });
 }
+
+function showTopRankings() {
+  const schoolContainer = document.getElementById('school-results');
+  const profContainer = document.getElementById('prof-results');
+  const areaContainer = document.getElementById('area-people-results');
+  const dblpContainer = document.getElementById('dblp-results');
+
+  areaContainer.innerHTML = '';
+  dblpContainer.innerHTML = '';
+  document.getElementById('search-context-header').style.display = 'none';
+  document.getElementById('conference-results').innerHTML = '';
+
+  const topSchools = Object.values(appData.schools)
+    .filter(s => s.name && s.rank)
+    .sort((a, b) => a.rank - b.rank)
+    .slice(0, 50);
+  const topProfs = Object.values(appData.professors)
+    .sort((a, b) => b.totalAdjusted - a.totalAdjusted)
+    .slice(0, 50);
+
+  const initialSchools = 10;
+  window._topSchoolsData = { schools: topSchools, shown: initialSchools };
+
+  let schoolHtml = `<h2 class="section-title">Top Schools</h2>`;
+  schoolHtml += topSchools.slice(0, initialSchools).map(s => renderSchoolCard(s)).join('');
+  if (topSchools.length > initialSchools) {
+    schoolHtml += `<button class="show-more-btn" onclick="showMoreTopSchools()">Show ${Math.min(topSchools.length - initialSchools, 40)} More Schools</button>`;
+  }
+  schoolContainer.innerHTML = schoolHtml;
+
+  const initialProfs = 10;
+  window._topProfsData = { profs: topProfs, shown: initialProfs };
+
+  let profHtml = `<h2 class="section-title">Top Researchers</h2>`;
+  profHtml += topProfs.slice(0, initialProfs).map(p => renderProfessorCard(p)).join('');
+  if (topProfs.length > initialProfs) {
+    profHtml += `<button class="show-more-btn" onclick="showMoreTopProfs()">Show ${Math.min(topProfs.length - initialProfs, 40)} More Researchers</button>`;
+  }
+  profContainer.innerHTML = profHtml;
+}
+
+window.showMoreTopSchools = function () {
+  const data = window._topSchoolsData;
+  if (!data) return;
+
+  const container = document.getElementById('school-results');
+  const nextBatch = data.schools.slice(data.shown, data.shown + 40);
+  data.shown += nextBatch.length;
+
+  const btn = container.querySelector('.show-more-btn');
+  if (btn) btn.remove();
+
+  container.insertAdjacentHTML('beforeend', nextBatch.map(s => renderSchoolCard(s)).join(''));
+
+  if (data.shown < data.schools.length) {
+    container.insertAdjacentHTML('beforeend',
+      `<button class="show-more-btn" onclick="showMoreTopSchools()">Show ${Math.min(data.schools.length - data.shown, 40)} More Schools</button>`
+    );
+  }
+};
+
+window.showMoreTopProfs = function () {
+  const data = window._topProfsData;
+  if (!data) return;
+
+  const container = document.getElementById('prof-results');
+  const nextBatch = data.profs.slice(data.shown, data.shown + 40);
+  data.shown += nextBatch.length;
+
+  const btn = container.querySelector('.show-more-btn');
+  if (btn) btn.remove();
+
+  container.insertAdjacentHTML('beforeend', nextBatch.map(p => renderProfessorCard(p)).join(''));
+
+  if (data.shown < data.profs.length) {
+    container.insertAdjacentHTML('beforeend',
+      `<button class="show-more-btn" onclick="showMoreTopProfs()">Show ${Math.min(data.profs.length - data.shown, 40)} More Researchers</button>`
+    );
+  }
+};
 
 let areaPeopleObserver = null;
 
@@ -644,19 +727,16 @@ function setupFilters() {
 
     updateURL();
 
-    // Re-run current search
+    // Re-run current search or show top rankings
     const query = document.getElementById('main-search').value.toLowerCase();
 
-    if (query.length >= 1) {
+    if (query.length >= 2) {
       searchProfessors(query);
       searchSchools(query);
       searchAreaPeople(query);
       searchDBLPAuthors(query);
     } else {
-      document.getElementById('prof-results').innerHTML = '';
-      document.getElementById('school-results').innerHTML = '';
-      document.getElementById('area-people-results').innerHTML = '';
-      document.getElementById('dblp-results').innerHTML = '';
+      showTopRankings();
     }
   };
 
