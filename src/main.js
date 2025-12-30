@@ -341,11 +341,28 @@ function renderProfessorCardContent(prof) {
     const history = historyMap[prof.name];
     const currentYear = new Date().getFullYear();
 
-    // Only show affiliations for years where prof has actual papers
     const affiliationMap = new Map();
 
     // Get publication years from the professor's filtered pubs
     const pubYears = new Set(prof.pubs.map(p => p.year));
+
+    const schoolsWithPapers = new Set();
+    prof.pubs.forEach(pub => {
+      if (historyMap[prof.name]) {
+        const matchingSegs = historyMap[prof.name].filter(seg =>
+          pub.year >= seg.start && pub.year <= seg.end
+        );
+        matchingSegs.forEach(seg => {
+          let schoolName = seg.school;
+          if (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, seg.school)) {
+            schoolName = aliasMap[seg.school];
+          }
+          if (schoolName) {
+            schoolsWithPapers.add(schoolName);
+          }
+        });
+      }
+    });
 
     history.forEach(seg => {
       let hasPapersInSegment = false;
@@ -356,9 +373,8 @@ function renderProfessorCardContent(prof) {
         }
       }
 
-      // Filter: require 2+ year duration OR current affiliation (reduces noise from short-term collaborations)
+      // Duration filter: require 2+ years OR current affiliation
       const duration = seg.end - seg.start + 1;
-      const currentYear = new Date().getFullYear();
       const isSignificant = duration >= 2 || seg.end >= currentYear;
 
       if (hasPapersInSegment && isSignificant && seg.end >= startYear && seg.start <= endYear) {
@@ -366,7 +382,14 @@ function renderProfessorCardContent(prof) {
         if (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, seg.school)) {
           schoolName = aliasMap[seg.school];
         }
-        if (schoolName) {
+
+        // FILTER 1: must exist in CSRankings school list
+        const isAcademic = rawData.schools && rawData.schools[schoolName];
+
+        // FILTER 2: must have papers attributed to this school
+        const hasPapersAtSchool = schoolsWithPapers.has(schoolName);
+
+        if (schoolName && isAcademic && hasPapersAtSchool) {
           if (affiliationMap.has(schoolName)) {
             const existing = affiliationMap.get(schoolName);
             existing.start = Math.min(existing.start, seg.start);
@@ -379,13 +402,11 @@ function renderProfessorCardContent(prof) {
     });
 
     if (affiliationMap.size > 0) {
-      // Sort by duration (longest first), then by end year
+      // Sort by recency
       const sortedAffils = Array.from(affiliationMap.entries())
         .sort((a, b) => {
-          const durA = a[1].end - a[1].start;
-          const durB = b[1].end - b[1].start;
-          if (durB !== durA) return durB - durA;
-          return b[1].end - a[1].end;
+          if (b[1].end !== a[1].end) return b[1].end - a[1].end;
+          return b[1].start - a[1].start;
         });
 
       const formatAffil = ([school, range]) => {
@@ -1180,6 +1201,132 @@ function renderConferenceCard(confKey, sortedSchools) {
   `;
 }
 
+function renderSchoolRankGraphPlaceholder(schoolName) {
+  if (!historicalMode || !historyMap || !aliasMap) return '';
+
+  const escapedName = schoolName.replace(/'/g, "\\'");
+  const uniqueId = schoolName.replace(/[^a-zA-Z0-9]/g, '_');
+
+  return `
+    <div class="school-rank-graph" id="rank-graph-${uniqueId}">
+      <button class="show-rank-trend-btn" onclick="loadSchoolRankGraph('${escapedName}', '${uniqueId}')">
+        Show Rank Trend
+      </button>
+    </div>
+  `;
+}
+
+window.loadSchoolRankGraph = async function (schoolName, uniqueId) {
+  const container = document.getElementById('rank-graph-' + uniqueId);
+  if (!container) return;
+
+  container.innerHTML = '<p style="color: var(--text-secondary); font-size: 0.8rem; font-family: var(--font-body);">Loading trend data...</p>';
+
+  await new Promise(resolve => setTimeout(resolve, 50));
+
+  const years = [];
+  const ranks = [];
+  const windowSize = endYear - startYear;
+
+  for (let y = startYear; y <= endYear; y++) {
+    const wStart = Math.max(startYear, y - Math.min(windowSize, 10));
+    const wEnd = y;
+
+    try {
+      const result = filterByYears({ ...rawData }, wStart, wEnd, selectedRegion, historyMap, aliasMap);
+      const school = result.schools[schoolName];
+      years.push(y);
+      ranks.push(school ? school.rank : null);
+    } catch (e) {
+      years.push(y);
+      ranks.push(null);
+    }
+  }
+
+  const validRanks = ranks.filter(r => r !== null);
+  if (validRanks.length < 2) {
+    container.innerHTML = '<p style="color: var(--text-secondary); font-size: 0.8rem; font-family: var(--font-body);">Insufficient historical data for trend.</p>';
+    return;
+  }
+
+  container.innerHTML = `
+    <h4 style="font-family: var(--font-heading); font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--text-primary);">Rank Trend (${startYear}-${endYear})</h4>
+    <div class="chart-container" style="position: relative; height: 120px; width: 100%;">
+      <canvas id="chart-${uniqueId}"></canvas>
+    </div>
+  `;
+
+  try {
+    const { default: Chart } = await import('chart.js/auto');
+    const ctx = document.getElementById(`chart-${uniqueId}`).getContext('2d');
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [{
+          label: 'World Rank',
+          data: ranks,
+          borderColor: '#10b981',
+          backgroundColor: 'rgba(16, 185, 129, 0.1)',
+          tension: 0.3,
+          fill: true,
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          pointBackgroundColor: '#10b981',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            titleFont: { family: 'Inter', size: 10 },
+            bodyFont: { family: 'Inter', size: 11 },
+            displayColors: false,
+            callbacks: {
+              label: (context) => `Rank: #${context.parsed.y}`
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              font: { family: 'Inter', size: 9 },
+              color: '#666',
+              maxRotation: 0,
+              autoSkip: true,
+              maxTicksLimit: 10
+            }
+          },
+          y: {
+            reverse: true,
+            grid: { color: 'rgba(0, 0, 0, 0.05)' },
+            ticks: {
+              font: { family: 'Inter', size: 9 },
+              color: '#666',
+              stepSize: 1,
+              precision: 0,
+              callback: (value) => `#${value}`
+            },
+            suggestedMin: Math.max(1, Math.min(...validRanks) - 1),
+            suggestedMax: Math.max(...validRanks) + 1
+          }
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Failed to load Chart.js:', error);
+    container.innerHTML = '<p style="color: red; font-size: 0.8rem;">Error loading chart engine.</p>';
+  }
+};
+
+
 function renderSchoolCard(school, filterArea = null) {
   let sortedAreas;
 
@@ -1212,6 +1359,7 @@ function renderSchoolCard(school, filterArea = null) {
         <span class="toggle-icon">▼</span>
       </div>
       <div class="card-content">
+        ${renderSchoolRankGraphPlaceholder(school.name)}
         <div class="stats-list">
         ${sortedAreas.map(([area, data]) => {
     const areaRank = school.areaRanks?.[area];
