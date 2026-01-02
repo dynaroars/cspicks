@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS Picks - Compare Schools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./src/style.css">
+    <style>
+        .compare-controls {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f9fafb;
+            border-radius: 12px;
+        }
+
+        .school-selector {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .school-selector label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .searchable-select {
+            position: relative;
+        }
+
+        .searchable-select .search-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 1rem;
+            background: white;
+            box-sizing: border-box;
+        }
+
+        .searchable-select .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .searchable-select .dropdown-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 250px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            display: none;
+            margin-top: 4px;
+        }
+
+        .searchable-select .dropdown-list.show {
+            display: block;
+        }
+
+        .searchable-select .dropdown-item {
+            padding: 0.6rem 0.75rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .searchable-select .dropdown-item:hover {
+            background: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        .searchable-select .dropdown-item.selected {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .vs-badge {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            position: relative;
+            height: 500px;
+            width: 100%;
+        }
+
+        .comparison-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .summary-card h4 {
+            margin: 0 0 0.75rem 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .summary-card .leader {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .summary-card .margin {
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            margin-top: 0.25rem;
+        }
+
+        .top-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            justify-content: center;
+        }
+
+        .top-nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .top-nav a.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <h1>Compare Schools</h1>
+            <div class="top-nav">
+                <a href="index.html">Search</a>
+                <a href="analysis.html">Analysis</a>
+                <a href="compare.html" class="active">Compare</a>
+            </div>
+            <p>Head-to-head comparison of two institutions across research areas.</p>
+        </header>
+
+        <div id="loading-indicator" style="text-align: center; padding: 3rem;">
+            <div
+                style="display: inline-block; width: 40px; height: 40px; border: 3px solid #e5e7eb; border-top-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite;">
+            </div>
+            <p style="margin-top: 1rem; color: var(--text-secondary);">Loading comparison data...</p>
+        </div>
+
+        <style>
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+
+        <div class="filters" id="filter-controls" style="display: none; margin-bottom: 1.5rem;">
+            <div class="filter-group">
+                <label for="region-select">Region</label>
+                <select id="region-select">
+                    <option value="world">World</option>
+                    <option value="us" selected>USA</option>
+                    <option value="europe">Europe</option>
+                    <option value="asia">Asia</option>
+                    <option value="canada">Canada</option>
+                    <option value="australasia">Australasia</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Year Range</label>
+                <div class="year-inputs">
+                    <select id="start-year"></select>
+                    <span>to</span>
+                    <select id="end-year"></select>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label for="historical-mode" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" id="historical-mode" style="width: 16px; height: 16px; cursor: pointer;">
+                    <span>Historical Mode</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="compare-controls" id="compare-controls" style="display: none;">
+            <div class="school-selector">
+                <label>School A</label>
+                <div class="searchable-select" id="select-a">
+                    <input type="text" class="search-input" placeholder="Search schools..." autocomplete="off">
+                    <div class="dropdown-list"></div>
+                    <input type="hidden" id="school-a" value="">
+                </div>
+            </div>
+
+            <div class="vs-badge">VS</div>
+
+            <div class="school-selector">
+                <label>School B</label>
+                <div class="searchable-select" id="select-b">
+                    <input type="text" class="search-input" placeholder="Search schools..." autocomplete="off">
+                    <div class="dropdown-list"></div>
+                    <input type="hidden" id="school-b" value="">
+                </div>
+            </div>
+        </div>
+
+        <div id="comparison-chart-container" class="chart-container" style="display: none;">
+            <canvas id="comparisonChart"></canvas>
+        </div>
+
+        <div id="comparison-summary" class="comparison-summary"></div>
+
+    </div>
+    <script type="module" src="./src/compare.js"></script>
+</body>
+
+</html>
