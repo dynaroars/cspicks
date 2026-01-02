@@ -8,6 +8,7 @@ export default defineConfig({
             input: {
                 main: resolve(__dirname, 'index.html'),
                 analysis: resolve(__dirname, 'analysis.html'),
+                compare: resolve(__dirname, 'compare.html'),
             },
         },
     },
