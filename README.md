@@ -67,7 +67,7 @@ cspicks/
 
 ## 📊 Data Sources
 
-The application uses data from the [CSrankings](https://github.com/emeryberger/CSrankings) project. It does not modify or store these data and instead connects directly to them.
+The application uses data from [CSrankings](https://github.com/emeryberger/CSrankings), [DBLP](https://dblp.org/), and [OpenAlex](https://openalex.org/). It does not modify or store these data and instead connects directly to them.
 
 
 ## 📝 License
