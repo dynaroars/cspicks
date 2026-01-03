@@ -509,14 +509,46 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
   return { professors: filteredProfs, schools: filteredSchools };
 }
 
-async function fetchCsv(url) {
+export async function fetchCsv(url) {
   const response = await fetch(url);
   const text = await response.text();
   return new Promise((resolve) => {
     Papa.parse(text, {
       header: true,
       skipEmptyLines: true,
+      comments: "#",
       complete: (results) => resolve(results.data)
     });
   });
+}
+
+/**
+ * Merges manual CSV affiliations with OpenAlex JSON history.
+ * Manual data takes precedence. If a professor is found in the manual list,
+ * their OpenAlex history is replaced by the manual entries.
+ */
+export function mergeAffiliationHistory(historyMap, manualList) {
+  if (!manualList || manualList.length === 0) return historyMap;
+
+  const merged = { ...historyMap };
+
+  // Group manual entries by name
+  const manualGroups = {};
+  manualList.forEach(item => {
+    if (!item.name || !item.school) return;
+    const name = item.name.trim();
+    if (!manualGroups[name]) manualGroups[name] = [];
+    manualGroups[name].push({
+      school: item.school.trim(),
+      start: parseInt(item.start) || 1970,
+      end: parseInt(item.end) || currentYear
+    });
+  });
+
+  // Apply manual overrides
+  for (const name in manualGroups) {
+    merged[name] = manualGroups[name];
+  }
+
+  return merged;
 }

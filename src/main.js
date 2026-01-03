@@ -1,4 +1,4 @@
-import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, schoolAliases, conferenceAliases, nationalityAliases } from './data.js';
+import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, schoolAliases, conferenceAliases, nationalityAliases, fetchCsv, mergeAffiliationHistory } from './data.js';
 import { nameOriginMap } from './name_map.js';
 import he from 'he';
 
@@ -24,7 +24,6 @@ if (params.has('start')) startYear = parseInt(params.get('start'));
 if (params.has('end')) endYear = parseInt(params.get('end'));
 if (params.has('region')) selectedRegion = params.get('region');
 if (params.has('historical')) historicalMode = params.get('historical') === 'true';
-
 async function init() {
   setupFilters();
   setupSearch();
@@ -34,15 +33,16 @@ async function init() {
   try {
     // Load main data and historical affiliation data in parallel
     const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
-    const [data, history, aliases] = await Promise.all([
+    const [data, history, aliases, manualCsv] = await Promise.all([
       loadData(),
       fetch(`${GITHUB_RAW}/professor_history_openalex.json`).then(r => r.ok ? r.json() : null).catch(() => null),
       fetch(`${GITHUB_RAW}/school-aliases.json`).then(r => r.ok ? r.json() : null).catch(() => null),
+      fetchCsv('./manual_affiliations.csv').catch(() => []),
     ]);
 
     rawData = data;
-    historyMap = history;
     aliasMap = aliases;
+    historyMap = mergeAffiliationHistory(history || {}, manualCsv);
 
     // Initialize toggle checkbox
     const historicalToggle = document.getElementById('historical-mode');

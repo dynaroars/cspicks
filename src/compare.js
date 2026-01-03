@@ -1,5 +1,5 @@
 import Chart from 'chart.js/auto';
-import { loadData, filterByYears } from './data.js';
+import { loadData, filterByYears, fetchCsv, mergeAffiliationHistory } from './data.js';
 
 const areaLabels = {
     'ai': 'AI',
@@ -45,17 +45,16 @@ async function init() {
     rawData = await loadData();
 
     try {
-        const historyRes = await fetch('./professor_history_openalex.json');
-        historyMap = await historyRes.json();
-    } catch (e) {
-        console.warn('Could not load affiliation history');
-    }
+        const [history, aliases, manualCsv] = await Promise.all([
+            fetch('./professor_history_openalex.json').then(r => r.ok ? r.json() : null).catch(() => null),
+            fetch('./school-aliases.json').then(r => r.ok ? r.json() : null).catch(() => null),
+            fetchCsv('./manual_affiliations.csv').catch(() => []),
+        ]);
 
-    try {
-        const aliasRes = await fetch('./school-aliases.json');
-        aliasMap = await aliasRes.json();
+        aliasMap = aliases || {};
+        historyMap = mergeAffiliationHistory(history || {}, manualCsv);
     } catch (e) {
-        console.warn('Could not load school aliases');
+        console.warn('Could not load affiliation history or aliases', e);
     }
 
     setupYearSelectors();
@@ -97,11 +96,34 @@ function populateSchoolSelects() {
     initSearchableSelect('select-a', 'school-a');
     initSearchableSelect('select-b', 'school-b');
 
-    // Set defaults
-    if (schoolsList.length >= 2) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlSchoolA = urlParams.get('schoolA');
+    const urlSchoolB = urlParams.get('schoolB');
+
+    if (urlSchoolA && schoolsList.find(s => s.name === urlSchoolA)) {
+        setSchoolValue('select-a', 'school-a', urlSchoolA);
+    } else if (schoolsList.length >= 1) {
         setSchoolValue('select-a', 'school-a', schoolsList[0].name);
+    }
+
+    if (urlSchoolB && schoolsList.find(s => s.name === urlSchoolB)) {
+        setSchoolValue('select-b', 'school-b', urlSchoolB);
+    } else if (schoolsList.length >= 2) {
         setSchoolValue('select-b', 'school-b', schoolsList[1].name);
-        renderComparison();
+    }
+
+    renderComparison();
+}
+
+function updateURL() {
+    const schoolA = document.getElementById('school-a').value;
+    const schoolB = document.getElementById('school-b').value;
+
+    if (schoolA && schoolB) {
+        const url = new URL(window.location);
+        url.searchParams.set('schoolA', schoolA);
+        url.searchParams.set('schoolB', schoolB);
+        window.history.replaceState({}, '', url);
     }
 }
 
@@ -152,6 +174,7 @@ function renderDropdownItems(dropdown, schools, hidden, input) {
             input.value = value;
             dropdown.classList.remove('show');
             renderComparison();
+            updateURL();
         });
     });
 }

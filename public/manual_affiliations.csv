@@ -1,0 +1,12 @@
+# Manual Affiliation Overrides
+# Format: name,school,start,end
+# 
+# To handle multiple affiliations (e.g., professor moved or joint appointment), 
+# add multiple rows for the same name with different years/schools.
+# 
+# Example:
+# "John Smith","Carnegie Mellon University",2010,2018
+# "John Smith","Stanford University",2019,2026
+
+name,school,start,end
+
