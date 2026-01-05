@@ -45,9 +45,10 @@ async function init() {
     rawData = await loadData();
 
     try {
+        const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
         const [history, aliases, manualCsv] = await Promise.all([
-            fetch('./professor_history_openalex.json').then(r => r.ok ? r.json() : null).catch(() => null),
-            fetch('./school-aliases.json').then(r => r.ok ? r.json() : null).catch(() => null),
+            fetch(`${GITHUB_RAW}/professor_history_openalex.json`).then(r => r.ok ? r.json() : null).catch(() => null),
+            fetch(`${GITHUB_RAW}/school-aliases.json`).then(r => r.ok ? r.json() : null).catch(() => null),
             fetchCsv('./manual_affiliations.csv').catch(() => []),
         ]);
 
@@ -56,6 +57,7 @@ async function init() {
     } catch (e) {
         console.warn('Could not load affiliation history or aliases', e);
     }
+
 
     setupYearSelectors();
     populateSchoolSelects();
