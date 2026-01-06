@@ -119,6 +119,19 @@ const MANUAL_OVERRIDES = {
     'University of Nebraska-Lincoln': 'University of Nebraska',
     'University of Nebraska–Lincoln': 'University of Nebraska',
     'University of Nebraska at Omaha': 'University of Nebraska - Omaha',
+    // UIUC and other major schools with naming discrepancies
+    'University of Illinois Urbana-Champaign': 'Univ. of Illinois at Urbana-Champaign',
+    'University of Illinois at Urbana-Champaign': 'Univ. of Illinois at Urbana-Champaign',
+    'University of Illinois at Chicago': 'University of Illinois at Chicago',
+    'University of Maryland, College Park': 'Univ. of Maryland - College Park',
+    'University of Maryland': 'Univ. of Maryland - College Park',
+    'University of North Carolina at Chapel Hill': 'Univ. of North Carolina - Chapel Hill',
+    'University of North Carolina': 'Univ. of North Carolina - Chapel Hill',
+    'University of Washington': 'Univ. of Washington',
+    'University of Michigan': 'University of Michigan',
+    'University of Michigan-Ann Arbor': 'University of Michigan',
+    'Georgia Institute of Technology': 'Georgia Institute of Technology',
+    'Georgia Tech': 'Georgia Institute of Technology',
 };
 
 // Patterns to exclude (companies, hospitals, etc. that shouldn't map to universities)
