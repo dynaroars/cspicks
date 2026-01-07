@@ -65,7 +65,7 @@ async function init() {
     console.log(`Data loaded (${startYear}-${endYear}, region: ${selectedRegion}, historical: ${historicalMode}):`, Object.keys(appData.professors).length, 'professors', Object.keys(appData.schools).length, 'schools');
 
     const searchInput = document.getElementById('main-search');
-    searchInput.placeholder = "Search professors, universities, areas (e.g., graphics), or conferences (e.g., pldi)";
+    searchInput.placeholder = "Search professors, universities, areas (e.g., graphics), or conferences (e.g., PLDI)";
     searchInput.disabled = false;
 
     document.getElementById('region-select').value = selectedRegion;

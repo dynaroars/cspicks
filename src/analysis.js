@@ -84,8 +84,8 @@ function setupYearSelectors() {
     const currentYear = new Date().getFullYear();
 
     for (let y = 2000; y <= currentYear; y++) {
-        startSelect.innerHTML += `<option value="${y}" ${y === 2015 ? 'selected' : ''}>${y}</option>`;
         endSelect.innerHTML += `<option value="${y}" ${y === currentYear ? 'selected' : ''}>${y}</option>`;
+        startSelect.innerHTML += `<option value="${y}" ${y === currentYear - 10 ? 'selected' : ''}>${y}</option>`;
     }
     const refresh = () => {
         if (currentTab === 'schools') renderSchoolTrends();
@@ -134,8 +134,9 @@ async function renderSchoolTrends() {
             return;
         }
         const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
-        const startYear = parseInt(document.getElementById('analysis-start-year')?.value) || 2015;
         const endYear = parseInt(document.getElementById('analysis-end-year')?.value) || new Date().getFullYear();
+        const startYear = endYear - 10;
+        
 
         const labels = [];
         const dataPoints = [];
