@@ -37,8 +37,8 @@ let historyMap = {};
 let aliasMap = {};
 
 let selectedRegion = 'us';
-let startYear = 2015;
 let endYear = new Date().getFullYear();
+let startYear = endYear - 10;
 let historicalMode = false;
 
 async function init() {
@@ -78,11 +78,11 @@ function setupYearSelectors() {
         startSelect.add(new Option(y, y));
         endSelect.add(new Option(y, y));
     }
-
-    startSelect.value = 2015;
+    
     endSelect.value = currentYear;
-    startYear = 2015;
+    startSelect.value = endSelect.value - 10;
     endYear = currentYear;
+    startYear = endYear - 10;    
 }
 
 

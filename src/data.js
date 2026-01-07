@@ -1,8 +1,10 @@
 import Papa from 'papaparse';
 
 const currentYear = new Date().getFullYear();
-export const DEFAULT_START_YEAR = 2015;
 export const DEFAULT_END_YEAR = currentYear;
+export const DEFAULT_START_YEAR = DEFAULT_END_YEAR - 10;
+
+
 
 export const schoolAliases = {
   'gmu': 'George Mason University',
