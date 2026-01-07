@@ -1210,7 +1210,7 @@ function renderSchoolRankGraphPlaceholder(schoolName) {
   return `
     <div class="school-rank-graph" id="rank-graph-${uniqueId}">
       <button class="show-rank-trend-btn" onclick="loadSchoolRankGraph('${escapedName}', '${uniqueId}')">
-        Show Rank Trend
+        Show Trend
       </button>
     </div>
   `;
