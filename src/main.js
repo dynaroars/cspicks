@@ -18,6 +18,7 @@ let startYear = DEFAULT_START_YEAR;
 let endYear = DEFAULT_END_YEAR;
 let selectedRegion = 'us';
 let historicalMode = false;
+let showRankings = false;
 
 const params = new URLSearchParams(window.location.search);
 if (params.has('start')) startYear = parseInt(params.get('start'));
@@ -52,6 +53,19 @@ async function init() {
         historicalMode = historicalToggle.checked;
         refreshData();
         updateURL();
+      });
+    }
+
+    // Show Rankings toggle
+    const rankingsToggle = document.getElementById('show-rankings');
+    if (rankingsToggle) {
+      rankingsToggle.checked = showRankings;
+      rankingsToggle.addEventListener('change', () => {
+        showRankings = rankingsToggle.checked;
+        const mainSearch = document.getElementById('main-search');
+        if (mainSearch) {
+          mainSearch.dispatchEvent(new Event('input'));
+        }
       });
     }
 
@@ -1208,30 +1222,33 @@ function renderSchoolRankGraphPlaceholder(schoolName) {
   const uniqueId = schoolName.replace(/[^a-zA-Z0-9]/g, '_');
 
   return `
-    <div class="school-rank-graph" id="rank-graph-${uniqueId}">
-      <button class="show-rank-trend-btn" onclick="loadSchoolRankGraph('${escapedName}', '${uniqueId}')">
-        Show Trend
+    <div class="school-charts-container" id="charts-${uniqueId}">
+      <button class="show-rank-trend-btn" onclick="loadSchoolCharts('${escapedName}', '${uniqueId}')">
+        Show Trends
       </button>
     </div>
   `;
 }
 
-window.loadSchoolRankGraph = async function (schoolName, uniqueId) {
-  const container = document.getElementById('rank-graph-' + uniqueId);
+window.loadSchoolCharts = async function (schoolName, uniqueId) {
+  const container = document.getElementById('charts-' + uniqueId);
   if (!container) return;
 
   container.innerHTML = '<p style="color: var(--text-secondary); font-size: 0.8rem; font-family: var(--font-body);">Loading trend data...</p>';
 
   await new Promise(resolve => setTimeout(resolve, 50));
 
+  const { default: Chart } = await import('chart.js/auto');
+
+  // Compute all chart data
   const years = [];
   const ranks = [];
   const windowSize = endYear - startYear;
 
+  // Rank Trend data
   for (let y = startYear; y <= endYear; y++) {
     const wStart = Math.max(startYear, y - Math.min(windowSize, 10));
     const wEnd = y;
-
     try {
       const result = filterByYears({ ...rawData }, wStart, wEnd, selectedRegion, historyMap, aliasMap);
       const school = result.schools[schoolName];
@@ -1245,85 +1262,252 @@ window.loadSchoolRankGraph = async function (schoolName, uniqueId) {
 
   const validRanks = ranks.filter(r => r !== null);
   if (validRanks.length < 2) {
-    container.innerHTML = '<p style="color: var(--text-secondary); font-size: 0.8rem; font-family: var(--font-body);">Insufficient historical data for trend.</p>';
+    container.innerHTML = '<p style="color: var(--text-secondary); font-size: 0.8rem; font-family: var(--font-body);">Insufficient historical data for trends.</p>';
     return;
   }
 
+  // Area Growth data
+  const areaStats = {};
+  const areaYears = [];
+  for (let y = startYear; y <= endYear; y++) {
+    areaYears.push(y);
+    areaStats[y] = {};
+  }
+
+  const schoolProfs = Object.values(rawData.professors).filter(p => p.affiliation === schoolName);
+  const allPubs = schoolProfs.flatMap(p => p.pubs);
+
+  allPubs.forEach(pub => {
+    if (pub.year >= startYear && pub.year <= endYear) {
+      const area = parentMap[pub.area] || pub.area;
+      if (!areaStats[pub.year][area]) areaStats[pub.year][area] = 0;
+      areaStats[pub.year][area] += pub.adjustedcount;
+    }
+  });
+
+  const areaTotals = {};
+  Object.values(areaStats).forEach(yearStats => {
+    Object.entries(yearStats).forEach(([area, count]) => {
+      areaTotals[area] = (areaTotals[area] || 0) + count;
+    });
+  });
+
+  const topAreas = Object.entries(areaTotals).sort(([, a], [, b]) => b - a).slice(0, 50).map(([area]) => area);
+  const areaColors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#6366f1', '#14b8a6', '#06b6d4', '#f97316', '#84cc16', '#a855f7', '#ec4899', '#e11d48', '#0f172a'];
+  const areaLabelsMap = {
+    'ai': 'AI', 'vision': 'Vision', 'mlmining': 'ML', 'nlp': 'NLP', 'inforet': 'IR',
+    'arch': 'Arch', 'sec': 'Security', 'mod': 'DB', 'da': 'DA', 'bed': 'Embedded',
+    'hpc': 'HPC', 'mobile': 'Mobile', 'metrics': 'Metrics', 'ops': 'Systems',
+    'plan': 'PL', 'soft': 'SE', 'comm': 'Networks', 'graph': 'Graphics',
+    'act': 'Theory', 'crypt': 'Crypto', 'log': 'Logic', 'bio': 'Bio',
+    'ecom': 'Econ', 'chi': 'HCI', 'robotics': 'Robotics', 'visualization': 'Vis', 'csed': 'CSEd'
+  };
+
+  const areaDatasets = topAreas.map((area, i) => ({
+    label: areaLabelsMap[area] || area,
+    data: areaYears.map(y => areaStats[y][area] || 0),
+    borderColor: areaColors[i % areaColors.length],
+    backgroundColor: areaColors[i % areaColors.length],
+    tension: 0.3,
+    fill: false,
+    pointRadius: 2,
+    borderWidth: 2
+  }));
+
+  // Faculty Diversity data
+  const diversityRates = [];
+  const facultyCounts = [];
+  const multiAreaCounts = [];
+  const diversityWindowSize = 3;
+
+  for (let y = startYear; y <= endYear; y++) {
+    const wStart = y - diversityWindowSize + 1;
+    const wEnd = y;
+    const authorAreas = {};
+
+    schoolProfs.forEach(prof => {
+      prof.pubs.forEach(pub => {
+        if (pub.year >= wStart && pub.year <= wEnd) {
+          if (!authorAreas[prof.name]) authorAreas[prof.name] = new Set();
+          const area = parentMap[pub.area] || pub.area;
+          authorAreas[prof.name].add(area);
+        }
+      });
+    });
+
+    let multiAreaCount = 0;
+    const authors = Object.keys(authorAreas);
+    const activeAuthors = authors.length;
+
+    if (activeAuthors > 0) {
+      authors.forEach(name => {
+        if (authorAreas[name].size > 1) multiAreaCount++;
+      });
+      diversityRates.push((multiAreaCount / activeAuthors) * 100);
+    } else {
+      diversityRates.push(0);
+    }
+
+    facultyCounts.push(activeAuthors);
+    multiAreaCounts.push(multiAreaCount);
+  }
+
+  // Render container with 3 charts
   container.innerHTML = `
-    <h4 style="font-family: var(--font-heading); font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--text-primary);">Rank Trend (${startYear}-${endYear})</h4>
-    <div class="chart-container" style="position: relative; height: 120px; width: 100%;">
-      <canvas id="chart-${uniqueId}"></canvas>
+    <div class="school-charts-grid">
+      <div class="school-chart-item">
+        <h4>Rank Trend</h4>
+        <div class="chart-wrapper"><canvas id="rank-chart-${uniqueId}"></canvas></div>
+      </div>
+      <div class="school-chart-item">
+        <h4>Area Growth</h4>
+        <div class="chart-wrapper"><canvas id="area-chart-${uniqueId}"></canvas></div>
+        <div class="area-legend" id="area-legend-${uniqueId}"></div>
+      </div>
+      <div class="school-chart-item">
+        <h4>Faculty Diversity</h4>
+        <div class="chart-wrapper"><canvas id="diversity-chart-${uniqueId}"></canvas></div>
+      </div>
     </div>
   `;
 
-  try {
-    const { default: Chart } = await import('chart.js/auto');
-    const ctx = document.getElementById(`chart-${uniqueId}`).getContext('2d');
+  // Chart 1: Rank Trend
+  new Chart(document.getElementById(`rank-chart-${uniqueId}`).getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [{
+        label: 'World Rank',
+        data: ranks,
+        borderColor: '#10b981',
+        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+        tension: 0.3,
+        fill: true,
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        pointBackgroundColor: '#10b981',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      devicePixelRatio: 2,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          titleFont: { family: 'Inter', size: 10 },
+          bodyFont: { family: 'Inter', size: 11 },
+          displayColors: false,
+          callbacks: { label: (c) => `Rank: #${c.parsed.y}` }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 9 }, color: '#666', maxRotation: 0, autoSkip: true, maxTicksLimit: 8 } },
+        y: {
+          reverse: true,
+          grid: { color: 'rgba(0, 0, 0, 0.05)' },
+          ticks: { font: { family: 'Inter', size: 9 }, color: '#666', stepSize: 1, precision: 0, callback: (v) => `#${v}` },
+          suggestedMin: Math.max(1, Math.min(...validRanks) - 1),
+          suggestedMax: Math.max(...validRanks) + 1
+        }
+      }
+    }
+  });
 
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: years,
-        datasets: [{
-          label: 'World Rank',
-          data: ranks,
-          borderColor: '#10b981',
-          backgroundColor: 'rgba(16, 185, 129, 0.1)',
+  // Chart 2: Area Growth
+  const areaChart = new Chart(document.getElementById(`area-chart-${uniqueId}`).getContext('2d'), {
+    type: 'line',
+    data: { labels: areaYears, datasets: areaDatasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      devicePixelRatio: 2,
+      interaction: { mode: 'nearest', axis: 'x', intersect: false },
+      scales: { y: { beginAtZero: true, title: { display: false } } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          yAlign: 'bottom',
+          itemSort: (a, b) => b.raw - a.raw
+        }
+      }
+    }
+  });
+
+  // Area legend
+  const legendContainer = document.getElementById(`area-legend-${uniqueId}`);
+  if (legendContainer) {
+    legendContainer.innerHTML = areaDatasets.map((ds, i) => `
+      <label class="area-legend-item">
+        <input type="checkbox" checked data-index="${i}" style="accent-color: ${ds.borderColor};">
+        <span class="legend-color" style="background: ${ds.borderColor};"></span>
+        <span>${ds.label}</span>
+      </label>
+    `).join('');
+
+    legendContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', (e) => {
+        const index = parseInt(e.target.dataset.index);
+        areaChart.setDatasetVisibility(index, e.target.checked);
+        areaChart.update();
+      });
+    });
+  }
+
+  // Chart 3: Faculty Diversity
+  new Chart(document.getElementById(`diversity-chart-${uniqueId}`).getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [
+        {
+          label: '% Multi-Area',
+          data: diversityRates,
+          borderColor: '#8b5cf6',
+          backgroundColor: 'rgba(139, 92, 246, 0.1)',
           tension: 0.3,
           fill: true,
           pointRadius: 3,
-          pointHoverRadius: 5,
-          pointBackgroundColor: '#10b981',
-          pointBorderColor: '#fff',
-          pointBorderWidth: 2
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            titleFont: { family: 'Inter', size: 10 },
-            bodyFont: { family: 'Inter', size: 11 },
-            displayColors: false,
-            callbacks: {
-              label: (context) => `Rank: #${context.parsed.y}`
-            }
-          }
+          yAxisID: 'y'
         },
-        scales: {
-          x: {
-            grid: { display: false },
-            ticks: {
-              font: { family: 'Inter', size: 9 },
-              color: '#666',
-              maxRotation: 0,
-              autoSkip: true,
-              maxTicksLimit: 10
+        {
+          label: 'Faculty Count',
+          data: facultyCounts,
+          borderColor: '#f59e0b',
+          backgroundColor: 'rgba(245, 158, 11, 0.1)',
+          tension: 0.3,
+          fill: false,
+          pointRadius: 2,
+          borderDash: [5, 5],
+          yAxisID: 'y1'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      devicePixelRatio: 2,
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        y: { type: 'linear', display: true, position: 'left', beginAtZero: true, suggestedMax: 60, title: { display: false } },
+        y1: { type: 'linear', display: true, position: 'right', beginAtZero: true, grid: { drawOnChartArea: false }, title: { display: false } }
+      },
+      plugins: {
+        legend: { display: true, position: 'bottom', labels: { boxWidth: 12, padding: 8, font: { size: 10 } } },
+        tooltip: {
+          callbacks: {
+            afterBody: (context) => {
+              const idx = context[0].dataIndex;
+              return `${multiAreaCounts[idx]} of ${facultyCounts[idx]} multi-area`;
             }
-          },
-          y: {
-            reverse: true,
-            grid: { color: 'rgba(0, 0, 0, 0.05)' },
-            ticks: {
-              font: { family: 'Inter', size: 9 },
-              color: '#666',
-              stepSize: 1,
-              precision: 0,
-              callback: (value) => `#${value}`
-            },
-            suggestedMin: Math.max(1, Math.min(...validRanks) - 1),
-            suggestedMax: Math.max(...validRanks) + 1
           }
         }
       }
-    });
-  } catch (error) {
-    console.error('Failed to load Chart.js:', error);
-    container.innerHTML = '<p style="color: red; font-size: 0.8rem;">Error loading chart engine.</p>';
-  }
+    }
+  });
 };
 
 
@@ -1352,10 +1536,20 @@ function renderSchoolCard(school, filterArea = null) {
     (schoolAliases[currentQuery] && schoolAliases[currentQuery].toLowerCase() === school.name.toLowerCase());
   const cardClass = isExactMatch ? 'card' : 'card collapsed';
 
+  // Calculate faculty count
+  const facultySet = new Set();
+  Object.values(school.areas).forEach(areaData => {
+    areaData.faculty.forEach(f => facultySet.add(f));
+  });
+  const facultyCount = facultySet.size;
+
+  const rankBadgeHeader = showRankings ? ` <span style="color: var(--text-secondary); font-size: 0.8em;">#${school.rank}</span>` : '';
+  const facultyBadge = `<span style="color: var(--text-secondary); font-size: 0.75em; margin-left: 0.5rem;">${facultyCount} Faculty</span>`;
+
   return `
     <div class="${cardClass}">
       <div class="card-header" onclick="toggleCard(this)">
-        <h2>${school.name} <span style="color: var(--text-secondary); font-size: 0.8em;">#${school.rank}</span></h2>
+        <h2>${school.name}${rankBadgeHeader}${facultyBadge}</h2>
         <span class="toggle-icon">▼</span>
       </div>
       <div class="card-content">
@@ -1363,7 +1557,7 @@ function renderSchoolCard(school, filterArea = null) {
         <div class="stats-list">
         ${sortedAreas.map(([area, data]) => {
     const areaRank = school.areaRanks?.[area];
-    const rankBadge = areaRank ? `<span style="color: var(--text-secondary); font-size: 0.85em; margin-left: 0.5rem;">#${areaRank}</span>` : '';
+    const rankBadge = (showRankings && areaRank) ? `<span style="color: var(--text-secondary); font-size: 0.85em; margin-left: 0.5rem;">#${areaRank}</span>` : '';
     return `
           <div class="school-area-section">
             <div class="school-area-header">
