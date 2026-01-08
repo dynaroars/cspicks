@@ -897,3 +897,72 @@ input[type="text"]::placeholder {
 .show-rank-trend-btn:active {
   transform: translateY(0);
 }
+
+/* 3-Chart Grid Layout */
+.school-charts-container {
+  margin-bottom: 1.5rem;
+}
+
+.school-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .school-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.school-chart-item {
+  background: #fdfdfd;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.school-chart-item h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 150px;
+  width: 100%;
+}
+
+.area-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.area-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.area-legend-item input[type="checkbox"] {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+}
+
+.legend-color {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
