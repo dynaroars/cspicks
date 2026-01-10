@@ -7,35 +7,47 @@
 ### 1. Professor Search
 - **Search by Name**: Instantly find professors by name.
 - **Publication Stats**: View a breakdown of publication counts by research area, sorted by volume.
+- **Activity Graph**: Visual timeline of publications per year.
 - **Direct Links**: Quick access to the professor's:
     - **Homepage**
     - **Google Scholar Profile**
     - **DBLP Profile**
-
+    
 ### 2. School Search
 - **Search by Name**: Find universities by name.
-- **Area Analysis**: View the school's top research areas based on publication count.
-- **Faculty Lists**: See which faculty members are publishing in each area.
+- **Area Analysis**: View the school's top research areas with per-area rankings.
+- **Faculty Count**: See total faculty contributing to each school.
+- **Trend Charts**: Click "Show Trends" to see:
+  - **Rank Trend**: Historical ranking over time.
+  - **Area Growth**: Publication growth by research area.
+  - **Faculty Diversity**: Percentage of faculty publishing in multiple areas.
 
-### 3. Area Search
-- **Search by Area Name**: Find universities and professors working on an area.
+### 3. Historical Mode
+- **Toggle Historical Affiliations**: When enabled, publications are credited to the institution where the author was affiliated at the time of publication (via OpenAlex data).
 
-### 4. Conference Search
-- **Search by Conference Name**: Find universities and professors publishing in a specific conference.
+### 4. School Comparison
+- **Side-by-Side Comparison**: Compare two schools across all research areas.
 
+### 5. Area & Conference Search
+- **Search by Area Name**: Find universities and professors in a research area.
+- **Search by Conference**: Find contributors to specific venues (e.g., PLDI, NeurIPS).
+
+### 6. Manual Affiliation Overrides
+- **Community Corrections**: Add corrections to `public/manual_affiliations.csv` to fix incorrect OpenAlex data.
 
 ## 🛠️ Technologies Used
 
 - **Frontend**: Vanilla JavaScript (ES6+), HTML5, CSS3.
-- **Build Tool**: [Vite](https://vitejs.dev/) (for fast development and bundling).
+- **Build Tool**: [Vite](https://vitejs.dev/).
+- **Charts**: [Chart.js](https://www.chartjs.org/).
 - **CSV Parsing**: [PapaParse](https://www.papaparse.com/).
-- **HTML Encoding**: [he](https://github.com/mathiasbynens/he) (for DBLP URL generation).
+- **HTML Encoding**: [he](https://github.com/mathiasbynens/he).
 
 ## 📦 Installation & Setup
 
 1.  **Clone the Repository**
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/dynaroars/cspicks.git
     cd cspicks
     ```
 
@@ -48,27 +60,42 @@
     ```bash
     npm run dev
     ```
-    The application will be available at `http://localhost:5173/`.
+    The application will be available at `http://localhost:5173/cspicks/`.
+
+4.  **Deploy to GitHub Pages**
+    ```bash
+    npm run deploy
+    ```
 
 ## 📂 Project Structure
 
 ```
 cspicks/
 ├── public/
-│   └── favicon.png                   # Site favicon
+│   ├── data/                         # CSRankings data files
+│   ├── professor_history_openalex.json  # Historical affiliations
+│   ├── school-aliases.json           # OpenAlex → CSRankings name mapping
+│   └── manual_affiliations.csv       # Community corrections
 ├── src/
-│   ├── data.js                       # Data loading and processing logic
-│   ├── main.js                       # Main application logic
+│   ├── data.js                       # Data loading and filtering
+│   ├── main.js                       # Main search page logic
+│   ├── compare.js                    # School comparison logic
+│   ├── analysis.js                   # Analysis dashboard logic
 │   └── style.css                     # CSS styles
-├── index.html                        # Main HTML entry point
-├── package.json                      # dependencies and scripts
-└── README.md                         # documentation
+├── scripts/
+│   ├── build-school-aliases.js       # Generates school-aliases.json
+│   └── fetch_openalex_history.py     # Fetches OpenAlex affiliation data
+├── index.html                        # Main search page
+├── compare.html                      # School comparison page
+├── analysis.html                     # Analysis dashboard
+└── README.md
 ```
 
 ## 📊 Data Sources
 
-The application uses data from [CSrankings](https://github.com/emeryberger/CSrankings), [DBLP](https://dblp.org/), and [OpenAlex](https://openalex.org/). It does not modify or store these data and instead connects directly to them.
-
+- [CSrankings](https://github.com/emeryberger/CSrankings) - Faculty and publication data
+- [DBLP](https://dblp.org/) - Publication metadata and author profiles
+- [OpenAlex](https://openalex.org/) - Historical affiliation data
 
 ## 📝 License
 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
