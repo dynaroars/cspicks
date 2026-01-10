@@ -524,15 +524,37 @@ export async function fetchCsv(url) {
   });
 }
 
-/**
- * Merges manual CSV affiliations with OpenAlex JSON history.
- * Manual data takes precedence. If a professor is found in the manual list,
- * their OpenAlex history is replaced by the manual entries.
- */
-export function mergeAffiliationHistory(historyMap, manualList) {
-  if (!manualList || manualList.length === 0) return historyMap;
+// Discards 1-year affiliations if the professor has a longer (2+ year)
+// overlapping affiliation during that same period.
+function filterSabbaticals(affiliations) {
+  if (!affiliations || affiliations.length <= 1) return affiliations;
 
-  const merged = { ...historyMap };
+  return affiliations.filter(aff => {
+    const duration = aff.end - aff.start + 1;
+    if (duration > 1) return true;
+
+    const overlapsLonger = affiliations.some(other => {
+      if (other === aff) return false;
+      const otherDuration = other.end - other.start + 1;
+      const overlaps = aff.start >= other.start && aff.end <= other.end;
+      return overlaps && otherDuration >= 2;
+    });
+
+    return !overlapsLonger;
+  });
+}
+
+export function mergeAffiliationHistory(historyMap, manualList) {
+  if (!historyMap) historyMap = {};
+
+  const filtered = {};
+  for (const name in historyMap) {
+    filtered[name] = filterSabbaticals(historyMap[name]);
+  }
+
+  if (!manualList || manualList.length === 0) return filtered;
+
+  const merged = { ...filtered };
 
   // Group manual entries by name
   const manualGroups = {};
