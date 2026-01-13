@@ -1,6 +1,6 @@
 # CS Picks
 
-**CS Picks** is a JavaScript-based web application for exploring Computer Science professors and schools. It uses data from [CSrankings](https://github.com/emeryberger/CSrankings), DBLP, and OpenAlex to provide an interface for searching faculty publications and analyzing school strengths.
+**CS Picks** is a JavaScript-based web application for exploring Computer Science professors and schools. It is an accompaying tool to the PhD Demystify book (https://github.com/dynaroars/phd-cs-us), which helps prospective student navigate the PhD admission process in the US.  CSPicks uses data from [CSrankings](https://github.com/emeryberger/CSrankings), DBLP, and Open Alex to provide an interface for searching faculty publications and analyzing school strengths.
 
 ## 🚀 Features
 
