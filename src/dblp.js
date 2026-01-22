@@ -40,7 +40,9 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
 
         const stats = {
             totalAdjusted: 0,
-            areas: {}
+            totalPapers: 0,
+            areas: {},
+            papers: []
         };
 
         const records = xmlDoc.getElementsByTagName("r");
@@ -86,15 +88,29 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
             const adjusted = 1.0 / authorCount;
             const area = parentMap[confKey];
 
+            const titleNode = pub.getElementsByTagName("title")[0];
+            const title = titleNode ? titleNode.textContent : "Untitled";
+
             stats.totalAdjusted += adjusted;
-            stats.totalPapers = (stats.totalPapers || 0) + 1;
+            stats.totalPapers += 1;
 
             if (!stats.areas[area]) {
                 stats.areas[area] = { count: 0, adjusted: 0 };
             }
             stats.areas[area].count += 1;
             stats.areas[area].adjusted += adjusted;
+
+            stats.papers.push({
+                title: title,
+                venue: confKey.toUpperCase(),
+                year: year,
+                authors: authorCount,
+                adjusted: adjusted,
+                area: area
+            });
         }
+
+        stats.papers.sort((a, b) => b.year - a.year);
 
         return stats;
 

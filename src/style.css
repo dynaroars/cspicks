@@ -590,6 +590,127 @@ input[type="text"]::placeholder {
   font-weight: bold;
 }
 
+/* Simulator textarea */
+.sim-step textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  background: #fff;
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color 0.2s;
+}
+
+.sim-step textarea:focus {
+  border-color: #333;
+  outline: none;
+}
+
+/* Candidate result cards */
+.candidate-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.candidate-card.loading {
+  opacity: 0.6;
+}
+
+.candidate-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.candidate-medal {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.candidate-info {
+  flex: 1;
+}
+
+.candidate-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.candidate-stats {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.candidate-impact {
+  text-align: right;
+}
+
+.candidate-rank-delta {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.candidate-rank-delta.positive { color: #10b981; }
+.candidate-rank-delta.negative { color: #ef4444; }
+.candidate-rank-delta.neutral { color: var(--text-secondary); }
+
+/* Papers toggle */
+.papers-toggle {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.papers-toggle:hover {
+  text-decoration: underline;
+}
+
+.papers-list {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #eee;
+  display: none;
+}
+
+.papers-list.visible {
+  display: block;
+}
+
+.paper-item {
+  font-size: 0.8rem;
+  padding: 0.4rem 0;
+  color: var(--text-secondary);
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.paper-item:last-child {
+  border-bottom: none;
+}
+
+.paper-venue {
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.paper-year {
+  color: #888;
+}
+
 .btn-secondary {
   background: #f5f5f5;
   color: #333;
