@@ -1587,21 +1587,13 @@ function setupSimulation() {
   const modal = document.getElementById('sim-modal');
   const openBtn = document.getElementById('simulate-btn');
   const closeBtn = document.querySelector('.close-modal');
-  const authorSearch = document.getElementById('sim-author-search');
   const univSearch = document.getElementById('sim-univ-search');
-  const facultySearch = document.getElementById('sim-faculty-search');
+  const candidatesInput = document.getElementById('sim-candidates-input');
+  const analyzeBtn = document.getElementById('sim-analyze-btn');
   const resetBtn = document.getElementById('sim-reset-btn');
 
-  let selectedAuthor = null;
   let selectedUniv = null;
-  let simMode = 'add';
 
-  document.querySelectorAll('input[name="sim-mode"]').forEach(radio => {
-    radio.addEventListener('change', (e) => {
-      simMode = e.target.value;
-      resetSimulation();
-    });
-  });
   const checkHash = () => {
     if (window.location.hash === '#simulate') {
       openBtn.style.display = 'flex';
@@ -1614,64 +1606,22 @@ function setupSimulation() {
 
   openBtn.addEventListener('click', () => {
     modal.classList.remove('hidden');
-    if (simMode === 'add') authorSearch.focus();
-    else univSearch.focus();
+    univSearch.focus();
   });
   closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
 
   const resetSimulation = () => {
-    selectedAuthor = null;
     selectedUniv = null;
+    document.getElementById('step-univ-first').classList.remove('hidden');
+    document.getElementById('step-candidates').classList.add('hidden');
     document.getElementById('step-results').classList.add('hidden');
-    document.getElementById('step-faculty').classList.add('hidden');
-
-    if (simMode === 'add') {
-      document.getElementById('step-author').classList.remove('hidden');
-      document.getElementById('step-univ').classList.add('hidden');
-      document.getElementById('step-univ-title').textContent = '2. Select Target University';
-    } else {
-      document.getElementById('step-author').classList.add('hidden');
-      document.getElementById('step-univ').classList.remove('hidden');
-      document.getElementById('step-univ-title').textContent = '1. Select Target University';
-      univSearch.focus();
-    }
-
-    authorSearch.value = '';
     univSearch.value = '';
-    facultySearch.value = '';
-    document.getElementById('sim-author-results').innerHTML = '';
+    candidatesInput.value = '';
     document.getElementById('sim-univ-results').innerHTML = '';
-    document.getElementById('sim-faculty-results').innerHTML = '';
+    document.getElementById('sim-candidates-results').innerHTML = '';
   };
 
   resetBtn.addEventListener('click', resetSimulation);
-
-  authorSearch.addEventListener('input', async (e) => {
-    const q = e.target.value;
-    if (q.length < 3) return;
-
-    const results = await window.dblp.search(q);
-    const container = document.getElementById('sim-author-results');
-
-    container.innerHTML = results.map(a => `
-      <div class="sim-item" data-pid="${a.pid}" data-name="${a.name}">
-        <strong>${a.name}</strong> <small>(${a.pid})</small>
-      </div>
-    `).join('');
-
-    container.querySelectorAll('.sim-item').forEach(item => {
-      item.addEventListener('click', () => {
-        selectedAuthor = {
-          name: item.dataset.name,
-          pid: item.dataset.pid
-        };
-        document.getElementById('selected-author-display').textContent = `Selected: ${selectedAuthor.name}`;
-        document.getElementById('step-author').classList.add('hidden');
-        document.getElementById('step-univ').classList.remove('hidden');
-        univSearch.focus();
-      });
-    });
-  });
 
   univSearch.addEventListener('input', (e) => {
     const q = e.target.value.toLowerCase();
@@ -1691,58 +1641,171 @@ function setupSimulation() {
     container.querySelectorAll('.sim-item').forEach(item => {
       item.addEventListener('click', () => {
         selectedUniv = appData.schools[item.dataset.name];
-
-        if (simMode === 'add') {
-          document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name}`;
-          document.getElementById('step-univ').classList.add('hidden');
-          document.getElementById('step-results').classList.remove('hidden');
-          runSimulation(selectedAuthor, selectedUniv, false);
-        } else {
-          // Remove Mode
-          document.getElementById('selected-univ-display-remove').textContent = `Target: ${selectedUniv.name}`;
-          document.getElementById('step-univ').classList.add('hidden');
-          document.getElementById('step-faculty').classList.remove('hidden');
-          renderFacultyList(selectedUniv);
-          facultySearch.focus();
-        }
+        document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name} (#${selectedUniv.rank})`;
+        document.getElementById('step-univ-first').classList.add('hidden');
+        document.getElementById('step-candidates').classList.remove('hidden');
+        candidatesInput.focus();
       });
     });
   });
 
-  const renderFacultyList = (school) => {
-    const container = document.getElementById('sim-faculty-results');
+  analyzeBtn.addEventListener('click', async () => {
+    if (!selectedUniv) return;
 
-    const facultySet = new Set();
-    Object.values(school.areas).forEach(area => {
-      area.faculty.forEach(name => facultySet.add(name));
+    const text = candidatesInput.value.trim();
+    if (!text) return;
+
+    const names = text.split('\n').map(n => n.trim()).filter(n => n.length > 0);
+    const uniqueNames = [...new Set(names)];
+
+    if (uniqueNames.length === 0) return;
+
+    document.getElementById('step-candidates').classList.add('hidden');
+    document.getElementById('step-results').classList.remove('hidden');
+    document.getElementById('selected-univ-display-results').textContent = `Target: ${selectedUniv.name} (#${selectedUniv.rank})`;
+
+    const loading = document.getElementById('sim-loading');
+    const resultsContainer = document.getElementById('sim-candidates-results');
+    loading.classList.remove('hidden');
+    resultsContainer.innerHTML = '';
+
+    const candidateResults = [];
+
+    for (const name of uniqueNames) {
+      try {
+        const searchResults = await window.dblp.search(name);
+        if (!searchResults || searchResults.length === 0) {
+          candidateResults.push({ name, error: 'Not found in DBLP' });
+          continue;
+        }
+
+        const best = searchResults[0];
+        const stats = await window.dblp.stats(best.pid, startYear, endYear);
+        if (!stats) {
+          candidateResults.push({ name, error: 'Failed to fetch stats' });
+          continue;
+        }
+
+        const rankDelta = calculateRankImpact(stats, selectedUniv);
+
+        candidateResults.push({
+          name: best.name,
+          pid: best.pid,
+          stats,
+          rankDelta,
+          error: null
+        });
+      } catch (err) {
+        candidateResults.push({ name, error: 'Error fetching data' });
+      }
+    }
+
+    candidateResults.sort((a, b) => {
+      if (a.error && !b.error) return 1;
+      if (!a.error && b.error) return -1;
+      return (b.rankDelta || 0) - (a.rankDelta || 0);
     });
 
-    const faculty = Array.from(facultySet).sort();
+    loading.classList.add('hidden');
+    resultsContainer.innerHTML = renderCandidateResults(candidateResults);
 
-    const filterAndRender = (q) => {
-      const filtered = faculty.filter(f => f.toLowerCase().includes(q));
-      container.innerHTML = filtered.map(f => `
-        <div class="sim-item" data-name="${f.replace(/"/g, '&quot;')}">
-          <strong>${cleanName(f)}</strong>
+    resultsContainer.querySelectorAll('.papers-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const list = btn.nextElementSibling;
+        list.classList.toggle('visible');
+        btn.textContent = list.classList.contains('visible') ? '▼ Hide Papers' : '▶ Show Papers';
+      });
+    });
+  });
+
+  function calculateRankImpact(stats, school) {
+    const schoolClone = JSON.parse(JSON.stringify(school));
+
+    for (const [area, areaStats] of Object.entries(stats.areas)) {
+      const val = typeof areaStats === 'number' ? areaStats : areaStats.adjusted;
+      if (!schoolClone.areas[area]) {
+        schoolClone.areas[area] = { count: 0, adjusted: 0, faculty: [] };
+      }
+      schoolClone.areas[area].adjusted += val;
+    }
+
+    const allSchools = Object.values(appData.schools).map(s =>
+      s.name === school.name ? schoolClone : s
+    );
+
+    const areas = new Set();
+    Object.values(parentMap).forEach(a => areas.add(a));
+    const areaList = Array.from(areas);
+
+    const calcScore = (s) => {
+      let product = 1;
+      for (const area of areaList) {
+        const adj = s.areas[area]?.adjusted || 0;
+        product *= (adj + 1);
+      }
+      return Math.pow(product, 1 / areaList.length) - 1;
+    };
+
+    allSchools.forEach(s => {
+      s._simScore = calcScore(s);
+    });
+
+    allSchools.sort((a, b) => b._simScore - a._simScore);
+
+    const newRank = allSchools.findIndex(s => s.name === school.name) + 1;
+    return school.rank - newRank;
+  }
+
+  function renderCandidateResults(candidates) {
+    const medals = ['🥇', '🥈', '🥉'];
+
+    return candidates.map((c, i) => {
+      if (c.error) {
+        return `
+          <div class="candidate-card">
+            <div class="candidate-header">
+              <span class="candidate-medal">❌</span>
+              <div class="candidate-info">
+                <div class="candidate-name">${c.name}</div>
+                <div class="candidate-stats" style="color: #ef4444;">${c.error}</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      const medal = i < 3 ? medals[i] : `#${i + 1}`;
+      const deltaClass = c.rankDelta > 0 ? 'positive' : (c.rankDelta < 0 ? 'negative' : 'neutral');
+      const deltaText = c.rankDelta > 0 ? `+${c.rankDelta}` : (c.rankDelta < 0 ? `${c.rankDelta}` : '±0');
+
+      const papersHtml = c.stats.papers.slice(0, 20).map(p => `
+        <div class="paper-item">
+          <span class="paper-venue">${p.venue}</span>
+          <span class="paper-year">${p.year}</span>:
+          ${p.title} <small>(${p.authors} authors, ${p.adjusted.toFixed(2)} adj)</small>
         </div>
       `).join('');
 
-      container.querySelectorAll('.sim-item').forEach(item => {
-        item.addEventListener('click', () => {
-          const profName = item.dataset.name;
-          const profObj = { name: profName, isFaculty: true };
-          document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name}`;
-          document.getElementById('step-faculty').classList.add('hidden');
-          document.getElementById('step-results').classList.remove('hidden');
-          runSimulation(profObj, selectedUniv, true);
-        });
-      });
-    };
-
-    filterAndRender('');
-
-    facultySearch.oninput = (e) => filterAndRender(e.target.value.toLowerCase());
-  };
+      return `
+        <div class="candidate-card">
+          <div class="candidate-header">
+            <span class="candidate-medal">${medal}</span>
+            <div class="candidate-info">
+              <div class="candidate-name">${c.name}</div>
+              <div class="candidate-stats">${c.stats.totalPapers} papers, ${c.stats.totalAdjusted.toFixed(1)} adjusted</div>
+            </div>
+            <div class="candidate-impact">
+              <div class="candidate-rank-delta ${deltaClass}">${deltaText} ranks</div>
+            </div>
+          </div>
+          <button class="papers-toggle">▶ Show Papers</button>
+          <div class="papers-list">
+            ${papersHtml || '<div class="paper-item">No counted papers</div>'}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
 }
 
 async function runSimulation(author, school, isRemove = false) {
@@ -1782,15 +1845,7 @@ async function runSimulation(author, school, isRemove = false) {
 
   for (const [area, areaStats] of Object.entries(stats.areas)) {
     // Handle both old format (if cached/prof data) and new format (DBLP stats)
-    // Actually standard prof data is still flattened? No, prof.areas is also { adjusted, count } usually?
-    // Let's check appData.professors structure. In data.js loadData:
-    // professors[name].areas[area] = { count: ..., adjusted: ... }
-    // So actually even 'isRemove' logic might have been relying on object access earlier? 
-    // Wait, let's look at `isRemove` block:
-    // `flatAreas[k] = v.adjusted` -> Here it was explicitly flattening to a number! (Lines 846-848)
-    // But `window.dblp.stats` now returns objects.
 
-    // So I just need to handle the case where `areaStats` is an object.
     const val = typeof areaStats === 'number' ? areaStats : areaStats.adjusted;
 
     if (!schoolClone.areas[area]) {
