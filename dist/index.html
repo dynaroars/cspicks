@@ -11,9 +11,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
     rel="stylesheet">
-  <script type="module" crossorigin src="/cspicks/assets/main-BsRrb30y.js"></script>
-  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-CAvAE1eP.js">
-  <link rel="stylesheet" crossorigin href="/cspicks/assets/data-DPmrZ3B8.css">
+  <script type="module" crossorigin src="/cspicks/assets/main-Ddn-rMf-.js"></script>
+  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-Hl9q1mSV.js">
+  <link rel="stylesheet" crossorigin href="/cspicks/assets/data-BXA3x_4X.css">
 </head>
 
 <body>
@@ -104,42 +104,33 @@
           <button class="close-modal">&times;</button>
         </div>
         <div class="modal-body">
-          <div class="sim-mode-toggle"
-            style="margin-bottom: 1.5rem; display: flex; gap: 1rem; justify-content: center;">
-            <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
-              <input type="radio" name="sim-mode" value="add" checked> Add Author
-            </label>
-            <label style="cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
-              <input type="radio" name="sim-mode" value="remove"> Remove Faculty
-            </label>
-          </div>
-
-          <div class="sim-step" id="step-author">
-            <h3>1. Find an Author (DBLP)</h3>
-            <input type="text" id="sim-author-search" placeholder="Type name (e.g. Geoffrey Hinton)...">
-            <div id="sim-author-results" class="sim-list"></div>
-          </div>
-
-          <div class="sim-step hidden" id="step-univ">
-            <h3 id="step-univ-title">2. Select Target University</h3>
-            <div class="selected-item" id="selected-author-display"></div>
-            <input type="text" id="sim-univ-search" placeholder="Type university name...">
+          <!-- Step 1: Select University -->
+          <div class="sim-step" id="step-univ-first">
+            <h3>1. Select Target University</h3>
+            <input type="text" id="sim-univ-search" placeholder="Type university name (e.g. George Mason)...">
             <div id="sim-univ-results" class="sim-list"></div>
           </div>
 
-          <div class="sim-step hidden" id="step-faculty">
-            <h3>2. Select Faculty to Remove</h3>
-            <div class="selected-item" id="selected-univ-display-remove"></div>
-            <input type="text" id="sim-faculty-search" placeholder="Search faculty name...">
-            <div id="sim-faculty-results" class="sim-list"></div>
+          <!-- Step 2: Enter Candidates -->
+          <div class="sim-step hidden" id="step-candidates">
+            <h3>2. Enter Faculty Candidates</h3>
+            <div class="selected-item" id="selected-univ-display"></div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+              Paste candidate names below (one per line). We'll search DBLP for each.
+            </p>
+            <textarea id="sim-candidates-input" rows="6" placeholder="John Smith&#10;Jane Doe&#10;Bob Johnson"></textarea>
+            <button id="sim-analyze-btn" class="btn-primary" style="margin-top: 1rem; width: 100%;">
+              Analyze Candidates
+            </button>
           </div>
 
+          <!-- Step 3: Results -->
           <div class="sim-step hidden" id="step-results">
-            <h3>3. Impact Analysis</h3>
-            <div class="selected-item" id="selected-univ-display"></div>
-            <div id="sim-loading" class="hidden">Calculating... <span class="spinner">↻</span></div>
-            <div id="sim-impact-display"></div>
-            <button id="sim-reset-btn" class="btn-secondary">Start Over</button>
+            <h3>3. Candidate Rankings</h3>
+            <div class="selected-item" id="selected-univ-display-results"></div>
+            <div id="sim-loading" class="hidden">Analyzing candidates... <span class="spinner">↻</span></div>
+            <div id="sim-candidates-results"></div>
+            <button id="sim-reset-btn" class="btn-secondary" style="margin-top: 1rem;">Start Over</button>
           </div>
         </div>
       </div>
