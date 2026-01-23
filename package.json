@@ -16,8 +16,10 @@
     "vite": "^7.2.4"
   },
   "dependencies": {
+    "@xmldom/xmldom": "^0.8.11",
     "chart.js": "^4.5.1",
     "he": "^1.2.0",
+    "node-fetch": "^3.3.2",
     "papaparse": "^5.5.3"
   }
 }

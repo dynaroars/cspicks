@@ -19,12 +19,14 @@ let endYear = DEFAULT_END_YEAR;
 let selectedRegion = 'us';
 let historicalMode = false;
 let showRankings = false;
+let confSet = 'csrankings';
 
 const params = new URLSearchParams(window.location.search);
 if (params.has('start')) startYear = parseInt(params.get('start'));
 if (params.has('end')) endYear = parseInt(params.get('end'));
 if (params.has('region')) selectedRegion = params.get('region');
 if (params.has('historical')) historicalMode = params.get('historical') === 'true';
+if (params.has('confSet')) confSet = params.get('confSet');
 async function init() {
   setupFilters();
   setupSearch();
@@ -38,7 +40,7 @@ async function init() {
       loadData(),
       fetch(`${GITHUB_RAW}/professor_history_openalex.json`).then(r => r.ok ? r.json() : null).catch(() => null),
       fetch(`${GITHUB_RAW}/school-aliases.json`).then(r => r.ok ? r.json() : null).catch(() => null),
-      fetchCsv('./manual_affiliations.csv').catch(() => []),
+      fetchCsv(`${GITHUB_RAW}/manual_affiliations.csv`).catch(() => []),
     ]);
 
     rawData = data;
@@ -49,8 +51,19 @@ async function init() {
     const historicalToggle = document.getElementById('historical-mode');
     if (historicalToggle) {
       historicalToggle.checked = historicalMode;
+      const toggleYearVisibility = () => {
+        const yearFilterGroup = document.getElementById('year-filter-group');
+        if (yearFilterGroup) {
+          yearFilterGroup.style.display = historicalMode ? 'none' : 'block';
+        }
+      };
+
+      // Set initial state
+      toggleYearVisibility();
+
       historicalToggle.addEventListener('change', () => {
         historicalMode = historicalToggle.checked;
+        toggleYearVisibility();
         refreshData();
         updateURL();
       });
@@ -69,11 +82,22 @@ async function init() {
       });
     }
 
+    // Conference Set toggle
+    const confSetSelect = document.getElementById('conf-set');
+    if (confSetSelect) {
+      confSetSelect.value = confSet;
+      confSetSelect.addEventListener('change', () => {
+        confSet = confSetSelect.value;
+        refreshData();
+        updateURL();
+      });
+    }
+
     // Apply filters
     if (historicalMode && historyMap && aliasMap) {
-      appData = filterByYears(rawData, startYear, endYear, selectedRegion, historyMap, aliasMap);
+      appData = filterByYears(rawData, startYear, endYear, selectedRegion, historyMap, aliasMap, confSet);
     } else {
-      appData = filterByYears(rawData, startYear, endYear, selectedRegion);
+      appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
     }
 
     console.log(`Data loaded (${startYear}-${endYear}, region: ${selectedRegion}, historical: ${historicalMode}):`, Object.keys(appData.professors).length, 'professors', Object.keys(appData.schools).length, 'schools');
@@ -109,6 +133,7 @@ function updateURL() {
   params.set('end', endYear);
   params.set('region', selectedRegion);
   if (historicalMode) params.set('historical', 'true');
+  if (confSet !== 'csrankings') params.set('confSet', confSet);
 
   const q = document.getElementById('main-search').value;
   if (q) params.set('q', q);
@@ -121,12 +146,15 @@ function refreshData() {
   if (!rawData) return;
 
   if (historicalMode && historyMap && aliasMap) {
-    appData = filterByYears(rawData, startYear, endYear, selectedRegion, historyMap, aliasMap);
+    // In Historical Mode, checking "All Time" (e.g. 1970-Current)
+    const histStart = 1970;
+    const histEnd = new Date().getFullYear();
+    appData = filterByYears(rawData, histStart, histEnd, selectedRegion, historyMap, aliasMap, confSet);
   } else {
-    appData = filterByYears(rawData, startYear, endYear, selectedRegion);
+    appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
   }
 
-  console.log(`Refreshed: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}`);
+  console.log(`Refreshed: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}, ConfSet=${confSet}`);
 
   // Re-run current search
   const query = document.getElementById('main-search').value.toLowerCase();
@@ -355,6 +383,10 @@ function renderProfessorCardContent(prof) {
     const history = historyMap[prof.name];
     const currentYear = new Date().getFullYear();
 
+    // In Historical Mode, use full year range for display logic
+    const displayStartYear = historicalMode ? 1970 : startYear;
+    const displayEndYear = historicalMode ? currentYear : endYear;
+
     const affiliationMap = new Map();
 
     // Get publication years from the professor's filtered pubs
@@ -391,7 +423,7 @@ function renderProfessorCardContent(prof) {
       const duration = seg.end - seg.start + 1;
       const isSignificant = duration >= 2 || seg.end >= currentYear;
 
-      if (hasPapersInSegment && isSignificant && seg.end >= startYear && seg.start <= endYear) {
+      if (hasPapersInSegment && isSignificant && seg.end >= displayStartYear && seg.start <= displayEndYear) {
         let schoolName = seg.school;
         if (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, seg.school)) {
           schoolName = aliasMap[seg.school];
@@ -402,6 +434,8 @@ function renderProfessorCardContent(prof) {
 
         // FILTER 2: must have papers attributed to this school
         const hasPapersAtSchool = schoolsWithPapers.has(schoolName);
+
+
 
         if (schoolName && isAcademic && hasPapersAtSchool) {
           if (affiliationMap.has(schoolName)) {
@@ -472,6 +506,25 @@ function renderProfessorCardContent(prof) {
           `;
   }).join('')}
       </div>
+      
+      ${(() => {
+      if (!prof.pubs || prof.pubs.length === 0) return '';
+
+      const uniqueId = prof.name.replace(/[^a-zA-Z0-9]/g, '_') + '_papers';
+      const sortedPubs = [...prof.pubs].sort((a, b) => b.year - a.year);
+
+      const pubsHtml = sortedPubs.map(p => {
+        const areaLabel = areaLabels[p.area] || p.area.toUpperCase();
+        return `<div class="paper-item"><span class="paper-venue">${areaLabel}</span> <span class="paper-year">${p.year}</span>: ${p.count} paper(s), ${p.adjustedcount.toFixed(2)} adj</div>`;
+      }).join('');
+
+      return `
+          <button class="papers-toggle" onclick="const list = document.getElementById('${uniqueId}'); list.classList.toggle('visible'); this.textContent = list.classList.contains('visible') ? '▼ Hide Papers' : '▶ Show Papers';">▶ Show Papers</button>
+          <div id="${uniqueId}" class="papers-list">
+            ${pubsHtml}
+          </div>
+        `;
+    })()}
   `;
 }
 
@@ -754,11 +807,11 @@ function setupFilters() {
     }
 
     if (historicalMode && historyMap && aliasMap) {
-      appData = filterByYears(rawData, startYear, endYear, selectedRegion, historyMap, aliasMap);
+      appData = filterByYears(rawData, startYear, endYear, selectedRegion, historyMap, aliasMap, confSet);
     } else {
-      appData = filterByYears(rawData, startYear, endYear, selectedRegion);
+      appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
     }
-    console.log(`Filtered: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}`);
+    console.log(`Filtered: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}, ConfSet=${confSet}`);
 
     updateURL();
 
@@ -907,7 +960,7 @@ function getDBLPUrl(name) {
 const areaLabels = {
   'ai': 'AI',
   'vision': 'Computer Vision',
-  'mlmining': 'Machine Learning & Data Mining',
+  'mlmining': 'Machine Learning',
   'nlp': 'Natural Language Processing',
   'inforet': 'Information Retrieval',
   'arch': 'Computer Architecture',
@@ -1250,7 +1303,7 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
     const wStart = Math.max(startYear, y - Math.min(windowSize, 10));
     const wEnd = y;
     try {
-      const result = filterByYears({ ...rawData }, wStart, wEnd, selectedRegion, historyMap, aliasMap);
+      const result = filterByYears({ ...rawData }, wStart, wEnd, selectedRegion, historyMap, aliasMap, confSet);
       const school = result.schools[schoolName];
       years.push(y);
       ranks.push(school ? school.rank : null);
@@ -1670,33 +1723,192 @@ function setupSimulation() {
     resultsContainer.innerHTML = '';
 
     const candidateResults = [];
+    const isSingleCandidate = uniqueNames.length === 1;
+
+    const fuzzyMatch = (nameA, nameB) => {
+      const a = cleanName(nameA).toLowerCase();
+      const b = cleanName(nameB).toLowerCase();
+      if (a === b) return true;
+      if (Math.abs(a.length - b.length) > 3) return false;
+
+      const matrix = [];
+      for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
+      for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
+
+      for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+          if (b.charAt(i - 1) === a.charAt(j - 1)) {
+            matrix[i][j] = matrix[i - 1][j - 1];
+          } else {
+            matrix[i][j] = Math.min(
+              matrix[i - 1][j - 1] + 1,
+              matrix[i][j - 1] + 1,
+              matrix[i - 1][j] + 1
+            );
+          }
+        }
+      }
+
+      const distance = matrix[b.length][a.length];
+      return distance <= 2;
+    };
 
     for (const name of uniqueNames) {
       try {
-        const searchResults = await window.dblp.search(name);
-        if (!searchResults || searchResults.length === 0) {
-          candidateResults.push({ name, error: 'Not found in DBLP' });
-          continue;
+        let profData = null;
+        let profName = name;
+
+        if (appData.professors[name]) {
+          profData = appData.professors[name];
+          profName = name;
+        } else {
+          for (const pName of Object.keys(appData.professors)) {
+            if (fuzzyMatch(pName, name)) {
+              profData = appData.professors[pName];
+              profName = pName;
+              break;
+            }
+          }
         }
 
-        const best = searchResults[0];
-        const stats = await window.dblp.stats(best.pid, startYear, endYear);
-        if (!stats) {
-          candidateResults.push({ name, error: 'Failed to fetch stats' });
-          continue;
+        let stats;
+        let displayName = name;
+        let usedCSRankings = false;
+
+        if (profData && profData.pubs && profData.pubs.length > 0) {
+          // Use CSRankings data for existing professors
+          displayName = profData.name;
+
+          // Filter pubs by year range and convert to stats format
+          const filteredPubs = profData.pubs.filter(p => p.year >= startYear && p.year <= endYear);
+
+          console.log('CSRankings match for:', name, '→', profData.name, 'pubs:', profData.pubs.length, 'filtered:', filteredPubs.length);
+
+          if (filteredPubs.length === 0) {
+            // No papers in this year range - show as such
+            candidateResults.push({ name: displayName, error: `No papers in ${startYear}-${endYear}` });
+            continue;
+          }
+
+          usedCSRankings = true;
+
+          stats = {
+            totalAdjusted: 0,
+            totalPapers: 0,
+            areas: {},
+            papers: []
+          };
+
+          filteredPubs.forEach(pub => {
+            stats.totalAdjusted += pub.adjustedcount;
+            stats.totalPapers += pub.count;
+
+            if (!stats.areas[pub.area]) {
+              stats.areas[pub.area] = { count: 0, adjusted: 0 };
+            }
+            stats.areas[pub.area].count += pub.count;
+            stats.areas[pub.area].adjusted += pub.adjustedcount;
+
+            stats.papers.push({
+              title: `${pub.area.toUpperCase()} publication`,
+              venue: pub.area.toUpperCase(),
+              year: pub.year,
+              authors: Math.round(1 / pub.adjustedcount),
+              adjusted: pub.adjustedcount,
+              area: pub.area
+            });
+          });
+
+          stats.papers.sort((a, b) => b.year - a.year);
+        } else {
+          // External candidate - query DBLP
+          const searchResults = await window.dblp.search(name);
+          if (!searchResults || searchResults.length === 0) {
+            candidateResults.push({ name, error: 'Not found in DBLP or CSRankings' });
+            continue;
+          }
+
+          const best = searchResults[0];
+          displayName = best.name;
+
+          stats = await window.dblp.stats(best.pid, startYear, endYear);
+          if (!stats) {
+            candidateResults.push({ name, error: 'Failed to fetch stats' });
+            continue;
+          }
         }
 
-        const rankDelta = calculateRankImpact(stats, selectedUniv);
+        let sourceSchool = null;
+        let isRemovalMode = false;
+
+        // Get all name variants to check (includes DBLP aliases)
+        const namesToCheck = [displayName];
+        if (stats.aliases && stats.aliases.length > 0) {
+          stats.aliases.forEach(alias => {
+            if (!namesToCheck.includes(alias)) namesToCheck.push(alias);
+          });
+        }
+
+        const targetFaculty = new Set();
+        Object.values(selectedUniv.areas).forEach(a => a.faculty.forEach(f => targetFaculty.add(f)));
+
+        // Check if any alias matches target school facult
+        outerRemoval:
+        for (const nameVariant of namesToCheck) {
+          for (const f of targetFaculty) {
+            if (fuzzyMatch(f, nameVariant)) {
+              isRemovalMode = true;
+              break outerRemoval;
+            }
+          }
+        }
+
+        // Check if any alias matches another school's faculty (transfer mode)
+        if (!isRemovalMode) {
+          outerSource:
+          for (const s of Object.values(appData.schools)) {
+            if (s.name === selectedUniv.name) continue;
+            const sFaculty = new Set();
+            Object.values(s.areas).forEach(a => a.faculty.forEach(f => sFaculty.add(f)));
+
+            for (const nameVariant of namesToCheck) {
+              for (const f of sFaculty) {
+                if (fuzzyMatch(f, nameVariant)) {
+                  sourceSchool = s;
+                  break outerSource;
+                }
+              }
+            }
+          }
+        }
+
+        const ops = [];
+        if (isRemovalMode) {
+          ops.push({ school: selectedUniv, stats, isRemoval: true });
+        } else {
+          ops.push({ school: selectedUniv, stats, isRemoval: false });
+        }
+
+        if (sourceSchool && !isRemovalMode) {
+          ops.push({ school: sourceSchool, stats, isRemoval: true });
+        }
+        const impactMap = calculateRankImpact(ops);
+        const rankDelta = impactMap.get(selectedUniv.name) || 0;
+        const sourceImpact = sourceSchool ? (impactMap.get(sourceSchool.name) || 0) : null;
 
         candidateResults.push({
-          name: best.name,
-          pid: best.pid,
+          name: displayName,
           stats,
           rankDelta,
+          isRemoval: isRemovalMode,
+          usedCSRankings: usedCSRankings,
+          sourceSchool: sourceSchool ? { name: sourceSchool.name, delta: sourceImpact } : null,
           error: null
         });
       } catch (err) {
-        candidateResults.push({ name, error: 'Error fetching data' });
+        console.error('Simulator error for:', name, err);
+        console.error('Stack:', err.stack);
+        candidateResults.push({ name, error: 'Error fetching data: ' + err.message });
       }
     }
 
@@ -1718,19 +1930,32 @@ function setupSimulation() {
     });
   });
 
-  function calculateRankImpact(stats, school) {
-    const schoolClone = JSON.parse(JSON.stringify(school));
+  function calculateRankImpact(ops) {
+    const schoolClones = new Map();
+    ops.forEach(op => {
+      const clone = JSON.parse(JSON.stringify(op.school));
+      schoolClones.set(op.school.name, clone);
+    });
 
-    for (const [area, areaStats] of Object.entries(stats.areas)) {
-      const val = typeof areaStats === 'number' ? areaStats : areaStats.adjusted;
-      if (!schoolClone.areas[area]) {
-        schoolClone.areas[area] = { count: 0, adjusted: 0, faculty: [] };
+    // Apply stats changes
+    ops.forEach(op => {
+      const clone = schoolClones.get(op.school.name);
+      for (const [area, areaStats] of Object.entries(op.stats.areas)) {
+        const val = typeof areaStats === 'number' ? areaStats : areaStats.adjusted;
+        if (!clone.areas[area]) {
+          clone.areas[area] = { count: 0, adjusted: 0, faculty: [] };
+        }
+        if (op.isRemoval) {
+          clone.areas[area].adjusted = Math.max(0, clone.areas[area].adjusted - val);
+        } else {
+          clone.areas[area].adjusted += val;
+        }
       }
-      schoolClone.areas[area].adjusted += val;
-    }
+    });
 
+    // Construct full list for ranking
     const allSchools = Object.values(appData.schools).map(s =>
-      s.name === school.name ? schoolClone : s
+      schoolClones.has(s.name) ? schoolClones.get(s.name) : s
     );
 
     const areas = new Set();
@@ -1752,8 +1977,14 @@ function setupSimulation() {
 
     allSchools.sort((a, b) => b._simScore - a._simScore);
 
-    const newRank = allSchools.findIndex(s => s.name === school.name) + 1;
-    return school.rank - newRank;
+    const deltaMap = new Map();
+    ops.forEach(op => {
+      const newRank = allSchools.findIndex(s => s.name === op.school.name) + 1;
+      const delta = op.school.rank - newRank;
+      deltaMap.set(op.school.name, delta);
+    });
+
+    return deltaMap;
   }
 
   function renderCandidateResults(candidates) {
@@ -1778,6 +2009,31 @@ function setupSimulation() {
       const deltaClass = c.rankDelta > 0 ? 'positive' : (c.rankDelta < 0 ? 'negative' : 'neutral');
       const deltaText = c.rankDelta > 0 ? `+${c.rankDelta}` : (c.rankDelta < 0 ? `${c.rankDelta}` : '±0');
 
+      let actionLabel = '';
+      if (c.isRemoval) {
+        actionLabel = `<span style="font-size: 0.8em; color: #ef4444; background: #fee2e2; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">Removing</span>`;
+      } else if (c.sourceSchool) {
+        actionLabel = `<span style="font-size: 0.8em; color: #3b82f6; background: #dbeafe; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">from ${c.sourceSchool.name}</span>`;
+      }
+
+      let dataSourceBadge = '';
+      if (c.usedCSRankings) {
+        dataSourceBadge = `<span style="font-size: 0.7em; color: #059669; background: #d1fae5; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">CSRankings</span>`;
+      }
+
+      let sourceImpactHtml = '';
+      if (c.sourceSchool) {
+        const sDelta = c.sourceSchool.delta;
+        const sClass = sDelta > 0 ? 'positive' : (sDelta < 0 ? 'negative' : 'neutral');
+        const sText = sDelta > 0 ? `+${sDelta}` : (sDelta < 0 ? `${sDelta}` : '±0');
+        sourceImpactHtml = `
+            <div style="font-size: 0.85rem; margin-top: 4px; color: #666; display: flex; align-items: center; justify-content: flex-end;">
+               <span style="margin-right: 6px;">${c.sourceSchool.name}:</span>
+               <span class="${sClass}" style="font-weight: 600;">${sText} ranks</span>
+            </div>
+        `;
+      }
+
       const papersHtml = c.stats.papers.slice(0, 20).map(p => `
         <div class="paper-item">
           <span class="paper-venue">${p.venue}</span>
@@ -1791,11 +2047,16 @@ function setupSimulation() {
           <div class="candidate-header">
             <span class="candidate-medal">${medal}</span>
             <div class="candidate-info">
-              <div class="candidate-name">${c.name}</div>
+              <div class="candidate-name">
+                ${c.name}
+                ${actionLabel}
+                ${dataSourceBadge}
+              </div>
               <div class="candidate-stats">${c.stats.totalPapers} papers, ${c.stats.totalAdjusted.toFixed(1)} adjusted</div>
             </div>
             <div class="candidate-impact">
               <div class="candidate-rank-delta ${deltaClass}">${deltaText} ranks</div>
+              ${sourceImpactHtml}
             </div>
           </div>
           <button class="papers-toggle">▶ Show Papers</button>

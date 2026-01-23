@@ -330,15 +330,15 @@ export const parentMap = {
   'sigir': 'inforet', 'www': 'inforet',
   'asplos': 'arch', 'isca': 'arch', 'micro': 'arch', 'hpca': 'arch',
   'ccs': 'sec', 'oakland': 'sec', 'usenixsec': 'sec', 'ndss': 'sec',
-  'vldb': 'mod', 'sigmod': 'mod', 'icde': 'mod', 'pods': 'mod',
+  'vldb': 'mod', 'sigmod': 'mod', 'icde': 'mod', 'pods': 'mod', 'pacmmod': 'mod',
   'dac': 'da', 'iccad': 'da',
   'emsoft': 'bed', 'rtas': 'bed', 'rtss': 'bed',
   'sc': 'hpc', 'hpdc': 'hpc', 'ics': 'hpc',
   'mobicom': 'mobile', 'mobisys': 'mobile', 'sensys': 'mobile',
   'imc': 'metrics', 'sigmetrics': 'metrics',
   'osdi': 'ops', 'sosp': 'ops', 'eurosys': 'ops', 'fast': 'ops', 'usenixatc': 'ops',
-  'popl': 'plan', 'pldi': 'plan', 'oopsla': 'plan', 'icfp': 'plan',
-  'fse': 'soft', 'icse': 'soft', 'ase': 'soft', 'issta': 'soft',
+  'popl': 'plan', 'pldi': 'plan', 'oopsla': 'plan', 'icfp': 'plan', 'pacmpl': 'plan',
+  'fse': 'soft', 'icse': 'soft', 'ase': 'soft', 'issta': 'soft', 'kbse': 'soft', 'sigsoft': 'soft', 'pacmse': 'soft',
   'nsdi': 'comm', 'sigcomm': 'comm',
   'siggraph': 'graph', 'siggraph-asia': 'graph', 'eurographics': 'graph',
   'focs': 'act', 'soda': 'act', 'stoc': 'act',
@@ -352,14 +352,45 @@ export const parentMap = {
   'sigcse': 'csed'
 };
 
+// CORE A* conferences
+export const coreAStarMap = {
+  // AI
+  'aaai': 'ai', 'ijcai': 'ai', 'ecai': 'ai',
+  // ML
+  'icml': 'mlmining', 'nips': 'mlmining', 'iclr': 'mlmining', 'kdd': 'mlmining',
+  // CV
+  'cvpr': 'vision', 'iccv': 'vision', 'eccv': 'vision',
+  // NLP
+  'acl': 'nlp', 'emnlp': 'nlp', 'naacl': 'nlp',
+  // Security
+  'oakland': 'sec', 'usenixsec': 'sec', 'ccs': 'sec', 'ndss': 'sec',
+  // Systems & Architecture
+  'osdi': 'ops', 'sosp': 'ops', 'isca': 'arch', 'asplos': 'arch', 'eurosys': 'ops',
+  // Theory
+  'stoc': 'act', 'focs': 'act', 'soda': 'act', 'icalp': 'act',
+  // HCI
+  'chiconf': 'chi', 'uist': 'chi', 'cscw': 'chi', 'ubicomp': 'chi',
+  // Networks
+  'sigcomm': 'comm', 'nsdi': 'comm', 'infocom': 'comm',
+  // Graphics
+  'siggraph': 'graph', 'siggraph-asia': 'graph', 'eurographics': 'graph',
+  // SE
+  'icse': 'soft', 'fse': 'soft', 'ase': 'soft', 'issta': 'soft',
+  // PL
+  'popl': 'plan', 'pldi': 'plan', 'oopsla': 'plan', 'icfp': 'plan'
+};
+
 // Get unique top-level areas
 const topLevelAreas = [...new Set(Object.values(parentMap))];
 const numAreas = topLevelAreas.length;
 
-export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null) {
+export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'csrankings') {
   const { professors, schools } = data;
   const filteredProfs = {};
   const filteredSchools = {};
+
+  // Select conference map based on confSet
+  const confMap = confSet === 'core' ? coreAStarMap : parentMap;
 
   // Helper to check if school is in selected region
   const isInRegion = (schoolName) => {
@@ -378,7 +409,8 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
     const prof = professors[name];
 
     // Only include professors from schools in the selected region
-    if (!isInRegion(prof.affiliation)) {
+
+    if (!historyMap && !isInRegion(prof.affiliation)) {
       continue;
     }
 
@@ -394,8 +426,8 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
       const areaStats = {};
 
       filteredPubs.forEach(pub => {
-        // 1. Stats for Professor Object
-        const area = parentMap[pub.area] || pub.area;
+        // 1. Stats for Professor Object - use confMap
+        const area = confMap[pub.area] || parentMap[pub.area] || pub.area;
         if (!areaStats[area]) {
           areaStats[area] = { count: 0, adjusted: 0 };
         }

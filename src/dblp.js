@@ -38,11 +38,22 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(text, "text/xml");
 
+        // Extract author aliases from the <person> element
+        const aliases = [];
+        const personNode = xmlDoc.getElementsByTagName("person")[0];
+        if (personNode) {
+            const authorNodes = personNode.getElementsByTagName("author");
+            for (let i = 0; i < authorNodes.length; i++) {
+                aliases.push(authorNodes[i].textContent);
+            }
+        }
+
         const stats = {
             totalAdjusted: 0,
             totalPapers: 0,
             areas: {},
-            papers: []
+            papers: [],
+            aliases: aliases
         };
 
         const records = xmlDoc.getElementsByTagName("r");
@@ -69,15 +80,31 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
             if (!parentMap[confKey]) continue;
             if (nextTier[confKey]) continue;
 
+            // handling for article numbers (e.g., "146:1-146:12")
             const pagesNode = pub.getElementsByTagName("pages")[0];
-            if (!pagesNode) continue;
+            if (pagesNode) {
+                let pagesStr = pagesNode.textContent;
 
-            const pagesStr = pagesNode.textContent;
-            const rangeMatch = pagesStr.match(/(\d+)-(\d+)/);
-            if (rangeMatch) {
-                const start = parseInt(rangeMatch[1]);
-                const end = parseInt(rangeMatch[2]);
-                if ((end - start + 1) < 6) continue;
+                // If format is ArticleNo:PageStart-ArticleNo:PageEnd, strip ArticleNo
+                // Example: 19:1-19:9 -> 1-9
+                if (pagesStr.includes(':')) {
+                    pagesStr = pagesStr.replace(/(\d+):/g, '');
+                }
+
+                const rangeMatch = pagesStr.match(/(\d+)-(\d+)/);
+                if (rangeMatch) {
+                    const start = parseInt(rangeMatch[1]);
+                    const end = parseInt(rangeMatch[2]);
+                    if ((end - start + 1) < 6) continue;
+                } else {
+                    // Fallback: If it was one of our special article venues and we couldn't find a range,
+                    // we accept it (matches previous behavior for "Article 66")
+                    const isArticleVenue = confKey === 'siggraph' || confKey === 'siggraph-asia' ||
+                        confKey === 'pacmmod' || confKey === 'pacmpl' ||
+                        confKey === 'sigsoft' || confKey === 'kbse' || confKey === 'pacmse';
+
+                    if (!isArticleVenue) continue;
+                }
             } else {
                 continue;
             }

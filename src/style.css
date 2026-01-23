@@ -474,7 +474,7 @@ input[type="text"]::placeholder {
 .modal-content {
   background: #ffffff;
   width: 90%;
-  max-width: 550px;
+  max-width: 950px;
   border-radius: 24px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -658,9 +658,17 @@ input[type="text"]::placeholder {
   font-weight: 700;
 }
 
-.candidate-rank-delta.positive { color: #10b981; }
-.candidate-rank-delta.negative { color: #ef4444; }
-.candidate-rank-delta.neutral { color: var(--text-secondary); }
+.candidate-rank-delta.positive {
+  color: #10b981;
+}
+
+.candidate-rank-delta.negative {
+  color: #ef4444;
+}
+
+.candidate-rank-delta.neutral {
+  color: var(--text-secondary);
+}
 
 /* Papers toggle */
 .papers-toggle {
