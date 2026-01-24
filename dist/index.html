@@ -11,9 +11,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
     rel="stylesheet">
-  <script type="module" crossorigin src="/cspicks/assets/main-Ddn-rMf-.js"></script>
-  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-Hl9q1mSV.js">
-  <link rel="stylesheet" crossorigin href="/cspicks/assets/data-BXA3x_4X.css">
+  <script type="module" crossorigin src="/cspicks/assets/main-BerpWGnm.js"></script>
+  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-AXUpkpy2.js">
+  <link rel="stylesheet" crossorigin href="/cspicks/assets/data-CHmzjJJw.css">
 </head>
 
 <body>
@@ -49,7 +49,7 @@
           </select>
         </div>
 
-        <div class="filter-group">
+        <div class="filter-group" id="year-filter-group">
           <label>Year Range</label>
           <div class="year-inputs">
             <select id="start-year"></select>
@@ -76,6 +76,17 @@
             <span>Show Rankings</span>
           </label>
         </div>
+
+        <div class="filter-group">
+          <label for="conf-set" style="display: flex; align-items: center; gap: 0.5rem;">
+            <span>Conferences:</span>
+            <select id="conf-set"
+              style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid #ddd; font-size: 0.9rem;">
+              <option value="csrankings">CSRankings</option>
+              <option value="core">CORE A*</option>
+            </select>
+          </label>
+        </div>
       </div>
 
       <div class="actions-container">
@@ -100,7 +111,7 @@
     <div id="sim-modal" class="modal hidden">
       <div class="modal-content">
         <div class="modal-header">
-          <h2>Recruiting Simulator</h2>
+          <h2>Simulator</h2>
           <button class="close-modal">&times;</button>
         </div>
         <div class="modal-body">
@@ -118,8 +129,9 @@
             <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
               Paste candidate names below (one per line). We'll search DBLP for each.
             </p>
-            <textarea id="sim-candidates-input" rows="6" placeholder="John Smith&#10;Jane Doe&#10;Bob Johnson"></textarea>
-            <button id="sim-analyze-btn" class="btn-primary" style="margin-top: 1rem; width: 100%;">
+            <textarea id="sim-candidates-input" rows="6"
+              placeholder="John Smith&#10;Jane Doe&#10;Bob Johnson"></textarea>
+            <button id="sim-analyze-btn" class="btn-secondary" style="margin-top: 1rem; width: 100%;">
               Analyze Candidates
             </button>
           </div>
@@ -154,6 +166,16 @@
         <p>Historical affiliation data is sourced from <a href="https://openalex.org"
             target="_blank"><strong>OpenAlex</strong></a>,
           an open catalog of the world's scholarly works.</p>
+        <p style="color: #666; font-size: 0.9em;"><em>⚠️ OpenAlex uses automated extraction which may produce
+            inaccuracies in their affiliation data.
+            Some historical affiliations may be missing, incorrect, or include short-term visiting positions.
+            These limitations are inherent to the OpenAlex dataset and not errors in CSPicks.</em></p>
+        <p style="color: #059669; font-size: 0.9em;"><strong>Wrong affiliation?</strong> You can submit corrections
+          by opening an issue on
+          <a href="https://github.com/dynaroars/cspicks/issues" target="_blank">GitHub</a> with the professor's name,
+          correct school, and years.
+          We maintain a manual override file to fix OpenAlex errors.
+        </p>
         <p>All information is fetched on demand; no data is stored.</p>
         <p>Report bugs and issues on <a href="https://github.com/dynaroars/cspicks"
             target="_blank"><strong>GitHub</strong></a>.</p>

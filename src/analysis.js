@@ -1,6 +1,39 @@
 import Chart from 'chart.js/auto';
 import { loadData, filterByYears, parentMap } from './data.js';
 
+function getChartColors() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    return {
+        text: isDark ? '#e0e0e0' : '#666666',
+        grid: isDark ? '#3d4043' : '#e5e7eb',
+        title: isDark ? '#ffffff' : '#111111'
+    };
+}
+
+function updateChartDefaults() {
+    const colors = getChartColors();
+    Chart.defaults.color = colors.text;
+    Chart.defaults.borderColor = colors.grid;
+    Chart.defaults.plugins.title.color = colors.title;
+    Chart.defaults.plugins.legend.labels.color = colors.text;
+    Chart.defaults.scale.ticks.color = colors.text;
+    Chart.defaults.scale.title.color = colors.text;
+}
+
+updateChartDefaults();
+
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-theme') {
+            updateChartDefaults();
+            if (currentTab === 'schools') renderSchoolTrends();
+            else if (currentTab === 'areas') renderAreaTrends();
+            else if (currentTab === 'faculty') renderFacultyTrends();
+        }
+    });
+});
+observer.observe(document.documentElement, { attributes: true });
+
 const areaLabels = {
     'ai': 'AI',
     'vision': 'Computer Vision',
@@ -136,7 +169,7 @@ async function renderSchoolTrends() {
         const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
         const endYear = parseInt(document.getElementById('analysis-end-year')?.value) || new Date().getFullYear();
         const startYear = endYear - 10;
-        
+
 
         const labels = [];
         const dataPoints = [];

@@ -32,6 +32,7 @@ async function init() {
   setupSearch();
   setupSimulation();
   setupTooltips();
+  setupThemeToggle();
 
   try {
     // Load main data and historical affiliation data in parallel
@@ -1729,7 +1730,30 @@ function setupSimulation() {
       const a = cleanName(nameA).toLowerCase();
       const b = cleanName(nameB).toLowerCase();
       if (a === b) return true;
-      if (Math.abs(a.length - b.length) > 3) return false;
+
+      // Split into parts and compare
+      const partsA = a.split(/\s+/).filter(p => p.length > 0);
+      const partsB = b.split(/\s+/).filter(p => p.length > 0);
+
+      // Extract first and last names
+      const firstA = partsA[0];
+      const lastA = partsA[partsA.length - 1];
+      const firstB = partsB[0];
+      const lastB = partsB[partsB.length - 1];
+
+      // Check: same last name AND (same first name OR one is initial of other)
+      if (lastA === lastB) {
+        if (firstA === firstB) return true;
+        // Check if one first name starts with the other (handles initials like S. vs Samuel)
+        if (firstA.startsWith(firstB[0]) || firstB.startsWith(firstA[0])) {
+          const shorter = firstA.length < firstB.length ? firstA : firstB;
+          const longer = firstA.length < firstB.length ? firstB : firstA;
+          if (shorter.length <= 2 || longer.startsWith(shorter)) return true;
+        }
+      }
+
+      // Fallback: Levenshtein distance for close matches
+      if (Math.abs(a.length - b.length) > 5) return false;
 
       const matrix = [];
       for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
@@ -1750,7 +1774,7 @@ function setupSimulation() {
       }
 
       const distance = matrix[b.length][a.length];
-      return distance <= 2;
+      return distance <= 3;
     };
 
     for (const name of uniqueNames) {
@@ -2052,7 +2076,7 @@ function setupSimulation() {
                 ${actionLabel}
                 ${dataSourceBadge}
               </div>
-              <div class="candidate-stats">${c.stats.totalPapers} papers, ${c.stats.totalAdjusted.toFixed(1)} adjusted</div>
+              <div class="candidate-stats">${Object.keys(c.stats.areas).length} areas, ${c.stats.totalPapers} papers, ${c.stats.totalAdjusted.toFixed(1)} adjusted</div>
             </div>
             <div class="candidate-impact">
               <div class="candidate-rank-delta ${deltaClass}">${deltaText} ranks</div>
@@ -2237,6 +2261,18 @@ function setupTooltips() {
     if (target) {
       tooltip.style.display = 'none';
     }
+  });
+}
+
+function setupThemeToggle() {
+  const toggle = document.getElementById('theme-toggle');
+  if (!toggle) return;
+
+  toggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
   });
 }
 

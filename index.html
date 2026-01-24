@@ -15,6 +15,16 @@
 </head>
 
 <body>
+  <!-- Theme toggle button -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <span class="sun-icon">☀️</span>
+    <span class="moon-icon">🌙</span>
+  </button>
+  <script>
+    // Apply saved theme immediately to prevent flash
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
   <div id="app">
     <header>
       <h1>CS Picks</h1>
@@ -48,7 +58,6 @@
         </div>
 
         <div class="filter-group" id="year-filter-group">
-          <label>Year Range</label>
           <div class="year-inputs">
             <select id="start-year"></select>
             <span>to</span>
@@ -71,15 +80,9 @@
         <div class="filter-group">
           <label for="show-rankings" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
             <input type="checkbox" id="show-rankings" style="width: 16px; height: 16px; cursor: pointer;">
-            <span>Show Rankings</span>
-          </label>
-        </div>
-
-        <div class="filter-group">
-          <label for="conf-set" style="display: flex; align-items: center; gap: 0.5rem;">
-            <span>Conferences:</span>
+            <span>Show Rankings Using</span>
             <select id="conf-set"
-              style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid #ddd; font-size: 0.9rem;">
+              style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.9rem; background: var(--card-bg); color: var(--text-primary);">
               <option value="csrankings">CSRankings</option>
               <option value="core">CORE A*</option>
             </select>

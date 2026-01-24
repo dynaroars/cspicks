@@ -18,6 +18,153 @@
   --font-body: 'Inter', sans-serif;
 }
 
+/* Dark Mode */
+[data-theme="dark"] {
+  --bg-color: #1a1d21;
+  --text-color: #e0e0e0;
+  --text-primary: #ffffff;
+  --text-secondary: #ababad;
+  --accent-color: #36c5f0;
+  --card-bg: #222529;
+  --border-color: #3d4043;
+  --hover-bg: #2c2f33;
+  --primary-color: #36c5f0;
+  --primary-dark: #1d9bd1;
+  --primary-light: #2c3e50;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .theme-toggle {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle .sun-icon {
+  display: none;
+}
+
+.theme-toggle .moon-icon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+  display: none;
+}
+
+/* Dark mode overrides for modal and simulator */
+[data-theme="dark"] .modal-content {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .modal-header {
+  background: var(--hover-bg);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .modal-header h2 {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .close-modal {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .close-modal:hover {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .sim-step input,
+[data-theme="dark"] .sim-step textarea {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .sim-step input:focus,
+[data-theme="dark"] .sim-step textarea:focus {
+  border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .sim-list {
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .sim-item {
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .sim-item:hover {
+  background: var(--hover-bg);
+}
+
+[data-theme="dark"] .selected-item {
+  background: var(--hover-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .candidate-card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .papers-list {
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .paper-item {
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .impact-card,
+[data-theme="dark"] .area-gains {
+  background: var(--hover-bg);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .gain-item {
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .btn-secondary {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background: var(--card-bg);
+}
+
 /* =========================================
    Reset & Base Styles
    ========================================= */

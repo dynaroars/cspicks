@@ -1,6 +1,37 @@
 import Chart from 'chart.js/auto';
 import { loadData, filterByYears, fetchCsv, mergeAffiliationHistory } from './data.js';
 
+function getChartColors() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    return {
+        text: isDark ? '#e0e0e0' : '#666666',
+        grid: isDark ? '#3d4043' : '#e5e7eb',
+        title: isDark ? '#ffffff' : '#111111'
+    };
+}
+
+function updateChartDefaults() {
+    const colors = getChartColors();
+    Chart.defaults.color = colors.text;
+    Chart.defaults.borderColor = colors.grid;
+    Chart.defaults.plugins.title.color = colors.title;
+    Chart.defaults.plugins.legend.labels.color = colors.text;
+    Chart.defaults.scale.ticks.color = colors.text;
+    Chart.defaults.scale.title.color = colors.text;
+}
+
+updateChartDefaults();
+
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-theme') {
+            updateChartDefaults();
+            renderComparison();
+        }
+    });
+});
+observer.observe(document.documentElement, { attributes: true });
+
 const areaLabels = {
     'ai': 'AI',
     'vision': 'Computer Vision',
@@ -78,11 +109,11 @@ function setupYearSelectors() {
         startSelect.add(new Option(y, y));
         endSelect.add(new Option(y, y));
     }
-    
+
     endSelect.value = currentYear;
     startSelect.value = endSelect.value - 10;
     endYear = currentYear;
-    startYear = endYear - 10;    
+    startYear = endYear - 10;
 }
 
 
