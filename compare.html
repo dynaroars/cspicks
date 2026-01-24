@@ -20,8 +20,9 @@
             flex-wrap: wrap;
             margin-bottom: 2rem;
             padding: 1.5rem;
-            background: #f9fafb;
+            background: var(--hover-bg);
             border-radius: 12px;
+            border: 1px solid var(--border-color);
         }
 
         .school-selector {
@@ -46,7 +47,8 @@
             border-radius: 8px;
             border: 1px solid var(--border-color);
             font-size: 1rem;
-            background: white;
+            background: var(--card-bg);
+            color: var(--text-primary);
             box-sizing: border-box;
         }
 
@@ -63,7 +65,7 @@
             right: 0;
             max-height: 250px;
             overflow-y: auto;
-            background: white;
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -80,7 +82,8 @@
             padding: 0.6rem 0.75rem;
             cursor: pointer;
             font-size: 0.9rem;
-            border-bottom: 1px solid #f3f4f6;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .searchable-select .dropdown-item:hover {
@@ -101,7 +104,7 @@
         }
 
         .chart-container {
-            background: white;
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -109,6 +112,7 @@
             position: relative;
             height: 500px;
             width: 100%;
+            border: 1px solid var(--border-color);
         }
 
         .comparison-summary {
@@ -119,7 +123,7 @@
         }
 
         .summary-card {
-            background: white;
+            background: var(--card-bg);
             padding: 1.25rem;
             border-radius: 12px;
             border: 1px solid var(--border-color);
@@ -161,10 +165,32 @@
             color: var(--primary-color);
             border-bottom: 2px solid var(--primary-color);
         }
+
+        /* Dark mode overrides */
+        [data-theme="dark"] select {
+            background-color: var(--card-bg) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
     </style>
 </head>
 
 <body>
+    <!-- Theme toggle button -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+    </button>
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
     <div id="app">
         <header>
             <h1>CS Picks</h1>
