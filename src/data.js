@@ -419,13 +419,17 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
     );
 
     if (filteredPubs.length > 0) {
-      const totalCount = filteredPubs.reduce((sum, p) => sum + p.count, 0);
-      const totalAdjusted = filteredPubs.reduce((sum, p) => sum + p.adjustedcount, 0);
+      const confFilteredPubs = confSet === 'core'
+        ? filteredPubs.filter(p => coreAStarMap[p.area])
+        : filteredPubs;
+
+      const totalCount = confFilteredPubs.reduce((sum, p) => sum + p.count, 0);
+      const totalAdjusted = confFilteredPubs.reduce((sum, p) => sum + p.adjustedcount, 0);
       const totalPapers = Math.ceil(totalCount);
 
       const areaStats = {};
 
-      filteredPubs.forEach(pub => {
+      confFilteredPubs.forEach(pub => {
         // 1. Stats for Professor Object - use confMap
         const area = confMap[pub.area] || parentMap[pub.area] || pub.area;
         if (!areaStats[area]) {
@@ -495,14 +499,16 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
         });
       });
 
-      filteredProfs[name] = {
-        ...prof,
-        pubs: filteredPubs,
-        areas: areaStats,
-        totalCount,
-        totalAdjusted,
-        totalPapers
-      };
+      if (confFilteredPubs.length > 0) {
+        filteredProfs[name] = {
+          ...prof,
+          pubs: confFilteredPubs,
+          areas: areaStats,
+          totalCount,
+          totalAdjusted,
+          totalPapers
+        };
+      }
     }
   }
 

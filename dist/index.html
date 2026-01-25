@@ -11,12 +11,22 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
     rel="stylesheet">
-  <script type="module" crossorigin src="/cspicks/assets/main-BerpWGnm.js"></script>
-  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-AXUpkpy2.js">
-  <link rel="stylesheet" crossorigin href="/cspicks/assets/data-CHmzjJJw.css">
+  <script type="module" crossorigin src="/cspicks/assets/main-DDGmq72S.js"></script>
+  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-Dxs-U6P_.js">
+  <link rel="stylesheet" crossorigin href="/cspicks/assets/data-BV3NgB74.css">
 </head>
 
 <body>
+  <!-- Theme toggle button -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+    <span class="sun-icon">☀️</span>
+    <span class="moon-icon">🌙</span>
+  </button>
+  <script>
+    // Apply saved theme immediately to prevent flash
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
   <div id="app">
     <header>
       <h1>CS Picks</h1>
@@ -50,7 +60,6 @@
         </div>
 
         <div class="filter-group" id="year-filter-group">
-          <label>Year Range</label>
           <div class="year-inputs">
             <select id="start-year"></select>
             <span>to</span>
@@ -73,15 +82,9 @@
         <div class="filter-group">
           <label for="show-rankings" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
             <input type="checkbox" id="show-rankings" style="width: 16px; height: 16px; cursor: pointer;">
-            <span>Show Rankings</span>
-          </label>
-        </div>
-
-        <div class="filter-group">
-          <label for="conf-set" style="display: flex; align-items: center; gap: 0.5rem;">
-            <span>Conferences:</span>
+            <span>Show Rankings Using</span>
             <select id="conf-set"
-              style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid #ddd; font-size: 0.9rem;">
+              style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.9rem; background: var(--card-bg); color: var(--text-primary);">
               <option value="csrankings">CSRankings</option>
               <option value="core">CORE A*</option>
             </select>
