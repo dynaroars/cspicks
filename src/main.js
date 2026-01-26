@@ -21,6 +21,32 @@ let historicalMode = false;
 let showRankings = false;
 let confSet = 'csrankings';
 
+let ChartCtor = null;
+const activeSchoolCharts = new Map();
+
+function getChartColors() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  return {
+    text: isDark ? '#e0e0e0' : '#666',
+    grid: isDark ? '#3d4043' : 'rgba(0, 0, 0, 0.05)',
+    title: isDark ? '#fff' : '#111'
+  };
+}
+
+function updateChartDefaults(ctor) {
+  if (!ctor) return;
+  const colors = getChartColors();
+  ctor.defaults.color = colors.text;
+  ctor.defaults.borderColor = colors.grid;
+  ctor.defaults.plugins.title.color = colors.title;
+  ctor.defaults.plugins.legend.labels.color = colors.text;
+  if (ctor.defaults.scale) {
+    ctor.defaults.scale.ticks.color = colors.text;
+    ctor.defaults.scale.title.color = colors.text;
+  }
+}
+
+
 const params = new URLSearchParams(window.location.search);
 if (params.has('start')) startYear = parseInt(params.get('start'));
 if (params.has('end')) endYear = parseInt(params.get('end'));
@@ -52,19 +78,9 @@ async function init() {
     const historicalToggle = document.getElementById('historical-mode');
     if (historicalToggle) {
       historicalToggle.checked = historicalMode;
-      const toggleYearVisibility = () => {
-        const yearFilterGroup = document.getElementById('year-filter-group');
-        if (yearFilterGroup) {
-          yearFilterGroup.style.display = historicalMode ? 'none' : 'block';
-        }
-      };
-
-      // Set initial state
-      toggleYearVisibility();
 
       historicalToggle.addEventListener('change', () => {
         historicalMode = historicalToggle.checked;
-        toggleYearVisibility();
         refreshData();
         updateURL();
       });
@@ -146,14 +162,7 @@ function updateURL() {
 function refreshData() {
   if (!rawData) return;
 
-  if (historicalMode && historyMap && aliasMap) {
-    // In Historical Mode, checking "All Time" (e.g. 1970-Current)
-    const histStart = 1970;
-    const histEnd = new Date().getFullYear();
-    appData = filterByYears(rawData, histStart, histEnd, selectedRegion, historyMap, aliasMap, confSet);
-  } else {
-    appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
-  }
+  appData = filterByYears(rawData, startYear, endYear, selectedRegion, historicalMode ? historyMap : null, historicalMode ? aliasMap : null, confSet);
 
   console.log(`Refreshed: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}, ConfSet=${confSet}`);
 
@@ -384,9 +393,8 @@ function renderProfessorCardContent(prof) {
     const history = historyMap[prof.name];
     const currentYear = new Date().getFullYear();
 
-    // In Historical Mode, use full year range for display logic
-    const displayStartYear = historicalMode ? 1970 : startYear;
-    const displayEndYear = historicalMode ? currentYear : endYear;
+    const displayStartYear = startYear;
+    const displayEndYear = endYear;
 
     const affiliationMap = new Map();
 
@@ -1292,16 +1300,25 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
 
   await new Promise(resolve => setTimeout(resolve, 50));
 
-  const { default: Chart } = await import('chart.js/auto');
+  if (!ChartCtor) {
+    const { default: Chart } = await import('chart.js/auto');
+    ChartCtor = Chart;
+    updateChartDefaults(ChartCtor);
+  }
+  const Chart = ChartCtor;
+
+  activeSchoolCharts.set(uniqueId, { schoolName });
 
   // Compute all chart data
   const years = [];
   const ranks = [];
-  const windowSize = endYear - startYear;
+  const chartStart = startYear;
+  const chartEnd = endYear;
+  const windowSize = chartEnd - chartStart;
 
   // Rank Trend data
-  for (let y = startYear; y <= endYear; y++) {
-    const wStart = Math.max(startYear, y - Math.min(windowSize, 10));
+  for (let y = chartStart; y <= chartEnd; y++) {
+    const wStart = Math.max(chartStart, y - Math.min(windowSize, 10));
     const wEnd = y;
     try {
       const result = filterByYears({ ...rawData }, wStart, wEnd, selectedRegion, historyMap, aliasMap, confSet);
@@ -1323,7 +1340,7 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
   // Area Growth data
   const areaStats = {};
   const areaYears = [];
-  for (let y = startYear; y <= endYear; y++) {
+  for (let y = chartStart; y <= chartEnd; y++) {
     areaYears.push(y);
     areaStats[y] = {};
   }
@@ -1332,7 +1349,7 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
   const allPubs = schoolProfs.flatMap(p => p.pubs);
 
   allPubs.forEach(pub => {
-    if (pub.year >= startYear && pub.year <= endYear) {
+    if (pub.year >= chartStart && pub.year <= chartEnd) {
       const area = parentMap[pub.area] || pub.area;
       if (!areaStats[pub.year][area]) areaStats[pub.year][area] = 0;
       areaStats[pub.year][area] += pub.adjustedcount;
@@ -1374,7 +1391,7 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
   const multiAreaCounts = [];
   const diversityWindowSize = 3;
 
-  for (let y = startYear; y <= endYear; y++) {
+  for (let y = chartStart; y <= chartEnd; y++) {
     const wStart = y - diversityWindowSize + 1;
     const wEnd = y;
     const authorAreas = {};
@@ -1451,7 +1468,7 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          backgroundColor: document.documentElement.getAttribute('data-theme') === 'dark' ? 'rgba(30, 30, 30, 0.9)' : 'rgba(0, 0, 0, 0.8)',
           titleFont: { family: 'Inter', size: 10 },
           bodyFont: { family: 'Inter', size: 11 },
           displayColors: false,
@@ -1459,11 +1476,24 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
         }
       },
       scales: {
-        x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 9 }, color: '#666', maxRotation: 0, autoSkip: true, maxTicksLimit: 8 } },
+        x: {
+          grid: { display: false },
+          ticks: {
+            font: { family: 'Inter', size: 9 },
+            maxRotation: 0,
+            autoSkip: true,
+            maxTicksLimit: 8
+          }
+        },
         y: {
           reverse: true,
-          grid: { color: 'rgba(0, 0, 0, 0.05)' },
-          ticks: { font: { family: 'Inter', size: 9 }, color: '#666', stepSize: 1, precision: 0, callback: (v) => `#${v}` },
+          grid: { color: getChartColors().grid },
+          ticks: {
+            font: { family: 'Inter', size: 9 },
+            stepSize: 1,
+            precision: 0,
+            callback: (v) => `#${v}`
+          },
           suggestedMin: Math.max(1, Math.min(...validRanks) - 1),
           suggestedMax: Math.max(...validRanks) + 1
         }
@@ -1480,10 +1510,20 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
       maintainAspectRatio: false,
       devicePixelRatio: 2,
       interaction: { mode: 'nearest', axis: 'x', intersect: false },
-      scales: { y: { beginAtZero: true, title: { display: false } } },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: { display: false },
+          grid: { color: getChartColors().grid }
+        },
+        x: {
+          grid: { display: false }
+        }
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
+          backgroundColor: document.documentElement.getAttribute('data-theme') === 'dark' ? 'rgba(30, 30, 30, 0.9)' : 'rgba(0, 0, 0, 0.8)',
           yAlign: 'bottom',
           itemSort: (a, b) => b.raw - a.raw
         }
@@ -1546,12 +1586,48 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
       devicePixelRatio: 2,
       interaction: { mode: 'index', intersect: false },
       scales: {
-        y: { type: 'linear', display: true, position: 'left', beginAtZero: true, suggestedMax: 60, title: { display: false } },
-        y1: { type: 'linear', display: true, position: 'right', beginAtZero: true, grid: { drawOnChartArea: false }, title: { display: false } }
+        y: {
+          type: 'linear',
+          display: true,
+          position: 'left',
+          beginAtZero: true,
+          suggestedMax: 60,
+          title: { display: false },
+          grid: { color: getChartColors().grid },
+          ticks: {
+            color: getChartColors().text,
+            font: { family: 'Inter', size: 9 }
+          }
+        },
+        y1: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          beginAtZero: true,
+          grid: { drawOnChartArea: false, color: getChartColors().grid },
+          title: { display: false },
+          ticks: {
+            color: getChartColors().text,
+            font: { family: 'Inter', size: 9 }
+          }
+        },
+        x: {
+          grid: { display: false, color: getChartColors().grid },
+          ticks: {
+            color: getChartColors().text,
+            font: { family: 'Inter', size: 9 },
+            maxRotation: 0,
+            autoSkip: true,
+            maxTicksLimit: 8
+          }
+        }
       },
       plugins: {
         legend: { display: true, position: 'bottom', labels: { boxWidth: 12, padding: 8, font: { size: 10 } } },
         tooltip: {
+          backgroundColor: document.documentElement.getAttribute('data-theme') === 'dark' ? 'rgba(30, 30, 30, 0.9)' : 'rgba(0, 0, 0, 0.8)',
+          titleFont: { family: 'Inter', size: 10 },
+          bodyFont: { family: 'Inter', size: 11 },
           callbacks: {
             afterBody: (context) => {
               const idx = context[0].dataIndex;
@@ -1597,13 +1673,17 @@ function renderSchoolCard(school, filterArea = null) {
   });
   const facultyCount = facultySet.size;
 
+  // Calculate area count 
+  const areaCount = Object.values(school.areas).filter(a => a.adjusted > 0).length;
+
   const rankBadgeHeader = showRankings ? ` <span style="color: var(--text-secondary); font-size: 0.8em;">#${school.rank}</span>` : '';
   const facultyBadge = `<span style="color: var(--text-secondary); font-size: 0.75em; margin-left: 0.5rem;">${facultyCount} Faculty</span>`;
+  const areaBadge = `<span style="color: var(--text-secondary); font-size: 0.75em; margin-left: 0.5rem;">${areaCount} Areas</span>`;
 
   return `
     <div class="${cardClass}">
       <div class="card-header" onclick="toggleCard(this)">
-        <h2>${school.name}${rankBadgeHeader}${facultyBadge}</h2>
+        <h2>${school.name}${rankBadgeHeader}${facultyBadge}${areaBadge}</h2>
         <span class="toggle-icon">▼</span>
       </div>
       <div class="card-content">
@@ -2273,7 +2353,26 @@ function setupThemeToggle() {
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
+
+    if (ChartCtor) {
+      updateChartDefaults(ChartCtor);
+      activeSchoolCharts.forEach((data, uniqueId) => {
+        loadSchoolCharts(data.schoolName, uniqueId);
+      });
+    }
   });
+
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'data-theme' && ChartCtor) {
+        updateChartDefaults(ChartCtor);
+        activeSchoolCharts.forEach((data, uniqueId) => {
+          loadSchoolCharts(data.schoolName, uniqueId);
+        });
+      }
+    });
+  });
+  observer.observe(document.documentElement, { attributes: true });
 }
 
 init();
