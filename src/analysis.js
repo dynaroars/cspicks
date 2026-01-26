@@ -70,6 +70,7 @@ let affiliationHistory = {};
 let schoolAliases = {};
 let chartInstance = null;
 let currentTab = 'schools';
+let historicalMode = false;
 
 async function init() {
     console.log('Initializing Analysis Dashboard...');
@@ -88,6 +89,7 @@ async function init() {
 
         populateSchoolSelect();
         setupYearSelectors();
+        setupHistoricalMode();
         setupTabs();
         renderSchoolTrends();
     } catch (err) {
@@ -127,6 +129,18 @@ function setupYearSelectors() {
     };
     startSelect.addEventListener('change', refresh);
     endSelect.addEventListener('change', refresh);
+}
+
+function setupHistoricalMode() {
+    const historicalToggle = document.getElementById('analysis-historical-mode');
+    if (historicalToggle) {
+        historicalToggle.addEventListener('change', () => {
+            historicalMode = historicalToggle.checked;
+            if (currentTab === 'schools') renderSchoolTrends();
+            else if (currentTab === 'areas') renderAreaTrends();
+            else if (currentTab === 'faculty') renderFacultyTrends();
+        });
+    }
 }
 
 function setupTabs() {
@@ -182,7 +196,7 @@ async function renderSchoolTrends() {
             const wStart = Math.max(startYear, y - windowSize);
             const wEnd = y;
 
-            const result = filterByYears({ ...rawData }, wStart, wEnd, region, affiliationHistory, schoolAliases);
+            const result = filterByYears({ ...rawData }, wStart, wEnd, region, historicalMode ? affiliationHistory : null, historicalMode ? schoolAliases : null);
             const school = result.schools[targetSchool];
 
             labels.push(y);
@@ -274,7 +288,8 @@ function renderAreaTrends() {
                 } else {
                     isAtTargetSchool = false;
                 }
-            } else {
+            } else if (historicalMode) {
+                isAtTargetSchool = false; // In strict historical mode, if not in history, it's not there.
             }
 
             if (isAtTargetSchool) {

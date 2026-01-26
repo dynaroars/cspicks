@@ -105,7 +105,7 @@ function setupYearSelectors() {
     const startSelect = document.getElementById('start-year');
     const endSelect = document.getElementById('end-year');
 
-    for (let y = currentYear; y >= 1970; y--) {
+    for (let y = currentYear; y >= 2000; y--) {
         startSelect.add(new Option(y, y));
         endSelect.add(new Option(y, y));
     }

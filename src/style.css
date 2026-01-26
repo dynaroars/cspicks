@@ -305,6 +305,9 @@ footer a:hover {
   padding: 0 1.5em;
   cursor: text;
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
   font-weight: inherit;
   font-size: 1.1rem;
   font-family: inherit;
@@ -366,7 +369,7 @@ footer a:hover {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.5rem center;
   background-size: 1.25em;
@@ -978,9 +981,9 @@ input[type="text"]::placeholder {
 .activity-graph {
   margin: 1rem 0;
   padding: 0.8rem;
-  background: #f5f5f5;
+  background: var(--hover-bg);
   border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
 }
 
 .activity-graph h4 {
@@ -1017,7 +1020,7 @@ input[type="text"]::placeholder {
 .year-column .bar {
   width: 100%;
   max-width: 20px;
-  background-color: #374151;
+  background-color: var(--text-secondary);
   border-radius: 3px 3px 0 0;
   transition: height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
   min-height: 2px;
@@ -1030,7 +1033,7 @@ input[type="text"]::placeholder {
 
 .year-label {
   font-size: 10px;
-  color: #666;
+  color: var(--text-secondary);
   margin-top: 4px;
 }
 
@@ -1192,7 +1195,7 @@ input[type="text"]::placeholder {
 }
 
 .school-chart-item {
-  background: #fdfdfd;
+  background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 1rem;

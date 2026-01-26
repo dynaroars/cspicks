@@ -118,6 +118,24 @@
             <span>to</span>
             <select id="analysis-end-year" style="padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc;">
             </select>
+
+            <div style="margin-left: 2rem; display: flex; align-items: center;">
+                <label for="analysis-historical-mode"
+                    style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500; color: var(--text-secondary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                    <input type="checkbox" id="analysis-historical-mode"
+                        style="width: 16px; height: 16px; cursor: pointer;">
+                    <span>Historical Mode</span>
+                    <span class="tooltip-trigger"
+                        style="color: var(--text-secondary); cursor: help; position: relative;">
+                        ⓘ
+                        <span class="tooltip-content">When enabled, publications are credited to the institution where
+                            the author
+                            was affiliated at the time of publication. not their current institution.
+                            Use the year selectors to filter results
+                            for a specific historical period.</span>
+                    </span>
+                </label>
+            </div>
         </div>
 
         <div class="nav-tabs">
