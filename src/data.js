@@ -355,29 +355,37 @@ export const parentMap = {
 // CORE A* conferences
 export const coreAStarMap = {
   // AI
-  'aaai': 'ai', 'ijcai': 'ai', 'ecai': 'ai',
+  'aaai': 'ai', 'ijcai': 'ai', 'aamas': 'ai', 'kr': 'ai', 'icaps': 'ai',
   // ML
-  'icml': 'mlmining', 'nips': 'mlmining', 'iclr': 'mlmining', 'kdd': 'mlmining',
+  'icml': 'mlmining', 'nips': 'mlmining', 'iclr': 'mlmining', 'kdd': 'mlmining', 'colt': 'mlmining', 'icdm': 'mlmining',
   // CV
   'cvpr': 'vision', 'iccv': 'vision', 'eccv': 'vision',
   // NLP
-  'acl': 'nlp', 'emnlp': 'nlp', 'naacl': 'nlp',
+  'acl': 'nlp', 'emnlp': 'nlp',
   // Security
   'oakland': 'sec', 'usenixsec': 'sec', 'ccs': 'sec', 'ndss': 'sec',
   // Systems & Architecture
-  'osdi': 'ops', 'sosp': 'ops', 'isca': 'arch', 'asplos': 'arch', 'eurosys': 'ops',
-  // Theory
-  'stoc': 'act', 'focs': 'act', 'soda': 'act', 'icalp': 'act',
+  'osdi': 'ops', 'sosp': 'ops', 'isca': 'arch', 'asplos': 'arch', 'hpca': 'arch',
+  // Theory & Logic
+  'stoc': 'act', 'focs': 'act', 'soda': 'act', 'cav': 'log', 'lics': 'log', 'podc': 'act',
   // HCI
-  'chiconf': 'chi', 'uist': 'chi', 'cscw': 'chi', 'ubicomp': 'chi',
+  'chiconf': 'chi', 'uist': 'chi',
   // Networks
-  'sigcomm': 'comm', 'nsdi': 'comm', 'infocom': 'comm',
-  // Graphics
-  'siggraph': 'graph', 'siggraph-asia': 'graph', 'eurographics': 'graph',
+  'sigcomm': 'comm', 'infocom': 'comm', 'sensys': 'mobile', 'mobicom': 'mobile', 'percom': 'mobile', 'ipsn': 'mobile',
+  // Graphics & Multimedia
+  'siggraph': 'graph', 'siggraph-asia': 'graph', 'acmmm': 'graph', 'vr': 'graph', 'ismar': 'graph',
   // SE
-  'icse': 'soft', 'fse': 'soft', 'ase': 'soft', 'issta': 'soft',
+  'icse': 'soft', 'fse': 'soft', 'ase': 'soft',
   // PL
-  'popl': 'plan', 'pldi': 'plan', 'oopsla': 'plan', 'icfp': 'plan'
+  'popl': 'plan', 'pldi': 'plan',
+  // Databases / Info Retrieval
+  'sigmod': 'mod', 'vldb': 'mod', 'icde': 'mod', 'pods': 'mod', 'sigir': 'inforet', 'www': 'inforet',
+  // Measurement / Performance
+  'sigmetrics': 'metrics',
+  // RT
+  'rtss': 'bed',
+  // Economics
+  'ec': 'ecom'
 };
 
 // Get unique top-level areas
