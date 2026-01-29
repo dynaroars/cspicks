@@ -1,4 +1,4 @@
-import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, schoolAliases, conferenceAliases, nationalityAliases, fetchCsv, mergeAffiliationHistory } from './data.js';
+import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, coreAStarMap, schoolAliases, conferenceAliases, nationalityAliases, fetchCsv, mergeAffiliationHistory } from './data.js';
 import { nameOriginMap } from './name_map.js';
 import he from 'he';
 
@@ -1804,7 +1804,11 @@ function setupSimulation() {
     resultsContainer.innerHTML = '';
 
     const candidateResults = [];
-    const isSingleCandidate = uniqueNames.length === 1;
+
+    // Get current conference set
+    const confSetSelect = document.getElementById('conf-set');
+    const confSet = confSetSelect ? confSetSelect.value : 'csrankings';
+    const confMap = confSet === 'core' ? coreAStarMap : parentMap;
 
     const fuzzyMatch = (nameA, nameB) => {
       const a = cleanName(nameA).toLowerCase();
@@ -1828,12 +1832,14 @@ function setupSimulation() {
         if (firstA.startsWith(firstB[0]) || firstB.startsWith(firstA[0])) {
           const shorter = firstA.length < firstB.length ? firstA : firstB;
           const longer = firstA.length < firstB.length ? firstB : firstA;
-          if (shorter.length <= 2 || longer.startsWith(shorter)) return true;
+          // Only allow prefix match if the shorter one is an initial or short enough
+          // And strictly require the longer to start with shorter
+          if (shorter.length <= 2 && longer.startsWith(shorter)) return true;
         }
       }
 
       // Fallback: Levenshtein distance for close matches
-      if (Math.abs(a.length - b.length) > 5) return false;
+      if (Math.abs(a.length - b.length) > 3) return false;
 
       const matrix = [];
       for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
@@ -1854,7 +1860,14 @@ function setupSimulation() {
       }
 
       const distance = matrix[b.length][a.length];
-      return distance <= 3;
+      const maxLength = Math.max(a.length, b.length);
+
+      // distance rules
+      if (distance === 0) return true;
+      if (distance === 1 && maxLength > 3) return true;
+      if (distance === 2 && maxLength > 6) return true;
+
+      return false;
     };
 
     for (const name of uniqueNames) {
@@ -1867,6 +1880,10 @@ function setupSimulation() {
           profName = name;
         } else {
           for (const pName of Object.keys(appData.professors)) {
+            // Optimization: must match last name at least partially or be roughly same length
+            if (!pName.toLowerCase().includes(name.split(' ').pop().toLowerCase()) &&
+              Math.abs(pName.length - name.length) > 3) continue;
+
             if (fuzzyMatch(pName, name)) {
               profData = appData.professors[pName];
               profName = pName;
@@ -1883,14 +1900,19 @@ function setupSimulation() {
           // Use CSRankings data for existing professors
           displayName = profData.name;
 
-          // Filter pubs by year range and convert to stats format
-          const filteredPubs = profData.pubs.filter(p => p.year >= startYear && p.year <= endYear);
+          // Filter pubs by year range AND conference set
+          const yearFiltered = profData.pubs.filter(p => p.year >= startYear && p.year <= endYear);
 
-          console.log('CSRankings match for:', name, '→', profData.name, 'pubs:', profData.pubs.length, 'filtered:', filteredPubs.length);
+          let confFilteredPubs = yearFiltered;
+          if (confSet === 'core') {
+            confFilteredPubs = yearFiltered.filter(p => coreAStarMap[p.area]);
+          }
 
-          if (filteredPubs.length === 0) {
-            // No papers in this year range - show as such
-            candidateResults.push({ name: displayName, error: `No papers in ${startYear}-${endYear}` });
+          console.log('CSRankings match for:', name, '→', profData.name, 'pubs:', profData.pubs.length, 'filtered:', confFilteredPubs.length);
+
+          if (confFilteredPubs.length === 0) {
+            // No papers in this year range/conf set - show as such
+            candidateResults.push({ name: displayName, error: `No papers in ${startYear}-${endYear} for active set` });
             continue;
           }
 
@@ -1903,23 +1925,25 @@ function setupSimulation() {
             papers: []
           };
 
-          filteredPubs.forEach(pub => {
+          confFilteredPubs.forEach(pub => {
+            const area = confMap[pub.area] || parentMap[pub.area] || pub.area;
+
             stats.totalAdjusted += pub.adjustedcount;
             stats.totalPapers += pub.count;
 
-            if (!stats.areas[pub.area]) {
-              stats.areas[pub.area] = { count: 0, adjusted: 0 };
+            if (!stats.areas[area]) {
+              stats.areas[area] = { count: 0, adjusted: 0 };
             }
-            stats.areas[pub.area].count += pub.count;
-            stats.areas[pub.area].adjusted += pub.adjustedcount;
+            stats.areas[area].count += pub.count;
+            stats.areas[area].adjusted += pub.adjustedcount;
 
             stats.papers.push({
-              title: `${pub.area.toUpperCase()} publication`,
+              title: `${area.toUpperCase()} publication`,
               venue: pub.area.toUpperCase(),
               year: pub.year,
               authors: Math.round(1 / pub.adjustedcount),
               adjusted: pub.adjustedcount,
-              area: pub.area
+              area: area
             });
           });
 
@@ -1956,7 +1980,7 @@ function setupSimulation() {
         const targetFaculty = new Set();
         Object.values(selectedUniv.areas).forEach(a => a.faculty.forEach(f => targetFaculty.add(f)));
 
-        // Check if any alias matches target school facult
+        // Check if any alias matches target school faculty
         outerRemoval:
         for (const nameVariant of namesToCheck) {
           for (const f of targetFaculty) {
