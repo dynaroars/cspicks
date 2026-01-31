@@ -238,7 +238,7 @@ export const nationalityAliases = {
 };
 
 export const nextTier = {
-  /* 'ase': true,
+  'ase': true,
   'issta': true,
   'icde': true,
   'pods': true,
@@ -250,7 +250,7 @@ export const nextTier = {
   'usenixatc': true,
   'icfp': true,
   'oopsla': true,
-  'kdd': true */
+  'kdd': true
 };
 
 export async function loadData() {
@@ -427,9 +427,13 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
     );
 
     if (filteredPubs.length > 0) {
-      const confFilteredPubs = confSet === 'core'
-        ? filteredPubs.filter(p => coreAStarMap[p.area])
-        : filteredPubs;
+      let confFilteredPubs = filteredPubs;
+      if (confSet === 'core') {
+        confFilteredPubs = filteredPubs.filter(p => coreAStarMap[p.area]);
+      } else if (confSet === 'csrankings-default') {
+        confFilteredPubs = filteredPubs.filter(p => !nextTier[p.area]);
+      }
+      // else: confSet === 'csrankings', include all conferences (no filtering)
 
       const totalCount = confFilteredPubs.reduce((sum, p) => sum + p.count, 0);
       const totalAdjusted = confFilteredPubs.reduce((sum, p) => sum + p.adjustedcount, 0);

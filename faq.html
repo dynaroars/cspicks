@@ -21,9 +21,10 @@
         <span class="moon-icon">🌙</span>
     </button>
     <script>
-        // Apply saved theme immediately
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (systemDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', initialTheme);
     </script>
 
     <div id="app">
@@ -100,17 +101,24 @@
                 </div>
 
                 <div class="faq-item" style="margin-bottom: 1.5rem;">
-                    <h3 style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">What is the
-                        difference between CSRankings and CORE A*?</h3>
+                    <h3 style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary);">What are the
+                        Conference Set options?</h3>
                     <p style="color: var(--text-secondary); line-height: 1.6;">
-                        This filter determines which conferences are included in the count:
+                        This filter determines which conferences are included in the rankings. Three options are
+                        available:
                     </p>
                     <ul
                         style="color: var(--text-secondary); margin-left: 1.5rem; margin-top: 0.5rem; list-style-type: disc;">
-                        <li style="margin-bottom: 0.5rem;"><strong>CSRankings:</strong> Includes a select list of
-                            top-tier conferences curated by csrankings.org.</li>
-                        <li><strong>CORE A*:</strong> Only includes conferences that are rated as <strong>A*</strong>
-                            (top 4%) by the CORE Ranking 2023. This excludes certain venues compared to the default set.
+                        <li style="margin-bottom: 0.5rem;"><strong>CSRankings (All):</strong> Includes ALL conferences
+                            from csrankings.org,
+                            including both default venues and next-tier conferences (ASE, ISSTA, ICDE, PODS, HPCA, NDSS,
+                            EuroSys, Eurographics, FAST, USENIX ATC, ICFP, OOPSLA, KDD).</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>CSRankings Default:</strong> Includes only the
+                            default set of
+                            top-tier conferences from csrankings.org, excluding next-tier venues. This matches the
+                            original CSRankings behavior.</li>
+                        <li><strong>CORE A*:</strong> Only includes conferences rated as <strong>A*</strong>
+                            (top 4%) by the CORE Ranking 2023. This is the most restrictive option.
                         </li>
                     </ul>
                 </div>

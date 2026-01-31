@@ -182,8 +182,10 @@
         <span class="moon-icon">🌙</span>
     </button>
     <script>
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (systemDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', initialTheme);
         document.getElementById('theme-toggle').addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
@@ -254,6 +256,18 @@
                     </span>
                 </label>
             </div>
+
+            <div class="filter-group">
+                <label for="conf-set" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span>Conference Set</span>
+                    <select id="conf-set"
+                        style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.9rem; background: var(--card-bg); color: var(--text-primary);">
+                        <option value="csrankings">CSRankings (All)</option>
+                        <option value="csrankings-default">CSRankings Default</option>
+                        <option value="core">CORE A*</option>
+                    </select>
+                </label>
+            </div>
         </div>
 
         <div class="compare-controls" id="compare-controls" style="display: none;">
@@ -285,7 +299,7 @@
         <div id="comparison-summary" class="comparison-summary"></div>
 
         <footer
-            style="text-align: center; padding: 2rem; color: var(--text-secondary); font-size: 0.9rem; margin-top: 3rem; border-top: 1px solid var(--border-color);">
+            style="text-align: center; padding: 0.75rem; color: var(--text-secondary); font-size: 0.9rem; margin-top: 1.5rem; border-top: 1px solid var(--border-color);">
             <a href="faq.html" style="color: inherit; text-decoration: underline; margin-right: 1rem;">FAQ & Methods</a>
             <a href="#" id="open-ack-modal" style="color: inherit; text-decoration: underline;">Data &
                 Acknowledgment</a>

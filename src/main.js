@@ -1,4 +1,4 @@
-import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, coreAStarMap, schoolAliases, conferenceAliases, nationalityAliases, fetchCsv, mergeAffiliationHistory } from './data.js';
+import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, coreAStarMap, nextTier, schoolAliases, conferenceAliases, nationalityAliases, fetchCsv, mergeAffiliationHistory } from './data.js';
 import { nameOriginMap } from './name_map.js';
 import he from 'he';
 
@@ -1906,6 +1906,8 @@ function setupSimulation() {
           let confFilteredPubs = yearFiltered;
           if (confSet === 'core') {
             confFilteredPubs = yearFiltered.filter(p => coreAStarMap[p.area]);
+          } else if (confSet === 'csrankings-default') {
+            confFilteredPubs = yearFiltered.filter(p => !nextTier[p.area]);
           }
 
           console.log('CSRankings match for:', name, '→', profData.name, 'pubs:', profData.pubs.length, 'filtered:', confFilteredPubs.length);
@@ -2043,7 +2045,8 @@ function setupSimulation() {
     candidateResults.sort((a, b) => {
       if (a.error && !b.error) return 1;
       if (!a.error && b.error) return -1;
-      return (b.rankDelta || 0) - (a.rankDelta || 0);
+      // Sort by impact descending
+      return Math.abs(b.rankDelta || 0) - Math.abs(a.rankDelta || 0);
     });
 
     loading.classList.add('hidden');
