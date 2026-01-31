@@ -121,7 +121,8 @@ let schoolsList = [];
 
 function populateSchoolSelects() {
     const historyData = historicalMode ? historyMap : {};
-    const filtered = filterByYears(rawData, startYear, endYear, selectedRegion, historyData, aliasMap);
+    const confSet = document.getElementById('conf-set')?.value || 'csrankings';
+    const filtered = filterByYears(rawData, startYear, endYear, selectedRegion, historyData, aliasMap, confSet);
     schoolsList = Object.values(filtered.schools)
         .filter(s => s.rank)
         .sort((a, b) => a.rank - b.rank);
@@ -251,6 +252,11 @@ function setupEventListeners() {
         historicalMode = e.target.checked;
         refreshData();
     });
+
+    // Conference set toggle
+    document.getElementById('conf-set').addEventListener('change', () => {
+        refreshData();
+    });
 }
 
 function refreshData() {
@@ -281,7 +287,8 @@ function renderComparison() {
     }
 
     const historyData = historicalMode ? historyMap : {};
-    const filtered = filterByYears(rawData, startYear, endYear, selectedRegion, historyData, aliasMap);
+    const confSet = document.getElementById('conf-set')?.value || 'csrankings';
+    const filtered = filterByYears(rawData, startYear, endYear, selectedRegion, historyData, aliasMap, confSet);
     const schoolA = filtered.schools[schoolAName];
     const schoolB = filtered.schools[schoolBName];
 

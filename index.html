@@ -22,8 +22,10 @@
   </button>
   <script>
     // Apply saved theme immediately to prevent flash
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    const savedTheme = localStorage.getItem('theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (systemDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', initialTheme);
   </script>
   <div id="app">
     <header>
@@ -85,7 +87,8 @@
             <span>Show Rankings Using</span>
             <select id="conf-set"
               style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.9rem; background: var(--card-bg); color: var(--text-primary);">
-              <option value="csrankings">CSRankings</option>
+              <option value="csrankings">CSRankings (All)</option>
+              <option value="csrankings-default">CSRankings Default</option>
               <option value="core">CORE A*</option>
             </select>
           </label>
