@@ -74,8 +74,8 @@
             background: var(--card-bg) !important;
         }
     </style>
-  <script type="module" crossorigin src="/cspicks/assets/analysis-oXbXN5D7.js"></script>
-  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-DBxGSxsc.js">
+  <script type="module" crossorigin src="/cspicks/assets/analysis-XLM7ZYqN.js"></script>
+  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-BKwhAm4p.js">
   <link rel="modulepreload" crossorigin href="/cspicks/assets/auto-CPGI3frw.js">
   <link rel="stylesheet" crossorigin href="/cspicks/assets/style-DJW1LL3P.css">
 </head>
@@ -87,8 +87,10 @@
         <span class="moon-icon">🌙</span>
     </button>
     <script>
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (systemDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', initialTheme);
         document.getElementById('theme-toggle').addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
@@ -172,7 +174,7 @@
         </div>
 
         <footer
-            style="text-align: center; padding: 2rem; color: var(--text-secondary); font-size: 0.9rem; margin-top: 3rem; border-top: 1px solid var(--border-color);">
+            style="text-align: center; padding: 0.75rem; color: var(--text-secondary); font-size: 0.9rem; margin-top: 1.5rem; border-top: 1px solid var(--border-color);">
             <a href="faq.html" style="color: inherit; text-decoration: underline; margin-right: 1rem;">FAQ & Methods</a>
             <a href="#" id="open-ack-modal" style="color: inherit; text-decoration: underline;">Data &
                 Acknowledgment</a>

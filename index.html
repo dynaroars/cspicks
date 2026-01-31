@@ -11,8 +11,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
     rel="stylesheet">
-  <script type="module" crossorigin src="/cspicks/assets/main-CzyhBtIj.js"></script>
-  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-DBxGSxsc.js">
+  <script type="module" crossorigin src="/cspicks/assets/main-BdcAQkzp.js"></script>
+  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-BKwhAm4p.js">
   <link rel="stylesheet" crossorigin href="/cspicks/assets/style-DJW1LL3P.css">
 </head>
 
@@ -24,8 +24,10 @@
   </button>
   <script>
     // Apply saved theme immediately to prevent flash
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
+    const savedTheme = localStorage.getItem('theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (systemDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', initialTheme);
   </script>
   <div id="app">
     <header>
@@ -87,7 +89,8 @@
             <span>Show Rankings Using</span>
             <select id="conf-set"
               style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.9rem; background: var(--card-bg); color: var(--text-primary);">
-              <option value="csrankings">CSRankings</option>
+              <option value="csrankings">CSRankings (All)</option>
+              <option value="csrankings-default">CSRankings Default</option>
               <option value="core">CORE A*</option>
             </select>
           </label>
