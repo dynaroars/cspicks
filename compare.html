@@ -242,6 +242,18 @@
             </div>
 
             <div class="filter-group">
+                <label for="conf-set" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span>Conference Set</span>
+                    <select id="conf-set"
+                        style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.9rem; background: var(--card-bg); color: var(--text-primary);">
+                        <option value="csrankings">CSRankings (All)</option>
+                        <option value="csrankings-default" selected>CSRankings (Default)</option>
+                        <option value="core">CORE A*</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="filter-group">
                 <label for="historical-mode" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
                     <input type="checkbox" id="historical-mode" style="width: 16px; height: 16px; cursor: pointer;">
                     <span>Historical Mode</span>
@@ -254,18 +266,6 @@
                             Use the year selectors to filter results
                             for a specific historical period.</span>
                     </span>
-                </label>
-            </div>
-
-            <div class="filter-group">
-                <label for="conf-set" style="display: flex; align-items: center; gap: 0.5rem;">
-                    <span>Conference Set</span>
-                    <select id="conf-set"
-                        style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.9rem; background: var(--card-bg); color: var(--text-primary);">
-                        <option value="csrankings">CSRankings (All)</option>
-                        <option value="csrankings-default">CSRankings Default</option>
-                        <option value="core">CORE A*</option>
-                    </select>
                 </label>
             </div>
         </div>

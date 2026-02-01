@@ -91,11 +91,34 @@ async function init() {
     if (rankingsToggle) {
       rankingsToggle.checked = showRankings;
       rankingsToggle.addEventListener('change', () => {
+        // Save which cards are currently expanded
+        const expandedCards = new Set();
+        document.querySelectorAll('.card:not(.collapsed)').forEach(card => {
+          const header = card.querySelector('.card-header h2, .card-header h3');
+          if (header) {
+            expandedCards.add(header.textContent.trim());
+          }
+        });
+
         showRankings = rankingsToggle.checked;
         const mainSearch = document.getElementById('main-search');
         if (mainSearch) {
           mainSearch.dispatchEvent(new Event('input'));
         }
+
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            document.querySelectorAll('.card').forEach(card => {
+              const header = card.querySelector('.card-header h2, .card-header h3');
+              if (header && expandedCards.has(header.textContent.trim())) {
+                card.classList.add('no-transition');
+                card.classList.remove('collapsed');
+                card.offsetHeight;
+                card.classList.remove('no-transition');
+              }
+            });
+          });
+        }, 350);
       });
     }
 
@@ -162,6 +185,15 @@ function updateURL() {
 function refreshData() {
   if (!rawData) return;
 
+  // Save which cards are currently expanded
+  const expandedCards = new Set();
+  document.querySelectorAll('.card:not(.collapsed)').forEach(card => {
+    const header = card.querySelector('.card-header h2, .card-header h3');
+    if (header) {
+      expandedCards.add(header.textContent.trim());
+    }
+  });
+
   appData = filterByYears(rawData, startYear, endYear, selectedRegion, historicalMode ? historyMap : null, historicalMode ? aliasMap : null, confSet);
 
   console.log(`Refreshed: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}, ConfSet=${confSet}`);
@@ -176,6 +208,19 @@ function refreshData() {
   } else {
     showTopRankings();
   }
+
+  // Restore expanded state immediately
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.card').forEach(card => {
+      const header = card.querySelector('.card-header h2, .card-header h3');
+      if (header && expandedCards.has(header.textContent.trim())) {
+        card.classList.add('no-transition');
+        card.classList.remove('collapsed');
+        card.offsetHeight;
+        card.classList.remove('no-transition');
+      }
+    });
+  });
 }
 function setupSearch() {
   const mainSearch = document.getElementById('main-search');
@@ -803,6 +848,15 @@ function setupFilters() {
   endYearSelect.value = endYear;
 
   const handleFilterChange = () => {
+    // Save which cards are currently expanded
+    const expandedCards = new Set();
+    document.querySelectorAll('.card:not(.collapsed)').forEach(card => {
+      const header = card.querySelector('.card-header h2, .card-header h3');
+      if (header) {
+        expandedCards.add(header.textContent.trim());
+      }
+    });
+
     selectedRegion = regionSelect.value;
     startYear = parseInt(startYearSelect.value);
     endYear = parseInt(endYearSelect.value);
@@ -835,6 +889,19 @@ function setupFilters() {
     } else {
       showTopRankings();
     }
+
+    // Restore expanded state immediately
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.card').forEach(card => {
+        const header = card.querySelector('.card-header h2, .card-header h3');
+        if (header && expandedCards.has(header.textContent.trim())) {
+          card.classList.add('no-transition');
+          card.classList.remove('collapsed');
+          card.offsetHeight;
+          card.classList.remove('no-transition');
+        }
+      });
+    });
   };
 
   regionSelect.addEventListener('change', handleFilterChange);
@@ -1082,6 +1149,10 @@ function searchSchools(query) {
         if (adjusted === 0) return;
 
         const schoolName = prof.affiliation;
+
+        // Filter by school region
+        if (!appData.schools[schoolName]) return;
+
         if (!schoolStats[schoolName]) {
           schoolStats[schoolName] = { adjusted: 0, count: 0, faculty: [] };
         }
@@ -1241,6 +1312,7 @@ function renderConferenceCard(confKey, sortedSchools) {
   const cardClass = 'card collapsed';
   const parentArea = parentMap[confKey];
   const areaLabel = areaLabels[parentArea] || parentArea || '';
+  const showRankings = document.getElementById('show-rankings')?.checked || false;
 
   return `
     <div class="${cardClass}">
@@ -1253,7 +1325,7 @@ function renderConferenceCard(confKey, sortedSchools) {
         ${sortedSchools.map(school => `
           <div class="school-area-section">
             <div class="school-area-header">
-              <span onclick="setSearchQuery('${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${school.name} <small>#${school.rank}</small></span>
+              <span onclick="setSearchQuery('${school.name.replace(/'/g, "\\'")}'))" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${school.name}${showRankings ? ` <small>#${school.rank}</small>` : ''}</span>
               <span>${Math.ceil(school.count)} (${school.adjusted.toFixed(1)})</span>
             </div>
             <div class="faculty-list">
@@ -1266,7 +1338,7 @@ function renderConferenceCard(confKey, sortedSchools) {
         return countB - countA;
       })
       .map(name => `
-                  <span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}</span>
+                  <span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}'))" style="cursor: pointer;">${cleanName(name)}</span>
                 `).join('')}
             </div>
           </div>
