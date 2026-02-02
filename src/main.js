@@ -1,4 +1,4 @@
-import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, coreAStarMap, nextTier, schoolAliases, conferenceAliases, nationalityAliases, fetchCsv, mergeAffiliationHistory } from './data.js';
+import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, coreAStarMap, coreAMap, nextTier, schoolAliases, conferenceAliases, nationalityAliases, fetchCsv, mergeAffiliationHistory } from './data.js';
 import { nameOriginMap } from './name_map.js';
 import he from 'he';
 
@@ -94,9 +94,16 @@ async function init() {
         // Save which cards are currently expanded
         const expandedCards = new Set();
         document.querySelectorAll('.card:not(.collapsed)').forEach(card => {
-          const header = card.querySelector('.card-header h2, .card-header h3');
-          if (header) {
-            expandedCards.add(header.textContent.trim());
+          const nameAttr = card.getAttribute('data-name');
+          if (nameAttr) {
+            expandedCards.add(nameAttr);
+          } else {
+            const header = card.querySelector('.card-header h2, .card-header h3');
+            if (header) {
+              const fullText = header.textContent.trim();
+              const nameOnly = fullText.split('#')[0].trim();
+              expandedCards.add(nameOnly);
+            }
           }
         });
 
@@ -109,8 +116,21 @@ async function init() {
         setTimeout(() => {
           requestAnimationFrame(() => {
             document.querySelectorAll('.card').forEach(card => {
+              const nameAttr = card.getAttribute('data-name');
               const header = card.querySelector('.card-header h2, .card-header h3');
-              if (header && expandedCards.has(header.textContent.trim())) {
+
+              let shouldExpand = false;
+              if (nameAttr && expandedCards.has(nameAttr)) {
+                shouldExpand = true;
+              } else if (header) {
+                const fullText = header.textContent.trim();
+                const nameOnly = fullText.split('#')[0].trim();
+                if (expandedCards.has(nameOnly)) {
+                  shouldExpand = true;
+                }
+              }
+
+              if (shouldExpand) {
                 card.classList.add('no-transition');
                 card.classList.remove('collapsed');
                 card.offsetHeight;
@@ -188,9 +208,16 @@ function refreshData() {
   // Save which cards are currently expanded
   const expandedCards = new Set();
   document.querySelectorAll('.card:not(.collapsed)').forEach(card => {
-    const header = card.querySelector('.card-header h2, .card-header h3');
-    if (header) {
-      expandedCards.add(header.textContent.trim());
+    const nameAttr = card.getAttribute('data-name');
+    if (nameAttr) {
+      expandedCards.add(nameAttr);
+    } else {
+      const header = card.querySelector('.card-header h2, .card-header h3');
+      if (header) {
+        const fullText = header.textContent.trim();
+        const nameOnly = fullText.split('#')[0].trim();
+        expandedCards.add(nameOnly);
+      }
     }
   });
 
@@ -212,8 +239,21 @@ function refreshData() {
   // Restore expanded state immediately
   requestAnimationFrame(() => {
     document.querySelectorAll('.card').forEach(card => {
+      const nameAttr = card.getAttribute('data-name');
       const header = card.querySelector('.card-header h2, .card-header h3');
-      if (header && expandedCards.has(header.textContent.trim())) {
+
+      let shouldExpand = false;
+      if (nameAttr && expandedCards.has(nameAttr)) {
+        shouldExpand = true;
+      } else if (header) {
+        const fullText = header.textContent.trim();
+        const nameOnly = fullText.split('#')[0].trim();
+        if (expandedCards.has(nameOnly)) {
+          shouldExpand = true;
+        }
+      }
+
+      if (shouldExpand) {
         card.classList.add('no-transition');
         card.classList.remove('collapsed');
         card.offsetHeight;
@@ -851,9 +891,16 @@ function setupFilters() {
     // Save which cards are currently expanded
     const expandedCards = new Set();
     document.querySelectorAll('.card:not(.collapsed)').forEach(card => {
-      const header = card.querySelector('.card-header h2, .card-header h3');
-      if (header) {
-        expandedCards.add(header.textContent.trim());
+      const nameAttr = card.getAttribute('data-name');
+      if (nameAttr) {
+        expandedCards.add(nameAttr);
+      } else {
+        const header = card.querySelector('.card-header h2, .card-header h3');
+        if (header) {
+          const fullText = header.textContent.trim();
+          const nameOnly = fullText.split('#')[0].trim();
+          expandedCards.add(nameOnly);
+        }
       }
     });
 
@@ -893,8 +940,21 @@ function setupFilters() {
     // Restore expanded state immediately
     requestAnimationFrame(() => {
       document.querySelectorAll('.card').forEach(card => {
+        const nameAttr = card.getAttribute('data-name');
         const header = card.querySelector('.card-header h2, .card-header h3');
-        if (header && expandedCards.has(header.textContent.trim())) {
+
+        let shouldExpand = false;
+        if (nameAttr && expandedCards.has(nameAttr)) {
+          shouldExpand = true;
+        } else if (header) {
+          const fullText = header.textContent.trim();
+          const nameOnly = fullText.split('#')[0].trim();
+          if (expandedCards.has(nameOnly)) {
+            shouldExpand = true;
+          }
+        }
+
+        if (shouldExpand) {
           card.classList.add('no-transition');
           card.classList.remove('collapsed');
           card.offsetHeight;
@@ -1880,7 +1940,7 @@ function setupSimulation() {
     // Get current conference set
     const confSetSelect = document.getElementById('conf-set');
     const confSet = confSetSelect ? confSetSelect.value : 'csrankings';
-    const confMap = confSet === 'core' ? coreAStarMap : parentMap;
+    const confMap = (confSet === 'core' || confSet === 'core-a') ? (confSet === 'core' ? coreAStarMap : coreAMap) : parentMap;
 
     const fuzzyMatch = (nameA, nameB) => {
       const a = cleanName(nameA).toLowerCase();
@@ -1978,6 +2038,8 @@ function setupSimulation() {
           let confFilteredPubs = yearFiltered;
           if (confSet === 'core') {
             confFilteredPubs = yearFiltered.filter(p => coreAStarMap[p.area]);
+          } else if (confSet === 'core-a') {
+            confFilteredPubs = yearFiltered.filter(p => coreAMap[p.area]);
           } else if (confSet === 'csrankings-default') {
             confFilteredPubs = yearFiltered.filter(p => !nextTier[p.area]);
           }

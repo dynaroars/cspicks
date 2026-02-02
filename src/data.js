@@ -4,6 +4,7 @@ const currentYear = new Date().getFullYear();
 export const DEFAULT_END_YEAR = currentYear;
 export const DEFAULT_START_YEAR = DEFAULT_END_YEAR - 10;
 
+const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
 
 
 export const schoolAliases = {
@@ -388,9 +389,27 @@ export const coreAStarMap = {
   'ec': 'ecom'
 };
 
+export const coreAMap = {
+  'acsac': true, 'aied': true, 'aistats': true, 'alenex': true, 'asiacrypt': true, 'assets': true,
+  'bmvc': true, 'bpm': true, 'cade': true, 'caise': true, 'ccc': true, 'cgo': true, 'ches': true,
+  'cidr': true, 'cikm': true, 'conext': true, 'cp': true, 'cscw': true, 'csf': true, 'dis': true,
+  'disc': true, 'dsn': true, 'eacl': true, 'ease': true, 'ecai': true, 'ecir': true, 'ecoop': true,
+  'er': true, 'esa': true, 'esem': true, 'esop': true, 'esorics': true, 'eurosys': true, 'fast': true,
+  'fc': true, 'foga': true, 'fpga': true, 'gd': true, 'gecco': true, 'hotos': true, 'hpdc': true,
+  'iccad': true, 'icdar': true, 'icdcs': true, 'icdt': true, 'icer': true, 'icfp': true, 'icme': true,
+  'ics': true, 'icsa': true, 'icsoc': true, 'icws': true, 'icwsm': true, 'ijcar': true, 'imc': true,
+  'interspeech': true, 'ipdps': true, 'iros': true, 'islped': true, 'ismb': true, 'issre': true,
+  'issta': true, 'iswc': true, 'itc': true, 'itcs': true, 'iui': true, 'lak': true, 'miccai': true,
+  'middleware': true, 'mmsys': true, 'msr': true, 'naacl': true, 'oopsla': true, 'pets': true,
+  'ppsn': true, 're': true, 'recsys': true, 'rtas': true, 'rtss': true, 'sat': true, 'sdm': true,
+  'seams': true, 'sigcse': true, 'sigspatial': true, 'soups': true, 'stacs': true, 'tacas': true,
+  'uai': true, 'usenixatc': true, 'wacv': true, 'wsdm': true
+};
+
 // Get unique top-level areas
 const topLevelAreas = [...new Set(Object.values(parentMap))];
 const numAreas = topLevelAreas.length;
+
 
 export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'csrankings') {
   const { professors, schools } = data;
@@ -430,6 +449,8 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
       let confFilteredPubs = filteredPubs;
       if (confSet === 'core') {
         confFilteredPubs = filteredPubs.filter(p => coreAStarMap[p.area]);
+      } else if (confSet === 'core-a') {
+        confFilteredPubs = filteredPubs.filter(p => coreAMap[p.area]);
       } else if (confSet === 'csrankings-default') {
         confFilteredPubs = filteredPubs.filter(p => !nextTier[p.area]);
       }

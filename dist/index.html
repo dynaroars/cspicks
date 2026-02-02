@@ -11,9 +11,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
     rel="stylesheet">
-  <script type="module" crossorigin src="/cspicks/assets/main-BdcAQkzp.js"></script>
-  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-BKwhAm4p.js">
-  <link rel="stylesheet" crossorigin href="/cspicks/assets/style-DJW1LL3P.css">
+  <script type="module" crossorigin src="/cspicks/assets/main-C_uLV7R-.js"></script>
+  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-COpcRm_a.js">
+  <link rel="stylesheet" crossorigin href="/cspicks/assets/style-DsLh67RU.css">
 </head>
 
 <body>
@@ -70,6 +70,20 @@
         </div>
 
         <div class="filter-group">
+          <label for="show-rankings" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+            <input type="checkbox" id="show-rankings" style="width: 16px; height: 16px; cursor: pointer;">
+            <span>Show Rankings</span>
+            <select id="conf-set"
+              style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.9rem; background: var(--card-bg); color: var(--text-primary);">
+              <option value="csrankings">CSRankings (All)</option>
+              <option value="csrankings-default" selected>CSRankings (Default)</option>
+              <option value="core">CORE A*</option>
+              <option value="core-a">CORE A</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="filter-group">
           <label for="historical-mode" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
             <input type="checkbox" id="historical-mode" style="width: 16px; height: 16px; cursor: pointer;">
             <span>Historical Mode</span>
@@ -80,19 +94,6 @@
                 Use the year selectors to filter results
                 for a specific historical period.</span>
             </span>
-          </label>
-        </div>
-
-        <div class="filter-group">
-          <label for="show-rankings" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-            <input type="checkbox" id="show-rankings" style="width: 16px; height: 16px; cursor: pointer;">
-            <span>Show Rankings Using</span>
-            <select id="conf-set"
-              style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.9rem; background: var(--card-bg); color: var(--text-primary);">
-              <option value="csrankings">CSRankings (All)</option>
-              <option value="csrankings-default">CSRankings Default</option>
-              <option value="core">CORE A*</option>
-            </select>
           </label>
         </div>
       </div>
