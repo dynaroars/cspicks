@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/cspicks/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS Picks - Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .nav-tab {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-tab.active {
+            background: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        .chart-container {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            position: relative;
+            height: 400px;
+            width: 100%;
+            border: 1px solid var(--border-color);
+        }
+
+        .top-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .top-nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .top-nav a.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        /* Dark mode overrides for inline styles */
+        [data-theme="dark"] select {
+            background-color: var(--card-bg) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] #area-legend {
+            background: var(--card-bg) !important;
+        }
+    </style>
+  <script type="module" crossorigin src="/cspicks/assets/analysis-BSD3Lb5O.js"></script>
+  <link rel="modulepreload" crossorigin href="/cspicks/assets/data-COpcRm_a.js">
+  <link rel="modulepreload" crossorigin href="/cspicks/assets/auto-CPGI3frw.js">
+  <link rel="stylesheet" crossorigin href="/cspicks/assets/style-DsLh67RU.css">
+</head>
+
+<body>
+    <!-- Theme toggle button -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon">🌙</span>
+    </button>
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (systemDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', initialTheme);
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+    <div id="app">
+        <header>
+            <h1>CS Picks</h1>
+            <div class="top-nav">
+                <a href="index.html">Search</a>
+                <a href="analysis.html" class="active">Analysis</a>
+                <a href="compare.html">Compare</a>
+            </div>
+            <p>Visualize trends in Computer Science academia over the last decade.</p>
+        </header>
+
+        <div class="analysis-controls"
+            style="margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+            <label for="analysis-school-select" style="font-weight: 600;">Focus School:</label>
+            <select id="analysis-school-select"
+                style="padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc; width: 300px;">
+                <option value="George Mason University" selected>George Mason University</option>
+            </select>
+
+            <label style="font-weight: 600; margin-left: 1rem;">Year Range:</label>
+            <select id="analysis-start-year" style="padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc;">
+            </select>
+            <span>to</span>
+            <select id="analysis-end-year" style="padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc;">
+            </select>
+
+            <div style="margin-left: 2rem; display: flex; align-items: center;">
+                <label for="analysis-historical-mode"
+                    style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500; color: var(--text-secondary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                    <input type="checkbox" id="analysis-historical-mode"
+                        style="width: 16px; height: 16px; cursor: pointer;">
+                    <span>Historical Mode</span>
+                    <span class="tooltip-trigger"
+                        style="color: var(--text-secondary); cursor: help; position: relative;">
+                        ⓘ
+                        <span class="tooltip-content">When enabled, publications are credited to the institution where
+                            the author
+                            was affiliated at the time of publication. not their current institution.
+                            Use the year selectors to filter results
+                            for a specific historical period.</span>
+                    </span>
+                </label>
+            </div>
+        </div>
+
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-tab="schools">School Trends</div>
+            <div class="nav-tab" data-tab="areas">Area Growth</div>
+            <div class="nav-tab" data-tab="faculty">Faculty Diversity</div>
+        </div>
+
+        <div id="school-trends-view" class="view-section">
+            <div class="chart-container">
+                <canvas id="rankingChart"></canvas>
+            </div>
+            <div id="ranking-stats"></div>
+        </div>
+
+        <div id="area-growth-view" class="view-section" style="display: none;">
+            <div style="display: flex; gap: 1rem;">
+                <div id="area-legend"
+                    style="min-width: 180px; max-height: 400px; overflow-y: auto; padding: 1rem; background: #f9fafb; border-radius: 8px; font-size: 13px;">
+                </div>
+                <div class="chart-container" style="flex: 1;">
+                    <canvas id="areaChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="faculty-diversity-view" class="view-section" style="display: none;">
+            <div class="chart-container">
+                <canvas id="diversityChart"></canvas>
+            </div>
+        </div>
+
+        <footer
+            style="text-align: center; padding: 0.75rem; color: var(--text-secondary); font-size: 0.9rem; margin-top: 1.5rem; border-top: 1px solid var(--border-color);">
+            <a href="faq.html" style="color: inherit; text-decoration: underline; margin-right: 1rem;">FAQ & Methods</a>
+            <a href="#" id="open-ack-modal" style="color: inherit; text-decoration: underline;">Data &
+                Acknowledgment</a>
+        </footer>
+    </div>
+
+    <div id="ack-modal" class="modal hidden">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>Data & Acknowledgment</h2>
+                <button class="close-modal"
+                    onclick="document.getElementById('ack-modal').classList.add('hidden')">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align: left;">
+                <p>CSPicks is inspired by <a href="https://csrankings.org"
+                        target="_blank"><strong>CSRankings</strong></a> and
+                    uses its taxonomy and data to organize results.</p>
+                <p>Historical affiliation data is sourced from <a href="https://openalex.org"
+                        target="_blank"><strong>OpenAlex</strong></a>,
+                    an open catalog of the world's scholarly works.</p>
+                <p style="color: var(--text-secondary); font-size: 0.9em;"><em>⚠️ OpenAlex uses automated extraction
+                        which may produce
+                        inaccuracies in their affiliation data.
+                        Some historical affiliations may be missing, incorrect, or include short-term visiting
+                        positions.
+                        These limitations are inherent to the OpenAlex dataset and not errors in CSPicks.</em></p>
+                <p style="color: #059669; font-size: 0.9em;"><strong>Wrong affiliation?</strong> You can submit
+                    corrections
+                    by opening an issue on
+                    <a href="https://github.com/dynaroars/cspicks/issues" target="_blank">GitHub</a> with the
+                    professor's name,
+                    correct school, and years.
+                    We maintain a manual override file to fix OpenAlex errors.
+                </p>
+                <p>All information is fetched on demand; no data is stored.</p>
+                <p>Report bugs and issues on <a href="https://github.com/dynaroars/cspicks"
+                        target="_blank"><strong>GitHub</strong></a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('open-ack-modal').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('ack-modal').classList.remove('hidden');
+        });
+        document.getElementById('ack-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'ack-modal') {
+                document.getElementById('ack-modal').classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>
