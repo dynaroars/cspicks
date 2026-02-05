@@ -450,7 +450,7 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
       if (confSet === 'core') {
         confFilteredPubs = filteredPubs.filter(p => coreAStarMap[p.area]);
       } else if (confSet === 'core-a') {
-        confFilteredPubs = filteredPubs.filter(p => coreAMap[p.area]);
+        confFilteredPubs = filteredPubs.filter(p => coreAStarMap[p.area] || coreAMap[p.area]);
       } else if (confSet === 'csrankings-default') {
         confFilteredPubs = filteredPubs.filter(p => !nextTier[p.area]);
       }
