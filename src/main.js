@@ -180,7 +180,10 @@ async function init() {
       showTopRankings();
     }
 
-    searchInput.focus();
+    const simModal = document.getElementById('sim-modal');
+    if (!simModal || simModal.classList.contains('hidden')) {
+      searchInput.focus();
+    }
   } catch (err) {
     console.error('Failed to load data:', err);
     document.querySelector('main').innerHTML = '<p style="text-align:center; color: #ef4444;">Error loading data. Please try again.</p>';
@@ -1813,7 +1816,7 @@ function renderSchoolCard(school, filterArea = null) {
   const areaBadge = `<span style="color: var(--text-secondary); font-size: 0.75em; margin-left: 0.5rem;">${areaCount} Areas</span>`;
 
   return `
-    <div class="${cardClass}">
+    <div class="${cardClass}" data-name="${school.name}">
       <div class="card-header" onclick="toggleCard(this)">
         <h2>${school.name}${rankBadgeHeader}${facultyBadge}${areaBadge}</h2>
         <span class="toggle-icon">▼</span>
@@ -1863,6 +1866,9 @@ function setupSimulation() {
   const checkHash = () => {
     if (window.location.hash === '#simulate') {
       openBtn.style.display = 'flex';
+      // Auto-open modal and focus university search
+      modal.classList.remove('hidden');
+      univSearch.focus();
     } else {
       openBtn.style.display = 'none';
     }
@@ -2039,7 +2045,7 @@ function setupSimulation() {
           if (confSet === 'core') {
             confFilteredPubs = yearFiltered.filter(p => coreAStarMap[p.area]);
           } else if (confSet === 'core-a') {
-            confFilteredPubs = yearFiltered.filter(p => coreAMap[p.area]);
+            confFilteredPubs = yearFiltered.filter(p => coreAStarMap[p.area] || coreAMap[p.area]);
           } else if (confSet === 'csrankings-default') {
             confFilteredPubs = yearFiltered.filter(p => !nextTier[p.area]);
           }
