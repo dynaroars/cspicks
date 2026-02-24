@@ -838,6 +838,7 @@ window.setSearchQuery = function (query) {
 window.searchProfessorByAffiliation = function (name, affiliation) {
   const input = document.getElementById('main-search');
   input.value = name;
+  updateURL();
 
   const query = name.toLowerCase();
   const tokens = query.split(/\s+/).filter(t => t.length > 0);
@@ -860,9 +861,11 @@ window.searchProfessorByAffiliation = function (name, affiliation) {
     .map(prof => renderProfessorCard(prof))
     .join('');
 
+  document.getElementById('conference-results').innerHTML = '';
   document.getElementById('school-results').innerHTML = '';
   document.getElementById('area-people-results').innerHTML = '';
   document.getElementById('dblp-results').innerHTML = '';
+  document.getElementById('search-context-header').style.display = 'none';
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -1137,7 +1140,7 @@ function renderProfessorCard(prof) {
   const cardClass = isExactMatch ? 'card' : 'card collapsed';
 
   return `
-    <div class="${cardClass}">
+    <div class="${cardClass}" data-name="${cleanName(prof.name)}">
       <div class="card-header" onclick="toggleCard(this)">
         <h2>${cleanName(prof.name)}</h2>
         <span class="toggle-icon">▼</span>
@@ -1388,7 +1391,7 @@ function renderConferenceCard(confKey, sortedSchools) {
         ${sortedSchools.map(school => `
           <div class="school-area-section">
             <div class="school-area-header">
-              <span onclick="setSearchQuery('${school.name.replace(/'/g, "\\'")}'))" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${school.name}${showRankings ? ` <small>#${school.rank}</small>` : ''}</span>
+              <span onclick="setSearchQuery('${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${school.name}${showRankings ? ` <small>#${school.rank}</small>` : ''}</span>
               <span>${Math.ceil(school.count)} (${school.adjusted.toFixed(1)})</span>
             </div>
             <div class="faculty-list">
@@ -1401,7 +1404,7 @@ function renderConferenceCard(confKey, sortedSchools) {
         return countB - countA;
       })
       .map(name => `
-                  <span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}'))" style="cursor: pointer;">${cleanName(name)}</span>
+                  <span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}</span>
                 `).join('')}
             </div>
           </div>
