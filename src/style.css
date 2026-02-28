@@ -400,6 +400,10 @@ footer a:hover {
   font-size: 0.9rem;
 }
 
+option{
+  background-color: var(--bg-color);
+}
+
 input[type="text"] {
   width: 100%;
   padding: 1rem 0;
