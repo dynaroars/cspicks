@@ -2166,13 +2166,17 @@ function setupSimulation() {
           ops.push({ school: sourceSchool, stats, isRemoval: true });
         }
         const impactMap = calculateRankImpact(ops);
-        const rankDelta = impactMap.get(selectedUniv.name) || 0;
-        const sourceImpact = sourceSchool ? (impactMap.get(sourceSchool.name) || 0) : null;
+        const targetImpact = impactMap.get(selectedUniv.name) || { overall: 0, areas: {} };
+        const rankDelta = targetImpact.overall;
+        const areaDeltas = targetImpact.areas;
+        const sourceImpactEntry = sourceSchool ? impactMap.get(sourceSchool.name) : null;
+        const sourceImpact = sourceImpactEntry ? sourceImpactEntry.overall : null;
 
         candidateResults.push({
           name: displayName,
           stats,
           rankDelta,
+          areaDeltas,
           isRemoval: isRemovalMode,
           usedCSRankings: usedCSRankings,
           sourceSchool: sourceSchool ? { name: sourceSchool.name, delta: sourceImpact } : null,
@@ -2251,11 +2255,42 @@ function setupSimulation() {
 
     allSchools.sort((a, b) => b._simScore - a._simScore);
 
+    // area rankings for simulation
+    const areaRanksBefore = {};
+    const areaRanksAfter = {};
+    ops.forEach(op => {
+      areaRanksBefore[op.school.name] = op.school.areaRanks || {};
+      areaRanksAfter[op.school.name] = {};
+    });
+
+    areaList.forEach(area => {
+      const sorted = allSchools
+        .filter(s => (s.areas[area]?.adjusted || 0) > 0)
+        .sort((a, b) => (b.areas[area]?.adjusted || 0) - (a.areas[area]?.adjusted || 0));
+      sorted.forEach((s, idx) => {
+        if (areaRanksAfter[s.name] !== undefined) {
+          areaRanksAfter[s.name][area] = idx + 1;
+        }
+      });
+    });
+
     const deltaMap = new Map();
     ops.forEach(op => {
       const newRank = allSchools.findIndex(s => s.name === op.school.name) + 1;
       const delta = op.school.rank - newRank;
-      deltaMap.set(op.school.name, delta);
+
+      const areaDeltasBefore = areaRanksBefore[op.school.name];
+      const areaDeltasAfter = areaRanksAfter[op.school.name];
+      const areaDeltas = {};
+      areaList.forEach(area => {
+        const before = areaDeltasBefore[area];
+        const after = areaDeltasAfter[area];
+        if (before !== undefined || after !== undefined) {
+          areaDeltas[area] = (before || 9999) - (after || 9999);
+        }
+      });
+
+      deltaMap.set(op.school.name, { overall: delta, areas: areaDeltas });
     });
 
     return deltaMap;
@@ -2316,6 +2351,25 @@ function setupSimulation() {
         </div>
       `).join('');
 
+      const areaDeltaEntries = Object.entries(c.areaDeltas || {})
+        .filter(([, d]) => d !== 0 && Math.abs(d) < 500)  // filter bogus deltas
+        .sort(([, a], [, b]) => Math.abs(b) - Math.abs(a))
+        .slice(0, 6);
+
+      const areaPillsHtml = areaDeltaEntries.length > 0 ? `
+        <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px;">
+          ${areaDeltaEntries.map(([area, d]) => {
+        const label = areaLabels[area] || area;
+        const arrow = d > 0 ? '↑' : '↓';
+        const sign = d > 0 ? '+' : '';
+        const bg = d > 0 ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)';
+        const color = d > 0 ? '#a3ffe2ff' : '#ffa2a2ff';
+        return `<span style="font-size: 0.78em; padding: 3px 9px; border-radius: 99px; font-weight: 600; background: ${bg}; color: ${color}; white-space: nowrap;">${arrow} ${label} ${sign}${d}</span>`;
+      }).join('')}
+        </div>
+      ` : '';
+
+
       return `
         <div class="candidate-card">
           <div class="candidate-header">
@@ -2327,6 +2381,7 @@ function setupSimulation() {
                 ${dataSourceBadge}
               </div>
               <div class="candidate-stats">${Object.keys(c.stats.areas).length} areas, ${c.stats.totalPapers} papers, ${c.stats.totalAdjusted.toFixed(1)} adjusted</div>
+              ${areaPillsHtml}
             </div>
             <div class="candidate-impact">
               <div class="candidate-rank-delta ${deltaClass}">${deltaText} ranks</div>
@@ -2339,6 +2394,7 @@ function setupSimulation() {
           </div>
         </div>
       `;
+
     }).join('');
   }
 }
@@ -2529,6 +2585,12 @@ function setupThemeToggle() {
       activeSchoolCharts.forEach((data, uniqueId) => {
         loadSchoolCharts(data.schoolName, uniqueId);
       });
+    }
+  });
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
     }
   });
 
