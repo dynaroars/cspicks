@@ -16,6 +16,14 @@
 
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
+
+  /* Impact Colors */
+  --impact-pos-bg: rgba(16, 185, 129, 0.12);
+  --impact-pos-text: #059669;
+  --impact-neg-bg: rgba(239, 68, 68, 0.12);
+  --impact-neg-text: #dc2626;
+  --impact-neu-bg: rgba(128, 128, 128, 0.12);
+  --impact-neu-text: #666666;
 }
 
 /* Dark Mode */
@@ -31,6 +39,14 @@
   --primary-color: #36c5f0;
   --primary-dark: #1d9bd1;
   --primary-light: #2c3e50;
+
+  /* Impact Colors (Dark Mode) */
+  --impact-pos-bg: rgba(16, 185, 129, 0.2);
+  --impact-pos-text: #a3ffe2;
+  --impact-neg-bg: rgba(239, 68, 68, 0.2);
+  --impact-neg-text: #ffa2a2;
+  --impact-neu-bg: rgba(171, 171, 173, 0.15);
+  --impact-neu-text: #ababad;
 }
 
 /* Theme Toggle Button */
@@ -802,6 +818,33 @@ input[type="text"]::placeholder {
   color: var(--text-primary);
 }
 
+/* Area Pills in Simulator */
+.area-pill {
+  font-size: 0.78em;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-weight: 600;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.area-pill.positive {
+  background: var(--impact-pos-bg);
+  color: var(--impact-pos-text);
+}
+
+.area-pill.negative {
+  background: var(--impact-neg-bg);
+  color: var(--impact-neg-text);
+}
+
+.area-pill.neutral {
+  background: var(--impact-neu-bg);
+  color: var(--impact-neu-text);
+}
+
 .candidate-stats {
   font-size: 0.85rem;
   color: var(--text-secondary);
@@ -818,11 +861,11 @@ input[type="text"]::placeholder {
 }
 
 .candidate-rank-delta.positive {
-  color: #10b981;
+  color: var(--impact-pos-text);
 }
 
 .candidate-rank-delta.negative {
-  color: #ef4444;
+  color: var(--impact-neg-text);
 }
 
 .candidate-rank-delta.neutral {

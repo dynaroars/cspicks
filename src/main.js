@@ -19,7 +19,7 @@ let endYear = DEFAULT_END_YEAR;
 let selectedRegion = 'us';
 let historicalMode = false;
 let showRankings = false;
-let confSet = 'csrankings';
+let confSet = 'csrankings-default';
 
 let ChartCtor = null;
 const activeSchoolCharts = new Map();
@@ -196,7 +196,7 @@ function updateURL() {
   params.set('end', endYear);
   params.set('region', selectedRegion);
   if (historicalMode) params.set('historical', 'true');
-  if (confSet !== 'csrankings') params.set('confSet', confSet);
+  if (confSet !== 'csrankings-default') params.set('confSet', confSet);
 
   const q = document.getElementById('main-search').value;
   if (q) params.set('q', q);
@@ -1894,9 +1894,69 @@ function setupSimulation() {
     candidatesInput.value = '';
     document.getElementById('sim-univ-results').innerHTML = '';
     document.getElementById('sim-candidates-results').innerHTML = '';
+    document.getElementById('sim-faculty-list').innerHTML = '';
+    document.getElementById('sim-faculty-search').value = '';
   };
 
   resetBtn.addEventListener('click', resetSimulation);
+
+  // Faculty picker helpers
+  function populateFacultyList(school) {
+    const facultySet = new Set();
+    Object.values(school.areas).forEach(a => a.faculty.forEach(f => facultySet.add(f)));
+    const facultyArr = Array.from(facultySet).sort((a, b) => {
+      const profA = appData.professors[a];
+      const profB = appData.professors[b];
+      return (profB?.totalAdjusted || 0) - (profA?.totalAdjusted || 0);
+    });
+
+    const listEl = document.getElementById('sim-faculty-list');
+    const searchEl = document.getElementById('sim-faculty-search');
+
+    function renderList(filter = '') {
+      const filtered = filter
+        ? facultyArr.filter(f => cleanName(f).toLowerCase().includes(filter.toLowerCase()))
+        : facultyArr;
+
+      const currentNames = candidatesInput.value.split('\n').map(n => n.trim()).filter(n => n);
+
+      listEl.innerHTML = filtered.map(f => {
+        const name = cleanName(f);
+        const checked = currentNames.some(n => n.toLowerCase() === name.toLowerCase());
+        const prof = appData.professors[f];
+        const areas = prof ? Object.keys(prof.areas).length : 0;
+        const adj = prof ? prof.totalAdjusted.toFixed(1) : '0';
+        return `
+          <label style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; cursor: pointer; border-bottom: 1px solid var(--border-color); font-size: 0.88em;"
+                 data-name="${name}">
+            <input type="checkbox" ${checked ? 'checked' : ''} style="width: 15px; height: 15px; cursor: pointer;">
+            <span style="flex: 1; color: var(--text-primary);">${name}</span>
+            <small style="color: var(--text-secondary);">${areas} areas, ${adj} adj</small>
+          </label>
+        `;
+      }).join('');
+
+      listEl.querySelectorAll('label').forEach(label => {
+        const checkbox = label.querySelector('input[type="checkbox"]');
+        checkbox.addEventListener('change', () => {
+          const name = label.dataset.name;
+          const lines = candidatesInput.value.split('\n').map(n => n.trim()).filter(n => n);
+          if (checkbox.checked) {
+            if (!lines.some(n => n.toLowerCase() === name.toLowerCase())) {
+              lines.push(name);
+            }
+          } else {
+            const idx = lines.findIndex(n => n.toLowerCase() === name.toLowerCase());
+            if (idx >= 0) lines.splice(idx, 1);
+          }
+          candidatesInput.value = lines.join('\n');
+        });
+      });
+    }
+
+    renderList();
+    searchEl.addEventListener('input', (e) => renderList(e.target.value));
+  }
 
   univSearch.addEventListener('input', (e) => {
     const q = e.target.value.toLowerCase();
@@ -1919,6 +1979,7 @@ function setupSimulation() {
         document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name} (#${selectedUniv.rank})`;
         document.getElementById('step-univ-first').classList.add('hidden');
         document.getElementById('step-candidates').classList.remove('hidden');
+        populateFacultyList(selectedUniv);
         candidatesInput.focus();
       });
     });
@@ -2086,6 +2147,7 @@ function setupSimulation() {
               title: `${area.toUpperCase()} publication`,
               venue: pub.area.toUpperCase(),
               year: pub.year,
+              count: pub.count,
               authors: Math.round(1 / pub.adjustedcount),
               adjusted: pub.adjustedcount,
               area: area
@@ -2343,28 +2405,38 @@ function setupSimulation() {
         `;
       }
 
-      const papersHtml = c.stats.papers.slice(0, 20).map(p => `
+      const papersHtml = c.stats.papers.slice(0, 20).map(p => {
+        const countLabel = p.count > 1 ? `${Math.round(p.count)} papers` : '1 paper';
+        return `
         <div class="paper-item">
           <span class="paper-venue">${p.venue}</span>
           <span class="paper-year">${p.year}</span>:
-          ${p.title} <small>(${p.authors} authors, ${p.adjusted.toFixed(2)} adj)</small>
+          ${countLabel} <small>(~${p.authors} authors, ${p.adjusted.toFixed(2)} adj)</small>
         </div>
-      `).join('');
+      `;
+      }).join('');
 
-      const areaDeltaEntries = Object.entries(c.areaDeltas || {})
-        .filter(([, d]) => d !== 0 && Math.abs(d) < 500)  // filter bogus deltas
-        .sort(([, a], [, b]) => Math.abs(b) - Math.abs(a))
-        .slice(0, 6);
+      // Show all areas the candidate publishes in, with rank delta for each
+      const allAreas = Object.keys(c.stats.areas);
+      const areaDeltaEntries = allAreas
+        .map(area => {
+          let d = (c.areaDeltas || {})[area] || 0;
+          if (Math.abs(d) >= 500) d = 0;  // clamp bogus deltas
+          return [area, d];
+        })
+        .sort(([, a], [, b]) => Math.abs(b) - Math.abs(a));
 
       const areaPillsHtml = areaDeltaEntries.length > 0 ? `
         <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px;">
           ${areaDeltaEntries.map(([area, d]) => {
         const label = areaLabels[area] || area;
+        if (d === 0) {
+          return `<span class="area-pill neutral">${label} ±0</span>`;
+        }
         const arrow = d > 0 ? '↑' : '↓';
         const sign = d > 0 ? '+' : '';
-        const bg = d > 0 ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)';
-        const color = d > 0 ? '#a3ffe2ff' : '#ffa2a2ff';
-        return `<span style="font-size: 0.78em; padding: 3px 9px; border-radius: 99px; font-weight: 600; background: ${bg}; color: ${color}; white-space: nowrap;">${arrow} ${label} ${sign}${d}</span>`;
+        const cls = d > 0 ? 'positive' : 'negative';
+        return `<span class="area-pill ${cls}">${arrow} ${label} ${sign}${d}</span>`;
       }).join('')}
         </div>
       ` : '';
