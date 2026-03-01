@@ -245,6 +245,7 @@ export const nextTier = {
   'pods': true,
   'hpca': true,
   'ndss': true,
+  'pets': true,
   'eurosys': true,
   'eurographics': true,
   'fast': true,
@@ -289,7 +290,6 @@ export async function loadData() {
   authorInfo.forEach(row => {
     const name = row.name.trim();
     if (professors[name]) {
-      if (row.area === 'pets') return;
 
       // Skip next-tier conferences (matches CSRankings default behavior)
       // if (nextTier[row.area]) {
@@ -330,16 +330,16 @@ export const parentMap = {
   'acl': 'nlp', 'emnlp': 'nlp', 'naacl': 'nlp',
   'sigir': 'inforet', 'www': 'inforet',
   'asplos': 'arch', 'isca': 'arch', 'micro': 'arch', 'hpca': 'arch',
-  'ccs': 'sec', 'oakland': 'sec', 'usenixsec': 'sec', 'ndss': 'sec',
-  'vldb': 'mod', 'sigmod': 'mod', 'icde': 'mod', 'pods': 'mod', 'pacmmod': 'mod',
+  'ccs': 'sec', 'oakland': 'sec', 'usenixsec': 'sec', 'ndss': 'sec', 'pets': 'sec',
+  'vldb': 'mod', 'sigmod': 'mod', 'icde': 'mod', 'pods': 'mod',
   'dac': 'da', 'iccad': 'da',
   'emsoft': 'bed', 'rtas': 'bed', 'rtss': 'bed',
   'sc': 'hpc', 'hpdc': 'hpc', 'ics': 'hpc',
   'mobicom': 'mobile', 'mobisys': 'mobile', 'sensys': 'mobile',
   'imc': 'metrics', 'sigmetrics': 'metrics',
   'osdi': 'ops', 'sosp': 'ops', 'eurosys': 'ops', 'fast': 'ops', 'usenixatc': 'ops',
-  'popl': 'plan', 'pldi': 'plan', 'oopsla': 'plan', 'icfp': 'plan', 'pacmpl': 'plan',
-  'fse': 'soft', 'icse': 'soft', 'ase': 'soft', 'issta': 'soft', 'kbse': 'soft', 'sigsoft': 'soft', 'pacmse': 'soft',
+  'popl': 'plan', 'pldi': 'plan', 'oopsla': 'plan', 'icfp': 'plan',
+  'fse': 'soft', 'icse': 'soft', 'ase': 'soft', 'issta': 'soft',
   'nsdi': 'comm', 'sigcomm': 'comm',
   'siggraph': 'graph', 'siggraph-asia': 'graph', 'eurographics': 'graph',
   'focs': 'act', 'soda': 'act', 'stoc': 'act',
@@ -558,7 +558,13 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
   });
 
   // Sort by Geometric Mean Score
-  schoolList.sort((a, b) => b.score - a.score);
+  schoolList.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    // Alphabetical tie-breaking (matches CSRankings)
+    if (a.name < b.name) return -1;
+    if (b.name < a.name) return 1;
+    return 0;
+  });
 
   schoolList.forEach((school, index) => {
     school.rank = index + 1;

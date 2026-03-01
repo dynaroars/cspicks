@@ -11,9 +11,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
     rel="stylesheet">
-  <script type="module" crossorigin src="/cspicks/assets/main-BXSBb0Lg.js"></script>
+  <script type="module" crossorigin src="/cspicks/assets/main-BsBJ9ynp.js"></script>
   <link rel="modulepreload" crossorigin href="/cspicks/assets/data-CHqNZ0Rv.js">
-  <link rel="stylesheet" crossorigin href="/cspicks/assets/style-DsLh67RU.css">
+  <link rel="stylesheet" crossorigin href="/cspicks/assets/style-IVvXrEGl.css">
 </head>
 
 <body>
@@ -136,10 +136,17 @@
             <h3>2. Enter Faculty Candidates</h3>
             <div class="selected-item" id="selected-univ-display"></div>
             <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
-              Paste candidate names below (one per line). We'll search DBLP for each.
+              Select existing faculty below or paste candidate names in the text box (one per line).
             </p>
-            <textarea id="sim-candidates-input" rows="6"
-              placeholder="John Smith&#10;Jane Doe&#10;Bob Johnson"></textarea>
+            <div id="sim-faculty-picker" style="margin-bottom: 0.75rem;">
+              <input type="text" id="sim-faculty-search" placeholder="Search faculty at this university..."
+                style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-primary); font-size: 0.9rem; box-sizing: border-box;">
+              <div id="sim-faculty-list"
+                style="max-height: 180px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; background: var(--card-bg);">
+              </div>
+            </div>
+            <textarea id="sim-candidates-input" rows="4"
+              placeholder="Or paste external candidate names here (one per line)&#10;John Smith&#10;Jane Doe"></textarea>
             <button id="sim-analyze-btn" class="btn-secondary" style="margin-top: 1rem; width: 100%;">
               Analyze Candidates
             </button>
