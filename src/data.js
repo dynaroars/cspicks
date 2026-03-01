@@ -554,20 +554,31 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
       const adjustedCount = school.areaAdjustedCounts[area] || 0;
       score *= (adjustedCount + 1.0);
     });
-    school.score = Math.pow(score, 1 / numAreas);
+    // Round to 1 decimal place
+    school.score = Math.round(10.0 * Math.pow(score, 1 / numAreas)) / 10.0;
   });
 
-  // Sort by Geometric Mean Score
+  // Sort by Geometric Mean Score, then alphabetically for ties
   schoolList.sort((a, b) => {
-    if (b.score !== a.score) return b.score - a.score;
-    // Alphabetical tie-breaking (matches CSRankings)
+    if (a.score !== b.score) return b.score - a.score;
     if (a.name < b.name) return -1;
     if (b.name < a.name) return 1;
     return 0;
   });
 
+  // Standard Competition Ranking
+  let rank = 0;
+  let ties = 1;
+  let oldScore = -1;
   schoolList.forEach((school, index) => {
-    school.rank = index + 1;
+    if (school.score !== oldScore) {
+      rank = rank + ties;
+      ties = 1;
+    } else {
+      ties++;
+    }
+    school.rank = rank;
+    oldScore = school.score;
     filteredSchools[school.name] = school;
   });
 
