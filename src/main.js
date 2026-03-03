@@ -1403,9 +1403,11 @@ function renderConferenceCard(confKey, sortedSchools) {
         const countB = profB?.pubs.filter(p => p.area === confKey).reduce((sum, p) => sum + p.adjustedcount, 0) || 0;
         return countB - countA;
       })
-      .map(name => `
-                  <span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}</span>
-                `).join('')}
+      .map(name => {
+        const prof = appData.professors[name];
+        const statsText = (showRankings && prof) ? ` <small style="color: var(--text-secondary);">${prof.totalPapers} / ${prof.totalAdjusted.toFixed(1)}</small>` : '';
+        return `<span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}${statsText}</span>`;
+      }).join('')}
             </div>
           </div>
         `).join('')}
@@ -1843,9 +1845,11 @@ function renderSchoolCard(school, filterArea = null) {
           const countB = appData.professors[b]?.areas[area]?.adjusted || 0;
           return countB - countA;
         })
-        .map(name => `
-                <span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}</span>
-              `).join('')}
+        .map(name => {
+          const prof = appData.professors[name];
+          const statsText = (showRankings && prof) ? ` <small style="color: var(--text-secondary);">${prof.totalPapers} / ${prof.totalAdjusted.toFixed(1)}</small>` : '';
+          return `<span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}${statsText}</span>`;
+        }).join('')}
             </div>
           </div>
         `}).join('')}
@@ -2239,6 +2243,7 @@ function setupSimulation() {
           name: displayName,
           stats,
           rankDelta,
+          currentRank: selectedUniv.rank,
           areaDeltas,
           isRemoval: isRemovalMode,
           usedCSRankings: usedCSRankings,
@@ -2471,7 +2476,7 @@ function setupSimulation() {
               ${areaPillsHtml}
             </div>
             <div class="candidate-impact">
-              <div class="candidate-rank-delta ${deltaClass}">${deltaText} ranks</div>
+              <div class="candidate-rank-delta ${deltaClass}">#${c.currentRank} → #${c.currentRank - c.rankDelta} (${deltaText})</div>
               ${sourceImpactHtml}
             </div>
           </div>
