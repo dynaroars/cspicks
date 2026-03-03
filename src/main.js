@@ -1925,13 +1925,14 @@ function setupSimulation() {
         const checked = currentNames.some(n => n.toLowerCase() === name.toLowerCase());
         const prof = appData.professors[f];
         const areas = prof ? Object.keys(prof.areas).length : 0;
+        const papers = prof ? prof.totalPapers : 0;
         const adj = prof ? prof.totalAdjusted.toFixed(1) : '0';
         return `
           <label style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; cursor: pointer; border-bottom: 1px solid var(--border-color); font-size: 0.88em;"
                  data-name="${name}">
             <input type="checkbox" ${checked ? 'checked' : ''} style="width: 15px; height: 15px; cursor: pointer;">
             <span style="flex: 1; color: var(--text-primary);">${name}</span>
-            <small style="color: var(--text-secondary);">${areas} areas, ${adj} adj</small>
+            <small style="color: var(--text-secondary);">${areas} areas, ${papers} papers, ${adj} adj</small>
           </label>
         `;
       }).join('');
@@ -2347,8 +2348,12 @@ function setupSimulation() {
       areaList.forEach(area => {
         const before = areaDeltasBefore[area];
         const after = areaDeltasAfter[area];
-        if (before !== undefined || after !== undefined) {
-          areaDeltas[area] = (before || 9999) - (after || 9999);
+        if (before !== undefined && after === undefined) {
+          areaDeltas[area] = { dropped: true, wasRank: before };
+        } else if (before === undefined && after !== undefined) {
+          areaDeltas[area] = { entered: true, nowRank: after };
+        } else if (before !== undefined && after !== undefined) {
+          areaDeltas[area] = before - after;
         }
       });
 
@@ -2420,16 +2425,26 @@ function setupSimulation() {
       const allAreas = Object.keys(c.stats.areas);
       const areaDeltaEntries = allAreas
         .map(area => {
-          let d = (c.areaDeltas || {})[area] || 0;
-          if (Math.abs(d) >= 500) d = 0;  // clamp bogus deltas
+          let d = (c.areaDeltas || {})[area];
+          if (d === undefined) d = 0;
           return [area, d];
         })
-        .sort(([, a], [, b]) => Math.abs(b) - Math.abs(a));
+        .sort(([, a], [, b]) => {
+          const aVal = (typeof a === 'object' && a !== null) ? 1000 : Math.abs(a);
+          const bVal = (typeof b === 'object' && b !== null) ? 1000 : Math.abs(b);
+          return bVal - aVal;
+        });
 
       const areaPillsHtml = areaDeltaEntries.length > 0 ? `
         <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px;">
           ${areaDeltaEntries.map(([area, d]) => {
         const label = areaLabels[area] || area;
+        if (d && typeof d === 'object' && d.dropped) {
+          return `<span class="area-pill negative">↓ ${label} (Unranked - was #${d.wasRank})</span>`;
+        }
+        if (d && typeof d === 'object' && d.entered) {
+          return `<span class="area-pill positive">↑ ${label} (→ #${d.nowRank})</span>`;
+        }
         if (d === 0) {
           return `<span class="area-pill neutral">${label} ±0</span>`;
         }
