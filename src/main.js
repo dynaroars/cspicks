@@ -1961,6 +1961,17 @@ function setupSimulation() {
 
     renderList();
     searchEl.addEventListener('input', (e) => renderList(e.target.value));
+
+    document.getElementById('sim-select-all').addEventListener('click', () => {
+      listEl.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        if (!cb.checked) { cb.checked = true; cb.dispatchEvent(new Event('change')); }
+      });
+    });
+    document.getElementById('sim-deselect-all').addEventListener('click', () => {
+      listEl.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        if (cb.checked) { cb.checked = false; cb.dispatchEvent(new Event('change')); }
+      });
+    });
   }
 
   univSearch.addEventListener('input', (e) => {
@@ -2048,6 +2059,23 @@ function setupSimulation() {
       // Fallback: Levenshtein distance for close matches
       if (Math.abs(a.length - b.length) > 3) return false;
 
+      if (lastA === lastB && partsA.length > 1 && partsB.length > 1) {
+        const firstDist = levenshtein(firstA, firstB);
+        return firstDist <= 1;
+      }
+
+      const distance = levenshtein(a, b);
+      const maxLength = Math.max(a.length, b.length);
+
+      // distance rules
+      if (distance === 0) return true;
+      if (distance === 1 && maxLength > 3) return true;
+      if (distance === 2 && maxLength > 8) return true;
+
+      return false;
+    };
+
+    function levenshtein(a, b) {
       const matrix = [];
       for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
       for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
@@ -2065,17 +2093,8 @@ function setupSimulation() {
           }
         }
       }
-
-      const distance = matrix[b.length][a.length];
-      const maxLength = Math.max(a.length, b.length);
-
-      // distance rules
-      if (distance === 0) return true;
-      if (distance === 1 && maxLength > 3) return true;
-      if (distance === 2 && maxLength > 6) return true;
-
-      return false;
-    };
+      return matrix[b.length][a.length];
+    }
 
     for (const name of uniqueNames) {
       try {
@@ -2086,15 +2105,25 @@ function setupSimulation() {
           profData = appData.professors[name];
           profName = name;
         } else {
-          for (const pName of Object.keys(appData.professors)) {
-            // Optimization: must match last name at least partially or be roughly same length
-            if (!pName.toLowerCase().includes(name.split(' ').pop().toLowerCase()) &&
-              Math.abs(pName.length - name.length) > 3) continue;
-
-            if (fuzzyMatch(pName, name)) {
-              profData = appData.professors[pName];
-              profName = pName;
+          const targetFacultyNames = new Set();
+          Object.values(selectedUniv.areas).forEach(a => a.faculty.forEach(f => targetFacultyNames.add(f)));
+          for (const fName of targetFacultyNames) {
+            if (fuzzyMatch(fName, name)) {
+              profData = appData.professors[fName];
+              profName = fName;
               break;
+            }
+          }
+          if (!profData) {
+            for (const pName of Object.keys(appData.professors)) {
+              if (!pName.toLowerCase().includes(name.split(' ').pop().toLowerCase()) &&
+                Math.abs(pName.length - name.length) > 3) continue;
+
+              if (fuzzyMatch(pName, name)) {
+                profData = appData.professors[pName];
+                profName = pName;
+                break;
+              }
             }
           }
         }
