@@ -11,7 +11,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
     rel="stylesheet">
-  <script type="module" crossorigin src="/cspicks/assets/main-B3KjFo3s.js"></script>
+  <script type="module" crossorigin src="/cspicks/assets/main-b7eKvEgQ.js"></script>
   <link rel="modulepreload" crossorigin href="/cspicks/assets/data-9O3L5Wjk.js">
   <link rel="stylesheet" crossorigin href="/cspicks/assets/style-IVvXrEGl.css">
 </head>
@@ -141,6 +141,14 @@
             <div id="sim-faculty-picker" style="margin-bottom: 0.75rem;">
               <input type="text" id="sim-faculty-search" placeholder="Search faculty at this university..."
                 style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-primary); font-size: 0.9rem; box-sizing: border-box;">
+              <div style="display: flex; gap: 6px; margin-bottom: 0.5rem;">
+                <button id="sim-select-all" type="button"
+                  style="flex: 1; padding: 4px 8px; font-size: 0.8em; border-radius: 4px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-primary); cursor: pointer;">Select
+                  All</button>
+                <button id="sim-deselect-all" type="button"
+                  style="flex: 1; padding: 4px 8px; font-size: 0.8em; border-radius: 4px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-primary); cursor: pointer;">Deselect
+                  All</button>
+              </div>
               <div id="sim-faculty-list"
                 style="max-height: 180px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px; background: var(--card-bg);">
               </div>
