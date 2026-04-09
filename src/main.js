@@ -2387,7 +2387,7 @@ function setupSimulation() {
         } else if (before === undefined && after !== undefined) {
           areaDeltas[area] = { entered: true, nowRank: after };
         } else if (before !== undefined && after !== undefined) {
-          areaDeltas[area] = before - after;
+          areaDeltas[area] = { delta: before - after, nowRank: after };
         }
       });
 
@@ -2460,32 +2460,40 @@ function setupSimulation() {
       const areaDeltaEntries = allAreas
         .map(area => {
           let d = (c.areaDeltas || {})[area];
-          if (d === undefined) d = 0;
+          if (d === undefined) d = { delta: 0 };
           return [area, d];
         })
         .sort(([, a], [, b]) => {
-          const aVal = (typeof a === 'object' && a !== null) ? 1000 : Math.abs(a);
-          const bVal = (typeof b === 'object' && b !== null) ? 1000 : Math.abs(b);
-          return bVal - aVal;
+          const getVal = (x) => {
+            if (typeof x === 'number') return Math.abs(x);
+            if (x && (x.dropped || x.entered)) return 1000;
+            if (x && x.delta !== undefined) return Math.abs(x.delta);
+            return 0;
+          };
+          return getVal(b) - getVal(a);
         });
 
       const areaPillsHtml = areaDeltaEntries.length > 0 ? `
         <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px;">
           ${areaDeltaEntries.map(([area, d]) => {
         const label = areaLabels[area] || area;
-        if (d && typeof d === 'object' && d.dropped) {
+        if (d && d.dropped) {
           return `<span class="area-pill negative">↓ ${label} (Unranked - was #${d.wasRank})</span>`;
         }
-        if (d && typeof d === 'object' && d.entered) {
-          return `<span class="area-pill positive">↑ ${label} (→ #${d.nowRank})</span>`;
+        if (d && d.entered) {
+          return `<span class="area-pill positive">↑ ${label} +New (→ #${d.nowRank})</span>`;
         }
-        if (d === 0) {
-          return `<span class="area-pill neutral">${label} ±0</span>`;
+        
+        const deltaVal = d && d.delta !== undefined ? d.delta : (typeof d === 'number' ? d : 0);
+        const nowRank = d && d.nowRank !== undefined ? d.nowRank : null;
+
+        if (deltaVal === 0) {
+          return `<span class="area-pill neutral">${label} ±0${nowRank ? ` (#${nowRank})` : ''}</span>`;
         }
-        const arrow = d > 0 ? '↑' : '↓';
-        const sign = d > 0 ? '+' : '';
-        const cls = d > 0 ? 'positive' : 'negative';
-        return `<span class="area-pill ${cls}">${arrow} ${label} ${sign}${d}</span>`;
+        const arrow = deltaVal > 0 ? '↑' : '↓';
+        const sign = deltaVal > 0 ? '+' : '';
+        const cls = deltaVal > 0 ? 'positive' : 'negative';
+        return `<span class="area-pill ${cls}">${arrow} ${label} ${sign}${deltaVal} (→ #${nowRank})</span>`;
       }).join('')}
         </div>
       ` : '';
