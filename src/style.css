@@ -3,19 +3,28 @@
    ========================================= */
 :root {
   --bg-color: #ffffff;
-  --text-color: hsl(0, 0%, 0%);
-  --text-primary: #000000;
-  --text-secondary: #000000;
-  --accent-color: #333333;
+  --text-color: #0f172a;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --accent-color: #475569;
   --card-bg: #ffffff;
-  --border-color: #000000;
-  --hover-bg: #f5f5f5;
-  --primary-color: #000000;
-  --primary-dark: #000000;
-  --primary-light: #eff6ff;
+  --border-color: #cbd5e1;
+  --hover-bg: #f8fafc;
+  --primary-color: #0f172a;
+  --primary-dark: #1e293b;
+  --primary-light: #f1f5f9;
 
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
+
+  --text-xs: 0.8rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.563rem;
+  --text-2xl: 1.953rem;
+  --text-3xl: 2.5rem;
+  --text-4xl: 3.5rem;
 
   /* Impact Colors */
   --impact-pos-bg: rgba(16, 185, 129, 0.12);
@@ -212,7 +221,7 @@ header {
 
 h1 {
   font-family: var(--font-heading);
-  font-size: 3.5rem;
+  font-size: var(--text-4xl);
   font-weight: 800;
   letter-spacing: -0.03em;
   margin: 0;
@@ -221,7 +230,7 @@ h1 {
 
 header p {
   color: var(--text-secondary);
-  font-size: 1.2rem;
+  font-size: var(--text-lg);
   margin-top: 0.5rem;
   font-weight: 400;
 }
@@ -229,7 +238,7 @@ header p {
 /* Sections */
 .section-title {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: var(--text-xl);
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid var(--border-color);
@@ -352,10 +361,15 @@ footer a:hover {
 }
 
 .filters {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
+  padding: 1.5rem 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  margin-bottom: 2rem;
 }
 
 .actions-container {
@@ -366,21 +380,33 @@ footer a:hover {
 
 .filter-group {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.375rem;
+}
+
+.filter-group.checkboxes {
+  flex-direction: row;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1.5rem;
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+  border-top: 1px dashed var(--border-color);
+  padding-top: 1rem;
 }
 
 .filter-group label {
   font-weight: 500;
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .filter-group select {
+  width: 100%;
   padding: 0.5rem 2rem 0.5rem 1rem;
-  font-size: 0.95rem;
+  font-size: var(--text-sm);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background-color: var(--bg-secondary);
@@ -409,14 +435,20 @@ footer a:hover {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  width: 100%;
 }
 
-.year-separator {
+.year-inputs select {
+  flex: 1;
+}
+
+.year-inputs span {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
+  font-weight: 500;
 }
 
-option{
+option {
   background-color: var(--bg-color);
 }
 
@@ -496,7 +528,7 @@ input[type="text"]::placeholder {
 .card h2 {
   margin: 0 0 0.25rem;
   font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: var(--text-xl);
   font-weight: 700;
   user-select: text;
   cursor: text;
@@ -507,13 +539,13 @@ input[type="text"]::placeholder {
 .card-subtitle {
   color: var(--text-secondary);
   margin-bottom: 0.5rem;
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   font-weight: 400;
   font-family: var(--font-body);
 }
 
 .card-stats {
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   color: var(--text-secondary);
   margin-bottom: 1rem;
 }
@@ -849,6 +881,31 @@ input[type="text"]::placeholder {
   font-size: 0.85rem;
   color: var(--text-secondary);
   margin-top: 0.25rem;
+}
+
+.candidate-area-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.area-breakdown-tag {
+  font-size: 0.78em;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: var(--hover-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.area-breakdown-tag strong {
+  color: var(--text-secondary);
+  font-weight: 600;
 }
 
 .candidate-impact {
@@ -1296,4 +1353,33 @@ input[type="text"]::placeholder {
   width: 10px;
   height: 10px;
   border-radius: 2px;
+}
+
+/* =========================================
+   View Transitions API & Premium Easing
+   ========================================= */
+
+/* circular theme toggle sweep transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/* Ensure prefers-reduced-motion turns off view transitions */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+    transition: none !important;
+  }
 }
