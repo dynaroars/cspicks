@@ -1883,11 +1883,17 @@ function setupSimulation() {
   checkHash();
   window.addEventListener('hashchange', checkHash);
 
-  openBtn.addEventListener('click', () => {
+  const openModalWithTransition = () => {
     modal.classList.remove('hidden');
     univSearch.focus();
-  });
-  closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+  };
+
+  const closeModalWithTransition = () => {
+    modal.classList.add('hidden');
+  };
+
+  openBtn.addEventListener('click', openModalWithTransition);
+  closeBtn.addEventListener('click', closeModalWithTransition);
 
   const resetSimulation = () => {
     selectedUniv = null;
@@ -1999,6 +2005,13 @@ function setupSimulation() {
         candidatesInput.focus();
       });
     });
+  });
+
+  candidatesInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      analyzeBtn.click();
+    }
   });
 
   analyzeBtn.addEventListener('click', async () => {
@@ -2152,7 +2165,7 @@ function setupSimulation() {
 
           if (confFilteredPubs.length === 0) {
             // No papers in this year range/conf set - show as such
-            candidateResults.push({ name: displayName, error: `No papers in ${startYear}-${endYear} for active set` });
+            candidateResults.push({ name: displayName, error: `No publication records found in ${startYear}–${endYear} for the active conference set` });
             continue;
           }
 
@@ -2191,18 +2204,48 @@ function setupSimulation() {
           stats.papers.sort((a, b) => b.year - a.year);
         } else {
           // External candidate - query DBLP
-          const searchResults = await window.dblp.search(name);
-          if (!searchResults || searchResults.length === 0) {
-            candidateResults.push({ name, error: 'Not found in DBLP or CSRankings' });
+
+          let searchName = name;
+          let dblpSuffix = null;
+          const suffixMatch = name.match(/^(.+?)\s+(\d{4})$/);
+          if (suffixMatch) {
+            searchName = suffixMatch[1];
+            dblpSuffix = suffixMatch[2];
+          }
+
+          const searchResults = await window.dblp.search(searchName);
+
+          let best = null;
+          if (searchResults && searchResults.length > 0) {
+            if (dblpSuffix) {
+              const numSuffix = parseInt(dblpSuffix, 10);
+              best = searchResults.find(r => {
+                if (numSuffix === 0) {
+                  return !r.pid.includes('-');
+                }
+                return r.pid.endsWith(`-${numSuffix}`);
+              });
+              if (!best) {
+                best = searchResults.find(r =>
+                  r.name.includes(dblpSuffix) || r.name.endsWith(dblpSuffix)
+                );
+              }
+              if (!best) best = searchResults[0];
+            } else {
+              best = searchResults[0];
+            }
+          }
+
+          if (!best) {
+            candidateResults.push({ name, error: 'No matching profile found in the CSRankings database or DBLP search' });
             continue;
           }
 
-          const best = searchResults[0];
           displayName = best.name;
 
           stats = await window.dblp.stats(best.pid, startYear, endYear);
           if (!stats) {
-            candidateResults.push({ name, error: 'Failed to fetch stats' });
+            candidateResults.push({ name, error: 'We couldn\'t retrieve publication records from DBLP. Please verify the profile is accessible.' });
             continue;
           }
         }
@@ -2282,7 +2325,7 @@ function setupSimulation() {
       } catch (err) {
         console.error('Simulator error for:', name, err);
         console.error('Stack:', err.stack);
-        candidateResults.push({ name, error: 'Error fetching data: ' + err.message });
+        candidateResults.push({ name, error: `An unexpected error occurred while retrieving data: ${err.message}. Please try again.` });
       }
     }
 
@@ -2483,7 +2526,7 @@ function setupSimulation() {
         if (d && d.entered) {
           return `<span class="area-pill positive">↑ ${label} +New (→ #${d.nowRank})</span>`;
         }
-        
+
         const deltaVal = d && d.delta !== undefined ? d.delta : (typeof d === 'number' ? d : 0);
         const nowRank = d && d.nowRank !== undefined ? d.nowRank : null;
 
@@ -2510,6 +2553,16 @@ function setupSimulation() {
                 ${dataSourceBadge}
               </div>
               <div class="candidate-stats">${Object.keys(c.stats.areas).length} areas, ${c.stats.totalPapers} papers, ${c.stats.totalAdjusted.toFixed(1)} adjusted</div>
+              <div class="candidate-area-breakdown">
+                ${Object.entries(c.stats.areas)
+          .sort(([, a], [, b]) => (b.count || b) - (a.count || a))
+          .map(([area, areaStats]) => {
+            const count = typeof areaStats === 'number' ? Math.ceil(areaStats) : (areaStats.count || 0);
+            const adj = typeof areaStats === 'number' ? areaStats : (areaStats.adjusted || 0);
+            const label = areaLabels[area] || area;
+            return `<span class="area-breakdown-tag">${label} <strong>(${count} ${count === 1 ? 'paper' : 'papers'})</strong></span>`;
+          }).join('')}
+              </div>
               ${areaPillsHtml}
             </div>
             <div class="candidate-impact">
@@ -2703,18 +2756,55 @@ function setupThemeToggle() {
   const toggle = document.getElementById('theme-toggle');
   if (!toggle) return;
 
-  toggle.addEventListener('click', () => {
+  toggle.addEventListener('click', (event) => {
     const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
     const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
 
-    if (ChartCtor) {
-      updateChartDefaults(ChartCtor);
-      activeSchoolCharts.forEach((data, uniqueId) => {
-        loadSchoolCharts(data.schoolName, uniqueId);
-      });
+    if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      if (ChartCtor) {
+        updateChartDefaults(ChartCtor);
+        activeSchoolCharts.forEach((data, uniqueId) => {
+          loadSchoolCharts(data.schoolName, uniqueId);
+        });
+      }
+      return;
     }
+
+    const x = event.clientX ?? window.innerWidth / 2;
+    const y = event.clientY ?? window.innerHeight / 2;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => {
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      if (ChartCtor) {
+        updateChartDefaults(ChartCtor);
+        activeSchoolCharts.forEach((data, uniqueId) => {
+          loadSchoolCharts(data.schoolName, uniqueId);
+        });
+      }
+    });
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`
+          ]
+        },
+        {
+          duration: 450,
+          easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+          pseudoElement: '::view-transition-new(root)'
+        }
+      );
+    });
   });
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {

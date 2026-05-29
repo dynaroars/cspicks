@@ -26,3 +26,6 @@ dist-ssr
 public/data/*.csv
 remote_history.json
 debug_gmu_history.js
+
+.gemini/
+.impeccable/

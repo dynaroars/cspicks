@@ -61,6 +61,7 @@
         </div>
 
         <div class="filter-group" id="year-filter-group">
+          <label>Year Range</label>
           <div class="year-inputs">
             <select id="start-year"></select>
             <span>to</span>
@@ -69,8 +70,8 @@
         </div>
 
         <div class="filter-group">
-          <select id="conf-set"
-            style="padding: 0.25rem 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.9rem; background: var(--card-bg); color: var(--text-primary);">
+          <label for="conf-set">Conference Set</label>
+          <select id="conf-set">
             <option value="csrankings-default" selected>CSRankings (Default)</option>
             <option value="csrankings">CSRankings (All)</option>
             <option value="core">CORE A*</option>
@@ -78,7 +79,7 @@
           </select>
         </div>
 
-        <div class="filter-group" style="display: flex; gap: 1.5rem;">
+        <div class="filter-group checkboxes">
           <label for="show-rankings" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
             <input type="checkbox" id="show-rankings" style="width: 16px; height: 16px; cursor: pointer;">
             <span>Show Rankings</span>
@@ -153,7 +154,10 @@
               </div>
             </div>
             <textarea id="sim-candidates-input" rows="4"
-              placeholder="Or paste external candidate names here (one per line)&#10;John Smith&#10;Jane Doe"></textarea>
+              placeholder="Or paste external candidate names (one per line).&#10;Examples:&#10;John Smith&#10;Lishan Yang 0001 (DBLP suffix)"></textarea>
+            <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.35rem; line-height: 1.4;">
+              💡 <strong>DBLP Disambiguation</strong>: Append a 4-digit DBLP suffix (e.g., <code>0001</code>) to target the exact profile on DBLP. Press <code>Cmd+Enter</code> or <code>Ctrl+Enter</code> to analyze.
+            </p>
             <button id="sim-analyze-btn" class="btn-secondary" style="margin-top: 1rem; width: 100%;">
               Analyze Candidates
             </button>

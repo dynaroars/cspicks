@@ -280,9 +280,25 @@ function renderComparison() {
     const schoolAName = document.getElementById('school-a').value;
     const schoolBName = document.getElementById('school-b').value;
 
-    if (!schoolAName || !schoolBName || schoolAName === schoolBName) {
+    if (!schoolAName || !schoolBName) {
         document.getElementById('comparison-chart-container').style.display = 'none';
-        document.getElementById('comparison-summary').innerHTML = '';
+        document.getElementById('comparison-summary').innerHTML = `
+            <div class="summary-card" style="grid-column: 1 / -1; text-align: center; padding: 2rem; border-style: dashed;">
+                <h4 style="margin: 0 0 0.5rem 0; color: var(--text-secondary); font-weight: 500;">Ready to Compare</h4>
+                <p style="margin: 0; color: var(--text-secondary); font-size: var(--text-sm);">Select two institutions above to analyze their publication weights side by side.</p>
+            </div>
+        `;
+        return;
+    }
+
+    if (schoolAName === schoolBName) {
+        document.getElementById('comparison-chart-container').style.display = 'none';
+        document.getElementById('comparison-summary').innerHTML = `
+            <div class="summary-card" style="grid-column: 1 / -1; text-align: center; padding: 2rem; border-style: dashed;">
+                <h4 style="margin: 0 0 0.5rem 0; color: var(--text-secondary); font-weight: 500;">Identical Selection</h4>
+                <p style="margin: 0; color: var(--text-secondary); font-size: var(--text-sm);">Please choose two different universities to generate a head-to-head comparison.</p>
+            </div>
+        `;
         return;
     }
 
@@ -421,7 +437,7 @@ function renderSummary(schoolAName, schoolBName, areas, dataA, dataB) {
         <h4 style="margin: 0; color: rgba(37, 99, 235, 1); font-weight: 600;">${schoolAName} Leads</h4>`;
     insightsA.forEach(insight => {
         html += `
-            <div class="summary-card" style="border-left: 3px solid rgba(37, 99, 235, 1);">
+            <div class="summary-card" style="border: 1px solid rgba(37, 99, 235, 0.25); background: rgba(37, 99, 235, 0.02);">
                 <h4>${insight.area}</h4>
                 <div class="margin" style="color: rgba(37, 99, 235, 1);">+${insight.margin} adjusted pubs</div>
             </div>
@@ -433,7 +449,7 @@ function renderSummary(schoolAName, schoolBName, areas, dataA, dataB) {
         <h4 style="margin: 0; color: rgba(16, 185, 129, 1); font-weight: 600;">${schoolBName} Leads</h4>`;
     insightsB.forEach(insight => {
         html += `
-            <div class="summary-card" style="border-left: 3px solid rgba(16, 185, 129, 1);">
+            <div class="summary-card" style="border: 1px solid rgba(16, 185, 129, 0.25); background: rgba(16, 185, 129, 0.02);">
                 <h4>${insight.area}</h4>
                 <div class="margin" style="color: rgba(16, 185, 129, 1);">+${insight.margin} adjusted pubs</div>
             </div>
