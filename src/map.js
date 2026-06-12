@@ -1,35 +1,6 @@
 import { loadData, filterByYears, parentMap } from './data.js';
 import { schoolCoords } from './school_coords.js';
-
-const areaLabels = {
-    'ai': 'AI',
-    'vision': 'Computer Vision',
-    'mlmining': 'Machine Learning',
-    'nlp': 'Natural Language Processing',
-    'inforet': 'Information Retrieval',
-    'arch': 'Computer Architecture',
-    'sec': 'Computer Security',
-    'mod': 'Databases',
-    'da': 'Design Automation',
-    'bed': 'Embedded & Real-Time Systems',
-    'hpc': 'High-Performance Computing',
-    'mobile': 'Mobile Computing',
-    'metrics': 'Measurement & Perf. Analysis',
-    'ops': 'Operating Systems',
-    'plan': 'Programming Languages',
-    'soft': 'Software Engineering',
-    'comm': 'Computer Networks',
-    'graph': 'Computer Graphics',
-    'act': 'Algorithms & Complexity',
-    'crypt': 'Cryptography',
-    'log': 'Logic & Verification',
-    'bio': 'Comp. Bio & Bioinformatics',
-    'ecom': 'Economics & Computation',
-    'chi': 'Human-Computer Interaction',
-    'robotics': 'Robotics',
-    'visualization': 'Visualization',
-    'csed': 'Computer Science Education'
-};
+import { areaLabels, cleanName } from './shared.js';
 
 let map;
 let markersLayer;
@@ -86,10 +57,6 @@ function rankColor(rank, total) {
         const b = Math.round(8 + t * (68 - 8));
         return `rgb(${r},${g},${b})`;
     }
-}
-
-function cleanName(name) {
-    return name.replace(/\s+\d+$/, '');
 }
 
 function renderMarkers() {

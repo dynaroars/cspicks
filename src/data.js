@@ -411,7 +411,7 @@ const topLevelAreas = [...new Set(Object.values(parentMap))];
 const numAreas = topLevelAreas.length;
 
 
-export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'csrankings') {
+export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'csrankings', useRaw = false) {
   const { professors, schools } = data;
   const filteredProfs = {};
   const filteredSchools = {};
@@ -551,8 +551,8 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
   schoolList.forEach(school => {
     let score = 1.0;
     topLevelAreas.forEach(area => {
-      const adjustedCount = school.areaAdjustedCounts[area] || 0;
-      score *= (adjustedCount + 1.0);
+      const val = useRaw ? (school.areas[area]?.count || 0) : (school.areaAdjustedCounts[area] || 0);
+      score *= (val + 1.0);
     });
     // Round to 1 decimal place
     school.score = Math.round(10.0 * Math.pow(score, 1 / numAreas)) / 10.0;

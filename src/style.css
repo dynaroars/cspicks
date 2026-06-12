@@ -1376,10 +1376,95 @@ input[type="text"]::placeholder {
 
 /* Ensure prefers-reduced-motion turns off view transitions */
 @media (prefers-reduced-motion: reduce) {
+
   ::view-transition-group(*),
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation: none !important;
     transition: none !important;
   }
+}
+
+.school-rank-attribution {
+  margin: 0.5rem 0 1rem 0;
+  font-family: var(--font-body);
+}
+
+.attribution-details {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--hover-bg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.attribution-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+
+.attribution-summary::-webkit-details-marker {
+  display: none;
+}
+
+.attribution-summary:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .attribution-summary:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.attribution-content {
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contribution-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.contribution-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.contribution-label {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.contribution-value {
+  color: var(--text-secondary);
+  font-family: monospace;
+}
+
+.contribution-bar-container {
+  height: 6px;
+  background-color: var(--border-color);
+  border-radius: 3px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.contribution-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
