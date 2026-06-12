@@ -1,68 +1,27 @@
 import Chart from 'chart.js/auto';
 import { loadData, filterByYears, parentMap } from './data.js';
+import { areaLabels, updateChartDefaults } from './shared.js';
 
-function getChartColors() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    return {
-        text: isDark ? '#e0e0e0' : '#666666',
-        grid: isDark ? '#3d4043' : '#e5e7eb',
-        title: isDark ? '#ffffff' : '#111111'
-    };
+updateChartDefaults(Chart);
+
+function refreshActiveTabChart() {
+    if (currentTab === 'schools') renderSchoolTrends();
+    else if (currentTab === 'areas') renderAreaTrends();
+    else if (currentTab === 'faculty') renderFacultyTrends();
+    else if (currentTab === 'effort') renderSubfieldEffort();
+    else if (currentTab === 'ai-trends') renderAITrends();
+    else if (currentTab === 'conf-trends') renderConferenceTrends();
 }
-
-function updateChartDefaults() {
-    const colors = getChartColors();
-    Chart.defaults.color = colors.text;
-    Chart.defaults.borderColor = colors.grid;
-    Chart.defaults.plugins.title.color = colors.title;
-    Chart.defaults.plugins.legend.labels.color = colors.text;
-    Chart.defaults.scale.ticks.color = colors.text;
-    Chart.defaults.scale.title.color = colors.text;
-}
-
-updateChartDefaults();
 
 const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         if (mutation.attributeName === 'data-theme') {
-            updateChartDefaults();
-            if (currentTab === 'schools') renderSchoolTrends();
-            else if (currentTab === 'areas') renderAreaTrends();
-            else if (currentTab === 'faculty') renderFacultyTrends();
+            updateChartDefaults(Chart);
+            refreshActiveTabChart();
         }
     });
 });
 observer.observe(document.documentElement, { attributes: true });
-
-const areaLabels = {
-    'ai': 'AI',
-    'vision': 'Computer Vision',
-    'mlmining': 'Machine Learning',
-    'nlp': 'NLP',
-    'inforet': 'Info Retrieval',
-    'arch': 'Architecture',
-    'sec': 'Security',
-    'mod': 'Databases',
-    'da': 'Design Automation',
-    'bed': 'Embedded Systems',
-    'hpc': 'HPC',
-    'mobile': 'Mobile',
-    'metrics': 'Measurement',
-    'ops': 'Operating Systems',
-    'plan': 'Programming Languages',
-    'soft': 'Software Engineering',
-    'comm': 'Networks',
-    'graph': 'Graphics',
-    'act': 'Algorithms',
-    'crypt': 'Cryptography',
-    'log': 'Logic & Verification',
-    'bio': 'Bioinformatics',
-    'ecom': 'Econ & Computation',
-    'chi': 'HCI',
-    'robotics': 'Robotics',
-    'visualization': 'Visualization',
-    'csed': 'CS Education'
-};
 
 // State
 let rawData = [];
@@ -71,6 +30,7 @@ let schoolAliases = {};
 let chartInstance = null;
 let currentTab = 'schools';
 let historicalMode = false;
+let focusSchoolOnly = false;
 
 async function init() {
     console.log('Initializing Analysis Dashboard...');
@@ -90,7 +50,9 @@ async function init() {
         populateSchoolSelect();
         setupYearSelectors();
         setupHistoricalMode();
+        setupFocusMode();
         setupTabs();
+        setupConferenceFilterButtons();
         renderSchoolTrends();
     } catch (err) {
         console.error('Analysis load error:', err);
@@ -107,9 +69,7 @@ function populateSchoolSelect() {
     ).join('');
 
     select.addEventListener('change', () => {
-        if (currentTab === 'schools') renderSchoolTrends();
-        else if (currentTab === 'areas') renderAreaTrends();
-        else if (currentTab === 'faculty') renderFacultyTrends();
+        refreshActiveTabChart();
     });
 }
 
@@ -123,9 +83,7 @@ function setupYearSelectors() {
         startSelect.innerHTML += `<option value="${y}" ${y === currentYear - 10 ? 'selected' : ''}>${y}</option>`;
     }
     const refresh = () => {
-        if (currentTab === 'schools') renderSchoolTrends();
-        else if (currentTab === 'areas') renderAreaTrends();
-        else if (currentTab === 'faculty') renderFacultyTrends();
+        refreshActiveTabChart();
     };
     startSelect.addEventListener('change', refresh);
     endSelect.addEventListener('change', refresh);
@@ -136,9 +94,17 @@ function setupHistoricalMode() {
     if (historicalToggle) {
         historicalToggle.addEventListener('change', () => {
             historicalMode = historicalToggle.checked;
-            if (currentTab === 'schools') renderSchoolTrends();
-            else if (currentTab === 'areas') renderAreaTrends();
-            else if (currentTab === 'faculty') renderFacultyTrends();
+            refreshActiveTabChart();
+        });
+    }
+}
+
+function setupFocusMode() {
+    const focusToggle = document.getElementById('analysis-focus-mode');
+    if (focusToggle) {
+        focusToggle.addEventListener('change', () => {
+            focusSchoolOnly = focusToggle.checked;
+            refreshActiveTabChart();
         });
     }
 }
@@ -164,6 +130,15 @@ function setupTabs() {
             } else if (tabName === 'faculty') {
                 document.getElementById('faculty-diversity-view').style.display = 'block';
                 renderFacultyTrends();
+            } else if (tabName === 'effort') {
+                document.getElementById('effort-view').style.display = 'block';
+                renderSubfieldEffort();
+            } else if (tabName === 'ai-trends') {
+                document.getElementById('ai-trends-view').style.display = 'block';
+                renderAITrends();
+            } else if (tabName === 'conf-trends') {
+                document.getElementById('conf-trends-view').style.display = 'block';
+                renderConferenceTrends();
             }
         });
     });
@@ -246,6 +221,23 @@ async function renderSchoolTrends() {
     }
 }
 
+function isPubAtSchool(prof, pub, targetSchool) {
+    if (historicalMode) {
+        if (affiliationHistory && affiliationHistory[prof.name]) {
+            const matches = affiliationHistory[prof.name].filter(seg => pub.year >= seg.start && pub.year <= seg.end);
+            if (matches.length > 0) {
+                return matches.some(h => {
+                    const normalized = schoolAliases[h.school] || h.school;
+                    return normalized === targetSchool;
+                });
+            }
+        }
+        return prof.affiliation === targetSchool;
+    } else {
+        return prof.affiliation === targetSchool;
+    }
+}
+
 // ------------------
 //    AREA TRENDS
 // ------------------
@@ -271,33 +263,16 @@ function renderAreaTrends() {
 
     const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
 
-    const schoolProfs = Object.values(rawData.professors).filter(p => p.affiliation === targetSchool);
-    const allPubs = schoolProfs.flatMap(p => p.pubs);
-
-    allPubs.forEach(pub => {
-        if (pub.year >= startYear && pub.year <= currentYear) {
-            // Check history for this specific pub
-            let isAtTargetSchool = true;
-            if (affiliationHistory && affiliationHistory[pub.name]) {
-                const h = affiliationHistory[pub.name].find(s => pub.year >= s.start && pub.year <= s.end);
-
-                if (h) {
-                    // Normalize the OpenAlex school name using aliases
-                    const normalizedSchool = schoolAliases[h.school] || h.school;
-                    isAtTargetSchool = normalizedSchool === targetSchool;
-                } else {
-                    isAtTargetSchool = false;
+    Object.values(rawData.professors).forEach(prof => {
+        prof.pubs.forEach(pub => {
+            if (pub.year >= startYear && pub.year <= currentYear) {
+                if (isPubAtSchool(prof, pub, targetSchool)) {
+                    const area = parentMap[pub.area] || pub.area;
+                    if (!stats[pub.year][area]) stats[pub.year][area] = 0;
+                    stats[pub.year][area] += pub.adjustedcount;
                 }
-            } else if (historicalMode) {
-                isAtTargetSchool = false; // In strict historical mode, if not in history, it's not there.
             }
-
-            if (isAtTargetSchool) {
-                const area = parentMap[pub.area] || pub.area;
-                if (!stats[pub.year][area]) stats[pub.year][area] = 0;
-                stats[pub.year][area] += pub.adjustedcount;
-            }
-        }
+        });
     });
 
     const areaTotals = {};
@@ -414,14 +389,15 @@ function renderFacultyTrends() {
         const authorAreas = {};
 
         const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
-        const schoolProfs = Object.entries(rawData.professors).filter(([, p]) => p.affiliation === targetSchool);
 
-        schoolProfs.forEach(([profName, prof]) => {
+        Object.values(rawData.professors).forEach(prof => {
             prof.pubs.forEach(pub => {
                 if (pub.year >= wStart && pub.year <= wEnd) {
-                    if (!authorAreas[profName]) authorAreas[profName] = new Set();
-                    const area = parentMap[pub.area] || pub.area;
-                    authorAreas[profName].add(area);
+                    if (isPubAtSchool(prof, pub, targetSchool)) {
+                        if (!authorAreas[prof.name]) authorAreas[prof.name] = new Set();
+                        const area = parentMap[pub.area] || pub.area;
+                        authorAreas[prof.name].add(area);
+                    }
                 }
             });
         });
@@ -511,6 +487,331 @@ function renderFacultyTrends() {
                 title: {
                     display: true,
                     text: 'Faculty publishing in 2+ research areas (3-year rolling window)'
+                }
+            }
+        }
+    });
+}
+
+function setupConferenceFilterButtons() {
+    const selectAllBtn = document.getElementById('conf-select-all');
+    const clearAllBtn = document.getElementById('conf-clear-all');
+    const selectMajorBtn = document.getElementById('conf-select-major');
+
+    if (selectAllBtn) {
+        selectAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('#conf-trends-view input[type="checkbox"]').forEach(cb => {
+                cb.checked = true;
+            });
+            renderConferenceTrends();
+        });
+    }
+
+    if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('#conf-trends-view input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+            renderConferenceTrends();
+        });
+    }
+
+    if (selectMajorBtn) {
+        const majorConfs = [
+            'cvpr', 'nips', 'iclr', 'icml', 'acl', 'pldi', 'popl',
+            'sigcomm', 'nsdi', 'osdi', 'sosp', 'focs', 'stoc',
+            'siggraph', 'chiconf', 'icse', 'fse', 'sigmod', 'vldb',
+            'ccs', 'oakland', 'usenixsec'
+        ];
+        selectMajorBtn.addEventListener('click', () => {
+            document.querySelectorAll('#conf-trends-view input[type="checkbox"]').forEach(cb => {
+                cb.checked = majorConfs.includes(cb.value);
+            });
+            renderConferenceTrends();
+        });
+    }
+
+    // Add change listeners to each checkbox to update chart on the fly
+    document.querySelectorAll('#conf-trends-view input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', () => {
+            renderConferenceTrends();
+        });
+    });
+}
+function renderSubfieldEffort() {
+    if (chartInstance) chartInstance.destroy();
+
+    const ctx = document.getElementById('effortChart')?.getContext('2d');
+    if (!ctx) return;
+
+    const startYear = parseInt(document.getElementById('analysis-start-year')?.value) || 2016;
+    const endYear = parseInt(document.getElementById('analysis-end-year')?.value) || new Date().getFullYear();
+    const numYears = endYear - startYear + 1;
+    const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
+
+    // calculate effort based on all professors in the dataset during the active period
+    const subfieldRates = {}; // subfield -> array of rates
+
+    Object.values(rawData.professors).forEach(prof => {
+        const profSubfieldCounts = {}; // subfield -> sum of adjusted count
+        prof.pubs.forEach(pub => {
+            if (pub.year >= startYear && pub.year <= endYear) {
+                if (focusSchoolOnly && !isPubAtSchool(prof, pub, targetSchool)) {
+                    return;
+                }
+                const subfield = parentMap[pub.area] || pub.area;
+                profSubfieldCounts[subfield] = (profSubfieldCounts[subfield] || 0) + pub.adjustedcount;
+            }
+        });
+
+        // For each subfield where the professor published, record their rate
+        Object.entries(profSubfieldCounts).forEach(([subfield, adjSum]) => {
+            if (adjSum > 0) {
+                if (!subfieldRates[subfield]) subfieldRates[subfield] = [];
+                subfieldRates[subfield].push(adjSum / numYears);
+            }
+        });
+    });
+
+    const subfields = [...new Set(Object.values(parentMap))];
+    const chartData = subfields.map(sf => {
+        const rates = subfieldRates[sf] || [];
+        // median
+        let median = 0;
+        if (rates.length > 0) {
+            rates.sort((a, b) => a - b);
+            const mid = Math.floor(rates.length / 2);
+            median = rates.length % 2 !== 0 ? rates[mid] : (rates[mid - 1] + rates[mid]) / 2;
+        }
+        return {
+            subfield: sf,
+            label: areaLabels[sf] || sf,
+            median: median,
+            count: rates.length // number of active researchers
+        };
+    });
+
+    // Sort by median descending
+    chartData.sort((a, b) => b.median - a.median);
+
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const barColor = isDark ? '#36c5f0' : '#475569';
+
+    chartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.map(d => d.label),
+            datasets: [{
+                label: 'Median Papers/Faculty/Year',
+                data: chartData.map(d => d.median),
+                backgroundColor: barColor,
+                borderColor: barColor,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            devicePixelRatio: 2,
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    title: { display: true, text: 'Median Adjusted Papers / Year' },
+                    beginAtZero: true
+                },
+                y: {
+                    ticks: {
+                        font: { size: 10 }
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: focusSchoolOnly
+                        ? `Subfield Effort Index at ${targetSchool} (${startYear}-${endYear}): Median Pubs/Faculty/Year`
+                        : `Subfield Effort Index (${startYear}-${endYear}): Median Pubs/Faculty/Year per Subfield`
+                },
+                tooltip: {
+                    callbacks: {
+                        afterLabel: function (context) {
+                            const dataIndex = context.dataIndex;
+                            const d = chartData[dataIndex];
+                            return `Active Researchers: ${d.count}`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function renderAITrends() {
+    if (chartInstance) chartInstance.destroy();
+
+    const ctx = document.getElementById('aiTrendsChart')?.getContext('2d');
+    if (!ctx) return;
+
+    const startYear = parseInt(document.getElementById('analysis-start-year')?.value) || 2005;
+    const endYear = parseInt(document.getElementById('analysis-end-year')?.value) || new Date().getFullYear();
+    const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
+
+    const years = [];
+    const stats = {}; // year -> { subfield -> sum }
+    for (let y = startYear; y <= endYear; y++) {
+        years.push(y);
+        stats[y] = { 'ai': 0, 'vision': 0, 'mlmining': 0, 'nlp': 0, 'robotics': 0, 'visualization': 0 };
+    }
+
+    // iterate over all professors and sum their publications in these subfields
+    Object.values(rawData.professors).forEach(prof => {
+        prof.pubs.forEach(pub => {
+            if (pub.year >= startYear && pub.year <= endYear) {
+                if (focusSchoolOnly && !isPubAtSchool(prof, pub, targetSchool)) {
+                    return;
+                }
+                const subfield = parentMap[pub.area] || pub.area;
+                if (stats[pub.year] && Object.prototype.hasOwnProperty.call(stats[pub.year], subfield)) {
+                    stats[pub.year][subfield] += pub.adjustedcount;
+                }
+            }
+        });
+    });
+
+    const aiSubfields = ['ai', 'vision', 'mlmining', 'nlp', 'robotics', 'visualization'];
+    const colors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4'];
+
+    const datasets = aiSubfields.map((sf, index) => {
+        const data = years.map(y => stats[y][sf]);
+        return {
+            label: areaLabels[sf] || sf,
+            data: data,
+            borderColor: colors[index % colors.length],
+            backgroundColor: colors[index % colors.length],
+            tension: 0.3,
+            fill: false,
+            pointRadius: 3,
+            borderWidth: 2
+        };
+    });
+
+    chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: years,
+            datasets: datasets
+        },
+        options: {
+            devicePixelRatio: 2,
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            scales: {
+                y: {
+                    title: { display: true, text: 'Total Adjusted Publication Volume' },
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: focusSchoolOnly
+                        ? `AI Subfields Growth at ${targetSchool} (${startYear}-${endYear})`
+                        : `Global Growth of AI Subfields (${startYear}-${endYear})`
+                }
+            }
+        }
+    });
+}
+
+function renderConferenceTrends() {
+    if (chartInstance) chartInstance.destroy();
+
+    const ctx = document.getElementById('confTrendsChart')?.getContext('2d');
+    if (!ctx) return;
+
+    const startYear = parseInt(document.getElementById('analysis-start-year')?.value) || 2010;
+    const endYear = parseInt(document.getElementById('analysis-end-year')?.value) || new Date().getFullYear();
+    const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
+
+    // get list of selected conferences
+    const checkedCheckboxes = document.querySelectorAll('#conf-trends-view input[type="checkbox"]:checked');
+    const selectedConfs = Array.from(checkedCheckboxes).map(cb => cb.value);
+
+    const years = [];
+    const stats = {}; // year -> { conf -> count }
+    for (let y = startYear; y <= endYear; y++) {
+        years.push(y);
+        stats[y] = {};
+        selectedConfs.forEach(conf => {
+            stats[y][conf] = 0;
+        });
+    }
+
+    // Aggregate conference publication volume
+    Object.values(rawData.professors).forEach(prof => {
+        prof.pubs.forEach(pub => {
+            if (pub.year >= startYear && pub.year <= endYear) {
+                if (focusSchoolOnly && !isPubAtSchool(prof, pub, targetSchool)) {
+                    return;
+                }
+                const conf = pub.area;
+                if (stats[pub.year] && Object.prototype.hasOwnProperty.call(stats[pub.year], conf)) {
+                    stats[pub.year][conf] += pub.count;
+                }
+            }
+        });
+    });
+
+    const colors = [
+        '#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6',
+        '#ec4899', '#6366f1', '#14b8a6', '#06b6d4', '#f97316',
+        '#84cc16', '#a855f7', '#0f172a', '#e11d48', '#34d399'
+    ];
+
+    const datasets = selectedConfs.map((conf, index) => {
+        const data = years.map(y => stats[y][conf] || 0);
+        return {
+            label: conf.toUpperCase(),
+            data: data,
+            borderColor: colors[index % colors.length],
+            backgroundColor: colors[index % colors.length],
+            tension: 0.3,
+            fill: false,
+            pointRadius: 3,
+            borderWidth: 2
+        };
+    });
+
+    chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: years,
+            datasets: datasets
+        },
+        options: {
+            devicePixelRatio: 2,
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            scales: {
+                y: {
+                    title: { display: true, text: 'Total Publications (Paper Count)' },
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: focusSchoolOnly
+                        ? `Conference Publication Volume Trends at ${targetSchool} (${startYear}-${endYear})`
+                        : `Conference Publication Volume Trends (${startYear}-${endYear})`
                 }
             }
         }

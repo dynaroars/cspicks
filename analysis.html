@@ -145,12 +145,29 @@
                     </span>
                 </label>
             </div>
+
+            <div style="margin-left: 2rem; display: flex; align-items: center;">
+                <label for="analysis-focus-mode"
+                    style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500; color: var(--text-secondary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                    <input type="checkbox" id="analysis-focus-mode"
+                        style="width: 16px; height: 16px; cursor: pointer;">
+                    <span>Filter by Focus School</span>
+                    <span class="tooltip-trigger"
+                        style="color: var(--text-secondary); cursor: help; position: relative;">
+                        ⓘ
+                        <span class="tooltip-content">When enabled, the AI Subfields Growth and Conference Trends charts show data for the selected Focus School only, rather than global totals.</span>
+                    </span>
+                </label>
+            </div>
         </div>
 
         <div class="nav-tabs">
             <div class="nav-tab active" data-tab="schools">School Trends</div>
             <div class="nav-tab" data-tab="areas">Area Growth</div>
             <div class="nav-tab" data-tab="faculty">Faculty Diversity</div>
+            <div class="nav-tab" data-tab="effort">Publishing Effort</div>
+            <div class="nav-tab" data-tab="ai-trends">AI Subfields</div>
+            <div class="nav-tab" data-tab="conf-trends">Conference Trends</div>
         </div>
 
         <div id="school-trends-view" class="view-section">
@@ -174,6 +191,92 @@
         <div id="faculty-diversity-view" class="view-section" style="display: none;">
             <div class="chart-container">
                 <canvas id="diversityChart"></canvas>
+            </div>
+        </div>
+
+        <div id="effort-view" class="view-section" style="display: none;">
+            <div class="chart-container" style="height: 600px;">
+                <canvas id="effortChart"></canvas>
+            </div>
+        </div>
+
+        <div id="ai-trends-view" class="view-section" style="display: none;">
+            <div class="chart-container">
+                <canvas id="aiTrendsChart"></canvas>
+            </div>
+        </div>
+
+        <div id="conf-trends-view" class="view-section" style="display: none;">
+            <div style="margin-bottom: 1.5rem; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem;">
+                <h3 style="margin-bottom: 1rem; font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-primary);">Filter Conferences</h3>
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem;">
+                    <button id="conf-select-all" class="btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.8rem; border-radius: 4px; cursor: pointer; border: 1px solid var(--border-color); background: var(--hover-bg); color: var(--text-primary);">Select All</button>
+                    <button id="conf-clear-all" class="btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.8rem; border-radius: 4px; cursor: pointer; border: 1px solid var(--border-color); background: var(--hover-bg); color: var(--text-primary);">Clear All</button>
+                    <button id="conf-select-major" class="btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.8rem; border-radius: 4px; cursor: pointer; border: 1px solid var(--border-color); background: var(--hover-bg); color: var(--text-primary);">Top Tier Only</button>
+                </div>
+                <div id="conf-checkbox-groups" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                    <div class="conf-group">
+                        <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.25rem;">AI / ML / Vision</h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem;">
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="aaai" checked> AAAI (AI)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="ijcai" checked> IJCAI (AI)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="cvpr" checked> CVPR (Vision)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="eccv" checked> ECCV (Vision)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="iccv" checked> ICCV (Vision)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="icml" checked> ICML (ML)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="iclr" checked> ICLR (ML)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="nips" checked> NeurIPS (ML)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="kdd" checked> KDD (ML/Mining)</label>
+                        </div>
+                    </div>
+                    <div class="conf-group">
+                        <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.25rem;">NLP & Systems</h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem;">
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="acl" checked> ACL (NLP)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="emnlp" checked> EMNLP (NLP)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="naacl" checked> NAACL (NLP)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="osdi" checked> OSDI (Systems)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="sosp" checked> SOSP (Systems)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="eurosys" checked> EuroSys (Systems)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="fast" checked> FAST (Systems)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="usenixatc" checked> ATC (Systems)</label>
+                        </div>
+                    </div>
+                    <div class="conf-group">
+                        <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.25rem;">Theory, Sec, DB, Networks</h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem;">
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="focs" checked> FOCS (Theory)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="stoc" checked> STOC (Theory)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="soda" checked> SODA (Theory)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="ccs" checked> CCS (Security)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="oakland" checked> IEEE S&P (Security)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="usenixsec" checked> USENIX Sec (Security)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="ndss" checked> NDSS (Security)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="sigmod" checked> SIGMOD (Databases)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="vldb" checked> VLDB (Databases)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="sigcomm" checked> SIGCOMM (Networks)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="nsdi" checked> NSDI (Networks)</label>
+                        </div>
+                    </div>
+                    <div class="conf-group">
+                        <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.25rem;">PL, SE, Graphics & Others</h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem;">
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="popl" checked> POPL (PL)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="pldi" checked> PLDI (PL)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="oopsla" checked> OOPSLA (PL)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="icse" checked> ICSE (SE)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="fse" checked> FSE (SE)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="siggraph" checked> SIGGRAPH (Graphics)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="chiconf" checked> CHI (HCI)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="icra" checked> ICRA (Robotics)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="iros" checked> IROS (Robotics)</label>
+                            <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;"><input type="checkbox" value="rss" checked> RSS (Robotics)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="confTrendsChart"></canvas>
             </div>
         </div>
 
