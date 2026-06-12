@@ -32,6 +32,21 @@ let currentTab = 'schools';
 let historicalMode = false;
 let focusSchoolOnly = false;
 
+// DOM Elements Cache
+let schoolSelectEl = null;
+let startYearSelectEl = null;
+let endYearSelectEl = null;
+let historicalToggleEl = null;
+let focusToggleEl = null;
+
+function cacheDOMElements() {
+    schoolSelectEl = document.getElementById('analysis-school-select');
+    startYearSelectEl = document.getElementById('analysis-start-year');
+    endYearSelectEl = document.getElementById('analysis-end-year');
+    historicalToggleEl = document.getElementById('analysis-historical-mode');
+    focusToggleEl = document.getElementById('analysis-focus-mode');
+}
+
 async function init() {
     console.log('Initializing Analysis Dashboard...');
     try {
@@ -47,6 +62,7 @@ async function init() {
 
         console.log('Data loaded:', rawData.length, 'records, history for', Object.keys(affiliationHistory).length, 'profs, aliases for', Object.keys(schoolAliases).length, 'schools');
 
+        cacheDOMElements();
         populateSchoolSelect();
         setupYearSelectors();
         setupHistoricalMode();
@@ -60,50 +76,47 @@ async function init() {
 }
 
 function populateSchoolSelect() {
-    const select = document.getElementById('analysis-school-select');
+    if (!schoolSelectEl) return;
     const allData = filterByYears(rawData, 2020, 2025, 'us');
     const schools = Object.keys(allData.schools).sort();
 
-    select.innerHTML = schools.map(s =>
+    schoolSelectEl.innerHTML = schools.map(s =>
         `<option value="${s}" ${s === 'George Mason University' ? 'selected' : ''}>${s}</option>`
     ).join('');
 
-    select.addEventListener('change', () => {
+    schoolSelectEl.addEventListener('change', () => {
         refreshActiveTabChart();
     });
 }
 
 function setupYearSelectors() {
-    const startSelect = document.getElementById('analysis-start-year');
-    const endSelect = document.getElementById('analysis-end-year');
+    if (!startYearSelectEl || !endYearSelectEl) return;
     const currentYear = new Date().getFullYear();
 
     for (let y = 2000; y <= currentYear; y++) {
-        endSelect.innerHTML += `<option value="${y}" ${y === currentYear ? 'selected' : ''}>${y}</option>`;
-        startSelect.innerHTML += `<option value="${y}" ${y === currentYear - 10 ? 'selected' : ''}>${y}</option>`;
+        endYearSelectEl.innerHTML += `<option value="${y}" ${y === currentYear ? 'selected' : ''}>${y}</option>`;
+        startYearSelectEl.innerHTML += `<option value="${y}" ${y === currentYear - 10 ? 'selected' : ''}>${y}</option>`;
     }
     const refresh = () => {
         refreshActiveTabChart();
     };
-    startSelect.addEventListener('change', refresh);
-    endSelect.addEventListener('change', refresh);
+    startYearSelectEl.addEventListener('change', refresh);
+    endYearSelectEl.addEventListener('change', refresh);
 }
 
 function setupHistoricalMode() {
-    const historicalToggle = document.getElementById('analysis-historical-mode');
-    if (historicalToggle) {
-        historicalToggle.addEventListener('change', () => {
-            historicalMode = historicalToggle.checked;
+    if (historicalToggleEl) {
+        historicalToggleEl.addEventListener('change', () => {
+            historicalMode = historicalToggleEl.checked;
             refreshActiveTabChart();
         });
     }
 }
 
 function setupFocusMode() {
-    const focusToggle = document.getElementById('analysis-focus-mode');
-    if (focusToggle) {
-        focusToggle.addEventListener('change', () => {
-            focusSchoolOnly = focusToggle.checked;
+    if (focusToggleEl) {
+        focusToggleEl.addEventListener('change', () => {
+            focusSchoolOnly = focusToggleEl.checked;
             refreshActiveTabChart();
         });
     }
@@ -148,17 +161,19 @@ function setupTabs() {
 
 async function renderSchoolTrends() {
     try {
-        if (chartInstance) chartInstance.destroy();
+        const canvas = document.getElementById('rankingChart');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
 
-        const ctx = document.getElementById('rankingChart')?.getContext('2d');
-        if (!ctx) {
-            console.error('Canvas rankingChart not found');
-            return;
+        if (chartInstance) {
+            chartInstance.destroy();
+            chartInstance = null;
         }
-        const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
-        const endYear = parseInt(document.getElementById('analysis-end-year')?.value) || new Date().getFullYear();
-        const startYear = endYear - 10;
 
+        const targetSchool = schoolSelectEl?.value || 'George Mason University';
+        const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
+        const startYear = endYear - 10;
 
         const labels = [];
         const dataPoints = [];
@@ -167,11 +182,29 @@ async function renderSchoolTrends() {
         console.log('Calculating trends for', targetSchool, 'from', startYear, 'to', endYear);
 
         const windowSize = endYear - startYear;
+        const overallMinYear = (endYear - 9) - windowSize;
+        const overallMaxYear = endYear;
+
+        // Pre-filter publications once to drastically improve loop performance
+        const preFilteredData = {
+            schools: rawData.schools,
+            professors: {}
+        };
+        Object.entries(rawData.professors).forEach(([name, prof]) => {
+            const filteredPubs = prof.pubs.filter(p => p.year >= overallMinYear && p.year <= overallMaxYear);
+            if (filteredPubs.length > 0) {
+                preFilteredData.professors[name] = {
+                    ...prof,
+                    pubs: filteredPubs
+                };
+            }
+        });
+
         for (let y = endYear - 9; y <= endYear; y++) {
             const wStart = Math.max(startYear, y - windowSize);
             const wEnd = y;
 
-            const result = filterByYears({ ...rawData }, wStart, wEnd, region, historicalMode ? affiliationHistory : null, historicalMode ? schoolAliases : null);
+            const result = filterByYears(preFilteredData, wStart, wEnd, region, historicalMode ? affiliationHistory : null, historicalMode ? schoolAliases : null);
             const school = result.schools[targetSchool];
 
             labels.push(y);
@@ -242,9 +275,15 @@ function isPubAtSchool(prof, pub, targetSchool) {
 //    AREA TRENDS
 // ------------------
 function renderAreaTrends() {
-    if (chartInstance) chartInstance.destroy();
+    const canvas = document.getElementById('areaChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    const ctx = document.getElementById('areaChart').getContext('2d');
+    if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
+    }
 
     const years = [];
     const currentYear = new Date().getFullYear();
@@ -261,7 +300,7 @@ function renderAreaTrends() {
         return;
     }
 
-    const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
+    const targetSchool = schoolSelectEl?.value || 'George Mason University';
 
     Object.values(rawData.professors).forEach(prof => {
         prof.pubs.forEach(pub => {
@@ -366,9 +405,15 @@ function renderAreaTrends() {
 // FACULTY DIVERSITY TRENDS
 // --------------------------------------------------------------------------
 function renderFacultyTrends() {
-    if (chartInstance) chartInstance.destroy();
+    const canvas = document.getElementById('diversityChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    const ctx = document.getElementById('diversityChart').getContext('2d');
+    if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
+    }
 
     const years = [];
     const currentYear = new Date().getFullYear();
@@ -378,6 +423,7 @@ function renderFacultyTrends() {
     const diversityRates = [];
     const facultyCounts = [];
     const multiAreaCounts = [];
+    const targetSchool = schoolSelectEl?.value || 'George Mason University';
 
     for (let y = startYear; y <= currentYear; y++) {
         years.push(y);
@@ -387,8 +433,6 @@ function renderFacultyTrends() {
 
         // Count distinct areas per author in this window
         const authorAreas = {};
-
-        const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
 
         Object.values(rawData.professors).forEach(prof => {
             prof.pubs.forEach(pub => {
@@ -539,15 +583,20 @@ function setupConferenceFilterButtons() {
     });
 }
 function renderSubfieldEffort() {
-    if (chartInstance) chartInstance.destroy();
-
-    const ctx = document.getElementById('effortChart')?.getContext('2d');
+    const canvas = document.getElementById('effortChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const startYear = parseInt(document.getElementById('analysis-start-year')?.value) || 2016;
-    const endYear = parseInt(document.getElementById('analysis-end-year')?.value) || new Date().getFullYear();
+    if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
+    }
+
+    const startYear = parseInt(startYearSelectEl?.value) || 2016;
+    const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
     const numYears = endYear - startYear + 1;
-    const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
+    const targetSchool = schoolSelectEl?.value || 'George Mason University';
 
     // calculate effort based on all professors in the dataset during the active period
     const subfieldRates = {}; // subfield -> array of rates
@@ -647,14 +696,19 @@ function renderSubfieldEffort() {
 }
 
 function renderAITrends() {
-    if (chartInstance) chartInstance.destroy();
-
-    const ctx = document.getElementById('aiTrendsChart')?.getContext('2d');
+    const canvas = document.getElementById('aiTrendsChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const startYear = parseInt(document.getElementById('analysis-start-year')?.value) || 2005;
-    const endYear = parseInt(document.getElementById('analysis-end-year')?.value) || new Date().getFullYear();
-    const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
+    if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
+    }
+
+    const startYear = parseInt(startYearSelectEl?.value) || 2005;
+    const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
+    const targetSchool = schoolSelectEl?.value || 'George Mason University';
 
     const years = [];
     const stats = {}; // year -> { subfield -> sum }
@@ -728,14 +782,19 @@ function renderAITrends() {
 }
 
 function renderConferenceTrends() {
-    if (chartInstance) chartInstance.destroy();
-
-    const ctx = document.getElementById('confTrendsChart')?.getContext('2d');
+    const canvas = document.getElementById('confTrendsChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const startYear = parseInt(document.getElementById('analysis-start-year')?.value) || 2010;
-    const endYear = parseInt(document.getElementById('analysis-end-year')?.value) || new Date().getFullYear();
-    const targetSchool = document.getElementById('analysis-school-select')?.value || 'George Mason University';
+    if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
+    }
+
+    const startYear = parseInt(startYearSelectEl?.value) || 2010;
+    const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
+    const targetSchool = schoolSelectEl?.value || 'George Mason University';
 
     // get list of selected conferences
     const checkedCheckboxes = document.querySelectorAll('#conf-trends-view input[type="checkbox"]:checked');
