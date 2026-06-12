@@ -129,13 +129,17 @@ function initSearchableSelect(containerId, hiddenId) {
     });
 
     // Handle typing
+    let debounceTimer;
     input.addEventListener('input', () => {
-        const query = input.value.toLowerCase();
-        const filtered = schoolsList.filter(s =>
-            s.name.toLowerCase().includes(query)
-        );
-        renderDropdownItems(dropdown, filtered, hidden, input);
-        dropdown.classList.add('show');
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            const query = input.value.toLowerCase();
+            const filtered = schoolsList.filter(s =>
+                s.name.toLowerCase().includes(query)
+            );
+            renderDropdownItems(dropdown, filtered, hidden, input);
+            dropdown.classList.add('show');
+        }, 150);
     });
 
     document.addEventListener('click', (e) => {
