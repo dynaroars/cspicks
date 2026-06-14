@@ -23,6 +23,9 @@ let selectedRegion = 'us';
 let endYear = new Date().getFullYear();
 let startYear = endYear - 10;
 let historicalMode = false;
+let comparisonType = 'schools';
+let schoolsList = [];
+let facultyList = [];
 
 async function init() {
     rawData = await loadData();
@@ -41,14 +44,18 @@ async function init() {
         console.warn('Could not load affiliation history or aliases', e);
     }
 
-
     setupYearSelectors();
-    populateSchoolSelects();
+    
+    // Set up inputs
+    initSearchableSelect('select-a', 'school-a');
+    initSearchableSelect('select-b', 'school-b');
+
+    populateComparisonControls();
     setupEventListeners();
 
     // Hide loading indicator and show controls
     document.getElementById('loading-indicator').style.display = 'none';
-    document.getElementById('filter-controls').style.display = 'flex';
+    document.getElementById('filter-controls').style.display = 'grid';
     document.getElementById('compare-controls').style.display = 'flex';
 }
 
@@ -68,47 +75,59 @@ function setupYearSelectors() {
     startYear = endYear - 10;
 }
 
-
-let schoolsList = [];
-
-function populateSchoolSelects() {
+function populateLists() {
     const historyData = historicalMode ? historyMap : {};
     const confSet = document.getElementById('conf-set')?.value || 'csrankings';
     const filtered = filterByYears(rawData, startYear, endYear, selectedRegion, historyData, aliasMap, confSet);
+    
     schoolsList = Object.values(filtered.schools)
         .filter(s => s.rank)
         .sort((a, b) => a.rank - b.rank);
 
-    initSearchableSelect('select-a', 'school-a');
-    initSearchableSelect('select-b', 'school-b');
+    facultyList = Object.values(filtered.professors)
+        .sort((a, b) => b.totalAdjusted - a.totalAdjusted)
+        .map(p => ({
+            name: p.name,
+            affiliation: p.affiliation,
+            totalPapers: p.totalPapers,
+            totalAdjusted: p.totalAdjusted,
+            areas: p.areas,
+            pubs: p.pubs
+        }));
+}
+
+function populateComparisonControls() {
+    populateLists();
 
     const urlParams = new URLSearchParams(window.location.search);
     const urlSchoolA = urlParams.get('schoolA');
     const urlSchoolB = urlParams.get('schoolB');
 
-    if (urlSchoolA && schoolsList.find(s => s.name === urlSchoolA)) {
+    const activeList = comparisonType === 'schools' ? schoolsList : facultyList;
+
+    if (urlSchoolA && activeList.find(s => s.name === urlSchoolA)) {
         setSchoolValue('select-a', 'school-a', urlSchoolA);
-    } else if (schoolsList.length >= 1) {
-        setSchoolValue('select-a', 'school-a', schoolsList[0].name);
+    } else if (activeList.length >= 1) {
+        setSchoolValue('select-a', 'school-a', activeList[0].name);
     }
 
-    if (urlSchoolB && schoolsList.find(s => s.name === urlSchoolB)) {
+    if (urlSchoolB && activeList.find(s => s.name === urlSchoolB)) {
         setSchoolValue('select-b', 'school-b', urlSchoolB);
-    } else if (schoolsList.length >= 2) {
-        setSchoolValue('select-b', 'school-b', schoolsList[1].name);
+    } else if (activeList.length >= 2) {
+        setSchoolValue('select-b', 'school-b', activeList[1].name);
     }
 
     renderComparison();
 }
 
 function updateURL() {
-    const schoolA = document.getElementById('school-a').value;
-    const schoolB = document.getElementById('school-b').value;
+    const valA = document.getElementById('school-a').value;
+    const valB = document.getElementById('school-b').value;
 
-    if (schoolA && schoolB) {
+    if (valA && valB) {
         const url = new URL(window.location);
-        url.searchParams.set('schoolA', schoolA);
-        url.searchParams.set('schoolB', schoolB);
+        url.searchParams.set('schoolA', valA);
+        url.searchParams.set('schoolB', valB);
         window.history.replaceState({}, '', url);
     }
 }
@@ -119,13 +138,15 @@ function initSearchableSelect(containerId, hiddenId) {
     const dropdown = container.querySelector('.dropdown-list');
     const hidden = document.getElementById(hiddenId);
 
+    const getActiveList = () => comparisonType === 'schools' ? schoolsList : facultyList;
+
     // Populate initial list
-    renderDropdownItems(dropdown, schoolsList, hidden, input);
+    renderDropdownItems(dropdown, getActiveList(), hidden, input);
 
     // Handle input focus
     input.addEventListener('focus', () => {
         dropdown.classList.add('show');
-        renderDropdownItems(dropdown, schoolsList, hidden, input);
+        renderDropdownItems(dropdown, getActiveList(), hidden, input);
     });
 
     // Handle typing
@@ -134,7 +155,7 @@ function initSearchableSelect(containerId, hiddenId) {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
             const query = input.value.toLowerCase();
-            const filtered = schoolsList.filter(s =>
+            const filtered = getActiveList().filter(s =>
                 s.name.toLowerCase().includes(query)
             );
             renderDropdownItems(dropdown, filtered, hidden, input);
@@ -149,13 +170,23 @@ function initSearchableSelect(containerId, hiddenId) {
     });
 }
 
-function renderDropdownItems(dropdown, schools, hidden, input) {
-    dropdown.innerHTML = schools.slice(0, 50).map(school => `
-        <div class="dropdown-item" data-value="${school.name}">
-            <span style="color: var(--text-secondary); margin-right: 0.5rem;">#${school.rank}</span>
-            ${school.name}
-        </div>
-    `).join('');
+function renderDropdownItems(dropdown, list, hidden, input) {
+    if (comparisonType === 'schools') {
+        dropdown.innerHTML = list.slice(0, 50).map(school => `
+            <div class="dropdown-item" data-value="${school.name}">
+                <span style="color: var(--text-secondary); margin-right: 0.5rem;">#${school.rank}</span>
+                ${school.name}
+            </div>
+        `).join('');
+    } else {
+        dropdown.innerHTML = list.slice(0, 50).map(faculty => `
+            <div class="dropdown-item" data-value="${faculty.name}">
+                <span style="font-weight: 600;">${faculty.name}</span>
+                <span style="color: var(--text-secondary); margin-left: 0.5rem; font-size: 0.85em;">(${faculty.affiliation})</span>
+                <span style="float: right; color: var(--primary-color); font-size: 0.85em; font-weight: 600;">${faculty.totalAdjusted.toFixed(1)}</span>
+            </div>
+        `).join('');
+    }
 
     dropdown.querySelectorAll('.dropdown-item').forEach(item => {
         item.addEventListener('click', () => {
@@ -178,6 +209,40 @@ function setSchoolValue(containerId, hiddenId, value) {
 }
 
 function setupEventListeners() {
+    // Comparison Type selector
+    document.getElementById('comparison-type')?.addEventListener('change', (e) => {
+        comparisonType = e.target.value;
+        
+        // Update labels and placeholders
+        const labelA = document.getElementById('label-a');
+        const labelB = document.getElementById('label-b');
+        const inputA = document.querySelector('#select-a .search-input');
+        const inputB = document.querySelector('#select-b .search-input');
+        const hiddenA = document.getElementById('school-a');
+        const hiddenB = document.getElementById('school-b');
+
+        if (comparisonType === 'schools') {
+            if (labelA) labelA.textContent = 'School A';
+            if (labelB) labelB.textContent = 'School B';
+            if (inputA) inputA.placeholder = 'Search schools...';
+            if (inputB) inputB.placeholder = 'Search schools...';
+        } else {
+            if (labelA) labelA.textContent = 'Researcher A';
+            if (labelB) labelB.textContent = 'Researcher B';
+            if (inputA) inputA.placeholder = 'Search researchers...';
+            if (inputB) inputB.placeholder = 'Search researchers...';
+        }
+
+        // Clear previous selections to avoid cross-mode leaks
+        if (hiddenA) hiddenA.value = '';
+        if (hiddenB) hiddenB.value = '';
+        if (inputA) inputA.value = '';
+        if (inputB) inputB.value = '';
+
+        // Refresh list references and render initial options
+        populateComparisonControls();
+    });
+
     // Region filter
     document.getElementById('region-select').addEventListener('change', (e) => {
         selectedRegion = e.target.value;
@@ -219,13 +284,22 @@ function refreshData() {
     const currentSchoolA = document.getElementById('school-a').value;
     const currentSchoolB = document.getElementById('school-b').value;
 
-    populateSchoolSelects();
+    populateLists();
 
-    if (schoolsList.find(s => s.name === currentSchoolA)) {
+    const activeList = comparisonType === 'schools' ? schoolsList : facultyList;
+
+    if (activeList.find(s => s.name === currentSchoolA)) {
         setSchoolValue('select-a', 'school-a', currentSchoolA);
+    } else {
+        document.getElementById('school-a').value = '';
+        document.querySelector('#select-a .search-input').value = '';
     }
-    if (schoolsList.find(s => s.name === currentSchoolB)) {
+    
+    if (activeList.find(s => s.name === currentSchoolB)) {
         setSchoolValue('select-b', 'school-b', currentSchoolB);
+    } else {
+        document.getElementById('school-b').value = '';
+        document.querySelector('#select-b .search-input').value = '';
     }
 
     renderComparison();
@@ -233,26 +307,26 @@ function refreshData() {
 
 
 function renderComparison() {
-    const schoolAName = document.getElementById('school-a').value;
-    const schoolBName = document.getElementById('school-b').value;
+    const valA = document.getElementById('school-a').value;
+    const valB = document.getElementById('school-b').value;
 
-    if (!schoolAName || !schoolBName) {
+    if (!valA || !valB) {
         document.getElementById('comparison-chart-container').style.display = 'none';
         document.getElementById('comparison-summary').innerHTML = `
             <div class="summary-card" style="grid-column: 1 / -1; text-align: center; padding: 2rem; border-style: dashed;">
                 <h4 style="margin: 0 0 0.5rem 0; color: var(--text-secondary); font-weight: 500;">Ready to Compare</h4>
-                <p style="margin: 0; color: var(--text-secondary); font-size: var(--text-sm);">Select two institutions above to analyze their publication weights side by side.</p>
+                <p style="margin: 0; color: var(--text-secondary); font-size: var(--text-sm);">Select two ${comparisonType === 'schools' ? 'institutions' : 'researchers'} above to analyze their publication weights side by side.</p>
             </div>
         `;
         return;
     }
 
-    if (schoolAName === schoolBName) {
+    if (valA === valB) {
         document.getElementById('comparison-chart-container').style.display = 'none';
         document.getElementById('comparison-summary').innerHTML = `
             <div class="summary-card" style="grid-column: 1 / -1; text-align: center; padding: 2rem; border-style: dashed;">
                 <h4 style="margin: 0 0 0.5rem 0; color: var(--text-secondary); font-weight: 500;">Identical Selection</h4>
-                <p style="margin: 0; color: var(--text-secondary); font-size: var(--text-sm);">Please choose two different universities to generate a head-to-head comparison.</p>
+                <p style="margin: 0; color: var(--text-secondary); font-size: var(--text-sm);">Please choose two different ${comparisonType === 'schools' ? 'universities' : 'researchers'} to generate a head-to-head comparison.</p>
             </div>
         `;
         return;
@@ -261,25 +335,48 @@ function renderComparison() {
     const historyData = historicalMode ? historyMap : {};
     const confSet = document.getElementById('conf-set')?.value || 'csrankings';
     const filtered = filterByYears(rawData, startYear, endYear, selectedRegion, historyData, aliasMap, confSet);
-    const schoolA = filtered.schools[schoolAName];
-    const schoolB = filtered.schools[schoolBName];
+    
+    let labels, dataA, dataB, areaList;
 
-    if (!schoolA || !schoolB) {
-        console.error('Could not find one of the schools');
-        return;
+    if (comparisonType === 'schools') {
+        const schoolA = filtered.schools[valA];
+        const schoolB = filtered.schools[valB];
+
+        if (!schoolA || !schoolB) {
+            console.error('Could not find one of the schools');
+            return;
+        }
+
+        const allAreas = new Set([...Object.keys(schoolA.areas || {}), ...Object.keys(schoolB.areas || {})]);
+        areaList = Array.from(allAreas).sort((a, b) => {
+            const totalA = (schoolA.areas[a]?.adjusted || 0) + (schoolB.areas[a]?.adjusted || 0);
+            const totalB = (schoolA.areas[b]?.adjusted || 0) + (schoolB.areas[b]?.adjusted || 0);
+            return totalB - totalA;
+        });
+
+        labels = areaList.map(a => areaLabels[a] || a);
+        dataA = areaList.map(a => schoolA.areas[a]?.adjusted || 0);
+        dataB = areaList.map(a => schoolB.areas[a]?.adjusted || 0);
+    } else {
+        const profA = filtered.professors[valA];
+        const profB = filtered.professors[valB];
+
+        if (!profA || !profB) {
+            console.error('Could not find one of the professors');
+            return;
+        }
+
+        const allAreas = new Set([...Object.keys(profA.areas || {}), ...Object.keys(profB.areas || {})]);
+        areaList = Array.from(allAreas).sort((a, b) => {
+            const totalA = (profA.areas[a]?.adjusted || 0) + (profB.areas[a]?.adjusted || 0);
+            const totalB = (profA.areas[b]?.adjusted || 0) + (profB.areas[b]?.adjusted || 0);
+            return totalB - totalA;
+        });
+
+        labels = areaList.map(a => areaLabels[a] || a);
+        dataA = areaList.map(a => profA.areas[a]?.adjusted || 0);
+        dataB = areaList.map(a => profB.areas[a]?.adjusted || 0);
     }
-
-    // Get all areas that either school has
-    const allAreas = new Set([...Object.keys(schoolA.areas || {}), ...Object.keys(schoolB.areas || {})]);
-    const areaList = Array.from(allAreas).sort((a, b) => {
-        const totalA = (schoolA.areas[a]?.adjusted || 0) + (schoolB.areas[a]?.adjusted || 0);
-        const totalB = (schoolA.areas[b]?.adjusted || 0) + (schoolB.areas[b]?.adjusted || 0);
-        return totalB - totalA;
-    });
-
-    const labels = areaList.map(a => areaLabels[a] || a);
-    const dataA = areaList.map(a => schoolA.areas[a]?.adjusted || 0);
-    const dataB = areaList.map(a => schoolB.areas[a]?.adjusted || 0);
 
     // Render chart
     document.getElementById('comparison-chart-container').style.display = 'block';
@@ -295,14 +392,14 @@ function renderComparison() {
             labels: labels,
             datasets: [
                 {
-                    label: schoolAName,
+                    label: valA,
                     data: dataA,
                     backgroundColor: 'rgba(37, 99, 235, 0.7)',
                     borderColor: 'rgba(37, 99, 235, 1)',
                     borderWidth: 1
                 },
                 {
-                    label: schoolBName,
+                    label: valB,
                     data: dataB,
                     backgroundColor: 'rgba(16, 185, 129, 0.7)',
                     borderColor: 'rgba(16, 185, 129, 1)',
@@ -342,7 +439,7 @@ function renderComparison() {
     });
 
     // Generate summary
-    renderSummary(schoolAName, schoolBName, areaList, dataA, dataB);
+    renderSummary(valA, valB, areaList, dataA, dataB);
 }
 
 function renderSummary(schoolAName, schoolBName, areas, dataA, dataB) {
