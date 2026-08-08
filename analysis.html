@@ -21,14 +21,16 @@
     <style>
         .nav-tabs {
             display: flex;
-            gap: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
             margin-bottom: 2rem;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 0.5rem;
         }
 
         .nav-tab {
-            padding: 0.5rem 1rem;
+            padding: 0.45rem 0.7rem;
+            font-size: 0.9rem;
             cursor: pointer;
             font-weight: 600;
             color: var(--text-secondary);
@@ -146,6 +148,8 @@
             <div class="nav-tab" data-tab="effort">Publishing Effort</div>
             <div class="nav-tab" data-tab="ai-trends">AI Subfields</div>
             <div class="nav-tab" data-tab="conf-trends">Conference Trends</div>
+            <div class="nav-tab" data-tab="collaboration">Collaboration</div>
+            <div class="nav-tab" data-tab="data-health">Data Health</div>
         </div>
 
         <div id="school-trends-view" class="view-section">
@@ -256,6 +260,14 @@
             <div class="chart-container">
                 <canvas id="confTrendsChart"></canvas>
             </div>
+        </div>
+
+        <div id="collaboration-view" class="view-section" style="display: none;">
+            <div id="collaboration-stats" class="diagnostic-panel"></div>
+        </div>
+
+        <div id="data-health-view" class="view-section" style="display: none;">
+            <div id="data-health-stats" class="diagnostic-panel"></div>
         </div>
 
         <footer

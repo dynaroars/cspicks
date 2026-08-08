@@ -1,11 +1,13 @@
 import { loadData, loadAffiliationData, filterByYears, getPublicationSchools, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, coreAStarMap, coreAMap, nextTier, schoolAliases, conferenceAliases } from './data.js';
 import { areaLabels, cleanName, encodeInlineValue, escapeHtml, getChartColors, safeExternalUrl, updateChartDefaults } from './shared.js';
+import { buildPriorPeriodData, calculateSchoolMetrics, rankingsToCsv } from './metrics.js';
 import he from 'he';
 
 import { searchAuthor, fetchAuthorStats } from './dblp.js';
 
 let rawData = null;
 let appData = { professors: {}, schools: {} };
+let priorAppData = { professors: {}, schools: {} };
 let historyMap = null;  // OpenAlex affiliation history
 let aliasMap = null;    // School name aliases
 
@@ -37,6 +39,7 @@ async function init() {
   setupSearch();
   setupTooltips();
   setupThemeSync();
+  setupRankingActions();
 
   try {
     rawData = await loadData();
@@ -82,6 +85,7 @@ async function init() {
     } else {
       appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
     }
+    updatePriorData();
 
     console.log(`Data loaded (${startYear}-${endYear}, region: ${selectedRegion}, historical: ${historicalMode}):`, Object.keys(appData.professors).length, 'professors', Object.keys(appData.schools).length, 'schools');
 
@@ -174,6 +178,7 @@ function refreshData() {
   const expandedCards = saveExpandedCards();
 
   appData = filterByYears(rawData, startYear, endYear, selectedRegion, historicalMode ? historyMap : null, historicalMode ? aliasMap : null, confSet);
+  updatePriorData();
 
   console.log(`Refreshed: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}, ConfSet=${confSet}`);
 
@@ -191,6 +196,42 @@ function refreshData() {
   // Restore expanded state immediately
   requestAnimationFrame(() => {
     restoreExpandedCards(expandedCards);
+  });
+}
+
+function updatePriorData() {
+  priorAppData = buildPriorPeriodData(
+    rawData,
+    startYear,
+    endYear,
+    selectedRegion,
+    historicalMode ? historyMap : null,
+    historicalMode ? aliasMap : null,
+    confSet
+  );
+}
+
+function setupRankingActions() {
+  document.getElementById('share-view')?.addEventListener('click', async event => {
+    updateURL();
+    const button = event.currentTarget;
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      button.textContent = 'Copied';
+    } catch {
+      window.prompt('Copy this link:', window.location.href);
+    }
+    setTimeout(() => { button.textContent = 'Share'; }, 1500);
+  });
+
+  document.getElementById('export-rankings')?.addEventListener('click', () => {
+    const blob = new Blob([rankingsToCsv(appData)], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `cspicks-${selectedRegion}-${startYear}-${endYear}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
   });
 }
 function setupSearch() {
@@ -849,6 +890,7 @@ function setupFilters() {
     } else {
       appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
     }
+    updatePriorData();
     console.log(`Filtered: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}, ConfSet=${confSet}`);
 
     updateURL();
@@ -1739,6 +1781,8 @@ function renderSchoolCard(school, filterArea = null) {
   const rankPrefix = Number.isFinite(school.rank) ? `${school.rank}. ` : '';
   const facultyBadge = `<span style="color: var(--text-secondary); font-size: 0.75em; margin-left: 0.5rem;">${facultyCount} Faculty</span>`;
   const areaBadge = `<span style="color: var(--text-secondary); font-size: 0.75em; margin-left: 0.5rem;">${areaCount} Areas</span>`;
+  const metrics = calculateSchoolMetrics(appData, priorAppData, school.name);
+  const metricsHtml = metrics ? renderSchoolMetrics(metrics) : '';
 
   return `
     <div class="${cardClass}" data-name="${safeSchoolName}">
@@ -1747,6 +1791,7 @@ function renderSchoolCard(school, filterArea = null) {
         <span class="toggle-icon">▼</span>
       </div>
       <div class="card-content">
+        ${metricsHtml}
         ${renderSchoolRankGraphPlaceholder(school.name)}
         ${renderRankContribution(school)}
         <div class="stats-list">
@@ -1776,6 +1821,25 @@ function renderSchoolCard(school, filterArea = null) {
         `}).join('')}
         </div>
       </div>
+    </div>
+  `;
+}
+
+function renderSchoolMetrics(metrics) {
+  const rankMovement = metrics.rankDelta === null
+    ? '—'
+    : metrics.rankDelta === 0 ? 'No change' : `${metrics.rankDelta > 0 ? '▲' : '▼'} ${Math.abs(metrics.rankDelta)}`;
+  const growth = `${metrics.growth >= 0 ? '+' : ''}${metrics.growth.toFixed(0)}%`;
+  const confidenceClass = metrics.confidence.toLowerCase();
+  return `
+    <div class="school-metrics" aria-label="University statistics">
+      <div class="school-metric" title="Rank movement versus the immediately preceding period of the same length"><span>Rank movement</span><strong>${rankMovement}</strong></div>
+      <div class="school-metric" title="Fractional-credit growth versus the preceding period"><span>Momentum</span><strong>${growth}</strong></div>
+      <div class="school-metric" title="Median fractional publication credit per active faculty member"><span>Median / faculty</span><strong>${metrics.medianPerFaculty.toFixed(1)}</strong></div>
+      <div class="school-metric" title="Top three faculty produce ${metrics.top3Share.toFixed(0)}% of fractional credit; top one ${metrics.top1Share.toFixed(0)}%; top five ${metrics.top5Share.toFixed(0)}%"><span>Top-3 concentration</span><strong>${metrics.top3Share.toFixed(0)}%</strong></div>
+      <div class="school-metric" title="${metrics.topTenAreas} areas rank in the top 10; sustained means active in both this and the preceding period"><span>Breadth</span><strong>${metrics.activeAreas} active · ${metrics.sustainedAreas} sustained</strong></div>
+      <div class="school-metric" title="Raw count divided by fractional credit. This is a team-size proxy, not a cross-institution collaboration count."><span>Team-size proxy</span><strong>${metrics.impliedTeamSize.toFixed(1)}×</strong></div>
+      <div class="school-metric" title="Profile-field coverage: ${metrics.profileCoverage.toFixed(0)}%"><span>Data confidence</span><strong class="confidence-${confidenceClass}">${metrics.confidence}</strong></div>
     </div>
   `;
 }
