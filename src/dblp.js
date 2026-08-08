@@ -1,4 +1,4 @@
-import { parentMap, nextTier } from './data.js';
+import { getConferenceAreaMap, parentMap, publicationMatchesConferenceSet } from './data.js';
 import { getCsrankingsRules, syncCsrankingsRules } from './csrankings-rules.js';
 
 export function normalizeDblpVenue(venue, metadata = {}) {
@@ -87,7 +87,7 @@ export async function searchAuthor(name) {
     }
 }
 
-export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date().getFullYear()) {
+export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date().getFullYear(), confSet = 'csrankings-default') {
     const url = `https://dblp.org/pid/${pid}.xml`;
 
     try {
@@ -117,6 +117,7 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
             papers: [],
             aliases: aliases
         };
+        const conferenceAreaMap = getConferenceAreaMap(confSet);
 
         const records = xmlDoc.getElementsByTagName("r");
 
@@ -151,7 +152,7 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
             });
 
             if (!confKey || !parentMap[confKey]) continue;
-            if (nextTier[confKey]) continue;
+            if (!publicationMatchesConferenceSet({ area: confKey }, confSet)) continue;
 
             const pagesNode = pub.getElementsByTagName("pages")[0];
             if (!hasEligiblePageRange(pagesNode?.textContent, dblpVenue, booktitleNode?.textContent)) continue;
@@ -160,7 +161,7 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
             const authorCount = authors.length || 1;
 
             const adjusted = 1.0 / authorCount;
-            const area = parentMap[confKey];
+            const area = conferenceAreaMap[confKey] || parentMap[confKey];
 
             const titleNode = pub.getElementsByTagName("title")[0];
             const title = titleNode ? titleNode.textContent : "Untitled";

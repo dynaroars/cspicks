@@ -27,24 +27,11 @@ let historicalMode = false;
 let comparisonType = 'schools';
 let schoolsList = [];
 let facultyList = [];
-let lastComparison = null;
-const initialParams = new URLSearchParams(window.location.search);
-
-if (initialParams.has('region')) selectedRegion = initialParams.get('region');
-if (initialParams.has('start')) startYear = Number(initialParams.get('start'));
-if (initialParams.has('end')) endYear = Number(initialParams.get('end'));
-if (initialParams.has('historical')) historicalMode = initialParams.get('historical') === 'true';
-if (initialParams.get('type') === 'faculty') comparisonType = 'faculty';
 
 async function init() {
     rawData = await loadData();
 
     setupYearSelectors();
-    document.getElementById('region-select').value = selectedRegion;
-    document.getElementById('comparison-type').value = comparisonType;
-    document.getElementById('conf-set').value = initialParams.get('confSet') || 'csrankings-default';
-    document.getElementById('historical-mode').checked = historicalMode;
-    if (historicalMode) await ensureHistoricalData();
     
     // Set up inputs
     initSearchableSelect('select-a', 'school-a');
@@ -76,13 +63,15 @@ function setupYearSelectors() {
         endSelect.add(new Option(y, y));
     }
 
-    endSelect.value = endYear;
-    startSelect.value = startYear;
+    endSelect.value = currentYear;
+    startSelect.value = endSelect.value - 10;
+    endYear = currentYear;
+    startYear = endYear - 10;
 }
 
 function populateLists() {
     const historyData = historicalMode ? historyMap : null;
-    const confSet = document.getElementById('conf-set')?.value || 'csrankings';
+    const confSet = document.getElementById('conf-set')?.value || 'csrankings-default';
     const filtered = filterByYears(rawData, startYear, endYear, selectedRegion, historyData, aliasMap, confSet);
     
     schoolsList = Object.values(filtered.schools)
@@ -129,17 +118,12 @@ function updateURL() {
     const valA = document.getElementById('school-a').value;
     const valB = document.getElementById('school-b').value;
 
-    const url = new URL(window.location);
-    if (valA) url.searchParams.set('schoolA', valA);
-    if (valB) url.searchParams.set('schoolB', valB);
-    url.searchParams.set('type', comparisonType);
-    url.searchParams.set('region', selectedRegion);
-    url.searchParams.set('start', startYear);
-    url.searchParams.set('end', endYear);
-    url.searchParams.set('confSet', document.getElementById('conf-set')?.value || 'csrankings-default');
-    if (historicalMode) url.searchParams.set('historical', 'true');
-    else url.searchParams.delete('historical');
-    window.history.replaceState({}, '', url);
+    if (valA && valB) {
+        const url = new URL(window.location);
+        url.searchParams.set('schoolA', valA);
+        url.searchParams.set('schoolB', valB);
+        window.history.replaceState({}, '', url);
+    }
 }
 
 function initSearchableSelect(containerId, hiddenId) {
@@ -219,38 +203,9 @@ function setSchoolValue(containerId, hiddenId, value) {
 }
 
 function setupEventListeners() {
-    document.getElementById('share-comparison')?.addEventListener('click', async event => {
-        updateURL();
-        const button = event.currentTarget;
-        try {
-            await navigator.clipboard.writeText(window.location.href);
-            button.textContent = 'Copied';
-        } catch {
-            window.prompt('Copy this comparison link:', window.location.href);
-        }
-        setTimeout(() => { button.textContent = 'Share'; }, 1500);
-    });
-    document.getElementById('export-comparison')?.addEventListener('click', () => {
-        if (!lastComparison) return;
-        const quote = value => `"${String(value ?? '').replaceAll('"', '""')}"`;
-        const rows = [['Area', lastComparison.nameA, lastComparison.nameB]];
-        lastComparison.areas.forEach((area, index) => rows.push([
-            areaLabels[area] || area,
-            lastComparison.dataA[index].toFixed(2),
-            lastComparison.dataB[index].toFixed(2)
-        ]));
-        const blob = new Blob([rows.map(row => row.map(quote).join(',')).join('\n')], { type: 'text/csv;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'cspicks-comparison.csv';
-        link.click();
-        URL.revokeObjectURL(url);
-    });
     // Comparison Type selector
     document.getElementById('comparison-type')?.addEventListener('change', (e) => {
         comparisonType = e.target.value;
-        updateURL();
         
         // Update labels and placeholders
         const labelA = document.getElementById('label-a');
@@ -286,7 +241,6 @@ function setupEventListeners() {
     document.getElementById('region-select').addEventListener('change', (e) => {
         selectedRegion = e.target.value;
         refreshData();
-        updateURL();
     });
 
     // Year range filters
@@ -297,7 +251,6 @@ function setupEventListeners() {
             document.getElementById('end-year').value = endYear;
         }
         refreshData();
-        updateURL();
     });
 
     document.getElementById('end-year').addEventListener('change', (e) => {
@@ -307,7 +260,6 @@ function setupEventListeners() {
             document.getElementById('start-year').value = startYear;
         }
         refreshData();
-        updateURL();
     });
 
     // Historical mode
@@ -318,7 +270,6 @@ function setupEventListeners() {
             if (toggle.checked) await ensureHistoricalData();
             historicalMode = toggle.checked;
             refreshData();
-            updateURL();
         } catch (error) {
             console.error('Failed to load historical affiliation data:', error);
             toggle.checked = false;
@@ -332,7 +283,6 @@ function setupEventListeners() {
     // Conference set toggle
     document.getElementById('conf-set').addEventListener('change', () => {
         refreshData();
-        updateURL();
     });
 }
 
@@ -389,7 +339,7 @@ function renderComparison() {
     }
 
     const historyData = historicalMode ? historyMap : null;
-    const confSet = document.getElementById('conf-set')?.value || 'csrankings';
+    const confSet = document.getElementById('conf-set')?.value || 'csrankings-default';
     const filtered = filterByYears(rawData, startYear, endYear, selectedRegion, historyData, aliasMap, confSet);
     
     let labels, dataA, dataB, areaList, selectedA, selectedB;
@@ -437,8 +387,6 @@ function renderComparison() {
         dataA = areaList.map(a => profA.areas[a]?.adjusted || 0);
         dataB = areaList.map(a => profB.areas[a]?.adjusted || 0);
     }
-
-    lastComparison = { nameA: valA, nameB: valB, areas: areaList, dataA, dataB };
 
     // Render chart
     document.getElementById('comparison-chart-container').style.display = 'block';

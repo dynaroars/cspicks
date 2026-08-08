@@ -65,6 +65,81 @@ export function calculateSchoolMetrics(currentData, priorData, schoolName) {
   };
 }
 
+/**
+ * Find notable cross-school changes between two equal-length ranking periods.
+ * Minimum-credit guards keep tiny denominators from dominating growth lists.
+ */
+export function calculateDiscoveryInsights(currentData, priorData, limit = 5) {
+  const schools = Object.values(currentData?.schools || {}).map(school => {
+    const prior = priorData?.schools?.[school.name];
+    const metrics = calculateSchoolMetrics(currentData, priorData, school.name);
+    const priorAreas = Object.values(prior?.areas || {}).filter(area => area.adjusted > 0).length;
+    const topArea = Object.entries(school.areas || {})
+      .map(([area, values]) => ({ area, credit: values.adjusted || 0 }))
+      .sort((a, b) => b.credit - a.credit)[0];
+    return {
+      name: school.name,
+      school,
+      prior,
+      metrics,
+      outputGain: (school.totalAdjusted || 0) - (prior?.totalAdjusted || 0),
+      breadthGain: metrics.activeAreas - priorAreas,
+      topArea,
+      topAreaShare: topArea && school.totalAdjusted > 0
+        ? percent(topArea.credit, school.totalAdjusted)
+        : 0
+    };
+  }).filter(item => item.metrics);
+
+  const take = (items, compare) => [...items].sort(compare).slice(0, limit);
+  const established = schools.filter(item =>
+    item.prior?.rank && item.prior.totalAdjusted >= 2 && item.school.totalAdjusted >= 2
+  );
+  const substantive = schools.filter(item =>
+    item.school.totalAdjusted >= 5 && item.metrics.facultyCount >= 3
+  );
+
+  const areaBreakouts = [];
+  schools.forEach(item => {
+    Object.entries(item.school.areas || {}).forEach(([area, values]) => {
+      const currentCredit = values.adjusted || 0;
+      const priorCredit = item.prior?.areas?.[area]?.adjusted || 0;
+      const gain = currentCredit - priorCredit;
+      if (currentCredit >= 2 && gain > 0) {
+        areaBreakouts.push({ name: item.name, area, currentCredit, priorCredit, gain });
+      }
+    });
+  });
+
+  return {
+    rankClimbers: take(
+      established.filter(item => item.metrics.rankDelta > 0),
+      (a, b) => b.metrics.rankDelta - a.metrics.rankDelta || a.metrics.rank - b.metrics.rank
+    ),
+    momentum: take(
+      established.filter(item => item.metrics.growth > 0),
+      (a, b) => b.metrics.growth - a.metrics.growth || b.outputGain - a.outputGain
+    ),
+    outputGains: take(
+      schools.filter(item => item.outputGain > 0),
+      (a, b) => b.outputGain - a.outputGain
+    ),
+    breadthBuilders: take(
+      established.filter(item => item.breadthGain > 0),
+      (a, b) => b.breadthGain - a.breadthGain || b.outputGain - a.outputGain
+    ),
+    balancedPortfolios: take(
+      substantive,
+      (a, b) => a.metrics.top3Share - b.metrics.top3Share || b.school.totalAdjusted - a.school.totalAdjusted
+    ),
+    focusedPowerhouses: take(
+      substantive,
+      (a, b) => b.topAreaShare - a.topAreaShare || b.school.totalAdjusted - a.school.totalAdjusted
+    ),
+    areaBreakouts: take(areaBreakouts, (a, b) => b.gain - a.gain || b.currentCredit - a.currentCredit)
+  };
+}
+
 export function buildPriorPeriodData(rawData, startYear, endYear, region, historyMap, aliasMap, confSet) {
   const span = endYear - startYear + 1;
   return filterByYears(rawData, startYear - span, startYear - 1, region, historyMap, aliasMap, confSet);
@@ -108,23 +183,59 @@ export function calculateParityReport(rawData, filteredData, confSet = 'csrankin
     rankOrderIssues,
     institutionCoverage,
     profileCoverage,
-    officialVenueMode: confSet === 'csrankings-default',
-    fractionalCredit: true
+    officialVenueMode: confSet === 'csrankings-default'
   };
 }
 
-export function rankingsToCsv(filteredData) {
-  const quote = value => `"${String(value ?? '').replaceAll('"', '""')}"`;
-  const rows = [['Rank', 'University', 'Score', 'Raw publications', 'Fractional credit', 'Active areas']];
-  Object.values(filteredData.schools || {})
-    .sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name))
-    .forEach(school => rows.push([
-      school.rank,
-      school.name,
-      school.score,
-      school.totalCount.toFixed(2),
-      school.totalAdjusted.toFixed(2),
-      Object.values(school.areas || {}).filter(area => area.adjusted > 0).length
-    ]));
-  return rows.map(row => row.map(quote).join(',')).join('\n');
+/**
+ * Measure how a school's fractional publication output is distributed across
+ * subfields. The denominator is the school's full set of active faculty in the
+ * period, rather than only the people who published in a given subfield. This
+ * keeps a subfield represented by one person from looking like the school's
+ * dominant publishing effort merely because that person's individual rate is
+ * high.
+ */
+export function calculatePublishingEffort(
+  professors,
+  { startYear, endYear, parentAreas, includesPublication }
+) {
+  const years = endYear - startYear + 1;
+  if (!Number.isFinite(years) || years <= 0) {
+    return { activeFaculty: 0, subfields: [] };
+  }
+
+  const facultyOutput = [];
+  Object.values(professors || {}).forEach(professor => {
+    const output = {};
+    (professor.pubs || []).forEach(publication => {
+      if (publication.year < startYear || publication.year > endYear) return;
+      if (!includesPublication(professor, publication)) return;
+
+      const subfield = parentAreas[publication.area] || publication.area;
+      const credit = Number(publication.adjustedcount) || 0;
+      if (credit > 0) output[subfield] = (output[subfield] || 0) + credit;
+    });
+    if (Object.keys(output).length) facultyOutput.push(output);
+  });
+
+  const activeFaculty = facultyOutput.length;
+  if (!activeFaculty) return { activeFaculty: 0, subfields: [] };
+
+  const totals = {};
+  const researchers = {};
+  facultyOutput.forEach(output => {
+    Object.entries(output).forEach(([subfield, credit]) => {
+      totals[subfield] = (totals[subfield] || 0) + credit;
+      researchers[subfield] = (researchers[subfield] || 0) + 1;
+    });
+  });
+
+  const subfields = Object.entries(totals).map(([subfield, total]) => ({
+    subfield,
+    total,
+    activeResearchers: researchers[subfield],
+    effort: total / activeFaculty / years
+  })).sort((a, b) => b.effort - a.effort || a.subfield.localeCompare(b.subfield));
+
+  return { activeFaculty, subfields };
 }
