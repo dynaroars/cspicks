@@ -349,7 +349,7 @@ export function getPublicationSchools(professor, publication, historyMap = null,
 }
 
 
-export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'csrankings', useRaw = false) {
+export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'csrankings') {
   const { professors, schools } = data;
   const filteredProfs = {};
   const filteredSchools = {};
@@ -475,7 +475,7 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
   schoolList.forEach(school => {
     let score = 1.0;
     topLevelAreas.forEach(area => {
-      const val = useRaw ? (school.areas[area]?.count || 0) : (school.areaAdjustedCounts[area] || 0);
+      const val = school.areaAdjustedCounts[area] || 0;
       score *= (val + 1.0);
     });
     // Round to 1 decimal place
@@ -509,9 +509,7 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
   // Compute Per-Area Rankings
   topLevelAreas.forEach(area => {
     // Get all schools that have this area
-    const getAreaValue = (school) => useRaw
-      ? (school.areas[area]?.count || 0)
-      : (school.areas[area]?.adjusted || 0);
+    const getAreaValue = (school) => school.areas[area]?.adjusted || 0;
     const schoolsWithArea = schoolList
       .filter(s => getAreaValue(s) > 0)
       .sort((a, b) => getAreaValue(b) - getAreaValue(a));

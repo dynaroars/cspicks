@@ -4,11 +4,6 @@ import he from 'he';
 
 import { searchAuthor, fetchAuthorStats } from './dblp.js';
 
-window.dblp = {
-  search: searchAuthor,
-  stats: fetchAuthorStats
-};
-
 let rawData = null;
 let appData = { professors: {}, schools: {} };
 let historyMap = null;  // OpenAlex affiliation history
@@ -18,9 +13,7 @@ let startYear = DEFAULT_START_YEAR;
 let endYear = DEFAULT_END_YEAR;
 let selectedRegion = 'us';
 let historicalMode = false;
-let showRankings = false;
 let confSet = 'csrankings-default';
-let useRaw = false;
 
 let ChartCtor = null;
 const activeSchoolCharts = new Map();
@@ -39,11 +32,9 @@ if (params.has('end')) endYear = parseInt(params.get('end'));
 if (params.has('region')) selectedRegion = params.get('region');
 if (params.has('historical')) historicalMode = params.get('historical') === 'true';
 if (params.has('confSet')) confSet = params.get('confSet');
-if (params.has('raw')) useRaw = params.get('raw') === 'true';
 async function init() {
   setupFilters();
   setupSearch();
-  setupSimulation();
   setupTooltips();
   setupThemeSync();
 
@@ -74,38 +65,6 @@ async function init() {
       });
     }
 
-    const fractionalToggle = document.getElementById('fractional-credit');
-    if (fractionalToggle) {
-      fractionalToggle.checked = !useRaw;
-
-      fractionalToggle.addEventListener('change', () => {
-        useRaw = !fractionalToggle.checked;
-        refreshData();
-        updateURL();
-      });
-    }
-
-    // Show Rankings toggle
-    const rankingsToggle = document.getElementById('show-rankings');
-    if (rankingsToggle) {
-      rankingsToggle.checked = showRankings;
-      rankingsToggle.addEventListener('change', () => {
-        const expandedCards = saveExpandedCards();
-
-        showRankings = rankingsToggle.checked;
-        const mainSearch = document.getElementById('main-search');
-        if (mainSearch) {
-          mainSearch.dispatchEvent(new Event('input'));
-        }
-
-        setTimeout(() => {
-          requestAnimationFrame(() => {
-            restoreExpandedCards(expandedCards);
-          });
-        }, 350);
-      });
-    }
-
     // Conference Set toggle
     const confSetSelect = document.getElementById('conf-set');
     if (confSetSelect) {
@@ -119,9 +78,9 @@ async function init() {
 
     // Apply filters
     if (historicalMode && historyMap && aliasMap) {
-      appData = filterByYears(rawData, startYear, endYear, selectedRegion, historyMap, aliasMap, confSet, useRaw);
+      appData = filterByYears(rawData, startYear, endYear, selectedRegion, historyMap, aliasMap, confSet);
     } else {
-      appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet, useRaw);
+      appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
     }
 
     console.log(`Data loaded (${startYear}-${endYear}, region: ${selectedRegion}, historical: ${historicalMode}):`, Object.keys(appData.professors).length, 'professors', Object.keys(appData.schools).length, 'schools');
@@ -144,10 +103,7 @@ async function init() {
       showTopRankings();
     }
 
-    const simModal = document.getElementById('sim-modal');
-    if (!simModal || simModal.classList.contains('hidden')) {
-      searchInput.focus();
-    }
+    searchInput.focus();
   } catch (err) {
     console.error('Failed to load data:', err);
     document.querySelector('main').innerHTML = '<p style="text-align:center; color: #ef4444;">Error loading data. Please try again.</p>';
@@ -204,7 +160,6 @@ function updateURL() {
   params.set('region', selectedRegion);
   if (historicalMode) params.set('historical', 'true');
   if (confSet !== 'csrankings-default') params.set('confSet', confSet);
-  if (useRaw) params.set('raw', 'true');
 
   const q = document.getElementById('main-search').value;
   if (q) params.set('q', q);
@@ -218,7 +173,7 @@ function refreshData() {
 
   const expandedCards = saveExpandedCards();
 
-  appData = filterByYears(rawData, startYear, endYear, selectedRegion, historicalMode ? historyMap : null, historicalMode ? aliasMap : null, confSet, useRaw);
+  appData = filterByYears(rawData, startYear, endYear, selectedRegion, historicalMode ? historyMap : null, historicalMode ? aliasMap : null, confSet);
 
   console.log(`Refreshed: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}, ConfSet=${confSet}`);
 
@@ -278,7 +233,7 @@ function showTopRankings() {
     .sort((a, b) => a.rank - b.rank)
     .slice(0, 50);
   const topProfs = Object.values(appData.professors)
-    .sort((a, b) => useRaw ? (b.totalCount - a.totalCount) : (b.totalAdjusted - a.totalAdjusted))
+    .sort((a, b) => b.totalAdjusted - a.totalAdjusted)
     .slice(0, 50);
 
   const initialSchools = 10;
@@ -372,8 +327,8 @@ function searchAreaPeople(query) {
         const adjusted = confPubs.reduce((sum, pub) => sum + pub.adjustedcount, 0);
         return { ...p, confCount: count, confAdjusted: adjusted };
       })
-      .filter(p => p && (useRaw ? p.confCount : p.confAdjusted) > 0)
-      .sort((a, b) => useRaw ? (b.confCount - a.confCount) : (b.confAdjusted - a.confAdjusted));
+      .filter(p => p && p.confAdjusted > 0)
+      .sort((a, b) => b.confAdjusted - a.confAdjusted);
   } else {
     const areaMatch = Object.entries(areaLabels).find(([key, label]) =>
       label.toLowerCase().includes(query) || key.toLowerCase() === query
@@ -383,8 +338,8 @@ function searchAreaPeople(query) {
       const [areaKey] = areaMatch;
       // Find top professors in this area
       topProfs = Object.values(appData.professors)
-        .filter(p => p.areas[areaKey] && (useRaw ? p.areas[areaKey].count : p.areas[areaKey].adjusted) > 0)
-        .sort((a, b) => useRaw ? (b.areas[areaKey].count - a.areas[areaKey].count) : (b.areas[areaKey].adjusted - a.areas[areaKey].adjusted));
+        .filter(p => p.areas[areaKey]?.adjusted > 0)
+        .sort((a, b) => b.areas[areaKey].adjusted - a.areas[areaKey].adjusted);
     }
   }
 
@@ -684,7 +639,7 @@ async function searchDBLPAuthors(query) {
   const container = document.getElementById('dblp-results');
 
   try {
-    let results = await window.dblp.search(query);
+    let results = await searchAuthor(query);
     console.log('DBLP Search Results:', results);
 
     const existingProfNames = new Set(Object.keys(appData.professors).map(n => n.toLowerCase()));
@@ -702,8 +657,8 @@ async function searchDBLPAuthors(query) {
 
     await Promise.all(candidates.map(async (a) => {
       try {
-        const stats = await window.dblp.stats(a.pid, startYear, endYear);
-        if (stats && (useRaw ? stats.totalPapers : stats.totalAdjusted) > 0) {
+        const stats = await fetchAuthorStats(a.pid, startYear, endYear);
+        if (stats?.totalAdjusted > 0) {
           validAuthors.push({ ...a, stats });
         } else {
           // console.log(`Skipping ${a.name}: 0 adjusted count`);
@@ -718,7 +673,7 @@ async function searchDBLPAuthors(query) {
       return;
     }
 
-    validAuthors.sort((a, b) => useRaw ? (b.stats.totalPapers - a.stats.totalPapers) : (b.stats.totalAdjusted - a.stats.totalAdjusted));
+    validAuthors.sort((a, b) => b.stats.totalAdjusted - a.stats.totalAdjusted);
 
     container.innerHTML = `
       <div class="section-header" style="grid-column: 1/-1; margin-top: 2rem;">
@@ -727,7 +682,7 @@ async function searchDBLPAuthors(query) {
       <div class="compact-list" style="grid-column: 1/-1; display: flex; flex-direction: column; gap: 0.5rem;">
       ${validAuthors.map(a => {
       const sortedAreas = Object.entries(a.stats.areas)
-        .sort(([, x], [, y]) => useRaw ? (y.count - x.count) : (y.adjusted - x.adjusted));
+        .sort(([, x], [, y]) => y.adjusted - x.adjusted);
 
       const encodedPid = String(a.pid).split('/').map(encodeURIComponent).join('/');
       const dblpUrl = safeExternalUrl(`https://dblp.org/pid/${encodedPid}.html`);
@@ -737,7 +692,7 @@ async function searchDBLPAuthors(query) {
           <div class="card-header" onclick="toggleCard(this)">
             <div style="display: flex; align-items: baseline; gap: 1rem;">
               <h2>${escapeHtml(a.name)}</h2>
-              <span style="color: #10b981; font-weight: bold; font-size: 0.9rem;">${(useRaw ? a.stats.totalPapers : a.stats.totalAdjusted).toFixed(1)} ${useRaw ? 'Paper Count' : 'Adjusted Count'}</span>
+              <span style="color: #10b981; font-weight: bold; font-size: 0.9rem;">${a.stats.totalAdjusted.toFixed(1)} Adjusted Count</span>
             </div>
             <span class="toggle-icon">▼</span>
           </div>
@@ -772,7 +727,7 @@ window.showDBLPAuthorProfile = async (cardEl, pid, name) => {
   contentEl.innerHTML = '<p>Loading stats...</p>';
 
   try {
-    const stats = await window.dblp.stats(pid, startYear, endYear);
+    const stats = await fetchAuthorStats(pid, startYear, endYear);
     if (!stats) {
       contentEl.innerHTML = '<p>No data found.</p>';
       return;
@@ -833,7 +788,7 @@ window.searchProfessorByAffiliation = function (name, affiliation) {
       const aMatch = a.affiliation === affiliation ? 1 : 0;
       const bMatch = b.affiliation === affiliation ? 1 : 0;
       if (aMatch !== bMatch) return bMatch - aMatch;
-      return useRaw ? (b.totalCount - a.totalCount) : (b.totalAdjusted - a.totalAdjusted);
+      return b.totalAdjusted - a.totalAdjusted;
     });
 
   const container = document.getElementById('prof-results');
@@ -890,9 +845,9 @@ function setupFilters() {
     }
 
     if (historicalMode && historyMap && aliasMap) {
-      appData = filterByYears(rawData, startYear, endYear, selectedRegion, historyMap, aliasMap, confSet, useRaw);
+      appData = filterByYears(rawData, startYear, endYear, selectedRegion, historyMap, aliasMap, confSet);
     } else {
-      appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet, useRaw);
+      appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
     }
     console.log(`Filtered: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}, ConfSet=${confSet}`);
 
@@ -937,7 +892,7 @@ function searchProfessors(query) {
       const name = p.name.toLowerCase();
       return tokens.every(token => name.includes(token));
     })
-    .sort((a, b) => useRaw ? (b.totalCount - a.totalCount) : (b.totalAdjusted - a.totalAdjusted));
+    .sort((a, b) => b.totalAdjusted - a.totalAdjusted);
 
   const container = document.getElementById('prof-results');
   container.innerHTML = '';
@@ -1239,7 +1194,6 @@ function renderConferenceCard(confKey, sortedSchools) {
   const cardClass = 'card collapsed';
   const parentArea = parentMap[confKey];
   const areaLabel = areaLabels[parentArea] || parentArea || '';
-  const showRankings = document.getElementById('show-rankings')?.checked || false;
 
   return `
     <div class="${cardClass}">
@@ -1252,7 +1206,7 @@ function renderConferenceCard(confKey, sortedSchools) {
         ${sortedSchools.map(school => `
           <div class="school-area-section">
             <div class="school-area-header">
-              <span onclick="setSearchQuery(decodeURIComponent('${encodeInlineValue(school.name)}'))" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${escapeHtml(school.name)}${showRankings ? ` <small>#${school.rank}</small>` : ''}</span>
+              <span onclick="setSearchQuery(decodeURIComponent('${encodeInlineValue(school.name)}'))" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${school.rank}. ${escapeHtml(school.name)}</span>
               <span>${Math.ceil(school.count)} (${school.adjusted.toFixed(1)})</span>
             </div>
             <div class="faculty-list">
@@ -1266,7 +1220,7 @@ function renderConferenceCard(confKey, sortedSchools) {
       })
       .map(name => {
         const prof = appData.professors[name];
-        const statsText = (showRankings && prof) ? ` <small style="color: var(--text-secondary);">${prof.totalPapers} / ${prof.totalAdjusted.toFixed(1)}</small>` : '';
+        const statsText = prof ? ` <small style="color: var(--text-secondary);">${prof.totalPapers} / ${prof.totalAdjusted.toFixed(1)}</small>` : '';
         return `<span class="faculty-tag" onclick="searchProfessorByAffiliation(decodeURIComponent('${encodeInlineValue(cleanName(name))}'), decodeURIComponent('${encodeInlineValue(school.name)}'))" style="cursor: pointer;">${escapeHtml(cleanName(name))}${statsText}</span>`;
       }).join('')}
             </div>
@@ -1332,7 +1286,7 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
       const wStart = Math.max(chartStart, y - (windowYears - 1));
     const wEnd = y;
     try {
-      const result = filterByYears({ ...rawData }, wStart, wEnd, selectedRegion, historyMap, aliasMap, confSet, useRaw);
+      const result = filterByYears({ ...rawData }, wStart, wEnd, selectedRegion, historyMap, aliasMap, confSet);
       const school = result.schools[schoolName];
       years.push(y);
       ranks.push(school ? school.rank : null);
@@ -1661,7 +1615,7 @@ function renderRankContribution(school) {
   const contributions = [];
 
   topLevelAreas.forEach(area => {
-    const val = useRaw ? (school.areas[area]?.count || 0) : (school.areaAdjustedCounts?.[area] || 0);
+    const val = school.areaAdjustedCounts?.[area] || 0;
     if (val > 0) {
       contributions.push({
         area,
@@ -1710,13 +1664,13 @@ function renderRankContribution(school) {
 
   const itemsHtml = displayList.map(item => {
     const label = item.isOther ? 'Other Subfields' : (areaLabels[item.area] || item.area);
-    const formattedVal = useRaw ? Math.ceil(item.val) : item.val.toFixed(1);
+    const formattedVal = item.val.toFixed(1);
     const color = item.isOther ? 'var(--accent-color)' : 'var(--primary-color)';
     return `
       <div class="contribution-item">
         <div class="contribution-info">
           <span class="contribution-label">${label}</span>
-          <span class="contribution-value">${formattedVal} ${useRaw ? 'papers' : 'adj'} (${item.percentage.toFixed(1)}%)</span>
+          <span class="contribution-value">${formattedVal} adj (${item.percentage.toFixed(1)}%)</span>
         </div>
         <div class="contribution-bar-container">
           <div class="contribution-bar" style="width: ${item.percentage}%; background-color: ${color};"></div>
@@ -1782,14 +1736,14 @@ function renderSchoolCard(school, filterArea = null) {
   // Calculate area count 
   const areaCount = Object.values(school.areas).filter(a => a.adjusted > 0).length;
 
-  const rankBadgeHeader = showRankings ? ` <span style="color: var(--text-secondary); font-size: 0.8em;">#${school.rank}</span>` : '';
+  const rankPrefix = Number.isFinite(school.rank) ? `${school.rank}. ` : '';
   const facultyBadge = `<span style="color: var(--text-secondary); font-size: 0.75em; margin-left: 0.5rem;">${facultyCount} Faculty</span>`;
   const areaBadge = `<span style="color: var(--text-secondary); font-size: 0.75em; margin-left: 0.5rem;">${areaCount} Areas</span>`;
 
   return `
     <div class="${cardClass}" data-name="${safeSchoolName}">
       <div class="card-header" onclick="toggleCard(this)">
-        <h2>${safeSchoolName}${rankBadgeHeader}${facultyBadge}${areaBadge}</h2>
+        <h2>${rankPrefix}${safeSchoolName}${facultyBadge}${areaBadge}</h2>
         <span class="toggle-icon">▼</span>
       </div>
       <div class="card-content">
@@ -1798,11 +1752,11 @@ function renderSchoolCard(school, filterArea = null) {
         <div class="stats-list">
         ${sortedAreas.map(([area, data]) => {
     const areaRank = school.areaRanks?.[area];
-    const rankBadge = (showRankings && areaRank) ? `<span style="color: var(--text-secondary); font-size: 0.85em; margin-left: 0.5rem;">#${areaRank}</span>` : '';
+    const areaRankPrefix = areaRank ? `${areaRank}. ` : '';
     return `
           <div class="school-area-section">
             <div class="school-area-header">
-              <span onclick="setSearchQuery('${areaLabels[area] ? areaLabels[area].replace(/'/g, "\\'") : area}')" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${areaLabels[area] || area}${rankBadge}</span>
+              <span onclick="setSearchQuery('${areaLabels[area] ? areaLabels[area].replace(/'/g, "\\'") : area}')" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${areaRankPrefix}${areaLabels[area] || area}</span>
               <span>${Math.ceil(data.count)} (${data.adjusted.toFixed(1)})</span>
             </div>
             <div class="faculty-list">
@@ -1814,7 +1768,7 @@ function renderSchoolCard(school, filterArea = null) {
         })
         .map(name => {
           const prof = appData.professors[name];
-          const statsText = (showRankings && prof) ? ` <small style="color: var(--text-secondary);">${prof.totalPapers} / ${prof.totalAdjusted.toFixed(1)}</small>` : '';
+          const statsText = prof ? ` <small style="color: var(--text-secondary);">${prof.totalPapers} / ${prof.totalAdjusted.toFixed(1)}</small>` : '';
           return `<span class="faculty-tag" onclick="searchProfessorByAffiliation(decodeURIComponent('${encodeInlineValue(cleanName(name))}'), decodeURIComponent('${encodedSchoolName}'))" style="cursor: pointer;">${escapeHtml(cleanName(name))}${statsText}</span>`;
         }).join('')}
             </div>
@@ -1825,879 +1779,6 @@ function renderSchoolCard(school, filterArea = null) {
     </div>
   `;
 }
-
-let simFacultyArr = [];
-
-function populateFacultyList(school) {
-  const facultySet = new Set();
-  Object.values(school.areas).forEach(a => a.faculty.forEach(f => facultySet.add(f)));
-  simFacultyArr = Array.from(facultySet).sort((a, b) => {
-    const profA = appData.professors[a];
-    const profB = appData.professors[b];
-    return (profB?.totalAdjusted || 0) - (profA?.totalAdjusted || 0);
-  });
-
-  renderFacultyList();
-}
-
-function renderFacultyList(filter = '') {
-  const listEl = document.getElementById('sim-faculty-list');
-  const candidatesInput = document.getElementById('sim-candidates-input');
-  if (!listEl || !candidatesInput) return;
-
-  const filtered = filter
-    ? simFacultyArr.filter(f => cleanName(f).toLowerCase().includes(filter.toLowerCase()))
-    : simFacultyArr;
-
-  const currentNames = candidatesInput.value.split('\n').map(n => n.trim()).filter(n => n);
-
-  listEl.innerHTML = filtered.map(f => {
-    const name = cleanName(f);
-    const checked = currentNames.some(n => n.toLowerCase() === name.toLowerCase());
-    const prof = appData.professors[f];
-    const areas = prof ? Object.keys(prof.areas).length : 0;
-    const papers = prof ? prof.totalPapers : 0;
-    const adj = prof ? prof.totalAdjusted.toFixed(1) : '0';
-    return `
-      <label style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; cursor: pointer; border-bottom: 1px solid var(--border-color); font-size: 0.88em;"
-             data-name="${escapeHtml(name)}">
-        <input type="checkbox" ${checked ? 'checked' : ''} style="width: 15px; height: 15px; cursor: pointer;">
-        <span style="flex: 1; color: var(--text-primary);">${escapeHtml(name)}</span>
-        <small style="color: var(--text-secondary);">${areas} areas, ${papers} papers, ${adj} adj</small>
-      </label>
-    `;
-  }).join('');
-
-  listEl.querySelectorAll('label').forEach(label => {
-    const checkbox = label.querySelector('input[type="checkbox"]');
-    checkbox.addEventListener('change', () => {
-      const name = label.dataset.name;
-      const lines = candidatesInput.value.split('\n').map(n => n.trim()).filter(n => n);
-      if (checkbox.checked) {
-        if (!lines.some(n => n.toLowerCase() === name.toLowerCase())) {
-          lines.push(name);
-        }
-      } else {
-        const idx = lines.findIndex(n => n.toLowerCase() === name.toLowerCase());
-        if (idx >= 0) lines.splice(idx, 1);
-      }
-      candidatesInput.value = lines.join('\n');
-    });
-  });
-}
-
-function levenshtein(a, b) {
-  const matrix = [];
-  for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
-  for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
-
-  for (let i = 1; i <= b.length; i++) {
-    for (let j = 1; j <= a.length; j++) {
-      if (b.charAt(i - 1) === a.charAt(j - 1)) {
-        matrix[i][j] = matrix[i - 1][j - 1];
-      } else {
-        matrix[i][j] = Math.min(
-          matrix[i - 1][j - 1] + 1,
-          matrix[i][j - 1] + 1,
-          matrix[i - 1][j] + 1
-        );
-      }
-    }
-  }
-  return matrix[b.length][a.length];
-}
-
-function fuzzyMatch(nameA, nameB) {
-  const a = cleanName(nameA).toLowerCase();
-  const b = cleanName(nameB).toLowerCase();
-  if (a === b) return true;
-
-  // Split into parts and compare
-  const partsA = a.split(/\s+/).filter(p => p.length > 0);
-  const partsB = b.split(/\s+/).filter(p => p.length > 0);
-
-  // Extract first and last names
-  const firstA = partsA[0];
-  const lastA = partsA[partsA.length - 1];
-  const firstB = partsB[0];
-  const lastB = partsB[partsB.length - 1];
-
-  // Check: same last name AND (same first name OR one is initial of other)
-  if (lastA === lastB) {
-    if (firstA === firstB) return true;
-    // Check if one first name starts with the other (handles initials like S. vs Samuel)
-    if (firstA.startsWith(firstB[0]) || firstB.startsWith(firstA[0])) {
-      const shorter = firstA.length < firstB.length ? firstA : firstB;
-      const longer = firstA.length < firstB.length ? firstB : firstA;
-      // Only allow prefix match if the shorter one is an initial or short enough
-      // And strictly require the longer to start with shorter
-      if (shorter.length <= 2 && longer.startsWith(shorter)) return true;
-    }
-  }
-
-  // Fallback: Levenshtein distance for close matches
-  if (Math.abs(a.length - b.length) > 3) return false;
-
-  if (lastA === lastB && partsA.length > 1 && partsB.length > 1) {
-    const firstDist = levenshtein(firstA, firstB);
-    return firstDist <= 1;
-  }
-
-  const distance = levenshtein(a, b);
-  const maxLength = Math.max(a.length, b.length);
-
-  // distance rules
-  if (distance === 0) return true;
-  if (distance === 1 && maxLength > 3) return true;
-  if (distance === 2 && maxLength > 8) return true;
-
-  return false;
-}
-
-function calculateRankImpact(ops) {
-  const schoolClones = new Map();
-  ops.forEach(op => {
-    const clone = JSON.parse(JSON.stringify(op.school));
-    schoolClones.set(op.school.name, clone);
-  });
-
-  // Apply stats changes
-  ops.forEach(op => {
-    const clone = schoolClones.get(op.school.name);
-    for (const [area, areaStats] of Object.entries(op.stats.areas)) {
-      const val = typeof areaStats === 'number' ? areaStats : areaStats.adjusted;
-      if (!clone.areas[area]) {
-        clone.areas[area] = { count: 0, adjusted: 0, faculty: [] };
-      }
-      if (op.isRemoval) {
-        clone.areas[area].adjusted = Math.max(0, clone.areas[area].adjusted - val);
-      } else {
-        clone.areas[area].adjusted += val;
-      }
-    }
-  });
-
-  // Construct full list for ranking
-  const allSchools = Object.values(appData.schools).map(s =>
-    schoolClones.has(s.name) ? schoolClones.get(s.name) : s
-  );
-
-  const areas = new Set();
-  Object.values(parentMap).forEach(a => areas.add(a));
-  const areaList = Array.from(areas);
-
-  const calcScore = (s) => {
-    let product = 1;
-    for (const area of areaList) {
-      const adj = s.areas[area]?.adjusted || 0;
-      product *= (adj + 1);
-    }
-    return Math.pow(product, 1 / areaList.length) - 1;
-  };
-
-  allSchools.forEach(s => {
-    s._simScore = calcScore(s);
-  });
-
-  allSchools.sort((a, b) => b._simScore - a._simScore);
-
-  // area rankings for simulation
-  const areaRanksBefore = {};
-  const areaRanksAfter = {};
-  ops.forEach(op => {
-    areaRanksBefore[op.school.name] = op.school.areaRanks || {};
-    areaRanksAfter[op.school.name] = {};
-  });
-
-  areaList.forEach(area => {
-    const sorted = allSchools
-      .filter(s => (s.areas[area]?.adjusted || 0) > 0)
-      .sort((a, b) => (b.areas[area]?.adjusted || 0) - (a.areas[area]?.adjusted || 0));
-    sorted.forEach((s, idx) => {
-      if (areaRanksAfter[s.name] !== undefined) {
-        areaRanksAfter[s.name][area] = idx + 1;
-      }
-    });
-  });
-
-  const deltaMap = new Map();
-  ops.forEach(op => {
-    const newRank = allSchools.findIndex(s => s.name === op.school.name) + 1;
-    const delta = op.school.rank - newRank;
-
-    const areaDeltasBefore = areaRanksBefore[op.school.name];
-    const areaDeltasAfter = areaRanksAfter[op.school.name];
-    const areaDeltas = {};
-    areaList.forEach(area => {
-      const before = areaDeltasBefore[area];
-      const after = areaDeltasAfter[area];
-      if (before !== undefined && after === undefined) {
-        areaDeltas[area] = { dropped: true, wasRank: before };
-      } else if (before === undefined && after !== undefined) {
-        areaDeltas[area] = { entered: true, nowRank: after };
-      } else if (before !== undefined && after !== undefined) {
-        areaDeltas[area] = { delta: before - after, nowRank: after };
-      }
-    });
-
-    deltaMap.set(op.school.name, { overall: delta, areas: areaDeltas });
-  });
-
-  return deltaMap;
-}
-
-function renderCandidateResults(candidates) {
-  const medals = ['🥇', '🥈', '🥉'];
-
-  return candidates.map((c, i) => {
-    if (c.error) {
-      return `
-        <div class="candidate-card">
-          <div class="candidate-header">
-            <span class="candidate-medal">❌</span>
-            <div class="candidate-info">
-              <div class="candidate-name">${escapeHtml(c.name)}</div>
-              <div class="candidate-stats" style="color: #ef4444;">${escapeHtml(c.error)}</div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    const medal = i < 3 ? medals[i] : `#${i + 1}`;
-    const deltaClass = c.rankDelta > 0 ? 'positive' : (c.rankDelta < 0 ? 'negative' : 'neutral');
-    const deltaText = c.rankDelta > 0 ? `+${c.rankDelta}` : (c.rankDelta < 0 ? `${c.rankDelta}` : '±0');
-
-    let actionLabel = '';
-    if (c.isRemoval) {
-      actionLabel = `<span style="font-size: 0.8em; color: #ef4444; background: #fee2e2; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">Removing</span>`;
-    } else if (c.sourceSchool) {
-      actionLabel = `<span style="font-size: 0.8em; color: #3b82f6; background: #dbeafe; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">from ${escapeHtml(c.sourceSchool.name)}</span>`;
-    }
-
-    let dataSourceBadge = '';
-    if (c.usedCSRankings) {
-      dataSourceBadge = `<span style="font-size: 0.7em; color: #059669; background: #d1fae5; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">CSRankings</span>`;
-    }
-
-    let sourceImpactHtml = '';
-    if (c.sourceSchool) {
-      const sDelta = c.sourceSchool.delta;
-      const sClass = sDelta > 0 ? 'positive' : (sDelta < 0 ? 'negative' : 'neutral');
-      const sText = sDelta > 0 ? `+${sDelta}` : (sDelta < 0 ? `${sDelta}` : '±0');
-      sourceImpactHtml = `
-          <div style="font-size: 0.85rem; margin-top: 4px; color: #666; display: flex; align-items: center; justify-content: flex-end;">
-             <span style="margin-right: 6px;">${escapeHtml(c.sourceSchool.name)}:</span>
-             <span class="${sClass}" style="font-weight: 600;">${sText} ranks</span>
-          </div>
-      `;
-    }
-
-    const papersHtml = c.stats.papers.slice(0, 20).map(p => {
-      const countLabel = p.count > 1 ? `${Math.round(p.count)} papers` : '1 paper';
-      return `
-      <div class="paper-item">
-        <span class="paper-venue">${escapeHtml(p.venue)}</span>
-        <span class="paper-year">${p.year}</span>:
-        ${countLabel} <small>(~${p.authors} authors, ${p.adjusted.toFixed(2)} adj)</small>
-      </div>
-    `;
-    }).join('');
-
-    // Show all areas the candidate publishes in, with rank delta for each
-    const allAreas = Object.keys(c.stats.areas);
-    const areaDeltaEntries = allAreas
-      .map(area => {
-        let d = (c.areaDeltas || {})[area];
-        if (d === undefined) d = { delta: 0 };
-        return [area, d];
-      })
-      .sort(([, a], [, b]) => {
-        const getVal = (x) => {
-          if (typeof x === 'number') return Math.abs(x);
-          if (x && (x.dropped || x.entered)) return 1000;
-          if (x && x.delta !== undefined) return Math.abs(x.delta);
-          return 0;
-        };
-        return getVal(b) - getVal(a);
-      });
-
-    const areaPillsHtml = areaDeltaEntries.length > 0 ? `
-      <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px;">
-        ${areaDeltaEntries.map(([area, d]) => {
-      const label = escapeHtml(areaLabels[area] || area);
-      if (d && d.dropped) {
-        return `<span class="area-pill negative">↓ ${label} (Unranked - was #${d.wasRank})</span>`;
-      }
-      if (d && d.entered) {
-        return `<span class="area-pill positive">↑ ${label} +New (→ #${d.nowRank})</span>`;
-      }
-
-      const deltaVal = d && d.delta !== undefined ? d.delta : (typeof d === 'number' ? d : 0);
-      const nowRank = d && d.nowRank !== undefined ? d.nowRank : null;
-
-      if (deltaVal === 0) {
-        return `<span class="area-pill neutral">${label} ±0${nowRank ? ` (#${nowRank})` : ''}</span>`;
-      }
-      const arrow = deltaVal > 0 ? '↑' : '↓';
-      const sign = deltaVal > 0 ? '+' : '';
-      const cls = deltaVal > 0 ? 'positive' : 'negative';
-      return `<span class="area-pill ${cls}">${arrow} ${label} ${sign}${deltaVal} (→ #${nowRank})</span>`;
-    }).join('')}
-      </div>
-    ` : '';
-
-
-    return `
-      <div class="candidate-card">
-        <div class="candidate-header">
-          <span class="candidate-medal">${medal}</span>
-          <div class="candidate-info">
-            <div class="candidate-name">
-              ${escapeHtml(c.name)}
-              ${actionLabel}
-              ${dataSourceBadge}
-            </div>
-            <div class="candidate-stats">${Object.keys(c.stats.areas).length} areas, ${c.stats.totalPapers} papers, ${c.stats.totalAdjusted.toFixed(1)} adjusted</div>
-            <div class="candidate-area-breakdown">
-              ${Object.entries(c.stats.areas)
-        .sort(([, a], [, b]) => (b.count || b) - (a.count || a))
-        .map(([area, areaStats]) => {
-          const count = typeof areaStats === 'number' ? Math.ceil(areaStats) : (areaStats.count || 0);
-          const adj = typeof areaStats === 'number' ? areaStats : (areaStats.adjusted || 0);
-          const label = escapeHtml(areaLabels[area] || area);
-          return `<span class="area-breakdown-tag">${label} <strong>(${count} ${count === 1 ? 'paper' : 'papers'})</strong></span>`;
-        }).join('')}
-            </div>
-            ${areaPillsHtml}
-          </div>
-          <div class="candidate-impact">
-            <div class="candidate-rank-delta ${deltaClass}">#${c.currentRank} → #${c.currentRank - c.rankDelta} (${deltaText})</div>
-            ${sourceImpactHtml}
-          </div>
-        </div>
-        <button class="papers-toggle">▶ Show Papers</button>
-        <div class="papers-list">
-          ${papersHtml || '<div class="paper-item">No counted papers</div>'}
-        </div>
-      </div>
-    `;
-
-  }).join('');
-}
-
-async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
-  const candidateResults = [];
-
-  // Get current conference set
-  const confSetSelect = document.getElementById('conf-set');
-  const confSetVal = confSetSelect ? confSetSelect.value : 'csrankings';
-  const confMap = (confSetVal === 'core' || confSetVal === 'core-a') ? (confSetVal === 'core' ? coreAStarMap : coreAMap) : parentMap;
-
-  for (const name of uniqueNames) {
-    try {
-      let profData = null;
-      let profName = name;
-
-      if (appData.professors[name]) {
-        profData = appData.professors[name];
-        profName = name;
-      } else {
-        const targetFacultyNames = new Set();
-        Object.values(selectedUniv.areas).forEach(a => a.faculty.forEach(f => targetFacultyNames.add(f)));
-        for (const fName of targetFacultyNames) {
-          if (fuzzyMatch(fName, name)) {
-            profData = appData.professors[fName];
-            profName = fName;
-            break;
-          }
-        }
-        if (!profData) {
-          for (const pName of Object.keys(appData.professors)) {
-            if (!pName.toLowerCase().includes(name.split(' ').pop().toLowerCase()) &&
-              Math.abs(pName.length - name.length) > 3) continue;
-
-            if (fuzzyMatch(pName, name)) {
-              profData = appData.professors[pName];
-              profName = pName;
-              break;
-            }
-          }
-        }
-      }
-
-      let stats;
-      let displayName = name;
-      let usedCSRankings = false;
-
-      if (profData && profData.pubs && profData.pubs.length > 0) {
-        // Use CSRankings data for existing professors
-        displayName = profData.name;
-
-        // Filter pubs by year range AND conference set
-        const yearFiltered = profData.pubs.filter(p => p.year >= startYear && p.year <= endYear);
-
-        let confFilteredPubs = yearFiltered;
-        if (confSet === 'core') {
-          confFilteredPubs = yearFiltered.filter(p => coreAStarMap[p.area]);
-        } else if (confSet === 'core-a') {
-          confFilteredPubs = yearFiltered.filter(p => coreAStarMap[p.area] || coreAMap[p.area]);
-        } else if (confSet === 'csrankings-default') {
-          confFilteredPubs = yearFiltered.filter(p => !nextTier[p.area]);
-        }
-
-        console.log('CSRankings match for:', name, '→', profData.name, 'pubs:', profData.pubs.length, 'filtered:', confFilteredPubs.length);
-
-        if (confFilteredPubs.length === 0) {
-          // No papers in this year range/conf set - show as such
-          candidateResults.push({ name: displayName, error: `No publication records found in ${startYear}–${endYear} for the active conference set` });
-          continue;
-        }
-
-        usedCSRankings = true;
-
-        stats = {
-          totalAdjusted: 0,
-          totalPapers: 0,
-          areas: {},
-          papers: []
-        };
-
-        confFilteredPubs.forEach(pub => {
-          const area = confMap[pub.area] || parentMap[pub.area] || pub.area;
-
-          stats.totalAdjusted += pub.adjustedcount;
-          stats.totalPapers += pub.count;
-
-          if (!stats.areas[area]) {
-            stats.areas[area] = { count: 0, adjusted: 0 };
-          }
-          stats.areas[area].count += pub.count;
-          stats.areas[area].adjusted += pub.adjustedcount;
-
-          stats.papers.push({
-            title: `${area.toUpperCase()} publication`,
-            venue: pub.area.toUpperCase(),
-            year: pub.year,
-            count: pub.count,
-            authors: Math.round(1 / pub.adjustedcount),
-            adjusted: pub.adjustedcount,
-            area: area
-          });
-        });
-
-        stats.papers.sort((a, b) => b.year - a.year);
-      } else {
-        // External candidate - query DBLP
-
-        let searchName = name;
-        let dblpSuffix = null;
-        const suffixMatch = name.match(/^(.+?)\s+(\d{4})$/);
-        if (suffixMatch) {
-          searchName = suffixMatch[1];
-          dblpSuffix = suffixMatch[2];
-        }
-
-        const searchResults = await window.dblp.search(searchName);
-
-        let best = null;
-        if (searchResults && searchResults.length > 0) {
-          if (dblpSuffix) {
-            const numSuffix = parseInt(dblpSuffix, 10);
-            best = searchResults.find(r => {
-              if (numSuffix === 0) {
-                return !r.pid.includes('-');
-              }
-              return r.pid.endsWith(`-${numSuffix}`);
-            });
-            if (!best) {
-              best = searchResults.find(r =>
-                r.name.includes(dblpSuffix) || r.name.endsWith(dblpSuffix)
-              );
-            }
-            if (!best) best = searchResults[0];
-          } else {
-            best = searchResults[0];
-          }
-        }
-
-        if (!best) {
-          candidateResults.push({ name, error: 'No matching profile found in the CSRankings database or DBLP search' });
-          continue;
-        }
-
-        displayName = best.name;
-
-        stats = await window.dblp.stats(best.pid, startYear, endYear);
-        if (!stats) {
-          candidateResults.push({ name, error: 'We couldn\'t retrieve publication records from DBLP. Please verify the profile is accessible.' });
-          continue;
-        }
-      }
-
-      let sourceSchool = null;
-      let isRemovalMode = false;
-
-      // Get all name variants to check (includes DBLP aliases)
-      const namesToCheck = [displayName];
-      if (stats.aliases && stats.aliases.length > 0) {
-        stats.aliases.forEach(alias => {
-          if (!namesToCheck.includes(alias)) namesToCheck.push(alias);
-        });
-      }
-
-      const targetFaculty = new Set();
-      Object.values(selectedUniv.areas).forEach(a => a.faculty.forEach(f => targetFaculty.add(f)));
-
-      // Check if any alias matches target school faculty
-      outerRemoval:
-      for (const nameVariant of namesToCheck) {
-        for (const f of targetFaculty) {
-          if (fuzzyMatch(f, nameVariant)) {
-            isRemovalMode = true;
-            break outerRemoval;
-          }
-        }
-      }
-
-      // Check if any alias matches another school's faculty (transfer mode)
-      if (!isRemovalMode) {
-        outerSource:
-        for (const s of Object.values(appData.schools)) {
-          if (s.name === selectedUniv.name) continue;
-          const sFaculty = new Set();
-          Object.values(s.areas).forEach(a => a.faculty.forEach(f => sFaculty.add(f)));
-
-          for (const nameVariant of namesToCheck) {
-            for (const f of sFaculty) {
-              if (fuzzyMatch(f, nameVariant)) {
-                sourceSchool = s;
-                break outerSource;
-              }
-            }
-          }
-        }
-      }
-
-      const ops = [];
-      if (isRemovalMode) {
-        ops.push({ school: selectedUniv, stats, isRemoval: true });
-      } else {
-        ops.push({ school: selectedUniv, stats, isRemoval: false });
-      }
-
-      if (sourceSchool && !isRemovalMode) {
-        ops.push({ school: sourceSchool, stats, isRemoval: true });
-      }
-      const impactMap = calculateRankImpact(ops);
-      const targetImpact = impactMap.get(selectedUniv.name) || { overall: 0, areas: {} };
-      const rankDelta = targetImpact.overall;
-      const areaDeltas = targetImpact.areas;
-      const sourceImpactEntry = sourceSchool ? impactMap.get(sourceSchool.name) : null;
-      const sourceImpact = sourceImpactEntry ? sourceImpactEntry.overall : null;
-
-      candidateResults.push({
-        name: displayName,
-        stats,
-        rankDelta,
-        currentRank: selectedUniv.rank,
-        areaDeltas,
-        isRemoval: isRemovalMode,
-        usedCSRankings: usedCSRankings,
-        sourceSchool: sourceSchool ? { name: sourceSchool.name, delta: sourceImpact } : null,
-        error: null
-      });
-    } catch (err) {
-      console.error('Simulator error for:', name, err);
-      console.error('Stack:', err.stack);
-      candidateResults.push({ name, error: `An unexpected error occurred while retrieving data: ${err.message}. Please try again.` });
-    }
-  }
-
-  candidateResults.sort((a, b) => {
-    if (a.error && !b.error) return 1;
-    if (!a.error && b.error) return -1;
-    // Sort by impact descending
-    return Math.abs(b.rankDelta || 0) - Math.abs(a.rankDelta || 0);
-  });
-
-  return candidateResults;
-}
-
-function setupSimulation() {
-  const modal = document.getElementById('sim-modal');
-  const openBtn = document.getElementById('simulate-btn');
-  const closeBtn = document.querySelector('.close-modal');
-  const univSearch = document.getElementById('sim-univ-search');
-  const candidatesInput = document.getElementById('sim-candidates-input');
-  const analyzeBtn = document.getElementById('sim-analyze-btn');
-  const resetBtn = document.getElementById('sim-reset-btn');
-
-  let selectedUniv = null;
-
-  const checkHash = () => {
-    if (window.location.hash === '#simulate') {
-      openBtn.style.display = 'flex';
-      // Auto-open modal and focus university search
-      modal.classList.remove('hidden');
-      univSearch.focus();
-    } else {
-      openBtn.style.display = 'none';
-    }
-  };
-  checkHash();
-  window.addEventListener('hashchange', checkHash);
-
-  const openModalWithTransition = () => {
-    modal.classList.remove('hidden');
-    univSearch.focus();
-  };
-
-  const closeModalWithTransition = () => {
-    modal.classList.add('hidden');
-  };
-
-  openBtn.addEventListener('click', openModalWithTransition);
-  closeBtn.addEventListener('click', closeModalWithTransition);
-
-  const resetSimulation = () => {
-    selectedUniv = null;
-    document.getElementById('step-univ-first').classList.remove('hidden');
-    document.getElementById('step-candidates').classList.add('hidden');
-    document.getElementById('step-results').classList.add('hidden');
-    univSearch.value = '';
-    candidatesInput.value = '';
-    document.getElementById('sim-univ-results').innerHTML = '';
-    document.getElementById('sim-candidates-results').innerHTML = '';
-    document.getElementById('sim-faculty-list').innerHTML = '';
-    document.getElementById('sim-faculty-search').value = '';
-  };
-
-  resetBtn.addEventListener('click', resetSimulation);
-
-  // Set up static listeners once
-  const searchEl = document.getElementById('sim-faculty-search');
-  if (searchEl) {
-    searchEl.addEventListener('input', (e) => renderFacultyList(e.target.value));
-  }
-
-  const selectAllBtn = document.getElementById('sim-select-all');
-  if (selectAllBtn) {
-    selectAllBtn.addEventListener('click', () => {
-      const listEl = document.getElementById('sim-faculty-list');
-      if (listEl) {
-        listEl.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-          if (!cb.checked) { cb.checked = true; cb.dispatchEvent(new Event('change')); }
-        });
-      }
-    });
-  }
-
-  const deselectAllBtn = document.getElementById('sim-deselect-all');
-  if (deselectAllBtn) {
-    deselectAllBtn.addEventListener('click', () => {
-      const listEl = document.getElementById('sim-faculty-list');
-      if (listEl) {
-        listEl.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-          if (cb.checked) { cb.checked = false; cb.dispatchEvent(new Event('change')); }
-        });
-      }
-    });
-  }
-
-  univSearch.addEventListener('input', (e) => {
-    const q = e.target.value.toLowerCase();
-    if (q.length < 1) return;
-
-    const results = Object.values(appData.schools)
-      .filter(s => s.name.toLowerCase().includes(q))
-      .slice(0, 10);
-
-    const container = document.getElementById('sim-univ-results');
-    container.innerHTML = results.map(s => `
-      <div class="sim-item" data-name="${escapeHtml(s.name)}">
-        <strong>${escapeHtml(s.name)}</strong> <small>#${s.rank}</small>
-      </div>
-    `).join('');
-
-    container.querySelectorAll('.sim-item').forEach(item => {
-      item.addEventListener('click', () => {
-        selectedUniv = appData.schools[item.dataset.name];
-        document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name} (#${selectedUniv.rank})`;
-        document.getElementById('step-univ-first').classList.add('hidden');
-        document.getElementById('step-candidates').classList.remove('hidden');
-        populateFacultyList(selectedUniv);
-        candidatesInput.focus();
-      });
-    });
-  });
-
-  candidatesInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-      e.preventDefault();
-      analyzeBtn.click();
-    }
-  });
-
-  analyzeBtn.addEventListener('click', async () => {
-    if (!selectedUniv) return;
-
-    const text = candidatesInput.value.trim();
-    if (!text) return;
-
-    const names = text.split('\n').map(n => n.trim()).filter(n => n.length > 0);
-    const uniqueNames = [...new Set(names)];
-
-    if (uniqueNames.length === 0) return;
-
-    document.getElementById('step-candidates').classList.add('hidden');
-    document.getElementById('step-results').classList.remove('hidden');
-    document.getElementById('selected-univ-display-results').textContent = `Target: ${selectedUniv.name} (#${selectedUniv.rank})`;
-
-    const loading = document.getElementById('sim-loading');
-    const resultsContainer = document.getElementById('sim-candidates-results');
-    loading.classList.remove('hidden');
-    resultsContainer.innerHTML = '';
-
-    const candidateResults = await performCandidatesAnalysis(selectedUniv, uniqueNames);
-
-    loading.classList.add('hidden');
-    resultsContainer.innerHTML = renderCandidateResults(candidateResults);
-
-    resultsContainer.querySelectorAll('.papers-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const list = btn.nextElementSibling;
-        list.classList.toggle('visible');
-        btn.textContent = list.classList.contains('visible') ? '▼ Hide Papers' : '▶ Show Papers';
-      });
-    });
-  });
-}
-
-async function runSimulation(author, school, isRemove = false) {
-  const loading = document.getElementById('sim-loading');
-  const display = document.getElementById('sim-impact-display');
-
-  loading.classList.remove('hidden');
-  display.innerHTML = '';
-
-  let stats;
-
-  if (isRemove) {
-    const prof = appData.professors[author.name];
-    if (!prof) {
-      loading.classList.add('hidden');
-      display.innerHTML = '<p style="color:red">Professor data not found.</p>';
-      return;
-    }
-    const flatAreas = {};
-    for (const [k, v] of Object.entries(prof.areas)) {
-      flatAreas[k] = v.adjusted;
-    }
-    stats = {
-      totalAdjusted: prof.totalAdjusted,
-      areas: flatAreas
-    };
-  } else {
-    stats = await window.dblp.stats(author.pid, startYear, endYear);
-    if (!stats) {
-      loading.classList.add('hidden');
-      display.innerHTML = '<p style="color:red">Failed to fetch author data.</p>';
-      return;
-    }
-  }
-
-  const schoolClone = JSON.parse(JSON.stringify(school));
-
-  for (const [area, areaStats] of Object.entries(stats.areas)) {
-    // Handle both old format (if cached/prof data) and new format (DBLP stats)
-
-    const val = typeof areaStats === 'number' ? areaStats : areaStats.adjusted;
-
-    if (!schoolClone.areas[area]) {
-      schoolClone.areas[area] = { count: 0, adjusted: 0, faculty: [] };
-    }
-
-    if (isRemove) {
-      schoolClone.areas[area].adjusted = Math.max(0, schoolClone.areas[area].adjusted - val);
-    } else {
-      schoolClone.areas[area].adjusted += val;
-    }
-  }
-
-  // 3. Re-calculate Rank
-  const allSchools = Object.values(appData.schools).map(s =>
-    s.name === school.name ? schoolClone : s
-  );
-
-  const areas = new Set();
-  Object.values(parentMap).forEach(a => areas.add(a));
-  const areaList = Array.from(areas);
-
-  const calcScore = (s) => {
-    let product = 1;
-    for (const area of areaList) {
-      const adj = s.areas[area]?.adjusted || 0;
-      product *= (adj + 1);
-    }
-    return Math.pow(product, 1 / areaList.length) - 1;
-  };
-
-  allSchools.forEach(s => {
-    s._simScore = calcScore(s);
-  });
-
-  allSchools.sort((a, b) => b._simScore - a._simScore);
-
-  const newRank = allSchools.findIndex(s => s.name === school.name) + 1;
-  const oldRank = school.rank;
-  const diff = oldRank - newRank;
-
-  loading.classList.add('hidden');
-
-  let arrow = diff > 0 ? '⬆' : (diff < 0 ? '⬇' : '➡');
-  let color = diff > 0 ? '#10b981' : (diff < 0 ? '#ef4444' : 'var(--text-secondary)');
-
-  const actionText = isRemove ? `Removed ${author.name}` : `Added ${author.name}`;
-  const impactText = diff > 0 ? `Improved by ${diff} spots!` : (diff < 0 ? `Dropped by ${Math.abs(diff)} spots` : 'No change in rank');
-
-  display.innerHTML = `
-    <div class="impact-card">
-      <h3>${escapeHtml(actionText)}</h3>
-      <p>${isRemove ? '-' : '+'}${stats.totalAdjusted.toFixed(1)} Adjusted Count</p>
-    </div>
-    
-    <div class="impact-card">
-      <h3>${escapeHtml(school.name)}</h3>
-      <div class="rank-change" style="color: ${color}">
-        <span>#${oldRank}</span>
-        <span>${arrow}</span>
-        <span>#${newRank}</span>
-      </div>
-      <p>${impactText}</p>
-    </div>
-
-    <div class="area-gains">
-      <h4>Top Area ${isRemove ? 'Losses' : 'Gains'}:</h4>
-      ${Object.entries(stats.areas)
-      .map(([area, areaStats]) => {
-        const val = typeof areaStats === 'number' ? areaStats : areaStats.adjusted;
-        return [area, val];
-      })
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 5)
-      .map(([area, val]) => `
-          <div class="gain-item">
-            <span>${areaLabels[area] || area}</span>
-            <span class="gain-val" style="color: ${isRemove ? '#ef4444' : '#10b981'}">
-              ${isRemove ? '-' : '+'}${val.toFixed(1)}
-            </span>
-          </div>
-        `).join('')}
-    </div>
-  `;
-}
-
 
 function setupTooltips() {
   // Create global tooltip element

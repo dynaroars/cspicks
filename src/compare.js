@@ -41,7 +41,7 @@ async function init() {
 
     // Hide loading indicator and show controls
     document.getElementById('loading-indicator').style.display = 'none';
-    document.getElementById('filter-controls').style.display = 'grid';
+    document.getElementById('filter-controls').style.display = 'flex';
     document.getElementById('compare-controls').style.display = 'flex';
 }
 
