@@ -6,6 +6,7 @@ import { encodeInlineValue, escapeHtml, safeExternalUrl } from '../src/shared.js
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../src/simulation.js';
 import { hasEligiblePageRange, normalizeDblpVenue } from '../src/dblp.js';
 import { parseCsrankingsRules } from '../src/csrankings-rules.js';
+import { calculateParityReport, calculateSchoolMetrics, explainRankGap, rankingsToCsv } from '../src/metrics.js';
 
 function professor(name, affiliation, count, adjustedcount) {
   return {
@@ -214,4 +215,56 @@ test('simulator calculates target-school overall and area rank changes', () => {
   assert.equal(impact.overall, 1);
   assert.equal(impact.areas.mlmining.delta, 1);
   assert.equal(impact.areas.mlmining.nowRank, 1);
+});
+
+test('school metrics report movement, momentum, concentration, breadth, and collaboration proxy', () => {
+  const current = {
+    professors: {
+      Alice: { name: 'Alice', homepage: 'https://a.example', scholarid: 'a', totalAdjusted: 6 },
+      Bob: { name: 'Bob', homepage: '', scholarid: '', totalAdjusted: 4 }
+    },
+    schools: {
+      A: {
+        name: 'A', rank: 2, totalCount: 20, totalAdjusted: 10,
+        areas: { mlmining: { adjusted: 7, faculty: ['Alice', 'Bob'] }, ai: { adjusted: 3, faculty: ['Alice'] } },
+        areaRanks: { mlmining: 3, ai: 12 }
+      }
+    }
+  };
+  const prior = { schools: { A: { rank: 5, totalAdjusted: 5, areas: { mlmining: { adjusted: 5 } } } } };
+  const metrics = calculateSchoolMetrics(current, prior, 'A');
+
+  assert.equal(metrics.rankDelta, 3);
+  assert.equal(metrics.growth, 100);
+  assert.equal(metrics.medianPerFaculty, 5);
+  assert.equal(metrics.top3Share, 100);
+  assert.equal(metrics.activeAreas, 2);
+  assert.equal(metrics.sustainedAreas, 1);
+  assert.equal(metrics.impliedTeamSize, 2);
+  assert.equal(metrics.confidence, 'Medium');
+});
+
+test('rank gap explanation uses geometric-mean log contributions', () => {
+  const gaps = explainRankGap(
+    { areaAdjustedCounts: { ai: 9, mlmining: 1 } },
+    { areaAdjustedCounts: { ai: 1, mlmining: 3 } }
+  );
+  assert.equal(gaps[0].area, 'ai');
+  assert.equal(gaps[0].leader, 'a');
+  assert.ok(gaps[0].logGap > 0);
+});
+
+test('parity audit and CSV export validate ranked data', () => {
+  const raw = { professors: { Alice: {} } };
+  const filtered = {
+    professors: { Alice: { homepage: 'https://a.example' } },
+    schools: {
+      A: { name: 'A', rank: 1, score: 2, country: 'us', totalCount: 2, totalAdjusted: 1, areas: { ai: { adjusted: 1 } } }
+    }
+  };
+  const report = calculateParityReport(raw, filtered);
+  assert.equal(report.totalMismatches, 0);
+  assert.equal(report.rankOrderIssues, 0);
+  assert.equal(report.officialVenueMode, true);
+  assert.match(rankingsToCsv(filtered), /"1","A","2","2\.00","1\.00","1"/);
 });

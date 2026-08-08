@@ -1,6 +1,9 @@
 import Chart from 'chart.js/auto';
 import { loadData, loadAffiliationData, filterByYears, getPublicationSchools, parentMap } from './data.js';
 import { areaLabels, escapeHtml, updateChartDefaults } from './shared.js';
+import { buildPriorPeriodData, calculateParityReport, calculateSchoolMetrics } from './metrics.js';
+import bundledRules from './csrankings-rules.generated.js';
+import { syncCsrankingsRules } from './csrankings-rules.js';
 
 updateChartDefaults(Chart);
 
@@ -11,6 +14,8 @@ function refreshActiveTabChart() {
     else if (currentTab === 'effort') renderSubfieldEffort();
     else if (currentTab === 'ai-trends') renderAITrends();
     else if (currentTab === 'conf-trends') renderConferenceTrends();
+    else if (currentTab === 'collaboration') renderCollaborationStats();
+    else if (currentTab === 'data-health') renderDataHealth();
 }
 
 const observer = new MutationObserver((mutations) => {
@@ -31,6 +36,8 @@ let chartInstance = null;
 let currentTab = 'schools';
 let historicalMode = false;
 let focusSchoolOnly = false;
+let activeVenueRules = bundledRules;
+let venueRulesCheckedAt = null;
 
 // DOM Elements Cache
 let schoolSelectEl = null;
@@ -50,7 +57,8 @@ function cacheDOMElements() {
 async function init() {
     console.log('Initializing Analysis Dashboard...');
     try {
-        rawData = await loadData();
+        [rawData, activeVenueRules] = await Promise.all([loadData(), syncCsrankingsRules()]);
+        venueRulesCheckedAt = new Date();
 
         cacheDOMElements();
         populateSchoolSelect();
@@ -160,9 +168,80 @@ function setupTabs() {
             } else if (tabName === 'conf-trends') {
                 document.getElementById('conf-trends-view').style.display = 'block';
                 renderConferenceTrends();
+            } else if (tabName === 'collaboration') {
+                document.getElementById('collaboration-view').style.display = 'block';
+                renderCollaborationStats();
+            } else if (tabName === 'data-health') {
+                document.getElementById('data-health-view').style.display = 'block';
+                renderDataHealth();
             }
         });
     });
+}
+
+function getAnalysisData() {
+    const end = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
+    const start = parseInt(startYearSelectEl?.value) || end - 10;
+    const history = historicalMode ? affiliationHistory : null;
+    const aliases = historicalMode ? schoolAliases : null;
+    const current = filterByYears(rawData, start, end, 'us', history, aliases, 'csrankings-default');
+    const prior = buildPriorPeriodData(rawData, start, end, 'us', history, aliases, 'csrankings-default');
+    return { current, prior, start, end };
+}
+
+function renderCollaborationStats() {
+    const container = document.getElementById('collaboration-stats');
+    if (!container || !rawData?.professors) return;
+    const { current, prior } = getAnalysisData();
+    const schoolName = schoolSelectEl?.value;
+    const metrics = calculateSchoolMetrics(current, prior, schoolName);
+    if (!metrics) {
+        container.innerHTML = '<p>No collaboration statistics are available for this selection.</p>';
+        return;
+    }
+
+    const leaders = Object.values(current.schools)
+        .map(school => ({ school, metrics: calculateSchoolMetrics(current, prior, school.name) }))
+        .filter(item => item.metrics)
+        .sort((a, b) => b.metrics.impliedTeamSize - a.metrics.impliedTeamSize)
+        .slice(0, 10);
+
+    container.innerHTML = `
+        <h2>${escapeHtml(schoolName)} collaboration profile</h2>
+        <div class="diagnostic-grid">
+            <div class="diagnostic-stat"><span>Team-size proxy</span><strong>${metrics.impliedTeamSize.toFixed(2)}×</strong><small>raw credit ÷ fractional credit</small></div>
+            <div class="diagnostic-stat"><span>Fraction retained</span><strong>${metrics.collaborationRetention.toFixed(0)}%</strong><small>after coauthor adjustment</small></div>
+            <div class="diagnostic-stat"><span>Top-3 concentration</span><strong>${metrics.top3Share.toFixed(0)}%</strong><small>share of department credit</small></div>
+            <div class="diagnostic-stat"><span>Median / faculty</span><strong>${metrics.medianPerFaculty.toFixed(1)}</strong><small>fractional publication credit</small></div>
+        </div>
+        <div class="data-caveat"><strong>Source limitation:</strong> CSRankings aggregate rows do not expose paper identifiers or coauthor affiliations, so CSPicks cannot reliably separate internal from cross-university collaborations. The proxy above measures coauthor intensity without inventing that split.</div>
+        <h3>Highest team-size proxies</h3>
+        <div class="metric-table">${leaders.map((item, index) => `<div><span>${index + 1}. ${escapeHtml(item.school.name)}</span><strong>${item.metrics.impliedTeamSize.toFixed(2)}×</strong></div>`).join('')}</div>
+    `;
+}
+
+function renderDataHealth() {
+    const container = document.getElementById('data-health-stats');
+    if (!container || !rawData?.professors) return;
+    const { current, start, end } = getAnalysisData();
+    const report = calculateParityReport(rawData, current, 'csrankings-default');
+    const syncDate = venueRulesCheckedAt || new Date(activeVenueRules.syncedAt);
+    const syncText = Number.isNaN(syncDate.getTime()) ? 'Unknown' : syncDate.toLocaleString();
+    const parityOk = report.totalMismatches === 0 && report.rankOrderIssues === 0 && report.officialVenueMode;
+
+    container.innerHTML = `
+        <h2>CSRankings compatibility · ${start}–${end}</h2>
+        <p class="summary-note">This audit checks the canonical CSRankings inputs, default venue mode, fractional-credit totals, and ranking invariants used by CSPicks.</p>
+        <div class="diagnostic-grid">
+            <div class="diagnostic-stat"><span>Parity checks</span><strong class="${parityOk ? 'confidence-high' : 'confidence-review'}">${parityOk ? 'Pass' : 'Review'}</strong><small>${report.totalMismatches + report.rankOrderIssues} inconsistencies</small></div>
+            <div class="diagnostic-stat"><span>Ranked schools</span><strong>${report.rankedSchools}</strong><small>from ${report.sourceFaculty} source faculty</small></div>
+            <div class="diagnostic-stat"><span>Institution metadata</span><strong>${report.institutionCoverage.toFixed(0)}%</strong><small>country or region present</small></div>
+            <div class="diagnostic-stat"><span>Author profiles</span><strong>${report.profileCoverage.toFixed(0)}%</strong><small>homepage or Scholar ID present</small></div>
+            <div class="diagnostic-stat"><span>Fractional credit</span><strong class="confidence-high">Always on</strong><small>no raw-credit ranking path</small></div>
+            <div class="diagnostic-stat"><span>Venue rules checked</span><strong>${escapeHtml(syncText)}</strong><small>upstream CSRankings parser · ${escapeHtml(activeVenueRules.sourceVersion || 'bundled fallback')}</small></div>
+        </div>
+        <div class="data-caveat">A passing audit means CSPicks is internally compatible with the selected canonical inputs. The official site can still differ temporarily when its deployed data or defaults update before this page reloads.</div>
+    `;
 }
 
 
