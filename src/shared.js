@@ -50,3 +50,27 @@ export function updateChartDefaults(Chart) {
 export function cleanName(name) {
   return name.replace(/\s+\d+$/, '');
 }
+
+export function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Produces a value that is safe inside a quoted inline-handler argument.
+// decodeURIComponent() must be used by the handler before consuming it.
+export function encodeInlineValue(value) {
+  return encodeURIComponent(String(value ?? '')).replace(/'/g, '%27');
+}
+
+export function safeExternalUrl(value) {
+  try {
+    const url = new URL(String(value ?? ''));
+    return url.protocol === 'http:' || url.protocol === 'https:' ? url.href : '#';
+  } catch {
+    return '#';
+  }
+}

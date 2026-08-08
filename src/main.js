@@ -1,6 +1,5 @@
-import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, coreAStarMap, coreAMap, nextTier, schoolAliases, conferenceAliases, nationalityAliases, fetchCsv, mergeAffiliationHistory } from './data.js';
-import { nameOriginMap } from './name_map.js';
-import { areaLabels, cleanName } from './shared.js';
+import { loadData, loadAffiliationData, filterByYears, getPublicationSchools, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, coreAStarMap, coreAMap, nextTier, schoolAliases, conferenceAliases } from './data.js';
+import { areaLabels, cleanName, encodeInlineValue, escapeHtml, getChartColors, safeExternalUrl, updateChartDefaults } from './shared.js';
 import he from 'he';
 
 import { searchAuthor, fetchAuthorStats } from './dblp.js';
@@ -26,26 +25,11 @@ let useRaw = false;
 let ChartCtor = null;
 const activeSchoolCharts = new Map();
 
-function getChartColors() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  return {
-    text: isDark ? '#e0e0e0' : '#666',
-    grid: isDark ? '#3d4043' : 'rgba(0, 0, 0, 0.05)',
-    title: isDark ? '#fff' : '#111'
-  };
-}
-
-function updateChartDefaults(ctor) {
-  if (!ctor) return;
-  const colors = getChartColors();
-  ctor.defaults.color = colors.text;
-  ctor.defaults.borderColor = colors.grid;
-  ctor.defaults.plugins.title.color = colors.title;
-  ctor.defaults.plugins.legend.labels.color = colors.text;
-  if (ctor.defaults.scale) {
-    ctor.defaults.scale.ticks.color = colors.text;
-    ctor.defaults.scale.title.color = colors.text;
-  }
+async function ensureHistoricalData() {
+  if (historyMap !== null && aliasMap !== null) return;
+  const data = await loadAffiliationData();
+  historyMap = data.historyMap;
+  aliasMap = data.aliasMap;
 }
 
 
@@ -61,31 +45,32 @@ async function init() {
   setupSearch();
   setupSimulation();
   setupTooltips();
-  setupThemeToggle();
+  setupThemeSync();
 
   try {
-    // Load main data and historical affiliation data in parallel
-    const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
-    const [data, history, aliases, manualCsv] = await Promise.all([
-      loadData(),
-      fetch(`${GITHUB_RAW}/professor_history_openalex.json`).then(r => r.ok ? r.json() : null).catch(() => null),
-      fetch(`${GITHUB_RAW}/school-aliases.json`).then(r => r.ok ? r.json() : null).catch(() => null),
-      fetchCsv(`${GITHUB_RAW}/manual_affiliations.csv`).catch(() => []),
-    ]);
-
-    rawData = data;
-    aliasMap = aliases;
-    historyMap = mergeAffiliationHistory(history || {}, manualCsv);
+    rawData = await loadData();
+    if (historicalMode) await ensureHistoricalData();
 
     // Initialize toggle checkbox
     const historicalToggle = document.getElementById('historical-mode');
     if (historicalToggle) {
       historicalToggle.checked = historicalMode;
 
-      historicalToggle.addEventListener('change', () => {
-        historicalMode = historicalToggle.checked;
-        refreshData();
-        updateURL();
+      historicalToggle.addEventListener('change', async () => {
+        historicalToggle.disabled = true;
+        try {
+          if (historicalToggle.checked) await ensureHistoricalData();
+          historicalMode = historicalToggle.checked;
+          refreshData();
+          updateURL();
+        } catch (error) {
+          console.error('Failed to load historical affiliation data:', error);
+          historicalToggle.checked = false;
+          historicalMode = false;
+          window.alert('Historical affiliation data could not be loaded. Please try again.');
+        } finally {
+          historicalToggle.disabled = false;
+        }
       });
     }
 
@@ -427,7 +412,7 @@ function searchAreaPeople(query) {
         <div class="card collapsed" style="margin: 0;">
           <div class="card-header" onclick="toggleCard(this)">
             <div style="display: flex; align-items: baseline; gap: 1rem;">
-              <h2>${cleanName(prof.name)}</h2>
+              <h2>${escapeHtml(cleanName(prof.name))}</h2>
             </div>
             <span class="toggle-icon">▼</span>
           </div>
@@ -546,7 +531,7 @@ function renderProfessorCardContent(prof) {
       const formatAffil = ([school, range]) => {
         const endLabel = range.end >= currentYear ? 'current' : range.end;
         const yearRange = range.start === range.end ? `${range.start}` : `${range.start}–${endLabel}`;
-        return `<a href="#" onclick="setSearchQuery('${school.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${school}</a> <span style="color: var(--text-secondary); font-size: 0.85em;">(${yearRange})</span>`;
+        return `<a href="#" onclick="setSearchQuery(decodeURIComponent('${encodeInlineValue(school)}')); return false;" style="color: inherit; text-decoration: underline;">${escapeHtml(school)}</a> <span style="color: var(--text-secondary); font-size: 0.85em;">(${yearRange})</span>`;
       };
 
       const firstAffil = formatAffil(sortedAffils[0]);
@@ -559,11 +544,16 @@ function renderProfessorCardContent(prof) {
         affiliationsHtml = firstAffil;
       }
     } else {
-      affiliationsHtml = `<a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>`;
+      affiliationsHtml = `<a href="#" onclick="setSearchQuery(decodeURIComponent('${encodeInlineValue(prof.affiliation)}')); return false;" style="color: inherit; text-decoration: underline;">${escapeHtml(prof.affiliation)}</a>`;
     }
   } else {
-    affiliationsHtml = `<a href="#" onclick="setSearchQuery('${prof.affiliation.replace(/'/g, "\\'")}'); return false;" style="color: inherit; text-decoration: underline;">${prof.affiliation}</a>`;
+    affiliationsHtml = `<a href="#" onclick="setSearchQuery(decodeURIComponent('${encodeInlineValue(prof.affiliation)}')); return false;" style="color: inherit; text-decoration: underline;">${escapeHtml(prof.affiliation)}</a>`;
   }
+
+  const homepageUrl = safeExternalUrl(prof.homepage);
+  const scholarUrl = prof.scholarid
+    ? `https://scholar.google.com/citations?user=${encodeURIComponent(prof.scholarid)}`
+    : null;
 
   return `
       <div class="card-subtitle">
@@ -574,9 +564,9 @@ function renderProfessorCardContent(prof) {
       </div>
 
       <div class="card-links">
-        ${prof.homepage ? `<a href="${prof.homepage}" target="_blank" class="card-link">Website</a>` : ''}
-        ${prof.scholarid ? `<a href="https://scholar.google.com/citations?user=${prof.scholarid}" target="_blank" class="card-link">Google Scholar</a>` : ''}
-        <a href="${dblpUrl}" target="_blank" class="card-link">DBLP</a>
+        ${homepageUrl !== '#' ? `<a href="${escapeHtml(homepageUrl)}" target="_blank" rel="noopener noreferrer" class="card-link">Website</a>` : ''}
+        ${scholarUrl ? `<a href="${escapeHtml(scholarUrl)}" target="_blank" rel="noopener noreferrer" class="card-link">Google Scholar</a>` : ''}
+        <a href="${escapeHtml(dblpUrl)}" target="_blank" rel="noopener noreferrer" class="card-link">DBLP</a>
       </div>
 
       ${renderActivityGraph(prof)}
@@ -739,13 +729,14 @@ async function searchDBLPAuthors(query) {
       const sortedAreas = Object.entries(a.stats.areas)
         .sort(([, x], [, y]) => useRaw ? (y.count - x.count) : (y.adjusted - x.adjusted));
 
-      const dblpUrl = `https://dblp.org/pid/${a.pid}.html`;
+      const encodedPid = String(a.pid).split('/').map(encodeURIComponent).join('/');
+      const dblpUrl = safeExternalUrl(`https://dblp.org/pid/${encodedPid}.html`);
 
       return `
         <div class="card collapsed" style="margin: 0;">
           <div class="card-header" onclick="toggleCard(this)">
             <div style="display: flex; align-items: baseline; gap: 1rem;">
-              <h2>${a.name}</h2>
+              <h2>${escapeHtml(a.name)}</h2>
               <span style="color: #10b981; font-weight: bold; font-size: 0.9rem;">${(useRaw ? a.stats.totalPapers : a.stats.totalAdjusted).toFixed(1)} ${useRaw ? 'Paper Count' : 'Adjusted Count'}</span>
             </div>
             <span class="toggle-icon">▼</span>
@@ -756,7 +747,7 @@ async function searchDBLPAuthors(query) {
                <strong>${a.stats.totalPapers}</strong> papers (<strong>${a.stats.totalAdjusted.toFixed(1)}</strong> adjusted)
              </div>
              <div class="card-links">
-               <a href="${dblpUrl}" target="_blank" class="card-link">DBLP</a>
+               <a href="${escapeHtml(dblpUrl)}" target="_blank" rel="noopener noreferrer" class="card-link">DBLP</a>
              </div>
              <div class="stats-list">
                ${sortedAreas.map(([area, stats]) => `
@@ -790,7 +781,8 @@ window.showDBLPAuthorProfile = async (cardEl, pid, name) => {
     const sortedAreas = Object.entries(stats.areas)
       .sort(([, a], [, b]) => b - a);
 
-    const dblpUrl = `https://dblp.org/pid/${pid}.html`;
+    const encodedPid = String(pid).split('/').map(encodeURIComponent).join('/');
+    const dblpUrl = safeExternalUrl(`https://dblp.org/pid/${encodedPid}.html`);
 
     contentEl.innerHTML = `
       <div class="card-subtitle">DBLP Author</div>
@@ -799,7 +791,7 @@ window.showDBLPAuthorProfile = async (cardEl, pid, name) => {
       </div>
 
       <div class="card-links">
-        <a href="${dblpUrl}" target="_blank" class="card-link">DBLP</a>
+        <a href="${escapeHtml(dblpUrl)}" target="_blank" rel="noopener noreferrer" class="card-link">DBLP</a>
       </div>
 
       <div class="stats-list">
@@ -940,43 +932,12 @@ function searchProfessors(query) {
   const allProfs = Object.values(appData.professors);
   const tokens = query.toLowerCase().split(/\s+/).filter(t => t.length > 0);
 
-  // Check for nationality match
-  const nationalityMatch = Object.keys(nationalityAliases).find(key =>
-    query.toLowerCase().startsWith(key) || key.startsWith(query.toLowerCase())
-  );
-  const nationalityData = nationalityMatch ? nationalityAliases[nationalityMatch] : null;
-
-  let results;
-
-  if (nationalityData && nationalityData.lastNames && nationalityData.lastNames.length > 0) {
-    // Nationality search: filter by last names + nameOriginMap override
-    const lastNamesLower = nationalityData.lastNames.map(n => n.toLowerCase());
-    const allowedCountries = nationalityData.countries || [];
-
-    results = allProfs
-      .filter(p => {
-        // 1. Check exact map override first
-        if (nameOriginMap[p.name]) {
-          // If mapped, it MUST match one of the allowed countries for this nationality
-          // e.g. "Tsung-Yi Ho" -> "tw". Searching "viet" (['vn']) -> mismatch -> return false.
-          return allowedCountries.includes(nameOriginMap[p.name]);
-        }
-
-        // 2. Fallback to last name matching
-        const nameParts = p.name.split(/\s+/);
-        const lastName = nameParts[nameParts.length - 1].toLowerCase();
-        return lastNamesLower.includes(lastName);
-      })
-      .sort((a, b) => useRaw ? (b.totalCount - a.totalCount) : (b.totalAdjusted - a.totalAdjusted));
-  } else {
-    // Standard search
-    results = allProfs
-      .filter(p => {
-        const name = p.name.toLowerCase();
-        return tokens.every(token => name.includes(token));
-      })
-      .sort((a, b) => useRaw ? (b.totalCount - a.totalCount) : (b.totalAdjusted - a.totalAdjusted));
-  }
+  const results = allProfs
+    .filter(p => {
+      const name = p.name.toLowerCase();
+      return tokens.every(token => name.includes(token));
+    })
+    .sort((a, b) => useRaw ? (b.totalCount - a.totalCount) : (b.totalAdjusted - a.totalAdjusted));
 
   const container = document.getElementById('prof-results');
   container.innerHTML = '';
@@ -1060,11 +1021,12 @@ function renderProfessorCard(prof) {
   const currentQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
   const isExactMatch = cleanName(prof.name).toLowerCase() === currentQuery;
   const cardClass = isExactMatch ? 'card' : 'card collapsed';
+  const displayName = cleanName(prof.name);
 
   return `
-    <div class="${cardClass}" data-name="${cleanName(prof.name)}">
+    <div class="${cardClass}" data-name="${escapeHtml(displayName)}">
       <div class="card-header" onclick="toggleCard(this)">
-        <h2>${cleanName(prof.name)}</h2>
+        <h2>${escapeHtml(displayName)}</h2>
         <span class="toggle-icon">▼</span>
       </div>
       <div class="card-content">
@@ -1098,12 +1060,6 @@ function searchSchools(query) {
   const confKeyRaw = conferenceAliases[query] || query;
   const confKeyMatch = Object.keys(parentMap).find(k => k.toLowerCase().startsWith(confKeyRaw) || confKeyRaw.startsWith(k.toLowerCase()));
   const matchedArea = findMatchingArea(effectiveQuery);
-
-  // Check for nationality match
-  const nationalityMatch = Object.keys(nationalityAliases).find(key =>
-    query.toLowerCase().startsWith(key) || key.startsWith(query.toLowerCase())
-  );
-  const nationalityData = nationalityMatch ? nationalityAliases[nationalityMatch] : null;
 
   let results;
 
@@ -1163,23 +1119,6 @@ function searchSchools(query) {
     document.getElementById('school-results').innerHTML = '';
     return;
 
-  }
-
-  if (nationalityData && nationalityData.countries && nationalityData.countries.length > 0) {
-    const countryCodes = nationalityData.countries;
-    header.textContent = `Results for: ${nationalityMatch.charAt(0).toUpperCase() + nationalityMatch.slice(1)}`;
-    header.style.display = 'block';
-
-    results = Object.values(appData.schools)
-      .filter(school => countryCodes.includes(school.country))
-      .sort((a, b) => a.rank - b.rank);
-
-    const container = document.getElementById('school-results');
-    container.innerHTML = results
-      .slice(0, 20)
-      .map(school => renderSchoolCard(school, null))
-      .join('');
-    return;
   }
 
   if (matchedArea) {
@@ -1313,7 +1252,7 @@ function renderConferenceCard(confKey, sortedSchools) {
         ${sortedSchools.map(school => `
           <div class="school-area-section">
             <div class="school-area-header">
-              <span onclick="setSearchQuery('${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${school.name}${showRankings ? ` <small>#${school.rank}</small>` : ''}</span>
+              <span onclick="setSearchQuery(decodeURIComponent('${encodeInlineValue(school.name)}'))" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${escapeHtml(school.name)}${showRankings ? ` <small>#${school.rank}</small>` : ''}</span>
               <span>${Math.ceil(school.count)} (${school.adjusted.toFixed(1)})</span>
             </div>
             <div class="faculty-list">
@@ -1328,7 +1267,7 @@ function renderConferenceCard(confKey, sortedSchools) {
       .map(name => {
         const prof = appData.professors[name];
         const statsText = (showRankings && prof) ? ` <small style="color: var(--text-secondary);">${prof.totalPapers} / ${prof.totalAdjusted.toFixed(1)}</small>` : '';
-        return `<span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}${statsText}</span>`;
+        return `<span class="faculty-tag" onclick="searchProfessorByAffiliation(decodeURIComponent('${encodeInlineValue(cleanName(name))}'), decodeURIComponent('${encodeInlineValue(school.name)}'))" style="cursor: pointer;">${escapeHtml(cleanName(name))}${statsText}</span>`;
       }).join('')}
             </div>
           </div>
@@ -1342,16 +1281,26 @@ function renderConferenceCard(confKey, sortedSchools) {
 function renderSchoolRankGraphPlaceholder(schoolName) {
   if (!historicalMode || !historyMap || !aliasMap) return '';
 
-  const escapedName = schoolName.replace(/'/g, "\\'");
   const uniqueId = schoolName.replace(/[^a-zA-Z0-9]/g, '_');
 
   return `
     <div class="school-charts-container" id="charts-${uniqueId}">
-      <button class="show-rank-trend-btn" onclick="loadSchoolCharts('${escapedName}', '${uniqueId}')">
+      <button class="show-rank-trend-btn" onclick="loadSchoolCharts(decodeURIComponent('${encodeInlineValue(schoolName)}'), '${uniqueId}')">
         Show Trends
       </button>
     </div>
   `;
+}
+
+function isPublicationInConferenceSet(pub) {
+  if (confSet === 'core') return Boolean(coreAStarMap[pub.area]);
+  if (confSet === 'core-a') return Boolean(coreAStarMap[pub.area] || coreAMap[pub.area]);
+  if (confSet === 'csrankings-default') return !nextTier[pub.area];
+  return true;
+}
+
+function isPublicationAtHistoricalSchool(prof, pub, schoolName) {
+  return getPublicationSchools(prof, pub, historyMap, aliasMap).includes(schoolName);
 }
 
 window.loadSchoolCharts = async function (schoolName, uniqueId) {
@@ -1376,11 +1325,11 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
   const ranks = [];
   const chartStart = startYear;
   const chartEnd = endYear;
-  const windowSize = chartEnd - chartStart;
+  const windowYears = Math.min(chartEnd - chartStart + 1, 10);
 
   // Rank Trend data
   for (let y = chartStart; y <= chartEnd; y++) {
-    const wStart = Math.max(chartStart, y - Math.min(windowSize, 10));
+      const wStart = Math.max(chartStart, y - (windowYears - 1));
     const wEnd = y;
     try {
       const result = filterByYears({ ...rawData }, wStart, wEnd, selectedRegion, historyMap, aliasMap, confSet, useRaw);
@@ -1407,8 +1356,10 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
     areaStats[y] = {};
   }
 
-  const schoolProfs = Object.values(rawData.professors).filter(p => p.affiliation === schoolName);
-  const allPubs = schoolProfs.flatMap(p => p.pubs);
+  const allProfessors = Object.values(rawData.professors);
+  const allPubs = allProfessors.flatMap(prof => prof.pubs.filter(pub =>
+    isPublicationAtHistoricalSchool(prof, pub, schoolName) && isPublicationInConferenceSet(pub)
+  ));
 
   allPubs.forEach(pub => {
     if (pub.year >= chartStart && pub.year <= chartEnd) {
@@ -1458,9 +1409,11 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
     const wEnd = y;
     const authorAreas = {};
 
-    schoolProfs.forEach(prof => {
+    allProfessors.forEach(prof => {
       prof.pubs.forEach(pub => {
-        if (pub.year >= wStart && pub.year <= wEnd) {
+        if (pub.year >= wStart && pub.year <= wEnd &&
+          isPublicationAtHistoricalSchool(prof, pub, schoolName) &&
+          isPublicationInConferenceSet(pub)) {
           if (!authorAreas[prof.name]) authorAreas[prof.name] = new Set();
           const area = parentMap[pub.area] || pub.area;
           authorAreas[prof.name].add(area);
@@ -1793,6 +1746,8 @@ function renderRankContribution(school) {
 }
 
 function renderSchoolCard(school, filterArea = null) {
+  const safeSchoolName = escapeHtml(school.name);
+  const encodedSchoolName = encodeInlineValue(school.name);
   let sortedAreas;
 
   if (filterArea) {
@@ -1832,9 +1787,9 @@ function renderSchoolCard(school, filterArea = null) {
   const areaBadge = `<span style="color: var(--text-secondary); font-size: 0.75em; margin-left: 0.5rem;">${areaCount} Areas</span>`;
 
   return `
-    <div class="${cardClass}" data-name="${school.name}">
+    <div class="${cardClass}" data-name="${safeSchoolName}">
       <div class="card-header" onclick="toggleCard(this)">
-        <h2>${school.name}${rankBadgeHeader}${facultyBadge}${areaBadge}</h2>
+        <h2>${safeSchoolName}${rankBadgeHeader}${facultyBadge}${areaBadge}</h2>
         <span class="toggle-icon">▼</span>
       </div>
       <div class="card-content">
@@ -1860,7 +1815,7 @@ function renderSchoolCard(school, filterArea = null) {
         .map(name => {
           const prof = appData.professors[name];
           const statsText = (showRankings && prof) ? ` <small style="color: var(--text-secondary);">${prof.totalPapers} / ${prof.totalAdjusted.toFixed(1)}</small>` : '';
-          return `<span class="faculty-tag" onclick="searchProfessorByAffiliation('${cleanName(name).replace(/'/g, "\\'")}', '${school.name.replace(/'/g, "\\'")}')" style="cursor: pointer;">${cleanName(name)}${statsText}</span>`;
+          return `<span class="faculty-tag" onclick="searchProfessorByAffiliation(decodeURIComponent('${encodeInlineValue(cleanName(name))}'), decodeURIComponent('${encodedSchoolName}'))" style="cursor: pointer;">${escapeHtml(cleanName(name))}${statsText}</span>`;
         }).join('')}
             </div>
           </div>
@@ -1905,9 +1860,9 @@ function renderFacultyList(filter = '') {
     const adj = prof ? prof.totalAdjusted.toFixed(1) : '0';
     return `
       <label style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; cursor: pointer; border-bottom: 1px solid var(--border-color); font-size: 0.88em;"
-             data-name="${name}">
+             data-name="${escapeHtml(name)}">
         <input type="checkbox" ${checked ? 'checked' : ''} style="width: 15px; height: 15px; cursor: pointer;">
-        <span style="flex: 1; color: var(--text-primary);">${name}</span>
+        <span style="flex: 1; color: var(--text-primary);">${escapeHtml(name)}</span>
         <small style="color: var(--text-secondary);">${areas} areas, ${papers} papers, ${adj} adj</small>
       </label>
     `;
@@ -2101,8 +2056,8 @@ function renderCandidateResults(candidates) {
           <div class="candidate-header">
             <span class="candidate-medal">❌</span>
             <div class="candidate-info">
-              <div class="candidate-name">${c.name}</div>
-              <div class="candidate-stats" style="color: #ef4444;">${c.error}</div>
+              <div class="candidate-name">${escapeHtml(c.name)}</div>
+              <div class="candidate-stats" style="color: #ef4444;">${escapeHtml(c.error)}</div>
             </div>
           </div>
         </div>
@@ -2117,7 +2072,7 @@ function renderCandidateResults(candidates) {
     if (c.isRemoval) {
       actionLabel = `<span style="font-size: 0.8em; color: #ef4444; background: #fee2e2; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">Removing</span>`;
     } else if (c.sourceSchool) {
-      actionLabel = `<span style="font-size: 0.8em; color: #3b82f6; background: #dbeafe; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">from ${c.sourceSchool.name}</span>`;
+      actionLabel = `<span style="font-size: 0.8em; color: #3b82f6; background: #dbeafe; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">from ${escapeHtml(c.sourceSchool.name)}</span>`;
     }
 
     let dataSourceBadge = '';
@@ -2132,7 +2087,7 @@ function renderCandidateResults(candidates) {
       const sText = sDelta > 0 ? `+${sDelta}` : (sDelta < 0 ? `${sDelta}` : '±0');
       sourceImpactHtml = `
           <div style="font-size: 0.85rem; margin-top: 4px; color: #666; display: flex; align-items: center; justify-content: flex-end;">
-             <span style="margin-right: 6px;">${c.sourceSchool.name}:</span>
+             <span style="margin-right: 6px;">${escapeHtml(c.sourceSchool.name)}:</span>
              <span class="${sClass}" style="font-weight: 600;">${sText} ranks</span>
           </div>
       `;
@@ -2142,7 +2097,7 @@ function renderCandidateResults(candidates) {
       const countLabel = p.count > 1 ? `${Math.round(p.count)} papers` : '1 paper';
       return `
       <div class="paper-item">
-        <span class="paper-venue">${p.venue}</span>
+        <span class="paper-venue">${escapeHtml(p.venue)}</span>
         <span class="paper-year">${p.year}</span>:
         ${countLabel} <small>(~${p.authors} authors, ${p.adjusted.toFixed(2)} adj)</small>
       </div>
@@ -2170,7 +2125,7 @@ function renderCandidateResults(candidates) {
     const areaPillsHtml = areaDeltaEntries.length > 0 ? `
       <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px;">
         ${areaDeltaEntries.map(([area, d]) => {
-      const label = areaLabels[area] || area;
+      const label = escapeHtml(areaLabels[area] || area);
       if (d && d.dropped) {
         return `<span class="area-pill negative">↓ ${label} (Unranked - was #${d.wasRank})</span>`;
       }
@@ -2199,7 +2154,7 @@ function renderCandidateResults(candidates) {
           <span class="candidate-medal">${medal}</span>
           <div class="candidate-info">
             <div class="candidate-name">
-              ${c.name}
+              ${escapeHtml(c.name)}
               ${actionLabel}
               ${dataSourceBadge}
             </div>
@@ -2210,7 +2165,7 @@ function renderCandidateResults(candidates) {
         .map(([area, areaStats]) => {
           const count = typeof areaStats === 'number' ? Math.ceil(areaStats) : (areaStats.count || 0);
           const adj = typeof areaStats === 'number' ? areaStats : (areaStats.adjusted || 0);
-          const label = areaLabels[area] || area;
+          const label = escapeHtml(areaLabels[area] || area);
           return `<span class="area-breakdown-tag">${label} <strong>(${count} ${count === 1 ? 'paper' : 'papers'})</strong></span>`;
         }).join('')}
             </div>
@@ -2560,8 +2515,8 @@ function setupSimulation() {
 
     const container = document.getElementById('sim-univ-results');
     container.innerHTML = results.map(s => `
-      <div class="sim-item" data-name="${s.name}">
-        <strong>${s.name}</strong> <small>#${s.rank}</small>
+      <div class="sim-item" data-name="${escapeHtml(s.name)}">
+        <strong>${escapeHtml(s.name)}</strong> <small>#${s.rank}</small>
       </div>
     `).join('');
 
@@ -2708,12 +2663,12 @@ async function runSimulation(author, school, isRemove = false) {
 
   display.innerHTML = `
     <div class="impact-card">
-      <h3>${actionText}</h3>
+      <h3>${escapeHtml(actionText)}</h3>
       <p>${isRemove ? '-' : '+'}${stats.totalAdjusted.toFixed(1)} Adjusted Count</p>
     </div>
     
     <div class="impact-card">
-      <h3>${school.name}</h3>
+      <h3>${escapeHtml(school.name)}</h3>
       <div class="rank-change" style="color: ${color}">
         <span>#${oldRank}</span>
         <span>${arrow}</span>
@@ -2790,67 +2745,7 @@ function setupTooltips() {
   });
 }
 
-function setupThemeToggle() {
-  const toggle = document.getElementById('theme-toggle');
-  if (!toggle) return;
-
-  toggle.addEventListener('click', (event) => {
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-    if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      if (ChartCtor) {
-        updateChartDefaults(ChartCtor);
-        activeSchoolCharts.forEach((data, uniqueId) => {
-          loadSchoolCharts(data.schoolName, uniqueId);
-        });
-      }
-      return;
-    }
-
-    const x = event.clientX ?? window.innerWidth / 2;
-    const y = event.clientY ?? window.innerHeight / 2;
-    const endRadius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y)
-    );
-
-    const transition = document.startViewTransition(() => {
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      if (ChartCtor) {
-        updateChartDefaults(ChartCtor);
-        activeSchoolCharts.forEach((data, uniqueId) => {
-          loadSchoolCharts(data.schoolName, uniqueId);
-        });
-      }
-    });
-
-    transition.ready.then(() => {
-      document.documentElement.animate(
-        {
-          clipPath: [
-            `circle(0px at ${x}px ${y}px)`,
-            `circle(${endRadius}px at ${x}px ${y}px)`
-          ]
-        },
-        {
-          duration: 450,
-          easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-          pseudoElement: '::view-transition-new(root)'
-        }
-      );
-    });
-  });
-
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-    }
-  });
-
+function setupThemeSync() {
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.attributeName === 'data-theme' && ChartCtor) {

@@ -5,6 +5,7 @@ export const DEFAULT_END_YEAR = currentYear;
 export const DEFAULT_START_YEAR = DEFAULT_END_YEAR - 10;
 
 const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
+let affiliationDataPromise = null;
 
 
 export const schoolAliases = {
@@ -131,112 +132,6 @@ export const conferenceAliases = {
   'neurips': 'nips',
 };
 
-// Maps nationality keywords to { lastNames: [], countries: [] }
-// lastNames: common surnames for that ethnicity
-// countries: country codes to show schools from (optional)
-export const nationalityAliases = {
-  // --- ASIAN ---
-  'vietnam': {
-    lastNames: ['Nguyen', 'Tran', 'Le', 'Pham', 'Hoang', 'Vu', 'Vo', 'Dang', 'Bui', 'Do', 'Ho', 'Ngo', 'Duong', 'Ly'],
-    countries: ['vn']
-  },
-  'pakistan': {
-    lastNames: ['Khan', 'Ahmed', 'Ali', 'Hussain', 'Hassan', 'Shah', 'Malik', 'Iqbal', 'Raza', 'Syed', 'Qureshi', 'Mirza', 'Butt', 'Chaudhry', 'Sheikh', 'Aslam', 'Abbasi', 'Javed', 'Farooq', 'Rehman'],
-    countries: ['pk']
-  },
-  'indian': {
-    lastNames: ['Patel', 'Sharma', 'Singh', 'Kumar', 'Gupta', 'Reddy', 'Rao', 'Jain', 'Agarwal', 'Chopra', 'Mehta', 'Bhatia', 'Kapoor', 'Verma', 'Malhotra', 'Saxena', 'Nair', 'Iyer', 'Pillai', 'Menon'],
-    countries: ['in']
-  },
-  'chinese': {
-    lastNames: ['Wang', 'Li', 'Zhang', 'Liu', 'Chen', 'Yang', 'Huang', 'Zhao', 'Wu', 'Zhou', 'Xu', 'Sun', 'Ma', 'Zhu', 'Hu', 'Guo', 'Lin', 'He', 'Gao', 'Liang'],
-    countries: ['cn', 'hk', 'tw']
-  },
-  'korean': {
-    lastNames: ['Kim', 'Lee', 'Park', 'Choi', 'Jung', 'Kang', 'Cho', 'Yoon', 'Jang', 'Lim', 'Han', 'Shin', 'Seo', 'Kwon', 'Ko', 'Oh', 'Yoo', 'Moon', 'Song', 'Ahn'],
-    countries: ['kr']
-  },
-  'japanese': {
-    lastNames: ['Sato', 'Suzuki', 'Takahashi', 'Tanaka', 'Watanabe', 'Ito', 'Yamamoto', 'Nakamura', 'Kobayashi', 'Kato', 'Yoshida', 'Yamada', 'Sasaki', 'Yamaguchi', 'Matsumoto', 'Inoue', 'Kimura', 'Hayashi', 'Shimizu', 'Mori'],
-    countries: ['jp']
-  },
-  'iranian': {
-    lastNames: ['Ahmadi', 'Hosseini', 'Mohammadi', 'Karimi', 'Hashemi', 'Mousavi', 'Rahimi', 'Moradi', 'Jafari', 'Rezaei', 'Safari', 'Ebrahimi', 'Salehi', 'Sadeghi', 'Shirazi', 'Tehrani', 'Tabatabaei', 'Nasseri', 'Tavakoli', 'Najafi'],
-    countries: ['ir']
-  },
-
-  // --- ENGLISH / ANGLOSPHERE ---
-  'usa': {
-    lastNames: ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'],
-    countries: ['us']
-  },
-  'american': {
-    lastNames: ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'],
-    countries: ['us']
-  },
-  'british': {
-    lastNames: ['Smith', 'Jones', 'Taylor', 'Brown', 'Williams', 'Wilson', 'Johnson', 'Davies', 'Robinson', 'Wright', 'Thompson', 'Evans', 'Walker', 'White', 'Roberts', 'Green', 'Hall', 'Wood', 'Harris', 'Clarke'],
-    countries: ['gb']
-  },
-  'uk': {
-    lastNames: ['Smith', 'Jones', 'Taylor', 'Brown', 'Williams', 'Wilson', 'Johnson', 'Davies', 'Robinson', 'Wright', 'Thompson', 'Evans', 'Walker', 'White', 'Roberts', 'Green', 'Hall', 'Wood', 'Harris', 'Clarke'],
-    countries: ['gb']
-  },
-
-  // --- HISPANIC / LATIN AMERICA / SPAIN ---
-  'spanish': {
-    lastNames: ['Garcia', 'Rodriguez', 'Gonzalez', 'Fernandez', 'Lopez', 'Martinez', 'Sanchez', 'Perez', 'Gomez', 'Martin', 'Jimenez', 'Ruiz', 'Hernandez', 'Diaz', 'Moreno', 'Muñoz', 'Alvarez', 'Romero', 'Alonso', 'Gutierrez'],
-    countries: ['es', 'mx', 'co', 'ar', 'pe', 've', 'cl', 'ec', 'gt', 'cu']
-  },
-  'hispanic': {
-    lastNames: ['Garcia', 'Rodriguez', 'Gonzalez', 'Fernandez', 'Lopez', 'Martinez', 'Sanchez', 'Perez', 'Gomez', 'Martin', 'Jimenez', 'Ruiz', 'Hernandez', 'Diaz', 'Moreno', 'Muñoz', 'Alvarez', 'Romero', 'Alonso', 'Gutierrez'],
-    countries: ['es', 'mx', 'co', 'ar', 'pe', 've', 'cl', 'ec', 'gt', 'cu']
-  },
-
-  // --- EUROPEAN ---
-  'french': {
-    lastNames: ['Martin', 'Bernard', 'Thomas', 'Petit', 'Robert', 'Richard', 'Durand', 'Dubois', 'Moreau', 'Laurent', 'Simon', 'Michel', 'Lefebvre', 'Leroy', 'Roux', 'David', 'Bertrand', 'Morel', 'Fournier', 'Girard'],
-    countries: ['fr', 'be']
-  },
-  'german': {
-    lastNames: ['Müller', 'Schmidt', 'Schneider', 'Fischer', 'Weber', 'Meyer', 'Wagner', 'Becker', 'Schulz', 'Hoffmann', 'Schäfer', 'Koch', 'Bauer', 'Richter', 'Klein', 'Wolf', 'Schröder', 'Neumann', 'Schwarz', 'Zimmermann'],
-    countries: ['de', 'at', 'ch']
-  },
-  'italian': {
-    lastNames: ['Rossi', 'Russo', 'Ferrari', 'Esposito', 'Bianchi', 'Romano', 'Colombo', 'Ricci', 'Marino', 'Greco', 'Bruno', 'Gallo', 'Conti', 'De Luca', 'Mancini', 'Costa', 'Giordano', 'Rizzo', 'Lombardi', 'Moretti'],
-    countries: ['it']
-  },
-  'russian': {
-    lastNames: ['Ivanov', 'Smirnov', 'Kuznetsov', 'Popov', 'Sokolov', 'Lebedev', 'Kozlov', 'Novikov', 'Morozov', 'Petrov', 'Volkov', 'Solovyov', 'Vasilyev', 'Zaytsev', 'Pavlov', 'Semyonov', 'Golubev', 'Vinogradov', 'Bogdanov', 'Vorobyov'],
-    countries: ['ru', 'by']
-  },
-  'portuguese': {
-    lastNames: ['Silva', 'Santos', 'Oliveira', 'Souza', 'Rodrigues', 'Ferreira', 'Alves', 'Pereira', 'Lima', 'Gomes', 'Costa', 'Ribeiro', 'Martins', 'Carvalho', 'Almeida', 'Lopes', 'Soares', 'Fernandes', 'Vieira', 'Barbosa'],
-    countries: ['pt', 'br']
-  },
-  'brazilian': {
-    lastNames: ['Silva', 'Santos', 'Oliveira', 'Souza', 'Rodrigues', 'Ferreira', 'Alves', 'Pereira', 'Lima', 'Gomes', 'Costa', 'Ribeiro', 'Martins', 'Carvalho', 'Almeida', 'Lopes', 'Soares', 'Fernandes', 'Vieira', 'Barbosa'],
-    countries: ['br']
-  },
-
-  // --- MIDDLE EASTERN / ARABIC ---
-  'arabic': {
-    lastNames: ['Mohamed', 'Ahmed', 'Ali', 'Youssef', 'Ibrahim', 'Mahmoud', 'Hassan', 'Abdallah', 'Hussein', 'Saleh', 'Saad', 'Fawzi', 'Nasser', 'Khalil', 'Ismail', 'Zayed', 'Sultan', 'Mustafa', 'Osman', 'Hamad'],
-    countries: ['eg', 'sa', 'ae', 'kw', 'qa', 'jo', 'lb', 'om']
-  },
-
-  // --- AFRICAN ---
-  'nigerian': {
-    lastNames: ['Musa', 'Ibrahim', 'Abdullahi', 'Ali', 'Okafor', 'Adebayo', 'Okeke', 'Balogun', 'Eze', 'Obi', 'Olawale', 'Okonkwo', 'Nwachukwu', 'Abubakar', 'Danjuma', 'Bello', 'Okoro', 'Lawal', 'Umar', 'Sani'],
-    countries: ['ng']
-  },
-
-  // --- SOUTHEAST ASIAN (Additional) ---
-  'filipino': {
-    lastNames: ['De la Cruz', 'Garcia', 'Reyes', 'Ramos', 'Mendoza', 'Santos', 'Flores', 'Gonzales', 'Bautista', 'Villanueva', 'Fernandez', 'Cruz', 'De Guzman', 'Lopez', 'Perez', 'Castillo', 'Rivera', 'Aquino', 'Del Rosario', 'Sanchez'],
-    countries: ['ph']
-  }
-};
 
 export const nextTier = {
   'ase': true,
@@ -320,6 +215,32 @@ export async function loadData() {
   }
 
   return { professors, schools };
+}
+
+async function fetchJson(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Failed to fetch JSON (${response.status}) from ${url}`);
+  return response.json();
+}
+
+export function loadAffiliationData() {
+  if (!affiliationDataPromise) {
+    affiliationDataPromise = Promise.all([
+      fetchJson(`${GITHUB_RAW}/professor_history_openalex.json`),
+      fetchJson(`${GITHUB_RAW}/school-aliases.json`),
+      fetchCsv(`${GITHUB_RAW}/manual_affiliations.csv`)
+    ])
+      .then(([history, aliases, manual]) => ({
+        historyMap: mergeAffiliationHistory(history, manual),
+        aliasMap: aliases || {}
+      }))
+      .catch(error => {
+        affiliationDataPromise = null;
+        throw error;
+      });
+  }
+
+  return affiliationDataPromise;
 }
 
 // Map conferences to top-level areas (from csrankings.ts)
@@ -410,11 +331,29 @@ export const coreAMap = {
 const topLevelAreas = [...new Set(Object.values(parentMap))];
 const numAreas = topLevelAreas.length;
 
+export function getPublicationSchools(professor, publication, historyMap = null, aliasMap = null) {
+  const fallback = [professor.affiliation];
+  const matches = historyMap?.[professor.name]?.filter(segment =>
+    publication.year >= segment.start && publication.year <= segment.end
+  ) || [];
+
+  if (matches.length === 0) return fallback;
+
+  const schools = matches
+    .map(segment => Object.prototype.hasOwnProperty.call(aliasMap || {}, segment.school)
+      ? aliasMap[segment.school]
+      : segment.school)
+    .filter(Boolean);
+
+  return schools.length > 0 ? [...new Set(schools)] : fallback;
+}
+
 
 export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'csrankings', useRaw = false) {
   const { professors, schools } = data;
   const filteredProfs = {};
   const filteredSchools = {};
+  const hasHistoricalData = Boolean(historyMap && Object.keys(historyMap).length > 0);
 
   // Select conference map based on confSet
   const confMap = confSet === 'core' ? coreAStarMap : parentMap;
@@ -437,7 +376,7 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
 
     // Only include professors from schools in the selected region
 
-    if (!historyMap && !isInRegion(prof.affiliation)) {
+    if (!hasHistoricalData && !isInRegion(prof.affiliation)) {
       continue;
     }
 
@@ -456,14 +395,22 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
       }
       // else: confSet === 'csrankings', include all conferences (no filtering)
 
-      const totalCount = confFilteredPubs.reduce((sum, p) => sum + p.count, 0);
-      const totalAdjusted = confFilteredPubs.reduce((sum, p) => sum + p.adjustedcount, 0);
-      const totalPapers = Math.ceil(totalCount);
-
       const areaStats = {};
+      const regionFilteredPubs = [];
 
       confFilteredPubs.forEach(pub => {
-        // 1. Stats for Professor Object - use confMap
+        const pubSchools = getPublicationSchools(
+          prof,
+          pub,
+          hasHistoricalData ? historyMap : null,
+          aliasMap
+        ).filter(isInRegion);
+
+        // A professor's regional totals should contain only publications credited
+        // to a school in the selected region.
+        if (pubSchools.length === 0) return;
+        regionFilteredPubs.push(pub);
+
         const area = confMap[pub.area] || parentMap[pub.area] || pub.area;
         if (!areaStats[area]) {
           areaStats[area] = { count: 0, adjusted: 0 };
@@ -471,33 +418,8 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
         areaStats[area].count += pub.count;
         areaStats[area].adjusted += pub.adjustedcount;
 
-        // 2. Stats for School (Historical Attribution)
-        // Collect all schools this paper should be attributed to
-        let pubSchools = [prof.affiliation]; // Default to CSRankings
-
-        // Check history override, credit  matching affiliations
-        if (historyMap && historyMap[name]) {
-          const matches = historyMap[name].filter(seg => pub.year >= seg.start && pub.year <= seg.end);
-          if (matches.length > 0) {
-            pubSchools = matches.map(h => {
-              if (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, h.school)) {
-                return aliasMap[h.school];
-              }
-              return h.school;
-            }).filter(s => s !== null);
-
-            if (pubSchools.length === 0) {
-              pubSchools = [prof.affiliation];
-            }
-          }
-          // If no history match, keep CSRankings affiliation
-        }
-
         // Credit each school (only if in selected region)
         pubSchools.forEach(pubSchoolName => {
-          // Skip schools not in the selected region
-          if (!isInRegion(pubSchoolName)) return;
-
           if (!filteredSchools[pubSchoolName]) {
             filteredSchools[pubSchoolName] = {
               name: pubSchoolName,
@@ -532,14 +454,16 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
         });
       });
 
-      if (confFilteredPubs.length > 0) {
+      if (regionFilteredPubs.length > 0) {
+        const totalCount = regionFilteredPubs.reduce((sum, p) => sum + p.count, 0);
+        const totalAdjusted = regionFilteredPubs.reduce((sum, p) => sum + p.adjustedcount, 0);
         filteredProfs[name] = {
           ...prof,
-          pubs: confFilteredPubs,
+          pubs: regionFilteredPubs,
           areas: areaStats,
           totalCount,
           totalAdjusted,
-          totalPapers
+          totalPapers: Math.ceil(totalCount)
         };
       }
     }
@@ -585,14 +509,22 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
   // Compute Per-Area Rankings
   topLevelAreas.forEach(area => {
     // Get all schools that have this area
+    const getAreaValue = (school) => useRaw
+      ? (school.areas[area]?.count || 0)
+      : (school.areas[area]?.adjusted || 0);
     const schoolsWithArea = schoolList
-      .filter(s => s.areas[area] && s.areas[area].adjusted > 0)
-      .sort((a, b) => (b.areas[area]?.adjusted || 0) - (a.areas[area]?.adjusted || 0));
+      .filter(s => getAreaValue(s) > 0)
+      .sort((a, b) => getAreaValue(b) - getAreaValue(a));
 
-    // Assign ranks
+    // Assign standard competition ranks, including ties.
+    let areaRank = 0;
+    let previousValue = null;
     schoolsWithArea.forEach((school, idx) => {
+      const value = getAreaValue(school);
+      if (value !== previousValue) areaRank = idx + 1;
       if (!school.areaRanks) school.areaRanks = {};
-      school.areaRanks[area] = idx + 1;
+      school.areaRanks[area] = areaRank;
+      previousValue = value;
     });
   });
 
@@ -601,13 +533,23 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
 
 export async function fetchCsv(url) {
   const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch CSV (${response.status}) from ${url}`);
+  }
   const text = await response.text();
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     Papa.parse(text, {
       header: true,
       skipEmptyLines: true,
       comments: "#",
-      complete: (results) => resolve(results.data)
+      complete: (results) => {
+        if (results.errors?.length) {
+          reject(new Error(`Failed to parse CSV from ${url}: ${results.errors[0].message}`));
+          return;
+        }
+        resolve(results.data);
+      },
+      error: reject
     });
   });
 }

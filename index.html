@@ -5,6 +5,12 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const applySystemTheme = () => document.documentElement.setAttribute('data-theme', systemTheme.matches ? 'dark' : 'light');
+    applySystemTheme();
+    systemTheme.addEventListener('change', applySystemTheme);
+  </script>
   <title>CS Picks</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,18 +21,6 @@
 </head>
 
 <body>
-  <!-- Theme toggle button -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-    <span class="sun-icon">☀️</span>
-    <span class="moon-icon">🌙</span>
-  </button>
-  <script>
-    // Apply saved theme immediately to prevent flash
-    const savedTheme = localStorage.getItem('theme');
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (systemDark ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', initialTheme);
-  </script>
   <div id="app">
     <header>
       <h1>CS Picks</h1>
@@ -37,7 +31,6 @@
           style="text-decoration: none; color: var(--text-secondary); font-weight: 600;">Analysis</a>
         <a href="compare.html"
           style="text-decoration: none; color: var(--text-secondary); font-weight: 600;">Compare</a>
-        <a href="map.html" style="text-decoration: none; color: var(--text-secondary); font-weight: 600;">Map</a>
       </div>
       <p>Explore Computer Science Professors, Schools, and Research Areas.</p>
     </header>

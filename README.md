@@ -72,7 +72,6 @@
 ```
 cspicks/
 ├── public/
-│   ├── data/                         # CSRankings data files
 │   ├── professor_history_openalex.json  # Historical affiliations
 │   ├── school-aliases.json           # OpenAlex → CSRankings name mapping
 │   └── manual_affiliations.csv       # Community corrections
@@ -83,8 +82,8 @@ cspicks/
 │   ├── analysis.js                   # Analysis dashboard logic
 │   └── style.css                     # CSS styles
 ├── scripts/
-│   ├── build-school-aliases.js       # Generates school-aliases.json
-│   └── fetch_openalex_history.py     # Fetches OpenAlex affiliation data
+│   ├── build-openalex-history.js     # Generates historical affiliations
+│   └── build-school-aliases.js       # Generates school-aliases.json
 ├── index.html                        # Main search page
 ├── compare.html                      # School comparison page
 ├── analysis.html                     # Analysis dashboard
