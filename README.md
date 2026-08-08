@@ -25,14 +25,18 @@
 ### 3. Historical Mode
 - **Toggle Historical Affiliations**: When enabled, publications are credited to the institution where the author was affiliated at the time of publication (via OpenAlex data).
 
-### 4. School Comparison
+### 4. Ranking Simulator
+- **What-if Analysis**: Model adding, transferring, or removing faculty and inspect the resulting overall and per-area rank changes.
+- **CSRankings and DBLP**: Use existing CSRankings faculty or look up external researchers through DBLP.
+
+### 5. School Comparison
 - **Side-by-Side Comparison**: Compare two schools across all research areas.
 
-### 5. Area & Conference Search
+### 6. Area & Conference Search
 - **Search by Area Name**: Find universities and professors in a research area.
 - **Search by Conference**: Find contributors to specific venues (e.g., PLDI, NeurIPS).
 
-### 6. Manual Affiliation Overrides
+### 7. Manual Affiliation Overrides
 - **Community Corrections**: Add corrections to `public/manual_affiliations.csv` to fix incorrect OpenAlex data.
 
 ## 🛠️ Technologies Used
@@ -78,6 +82,8 @@ cspicks/
 ├── src/
 │   ├── data.js                       # Data loading and filtering
 │   ├── main.js                       # Main search page logic
+│   ├── simulator.js                  # Simulator page UI and orchestration
+│   ├── simulation.js                 # Pure matching and rank-impact logic
 │   ├── compare.js                    # School comparison logic
 │   ├── analysis.js                   # Analysis dashboard logic
 │   └── style.css                     # CSS styles
@@ -86,6 +92,7 @@ cspicks/
 │   └── build-school-aliases.js       # Generates school-aliases.json
 ├── index.html                        # Main search page
 ├── compare.html                      # School comparison page
+├── simulator.html                    # Ranking simulator page
 ├── analysis.html                     # Analysis dashboard
 └── README.md
 ```

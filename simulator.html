@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const applySystemTheme = () => document.documentElement.setAttribute('data-theme', systemTheme.matches ? 'dark' : 'light');
+    applySystemTheme();
+    systemTheme.addEventListener('change', applySystemTheme);
+  </script>
+  <title>CS Picks - Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <div class="title-row">
+        <h1>CS Picks</h1>
+        <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
+      </div>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="index.html">Search</a>
+        <a href="analysis.html">Analysis</a>
+        <a href="compare.html">Compare</a>
+        <a href="simulator.html" class="active" aria-current="page">Simulator</a>
+      </nav>
+      <p>Explore how adding, transferring, or removing faculty changes publication-based rankings.</p>
+    </header>
+
+    <main class="simulator-page">
+      <aside class="simulator-disclaimer" role="note" aria-label="Simulator disclaimer">
+        <strong>Experimental what-if tool.</strong>
+        Results are hypothetical estimates based on third-party publication data that may be incomplete, outdated, or matched to the wrong person. They are not predictions, endorsements, or recommendations. Verify the underlying data, and do not use these results for hiring, promotion, evaluation, or other consequential decisions.
+      </aside>
+
+      <div class="filters search-filters simulator-filters" aria-label="Simulator filters">
+        <div class="filter-group search-region-control">
+          <select id="region-select" aria-label="Region">
+            <option value="world">World</option>
+            <option value="us" selected>USA</option>
+            <option value="europe">Europe</option>
+            <option value="asia">Asia</option>
+            <option value="canada">Canada</option>
+            <option value="australasia">Australasia</option>
+          </select>
+        </div>
+        <div class="filter-group" id="year-filter-group" aria-label="Year range">
+          <div class="year-inputs">
+            <select id="start-year" aria-label="Start year"></select>
+            <span>to</span>
+            <select id="end-year" aria-label="End year"></select>
+          </div>
+        </div>
+        <div class="filter-group conference-set-control">
+          <select id="conf-set" aria-label="Conference set">
+            <option value="csrankings-default" selected>CSRankings (Default)</option>
+            <option value="csrankings">CSRankings (All)</option>
+            <option value="core">CORE A*</option>
+            <option value="core-a">CORE A*/A</option>
+          </select>
+          <span class="tooltip-trigger filter-info" tabindex="0" aria-label="About conference sets">
+            ⓘ
+            <span class="tooltip-content">Chooses which publication venues count. CSRankings Default follows the primary CSRankings set; CSRankings All includes its extended venues; CORE options use CORE conference tiers.</span>
+          </span>
+        </div>
+      </div>
+
+      <div id="sim-loading-page" class="simulator-loading">Loading ranking data…</div>
+
+      <div id="simulator-workflow" class="simulator-workflow hidden">
+        <section class="sim-step" id="step-univ-first">
+          <h2>1. Select Target University</h2>
+          <input type="search" id="sim-univ-search" placeholder="Type a university name" autocomplete="off">
+          <div id="sim-univ-results" class="sim-list"></div>
+        </section>
+
+        <section class="sim-step hidden" id="step-candidates">
+          <h2>2. Enter Faculty Candidates</h2>
+          <div class="selected-item" id="selected-univ-display"></div>
+          <p class="sim-help">Select current faculty to model removal, or enter other researchers to model additions and transfers.</p>
+          <input type="search" id="sim-faculty-search" placeholder="Search current faculty or DBLP" autocomplete="off">
+          <div class="sim-selection-actions">
+            <button id="sim-select-all" type="button" class="btn-secondary">Select all</button>
+            <button id="sim-deselect-all" type="button" class="btn-secondary">Deselect all</button>
+          </div>
+          <div id="sim-faculty-list" class="sim-faculty-list"></div>
+          <textarea id="sim-candidates-input" rows="5" placeholder="One researcher per line&#10;John Smith&#10;Lishan Yang 0001"></textarea>
+          <p class="sim-help">Append a four-digit DBLP suffix when a name is ambiguous. Press Ctrl+Enter or Cmd+Enter to analyze.</p>
+          <button id="sim-analyze-btn" class="btn-secondary simulator-primary" type="button">Analyze candidates</button>
+        </section>
+
+        <section class="sim-step hidden" id="step-results">
+          <h2>3. Candidate Ranking Impact</h2>
+          <div class="selected-item" id="selected-univ-display-results"></div>
+          <div id="sim-loading" class="hidden">Analyzing candidates… <span class="spinner">↻</span></div>
+          <div id="sim-candidates-results"></div>
+          <div class="sim-selection-actions">
+            <button id="sim-change-candidates-btn" class="btn-secondary" type="button">Change faculty</button>
+            <button id="sim-reset-btn" class="btn-secondary" type="button">Start over</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <a href="faq.html" style="color: inherit; text-decoration: underline;">FAQ, Methods &amp; Data</a>
+  </footer>
+  <script type="module" src="./src/simulator.js"></script>
+</body>
+
+</html>

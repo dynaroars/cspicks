@@ -32,12 +32,13 @@ node scripts/build-school-aliases.js                         # rebuilds public/s
 ## Architecture
 
 **Multi-page app, one entry module per HTML page** (wired in `vite.config.js` as separate rollup inputs):
-- `index.html` + `src/main.js` (~2750 lines) — main search page: professor/school/area/conference search,
-  historical mode, the ranking-impact **simulator** (add/remove candidate faculty and see rank deltas), DBLP
-  live author search.
+- `index.html` + `src/main.js` (~1850 lines) — main search page: professor/school/area/conference search,
+  historical mode, school trend charts, and DBLP live author search.
 - `analysis.html` + `src/analysis.js` — school-level analysis dashboard (rank trends, area growth, faculty
   diversity, subfield effort, AI growth, conference trends). Tab-based, each tab lazily renders its own chart.
 - `compare.html` + `src/compare.js` — side-by-side two-school comparison across research areas.
+- `simulator.html` + `src/simulator.js` — standalone ranking-impact workflow for adding, transferring, or
+  removing faculty. Pure name-matching and rank-impact calculations live in `src/simulation.js`.
 - `faq.html` — static methodology page, no dedicated JS module.
 
 Each page module independently calls `loadData()` and `filterByYears()` on load — there's no shared app state
@@ -47,7 +48,7 @@ or router between pages; navigation is plain `<a href>` between static HTML file
 1. `loadData()` fetches three CSVs directly from `raw.githubusercontent.com/emeryberger/CSrankings` at
    runtime (csrankings.csv, generated-author-info.csv, institutions.csv) and joins them into
    `{ professors, schools }` keyed by name.
-2. `filterByYears(data, startYear, endYear, region, historyMap, aliasMap, confSet, useRaw)` is the main
+2. `filterByYears(data, startYear, endYear, region, historyMap, aliasMap, confSet)` is the main
    query/aggregation function — filters publications by year range and conference set (CSRankings default /
    All / CORE A / CORE A*), optionally reassigns publications to historical affiliations (see below), and
    computes per-area, per-school rank aggregates. Nearly every view calls this rather than touching raw data.

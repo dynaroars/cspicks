@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "test": "node test/data.test.js",
+    "sync:csrankings-rules": "node scripts/sync-csrankings-rules.mjs",
     "build": "vite build",
     "postbuild": "rm -f dist/professor_history_openalex.json dist/school-aliases.json && rm -rf dist/data",
     "preview": "vite preview",

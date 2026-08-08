@@ -9,6 +9,7 @@ export default defineConfig({
                 main: resolve(__dirname, 'index.html'),
                 analysis: resolve(__dirname, 'analysis.html'),
                 compare: resolve(__dirname, 'compare.html'),
+                simulator: resolve(__dirname, 'simulator.html'),
                 faq: resolve(__dirname, 'faq.html'),
             },
         },
