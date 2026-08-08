@@ -10,7 +10,6 @@ export default defineConfig({
                 analysis: resolve(__dirname, 'analysis.html'),
                 compare: resolve(__dirname, 'compare.html'),
                 faq: resolve(__dirname, 'faq.html'),
-                map: resolve(__dirname, 'map.html'),
             },
         },
     },

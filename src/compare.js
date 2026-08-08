@@ -1,6 +1,6 @@
 import Chart from 'chart.js/auto';
-import { loadData, filterByYears, fetchCsv, mergeAffiliationHistory } from './data.js';
-import { areaLabels, updateChartDefaults } from './shared.js';
+import { loadData, loadAffiliationData, filterByYears } from './data.js';
+import { areaLabels, escapeHtml, updateChartDefaults } from './shared.js';
 
 updateChartDefaults(Chart);
 
@@ -16,8 +16,8 @@ observer.observe(document.documentElement, { attributes: true });
 
 let rawData = null;
 let chartInstance = null;
-let historyMap = {};
-let aliasMap = {};
+let historyMap = null;
+let aliasMap = null;
 
 let selectedRegion = 'us';
 let endYear = new Date().getFullYear();
@@ -29,20 +29,6 @@ let facultyList = [];
 
 async function init() {
     rawData = await loadData();
-
-    try {
-        const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
-        const [history, aliases, manualCsv] = await Promise.all([
-            fetch(`${GITHUB_RAW}/professor_history_openalex.json`).then(r => r.ok ? r.json() : null).catch(() => null),
-            fetch(`${GITHUB_RAW}/school-aliases.json`).then(r => r.ok ? r.json() : null).catch(() => null),
-            fetchCsv('./manual_affiliations.csv').catch(() => []),
-        ]);
-
-        aliasMap = aliases || {};
-        historyMap = mergeAffiliationHistory(history || {}, manualCsv);
-    } catch (e) {
-        console.warn('Could not load affiliation history or aliases', e);
-    }
 
     setupYearSelectors();
     
@@ -57,6 +43,13 @@ async function init() {
     document.getElementById('loading-indicator').style.display = 'none';
     document.getElementById('filter-controls').style.display = 'grid';
     document.getElementById('compare-controls').style.display = 'flex';
+}
+
+async function ensureHistoricalData() {
+    if (historyMap !== null && aliasMap !== null) return;
+    const data = await loadAffiliationData();
+    historyMap = data.historyMap;
+    aliasMap = data.aliasMap;
 }
 
 function setupYearSelectors() {
@@ -76,7 +69,7 @@ function setupYearSelectors() {
 }
 
 function populateLists() {
-    const historyData = historicalMode ? historyMap : {};
+    const historyData = historicalMode ? historyMap : null;
     const confSet = document.getElementById('conf-set')?.value || 'csrankings';
     const filtered = filterByYears(rawData, startYear, endYear, selectedRegion, historyData, aliasMap, confSet);
     
@@ -173,16 +166,16 @@ function initSearchableSelect(containerId, hiddenId) {
 function renderDropdownItems(dropdown, list, hidden, input) {
     if (comparisonType === 'schools') {
         dropdown.innerHTML = list.slice(0, 50).map(school => `
-            <div class="dropdown-item" data-value="${school.name}">
+            <div class="dropdown-item" data-value="${escapeHtml(school.name)}">
                 <span style="color: var(--text-secondary); margin-right: 0.5rem;">#${school.rank}</span>
-                ${school.name}
+                ${escapeHtml(school.name)}
             </div>
         `).join('');
     } else {
         dropdown.innerHTML = list.slice(0, 50).map(faculty => `
-            <div class="dropdown-item" data-value="${faculty.name}">
-                <span style="font-weight: 600;">${faculty.name}</span>
-                <span style="color: var(--text-secondary); margin-left: 0.5rem; font-size: 0.85em;">(${faculty.affiliation})</span>
+            <div class="dropdown-item" data-value="${escapeHtml(faculty.name)}">
+                <span style="font-weight: 600;">${escapeHtml(faculty.name)}</span>
+                <span style="color: var(--text-secondary); margin-left: 0.5rem; font-size: 0.85em;">(${escapeHtml(faculty.affiliation)})</span>
                 <span style="float: right; color: var(--primary-color); font-size: 0.85em; font-weight: 600;">${faculty.totalAdjusted.toFixed(1)}</span>
             </div>
         `).join('');
@@ -269,9 +262,21 @@ function setupEventListeners() {
     });
 
     // Historical mode
-    document.getElementById('historical-mode').addEventListener('change', (e) => {
-        historicalMode = e.target.checked;
-        refreshData();
+    document.getElementById('historical-mode').addEventListener('change', async (e) => {
+        const toggle = e.target;
+        toggle.disabled = true;
+        try {
+            if (toggle.checked) await ensureHistoricalData();
+            historicalMode = toggle.checked;
+            refreshData();
+        } catch (error) {
+            console.error('Failed to load historical affiliation data:', error);
+            toggle.checked = false;
+            historicalMode = false;
+            window.alert('Historical affiliation data could not be loaded. Please try again.');
+        } finally {
+            toggle.disabled = false;
+        }
     });
 
     // Conference set toggle
@@ -332,7 +337,7 @@ function renderComparison() {
         return;
     }
 
-    const historyData = historicalMode ? historyMap : {};
+    const historyData = historicalMode ? historyMap : null;
     const confSet = document.getElementById('conf-set')?.value || 'csrankings';
     const filtered = filterByYears(rawData, startYear, endYear, selectedRegion, historyData, aliasMap, confSet);
     
@@ -444,6 +449,8 @@ function renderComparison() {
 
 function renderSummary(schoolAName, schoolBName, areas, dataA, dataB) {
     const summaryContainer = document.getElementById('comparison-summary');
+    const safeSchoolAName = escapeHtml(schoolAName);
+    const safeSchoolBName = escapeHtml(schoolBName);
 
     let aWins = 0;
     let bWins = 0;
@@ -477,9 +484,9 @@ function renderSummary(schoolAName, schoolBName, areas, dataA, dataB) {
         <div class="summary-card" style="grid-column: 1 / -1; text-align: center;">
             <h4>Overall Comparison</h4>
             <div class="leader" style="font-size: 1.3rem;">
-                <span style="color: rgba(37, 99, 235, 1);">${schoolAName}</span> leads in <strong>${aWins}</strong> areas
+                <span style="color: rgba(37, 99, 235, 1);">${safeSchoolAName}</span> leads in <strong>${aWins}</strong> areas
                 &nbsp;|&nbsp;
-                <span style="color: rgba(16, 185, 129, 1);">${schoolBName}</span> leads in <strong>${bWins}</strong> areas
+                <span style="color: rgba(16, 185, 129, 1);">${safeSchoolBName}</span> leads in <strong>${bWins}</strong> areas
             </div>
         </div>
     `;
@@ -487,11 +494,11 @@ function renderSummary(schoolAName, schoolBName, areas, dataA, dataB) {
     html += `<div style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">`;
 
     html += `<div style="display: flex; flex-direction: column; gap: 0.75rem;">
-        <h4 style="margin: 0; color: rgba(37, 99, 235, 1); font-weight: 600;">${schoolAName} Leads</h4>`;
+        <h4 style="margin: 0; color: rgba(37, 99, 235, 1); font-weight: 600;">${safeSchoolAName} Leads</h4>`;
     insightsA.forEach(insight => {
         html += `
             <div class="summary-card" style="border: 1px solid rgba(37, 99, 235, 0.25); background: rgba(37, 99, 235, 0.02);">
-                <h4>${insight.area}</h4>
+                <h4>${escapeHtml(insight.area)}</h4>
                 <div class="margin" style="color: rgba(37, 99, 235, 1);">+${insight.margin} adjusted pubs</div>
             </div>
         `;
@@ -499,11 +506,11 @@ function renderSummary(schoolAName, schoolBName, areas, dataA, dataB) {
     html += `</div>`;
 
     html += `<div style="display: flex; flex-direction: column; gap: 0.75rem;">
-        <h4 style="margin: 0; color: rgba(16, 185, 129, 1); font-weight: 600;">${schoolBName} Leads</h4>`;
+        <h4 style="margin: 0; color: rgba(16, 185, 129, 1); font-weight: 600;">${safeSchoolBName} Leads</h4>`;
     insightsB.forEach(insight => {
         html += `
             <div class="summary-card" style="border: 1px solid rgba(16, 185, 129, 0.25); background: rgba(16, 185, 129, 0.02);">
-                <h4>${insight.area}</h4>
+                <h4>${escapeHtml(insight.area)}</h4>
                 <div class="margin" style="color: rgba(16, 185, 129, 1);">+${insight.margin} adjusted pubs</div>
             </div>
         `;
@@ -515,4 +522,8 @@ function renderSummary(schoolAName, schoolBName, areas, dataA, dataB) {
     summaryContainer.innerHTML = html;
 }
 
-init();
+init().catch(err => {
+    console.error('Failed to initialize comparison:', err);
+    document.getElementById('loading-indicator').innerHTML =
+        '<p style="color: #ef4444;">Unable to load comparison data. Please try again.</p>';
+});

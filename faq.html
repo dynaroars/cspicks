@@ -5,6 +5,12 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const applySystemTheme = () => document.documentElement.setAttribute('data-theme', systemTheme.matches ? 'dark' : 'light');
+        applySystemTheme();
+        systemTheme.addEventListener('change', applySystemTheme);
+    </script>
     <title>CS Picks - FAQ & Methods</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,18 +21,6 @@
 </head>
 
 <body>
-    <!-- Theme toggle button -->
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-        <span class="sun-icon">☀️</span>
-        <span class="moon-icon">🌙</span>
-    </button>
-    <script>
-        const savedTheme = localStorage.getItem('theme');
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const initialTheme = savedTheme || (systemDark ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', initialTheme);
-    </script>
-
     <div id="app">
         <header>
             <h1>CS Picks</h1>
@@ -183,24 +177,6 @@
                 document.getElementById('ack-modal').classList.add('hidden');
             }
         });
-    </script>
-
-
-    <script>
-        const toggle = document.getElementById('theme-toggle');
-        if (toggle) {
-            toggle.addEventListener('click', () => {
-                const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-            });
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-                if (!localStorage.getItem('theme')) {
-                    document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-                }
-            });
-        }
     </script>
 </body>
 

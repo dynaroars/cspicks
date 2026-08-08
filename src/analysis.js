@@ -1,6 +1,6 @@
 import Chart from 'chart.js/auto';
-import { loadData, filterByYears, parentMap } from './data.js';
-import { areaLabels, updateChartDefaults } from './shared.js';
+import { loadData, loadAffiliationData, filterByYears, getPublicationSchools, parentMap } from './data.js';
+import { areaLabels, escapeHtml, updateChartDefaults } from './shared.js';
 
 updateChartDefaults(Chart);
 
@@ -25,8 +25,8 @@ observer.observe(document.documentElement, { attributes: true });
 
 // State
 let rawData = [];
-let affiliationHistory = {};
-let schoolAliases = {};
+let affiliationHistory = null;
+let schoolAliases = null;
 let chartInstance = null;
 let currentTab = 'schools';
 let historicalMode = false;
@@ -50,17 +50,7 @@ function cacheDOMElements() {
 async function init() {
     console.log('Initializing Analysis Dashboard...');
     try {
-        const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
-        const [data, history, aliases] = await Promise.all([
-            loadData(),
-            fetch(`${GITHUB_RAW}/professor_history_openalex.json`).then(res => res.ok ? res.json() : {}).catch(e => ({})),
-            fetch(`${GITHUB_RAW}/school-aliases.json`).then(res => res.ok ? res.json() : {}).catch(e => ({})),
-        ]);
-        rawData = data;
-        affiliationHistory = history;
-        schoolAliases = aliases;
-
-        console.log('Data loaded:', rawData.length, 'records, history for', Object.keys(affiliationHistory).length, 'profs, aliases for', Object.keys(schoolAliases).length, 'schools');
+        rawData = await loadData();
 
         cacheDOMElements();
         populateSchoolSelect();
@@ -75,13 +65,20 @@ async function init() {
     }
 }
 
+async function ensureHistoricalData() {
+    if (affiliationHistory !== null && schoolAliases !== null) return;
+    const data = await loadAffiliationData();
+    affiliationHistory = data.historyMap;
+    schoolAliases = data.aliasMap;
+}
+
 function populateSchoolSelect() {
     if (!schoolSelectEl) return;
     const allData = filterByYears(rawData, 2020, 2025, 'us');
     const schools = Object.keys(allData.schools).sort();
 
     schoolSelectEl.innerHTML = schools.map(s =>
-        `<option value="${s}" ${s === 'George Mason University' ? 'selected' : ''}>${s}</option>`
+        `<option value="${escapeHtml(s)}" ${s === 'George Mason University' ? 'selected' : ''}>${escapeHtml(s)}</option>`
     ).join('');
 
     schoolSelectEl.addEventListener('change', () => {
@@ -106,9 +103,20 @@ function setupYearSelectors() {
 
 function setupHistoricalMode() {
     if (historicalToggleEl) {
-        historicalToggleEl.addEventListener('change', () => {
-            historicalMode = historicalToggleEl.checked;
-            refreshActiveTabChart();
+        historicalToggleEl.addEventListener('change', async () => {
+            historicalToggleEl.disabled = true;
+            try {
+                if (historicalToggleEl.checked) await ensureHistoricalData();
+                historicalMode = historicalToggleEl.checked;
+                refreshActiveTabChart();
+            } catch (error) {
+                console.error('Failed to load historical affiliation data:', error);
+                historicalToggleEl.checked = false;
+                historicalMode = false;
+                window.alert('Historical affiliation data could not be loaded. Please try again.');
+            } finally {
+                historicalToggleEl.disabled = false;
+            }
         });
     }
 }
@@ -173,7 +181,8 @@ async function renderSchoolTrends() {
 
         const targetSchool = schoolSelectEl?.value || 'George Mason University';
         const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
-        const startYear = endYear - 10;
+        const startYear = parseInt(startYearSelectEl?.value) || endYear - 10;
+        if (startYear > endYear) return;
 
         const labels = [];
         const dataPoints = [];
@@ -181,8 +190,8 @@ async function renderSchoolTrends() {
 
         console.log('Calculating trends for', targetSchool, 'from', startYear, 'to', endYear);
 
-        const windowSize = endYear - startYear;
-        const overallMinYear = (endYear - 9) - windowSize;
+        const windowSize = 10;
+        const overallMinYear = startYear - (windowSize - 1);
         const overallMaxYear = endYear;
 
         // Pre-filter publications once to drastically improve loop performance
@@ -200,8 +209,8 @@ async function renderSchoolTrends() {
             }
         });
 
-        for (let y = endYear - 9; y <= endYear; y++) {
-            const wStart = Math.max(startYear, y - windowSize);
+        for (let y = startYear; y <= endYear; y++) {
+            const wStart = y - (windowSize - 1);
             const wEnd = y;
 
             const result = filterByYears(preFilteredData, wStart, wEnd, region, historicalMode ? affiliationHistory : null, historicalMode ? schoolAliases : null);
@@ -255,20 +264,8 @@ async function renderSchoolTrends() {
 }
 
 function isPubAtSchool(prof, pub, targetSchool) {
-    if (historicalMode) {
-        if (affiliationHistory && affiliationHistory[prof.name]) {
-            const matches = affiliationHistory[prof.name].filter(seg => pub.year >= seg.start && pub.year <= seg.end);
-            if (matches.length > 0) {
-                return matches.some(h => {
-                    const normalized = schoolAliases[h.school] || h.school;
-                    return normalized === targetSchool;
-                });
-            }
-        }
-        return prof.affiliation === targetSchool;
-    } else {
-        return prof.affiliation === targetSchool;
-    }
+    if (!historicalMode) return prof.affiliation === targetSchool;
+    return getPublicationSchools(prof, pub, affiliationHistory, schoolAliases).includes(targetSchool);
 }
 
 // ------------------
