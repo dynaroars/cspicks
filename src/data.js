@@ -140,7 +140,6 @@ export const nextTier = {
   'pods': true,
   'hpca': true,
   'ndss': true,
-  'pets': true,
   'eurosys': true,
   'eurographics': true,
   'fast': true,
@@ -251,7 +250,7 @@ export const parentMap = {
   'acl': 'nlp', 'emnlp': 'nlp', 'naacl': 'nlp',
   'sigir': 'inforet', 'www': 'inforet',
   'asplos': 'arch', 'isca': 'arch', 'micro': 'arch', 'hpca': 'arch',
-  'ccs': 'sec', 'oakland': 'sec', 'usenixsec': 'sec', 'ndss': 'sec', 'pets': 'sec',
+  'ccs': 'sec', 'oakland': 'sec', 'usenixsec': 'sec', 'ndss': 'sec',
   'vldb': 'mod', 'sigmod': 'mod', 'icde': 'mod', 'pods': 'mod',
   'dac': 'da', 'iccad': 'da',
   'emsoft': 'bed', 'rtas': 'bed', 'rtss': 'bed',
@@ -327,17 +326,49 @@ export const coreAMap = {
   'uai': true, 'usenixatc': true, 'wacv': true, 'wsdm': true
 };
 
+export const CONFERENCE_SET_IDS = ['csrankings-default', 'csrankings', 'core', 'core-a'];
+
+export function normalizeConferenceSet(confSet) {
+  return CONFERENCE_SET_IDS.includes(confSet) ? confSet : 'csrankings-default';
+}
+
+export function publicationMatchesConferenceSet(publication, confSet = 'csrankings-default') {
+  const selectedSet = normalizeConferenceSet(confSet);
+  if (selectedSet === 'core') return Boolean(coreAStarMap[publication.area]);
+  if (selectedSet === 'core-a') return Boolean(coreAStarMap[publication.area] || coreAMap[publication.area]);
+  if (selectedSet === 'csrankings-default') return !nextTier[publication.area];
+  return true;
+}
+
+export function getConferenceAreaMap(confSet = 'csrankings-default') {
+  const selectedSet = normalizeConferenceSet(confSet);
+  if (selectedSet === 'core' || selectedSet === 'core-a') {
+    // CORE occasionally categorizes a venue differently from CSRankings, so
+    // CORE's mapping must win when both contain the venue.
+    return { ...parentMap, ...coreAStarMap };
+  }
+  return parentMap;
+}
+
 // Get unique top-level areas
 const topLevelAreas = [...new Set(Object.values(parentMap))];
 const numAreas = topLevelAreas.length;
 
 export function getPublicationSchools(professor, publication, historyMap = null, aliasMap = null) {
   const fallback = [professor.affiliation];
-  const matches = historyMap?.[professor.name]?.filter(segment =>
-    publication.year >= segment.start && publication.year <= segment.end
-  ) || [];
+  const history = historyMap?.[professor.name];
 
-  if (matches.length === 0) return fallback;
+  // Falling back to a professor's current school is only safe when no
+  // historical record exists for that professor. OpenAlex histories can be
+  // sparse; treating an uncovered old year as the current affiliation silently
+  // moves old publications to the professor's present-day institution.
+  if (!history || history.length === 0) return fallback;
+
+  const matches = history.filter(segment =>
+    publication.year >= segment.start && publication.year <= segment.end
+  );
+
+  if (matches.length === 0) return [];
 
   const schools = matches
     .map(segment => Object.prototype.hasOwnProperty.call(aliasMap || {}, segment.school)
@@ -345,18 +376,18 @@ export function getPublicationSchools(professor, publication, historyMap = null,
       : segment.school)
     .filter(Boolean);
 
-  return schools.length > 0 ? [...new Set(schools)] : fallback;
+  return [...new Set(schools)];
 }
 
 
-export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'csrankings') {
+export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'csrankings-default') {
   const { professors, schools } = data;
   const filteredProfs = {};
   const filteredSchools = {};
   const hasHistoricalData = Boolean(historyMap && Object.keys(historyMap).length > 0);
 
   // Select conference map based on confSet
-  const confMap = confSet === 'core' ? coreAStarMap : parentMap;
+  const confMap = getConferenceAreaMap(confSet);
 
   // Helper to check if school is in selected region
   const isInRegion = (schoolName) => {
@@ -385,15 +416,7 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
     );
 
     if (filteredPubs.length > 0) {
-      let confFilteredPubs = filteredPubs;
-      if (confSet === 'core') {
-        confFilteredPubs = filteredPubs.filter(p => coreAStarMap[p.area]);
-      } else if (confSet === 'core-a') {
-        confFilteredPubs = filteredPubs.filter(p => coreAStarMap[p.area] || coreAMap[p.area]);
-      } else if (confSet === 'csrankings-default') {
-        confFilteredPubs = filteredPubs.filter(p => !nextTier[p.area]);
-      }
-      // else: confSet === 'csrankings', include all conferences (no filtering)
+      const confFilteredPubs = filteredPubs.filter(p => publicationMatchesConferenceSet(p, confSet));
 
       const areaStats = {};
       const regionFilteredPubs = [];
@@ -411,7 +434,7 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
         if (pubSchools.length === 0) return;
         regionFilteredPubs.push(pub);
 
-        const area = confMap[pub.area] || parentMap[pub.area] || pub.area;
+        const area = confMap[pub.area] || pub.area;
         if (!areaStats[area]) {
           areaStats[area] = { count: 0, adjusted: 0 };
         }

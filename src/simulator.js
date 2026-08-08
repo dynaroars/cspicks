@@ -1,4 +1,4 @@
-import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, coreAStarMap, coreAMap, nextTier } from './data.js';
+import { loadData, filterByYears, getConferenceAreaMap, publicationMatchesConferenceSet, DEFAULT_START_YEAR, DEFAULT_END_YEAR } from './data.js';
 import { areaLabels, cleanName, escapeHtml } from './shared.js';
 import { searchAuthor, fetchAuthorStats } from './dblp.js';
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from './simulation.js';
@@ -10,12 +10,6 @@ let startYear = DEFAULT_START_YEAR;
 let endYear = DEFAULT_END_YEAR;
 let selectedRegion = 'us';
 let confSet = 'csrankings-default';
-const initialParams = new URLSearchParams(window.location.search);
-
-if (initialParams.has('start')) startYear = Number(initialParams.get('start'));
-if (initialParams.has('end')) endYear = Number(initialParams.get('end'));
-if (initialParams.has('region')) selectedRegion = initialParams.get('region');
-if (initialParams.has('confSet')) confSet = initialParams.get('confSet');
 
 let simFacultyArr = [];
 let facultyFilter = '';
@@ -24,7 +18,6 @@ let dblpFacultyLoading = false;
 let dblpSearchTimer = null;
 let dblpSearchSequence = 0;
 const selectedDblpProfiles = new Map();
-let lastSimulationResults = [];
 
 function resetFacultySearch() {
   clearTimeout(dblpSearchTimer);
@@ -56,7 +49,6 @@ function addCandidate(name, dblpProfile = null) {
     names.push(name);
     candidatesInput.value = names.join('\n');
   }
-  updateSimulatorURL();
 }
 
 function renderFacultyList(filter = facultyFilter) {
@@ -302,8 +294,7 @@ function renderCandidateResults(candidates) {
 async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
   const candidateResults = [];
 
-  // Get current conference set
-  const confMap = confSet === 'core' ? coreAStarMap : parentMap;
+  const confMap = getConferenceAreaMap(confSet);
 
   for (const name of uniqueNames) {
     try {
@@ -344,14 +335,7 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
         // Filter pubs by year range AND conference set
         const yearFiltered = profData.pubs.filter(p => p.year >= startYear && p.year <= endYear);
 
-        let confFilteredPubs = yearFiltered;
-        if (confSet === 'core') {
-          confFilteredPubs = yearFiltered.filter(p => coreAStarMap[p.area]);
-        } else if (confSet === 'core-a') {
-          confFilteredPubs = yearFiltered.filter(p => coreAStarMap[p.area] || coreAMap[p.area]);
-        } else if (confSet === 'csrankings-default') {
-          confFilteredPubs = yearFiltered.filter(p => !nextTier[p.area]);
-        }
+        const confFilteredPubs = yearFiltered.filter(p => publicationMatchesConferenceSet(p, confSet));
 
         console.log('CSRankings match for:', name, '→', profData.name, 'pubs:', profData.pubs.length, 'filtered:', confFilteredPubs.length);
 
@@ -371,7 +355,7 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
         };
 
         confFilteredPubs.forEach(pub => {
-          const area = confMap[pub.area] || parentMap[pub.area] || pub.area;
+          const area = confMap[pub.area] || pub.area;
 
           stats.totalAdjusted += pub.adjustedcount;
           stats.totalPapers += pub.count;
@@ -434,7 +418,7 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
 
         displayName = best.name;
 
-        stats = await fetchAuthorStats(best.pid, startYear, endYear);
+        stats = await fetchAuthorStats(best.pid, startYear, endYear, confSet);
         if (!stats) {
           candidateResults.push({ name, error: 'We couldn\'t retrieve publication records from DBLP. Please verify the profile is accessible.' });
           continue;
@@ -532,7 +516,6 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
 
 
 function resetSimulation() {
-  lastSimulationResults = [];
   resetFacultySearch();
   selectedDblpProfiles.clear();
   selectedUniv = null;
@@ -545,12 +528,10 @@ function resetSimulation() {
   document.getElementById('sim-candidates-results').innerHTML = '';
   document.getElementById('sim-faculty-list').innerHTML = '';
   document.getElementById('sim-faculty-search').value = '';
-  updateSimulatorURL();
 }
 
 function resetCandidates() {
   if (!selectedUniv) return;
-  lastSimulationResults = [];
   document.getElementById('step-results').classList.add('hidden');
   document.getElementById('step-candidates').classList.remove('hidden');
   document.getElementById('sim-candidates-input').value = '';
@@ -558,7 +539,6 @@ function resetCandidates() {
   document.getElementById('sim-candidates-results').innerHTML = '';
   document.getElementById('sim-faculty-search').value = '';
   populateFacultyList(selectedUniv);
-  updateSimulatorURL();
   document.getElementById('sim-faculty-search').focus();
 }
 
@@ -568,39 +548,6 @@ function setupSimulator() {
   const univSearch = document.getElementById('sim-univ-search');
   const candidatesInput = document.getElementById('sim-candidates-input');
   const analyzeBtn = document.getElementById('sim-analyze-btn');
-
-  document.getElementById('share-simulation')?.addEventListener('click', async event => {
-    updateSimulatorURL();
-    const button = event.currentTarget;
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      button.textContent = 'Copied';
-    } catch {
-      window.prompt('Copy this simulation link:', window.location.href);
-    }
-    setTimeout(() => { button.textContent = 'Share'; }, 1500);
-  });
-  document.getElementById('export-simulation')?.addEventListener('click', () => {
-    if (!lastSimulationResults.length || !selectedUniv) return;
-    const quote = value => `"${String(value ?? '').replaceAll('"', '""')}"`;
-    const rows = [['Candidate', 'Target university', 'Current rank', 'Simulated rank', 'Rank change', 'Mode', 'Status']];
-    lastSimulationResults.forEach(result => rows.push([
-      result.name,
-      selectedUniv.name,
-      result.currentRank || '',
-      result.error ? '' : result.currentRank - result.rankDelta,
-      result.error ? '' : result.rankDelta,
-      result.error ? '' : result.isRemoval ? 'Removal' : result.sourceSchool ? 'Transfer' : 'Addition',
-      result.error || 'OK'
-    ]));
-    const blob = new Blob([rows.map(row => row.map(quote).join(',')).join('\n')], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'cspicks-simulation.csv';
-    link.click();
-    URL.revokeObjectURL(url);
-  });
 
   document.getElementById('sim-reset-btn').addEventListener('click', resetSimulation);
   document.getElementById('sim-change-candidates-btn').addEventListener('click', resetCandidates);
@@ -646,7 +593,6 @@ function setupSimulator() {
         document.getElementById('step-candidates').classList.remove('hidden');
         populateFacultyList(selectedUniv);
         candidatesInput.focus();
-        updateSimulatorURL();
       });
     });
   });
@@ -663,14 +609,12 @@ function setupSimulator() {
     for (const name of selectedDblpProfiles.keys()) {
       if (!currentNames.has(name)) selectedDblpProfiles.delete(name);
     }
-    updateSimulatorURL();
   });
 
   analyzeBtn.addEventListener('click', async () => {
     if (!selectedUniv) return;
     const names = parseCandidateNames(candidatesInput.value);
     if (names.length === 0) return;
-    updateSimulatorURL();
 
     document.getElementById('step-candidates').classList.add('hidden');
     document.getElementById('step-results').classList.remove('hidden');
@@ -682,7 +626,6 @@ function setupSimulator() {
     resultsContainer.innerHTML = '';
 
     const results = await performCandidatesAnalysis(selectedUniv, names);
-    lastSimulationResults = results;
     loading.classList.add('hidden');
     resultsContainer.innerHTML = renderCandidateResults(results);
     resultsContainer.querySelectorAll('.papers-toggle').forEach(button => {
@@ -693,43 +636,6 @@ function setupSimulator() {
       });
     });
   });
-}
-
-function updateSimulatorURL() {
-  const url = new URL(window.location);
-  url.searchParams.set('start', startYear);
-  url.searchParams.set('end', endYear);
-  url.searchParams.set('region', selectedRegion);
-  url.searchParams.set('confSet', confSet);
-  if (selectedUniv) url.searchParams.set('target', selectedUniv.name);
-  else url.searchParams.delete('target');
-  const candidates = parseCandidateNames(document.getElementById('sim-candidates-input')?.value || '');
-  if (candidates.length) url.searchParams.set('candidates', candidates.join('|'));
-  else url.searchParams.delete('candidates');
-  const profiles = [...selectedDblpProfiles.entries()].map(([key, profile]) => [key, profile.pid, profile.name]);
-  if (profiles.length) url.searchParams.set('profiles', JSON.stringify(profiles));
-  else url.searchParams.delete('profiles');
-  window.history.replaceState({}, '', url);
-}
-
-function restoreSharedSimulation() {
-  const targetName = initialParams.get('target');
-  const target = targetName ? appData.schools[targetName] : null;
-  if (!target) return;
-  selectedUniv = target;
-  document.getElementById('selected-univ-display').textContent = `Target: ${target.name} (#${target.rank})`;
-  document.getElementById('step-univ-first').classList.add('hidden');
-  document.getElementById('step-candidates').classList.remove('hidden');
-  populateFacultyList(target);
-  const candidates = (initialParams.get('candidates') || '').split('|').map(name => name.trim()).filter(Boolean);
-  document.getElementById('sim-candidates-input').value = candidates.join('\n');
-  try {
-    const profiles = JSON.parse(initialParams.get('profiles') || '[]');
-    profiles.forEach(([key, pid, name]) => selectedDblpProfiles.set(key, { pid, name }));
-  } catch {
-    selectedDblpProfiles.clear();
-  }
-  renderFacultyList();
 }
 
 function setupFilters() {
@@ -755,7 +661,6 @@ function setupFilters() {
     confSet = document.getElementById('conf-set').value;
     appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
     resetSimulation();
-    updateSimulatorURL();
   };
 
   startSelect.addEventListener('change', refresh);
@@ -770,7 +675,6 @@ async function init() {
     setupFilters();
     appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
     setupSimulator();
-    restoreSharedSimulation();
     document.getElementById('sim-loading-page').classList.add('hidden');
     document.getElementById('simulator-workflow').classList.remove('hidden');
     document.getElementById('sim-univ-search').focus();

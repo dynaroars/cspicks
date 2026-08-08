@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { fetchCsv, filterByYears, getPublicationSchools } from '../src/data.js';
-import { encodeInlineValue, escapeHtml, safeExternalUrl } from '../src/shared.js';
+import { fetchCsv, filterByYears, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet } from '../src/data.js';
+import { encodeInlineValue, escapeHtml, getInstitutionShortName, safeExternalUrl } from '../src/shared.js';
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../src/simulation.js';
 import { hasEligiblePageRange, normalizeDblpVenue } from '../src/dblp.js';
 import { parseCsrankingsRules } from '../src/csrankings-rules.js';
-import { calculateParityReport, calculateSchoolMetrics, explainRankGap, rankingsToCsv } from '../src/metrics.js';
+import { calculateDiscoveryInsights, calculateParityReport, calculatePublishingEffort, calculateSchoolMetrics, explainRankGap } from '../src/metrics.js';
 
 function professor(name, affiliation, count, adjustedcount) {
   return {
@@ -66,12 +66,28 @@ test('historical mode filters professors and their publications by region', () =
   assert.deepEqual(Object.keys(result.schools), ['US']);
 });
 
-test('historical attribution falls back when all matching aliases are excluded', () => {
+test('historical attribution does not replace excluded schools with the current school', () => {
   const prof = { name: 'Alice', affiliation: 'US' };
   const pub = { year: 2025 };
   const history = { Alice: [{ school: 'Unknown School', start: 2025, end: 2025 }] };
 
-  assert.deepEqual(getPublicationSchools(prof, pub, history, { 'Unknown School': null }), ['US']);
+  assert.deepEqual(getPublicationSchools(prof, pub, history, { 'Unknown School': null }), []);
+});
+
+test('historical gaps do not assign old publications to the current school', () => {
+  const prof = { name: 'Alice', affiliation: 'Current University' };
+  const history = {
+    Alice: [{ school: 'Current University', start: 2021, end: 2026 }]
+  };
+
+  assert.deepEqual(getPublicationSchools(prof, { year: 2020 }, history), []);
+  assert.deepEqual(getPublicationSchools(prof, { year: 2021 }, history), ['Current University']);
+});
+
+test('current affiliation remains the fallback when a professor has no history', () => {
+  const prof = { name: 'Alice', affiliation: 'Current University' };
+
+  assert.deepEqual(getPublicationSchools(prof, { year: 2020 }, {}, {}), ['Current University']);
 });
 
 test('rankings always use fractional credit', () => {
@@ -90,6 +106,22 @@ test('rankings always use fractional credit', () => {
   assert.equal(result.schools.A.areaRanks.mlmining, 2);
   assert.equal(legacyRawArgument.schools.B.areaRanks.mlmining, 1);
   assert.equal(legacyRawArgument.schools.A.areaRanks.mlmining, 2);
+});
+
+test('conference-set rules consistently distinguish default, extended, and CORE venues', () => {
+  assert.equal(publicationMatchesConferenceSet({ area: 'icse' }, 'csrankings-default'), true);
+  assert.equal(publicationMatchesConferenceSet({ area: 'ase' }, 'csrankings-default'), false);
+  assert.equal(publicationMatchesConferenceSet({ area: 'ase' }, 'csrankings'), true);
+  assert.equal(publicationMatchesConferenceSet({ area: 'ase' }, 'core'), true);
+  assert.equal(publicationMatchesConferenceSet({ area: 'issta' }, 'core'), false);
+  assert.equal(publicationMatchesConferenceSet({ area: 'issta' }, 'core-a'), true);
+  assert.equal(publicationMatchesConferenceSet({ area: 'fast' }, 'csrankings-default'), false);
+  assert.equal(publicationMatchesConferenceSet({ area: 'fast' }, 'csrankings'), true);
+  assert.equal(publicationMatchesConferenceSet({ area: 'usenixatc' }, 'csrankings-default'), false);
+  assert.equal(publicationMatchesConferenceSet({ area: 'usenixatc' }, 'csrankings'), true);
+  assert.equal(publicationMatchesConferenceSet({ area: 'ase' }, 'invalid-set'), false);
+  assert.equal(getConferenceAreaMap('core').vr, 'graph');
+  assert.equal(getConferenceAreaMap('csrankings-default').vr, 'visualization');
 });
 
 test('per-area rankings assign the same rank to equal scores', () => {
@@ -113,6 +145,9 @@ test('rendering helpers neutralize markup and unsafe URLs', () => {
   assert.equal(decodeURIComponent(encodeInlineValue("O'Brien </script>")), "O'Brien </script>");
   assert.equal(safeExternalUrl('javascript:alert(1)'), '#');
   assert.equal(safeExternalUrl('https://example.com/profile'), 'https://example.com/profile');
+  assert.equal(getInstitutionShortName('Carnegie Mellon University'), 'CMU');
+  assert.equal(getInstitutionShortName('George Mason University'), 'GMU');
+  assert.equal(getInstitutionShortName('Unmapped University'), 'Unmapped University');
 });
 
 test('fetchCsv rejects HTTP failures', async () => {
@@ -244,6 +279,75 @@ test('school metrics report movement, momentum, concentration, breadth, and coll
   assert.equal(metrics.confidence, 'Medium');
 });
 
+test('discovery insights rank substantive movement and ignore tiny momentum baselines', () => {
+  const current = {
+    professors: {
+      A1: { name: 'A1', totalAdjusted: 5 },
+      A2: { name: 'A2', totalAdjusted: 4 },
+      A3: { name: 'A3', totalAdjusted: 3 },
+      B1: { name: 'B1', totalAdjusted: 5 },
+      B2: { name: 'B2', totalAdjusted: 3 },
+      B3: { name: 'B3', totalAdjusted: 2 }
+    },
+    schools: {
+      A: {
+        name: 'A', rank: 2, totalCount: 15, totalAdjusted: 12,
+        areas: {
+          ai: { adjusted: 7, faculty: ['A1', 'A2'] },
+          soft: { adjusted: 5, faculty: ['A3'] }
+        }
+      },
+      B: {
+        name: 'B', rank: 1, totalCount: 12, totalAdjusted: 10,
+        areas: { ai: { adjusted: 10, faculty: ['B1', 'B2', 'B3'] } }
+      }
+    }
+  };
+  const prior = {
+    schools: {
+      A: { name: 'A', rank: 8, totalAdjusted: 3, areas: { ai: { adjusted: 3 } } },
+      B: { name: 'B', rank: 1, totalAdjusted: 9, areas: { ai: { adjusted: 9 } } }
+    }
+  };
+
+  const insights = calculateDiscoveryInsights(current, prior);
+  assert.equal(insights.rankClimbers[0].name, 'A');
+  assert.equal(insights.rankClimbers[0].metrics.rankDelta, 6);
+  assert.equal(insights.momentum[0].name, 'A');
+  assert.equal(insights.breadthBuilders[0].breadthGain, 1);
+  assert.equal(insights.focusedPowerhouses[0].name, 'B');
+  assert.equal(insights.areaBreakouts[0].name, 'A');
+});
+
+test('publishing effort includes only the selected school and uses all active faculty', () => {
+  const professors = {
+    Alice: {
+      affiliation: 'George Mason University',
+      pubs: [{ area: 'icse', year: 2025, adjustedcount: 4 }]
+    },
+    Bob: {
+      affiliation: 'George Mason University',
+      pubs: [{ area: 'ccs', year: 2025, adjustedcount: 2 }]
+    },
+    Outsider: {
+      affiliation: 'Other University',
+      pubs: [{ area: 'focs', year: 2025, adjustedcount: 100 }]
+    }
+  };
+
+  const result = calculatePublishingEffort(professors, {
+    startYear: 2025,
+    endYear: 2025,
+    parentAreas: { icse: 'soft', ccs: 'sec', focs: 'act' },
+    includesPublication: professor => professor.affiliation === 'George Mason University'
+  });
+
+  assert.equal(result.activeFaculty, 2);
+  assert.deepEqual(result.subfields.map(area => area.subfield), ['soft', 'sec']);
+  assert.equal(result.subfields[0].effort, 2);
+  assert.equal(result.subfields[1].effort, 1);
+});
+
 test('rank gap explanation uses geometric-mean log contributions', () => {
   const gaps = explainRankGap(
     { areaAdjustedCounts: { ai: 9, mlmining: 1 } },
@@ -254,7 +358,7 @@ test('rank gap explanation uses geometric-mean log contributions', () => {
   assert.ok(gaps[0].logGap > 0);
 });
 
-test('parity audit and CSV export validate ranked data', () => {
+test('parity audit validates ranked data', () => {
   const raw = { professors: { Alice: {} } };
   const filtered = {
     professors: { Alice: { homepage: 'https://a.example' } },
@@ -266,5 +370,4 @@ test('parity audit and CSV export validate ranked data', () => {
   assert.equal(report.totalMismatches, 0);
   assert.equal(report.rankOrderIssues, 0);
   assert.equal(report.officialVenueMode, true);
-  assert.match(rankingsToCsv(filtered), /"1","A","2","2\.00","1\.00","1"/);
 });

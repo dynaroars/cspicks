@@ -1,6 +1,6 @@
-import { loadData, loadAffiliationData, filterByYears, getPublicationSchools, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, coreAStarMap, coreAMap, nextTier, schoolAliases, conferenceAliases } from './data.js';
+import { loadData, loadAffiliationData, filterByYears, getConferenceAreaMap, getPublicationSchools, normalizeConferenceSet, publicationMatchesConferenceSet, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, schoolAliases, conferenceAliases } from './data.js';
 import { areaLabels, cleanName, encodeInlineValue, escapeHtml, getChartColors, safeExternalUrl, updateChartDefaults } from './shared.js';
-import { buildPriorPeriodData, calculateSchoolMetrics, rankingsToCsv } from './metrics.js';
+import { buildPriorPeriodData, calculateSchoolMetrics } from './metrics.js';
 import he from 'he';
 
 import { searchAuthor, fetchAuthorStats } from './dblp.js';
@@ -33,13 +33,12 @@ if (params.has('start')) startYear = parseInt(params.get('start'));
 if (params.has('end')) endYear = parseInt(params.get('end'));
 if (params.has('region')) selectedRegion = params.get('region');
 if (params.has('historical')) historicalMode = params.get('historical') === 'true';
-if (params.has('confSet')) confSet = params.get('confSet');
+if (params.has('confSet')) confSet = normalizeConferenceSet(params.get('confSet'));
 async function init() {
   setupFilters();
   setupSearch();
   setupTooltips();
   setupThemeSync();
-  setupRankingActions();
 
   try {
     rawData = await loadData();
@@ -211,29 +210,6 @@ function updatePriorData() {
   );
 }
 
-function setupRankingActions() {
-  document.getElementById('share-view')?.addEventListener('click', async event => {
-    updateURL();
-    const button = event.currentTarget;
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      button.textContent = 'Copied';
-    } catch {
-      window.prompt('Copy this link:', window.location.href);
-    }
-    setTimeout(() => { button.textContent = 'Share'; }, 1500);
-  });
-
-  document.getElementById('export-rankings')?.addEventListener('click', () => {
-    const blob = new Blob([rankingsToCsv(appData)], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `cspicks-${selectedRegion}-${startYear}-${endYear}.csv`;
-    link.click();
-    URL.revokeObjectURL(url);
-  });
-}
 function setupSearch() {
   const mainSearch = document.getElementById('main-search');
 
@@ -263,6 +239,8 @@ function showTopRankings() {
   const profContainer = document.getElementById('prof-results');
   const areaContainer = document.getElementById('area-people-results');
   const dblpContainer = document.getElementById('dblp-results');
+
+  profContainer.classList.remove('single-result');
 
   areaContainer.innerHTML = '';
   dblpContainer.innerHTML = '';
@@ -619,6 +597,7 @@ function renderActivityGraph(prof) {
   if (effectiveStart > effectiveEnd) return '';
 
   const yearStats = {};
+  const activityAreaMap = getConferenceAreaMap(confSet);
   for (let y = effectiveStart; y <= effectiveEnd; y++) {
     yearStats[y] = { total: 0, areas: {} };
   }
@@ -626,11 +605,11 @@ function renderActivityGraph(prof) {
   prof.pubs.forEach(p => {
     if (p.year >= effectiveStart && p.year <= effectiveEnd) {
       if (!yearStats[p.year]) return;
-      yearStats[p.year].total += p.count;
+      yearStats[p.year].total += p.adjustedcount;
 
-      const parentArea = parentMap[p.area] || p.area;
+      const parentArea = activityAreaMap[p.area] || p.area;
       if (!yearStats[p.year].areas[parentArea]) yearStats[p.year].areas[parentArea] = 0;
-      yearStats[p.year].areas[parentArea] += p.count;
+      yearStats[p.year].areas[parentArea] += p.adjustedcount;
     }
   });
 
@@ -654,7 +633,7 @@ function renderActivityGraph(prof) {
     const height = maxCount > 0 ? (stats.total / maxCount) * 100 : 0;
     const breakdown = Object.entries(stats.areas)
       .sort(([, a], [, b]) => b - a)
-      .map(([area, count]) => `${Math.ceil(count)} ${areaLabels[area] || area}`)
+      .map(([area, count]) => `${count.toFixed(1)} ${areaLabels[area] || area}`)
       .join(', ');
 
     const tooltip = `${year}: ${breakdown || 'No papers'}`;
@@ -698,7 +677,7 @@ async function searchDBLPAuthors(query) {
 
     await Promise.all(candidates.map(async (a) => {
       try {
-        const stats = await fetchAuthorStats(a.pid, startYear, endYear);
+        const stats = await fetchAuthorStats(a.pid, startYear, endYear, confSet);
         if (stats?.totalAdjusted > 0) {
           validAuthors.push({ ...a, stats });
         } else {
@@ -768,7 +747,7 @@ window.showDBLPAuthorProfile = async (cardEl, pid, name) => {
   contentEl.innerHTML = '<p>Loading stats...</p>';
 
   try {
-    const stats = await fetchAuthorStats(pid, startYear, endYear);
+    const stats = await fetchAuthorStats(pid, startYear, endYear, confSet);
     if (!stats) {
       contentEl.innerHTML = '<p>No data found.</p>';
       return;
@@ -833,6 +812,7 @@ window.searchProfessorByAffiliation = function (name, affiliation) {
     });
 
   const container = document.getElementById('prof-results');
+  container.classList.toggle('single-result', results.length === 1);
   container.innerHTML = results
     .slice(0, 50)
     .map(prof => renderProfessorCard(prof))
@@ -937,6 +917,7 @@ function searchProfessors(query) {
     .sort((a, b) => b.totalAdjusted - a.totalAdjusted);
 
   const container = document.getElementById('prof-results');
+  container.classList.toggle('single-result', results.length === 1);
   container.innerHTML = '';
 
   const CHUNK_SIZE = 20;
@@ -1288,13 +1269,6 @@ function renderSchoolRankGraphPlaceholder(schoolName) {
   `;
 }
 
-function isPublicationInConferenceSet(pub) {
-  if (confSet === 'core') return Boolean(coreAStarMap[pub.area]);
-  if (confSet === 'core-a') return Boolean(coreAStarMap[pub.area] || coreAMap[pub.area]);
-  if (confSet === 'csrankings-default') return !nextTier[pub.area];
-  return true;
-}
-
 function isPublicationAtHistoricalSchool(prof, pub, schoolName) {
   return getPublicationSchools(prof, pub, historyMap, aliasMap).includes(schoolName);
 }
@@ -1353,13 +1327,14 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
   }
 
   const allProfessors = Object.values(rawData.professors);
+  const conferenceAreaMap = getConferenceAreaMap(confSet);
   const allPubs = allProfessors.flatMap(prof => prof.pubs.filter(pub =>
-    isPublicationAtHistoricalSchool(prof, pub, schoolName) && isPublicationInConferenceSet(pub)
+    isPublicationAtHistoricalSchool(prof, pub, schoolName) && publicationMatchesConferenceSet(pub, confSet)
   ));
 
   allPubs.forEach(pub => {
     if (pub.year >= chartStart && pub.year <= chartEnd) {
-      const area = parentMap[pub.area] || pub.area;
+      const area = conferenceAreaMap[pub.area] || pub.area;
       if (!areaStats[pub.year][area]) areaStats[pub.year][area] = 0;
       areaStats[pub.year][area] += pub.adjustedcount;
     }
@@ -1409,9 +1384,9 @@ window.loadSchoolCharts = async function (schoolName, uniqueId) {
       prof.pubs.forEach(pub => {
         if (pub.year >= wStart && pub.year <= wEnd &&
           isPublicationAtHistoricalSchool(prof, pub, schoolName) &&
-          isPublicationInConferenceSet(pub)) {
+          publicationMatchesConferenceSet(pub, confSet)) {
           if (!authorAreas[prof.name]) authorAreas[prof.name] = new Set();
-          const area = parentMap[pub.area] || pub.area;
+          const area = conferenceAreaMap[pub.area] || pub.area;
           authorAreas[prof.name].add(area);
         }
       });
@@ -1723,20 +1698,20 @@ function renderRankContribution(school) {
 
   return `
     <div class="school-rank-attribution">
-      <details class="attribution-details">
-        <summary class="attribution-summary">
-          <span>Why this rank? (Subfield Contribution)</span>
-          <span class="tooltip-trigger" style="color: var(--text-secondary); cursor: help; position: relative;">
+      <div class="attribution-details">
+        <div class="attribution-summary">
+          <span>Subfield Contributions</span>
+          <span class="tooltip-trigger contribution-tooltip" tabindex="0" aria-label="About subfield contributions">
             ⓘ
-            <span class="tooltip-content" style="font-weight: normal; font-size: 0.8rem; text-transform: none; width: 220px;">
+            <span class="tooltip-content">
               Attribution is calculated logarithmically using ln(val + 1) because the overall rank score uses a geometric mean of all subfields.
             </span>
           </span>
-        </summary>
+        </div>
         <div class="attribution-content">
           ${itemsHtml}
         </div>
-      </details>
+      </div>
     </div>
   `;
 }
@@ -1831,15 +1806,23 @@ function renderSchoolMetrics(metrics) {
     : metrics.rankDelta === 0 ? 'No change' : `${metrics.rankDelta > 0 ? '▲' : '▼'} ${Math.abs(metrics.rankDelta)}`;
   const growth = `${metrics.growth >= 0 ? '+' : ''}${metrics.growth.toFixed(0)}%`;
   const confidenceClass = metrics.confidence.toLowerCase();
+  const metricLabel = (label, explanation) => `
+    <span class="metric-label-row">
+      <span class="metric-label">${escapeHtml(label)}</span>
+      <span class="tooltip-trigger metric-info" tabindex="0" aria-label="About ${escapeHtml(label)}">ⓘ
+        <span class="tooltip-content">${escapeHtml(explanation)}</span>
+      </span>
+    </span>
+  `;
   return `
     <div class="school-metrics" aria-label="University statistics">
-      <div class="school-metric" title="Rank movement versus the immediately preceding period of the same length"><span>Rank movement</span><strong>${rankMovement}</strong></div>
-      <div class="school-metric" title="Fractional-credit growth versus the preceding period"><span>Momentum</span><strong>${growth}</strong></div>
-      <div class="school-metric" title="Median fractional publication credit per active faculty member"><span>Median / faculty</span><strong>${metrics.medianPerFaculty.toFixed(1)}</strong></div>
-      <div class="school-metric" title="Top three faculty produce ${metrics.top3Share.toFixed(0)}% of fractional credit; top one ${metrics.top1Share.toFixed(0)}%; top five ${metrics.top5Share.toFixed(0)}%"><span>Top-3 concentration</span><strong>${metrics.top3Share.toFixed(0)}%</strong></div>
-      <div class="school-metric" title="${metrics.topTenAreas} areas rank in the top 10; sustained means active in both this and the preceding period"><span>Breadth</span><strong>${metrics.activeAreas} active · ${metrics.sustainedAreas} sustained</strong></div>
-      <div class="school-metric" title="Raw count divided by fractional credit. This is a team-size proxy, not a cross-institution collaboration count."><span>Team-size proxy</span><strong>${metrics.impliedTeamSize.toFixed(1)}×</strong></div>
-      <div class="school-metric" title="Profile-field coverage: ${metrics.profileCoverage.toFixed(0)}%"><span>Data confidence</span><strong class="confidence-${confidenceClass}">${metrics.confidence}</strong></div>
+      <div class="school-metric">${metricLabel('Rank movement', 'Change in rank versus the immediately preceding period of the same length. An upward arrow means the university improved.')}<strong>${rankMovement}</strong></div>
+      <div class="school-metric">${metricLabel('Momentum', 'Percentage change in fractional publication credit versus the preceding period of the same length.')}<strong>${growth}</strong></div>
+      <div class="school-metric">${metricLabel('Median / faculty', 'Median fractional publication credit among the university’s active faculty in the selected period.')}<strong>${metrics.medianPerFaculty.toFixed(1)}</strong></div>
+      <div class="school-metric">${metricLabel('Top-3 concentration', `Share of the university’s fractional credit produced by its three highest-output faculty. Top one: ${metrics.top1Share.toFixed(0)}%; top five: ${metrics.top5Share.toFixed(0)}%.`)}<strong>${metrics.top3Share.toFixed(0)}%</strong></div>
+      <div class="school-metric">${metricLabel('Breadth', `Active is the number of areas with output. Sustained means active in both this and the preceding period. ${metrics.topTenAreas} areas currently rank in the top 10.`)}<strong>${metrics.activeAreas} active · ${metrics.sustainedAreas} sustained</strong></div>
+      <div class="school-metric">${metricLabel('Team-size proxy', 'Raw publication count divided by fractional credit. This estimates coauthor intensity; it is not a cross-university collaboration count.')}<strong>${metrics.impliedTeamSize.toFixed(1)}×</strong></div>
+      <div class="school-metric">${metricLabel('Data confidence', `Completeness of author homepage and Google Scholar profile fields. Current profile-field coverage: ${metrics.profileCoverage.toFixed(0)}%.`)}<strong class="confidence-${confidenceClass}">${metrics.confidence}</strong></div>
     </div>
   `;
 }

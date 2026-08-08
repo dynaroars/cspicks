@@ -51,6 +51,43 @@ export function cleanName(name) {
   return name.replace(/\s+\d+$/, '');
 }
 
+const institutionShortNames = {
+  'Carnegie Mellon University': 'CMU',
+  'George Mason University': 'GMU',
+  'Massachusetts Institute of Technology': 'MIT',
+  'Georgia Institute of Technology': 'Georgia Tech',
+  'California Inst. of Technology': 'Caltech',
+  'University of Illinois at Urbana-Champaign': 'UIUC',
+  'Univ. of Illinois at Urbana-Champaign': 'UIUC',
+  'University of Maryland, College Park': 'UMD',
+  'Univ. of Maryland - College Park': 'UMD',
+  'University of Texas at Austin': 'UT Austin',
+  'University of Wisconsin - Madison': 'UW–Madison',
+  'University of Michigan': 'UMich',
+  'University of Pennsylvania': 'Penn',
+  'Pennsylvania State University': 'Penn State',
+  'University of Southern California': 'USC',
+  'University of Washington': 'UW',
+  'Virginia Polytechnic Institute and State University': 'Virginia Tech',
+  'New York University': 'NYU',
+  'University of North Carolina at Chapel Hill': 'UNC',
+  'University of Massachusetts Amherst': 'UMass Amherst',
+  'University of California, Berkeley': 'UC Berkeley',
+  'University of California - Berkeley': 'UC Berkeley',
+  'University of California, Los Angeles': 'UCLA',
+  'University of California - Los Angeles': 'UCLA',
+  'University of California, San Diego': 'UCSD',
+  'University of California - San Diego': 'UCSD',
+  'University of California, Santa Barbara': 'UCSB',
+  'University of California - Santa Barbara': 'UCSB',
+  'University of California, Irvine': 'UC Irvine',
+  'University of California - Irvine': 'UC Irvine'
+};
+
+export function getInstitutionShortName(name) {
+  return institutionShortNames[name] || name;
+}
+
 export function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')

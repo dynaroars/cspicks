@@ -1,7 +1,7 @@
 import Chart from 'chart.js/auto';
-import { loadData, loadAffiliationData, filterByYears, getPublicationSchools, parentMap } from './data.js';
+import { loadData, loadAffiliationData, filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from './data.js';
 import { areaLabels, escapeHtml, updateChartDefaults } from './shared.js';
-import { buildPriorPeriodData, calculateParityReport, calculateSchoolMetrics } from './metrics.js';
+import { buildPriorPeriodData, calculateParityReport, calculatePublishingEffort, calculateSchoolMetrics } from './metrics.js';
 import bundledRules from './csrankings-rules.generated.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
 
@@ -12,7 +12,6 @@ function refreshActiveTabChart() {
     else if (currentTab === 'areas') renderAreaTrends();
     else if (currentTab === 'faculty') renderFacultyTrends();
     else if (currentTab === 'effort') renderSubfieldEffort();
-    else if (currentTab === 'ai-trends') renderAITrends();
     else if (currentTab === 'conf-trends') renderConferenceTrends();
     else if (currentTab === 'collaboration') renderCollaborationStats();
     else if (currentTab === 'data-health') renderDataHealth();
@@ -35,23 +34,24 @@ let schoolAliases = null;
 let chartInstance = null;
 let currentTab = 'schools';
 let historicalMode = false;
-let focusSchoolOnly = false;
+let selectedTarget = { type: 'school', name: 'George Mason University' };
 let activeVenueRules = bundledRules;
 let venueRulesCheckedAt = null;
+let conferenceFilterContext = null;
 
 // DOM Elements Cache
-let schoolSelectEl = null;
+let targetSearchEl = null;
 let startYearSelectEl = null;
 let endYearSelectEl = null;
+let confSetSelectEl = null;
 let historicalToggleEl = null;
-let focusToggleEl = null;
 
 function cacheDOMElements() {
-    schoolSelectEl = document.getElementById('analysis-school-select');
+    targetSearchEl = document.getElementById('analysis-target-search');
     startYearSelectEl = document.getElementById('analysis-start-year');
     endYearSelectEl = document.getElementById('analysis-end-year');
+    confSetSelectEl = document.getElementById('analysis-conf-set');
     historicalToggleEl = document.getElementById('analysis-historical-mode');
-    focusToggleEl = document.getElementById('analysis-focus-mode');
 }
 
 async function init() {
@@ -61,11 +61,12 @@ async function init() {
         venueRulesCheckedAt = new Date();
 
         cacheDOMElements();
-        populateSchoolSelect();
         setupYearSelectors();
+        renderConferenceFilters();
+        setupConferenceSet();
         setupHistoricalMode();
-        setupFocusMode();
         setupTabs();
+        setupTargetSearch();
         setupConferenceFilterButtons();
         renderSchoolTrends();
     } catch (err) {
@@ -80,18 +81,77 @@ async function ensureHistoricalData() {
     schoolAliases = data.aliasMap;
 }
 
-function populateSchoolSelect() {
-    if (!schoolSelectEl) return;
-    const allData = filterByYears(rawData, 2020, 2025, 'us');
-    const schools = Object.keys(allData.schools).sort();
+function setupTargetSearch() {
+    if (!targetSearchEl) return;
+    const options = document.getElementById('analysis-target-options');
+    const schools = Object.values(rawData.schools)
+        .filter(school => school.country === 'us')
+        .map(school => school.name)
+        .sort();
+    const researchers = Object.keys(rawData.professors).sort();
+    const targetsByName = new Map();
 
-    schoolSelectEl.innerHTML = schools.map(s =>
-        `<option value="${escapeHtml(s)}" ${s === 'George Mason University' ? 'selected' : ''}>${escapeHtml(s)}</option>`
-    ).join('');
-
-    schoolSelectEl.addEventListener('change', () => {
-        refreshActiveTabChart();
+    schools.forEach(name => targetsByName.set(name.toLowerCase(), { type: 'school', name }));
+    researchers.forEach(name => {
+        const key = name.toLowerCase();
+        if (!targetsByName.has(key)) targetsByName.set(key, { type: 'researcher', name });
     });
+
+    if (options) {
+        options.innerHTML = [
+            ...schools.map(name => `<option value="${escapeHtml(name)}" label="University"></option>`),
+            ...researchers.map(name => `<option value="${escapeHtml(name)}" label="Researcher"></option>`)
+        ].join('');
+    }
+
+    const requestedTarget = new URLSearchParams(window.location.search).get('target');
+    const linkedTarget = requestedTarget && targetsByName.get(requestedTarget.toLowerCase());
+    if (linkedTarget) {
+        selectedTarget = linkedTarget;
+        targetSearchEl.value = linkedTarget.name;
+    }
+
+    const selectTarget = () => {
+        const query = targetSearchEl.value.trim().toLowerCase();
+        let target = targetsByName.get(query);
+        if (!target) {
+            const matches = [...targetsByName.entries()].filter(([name]) => name.includes(query));
+            if (matches.length === 1) {
+                target = matches[0][1];
+                targetSearchEl.value = target.name;
+            }
+        }
+        if (!target || (target.type === selectedTarget.type && target.name === selectedTarget.name)) return;
+        selectedTarget = target;
+        updateTargetMode();
+        refreshActiveTabChart();
+    };
+    targetSearchEl.addEventListener('input', selectTarget);
+    targetSearchEl.addEventListener('change', selectTarget);
+    updateTargetMode();
+}
+
+function updateTargetMode() {
+    const researcherMode = selectedTarget.type === 'researcher';
+    document.querySelectorAll('[data-school-only]').forEach(tab => {
+        tab.style.display = researcherMode ? 'none' : 'inline-flex';
+    });
+    const historyControls = document.querySelector('.analysis-checkboxes');
+    if (historyControls) historyControls.style.display = researcherMode ? 'none' : 'flex';
+
+    const activeTab = document.querySelector(`.nav-tab[data-tab="${currentTab}"]`);
+    if (researcherMode && activeTab?.hasAttribute('data-school-only')) {
+        document.querySelector('.nav-tab[data-tab="schools"]')?.click();
+    }
+}
+
+function getTargetName() {
+    return selectedTarget.name;
+}
+
+function isPublicationForTarget(prof, pub) {
+    if (selectedTarget.type === 'researcher') return prof.name === selectedTarget.name;
+    return isPubAtSchool(prof, pub, selectedTarget.name);
 }
 
 function setupYearSelectors() {
@@ -107,6 +167,17 @@ function setupYearSelectors() {
     };
     startYearSelectEl.addEventListener('change', refresh);
     endYearSelectEl.addEventListener('change', refresh);
+}
+
+function getConferenceSet() {
+    return confSetSelectEl?.value || 'csrankings-default';
+}
+
+function setupConferenceSet() {
+    if (!confSetSelectEl) return;
+    confSetSelectEl.addEventListener('change', () => {
+        refreshActiveTabChart();
+    });
 }
 
 function setupHistoricalMode() {
@@ -125,15 +196,6 @@ function setupHistoricalMode() {
             } finally {
                 historicalToggleEl.disabled = false;
             }
-        });
-    }
-}
-
-function setupFocusMode() {
-    if (focusToggleEl) {
-        focusToggleEl.addEventListener('change', () => {
-            focusSchoolOnly = focusToggleEl.checked;
-            refreshActiveTabChart();
         });
     }
 }
@@ -162,9 +224,6 @@ function setupTabs() {
             } else if (tabName === 'effort') {
                 document.getElementById('effort-view').style.display = 'block';
                 renderSubfieldEffort();
-            } else if (tabName === 'ai-trends') {
-                document.getElementById('ai-trends-view').style.display = 'block';
-                renderAITrends();
             } else if (tabName === 'conf-trends') {
                 document.getElementById('conf-trends-view').style.display = 'block';
                 renderConferenceTrends();
@@ -184,16 +243,17 @@ function getAnalysisData() {
     const start = parseInt(startYearSelectEl?.value) || end - 10;
     const history = historicalMode ? affiliationHistory : null;
     const aliases = historicalMode ? schoolAliases : null;
-    const current = filterByYears(rawData, start, end, 'us', history, aliases, 'csrankings-default');
-    const prior = buildPriorPeriodData(rawData, start, end, 'us', history, aliases, 'csrankings-default');
-    return { current, prior, start, end };
+    const confSet = getConferenceSet();
+    const current = filterByYears(rawData, start, end, 'us', history, aliases, confSet);
+    const prior = buildPriorPeriodData(rawData, start, end, 'us', history, aliases, confSet);
+    return { current, prior, start, end, confSet };
 }
 
 function renderCollaborationStats() {
     const container = document.getElementById('collaboration-stats');
     if (!container || !rawData?.professors) return;
     const { current, prior } = getAnalysisData();
-    const schoolName = schoolSelectEl?.value;
+    const schoolName = getTargetName();
     const metrics = calculateSchoolMetrics(current, prior, schoolName);
     if (!metrics) {
         container.innerHTML = '<p>No collaboration statistics are available for this selection.</p>';
@@ -223,21 +283,20 @@ function renderCollaborationStats() {
 function renderDataHealth() {
     const container = document.getElementById('data-health-stats');
     if (!container || !rawData?.professors) return;
-    const { current, start, end } = getAnalysisData();
-    const report = calculateParityReport(rawData, current, 'csrankings-default');
+    const { current, start, end, confSet } = getAnalysisData();
+    const report = calculateParityReport(rawData, current, confSet);
     const syncDate = venueRulesCheckedAt || new Date(activeVenueRules.syncedAt);
     const syncText = Number.isNaN(syncDate.getTime()) ? 'Unknown' : syncDate.toLocaleString();
     const parityOk = report.totalMismatches === 0 && report.rankOrderIssues === 0 && report.officialVenueMode;
 
     container.innerHTML = `
         <h2>CSRankings compatibility · ${start}–${end}</h2>
-        <p class="summary-note">This audit checks the canonical CSRankings inputs, default venue mode, fractional-credit totals, and ranking invariants used by CSPicks.</p>
+        <p class="summary-note">This audit checks the canonical CSRankings inputs, selected venue mode, source coverage, and ranking invariants used by CSPicks.</p>
         <div class="diagnostic-grid">
             <div class="diagnostic-stat"><span>Parity checks</span><strong class="${parityOk ? 'confidence-high' : 'confidence-review'}">${parityOk ? 'Pass' : 'Review'}</strong><small>${report.totalMismatches + report.rankOrderIssues} inconsistencies</small></div>
             <div class="diagnostic-stat"><span>Ranked schools</span><strong>${report.rankedSchools}</strong><small>from ${report.sourceFaculty} source faculty</small></div>
             <div class="diagnostic-stat"><span>Institution metadata</span><strong>${report.institutionCoverage.toFixed(0)}%</strong><small>country or region present</small></div>
             <div class="diagnostic-stat"><span>Author profiles</span><strong>${report.profileCoverage.toFixed(0)}%</strong><small>homepage or Scholar ID present</small></div>
-            <div class="diagnostic-stat"><span>Fractional credit</span><strong class="confidence-high">Always on</strong><small>no raw-credit ranking path</small></div>
             <div class="diagnostic-stat"><span>Venue rules checked</span><strong>${escapeHtml(syncText)}</strong><small>upstream CSRankings parser · ${escapeHtml(activeVenueRules.sourceVersion || 'bundled fallback')}</small></div>
         </div>
         <div class="data-caveat">A passing audit means CSPicks is internally compatible with the selected canonical inputs. The official site can still differ temporarily when its deployed data or defaults update before this page reloads.</div>
@@ -258,10 +317,57 @@ async function renderSchoolTrends() {
             chartInstance = null;
         }
 
-        const targetSchool = schoolSelectEl?.value || 'George Mason University';
+        const targetName = getTargetName();
         const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
         const startYear = parseInt(startYearSelectEl?.value) || endYear - 10;
         if (startYear > endYear) return;
+
+        if (selectedTarget.type === 'researcher') {
+            const professor = rawData.professors[targetName];
+            const confSet = getConferenceSet();
+            const labels = [];
+            const dataPoints = [];
+            for (let year = startYear; year <= endYear; year++) {
+                labels.push(year);
+                dataPoints.push((professor?.pubs || [])
+                    .filter(pub => pub.year === year && publicationMatchesConferenceSet(pub, confSet))
+                    .reduce((sum, pub) => sum + pub.adjustedcount, 0));
+            }
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: `${targetName} (Fractional Publication Credit)`,
+                        data: dataPoints,
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.2,
+                        fill: true,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    devicePixelRatio: 2,
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            title: { display: true, text: 'Fractional Publication Credit' },
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: { display: true, text: `Publication Trends for ${targetName}` }
+                    }
+                }
+            });
+            return;
+        }
+
+        const targetSchool = targetName;
 
         const labels = [];
         const dataPoints = [];
@@ -292,7 +398,7 @@ async function renderSchoolTrends() {
             const wStart = y - (windowSize - 1);
             const wEnd = y;
 
-            const result = filterByYears(preFilteredData, wStart, wEnd, region, historicalMode ? affiliationHistory : null, historicalMode ? schoolAliases : null);
+            const result = filterByYears(preFilteredData, wStart, wEnd, region, historicalMode ? affiliationHistory : null, historicalMode ? schoolAliases : null, getConferenceSet());
             const school = result.schools[targetSchool];
 
             labels.push(y);
@@ -362,11 +468,11 @@ function renderAreaTrends() {
     }
 
     const years = [];
-    const currentYear = new Date().getFullYear();
-    const startYear = 2010;
+    const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
+    const startYear = parseInt(startYearSelectEl?.value) || endYear - 10;
 
     const stats = {};
-    for (let y = startYear; y <= currentYear; y++) {
+    for (let y = startYear; y <= endYear; y++) {
         years.push(y);
         stats[y] = {};
     }
@@ -376,13 +482,15 @@ function renderAreaTrends() {
         return;
     }
 
-    const targetSchool = schoolSelectEl?.value || 'George Mason University';
+    const targetName = getTargetName();
+    const confSet = getConferenceSet();
+    const confMap = getConferenceAreaMap(confSet);
 
     Object.values(rawData.professors).forEach(prof => {
         prof.pubs.forEach(pub => {
-            if (pub.year >= startYear && pub.year <= currentYear) {
-                if (isPubAtSchool(prof, pub, targetSchool)) {
-                    const area = parentMap[pub.area] || pub.area;
+            if (pub.year >= startYear && pub.year <= endYear && publicationMatchesConferenceSet(pub, confSet)) {
+                if (isPublicationForTarget(prof, pub)) {
+                    const area = confMap[pub.area] || pub.area;
                     if (!stats[pub.year][area]) stats[pub.year][area] = 0;
                     stats[pub.year][area] += pub.adjustedcount;
                 }
@@ -450,7 +558,7 @@ function renderAreaTrends() {
                 },
                 title: {
                     display: true,
-                    text: `Top Research Areas Growth at ${targetSchool}`
+                    text: `Top Research Areas Growth for ${targetName}`
                 }
             }
         }
@@ -462,7 +570,6 @@ function renderAreaTrends() {
             datasets.map((ds, i) => `
                 <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; cursor: pointer;">
                     <input type="checkbox" checked data-index="${i}" style="accent-color: ${ds.borderColor};">
-                    <span style="width: 12px; height: 12px; background: ${ds.borderColor}; border-radius: 2px;"></span>
                     <span>${ds.label}</span>
                 </label>
             `).join('');
@@ -492,16 +599,18 @@ function renderFacultyTrends() {
     }
 
     const years = [];
-    const currentYear = new Date().getFullYear();
-    const startYear = 2010;
+    const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
+    const startYear = parseInt(startYearSelectEl?.value) || endYear - 10;
     const windowSize = 3; // 3-year window for diversity check
 
     const diversityRates = [];
     const facultyCounts = [];
     const multiAreaCounts = [];
-    const targetSchool = schoolSelectEl?.value || 'George Mason University';
+    const targetSchool = getTargetName();
+    const confSet = getConferenceSet();
+    const confMap = getConferenceAreaMap(confSet);
 
-    for (let y = startYear; y <= currentYear; y++) {
+    for (let y = startYear; y <= endYear; y++) {
         years.push(y);
 
         const wStart = y - windowSize + 1;
@@ -512,10 +621,10 @@ function renderFacultyTrends() {
 
         Object.values(rawData.professors).forEach(prof => {
             prof.pubs.forEach(pub => {
-                if (pub.year >= wStart && pub.year <= wEnd) {
+                if (pub.year >= wStart && pub.year <= wEnd && publicationMatchesConferenceSet(pub, confSet)) {
                     if (isPubAtSchool(prof, pub, targetSchool)) {
                         if (!authorAreas[prof.name]) authorAreas[prof.name] = new Set();
-                        const area = parentMap[pub.area] || pub.area;
+                        const area = confMap[pub.area] || pub.area;
                         authorAreas[prof.name].add(area);
                     }
                 }
@@ -616,11 +725,10 @@ function renderFacultyTrends() {
 function setupConferenceFilterButtons() {
     const selectAllBtn = document.getElementById('conf-select-all');
     const clearAllBtn = document.getElementById('conf-clear-all');
-    const selectMajorBtn = document.getElementById('conf-select-major');
 
     if (selectAllBtn) {
         selectAllBtn.addEventListener('click', () => {
-            document.querySelectorAll('#conf-trends-view input[type="checkbox"]').forEach(cb => {
+            document.querySelectorAll('#conf-trends-view input[type="checkbox"]:not(:disabled)').forEach(cb => {
                 cb.checked = true;
             });
             renderConferenceTrends();
@@ -636,27 +744,89 @@ function setupConferenceFilterButtons() {
         });
     }
 
-    if (selectMajorBtn) {
-        const majorConfs = [
-            'cvpr', 'nips', 'iclr', 'icml', 'acl', 'pldi', 'popl',
-            'sigcomm', 'nsdi', 'osdi', 'sosp', 'focs', 'stoc',
-            'siggraph', 'chiconf', 'icse', 'fse', 'sigmod', 'vldb',
-            'ccs', 'oakland', 'usenixsec'
-        ];
-        selectMajorBtn.addEventListener('click', () => {
-            document.querySelectorAll('#conf-trends-view input[type="checkbox"]').forEach(cb => {
-                cb.checked = majorConfs.includes(cb.value);
-            });
+    // The checkbox list is rebuilt when the target, years, or conference set
+    // changes, so listen on its stable parent rather than on individual inputs.
+    document.getElementById('conf-checkbox-groups')?.addEventListener('change', event => {
+        if (event.target.matches('input[type="checkbox"]')) {
             renderConferenceTrends();
-        });
-    }
+        }
+    });
+}
 
-    // Add change listeners to each checkbox to update chart on the fly
-    document.querySelectorAll('#conf-trends-view input[type="checkbox"]').forEach(cb => {
-        cb.addEventListener('change', () => {
-            renderConferenceTrends();
+function renderConferenceFilters() {
+    const container = document.getElementById('conf-checkbox-groups');
+    if (!container) return;
+
+    const startYear = parseInt(startYearSelectEl?.value) || 2010;
+    const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
+    const confSet = getConferenceSet();
+    const context = [
+        selectedTarget.type,
+        selectedTarget.name,
+        startYear,
+        endYear,
+        confSet,
+        historicalMode
+    ].join('|');
+
+    // Preserve checkbox choices while merely redrawing the chart. A changed
+    // analysis context gets a fresh list with all actually published venues
+    // selected by default.
+    if (conferenceFilterContext === context) return;
+    conferenceFilterContext = context;
+
+    const publishedConferences = new Set();
+    Object.values(rawData.professors).forEach(prof => {
+        prof.pubs.forEach(pub => {
+            if (pub.year < startYear || pub.year > endYear) return;
+            if (!publicationMatchesConferenceSet(pub, confSet)) return;
+            if (isPublicationForTarget(prof, pub)) publishedConferences.add(pub.area);
         });
     });
+
+    const groups = [
+        { title: 'AI, Data & Language', areas: ['ai', 'vision', 'mlmining', 'nlp', 'inforet'] },
+        { title: 'Computer Systems', areas: ['arch', 'ops', 'comm', 'mobile', 'metrics', 'hpc', 'bed', 'da'] },
+        { title: 'Theory, Security & DB', areas: ['act', 'crypt', 'log', 'sec', 'mod'] },
+        { title: 'Programming & SE', areas: ['plan', 'soft'] },
+        { title: 'Interdisciplinary', areas: ['graph', 'chi', 'robotics', 'visualization', 'bio', 'ecom', 'csed'] }
+    ];
+    const displayNames = {
+        nips: 'NeurIPS',
+        oakland: 'IEEE S&P',
+        usenixsec: 'USENIX Security',
+        usenixatc: 'USENIX ATC',
+        chiconf: 'CHI',
+        'siggraph-asia': 'SIGGRAPH Asia'
+    };
+    const venues = Object.entries(parentMap)
+        .filter(([venue]) => publishedConferences.has(venue));
+
+    if (venues.length === 0) {
+        container.innerHTML = '<p class="data-caveat">No publications at conferences in this set and time range.</p>';
+        return;
+    }
+
+    container.innerHTML = groups.map(group => ({
+        ...group,
+        venues: venues
+            .filter(([, area]) => group.areas.includes(area))
+            .sort(([venueA], [venueB]) => venueA.localeCompare(venueB))
+    })).filter(group => group.venues.length > 0).map(group => {
+        return `
+            <div class="conf-group">
+                <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.25rem;">${escapeHtml(group.title)}</h4>
+                <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem;">
+                    ${group.venues.map(([venue, area]) => `
+                        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                            <input type="checkbox" value="${escapeHtml(venue)}" checked>
+                            ${escapeHtml(displayNames[venue] || venue.toUpperCase())} (${escapeHtml(areaLabels[area] || area)})
+                        </label>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }).join('');
 }
 function renderSubfieldEffort() {
     const canvas = document.getElementById('effortChart');
@@ -671,53 +841,18 @@ function renderSubfieldEffort() {
 
     const startYear = parseInt(startYearSelectEl?.value) || 2016;
     const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
-    const numYears = endYear - startYear + 1;
-    const targetSchool = schoolSelectEl?.value || 'George Mason University';
-
-    // calculate effort based on all professors in the dataset during the active period
-    const subfieldRates = {}; // subfield -> array of rates
-
-    Object.values(rawData.professors).forEach(prof => {
-        const profSubfieldCounts = {}; // subfield -> sum of adjusted count
-        prof.pubs.forEach(pub => {
-            if (pub.year >= startYear && pub.year <= endYear) {
-                if (focusSchoolOnly && !isPubAtSchool(prof, pub, targetSchool)) {
-                    return;
-                }
-                const subfield = parentMap[pub.area] || pub.area;
-                profSubfieldCounts[subfield] = (profSubfieldCounts[subfield] || 0) + pub.adjustedcount;
-            }
-        });
-
-        // For each subfield where the professor published, record their rate
-        Object.entries(profSubfieldCounts).forEach(([subfield, adjSum]) => {
-            if (adjSum > 0) {
-                if (!subfieldRates[subfield]) subfieldRates[subfield] = [];
-                subfieldRates[subfield].push(adjSum / numYears);
-            }
-        });
+    const targetSchool = getTargetName();
+    const confSet = getConferenceSet();
+    const effort = calculatePublishingEffort(rawData.professors, {
+        startYear,
+        endYear,
+        parentAreas: getConferenceAreaMap(confSet),
+        includesPublication: (prof, pub) => publicationMatchesConferenceSet(pub, confSet) && isPubAtSchool(prof, pub, targetSchool)
     });
-
-    const subfields = [...new Set(Object.values(parentMap))];
-    const chartData = subfields.map(sf => {
-        const rates = subfieldRates[sf] || [];
-        // median
-        let median = 0;
-        if (rates.length > 0) {
-            rates.sort((a, b) => a - b);
-            const mid = Math.floor(rates.length / 2);
-            median = rates.length % 2 !== 0 ? rates[mid] : (rates[mid - 1] + rates[mid]) / 2;
-        }
-        return {
-            subfield: sf,
-            label: areaLabels[sf] || sf,
-            median: median,
-            count: rates.length // number of active researchers
-        };
-    });
-
-    // Sort by median descending
-    chartData.sort((a, b) => b.median - a.median);
+    const chartData = effort.subfields.map(item => ({
+        ...item,
+        label: areaLabels[item.subfield] || item.subfield
+    }));
 
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const barColor = isDark ? '#36c5f0' : '#475569';
@@ -727,8 +862,8 @@ function renderSubfieldEffort() {
         data: {
             labels: chartData.map(d => d.label),
             datasets: [{
-                label: 'Median Papers/Faculty/Year',
-                data: chartData.map(d => d.median),
+                label: 'Fractional Papers/Active Faculty/Year',
+                data: chartData.map(d => d.effort),
                 backgroundColor: barColor,
                 borderColor: barColor,
                 borderWidth: 1
@@ -741,7 +876,7 @@ function renderSubfieldEffort() {
             maintainAspectRatio: false,
             scales: {
                 x: {
-                    title: { display: true, text: 'Median Adjusted Papers / Year' },
+                    title: { display: true, text: 'Fractional Papers / Active Faculty / Year' },
                     beginAtZero: true
                 },
                 y: {
@@ -753,104 +888,20 @@ function renderSubfieldEffort() {
             plugins: {
                 title: {
                     display: true,
-                    text: focusSchoolOnly
-                        ? `Subfield Effort Index at ${targetSchool} (${startYear}-${endYear}): Median Pubs/Faculty/Year`
-                        : `Subfield Effort Index (${startYear}-${endYear}): Median Pubs/Faculty/Year per Subfield`
+                    text: `Publishing Effort at ${targetSchool} (${startYear}-${endYear})`
                 },
                 tooltip: {
                     callbacks: {
                         afterLabel: function (context) {
                             const dataIndex = context.dataIndex;
                             const d = chartData[dataIndex];
-                            return `Active Researchers: ${d.count}`;
+                            return [
+                                `Fractional papers: ${d.total.toFixed(2)}`,
+                                `Researchers in area: ${d.activeResearchers}`,
+                                `Active school faculty: ${effort.activeFaculty}`
+                            ];
                         }
                     }
-                }
-            }
-        }
-    });
-}
-
-function renderAITrends() {
-    const canvas = document.getElementById('aiTrendsChart');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    if (chartInstance) {
-        chartInstance.destroy();
-        chartInstance = null;
-    }
-
-    const startYear = parseInt(startYearSelectEl?.value) || 2005;
-    const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
-    const targetSchool = schoolSelectEl?.value || 'George Mason University';
-
-    const years = [];
-    const stats = {}; // year -> { subfield -> sum }
-    for (let y = startYear; y <= endYear; y++) {
-        years.push(y);
-        stats[y] = { 'ai': 0, 'vision': 0, 'mlmining': 0, 'nlp': 0, 'robotics': 0, 'visualization': 0 };
-    }
-
-    // iterate over all professors and sum their publications in these subfields
-    Object.values(rawData.professors).forEach(prof => {
-        prof.pubs.forEach(pub => {
-            if (pub.year >= startYear && pub.year <= endYear) {
-                if (focusSchoolOnly && !isPubAtSchool(prof, pub, targetSchool)) {
-                    return;
-                }
-                const subfield = parentMap[pub.area] || pub.area;
-                if (stats[pub.year] && Object.prototype.hasOwnProperty.call(stats[pub.year], subfield)) {
-                    stats[pub.year][subfield] += pub.adjustedcount;
-                }
-            }
-        });
-    });
-
-    const aiSubfields = ['ai', 'vision', 'mlmining', 'nlp', 'robotics', 'visualization'];
-    const colors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4'];
-
-    const datasets = aiSubfields.map((sf, index) => {
-        const data = years.map(y => stats[y][sf]);
-        return {
-            label: areaLabels[sf] || sf,
-            data: data,
-            borderColor: colors[index % colors.length],
-            backgroundColor: colors[index % colors.length],
-            tension: 0.3,
-            fill: false,
-            pointRadius: 3,
-            borderWidth: 2
-        };
-    });
-
-    chartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: years,
-            datasets: datasets
-        },
-        options: {
-            devicePixelRatio: 2,
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: {
-                mode: 'index',
-                intersect: false
-            },
-            scales: {
-                y: {
-                    title: { display: true, text: 'Total Adjusted Publication Volume' },
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    text: focusSchoolOnly
-                        ? `AI Subfields Growth at ${targetSchool} (${startYear}-${endYear})`
-                        : `Global Growth of AI Subfields (${startYear}-${endYear})`
                 }
             }
         }
@@ -870,10 +921,13 @@ function renderConferenceTrends() {
 
     const startYear = parseInt(startYearSelectEl?.value) || 2010;
     const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
-    const targetSchool = schoolSelectEl?.value || 'George Mason University';
+    const targetName = getTargetName();
+    const confSet = getConferenceSet();
+
+    renderConferenceFilters();
 
     // get list of selected conferences
-    const checkedCheckboxes = document.querySelectorAll('#conf-trends-view input[type="checkbox"]:checked');
+    const checkedCheckboxes = document.querySelectorAll('#conf-trends-view input[type="checkbox"]:checked:not(:disabled)');
     const selectedConfs = Array.from(checkedCheckboxes).map(cb => cb.value);
 
     const years = [];
@@ -889,13 +943,13 @@ function renderConferenceTrends() {
     // Aggregate conference publication volume
     Object.values(rawData.professors).forEach(prof => {
         prof.pubs.forEach(pub => {
-            if (pub.year >= startYear && pub.year <= endYear) {
-                if (focusSchoolOnly && !isPubAtSchool(prof, pub, targetSchool)) {
+            if (pub.year >= startYear && pub.year <= endYear && publicationMatchesConferenceSet(pub, confSet)) {
+                if (!isPublicationForTarget(prof, pub)) {
                     return;
                 }
                 const conf = pub.area;
                 if (stats[pub.year] && Object.prototype.hasOwnProperty.call(stats[pub.year], conf)) {
-                    stats[pub.year][conf] += pub.count;
+                    stats[pub.year][conf] += pub.adjustedcount;
                 }
             }
         });
@@ -937,16 +991,14 @@ function renderConferenceTrends() {
             },
             scales: {
                 y: {
-                    title: { display: true, text: 'Total Publications (Paper Count)' },
+                    title: { display: true, text: 'Fractional Publication Credit' },
                     beginAtZero: true
                 }
             },
             plugins: {
                 title: {
                     display: true,
-                    text: focusSchoolOnly
-                        ? `Conference Publication Volume Trends at ${targetSchool} (${startYear}-${endYear})`
-                        : `Conference Publication Volume Trends (${startYear}-${endYear})`
+                    text: `Conference Fractional Publication Trends for ${targetName} (${startYear}-${endYear})`
                 }
             }
         }
