@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="./src/style.css">
 </head>
 
-<body>
+<body class="tool-page discoveries-tool-page">
   <div id="app">
     <header>
       <div class="title-row">
@@ -27,15 +27,18 @@
       </div>
       <nav class="top-nav" aria-label="Primary navigation">
         <a href="index.html">Search</a>
-        <a href="analysis.html">Analysis</a>
         <a href="compare.html">Compare</a>
         <a href="discoveries.html" class="active" aria-current="page">🔭 Discoveries</a>
         <a href="simulator.html">⚠️ Simulator</a>
       </nav>
-      <p>Find surprising changes and hidden patterns across Computer Science departments.</p>
     </header>
 
-    <main class="discoveries-page">
+    <main class="discoveries-page tool-content">
+      <section class="tool-intro">
+        <p class="eyebrow">Discoveries</p>
+        <h2>Find changes hidden in the rankings</h2>
+        <p>Explore unusual growth, decline, concentration, and specialization across computer science academia.</p>
+      </section>
       <aside id="discoveries-history-warning" class="history-warning discoveries-disclaimer" role="status" aria-live="polite" aria-label="Discoveries data interpretation">
         <strong>Current-roster retrospective.</strong>
         Past publications are assigned to each researcher’s current CSRankings university. Changes describe the publication history of today’s roster, not necessarily the university’s actual faculty at that time.
@@ -87,7 +90,8 @@
   </div>
 
   <footer>
-    <a href="faq.html" style="color: inherit; text-decoration: underline;">FAQ, Methods &amp; Data</a>
+    <a href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">FAQ, Methods &amp; Data</a> ·
+    <a href="index.html?dataHealth=true#site-data-health" style="color: inherit; text-decoration: underline;">Data Health</a>
   </footer>
   <script type="module" src="./src/discoveries.js"></script>
 </body>

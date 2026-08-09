@@ -32,17 +32,17 @@ node scripts/build-school-aliases.js                         # rebuilds public/s
 ## Architecture
 
 **Multi-page app, one entry module per HTML page** (wired in `vite.config.js` as separate rollup inputs):
-- `index.html` + `src/main.js` (~1850 lines) — main search page: professor/school/area/conference search,
-  historical mode, school trend charts, and DBLP live author search.
-- `analysis.html` + `src/analysis.js` — school-level analysis dashboard (rank trends, area growth, faculty
-  diversity, subfield effort, AI growth, conference trends). Tab-based, each tab lazily renders its own chart.
+- `index.html` + `src/main.js` + `src/analysis.js` — main search page: professor/school/area/conference search,
+  historical mode, DBLP live author search, and integrated target analysis (trends, area growth, faculty
+  diversity, publishing effort, conference trends, and collaboration). Analysis tabs render charts lazily.
+- `analysis.html` — legacy URL redirect that forwards bookmarked targets to integrated Search results.
 - `compare.html` + `src/compare.js` — side-by-side two-school comparison across research areas.
 - `simulator.html` + `src/simulator.js` — standalone ranking-impact workflow for adding, transferring, or
   removing faculty. Pure name-matching and rank-impact calculations live in `src/simulation.js`.
-- `faq.html` — static methodology page, no dedicated JS module.
+- `FAQ.md` — GitHub-hosted FAQ, methodology, limitations, and data documentation.
 
-Each page module independently calls `loadData()` and `filterByYears()` on load — there's no shared app state
-or router between pages; navigation is plain `<a href>` between static HTML files.
+Pages have independent filtered state and use plain `<a href>` navigation. `loadData()` memoizes its promise,
+so modules loaded together on Search share one download and parse of the canonical CSRankings inputs.
 
 **Data pipeline (`src/data.js` is the core of the app):**
 1. `loadData()` fetches three CSVs directly from `raw.githubusercontent.com/emeryberger/CSrankings` at

@@ -8,7 +8,7 @@ let rawData = null;
 let appData = { professors: {}, schools: {} };
 let startYear = DEFAULT_START_YEAR;
 let endYear = DEFAULT_END_YEAR;
-let selectedRegion = 'us';
+const selectedRegion = 'world';
 let confSet = 'csrankings-default';
 
 let simFacultyArr = [];
@@ -51,14 +51,28 @@ function addCandidate(name, dblpProfile = null) {
   }
 }
 
+function findLocalFaculty(filter) {
+  const normalized = filter.trim().toLowerCase();
+  if (!normalized) return simFacultyArr;
+
+  return Object.keys(appData.professors)
+    .filter(name => cleanName(name).toLowerCase().includes(normalized))
+    .sort((a, b) => {
+      const nameA = cleanName(a).toLowerCase();
+      const nameB = cleanName(b).toLowerCase();
+      const startsA = nameA.startsWith(normalized) ? 0 : 1;
+      const startsB = nameB.startsWith(normalized) ? 0 : 1;
+      return startsA - startsB || nameA.localeCompare(nameB);
+    })
+    .slice(0, 20);
+}
+
 function renderFacultyList(filter = facultyFilter) {
   const listEl = document.getElementById('sim-faculty-list');
   const candidatesInput = document.getElementById('sim-candidates-input');
   if (!listEl || !candidatesInput) return;
 
-  const filtered = filter
-    ? simFacultyArr.filter(f => cleanName(f).toLowerCase().includes(filter.toLowerCase()))
-    : simFacultyArr;
+  const filtered = findLocalFaculty(filter);
 
   const currentNames = candidatesInput.value.split('\n').map(n => n.trim()).filter(n => n);
 
@@ -69,18 +83,22 @@ function renderFacultyList(filter = facultyFilter) {
     const areas = prof ? Object.keys(prof.areas).length : 0;
     const papers = prof ? prof.totalPapers : 0;
     const adj = prof ? prof.totalAdjusted.toFixed(1) : '0';
+    const affiliation = prof?.affiliation || 'University unavailable';
     return `
       <label style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; cursor: pointer; border-bottom: 1px solid var(--border-color); font-size: 0.88em;"
              data-name="${escapeHtml(name)}">
         <input type="checkbox" ${checked ? 'checked' : ''} style="width: 15px; height: 15px; cursor: pointer;">
-        <span style="flex: 1; color: var(--text-primary);">${escapeHtml(name)}</span>
-        <small style="color: var(--text-secondary);">${areas} areas, ${papers} papers, ${adj} adj</small>
+        <span class="sim-faculty-identity">
+          <span>${escapeHtml(name)}</span>
+          <small>${escapeHtml(affiliation)}</small>
+        </span>
+        <small class="sim-faculty-stats">${areas} areas, ${papers} papers, ${adj} adj</small>
       </label>
     `;
   }).join('');
 
   let dblpHtml = '';
-  if (filter.trim().length >= 2) {
+  if (filter.trim().length >= 2 && filtered.length === 0) {
     const resultHtml = dblpFacultyResults.map((result, index) => {
       const selectedProfile = selectedDblpProfiles.get(result.name.toLowerCase());
       const added = selectedProfile?.pid === result.pid;
@@ -95,12 +113,12 @@ function renderFacultyList(filter = facultyFilter) {
     const status = dblpFacultyLoading
       ? '<div class="sim-search-status">Searching DBLP…</div>'
       : (resultHtml || '<div class="sim-search-status">No DBLP matches</div>');
-    dblpHtml = `<div class="sim-list-heading">DBLP authors</div>${status}${resultHtml}`;
+    dblpHtml = `<div class="sim-list-heading">DBLP results · affiliation unavailable</div>${status}${resultHtml}`;
   }
 
   const localHeading = filter
-    ? `<div class="sim-list-heading">Current faculty (${filtered.length})</div>`
-    : '';
+    ? (filtered.length ? `<div class="sim-list-heading">CSRankings faculty (${filtered.length})</div>` : '')
+    : `<div class="sim-list-heading">Faculty at the selected university (${filtered.length})</div>`;
   listEl.innerHTML = `${localHeading}${localHtml}${dblpHtml}`;
 
   listEl.querySelectorAll('label').forEach(label => {
@@ -131,12 +149,13 @@ function renderFacultyList(filter = facultyFilter) {
 function searchFaculty(filter) {
   facultyFilter = filter.trim();
   dblpFacultyResults = [];
-  dblpFacultyLoading = facultyFilter.length >= 2;
+  const localMatches = findLocalFaculty(facultyFilter);
+  dblpFacultyLoading = facultyFilter.length >= 2 && localMatches.length === 0;
   const sequence = ++dblpSearchSequence;
   clearTimeout(dblpSearchTimer);
   renderFacultyList();
 
-  if (facultyFilter.length < 2) return;
+  if (facultyFilter.length < 2 || localMatches.length > 0) return;
   dblpSearchTimer = setTimeout(async () => {
     const results = await searchAuthor(facultyFilter);
     if (sequence !== dblpSearchSequence) return;
@@ -647,7 +666,6 @@ function setupFilters() {
   }
   startSelect.value = startYear;
   endSelect.value = endYear;
-  document.getElementById('region-select').value = selectedRegion;
   document.getElementById('conf-set').value = confSet;
 
   const refresh = () => {
@@ -657,7 +675,6 @@ function setupFilters() {
       endYear = startYear;
       endSelect.value = endYear;
     }
-    selectedRegion = document.getElementById('region-select').value;
     confSet = document.getElementById('conf-set').value;
     appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
     resetSimulation();
@@ -665,7 +682,6 @@ function setupFilters() {
 
   startSelect.addEventListener('change', refresh);
   endSelect.addEventListener('change', refresh);
-  document.getElementById('region-select').addEventListener('change', refresh);
   document.getElementById('conf-set').addEventListener('change', refresh);
 }
 

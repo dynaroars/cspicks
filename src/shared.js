@@ -28,6 +28,14 @@ export const areaLabels = {
   'csed': 'CS Education'
 };
 
+export const conferenceLabels = {
+  pets: 'PETS (Privacy Enhancing Technologies Symposium)'
+};
+
+export function getConferenceLabel(key) {
+  return conferenceLabels[key] || key.toUpperCase();
+}
+
 export function getChartColors() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   return {
@@ -95,6 +103,12 @@ export function updateHistoryWarning(elementOrId, enabled) {
   if (!warning) return;
 
   warning.classList.toggle('history-enabled', enabled);
+  if (warning.classList.contains('compact-history-status')) {
+    warning.innerHTML = enabled
+      ? '⚠ Historical affiliations are estimates and may be incomplete.'
+      : 'ⓘ Current affiliations · Past work follows today’s faculty roster.';
+    return;
+  }
   warning.innerHTML = enabled
     ? '<strong>Estimated historical affiliations.</strong> Publications use OpenAlex and manual year-specific affiliations. Records may be incomplete or incorrect: uncovered years are omitted, while researchers with no history record fall back to their current university.'
     : '<strong>Current-roster view.</strong> Past publications are assigned to each researcher’s current CSRankings university. Results describe today’s roster, not necessarily the university’s actual faculty at that time.';

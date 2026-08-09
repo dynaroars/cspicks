@@ -149,7 +149,19 @@ export const nextTier = {
   'kdd': true
 };
 
-export async function loadData() {
+let dataPromise = null;
+
+export function loadData() {
+  if (!dataPromise) {
+    dataPromise = loadDataFromSources().catch(error => {
+      dataPromise = null;
+      throw error;
+    });
+  }
+  return dataPromise;
+}
+
+async function loadDataFromSources() {
   const [csrankings, authorInfo, institutions] = await Promise.all([
     fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv'),
     fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/generated-author-info.csv'),
@@ -309,21 +321,23 @@ export const coreAStarMap = {
   'ec': 'ecom'
 };
 
+// CORE A venues must map to a CSRankings research area. Using booleans here
+// caused venue identifiers such as "pets" to leak into charts as fake areas.
 export const coreAMap = {
-  'acsac': true, 'aied': true, 'aistats': true, 'alenex': true, 'asiacrypt': true, 'assets': true,
-  'bmvc': true, 'bpm': true, 'cade': true, 'caise': true, 'ccc': true, 'cgo': true, 'ches': true,
-  'cidr': true, 'cikm': true, 'conext': true, 'cp': true, 'cscw': true, 'csf': true, 'dis': true,
-  'disc': true, 'dsn': true, 'eacl': true, 'ease': true, 'ecai': true, 'ecir': true, 'ecoop': true,
-  'er': true, 'esa': true, 'esem': true, 'esop': true, 'esorics': true, 'eurosys': true, 'fast': true,
-  'fc': true, 'foga': true, 'fpga': true, 'gd': true, 'gecco': true, 'hotos': true, 'hpdc': true,
-  'iccad': true, 'icdar': true, 'icdcs': true, 'icdt': true, 'icer': true, 'icfp': true, 'icme': true,
-  'ics': true, 'icsa': true, 'icsoc': true, 'icws': true, 'icwsm': true, 'ijcar': true, 'imc': true,
-  'interspeech': true, 'ipdps': true, 'iros': true, 'islped': true, 'ismb': true, 'issre': true,
-  'issta': true, 'iswc': true, 'itc': true, 'itcs': true, 'iui': true, 'lak': true, 'miccai': true,
-  'middleware': true, 'mmsys': true, 'msr': true, 'naacl': true, 'oopsla': true, 'pets': true,
-  'ppsn': true, 're': true, 'recsys': true, 'rtas': true, 'rtss': true, 'sat': true, 'sdm': true,
-  'seams': true, 'sigcse': true, 'sigspatial': true, 'soups': true, 'stacs': true, 'tacas': true,
-  'uai': true, 'usenixatc': true, 'wacv': true, 'wsdm': true
+  'acsac': 'sec', 'aied': 'csed', 'aistats': 'mlmining', 'alenex': 'act', 'asiacrypt': 'crypt', 'assets': 'chi',
+  'bmvc': 'vision', 'bpm': 'soft', 'cade': 'log', 'caise': 'soft', 'ccc': 'act', 'cgo': 'arch', 'ches': 'crypt',
+  'cidr': 'mod', 'cikm': 'inforet', 'conext': 'comm', 'cp': 'act', 'cscw': 'chi', 'csf': 'sec', 'dis': 'chi',
+  'disc': 'act', 'dsn': 'ops', 'eacl': 'nlp', 'ease': 'soft', 'ecai': 'ai', 'ecir': 'inforet', 'ecoop': 'plan',
+  'er': 'mod', 'esa': 'act', 'esem': 'soft', 'esop': 'plan', 'esorics': 'sec', 'eurosys': 'ops', 'fast': 'ops',
+  'fc': 'crypt', 'foga': 'ai', 'fpga': 'da', 'gd': 'visualization', 'gecco': 'ai', 'hotos': 'ops', 'hpdc': 'hpc',
+  'iccad': 'da', 'icdar': 'vision', 'icdcs': 'ops', 'icdt': 'mod', 'icer': 'csed', 'icfp': 'plan', 'icme': 'graph',
+  'ics': 'hpc', 'icsa': 'soft', 'icsoc': 'soft', 'icws': 'soft', 'icwsm': 'inforet', 'ijcar': 'log', 'imc': 'metrics',
+  'interspeech': 'nlp', 'ipdps': 'hpc', 'iros': 'robotics', 'islped': 'da', 'ismb': 'bio', 'issre': 'soft',
+  'issta': 'soft', 'iswc': 'inforet', 'itc': 'da', 'itcs': 'act', 'iui': 'chi', 'lak': 'csed', 'miccai': 'vision',
+  'middleware': 'ops', 'mmsys': 'graph', 'msr': 'soft', 'naacl': 'nlp', 'oopsla': 'plan', 'pets': 'sec',
+  'ppsn': 'ai', 're': 'soft', 'recsys': 'inforet', 'rtas': 'bed', 'rtss': 'bed', 'sat': 'log', 'sdm': 'mlmining',
+  'seams': 'soft', 'sigcse': 'csed', 'sigspatial': 'mod', 'soups': 'sec', 'stacs': 'act', 'tacas': 'log',
+  'uai': 'ai', 'usenixatc': 'ops', 'wacv': 'vision', 'wsdm': 'inforet'
 };
 
 export const CONFERENCE_SET_IDS = ['csrankings-default', 'csrankings', 'core', 'core-a'];
@@ -345,7 +359,9 @@ export function getConferenceAreaMap(confSet = 'csrankings-default') {
   if (selectedSet === 'core' || selectedSet === 'core-a') {
     // CORE occasionally categorizes a venue differently from CSRankings, so
     // CORE's mapping must win when both contain the venue.
-    return { ...parentMap, ...coreAStarMap };
+    return selectedSet === 'core-a'
+      ? { ...parentMap, ...coreAStarMap, ...coreAMap }
+      : { ...parentMap, ...coreAStarMap };
   }
   return parentMap;
 }

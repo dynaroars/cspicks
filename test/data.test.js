@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { fetchCsv, filterByYears, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet } from '../src/data.js';
-import { encodeInlineValue, escapeHtml, getInstitutionShortName, safeExternalUrl } from '../src/shared.js';
+import { coreAMap, fetchCsv, filterByYears, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet } from '../src/data.js';
+import { areaLabels, encodeInlineValue, escapeHtml, getInstitutionShortName, safeExternalUrl } from '../src/shared.js';
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../src/simulation.js';
 import { hasEligiblePageRange, normalizeDblpVenue } from '../src/dblp.js';
 import { parseCsrankingsRules } from '../src/csrankings-rules.js';
@@ -122,6 +122,14 @@ test('conference-set rules consistently distinguish default, extended, and CORE 
   assert.equal(publicationMatchesConferenceSet({ area: 'ase' }, 'invalid-set'), false);
   assert.equal(getConferenceAreaMap('core').vr, 'graph');
   assert.equal(getConferenceAreaMap('csrankings-default').vr, 'visualization');
+});
+
+test('every CORE A venue maps to a real research area', () => {
+  const conferenceMap = getConferenceAreaMap('core-a');
+  Object.keys(coreAMap).forEach(venue => {
+    assert.ok(areaLabels[conferenceMap[venue]], `${venue} has no research-area mapping`);
+  });
+  assert.equal(conferenceMap.pets, 'sec');
 });
 
 test('per-area rankings assign the same rank to equal scores', () => {
