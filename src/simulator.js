@@ -1,14 +1,15 @@
 import { loadData, filterByYears, getConferenceAreaMap, publicationMatchesConferenceSet, DEFAULT_START_YEAR, DEFAULT_END_YEAR } from './data.js';
-import { areaLabels, cleanName, escapeHtml } from './shared.js';
-import { searchAuthor, fetchAuthorStats } from './dblp.js';
+import { areaLabels, cleanName, escapeHtml, getInitialRegion, rememberRegion } from './shared.js';
+import { searchAuthor, fetchAuthorStats, parseDblpProfileUrl } from './dblp.js';
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from './simulation.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
+import './styles/simulator.css';
 
 let rawData = null;
 let appData = { professors: {}, schools: {} };
 let startYear = DEFAULT_START_YEAR;
 let endYear = DEFAULT_END_YEAR;
-const selectedRegion = 'world';
+let selectedRegion = getInitialRegion();
 let confSet = 'csrankings-default';
 
 let simFacultyArr = [];
@@ -56,7 +57,8 @@ function findLocalFaculty(filter) {
   if (!normalized) return simFacultyArr;
 
   return Object.keys(appData.professors)
-    .filter(name => cleanName(name).toLowerCase().includes(normalized))
+    .filter(name => cleanName(name).toLowerCase().includes(normalized)
+      || (appData.professors[name].aliases || []).some(alias => cleanName(alias).toLowerCase().includes(normalized)))
     .sort((a, b) => {
       const nameA = cleanName(a).toLowerCase();
       const nameB = cleanName(b).toLowerCase();
@@ -77,19 +79,19 @@ function renderFacultyList(filter = facultyFilter) {
   const currentNames = candidatesInput.value.split('\n').map(n => n.trim()).filter(n => n);
 
   const localHtml = filtered.map(f => {
-    const name = cleanName(f);
-    const checked = currentNames.some(n => n.toLowerCase() === name.toLowerCase());
+    const displayName = cleanName(f);
+    const candidateName = f;
+    const checked = currentNames.some(n => n.toLowerCase() === candidateName.toLowerCase());
     const prof = appData.professors[f];
     const areas = prof ? Object.keys(prof.areas).length : 0;
     const papers = prof ? prof.totalPapers : 0;
     const adj = prof ? prof.totalAdjusted.toFixed(1) : '0';
     const affiliation = prof?.affiliation || 'University unavailable';
     return `
-      <label style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; cursor: pointer; border-bottom: 1px solid var(--border-color); font-size: 0.88em;"
-             data-name="${escapeHtml(name)}">
-        <input type="checkbox" ${checked ? 'checked' : ''} style="width: 15px; height: 15px; cursor: pointer;">
+      <label class="sim-faculty-option" data-name="${escapeHtml(candidateName)}">
+        <input type="checkbox" ${checked ? 'checked' : ''}>
         <span class="sim-faculty-identity">
-          <span>${escapeHtml(name)}</span>
+          <span>${escapeHtml(displayName)}</span>
           <small>${escapeHtml(affiliation)}</small>
         </span>
         <small class="sim-faculty-stats">${areas} areas, ${papers} papers, ${adj} adj</small>
@@ -218,7 +220,7 @@ function renderCandidateResults(candidates) {
       <div class="paper-item">
         <span class="paper-venue">${escapeHtml(p.venue)}</span>
         <span class="paper-year">${p.year}</span>:
-        ${countLabel} <small>(~${p.authors} authors, ${p.adjusted.toFixed(2)} adj)</small>
+        ${countLabel} <small>· ${p.adjusted.toFixed(2)} adjusted</small>
       </div>
     `;
     }).join('');
@@ -349,7 +351,7 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
 
       if (profData && profData.pubs && profData.pubs.length > 0) {
         // Use CSRankings data for existing professors
-        displayName = profData.name;
+        displayName = cleanName(profData.name);
 
         // Filter pubs by year range AND conference set
         const yearFiltered = profData.pubs.filter(p => p.year >= startYear && p.year <= endYear);
@@ -390,7 +392,6 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
             venue: pub.area.toUpperCase(),
             year: pub.year,
             count: pub.count,
-            authors: Math.round(1 / pub.adjustedcount),
             adjusted: pub.adjustedcount,
             area: area
           });
@@ -400,6 +401,12 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
       } else {
         // External candidate - query DBLP
 
+        const linkedProfile = parseDblpProfileUrl(name);
+        if (!linkedProfile && /^https?:\/\//i.test(name)) {
+          candidateResults.push({ name, error: 'Use a DBLP author-profile link containing /pid/, such as https://dblp.org/pid/12/3456.html' });
+          continue;
+        }
+
         let searchName = name;
         let dblpSuffix = null;
         const suffixMatch = name.match(/^(.+?)\s+(\d{4})$/);
@@ -408,7 +415,7 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
           dblpSuffix = suffixMatch[2];
         }
 
-        let best = selectedDblpProfile;
+        let best = linkedProfile || selectedDblpProfile;
         if (!best) {
           const searchResults = await searchAuthor(searchName);
           if (dblpSuffix) {
@@ -435,13 +442,14 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
           continue;
         }
 
-        displayName = best.name;
+        displayName = best.name || `DBLP profile ${best.pid}`;
 
         stats = await fetchAuthorStats(best.pid, startYear, endYear, confSet);
         if (!stats) {
           candidateResults.push({ name, error: 'We couldn\'t retrieve publication records from DBLP. Please verify the profile is accessible.' });
           continue;
         }
+        if (!best.name && stats.aliases?.length) displayName = stats.aliases[0];
       }
 
       let sourceSchool = null;
@@ -658,6 +666,7 @@ function setupSimulator() {
 }
 
 function setupFilters() {
+  const regionSelect = document.getElementById('sim-region-select');
   const startSelect = document.getElementById('start-year');
   const endSelect = document.getElementById('end-year');
   for (let year = DEFAULT_END_YEAR; year >= 2000; year--) {
@@ -666,9 +675,12 @@ function setupFilters() {
   }
   startSelect.value = startYear;
   endSelect.value = endYear;
+  regionSelect.value = selectedRegion;
   document.getElementById('conf-set').value = confSet;
 
   const refresh = () => {
+    selectedRegion = regionSelect.value;
+    rememberRegion(selectedRegion);
     startYear = Number(startSelect.value);
     endYear = Number(endSelect.value);
     if (startYear > endYear) {
@@ -682,6 +694,7 @@ function setupFilters() {
 
   startSelect.addEventListener('change', refresh);
   endSelect.addEventListener('change', refresh);
+  regionSelect.addEventListener('change', refresh);
   document.getElementById('conf-set').addEventListener('change', refresh);
 }
 

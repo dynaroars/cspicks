@@ -1,6 +1,6 @@
 # CS Picks
 
-**CS Picks** is a JavaScript-based web application for exploring Computer Science professors and schools. It is an accompanying tool to the PhD Demystify book (https://github.com/dynaroars/phd-cs-us), which helps prospective student navigate the PhD admission process in the US.  CSPicks uses data from [CSrankings](https://github.com/emeryberger/CSrankings), DBLP, and Open Alex to provide an interface for searching faculty publications and analyzing school strengths.
+**CS Picks** is a JavaScript application for exploring computer science professors, universities, publication patterns, and NSF funding. It accompanies the [PhD Demystify](https://github.com/dynaroars/phd-cs-us) book for prospective PhD students. CS Picks uses CSRankings and DBLP for ranking-compatible publication counts, OpenAlex plus manual corrections for estimated historical affiliations, and the official NSF Award Search for its funding beta.
 
 ## 🚀 Features
 
@@ -17,10 +17,7 @@
 - **Search by Name**: Find universities by name.
 - **Area Analysis**: View the school's top research areas with per-area rankings.
 - **Faculty Count**: See total faculty contributing to each school.
-- **Trend Charts**: Click "Show Trends" to see:
-  - **Rank Trend**: Historical ranking over time.
-  - **Area Growth**: Publication growth by research area.
-  - **Faculty Diversity**: Percentage of faculty publishing in multiple areas.
+- **Further Analysis**: Explore publication trends, area growth, conference trends, faculty diversity, publishing effort, and other profile highlights.
 
 ### 3. Historical Mode
 - **Toggle Historical Affiliations**: When enabled, publications are credited to the institution where the author was affiliated at the time of publication (via OpenAlex data).
@@ -38,6 +35,12 @@
 
 ### 7. Manual Affiliation Overrides
 - **Community Corrections**: Add corrections to `public/manual_affiliations.csv` to fix incorrect OpenAlex data.
+
+### 8. NSF Funding Beta
+- **Nationwide Search**: Explore institution-verified NSF awards for faculty at US universities in the current CSRankings roster.
+- **Fractional Funding Attribution**: Divide NSF's estimated total award amount equally among every listed PI and co-PI, then aggregate matched faculty shares to universities.
+- **Funding Trends**: Inspect award-year activity, programs, active awards, and individual award details.
+- **Conservative Matching**: Retain an award only when its NSF recipient matches the faculty member's current CSRankings institution.
 
 ## 🛠️ Technologies Used
 
@@ -57,7 +60,7 @@
 
 2.  **Install Dependencies**
     ```bash
-    npm install
+    npm ci
     ```
 
 3.  **Run Development Server**
@@ -66,10 +69,57 @@
     ```
     The application will be available at `http://localhost:5173/cspicks/`.
 
-4.  **Deploy to GitHub Pages**
+4.  **Run Tests and Build**
+    ```bash
+    npm test
+    npm run test:e2e
+    npm run build
+    ```
+
+5.  **Deploy to GitHub Pages**
     ```bash
     npm run deploy
     ```
+
+## 💰 Refreshing NSF Funding Data
+
+The browser does not query NSF directly. NSF rejects browser-origin requests, and live per-user requests would make results dependent on API availability and unstable name matching. Instead, the funding page lazily loads a synchronized static dataset only when someone opens `funding.html`.
+
+To synchronize all US institutions in the current CSRankings roster:
+
+```bash
+npm run sync:nsf:all
+```
+
+The synchronizer:
+
+- queries the official NSF Award Search API for each unique faculty/institution pair;
+- accepts awards only when the NSF recipient matches the current CSRankings institution;
+- retains all listed PIs and co-PIs for fractional attribution;
+- finds exact-title sibling awards for collaborative projects and deduplicates institution-transfer records;
+- checkpoints progress in the ignored `.nsf-sync-cache.json` file;
+- resumes incomplete runs without repeating completed queries.
+
+To force a targeted faculty refresh while diagnosing a name variant:
+
+```bash
+npm run sync:nsf:all -- --faculty "Hoang-Dung Tran"
+```
+- writes the deployable dataset to `public/nsf-awards.json`, including explicit coverage totals.
+
+To build a deliberately scoped dataset for one institution instead:
+
+```bash
+npm run sync:nsf -- --school "George Mason University"
+```
+
+Run the nationwide command again before deployment when you want to refresh NSF data. `npm run deploy` does not contact NSF automatically.
+
+### Funding interpretation
+
+An award's estimated total amount (its intended amount) is divided equally among every listed PI and co-PI. University totals sum the shares assigned to matched current CSRankings faculty. These are matched-faculty statistics—not complete university NSF portfolios, annual expenditures, fiscal-year obligation totals, or measures of research quality.
+
+Awards made to a professor's former institution are intentionally excluded. Name variants, missing co-PIs, transfers, supplements, and NSF data changes can still cause omissions.
 
 ## 📂 Project Structure
 
@@ -77,8 +127,9 @@
 cspicks/
 ├── public/
 │   ├── professor_history_openalex.json  # Historical affiliations
-│   ├── school-aliases.json           # OpenAlex → CSRankings name mapping
-│   └── manual_affiliations.csv       # Community corrections
+│   ├── nsf-awards.json                  # Synchronized US NSF funding data
+│   ├── school-aliases.json              # OpenAlex → CSRankings name mapping
+│   └── manual_affiliations.csv          # Community corrections
 ├── src/
 │   ├── data.js                       # Data loading and filtering
 │   ├── main.js                       # Main search page logic
@@ -86,12 +137,16 @@ cspicks/
 │   ├── simulation.js                 # Pure matching and rank-impact logic
 │   ├── compare.js                    # School comparison logic
 │   ├── analysis.js                   # Integrated analysis and data-health logic
+│   ├── funding.js                    # NSF funding search page
+│   ├── nsf.js                        # Funding attribution and rendering
 │   └── style.css                     # CSS styles
 ├── scripts/
 │   ├── build-openalex-history.js     # Generates historical affiliations
+│   ├── sync-nsf-awards.mjs           # Resumable scoped/all-US NSF synchronization
 │   └── build-school-aliases.js       # Generates school-aliases.json
 ├── index.html                        # Search, results, and integrated analysis
 ├── compare.html                      # School comparison page
+├── funding.html                      # Nationwide NSF funding beta
 ├── simulator.html                    # Ranking simulator page
 ├── analysis.html                     # Legacy redirect to integrated search
 ├── FAQ.md                            # GitHub-hosted methods and data documentation
@@ -100,9 +155,10 @@ cspicks/
 
 ## 📊 Data Sources
 
-- [CSrankings](https://github.com/emeryberger/CSrankings) - Faculty and publication data
+- [CSRankings](https://github.com/emeryberger/CSrankings) - Faculty and publication data
 - [DBLP](https://dblp.org/) - Publication metadata and author profiles
 - [OpenAlex](https://openalex.org/) - Historical affiliation data
+- [NSF Award Search](https://www.nsf.gov/funding/award-search) - NSF awards, investigators, program managers, programs, dates, and intended amounts
 
 ## 📝 License
 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.

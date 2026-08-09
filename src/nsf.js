@@ -1,0 +1,222 @@
+import { cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
+
+// Confirmed NSF award transfers need an explicit marker: estimated funding can
+// exceed current obligations for ordinary continuing grants as well.
+const confirmedTransferAwards = new Set(['2304748']);
+
+export function awardYear(award) {
+  const match = String(award.awardDate || award.startDate || '').match(/(\d{4})/);
+  return match ? Number(match[1]) : null;
+}
+
+export function formatFunding(amount) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency', currency: 'USD', notation: amount >= 1_000_000 ? 'compact' : 'standard',
+    maximumFractionDigits: amount >= 1_000_000 ? 1 : 0
+  }).format(amount || 0);
+}
+
+const fundingDateFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'
+});
+
+function parseFundingDate(value) {
+  const match = String(value || '').match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (!match) return null;
+  const [, month, day, year] = match.map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return date.getUTCFullYear() === year
+    && date.getUTCMonth() === month - 1
+    && date.getUTCDate() === day
+    ? date
+    : null;
+}
+
+function fundingDurationLabel(start, end) {
+  if (!start || !end || end < start) return '';
+  const inclusiveDays = Math.round((end - start) / 86_400_000) + 1;
+  const months = Math.max(1, Math.round(inclusiveDays / (365.2425 / 12)));
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+  return [
+    years ? `${years} ${years === 1 ? 'year' : 'years'}` : '',
+    remainingMonths ? `${remainingMonths} ${remainingMonths === 1 ? 'month' : 'months'}` : ''
+  ].filter(Boolean).join(' ');
+}
+
+export function formatAwardPeriod(award) {
+  const start = parseFundingDate(award?.startDate);
+  const end = parseFundingDate(award?.endDate);
+  if (!start && !end) return '';
+  if (!start) return `Ends ${fundingDateFormatter.format(end)}`;
+  if (!end) return `Starts ${fundingDateFormatter.format(start)}`;
+  const duration = fundingDurationLabel(start, end);
+  return `${fundingDateFormatter.format(start)} – ${fundingDateFormatter.format(end)}${duration ? ` · ${duration}` : ''}`;
+}
+
+export function buildFundingIndex(dataset, startYear, endYear) {
+  const awards = (dataset?.awards || []).filter(award => {
+    const year = awardYear(award);
+    const hasMatchedFaculty = (award.investigators || []).some(person => person.facultyName);
+    return hasMatchedFaculty && year !== null && year >= startYear && year <= endYear;
+  });
+  const faculty = new Map();
+  const schools = new Map();
+
+  awards.forEach(award => {
+    const investigatorCount = Math.max(1, award.investigators.length);
+    const amount = award.estimatedAmount || award.obligatedAmount || 0;
+    const share = amount / investigatorCount;
+    award.investigators.filter(person => person.facultyName).forEach(person => {
+      if (!faculty.has(person.facultyName)) faculty.set(person.facultyName, {
+        name: person.facultyName, affiliation: person.affiliation, awards: [], attributedAmount: 0, totalAwardAmount: 0
+      });
+      const record = faculty.get(person.facultyName);
+      record.awards.push({ ...award, role: person.role, attributedAmount: share });
+      record.attributedAmount += share;
+      record.totalAwardAmount += award.collaborativeTotalAmount || award.estimatedAmount || award.obligatedAmount || 0;
+
+      if (!person.affiliation) return;
+      if (!schools.has(person.affiliation)) schools.set(person.affiliation, {
+        name: person.affiliation, awards: new Map(), faculty: new Set(), attributedAmount: 0
+      });
+      const school = schools.get(person.affiliation);
+      const schoolAward = school.awards.get(award.id) || { ...award, attributedAmount: 0 };
+      schoolAward.attributedAmount += share;
+      school.awards.set(award.id, schoolAward);
+      school.faculty.add(person.facultyName);
+      school.attributedAmount += share;
+    });
+  });
+
+  return {
+    awards,
+    faculty: [...faculty.values()].sort((a, b) => b.attributedAmount - a.attributedAmount || a.name.localeCompare(b.name)),
+    schools: [...schools.values()].map(school => ({
+      ...school, awards: [...school.awards.values()], faculty: [...school.faculty]
+    })).sort((a, b) => b.attributedAmount - a.attributedAmount || a.name.localeCompare(b.name))
+  };
+}
+
+function yearBars(awards) {
+  const totals = new Map();
+  awards.forEach(award => {
+    const year = awardYear(award);
+    if (year) totals.set(year, (totals.get(year) || 0) + (award.attributedAmount ?? award.estimatedAmount ?? award.obligatedAmount ?? 0));
+  });
+  if (!totals.size) return '';
+  const max = Math.max(...totals.values());
+  return `<div class="funding-years" aria-label="Funding by award year">${[...totals.entries()].sort(([a], [b]) => a - b).map(([year, amount]) =>
+    `<div class="funding-year" title="${year}: ${escapeHtml(formatFunding(amount))}"><span style="height:${Math.max(4, amount / max * 100)}%"></span><small>${String(year).slice(-2)}</small></div>`
+  ).join('')}</div>`;
+}
+
+function awardAmount(award, affiliation) {
+  const attributed = award.attributedAmount ?? award.estimatedAmount ?? award.obligatedAmount ?? 0;
+  const estimatedTotal = award.estimatedAmount || 0;
+  const obligated = award.obligatedAmount || 0;
+  const institution = getInstitutionShortName(affiliation || award.awardee || 'matched university');
+  const collaborativeDetail = award.collaborativeTotalAmount > Math.max(estimatedTotal, obligated)
+    ? `<small class="funding-award-amount-detail">(${escapeHtml(formatFunding(award.collaborativeTotalAmount))} collaborative intended total; ${escapeHtml(formatFunding(estimatedTotal || obligated))} local intended award)</small>`
+    : '';
+  const transferDetail = !collaborativeDetail && confirmedTransferAwards.has(String(award.id))
+    ? `<small class="funding-award-amount-detail">(${escapeHtml(formatFunding(obligated))} obligated to ${escapeHtml(institution)})</small>`
+    : '';
+  return `<span class="funding-award-amount"><b>${escapeHtml(formatFunding(attributed))}</b><small class="funding-award-amount-label">intended share</small>${collaborativeDetail || transferDetail}</span>`;
+}
+
+function awardList(awards, affiliation = '') {
+  const sorted = [...awards].sort((a, b) => (awardYear(b) || 0) - (awardYear(a) || 0));
+  return `<div class="funding-awards">${sorted.map(award => `
+    <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=${encodeURIComponent(award.id)}" target="_blank" rel="noopener noreferrer" class="funding-award">
+      <span><strong>${escapeHtml(award.title)}</strong><small>${escapeHtml(award.program || award.division || 'NSF award')} · ${awardYear(award) || '—'} · ${escapeHtml(award.role || 'Matched investigator')}</small>${award.programManager ? `<small>Program manager: ${escapeHtml(award.programManager)}</small>` : ''}${formatAwardPeriod(award) ? `<small class="funding-award-period">Project: ${escapeHtml(formatAwardPeriod(award))}</small>` : ''}</span>
+      ${awardAmount(award, affiliation)}
+    </a>`).join('')}</div>`;
+}
+
+export function renderFundingFacultyCard(person) {
+  return `<article class="card funding-card" data-name="${escapeHtml(cleanName(person.name))}">
+    <div class="card-header"><span class="professor-heading"><h2>${escapeHtml(cleanName(person.name))}</h2></span></div>
+    <div class="card-content">
+      <div class="card-stats funding-professor-summary">${escapeHtml(person.affiliation || 'Current CSRankings affiliation')} · <strong>${person.awards.length}</strong> NSF ${person.awards.length === 1 ? 'award' : 'awards'} · <strong>${escapeHtml(formatFunding(person.attributedAmount))}</strong> intended share (<strong>${escapeHtml(formatFunding(person.totalAwardAmount))}</strong> full project value)</div>
+      ${yearBars(person.awards)}
+      ${awardList(person.awards, person.affiliation)}
+    </div>
+  </article>`;
+}
+
+export function renderFundingSchoolCard(school, resultPosition = null) {
+  const position = Number.isInteger(resultPosition)
+    ? `<span class="result-position">${resultPosition + 1}.</span> `
+    : '';
+  return `<article class="card funding-card" data-name="${escapeHtml(school.name)}">
+    <div class="card-header"><h2>${position}${escapeHtml(school.name)} <span class="card-badge">${school.faculty.length} matched faculty</span></h2></div>
+    <div class="card-content">
+      <div class="card-stats"><strong>${school.awards.length}</strong> NSF ${school.awards.length === 1 ? 'award' : 'awards'} · <strong>${escapeHtml(formatFunding(school.attributedAmount))}</strong> intended funding attributed</div>
+      <p class="funding-definition">Sum of intended-award shares for matched current CSRankings faculty; this is not the university's complete NSF portfolio.</p>
+      ${yearBars(school.awards)}
+    </div>
+  </article>`;
+}
+
+export function fundingMatches(record, query) {
+  const haystack = [record.name, record.affiliation, ...(record.awards || []).flatMap(award => [award.title, award.program, award.programManager, award.division, award.directorate])]
+    .filter(Boolean).join(' ').toLowerCase();
+  return query.trim().toLowerCase().split(/\s+/).every(token => haystack.includes(token));
+}
+
+function normalizedSearchTokens(value) {
+  return String(value || '').toLowerCase().match(/[a-z0-9]+/g) || [];
+}
+
+export function fundingFacultyNameMatches(record, query) {
+  const nameTokens = normalizedSearchTokens(cleanName(record?.name));
+  const queryTokens = normalizedSearchTokens(query);
+  return queryTokens.length > 0 && queryTokens.every(queryToken =>
+    nameTokens.some(nameToken => nameToken.startsWith(queryToken))
+  );
+}
+
+export function fundingSchoolNameMatches(record, query) {
+  const name = String(record?.name || '').toLowerCase();
+  return query.trim().toLowerCase().split(/\s+/).every(token => name.includes(token));
+}
+
+export function fundingScopeLabel(dataset) {
+  return (dataset?.scope || []).map(getInstitutionShortName).join(', ') || 'No institutions';
+}
+
+export function calculateFundingDiscoveries(current, prior, publicationSchools = {}) {
+  const currentByName = new Map(current.schools.map(school => [school.name, school]));
+  const priorByName = new Map(prior.schools.map(school => [school.name, school]));
+  const changes = current.schools.map(school => {
+    const earlier = priorByName.get(school.name);
+    const priorAmount = earlier?.attributedAmount || 0;
+    const delta = school.attributedAmount - priorAmount;
+    return { school, prior: earlier, priorAmount, delta, growth: priorAmount ? delta / priorAmount * 100 : null };
+  });
+  const substantive = changes.filter(item => item.priorAmount >= 100000 && item.school.attributedAmount >= 100000);
+  const fundingRanks = new Map(current.schools.map((school, index) => [school.name, index + 1]));
+  const rankGaps = current.schools.map(school => {
+    const publication = publicationSchools[school.name];
+    if (!publication || school.attributedAmount < 100000 || publication.totalAdjusted < 2) return null;
+    const fundingRank = fundingRanks.get(school.name);
+    return { school, fundingRank, publicationRank: publication.rank, gap: publication.rank - fundingRank };
+  }).filter(Boolean);
+  const collaborative = new Map();
+  current.awards.filter(award => award.collaborativeTotalAmount).forEach(award => {
+    const key = `${award.title}|${award.collaborativeTotalAmount}`;
+    if (!collaborative.has(key)) collaborative.set(key, award);
+  });
+
+  return {
+    topFunding: current.schools.slice(0, 5),
+    fastestGrowth: substantive.filter(item => item.growth > 0).sort((a, b) => b.growth - a.growth).slice(0, 5),
+    fastestDecline: substantive.filter(item => item.growth < 0).sort((a, b) => a.growth - b.growth).slice(0, 5),
+    broadParticipation: [...current.schools].sort((a, b) => b.faculty.length - a.faculty.length || b.attributedAmount - a.attributedAmount).slice(0, 5),
+    fundingAhead: rankGaps.filter(item => item.gap > 0).sort((a, b) => b.gap - a.gap).slice(0, 5),
+    publicationsAhead: rankGaps.filter(item => item.gap < 0).sort((a, b) => a.gap - b.gap).slice(0, 5),
+    largestCollaborations: [...collaborative.values()].sort((a, b) => b.collaborativeTotalAmount - a.collaborativeTotalAmount).slice(0, 5),
+    matchedSchools: currentByName.size
+  };
+}

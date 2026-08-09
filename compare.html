@@ -185,20 +185,20 @@
     <div id="app">
         <header>
             <div class="title-row">
-                <h1>CS Picks</h1>
+                <a class="site-title-link" href="index.html" aria-label="Reset CS Picks"><h1>CS Picks</h1></a>
                 <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
             </div>
-            <div class="top-nav">
-                <a href="index.html">Search</a>
-                <a href="compare.html" class="active">Compare</a>
+            <nav class="top-nav" aria-label="Primary navigation">
+                <a href="index.html">🔎 Search</a>
+                <a href="compare.html" class="active" aria-current="page">⚖️ Compare</a>
                 <a href="discoveries.html">🔭 Discoveries</a>
-                <a href="simulator.html">⚠️ Simulator</a>
-            </div>
+                <a href="simulator.html">☠️ Simulator</a>
+                <a href="funding.html">🇺🇸 NSF Funding</a>
+            </nav>
         </header>
 
         <main class="tool-content compare-page-content">
         <section class="tool-intro">
-            <p class="eyebrow">Compare</p>
             <h2>Compare computer science academia</h2>
             <p>See how two universities or professors differ across research areas.</p>
         </section>
@@ -218,11 +218,6 @@
             }
         </style>
 
-        <aside id="compare-history-warning" class="history-warning" role="status" aria-live="polite">
-            <strong>Current-roster view.</strong>
-            Past publications are assigned to each researcher’s current CSRankings university.
-        </aside>
-
         <div class="filters search-filters" id="filter-controls" style="display: none; margin-bottom: 1.5rem;" aria-label="Comparison filters">
             <div class="filter-group comparison-type-control">
                 <select id="comparison-type" aria-label="Comparison type">
@@ -233,8 +228,8 @@
 
             <div class="filter-group search-region-control">
                 <select id="region-select" aria-label="Region">
-                    <option value="world">World</option>
-                    <option value="us" selected>USA</option>
+                    <option value="world" selected>World</option>
+                    <option value="us">USA</option>
                     <option value="europe">Europe</option>
                     <option value="asia">Asia</option>
                     <option value="canada">Canada</option>
@@ -313,6 +308,7 @@
             style="text-align: center; padding: 0.75rem; color: var(--text-secondary); font-size: 0.9rem; margin-top: 1.5rem; border-top: 1px solid var(--border-color);">
             <a href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">FAQ, Methods &amp; Data</a> ·
             <a href="index.html?dataHealth=true#site-data-health" style="color: inherit; text-decoration: underline;">Data Health</a>
+            · <a href="https://roars.dev" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">ROARS Lab</a>
         </footer>
     </div>
     <script type="module" src="./src/compare.js"></script>

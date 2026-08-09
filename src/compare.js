@@ -1,6 +1,6 @@
 import Chart from 'chart.js/auto';
 import { loadData, loadAffiliationData, filterByYears } from './data.js';
-import { areaLabels, escapeHtml, updateChartDefaults, updateHistoryWarning } from './shared.js';
+import { areaLabels, escapeHtml, getInitialRegion, rememberRegion, updateChartDefaults } from './shared.js';
 import { explainRankGap } from './metrics.js';
 
 updateChartDefaults(Chart);
@@ -20,7 +20,7 @@ let chartInstance = null;
 let historyMap = null;
 let aliasMap = null;
 
-let selectedRegion = 'us';
+let selectedRegion = getInitialRegion();
 let endYear = new Date().getFullYear();
 let startYear = endYear - 10;
 let historicalMode = false;
@@ -30,6 +30,8 @@ let facultyList = [];
 
 async function init() {
     rawData = await loadData();
+
+    document.getElementById('region-select').value = selectedRegion;
 
     setupYearSelectors();
     
@@ -44,7 +46,6 @@ async function init() {
     document.getElementById('loading-indicator').style.display = 'none';
     document.getElementById('filter-controls').style.display = 'flex';
     document.getElementById('compare-controls').style.display = 'flex';
-    updateHistoryWarning('compare-history-warning', historicalMode);
 }
 
 async function ensureHistoricalData() {
@@ -241,6 +242,7 @@ function setupEventListeners() {
     // Region filter
     document.getElementById('region-select').addEventListener('change', (e) => {
         selectedRegion = e.target.value;
+        rememberRegion(selectedRegion);
         refreshData();
     });
 
@@ -270,13 +272,11 @@ function setupEventListeners() {
         try {
             if (toggle.checked) await ensureHistoricalData();
             historicalMode = toggle.checked;
-            updateHistoryWarning('compare-history-warning', historicalMode);
             refreshData();
         } catch (error) {
             console.error('Failed to load historical affiliation data:', error);
             toggle.checked = false;
             historicalMode = false;
-            updateHistoryWarning('compare-history-warning', false);
             window.alert('Historical affiliation data could not be loaded. Please try again.');
         } finally {
             toggle.disabled = false;

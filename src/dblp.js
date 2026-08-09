@@ -1,6 +1,28 @@
 import { getConferenceAreaMap, parentMap, publicationMatchesConferenceSet } from './data.js';
 import { getCsrankingsRules, syncCsrankingsRules } from './csrankings-rules.js';
 
+export function parseDblpProfileUrl(value) {
+    try {
+        const url = new URL(String(value ?? '').trim());
+        const hostname = url.hostname.toLowerCase();
+        const isDblpHost = hostname === 'dblp.org' || hostname === 'www.dblp.org' || hostname === 'dblp.uni-trier.de';
+        if (!isDblpHost) return null;
+
+        const match = url.pathname.match(/^\/pid\/(.+?)(?:\.(?:html|xml))?\/?$/i);
+        if (!match) return null;
+
+        const pid = match[1]
+            .split('/')
+            .map(segment => decodeURIComponent(segment))
+            .join('/');
+        if (!/^[A-Za-z0-9][A-Za-z0-9._=-]*(?:\/[A-Za-z0-9][A-Za-z0-9._=-]*)+$/.test(pid)) return null;
+
+        return { pid, url: `https://dblp.org/pid/${pid}.html` };
+    } catch {
+        return null;
+    }
+}
+
 export function normalizeDblpVenue(venue, metadata = {}) {
     const rules = getCsrankingsRules();
     const number = String(metadata.number || '').trim().toLowerCase();
@@ -151,7 +173,7 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
                 year
             });
 
-            if (!confKey || !parentMap[confKey]) continue;
+            if (!confKey || !conferenceAreaMap[confKey]) continue;
             if (!publicationMatchesConferenceSet({ area: confKey }, confSet)) continue;
 
             const pagesNode = pub.getElementsByTagName("pages")[0];
@@ -179,14 +201,12 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
                 title: title,
                 venue: confKey.toUpperCase(),
                 year: year,
-                authors: authorCount,
                 adjusted: adjusted,
                 area: area
             });
         }
 
         stats.papers.sort((a, b) => b.year - a.year);
-
         return stats;
 
     } catch (err) {

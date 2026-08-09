@@ -162,14 +162,26 @@ export function loadData() {
 }
 
 async function loadDataFromSources() {
-  const [csrankings, authorInfo, institutions] = await Promise.all([
+  const optionalCsv = url => fetchCsv(url).catch(error => {
+    console.warn(`Optional CSRankings metadata unavailable: ${url}`, error);
+    return [];
+  });
+  const [csrankings, authorInfo, institutions, turingWinners, acmFellows, countries, dblpAliases, nameChanges] = await Promise.all([
     fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv'),
     fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/generated-author-info.csv'),
-    fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/institutions.csv')
+    fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/institutions.csv'),
+    optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/turing.csv'),
+    optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/acm-fellows.csv'),
+    optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/countries.csv'),
+    optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/dblp-aliases.csv'),
+    optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/name-changes.csv')
   ]);
 
   const professors = {};
   const schools = {};
+  const turingByName = new Map(turingWinners.map(row => [row.name?.trim(), Number(row.year)]));
+  const acmFellowByName = new Map(acmFellows.map(row => [row.name?.trim(), Number(row.year)]));
+  const countryByCode = new Map(countries.map(row => [row.alpha_2?.trim().toLowerCase(), row.name?.trim()]));
 
   csrankings.forEach(row => {
     if (row.name) {
@@ -179,6 +191,13 @@ async function loadDataFromSources() {
         affiliation: row.affiliation,
         homepage: row.homepage,
         scholarid: row.scholarid,
+        orcid: /^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/i.test(row.orcid?.trim()) && row.orcid !== '0000-0000-0000-0000'
+          ? row.orcid.trim()
+          : null,
+        aliases: [],
+        unitNotes: [],
+        turingAwardYear: turingByName.get(name) || null,
+        acmFellowYear: acmFellowByName.get(name) || null,
         pubs: []
       };
 
@@ -194,8 +213,13 @@ async function loadDataFromSources() {
   });
 
   authorInfo.forEach(row => {
-    const name = row.name.trim();
+    const annotatedName = row.name.trim();
+    const noteMatch = annotatedName.match(/^(.*?)\s+\[([^\]]+)\]$/);
+    const name = noteMatch ? noteMatch[1].trim() : annotatedName;
     if (professors[name]) {
+      if (noteMatch && !professors[name].unitNotes.includes(noteMatch[2])) {
+        professors[name].unitNotes.push(noteMatch[2]);
+      }
 
       // Skip next-tier conferences (matches CSRankings default behavior)
       // if (nextTier[row.area]) {
@@ -216,6 +240,24 @@ async function loadDataFromSources() {
     if (schools[name]) {
       schools[name].region = row.region;
       schools[name].country = row.countryabbrv;
+      schools[name].countryName = countryByCode.get(row.countryabbrv?.trim().toLowerCase()) || row.countryabbrv;
+      schools[name].homepage = row.homepage || null;
+    }
+  });
+
+  const attachAlias = (alias, canonical) => {
+    const professor = professors[canonical?.trim()];
+    const normalizedAlias = alias?.trim();
+    if (professor && normalizedAlias && normalizedAlias !== professor.name && !professor.aliases.includes(normalizedAlias)) {
+      professor.aliases.push(normalizedAlias);
+    }
+  };
+  dblpAliases.forEach(row => attachAlias(row.alias, row.name));
+  nameChanges.forEach(row => {
+    attachAlias(row.old_name, row.new_name);
+    const professor = professors[row.new_name?.trim()];
+    if (professor && !professor.orcid && /^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/i.test(row.orcid?.trim())) {
+      professor.orcid = row.orcid.trim();
     }
   });
 
@@ -464,8 +506,11 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
               name: pubSchoolName,
               region: schools[pubSchoolName]?.region,
               country: schools[pubSchoolName]?.country,
+              countryName: schools[pubSchoolName]?.countryName,
+              homepage: schools[pubSchoolName]?.homepage,
               areas: {},
               areaAdjustedCounts: {},
+              facultyAdjustedCounts: {},
               totalCount: 0,
               totalAdjusted: 0
             };
@@ -490,6 +535,7 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
             school.areaAdjustedCounts[area] = 0;
           }
           school.areaAdjustedCounts[area] += pub.adjustedcount;
+          school.facultyAdjustedCounts[name] = (school.facultyAdjustedCounts[name] || 0) + pub.adjustedcount;
         });
       });
 

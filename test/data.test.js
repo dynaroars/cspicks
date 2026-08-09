@@ -2,11 +2,12 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import { coreAMap, fetchCsv, filterByYears, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet } from '../src/data.js';
-import { areaLabels, encodeInlineValue, escapeHtml, getInstitutionShortName, safeExternalUrl } from '../src/shared.js';
+import { areaLabels, detectRegionFromLocales, encodeInlineValue, escapeHtml, getInstitutionShortName, safeExternalUrl } from '../src/shared.js';
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../src/simulation.js';
-import { hasEligiblePageRange, normalizeDblpVenue } from '../src/dblp.js';
+import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl } from '../src/dblp.js';
 import { parseCsrankingsRules } from '../src/csrankings-rules.js';
-import { calculateDiscoveryInsights, calculateParityReport, calculatePublishingEffort, calculateSchoolMetrics, explainRankGap } from '../src/metrics.js';
+import { calculateDiscoveryInsights, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, explainRankGap } from '../src/metrics.js';
+import { awardYear, buildFundingIndex, calculateFundingDiscoveries, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, renderFundingFacultyCard } from '../src/nsf.js';
 
 function professor(name, affiliation, count, adjustedcount) {
   return {
@@ -15,6 +16,104 @@ function professor(name, affiliation, count, adjustedcount) {
     pubs: [{ area: 'icml', year: 2025, count, adjustedcount }]
   };
 }
+
+test('browser locales map to supported regions and unknown locales fall back to World', () => {
+  assert.equal(detectRegionFromLocales(['en-US']), 'us');
+  assert.equal(detectRegionFromLocales(['fr-CA']), 'canada');
+  assert.equal(detectRegionFromLocales(['en-GB']), 'europe');
+  assert.equal(detectRegionFromLocales(['ja-JP']), 'asia');
+  assert.equal(detectRegionFromLocales(['en-AU']), 'australasia');
+  assert.equal(detectRegionFromLocales(['es-MX']), 'world');
+  assert.equal(detectRegionFromLocales(['en']), 'us');
+  assert.equal(detectRegionFromLocales(['de']), 'europe');
+  assert.equal(detectRegionFromLocales(['not_a_locale']), 'world');
+});
+
+test('NSF funding uses award year and fractional investigator attribution', () => {
+  const dataset = {
+    awards: [{
+      id: '1', title: 'Secure systems', awardee: 'Example University', awardDate: '09/01/2024',
+      startDate: '10/01/2024', endDate: '09/30/2027',
+      obligatedAmount: 300000, estimatedAmount: 900000, program: 'Secure Computing', programManager: 'Dana Smith',
+      investigators: [
+        { name: 'Alice', role: 'PI', facultyName: 'Alice', affiliation: 'Example University' },
+        { name: 'Bob', role: 'Co-PI', facultyName: 'Bob', affiliation: 'Example University' },
+        { name: 'Outside', role: 'Co-PI', facultyName: null, affiliation: null }
+      ]
+    }]
+  };
+  const funding = buildFundingIndex(dataset, 2020, 2025);
+  assert.equal(awardYear(dataset.awards[0]), 2024);
+  assert.equal(funding.faculty.length, 2);
+  assert.equal(funding.faculty[0].attributedAmount, 300000);
+  assert.equal(funding.faculty[0].totalAwardAmount, 900000);
+  assert.equal(funding.schools[0].attributedAmount, 600000);
+  assert.equal(funding.schools[0].awards.length, 1);
+  assert.equal(fundingMatches(funding.faculty[0], 'secure computing'), true);
+  assert.equal(fundingMatches(funding.faculty[0], 'Dana Smith'), true);
+  assert.equal(fundingFacultyNameMatches({ name: 'Hoang-Dung Tran' }, 'Dung Tran'), true);
+  assert.equal(fundingFacultyNameMatches({ name: 'Hoang-Dung Tran' }, 'Hoang Tran'), true);
+  assert.equal(fundingFacultyNameMatches({ name: 'Hoang-Dung Tran' }, 'transformative'), false);
+  assert.equal(fundingSchoolNameMatches(funding.schools[0], 'Example'), true);
+  assert.equal(fundingSchoolNameMatches(funding.schools[0], 'secure'), false);
+  assert.equal(formatAwardPeriod(dataset.awards[0]), 'Oct 1, 2024 – Sep 30, 2027 · 3 years');
+  assert.match(renderFundingFacultyCard(funding.faculty[0]), /Project: Oct 1, 2024 – Sep 30, 2027 · 3 years/);
+  assert.match(renderFundingFacultyCard(funding.faculty[0]), /Program manager: Dana Smith/);
+  assert.match(renderFundingFacultyCard(funding.faculty[0]), /intended share/);
+});
+
+test('NSF funding and discoveries exclude awards without matched CSRankings faculty', () => {
+  const dataset = { awards: [
+    {
+      id: 'matched', title: 'Matched project', awardDate: '01/01/2024', obligatedAmount: 100,
+      investigators: [{ name: 'Alice', facultyName: 'Alice', affiliation: 'Example University' }]
+    },
+    {
+      id: 'unmatched', title: 'Unmatched university project', awardDate: '01/01/2024', obligatedAmount: 999999,
+      investigators: [{ name: 'Outside', facultyName: null, affiliation: null }]
+    }
+  ] };
+  const funding = buildFundingIndex(dataset, 2020, 2025);
+  assert.deepEqual(funding.awards.map(award => award.id), ['matched']);
+  assert.equal(funding.schools[0].attributedAmount, 100);
+});
+
+test('NSF funding uses collaborative project totals without changing local attribution', () => {
+  const title = 'Collaborative Research: SHF: Medium: Shared project';
+  const dataset = { awards: [
+    {
+      id: '1', title, awardee: 'Example University', awardDate: '07/01/2024', obligatedAmount: 400000,
+      estimatedAmount: 400000, collaborativeTotalAmount: 1200000,
+      investigators: [{ name: 'Alice', role: 'PI', facultyName: 'Alice', affiliation: 'Example University' }]
+    }
+  ] };
+  const funding = buildFundingIndex(dataset, 2020, 2025);
+  assert.equal(funding.faculty[0].attributedAmount, 400000);
+  assert.equal(funding.faculty[0].totalAwardAmount, 1200000);
+  assert.equal(funding.schools[0].attributedAmount, 400000);
+});
+
+test('NSF discoveries compare funding periods and publication ranks', () => {
+  const current = {
+    awards: [],
+    schools: [
+      { name: 'A', attributedAmount: 500000, faculty: ['One', 'Two'], awards: [{}] },
+      { name: 'B', attributedAmount: 200000, faculty: ['Three'], awards: [{}] }
+    ]
+  };
+  const prior = { schools: [
+    { name: 'A', attributedAmount: 200000, faculty: [], awards: [] },
+    { name: 'B', attributedAmount: 400000, faculty: [], awards: [] }
+  ] };
+  const insights = calculateFundingDiscoveries(current, prior, {
+    A: { rank: 10, totalAdjusted: 3 }, B: { rank: 1, totalAdjusted: 3 }
+  });
+  assert.equal(insights.fastestGrowth[0].school.name, 'A');
+  assert.equal(insights.fastestDecline[0].school.name, 'B');
+  assert.equal(insights.broadParticipation[0].name, 'A');
+  assert.equal(insights.fundingAhead[0].school.name, 'A');
+  assert.equal(insights.publicationsAhead[0].school.name, 'B');
+});
 
 test('an empty historical map does not bypass region filtering', () => {
   const data = {
@@ -220,6 +319,19 @@ test('DBLP venue normalization covers renamed and journal-published proceedings'
   assert.equal(hasEligiblePageRange('i100-i108', 'bioinformatics'), true);
 });
 
+test('DBLP profile links resolve to exact author identifiers', () => {
+  assert.deepEqual(parseDblpProfileUrl('https://dblp.org/pid/12/3456.html'), {
+    pid: '12/3456',
+    url: 'https://dblp.org/pid/12/3456.html'
+  });
+  assert.deepEqual(parseDblpProfileUrl('https://dblp.uni-trier.de/pid/12/3456.xml?view=bibtex'), {
+    pid: '12/3456',
+    url: 'https://dblp.org/pid/12/3456.html'
+  });
+  assert.equal(parseDblpProfileUrl('https://example.com/pid/12/3456.html'), null);
+  assert.equal(parseDblpProfileUrl('https://dblp.org/db/conf/pldi/index.html'), null);
+});
+
 test('CSRankings rule sync parses upstream issue tables', () => {
   const source = `
 TOG_SIGGRAPH_Volume = {2025: (44, 4)}
@@ -285,6 +397,61 @@ test('school metrics report movement, momentum, concentration, breadth, and coll
   assert.equal(metrics.sustainedAreas, 1);
   assert.equal(metrics.impliedTeamSize, 2);
   assert.equal(metrics.confidence, 'Medium');
+});
+
+test('historical school metrics use only output attributed to that school', () => {
+  const current = {
+    schools: {
+      A: {
+        name: 'A', rank: 1, totalAdjusted: 2, totalCount: 2,
+        areas: { ai: { adjusted: 2, faculty: ['Mover'] } },
+        areaRanks: { ai: 1 }, facultyAdjustedCounts: { Mover: 2 }
+      },
+      B: {
+        name: 'B', rank: 2, totalAdjusted: 8, totalCount: 8,
+        areas: { ai: { adjusted: 8, faculty: ['Mover'] } },
+        areaRanks: { ai: 2 }, facultyAdjustedCounts: { Mover: 8 }
+      }
+    },
+    professors: { Mover: { name: 'Mover', totalAdjusted: 10, homepage: 'x', scholarid: 'y' } }
+  };
+  const metricsA = calculateSchoolMetrics(current, { schools: {} }, 'A');
+  const metricsB = calculateSchoolMetrics(current, { schools: {} }, 'B');
+  assert.equal(metricsA.medianPerFaculty, 2);
+  assert.equal(metricsB.medianPerFaculty, 8);
+  assert.equal(metricsA.top1Share, 100);
+});
+
+test('researcher patterns summarize activity, area shifts, venues, and peers', () => {
+  const target = {
+    name: 'Target', affiliation: 'A', totalAdjusted: 4.5,
+    pubs: [
+      { area: 'icse', year: 2020, count: 2, adjustedcount: 1 },
+      { area: 'icse', year: 2021, count: 1, adjustedcount: 0.5 },
+      { area: 'ccs', year: 2024, count: 2, adjustedcount: 1 },
+      { area: 'ccs', year: 2025, count: 4, adjustedcount: 2 }
+    ]
+  };
+  const peers = {
+    Target: target,
+    Similar: { name: 'Similar', affiliation: 'B', totalAdjusted: 3, areas: { sec: { adjusted: 2 }, soft: { adjusted: 1 } } },
+    Different: { name: 'Different', affiliation: 'C', totalAdjusted: 6, areas: { ai: { adjusted: 6 } } }
+  };
+  const patterns = calculateResearcherPatterns(target, peers, {
+    startYear: 2020,
+    endYear: 2025,
+    confSet: 'csrankings-default'
+  });
+
+  assert.deepEqual(patterns.activeYears, [2020, 2021, 2024, 2025]);
+  assert.deepEqual(patterns.yearly[2025], { count: 4, adjusted: 2 });
+  assert.equal(patterns.peak.year, 2025);
+  assert.equal(patterns.activeStreak, 2);
+  assert.equal(patterns.primaryArea[0], 'sec');
+  assert.deepEqual(patterns.pivot, { from: 'soft', to: 'sec', midpoint: 2022 });
+  assert.equal(patterns.venueBreadth, 2);
+  assert.deepEqual(patterns.venueShift, { from: 'icse', to: 'ccs' });
+  assert.equal(patterns.similarPeers[0].name, 'Similar');
 });
 
 test('discovery insights rank substantive movement and ignore tiny momentum baselines', () => {

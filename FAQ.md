@@ -54,6 +54,16 @@ Choose a target university and one or more researchers. Current faculty are mode
 
 The simulator is exploratory. Its results are hypothetical and should not be interpreted as predictions, hiring recommendations, or evaluations of individuals.
 
+### How does the NSF Funding beta work?
+
+The funding page uses public records from the official [NSF Award Search](https://www.nsf.gov/funding/award-search). A synchronization script searches current CSRankings faculty as primary investigators and retains an award only when its NSF recipient matches the faculty member’s current CSRankings institution.
+
+For an award with multiple listed investigators, NSF's estimated total award amount (the intended amount) is divided equally among all PIs and co-PIs. A university total is the sum of the resulting shares for matched current CSRankings faculty. It is therefore a matched-faculty statistic, not the university’s complete NSF portfolio.
+
+For confirmed transferred awards, the page distinguishes the amount transferred to the new institution from NSF's estimated full award value. It does not infer a transfer merely because estimated funding exceeds current obligations. For collaborative projects, the synchronizer also finds exact-title sibling awards and reports their combined project total while keeping each university's local attribution unchanged. Transfer records for the same lead investigator are counted once in that combined total.
+
+The current beta covers the US institutions in the CSRankings roster. The synchronized file records coverage totals so incomplete runs are visible rather than silently treated as complete data.
+
 ## Data limitations
 
 - Historical affiliations are assembled from automated sources and manual corrections; coverage is uneven.
@@ -61,6 +71,8 @@ The simulator is exploratory. Its results are hypothetical and should not be int
 - Publication and author records can change when CSRankings or DBLP updates.
 - Conference names and eligibility rules can change over time.
 - The collaboration statistic is a coauthor-intensity proxy, not a measurement of cross-institution collaboration.
+- NSF investigator matching can miss name variants. The beta deliberately excludes awards made to another institution, even when they may belong to the same faculty member’s earlier career.
+- NSF dollar totals use the estimated total award amount recorded on each award and group it by award year; they are intended project totals, not annual expenditures or fiscal-year obligations.
 - A passing Data Health audit means the current calculation is internally consistent with the loaded inputs. It does not guarantee that a separately deployed CSRankings page uses identical data at that moment.
 
 ## Privacy
