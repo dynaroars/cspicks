@@ -70,6 +70,15 @@ export function calculateSchoolMetrics(currentData, priorData, schoolName) {
  * Minimum-credit guards keep tiny denominators from dominating growth lists.
  */
 export function calculateDiscoveryInsights(currentData, priorData, limit = 5) {
+  const regionalAreaTotals = {};
+  let regionalTotal = 0;
+  Object.values(currentData?.schools || {}).forEach(school => {
+    regionalTotal += school.totalAdjusted || 0;
+    Object.entries(school.areas || {}).forEach(([area, values]) => {
+      regionalAreaTotals[area] = (regionalAreaTotals[area] || 0) + (values.adjusted || 0);
+    });
+  });
+
   const schools = Object.values(currentData?.schools || {}).map(school => {
     const prior = priorData?.schools?.[school.name];
     const metrics = calculateSchoolMetrics(currentData, priorData, school.name);
@@ -77,6 +86,23 @@ export function calculateDiscoveryInsights(currentData, priorData, limit = 5) {
     const topArea = Object.entries(school.areas || {})
       .map(([area, values]) => ({ area, credit: values.adjusted || 0 }))
       .sort((a, b) => b.credit - a.credit)[0];
+    const focusArea = Object.entries(school.areas || {})
+      .map(([area, values]) => {
+        const credit = values.adjusted || 0;
+        const portfolioShare = percent(credit, school.totalAdjusted || 0);
+        const regionalBaseline = percent(regionalAreaTotals[area] || 0, regionalTotal);
+        return {
+          area,
+          credit,
+          regionalShare: percent(credit, regionalAreaTotals[area] || 0),
+          portfolioShare,
+          regionalBaseline,
+          specialization: regionalBaseline > 0 ? portfolioShare / regionalBaseline : 0,
+          areaRank: school.areaRanks?.[area] || null
+        };
+      })
+      .filter(area => area.credit >= 2 && area.areaRank && area.areaRank <= 25)
+      .sort((a, b) => b.specialization - a.specialization || b.regionalShare - a.regionalShare)[0];
     return {
       name: school.name,
       school,
@@ -85,6 +111,7 @@ export function calculateDiscoveryInsights(currentData, priorData, limit = 5) {
       outputGain: (school.totalAdjusted || 0) - (prior?.totalAdjusted || 0),
       breadthGain: metrics.activeAreas - priorAreas,
       topArea,
+      focusArea,
       topAreaShare: topArea && school.totalAdjusted > 0
         ? percent(topArea.credit, school.totalAdjusted)
         : 0
@@ -98,15 +125,26 @@ export function calculateDiscoveryInsights(currentData, priorData, limit = 5) {
   const substantive = schools.filter(item =>
     item.school.totalAdjusted >= 5 && item.metrics.facultyCount >= 3
   );
+  const portfolioSchools = schools.filter(item =>
+    item.school.totalAdjusted >= 5 && item.metrics.facultyCount >= 5
+  );
 
   const areaBreakouts = [];
+  const areaDeclines = [];
   schools.forEach(item => {
-    Object.entries(item.school.areas || {}).forEach(([area, values]) => {
-      const currentCredit = values.adjusted || 0;
+    const areas = new Set([
+      ...Object.keys(item.school.areas || {}),
+      ...Object.keys(item.prior?.areas || {})
+    ]);
+    areas.forEach(area => {
+      const currentCredit = item.school.areas?.[area]?.adjusted || 0;
       const priorCredit = item.prior?.areas?.[area]?.adjusted || 0;
       const gain = currentCredit - priorCredit;
       if (currentCredit >= 2 && gain > 0) {
         areaBreakouts.push({ name: item.name, area, currentCredit, priorCredit, gain });
+      }
+      if (priorCredit >= 2 && gain < 0) {
+        areaDeclines.push({ name: item.name, area, currentCredit, priorCredit, gain });
       }
     });
   });
@@ -116,27 +154,44 @@ export function calculateDiscoveryInsights(currentData, priorData, limit = 5) {
       established.filter(item => item.metrics.rankDelta > 0),
       (a, b) => b.metrics.rankDelta - a.metrics.rankDelta || a.metrics.rank - b.metrics.rank
     ),
+    rankDroppers: take(
+      established.filter(item => item.metrics.rankDelta < 0),
+      (a, b) => a.metrics.rankDelta - b.metrics.rankDelta || a.metrics.rank - b.metrics.rank
+    ),
     momentum: take(
       established.filter(item => item.metrics.growth > 0),
       (a, b) => b.metrics.growth - a.metrics.growth || b.outputGain - a.outputGain
+    ),
+    slowdowns: take(
+      established.filter(item => item.metrics.growth < 0),
+      (a, b) => a.metrics.growth - b.metrics.growth || a.outputGain - b.outputGain
     ),
     outputGains: take(
       schools.filter(item => item.outputGain > 0),
       (a, b) => b.outputGain - a.outputGain
     ),
+    outputLosses: take(
+      schools.filter(item => item.prior && item.outputGain < 0),
+      (a, b) => a.outputGain - b.outputGain
+    ),
     breadthBuilders: take(
       established.filter(item => item.breadthGain > 0),
       (a, b) => b.breadthGain - a.breadthGain || b.outputGain - a.outputGain
     ),
+    breadthContractions: take(
+      established.filter(item => item.breadthGain < 0),
+      (a, b) => a.breadthGain - b.breadthGain || a.outputGain - b.outputGain
+    ),
     balancedPortfolios: take(
-      substantive,
+      portfolioSchools,
       (a, b) => a.metrics.top3Share - b.metrics.top3Share || b.school.totalAdjusted - a.school.totalAdjusted
     ),
     focusedPowerhouses: take(
-      substantive,
-      (a, b) => b.topAreaShare - a.topAreaShare || b.school.totalAdjusted - a.school.totalAdjusted
+      substantive.filter(item => item.focusArea),
+      (a, b) => b.focusArea.specialization - a.focusArea.specialization || b.focusArea.regionalShare - a.focusArea.regionalShare
     ),
-    areaBreakouts: take(areaBreakouts, (a, b) => b.gain - a.gain || b.currentCredit - a.currentCredit)
+    areaBreakouts: take(areaBreakouts, (a, b) => b.gain - a.gain || b.currentCredit - a.currentCredit),
+    areaDeclines: take(areaDeclines, (a, b) => a.gain - b.gain || b.priorCredit - a.priorCredit)
   };
 }
 

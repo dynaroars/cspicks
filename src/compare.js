@@ -1,6 +1,6 @@
 import Chart from 'chart.js/auto';
 import { loadData, loadAffiliationData, filterByYears } from './data.js';
-import { areaLabels, escapeHtml, updateChartDefaults } from './shared.js';
+import { areaLabels, escapeHtml, updateChartDefaults, updateHistoryWarning } from './shared.js';
 import { explainRankGap } from './metrics.js';
 
 updateChartDefaults(Chart);
@@ -44,6 +44,7 @@ async function init() {
     document.getElementById('loading-indicator').style.display = 'none';
     document.getElementById('filter-controls').style.display = 'flex';
     document.getElementById('compare-controls').style.display = 'flex';
+    updateHistoryWarning('compare-history-warning', historicalMode);
 }
 
 async function ensureHistoricalData() {
@@ -269,11 +270,13 @@ function setupEventListeners() {
         try {
             if (toggle.checked) await ensureHistoricalData();
             historicalMode = toggle.checked;
+            updateHistoryWarning('compare-history-warning', historicalMode);
             refreshData();
         } catch (error) {
             console.error('Failed to load historical affiliation data:', error);
             toggle.checked = false;
             historicalMode = false;
+            updateHistoryWarning('compare-history-warning', false);
             window.alert('Historical affiliation data could not be loaded. Please try again.');
         } finally {
             toggle.disabled = false;

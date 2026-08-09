@@ -29,13 +29,18 @@
         <a href="index.html">Search</a>
         <a href="analysis.html">Analysis</a>
         <a href="compare.html">Compare</a>
-        <a href="simulator.html">Simulator</a>
         <a href="discoveries.html" class="active" aria-current="page">🔭 Discoveries</a>
+        <a href="simulator.html">⚠️ Simulator</a>
       </nav>
       <p>Find surprising changes and hidden patterns across Computer Science departments.</p>
     </header>
 
     <main class="discoveries-page">
+      <aside id="discoveries-history-warning" class="history-warning discoveries-disclaimer" role="status" aria-live="polite" aria-label="Discoveries data interpretation">
+        <strong>Current-roster retrospective.</strong>
+        Past publications are assigned to each researcher’s current CSRankings university. Changes describe the publication history of today’s roster, not necessarily the university’s actual faculty at that time.
+      </aside>
+
       <div class="filters search-filters discoveries-filters" aria-label="Discovery filters">
         <div class="filter-group search-region-control">
           <select id="discoveries-region" aria-label="Region">
@@ -68,7 +73,7 @@
         <div class="filter-group checkboxes">
           <label for="discoveries-history" class="filter-checkbox">
             <input type="checkbox" id="discoveries-history">
-            <span>Use History</span>
+            <span>History</span>
             <span class="tooltip-trigger" tabindex="0" aria-label="About historical mode">ⓘ
               <span class="tooltip-content">Credits each publication to the author's institution in its publication year when historical data is available.</span>
             </span>

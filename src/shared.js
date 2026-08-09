@@ -88,6 +88,18 @@ export function getInstitutionShortName(name) {
   return institutionShortNames[name] || name;
 }
 
+export function updateHistoryWarning(elementOrId, enabled) {
+  const warning = typeof elementOrId === 'string'
+    ? document.getElementById(elementOrId)
+    : elementOrId;
+  if (!warning) return;
+
+  warning.classList.toggle('history-enabled', enabled);
+  warning.innerHTML = enabled
+    ? '<strong>Estimated historical affiliations.</strong> Publications use OpenAlex and manual year-specific affiliations. Records may be incomplete or incorrect: uncovered years are omitted, while researchers with no history record fall back to their current university.'
+    : '<strong>Current-roster view.</strong> Past publications are assigned to each researcher’s current CSRankings university. Results describe today’s roster, not necessarily the university’s actual faculty at that time.';
+}
+
 export function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')

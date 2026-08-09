@@ -1,6 +1,6 @@
 import Chart from 'chart.js/auto';
 import { loadData, loadAffiliationData, filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from './data.js';
-import { areaLabels, escapeHtml, updateChartDefaults } from './shared.js';
+import { areaLabels, escapeHtml, updateChartDefaults, updateHistoryWarning } from './shared.js';
 import { buildPriorPeriodData, calculateParityReport, calculatePublishingEffort, calculateSchoolMetrics } from './metrics.js';
 import bundledRules from './csrankings-rules.generated.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
@@ -182,16 +182,19 @@ function setupConferenceSet() {
 
 function setupHistoricalMode() {
     if (historicalToggleEl) {
+        updateHistoryWarning('analysis-history-warning', historicalMode);
         historicalToggleEl.addEventListener('change', async () => {
             historicalToggleEl.disabled = true;
             try {
                 if (historicalToggleEl.checked) await ensureHistoricalData();
                 historicalMode = historicalToggleEl.checked;
+                updateHistoryWarning('analysis-history-warning', historicalMode);
                 refreshActiveTabChart();
             } catch (error) {
                 console.error('Failed to load historical affiliation data:', error);
                 historicalToggleEl.checked = false;
                 historicalMode = false;
+                updateHistoryWarning('analysis-history-warning', false);
                 window.alert('Historical affiliation data could not be loaded. Please try again.');
             } finally {
                 historicalToggleEl.disabled = false;
@@ -269,10 +272,10 @@ function renderCollaborationStats() {
     container.innerHTML = `
         <h2>${escapeHtml(schoolName)} collaboration profile</h2>
         <div class="diagnostic-grid">
-            <div class="diagnostic-stat"><span>Team-size proxy</span><strong>${metrics.impliedTeamSize.toFixed(2)}×</strong><small>raw credit ÷ fractional credit</small></div>
+            <div class="diagnostic-stat"><span>Team-size proxy</span><strong>${metrics.impliedTeamSize.toFixed(2)}×</strong><small>raw count ÷ adjusted count</small></div>
             <div class="diagnostic-stat"><span>Fraction retained</span><strong>${metrics.collaborationRetention.toFixed(0)}%</strong><small>after coauthor adjustment</small></div>
-            <div class="diagnostic-stat"><span>Top-3 concentration</span><strong>${metrics.top3Share.toFixed(0)}%</strong><small>share of department credit</small></div>
-            <div class="diagnostic-stat"><span>Median / faculty</span><strong>${metrics.medianPerFaculty.toFixed(1)}</strong><small>fractional publication credit</small></div>
+            <div class="diagnostic-stat"><span>Top-3 concentration</span><strong>${metrics.top3Share.toFixed(0)}%</strong><small>share of adjusted count</small></div>
+            <div class="diagnostic-stat"><span>Median / faculty</span><strong>${metrics.medianPerFaculty.toFixed(1)}</strong><small>adjusted publication count</small></div>
         </div>
         <div class="data-caveat"><strong>Source limitation:</strong> CSRankings aggregate rows do not expose paper identifiers or coauthor affiliations, so CSPicks cannot reliably separate internal from cross-university collaborations. The proxy above measures coauthor intensity without inventing that split.</div>
         <h3>Highest team-size proxies</h3>
@@ -339,7 +342,7 @@ async function renderSchoolTrends() {
                 data: {
                     labels,
                     datasets: [{
-                        label: `${targetName} (Fractional Publication Credit)`,
+                        label: `${targetName} (Adjusted Publication Count)`,
                         data: dataPoints,
                         borderColor: '#10b981',
                         backgroundColor: 'rgba(16, 185, 129, 0.1)',
@@ -355,7 +358,7 @@ async function renderSchoolTrends() {
                     maintainAspectRatio: false,
                     scales: {
                         y: {
-                            title: { display: true, text: 'Fractional Publication Credit' },
+                            title: { display: true, text: 'Adjusted Publication Count' },
                             beginAtZero: true
                         }
                     },
@@ -548,7 +551,7 @@ function renderAreaTrends() {
             },
             scales: {
                 y: {
-                    title: { display: true, text: 'Adjusted Paper Count' },
+                    title: { display: true, text: 'Adjusted Publication Count' },
                     beginAtZero: true
                 }
             },
@@ -862,7 +865,7 @@ function renderSubfieldEffort() {
         data: {
             labels: chartData.map(d => d.label),
             datasets: [{
-                label: 'Fractional Papers/Active Faculty/Year',
+                label: 'Adjusted Count/Active Faculty/Year',
                 data: chartData.map(d => d.effort),
                 backgroundColor: barColor,
                 borderColor: barColor,
@@ -876,7 +879,7 @@ function renderSubfieldEffort() {
             maintainAspectRatio: false,
             scales: {
                 x: {
-                    title: { display: true, text: 'Fractional Papers / Active Faculty / Year' },
+                    title: { display: true, text: 'Adjusted Count / Active Faculty / Year' },
                     beginAtZero: true
                 },
                 y: {
@@ -896,7 +899,7 @@ function renderSubfieldEffort() {
                             const dataIndex = context.dataIndex;
                             const d = chartData[dataIndex];
                             return [
-                                `Fractional papers: ${d.total.toFixed(2)}`,
+                                `Adjusted count: ${d.total.toFixed(2)}`,
                                 `Researchers in area: ${d.activeResearchers}`,
                                 `Active school faculty: ${effort.activeFaculty}`
                             ];
@@ -991,14 +994,14 @@ function renderConferenceTrends() {
             },
             scales: {
                 y: {
-                    title: { display: true, text: 'Fractional Publication Credit' },
+                    title: { display: true, text: 'Adjusted Publication Count' },
                     beginAtZero: true
                 }
             },
             plugins: {
                 title: {
                     display: true,
-                    text: `Conference Fractional Publication Trends for ${targetName} (${startYear}-${endYear})`
+                    text: `Conference Adjusted-Count Trends for ${targetName} (${startYear}-${endYear})`
                 }
             }
         }

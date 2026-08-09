@@ -1,5 +1,5 @@
 import { loadData, loadAffiliationData, filterByYears, getConferenceAreaMap, getPublicationSchools, normalizeConferenceSet, publicationMatchesConferenceSet, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, schoolAliases, conferenceAliases } from './data.js';
-import { areaLabels, cleanName, encodeInlineValue, escapeHtml, getChartColors, safeExternalUrl, updateChartDefaults } from './shared.js';
+import { areaLabels, cleanName, encodeInlineValue, escapeHtml, getChartColors, safeExternalUrl, updateChartDefaults, updateHistoryWarning } from './shared.js';
 import { buildPriorPeriodData, calculateSchoolMetrics } from './metrics.js';
 import he from 'he';
 
@@ -48,18 +48,21 @@ async function init() {
     const historicalToggle = document.getElementById('historical-mode');
     if (historicalToggle) {
       historicalToggle.checked = historicalMode;
+      updateHistoryWarning('history-warning', historicalMode);
 
       historicalToggle.addEventListener('change', async () => {
         historicalToggle.disabled = true;
         try {
           if (historicalToggle.checked) await ensureHistoricalData();
           historicalMode = historicalToggle.checked;
+          updateHistoryWarning('history-warning', historicalMode);
           refreshData();
           updateURL();
         } catch (error) {
           console.error('Failed to load historical affiliation data:', error);
           historicalToggle.checked = false;
           historicalMode = false;
+          updateHistoryWarning('history-warning', false);
           window.alert('Historical affiliation data could not be loaded. Please try again.');
         } finally {
           historicalToggle.disabled = false;
@@ -1817,11 +1820,11 @@ function renderSchoolMetrics(metrics) {
   return `
     <div class="school-metrics" aria-label="University statistics">
       <div class="school-metric">${metricLabel('Rank movement', 'Change in rank versus the immediately preceding period of the same length. An upward arrow means the university improved.')}<strong>${rankMovement}</strong></div>
-      <div class="school-metric">${metricLabel('Momentum', 'Percentage change in fractional publication credit versus the preceding period of the same length.')}<strong>${growth}</strong></div>
-      <div class="school-metric">${metricLabel('Median / faculty', 'Median fractional publication credit among the university’s active faculty in the selected period.')}<strong>${metrics.medianPerFaculty.toFixed(1)}</strong></div>
-      <div class="school-metric">${metricLabel('Top-3 concentration', `Share of the university’s fractional credit produced by its three highest-output faculty. Top one: ${metrics.top1Share.toFixed(0)}%; top five: ${metrics.top5Share.toFixed(0)}%.`)}<strong>${metrics.top3Share.toFixed(0)}%</strong></div>
+      <div class="school-metric">${metricLabel('Momentum', 'Percentage change in adjusted publication count versus the preceding period of the same length.')}<strong>${growth}</strong></div>
+      <div class="school-metric">${metricLabel('Median / faculty', 'Median adjusted publication count among the university’s active faculty in the selected period.')}<strong>${metrics.medianPerFaculty.toFixed(1)}</strong></div>
+      <div class="school-metric">${metricLabel('Top-3 concentration', `Share of the university’s adjusted publication count produced by its three highest-output faculty. Top one: ${metrics.top1Share.toFixed(0)}%; top five: ${metrics.top5Share.toFixed(0)}%.`)}<strong>${metrics.top3Share.toFixed(0)}%</strong></div>
       <div class="school-metric">${metricLabel('Breadth', `Active is the number of areas with output. Sustained means active in both this and the preceding period. ${metrics.topTenAreas} areas currently rank in the top 10.`)}<strong>${metrics.activeAreas} active · ${metrics.sustainedAreas} sustained</strong></div>
-      <div class="school-metric">${metricLabel('Team-size proxy', 'Raw publication count divided by fractional credit. This estimates coauthor intensity; it is not a cross-university collaboration count.')}<strong>${metrics.impliedTeamSize.toFixed(1)}×</strong></div>
+      <div class="school-metric">${metricLabel('Team-size proxy', 'Raw publication count divided by adjusted publication count. This estimates coauthor intensity; it is not a cross-university collaboration count.')}<strong>${metrics.impliedTeamSize.toFixed(1)}×</strong></div>
       <div class="school-metric">${metricLabel('Data confidence', `Completeness of author homepage and Google Scholar profile fields. Current profile-field coverage: ${metrics.profileCoverage.toFixed(0)}%.`)}<strong class="confidence-${confidenceClass}">${metrics.confidence}</strong></div>
     </div>
   `;

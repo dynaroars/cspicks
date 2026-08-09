@@ -138,11 +138,16 @@
                 <a href="index.html">Search</a>
                 <a href="analysis.html" class="active">Analysis</a>
                 <a href="compare.html">Compare</a>
-                <a href="simulator.html">Simulator</a>
                 <a href="discoveries.html">🔭 Discoveries</a>
+                <a href="simulator.html">⚠️ Simulator</a>
             </div>
             <p>Visualize trends in Computer Science academia over the last decade.</p>
         </header>
+
+        <aside id="analysis-history-warning" class="history-warning" role="status" aria-live="polite">
+            <strong>Current-roster view.</strong>
+            Past publications are assigned to each researcher’s current CSRankings university.
+        </aside>
 
         <div class="filters search-filters analysis-controls" aria-label="Analysis filters">
             <div class="filter-group analysis-school-control">
@@ -175,7 +180,7 @@
             <div class="filter-group checkboxes analysis-checkboxes">
                 <label for="analysis-historical-mode" class="filter-checkbox">
                     <input type="checkbox" id="analysis-historical-mode">
-                    <span>Use History</span>
+                    <span>History</span>
                     <span class="tooltip-trigger" tabindex="0" aria-label="About historical mode">
                         ⓘ
                         <span class="tooltip-content">When enabled, publications are credited to the institution where
@@ -192,13 +197,13 @@
             <div class="nav-tab active" data-tab="schools">
                 Trends
                 <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Trends">ⓘ
-                    <span class="tooltip-content">For a university, shows its US rank over time using a rolling 10-year window. For a researcher, shows yearly fractional publication activity. <strong>Example:</strong> a university moving from rank 20 to 15 rose five places; a researcher at 1.5 received 1.5 fractional publication credits that year.</span>
+                    <span class="tooltip-content">For a university, shows its US rank over time using a rolling 10-year window. For a researcher, shows yearly adjusted publication count. <strong>Example:</strong> a university moving from rank 20 to 15 rose five places; a researcher at 1.5 had an adjusted count of 1.5 that year.</span>
                 </span>
             </div>
             <div class="nav-tab" data-tab="areas">
                 Area Growth
                 <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Area Growth">ⓘ
-                    <span class="tooltip-content">Shows the selected university's or researcher's fractional publication credit in each research area by year. <strong>Example:</strong> Security at 2.5 in 2025 means the selected target received 2.5 combined fractional credits in that area that year.</span>
+                    <span class="tooltip-content">Shows the selected university's or researcher's adjusted publication count in each research area by year. <strong>Example:</strong> Security at 2.5 in 2025 means the selected target had an adjusted count of 2.5 in that area that year.</span>
                 </span>
             </div>
             <div class="nav-tab" data-tab="faculty" data-school-only>
@@ -210,25 +215,25 @@
             <div class="nav-tab" data-tab="effort" data-school-only>
                 Publishing Effort
                 <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Publishing Effort">ⓘ
-                    <span class="tooltip-content">Compares the selected university's areas using fractional papers per active faculty per year. <strong>Example:</strong> 22 credits from 10 active faculty over 5 years gives an effort value of 0.44.</span>
+                    <span class="tooltip-content">Compares the selected university's areas using adjusted publication count per active faculty per year. <strong>Example:</strong> an adjusted count of 22 from 10 active faculty over 5 years gives an effort value of 0.44.</span>
                 </span>
             </div>
             <div class="nav-tab" data-tab="conf-trends">
                 Conference Trends
                 <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Conference Trends">ⓘ
-                    <span class="tooltip-content">Tracks the selected university's or researcher's yearly fractional credit at eligible conferences. The conference set above determines eligibility; this tab's checkboxes narrow it further. <strong>Example:</strong> compare whether the target's NeurIPS and ICML output rose or fell over the same years.</span>
+                    <span class="tooltip-content">Tracks the selected university's or researcher's yearly adjusted publication count at eligible conferences. The conference set above determines eligibility; this tab's checkboxes narrow it further. <strong>Example:</strong> compare whether the target's NeurIPS and ICML output rose or fell over the same years.</span>
                 </span>
             </div>
             <div class="nav-tab" data-tab="collaboration" data-school-only>
                 Collaboration
                 <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Collaboration">ⓘ
-                    <span class="tooltip-content">Shows coauthor-intensity and faculty-concentration proxies; it does not claim to identify cross-university collaborations. <strong>Example:</strong> 10 raw credits divided by 5 fractional credits gives a 2× team-size proxy.</span>
+                    <span class="tooltip-content">Shows coauthor-intensity and faculty-concentration proxies; it does not claim to identify cross-university collaborations. <strong>Example:</strong> a raw publication count of 10 divided by an adjusted count of 5 gives a 2× team-size proxy.</span>
                 </span>
             </div>
             <div class="nav-tab" data-tab="data-health">
                 Data Health
                 <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Data Health">ⓘ
-                    <span class="tooltip-content">Checks venue mode, fractional-credit totals, ranking order, and source metadata coverage. <strong>Example:</strong> “Pass” with zero inconsistencies means the current CSPicks calculation satisfies its CSRankings compatibility checks.</span>
+                    <span class="tooltip-content">Checks venue mode, adjusted-count totals, ranking order, and source metadata coverage. <strong>Example:</strong> “Pass” with zero inconsistencies means the current CSPicks calculation satisfies its CSRankings compatibility checks.</span>
                 </span>
             </div>
         </div>
