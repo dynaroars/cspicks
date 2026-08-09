@@ -22,33 +22,28 @@
   <div id="app">
     <header>
       <div class="title-row">
-        <h1>CS Picks</h1>
+        <a class="site-title-link" href="index.html" aria-label="Reset CS Picks"><h1>CS Picks</h1></a>
         <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
       </div>
       <nav class="top-nav" aria-label="Primary navigation">
-        <a href="index.html">Search</a>
-        <a href="compare.html">Compare</a>
+        <a href="index.html">🔎 Search</a>
+        <a href="compare.html">⚖️ Compare</a>
         <a href="discoveries.html" class="active" aria-current="page">🔭 Discoveries</a>
-        <a href="simulator.html">⚠️ Simulator</a>
+        <a href="simulator.html">☠️ Simulator</a>
+        <a href="funding.html">🇺🇸 NSF Funding</a>
       </nav>
     </header>
 
     <main class="discoveries-page tool-content">
       <section class="tool-intro">
-        <p class="eyebrow">Discoveries</p>
         <h2>Find changes hidden in the rankings</h2>
         <p>Explore unusual growth, decline, concentration, and specialization across computer science academia.</p>
       </section>
-      <aside id="discoveries-history-warning" class="history-warning discoveries-disclaimer" role="status" aria-live="polite" aria-label="Discoveries data interpretation">
-        <strong>Current-roster retrospective.</strong>
-        Past publications are assigned to each researcher’s current CSRankings university. Changes describe the publication history of today’s roster, not necessarily the university’s actual faculty at that time.
-      </aside>
-
       <div class="filters search-filters discoveries-filters" aria-label="Discovery filters">
         <div class="filter-group search-region-control">
           <select id="discoveries-region" aria-label="Region">
-            <option value="world">World</option>
-            <option value="us" selected>USA</option>
+            <option value="world" selected>World</option>
+            <option value="us">USA</option>
             <option value="europe">Europe</option>
             <option value="asia">Asia</option>
             <option value="canada">Canada</option>
@@ -92,6 +87,7 @@
   <footer>
     <a href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">FAQ, Methods &amp; Data</a> ·
     <a href="index.html?dataHealth=true#site-data-health" style="color: inherit; text-decoration: underline;">Data Health</a>
+    · <a href="https://roars.dev" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">ROARS Lab</a>
   </footer>
   <script type="module" src="./src/discoveries.js"></script>
 </body>

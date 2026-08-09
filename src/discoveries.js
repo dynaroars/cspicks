@@ -1,10 +1,12 @@
 import { filterByYears, loadAffiliationData, loadData } from './data.js';
 import { buildPriorPeriodData, calculateDiscoveryInsights } from './metrics.js';
-import { areaLabels, escapeHtml, getInstitutionShortName, updateHistoryWarning } from './shared.js';
+import { buildFundingIndex, calculateFundingDiscoveries, formatFunding } from './nsf.js';
+import { areaLabels, escapeHtml, getInitialRegion, getInstitutionShortName, rememberRegion } from './shared.js';
 
 let rawData = null;
 let affiliationHistory = null;
 let schoolAliases = null;
+let nsfData = null;
 
 const regionLabels = {
   world: 'worldwide',
@@ -38,6 +40,10 @@ function schoolLink(name) {
   return `<a class="discovery-school" href="index.html?q=${target}" title="${escapeHtml(name)}" aria-label="Explore ${escapeHtml(name)}">${escapeHtml(shortName)}</a>`;
 }
 
+function fundingSchoolLink(name) {
+  return `<a class="discovery-school" href="funding.html?q=${encodeURIComponent(name)}" title="Explore NSF funding for ${escapeHtml(name)}">${escapeHtml(getInstitutionShortName(name))}</a>`;
+}
+
 function renderDiscoveries() {
   const container = document.getElementById('discovery-stats');
   const start = Number(document.getElementById('discoveries-start-year').value);
@@ -45,7 +51,6 @@ function renderDiscoveries() {
   const region = document.getElementById('discoveries-region').value;
   const confSet = document.getElementById('discoveries-conf-set').value;
   const useHistory = document.getElementById('discoveries-history').checked;
-  updateHistoryWarning('discoveries-history-warning', useHistory);
   const history = useHistory ? affiliationHistory : null;
   const aliases = useHistory ? schoolAliases : null;
 
@@ -70,6 +75,12 @@ function renderDiscoveries() {
       <h3>${escapeHtml(title)} <span class="tooltip-trigger discovery-info" tabindex="0" aria-label="About ${escapeHtml(title)}">ⓘ<span class="tooltip-content">${escapeHtml(help)}</span></span></h3>
       ${body}
     </section>`;
+  const funding = buildFundingIndex(nsfData, start, end);
+  const priorFunding = buildFundingIndex(nsfData, priorStart, priorEnd);
+  const fundingInsights = calculateFundingDiscoveries(funding, priorFunding, current.schools);
+  const fundingList = (items, row) => items.length
+    ? `<ol class="discovery-list">${items.map((item, index) => `<li><span class="discovery-position">${index + 1}</span>${row(item)}</li>`).join('')}</ol>`
+    : empty;
 
   container.innerHTML = `
     <h2>Notable patterns across ${escapeHtml(regionLabels[region] || region)} universities</h2>
@@ -112,6 +123,25 @@ function renderDiscoveries() {
         <span>${schoolLink(item.name)}<small>${escapeHtml(areaLabels[item.focusArea.area] || item.focusArea.area)} · ${item.focusArea.portfolioShare.toFixed(0)}% school vs ${item.focusArea.regionalBaseline.toFixed(0)}% region · #${item.focusArea.areaRank}</small></span>
         <strong>${item.focusArea.specialization.toFixed(1)}× region</strong>`), 'discovery-featured')}
     </div>
+    ${(region === 'us' || region === 'world') ? `
+      <h2 class="discovery-section-heading">NSF funding patterns across US universities</h2>
+      <p class="summary-note">These include only awards attached to matched current US CSRankings faculty—not every NSF award at each university. Dollar attribution remains local even when a matched faculty member’s collaborative project spans several institutions.</p>
+      <div class="discovery-grid">
+        ${card('Largest attributed NSF portfolios', 'Universities with the most intended NSF funding attributed to matched current CSRankings faculty in the selected years.', fundingList(fundingInsights.topFunding, school => `
+          <span>${fundingSchoolLink(school.name)}<small>${school.awards.length} matched awards</small></span><strong>${formatFunding(school.attributedAmount)}</strong>`), 'discovery-featured')}
+        ${card('Fastest-growing NSF funding', 'Largest percentage increases in attributed NSF funding versus the preceding equal-length period. Both periods must contain at least $100,000.', fundingList(fundingInsights.fastestGrowth, item => `
+          <span>${fundingSchoolLink(item.school.name)}<small>${formatFunding(item.priorAmount)} → ${formatFunding(item.school.attributedAmount)}</small></span><strong>+${item.growth.toFixed(0)}%</strong>`), 'discovery-featured')}
+        ${card('Fastest-declining NSF funding', 'Largest percentage decreases in attributed NSF funding versus the preceding equal-length period. Both periods must contain at least $100,000.', fundingList(fundingInsights.fastestDecline, item => `
+          <span>${fundingSchoolLink(item.school.name)}<small>${formatFunding(item.priorAmount)} → ${formatFunding(item.school.attributedAmount)}</small></span><strong class="confidence-review">${item.growth.toFixed(0)}%</strong>`), 'discovery-risk')}
+        ${card('Broadest funded participation', 'Universities with the most distinct current-roster faculty matched to NSF awards in the selected years.', fundingList(fundingInsights.broadParticipation, school => `
+          <span>${fundingSchoolLink(school.name)}<small>${formatFunding(school.attributedAmount)} attributed</small></span><strong>${school.faculty.length} faculty</strong>`), 'discovery-featured')}
+        ${card('Funding rank ahead of publication rank', 'Universities whose rank by attributed NSF funding is substantially stronger than their CSRankings-style publication rank. This is a descriptive mismatch, not a quality judgment.', fundingList(fundingInsights.fundingAhead, item => `
+          <span>${fundingSchoolLink(item.school.name)}<small>funding #${item.fundingRank} · publications #${item.publicationRank}</small></span><strong>+${item.gap} places</strong>`), 'discovery-featured')}
+        ${card('Publication rank ahead of funding rank', 'Universities whose CSRankings-style publication rank is substantially stronger than their rank by matched attributed NSF funding. Missing matches can affect this comparison.', fundingList(fundingInsights.publicationsAhead, item => `
+          <span>${fundingSchoolLink(item.school.name)}<small>publications #${item.publicationRank} · funding #${item.fundingRank}</small></span><strong>${Math.abs(item.gap)} places</strong>`), 'discovery-risk')}
+        ${card('Largest matched collaborative projects', 'Largest full project values involving at least one matched current CSRankings professor, reconstructed from exact-title NSF sibling awards. Other project portions can belong to collaborators outside the roster; transfer records for the same lead investigator count only once.', fundingList(fundingInsights.largestCollaborations, award => `
+          <span><a class="discovery-school" href="funding.html?q=${encodeURIComponent(award.title)}" title="Explore this collaborative project">${escapeHtml(award.title.replace(/^Collaborative (?:Research|Resaerch):\s*/i, ''))}</a><small>${award.collaborativeAwardCount} institutional portions</small></span><strong>${formatFunding(award.collaborativeTotalAmount)}</strong>`), 'discovery-featured discovery-wide')}
+      </div>` : ''}
   `;
 }
 
@@ -136,7 +166,13 @@ async function refresh() {
 
 async function init() {
   setupYearSelectors();
-  rawData = await loadData();
+  const regionSelect = document.getElementById('discoveries-region');
+  regionSelect.value = getInitialRegion();
+  regionSelect.addEventListener('change', () => rememberRegion(regionSelect.value));
+  const [loadedData, nsfResponse] = await Promise.all([loadData(), fetch('./nsf-awards.json')]);
+  if (!nsfResponse.ok) throw new Error(`NSF dataset returned ${nsfResponse.status}`);
+  rawData = loadedData;
+  nsfData = await nsfResponse.json();
   document.getElementById('discoveries-loading').classList.add('hidden');
   document.getElementById('discovery-stats').classList.remove('hidden');
   document.querySelectorAll('.discoveries-filters select, #discoveries-history').forEach(control => {

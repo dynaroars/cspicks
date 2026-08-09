@@ -11,6 +11,7 @@ export default defineConfig({
                 compare: resolve(__dirname, 'compare.html'),
                 simulator: resolve(__dirname, 'simulator.html'),
                 discoveries: resolve(__dirname, 'discoveries.html'),
+                funding: resolve(__dirname, 'funding.html'),
             },
         },
     },

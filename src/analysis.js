@@ -1,7 +1,8 @@
 import Chart from 'chart.js/auto';
 import { loadData, loadAffiliationData, filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from './data.js';
-import { areaLabels, escapeHtml, updateChartDefaults } from './shared.js';
-import { buildPriorPeriodData, calculateParityReport, calculatePublishingEffort, calculateSchoolMetrics } from './metrics.js';
+import { areaLabels, cleanName, escapeHtml, getConferenceLabel, updateChartDefaults } from './shared.js';
+import { buildPriorPeriodData, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics } from './metrics.js';
+import { renderInsightList, renderMetricCards } from './analysis-ui.js';
 import bundledRules from './csrankings-rules.generated.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
 
@@ -9,6 +10,7 @@ updateChartDefaults(Chart);
 
 function refreshActiveTabChart() {
     if (!selectedTarget) return;
+    renderResearcherHighlights();
     if (currentTab === 'schools') renderSchoolTrends();
     else if (currentTab === 'areas') renderAreaTrends();
     else if (currentTab === 'faculty') renderFacultyTrends();
@@ -87,11 +89,13 @@ async function ensureHistoricalData() {
 
 function updateTargetMode() {
     const researcherMode = selectedTarget?.type === 'researcher';
+    document.body.classList.toggle('researcher-analysis', researcherMode);
     document.querySelectorAll('[data-school-only]').forEach(tab => {
         tab.style.display = researcherMode ? 'none' : 'inline-flex';
     });
     const activeTab = document.querySelector(`.nav-tab[data-tab="${currentTab}"]`);
-    if (researcherMode && activeTab?.hasAttribute('data-school-only')) {
+    const incompatible = researcherMode && activeTab?.hasAttribute('data-school-only');
+    if (incompatible) {
         document.querySelector('.nav-tab[data-tab="schools"]')?.click();
     }
 }
@@ -111,9 +115,11 @@ function showTargetPrompt() {
         chartInstance.destroy();
         chartInstance = null;
     }
-    document.querySelectorAll('.view-section').forEach(view => { view.style.display = 'none'; });
+    document.querySelectorAll('.view-section').forEach(view => { view.hidden = true; });
     const integratedSection = document.getElementById('integrated-analysis');
     if (integratedSection) integratedSection.hidden = true;
+    const highlights = document.getElementById('researcher-highlights');
+    if (highlights) highlights.hidden = true;
 }
 
 function showSelectedTarget() {
@@ -121,6 +127,7 @@ function showSelectedTarget() {
     if (integratedSection) {
         integratedSection.hidden = false;
     }
+    renderResearcherHighlights();
     renderConferenceFilters();
     document.querySelector(`.nav-tab[data-tab="${currentTab}"]`)?.click();
 }
@@ -175,12 +182,13 @@ function getConferenceSet() {
 function setupTabs() {
     document.querySelectorAll('.nav-tab').forEach(tab => {
         tab.addEventListener('click', () => {
+            const scrollPosition = { left: window.scrollX, top: window.scrollY };
             // UI Toggle
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
 
             // View Toggle
-            document.querySelectorAll('.view-section').forEach(v => v.style.display = 'none');
+            document.querySelectorAll('.view-section').forEach(view => { view.hidden = true; });
             const tabName = tab.dataset.tab;
             currentTab = tabName;
 
@@ -190,24 +198,30 @@ function setupTabs() {
             }
 
             if (tabName === 'schools') {
-                document.getElementById('school-trends-view').style.display = 'block';
+                document.getElementById('school-trends-view').hidden = false;
                 renderSchoolTrends();
             } else if (tabName === 'areas') {
-                document.getElementById('area-growth-view').style.display = 'block';
+                document.getElementById('area-growth-view').hidden = false;
                 renderAreaTrends();
             } else if (tabName === 'faculty') {
-                document.getElementById('faculty-diversity-view').style.display = 'block';
+                document.getElementById('faculty-diversity-view').hidden = false;
                 renderFacultyTrends();
             } else if (tabName === 'effort') {
-                document.getElementById('effort-view').style.display = 'block';
+                document.getElementById('effort-view').hidden = false;
                 renderSubfieldEffort();
             } else if (tabName === 'conf-trends') {
-                document.getElementById('conf-trends-view').style.display = 'block';
+                document.getElementById('conf-trends-view').hidden = false;
                 renderConferenceTrends();
             } else if (tabName === 'collaboration') {
-                document.getElementById('collaboration-view').style.display = 'block';
+                document.getElementById('collaboration-view').hidden = false;
                 renderCollaborationStats();
             }
+
+            requestAnimationFrame(() => {
+                if (Math.abs(window.scrollY - scrollPosition.top) > 1) {
+                    window.scrollTo({ ...scrollPosition, behavior: 'auto' });
+                }
+            });
         });
     });
 }
@@ -222,6 +236,107 @@ function getAnalysisData() {
     const current = filterByYears(rawData, start, end, region, history, aliases, confSet);
     const prior = buildPriorPeriodData(rawData, start, end, region, history, aliases, confSet);
     return { current, prior, start, end, confSet };
+}
+
+function getResearcherPatterns() {
+    if (selectedTarget?.type !== 'researcher') return null;
+    const professor = rawData.professors?.[getTargetName()];
+    if (!professor) return null;
+    const { current, start, end, confSet } = getAnalysisData();
+    return calculateResearcherPatterns(professor, current.professors, {
+        startYear: start,
+        endYear: end,
+        confSet,
+        areaMap: getConferenceAreaMap(confSet)
+    });
+}
+
+function researcherHighlightText(patterns) {
+    if (!patterns) return [];
+    const insights = [];
+    if (patterns.pivot) {
+        insights.push(`Research emphasis shifted from ${areaLabels[patterns.pivot.from] || patterns.pivot.from} to ${areaLabels[patterns.pivot.to] || patterns.pivot.to} between the earlier and later halves of this period.`);
+    }
+    if (patterns.momentum !== null && Math.abs(patterns.momentum) >= 25) {
+        insights.push(`Recent three-year adjusted output is ${Math.abs(patterns.momentum).toFixed(0)}% ${patterns.momentum > 0 ? 'higher' : 'lower'} than the preceding three-year window.`);
+    }
+    if (patterns.primaryArea && patterns.primaryAreaShare >= 60) {
+        insights.push(`${patterns.primaryAreaShare.toFixed(0)}% of adjusted output is in ${areaLabels[patterns.primaryArea[0]] || patterns.primaryArea[0]}.`);
+    }
+    if (patterns.similarPeers.length) {
+        insights.push(`Closest selected-region area profiles: ${patterns.similarPeers.map(peer => `${cleanName(peer.name)} (${peer.affiliation})`).join('; ')}.`);
+    }
+    if (!insights.length) insights.push(`Eligible publications appear in ${patterns.activeYears.length} selected years across ${patterns.breadth} research areas.`);
+    return insights.slice(0, 3);
+}
+
+function renderResearcherHighlights() {
+    const container = document.getElementById('researcher-highlights');
+    if (!container) return;
+    const patterns = getResearcherPatterns();
+    container.hidden = !patterns;
+    container.innerHTML = patterns ? renderInsightList(researcherHighlightText(patterns), 'Profile highlights') : '';
+}
+
+function renderResearcherActivityMetrics(patterns) {
+    const container = document.getElementById('ranking-stats');
+    if (!container) return;
+    if (!patterns) {
+        container.innerHTML = '';
+        return;
+    }
+    const selectedYears = parseInt(endYearSelectEl.value) - parseInt(startYearSelectEl.value) + 1;
+    const momentum = patterns.momentum === null ? '—' : `${patterns.momentum >= 0 ? '+' : ''}${patterns.momentum.toFixed(0)}%`;
+    const percentile = patterns.percentile === null ? '—' : `${Math.round(patterns.percentile)}th`;
+    container.innerHTML = renderMetricCards([
+        { label: 'Active years', value: `${patterns.activeYears.length} / ${selectedYears}`, help: 'Years with at least one eligible publication in the selected conference set.' },
+        { label: 'Consistency', value: `${patterns.consistency.toFixed(0)}%`, help: 'Share of selected years with at least one eligible publication.' },
+        { label: 'Peak year', value: `${patterns.peak.year}`, detail: `${Math.ceil(patterns.peak.count)} papers (${patterns.peak.adjusted.toFixed(1)} adjusted)`, help: 'Year with the highest adjusted publication count.' },
+        { label: 'Active streak', value: `${patterns.activeStreak} ${patterns.activeStreak === 1 ? 'year' : 'years'}`, detail: `ending ${patterns.activeYears.at(-1)}`, help: 'Consecutive active years ending at the latest active year in the selection.' },
+        { label: 'Recent momentum', value: momentum, detail: 'latest 3 years vs previous 3', help: 'Percentage change in adjusted count between the latest three-year window and the preceding three-year window.' },
+        { label: 'Yearly variability', value: `${(patterns.volatility * 100).toFixed(0)}%`, detail: 'relative to mean output', help: 'Variation in annual adjusted count relative to its yearly mean. Lower values indicate steadier output across the selected period.' },
+        { label: 'Regional percentile', value: percentile, detail: 'by adjusted count', help: 'Position by adjusted publication count among active researchers in the selected region and period.' }
+    ], 'Researcher activity statistics');
+}
+
+function renderResearcherAreaInsights(patterns) {
+    const container = document.getElementById('area-insights');
+    if (!container) return;
+    if (!patterns || selectedTarget?.type !== 'researcher') {
+        container.innerHTML = '';
+        return;
+    }
+    const trajectory = patterns.pivot
+        ? `${areaLabels[patterns.pivot.from] || patterns.pivot.from} → ${areaLabels[patterns.pivot.to] || patterns.pivot.to}`
+        : 'No clear pivot';
+    const emerging = patterns.emergingAreas.map(area => areaLabels[area] || area).join(', ') || 'None';
+    const dormant = patterns.dormantAreas.map(area => areaLabels[area] || area).join(', ') || 'None';
+    container.innerHTML = renderMetricCards([
+        { label: 'Primary area', value: areaLabels[patterns.primaryArea[0]] || patterns.primaryArea[0], detail: `${patterns.primaryAreaShare.toFixed(0)}% of adjusted output`, help: 'Research area with the largest adjusted publication count.' },
+        { label: 'Research breadth', value: `${patterns.breadth} ${patterns.breadth === 1 ? 'area' : 'areas'}`, help: 'Number of research areas with eligible output.' },
+        { label: 'Area balance', value: `${patterns.balance.toFixed(0)}%`, help: 'Normalized entropy of adjusted output across active areas. Higher means output is more evenly distributed.' },
+        { label: 'Trajectory', value: trajectory, help: 'Compares the primary area in the earlier and later halves of the selected period; small totals are ignored.' },
+        { label: 'Emerging', value: emerging, help: 'Areas appearing in the later half but not the earlier half, with at least 0.5 adjusted count.' },
+        { label: 'Dormant', value: dormant, help: 'Areas present in the earlier half but absent from the later half, with at least 0.5 adjusted count earlier.' }
+    ], 'Research-area patterns');
+}
+
+function renderResearcherVenueInsights(patterns) {
+    const container = document.getElementById('venue-insights');
+    if (!container) return;
+    if (!patterns || selectedTarget?.type !== 'researcher') {
+        container.innerHTML = '';
+        return;
+    }
+    const shift = patterns.venueShift
+        ? `${getConferenceLabel(patterns.venueShift.from)} → ${getConferenceLabel(patterns.venueShift.to)}`
+        : 'No clear shift';
+    container.innerHTML = renderMetricCards([
+        { label: 'Venue breadth', value: `${patterns.venueBreadth} venues`, help: 'Number of eligible conferences with output in the selected period.' },
+        { label: 'Primary venue', value: getConferenceLabel(patterns.topVenue[0]), detail: `${patterns.venueConcentration.toFixed(0)}% of adjusted output`, help: 'Conference with the largest adjusted publication count.' },
+        { label: 'Venue persistence', value: getConferenceLabel(patterns.mostPersistentVenue[0]), detail: `${patterns.mostPersistentVenue[1].years.size} active years`, help: 'Conference appearing in the greatest number of distinct years.' },
+        { label: 'Venue trajectory', value: shift, help: 'Compares the highest-output venue in the earlier and later halves of the selected period.' }
+    ], 'Conference patterns');
 }
 
 function renderCollaborationStats() {
@@ -278,7 +393,31 @@ function renderDataHealth() {
     `;
 }
 
+function renderSchoolAnalysisSummary(current, prior, schoolName) {
+    const container = document.getElementById('ranking-stats');
+    if (!container) return;
+    const school = current.schools[schoolName];
+    const metrics = calculateSchoolMetrics(current, prior, schoolName);
+    if (!school || !metrics) {
+        container.innerHTML = '';
+        return;
+    }
 
+    const rankMovement = metrics.rankDelta === null
+        ? '—'
+        : metrics.rankDelta === 0 ? 'No change' : `${metrics.rankDelta > 0 ? '▲' : '▼'} ${Math.abs(metrics.rankDelta)}`;
+    const growth = `${metrics.growth >= 0 ? '+' : ''}${metrics.growth.toFixed(0)}%`;
+    const confidenceClass = metrics.confidence.toLowerCase();
+    container.innerHTML = renderMetricCards([
+        { label: 'Rank movement', value: rankMovement, help: 'Change in rank versus the immediately preceding period of the same length. An upward arrow means the university improved.' },
+        { label: 'Momentum', value: growth, help: 'Percentage change in adjusted publication count versus the preceding period of the same length.' },
+        { label: 'Median / faculty', value: metrics.medianPerFaculty.toFixed(1), help: 'Median adjusted publication count among the university’s active faculty in the selected period.' },
+        { label: 'Top-3 concentration', value: `${metrics.top3Share.toFixed(0)}%`, help: `Share of adjusted publication count produced by the three highest-output faculty. Top one: ${metrics.top1Share.toFixed(0)}%; top five: ${metrics.top5Share.toFixed(0)}%.` },
+        { label: 'Breadth', value: `${metrics.activeAreas} active · ${metrics.sustainedAreas} sustained`, help: `Active is the number of areas with output. Sustained means active in this and the preceding period. ${metrics.topTenAreas} areas currently rank in the top 10.` },
+        { label: 'Team-size proxy', value: `${metrics.impliedTeamSize.toFixed(1)}×`, help: 'Raw publication count divided by adjusted publication count. This estimates coauthor intensity, not cross-university collaboration.' },
+        { label: 'Profile completeness', value: metrics.confidence, className: `confidence-${confidenceClass}`, help: `Completeness of author homepage and Google Scholar profile fields. Coverage: ${metrics.profileCoverage.toFixed(0)}%.` }
+    ], 'University statistics');
+}
 
 async function renderSchoolTrends() {
     try {
@@ -298,15 +437,18 @@ async function renderSchoolTrends() {
         if (startYear > endYear) return;
 
         if (selectedTarget.type === 'researcher') {
+            renderResearcherActivityMetrics(getResearcherPatterns());
             const professor = rawData.professors[targetName];
             const confSet = getConferenceSet();
             const labels = [];
-            const dataPoints = [];
+            const paperCounts = [];
+            const adjustedCounts = [];
             for (let year = startYear; year <= endYear; year++) {
                 labels.push(year);
-                dataPoints.push((professor?.pubs || [])
-                    .filter(pub => pub.year === year && publicationMatchesConferenceSet(pub, confSet))
-                    .reduce((sum, pub) => sum + pub.adjustedcount, 0));
+                const yearlyPublications = (professor?.pubs || [])
+                    .filter(pub => pub.year === year && publicationMatchesConferenceSet(pub, confSet));
+                paperCounts.push(yearlyPublications.reduce((sum, pub) => sum + (pub.count || 0), 0));
+                adjustedCounts.push(yearlyPublications.reduce((sum, pub) => sum + (pub.adjustedcount || 0), 0));
             }
 
             chartInstance = new Chart(ctx, {
@@ -314,8 +456,17 @@ async function renderSchoolTrends() {
                 data: {
                     labels,
                     datasets: [{
-                        label: 'Adjusted publication count',
-                        data: dataPoints,
+                        label: 'Papers',
+                        data: paperCounts,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.08)',
+                        tension: 0.2,
+                        fill: false,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }, {
+                        label: 'Adjusted count',
+                        data: adjustedCounts,
                         borderColor: '#10b981',
                         backgroundColor: 'rgba(16, 185, 129, 0.1)',
                         tension: 0.2,
@@ -330,12 +481,20 @@ async function renderSchoolTrends() {
                     maintainAspectRatio: false,
                     scales: {
                         y: {
-                            title: { display: true, text: 'Adjusted Publication Count' },
+                            title: { display: true, text: 'Publication count' },
                             beginAtZero: true
                         }
                     },
                     plugins: {
-                        title: { display: true, text: 'Publication trend' }
+                        title: { display: true, text: 'Publication trends · papers and adjusted count' },
+                        tooltip: {
+                            callbacks: {
+                                footer: items => {
+                                    const index = items[0]?.dataIndex;
+                                    return index === undefined ? '' : `${paperCounts[index]} papers (${adjustedCounts[index].toFixed(1)} adjusted)`;
+                                }
+                            }
+                        }
                     }
                 }
             });
@@ -343,9 +502,12 @@ async function renderSchoolTrends() {
         }
 
         const targetSchool = targetName;
+        const { current, prior } = getAnalysisData();
+        renderSchoolAnalysisSummary(current, prior, targetSchool);
 
         const labels = [];
-        const dataPoints = [];
+        const rankPoints = [];
+        const publicationPoints = [];
         const region = document.getElementById('region-select')?.value || 'world';
         const regionLabel = document.getElementById('region-select')?.selectedOptions?.[0]?.textContent || 'US';
 
@@ -378,7 +540,15 @@ async function renderSchoolTrends() {
             const school = result.schools[targetSchool];
 
             labels.push(y);
-            dataPoints.push(school ? school.rank : null);
+            rankPoints.push(school ? school.rank : null);
+            publicationPoints.push(Object.values(rawData.professors).reduce((total, professor) => {
+                const yearlyOutput = professor.pubs
+                    .filter(pub => pub.year === y
+                        && publicationMatchesConferenceSet(pub, getConferenceSet())
+                        && isPubAtSchool(professor, pub, targetSchool))
+                    .reduce((sum, pub) => sum + pub.adjustedcount, 0);
+                return total + yearlyOutput;
+            }, 0));
         }
 
         chartInstance = new Chart(ctx, {
@@ -386,15 +556,23 @@ async function renderSchoolTrends() {
             data: {
                 labels: labels,
                 datasets: [{
-                    label: `Rank in ${regionLabel}`,
-                    data: dataPoints,
+                    label: 'Adjusted publication count',
+                    data: publicationPoints,
                     borderColor: '#10b981',
                     backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    yAxisID: 'y',
                     tension: 0.2,
-                    fill: {
-                        target: 'end',
-                        below: 'rgba(16, 185, 129, 0.1)'
-                    },
+                    fill: true,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }, {
+                    label: `Rank in ${regionLabel}`,
+                    data: rankPoints,
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.08)',
+                    yAxisID: 'y1',
+                    tension: 0.2,
+                    fill: false,
                     pointRadius: 4,
                     pointHoverRadius: 6
                 }]
@@ -405,17 +583,20 @@ async function renderSchoolTrends() {
                 maintainAspectRatio: false,
                 scales: {
                     y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Adjusted Publication Count' }
+                    },
+                    y1: {
                         reverse: true,
                         title: { display: true, text: `${regionLabel} Rank (10-year window)` },
                         suggestedMin: 1,
-                        suggestedMax: 100
+                        suggestedMax: 100,
+                        position: 'right',
+                        grid: { drawOnChartArea: false }
                     }
                 },
                 plugins: {
-                    tooltip: {
-                        callbacks: {
-                        }
-                    }
+                    title: { display: true, text: 'Publication output and regional rank' }
                 }
             }
         });
@@ -542,13 +723,17 @@ function renderAreaTrends() {
 
     const legendContainer = document.getElementById('area-legend');
     if (legendContainer) {
-        legendContainer.innerHTML = '<div style="font-weight: 600; margin-bottom: 0.5rem;">Areas</div>' +
-            datasets.map((ds, i) => `
-                <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; cursor: pointer;">
+        legendContainer.innerHTML = `
+            <div class="analysis-area-legend-title">Areas</div>
+            <div class="analysis-area-options">
+              ${datasets.map((ds, i) => `
+                <label class="analysis-area-option">
                     <input type="checkbox" checked data-index="${i}" style="accent-color: ${ds.borderColor};">
                     <span>${ds.label}</span>
                 </label>
-            `).join('');
+              `).join('')}
+            </div>
+        `;
 
         legendContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
             cb.addEventListener('change', (e) => {
@@ -558,6 +743,7 @@ function renderAreaTrends() {
             });
         });
     }
+    renderResearcherAreaInsights(getResearcherPatterns());
 }
 
 // --------------------------------------------------------------------------
@@ -780,7 +966,7 @@ function renderConferenceFilters() {
         chiconf: 'CHI',
         'siggraph-asia': 'SIGGRAPH Asia'
     };
-    const venues = Object.entries(parentMap)
+    const venues = Object.entries(getConferenceAreaMap(confSet))
         .filter(([venue]) => publishedConferences.has(venue));
 
     if (venues.length === 0) {
@@ -984,6 +1170,7 @@ function renderConferenceTrends() {
             }
         }
     });
+    renderResearcherVenueInsights(getResearcherPatterns());
 }
 
 init();

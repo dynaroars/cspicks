@@ -32,6 +32,55 @@ export const conferenceLabels = {
   pets: 'PETS (Privacy Enhancing Technologies Symposium)'
 };
 
+const VALID_REGIONS = new Set(['world', 'us', 'europe', 'asia', 'canada', 'australasia']);
+const EUROPE_COUNTRIES = new Set('AL AD AT BY BE BA BG HR CY CZ DK EE FI FR DE GR HU IS IE IT LV LI LT LU MT MD MC ME NL MK NO PL PT RO RU SM RS SK SI ES SE CH TR UA GB VA'.split(' '));
+const ASIA_COUNTRIES = new Set('AF AM AZ BH BD BT BN KH CN GE HK IN ID IR IQ IL JP JO KZ KW KG LA LB MO MY MV MN MM NP KP KR OM PK PS PH QA SA SG LK SY TW TJ TH TL TM AE UZ VN YE'.split(' '));
+const AUSTRALASIA_COUNTRIES = new Set('AU NZ FJ PG SB VU WS TO KI FM MH PW NR TV'.split(' '));
+const REGION_STORAGE_KEY = 'cspicks:preferred-region';
+
+export function detectRegionFromLocales(locales = []) {
+  for (const locale of locales) {
+    try {
+      const parsedLocale = new Intl.Locale(locale);
+      const region = (parsedLocale.region || parsedLocale.maximize().region)?.toUpperCase();
+      if (!region) continue;
+      if (region === 'US') return 'us';
+      if (region === 'CA') return 'canada';
+      if (EUROPE_COUNTRIES.has(region)) return 'europe';
+      if (ASIA_COUNTRIES.has(region)) return 'asia';
+      if (AUSTRALASIA_COUNTRIES.has(region)) return 'australasia';
+      return 'world';
+    } catch {
+      // Try the next browser locale when a malformed locale is present.
+    }
+  }
+  return 'world';
+}
+
+export function getInitialRegion(search = globalThis.location?.search || '') {
+  const queryRegion = new URLSearchParams(search).get('region');
+  if (VALID_REGIONS.has(queryRegion)) return queryRegion;
+  try {
+    const stored = globalThis.localStorage?.getItem(REGION_STORAGE_KEY);
+    if (VALID_REGIONS.has(stored)) return stored;
+  } catch {
+    // Privacy modes can disable storage.
+  }
+  const locales = globalThis.navigator?.languages?.length
+    ? globalThis.navigator.languages
+    : [globalThis.navigator?.language].filter(Boolean);
+  return detectRegionFromLocales(locales);
+}
+
+export function rememberRegion(region) {
+  if (!VALID_REGIONS.has(region)) return;
+  try {
+    globalThis.localStorage?.setItem(REGION_STORAGE_KEY, region);
+  } catch {
+    // Region selection still works for the current page without storage.
+  }
+}
+
 export function getConferenceLabel(key) {
   return conferenceLabels[key] || key.toUpperCase();
 }
@@ -94,24 +143,6 @@ const institutionShortNames = {
 
 export function getInstitutionShortName(name) {
   return institutionShortNames[name] || name;
-}
-
-export function updateHistoryWarning(elementOrId, enabled) {
-  const warning = typeof elementOrId === 'string'
-    ? document.getElementById(elementOrId)
-    : elementOrId;
-  if (!warning) return;
-
-  warning.classList.toggle('history-enabled', enabled);
-  if (warning.classList.contains('compact-history-status')) {
-    warning.innerHTML = enabled
-      ? '⚠ Historical affiliations are estimates and may be incomplete.'
-      : 'ⓘ Current affiliations · Past work follows today’s faculty roster.';
-    return;
-  }
-  warning.innerHTML = enabled
-    ? '<strong>Estimated historical affiliations.</strong> Publications use OpenAlex and manual year-specific affiliations. Records may be incomplete or incorrect: uncovered years are omitted, while researchers with no history record fall back to their current university.'
-    : '<strong>Current-roster view.</strong> Past publications are assigned to each researcher’s current CSRankings university. Results describe today’s roster, not necessarily the university’s actual faculty at that time.';
 }
 
 export function escapeHtml(value) {

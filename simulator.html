@@ -22,29 +22,38 @@
   <div id="app">
     <header>
       <div class="title-row">
-        <h1>CS Picks</h1>
+        <a class="site-title-link" href="index.html" aria-label="Reset CS Picks"><h1>CS Picks</h1></a>
         <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
       </div>
       <nav class="top-nav" aria-label="Primary navigation">
-        <a href="index.html">Search</a>
-        <a href="compare.html">Compare</a>
+        <a href="index.html">🔎 Search</a>
+        <a href="compare.html">⚖️ Compare</a>
         <a href="discoveries.html">🔭 Discoveries</a>
-        <a href="simulator.html" class="active" aria-current="page">⚠️ Simulator</a>
+        <a href="simulator.html" class="active" aria-current="page">☠️ Simulator</a>
+        <a href="funding.html">🇺🇸 NSF Funding</a>
       </nav>
     </header>
 
     <main class="simulator-page tool-content">
       <section class="tool-intro">
-        <p class="eyebrow">Simulator</p>
         <h2>Explore hypothetical faculty changes</h2>
         <p>Estimate how adding, transferring, or removing professors changes publication-based rankings.</p>
       </section>
-      <aside class="simulator-disclaimer" role="note" aria-label="Simulator disclaimer">
-        <strong>Experimental what-if tool.</strong>
-        Results are hypothetical estimates based on third-party publication data that may be incomplete, outdated, or matched to the wrong person. They are not predictions, endorsements, or recommendations. Verify the underlying data, and do not use these results for hiring, promotion, evaluation, or other consequential decisions.
+      <aside class="simulator-disclaimer context-note" role="note" aria-label="Simulator disclaimer">
+        <strong>Experimental simulator.</strong> Results are hypothetical, may contain third-party data errors, and are not recommendations. Verify them before use.
       </aside>
 
       <div class="filters search-filters simulator-filters" aria-label="Simulator filters">
+        <div class="filter-group search-region-control">
+          <select id="sim-region-select" aria-label="Region">
+            <option value="world" selected>World</option>
+            <option value="us">USA</option>
+            <option value="europe">Europe</option>
+            <option value="asia">Asia</option>
+            <option value="canada">Canada</option>
+            <option value="australasia">Australasia</option>
+          </select>
+        </div>
         <div class="filter-group" id="year-filter-group" aria-label="Year range">
           <div class="year-inputs">
             <select id="start-year" aria-label="Start year"></select>
@@ -85,8 +94,8 @@
             <button id="sim-deselect-all" type="button" class="btn-secondary">Deselect all</button>
           </div>
           <div id="sim-faculty-list" class="sim-faculty-list"></div>
-          <textarea id="sim-candidates-input" rows="5" placeholder="One researcher per line&#10;John Smith&#10;Lishan Yang 0001"></textarea>
-          <p class="sim-help">Append a four-digit DBLP suffix when a name is ambiguous. Press Ctrl+Enter or Cmd+Enter to analyze.</p>
+          <textarea id="sim-candidates-input" rows="5" placeholder="One researcher or DBLP profile URL per line&#10;John Smith&#10;https://dblp.org/pid/12/3456.html"></textarea>
+          <p class="sim-help">Paste DBLP author-profile links containing <code>/pid/</code> for exact matching. You can also append a four-digit DBLP suffix to an ambiguous name. Press Ctrl+Enter or Cmd+Enter to analyze.</p>
           <button id="sim-analyze-btn" class="btn-secondary simulator-primary" type="button">Analyze candidates</button>
         </section>
 
@@ -105,8 +114,9 @@
   </div>
 
   <footer>
-    <a href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">FAQ, Methods &amp; Data</a> ·
-    <a href="index.html?dataHealth=true#site-data-health" style="color: inherit; text-decoration: underline;">Data Health</a>
+    <a href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer">FAQ, Methods &amp; Data</a> ·
+    <a href="index.html?dataHealth=true#site-data-health">Data Health</a>
+    · <a href="https://roars.dev" target="_blank" rel="noopener noreferrer">ROARS Lab</a>
   </footer>
   <script type="module" src="./src/simulator.js"></script>
 </body>

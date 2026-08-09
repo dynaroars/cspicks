@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const applySystemTheme = () => document.documentElement.setAttribute('data-theme', systemTheme.matches ? 'dark' : 'light');
+    applySystemTheme();
+    systemTheme.addEventListener('change', applySystemTheme);
+  </script>
+  <title>CS Picks - NSF Funding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body class="search-page funding-page">
+  <div id="app">
+    <header>
+      <div class="title-row">
+        <a class="site-title-link" href="index.html" aria-label="Reset CS Picks"><h1>CS Picks</h1></a>
+        <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
+      </div>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="index.html">🔎 Search</a>
+        <a href="compare.html">⚖️ Compare</a>
+        <a href="discoveries.html">🔭 Discoveries</a>
+        <a href="simulator.html">☠️ Simulator</a>
+        <a href="funding.html" class="active" aria-current="page">🇺🇸 NSF Funding</a>
+      </nav>
+    </header>
+
+    <section class="search-section funding-search-section">
+      <div class="search-intro">
+        <h2>Explore NSF funding</h2>
+        <p>Search matched CS faculty, universities, awards, and NSF programs.</p>
+      </div>
+      <div class="search-container">
+        <div class="universal-search">
+          <input type="search" id="funding-search" placeholder="Loading NSF award data…" disabled autofocus
+            autocomplete="off" aria-autocomplete="list" aria-controls="funding-suggestions"
+            aria-expanded="false">
+          <div id="funding-suggestions" class="universal-suggestions" role="listbox" hidden></div>
+        </div>
+      </div>
+      <div class="search-examples">
+        <span>Try</span>
+        <span id="funding-examples"><button type="button" data-show-all>All</button></span>
+      </div>
+      <div class="search-filters funding-filters" aria-label="Funding filters">
+        <span id="funding-award-count" class="filter-sentence-prefix">NSF CS awards during</span>
+        <div class="filter-group" aria-label="Award year range">
+          <div class="year-inputs">
+            <select id="funding-start-year" aria-label="Start award year"></select>
+            <span>to</span>
+            <select id="funding-end-year" aria-label="End award year"></select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="funding-results-container">
+      <div id="funding-status" class="funding-status" role="status" aria-live="polite"></div>
+      <section id="funding-school-results" class="results-grid"></section>
+      <section id="funding-faculty-results" class="results-grid"></section>
+    </main>
+
+    <section id="nsf-data-health" class="site-data-health" hidden>
+      <div id="nsf-data-health-stats" class="diagnostic-panel"></div>
+    </section>
+  </div>
+  <script type="module" src="/src/funding.js"></script>
+  <footer>
+    <a href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer">FAQ, Methods &amp; Data</a>
+    <span aria-hidden="true">·</span>
+    <a id="nsf-data-health-toggle" href="?dataHealth=true#nsf-data-health">Data Health</a>
+    <span aria-hidden="true">·</span>
+    <a href="https://roars.dev" target="_blank" rel="noopener noreferrer">ROARS Lab</a>
+  </footer>
+</body>
+</html>
