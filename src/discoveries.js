@@ -35,7 +35,7 @@ async function ensureHistoricalData() {
 function schoolLink(name) {
   const shortName = getInstitutionShortName(name);
   const target = encodeURIComponent(name);
-  return `<a class="discovery-school" href="analysis.html?target=${target}" title="${escapeHtml(name)}" aria-label="Analyze ${escapeHtml(name)}">${escapeHtml(shortName)}</a>`;
+  return `<a class="discovery-school" href="index.html?q=${target}" title="${escapeHtml(name)}" aria-label="Explore ${escapeHtml(name)}">${escapeHtml(shortName)}</a>`;
 }
 
 function renderDiscoveries() {
@@ -73,7 +73,7 @@ function renderDiscoveries() {
 
   container.innerHTML = `
     <h2>Notable patterns across ${escapeHtml(regionLabels[region] || region)} universities</h2>
-    <p class="summary-note">Current period: ${start}–${end}. Comparison period: ${priorStart}–${priorEnd}. Select a university to explore it in Analysis.</p>
+    <p class="summary-note">Current period: ${start}–${end}. Comparison period: ${priorStart}–${priorEnd}. Select a university to explore its results and analysis.</p>
     <div class="discovery-grid">
       ${card('Biggest rank gains', 'Universities that moved up the most places compared with the preceding equal-length period. Both periods must have an adjusted publication count of at least 2.', list(insights.rankClimbers, item => `
         <span>${schoolLink(item.name)}<small>#${item.prior.rank} → #${item.metrics.rank}</small></span>

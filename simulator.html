@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="./src/style.css">
 </head>
 
-<body>
+<body class="tool-page simulator-tool-page">
   <div id="app">
     <header>
       <div class="title-row">
@@ -27,31 +27,24 @@
       </div>
       <nav class="top-nav" aria-label="Primary navigation">
         <a href="index.html">Search</a>
-        <a href="analysis.html">Analysis</a>
         <a href="compare.html">Compare</a>
         <a href="discoveries.html">🔭 Discoveries</a>
         <a href="simulator.html" class="active" aria-current="page">⚠️ Simulator</a>
       </nav>
-      <p>Explore how adding, transferring, or removing faculty changes publication-based rankings.</p>
     </header>
 
-    <main class="simulator-page">
+    <main class="simulator-page tool-content">
+      <section class="tool-intro">
+        <p class="eyebrow">Simulator</p>
+        <h2>Explore hypothetical faculty changes</h2>
+        <p>Estimate how adding, transferring, or removing professors changes publication-based rankings.</p>
+      </section>
       <aside class="simulator-disclaimer" role="note" aria-label="Simulator disclaimer">
         <strong>Experimental what-if tool.</strong>
         Results are hypothetical estimates based on third-party publication data that may be incomplete, outdated, or matched to the wrong person. They are not predictions, endorsements, or recommendations. Verify the underlying data, and do not use these results for hiring, promotion, evaluation, or other consequential decisions.
       </aside>
 
       <div class="filters search-filters simulator-filters" aria-label="Simulator filters">
-        <div class="filter-group search-region-control">
-          <select id="region-select" aria-label="Region">
-            <option value="world">World</option>
-            <option value="us" selected>USA</option>
-            <option value="europe">Europe</option>
-            <option value="asia">Asia</option>
-            <option value="canada">Canada</option>
-            <option value="australasia">Australasia</option>
-          </select>
-        </div>
         <div class="filter-group" id="year-filter-group" aria-label="Year range">
           <div class="year-inputs">
             <select id="start-year" aria-label="Start year"></select>
@@ -86,7 +79,7 @@
           <h2>2. Enter Faculty Candidates</h2>
           <div class="selected-item" id="selected-univ-display"></div>
           <p class="sim-help">Select current faculty to model removal, or enter other researchers to model additions and transfers.</p>
-          <input type="search" id="sim-faculty-search" placeholder="Search current faculty or DBLP" autocomplete="off">
+          <input type="search" id="sim-faculty-search" placeholder="Search faculty by name; DBLP is used as a fallback" autocomplete="off">
           <div class="sim-selection-actions">
             <button id="sim-select-all" type="button" class="btn-secondary">Select all</button>
             <button id="sim-deselect-all" type="button" class="btn-secondary">Deselect all</button>
@@ -112,7 +105,8 @@
   </div>
 
   <footer>
-    <a href="faq.html" style="color: inherit; text-decoration: underline;">FAQ, Methods &amp; Data</a>
+    <a href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">FAQ, Methods &amp; Data</a> ·
+    <a href="index.html?dataHealth=true#site-data-health" style="color: inherit; text-decoration: underline;">Data Health</a>
   </footer>
   <script type="module" src="./src/simulator.js"></script>
 </body>

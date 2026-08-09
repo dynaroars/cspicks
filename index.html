@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="./src/style.css">
 </head>
 
-<body>
+<body class="search-page">
   <div id="app">
     <header>
       <div class="title-row">
@@ -30,8 +30,6 @@
       <div class="top-nav" style="display: flex; gap: 1rem; margin-bottom: 1rem; justify-content: center;">
         <a href="index.html"
           style="text-decoration: none; color: var(--primary-color); border-bottom: 2px solid var(--primary-color); font-weight: 600;">Search</a>
-        <a href="analysis.html"
-          style="text-decoration: none; color: var(--text-secondary); font-weight: 600;">Analysis</a>
         <a href="compare.html"
           style="text-decoration: none; color: var(--text-secondary); font-weight: 600;">Compare</a>
         <a href="discoveries.html"
@@ -39,24 +37,33 @@
         <a href="simulator.html"
           style="text-decoration: none; color: var(--text-secondary); font-weight: 600;">⚠️ Simulator</a>
       </div>
-      <p>Explore Computer Science Professors, Schools, and Research Areas.</p>
     </header>
 
     <div class="search-section">
+      <div class="search-intro">
+        <h2>Explore computer science academia</h2>
+        <p>Discover universities, professors, research areas, and publication trends.</p>
+      </div>
       <div class="search-container">
-        <input type="search" id="main-search" placeholder="Loading data..." disabled autofocus>
+        <div class="universal-search">
+          <input type="search" id="main-search" placeholder="Loading data..." disabled autofocus
+            autocomplete="off" aria-autocomplete="list" aria-controls="universal-suggestions"
+            aria-expanded="false">
+          <div id="universal-suggestions" class="universal-suggestions" role="listbox" hidden></div>
+        </div>
       </div>
 
-      <aside id="history-warning" class="history-warning" role="status" aria-live="polite">
-        <strong>Current-roster view.</strong>
-        Past publications are assigned to each researcher’s current CSRankings university.
-      </aside>
+      <div class="search-examples" aria-label="Example searches">
+        <span>Try</span>
+        <span id="search-example-items"></span>
+      </div>
 
       <div class="filters search-filters" aria-label="Search filters">
+        <span class="filter-sentence-prefix">Showing</span>
         <div class="filter-group search-region-control">
           <select id="region-select" aria-label="Region">
-            <option value="world" selected>World</option>
-            <option value="us">USA</option>
+            <option value="world">World</option>
+            <option value="us" selected>USA</option>
             <option value="europe">Europe</option>
             <option value="asia">Asia</option>
             <option value="canada">Canada</option>
@@ -100,6 +107,11 @@
         </div>
       </div>
 
+      <aside id="history-warning" class="history-warning compact-history-status" role="status" aria-live="polite">
+        <strong>Current-roster view.</strong>
+        Past publications are assigned to each researcher’s current CSRankings university.
+      </aside>
+
     </div>
 
     <div id="search-context-header"
@@ -114,11 +126,80 @@
       <section id="dblp-results" class="results-grid"></section>
     </main>
 
+    <section id="integrated-analysis" class="integrated-analysis" hidden aria-live="polite">
+      <div class="integrated-analysis-header">
+        <div>
+          <p class="eyebrow">Explore further</p>
+          <h2>Analysis</h2>
+        </div>
+        <p>These views use the region, years, conference set, and History setting above.</p>
+      </div>
+
+      <div class="nav-tabs analysis-nav-tabs" role="tablist" aria-label="Analysis views">
+        <button type="button" class="nav-tab active" data-tab="schools" role="tab">
+          Trends <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Trends">ⓘ<span class="tooltip-content">For a university, shows its regional rank over time using a rolling 10-year window. For a professor, shows yearly adjusted publication count.</span></span>
+        </button>
+        <button type="button" class="nav-tab" data-tab="areas" role="tab">
+          Area Growth <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Area Growth">ⓘ<span class="tooltip-content">Shows the selected university's or professor's adjusted publication count in each research area by year.</span></span>
+        </button>
+        <button type="button" class="nav-tab" data-tab="faculty" data-school-only role="tab">
+          Faculty Diversity <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Faculty Diversity">ⓘ<span class="tooltip-content">Measures how many active faculty published in at least two top-level areas within a rolling three-year window.</span></span>
+        </button>
+        <button type="button" class="nav-tab" data-tab="effort" data-school-only role="tab">
+          Publishing Effort <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Publishing Effort">ⓘ<span class="tooltip-content">Compares research areas using adjusted publication count per active faculty per year.</span></span>
+        </button>
+        <button type="button" class="nav-tab" data-tab="conf-trends" role="tab">
+          Conference Trends <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Conference Trends">ⓘ<span class="tooltip-content">Tracks yearly adjusted publication count at eligible conferences in the conference set selected above.</span></span>
+        </button>
+        <button type="button" class="nav-tab" data-tab="collaboration" data-school-only role="tab">
+          Collaboration <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Collaboration">ⓘ<span class="tooltip-content">Shows coauthor-intensity and faculty-concentration proxies; it does not claim to identify cross-university collaborations.</span></span>
+        </button>
+      </div>
+
+      <div id="school-trends-view" class="view-section">
+        <div class="chart-container"><canvas id="rankingChart"></canvas></div>
+        <div id="ranking-stats"></div>
+      </div>
+      <div id="area-growth-view" class="view-section" style="display: none;">
+        <div class="analysis-area-layout">
+          <div id="area-legend" class="analysis-area-legend"></div>
+          <div class="chart-container"><canvas id="areaChart"></canvas></div>
+        </div>
+      </div>
+      <div id="faculty-diversity-view" class="view-section" style="display: none;">
+        <div class="chart-container"><canvas id="diversityChart"></canvas></div>
+      </div>
+      <div id="effort-view" class="view-section" style="display: none;">
+        <div class="chart-container analysis-tall-chart"><canvas id="effortChart"></canvas></div>
+      </div>
+      <div id="conf-trends-view" class="view-section" style="display: none;">
+        <div class="analysis-conference-filter">
+          <h3>Filter Conferences</h3>
+          <div class="analysis-conference-actions">
+            <button id="conf-select-all" type="button" class="btn-secondary">Select All</button>
+            <button id="conf-clear-all" type="button" class="btn-secondary">Clear All</button>
+          </div>
+          <div id="conf-checkbox-groups" class="analysis-conference-groups"></div>
+        </div>
+        <div class="chart-container"><canvas id="confTrendsChart"></canvas></div>
+      </div>
+      <div id="collaboration-view" class="view-section" style="display: none;">
+        <div id="collaboration-stats" class="diagnostic-panel"></div>
+      </div>
+    </section>
+
+    <section id="site-data-health" class="site-data-health" hidden>
+      <div id="data-health-stats" class="diagnostic-panel"></div>
+    </section>
+
 
   </div>
   <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/analysis.js"></script>
   <footer>
-    <a href="faq.html" style="color: inherit; text-decoration: underline;">FAQ, Methods &amp; Data</a>
+    <a href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer">FAQ, Methods &amp; Data</a>
+    <span aria-hidden="true">·</span>
+    <a id="data-health-toggle" href="?dataHealth=true#site-data-health">Data Health</a>
   </footer>
 </body>
 

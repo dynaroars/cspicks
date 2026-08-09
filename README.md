@@ -85,15 +85,16 @@ cspicks/
 │   ├── simulator.js                  # Simulator page UI and orchestration
 │   ├── simulation.js                 # Pure matching and rank-impact logic
 │   ├── compare.js                    # School comparison logic
-│   ├── analysis.js                   # Analysis dashboard logic
+│   ├── analysis.js                   # Integrated analysis and data-health logic
 │   └── style.css                     # CSS styles
 ├── scripts/
 │   ├── build-openalex-history.js     # Generates historical affiliations
 │   └── build-school-aliases.js       # Generates school-aliases.json
-├── index.html                        # Main search page
+├── index.html                        # Search, results, and integrated analysis
 ├── compare.html                      # School comparison page
 ├── simulator.html                    # Ranking simulator page
-├── analysis.html                     # Analysis dashboard
+├── analysis.html                     # Legacy redirect to integrated search
+├── FAQ.md                            # GitHub-hosted methods and data documentation
 └── README.md
 ```
 

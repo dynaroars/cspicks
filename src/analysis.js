@@ -1,6 +1,6 @@
 import Chart from 'chart.js/auto';
 import { loadData, loadAffiliationData, filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from './data.js';
-import { areaLabels, escapeHtml, updateChartDefaults, updateHistoryWarning } from './shared.js';
+import { areaLabels, escapeHtml, updateChartDefaults } from './shared.js';
 import { buildPriorPeriodData, calculateParityReport, calculatePublishingEffort, calculateSchoolMetrics } from './metrics.js';
 import bundledRules from './csrankings-rules.generated.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
@@ -8,13 +8,13 @@ import { syncCsrankingsRules } from './csrankings-rules.js';
 updateChartDefaults(Chart);
 
 function refreshActiveTabChart() {
+    if (!selectedTarget) return;
     if (currentTab === 'schools') renderSchoolTrends();
     else if (currentTab === 'areas') renderAreaTrends();
     else if (currentTab === 'faculty') renderFacultyTrends();
     else if (currentTab === 'effort') renderSubfieldEffort();
     else if (currentTab === 'conf-trends') renderConferenceTrends();
     else if (currentTab === 'collaboration') renderCollaborationStats();
-    else if (currentTab === 'data-health') renderDataHealth();
 }
 
 const observer = new MutationObserver((mutations) => {
@@ -34,24 +34,21 @@ let schoolAliases = null;
 let chartInstance = null;
 let currentTab = 'schools';
 let historicalMode = false;
-let selectedTarget = { type: 'school', name: 'George Mason University' };
+let selectedTarget = null;
 let activeVenueRules = bundledRules;
 let venueRulesCheckedAt = null;
 let conferenceFilterContext = null;
+let analysisReady = false;
 
 // DOM Elements Cache
-let targetSearchEl = null;
 let startYearSelectEl = null;
 let endYearSelectEl = null;
 let confSetSelectEl = null;
-let historicalToggleEl = null;
 
 function cacheDOMElements() {
-    targetSearchEl = document.getElementById('analysis-target-search');
-    startYearSelectEl = document.getElementById('analysis-start-year');
-    endYearSelectEl = document.getElementById('analysis-end-year');
-    confSetSelectEl = document.getElementById('analysis-conf-set');
-    historicalToggleEl = document.getElementById('analysis-historical-mode');
+    startYearSelectEl = document.getElementById('start-year');
+    endYearSelectEl = document.getElementById('end-year');
+    confSetSelectEl = document.getElementById('conf-set');
 }
 
 async function init() {
@@ -61,14 +58,21 @@ async function init() {
         venueRulesCheckedAt = new Date();
 
         cacheDOMElements();
-        setupYearSelectors();
         renderConferenceFilters();
-        setupConferenceSet();
-        setupHistoricalMode();
         setupTabs();
-        setupTargetSearch();
         setupConferenceFilterButtons();
-        renderSchoolTrends();
+        analysisReady = true;
+        if (new URLSearchParams(window.location.search).get('dataHealth') === 'true') {
+            const panel = document.getElementById('site-data-health');
+            if (panel) panel.hidden = false;
+        }
+        if (!document.getElementById('site-data-health')?.hidden) renderDataHealth();
+        if (window.__cspicksAnalysisTarget) {
+            await selectIntegratedTarget(window.__cspicksAnalysisTarget);
+            return;
+        }
+        if (selectedTarget) showSelectedTarget();
+        else showTargetPrompt();
     } catch (err) {
         console.error('Analysis load error:', err);
     }
@@ -81,64 +85,11 @@ async function ensureHistoricalData() {
     schoolAliases = data.aliasMap;
 }
 
-function setupTargetSearch() {
-    if (!targetSearchEl) return;
-    const options = document.getElementById('analysis-target-options');
-    const schools = Object.values(rawData.schools)
-        .filter(school => school.country === 'us')
-        .map(school => school.name)
-        .sort();
-    const researchers = Object.keys(rawData.professors).sort();
-    const targetsByName = new Map();
-
-    schools.forEach(name => targetsByName.set(name.toLowerCase(), { type: 'school', name }));
-    researchers.forEach(name => {
-        const key = name.toLowerCase();
-        if (!targetsByName.has(key)) targetsByName.set(key, { type: 'researcher', name });
-    });
-
-    if (options) {
-        options.innerHTML = [
-            ...schools.map(name => `<option value="${escapeHtml(name)}" label="University"></option>`),
-            ...researchers.map(name => `<option value="${escapeHtml(name)}" label="Researcher"></option>`)
-        ].join('');
-    }
-
-    const requestedTarget = new URLSearchParams(window.location.search).get('target');
-    const linkedTarget = requestedTarget && targetsByName.get(requestedTarget.toLowerCase());
-    if (linkedTarget) {
-        selectedTarget = linkedTarget;
-        targetSearchEl.value = linkedTarget.name;
-    }
-
-    const selectTarget = () => {
-        const query = targetSearchEl.value.trim().toLowerCase();
-        let target = targetsByName.get(query);
-        if (!target) {
-            const matches = [...targetsByName.entries()].filter(([name]) => name.includes(query));
-            if (matches.length === 1) {
-                target = matches[0][1];
-                targetSearchEl.value = target.name;
-            }
-        }
-        if (!target || (target.type === selectedTarget.type && target.name === selectedTarget.name)) return;
-        selectedTarget = target;
-        updateTargetMode();
-        refreshActiveTabChart();
-    };
-    targetSearchEl.addEventListener('input', selectTarget);
-    targetSearchEl.addEventListener('change', selectTarget);
-    updateTargetMode();
-}
-
 function updateTargetMode() {
-    const researcherMode = selectedTarget.type === 'researcher';
+    const researcherMode = selectedTarget?.type === 'researcher';
     document.querySelectorAll('[data-school-only]').forEach(tab => {
         tab.style.display = researcherMode ? 'none' : 'inline-flex';
     });
-    const historyControls = document.querySelector('.analysis-checkboxes');
-    if (historyControls) historyControls.style.display = researcherMode ? 'none' : 'flex';
-
     const activeTab = document.querySelector(`.nav-tab[data-tab="${currentTab}"]`);
     if (researcherMode && activeTab?.hasAttribute('data-school-only')) {
         document.querySelector('.nav-tab[data-tab="schools"]')?.click();
@@ -146,61 +97,79 @@ function updateTargetMode() {
 }
 
 function getTargetName() {
-    return selectedTarget.name;
+    return selectedTarget?.name || '';
 }
 
 function isPublicationForTarget(prof, pub) {
+    if (!selectedTarget) return false;
     if (selectedTarget.type === 'researcher') return prof.name === selectedTarget.name;
     return isPubAtSchool(prof, pub, selectedTarget.name);
 }
 
-function setupYearSelectors() {
-    if (!startYearSelectEl || !endYearSelectEl) return;
-    const currentYear = new Date().getFullYear();
-
-    for (let y = 2000; y <= currentYear; y++) {
-        endYearSelectEl.innerHTML += `<option value="${y}" ${y === currentYear ? 'selected' : ''}>${y}</option>`;
-        startYearSelectEl.innerHTML += `<option value="${y}" ${y === currentYear - 10 ? 'selected' : ''}>${y}</option>`;
+function showTargetPrompt() {
+    if (chartInstance) {
+        chartInstance.destroy();
+        chartInstance = null;
     }
-    const refresh = () => {
-        refreshActiveTabChart();
-    };
-    startYearSelectEl.addEventListener('change', refresh);
-    endYearSelectEl.addEventListener('change', refresh);
+    document.querySelectorAll('.view-section').forEach(view => { view.style.display = 'none'; });
+    const integratedSection = document.getElementById('integrated-analysis');
+    if (integratedSection) integratedSection.hidden = true;
 }
+
+function showSelectedTarget() {
+    const integratedSection = document.getElementById('integrated-analysis');
+    if (integratedSection) {
+        integratedSection.hidden = false;
+    }
+    renderConferenceFilters();
+    document.querySelector(`.nav-tab[data-tab="${currentTab}"]`)?.click();
+}
+
+async function selectIntegratedTarget(detail) {
+    if (!detail?.name || !detail?.type) {
+        selectedTarget = null;
+        if (analysisReady) showTargetPrompt();
+        return;
+    }
+    selectedTarget = { type: detail.type, name: detail.name };
+    historicalMode = Boolean(detail.historical);
+    if (historicalMode) await ensureHistoricalData();
+    conferenceFilterContext = null;
+    updateTargetMode();
+    if (analysisReady) showSelectedTarget();
+}
+
+window.addEventListener('cspicks:analysis-target', event => {
+    window.__cspicksAnalysisTarget = event.detail || null;
+    selectIntegratedTarget(event.detail).catch(error => console.error('Failed to update integrated analysis:', error));
+});
+window.addEventListener('cspicks:analysis-refresh', event => {
+    historicalMode = Boolean(event.detail?.historical);
+    const refresh = async () => {
+        if (historicalMode) await ensureHistoricalData();
+        if (selectedTarget) {
+            conferenceFilterContext = null;
+            renderConferenceFilters();
+            refreshActiveTabChart();
+        }
+        if (!document.getElementById('site-data-health')?.hidden) renderDataHealth();
+    };
+    refresh().catch(error => console.error('Failed to refresh integrated analysis:', error));
+});
+
+document.getElementById('data-health-toggle')?.addEventListener('click', event => {
+    event.preventDefault();
+    const panel = document.getElementById('site-data-health');
+    if (!panel) return;
+    panel.hidden = !panel.hidden;
+    if (!panel.hidden && analysisReady) {
+        renderDataHealth();
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+});
 
 function getConferenceSet() {
     return confSetSelectEl?.value || 'csrankings-default';
-}
-
-function setupConferenceSet() {
-    if (!confSetSelectEl) return;
-    confSetSelectEl.addEventListener('change', () => {
-        refreshActiveTabChart();
-    });
-}
-
-function setupHistoricalMode() {
-    if (historicalToggleEl) {
-        updateHistoryWarning('analysis-history-warning', historicalMode);
-        historicalToggleEl.addEventListener('change', async () => {
-            historicalToggleEl.disabled = true;
-            try {
-                if (historicalToggleEl.checked) await ensureHistoricalData();
-                historicalMode = historicalToggleEl.checked;
-                updateHistoryWarning('analysis-history-warning', historicalMode);
-                refreshActiveTabChart();
-            } catch (error) {
-                console.error('Failed to load historical affiliation data:', error);
-                historicalToggleEl.checked = false;
-                historicalMode = false;
-                updateHistoryWarning('analysis-history-warning', false);
-                window.alert('Historical affiliation data could not be loaded. Please try again.');
-            } finally {
-                historicalToggleEl.disabled = false;
-            }
-        });
-    }
 }
 
 function setupTabs() {
@@ -214,6 +183,11 @@ function setupTabs() {
             document.querySelectorAll('.view-section').forEach(v => v.style.display = 'none');
             const tabName = tab.dataset.tab;
             currentTab = tabName;
+
+            if (!selectedTarget) {
+                showTargetPrompt();
+                return;
+            }
 
             if (tabName === 'schools') {
                 document.getElementById('school-trends-view').style.display = 'block';
@@ -233,9 +207,6 @@ function setupTabs() {
             } else if (tabName === 'collaboration') {
                 document.getElementById('collaboration-view').style.display = 'block';
                 renderCollaborationStats();
-            } else if (tabName === 'data-health') {
-                document.getElementById('data-health-view').style.display = 'block';
-                renderDataHealth();
             }
         });
     });
@@ -247,8 +218,9 @@ function getAnalysisData() {
     const history = historicalMode ? affiliationHistory : null;
     const aliases = historicalMode ? schoolAliases : null;
     const confSet = getConferenceSet();
-    const current = filterByYears(rawData, start, end, 'us', history, aliases, confSet);
-    const prior = buildPriorPeriodData(rawData, start, end, 'us', history, aliases, confSet);
+    const region = document.getElementById('region-select')?.value || 'world';
+    const current = filterByYears(rawData, start, end, region, history, aliases, confSet);
+    const prior = buildPriorPeriodData(rawData, start, end, region, history, aliases, confSet);
     return { current, prior, start, end, confSet };
 }
 
@@ -342,7 +314,7 @@ async function renderSchoolTrends() {
                 data: {
                     labels,
                     datasets: [{
-                        label: `${targetName} (Adjusted Publication Count)`,
+                        label: 'Adjusted publication count',
                         data: dataPoints,
                         borderColor: '#10b981',
                         backgroundColor: 'rgba(16, 185, 129, 0.1)',
@@ -363,7 +335,7 @@ async function renderSchoolTrends() {
                         }
                     },
                     plugins: {
-                        title: { display: true, text: `Publication Trends for ${targetName}` }
+                        title: { display: true, text: 'Publication trend' }
                     }
                 }
             });
@@ -374,7 +346,8 @@ async function renderSchoolTrends() {
 
         const labels = [];
         const dataPoints = [];
-        const region = 'us';
+        const region = document.getElementById('region-select')?.value || 'world';
+        const regionLabel = document.getElementById('region-select')?.selectedOptions?.[0]?.textContent || 'US';
 
         console.log('Calculating trends for', targetSchool, 'from', startYear, 'to', endYear);
 
@@ -413,7 +386,7 @@ async function renderSchoolTrends() {
             data: {
                 labels: labels,
                 datasets: [{
-                    label: `${targetSchool} (Rank in US)`,
+                    label: `Rank in ${regionLabel}`,
                     data: dataPoints,
                     borderColor: '#10b981',
                     backgroundColor: 'rgba(16, 185, 129, 0.1)',
@@ -433,7 +406,7 @@ async function renderSchoolTrends() {
                 scales: {
                     y: {
                         reverse: true,
-                        title: { display: true, text: 'US Rank (10-year window)' },
+                        title: { display: true, text: `${regionLabel} Rank (10-year window)` },
                         suggestedMin: 1,
                         suggestedMax: 100
                     }
@@ -561,7 +534,7 @@ function renderAreaTrends() {
                 },
                 title: {
                     display: true,
-                    text: `Top Research Areas Growth for ${targetName}`
+                    text: 'Research-area growth'
                 }
             }
         }
@@ -759,6 +732,11 @@ function setupConferenceFilterButtons() {
 function renderConferenceFilters() {
     const container = document.getElementById('conf-checkbox-groups');
     if (!container) return;
+    if (!selectedTarget) {
+        container.innerHTML = '';
+        conferenceFilterContext = null;
+        return;
+    }
 
     const startYear = parseInt(startYearSelectEl?.value) || 2010;
     const endYear = parseInt(endYearSelectEl?.value) || new Date().getFullYear();
@@ -891,7 +869,7 @@ function renderSubfieldEffort() {
             plugins: {
                 title: {
                     display: true,
-                    text: `Publishing Effort at ${targetSchool} (${startYear}-${endYear})`
+                    text: `Publishing effort (${startYear}-${endYear})`
                 },
                 tooltip: {
                     callbacks: {
@@ -1001,7 +979,7 @@ function renderConferenceTrends() {
             plugins: {
                 title: {
                     display: true,
-                    text: `Conference Adjusted-Count Trends for ${targetName} (${startYear}-${endYear})`
+                    text: `Conference adjusted-count trends (${startYear}-${endYear})`
                 }
             }
         }

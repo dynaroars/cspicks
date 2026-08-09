@@ -181,7 +181,7 @@
     </style>
 </head>
 
-<body>
+<body class="tool-page compare-tool-page">
     <div id="app">
         <header>
             <div class="title-row">
@@ -190,13 +190,18 @@
             </div>
             <div class="top-nav">
                 <a href="index.html">Search</a>
-                <a href="analysis.html">Analysis</a>
                 <a href="compare.html" class="active">Compare</a>
                 <a href="discoveries.html">🔭 Discoveries</a>
                 <a href="simulator.html">⚠️ Simulator</a>
             </div>
-            <p>Head-to-head comparison of two institutions or faculty across research areas.</p>
         </header>
+
+        <main class="tool-content compare-page-content">
+        <section class="tool-intro">
+            <p class="eyebrow">Compare</p>
+            <h2>Compare computer science academia</h2>
+            <p>See how two universities or professors differ across research areas.</p>
+        </section>
 
         <div id="loading-indicator" style="text-align: center; padding: 3rem;">
             <div
@@ -302,9 +307,12 @@
 
         <div id="comparison-summary" class="comparison-summary"></div>
 
+        </main>
+
         <footer
             style="text-align: center; padding: 0.75rem; color: var(--text-secondary); font-size: 0.9rem; margin-top: 1.5rem; border-top: 1px solid var(--border-color);">
-            <a href="faq.html" style="color: inherit; text-decoration: underline;">FAQ, Methods &amp; Data</a>
+            <a href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">FAQ, Methods &amp; Data</a> ·
+            <a href="index.html?dataHealth=true#site-data-health" style="color: inherit; text-decoration: underline;">Data Health</a>
         </footer>
     </div>
     <script type="module" src="./src/compare.js"></script>

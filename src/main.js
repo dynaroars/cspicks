@@ -1,5 +1,5 @@
 import { loadData, loadAffiliationData, filterByYears, getConferenceAreaMap, getPublicationSchools, normalizeConferenceSet, publicationMatchesConferenceSet, DEFAULT_START_YEAR, DEFAULT_END_YEAR, parentMap, schoolAliases, conferenceAliases } from './data.js';
-import { areaLabels, cleanName, encodeInlineValue, escapeHtml, getChartColors, safeExternalUrl, updateChartDefaults, updateHistoryWarning } from './shared.js';
+import { areaLabels, cleanName, encodeInlineValue, escapeHtml, getChartColors, getConferenceLabel, getInstitutionShortName, safeExternalUrl, updateChartDefaults, updateHistoryWarning } from './shared.js';
 import { buildPriorPeriodData, calculateSchoolMetrics } from './metrics.js';
 import he from 'he';
 
@@ -16,6 +16,7 @@ let endYear = DEFAULT_END_YEAR;
 let selectedRegion = 'us';
 let historicalMode = false;
 let confSet = 'csrankings-default';
+let selectedAnalysisTarget = null;
 
 let ChartCtor = null;
 const activeSchoolCharts = new Map();
@@ -88,6 +89,7 @@ async function init() {
       appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
     }
     updatePriorData();
+    renderSearchExamples();
 
     console.log(`Data loaded (${startYear}-${endYear}, region: ${selectedRegion}, historical: ${historicalMode}):`, Object.keys(appData.professors).length, 'professors', Object.keys(appData.schools).length, 'schools');
 
@@ -99,14 +101,22 @@ async function init() {
 
     if (params.has('q')) {
       searchInput.value = params.get('q');
+      document.body.classList.add('has-search-query');
       const query = params.get('q').toLowerCase();
       searchProfessors(query);
       searchSchools(query);
       searchAreaPeople(query);
       searchDBLPAuthors(query);
+      updateIntegratedAnalysis(query);
+      const linkedTargetName = params.get('target');
+      const linkedTargetType = params.get('targetType');
+      const linkedTargetExists = linkedTargetType === 'school'
+        ? Boolean(rawData.schools[linkedTargetName])
+        : linkedTargetType === 'researcher' && Boolean(rawData.professors[linkedTargetName]);
+      if (linkedTargetExists) displayIntegratedAnalysis({ type: linkedTargetType, name: linkedTargetName });
     } else {
       // Show top rankings on initial load
-      showTopRankings();
+      showDefaultRankings();
     }
 
     searchInput.focus();
@@ -169,6 +179,10 @@ function updateURL() {
 
   const q = document.getElementById('main-search').value;
   if (q) params.set('q', q);
+  if (selectedAnalysisTarget) {
+    params.set('target', selectedAnalysisTarget.name);
+    params.set('targetType', selectedAnalysisTarget.type);
+  }
 
   const newUrl = `${window.location.pathname}?${params.toString()}`;
   window.history.replaceState({}, '', newUrl);
@@ -181,6 +195,7 @@ function refreshData() {
 
   appData = filterByYears(rawData, startYear, endYear, selectedRegion, historicalMode ? historyMap : null, historicalMode ? aliasMap : null, confSet);
   updatePriorData();
+  renderSearchExamples();
 
   console.log(`Refreshed: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}, ConfSet=${confSet}`);
 
@@ -192,8 +207,12 @@ function refreshData() {
     searchAreaPeople(query);
     searchDBLPAuthors(query);
   } else {
-    showTopRankings();
+    showDefaultRankings();
   }
+
+  window.dispatchEvent(new CustomEvent('cspicks:analysis-refresh', {
+    detail: { historical: historicalMode }
+  }));
 
   // Restore expanded state immediately
   requestAnimationFrame(() => {
@@ -215,142 +234,340 @@ function updatePriorData() {
 
 function setupSearch() {
   const mainSearch = document.getElementById('main-search');
+  const suggestionsEl = document.getElementById('universal-suggestions');
+  let suggestions = [];
+  let activeSuggestion = -1;
+
+  const closeSuggestions = () => {
+    suggestions = [];
+    activeSuggestion = -1;
+    suggestionsEl.hidden = true;
+    suggestionsEl.innerHTML = '';
+    mainSearch.setAttribute('aria-expanded', 'false');
+    mainSearch.removeAttribute('aria-activedescendant');
+  };
+
+  const scoreMatch = (text, query) => {
+    const normalized = text.toLowerCase();
+    if (normalized.startsWith(query)) return 0;
+    if (normalized.split(/\s+/).some(word => word.startsWith(query))) return 1;
+    return normalized.includes(query) ? 2 : Infinity;
+  };
+
+  const renderSuggestions = queryValue => {
+    if (!rawData || !appData) return closeSuggestions();
+    const query = queryValue.trim().toLowerCase();
+    if (!query) return closeSuggestions();
+
+    const rank = (items, limit) => items
+      .map(item => ({ item, score: scoreMatch(`${item.label} ${item.searchTerms || ''}`, query) }))
+      .filter(match => Number.isFinite(match.score))
+      .sort((a, b) => a.score - b.score || a.item.label.localeCompare(b.item.label))
+      .slice(0, limit)
+      .map(match => match.item);
+
+    const aliasesBySchool = new Map();
+    Object.entries(schoolAliases).forEach(([alias, school]) => {
+      if (!aliasesBySchool.has(school)) aliasesBySchool.set(school, []);
+      aliasesBySchool.get(school).push(alias);
+    });
+
+    const schools = rank(Object.values(appData.schools).map(school => ({
+      kind: 'school',
+      label: school.name,
+      value: school.name,
+      detail: Number.isFinite(school.rank) ? `University · #${school.rank}` : 'University',
+      searchTerms: (aliasesBySchool.get(school.name) || []).join(' '),
+      target: { type: 'school', name: school.name }
+    })), 4);
+    const professors = rank(Object.values(appData.professors).map(professor => ({
+      kind: 'researcher',
+      label: cleanName(professor.name),
+      value: professor.name,
+      detail: professor.affiliation || 'Professor',
+      target: { type: 'researcher', name: professor.name }
+    })), 4);
+    const areas = rank(Object.entries(areaLabels).map(([key, label]) => ({
+      kind: 'area', label, value: label, detail: 'Research area', searchTerms: key
+    })), 3);
+    const conferences = rank(Object.keys(getConferenceAreaMap(confSet))
+      .filter(key => publicationMatchesConferenceSet({ area: key }, confSet))
+      .map(key => ({
+        kind: 'conference', label: getConferenceLabel(key), value: key, detail: 'Conference'
+      })), 3);
+
+    const groups = [
+      ['Universities', schools],
+      ['Professors', professors],
+      ['Research areas', areas],
+      ['Conferences', conferences]
+    ].filter(([, items]) => items.length);
+    suggestions = groups.flatMap(([, items]) => items);
+    activeSuggestion = -1;
+
+    if (!suggestions.length) {
+      suggestionsEl.innerHTML = '<div class="universal-suggestion-empty">No matching CSRankings result</div>';
+    } else {
+      let index = 0;
+      suggestionsEl.innerHTML = groups.map(([label, items]) => `
+        <div class="universal-suggestion-group">${label}</div>
+        ${items.map(item => {
+          const itemIndex = index++;
+          return `<button type="button" id="universal-suggestion-${itemIndex}" class="universal-suggestion" role="option" data-index="${itemIndex}" aria-selected="false"><span>${escapeHtml(item.label)}</span><small>${escapeHtml(item.detail)}</small></button>`;
+        }).join('')}
+      `).join('');
+    }
+    suggestionsEl.hidden = false;
+    mainSearch.setAttribute('aria-expanded', 'true');
+  };
+
+  const updateActiveSuggestion = nextIndex => {
+    if (!suggestions.length) return;
+    activeSuggestion = (nextIndex + suggestions.length) % suggestions.length;
+    suggestionsEl.querySelectorAll('.universal-suggestion').forEach((element, index) => {
+      const active = index === activeSuggestion;
+      element.classList.toggle('active', active);
+      element.setAttribute('aria-selected', String(active));
+    });
+    const activeElement = document.getElementById(`universal-suggestion-${activeSuggestion}`);
+    if (activeElement) {
+      mainSearch.setAttribute('aria-activedescendant', activeElement.id);
+      activeElement.scrollIntoView({ block: 'nearest' });
+    }
+  };
+
+  const selectSuggestion = item => {
+    if (!item) return;
+    mainSearch.value = item.label;
+    closeSuggestions();
+    const query = item.value.toLowerCase();
+    searchProfessors(query);
+    searchSchools(query);
+    searchAreaPeople(query);
+    document.getElementById('dblp-results').innerHTML = '';
+    if (item.target) displayIntegratedAnalysis(item.target);
+    else displayIntegratedAnalysis(null);
+    updateURL();
+  };
+
+  suggestionsEl.addEventListener('pointerdown', event => event.preventDefault());
+  suggestionsEl.addEventListener('click', event => {
+    const option = event.target.closest('.universal-suggestion');
+    if (option) selectSuggestion(suggestions[Number(option.dataset.index)]);
+  });
 
   let debounceTimer;
   mainSearch.addEventListener('input', (e) => {
     clearTimeout(debounceTimer);
     const query = e.target.value.toLowerCase();
 
+    displayIntegratedAnalysis(null);
     updateURL();
+    document.body.classList.toggle('has-search-query', Boolean(query.trim()));
+    renderSuggestions(query);
 
     if (query.length < 2) {
-      showTopRankings();
+      showDefaultRankings();
       return;
     }
+
 
     debounceTimer = setTimeout(() => {
       searchProfessors(query);
       searchSchools(query);
       searchAreaPeople(query);
       searchDBLPAuthors(query);
+      updateIntegratedAnalysis(query);
     }, 300);
+  });
+
+  mainSearch.addEventListener('focus', () => renderSuggestions(mainSearch.value));
+  mainSearch.addEventListener('blur', () => window.setTimeout(closeSuggestions, 120));
+  mainSearch.addEventListener('keydown', event => {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      if (suggestionsEl.hidden) renderSuggestions(mainSearch.value);
+      updateActiveSuggestion(activeSuggestion + 1);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      updateActiveSuggestion(activeSuggestion - 1);
+    } else if (event.key === 'Enter' && activeSuggestion >= 0) {
+      event.preventDefault();
+      selectSuggestion(suggestions[activeSuggestion]);
+    } else if (event.key === 'Escape') {
+      closeSuggestions();
+    }
+  });
+
+  document.getElementById('search-example-items')?.addEventListener('click', event => {
+    const button = event.target.closest('[data-search-example]');
+    if (button) {
+      mainSearch.value = button.dataset.searchExample;
+      mainSearch.dispatchEvent(new Event('input', { bubbles: true }));
+      mainSearch.focus();
+    }
   });
 }
 
-function showTopRankings() {
-  const schoolContainer = document.getElementById('school-results');
-  const profContainer = document.getElementById('prof-results');
-  const areaContainer = document.getElementById('area-people-results');
-  const dblpContainer = document.getElementById('dblp-results');
+function renderSearchExamples() {
+  const container = document.getElementById('search-example-items');
+  if (!container || !rawData || !appData) return;
 
-  profContainer.classList.remove('single-result');
+  const sample = (items, count) => {
+    const available = [...items];
+    for (let index = available.length - 1; index > 0; index--) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [available[index], available[swapIndex]] = [available[swapIndex], available[index]];
+    }
+    return available.slice(0, count);
+  };
 
-  areaContainer.innerHTML = '';
-  dblpContainer.innerHTML = '';
-  document.getElementById('search-context-header').style.display = 'none';
-  document.getElementById('conference-results').innerHTML = '';
+  const schools = Object.values(appData.schools).filter(school => school.name);
+  const schoolsInRegion = region => schools.filter(school => {
+    const metadata = rawData.schools[school.name];
+    if (!metadata) return false;
+    if (region === 'us') return metadata.country === 'us';
+    return metadata.region === region;
+  });
+  const universityExamples = [];
+  const addUniversity = (school, label = null) => {
+    if (!school || universityExamples.some(item => item.query === school.name)) return;
+    universityExamples.push({
+      label: label || getInstitutionShortName(school.name),
+      query: school.name
+    });
+  };
 
-  const topSchools = Object.values(appData.schools)
-    .filter(s => s.name && s.rank)
-    .sort((a, b) => a.rank - b.rank)
-    .slice(0, 50);
-  const topProfs = Object.values(appData.professors)
-    .sort((a, b) => b.totalAdjusted - a.totalAdjusted)
-    .slice(0, 50);
-
-  const initialSchools = 10;
-  window._topSchoolsData = { schools: topSchools, shown: initialSchools };
-
-  let schoolHtml = `<h2 class="section-title">Top Schools</h2>`;
-  schoolHtml += topSchools.slice(0, initialSchools).map(s => renderSchoolCard(s)).join('');
-  if (topSchools.length > initialSchools) {
-    schoolHtml += `<button class="show-more-btn" onclick="showMoreTopSchools()">Show ${Math.min(topSchools.length - initialSchools, 40)} More Schools</button>`;
+  if (selectedRegion === 'world') {
+    ['us', 'europe', 'asia', 'australasia'].forEach(region => {
+      addUniversity(sample(schoolsInRegion(region), 1)[0]);
+    });
+  } else {
+    sample(schools, 3).forEach(school => addUniversity(school));
   }
-  schoolContainer.innerHTML = schoolHtml;
 
-  const initialProfs = 10;
-  window._topProfsData = { profs: topProfs, shown: initialProfs };
+  const rankedProfessors = Object.values(appData.professors)
+    .filter(professor => professor.totalAdjusted > 0);
+  const facultyExamples = sample(rankedProfessors, 2)
+    .map(professor => ({ label: cleanName(professor.name), query: professor.name }));
 
-  let profHtml = `<h2 class="section-title">Top Researchers</h2>`;
-  profHtml += topProfs.slice(0, initialProfs).map(p => renderProfessorCard(p)).join('');
-  if (topProfs.length > initialProfs) {
-    profHtml += `<button class="show-more-btn" onclick="showMoreTopProfs()">Show ${Math.min(topProfs.length - initialProfs, 40)} More Researchers</button>`;
-  }
-  profContainer.innerHTML = profHtml;
+  const areaExamples = sample(Object.values(areaLabels), 2)
+    .map(label => ({ label, query: label }));
+  const familiarConferences = ['pldi', 'nips', 'icml', 'cvpr', 'sigcomm', 'sosp', 'chi', 'sigmod', 'fse', 'icse']
+    .filter(area => publicationMatchesConferenceSet({ area }, confSet));
+  const conferenceExamples = sample(familiarConferences, 2).map(area => ({
+    label: area === 'nips' ? 'NeurIPS' : area.toUpperCase(),
+    query: area === 'nips' ? 'NeurIPS' : area.toUpperCase()
+  }));
+
+  container.innerHTML = [...universityExamples, ...facultyExamples, ...areaExamples, ...conferenceExamples]
+    .map(item => `<button type="button" data-search-example="${escapeHtml(item.query)}">${escapeHtml(item.label)}</button>`)
+    .join('');
 }
 
-window.showMoreTopSchools = function () {
-  const data = window._topSchoolsData;
-  if (!data) return;
+function resolveAnalysisTarget(query) {
+  const normalized = query.trim().toLowerCase();
+  if (!normalized || !appData) return null;
 
-  const container = document.getElementById('school-results');
-  const nextBatch = data.schools.slice(data.shown, data.shown + 40);
-  data.shown += nextBatch.length;
+  const canonicalSchool = schoolAliases[normalized] || normalized;
+  const school = Object.values(appData.schools).find(candidate =>
+    candidate.name.toLowerCase() === canonicalSchool.toLowerCase()
+  );
+  if (school) return { type: 'school', name: school.name };
 
-  const btn = container.querySelector('.show-more-btn');
-  if (btn) btn.remove();
+  const exactResearchers = Object.values(appData.professors).filter(professor =>
+    professor.name.toLowerCase() === normalized || cleanName(professor.name).toLowerCase() === normalized
+  );
+  return exactResearchers.length === 1
+    ? { type: 'researcher', name: exactResearchers[0].name }
+    : null;
+}
 
-  container.insertAdjacentHTML('beforeend', nextBatch.map(s => renderSchoolCard(s)).join(''));
+function displayIntegratedAnalysis(target) {
+  selectedAnalysisTarget = target ? { type: target.type, name: target.name } : null;
+  const detail = target ? { ...target, historical: historicalMode } : null;
+  document.body.classList.toggle('has-analysis-target', Boolean(target));
+  window.__cspicksAnalysisTarget = detail;
+  window.dispatchEvent(new CustomEvent('cspicks:analysis-target', { detail }));
+}
 
-  if (data.shown < data.schools.length) {
-    container.insertAdjacentHTML('beforeend',
-      `<button class="show-more-btn" onclick="showMoreTopSchools()">Show ${Math.min(data.schools.length - data.shown, 40)} More Schools</button>`
-    );
-  }
+function updateIntegratedAnalysis(query) {
+  displayIntegratedAnalysis(resolveAnalysisTarget(query));
+}
+
+window.showIntegratedAnalysis = function (type, name) {
+  const input = document.getElementById('main-search');
+  input.value = type === 'researcher' ? cleanName(name) : name;
+  document.body.classList.add('has-search-query');
+  const query = name.toLowerCase();
+  searchProfessors(query);
+  searchSchools(query);
+  searchAreaPeople(query);
+  document.getElementById('dblp-results').innerHTML = '';
+  displayIntegratedAnalysis({ type, name });
+  updateURL();
 };
 
-window.showMoreTopProfs = function () {
-  const data = window._topProfsData;
-  if (!data) return;
+function showDefaultRankings() {
+  displayIntegratedAnalysis(null);
+  const schools = Object.values(appData.schools)
+    .filter(school => school.name && Number.isFinite(school.rank))
+    .sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name))
+    .slice(0, 50);
+  const professors = Object.values(appData.professors)
+    .sort((a, b) => b.totalAdjusted - a.totalAdjusted || a.name.localeCompare(b.name))
+    .slice(0, 50);
 
-  const container = document.getElementById('prof-results');
-  const nextBatch = data.profs.slice(data.shown, data.shown + 40);
-  data.shown += nextBatch.length;
+  document.getElementById('school-results').innerHTML = `
+    <h2 class="section-title">Top 50 Universities</h2>
+    ${schools.map(school => renderSchoolCard(school)).join('')}
+  `;
+  document.getElementById('prof-results').classList.remove('single-result');
+  document.getElementById('prof-results').innerHTML = `
+    <h2 class="section-title">Top 50 Professors</h2>
+    ${professors.map(professor => renderProfessorCard(professor)).join('')}
+  `;
+  document.querySelectorAll('#conference-results, #area-people-results, #dblp-results')
+    .forEach(container => { container.innerHTML = ''; });
+  document.getElementById('search-context-header').style.display = 'none';
+}
 
-  const btn = container.querySelector('.show-more-btn');
-  if (btn) btn.remove();
-
-  container.insertAdjacentHTML('beforeend', nextBatch.map(p => renderProfessorCard(p)).join(''));
-
-  if (data.shown < data.profs.length) {
-    container.insertAdjacentHTML('beforeend',
-      `<button class="show-more-btn" onclick="showMoreTopProfs()">Show ${Math.min(data.profs.length - data.shown, 40)} More Researchers</button>`
-    );
-  }
-};
-
-let areaPeopleObserver = null;
+function findMatchingConference(query) {
+  const normalized = (conferenceAliases[query] || query).toLowerCase();
+  return Object.keys(getConferenceAreaMap(confSet)).find(key =>
+    key.toLowerCase() === normalized && publicationMatchesConferenceSet({ area: key }, confSet)
+  ) || null;
+}
 
 function searchAreaPeople(query) {
-  if (areaPeopleObserver) {
-    areaPeopleObserver.disconnect();
-    areaPeopleObserver = null;
-  }
-
   const container = document.getElementById('area-people-results');
-  container.innerHTML = '';
-
   container.innerHTML = '';
 
   let topProfs = [];
   let title = 'Top Researchers';
-
-  // 1. Check Conference Match
-  let effectiveQuery = conferenceAliases[query] || query;
-  const confKey = Object.keys(parentMap).find(k => k.toLowerCase() === effectiveQuery);
+  const confKey = findMatchingConference(query);
 
   if (confKey) {
-    title = `Top Researchers in ${confKey.toUpperCase()}`;
+    title = `Top Researchers publishing in ${getConferenceLabel(confKey)}`;
     topProfs = Object.values(appData.professors)
       .map(p => {
         const confPubs = p.pubs.filter(pub => pub.area === confKey);
         if (confPubs.length === 0) return null;
         const count = confPubs.reduce((sum, pub) => sum + pub.count, 0);
         const adjusted = confPubs.reduce((sum, pub) => sum + pub.adjustedcount, 0);
-        return { ...p, confCount: count, confAdjusted: adjusted };
+        const parentArea = getConferenceAreaMap(confSet)[confKey];
+        return {
+          ...p,
+          pubs: confPubs,
+          areas: { [parentArea]: { count, adjusted } },
+          totalCount: count,
+          totalPapers: Math.ceil(count),
+          totalAdjusted: adjusted,
+          resultAdjusted: adjusted
+        };
       })
-      .filter(p => p && p.confAdjusted > 0)
-      .sort((a, b) => b.confAdjusted - a.confAdjusted);
+      .filter(p => p && p.resultAdjusted > 0)
+      .sort((a, b) => b.resultAdjusted - a.resultAdjusted || cleanName(a.name).localeCompare(cleanName(b.name)));
   } else {
     const areaMatch = Object.entries(areaLabels).find(([key, label]) =>
       label.toLowerCase().includes(query) || key.toLowerCase() === query
@@ -358,69 +575,58 @@ function searchAreaPeople(query) {
 
     if (areaMatch) {
       const [areaKey] = areaMatch;
-      // Find top professors in this area
       topProfs = Object.values(appData.professors)
-        .filter(p => p.areas[areaKey]?.adjusted > 0)
-        .sort((a, b) => b.areas[areaKey].adjusted - a.areas[areaKey].adjusted);
+        .map(p => {
+          const stats = p.areas[areaKey];
+          if (!stats?.adjusted) return null;
+          const areaMap = getConferenceAreaMap(confSet);
+          const pubs = p.pubs.filter(pub => areaMap[pub.area] === areaKey);
+          return {
+            ...p,
+            pubs,
+            areas: { [areaKey]: stats },
+            totalCount: stats.count,
+            totalPapers: Math.ceil(stats.count),
+            totalAdjusted: stats.adjusted,
+            resultAdjusted: stats.adjusted
+          };
+        })
+        .filter(Boolean)
+        .sort((a, b) => b.resultAdjusted - a.resultAdjusted || cleanName(a.name).localeCompare(cleanName(b.name)));
+      title = `Top Researchers in ${areaLabels[areaKey]}`;
     }
   }
 
   if (topProfs.length === 0) return;
-
-  container.innerHTML = `
-    <div class="section-header" style="grid-column: 1/-1; margin-top: 2rem;">
-      <h3>${title}</h3>
-    </div>
-    <div id="area-people-list" class="compact-list" style="grid-column: 1/-1; display: flex; flex-direction: column; gap: 0.5rem;"></div>
-  `;
-
-  const listContainer = document.getElementById('area-people-list');
-  const CHUNK_SIZE = 20;
-  let renderedCount = 0;
-
-  const renderChunk = () => {
-    const chunk = topProfs.slice(renderedCount, renderedCount + CHUNK_SIZE);
-    if (chunk.length === 0) return;
-
-    const oldSentinel = document.getElementById('area-sentinel');
-    if (oldSentinel) oldSentinel.remove();
-
-    const html = chunk.map(prof => `
-        <div class="card collapsed" style="margin: 0;">
-          <div class="card-header" onclick="toggleCard(this)">
-            <div style="display: flex; align-items: baseline; gap: 1rem;">
-              <h2>${escapeHtml(cleanName(prof.name))}</h2>
-            </div>
-            <span class="toggle-icon">▼</span>
-          </div>
-          <div class="card-content">
-            ${renderProfessorCardContent(prof)}
-          </div>
-        </div>
-      `).join('');
-
-    listContainer.insertAdjacentHTML('beforeend', html);
-    renderedCount += CHUNK_SIZE;
-
-    if (renderedCount < topProfs.length) {
-      const sentinel = document.createElement('div');
-      sentinel.id = 'area-sentinel';
-      sentinel.style.height = '50px';
-      listContainer.appendChild(sentinel);
-
-      if (areaPeopleObserver) areaPeopleObserver.observe(sentinel);
-    }
-  };
-
-  areaPeopleObserver = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      areaPeopleObserver.unobserve(entries[0].target);
-      renderChunk();
-    }
-  }, { rootMargin: '400px' });
-
-  renderChunk();
+  const initialCount = 10;
+  window._peopleResults = { results: topProfs, shown: initialCount, title };
+  renderPeopleResults();
 }
+
+function renderPeopleResults() {
+  const state = window._peopleResults;
+  const container = document.getElementById('area-people-results');
+  if (!state || !container) return;
+
+  const visible = state.results.slice(0, state.shown);
+  container.innerHTML = `
+    <h2 class="section-title">${escapeHtml(state.title)}</h2>
+    ${visible.map(professor => renderProfessorCard(professor)).join('')}
+    ${state.results.length > state.shown ? `
+      <div id="see-more-people" class="see-more-results">
+        <button onclick="showMorePeople()" class="btn-secondary">
+          See more researchers (${state.results.length - state.shown} remaining)
+        </button>
+      </div>
+    ` : ''}
+  `;
+}
+
+window.showMorePeople = function () {
+  if (!window._peopleResults) return;
+  window._peopleResults.shown += 10;
+  renderPeopleResults();
+};
 
 function renderProfessorCardContent(prof) {
   const sortedAreas = Object.entries(prof.areas)
@@ -567,8 +773,8 @@ function renderProfessorCardContent(prof) {
       const sortedPubs = [...prof.pubs].sort((a, b) => b.year - a.year);
 
       const pubsHtml = sortedPubs.map(p => {
-        const areaLabel = areaLabels[p.area] || p.area.toUpperCase();
-        return `<div class="paper-item"><span class="paper-venue">${areaLabel}</span> <span class="paper-year">${p.year}</span>: ${p.count} paper(s), ${p.adjustedcount.toFixed(2)} adj</div>`;
+        const venueLabel = getConferenceLabel(p.area);
+        return `<div class="paper-item"><span class="paper-venue">${escapeHtml(venueLabel)}</span> <span class="paper-year">${p.year}</span>: ${p.count} paper(s), ${p.adjustedcount.toFixed(2)} adj</div>`;
       }).join('');
 
       return `
@@ -874,6 +1080,7 @@ function setupFilters() {
       appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
     }
     updatePriorData();
+    renderSearchExamples();
     console.log(`Filtered: Region=${selectedRegion}, Years=${startYear}-${endYear}, Historical=${historicalMode}, ConfSet=${confSet}`);
 
     updateURL();
@@ -887,8 +1094,12 @@ function setupFilters() {
       searchAreaPeople(query);
       searchDBLPAuthors(query);
     } else {
-      showTopRankings();
+      showDefaultRankings();
     }
+
+    window.dispatchEvent(new CustomEvent('cspicks:analysis-refresh', {
+      detail: { historical: historicalMode }
+    }));
 
     // Restore expanded state immediately
     requestAnimationFrame(() => {
@@ -933,7 +1144,7 @@ function searchProfessors(query) {
     const oldSentinel = document.getElementById('prof-sentinel');
     if (oldSentinel) oldSentinel.remove();
 
-    const html = chunk.map(renderProfessorCard).join('');
+    const html = chunk.map(professor => renderProfessorCard(professor)).join('');
     container.insertAdjacentHTML('beforeend', html);
     renderedCount += CHUNK_SIZE;
 
@@ -1006,7 +1217,7 @@ function renderProfessorCard(prof) {
 
   return `
     <div class="${cardClass}" data-name="${escapeHtml(displayName)}">
-      <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header" onclick="toggleCard(this); showIntegratedAnalysis('researcher', decodeURIComponent('${encodeInlineValue(prof.name)}'))">
         <h2>${escapeHtml(displayName)}</h2>
         <span class="toggle-icon">▼</span>
       </div>
@@ -1038,8 +1249,7 @@ function findMatchingArea(query) {
 
 function searchSchools(query) {
   const effectiveQuery = schoolAliases[query] || query;
-  const confKeyRaw = conferenceAliases[query] || query;
-  const confKeyMatch = Object.keys(parentMap).find(k => k.toLowerCase().startsWith(confKeyRaw) || confKeyRaw.startsWith(k.toLowerCase()));
+  const confKeyMatch = findMatchingConference(query);
   const matchedArea = findMatchingArea(effectiveQuery);
 
   let results;
@@ -1048,61 +1258,9 @@ function searchSchools(query) {
   const header = document.getElementById('search-context-header');
 
   if (confKeyMatch) {
-    const allConfMatches = Object.keys(parentMap).filter(k =>
-      k.toLowerCase().startsWith(confKeyRaw) || confKeyRaw.startsWith(k.toLowerCase())
-    );
-
-    allConfMatches.sort((a, b) => {
-      if (a === confKeyRaw) return -1;
-      if (b === confKeyRaw) return 1;
-      return a.localeCompare(b);
-    });
-
-    header.textContent = `Results for Conference: ${allConfMatches.map(c => c.toUpperCase()).join(', ')}`;
+    header.textContent = `Results for Conference: ${getConferenceLabel(confKeyMatch)}`;
     header.style.display = 'block';
-
-    const confResultsContainer = document.getElementById('conference-results');
-
-    const confCardsHtml = allConfMatches.map(confKey => {
-      const schoolStats = {};
-      Object.entries(appData.professors).forEach(([profName, prof]) => {
-        const pubsInConf = prof.pubs.filter(p => p.area === confKey);
-        if (pubsInConf.length === 0) return;
-
-        const adjusted = pubsInConf.reduce((sum, p) => sum + p.adjustedcount, 0);
-        const count = pubsInConf.reduce((sum, p) => sum + p.count, 0);
-        if (adjusted === 0) return;
-
-        const schoolName = prof.affiliation;
-
-        // Filter by school region
-        if (!appData.schools[schoolName]) return;
-
-        if (!schoolStats[schoolName]) {
-          schoolStats[schoolName] = { adjusted: 0, count: 0, faculty: [] };
-        }
-        schoolStats[schoolName].adjusted += adjusted;
-        schoolStats[schoolName].count += count;
-        schoolStats[schoolName].faculty.push(profName);
-      });
-
-      const sortedSchools = Object.entries(schoolStats)
-        .map(([name, stats]) => ({ name, ...stats, rank: appData.schools[name]?.rank || 999 }))
-        .sort((a, b) => b.adjusted - a.adjusted);
-
-      if (sortedSchools.length === 0) return '';
-
-      return renderConferenceCard(confKey, sortedSchools);
-    }).join('');
-
-    confResultsContainer.innerHTML = confCardsHtml;
-
-    document.getElementById('school-results').innerHTML = '';
-    return;
-
-  }
-
-  if (matchedArea) {
+  } else if (matchedArea) {
     header.textContent = `Results for Area: ${areaLabels[matchedArea]}`;
     header.style.display = 'block';
   } else {
@@ -1116,17 +1274,25 @@ function searchSchools(query) {
       const pubsInConf = prof.pubs.filter(p => p.area === confKeyMatch);
       if (pubsInConf.length === 0) return;
 
-      const adjusted = pubsInConf.reduce((sum, p) => sum + p.adjustedcount, 0);
-      const count = pubsInConf.reduce((sum, p) => sum + p.count, 0);
-      if (adjusted === 0) return;
+      pubsInConf.forEach(pub => {
+        const publicationSchools = getPublicationSchools(
+          prof,
+          pub,
+          historicalMode ? historyMap : null,
+          historicalMode ? aliasMap : null
+        ).filter(schoolName => appData.schools[schoolName]);
 
-      const schoolName = prof.affiliation;
-      if (!schoolStats[schoolName]) {
-        schoolStats[schoolName] = { adjusted: 0, count: 0, faculty: [] };
-      }
-      schoolStats[schoolName].adjusted += adjusted;
-      schoolStats[schoolName].count += count;
-      schoolStats[schoolName].faculty.push(profName);
+        publicationSchools.forEach(schoolName => {
+          if (!schoolStats[schoolName]) {
+            schoolStats[schoolName] = { adjusted: 0, count: 0, faculty: [] };
+          }
+          schoolStats[schoolName].adjusted += pub.adjustedcount;
+          schoolStats[schoolName].count += pub.count;
+          if (!schoolStats[schoolName].faculty.includes(profName)) {
+            schoolStats[schoolName].faculty.push(profName);
+          }
+        });
+      });
     });
 
     results = Object.entries(schoolStats)
@@ -1134,9 +1300,14 @@ function searchSchools(query) {
         const school = appData.schools[schoolName];
         if (!school) return null;
 
-        const sClone = { ...school, areas: { ...school.areas } };
-        sClone.areas[confKeyMatch] = { count: stats.count, adjusted: stats.adjusted, faculty: stats.faculty };
-        return sClone;
+        return {
+          ...school,
+          areas: {
+            [confKeyMatch]: { count: stats.count, adjusted: stats.adjusted, faculty: stats.faculty }
+          },
+          totalCount: stats.count,
+          totalAdjusted: stats.adjusted
+        };
       })
       .filter(s => s)
       .sort((a, b) => b.areas[confKeyMatch].adjusted - a.areas[confKeyMatch].adjusted);
@@ -1166,13 +1337,18 @@ function searchSchools(query) {
 
   const container = document.getElementById('school-results');
   const filterKey = confKeyMatch || matchedArea;
-  const initialCount = 20;
+  const initialCount = 10;
 
-  window._schoolResults = { results, filterKey, shown: initialCount };
+  const useResultOrder = Boolean(filterKey);
+  const resultTitle = confKeyMatch
+    ? `Top Universities publishing in ${getConferenceLabel(confKeyMatch)}`
+    : matchedArea ? `Top Universities in ${areaLabels[matchedArea]}` : '';
+  window._schoolResults = { results, filterKey, shown: initialCount, useResultOrder, resultTitle };
 
-  let html = results
+  let html = resultTitle ? `<h2 class="section-title">${escapeHtml(resultTitle)}</h2>` : '';
+  html += results
     .slice(0, initialCount)
-    .map(school => renderSchoolCard(school, filterKey))
+    .map((school, index) => renderSchoolCard(school, filterKey, useResultOrder ? index + 1 : null))
     .join('');
 
   if (results.length > initialCount) {
@@ -1189,8 +1365,8 @@ function searchSchools(query) {
 }
 
 window.showMoreSchools = function () {
-  const { results, filterKey, shown } = window._schoolResults;
-  const nextBatch = 20;
+  const { results, filterKey, shown, useResultOrder } = window._schoolResults;
+  const nextBatch = 10;
   const newShown = shown + nextBatch;
 
   document.getElementById('see-more-schools')?.remove();
@@ -1198,7 +1374,7 @@ window.showMoreSchools = function () {
   const container = document.getElementById('school-results');
   const newCards = results
     .slice(shown, newShown)
-    .map(school => renderSchoolCard(school, filterKey))
+    .map((school, index) => renderSchoolCard(school, filterKey, useResultOrder ? shown + index + 1 : null))
     .join('');
 
   container.insertAdjacentHTML('beforeend', newCards);
@@ -1683,7 +1859,7 @@ function renderRankContribution(school) {
   }
 
   const itemsHtml = displayList.map(item => {
-    const label = item.isOther ? 'Other Subfields' : (areaLabels[item.area] || item.area);
+    const label = item.isOther ? 'Other Subfields' : (areaLabels[item.area] || getConferenceLabel(item.area));
     const formattedVal = item.val.toFixed(1);
     const color = item.isOther ? 'var(--accent-color)' : 'var(--primary-color)';
     return `
@@ -1719,7 +1895,7 @@ function renderRankContribution(school) {
   `;
 }
 
-function renderSchoolCard(school, filterArea = null) {
+function renderSchoolCard(school, filterArea = null, resultRank = null) {
   const safeSchoolName = escapeHtml(school.name);
   const encodedSchoolName = encodeInlineValue(school.name);
   let sortedAreas;
@@ -1756,7 +1932,8 @@ function renderSchoolCard(school, filterArea = null) {
   // Calculate area count 
   const areaCount = Object.values(school.areas).filter(a => a.adjusted > 0).length;
 
-  const rankPrefix = Number.isFinite(school.rank) ? `${school.rank}. ` : '';
+  const displayedRank = Number.isFinite(resultRank) ? resultRank : school.rank;
+  const rankPrefix = Number.isFinite(displayedRank) ? `${displayedRank}. ` : '';
   const facultyBadge = `<span style="color: var(--text-secondary); font-size: 0.75em; margin-left: 0.5rem;">${facultyCount} Faculty</span>`;
   const areaBadge = `<span style="color: var(--text-secondary); font-size: 0.75em; margin-left: 0.5rem;">${areaCount} Areas</span>`;
   const metrics = calculateSchoolMetrics(appData, priorAppData, school.name);
@@ -1764,7 +1941,7 @@ function renderSchoolCard(school, filterArea = null) {
 
   return `
     <div class="${cardClass}" data-name="${safeSchoolName}">
-      <div class="card-header" onclick="toggleCard(this)">
+      <div class="card-header" onclick="toggleCard(this); showIntegratedAnalysis('school', decodeURIComponent('${encodedSchoolName}'))">
         <h2>${rankPrefix}${safeSchoolName}${facultyBadge}${areaBadge}</h2>
         <span class="toggle-icon">▼</span>
       </div>
@@ -1775,23 +1952,34 @@ function renderSchoolCard(school, filterArea = null) {
         <div class="stats-list">
         ${sortedAreas.map(([area, data]) => {
     const areaRank = school.areaRanks?.[area];
-    const areaRankPrefix = areaRank ? `${areaRank}. ` : '';
+    const areaRankPrefix = filterArea ? '' : (areaRank ? `${areaRank}. ` : '');
+    const resultLabel = areaLabels[area] || getConferenceLabel(area);
     return `
           <div class="school-area-section">
             <div class="school-area-header">
-              <span onclick="setSearchQuery('${areaLabels[area] ? areaLabels[area].replace(/'/g, "\\'") : area}')" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${areaRankPrefix}${areaLabels[area] || area}</span>
+              <span onclick="setSearchQuery(decodeURIComponent('${encodeInlineValue(areaLabels[area] || area)}'))" style="cursor: pointer; text-decoration: underline; text-decoration-style: dotted;">${areaRankPrefix}${escapeHtml(resultLabel)}</span>
               <span>${Math.ceil(data.count)} (${data.adjusted.toFixed(1)})</span>
             </div>
             <div class="faculty-list">
               ${data.faculty
         .sort((a, b) => {
-          const countA = appData.professors[a]?.areas[area]?.adjusted || 0;
-          const countB = appData.professors[b]?.areas[area]?.adjusted || 0;
+          const adjustedFor = name => areaLabels[area]
+            ? appData.professors[name]?.areas[area]?.adjusted || 0
+            : appData.professors[name]?.pubs
+              .filter(pub => pub.area === area)
+              .reduce((sum, pub) => sum + pub.adjustedcount, 0) || 0;
+          const countA = adjustedFor(a);
+          const countB = adjustedFor(b);
           return countB - countA;
         })
         .map(name => {
           const prof = appData.professors[name];
-          const statsText = prof ? ` <small style="color: var(--text-secondary);">${prof.totalPapers} / ${prof.totalAdjusted.toFixed(1)}</small>` : '';
+          const relevantPubs = prof && !areaLabels[area] ? prof.pubs.filter(pub => pub.area === area) : null;
+          const relevantCount = relevantPubs?.reduce((sum, pub) => sum + pub.count, 0);
+          const relevantAdjusted = relevantPubs?.reduce((sum, pub) => sum + pub.adjustedcount, 0);
+          const statsText = prof
+            ? ` <small style="color: var(--text-secondary);">${Math.ceil(relevantPubs ? relevantCount : prof.totalPapers)} / ${(relevantPubs ? relevantAdjusted : prof.totalAdjusted).toFixed(1)}</small>`
+            : '';
           return `<span class="faculty-tag" onclick="searchProfessorByAffiliation(decodeURIComponent('${encodeInlineValue(cleanName(name))}'), decodeURIComponent('${encodedSchoolName}'))" style="cursor: pointer;">${escapeHtml(cleanName(name))}${statsText}</span>`;
         }).join('')}
             </div>
