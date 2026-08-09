@@ -192,8 +192,8 @@
                 <a href="index.html">Search</a>
                 <a href="analysis.html">Analysis</a>
                 <a href="compare.html" class="active">Compare</a>
-                <a href="simulator.html">Simulator</a>
                 <a href="discoveries.html">🔭 Discoveries</a>
+                <a href="simulator.html">⚠️ Simulator</a>
             </div>
             <p>Head-to-head comparison of two institutions or faculty across research areas.</p>
         </header>
@@ -212,6 +212,11 @@
                 }
             }
         </style>
+
+        <aside id="compare-history-warning" class="history-warning" role="status" aria-live="polite">
+            <strong>Current-roster view.</strong>
+            Past publications are assigned to each researcher’s current CSRankings university.
+        </aside>
 
         <div class="filters search-filters" id="filter-controls" style="display: none; margin-bottom: 1.5rem;" aria-label="Comparison filters">
             <div class="filter-group comparison-type-control">
@@ -256,7 +261,7 @@
             <div class="filter-group checkboxes">
                 <label for="historical-mode" class="filter-checkbox">
                     <input type="checkbox" id="historical-mode">
-                    <span>Use History</span>
+                    <span>History</span>
                     <span class="tooltip-trigger" tabindex="0" aria-label="About historical mode">
                         ⓘ
                         <span class="tooltip-content">When enabled, publications are credited to the institution where

@@ -34,10 +34,10 @@
           style="text-decoration: none; color: var(--text-secondary); font-weight: 600;">Analysis</a>
         <a href="compare.html"
           style="text-decoration: none; color: var(--text-secondary); font-weight: 600;">Compare</a>
-        <a href="simulator.html"
-          style="text-decoration: none; color: var(--text-secondary); font-weight: 600;">Simulator</a>
         <a href="discoveries.html"
           style="text-decoration: none; color: var(--text-secondary); font-weight: 600;">🔭 Discoveries</a>
+        <a href="simulator.html"
+          style="text-decoration: none; color: var(--text-secondary); font-weight: 600;">⚠️ Simulator</a>
       </div>
       <p>Explore Computer Science Professors, Schools, and Research Areas.</p>
     </header>
@@ -46,6 +46,11 @@
       <div class="search-container">
         <input type="search" id="main-search" placeholder="Loading data..." disabled autofocus>
       </div>
+
+      <aside id="history-warning" class="history-warning" role="status" aria-live="polite">
+        <strong>Current-roster view.</strong>
+        Past publications are assigned to each researcher’s current CSRankings university.
+      </aside>
 
       <div class="filters search-filters" aria-label="Search filters">
         <div class="filter-group search-region-control">
@@ -83,7 +88,7 @@
         <div class="filter-group checkboxes">
           <label for="historical-mode" class="filter-checkbox">
             <input type="checkbox" id="historical-mode">
-            <span>Use History</span>
+            <span>History</span>
             <span class="tooltip-trigger" tabindex="0" aria-label="About historical mode">
               ⓘ
               <span class="tooltip-content">When enabled, publications are credited to the institution where the author

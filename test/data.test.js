@@ -287,7 +287,10 @@ test('discovery insights rank substantive movement and ignore tiny momentum base
       A3: { name: 'A3', totalAdjusted: 3 },
       B1: { name: 'B1', totalAdjusted: 5 },
       B2: { name: 'B2', totalAdjusted: 3 },
-      B3: { name: 'B3', totalAdjusted: 2 }
+      B3: { name: 'B3', totalAdjusted: 2 },
+      C1: { name: 'C1', totalAdjusted: 2 },
+      C2: { name: 'C2', totalAdjusted: 2 },
+      C3: { name: 'C3', totalAdjusted: 1 }
     },
     schools: {
       A: {
@@ -295,18 +298,26 @@ test('discovery insights rank substantive movement and ignore tiny momentum base
         areas: {
           ai: { adjusted: 7, faculty: ['A1', 'A2'] },
           soft: { adjusted: 5, faculty: ['A3'] }
-        }
+        },
+        areaRanks: { ai: 2, soft: 1 }
       },
       B: {
         name: 'B', rank: 1, totalCount: 12, totalAdjusted: 10,
-        areas: { ai: { adjusted: 10, faculty: ['B1', 'B2', 'B3'] } }
+        areas: { ai: { adjusted: 10, faculty: ['B1', 'B2', 'B3'] } },
+        areaRanks: { ai: 1 }
+      },
+      C: {
+        name: 'C', rank: 8, totalCount: 7, totalAdjusted: 5,
+        areas: { ai: { adjusted: 5, faculty: ['C1', 'C2', 'C3'] } },
+        areaRanks: { ai: 3 }
       }
     }
   };
   const prior = {
     schools: {
       A: { name: 'A', rank: 8, totalAdjusted: 3, areas: { ai: { adjusted: 3 } } },
-      B: { name: 'B', rank: 1, totalAdjusted: 9, areas: { ai: { adjusted: 9 } } }
+      B: { name: 'B', rank: 1, totalAdjusted: 9, areas: { ai: { adjusted: 9 } } },
+      C: { name: 'C', rank: 2, totalAdjusted: 10, areas: { ai: { adjusted: 8 }, soft: { adjusted: 2 } } }
     }
   };
 
@@ -315,8 +326,16 @@ test('discovery insights rank substantive movement and ignore tiny momentum base
   assert.equal(insights.rankClimbers[0].metrics.rankDelta, 6);
   assert.equal(insights.momentum[0].name, 'A');
   assert.equal(insights.breadthBuilders[0].breadthGain, 1);
-  assert.equal(insights.focusedPowerhouses[0].name, 'B');
+  assert.equal(insights.focusedPowerhouses[0].name, 'A');
+  assert.equal(insights.focusedPowerhouses[0].focusArea.area, 'soft');
+  assert.equal(insights.focusedPowerhouses[0].focusArea.regionalShare, 100);
+  assert.ok(insights.focusedPowerhouses[0].focusArea.specialization > 1);
   assert.equal(insights.areaBreakouts[0].name, 'A');
+  assert.equal(insights.rankDroppers[0].name, 'C');
+  assert.equal(insights.slowdowns[0].name, 'C');
+  assert.equal(insights.outputLosses[0].name, 'C');
+  assert.equal(insights.breadthContractions[0].name, 'C');
+  assert.equal(insights.areaDeclines[0].name, 'C');
 });
 
 test('publishing effort includes only the selected school and uses all active faculty', () => {

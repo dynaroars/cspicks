@@ -1,6 +1,6 @@
 import { filterByYears, loadAffiliationData, loadData } from './data.js';
 import { buildPriorPeriodData, calculateDiscoveryInsights } from './metrics.js';
-import { areaLabels, escapeHtml, getInstitutionShortName } from './shared.js';
+import { areaLabels, escapeHtml, getInstitutionShortName, updateHistoryWarning } from './shared.js';
 
 let rawData = null;
 let affiliationHistory = null;
@@ -45,6 +45,7 @@ function renderDiscoveries() {
   const region = document.getElementById('discoveries-region').value;
   const confSet = document.getElementById('discoveries-conf-set').value;
   const useHistory = document.getElementById('discoveries-history').checked;
+  updateHistoryWarning('discoveries-history-warning', useHistory);
   const history = useHistory ? affiliationHistory : null;
   const aliases = useHistory ? schoolAliases : null;
 
@@ -74,29 +75,43 @@ function renderDiscoveries() {
     <h2>Notable patterns across ${escapeHtml(regionLabels[region] || region)} universities</h2>
     <p class="summary-note">Current period: ${start}–${end}. Comparison period: ${priorStart}–${priorEnd}. Select a university to explore it in Analysis.</p>
     <div class="discovery-grid">
-      ${card('Fastest rank climbers', 'Change in overall rank relative to the preceding equal-length period. Both periods must contain at least 2 fractional publication credits.', list(insights.rankClimbers, item => `
+      ${card('Biggest rank gains', 'Universities that moved up the most places compared with the preceding equal-length period. Both periods must have an adjusted publication count of at least 2.', list(insights.rankClimbers, item => `
         <span>${schoolLink(item.name)}<small>#${item.prior.rank} → #${item.metrics.rank}</small></span>
         <strong class="confidence-high">+${item.metrics.rankDelta} places</strong>`), 'discovery-featured')}
-      ${card('Strongest momentum', 'Largest percentage increase in fractional publication credit versus the preceding period, requiring at least 2 credits in both periods.', list(insights.momentum, item => `
-        <span>${schoolLink(item.name)}<small>${number(item.prior.totalAdjusted)} → ${number(item.school.totalAdjusted)} credits</small></span>
+      ${card('Biggest rank declines', 'Universities that moved down the most places compared with the preceding equal-length period. Both periods must have an adjusted publication count of at least 2.', list(insights.rankDroppers, item => `
+        <span>${schoolLink(item.name)}<small>#${item.prior.rank} → #${item.metrics.rank}</small></span>
+        <strong class="confidence-review">${item.metrics.rankDelta} places</strong>`), 'discovery-risk')}
+      ${card('Fastest-growing output', 'Compares the university\'s adjusted publication count in your selected years with the equally long period immediately before. Example: increasing from 10 to 15 is 50% growth. Both periods must have an adjusted count of at least 2.', list(insights.momentum, item => `
+        <span>${schoolLink(item.name)}<small>${number(item.prior.totalAdjusted)} → ${number(item.school.totalAdjusted)} adjusted count</small></span>
         <strong>+${item.metrics.growth.toFixed(0)}%</strong>`), 'discovery-featured')}
-      ${card('Largest output gains', 'Largest absolute increase in fractional publication credit. This complements percentage momentum, which favors smaller starting points.', list(insights.outputGains, item => `
-        <span>${schoolLink(item.name)}<small>${number(item.school.totalAdjusted)} current credits</small></span>
-        <strong>+${number(item.outputGain)}</strong>`))}
-      ${card('Breadth builders', 'Universities adding the most active top-level research areas compared with the preceding period.', list(insights.breadthBuilders, item => `
+      ${card('Fastest-shrinking output', 'Compares the university\'s adjusted publication count in your selected years with the equally long period immediately before. Example: decreasing from 10 to 6 is a 40% decline. Both periods must have an adjusted count of at least 2.', list(insights.slowdowns, item => `
+        <span>${schoolLink(item.name)}<small>${number(item.prior.totalAdjusted)} → ${number(item.school.totalAdjusted)} adjusted count</small></span>
+        <strong class="confidence-review">${item.metrics.growth.toFixed(0)}%</strong>`), 'discovery-risk')}
+      ${card('Largest adjusted-count gains', 'Largest absolute increase in adjusted publication count. This complements percentage growth, which favors smaller starting points.', list(insights.outputGains, item => `
+        <span>${schoolLink(item.name)}<small>${number(item.school.totalAdjusted)} current adjusted count</small></span>
+        <strong>+${number(item.outputGain)}</strong>`), 'discovery-featured')}
+      ${card('Largest adjusted-count losses', 'Largest absolute decrease in adjusted publication count compared with the preceding period.', list(insights.outputLosses, item => `
+        <span>${schoolLink(item.name)}<small>${number(item.prior.totalAdjusted)} → ${number(item.school.totalAdjusted)} adjusted count</small></span>
+        <strong class="confidence-review">${number(item.outputGain)}</strong>`), 'discovery-risk')}
+      ${card('Expanding research breadth', 'Universities adding the most active top-level research areas compared with the preceding period.', list(insights.breadthBuilders, item => `
         <span>${schoolLink(item.name)}<small>${item.metrics.activeAreas} active areas now</small></span>
-        <strong>+${item.breadthGain} areas</strong>`))}
-      ${card('Most distributed portfolios', 'Lowest share of output produced by the top three faculty, among universities with at least 5 credits and 3 active faculty. Lower means output is less dependent on a few people.', list(insights.balancedPortfolios, item => `
-        <span>${schoolLink(item.name)}<small>${item.metrics.facultyCount} active faculty</small></span>
-        <strong>${item.metrics.top3Share.toFixed(0)}% top-3</strong>`))}
-      ${card('Focused powerhouses', 'Highest share of a university\'s output concentrated in one research area, among universities with at least 5 credits and 3 active faculty.', list(insights.focusedPowerhouses, item => `
-        <span>${schoolLink(item.name)}<small>${escapeHtml(areaLabels[item.topArea.area] || item.topArea.area)}</small></span>
-        <strong>${item.topAreaShare.toFixed(0)}%</strong>`))}
-      ${card('Breakout research areas', 'Largest university-and-area increases in fractional publication credit versus the preceding period; current area output must be at least 2 credits.', list(insights.areaBreakouts, item => `
+        <strong>+${item.breadthGain} areas</strong>`), 'discovery-featured')}
+      ${card('Shrinking research breadth', 'Universities losing the most active top-level research areas compared with the preceding period.', list(insights.breadthContractions, item => `
+        <span>${schoolLink(item.name)}<small>${item.metrics.activeAreas} active areas now</small></span>
+        <strong class="confidence-review">${item.breadthGain} areas</strong>`), 'discovery-risk')}
+      ${card('Fastest-growing research areas', 'Largest university-and-area increases in adjusted publication count versus the preceding period; the current area adjusted count must be at least 2.', list(insights.areaBreakouts, item => `
         <span>${schoolLink(item.name)}<small>${escapeHtml(areaLabels[item.area] || item.area)} · ${number(item.priorCredit)} → ${number(item.currentCredit)}</small></span>
-        <strong>+${number(item.gain)}</strong>`), 'discovery-wide')}
+        <strong>+${number(item.gain)}</strong>`), 'discovery-featured')}
+      ${card('Fastest-declining research areas', 'Largest university-and-area decreases in adjusted publication count versus the preceding period; the prior area adjusted count must be at least 2.', list(insights.areaDeclines, item => `
+        <span>${schoolLink(item.name)}<small>${escapeHtml(areaLabels[item.area] || item.area)} · ${number(item.priorCredit)} → ${number(item.currentCredit)}</small></span>
+        <strong class="confidence-review">${number(item.gain)}</strong>`), 'discovery-risk')}
+      ${card('Broad faculty participation', 'Lowest share of adjusted publication count produced by the top three faculty, among universities with an adjusted count of at least 5 and 5 active faculty. Lower means output is distributed across more people.', list(insights.balancedPortfolios, item => `
+        <span>${schoolLink(item.name)}<small>${item.metrics.facultyCount} active faculty</small></span>
+        <strong>${item.metrics.top3Share.toFixed(0)}% top-3</strong>`), 'discovery-featured')}
+      ${card('Regional specializations', 'Areas where a university is much more focused than the selected region overall. The university must also rank in the region\'s top 25 for that area, with a total adjusted count of at least 5, 3 active faculty, and an area adjusted count of at least 2.', list(insights.focusedPowerhouses, item => `
+        <span>${schoolLink(item.name)}<small>${escapeHtml(areaLabels[item.focusArea.area] || item.focusArea.area)} · ${item.focusArea.portfolioShare.toFixed(0)}% school vs ${item.focusArea.regionalBaseline.toFixed(0)}% region · #${item.focusArea.areaRank}</small></span>
+        <strong>${item.focusArea.specialization.toFixed(1)}× region</strong>`), 'discovery-featured')}
     </div>
-    <div class="data-caveat"><strong>Interpret carefully:</strong> these are descriptive signals, not measures of department quality or causal claims. Results change with the selected years, region, venues, and historical-affiliation setting.</div>
   `;
 }
 
