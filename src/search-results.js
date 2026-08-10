@@ -35,7 +35,8 @@ function extendInfiniteLists() {
     const chunk = column.items.slice(column.rendered, column.rendered + CHUNK_SIZE);
     column.container.querySelector('.list-sentinel')?.remove();
     if (!chunk.length) return;
-    column.container.insertAdjacentHTML('beforeend', chunk.map(column.renderItem).join(''));
+    column.container.insertAdjacentHTML('beforeend',
+      chunk.map((item, index) => column.renderItem(item, column.rendered + index + 1)).join(''));
     column.rendered += chunk.length;
     grew = true;
   });
@@ -147,7 +148,7 @@ export function searchAreaPeople(query) {
   if (topProfs.length === 0) return;
   document.body.classList.add('showing-rankings');
   queueInfiniteList(document.getElementById('area-people-results'), topProfs,
-    professor => ctx.renderProfessorCard(professor));
+    (professor, position) => ctx.renderProfessorCard(professor, position));
 }
 
 export function searchProfessorByAffiliation(name, affiliation) {
@@ -392,7 +393,7 @@ export function showDefaultRankings() {
   // No headings or ordinals here: the two columns and their order say enough.
   renderInfiniteLists([
     { container: document.getElementById('school-results'), items: schools, renderItem: school => ctx.renderSchoolCard(school) },
-    { container: document.getElementById('prof-results'), items: professors, renderItem: professor => ctx.renderProfessorCard(professor) }
+    { container: document.getElementById('prof-results'), items: professors, renderItem: (professor, position) => ctx.renderProfessorCard(professor, position) }
   ]);
   document.querySelectorAll('#conference-results, #area-people-results, #dblp-results')
     .forEach(container => { container.innerHTML = ''; });

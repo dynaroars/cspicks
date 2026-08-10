@@ -1,12 +1,14 @@
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadAffiliationData, normalizeConferenceSet } from './data.js';
 import { getInitialRegion, rememberRegion } from './shared.js';
 
-// Every page shows the same "region / years / conference set / history" controls.
+// Every page shows the same "region / years / conference set / rankings /
+// history" controls.
 // This module owns their markup, state, persistence, and the affiliation data
 // that History mode needs, so pages only declare which fields they want.
 
 const CONF_SET_HELP = 'Chooses which publication venues count. CSRankings Default follows the primary CSRankings set; CSRankings All includes its extended venues; CORE options use CORE conference tiers.';
 const HISTORY_HELP = 'When enabled, publications are credited to the institution where the author was affiliated at the time of publication, not their current institution. Use the year selectors to filter results for a specific historical period.';
+const RANKINGS_HELP = 'Numbers the result lists and shows each university\'s overall and per-area rank for the selected region, years, and conference set.';
 
 const REGIONS = [
   ['world', 'World'],
@@ -56,13 +58,14 @@ function yearOptions(min, max, selected) {
 /**
  * Renders a filter bar into `mount` and returns a controller holding the state.
  *
- * fields   — any of 'region', 'years', 'confSet', 'history' (order is fixed)
+ * fields   — any of 'region', 'years', 'confSet', 'rankings', 'history' (order
+ *            is fixed)
  * onChange — called after any control changes, with the controller
  * The controller exposes the current values plus `apply(rawData)`, which runs
  * `filterByYears` with the right history maps for the current History setting.
  */
 export function createFilterBar(mount, {
-  fields = ['region', 'years', 'confSet', 'history'],
+  fields = ['region', 'years', 'confSet', 'rankings', 'history'],
   years = { min: 1970, max: new Date().getFullYear() + 1 },
   prefix = '',
   prefixId = '',
@@ -80,6 +83,7 @@ export function createFilterBar(mount, {
     startYear: DEFAULT_START_YEAR,
     endYear: DEFAULT_END_YEAR,
     confSet: 'csrankings-default',
+    rankings: false,
     historical: false
   };
 
@@ -87,6 +91,7 @@ export function createFilterBar(mount, {
   if (params.has('start')) state.startYear = parseInt(params.get('start'));
   if (params.has('end')) state.endYear = parseInt(params.get('end'));
   if (params.has('confSet')) state.confSet = normalizeConferenceSet(params.get('confSet'));
+  if (params.has('rankings')) state.rankings = params.get('rankings') === 'true';
   if (params.has('historical')) state.historical = params.get('historical') === 'true';
   state.startYear = Math.min(Math.max(state.startYear, years.min), years.max);
   state.endYear = Math.min(Math.max(state.endYear, years.min), years.max);
@@ -109,6 +114,13 @@ export function createFilterBar(mount, {
       <select id="conf-set" aria-label="Conference set">${optionsHtml(CONF_SETS, state.confSet)}</select>
       ${tooltip('conference sets', CONF_SET_HELP)}
     </div>` : ''}
+    ${has('rankings') ? `<div class="filter-group checkboxes">
+      <label for="show-rankings" class="filter-checkbox">
+        <input type="checkbox" id="show-rankings"${state.rankings ? ' checked' : ''}>
+        <span>Rankings</span>
+        ${tooltip('rankings', RANKINGS_HELP)}
+      </label>
+    </div>` : ''}
     ${has('history') ? `<div class="filter-group checkboxes">
       <label for="historical-mode" class="filter-checkbox">
         <input type="checkbox" id="historical-mode"${state.historical ? ' checked' : ''}>
@@ -122,6 +134,7 @@ export function createFilterBar(mount, {
   const startSelect = element.querySelector('#start-year');
   const endSelect = element.querySelector('#end-year');
   const confSelect = element.querySelector('#conf-set');
+  const rankingsToggle = element.querySelector('#show-rankings');
   const historyToggle = element.querySelector('#historical-mode');
 
   const controller = {
@@ -130,6 +143,7 @@ export function createFilterBar(mount, {
     get startYear() { return state.startYear; },
     get endYear() { return state.endYear; },
     get confSet() { return state.confSet; },
+    get rankings() { return state.rankings; },
     get historical() { return state.historical; },
     get historyMap() { return state.historical ? affiliationData?.historyMap || null : null; },
     get aliasMap() { return state.historical ? affiliationData?.aliasMap || null : null; },
@@ -147,6 +161,7 @@ export function createFilterBar(mount, {
         target.set('end', String(state.endYear));
       }
       if (has('confSet') && state.confSet !== 'csrankings-default') target.set('confSet', state.confSet);
+      if (has('rankings') && state.rankings) target.set('rankings', 'true');
       if (has('history') && state.historical) target.set('historical', 'true');
       return target;
     },
@@ -180,6 +195,11 @@ export function createFilterBar(mount, {
       readControls();
       onChange(controller);
     });
+  });
+
+  rankingsToggle?.addEventListener('change', () => {
+    state.rankings = rankingsToggle.checked;
+    onChange(controller);
   });
 
   historyToggle?.addEventListener('change', async () => {
