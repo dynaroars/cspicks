@@ -392,6 +392,25 @@ test('NSF funding beta searches nationwide data and aggregates fractional awards
   }
 });
 
+test('funding compares two universities with vs', async ({ page }) => {
+  await page.goto('funding.html?q=George%20Mason%20University%20vs%20Univ.%20of%20Illinois%20at%20Urbana-Champaign');
+  const comparison = page.locator('#funding-comparison');
+  await expect(comparison).toBeVisible();
+  await expect(comparison.locator('.comparison-scoreboard')).toContainText('NSF awards');
+  await expect(comparison.locator('.comparison-scoreboard')).toContainText('CS faculty with awards');
+  await expect(comparison.locator('.comparison-cards .funding-card')).toHaveCount(2);
+  // The comparison replaces the ranked columns, and the cards open in full.
+  await expect(page.locator('#funding-school-results .funding-card')).toHaveCount(0);
+  await expect(comparison.locator('.funding-card.collapsed')).toHaveCount(0);
+
+  await page.goto('funding.html?q=George%20Mason%20University%20vs%20Nowhere%20Tech');
+  await expect(comparison).toContainText('No match found');
+
+  await page.goto('funding.html?q=George%20Mason%20University');
+  await expect(page.locator('#funding-school-results .funding-card').first()).toBeVisible();
+  await expect(comparison).toBeHidden();
+});
+
 test('funding stays off the search page and on discoveries', async ({ page }) => {
   await page.goto('./?q=Hai%20Duong');
   await expect(page.locator('#prof-results .card-stats')).toContainText('papers');

@@ -1127,6 +1127,13 @@ button.card-header {
   font-size: var(--text-sm);
 }
 
+/* The two funding cards sit side by side beneath the head-to-head table. */
+.comparison-cards {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 2rem;
+}
+
 .comparison-leads {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1990,7 +1997,8 @@ button.card-header {
   order: 3;
 }
 
-.search-page #comparison-results {
+.search-page #comparison-results,
+.search-page #funding-comparison {
   order: 4;
 }
 
