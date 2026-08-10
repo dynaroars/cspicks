@@ -11,6 +11,7 @@
     "sync:nsf": "node scripts/sync-nsf-awards.mjs",
     "sync:nsf:all": "node scripts/sync-nsf-awards.mjs --all-us",
     "sync:nsf:names": "node scripts/sync-nsf-roster-names.mjs",
+    "sync:nsf:rebuild": "node scripts/sync-nsf-awards.mjs --all-us --cache-only",
     "build": "vite build",
     "postbuild": "rm -f dist/professor_history_openalex.json dist/school-aliases.json && rm -rf dist/data",
     "preview": "vite preview",

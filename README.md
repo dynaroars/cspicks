@@ -90,6 +90,7 @@ Two upstream sources move at very different speeds, so refreshing them is two di
 | --- | --- | --- | --- |
 | **Monthly, or after any CSRankings roster update** | `npm run sync:nsf:names` | 2 CSV downloads, seconds | Re-resolves NSF investigators to the name CSRankings' publication table uses, and rewrites `public/nsf-name-crosswalk.csv` |
 | Quarterly, or when award data looks stale | `npm run sync:nsf:all` | Thousands of NSF API queries, hours | Re-queries the NSF Award Search API for every faculty/institution pair |
+| After changing institution or name matching | `npm run sync:nsf:rebuild` | Local cache only, seconds | Rebuilds the dataset from `.nsf-sync-cache.json` with no API access |
 
 **Run `npm run sync:nsf:names` regularly.** CSRankings spells some faculty differently in `csrankings.csv` than in `generated-author-info.csv`, and the site matches on the latter. Without this refresh, faculty hired or renamed since the last award sync silently show no funding. It needs no NSF API access, so it is safe to run any time — commit the resulting `public/nsf-awards.json` and `public/nsf-name-crosswalk.csv`.
 
@@ -125,6 +126,8 @@ To force a targeted faculty refresh while diagnosing a name variant:
 npm run sync:nsf:all -- --faculty "Hoang-Dung Tran"
 ```
 - writes the deployable dataset to `public/nsf-awards.json`, including explicit coverage totals.
+
+NSF records awards under legal names (`Regents of the University of Michigan - Flint`), informal ones (`Georgia Tech Research Corporation`), and expansions of names CSRankings abbreviates (`Massachusetts Institute of Technology` vs `Massachusetts Inst. of Technology`). The synchronizer normalizes those forms, keeps an alias list for names it cannot derive, and assigns each awardee to the *most specific* matching institution so a flagship never claims its branch campus's awards.
 
 To build a deliberately scoped dataset for one institution instead:
 

@@ -22,6 +22,9 @@ const facultyFilter = option('--faculty');
 const collaborativeFilter = option('--collaborative');
 const allUs = args.includes('--all-us');
 const refresh = args.includes('--refresh');
+// Rebuilds the dataset from the local cache without querying NSF, so a matching
+// change can be applied to already-fetched awards.
+const cacheOnly = args.includes('--cache-only');
 const limit = Number(option('--limit')) || Infinity;
 
 if (!schoolFilter && !allUs) {
@@ -89,13 +92,43 @@ function facultyQueryNames(name) {
   return [...new Set(variants)];
 }
 
+// NSF records awards under legal names ("Regents of the University of
+// Michigan - Flint"), informal ones ("Georgia Tech Research Corporation") and
+// acronym expansions that CSRankings abbreviates. Names that cannot be derived
+// are listed here.
+const INSTITUTION_ALIASES = {
+  'njit': 'new jersey institute of technology',
+  'iupui': 'indiana university purdue university indianapolis',
+  'ohsu': 'oregon health science university',
+  'uccs': 'university of colorado colorado springs',
+  'liu post': 'long island university',
+  'tti chicago': 'toyota technological institute at chicago',
+  'new mexico tech': 'new mexico institute of mining and technology',
+  'new york tech': 'new york institute of technology',
+  'missouri s&t': 'missouri university of science and technology',
+  'virginia tech': 'virginia polytechnic institute and state university',
+  'georgia institute of technology': 'georgia tech',
+  'cuny': 'city university of new york',
+  'suny stony brook': 'stony brook',
+  'unc - charlotte': 'university of north carolina at charlotte',
+  'unc - greensboro': 'university of north carolina greensboro',
+  'siu carbondale': 'southern illinois university at carbondale'
+};
+
 function institutionKey(value) {
-  return String(value || '')
-    .toLowerCase()
+  const raw = String(value || '').toLowerCase().trim();
+  return (INSTITUTION_ALIASES[raw] || raw)
     .normalize('NFKD')
     .replace(/[\u0300-\u036f]/g, '')
+    .replace(/&/g, ' and ')
+    .replace(/\binst\b\.?/g, 'institute')
+    .replace(/\btech\b/g, 'technology')
+    .replace(/\bstate university of new york\b/g, 'suny')
+    .replace(/\bsuny\b/g, ' ')
+    .replace(/\binstitute of technology\b/g, 'technology')
     .replace(/\buniversity\b/g, 'univ')
-    .replace(/\b(the|research|foundation|corporation|corp|inc)\b/g, ' ')
+    // Legal-entity wrappers and generic qualifiers never identify a campus.
+    .replace(/\b(the|at|in|of|and|research|foundation|corporation|corp|incorporated|inc|system|campus|main|downtown|regents|trustees|board|curators|rector|visitors|president|fellows|obo|nshe)\b/g, ' ')
     .replace(/[^a-z0-9]+/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
@@ -104,7 +137,40 @@ function institutionKey(value) {
 function institutionMatches(first, second) {
   const a = institutionKey(first);
   const b = institutionKey(second);
-  return Boolean(a && b && (a === b || a.includes(b) || b.includes(a)));
+  if (!a || !b) return false;
+  if (a === b) return true;
+  // Anchored containment only: "rice univ" inside "william marsh rice univ" is
+  // the same school; "univ buffalo" inside "canisius univ buffalo new york" is
+  // a different one.
+  const [shorter, longer] = a.length <= b.length ? [a, b] : [b, a];
+  return longer.startsWith(`${shorter} `) || longer.endsWith(` ${shorter}`);
+}
+
+/**
+ * An awardee belongs to the institution with the most specific matching name,
+ * so a flagship cannot claim its branch campus's awards. An exact name always
+ * wins, and a tie means no one claims it.
+ */
+function buildInstitutionResolver(institutions) {
+  const keyed = [...new Set(institutions)].map(name => ({ name, key: institutionKey(name) }));
+  const cache = new Map();
+  return awardeeName => {
+    if (cache.has(awardeeName)) return cache.get(awardeeName);
+    const awardeeKey = institutionKey(awardeeName);
+    const exact = keyed.filter(entry => entry.key === awardeeKey);
+    let owner = null;
+    if (exact.length === 1) {
+      owner = exact[0].name;
+    } else if (!exact.length) {
+      const matches = keyed.filter(entry => institutionMatches(entry.name, awardeeName))
+        .sort((a, b) => b.key.length - a.key.length);
+      owner = matches.length && !(matches.length > 1 && matches[0].key.length === matches[1].key.length)
+        ? matches[0].name
+        : null;
+    }
+    cache.set(awardeeName, owner);
+    return owner;
+  };
 }
 
 function compactAward(raw) {
@@ -120,7 +186,7 @@ function compactAward(raw) {
   };
 }
 
-function buildFacultyResolver(faculty) {
+function buildFacultyResolver(faculty, resolveInstitution) {
   const byLastName = new Map();
   faculty.forEach(row => {
     const key = nameWords(row.name).at(-1);
@@ -128,8 +194,12 @@ function buildFacultyResolver(faculty) {
     byLastName.get(key).push(row);
   });
   return (name, awardee) => {
+    // The awardee belongs to exactly one institution, so only faculty there can
+    // be credited with the award.
+    const owner = resolveInstitution(awardee);
+    if (!owner) return null;
     const candidates = (byLastName.get(nameWords(name).at(-1)) || [])
-      .filter(row => institutionMatches(row.affiliation, awardee) && facultyNameMatches(row.name, name));
+      .filter(row => row.affiliation === owner && facultyNameMatches(row.name, name));
     if (!candidates.length) return null;
     const exact = candidates.filter(row => fullNameKey(row.name) === fullNameKey(name));
     if (exact.length === 1) return exact[0];
@@ -303,12 +373,12 @@ const queueCacheWrite = () => {
   const snapshot = `${JSON.stringify(cache)}\n`;
   cacheWrite = cacheWrite.then(() => fs.writeFile(CACHE, snapshot));
 };
-const pending = scopedFaculty.filter(faculty => {
+const pending = cacheOnly ? [] : scopedFaculty.filter(faculty => {
   const key = `${fullNameKey(faculty.name)}|${institutionKey(faculty.affiliation)}`;
   const selected = !facultyFilter || fullNameKey(faculty.name).includes(fullNameKey(facultyFilter));
   return selected && (!cache.checked[key] || Boolean(facultyFilter));
 });
-process.stdout.write(`NSF sync: ${scopedFaculty.length} faculty at ${new Set(scopedFaculty.map(row => row.affiliation)).size} institutions; ${pending.length} require API queries.\n`);
+process.stdout.write(`NSF sync${cacheOnly ? ' (cache only)' : ''}: ${scopedFaculty.length} faculty at ${new Set(scopedFaculty.map(row => row.affiliation)).size} institutions; ${pending.length} require API queries.\n`);
 
 const concurrency = 6;
 let nextIndex = 0;
@@ -367,7 +437,8 @@ async function collaborativeWorker() {
 await Promise.all(Array.from({ length: Math.min(concurrency, pendingCollaborative.length || 1) }, collaborativeWorker));
 await cacheWrite;
 
-const resolveFaculty = buildFacultyResolver(scopedRoster);
+const resolveInstitution = buildInstitutionResolver(scopedRoster.map(row => row.affiliation));
+const resolveFaculty = buildFacultyResolver(scopedRoster, resolveInstitution);
 const normalizedAwards = Object.values(cache.awards).map(raw => normalizeAward(raw, resolveFaculty));
 const collaborativeGroups = new Map();
 normalizedAwards.filter(award => isCollaborativeTitle(award.title)).forEach(award => {
