@@ -39,15 +39,13 @@ By default, every eligible paper is credited to its author’s current CSRanking
 
 Historical affiliation records are estimates. They can be incomplete or incorrect, especially for older years, visiting positions, and institutions that changed names.
 
-### How do I compare two universities or two professors?
-
-Type both names in the main search box separated by `vs` — for example `Carnegie Mellon University vs Massachusetts Inst. of Technology` or `Emery Berger vs Michael Hicks`. The search suggestions complete whichever side you are typing.
-
-The comparison shows adjusted publication weight by research area for both targets, which areas each one leads, and, for universities, the area-level log-score differences behind the rank gap. It uses the region, years, conference set, and History setting selected above the search box. Both sides must be the same kind of target: two universities or two professors.
-
 ### What does the Rankings checkbox do?
 
-Off by default, the result lists read as plain lists of universities and people. Turning it on numbers the people list and shows each university's overall rank for the selected region, years, and conference set, plus its rank within each research area. Individual professors have no rank of their own, so their cards never show one.
+Off by default, the result lists read as plain lists of universities and people. Turning it on shows each university's overall rank for the selected region, years, and conference set, plus its rank within each research area, and ranks people by adjusted publication count over the same selection. In an area or conference view both are ranked within that subject instead. Equal values share a rank.
+
+### Can I compare two universities or two professors?
+
+Yes, on both Search and NSF Funding: type both names separated by `vs` — for example `Carnegie Mellon University vs Univ. of Illinois at Urbana-Champaign`. Search compares publication output by research area; NSF Funding compares awards, attributed funding, and the number of matched CS faculty. Both sides must be the same kind of target.
 
 ### What do the conference-set options mean?
 

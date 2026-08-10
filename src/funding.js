@@ -1,4 +1,6 @@
-import { buildFundingIndex, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, renderFundingFacultyCard, renderFundingSchoolCard } from './nsf.js';
+import { buildFundingIndex, formatFunding, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, renderFundingFacultyCard, renderFundingSchoolCard } from './nsf.js';
+import { parseComparisonQuery } from './comparison.js';
+import { compareNumber, renderComparisonNotice, renderScoreboard } from './compare-view.js';
 import { createFilterBar } from './filters.js';
 import { renderInfiniteLists } from './search-results.js';
 import { cleanName, escapeHtml } from './shared.js';
@@ -75,8 +77,89 @@ function updateUrl() {
   history.replaceState({}, '', `${location.pathname}?${next}`);
 }
 
+// "A vs B" compares two universities or two people, as on Search.
+function resolveFundingTarget(name) {
+  const wanted = cleanName(name).toLowerCase();
+  const school = index.schools.find(record => record.name.toLowerCase() === wanted);
+  if (school) return { type: 'school', name: school.name, record: school };
+  const person = index.faculty.find(record => cleanName(record.name).toLowerCase() === wanted);
+  return person ? { type: 'faculty', name: cleanName(person.name), record: person } : null;
+}
+
+function renderFundingComparison(parsed) {
+  const section = document.getElementById('funding-comparison');
+  const summary = document.getElementById('funding-comparison-summary');
+  section.hidden = false;
+  document.getElementById('funding-comparison-title').textContent = `${parsed.left} vs ${parsed.right}`;
+  document.body.classList.remove('showing-rankings');
+  ['funding-school-results', 'funding-faculty-results'].forEach(id => {
+    document.getElementById(id).innerHTML = '';
+  });
+
+  const a = resolveFundingTarget(parsed.left);
+  const b = resolveFundingTarget(parsed.right);
+  if (!a || !b) {
+    const missing = a ? parsed.right : parsed.left;
+    renderComparisonNotice(summary, 'No match found',
+      `Could not match "${missing}" to a university or professor with matched NSF awards in this year range.`);
+    return;
+  }
+  if (a.type !== b.type) {
+    renderComparisonNotice(summary, 'Mixed comparison',
+      'Compare two universities or two professors — not one of each.');
+    return;
+  }
+  if (a.name === b.name) {
+    renderComparisonNotice(summary, 'Identical selection',
+      'Pick two different targets to generate a head-to-head comparison.');
+    return;
+  }
+
+  const money = value => formatFunding(value || 0);
+  const rows = a.type === 'school'
+    ? [
+      { label: 'NSF awards', a: a.record.awards.length, b: b.record.awards.length },
+      { label: 'Intended funding attributed', a: a.record.attributedAmount, b: b.record.attributedAmount, format: money },
+      { label: 'CS faculty with awards', a: a.record.faculty.length, b: b.record.faculty.length },
+      {
+        label: 'Average per matched faculty',
+        a: a.record.attributedAmount / Math.max(1, a.record.faculty.length),
+        b: b.record.attributedAmount / Math.max(1, b.record.faculty.length),
+        format: money
+      }
+    ]
+    : [
+      { label: 'University', a: a.record.affiliation || '—', b: b.record.affiliation || '—', format: value => String(value) },
+      { label: 'NSF awards', a: a.record.awards.length, b: b.record.awards.length },
+      { label: 'Intended share', a: a.record.attributedAmount, b: b.record.attributedAmount, format: money },
+      { label: 'Full project value', a: a.record.totalAwardAmount, b: b.record.totalAwardAmount, format: money }
+    ];
+
+  summary.innerHTML = renderScoreboard(escapeHtml(a.name), escapeHtml(b.name), rows.map(row => ({ format: compareNumber, ...row })))
+    + `<div class="results-grid comparison-cards">
+        ${[a, b].map(side => (side.type === 'school'
+          ? renderFundingSchoolCard(side.record, { collapsible: false })
+          : renderFundingFacultyCard(side.record, { collapsible: false }))).join('')}
+      </div>`;
+}
+
+function hideFundingComparison() {
+  const section = document.getElementById('funding-comparison');
+  if (!section || section.hidden) return;
+  section.hidden = true;
+  document.getElementById('funding-comparison-summary').innerHTML = '';
+}
+
 function render(query = '') {
   const normalized = query.trim();
+  const comparison = parseComparisonQuery(normalized);
+  if (comparison) {
+    document.getElementById('funding-status').textContent = '';
+    renderFundingComparison(comparison);
+    updateUrl();
+    return;
+  }
+  hideFundingComparison();
   const schools = normalized ? index.schools.filter(record => fundingSchoolNameMatches(record, normalized)) : index.schools;
   const faculty = normalized ? [
     ...index.faculty.filter(record => fundingFacultyNameMatches(record, normalized)),

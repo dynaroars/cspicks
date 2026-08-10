@@ -75,10 +75,38 @@ export function renderComparisonChart(canvas, previous, { labels, dataA, dataB, 
     });
 }
 
+export const compareNumber = value => Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 1 });
+
+/**
+ * A head-to-head table of two entities. Each row is
+ * `{ label, a, b, format, lowerWins }`; the better of two numeric values is
+ * marked, and non-numeric rows (an affiliation, say) are shown without a winner.
+ */
+export function renderScoreboard(safeNameA, safeNameB, rows) {
+  const cell = (row, side) => {
+    const value = row[side];
+    const other = row[side === 'a' ? 'b' : 'a'];
+    const wins = Number.isFinite(value) && Number.isFinite(other)
+      && (row.lowerWins ? value < other : value > other);
+    return `<td class="comparison-side-${side}${wins ? ' is-leader' : ''}">${escapeHtml((row.format || compareNumber)(value))}</td>`;
+  };
+
+  return `
+    <div class="summary-card comparison-scoreboard">
+      <h4>Head-to-head</h4>
+      <table class="comparison-table">
+        <thead><tr><th scope="col"><span class="visually-hidden">Measure</span></th>
+          <th scope="col" class="comparison-side-a">${safeNameA}</th>
+          <th scope="col" class="comparison-side-b">${safeNameB}</th></tr></thead>
+        <tbody>${rows.map(row => `<tr><th scope="row">${escapeHtml(row.label)}</th>${cell(row, 'a')}${cell(row, 'b')}</tr>`).join('')}</tbody>
+      </table>
+    </div>`;
+}
+
 // "Leads in N areas" says who is broader, not who is bigger, so the summary
 // opens with the totals that decide the ranking.
 function scoreboard(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins) {
-  const number = value => Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 1 });
+  const number = compareNumber;
   const facultyCount = entry => Object.keys(entry.facultyAdjustedCounts || {}).length;
   const rows = type === 'school'
     ? [
@@ -97,24 +125,7 @@ function scoreboard(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins) {
       { label: 'Areas led', a: aWins, b: bWins, format: number }
     ];
 
-  const cell = (row, side) => {
-    const value = row[side];
-    const other = row[side === 'a' ? 'b' : 'a'];
-    const wins = Number.isFinite(value) && Number.isFinite(other)
-      && (row.lowerWins ? value < other : value > other);
-    return `<td class="comparison-side-${side}${wins ? ' is-leader' : ''}">${escapeHtml(row.format(value))}</td>`;
-  };
-
-  return `
-    <div class="summary-card comparison-scoreboard">
-      <h4>Head-to-head</h4>
-      <table class="comparison-table">
-        <thead><tr><th scope="col"><span class="visually-hidden">Measure</span></th>
-          <th scope="col" class="comparison-side-a">${safeNameA}</th>
-          <th scope="col" class="comparison-side-b">${safeNameB}</th></tr></thead>
-        <tbody>${rows.map(row => `<tr><th scope="row">${escapeHtml(row.label)}</th>${cell(row, 'a')}${cell(row, 'b')}</tr>`).join('')}</tbody>
-      </table>
-    </div>`;
+  return renderScoreboard(safeNameA, safeNameB, rows);
 }
 
 export function renderComparisonSummary(container, { type, nameA, nameB, entryA, entryB, areaList, dataA, dataB }) {
