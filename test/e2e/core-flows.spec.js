@@ -250,7 +250,8 @@ test('conference and area queries list universities beside their people', async 
   expect(columns).toEqual({ sameRow: true, schoolsFirst: true });
   // Lists grow on scroll instead of offering a "see more" button.
   await expect(page.locator('[data-show-more-schools], [data-show-more-people]')).toHaveCount(0);
-  await expect(page.locator('#search-context-header')).toContainText('Results for Conference: ICSE');
+  // The header names the venue and spells out the abbreviation.
+  await expect(page.locator('#search-context-header')).toHaveText('ICSE (International Conference on Software Engineering)');
 });
 
 test('CORE A conference trends include a published ASE venue', async ({ page }) => {

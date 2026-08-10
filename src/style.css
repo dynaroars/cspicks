@@ -375,21 +375,24 @@ footer button:hover {
   line-height: 1.2;
 }
 
+/* Let each control take exactly the width its longest option needs, so
+   "Australasia" is not clipped and the venue box is not oversized. */
 .search-filters .search-region-control {
-  flex: 0 1 110px;
+  flex: 0 0 auto;
+}
+
+.search-filters .search-region-control select,
+.search-filters .conference-set-control select {
+  width: auto;
+  max-width: 100%;
 }
 
 .search-filters #year-filter-group {
-  flex: 0 0 195px;
+  flex: 0 0 auto;
 }
 
 .search-filters .conference-set-control {
-  flex: 0 0 235px;
-}
-
-.search-filters .conference-set-control select {
-  flex: 1;
-  min-width: 0;
+  flex: 0 0 auto;
 }
 
 .search-filters .filter-group.checkboxes {
@@ -428,11 +431,12 @@ footer button:hover {
 }
 
 .search-filters .filter-info {
+  position: relative;
   flex: none;
   color: var(--text-secondary);
+  font-size: var(--text-xs);
   cursor: help;
   line-height: 1;
-  position: relative;
 }
 
 @media (max-width: 640px) {

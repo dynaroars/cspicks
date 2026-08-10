@@ -29,8 +29,104 @@ export const areaLabels = {
 };
 
 export const conferenceLabels = {
+  nips: 'NeurIPS',
+  chiconf: 'CHI',
+  'siggraph-asia': 'SIGGRAPH Asia',
+  usenixsec: 'USENIX Security',
+  usenixatc: 'USENIX ATC',
+  oakland: 'IEEE S&P',
   pets: 'PETS (Privacy Enhancing Technologies Symposium)'
 };
+
+// Spelled-out venue names for the CSRankings venue set, so a result header can
+// say what an abbreviation stands for.
+const conferenceFullNames = {
+  aaai: 'AAAI Conference on Artificial Intelligence',
+  ijcai: 'International Joint Conference on Artificial Intelligence',
+  cvpr: 'Conference on Computer Vision and Pattern Recognition',
+  eccv: 'European Conference on Computer Vision',
+  iccv: 'International Conference on Computer Vision',
+  icml: 'International Conference on Machine Learning',
+  iclr: 'International Conference on Learning Representations',
+  kdd: 'Conference on Knowledge Discovery and Data Mining',
+  nips: 'Conference on Neural Information Processing Systems',
+  acl: 'Annual Meeting of the Association for Computational Linguistics',
+  emnlp: 'Conference on Empirical Methods in Natural Language Processing',
+  naacl: 'Conference of the North American Chapter of the ACL',
+  sigir: 'Conference on Research and Development in Information Retrieval',
+  www: 'The Web Conference',
+  asplos: 'Architectural Support for Programming Languages and Operating Systems',
+  isca: 'International Symposium on Computer Architecture',
+  micro: 'International Symposium on Microarchitecture',
+  hpca: 'International Symposium on High-Performance Computer Architecture',
+  ccs: 'Conference on Computer and Communications Security',
+  oakland: 'IEEE Symposium on Security and Privacy',
+  usenixsec: 'USENIX Security Symposium',
+  ndss: 'Network and Distributed System Security Symposium',
+  pets: 'Privacy Enhancing Technologies Symposium',
+  vldb: 'International Conference on Very Large Data Bases',
+  sigmod: 'International Conference on Management of Data',
+  icde: 'International Conference on Data Engineering',
+  pods: 'Symposium on Principles of Database Systems',
+  dac: 'Design Automation Conference',
+  iccad: 'International Conference on Computer-Aided Design',
+  emsoft: 'International Conference on Embedded Software',
+  rtas: 'Real-Time and Embedded Technology and Applications Symposium',
+  rtss: 'Real-Time Systems Symposium',
+  sc: 'International Conference for High Performance Computing, Networking, Storage and Analysis',
+  hpdc: 'International Symposium on High-Performance Parallel and Distributed Computing',
+  ics: 'International Conference on Supercomputing',
+  mobicom: 'International Conference on Mobile Computing and Networking',
+  mobisys: 'International Conference on Mobile Systems, Applications, and Services',
+  sensys: 'Conference on Embedded Networked Sensor Systems',
+  imc: 'Internet Measurement Conference',
+  sigmetrics: 'International Conference on Measurement and Modeling of Computer Systems',
+  osdi: 'Symposium on Operating Systems Design and Implementation',
+  sosp: 'Symposium on Operating Systems Principles',
+  eurosys: 'European Conference on Computer Systems',
+  fast: 'Conference on File and Storage Technologies',
+  usenixatc: 'USENIX Annual Technical Conference',
+  popl: 'Symposium on Principles of Programming Languages',
+  pldi: 'Conference on Programming Language Design and Implementation',
+  oopsla: 'Conference on Object-Oriented Programming, Systems, Languages, and Applications',
+  icfp: 'International Conference on Functional Programming',
+  fse: 'Symposium on the Foundations of Software Engineering',
+  icse: 'International Conference on Software Engineering',
+  ase: 'International Conference on Automated Software Engineering',
+  issta: 'International Symposium on Software Testing and Analysis',
+  nsdi: 'Symposium on Networked Systems Design and Implementation',
+  sigcomm: 'Conference on Applications, Technologies, Architectures, and Protocols for Computer Communication',
+  siggraph: 'Conference on Computer Graphics and Interactive Techniques',
+  'siggraph-asia': 'SIGGRAPH Asia Conference',
+  eurographics: 'Annual Conference of the European Association for Computer Graphics',
+  focs: 'Symposium on Foundations of Computer Science',
+  soda: 'Symposium on Discrete Algorithms',
+  stoc: 'Symposium on Theory of Computing',
+  crypto: 'International Cryptology Conference',
+  eurocrypt: 'International Conference on the Theory and Applications of Cryptographic Techniques',
+  cav: 'International Conference on Computer Aided Verification',
+  lics: 'Symposium on Logic in Computer Science',
+  ismb: 'Conference on Intelligent Systems for Molecular Biology',
+  recomb: 'Conference on Research in Computational Molecular Biology',
+  ec: 'Conference on Economics and Computation',
+  wine: 'Conference on Web and Internet Economics',
+  chiconf: 'Conference on Human Factors in Computing Systems',
+  ubicomp: 'Conference on Ubiquitous and Pervasive Computing',
+  uist: 'Symposium on User Interface Software and Technology',
+  icra: 'International Conference on Robotics and Automation',
+  iros: 'International Conference on Intelligent Robots and Systems',
+  rss: 'Robotics: Science and Systems',
+  vis: 'IEEE Visualization Conference',
+  vr: 'IEEE Conference on Virtual Reality and 3D User Interfaces',
+  sigcse: 'Technical Symposium on Computer Science Education'
+};
+
+/** "ICSE (International Conference on Software Engineering)" when known. */
+export function getConferenceFullLabel(key) {
+  const label = getConferenceLabel(key);
+  const full = conferenceFullNames[key];
+  return full && !label.includes('(') ? `${label} (${full})` : label;
+}
 
 const VALID_REGIONS = new Set(['world', 'us', 'europe', 'asia', 'canada', 'australasia']);
 const EUROPE_COUNTRIES = new Set('AL AD AT BY BE BA BG HR CY CZ DK EE FI FR DE GR HU IS IE IT LV LI LT LU MT MD MC ME NL MK NO PL PT RO RU SM RS SK SI ES SE CH TR UA GB VA'.split(' '));
