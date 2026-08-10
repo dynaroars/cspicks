@@ -1,5 +1,5 @@
 import { getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet, schoolAliases, conferenceAliases } from './data.js';
-import { areaLabels, cleanName, escapeHtml, getConferenceLabel } from './shared.js';
+import { areaLabels, cleanName, escapeHtml, getConferenceFullLabel, getConferenceLabel } from './shared.js';
 
 // Renders the Search page's result sections. The page injects its live state
 // and callbacks through `ctx` so these functions stay free of module globals.
@@ -83,8 +83,11 @@ function queueInfiniteList(container, items, renderItem) {
 
 function findMatchingConference(query) {
   const normalized = (conferenceAliases[query] || query).toLowerCase();
+  // Venues answer to their identifier and to the label the interface shows,
+  // so "usenixsec", "USENIX Security" and "IEEE S&P" all resolve.
   return Object.keys(getConferenceAreaMap(ctx.filters.confSet)).find(key =>
-    key.toLowerCase() === normalized && publicationMatchesConferenceSet({ area: key }, ctx.filters.confSet)
+    (key.toLowerCase() === normalized || getConferenceLabel(key).toLowerCase() === normalized)
+      && publicationMatchesConferenceSet({ area: key }, ctx.filters.confSet)
   ) || null;
 }
 
@@ -280,10 +283,10 @@ export function searchSchools(query) {
   const header = document.getElementById('search-context-header');
 
   if (confKeyMatch) {
-    header.textContent = `Results for Conference: ${getConferenceLabel(confKeyMatch)}`;
+    header.textContent = getConferenceFullLabel(confKeyMatch);
     header.style.display = 'block';
   } else if (matchedArea) {
-    header.textContent = `Results for Area: ${areaLabels[matchedArea]}`;
+    header.textContent = areaLabels[matchedArea];
     header.style.display = 'block';
   } else {
     header.style.display = 'none';

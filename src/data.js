@@ -130,6 +130,9 @@ export const schoolAliases = {
 
 export const conferenceAliases = {
   'neurips': 'nips',
+  // CSRankings files CHI under "chiconf"; "chi" alone is the HCI area's key.
+  'chi conference': 'chiconf',
+  'siggraph asia': 'siggraph-asia'
 };
 
 
