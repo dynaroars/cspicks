@@ -4,7 +4,7 @@ import { initAnalysis, refreshAnalysis, setAnalysisTarget } from './analysis.js'
 import { areaLabels, cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
 import { buildPriorPeriodData } from './metrics.js';
 import { renderProfessorCard as renderProfessorCardView, renderSchoolCard as renderSchoolCardView } from './search-cards.js';
-import { clearSearchSections, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings, showMorePeople, showMoreSchools } from './search-results.js';
+import { clearSearchSections, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
 import { createDblpAuthorSearch } from './dblp-search-ui.js';
 import { hideComparison, initComparison, renderComparison, resolveComparison } from './comparison.js';
 import { createSuggestionBox } from './search-suggestions.js';
@@ -252,8 +252,6 @@ function setupSearch() {
   });
 
   document.querySelector('main')?.addEventListener('click', event => {
-    if (event.target.closest('[data-show-more-people]')) showMorePeople();
-    if (event.target.closest('[data-show-more-schools]')) showMoreSchools();
     const searchAction = event.target.closest('[data-action="search-query"]');
     if (searchAction) setSearchQuery(searchAction.dataset.query);
     const professorAction = event.target.closest('[data-action="professor-at-school"]');
