@@ -1,6 +1,6 @@
 import he from 'he';
 import { getConferenceAreaMap, schoolAliases } from './data.js';
-import { areaLabels, cleanName, countryFlag, escapeHtml, getConferenceLabel, safeExternalUrl } from './shared.js';
+import { areaLabels, cleanName, countryFlag, escapeHtml, getConferenceLabel, getInstitutionShortName, safeExternalUrl } from './shared.js';
 
 function actionAttributes(action, values = {}) {
   return Object.entries({ action, ...values })
@@ -137,8 +137,9 @@ function renderActivityGraph(prof, context) {
 export function renderProfessorCard(prof, context) {
   // A professor's flag is their current institution's country.
   const profCountry = context.rawData?.schools?.[prof.affiliation];
-  const listPosition = context.showRankings && Number.isInteger(context.resultPosition)
-    ? `<span class="result-position">${context.resultPosition}.</span> `
+  const profRank = Number.isFinite(context.rankOverride) ? context.rankOverride : prof.rank;
+  const rankPrefix = context.showRankings && Number.isFinite(profRank)
+    ? `<span class="result-position">${profRank}.</span> `
     : '';
   // In an area or conference view the professor's totals are already scoped to
   // it, so the header can say how much of their work landed there.
@@ -165,7 +166,7 @@ export function renderProfessorCard(prof, context) {
     <div class="card${exact ? '' : ' collapsed'}" data-name="${escapeHtml(cleanName(prof.name))}">
       <div class="card-header-row">
         <${headerTag} class="card-header" ${headerAttributes}>
-          <span class="professor-heading">${listPosition}${countryFlag(profCountry?.country, profCountry?.countryName)}<h2>${escapeHtml(cleanName(prof.name))}</h2><span class="professor-affiliation">${escapeHtml(prof.affiliation || '')}</span>${scopedPapers}${honors ? `<span class="faculty-honors">${honors}</span>` : ''}</span>
+          <span class="professor-heading">${rankPrefix}${countryFlag(profCountry?.country, profCountry?.countryName)}<h2>${escapeHtml(cleanName(prof.name))}</h2><span class="professor-affiliation">${escapeHtml(context.compactNames ? getInstitutionShortName(prof.affiliation || '') : (prof.affiliation || ''))}</span>${scopedPapers}${honors ? `<span class="faculty-honors">${honors}</span>` : ''}</span>
         </${headerTag}>
         ${renderProfileLinks(prof)}
       </div>
@@ -224,7 +225,7 @@ export function renderSchoolCard(school, filterArea, context) {
     : `type="button" ${actionAttributes('open-target', { targetType: 'school', targetName: school.name })}`;
 
   return `<div class="card${exact ? '' : ' collapsed'}" data-name="${escapeHtml(school.name)}">
-    <${headerTag} class="card-header" ${headerAttributes}><h2>${rankPrefix}${countryFlag(school.country, school.countryName)}${escapeHtml(school.name)}${badges}</h2></${headerTag}>
+    <${headerTag} class="card-header" ${headerAttributes}><h2>${rankPrefix}${countryFlag(school.country, school.countryName)}${escapeHtml(context.compactNames ? getInstitutionShortName(school.name) : school.name)}${badges}</h2></${headerTag}>
     <div class="card-content">${institutionMetadata || departmentHomepage !== '#' ? `<div class="school-metadata">${institutionMetadata ? `<span>${escapeHtml(institutionMetadata)}</span>` : ''}${departmentHomepage !== '#' ? `<a href="${escapeHtml(departmentHomepage)}" target="_blank" rel="noopener noreferrer">Department website</a>` : ''}</div>` : ''}${renderSubfieldContributions(school)}<div class="stats-list">${sortedAreas.map(([area, data]) => {
       const prefix = filterArea || !context.showRankings ? '' : (school.areaRanks?.[area] ? `${school.areaRanks[area]}. ` : '');
       const label = areaLabels[area] || getConferenceLabel(area);

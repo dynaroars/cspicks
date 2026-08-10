@@ -32,12 +32,12 @@ function getCardContext() {
 
 const searchDBLPAuthors = createDblpAuthorSearch(getCardContext);
 
-function renderProfessorCard(professor, resultPosition = null, scopedStats = false) {
-  return renderProfessorCardView(professor, { ...getCardContext(), resultPosition, scopedStats });
+function renderProfessorCard(professor, options = {}) {
+  return renderProfessorCardView(professor, { ...getCardContext(), ...options });
 }
 
-function renderSchoolCard(school, filterArea = null, rankOverride = null) {
-  return renderSchoolCardView(school, filterArea, { ...getCardContext(), rankOverride });
+function renderSchoolCard(school, filterArea = null, options = {}) {
+  return renderSchoolCardView(school, filterArea, { ...getCardContext(), ...options });
 }
 
 const params = new URLSearchParams(window.location.search);
@@ -303,6 +303,8 @@ function renderSearchExamples() {
     });
   };
 
+  // One short row of examples: two universities, a professor, an area, a venue
+  // and a single comparison.
   if (filters.region === 'world') {
     sample(['us', 'europe', 'asia', 'australasia'], 2).forEach(region => {
       addUniversity(sample(schoolsInRegion(region), 1)[0]);
@@ -313,14 +315,14 @@ function renderSearchExamples() {
 
   const rankedProfessors = Object.values(appData.professors)
     .filter(professor => professor.totalAdjusted > 0);
-  const facultyExamples = sample(rankedProfessors, 2)
+  const facultyExamples = sample(rankedProfessors, 1)
     .map(professor => ({ label: cleanName(professor.name), query: professor.name }));
 
-  const areaExamples = sample(Object.values(areaLabels), 2)
+  const areaExamples = sample(Object.values(areaLabels), 1)
     .map(label => ({ label, query: label }));
   const familiarConferences = ['pldi', 'nips', 'icml', 'cvpr', 'sigcomm', 'sosp', 'chi', 'sigmod', 'fse', 'icse']
     .filter(area => publicationMatchesConferenceSet({ area }, filters.confSet));
-  const conferenceExamples = sample(familiarConferences, 2).map(area => ({
+  const conferenceExamples = sample(familiarConferences, 1).map(area => ({
     label: area === 'nips' ? 'NeurIPS' : area.toUpperCase(),
     query: area === 'nips' ? 'NeurIPS' : area.toUpperCase()
   }));
@@ -337,13 +339,15 @@ function renderSearchExamples() {
     }
     return pairs;
   };
-  const schoolPairs = comparisonExamples(
-    schools.map(school => ({ label: getInstitutionShortName(school.name), query: school.name })), 1);
-  const facultyPairs = comparisonExamples(
-    rankedProfessors.map(professor => ({ label: cleanName(professor.name), query: professor.name })), 1);
-
+  // Pair schools that have a short name, so the comparison chip stays short
+  // enough for the row to hold one line.
+  const abbreviated = schools
+    .map(school => ({ label: getInstitutionShortName(school.name), query: school.name }))
+    .filter(entry => entry.label !== entry.query);
+  const schoolPairs = comparisonExamples(abbreviated.length >= 2 ? abbreviated : schools
+    .map(school => ({ label: getInstitutionShortName(school.name), query: school.name })), 1);
   fixedContainer.innerHTML = '<span>Examples:</span>';
-  container.innerHTML = [...universityExamples, ...facultyExamples, ...areaExamples, ...conferenceExamples, ...schoolPairs, ...facultyPairs]
+  container.innerHTML = [...universityExamples, ...facultyExamples, ...areaExamples, ...conferenceExamples, ...schoolPairs]
     .map(item => `<button type="button" data-search-example="${escapeHtml(item.query)}">${escapeHtml(item.label)}</button>`)
     .join('');
 }

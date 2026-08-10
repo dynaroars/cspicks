@@ -1,4 +1,4 @@
-import { getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet, schoolAliases, conferenceAliases } from './data.js';
+import { assignCompetitionRanks, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet, schoolAliases, conferenceAliases } from './data.js';
 import { areaLabels, cleanName, escapeHtml, getConferenceFullLabel, getConferenceLabel } from './shared.js';
 
 // Renders the Search page's result sections. The page injects its live state
@@ -150,8 +150,17 @@ export function searchAreaPeople(query) {
 
   if (topProfs.length === 0) return;
   document.body.classList.add('showing-rankings');
+  // Rank within the area or venue being viewed, not overall.
+  const scopedRanks = new Map(assignCompetitionRanks(
+    topProfs.map(prof => ({ name: prof.name, resultAdjusted: prof.resultAdjusted })),
+    entry => entry.resultAdjusted
+  ).map(entry => [entry.name, entry.rank]));
   queueInfiniteList(document.getElementById('area-people-results'), topProfs,
-    (professor, position) => ctx.renderProfessorCard(professor, position, true));
+    professor => ctx.renderProfessorCard(professor, {
+      scopedStats: true,
+      compactNames: true,
+      rankOverride: scopedRanks.get(professor.name)
+    }));
 }
 
 export function searchProfessorByAffiliation(name, affiliation) {
@@ -365,11 +374,10 @@ export function searchSchools(query) {
   const filterKey = confKeyMatch || matchedArea;
   // Area views rank by that area; conference views have no stored rank, so the
   // list position stands in — the list is already ordered by that venue.
-  queueInfiniteList(container, results, (school, position) => ctx.renderSchoolCard(
-    school,
-    filterKey,
-    filterKey ? (matchedArea ? school.areaRanks?.[matchedArea] ?? position : position) : null
-  ));
+  queueInfiniteList(container, results, (school, position) => ctx.renderSchoolCard(school, filterKey, {
+    rankOverride: filterKey ? (matchedArea ? school.areaRanks?.[matchedArea] ?? position : position) : null,
+    compactNames: Boolean(filterKey)
+  }));
 }
 
 
@@ -401,8 +409,8 @@ export function showDefaultRankings() {
   document.getElementById('school-results').classList.remove('single-result');
   // No headings or ordinals here: the two columns and their order say enough.
   renderInfiniteLists([
-    { container: document.getElementById('school-results'), items: schools, renderItem: school => ctx.renderSchoolCard(school) },
-    { container: document.getElementById('prof-results'), items: professors, renderItem: (professor, position) => ctx.renderProfessorCard(professor, position) }
+    { container: document.getElementById('school-results'), items: schools, renderItem: school => ctx.renderSchoolCard(school, null, { compactNames: true }) },
+    { container: document.getElementById('prof-results'), items: professors, renderItem: professor => ctx.renderProfessorCard(professor, { compactNames: true }) }
   ]);
   document.querySelectorAll('#conference-results, #area-people-results, #dblp-results')
     .forEach(container => { container.innerHTML = ''; });
