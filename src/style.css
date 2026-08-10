@@ -715,6 +715,11 @@ button.card-header {
   object-fit: cover;
 }
 
+.card-badge-rank {
+  color: var(--primary-color);
+  background: var(--primary-light);
+}
+
 .card-badge {
   margin-left: 0.5rem;
   color: var(--text-secondary);

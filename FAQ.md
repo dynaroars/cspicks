@@ -45,6 +45,10 @@ Type both names in the main search box separated by `vs` — for example `Carneg
 
 The comparison shows adjusted publication weight by research area for both targets, which areas each one leads, and, for universities, the area-level log-score differences behind the rank gap. It uses the region, years, conference set, and History setting selected above the search box. Both sides must be the same kind of target: two universities or two professors.
 
+### What does the Rankings checkbox do?
+
+Off by default, the result lists read as plain lists of universities and people. Turning it on numbers the people list and shows each university's overall rank for the selected region, years, and conference set, plus its rank within each research area. Individual professors have no rank of their own, so their cards never show one.
+
 ### What do the conference-set options mean?
 
 - **CSRankings (Default)** uses the primary CSRankings venue set and excludes its optional next-tier venues. Venues that CSRankings collects but never assigns to a research area (PoPETs, for example) are counted by neither CSRankings option.

@@ -202,6 +202,30 @@ test('suggestions list every match and complete the second side of a vs query', 
   await expect(page.locator('#comparison-chart-container')).toBeVisible();
 });
 
+test('rankings toggle adds ranks and list positions', async ({ page }) => {
+  await page.goto('./');
+  await expect(page.locator('#school-results .card').first()).toBeVisible();
+  await expect(page.locator('main .card-badge-rank')).toHaveCount(0);
+  await expect(page.locator('main .result-position')).toHaveCount(0);
+
+  await page.locator('#show-rankings').check();
+  await expect(page).toHaveURL(/rankings=true/);
+  // Universities show their real rank; people are numbered by list position.
+  await expect(page.locator('#school-results .card-badge-rank').first()).toHaveText('#1');
+  await expect(page.locator('#prof-results .result-position').first()).toHaveText('1.');
+  await expect(page.locator('#school-results .result-position')).toHaveCount(0);
+
+  // A single result carries its rank but no list position.
+  await page.goto('./?q=George%20Mason%20University&rankings=true');
+  await expect(page.locator('#school-results .card')).toBeVisible();
+  await expect(page.locator('#school-results .result-position')).toHaveCount(0);
+  await expect(page.locator('#school-results .card-badge-rank')).toHaveCount(1);
+
+  await page.goto('./?q=George%20Mason%20University');
+  await expect(page.locator('#school-results .card')).toBeVisible();
+  await expect(page.locator('#school-results .card-badge-rank')).toHaveCount(0);
+});
+
 test('conference and area queries list universities beside their people', async ({ page }) => {
   await page.goto('./?q=ICSE');
   await expect(page.locator('#school-results .card').first()).toBeVisible();

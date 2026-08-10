@@ -25,18 +25,19 @@ function getCardContext() {
     startYear: filters.startYear,
     endYear: filters.endYear,
     confSet: filters.confSet,
+    showRankings: filters.rankings,
     currentQuery: document.getElementById('main-search')?.value.toLowerCase().trim() || ''
   };
 }
 
 const searchDBLPAuthors = createDblpAuthorSearch(getCardContext);
 
-function renderProfessorCard(professor) {
-  return renderProfessorCardView(professor, getCardContext());
+function renderProfessorCard(professor, resultPosition = null) {
+  return renderProfessorCardView(professor, { ...getCardContext(), resultPosition });
 }
 
-function renderSchoolCard(school, filterArea = null, resultPosition = null) {
-  return renderSchoolCardView(school, filterArea, { ...getCardContext(), resultPosition });
+function renderSchoolCard(school, filterArea = null) {
+  return renderSchoolCardView(school, filterArea, getCardContext());
 }
 
 const params = new URLSearchParams(window.location.search);
