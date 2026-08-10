@@ -544,6 +544,29 @@ function scoreSchools(schoolList) {
 }
 
 // Stage 3: standard competition ranking overall and within each area.
+/**
+ * Standard competition ranking: equal values share a rank and the next value
+ * skips ahead, so ties never invent an ordering the data does not support.
+ */
+export function assignCompetitionRanks(items, valueOf) {
+  const ordered = [...items].sort((a, b) => valueOf(b) - valueOf(a));
+  let rank = 0;
+  let ties = 1;
+  let previousValue = null;
+  ordered.forEach(item => {
+    const value = valueOf(item);
+    if (value !== previousValue) {
+      rank += ties;
+      ties = 1;
+    } else {
+      ties++;
+    }
+    item.rank = rank;
+    previousValue = value;
+  });
+  return ordered;
+}
+
 function rankSchools(schoolList) {
   schoolList.sort((a, b) => b.score - a.score || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
 
@@ -592,6 +615,9 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
   const schoolList = Object.values(filteredSchools).filter(school => school.name);
   scoreSchools(schoolList);
   rankSchools(schoolList);
+  // People are ranked by adjusted count over the same selection, so a person's
+  // rank means the same thing as a university's.
+  assignCompetitionRanks(Object.values(filteredProfs), professor => professor.totalAdjusted);
 
   return { professors: filteredProfs, schools: filteredSchools };
 }

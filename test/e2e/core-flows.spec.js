@@ -71,7 +71,8 @@ test.beforeEach(async ({ page }) => {
 test('default view ranks universities and people side by side, and clears stale analysis after a region change', async ({ page }) => {
   await page.goto('./');
   await expect(page.getByRole('link', { name: '🔎 Search' })).toHaveAttribute('aria-current', 'page');
-  await expect(page.locator('#school-results')).toContainText('George Mason University');
+  // The ranking columns use short institution names where one exists.
+  await expect(page.locator('#school-results')).toContainText('GMU');
   await expect(page.locator('#prof-results')).toContainText('Hai Duong');
   await expect(page.locator('#school-results .card-header').first()).toHaveJSProperty('tagName', 'BUTTON');
   // Universities occupy the left column, people the right.
