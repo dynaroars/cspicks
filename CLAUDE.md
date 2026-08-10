@@ -27,6 +27,7 @@ Data-generation scripts (run manually, not part of the build):
 ```bash
 node scripts/build-openalex-history.js [--test --limit=10]  # rebuilds public/professor_history_openalex.json via OpenAlex API
 node scripts/build-school-aliases.js                         # rebuilds public/school-aliases.json (OpenAlex → CSRankings name mapping)
+npm run sync:nsf:names                                       # re-resolves NSF investigator names against the current roster (2 CSV downloads, no NSF API)
 ```
 
 ## Architecture

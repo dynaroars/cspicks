@@ -21,8 +21,10 @@ export function normalizeFundingName(name) {
 }
 
 /**
- * Exact name first. A normalized match (middle initials differing) is accepted
- * only when the professor's current institution also matches: CSRankings has
+ * Exact name first — which is the normal path, since the sync stores the
+ * publication-table spelling. The normalized fallback covers people hired
+ * since the snapshot was taken, and is accepted only when the professor's
+ * current institution also matches: CSRankings has
  * distinct people whose names differ solely by middle initial — "Michael A.
  * Goodrich" (BYU) and "Michael T. Goodrich" (UC Irvine) — and attributing one
  * person's grants to another is worse than showing none.
@@ -100,10 +102,13 @@ export function buildFundingIndex(dataset, startYear, endYear) {
     const amount = award.estimatedAmount || award.obligatedAmount || 0;
     const share = amount / investigatorCount;
     award.investigators.filter(person => person.facultyName).forEach(person => {
-      if (!faculty.has(person.facultyName)) faculty.set(person.facultyName, {
-        name: person.facultyName, affiliation: person.affiliation, awards: [], attributedAmount: 0, totalAwardAmount: 0
+      // The sync resolves each investigator to the publication-table spelling;
+      // older snapshots without it fall back to the roster name.
+      const facultyName = person.rosterName || person.facultyName;
+      if (!faculty.has(facultyName)) faculty.set(facultyName, {
+        name: facultyName, affiliation: person.affiliation, awards: [], attributedAmount: 0, totalAwardAmount: 0
       });
-      const record = faculty.get(person.facultyName);
+      const record = faculty.get(facultyName);
       record.awards.push({ ...award, role: person.role, attributedAmount: share });
       record.attributedAmount += share;
       record.totalAwardAmount += award.collaborativeTotalAmount || award.estimatedAmount || award.obligatedAmount || 0;
@@ -116,7 +121,7 @@ export function buildFundingIndex(dataset, startYear, endYear) {
       const schoolAward = school.awards.get(award.id) || { ...award, attributedAmount: 0 };
       schoolAward.attributedAmount += share;
       school.awards.set(award.id, schoolAward);
-      school.faculty.add(person.facultyName);
+      school.faculty.add(facultyName);
       school.attributedAmount += share;
     });
   });

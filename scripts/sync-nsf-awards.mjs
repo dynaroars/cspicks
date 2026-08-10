@@ -2,10 +2,15 @@ import fs from 'node:fs/promises';
 import Papa from 'papaparse';
 
 const ROSTER_URL = 'https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv';
+// The roster and the publication table spell some people differently ("Aaron
+// Striegel" vs "Aaron D. Striegel"). The app keys on the publication-table
+// name, so the snapshot records both and the crosswalk lists the differences.
+const AUTHOR_INFO_URL = 'https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/generated-author-info.csv';
 const INSTITUTIONS_URL = 'https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/institutions.csv';
 const API_URL = 'https://www.research.gov/awardapi-service/v1/awards.json';
 const LEGACY_API_URL = 'https://api.nsf.gov/services/v1/awards.json';
 const OUTPUT = new URL('../public/nsf-awards.json', import.meta.url);
+const CROSSWALK = new URL('../public/nsf-name-crosswalk.csv', import.meta.url);
 const CACHE = new URL('../.nsf-sync-cache.json', import.meta.url);
 const args = process.argv.slice(2);
 const option = name => {
@@ -150,6 +155,9 @@ function normalizeAward(raw, resolveFaculty) {
     return {
       name: row.name, role: row.role,
       facultyName: faculty?.name || null,
+      // The publication-table spelling, resolved once here instead of in every
+      // visitor's browser.
+      rosterName: faculty ? rosterNameFor(faculty.name, faculty.affiliation) : null,
       affiliation: faculty?.affiliation || null
     };
   });
@@ -236,9 +244,33 @@ async function fetchText(url) {
   return response.text();
 }
 
-const [rosterText, institutionsText] = await Promise.all([fetchText(ROSTER_URL), fetchText(INSTITUTIONS_URL)]);
+const [rosterText, institutionsText, authorInfoText] = await Promise.all([
+  fetchText(ROSTER_URL), fetchText(INSTITUTIONS_URL), fetchText(AUTHOR_INFO_URL)
+]);
 const roster = Papa.parse(rosterText, { header: true, skipEmptyLines: true }).data
   .filter(row => row.name && row.affiliation);
+
+// Names as they appear in the publication table, which is what the app keys on.
+const publicationNames = new Set(Papa.parse(authorInfoText, { header: true, skipEmptyLines: true }).data
+  .map(row => String(row.name || '').replace(/\s*\[.*\]$/, '').trim())
+  .filter(Boolean));
+const publicationNamesByIdentity = new Map();
+publicationNames.forEach(name => {
+  const key = identityKey(name);
+  // An ambiguous identity (two people, same first and last name) is left
+  // unresolved rather than guessed at.
+  publicationNamesByIdentity.set(key, publicationNamesByIdentity.has(key) ? null : name);
+});
+
+const crosswalk = new Map();
+function rosterNameFor(name, affiliation) {
+  if (!name) return null;
+  if (publicationNames.has(name)) return name;
+  const candidate = publicationNamesByIdentity.get(identityKey(name));
+  if (!candidate) return null;
+  crosswalk.set(`${name}|${candidate}`, { facultyName: name, rosterName: candidate, affiliation: affiliation || '' });
+  return candidate;
+}
 const institutions = Papa.parse(institutionsText, { header: true, skipEmptyLines: true }).data;
 const usSchools = new Set(institutions
   .filter(row => String(row.countryabbrv || '').trim().toLowerCase() === 'us')
@@ -383,4 +415,16 @@ const output = {
   awards
 };
 await fs.writeFile(OUTPUT, `${JSON.stringify(output)}\n`);
+
+// A reviewable record of every name that needed resolving, so a wrong match can
+// be spotted and corrected by hand.
+const crosswalkRows = [...crosswalk.values()].sort((a, b) => a.rosterName.localeCompare(b.rosterName));
+await fs.writeFile(CROSSWALK, [
+  '# Faculty whose CSRankings roster name differs from their publication-table name.',
+  `# Generated ${new Date().toISOString()} by scripts/sync-nsf-awards.mjs.`,
+  'faculty_name,roster_name,affiliation',
+  ...crosswalkRows.map(row => [row.facultyName, row.rosterName, row.affiliation]
+    .map(value => /[",]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value).join(','))
+].join('\n') + '\n');
+process.stdout.write(`Recorded ${crosswalkRows.length} name resolutions in public/nsf-name-crosswalk.csv.\n`);
 process.stdout.write(`Saved ${awards.length} awards matched to ${checkedFaculty.length} faculty at ${checkedSchools.size} institutions. Coverage complete: ${scopeComplete}.\n`);
