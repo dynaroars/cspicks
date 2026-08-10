@@ -27,8 +27,19 @@ Data-generation scripts (run manually, not part of the build):
 ```bash
 node scripts/build-openalex-history.js [--test --limit=10]  # rebuilds public/professor_history_openalex.json via OpenAlex API
 node scripts/build-school-aliases.js                         # rebuilds public/school-aliases.json (OpenAlex → CSRankings name mapping)
-npm run sync:nsf:names                                       # re-resolves NSF investigator names against the current roster (2 CSV downloads, no NSF API)
+npm run sync:nsf:all                                         # re-queries the NSF API for every faculty/institution pair (hours)
 ```
+
+**Routine upkeep — run this when touching anything NSF-related, and monthly otherwise:**
+```bash
+npm run sync:nsf:names   # re-resolves NSF names against the current CSRankings roster
+```
+It costs two CSV downloads and no NSF API access. CSRankings spells some faculty
+differently in `csrankings.csv` (what the award sync matched against) than in
+`generated-author-info.csv` (what the site keys on); without this refresh, anyone
+hired or renamed since the last award sync silently shows no funding. It rewrites
+`public/nsf-awards.json` and the reviewable `public/nsf-name-crosswalk.csv`; commit both.
+See "Routine Maintenance" in README.md.
 
 ## Architecture
 

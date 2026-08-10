@@ -82,6 +82,24 @@
     npm run deploy
     ```
 
+## 🔁 Routine Maintenance
+
+Two upstream sources move at very different speeds, so refreshing them is two different jobs.
+
+| How often | Command | Cost | What it does |
+| --- | --- | --- | --- |
+| **Monthly, or after any CSRankings roster update** | `npm run sync:nsf:names` | 2 CSV downloads, seconds | Re-resolves NSF investigators to the name CSRankings' publication table uses, and rewrites `public/nsf-name-crosswalk.csv` |
+| Quarterly, or when award data looks stale | `npm run sync:nsf:all` | Thousands of NSF API queries, hours | Re-queries the NSF Award Search API for every faculty/institution pair |
+
+**Run `npm run sync:nsf:names` regularly.** CSRankings spells some faculty differently in `csrankings.csv` than in `generated-author-info.csv`, and the site matches on the latter. Without this refresh, faculty hired or renamed since the last award sync silently show no funding. It needs no NSF API access, so it is safe to run any time — commit the resulting `public/nsf-awards.json` and `public/nsf-name-crosswalk.csv`.
+
+The crosswalk is meant to be read: each row records a name that needed resolving. Correcting a wrong row by hand is a legitimate fix.
+
+```bash
+npm run sync:nsf:names   # then review the diff in public/nsf-name-crosswalk.csv
+npm test && npm run build
+```
+
 ## 💰 Refreshing NSF Funding Data
 
 The browser does not query NSF directly. NSF rejects browser-origin requests, and live per-user requests would make results dependent on API availability and unstable name matching. Instead, the funding page lazily loads a synchronized static dataset only when someone opens `funding.html`.
