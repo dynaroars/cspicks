@@ -1,4 +1,4 @@
-# CSPicks Research and Experiment Plan
+# CS Picks Paper, Research, and Experiment Plan
 
 ## 1. Research vision
 
@@ -32,12 +32,14 @@ The goal is not to establish a single “correct” ranking. A more interesting 
 CSPicks already provides a useful experimental foundation:
 
 - University, faculty, research-area, conference, and DBLP search.
-- Region, year, conference-set, and historical-affiliation filters.
-- Fractional-credit rankings compatible with CSRankings methodology.
-- University and researcher comparison.
+- Region, year, conference-set, rankings, and historical-affiliation filters, remembered across pages.
+- Fractional-credit rankings compatible with CSRankings methodology, including a venue-set fidelity rule that counts only venues CSRankings itself assigns to an area.
+- University and researcher comparison through an `A vs B` query, with a head-to-head table and per-area margins.
 - Faculty movement/removal/addition simulation.
-- Rank movement, momentum, breadth, faculty concentration, median productivity, and team-size proxies.
-- Rank-gap explanations, data-health diagnostics, export, and shareable views.
+- Rank movement, momentum, breadth, faculty concentration, median productivity, team-size proxies, and area growth measured against the field.
+- Peer discovery by area profile at other universities, and coauthor lookup from DBLP.
+- NSF award attribution for matched current faculty, with fractional PI/co-PI shares.
+- Rank-gap explanations, data-health diagnostics, and shareable views.
 
 These features should be instrumented and validated before expanding the product substantially.
 
@@ -437,6 +439,23 @@ Focus on exploratory search, information seeking, sensemaking, relevance, and co
 ### JCDL or ISSI framing
 
 Focus on scholarly data integration, scientometric methodology, attribution, rank stability, data quality, and reproducibility.
+
+### Recommended submission order
+
+1. **CHIIR.** The closest fit and the least often considered. Exploratory search and sensemaking over scholarly data is its core subject, it accepts system-plus-study papers, and its expectations for study scale are lower than CHI's. The head-to-head comparison, the area and venue sensitivity views, and the rank-gap explanation are all directly on topic.
+2. **JCDL.** The right venue if the data work leads: the CSRankings parity audit, venue-set fidelity, historical attribution from OpenAlex, and NSF award attribution. A scholarly-data-quality paper with a working artifact. Corrections already found while building the tool — venues upstream never assigns to an area, a region filter that matched nothing, roster name variants that broke funding attribution — make a concrete fidelity table.
+3. **SIGCSE.** Experience Reports or Tools track, framed around the *PhD Demystify* audience: what applicants misread in rankings and what changes when the interface exposes sensitivity. The lowest evaluation bar of the four and the closest to the existing readership, with the book providing the deployment story.
+4. **CHI.** Only with a genuine controlled study (Study B, trust and calibration). Without it a system paper will not clear the bar regardless of the system's quality.
+
+The observational contributions in §7 are nearly free given what the platform already computes, so CHIIR or JCDL is the realistic first submission, with CHI following once Study B has run. SIGCSE can run in parallel with the applicant-facing framing, reusing the same system.
+
+### Reproducibility gap to close first
+
+The minimum publishable evaluation above assumes frozen analysis scripts and versioned datasets, and the repository currently has neither: CSRankings CSVs are fetched from GitHub at page load, so any number computed today cannot be reproduced tomorrow. Before submission:
+
+- Freeze a dated snapshot of every upstream input (csrankings.csv, generated-author-info.csv, institutions.csv, country and alias files, the OpenAlex history, and the NSF award set).
+- Add a script that regenerates every figure and table in the paper from that snapshot alone, with no network access.
+- Record the upstream commit or fetch date beside each snapshot, and report it in the paper.
 
 ## 12. Implementation sequence
 
