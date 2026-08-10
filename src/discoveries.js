@@ -1,11 +1,11 @@
-import { filterByYears, loadAffiliationData, loadData } from './data.js';
+import { filterByYears, loadData } from './data.js';
+import { createFilterBar } from './filters.js';
 import { buildPriorPeriodData, calculateDiscoveryInsights } from './metrics.js';
 import { buildFundingIndex, calculateFundingDiscoveries, formatFunding } from './nsf.js';
-import { areaLabels, escapeHtml, getInitialRegion, getInstitutionShortName, rememberRegion } from './shared.js';
+import { areaLabels, escapeHtml, getInstitutionShortName } from './shared.js';
 
 let rawData = null;
-let affiliationHistory = null;
-let schoolAliases = null;
+let filters = null;
 let nsfData = null;
 
 const regionLabels = {
@@ -16,23 +16,6 @@ const regionLabels = {
   canada: 'Canadian',
   australasia: 'Australasian'
 };
-
-function setupYearSelectors() {
-  const start = document.getElementById('discoveries-start-year');
-  const end = document.getElementById('discoveries-end-year');
-  const currentYear = new Date().getFullYear();
-  for (let year = 2000; year <= currentYear; year++) {
-    start.insertAdjacentHTML('beforeend', `<option value="${year}" ${year === currentYear - 10 ? 'selected' : ''}>${year}</option>`);
-    end.insertAdjacentHTML('beforeend', `<option value="${year}" ${year === currentYear ? 'selected' : ''}>${year}</option>`);
-  }
-}
-
-async function ensureHistoricalData() {
-  if (affiliationHistory !== null && schoolAliases !== null) return;
-  const data = await loadAffiliationData();
-  affiliationHistory = data.historyMap;
-  schoolAliases = data.aliasMap;
-}
 
 function schoolLink(name) {
   const shortName = getInstitutionShortName(name);
@@ -46,13 +29,7 @@ function fundingSchoolLink(name) {
 
 function renderDiscoveries() {
   const container = document.getElementById('discovery-stats');
-  const start = Number(document.getElementById('discoveries-start-year').value);
-  const end = Number(document.getElementById('discoveries-end-year').value);
-  const region = document.getElementById('discoveries-region').value;
-  const confSet = document.getElementById('discoveries-conf-set').value;
-  const useHistory = document.getElementById('discoveries-history').checked;
-  const history = useHistory ? affiliationHistory : null;
-  const aliases = useHistory ? schoolAliases : null;
+  const { startYear: start, endYear: end, region, confSet, historyMap: history, aliasMap: aliases } = filters;
 
   if (start > end) {
     container.innerHTML = '<p class="data-caveat">The start year must not be later than the end year.</p>';
@@ -145,39 +122,20 @@ function renderDiscoveries() {
   `;
 }
 
-async function refresh() {
-  const historyToggle = document.getElementById('discoveries-history');
-  const container = document.getElementById('discovery-stats');
-  try {
-    if (historyToggle.checked) {
-      historyToggle.disabled = true;
-      await ensureHistoricalData();
-    }
-    renderDiscoveries();
-  } catch (error) {
-    console.error('Failed to load historical affiliation data:', error);
-    historyToggle.checked = false;
-    container.innerHTML = '<p class="data-caveat">Historical affiliation data could not be loaded. Showing current affiliations instead.</p>';
-    renderDiscoveries();
-  } finally {
-    historyToggle.disabled = false;
-  }
-}
-
 async function init() {
-  setupYearSelectors();
-  const regionSelect = document.getElementById('discoveries-region');
-  regionSelect.value = getInitialRegion();
-  regionSelect.addEventListener('change', () => rememberRegion(regionSelect.value));
+  filters = createFilterBar('#filter-bar', {
+    label: 'Discovery filters',
+    years: { min: 2000, max: new Date().getFullYear() },
+    className: 'discoveries-filters',
+    onChange: renderDiscoveries
+  });
+  await filters.ready();
   const [loadedData, nsfResponse] = await Promise.all([loadData(), fetch('./nsf-awards.json')]);
   if (!nsfResponse.ok) throw new Error(`NSF dataset returned ${nsfResponse.status}`);
   rawData = loadedData;
   nsfData = await nsfResponse.json();
   document.getElementById('discoveries-loading').classList.add('hidden');
   document.getElementById('discovery-stats').classList.remove('hidden');
-  document.querySelectorAll('.discoveries-filters select, #discoveries-history').forEach(control => {
-    control.addEventListener('change', refresh);
-  });
   renderDiscoveries();
 }
 

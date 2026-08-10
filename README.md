@@ -26,8 +26,9 @@
 - **What-if Analysis**: Model adding, transferring, or removing faculty and inspect the resulting overall and per-area rank changes.
 - **CSRankings and DBLP**: Use existing CSRankings faculty or look up external researchers through DBLP.
 
-### 5. School Comparison
-- **Side-by-Side Comparison**: Compare two schools across all research areas.
+### 5. Head-to-Head Comparison
+- **`vs` Search**: Type `A vs B` in the main search box (e.g. `CMU vs MIT`) to compare two universities or two professors side by side across all research areas.
+- **Rank-Gap Breakdown**: For universities, see the area-level log-score differences behind the overall rank gap.
 
 ### 6. Area & Conference Search
 - **Search by Area Name**: Find universities and professors in a research area.
@@ -131,11 +132,16 @@ cspicks/
 │   ├── school-aliases.json              # OpenAlex → CSRankings name mapping
 │   └── manual_affiliations.csv          # Community corrections
 ├── src/
-│   ├── data.js                       # Data loading and filtering
-│   ├── main.js                       # Main search page logic
+│   ├── data.js                       # Data loading, filtering, ranking pipeline
+│   ├── filters.js                    # Shared region/year/venue/history filter bar
+│   ├── charts.js                     # Chart.js defaults, redraw, and theme handling
+│   ├── main.js                       # Search page controller
+│   ├── search-results.js             # Search result sections
+│   ├── search-suggestions.js         # Search autocomplete
+│   ├── comparison.js                 # `A vs B` head-to-head mode
 │   ├── simulator.js                  # Simulator page UI and orchestration
 │   ├── simulation.js                 # Pure matching and rank-impact logic
-│   ├── compare.js                    # School comparison logic
+│   ├── compare-view.js               # Comparison chart and summary rendering
 │   ├── analysis.js                   # Integrated analysis and data-health logic
 │   ├── funding.js                    # NSF funding search page
 │   ├── nsf.js                        # Funding attribution and rendering
@@ -145,10 +151,8 @@ cspicks/
 │   ├── sync-nsf-awards.mjs           # Resumable scoped/all-US NSF synchronization
 │   └── build-school-aliases.js       # Generates school-aliases.json
 ├── index.html                        # Search, results, and integrated analysis
-├── compare.html                      # School comparison page
 ├── funding.html                      # Nationwide NSF funding beta
 ├── simulator.html                    # Ranking simulator page
-├── analysis.html                     # Legacy redirect to integrated search
 ├── FAQ.md                            # GitHub-hosted methods and data documentation
 └── README.md
 ```

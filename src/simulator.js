@@ -1,5 +1,6 @@
-import { loadData, filterByYears, getConferenceAreaMap, publicationMatchesConferenceSet, DEFAULT_START_YEAR, DEFAULT_END_YEAR } from './data.js';
-import { areaLabels, cleanName, escapeHtml, getInitialRegion, rememberRegion } from './shared.js';
+import { loadData, getConferenceAreaMap, publicationMatchesConferenceSet, DEFAULT_END_YEAR } from './data.js';
+import { createFilterBar } from './filters.js';
+import { areaLabels, cleanName, escapeHtml } from './shared.js';
 import { searchAuthor, fetchAuthorStats, parseDblpProfileUrl } from './dblp.js';
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from './simulation.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
@@ -7,10 +8,7 @@ import './styles/simulator.css';
 
 let rawData = null;
 let appData = { professors: {}, schools: {} };
-let startYear = DEFAULT_START_YEAR;
-let endYear = DEFAULT_END_YEAR;
-let selectedRegion = getInitialRegion();
-let confSet = 'csrankings-default';
+let filters = null;
 
 let simFacultyArr = [];
 let facultyFilter = '';
@@ -315,7 +313,7 @@ function renderCandidateResults(candidates) {
 async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
   const candidateResults = [];
 
-  const confMap = getConferenceAreaMap(confSet);
+  const confMap = getConferenceAreaMap(filters.confSet);
 
   for (const name of uniqueNames) {
     try {
@@ -354,15 +352,15 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
         displayName = cleanName(profData.name);
 
         // Filter pubs by year range AND conference set
-        const yearFiltered = profData.pubs.filter(p => p.year >= startYear && p.year <= endYear);
+        const yearFiltered = profData.pubs.filter(p => p.year >= filters.startYear && p.year <= filters.endYear);
 
-        const confFilteredPubs = yearFiltered.filter(p => publicationMatchesConferenceSet(p, confSet));
+        const confFilteredPubs = yearFiltered.filter(p => publicationMatchesConferenceSet(p, filters.confSet));
 
         console.log('CSRankings match for:', name, '→', profData.name, 'pubs:', profData.pubs.length, 'filtered:', confFilteredPubs.length);
 
         if (confFilteredPubs.length === 0) {
           // No papers in this year range/conf set - show as such
-          candidateResults.push({ name: displayName, error: `No publication records found in ${startYear}–${endYear} for the active conference set` });
+          candidateResults.push({ name: displayName, error: `No publication records found in ${filters.startYear}–${filters.endYear} for the active conference set` });
           continue;
         }
 
@@ -444,7 +442,7 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
 
         displayName = best.name || `DBLP profile ${best.pid}`;
 
-        stats = await fetchAuthorStats(best.pid, startYear, endYear, confSet);
+        stats = await fetchAuthorStats(best.pid, filters.startYear, filters.endYear, filters.confSet);
         if (!stats) {
           candidateResults.push({ name, error: 'We couldn\'t retrieve publication records from DBLP. Please verify the profile is accessible.' });
           continue;
@@ -666,43 +664,23 @@ function setupSimulator() {
 }
 
 function setupFilters() {
-  const regionSelect = document.getElementById('sim-region-select');
-  const startSelect = document.getElementById('start-year');
-  const endSelect = document.getElementById('end-year');
-  for (let year = DEFAULT_END_YEAR; year >= 2000; year--) {
-    startSelect.add(new Option(year, year));
-    endSelect.add(new Option(year, year));
-  }
-  startSelect.value = startYear;
-  endSelect.value = endYear;
-  regionSelect.value = selectedRegion;
-  document.getElementById('conf-set').value = confSet;
-
-  const refresh = () => {
-    selectedRegion = regionSelect.value;
-    rememberRegion(selectedRegion);
-    startYear = Number(startSelect.value);
-    endYear = Number(endSelect.value);
-    if (startYear > endYear) {
-      endYear = startYear;
-      endSelect.value = endYear;
+  filters = createFilterBar('#filter-bar', {
+    label: 'Simulator filters',
+    fields: ['region', 'years', 'confSet'],
+    years: { min: 2000, max: DEFAULT_END_YEAR },
+    className: 'simulator-filters',
+    onChange: () => {
+      appData = filters.apply(rawData);
+      resetSimulation();
     }
-    confSet = document.getElementById('conf-set').value;
-    appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
-    resetSimulation();
-  };
-
-  startSelect.addEventListener('change', refresh);
-  endSelect.addEventListener('change', refresh);
-  regionSelect.addEventListener('change', refresh);
-  document.getElementById('conf-set').addEventListener('change', refresh);
+  });
 }
 
 async function init() {
   try {
     [rawData] = await Promise.all([loadData(), syncCsrankingsRules()]);
     setupFilters();
-    appData = filterByYears(rawData, startYear, endYear, selectedRegion, null, null, confSet);
+    appData = filters.apply(rawData);
     setupSimulator();
     document.getElementById('sim-loading-page').classList.add('hidden');
     document.getElementById('simulator-workflow').classList.remove('hidden');

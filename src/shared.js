@@ -104,6 +104,22 @@ export function updateChartDefaults(Chart) {
   Chart.defaults.scale.title.color = colors.text;
 }
 
+/**
+ * Ranks how well `text` matches a lowercased `query` (lower is better,
+ * Infinity means no match). The last tier lets every query token match the
+ * start of some word, so "michael goodrich" still finds "Michael T. Goodrich".
+ */
+export function scoreSuggestionMatch(text, query) {
+  const normalized = text.toLowerCase();
+  if (normalized.startsWith(query)) return 0;
+  const words = normalized.split(/\s+/);
+  if (words.some(word => word.startsWith(query))) return 1;
+  if (normalized.includes(query)) return 2;
+  const tokens = query.split(/\s+/).filter(Boolean);
+  if (tokens.length > 1 && tokens.every(token => words.some(word => word.startsWith(token)))) return 3;
+  return Infinity;
+}
+
 export function cleanName(name) {
   return name.replace(/\s+\d+$/, '');
 }
@@ -111,7 +127,7 @@ export function cleanName(name) {
 const institutionShortNames = {
   'Carnegie Mellon University': 'CMU',
   'George Mason University': 'GMU',
-  'Massachusetts Institute of Technology': 'MIT',
+  'Massachusetts Inst. of Technology': 'MIT',
   'Georgia Institute of Technology': 'Georgia Tech',
   'California Inst. of Technology': 'Caltech',
   'University of Illinois at Urbana-Champaign': 'UIUC',
@@ -140,6 +156,16 @@ const institutionShortNames = {
   'University of California, Irvine': 'UC Irvine',
   'University of California - Irvine': 'UC Irvine'
 };
+
+// CSRankings publishes a flag per country alongside its institution data.
+const CSRANKINGS_FLAGS = 'https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/flags';
+
+export function countryFlag(countryCode, countryName = '') {
+  const code = String(countryCode || '').toLowerCase();
+  if (!/^[a-z]{2}$/.test(code)) return '';
+  const label = escapeHtml(countryName || code.toUpperCase());
+  return `<img class="country-flag" src="${CSRANKINGS_FLAGS}/${code}.png" alt="${label}" title="${label}" width="16" height="11" loading="lazy" decoding="async">`;
+}
 
 export function getInstitutionShortName(name) {
   return institutionShortNames[name] || name;

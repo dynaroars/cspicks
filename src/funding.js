@@ -1,14 +1,13 @@
 import { buildFundingIndex, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, renderFundingFacultyCard, renderFundingSchoolCard } from './nsf.js';
-import { schoolAliases } from './data.js';
+import { createFilterBar } from './filters.js';
+import { renderInfiniteLists } from './search-results.js';
 import { cleanName, escapeHtml } from './shared.js';
 
 const params = new URLSearchParams(window.location.search);
 const currentYear = new Date().getFullYear();
-let startYear = Number(params.get('start')) || currentYear - 10;
-let endYear = Number(params.get('end')) || currentYear;
+let filters = null;
 let dataset = null;
 let index = null;
-let showingAll = params.get('view') === 'all';
 
 function renderDataHealth() {
   const container = document.getElementById('nsf-data-health-stats');
@@ -57,48 +56,46 @@ function setupDataHealth() {
 }
 
 function setupYears() {
-  const start = document.getElementById('funding-start-year');
-  const end = document.getElementById('funding-end-year');
-  for (let year = 1989; year <= currentYear + 1; year++) {
-    start.add(new Option(year, year));
-    end.add(new Option(year, year));
-  }
-  start.value = startYear;
-  end.value = endYear;
-  const update = () => {
-    startYear = Number(start.value);
-    endYear = Number(end.value);
-    if (startYear > endYear) [startYear, endYear] = [endYear, startYear];
-    start.value = startYear;
-    end.value = endYear;
-    rebuild();
-  };
-  start.addEventListener('change', update);
-  end.addEventListener('change', update);
+  filters = createFilterBar('#filter-bar', {
+    label: 'Funding filters',
+    fields: ['years'],
+    years: { min: 1989, max: currentYear + 1 },
+    prefix: 'NSF CS awards during',
+    prefixId: 'funding-award-count',
+    className: 'funding-filters',
+    params,
+    onChange: rebuild
+  });
 }
 
 function updateUrl() {
-  const next = new URLSearchParams({ start: String(startYear), end: String(endYear) });
+  const next = filters.toParams();
   const query = document.getElementById('funding-search').value.trim();
   if (query) next.set('q', query);
-  if (showingAll) next.set('view', 'all');
   history.replaceState({}, '', `${location.pathname}?${next}`);
 }
 
 function render(query = '') {
   const normalized = query.trim();
-  const matchingSchools = normalized ? index.schools.filter(record => fundingSchoolNameMatches(record, normalized)) : (showingAll ? index.schools : []);
-  const matchingFaculty = normalized ? [
+  const schools = normalized ? index.schools.filter(record => fundingSchoolNameMatches(record, normalized)) : index.schools;
+  const faculty = normalized ? [
     ...index.faculty.filter(record => fundingFacultyNameMatches(record, normalized)),
     ...index.faculty.filter(record => !fundingFacultyNameMatches(record, normalized) && fundingMatches(record, normalized))
-  ] : (showingAll ? index.faculty : []);
-  const schools = matchingSchools.slice(0, 50);
-  const faculty = matchingFaculty.slice(0, 50);
+  ] : index.faculty;
   const schoolContainer = document.getElementById('funding-school-results');
   const facultyContainer = document.getElementById('funding-faculty-results');
   document.getElementById('funding-award-count').textContent = `${index.awards.length.toLocaleString()} NSF CS awards during`;
-  schoolContainer.innerHTML = schools.length ? `<h2 class="section-title">Universities</h2>${schools.map((school, index) => renderFundingSchoolCard(school, index)).join('')}` : '';
-  facultyContainer.innerHTML = faculty.length ? `<h2 class="section-title">Professors</h2>${faculty.map(record => renderFundingFacultyCard(record)).join('')}` : '';
+  // Universities left, people right, both growing on scroll — as on Search.
+  document.body.classList.toggle('showing-rankings', !normalized);
+  // The record you searched for opens; the rest stay as names.
+  const isTarget = value => Boolean(normalized)
+    && cleanName(String(value)).toLowerCase() === cleanName(normalized).toLowerCase();
+  // Viewing one university: the people under it are its faculty, shown in full.
+  const underOneSchool = schools.length === 1 && isTarget(schools[0].name);
+  renderInfiniteLists([
+    { container: schoolContainer, items: schools, renderItem: school => renderFundingSchoolCard(school, { expanded: isTarget(school.name) }) },
+    { container: facultyContainer, items: faculty, renderItem: record => renderFundingFacultyCard(record, { expanded: isTarget(record.name), collapsible: !underOneSchool }) }
+  ]);
 
   const status = document.getElementById('funding-status');
   status.textContent = normalized && !schools.length && !faculty.length
@@ -108,7 +105,7 @@ function render(query = '') {
 }
 
 function rebuild() {
-  index = buildFundingIndex(dataset, startYear, endYear);
+  index = buildFundingIndex(dataset, filters.startYear, filters.endYear);
   render(document.getElementById('funding-search').value);
 }
 
@@ -116,137 +113,11 @@ function renderExamples() {
   const examples = document.getElementById('funding-examples');
   const faculty = index.faculty.slice(0, 3);
   const schools = index.schools.slice(0, 2);
-  examples.innerHTML = `<button type="button" data-show-all>All</button>${schools.map(record =>
+  examples.innerHTML = `${schools.map(record =>
     `<button type="button" data-query="${escapeHtml(record.name)}">${escapeHtml(record.name)}</button>`
   ).join('')}${faculty.map(record =>
     `<button type="button" data-query="${escapeHtml(record.name)}">${escapeHtml(record.name.replace(/\s+\d{4}$/, ''))}</button>`
   ).join('')}`;
-}
-
-function setupSearchSuggestions(input) {
-  const suggestionsEl = document.getElementById('funding-suggestions');
-  let suggestions = [];
-  let activeSuggestion = -1;
-
-  const closeSuggestions = () => {
-    suggestions = [];
-    activeSuggestion = -1;
-    suggestionsEl.hidden = true;
-    suggestionsEl.innerHTML = '';
-    input.setAttribute('aria-expanded', 'false');
-    input.removeAttribute('aria-activedescendant');
-  };
-
-  const scoreMatch = (text, query) => {
-    const normalized = text.toLowerCase();
-    if (normalized.startsWith(query)) return 0;
-    if (normalized.split(/\s+/).some(word => word.startsWith(query))) return 1;
-    return normalized.includes(query) ? 2 : Infinity;
-  };
-
-  const rank = (items, query, limit) => items
-    .map(item => ({ item, score: scoreMatch(`${item.label} ${item.searchTerms || ''}`, query) }))
-    .filter(match => Number.isFinite(match.score))
-    .sort((a, b) => a.score - b.score || a.item.label.localeCompare(b.item.label))
-    .slice(0, limit)
-    .map(match => match.item);
-
-  const renderSuggestions = queryValue => {
-    if (!index) return closeSuggestions();
-    const query = queryValue.trim().toLowerCase();
-    if (!query) return closeSuggestions();
-
-    const aliasesBySchool = new Map();
-    Object.entries(schoolAliases).forEach(([alias, school]) => {
-      if (!aliasesBySchool.has(school)) aliasesBySchool.set(school, []);
-      aliasesBySchool.get(school).push(alias);
-    });
-
-    const schools = rank(index.schools.map(school => ({
-      label: school.name,
-      value: school.name,
-      detail: `University · ${school.faculty.length} matched faculty`,
-      searchTerms: (aliasesBySchool.get(school.name) || []).join(' ')
-    })), query, 4);
-    const faculty = rank(index.faculty.map(person => ({
-      label: cleanName(person.name),
-      value: person.name,
-      detail: person.affiliation || 'Professor'
-    })), query, 4);
-    const programs = rank([...new Set(index.awards.flatMap(award => [award.program, award.division]).filter(Boolean))]
-      .map(program => ({ label: program, value: program, detail: 'NSF program' })), query, 3);
-    const groups = [
-      ['Universities', schools],
-      ['Professors', faculty],
-      ['NSF programs', programs]
-    ].filter(([, items]) => items.length);
-    suggestions = groups.flatMap(([, items]) => items);
-    activeSuggestion = -1;
-
-    if (!suggestions.length) {
-      suggestionsEl.innerHTML = '<div class="universal-suggestion-empty">No matching funding result</div>';
-    } else {
-      let itemIndex = 0;
-      suggestionsEl.innerHTML = groups.map(([label, items]) => `
-        <div class="universal-suggestion-group">${escapeHtml(label)}</div>
-        ${items.map(item => {
-          const index = itemIndex++;
-          return `<button type="button" id="funding-suggestion-${index}" class="universal-suggestion" role="option" data-index="${index}" aria-selected="false"><span>${escapeHtml(item.label)}</span><small>${escapeHtml(item.detail)}</small></button>`;
-        }).join('')}
-      `).join('');
-    }
-    suggestionsEl.hidden = false;
-    input.setAttribute('aria-expanded', 'true');
-  };
-
-  const updateActiveSuggestion = nextIndex => {
-    if (!suggestions.length) return;
-    activeSuggestion = (nextIndex + suggestions.length) % suggestions.length;
-    suggestionsEl.querySelectorAll('.universal-suggestion').forEach((element, index) => {
-      const active = index === activeSuggestion;
-      element.classList.toggle('active', active);
-      element.setAttribute('aria-selected', String(active));
-    });
-    const activeElement = document.getElementById(`funding-suggestion-${activeSuggestion}`);
-    if (activeElement) {
-      input.setAttribute('aria-activedescendant', activeElement.id);
-      activeElement.scrollIntoView({ block: 'nearest' });
-    }
-  };
-
-  const selectSuggestion = item => {
-    if (!item) return;
-    input.value = item.label;
-    showingAll = false;
-    closeSuggestions();
-    render(item.value);
-  };
-
-  suggestionsEl.addEventListener('pointerdown', event => event.preventDefault());
-  suggestionsEl.addEventListener('click', event => {
-    const option = event.target.closest('.universal-suggestion');
-    if (option) selectSuggestion(suggestions[Number(option.dataset.index)]);
-  });
-  input.addEventListener('input', () => renderSuggestions(input.value));
-  input.addEventListener('focus', () => renderSuggestions(input.value));
-  input.addEventListener('blur', () => window.setTimeout(closeSuggestions, 120));
-  input.addEventListener('keydown', event => {
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      if (suggestionsEl.hidden) renderSuggestions(input.value);
-      updateActiveSuggestion(activeSuggestion + 1);
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      updateActiveSuggestion(activeSuggestion - 1);
-    } else if (event.key === 'Enter' && activeSuggestion >= 0) {
-      event.preventDefault();
-      selectSuggestion(suggestions[activeSuggestion]);
-    } else if (event.key === 'Escape') {
-      closeSuggestions();
-    }
-  });
-
-  return { closeSuggestions };
 }
 
 async function init() {
@@ -254,7 +125,7 @@ async function init() {
   const response = await fetch('./nsf-awards.json');
   if (!response.ok) throw new Error(`NSF dataset returned ${response.status}`);
   dataset = await response.json();
-  index = buildFundingIndex(dataset, startYear, endYear);
+  index = buildFundingIndex(dataset, filters.startYear, filters.endYear);
   const input = document.getElementById('funding-search');
   input.disabled = false;
   input.placeholder = 'Search university, professor, award, or NSF program';
@@ -262,22 +133,21 @@ async function init() {
   setupDataHealth();
   renderExamples();
   render(input.value);
-  const searchSuggestions = setupSearchSuggestions(input);
-  input.addEventListener('input', () => {
-    showingAll = false;
+  input.addEventListener('input', () => render(input.value));
+  // Clicking a card searches for that university or professor, the way
+  // clicking a Search result opens that target.
+  document.querySelector('.funding-results-container')?.addEventListener('click', event => {
+    const header = event.target.closest('[data-action="open-funding-target"]');
+    const name = header?.closest('.card')?.dataset.name;
+    if (!name || input.value.trim().toLowerCase() === name.toLowerCase()) return;
+    input.value = name;
     render(input.value);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
   document.getElementById('funding-examples').addEventListener('click', event => {
     const button = event.target.closest('button');
     if (!button) return;
-    if (button.hasAttribute('data-show-all')) {
-      input.value = '';
-      showingAll = true;
-    } else {
-      input.value = button.dataset.query;
-      showingAll = false;
-    }
-    searchSuggestions.closeSuggestions();
+    input.value = button.dataset.query;
     render(input.value);
   });
   input.focus();

@@ -26,10 +26,12 @@
       <div class="title-row">
         <a class="site-title-link" href="index.html" aria-label="Reset CS Picks"><h1>CS Picks</h1></a>
         <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
+        <a class="icon-link" href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer" aria-label="FAQ, methods and data" title="FAQ, methods &amp; data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.9 2.9 0 0 1 5.6 1c0 2-2.8 2.4-2.8 4.2"/><circle cx="12" cy="17.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a class="icon-link" id="data-health-toggle" href="?dataHealth=true#site-data-health" aria-label="Data health" title="Data health"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h4l2.5-6 4 12L16 12h5"/></svg></a>
+        <a class="icon-link roars-link" href="https://roars.dev" target="_blank" rel="noopener noreferrer" aria-label="ROARS Lab" title="ROARS Lab"></a>
       </div>
       <nav class="top-nav" aria-label="Primary navigation">
         <a href="index.html" class="active" aria-current="page">🔎 Search</a>
-        <a href="compare.html">⚖️ Compare</a>
         <a href="discoveries.html">🔭 Discoveries</a>
         <a href="simulator.html">☠️ Simulator</a>
         <a href="funding.html">🇺🇸 NSF Funding</a>
@@ -50,64 +52,28 @@
         </div>
       </div>
 
+      <div id="filter-bar"></div>
+
       <div class="search-examples" aria-label="Example searches">
-        <span>Try</span>
-        <span id="search-example-items"></span>
-      </div>
-
-      <div class="filters search-filters" aria-label="Search filters">
-        <span class="filter-sentence-prefix">Showing</span>
-        <div class="filter-group search-region-control">
-          <select id="region-select" aria-label="Region">
-            <option value="world" selected>World</option>
-            <option value="us">USA</option>
-            <option value="europe">Europe</option>
-            <option value="asia">Asia</option>
-            <option value="canada">Canada</option>
-            <option value="australasia">Australasia</option>
-          </select>
-        </div>
-
-        <div class="filter-group" id="year-filter-group" aria-label="Year range">
-          <div class="year-inputs">
-            <select id="start-year" aria-label="Start year"></select>
-            <span>to</span>
-            <select id="end-year" aria-label="End year"></select>
-          </div>
-        </div>
-
-        <div class="filter-group conference-set-control">
-          <select id="conf-set" aria-label="Conference set">
-            <option value="csrankings-default" selected>CSRankings (Default)</option>
-            <option value="csrankings">CSRankings (All)</option>
-            <option value="core">CORE A*</option>
-            <option value="core-a">CORE A*/A</option>
-          </select>
-          <span class="tooltip-trigger filter-info" tabindex="0" aria-label="About conference sets">
-            ⓘ
-            <span class="tooltip-content">Chooses which publication venues count. CSRankings Default follows the primary CSRankings set; CSRankings All includes its extended venues; CORE options use CORE conference tiers.</span>
-          </span>
-        </div>
-
-        <div class="filter-group checkboxes">
-          <label for="historical-mode" class="filter-checkbox">
-            <input type="checkbox" id="historical-mode">
-            <span>History</span>
-            <span class="tooltip-trigger" tabindex="0" aria-label="About historical mode">
-              ⓘ
-              <span class="tooltip-content">When enabled, publications are credited to the institution where the author
-                was affiliated at the time of publication, not their current institution.
-                Use the year selectors to filter results
-                for a specific historical period.</span>
-            </span>
-          </label>
-        </div>
+        <div class="search-examples-row" id="search-example-fixed"></div>
+        <div class="search-examples-row" id="search-example-items"></div>
       </div>
 
     </div>
 
     <div id="search-context-header" class="search-context-header">
     </div>
+
+    <section id="comparison-results" class="comparison-results" hidden aria-live="polite">
+      <div class="comparison-results-header">
+        <h2 id="comparison-title">Head-to-head</h2>
+        <p>Adjusted publication weight by area, using the region, years, conference set, and History setting above.</p>
+      </div>
+      <div id="comparison-chart-container" class="chart-container" hidden>
+        <canvas id="comparisonChart"></canvas>
+      </div>
+      <div id="comparison-summary" class="comparison-summary"></div>
+    </section>
 
     <main>
       <section id="conference-results" class="results-grid"></section>
@@ -119,9 +85,6 @@
 
     <section id="integrated-analysis" class="integrated-analysis" hidden aria-live="polite">
       <div class="integrated-analysis-header">
-        <div>
-          <h2>Further analysis</h2>
-        </div>
         <p>These views use the region, years, conference set, and History setting above.</p>
       </div>
 
@@ -129,7 +92,7 @@
 
       <div class="nav-tabs analysis-nav-tabs" role="tablist" aria-label="Analysis views">
         <button type="button" class="nav-tab active" data-tab="schools" role="tab">
-          Publication Trends <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Publication Trends">ⓘ<span class="tooltip-content">Shows yearly adjusted publication output. Researcher profiles also summarize activity, consistency, momentum, and their selected-region percentile. Universities also show regional rank using CSRankings-style rolling 10-year windows.</span></span>
+          Publication Trends <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Publication Trends">ⓘ<span class="tooltip-content">Shows yearly adjusted publication output. Researcher profiles also summarize activity, consistency, momentum, and steadiness. Universities also show regional rank using CSRankings-style rolling 10-year windows.</span></span>
         </button>
         <button type="button" class="nav-tab" data-tab="faculty" data-school-only role="tab">
           Faculty Diversity <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Faculty Diversity">ⓘ<span class="tooltip-content">Measures how many active faculty published in at least two top-level areas within a rolling three-year window.</span></span>
@@ -166,7 +129,7 @@
         <div class="analysis-view-card chart-container analysis-tall-chart"><canvas id="effortChart"></canvas></div>
       </div>
       <div id="conf-trends-view" class="view-section" hidden>
-        <div class="analysis-conference-filter">
+        <div class="analysis-conference-filter" id="conference-filter-panel">
           <h3>Filter Conferences</h3>
           <div class="analysis-conference-actions">
             <button id="conf-select-all" type="button" class="btn-secondary">Select All</button>
@@ -189,14 +152,6 @@
 
   </div>
   <script type="module" src="/src/main.js"></script>
-  <script type="module" src="/src/analysis.js"></script>
-  <footer>
-    <a href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer">FAQ, Methods &amp; Data</a>
-    <span aria-hidden="true">·</span>
-    <a id="data-health-toggle" href="?dataHealth=true#site-data-health">Data Health</a>
-    <span aria-hidden="true">·</span>
-    <a href="https://roars.dev" target="_blank" rel="noopener noreferrer">ROARS Lab</a>
-  </footer>
 </body>
 
 </html>

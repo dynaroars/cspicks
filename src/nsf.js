@@ -4,6 +4,38 @@ import { cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
 // exceed current obligations for ordinary continuing grants as well.
 const confirmedTransferAwards = new Set(['2304748']);
 
+// CSRankings sometimes lists a person under more than one spelling (e.g. with
+// and without a middle initial), and the NSF snapshot records whichever variant
+// the sync matched. Compare on a form that ignores middle initials but KEEPS
+// CSRankings' trailing disambiguation number, which is what separates distinct
+// people who share a name ("Adam Smith 0001" is not "Adam Smith 0006").
+export function normalizeFundingName(name) {
+  const tokens = String(name || '')
+    .toLowerCase()
+    .replace(/\./g, ' ')
+    .split(/\s+/)
+    .filter(Boolean);
+  return tokens
+    .filter((token, index) => token.length > 1 || index === 0 || index === tokens.length - 1)
+    .join(' ');
+}
+
+/**
+ * Exact name first. A normalized match (middle initials differing) is accepted
+ * only when the professor's current institution also matches: CSRankings has
+ * distinct people whose names differ solely by middle initial — "Michael A.
+ * Goodrich" (BYU) and "Michael T. Goodrich" (UC Irvine) — and attributing one
+ * person's grants to another is worse than showing none.
+ */
+export function findFundingFaculty(index, name, affiliation = null) {
+  if (!index || !name) return null;
+  const exact = index.facultyByName?.get(name);
+  if (exact) return exact;
+  if (!affiliation) return null;
+  const candidate = index.facultyByNormalizedName?.get(normalizeFundingName(name));
+  return candidate && candidate.affiliation === affiliation ? candidate : null;
+}
+
 export function awardYear(award) {
   const match = String(award.awardDate || award.startDate || '').match(/(\d{4})/);
   return match ? Number(match[1]) : null;
@@ -89,9 +121,22 @@ export function buildFundingIndex(dataset, startYear, endYear) {
     });
   });
 
+  const facultyList = [...faculty.values()]
+    .sort((a, b) => b.attributedAmount - a.attributedAmount || a.name.localeCompare(b.name));
+
+  // Ambiguous normalized names (two different people who normalize alike) are
+  // recorded as misses rather than guessed at.
+  const facultyByNormalizedName = new Map();
+  facultyList.forEach(record => {
+    const key = normalizeFundingName(record.name);
+    facultyByNormalizedName.set(key, facultyByNormalizedName.has(key) ? null : record);
+  });
+
   return {
     awards,
-    faculty: [...faculty.values()].sort((a, b) => b.attributedAmount - a.attributedAmount || a.name.localeCompare(b.name)),
+    faculty: facultyList,
+    facultyByName: new Map(facultyList.map(record => [record.name, record])),
+    facultyByNormalizedName,
     schools: [...schools.values()].map(school => ({
       ...school, awards: [...school.awards.values()], faculty: [...school.faculty]
     })).sort((a, b) => b.attributedAmount - a.attributedAmount || a.name.localeCompare(b.name))
@@ -134,9 +179,16 @@ function awardList(awards, affiliation = '') {
     </a>`).join('')}</div>`;
 }
 
-export function renderFundingFacultyCard(person) {
-  return `<article class="card funding-card" data-name="${escapeHtml(cleanName(person.name))}">
-    <div class="card-header"><span class="professor-heading"><h2>${escapeHtml(cleanName(person.name))}</h2></span></div>
+// Collapsed by default, like the Search cards: a name you can open. Listed
+// under a university the details are already the point, so they stay open and
+// lose the toggle.
+export function renderFundingFacultyCard(person, { expanded = false, collapsible = true } = {}) {
+  const heading = `<span class="professor-heading"><h2>${escapeHtml(cleanName(person.name))}</h2></span>`;
+  const header = collapsible
+    ? `<button type="button" class="card-header" data-action="open-funding-target">${heading}</button>`
+    : `<div class="card-header">${heading}</div>`;
+  return `<article class="card funding-card${expanded || !collapsible ? '' : ' collapsed'}" data-name="${escapeHtml(cleanName(person.name))}">
+    ${header}
     <div class="card-content">
       <div class="card-stats funding-professor-summary">${escapeHtml(person.affiliation || 'Current CSRankings affiliation')} · <strong>${person.awards.length}</strong> NSF ${person.awards.length === 1 ? 'award' : 'awards'} · <strong>${escapeHtml(formatFunding(person.attributedAmount))}</strong> intended share (<strong>${escapeHtml(formatFunding(person.totalAwardAmount))}</strong> full project value)</div>
       ${yearBars(person.awards)}
@@ -145,12 +197,9 @@ export function renderFundingFacultyCard(person) {
   </article>`;
 }
 
-export function renderFundingSchoolCard(school, resultPosition = null) {
-  const position = Number.isInteger(resultPosition)
-    ? `<span class="result-position">${resultPosition + 1}.</span> `
-    : '';
-  return `<article class="card funding-card" data-name="${escapeHtml(school.name)}">
-    <div class="card-header"><h2>${position}${escapeHtml(school.name)} <span class="card-badge">${school.faculty.length} matched faculty</span></h2></div>
+export function renderFundingSchoolCard(school, { expanded = false } = {}) {
+  return `<article class="card funding-card${expanded ? '' : ' collapsed'}" data-name="${escapeHtml(school.name)}">
+    <button type="button" class="card-header" data-action="open-funding-target"><h2>${escapeHtml(school.name)} <span class="card-badge">${school.faculty.length} faculty with NSF awards</span></h2></button>
     <div class="card-content">
       <div class="card-stats"><strong>${school.awards.length}</strong> NSF ${school.awards.length === 1 ? 'award' : 'awards'} · <strong>${escapeHtml(formatFunding(school.attributedAmount))}</strong> intended funding attributed</div>
       <p class="funding-definition">Sum of intended-award shares for matched current CSRankings faculty; this is not the university's complete NSF portfolio.</p>

@@ -30,3 +30,7 @@ debug_gmu_history.js
 
 .gemini/
 .impeccable/
+
+# Playwright artifacts
+test-results/
+playwright-report/

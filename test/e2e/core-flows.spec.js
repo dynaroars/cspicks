@@ -68,14 +68,19 @@ test.beforeEach(async ({ page }) => {
   await mockUpstreams(page);
 });
 
-test('main search stays blank until All and clears stale analysis after a region change', async ({ page }) => {
+test('default view ranks universities and people side by side, and clears stale analysis after a region change', async ({ page }) => {
   await page.goto('./');
   await expect(page.getByRole('link', { name: '🔎 Search' })).toHaveAttribute('aria-current', 'page');
-  await expect(page.locator('#school-results .card')).toHaveCount(0);
-
-  await page.getByRole('button', { name: 'All' }).click();
   await expect(page.locator('#school-results')).toContainText('George Mason University');
+  await expect(page.locator('#prof-results')).toContainText('Hai Duong');
   await expect(page.locator('#school-results .card-header').first()).toHaveJSProperty('tagName', 'BUTTON');
+  // Universities occupy the left column, people the right.
+  const columns = await page.evaluate(() => {
+    const schools = document.querySelector('#school-results').getBoundingClientRect();
+    const people = document.querySelector('#prof-results').getBoundingClientRect();
+    return { sameRow: Math.abs(schools.y - people.y) < 5, schoolsFirst: schools.x < people.x };
+  });
+  expect(columns).toEqual({ sameRow: true, schoolsFirst: true });
 
   await page.locator('#main-search').fill('George Mason University');
   await expect(page.locator('#integrated-analysis')).toBeVisible();
@@ -115,6 +120,11 @@ test('professor cards show official CSRankings distinctions', async ({ page }) =
   await page.goto('./');
   await page.locator('#main-search').fill('Hai Duong');
   const card = page.locator('#prof-results .card');
+  await expect(card).toHaveCount(1);
+  // One flag per card, with the university and profile links on the name row.
+  await expect(card.locator('.country-flag')).toHaveCount(1);
+  await expect(card.locator('.card-header-row')).toContainText('George Mason University');
+  await expect(card.locator('.card-header-row .profile-link')).toHaveCount(4);
   await expect(card).toContainText('Turing Award · 2025');
   await expect(card).toContainText('ACM Fellow · 2024');
   await expect(card).toContainText('2 papers (1.0 adjusted)');
@@ -135,20 +145,61 @@ test('official aliases resolve professors and schools show country and departmen
   await expect(school.getByRole('link', { name: 'Department website' })).toHaveAttribute('href', 'https://cs.gmu.test/');
 });
 
-test('permanent distinction chips filter faculty', async ({ page }) => {
+test('award badges appear on cards but are not searchable', async ({ page }) => {
   await page.goto('./');
-  const examples = page.locator('#search-example-items');
-  await expect(examples.getByRole('button', { name: '🏆 Turing Award' })).toBeVisible();
-  await expect(examples.getByRole('button', { name: 'ACM Fellows' })).toBeVisible();
+  await page.locator('#main-search').fill('Hai Duong');
+  await expect(page.locator('#prof-results .card')).toHaveCount(1);
+  await expect(page.locator('#prof-results .card')).toContainText('Turing Award · 2025');
 
-  await examples.getByRole('button', { name: '🏆 Turing Award' }).click();
-  await expect(page.locator('#prof-results .card')).toHaveCount(2);
-  await expect(page.locator('#prof-results .professor-heading h2')).toHaveText(['Hai Duong', 'Alice Example']);
+  // The distinction filters are gone: these are ordinary text queries now.
+  await page.locator('#main-search').fill('Turing Award');
+  await expect(page.locator('#prof-results .card')).toHaveCount(0);
+});
 
-  await examples.getByRole('button', { name: 'ACM Fellows' }).click();
-  await expect(page.locator('#prof-results .card')).toHaveCount(2);
-  await expect(page.locator('#prof-results .professor-heading h2')).toHaveText(['Hai Duong', 'Alice Example']);
-  await expect(page.locator('#prof-results')).toContainText('ACM Fellow · 2024');
+test('vs syntax compares two targets in place of search results', async ({ page }) => {
+  await page.goto('./');
+  const comparison = page.locator('#comparison-results');
+  const summary = page.locator('#comparison-summary');
+
+  await page.locator('#main-search').fill('George Mason University vs Univ. of Illinois at Urbana-Champaign');
+  await expect(comparison).toBeVisible();
+  await expect(page.locator('#comparison-title')).toHaveText('George Mason University vs Univ. of Illinois at Urbana-Champaign');
+  await expect(summary).toContainText('What explains the rank gap?');
+  await expect(summary).toContainText('Software Engineering');
+  await expect(page.locator('#comparison-chart-container')).toBeVisible();
+  await expect(page.locator('#school-results .card')).toHaveCount(0);
+  await expect(page.locator('#integrated-analysis')).toBeHidden();
+  await expect(page).not.toHaveURL(/target=/);
+
+  // Researchers compare too, but the rank-gap breakdown is school-only.
+  await page.locator('#main-search').fill('Hai Duong vs Alice Example');
+  await expect(page.locator('#comparison-title')).toHaveText('Hai Duong vs Alice Example');
+  await expect(summary).toContainText('leads in');
+  await expect(summary).not.toContainText('What explains the rank gap?');
+
+  await page.locator('#main-search').fill('Hai Duong vs George Mason University');
+  await expect(summary).toContainText('Compare two universities or two professors');
+  await expect(page.locator('#comparison-chart-container')).toBeHidden();
+
+  await page.locator('#main-search').fill('George Mason University');
+  await expect(comparison).toBeHidden();
+  await expect(page.locator('#integrated-analysis')).toBeVisible();
+});
+
+test('suggestions list every match and complete the second side of a vs query', async ({ page }) => {
+  await page.goto('./');
+  await page.locator('#main-search').fill('Duong');
+  const listbox = page.locator('#universal-suggestions');
+  await expect(listbox).toBeVisible();
+  await expect(listbox.locator('.universal-suggestion')).toHaveCount(1);
+
+  await page.locator('#main-search').fill('George Mason University vs Univ');
+  const option = listbox.locator('.universal-suggestion', { hasText: 'Univ. of Illinois' });
+  await expect(option).toBeVisible();
+  await expect(page.locator('#comparison-results')).toBeVisible();
+  await option.click();
+  await expect(page.locator('#main-search')).toHaveValue('George Mason University vs Univ. of Illinois at Urbana-Champaign');
+  await expect(page.locator('#comparison-chart-container')).toBeVisible();
 });
 
 test('CORE A conference trends include a published ASE venue', async ({ page }) => {
@@ -196,17 +247,15 @@ test('region defaults are locale-aware and a user choice carries across every ta
   await expect(page.locator('#region-select')).toHaveValue('us');
   await page.locator('#region-select').selectOption('europe');
 
-  await page.goto('compare.html');
-  await expect(page.locator('#region-select')).toHaveValue('europe');
-  await expect(page.locator('#compare-history-warning')).toHaveCount(0);
-  await expect(page.locator('.tool-intro .eyebrow')).toHaveCount(0);
   await page.goto('discoveries.html');
-  await expect(page.locator('#discoveries-region')).toHaveValue('europe');
+  await expect(page.locator('#region-select')).toHaveValue('europe');
   await expect(page.locator('#discoveries-history-warning')).toHaveCount(0);
   await expect(page.locator('.tool-intro .eyebrow')).toHaveCount(0);
   await page.goto('simulator.html');
-  await expect(page.locator('#sim-region-select')).toHaveValue('europe');
+  await expect(page.locator('#region-select')).toHaveValue('europe');
   await expect(page.locator('.tool-intro .eyebrow')).toHaveCount(0);
+  await page.goto('funding.html');
+  await expect(page.locator('#funding-award-count')).toContainText('NSF CS awards during');
 
   await page.goto('./?region=world');
   await expect(page.locator('#region-select')).toHaveValue('world');
@@ -218,34 +267,46 @@ test('NSF funding beta searches nationwide data and aggregates fractional awards
   await expect(page.locator('.funding-warning')).toHaveCount(0);
   await expect(page.locator('#funding-award-count')).toContainText(/[\d,]+ NSF CS awards during/);
   await expect(page.locator('.funding-filters')).not.toContainText('NSF · USA');
-  await expect(page.locator('#funding-start-year')).toHaveCSS('border-top-style', 'solid');
-  expect(await page.locator('#funding-start-year').evaluate(element => getComputedStyle(element).backgroundImage)).not.toBe('none');
+  await expect(page.locator('#start-year')).toHaveCSS('border-top-style', 'solid');
+  expect(await page.locator('#start-year').evaluate(element => getComputedStyle(element).backgroundImage)).not.toBe('none');
   const countLabelBox = await page.locator('#funding-award-count').boundingBox();
-  const startYearBox = await page.locator('#funding-start-year').boundingBox();
+  const startYearBox = await page.locator('#start-year').boundingBox();
   expect(Math.abs((countLabelBox.y + countLabelBox.height / 2) - (startYearBox.y + startYearBox.height / 2))).toBeLessThan(2);
   await expect(page.locator('#funding-status')).toBeHidden();
   await page.locator('#nsf-data-health-toggle').click();
   await expect(page.locator('#nsf-data-health')).toBeVisible();
   await expect(page.locator('#nsf-data-health-stats')).toContainText('NSF funding data health');
   await expect(page.locator('#nsf-data-health-stats')).toContainText('Program managers');
-  const fundingResultsBox = await page.locator('.funding-results-container').boundingBox();
-  const fundingHealthBox = await page.locator('#nsf-data-health').boundingBox();
-  expect(fundingHealthBox.y).toBeGreaterThanOrEqual(fundingResultsBox.y + fundingResultsBox.height);
+  // Measure both rects in one frame: the toggle smooth-scrolls, and separate
+  // boundingBox() calls would sample different points of that animation.
+  const stacking = await page.evaluate(() => {
+    const results = document.querySelector('.funding-results-container').getBoundingClientRect();
+    const health = document.querySelector('#nsf-data-health').getBoundingClientRect();
+    return { resultsBottom: results.bottom, healthTop: health.top };
+  });
+  expect(stacking.healthTop).toBeGreaterThanOrEqual(stacking.resultsBottom);
   await page.locator('#nsf-data-health-toggle').click();
   await expect(page.locator('#nsf-data-health')).toBeHidden();
-  await page.getByRole('button', { name: 'All' }).click();
+
+  // Like Search: universities left, people right, cards collapsed to names.
   await expect(page.locator('#funding-status')).toBeHidden();
   await expect(page.locator('#funding-school-results')).toContainText('Carnegie Mellon University');
-  await expect(page.locator('#funding-school-results .funding-card h2').first()).toContainText('1.');
+  await expect(page.locator('#funding-school-results .funding-card').first()).toHaveClass(/collapsed/);
+  await expect(page.locator('#funding-school-results .section-title')).toHaveCount(0);
+  await expect(page.locator('#funding-school-results .result-position')).toHaveCount(0);
+  const columns = await page.evaluate(() => {
+    const schools = document.querySelector('#funding-school-results').getBoundingClientRect();
+    const people = document.querySelector('#funding-faculty-results').getBoundingClientRect();
+    return { sameRow: Math.abs(schools.y - people.y) < 5, schoolsFirst: schools.x < people.x };
+  });
+  expect(columns).toEqual({ sameRow: true, schoolsFirst: true });
 
-  await page.locator('#funding-search').fill('George');
-  await expect(page.locator('#funding-suggestions')).toBeVisible();
-  await expect(page.locator('#funding-suggestions')).toContainText('Universities');
-  await page.getByRole('option', { name: /George Mason University/ }).click();
-  await expect(page.locator('#funding-search')).toHaveValue('George Mason University');
+  await page.locator('#funding-search').fill('George Mason University');
   await expect(page.locator('#funding-school-results')).toContainText('George Mason University');
   await expect(page.locator('#funding-school-results')).toContainText('attributed');
   await expect(page.locator('#funding-faculty-results .funding-card').first()).toBeVisible();
+  // Details live behind the card header, as on Search.
+  await page.locator('#funding-faculty-results .card-header').first().click();
   await expect(page.locator('#funding-faculty-results .funding-award-period').first()).toContainText('Project:');
   await expect(page.locator('#funding-faculty-results .funding-award-period').first()).toContainText(/–.*·.*(?:year|month)/);
 
@@ -278,10 +339,11 @@ test('NSF funding beta searches nationwide data and aggregates fractional awards
   }
 });
 
-test('main professor cards and discoveries include NSF funding context', async ({ page }) => {
+test('funding stays off the search page and on discoveries', async ({ page }) => {
   await page.goto('./?q=Hai%20Duong');
-  await expect(page.locator('#prof-results .card-stats')).toContainText('NSF awards');
-  await expect(page.locator('#prof-results .card-stats')).toContainText('attributed');
+  await expect(page.locator('#prof-results .card-stats')).toContainText('papers');
+  await expect(page.locator('#prof-results')).not.toContainText('NSF');
+  await expect(page.locator('#integrated-analysis')).not.toContainText('NSF');
 
   await page.goto('discoveries.html');
   await expect(page.getByRole('heading', { name: 'NSF funding patterns across US universities' })).toBeVisible();
@@ -295,8 +357,10 @@ test('simulator preserves CSRankings suffixes and accepts an exact DBLP profile 
   await expect(page.locator('.simulator-disclaimer')).toContainText('Experimental simulator.');
   await expect(page.locator('.simulator-disclaimer')).toHaveClass(/context-note/);
   await expect(page.locator('.simulator-disclaimer')).toHaveCSS('border-left-style', 'solid');
-  const footerBox = await page.locator('footer').boundingBox();
-  expect(footerBox.y + footerBox.height).toBeLessThanOrEqual((page.viewportSize()?.height || 0) + 1);
+  // The former footer links now live beside the title as icons.
+  await expect(page.locator('footer')).toHaveCount(0);
+  await expect(page.getByRole('link', { name: 'ROARS Lab' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'FAQ, methods and data' })).toBeVisible();
   await page.locator('#sim-univ-search').fill('George Mason');
   await page.locator('#sim-univ-results .sim-item').click();
 
