@@ -129,6 +129,7 @@ cspicks/
 ├── public/
 │   ├── professor_history_openalex.json  # Historical affiliations
 │   ├── nsf-awards.json                  # Synchronized US NSF funding data
+│   ├── nsf-name-crosswalk.csv           # Roster vs publication-table name resolutions
 │   ├── school-aliases.json              # OpenAlex → CSRankings name mapping
 │   └── manual_affiliations.csv          # Community corrections
 ├── src/
@@ -149,6 +150,7 @@ cspicks/
 ├── scripts/
 │   ├── build-openalex-history.js     # Generates historical affiliations
 │   ├── sync-nsf-awards.mjs           # Resumable scoped/all-US NSF synchronization
+│   ├── sync-nsf-roster-names.mjs     # Re-resolves NSF names against the CSRankings roster
 │   └── build-school-aliases.js       # Generates school-aliases.json
 ├── index.html                        # Search, results, and integrated analysis
 ├── funding.html                      # Nationwide NSF funding beta

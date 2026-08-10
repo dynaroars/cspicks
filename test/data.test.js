@@ -62,6 +62,27 @@ test('NSF funding resolves faculty listed under a middle-initial variant', () =>
   assert.equal(findFundingFaculty(index, 'ThanhVu Nguyen'), null);
 });
 
+test('NSF funding keys on the resolved publication-table name', () => {
+  // The sync records both spellings; the site matches on the one the
+  // publication table uses, with no runtime guessing needed.
+  const dataset = {
+    awards: [{
+      id: '1', title: 'Verification', awardee: 'Example University', awardDate: '09/01/2024',
+      estimatedAmount: 300000,
+      investigators: [{
+        name: 'A', role: 'PI',
+        facultyName: 'ThanhVu H. Nguyen',
+        rosterName: 'ThanhVu Nguyen',
+        affiliation: 'Example University'
+      }]
+    }]
+  };
+  const index = buildFundingIndex(dataset, 2020, 2025);
+  assert.equal(index.faculty[0].name, 'ThanhVu Nguyen');
+  assert.equal(findFundingFaculty(index, 'ThanhVu Nguyen').attributedAmount, 300000);
+  assert.deepEqual(index.schools[0].faculty, ['ThanhVu Nguyen']);
+});
+
 test('NSF funding uses award year and fractional investigator attribution', () => {
   const dataset = {
     awards: [{

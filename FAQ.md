@@ -72,6 +72,8 @@ For an award with multiple listed investigators, NSF's estimated total award amo
 
 For confirmed transferred awards, the page distinguishes the amount transferred to the new institution from NSF's estimated full award value. It does not infer a transfer merely because estimated funding exceeds current obligations. For collaborative projects, the synchronizer also finds exact-title sibling awards and reports their combined project total while keeping each university's local attribution unchanged. Transfer records for the same lead investigator are counted once in that combined total.
 
+CSRankings spells some faculty differently in its roster file than in its publication table, so the synchronizer records both spellings and `public/nsf-name-crosswalk.csv` lists every name that needed resolving. Corrections to that file are welcome.
+
 The current beta covers the US institutions in the CSRankings roster. The synchronized file records coverage totals so incomplete runs are visible rather than silently treated as complete data.
 
 ## Data limitations
