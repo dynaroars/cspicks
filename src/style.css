@@ -586,8 +586,7 @@ input[type="text"]::placeholder {
 /* A lone result lines up with the analysis panel below it. */
 #prof-results.single-result,
 #school-results.single-result {
-  grid-template-columns: minmax(0, 880px);
-  justify-content: center;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .search-context-header {
@@ -614,7 +613,7 @@ input[type="text"]::placeholder {
 
 .analysis-insights {
   width: 100%;
-  max-width: 880px;
+  max-width: 100%;
   margin: 0 0 1rem;
   padding: 0.75rem 1rem;
   background: var(--hover-bg);
@@ -645,7 +644,7 @@ input[type="text"]::placeholder {
 
 #researcher-highlights {
   width: 100%;
-  max-width: 880px;
+  max-width: 100%;
 }
 
 .dblp-section-header,
@@ -951,7 +950,7 @@ button.card-header {
 
 .integrated-analysis {
   width: 100%;
-  max-width: 880px;
+  max-width: 100%;
   margin: 1.25rem auto 0;
   padding-top: 1.25rem;
   border-top: 1px solid var(--border-color);
@@ -963,7 +962,7 @@ button.card-header {
 
 .comparison-results {
   width: 100%;
-  max-width: 880px;
+  max-width: 100%;
   margin: 1.5rem auto 0;
 }
 
@@ -1154,7 +1153,7 @@ button.card-header {
 
 .funding-results-container {
   width: 100%;
-  max-width: 880px;
+  max-width: 100%;
   margin-right: auto;
   margin-left: auto;
 }
@@ -1263,7 +1262,7 @@ button.card-header {
 
 .integrated-analysis .analysis-view-card {
   width: 100%;
-  max-width: 880px;
+  max-width: 100%;
   margin-bottom: 2rem;
   padding: 1.5rem;
   background: var(--card-bg);
@@ -1284,7 +1283,7 @@ button.card-header {
 .integrated-analysis .view-section > *,
 #researcher-highlights > * {
   width: 100%;
-  max-width: 880px;
+  max-width: 100%;
   margin-right: auto;
   margin-left: auto;
 }
@@ -1626,7 +1625,7 @@ button.card-header {
 .search-page .search-section {
   order: 1;
   width: 100%;
-  max-width: 880px;
+  max-width: 100%;
   margin-bottom: 2rem;
 }
 
@@ -2003,7 +2002,7 @@ button.card-header {
   gap: 3rem;
   align-items: start;
   width: 100%;
-  max-width: 880px;
+  max-width: 100%;
   margin-right: auto;
   margin-left: auto;
 }

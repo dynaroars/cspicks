@@ -143,7 +143,7 @@ export function renderProfessorCard(prof, context) {
   // In an area or conference view the professor's totals are already scoped to
   // it, so the header can say how much of their work landed there.
   const scopedPapers = context.scopedStats
-    ? `<span class="card-badge">${prof.totalPapers} ${prof.totalPapers === 1 ? 'paper' : 'papers'}</span>`
+    ? `<span class="card-badge">${prof.totalPapers} ${prof.totalPapers === 1 ? 'paper' : 'papers'} (${prof.totalAdjusted.toFixed(1)} adjusted)</span>`
     : '';
   const sortedAreas = Object.entries(prof.areas).sort(([, a], [, b]) => b.adjusted - a.adjusted);
   const exact = cleanName(prof.name).toLowerCase() === context.currentQuery;
@@ -207,8 +207,9 @@ export function renderSchoolCard(school, filterArea, context) {
     ? (school.areas[filterArea]?.faculty || [])
     : Object.values(school.areas).flatMap(area => area.faculty));
   const areaCount = Object.values(school.areas).filter(area => area.adjusted > 0).length;
+  const scopedArea = filterArea ? school.areas[filterArea] : null;
   const badges = filterArea
-    ? `<span class="card-badge">${faculty.size} Faculty</span>`
+    ? `<span class="card-badge">${faculty.size} Faculty</span><span class="card-badge">${Math.ceil(scopedArea?.count || 0)} ${Math.ceil(scopedArea?.count || 0) === 1 ? 'paper' : 'papers'} (${(scopedArea?.adjusted || 0).toFixed(1)} adjusted)</span>`
     : `<span class="card-badge">${faculty.size} Faculty</span><span class="card-badge">${areaCount} Areas</span>`;
   const departmentHomepage = safeExternalUrl(school.homepage);
   const institutionMetadata = school.countryName || school.country || '';

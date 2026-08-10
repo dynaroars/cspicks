@@ -233,8 +233,10 @@ test('area queries rank universities within that area', async ({ page }) => {
   await expect(page.locator('#school-results .result-position').first()).toHaveText('1.');
   await expect(page.locator('#area-people-results .result-position').first()).toHaveText('1.');
   // Counts are scoped to the area: faculty publishing in it, papers within it.
-  await expect(page.locator('#school-results .card-badge')).toHaveText('1 Faculty');
-  await expect(page.locator('#area-people-results .card-badge').first()).toContainText('papers');
+  await expect(page.locator('#school-results .card-badge').first()).toHaveText('1 Faculty');
+  await expect(page.locator('#school-results .card-badge').nth(1)).toContainText('adjusted)');
+  await expect(page.locator('#area-people-results .card-badge').first()).toContainText('papers (');
+  await expect(page.locator('#area-people-results .card-badge').first()).toContainText('adjusted)');
 });
 
 test('conference and area queries list universities beside their people', async ({ page }) => {
