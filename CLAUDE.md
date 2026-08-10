@@ -14,7 +14,7 @@ JSON files in `public/`, then processed in the browser.
 ```bash
 npm run dev       # vite dev server at http://localhost:5173/cspicks/
 npm test          # run the Node.js unit tests
-npm run build      # production build to dist/ (multi-page: index, analysis, compare, faq)
+npm run build      # production build to dist/ (multi-page: index, simulator, discoveries, funding)
 npm run preview    # preview the production build
 npm run deploy      # build + postbuild + publish dist/ to GitHub Pages (gh-pages branch)
 ```
@@ -32,14 +32,28 @@ node scripts/build-school-aliases.js                         # rebuilds public/s
 ## Architecture
 
 **Multi-page app, one entry module per HTML page** (wired in `vite.config.js` as separate rollup inputs):
-- `index.html` + `src/main.js` + `src/analysis.js` — main search page: professor/school/area/conference search,
-  historical mode, DBLP live author search, and integrated target analysis (trends, area growth, faculty
-  diversity, publishing effort, conference trends, and collaboration). Analysis tabs render charts lazily.
-- `analysis.html` — legacy URL redirect that forwards bookmarked targets to integrated Search results.
-- `compare.html` + `src/compare.js` — side-by-side two-school comparison across research areas.
+- `index.html` + `src/main.js` — Search page. `main.js` is the page controller only: it owns the data load,
+  the filter bar, URL state, and the example chips, then delegates to
+  `src/search-results.js` (result sections), `src/search-suggestions.js` (autocomplete),
+  `src/comparison.js` + `src/compare-view.js` (`A vs B` head-to-head mode), and `src/analysis.js`
+  (the tabbed analysis panel, imported directly — no window globals or custom events).
 - `simulator.html` + `src/simulator.js` — standalone ranking-impact workflow for adding, transferring, or
   removing faculty. Pure name-matching and rank-impact calculations live in `src/simulation.js`.
+- `discoveries.html` — standalone tool surfacing notable ranking and funding movements.
+- `funding.html` + `src/funding.js` — standalone NSF funding search over the synchronized snapshot in
+  `public/nsf-awards.json`. Attribution and card rendering live in `src/nsf.js`; Discoveries also reads it
+  for its funding sections. Search itself carries no NSF data and never loads the snapshot.
 - `FAQ.md` — GitHub-hosted FAQ, methodology, limitations, and data documentation.
+
+**Shared page infrastructure** — prefer these over per-page copies:
+- `src/filters.js` — `createFilterBar(mount, { fields, years, onChange })` renders the region / year-range /
+  conference-set / History controls into a `<div id="filter-bar">`, owns their state, URL params, region
+  persistence, and the one-time affiliation-history load. `filters.apply(rawData)` runs `filterByYears`
+  with the right history maps; `filters.toParams()` writes the shared URL shape. Every page uses it, so
+  the control ids (`#region-select`, `#start-year`, `#end-year`, `#conf-set`, `#historical-mode`) are the
+  same everywhere.
+- `src/charts.js` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges
+  shared defaults and destroys the previous chart; `onThemeChange(fn)` re-renders on light/dark switches.
 
 Pages have independent filtered state and use plain `<a href>` navigation. `loadData()` memoizes its promise,
 so modules loaded together on Search share one download and parse of the canonical CSRankings inputs.
@@ -49,7 +63,8 @@ so modules loaded together on Search share one download and parse of the canonic
    runtime (csrankings.csv, generated-author-info.csv, institutions.csv) and joins them into
    `{ professors, schools }` keyed by name.
 2. `filterByYears(data, startYear, endYear, region, historyMap, aliasMap, confSet)` is the main
-   query/aggregation function — filters publications by year range and conference set (CSRankings default /
+   query/aggregation function, built as a three-stage pipeline (`collectFilteredData` → `scoreSchools` →
+   `rankSchools`) — filters publications by year range and conference set (CSRankings default /
    All / CORE A / CORE A*), optionally reassigns publications to historical affiliations (see below), and
    computes per-area, per-school rank aggregates. Nearly every view calls this rather than touching raw data.
 3. **Historical affiliation mode**: `public/professor_history_openalex.json` (large, generated offline by

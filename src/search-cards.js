@@ -1,6 +1,6 @@
 import he from 'he';
 import { getConferenceAreaMap, schoolAliases } from './data.js';
-import { areaLabels, cleanName, escapeHtml, getConferenceLabel, safeExternalUrl } from './shared.js';
+import { areaLabels, cleanName, countryFlag, escapeHtml, getConferenceLabel, safeExternalUrl } from './shared.js';
 
 function actionAttributes(action, values = {}) {
   return Object.entries({ action, ...values })
@@ -27,6 +27,29 @@ export function getDBLPUrl(originalName) {
   parts.pop();
   const firstNames = encodeURIComponent(parts.join(' ').replace(/\s/g, '_').replace(/-/g, '='));
   return `https://dblp.org/pers/hd/${lastName[0].toLowerCase()}/${lastName}:${firstNames}`;
+}
+
+// Inline so the icons inherit the theme's text color and cost no extra request.
+const profileIcons = {
+  website: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18"/></svg>',
+  scholar: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3Z"/><path d="M6 13.2V17c0 1.7 2.7 3 6 3s6-1.3 6-3v-3.8l-6 3.3-6-3.3Z"/></svg>',
+  orcid: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><rect x="7" y="10" width="1.8" height="7.5"/><circle cx="7.9" cy="7.4" r="1.1"/><path d="M11.2 10h3.4c2.4 0 4 1.6 4 3.7s-1.6 3.8-4 3.8h-3.4V10Zm1.8 1.7v4.1h1.5c1.4 0 2.3-.8 2.3-2s-.9-2.1-2.3-2.1H13Z"/></svg>',
+  dblp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 4h9l5 5v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/><path d="M14 4v5h5M8 13h8M8 17h5"/></svg>'
+};
+
+function profileLink(url, kind, label) {
+  return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}">${profileIcons[kind]}</a>`;
+}
+
+function renderProfileLinks(prof) {
+  const homepage = safeExternalUrl(prof.homepage);
+  const links = [
+    homepage !== '#' ? profileLink(homepage, 'website', 'Website') : '',
+    prof.scholarid ? profileLink(`https://scholar.google.com/citations?user=${encodeURIComponent(prof.scholarid)}`, 'scholar', 'Google Scholar') : '',
+    prof.orcid ? profileLink(`https://orcid.org/${encodeURIComponent(prof.orcid)}`, 'orcid', 'ORCID') : '',
+    profileLink(getDBLPUrl(prof.name), 'dblp', 'DBLP')
+  ].filter(Boolean).join('');
+  return `<span class="profile-links">${links}</span>`;
 }
 
 function renderAffiliationLink(school, yearRange = '') {
@@ -112,12 +135,11 @@ function renderActivityGraph(prof, context) {
 }
 
 export function renderProfessorCard(prof, context) {
+  // A professor's flag is their current institution's country.
+  const profCountry = context.rawData?.schools?.[prof.affiliation];
   const sortedAreas = Object.entries(prof.areas).sort(([, a], [, b]) => b.adjusted - a.adjusted);
   const exact = cleanName(prof.name).toLowerCase() === context.currentQuery;
   const papers = [...(prof.pubs || [])].sort((a, b) => b.year - a.year);
-  const homepage = safeExternalUrl(prof.homepage);
-  const scholar = prof.scholarid ? `https://scholar.google.com/citations?user=${encodeURIComponent(prof.scholarid)}` : null;
-  const orcid = prof.orcid ? `https://orcid.org/${encodeURIComponent(prof.orcid)}` : null;
   const honors = [
     prof.turingAwardYear ? `<span class="honor-badge honor-turing" title="Turing Award recipient in ${prof.turingAwardYear}">🏆 Turing Award · ${prof.turingAwardYear}</span>` : '',
     prof.acmFellowYear ? `<span class="honor-badge honor-acm" title="Named an ACM Fellow in ${prof.acmFellowYear}">ACM Fellow · ${prof.acmFellowYear}</span>` : ''
@@ -127,20 +149,21 @@ export function renderProfessorCard(prof, context) {
     ? ''
     : `type="button" ${actionAttributes('open-target', { targetType: 'researcher', targetName: prof.name })}`;
 
+  const historicalAffiliations = context.historicalMode && context.historyMap?.[prof.name]
+    ? renderAffiliations(prof, context)
+    : '';
+
   return `
     <div class="card${exact ? '' : ' collapsed'}" data-name="${escapeHtml(cleanName(prof.name))}">
-      <${headerTag} class="card-header" ${headerAttributes}>
-        <span class="professor-heading"><h2>${escapeHtml(cleanName(prof.name))}</h2>${honors ? `<span class="faculty-honors">${honors}</span>` : ''}</span>${exact ? '' : '<span class="toggle-icon" aria-hidden="true">▼</span>'}
-      </${headerTag}>
+      <div class="card-header-row">
+        <${headerTag} class="card-header" ${headerAttributes}>
+          <span class="professor-heading">${countryFlag(profCountry?.country, profCountry?.countryName)}<h2>${escapeHtml(cleanName(prof.name))}</h2><span class="professor-affiliation">${escapeHtml(prof.affiliation || '')}</span>${honors ? `<span class="faculty-honors">${honors}</span>` : ''}</span>
+        </${headerTag}>
+        ${renderProfileLinks(prof)}
+      </div>
       <div class="card-content">
-        <div class="card-subtitle">${renderAffiliations(prof, context)}</div>
-        <div class="card-stats"><strong>${prof.totalPapers}</strong> papers (<strong>${prof.totalAdjusted.toFixed(1)}</strong> adjusted)<span class="faculty-funding-stat" data-funding-faculty="${escapeHtml(prof.name)}"></span></div>
-        <div class="card-links">
-          ${homepage !== '#' ? `<a href="${escapeHtml(homepage)}" target="_blank" rel="noopener noreferrer" class="card-link">Website</a>` : ''}
-          ${scholar ? `<a href="${escapeHtml(scholar)}" target="_blank" rel="noopener noreferrer" class="card-link">Google Scholar</a>` : ''}
-          ${orcid ? `<a href="${escapeHtml(orcid)}" target="_blank" rel="noopener noreferrer" class="card-link">ORCID</a>` : ''}
-          <a href="${escapeHtml(getDBLPUrl(prof.name))}" target="_blank" rel="noopener noreferrer" class="card-link">DBLP</a>
-        </div>
+        ${historicalAffiliations ? `<div class="card-subtitle">${historicalAffiliations}</div>` : ''}
+        <div class="card-stats"><strong>${prof.totalPapers}</strong> papers (<strong>${prof.totalAdjusted.toFixed(1)}</strong> adjusted)</div>
         ${prof.unitNotes?.length ? `<div class="faculty-unit-notes">CSRankings unit: ${prof.unitNotes.map(escapeHtml).join(', ')}</div>` : ''}
         ${renderActivityGraph(prof, context)}
         <div class="stats-list">${sortedAreas.map(([area, stats]) => {
@@ -185,7 +208,7 @@ export function renderSchoolCard(school, filterArea, context) {
     : `type="button" ${actionAttributes('open-target', { targetType: 'school', targetName: school.name })}`;
 
   return `<div class="card${exact ? '' : ' collapsed'}" data-name="${escapeHtml(school.name)}">
-    <${headerTag} class="card-header" ${headerAttributes}><h2>${position}${escapeHtml(school.name)}<span class="card-badge">${faculty.size} Faculty</span><span class="card-badge">${areaCount} Areas</span></h2>${exact ? '' : '<span class="toggle-icon" aria-hidden="true">▼</span>'}</${headerTag}>
+    <${headerTag} class="card-header" ${headerAttributes}><h2>${position}${countryFlag(school.country, school.countryName)}${escapeHtml(school.name)}<span class="card-badge">${faculty.size} Faculty</span><span class="card-badge">${areaCount} Areas</span></h2></${headerTag}>
     <div class="card-content">${institutionMetadata || departmentHomepage !== '#' ? `<div class="school-metadata">${institutionMetadata ? `<span>${escapeHtml(institutionMetadata)}</span>` : ''}${departmentHomepage !== '#' ? `<a href="${escapeHtml(departmentHomepage)}" target="_blank" rel="noopener noreferrer">Department website</a>` : ''}</div>` : ''}${renderSubfieldContributions(school)}<div class="stats-list">${sortedAreas.map(([area, data]) => {
       const prefix = filterArea ? '' : (school.areaRanks?.[area] ? `${school.areaRanks[area]}. ` : '');
       const label = areaLabels[area] || getConferenceLabel(area);

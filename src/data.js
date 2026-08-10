@@ -11,7 +11,7 @@ let affiliationDataPromise = null;
 export const schoolAliases = {
   'gmu': 'George Mason University',
   'cmu': 'Carnegie Mellon University',
-  'mit': 'Massachusetts Institute of Technology',
+  'mit': 'Massachusetts Inst. of Technology',
   'nyu': 'New York University',
   'uiuc': 'Univ. of Illinois at Urbana-Champaign',
   'ucb': 'Univ. of California - Berkeley',
@@ -392,6 +392,9 @@ export function publicationMatchesConferenceSet(publication, confSet = 'csrankin
   const selectedSet = normalizeConferenceSet(confSet);
   if (selectedSet === 'core') return Boolean(coreAStarMap[publication.area]);
   if (selectedSet === 'core-a') return Boolean(coreAStarMap[publication.area] || coreAMap[publication.area]);
+  // Upstream scrapes venues it never assigns to an area (PoPETs, for example);
+  // CSRankings itself counts none of them, so neither set may include one.
+  if (!parentMap[publication.area]) return false;
   if (selectedSet === 'csrankings-default') return !nextTier[publication.area];
   return true;
 }
@@ -438,178 +441,154 @@ export function getPublicationSchools(professor, publication, historyMap = null,
 }
 
 
-export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'csrankings-default') {
-  const { professors, schools } = data;
+function makeRegionTest(schools, region) {
+  return schoolName => {
+    const school = schools[schoolName];
+    if (!school) return region === 'world';
+    if (region === 'world') return true;
+    // CSRankings files a country per school and a continent per region, so the
+    // two country-level options must match on country, not region.
+    if (region === 'us') return school.country === 'us';
+    if (region === 'canada') return school.country === 'ca';
+    return school.region === region;  // continents
+  };
+}
+
+function emptySchool(name, source) {
+  return {
+    name,
+    region: source?.region,
+    country: source?.country,
+    countryName: source?.countryName,
+    homepage: source?.homepage,
+    areas: {},
+    areaAdjustedCounts: {},
+    facultyAdjustedCounts: {},
+    totalCount: 0,
+    totalAdjusted: 0
+  };
+}
+
+// Stage 1: keep the publications inside the year range, conference set, and
+// region, crediting each one to its school(s) as it goes.
+function collectFilteredData({ professors, schools }, startYear, endYear, isInRegion, historyMap, aliasMap, confSet) {
+  const confMap = getConferenceAreaMap(confSet);
   const filteredProfs = {};
   const filteredSchools = {};
-  const hasHistoricalData = Boolean(historyMap && Object.keys(historyMap).length > 0);
-
-  // Select conference map based on confSet
-  const confMap = getConferenceAreaMap(confSet);
-
-  // Helper to check if school is in selected region
-  const isInRegion = (schoolName) => {
-    const school = schools[schoolName];
-    if (!school) {
-      return region === 'world';
-    }
-
-    if (region === 'world') return true;
-    if (region === 'us') return school.country === 'us';
-    // For continents, check region field
-    return school.region === region;
-  };
 
   for (const name in professors) {
     const prof = professors[name];
+    if (!historyMap && !isInRegion(prof.affiliation)) continue;
 
-    // Only include professors from schools in the selected region
+    const inRange = prof.pubs.filter(pub =>
+      pub.year >= startYear && pub.year <= endYear && publicationMatchesConferenceSet(pub, confSet));
+    if (inRange.length === 0) continue;
 
-    if (!hasHistoricalData && !isInRegion(prof.affiliation)) {
-      continue;
-    }
+    const areaStats = {};
+    const credited = [];
 
-    const filteredPubs = prof.pubs.filter(p =>
-      p.year >= startYear && p.year <= endYear
-    );
+    inRange.forEach(pub => {
+      const pubSchools = getPublicationSchools(prof, pub, historyMap, aliasMap).filter(isInRegion);
+      // A professor's regional totals should contain only publications credited
+      // to a school in the selected region.
+      if (pubSchools.length === 0) return;
+      credited.push(pub);
 
-    if (filteredPubs.length > 0) {
-      const confFilteredPubs = filteredPubs.filter(p => publicationMatchesConferenceSet(p, confSet));
+      const area = confMap[pub.area] || pub.area;
+      if (!areaStats[area]) areaStats[area] = { count: 0, adjusted: 0 };
+      areaStats[area].count += pub.count;
+      areaStats[area].adjusted += pub.adjustedcount;
 
-      const areaStats = {};
-      const regionFilteredPubs = [];
+      pubSchools.forEach(schoolName => {
+        const school = filteredSchools[schoolName]
+          || (filteredSchools[schoolName] = emptySchool(schoolName, schools[schoolName]));
 
-      confFilteredPubs.forEach(pub => {
-        const pubSchools = getPublicationSchools(
-          prof,
-          pub,
-          hasHistoricalData ? historyMap : null,
-          aliasMap
-        ).filter(isInRegion);
+        school.totalCount += pub.count;
+        school.totalAdjusted += pub.adjustedcount;
 
-        // A professor's regional totals should contain only publications credited
-        // to a school in the selected region.
-        if (pubSchools.length === 0) return;
-        regionFilteredPubs.push(pub);
+        if (!school.areas[area]) school.areas[area] = { count: 0, adjusted: 0, faculty: [] };
+        school.areas[area].count += pub.count;
+        school.areas[area].adjusted += pub.adjustedcount;
+        if (!school.areas[area].faculty.includes(name)) school.areas[area].faculty.push(name);
 
-        const area = confMap[pub.area] || pub.area;
-        if (!areaStats[area]) {
-          areaStats[area] = { count: 0, adjusted: 0 };
-        }
-        areaStats[area].count += pub.count;
-        areaStats[area].adjusted += pub.adjustedcount;
-
-        // Credit each school (only if in selected region)
-        pubSchools.forEach(pubSchoolName => {
-          if (!filteredSchools[pubSchoolName]) {
-            filteredSchools[pubSchoolName] = {
-              name: pubSchoolName,
-              region: schools[pubSchoolName]?.region,
-              country: schools[pubSchoolName]?.country,
-              countryName: schools[pubSchoolName]?.countryName,
-              homepage: schools[pubSchoolName]?.homepage,
-              areas: {},
-              areaAdjustedCounts: {},
-              facultyAdjustedCounts: {},
-              totalCount: 0,
-              totalAdjusted: 0
-            };
-          }
-
-          const school = filteredSchools[pubSchoolName];
-          school.totalCount += pub.count;
-          school.totalAdjusted += pub.adjustedcount;
-
-          if (!school.areas[area]) {
-            school.areas[area] = { count: 0, adjusted: 0, faculty: [] };
-          }
-          school.areas[area].count += pub.count;
-          school.areas[area].adjusted += pub.adjustedcount;
-
-          if (!school.areas[area].faculty.includes(name)) {
-            school.areas[area].faculty.push(name);
-          }
-
-          // Geometric mean accumulator
-          if (!school.areaAdjustedCounts[area]) {
-            school.areaAdjustedCounts[area] = 0;
-          }
-          school.areaAdjustedCounts[area] += pub.adjustedcount;
-          school.facultyAdjustedCounts[name] = (school.facultyAdjustedCounts[name] || 0) + pub.adjustedcount;
-        });
+        school.areaAdjustedCounts[area] = (school.areaAdjustedCounts[area] || 0) + pub.adjustedcount;
+        school.facultyAdjustedCounts[name] = (school.facultyAdjustedCounts[name] || 0) + pub.adjustedcount;
       });
+    });
 
-      if (regionFilteredPubs.length > 0) {
-        const totalCount = regionFilteredPubs.reduce((sum, p) => sum + p.count, 0);
-        const totalAdjusted = regionFilteredPubs.reduce((sum, p) => sum + p.adjustedcount, 0);
-        filteredProfs[name] = {
-          ...prof,
-          pubs: regionFilteredPubs,
-          areas: areaStats,
-          totalCount,
-          totalAdjusted,
-          totalPapers: Math.ceil(totalCount)
-        };
-      }
-    }
+    if (credited.length === 0) continue;
+    const totalCount = credited.reduce((sum, pub) => sum + pub.count, 0);
+    filteredProfs[name] = {
+      ...prof,
+      pubs: credited,
+      areas: areaStats,
+      totalCount,
+      totalAdjusted: credited.reduce((sum, pub) => sum + pub.adjustedcount, 0),
+      totalPapers: Math.ceil(totalCount)
+    };
   }
 
-  // Compute Geometric Mean Score for Ranking
-  const schoolList = Object.values(filteredSchools).filter(s => s.name);
+  return { filteredProfs, filteredSchools };
+}
 
+// Stage 2: CSRankings' geometric mean over every top-level area.
+function scoreSchools(schoolList) {
   schoolList.forEach(school => {
-    let score = 1.0;
-    topLevelAreas.forEach(area => {
-      const val = school.areaAdjustedCounts[area] || 0;
-      score *= (val + 1.0);
-    });
-    // Round to 1 decimal place
-    school.score = Math.round(10.0 * Math.pow(score, 1 / numAreas)) / 10.0;
+    const product = topLevelAreas.reduce((score, area) =>
+      score * ((school.areaAdjustedCounts[area] || 0) + 1.0), 1.0);
+    school.score = Math.round(10.0 * Math.pow(product, 1 / numAreas)) / 10.0;
   });
+}
 
-  // Sort by Geometric Mean Score, then alphabetically for ties
-  schoolList.sort((a, b) => {
-    if (a.score !== b.score) return b.score - a.score;
-    if (a.name < b.name) return -1;
-    if (b.name < a.name) return 1;
-    return 0;
-  });
+// Stage 3: standard competition ranking overall and within each area.
+function rankSchools(schoolList) {
+  schoolList.sort((a, b) => b.score - a.score || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
 
-  // Standard Competition Ranking
   let rank = 0;
   let ties = 1;
-  let oldScore = -1;
-  schoolList.forEach((school, index) => {
-    if (school.score !== oldScore) {
-      rank = rank + ties;
+  let previousScore = -1;
+  schoolList.forEach(school => {
+    if (school.score !== previousScore) {
+      rank += ties;
       ties = 1;
     } else {
       ties++;
     }
     school.rank = rank;
-    oldScore = school.score;
-    filteredSchools[school.name] = school;
+    previousScore = school.score;
   });
 
-  // Compute Per-Area Rankings
   topLevelAreas.forEach(area => {
-    // Get all schools that have this area
-    const getAreaValue = (school) => school.areas[area]?.adjusted || 0;
-    const schoolsWithArea = schoolList
-      .filter(s => getAreaValue(s) > 0)
-      .sort((a, b) => getAreaValue(b) - getAreaValue(a));
+    const areaValue = school => school.areas[area]?.adjusted || 0;
+    const ranked = schoolList.filter(school => areaValue(school) > 0)
+      .sort((a, b) => areaValue(b) - areaValue(a));
 
-    // Assign standard competition ranks, including ties.
     let areaRank = 0;
     let previousValue = null;
-    schoolsWithArea.forEach((school, idx) => {
-      const value = getAreaValue(school);
-      if (value !== previousValue) areaRank = idx + 1;
+    ranked.forEach((school, index) => {
+      const value = areaValue(school);
+      if (value !== previousValue) areaRank = index + 1;
       if (!school.areaRanks) school.areaRanks = {};
       school.areaRanks[area] = areaRank;
       previousValue = value;
     });
   });
+}
+
+/**
+ * The query behind every view: filter publications by year, venue, and region
+ * (optionally re-crediting them to historical affiliations), then aggregate and
+ * rank schools. Returns `{ professors, schools }` keyed by name.
+ */
+export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'csrankings-default') {
+  const history = historyMap && Object.keys(historyMap).length > 0 ? historyMap : null;
+  const isInRegion = makeRegionTest(data.schools, region);
+  const { filteredProfs, filteredSchools } = collectFilteredData(
+    data, startYear, endYear, isInRegion, history, aliasMap, confSet);
+
+  const schoolList = Object.values(filteredSchools).filter(school => school.name);
+  scoreSchools(schoolList);
+  rankSchools(schoolList);
 
   return { professors: filteredProfs, schools: filteredSchools };
 }

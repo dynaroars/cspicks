@@ -109,6 +109,96 @@ export async function searchAuthor(name) {
     }
 }
 
+const coauthorCache = new Map();
+const COAUTHOR_RETRY_AFTER_MS = 60_000;
+
+// DBLP rate-limits bursts (a 429 arrives without CORS headers, so the browser
+// reports it as a CORS failure). Requests are therefore serialized with a gap,
+// and transient failures are retried instead of being cached as "no results".
+const DBLP_REQUEST_GAP_MS = 1200;
+let dblpQueue = Promise.resolve();
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+function queueDblpRequest(task) {
+    const result = dblpQueue.then(task);
+    dblpQueue = result.catch(() => {}).then(() => sleep(DBLP_REQUEST_GAP_MS));
+    return result;
+}
+
+async function fetchDblp(url, attempts = 3) {
+    for (let attempt = 1; ; attempt++) {
+        try {
+            const response = await queueDblpRequest(() => fetch(url));
+            if (response.status === 429) throw new Error('DBLP rate limit');
+            if (!response.ok) throw new Error(`DBLP returned ${response.status}`);
+            return response;
+        } catch (error) {
+            if (attempt >= attempts) throw error;
+            await sleep(1500 * attempt);
+        }
+    }
+}
+
+/**
+ * Most frequent coauthors from the author's DBLP profile. DBLP is the only
+ * source that names coauthors — CSRankings publishes per-author totals only —
+ * so these names are DBLP's and need not appear in the CSRankings roster.
+ * Resolution requires an exact name match to avoid attributing another
+ * researcher's collaborators; anything less returns nothing.
+ */
+export async function fetchFrequentCoauthors(name, { startYear, endYear, limit = 3 } = {}) {
+    const cacheKey = `${name}|${startYear}|${endYear}|${limit}`;
+    if (coauthorCache.has(cacheKey)) return coauthorCache.get(cacheKey);
+
+    const request = (async () => {
+        const search = await fetchDblp(`https://dblp.org/search/author/api?q=${encodeURIComponent(name)}&format=json&h=60`);
+        const hits = (await search.json()).result?.hits?.hit || [];
+        const target = hits.find(hit => hit.info?.author?.toLowerCase() === name.toLowerCase());
+        if (!target) return [];
+
+        const pid = target.info.url.split('/pid/')[1];
+        const profile = await fetchDblp(`https://dblp.org/pid/${pid}.xml`);
+        const xml = new DOMParser().parseFromString(await profile.text(), 'text/xml');
+
+        // The <person> block lists the author's own name variants.
+        const self = new Set([name.toLowerCase()]);
+        const person = xml.getElementsByTagName('person')[0];
+        if (person) {
+            Array.from(person.getElementsByTagName('author'))
+                .forEach(node => self.add(node.textContent.trim().toLowerCase()));
+        }
+
+        const counts = new Map();
+        Array.from(xml.getElementsByTagName('r')).forEach(record => {
+            const publication = record.firstElementChild;
+            if (!publication) return;
+            const year = Number(publication.getElementsByTagName('year')[0]?.textContent);
+            if (!Number.isFinite(year)) return;
+            if (Number.isFinite(startYear) && year < startYear) return;
+            if (Number.isFinite(endYear) && year > endYear) return;
+
+            new Set(Array.from(publication.getElementsByTagName('author'))
+                .map(node => node.textContent.trim())
+                .filter(author => author && !self.has(author.toLowerCase()))
+            ).forEach(author => counts.set(author, (counts.get(author) || 0) + 1));
+        });
+
+        return [...counts.entries()]
+            .map(([coauthor, papers]) => ({ name: coauthor, papers }))
+            .sort((a, b) => b.papers - a.papers || a.name.localeCompare(b.name))
+            .slice(0, limit);
+    })().catch(error => {
+        // Let a later visit try again rather than remembering the outage.
+        console.error('DBLP coauthor lookup failed:', error);
+        setTimeout(() => coauthorCache.delete(cacheKey), COAUTHOR_RETRY_AFTER_MS);
+        return [];
+    });
+
+    coauthorCache.set(cacheKey, request);
+    return request;
+}
+
 export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date().getFullYear(), confSet = 'csrankings-default') {
     const url = `https://dblp.org/pid/${pid}.xml`;
 

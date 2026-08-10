@@ -323,6 +323,48 @@ function cosineSimilarity(first, second) {
 }
 
 /** Individual patterns based only on eligible CSRankings aggregate rows. */
+/**
+ * Growth of a school's areas measured against the same areas across every
+ * ranked school in the selection. Raw growth says little on its own — a 40%
+ * rise means something different when the whole field rose 35%.
+ */
+export function calculateAreaMomentum(current, prior, schoolName, { minAdjusted = 2, limit = 4 } = {}) {
+  const currentSchool = current?.schools?.[schoolName];
+  if (!currentSchool) return [];
+  const priorSchool = prior?.schools?.[schoolName];
+
+  const fieldTotals = data => {
+    const totals = {};
+    Object.values(data?.schools || {}).forEach(school => {
+      Object.entries(school.areaAdjustedCounts || {}).forEach(([area, value]) => {
+        totals[area] = (totals[area] || 0) + value;
+      });
+    });
+    return totals;
+  };
+  const growth = (now, before) => before > 0 ? ((now - before) / before) * 100 : null;
+
+  const fieldNow = fieldTotals(current);
+  const fieldBefore = fieldTotals(prior);
+
+  return Object.entries(currentSchool.areaAdjustedCounts || {})
+    .map(([area, value]) => {
+      const before = priorSchool?.areaAdjustedCounts?.[area] || 0;
+      return {
+        area,
+        current: value,
+        prior: before,
+        growth: growth(value, before),
+        fieldGrowth: growth(fieldNow[area] || 0, fieldBefore[area] || 0)
+      };
+    })
+    .filter(entry => entry.growth !== null && entry.fieldGrowth !== null
+      && entry.current >= minAdjusted && entry.prior >= minAdjusted)
+    .map(entry => ({ ...entry, delta: entry.growth - entry.fieldGrowth }))
+    .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta))
+    .slice(0, limit);
+}
+
 export function calculateResearcherPatterns(professor, peers = {}, options = {}) {
   if (!professor) return null;
   const startYear = Number(options.startYear);
@@ -407,16 +449,21 @@ export function calculateResearcherPatterns(professor, peers = {}, options = {})
     ? { from: earlyTopVenue[0], to: recentTopVenue[0] }
     : null;
 
-  const peerList = Object.values(peers).filter(peer => peer.name !== professor.name && peer.totalAdjusted > 0);
-  const currentTotal = professor.totalAdjusted ?? totalAdjusted;
-  const percentile = peerList.length
-    ? percent(peerList.filter(peer => peer.totalAdjusted <= currentTotal).length, peerList.length)
-    : null;
-  const similarPeers = peerList.map(peer => ({
-    name: peer.name,
-    affiliation: peer.affiliation,
-    similarity: cosineSimilarity(areas, Object.fromEntries(Object.entries(peer.areas || {}).map(([area, values]) => [area, values.adjusted || 0])))
-  })).filter(peer => peer.similarity > 0).sort((a, b) => b.similarity - a.similarity || a.name.localeCompare(b.name)).slice(0, 3);
+  // Peers are only useful as "where else could I work on this?", so colleagues
+  // at the target's own university are excluded from both rankings.
+  const peerList = Object.values(peers).filter(peer =>
+    peer.name !== professor.name && peer.totalAdjusted > 0 && peer.affiliation !== professor.affiliation);
+
+  const similarPeers = peerList
+    .map(peer => ({
+      name: peer.name,
+      affiliation: peer.affiliation,
+      similarity: cosineSimilarity(areas,
+        Object.fromEntries(Object.entries(peer.areas || {}).map(([area, values]) => [area, values.adjusted || 0])))
+    }))
+    .filter(peer => peer.similarity > 0)
+    .sort((a, b) => b.similarity - a.similarity || a.name.localeCompare(b.name))
+    .slice(0, 3);
 
   const highlights = [];
   if (pivot) highlights.push(`Primary research emphasis shifted between the earlier and later halves of the selected period.`);
@@ -434,6 +481,6 @@ export function calculateResearcherPatterns(professor, peers = {}, options = {})
     balance: entropy * 100, pivot, emergingAreas, dormantAreas,
     venues, venueBreadth: Object.keys(venues).length, topVenue,
     venueConcentration, mostPersistentVenue, venueShift,
-    percentile, similarPeers, highlights
+    similarPeers, highlights
   };
 }

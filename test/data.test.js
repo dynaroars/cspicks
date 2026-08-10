@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import { coreAMap, fetchCsv, filterByYears, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet } from '../src/data.js';
-import { areaLabels, detectRegionFromLocales, encodeInlineValue, escapeHtml, getInstitutionShortName, safeExternalUrl } from '../src/shared.js';
+import { areaLabels, detectRegionFromLocales, encodeInlineValue, escapeHtml, getInstitutionShortName, safeExternalUrl, scoreSuggestionMatch } from '../src/shared.js';
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../src/simulation.js';
 import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl } from '../src/dblp.js';
 import { parseCsrankingsRules } from '../src/csrankings-rules.js';
-import { calculateDiscoveryInsights, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, explainRankGap } from '../src/metrics.js';
-import { awardYear, buildFundingIndex, calculateFundingDiscoveries, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, renderFundingFacultyCard } from '../src/nsf.js';
+import { calculateAreaMomentum, calculateDiscoveryInsights, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, explainRankGap } from '../src/metrics.js';
+import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../src/nsf.js';
 
 function professor(name, affiliation, count, adjustedcount) {
   return {
@@ -27,6 +27,39 @@ test('browser locales map to supported regions and unknown locales fall back to 
   assert.equal(detectRegionFromLocales(['en']), 'us');
   assert.equal(detectRegionFromLocales(['de']), 'europe');
   assert.equal(detectRegionFromLocales(['not_a_locale']), 'world');
+});
+
+test('NSF funding resolves faculty listed under a middle-initial variant', () => {
+  // CSRankings lists some people twice (e.g. "ThanhVu H. Nguyen" in the roster
+  // but "ThanhVu Nguyen" in the publication table); the NSF snapshot records
+  // whichever variant the sync matched, so lookups must tolerate both.
+  const dataset = {
+    awards: [{
+      id: '1', title: 'Verification', awardee: 'Example University', awardDate: '09/01/2024',
+      estimatedAmount: 400000,
+      investigators: [{ name: 'A', role: 'PI', facultyName: 'ThanhVu H. Nguyen', affiliation: 'Example University' }]
+    }, {
+      id: '2', title: 'Ambiguous', awardee: 'Other University', awardDate: '09/01/2024',
+      estimatedAmount: 200000,
+      investigators: [{ name: 'B', role: 'PI', facultyName: 'Michael T. Goodrich', affiliation: 'Other University' }]
+    }]
+  };
+  const index = buildFundingIndex(dataset, 2020, 2025);
+
+  assert.equal(normalizeFundingName('ThanhVu H. Nguyen'), 'thanhvu nguyen');
+  assert.equal(normalizeFundingName('J. Smith'), 'j smith');
+  // The CSRankings disambiguation number identifies the person and is kept.
+  assert.equal(normalizeFundingName('Adam D. Smith 0001'), 'adam smith 0001');
+  assert.notEqual(normalizeFundingName('Adam D. Smith 0001'), normalizeFundingName('Adam Smith 0006'));
+
+  assert.equal(findFundingFaculty(index, 'ThanhVu H. Nguyen').attributedAmount, 400000);
+  assert.equal(findFundingFaculty(index, 'ThanhVu Nguyen', 'Example University').attributedAmount, 400000);
+  assert.equal(findFundingFaculty(index, 'Unrelated Person', 'Example University'), null);
+  // Same-name-different-person: middle initials differ and so do institutions.
+  assert.equal(findFundingFaculty(index, 'Michael A. Goodrich', 'Brigham Young University'), null);
+  assert.equal(findFundingFaculty(index, 'Michael Goodrich', 'Other University').attributedAmount, 200000);
+  // Without an institution to confirm it, a normalized match is not assumed.
+  assert.equal(findFundingFaculty(index, 'ThanhVu Nguyen'), null);
 });
 
 test('NSF funding uses award year and fractional investigator attribution', () => {
@@ -245,6 +278,16 @@ test('per-area rankings assign the same rank to equal scores', () => {
   assert.equal(result.schools.A.areaRanks.mlmining, 1);
   assert.equal(result.schools.B.areaRanks.mlmining, 1);
   assert.equal(result.schools.C.areaRanks.mlmining, 3);
+});
+
+test('suggestion ranking tolerates middle initials without losing precedence', () => {
+  // Prefix of the whole string beats a word prefix beats a substring beats a
+  // per-token match, so exact typing still wins.
+  assert.equal(scoreSuggestionMatch('Michael T. Goodrich', 'michael'), 0);
+  assert.equal(scoreSuggestionMatch('Michael T. Goodrich', 'goodrich'), 1);
+  assert.equal(scoreSuggestionMatch('Michael T. Goodrich', 'l t. go'), 2);
+  assert.equal(scoreSuggestionMatch('ThanhVu H. Nguyen', 'thanhvu nguyen'), 3);
+  assert.equal(scoreSuggestionMatch('ThanhVu H. Nguyen', 'alice example'), Infinity);
 });
 
 test('rendering helpers neutralize markup and unsafe URLs', () => {
@@ -564,4 +607,33 @@ test('parity audit validates ranked data', () => {
   assert.equal(report.totalMismatches, 0);
   assert.equal(report.rankOrderIssues, 0);
   assert.equal(report.officialVenueMode, true);
+});
+
+test('area momentum compares a school against the field, not against itself', () => {
+  const school = (name, areas) => ({ name, areaAdjustedCounts: areas, areas: {}, totalAdjusted: 0 });
+  const current = { schools: {
+    Target: school('Target', { robotics: 14, act: 10, bio: 1 }),
+    Other: school('Other', { robotics: 86, act: 190, bio: 9 })
+  } };
+  const prior = { schools: {
+    Target: school('Target', { robotics: 10, act: 10, bio: 1 }),
+    Other: school('Other', { robotics: 90, act: 90, bio: 9 })
+  } };
+
+  const momentum = calculateAreaMomentum(current, prior, 'Target');
+  const byArea = Object.fromEntries(momentum.map(entry => [entry.area, entry]));
+
+  // Robotics grew 40% here while the field grew exactly 0%.
+  assert.equal(byArea.robotics.growth, 40);
+  assert.equal(byArea.robotics.fieldGrowth, 0);
+  assert.equal(byArea.robotics.delta, 40);
+  // Flat output is a real decline when the field doubled.
+  assert.equal(byArea.act.growth, 0);
+  assert.equal(byArea.act.fieldGrowth, 100);
+  assert.equal(byArea.act.delta, -100);
+  // Areas too small to be meaningful are dropped.
+  assert.equal('bio' in byArea, false);
+  // Ordered by the size of the gap, whichever direction it points.
+  assert.equal(momentum[0].area, 'act');
+  assert.equal(calculateAreaMomentum(current, prior, 'Missing School').length, 0);
 });

@@ -39,9 +39,15 @@ By default, every eligible paper is credited to its author’s current CSRanking
 
 Historical affiliation records are estimates. They can be incomplete or incorrect, especially for older years, visiting positions, and institutions that changed names.
 
+### How do I compare two universities or two professors?
+
+Type both names in the main search box separated by `vs` — for example `Carnegie Mellon University vs Massachusetts Inst. of Technology` or `Emery Berger vs Michael Hicks`. The search suggestions complete whichever side you are typing.
+
+The comparison shows adjusted publication weight by research area for both targets, which areas each one leads, and, for universities, the area-level log-score differences behind the rank gap. It uses the region, years, conference set, and History setting selected above the search box. Both sides must be the same kind of target: two universities or two professors.
+
 ### What do the conference-set options mean?
 
-- **CSRankings (Default)** uses the primary CSRankings venue set and excludes its optional next-tier venues.
+- **CSRankings (Default)** uses the primary CSRankings venue set and excludes its optional next-tier venues. Venues that CSRankings collects but never assigns to a research area (PoPETs, for example) are counted by neither CSRankings option.
 - **CSRankings (All)** includes both the primary and extended CSRankings venues, including venues such as ASE, ISSTA, ICDE, PODS, HPCA, NDSS, EuroSys, Eurographics, FAST, USENIX ATC, ICFP, OOPSLA, and KDD.
 - **CORE A\*** includes only conferences mapped to the CORE A* tier.
 - **CORE A\*/A** includes conferences mapped to either the CORE A* or A tier.

@@ -79,6 +79,7 @@ body {
 }
 
 #app {
+  overflow-x: clip;
   max-width: 1000px;
   margin: 0 auto;
   padding: 4rem 2rem 4rem;
@@ -114,6 +115,43 @@ h1 {
   color: var(--text-secondary);
   border-radius: 50%;
   transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* FAQ, data health and ROARS moved up here from the footer, which infinite
+   scrolling put out of reach. */
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--text-secondary);
+  border-radius: 50%;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.icon-link svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.roars-link::before {
+  width: 1.5rem;
+  height: 1.5rem;
+  background: currentColor;
+  content: '';
+  mask: url('/roars-dino.png') center / contain no-repeat;
+  -webkit-mask: url('/roars-dino.png') center / contain no-repeat;
+}
+
+.github-link:hover,
+.github-link:focus-visible,
+.icon-link:hover,
+.icon-link:focus-visible {
+  color: var(--text-primary);
+  background: var(--hover-bg);
 }
 
 .github-link::before {
@@ -157,11 +195,23 @@ header p {
   border-bottom: 2px solid var(--border-color);
   color: var(--text-primary);
 }
-
-.unified-results {
+/* Name, university and profile links share one row; the links live outside the
+   header button because anchors cannot nest inside a button. */
+.card-header-row {
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-header-row .card-header {
+  flex: 1;
+  min-width: 0;
+}
+
+.professor-affiliation {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 400;
 }
 
 .card-header {
@@ -327,10 +377,6 @@ footer button:hover {
 
 .search-filters .search-region-control {
   flex: 0 1 110px;
-}
-
-.search-filters .comparison-type-control {
-  flex: 0 1 130px;
 }
 
 .search-filters #year-filter-group {
@@ -537,15 +583,11 @@ input[type="text"]::placeholder {
   grid-template-columns: 1fr;
 }
 
-#prof-results.single-result {
-  grid-template-columns: minmax(300px, 720px);
+/* A lone result lines up with the analysis panel below it. */
+#prof-results.single-result,
+#school-results.single-result {
+  grid-template-columns: minmax(0, 880px);
   justify-content: center;
-}
-
-.results-container {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
 }
 
 .search-context-header {
@@ -572,12 +614,17 @@ input[type="text"]::placeholder {
 
 .analysis-insights {
   width: 100%;
-  max-width: 720px;
+  max-width: 880px;
   margin: 0 0 1rem;
   padding: 0.75rem 1rem;
   background: var(--hover-bg);
   border-left: 3px solid var(--primary-color);
   border-radius: 0 8px 8px 0;
+}
+
+#researcher-highlights [data-action="load-coauthors"] {
+  margin: -0.5rem 0 1rem 1rem;
+  font-size: var(--text-sm);
 }
 
 .analysis-insights h3 {
@@ -598,7 +645,7 @@ input[type="text"]::placeholder {
 
 #researcher-highlights {
   width: 100%;
-  max-width: 720px;
+  max-width: 880px;
 }
 
 .dblp-section-header,
@@ -656,6 +703,16 @@ button.card-header {
   font: inherit;
   text-decoration: underline dotted;
   cursor: pointer;
+}
+
+/* CSRankings' own country flags, next to the institution they belong to. */
+.country-flag {
+  width: 16px;
+  height: 11px;
+  margin-right: 0.4rem;
+  border-radius: 2px;
+  vertical-align: baseline;
+  object-fit: cover;
 }
 
 .card-badge {
@@ -893,12 +950,227 @@ button.card-header {
 .diagnostic-panel h3 { margin-top: 1.25rem; }
 
 .integrated-analysis {
-  margin: 2.5rem auto 0;
-  padding-top: 2rem;
+  width: 100%;
+  max-width: 880px;
+  margin: 1.25rem auto 0;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--border-color);
 }
 
 .integrated-analysis[hidden] {
+  display: none;
+}
+
+.comparison-results {
+  width: 100%;
+  max-width: 880px;
+  margin: 1.5rem auto 0;
+}
+
+.comparison-results[hidden] {
+  display: none;
+}
+
+.comparison-results-header {
+  margin-bottom: 1.25rem;
+}
+
+.comparison-results-header h2 {
+  margin: 0;
+}
+
+.comparison-results-header p {
+  margin: 0.25rem 0 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.comparison-results .chart-container {
+  position: relative;
+  height: 500px;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.comparison-results .chart-container[hidden] {
+  display: none;
+}
+
+.comparison-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.comparison-summary .summary-card {
+  padding: 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.comparison-summary .summary-card h4 {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.comparison-summary .summary-card .leader {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.comparison-summary .summary-card .margin {
+  margin-top: 0.25rem;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+}
+
+/* Blue = first target, green = second, matching the chart's two series. */
+.comparison-side-a { --comparison-accent: rgba(37, 99, 235, 1); }
+.comparison-side-b { --comparison-accent: rgba(16, 185, 129, 1); }
+
+.comparison-overall,
+.rank-gap-card,
+.comparison-notice,
+.comparison-leads {
+  grid-column: 1 / -1;
+}
+
+.comparison-overall {
+  text-align: center;
+}
+
+.comparison-scoreboard {
+  grid-column: 1 / -1;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 0.5rem 0.4rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: right;
+}
+
+.comparison-table thead th {
+  color: var(--comparison-accent, var(--text-secondary));
+  font-weight: 600;
+}
+
+.comparison-table tbody th {
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-align: left;
+}
+
+.comparison-table tbody tr:last-child th,
+.comparison-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.comparison-table td {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The better number in each row carries its side's color and weight. */
+.comparison-table td.is-leader {
+  color: var(--comparison-accent);
+  font-weight: 700;
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+}
+
+.comparison-overall .leader {
+  font-size: 1.3rem;
+}
+
+.comparison-overall .comparison-side-a,
+.comparison-overall .comparison-side-b {
+  color: var(--comparison-accent);
+}
+
+.comparison-notice {
+  padding: 2rem;
+  border-style: dashed;
+  text-align: center;
+}
+
+.comparison-notice h4 {
+  margin-bottom: 0.5rem;
+}
+
+.comparison-notice p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.comparison-leads {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.comparison-lead-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.comparison-lead-column > h4 {
+  margin: 0;
+  color: var(--comparison-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.comparison-summary .comparison-lead-card {
+  border-color: color-mix(in srgb, var(--comparison-accent) 25%, transparent);
+  background: color-mix(in srgb, var(--comparison-accent) 3%, var(--card-bg));
+}
+
+.comparison-summary .comparison-lead-card .margin {
+  color: var(--comparison-accent);
+}
+
+.funding-results-container {
+  width: 100%;
+  max-width: 880px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.funding-results-container .results-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.funding-status {
+  margin: 0.5rem 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.funding-status:empty {
   display: none;
 }
 
@@ -913,7 +1185,7 @@ button.card-header {
 .integrated-analysis-header {
   display: flex;
   align-items: end;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 1.5rem;
   margin-bottom: 1.25rem;
 }
@@ -924,10 +1196,10 @@ button.card-header {
 }
 
 .integrated-analysis-header > p {
-  max-width: 520px;
+  max-width: none;
   color: var(--text-secondary);
   font-size: var(--text-sm);
-  text-align: right;
+  text-align: left;
 }
 
 .integrated-analysis .eyebrow {
@@ -942,7 +1214,7 @@ button.card-header {
 .analysis-nav-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.25rem;
   margin-bottom: 2rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--border-color);
@@ -951,14 +1223,14 @@ button.card-header {
 .analysis-nav-tabs .nav-tab {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.45rem 0.7rem;
+  gap: 0.3rem;
+  padding: 0.4rem 0.5rem;
   color: var(--text-secondary);
   background: transparent;
   border: 0;
   border-radius: 6px;
   font: inherit;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
 }
@@ -991,7 +1263,7 @@ button.card-header {
 
 .integrated-analysis .analysis-view-card {
   width: 100%;
-  max-width: 720px;
+  max-width: 880px;
   margin-bottom: 2rem;
   padding: 1.5rem;
   background: var(--card-bg);
@@ -1005,12 +1277,36 @@ button.card-header {
   height: 400px;
 }
 
+/* One column for the whole panel: every tab, and both target types, line up.
+   880px matches the search box above, so the page reads as one column. */
+.integrated-analysis-header,
+.analysis-nav-tabs,
+.integrated-analysis .view-section > *,
+#researcher-highlights > * {
+  width: 100%;
+  max-width: 880px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .integrated-analysis .analysis-tall-chart {
   height: 600px;
 }
 
 .integrated-analysis .view-section,
 .analysis-area-layout,
+/* Researchers get a read-only key, so the swatch replaces the checkbox. */
+.analysis-area-option.is-static {
+  cursor: default;
+}
+
+.analysis-area-swatch {
+  flex: none;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 3px;
+}
+
 .analysis-conference-filter {
   width: 100%;
   max-width: 100%;
@@ -1212,82 +1508,11 @@ button.card-header {
   border-color: var(--border-color);
 }
 
-.compare-tool-page .history-warning,
-.discoveries-tool-page .history-warning {
-  max-width: 880px;
-  margin-bottom: 0.5rem;
-  padding: 0;
-  color: var(--text-secondary);
-  background: transparent;
-  border: 0;
-  font-size: var(--text-xs);
-  text-align: center;
-}
-
-.compare-tool-page .compare-controls {
-  gap: 1rem;
-  max-width: 880px;
-  margin: 1.5rem auto 2rem;
-  padding: 0;
-  background: transparent;
-  border: 0;
-}
-
-.compare-tool-page .school-selector label {
-  color: var(--text-secondary);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.compare-tool-page .searchable-select .search-input {
-  height: 58px;
-  padding: 0 1.1rem;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 15px;
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.07);
-  font-size: 1rem;
-}
-
-.compare-tool-page .searchable-select .search-input:focus {
-  border-color: var(--text-primary);
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.11);
-}
-
-.compare-tool-page .searchable-select .dropdown-list {
-  margin-top: 0.5rem;
-  padding: 0.35rem;
-  border-radius: 14px;
-  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16);
-}
-
-.compare-tool-page .searchable-select .dropdown-item {
-  border-bottom: 0;
-  border-radius: 8px;
-}
-
-.compare-tool-page .vs-badge {
-  padding: 1.7rem 0.25rem 0;
-  color: var(--text-secondary);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-}
-
 .tool-page .chart-container {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 16px;
   box-shadow: none;
-}
-
-.compare-tool-page .summary-card {
-  padding: 1rem 0;
-  background: transparent;
-  border-width: 1px 0 0;
-  border-radius: 0;
 }
 
 .discoveries-tool-page .diagnostic-panel {
@@ -1356,20 +1581,6 @@ button.card-header {
   .tool-page .filters.search-filters {
     flex-wrap: wrap;
   }
-
-  .compare-tool-page .compare-controls {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .compare-tool-page .school-selector {
-    min-width: 0;
-  }
-
-  .compare-tool-page .vs-badge {
-    padding: 0;
-    text-align: center;
-  }
 }
 
 /* =========================================
@@ -1422,6 +1633,23 @@ button.card-header {
 .search-intro {
   margin-bottom: 2rem;
   text-align: center;
+}
+
+/* Once a search is running, the hero gives its space back to the results. */
+.has-search-query header {
+  margin-bottom: 1.75rem;
+}
+
+.has-search-query .search-intro {
+  margin-bottom: 1rem;
+}
+
+.has-search-query .search-intro h2 {
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+}
+
+.has-search-query .search-intro p {
+  display: none;
 }
 
 .search-intro h2 {
@@ -1522,12 +1750,23 @@ button.card-header {
 }
 
 .universal-suggestion-group {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
   padding: 0.65rem 0.85rem 0.3rem;
   color: var(--text-secondary);
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.07em;
   text-transform: uppercase;
+}
+
+/* Says how many matches the group holds when the list is trimmed. */
+.universal-suggestion-count {
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
 }
 
 .universal-suggestion {
@@ -1586,7 +1825,8 @@ button.card-header {
   font-size: var(--text-sm);
 }
 
-#search-example-items {
+/* The rows flow into one wrapping line: "Try All <examples…>". */
+.search-examples-row {
   display: contents;
 }
 
@@ -1608,10 +1848,6 @@ button.card-header {
   background: var(--hover-bg);
 }
 
-.has-search-query #search-example-items button:not(.search-all):not(.search-persistent) {
-  display: none;
-}
-
 .search-page .search-filters {
   width: 100%;
   margin: 1rem auto 0;
@@ -1619,26 +1855,6 @@ button.card-header {
   background: transparent;
   border: 0;
   box-shadow: none;
-}
-
-.funding-results-container {
-  width: 100%;
-  max-width: 880px;
-}
-
-.funding-results-container .results-grid {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.funding-status {
-  margin: 0.5rem 0;
-  color: var(--text-secondary);
-  font-size: var(--text-sm);
-  text-align: center;
-}
-
-.funding-status:empty {
-  display: none;
 }
 
 .funding-definition {
@@ -1768,74 +1984,76 @@ button.card-header {
 }
 
 .search-page .search-filters.funding-filters {
-  width: fit-content;
-  max-width: 100%;
-  flex-wrap: nowrap;
-  gap: 0.65rem;
   justify-content: center;
-  margin: 1rem auto 0;
-  padding: 0;
-  overflow: visible;
+  margin-top: 0.35rem;
 }
 
 .search-page .funding-filters .filter-sentence-prefix {
-  display: inline-flex;
-  width: auto;
-  align-items: center;
-  min-height: 38px;
-  margin: 0;
-  font-weight: 500;
-  text-align: left;
-  white-space: nowrap;
-}
-
-.search-page .funding-filters .filter-group,
-.search-page .funding-filters .year-inputs select {
-  height: 38px;
-}
-
-.search-page .funding-filters .year-inputs select {
-  padding: 0.45rem 1.65rem 0.45rem 0.65rem;
-  background-color: var(--bg-secondary);
-  border-color: var(--border-color);
-}
-
-.search-page .funding-filters .year-inputs select:hover,
-.search-page .funding-filters .year-inputs select:focus {
-  border-color: var(--accent-color);
-}
-
-.search-page .history-warning {
-  max-width: 880px;
-  margin: 0.35rem auto 0;
-  padding: 0;
-  color: var(--text-secondary);
-  background: transparent;
-  border: 0;
-  font-size: var(--text-xs);
-  text-align: center;
-}
-
-.search-page .history-warning.history-enabled {
-  color: var(--impact-neg-text);
-  background: transparent;
-  border: 0;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .search-page #search-context-header {
   order: 3;
 }
 
-.search-page main {
+.search-page #comparison-results {
   order: 4;
 }
 
-.search-page #integrated-analysis {
+.search-page main {
   order: 5;
 }
 
-.search-page .site-data-health {
+/* Default view: ranked universities on the left, people on the right. */
+.showing-rankings main,
+.showing-rankings .funding-results-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3rem;
+  align-items: start;
+  width: 100%;
+  max-width: 880px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.showing-rankings main > section:empty {
+  display: none;
+}
+
+.showing-rankings #school-results,
+.showing-rankings #funding-school-results {
+  grid-column: 1;
+}
+
+.showing-rankings #prof-results,
+.showing-rankings #area-people-results,
+.showing-rankings #funding-faculty-results {
+  grid-column: 2;
+}
+
+/* Names and badges share a narrow column, so keep the header compact. */
+.showing-rankings .card-header h2 {
+  font-size: 1.05rem;
+}
+
+.showing-rankings .card-badge {
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+.showing-rankings .results-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.search-page #integrated-analysis {
   order: 6;
+}
+
+.search-page .site-data-health {
+  order: 7;
 }
 
 .search-page .card {
@@ -1884,6 +2102,18 @@ button.card-header {
 }
 
 @media (max-width: 760px) {
+  .showing-rankings main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .showing-rankings #school-results,
+  .showing-rankings #prof-results,
+  .showing-rankings #area-people-results,
+  .showing-rankings #funding-school-results,
+  .showing-rankings #funding-faculty-results {
+    grid-column: 1;
+  }
+
   .search-page #app {
     padding: 1.25rem 1rem 3rem;
   }
@@ -1968,36 +2198,6 @@ button.card-header {
 .discoveries-filters {
   margin-bottom: 1.5rem;
 }
-
-.discoveries-disclaimer {
-  max-width: none;
-}
-
-.history-warning {
-  box-sizing: border-box;
-  max-width: 1180px;
-  margin: 0 auto 1rem;
-  padding: 0.8rem 1rem;
-  color: var(--text-primary);
-  background: color-mix(in srgb, #f59e0b 11%, var(--card-bg));
-  border: 1px solid color-mix(in srgb, #f59e0b 45%, var(--border-color));
-  border-left: 4px solid #f59e0b;
-  border-radius: 10px;
-  font-size: var(--text-sm);
-  line-height: 1.45;
-}
-
-.history-warning.history-enabled {
-  background: color-mix(in srgb, #3b82f6 11%, var(--card-bg));
-  border-color: color-mix(in srgb, #3b82f6 45%, var(--border-color));
-  border-left-color: #3b82f6;
-}
-
-.history-warning strong {
-  color: inherit;
-}
-
-.history-warning.context-note,
 .simulator-disclaimer.context-note {
   box-sizing: border-box;
   width: 100%;
@@ -2012,13 +2212,6 @@ button.card-header {
   font-size: var(--text-xs);
   line-height: 1.5;
   text-align: left;
-}
-
-.history-warning.context-note.history-enabled {
-  color: var(--text-primary);
-  background: color-mix(in srgb, #ef4444 5%, var(--card-bg));
-  border-color: color-mix(in srgb, #ef4444 22%, var(--border-color));
-  border-left-color: #dc2626;
 }
 
 .context-note strong {
@@ -2164,7 +2357,6 @@ button.card-header {
 }
 
 .confidence-high { color: var(--impact-pos-text) !important; }
-.confidence-medium { color: #b45309 !important; }
 .confidence-review { color: var(--impact-neg-text) !important; }
 
 
@@ -2187,6 +2379,38 @@ button.card-header {
   display: flex;
   gap: 1.5rem;
   margin-bottom: 2rem;
+}
+
+/* Profile links ride alongside the affiliation as icons. */
+.profile-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: 0.6rem;
+  vertical-align: middle;
+}
+
+.profile-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--text-secondary);
+  border-radius: 6px;
+}
+
+.profile-link svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.profile-link:hover,
+.profile-link:focus-visible {
+  color: var(--primary-color);
+  background: var(--hover-bg);
 }
 
 .card-link {
@@ -2280,7 +2504,7 @@ button.card-header {
   margin-top: 2rem;
   padding: 1.5rem;
   border: 1px solid var(--text-primary);
-  background: #fafafa;
+  background: var(--hover-bg);
   color: var(--text-primary);
   font-size: 0.9rem;
   font-style: italic;
@@ -2312,22 +2536,22 @@ button.card-header {
 .sim-step input {
   width: 100%;
   padding: 1rem;
-  border: 2px solid #eee;
+  border: 2px solid var(--border-color);
   border-radius: 12px;
   font-size: 1rem;
-  background: #fff;
+  background: var(--card-bg);
   transition: border-color 0.2s;
 }
 
 .sim-step input:focus {
-  border-color: #333;
+  border-color: var(--text-primary);
   outline: none;
 }
 
 .sim-list {
   max-height: 250px;
   overflow-y: auto;
-  border: 1px solid #eee;
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   margin-top: 0.5rem;
 }
@@ -2335,12 +2559,12 @@ button.card-header {
 .sim-item {
   padding: 0.8rem 1rem;
   cursor: pointer;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid var(--border-color);
   transition: background 0.1s;
 }
 
 .sim-item:hover {
-  background: #f9f9f9;
+  background: var(--hover-bg);
 }
 
 .sim-item:last-child {
@@ -2348,10 +2572,10 @@ button.card-header {
 }
 
 .selected-item {
-  background: #f5f5f5;
+  background: var(--hover-bg);
   padding: 1rem;
   border-radius: 12px;
-  border: 1px solid #eee;
+  border: 1px solid var(--border-color);
   margin-bottom: 1rem;
   font-weight: 500;
   display: flex;
@@ -2369,25 +2593,25 @@ button.card-header {
 .sim-step textarea {
   width: 100%;
   padding: 1rem;
-  border: 2px solid #eee;
+  border: 2px solid var(--border-color);
   border-radius: 12px;
   font-size: 0.95rem;
   font-family: var(--font-body);
-  background: #fff;
+  background: var(--card-bg);
   resize: vertical;
   min-height: 120px;
   transition: border-color 0.2s;
 }
 
 .sim-step textarea:focus {
-  border-color: #333;
+  border-color: var(--text-primary);
   outline: none;
 }
 
 /* Candidate result cards */
 .candidate-card {
-  background: #fff;
-  border: 1px solid #eee;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 1rem;
   margin-bottom: 0.75rem;
@@ -2517,7 +2741,7 @@ button.card-header {
 .papers-list {
   margin-top: 0.75rem;
   padding-top: 0.75rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--border-color);
   display: none;
 }
 
@@ -2529,7 +2753,7 @@ button.card-header {
   font-size: 0.8rem;
   padding: 0.4rem 0;
   color: var(--text-secondary);
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .paper-item:last-child {
@@ -2543,13 +2767,13 @@ button.card-header {
 }
 
 .paper-year {
-  color: #888;
+  color: var(--text-secondary);
 }
 
 .btn-secondary {
-  background: #f5f5f5;
-  color: #333;
-  border: 1px solid #eee;
+  background: var(--hover-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
   padding: 0.6rem 1.2rem;
   border-radius: 10px;
   cursor: pointer;
@@ -2562,44 +2786,9 @@ button.card-header {
 }
 
 .btn-secondary:hover {
-  background: #eee;
-  border-color: #ddd;
+  background: var(--hover-bg);
+  border-color: var(--text-secondary);
 }
-
-/* DBLP Author Card Styles */
-.prof-stats {
-  margin-top: 0.5rem;
-}
-
-.stat-row {
-  margin-bottom: 1rem;
-  font-size: 0.95rem;
-  color: var(--text-primary);
-}
-
-.areas-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.area-tag {
-  background: #f5f5f5;
-  padding: 0.3rem 0.8rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  color: #333;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border: 1px solid #eee;
-}
-
-.area-tag .count {
-  font-weight: 600;
-  color: #10b981;
-}
-
 /* Activity Graph */
 .activity-graph {
   margin: 1rem 0;
@@ -2702,7 +2891,7 @@ button.card-header {
   font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.4;
-  width: 260px;
+  width: min(260px, calc(100vw - 2rem));
   text-align: left;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   z-index: 1000;
@@ -2717,6 +2906,22 @@ button.card-header {
   transform: translateX(-50%);
   border: 6px solid transparent;
   border-top-color: #2d2d2d;
+}
+
+@media (max-width: 760px) {
+  /* Triggers sit at the end of a label, so anchor tooltips to their right edge
+     rather than centering them past the screen edge. */
+  .tooltip-trigger .tooltip-content {
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+
+  .tooltip-trigger .tooltip-content::after {
+    left: auto;
+    right: 0.5rem;
+    transform: none;
+  }
 }
 
 .tooltip-trigger:hover .tooltip-content,
