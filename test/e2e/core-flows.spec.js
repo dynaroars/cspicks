@@ -202,6 +202,20 @@ test('suggestions list every match and complete the second side of a vs query', 
   await expect(page.locator('#comparison-chart-container')).toBeVisible();
 });
 
+test('conference and area queries list universities beside their people', async ({ page }) => {
+  await page.goto('./?q=ICSE');
+  await expect(page.locator('#school-results .card').first()).toBeVisible();
+  const columns = await page.evaluate(() => {
+    const schools = document.querySelector('#school-results').getBoundingClientRect();
+    const people = document.querySelector('#area-people-results').getBoundingClientRect();
+    return { sameRow: Math.abs(schools.y - people.y) < 5, schoolsFirst: schools.x < people.x };
+  });
+  expect(columns).toEqual({ sameRow: true, schoolsFirst: true });
+  // Lists grow on scroll instead of offering a "see more" button.
+  await expect(page.locator('[data-show-more-schools], [data-show-more-people]')).toHaveCount(0);
+  await expect(page.locator('#search-context-header')).toContainText('Results for Conference: ICSE');
+});
+
 test('CORE A conference trends include a published ASE venue', async ({ page }) => {
   await page.goto('./');
   await page.locator('#conf-set').selectOption('core-a');

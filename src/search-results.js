@@ -1,11 +1,10 @@
-import { getConferenceAreaMap, publicationMatchesConferenceSet, schoolAliases, conferenceAliases } from './data.js';
+import { getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet, schoolAliases, conferenceAliases } from './data.js';
 import { areaLabels, cleanName, escapeHtml, getConferenceLabel } from './shared.js';
 
 // Renders the Search page's result sections. The page injects its live state
 // and callbacks through `ctx` so these functions stay free of module globals.
 let ctx = null;
 let profObserver = null;
-let peopleResults = null;
 
 export function initSearchResults(context) {
   ctx = context;
@@ -63,6 +62,22 @@ export function renderInfiniteLists(columns) {
     extendInfiniteLists();
   }, { rootMargin: '600px' });
   extendInfiniteLists();
+}
+
+// Search renders its columns from separate functions; collecting them for the
+// end of the tick lets both grow in step without the callers coordinating.
+let queuedColumns = [];
+
+function queueInfiniteList(container, items, renderItem) {
+  container.innerHTML = '';
+  if (!queuedColumns.length) {
+    queueMicrotask(() => {
+      const columns = queuedColumns;
+      queuedColumns = [];
+      if (columns.length) renderInfiniteLists(columns);
+    });
+  }
+  queuedColumns.push({ container, items, renderItem });
 }
 
 function findMatchingConference(query) {
@@ -131,33 +146,8 @@ export function searchAreaPeople(query) {
 
   if (topProfs.length === 0) return;
   document.body.classList.add('showing-rankings');
-  const initialCount = 10;
-  peopleResults = { results: topProfs, shown: initialCount, title };
-  renderPeopleResults();
-}
-
-export function renderPeopleResults() {
-  const state = peopleResults;
-  const container = document.getElementById('area-people-results');
-  if (!state || !container) return;
-
-  const visible = state.results.slice(0, state.shown);
-  container.innerHTML = `
-    ${visible.map(professor => ctx.renderProfessorCard(professor)).join('')}
-    ${state.results.length > state.shown ? `
-      <div id="see-more-people" class="see-more-results">
-        <button type="button" data-show-more-people class="btn-secondary">
-          See more researchers (${state.results.length - state.shown} remaining)
-        </button>
-      </div>
-    ` : ''}
-  `;
-}
-
-export function showMorePeople() {
-  if (!peopleResults) return;
-  peopleResults.shown += 10;
-  renderPeopleResults();
+  queueInfiniteList(document.getElementById('area-people-results'), topProfs,
+    professor => ctx.renderProfessorCard(professor));
 }
 
 export function searchProfessorByAffiliation(name, affiliation) {
@@ -369,55 +359,9 @@ export function searchSchools(query) {
   const container = document.getElementById('school-results');
   container.classList.toggle('single-result', results.length === 1);
   const filterKey = confKeyMatch || matchedArea;
-  const initialCount = 10;
-
-  window._schoolResults = { results, filterKey, shown: initialCount };
-
-  let html = results
-    .slice(0, initialCount)
-    .map(school => ctx.renderSchoolCard(school, filterKey))
-    .join('');
-
-  if (results.length > initialCount) {
-    html += `
-      <div id="see-more-schools" class="see-more-results">
-        <button type="button" data-show-more-schools class="btn-secondary">
-          See more universities (${results.length - initialCount} remaining)
-        </button>
-      </div>
-    `;
-  }
-
-  container.innerHTML = html;
+  queueInfiniteList(container, results, school => ctx.renderSchoolCard(school, filterKey));
 }
 
-export function showMoreSchools() {
-  const { results, filterKey, shown } = window._schoolResults;
-  const nextBatch = 10;
-  const newShown = shown + nextBatch;
-
-  document.getElementById('see-more-schools')?.remove();
-
-  const container = document.getElementById('school-results');
-  const newCards = results
-    .slice(shown, newShown)
-    .map(school => ctx.renderSchoolCard(school, filterKey))
-    .join('');
-
-  container.insertAdjacentHTML('beforeend', newCards);
-
-  window._schoolResults.shown = newShown;
-
-  if (results.length > newShown) {
-    container.insertAdjacentHTML('beforeend', `
-      <div id="see-more-schools" class="see-more-results">
-        <button type="button" data-show-more-schools class="btn-secondary">
-          See more universities (${results.length - newShown} remaining)
-        </button>
-      </div>
-    `);
-  }
-}
 
 
 
