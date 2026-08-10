@@ -204,7 +204,7 @@ export function renderFundingFacultyCard(person, { expanded = false, collapsible
 
 export function renderFundingSchoolCard(school, { expanded = false } = {}) {
   return `<article class="card funding-card${expanded ? '' : ' collapsed'}" data-name="${escapeHtml(school.name)}">
-    <button type="button" class="card-header" data-action="open-funding-target"><h2>${escapeHtml(school.name)} <span class="card-badge">${school.faculty.length} faculty with NSF awards</span></h2></button>
+    <button type="button" class="card-header" data-action="open-funding-target"><h2>${escapeHtml(school.name)} <span class="card-badge">${school.faculty.length} CS faculty with NSF awards</span></h2></button>
     <div class="card-content">
       <div class="card-stats"><strong>${school.awards.length}</strong> NSF ${school.awards.length === 1 ? 'award' : 'awards'} · <strong>${escapeHtml(formatFunding(school.attributedAmount))}</strong> intended funding attributed</div>
       <p class="funding-definition">Sum of intended-award shares for matched current CSRankings faculty; this is not the university's complete NSF portfolio.</p>
