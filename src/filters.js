@@ -26,6 +26,32 @@ const CONF_SETS = [
   ['core-a', 'CORE A*/A']
 ];
 
+const FILTER_STORAGE_KEY = 'cspicks:filters';
+
+// Filter choices follow the reader from page to page, so clicking through to
+// another university or tool does not silently reset them.
+function readStoredFilters() {
+  try {
+    return JSON.parse(globalThis.localStorage?.getItem(FILTER_STORAGE_KEY) || '{}') || {};
+  } catch {
+    return {};
+  }
+}
+
+function storeFilters(state) {
+  try {
+    globalThis.localStorage?.setItem(FILTER_STORAGE_KEY, JSON.stringify({
+      startYear: state.startYear,
+      endYear: state.endYear,
+      confSet: state.confSet,
+      rankings: state.rankings,
+      historical: state.historical
+    }));
+  } catch {
+    // Filters still work for this page without storage.
+  }
+}
+
 let affiliationData = null;
 
 // Shared across pages: the affiliation history is large, so load it at most once.
@@ -87,6 +113,14 @@ export function createFilterBar(mount, {
     historical: false
   };
 
+  // A link's parameters win; otherwise the reader's last choices apply.
+  const stored = readStoredFilters();
+  if (Number.isFinite(stored.startYear)) state.startYear = stored.startYear;
+  if (Number.isFinite(stored.endYear)) state.endYear = stored.endYear;
+  if (stored.confSet) state.confSet = normalizeConferenceSet(stored.confSet);
+  if (typeof stored.rankings === 'boolean') state.rankings = stored.rankings;
+  if (typeof stored.historical === 'boolean') state.historical = stored.historical;
+
   if (params.has('region')) state.region = params.get('region');
   if (params.has('start')) state.startYear = parseInt(params.get('start'));
   if (params.has('end')) state.endYear = parseInt(params.get('end'));
@@ -95,6 +129,7 @@ export function createFilterBar(mount, {
   if (params.has('historical')) state.historical = params.get('historical') === 'true';
   state.startYear = Math.min(Math.max(state.startYear, years.min), years.max);
   state.endYear = Math.min(Math.max(state.endYear, years.min), years.max);
+  storeFilters(state);
 
   element.className = ['filters', 'search-filters', className].filter(Boolean).join(' ');
   element.setAttribute('aria-label', label);
@@ -188,6 +223,7 @@ export function createFilterBar(mount, {
       }
     }
     if (confSelect) state.confSet = confSelect.value;
+    storeFilters(state);
   };
 
   [regionSelect, startSelect, endSelect, confSelect].forEach(control => {
@@ -199,6 +235,7 @@ export function createFilterBar(mount, {
 
   rankingsToggle?.addEventListener('change', () => {
     state.rankings = rankingsToggle.checked;
+    storeFilters(state);
     onChange(controller);
   });
 
@@ -207,6 +244,7 @@ export function createFilterBar(mount, {
     try {
       if (historyToggle.checked) await loadHistoryMaps();
       state.historical = historyToggle.checked;
+      storeFilters(state);
       onChange(controller);
     } catch (error) {
       console.error('Failed to load historical affiliation data:', error);

@@ -148,7 +148,7 @@ export function searchAreaPeople(query) {
   if (topProfs.length === 0) return;
   document.body.classList.add('showing-rankings');
   queueInfiniteList(document.getElementById('area-people-results'), topProfs,
-    (professor, position) => ctx.renderProfessorCard(professor, position));
+    (professor, position) => ctx.renderProfessorCard(professor, position, true));
 }
 
 export function searchProfessorByAffiliation(name, affiliation) {
@@ -360,7 +360,13 @@ export function searchSchools(query) {
   const container = document.getElementById('school-results');
   container.classList.toggle('single-result', results.length === 1);
   const filterKey = confKeyMatch || matchedArea;
-  queueInfiniteList(container, results, school => ctx.renderSchoolCard(school, filterKey));
+  // Area views rank by that area; conference views have no stored rank, so the
+  // list position stands in — the list is already ordered by that venue.
+  queueInfiniteList(container, results, (school, position) => ctx.renderSchoolCard(
+    school,
+    filterKey,
+    filterKey ? (matchedArea ? school.areaRanks?.[matchedArea] ?? position : position) : null
+  ));
 }
 
 

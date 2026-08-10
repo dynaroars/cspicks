@@ -140,6 +140,11 @@ export function renderProfessorCard(prof, context) {
   const listPosition = context.showRankings && Number.isInteger(context.resultPosition)
     ? `<span class="result-position">${context.resultPosition}.</span> `
     : '';
+  // In an area or conference view the professor's totals are already scoped to
+  // it, so the header can say how much of their work landed there.
+  const scopedPapers = context.scopedStats
+    ? `<span class="card-badge">${prof.totalPapers} ${prof.totalPapers === 1 ? 'paper' : 'papers'}</span>`
+    : '';
   const sortedAreas = Object.entries(prof.areas).sort(([, a], [, b]) => b.adjusted - a.adjusted);
   const exact = cleanName(prof.name).toLowerCase() === context.currentQuery;
   const papers = [...(prof.pubs || [])].sort((a, b) => b.year - a.year);
@@ -160,7 +165,7 @@ export function renderProfessorCard(prof, context) {
     <div class="card${exact ? '' : ' collapsed'}" data-name="${escapeHtml(cleanName(prof.name))}">
       <div class="card-header-row">
         <${headerTag} class="card-header" ${headerAttributes}>
-          <span class="professor-heading">${listPosition}${countryFlag(profCountry?.country, profCountry?.countryName)}<h2>${escapeHtml(cleanName(prof.name))}</h2><span class="professor-affiliation">${escapeHtml(prof.affiliation || '')}</span>${honors ? `<span class="faculty-honors">${honors}</span>` : ''}</span>
+          <span class="professor-heading">${listPosition}${countryFlag(profCountry?.country, profCountry?.countryName)}<h2>${escapeHtml(cleanName(prof.name))}</h2><span class="professor-affiliation">${escapeHtml(prof.affiliation || '')}</span>${scopedPapers}${honors ? `<span class="faculty-honors">${honors}</span>` : ''}</span>
         </${headerTag}>
         ${renderProfileLinks(prof)}
       </div>
@@ -198,12 +203,19 @@ export function renderSchoolCard(school, filterArea, context) {
     : Object.entries(school.areas).sort(([a], [b]) => (school.areaRanks?.[a] || 9999) - (school.areaRanks?.[b] || 9999));
   const exact = school.name.toLowerCase() === currentQuery
     || schoolAliases[currentQuery]?.toLowerCase() === school.name.toLowerCase();
-  const faculty = new Set(Object.values(school.areas).flatMap(area => area.faculty));
+  const faculty = new Set(filterArea
+    ? (school.areas[filterArea]?.faculty || [])
+    : Object.values(school.areas).flatMap(area => area.faculty));
   const areaCount = Object.values(school.areas).filter(area => area.adjusted > 0).length;
+  const badges = filterArea
+    ? `<span class="card-badge">${faculty.size} Faculty</span>`
+    : `<span class="card-badge">${faculty.size} Faculty</span><span class="card-badge">${areaCount} Areas</span>`;
   const departmentHomepage = safeExternalUrl(school.homepage);
   const institutionMetadata = school.countryName || school.country || '';
-  const rankBadge = context.showRankings && Number.isFinite(school.rank)
-    ? `<span class="card-badge card-badge-rank">#${school.rank}</span>`
+  // In an area or conference view the meaningful rank is within that area.
+  const rankValue = Number.isFinite(context.rankOverride) ? context.rankOverride : school.rank;
+  const rankPrefix = context.showRankings && Number.isFinite(rankValue)
+    ? `<span class="result-position">${rankValue}.</span> `
     : '';
   const headerTag = exact ? 'div' : 'button';
   const headerAttributes = exact
@@ -211,7 +223,7 @@ export function renderSchoolCard(school, filterArea, context) {
     : `type="button" ${actionAttributes('open-target', { targetType: 'school', targetName: school.name })}`;
 
   return `<div class="card${exact ? '' : ' collapsed'}" data-name="${escapeHtml(school.name)}">
-    <${headerTag} class="card-header" ${headerAttributes}><h2>${countryFlag(school.country, school.countryName)}${escapeHtml(school.name)}${rankBadge}<span class="card-badge">${faculty.size} Faculty</span><span class="card-badge">${areaCount} Areas</span></h2></${headerTag}>
+    <${headerTag} class="card-header" ${headerAttributes}><h2>${rankPrefix}${countryFlag(school.country, school.countryName)}${escapeHtml(school.name)}${badges}</h2></${headerTag}>
     <div class="card-content">${institutionMetadata || departmentHomepage !== '#' ? `<div class="school-metadata">${institutionMetadata ? `<span>${escapeHtml(institutionMetadata)}</span>` : ''}${departmentHomepage !== '#' ? `<a href="${escapeHtml(departmentHomepage)}" target="_blank" rel="noopener noreferrer">Department website</a>` : ''}</div>` : ''}${renderSubfieldContributions(school)}<div class="stats-list">${sortedAreas.map(([area, data]) => {
       const prefix = filterArea || !context.showRankings ? '' : (school.areaRanks?.[area] ? `${school.areaRanks[area]}. ` : '');
       const label = areaLabels[area] || getConferenceLabel(area);

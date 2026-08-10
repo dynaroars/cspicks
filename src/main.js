@@ -32,12 +32,12 @@ function getCardContext() {
 
 const searchDBLPAuthors = createDblpAuthorSearch(getCardContext);
 
-function renderProfessorCard(professor, resultPosition = null) {
-  return renderProfessorCardView(professor, { ...getCardContext(), resultPosition });
+function renderProfessorCard(professor, resultPosition = null, scopedStats = false) {
+  return renderProfessorCardView(professor, { ...getCardContext(), resultPosition, scopedStats });
 }
 
-function renderSchoolCard(school, filterArea = null) {
-  return renderSchoolCardView(school, filterArea, getCardContext());
+function renderSchoolCard(school, filterArea = null, rankOverride = null) {
+  return renderSchoolCardView(school, filterArea, { ...getCardContext(), rankOverride });
 }
 
 const params = new URLSearchParams(window.location.search);
