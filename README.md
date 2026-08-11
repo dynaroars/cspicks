@@ -159,7 +159,8 @@ cspicks/
 │   ├── charts.js                     # Chart.js defaults, redraw, and theme handling
 │   ├── main.js                       # Search page controller
 │   ├── search-results.js             # Search result sections
-│   ├── search-suggestions.js         # Search autocomplete
+│   ├── suggestion-box.js             # Shared autocomplete menu (Search and Funding)
+│   ├── search-suggestions.js         # Search autocomplete rows
 │   ├── comparison.js                 # `A vs B` head-to-head mode
 │   ├── simulator.js                  # Simulator page UI and orchestration
 │   ├── simulation.js                 # Pure matching and rank-impact logic

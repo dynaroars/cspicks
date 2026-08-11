@@ -66,6 +66,11 @@ See "Routine Maintenance" in README.md.
   same everywhere.
 - `src/charts.js` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges
   shared defaults and destroys the previous chart; `onThemeChange(fn)` re-renders on light/dark switches.
+- `src/suggestion-box.js` — `createSuggestionBox({ input, listbox, getGroups, onSelect })` owns the
+  autocomplete menu's markup, keyboard handling, ARIA state, and the `A vs B` prefix logic (it completes the
+  trailing side only and tells `getGroups` it is comparing). Search supplies CSRankings groups through
+  `src/search-suggestions.js`; Funding supplies NSF universities, professors, and programs from its own
+  index. Both pages mount it on `<div id="universal-suggestions">` inside `.universal-search`.
 
 Pages have independent filtered state and use plain `<a href>` navigation. `loadData()` memoizes its promise,
 so modules loaded together on Search share one download and parse of the canonical CSRankings inputs.

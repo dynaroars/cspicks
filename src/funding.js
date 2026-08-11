@@ -3,13 +3,16 @@ import { parseComparisonQuery } from './comparison.js';
 import { compareNumber, renderComparisonNotice, renderScoreboard } from './compare-view.js';
 import { createFilterBar } from './filters.js';
 import { renderInfiniteLists } from './search-results.js';
-import { cleanName, escapeHtml } from './shared.js';
+import { cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
+import { createSuggestionBox, rankSuggestions } from './suggestion-box.js';
 
 const params = new URLSearchParams(window.location.search);
 const currentYear = new Date().getFullYear();
+const SUGGESTION_LIMITS = { schools: 12, faculty: 25, programs: 8 };
 let filters = null;
 let dataset = null;
 let index = null;
+let suggestionItems = null;
 
 function renderDataHealth() {
   const container = document.getElementById('nsf-data-health-stats');
@@ -25,17 +28,17 @@ function renderDataHealth() {
 
   container.innerHTML = `
     <h2>NSF funding data health</h2>
-    <p class="summary-note">This audit reports the freshness and field coverage of the nationwide NSF snapshot matched to the current CSRankings roster.</p>
+    <p class="summary-note">This audit reports the freshness and field coverage of the nationwide NSF snapshot matched to the current CS faculty roster.</p>
     <div class="diagnostic-grid">
       <div class="diagnostic-stat"><span>Roster sync</span><strong class="${coverageComplete ? 'confidence-high' : 'confidence-review'}">${coverageComplete ? 'Complete' : 'Review'}</strong><small>${Number(coverage.failures || 0).toLocaleString()} API failures</small></div>
-      <div class="diagnostic-stat"><span>Universities checked</span><strong>${Number(coverage.institutionsChecked || 0).toLocaleString()} / ${Number(coverage.institutionsTotal || 0).toLocaleString()}</strong><small>current CSRankings institutions</small></div>
+      <div class="diagnostic-stat"><span>Universities checked</span><strong>${Number(coverage.institutionsChecked || 0).toLocaleString()} / ${Number(coverage.institutionsTotal || 0).toLocaleString()}</strong><small>current roster institutions</small></div>
       <div class="diagnostic-stat"><span>Faculty checked</span><strong>${Number(coverage.facultyChecked || 0).toLocaleString()} / ${Number(coverage.facultyTotal || 0).toLocaleString()}</strong><small>current-roster faculty</small></div>
       <div class="diagnostic-stat"><span>Matched awards</span><strong>${awards.length.toLocaleString()}</strong><small>nationwide NSF snapshot</small></div>
       <div class="diagnostic-stat"><span>Program managers</span><strong>${percentage(managerCount)}%</strong><small>${managerCount.toLocaleString()} awards populated</small></div>
       <div class="diagnostic-stat"><span>Project dates</span><strong>${percentage(datedCount)}%</strong><small>${datedCount.toLocaleString()} awards with start and end dates</small></div>
       <div class="diagnostic-stat"><span>Snapshot synchronized</span><strong>${escapeHtml(syncText)}</strong><small>schema version ${escapeHtml(String(dataset.schemaVersion || 'unknown'))}</small></div>
     </div>
-    <div class="data-caveat"><strong>Scope limitation:</strong> Matching is limited to current CSRankings faculty and may miss name variants or prior affiliations. Intended amounts are divided equally among listed PIs and co-PIs.</div>
+    <div class="data-caveat"><strong>Scope limitation:</strong> Matching is limited to current CS faculty on the roster and may miss name variants or prior affiliations. Intended amounts are divided equally among listed PIs and co-PIs.</div>
   `;
 }
 
@@ -187,20 +190,78 @@ function render(query = '') {
   updateUrl();
 }
 
-function rebuild() {
+// The autocomplete rows only change when the year range does, so they are built
+// with the index rather than on every keystroke.
+function setIndex() {
   index = buildFundingIndex(dataset, filters.startYear, filters.endYear);
+  const awardCount = count => `${count} NSF ${count === 1 ? 'award' : 'awards'}`;
+  const programs = new Map();
+  index.awards.forEach(award => {
+    if (award.program) programs.set(award.program, (programs.get(award.program) || 0) + 1);
+  });
+  suggestionItems = {
+    schools: index.schools.map(school => {
+      const shortName = getInstitutionShortName(school.name);
+      return {
+        label: school.name,
+        detail: `${awardCount(school.awards.length)} · ${formatFunding(school.attributedAmount)}`,
+        searchTerms: shortName === school.name ? '' : shortName
+      };
+    }),
+    faculty: index.faculty.map(record => ({
+      label: cleanName(record.name),
+      detail: `${record.affiliation || 'Professor'} · ${awardCount(record.awards.length)}`
+    })),
+    programs: [...programs.entries()]
+      .sort(([, a], [, b]) => b - a)
+      .map(([program, count]) => ({ label: program, detail: `NSF program · ${awardCount(count)}` }))
+  };
+}
+
+function setupSuggestions(input) {
+  return createSuggestionBox({
+    input,
+    listbox: document.getElementById('universal-suggestions'),
+    emptyText: 'No matching NSF funding record',
+    getGroups: (query, { comparing }) => {
+      if (!suggestionItems) return null;
+      const groups = [
+        ['Universities', rankSuggestions(suggestionItems.schools, query, SUGGESTION_LIMITS.schools)],
+        ['Professors', rankSuggestions(suggestionItems.faculty, query, SUGGESTION_LIMITS.faculty)]
+      ];
+      // Only universities and people can be compared, so "A vs …" drops programs.
+      if (comparing) return groups;
+      return [...groups, ['NSF programs', rankSuggestions(suggestionItems.programs, query, SUGGESTION_LIMITS.programs)]];
+    },
+    onSelect: (item, comparePrefix) => {
+      input.value = `${comparePrefix}${item.label}`;
+      render(input.value);
+    }
+  });
+}
+
+function rebuild() {
+  setIndex();
   render(document.getElementById('funding-search').value);
 }
 
 function renderExamples() {
   const examples = document.getElementById('funding-examples');
-  const faculty = index.faculty.slice(0, 3);
-  const schools = index.schools.slice(0, 2);
-  examples.innerHTML = `${schools.map(record =>
-    `<button type="button" data-query="${escapeHtml(record.name)}">${escapeHtml(record.name)}</button>`
-  ).join('')}${faculty.map(record =>
-    `<button type="button" data-query="${escapeHtml(record.name)}">${escapeHtml(record.name.replace(/\s+\d{4}$/, ''))}</button>`
-  ).join('')}`;
+  const chip = (query, label) =>
+    `<button type="button" data-query="${escapeHtml(query)}">${escapeHtml(label)}</button>`;
+  // Two best-funded universities that have a short name, so the "A vs B" chip
+  // advertising head-to-head mode stays one line — as on Search.
+  const abbreviated = index.schools
+    .map(school => ({ label: getInstitutionShortName(school.name), query: school.name }))
+    .filter(entry => entry.label !== entry.query)
+    .slice(0, 2);
+  examples.innerHTML = `${index.schools.slice(0, 2).map(record =>
+    chip(record.name, record.name)
+  ).join('')}${index.faculty.slice(0, 3).map(record =>
+    chip(record.name, record.name.replace(/\s+\d{4}$/, ''))
+  ).join('')}${abbreviated.length === 2
+    ? chip(`${abbreviated[0].query} vs ${abbreviated[1].query}`, `${abbreviated[0].label} vs ${abbreviated[1].label}`)
+    : ''}`;
 }
 
 async function init() {
@@ -208,7 +269,7 @@ async function init() {
   const response = await fetch('./nsf-awards.json');
   if (!response.ok) throw new Error(`NSF dataset returned ${response.status}`);
   dataset = await response.json();
-  index = buildFundingIndex(dataset, filters.startYear, filters.endYear);
+  setIndex();
   const input = document.getElementById('funding-search');
   input.disabled = false;
   input.placeholder = 'Search university, professor, award, or NSF program';
@@ -216,7 +277,11 @@ async function init() {
   setupDataHealth();
   renderExamples();
   render(input.value);
-  input.addEventListener('input', () => render(input.value));
+  const suggestionBox = setupSuggestions(input);
+  input.addEventListener('input', () => {
+    suggestionBox.render(input.value);
+    render(input.value);
+  });
   // Clicking a card searches for that university or professor, the way
   // clicking a Search result opens that target.
   document.querySelector('.funding-results-container')?.addEventListener('click', event => {

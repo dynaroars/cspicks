@@ -45,7 +45,7 @@ Off by default, the result lists read as plain lists of universities and people.
 
 ### Can I compare two universities or two professors?
 
-Yes, on both Search and NSF Funding: type both names separated by `vs` — for example `Carnegie Mellon University vs Univ. of Illinois at Urbana-Champaign`. Search compares publication output by research area; NSF Funding compares awards, attributed funding, and the number of matched CS faculty. Both sides must be the same kind of target.
+Yes, on both Search and NSF Funding: type both names separated by `vs` — for example `Carnegie Mellon University vs Univ. of Illinois at Urbana-Champaign`. Both search boxes autocomplete, and after you type `vs` the menu narrows to universities and professors, so you can pick the second side from the list instead of spelling it out. Search compares publication output by research area; NSF Funding compares awards, attributed funding, and the number of matched CS faculty. Both sides must be the same kind of target.
 
 ### What do the conference-set options mean?
 
