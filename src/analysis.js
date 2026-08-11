@@ -374,7 +374,7 @@ function renderCollaborationStats() {
             <div class="diagnostic-stat"><span>Top-3 concentration</span><strong>${metrics.top3Share.toFixed(0)}%</strong><small>share of adjusted count</small></div>
             <div class="diagnostic-stat"><span>Median / faculty</span><strong>${metrics.medianPerFaculty.toFixed(1)}</strong><small>adjusted publication count</small></div>
         </div>
-        <div class="data-caveat"><strong>Source limitation:</strong> CSRankings aggregate rows do not expose paper identifiers or coauthor affiliations, so CSPicks cannot reliably separate internal from cross-university collaborations. The proxy above measures coauthor intensity without inventing that split.</div>
+        <div class="data-caveat"><strong>Source limitation:</strong> The source data is aggregated per author and does not expose paper identifiers or coauthor affiliations, so CSPicks cannot reliably separate internal from cross-university collaborations. The proxy above measures coauthor intensity without inventing that split.</div>
         <h3>Highest team-size proxies</h3>
         <div class="metric-table">${leaders.map((item, index) => `<div><span>${index + 1}. ${escapeHtml(item.school.name)}</span><strong>${item.metrics.impliedTeamSize.toFixed(2)}×</strong></div>`).join('')}</div>
     `;
@@ -390,14 +390,14 @@ function renderDataHealth() {
     const parityOk = report.totalMismatches === 0 && report.rankOrderIssues === 0 && report.officialVenueMode;
 
     container.innerHTML = `
-        <h2>CSRankings compatibility · ${start}–${end}</h2>
-        <p class="summary-note">This audit checks the canonical CSRankings inputs, selected venue mode, source coverage, and ranking invariants used by CSPicks.</p>
+        <h2>Publication data health · ${start}–${end}</h2>
+        <p class="summary-note">This audit checks the canonical source inputs, selected venue mode, source coverage, and ranking invariants used by CSPicks.</p>
         <div class="diagnostic-grid">
             <div class="diagnostic-stat"><span>Parity checks</span><strong class="${parityOk ? 'confidence-high' : 'confidence-review'}">${parityOk ? 'Pass' : 'Review'}</strong><small>${report.totalMismatches + report.rankOrderIssues} inconsistencies</small></div>
             <div class="diagnostic-stat"><span>Ranked schools</span><strong>${report.rankedSchools}</strong><small>from ${report.sourceFaculty} source faculty</small></div>
             <div class="diagnostic-stat"><span>Institution metadata</span><strong>${report.institutionCoverage.toFixed(0)}%</strong><small>country or region present</small></div>
             <div class="diagnostic-stat"><span>Author profiles</span><strong>${report.profileCoverage.toFixed(0)}%</strong><small>homepage or Scholar ID present</small></div>
-            <div class="diagnostic-stat"><span>Venue rules checked</span><strong>${escapeHtml(syncText)}</strong><small>upstream CSRankings parser · ${escapeHtml(activeVenueRules.sourceVersion || 'bundled fallback')}</small></div>
+            <div class="diagnostic-stat"><span>Venue rules checked</span><strong>${escapeHtml(syncText)}</strong><small>upstream venue parser · ${escapeHtml(activeVenueRules.sourceVersion || 'bundled fallback')}</small></div>
         </div>
         <div class="data-caveat">A passing audit means CSPicks is internally compatible with the selected canonical inputs. The official site can still differ temporarily when its deployed data or defaults update before this page reloads.</div>
     `;

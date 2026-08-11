@@ -195,7 +195,7 @@ export function renderFundingFacultyCard(person, { expanded = false, collapsible
   return `<article class="card funding-card${expanded || !collapsible ? '' : ' collapsed'}" data-name="${escapeHtml(cleanName(person.name))}">
     ${header}
     <div class="card-content">
-      <div class="card-stats funding-professor-summary">${escapeHtml(person.affiliation || 'Current CSRankings affiliation')} · <strong>${person.awards.length}</strong> NSF ${person.awards.length === 1 ? 'award' : 'awards'} · <strong>${escapeHtml(formatFunding(person.attributedAmount))}</strong> intended share (<strong>${escapeHtml(formatFunding(person.totalAwardAmount))}</strong> full project value)</div>
+      <div class="card-stats funding-professor-summary">${escapeHtml(person.affiliation || 'Current affiliation')} · <strong>${person.awards.length}</strong> NSF ${person.awards.length === 1 ? 'award' : 'awards'} · <strong>${escapeHtml(formatFunding(person.attributedAmount))}</strong> intended share (<strong>${escapeHtml(formatFunding(person.totalAwardAmount))}</strong> full project value)</div>
       ${yearBars(person.awards)}
       ${awardList(person.awards, person.affiliation)}
     </div>
@@ -211,7 +211,7 @@ export function renderFundingSchoolCard(school, { expanded = false, collapsible 
     ${header}
     <div class="card-content">
       <div class="card-stats"><strong>${school.awards.length}</strong> NSF ${school.awards.length === 1 ? 'award' : 'awards'} · <strong>${escapeHtml(formatFunding(school.attributedAmount))}</strong> intended funding attributed</div>
-      <p class="funding-definition">Sum of intended-award shares for matched current CSRankings faculty; this is not the university's complete NSF portfolio.</p>
+      <p class="funding-definition">Sum of intended-award shares for matched current CS faculty; this is not the university's complete NSF portfolio.</p>
       ${yearBars(school.awards)}
     </div>
   </article>`;

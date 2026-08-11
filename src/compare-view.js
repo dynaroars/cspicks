@@ -111,7 +111,6 @@ function scoreboard(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins) {
   const rows = type === 'school'
     ? [
       { label: 'Overall rank', a: entryA.rank, b: entryB.rank, format: value => `#${value}`, lowerWins: true },
-      { label: 'CSRankings score', a: entryA.score, b: entryB.score, format: number },
       { label: 'Papers', a: Math.ceil(entryA.totalCount || 0), b: Math.ceil(entryB.totalCount || 0), format: number },
       { label: 'Adjusted count', a: entryA.totalAdjusted, b: entryB.totalAdjusted, format: number },
       { label: 'Publishing faculty', a: facultyCount(entryA), b: facultyCount(entryB), format: number },

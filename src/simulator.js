@@ -117,7 +117,7 @@ function renderFacultyList(filter = facultyFilter) {
   }
 
   const localHeading = filter
-    ? (filtered.length ? `<div class="sim-list-heading">CSRankings faculty (${filtered.length})</div>` : '')
+    ? (filtered.length ? `<div class="sim-list-heading">Matching faculty (${filtered.length})</div>` : '')
     : `<div class="sim-list-heading">Faculty at the selected university (${filtered.length})</div>`;
   listEl.innerHTML = `${localHeading}${localHtml}${dblpHtml}`;
 
@@ -196,7 +196,7 @@ function renderCandidateResults(candidates) {
 
     let dataSourceBadge = '';
     if (c.usedCSRankings) {
-      dataSourceBadge = `<span style="font-size: 0.7em; color: #059669; background: #d1fae5; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">CSRankings</span>`;
+      dataSourceBadge = `<span style="font-size: 0.7em; color: #059669; background: #d1fae5; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">Roster</span>`;
     }
 
     let sourceImpactHtml = '';
@@ -436,7 +436,7 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
         }
 
         if (!best) {
-          candidateResults.push({ name, error: 'No matching profile found in the CSRankings database or DBLP search' });
+          candidateResults.push({ name, error: 'No matching profile found in the faculty roster or DBLP search' });
           continue;
         }
 
