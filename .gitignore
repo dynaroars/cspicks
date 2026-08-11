@@ -27,6 +27,7 @@ public/data/*.csv
 remote_history.json
 debug_gmu_history.js
 .nsf-sync-cache.json
+.openalex-ror-progress.json
 
 .gemini/
 .impeccable/
