@@ -6,7 +6,7 @@ import { getInitialRegion, rememberRegion } from './shared.js';
 // This module owns their markup, state, persistence, and the affiliation data
 // that History mode needs, so pages only declare which fields they want.
 
-const CONF_SET_HELP = 'Chooses which publication venues count. Top Venues follows the primary conference set; All Venues adds the extended, next-tier venues; CORE options use CORE conference tiers.';
+const CONF_SET_HELP = 'Chooses which publication venues count. CSRankings (Default Venues) follows the primary conference set; CSRankings (All Venues) adds the extended, next-tier venues; CORE options use CORE conference tiers.';
 const HISTORY_HELP = 'When enabled, publications are credited to the institution where the author was affiliated at the time of publication, not their current institution. Use the year selectors to filter results for a specific historical period.';
 const RANKINGS_HELP = 'Numbers the result lists and shows each university\'s overall and per-area rank for the selected region, years, and conference set.';
 
@@ -20,8 +20,8 @@ const REGIONS = [
 ];
 
 const CONF_SETS = [
-  ['csrankings-default', 'Top Venues (Default)'],
-  ['csrankings', 'All Venues'],
+  ['csrankings-default', 'CSRankings (Default Venues)'],
+  ['csrankings', 'CSRankings (All Venues)'],
   ['core', 'CORE A*'],
   ['core-a', 'CORE A*/A']
 ];
