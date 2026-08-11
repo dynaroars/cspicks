@@ -117,7 +117,7 @@ test('choosing faculty from a university switches analysis to that professor', a
   await expect(page.getByRole('tab', { name: /Faculty Diversity/ })).toBeHidden();
 });
 
-test('professor cards show official CSRankings distinctions', async ({ page }) => {
+test('professor cards show official roster distinctions', async ({ page }) => {
   await page.goto('./');
   await page.locator('#main-search').fill('Hai Duong');
   const card = page.locator('#prof-results .card');
@@ -130,7 +130,7 @@ test('professor cards show official CSRankings distinctions', async ({ page }) =
   await expect(card).toContainText('ACM Fellow · 2024');
   await expect(card).toContainText('2 papers (1.0 adjusted)');
   await expect(card.getByRole('link', { name: 'ORCID' })).toHaveAttribute('href', 'https://orcid.org/0000-0001-2345-6789');
-  await expect(card).toContainText('CSRankings unit: Tech');
+  await expect(card).toContainText('Unit: Tech');
   await expect(card.locator('.year-column')).toHaveAttribute('data-tooltip', new RegExp(`${currentYear}: 2 papers \\(1\\.0 adjusted\\)`));
 });
 

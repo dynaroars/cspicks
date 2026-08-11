@@ -173,7 +173,7 @@ export function renderProfessorCard(prof, context) {
       <div class="card-content">
         ${historicalAffiliations ? `<div class="card-subtitle">${historicalAffiliations}</div>` : ''}
         <div class="card-stats"><strong>${prof.totalPapers}</strong> papers (<strong>${prof.totalAdjusted.toFixed(1)}</strong> adjusted)</div>
-        ${prof.unitNotes?.length ? `<div class="faculty-unit-notes">CSRankings unit: ${prof.unitNotes.map(escapeHtml).join(', ')}</div>` : ''}
+        ${prof.unitNotes?.length ? `<div class="faculty-unit-notes">Unit: ${prof.unitNotes.map(escapeHtml).join(', ')}</div>` : ''}
         ${renderActivityGraph(prof, context)}
         <div class="stats-list">${sortedAreas.map(([area, stats]) => {
           const paperCount = Math.ceil(stats.count);
@@ -191,7 +191,7 @@ function renderSubfieldContributions(school) {
     .sort((a, b) => b.weight - a.weight);
   const totalWeight = contributions.reduce((sum, item) => sum + item.weight, 0);
   if (!totalWeight) return '';
-  return `<div class="school-rank-attribution"><details class="attribution-details"><summary class="attribution-summary"><span>Subfield Contributions</span><span class="tooltip-trigger contribution-tooltip" tabindex="0" aria-label="About subfield contributions">ⓘ<span class="tooltip-content">Shows how each research area contributes to the CSRankings geometric-mean score using ln(adjusted count + 1).</span></span></summary><div class="attribution-content">${contributions.map(item => {
+  return `<div class="school-rank-attribution"><details class="attribution-details"><summary class="attribution-summary"><span>Subfield Contributions</span><span class="tooltip-trigger contribution-tooltip" tabindex="0" aria-label="About subfield contributions">ⓘ<span class="tooltip-content">Shows how each research area contributes to the geometric-mean ranking score using ln(adjusted count + 1).</span></span></summary><div class="attribution-content">${contributions.map(item => {
     const percentage = item.weight / totalWeight * 100;
     return `<div class="contribution-item"><div class="contribution-info"><span class="contribution-label">${escapeHtml(areaLabels[item.area] || item.area)}</span><span class="contribution-value">${item.value.toFixed(1)} adjusted (${percentage.toFixed(1)}%)</span></div><div class="contribution-bar-container"><div class="contribution-bar" style="width: ${percentage}%;"></div></div></div>`;
   }).join('')}</div></details></div>`;
