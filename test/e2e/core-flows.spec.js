@@ -411,6 +411,26 @@ test('funding compares two universities with vs', async ({ page }) => {
   await expect(comparison).toBeHidden();
 });
 
+test('funding suggestions complete both sides of a vs query', async ({ page }) => {
+  await page.goto('funding.html');
+  const listbox = page.locator('#universal-suggestions');
+  // A comparison chip advertises the mode before anything is typed.
+  await expect(page.locator('#funding-examples button', { hasText: ' vs ' })).toHaveCount(1);
+  await page.locator('#funding-search').fill('CAREER');
+  await expect(listbox).toBeVisible();
+  await expect(listbox).toContainText('NSF programs');
+
+  // Comparing only accepts universities and people, so programs drop out.
+  await page.locator('#funding-search').fill('George Mason University vs Illinois');
+  await expect(listbox).not.toContainText('NSF programs');
+  const option = listbox.locator('.universal-suggestion', { hasText: 'Univ. of Illinois' }).first();
+  await expect(option).toBeVisible();
+  await option.click();
+  await expect(page.locator('#funding-search')).toHaveValue('George Mason University vs Univ. of Illinois at Urbana-Champaign');
+  await expect(page.locator('#funding-comparison .comparison-scoreboard')).toContainText('CS faculty with awards');
+  await expect(listbox).toBeHidden();
+});
+
 test('funding stays off the search page and on discoveries', async ({ page }) => {
   await page.goto('./?q=Hai%20Duong');
   await expect(page.locator('#prof-results .card-stats')).toContainText('papers');

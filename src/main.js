@@ -7,7 +7,7 @@ import { renderProfessorCard as renderProfessorCardView, renderSchoolCard as ren
 import { clearSearchSections, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
 import { createDblpAuthorSearch } from './dblp-search-ui.js';
 import { hideComparison, initComparison, renderComparison, resolveComparison } from './comparison.js';
-import { createSuggestionBox } from './search-suggestions.js';
+import { createSearchSuggestionBox } from './search-suggestions.js';
 
 let rawData = null;
 let appData = { professors: {}, schools: {} };
@@ -198,7 +198,7 @@ function updatePriorData() {
 
 function setupSearch() {
   const mainSearch = document.getElementById('main-search');
-  const suggestionBox = createSuggestionBox({
+  const suggestionBox = createSearchSuggestionBox({
     input: mainSearch,
     listbox: document.getElementById('universal-suggestions'),
     getContext: () => ({ appData: rawData ? appData : null, confSet: filters.confSet }),
