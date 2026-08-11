@@ -1,14 +1,25 @@
 #!/usr/bin/env node
 /**
  * build-openalex-history.js
- * 
+ *
  * Extracts professor affiliation history from OpenAlex API.
  * Replaces the CSRankings Git mining approach with automated API data.
- * 
+ *
+ * OpenAlex now requires a free API key (openalex.org/settings/api) and caps
+ * free usage at $1/day (~1000 author-search requests). The full roster is
+ * larger than that, so this script is resumable: it checkpoints every
+ * attempted name to .openalex-ror-progress.json (gitignored) and each
+ * invocation only spends up to --daily-budget requests on names not yet
+ * attempted. Re-run it once a day (or on a cron) until it reports 0
+ * remaining. Every run merges freshly-fetched entries into the existing
+ * public/professor_history_openalex.json rather than replacing it, so the
+ * committed file is safe to commit/push after any partial run.
+ *
  * Usage:
- *   node scripts/build-openalex-history.js                    # Full run
- *   node scripts/build-openalex-history.js --test --limit=10  # Test with 10 professors
- * 
+ *   OPENALEX_API_KEY=... node scripts/build-openalex-history.js
+ *   OPENALEX_API_KEY=... node scripts/build-openalex-history.js --daily-budget=900
+ *   node scripts/build-openalex-history.js --test --limit=10
+ *
  * Output: public/professor_history_openalex.json
  */
 
@@ -23,22 +34,46 @@ const __dirname = path.dirname(__filename);
 const INPUT_CSV = path.join(__dirname, '../public/data/author-info.csv');
 const OUTPUT_JSON = path.join(__dirname, '../public/professor_history_openalex.json');
 const SCHOOL_ALIASES_OUTPUT = path.join(__dirname, '../public/school-aliases.json');
+const PROGRESS_FILE = path.join(__dirname, '../.openalex-ror-progress.json');
 const OPENALEX_API = 'https://api.openalex.org/authors';
 
 const DELAY_MS = 115;
 const BATCH_SIZE = 50;
+const SAVE_EVERY = 20;
+// Retry-after longer than this means the daily quota is exhausted, not a
+// transient throttle - stop the run instead of sleeping it out.
+const QUOTA_EXHAUSTED_THRESHOLD_S = 300;
 
 // Parse command line args
 const args = process.argv.slice(2);
 const isTest = args.includes('--test');
 const limitArg = args.find(a => a.startsWith('--limit='));
 const limit = limitArg ? parseInt(limitArg.split('=')[1]) : null;
+const budgetArg = args.find(a => a.startsWith('--daily-budget='));
+const dailyBudget = budgetArg ? parseInt(budgetArg.split('=')[1]) : 900;
+const apiKeyArg = args.find(a => a.startsWith('--api-key='));
+const apiKey = apiKeyArg ? apiKeyArg.split('=')[1] : process.env.OPENALEX_API_KEY;
 
-/**
- * Sleep helper for rate limiting
- */
+if (!apiKey) {
+    console.warn('WARNING: no OPENALEX_API_KEY set. Anonymous requests have a tiny one-time quota and will likely fail immediately.');
+    console.warn('Get a free key at https://openalex.org/settings/api and pass it via OPENALEX_API_KEY env var or --api-key=.\n');
+}
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function loadProgress() {
+    if (!fs.existsSync(PROGRESS_FILE)) return {};
+    try {
+        return JSON.parse(fs.readFileSync(PROGRESS_FILE, 'utf-8'));
+    } catch {
+        return {};
+    }
+}
+
+function saveProgress(progress) {
+    fs.writeFileSync(PROGRESS_FILE, JSON.stringify(progress));
 }
 
 /**
@@ -77,63 +112,67 @@ function cleanName(name) {
     return name.replace(/\s+\d{4}$/, '').trim();
 }
 
+// Thrown when the daily quota looks exhausted, to stop the run instead of
+// spinning through repeated 60s retries that will never succeed.
+class QuotaExhaustedError extends Error {}
+
 /**
  * Query OpenAlex API for author affiliations
  */
-async function fetchOpenAlexAuthor(name) {
+async function fetchOpenAlexAuthor(name, attempt = 1) {
     const cleanedName = cleanName(name);
-    const url = `${OPENALEX_API}?search=${encodeURIComponent(cleanedName)}&per_page=1`;
+    let url = `${OPENALEX_API}?search=${encodeURIComponent(cleanedName)}&per_page=1`;
+    if (apiKey) url += `&api_key=${encodeURIComponent(apiKey)}`;
 
-    try {
-        const response = await fetch(url, {
-            headers: {
-                'User-Agent': 'CSPicks/1.0 (https://github.com/dynaroars/cspicks; mailto:toazanrayyan@gmail.com)'
+    const response = await fetch(url, {
+        headers: {
+            'User-Agent': 'CSPicks/1.0 (https://github.com/dynaroars/cspicks; mailto:toazanrayyan@gmail.com)'
+        }
+    });
+
+    if (!response.ok) {
+        if (response.status === 429) {
+            const retryAfter = parseInt(response.headers.get('retry-after') || '0', 10);
+            if (retryAfter > QUOTA_EXHAUSTED_THRESHOLD_S) {
+                throw new QuotaExhaustedError(`Quota exhausted (retry-after ${retryAfter}s)`);
             }
-        });
-
-        if (!response.ok) {
-            if (response.status === 429) {
-                console.log('Rate limited, waiting 60s...');
-                await sleep(60000);
-                return fetchOpenAlexAuthor(name); // Retry
-            }
-            throw new Error(`HTTP ${response.status}`);
+            if (attempt > 3) throw new Error(`Rate limited repeatedly on "${name}"`);
+            console.log(`Rate limited, waiting ${retryAfter || 60}s...`);
+            await sleep((retryAfter || 60) * 1000);
+            return fetchOpenAlexAuthor(name, attempt + 1);
         }
+        throw new Error(`HTTP ${response.status}`);
+    }
 
-        const data = await response.json();
+    const data = await response.json();
 
-        if (!data.results || data.results.length === 0) {
-            return null;
-        }
-
-        const author = data.results[0];
-
-        // Extract affiliation history
-        if (!author.affiliations || author.affiliations.length === 0) {
-            return null;
-        }
-
-        return {
-            openalex_id: author.id?.replace('https://openalex.org/', '') || null,
-            orcid: author.orcid?.replace('https://orcid.org/', '') || null,
-            display_name: author.display_name,
-            affiliations: author.affiliations.map(aff => ({
-                institution: aff.institution?.display_name || 'Unknown',
-                institution_id: aff.institution?.id?.replace('https://openalex.org/', '') || null,
-                country: aff.institution?.country_code || null,
-                years: aff.years || []
-            }))
-        };
-
-    } catch (err) {
-        console.error(`Error fetching ${name}: ${err.message}`);
+    if (!data.results || data.results.length === 0) {
         return null;
     }
+
+    const author = data.results[0];
+
+    if (!author.affiliations || author.affiliations.length === 0) {
+        return null;
+    }
+
+    return {
+        openalex_id: author.id?.replace('https://openalex.org/', '') || null,
+        orcid: author.orcid?.replace('https://orcid.org/', '') || null,
+        display_name: author.display_name,
+        affiliations: author.affiliations.map(aff => ({
+            institution: aff.institution?.display_name || 'Unknown',
+            institution_id: aff.institution?.id?.replace('https://openalex.org/', '') || null,
+            ror: aff.institution?.ror?.replace('https://ror.org/', '') || null,
+            country: aff.institution?.country_code || null,
+            years: aff.years || []
+        }))
+    };
 }
 
 /**
  * Convert OpenAlex affiliations to our professor_history.json format
- * 
+ *
  * Input: { affiliations: [{ institution, years: [2020, 2019, 2018] }] }
  * Output: [{ start: 2018, end: 2020, school: "..." }]
  */
@@ -160,7 +199,8 @@ function convertToHistoryFormat(openAlexData) {
                 history.push({
                     start: segmentStart,
                     end: segmentEnd,
-                    school: aff.institution
+                    school: aff.institution,
+                    ror: aff.ror
                 });
                 segmentStart = sortedYears[i];
                 segmentEnd = sortedYears[i];
@@ -171,11 +211,50 @@ function convertToHistoryFormat(openAlexData) {
         history.push({
             start: segmentStart,
             end: segmentEnd,
-            school: aff.institution
+            school: aff.institution,
+            ror: aff.ror
         });
     }
 
     return history.length > 0 ? history : null;
+}
+
+/**
+ * Rebuild the committed output files from the existing committed data plus
+ * every successfully-fetched name in progress. Names not yet attempted, or
+ * that OpenAlex couldn't find, keep whatever was already committed - a run
+ * can only add ror-enriched data, never remove existing history.
+ */
+function writeMergedOutput(progress) {
+    let base = {};
+    if (fs.existsSync(OUTPUT_JSON)) {
+        base = JSON.parse(fs.readFileSync(OUTPUT_JSON, 'utf-8'));
+    }
+
+    const merged = { ...base };
+    for (const [name, openAlexData] of Object.entries(progress)) {
+        if (!openAlexData) continue; // not found on OpenAlex - keep old entry, if any
+        const history = convertToHistoryFormat(openAlexData);
+        if (history) merged[name] = history;
+    }
+
+    fs.writeFileSync(OUTPUT_JSON, JSON.stringify(merged, null, 2));
+    console.log(`Saved ${Object.keys(merged).length} professors to ${OUTPUT_JSON}`);
+
+    const schoolNames = new Set();
+    for (const history of Object.values(merged)) {
+        history.forEach(h => schoolNames.add(h.school));
+    }
+    const schoolList = Array.from(schoolNames).sort();
+
+    let aliasTemplate = {};
+    if (fs.existsSync(SCHOOL_ALIASES_OUTPUT)) {
+        aliasTemplate = JSON.parse(fs.readFileSync(SCHOOL_ALIASES_OUTPUT, 'utf-8'));
+    }
+    schoolList.forEach(s => { if (!(s in aliasTemplate)) aliasTemplate[s] = s; });
+
+    fs.writeFileSync(SCHOOL_ALIASES_OUTPUT, JSON.stringify(aliasTemplate, null, 2));
+    console.log(`Saved ${Object.keys(aliasTemplate).length} school names to ${SCHOOL_ALIASES_OUTPUT}`);
 }
 
 /**
@@ -188,65 +267,59 @@ async function main() {
         console.log('TEST MODE: Limited run\n');
     }
 
-    // Step 1: Extract professor names
     const professors = extractProfessorNames();
     let names = Array.from(professors.keys());
-
     if (limit) {
         names = names.slice(0, limit);
         console.log(`Limited to ${limit} professors for testing\n`);
     }
 
-    // Step 2: Fetch from OpenAlex
-    const result = {};
-    const schoolNames = new Set(); // Collect all OpenAlex school names
-    let found = 0;
-    let notFound = 0;
+    const progress = isTest ? {} : loadProgress();
+    const remaining = names.filter(name => !(name in progress));
+    const todaysBatch = isTest ? names : remaining.slice(0, dailyBudget);
 
-    console.log(`Processing ${names.length} professors...\n`);
+    console.log(`${remaining.length} professors not yet attempted; processing ${todaysBatch.length} this run (budget ${dailyBudget}).\n`);
 
-    for (let i = 0; i < names.length; i++) {
-        const name = names[i];
+    let found = 0, notFound = 0, quotaHit = false;
 
-        // Progress reporting
+    for (let i = 0; i < todaysBatch.length; i++) {
+        const name = todaysBatch[i];
+
         if (i > 0 && i % BATCH_SIZE === 0) {
-            console.log(`Progress: ${i}/${names.length} (${found} found, ${notFound} not found)`);
+            console.log(`Progress: ${i}/${todaysBatch.length} (${found} found, ${notFound} not found)`);
         }
 
-        const openAlexData = await fetchOpenAlexAuthor(name);
-
-        if (openAlexData) {
-            const history = convertToHistoryFormat(openAlexData);
-            if (history) {
-                result[name] = history;
-                found++;
-
-                // Collect school names for alias mapping
-                history.forEach(h => schoolNames.add(h.school));
-            } else {
-                notFound++;
+        try {
+            const openAlexData = await fetchOpenAlexAuthor(name);
+            progress[name] = openAlexData;
+            if (openAlexData) found++; else notFound++;
+        } catch (err) {
+            if (err instanceof QuotaExhaustedError) {
+                console.log(`\n${err.message} - stopping this run, resume later.`);
+                quotaHit = true;
+                break;
             }
-        } else {
+            console.error(`Error fetching ${name}: ${err.message}`);
+            progress[name] = null;
             notFound++;
         }
 
-        // Rate limiting
+        if (!isTest && (i + 1) % SAVE_EVERY === 0) saveProgress(progress);
         await sleep(DELAY_MS);
     }
 
-    console.log(`\nCompleted: ${found} found, ${notFound} not found`);
+    console.log(`\nThis run: ${found} found, ${notFound} not found${quotaHit ? ' (stopped early: quota exhausted)' : ''}`);
 
-    // Step 3: Save results
-    fs.writeFileSync(OUTPUT_JSON, JSON.stringify(result, null, 2));
-    console.log(`\nSaved to ${OUTPUT_JSON}`);
+    if (!isTest) {
+        saveProgress(progress);
+        writeMergedOutput(progress);
 
-    // Step 4: Save school names for alias mapping
-    const schoolList = Array.from(schoolNames).sort();
-    const aliasTemplate = {};
-    schoolList.forEach(s => { aliasTemplate[s] = s; }); // Identity mapping as starting point
-
-    fs.writeFileSync(SCHOOL_ALIASES_OUTPUT, JSON.stringify(aliasTemplate, null, 2));
-    console.log(`Saved ${schoolList.length} school names to ${SCHOOL_ALIASES_OUTPUT}`);
+        const stillRemaining = names.filter(name => !(name in progress)).length;
+        const daysLeft = Math.ceil(stillRemaining / dailyBudget);
+        console.log(`\n${stillRemaining} professors still not attempted (~${daysLeft} more run(s) at this budget).`);
+    } else {
+        writeMergedOutput(progress);
+    }
 
     console.log('\n=== Done ===');
 }
