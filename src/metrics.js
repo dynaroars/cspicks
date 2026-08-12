@@ -1,4 +1,4 @@
-import { filterByYears, getConferenceAreaMap, publicationMatchesConferenceSet } from './data.js';
+import { CONFERENCE_SET_IDS, assignCompetitionRanks, filterByYears, geometricMeanScore, getConferenceAreaMap, publicationMatchesConferenceSet } from './data.js';
 
 function median(values) {
   if (!values.length) return 0;
@@ -483,4 +483,217 @@ export function calculateResearcherPatterns(professor, peers = {}, options = {})
     venueConcentration, mostPersistentVenue, venueShift,
     similarPeers, highlights
   };
+}
+
+/**
+ * The settings a ranking is computed under are choices, not facts: how many
+ * years to look back, and which venues to count. Sweeping them shows how much
+ * of a rank is the department and how much is the knobs.
+ *
+ * Region is deliberately held fixed. A rank among US schools and a rank among
+ * world schools are answers to different questions, and pooling them into one
+ * range would mix a scope choice into a methodology range.
+ */
+export const RANK_STABILITY_WINDOWS = [5, 10, 20, 30];
+
+export function rankStabilityVariants(endYear) {
+  return RANK_STABILITY_WINDOWS.flatMap(span => CONFERENCE_SET_IDS.map(confSet => ({
+    key: `${span}|${confSet}`,
+    span,
+    confSet,
+    // Inclusive, matching every other year range in the app: a 5-year window
+    // ending in 2026 is 2022–2026, not 2021–2026.
+    startYear: endYear - span + 1,
+    endYear
+  })));
+}
+
+/**
+ * One sweep run. Returns every school's rank under this variant, so a single
+ * pass over the data serves every school rather than one.
+ */
+export function collectVariantRanks(rawData, variant, { region, historyMap, aliasMap }) {
+  const data = filterByYears(rawData, variant.startYear, variant.endYear, region, historyMap, aliasMap, variant.confSet);
+  const ranks = {};
+  let ranked = 0;
+  Object.values(data.schools).forEach(school => {
+    if (!school.name || !Number.isFinite(school.rank)) return;
+    ranks[school.name] = school.rank;
+    ranked++;
+  });
+  return { key: variant.key, variant, ranks, ranked };
+}
+
+/**
+ * Collapse the sweep into one school's rank envelope. `samples` are the
+ * `collectVariantRanks` results; variants where the school never ranks are
+ * reported rather than silently dropped.
+ */
+export function summarizeRankStability(samples, schoolName) {
+  const rows = samples.map(sample => ({
+    span: sample.variant.span,
+    confSet: sample.variant.confSet,
+    rank: sample.ranks[schoolName] ?? null,
+    of: sample.ranked
+  }));
+  const ranked = rows.filter(row => Number.isFinite(row.rank));
+  if (!ranked.length) return null;
+
+  const values = ranked.map(row => row.rank);
+  const best = Math.min(...values);
+  const worst = Math.max(...values);
+  return {
+    rows,
+    best,
+    worst,
+    spread: worst - best,
+    // A rank is an integer position: an even sample count would otherwise
+    // report a half-place ("#12.5"), which is not a rank anyone can occupy.
+    median: Math.round(median(values)),
+    settings: rows.length,
+    unranked: rows.length - ranked.length,
+    // A rank that barely moves is a property of the department; one that swings
+    // across tens of places is mostly an artifact of the settings.
+    stable: worst - best <= Math.max(3, Math.round(best * 0.25))
+  };
+}
+
+const formatAdjusted = value => Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 1 });
+
+/**
+ * Decide the one line a reader should be able to stop at. "Leads in N areas"
+ * measures breadth; the headline measure — rank for schools, adjusted output
+ * for researchers — measures size. The two can disagree, and saying so is the
+ * most useful thing on the page: it is exactly the depth-versus-breadth
+ * tradeoff a single ordered list hides.
+ *
+ * Returns the decision only, so the branches can be tested without markup.
+ */
+export function describeVerdict(type, entryA, entryB, aWins, bWins) {
+  const headline = type === 'school'
+    // Rank is the headline for a school, and lower wins.
+    ? {
+      leader: entryA.rank === entryB.rank ? null : (entryA.rank < entryB.rank ? 'a' : 'b'),
+      phrase: `#${entryA.rank} vs #${entryB.rank}`,
+      verb: 'ranks higher'
+    }
+    : (() => {
+      // Compare at the precision the sentence quotes, or a 12.44-vs-12.35 pair
+      // reads as "12.4 vs 12.4 adjusted" while naming a leader.
+      const shownA = Math.round(Number(entryA.totalAdjusted || 0) * 10);
+      const shownB = Math.round(Number(entryB.totalAdjusted || 0) * 10);
+      return {
+        leader: shownA === shownB ? null : (shownA > shownB ? 'a' : 'b'),
+        phrase: `${formatAdjusted(entryA.totalAdjusted)} vs ${formatAdjusted(entryB.totalAdjusted)} adjusted`,
+        verb: 'has more output'
+      };
+    })();
+  const areaLeader = aWins === bWins ? null : (aWins > bWins ? 'a' : 'b');
+  const kind = !headline.leader && !areaLeader ? 'even'
+    : !headline.leader ? 'breadth-only'
+      : !areaLeader || headline.leader === areaLeader ? 'agree'
+        : 'split';
+  return { ...headline, areaLeader, kind };
+}
+
+/**
+ * Adjusted output per publishing faculty member.
+ *
+ * The geometric mean of Eq. (1) sums over areas, so it rewards a department for
+ * being large as well as for being productive. Dividing by headcount asks a
+ * different question — how much does the average member of this department
+ * publish — and surfaces small departments that volume-weighted ranking buries.
+ *
+ * Departments below `minFaculty` are excluded rather than ranked: with two or
+ * three people the ratio is dominated by one person and means little.
+ */
+export function calculatePerCapita(filteredData, { minFaculty = 5 } = {}) {
+  const rows = Object.values(filteredData?.schools || {})
+    .map(school => {
+      const facultyCount = Object.keys(school.facultyAdjustedCounts || {}).length;
+      return {
+        name: school.name,
+        school,
+        facultyCount,
+        overallRank: school.rank,
+        perCapita: facultyCount ? (school.totalAdjusted || 0) / facultyCount : 0
+      };
+    })
+    .filter(row => row.name && row.facultyCount >= minFaculty);
+  return assignCompetitionRanks(rows, row => row.perCapita);
+}
+
+/**
+ * How many departures it would take to move a department out of the top N.
+ *
+ * Removing faculty changes only this department's score, so every other
+ * department's score is fixed and a hypothetical rank is a lookup. At each step
+ * we remove whichever remaining member costs the department the most score,
+ * which is not simply the most prolific one: because the score is a geometric
+ * mean over areas, losing the only person in a thin area can cost more than
+ * losing a bigger producer in a crowded one.
+ *
+ * This is a structural measure of concentration, not a claim about any
+ * individual's worth, and it is reported per department rather than per person.
+ */
+export function calculateFragility(filteredData, schoolName, {
+  thresholds = [10, 25, 50],
+  maxRemovals = 15,
+  // Keep going past the last threshold so the trajectory shows a curve rather
+  // than a single point for departments already outside every band.
+  minSteps = 5
+} = {}) {
+  const school = filteredData?.schools?.[schoolName];
+  if (!school || !Number.isFinite(school.rank)) return null;
+
+  // Per-person, per-area credit, accumulated by the data pipeline.
+  const contributions = {};
+  Object.entries(school.areas || {}).forEach(([area, data]) => {
+    Object.entries(data.facultyStats || {}).forEach(([name, stats]) => {
+      if (!contributions[name]) contributions[name] = {};
+      contributions[name][area] = (contributions[name][area] || 0) + (stats.adjusted || 0);
+    });
+  });
+  const names = Object.keys(contributions);
+  if (!names.length) return null;
+
+  const otherScores = Object.values(filteredData.schools)
+    .filter(other => other.name !== schoolName && Number.isFinite(other.score))
+    .map(other => other.score);
+  const rankOf = score => 1 + otherScores.filter(other => other > score).length;
+
+  let areaCounts = { ...school.areaAdjustedCounts };
+  const remaining = new Set(names);
+  const steps = [];
+  const exits = {};
+  // A department already outside a threshold needs no departures to leave it.
+  thresholds.forEach(threshold => { if (school.rank > threshold) exits[threshold] = 0; });
+
+  for (let removed = 1; removed <= maxRemovals && remaining.size; removed++) {
+    let best = null;
+    for (const name of remaining) {
+      const trial = { ...areaCounts };
+      Object.entries(contributions[name]).forEach(([area, adjusted]) => {
+        trial[area] = Math.max(0, (trial[area] || 0) - adjusted);
+      });
+      // Compare on the unrounded mean: in a large department every single
+      // departure moves the reported score by less than the 0.1 it rounds to,
+      // so choosing on the rounded value would tie every candidate and remove
+      // an arbitrary person instead of the costliest one.
+      const exact = geometricMeanScore(trial);
+      if (!best || exact < best.exact) best = { name, exact, counts: trial };
+    }
+    areaCounts = best.counts;
+    remaining.delete(best.name);
+    // Ranking is against other departments' rounded scores, so report rounded.
+    const score = Math.round(10 * best.exact) / 10;
+    const rank = rankOf(score);
+    steps.push({ removed: best.name, score, rank });
+    thresholds.forEach(threshold => {
+      if (!(threshold in exits) && rank > threshold) exits[threshold] = removed;
+    });
+    if (thresholds.every(threshold => threshold in exits) && steps.length >= minSteps) break;
+  }
+
+  return { rank: school.rank, score: school.score, facultyCount: names.length, steps, exits, thresholds };
 }

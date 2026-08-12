@@ -1,6 +1,6 @@
 import { drawChart } from './charts.js';
 import { areaLabels, escapeHtml } from './shared.js';
-import { explainRankGap } from './metrics.js';
+import { describeVerdict, explainRankGap } from './metrics.js';
 
 export const compareColors = {
     a: { fill: 'rgba(37, 99, 235, 0.7)', line: 'rgba(37, 99, 235, 1)' },
@@ -103,6 +103,30 @@ export function renderScoreboard(safeNameA, safeNameB, rows) {
     </div>`;
 }
 
+const sideSpan = (side, name) => `<span class="comparison-side-${side}">${name}</span>`;
+
+function verdict(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins, areaCount) {
+  const { leader, phrase, verb, areaLeader, kind } = describeVerdict(type, entryA, entryB, aWins, bWins);
+  const named = side => sideSpan(side, side === 'a' ? safeNameA : safeNameB);
+  const areaPhrase = side => `${side === 'a' ? aWins : bWins} of ${areaCount} areas`;
+
+  let line;
+  if (kind === 'even') {
+    line = `${named('a')} and ${named('b')} are evenly matched — ${phrase}, and neither leads in more areas.`;
+  } else if (kind === 'breadth-only') {
+    line = `Level on the headline measure (${phrase}), but ${named(areaLeader)} leads in more areas (${areaPhrase(areaLeader)}).`;
+  } else if (kind === 'agree') {
+    const also = areaLeader
+      ? ` and leads in ${areaPhrase(leader)}`
+      : ', though the two lead in an equal number of areas';
+    line = `${named(leader)} ${verb} — ${phrase}${also}.`;
+  } else {
+    line = `${named(leader)} ${verb} (${phrase}), but ${named(areaLeader)} is broader, leading in ${areaPhrase(areaLeader)}.`;
+  }
+
+  return `<div class="summary-card comparison-verdict"><p>${line}</p></div>`;
+}
+
 // "Leads in N areas" says who is broader, not who is bigger, so the summary
 // opens with the totals that decide the ranking.
 function scoreboard(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins) {
@@ -159,16 +183,11 @@ export function renderComparisonSummary(container, { type, nameA, nameB, entryA,
     insightsA.sort((a, b) => parseFloat(b.margin) - parseFloat(a.margin));
     insightsB.sort((a, b) => parseFloat(b.margin) - parseFloat(a.margin));
 
-    let html = scoreboard(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins) + `
-        <div class="summary-card comparison-overall">
-            <h4>Overall Comparison</h4>
-            <div class="leader">
-                <span class="comparison-side-a">${safeNameA}</span> leads in <strong>${aWins}</strong> areas
-                &nbsp;|&nbsp;
-                <span class="comparison-side-b">${safeNameB}</span> leads in <strong>${bWins}</strong> areas
-            </div>
-        </div>
-    `;
+    // Verdict first, then the numbers behind it. The old "Overall Comparison"
+    // card is gone: it restated the scoreboard's "Areas led" row verbatim,
+    // directly beneath it.
+    let html = verdict(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins, areaList.length)
+        + scoreboard(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins);
 
     if (type === 'school') {
         const gapItems = explainRankGap(entryA, entryB).slice(0, 6);
@@ -188,7 +207,7 @@ export function renderComparisonSummary(container, { type, nameA, nameB, entryA,
 
     const leadColumn = (side, name, insights) => `
         <div class="comparison-lead-column comparison-side-${side}">
-            <h4>${name} Leads</h4>
+            <h4>${name} leads</h4>
             ${insights.map(insight => `
                 <div class="summary-card comparison-lead-card">
                     <h4>${escapeHtml(insight.area)}</h4>
