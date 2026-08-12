@@ -1,0 +1,318 @@
+{
+  "dataset": {
+    "professors": 20822,
+    "schools": 702,
+    "publicationRecords": 296267,
+    "minYear": 1970,
+    "maxYear": 2026,
+    "withHomepage": 20822,
+    "withScholar": 18256
+  },
+  "sweepMs": 1703,
+  "stability": {
+    "region": "us",
+    "settings": 16,
+    "schools": 190,
+    "spreadMedian": 17,
+    "spreadQ1": 11,
+    "spreadQ3": 25,
+    "spreadMax": 46,
+    "shareSpreadOver10": 77.36842105263158,
+    "shareSpreadOver25": 23.157894736842106,
+    "top10": {
+      "n": 10,
+      "medianSpread": 5
+    },
+    "top25": {
+      "n": 26,
+      "medianSpread": 6
+    },
+    "top50": {
+      "n": 51,
+      "medianSpread": 10
+    },
+    "alwaysTop10": 5,
+    "examples": [
+      {
+        "name": "Carnegie Mellon University",
+        "baseline": 1,
+        "best": 1,
+        "worst": 1,
+        "spread": 0,
+        "median": 1
+      },
+      {
+        "name": "George Mason University",
+        "baseline": 32,
+        "best": 23,
+        "worst": 50,
+        "spread": 27,
+        "median": 42
+      },
+      {
+        "name": "Univ. of Illinois at Urbana-Champaign",
+        "baseline": 2,
+        "best": 2,
+        "worst": 2,
+        "spread": 0,
+        "median": 2
+      },
+      {
+        "name": "Northeastern University",
+        "baseline": 11,
+        "best": 8,
+        "worst": 18,
+        "spread": 10,
+        "median": 11
+      }
+    ]
+  },
+  "venueSensitivity": [
+    {
+      "a": "csrankings-default",
+      "b": "csrankings",
+      "shared": 190,
+      "tau": 0.9822073978757957,
+      "medianAbsRankChange": 2,
+      "maxAbsRankChange": 18,
+      "top10Overlap": 9,
+      "top10Jaccard": 0.8181818181818182
+    },
+    {
+      "a": "csrankings-default",
+      "b": "core",
+      "shared": 187,
+      "tau": 0.9525544793770463,
+      "medianAbsRankChange": 5,
+      "maxAbsRankChange": 20,
+      "top10Overlap": 9,
+      "top10Jaccard": 0.75
+    },
+    {
+      "a": "csrankings-default",
+      "b": "core-a",
+      "shared": 189,
+      "tau": 0.9731528240321161,
+      "medianAbsRankChange": 2,
+      "maxAbsRankChange": 20,
+      "top10Overlap": 9,
+      "top10Jaccard": 0.8181818181818182
+    },
+    {
+      "a": "csrankings",
+      "b": "core",
+      "shared": 187,
+      "tau": 0.9523397585834396,
+      "medianAbsRankChange": 5,
+      "maxAbsRankChange": 19,
+      "top10Overlap": 8,
+      "top10Jaccard": 0.6153846153846154
+    },
+    {
+      "a": "csrankings",
+      "b": "core-a",
+      "shared": 189,
+      "tau": 0.9725696783573538,
+      "medianAbsRankChange": 3,
+      "maxAbsRankChange": 15,
+      "top10Overlap": 10,
+      "top10Jaccard": 1
+    },
+    {
+      "a": "core",
+      "b": "core-a",
+      "shared": 187,
+      "tau": 0.960947315858716,
+      "medianAbsRankChange": 4,
+      "maxAbsRankChange": 15,
+      "top10Overlap": 8,
+      "top10Jaccard": 0.6153846153846154
+    }
+  ],
+  "concentration": {
+    "schools": 166,
+    "medianTop3Share": 36.66283834730481,
+    "medianTop1Share": 15.158685107027164,
+    "shareTop3Over50": 31.92771084337349,
+    "top25MedianTop3": 15.50533437127534,
+    "tailMedianTop3": 60.29523621036738,
+    "medianFaculty": 24
+  },
+  "perCapita": {
+    "schools": 166,
+    "minFaculty": 5,
+    "tau": 0.7160087083503949,
+    "medianAbsRankChange": 13,
+    "maxAbsRankChange": 71,
+    "csTop10RetainedInPcTop10": 6,
+    "csTop10Size": 10,
+    "top10": [
+      {
+        "name": "Stanford University",
+        "perCapita": 11.65527046229514,
+        "faculty": 61,
+        "overallRank": 10,
+        "pcRank": 1
+      },
+      {
+        "name": "Univ. of California - Berkeley",
+        "perCapita": 8.324295931764729,
+        "faculty": 85,
+        "overallRank": 7,
+        "pcRank": 2
+      },
+      {
+        "name": "Univ. of California - Los Angeles",
+        "perCapita": 7.549650219999989,
+        "faculty": 50,
+        "overallRank": 20,
+        "pcRank": 3
+      },
+      {
+        "name": "Massachusetts Inst. of Technology",
+        "perCapita": 7.496830971153903,
+        "faculty": 104,
+        "overallRank": 5,
+        "pcRank": 4
+      },
+      {
+        "name": "University of Texas at Austin",
+        "perCapita": 7.276157449999971,
+        "faculty": 60,
+        "overallRank": 14,
+        "pcRank": 5
+      },
+      {
+        "name": "University of Washington",
+        "perCapita": 7.035621849999993,
+        "faculty": 80,
+        "overallRank": 6,
+        "pcRank": 6
+      },
+      {
+        "name": "Carnegie Mellon University",
+        "perCapita": 6.587528038251458,
+        "faculty": 183,
+        "overallRank": 1,
+        "pcRank": 7
+      },
+      {
+        "name": "University of Pennsylvania",
+        "perCapita": 6.311185685714258,
+        "faculty": 70,
+        "overallRank": 18,
+        "pcRank": 8
+      },
+      {
+        "name": "Harvard University",
+        "perCapita": 6.218824421052623,
+        "faculty": 38,
+        "overallRank": 39,
+        "pcRank": 9
+      },
+      {
+        "name": "Univ. of Illinois at Urbana-Champaign",
+        "perCapita": 6.15797911811029,
+        "faculty": 127,
+        "overallRank": 2,
+        "pcRank": 10
+      }
+    ],
+    "biggestGains": [
+      {
+        "name": "TTI Chicago",
+        "overallRank": 87,
+        "pcRank": 16,
+        "faculty": 15
+      },
+      {
+        "name": "California Inst. of Technology",
+        "overallRank": 80,
+        "pcRank": 20,
+        "faculty": 27
+      },
+      {
+        "name": "Univ. of California - Merced",
+        "overallRank": 73,
+        "pcRank": 18,
+        "faculty": 18
+      },
+      {
+        "name": "University of New Hampshire",
+        "overallRank": 110,
+        "pcRank": 60,
+        "faculty": 8
+      },
+      {
+        "name": "University of New Mexico",
+        "overallRank": 127,
+        "pcRank": 79,
+        "faculty": 8
+      }
+    ]
+  },
+  "fragility": {
+    "schools": 51,
+    "resolved": 48,
+    "unresolved": 3,
+    "medianDepartures": 3,
+    "oneDeparture": 12,
+    "twoOrFewer": 22,
+    "byBand": {
+      "10": {
+        "n": 8,
+        "median": 3.5
+      },
+      "25": {
+        "n": 15,
+        "median": 5
+      },
+      "50": {
+        "n": 25,
+        "median": 2
+      }
+    },
+    "singleDepartureMedianTop3": 22.12099774657417,
+    "resilientMedianTop3": 15.374103901812925,
+    "examples": [
+      {
+        "name": "Rice University",
+        "rank": 43,
+        "band": 50,
+        "faculty": 39,
+        "departures": 1,
+        "top3Share": 26.563767707637105
+      },
+      {
+        "name": "Carnegie Mellon University",
+        "rank": 1,
+        "band": 10,
+        "faculty": 183,
+        "top3Share": 10.644161951705058
+      },
+      {
+        "name": "George Mason University",
+        "rank": 32,
+        "band": 50,
+        "faculty": 54,
+        "departures": 3,
+        "top3Share": 17.33110087394128
+      },
+      {
+        "name": "Massachusetts Inst. of Technology",
+        "rank": 5,
+        "band": 10,
+        "faculty": 104,
+        "departures": 5,
+        "top3Share": 12.306064641639042
+      },
+      {
+        "name": "Northeastern University",
+        "rank": 11,
+        "band": 25,
+        "faculty": 115,
+        "top3Share": 14.506195590501308
+      }
+    ]
+  }
+}
