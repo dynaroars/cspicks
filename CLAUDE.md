@@ -12,7 +12,7 @@ JSON files in `public/`, then processed in the browser.
 ## Commands
 
 ```bash
-npm run dev       # vite dev server at http://localhost:5173/cspicks/
+npm run dev       # vite dev server at http://localhost:5173/
 npm test          # run the Node.js unit tests
 npm run build      # production build to dist/ (multi-page: index, simulator, discoveries, funding)
 npm run preview    # preview the production build
