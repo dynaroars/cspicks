@@ -1203,26 +1203,6 @@ button.card-header {
   display: none;
 }
 
-.integrated-analysis-header {
-  display: flex;
-  align-items: end;
-  justify-content: flex-start;
-  gap: 1.5rem;
-  margin-bottom: 1.25rem;
-}
-
-.integrated-analysis-header h2,
-.integrated-analysis-header p {
-  margin: 0;
-}
-
-.integrated-analysis-header > p {
-  max-width: none;
-  color: var(--text-secondary);
-  font-size: var(--text-sm);
-  text-align: left;
-}
-
 .integrated-analysis .eyebrow {
   margin-bottom: 0.25rem;
   color: var(--text-secondary);
@@ -1271,6 +1251,12 @@ button.card-header {
   width: 100%;
 }
 
+/* Researcher profiles show the Activity stat cards only; the line chart is
+   school-only (analysis.js skips drawing it for researcher targets). */
+.researcher-analysis #school-trends-view .chart-container {
+  display: none;
+}
+
 .analysis-tab-info {
   position: relative;
   display: inline-flex;
@@ -1300,7 +1286,6 @@ button.card-header {
 
 /* One column for the whole panel: every tab, and both target types, line up.
    880px matches the search box above, so the page reads as one column. */
-.integrated-analysis-header,
 .analysis-nav-tabs,
 .integrated-analysis .view-section > *,
 #researcher-highlights > * {
@@ -1415,14 +1400,9 @@ button.card-header {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .integrated-analysis-header,
   .analysis-area-layout {
     align-items: stretch;
     flex-direction: column;
-  }
-
-  .integrated-analysis-header > p {
-    text-align: left;
   }
 
   .analysis-area-options {
