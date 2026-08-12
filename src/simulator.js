@@ -3,7 +3,12 @@ import { createFilterBar } from './filters.js';
 import { areaLabels, cleanName, escapeHtml } from './shared.js';
 import { searchAuthor, fetchAuthorStats, parseDblpProfileUrl } from './dblp.js';
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from './simulation.js';
+import { calculatePerCapita } from './metrics.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
+import { initTooltipPositioning } from './tooltip-position.js';
+import { SITE_NAME, updatePageMeta } from './seo.js';
+import { mountShareButton } from './share.js';
+import { trackShare, trackView } from './analytics.js';
 import './styles/simulator.css';
 
 let rawData = null;
@@ -165,6 +170,14 @@ function searchFaculty(filter) {
   }, 350);
 }
 
+// Under Per capita, a department can sit on either side of the 5-faculty
+// minimum before or after the hypothetical change, so either rank can be
+// unavailable rather than a number — shown plainly instead of guessed at.
+function rankMoveLabel(before, after, deltaText) {
+  const label = rank => rank == null ? 'not ranked' : `#${rank}`;
+  return `${label(before)} → ${label(after)} (${deltaText})`;
+}
+
 function renderCandidateResults(candidates) {
   const medals = ['🥇', '🥈', '🥉'];
 
@@ -184,8 +197,8 @@ function renderCandidateResults(candidates) {
     }
 
     const medal = i < 3 ? medals[i] : `#${i + 1}`;
-    const deltaClass = c.rankDelta > 0 ? 'positive' : (c.rankDelta < 0 ? 'negative' : 'neutral');
-    const deltaText = c.rankDelta > 0 ? `+${c.rankDelta}` : (c.rankDelta < 0 ? `${c.rankDelta}` : '±0');
+    const deltaClass = c.rankDelta == null ? 'neutral' : c.rankDelta > 0 ? 'positive' : (c.rankDelta < 0 ? 'negative' : 'neutral');
+    const deltaText = c.rankDelta == null ? 'n/a' : c.rankDelta > 0 ? `+${c.rankDelta}` : (c.rankDelta < 0 ? `${c.rankDelta}` : '±0');
 
     let actionLabel = '';
     if (c.isRemoval) {
@@ -296,7 +309,7 @@ function renderCandidateResults(candidates) {
             ${areaPillsHtml}
           </div>
           <div class="candidate-impact">
-            <div class="candidate-rank-delta ${deltaClass}">#${c.currentRank} → #${c.currentRank - c.rankDelta} (${deltaText})</div>
+            <div class="candidate-rank-delta ${deltaClass}">${rankMoveLabel(c.currentRank, c.newRank, deltaText)}</div>
             ${sourceImpactHtml}
           </div>
         </div>
@@ -452,6 +465,10 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
 
       let sourceSchool = null;
       let isRemovalMode = false;
+      // The roster spelling being removed (target school if isRemovalMode, or
+      // sourceSchool on a transfer) — needed under Per capita so the
+      // hypothetical faculty count drops by exactly this one entry.
+      let matchedFacultyName = null;
 
       // Get all name variants to check (includes DBLP aliases)
       const namesToCheck = [displayName];
@@ -470,6 +487,7 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
         for (const f of targetFaculty) {
           if (fuzzyMatch(f, nameVariant)) {
             isRemovalMode = true;
+            matchedFacultyName = f;
             break outerRemoval;
           }
         }
@@ -487,6 +505,7 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
             for (const f of sFaculty) {
               if (fuzzyMatch(f, nameVariant)) {
                 sourceSchool = s;
+                matchedFacultyName = f;
                 break outerSource;
               }
             }
@@ -496,16 +515,16 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
 
       const ops = [];
       if (isRemovalMode) {
-        ops.push({ school: selectedUniv, stats, isRemoval: true });
+        ops.push({ school: selectedUniv, stats, isRemoval: true, facultyKey: matchedFacultyName });
       } else {
-        ops.push({ school: selectedUniv, stats, isRemoval: false });
+        ops.push({ school: selectedUniv, stats, isRemoval: false, facultyKey: displayName });
       }
 
       if (sourceSchool && !isRemovalMode) {
-        ops.push({ school: sourceSchool, stats, isRemoval: true });
+        ops.push({ school: sourceSchool, stats, isRemoval: true, facultyKey: matchedFacultyName });
       }
-      const impactMap = calculateRankImpact(appData.schools, ops);
-      const targetImpact = impactMap.get(selectedUniv.name) || { overall: 0, areas: {} };
+      const impactMap = calculateRankImpact(appData.schools, ops, { perCapita: filters.perCapita });
+      const targetImpact = impactMap.get(selectedUniv.name) || { overall: 0, areas: {}, rankBefore: selectedUniv.rank, rankAfter: selectedUniv.rank };
       const rankDelta = targetImpact.overall;
       const areaDeltas = targetImpact.areas;
       const sourceImpactEntry = sourceSchool ? impactMap.get(sourceSchool.name) : null;
@@ -515,7 +534,8 @@ async function performCandidatesAnalysis(selectedUniv, uniqueNames) {
         name: displayName,
         stats,
         rankDelta,
-        currentRank: selectedUniv.rank,
+        currentRank: targetImpact.rankBefore,
+        newRank: targetImpact.rankAfter,
         areaDeltas,
         isRemoval: isRemovalMode,
         usedCSRankings: usedCSRankings,
@@ -553,6 +573,7 @@ function resetSimulation() {
   document.getElementById('sim-candidates-results').innerHTML = '';
   document.getElementById('sim-faculty-list').innerHTML = '';
   document.getElementById('sim-faculty-search').value = '';
+  if (filters) updateSimulatorUrl();
 }
 
 function resetCandidates() {
@@ -564,10 +585,25 @@ function resetCandidates() {
   document.getElementById('sim-candidates-results').innerHTML = '';
   document.getElementById('sim-faculty-search').value = '';
   populateFacultyList(selectedUniv);
+  updateSimulatorUrl();
   document.getElementById('sim-faculty-search').focus();
 }
 
 let selectedUniv = null;
+// Recomputed whenever appData changes; keyed by school name, same rule as the
+// Per capita toggle on Search and Discoveries (calculatePerCapita).
+let perCapitaRanks = new Map();
+
+function refreshPerCapitaRanks() {
+  perCapitaRanks = new Map(calculatePerCapita(appData).map(row => [row.name, row.rank]));
+}
+
+// The rank shown next to a school name, in whichever mode Per capita is set to.
+function currentRankLabel(school) {
+  if (!filters.perCapita) return `#${school.rank}`;
+  const rank = perCapitaRanks.get(school.name);
+  return rank ? `#${rank}` : 'not ranked — fewer than 5 faculty';
+}
 
 function setupSimulator() {
   const univSearch = document.getElementById('sim-univ-search');
@@ -606,17 +642,18 @@ function setupSimulator() {
 
     container.innerHTML = results.map(school => `
       <button type="button" class="sim-item" data-name="${escapeHtml(school.name)}">
-        <strong>${escapeHtml(school.name)}</strong> <small>#${school.rank}</small>
+        <strong>${escapeHtml(school.name)}</strong> <small>${escapeHtml(currentRankLabel(school))}</small>
       </button>
     `).join('');
 
     container.querySelectorAll('.sim-item').forEach(item => {
       item.addEventListener('click', () => {
         selectedUniv = appData.schools[item.dataset.name];
-        document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name} (#${selectedUniv.rank})`;
+        document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name} (${currentRankLabel(selectedUniv)})`;
         document.getElementById('step-univ-first').classList.add('hidden');
         document.getElementById('step-candidates').classList.remove('hidden');
         populateFacultyList(selectedUniv);
+        updateSimulatorUrl();
         candidatesInput.focus();
       });
     });
@@ -636,52 +673,100 @@ function setupSimulator() {
     }
   });
 
-  analyzeBtn.addEventListener('click', async () => {
-    if (!selectedUniv) return;
-    const names = parseCandidateNames(candidatesInput.value);
-    if (names.length === 0) return;
+  analyzeBtn.addEventListener('click', () => runAnalysis());
+}
 
-    document.getElementById('step-candidates').classList.add('hidden');
-    document.getElementById('step-results').classList.remove('hidden');
-    document.getElementById('selected-univ-display-results').textContent = `Target: ${selectedUniv.name} (#${selectedUniv.rank})`;
+async function runAnalysis() {
+  const candidatesInput = document.getElementById('sim-candidates-input');
+  if (!selectedUniv) return;
+  const names = parseCandidateNames(candidatesInput.value);
+  if (names.length === 0) return;
 
-    const loading = document.getElementById('sim-loading');
-    const resultsContainer = document.getElementById('sim-candidates-results');
-    loading.classList.remove('hidden');
-    resultsContainer.innerHTML = '';
+  document.getElementById('step-candidates').classList.add('hidden');
+  document.getElementById('step-results').classList.remove('hidden');
+  document.getElementById('selected-univ-display-results').textContent = `Target: ${selectedUniv.name} (${currentRankLabel(selectedUniv)})`;
+  updateSimulatorUrl();
 
-    const results = await performCandidatesAnalysis(selectedUniv, names);
-    loading.classList.add('hidden');
-    resultsContainer.innerHTML = renderCandidateResults(results);
-    resultsContainer.querySelectorAll('.papers-toggle').forEach(button => {
-      button.addEventListener('click', () => {
-        const list = button.nextElementSibling;
-        list.classList.toggle('visible');
-        button.textContent = list.classList.contains('visible') ? '▼ Hide Papers' : '▶ Show Papers';
-      });
+  const loading = document.getElementById('sim-loading');
+  const resultsContainer = document.getElementById('sim-candidates-results');
+  loading.classList.remove('hidden');
+  resultsContainer.innerHTML = '';
+
+  const results = await performCandidatesAnalysis(selectedUniv, names);
+  loading.classList.add('hidden');
+  resultsContainer.innerHTML = renderCandidateResults(results);
+  resultsContainer.querySelectorAll('.papers-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const list = button.nextElementSibling;
+      list.classList.toggle('visible');
+      button.textContent = list.classList.contains('visible') ? '▼ Hide Papers' : '▶ Show Papers';
     });
   });
+}
+
+// A shareable link for the current setup: filters, the selected university,
+// and whatever candidate names/DBLP links are in the box - not a URL per
+// computed result (that would mean re-resolving DBLP on every page load),
+// but enough that opening the link reproduces the same inputs one click away.
+function updateSimulatorUrl() {
+  const params = filters.toParams();
+  if (selectedUniv) params.set('univ', selectedUniv.name);
+  const candidatesInput = document.getElementById('sim-candidates-input');
+  const candidates = candidatesInput?.value.trim();
+  if (candidates) params.set('candidates', candidates);
+  window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
+  updatePageMeta({
+    title: selectedUniv ? `${selectedUniv.name} ranking simulation - ${SITE_NAME}` : `${SITE_NAME} - Ranking Simulator`,
+    description: selectedUniv
+      ? `Model how adding, removing, or transferring faculty would change ${selectedUniv.name}'s ranking, overall and by research area.`
+      : undefined
+  });
+  trackView(selectedUniv ? 'school' : 'default', 'simulator');
 }
 
 function setupFilters() {
   filters = createFilterBar('#filter-bar', {
     label: 'Simulator filters',
-    fields: ['region', 'years', 'confSet'],
+    fields: ['region', 'years', 'confSet', 'percapita'],
     years: { min: 2000, max: DEFAULT_END_YEAR },
     className: 'simulator-filters',
     onChange: () => {
       appData = filters.apply(rawData);
+      refreshPerCapitaRanks();
       resetSimulation();
     }
   });
 }
 
+// Reproduces a shared setup: the university from ?univ= (if it still exists
+// under these filters) and, if given, the candidate names/DBLP links from
+// ?candidates= - left for the visitor to click Analyze on, rather than
+// auto-run, since that would re-query DBLP for every open of the link.
+function restoreFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const univName = params.get('univ');
+  const school = univName && appData.schools[univName];
+  if (!school) return;
+  selectedUniv = school;
+  document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name} (${currentRankLabel(selectedUniv)})`;
+  document.getElementById('step-univ-first').classList.add('hidden');
+  document.getElementById('step-candidates').classList.remove('hidden');
+  populateFacultyList(selectedUniv);
+  const candidates = params.get('candidates');
+  if (candidates) document.getElementById('sim-candidates-input').value = candidates;
+}
+
 async function init() {
+  initTooltipPositioning();
+  const shareButton = mountShareButton('#page-share-mount', { getUrl: () => window.location.href, label: '', className: 'icon-link' });
+  shareButton?.addEventListener('click', () => trackShare('simulator'), { capture: true });
   try {
     [rawData] = await Promise.all([loadData(), syncCsrankingsRules()]);
     setupFilters();
     appData = filters.apply(rawData);
+    refreshPerCapitaRanks();
     setupSimulator();
+    restoreFromUrl();
     document.getElementById('sim-loading-page').classList.add('hidden');
     document.getElementById('simulator-workflow').classList.remove('hidden');
     document.getElementById('sim-univ-search').focus();

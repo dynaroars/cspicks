@@ -1650,7 +1650,9 @@ button.card-header {
   font-size: clamp(1.35rem, 3vw, 1.9rem);
 }
 
-.has-search-query .search-intro p {
+.has-search-query .search-intro p,
+.has-search-query .search-intro .capability-list,
+.has-search-query .phd-callout {
   display: none;
 }
 
@@ -1667,6 +1669,39 @@ button.card-header {
   margin-top: 0.75rem;
   color: var(--text-secondary);
   font-size: 1.05rem;
+}
+
+/* A quiet inventory of what the search box can do, not a second nav - plain
+   text with dot separators rather than buttons, so it reads as a caption. */
+.capability-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.6rem;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.capability-list li {
+  position: relative;
+  padding-left: 0.7rem;
+}
+
+.capability-list li:first-child {
+  padding-left: 0;
+}
+
+.capability-list li:first-child::before {
+  content: none;
+}
+
+.capability-list li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
 }
 
 .universal-search {
@@ -1838,6 +1873,26 @@ button.card-header {
 .search-examples button:hover {
   color: var(--text-primary);
   background: var(--hover-bg);
+}
+
+/* One quiet line, not a promo banner: same caption weight as the capability
+   list above, so it reads as "here's how this fits your workflow" rather
+   than an ad for a different site. */
+.phd-callout {
+  max-width: 640px;
+  margin: 1rem auto 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.phd-callout strong {
+  color: var(--text-primary);
+}
+
+.phd-callout a {
+  color: var(--accent-color);
 }
 
 .search-page .search-filters {
@@ -2329,6 +2384,67 @@ button.card-header {
 
 .discovery-section-heading {
   margin-top: 2.5rem;
+}
+
+/* One shared look for every "Copy link" control on the site, icon-only or
+   with a label, always right-aligned in whatever header it sits in. */
+.share-button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: auto;
+  padding: 0.3rem 0.55rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  font: inherit;
+  font-size: var(--text-xs);
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.share-button svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.share-button:hover {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+  border-color: var(--text-secondary);
+}
+
+.share-button.is-flashed {
+  color: var(--impact-pos-text);
+  border-color: var(--impact-pos-text);
+}
+
+/* The page-header copy is icon-only, so it matches the GitHub/FAQ icons
+   beside it rather than the pill style cards use. */
+.icon-link.share-button {
+  margin-left: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+}
+
+.icon-link.share-button.is-flashed {
+  color: var(--impact-pos-text);
+}
+
+/* Briefly marks the card a shared #fragment link pointed at, so the reader
+   can tell which one of a full grid they were sent to. */
+.discovery-highlighted {
+  animation: discovery-highlight-pulse 2.2s ease-out;
+}
+
+@keyframes discovery-highlight-pulse {
+  0% { box-shadow: 0 0 0 3px var(--primary-color); }
+  100% { box-shadow: 0 0 0 3px transparent; }
 }
 
 .discovery-info {
@@ -3045,6 +3161,11 @@ button.card-header {
   ::view-transition-new(*) {
     animation: none !important;
     transition: none !important;
+  }
+
+  .discovery-highlighted {
+    animation: none;
+    box-shadow: 0 0 0 3px var(--primary-color);
   }
 }
 

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1200px;
+    height: 630px;
+    background: #ffffff;
+    font-family: 'Inter', -apple-system, sans-serif;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 96px;
+    position: relative;
+    overflow: hidden;
+  }
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(#f1f5f9 1px, transparent 1px),
+      linear-gradient(90deg, #f1f5f9 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+  }
+  .accent-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 10px;
+    background: #0f172a;
+  }
+  .wordmark {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 88px;
+    letter-spacing: -0.03em;
+    color: #0f172a;
+    line-height: 1;
+    z-index: 1;
+  }
+  .tagline {
+    margin-top: 28px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+    color: #334155;
+    line-height: 1.25;
+    max-width: 920px;
+    z-index: 1;
+  }
+  .categories {
+    margin-top: 48px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    z-index: 1;
+  }
+  .categories span {
+    font-size: 24px;
+    font-weight: 600;
+    color: #0f172a;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 999px;
+    padding: 10px 24px;
+  }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="accent-bar"></div>
+  <div class="wordmark">CS Picks</div>
+  <div class="tagline">Find the right CS PhD program and research advisor</div>
+  <div class="categories">
+    <span>Universities</span>
+    <span>Faculty</span>
+    <span>Research Areas</span>
+    <span>NSF Funding</span>
+  </div>
+</body>
+</html>

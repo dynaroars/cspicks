@@ -414,6 +414,30 @@ test('region defaults are locale-aware and a user choice carries across every ta
   await expect(page.locator('#region-select')).toHaveValue('world');
 });
 
+test('discoveries filter changes update the shareable URL and title', async ({ page }) => {
+  await page.goto('discoveries.html');
+  await expect(page.locator('#discoveries-loading')).toBeHidden();
+  await page.locator('#region-select').selectOption('europe');
+  await expect(page).toHaveURL(/region=europe/);
+  await expect(page).toHaveTitle(/European/);
+});
+
+test('a discovery card\'s share button copies a link back to that card', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.goto('discoveries.html');
+  await expect(page.locator('#discoveries-loading')).toBeHidden();
+  const card = page.locator('.discovery-card', { hasText: 'Fastest-growing subfields' });
+  await card.locator('.discovery-share').click();
+  const copied = await page.evaluate(() => navigator.clipboard.readText());
+  expect(copied).toMatch(/discoveries\.html\?.*#discovery-fastest-growing-subfields$/);
+});
+
+test('opening a discovery card\'s link directly scrolls to and highlights it', async ({ page }) => {
+  await page.goto('discoveries.html?region=us#discovery-fastest-growing-subfields');
+  await expect(page.locator('#discoveries-loading')).toBeHidden();
+  await expect(page.locator('#discovery-fastest-growing-subfields')).toHaveClass(/discovery-highlighted/);
+});
+
 test('NSF funding beta searches nationwide data and aggregates fractional awards', async ({ page }) => {
   await page.goto('funding.html');
   await expect(page.getByRole('link', { name: '🇺🇸 NSF Funding' })).toHaveAttribute('aria-current', 'page');
@@ -561,8 +585,32 @@ test('simulator preserves CSRankings suffixes and accepts an exact DBLP profile 
   await expect(page.locator('#sim-candidates-input')).toHaveValue('Hai Duong 0001');
 
   await page.locator('#sim-candidates-input').fill('https://dblp.org/pid/99/9999.html');
+  await expect(page).toHaveURL(/univ=George\+Mason\+University/);
   await page.locator('#sim-analyze-btn').click();
   await expect(page.locator('#sim-candidates-results')).toContainText('Exact DBLP Person');
   await expect(page.locator('#sim-candidates-results')).toContainText('1 rank-counted paper');
   await expect(page.locator('#sim-candidates-results')).not.toContainText('authors');
+  await expect(page).toHaveURL(/candidates=https/);
+  await expect(page).toHaveTitle(/George Mason University ranking simulation/);
+});
+
+test('a shared simulator link restores the university and candidates for one-click analysis', async ({ page }) => {
+  await page.goto('simulator.html?univ=George+Mason+University&candidates=Hai+Duong+0001');
+  await expect(page.locator('#step-candidates')).toBeVisible();
+  await expect(page.locator('#selected-univ-display')).toContainText('George Mason University');
+  await expect(page.locator('#sim-candidates-input')).toHaveValue('Hai Duong 0001');
+  await page.locator('#sim-analyze-btn').click();
+  await expect(page.locator('#sim-candidates-results')).toContainText('Hai Duong');
+});
+
+test('every page mounts a page-level copy-link button that copies the current URL', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  for (const path of ['./', 'discoveries.html', 'simulator.html', 'funding.html']) {
+    await page.goto(path);
+    const button = page.locator('#page-share-mount .share-button');
+    await expect(button).toBeVisible();
+    await button.click();
+    const copied = await page.evaluate(() => navigator.clipboard.readText());
+    expect(copied).toBe(page.url());
+  }
 });

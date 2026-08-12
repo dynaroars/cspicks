@@ -5,6 +5,10 @@ import { createFilterBar } from './filters.js';
 import { renderInfiniteLists } from './search-results.js';
 import { cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
 import { createSuggestionBox, rankSuggestions } from './suggestion-box.js';
+import { initTooltipPositioning } from './tooltip-position.js';
+import { SITE_NAME, updatePageMeta } from './seo.js';
+import { mountShareButton } from './share.js';
+import { trackComparison, trackShare, trackView } from './analytics.js';
 
 const params = new URLSearchParams(window.location.search);
 const currentYear = new Date().getFullYear();
@@ -78,6 +82,23 @@ function updateUrl() {
   const query = document.getElementById('funding-search').value.trim();
   if (query) next.set('q', query);
   history.replaceState({}, '', `${location.pathname}?${next}`);
+  updateSeoForCurrentView(query);
+}
+
+function updateSeoForCurrentView(query) {
+  if (!query) {
+    updatePageMeta({ title: `${SITE_NAME} - NSF Funding Explorer` });
+    trackView('default', 'funding');
+    return;
+  }
+  const isComparison = Boolean(parseComparisonQuery(query));
+  if (isComparison) trackComparison('funding', 'funding'); else trackView('search-results', 'funding');
+  updatePageMeta({
+    title: `${query} - NSF Funding - ${SITE_NAME}`,
+    description: isComparison
+      ? `NSF funding comparison: ${query}. Award totals, growth, and matched faculty from official NSF Award Search data.`
+      : `NSF funding results for "${query}" on CS Picks, built from official NSF Award Search data.`
+  });
 }
 
 // "A vs B" compares two universities or two people, as on Search.
@@ -265,6 +286,9 @@ function renderExamples() {
 }
 
 async function init() {
+  initTooltipPositioning();
+  const shareButton = mountShareButton('#page-share-mount', { getUrl: () => window.location.href, label: '', className: 'icon-link' });
+  shareButton?.addEventListener('click', () => trackShare('funding'), { capture: true });
   setupYears();
   const response = await fetch('./nsf-awards.json');
   if (!response.ok) throw new Error(`NSF dataset returned ${response.status}`);
