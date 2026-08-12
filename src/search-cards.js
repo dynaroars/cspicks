@@ -184,6 +184,11 @@ export function renderProfessorCard(prof, context) {
     </div>`;
 }
 
+// These percentages are shares of this one university's own score, so they say
+// nothing about how it stands against anyone else — the ranked subfield list
+// above is what answers that.
+const SCORE_MIX_HELP = 'A university\'s CSRankings score is the geometric mean of its output across all areas, where each area enters as ln(adjusted count + 1). This breakdown splits that score into the share each area supplies. The percentages are internal to this university and always add up to 100%, so a large share means the area drives this university\'s own score — not that the university leads other universities in it. For standing against other universities, use the ranked subfield list above.';
+
 function renderSubfieldContributions(school) {
   const contributions = Object.entries(school.areaAdjustedCounts || {})
     .filter(([, value]) => value > 0)
@@ -191,10 +196,63 @@ function renderSubfieldContributions(school) {
     .sort((a, b) => b.weight - a.weight);
   const totalWeight = contributions.reduce((sum, item) => sum + item.weight, 0);
   if (!totalWeight) return '';
-  return `<div class="school-rank-attribution"><details class="attribution-details"><summary class="attribution-summary"><span>Subfield Contributions</span><span class="tooltip-trigger contribution-tooltip" tabindex="0" aria-label="About subfield contributions">ⓘ<span class="tooltip-content">Shows how each research area contributes to the geometric-mean ranking score using ln(adjusted count + 1).</span></span></summary><div class="attribution-content">${contributions.map(item => {
+  // Bars are scaled against the largest share, not against 100%. Every area's
+  // share is small (the top one is usually under 8%), so drawing each bar at its
+  // literal percentage of the width leaves 26 near-identical stubs.
+  const topWeight = contributions[0].weight;
+  return `<div class="school-rank-attribution"><details class="attribution-details" open><summary class="attribution-summary"><span>Subfield Share of This University's Score</span><span class="tooltip-trigger contribution-tooltip" tabindex="0" aria-label="About this university's score breakdown">ⓘ<span class="tooltip-content">${escapeHtml(SCORE_MIX_HELP)}</span></span></summary><div class="attribution-content">${contributions.map(item => {
     const percentage = item.weight / totalWeight * 100;
-    return `<div class="contribution-item"><div class="contribution-info"><span class="contribution-label">${escapeHtml(areaLabels[item.area] || item.area)}</span><span class="contribution-value">${item.value.toFixed(1)} adjusted (${percentage.toFixed(1)}%)</span></div><div class="contribution-bar-container"><div class="contribution-bar" style="width: ${percentage}%;"></div></div></div>`;
+    return `<div class="contribution-item"><div class="contribution-info"><span class="contribution-label">${escapeHtml(areaLabels[item.area] || item.area)}</span><span class="contribution-value">${item.value.toFixed(1)} adjusted (${percentage.toFixed(1)}%)</span></div><div class="contribution-bar-container"><div class="contribution-bar" style="width: ${(item.weight / topWeight * 100).toFixed(1)}%;"></div></div></div>`;
   }).join('')}</div></details></div>`;
+}
+
+function facultyButton(name, school, stats, rank = null) {
+  const paperCount = Math.ceil(stats.count);
+  const rankPrefix = Number.isFinite(rank) ? `<span class="faculty-tag-rank">${rank}.</span> ` : '';
+  return `<button type="button" class="faculty-tag" ${actionAttributes('professor-at-school', { professorName: name, affiliation: school })}>${rankPrefix}<span>${escapeHtml(cleanName(name))}</span> <small class="faculty-tag-stats">${paperCount} ${paperCount === 1 ? 'paper' : 'papers'} (${stats.adjusted.toFixed(1)} adjusted)</small></button>`;
+}
+
+// What one professor contributed to one area at one school. Pre-aggregated by
+// the data pipeline; the fallback covers school objects assembled by a search
+// (conference views) rather than by `filterByYears`.
+function areaFacultyStats(data, area, name, appData) {
+  const stored = data.facultyStats?.[name];
+  if (stored) return stored;
+  const prof = appData.professors[name];
+  if (!prof) return { count: 0, adjusted: 0 };
+  if (areaLabels[area]) return prof.areas[area] || { count: 0, adjusted: 0 };
+  return prof.pubs.filter(pub => pub.area === area).reduce((totals, pub) => ({
+    count: totals.count + pub.count,
+    adjusted: totals.adjusted + pub.adjustedcount
+  }), { count: 0, adjusted: 0 });
+}
+
+// The whole department in one list, ordered by output — the view CSRankings
+// gives when a university is expanded.
+function renderFacultyRoster(school, context) {
+  const counts = school.facultyCounts || {};
+  const roster = Object.entries(school.facultyAdjustedCounts || {})
+    .map(([name, adjusted]) => ({ name, stats: { count: counts[name] || 0, adjusted } }))
+    .sort((a, b) => b.stats.adjusted - a.stats.adjusted || cleanName(a.name).localeCompare(cleanName(b.name)));
+  if (!roster.length) return '';
+
+  // Ranks tie on the number the tag actually shows, so two people both listed
+  // as "3.4 adjusted" never carry different ranks.
+  let rank = 0;
+  let previous = null;
+  roster.forEach(entry => {
+    const shown = entry.stats.adjusted.toFixed(1);
+    if (shown !== previous) rank += 1;
+    entry.rank = rank;
+    previous = shown;
+  });
+
+  const tags = roster
+    .map(entry => facultyButton(entry.name, school.name, entry.stats, context.showRankings ? entry.rank : null))
+    .join('');
+
+  // No heading: the card badge already says how many faculty there are.
+  return `<div class="school-faculty-roster"><div class="faculty-list">${tags}</div></div>`;
 }
 
 export function renderSchoolCard(school, filterArea, context) {
@@ -226,25 +284,17 @@ export function renderSchoolCard(school, filterArea, context) {
 
   return `<div class="card${exact ? '' : ' collapsed'}" data-name="${escapeHtml(school.name)}">
     <${headerTag} class="card-header" ${headerAttributes}><h2>${rankPrefix}${countryFlag(school.country, school.countryName)}${escapeHtml(context.compactNames ? getInstitutionShortName(school.name) : school.name)}${badges}</h2></${headerTag}>
-    <div class="card-content">${institutionMetadata || departmentHomepage !== '#' ? `<div class="school-metadata">${institutionMetadata ? `<span>${escapeHtml(institutionMetadata)}</span>` : ''}${departmentHomepage !== '#' ? `<a href="${escapeHtml(departmentHomepage)}" target="_blank" rel="noopener noreferrer">Department website</a>` : ''}</div>` : ''}${renderSubfieldContributions(school)}<div class="stats-list">${sortedAreas.map(([area, data]) => {
+    <div class="card-content">${institutionMetadata || departmentHomepage !== '#' ? `<div class="school-metadata">${institutionMetadata ? `<span>${escapeHtml(institutionMetadata)}</span>` : ''}${departmentHomepage !== '#' ? `<a href="${escapeHtml(departmentHomepage)}" target="_blank" rel="noopener noreferrer">Department website</a>` : ''}</div>` : ''}${filterArea ? '' : renderFacultyRoster(school, context)}<div class="stats-list">${sortedAreas.map(([area, data]) => {
       const prefix = filterArea || !context.showRankings ? '' : (school.areaRanks?.[area] ? `${school.areaRanks[area]}. ` : '');
       const label = areaLabels[area] || getConferenceLabel(area);
-      const facultyHtml = data.faculty.sort((a, b) => {
-        const adjusted = name => areaLabels[area]
-          ? appData.professors[name]?.areas[area]?.adjusted || 0
-          : appData.professors[name]?.pubs.filter(pub => pub.area === area).reduce((sum, pub) => sum + pub.adjustedcount, 0) || 0;
-        return adjusted(b) - adjusted(a);
-      }).map(name => {
-        const prof = appData.professors[name];
-        const pubs = prof && !areaLabels[area] ? prof.pubs.filter(pub => pub.area === area) : null;
-        const count = pubs?.reduce((sum, pub) => sum + pub.count, 0);
-        const adjusted = pubs?.reduce((sum, pub) => sum + pub.adjustedcount, 0);
-        const paperCount = prof ? Math.ceil(pubs ? count : prof.totalPapers) : 0;
-        const adjustedCount = prof ? (pubs ? adjusted : prof.totalAdjusted).toFixed(1) : '0.0';
-        const stats = prof ? `<small class="faculty-tag-stats">${paperCount} ${paperCount === 1 ? 'paper' : 'papers'} (${adjustedCount} adjusted)</small>` : '';
-        return `<button type="button" class="faculty-tag" ${actionAttributes('professor-at-school', { professorName: name, affiliation: school.name })}><span>${escapeHtml(cleanName(name))}</span> ${stats}</button>`;
-      }).join('');
+      // Each name carries what that person published *in this area*, not their
+      // department-wide total.
+      const facultyHtml = data.faculty
+        .map(name => ({ name, stats: areaFacultyStats(data, area, name, appData) }))
+        .sort((a, b) => b.stats.adjusted - a.stats.adjusted || cleanName(a.name).localeCompare(cleanName(b.name)))
+        .map(entry => facultyButton(entry.name, school.name, entry.stats))
+        .join('');
       const paperCount = Math.ceil(data.count);
       return `<div class="school-area-section"><div class="school-area-header"><button type="button" class="inline-link" ${actionAttributes('search-query', { query: areaLabels[area] || area })}>${escapeHtml(prefix + label)}</button><span>${paperCount} ${paperCount === 1 ? 'paper' : 'papers'} (${data.adjusted.toFixed(1)} adjusted)</span></div><div class="faculty-list">${facultyHtml}</div></div>`;
-    }).join('')}</div></div></div>`;
+    }).join('')}</div>${renderSubfieldContributions(school)}</div></div>`;
 }

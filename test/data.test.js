@@ -6,6 +6,7 @@ import { areaLabels, detectRegionFromLocales, encodeInlineValue, escapeHtml, get
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../src/simulation.js';
 import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl } from '../src/dblp.js';
 import { parseCsrankingsRules } from '../src/csrankings-rules.js';
+import { renderSchoolCard } from '../src/search-cards.js';
 import { calculateAreaMomentum, calculateDiscoveryInsights, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, explainRankGap } from '../src/metrics.js';
 import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../src/nsf.js';
 
@@ -299,6 +300,38 @@ test('per-area rankings assign the same rank to equal scores', () => {
   assert.equal(result.schools.A.areaRanks.mlmining, 1);
   assert.equal(result.schools.B.areaRanks.mlmining, 1);
   assert.equal(result.schools.C.areaRanks.mlmining, 3);
+});
+
+test('a school card ranks its faculty roster and scopes subfield counts to the subfield', () => {
+  const data = {
+    schools: { 'Example University': { country: 'us' } },
+    professors: {
+      Alice: {
+        name: 'Alice',
+        affiliation: 'Example University',
+        pubs: [
+          { area: 'icml', year: 2025, count: 4, adjustedcount: 2 },
+          { area: 'pldi', year: 2025, count: 2, adjustedcount: 0.5 }
+        ]
+      },
+      Bob: { name: 'Bob', affiliation: 'Example University', pubs: [{ area: 'icml', year: 2025, count: 3, adjustedcount: 3 }] },
+      Carol: { name: 'Carol', affiliation: 'Example University', pubs: [{ area: 'icml', year: 2025, count: 3, adjustedcount: 3 }] }
+    }
+  };
+
+  const result = filterByYears(data, 2025, 2025, 'us');
+  const school = result.schools['Example University'];
+  assert.deepEqual(school.areas.mlmining.facultyStats.Alice, { count: 4, adjusted: 2 });
+  assert.equal(school.facultyCounts.Alice, 6);
+
+  const html = renderSchoolCard(school, null, { appData: result, currentQuery: '', showRankings: true });
+  // Equal adjusted counts share a rank, and the next distinct value follows it.
+  assert.match(html, /faculty-tag-rank">1\.<\/span> <span>Bob<\/span> <small class="faculty-tag-stats">3 papers \(3\.0 adjusted\)/);
+  assert.match(html, /faculty-tag-rank">1\.<\/span> <span>Carol<\/span>/);
+  assert.match(html, /faculty-tag-rank">2\.<\/span> <span>Alice<\/span> <small class="faculty-tag-stats">6 papers \(2\.5 adjusted\)/);
+  // Inside a subfield each name reports only the work it published there.
+  assert.match(html, /<span>Alice<\/span> <small class="faculty-tag-stats">4 papers \(2\.0 adjusted\)/);
+  assert.match(html, /<span>Alice<\/span> <small class="faculty-tag-stats">2 papers \(0\.5 adjusted\)/);
 });
 
 test('suggestion ranking tolerates middle initials without losing precedence', () => {
