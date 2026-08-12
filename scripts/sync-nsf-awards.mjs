@@ -461,7 +461,11 @@ const awards = normalizedAwards
       ? { ...award, collaborativeTotalAmount: collaborative.amount, collaborativeAwardCount: collaborative.awardCount }
       : award;
   })
-  .filter(award => award.investigators.some(person => person.facultyName))
+  // rosterName (not facultyName) is what the site actually displays: it's the
+  // name verified against the publication table, so a roster-only match with
+  // no publication-table entry (rosterName null) is dropped here too, rather
+  // than persisted as a match nothing else in the app can find.
+  .filter(award => award.investigators.some(person => person.rosterName))
   .sort((a, b) => String(b.awardDate).localeCompare(String(a.awardDate)));
 const checkedFaculty = scopedFaculty.filter(faculty =>
   cache.checked[`${fullNameKey(faculty.name)}|${institutionKey(faculty.affiliation)}`]
