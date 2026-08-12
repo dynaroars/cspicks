@@ -6,10 +6,10 @@ import { getInitialRegion, rememberRegion } from './shared.js';
 // This module owns their markup, state, persistence, and the affiliation data
 // that History mode needs, so pages only declare which fields they want.
 
-const CONF_SET_HELP = 'Chooses which publication venues count. Default follows the primary CSRankings conference set; All adds the extended, next-tier venues; the CORE options use CORE conference tiers.';
-const HISTORY_HELP = 'When enabled, publications are credited to the institution where the author was affiliated at the time of publication, not their current institution. Use the year selectors to filter results for a specific historical period.';
-const RANKINGS_HELP = 'Numbers the result lists and shows each university\'s overall and per-area rank for the selected region, years, and conference set.';
-const PER_CAPITA_HELP = 'Ranks universities by average output per professor rather than by departmental total, so a large department is not favoured over a productive one. Universities with fewer than five publishing professors are omitted.';
+const CONF_SET_HELP = 'Chooses which venues count. CSRankings (Default) follows the primary conference set; CSRankings (All) adds the extended, next-tier venues; the CORE options use CORE conference tiers.';
+const HISTORY_HELP = 'Credits pubs to the univ where the author worked when each was published, not their current one. Use the year selectors to focus on a historical period.';
+const RANKINGS_HELP = 'Numbers the result lists and shows each univ\'s overall and per-area rank for the selected region, years, and conference set.';
+const PER_CAPITA_HELP = 'Ranks univs by average output per prof rather than by departmental total, so a large dept is not favoured over a productive one. Univs with fewer than 5 publishing profs are omitted.';
 
 const REGIONS = [
   ['world', 'World'],
@@ -21,8 +21,8 @@ const REGIONS = [
 ];
 
 const CONF_SETS = [
-  ['csrankings-default', 'Default'],
-  ['csrankings', 'All'],
+  ['csrankings-default', 'CSRankings (Default)'],
+  ['csrankings', 'CSRankings (All)'],
   ['core', 'CORE A*'],
   ['core-a', 'CORE A*/A']
 ];

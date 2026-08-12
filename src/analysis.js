@@ -287,9 +287,9 @@ function renderResearcherActivityMetrics(patterns) {
     const selectedYears = filters.endYear - filters.startYear + 1;
     const momentum = patterns.momentum === null ? '—' : `${patterns.momentum >= 0 ? '+' : ''}${patterns.momentum.toFixed(0)}%`;
     container.innerHTML = renderMetricCards([
-        { label: 'Active years', value: `${patterns.activeYears.length} / ${selectedYears}`, help: 'Years with at least one eligible publication in the selected conference set.' },
-        { label: 'Consistency', value: `${patterns.consistency.toFixed(0)}%`, help: 'Share of selected years with at least one eligible publication.' },
-        { label: 'Peak year', value: `${patterns.peak.year}`, detail: `${Math.ceil(patterns.peak.count)} papers (${patterns.peak.adjusted.toFixed(1)} adjusted)`, help: 'Year with the highest adjusted publication count.' },
+        { label: 'Active years', value: `${patterns.activeYears.length} / ${selectedYears}`, help: 'Years with at least one eligible pub in the selected conference set.' },
+        { label: 'Consistency', value: `${patterns.consistency.toFixed(0)}%`, help: 'Share of selected years with at least one eligible pub.' },
+        { label: 'Peak year', value: `${patterns.peak.year}`, detail: `${Math.ceil(patterns.peak.count)} papers (${patterns.peak.adjusted.toFixed(1)} adjusted)`, help: 'Year with the highest adjusted pub count.' },
         { label: 'Active streak', value: `${patterns.activeStreak} ${patterns.activeStreak === 1 ? 'year' : 'years'}`, detail: `ending ${patterns.activeYears.at(-1)}`, help: 'Consecutive active years ending at the latest active year in the selection.' },
         { label: 'Recent momentum', value: momentum, detail: 'latest 3 years vs previous 3', help: 'Percentage change in adjusted count between the latest three-year window and the preceding three-year window.' },
         { label: 'Yearly variability', value: `${(patterns.volatility * 100).toFixed(0)}%`, detail: 'relative to mean output', help: 'Variation in annual adjusted count relative to its yearly mean. Lower values indicate steadier output across the selected period.' }
@@ -326,7 +326,7 @@ function renderResearcherAreaInsights(patterns) {
     const emerging = patterns.emergingAreas.map(area => areaLabels[area] || area).join(', ') || 'None';
     const dormant = patterns.dormantAreas.map(area => areaLabels[area] || area).join(', ') || 'None';
     container.innerHTML = renderMetricCards([
-        { label: 'Primary area', value: areaLabels[patterns.primaryArea[0]] || patterns.primaryArea[0], detail: `${patterns.primaryAreaShare.toFixed(0)}% of adjusted output`, help: 'Research area with the largest adjusted publication count.' },
+        { label: 'Primary area', value: areaLabels[patterns.primaryArea[0]] || patterns.primaryArea[0], detail: `${patterns.primaryAreaShare.toFixed(0)}% of adjusted output`, help: 'Research area with the largest adjusted pub count.' },
         { label: 'Research breadth', value: `${patterns.breadth} ${patterns.breadth === 1 ? 'area' : 'areas'}`, help: 'Number of research areas with eligible output.' },
         { label: 'Area balance', value: `${patterns.balance.toFixed(0)}%`, help: 'Normalized entropy of adjusted output across active areas. Higher means output is more evenly distributed.' },
         { label: 'Trajectory', value: trajectory, help: 'Compares the primary area in the earlier and later halves of the selected period; small totals are ignored.' },
@@ -347,7 +347,7 @@ function renderResearcherVenueInsights(patterns) {
         : 'No clear shift';
     container.innerHTML = renderMetricCards([
         { label: 'Venue breadth', value: `${patterns.venueBreadth} venues`, help: 'Number of eligible conferences with output in the selected period.' },
-        { label: 'Primary venue', value: getConferenceLabel(patterns.topVenue[0]), detail: `${patterns.venueConcentration.toFixed(0)}% of adjusted output`, help: 'Conference with the largest adjusted publication count.' },
+        { label: 'Primary venue', value: getConferenceLabel(patterns.topVenue[0]), detail: `${patterns.venueConcentration.toFixed(0)}% of adjusted output`, help: 'Conference with the largest adjusted pub count.' },
         { label: 'Venue persistence', value: getConferenceLabel(patterns.mostPersistentVenue[0]), detail: `${patterns.mostPersistentVenue[1].years.size} active years`, help: 'Conference appearing in the greatest number of distinct years.' },
         { label: 'Venue trajectory', value: shift, help: 'Compares the highest-output venue in the earlier and later halves of the selected period.' }
     ], 'Conference patterns');
@@ -565,12 +565,12 @@ function renderSchoolAnalysisSummary(current, prior, schoolName) {
     const growth = `${metrics.growth >= 0 ? '+' : ''}${metrics.growth.toFixed(0)}%`;
     const confidenceClass = metrics.confidence.toLowerCase();
     container.innerHTML = renderMetricCards([
-        { label: 'Rank movement', value: rankMovement, help: 'Change in rank versus the immediately preceding period of the same length. An upward arrow means the university improved.' },
-        { label: 'Momentum', value: growth, help: 'Percentage change in adjusted publication count versus the preceding period of the same length.' },
-        { label: 'Median / faculty', value: metrics.medianPerFaculty.toFixed(1), help: 'Median adjusted publication count among the university’s active faculty in the selected period.' },
-        { label: 'Top-3 concentration', value: `${metrics.top3Share.toFixed(0)}%`, help: `Share of adjusted publication count produced by the three highest-output faculty. Top one: ${metrics.top1Share.toFixed(0)}%; top five: ${metrics.top5Share.toFixed(0)}%.` },
+        { label: 'Rank movement', value: rankMovement, help: 'Change in rank versus the immediately preceding period of the same length. An upward arrow means the univ improved.' },
+        { label: 'Momentum', value: growth, help: 'Percentage change in adjusted pub count versus the preceding period of the same length.' },
+        { label: 'Median / faculty', value: metrics.medianPerFaculty.toFixed(1), help: 'Median adjusted pub count among the univ’s active faculty in the selected period.' },
+        { label: 'Top-3 concentration', value: `${metrics.top3Share.toFixed(0)}%`, help: `Share of adjusted pub count produced by the three highest-output faculty. Top one: ${metrics.top1Share.toFixed(0)}%; top five: ${metrics.top5Share.toFixed(0)}%.` },
         { label: 'Breadth', value: `${metrics.activeAreas} active · ${metrics.sustainedAreas} sustained`, help: `Active is the number of areas with output. Sustained means active in this and the preceding period. ${metrics.topTenAreas} areas currently rank in the top 10.` },
-        { label: 'Team-size proxy', value: `${metrics.impliedTeamSize.toFixed(1)}×`, help: 'Raw publication count divided by adjusted publication count. This estimates coauthor intensity, not cross-university collaboration.' },
+        { label: 'Team-size proxy', value: `${metrics.impliedTeamSize.toFixed(1)}×`, help: 'Raw pub count divided by adjusted pub count. This estimates coauthor intensity, not cross-univ collaboration.' },
         { label: 'Profile completeness', value: metrics.confidence, className: `confidence-${confidenceClass}`, help: `Completeness of author homepage and Google Scholar profile fields. Coverage: ${metrics.profileCoverage.toFixed(0)}%.` }
     ], 'University statistics');
 }

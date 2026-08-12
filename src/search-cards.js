@@ -187,7 +187,7 @@ export function renderProfessorCard(prof, context) {
 // These percentages are shares of this one university's own score, so they say
 // nothing about how it stands against anyone else — the ranked subfield list
 // above is what answers that.
-const SCORE_MIX_HELP = 'A university\'s CSRankings score is the geometric mean of its output across all areas, where each area enters as ln(adjusted count + 1). This breakdown splits that score into the share each area supplies. The percentages are internal to this university and always add up to 100%, so a large share means the area drives this university\'s own score — not that the university leads other universities in it. For standing against other universities, use the ranked subfield list above.';
+const SCORE_MIX_HELP = 'A univ\'s CSRankings score is the geometric mean of its output across all areas, where each area enters as ln(adjusted pubs + 1). This splits that score into the share each area supplies. The percentages are internal to this univ and always add up to 100%, so a large share means the area drives this univ\'s own score \u2014 not that it leads other univs in that area. For standing against other univs, use the ranked subfield list above.';
 
 function renderSubfieldContributions(school) {
   const contributions = Object.entries(school.areaAdjustedCounts || {})
