@@ -1,0 +1,780 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\sys}{CS~Picks}
+\newcommand{\csr}{CSRankings}
+
+\title{\sys: An Uncertainty-Aware Interface for Exploring\\
+Computer Science Departments, Faculty, and Venues}
+
+\author{ThanhVu Nguyen\\
+George Mason University\\
+\texttt{tvn@gmu.edu}}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Metrics-based rankings of computer science departments have become a routine
+input to consequential decisions, most visibly for prospective doctoral
+students choosing where to apply. \csr{} is the field's de facto standard: it
+is transparent, reproducible, and deliberately narrow, computing a single
+ordered list from fractional publication credit at a curated set of venues.
+Its very legibility, however, encourages readers to treat one integer as a
+measurement of departmental quality.
+
+We present \sys{}, a static, entirely client-side web application that reuses
+\csr{}'s inputs and scoring rules but reorganizes them around the questions an
+applicant actually asks. \sys{} makes the discretionary parameters of a ranking
+manipulable and visible, and adds four views that a single ordered list cannot
+express: a \emph{rank stability} sweep that recomputes a department's position
+under every combination of look-back window and venue set; a per-subfield
+attribution of both departmental score and individual faculty output; a
+\emph{per-faculty} ordering that measures output per head rather than in
+aggregate; and a \emph{fragility} analysis reporting how many departures would
+move a department out of its rank band.
+
+Applying the stability sweep to all 190 ranked U.S.\ departments produces our
+central empirical finding: rank stability is highly unevenly distributed. The
+median department moves 17 positions across 16 defensible settings, and 77.4\%
+move more than 10, yet the top-10 departments move a median of only 5. The
+ordering is therefore trustworthy exactly where readers least need guidance and
+unreliable across the broad middle where most applicants are choosing. We
+report companion analyses of venue-set sensitivity, output concentration,
+per-faculty ordering, and fragility, and describe the system's architecture and
+interface.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+A prospective doctoral student in computer science faces a decision with a long
+horizon, poor feedback, and very little trustworthy information. Departmental
+rankings fill that vacuum. They are compact, ordinal, and easy to act on, and
+so they are acted on --- by applicants, by administrators, and by the
+departments that manage themselves against
+them~\cite{usnews,espeland2016engines}.
+
+Within computer science, \csr{}~\cite{csrankings} occupies a distinctive
+position. Unlike reputation surveys, it is computed from a public, auditable
+procedure over public data: publications recorded in DBLP~\cite{dblp} at a
+curated list of selective conferences, credited fractionally among coauthors,
+aggregated per area, and combined across areas by a geometric mean. Anyone can
+reproduce the number. This transparency is a genuine advance, and we build
+directly on it.
+
+Transparency of \emph{procedure}, however, is not the same as transparency of
+\emph{contingency}. A reproducible pipeline still rests on discretionary
+choices --- which venues count, how many years to look back, whether credit
+follows an author's current or historical affiliation --- and the output
+format, a single ordered list, cannot express that any of those choices were
+made. A reader who sees a department at position 32 has no way to learn from
+the artifact itself that the same department sits at 23 under one defensible
+setting and 50 under another. The number's precision is real; its stability is
+not, and nothing on the page distinguishes the two.
+
+This paper describes \sys{}, a companion tool to a guide for prospective
+computer science doctoral students~\cite{phddemystify}. \sys{} is not an
+alternative ranking. It consumes \csr{}'s inputs and reimplements its scoring
+faithfully, then asks what else can be built once that computation is fast
+enough to run many times in a browser. Our contributions are:
+
+\begin{itemize}
+  \item \textbf{A rank stability sweep} (\S\ref{sec:stability}) that recomputes
+    a department's rank under all 16 combinations of four look-back windows and
+    four venue sets, holding region fixed, and reports the resulting envelope
+    rather than a point estimate.
+  \item \textbf{Per-subfield attribution} (\S\ref{sec:attribution}) of both
+    departmental score composition and individual faculty output, so that a
+    name listed under a subfield reports what that person published
+    \emph{in that subfield} rather than their department-wide total.
+  \item \textbf{A per-faculty ordering} (\S\ref{sec:percapita}) that divides
+    adjusted output by publishing headcount, separating how much a department
+    produces from how many people it employs.
+  \item \textbf{A fragility analysis} (\S\ref{sec:fragility}) reporting the
+    number of departures that would move a department out of the top 10, 25, or
+    50, computed without naming the individuals concerned.
+  \item \textbf{An empirical characterization} (\S\ref{sec:results}) of rank
+    stability, venue sensitivity, output concentration, per-faculty ordering,
+    and fragility across the U.S.\ departments in the current data.
+  \item \textbf{A fully client-side implementation} (\S\ref{sec:implementation})
+    with no backend, in which a complete re-ranking of 20{,}822 faculty takes
+    roughly 100\,ms, making interactive sensitivity analysis practical.
+\end{itemize}
+
+\section{Background}
+\label{sec:background}
+
+\subsection{\csr{} and its scoring rule}
+
+\csr{} ranks departments by publication output at a curated set of highly
+selective conferences, deliberately excluding journals, workshops, and citation
+counts. Three design decisions matter for everything that follows.
+
+\paragraph{Fractional credit.} A paper with $k$ authors contributes $1/k$ to
+each author, and thence to their department. This is a deliberate
+counterweight to the very different coauthorship norms across subfields, where
+raw paper counts would reward large-team areas. We refer to the resulting
+quantity as \emph{adjusted count} throughout.
+
+\paragraph{Geometric mean across areas.} A department's score is
+\begin{equation}
+  S(d) = \left( \prod_{a \in A} \left( c_{d,a} + 1 \right) \right)^{1/|A|},
+  \label{eq:score}
+\end{equation}
+where $A$ is the set of top-level research areas and $c_{d,a}$ is department
+$d$'s adjusted count in area $a$. The product runs over \emph{all} areas, not
+only those where the department is active, so a zero contributes a factor of
+one. This strongly rewards breadth: a department strong in every area beats one
+that is dominant in a few. It is the single most consequential choice in the
+formula and is often misread as an average of strengths.
+
+\paragraph{Venue curation.} Which conferences count is a maintained,
+contested list. \csr{} distinguishes a default set from a larger set including
+additional venues; independent efforts such as the CORE
+rankings~\cite{coreportal} draw the line elsewhere. \sys{} supports four sets
+(\S\ref{sec:venuesets}).
+
+An important structural consequence of Eq.~\ref{eq:score} is that scores are
+rounded to one decimal place before ranking, and ties share a rank under
+standard competition ranking. In the tail of the distribution, where
+departments differ by fractions of a publication, this rounding produces
+substantial tied blocks --- a fact that becomes visible in our stability
+analysis.
+
+\subsection{Why a single ordered list under-serves the applicant}
+
+The critiques of academic ranking are well rehearsed: rankings reshape the
+behavior they claim to measure~\cite{goodhart}, and institutions reorganize
+around them~\cite{usnews}. Our concern is narrower and more practical. Even
+granting that adjusted publication count at selective venues is a reasonable
+proxy for research activity, the \emph{presentation} of that proxy as a single
+integer discards three things an applicant needs:
+
+\begin{enumerate}
+  \item \textbf{Sensitivity.} How much of position 32 is the department, and
+    how much is the window and venue set?
+  \item \textbf{Locality.} An applicant does not join a department; they join a
+    research group. Departmental aggregates say little about whether one
+    subfield is strong or whether one professor is taking students.
+  \item \textbf{Scale.} A sum over faculty conflates a productive department
+    with a large one, and says nothing about how much of the total rests on how
+    few people.
+\end{enumerate}
+
+\sys{} addresses each in turn.
+
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Data sources and joins}
+
+\sys{} fetches three \csr{} CSV files at page load --- the faculty roster
+(name, affiliation, homepage, Scholar and ORCID identifiers), the per-author
+publication table (name, area, year, raw count, adjusted count), and the
+institution table (region, country, homepage) --- and joins them on author
+name. Table~\ref{tab:dataset} summarizes the resulting corpus.
+
+\begin{table}[t]
+\centering
+\caption{The corpus as fetched at the time of writing. Publication records are
+per author, area, and year; they are aggregates, not individual papers.}
+\label{tab:dataset}
+\begin{tabular}{lr}
+\toprule
+Quantity & Value \\
+\midrule
+Faculty in roster            & 20{,}822 \\
+Institutions                 & 702 \\
+Publication records          & 296{,}267 \\
+Year range                   & 1970--2026 \\
+Faculty with a homepage      & 20{,}822 (100.0\%) \\
+Faculty with a Scholar ID    & 18{,}256 (87.7\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A consequence of the third row deserves emphasis, because it constrains every
+method below: the publication table is \emph{aggregated per author, area, and
+year}. It contains no paper titles, no paper identifiers, and no author order.
+Any analysis requiring per-paper structure --- coauthorship, first-versus-last
+authorship, cross-institutional collaboration --- cannot be answered from
+\csr{} data alone and must go to DBLP directly, one author at a time.
+
+Two optional sources extend the corpus. Affiliation histories derived from
+OpenAlex~\cite{openalex} allow publications to be credited to the institution
+an author held \emph{at publication time} rather than their current one; these
+are generated offline and loaded on demand. NSF award records~\cite{nsfawards},
+synchronized offline and attributed fractionally among principal
+investigators, support a separate funding view.
+
+\subsection{The filtering and ranking pipeline}
+
+The core computation, invoked by nearly every view, is a three-stage pipeline
+parameterized by a year range $[y_0, y_1]$, a region $r$, a venue set $V$, and
+optionally an affiliation history map $H$:
+
+\begin{enumerate}
+  \item \textbf{Collect.} Retain publications with $y_0 \le \text{year} \le
+    y_1$ whose venue is in $V$; credit each to the institution(s) implied by
+    $H$ (or the current affiliation when $H$ is absent), keeping only those in
+    $r$. Accumulate per-department, per-area, and per-faculty totals in the
+    same pass.
+  \item \textbf{Score.} Apply Eq.~\ref{eq:score} to each department.
+  \item \textbf{Rank.} Sort by score and assign standard competition ranks,
+    overall and within each area, so tied scores share a rank and the next
+    distinct score skips ahead.
+\end{enumerate}
+
+Crucially, per-faculty and per-area-per-faculty totals are accumulated
+\emph{during} stage 1 rather than derived afterwards. Under historical
+attribution a single author's output may be split across several institutions,
+and that split cannot be reconstructed from their aggregate area totals once
+the pass has finished.
+
+\subsection{Venue sets}
+\label{sec:venuesets}
+
+\sys{} supports four venue sets: \csr{}'s default list; \csr{}'s extended list
+including additional venues; CORE~A$^*$ only; and CORE~A together with
+A$^*$. A venue that upstream scrapes but assigns to no research area is
+counted by none of them, matching \csr{}'s own behavior.
+
+\subsection{Rank stability}
+\label{sec:stability}
+
+Let $W = \{5, 10, 20, 30\}$ be look-back windows in years and $V$ the four
+venue sets. For a fixed region $r$ and end year $y_1$, the sweep evaluates the
+pipeline at every $(w, v) \in W \times V$, yielding 16 complete rankings. For a
+department $d$ we report the envelope
+\begin{equation}
+  \big[\min_{(w,v)} \rho_{w,v}(d),\ \max_{(w,v)} \rho_{w,v}(d)\big],
+\end{equation}
+its median, and the \emph{spread} $\max - \min$, where $\rho_{w,v}(d)$ is $d$'s
+rank in the corresponding run.
+
+Two design decisions are worth stating explicitly.
+
+\paragraph{Region is held fixed.} A rank among U.S.\ departments and a rank
+worldwide answer different questions over different populations; pooling them
+into a single interval would mix a \emph{scope} choice into what is meant to be
+a range over \emph{methodological} choices. The user's selected region is
+therefore held constant across the sweep.
+
+\paragraph{Departments that vanish are reported, not dropped.} A department
+active only at venues outside a given set does not appear in that run's ranking
+at all. Silently omitting such runs would understate volatility, so we report
+the count of settings under which a department is unranked alongside its
+envelope.
+
+One sweep produces ranks for every department simultaneously, so its cost is
+amortized: the result is cached per region and reused for any department the
+user subsequently inspects.
+
+\subsection{Per-subfield attribution}
+\label{sec:attribution}
+
+Departmental cards list each active subfield with the faculty contributing to
+it. Two quantities are distinguished that a naive implementation conflates.
+First, a faculty member listed under subfield $a$ reports their output
+\emph{within $a$ at that institution}, not their department-wide total ---
+which, for a broad researcher, may differ by an order of magnitude. Second, we
+report each subfield's share of the department's own score,
+\begin{equation}
+  \sigma_{d,a} = \frac{\ln(c_{d,a} + 1)}{\sum_{a' \in A} \ln(c_{d,a'} + 1)},
+\end{equation}
+which follows from taking logarithms of Eq.~\ref{eq:score}. Because these
+shares are internal to one department and sum to one, they describe
+composition, not standing: a large $\sigma_{d,a}$ means area $a$ drives $d$'s
+score, not that $d$ leads others in $a$. The interface states this explicitly,
+because the distinction is easy to lose.
+
+\subsection{Per-faculty ordering}
+\label{sec:percapita}
+
+Eq.~\ref{eq:score} accumulates adjusted counts and then takes a geometric mean
+across areas. Because the per-area counts are sums over faculty, a department
+can raise its score by employing more people at a constant rate of output. The
+resulting order therefore answers ``how much does this department publish'',
+which is not the same question as ``how much does a member of this department
+publish'' --- and for an applicant, who will work with a handful of people
+rather than the whole department, the second is at least as relevant.
+
+We therefore also order departments by
+\begin{equation}
+  P(d) = \frac{\sum_{a \in A} c_{d,a}}{|F_d|},
+\end{equation}
+where $F_d$ is the set of faculty at $d$ with at least one credited publication
+in the selected window. Headcount is measured as \emph{publishing} faculty
+rather than roster size, so that a department is not penalized for listing
+members whose work falls outside the counted venues.
+
+Departments with fewer than five publishing faculty are excluded from this
+ordering rather than ranked. With two or three people the ratio is
+substantially one person's output, and the resulting list is dominated by small
+groups rather than by productive ones. This threshold is a judgement, and we
+report it explicitly because it materially determines the head of the ordering.
+
+\subsection{Fragility}
+\label{sec:fragility}
+
+Rank stability (\S\ref{sec:stability}) asks how much of a position is an
+artifact of methodology. Fragility asks a complementary question about
+personnel: how many departures would move this department out of its rank band?
+
+Because removing faculty from one department leaves every other department's
+score untouched, a hypothetical rank is a lookup rather than a re-ranking. We
+proceed greedily. At each step we evaluate removing each remaining faculty
+member, recompute the department's score under Eq.~\ref{eq:score} from its
+per-area counts less that person's per-area contribution, and remove whichever
+costs the department most. The choice is not simply the most prolific member:
+under a geometric mean, losing the only contributor in a thin area can cost more
+than losing a larger producer in a crowded one. We report the number of
+departures needed to leave the top 10, 25, and 50, and the rank trajectory of
+the first several steps.
+
+Computing this requires per-person, per-area credit, which the pipeline
+accumulates during stage 1 (\S\ref{sec:methods}) rather than deriving
+afterwards.
+
+\paragraph{Names are deliberately withheld.} The procedure necessarily
+identifies which individuals carry a department, and the interface does not
+display them. Publishing a ranked list of the people whose departure would most
+damage their employer invites precisely the personnel conclusions this work
+should not support, and the aggregate quantity --- how concentrated a
+department's output is --- is what carries the analytic content. We report
+distributions across departments in \S\ref{sec:results} for the same reason.
+
+\section{Implementation}
+\label{sec:implementation}
+
+\subsection{Architecture}
+
+\sys{} is a static, multi-page web application with no backend of any kind. All
+data is fetched client-side from public sources and processed in the browser;
+deployment is a directory of static files. This is a substantive design choice
+rather than an economy: it means the computation a reader sees is the
+computation they can inspect, there is no server-side state that could
+personalize or silently alter a ranking, and the tool cannot accumulate a
+record of who looked up whom.
+
+The application comprises four pages --- search and analysis, a ranking-impact
+simulator, a discoveries feed, and an NSF funding explorer --- each with its
+own entry module, sharing a common filter bar, chart layer, and autocomplete
+component. The canonical data load is memoized, so modules loaded together
+share a single download and parse.
+
+\subsection{Performance}
+
+A complete pass of the pipeline over all 20{,}822 faculty and 296{,}267
+publication records --- filter, score, and rank --- takes approximately
+100\,ms. This number is what makes the stability sweep viable: 16 full
+re-rankings complete in about 1.5\,s.
+
+Because 1.5\,s of uninterrupted computation would freeze the interface, the
+sweep yields to the event loop between runs and reports incremental progress,
+and its result is cached per region. The cost is therefore paid once per
+region per session, and every department examined afterwards resolves from
+cache.
+
+\subsection{Offline generators and correctness}
+
+Two datasets are too large or too slow to build at page load and are generated
+offline: OpenAlex-derived affiliation histories, and the NSF award snapshot.
+A separate name-reconciliation step maps NSF award records onto the current
+\csr{} roster, because \csr{} spells some faculty differently in its roster
+file than in its publication table.
+
+Correctness is maintained by a unit suite covering the filtering, scoring, and
+ranking logic, rendering safety, and the metric definitions introduced here,
+together with an end-to-end browser suite exercising the principal user flows.
+
+\section{Web interface}
+\label{sec:ui}
+
+\subsection{Search and filtering}
+
+A single search box resolves institutions, faculty, research areas, and
+individual venues, disambiguating by type. A shared filter bar exposes the
+discretionary parameters --- region, year range, venue set, whether to show
+rank ordinals, and whether to use historical affiliation --- and persists them
+across pages and into the URL, so any view is shareable as a link that encodes
+the settings that produced it. Making these parameters ambient rather than
+buried is itself an argument: the reader is continuously reminded that the
+numbers are conditional.
+
+\subsection{Departmental cards}
+
+A department expands to show, in order: the complete faculty roster ordered by
+adjusted count, with each member's rank within the department when rank display
+is enabled; each active subfield with its contributing faculty and their
+\emph{within-subfield} output; and the subfield share of the department's own
+score (\S\ref{sec:attribution}) rendered as a ranked bar chart.
+
+The bars in that chart are scaled against the largest share rather than against
+100\%. Because the shares derive from $\ln(c+1)$, the largest is typically
+under 8\%, and drawing each bar at its literal percentage of the available
+width renders two dozen visually indistinguishable stubs. This is a small
+detail with a real consequence: the corrected scaling is what makes the
+composition legible at a glance.
+
+\subsection{Analysis panel}
+
+Selecting a department or researcher opens a tabbed panel: publication trends,
+faculty diversity, publishing effort, conference trends, area growth,
+collaboration proxies, and --- added here --- rank stability, with the fragility
+analysis of \S\ref{sec:fragility} beneath it. Tabs that do not apply to the
+current target type are hidden rather than shown empty.
+
+The default view, shown before any search, ranks departments and researchers in
+two columns. A control above it switches the departmental column between the
+\csr{} score and the per-faculty ordering of \S\ref{sec:percapita}; the
+control appears only in that view, since a filtered result list is not a
+ranking.
+
+\subsection{Comparison, simulation, and discovery}
+
+An \texttt{A vs B} query switches into a head-to-head view with per-area
+margins. A separate simulator estimates how adding, removing, or transferring
+faculty would change a department's rank, resolving hypothetical candidates
+against DBLP so that real researchers not yet in \csr{} can be evaluated. A
+discoveries page surfaces notable movements without requiring the reader to
+know what to search for.
+
+\section{Features and results}
+\label{sec:results}
+
+All figures in this section were computed by a script that runs the shipping
+implementation against the live \csr{} inputs; none are estimated or
+illustrative. Unless noted, the region is the United States, the end year is
+2026, and the baseline setting is a 10-year window with \csr{}'s default venue
+set.
+
+\subsection{Rank stability is unevenly distributed}
+
+Table~\ref{tab:stability} summarizes the sweep over all 190 ranked U.S.\
+departments.
+
+\begin{table}[t]
+\centering
+\caption{Rank spread (worst minus best position) across 16 settings --- four
+look-back windows $\times$ four venue sets --- for 190 ranked U.S.\
+departments. Strata are defined by baseline rank.}
+\label{tab:stability}
+\begin{tabular}{lrr}
+\toprule
+Stratum & Departments & Median spread \\
+\midrule
+Baseline rank $\le$ 10   & 10  & 5.0 \\
+Baseline rank $\le$ 25   & 26  & 6.0 \\
+Baseline rank $\le$ 50   & 51  & 10.0 \\
+All ranked departments   & 190 & 17.0 \\
+\midrule
+\multicolumn{3}{l}{\emph{Distribution over all departments}} \\
+First quartile of spread   & \multicolumn{2}{r}{11 positions} \\
+Median spread              & \multicolumn{2}{r}{17 positions} \\
+Third quartile of spread   & \multicolumn{2}{r}{25 positions} \\
+Maximum spread             & \multicolumn{2}{r}{46 positions} \\
+Departments moving $>$10   & \multicolumn{2}{r}{77.4\%} \\
+Departments moving $>$25   & \multicolumn{2}{r}{23.2\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The headline number is the median spread of 17 positions, and the fact that
+over three quarters of departments move by more than 10. But the stratification is
+the more interesting result: the top of the ranking is markedly more stable
+than the middle. Departments with a baseline rank of 10 or better move a median
+of 5 positions; the field as a whole moves a median of 17.
+
+The ordering is thus most trustworthy precisely where it is least decision-
+relevant. An applicant weighing the top handful of departments is looking at a
+comparatively robust ordering --- and is also choosing among options that a
+single ranking position barely distinguishes. An applicant weighing options
+ranked between 30 and 80, which describes the large majority of applicants, is
+reading an ordering in which a 20-position difference can be produced entirely
+by moving the window from 10 years to 20.
+
+Even at the top, stability is not absolute: of the 10 departments in the
+baseline top 10, only 5 remain in the top 10 under all 16 settings.
+
+Table~\ref{tab:examples} gives individual envelopes.
+
+\begin{table}[t]
+\centering
+\caption{Rank envelopes for selected departments across the 16 settings.}
+\label{tab:examples}
+\begin{tabular}{lrrrr}
+\toprule
+Department & Baseline & Best & Worst & Spread \\
+\midrule
+Carnegie Mellon University                & 1  & 1  & 1  & 0 \\
+Univ.\ of Illinois at Urbana-Champaign    & 2  & 2  & 2  & 0 \\
+Northeastern University                   & 11 & 8  & 18 & 10 \\
+George Mason University                   & 32 & 23 & 50 & 27 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Carnegie Mellon and Illinois are genuinely invariant: they hold their positions
+under every setting tested. George Mason ranges from 23rd to 50th depending on
+nothing but the window and venue set. Reporting only the baseline value of 32
+for the latter conveys a precision the data does not support --- and this is
+the ordinary case, not a pathological one.
+
+\subsection{Venue sets correlate globally but move individual departments}
+
+Table~\ref{tab:venue} compares venue sets pairwise at a fixed 10-year window.
+
+\begin{table}[t]
+\centering
+\caption{Pairwise agreement between venue sets at a 10-year window. $\tau$ is
+Kendall's rank correlation~\cite{kendall1938}; overlap is the number of
+departments common to both top-10 lists.}
+\label{tab:venue}
+\begin{tabular}{llrrrr}
+\toprule
+Set A & Set B & $\tau$ & Median $|\Delta\text{rank}|$ & Max $|\Delta\text{rank}|$ & Top-10 overlap \\
+\midrule
+\csr{} default & \csr{} all    & 0.982 & 2 & 18 & 9 \\
+\csr{} default & CORE A$^*$    & 0.953 & 5 & 20 & 9 \\
+\csr{} default & CORE A/A$^*$  & 0.973 & 2 & 20 & 9 \\
+\csr{} all     & CORE A$^*$    & 0.952 & 5 & 19 & 8 \\
+\csr{} all     & CORE A/A$^*$  & 0.973 & 3 & 15 & 10 \\
+CORE A$^*$     & CORE A/A$^*$  & 0.961 & 4 & 15 & 8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Read as aggregate correlations, these numbers are reassuring: $\tau$ never
+falls below 0.95, so the venue sets broadly agree about the shape of the field.
+Read as individual outcomes, they are not. Switching from \csr{}'s default set
+to CORE~A$^*$ moves the median department 5 positions and some department 20
+positions, and changes the membership of the top 10.
+
+This is the familiar gap between a distribution and a case. A department
+evaluating itself, or an applicant evaluating a department, experiences the
+20-position move, not the 0.953 correlation. High rank correlation is
+compatible with substantial individual displacement, and reporting only the
+former is how sensitivity analyses come to reassure when they should caution.
+
+\subsection{Output concentration rises sharply down the ranking}
+
+Table~\ref{tab:concentration} reports the share of a department's adjusted
+output produced by its most prolific faculty, over 166 U.S.\ departments with
+at least five active faculty.
+
+\begin{table}[t]
+\centering
+\caption{Concentration of adjusted publication count, for 166 U.S.\
+departments with at least 5 active faculty in a 10-year window.}
+\label{tab:concentration}
+\begin{tabular}{lr}
+\toprule
+Quantity & Value \\
+\midrule
+Median faculty per department          & 24 \\
+Median top-1 share                     & 15.2\% \\
+Median top-3 share                     & 36.7\% \\
+Departments with top-3 share $>$ 50\%  & 31.9\% \\
+\midrule
+Median top-3 share, rank $\le$ 25      & 15.5\% \\
+Median top-3 share, rank $>$ 100       & 60.3\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Nearly a third of departments derive more than half their adjusted output from
+three people, and the contrast across the ranking is stark: a median top-3
+share of 15.5\% among the top 25 versus 60.3\% below rank 100. Departments in
+the tail are not scaled-down versions of departments at the top; they are
+structurally different, with output concentrated in a few individuals.
+
+For an applicant this is arguably more actionable than the rank itself. A
+department ranked 120 whose standing rests on three faculty is a good choice if
+one of those three takes the applicant as a student and a poor one otherwise,
+and the rank alone cannot distinguish these outcomes. It also bears on the
+stability result above: concentrated departments are precisely those whose
+position is most sensitive to which venues are counted, since a few
+individuals' venue preferences determine the department's profile.
+
+\subsection{Measuring per faculty reorders the field}
+
+Table~\ref{tab:percapita} orders the 166 U.S.\ departments with at least five
+publishing faculty by adjusted output per head, against their \csr{} position.
+
+\begin{table}[t]
+\centering
+\caption{Top ten departments by adjusted publication count per publishing
+faculty member, 10-year window, alongside their \csr{} rank.}
+\label{tab:percapita}
+\begin{tabular}{lrrr}
+\toprule
+Department & Per faculty & Faculty & \csr{} rank \\
+\midrule
+Stanford University                    & 11.66 & 61  & 10 \\
+Univ.\ of California - Berkeley         & 8.32  & 85  & 7  \\
+Univ.\ of California - Los Angeles      & 7.55  & 50  & 20 \\
+Massachusetts Inst.\ of Technology      & 7.50  & 104 & 5  \\
+University of Texas at Austin          & 7.28  & 60  & 14 \\
+University of Washington               & 7.04  & 80  & 6  \\
+Carnegie Mellon University             & 6.59  & 183 & 1  \\
+University of Pennsylvania             & 6.31  & 70  & 18 \\
+Harvard University                     & 6.22  & 38  & 39 \\
+Univ.\ of Illinois at Urbana-Champaign  & 6.16  & 127 & 2  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The two orderings agree far less than the venue sets did. Kendall's $\tau$
+between them is 0.716, against 0.95 or higher for every pair of venue sets in
+Table~\ref{tab:venue}; the median department moves 13 positions and one moves
+71. Only 6 of the 10 departments in the \csr{} top ten remain in the top ten
+when measured per head.
+
+The direction of the change is systematic. Carnegie Mellon leads the \csr{}
+ordering with 183 publishing faculty and places seventh per head; Stanford
+places tenth overall and first per head with 61. The departments that gain most
+are small and selective: TTI Chicago moves from 87th to 16th on 15 faculty,
+Caltech from 80th to 20th on 27, and UC Merced from 73rd to 18th on 18.
+
+Neither ordering is more correct. A large department genuinely produces more
+research, which is what \csr{} sets out to measure, and an applicant choosing
+by prestige or by breadth of available advisors is right to weigh size. But an
+applicant asking how productive the people around them will be is asking the
+per-head question, and the volume-weighted ordering does not answer it. Our
+point is that the two questions have materially different answers --- 13
+positions of median disagreement --- and that a single ordered list conceals
+which one it is reporting.
+
+\subsection{Many departments rest on very few people}
+
+Table~\ref{tab:fragility} reports how many departures would move a department
+out of its own rank band, for the 51 departments ranked in the top 50 with at
+least five publishing faculty.
+
+\begin{table}[t]
+\centering
+\caption{Departures required to leave a rank band, by band. Three departments do
+not leave their band within the 15-removal search and are excluded from the
+medians.}
+\label{tab:fragility}
+\begin{tabular}{lrr}
+\toprule
+Band & Departments & Median departures \\
+\midrule
+Top 10  & 8  & 3.5 \\
+Top 25  & 15 & 5 \\
+Top 50  & 25 & 2 \\
+\midrule
+All resolved & 48 & 3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Twelve of the 48 departments leave their band on a \emph{single} departure, and
+22 --- almost half --- on two or fewer. The median is three. Rice University,
+ranked 43rd with 39 publishing faculty, falls out of the top 50 when one person
+leaves. George Mason, 32nd with 54 faculty, needs three. At the other end,
+Carnegie Mellon and Northeastern never leave their bands within the 15-removal
+search, and MIT needs five departures to leave the top ten.
+
+Fragility tracks concentration, as it should: departments that leave their band
+on one departure have a median top-3 share of 22.1\%, against 15.4\% for those
+needing four or more. The band medians are not monotonic --- the top-50 band has
+the lowest median at 2 --- because a department sitting near the bottom edge of
+a band is close to leaving it regardless of how its output is distributed.
+
+Read alongside \S\ref{sec:stability}, this sharpens the picture. A rank is
+contingent on methodology, moving a median of 17 positions across defensible
+settings; it is also contingent on a handful of individuals continuing to work
+where they currently do. For an applicant, a department whose standing rests on
+one or two people is a genuinely different proposition from one of the same rank
+whose output is spread across dozens, and the rank alone does not distinguish
+them.
+
+\section{Limitations}
+\label{sec:limitations}
+
+\paragraph{The proxy is upstream of everything.} \sys{} inherits \csr{}'s
+premise that fractional publication credit at selective conferences is a useful
+proxy for research activity. Work published in journals, at workshops, or at
+venues outside the curated lists is invisible, as is teaching, mentorship,
+software, and service. Our stability analysis quantifies sensitivity
+\emph{within} this framework; it says nothing about the framework's validity.
+
+\paragraph{Aggregated inputs.} Because the publication table carries no author
+order or paper identity, alternative credit models --- first-author,
+last-author-weighted, harmonic --- cannot be evaluated at corpus scale without
+per-author DBLP retrieval. We regard this as the most interesting blocked
+direction.
+
+\paragraph{Historical attribution quality.} OpenAlex affiliation histories
+contain errors, which is why a community-corrections file is merged over them.
+Results computed under historical attribution should be treated as
+provisional.
+
+\paragraph{Fragility is a counterfactual.} The analysis assumes a department's
+remaining output is unchanged when someone leaves, which no real department
+experiences: positions are refilled, collaborations are redistributed, and
+students continue. It measures how concentrated current output is, expressed in
+units of departures, not a forecast.
+
+\paragraph{Name identity.} All joins are by name. \csr{} disambiguates with
+numeric suffixes, which we preserve, but coauthor matching against DBLP remains
+exact-match by construction: we prefer to miss a match than to attribute one
+researcher's collaborators to another.
+
+\section{Ethical considerations}
+
+Rankings applied to individuals invite misuse in ways that rankings applied to
+institutions do not. We adopt several constraints. \sys{} presents no
+individual-level metric as an evaluation, and reports faculty output only as the
+publication counts its sources already make public. The fragility analysis
+(\S\ref{sec:fragility}) identifies which individuals a department's rank
+depends on and deliberately does not display them, reporting only counts and the
+resulting positions. Every derived quantity is
+labeled with what it measures and what it cannot, inline rather than in
+documentation. The system infers no protected characteristics. Because it is
+entirely client-side, it collects no record of queries.
+
+The concentration results in \S\ref{sec:results} are reported at the
+distributional level deliberately: identifying which specific individuals a
+department depends on invites exactly the personnel conclusions this work
+should not support.
+
+\section{Conclusion}
+
+\sys{} began as a companion to a guide for prospective doctoral
+students~\cite{phddemystify} and became an argument about presentation. The
+computation underlying \csr{} is transparent and reproducible; what a single
+ordered list cannot convey is how contingent its output is on choices that were
+made silently. Once the ranking pipeline is fast enough to run many times ---
+roughly 100\,ms in a browser, in our implementation --- that contingency
+becomes directly measurable and directly displayable.
+
+The measurement yields a finding we did not anticipate: rank stability is
+sharply stratified. The top ten departments are nearly invariant while the
+median department moves 17 positions across defensible settings, which means
+the ranking is most reliable in the region where readers need it least. We
+believe the appropriate response is not to propose a better ranking, but to
+report the envelope alongside the number, and to supply the more local
+information --- which subfield, which faculty --- that the decision actually
+turns on.
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}
