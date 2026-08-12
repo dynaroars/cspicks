@@ -318,13 +318,17 @@ export function searchSchools(query) {
 
         publicationSchools.forEach(schoolName => {
           if (!schoolStats[schoolName]) {
-            schoolStats[schoolName] = { adjusted: 0, count: 0, faculty: [] };
+            schoolStats[schoolName] = { adjusted: 0, count: 0, faculty: [], facultyStats: {} };
           }
           schoolStats[schoolName].adjusted += pub.adjustedcount;
           schoolStats[schoolName].count += pub.count;
           if (!schoolStats[schoolName].faculty.includes(profName)) {
             schoolStats[schoolName].faculty.push(profName);
           }
+          const facultyStats = schoolStats[schoolName].facultyStats[profName]
+            || (schoolStats[schoolName].facultyStats[profName] = { count: 0, adjusted: 0 });
+          facultyStats.count += pub.count;
+          facultyStats.adjusted += pub.adjustedcount;
         });
       });
     });
@@ -337,7 +341,12 @@ export function searchSchools(query) {
         return {
           ...school,
           areas: {
-            [confKeyMatch]: { count: stats.count, adjusted: stats.adjusted, faculty: stats.faculty }
+            [confKeyMatch]: {
+              count: stats.count,
+              adjusted: stats.adjusted,
+              faculty: stats.faculty,
+              facultyStats: stats.facultyStats
+            }
           },
           totalCount: stats.count,
           totalAdjusted: stats.adjusted

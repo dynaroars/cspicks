@@ -467,6 +467,7 @@ function emptySchool(name, source) {
     areas: {},
     areaAdjustedCounts: {},
     facultyAdjustedCounts: {},
+    facultyCounts: {},
     totalCount: 0,
     totalAdjusted: 0
   };
@@ -509,13 +510,22 @@ function collectFilteredData({ professors, schools }, startYear, endYear, isInRe
         school.totalCount += pub.count;
         school.totalAdjusted += pub.adjustedcount;
 
-        if (!school.areas[area]) school.areas[area] = { count: 0, adjusted: 0, faculty: [] };
+        if (!school.areas[area]) school.areas[area] = { count: 0, adjusted: 0, faculty: [], facultyStats: {} };
         school.areas[area].count += pub.count;
         school.areas[area].adjusted += pub.adjustedcount;
         if (!school.areas[area].faculty.includes(name)) school.areas[area].faculty.push(name);
 
+        // Per-area, per-person totals have to be accumulated here: in historical
+        // mode a professor's own area stats span every school they published
+        // from, so they cannot be re-derived for one school after the fact.
+        const areaFaculty = school.areas[area].facultyStats[name]
+          || (school.areas[area].facultyStats[name] = { count: 0, adjusted: 0 });
+        areaFaculty.count += pub.count;
+        areaFaculty.adjusted += pub.adjustedcount;
+
         school.areaAdjustedCounts[area] = (school.areaAdjustedCounts[area] || 0) + pub.adjustedcount;
         school.facultyAdjustedCounts[name] = (school.facultyAdjustedCounts[name] || 0) + pub.adjustedcount;
+        school.facultyCounts[name] = (school.facultyCounts[name] || 0) + pub.count;
       });
     });
 

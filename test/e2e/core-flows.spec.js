@@ -92,11 +92,17 @@ test('default view ranks universities and people side by side, and clears stale 
   const analysisWidths = await analysisCards.evaluateAll(cards => cards.map(card => Math.round(card.getBoundingClientRect().width)));
   expect(analysisWidths.length).toBeGreaterThan(1);
   expect(new Set(analysisWidths).size).toBe(1);
+  // The score breakdown opens with the card; collapsing is the reader's choice.
   const contributions = page.locator('#school-results .attribution-details');
-  await expect(contributions).not.toHaveAttribute('open', '');
-  await contributions.locator('summary').click();
+  await expect(contributions).toHaveAttribute('open', '');
   await expect(contributions.locator('.attribution-content')).toBeVisible();
-  await expect(page.locator('#school-results .faculty-tag')).toContainText('Hai Duong 2 papers (1.0 adjusted)');
+  await contributions.locator('summary').click();
+  await expect(contributions.locator('.attribution-content')).toBeHidden();
+  await contributions.locator('summary').click();
+  // The department roster and the subfield list each carry the professor, and
+  // here their totals coincide because this professor has one counted area.
+  await expect(page.locator('#school-results .school-faculty-roster .faculty-tag')).toContainText('Hai Duong 2 papers (1.0 adjusted)');
+  await expect(page.locator('#school-results .school-area-section .faculty-tag')).toContainText('Hai Duong 2 papers (1.0 adjusted)');
   await expect(page.locator('#school-results .school-area-header')).toContainText('2 papers (1.0 adjusted)');
 
   await page.locator('#region-select').selectOption('europe');
@@ -108,7 +114,7 @@ test('choosing faculty from a university switches analysis to that professor', a
   await page.goto('./');
   await page.locator('#main-search').fill('George Mason University');
   await expect(page).toHaveURL(/targetType=school/);
-  await page.locator('#school-results .faculty-tag', { hasText: 'Hai Duong' }).click();
+  await page.locator('#school-results .school-faculty-roster .faculty-tag', { hasText: 'Hai Duong' }).click();
   await expect(page.locator('#prof-results')).toContainText('Hai Duong');
   await expect(page).toHaveURL(/targetType=researcher/);
   expect(new URL(page.url()).searchParams.get('target')).toBe('Hai Duong 0001');
