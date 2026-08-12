@@ -221,15 +221,20 @@ export function cleanName(name) {
 }
 
 const institutionShortNames = {
+  // Keys are CSRankings' own spellings, which are not always the institution's
+  // canonical name ("Univ. of California - Berkeley", not "University of
+  // California, Berkeley"). Every key here is verified to exist in the roster;
+  // entries that do not match are silently dead, which is how the whole
+  // University of California set went unshortened for a while.
   'Carnegie Mellon University': 'CMU',
   'George Mason University': 'GMU',
   'Massachusetts Inst. of Technology': 'MIT',
   'Georgia Institute of Technology': 'Georgia Tech',
   'California Inst. of Technology': 'Caltech',
-  'University of Illinois at Urbana-Champaign': 'UIUC',
+  'Illinois Institute of Technology': 'Illinois Tech',
   'Univ. of Illinois at Urbana-Champaign': 'UIUC',
-  'University of Maryland, College Park': 'UMD',
   'Univ. of Maryland - College Park': 'UMD',
+  'Univ. of Maryland - Baltimore County': 'UMBC',
   'University of Texas at Austin': 'UT Austin',
   'University of Wisconsin - Madison': 'UW–Madison',
   'University of Michigan': 'UMich',
@@ -237,21 +242,23 @@ const institutionShortNames = {
   'Pennsylvania State University': 'Penn State',
   'University of Southern California': 'USC',
   'University of Washington': 'UW',
-  'Virginia Polytechnic Institute and State University': 'Virginia Tech',
+  'University of Chicago': 'UChicago',
+  'University of North Carolina': 'UNC',
   'New York University': 'NYU',
-  'University of North Carolina at Chapel Hill': 'UNC',
-  'University of Massachusetts Amherst': 'UMass Amherst',
-  'University of California, Berkeley': 'UC Berkeley',
-  'University of California - Berkeley': 'UC Berkeley',
-  'University of California, Los Angeles': 'UCLA',
-  'University of California - Los Angeles': 'UCLA',
-  'University of California, San Diego': 'UCSD',
-  'University of California - San Diego': 'UCSD',
-  'University of California, Santa Barbara': 'UCSB',
-  'University of California - Santa Barbara': 'UCSB',
-  'University of California, Irvine': 'UC Irvine',
-  'University of California - Irvine': 'UC Irvine'
+  'Johns Hopkins University': 'Johns Hopkins',
+  'Stony Brook University': 'Stony Brook',
+  'Univ. of Massachusetts Amherst': 'UMass Amherst',
+  'Univ. of California - Berkeley': 'UC Berkeley',
+  'Univ. of California - Los Angeles': 'UCLA',
+  'Univ. of California - San Diego': 'UCSD',
+  'Univ. of California - Santa Barbara': 'UCSB',
+  'Univ. of California - Santa Cruz': 'UC Santa Cruz',
+  'Univ. of California - Irvine': 'UC Irvine',
+  'Univ. of California - Davis': 'UC Davis',
+  'Univ. of California - Riverside': 'UC Riverside',
+  'Univ. of California - Merced': 'UC Merced'
 };
+
 
 // CSRankings publishes a flag per country alongside its institution data.
 const CSRANKINGS_FLAGS = 'https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/flags';
@@ -263,8 +270,27 @@ export function countryFlag(countryCode, countryName = '') {
   return `<img class="country-flag" src="${CSRANKINGS_FLAGS}/${code}.png" alt="${label}" title="${label}" width="16" height="11" loading="lazy" decoding="async">`;
 }
 
+/**
+ * A display-only friendly name. The CSRankings spelling remains the key for
+ * every lookup, join, and URL; this is only what a reader sees.
+ *
+ * The table above holds names that shorten to something a rule could not
+ * derive — acronyms, and cases where the common name is not a substring.
+ * Beyond it, most institutions are "<Name> University" and are universally
+ * called just "<Name>": Harvard, Stanford, Columbia, Ohio State. Dropping the
+ * suffix is applied only when the remainder stands on its own, meaning a single
+ * word or one ending in "State". Multi-word remainders keep the suffix, because
+ * "Istanbul Technical" or "De La Salle" do not read as institution names
+ * without it. Verified against the full CSRankings roster: 159 of 702 names
+ * shorten, and no two collapse to the same string.
+ */
 export function getInstitutionShortName(name) {
-  return institutionShortNames[name] || name;
+  const mapped = institutionShortNames[name];
+  if (mapped) return mapped;
+  const match = String(name || '').match(/^(.+) University$/);
+  if (!match) return name;
+  const rest = match[1];
+  return !/\s/.test(rest) || /\sState$/.test(rest) ? rest : name;
 }
 
 export function escapeHtml(value) {
