@@ -171,9 +171,21 @@ test('vs syntax compares two targets in place of search results', async ({ page 
   await page.locator('#main-search').fill('George Mason University vs Univ. of Illinois at Urbana-Champaign');
   await expect(comparison).toBeVisible();
   await expect(page.locator('#comparison-title')).toHaveText('George Mason University vs Univ. of Illinois at Urbana-Champaign');
+  // The verdict leads, the chart closes: summary before detail. These two tie
+  // on score and each lead one area, so the verdict reports an even match.
+  await expect(summary.locator('.comparison-verdict')).toContainText('evenly matched');
   await expect(summary).toContainText('What explains the rank gap?');
   await expect(summary).toContainText('Software Engineering');
   await expect(page.locator('#comparison-chart-container')).toBeVisible();
+  const order = await page.locator('#comparison-results').evaluate(el => {
+    const box = sel => el.querySelector(sel).getBoundingClientRect().top;
+    return {
+      verdictFirst: box('.comparison-verdict') < box('.comparison-scoreboard'),
+      gapBeforeLeads: box('.rank-gap-card') < box('.comparison-leads'),
+      chartLast: box('.comparison-leads') < box('#comparison-chart-container')
+    };
+  });
+  expect(order).toEqual({ verdictFirst: true, gapBeforeLeads: true, chartLast: true });
   await expect(page.locator('#school-results .card')).toHaveCount(0);
   await expect(page.locator('#integrated-analysis')).toBeHidden();
   await expect(page).not.toHaveURL(/target=/);
@@ -181,6 +193,9 @@ test('vs syntax compares two targets in place of search results', async ({ page 
   // Researchers compare too, but the rank-gap breakdown is school-only.
   await page.locator('#main-search').fill('Hai Duong vs Alice Example');
   await expect(page.locator('#comparison-title')).toHaveText('Hai Duong vs Alice Example');
+  // Researchers are judged on adjusted output rather than rank (the school
+  // verdict above quotes "#1 vs #1"), and get no gap breakdown.
+  await expect(summary.locator('.comparison-verdict')).toContainText('adjusted');
   await expect(summary).toContainText('leads in');
   await expect(summary).not.toContainText('What explains the rank gap?');
 
@@ -281,8 +296,10 @@ test('professor analysis shows activity, area, and venue patterns', async ({ pag
   await page.goto('./');
   await page.locator('#main-search').fill('Hai Duong');
   await expect(page.locator('#integrated-analysis')).toBeVisible();
+  // The school-only tabs, including Rank Stability, hide for a researcher.
   const visibleTabs = page.locator('.analysis-nav-tabs .nav-tab:visible');
   await expect(visibleTabs).toHaveCount(3);
+  await expect(page.locator('.nav-tab[data-tab="stability"]')).toBeHidden();
   const tabWidths = await visibleTabs.evaluateAll(tabs => tabs.map(tab => Math.round(tab.getBoundingClientRect().width)));
   expect(new Set(tabWidths).size).toBe(1);
   await expect(page.locator('#ranking-stats')).toContainText('Active years');

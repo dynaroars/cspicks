@@ -2,7 +2,7 @@ import { drawChart, onThemeChange } from './charts.js';
 import { fetchFrequentCoauthors } from './dblp.js';
 import { filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from './data.js';
 import { areaLabels, cleanName, escapeHtml, getConferenceLabel } from './shared.js';
-import { buildPriorPeriodData, calculateAreaMomentum, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics } from './metrics.js';
+import { buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateParityReport, calculatePerCapita, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from './metrics.js';
 import { renderInsightList, renderMetricCards } from './analysis-ui.js';
 import bundledRules from './csrankings-rules.generated.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
@@ -16,6 +16,7 @@ function refreshActiveTabChart() {
     else if (currentTab === 'effort') renderSubfieldEffort();
     else if (currentTab === 'conf-trends') renderConferenceTrends();
     else if (currentTab === 'collaboration') renderCollaborationStats();
+    else if (currentTab === 'stability') renderRankStability();
 }
 
 onThemeChange(refreshActiveTabChart);
@@ -171,6 +172,9 @@ function setupTabs() {
             } else if (tabName === 'collaboration') {
                 document.getElementById('collaboration-view').hidden = false;
                 renderCollaborationStats();
+            } else if (tabName === 'stability') {
+                document.getElementById('stability-view').hidden = false;
+                renderRankStability();
             }
 
             requestAnimationFrame(() => {
@@ -377,6 +381,148 @@ function renderCollaborationStats() {
         <div class="data-caveat"><strong>Source limitation:</strong> The source data is aggregated per author and does not expose paper identifiers or coauthor affiliations, so CSPicks cannot reliably separate internal from cross-university collaborations. The proxy above measures coauthor intensity without inventing that split.</div>
         <h3>Highest team-size proxies</h3>
         <div class="metric-table">${leaders.map((item, index) => `<div><span>${index + 1}. ${escapeHtml(item.school.name)}</span><strong>${item.metrics.impliedTeamSize.toFixed(2)}×</strong></div>`).join('')}</div>
+    `;
+}
+
+const CONF_SET_LABELS = {
+    'csrankings-default': 'CSRankings default',
+    csrankings: 'CSRankings all',
+    'core-a': 'CORE A + A*',
+    core: 'CORE A* only'
+};
+
+// One sweep serves every school, so it is cached per region rather than per
+// school. Historical mode changes which school a publication counts for, so it
+// is part of the key too.
+const stabilityCache = new Map();
+// A sweep takes over a second, and re-entering the tab or picking another
+// school during it would otherwise start a second identical one. In-flight
+// sweeps are shared so the later caller joins the running one.
+const stabilitySweeps = new Map();
+let stabilityToken = 0;
+
+function buildStabilitySweep(cacheKey, onProgress) {
+    if (stabilityCache.has(cacheKey)) return Promise.resolve(stabilityCache.get(cacheKey));
+    const running = stabilitySweeps.get(cacheKey);
+    if (running) {
+        running.listeners.add(onProgress);
+        return running.promise;
+    }
+
+    const listeners = new Set([onProgress]);
+    const { region, historyMap, aliasMap, endYear } = filters;
+    const promise = (async () => {
+        const variants = rankStabilityVariants(endYear);
+        const samples = [];
+        for (const variant of variants) {
+            // Each pass is ~100ms over the full dataset; yielding between them keeps
+            // the page responsive instead of freezing it for a second and a half.
+            await new Promise(resolve => setTimeout(resolve, 0));
+            samples.push(collectVariantRanks(rawData, variant, { region, historyMap, aliasMap }));
+            listeners.forEach(listener => listener?.(samples.length, variants.length));
+        }
+        stabilityCache.set(cacheKey, samples);
+        stabilitySweeps.delete(cacheKey);
+        return samples;
+    })().catch(error => {
+        stabilitySweeps.delete(cacheKey);
+        throw error;
+    });
+
+    stabilitySweeps.set(cacheKey, { listeners, promise });
+    return promise;
+}
+
+/**
+ * Departures needed to leave a rank band. Deliberately reports counts and the
+ * resulting positions only: which specific people carry a department is not
+ * something this should publish, and naming them would invite exactly the
+ * personnel conclusions the project does not support.
+ */
+function renderFragility(schoolName) {
+    const { current } = getAnalysisData();
+    const fragility = calculateFragility(current, schoolName);
+    if (!fragility || !fragility.steps.length) return '';
+
+    const bands = fragility.thresholds
+        .filter(threshold => fragility.rank <= threshold)
+        .map(threshold => {
+            const departures = fragility.exits[threshold];
+            return `<div class="diagnostic-stat"><span>Leaves the top ${threshold}</span><strong>${
+                departures === undefined ? `more than ${fragility.steps.length}` : `${departures} ${departures === 1 ? 'departure' : 'departures'}`
+            }</strong><small>of ${fragility.facultyCount} publishing faculty</small></div>`;
+        });
+    if (!bands.length) return '';
+
+    const trajectory = fragility.steps.slice(0, 5)
+        .map((step, index) => `<div><span>${index + 1} ${index === 0 ? 'departure' : 'departures'}</span><strong>#${step.rank}</strong></div>`)
+        .join('');
+
+    return `
+        <h3>How much does this rank depend on a few people?</h3>
+        <p class="summary-note">Removing the faculty whose absence would cost this university the most, one at a time, and re-ranking it against every other university unchanged.</p>
+        <div class="diagnostic-grid">${bands.join('')}</div>
+        <div class="metric-table fragility-trajectory">${trajectory}</div>
+        <p class="summary-note">Individual names are deliberately omitted: this measures how concentrated a department's output is, not any person's worth.</p>`;
+}
+
+async function renderRankStability() {
+    const container = document.getElementById('stability-stats');
+    if (!container || !rawData?.professors) return;
+    const schoolName = getTargetName();
+    const { region, historical, endYear } = filters;
+    const cacheKey = `${region}|${historical ? 'history' : 'current'}|${endYear}`;
+    const token = ++stabilityToken;
+
+    const cached = stabilityCache.get(cacheKey);
+    if (!cached) {
+        container.innerHTML = `<h2>${escapeHtml(schoolName)} rank stability</h2>
+            <p class="summary-note" id="stability-progress">Recomputing the ranking under every setting…</p>`;
+    }
+
+    const samples = await buildStabilitySweep(cacheKey, (done, total) => {
+        if (token !== stabilityToken) return;
+        const progress = document.getElementById('stability-progress');
+        if (progress) progress.textContent = `Recomputing the ranking under every setting… ${done} of ${total}`;
+    });
+    // A newer render (or a different target) started while this one was running.
+    if (token !== stabilityToken || getTargetName() !== schoolName) return;
+
+    const summary = summarizeRankStability(samples, schoolName);
+    if (!summary) {
+        container.innerHTML = `<h2>${escapeHtml(schoolName)} rank stability</h2>
+            <p>This university does not rank under any of the settings tested.</p>`;
+        return;
+    }
+
+    const spans = [...new Set(samples.map(sample => sample.variant.span))];
+    const sets = [...new Set(samples.map(sample => sample.variant.confSet))];
+    const cell = (span, confSet) => {
+        const row = summary.rows.find(item => item.span === span && item.confSet === confSet);
+        if (!row || !Number.isFinite(row.rank)) return '<td class="stability-cell">—</td>';
+        const extreme = row.rank === summary.best ? ' stability-best'
+            : row.rank === summary.worst ? ' stability-worst' : '';
+        return `<td class="stability-cell${extreme}"><strong>#${row.rank}</strong><small>of ${row.of}</small></td>`;
+    };
+
+    container.innerHTML = `
+        <h2>${escapeHtml(schoolName)} rank stability</h2>
+        <p class="summary-note">The same university, ranked ${summary.settings} ways: every look-back window against every conference set, with the region held at your current selection.</p>
+        ${renderMetricCards([
+            { label: 'Best case', value: `#${summary.best}`, help: 'The most favourable combination of look-back window and conference set.' },
+            { label: 'Worst case', value: `#${summary.worst}`, help: 'The least favourable combination of look-back window and conference set.' },
+            { label: 'Median', value: `#${summary.median}`, help: 'Middle rank across all settings tested — a more honest single number than any one of them.' },
+            { label: 'Spread', value: `${summary.spread} places`, className: summary.stable ? 'confidence-high' : 'confidence-review', help: summary.stable ? 'The rank holds steady across settings, so it reflects the department rather than the choice of settings.' : 'The rank moves substantially across settings, so any single number — including the one on the search page — is largely an artifact of those choices.' }
+        ], 'Rank stability')}
+        <table class="stability-table">
+            <caption>Rank by look-back window and conference set</caption>
+            <thead><tr><th scope="col">Window</th>${sets.map(set => `<th scope="col">${escapeHtml(CONF_SET_LABELS[set] || set)}</th>`).join('')}</tr></thead>
+            <tbody>${spans.map(span => `<tr><th scope="row">Last ${span} years</th>${sets.map(set => cell(span, set)).join('')}</tr>`).join('')}</tbody>
+        </table>
+        ${renderFragility(schoolName)}
+        <div class="data-caveat"><strong>How to read this:</strong> ${summary.stable
+            ? 'A narrow spread means the position is a property of the department, not of the settings.'
+            : `A ${summary.spread}-place spread means the headline rank is largely a consequence of which years and venues are counted. Treat any single rank — including this site's — as one point in that range.`}${summary.unranked ? ` This university is unranked under ${summary.unranked} of the ${summary.settings} settings.` : ''} Region is held fixed because a rank among US universities and a rank worldwide answer different questions and cannot be pooled into one range.</div>
     `;
 }
 

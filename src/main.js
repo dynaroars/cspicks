@@ -45,7 +45,9 @@ const params = new URLSearchParams(window.location.search);
 async function init() {
   filters = createFilterBar('#filter-bar', {
     label: 'Search filters',
-    prefix: 'Showing',
+    // Per-faculty ordering only means something for the ranking lists this page
+    // shows, so it is opted into here rather than offered on every page.
+    fields: ['region', 'years', 'confSet', 'rankings', 'history', 'percapita'],
     params,
     onChange: () => {
       refreshData();

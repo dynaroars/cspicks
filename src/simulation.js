@@ -1,4 +1,4 @@
-import { parentMap } from './data.js';
+import { parentMap, scoreFromAreaCounts } from './data.js';
 import { cleanName } from './shared.js';
 
 function levenshtein(a, b) {
@@ -110,14 +110,10 @@ export function calculateRankImpact(schools, ops) {
   Object.values(parentMap).forEach(a => areas.add(a));
   const areaList = Array.from(areas);
 
-  const calcScore = (s) => {
-    let product = 1;
-    for (const area of areaList) {
-      const adj = s.areas[area]?.adjusted || 0;
-      product *= (adj + 1);
-    }
-    return Math.round(10 * Math.pow(product, 1 / areaList.length)) / 10;
-  };
+  // The ranking formula lives in data.js; a hypothetical score has to use that
+  // one rather than a copy here that could drift from it.
+  const calcScore = (s) => scoreFromAreaCounts(
+    Object.fromEntries(areaList.map(area => [area, s.areas[area]?.adjusted || 0])));
 
   allSchools.forEach(s => {
     s._simScore = calcScore(s);

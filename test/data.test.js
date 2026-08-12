@@ -7,7 +7,7 @@ import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../src/sim
 import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl } from '../src/dblp.js';
 import { parseCsrankingsRules } from '../src/csrankings-rules.js';
 import { renderSchoolCard } from '../src/search-cards.js';
-import { calculateAreaMomentum, calculateDiscoveryInsights, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, explainRankGap } from '../src/metrics.js';
+import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, collectVariantRanks, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../src/metrics.js';
 import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../src/nsf.js';
 
 function professor(name, affiliation, count, adjustedcount) {
@@ -350,8 +350,23 @@ test('rendering helpers neutralize markup and unsafe URLs', () => {
   assert.equal(safeExternalUrl('javascript:alert(1)'), '#');
   assert.equal(safeExternalUrl('https://example.com/profile'), 'https://example.com/profile');
   assert.equal(getInstitutionShortName('Carnegie Mellon University'), 'CMU');
+  // The table holds names no rule could derive, keyed on CSRankings' own
+  // spelling — which is "Univ. of ...", not "University of ...".
+  assert.equal(getInstitutionShortName('Univ. of California - Berkeley'), 'UC Berkeley');
+  assert.equal(getInstitutionShortName('University of Pennsylvania'), 'Penn');
+  // Everything else drops a "University" suffix when the rest stands alone.
+  assert.equal(getInstitutionShortName('Harvard University'), 'Harvard');
+  assert.equal(getInstitutionShortName('Stanford University'), 'Stanford');
+  assert.equal(getInstitutionShortName('Columbia University'), 'Columbia');
+  assert.equal(getInstitutionShortName('Ohio State University'), 'Ohio State');
+  assert.equal(getInstitutionShortName('North Carolina State University'), 'North Carolina State');
+  // A multi-word remainder does not read as an institution on its own.
+  assert.equal(getInstitutionShortName('Istanbul Technical University'), 'Istanbul Technical University');
+  assert.equal(getInstitutionShortName('De La Salle University'), 'De La Salle University');
+  assert.equal(getInstitutionShortName('University of Virginia'), 'University of Virginia');
   assert.equal(getInstitutionShortName('George Mason University'), 'GMU');
-  assert.equal(getInstitutionShortName('Unmapped University'), 'Unmapped University');
+  // No table entry and no suffix to drop: the name passes through untouched.
+  assert.equal(getInstitutionShortName('Unmapped Institute of Technology'), 'Unmapped Institute of Technology');
 });
 
 test('fetchCsv rejects HTTP failures', async () => {
@@ -690,4 +705,126 @@ test('area momentum compares a school against the field, not against itself', ()
   // Ordered by the size of the gap, whichever direction it points.
   assert.equal(momentum[0].area, 'act');
   assert.equal(calculateAreaMomentum(current, prior, 'Missing School').length, 0);
+});
+
+test('rank stability sweeps every window and conference set, holding region fixed', () => {
+  const variants = rankStabilityVariants(2026);
+  assert.equal(variants.length, 16);
+  assert.deepEqual([...new Set(variants.map(v => v.confSet))], ['csrankings-default', 'csrankings', 'core', 'core-a']);
+  // Windows are inclusive of both endpoints, so a 5-year window is 2022–2026.
+  assert.deepEqual(variants[0], { key: '5|csrankings-default', span: 5, confSet: 'csrankings-default', startYear: 2022, endYear: 2026 });
+
+  const data = {
+    schools: { Steady: { country: 'us' }, Swingy: { country: 'us' } },
+    professors: {
+      // Steady publishes an always-counted venue; Swingy publishes one the
+      // default set excludes, so Swingy's standing depends on the setting.
+      // The margin is wide because school scores round to one decimal, which
+      // collapses small differences into ties.
+      Steady: { name: 'Steady', affiliation: 'Steady', pubs: [{ area: 'icse', year: 2025, count: 4, adjustedcount: 4 }] },
+      Swingy: { name: 'Swingy', affiliation: 'Swingy', pubs: [{ area: 'ase', year: 2025, count: 60, adjustedcount: 60 }] }
+    }
+  };
+  const samples = rankStabilityVariants(2026).map(variant =>
+    collectVariantRanks(data, variant, { region: 'us', historyMap: null, aliasMap: null }));
+
+  const steady = summarizeRankStability(samples, 'Steady');
+  const swingy = summarizeRankStability(samples, 'Swingy');
+  assert.equal(steady.settings, 16);
+  // Steady leads wherever ASE is excluded and trails wherever it counts, so the
+  // same department holds two different ranks depending on the setting alone.
+  assert.equal(steady.best, 1);
+  assert.equal(steady.worst, 2);
+  assert.equal(steady.spread, 1);
+  assert.equal(steady.stable, true);
+  // Swingy simply does not exist under the four default-venue settings.
+  assert.equal(swingy.best, 1);
+  assert.equal(swingy.unranked, 4, 'settings where a school never ranks are reported, not dropped');
+  assert.equal(swingy.rows.filter(row => row.rank === null).length, 4);
+  assert.equal(summarizeRankStability(samples, 'Nonexistent University'), null);
+});
+
+test('a comparison verdict separates who is bigger from who is broader', () => {
+  const school = (rank) => ({ rank });
+  const person = (totalAdjusted) => ({ totalAdjusted });
+
+  // Rank and breadth agree: one plain statement.
+  assert.deepEqual(describeVerdict('school', school(1), school(32), 19, 8), {
+    leader: 'a', phrase: '#1 vs #32', verb: 'ranks higher', areaLeader: 'a', kind: 'agree'
+  });
+  // The higher-ranked school is the narrower one — the case worth surfacing.
+  assert.equal(describeVerdict('school', school(12), school(18), 6, 15).kind, 'split');
+  assert.equal(describeVerdict('school', school(12), school(18), 6, 15).leader, 'a');
+  assert.equal(describeVerdict('school', school(12), school(18), 6, 15).areaLeader, 'b');
+  // Tied rank, unequal breadth.
+  assert.equal(describeVerdict('school', school(4), school(4), 3, 9).kind, 'breadth-only');
+  // Nothing separates them at all.
+  assert.equal(describeVerdict('school', school(4), school(4), 5, 5).kind, 'even');
+  // Researchers are judged on adjusted output, not rank.
+  const researcher = describeVerdict('researcher', person(12.4), person(8.1), 5, 3);
+  assert.equal(researcher.verb, 'has more output');
+  assert.equal(researcher.phrase, '12.4 vs 8.1 adjusted');
+  assert.equal(researcher.leader, 'a');
+});
+
+test('per-faculty ranking reorders the field and ignores tiny departments', () => {
+  const prof = (name, affiliation, adjusted) => ({
+    name, affiliation, pubs: [{ area: 'icse', year: 2025, count: adjusted, adjustedcount: adjusted }]
+  });
+  const professors = {};
+  // Big wins on total output (120 vs 30) but loses on rate (3.0 vs 6.0 each).
+  // The margin is wide because school scores round to one decimal place, which
+  // collapses smaller differences into ties.
+  for (let i = 0; i < 40; i++) professors[`Big${i}`] = prof(`Big${i}`, 'Big University', 3);
+  for (let i = 0; i < 5; i++) professors[`Small${i}`] = prof(`Small${i}`, 'Small College', 6);
+  professors.Solo = prof('Solo', 'Tiny Institute', 50);
+
+  const data = filterByYears({
+    schools: { 'Big University': { country: 'us' }, 'Small College': { country: 'us' }, 'Tiny Institute': { country: 'us' } },
+    professors
+  }, 2025, 2025, 'us');
+
+  // The geometric mean rewards Big's volume; per-faculty rewards Small's rate.
+  assert.ok(data.schools['Big University'].rank < data.schools['Small College'].rank);
+  const perCapita = calculatePerCapita(data);
+  assert.equal(perCapita[0].name, 'Small College');
+  assert.equal(perCapita[0].perCapita, 6);
+  assert.equal(perCapita[0].overallRank, data.schools['Small College'].rank);
+  assert.equal(perCapita[1].name, 'Big University');
+  assert.equal(perCapita[1].perCapita, 3);
+  // One prolific person is not a department: below the floor it is omitted.
+  assert.equal(perCapita.some(row => row.name === 'Tiny Institute'), false);
+  assert.equal(calculatePerCapita(data, { minFaculty: 1 })[0].name, 'Tiny Institute');
+});
+
+test('fragility counts the departures that move a university out of a rank band', () => {
+  const prof = (name, affiliation, adjusted) => ({
+    name, affiliation, pubs: [{ area: 'icse', year: 2025, count: adjusted, adjustedcount: adjusted }]
+  });
+  const professors = {
+    // Concentrated: one person carries almost everything.
+    Star: prof('Star', 'Concentrated University', 40),
+    Minor: prof('Minor', 'Concentrated University', 1),
+    // Broad: the same total spread over four people.
+    B1: prof('B1', 'Broad University', 10), B2: prof('B2', 'Broad University', 10),
+    B3: prof('B3', 'Broad University', 10), B4: prof('B4', 'Broad University', 10),
+    Rival: prof('Rival', 'Rival University', 20)
+  };
+  const data = filterByYears({
+    schools: {
+      'Concentrated University': { country: 'us' }, 'Broad University': { country: 'us' }, 'Rival University': { country: 'us' }
+    },
+    professors
+  }, 2025, 2025, 'us');
+
+  const concentrated = calculateFragility(data, 'Concentrated University', { thresholds: [2] });
+  const broad = calculateFragility(data, 'Broad University', { thresholds: [2] });
+  assert.equal(concentrated.facultyCount, 2);
+  // Losing the one carrier drops the concentrated department immediately; the
+  // broad one absorbs the same loss.
+  assert.equal(concentrated.exits[2], 1);
+  assert.ok(broad.exits[2] === undefined || broad.exits[2] > 1);
+  // Each step re-ranks against the other universities, which do not change.
+  assert.ok(concentrated.steps[0].rank > concentrated.rank);
+  assert.equal(calculateFragility(data, 'Nonexistent University'), null);
 });
