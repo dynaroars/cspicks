@@ -1,6 +1,8 @@
 import { onThemeChange } from './charts.js';
-import { buildComparison, renderComparisonChart, renderComparisonNotice, renderComparisonSummary } from './compare-view.js';
-import { cleanName } from './shared.js';
+import { buildComparison, renderAreaComparison, renderComparisonChart, renderComparisonNotice, renderComparisonSummary } from './compare-view.js';
+import { compareAreas } from './metrics.js';
+import { findMatchingArea } from './search-results.js';
+import { areaLabels, cleanName } from './shared.js';
 
 // "CMU vs MIT" — head-to-head mode for the Search page. The page injects its
 // filtered data and target resolver; everything else lives here.
@@ -16,6 +18,12 @@ export function initComparison(context) {
 
 export function isComparing() {
   return Boolean(activeComparison);
+}
+
+// 'school' | 'researcher' | 'area' | null - for analytics only, so callers
+// don't need to keep a second copy of the active comparison's shape.
+export function activeComparisonType() {
+  return activeComparison?.a?.type || null;
 }
 
 onThemeChange(() => {
@@ -34,13 +42,23 @@ export function parseComparisonQuery(query) {
   return left && right ? { left, right } : null;
 }
 
+// Schools and professors take priority; a term only resolves to an area once
+// neither of those matches, so "Systems vs Databases" behaves like any other
+// comparison without a new syntax to learn.
+function resolveComparisonTarget(term) {
+  const target = ctx.resolveTarget(term);
+  if (target) return target;
+  const area = findMatchingArea(term.trim());
+  return area ? { type: 'area', name: area } : null;
+}
+
 export function resolveComparison(query) {
   const parsed = parseComparisonQuery(query);
   if (!parsed) return null;
   return {
     ...parsed,
-    a: ctx.resolveTarget(parsed.left),
-    b: ctx.resolveTarget(parsed.right)
+    a: resolveComparisonTarget(parsed.left),
+    b: resolveComparisonTarget(parsed.right)
   };
 }
 
@@ -56,7 +74,9 @@ export function hideComparison() {
 }
 
 function displayName(target) {
-  return target.type === 'researcher' ? cleanName(target.name) : target.name;
+  if (target.type === 'researcher') return cleanName(target.name);
+  if (target.type === 'area') return areaLabels[target.name] || target.name;
+  return target.name;
 }
 
 export function renderComparison(comparison) {
@@ -74,17 +94,26 @@ export function renderComparison(comparison) {
   if (!a || !b) {
     const missing = !a ? left : right;
     renderComparisonNotice(summary, 'No match found',
-      `Could not match "${missing}" to a university or professor. Use the full name, for example "Carnegie Mellon University vs Massachusetts Inst. of Technology".`);
+      `Could not match "${missing}" to a university, professor, or research area. Use the full name, for example "Carnegie Mellon University vs Massachusetts Inst. of Technology".`);
     return;
   }
   if (a.type !== b.type) {
     renderComparisonNotice(summary, 'Mixed comparison',
-      'Compare two universities or two professors — not one of each.');
+      'Compare two universities, two professors, or two research areas — not a mix.');
     return;
   }
   if (a.name === b.name) {
     renderComparisonNotice(summary, 'Identical selection',
       'Pick two different targets to generate a head-to-head comparison.');
+    return;
+  }
+
+  if (a.type === 'area') {
+    const nameA = displayName(a);
+    const nameB = displayName(b);
+    document.getElementById('comparison-title').textContent = `${nameA} vs ${nameB}`;
+    const cmp = compareAreas(ctx.appData, ctx.priorAppData, a.name, b.name);
+    renderAreaComparison(summary, { labelA: nameA, labelB: nameB, cmp });
     return;
   }
 

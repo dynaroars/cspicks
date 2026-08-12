@@ -1050,6 +1050,7 @@ button.card-header {
 .comparison-verdict,
 .rank-gap-card,
 .comparison-notice,
+.comparison-bridge-card,
 .comparison-leads {
   grid-column: 1 / -1;
 }

@@ -199,6 +199,134 @@ export function calculateDiscoveryInsights(currentData, priorData, limit = 5) {
   };
 }
 
+/**
+ * The subfield-level counterpart to calculateDiscoveryInsights: instead of
+ * asking which universities moved, asks which research areas themselves grew,
+ * shrank, broadened, narrowed, or changed leader region-wide. Same
+ * equal-length-period comparison and minimum-credit guards.
+ */
+export function calculateSubfieldDiscoveries(currentData, priorData, limit = 5) {
+  const areasOf = data => Object.values(data?.schools || {}).flatMap(school => Object.keys(school.areas || {}));
+  const areas = new Set([...areasOf(currentData), ...areasOf(priorData)]);
+
+  const activeSchools = (data, area) => Object.values(data?.schools || {})
+    .map(school => ({ name: school.name, credit: school.areas?.[area]?.adjusted || 0 }))
+    .filter(row => row.credit > 0);
+
+  const leadersOf = rows => {
+    const max = rows.reduce((best, row) => Math.max(best, row.credit), 0);
+    return max > 0 ? rows.filter(row => row.credit === max).map(row => row.name) : [];
+  };
+
+  const summaries = [...areas].map(area => {
+    const current = activeSchools(currentData, area);
+    const prior = activeSchools(priorData, area);
+    const currentTotal = current.reduce((sum, row) => sum + row.credit, 0);
+    const priorTotal = prior.reduce((sum, row) => sum + row.credit, 0);
+    const currentLeaders = leadersOf(current);
+    const priorLeaders = leadersOf(prior);
+    const leaderChanged = priorLeaders.length > 0 && currentLeaders.length > 0
+      && !currentLeaders.some(name => priorLeaders.includes(name));
+
+    return {
+      area, currentTotal, priorTotal,
+      growth: priorTotal > 0 ? ((currentTotal - priorTotal) / priorTotal) * 100 : (currentTotal > 0 ? 100 : 0),
+      schoolCount: current.length,
+      priorSchoolCount: prior.length,
+      schoolGain: current.length - prior.length,
+      leaderChanged,
+      newLeader: currentLeaders[0] || null,
+      formerLeader: priorLeaders[0] || null
+    };
+  });
+
+  const take = (items, compare) => [...items].sort(compare).slice(0, limit);
+  // Both periods need at least a small amount of real output, so a subfield
+  // with a couple of stray publications doesn't dominate a percentage list.
+  const established = summaries.filter(s => s.priorTotal >= 2 && s.currentTotal >= 2);
+  const withSpread = summaries.filter(s => s.priorSchoolCount >= 3);
+
+  return {
+    growth: take(
+      established.filter(s => s.growth > 0),
+      (a, b) => b.growth - a.growth || b.currentTotal - a.currentTotal
+    ),
+    decline: take(
+      established.filter(s => s.growth < 0),
+      (a, b) => a.growth - b.growth || b.priorTotal - a.priorTotal
+    ),
+    expandingReach: take(
+      withSpread.filter(s => s.schoolGain > 0),
+      (a, b) => b.schoolGain - a.schoolGain || b.schoolCount - a.schoolCount
+    ),
+    narrowingReach: take(
+      withSpread.filter(s => s.schoolGain < 0),
+      (a, b) => a.schoolGain - b.schoolGain || a.schoolCount - b.schoolCount
+    ),
+    leadershipChanges: take(
+      established.filter(s => s.leaderChanged),
+      (a, b) => b.currentTotal - a.currentTotal
+    )
+  };
+}
+
+/**
+ * Head-to-head between two research areas: region-wide totals, growth versus
+ * the preceding equal-length period, and the universities and researchers
+ * active in both - the area-level counterpart to a school-vs-school or
+ * researcher-vs-researcher comparison.
+ */
+export function compareAreas(currentData, priorData, areaA, areaB) {
+  const schoolsIn = (data, area) => Object.values(data?.schools || {})
+    .map(school => ({ name: school.name, credit: school.areas?.[area]?.adjusted || 0 }))
+    .filter(row => row.credit > 0)
+    .sort((a, b) => b.credit - a.credit);
+
+  const facultyIn = (data, area) => {
+    const names = new Set();
+    Object.values(data?.schools || {}).forEach(school => {
+      (school.areas?.[area]?.faculty || []).forEach(name => names.add(name));
+    });
+    return names;
+  };
+
+  const totalOf = (data, area) => Object.values(data?.schools || {})
+    .reduce((sum, school) => sum + (school.areas?.[area]?.adjusted || 0), 0);
+
+  const sideOf = area => {
+    const currentTotal = totalOf(currentData, area);
+    const priorTotal = totalOf(priorData, area);
+    const currentFaculty = facultyIn(currentData, area);
+    const priorFaculty = facultyIn(priorData, area);
+    return {
+      area,
+      currentTotal,
+      priorTotal,
+      growth: priorTotal > 0 ? ((currentTotal - priorTotal) / priorTotal) * 100 : (currentTotal > 0 ? 100 : 0),
+      schools: schoolsIn(currentData, area),
+      facultyCount: currentFaculty.size,
+      // In the field now but not in the preceding period at all - a fresh
+      // entrant to the subfield, not just someone publishing more there.
+      newFaculty: [...currentFaculty].filter(name => !priorFaculty.has(name)).sort()
+    };
+  };
+
+  const a = sideOf(areaA);
+  const b = sideOf(areaB);
+
+  const facultyA = facultyIn(currentData, areaA);
+  const facultyB = facultyIn(currentData, areaB);
+  const bothFaculty = [...facultyA].filter(name => facultyB.has(name)).sort();
+
+  const creditBByName = new Map(b.schools.map(row => [row.name, row.credit]));
+  const bothSchools = a.schools
+    .filter(row => creditBByName.has(row.name))
+    .map(row => ({ name: row.name, creditA: row.credit, creditB: creditBByName.get(row.name) }))
+    .sort((x, y) => (y.creditA + y.creditB) - (x.creditA + x.creditB));
+
+  return { a, b, bothFaculty, bothSchools };
+}
+
 export function buildPriorPeriodData(rawData, startYear, endYear, region, historyMap, aliasMap, confSet) {
   const span = endYear - startYear + 1;
   return filterByYears(rawData, startYear - span, startYear - 1, region, historyMap, aliasMap, confSet);
@@ -621,6 +749,27 @@ export function calculatePerCapita(filteredData, { minFaculty = 5 } = {}) {
     })
     .filter(row => row.name && row.facultyCount >= minFaculty);
   return assignCompetitionRanks(rows, row => row.perCapita);
+}
+
+/**
+ * Re-ranks a filtered dataset's schools by per-capita output in place, so
+ * anything that reads `school.rank` — rank-delta insights, area-rank guards,
+ * the parity report — sees per-capita order without a separate code path.
+ * Departments below `minFaculty` (same rule as calculatePerCapita) drop their
+ * rank entirely rather than keep the departmental-total one, matching how the
+ * per-capita toggle omits them from the search results list.
+ */
+export function applyPerCapitaRanks(filteredData, options) {
+  const ranked = calculatePerCapita(filteredData, options);
+  const rankedSchools = new Set();
+  ranked.forEach(row => {
+    row.school.rank = row.rank;
+    rankedSchools.add(row.school);
+  });
+  Object.values(filteredData?.schools || {}).forEach(school => {
+    if (!rankedSchools.has(school)) school.rank = null;
+  });
+  return filteredData;
 }
 
 /**

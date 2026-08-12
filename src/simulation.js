@@ -78,7 +78,41 @@ export function fuzzyMatch(nameA, nameB) {
   return false;
 }
 
-export function calculateRankImpact(schools, ops) {
+// Adjusted output per publishing faculty member — the same rule as
+// calculatePerCapita in metrics.js (departments below minFaculty are excluded
+// rather than ranked), reimplemented here so simulation.js stays free of a
+// dependency on the display-layer metrics module. Works over any school list,
+// real or hypothetical, as long as each school carries `areas` and
+// `facultyAdjustedCounts`.
+function rankSchoolsByPerCapita(schoolList, minFaculty) {
+  const rows = schoolList
+    .map(school => {
+      const facultyCount = Object.keys(school.facultyAdjustedCounts || {}).length;
+      const totalAdjusted = Object.values(school.areas || {}).reduce((sum, area) => sum + (area.adjusted || 0), 0);
+      return { name: school.name, facultyCount, perCapita: facultyCount ? totalAdjusted / facultyCount : 0 };
+    })
+    .filter(row => row.name && row.facultyCount >= minFaculty)
+    .sort((a, b) => b.perCapita - a.perCapita || a.name.localeCompare(b.name));
+
+  const ranks = new Map();
+  let rank = 0;
+  let ties = 1;
+  let previousValue = null;
+  rows.forEach(row => {
+    if (row.perCapita !== previousValue) { rank += ties; ties = 1; } else { ties++; }
+    ranks.set(row.name, rank);
+    previousValue = row.perCapita;
+  });
+  return ranks;
+}
+
+/**
+ * ops: [{ school, stats, isRemoval, facultyKey }]. `facultyKey` is the name
+ * this op adds to or removes from the school's faculty count — the roster
+ * spelling being removed, or the candidate's own name being added — and only
+ * matters when `perCapita` is on, since it drives the denominator.
+ */
+export function calculateRankImpact(schools, ops, { perCapita = false, minFaculty = 5 } = {}) {
   const schoolClones = new Map();
   ops.forEach(op => {
     const clone = JSON.parse(JSON.stringify(op.school));
@@ -97,6 +131,17 @@ export function calculateRankImpact(schools, ops) {
         clone.areas[area].adjusted = Math.max(0, clone.areas[area].adjusted - val);
       } else {
         clone.areas[area].adjusted += val;
+      }
+    }
+    // Keep facultyAdjustedCounts (headcount) in sync with the same add/remove,
+    // so a hypothetical faculty change also moves the per-capita denominator.
+    if (op.facultyKey) {
+      if (!clone.facultyAdjustedCounts) clone.facultyAdjustedCounts = {};
+      if (op.isRemoval) delete clone.facultyAdjustedCounts[op.facultyKey];
+      else {
+        const total = Object.values(op.stats.areas).reduce((sum, areaStats) =>
+          sum + (typeof areaStats === 'number' ? areaStats : areaStats.adjusted || 0), 0);
+        clone.facultyAdjustedCounts[op.facultyKey] = total;
       }
     }
   });
@@ -130,6 +175,12 @@ export function calculateRankImpact(schools, ops) {
     previousScore = school._simScore;
   });
 
+  // Per-capita ranks mirror the toggle on Search and Discoveries: same rule,
+  // computed once over the real (unmodified) schools for "before" and once
+  // over the hypothetical allSchools for "after".
+  const perCapitaRanksBefore = perCapita ? rankSchoolsByPerCapita(Object.values(schools), minFaculty) : null;
+  const perCapitaRanksAfter = perCapita ? rankSchoolsByPerCapita(allSchools, minFaculty) : null;
+
   // area rankings for simulation
   const areaRanksBefore = {};
   const areaRanksAfter = {};
@@ -154,8 +205,15 @@ export function calculateRankImpact(schools, ops) {
 
   const deltaMap = new Map();
   ops.forEach(op => {
-    const newRank = overallRanks.get(op.school.name);
-    const delta = op.school.rank - newRank;
+    // rankBefore/rankAfter always reflect the active mode, so a caller reading
+    // just `overall` (and, for display, `rankBefore`) never has to branch on
+    // perCapita itself. Either side can be null: a department that crosses the
+    // minFaculty line (in or out) as a direct result of this op has no
+    // per-capita rank on that side, and the delta is reported as unavailable
+    // rather than guessed at.
+    const rankBefore = perCapita ? (perCapitaRanksBefore.get(op.school.name) ?? null) : op.school.rank;
+    const rankAfter = perCapita ? (perCapitaRanksAfter.get(op.school.name) ?? null) : overallRanks.get(op.school.name);
+    const delta = (rankBefore != null && rankAfter != null) ? rankBefore - rankAfter : null;
 
     const areaDeltasBefore = areaRanksBefore[op.school.name];
     const areaDeltasAfter = areaRanksAfter[op.school.name];
@@ -172,7 +230,7 @@ export function calculateRankImpact(schools, ops) {
       }
     });
 
-    deltaMap.set(op.school.name, { overall: delta, areas: areaDeltas });
+    deltaMap.set(op.school.name, { overall: delta, areas: areaDeltas, rankBefore, rankAfter });
   });
 
   return deltaMap;
