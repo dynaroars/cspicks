@@ -1,4 +1,5 @@
 import { getConferenceAreaMap, parentMap, publicationMatchesConferenceSet } from './data.js';
+import { readCached, writeCached } from './dblp-cache.js';
 import { getCsrankingsRules, syncCsrankingsRules } from './csrankings-rules.js';
 
 export function parseDblpProfileUrl(value) {
@@ -141,17 +142,23 @@ async function fetchDblp(url, attempts = 3) {
 }
 
 /**
- * Most frequent coauthors from the author's DBLP profile. DBLP is the only
- * source that names coauthors — CSRankings publishes per-author totals only —
- * so these names are DBLP's and need not appear in the CSRankings roster.
- * Resolution requires an exact name match to avoid attributing another
- * researcher's collaborators; anything less returns nothing.
+ * Every coauthor on an author's DBLP profile, with the years they appear.
+ * DBLP is the only source that names coauthors — CSRankings publishes
+ * per-author totals only — so these names are DBLP's and need not appear in the
+ * CSRankings roster. Resolution requires an exact name match to avoid
+ * attributing another researcher's collaborators; anything less returns nothing.
+ *
+ * Cached by author rather than by query window, in memory and in IndexedDB. One
+ * profile answers every window, so changing the year filter no longer costs two
+ * more rate-limited requests, and a returning reader pays nothing at all.
  */
-export async function fetchFrequentCoauthors(name, { startYear, endYear, limit = 3 } = {}) {
-    const cacheKey = `${name}|${startYear}|${endYear}|${limit}`;
-    if (coauthorCache.has(cacheKey)) return coauthorCache.get(cacheKey);
+async function fetchCoauthorRecords(name) {
+    if (coauthorCache.has(name)) return coauthorCache.get(name);
 
     const request = (async () => {
+        const stored = await readCached(name);
+        if (stored) return stored;
+
         const search = await fetchDblp(`https://dblp.org/search/author/api?q=${encodeURIComponent(name)}&format=json&h=60`);
         const hits = (await search.json()).result?.hits?.hit || [];
         const target = hits.find(hit => hit.info?.author?.toLowerCase() === name.toLowerCase());
@@ -169,34 +176,57 @@ export async function fetchFrequentCoauthors(name, { startYear, endYear, limit =
                 .forEach(node => self.add(node.textContent.trim().toLowerCase()));
         }
 
-        const counts = new Map();
+        const records = new Map();
         Array.from(xml.getElementsByTagName('r')).forEach(record => {
             const publication = record.firstElementChild;
             if (!publication) return;
             const year = Number(publication.getElementsByTagName('year')[0]?.textContent);
             if (!Number.isFinite(year)) return;
-            if (Number.isFinite(startYear) && year < startYear) return;
-            if (Number.isFinite(endYear) && year > endYear) return;
 
             new Set(Array.from(publication.getElementsByTagName('author'))
                 .map(node => node.textContent.trim())
                 .filter(author => author && !self.has(author.toLowerCase()))
-            ).forEach(author => counts.set(author, (counts.get(author) || 0) + 1));
+            ).forEach(author => {
+                let entry = records.get(author);
+                if (!entry) records.set(author, entry = { name: author, years: {} });
+                entry.years[year] = (entry.years[year] || 0) + 1;
+            });
         });
 
-        return [...counts.entries()]
-            .map(([coauthor, papers]) => ({ name: coauthor, papers }))
-            .sort((a, b) => b.papers - a.papers || a.name.localeCompare(b.name))
-            .slice(0, limit);
+        // Plain objects so the value survives IndexedDB's structured clone.
+        const result = [...records.values()];
+        await writeCached(name, result);
+        return result;
     })().catch(error => {
         // Let a later visit try again rather than remembering the outage.
         console.error('DBLP coauthor lookup failed:', error);
-        setTimeout(() => coauthorCache.delete(cacheKey), COAUTHOR_RETRY_AFTER_MS);
+        setTimeout(() => coauthorCache.delete(name), COAUTHOR_RETRY_AFTER_MS);
         return [];
     });
 
-    coauthorCache.set(cacheKey, request);
+    coauthorCache.set(name, request);
     return request;
+}
+
+/** Top coauthors within a year window, derived from cached per-year counts. */
+export function topCoauthorsInWindow(records, { startYear, endYear, limit = 3 } = {}) {
+    const inWindow = year => (!Number.isFinite(startYear) || year >= startYear)
+        && (!Number.isFinite(endYear) || year <= endYear);
+
+    return (records || [])
+        .map(record => ({
+            name: record.name,
+            papers: Object.entries(record.years || {})
+                .reduce((sum, [year, count]) => sum + (inWindow(Number(year)) ? count : 0), 0)
+        }))
+        .filter(record => record.papers > 0)
+        .sort((a, b) => b.papers - a.papers || a.name.localeCompare(b.name))
+        .slice(0, limit);
+}
+
+/** Most frequent coauthors in a year window, for the researcher summary. */
+export async function fetchFrequentCoauthors(name, options = {}) {
+    return topCoauthorsInWindow(await fetchCoauthorRecords(name), options);
 }
 
 export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date().getFullYear(), confSet = 'csrankings-default') {

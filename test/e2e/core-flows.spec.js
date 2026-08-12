@@ -69,7 +69,9 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('default view ranks universities and people side by side, and clears stale analysis after a region change', async ({ page }) => {
-  await page.goto('./');
+  // Pinned to the CSRankings ordering: per-capita is the default, and it omits
+  // departments below five publishing faculty, which this fixture is.
+  await page.goto('./?percapita=false');
   await expect(page.getByRole('link', { name: '🔎 Search' })).toHaveAttribute('aria-current', 'page');
   // The ranking columns use short institution names where one exists.
   await expect(page.locator('#school-results')).toContainText('GMU');
@@ -121,6 +123,17 @@ test('choosing faculty from a university switches analysis to that professor', a
   await expect(page.locator('#prof-results .card-header')).toHaveJSProperty('tagName', 'DIV');
   await expect(page.locator('#prof-results .toggle-icon')).toHaveCount(0);
   await expect(page.getByRole('tab', { name: /Faculty Diversity/ })).toBeHidden();
+});
+
+test('per-capita ordering is on by default and can be turned off', async ({ page }) => {
+  await page.goto('./');
+  await expect(page.locator('#per-capita-mode')).toBeChecked();
+  // Every fixture department is below the five-faculty floor, so the ordering
+  // has nothing to show until it is switched off.
+  await expect(page.locator('#school-results .card')).toHaveCount(0);
+  await page.locator('#per-capita-mode').uncheck();
+  await expect(page.locator('#school-results .card').first()).toBeVisible();
+  await expect(page).not.toHaveURL(/percapita=true/);
 });
 
 test('professor cards show official roster distinctions', async ({ page }) => {
@@ -225,7 +238,7 @@ test('suggestions list every match and complete the second side of a vs query', 
 });
 
 test('rankings toggle ranks universities and is remembered', async ({ page }) => {
-  await page.goto('./');
+  await page.goto('./?percapita=false');
   await expect(page.locator('#school-results .card').first()).toBeVisible();
   await expect(page.locator('main .result-position')).toHaveCount(0);
 

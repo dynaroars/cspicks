@@ -113,7 +113,9 @@ export function createFilterBar(mount, {
     confSet: 'csrankings-default',
     rankings: false,
     historical: false,
-    perCapita: false
+    // On by default: the CSRankings score rewards a department for being large
+    // as well as productive, and per-capita is the fairer first impression.
+    perCapita: true
   };
 
   // A link's parameters win; otherwise the reader's last choices apply.
