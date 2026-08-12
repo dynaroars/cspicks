@@ -439,19 +439,31 @@ footer button:hover {
   line-height: 1;
 }
 
-/* Filter help runs longer than the 260px default, and the bar sits near the top
-   of the page, so these open downward with room to breathe. */
+/* Filter help runs longer than the 260px default. Anchoring each panel to the
+   filter bar's left edge rather than centring it on its own ⓘ keeps it on
+   screen: the rightmost control (Per capita) would otherwise centre a 340px box
+   past the right edge at any viewport between roughly 800 and 1300px, and the
+   leftmost one would run off the left on a phone. The arrow is dropped because
+   it would no longer point at the trigger. */
+.search-filters {
+  position: relative;
+}
+
+.search-filters .filter-info {
+  position: static;
+}
+
 .search-filters .filter-info .tooltip-content {
-  top: 160%;
+  top: calc(100% + 0.5rem);
   bottom: auto;
+  left: 0;
+  right: auto;
+  transform: none;
   width: min(340px, calc(100vw - 2rem));
 }
 
 .search-filters .filter-info .tooltip-content::after {
-  top: auto;
-  bottom: 100%;
-  border-top-color: transparent;
-  border-bottom-color: #2d2d2d;
+  display: none;
 }
 
 @media (max-width: 640px) {
