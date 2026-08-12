@@ -256,12 +256,33 @@ test('vs syntax compares two targets in place of search results', async ({ page 
   await expect(summary).not.toContainText('What explains the rank gap?');
 
   await page.locator('#main-search').fill('Hai Duong vs George Mason University');
-  await expect(summary).toContainText('Compare two universities or two professors');
+  await expect(summary).toContainText('Compare two universities, two professors, or two research areas');
   await expect(page.locator('#comparison-chart-container')).toBeHidden();
 
   await page.locator('#main-search').fill('George Mason University');
   await expect(comparison).toBeHidden();
   await expect(page.locator('#integrated-analysis')).toBeVisible();
+});
+
+test('vs syntax also compares two research areas, region-wide', async ({ page }) => {
+  await page.goto('./');
+  const summary = page.locator('#comparison-summary');
+
+  // Hai Duong publishes in Software Engineering (icse, ase) only; Alice in
+  // Programming Languages (pldi) only - no overlap in this fixture, so the
+  // "bridges both fields" list should legitimately come back empty.
+  await page.locator('#main-search').fill('Software Engineering vs Programming Languages');
+  await expect(page.locator('#comparison-title')).toHaveText('Software Engineering vs Programming Languages');
+  await expect(summary).toContainText('Region-wide adjusted count');
+  await expect(summary).toContainText('Growth vs. prior period');
+  await expect(summary).toContainText('Bridges both fields');
+  await expect(summary).toContainText('No researcher has active output in both fields this period.');
+  await expect(page.locator('#comparison-chart-container')).toBeHidden();
+  await expect(page.locator('#school-results .card')).toHaveCount(0);
+
+  // Mixing an area with a university or professor is still rejected.
+  await page.locator('#main-search').fill('Software Engineering vs George Mason University');
+  await expect(summary).toContainText('Compare two universities, two professors, or two research areas');
 });
 
 test('suggestions list every match and complete the second side of a vs query', async ({ page }) => {

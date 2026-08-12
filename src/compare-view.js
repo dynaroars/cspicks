@@ -103,7 +103,7 @@ export function renderScoreboard(safeNameA, safeNameB, rows) {
     </div>`;
 }
 
-const sideSpan = (side, name) => `<span class="comparison-side-${side}">${name}</span>`;
+export const sideSpan = (side, name) => `<span class="comparison-side-${side}">${name}</span>`;
 
 function verdict(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins, areaCount) {
   const { leader, phrase, verb, areaLeader, kind } = describeVerdict(type, entryA, entryB, aWins, bWins);
@@ -222,6 +222,85 @@ export function renderComparisonSummary(container, { type, nameA, nameB, entryA,
     </div>`;
 
     container.innerHTML = html;
+}
+
+// A capped, expandable name list: the first dozen inline, the rest behind a
+// <details> disclosure - the same "+N more" pattern used for a professor's
+// affiliation history, since a common area's roster can run to hundreds.
+function nameList(names, emptyText) {
+  if (!names.length) return `<p class="summary-note">${escapeHtml(emptyText)}</p>`;
+  const link = name => `<a href="index.html?q=${encodeURIComponent(name)}">${escapeHtml(name)}</a>`;
+  const shown = names.slice(0, 12);
+  const rest = names.slice(12);
+  const shownHtml = shown.map(link).join(', ');
+  if (!rest.length) return `<p>${shownHtml}</p>`;
+  return `<p>${shownHtml}<details class="affiliation-history"><summary>+${rest.length} more</summary><span>${rest.map(link).join(', ')}</span></details></p>`;
+}
+
+function schoolList(rows, emptyText, labelA, labelB) {
+  if (!rows.length) return `<p class="summary-note">${escapeHtml(emptyText)}</p>`;
+  const shown = rows.slice(0, 9);
+  const html = `<div class="rank-gap-list">${shown.map(row => `
+    <div class="rank-gap-item">
+      <strong><a href="index.html?q=${encodeURIComponent(row.name)}" title="${escapeHtml(row.name)}">${escapeHtml(row.name)}</a></strong>
+      <small>${escapeHtml(labelA)}: ${compareNumber(row.creditA)} · ${escapeHtml(labelB)}: ${compareNumber(row.creditB)}</small>
+    </div>`).join('')}</div>`;
+  return rows.length > shown.length ? `${html}<p class="summary-note">+${rows.length - shown.length} more</p>` : html;
+}
+
+/**
+ * Head-to-head between two research areas: region-wide totals and growth,
+ * then who bridges both fields and who is newly active in each - the
+ * area-level counterpart to renderComparisonSummary.
+ */
+export function renderAreaComparison(container, { labelA, labelB, cmp }) {
+  const safeA = escapeHtml(labelA);
+  const safeB = escapeHtml(labelB);
+  const { a, b, bothFaculty, bothSchools } = cmp;
+  const growthText = value => `${value > 0 ? '+' : ''}${value.toFixed(0)}%`;
+
+  const biggerSide = a.currentTotal === b.currentTotal ? null : (a.currentTotal > b.currentTotal ? 'a' : 'b');
+  const fasterSide = a.growth === b.growth ? null : (a.growth > b.growth ? 'a' : 'b');
+  const named = side => sideSpan(side, side === 'a' ? safeA : safeB);
+  let verdictLine;
+  if (!biggerSide && !fasterSide) {
+    verdictLine = `${safeA} and ${safeB} are evenly matched on both region-wide output and growth.`;
+  } else {
+    const parts = [];
+    if (biggerSide) parts.push(`${named(biggerSide)} has the larger region-wide output`);
+    if (fasterSide) parts.push(`${named(fasterSide)} is growing faster`);
+    verdictLine = `${parts.join(', and ')}.`;
+  }
+
+  const rows = [
+    { label: 'Region-wide adjusted count', a: a.currentTotal, b: b.currentTotal },
+    { label: 'Growth vs. prior period', a: a.growth, b: b.growth, format: growthText },
+    { label: 'Active universities', a: a.schools.length, b: b.schools.length },
+    { label: 'Active researchers', a: a.facultyCount, b: b.facultyCount }
+  ];
+
+  container.innerHTML = `
+    <div class="summary-card comparison-verdict"><p>${verdictLine}</p></div>
+    ${renderScoreboard(safeA, safeB, rows)}
+    <div class="summary-card comparison-bridge-card">
+      <h4>Bridges both fields</h4>
+      <p class="summary-note">${bothFaculty.length} researcher${bothFaculty.length === 1 ? '' : 's'} and ${bothSchools.length} universit${bothSchools.length === 1 ? 'y' : 'ies'} with active output in both ${safeA} and ${safeB} this period.</p>
+      ${schoolList(bothSchools, 'No university has active output in both fields this period.', labelA, labelB)}
+      ${nameList(bothFaculty, 'No researcher has active output in both fields this period.')}
+    </div>
+    <div class="comparison-leads">
+      <div class="comparison-lead-column comparison-side-a">
+        <h4>New to ${safeA}</h4>
+        <p class="summary-note">Active this period, not in the preceding one.</p>
+        ${nameList(a.newFaculty, `No new researchers in ${labelA} this period.`)}
+      </div>
+      <div class="comparison-lead-column comparison-side-b">
+        <h4>New to ${safeB}</h4>
+        <p class="summary-note">Active this period, not in the preceding one.</p>
+        ${nameList(b.newFaculty, `No new researchers in ${labelB} this period.`)}
+      </div>
+    </div>
+  `;
 }
 
 export function renderComparisonNotice(container, title, message) {

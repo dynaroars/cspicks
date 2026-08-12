@@ -262,7 +262,7 @@ export function searchProfessors(query) {
   renderChunk();
 }
 
-function findMatchingArea(query) {
+export function findMatchingArea(query) {
   const q = query.toLowerCase();
 
   if (areaLabels[q]) return q;

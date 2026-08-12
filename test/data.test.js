@@ -7,7 +7,7 @@ import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../src/sim
 import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl, topCoauthorsInWindow } from '../src/dblp.js';
 import { parseCsrankingsRules } from '../src/csrankings-rules.js';
 import { renderSchoolCard } from '../src/search-cards.js';
-import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, collectVariantRanks, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../src/metrics.js';
+import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../src/metrics.js';
 import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../src/nsf.js';
 
 function professor(name, affiliation, count, adjustedcount) {
@@ -526,6 +526,57 @@ test('simulator calculates target-school overall and area rank changes', () => {
   assert.equal(impact.areas.mlmining.nowRank, 1);
 });
 
+function facultyCounts(names) {
+  return Object.fromEntries(names.map(name => [name, 1]));
+}
+
+test('simulator per-capita mode ranks by output per faculty and drops departments below the minimum', () => {
+  const schools = {
+    A: {
+      name: 'A', rank: 1, areas: { mlmining: { adjusted: 100 } }, areaRanks: { mlmining: 1 },
+      facultyAdjustedCounts: facultyCounts(['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10'])
+    },
+    B: {
+      name: 'B', rank: 2, areas: { mlmining: { adjusted: 45 } }, areaRanks: { mlmining: 2 },
+      facultyAdjustedCounts: facultyCounts(['b1', 'b2', 'b3', 'b4', 'b5'])
+    },
+    C: {
+      // Below the 5-faculty minimum: excluded from per-capita ranking outright,
+      // even though it is untouched by any op.
+      name: 'C', rank: 3, areas: { mlmining: { adjusted: 30 } }, areaRanks: { mlmining: 3 },
+      facultyAdjustedCounts: facultyCounts(['c1', 'c2', 'c3'])
+    }
+  };
+  const addStats = { areas: { mlmining: { adjusted: 15 } } };
+
+  // Per-capita mode: B trails A per capita before the add (9 vs 10), but the
+  // new hire's output outweighs its own one-person cost to the denominator
+  // (45+15)/(5+1) = 10, tying A - a move the total-score numbers never show.
+  const perCapitaImpact = calculateRankImpact(schools, [
+    { school: schools.B, stats: addStats, isRemoval: false, facultyKey: 'candidate' }
+  ], { perCapita: true }).get('B');
+  assert.equal(perCapitaImpact.rankBefore, 2);
+  assert.equal(perCapitaImpact.rankAfter, 1);
+  assert.equal(perCapitaImpact.overall, 1);
+
+  // C never has a per-capita rank: too few faculty, before or after.
+  const cImpact = calculateRankImpact(schools, [
+    { school: schools.C, stats: addStats, isRemoval: false, facultyKey: 'candidate' }
+  ], { perCapita: true }).get('C');
+  assert.equal(cImpact.rankBefore, null);
+  assert.equal(cImpact.rankAfter, null);
+  assert.equal(cImpact.overall, null);
+
+  // Removing one of B's five faculty drops it below the minimum: it had a
+  // per-capita rank before, and has none after.
+  const removalImpact = calculateRankImpact(schools, [
+    { school: schools.B, stats: { areas: { mlmining: { adjusted: 5 } } }, isRemoval: true, facultyKey: 'b1' }
+  ], { perCapita: true }).get('B');
+  assert.equal(removalImpact.rankBefore, 2);
+  assert.equal(removalImpact.rankAfter, null);
+  assert.equal(removalImpact.overall, null);
+});
+
 test('school metrics report movement, momentum, concentration, breadth, and collaboration proxy', () => {
   const current = {
     professors: {
@@ -665,6 +716,88 @@ test('discovery insights rank substantive movement and ignore tiny momentum base
   assert.equal(insights.outputLosses[0].name, 'C');
   assert.equal(insights.breadthContractions[0].name, 'C');
   assert.equal(insights.areaDeclines[0].name, 'C');
+});
+
+test('subfield discoveries rank region-wide area movement, spread, and leadership changes', () => {
+  const current = {
+    schools: {
+      A: { name: 'A', areas: { ai: { adjusted: 7 }, soft: { adjusted: 2 }, chi: { adjusted: 2 }, robotics: { adjusted: 4 }, vision: { adjusted: 5 } } },
+      B: { name: 'B', areas: { ai: { adjusted: 10 }, robotics: { adjusted: 3 } } },
+      C: { name: 'C', areas: { ai: { adjusted: 5 }, robotics: { adjusted: 2 } } },
+      D: { name: 'D', areas: { robotics: { adjusted: 2 } } },
+      E: { name: 'E', areas: { robotics: { adjusted: 1 } } }
+    }
+  };
+  const prior = {
+    schools: {
+      A: { name: 'A', areas: { ai: { adjusted: 3 }, soft: { adjusted: 5 }, robotics: { adjusted: 3 }, vision: { adjusted: 2 } } },
+      B: { name: 'B', areas: { ai: { adjusted: 9 }, chi: { adjusted: 2 }, robotics: { adjusted: 2 }, vision: { adjusted: 2 } } },
+      C: { name: 'C', areas: { ai: { adjusted: 8 }, robotics: { adjusted: 1 }, vision: { adjusted: 2 } } }
+    }
+  };
+
+  const subfields = calculateSubfieldDiscoveries(current, prior);
+
+  // robotics roughly doubles (6 -> 12 adjusted) and outranks ai's modest gain.
+  assert.equal(subfields.growth[0].area, 'robotics');
+  assert.equal(subfields.growth[0].growth, 100);
+  assert.ok(subfields.growth.some(s => s.area === 'ai' && s.growth === 10));
+
+  // soft drops the most (5 -> 2); vision also declines but less sharply.
+  assert.equal(subfields.decline[0].area, 'soft');
+  assert.equal(subfields.decline[0].growth, -60);
+
+  // robotics spreads from 3 to 5 active universities.
+  assert.equal(subfields.expandingReach[0].area, 'robotics');
+  assert.equal(subfields.expandingReach[0].schoolGain, 2);
+
+  // vision consolidates from 3 active universities down to 1.
+  assert.equal(subfields.narrowingReach[0].area, 'vision');
+  assert.equal(subfields.narrowingReach[0].schoolGain, -2);
+
+  // chi's only active school flips from B to A; every other subfield here
+  // keeps (or ties on) the same leader across both periods.
+  assert.equal(subfields.leadershipChanges.length, 1);
+  assert.equal(subfields.leadershipChanges[0].area, 'chi');
+  assert.equal(subfields.leadershipChanges[0].formerLeader, 'B');
+  assert.equal(subfields.leadershipChanges[0].newLeader, 'A');
+});
+
+test('area vs area comparison reports growth, new entrants, and who bridges both fields', () => {
+  const current = {
+    schools: {
+      A: { name: 'A', areas: { ai: { adjusted: 6, faculty: ['Alice', 'Bob'] }, vision: { adjusted: 3, faculty: ['Alice'] } } },
+      B: { name: 'B', areas: { ai: { adjusted: 4, faculty: ['Carol'] }, vision: { adjusted: 5, faculty: ['Dan', 'Erin'] } } },
+      C: { name: 'C', areas: { vision: { adjusted: 2, faculty: ['Erin'] } } }
+    }
+  };
+  const prior = {
+    schools: {
+      A: { name: 'A', areas: { ai: { adjusted: 5, faculty: ['Alice'] }, vision: { adjusted: 2, faculty: ['Alice'] } } },
+      B: { name: 'B', areas: { ai: { adjusted: 4, faculty: ['Carol'] }, vision: { adjusted: 6, faculty: ['Dan'] } } }
+    }
+  };
+
+  const cmp = compareAreas(current, prior, 'ai', 'vision');
+
+  assert.equal(cmp.a.currentTotal, 10);
+  assert.equal(cmp.a.priorTotal, 9);
+  assert.ok(Math.abs(cmp.a.growth - (100 / 9)) < 1e-9);
+  assert.deepEqual(cmp.a.newFaculty, ['Bob']);
+  assert.deepEqual(cmp.a.schools.map(s => s.name), ['A', 'B']);
+
+  assert.equal(cmp.b.currentTotal, 10);
+  assert.equal(cmp.b.priorTotal, 8);
+  assert.equal(cmp.b.growth, 25);
+  assert.deepEqual(cmp.b.newFaculty, ['Erin']);
+  assert.deepEqual(cmp.b.schools.map(s => s.name), ['B', 'A', 'C']);
+
+  // Alice is the only researcher active in both AI and Vision this period.
+  assert.deepEqual(cmp.bothFaculty, ['Alice']);
+
+  // A and B both publish in both fields; C only publishes in vision.
+  assert.deepEqual(cmp.bothSchools.map(s => s.name), ['A', 'B']);
+  assert.deepEqual(cmp.bothSchools.find(s => s.name === 'A'), { name: 'A', creditA: 6, creditB: 3 });
 });
 
 test('publishing effort includes only the selected school and uses all active faculty', () => {
