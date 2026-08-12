@@ -4,7 +4,7 @@ import test from 'node:test';
 import { coreAMap, fetchCsv, filterByYears, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet } from '../src/data.js';
 import { areaLabels, detectRegionFromLocales, encodeInlineValue, escapeHtml, getInstitutionShortName, safeExternalUrl, scoreSuggestionMatch } from '../src/shared.js';
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../src/simulation.js';
-import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl } from '../src/dblp.js';
+import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl, topCoauthorsInWindow } from '../src/dblp.js';
 import { parseCsrankingsRules } from '../src/csrankings-rules.js';
 import { renderSchoolCard } from '../src/search-cards.js';
 import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, collectVariantRanks, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../src/metrics.js';
@@ -827,4 +827,29 @@ test('fragility counts the departures that move a university out of a rank band'
   // Each step re-ranks against the other universities, which do not change.
   assert.ok(concentrated.steps[0].rank > concentrated.rank);
   assert.equal(calculateFragility(data, 'Nonexistent University'), null);
+});
+
+test('coauthor windows are derived from cached per-year counts', () => {
+  // One cached profile answers every year window, so changing the year filter
+  // costs no further DBLP requests.
+  const records = [
+    { name: 'Steady Collaborator', years: { 2015: 2, 2020: 3, 2024: 1 } },
+    { name: 'Recent Collaborator', years: { 2023: 4, 2024: 4 } },
+    { name: 'Old Collaborator', years: { 2001: 9 } }
+  ];
+
+  assert.deepEqual(topCoauthorsInWindow(records, { startYear: 2020, endYear: 2026 }), [
+    { name: 'Recent Collaborator', papers: 8 },
+    { name: 'Steady Collaborator', papers: 4 }
+  ]);
+  assert.deepEqual(topCoauthorsInWindow(records, { startYear: 2000, endYear: 2010 }), [
+    { name: 'Old Collaborator', papers: 9 }
+  ]);
+  assert.deepEqual(topCoauthorsInWindow(records, { startYear: 2020, endYear: 2026, limit: 1 }), [
+    { name: 'Recent Collaborator', papers: 8 }
+  ]);
+  // A window with no joint papers yields nothing rather than zero-count rows.
+  assert.deepEqual(topCoauthorsInWindow(records, { startYear: 2005, endYear: 2010 }), []);
+  assert.deepEqual(topCoauthorsInWindow([], { startYear: 2020, endYear: 2026 }), []);
+  assert.deepEqual(topCoauthorsInWindow(undefined, {}), []);
 });
