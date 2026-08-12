@@ -418,6 +418,27 @@ export function getConferenceAreaMap(confSet = 'csrankings-default') {
 const topLevelAreas = [...new Set(Object.values(parentMap))];
 const numAreas = topLevelAreas.length;
 
+// build-openalex-history.js resolves each professor by searching OpenAlex for
+// their name and taking the single top-relevance result, with no check that
+// the match's own affiliations have anything to do with this person - for
+// anyone whose name collides with a more prominent, unrelated researcher in
+// OpenAlex's far larger cross-discipline index (common names especially), that
+// silently attaches a real but wrong person's entire career. The signature of
+// that failure is a history sprawling across many more institutions than one
+// career plausibly has, with the professor's own current CSRankings
+// affiliation nowhere in it. When both hold, the history is not trusted at
+// all, and every publication falls back to the current affiliation instead -
+// the same safe behavior as having no history on record. A merely sparse or
+// stale history (few institutions, just missing recent coverage) still gets
+// the benefit of the doubt and is used as-is.
+const IMPLAUSIBLE_HISTORY_INSTITUTION_COUNT = 8;
+
+function isImplausibleHistory(history, currentAffiliation, aliasMap) {
+  const resolved = new Set(history.map(segment =>
+    Object.prototype.hasOwnProperty.call(aliasMap || {}, segment.school) ? aliasMap[segment.school] : segment.school));
+  return resolved.size >= IMPLAUSIBLE_HISTORY_INSTITUTION_COUNT && !resolved.has(currentAffiliation);
+}
+
 export function getPublicationSchools(professor, publication, historyMap = null, aliasMap = null) {
   const fallback = [professor.affiliation];
   const history = historyMap?.[professor.name];
@@ -427,6 +448,7 @@ export function getPublicationSchools(professor, publication, historyMap = null,
   // sparse; treating an uncovered old year as the current affiliation silently
   // moves old publications to the professor's present-day institution.
   if (!history || history.length === 0) return fallback;
+  if (isImplausibleHistory(history, professor.affiliation, aliasMap)) return fallback;
 
   const matches = history.filter(segment =>
     publication.year >= segment.start && publication.year <= segment.end

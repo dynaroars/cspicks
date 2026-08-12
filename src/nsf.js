@@ -91,7 +91,7 @@ export function formatAwardPeriod(award) {
 export function buildFundingIndex(dataset, startYear, endYear) {
   const awards = (dataset?.awards || []).filter(award => {
     const year = awardYear(award);
-    const hasMatchedFaculty = (award.investigators || []).some(person => person.facultyName);
+    const hasMatchedFaculty = (award.investigators || []).some(person => person.rosterName);
     return hasMatchedFaculty && year !== null && year >= startYear && year <= endYear;
   });
   const faculty = new Map();
@@ -101,10 +101,14 @@ export function buildFundingIndex(dataset, startYear, endYear) {
     const investigatorCount = Math.max(1, award.investigators.length);
     const amount = award.estimatedAmount || award.obligatedAmount || 0;
     const share = amount / investigatorCount;
-    award.investigators.filter(person => person.facultyName).forEach(person => {
-      // The sync resolves each investigator to the publication-table spelling;
-      // older snapshots without it fall back to the roster name.
-      const facultyName = person.rosterName || person.facultyName;
+    // `rosterName` is the publication-table spelling the sync resolved this
+    // investigator to; `facultyName` alone only means the NSF-listed name
+    // matched a CSRankings roster row, which can still have no corresponding
+    // publication-table entry at all (retired/unranked rows, bad matches).
+    // Those show up nowhere else in the app, so they should not show up here
+    // either — trust rosterName, not the weaker facultyName.
+    award.investigators.filter(person => person.rosterName).forEach(person => {
+      const facultyName = person.rosterName;
       if (!faculty.has(facultyName)) faculty.set(facultyName, {
         name: facultyName, affiliation: person.affiliation, awards: [], attributedAmount: 0, totalAwardAmount: 0
       });

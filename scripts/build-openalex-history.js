@@ -112,6 +112,33 @@ function cleanName(name) {
     return name.replace(/\s+\d{4}$/, '').trim();
 }
 
+function normalizeInstitutionName(name) {
+    return String(name || '')
+        .toLowerCase()
+        .replace(/[.,]/g, '')
+        .replace(/\buniv\b/g, 'university')
+        .replace(/\binst\b/g, 'institute')
+        .replace(/\btech\b/g, 'technology')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+// A bare name search with no affiliation check happily returns a real but
+// unrelated author when the searched name collides with someone more
+// prominent elsewhere in OpenAlex's far larger cross-discipline index -
+// common names especially. Preferring a candidate whose own affiliations
+// include the professor's known CSRankings institution catches most of that
+// before it ever reaches the output file (src/data.js also guards against
+// what slips through, since this check can't be perfect on name text alone).
+function affiliationsMatch(affiliations, currentAffiliation) {
+    const target = normalizeInstitutionName(currentAffiliation);
+    if (!target) return false;
+    return (affiliations || []).some(aff => {
+        const candidate = normalizeInstitutionName(aff.institution?.display_name);
+        return Boolean(candidate) && (candidate === target || candidate.includes(target) || target.includes(candidate));
+    });
+}
+
 // Thrown when the daily quota looks exhausted, to stop the run instead of
 // spinning through repeated 60s retries that will never succeed.
 class QuotaExhaustedError extends Error {}
@@ -119,9 +146,9 @@ class QuotaExhaustedError extends Error {}
 /**
  * Query OpenAlex API for author affiliations
  */
-async function fetchOpenAlexAuthor(name, attempt = 1) {
+async function fetchOpenAlexAuthor(name, currentAffiliation, attempt = 1) {
     const cleanedName = cleanName(name);
-    let url = `${OPENALEX_API}?search=${encodeURIComponent(cleanedName)}&per_page=1`;
+    let url = `${OPENALEX_API}?search=${encodeURIComponent(cleanedName)}&per_page=5`;
     if (apiKey) url += `&api_key=${encodeURIComponent(apiKey)}`;
 
     const response = await fetch(url, {
@@ -139,7 +166,7 @@ async function fetchOpenAlexAuthor(name, attempt = 1) {
             if (attempt > 3) throw new Error(`Rate limited repeatedly on "${name}"`);
             console.log(`Rate limited, waiting ${retryAfter || 60}s...`);
             await sleep((retryAfter || 60) * 1000);
-            return fetchOpenAlexAuthor(name, attempt + 1);
+            return fetchOpenAlexAuthor(name, currentAffiliation, attempt + 1);
         }
         throw new Error(`HTTP ${response.status}`);
     }
@@ -150,7 +177,12 @@ async function fetchOpenAlexAuthor(name, attempt = 1) {
         return null;
     }
 
-    const author = data.results[0];
+    // Prefer a result whose own affiliations include the professor's current
+    // institution; only fall back to bare top-1 relevance when none of the
+    // top candidates confirm it, so a still-unverified match is possible but
+    // no longer the default outcome for every ambiguous name.
+    const verified = data.results.find(candidate => affiliationsMatch(candidate.affiliations, currentAffiliation));
+    const author = verified || data.results[0];
 
     if (!author.affiliations || author.affiliations.length === 0) {
         return null;
@@ -290,7 +322,7 @@ async function main() {
         }
 
         try {
-            const openAlexData = await fetchOpenAlexAuthor(name);
+            const openAlexData = await fetchOpenAlexAuthor(name, professors.get(name));
             progress[name] = openAlexData;
             if (openAlexData) found++; else notFound++;
         } catch (err) {

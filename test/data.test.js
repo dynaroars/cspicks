@@ -38,11 +38,11 @@ test('NSF funding resolves faculty listed under a middle-initial variant', () =>
     awards: [{
       id: '1', title: 'Verification', awardee: 'Example University', awardDate: '09/01/2024',
       estimatedAmount: 400000,
-      investigators: [{ name: 'A', role: 'PI', facultyName: 'ThanhVu H. Nguyen', affiliation: 'Example University' }]
+      investigators: [{ name: 'A', role: 'PI', facultyName: 'ThanhVu H. Nguyen', rosterName: 'ThanhVu H. Nguyen', affiliation: 'Example University' }]
     }, {
       id: '2', title: 'Ambiguous', awardee: 'Other University', awardDate: '09/01/2024',
       estimatedAmount: 200000,
-      investigators: [{ name: 'B', role: 'PI', facultyName: 'Michael T. Goodrich', affiliation: 'Other University' }]
+      investigators: [{ name: 'B', role: 'PI', facultyName: 'Michael T. Goodrich', rosterName: 'Michael T. Goodrich', affiliation: 'Other University' }]
     }]
   };
   const index = buildFundingIndex(dataset, 2020, 2025);
@@ -91,9 +91,9 @@ test('NSF funding uses award year and fractional investigator attribution', () =
       startDate: '10/01/2024', endDate: '09/30/2027',
       obligatedAmount: 300000, estimatedAmount: 900000, program: 'Secure Computing', programManager: 'Dana Smith',
       investigators: [
-        { name: 'Alice', role: 'PI', facultyName: 'Alice', affiliation: 'Example University' },
-        { name: 'Bob', role: 'Co-PI', facultyName: 'Bob', affiliation: 'Example University' },
-        { name: 'Outside', role: 'Co-PI', facultyName: null, affiliation: null }
+        { name: 'Alice', role: 'PI', facultyName: 'Alice', rosterName: 'Alice', affiliation: 'Example University' },
+        { name: 'Bob', role: 'Co-PI', facultyName: 'Bob', rosterName: 'Bob', affiliation: 'Example University' },
+        { name: 'Outside', role: 'Co-PI', facultyName: null, rosterName: null, affiliation: null }
       ]
     }]
   };
@@ -121,16 +121,26 @@ test('NSF funding and discoveries exclude awards without matched CSRankings facu
   const dataset = { awards: [
     {
       id: 'matched', title: 'Matched project', awardDate: '01/01/2024', obligatedAmount: 100,
-      investigators: [{ name: 'Alice', facultyName: 'Alice', affiliation: 'Example University' }]
+      investigators: [{ name: 'Alice', facultyName: 'Alice', rosterName: 'Alice', affiliation: 'Example University' }]
     },
     {
       id: 'unmatched', title: 'Unmatched university project', awardDate: '01/01/2024', obligatedAmount: 999999,
-      investigators: [{ name: 'Outside', facultyName: null, affiliation: null }]
+      investigators: [{ name: 'Outside', facultyName: null, rosterName: null, affiliation: null }]
+    },
+    {
+      // A CSRankings roster row NSF's PI name matched (facultyName) but with no
+      // corresponding publication-table entry (rosterName null): the roster
+      // sync could not verify them, so they should not appear anywhere the
+      // rest of the app can — matching facultyName alone would wrongly credit
+      // this award to a person and school no professor search can ever find.
+      id: 'ghost', title: 'Unverifiable match', awardDate: '01/01/2024', obligatedAmount: 555555,
+      investigators: [{ name: 'Ghost', facultyName: 'Ghost Person', rosterName: null, affiliation: 'Example University' }]
     }
   ] };
   const funding = buildFundingIndex(dataset, 2020, 2025);
   assert.deepEqual(funding.awards.map(award => award.id), ['matched']);
   assert.equal(funding.schools[0].attributedAmount, 100);
+  assert.equal(funding.faculty.length, 1);
 });
 
 test('NSF funding uses collaborative project totals without changing local attribution', () => {
@@ -139,7 +149,7 @@ test('NSF funding uses collaborative project totals without changing local attri
     {
       id: '1', title, awardee: 'Example University', awardDate: '07/01/2024', obligatedAmount: 400000,
       estimatedAmount: 400000, collaborativeTotalAmount: 1200000,
-      investigators: [{ name: 'Alice', role: 'PI', facultyName: 'Alice', affiliation: 'Example University' }]
+      investigators: [{ name: 'Alice', role: 'PI', facultyName: 'Alice', rosterName: 'Alice', affiliation: 'Example University' }]
     }
   ] };
   const funding = buildFundingIndex(dataset, 2020, 2025);
@@ -242,6 +252,38 @@ test('current affiliation remains the fallback when a professor has no history',
   const prof = { name: 'Alice', affiliation: 'Current University' };
 
   assert.deepEqual(getPublicationSchools(prof, { year: 2020 }, {}, {}), ['Current University']);
+});
+
+test('an implausibly sprawling history that never mentions the current school is not trusted', () => {
+  // build-openalex-history.js resolves a professor by a bare name search with
+  // no affiliation check, so a name that collides with a more prominent,
+  // unrelated researcher elsewhere in OpenAlex silently attaches that other
+  // person's entire career. The signature: many more institutions than one
+  // career plausibly has, none of them the professor's actual current school.
+  const prof = { name: 'Wing Lam', affiliation: 'George Mason University' };
+  const wrongCareer = Array.from({ length: 10 }, (_, i) => ({
+    school: `Unrelated Institution ${i}`, start: 2000 + i, end: 2000 + i
+  }));
+  const history = { 'Wing Lam': wrongCareer };
+
+  // Every year - even ones a segment happens to cover - falls back to the
+  // professor's real current affiliation instead of the merged-in noise.
+  assert.deepEqual(getPublicationSchools(prof, { year: 2023 }, history), ['George Mason University']);
+  assert.deepEqual(getPublicationSchools(prof, { year: 1990 }, history), ['George Mason University']);
+
+  // A history with the same size that DOES include the current school is
+  // still trusted (a genuinely mobile academic, not a merge failure) - only
+  // years outside its coverage return no attribution, same as any other
+  // ordinary history.
+  const legitCareer = [...wrongCareer, { school: 'George Mason University', start: 2021, end: 2026 }];
+  assert.deepEqual(getPublicationSchools(prof, { year: 2023 }, { 'Wing Lam': legitCareer }), ['George Mason University']);
+  assert.deepEqual(getPublicationSchools(prof, { year: 2000 }, { 'Wing Lam': legitCareer }), ['Unrelated Institution 0']);
+  assert.deepEqual(getPublicationSchools(prof, { year: 2015 }, { 'Wing Lam': legitCareer }), []);
+
+  // A small, sparse history missing the current school (plausibly just stale,
+  // not merged) still gets the benefit of the doubt.
+  const sparseAndStale = [{ school: 'Old University', start: 2010, end: 2015 }];
+  assert.deepEqual(getPublicationSchools(prof, { year: 2012 }, { 'Wing Lam': sparseAndStale }), ['Old University']);
 });
 
 test('rankings always use fractional credit', () => {
