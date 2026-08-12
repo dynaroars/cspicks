@@ -439,31 +439,15 @@ footer button:hover {
   line-height: 1;
 }
 
-/* Filter help runs longer than the 260px default. Anchoring each panel to the
-   filter bar's left edge rather than centring it on its own ⓘ keeps it on
-   screen: the rightmost control (Per capita) would otherwise centre a 340px box
-   past the right edge at any viewport between roughly 800 and 1300px, and the
-   leftmost one would run off the left on a phone. The arrow is dropped because
-   it would no longer point at the trigger. */
+/* Filter help runs longer than the 260px default; `tooltip-position.js` keeps the
+   wider panel beside its own ⓘ and slides it back on screen when a control near
+   an edge (Per capita on the right, the first one on a phone) would overflow. */
 .search-filters {
   position: relative;
 }
 
-.search-filters .filter-info {
-  position: static;
-}
-
 .search-filters .filter-info .tooltip-content {
-  top: calc(100% + 0.5rem);
-  bottom: auto;
-  left: 0;
-  right: auto;
-  transform: none;
   width: min(340px, calc(100vw - 2rem));
-}
-
-.search-filters .filter-info .tooltip-content::after {
-  display: none;
 }
 
 @media (max-width: 640px) {
@@ -905,27 +889,12 @@ button.card-header {
 }
 
 .school-metric .metric-info .tooltip-content {
-  top: 150%;
-  right: -0.4rem;
-  bottom: auto;
-  left: auto;
   width: min(260px, calc(100vw - 2rem));
   overflow: visible;
-  transform: none;
   font-size: 0.8rem;
   font-weight: 400;
   text-transform: none;
   white-space: normal;
-}
-
-.school-metric .metric-info .tooltip-content::after {
-  top: auto;
-  right: 0.4rem;
-  bottom: 100%;
-  left: auto;
-  transform: none;
-  border-top-color: transparent;
-  border-bottom-color: #2d2d2d;
 }
 
 .summary-note {
@@ -3041,30 +3010,24 @@ button.card-header {
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
+/* `tooltip-position.js` pins the panel to its own ⓘ and, when the panel has to
+   shift to stay on screen, reports where the icon ended up as --tip-arrow-x so
+   the arrow keeps pointing at it. The 50% fallback covers the pre-script paint. */
 .tooltip-trigger .tooltip-content::after {
   content: '';
   position: absolute;
   top: 100%;
-  left: 50%;
+  left: var(--tip-arrow-x, 50%);
   transform: translateX(-50%);
   border: 6px solid transparent;
   border-top-color: #2d2d2d;
 }
 
-@media (max-width: 760px) {
-  /* Triggers sit at the end of a label, so anchor tooltips to their right edge
-     rather than centering them past the screen edge. */
-  .tooltip-trigger .tooltip-content {
-    left: auto;
-    right: 0;
-    transform: none;
-  }
-
-  .tooltip-trigger .tooltip-content::after {
-    left: auto;
-    right: 0.5rem;
-    transform: none;
-  }
+.tooltip-trigger .tooltip-content.tooltip-below::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: #2d2d2d;
 }
 
 .tooltip-trigger:hover .tooltip-content,
@@ -3158,26 +3121,11 @@ button.card-header {
 }
 
 .contribution-tooltip .tooltip-content {
-  top: 150%;
-  right: 0;
-  bottom: auto;
-  left: auto;
   width: min(360px, calc(100vw - 2rem));
-  transform: none;
   font-size: 0.8rem;
   font-weight: 400;
   text-transform: none;
   white-space: normal;
-}
-
-.contribution-tooltip .tooltip-content::after {
-  top: auto;
-  right: 0.25rem;
-  bottom: 100%;
-  left: auto;
-  transform: none;
-  border-top-color: transparent;
-  border-bottom-color: #2d2d2d;
 }
 
 [data-theme="dark"] .attribution-summary:hover {

@@ -112,6 +112,49 @@ test('default view ranks universities and people side by side, and clears stale 
   await expect(page).not.toHaveURL(/target=/);
 });
 
+for (const width of [1440, 820, 390]) {
+  test(`help panels open beside their own ⓘ at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('./?percapita=false');
+    await page.locator('#main-search').fill('George Mason University');
+    await expect(page.locator('#integrated-analysis')).toBeVisible();
+    await expect(page.locator('#ranking-stats')).toContainText('Profile completeness');
+    // Dismiss the autocomplete overlay (it sits above everything) without touching
+    // any control this test also wants to hover.
+    await page.locator('#main-search').blur();
+    await expect(page.locator('#universal-suggestions')).toBeHidden();
+
+    const triggers = page.locator([
+      '#filter-bar .filter-info',
+      '#integrated-analysis .analysis-tab-info:visible',
+      '#integrated-analysis .metric-info:visible',
+      '#school-results .card:not(.collapsed) .contribution-tooltip:visible'
+    ].join(', '));
+    const count = await triggers.count();
+    expect(count).toBeGreaterThan(4);
+    for (let i = 0; i < count; i++) {
+      const trigger = triggers.nth(i);
+      await trigger.scrollIntoViewIfNeeded();
+      await trigger.hover();
+      const panel = trigger.locator('.tooltip-content');
+      await expect(panel).toBeVisible();
+      const [icon, box] = [await trigger.boundingBox(), await panel.boundingBox()];
+      const label = await trigger.getAttribute('aria-label');
+      const iconCenter = icon.x + icon.width / 2;
+      // On screen, vertically adjacent to the icon, and horizontally over it —
+      // a panel anchored to some ancestor instead drifts away from its trigger.
+      expect(box.x, `${label} stays on screen`).toBeGreaterThanOrEqual(-1);
+      expect(box.x + box.width, `${label} stays on screen`).toBeLessThanOrEqual(width + 1);
+      expect(iconCenter, `${label} spans its icon`).toBeGreaterThanOrEqual(box.x - 1);
+      expect(iconCenter, `${label} spans its icon`).toBeLessThanOrEqual(box.x + box.width + 1);
+      const gap = box.y > icon.y ? box.y - (icon.y + icon.height) : icon.y - (box.y + box.height);
+      expect(gap, `${label} hugs its icon`).toBeGreaterThanOrEqual(0);
+      expect(gap, `${label} hugs its icon`).toBeLessThanOrEqual(16);
+      await page.mouse.move(0, 0);
+    }
+  });
+}
+
 test('choosing faculty from a university switches analysis to that professor', async ({ page }) => {
   await page.goto('./');
   await page.locator('#main-search').fill('George Mason University');
