@@ -6,8 +6,12 @@ import { buildPriorPeriodData } from './metrics.js';
 import { renderProfessorCard as renderProfessorCardView, renderSchoolCard as renderSchoolCardView } from './search-cards.js';
 import { clearSearchSections, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
 import { createDblpAuthorSearch } from './dblp-search-ui.js';
-import { hideComparison, initComparison, renderComparison, resolveComparison } from './comparison.js';
+import { activeComparisonType, hideComparison, initComparison, isComparing, renderComparison, resolveComparison } from './comparison.js';
 import { createSearchSuggestionBox } from './search-suggestions.js';
+import { initTooltipPositioning } from './tooltip-position.js';
+import { SITE_NAME, updatePageMeta } from './seo.js';
+import { mountShareButton } from './share.js';
+import { trackComparison, trackShare, trackView } from './analytics.js';
 
 let rawData = null;
 let appData = { professors: {}, schools: {} };
@@ -43,6 +47,8 @@ function renderSchoolCard(school, filterArea = null, options = {}) {
 const params = new URLSearchParams(window.location.search);
 
 async function init() {
+  const shareButton = mountShareButton('#page-share-mount', { getUrl: () => window.location.href, label: '', className: 'icon-link' });
+  shareButton?.addEventListener('click', () => trackShare('search'), { capture: true });
   filters = createFilterBar('#filter-bar', {
     label: 'Search filters',
     // Per-faculty ordering only means something for the ranking lists this page
@@ -56,6 +62,7 @@ async function init() {
   });
   initComparison({
     get appData() { return appData; },
+    get priorAppData() { return priorAppData; },
     resolveTarget: resolveAnalysisTarget
   });
   initSearchResults({
@@ -69,6 +76,7 @@ async function init() {
   });
   setupSearch();
   setupTooltips();
+  initTooltipPositioning();
 
   try {
     rawData = await loadData();
@@ -93,6 +101,10 @@ async function init() {
         ? Boolean(rawData.schools[linkedTargetName])
         : linkedTargetType === 'researcher' && Boolean(rawData.professors[linkedTargetName]);
       if (linkedTargetExists && !comparing) displayIntegratedAnalysis({ type: linkedTargetType, name: linkedTargetName });
+      // A shared link's title/description have to be right on first paint,
+      // not only after the next interaction - updateURL() is what normally
+      // triggers this, but nothing here calls it (the URL is already correct).
+      updateSeoForCurrentView(params.get('q'));
     } else {
       showDefaultRankings();
     }
@@ -159,6 +171,42 @@ function updateURL() {
 
   const newUrl = `${window.location.pathname}?${params.toString()}`;
   window.history.replaceState({}, '', newUrl);
+  updateSeoForCurrentView(q);
+}
+
+// Keeps <title>/description/canonical honest about what's on screen, so a
+// copied link previews the actual view rather than the generic homepage -
+// every call site that reproduces the URL (updateURL) reproduces the title too.
+function updateSeoForCurrentView(query) {
+  const trimmed = (query || '').trim();
+  if (!trimmed) {
+    updatePageMeta({ title: `${SITE_NAME} - Find the Right CS PhD Program and Advisor` });
+    trackView('default');
+    return;
+  }
+  if (isComparing()) {
+    updatePageMeta({
+      title: `${trimmed} - ${SITE_NAME}`,
+      description: `Head-to-head comparison: ${trimmed}. Publication trends, research strengths, and rank breakdowns on CS Picks.`
+    });
+    trackComparison(activeComparisonType());
+    return;
+  }
+  if (selectedAnalysisTarget) {
+    const name = selectedAnalysisTarget.type === 'researcher' ? cleanName(selectedAnalysisTarget.name) : selectedAnalysisTarget.name;
+    const kind = selectedAnalysisTarget.type === 'researcher' ? 'professor profile' : 'university research profile';
+    updatePageMeta({
+      title: `${name} - ${SITE_NAME}`,
+      description: `${name} ${kind} on CS Picks: publication trends, research strengths, and rankings from open academic data.`
+    });
+    trackView(selectedAnalysisTarget.type);
+    return;
+  }
+  updatePageMeta({
+    title: `${trimmed} - ${SITE_NAME}`,
+    description: `CS Picks results for "${trimmed}": universities, professors, and research areas from open academic data.`
+  });
+  trackView('search-results');
 }
 
 function refreshData() {
@@ -348,8 +396,25 @@ function renderSearchExamples() {
     .filter(entry => entry.label !== entry.query);
   const schoolPairs = comparisonExamples(abbreviated.length >= 2 ? abbreviated : schools
     .map(school => ({ label: getInstitutionShortName(school.name), query: school.name })), 1);
+
+  // A first-time visitor should see at least one example of every kind of
+  // query CS Picks supports (an area, a university, a head-to-head
+  // comparison) rather than depend entirely on the random draw above. These
+  // are only shown when the school actually exists under the current
+  // region/filters, so a chip never lands on an empty result.
+  const hasSchool = name => Boolean(appData.schools[name]);
+  const curated = [
+    { label: 'Software Engineering', query: 'Software Engineering' },
+    { label: 'Programming Languages', query: 'Programming Languages' },
+    { label: 'AI / ML', query: 'AI' },
+    hasSchool('George Mason University') && { label: 'George Mason University', query: 'George Mason University' },
+    (hasSchool('Carnegie Mellon University') && hasSchool('Univ. of Illinois at Urbana-Champaign'))
+      && { label: 'CMU vs UIUC', query: 'Carnegie Mellon University vs Univ. of Illinois at Urbana-Champaign' }
+  ].filter(Boolean);
   fixedContainer.innerHTML = '<span>Examples:</span>';
-  container.innerHTML = [...universityExamples, ...facultyExamples, ...areaExamples, ...conferenceExamples, ...schoolPairs]
+  container.innerHTML = [...curated, ...universityExamples, ...facultyExamples, ...areaExamples, ...conferenceExamples, ...schoolPairs]
+    .filter((item, index, all) => all.findIndex(other => other.query === item.query) === index)
+    .slice(0, 8)
     .map(item => `<button type="button" data-search-example="${escapeHtml(item.query)}">${escapeHtml(item.label)}</button>`)
     .join('');
 }

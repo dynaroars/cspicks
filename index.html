@@ -11,13 +11,31 @@
     applySystemTheme();
     systemTheme.addEventListener('change', applySystemTheme);
   </script>
-  <title>CS Picks</title>
+  <title>CS Picks - Find the Right CS PhD Program and Advisor</title>
+  <meta name="description" content="Find the right CS PhD program and research advisor. Explore professors, universities, research strengths, publication trends, and NSF funding using open academic data.">
+  <link rel="canonical" href="https://cspicks.roars.dev/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CS Picks">
+  <meta property="og:title" content="CS Picks - Find the Right CS PhD Program and Advisor">
+  <meta property="og:description" content="Find the right CS PhD program and research advisor. Explore professors, universities, research strengths, publication trends, and NSF funding using open academic data.">
+  <meta property="og:url" content="https://cspicks.roars.dev/">
+  <meta property="og:image" content="https://cspicks.roars.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CS Picks - Find the Right CS PhD Program and Advisor">
+  <meta name="twitter:description" content="Explore professors, universities, research strengths, publication trends, and NSF funding using open academic data.">
+  <meta name="twitter:image" content="https://cspicks.roars.dev/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="./src/style.css">
+  <!-- Privacy-conscious analytics (Plausible, no cookies), off until configured:
+       sign up at plausible.io (or self-host), then uncomment and set data-domain.
+       See README.md "Analytics" for what this tracks and why. -->
+  <!-- <script defer data-domain="cspicks.roars.dev" src="https://plausible.io/js/script.js"></script> -->
 </head>
 
 <body class="search-page">
@@ -28,6 +46,7 @@
         <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
         <a class="icon-link" href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer" aria-label="FAQ, methods and data" title="FAQ, methods &amp; data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.9 2.9 0 0 1 5.6 1c0 2-2.8 2.4-2.8 4.2"/><circle cx="12" cy="17.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
         <a class="icon-link" id="data-health-toggle" href="?dataHealth=true#site-data-health" aria-label="Data health" title="Data health"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h4l2.5-6 4 12L16 12h5"/></svg></a>
+        <span id="page-share-mount"></span>
         <a class="icon-link roars-link" href="https://roars.dev" target="_blank" rel="noopener noreferrer" aria-label="ROARS Lab" title="ROARS Lab"></a>
       </div>
       <nav class="top-nav" aria-label="Primary navigation">
@@ -40,8 +59,16 @@
 
     <div class="search-section">
       <div class="search-intro">
-        <h2>Explore computer science academia</h2>
-        <p>Discover universities, professors, research areas, and publication trends.</p>
+        <h2>Find the right CS PhD program and research advisor</h2>
+        <p>Explore professors, universities, research strengths, publication trends, and NSF funding using open academic data.</p>
+        <ul class="capability-list">
+          <li>Find professors</li>
+          <li>Compare universities</li>
+          <li>Explore research areas</li>
+          <li>Publication trends</li>
+          <li>NSF funding</li>
+          <li>Ranking simulator</li>
+        </ul>
       </div>
       <div class="search-container">
         <div class="universal-search">
@@ -58,6 +85,16 @@
         <div class="search-examples-row" id="search-example-fixed"></div>
         <div class="search-examples-row" id="search-example-items"></div>
       </div>
+
+      <p class="phd-callout">
+        <strong>Applying for a CS PhD?</strong> Pair CS Picks with the
+        <a href="https://github.com/dynaroars/phd-cs-us" target="_blank" rel="noopener noreferrer">PhD Demystify</a>
+        guide to
+        <a href="?q=Machine+Learning">find potential advisors</a>,
+        <a href="?q=Carnegie+Mellon+University+vs+Univ.+of+Illinois+at+Urbana-Champaign">compare departments</a>,
+        <a href="?q=Software+Engineering">explore research strengths</a>, and
+        <a href="?q=George+Mason+University&amp;target=George+Mason+University&amp;targetType=school">check publication trends</a>.
+      </p>
 
     </div>
 

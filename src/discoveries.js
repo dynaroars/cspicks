@@ -1,12 +1,64 @@
 import { filterByYears, loadData } from './data.js';
 import { createFilterBar } from './filters.js';
-import { buildPriorPeriodData, calculateDiscoveryInsights } from './metrics.js';
+import { applyPerCapitaRanks, buildPriorPeriodData, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
 import { buildFundingIndex, calculateFundingDiscoveries, formatFunding } from './nsf.js';
+import { SITE_NAME, updatePageMeta } from './seo.js';
+import { mountShareButton, shareUrl } from './share.js';
+import { trackDiscoveryShare, trackShare, trackView } from './analytics.js';
 import { areaLabels, escapeHtml, getInstitutionShortName } from './shared.js';
+import { initTooltipPositioning } from './tooltip-position.js';
 
 let rawData = null;
 let filters = null;
 let nsfData = null;
+
+const shareIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
+
+function slugify(title) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+// Each card's own shareable URL: current filters plus a fragment that
+// scrollIntoDiscovery() below picks up on load, so "share this card" reaches
+// the one the reader meant, not just the top of the page.
+function discoveryCardUrl(id) {
+  return `${window.location.origin}${window.location.pathname}?${filters.toParams()}#${id}`;
+}
+
+function updateDiscoveriesUrl() {
+  const params = filters.toParams();
+  window.history.replaceState({}, '', `${window.location.pathname}?${params}${window.location.hash}`);
+  const region = regionLabels[filters.region] || filters.region;
+  updatePageMeta({
+    title: `Discoveries: ${filters.startYear}-${filters.endYear} ${region} CS trends - ${SITE_NAME}`,
+    description: `Notable, reproducible patterns in ${region} CS research from ${filters.startYear} to ${filters.endYear}: fastest-growing subfields, departments on the rise, funding trends, and more.`
+  });
+  trackView('default', 'discoveries');
+}
+
+// One flash for whichever share button was just clicked, matching the label
+// swap createShareButton uses elsewhere, so all "Copy link" controls behave
+// identically regardless of which page rendered them.
+function flashShareButton(button, message) {
+  const original = button.getAttribute('title');
+  button.setAttribute('title', message);
+  button.classList.add('is-flashed');
+  clearTimeout(button._flashTimer);
+  button._flashTimer = setTimeout(() => {
+    button.setAttribute('title', original);
+    button.classList.remove('is-flashed');
+  }, 1800);
+}
+
+function scrollToHashDiscovery() {
+  const id = window.location.hash.slice(1);
+  if (!id) return;
+  const card = document.getElementById(id);
+  if (!card) return;
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  card.classList.add('discovery-highlighted');
+  setTimeout(() => card.classList.remove('discovery-highlighted'), 2200);
+}
 
 const regionLabels = {
   world: 'worldwide',
@@ -27,6 +79,11 @@ function fundingSchoolLink(name) {
   return `<a class="discovery-school" href="funding.html?q=${encodeURIComponent(name)}" title="Explore NSF funding for ${escapeHtml(name)}">${escapeHtml(getInstitutionShortName(name))}</a>`;
 }
 
+function areaLink(area) {
+  const label = areaLabels[area] || area;
+  return `<a class="discovery-school" href="index.html?q=${encodeURIComponent(label)}" title="Explore ${escapeHtml(label)}">${escapeHtml(label)}</a>`;
+}
+
 function renderDiscoveries() {
   const container = document.getElementById('discovery-stats');
   const { startYear: start, endYear: end, region, confSet, historyMap: history, aliasMap: aliases } = filters;
@@ -38,20 +95,35 @@ function renderDiscoveries() {
 
   const current = filterByYears(rawData, start, end, region, history, aliases, confSet);
   const prior = buildPriorPeriodData(rawData, start, end, region, history, aliases, confSet);
+  // Matches Search's Per capita toggle: rank-based insights (climbers,
+  // droppers, and any area-rank guard) read `school.rank`, so re-ranking it
+  // here by output-per-faculty is enough to carry the setting through
+  // unchanged — same rule, same excluded small departments, no separate path.
+  if (filters.perCapita) {
+    applyPerCapitaRanks(current);
+    applyPerCapitaRanks(prior);
+  }
   const insights = calculateDiscoveryInsights(current, prior);
+  const subfields = calculateSubfieldDiscoveries(current, prior);
   const span = end - start + 1;
   const priorStart = start - span;
   const priorEnd = start - 1;
   const number = value => Number(value || 0).toFixed(1);
   const empty = '<p class="discovery-empty">No university met the minimum evidence threshold.</p>';
-  const list = (items, row) => items.length
+  const emptySubfield = '<p class="discovery-empty">No subfield met the minimum evidence threshold.</p>';
+  const list = (items, row, emptyText = empty) => items.length
     ? `<ol class="discovery-list">${items.map((item, index) => `<li><span class="discovery-position">${index + 1}</span>${row(item)}</li>`).join('')}</ol>`
-    : empty;
-  const card = (title, help, body, className = '') => `
-    <section class="discovery-card ${className}">
-      <h3>${escapeHtml(title)} <span class="tooltip-trigger discovery-info" tabindex="0" aria-label="About ${escapeHtml(title)}">ⓘ<span class="tooltip-content">${escapeHtml(help)}</span></span></h3>
+    : emptyText;
+  const card = (title, help, body, className = '') => {
+    const id = `discovery-${slugify(title)}`;
+    return `
+    <section class="discovery-card ${className}" id="${id}">
+      <h3>${escapeHtml(title)} <span class="tooltip-trigger discovery-info" tabindex="0" aria-label="About ${escapeHtml(title)}">ⓘ<span class="tooltip-content">${escapeHtml(help)}</span></span>
+        <button type="button" class="share-button discovery-share" data-share-id="${id}" data-share-title="${escapeHtml(title)}" aria-label="Copy link to ${escapeHtml(title)}" title="Copy link">${shareIcon}</button>
+      </h3>
       ${body}
     </section>`;
+  };
   const funding = buildFundingIndex(nsfData, start, end);
   const priorFunding = buildFundingIndex(nsfData, priorStart, priorEnd);
   const fundingInsights = calculateFundingDiscoveries(funding, priorFunding, current.schools);
@@ -100,6 +172,25 @@ function renderDiscoveries() {
         <span>${schoolLink(item.name)}<small>${escapeHtml(areaLabels[item.focusArea.area] || item.focusArea.area)} · ${item.focusArea.portfolioShare.toFixed(0)}% school vs ${item.focusArea.regionalBaseline.toFixed(0)}% region · #${item.focusArea.areaRank}</small></span>
         <strong>${item.focusArea.specialization.toFixed(1)}× region</strong>`), 'discovery-featured')}
     </div>
+    <h2 class="discovery-section-heading">Notable patterns across subfields</h2>
+    <p class="summary-note">Region-wide, not per university: how each research area itself is growing, shrinking, spreading across more departments, or changing leaders.</p>
+    <div class="discovery-grid">
+      ${card('Fastest-growing subfields', 'Largest percentage increase in region-wide adjusted output versus the preceding equal-length period. Both periods must have an adjusted count of at least 2.', list(subfields.growth, item => `
+        <span>${areaLink(item.area)}<small>${number(item.priorTotal)} → ${number(item.currentTotal)} adjusted count</small></span>
+        <strong>+${item.growth.toFixed(0)}%</strong>`, emptySubfield), 'discovery-featured')}
+      ${card('Fastest-shrinking subfields', 'Largest percentage decrease in region-wide adjusted output versus the preceding equal-length period. Both periods must have an adjusted count of at least 2.', list(subfields.decline, item => `
+        <span>${areaLink(item.area)}<small>${number(item.priorTotal)} → ${number(item.currentTotal)} adjusted count</small></span>
+        <strong class="confidence-review">${item.growth.toFixed(0)}%</strong>`, emptySubfield), 'discovery-risk')}
+      ${card('Subfields spreading to more departments', 'Largest increase in the number of universities with active output in this area versus the preceding period, among subfields with at least 3 active universities before.', list(subfields.expandingReach, item => `
+        <span>${areaLink(item.area)}<small>${item.priorSchoolCount} → ${item.schoolCount} universities</small></span>
+        <strong>+${item.schoolGain}</strong>`, emptySubfield), 'discovery-featured')}
+      ${card('Subfields consolidating', 'Largest decrease in the number of universities with active output in this area versus the preceding period, among subfields with at least 3 active universities before.', list(subfields.narrowingReach, item => `
+        <span>${areaLink(item.area)}<small>${item.priorSchoolCount} → ${item.schoolCount} universities</small></span>
+        <strong class="confidence-review">${item.schoolGain}</strong>`, emptySubfield), 'discovery-risk')}
+      ${card('Changing of the guard', 'Subfields whose single leading university (by area adjusted count) differs from the preceding period. Both periods must have an area adjusted count of at least 2 for the subfield overall.', list(subfields.leadershipChanges, item => `
+        <span>${areaLink(item.area)}<small>${escapeHtml(getInstitutionShortName(item.formerLeader))} → ${escapeHtml(getInstitutionShortName(item.newLeader))}</small></span>
+        <strong>new leader</strong>`, emptySubfield), 'discovery-featured discovery-wide')}
+    </div>
     ${(region === 'us' || region === 'world') ? `
       <h2 class="discovery-section-heading">NSF funding patterns across US universities</h2>
       <p class="summary-note">These include only awards attached to matched current US CS faculty—not every NSF award at each university. Dollar attribution remains local even when a matched faculty member’s collaborative project spans several institutions.</p>
@@ -120,15 +211,35 @@ function renderDiscoveries() {
           <span><a class="discovery-school" href="funding.html?q=${encodeURIComponent(award.title)}" title="Explore this collaborative project">${escapeHtml(award.title.replace(/^Collaborative (?:Research|Resaerch):\s*/i, ''))}</a><small>${award.collaborativeAwardCount} institutional portions</small></span><strong>${formatFunding(award.collaborativeTotalAmount)}</strong>`), 'discovery-featured discovery-wide')}
       </div>` : ''}
   `;
+  updateDiscoveriesUrl();
+}
+
+function setupCardSharing() {
+  document.getElementById('discovery-stats')?.addEventListener('click', async event => {
+    const button = event.target.closest('[data-share-id]');
+    if (!button) return;
+    const outcome = await shareUrl(discoveryCardUrl(button.dataset.shareId), {
+      title: `${button.dataset.shareTitle} - CS Picks Discoveries`,
+      text: button.dataset.shareTitle
+    });
+    if (outcome === 'copied') flashShareButton(button, 'Copied!');
+    else if (outcome === 'failed') flashShareButton(button, 'Copy failed');
+    trackDiscoveryShare(button.dataset.shareId);
+  });
 }
 
 async function init() {
+  initTooltipPositioning();
+  const shareButton = mountShareButton('#page-share-mount', { getUrl: () => window.location.href, label: '', className: 'icon-link' });
+  shareButton?.addEventListener('click', () => trackShare('discoveries'), { capture: true });
   filters = createFilterBar('#filter-bar', {
     label: 'Discovery filters',
+    fields: ['region', 'years', 'confSet', 'rankings', 'history', 'percapita'],
     years: { min: 2000, max: new Date().getFullYear() },
     className: 'discoveries-filters',
     onChange: renderDiscoveries
   });
+  setupCardSharing();
   await filters.ready();
   const [loadedData, nsfResponse] = await Promise.all([loadData(), fetch('./nsf-awards.json')]);
   if (!nsfResponse.ok) throw new Error(`NSF dataset returned ${nsfResponse.status}`);
@@ -137,6 +248,10 @@ async function init() {
   document.getElementById('discoveries-loading').classList.add('hidden');
   document.getElementById('discovery-stats').classList.remove('hidden');
   renderDiscoveries();
+  // Only on first load: a shared link to one card should land on that card,
+  // but a later filter change re-rendering the same hash should not re-jerk
+  // the reader back to it.
+  scrollToHashDiscovery();
 }
 
 init().catch(error => {
