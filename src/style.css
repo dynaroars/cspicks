@@ -439,6 +439,21 @@ footer button:hover {
   line-height: 1;
 }
 
+/* Filter help runs longer than the 260px default, and the bar sits near the top
+   of the page, so these open downward with room to breathe. */
+.search-filters .filter-info .tooltip-content {
+  top: 160%;
+  bottom: auto;
+  width: min(340px, calc(100vw - 2rem));
+}
+
+.search-filters .filter-info .tooltip-content::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: #2d2d2d;
+}
+
 @media (max-width: 640px) {
   .search-filters {
     flex-wrap: wrap;
@@ -997,8 +1012,21 @@ button.card-header {
   border-radius: 12px;
 }
 
-.comparison-results .chart-container[hidden] {
+/* The full per-area detail closes the comparison rather than opening it. */
+.comparison-chart-section {
+  margin-top: 1.5rem;
+}
+
+.comparison-chart-section[hidden] {
   display: none;
+}
+
+.comparison-chart-title {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .comparison-summary {
@@ -1038,15 +1066,20 @@ button.card-header {
 .comparison-side-a { --comparison-accent: rgba(37, 99, 235, 1); }
 .comparison-side-b { --comparison-accent: rgba(16, 185, 129, 1); }
 
-.comparison-overall,
+.comparison-verdict,
 .rank-gap-card,
 .comparison-notice,
 .comparison-leads {
   grid-column: 1 / -1;
 }
 
-.comparison-overall {
-  text-align: center;
+/* The one line a reader can stop at, so it carries the most weight on the page. */
+.comparison-verdict p {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  line-height: 1.5;
 }
 
 .comparison-scoreboard {
@@ -1102,13 +1135,10 @@ button.card-header {
   white-space: nowrap;
 }
 
-.comparison-overall .leader {
-  font-size: 1.3rem;
-}
-
-.comparison-overall .comparison-side-a,
-.comparison-overall .comparison-side-b {
+.comparison-verdict .comparison-side-a,
+.comparison-verdict .comparison-side-b {
   color: var(--comparison-accent);
+  font-weight: 700;
 }
 
 .comparison-notice {
@@ -2184,6 +2214,83 @@ button.card-header {
   border-bottom: 1px solid var(--border-color);
 }
 
+.fragility-trajectory {
+  margin-top: 0.75rem;
+}
+
+.fragility-trajectory > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: var(--text-sm);
+}
+
+/* Rank stability: a 4x4 grid of ranks, so a table rather than a chart. The
+   extremes are marked by emphasis instead of a color ramp — sixteen shaded
+   cells would imply a precision these ranks do not have. */
+.stability-table {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.stability-table caption {
+  margin-bottom: 0.6rem;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  text-align: left;
+}
+
+.stability-table th,
+.stability-table td {
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.stability-table thead th {
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+.stability-table tbody th {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.stability-cell strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.stability-cell small {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+
+.stability-best {
+  background: color-mix(in srgb, #10b981 14%, var(--card-bg));
+}
+
+.stability-worst {
+  background: color-mix(in srgb, #ef4444 12%, var(--card-bg));
+}
+
+@media (max-width: 640px) {
+  .stability-table th,
+  .stability-table td {
+    padding: 0.45rem 0.3rem;
+  }
+}
+
 .discovery-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2545,12 +2652,17 @@ button.card-header {
   display: none;
 }
 
+/* These are type="search", so the input[type="text"] rule above never reaches
+   them — they have to carry their own themed color or they inherit the UA's
+   black and vanish against the dark card background. */
 .sim-step input {
   width: 100%;
   padding: 1rem;
   border: 2px solid var(--border-color);
   border-radius: 12px;
   font-size: 1rem;
+  font-family: var(--font-body);
+  color: var(--text-primary);
   background: var(--card-bg);
   transition: border-color 0.2s;
 }
@@ -2609,10 +2721,17 @@ button.card-header {
   border-radius: 12px;
   font-size: 0.95rem;
   font-family: var(--font-body);
+  color: var(--text-primary);
   background: var(--card-bg);
   resize: vertical;
   min-height: 120px;
   transition: border-color 0.2s;
+}
+
+.sim-step input::placeholder,
+.sim-step textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.75;
 }
 
 .sim-step textarea:focus {

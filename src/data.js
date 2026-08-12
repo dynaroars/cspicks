@@ -544,12 +544,32 @@ function collectFilteredData({ professors, schools }, startYear, endYear, isInRe
   return { filteredProfs, filteredSchools };
 }
 
+/**
+ * CSRankings' geometric mean over every top-level area, rounded the way the
+ * upstream ranking rounds it. Exported so that anything recomputing a
+ * hypothetical score — the fragility analysis, the simulator — uses this exact
+ * formula rather than a second copy that could drift from it.
+ */
+export function scoreFromAreaCounts(areaAdjustedCounts) {
+  return Math.round(10.0 * geometricMeanScore(areaAdjustedCounts)) / 10.0;
+}
+
+/**
+ * The same geometric mean before the one-decimal rounding. Rounding collapses
+ * small differences into ties, so anything that has to *compare* hypothetical
+ * scores — which departure costs a department the most — must compare these,
+ * and round only the value it reports.
+ */
+export function geometricMeanScore(areaAdjustedCounts) {
+  const product = topLevelAreas.reduce((score, area) =>
+    score * ((areaAdjustedCounts?.[area] || 0) + 1.0), 1.0);
+  return Math.pow(product, 1 / numAreas);
+}
+
 // Stage 2: CSRankings' geometric mean over every top-level area.
 function scoreSchools(schoolList) {
   schoolList.forEach(school => {
-    const product = topLevelAreas.reduce((score, area) =>
-      score * ((school.areaAdjustedCounts[area] || 0) + 1.0), 1.0);
-    school.score = Math.round(10.0 * Math.pow(product, 1 / numAreas)) / 10.0;
+    school.score = scoreFromAreaCounts(school.areaAdjustedCounts);
   });
 }
 

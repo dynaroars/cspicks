@@ -67,12 +67,13 @@
     <section id="comparison-results" class="comparison-results" hidden aria-live="polite">
       <div class="comparison-results-header">
         <h2 id="comparison-title">Head-to-head</h2>
-        <p>Adjusted publication weight by area, using the region, years, conference set, and History setting above.</p>
-      </div>
-      <div id="comparison-chart-container" class="chart-container" hidden>
-        <canvas id="comparisonChart"></canvas>
+        <p>Using the region, years, conference set, and History setting above.</p>
       </div>
       <div id="comparison-summary" class="comparison-summary"></div>
+      <div id="comparison-chart-container" class="comparison-chart-section" hidden>
+        <h3 class="comparison-chart-title">Adjusted publication count by area</h3>
+        <div class="chart-container"><canvas id="comparisonChart"></canvas></div>
+      </div>
     </section>
 
     <main>
@@ -109,6 +110,9 @@
         <button type="button" class="nav-tab" data-tab="collaboration" data-school-only role="tab">
           Collaboration <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Collaboration">ⓘ<span class="tooltip-content">Shows coauthor-intensity and faculty-concentration proxies; it does not claim to identify cross-university collaborations.</span></span>
         </button>
+        <button type="button" class="nav-tab" data-tab="stability" data-school-only role="tab">
+          Rank Stability <span class="tooltip-trigger analysis-tab-info" tabindex="0" aria-label="About Rank Stability">ⓘ<span class="tooltip-content">Recomputes the university's rank across every combination of look-back window and conference set, holding the region fixed, and reports the range. A rank that moves a lot across settings depends more on those choices than on the department.</span></span>
+        </button>
       </div>
 
       <div id="school-trends-view" class="view-section">
@@ -142,6 +146,9 @@
       </div>
       <div id="collaboration-view" class="view-section" hidden>
         <div id="collaboration-stats" class="diagnostic-panel"></div>
+      </div>
+      <div id="stability-view" class="view-section" hidden>
+        <div id="stability-stats" class="diagnostic-panel"></div>
       </div>
     </section>
 

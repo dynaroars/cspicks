@@ -6,9 +6,10 @@ import { getInitialRegion, rememberRegion } from './shared.js';
 // This module owns their markup, state, persistence, and the affiliation data
 // that History mode needs, so pages only declare which fields they want.
 
-const CONF_SET_HELP = 'Chooses which publication venues count. CSRankings (Default Venues) follows the primary conference set; CSRankings (All Venues) adds the extended, next-tier venues; CORE options use CORE conference tiers.';
+const CONF_SET_HELP = 'Chooses which publication venues count. Default follows the primary CSRankings conference set; All adds the extended, next-tier venues; the CORE options use CORE conference tiers.';
 const HISTORY_HELP = 'When enabled, publications are credited to the institution where the author was affiliated at the time of publication, not their current institution. Use the year selectors to filter results for a specific historical period.';
 const RANKINGS_HELP = 'Numbers the result lists and shows each university\'s overall and per-area rank for the selected region, years, and conference set.';
+const PER_CAPITA_HELP = 'Ranks universities by average output per professor rather than by departmental total, so a large department is not favoured over a productive one. Universities with fewer than five publishing professors are omitted.';
 
 const REGIONS = [
   ['world', 'World'],
@@ -20,8 +21,8 @@ const REGIONS = [
 ];
 
 const CONF_SETS = [
-  ['csrankings-default', 'CSRankings (Default Venues)'],
-  ['csrankings', 'CSRankings (All Venues)'],
+  ['csrankings-default', 'Default'],
+  ['csrankings', 'All'],
   ['core', 'CORE A*'],
   ['core-a', 'CORE A*/A']
 ];
@@ -45,7 +46,8 @@ function storeFilters(state) {
       endYear: state.endYear,
       confSet: state.confSet,
       rankings: state.rankings,
-      historical: state.historical
+      historical: state.historical,
+      perCapita: state.perCapita
     }));
   } catch {
     // Filters still work for this page without storage.
@@ -110,7 +112,8 @@ export function createFilterBar(mount, {
     endYear: DEFAULT_END_YEAR,
     confSet: 'csrankings-default',
     rankings: false,
-    historical: false
+    historical: false,
+    perCapita: false
   };
 
   // A link's parameters win; otherwise the reader's last choices apply.
@@ -120,6 +123,7 @@ export function createFilterBar(mount, {
   if (stored.confSet) state.confSet = normalizeConferenceSet(stored.confSet);
   if (typeof stored.rankings === 'boolean') state.rankings = stored.rankings;
   if (typeof stored.historical === 'boolean') state.historical = stored.historical;
+  if (typeof stored.perCapita === 'boolean') state.perCapita = stored.perCapita;
 
   if (params.has('region')) state.region = params.get('region');
   if (params.has('start')) state.startYear = parseInt(params.get('start'));
@@ -127,6 +131,7 @@ export function createFilterBar(mount, {
   if (params.has('confSet')) state.confSet = normalizeConferenceSet(params.get('confSet'));
   if (params.has('rankings')) state.rankings = params.get('rankings') === 'true';
   if (params.has('historical')) state.historical = params.get('historical') === 'true';
+  if (params.has('percapita')) state.perCapita = params.get('percapita') === 'true';
   state.startYear = Math.min(Math.max(state.startYear, years.min), years.max);
   state.endYear = Math.min(Math.max(state.endYear, years.min), years.max);
   storeFilters(state);
@@ -163,6 +168,13 @@ export function createFilterBar(mount, {
         ${tooltip('historical mode', HISTORY_HELP)}
       </label>
     </div>` : ''}
+    ${has('percapita') ? `<div class="filter-group checkboxes">
+      <label for="per-capita-mode" class="filter-checkbox">
+        <input type="checkbox" id="per-capita-mode"${state.perCapita ? ' checked' : ''}>
+        <span>Per capita</span>
+        ${tooltip('per-capita ranking', PER_CAPITA_HELP)}
+      </label>
+    </div>` : ''}
   `;
 
   const regionSelect = element.querySelector('#region-select');
@@ -171,6 +183,7 @@ export function createFilterBar(mount, {
   const confSelect = element.querySelector('#conf-set');
   const rankingsToggle = element.querySelector('#show-rankings');
   const historyToggle = element.querySelector('#historical-mode');
+  const perCapitaToggle = element.querySelector('#per-capita-mode');
 
   const controller = {
     element,
@@ -180,6 +193,7 @@ export function createFilterBar(mount, {
     get confSet() { return state.confSet; },
     get rankings() { return state.rankings; },
     get historical() { return state.historical; },
+    get perCapita() { return state.perCapita; },
     get historyMap() { return state.historical ? affiliationData?.historyMap || null : null; },
     get aliasMap() { return state.historical ? affiliationData?.aliasMap || null : null; },
 
@@ -198,6 +212,7 @@ export function createFilterBar(mount, {
       if (has('confSet') && state.confSet !== 'csrankings-default') target.set('confSet', state.confSet);
       if (has('rankings') && state.rankings) target.set('rankings', 'true');
       if (has('history') && state.historical) target.set('historical', 'true');
+      if (has('percapita') && state.perCapita) target.set('percapita', 'true');
       return target;
     },
 
@@ -235,6 +250,12 @@ export function createFilterBar(mount, {
 
   rankingsToggle?.addEventListener('change', () => {
     state.rankings = rankingsToggle.checked;
+    storeFilters(state);
+    onChange(controller);
+  });
+
+  perCapitaToggle?.addEventListener('change', () => {
+    state.perCapita = perCapitaToggle.checked;
     storeFilters(state);
     onChange(controller);
   });

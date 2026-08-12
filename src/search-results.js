@@ -1,5 +1,6 @@
 import { assignCompetitionRanks, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet, schoolAliases, conferenceAliases } from './data.js';
 import { areaLabels, cleanName, escapeHtml, getConferenceFullLabel, getConferenceLabel } from './shared.js';
+import { calculatePerCapita } from './metrics.js';
 
 // Renders the Search page's result sections. The page injects its live state
 // and callbacks through `ctx` so these functions stay free of module globals.
@@ -408,9 +409,14 @@ export function showDefaultRankings() {
   // Ranked universities and people sit side by side in this view.
   document.body.classList.add('showing-rankings');
   stopInfiniteLists();
-  const schools = Object.values(ctx.appData.schools)
-    .filter(school => school.name && Number.isFinite(school.rank))
-    .sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name));
+  // Two orderings of the same data: CSRankings' own score, or output per
+  // publishing faculty member, which reorders the list substantially.
+  const perCapita = Boolean(ctx.filters.perCapita);
+  const schools = perCapita
+    ? calculatePerCapita(ctx.appData).map(row => ({ ...row.school, perCapitaRank: row.rank, perCapita: row.perCapita }))
+    : Object.values(ctx.appData.schools)
+      .filter(school => school.name && Number.isFinite(school.rank))
+      .sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name));
   const professors = Object.values(ctx.appData.professors)
     .sort((a, b) => b.totalAdjusted - a.totalAdjusted || a.name.localeCompare(b.name));
 
@@ -418,7 +424,7 @@ export function showDefaultRankings() {
   document.getElementById('school-results').classList.remove('single-result');
   // No headings or ordinals here: the two columns and their order say enough.
   renderInfiniteLists([
-    { container: document.getElementById('school-results'), items: schools, renderItem: school => ctx.renderSchoolCard(school, null, { compactNames: true }) },
+    { container: document.getElementById('school-results'), items: schools, renderItem: school => ctx.renderSchoolCard(school, null, { compactNames: true, ...(perCapita ? { rankOverride: school.perCapitaRank } : {}) }) },
     { container: document.getElementById('prof-results'), items: professors, renderItem: professor => ctx.renderProfessorCard(professor, { compactNames: true }) }
   ]);
   document.querySelectorAll('#conference-results, #area-people-results, #dblp-results')
