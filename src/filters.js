@@ -27,7 +27,9 @@ const CONF_SETS = [
   ['core-a', 'CORE A*/A']
 ];
 
-const FILTER_STORAGE_KEY = 'cspicks:filters';
+// Versioned: per-capita used to default on, so readers carrying the old
+// stored value would otherwise never see the new CSRankings-matching default.
+const FILTER_STORAGE_KEY = 'cspicks:filters:v2';
 
 // Filter choices follow the reader from page to page, so clicking through to
 // another university or tool does not silently reset them.
@@ -65,8 +67,13 @@ export async function loadHistoryMaps() {
   return affiliationData;
 }
 
-function tooltip(label, help) {
-  return `<span class="tooltip-trigger filter-info" tabindex="0" aria-label="About ${label}">ⓘ<span class="tooltip-content">${help}</span></span>`;
+// The help panel hangs off the control itself rather than a separate ⓘ, so
+// hovering (or tabbing to) the control explains it. `tooltip-position.js`
+// measures whichever element carries `.tooltip-trigger`, so the panel lines up
+// with the whole control. Callers put `tooltip-trigger` on that element and
+// point the input's aria-describedby at this id.
+function helpPanel(id, help) {
+  return `<span class="tooltip-content" id="${id}" role="tooltip">${help}</span>`;
 }
 
 function optionsHtml(entries, selected) {
@@ -86,14 +93,14 @@ function yearOptions(min, max, selected) {
 /**
  * Renders a filter bar into `mount` and returns a controller holding the state.
  *
- * fields   — any of 'region', 'years', 'confSet', 'rankings', 'history' (order
- *            is fixed)
+ * fields   — any of 'region', 'years', 'rankings', 'history', 'percapita',
+ *            'confSet'; render order is fixed here, not by this array
  * onChange — called after any control changes, with the controller
  * The controller exposes the current values plus `apply(rawData)`, which runs
  * `filterByYears` with the right history maps for the current History setting.
  */
 export function createFilterBar(mount, {
-  fields = ['region', 'years', 'confSet', 'rankings', 'history'],
+  fields = ['region', 'years', 'rankings', 'history', 'confSet'],
   years = { min: 1970, max: new Date().getFullYear() + 1 },
   prefix = '',
   prefixId = '',
@@ -113,9 +120,9 @@ export function createFilterBar(mount, {
     confSet: 'csrankings-default',
     rankings: false,
     historical: false,
-    // On by default: the CSRankings score rewards a department for being large
-    // as well as productive, and per-capita is the fairer first impression.
-    perCapita: true
+    // Off by default so the default view reproduces official CSRankings
+    // (which ranks by department total, not by output per faculty member).
+    perCapita: false
   };
 
   // A link's parameters win; otherwise the reader's last choices apply.
@@ -152,30 +159,30 @@ export function createFilterBar(mount, {
         <select id="end-year" aria-label="End year">${yearOptions(years.min, years.max, state.endYear)}</select>
       </div>
     </div>` : ''}
-    ${has('confSet') ? `<div class="filter-group conference-set-control">
-      <select id="conf-set" aria-label="Conference set">${optionsHtml(CONF_SETS, state.confSet)}</select>
-      ${tooltip('conference sets', CONF_SET_HELP)}
-    </div>` : ''}
     ${has('rankings') ? `<div class="filter-group checkboxes">
-      <label for="show-rankings" class="filter-checkbox">
-        <input type="checkbox" id="show-rankings"${state.rankings ? ' checked' : ''}>
-        <span>Rankings</span>
-        ${tooltip('rankings', RANKINGS_HELP)}
+      <label for="show-rankings" class="filter-checkbox tooltip-trigger">
+        <input type="checkbox" id="show-rankings" aria-describedby="show-rankings-help"${state.rankings ? ' checked' : ''}>
+        <span>Show Rankings</span>
+        ${helpPanel('show-rankings-help', RANKINGS_HELP)}
       </label>
     </div>` : ''}
     ${has('history') ? `<div class="filter-group checkboxes">
-      <label for="historical-mode" class="filter-checkbox">
-        <input type="checkbox" id="historical-mode"${state.historical ? ' checked' : ''}>
+      <label for="historical-mode" class="filter-checkbox tooltip-trigger">
+        <input type="checkbox" id="historical-mode" aria-describedby="historical-mode-help"${state.historical ? ' checked' : ''}>
         <span>History</span>
-        ${tooltip('historical mode', HISTORY_HELP)}
+        ${helpPanel('historical-mode-help', HISTORY_HELP)}
       </label>
     </div>` : ''}
     ${has('percapita') ? `<div class="filter-group checkboxes">
-      <label for="per-capita-mode" class="filter-checkbox">
-        <input type="checkbox" id="per-capita-mode"${state.perCapita ? ' checked' : ''}>
+      <label for="per-capita-mode" class="filter-checkbox tooltip-trigger">
+        <input type="checkbox" id="per-capita-mode" aria-describedby="per-capita-mode-help"${state.perCapita ? ' checked' : ''}>
         <span>Per capita</span>
-        ${tooltip('per-capita ranking', PER_CAPITA_HELP)}
+        ${helpPanel('per-capita-mode-help', PER_CAPITA_HELP)}
       </label>
+    </div>` : ''}
+    ${has('confSet') ? `<div class="filter-group conference-set-control tooltip-trigger">
+      <select id="conf-set" aria-label="Conference set" aria-describedby="conf-set-help">${optionsHtml(CONF_SETS, state.confSet)}</select>
+      ${helpPanel('conf-set-help', CONF_SET_HELP)}
     </div>` : ''}
   `;
 

@@ -46,7 +46,6 @@
         <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
         <a class="icon-link" href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer" aria-label="FAQ, methods and data" title="FAQ, methods &amp; data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.9 2.9 0 0 1 5.6 1c0 2-2.8 2.4-2.8 4.2"/><circle cx="12" cy="17.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
         <a class="icon-link" id="data-health-toggle" href="?dataHealth=true#site-data-health" aria-label="Data health" title="Data health"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h4l2.5-6 4 12L16 12h5"/></svg></a>
-        <span id="page-share-mount"></span>
         <a class="icon-link roars-link" href="https://roars.dev" target="_blank" rel="noopener noreferrer" aria-label="ROARS Lab" title="ROARS Lab"></a>
       </div>
       <nav class="top-nav" aria-label="Primary navigation">
@@ -59,16 +58,7 @@
 
     <div class="search-section">
       <div class="search-intro">
-        <h2>Find the right CS PhD program and research advisor</h2>
-        <p>Explore professors, universities, research strengths, publication trends, and NSF funding using open academic data.</p>
-        <ul class="capability-list">
-          <li>Find professors</li>
-          <li>Compare universities</li>
-          <li>Explore research areas</li>
-          <li>Publication trends</li>
-          <li>NSF funding</li>
-          <li>Ranking simulator</li>
-        </ul>
+        <h2>Explore CS academia research</h2>
       </div>
       <div class="search-container">
         <div class="universal-search">
@@ -85,16 +75,6 @@
         <div class="search-examples-row" id="search-example-fixed"></div>
         <div class="search-examples-row" id="search-example-items"></div>
       </div>
-
-      <p class="phd-callout">
-        <strong>Applying for a CS PhD?</strong> Pair CS Picks with the
-        <a href="https://github.com/dynaroars/phd-cs-us" target="_blank" rel="noopener noreferrer">PhD Demystify</a>
-        guide to
-        <a href="?q=Machine+Learning">find potential advisors</a>,
-        <a href="?q=Carnegie+Mellon+University+vs+Univ.+of+Illinois+at+Urbana-Champaign">compare departments</a>,
-        <a href="?q=Software+Engineering">explore research strengths</a>, and
-        <a href="?q=George+Mason+University&amp;target=George+Mason+University&amp;targetType=school">check publication trends</a>.
-      </p>
 
     </div>
 
@@ -185,7 +165,8 @@
       </div>
     </section>
 
-    <section id="site-data-health" class="site-data-health" hidden>
+    <section id="site-data-health" class="site-data-health" hidden aria-label="Publication data health">
+      <button type="button" id="data-health-close" class="data-health-close" aria-label="Close data health"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       <div id="data-health-stats" class="diagnostic-panel"></div>
     </section>
 

@@ -327,6 +327,59 @@ export function compareAreas(currentData, priorData, areaA, areaB) {
   return { a, b, bothFaculty, bothSchools };
 }
 
+/**
+ * The same head-to-head as compareAreas, one level down: two individual venues
+ * rather than two research areas. School rollups are keyed by top-level area,
+ * so venue totals have to come from each professor's own publication list,
+ * where the conference key survives.
+ */
+export function compareConferences(currentData, priorData, confA, confB) {
+  const collect = (data, conf) => {
+    const totals = { conf, total: 0, schools: new Map(), faculty: new Set() };
+    Object.values(data?.professors || {}).forEach(professor => {
+      const credit = (professor.pubs || [])
+        .filter(pub => pub.area === conf)
+        .reduce((sum, pub) => sum + (Number(pub.adjustedcount) || 0), 0);
+      if (credit <= 0) return;
+      totals.total += credit;
+      totals.faculty.add(professor.name);
+      const school = professor.affiliation;
+      if (school) totals.schools.set(school, (totals.schools.get(school) || 0) + credit);
+    });
+    return totals;
+  };
+
+  const build = conf => {
+    const now = collect(currentData, conf);
+    const before = collect(priorData, conf);
+    return {
+      area: conf,
+      currentTotal: now.total,
+      priorTotal: before.total,
+      growth: before.total > 0
+        ? ((now.total - before.total) / before.total) * 100
+        : (now.total > 0 ? 100 : 0),
+      schools: [...now.schools.entries()]
+        .map(([name, credit]) => ({ name, credit }))
+        .sort((x, y) => y.credit - x.credit),
+      facultyCount: now.faculty.size,
+      newFaculty: [...now.faculty].filter(name => !before.faculty.has(name)).sort(),
+      faculty: now.faculty
+    };
+  };
+
+  const a = build(confA);
+  const b = build(confB);
+  const bothFaculty = [...a.faculty].filter(name => b.faculty.has(name)).sort();
+  const creditBByName = new Map(b.schools.map(row => [row.name, row.credit]));
+  const bothSchools = a.schools
+    .filter(row => creditBByName.has(row.name))
+    .map(row => ({ name: row.name, creditA: row.credit, creditB: creditBByName.get(row.name) }))
+    .sort((x, y) => (y.creditA + y.creditB) - (x.creditA + x.creditB));
+
+  return { a, b, bothFaculty, bothSchools };
+}
+
 export function buildPriorPeriodData(rawData, startYear, endYear, region, historyMap, aliasMap, confSet) {
   const span = endYear - startYear + 1;
   return filterByYears(rawData, startYear - span, startYear - 1, region, historyMap, aliasMap, confSet);
@@ -345,7 +398,13 @@ export function explainRankGap(schoolA, schoolB) {
   }).sort((x, y) => Math.abs(y.logGap) - Math.abs(x.logGap));
 }
 
-export function calculateParityReport(rawData, filteredData, confSet = 'csrankings-default') {
+/**
+ * `modes` carries the settings that change the ranking away from the official
+ * CSRankings one. Venue set is not the only one: per-capita reorders the whole
+ * list, and History reattributes publications to past affiliations, so a
+ * "matches CSRankings" claim has to account for all three.
+ */
+export function calculateParityReport(rawData, filteredData, confSet = 'csrankings-default', modes = {}) {
   const schools = Object.values(filteredData.schools || {});
   const professors = Object.values(filteredData.professors || {});
   const totalMismatches = schools.filter(school => {
@@ -363,6 +422,15 @@ export function calculateParityReport(rawData, filteredData, confSet = 'csrankin
     professors.length
   );
 
+  const officialVenueMode = confSet === 'csrankings-default';
+  // Each entry names a setting that makes this view intentionally differ from
+  // csrankings.org, so the panel can say *why* rather than only that it does.
+  const divergences = [
+    !officialVenueMode && 'a non-default venue set',
+    modes.perCapita && 'per-capita ranking',
+    modes.historical && 'historical affiliations'
+  ].filter(Boolean);
+
   return {
     sourceFaculty: Object.keys(rawData.professors || {}).length,
     rankedSchools: schools.length,
@@ -370,7 +438,9 @@ export function calculateParityReport(rawData, filteredData, confSet = 'csrankin
     rankOrderIssues,
     institutionCoverage,
     profileCoverage,
-    officialVenueMode: confSet === 'csrankings-default'
+    officialVenueMode,
+    divergences,
+    matchesCsrankings: divergences.length === 0
   };
 }
 

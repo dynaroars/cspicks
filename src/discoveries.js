@@ -3,8 +3,8 @@ import { createFilterBar } from './filters.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
 import { buildFundingIndex, calculateFundingDiscoveries, formatFunding } from './nsf.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
-import { mountShareButton, shareUrl } from './share.js';
-import { trackDiscoveryShare, trackShare, trackView } from './analytics.js';
+import { shareUrl } from './share.js';
+import { trackDiscoveryShare, trackView } from './analytics.js';
 import { areaLabels, escapeHtml, getInstitutionShortName } from './shared.js';
 import { initTooltipPositioning } from './tooltip-position.js';
 
@@ -230,11 +230,9 @@ function setupCardSharing() {
 
 async function init() {
   initTooltipPositioning();
-  const shareButton = mountShareButton('#page-share-mount', { getUrl: () => window.location.href, label: '', className: 'icon-link' });
-  shareButton?.addEventListener('click', () => trackShare('discoveries'), { capture: true });
   filters = createFilterBar('#filter-bar', {
     label: 'Discovery filters',
-    fields: ['region', 'years', 'confSet', 'rankings', 'history', 'percapita'],
+    fields: ['region', 'years', 'rankings', 'history', 'percapita', 'confSet'],
     years: { min: 2000, max: new Date().getFullYear() },
     className: 'discoveries-filters',
     onChange: renderDiscoveries

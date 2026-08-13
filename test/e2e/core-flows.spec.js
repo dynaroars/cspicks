@@ -125,7 +125,7 @@ for (const width of [1440, 820, 390]) {
     await expect(page.locator('#universal-suggestions')).toBeHidden();
 
     const triggers = page.locator([
-      '#filter-bar .filter-info',
+      '#filter-bar .tooltip-trigger',
       '#integrated-analysis .analysis-tab-info:visible',
       '#integrated-analysis .metric-info:visible',
       '#school-results .card:not(.collapsed) .contribution-tooltip:visible'
@@ -139,7 +139,10 @@ for (const width of [1440, 820, 390]) {
       const panel = trigger.locator('.tooltip-content');
       await expect(panel).toBeVisible();
       const [icon, box] = [await trigger.boundingBox(), await panel.boundingBox()];
-      const label = await trigger.getAttribute('aria-label');
+      // Filter controls describe themselves through their own text; the
+      // analysis/metric triggers are icons carrying an aria-label.
+      const label = (await trigger.getAttribute('aria-label'))
+        || (await trigger.innerText()).trim().split('\n')[0];
       const iconCenter = icon.x + icon.width / 2;
       // On screen, vertically adjacent to the icon, and horizontally over it —
       // a panel anchored to some ancestor instead drifts away from its trigger.
@@ -168,15 +171,17 @@ test('choosing faculty from a university switches analysis to that professor', a
   await expect(page.getByRole('tab', { name: /Faculty Diversity/ })).toBeHidden();
 });
 
-test('per-capita ordering is on by default and can be turned off', async ({ page }) => {
+test('per-capita ordering is off by default and can be turned on', async ({ page }) => {
   await page.goto('./');
-  await expect(page.locator('#per-capita-mode')).toBeChecked();
-  // Every fixture department is below the five-faculty floor, so the ordering
-  // has nothing to show until it is switched off.
-  await expect(page.locator('#school-results .card')).toHaveCount(0);
-  await page.locator('#per-capita-mode').uncheck();
+  // The default view reproduces CSRankings, which ranks by departmental total.
+  await expect(page.locator('#per-capita-mode')).not.toBeChecked();
   await expect(page.locator('#school-results .card').first()).toBeVisible();
   await expect(page).not.toHaveURL(/percapita=true/);
+  // Every fixture department is below the five-faculty floor, so switching the
+  // ordering on leaves it with nothing to rank.
+  await page.locator('#per-capita-mode').check();
+  await expect(page.locator('#school-results .card')).toHaveCount(0);
+  await expect(page).toHaveURL(/percapita=true/);
 });
 
 test('professor cards show official roster distinctions', async ({ page }) => {
@@ -256,7 +261,7 @@ test('vs syntax compares two targets in place of search results', async ({ page 
   await expect(summary).not.toContainText('What explains the rank gap?');
 
   await page.locator('#main-search').fill('Hai Duong vs George Mason University');
-  await expect(summary).toContainText('Compare two universities, two professors, or two research areas');
+  await expect(summary).toContainText('Compare two universities, two professors, two research areas, or two conferences');
   await expect(page.locator('#comparison-chart-container')).toBeHidden();
 
   await page.locator('#main-search').fill('George Mason University');
@@ -282,7 +287,7 @@ test('vs syntax also compares two research areas, region-wide', async ({ page })
 
   // Mixing an area with a university or professor is still rejected.
   await page.locator('#main-search').fill('Software Engineering vs George Mason University');
-  await expect(summary).toContainText('Compare two universities, two professors, or two research areas');
+  await expect(summary).toContainText('Compare two universities, two professors, two research areas, or two conferences');
 });
 
 test('suggestions list every match and complete the second side of a vs query', async ({ page }) => {
@@ -454,14 +459,20 @@ test('NSF funding beta searches nationwide data and aggregates fractional awards
   await expect(page.locator('#nsf-data-health')).toBeVisible();
   await expect(page.locator('#nsf-data-health-stats')).toContainText('NSF funding data health');
   await expect(page.locator('#nsf-data-health-stats')).toContainText('Program managers');
-  // Measure both rects in one frame: the toggle smooth-scrolls, and separate
-  // boundingBox() calls would sample different points of that animation.
-  const stacking = await page.evaluate(() => {
-    const results = document.querySelector('.funding-results-container').getBoundingClientRect();
-    const health = document.querySelector('#nsf-data-health').getBoundingClientRect();
-    return { resultsBottom: results.bottom, healthTop: health.top };
+  // The panel floats over the page rather than extending it, so opening it
+  // neither moves the reader nor pushes the results around.
+  const floating = await page.evaluate(() => {
+    const panel = document.querySelector('#nsf-data-health');
+    const box = panel.getBoundingClientRect();
+    return {
+      position: getComputedStyle(panel).position,
+      onScreen: box.top >= 0 && box.bottom <= window.innerHeight + 1,
+      scrollY: window.scrollY
+    };
   });
-  expect(stacking.healthTop).toBeGreaterThanOrEqual(stacking.resultsBottom);
+  expect(floating.position).toBe('fixed');
+  expect(floating.onScreen).toBe(true);
+  expect(floating.scrollY).toBe(0);
   await page.locator('#nsf-data-health-toggle').click();
   await expect(page.locator('#nsf-data-health')).toBeHidden();
 
@@ -601,16 +612,4 @@ test('a shared simulator link restores the university and candidates for one-cli
   await expect(page.locator('#sim-candidates-input')).toHaveValue('Hai Duong 0001');
   await page.locator('#sim-analyze-btn').click();
   await expect(page.locator('#sim-candidates-results')).toContainText('Hai Duong');
-});
-
-test('every page mounts a page-level copy-link button that copies the current URL', async ({ page, context }) => {
-  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-  for (const path of ['./', 'discoveries.html', 'simulator.html', 'funding.html']) {
-    await page.goto(path);
-    const button = page.locator('#page-share-mount .share-button');
-    await expect(button).toBeVisible();
-    await button.click();
-    const copied = await page.evaluate(() => navigator.clipboard.readText());
-    expect(copied).toBe(page.url());
-  }
 });

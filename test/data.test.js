@@ -851,6 +851,18 @@ test('parity audit validates ranked data', () => {
   assert.equal(report.totalMismatches, 0);
   assert.equal(report.rankOrderIssues, 0);
   assert.equal(report.officialVenueMode, true);
+  // Defaults (official venue set, no per-capita, no History) reproduce CSRankings.
+  assert.equal(report.matchesCsrankings, true);
+  assert.deepEqual(report.divergences, []);
+
+  // Each mode that reorders or reattributes output is reported as a divergence.
+  const perCapita = calculateParityReport(raw, filtered, 'csrankings-default', { perCapita: true });
+  assert.equal(perCapita.matchesCsrankings, false);
+  assert.deepEqual(perCapita.divergences, ['per-capita ranking']);
+
+  const everything = calculateParityReport(raw, filtered, 'core', { perCapita: true, historical: true });
+  assert.equal(everything.matchesCsrankings, false);
+  assert.equal(everything.divergences.length, 3);
 });
 
 test('area momentum compares a school against the field, not against itself', () => {

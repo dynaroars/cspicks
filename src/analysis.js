@@ -45,10 +45,10 @@ export async function initAnalysis(data, filterBar) {
         setupConferenceFilterButtons();
         analysisReady = true;
         if (new URLSearchParams(window.location.search).get('dataHealth') === 'true') {
-            const panel = document.getElementById('site-data-health');
-            if (panel) panel.hidden = false;
+            revealDataHealth();
+        } else if (!document.getElementById('site-data-health')?.hidden) {
+            renderDataHealth();
         }
-        if (!document.getElementById('site-data-health')?.hidden) renderDataHealth();
         if (selectedTarget) showSelectedTarget();
         else showTargetPrompt();
     } catch (err) {
@@ -121,15 +121,47 @@ export function refreshAnalysis() {
     if (!document.getElementById('site-data-health')?.hidden) renderDataHealth();
 }
 
+// The panel floats in a fixed corner instead of sitting inline in the page,
+// so opening it never has to scroll the reader away from wherever they were
+// (in particular, away from the middle of the lazy-loaded rankings lists).
+function revealDataHealth() {
+    const panel = document.getElementById('site-data-health');
+    if (!panel) return;
+    panel.hidden = false;
+    if (analysisReady) renderDataHealth();
+}
+
+function hideDataHealth() {
+    const panel = document.getElementById('site-data-health');
+    if (panel) panel.hidden = true;
+}
+
+// Clicking a link the page has scrolled away from otherwise focuses it and
+// the browser scrolls it back into view - exactly the jump this panel is
+// meant to avoid. Blocking the default on mousedown (rather than click)
+// suppresses that focus-driven scroll while still letting the click fire;
+// keyboard activation (Enter/Space, no mousedown) is unaffected.
+document.getElementById('data-health-toggle')?.addEventListener('mousedown', event => event.preventDefault());
+
 document.getElementById('data-health-toggle')?.addEventListener('click', event => {
     event.preventDefault();
     const panel = document.getElementById('site-data-health');
     if (!panel) return;
-    panel.hidden = !panel.hidden;
-    if (!panel.hidden && analysisReady) {
-        renderDataHealth();
-        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (panel.hidden) revealDataHealth();
+    else hideDataHealth();
+});
+
+document.getElementById('data-health-close')?.addEventListener('click', hideDataHealth);
+
+document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') hideDataHealth();
+});
+
+document.addEventListener('click', event => {
+    const panel = document.getElementById('site-data-health');
+    if (!panel || panel.hidden) return;
+    if (panel.contains(event.target) || event.target.closest('#data-health-toggle')) return;
+    hideDataHealth();
 });
 
 function getConferenceSet() {
@@ -530,22 +562,28 @@ function renderDataHealth() {
     const container = document.getElementById('data-health-stats');
     if (!container || !rawData?.professors) return;
     const { current, start, end, confSet } = getAnalysisData();
-    const report = calculateParityReport(rawData, current, confSet);
+    const report = calculateParityReport(rawData, current, confSet, {
+        perCapita: Boolean(filters?.perCapita),
+        historical: Boolean(filters?.historical)
+    });
     const syncDate = venueRulesCheckedAt || new Date(activeVenueRules.syncedAt);
     const syncText = Number.isNaN(syncDate.getTime()) ? 'Unknown' : syncDate.toLocaleString();
-    const parityOk = report.totalMismatches === 0 && report.rankOrderIssues === 0 && report.officialVenueMode;
+    const internalOk = report.totalMismatches === 0 && report.rankOrderIssues === 0;
 
     container.innerHTML = `
         <h2>Publication data health · ${start}–${end}</h2>
         <p class="summary-note">This audit checks the canonical source inputs, selected venue mode, source coverage, and ranking invariants used by CSPicks.</p>
         <div class="diagnostic-grid">
-            <div class="diagnostic-stat"><span>Parity checks</span><strong class="${parityOk ? 'confidence-high' : 'confidence-review'}">${parityOk ? 'Pass' : 'Review'}</strong><small>${report.totalMismatches + report.rankOrderIssues} inconsistencies</small></div>
+            <div class="diagnostic-stat"><span>Matches CSRankings</span><strong class="${report.matchesCsrankings ? 'confidence-high' : 'confidence-review'}">${report.matchesCsrankings ? 'Yes' : 'No'}</strong><small>${report.matchesCsrankings ? 'default settings reproduce csrankings.org' : `differs by ${escapeHtml(report.divergences.join(', '))}`}</small></div>
+            <div class="diagnostic-stat"><span>Parity checks</span><strong class="${internalOk ? 'confidence-high' : 'confidence-review'}">${internalOk ? 'Pass' : 'Review'}</strong><small>${report.totalMismatches + report.rankOrderIssues} inconsistencies</small></div>
             <div class="diagnostic-stat"><span>Ranked schools</span><strong>${report.rankedSchools}</strong><small>from ${report.sourceFaculty} source faculty</small></div>
             <div class="diagnostic-stat"><span>Institution metadata</span><strong>${report.institutionCoverage.toFixed(0)}%</strong><small>country or region present</small></div>
             <div class="diagnostic-stat"><span>Author profiles</span><strong>${report.profileCoverage.toFixed(0)}%</strong><small>homepage or Scholar ID present</small></div>
             <div class="diagnostic-stat"><span>Venue rules checked</span><strong>${escapeHtml(syncText)}</strong><small>upstream venue parser · ${escapeHtml(activeVenueRules.sourceVersion || 'bundled fallback')}</small></div>
         </div>
-        <div class="data-caveat">A passing audit means CSPicks is internally compatible with the selected canonical inputs. The official site can still differ temporarily when its deployed data or defaults update before this page reloads.</div>
+        <div class="data-caveat">${report.matchesCsrankings
+            ? 'With the default settings this view reproduces csrankings.org. The official site can still differ temporarily when its deployed data updates before this page reloads.'
+            : `This view intentionally differs from csrankings.org because it uses ${escapeHtml(report.divergences.join(' and '))}. Reset those filters to compare like for like.`}</div>
     `;
 }
 

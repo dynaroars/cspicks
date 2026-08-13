@@ -6,5 +6,7 @@
 *.log
 *.out
 *.pdf
+# The built paper is committed so a reader can get it without a LaTeX toolchain.
+!main.pdf
 *.synctex.gz
 *.toc
