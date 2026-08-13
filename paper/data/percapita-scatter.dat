@@ -1,0 +1,167 @@
+csrank pcrank label
+10 1 {Stanford}
+7 2 {UC Berkeley}
+20 3 {UCLA}
+5 4 {MIT}
+14 5 {UT Austin}
+6 6 {UW}
+1 7 {CMU}
+18 8 {Penn}
+39 9 {Harvard}
+2 10 {UIUC}
+17 11 {Princeton}
+8 12 {UMD}
+19 13 {Columbia}
+3 14 {UCSD}
+43 15 {UNC}
+87 16 {TTI Chicago}
+14 17 {NYU}
+73 18 {UC Merced}
+13 19 {Cornell}
+80 20 {Caltech}
+25 21 {UChicago}
+23 22 {UMass Amherst}
+9 23 {UMich}
+39 24 {Johns Hopkins}
+34 25 {UCSB}
+21 26 {USC}
+14 27 {UW--Madison}
+30 28 {Duke}
+12 29 {Purdue}
+4 30 {Georgia Tech}
+36 31 {Boston}
+43 32 {Yale}
+43 33 {Rice}
+58 34 {Washington University in St. Louis}
+47 35 {Ohio State}
+59 36 {University of Rochester}
+52 37 {Brown}
+29 38 {Rutgers}
+11 39 {Northeastern}
+34 40 {Texas A\&M University}
+47 41 {University at Buffalo}
+39 42 {University of Illinois at Chicago}
+28 43 {University of Virginia}
+22 44 {UC Irvine}
+32 45 {Penn State}
+25 46 {Northwestern}
+54 47 {Oregon State}
+32 48 {GMU}
+59 49 {University of Notre Dame}
+85 50 {Tulane}
+47 51 {University of Minnesota}
+24 52 {Stony Brook}
+53 53 {University of Central Florida}
+39 54 {Arizona State}
+56 55 {University of Texas at Dallas}
+87 56 {Wayne State}
+63 57 {Dartmouth College}
+27 58 {UC Riverside}
+63 59 {Michigan State}
+110 60 {University of New Hampshire}
+82 61 {Emory}
+82 62 {University of Arizona}
+87 63 {Georgetown}
+30 64 {University of Utah}
+101 65 {Lehigh}
+69 66 {Florida State}
+47 67 {UC Davis}
+43 68 {North Carolina State}
+67 69 {College of William and Mary}
+59 70 {University of Florida}
+38 71 {UC Santa Cruz}
+73 72 {University of Delaware}
+73 73 {Worcester Polytechnic Institute}
+87 74 {Temple}
+94 75 {University of Oregon}
+47 76 {University of Colorado Boulder}
+36 77 {Virginia Tech}
+59 78 {University of Texas at Arlington}
+127 79 {University of New Mexico}
+80 80 {University of Georgia}
+63 81 {University of Connecticut}
+85 82 {Washington State}
+94 83 {George Washington University}
+69 84 {Binghamton}
+73 85 {Stevens Institute of Technology}
+87 86 {Drexel}
+67 87 {University of Pittsburgh}
+118 88 {Portland State}
+55 89 {Indiana}
+110 90 {Colorado School of Mines}
+57 91 {Rochester Inst. of Technology}
+127 92 {University of Arkansas}
+94 93 {University of Massachusetts Lowell}
+63 94 {NJIT}
+101 95 {University of Nebraska}
+82 96 {Iowa State}
+139 97 {The University of Alabama}
+87 98 {Rensselaer Polytechnic Institute}
+127 99 {Brandeis}
+127 100 {University at Albany - SUNY}
+73 101 {Clemson}
+110 102 {Texas State}
+69 103 {Vanderbilt}
+101 104 {Case Western Reserve University}
+118 105 {Boston College}
+69 106 {Tufts}
+101 107 {Illinois Tech}
+139 108 {Wichita State}
+118 109 {University of Kentucky}
+127 110 {University of Nevada}
+110 111 {University of South Carolina}
+110 112 {University of Memphis}
+139 113 {University of Missouri}
+118 114 {Auburn}
+127 115 {Oakland}
+94 116 {University of Tennessee}
+73 117 {University of South Florida}
+127 118 {Cleveland State}
+101 119 {University of Iowa}
+139 120 {Northern Arizona University}
+110 121 {Syracuse}
+127 122 {Texas Tech University}
+94 123 {University of North Texas}
+118 124 {University of Cincinnati}
+118 125 {Kent State}
+73 126 {UNC - Charlotte}
+139 127 {University of Texas - El Paso}
+118 128 {University of Kansas}
+101 129 {Colorado State}
+94 130 {UMBC}
+139 131 {University of Massachusetts Boston}
+139 132 {Virginia Commonwealth University}
+110 133 {Brigham Young University}
+118 134 {Utah State}
+139 135 {UCCS}
+101 136 {University of Houston}
+139 137 {Florida Atlantic University}
+139 138 {Old Dominion University}
+101 139 {University of Texas at San Antonio}
+87 140 {Florida International University}
+101 141 {Augusta}
+127 142 {Univ. of Louisiana - Lafayette}
+127 143 {Michigan Technological University}
+139 144 {Missouri S\&T}
+110 145 {Louisiana State}
+139 146 {University of Vermont}
+139 147 {Southern Methodist University}
+159 148 {Baylor}
+159 149 {Naval Postgraduate School}
+159 150 {Mississippi State}
+118 151 {University of Oklahoma}
+139 152 {University of Nebraska - Omaha}
+127 153 {DePaul}
+139 154 {IUPUI}
+94 155 {CUNY}
+139 156 {University of Hawaii at Manoa}
+127 157 {Georgia State}
+139 158 {New Mexico State}
+159 159 {University of Nevada Las Vegas}
+159 160 {Boise State}
+159 161 {Kansas State}
+159 162 {University of Rhode Island}
+139 163 {University of Michigan-Dearborn}
+159 164 {Towson}
+159 165 {Ohio}
+159 166 {Montana State}

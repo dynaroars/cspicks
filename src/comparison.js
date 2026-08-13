@@ -1,8 +1,8 @@
 import { onThemeChange } from './charts.js';
 import { buildComparison, renderAreaComparison, renderComparisonChart, renderComparisonNotice, renderComparisonSummary } from './compare-view.js';
-import { compareAreas } from './metrics.js';
-import { findMatchingArea } from './search-results.js';
-import { areaLabels, cleanName } from './shared.js';
+import { compareAreas, compareConferences } from './metrics.js';
+import { findMatchingArea, findMatchingConference } from './search-results.js';
+import { areaLabels, cleanName, getConferenceLabel } from './shared.js';
 
 // "CMU vs MIT" — head-to-head mode for the Search page. The page injects its
 // filtered data and target resolver; everything else lives here.
@@ -42,12 +42,16 @@ export function parseComparisonQuery(query) {
   return left && right ? { left, right } : null;
 }
 
-// Schools and professors take priority; a term only resolves to an area once
-// neither of those matches, so "Systems vs Databases" behaves like any other
-// comparison without a new syntax to learn.
+// Schools and professors take priority; a term only resolves to a venue or an
+// area once neither of those matches, so "PLDI vs ICSE" and "Systems vs
+// Databases" behave like any other comparison without a new syntax to learn.
+// Venues are checked before areas because a few venue names ("Logic and
+// Verification") would otherwise be swallowed by an area prefix match.
 function resolveComparisonTarget(term) {
   const target = ctx.resolveTarget(term);
   if (target) return target;
+  const conference = findMatchingConference(term.trim());
+  if (conference) return { type: 'conference', name: conference };
   const area = findMatchingArea(term.trim());
   return area ? { type: 'area', name: area } : null;
 }
@@ -76,6 +80,7 @@ export function hideComparison() {
 function displayName(target) {
   if (target.type === 'researcher') return cleanName(target.name);
   if (target.type === 'area') return areaLabels[target.name] || target.name;
+  if (target.type === 'conference') return getConferenceLabel(target.name);
   return target.name;
 }
 
@@ -94,12 +99,12 @@ export function renderComparison(comparison) {
   if (!a || !b) {
     const missing = !a ? left : right;
     renderComparisonNotice(summary, 'No match found',
-      `Could not match "${missing}" to a university, professor, or research area. Use the full name, for example "Carnegie Mellon University vs Massachusetts Inst. of Technology".`);
+      `Could not match "${missing}" to a university, professor, research area, or conference. Use the full name, for example "Carnegie Mellon University vs Massachusetts Inst. of Technology".`);
     return;
   }
   if (a.type !== b.type) {
     renderComparisonNotice(summary, 'Mixed comparison',
-      'Compare two universities, two professors, or two research areas — not a mix.');
+      'Compare two universities, two professors, two research areas, or two conferences — not a mix.');
     return;
   }
   if (a.name === b.name) {
@@ -108,12 +113,17 @@ export function renderComparison(comparison) {
     return;
   }
 
-  if (a.type === 'area') {
+  if (a.type === 'area' || a.type === 'conference') {
     const nameA = displayName(a);
     const nameB = displayName(b);
     document.getElementById('comparison-title').textContent = `${nameA} vs ${nameB}`;
-    const cmp = compareAreas(ctx.appData, ctx.priorAppData, a.name, b.name);
-    renderAreaComparison(summary, { labelA: nameA, labelB: nameB, cmp });
+    const isConference = a.type === 'conference';
+    const cmp = isConference
+      ? compareConferences(ctx.appData, ctx.priorAppData, a.name, b.name)
+      : compareAreas(ctx.appData, ctx.priorAppData, a.name, b.name);
+    renderAreaComparison(summary, {
+      labelA: nameA, labelB: nameB, cmp, noun: isConference ? 'venues' : 'fields'
+    });
     return;
   }
 

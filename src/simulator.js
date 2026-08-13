@@ -7,8 +7,7 @@ import { calculatePerCapita } from './metrics.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
 import { initTooltipPositioning } from './tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
-import { mountShareButton } from './share.js';
-import { trackShare, trackView } from './analytics.js';
+import { trackView } from './analytics.js';
 import './styles/simulator.css';
 
 let rawData = null;
@@ -727,7 +726,7 @@ function updateSimulatorUrl() {
 function setupFilters() {
   filters = createFilterBar('#filter-bar', {
     label: 'Simulator filters',
-    fields: ['region', 'years', 'confSet', 'percapita'],
+    fields: ['region', 'years', 'history', 'percapita', 'confSet'],
     years: { min: 2000, max: DEFAULT_END_YEAR },
     className: 'simulator-filters',
     onChange: () => {
@@ -758,11 +757,12 @@ function restoreFromUrl() {
 
 async function init() {
   initTooltipPositioning();
-  const shareButton = mountShareButton('#page-share-mount', { getUrl: () => window.location.href, label: '', className: 'icon-link' });
-  shareButton?.addEventListener('click', () => trackShare('simulator'), { capture: true });
   try {
     [rawData] = await Promise.all([loadData(), syncCsrankingsRules()]);
     setupFilters();
+    // History mode may already be on from a shared link or a stored choice,
+    // and its affiliation data has to be in place before the first apply().
+    await filters.ready();
     appData = filters.apply(rawData);
     refreshPerCapitaRanks();
     setupSimulator();

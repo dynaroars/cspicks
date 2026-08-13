@@ -8,7 +8,7 @@
     "withHomepage": 20822,
     "withScholar": 18256
   },
-  "sweepMs": 1703,
+  "sweepMs": 1423,
   "stability": {
     "region": "us",
     "settings": 16,
@@ -39,7 +39,8 @@
         "best": 1,
         "worst": 1,
         "spread": 0,
-        "median": 1
+        "median": 1,
+        "short": "CMU"
       },
       {
         "name": "George Mason University",
@@ -47,7 +48,8 @@
         "best": 23,
         "worst": 50,
         "spread": 27,
-        "median": 42
+        "median": 42,
+        "short": "GMU"
       },
       {
         "name": "Univ. of Illinois at Urbana-Champaign",
@@ -55,7 +57,8 @@
         "best": 2,
         "worst": 2,
         "spread": 0,
-        "median": 2
+        "median": 2,
+        "short": "UIUC"
       },
       {
         "name": "Northeastern University",
@@ -63,7 +66,8 @@
         "best": 8,
         "worst": 18,
         "spread": 10,
-        "median": 11
+        "median": 11,
+        "short": "Northeastern"
       }
     ]
   },
@@ -152,70 +156,80 @@
         "perCapita": 11.65527046229514,
         "faculty": 61,
         "overallRank": 10,
-        "pcRank": 1
+        "pcRank": 1,
+        "short": "Stanford"
       },
       {
         "name": "Univ. of California - Berkeley",
         "perCapita": 8.324295931764729,
         "faculty": 85,
         "overallRank": 7,
-        "pcRank": 2
+        "pcRank": 2,
+        "short": "UC Berkeley"
       },
       {
         "name": "Univ. of California - Los Angeles",
         "perCapita": 7.549650219999989,
         "faculty": 50,
         "overallRank": 20,
-        "pcRank": 3
+        "pcRank": 3,
+        "short": "UCLA"
       },
       {
         "name": "Massachusetts Inst. of Technology",
         "perCapita": 7.496830971153903,
         "faculty": 104,
         "overallRank": 5,
-        "pcRank": 4
+        "pcRank": 4,
+        "short": "MIT"
       },
       {
         "name": "University of Texas at Austin",
         "perCapita": 7.276157449999971,
         "faculty": 60,
         "overallRank": 14,
-        "pcRank": 5
+        "pcRank": 5,
+        "short": "UT Austin"
       },
       {
         "name": "University of Washington",
         "perCapita": 7.035621849999993,
         "faculty": 80,
         "overallRank": 6,
-        "pcRank": 6
+        "pcRank": 6,
+        "short": "UW"
       },
       {
         "name": "Carnegie Mellon University",
         "perCapita": 6.587528038251458,
         "faculty": 183,
         "overallRank": 1,
-        "pcRank": 7
+        "pcRank": 7,
+        "short": "CMU"
       },
       {
         "name": "University of Pennsylvania",
         "perCapita": 6.311185685714258,
         "faculty": 70,
         "overallRank": 18,
-        "pcRank": 8
+        "pcRank": 8,
+        "short": "Penn"
       },
       {
         "name": "Harvard University",
         "perCapita": 6.218824421052623,
         "faculty": 38,
         "overallRank": 39,
-        "pcRank": 9
+        "pcRank": 9,
+        "short": "Harvard"
       },
       {
         "name": "Univ. of Illinois at Urbana-Champaign",
         "perCapita": 6.15797911811029,
         "faculty": 127,
         "overallRank": 2,
-        "pcRank": 10
+        "pcRank": 10,
+        "short": "UIUC"
       }
     ],
     "biggestGains": [
@@ -223,31 +237,218 @@
         "name": "TTI Chicago",
         "overallRank": 87,
         "pcRank": 16,
-        "faculty": 15
+        "faculty": 15,
+        "short": "TTI Chicago"
       },
       {
         "name": "California Inst. of Technology",
         "overallRank": 80,
         "pcRank": 20,
-        "faculty": 27
+        "faculty": 27,
+        "short": "Caltech"
       },
       {
         "name": "Univ. of California - Merced",
         "overallRank": 73,
         "pcRank": 18,
-        "faculty": 18
+        "faculty": 18,
+        "short": "UC Merced"
       },
       {
         "name": "University of New Hampshire",
         "overallRank": 110,
         "pcRank": 60,
-        "faculty": 8
+        "faculty": 8,
+        "short": "University of New Hampshire"
       },
       {
         "name": "University of New Mexico",
         "overallRank": 127,
         "pcRank": 79,
-        "faculty": 8
+        "faculty": 8,
+        "short": "University of New Mexico"
+      }
+    ],
+    "sideBySide": [
+      {
+        "position": 1,
+        "csName": "Carnegie Mellon University",
+        "csShort": "CMU",
+        "csScore": 20.6,
+        "pcName": "Stanford University",
+        "pcShort": "Stanford",
+        "pcValue": 11.65527046229514,
+        "pcFaculty": 61,
+        "pcOverallRank": 10,
+        "csPerCapitaRank": 7
+      },
+      {
+        "position": 2,
+        "csName": "Univ. of Illinois at Urbana-Champaign",
+        "csShort": "UIUC",
+        "csScore": 16.7,
+        "pcName": "Univ. of California - Berkeley",
+        "pcShort": "UC Berkeley",
+        "pcValue": 8.324295931764729,
+        "pcFaculty": 85,
+        "pcOverallRank": 7,
+        "csPerCapitaRank": 10
+      },
+      {
+        "position": 3,
+        "csName": "Univ. of California - San Diego",
+        "csShort": "UCSD",
+        "csScore": 14.8,
+        "pcName": "Univ. of California - Los Angeles",
+        "pcShort": "UCLA",
+        "pcValue": 7.549650219999989,
+        "pcFaculty": 50,
+        "pcOverallRank": 20,
+        "csPerCapitaRank": 14
+      },
+      {
+        "position": 4,
+        "csName": "Georgia Institute of Technology",
+        "csShort": "Georgia Tech",
+        "csScore": 13.7,
+        "pcName": "Massachusetts Inst. of Technology",
+        "pcShort": "MIT",
+        "pcValue": 7.496830971153903,
+        "pcFaculty": 104,
+        "pcOverallRank": 5,
+        "csPerCapitaRank": 30
+      },
+      {
+        "position": 5,
+        "csName": "Massachusetts Inst. of Technology",
+        "csShort": "MIT",
+        "csScore": 11.3,
+        "pcName": "University of Texas at Austin",
+        "pcShort": "UT Austin",
+        "pcValue": 7.276157449999971,
+        "pcFaculty": 60,
+        "pcOverallRank": 14,
+        "csPerCapitaRank": 4
+      },
+      {
+        "position": 6,
+        "csName": "University of Washington",
+        "csShort": "UW",
+        "csScore": 10.7,
+        "pcName": "University of Washington",
+        "pcShort": "UW",
+        "pcValue": 7.035621849999993,
+        "pcFaculty": 80,
+        "pcOverallRank": 6,
+        "csPerCapitaRank": 6
+      },
+      {
+        "position": 7,
+        "csName": "Univ. of California - Berkeley",
+        "csShort": "UC Berkeley",
+        "csScore": 10.6,
+        "pcName": "Carnegie Mellon University",
+        "pcShort": "CMU",
+        "pcValue": 6.587528038251458,
+        "pcFaculty": 183,
+        "pcOverallRank": 1,
+        "csPerCapitaRank": 2
+      },
+      {
+        "position": 8,
+        "csName": "Univ. of Maryland - College Park",
+        "csShort": "UMD",
+        "csScore": 10.3,
+        "pcName": "University of Pennsylvania",
+        "pcShort": "Penn",
+        "pcValue": 6.311185685714258,
+        "pcFaculty": 70,
+        "pcOverallRank": 18,
+        "csPerCapitaRank": 12
+      },
+      {
+        "position": 9,
+        "csName": "University of Michigan",
+        "csShort": "UMich",
+        "csScore": 10.1,
+        "pcName": "Harvard University",
+        "pcShort": "Harvard",
+        "pcValue": 6.218824421052623,
+        "pcFaculty": 38,
+        "pcOverallRank": 39,
+        "csPerCapitaRank": 23
+      },
+      {
+        "position": 10,
+        "csName": "Stanford University",
+        "csShort": "Stanford",
+        "csScore": 9.6,
+        "pcName": "Univ. of Illinois at Urbana-Champaign",
+        "pcShort": "UIUC",
+        "pcValue": 6.15797911811029,
+        "pcFaculty": 127,
+        "pcOverallRank": 2,
+        "csPerCapitaRank": 1
+      },
+      {
+        "position": 11,
+        "csName": "Northeastern University",
+        "csShort": "Northeastern",
+        "csScore": 9.4,
+        "pcName": "Princeton University",
+        "pcShort": "Princeton",
+        "pcValue": 5.897305179104444,
+        "pcFaculty": 67,
+        "pcOverallRank": 17,
+        "csPerCapitaRank": 39
+      },
+      {
+        "position": 12,
+        "csName": "Purdue University",
+        "csShort": "Purdue",
+        "csScore": 8.5,
+        "pcName": "Univ. of Maryland - College Park",
+        "pcShort": "UMD",
+        "pcValue": 5.878044163265303,
+        "pcFaculty": 98,
+        "pcOverallRank": 8,
+        "csPerCapitaRank": 29
+      },
+      {
+        "position": 13,
+        "csName": "Cornell University",
+        "csShort": "Cornell",
+        "csScore": 8.2,
+        "pcName": "Columbia University",
+        "pcShort": "Columbia",
+        "pcValue": 5.833799262068942,
+        "pcFaculty": 58,
+        "pcOverallRank": 19,
+        "csPerCapitaRank": 19
+      },
+      {
+        "position": 14,
+        "csName": "New York University",
+        "csShort": "NYU",
+        "csScore": 7.7,
+        "pcName": "Univ. of California - San Diego",
+        "pcShort": "UCSD",
+        "pcValue": 5.617907307692339,
+        "pcFaculty": 130,
+        "pcOverallRank": 3,
+        "csPerCapitaRank": 17
+      },
+      {
+        "position": 15,
+        "csName": "University of Texas at Austin",
+        "csShort": "UT Austin",
+        "csScore": 7.7,
+        "pcName": "University of North Carolina",
+        "pcShort": "UNC",
+        "pcValue": 5.579590199999993,
+        "pcFaculty": 46,
+        "pcOverallRank": 43,
+        "csPerCapitaRank": 5
       }
     ]
   },
@@ -281,14 +482,16 @@
         "band": 50,
         "faculty": 39,
         "departures": 1,
-        "top3Share": 26.563767707637105
+        "top3Share": 26.563767707637105,
+        "short": "Rice"
       },
       {
         "name": "Carnegie Mellon University",
         "rank": 1,
         "band": 10,
         "faculty": 183,
-        "top3Share": 10.644161951705058
+        "top3Share": 10.644161951705058,
+        "short": "CMU"
       },
       {
         "name": "George Mason University",
@@ -296,7 +499,8 @@
         "band": 50,
         "faculty": 54,
         "departures": 3,
-        "top3Share": 17.33110087394128
+        "top3Share": 17.33110087394128,
+        "short": "GMU"
       },
       {
         "name": "Massachusetts Inst. of Technology",
@@ -304,14 +508,3282 @@
         "band": 10,
         "faculty": 104,
         "departures": 5,
-        "top3Share": 12.306064641639042
+        "top3Share": 12.306064641639042,
+        "short": "MIT"
       },
       {
         "name": "Northeastern University",
         "rank": 11,
         "band": 25,
         "faculty": 115,
-        "top3Share": 14.506195590501308
+        "top3Share": 14.506195590501308,
+        "short": "Northeastern"
+      }
+    ]
+  },
+  "venueMovers": {
+    "schools": 187,
+    "towardCore": [
+      {
+        "name": "Auburn University",
+        "short": "Auburn",
+        "ranks": {
+          "csrankings-default": 116,
+          "csrankings": 113,
+          "core": 101,
+          "core-a": 105
+        },
+        "shift": -15
+      },
+      {
+        "name": "Brigham Young University",
+        "short": "Brigham Young University",
+        "ranks": {
+          "csrankings-default": 116,
+          "csrankings": 113,
+          "core": 101,
+          "core-a": 115
+        },
+        "shift": -15
+      },
+      {
+        "name": "University of Cincinnati",
+        "short": "University of Cincinnati",
+        "ranks": {
+          "csrankings-default": 116,
+          "csrankings": 120,
+          "core": 101,
+          "core-a": 115
+        },
+        "shift": -15
+      },
+      {
+        "name": "Drexel University",
+        "short": "Drexel",
+        "ranks": {
+          "csrankings-default": 89,
+          "csrankings": 89,
+          "core": 75,
+          "core-a": 84
+        },
+        "shift": -14
+      },
+      {
+        "name": "Emory University",
+        "short": "Emory",
+        "ranks": {
+          "csrankings-default": 83,
+          "csrankings": 82,
+          "core": 71,
+          "core-a": 75
+        },
+        "shift": -12
+      },
+      {
+        "name": "Univ. of California - Santa Cruz",
+        "short": "UC Santa Cruz",
+        "ranks": {
+          "csrankings-default": 37,
+          "csrankings": 38,
+          "core": 27,
+          "core-a": 30
+        },
+        "shift": -10
+      },
+      {
+        "name": "University of Arkansas",
+        "short": "University of Arkansas",
+        "ranks": {
+          "csrankings-default": 124,
+          "csrankings": 128,
+          "core": 114,
+          "core-a": 122
+        },
+        "shift": -10
+      },
+      {
+        "name": "Portland State University",
+        "short": "Portland State",
+        "ranks": {
+          "csrankings-default": 124,
+          "csrankings": 120,
+          "core": 114,
+          "core-a": 122
+        },
+        "shift": -10
+      }
+    ],
+    "awayFromCore": [
+      {
+        "name": "University of Memphis",
+        "short": "University of Memphis",
+        "ranks": {
+          "csrankings-default": 108,
+          "csrankings": 113,
+          "core": 128,
+          "core-a": 115
+        },
+        "shift": 20
+      },
+      {
+        "name": "Washington State University",
+        "short": "Washington State",
+        "ranks": {
+          "csrankings-default": 86,
+          "csrankings": 86,
+          "core": 101,
+          "core-a": 87
+        },
+        "shift": 15
+      },
+      {
+        "name": "University of Delaware",
+        "short": "University of Delaware",
+        "ranks": {
+          "csrankings-default": 70,
+          "csrankings": 76,
+          "core": 85,
+          "core-a": 75
+        },
+        "shift": 15
+      },
+      {
+        "name": "Florida Atlantic University",
+        "short": "Florida Atlantic University",
+        "ranks": {
+          "csrankings-default": 136,
+          "csrankings": 141,
+          "core": 150,
+          "core-a": 156
+        },
+        "shift": 14
+      },
+      {
+        "name": "Northern Arizona University",
+        "short": "Northern Arizona University",
+        "ranks": {
+          "csrankings-default": 136,
+          "csrankings": 141,
+          "core": 150,
+          "core-a": 138
+        },
+        "shift": 14
+      },
+      {
+        "name": "The University of Alabama",
+        "short": "The University of Alabama",
+        "ranks": {
+          "csrankings-default": 136,
+          "csrankings": 141,
+          "core": 150,
+          "core-a": 138
+        },
+        "shift": 14
+      },
+      {
+        "name": "University of Nebraska - Omaha",
+        "short": "University of Nebraska - Omaha",
+        "ranks": {
+          "csrankings-default": 136,
+          "csrankings": 141,
+          "core": 150,
+          "core-a": 156
+        },
+        "shift": 14
+      },
+      {
+        "name": "Virginia Commonwealth University",
+        "short": "Virginia Commonwealth University",
+        "ranks": {
+          "csrankings-default": 136,
+          "csrankings": 141,
+          "core": 150,
+          "core-a": 138
+        },
+        "shift": 14
+      }
+    ],
+    "topTens": {
+      "csrankings-default": [
+        {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "rank": 1
+        },
+        {
+          "name": "Univ. of Illinois at Urbana-Champaign",
+          "short": "UIUC",
+          "rank": 2
+        },
+        {
+          "name": "Univ. of California - San Diego",
+          "short": "UCSD",
+          "rank": 3
+        },
+        {
+          "name": "Georgia Institute of Technology",
+          "short": "Georgia Tech",
+          "rank": 4
+        },
+        {
+          "name": "Massachusetts Inst. of Technology",
+          "short": "MIT",
+          "rank": 5
+        },
+        {
+          "name": "University of Washington",
+          "short": "UW",
+          "rank": 6
+        },
+        {
+          "name": "Univ. of California - Berkeley",
+          "short": "UC Berkeley",
+          "rank": 6
+        },
+        {
+          "name": "Univ. of Maryland - College Park",
+          "short": "UMD",
+          "rank": 8
+        },
+        {
+          "name": "University of Michigan",
+          "short": "UMich",
+          "rank": 9
+        },
+        {
+          "name": "Stanford University",
+          "short": "Stanford",
+          "rank": 10
+        }
+      ],
+      "csrankings": [
+        {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "rank": 1
+        },
+        {
+          "name": "Univ. of Illinois at Urbana-Champaign",
+          "short": "UIUC",
+          "rank": 2
+        },
+        {
+          "name": "Univ. of California - San Diego",
+          "short": "UCSD",
+          "rank": 3
+        },
+        {
+          "name": "Georgia Institute of Technology",
+          "short": "Georgia Tech",
+          "rank": 4
+        },
+        {
+          "name": "University of Washington",
+          "short": "UW",
+          "rank": 5
+        },
+        {
+          "name": "Massachusetts Inst. of Technology",
+          "short": "MIT",
+          "rank": 5
+        },
+        {
+          "name": "Univ. of Maryland - College Park",
+          "short": "UMD",
+          "rank": 7
+        },
+        {
+          "name": "Univ. of California - Berkeley",
+          "short": "UC Berkeley",
+          "rank": 8
+        },
+        {
+          "name": "Northeastern University",
+          "short": "Northeastern",
+          "rank": 9
+        },
+        {
+          "name": "University of Michigan",
+          "short": "UMich",
+          "rank": 10
+        }
+      ],
+      "core": [
+        {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "rank": 1
+        },
+        {
+          "name": "Univ. of Illinois at Urbana-Champaign",
+          "short": "UIUC",
+          "rank": 2
+        },
+        {
+          "name": "Univ. of California - San Diego",
+          "short": "UCSD",
+          "rank": 3
+        },
+        {
+          "name": "Massachusetts Inst. of Technology",
+          "short": "MIT",
+          "rank": 4
+        },
+        {
+          "name": "Georgia Institute of Technology",
+          "short": "Georgia Tech",
+          "rank": 5
+        },
+        {
+          "name": "University of Michigan",
+          "short": "UMich",
+          "rank": 6
+        },
+        {
+          "name": "Univ. of California - Berkeley",
+          "short": "UC Berkeley",
+          "rank": 7
+        },
+        {
+          "name": "Cornell University",
+          "short": "Cornell",
+          "rank": 8
+        },
+        {
+          "name": "University of Washington",
+          "short": "UW",
+          "rank": 8
+        },
+        {
+          "name": "Stanford University",
+          "short": "Stanford",
+          "rank": 10
+        },
+        {
+          "name": "Purdue University",
+          "short": "Purdue",
+          "rank": 10
+        }
+      ],
+      "core-a": [
+        {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "rank": 1
+        },
+        {
+          "name": "Univ. of Illinois at Urbana-Champaign",
+          "short": "UIUC",
+          "rank": 2
+        },
+        {
+          "name": "Univ. of California - San Diego",
+          "short": "UCSD",
+          "rank": 3
+        },
+        {
+          "name": "Georgia Institute of Technology",
+          "short": "Georgia Tech",
+          "rank": 4
+        },
+        {
+          "name": "Massachusetts Inst. of Technology",
+          "short": "MIT",
+          "rank": 5
+        },
+        {
+          "name": "Univ. of Maryland - College Park",
+          "short": "UMD",
+          "rank": 6
+        },
+        {
+          "name": "University of Michigan",
+          "short": "UMich",
+          "rank": 7
+        },
+        {
+          "name": "University of Washington",
+          "short": "UW",
+          "rank": 8
+        },
+        {
+          "name": "Univ. of California - Berkeley",
+          "short": "UC Berkeley",
+          "rank": 9
+        },
+        {
+          "name": "Northeastern University",
+          "short": "Northeastern",
+          "rank": 10
+        }
+      ]
+    }
+  },
+  "venueComposition": {
+    "sizes": {
+      "csrankings-default": 64,
+      "csrankings": 77,
+      "core": 58,
+      "core-a": 148
+    },
+    "sharedCsAStar": 47,
+    "csOnlyCount": 30,
+    "aStarOnlyCount": 11,
+    "areasWithoutAStar": [
+      {
+        "area": "hpc",
+        "label": "HPC",
+        "defaultVenues": 3
+      },
+      {
+        "area": "robotics",
+        "label": "Robotics",
+        "defaultVenues": 3
+      },
+      {
+        "area": "da",
+        "label": "Design Automation",
+        "defaultVenues": 2
+      },
+      {
+        "area": "crypt",
+        "label": "Cryptography",
+        "defaultVenues": 2
+      },
+      {
+        "area": "bio",
+        "label": "Comp. Biology",
+        "defaultVenues": 2
+      },
+      {
+        "area": "visualization",
+        "label": "Visualization",
+        "defaultVenues": 2
+      },
+      {
+        "area": "csed",
+        "label": "CS Education",
+        "defaultVenues": 1
+      }
+    ],
+    "perArea": [
+      {
+        "area": "ai",
+        "label": "AI",
+        "default": 2,
+        "all": 2,
+        "aStar": 5,
+        "aAndAStar": 10,
+        "csOnly": [],
+        "aStarOnly": [
+          "aamas",
+          "kr",
+          "icaps"
+        ]
+      },
+      {
+        "area": "hpc",
+        "label": "HPC",
+        "default": 3,
+        "all": 3,
+        "aStar": 0,
+        "aAndAStar": 3,
+        "csOnly": [
+          "sc",
+          "hpdc",
+          "ics"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "mobile",
+        "label": "Mobile Computing",
+        "default": 3,
+        "all": 3,
+        "aStar": 4,
+        "aAndAStar": 4,
+        "csOnly": [
+          "mobisys"
+        ],
+        "aStarOnly": [
+          "percom",
+          "ipsn"
+        ]
+      },
+      {
+        "area": "ops",
+        "label": "Operating Systems",
+        "default": 2,
+        "all": 5,
+        "aStar": 2,
+        "aAndAStar": 9,
+        "csOnly": [
+          "eurosys",
+          "fast",
+          "usenixatc"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "graph",
+        "label": "Graphics",
+        "default": 2,
+        "all": 3,
+        "aStar": 5,
+        "aAndAStar": 7,
+        "csOnly": [
+          "eurographics"
+        ],
+        "aStarOnly": [
+          "acmmm",
+          "ismar"
+        ]
+      },
+      {
+        "area": "robotics",
+        "label": "Robotics",
+        "default": 3,
+        "all": 3,
+        "aStar": 0,
+        "aAndAStar": 1,
+        "csOnly": [
+          "icra",
+          "iros",
+          "rss"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "mlmining",
+        "label": "Machine Learning",
+        "default": 3,
+        "all": 4,
+        "aStar": 6,
+        "aAndAStar": 8,
+        "csOnly": [],
+        "aStarOnly": [
+          "colt",
+          "icdm"
+        ]
+      },
+      {
+        "area": "da",
+        "label": "Design Automation",
+        "default": 2,
+        "all": 2,
+        "aStar": 0,
+        "aAndAStar": 4,
+        "csOnly": [
+          "dac",
+          "iccad"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "bed",
+        "label": "Embedded & Real-Time",
+        "default": 3,
+        "all": 3,
+        "aStar": 1,
+        "aAndAStar": 2,
+        "csOnly": [
+          "emsoft",
+          "rtas"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "plan",
+        "label": "Programming Languages",
+        "default": 2,
+        "all": 4,
+        "aStar": 2,
+        "aAndAStar": 6,
+        "csOnly": [
+          "oopsla",
+          "icfp"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "comm",
+        "label": "Networks",
+        "default": 2,
+        "all": 2,
+        "aStar": 2,
+        "aAndAStar": 3,
+        "csOnly": [
+          "nsdi"
+        ],
+        "aStarOnly": [
+          "infocom"
+        ]
+      },
+      {
+        "area": "crypt",
+        "label": "Cryptography",
+        "default": 2,
+        "all": 2,
+        "aStar": 0,
+        "aAndAStar": 3,
+        "csOnly": [
+          "crypto",
+          "eurocrypt"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "bio",
+        "label": "Comp. Biology",
+        "default": 2,
+        "all": 2,
+        "aStar": 0,
+        "aAndAStar": 1,
+        "csOnly": [
+          "ismb",
+          "recomb"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "nlp",
+        "label": "NLP",
+        "default": 3,
+        "all": 3,
+        "aStar": 2,
+        "aAndAStar": 5,
+        "csOnly": [
+          "naacl"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "arch",
+        "label": "Architecture",
+        "default": 3,
+        "all": 4,
+        "aStar": 3,
+        "aAndAStar": 4,
+        "csOnly": [
+          "micro"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "metrics",
+        "label": "Measurement",
+        "default": 2,
+        "all": 2,
+        "aStar": 1,
+        "aAndAStar": 2,
+        "csOnly": [
+          "imc"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "soft",
+        "label": "Software Engineering",
+        "default": 2,
+        "all": 4,
+        "aStar": 3,
+        "aAndAStar": 15,
+        "csOnly": [
+          "issta"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "act",
+        "label": "Algorithms",
+        "default": 3,
+        "all": 3,
+        "aStar": 4,
+        "aAndAStar": 11,
+        "csOnly": [],
+        "aStarOnly": [
+          "podc"
+        ]
+      },
+      {
+        "area": "ecom",
+        "label": "Econ & Computation",
+        "default": 2,
+        "all": 2,
+        "aStar": 1,
+        "aAndAStar": 1,
+        "csOnly": [
+          "wine"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "chi",
+        "label": "HCI",
+        "default": 3,
+        "all": 3,
+        "aStar": 2,
+        "aAndAStar": 6,
+        "csOnly": [
+          "ubicomp"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "visualization",
+        "label": "Visualization",
+        "default": 2,
+        "all": 2,
+        "aStar": 0,
+        "aAndAStar": 1,
+        "csOnly": [
+          "vis"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "csed",
+        "label": "CS Education",
+        "default": 1,
+        "all": 1,
+        "aStar": 0,
+        "aAndAStar": 4,
+        "csOnly": [
+          "sigcse"
+        ],
+        "aStarOnly": []
+      },
+      {
+        "area": "vision",
+        "label": "Computer Vision",
+        "default": 3,
+        "all": 3,
+        "aStar": 3,
+        "aAndAStar": 7,
+        "csOnly": [],
+        "aStarOnly": []
+      },
+      {
+        "area": "inforet",
+        "label": "Info Retrieval",
+        "default": 2,
+        "all": 2,
+        "aStar": 2,
+        "aAndAStar": 8,
+        "csOnly": [],
+        "aStarOnly": []
+      },
+      {
+        "area": "sec",
+        "label": "Security",
+        "default": 3,
+        "all": 4,
+        "aStar": 4,
+        "aAndAStar": 9,
+        "csOnly": [],
+        "aStarOnly": []
+      },
+      {
+        "area": "mod",
+        "label": "Databases",
+        "default": 2,
+        "all": 4,
+        "aStar": 4,
+        "aAndAStar": 8,
+        "csOnly": [],
+        "aStarOnly": []
+      },
+      {
+        "area": "log",
+        "label": "Logic & Verification",
+        "default": 2,
+        "all": 2,
+        "aStar": 2,
+        "aAndAStar": 6,
+        "csOnly": [],
+        "aStarOnly": []
+      }
+    ],
+    "agreeExactly": [
+      "Computer Vision",
+      "Info Retrieval",
+      "Security",
+      "Databases",
+      "Logic & Verification"
+    ],
+    "droppedAreaExposure": {
+      "schools": 188,
+      "medianDroppedShare": 16.847129682751934,
+      "correlation": 0.4952601439281411,
+      "heavy": {
+        "n": 72,
+        "medianShift": 2
+      },
+      "light": {
+        "n": 50,
+        "medianShift": -7
+      },
+      "mostExposed": [
+        {
+          "name": "University of Wyoming",
+          "short": "University of Wyoming",
+          "defaultRank": 178,
+          "aStarRank": 171,
+          "shift": -7,
+          "droppedShare": 100
+        },
+        {
+          "name": "University of Denver",
+          "short": "University of Denver",
+          "defaultRank": 159,
+          "aStarRank": 171,
+          "shift": 12,
+          "droppedShare": 80.30554711502751
+        },
+        {
+          "name": "Ohio University",
+          "short": "Ohio",
+          "defaultRank": 159,
+          "aStarRank": 171,
+          "shift": 12,
+          "droppedShare": 74.44425845543655
+        },
+        {
+          "name": "Florida Institute of Technology",
+          "short": "Florida Institute of Technology",
+          "defaultRank": 178,
+          "aStarRank": 171,
+          "shift": -7,
+          "droppedShare": 66.66719999360006
+        },
+        {
+          "name": "University of Nevada",
+          "short": "University of Nevada",
+          "defaultRank": 127,
+          "aStarRank": 129,
+          "shift": 2,
+          "droppedShare": 65.81413770187055
+        },
+        {
+          "name": "University of Southern Mississippi",
+          "short": "University of Southern Mississippi",
+          "defaultRank": 159,
+          "aStarRank": 171,
+          "shift": 12,
+          "droppedShare": 64.86482103706396
+        }
+      ]
+    }
+  },
+  "researchers": {
+    "population": 5987,
+    "totalAdjusted": 22447.71744060018,
+    "medianBreadth": 2,
+    "medianAdjusted": 2.19166,
+    "top1PercentShare": 8.626447185661947,
+    "top5PercentShare": 25.94924413056161,
+    "top10PercentShare": 39.95427149389577,
+    "singleAreaShare": 28.84583263738099,
+    "specialistShare": 69.40036746283614,
+    "generalistShare": 29.313512610656424,
+    "top": [
+      {
+        "name": "Sergey Levine",
+        "affiliation": "Univ. of California - Berkeley",
+        "short": "UC Berkeley",
+        "adjusted": 78.94129000000002,
+        "papers": 370,
+        "breadth": 6,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 70.64257500732505,
+        "rank": 1
+      },
+      {
+        "name": "Mohit Bansal",
+        "affiliation": "University of North Carolina",
+        "short": "UNC",
+        "adjusted": 57.57709000000002,
+        "papers": 216,
+        "breadth": 5,
+        "primaryArea": "NLP",
+        "primaryShare": 60.54580042166076,
+        "rank": 2
+      },
+      {
+        "name": "Pieter Abbeel",
+        "affiliation": "Univ. of California - Berkeley",
+        "short": "UC Berkeley",
+        "adjusted": 53.81579,
+        "papers": 246,
+        "breadth": 8,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 65.65961402777883,
+        "rank": 3
+      },
+      {
+        "name": "Heng Huang",
+        "affiliation": "Univ. of Maryland - College Park",
+        "short": "UMD",
+        "adjusted": 51.34461999999997,
+        "papers": 186,
+        "breadth": 8,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 42.18747748060072,
+        "rank": 4
+      },
+      {
+        "name": "Stefano Ermon",
+        "affiliation": "Stanford University",
+        "short": "Stanford",
+        "adjusted": 47.48035,
+        "papers": 201,
+        "breadth": 3,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 80.3418256183874,
+        "rank": 5
+      },
+      {
+        "name": "Graham Neubig",
+        "affiliation": "Carnegie Mellon University",
+        "short": "CMU",
+        "adjusted": 46.47142899999999,
+        "papers": 201,
+        "breadth": 7,
+        "primaryArea": "NLP",
+        "primaryShare": 70.2086221622322,
+        "rank": 6
+      },
+      {
+        "name": "David P. Woodruff",
+        "affiliation": "Carnegie Mellon University",
+        "short": "CMU",
+        "adjusted": 46.00330999999999,
+        "papers": 146,
+        "breadth": 9,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 56.77350173281012,
+        "rank": 7
+      },
+      {
+        "name": "Ming-Hsuan Yang",
+        "affiliation": "Univ. of California - Merced",
+        "short": "UC Merced",
+        "adjusted": 45.458750000000016,
+        "papers": 254,
+        "breadth": 6,
+        "primaryArea": "Computer Vision",
+        "primaryShare": 75.58679022190445,
+        "rank": 8
+      },
+      {
+        "name": "Dinesh Manocha",
+        "affiliation": "Univ. of Maryland - College Park",
+        "short": "UMD",
+        "adjusted": 44.317492999999985,
+        "papers": 210,
+        "breadth": 9,
+        "primaryArea": "Robotics",
+        "primaryShare": 47.319960088897645,
+        "rank": 9
+      },
+      {
+        "name": "Daniela Rus",
+        "affiliation": "Massachusetts Inst. of Technology",
+        "short": "MIT",
+        "adjusted": 42.453663000000006,
+        "papers": 201,
+        "breadth": 7,
+        "primaryArea": "Robotics",
+        "primaryShare": 74.45854554411476,
+        "rank": 10
+      },
+      {
+        "name": "Quanquan Gu",
+        "affiliation": "Univ. of California - Los Angeles",
+        "short": "UCLA",
+        "adjusted": 40.335122999999996,
+        "papers": 155,
+        "breadth": 6,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 91.24905854384032,
+        "rank": 11
+      },
+      {
+        "name": "Trevor Darrell",
+        "affiliation": "Univ. of California - Berkeley",
+        "short": "UC Berkeley",
+        "adjusted": 39.124794200000004,
+        "papers": 210,
+        "breadth": 6,
+        "primaryArea": "Computer Vision",
+        "primaryShare": 49.7972459622548,
+        "rank": 12
+      },
+      {
+        "name": "Alan L. Yuille",
+        "affiliation": "Johns Hopkins University",
+        "short": "Johns Hopkins",
+        "adjusted": 36.65769,
+        "papers": 193,
+        "breadth": 5,
+        "primaryArea": "Computer Vision",
+        "primaryShare": 70.24861632034096,
+        "rank": 13
+      },
+      {
+        "name": "J. Zico Kolter",
+        "affiliation": "Carnegie Mellon University",
+        "short": "CMU",
+        "adjusted": 35.84251,
+        "papers": 134,
+        "breadth": 4,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 87.18602575545074,
+        "rank": 14
+      },
+      {
+        "name": "Kristen Grauman",
+        "affiliation": "University of Texas at Austin",
+        "short": "UT Austin",
+        "adjusted": 34.57558,
+        "papers": 107,
+        "breadth": 4,
+        "primaryArea": "Computer Vision",
+        "primaryShare": 76.83023683189117,
+        "rank": 15
+      }
+    ],
+    "broadest": [
+      {
+        "name": "Ion Stoica",
+        "affiliation": "Univ. of California - Berkeley",
+        "short": "UC Berkeley",
+        "adjusted": 20.094999999999995,
+        "papers": 133,
+        "breadth": 12,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 37.001856183130144,
+        "rank": 96
+      },
+      {
+        "name": "Yanzhi Wang",
+        "affiliation": "Northeastern University",
+        "short": "Northeastern",
+        "adjusted": 15.893269999999996,
+        "papers": 122,
+        "breadth": 12,
+        "primaryArea": "Design Automation",
+        "primaryShare": 25.764490252792537,
+        "rank": 168
+      },
+      {
+        "name": "Cong Liu",
+        "affiliation": "Univ. of California - Riverside",
+        "short": "UC Riverside",
+        "adjusted": 14.10041,
+        "papers": 55,
+        "breadth": 12,
+        "primaryArea": "Embedded & Real-Time",
+        "primaryShare": 50.429171917696,
+        "rank": 234
+      },
+      {
+        "name": "Isil Dillig",
+        "affiliation": "University of Texas at Austin",
+        "short": "UT Austin",
+        "adjusted": 13.594039999999996,
+        "papers": 57,
+        "breadth": 12,
+        "primaryArea": "Programming Languages",
+        "primaryShare": 43.769107638347414,
+        "rank": 259
+      },
+      {
+        "name": "Dawn Song",
+        "affiliation": "Univ. of California - Berkeley",
+        "short": "UC Berkeley",
+        "adjusted": 25.309585,
+        "papers": 133,
+        "breadth": 11,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 47.632981733995244,
+        "rank": 42
+      },
+      {
+        "name": "Xiangyu Zhang",
+        "affiliation": "Purdue University",
+        "short": "Purdue",
+        "adjusted": 20.296726999999994,
+        "papers": 119,
+        "breadth": 10,
+        "primaryArea": "Software Engineering",
+        "primaryShare": 33.71243058055617,
+        "rank": 93
+      },
+      {
+        "name": "Yiran Chen",
+        "affiliation": "Duke University",
+        "short": "Duke",
+        "adjusted": 18.454898,
+        "papers": 111,
+        "breadth": 10,
+        "primaryArea": "Design Automation",
+        "primaryShare": 46.38513851444748,
+        "rank": 114
+      },
+      {
+        "name": "Osbert Bastani",
+        "affiliation": "University of Pennsylvania",
+        "short": "Penn",
+        "adjusted": 15.28462,
+        "papers": 66,
+        "breadth": 10,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 60.7766499919527,
+        "rank": 182
+      }
+    ],
+    "areaLeaders": [
+      {
+        "area": "act",
+        "label": "Algorithms",
+        "name": "Thatchaphol Saranurak",
+        "affiliation": "University of Michigan",
+        "short": "UMich",
+        "credit": 18.25961,
+        "overallRank": 117
+      },
+      {
+        "area": "ai",
+        "label": "AI",
+        "name": "Heng Huang",
+        "affiliation": "Univ. of Maryland - College Park",
+        "short": "UMD",
+        "credit": 18.033189999999998,
+        "overallRank": 4
+      },
+      {
+        "area": "arch",
+        "label": "Architecture",
+        "name": "Moinuddin K. Qureshi",
+        "affiliation": "Georgia Institute of Technology",
+        "short": "Georgia Tech",
+        "credit": 11.80001,
+        "overallRank": 236
+      },
+      {
+        "area": "bed",
+        "label": "Embedded & Real-Time",
+        "name": "James H. Anderson",
+        "affiliation": "University of North Carolina",
+        "short": "UNC",
+        "credit": 9.595249999999998,
+        "overallRank": 515
+      },
+      {
+        "area": "bio",
+        "label": "Comp. Biology",
+        "name": "Carl Kingsford",
+        "affiliation": "Carnegie Mellon University",
+        "short": "CMU",
+        "credit": 5.899960000000001,
+        "overallRank": 837
+      },
+      {
+        "area": "chi",
+        "label": "HCI",
+        "name": "Chris Harrison",
+        "affiliation": "Carnegie Mellon University",
+        "short": "CMU",
+        "credit": 18.48569,
+        "overallRank": 111
+      },
+      {
+        "area": "comm",
+        "label": "Networks",
+        "name": "Mohammad Alizadeh",
+        "affiliation": "Massachusetts Inst. of Technology",
+        "short": "MIT",
+        "credit": 6.831879000000001,
+        "overallRank": 354
+      },
+      {
+        "area": "crypt",
+        "label": "Cryptography",
+        "name": "Stefano Tessaro",
+        "affiliation": "University of Washington",
+        "short": "UW",
+        "credit": 15.999989999999999,
+        "overallRank": 127
+      },
+      {
+        "area": "csed",
+        "label": "CS Education",
+        "name": "Craig B. Zilles",
+        "affiliation": "Univ. of Illinois at Urbana-Champaign",
+        "short": "UIUC",
+        "credit": 7.05551,
+        "overallRank": 808
+      },
+      {
+        "area": "da",
+        "label": "Design Automation",
+        "name": "David Z. Pan",
+        "affiliation": "University of Texas at Austin",
+        "short": "UT Austin",
+        "credit": 10.832949999999999,
+        "overallRank": 300
+      },
+      {
+        "area": "ecom",
+        "label": "Econ & Computation",
+        "name": "S. Matthew Weinberg",
+        "affiliation": "Princeton University",
+        "short": "Princeton",
+        "credit": 7.816660000000001,
+        "overallRank": 196
+      },
+      {
+        "area": "graph",
+        "label": "Graphics",
+        "name": "Ravi Ramamoorthi",
+        "affiliation": "Univ. of California - San Diego",
+        "short": "UCSD",
+        "credit": 10.303199999999997,
+        "overallRank": 106
+      },
+      {
+        "area": "hpc",
+        "label": "HPC",
+        "name": "Devesh Tiwari",
+        "affiliation": "Northeastern University",
+        "short": "Northeastern",
+        "credit": 6.319469999999999,
+        "overallRank": 318
+      },
+      {
+        "area": "inforet",
+        "label": "Info Retrieval",
+        "name": "Hamed Zamani",
+        "affiliation": "Univ. of Massachusetts Amherst",
+        "short": "UMass Amherst",
+        "credit": 12.246459999999999,
+        "overallRank": 242
+      },
+      {
+        "area": "log",
+        "label": "Logic & Verification",
+        "name": "Kuldeep S. Meel",
+        "affiliation": "Georgia Institute of Technology",
+        "short": "Georgia Tech",
+        "credit": 4.8667300000000004,
+        "overallRank": 70
+      },
+      {
+        "area": "metrics",
+        "label": "Measurement",
+        "name": "Ziv Scully",
+        "affiliation": "Cornell University",
+        "short": "Cornell",
+        "credit": 4.11666,
+        "overallRank": 1376
+      },
+      {
+        "area": "mlmining",
+        "label": "Machine Learning",
+        "name": "Sergey Levine",
+        "affiliation": "Univ. of California - Berkeley",
+        "short": "UC Berkeley",
+        "credit": 55.766160000000006,
+        "overallRank": 1
+      },
+      {
+        "area": "mobile",
+        "label": "Mobile Computing",
+        "name": "Xinyu Zhang",
+        "affiliation": "Univ. of California - San Diego",
+        "short": "UCSD",
+        "credit": 11.713419999999998,
+        "overallRank": 107
+      },
+      {
+        "area": "mod",
+        "label": "Databases",
+        "name": "Immanuel Trummer",
+        "affiliation": "Cornell University",
+        "short": "Cornell",
+        "credit": 15.852427000000002,
+        "overallRank": 160
+      },
+      {
+        "area": "nlp",
+        "label": "NLP",
+        "name": "Mohit Bansal",
+        "affiliation": "University of North Carolina",
+        "short": "UNC",
+        "credit": 34.860510000000005,
+        "overallRank": 2
+      },
+      {
+        "area": "ops",
+        "label": "Operating Systems",
+        "name": "Nickolai Zeldovich",
+        "affiliation": "Massachusetts Inst. of Technology",
+        "short": "MIT",
+        "credit": 4.8178600000000005,
+        "overallRank": 1191
+      },
+      {
+        "area": "plan",
+        "label": "Programming Languages",
+        "name": "Isil Dillig",
+        "affiliation": "University of Texas at Austin",
+        "short": "UT Austin",
+        "credit": 5.9499900000000014,
+        "overallRank": 259
+      },
+      {
+        "area": "robotics",
+        "label": "Robotics",
+        "name": "Daniela Rus",
+        "affiliation": "Massachusetts Inst. of Technology",
+        "short": "MIT",
+        "credit": 31.610379999999996,
+        "overallRank": 10
+      },
+      {
+        "area": "sec",
+        "label": "Security",
+        "name": "Zhiqiang Lin",
+        "affiliation": "Ohio State University",
+        "short": "Ohio State",
+        "credit": 12.57498,
+        "overallRank": 165
+      },
+      {
+        "area": "soft",
+        "label": "Software Engineering",
+        "name": "Hridesh Rajan",
+        "affiliation": "Tulane University",
+        "short": "Tulane",
+        "credit": 8.24282,
+        "overallRank": 672
+      },
+      {
+        "area": "vision",
+        "label": "Computer Vision",
+        "name": "Ming-Hsuan Yang",
+        "affiliation": "Univ. of California - Merced",
+        "short": "UC Merced",
+        "credit": 34.36081,
+        "overallRank": 8
+      },
+      {
+        "area": "visualization",
+        "label": "Visualization",
+        "name": "Kwan-Liu Ma",
+        "affiliation": "Univ. of California - Davis",
+        "short": "UC Davis",
+        "credit": 7.25952,
+        "overallRank": 580
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Sergey Levine",
+        "affiliation": "Univ. of California - Berkeley",
+        "short": "UC Berkeley",
+        "adjusted": 78.94129000000002,
+        "papers": 370,
+        "breadth": 6,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 70.64257500732505,
+        "balance": 43.72218222886044,
+        "consistency": 100,
+        "momentum": -52.510487448012896,
+        "volatility": 0.3987414026458996,
+        "venueBreadth": 13,
+        "venueConcentration": 26.96788968105283,
+        "topVenue": "iclr",
+        "peakYear": 2021,
+        "pivot": null,
+        "emergingAreas": [],
+        "similarPeers": [
+          {
+            "name": "Rohan R. Paleja",
+            "short": "Purdue",
+            "similarity": 0.9989379351813703
+          },
+          {
+            "name": "Chelsea Finn",
+            "short": "Stanford",
+            "similarity": 0.9987036009918763
+          },
+          {
+            "name": "Roy Fox",
+            "short": "UC Irvine",
+            "similarity": 0.9948615311222442
+          }
+        ]
+      },
+      {
+        "name": "Mohit Bansal",
+        "affiliation": "University of North Carolina",
+        "short": "UNC",
+        "adjusted": 57.57709000000002,
+        "papers": 216,
+        "breadth": 5,
+        "primaryArea": "NLP",
+        "primaryShare": 60.54580042166076,
+        "balance": 68.94838195357438,
+        "consistency": 100,
+        "momentum": -40.05806071726896,
+        "volatility": 0.41184003126630353,
+        "venueBreadth": 12,
+        "venueConcentration": 28.5619853313184,
+        "topVenue": "emnlp",
+        "peakYear": 2021,
+        "pivot": null,
+        "emergingAreas": [],
+        "similarPeers": [
+          {
+            "name": "William Yang Wang",
+            "short": "UCSB",
+            "similarity": 0.9984073077526658
+          },
+          {
+            "name": "Yejin Choi",
+            "short": "Stanford",
+            "similarity": 0.9961320202558053
+          },
+          {
+            "name": "Kai-Wei Chang",
+            "short": "UCLA",
+            "similarity": 0.9930413930576679
+          }
+        ]
+      },
+      {
+        "name": "Pieter Abbeel",
+        "affiliation": "Univ. of California - Berkeley",
+        "short": "UC Berkeley",
+        "adjusted": 53.81579,
+        "papers": 246,
+        "breadth": 8,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 65.65961402777883,
+        "balance": 45.6544415040593,
+        "consistency": 100,
+        "momentum": -47.732228100844736,
+        "volatility": 0.340637855630327,
+        "venueBreadth": 16,
+        "venueConcentration": 24.056415412651194,
+        "topVenue": "nips",
+        "peakYear": 2023,
+        "pivot": null,
+        "emergingAreas": [],
+        "similarPeers": [
+          {
+            "name": "Rohan R. Paleja",
+            "short": "Purdue",
+            "similarity": 0.9978854703110639
+          },
+          {
+            "name": "Pratik Chaudhari",
+            "short": "Penn",
+            "similarity": 0.996850297579686
+          },
+          {
+            "name": "Chelsea Finn",
+            "short": "Stanford",
+            "similarity": 0.9958209290154958
+          }
+        ]
+      },
+      {
+        "name": "Heng Huang",
+        "affiliation": "Univ. of Maryland - College Park",
+        "short": "UMD",
+        "adjusted": 51.34461999999997,
+        "papers": 186,
+        "breadth": 8,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 42.18747748060072,
+        "balance": 61.02844885710914,
+        "consistency": 90.9090909090909,
+        "momentum": -18.45454694083464,
+        "volatility": 0.47102526954374013,
+        "venueBreadth": 16,
+        "venueConcentration": 22.98182360683555,
+        "topVenue": "aaai",
+        "peakYear": 2024,
+        "pivot": {
+          "from": "AI",
+          "to": "Machine Learning"
+        },
+        "emergingAreas": [
+          "NLP",
+          "Mobile Computing"
+        ],
+        "similarPeers": [
+          {
+            "name": "Hongfu Liu",
+            "short": "Brandeis",
+            "similarity": 0.9955088865066821
+          },
+          {
+            "name": "Shuhan Yuan",
+            "short": "Utah State",
+            "similarity": 0.9949608254974643
+          },
+          {
+            "name": "Yanjun Qi",
+            "short": "University of Virginia",
+            "similarity": 0.9896978406178335
+          }
+        ]
+      },
+      {
+        "name": "Stefano Ermon",
+        "affiliation": "Stanford University",
+        "short": "Stanford",
+        "adjusted": 47.48035,
+        "papers": 201,
+        "breadth": 3,
+        "primaryArea": "Machine Learning",
+        "primaryShare": 80.3418256183874,
+        "balance": 54.9155537350979,
+        "consistency": 90.9090909090909,
+        "momentum": -48.22009369864359,
+        "volatility": 0.4102238128723741,
+        "venueBreadth": 7,
+        "venueConcentration": 38.59084863527754,
+        "topVenue": "nips",
+        "peakYear": 2020,
+        "pivot": null,
+        "emergingAreas": [],
+        "similarPeers": [
+          {
+            "name": "Tianbao Yang",
+            "short": "Texas A&M University",
+            "similarity": 0.9984309557018423
+          },
+          {
+            "name": "Aditya Grover",
+            "short": "UCLA",
+            "similarity": 0.9984260200748465
+          },
+          {
+            "name": "Lifeng Lai",
+            "short": "UC Davis",
+            "similarity": 0.9983661938470612
+          }
+        ]
+      },
+      {
+        "name": "Graham Neubig",
+        "affiliation": "Carnegie Mellon University",
+        "short": "CMU",
+        "adjusted": 46.47142899999999,
+        "papers": 201,
+        "breadth": 7,
+        "primaryArea": "NLP",
+        "primaryShare": 70.2086221622322,
+        "balance": 41.26531526585632,
+        "consistency": 100,
+        "momentum": -48.11967009025833,
+        "volatility": 0.4752627280610713,
+        "venueBreadth": 12,
+        "venueConcentration": 29.27721460857165,
+        "topVenue": "acl",
+        "peakYear": 2019,
+        "pivot": null,
+        "emergingAreas": [],
+        "similarPeers": [
+          {
+            "name": "Sewon Min",
+            "short": "UC Berkeley",
+            "similarity": 0.9988825426664426
+          },
+          {
+            "name": "Ayah Zirikly",
+            "short": "George Washington University",
+            "similarity": 0.9986939282990297
+          },
+          {
+            "name": "Luke Zettlemoyer",
+            "short": "UW",
+            "similarity": 0.9986662367964926
+          }
+        ]
+      }
+    ]
+  },
+  "fields": {
+    "areas": 27,
+    "rows": [
+      {
+        "area": "mlmining",
+        "label": "Machine Learning",
+        "total": 5382.6839820000005,
+        "prior": 989.0884260000012,
+        "growth": 444.20654822221064,
+        "schools": 165,
+        "faculty": 2422,
+        "perFaculty": 2.222412874483898,
+        "leader": {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "credit": 315.12302199999937
+        },
+        "runnerUp": {
+          "short": "MIT",
+          "credit": 267.1040959999997
+        },
+        "top5Share": 24.216798782150736
+      },
+      {
+        "area": "vision",
+        "label": "Computer Vision",
+        "total": 2076.2285360000014,
+        "prior": 1132.7755380000006,
+        "growth": 83.28684424680792,
+        "schools": 156,
+        "faculty": 1185,
+        "perFaculty": 1.7520915915611825,
+        "leader": {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "credit": 100.72713000000009
+        },
+        "runnerUp": {
+          "short": "UCSD",
+          "credit": 84.78975799999999
+        },
+        "top5Share": 20.422089170245368
+      },
+      {
+        "area": "nlp",
+        "label": "NLP",
+        "total": 1919.9373569999998,
+        "prior": 663.4087710000003,
+        "growth": 189.40487990623788,
+        "schools": 154,
+        "faculty": 1175,
+        "perFaculty": 1.6339892399999998,
+        "leader": {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "credit": 112.63065400000006
+        },
+        "runnerUp": {
+          "short": "UW",
+          "credit": 82.418715
+        },
+        "top5Share": 22.117909443854845
+      },
+      {
+        "area": "ai",
+        "label": "AI",
+        "total": 1806.0851909999992,
+        "prior": 734.6585140000012,
+        "growth": 145.84009530719143,
+        "schools": 172,
+        "faculty": 1861,
+        "perFaculty": 0.9704917737775385,
+        "leader": {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "credit": 81.12419999999997
+        },
+        "runnerUp": {
+          "short": "University of Virginia",
+          "credit": 46.223067
+        },
+        "top5Share": 14.455627968215815
+      },
+      {
+        "area": "robotics",
+        "label": "Robotics",
+        "total": 1708.1648386000002,
+        "prior": 1120.866344000001,
+        "growth": 52.39683551422601,
+        "schools": 144,
+        "faculty": 906,
+        "perFaculty": 1.8853916540838853,
+        "leader": {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "credit": 94.258916
+        },
+        "runnerUp": {
+          "short": "MIT",
+          "credit": 85.47833600000006
+        },
+        "top5Share": 23.95342446782525
+      },
+      {
+        "area": "chi",
+        "label": "HCI",
+        "total": 1476.2510589999997,
+        "prior": 601.0279760000003,
+        "growth": 145.62102230662205,
+        "schools": 146,
+        "faculty": 1202,
+        "perFaculty": 1.2281622787021629,
+        "leader": {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "credit": 129.36653900000013
+        },
+        "runnerUp": {
+          "short": "UW",
+          "credit": 110.29033700000006
+        },
+        "top5Share": 28.472171683637743
+      },
+      {
+        "area": "act",
+        "label": "Algorithms",
+        "total": 1241.696527,
+        "prior": 1037.1860599999998,
+        "growth": 19.717818710367197,
+        "schools": 91,
+        "faculty": 480,
+        "perFaculty": 2.5868677645833333,
+        "leader": {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "credit": 89.37005000000005
+        },
+        "runnerUp": {
+          "short": "MIT",
+          "credit": 86.28264000000004
+        },
+        "top5Share": 30.154950091118355
+      },
+      {
+        "area": "sec",
+        "label": "Security",
+        "total": 1138.317816,
+        "prior": 430.9784329999996,
+        "growth": 164.124078802802,
+        "schools": 149,
+        "faculty": 1039,
+        "perFaculty": 1.095589813282002,
+        "leader": {
+          "name": "Georgia Institute of Technology",
+          "short": "Georgia Tech",
+          "credit": 55.80977800000005
+        },
+        "runnerUp": {
+          "short": "Purdue",
+          "credit": 48.92961600000002
+        },
+        "top5Share": 19.346684107419794
+      },
+      {
+        "area": "mod",
+        "label": "Databases",
+        "total": 573.193765,
+        "prior": 384.3588369999997,
+        "growth": 49.12985206061502,
+        "schools": 125,
+        "faculty": 570,
+        "perFaculty": 1.0056030964912281,
+        "leader": {
+          "name": "Massachusetts Inst. of Technology",
+          "short": "MIT",
+          "credit": 30.041432999999994
+        },
+        "runnerUp": {
+          "short": "UC Berkeley",
+          "credit": 22.494961999999997
+        },
+        "top5Share": 20.59564953572026
+      },
+      {
+        "area": "arch",
+        "label": "Architecture",
+        "total": 565.1510280000001,
+        "prior": 310.83264499999984,
+        "growth": 81.8184277265988,
+        "schools": 101,
+        "faculty": 608,
+        "perFaculty": 0.9295247171052633,
+        "leader": {
+          "name": "Univ. of Illinois at Urbana-Champaign",
+          "short": "UIUC",
+          "credit": 41.65031300000001
+        },
+        "runnerUp": {
+          "short": "UMich",
+          "credit": 32.98589999999998
+        },
+        "top5Share": 26.652358845218266
+      },
+      {
+        "area": "inforet",
+        "label": "Info Retrieval",
+        "total": 439.1481209999999,
+        "prior": 250.33677899999992,
+        "growth": 75.42293335970422,
+        "schools": 140,
+        "faculty": 729,
+        "perFaculty": 0.6023979711934155,
+        "leader": {
+          "name": "Univ. of Illinois at Urbana-Champaign",
+          "short": "UIUC",
+          "credit": 33.12703299999999
+        },
+        "runnerUp": {
+          "short": "CMU",
+          "credit": 19.151615999999994
+        },
+        "top5Share": 22.77851235528798
+      },
+      {
+        "area": "da",
+        "label": "Design Automation",
+        "total": 407.36932599999994,
+        "prior": 371.1875509999999,
+        "growth": 9.747572326314366,
+        "schools": 118,
+        "faculty": 412,
+        "perFaculty": 0.9887604999999998,
+        "leader": {
+          "name": "Univ. of California - San Diego",
+          "short": "UCSD",
+          "credit": 34.41297999999999
+        },
+        "runnerUp": {
+          "short": "UC Irvine",
+          "credit": 19.717549999999996
+        },
+        "top5Share": 25.43789465385521
+      },
+      {
+        "area": "soft",
+        "label": "Software Engineering",
+        "total": 396.9356019999997,
+        "prior": 248.05592999999985,
+        "growth": 60.01859016230732,
+        "schools": 118,
+        "faculty": 417,
+        "perFaculty": 0.9518839376498793,
+        "leader": {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "credit": 29.25237999999999
+        },
+        "runnerUp": {
+          "short": "UC Irvine",
+          "credit": 21.716999999999995
+        },
+        "top5Share": 25.45305825200332
+      },
+      {
+        "area": "crypt",
+        "label": "Cryptography",
+        "total": 336.00768800000003,
+        "prior": 195.0614699999999,
+        "growth": 72.25733405987363,
+        "schools": 64,
+        "faculty": 160,
+        "perFaculty": 2.1000480500000003,
+        "leader": {
+          "name": "University of Washington",
+          "short": "UW",
+          "credit": 28.79997
+        },
+        "runnerUp": {
+          "short": "UT Austin",
+          "credit": 22.66659
+        },
+        "top5Share": 32.55551402740522
+      },
+      {
+        "area": "graph",
+        "label": "Graphics",
+        "total": 315.5559689999999,
+        "prior": 285.9127069999997,
+        "growth": 10.367941429060092,
+        "schools": 73,
+        "faculty": 229,
+        "perFaculty": 1.377973663755458,
+        "leader": {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "credit": 29.019453
+        },
+        "runnerUp": {
+          "short": "Stanford",
+          "credit": 24.90872199999999
+        },
+        "top5Share": 36.469826054851154
+      },
+      {
+        "area": "visualization",
+        "label": "Visualization",
+        "total": 309.72265399999986,
+        "prior": 175.72388000000007,
+        "growth": 76.25530121460996,
+        "schools": 110,
+        "faculty": 337,
+        "perFaculty": 0.9190583204747771,
+        "leader": {
+          "name": "University of Utah",
+          "short": "University of Utah",
+          "credit": 19.262529999999987
+        },
+        "runnerUp": {
+          "short": "Northwestern",
+          "credit": 15.376257
+        },
+        "top5Share": 23.505609634870307
+      },
+      {
+        "area": "plan",
+        "label": "Programming Languages",
+        "total": 309.13861199999985,
+        "prior": 210.0011129999999,
+        "growth": 47.208082654304796,
+        "schools": 91,
+        "faculty": 363,
+        "perFaculty": 0.8516215206611566,
+        "leader": {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "credit": 24.127837
+        },
+        "runnerUp": {
+          "short": "MIT",
+          "credit": 15.586121999999998
+        },
+        "top5Share": 25.61690611459432
+      },
+      {
+        "area": "mobile",
+        "label": "Mobile Computing",
+        "total": 301.489354,
+        "prior": 199.14387800000003,
+        "growth": 51.3927302349711,
+        "schools": 105,
+        "faculty": 413,
+        "perFaculty": 0.7299984358353511,
+        "leader": {
+          "name": "Univ. of California - San Diego",
+          "short": "UCSD",
+          "credit": 20.259048
+        },
+        "runnerUp": {
+          "short": "UMass Amherst",
+          "credit": 13.171864999999997
+        },
+        "top5Share": 22.208046855279672
+      },
+      {
+        "area": "comm",
+        "label": "Networks",
+        "total": 289.9310519999997,
+        "prior": 223.929613,
+        "growth": 29.474189731216878,
+        "schools": 91,
+        "faculty": 405,
+        "perFaculty": 0.71587914074074,
+        "leader": {
+          "name": "Princeton University",
+          "short": "Princeton",
+          "credit": 21.819270999999993
+        },
+        "runnerUp": {
+          "short": "MIT",
+          "credit": 21.758497999999996
+        },
+        "top5Share": 32.33053836537663
+      },
+      {
+        "area": "hpc",
+        "label": "HPC",
+        "total": 281.922694,
+        "prior": 295.075709,
+        "growth": -4.457505175392136,
+        "schools": 123,
+        "faculty": 444,
+        "perFaculty": 0.6349610225225225,
+        "leader": {
+          "name": "Ohio State University",
+          "short": "Ohio State",
+          "credit": 10.766169
+        },
+        "runnerUp": {
+          "short": "Rice",
+          "credit": 10.699622999999999
+        },
+        "top5Share": 18.626339460277713
+      },
+      {
+        "area": "csed",
+        "label": "CS Education",
+        "total": 264.46845099999996,
+        "prior": 75.36742300000003,
+        "growth": 250.90552452616012,
+        "schools": 107,
+        "faculty": 336,
+        "perFaculty": 0.7871084851190475,
+        "leader": {
+          "name": "Univ. of California - San Diego",
+          "short": "UCSD",
+          "credit": 24.573069999999994
+        },
+        "runnerUp": {
+          "short": "UIUC",
+          "credit": 14.54836
+        },
+        "top5Share": 28.71446469809739
+      },
+      {
+        "area": "metrics",
+        "label": "Measurement",
+        "total": 221.02844300000007,
+        "prior": 200.16788699999998,
+        "growth": 10.421529803129754,
+        "schools": 91,
+        "faculty": 349,
+        "perFaculty": 0.6333193209169057,
+        "leader": {
+          "name": "Northeastern University",
+          "short": "Northeastern",
+          "credit": 12.846527999999996
+        },
+        "runnerUp": {
+          "short": "CMU",
+          "credit": 12.344079999999998
+        },
+        "top5Share": 25.49739989798507
+      },
+      {
+        "area": "bed",
+        "label": "Embedded & Real-Time",
+        "total": 160.02045699999996,
+        "prior": 219.96868399999994,
+        "growth": -27.25307344203595,
+        "schools": 76,
+        "faculty": 164,
+        "perFaculty": 0.9757344939024388,
+        "leader": {
+          "name": "Washington University in St. Louis",
+          "short": "Washington University in St. Louis",
+          "credit": 18.98774
+        },
+        "runnerUp": {
+          "short": "UNC",
+          "credit": 14.011909999999997
+        },
+        "top5Share": 38.08122482739817
+      },
+      {
+        "area": "ecom",
+        "label": "Econ & Computation",
+        "total": 154.44249999999997,
+        "prior": 211.58321999999995,
+        "growth": -27.006262594926007,
+        "schools": 55,
+        "faculty": 142,
+        "perFaculty": 1.0876232394366194,
+        "leader": {
+          "name": "Cornell University",
+          "short": "Cornell",
+          "credit": 11.983300000000002
+        },
+        "runnerUp": {
+          "short": "UMich",
+          "credit": 10.14995
+        },
+        "top5Share": 30.556822118264094
+      },
+      {
+        "area": "ops",
+        "label": "Operating Systems",
+        "total": 148.00282099999995,
+        "prior": 80.14269899999996,
+        "growth": 84.67411610382628,
+        "schools": 65,
+        "faculty": 274,
+        "perFaculty": 0.5401562810218976,
+        "leader": {
+          "name": "Univ. of California - Berkeley",
+          "short": "UC Berkeley",
+          "credit": 11.752823999999999
+        },
+        "runnerUp": {
+          "short": "MIT",
+          "credit": 11.570249999999996
+        },
+        "top5Share": 33.5032850488708
+      },
+      {
+        "area": "log",
+        "label": "Logic & Verification",
+        "total": 119.66504500000003,
+        "prior": 101.7084,
+        "growth": 17.655026526815913,
+        "schools": 67,
+        "faculty": 159,
+        "perFaculty": 0.7526103459119499,
+        "leader": {
+          "name": "Georgia Institute of Technology",
+          "short": "Georgia Tech",
+          "credit": 8.04293
+        },
+        "runnerUp": {
+          "short": "UIUC",
+          "credit": 7.716640000000002
+        },
+        "top5Share": 28.142717867193372
+      },
+      {
+        "area": "bio",
+        "label": "Comp. Biology",
+        "total": 105.158552,
+        "prior": 152.07836099999994,
+        "growth": -30.85238997282458,
+        "schools": 78,
+        "faculty": 166,
+        "perFaculty": 0.6334852530120482,
+        "leader": {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "credit": 11.799560000000001
+        },
+        "runnerUp": {
+          "short": "Penn State",
+          "credit": 7.416650000000001
+        },
+        "top5Share": 33.88072517392595
+      }
+    ],
+    "totalAdjusted": 22447.717440600005,
+    "medianTop5Share": 25.49739989798507,
+    "growth": [
+      {
+        "label": "Machine Learning",
+        "area": "mlmining",
+        "currentTotal": 5382.6839820000005,
+        "priorTotal": 989.0884260000012,
+        "growth": 444.20654822221064,
+        "schoolCount": 165,
+        "priorSchoolCount": 112,
+        "schoolGain": 53,
+        "leaderChanged": false,
+        "newLeader": "Carnegie Mellon University",
+        "formerLeader": "Carnegie Mellon University"
+      },
+      {
+        "label": "CS Education",
+        "area": "csed",
+        "currentTotal": 264.46845099999996,
+        "priorTotal": 75.36742300000003,
+        "growth": 250.90552452616012,
+        "schoolCount": 107,
+        "priorSchoolCount": 77,
+        "schoolGain": 30,
+        "leaderChanged": true,
+        "newLeader": "Univ. of California - San Diego",
+        "formerLeader": "Virginia Tech"
+      },
+      {
+        "label": "NLP",
+        "area": "nlp",
+        "currentTotal": 1919.9373569999998,
+        "priorTotal": 663.4087710000003,
+        "growth": 189.40487990623788,
+        "schoolCount": 154,
+        "priorSchoolCount": 101,
+        "schoolGain": 53,
+        "leaderChanged": true,
+        "newLeader": "Carnegie Mellon University",
+        "formerLeader": "Stanford University"
+      },
+      {
+        "label": "Security",
+        "area": "sec",
+        "currentTotal": 1138.317816,
+        "priorTotal": 430.9784329999996,
+        "growth": 164.124078802802,
+        "schoolCount": 149,
+        "priorSchoolCount": 114,
+        "schoolGain": 35,
+        "leaderChanged": false,
+        "newLeader": "Georgia Institute of Technology",
+        "formerLeader": "Georgia Institute of Technology"
+      },
+      {
+        "label": "AI",
+        "area": "ai",
+        "currentTotal": 1806.0851909999992,
+        "priorTotal": 734.6585140000012,
+        "growth": 145.84009530719143,
+        "schoolCount": 172,
+        "priorSchoolCount": 135,
+        "schoolGain": 37,
+        "leaderChanged": false,
+        "newLeader": "Carnegie Mellon University",
+        "formerLeader": "Carnegie Mellon University"
+      },
+      {
+        "label": "HCI",
+        "area": "chi",
+        "currentTotal": 1476.2510589999997,
+        "priorTotal": 601.0279760000003,
+        "growth": 145.62102230662205,
+        "schoolCount": 146,
+        "priorSchoolCount": 115,
+        "schoolGain": 31,
+        "leaderChanged": true,
+        "newLeader": "Carnegie Mellon University",
+        "formerLeader": "University of Washington"
+      }
+    ],
+    "decline": [
+      {
+        "label": "Comp. Biology",
+        "area": "bio",
+        "currentTotal": 105.158552,
+        "priorTotal": 152.07836099999994,
+        "growth": -30.85238997282458,
+        "schoolCount": 78,
+        "priorSchoolCount": 80,
+        "schoolGain": -2,
+        "leaderChanged": true,
+        "newLeader": "Carnegie Mellon University",
+        "formerLeader": "Univ. of California - San Diego"
+      },
+      {
+        "label": "Embedded & Real-Time",
+        "area": "bed",
+        "currentTotal": 160.02045699999996,
+        "priorTotal": 219.96868399999994,
+        "growth": -27.25307344203595,
+        "schoolCount": 76,
+        "priorSchoolCount": 89,
+        "schoolGain": -13,
+        "leaderChanged": false,
+        "newLeader": "Washington University in St. Louis",
+        "formerLeader": "Washington University in St. Louis"
+      },
+      {
+        "label": "Econ & Computation",
+        "area": "ecom",
+        "currentTotal": 154.44249999999997,
+        "priorTotal": 211.58321999999995,
+        "growth": -27.006262594926007,
+        "schoolCount": 55,
+        "priorSchoolCount": 55,
+        "schoolGain": 0,
+        "leaderChanged": false,
+        "newLeader": "Cornell University",
+        "formerLeader": "Cornell University"
+      },
+      {
+        "label": "HPC",
+        "area": "hpc",
+        "currentTotal": 281.922694,
+        "priorTotal": 295.075709,
+        "growth": -4.457505175392136,
+        "schoolCount": 123,
+        "priorSchoolCount": 117,
+        "schoolGain": 6,
+        "leaderChanged": true,
+        "newLeader": "Ohio State University",
+        "formerLeader": "University of Utah"
+      }
+    ],
+    "leadershipChanges": [
+      {
+        "label": "NLP",
+        "newLeader": "CMU",
+        "formerLeader": "Stanford",
+        "currentTotal": 1919.9373569999998,
+        "growth": 189.40487990623788
+      },
+      {
+        "label": "HCI",
+        "newLeader": "CMU",
+        "formerLeader": "UW",
+        "currentTotal": 1476.2510589999997,
+        "growth": 145.62102230662205
+      },
+      {
+        "label": "Algorithms",
+        "newLeader": "CMU",
+        "formerLeader": "MIT",
+        "currentTotal": 1241.696527,
+        "growth": 19.717818710367197
+      },
+      {
+        "label": "Databases",
+        "newLeader": "MIT",
+        "formerLeader": "CMU",
+        "currentTotal": 573.193765,
+        "growth": 49.12985206061502
+      },
+      {
+        "label": "Architecture",
+        "newLeader": "UIUC",
+        "formerLeader": "UMich",
+        "currentTotal": 565.1510280000001,
+        "growth": 81.8184277265988
+      },
+      {
+        "label": "Cryptography",
+        "newLeader": "UW",
+        "formerLeader": "UCLA",
+        "currentTotal": 336.00768800000003,
+        "growth": 72.25733405987363
+      }
+    ],
+    "headToHead": {
+      "a": {
+        "label": "Machine Learning",
+        "total": 5382.6839820000005,
+        "prior": 989.0884260000012,
+        "growth": 444.20654822221064,
+        "schools": 165,
+        "faculty": 2422,
+        "newFaculty": 1857,
+        "top3": [
+          {
+            "short": "CMU",
+            "credit": 315.12302199999937
+          },
+          {
+            "short": "MIT",
+            "credit": 267.1040959999997
+          },
+          {
+            "short": "UC Berkeley",
+            "credit": 264.3330739999999
+          }
+        ]
+      },
+      "b": {
+        "label": "Programming Languages",
+        "total": 309.13861199999985,
+        "prior": 210.0011129999999,
+        "growth": 47.208082654304796,
+        "schools": 91,
+        "faculty": 363,
+        "newFaculty": 206,
+        "top3": [
+          {
+            "short": "CMU",
+            "credit": 24.127837
+          },
+          {
+            "short": "MIT",
+            "credit": 15.586121999999998
+          },
+          {
+            "short": "Penn",
+            "credit": 14.345239999999995
+          }
+        ]
+      },
+      "bothFaculty": 113,
+      "bothSchools": [
+        {
+          "short": "CMU",
+          "creditA": 315.12302199999937,
+          "creditB": 24.127837
+        },
+        {
+          "short": "MIT",
+          "creditA": 267.1040959999997,
+          "creditB": 15.586121999999998
+        },
+        {
+          "short": "UC Berkeley",
+          "creditA": 264.3330739999999,
+          "creditB": 5.1369299999999996
+        },
+        {
+          "short": "Stanford",
+          "creditA": 261.11107899999973,
+          "creditB": 6.700488000000001
+        },
+        {
+          "short": "UIUC",
+          "creditA": 195.84247800000006,
+          "creditB": 10.916633
+        }
+      ]
+    }
+  },
+  "comparisons": {
+    "schools": [
+      {
+        "type": "school",
+        "a": {
+          "name": "Univ. of Illinois at Urbana-Champaign",
+          "short": "UIUC"
+        },
+        "b": {
+          "name": "Massachusetts Inst. of Technology",
+          "short": "MIT"
+        },
+        "scoreboard": {
+          "rank": [
+            2,
+            5
+          ],
+          "papers": [
+            3488,
+            3294
+          ],
+          "adjusted": [
+            782.0633480000068,
+            779.670421000006
+          ],
+          "faculty": [
+            127,
+            104
+          ],
+          "areasLed": [
+            17,
+            10
+          ]
+        },
+        "verdict": {
+          "kind": "agree",
+          "phrase": "#2 vs #5",
+          "leader": "a",
+          "areaLeader": "a"
+        },
+        "topAreas": [
+          {
+            "area": "mlmining",
+            "label": "Machine Learning",
+            "a": 195.84247800000006,
+            "b": 267.1040959999997,
+            "margin": -71.26161799999963
+          },
+          {
+            "area": "vision",
+            "label": "Computer Vision",
+            "a": 83.81042500000004,
+            "b": 72.90414900000002,
+            "margin": 10.90627600000002
+          },
+          {
+            "area": "act",
+            "label": "Algorithms",
+            "a": 37.80111999999999,
+            "b": 86.28264000000004,
+            "margin": -48.48152000000005
+          },
+          {
+            "area": "robotics",
+            "label": "Robotics",
+            "a": 37.00750999999998,
+            "b": 85.47833600000006,
+            "margin": -48.47082600000007
+          },
+          {
+            "area": "nlp",
+            "label": "NLP",
+            "a": 72.05615700000004,
+            "b": 34.345683,
+            "margin": 37.71047400000004
+          },
+          {
+            "area": "ai",
+            "label": "AI",
+            "a": 38.78262399999998,
+            "b": 31.501626999999985,
+            "margin": 7.280996999999992
+          },
+          {
+            "area": "arch",
+            "label": "Architecture",
+            "a": 41.65031300000001,
+            "b": 26.398799999999987,
+            "margin": 15.251513000000024
+          },
+          {
+            "area": "chi",
+            "label": "HCI",
+            "a": 42.63648600000002,
+            "b": 22.717536,
+            "margin": 19.91895000000002
+          }
+        ],
+        "rankGap": [
+          {
+            "label": "Info Retrieval",
+            "a": 33.12703299999999,
+            "b": 2.30952,
+            "logGap": 2.3332866630546487,
+            "leader": "a"
+          },
+          {
+            "label": "CS Education",
+            "a": 14.54836,
+            "b": 0.58333,
+            "logGap": 2.28442494271228,
+            "leader": "a"
+          },
+          {
+            "label": "Security",
+            "a": 48.82371100000003,
+            "b": 8.77301,
+            "logGap": 1.6288664906338628,
+            "leader": "a"
+          },
+          {
+            "label": "HPC",
+            "a": 6.447306999999999,
+            "b": 0.465909,
+            "logGap": 1.625376962665059,
+            "leader": "a"
+          },
+          {
+            "label": "Embedded & Real-Time",
+            "a": 3.48811,
+            "b": 0,
+            "logGap": 1.5014316777239565,
+            "leader": "a"
+          }
+        ]
+      },
+      {
+        "type": "school",
+        "a": {
+          "name": "George Mason University",
+          "short": "GMU"
+        },
+        "b": {
+          "name": "Rice University",
+          "short": "Rice"
+        },
+        "scoreboard": {
+          "rank": [
+            32,
+            43
+          ],
+          "papers": [
+            776,
+            678
+          ],
+          "adjusted": [
+            178.7021679999999,
+            158.30740000000037
+          ],
+          "faculty": [
+            54,
+            39
+          ],
+          "areasLed": [
+            15,
+            12
+          ]
+        },
+        "verdict": {
+          "kind": "agree",
+          "phrase": "#32 vs #43",
+          "leader": "a",
+          "areaLeader": "a"
+        },
+        "topAreas": [
+          {
+            "area": "mlmining",
+            "label": "Machine Learning",
+            "a": 14.490469,
+            "b": 37.83672799999999,
+            "margin": -23.34625899999999
+          },
+          {
+            "area": "robotics",
+            "label": "Robotics",
+            "a": 22.583792,
+            "b": 18.96333999999999,
+            "margin": 3.6204520000000073
+          },
+          {
+            "area": "ai",
+            "label": "AI",
+            "a": 9.325439999999999,
+            "b": 23.790849999999995,
+            "margin": -14.465409999999997
+          },
+          {
+            "area": "nlp",
+            "label": "NLP",
+            "a": 22.231555999999994,
+            "b": 4.3580179999999995,
+            "margin": 17.873537999999996
+          },
+          {
+            "area": "sec",
+            "label": "Security",
+            "a": 22.624969999999994,
+            "b": 3.55239,
+            "margin": 19.072579999999995
+          },
+          {
+            "area": "chi",
+            "label": "HCI",
+            "a": 22.095339999999997,
+            "b": 2.119087,
+            "margin": 19.976252999999996
+          },
+          {
+            "area": "vision",
+            "label": "Computer Vision",
+            "a": 5.54524,
+            "b": 17.299098,
+            "margin": -11.753858000000001
+          },
+          {
+            "area": "mobile",
+            "label": "Mobile Computing",
+            "a": 11.578593000000005,
+            "b": 3.875000000000001,
+            "margin": 7.703593000000004
+          }
+        ],
+        "rankGap": [
+          {
+            "label": "HCI",
+            "a": 22.095339999999997,
+            "b": 2.119087,
+            "logGap": 2.0020905347831848,
+            "leader": "a"
+          },
+          {
+            "label": "Visualization",
+            "a": 5.309530000000001,
+            "b": 0,
+            "logGap": 1.8420611888344482,
+            "leader": "a"
+          },
+          {
+            "label": "Security",
+            "a": 22.624969999999994,
+            "b": 3.55239,
+            "logGap": 1.6466518337580736,
+            "leader": "a"
+          },
+          {
+            "label": "Software Engineering",
+            "a": 7.701580000000001,
+            "b": 0.7833300000000001,
+            "logGap": 1.5850222152878064,
+            "leader": "a"
+          },
+          {
+            "label": "Graphics",
+            "a": 5.466660000000001,
+            "b": 0.33333,
+            "logGap": 1.5789801740241507,
+            "leader": "a"
+          }
+        ]
+      }
+    ],
+    "researchers": [
+      {
+        "type": "researcher",
+        "a": {
+          "name": "Sergey Levine",
+          "short": "Sergey Levine"
+        },
+        "b": {
+          "name": "Mohit Bansal",
+          "short": "Mohit Bansal"
+        },
+        "scoreboard": {
+          "affiliation": [
+            "Univ. of California - Berkeley",
+            "University of North Carolina"
+          ],
+          "papers": [
+            370,
+            216
+          ],
+          "adjusted": [
+            78.94129000000002,
+            57.57709000000002
+          ],
+          "activeAreas": [
+            6,
+            5
+          ],
+          "areasLed": [
+            3,
+            3
+          ]
+        },
+        "verdict": {
+          "kind": "agree",
+          "phrase": "78.9 vs 57.6 adjusted",
+          "leader": "a",
+          "areaLeader": null
+        },
+        "topAreas": [
+          {
+            "area": "mlmining",
+            "label": "Machine Learning",
+            "a": 55.766160000000006,
+            "b": 11.234459999999999,
+            "margin": 44.53170000000001
+          },
+          {
+            "area": "nlp",
+            "label": "NLP",
+            "a": 0.7833300000000001,
+            "b": 34.860510000000005,
+            "margin": -34.077180000000006
+          },
+          {
+            "area": "robotics",
+            "label": "Robotics",
+            "a": 19.7545,
+            "b": 0.45,
+            "margin": 19.3045
+          },
+          {
+            "area": "vision",
+            "label": "Computer Vision",
+            "a": 1.45397,
+            "b": 5.8225999999999996,
+            "margin": -4.36863
+          },
+          {
+            "area": "ai",
+            "label": "AI",
+            "a": 0.33333,
+            "b": 5.20952,
+            "margin": -4.87619
+          },
+          {
+            "area": "graph",
+            "label": "Graphics",
+            "a": 0.8500000000000001,
+            "b": 0,
+            "margin": 0.8500000000000001
+          }
+        ],
+        "rankGap": null
+      }
+    ]
+  },
+  "nsf": {
+    "syncedAt": "2026-08-10T17:14:09.494Z",
+    "awardsTotal": 22696,
+    "awardsInWindow": 10226,
+    "coverage": {
+      "complete": true,
+      "facultyChecked": 10499,
+      "facultyTotal": 10499,
+      "institutionsChecked": 198,
+      "institutionsTotal": 198,
+      "failures": 0
+    },
+    "window": [
+      2016,
+      2026
+    ],
+    "schoolsMatched": 182,
+    "facultyMatched": 4101,
+    "totalAttributed": 4121069154.136653,
+    "directorates": [
+      {
+        "name": "CSE",
+        "count": 8342
+      },
+      {
+        "name": "EDU",
+        "count": 486
+      },
+      {
+        "name": "ENG",
+        "count": 463
+      },
+      {
+        "name": "MPS",
+        "count": 284
+      },
+      {
+        "name": "TIP",
+        "count": 275
+      },
+      {
+        "name": "SBE",
+        "count": 148
+      }
+    ],
+    "tau": 0.7779042342828824,
+    "medianAbsRankChange": 12,
+    "topSchools": [
+      {
+        "name": "Carnegie Mellon University",
+        "short": "CMU",
+        "fundingRank": 1,
+        "amount": 142658118.46666664,
+        "awards": 293,
+        "faculty": 124,
+        "pubRank": 1
+      },
+      {
+        "name": "Georgia Institute of Technology",
+        "short": "Georgia Tech",
+        "fundingRank": 2,
+        "amount": 119850055.78333333,
+        "awards": 278,
+        "faculty": 103,
+        "pubRank": 4
+      },
+      {
+        "name": "Univ. of California - San Diego",
+        "short": "UCSD",
+        "fundingRank": 3,
+        "amount": 119069251.81666668,
+        "awards": 235,
+        "faculty": 97,
+        "pubRank": 3
+      },
+      {
+        "name": "Univ. of Illinois at Urbana-Champaign",
+        "short": "UIUC",
+        "fundingRank": 4,
+        "amount": 108250469.76666668,
+        "awards": 236,
+        "faculty": 96,
+        "pubRank": 2
+      },
+      {
+        "name": "Northeastern University",
+        "short": "Northeastern",
+        "fundingRank": 5,
+        "amount": 107035951.59523806,
+        "awards": 216,
+        "faculty": 75,
+        "pubRank": 11
+      },
+      {
+        "name": "University of Texas at Austin",
+        "short": "UT Austin",
+        "fundingRank": 6,
+        "amount": 91435933.18333334,
+        "awards": 109,
+        "faculty": 40,
+        "pubRank": 14
+      },
+      {
+        "name": "University of Washington",
+        "short": "UW",
+        "fundingRank": 7,
+        "amount": 82318685.83809523,
+        "awards": 171,
+        "faculty": 58,
+        "pubRank": 6
+      },
+      {
+        "name": "Massachusetts Inst. of Technology",
+        "short": "MIT",
+        "fundingRank": 8,
+        "amount": 78481469.08333333,
+        "awards": 173,
+        "faculty": 69,
+        "pubRank": 5
+      },
+      {
+        "name": "University of Wisconsin - Madison",
+        "short": "UW–Madison",
+        "fundingRank": 9,
+        "amount": 75788032.36666667,
+        "awards": 157,
+        "faculty": 58,
+        "pubRank": 14
+      },
+      {
+        "name": "Univ. of Maryland - College Park",
+        "short": "UMD",
+        "fundingRank": 10,
+        "amount": 75538388.64999999,
+        "awards": 199,
+        "faculty": 78,
+        "pubRank": 8
+      },
+      {
+        "name": "University of Michigan",
+        "short": "UMich",
+        "fundingRank": 11,
+        "amount": 73221342.78030302,
+        "awards": 179,
+        "faculty": 69,
+        "pubRank": 9
+      },
+      {
+        "name": "Northwestern University",
+        "short": "Northwestern",
+        "fundingRank": 12,
+        "amount": 72487309.71666668,
+        "awards": 153,
+        "faculty": 54,
+        "pubRank": 25
+      },
+      {
+        "name": "New York University",
+        "short": "NYU",
+        "fundingRank": 13,
+        "amount": 70775598.06666666,
+        "awards": 166,
+        "faculty": 55,
+        "pubRank": 14
+      },
+      {
+        "name": "Rice University",
+        "short": "Rice",
+        "fundingRank": 14,
+        "amount": 62992147.72857143,
+        "awards": 83,
+        "faculty": 28,
+        "pubRank": 43
+      },
+      {
+        "name": "University of Virginia",
+        "short": "University of Virginia",
+        "fundingRank": 15,
+        "amount": 62289817.28333332,
+        "awards": 151,
+        "faculty": 47,
+        "pubRank": 28
+      }
+    ],
+    "topFaculty": [
+      {
+        "name": "Adam R. Klivans",
+        "affiliation": "University of Texas at Austin",
+        "short": "UT Austin",
+        "fundingRank": 1,
+        "amount": 41224721.75,
+        "projectValue": 42349721,
+        "awards": 5
+      },
+      {
+        "name": "Richard G. Baraniuk",
+        "affiliation": "Rice University",
+        "short": "Rice",
+        "fundingRank": 2,
+        "amount": 21291496.666666668,
+        "projectValue": 109324994,
+        "awards": 8
+      },
+      {
+        "name": "Sidney K. D'Mello",
+        "affiliation": "University of Colorado Boulder",
+        "short": "University of Colorado Boulder",
+        "fundingRank": 3,
+        "amount": 10973487.8,
+        "projectValue": 47056204,
+        "awards": 10
+      },
+      {
+        "name": "Ashok K. Goel",
+        "affiliation": "Georgia Institute of Technology",
+        "short": "Georgia Tech",
+        "fundingRank": 4,
+        "amount": 10769824,
+        "projectValue": 20765048,
+        "awards": 4
+      },
+      {
+        "name": "John Preskill",
+        "affiliation": "California Inst. of Technology",
+        "short": "Caltech",
+        "fundingRank": 5,
+        "amount": 10733333.333333334,
+        "projectValue": 25300000,
+        "awards": 2
+      },
+      {
+        "name": "James C. Lester",
+        "affiliation": "North Carolina State University",
+        "short": "North Carolina State",
+        "fundingRank": 6,
+        "amount": 10369724.566666666,
+        "projectValue": 38141947,
+        "awards": 11
+      },
+      {
+        "name": "Ellie Pavlick",
+        "affiliation": "Brown University",
+        "short": "Brown",
+        "fundingRank": 7,
+        "amount": 10333253.666666666,
+        "projectValue": 20999761,
+        "awards": 2
+      },
+      {
+        "name": "Suresh Venkatasubramanian",
+        "affiliation": "Brown University",
+        "short": "Brown",
+        "fundingRank": 8,
+        "amount": 10000000,
+        "projectValue": 20000000,
+        "awards": 1
+      },
+      {
+        "name": "Tamara Sumner",
+        "affiliation": "University of Colorado Boulder",
+        "short": "University of Colorado Boulder",
+        "fundingRank": 9,
+        "amount": 9445515.8,
+        "projectValue": 47920285,
+        "awards": 7
+      },
+      {
+        "name": "David R. Choffnes",
+        "affiliation": "Northeastern University",
+        "short": "Northeastern",
+        "fundingRank": 10,
+        "amount": 8947836.333333332,
+        "projectValue": 22244228,
+        "awards": 12
+      },
+      {
+        "name": "Tiffany Barnes",
+        "affiliation": "North Carolina State University",
+        "short": "North Carolina State",
+        "fundingRank": 11,
+        "amount": 7376845.500000001,
+        "projectValue": 23313164,
+        "awards": 18
+      },
+      {
+        "name": "Yiran Chen",
+        "affiliation": "Duke University",
+        "short": "Duke",
+        "fundingRank": 12,
+        "amount": 7155006.333333334,
+        "projectValue": 30206398,
+        "awards": 20
+      }
+    ],
+    "fundingAhead": [
+      {
+        "short": "University of Rhode Island",
+        "fundingRank": 104,
+        "publicationRank": 159,
+        "gap": 55,
+        "amount": 8115879
+      },
+      {
+        "short": "New Mexico State",
+        "fundingRank": 86,
+        "publicationRank": 139,
+        "gap": 53,
+        "amount": 11943243
+      },
+      {
+        "short": "University of Missouri",
+        "fundingRank": 88,
+        "publicationRank": 139,
+        "gap": 51,
+        "amount": 11372879.541666666
+      },
+      {
+        "short": "University of Nevada Las Vegas",
+        "fundingRank": 108,
+        "publicationRank": 159,
+        "gap": 51,
+        "amount": 7825370.333333334
+      },
+      {
+        "short": "University of Hawaii at Manoa",
+        "fundingRank": 103,
+        "publicationRank": 139,
+        "gap": 36,
+        "amount": 8226883.5
+      }
+    ],
+    "publicationsAhead": [
+      {
+        "short": "Texas A&M University",
+        "fundingRank": 167,
+        "publicationRank": 34,
+        "gap": -133,
+        "amount": 841383.75
+      },
+      {
+        "short": "Brigham Young University",
+        "fundingRank": 154,
+        "publicationRank": 110,
+        "gap": -44,
+        "amount": 2165135.6
+      },
+      {
+        "short": "University of Arizona",
+        "fundingRank": 122,
+        "publicationRank": 82,
+        "gap": -40,
+        "amount": 5977000
+      },
+      {
+        "short": "UC Merced",
+        "fundingRank": 110,
+        "publicationRank": 73,
+        "gap": -37,
+        "amount": 7714735.833333333
+      },
+      {
+        "short": "Old Dominion University",
+        "fundingRank": 176,
+        "publicationRank": 139,
+        "gap": -37,
+        "amount": 370666
+      }
+    ],
+    "fastestGrowth": [
+      {
+        "short": "Boise State",
+        "amount": 3356621.052380952,
+        "priorAmount": 199009.375,
+        "growth": 1586.6647877171374
+      },
+      {
+        "short": "University of Nevada Las Vegas",
+        "amount": 7825370.333333334,
+        "priorAmount": 499695,
+        "growth": 1466.0293445668526
+      },
+      {
+        "short": "Boston College",
+        "amount": 3331690.25,
+        "priorAmount": 244537,
+        "growth": 1262.4483207040244
+      },
+      {
+        "short": "UChicago",
+        "amount": 33360859.966666665,
+        "priorAmount": 2512751.1999999997,
+        "growth": 1227.662681711849
+      },
+      {
+        "short": "Tulane",
+        "amount": 9600051.000000004,
+        "priorAmount": 809097.5,
+        "growth": 1086.5134918844767
+      }
+    ],
+    "broadParticipation": [
+      {
+        "short": "CMU",
+        "faculty": 124,
+        "amount": 142658118.46666664,
+        "awards": 293
+      },
+      {
+        "short": "Georgia Tech",
+        "faculty": 103,
+        "amount": 119850055.78333333,
+        "awards": 278
+      },
+      {
+        "short": "UCSD",
+        "faculty": 97,
+        "amount": 119069251.81666668,
+        "awards": 235
+      },
+      {
+        "short": "UIUC",
+        "faculty": 96,
+        "amount": 108250469.76666668,
+        "awards": 236
+      },
+      {
+        "short": "UMD",
+        "faculty": 78,
+        "amount": 75538388.64999999,
+        "awards": 199
+      }
+    ],
+    "largestCollaborations": [
+      {
+        "id": "2326605",
+        "title": "Collaborative Research: National Science Foundation Expeditions in Computing: Carbon Connect -- An Ecosystem for Sustainable Computing",
+        "program": "NAIRR-Nat AI Research Resource, Expeditions in Computing",
+        "directorate": "CSE",
+        "total": 11999998,
+        "parts": 7
+      },
+      {
+        "id": "1918421",
+        "title": "Expeditions: Collaborative Research: Global Pervasive Computational Epidemiology",
+        "program": "Expeditions in Computing",
+        "directorate": "CSE",
+        "total": 10000521,
+        "parts": 10
+      },
+      {
+        "id": "2217033",
+        "title": "Collaborative Research: EnCORE: Institute for Emerging CORE Methods in Data Science",
+        "program": "TRIPODS Transdisciplinary Rese, HDR-Harnessing the Data Revolu",
+        "directorate": "CSE",
+        "total": 10000000,
+        "parts": 4
+      },
+      {
+        "id": "1730449",
+        "title": "Collaborative Research: EPiQC: Enabling Practical-Scale Quantum Computation",
+        "program": "Quantum Computing, Expeditions in Computing, FET-Fndtns of Emerging Tech, Special Projects - CCF",
+        "directorate": "CSE",
+        "total": 10000000,
+        "parts": 5
+      },
+      {
+        "id": "1729931",
+        "title": "Collaborative Research: Computational Photo-Scatterography: Unraveling Scattered Photons for Bio-Imaging",
+        "program": "Special Projects - CCF, Expeditions in Computing",
+        "directorate": "CSE",
+        "total": 9999999,
+        "parts": 5
+      }
+    ],
+    "topPrograms": [
+      {
+        "name": "Secure &Trustworthy Cyberspace",
+        "count": 929
+      },
+      {
+        "name": "Software & Hardware Foundation",
+        "count": 751
+      },
+      {
+        "name": "Info Integration & Informatics",
+        "count": 676
+      },
+      {
+        "name": "Robust Intelligence",
+        "count": 588
+      },
+      {
+        "name": "HCC-Human-Centered Computing",
+        "count": 466
+      },
+      {
+        "name": "CSR-Computer Systems Research",
+        "count": 426
+      },
+      {
+        "name": "Algorithmic Foundations",
+        "count": 418
+      },
+      {
+        "name": "Networking Technology and Syst",
+        "count": 395
       }
     ]
   }

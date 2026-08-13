@@ -42,7 +42,6 @@
         <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
         <a class="icon-link" href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer" aria-label="FAQ, methods and data" title="FAQ, methods &amp; data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.9 2.9 0 0 1 5.6 1c0 2-2.8 2.4-2.8 4.2"/><circle cx="12" cy="17.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
         <a class="icon-link" id="nsf-data-health-toggle" href="?dataHealth=true#nsf-data-health" aria-label="Data health" title="Data health"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h4l2.5-6 4 12L16 12h5"/></svg></a>
-        <span id="page-share-mount"></span>
         <a class="icon-link roars-link" href="https://roars.dev" target="_blank" rel="noopener noreferrer" aria-label="ROARS Lab" title="ROARS Lab"></a>
       </div>
       <nav class="top-nav" aria-label="Primary navigation">
@@ -87,7 +86,8 @@
       <section id="funding-faculty-results" class="results-grid"></section>
     </main>
 
-    <section id="nsf-data-health" class="site-data-health" hidden>
+    <section id="nsf-data-health" class="site-data-health" hidden aria-label="NSF funding data health">
+      <button type="button" id="nsf-data-health-close" class="data-health-close" aria-label="Close data health"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       <div id="nsf-data-health-stats" class="diagnostic-panel"></div>
     </section>
   </div>

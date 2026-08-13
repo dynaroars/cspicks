@@ -1,5 +1,5 @@
 import { drawChart } from './charts.js';
-import { areaLabels, escapeHtml } from './shared.js';
+import { areaLabels, cleanName, escapeHtml } from './shared.js';
 import { describeVerdict, explainRankGap } from './metrics.js';
 
 export const compareColors = {
@@ -229,12 +229,14 @@ export function renderComparisonSummary(container, { type, nameA, nameB, entryA,
 // affiliation history, since a common area's roster can run to hundreds.
 function nameList(names, emptyText) {
   if (!names.length) return `<p class="summary-note">${escapeHtml(emptyText)}</p>`;
-  const link = name => `<a href="index.html?q=${encodeURIComponent(name)}">${escapeHtml(name)}</a>`;
+  // The query keeps CSRankings' disambiguated name so the link resolves, but
+  // the label drops the trailing digits the way every other view does.
+  const link = name => `<a href="index.html?q=${encodeURIComponent(name)}">${escapeHtml(cleanName(name))}</a>`;
   const shown = names.slice(0, 12);
   const rest = names.slice(12);
   const shownHtml = shown.map(link).join(', ');
-  if (!rest.length) return `<p>${shownHtml}</p>`;
-  return `<p>${shownHtml}<details class="affiliation-history"><summary>+${rest.length} more</summary><span>${rest.map(link).join(', ')}</span></details></p>`;
+  if (!rest.length) return `<p class="comparison-name-list">${shownHtml}</p>`;
+  return `<p class="comparison-name-list">${shownHtml}<details class="affiliation-history"><summary>+${rest.length} more</summary><span>${rest.map(link).join(', ')}</span></details></p>`;
 }
 
 function schoolList(rows, emptyText, labelA, labelB) {
@@ -249,11 +251,12 @@ function schoolList(rows, emptyText, labelA, labelB) {
 }
 
 /**
- * Head-to-head between two research areas: region-wide totals and growth,
- * then who bridges both fields and who is newly active in each - the
- * area-level counterpart to renderComparisonSummary.
+ * Head-to-head between two research areas or two venues: region-wide totals
+ * and growth, then who bridges both and who is newly active in each - the
+ * area-level counterpart to renderComparisonSummary. `noun` names what is
+ * being compared so the copy reads correctly for either kind.
  */
-export function renderAreaComparison(container, { labelA, labelB, cmp }) {
+export function renderAreaComparison(container, { labelA, labelB, cmp, noun = 'fields' }) {
   const safeA = escapeHtml(labelA);
   const safeB = escapeHtml(labelB);
   const { a, b, bothFaculty, bothSchools } = cmp;
@@ -283,10 +286,10 @@ export function renderAreaComparison(container, { labelA, labelB, cmp }) {
     <div class="summary-card comparison-verdict"><p>${verdictLine}</p></div>
     ${renderScoreboard(safeA, safeB, rows)}
     <div class="summary-card comparison-bridge-card">
-      <h4>Bridges both fields</h4>
+      <h4>Bridges both ${escapeHtml(noun)}</h4>
       <p class="summary-note">${bothFaculty.length} researcher${bothFaculty.length === 1 ? '' : 's'} and ${bothSchools.length} universit${bothSchools.length === 1 ? 'y' : 'ies'} with active output in both ${safeA} and ${safeB} this period.</p>
-      ${schoolList(bothSchools, 'No university has active output in both fields this period.', labelA, labelB)}
-      ${nameList(bothFaculty, 'No researcher has active output in both fields this period.')}
+      ${schoolList(bothSchools, `No university has active output in both ${noun} this period.`, labelA, labelB)}
+      ${nameList(bothFaculty, `No researcher has active output in both ${noun} this period.`)}
     </div>
     <div class="comparison-leads">
       <div class="comparison-lead-column comparison-side-a">

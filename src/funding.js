@@ -7,8 +7,7 @@ import { cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
 import { createSuggestionBox, rankSuggestions } from './suggestion-box.js';
 import { initTooltipPositioning } from './tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
-import { mountShareButton } from './share.js';
-import { trackComparison, trackShare, trackView } from './analytics.js';
+import { trackComparison, trackView } from './analytics.js';
 
 const params = new URLSearchParams(window.location.search);
 const currentYear = new Date().getFullYear();
@@ -46,21 +45,34 @@ function renderDataHealth() {
   `;
 }
 
+// The panel floats in a fixed corner instead of sitting inline in the page,
+// so opening it never has to scroll the reader away from wherever they were.
 function setupDataHealth() {
   const panel = document.getElementById('nsf-data-health');
   const toggle = document.getElementById('nsf-data-health-toggle');
   if (!panel || !toggle) return;
-  if (params.get('dataHealth') === 'true') {
+  const hide = () => { panel.hidden = true; };
+  const reveal = () => {
     panel.hidden = false;
     renderDataHealth();
-  }
+  };
+  if (params.get('dataHealth') === 'true') reveal();
+  // Blocking default on mousedown (not click) stops the browser's own
+  // focus-follows-click from scrolling this off-screen toggle back into
+  // view, which would undo the point of a panel that doesn't move scroll.
+  toggle.addEventListener('mousedown', event => event.preventDefault());
   toggle.addEventListener('click', event => {
     event.preventDefault();
-    panel.hidden = !panel.hidden;
-    if (!panel.hidden) {
-      renderDataHealth();
-      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (panel.hidden) reveal();
+    else hide();
+  });
+  document.getElementById('nsf-data-health-close')?.addEventListener('click', hide);
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') hide();
+  });
+  document.addEventListener('click', event => {
+    if (panel.hidden || panel.contains(event.target) || event.target.closest('#nsf-data-health-toggle')) return;
+    hide();
   });
 }
 
@@ -287,8 +299,6 @@ function renderExamples() {
 
 async function init() {
   initTooltipPositioning();
-  const shareButton = mountShareButton('#page-share-mount', { getUrl: () => window.location.href, label: '', className: 'icon-link' });
-  shareButton?.addEventListener('click', () => trackShare('funding'), { capture: true });
   setupYears();
   const response = await fetch('./nsf-awards.json');
   if (!response.ok) throw new Error(`NSF dataset returned ${response.status}`);

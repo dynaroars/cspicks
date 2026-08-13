@@ -423,31 +423,29 @@ footer button:hover {
   cursor: pointer;
 }
 
+/* The control itself is the tooltip trigger - there is no separate ⓘ - so the
+   help panel appears on hovering or tabbing to the control it describes. */
 .search-filters .tooltip-trigger {
   position: relative;
-  color: var(--text-secondary);
-  cursor: help;
-  line-height: 1;
-}
-
-.search-filters .filter-info {
-  position: relative;
-  flex: none;
-  color: var(--text-secondary);
-  font-size: var(--text-xs);
-  cursor: help;
-  line-height: 1;
 }
 
 /* Filter help runs longer than the 260px default; `tooltip-position.js` keeps the
-   wider panel beside its own ⓘ and slides it back on screen when a control near
-   an edge (Per capita on the right, the first one on a phone) would overflow. */
+   wider panel beside its own control and slides it back on screen when one near
+   an edge (the venue set on the right, the first one on a phone) would overflow. */
 .search-filters {
   position: relative;
 }
 
-.search-filters .filter-info .tooltip-content {
+.search-filters .tooltip-content {
   width: min(340px, calc(100vw - 2rem));
+  /* The panel sits inside a <label>, where a stray click would toggle the
+     checkbox, and inside the hover target, where it would flicker. */
+  pointer-events: none;
+  /* It also inherits that label's small-caps treatment, which is meant for a
+     one-word control name, not a sentence of help text. */
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
 }
 
 @media (max-width: 640px) {
@@ -932,6 +930,14 @@ button.card-header {
   color: var(--text-secondary);
 }
 
+/* Rosters of people sit beside the university tiles in the same card, so they
+   match those tiles' type size rather than defaulting to body copy. */
+.comparison-name-list {
+  margin: 0;
+  font-size: var(--text-xs);
+  line-height: 1.7;
+}
+
 .diagnostic-panel {
   padding: 1.5rem;
   background: var(--card-bg);
@@ -1196,12 +1202,71 @@ button.card-header {
   display: none;
 }
 
+/* A floating panel, not an inline section: it must never force the reader to
+   scroll away from mid-list to see it, since the lists it sits alongside
+   lazy-load more of themselves as the reader scrolls. */
 .site-data-health {
-  margin: 2rem auto 0;
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 500;
+  width: min(420px, calc(100vw - 2rem));
+  max-height: min(75vh, 620px);
+  overflow-y: auto;
+  animation: data-health-pop-in 0.18s ease-out;
 }
 
 .site-data-health[hidden] {
   display: none;
+}
+
+.site-data-health .diagnostic-panel {
+  position: relative;
+  padding-right: 2.75rem;
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.28);
+}
+
+.data-health-close {
+  position: absolute;
+  z-index: 1;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.data-health-close:hover {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+}
+
+.data-health-close svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@keyframes data-health-pop-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 640px) {
+  .site-data-health {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    width: auto;
+  }
 }
 
 .integrated-analysis .eyebrow {
@@ -1650,12 +1715,6 @@ button.card-header {
   font-size: clamp(1.35rem, 3vw, 1.9rem);
 }
 
-.has-search-query .search-intro p,
-.has-search-query .search-intro .capability-list,
-.has-search-query .phd-callout {
-  display: none;
-}
-
 .search-intro h2 {
   margin: 0;
   color: var(--text-primary);
@@ -1663,45 +1722,6 @@ button.card-header {
   font-size: clamp(2rem, 5vw, 3.45rem);
   line-height: 1.08;
   letter-spacing: -0.045em;
-}
-
-.search-intro p {
-  margin-top: 0.75rem;
-  color: var(--text-secondary);
-  font-size: 1.05rem;
-}
-
-/* A quiet inventory of what the search box can do, not a second nav - plain
-   text with dot separators rather than buttons, so it reads as a caption. */
-.capability-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0 0.6rem;
-  margin: 0.9rem 0 0;
-  padding: 0;
-  list-style: none;
-  color: var(--text-secondary);
-  font-size: var(--text-sm);
-}
-
-.capability-list li {
-  position: relative;
-  padding-left: 0.7rem;
-}
-
-.capability-list li:first-child {
-  padding-left: 0;
-}
-
-.capability-list li:first-child::before {
-  content: none;
-}
-
-.capability-list li::before {
-  content: '·';
-  position: absolute;
-  left: 0;
 }
 
 .universal-search {
@@ -1873,26 +1893,6 @@ button.card-header {
 .search-examples button:hover {
   color: var(--text-primary);
   background: var(--hover-bg);
-}
-
-/* One quiet line, not a promo banner: same caption weight as the capability
-   list above, so it reads as "here's how this fits your workflow" rather
-   than an ad for a different site. */
-.phd-callout {
-  max-width: 640px;
-  margin: 1rem auto 0;
-  color: var(--text-secondary);
-  font-size: var(--text-sm);
-  line-height: 1.6;
-  text-align: center;
-}
-
-.phd-callout strong {
-  color: var(--text-primary);
-}
-
-.phd-callout a {
-  color: var(--accent-color);
 }
 
 .search-page .search-filters {
@@ -2098,10 +2098,6 @@ button.card-header {
 
 .search-page #integrated-analysis {
   order: 6;
-}
-
-.search-page .site-data-health {
-  order: 7;
 }
 
 .search-page .card {
@@ -2386,8 +2382,7 @@ button.card-header {
   margin-top: 2.5rem;
 }
 
-/* One shared look for every "Copy link" control on the site, icon-only or
-   with a label, always right-aligned in whatever header it sits in. */
+/* Shared look for the "Copy link" control on discovery cards. */
 .share-button {
   display: inline-flex;
   flex: none;
@@ -2421,19 +2416,6 @@ button.card-header {
 .share-button.is-flashed {
   color: var(--impact-pos-text);
   border-color: var(--impact-pos-text);
-}
-
-/* The page-header copy is icon-only, so it matches the GitHub/FAQ icons
-   beside it rather than the pill style cards use. */
-.icon-link.share-button {
-  margin-left: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-}
-
-.icon-link.share-button.is-flashed {
-  color: var(--impact-pos-text);
 }
 
 /* Briefly marks the card a shared #fragment link pointed at, so the reader

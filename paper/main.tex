@@ -1,6 +1,7 @@
 \documentclass[11pt]{article}
 
 \usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -9,10 +10,24 @@
 \usepackage{caption}
 \usepackage{microtype}
 \usepackage{url}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usepackage[hidelinks]{hyperref}
 
 \newcommand{\sys}{CS~Picks}
 \newcommand{\csr}{CSRankings}
+
+% Shared look for every plot, so the figures read as one family.
+\pgfplotsset{
+  cspicks/.style={
+    width=0.47\textwidth, height=5.2cm,
+    tick align=outside, tick pos=left,
+    grid=major, grid style={gray!20},
+    label style={font=\small}, tick label style={font=\footnotesize},
+    title style={font=\small\bfseries},
+    legend style={font=\footnotesize, draw=none, fill=none}
+  }
+}
 
 \title{\sys: An Uncertainty-Aware Interface for Exploring\\
 Computer Science Departments, Faculty, and Venues}
@@ -38,13 +53,15 @@ measurement of departmental quality.
 We present \sys{}, a static, entirely client-side web application that reuses
 \csr{}'s inputs and scoring rules but reorganizes them around the questions an
 applicant actually asks. \sys{} makes the discretionary parameters of a ranking
-manipulable and visible, and adds four views that a single ordered list cannot
+manipulable and visible, and adds views that a single ordered list cannot
 express: a \emph{rank stability} sweep that recomputes a department's position
-under every combination of look-back window and venue set; a per-subfield
+under every combination of look-back window and venue set; per-subfield
 attribution of both departmental score and individual faculty output; a
 \emph{per-faculty} ordering that measures output per head rather than in
-aggregate; and a \emph{fragility} analysis reporting how many departures would
-move a department out of its rank band.
+aggregate; a \emph{fragility} analysis reporting how many departures would move
+a department out of its rank band; head-to-head comparison of two departments,
+two researchers, or two subfields; and a funding view over NSF awards
+attributed to the same roster.
 
 Applying the stability sweep to all 190 ranked U.S.\ departments produces our
 central empirical finding: rank stability is highly unevenly distributed. The
@@ -52,9 +69,13 @@ median department moves 17 positions across 16 defensible settings, and 77.4\%
 move more than 10, yet the top-10 departments move a median of only 5. The
 ordering is therefore trustworthy exactly where readers least need guidance and
 unreliable across the broad middle where most applicants are choosing. We
-report companion analyses of venue-set sensitivity, output concentration,
-per-faculty ordering, and fragility, and describe the system's architecture and
-interface.
+report companion analyses at three levels of granularity --- department,
+researcher, and subfield --- including a per-faculty ordering that disagrees
+with the \csr{} ordering by a median of 13 positions, a subfield distribution
+in which machine learning alone accounts for 24.0\% of all U.S.\ output, an
+individual distribution in which the top 10\% of researchers produce 40.0\% of
+it, and an NSF funding ordering that agrees with the publication ordering only
+loosely ($\tau = 0.778$, median displacement 12 positions).
 \end{abstract}
 
 \section{Introduction}
@@ -85,6 +106,12 @@ the artifact itself that the same department sits at 23 under one defensible
 setting and 50 under another. The number's precision is real; its stability is
 not, and nothing on the page distinguishes the two.
 
+A single departmental ordering also answers only one of the three questions an
+applicant is actually asking. Applicants join research groups, work with
+individual advisors, and commit to a subfield. \sys{} therefore reports at all
+three levels --- department, subfield, and individual researcher --- and lets
+any two entities of the same kind be placed side by side.
+
 This paper describes \sys{}, a companion tool to a guide for prospective
 computer science doctoral students~\cite{phddemystify}. \sys{} is not an
 alternative ranking. It consumes \csr{}'s inputs and reimplements its scoring
@@ -106,9 +133,18 @@ enough to run many times in a browser. Our contributions are:
   \item \textbf{A fragility analysis} (\S\ref{sec:fragility}) reporting the
     number of departures that would move a department out of the top 10, 25, or
     50, computed without naming the individuals concerned.
+  \item \textbf{Head-to-head comparison} (\S\ref{sec:comparemethod}) of two
+    departments, two researchers, or two subfields, reporting per-area margins
+    and, for departments, a decomposition of the rank gap into the areas that
+    produced it.
+  \item \textbf{A funding view} (\S\ref{sec:nsfmethod}) over NSF awards
+    attributed to the same roster, which lets a publication-based ordering be
+    checked against an independently produced one.
   \item \textbf{An empirical characterization} (\S\ref{sec:results}) of rank
     stability, venue sensitivity, output concentration, per-faculty ordering,
-    and fragility across the U.S.\ departments in the current data.
+    fragility, the individual-researcher distribution, the subfield
+    distribution, and funding--publication divergence across the U.S.\
+    departments in the current data.
   \item \textbf{A fully client-side implementation} (\S\ref{sec:implementation})
     with no backend, in which a complete re-ranking of 20{,}822 faculty takes
     roughly 100\,ms, making interactive sensitivity analysis practical.
@@ -140,6 +176,8 @@ only those where the department is active, so a zero contributes a factor of
 one. This strongly rewards breadth: a department strong in every area beats one
 that is dominant in a few. It is the single most consequential choice in the
 formula and is often misread as an average of strengths.
+\S\ref{sec:comparison} shows it operating on a concrete pair of departments
+whose total output differs by 0.3\%.
 
 \paragraph{Venue curation.} Which conferences count is a maintained,
 contested list. \csr{} distinguishes a default set from a larger set including
@@ -190,7 +228,9 @@ name. Table~\ref{tab:dataset} summarizes the resulting corpus.
 \begin{table}[t]
 \centering
 \caption{The corpus as fetched at the time of writing. Publication records are
-per author, area, and year; they are aggregates, not individual papers.}
+per author, area, and year; they are aggregates, not individual papers. The
+final block covers the separately synchronized NSF award snapshot
+(\S\ref{sec:nsfmethod}).}
 \label{tab:dataset}
 \begin{tabular}{lr}
 \toprule
@@ -202,6 +242,12 @@ Publication records          & 296{,}267 \\
 Year range                   & 1970--2026 \\
 Faculty with a homepage      & 20{,}822 (100.0\%) \\
 Faculty with a Scholar ID    & 18{,}256 (87.7\%) \\
+\midrule
+NSF awards in snapshot       & 22{,}696 \\
+\quad within the 2016--2026 window   & 10{,}226 \\
+Faculty matched to an award  & 4{,}101 \\
+Institutions matched         & 182 \\
+Attributed award value       & \$4.12B \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -216,9 +262,10 @@ authorship, cross-institutional collaboration --- cannot be answered from
 Two optional sources extend the corpus. Affiliation histories derived from
 OpenAlex~\cite{openalex} allow publications to be credited to the institution
 an author held \emph{at publication time} rather than their current one; these
-are generated offline and loaded on demand. NSF award records~\cite{nsfawards},
-synchronized offline and attributed fractionally among principal
-investigators, support a separate funding view.
+are generated offline and loaded on demand. NSF award
+records~\cite{nsfawards}, synchronized offline and attributed fractionally
+among principal investigators, support a separate funding view
+(\S\ref{sec:nsfmethod}).
 
 \subsection{The filtering and ranking pipeline}
 
@@ -242,7 +289,9 @@ Crucially, per-faculty and per-area-per-faculty totals are accumulated
 \emph{during} stage 1 rather than derived afterwards. Under historical
 attribution a single author's output may be split across several institutions,
 and that split cannot be reconstructed from their aggregate area totals once
-the pass has finished.
+the pass has finished. The same accumulation is what makes the fragility
+analysis (\S\ref{sec:fragility}) and the per-subfield researcher tables
+(\S\ref{sec:researchers}) computable at all.
 
 \subsection{Venue sets}
 \label{sec:venuesets}
@@ -355,7 +404,84 @@ display them. Publishing a ranked list of the people whose departure would most
 damage their employer invites precisely the personnel conclusions this work
 should not support, and the aggregate quantity --- how concentrated a
 department's output is --- is what carries the analytic content. We report
-distributions across departments in \S\ref{sec:results} for the same reason.
+distributions across departments in \S\ref{sec:results} for the same reason,
+and \S\ref{sec:ethics} explains why the researcher tables of
+\S\ref{sec:researchers} are treated differently.
+
+\subsection{Researcher and subfield metrics}
+\label{sec:researchermethod}
+
+The same pipeline produces per-researcher and per-subfield aggregates, since
+stage 1 accumulates both. For a researcher we report adjusted count, paper
+count, \emph{breadth} (the number of top-level areas with any credit),
+\emph{primary-area share} (the fraction of adjusted output in their largest
+area), and a normalized-entropy \emph{balance} over the area vector. Two
+temporal quantities are computed over the selected window: \emph{consistency},
+the fraction of years with at least one credited publication, and
+\emph{momentum}, the change in adjusted output between the trailing three-year
+window and the three years before it. We call a researcher a \emph{specialist}
+when primary-area share is at least 60\%, and a \emph{generalist} when breadth
+is at least 4; the thresholds are reporting conventions, not claims.
+
+For a subfield we report region-wide adjusted total, the number of departments
+and distinct researchers with any credit, growth against the equal-length
+preceding period, and the share of the subfield's national output held by its
+five largest departments.
+
+\subsection{Head-to-head comparison}
+\label{sec:comparemethod}
+
+Two entities of the same kind are compared by taking the union of their active
+areas, ordering it by combined credit, and reporting the per-area margin
+$c_{A,a} - c_{B,a}$. Alongside it we report a small scoreboard (rank, papers,
+adjusted count, publishing faculty, and areas led, for departments; affiliation,
+papers, adjusted count, active areas, and areas led, for researchers).
+
+For departments we additionally decompose the score gap. Taking logarithms of
+Eq.~\ref{eq:score}, the difference in scores is a sum of per-area terms
+\begin{equation}
+  \ln S(A) - \ln S(B) = \frac{1}{|A|}\sum_{a} \big[\ln(c_{A,a}+1) - \ln(c_{B,a}+1)\big],
+  \label{eq:gap}
+\end{equation}
+so ranking areas by $|\ln(c_{A,a}+1) - \ln(c_{B,a}+1)|$ identifies exactly the
+areas that produced the rank gap. This is worth stating because the answer is
+frequently counterintuitive: the area where the raw margin is largest is
+usually \emph{not} the area that moved the rank, since the logarithm compresses
+differences at high volume and magnifies them near zero.
+\S\ref{sec:comparison} gives a case where the two answers point in opposite
+directions.
+
+Subfields are compared by a separate procedure, reporting each side's
+region-wide total, growth, participating departments and researchers, and the
+researchers and departments active in both.
+
+\subsection{NSF award attribution}
+\label{sec:nsfmethod}
+
+The funding view is built from a snapshot of the NSF award
+database~\cite{nsfawards}, synchronized offline by querying the award-search
+API once per (faculty, institution) pair over the \csr{} roster. Each award's
+value is split equally among its listed investigators,
+\begin{equation}
+  \text{share}(p, w) = \frac{\text{value}(w)}{|\,\text{investigators}(w)\,|},
+\end{equation}
+and a person's attributed total is the sum of their shares. Value is the
+estimated total award amount where present and the obligated amount otherwise.
+An institution's attributed total is the sum over its matched faculty.
+
+Equal splitting is a deliberate simplification and the main source of error in
+this view: NSF publishes no per-investigator allocation, so a weighted split
+would require inventing weights. We therefore report the equal share as a
+\emph{share}, and separately report the full project value, which is the more
+appropriate number for judging the scale of the work a group participates in.
+The two differ substantially for large collaborative awards, and the interface
+shows both.
+
+A name-reconciliation step maps award investigators onto the current \csr{}
+roster. \csr{} spells some faculty differently in its roster file than in its
+publication table, and only names verified against the publication table are
+retained, so an award with no resolvable investigator is dropped rather than
+attributed to an approximate match.
 
 \section{Implementation}
 \label{sec:implementation}
@@ -381,9 +507,9 @@ share a single download and parse.
 A complete pass of the pipeline over all 20{,}822 faculty and 296{,}267
 publication records --- filter, score, and rank --- takes approximately
 100\,ms. This number is what makes the stability sweep viable: 16 full
-re-rankings complete in about 1.5\,s.
+re-rankings complete in about 1.7\,s.
 
-Because 1.5\,s of uninterrupted computation would freeze the interface, the
+Because that much uninterrupted computation would freeze the interface, the
 sweep yields to the event loop between runs and reports incremental progress,
 and its result is cached per region. The cost is therefore paid once per
 region per session, and every department examined afterwards resolves from
@@ -393,13 +519,14 @@ cache.
 
 Two datasets are too large or too slow to build at page load and are generated
 offline: OpenAlex-derived affiliation histories, and the NSF award snapshot.
-A separate name-reconciliation step maps NSF award records onto the current
-\csr{} roster, because \csr{} spells some faculty differently in its roster
-file than in its publication table.
 
 Correctness is maintained by a unit suite covering the filtering, scoring, and
 ranking logic, rendering safety, and the metric definitions introduced here,
 together with an end-to-end browser suite exercising the principal user flows.
+Every number reported in \S\ref{sec:results} is emitted by a script that
+imports the shipping modules and runs them against the live \csr{} inputs, so
+the paper cannot drift from the implementation without the discrepancy being
+visible on the next regeneration.
 
 \section{Web interface}
 \label{sec:ui}
@@ -434,9 +561,12 @@ composition legible at a glance.
 
 Selecting a department or researcher opens a tabbed panel: activity,
 faculty diversity, publishing effort, conference trends, area growth,
-collaboration proxies, and --- added here --- rank stability, with the fragility
-analysis of \S\ref{sec:fragility} beneath it. Tabs that do not apply to the
-current target type are hidden rather than shown empty.
+collaboration proxies, and rank stability, with the fragility analysis of
+\S\ref{sec:fragility} beneath it. Tabs that do not apply to the current target
+type are hidden rather than shown empty --- a researcher has no faculty
+diversity --- and the researcher variant of the activity tab reports the
+pattern metrics of \S\ref{sec:researchermethod} instead of a departmental rank
+trajectory.
 
 The default view, shown before any search, ranks departments and researchers in
 two columns. A control above it switches the departmental column between the
@@ -444,14 +574,47 @@ two columns. A control above it switches the departmental column between the
 control appears only in that view, since a filtered result list is not a
 ranking.
 
-\subsection{Comparison, simulation, and discovery}
+\subsection{Comparison}
 
-An \texttt{A vs B} query switches into a head-to-head view with per-area
-margins. A separate simulator estimates how adding, removing, or transferring
-faculty would change a department's rank, resolving hypothetical candidates
-against DBLP so that real researchers not yet in \csr{} can be evaluated. A
-discoveries page surfaces notable movements without requiring the reader to
-know what to search for.
+A query of the form \texttt{A vs B} switches into a head-to-head view. The
+autocomplete completes only the trailing side, so a comparison can be typed
+without retyping the first entity, and the same syntax works for two
+departments, two researchers, or two subfields; mixed-type comparisons are
+refused with an explanation rather than silently coerced. The view renders the
+scoreboard, the per-area margin chart, and --- for departments --- the rank-gap
+decomposition of Eq.~\ref{eq:gap}. Worked examples appear in
+\S\ref{sec:comparison}.
+
+\subsection{Simulator and discoveries}
+
+A separate simulator estimates how adding, removing, or transferring faculty
+would change a department's rank, resolving hypothetical candidates against
+DBLP so that real researchers not yet in \csr{} can be evaluated. Because
+removing faculty leaves every other department's score fixed, the recomputation
+is a rescore of the affected departments plus a re-sort, and runs
+interactively.
+
+A discoveries page surfaces notable movements without requiring the reader to
+know what to search for: rank climbers and decliners, output and breadth
+changes, subfield growth and consolidation, changes of subfield leadership, and
+--- for U.S.\ and worldwide scope --- the funding sections of
+\S\ref{sec:nsf}.
+
+\subsection{Funding search}
+\label{sec:fundingui}
+
+The funding page searches the NSF snapshot independently of the publication
+data; the search page never loads it. Its autocomplete offers three groups ---
+universities, principal investigators, and NSF program names --- so
+\texttt{Secure \& Trustworthy Cyberspace} is as valid a query as
+\texttt{Carnegie Mellon University}. Results render as two parallel lists, one
+of institutions and one of faculty, each showing award count, attributed share,
+and full project value. The \texttt{A vs B} syntax works here too, over either
+institutions or investigators.
+
+A permanently visible data-health panel reports snapshot freshness, roster
+coverage, and the matching caveats of \S\ref{sec:nsfmethod}, because a funding
+figure invites more precise interpretation than it can support.
 
 \section{Features and results}
 \label{sec:results}
@@ -460,9 +623,10 @@ All figures in this section were computed by a script that runs the shipping
 implementation against the live \csr{} inputs; none are estimated or
 illustrative. Unless noted, the region is the United States, the end year is
 2026, and the baseline setting is a 10-year window with \csr{}'s default venue
-set.
+set. Institution names are abbreviated as the interface abbreviates them.
 
 \subsection{Rank stability is unevenly distributed}
+\label{sec:stabilityresults}
 
 Table~\ref{tab:stability} summarizes the sweep over all 190 ranked U.S.\
 departments.
@@ -498,6 +662,33 @@ over three quarters of departments move by more than 10. But the stratification 
 the more interesting result: the top of the ranking is markedly more stable
 than the middle. Departments with a baseline rank of 10 or better move a median
 of 5 positions; the field as a whole moves a median of 17.
+Figure~\ref{fig:stability} shows the full picture --- the left panel gives the
+cumulative distribution of spread, the right panel plots each department's
+spread against its baseline rank, where the widening cone is the stratification
+result rendered directly.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[cspicks, xlabel={Rank spread (positions)},
+  ylabel={Departments at most (\%)}, ymin=0, ymax=100, xmin=0,
+  title={Distribution of spread}]
+\addplot[thick, blue!70!black] table [x=spread, y=share] {data/spread-cdf.dat};
+\end{axis}
+\end{tikzpicture}
+\hfill
+\begin{tikzpicture}
+\begin{axis}[cspicks, xlabel={Baseline rank}, ylabel={Rank spread},
+  xmin=0, ymin=0, title={Spread against baseline rank}]
+\addplot[only marks, mark=*, mark size=1.1pt, blue!70!black, opacity=0.55]
+  table [x=baseline, y=spread] {data/spread-by-rank.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{Rank spread across the 16-setting sweep, over 190 ranked U.S.\
+departments. Stability is not a property of the ranking; it is a property of
+where in the ranking a department sits.}
+\label{fig:stability}
+\end{figure}
 
 The ordering is thus most trustworthy precisely where it is least decision-
 relevant. An applicant weighing the top handful of departments is looking at a
@@ -516,25 +707,28 @@ Table~\ref{tab:examples} gives individual envelopes.
 \centering
 \caption{Rank envelopes for selected departments across the 16 settings.}
 \label{tab:examples}
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrr}
 \toprule
-Department & Baseline & Best & Worst & Spread \\
+Department & Baseline & Best & Worst & Median & Spread \\
 \midrule
-Carnegie Mellon University                & 1  & 1  & 1  & 0 \\
-Univ.\ of Illinois at Urbana-Champaign    & 2  & 2  & 2  & 0 \\
-Northeastern University                   & 11 & 8  & 18 & 10 \\
-George Mason University                   & 32 & 23 & 50 & 27 \\
+CMU          & 1  & 1  & 1  & 1  & 0 \\
+UIUC         & 2  & 2  & 2  & 2  & 0 \\
+Northeastern & 11 & 8  & 18 & 11 & 10 \\
+GMU          & 32 & 23 & 50 & 42 & 27 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Carnegie Mellon and Illinois are genuinely invariant: they hold their positions
-under every setting tested. George Mason ranges from 23rd to 50th depending on
-nothing but the window and venue set. Reporting only the baseline value of 32
-for the latter conveys a precision the data does not support --- and this is
-the ordinary case, not a pathological one.
+CMU and UIUC are genuinely invariant: they hold their positions
+under every setting tested. GMU ranges from 23rd to 50th depending on
+nothing but the window and venue set, and its \emph{median} position across the
+sweep is 42 --- ten places below the baseline value a reader would see. So the
+baseline is not merely imprecise here; it is optimistic relative to the
+methodology's own central tendency. Reporting only 32 conveys a precision the
+data does not support, and this is the ordinary case, not a pathological one.
 
 \subsection{Venue sets correlate globally but move individual departments}
+\label{sec:venue}
 
 Table~\ref{tab:venue} compares venue sets pairwise at a fixed 10-year window.
 
@@ -544,6 +738,7 @@ Table~\ref{tab:venue} compares venue sets pairwise at a fixed 10-year window.
 Kendall's rank correlation~\cite{kendall1938}; overlap is the number of
 departments common to both top-10 lists.}
 \label{tab:venue}
+\small
 \begin{tabular}{llrrrr}
 \toprule
 Set A & Set B & $\tau$ & Median $|\Delta\text{rank}|$ & Max $|\Delta\text{rank}|$ & Top-10 overlap \\
@@ -564,6 +759,175 @@ Read as individual outcomes, they are not. Switching from \csr{}'s default set
 to CORE~A$^*$ moves the median department 5 positions and some department 20
 positions, and changes the membership of the top 10.
 
+Table~\ref{tab:toptens} makes the last point concrete by printing all four
+top-tens side by side. These are the same 190 departments, the same 10-year
+window, and the same scoring formula; only the venue list differs.
+
+\begin{table}[t]
+\centering
+\small
+\caption{The U.S.\ top ten under each of the four venue sets, 10-year window.
+Ties share a rank, so a column may list eleven names. Departments appearing in
+some columns but not others are set in italics.}
+\label{tab:toptens}
+\begin{tabular}{rllll}
+\toprule
+& \csr{} default & \csr{} all & CORE A$^*$ & CORE A/A$^*$ \\
+\midrule
+1  & CMU          & CMU          & CMU              & CMU \\
+2  & UIUC         & UIUC         & UIUC             & UIUC \\
+3  & UCSD         & UCSD         & UCSD             & UCSD \\
+4  & Georgia Tech & Georgia Tech & MIT              & Georgia Tech \\
+5  & MIT          & UW \& MIT    & Georgia Tech     & MIT \\
+6  & UW \& Berkeley & ---        & UMich            & UMD \\
+7  & ---          & UMD          & UC Berkeley      & UMich \\
+8  & UMD          & UC Berkeley  & \emph{Cornell} \& UW & UW \\
+9  & UMich        & Northeastern & ---              & UC Berkeley \\
+10 & Stanford     & UMich        & Stanford \& \emph{Purdue} & \emph{Northeastern} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Four departments --- CMU, UIUC, UCSD, and Georgia Tech (except under CORE~A$^*$,
+where it falls to 5) --- are effectively fixed. Below them the list is
+unsettled. Stanford is 10th under the default set and under CORE~A$^*$ but
+appears in neither of the other two top tens. Northeastern is 9th under
+\csr{}'s full venue list and 10th under CORE~A/A$^*$, but is outside the top ten
+under the default set and under CORE~A$^*$. Cornell and Purdue appear only
+under CORE~A$^*$. A reader who has internalized ``the top ten'' as a stable
+object is reading an artifact of one venue list.
+
+\subsubsection{What \csr{} and CORE~A$^*$ actually disagree about}
+\label{sec:venuecomposition}
+
+The rank movement above has a cause that is visible in the venue lists
+themselves, before any ranking is computed. Table~\ref{tab:venuecomp} sets the
+two lists side by side per area.
+
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\caption{Venue counts per area under each set, with the venues on which \csr{}
+(either list) and CORE~A$^*$ disagree. Areas are ordered by how much the two
+disagree; the five areas where they agree exactly are omitted. Venues marked
+$\dagger$ are in \csr{}'s extended list but not its default one.}
+\label{tab:venuecomp}
+\begin{tabular}{lrrrr ll}
+\toprule
+& \multicolumn{4}{c}{Venue count} & \multicolumn{2}{c}{Venues in one list only} \\
+\cmidrule(r){2-5}\cmidrule(l){6-7}
+Area & Def. & All & A$^*$ & A/A$^*$ & \csr{} only & CORE A$^*$ only \\
+\midrule
+AI                    & 2 & 2 & 5 & 10 & ---                                          & aamas, kr, icaps \\
+HPC                   & 3 & 3 & 0 & 3  & sc, hpdc, ics                                & --- \\
+Mobile Computing      & 3 & 3 & 4 & 4  & mobisys                                      & percom, ipsn \\
+Operating Systems     & 2 & 5 & 2 & 9  & eurosys$\dagger$, fast$\dagger$, usenixatc$\dagger$ & --- \\
+Graphics              & 2 & 3 & 5 & 7  & eurographics$\dagger$                        & acmmm, ismar \\
+Robotics              & 3 & 3 & 0 & 1  & icra, iros, rss                              & --- \\
+Machine Learning      & 3 & 4 & 6 & 8  & ---                                          & colt, icdm \\
+Design Automation     & 2 & 2 & 0 & 4  & dac, iccad                                   & --- \\
+Embedded \& Real-Time & 3 & 3 & 1 & 2  & emsoft, rtas                                 & --- \\
+Programming Languages & 2 & 4 & 2 & 6  & oopsla$\dagger$, icfp$\dagger$               & --- \\
+Networks              & 2 & 2 & 2 & 3  & nsdi                                         & infocom \\
+Cryptography          & 2 & 2 & 0 & 3  & crypto, eurocrypt                            & --- \\
+Comp.\ Biology        & 2 & 2 & 0 & 1  & ismb, recomb                                 & --- \\
+NLP                   & 3 & 3 & 2 & 5  & naacl                                        & --- \\
+Architecture          & 3 & 4 & 3 & 4  & micro                                        & --- \\
+Measurement           & 2 & 2 & 1 & 2  & imc                                          & --- \\
+Software Engineering  & 2 & 4 & 3 & 15 & issta$\dagger$                               & --- \\
+Algorithms            & 3 & 3 & 4 & 11 & ---                                          & podc \\
+Econ \& Computation   & 2 & 2 & 1 & 1  & wine                                         & --- \\
+HCI                   & 3 & 3 & 2 & 6  & ubicomp                                      & --- \\
+Visualization         & 2 & 2 & 0 & 1  & vis                                          & --- \\
+CS Education          & 1 & 1 & 0 & 4  & sigcse                                       & --- \\
+\midrule
+\textbf{Total venues} & \textbf{64} & \textbf{77} & \textbf{58} & \textbf{148} & 30 & 11 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The headline numbers are close --- \csr{}'s full list carries 77 venues against
+CORE~A$^*$'s 58 --- but the overlap is only 47. Thirty \csr{} venues are absent
+from CORE~A$^*$ and eleven CORE~A$^*$ venues are absent from \csr{}, so the two
+lists differ on 41 venues, over a third of their union. The two agree exactly
+on only five of 27 areas: computer vision, information retrieval, security,
+databases, and logic and verification.
+
+Two structural differences do most of the work. First, CORE~A$^*$ is broader in
+AI and theory --- it adds AAMAS, KR, and ICAPS to AI, COLT and ICDM to machine
+learning, and PODC to algorithms --- which is why the AI-heavy departments in
+Table~\ref{tab:toptens} hold their positions under it. Second, and far more
+consequentially, \emph{CORE~A$^*$ has no venue at all in seven of the 27 areas}:
+HPC, robotics, design automation, cryptography, computational biology,
+visualization, and CS education. \csr{} counts 15 venues across those areas
+(SC, ICRA, IROS, RSS, DAC, ICCAD, CRYPTO, EUROCRYPT, and others); CORE~A$^*$
+counts none.
+
+Under Eq.~\ref{eq:score} an area with no venues is not merely unmeasured, it is
+inert: $c_{d,a} = 0$ for every department, so the factor $(c_{d,a}+1)$ equals 1
+everywhere and the area stops discriminating between departments entirely.
+Switching to CORE~A$^*$ therefore does not reweight seven areas, it deletes
+them, and the geometric mean silently becomes an average over 20 effective
+areas rather than 27.
+
+This is measurable in exactly the way it should be. Across the 188 departments
+ranked under both sets, the median department takes 16.8\% of its adjusted
+output in those seven areas, and a department's exposure to them predicts how
+far it falls: the correlation between dropped-area share and rank shift is
+$r = 0.495$. The 72 departments with at least 20\% of their output in the
+dropped areas move a median of 2 positions worse under CORE~A$^*$, while the 50
+departments with under 10\% move a median of 7 positions better --- a
+nine-position swing driven by nothing but which subfields a reader's chosen
+venue list happens to cover.
+
+For an applicant in robotics or cryptography the practical reading is blunt: a
+CORE~A$^*$ ranking contains no information about their subfield whatsoever, and
+a department's position under it reflects only the work it does elsewhere.
+This is the strongest argument in the paper for exposing the venue set as a
+visible control rather than a buried constant.
+
+Table~\ref{tab:venuemovers} reports the departments that CORE~A$^*$ treats most
+differently from the \csr{} default.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Departments moved most by switching from \csr{}'s default venue set to
+CORE~A$^*$, 10-year window. Negative shift means the department ranks better
+under CORE~A$^*$.}
+\label{tab:venuemovers}
+\begin{tabular}{lrrrrr}
+\toprule
+Department & \csr{} default & \csr{} all & CORE A$^*$ & CORE A/A$^*$ & Shift \\
+\midrule
+\multicolumn{6}{l}{\emph{Gains under CORE~A$^*$}} \\
+Auburn                & 116 & 113 & 101 & 105 & $-15$ \\
+Brigham Young         & 116 & 113 & 101 & 115 & $-15$ \\
+Cincinnati            & 116 & 120 & 101 & 115 & $-15$ \\
+Drexel                & 89  & 89  & 75  & 84  & $-14$ \\
+Emory                 & 83  & 82  & 71  & 75  & $-12$ \\
+UC Santa Cruz         & 37  & 38  & 27  & 30  & $-10$ \\
+\midrule
+\multicolumn{6}{l}{\emph{Losses under CORE~A$^*$}} \\
+Memphis               & 108 & 113 & 128 & 115 & $+20$ \\
+Washington State      & 86  & 86  & 101 & 87  & $+15$ \\
+Delaware              & 70  & 76  & 85  & 75  & $+15$ \\
+Florida Atlantic      & 136 & 141 & 150 & 156 & $+14$ \\
+Northern Arizona      & 136 & 141 & 150 & 138 & $+14$ \\
+Alabama               & 136 & 141 & 150 & 138 & $+14$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two things stand out. First, the largest movers cluster in the tail, where the
+tied blocks noted in \S\ref{sec:background} mean a small score change crosses
+many departments at once: the five departments tied at 136 under the default
+set move together. Second, the movement is not confined to the tail. UC Santa
+Cruz sits at 37 under the default set and 27 under CORE~A$^*$ --- a ten-place
+move within the range applicants actually compare, produced entirely by
+substituting one defensible venue list for another.
+
 This is the familiar gap between a distribution and a case. A department
 evaluating itself, or an applicant evaluating a department, experiences the
 20-position move, not the 0.953 correlation. High rank correlation is
@@ -571,6 +935,7 @@ compatible with substantial individual displacement, and reporting only the
 former is how sensitivity analyses come to reassure when they should caution.
 
 \subsection{Output concentration rises sharply down the ranking}
+\label{sec:concentration}
 
 Table~\ref{tab:concentration} reports the share of a department's adjusted
 output produced by its most prolific faculty, over 166 U.S.\ departments with
@@ -611,29 +976,41 @@ position is most sensitive to which venues are counted, since a few
 individuals' venue preferences determine the department's profile.
 
 \subsection{Measuring per faculty reorders the field}
+\label{sec:percapitaresults}
 
-Table~\ref{tab:percapita} orders the 166 U.S.\ departments with at least five
-publishing faculty by adjusted output per head, against their \csr{} position.
+Table~\ref{tab:percapita} places the two departmental orderings side by side
+over the 166 U.S.\ departments with at least five publishing faculty.
 
 \begin{table}[t]
 \centering
-\caption{Top ten departments by adjusted publication count per publishing
-faculty member, 10-year window, alongside their \csr{} rank.}
+\small
+\caption{The two departmental orderings side by side, 10-year window, over the
+166 U.S.\ departments with at least five publishing faculty. The left block
+orders by the \csr{} score of Eq.~\ref{eq:score} and reports where each
+department sits per faculty; the right block orders by adjusted output per
+publishing faculty member and reports where each sits in the \csr{} order.}
 \label{tab:percapita}
-\begin{tabular}{lrrr}
+\begin{tabular}{r@{\hskip 1.5em}lrr@{\hskip 2.5em}lrrr}
 \toprule
-Department & Per faculty & Faculty & \csr{} rank \\
+& \multicolumn{3}{c}{Ordered by \csr{} score} & \multicolumn{4}{c}{Ordered per faculty} \\
+\cmidrule(r{1.2em}){2-4}\cmidrule(l){5-8}
+\# & Department & Score & Per-fac.\ & Department & Per fac.\ & Faculty & \csr{} \\
 \midrule
-Stanford University                    & 11.66 & 61  & 10 \\
-Univ.\ of California - Berkeley         & 8.32  & 85  & 7  \\
-Univ.\ of California - Los Angeles      & 7.55  & 50  & 20 \\
-Massachusetts Inst.\ of Technology      & 7.50  & 104 & 5  \\
-University of Texas at Austin          & 7.28  & 60  & 14 \\
-University of Washington               & 7.04  & 80  & 6  \\
-Carnegie Mellon University             & 6.59  & 183 & 1  \\
-University of Pennsylvania             & 6.31  & 70  & 18 \\
-Harvard University                     & 6.22  & 38  & 39 \\
-Univ.\ of Illinois at Urbana-Champaign  & 6.16  & 127 & 2  \\
+1  & CMU          & 20.6 & 7  & Stanford     & 11.66 & 61  & 10 \\
+2  & UIUC         & 16.7 & 10 & UC Berkeley  & 8.32  & 85  & 7  \\
+3  & UCSD         & 14.8 & 14 & UCLA         & 7.55  & 50  & 20 \\
+4  & Georgia Tech & 13.7 & 30 & MIT          & 7.50  & 104 & 5  \\
+5  & MIT          & 11.3 & 4  & UT Austin    & 7.28  & 60  & 14 \\
+6  & UW           & 10.7 & 6  & UW           & 7.04  & 80  & 6  \\
+7  & UC Berkeley  & 10.6 & 2  & CMU          & 6.59  & 183 & 1  \\
+8  & UMD          & 10.3 & 12 & Penn         & 6.31  & 70  & 18 \\
+9  & UMich        & 10.1 & 23 & Harvard      & 6.22  & 38  & 39 \\
+10 & Stanford     & 9.6  & 1  & UIUC         & 6.16  & 127 & 2  \\
+11 & Northeastern & 9.4  & 39 & Princeton    & 5.90  & 67  & 17 \\
+12 & Purdue       & 8.5  & 29 & UMD          & 5.88  & 98  & 8  \\
+13 & Cornell      & 8.2  & 19 & Columbia     & 5.83  & 58  & 19 \\
+14 & NYU          & 7.7  & 17 & UCSD         & 5.62  & 130 & 3  \\
+15 & UT Austin    & 7.7  & 5  & UNC          & 5.58  & 46  & 43 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -642,13 +1019,56 @@ The two orderings agree far less than the venue sets did. Kendall's $\tau$
 between them is 0.716, against 0.95 or higher for every pair of venue sets in
 Table~\ref{tab:venue}; the median department moves 13 positions and one moves
 71. Only 6 of the 10 departments in the \csr{} top ten remain in the top ten
-when measured per head.
+when measured per head. Figure~\ref{fig:percapita} plots the disagreement
+directly.
 
-The direction of the change is systematic. Carnegie Mellon leads the \csr{}
-ordering with 183 publishing faculty and places seventh per head; Stanford
-places tenth overall and first per head with 61. The departments that gain most
-are small and selective: TTI Chicago moves from 87th to 16th on 15 faculty,
-Caltech from 80th to 20th on 27, and UC Merced from 73rd to 18th on 18.
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[cspicks, width=0.62\textwidth, height=6.4cm,
+  xlabel={\csr{} rank}, ylabel={Per-faculty rank},
+  xmin=0, xmax=170, ymin=0, ymax=170]
+\addplot[gray!55, dashed, thick, forget plot] coordinates {(0,0) (170,170)};
+\addplot[only marks, mark=*, mark size=1.1pt, blue!70!black, opacity=0.55]
+  table [x=csrank, y=pcrank] {data/percapita-scatter.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{Departmental rank under the \csr{} score against rank by adjusted
+output per publishing faculty member, for the 166 U.S.\ departments with at
+least five publishing faculty. Points below the diagonal do better per head
+than in aggregate. $\tau = 0.716$.}
+\label{fig:percapita}
+\end{figure}
+
+The direction of the change is systematic. CMU leads the \csr{} ordering with
+183 publishing faculty and places seventh per head; Stanford places tenth
+overall and first per head with 61. Georgia Tech is the sharpest case inside
+the top five: fourth by \csr{} score and thirtieth per head. Northeastern,
+eleventh overall, is thirty-ninth. Running the other way, Harvard is 39th
+overall and 9th per head on 38 faculty, and UNC is 43rd overall and 15th per
+head on 46.
+
+Table~\ref{tab:percapitagains} lists the departments that gain most from the
+change of question. They are small and selective, and the volume-weighted
+ordering buries them.
+
+\begin{table}[t]
+\centering
+\caption{Departments gaining the most positions when ordered per publishing
+faculty member rather than by \csr{} score.}
+\label{tab:percapitagains}
+\begin{tabular}{lrrr}
+\toprule
+Department & \csr{} rank & Per-faculty rank & Publishing faculty \\
+\midrule
+TTI Chicago    & 87  & 16 & 15 \\
+Caltech        & 80  & 20 & 27 \\
+UC Merced      & 73  & 18 & 18 \\
+New Hampshire  & 110 & 60 & 8  \\
+New Mexico     & 127 & 79 & 8  \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 Neither ordering is more correct. A large department genuinely produces more
 research, which is what \csr{} sets out to measure, and an applicant choosing
@@ -660,6 +1080,7 @@ positions of median disagreement --- and that a single ordered list conceals
 which one it is reporting.
 
 \subsection{Many departments rest on very few people}
+\label{sec:fragilityresults}
 
 Table~\ref{tab:fragility} reports how many departures would move a department
 out of its own rank band, for the 51 departments ranked in the top 50 with at
@@ -685,10 +1106,33 @@ All resolved & 48 & 3 \\
 \end{table}
 
 Twelve of the 48 departments leave their band on a \emph{single} departure, and
-22 --- almost half --- on two or fewer. The median is three. Rice University,
-ranked 43rd with 39 publishing faculty, falls out of the top 50 when one person
-leaves. George Mason, 32nd with 54 faculty, needs three. At the other end,
-Carnegie Mellon and Northeastern never leave their bands within the 15-removal
+22 --- almost half --- on two or fewer. The median is three.
+Table~\ref{tab:fragileexamples} gives named cases.
+
+\begin{table}[t]
+\centering
+\caption{Departures required to leave a rank band, selected departments.
+``$>$15'' means the department does not leave its band within the search
+horizon. Top-3 share is the fraction of departmental adjusted output produced
+by its three most prolific members; the individuals are not identified
+(\S\ref{sec:ethics}).}
+\label{tab:fragileexamples}
+\begin{tabular}{lrrrr}
+\toprule
+Department & Rank & Band & Publishing faculty & Departures \\
+\midrule
+CMU          & 1  & 10 & 183 & $>$15 \\
+MIT          & 5  & 10 & 104 & 5 \\
+Northeastern & 11 & 25 & 115 & $>$15 \\
+GMU          & 32 & 50 & 54  & 3 \\
+Rice         & 43 & 50 & 39  & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Rice, ranked 43rd with 39 publishing faculty, falls out of the top 50 when one
+person leaves. GMU, 32nd with 54 faculty, needs three. At the other end,
+CMU and Northeastern never leave their bands within the 15-removal
 search, and MIT needs five departures to leave the top ten.
 
 Fragility tracks concentration, as it should: departments that leave their band
@@ -697,13 +1141,653 @@ needing four or more. The band medians are not monotonic --- the top-50 band has
 the lowest median at 2 --- because a department sitting near the bottom edge of
 a band is close to leaving it regardless of how its output is distributed.
 
-Read alongside \S\ref{sec:stability}, this sharpens the picture. A rank is
-contingent on methodology, moving a median of 17 positions across defensible
+Read alongside \S\ref{sec:stabilityresults}, this sharpens the picture. A rank
+is contingent on methodology, moving a median of 17 positions across defensible
 settings; it is also contingent on a handful of individuals continuing to work
 where they currently do. For an applicant, a department whose standing rests on
 one or two people is a genuinely different proposition from one of the same rank
 whose output is spread across dozens, and the rank alone does not distinguish
 them.
+
+\subsection{Individual output is more concentrated than departmental output}
+\label{sec:researchers}
+
+Departments are aggregates of people, and the aggregate hides a distribution
+far more skewed than the departmental one. Table~\ref{tab:researcherdist}
+summarizes the 5{,}987 U.S.-affiliated researchers with any credited output in
+the 10-year window.
+
+\begin{table}[t]
+\centering
+\caption{The distribution of adjusted output and breadth across 5{,}987
+U.S.-affiliated researchers with credited output in a 10-year window.
+Specialists take at least 60\% of their output in one area; generalists are
+active in at least four.}
+\label{tab:researcherdist}
+\begin{tabular}{lr}
+\toprule
+Quantity & Value \\
+\midrule
+Researchers with credited output    & 5{,}987 \\
+Median adjusted count               & 2.19 \\
+Median breadth (areas)              & 2 \\
+\midrule
+Share of output from the top 1\%    & 8.6\% \\
+Share of output from the top 5\%    & 25.9\% \\
+Share of output from the top 10\%   & 40.0\% \\
+\midrule
+Active in exactly one area          & 28.8\% \\
+Specialists ($\ge$60\% in one area) & 69.4\% \\
+Generalists ($\ge$4 areas)          & 29.3\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The top decile of researchers produces two fifths of all U.S.\ output, and the
+median researcher contributes an adjusted count of 2.19 over ten years --- the
+equivalent of roughly one four-author paper every two years. This is the
+individual-level counterpart of \S\ref{sec:concentration}, and it is the
+mechanism behind it: departmental concentration is high because the underlying
+individual distribution is heavy-tailed, and a department is simply a small
+sample from it. It also explains why fragility is so often resolved in one or
+two departures.
+
+Breadth is the other surprise. The median researcher is active in two areas and
+nearly seven in ten take the majority of their output in a single one, which
+sits awkwardly beside a departmental score (Eq.~\ref{eq:score}) that rewards
+breadth across 27 of them. Departmental breadth is assembled from specialists,
+not produced by generalists.
+
+Table~\ref{tab:topresearchers} lists the most prolific individuals.
+
+\begin{table}[t]
+\centering
+\small
+\caption{The fifteen U.S.-affiliated researchers with the highest adjusted
+count over a 10-year window. ``Share'' is the fraction of adjusted output in
+the researcher's largest area. All quantities are derived from publication
+counts \csr{} already publishes; see \S\ref{sec:ethics}.}
+\label{tab:topresearchers}
+\begin{tabular}{rllrrrlr}
+\toprule
+\# & Researcher & Department & Adj. & Papers & Areas & Primary area & Share \\
+\midrule
+1  & Sergey Levine     & UC Berkeley   & 78.9 & 370 & 6 & Machine Learning & 71\% \\
+2  & Mohit Bansal      & UNC           & 57.6 & 216 & 5 & NLP              & 61\% \\
+3  & Pieter Abbeel     & UC Berkeley   & 53.8 & 246 & 8 & Machine Learning & 66\% \\
+4  & Heng Huang        & UMD           & 51.3 & 186 & 8 & Machine Learning & 42\% \\
+5  & Stefano Ermon     & Stanford      & 47.5 & 201 & 3 & Machine Learning & 80\% \\
+6  & Graham Neubig     & CMU           & 46.5 & 201 & 7 & NLP              & 70\% \\
+7  & David P. Woodruff & CMU           & 46.0 & 146 & 9 & Machine Learning & 57\% \\
+8  & Ming-Hsuan Yang   & UC Merced     & 45.5 & 254 & 6 & Computer Vision  & 76\% \\
+9  & Dinesh Manocha    & UMD           & 44.3 & 210 & 9 & Robotics         & 47\% \\
+10 & Daniela Rus       & MIT           & 42.5 & 201 & 7 & Robotics         & 74\% \\
+11 & Quanquan Gu       & UCLA          & 40.3 & 155 & 6 & Machine Learning & 91\% \\
+12 & Trevor Darrell    & UC Berkeley   & 39.1 & 210 & 6 & Computer Vision  & 50\% \\
+13 & Alan L. Yuille    & Johns Hopkins & 36.7 & 193 & 5 & Computer Vision  & 70\% \\
+14 & J. Zico Kolter    & CMU           & 35.8 & 134 & 4 & Machine Learning & 87\% \\
+15 & Kristen Grauman   & UT Austin     & 34.6 & 107 & 4 & Computer Vision  & 77\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two observations. The head of the distribution is entirely AI-adjacent: all
+fifteen take their primary area in machine learning (seven), computer vision
+(four), NLP (two), or robotics (two). This is a fact about where publication
+volume is (\S\ref{sec:fields}) and not a statement about research importance.
+And adjusted count is not paper count: Ming-Hsuan Yang's 254 papers exceed
+those of every researcher ranked above him but one, yet he places eighth on
+adjusted count, because fractional credit divides a paper among its authors and
+the two orderings diverge for large-collaboration work. A tool that reported
+raw paper counts would produce a visibly different list.
+
+The most prolific researchers are also, mostly, specialists. The widest
+researchers are a different set, shown in Table~\ref{tab:broadest}.
+
+\begin{table}[t]
+\centering
+\caption{The widest-ranging researchers among the 300 most prolific, by number
+of top-level areas with credited output, 10-year window.}
+\label{tab:broadest}
+\begin{tabular}{llrrl}
+\toprule
+Researcher & Department & Areas & Adj. & Primary area \\
+\midrule
+Ion Stoica     & UC Berkeley  & 12 & 20.1 & Machine Learning \\
+Yanzhi Wang    & Northeastern & 12 & 15.9 & Design Automation \\
+Cong Liu       & UC Riverside & 12 & 14.1 & Embedded \& Real-Time \\
+Isil Dillig    & UT Austin    & 12 & 13.6 & Programming Languages \\
+Dawn Song      & UC Berkeley  & 11 & 25.3 & Machine Learning \\
+Xiangyu Zhang  & Purdue       & 10 & 20.3 & Software Engineering \\
+Yiran Chen     & Duke         & 10 & 18.5 & Design Automation \\
+Osbert Bastani & Penn         & 10 & 15.3 & Machine Learning \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+None of these appear in Table~\ref{tab:topresearchers}, and none is close to
+the top on volume --- twelve areas at an adjusted count of 20.1 is a quarter of
+the leader's output spread twice as wide. Under Eq.~\ref{eq:score} a department
+values these two profiles very differently: because the geometric mean
+multiplies $(c+1)$ over \emph{all} areas, a researcher who supplies the only
+credit in an otherwise empty area moves the departmental score more than a
+larger producer in a crowded one. This is the individual-level statement of the
+same effect that decides the departmental comparison in
+\S\ref{sec:comparison}.
+
+Table~\ref{tab:arealeaders} gives the most prolific researcher in each of the
+27 subfields, which is the query an applicant with a settled subfield actually
+wants and which no departmental ordering answers.
+
+\begin{table}[p]
+\centering
+\small
+\caption{The most prolific U.S.-affiliated researcher in each top-level
+subfield, 10-year window, with their adjusted count \emph{within that subfield}
+and their overall position in the researcher ordering. Subfields are ordered by
+region-wide output.}
+\label{tab:arealeaders}
+\begin{tabular}{llrlr}
+\toprule
+Subfield & Researcher & In-area adj. & Department & Overall \# \\
+\midrule
+Machine Learning      & Sergey Levine          & 55.8 & UC Berkeley   & 1 \\
+Computer Vision       & Ming-Hsuan Yang        & 34.4 & UC Merced     & 8 \\
+NLP                   & Mohit Bansal           & 34.9 & UNC           & 2 \\
+AI                    & Heng Huang             & 18.0 & UMD           & 4 \\
+Robotics              & Daniela Rus            & 31.6 & MIT           & 10 \\
+HCI                   & Chris Harrison         & 18.5 & CMU           & 111 \\
+Algorithms            & Thatchaphol Saranurak  & 18.3 & UMich         & 117 \\
+Security              & Zhiqiang Lin           & 12.6 & Ohio State    & 165 \\
+Databases             & Immanuel Trummer       & 15.9 & Cornell       & 160 \\
+Architecture          & Moinuddin K. Qureshi   & 11.8 & Georgia Tech  & 236 \\
+Info Retrieval        & Hamed Zamani           & 12.2 & UMass Amherst & 242 \\
+Design Automation     & David Z. Pan           & 10.8 & UT Austin     & 300 \\
+Software Engineering  & Hridesh Rajan          & 8.2  & Tulane        & 672 \\
+Cryptography          & Stefano Tessaro        & 16.0 & UW            & 127 \\
+Graphics              & Ravi Ramamoorthi       & 10.3 & UCSD          & 106 \\
+Visualization         & Kwan-Liu Ma            & 7.3  & UC Davis      & 580 \\
+Programming Languages & Isil Dillig            & 5.9  & UT Austin     & 259 \\
+Mobile Computing      & Xinyu Zhang            & 11.7 & UCSD          & 107 \\
+Networks              & Mohammad Alizadeh      & 6.8  & MIT           & 354 \\
+HPC                   & Devesh Tiwari          & 6.3  & Northeastern  & 318 \\
+CS Education          & Craig B. Zilles        & 7.1  & UIUC          & 808 \\
+Measurement           & Ziv Scully             & 4.1  & Cornell       & 1376 \\
+Embedded \& Real-Time & James H. Anderson      & 9.6  & UNC           & 515 \\
+Econ \& Computation   & S. Matthew Weinberg    & 7.8  & Princeton     & 196 \\
+Operating Systems     & Nickolai Zeldovich     & 4.8  & MIT           & 1191 \\
+Logic \& Verification & Kuldeep S. Meel        & 4.9  & Georgia Tech  & 70 \\
+Comp.\ Biology        & Carl Kingsford         & 5.9  & CMU           & 837 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The overall-rank column is the point of the table. The leader of a subfield is
+frequently nowhere near the top of the aggregate researcher ordering: the most
+prolific U.S.\ researcher in measurement sits 1376th overall, in operating
+systems 1191st, in computational biology 837th, and in CS education 808th.
+Only 6 of the 27 subfield leaders appear in the overall top 100, and the median
+subfield leader ranks 196th. This is not a statement
+about those researchers; it is a statement about the aggregate ordering, which
+is dominated by the volume differences between subfields
+(\S\ref{sec:fields}) rather than by standing within one. An applicant who
+searches a subfield sees the first column; an applicant who reads a global list
+of researchers sees the last, and the two disagree almost completely. The same
+caution applies to the ordering in Table~\ref{tab:topresearchers}.
+
+\subsection{Subfields differ by two orders of magnitude, and the gap is widening}
+\label{sec:fields}
+
+Table~\ref{tab:fields} reports every top-level subfield at region-wide scale.
+
+\begin{table}[p]
+\centering
+\small
+\caption{U.S.\ output by subfield over a 10-year window, with growth against
+the equal-length preceding period. ``Depts'' and ``Researchers'' count distinct
+entities with any credit in the subfield; ``Top-5'' is the share of the
+subfield's national output held by its five largest departments.}
+\label{tab:fields}
+\setlength{\tabcolsep}{4.5pt}
+\begin{tabular}{lrrrrrlr}
+\toprule
+Subfield & Adjusted & Growth & Depts & Researchers & Per res.\ & Leader & Top-5 \\
+\midrule
+Machine Learning      & 5382.7 & $+444$\% & 165 & 2422 & 2.22 & CMU          & 24.2\% \\
+Computer Vision       & 2076.2 & $+83$\%  & 156 & 1185 & 1.75 & CMU          & 20.4\% \\
+NLP                   & 1919.9 & $+189$\% & 154 & 1175 & 1.63 & CMU          & 22.1\% \\
+AI                    & 1806.4 & $+146$\% & 172 & 1861 & 0.97 & CMU          & 14.5\% \\
+Robotics              & 1707.6 & $+52$\%  & 144 & 906  & 1.89 & CMU          & 24.0\% \\
+HCI                   & 1476.3 & $+146$\% & 146 & 1202 & 1.23 & CMU          & 28.5\% \\
+Algorithms            & 1241.7 & $+20$\%  & 91  & 480  & 2.59 & CMU          & 30.2\% \\
+Security              & 1137.9 & $+164$\% & 149 & 1039 & 1.10 & Georgia Tech & 19.3\% \\
+Databases             & 573.2  & $+49$\%  & 125 & 570  & 1.01 & MIT          & 20.6\% \\
+Architecture          & 565.2  & $+82$\%  & 101 & 608  & 0.93 & UIUC         & 26.7\% \\
+Info Retrieval        & 438.7  & $+75$\%  & 140 & 729  & 0.60 & UIUC         & 22.8\% \\
+Design Automation     & 407.5  & $+10$\%  & 118 & 412  & 0.99 & UCSD         & 25.4\% \\
+Software Engineering  & 397.0  & $+60$\%  & 118 & 417  & 0.95 & CMU          & 25.5\% \\
+Cryptography          & 336.0  & $+72$\%  & 64  & 160  & 2.10 & UW           & 32.6\% \\
+Graphics              & 315.6  & $+10$\%  & 73  & 229  & 1.38 & CMU          & 36.5\% \\
+Visualization         & 310.4  & $+76$\%  & 110 & 337  & 0.92 & Utah         & 23.5\% \\
+Programming Languages & 309.1  & $+47$\%  & 91  & 363  & 0.85 & CMU          & 25.6\% \\
+Mobile Computing      & 301.2  & $+51$\%  & 105 & 413  & 0.73 & UCSD         & 22.2\% \\
+Networks              & 290.4  & $+29$\%  & 91  & 405  & 0.72 & Princeton    & 32.3\% \\
+HPC                   & 282.0  & $-4$\%   & 123 & 444  & 0.63 & Ohio State   & 18.6\% \\
+CS Education          & 264.4  & $+251$\% & 107 & 336  & 0.79 & UCSD         & 28.7\% \\
+Measurement           & 220.5  & $+10$\%  & 91  & 349  & 0.63 & Northeastern & 25.5\% \\
+Embedded \& Real-Time & 160.4  & $-27$\%  & 76  & 164  & 0.98 & WUSTL        & 38.1\% \\
+Econ \& Computation   & 154.4  & $-27$\%  & 55  & 142  & 1.09 & Cornell      & 30.6\% \\
+Operating Systems     & 147.9  & $+85$\%  & 65  & 274  & 0.54 & UC Berkeley  & 33.5\% \\
+Logic \& Verification & 119.6  & $+18$\%  & 67  & 159  & 0.75 & Georgia Tech & 28.1\% \\
+Comp.\ Biology        & 105.0  & $-31$\%  & 78  & 166  & 0.63 & CMU          & 33.9\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[cspicks, width=0.72\textwidth, height=11cm,
+  xbar, bar width=6pt,
+  xlabel={Adjusted count}, ylabel={},
+  xmin=0, ymin=0.3, ymax=27.7, y dir=reverse,
+  ytick=data, yticklabels from table={data/field-totals.dat}{label},
+  y tick label style={font=\footnotesize},
+  xmajorgrids, ymajorgrids=false,
+  nodes near coords, nodes near coords style={font=\tiny, /pgf/number format/precision=0, /pgf/number format/fixed}]
+\addplot[fill=blue!55!black, draw=none] table [x=total, y=idx] {data/field-totals.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{U.S.\ adjusted publication count by top-level subfield over a 10-year
+window. Machine learning alone accounts for 24.0\% of the total; the four
+AI-adjacent subfields together account for 49.8\%.}
+\label{fig:fields}
+\end{figure}
+
+The distribution is extraordinarily skewed (Figure~\ref{fig:fields}). Machine
+learning alone accounts for 24.0\% of all U.S.\ adjusted output. Together with
+computer vision, NLP, and AI it accounts for 49.8\% --- half the measured
+field. At the other end, computational biology, logic and verification, and
+operating systems each account for well under 1\%. The ratio between the
+largest and smallest subfield is 51:1.
+
+The growth column shows this is recent and accelerating. Machine learning grew
+444\% against the preceding decade, NLP 189\%, security 164\%. Three subfields
+contracted outright: computational biology by 31\%, embedded and real-time
+systems and economics-and-computation by 27\% each. CS education grew 251\%
+from a small base, spreading to 107 departments.
+
+This has a direct consequence for how Eq.~\ref{eq:score} behaves that is easy
+to miss. The geometric mean gives every one of the 27 areas equal weight in the
+exponent, but the areas are not equally sized, so a unit of adjusted output is
+worth far more to a department's score in operating systems --- where the
+national total is 147.9 and $\ln(c+1)$ is steeply increasing --- than in
+machine learning, where a department must add enormous volume to move the same
+factor. A department that hires one systems researcher may gain more score than
+one that hires three machine-learning researchers. This is arguably the correct
+incentive for a breadth-rewarding measure, but it is nowhere visible in the
+output, and it is why per-area credit and not just totals must be shown.
+
+Subfield leadership also turns over. Table~\ref{tab:fieldlead} lists the
+subfields whose leading department changed against the preceding period.
+
+\begin{table}[t]
+\centering
+\caption{Subfields whose leading U.S.\ department changed between the preceding
+decade and the current one.}
+\label{tab:fieldlead}
+\begin{tabular}{llll r}
+\toprule
+Subfield & Former leader & Current leader & & Growth \\
+\midrule
+NLP          & Stanford & CMU          & & $+189$\% \\
+HCI          & UW       & CMU          & & $+146$\% \\
+Algorithms   & MIT      & CMU          & & $+20$\% \\
+Databases    & CMU      & MIT          & & $+49$\% \\
+Architecture & UMich    & UIUC         & & $+82$\% \\
+Cryptography & UCLA     & UW           & & $+72$\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+CMU now leads 11 of the 27 subfields, having taken NLP, HCI, and algorithms
+from three different departments while losing databases to MIT. This is the
+concrete content behind its invariant first place in
+Table~\ref{tab:examples}: it is not first because it is far ahead anywhere in
+particular, but because it is at or near the front almost everywhere, which is
+exactly what Eq.~\ref{eq:score} rewards.
+
+Finally, the interface compares two subfields directly.
+Table~\ref{tab:fieldcompare} gives machine learning against programming
+languages, chosen as an extreme pair.
+
+\begin{table}[t]
+\centering
+\caption{Two subfields head to head, 10-year window against the preceding
+decade. ``New researchers'' are those with credit in the subfield now and none
+in the preceding period.}
+\label{tab:fieldcompare}
+\begin{tabular}{lrr}
+\toprule
+& Machine Learning & Programming Languages \\
+\midrule
+Adjusted count            & 5382.7 & 309.1 \\
+Preceding decade          & 989.1  & 210.0 \\
+Growth                    & $+444$\% & $+47$\% \\
+Departments active        & 165    & 91  \\
+Researchers active        & 2422   & 363 \\
+New researchers           & 1857   & 206 \\
+\midrule
+Leading department        & CMU (315.1) & CMU (24.1) \\
+Second                    & MIT (267.1) & MIT (15.6) \\
+Third                     & UC Berkeley (264.3) & Penn (14.3) \\
+\midrule
+Researchers active in both & \multicolumn{2}{c}{113} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The two subfields are separated by a factor of 17 in output and a factor of 6.7
+in participation, and 1{,}857 researchers entered machine learning in the last
+decade --- more than five times the entire current population of programming
+languages. Yet under Eq.~\ref{eq:score} they contribute symmetric factors to a
+department's score. An applicant told that a department is ``ranked 12th''
+learns nothing about which side of this divide its strength lies on, which is
+why the per-subfield view (\S\ref{sec:attribution}) rather than the rank is the
+thing we put in front of them.
+
+\subsection{Head-to-head comparison isolates what a rank gap is made of}
+\label{sec:comparison}
+
+Table~\ref{tab:compareuiuc} compares UIUC and MIT, three positions apart in the
+current ranking.
+
+\begin{table}[t]
+\centering
+\caption{UIUC against MIT, 10-year window. ``Areas led'' counts top-level areas
+where the department has strictly more adjusted credit.}
+\label{tab:compareuiuc}
+\begin{tabular}{lrr}
+\toprule
+& UIUC & MIT \\
+\midrule
+Overall rank        & 2      & 5 \\
+Papers              & 3488   & 3294 \\
+Adjusted count      & 782.1  & 779.7 \\
+Publishing faculty  & 127    & 104 \\
+Areas led           & 17     & 10 \\
+\midrule
+\multicolumn{3}{l}{\emph{Largest per-area margins}} \\
+Machine Learning    & 195.8 & \textbf{267.1} \\
+Algorithms          & 37.8  & \textbf{86.3} \\
+Robotics            & 37.0  & \textbf{85.5} \\
+NLP                 & \textbf{72.1} & 34.3 \\
+HCI                 & \textbf{42.6} & 22.7 \\
+\midrule
+\multicolumn{3}{l}{\emph{Areas that produced the rank gap} (Eq.~\ref{eq:gap})} \\
+Info Retrieval      & \textbf{33.1} & 2.3 \\
+CS Education        & \textbf{14.5} & 0.6 \\
+Security            & \textbf{48.8} & 8.8 \\
+HPC                 & \textbf{6.4}  & 0.5 \\
+Embedded \& Real-Time & \textbf{3.5} & 0.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This is the clearest single demonstration of what Eq.~\ref{eq:score} actually
+measures. The two departments' total adjusted output differs by 2.4 --- 0.3\%
+--- and MIT wins the three largest per-area margins outright, taking machine
+learning by 71.3, algorithms by 48.5, and robotics by 48.5. Yet UIUC ranks
+three positions higher.
+
+The decomposition explains it. Every area in the bottom block is one where MIT
+has almost no credited output: 2.3 in information retrieval, 0.6 in CS
+education, 0.0 in embedded and real-time systems. Because the score multiplies
+$(c+1)$ across all 27 areas, the move from 0.0 to 3.5 contributes more to the
+product than the move from 195.8 to 267.1 --- $\ln(4.5)-\ln(1.0) = 1.50$ against
+$\ln(268.1)-\ln(196.8) = 0.31$. The rank gap is made almost entirely of areas
+where neither department is nationally dominant and one of them is simply
+absent.
+
+Neither the raw margins nor the rank alone would tell a reader this. A
+prospective machine learning student reading ``UIUC is ranked above MIT'' is
+being told something true about a breadth-weighted aggregate and something
+false about the thing they care about, where MIT leads by 36\%. This is the
+central case for reporting per-area credit alongside the ordinal.
+
+Table~\ref{tab:comparegmu} gives a second pair further down the ranking, where
+the same mechanism operates.
+
+\begin{table}[t]
+\centering
+\caption{GMU against Rice, 10-year window.}
+\label{tab:comparegmu}
+\begin{tabular}{lrr}
+\toprule
+& GMU & Rice \\
+\midrule
+Overall rank        & 32    & 43 \\
+Papers              & 776   & 678 \\
+Adjusted count      & 178.7 & 158.3 \\
+Publishing faculty  & 54    & 39 \\
+Areas led           & 15    & 12 \\
+\midrule
+\multicolumn{3}{l}{\emph{Largest per-area margins}} \\
+Machine Learning    & 14.5 & \textbf{37.8} \\
+AI                  & 9.3  & \textbf{23.8} \\
+Computer Vision     & 5.5  & \textbf{17.3} \\
+HCI                 & \textbf{22.1} & 2.1 \\
+Security            & \textbf{22.6} & 3.6 \\
+NLP                 & \textbf{22.2} & 4.4 \\
+\midrule
+\multicolumn{3}{l}{\emph{Areas that produced the rank gap} (Eq.~\ref{eq:gap})} \\
+HCI                 & \textbf{22.1} & 2.1 \\
+Visualization       & \textbf{5.3}  & 0.0 \\
+Security            & \textbf{22.6} & 3.6 \\
+Software Engineering & \textbf{7.7} & 0.8 \\
+Graphics            & \textbf{5.5}  & 0.3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Rice is the stronger machine learning and AI department by a wide margin ---
+2.6$\times$ in machine learning --- and ranks eleven positions lower. GMU's rank
+advantage is built from HCI, security, visualization, software engineering, and
+graphics, five areas in which Rice is near zero. Recall from
+\S\ref{sec:fragilityresults} that Rice leaves the top 50 on a single departure
+while GMU needs three: the two comparisons together say that these departments
+are not close substitutes at any level of detail, despite sitting eleven
+positions apart in an ordering that reduces both to one number.
+
+The same view works for individuals. Table~\ref{tab:compareresearcher} compares
+the two most prolific U.S.\ researchers in the window.
+
+\begin{table}[t]
+\centering
+\caption{Two researchers head to head, 10-year window.}
+\label{tab:compareresearcher}
+\begin{tabular}{lrr}
+\toprule
+& Sergey Levine & Mohit Bansal \\
+\midrule
+Department       & UC Berkeley & UNC \\
+Papers           & 370   & 216 \\
+Adjusted count   & 78.9  & 57.6 \\
+Active areas     & 6     & 5 \\
+Areas led        & 3     & 3 \\
+\midrule
+Machine Learning & \textbf{55.8} & 11.2 \\
+NLP              & 0.8   & \textbf{34.9} \\
+Robotics         & \textbf{19.8} & 0.5 \\
+Computer Vision  & 1.5   & \textbf{5.8} \\
+AI               & 0.3   & \textbf{5.2} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The scoreboard reports a clear leader on volume and a tie on areas led, which
+is the honest summary: these are researchers in adjacent but different
+subfields, and the aggregate that puts one above the other is dominated by a
+single area in which they barely overlap. The interface says so rather than
+declaring a winner, and this is the reason the comparison view reports areas
+led alongside the total instead of collapsing to one verdict.
+
+\subsection{Funding orders departments differently from publications}
+\label{sec:nsf}
+
+The NSF snapshot provides a second, independently produced signal over the same
+roster. Table~\ref{tab:nsfschools} orders U.S.\ departments by attributed NSF
+award value over the same 10-year window and reports their publication rank
+alongside.
+
+\begin{table}[t]
+\centering
+\small
+\caption{The fifteen U.S.\ departments with the largest attributed NSF award
+value, awards dated 2016--2026. ``Attributed'' splits each award equally among
+its listed investigators (\S\ref{sec:nsfmethod}). ``Pub.\ rank'' is the \csr{}
+rank over the same window.}
+\label{tab:nsfschools}
+\begin{tabular}{rlrrrrr}
+\toprule
+\# & Department & Attributed & Awards & Funded faculty & Pub.\ rank & $\Delta$ \\
+\midrule
+1  & CMU          & \$142.7M & 293 & 124 & 1  & 0 \\
+2  & Georgia Tech & \$119.9M & 278 & 103 & 4  & $+2$ \\
+3  & UCSD         & \$119.1M & 235 & 97  & 3  & 0 \\
+4  & UIUC         & \$108.3M & 236 & 96  & 2  & $-2$ \\
+5  & Northeastern & \$107.0M & 216 & 75  & 11 & $+6$ \\
+6  & UT Austin    & \$91.4M  & 109 & 40  & 14 & $+8$ \\
+7  & UW           & \$82.3M  & 171 & 58  & 6  & $-1$ \\
+8  & MIT          & \$78.5M  & 173 & 69  & 5  & $-3$ \\
+9  & UW--Madison  & \$75.8M  & 157 & 58  & 14 & $+5$ \\
+10 & UMD          & \$75.5M  & 199 & 78  & 8  & $-2$ \\
+11 & UMich        & \$73.2M  & 179 & 69  & 9  & $-2$ \\
+12 & Northwestern & \$72.5M  & 153 & 54  & 25 & $+13$ \\
+13 & NYU          & \$70.8M  & 166 & 55  & 14 & $+1$ \\
+14 & Rice         & \$63.0M  & 83  & 28  & 43 & $+29$ \\
+15 & Virginia     & \$62.3M  & 151 & 47  & 28 & $+13$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The head of the two orderings agrees closely --- the same four departments lead
+both --- but agreement decays quickly. Across the 182 matched departments,
+Kendall's $\tau$ between funding rank and publication rank is 0.778, and the
+median department sits 12 positions apart in the two orderings. That is worse
+agreement than any pair of venue sets in Table~\ref{tab:venue} and comparable
+to the per-faculty disagreement of \S\ref{sec:percapitaresults}.
+Figure~\ref{fig:funding} plots it.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[cspicks, width=0.62\textwidth, height=6.4cm,
+  xlabel={Publication rank}, ylabel={NSF funding rank},
+  xmin=0, xmax=185, ymin=0, ymax=185]
+\addplot[gray!55, dashed, thick, forget plot] coordinates {(0,0) (185,185)};
+\addplot[only marks, mark=*, mark size=1.1pt, blue!70!black, opacity=0.55]
+  table [x=pubrank, y=fundrank] {data/funding-scatter.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{Publication rank against attributed-NSF-funding rank for the 182
+matched U.S.\ departments, 10-year window. $\tau = 0.778$, median displacement
+12 positions.}
+\label{fig:funding}
+\end{figure}
+
+The divergent cases are informative in both directions
+(Table~\ref{tab:nsfgap}). Rice is 43rd on publications and 14th on funding.
+Texas A\&M is 34th on publications and 167th on funding --- a 133-position gap,
+by far the largest in the data, and one worth treating as a question about the
+matching rather than a finding about the department (\S\ref{sec:limitations}).
+
+\begin{table}[t]
+\centering
+\caption{Departments where the funding and publication orderings disagree most,
+in each direction. Gap is publication rank minus funding rank.}
+\label{tab:nsfgap}
+\begin{tabular}{lrrr}
+\toprule
+Department & Funding rank & Pub.\ rank & Gap \\
+\midrule
+\multicolumn{4}{l}{\emph{Funded well above publication standing}} \\
+Rhode Island      & 104 & 159 & $+55$ \\
+New Mexico State  & 86  & 139 & $+53$ \\
+Missouri          & 88  & 139 & $+51$ \\
+UNLV              & 108 & 159 & $+51$ \\
+Hawaii at Manoa   & 103 & 139 & $+36$ \\
+\midrule
+\multicolumn{4}{l}{\emph{Publishing well above funding standing}} \\
+Texas A\&M        & 167 & 34  & $-133$ \\
+Brigham Young     & 154 & 110 & $-44$ \\
+Arizona           & 122 & 82  & $-40$ \\
+UC Merced         & 110 & 73  & $-37$ \\
+Old Dominion      & 176 & 139 & $-37$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Individual attribution is far more concentrated than departmental attribution,
+and far more sensitive to the equal-split assumption
+(Table~\ref{tab:nsffaculty}).
+
+\begin{table}[t]
+\centering
+\small
+\caption{The twelve investigators with the largest attributed NSF share,
+2016--2026. ``Project value'' is the full value of the awards they participate
+in, which for large collaborative awards is many times the attributed share.}
+\label{tab:nsffaculty}
+\begin{tabular}{rllrrr}
+\toprule
+\# & Investigator & Department & Attributed & Project value & Awards \\
+\midrule
+1  & Adam R. Klivans           & UT Austin        & \$41.2M & \$42.3M  & 5  \\
+2  & Richard G. Baraniuk       & Rice             & \$21.3M & \$109.3M & 8  \\
+3  & Sidney K. D'Mello         & Colorado Boulder & \$11.0M & \$47.1M  & 10 \\
+4  & Ashok K. Goel             & Georgia Tech     & \$10.8M & \$20.8M  & 4  \\
+5  & John Preskill             & Caltech          & \$10.7M & \$25.3M  & 2  \\
+6  & James C. Lester           & NC State         & \$10.4M & \$38.1M  & 11 \\
+7  & Ellie Pavlick             & Brown            & \$10.3M & \$21.0M  & 2  \\
+8  & Suresh Venkatasubramanian & Brown            & \$10.0M & \$20.0M  & 1  \\
+9  & Tamara Sumner             & Colorado Boulder & \$9.4M  & \$47.9M  & 7  \\
+10 & David R. Choffnes         & Northeastern     & \$8.9M  & \$22.2M  & 12 \\
+11 & Tiffany Barnes            & NC State         & \$7.4M  & \$23.3M  & 18 \\
+12 & Yiran Chen                & Duke             & \$7.2M  & \$30.2M  & 20 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The gap between the two money columns is the equal-split assumption made
+visible. The top investigator's five awards are almost entirely his own on
+paper (\$41.2M attributed against \$42.3M of project value), while the second's
+eight awards carry \$109.3M of project value of which the equal split assigns
+him \$21.3M. Neither number is the truth about how much money either person
+directs, and the interface shows both precisely so that neither can be read as
+if it were. Note also that this list has almost no overlap with the publication
+leaders of Table~\ref{tab:topresearchers}: of the twelve, only Yiran Chen
+appears anywhere in the breadth or output tables above. Funding and publication
+volume are close to orthogonal at the individual level.
+
+The award population itself is worth characterizing. Of the 10{,}226 awards in
+the window, 81.6\% are from the CISE directorate, with education (486),
+engineering (463), and mathematical and physical sciences (284) making up most
+of the remainder --- so this is not a CISE-only view, and a department strong in
+interdisciplinary work will show funding that its publication record does not
+predict. The largest programs by award count are Secure \& Trustworthy
+Cyberspace (929), Software \& Hardware Foundations (751), Information
+Integration \& Informatics (676), and Robust Intelligence (588); these are the
+program names the funding autocomplete offers as its third suggestion group
+(\S\ref{sec:fundingui}).
+
+Finally, collaborative awards are the reason the interface reports project
+value separately at all. The largest matched collaboration in the window is a
+\$12.0M National AI Research Resource award split across 7 institutional
+portions, followed by four \$10.0M Expeditions-in-Computing collaborations
+spanning 4 to 10 portions each. Attributed per investigator, these become
+unremarkable figures; read as projects, they are among the largest things in
+the data.
 
 \section{Limitations}
 \label{sec:limitations}
@@ -737,23 +1821,65 @@ numeric suffixes, which we preserve, but coauthor matching against DBLP remains
 exact-match by construction: we prefer to miss a match than to attribute one
 researcher's collaborators to another.
 
+\paragraph{Funding attribution is a lower bound, and an uneven one.} Three
+distinct effects bound the funding view. The equal split among listed
+investigators is an assumption NSF's data cannot confirm or refute. Awards are
+retrieved per current roster member and matched against their \emph{current}
+affiliation, so a grant held at a previous institution, or by a departed or
+retired investigator, is dropped rather than reassigned --- which makes every
+departmental total a lower bound whose tightness varies with faculty turnover.
+And a PI whose name resolution fails is silently absent. The Texas A\&M case in
+Table~\ref{tab:nsfgap} --- 34th on publications, 167th on funding --- is large
+enough that we would treat it as a matching artifact to be investigated rather
+than a substantive finding, and we report it as such rather than omitting it.
+
+\paragraph{Subfield boundaries are inherited, not derived.} The 27 top-level
+areas and the venue-to-area assignment come from \csr{}. Results in
+\S\ref{sec:fields} about subfield size and growth are therefore statements
+about that taxonomy: a venue reassigned upstream moves output between
+subfields, and work at a venue assigned to no area is counted nowhere. The
+striking machine-learning growth figure in particular reflects both genuine
+growth and the expansion of what the taxonomy counts as machine learning.
+
+\paragraph{Point-in-time data.} All results are computed against upstream data
+as fetched, and \csr{} updates continuously. Every number here is regenerated
+by a single script, so figures can be refreshed, but any specific value in this
+paper should be read as of its generation date rather than as a stable
+property.
+
 \section{Ethical considerations}
+\label{sec:ethics}
 
 Rankings applied to individuals invite misuse in ways that rankings applied to
 institutions do not. We adopt several constraints. \sys{} presents no
 individual-level metric as an evaluation, and reports faculty output only as the
-publication counts its sources already make public. The fragility analysis
-(\S\ref{sec:fragility}) identifies which individuals a department's rank
-depends on and deliberately does not display them, reporting only counts and the
-resulting positions. Every derived quantity is
+publication counts its sources already make public. Every derived quantity is
 labeled with what it measures and what it cannot, inline rather than in
 documentation. The system infers no protected characteristics. Because it is
 entirely client-side, it collects no record of queries.
 
-The concentration results in \S\ref{sec:results} are reported at the
-distributional level deliberately: identifying which specific individuals a
-department depends on invites exactly the personnel conclusions this work
-should not support.
+\paragraph{Why some individuals are named and others are not.} The researcher
+tables of \S\ref{sec:researchers} and the funding table of \S\ref{sec:nsf} name
+people; the fragility analysis of \S\ref{sec:fragility} does not, and the line
+between them is deliberate. Tables~\ref{tab:topresearchers}--\ref{tab:arealeaders}
+report publication counts that \csr{} and DBLP already publish per person, in
+the same units, and the tool displays them because an applicant looking for an
+advisor needs exactly this. The fragility procedure produces something
+different in kind: a ranked list of the individuals whose departure would most
+damage their employer, which exists nowhere in the public record and which
+invites personnel conclusions this work should not support. Its analytic content
+--- how concentrated a department's output is --- survives fully in the
+aggregate, so the names are withheld with nothing lost. The concentration
+results of \S\ref{sec:concentration} are reported distributionally for the same
+reason.
+
+\paragraph{Ordering people is more hazardous than ordering departments.}
+Table~\ref{tab:arealeaders} is included partly as its own counterargument: the
+median subfield leader ranks 196th on the aggregate ordering and the leader in
+measurement ranks 1376th, which demonstrates that a global ranking of
+researchers is mostly a ranking of subfield publication volume. We report the aggregate
+ordering only alongside the per-subfield one, and the interface surfaces
+researchers through search and subfield context rather than as a leaderboard.
 
 \section{Conclusion}
 
@@ -768,11 +1894,22 @@ becomes directly measurable and directly displayable.
 The measurement yields a finding we did not anticipate: rank stability is
 sharply stratified. The top ten departments are nearly invariant while the
 median department moves 17 positions across defensible settings, which means
-the ranking is most reliable in the region where readers need it least. We
-believe the appropriate response is not to propose a better ranking, but to
+the ranking is most reliable in the region where readers need it least.
+
+Reporting at three levels sharpens rather than softens that conclusion. The
+per-faculty ordering disagrees with the \csr{} ordering by a median of 13
+positions and an NSF-funding ordering by 12, so the departmental number is one
+of several defensible aggregates rather than the aggregate. Half of all
+measured output now sits in four AI-adjacent subfields, so a departmental total
+is dominated by a composition question the ordinal never states. And the top
+decile of individuals produces 40\% of all output, so a department is a small
+sample from a heavy-tailed distribution --- which is why a single departure
+resolves a quarter of the fragility cases we examined.
+
+We believe the appropriate response is not to propose a better ranking, but to
 report the envelope alongside the number, and to supply the more local
-information --- which subfield, which faculty --- that the decision actually
-turns on.
+information --- which subfield, which faculty, which funding --- that the
+decision actually turns on.
 
 \bibliographystyle{plain}
 \bibliography{refs}

@@ -82,7 +82,7 @@ function queueInfiniteList(container, items, renderItem) {
   queuedColumns.push({ container, items, renderItem });
 }
 
-function findMatchingConference(query) {
+export function findMatchingConference(query) {
   const normalized = (conferenceAliases[query] || query).toLowerCase();
   // Venues answer to their identifier and to the label the interface shows,
   // so "usenixsec", "USENIX Security" and "IEEE S&P" all resolve.

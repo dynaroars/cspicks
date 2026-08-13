@@ -1,0 +1,181 @@
+pubrank fundrank label
+1 1 {CMU}
+4 2 {Georgia Tech}
+3 3 {UCSD}
+2 4 {UIUC}
+11 5 {Northeastern}
+14 6 {UT Austin}
+6 7 {UW}
+5 8 {MIT}
+14 9 {UW--Madison}
+8 10 {UMD}
+9 11 {UMich}
+25 12 {Northwestern}
+14 13 {NYU}
+43 14 {Rice}
+28 15 {University of Virginia}
+47 16 {University of Colorado Boulder}
+43 17 {North Carolina State}
+13 18 {Cornell}
+7 19 {UC Berkeley}
+47 20 {Ohio State}
+39 21 {Arizona State}
+12 22 {Purdue}
+19 23 {Columbia}
+17 24 {Princeton}
+23 25 {UMass Amherst}
+18 26 {Penn}
+22 27 {UC Irvine}
+30 28 {Duke}
+10 29 {Stanford}
+32 30 {Penn State}
+27 31 {UC Riverside}
+21 32 {USC}
+36 33 {Virginia Tech}
+24 34 {Stony Brook}
+47 35 {UC Davis}
+52 36 {Brown}
+20 37 {UCLA}
+39 38 {Johns Hopkins}
+30 39 {University of Utah}
+47 40 {University of Minnesota}
+29 41 {Rutgers}
+53 42 {University of Central Florida}
+47 43 {University at Buffalo}
+32 44 {GMU}
+36 45 {Boston}
+25 46 {UChicago}
+34 47 {UCSB}
+39 48 {University of Illinois at Chicago}
+59 49 {University of Notre Dame}
+43 50 {Yale}
+54 51 {Oregon State}
+69 52 {Vanderbilt}
+80 53 {Caltech}
+73 54 {University of Delaware}
+59 55 {University of Florida}
+38 56 {UC Santa Cruz}
+55 57 {Indiana}
+39 58 {Harvard}
+43 59 {UNC}
+58 60 {Washington University in St. Louis}
+73 61 {Worcester Polytechnic Institute}
+69 62 {Tufts}
+63 63 {University of Connecticut}
+73 64 {Clemson}
+57 65 {Rochester Inst. of Technology}
+59 66 {University of Texas at Arlington}
+67 67 {University of Pittsburgh}
+69 68 {Florida State}
+63 69 {NJIT}
+101 70 {University of Texas at San Antonio}
+85 71 {Washington State}
+82 72 {Emory}
+56 73 {University of Texas at Dallas}
+63 74 {Michigan State}
+59 75 {University of Rochester}
+94 76 {University of Tennessee}
+82 77 {Iowa State}
+67 78 {College of William and Mary}
+69 79 {Binghamton}
+73 80 {UNC - Charlotte}
+63 81 {Dartmouth College}
+87 82 {Florida International University}
+94 83 {UMBC}
+110 84 {University of Memphis}
+101 85 {University of Nebraska}
+139 86 {New Mexico State}
+73 87 {Stevens Institute of Technology}
+139 88 {University of Missouri}
+87 89 {Temple}
+94 90 {George Washington University}
+87 91 {TTI Chicago}
+80 92 {University of Georgia}
+73 93 {University of South Florida}
+94 94 {University of North Texas}
+85 95 {Tulane}
+118 96 {University of Oklahoma}
+101 97 {Illinois Tech}
+101 98 {Colorado State}
+101 99 {Case Western Reserve University}
+87 100 {Georgetown}
+110 101 {Louisiana State}
+127 102 {University of Nevada}
+139 103 {University of Hawaii at Manoa}
+159 104 {University of Rhode Island}
+127 105 {University of Arkansas}
+110 106 {Syracuse}
+101 107 {University of Iowa}
+159 108 {University of Nevada Las Vegas}
+118 109 {Portland State}
+73 110 {UC Merced}
+127 111 {Texas Tech University}
+139 112 {The University of Alabama}
+94 113 {University of Oregon}
+101 114 {University of Houston}
+101 115 {Lehigh}
+87 116 {Drexel}
+110 117 {University of South Carolina}
+178 118 {University of Alabama - Birmingham}
+178 119 {University of Idaho}
+139 120 {Northern Arizona University}
+87 121 {Wayne State}
+82 122 {University of Arizona}
+87 123 {Rensselaer Polytechnic Institute}
+94 124 {University of Massachusetts Lowell}
+110 125 {University of New Hampshire}
+159 126 {University of Tulsa}
+139 127 {Florida Atlantic University}
+110 128 {Colorado School of Mines}
+118 129 {University of Kansas}
+139 130 {University of Texas - El Paso}
+127 131 {Georgia State}
+139 132 {Missouri S\&T}
+101 133 {Augusta}
+127 134 {DePaul}
+118 135 {Auburn}
+139 136 {UCCS}
+127 137 {Michigan Technological University}
+118 138 {Kent State}
+110 139 {Texas State}
+127 140 {Univ. of Louisiana - Lafayette}
+127 141 {University at Albany - SUNY}
+127 142 {University of New Mexico}
+127 143 {Brandeis}
+118 144 {University of Kentucky}
+159 145 {Boise State}
+118 146 {Boston College}
+139 147 {Virginia Commonwealth University}
+159 148 {Montana State}
+118 149 {University of Cincinnati}
+159 150 {Ohio}
+118 151 {Utah State}
+139 152 {University of Michigan-Dearborn}
+127 153 {Oakland}
+110 154 {Brigham Young University}
+159 155 {Mississippi State}
+139 156 {Wichita State}
+178 157 {New Mexico Tech}
+139 158 {University of Vermont}
+139 159 {University of Nebraska - Omaha}
+159 160 {University of Colorado - Denver}
+127 161 {Cleveland State}
+159 162 {Kansas State}
+139 163 {Southern Methodist University}
+159 164 {University of Louisville}
+178 165 {University of Miami}
+159 166 {Univ. of Missouri - Kansas City}
+34 167 {Texas A\&M University}
+159 168 {Towson}
+139 169 {University of Massachusetts Boston}
+178 170 {Univ. of Arkansas - Little Rock}
+139 171 {New York Tech}
+159 172 {Naval Postgraduate School}
+178 173 {University of Wyoming}
+178 174 {University of Alabama - Huntsville}
+178 175 {Oklahoma State}
+139 176 {Old Dominion University}
+159 177 {University of Southern Mississippi}
+159 178 {Baylor}
+159 179 {University of Denver}
+178 180 {University of New Orleans}
