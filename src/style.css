@@ -1054,7 +1054,6 @@ button.card-header {
 .comparison-side-b { --comparison-accent: rgba(16, 185, 129, 1); }
 
 .comparison-verdict,
-.rank-gap-card,
 .comparison-notice,
 .comparison-bridge-card,
 .comparison-leads {
@@ -1315,12 +1314,6 @@ button.card-header {
 .researcher-analysis .analysis-nav-tabs .nav-tab {
   justify-content: center;
   width: 100%;
-}
-
-/* Researcher profiles show the Activity stat cards only; the line chart is
-   school-only (analysis.js skips drawing it for researcher targets). */
-.researcher-analysis #school-trends-view .chart-container {
-  display: none;
 }
 
 .analysis-tab-info {

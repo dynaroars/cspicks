@@ -1,5 +1,5 @@
 import he from 'he';
-import { getConferenceAreaMap, schoolAliases } from './data.js';
+import { schoolAliases } from './data.js';
 import { areaLabels, cleanName, countryFlag, escapeHtml, getConferenceLabel, getInstitutionShortName, safeExternalUrl } from './shared.js';
 
 function actionAttributes(action, values = {}) {
@@ -93,47 +93,6 @@ function renderAffiliations(prof, context) {
   return `${format(sorted[0])}<details class="affiliation-history"><summary>+${sorted.length - 1} more</summary><span>${sorted.slice(1).map(format).join(', ')}</span></details>`;
 }
 
-function renderActivityGraph(prof, context) {
-  const { startYear, endYear, confSet } = context;
-  const activePubs = prof.pubs.filter(pub => pub.year >= startYear && pub.year <= endYear);
-  if (!activePubs.length) return '';
-  const effectiveStart = Math.min(...activePubs.map(pub => pub.year));
-  const effectiveEnd = Math.max(...activePubs.map(pub => pub.year));
-  const areaMap = getConferenceAreaMap(confSet);
-  const yearStats = {};
-  for (let year = effectiveStart; year <= effectiveEnd; year++) yearStats[year] = { count: 0, adjusted: 0, areas: {} };
-  activePubs.forEach(pub => {
-    const stats = yearStats[pub.year];
-    stats.count += pub.count;
-    stats.adjusted += pub.adjustedcount;
-    const area = areaMap[pub.area] || pub.area;
-    if (!stats.areas[area]) stats.areas[area] = { count: 0, adjusted: 0 };
-    stats.areas[area].count += pub.count;
-    stats.areas[area].adjusted += pub.adjustedcount;
-  });
-  const maxCount = Math.max(...Object.values(yearStats).map(stats => stats.adjusted));
-  if (!maxCount) return '';
-  const yearCount = effectiveEnd - effectiveStart + 1;
-  const barWidth = yearCount > 20 ? 'minmax(12px, 1fr)' : 'minmax(18px, 1fr)';
-
-  return `
-    <div class="activity-graph">
-      <h4>Activity (${effectiveStart}-${effectiveEnd})</h4>
-      <div class="activity-bars" style="grid-template-columns: repeat(${yearCount}, ${barWidth});">
-        ${Object.entries(yearStats).map(([year, stats]) => {
-          const breakdown = Object.entries(stats.areas)
-            .sort(([, a], [, b]) => b.adjusted - a.adjusted)
-            .map(([area, values]) => `${areaLabels[area] || area}: ${Math.ceil(values.count)} ${Math.ceil(values.count) === 1 ? 'paper' : 'papers'} (${values.adjusted.toFixed(1)} adjusted)`)
-            .join(', ');
-          const paperCount = Math.ceil(stats.count);
-          const total = `${paperCount} ${paperCount === 1 ? 'paper' : 'papers'} (${stats.adjusted.toFixed(1)} adjusted)`;
-          const tooltip = stats.count ? `${year}: ${total}${breakdown ? ` — ${breakdown}` : ''}` : `${year}: No papers`;
-          return `<div class="year-column" data-tooltip="${escapeHtml(tooltip)}"><div class="bar" style="height: ${Math.max(stats.adjusted / maxCount * 100, 2)}%;"></div><div class="year-label">'${year.slice(-2)}</div></div>`;
-        }).join('')}
-      </div>
-    </div>`;
-}
-
 export function renderProfessorCard(prof, context) {
   // A professor's flag is their current institution's country.
   const profCountry = context.rawData?.schools?.[prof.affiliation];
@@ -174,7 +133,6 @@ export function renderProfessorCard(prof, context) {
         ${historicalAffiliations ? `<div class="card-subtitle">${historicalAffiliations}</div>` : ''}
         <div class="card-stats"><strong>${prof.totalPapers}</strong> papers (<strong>${prof.totalAdjusted.toFixed(1)}</strong> adjusted)</div>
         ${prof.unitNotes?.length ? `<div class="faculty-unit-notes">Unit: ${prof.unitNotes.map(escapeHtml).join(', ')}</div>` : ''}
-        ${renderActivityGraph(prof, context)}
         <div class="stats-list">${sortedAreas.map(([area, stats]) => {
           const paperCount = Math.ceil(stats.count);
           return `<div class="stat-item"><button type="button" class="inline-link stat-label" ${actionAttributes('search-query', { query: areaLabels[area] || area })}>${escapeHtml(areaLabels[area] || area)}</button><span class="stat-count">${paperCount} ${paperCount === 1 ? 'paper' : 'papers'} (${stats.adjusted.toFixed(1)} adjusted)</span></div>`;
