@@ -1,6 +1,6 @@
 import { drawChart } from './charts.js';
 import { areaLabels, cleanName, escapeHtml } from './shared.js';
-import { describeVerdict, explainRankGap } from './metrics.js';
+import { describeVerdict } from './metrics.js';
 
 export const compareColors = {
     a: { fill: 'rgba(37, 99, 235, 0.7)', line: 'rgba(37, 99, 235, 1)' },
@@ -189,22 +189,6 @@ export function renderComparisonSummary(container, { type, nameA, nameB, entryA,
     let html = verdict(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins, areaList.length)
         + scoreboard(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins);
 
-    if (type === 'school') {
-        const gapItems = explainRankGap(entryA, entryB).slice(0, 6);
-        html += `
-            <div class="summary-card rank-gap-card">
-                <h4>What explains the rank gap?</h4>
-                <p class="summary-note">Overall rank uses a geometric mean. These are the largest area-level log-score differences.</p>
-                <div class="rank-gap-list">
-                    ${gapItems.map(item => {
-                        const leader = item.leader === 'a' ? safeNameA : safeNameB;
-                        return `<div class="rank-gap-item"><span>${escapeHtml(areaLabels[item.area] || item.area)}</span><strong>${leader}</strong><small>${Math.abs(item.logGap).toFixed(2)} log points</small></div>`;
-                    }).join('')}
-                </div>
-            </div>
-        `;
-    }
-
     const leadColumn = (side, name, insights) => `
         <div class="comparison-lead-column comparison-side-${side}">
             <h4>${name} leads</h4>
@@ -292,14 +276,14 @@ export function renderAreaComparison(container, { labelA, labelB, cmp, noun = 'f
       ${nameList(bothFaculty, `No researcher has active output in both ${noun} this period.`)}
     </div>
     <div class="comparison-leads">
-      <div class="comparison-lead-column comparison-side-a">
+      <div class="summary-card comparison-lead-column comparison-side-a">
         <h4>New to ${safeA}</h4>
-        <p class="summary-note">Active this period, not in the preceding one.</p>
+        <p class="summary-note">Active in the selected years, but not in the preceding equal-length period.</p>
         ${nameList(a.newFaculty, `No new researchers in ${labelA} this period.`)}
       </div>
-      <div class="comparison-lead-column comparison-side-b">
+      <div class="summary-card comparison-lead-column comparison-side-b">
         <h4>New to ${safeB}</h4>
-        <p class="summary-note">Active this period, not in the preceding one.</p>
+        <p class="summary-note">Active in the selected years, but not in the preceding equal-length period.</p>
         ${nameList(b.newFaculty, `No new researchers in ${labelB} this period.`)}
       </div>
     </div>

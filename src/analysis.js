@@ -615,24 +615,76 @@ function renderSchoolAnalysisSummary(current, prior, schoolName) {
 
 async function renderSchoolTrends() {
     try {
+        const canvas = document.getElementById('rankingChart');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
         const targetName = getTargetName();
         const { startYear, endYear } = filters;
         if (startYear > endYear) return;
 
         if (selectedTarget.type === 'researcher') {
-            // Researcher profiles get the stat cards only — no line chart. The
-            // school branch below still draws one, so drop any chart left over
-            // from a previous school target.
-            chartInstance?.destroy();
-            chartInstance = null;
             renderResearcherActivityMetrics(getResearcherPatterns());
+            const professor = rawData.professors[targetName];
+            const confSet = getConferenceSet();
+            const labels = [];
+            const paperCounts = [];
+            const adjustedCounts = [];
+            for (let year = startYear; year <= endYear; year++) {
+                labels.push(year);
+                const yearlyPublications = (professor?.pubs || [])
+                    .filter(pub => pub.year === year && publicationMatchesConferenceSet(pub, confSet));
+                paperCounts.push(yearlyPublications.reduce((sum, pub) => sum + (pub.count || 0), 0));
+                adjustedCounts.push(yearlyPublications.reduce((sum, pub) => sum + (pub.adjustedcount || 0), 0));
+            }
+
+            chartInstance = drawChart(ctx, chartInstance, {
+                type: 'line',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: 'Papers',
+                        data: paperCounts,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.08)',
+                        tension: 0.2,
+                        fill: false,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }, {
+                        label: 'Adjusted count',
+                        data: adjustedCounts,
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.2,
+                        fill: true,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            title: { display: true, text: 'Publication count' },
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: { display: true, text: 'Publication trends · papers and adjusted count' },
+                        tooltip: {
+                            callbacks: {
+                                footer: items => {
+                                    const index = items[0]?.dataIndex;
+                                    return index === undefined ? '' : `${paperCounts[index]} papers (${adjustedCounts[index].toFixed(1)} adjusted)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
             return;
         }
-
-        const canvas = document.getElementById('rankingChart');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
 
         const targetSchool = targetName;
         const { current, prior } = getAnalysisData();
@@ -643,8 +695,6 @@ async function renderSchoolTrends() {
         const publicationPoints = [];
         const region = filters.region;
         const regionLabel = filters.element.querySelector('#region-select')?.selectedOptions?.[0]?.textContent || 'US';
-
-        console.log('Calculating trends for', targetSchool, 'from', startYear, 'to', endYear);
 
         const windowSize = 10;
         const overallMinYear = startYear - (windowSize - 1);
