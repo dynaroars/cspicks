@@ -165,7 +165,7 @@ document.addEventListener('click', event => {
 });
 
 function getConferenceSet() {
-    return filters?.confSet || 'csrankings-default';
+    return filters?.confSet || 'all-union';
 }
 
 function setupTabs() {
@@ -420,7 +420,8 @@ const CONF_SET_LABELS = {
     'csrankings-default': 'CSRankings default',
     csrankings: 'CSRankings all',
     'core-a': 'CORE A + A*',
-    core: 'CORE A* only'
+    core: 'CORE A* only',
+    'all-union': 'All (union)'
 };
 
 // One sweep serves every school, so it is cached per region rather than per
