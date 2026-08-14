@@ -60,12 +60,12 @@ attribution of both departmental score and individual faculty output; a
 \emph{per-faculty} ordering that measures output per head rather than in
 aggregate; a \emph{fragility} analysis reporting how many departures would move
 a department out of its rank band; head-to-head comparison of two departments,
-two researchers, or two subfields; and a funding view over NSF awards
-attributed to the same roster.
+two researchers, two subfields, or two venues; and a funding view over NSF
+awards attributed to the same roster.
 
 Applying the stability sweep to all 190 ranked U.S.\ departments produces our
 central empirical finding: rank stability is highly unevenly distributed. The
-median department moves 17 positions across 16 defensible settings, and 77.4\%
+median department moves 18 positions across 20 defensible settings, and 78.9\%
 move more than 10, yet the top-10 departments move a median of only 5. The
 ordering is therefore trustworthy exactly where readers least need guidance and
 unreliable across the broad middle where most applicants are choosing. We
@@ -120,8 +120,8 @@ enough to run many times in a browser. Our contributions are:
 
 \begin{itemize}
   \item \textbf{A rank stability sweep} (\S\ref{sec:stability}) that recomputes
-    a department's rank under all 16 combinations of four look-back windows and
-    four venue sets, holding region fixed, and reports the resulting envelope
+    a department's rank under all 20 combinations of four look-back windows and
+    five venue sets, holding region fixed, and reports the resulting envelope
     rather than a point estimate.
   \item \textbf{Per-subfield attribution} (\S\ref{sec:attribution}) of both
     departmental score composition and individual faculty output, so that a
@@ -134,9 +134,9 @@ enough to run many times in a browser. Our contributions are:
     number of departures that would move a department out of the top 10, 25, or
     50, computed without naming the individuals concerned.
   \item \textbf{Head-to-head comparison} (\S\ref{sec:comparemethod}) of two
-    departments, two researchers, or two subfields, reporting per-area margins
-    and, for departments, a decomposition of the rank gap into the areas that
-    produced it.
+    departments, two researchers, two subfields, or two venues, reporting
+    per-area margins and, for departments, a decomposition of the rank gap
+    into the areas that produced it.
   \item \textbf{A funding view} (\S\ref{sec:nsfmethod}) over NSF awards
     attributed to the same roster, which lets a publication-based ordering be
     checked against an independently produced one.
@@ -182,8 +182,8 @@ whose total output differs by 0.3\%.
 \paragraph{Venue curation.} Which conferences count is a maintained,
 contested list. \csr{} distinguishes a default set from a larger set including
 additional venues; independent efforts such as the CORE
-rankings~\cite{coreportal} draw the line elsewhere. \sys{} supports four sets
-(\S\ref{sec:venuesets}).
+rankings~\cite{coreportal} draw the line elsewhere. \sys{} supports five sets
+(\S\ref{sec:venuesets}), and defaults to the broadest of them.
 
 An important structural consequence of Eq.~\ref{eq:score} is that scores are
 rounded to one decimal place before ranking, and ties share a rank under
@@ -296,17 +296,21 @@ analysis (\S\ref{sec:fragility}) and the per-subfield researcher tables
 \subsection{Venue sets}
 \label{sec:venuesets}
 
-\sys{} supports four venue sets: \csr{}'s default list; \csr{}'s extended list
-including additional venues; CORE~A$^*$ only; and CORE~A together with
-A$^*$. A venue that upstream scrapes but assigns to no research area is
-counted by none of them, matching \csr{}'s own behavior.
+\sys{} supports five venue sets: \csr{}'s default list; \csr{}'s extended list
+including additional venues; CORE~A$^*$ only; CORE~A together with A$^*$; and
+an All (Union) set combining every venue from the other four. A venue that
+upstream scrapes but assigns to no research area is counted by none of them,
+matching \csr{}'s own behavior. All (Union) is the default: a first-time
+reader is shown the most inclusive view rather than being asked to pick a
+methodological stance before they know what any of the choices mean, and can
+narrow to \csr{}'s own default set explicitly to reproduce csrankings.org.
 
 \subsection{Rank stability}
 \label{sec:stability}
 
-Let $W = \{5, 10, 20, 30\}$ be look-back windows in years and $V$ the four
+Let $W = \{5, 10, 20, 30\}$ be look-back windows in years and $V$ the five
 venue sets. For a fixed region $r$ and end year $y_1$, the sweep evaluates the
-pipeline at every $(w, v) \in W \times V$, yielding 16 complete rankings. For a
+pipeline at every $(w, v) \in W \times V$, yielding 20 complete rankings. For a
 department $d$ we report the envelope
 \begin{equation}
   \big[\min_{(w,v)} \rho_{w,v}(d),\ \max_{(w,v)} \rho_{w,v}(d)\big],
@@ -453,7 +457,10 @@ directions.
 
 Subfields are compared by a separate procedure, reporting each side's
 region-wide total, growth, participating departments and researchers, and the
-researchers and departments active in both.
+researchers and departments active in both. The same procedure applies to a
+pair of individual venues rather than top-level areas, so a reader can compare
+two conferences directly (e.g.\ \texttt{PLDI vs ICSE}) instead of only the
+subfields they belong to.
 
 \subsection{NSF award attribution}
 \label{sec:nsfmethod}
@@ -569,21 +576,28 @@ pattern metrics of \S\ref{sec:researchermethod} instead of a departmental rank
 trajectory.
 
 The default view, shown before any search, ranks departments and researchers in
-two columns. A control above it switches the departmental column between the
-\csr{} score and the per-faculty ordering of \S\ref{sec:percapita}; the
-control appears only in that view, since a filtered result list is not a
-ranking.
+two columns. A ``Per capita'' filter-bar toggle switches the departmental
+column between the \csr{} score and the per-faculty ordering of
+\S\ref{sec:percapita}; the toggle is offered only on the pages where a
+ranking is the thing being shown --- Search, the discoveries feed, and the
+simulator --- and not on the funding page, since a filtered result list is not
+a ranking. On Discoveries the same setting re-ranks the university-level
+insight calculators; on the simulator it re-ranks the rank-impact estimate
+shown for a hypothetical roster change.
 
 \subsection{Comparison}
 
 A query of the form \texttt{A vs B} switches into a head-to-head view. The
 autocomplete completes only the trailing side, so a comparison can be typed
 without retyping the first entity, and the same syntax works for two
-departments, two researchers, or two subfields; mixed-type comparisons are
-refused with an explanation rather than silently coerced. The view renders the
-scoreboard, the per-area margin chart, and --- for departments --- the rank-gap
-decomposition of Eq.~\ref{eq:gap}. Worked examples appear in
-\S\ref{sec:comparison}.
+departments, two researchers, two subfields, or two individual venues; mixed-type
+comparisons are refused with an explanation rather than silently coerced. The
+view renders a verdict, the scoreboard, and the per-area margin chart. The
+rank-gap decomposition of Eq.~\ref{eq:gap} is not surfaced as a separate
+interface card --- an earlier version showed it directly, but it restated the
+scoreboard's ``areas led'' row without adding information a reader could act
+on --- and instead is what this paper's own worked examples in
+\S\ref{sec:comparison} are computed with, offline, from the same function.
 
 \subsection{Simulator and discoveries}
 
@@ -633,8 +647,8 @@ departments.
 
 \begin{table}[t]
 \centering
-\caption{Rank spread (worst minus best position) across 16 settings --- four
-look-back windows $\times$ four venue sets --- for 190 ranked U.S.\
+\caption{Rank spread (worst minus best position) across 20 settings --- four
+look-back windows $\times$ five venue sets --- for 190 ranked U.S.\
 departments. Strata are defined by baseline rank.}
 \label{tab:stability}
 \begin{tabular}{lrr}
@@ -644,24 +658,24 @@ Stratum & Departments & Median spread \\
 Baseline rank $\le$ 10   & 10  & 5.0 \\
 Baseline rank $\le$ 25   & 26  & 6.0 \\
 Baseline rank $\le$ 50   & 51  & 10.0 \\
-All ranked departments   & 190 & 17.0 \\
+All ranked departments   & 190 & 18.0 \\
 \midrule
 \multicolumn{3}{l}{\emph{Distribution over all departments}} \\
 First quartile of spread   & \multicolumn{2}{r}{11 positions} \\
-Median spread              & \multicolumn{2}{r}{17 positions} \\
+Median spread              & \multicolumn{2}{r}{18 positions} \\
 Third quartile of spread   & \multicolumn{2}{r}{25 positions} \\
 Maximum spread             & \multicolumn{2}{r}{46 positions} \\
-Departments moving $>$10   & \multicolumn{2}{r}{77.4\%} \\
-Departments moving $>$25   & \multicolumn{2}{r}{23.2\%} \\
+Departments moving $>$10   & \multicolumn{2}{r}{78.9\%} \\
+Departments moving $>$25   & \multicolumn{2}{r}{24.2\%} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The headline number is the median spread of 17 positions, and the fact that
+The headline number is the median spread of 18 positions, and the fact that
 over three quarters of departments move by more than 10. But the stratification is
 the more interesting result: the top of the ranking is markedly more stable
 than the middle. Departments with a baseline rank of 10 or better move a median
-of 5 positions; the field as a whole moves a median of 17.
+of 5 positions; the field as a whole moves a median of 18.
 Figure~\ref{fig:stability} shows the full picture --- the left panel gives the
 cumulative distribution of spread, the right panel plots each department's
 spread against its baseline rank, where the widening cone is the stratification
@@ -684,7 +698,7 @@ result rendered directly.
   table [x=baseline, y=spread] {data/spread-by-rank.dat};
 \end{axis}
 \end{tikzpicture}
-\caption{Rank spread across the 16-setting sweep, over 190 ranked U.S.\
+\caption{Rank spread across the 20-setting sweep, over 190 ranked U.S.\
 departments. Stability is not a property of the ranking; it is a property of
 where in the ranking a department sits.}
 \label{fig:stability}
@@ -699,13 +713,13 @@ reading an ordering in which a 20-position difference can be produced entirely
 by moving the window from 10 years to 20.
 
 Even at the top, stability is not absolute: of the 10 departments in the
-baseline top 10, only 5 remain in the top 10 under all 16 settings.
+baseline top 10, only 5 remain in the top 10 under all 20 settings.
 
 Table~\ref{tab:examples} gives individual envelopes.
 
 \begin{table}[t]
 \centering
-\caption{Rank envelopes for selected departments across the 16 settings.}
+\caption{Rank envelopes for selected departments across the 20 settings.}
 \label{tab:examples}
 \begin{tabular}{lrrrrr}
 \toprule
@@ -713,14 +727,14 @@ Department & Baseline & Best & Worst & Median & Spread \\
 \midrule
 CMU          & 1  & 1  & 1  & 1  & 0 \\
 UIUC         & 2  & 2  & 2  & 2  & 0 \\
-Northeastern & 11 & 8  & 18 & 11 & 10 \\
-GMU          & 32 & 23 & 50 & 42 & 27 \\
+Northeastern & 11 & 6  & 18 & 11 & 12 \\
+GMU          & 32 & 23 & 51 & 42 & 28 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 CMU and UIUC are genuinely invariant: they hold their positions
-under every setting tested. GMU ranges from 23rd to 50th depending on
+under every setting tested. GMU ranges from 23rd to 51st depending on
 nothing but the window and venue set, and its \emph{median} position across the
 sweep is 42 --- ten places below the baseline value a reader would see. So the
 baseline is not merely imprecise here; it is optimistic relative to the
@@ -746,9 +760,13 @@ Set A & Set B & $\tau$ & Median $|\Delta\text{rank}|$ & Max $|\Delta\text{rank}|
 \csr{} default & \csr{} all    & 0.982 & 2 & 18 & 9 \\
 \csr{} default & CORE A$^*$    & 0.953 & 5 & 20 & 9 \\
 \csr{} default & CORE A/A$^*$  & 0.973 & 2 & 20 & 9 \\
+\csr{} default & All (Union)   & 0.982 & 2 & 18 & 9 \\
 \csr{} all     & CORE A$^*$    & 0.952 & 5 & 19 & 8 \\
 \csr{} all     & CORE A/A$^*$  & 0.973 & 3 & 15 & 10 \\
+\csr{} all     & All (Union)   & 0.997 & 0 & 8  & 10 \\
 CORE A$^*$     & CORE A/A$^*$  & 0.961 & 4 & 15 & 8 \\
+CORE A$^*$     & All (Union)   & 0.951 & 5 & 19 & 8 \\
+CORE A/A$^*$   & All (Union)   & 0.974 & 3 & 15 & 10 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -757,44 +775,50 @@ Read as aggregate correlations, these numbers are reassuring: $\tau$ never
 falls below 0.95, so the venue sets broadly agree about the shape of the field.
 Read as individual outcomes, they are not. Switching from \csr{}'s default set
 to CORE~A$^*$ moves the median department 5 positions and some department 20
-positions, and changes the membership of the top 10.
+positions, and changes the membership of the top 10. All (Union) is the
+outlier in the other direction: because it is a superset of \csr{}'s extended
+list, it agrees with \csr{} all almost exactly ($\tau = 0.997$, a median
+displacement of 0 positions) --- the venues CORE contributes on top of \csr{}'s
+own lists move few departments enough to matter at this window.
 
-Table~\ref{tab:toptens} makes the last point concrete by printing all four
+Table~\ref{tab:toptens} makes the last point concrete by printing all five
 top-tens side by side. These are the same 190 departments, the same 10-year
 window, and the same scoring formula; only the venue list differs.
 
 \begin{table}[t]
 \centering
 \small
-\caption{The U.S.\ top ten under each of the four venue sets, 10-year window.
+\caption{The U.S.\ top ten under each of the five venue sets, 10-year window.
 Ties share a rank, so a column may list eleven names. Departments appearing in
 some columns but not others are set in italics.}
 \label{tab:toptens}
-\begin{tabular}{rllll}
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{rlllll}
 \toprule
-& \csr{} default & \csr{} all & CORE A$^*$ & CORE A/A$^*$ \\
+& \csr{} default & \csr{} all & CORE A$^*$ & CORE A/A$^*$ & All (Union) \\
 \midrule
-1  & CMU          & CMU          & CMU              & CMU \\
-2  & UIUC         & UIUC         & UIUC             & UIUC \\
-3  & UCSD         & UCSD         & UCSD             & UCSD \\
-4  & Georgia Tech & Georgia Tech & MIT              & Georgia Tech \\
-5  & MIT          & UW \& MIT    & Georgia Tech     & MIT \\
-6  & UW \& Berkeley & ---        & UMich            & UMD \\
-7  & ---          & UMD          & UC Berkeley      & UMich \\
-8  & UMD          & UC Berkeley  & \emph{Cornell} \& UW & UW \\
-9  & UMich        & Northeastern & ---              & UC Berkeley \\
-10 & Stanford     & UMich        & Stanford \& \emph{Purdue} & \emph{Northeastern} \\
+1  & CMU  & CMU  & CMU  & CMU  & CMU \\
+2  & UIUC & UIUC & UIUC & UIUC & UIUC \\
+3  & UCSD & UCSD & UCSD & UCSD & UCSD \\
+4  & Georgia Tech & Georgia Tech & MIT & Georgia Tech & Georgia Tech \\
+5  & MIT  & UW \& MIT & Georgia Tech & MIT & UW \\
+6  & UW \& Berkeley & --- & UMich & \emph{UMD} & MIT \\
+7  & --- & \emph{UMD} & Berkeley & UMich & \emph{UMD} \\
+8  & \emph{UMD} & Berkeley & \emph{Cornell} \& UW & UW & \emph{Northeastern} \& Berkeley \\
+9  & UMich & \emph{Northeastern} & --- & Berkeley & --- \\
+10 & \emph{Stanford} & UMich & \emph{Stanford} \& \emph{Purdue} & \emph{Northeastern} & UMich \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 Four departments --- CMU, UIUC, UCSD, and Georgia Tech (except under CORE~A$^*$,
 where it falls to 5) --- are effectively fixed. Below them the list is
-unsettled. Stanford is 10th under the default set and under CORE~A$^*$ but
-appears in neither of the other two top tens. Northeastern is 9th under
-\csr{}'s full venue list and 10th under CORE~A/A$^*$, but is outside the top ten
-under the default set and under CORE~A$^*$. Cornell and Purdue appear only
-under CORE~A$^*$. A reader who has internalized ``the top ten'' as a stable
+unsettled. UMD appears in four of the five top tens but never under CORE~A$^*$.
+Stanford is 10th under the default set and under CORE~A$^*$ but appears in
+none of the other three. Northeastern is 9th under \csr{}'s full venue list,
+10th under CORE~A/A$^*$, and tied for 8th under All (Union), but is outside
+the top ten under the default set and under CORE~A$^*$. Cornell and Purdue
+appear only under CORE~A$^*$. A reader who has internalized ``the top ten'' as a stable
 object is reading an artifact of one venue list.
 
 \subsubsection{What \csr{} and CORE~A$^*$ actually disagree about}

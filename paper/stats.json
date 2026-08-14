@@ -8,17 +8,17 @@
     "withHomepage": 20822,
     "withScholar": 18256
   },
-  "sweepMs": 1423,
+  "sweepMs": 2060,
   "stability": {
     "region": "us",
-    "settings": 16,
+    "settings": 20,
     "schools": 190,
-    "spreadMedian": 17,
+    "spreadMedian": 18,
     "spreadQ1": 11,
     "spreadQ3": 25,
     "spreadMax": 46,
-    "shareSpreadOver10": 77.36842105263158,
-    "shareSpreadOver25": 23.157894736842106,
+    "shareSpreadOver10": 78.94736842105263,
+    "shareSpreadOver25": 24.210526315789473,
     "top10": {
       "n": 10,
       "medianSpread": 5
@@ -46,8 +46,8 @@
         "name": "George Mason University",
         "baseline": 32,
         "best": 23,
-        "worst": 50,
-        "spread": 27,
+        "worst": 51,
+        "spread": 28,
         "median": 42,
         "short": "GMU"
       },
@@ -63,9 +63,9 @@
       {
         "name": "Northeastern University",
         "baseline": 11,
-        "best": 8,
+        "best": 6,
         "worst": 18,
-        "spread": 10,
+        "spread": 12,
         "median": 11,
         "short": "Northeastern"
       }
@@ -103,6 +103,16 @@
       "top10Jaccard": 0.8181818181818182
     },
     {
+      "a": "csrankings-default",
+      "b": "all-union",
+      "shared": 190,
+      "tau": 0.9819763573018563,
+      "medianAbsRankChange": 2,
+      "maxAbsRankChange": 18,
+      "top10Overlap": 9,
+      "top10Jaccard": 0.8181818181818182
+    },
+    {
       "a": "csrankings",
       "b": "core",
       "shared": 187,
@@ -123,6 +133,16 @@
       "top10Jaccard": 1
     },
     {
+      "a": "csrankings",
+      "b": "all-union",
+      "shared": 190,
+      "tau": 0.9972796219749656,
+      "medianAbsRankChange": 0,
+      "maxAbsRankChange": 8,
+      "top10Overlap": 10,
+      "top10Jaccard": 1
+    },
+    {
       "a": "core",
       "b": "core-a",
       "shared": 187,
@@ -131,6 +151,26 @@
       "maxAbsRankChange": 15,
       "top10Overlap": 8,
       "top10Jaccard": 0.6153846153846154
+    },
+    {
+      "a": "core",
+      "b": "all-union",
+      "shared": 187,
+      "tau": 0.951259189499031,
+      "medianAbsRankChange": 5,
+      "maxAbsRankChange": 19,
+      "top10Overlap": 8,
+      "top10Jaccard": 0.6153846153846154
+    },
+    {
+      "a": "core-a",
+      "b": "all-union",
+      "shared": 189,
+      "tau": 0.9741559592305208,
+      "medianAbsRankChange": 3,
+      "maxAbsRankChange": 15,
+      "top10Overlap": 10,
+      "top10Jaccard": 1
     }
   ],
   "concentration": {
@@ -531,7 +571,8 @@
           "csrankings-default": 116,
           "csrankings": 113,
           "core": 101,
-          "core-a": 105
+          "core-a": 105,
+          "all-union": 114
         },
         "shift": -15
       },
@@ -542,7 +583,8 @@
           "csrankings-default": 116,
           "csrankings": 113,
           "core": 101,
-          "core-a": 115
+          "core-a": 115,
+          "all-union": 114
         },
         "shift": -15
       },
@@ -553,7 +595,8 @@
           "csrankings-default": 116,
           "csrankings": 120,
           "core": 101,
-          "core-a": 115
+          "core-a": 115,
+          "all-union": 120
         },
         "shift": -15
       },
@@ -564,7 +607,8 @@
           "csrankings-default": 89,
           "csrankings": 89,
           "core": 75,
-          "core-a": 84
+          "core-a": 84,
+          "all-union": 89
         },
         "shift": -14
       },
@@ -575,7 +619,8 @@
           "csrankings-default": 83,
           "csrankings": 82,
           "core": 71,
-          "core-a": 75
+          "core-a": 75,
+          "all-union": 82
         },
         "shift": -12
       },
@@ -586,7 +631,8 @@
           "csrankings-default": 37,
           "csrankings": 38,
           "core": 27,
-          "core-a": 30
+          "core-a": 30,
+          "all-union": 37
         },
         "shift": -10
       },
@@ -597,7 +643,8 @@
           "csrankings-default": 124,
           "csrankings": 128,
           "core": 114,
-          "core-a": 122
+          "core-a": 122,
+          "all-union": 128
         },
         "shift": -10
       },
@@ -608,7 +655,8 @@
           "csrankings-default": 124,
           "csrankings": 120,
           "core": 114,
-          "core-a": 122
+          "core-a": 122,
+          "all-union": 120
         },
         "shift": -10
       }
@@ -621,7 +669,8 @@
           "csrankings-default": 108,
           "csrankings": 113,
           "core": 128,
-          "core-a": 115
+          "core-a": 115,
+          "all-union": 114
         },
         "shift": 20
       },
@@ -632,7 +681,8 @@
           "csrankings-default": 86,
           "csrankings": 86,
           "core": 101,
-          "core-a": 87
+          "core-a": 87,
+          "all-union": 86
         },
         "shift": 15
       },
@@ -643,7 +693,8 @@
           "csrankings-default": 70,
           "csrankings": 76,
           "core": 85,
-          "core-a": 75
+          "core-a": 75,
+          "all-union": 78
         },
         "shift": 15
       },
@@ -654,7 +705,8 @@
           "csrankings-default": 136,
           "csrankings": 141,
           "core": 150,
-          "core-a": 156
+          "core-a": 156,
+          "all-union": 141
         },
         "shift": 14
       },
@@ -665,7 +717,8 @@
           "csrankings-default": 136,
           "csrankings": 141,
           "core": 150,
-          "core-a": 138
+          "core-a": 138,
+          "all-union": 141
         },
         "shift": 14
       },
@@ -676,7 +729,8 @@
           "csrankings-default": 136,
           "csrankings": 141,
           "core": 150,
-          "core-a": 138
+          "core-a": 138,
+          "all-union": 141
         },
         "shift": 14
       },
@@ -687,7 +741,8 @@
           "csrankings-default": 136,
           "csrankings": 141,
           "core": 150,
-          "core-a": 156
+          "core-a": 156,
+          "all-union": 141
         },
         "shift": 14
       },
@@ -698,7 +753,8 @@
           "csrankings-default": 136,
           "csrankings": 141,
           "core": 150,
-          "core-a": 138
+          "core-a": 138,
+          "all-union": 141
         },
         "shift": 14
       }
@@ -914,6 +970,58 @@
         {
           "name": "Northeastern University",
           "short": "Northeastern",
+          "rank": 10
+        }
+      ],
+      "all-union": [
+        {
+          "name": "Carnegie Mellon University",
+          "short": "CMU",
+          "rank": 1
+        },
+        {
+          "name": "Univ. of Illinois at Urbana-Champaign",
+          "short": "UIUC",
+          "rank": 2
+        },
+        {
+          "name": "Univ. of California - San Diego",
+          "short": "UCSD",
+          "rank": 3
+        },
+        {
+          "name": "Georgia Institute of Technology",
+          "short": "Georgia Tech",
+          "rank": 4
+        },
+        {
+          "name": "University of Washington",
+          "short": "UW",
+          "rank": 5
+        },
+        {
+          "name": "Massachusetts Inst. of Technology",
+          "short": "MIT",
+          "rank": 6
+        },
+        {
+          "name": "Univ. of Maryland - College Park",
+          "short": "UMD",
+          "rank": 7
+        },
+        {
+          "name": "Northeastern University",
+          "short": "Northeastern",
+          "rank": 8
+        },
+        {
+          "name": "Univ. of California - Berkeley",
+          "short": "UC Berkeley",
+          "rank": 8
+        },
+        {
+          "name": "University of Michigan",
+          "short": "UMich",
           "rank": 10
         }
       ]
