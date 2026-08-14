@@ -315,9 +315,19 @@ test('conference-set rules consistently distinguish default, extended, and CORE 
   assert.equal(publicationMatchesConferenceSet({ area: 'fast' }, 'csrankings'), true);
   assert.equal(publicationMatchesConferenceSet({ area: 'usenixatc' }, 'csrankings-default'), false);
   assert.equal(publicationMatchesConferenceSet({ area: 'usenixatc' }, 'csrankings'), true);
-  assert.equal(publicationMatchesConferenceSet({ area: 'ase' }, 'invalid-set'), false);
+  // An invalid set normalizes to the app default, all-union, which includes ase.
+  assert.equal(publicationMatchesConferenceSet({ area: 'ase' }, 'invalid-set'), true);
   assert.equal(getConferenceAreaMap('core').vr, 'graph');
   assert.equal(getConferenceAreaMap('csrankings-default').vr, 'visualization');
+});
+
+test('all-union unions CSRankings and CORE venues', () => {
+  // ase: CSRankings extended only. aistats: CORE A only, absent from parentMap.
+  assert.equal(publicationMatchesConferenceSet({ area: 'ase' }, 'all-union'), true);
+  assert.equal(publicationMatchesConferenceSet({ area: 'aistats' }, 'all-union'), true);
+  assert.equal(publicationMatchesConferenceSet({ area: 'icse' }, 'all-union'), true);
+  assert.equal(publicationMatchesConferenceSet({ area: 'nonexistent-venue' }, 'all-union'), false);
+  assert.equal(getConferenceAreaMap('all-union').aistats, 'mlmining');
 });
 
 test('every CORE A venue maps to a real research area', () => {
@@ -896,8 +906,8 @@ test('area momentum compares a school against the field, not against itself', ()
 
 test('rank stability sweeps every window and conference set, holding region fixed', () => {
   const variants = rankStabilityVariants(2026);
-  assert.equal(variants.length, 16);
-  assert.deepEqual([...new Set(variants.map(v => v.confSet))], ['csrankings-default', 'csrankings', 'core', 'core-a']);
+  assert.equal(variants.length, 20);
+  assert.deepEqual([...new Set(variants.map(v => v.confSet))], ['csrankings-default', 'csrankings', 'core', 'core-a', 'all-union']);
   // Windows are inclusive of both endpoints, so a 5-year window is 2022–2026.
   assert.deepEqual(variants[0], { key: '5|csrankings-default', span: 5, confSet: 'csrankings-default', startYear: 2022, endYear: 2026 });
 
@@ -917,7 +927,7 @@ test('rank stability sweeps every window and conference set, holding region fixe
 
   const steady = summarizeRankStability(samples, 'Steady');
   const swingy = summarizeRankStability(samples, 'Swingy');
-  assert.equal(steady.settings, 16);
+  assert.equal(steady.settings, 20);
   // Steady leads wherever ASE is excluded and trails wherever it counts, so the
   // same department holds two different ranks depending on the setting alone.
   assert.equal(steady.best, 1);

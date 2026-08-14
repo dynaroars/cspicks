@@ -385,16 +385,19 @@ export const coreAMap = {
   'uai': 'ai', 'usenixatc': 'ops', 'wacv': 'vision', 'wsdm': 'inforet'
 };
 
-export const CONFERENCE_SET_IDS = ['csrankings-default', 'csrankings', 'core', 'core-a'];
+export const CONFERENCE_SET_IDS = ['csrankings-default', 'csrankings', 'core', 'core-a', 'all-union'];
 
 export function normalizeConferenceSet(confSet) {
-  return CONFERENCE_SET_IDS.includes(confSet) ? confSet : 'csrankings-default';
+  return CONFERENCE_SET_IDS.includes(confSet) ? confSet : 'all-union';
 }
 
-export function publicationMatchesConferenceSet(publication, confSet = 'csrankings-default') {
+export function publicationMatchesConferenceSet(publication, confSet = 'all-union') {
   const selectedSet = normalizeConferenceSet(confSet);
   if (selectedSet === 'core') return Boolean(coreAStarMap[publication.area]);
   if (selectedSet === 'core-a') return Boolean(coreAStarMap[publication.area] || coreAMap[publication.area]);
+  if (selectedSet === 'all-union') {
+    return Boolean(parentMap[publication.area] || coreAStarMap[publication.area] || coreAMap[publication.area]);
+  }
   // Upstream scrapes venues it never assigns to an area (PoPETs, for example);
   // CSRankings itself counts none of them, so neither set may include one.
   if (!parentMap[publication.area]) return false;
@@ -402,14 +405,14 @@ export function publicationMatchesConferenceSet(publication, confSet = 'csrankin
   return true;
 }
 
-export function getConferenceAreaMap(confSet = 'csrankings-default') {
+export function getConferenceAreaMap(confSet = 'all-union') {
   const selectedSet = normalizeConferenceSet(confSet);
-  if (selectedSet === 'core' || selectedSet === 'core-a') {
+  if (selectedSet === 'core' || selectedSet === 'core-a' || selectedSet === 'all-union') {
     // CORE occasionally categorizes a venue differently from CSRankings, so
     // CORE's mapping must win when both contain the venue.
-    return selectedSet === 'core-a'
-      ? { ...parentMap, ...coreAStarMap, ...coreAMap }
-      : { ...parentMap, ...coreAStarMap };
+    return selectedSet === 'core'
+      ? { ...parentMap, ...coreAStarMap }
+      : { ...parentMap, ...coreAStarMap, ...coreAMap };
   }
   return parentMap;
 }
@@ -658,7 +661,7 @@ function rankSchools(schoolList) {
  * (optionally re-crediting them to historical affiliations), then aggregate and
  * rank schools. Returns `{ professors, schools }` keyed by name.
  */
-export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'csrankings-default') {
+export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'all-union') {
   const history = historyMap && Object.keys(historyMap).length > 0 ? historyMap : null;
   const isInRegion = makeRegionTest(data.schools, region);
   const { filteredProfs, filteredSchools } = collectFilteredData(

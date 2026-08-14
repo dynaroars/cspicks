@@ -6,7 +6,7 @@ import { getInitialRegion, rememberRegion } from './shared.js';
 // This module owns their markup, state, persistence, and the affiliation data
 // that History mode needs, so pages only declare which fields they want.
 
-const CONF_SET_HELP = 'Chooses which venues count. CSRankings (Default) follows the primary conference set; CSRankings (All) adds the extended, next-tier venues; the CORE options use CORE conference tiers.';
+const CONF_SET_HELP = 'Chooses which venues count. CSRankings (Default) follows the primary conference set; CSRankings (All) adds the extended, next-tier venues; the CORE options use CORE conference tiers; All (Union) combines every venue from all of the above.';
 const HISTORY_HELP = 'Credits pubs to the univ where the author worked when each was published, not their current one. Use the year selectors to focus on a historical period.';
 const RANKINGS_HELP = 'Numbers the result lists and shows each univ\'s overall and per-area rank for the selected region, years, and conference set.';
 const PER_CAPITA_HELP = 'Ranks univs by average output per prof rather than by departmental total, so a large dept is not favoured over a productive one. Univs with fewer than 5 publishing profs are omitted.';
@@ -24,12 +24,14 @@ const CONF_SETS = [
   ['csrankings-default', 'CSRankings (Default)'],
   ['csrankings', 'CSRankings (All)'],
   ['core', 'CORE A*'],
-  ['core-a', 'CORE A*/A']
+  ['core-a', 'CORE A*/A'],
+  ['all-union', 'All (Union)']
 ];
 
-// Versioned: per-capita used to default on, so readers carrying the old
-// stored value would otherwise never see the new CSRankings-matching default.
-const FILTER_STORAGE_KEY = 'cspicks:filters:v2';
+// Versioned: the conference-set default changed from CSRankings-default to
+// All (Union), so readers carrying the old stored value would otherwise
+// never see the new default.
+const FILTER_STORAGE_KEY = 'cspicks:filters:v3';
 
 // Filter choices follow the reader from page to page, so clicking through to
 // another university or tool does not silently reset them.
@@ -117,7 +119,7 @@ export function createFilterBar(mount, {
     region: has('region') ? getInitialRegion() : 'world',
     startYear: DEFAULT_START_YEAR,
     endYear: DEFAULT_END_YEAR,
-    confSet: 'csrankings-default',
+    confSet: 'all-union',
     rankings: false,
     historical: false,
     // Off by default so the default view reproduces official CSRankings
@@ -218,7 +220,7 @@ export function createFilterBar(mount, {
         target.set('start', String(state.startYear));
         target.set('end', String(state.endYear));
       }
-      if (has('confSet') && state.confSet !== 'csrankings-default') target.set('confSet', state.confSet);
+      if (has('confSet') && state.confSet !== 'all-union') target.set('confSet', state.confSet);
       if (has('rankings') && state.rankings) target.set('rankings', 'true');
       if (has('history') && state.historical) target.set('historical', 'true');
       if (has('percapita') && state.perCapita) target.set('percapita', 'true');

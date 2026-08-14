@@ -567,7 +567,7 @@ export function calculateResearcherPatterns(professor, peers = {}, options = {})
   if (!professor) return null;
   const startYear = Number(options.startYear);
   const endYear = Number(options.endYear);
-  const confSet = options.confSet || 'csrankings-default';
+  const confSet = options.confSet || 'all-union';
   const areaMap = options.areaMap || getConferenceAreaMap(confSet);
   const publications = (professor.pubs || []).filter(pub =>
     pub.year >= startYear && pub.year <= endYear && publicationMatchesConferenceSet(pub, confSet)

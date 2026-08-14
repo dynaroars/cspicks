@@ -229,7 +229,7 @@ export async function fetchFrequentCoauthors(name, options = {}) {
     return topCoauthorsInWindow(await fetchCoauthorRecords(name), options);
 }
 
-export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date().getFullYear(), confSet = 'csrankings-default') {
+export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date().getFullYear(), confSet = 'all-union') {
     const url = `https://dblp.org/pid/${pid}.xml`;
 
     try {
