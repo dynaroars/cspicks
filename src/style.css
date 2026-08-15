@@ -1073,6 +1073,17 @@ button.card-header {
   grid-column: 1 / -1;
 }
 
+/* Turing/ACM Fellow badges sit under the name in the head-to-head header,
+   right-aligned like the rest of that column. */
+.comparison-table thead th .faculty-honors {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
 .comparison-table {
   width: 100%;
   border-collapse: collapse;

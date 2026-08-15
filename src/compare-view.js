@@ -105,6 +105,15 @@ export function renderScoreboard(safeNameA, safeNameB, rows) {
 
 export const sideSpan = (side, name) => `<span class="comparison-side-${side}">${name}</span>`;
 
+// Turing Award / ACM Fellow badges sit next to the name in the head-to-head
+// header rather than a separate card.
+function honorBadges(entry) {
+  return [
+    entry.turingAwardYear ? `<span class="honor-badge honor-turing" title="Turing Award recipient in ${entry.turingAwardYear}">🏆 Turing Award · ${entry.turingAwardYear}</span>` : '',
+    entry.acmFellowYear ? `<span class="honor-badge honor-acm" title="Named an ACM Fellow in ${entry.acmFellowYear}">ACM Fellow · ${entry.acmFellowYear}</span>` : ''
+  ].filter(Boolean).join('');
+}
+
 function verdict(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins, areaCount) {
   const { leader, phrase, verb, areaLeader, kind } = describeVerdict(type, entryA, entryB, aWins, bWins);
   const named = side => sideSpan(side, side === 'a' ? safeNameA : safeNameB);
@@ -148,7 +157,13 @@ function scoreboard(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins) {
       { label: 'Areas led', a: aWins, b: bWins, format: number }
     ];
 
-  return renderScoreboard(safeNameA, safeNameB, rows);
+  const headerName = (safeName, entry) => {
+    if (type !== 'researcher') return safeName;
+    const badges = honorBadges(entry);
+    return badges ? `${safeName}<span class="faculty-honors">${badges}</span>` : safeName;
+  };
+
+  return renderScoreboard(headerName(safeNameA, entryA), headerName(safeNameB, entryB), rows);
 }
 
 export function renderComparisonSummary(container, { type, nameA, nameB, entryA, entryB, areaList, dataA, dataB }) {
