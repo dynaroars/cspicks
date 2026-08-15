@@ -186,6 +186,26 @@ async function loadDataFromSources() {
   const acmFellowByName = new Map(acmFellows.map(row => [row.name?.trim(), Number(row.year)]));
   const countryByCode = new Map(countries.map(row => [row.alpha_2?.trim().toLowerCase(), row.name?.trim()]));
 
+  // turing.csv/acm-fellows.csv list plain names, but CSRankings' roster
+  // appends a disambiguation number ("Vipin Kumar 0001") to names that
+  // collide with someone else in the roster. Strip it and retry, but only
+  // when exactly one roster entry shares that base name — an award can't be
+  // safely credited to either of two people with the same name.
+  const rosterNamesByBase = new Map();
+  csrankings.forEach(row => {
+    if (!row.name) return;
+    const name = row.name.trim();
+    const base = name.replace(/\s+\d{4}$/, '');
+    if (!rosterNamesByBase.has(base)) rosterNamesByBase.set(base, new Set());
+    rosterNamesByBase.get(base).add(name);
+  });
+  const lookupHonor = (honorMap, name) => {
+    if (honorMap.has(name)) return honorMap.get(name);
+    const base = name.replace(/\s+\d{4}$/, '');
+    if (base === name || !honorMap.has(base)) return null;
+    return rosterNamesByBase.get(base)?.size === 1 ? honorMap.get(base) : null;
+  };
+
   csrankings.forEach(row => {
     if (row.name) {
       const name = row.name.trim();
@@ -199,8 +219,8 @@ async function loadDataFromSources() {
           : null,
         aliases: [],
         unitNotes: [],
-        turingAwardYear: turingByName.get(name) || null,
-        acmFellowYear: acmFellowByName.get(name) || null,
+        turingAwardYear: lookupHonor(turingByName, name) || null,
+        acmFellowYear: lookupHonor(acmFellowByName, name) || null,
         pubs: []
       };
 
