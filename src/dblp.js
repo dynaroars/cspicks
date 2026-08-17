@@ -121,6 +121,14 @@ let dblpQueue = Promise.resolve();
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+function parseDblpXml(text) {
+    const xml = new DOMParser().parseFromString(text, 'text/xml');
+    if (xml.getElementsByTagName('parsererror').length > 0 || !xml.documentElement) {
+        throw new Error('DBLP returned malformed XML');
+    }
+    return xml;
+}
+
 function queueDblpRequest(task) {
     const result = dblpQueue.then(task);
     dblpQueue = result.catch(() => {}).then(() => sleep(DBLP_REQUEST_GAP_MS));
@@ -166,7 +174,10 @@ async function fetchCoauthorRecords(name) {
 
         const pid = target.info.url.split('/pid/')[1];
         const profile = await fetchDblp(`https://dblp.org/pid/${pid}.xml`);
-        const xml = new DOMParser().parseFromString(await profile.text(), 'text/xml');
+        const xml = parseDblpXml(await profile.text());
+        if (!xml.getElementsByTagName('dblpperson').length) {
+            throw new Error('DBLP returned an unexpected profile document');
+        }
 
         // The <person> block lists the author's own name variants.
         const self = new Set([name.toLowerCase()]);
@@ -238,8 +249,10 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
         if (!res.ok) throw new Error(`DBLP returned ${res.status}`);
 
         const text = await res.text();
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(text, "text/xml");
+        const xmlDoc = parseDblpXml(text);
+        if (!xmlDoc.getElementsByTagName('dblpperson').length) {
+            throw new Error('DBLP returned an unexpected profile document');
+        }
 
         // Extract author aliases from the <person> element
         const aliases = [];

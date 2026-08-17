@@ -86,6 +86,7 @@ function areaLink(area) {
 
 function renderDiscoveries() {
   const container = document.getElementById('discovery-stats');
+  if (!rawData || !nsfData) return;
   const { startYear: start, endYear: end, region, confSet, historyMap: history, aliasMap: aliases } = filters;
 
   if (start > end) {
@@ -237,12 +238,14 @@ async function init() {
     className: 'discoveries-filters',
     onChange: renderDiscoveries
   });
+  filters.setDisabled(true);
   setupCardSharing();
   await filters.ready();
   const [loadedData, nsfResponse] = await Promise.all([loadData(), fetch('./nsf-awards.json')]);
   if (!nsfResponse.ok) throw new Error(`NSF dataset returned ${nsfResponse.status}`);
   rawData = loadedData;
   nsfData = await nsfResponse.json();
+  filters.setDisabled(false);
   document.getElementById('discoveries-loading').classList.add('hidden');
   document.getElementById('discovery-stats').classList.remove('hidden');
   renderDiscoveries();

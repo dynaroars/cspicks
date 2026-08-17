@@ -563,28 +563,33 @@ function renderDataHealth() {
     const container = document.getElementById('data-health-stats');
     if (!container || !rawData?.professors) return;
     const { current, start, end, confSet } = getAnalysisData();
-    const report = calculateParityReport(rawData, current, confSet, {
+    const selectedReport = calculateParityReport(rawData, current, confSet, {
         perCapita: Boolean(filters?.perCapita),
         historical: Boolean(filters?.historical)
     });
+    // This baseline is deliberately independent of the visible view. Selecting
+    // CORE, per-capita, or History must not turn a healthy CSRankings-default
+    // implementation into a false "No"; those are view customizations, not
+    // parity failures.
+    const defaultData = filterByYears(rawData, start, end, filters.region, null, null, 'csrankings-default');
+    const defaultReport = calculateParityReport(rawData, defaultData, 'csrankings-default');
     const syncDate = venueRulesCheckedAt || new Date(activeVenueRules.syncedAt);
     const syncText = Number.isNaN(syncDate.getTime()) ? 'Unknown' : syncDate.toLocaleString();
-    const internalOk = report.totalMismatches === 0 && report.rankOrderIssues === 0;
-
+    const internalOk = selectedReport.totalMismatches === 0 && selectedReport.rankOrderIssues === 0;
+    const selectedMode = selectedReport.divergences.length
+        ? selectedReport.divergences.join(', ')
+        : 'CSRankings default';
     container.innerHTML = `
-        <h2>Publication data health · ${start}–${end}</h2>
-        <p class="summary-note">This audit checks the canonical source inputs, selected venue mode, source coverage, and ranking invariants used by CSPicks.</p>
+        <h2>CS Picks health · ${start}–${end}</h2>
+        <p class="summary-note">Health checks whether CS Picks’ source data, calculations, metadata, and venue rules are available and internally consistent.</p>
         <div class="diagnostic-grid">
-            <div class="diagnostic-stat"><span>Matches CSRankings</span><strong class="${report.matchesCsrankings ? 'confidence-high' : 'confidence-review'}">${report.matchesCsrankings ? 'Yes' : 'No'}</strong><small>${report.matchesCsrankings ? 'default settings reproduce csrankings.org' : `differs by ${escapeHtml(report.divergences.join(', '))}`}</small></div>
-            <div class="diagnostic-stat"><span>Parity checks</span><strong class="${internalOk ? 'confidence-high' : 'confidence-review'}">${internalOk ? 'Pass' : 'Review'}</strong><small>${report.totalMismatches + report.rankOrderIssues} inconsistencies</small></div>
-            <div class="diagnostic-stat"><span>Ranked schools</span><strong>${report.rankedSchools}</strong><small>from ${report.sourceFaculty} source faculty</small></div>
-            <div class="diagnostic-stat"><span>Institution metadata</span><strong>${report.institutionCoverage.toFixed(0)}%</strong><small>country or region present</small></div>
-            <div class="diagnostic-stat"><span>Author profiles</span><strong>${report.profileCoverage.toFixed(0)}%</strong><small>homepage or Scholar ID present</small></div>
+            <div class="diagnostic-stat"><span>Matches CSRankings default</span><strong class="${defaultReport.matchesCsrankings ? 'confidence-high' : 'confidence-review'}">${defaultReport.matchesCsrankings ? 'Yes' : 'No'}</strong><small>${defaultReport.matchesCsrankings ? 'official venue set, current affiliations, and total ranking' : `${defaultReport.totalMismatches + defaultReport.rankOrderIssues} baseline inconsistencies`}</small></div>
+            <div class="diagnostic-stat"><span>Current selection</span><strong>${selectedReport.divergences.length ? 'Customized' : 'Default'}</strong><small>${escapeHtml(selectedMode)}</small></div>
+            <div class="diagnostic-stat"><span>Selected-view invariants</span><strong class="${internalOk ? 'confidence-high' : 'confidence-review'}">${internalOk ? 'Pass' : 'Review'}</strong><small>${selectedReport.totalMismatches + selectedReport.rankOrderIssues} total or rank-order inconsistencies</small></div>
+            <div class="diagnostic-stat"><span>Institution metadata</span><strong>${selectedReport.institutionCoverage.toFixed(0)}%</strong><small>country or region present</small></div>
             <div class="diagnostic-stat"><span>Venue rules checked</span><strong>${escapeHtml(syncText)}</strong><small>upstream venue parser · ${escapeHtml(activeVenueRules.sourceVersion || 'bundled fallback')}</small></div>
         </div>
-        <div class="data-caveat">${report.matchesCsrankings
-            ? 'With the default settings this view reproduces csrankings.org. The official site can still differ temporarily when its deployed data updates before this page reloads.'
-            : `This view intentionally differs from csrankings.org because it uses ${escapeHtml(report.divergences.join(' and '))}. Reset those filters to compare like for like.`}</div>
+        <div class="data-caveat"><strong>What “matches” means:</strong> CSPicks recomputes the selected region and years with CSRankings’ default venues, current affiliations, total department scoring, and the same upstream CSV inputs. It verifies internal totals and rank ordering. CSRankings does not publish a static result table API, so a brief difference can still occur if csrankings.org has deployed newer source data than this browser session.</div>
     `;
 }
 
@@ -1344,4 +1349,3 @@ function renderConferenceTrends() {
     });
     renderResearcherVenueInsights(getResearcherPatterns());
 }
-
