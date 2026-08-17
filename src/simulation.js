@@ -1,4 +1,5 @@
 import { parentMap, scoreFromAreaCounts } from './data.js';
+import { rankSchoolsPerCapita } from './metrics.js';
 import { cleanName } from './shared.js';
 
 function levenshtein(a, b) {
@@ -78,32 +79,27 @@ export function fuzzyMatch(nameA, nameB) {
   return false;
 }
 
-// Adjusted output per publishing faculty member — the same rule as
-// calculatePerCapita in metrics.js (departments below minFaculty are excluded
-// rather than ranked), reimplemented here so simulation.js stays free of a
-// dependency on the display-layer metrics module. Works over any school list,
-// real or hypothetical, as long as each school carries `areas` and
-// `facultyAdjustedCounts`.
 function rankSchoolsByPerCapita(schoolList, minFaculty) {
-  const rows = schoolList
-    .map(school => {
-      const facultyCount = Object.keys(school.facultyAdjustedCounts || {}).length;
-      const totalAdjusted = Object.values(school.areas || {}).reduce((sum, area) => sum + (area.adjusted || 0), 0);
-      return { name: school.name, facultyCount, perCapita: facultyCount ? totalAdjusted / facultyCount : 0 };
-    })
-    .filter(row => row.name && row.facultyCount >= minFaculty)
-    .sort((a, b) => b.perCapita - a.perCapita || a.name.localeCompare(b.name));
+  return new Map(rankSchoolsPerCapita(schoolList, { minFaculty }).map(row => [row.name, row.rank]));
+}
 
-  const ranks = new Map();
-  let rank = 0;
-  let ties = 1;
-  let previousValue = null;
-  rows.forEach(row => {
-    if (row.perCapita !== previousValue) { rank += ties; ties = 1; } else { ties++; }
-    ranks.set(row.name, rank);
-    previousValue = row.perCapita;
-  });
-  return ranks;
+function cloneSchoolForSimulation(school) {
+  const totalAdjusted = Number.isFinite(school.totalAdjusted)
+    ? school.totalAdjusted
+    : Object.values(school.areas || {}).reduce((sum, area) => sum + (area.adjusted || 0), 0);
+  return {
+    ...school,
+    totalAdjusted,
+    areas: Object.fromEntries(Object.entries(school.areas || {}).map(([area, stats]) => [area, {
+      ...stats,
+      faculty: [...(stats.faculty || [])],
+      facultyStats: Object.fromEntries(Object.entries(stats.facultyStats || {}).map(([name, values]) => [name, { ...values }]))
+    }])),
+    facultyAdjustedCounts: { ...(school.facultyAdjustedCounts || {}) },
+    facultyCounts: { ...(school.facultyCounts || {}) },
+    areaAdjustedCounts: { ...(school.areaAdjustedCounts || {}) },
+    areaRanks: { ...(school.areaRanks || {}) }
+  };
 }
 
 /**
@@ -115,24 +111,29 @@ function rankSchoolsByPerCapita(schoolList, minFaculty) {
 export function calculateRankImpact(schools, ops, { perCapita = false, minFaculty = 5 } = {}) {
   const schoolClones = new Map();
   ops.forEach(op => {
-    const clone = JSON.parse(JSON.stringify(op.school));
-    schoolClones.set(op.school.name, clone);
+    if (!schoolClones.has(op.school.name)) {
+      schoolClones.set(op.school.name, cloneSchoolForSimulation(op.school));
+    }
   });
 
   // Apply stats changes
   ops.forEach(op => {
     const clone = schoolClones.get(op.school.name);
+    let adjustedDelta = 0;
     for (const [area, areaStats] of Object.entries(op.stats.areas)) {
       const val = typeof areaStats === 'number' ? areaStats : areaStats.adjusted;
       if (!clone.areas[area]) {
         clone.areas[area] = { count: 0, adjusted: 0, faculty: [] };
       }
+      const beforeAdjusted = clone.areas[area].adjusted;
       if (op.isRemoval) {
         clone.areas[area].adjusted = Math.max(0, clone.areas[area].adjusted - val);
       } else {
         clone.areas[area].adjusted += val;
       }
+      adjustedDelta += clone.areas[area].adjusted - beforeAdjusted;
     }
+    clone.totalAdjusted = Math.max(0, (clone.totalAdjusted || 0) + adjustedDelta);
     // Keep facultyAdjustedCounts (headcount) in sync with the same add/remove,
     // so a hypothetical faculty change also moves the per-capita denominator.
     if (op.facultyKey) {

@@ -90,6 +90,9 @@ export function renderScoreboard(safeNameA, safeNameB, rows) {
       && (row.lowerWins ? value < other : value > other);
     return `<td class="comparison-side-${side}${wins ? ' is-leader' : ''}">${escapeHtml((row.format || compareNumber)(value))}</td>`;
   };
+  const measure = row => row.help
+    ? `<span class="tooltip-trigger comparison-measure" tabindex="0" aria-label="About ${escapeHtml(row.label)}">${escapeHtml(row.label)} <span class="comparison-measure-info" aria-hidden="true">ⓘ</span><span class="tooltip-content" role="tooltip">${escapeHtml(row.help)}</span></span>`
+    : escapeHtml(row.label);
 
   return `
     <div class="summary-card comparison-scoreboard">
@@ -98,7 +101,7 @@ export function renderScoreboard(safeNameA, safeNameB, rows) {
         <thead><tr><th scope="col"><span class="visually-hidden">Measure</span></th>
           <th scope="col" class="comparison-side-a">${safeNameA}</th>
           <th scope="col" class="comparison-side-b">${safeNameB}</th></tr></thead>
-        <tbody>${rows.map(row => `<tr><th scope="row">${escapeHtml(row.label)}</th>${cell(row, 'a')}${cell(row, 'b')}</tr>`).join('')}</tbody>
+        <tbody>${rows.map(row => `<tr><th scope="row">${measure(row)}</th>${cell(row, 'a')}${cell(row, 'b')}</tr>`).join('')}</tbody>
       </table>
     </div>`;
 }
@@ -143,18 +146,18 @@ function scoreboard(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins) {
   const facultyCount = entry => Object.keys(entry.facultyAdjustedCounts || {}).length;
   const rows = type === 'school'
     ? [
-      { label: 'Overall rank', a: entryA.rank, b: entryB.rank, format: value => `#${value}`, lowerWins: true },
-      { label: 'Papers', a: Math.ceil(entryA.totalCount || 0), b: Math.ceil(entryB.totalCount || 0), format: number },
-      { label: 'Adjusted count', a: entryA.totalAdjusted, b: entryB.totalAdjusted, format: number },
-      { label: 'Publishing faculty', a: facultyCount(entryA), b: facultyCount(entryB), format: number },
-      { label: 'Areas led', a: aWins, b: bWins, format: number }
+      { label: 'Overall rank', help: 'Position among universities in the selected region, years, and venue set. The score is the geometric mean of adjusted publication counts plus one across every top-level CSRankings area; equal scores share a rank.', a: entryA.rank, b: entryB.rank, format: value => `#${value}`, lowerWins: true },
+      { label: 'Papers', help: 'Non-fractional publication credit summed across publishing faculty for the selected years and venues. A paper coauthored by multiple listed faculty can contribute once for each listed author, so this is not a deduplicated paper count.', a: Math.ceil(entryA.totalCount || 0), b: Math.ceil(entryB.totalCount || 0), format: number },
+      { label: 'Adjusted count', help: 'The same publication output after each author receives fractional credit based on the paper’s author count. University totals sum that credit across eligible faculty.', a: entryA.totalAdjusted, b: entryB.totalAdjusted, format: number },
+      { label: 'Publishing faculty', help: 'Distinct faculty with at least one eligible publication in the selected years and venue set. Faculty with no counted output in this window are not included.', a: facultyCount(entryA), b: facultyCount(entryB), format: number },
+      { label: 'Areas led', help: 'Number of research areas where this university has a higher adjusted count than the other university. It compares only this pair; it is not the number of regional #1 rankings.', a: aWins, b: bWins, format: number }
     ]
     : [
-      { label: 'University', a: entryA.affiliation || '—', b: entryB.affiliation || '—', format: value => String(value) },
-      { label: 'Papers', a: entryA.totalPapers ?? Math.ceil(entryA.totalCount || 0), b: entryB.totalPapers ?? Math.ceil(entryB.totalCount || 0), format: number },
-      { label: 'Adjusted count', a: entryA.totalAdjusted, b: entryB.totalAdjusted, format: number },
-      { label: 'Active areas', a: Object.keys(entryA.areas || {}).length, b: Object.keys(entryB.areas || {}).length, format: number },
-      { label: 'Areas led', a: aWins, b: bWins, format: number }
+      { label: 'University', help: 'Current CSRankings affiliation. Enable History when you want publications credited to estimated affiliations at publication time.', a: entryA.affiliation || '—', b: entryB.affiliation || '—', format: value => String(value) },
+      { label: 'Papers', help: 'Eligible publications attributed to this researcher in the selected years and venue set, before fractional author adjustment.', a: entryA.totalPapers ?? Math.ceil(entryA.totalCount || 0), b: entryB.totalPapers ?? Math.ceil(entryB.totalCount || 0), format: number },
+      { label: 'Adjusted count', help: 'Sum of the researcher’s fractional authorship credit for eligible publications. A paper’s credit is divided according to its author count.', a: entryA.totalAdjusted, b: entryB.totalAdjusted, format: number },
+      { label: 'Active areas', help: 'Top-level research areas in which the researcher has eligible publication output during the selected period.', a: Object.keys(entryA.areas || {}).length, b: Object.keys(entryB.areas || {}).length, format: number },
+      { label: 'Areas led', help: 'Number of research areas where this researcher has a higher adjusted count than the other researcher. This is a pairwise comparison, not a regional rank.', a: aWins, b: bWins, format: number }
     ];
 
   const headerName = (safeName, entry) => {
@@ -275,10 +278,10 @@ export function renderAreaComparison(container, { labelA, labelB, cmp, noun = 'f
   }
 
   const rows = [
-    { label: 'Region-wide adjusted count', a: a.currentTotal, b: b.currentTotal },
-    { label: 'Growth vs. prior period', a: a.growth, b: b.growth, format: growthText },
-    { label: 'Active universities', a: a.schools.length, b: b.schools.length },
-    { label: 'Active researchers', a: a.facultyCount, b: b.facultyCount }
+    { label: 'Region-wide adjusted count', help: `Fractional publication credit for this ${noun === 'venues' ? 'venue' : 'field'}, summed across every university in the selected region and years. Each author receives a fraction of a paper based on its author count.`, a: a.currentTotal, b: b.currentTotal },
+    { label: 'Growth vs. prior period', help: 'Percentage change in region-wide adjusted count versus the immediately preceding period of equal length. For example, a 2022–2026 selection is compared with 2017–2021.', a: a.growth, b: b.growth, format: growthText },
+    { label: 'Active universities', help: `Distinct universities with a positive adjusted count in this ${noun === 'venues' ? 'venue' : 'field'} during the selected period.`, a: a.schools.length, b: b.schools.length },
+    { label: 'Active researchers', help: `Distinct roster researchers with eligible output in this ${noun === 'venues' ? 'venue' : 'field'} during the selected period.`, a: a.facultyCount, b: b.facultyCount }
   ];
 
   container.innerHTML = `

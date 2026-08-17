@@ -346,7 +346,7 @@ footer button:hover {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   padding: 0.6rem;
   overflow: visible;
 }
@@ -396,23 +396,47 @@ footer button:hover {
 }
 
 .search-filters .filter-group.checkboxes {
-  flex: 0 1 auto;
+  flex: 0 0 auto;
   flex-wrap: nowrap;
   justify-content: flex-start;
   grid-column: auto;
   margin-top: 0;
   padding-top: 0;
   border-top: 0;
-  gap: 1rem;
+  gap: 0;
 }
 
 .search-filters .filter-checkbox {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  min-height: 20px;
+  gap: 0.45rem;
+  min-height: 34px;
+  padding: 0.35rem 0.6rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: normal;
   line-height: 1.25;
+  text-transform: none;
+  white-space: nowrap;
   cursor: pointer;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.search-filters .filter-checkbox:hover,
+.search-filters .filter-checkbox:focus-within {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+  border-color: var(--border-color);
+}
+
+.search-filters .filter-checkbox:has(input:checked) {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+  border-color: var(--border-color);
 }
 
 .search-filters .filter-checkbox input {
@@ -1106,6 +1130,32 @@ button.card-header {
   color: var(--text-secondary);
   font-weight: 500;
   text-align: left;
+}
+
+.comparison-measure {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 4px;
+  cursor: help;
+}
+
+.comparison-measure:focus {
+  color: var(--text-primary);
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+.comparison-measure-info {
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.comparison-measure .tooltip-content {
+  width: min(340px, calc(100vw - 2rem));
+  text-transform: none;
 }
 
 .comparison-table tbody tr:last-child th,
@@ -2321,7 +2371,16 @@ button.card-header {
 }
 
 .discoveries-filters {
+  width: 100%;
+  max-width: none !important;
+  margin-top: 1rem;
   margin-bottom: 1.5rem;
+  padding: 0.35rem 0 !important;
+}
+
+.discoveries-filters .filter-group:not(.checkboxes),
+.discoveries-filters .filter-group select {
+  height: 34px;
 }
 .simulator-disclaimer.context-note {
   box-sizing: border-box;

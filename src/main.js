@@ -293,9 +293,18 @@ function setupSearch() {
   document.querySelector('.search-examples')?.addEventListener('click', event => {
     const exampleButton = event.target.closest('[data-search-example]');
     if (exampleButton) {
-      mainSearch.value = exampleButton.dataset.searchExample;
-      mainSearch.dispatchEvent(new Event('input', { bubbles: true }));
+      clearTimeout(debounceTimer);
+      const query = exampleButton.dataset.searchExample;
+      mainSearch.value = query;
+      document.body.classList.add('has-search-query');
+      displayIntegratedAnalysis(null);
+      runQuery(query);
+      updateURL();
       mainSearch.focus();
+      // Focusing a populated search normally opens autocomplete. An example is
+      // already a complete query, so keep focus for easy editing but do not put
+      // a redundant suggestion menu over its results.
+      suggestionBox.close();
     }
   });
 
@@ -451,30 +460,12 @@ function showIntegratedAnalysis(type, name) {
 }
 
 
-function clearMainResults() {
-  displayIntegratedAnalysis(null);
-  hideComparison();
-  clearSearchSections();
-}
-
-
-
-
-
-
 function setSearchQuery(query) {
   const input = document.getElementById('main-search');
   input.value = query;
   input.dispatchEvent(new Event('input', { bubbles: true }));
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-
-
-// DBLP URL generation
-
-
-
 function setupTooltips() {
   // Create global tooltip element
   let tooltip = document.getElementById('global-tooltip');

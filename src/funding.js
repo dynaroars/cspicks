@@ -154,21 +154,22 @@ function renderFundingComparison(parsed) {
   const money = value => formatFunding(value || 0);
   const rows = a.type === 'school'
     ? [
-      { label: 'NSF awards', a: a.record.awards.length, b: b.record.awards.length },
-      { label: 'Intended funding attributed', a: a.record.attributedAmount, b: b.record.attributedAmount, format: money },
-      { label: 'CS faculty with awards', a: a.record.faculty.length, b: b.record.faculty.length },
+      { label: 'NSF awards', help: 'Distinct NSF awards matched to current CSRankings faculty at this university within the selected award years.', a: a.record.awards.length, b: b.record.awards.length },
+      { label: 'Intended funding attributed', help: 'Sum of intended award amounts fractionally attributed to matched faculty. Each award is divided equally among its listed investigators before matched shares are assigned to universities.', a: a.record.attributedAmount, b: b.record.attributedAmount, format: money },
+      { label: 'CS faculty with awards', help: 'Distinct current CSRankings faculty matched to at least one included NSF award.', a: a.record.faculty.length, b: b.record.faculty.length },
       {
         label: 'Average per matched faculty',
+        help: 'Attributed intended funding divided by the number of matched CS faculty with awards. Faculty without a matched award are not included in the denominator.',
         a: a.record.attributedAmount / Math.max(1, a.record.faculty.length),
         b: b.record.attributedAmount / Math.max(1, b.record.faculty.length),
         format: money
       }
     ]
     : [
-      { label: 'University', a: a.record.affiliation || '—', b: b.record.affiliation || '—', format: value => String(value) },
-      { label: 'NSF awards', a: a.record.awards.length, b: b.record.awards.length },
-      { label: 'Intended share', a: a.record.attributedAmount, b: b.record.attributedAmount, format: money },
-      { label: 'Full project value', a: a.record.totalAwardAmount, b: b.record.totalAwardAmount, format: money }
+      { label: 'University', help: 'The investigator’s current CSRankings affiliation used for conservative award matching.', a: a.record.affiliation || '—', b: b.record.affiliation || '—', format: value => String(value) },
+      { label: 'NSF awards', help: 'Distinct NSF awards matched to this faculty member within the selected award years.', a: a.record.awards.length, b: b.record.awards.length },
+      { label: 'Intended share', help: 'The faculty member’s fractional share of intended award amounts, dividing each award equally among all listed investigators.', a: a.record.attributedAmount, b: b.record.attributedAmount, format: money },
+      { label: 'Full project value', help: 'Sum of the complete intended values of matched projects before fractional attribution. This can include portions belonging to other investigators or institutions.', a: a.record.totalAwardAmount, b: b.record.totalAwardAmount, format: money }
     ];
 
   summary.innerHTML = renderScoreboard(escapeHtml(a.name), escapeHtml(b.name), rows.map(row => ({ format: compareNumber, ...row })))

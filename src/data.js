@@ -235,8 +235,17 @@ async function loadDataFromSources() {
     }
   });
 
+  let invalidPublicationRows = 0;
   authorInfo.forEach(row => {
-    const annotatedName = row.name.trim();
+    const annotatedName = row.name?.trim();
+    const year = Number.parseInt(row.year, 10);
+    const count = Number.parseFloat(row.count);
+    const adjustedcount = Number.parseFloat(row.adjustedcount);
+    if (!annotatedName || !row.area?.trim() || !Number.isFinite(year)
+      || !Number.isFinite(count) || !Number.isFinite(adjustedcount)) {
+      invalidPublicationRows++;
+      return;
+    }
     const noteMatch = annotatedName.match(/^(.*?)\s+\[([^\]]+)\]$/);
     const name = noteMatch ? noteMatch[1].trim() : annotatedName;
     if (professors[name]) {
@@ -250,16 +259,20 @@ async function loadDataFromSources() {
       // }
 
       professors[name].pubs.push({
-        area: row.area,
-        year: parseInt(row.year),
-        count: parseFloat(row.count),
-        adjustedcount: parseFloat(row.adjustedcount)
+        area: row.area.trim(),
+        year,
+        count,
+        adjustedcount
       });
     }
   });
+  if (invalidPublicationRows) {
+    console.warn(`Ignored ${invalidPublicationRows} malformed CSRankings publication row(s).`);
+  }
 
   institutions.forEach(row => {
-    const name = row.institution.trim();
+    const name = row.institution?.trim();
+    if (!name) return;
     if (schools[name]) {
       schools[name].region = row.region;
       schools[name].country = row.countryabbrv;

@@ -19,6 +19,7 @@ const REGIONS = [
   ['canada', 'Canada'],
   ['australasia', 'Australasia']
 ];
+const REGION_IDS = new Set(REGIONS.map(([value]) => value));
 
 const CONF_SETS = [
   ['csrankings-default', 'CSRankings (Default)'],
@@ -136,9 +137,15 @@ export function createFilterBar(mount, {
   if (typeof stored.historical === 'boolean') state.historical = stored.historical;
   if (typeof stored.perCapita === 'boolean') state.perCapita = stored.perCapita;
 
-  if (params.has('region')) state.region = params.get('region');
-  if (params.has('start')) state.startYear = parseInt(params.get('start'));
-  if (params.has('end')) state.endYear = parseInt(params.get('end'));
+  if (params.has('region') && REGION_IDS.has(params.get('region'))) state.region = params.get('region');
+  if (params.has('start')) {
+    const startYear = Number.parseInt(params.get('start'), 10);
+    if (Number.isFinite(startYear)) state.startYear = startYear;
+  }
+  if (params.has('end')) {
+    const endYear = Number.parseInt(params.get('end'), 10);
+    if (Number.isFinite(endYear)) state.endYear = endYear;
+  }
   if (params.has('confSet')) state.confSet = normalizeConferenceSet(params.get('confSet'));
   if (params.has('rankings')) state.rankings = params.get('rankings') === 'true';
   if (params.has('historical')) state.historical = params.get('historical') === 'true';
@@ -207,6 +214,12 @@ export function createFilterBar(mount, {
     get perCapita() { return state.perCapita; },
     get historyMap() { return state.historical ? affiliationData?.historyMap || null : null; },
     get aliasMap() { return state.historical ? affiliationData?.aliasMap || null : null; },
+
+    setDisabled(disabled) {
+      element.querySelectorAll('input, select, button').forEach(control => {
+        control.disabled = disabled;
+      });
+    },
 
     apply(rawData) {
       return filterByYears(rawData, state.startYear, state.endYear, state.region,
