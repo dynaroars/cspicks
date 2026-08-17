@@ -873,6 +873,13 @@ test('parity audit validates ranked data', () => {
   const everything = calculateParityReport(raw, filtered, 'core', { perCapita: true, historical: true });
   assert.equal(everything.matchesCsrankings, false);
   assert.equal(everything.divergences.length, 3);
+
+  const inconsistent = calculateParityReport(raw, {
+    ...filtered,
+    schools: { A: { ...filtered.schools.A, totalAdjusted: 99 } }
+  });
+  assert.equal(inconsistent.matchesCsrankings, false);
+  assert.equal(inconsistent.totalMismatches, 1);
 });
 
 test('area momentum compares a school against the field, not against itself', () => {

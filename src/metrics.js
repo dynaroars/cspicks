@@ -430,6 +430,9 @@ export function calculateParityReport(rawData, filteredData, confSet = 'csrankin
     modes.perCapita && 'per-capita ranking',
     modes.historical && 'historical affiliations'
   ].filter(Boolean);
+  const matchesCsrankings = divergences.length === 0
+    && totalMismatches === 0
+    && rankOrderIssues === 0;
 
   return {
     sourceFaculty: Object.keys(rawData.professors || {}).length,
@@ -440,7 +443,7 @@ export function calculateParityReport(rawData, filteredData, confSet = 'csrankin
     profileCoverage,
     officialVenueMode,
     divergences,
-    matchesCsrankings: divergences.length === 0
+    matchesCsrankings
   };
 }
 
@@ -805,20 +808,27 @@ export function describeVerdict(type, entryA, entryB, aWins, bWins) {
  * Departments below `minFaculty` are excluded rather than ranked: with two or
  * three people the ratio is dominated by one person and means little.
  */
-export function calculatePerCapita(filteredData, { minFaculty = 5 } = {}) {
-  const rows = Object.values(filteredData?.schools || {})
+export function rankSchoolsPerCapita(schools, { minFaculty = 5 } = {}) {
+  const rows = Object.values(schools || {})
     .map(school => {
       const facultyCount = Object.keys(school.facultyAdjustedCounts || {}).length;
+      const totalAdjusted = Number.isFinite(school.totalAdjusted)
+        ? school.totalAdjusted
+        : Object.values(school.areas || {}).reduce((sum, area) => sum + (area.adjusted || 0), 0);
       return {
         name: school.name,
         school,
         facultyCount,
         overallRank: school.rank,
-        perCapita: facultyCount ? (school.totalAdjusted || 0) / facultyCount : 0
+        perCapita: facultyCount ? totalAdjusted / facultyCount : 0
       };
     })
     .filter(row => row.name && row.facultyCount >= minFaculty);
   return assignCompetitionRanks(rows, row => row.perCapita);
+}
+
+export function calculatePerCapita(filteredData, options) {
+  return rankSchoolsPerCapita(filteredData?.schools, options);
 }
 
 /**
