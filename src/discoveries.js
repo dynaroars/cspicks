@@ -1,16 +1,10 @@
-import { filterByYears, loadData } from './data.js';
-import { createFilterBar } from './filters.js';
+import { filterByYears } from './data.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
 import { buildFundingIndex, calculateFundingDiscoveries, formatFunding } from './nsf.js';
-import { SITE_NAME, updatePageMeta } from './seo.js';
+import { SITE_NAME } from './seo.js';
 import { shareUrl } from './share.js';
-import { trackDiscoveryShare, trackView } from './analytics.js';
+import { trackDiscoveryShare } from './analytics.js';
 import { areaLabels, escapeHtml, getInstitutionShortName } from './shared.js';
-import { initTooltipPositioning } from './tooltip-position.js';
-
-let rawData = null;
-let filters = null;
-let nsfData = null;
 
 const shareIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
 
@@ -18,22 +12,42 @@ function slugify(title) {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
-// Each card's own shareable URL: current filters plus a fragment that
-// scrollIntoDiscovery() below picks up on load, so "share this card" reaches
-// the one the reader meant, not just the top of the page.
-function discoveryCardUrl(id) {
-  return `${window.location.origin}${window.location.pathname}?${filters.toParams()}#${id}`;
+const regionLabels = {
+  world: 'worldwide',
+  us: 'US',
+  europe: 'European',
+  asia: 'Asian',
+  canada: 'Canadian',
+  australasia: 'Australasian'
+};
+
+// Every page that reads or writes the Discoveries URL agrees on this shape:
+// the shared filter params plus `view=discoveries`.
+export function discoveriesParams(filters) {
+  const params = filters.toParams();
+  params.set('view', 'discoveries');
+  return params;
 }
 
-function updateDiscoveriesUrl() {
-  const params = filters.toParams();
-  window.history.replaceState({}, '', `${window.location.pathname}?${params}${window.location.hash}`);
+// Each card's own shareable URL: current filters plus a fragment that
+// scrollToHashDiscovery() below picks up on load, so "share this card" reaches
+// the one the reader meant, not just the top of the page.
+function discoveryCardUrl(id, filters) {
+  return `${window.location.origin}${window.location.pathname}?${discoveriesParams(filters)}#${id}`;
+}
+
+export function getDiscoveriesMeta(filters) {
   const region = regionLabels[filters.region] || filters.region;
-  updatePageMeta({
+  return {
     title: `Discoveries: ${filters.startYear}-${filters.endYear} ${region} CS trends - ${SITE_NAME}`,
     description: `Notable, reproducible patterns in ${region} CS research from ${filters.startYear} to ${filters.endYear}: fastest-growing subfields, departments on the rise, funding trends, and more.`
-  });
-  trackView('default', 'discoveries');
+  };
+}
+
+export async function fetchDiscoveriesNsfData() {
+  const response = await fetch('./nsf-awards.json');
+  if (!response.ok) throw new Error(`NSF dataset returned ${response.status}`);
+  return response.json();
 }
 
 // One flash for whichever share button was just clicked, matching the label
@@ -50,7 +64,7 @@ function flashShareButton(button, message) {
   }, 1800);
 }
 
-function scrollToHashDiscovery() {
+export function scrollToHashDiscovery() {
   const id = window.location.hash.slice(1);
   if (!id) return;
   const card = document.getElementById(id);
@@ -59,15 +73,6 @@ function scrollToHashDiscovery() {
   card.classList.add('discovery-highlighted');
   setTimeout(() => card.classList.remove('discovery-highlighted'), 2200);
 }
-
-const regionLabels = {
-  world: 'worldwide',
-  us: 'US',
-  europe: 'European',
-  asia: 'Asian',
-  canada: 'Canadian',
-  australasia: 'Australasian'
-};
 
 function schoolLink(name) {
   const shortName = getInstitutionShortName(name);
@@ -84,7 +89,7 @@ function areaLink(area) {
   return `<a class="discovery-school" href="index.html?q=${encodeURIComponent(label)}" title="Explore ${escapeHtml(label)}">${escapeHtml(label)}</a>`;
 }
 
-function renderDiscoveries() {
+export function renderDiscoveries(rawData, filters, nsfData) {
   const container = document.getElementById('discovery-stats');
   if (!rawData || !nsfData) return;
   const { startYear: start, endYear: end, region, confSet, historyMap: history, aliasMap: aliases } = filters;
@@ -212,14 +217,13 @@ function renderDiscoveries() {
           <span><a class="discovery-school" href="funding.html?q=${encodeURIComponent(award.title)}" title="Explore this collaborative project">${escapeHtml(award.title.replace(/^Collaborative (?:Research|Resaerch):\s*/i, ''))}</a><small>${award.collaborativeAwardCount} institutional portions</small></span><strong>${formatFunding(award.collaborativeTotalAmount)}</strong>`), 'discovery-featured discovery-wide')}
       </div>` : ''}
   `;
-  updateDiscoveriesUrl();
 }
 
-function setupCardSharing() {
+export function setupCardSharing(filters) {
   document.getElementById('discovery-stats')?.addEventListener('click', async event => {
     const button = event.target.closest('[data-share-id]');
     if (!button) return;
-    const outcome = await shareUrl(discoveryCardUrl(button.dataset.shareId), {
+    const outcome = await shareUrl(discoveryCardUrl(button.dataset.shareId, filters), {
       title: `${button.dataset.shareTitle} - CS Picks Discoveries`,
       text: button.dataset.shareTitle
     });
@@ -228,34 +232,3 @@ function setupCardSharing() {
     trackDiscoveryShare(button.dataset.shareId);
   });
 }
-
-async function init() {
-  initTooltipPositioning();
-  filters = createFilterBar('#filter-bar', {
-    label: 'Discovery filters',
-    fields: ['region', 'years', 'rankings', 'history', 'percapita', 'confSet'],
-    years: { min: 2000, max: new Date().getFullYear() },
-    className: 'discoveries-filters',
-    onChange: renderDiscoveries
-  });
-  filters.setDisabled(true);
-  setupCardSharing();
-  await filters.ready();
-  const [loadedData, nsfResponse] = await Promise.all([loadData(), fetch('./nsf-awards.json')]);
-  if (!nsfResponse.ok) throw new Error(`NSF dataset returned ${nsfResponse.status}`);
-  rawData = loadedData;
-  nsfData = await nsfResponse.json();
-  filters.setDisabled(false);
-  document.getElementById('discoveries-loading').classList.add('hidden');
-  document.getElementById('discovery-stats').classList.remove('hidden');
-  renderDiscoveries();
-  // Only on first load: a shared link to one card should land on that card,
-  // but a later filter change re-rendering the same hash should not re-jerk
-  // the reader back to it.
-  scrollToHashDiscovery();
-}
-
-init().catch(error => {
-  console.error('Discoveries load error:', error);
-  document.getElementById('discoveries-loading').textContent = 'Could not load discovery data.';
-});

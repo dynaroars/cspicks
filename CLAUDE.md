@@ -15,7 +15,7 @@ JSON files in `public/`, then processed in the browser.
 npm run dev       # vite dev server at http://localhost:5173/
 npm test          # run the Node.js unit tests (test/data.test.js)
 npm run test:e2e  # Playwright e2e tests (test/e2e/); auto-starts the dev server on :4173
-npm run build      # production build to dist/ (multi-page: index, simulator, discoveries, funding)
+npm run build      # production build to dist/ (multi-page: index, simulator, funding)
 npm run preview    # preview the production build
 npm run deploy      # build + postbuild + publish dist/ to GitHub Pages (gh-pages branch)
 ```
@@ -59,13 +59,20 @@ See "Routine Maintenance" in README.md.
   the filter bar, URL state, and the example chips, then delegates to
   `src/search-results.js` (result sections), `src/search-suggestions.js` (autocomplete),
   `src/comparison.js` + `src/compare-view.js` (`A vs B` head-to-head mode), and `src/analysis.js`
-  (the tabbed analysis panel, imported directly — no window globals or custom events).
+  (the tabbed analysis panel, imported directly — no window globals or custom events). It also renders
+  the Discoveries view (`?view=discoveries`, surfaced via the "🔭 Discoveries" nav link) in place of the
+  normal search UI, reusing the same `filters` controller and `loadData()` call rather than standing up a
+  second page: the header, filter bar, search box, and examples are identical to Search, but the default
+  landing state puts the insight-card grid (`#discovery-stats`, inside `<main>`) where the university/
+  faculty lists would otherwise sit. Typing an actual search still runs normally and replaces the cards
+  with real results (`hideDiscoveryCards()` in `main.js`) — Discoveries is a landing-state swap, not a
+  separate search experience. `src/discoveries.js` exports the pure rendering (`renderDiscoveries`) and
+  URL/meta helpers (`discoveriesParams`, `getDiscoveriesMeta`) that `main.js` drives. Computation for its
+  insights lives in `src/metrics.js` (university-level) and is never done inline — see "Adding a new
+  Discovery" below.
 - `simulator.html` + `src/simulator.js` — standalone ranking-impact workflow for adding, transferring, or
   removing faculty. Pure name-matching and rank-impact calculations live in `src/simulation.js`;
   `src/dblp-search-ui.js` renders the DBLP candidate-search UI.
-- `discoveries.html` + `src/discoveries.js` — standalone tool surfacing notable ranking and funding
-  movements. Computation lives in `src/metrics.js` (university-level) and is never done inline in the page
-  module — see "Adding a new Discovery" below.
 - `funding.html` + `src/funding.js` — standalone NSF funding search over the synchronized snapshot in
   `public/nsf-awards.json`. Attribution and card rendering live in `src/nsf.js`; Discoveries also reads it
   for its funding sections. Search itself carries no NSF data and never loads the snapshot.

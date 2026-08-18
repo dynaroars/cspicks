@@ -48,6 +48,7 @@ Live at **[cspicks.roars.dev](https://cspicks.roars.dev)**.
 - **Conservative Matching**: Retain an award only when its NSF recipient matches the faculty member's current CSRankings institution.
 
 ### 9. Discoveries
+- **On the Search page**: the "🔭 Discoveries" nav link (`index.html?view=discoveries`) opens the same search shell — header, filter bar, search box, examples — but its default landing state shows the Discoveries insight cards where the university/faculty lists would normally sit. Typing a real search still works exactly like Search and replaces the cards with actual results.
 - **Notable, reproducible patterns**: fastest-growing/shrinking research areas and universities, departments rising or falling, funding trends, faculty mobility (who's new to a field), regional specializations, and more — every card is computed from the live data, never hand-picked.
 - **University-level and subfield-level**: one set of cards asks "which universities moved," a second asks "which research areas themselves grew, shrank, or changed leaders" region-wide.
 - **Stable, shareable per-card links**: every card has its own `#fragment` URL and a Copy Link button; opening that link scrolls to and highlights the exact card.
@@ -59,11 +60,11 @@ Every page keeps the URL in sync with what's on screen, so any view is a link th
 | Page | What's encoded |
 | --- | --- |
 | Search (`index.html`) | `q` (the search text, including `A vs B`), `target`/`targetType` (the selected analysis target), plus region/years/venue set/rankings/history/per-capita from the shared filter bar |
-| Discoveries (`discoveries.html`) | Region/years/venue set/history/per-capita, plus a `#fragment` per card (`#discovery-fastest-growing-subfields`, etc.) that scrolls to and briefly highlights that card on load |
+| Discoveries (`index.html?view=discoveries`) | `view=discoveries`, region/years/venue set/history/per-capita, plus a `#fragment` per card (`#discovery-fastest-growing-subfields`, etc.) that scrolls to and briefly highlights that card on load — or `q`/`target` once the visitor searches for something |
 | Simulator (`simulator.html`) | Filters, `univ` (selected university), and `candidates` (the raw candidate names/DBLP links) — opening the link pre-fills the setup one click from a result, without re-querying DBLP on load |
 | Funding (`funding.html`) | `q` (search or `A vs B`) plus the year-range filter |
 
-Filter choices also persist across page navigations via `localStorage`, so clicking from Search into Discoveries doesn't silently reset the region or year range.
+Filter choices also persist across page navigations via `localStorage`, so switching between Search and Discoveries, or clicking into Simulator or Funding, doesn't silently reset the region or year range.
 
 Every page has an unobtrusive **Copy Link** button in the header (`src/share.js`): the Web Share API's native sheet where the browser offers one, a clipboard copy otherwise. Discoveries cards each get their own copy of the same control, scoped to that card's fragment. `src/seo.js` keeps `<title>`, the meta description, canonical link, and OpenGraph/Twitter tags in sync with the same state, so a shared link's title and social preview describe the actual view, not just the generic homepage.
 
@@ -80,10 +81,10 @@ Every page has an unobtrusive **Copy Link** button in the header (`src/share.js`
 No analytics are wired to a real account by default — `src/analytics.js`'s calls are safe no-ops until one is configured, and nothing here can invent credentials for you. To enable lightweight, cookie-free tracking:
 
 1. Sign up at [plausible.io](https://plausible.io) (or self-host it) and register `cspicks.roars.dev`.
-2. Uncomment the `<script defer data-domain="cspicks.roars.dev" src="https://plausible.io/js/script.js">` tag near the bottom of each page's `<head>` (`index.html`, `discoveries.html`, `simulator.html`, `funding.html`).
+2. Uncomment the `<script defer data-domain="cspicks.roars.dev" src="https://plausible.io/js/script.js">` tag near the bottom of each page's `<head>` (`index.html`, `simulator.html`, `funding.html`).
 3. Deploy. Plausible's dashboard then answers: visits, popular pages (via its own pathname-based pageviews), and referral sources out of the box.
 
-`src/analytics.js` additionally fires custom events — `View` (by page and kind: school/researcher/area/search-results), `Comparison`, `Discovery Share`, and `Share` — at the same points the URL updates, so "popular university pages," "popular research fields," "comparison usage," and "Discoveries traffic" are answerable from Plausible's custom-event breakdowns even though those views share one static HTML file per page. Swap the calls in `analytics.js` for another tool's API (e.g. GoatCounter) if preferred; nothing else needs to change.
+`src/analytics.js` additionally fires custom events — `View` (by page and kind: school/researcher/area/search-results), `Comparison`, and `Discovery Share`, each tagged with `page: 'search' | 'discoveries'` where relevant — at the same points the URL updates, so "popular university pages," "popular research fields," "comparison usage," and "Discoveries traffic" are answerable from Plausible's custom-event breakdowns even though those views share one static HTML file per page. Swap the calls in `analytics.js` for another tool's API (e.g. GoatCounter) if preferred; nothing else needs to change.
 
 ## 🛠️ Technologies Used
 
@@ -215,14 +216,14 @@ cspicks/
 │   ├── metrics.js                    # School/researcher/subfield metrics and Discoveries insights
 │   ├── filters.js                    # Shared region/year/venue/history filter bar
 │   ├── charts.js                     # Chart.js defaults, redraw, and theme handling
-│   ├── main.js                       # Search page controller
+│   ├── main.js                       # Search page controller (also drives the Discoveries view)
 │   ├── search-results.js             # Search result sections
 │   ├── search-cards.js               # Professor/school card rendering
 │   ├── suggestion-box.js             # Shared autocomplete menu (Search and Funding)
 │   ├── search-suggestions.js         # Search autocomplete rows
 │   ├── comparison.js                 # `A vs B` head-to-head mode (schools, professors, or areas)
 │   ├── compare-view.js               # Comparison chart and summary rendering
-│   ├── discoveries.js                # Discoveries page: computes and renders insight cards
+│   ├── discoveries.js                # Discoveries view (rendered on the Search page): insight cards
 │   ├── simulator.js                  # Simulator page UI and orchestration
 │   ├── simulation.js                 # Pure matching and rank-impact logic
 │   ├── analysis.js                   # Integrated analysis and data-health logic
@@ -240,8 +241,7 @@ cspicks/
 │   ├── build-school-aliases.js       # Generates school-aliases.json
 │   ├── generate-og-image.mjs         # Renders og-card-template.html to public/og-image.png
 │   └── generate-sitemap.mjs          # Generates public/sitemap.xml from the CSRankings roster
-├── index.html                        # Search, results, and integrated analysis
-├── discoveries.html                  # Notable, reproducible research trends
+├── index.html                        # Search, results, integrated analysis, and the Discoveries view
 ├── funding.html                      # Nationwide NSF funding beta
 ├── simulator.html                    # Ranking simulator page
 ├── FAQ.md                            # GitHub-hosted methods and data documentation

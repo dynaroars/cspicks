@@ -49,8 +49,8 @@
         <a class="icon-link roars-link" href="https://roars.dev" target="_blank" rel="noopener noreferrer" aria-label="ROARS Lab" title="ROARS Lab"></a>
       </div>
       <nav class="top-nav" aria-label="Primary navigation">
-        <a href="index.html" class="active" aria-current="page">🔎 Search</a>
-        <a href="discoveries.html">🔭 Discoveries</a>
+        <a href="index.html" id="nav-search">🔎 Search</a>
+        <a href="index.html?view=discoveries" id="nav-discoveries">🔭 Discoveries</a>
         <a href="simulator.html">☠️ Simulator</a>
         <a href="funding.html">🇺🇸 NSF Funding</a>
       </nav>
@@ -94,6 +94,7 @@
     </section>
 
     <main>
+      <div id="discovery-stats" class="diagnostic-panel" hidden></div>
       <section id="conference-results" class="results-grid"></section>
       <section id="school-results" class="results-grid"></section>
       <section id="area-people-results" class="results-grid"></section>

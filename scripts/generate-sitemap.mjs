@@ -36,7 +36,7 @@ const url = (loc, { changefreq = 'weekly', priority = '0.5' } = {}) => `  <url>
 
 const staticPages = [
   url(`${ORIGIN}/`, { changefreq: 'daily', priority: '1.0' }),
-  url(`${ORIGIN}/discoveries.html`, { changefreq: 'daily', priority: '0.9' }),
+  url(`${ORIGIN}/?view=discoveries`, { changefreq: 'daily', priority: '0.9' }),
   url(`${ORIGIN}/simulator.html`, { changefreq: 'weekly', priority: '0.6' }),
   url(`${ORIGIN}/funding.html`, { changefreq: 'weekly', priority: '0.7' })
 ];

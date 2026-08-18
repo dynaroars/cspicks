@@ -17,6 +17,12 @@ let appData = { professors: {}, schools: {} };
 let priorAppData = { professors: {}, schools: {} };
 let filters = null;
 let selectedAnalysisTarget = null;
+let nsfData = null;
+// Discoveries' cards (and the NSF fetch they need) are dead weight on every
+// plain Search visit, so they're loaded as a separate chunk only when the
+// page was actually reached via the Discoveries nav link, not statically
+// imported here.
+let discoveriesApi = null;
 
 function getCardContext() {
   return {
@@ -44,8 +50,30 @@ function renderSchoolCard(school, filterArea = null, options = {}) {
 }
 
 const params = new URLSearchParams(window.location.search);
+const isDiscoveries = params.get('view') === 'discoveries';
+
+function updateNavActive() {
+  const searchLink = document.getElementById('nav-search');
+  const discoveriesLink = document.getElementById('nav-discoveries');
+  searchLink.classList.toggle('active', !isDiscoveries);
+  discoveriesLink.classList.toggle('active', isDiscoveries);
+  if (isDiscoveries) {
+    searchLink.removeAttribute('aria-current');
+    discoveriesLink.setAttribute('aria-current', 'page');
+  } else {
+    discoveriesLink.removeAttribute('aria-current');
+    searchLink.setAttribute('aria-current', 'page');
+  }
+}
 
 async function init() {
+  updateNavActive();
+
+  // Kick off the fetch immediately (in parallel with filter-bar setup and
+  // loadData() below) so awaiting it later costs nothing extra - only its
+  // own network/parse time, not a serialized extra round trip.
+  const discoveriesModulePromise = isDiscoveries ? import('./discoveries.js') : null;
+
   filters = createFilterBar('#filter-bar', {
     label: 'Search filters',
     // Per-faculty ordering only means something for the ranking lists this page
@@ -57,6 +85,7 @@ async function init() {
       updateURL();
     }
   });
+
   initComparison({
     get appData() { return appData; },
     get priorAppData() { return priorAppData; },
@@ -76,7 +105,15 @@ async function init() {
   initTooltipPositioning();
 
   try {
-    rawData = await loadData();
+    if (isDiscoveries) {
+      discoveriesApi = await discoveriesModulePromise;
+      discoveriesApi.setupCardSharing(filters);
+      const [loadedData, loadedNsfData] = await Promise.all([loadData(), discoveriesApi.fetchDiscoveriesNsfData()]);
+      rawData = loadedData;
+      nsfData = loadedNsfData;
+    } else {
+      rawData = await loadData();
+    }
     await filters.ready();
 
     appData = filters.apply(rawData);
@@ -103,7 +140,11 @@ async function init() {
       // triggers this, but nothing here calls it (the URL is already correct).
       updateSeoForCurrentView(params.get('q'));
     } else {
-      showDefaultRankings();
+      showLandingState();
+      // Only meaningful right after the initial render - a card's #fragment
+      // link should land on that card once, not re-scroll on every later
+      // filter change that re-renders the grid.
+      if (isDiscoveries) discoveriesApi.scrollToHashDiscovery();
     }
 
     searchInput.focus();
@@ -159,6 +200,7 @@ function restoreExpandedCards(expandedCards) {
 function updateURL() {
   const params = filters.toParams();
 
+  if (isDiscoveries) params.set('view', 'discoveries');
   const q = document.getElementById('main-search').value;
   if (q) params.set('q', q);
   if (selectedAnalysisTarget) {
@@ -175,10 +217,15 @@ function updateURL() {
 // copied link previews the actual view rather than the generic homepage -
 // every call site that reproduces the URL (updateURL) reproduces the title too.
 function updateSeoForCurrentView(query) {
+  const page = isDiscoveries ? 'discoveries' : 'search';
   const trimmed = (query || '').trim();
   if (!trimmed) {
-    updatePageMeta({ title: `${SITE_NAME} - Find the Right CS PhD Program and Advisor` });
-    trackView('default');
+    // The filter bar isn't disabled during the initial load, so this can in
+    // principle fire before the lazy-loaded discoveries chunk resolves -
+    // skip the meta update rather than reading off a still-null module.
+    if (isDiscoveries && discoveriesApi) updatePageMeta(discoveriesApi.getDiscoveriesMeta(filters));
+    else if (!isDiscoveries) updatePageMeta({ title: `${SITE_NAME} - Find the Right CS PhD Program and Advisor` });
+    trackView('default', page);
     return;
   }
   if (isComparing()) {
@@ -186,7 +233,7 @@ function updateSeoForCurrentView(query) {
       title: `${trimmed} - ${SITE_NAME}`,
       description: `Head-to-head comparison: ${trimmed}. Publication trends, research strengths, and rank breakdowns on CS Picks.`
     });
-    trackComparison(activeComparisonType());
+    trackComparison(activeComparisonType(), page);
     return;
   }
   if (selectedAnalysisTarget) {
@@ -196,14 +243,36 @@ function updateSeoForCurrentView(query) {
       title: `${name} - ${SITE_NAME}`,
       description: `${name} ${kind} on CS Picks: publication trends, research strengths, and rankings from open academic data.`
     });
-    trackView(selectedAnalysisTarget.type);
+    trackView(selectedAnalysisTarget.type, page);
     return;
   }
   updatePageMeta({
     title: `${trimmed} - ${SITE_NAME}`,
     description: `CS Picks results for "${trimmed}": universities, professors, and research areas from open academic data.`
   });
-  trackView('search-results');
+  trackView('search-results', page);
+}
+
+// Search's empty-query landing browses every university and professor;
+// Discoveries uses the same shell but shows the insight-card grid where
+// those lists would go instead.
+function showLandingState() {
+  if (isDiscoveries) {
+    displayIntegratedAnalysis(null);
+    hideComparison();
+    clearSearchSections();
+    document.getElementById('discovery-stats').hidden = false;
+    discoveriesApi.renderDiscoveries(rawData, filters, nsfData);
+  } else {
+    showDefaultRankings();
+  }
+}
+
+// A real search (or comparison, or clicking into a card's analysis) replaces
+// the Discoveries landing grid the same way it replaces Search's default
+// rankings - this just also needs to hide the card grid first.
+function hideDiscoveryCards() {
+  if (isDiscoveries) document.getElementById('discovery-stats').hidden = true;
 }
 
 function refreshData() {
@@ -220,7 +289,7 @@ function refreshData() {
   if (query.length >= 2) {
     runQuery(query);
   } else {
-    showDefaultRankings();
+    showLandingState();
   }
 
   refreshAnalysis();
@@ -259,6 +328,7 @@ function setupSearch() {
         return;
       }
 
+      hideDiscoveryCards();
       const query = item.value.toLowerCase();
       searchProfessors(query);
       searchSchools(query);
@@ -280,7 +350,7 @@ function setupSearch() {
     suggestionBox.render(rawQuery);
 
     if (rawQuery.length < 2) {
-      showDefaultRankings();
+      showLandingState();
       return;
     }
 
@@ -423,6 +493,7 @@ function updateIntegratedAnalysis(query) {
 // Runs a query through either the comparison view or the regular search
 // sections. Returns true when the query was handled as a comparison.
 function runQuery(query, { includeDblp = true } = {}) {
+  hideDiscoveryCards();
   // Fresh suggestions for each search rather than the set drawn at page load.
   renderSearchExamples();
   const comparison = resolveComparison(query);
@@ -446,6 +517,7 @@ function runQuery(query, { includeDblp = true } = {}) {
 }
 
 function showIntegratedAnalysis(type, name) {
+  hideDiscoveryCards();
   const input = document.getElementById('main-search');
   input.value = type === 'researcher' ? cleanName(name) : name;
   document.body.classList.add('has-search-query');

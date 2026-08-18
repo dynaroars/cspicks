@@ -1636,18 +1636,6 @@ button.card-header {
   box-shadow: none;
 }
 
-.discoveries-tool-page .diagnostic-panel {
-  padding: 0;
-  background: transparent;
-  border: 0;
-}
-
-.discoveries-tool-page .discovery-card {
-  padding: 1.15rem;
-  background: var(--card-bg);
-  border-radius: 14px;
-}
-
 .simulator-tool-page .simulator-disclaimer {
   max-width: 880px;
   margin-bottom: 1rem;
@@ -2365,23 +2353,6 @@ button.card-header {
   margin-top: 1rem;
 }
 
-.discoveries-page {
-  max-width: 1180px;
-  margin: 0 auto;
-}
-
-.discoveries-filters {
-  width: 100%;
-  max-width: none !important;
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
-  padding: 0.35rem 0 !important;
-}
-
-.discoveries-filters .filter-group:not(.checkboxes),
-.discoveries-filters .filter-group select {
-  height: 34px;
-}
 .simulator-disclaimer.context-note {
   box-sizing: border-box;
   width: 100%;
@@ -2401,10 +2372,6 @@ button.card-header {
 .context-note strong {
   color: var(--impact-neg-text);
   font-weight: 600;
-}
-
-.discoveries-page .hidden {
-  display: none;
 }
 
 .discovery-card {

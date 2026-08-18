@@ -38,7 +38,3 @@ export function trackComparison(entityType, page = 'search') {
 export function trackDiscoveryShare(cardId) {
   track('Discovery Share', { card: cardId });
 }
-
-export function trackShare(page) {
-  track('Share', { page });
-}

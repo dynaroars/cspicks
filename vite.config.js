@@ -8,7 +8,6 @@ export default defineConfig({
             input: {
                 main: resolve(__dirname, 'index.html'),
                 simulator: resolve(__dirname, 'simulator.html'),
-                discoveries: resolve(__dirname, 'discoveries.html'),
                 funding: resolve(__dirname, 'funding.html'),
             },
         },

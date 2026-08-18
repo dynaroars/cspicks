@@ -133,25 +133,17 @@ test('malformed shared filter parameters fall back to valid controls', async ({ 
   await expect(page.locator('#school-results')).toContainText('GMU');
 });
 
-test('search and discoveries use the same roomy filter bar', async ({ page }) => {
+test('the shared filter bar stays a single roomy row', async ({ page }) => {
   const measurements = async () => page.locator('#filter-bar').evaluate(bar => ({
-    width: Math.round(bar.getBoundingClientRect().width),
-    controlHeight: Math.round(bar.querySelector('#region-select').getBoundingClientRect().height),
     toggleWidths: [...bar.querySelectorAll('.filter-checkbox')].map(label => Math.round(label.getBoundingClientRect().width)),
     wraps: new Set([...bar.querySelectorAll('.filter-group')].map(group => Math.round(group.getBoundingClientRect().top))).size
   }));
 
   await page.goto('./?percapita=false');
-  const search = await measurements();
-  expect(search.toggleWidths.every(width => width >= 80)).toBe(true);
-
-  await page.goto('./discoveries.html?percapita=false');
-  await expect(page.locator('#discovery-stats')).toBeVisible();
-  const discoveries = await measurements();
-  expect(discoveries.controlHeight).toBe(search.controlHeight);
-  expect(discoveries.width).toBeGreaterThanOrEqual(search.width);
-  expect(discoveries.toggleWidths.every(width => width >= 80)).toBe(true);
-  expect(discoveries.wraps).toBe(1);
+  await expect(page.locator('#school-results')).toContainText('GMU');
+  const layout = await measurements();
+  expect(layout.toggleWidths.every(width => width >= 80)).toBe(true);
+  expect(layout.wraps).toBe(1);
 });
 
 for (const width of [1440, 820, 390]) {
@@ -476,10 +468,8 @@ test('region defaults are locale-aware and a user choice carries across every ta
   await expect(page.locator('#region-select')).toHaveValue('us');
   await page.locator('#region-select').selectOption('europe');
 
-  await page.goto('discoveries.html');
+  await page.goto('./?view=discoveries');
   await expect(page.locator('#region-select')).toHaveValue('europe');
-  await expect(page.locator('#discoveries-history-warning')).toHaveCount(0);
-  await expect(page.locator('.tool-intro .eyebrow')).toHaveCount(0);
   await page.goto('simulator.html');
   await expect(page.locator('#region-select')).toHaveValue('europe');
   await expect(page.locator('.tool-intro .eyebrow')).toHaveCount(0);
@@ -490,27 +480,44 @@ test('region defaults are locale-aware and a user choice carries across every ta
   await expect(page.locator('#region-select')).toHaveValue('world');
 });
 
-test('discoveries filter changes update the shareable URL and title', async ({ page }) => {
-  await page.goto('discoveries.html');
-  await expect(page.locator('#discoveries-loading')).toBeHidden();
+test('the Discoveries nav link shows insight cards in place of the university/faculty lists', async ({ page }) => {
+  await page.goto('./?view=discoveries&percapita=false');
+  await expect(page.getByRole('link', { name: '🔭 Discoveries' })).toHaveAttribute('aria-current', 'page');
+  // Same shell as Search - header, filter bar, search box, examples - but the
+  // insight-card grid takes the place of the default university/faculty lists.
+  await expect(page.locator('#filter-bar')).toBeVisible();
+  await expect(page.locator('#main-search')).toBeVisible();
+  await expect(page.locator('#discovery-stats')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Biggest rank gains' })).toBeVisible();
+  await expect(page.locator('#school-results')).toBeEmpty();
+  await expect(page.locator('#prof-results')).toBeEmpty();
+
+  // Typing a real search still works exactly like Search, replacing the cards.
+  await page.locator('#main-search').fill('George Mason University');
+  await expect(page.locator('#school-results')).toContainText('George Mason University');
+  await expect(page.locator('#discovery-stats')).toBeHidden();
+
+  await page.locator('#main-search').fill('');
+  await expect(page.locator('#discovery-stats')).toBeVisible();
   await page.locator('#region-select').selectOption('europe');
+  await expect(page).toHaveURL(/view=discoveries/);
   await expect(page).toHaveURL(/region=europe/);
-  await expect(page).toHaveTitle(/European/);
+  await expect(page.locator('#school-results')).toBeEmpty();
 });
 
 test('a discovery card\'s share button copies a link back to that card', async ({ page, context }) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-  await page.goto('discoveries.html');
-  await expect(page.locator('#discoveries-loading')).toBeHidden();
+  await page.goto('./?view=discoveries');
+  await expect(page.locator('#discovery-stats')).toBeVisible();
   const card = page.locator('.discovery-card', { hasText: 'Fastest-growing subfields' });
   await card.locator('.discovery-share').click();
   const copied = await page.evaluate(() => navigator.clipboard.readText());
-  expect(copied).toMatch(/discoveries\.html\?.*#discovery-fastest-growing-subfields$/);
+  expect(copied).toMatch(/\?.*view=discoveries.*#discovery-fastest-growing-subfields$/);
 });
 
 test('opening a discovery card\'s link directly scrolls to and highlights it', async ({ page }) => {
-  await page.goto('discoveries.html?region=us#discovery-fastest-growing-subfields');
-  await expect(page.locator('#discoveries-loading')).toBeHidden();
+  await page.goto('./?view=discoveries&region=us#discovery-fastest-growing-subfields');
+  await expect(page.locator('#discovery-stats')).toBeVisible();
   await expect(page.locator('#discovery-fastest-growing-subfields')).toHaveClass(/discovery-highlighted/);
 });
 
@@ -637,13 +644,17 @@ test('funding suggestions complete both sides of a vs query', async ({ page }) =
   await expect(listbox).toBeHidden();
 });
 
-test('funding stays off the search page and on discoveries', async ({ page }) => {
+test('funding stays off search results but appears in the Discoveries cards', async ({ page }) => {
   await page.goto('./?q=Hai%20Duong');
   await expect(page.locator('#prof-results .card-stats')).toContainText('papers');
   await expect(page.locator('#prof-results')).not.toContainText('NSF');
   await expect(page.locator('#integrated-analysis')).not.toContainText('NSF');
 
-  await page.goto('discoveries.html');
+  await page.goto('./?view=discoveries&q=Hai%20Duong');
+  await expect(page.locator('#prof-results .card-stats')).toContainText('papers');
+  await expect(page.locator('#prof-results')).not.toContainText('NSF');
+
+  await page.goto('./?view=discoveries');
   await expect(page.getByRole('heading', { name: 'NSF funding patterns across US universities' })).toBeVisible();
   await expect(page.getByRole('heading', { name: /Largest attributed NSF portfolios/ })).toBeVisible();
   await expect(page.getByRole('heading', { name: /Largest matched collaborative projects/ })).toBeVisible();
