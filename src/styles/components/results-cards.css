@@ -1,0 +1,363 @@
+/* Views */
+.view {
+  display: none;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.view.active {
+  display: block;
+}
+
+/* Results Grid */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.results-grid:empty {
+  margin-bottom: 0;
+}
+
+#school-results {
+  grid-template-columns: 1fr;
+}
+
+#conference-results {
+  grid-template-columns: 1fr;
+}
+
+/* A lone result lines up with the analysis panel below it. */
+#prof-results.single-result,
+#school-results.single-result {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.search-context-header {
+  display: none;
+  margin: 1.5rem 0;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.load-error {
+  color: var(--impact-neg-text);
+  text-align: center;
+}
+
+.analysis-school-metrics .school-metric small {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  text-transform: none;
+}
+
+.analysis-insights {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--hover-bg);
+  border-left: 3px solid var(--primary-color);
+  border-radius: 0 8px 8px 0;
+}
+
+#researcher-highlights [data-action="load-coauthors"] {
+  margin: -0.5rem 0 1rem 1rem;
+  font-size: var(--text-sm);
+}
+
+.analysis-insights h3 {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.analysis-insights ul {
+  margin: 0.35rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.analysis-insights li + li {
+  margin-top: 0.2rem;
+}
+
+#researcher-highlights {
+  width: 100%;
+  max-width: 100%;
+}
+
+.dblp-section-header,
+.dblp-compact-list {
+  grid-column: 1 / -1;
+}
+
+.dblp-section-header { margin-top: 2rem; }
+.dblp-compact-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.compact-card { margin: 0; }
+
+.view-section[hidden] { display: none; }
+
+/* Cards */
+.card {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--text-primary);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+.card h2 {
+  margin: 0 0 0.25rem;
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  user-select: text;
+  cursor: text;
+}
+
+.result-position {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+button.card-header {
+  width: 100%;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  text-align: left;
+}
+
+.inline-link,
+.faculty-tag {
+  color: inherit;
+  background: none;
+  border: 0;
+  font: inherit;
+  text-decoration: underline dotted;
+  cursor: pointer;
+}
+
+/* CSRankings' own country flags, next to the institution they belong to. */
+.country-flag {
+  width: 16px;
+  height: 11px;
+  margin-right: 0.4rem;
+  border-radius: 2px;
+  vertical-align: baseline;
+  object-fit: cover;
+}
+
+.card-badge {
+  margin-left: 0.5rem;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.75em;
+  font-weight: 500;
+}
+
+.professor-heading {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.75rem;
+}
+
+.faculty-honors {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.honor-badge {
+  padding: 0.18rem 0.45rem;
+  color: var(--text-secondary);
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.honor-turing {
+  color: #92400e;
+  background: color-mix(in srgb, #f59e0b 12%, var(--card-bg));
+  border-color: color-mix(in srgb, #f59e0b 45%, var(--border-color));
+}
+
+.faculty-unit-notes {
+  margin: -1rem 0 1.25rem;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+
+.school-metadata {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.school-metadata a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+[data-theme="dark"] .honor-turing {
+  color: #fbbf24;
+}
+
+.affiliation-years {
+  color: var(--text-secondary);
+  font-size: 0.85em;
+}
+
+.affiliation-history {
+  display: inline;
+  margin-left: 0.35rem;
+  font-size: 0.9em;
+}
+
+.affiliation-history summary {
+  display: inline;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.dblp-card-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.dblp-adjusted-count {
+  color: #059669;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.school-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.5rem;
+  max-width: 860px;
+  margin-bottom: 1rem;
+}
+
+.school-metric {
+  flex: 0 0 auto;
+  width: max-content;
+  max-width: min(100%, 310px);
+  padding: 0.55rem 0.65rem;
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.school-metric span,
+.school-metric strong {
+  display: block;
+}
+
+.school-metric .metric-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem;
+  overflow: visible;
+  white-space: normal;
+}
+
+.school-metric .metric-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.school-metric .metric-info {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  overflow: visible;
+  color: var(--text-secondary);
+  cursor: help;
+  font-size: 0.72rem;
+  line-height: 1;
+  text-transform: none;
+}
+
+.analysis-school-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: none;
+  margin-top: 0.5rem;
+}
+
+.analysis-school-metrics .school-metric {
+  width: auto;
+  max-width: none;
+}
+
+.school-metric .metric-info .tooltip-content {
+  width: min(260px, calc(100vw - 2rem));
+  overflow: visible;
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: none;
+  white-space: normal;
+}
+
+.summary-note {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.rank-gap-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.5rem;
+}
+
+.rank-gap-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 0.5rem;
+  padding: 0.6rem;
+  background: var(--hover-bg);
+  border-radius: 7px;
+}
+
+.rank-gap-item strong {
+  overflow: hidden;
+  max-width: 12rem;
+  color: var(--text-primary);
+  font-size: var(--text-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rank-gap-item small {
+  grid-column: 1 / -1;
+  color: var(--text-secondary);
+}

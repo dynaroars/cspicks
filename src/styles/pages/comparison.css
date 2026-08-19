@@ -1,0 +1,307 @@
+/* Rosters of people sit beside the university tiles in the same card, so they
+   match those tiles' type size rather than defaulting to body copy. */
+.comparison-name-list {
+  margin: 0;
+  font-size: var(--text-xs);
+  line-height: 1.7;
+}
+
+.diagnostic-panel {
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.diagnostic-panel h2,
+.diagnostic-panel h3 {
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+}
+
+.diagnostic-panel h3 { margin-top: 1.25rem; }
+
+.integrated-analysis {
+  width: 100%;
+  max-width: 100%;
+  margin: 1.25rem auto 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.integrated-analysis[hidden] {
+  display: none;
+}
+
+.comparison-results {
+  width: 100%;
+  max-width: 100%;
+  margin: 1.5rem auto 0;
+}
+
+.comparison-results[hidden] {
+  display: none;
+}
+
+.comparison-results-header {
+  margin-bottom: 1.25rem;
+}
+
+.comparison-results-header h2 {
+  margin: 0;
+}
+
+.comparison-results-header p {
+  margin: 0.25rem 0 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.comparison-results .chart-container {
+  position: relative;
+  height: 500px;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+/* The full per-area detail closes the comparison rather than opening it. */
+.comparison-chart-section {
+  margin-top: 1.5rem;
+}
+
+.comparison-chart-section[hidden] {
+  display: none;
+}
+
+.comparison-chart-title {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.comparison-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.comparison-summary .summary-card {
+  padding: 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.comparison-summary .summary-card h4 {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.comparison-summary .summary-card .leader {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.comparison-summary .summary-card .margin {
+  margin-top: 0.25rem;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+}
+
+/* Blue = first target, green = second, matching the chart's two series. */
+.comparison-side-a { --comparison-accent: rgba(37, 99, 235, 1); }
+.comparison-side-b { --comparison-accent: rgba(16, 185, 129, 1); }
+
+.comparison-verdict,
+.comparison-notice,
+.comparison-bridge-card,
+.comparison-leads {
+  grid-column: 1 / -1;
+}
+
+/* The one line a reader can stop at, so it carries the most weight on the page. */
+.comparison-verdict p {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.comparison-scoreboard {
+  grid-column: 1 / -1;
+}
+
+/* Turing/ACM Fellow badges sit under the name in the head-to-head header,
+   right-aligned like the rest of that column. */
+.comparison-table thead th .faculty-honors {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 0.5rem 0.4rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: right;
+}
+
+.comparison-table thead th {
+  color: var(--comparison-accent, var(--text-secondary));
+  font-weight: 600;
+}
+
+.comparison-table tbody th {
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-align: left;
+}
+
+.comparison-measure {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 4px;
+  cursor: help;
+}
+
+.comparison-measure:focus {
+  color: var(--text-primary);
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+.comparison-measure-info {
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.comparison-measure .tooltip-content {
+  width: min(340px, calc(100vw - 2rem));
+  text-transform: none;
+}
+
+.comparison-table tbody tr:last-child th,
+.comparison-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.comparison-table td {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The better number in each row carries its side's color and weight. */
+.comparison-table td.is-leader {
+  color: var(--comparison-accent);
+  font-weight: 700;
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+}
+
+.comparison-verdict .comparison-side-a,
+.comparison-verdict .comparison-side-b {
+  color: var(--comparison-accent);
+  font-weight: 700;
+}
+
+.comparison-notice {
+  padding: 2rem;
+  border-style: dashed;
+  text-align: center;
+}
+
+.comparison-notice h4 {
+  margin-bottom: 0.5rem;
+}
+
+.comparison-notice p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+/* The two funding cards sit side by side beneath the head-to-head table. */
+.comparison-cards {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 2rem;
+}
+
+.comparison-leads {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.comparison-lead-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.comparison-lead-column > h4 {
+  margin: 0;
+  color: var(--comparison-accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.comparison-summary .comparison-lead-card {
+  border-color: color-mix(in srgb, var(--comparison-accent) 25%, transparent);
+  background: color-mix(in srgb, var(--comparison-accent) 3%, var(--card-bg));
+}
+
+.comparison-summary .comparison-lead-card .margin {
+  color: var(--comparison-accent);
+}
+
+.funding-results-container {
+  width: 100%;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.funding-results-container .results-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.funding-status {
+  margin: 0.5rem 0;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.funding-status:empty {
+  display: none;
+}

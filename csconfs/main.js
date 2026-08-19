@@ -139,8 +139,9 @@ async function init() {
   initTooltipPositioning();
 
   try {
-    const module = await import('./data/conferences.json');
-    conferences = module.default;
+    const response = await fetch(new URL('./data/conferences.json', import.meta.url));
+    if (!response.ok) throw new Error(`Conference data request failed (${response.status})`);
+    conferences = await response.json();
     suggestions = buildSuggestions();
     input.disabled = false;
     input.placeholder = 'Search conferences or research areas (e.g., PLDI or Security)';

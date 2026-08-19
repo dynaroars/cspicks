@@ -1,0 +1,308 @@
+/* Search & Filters */
+.search-section {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.search-container input {
+  background: rgba(0, 0, 0, .05) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAUCAYAAABvVQZ0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQBJREFUeNqslI0RgyAMhdENWIEVWMEVXIGO0BW6Ah2hHcGOoCPYEewINFzBe9IA9id37w4kfEZesHHOCSYUqSPJML+RJlELDwN1pMHxMZNMkr8RTgyz2YPH5LmtwXpIHkOFmKhIlxowDmYAycKnHAHYcTCsSpXOJCie6YWDnXKLGeHLN2stGaqDsXXrX3GFcYcLrfhjtKEhffQ792gYT2nT6pJDjCw4z7ZGdGipOIqNbXIwFUARmCbKpMfYxsWJBmCEDoW7+gYUTAU2s3HJrK3AJvMLkqGHFLgWXTckm+SfSQexs+tLRqwVfgvjgMsvMAT689S5M/sk/I14kO5PAQYAuk6L1q+EdHMAAAAASUVORK5CYII=) no-repeat 14px center;
+  text-indent: 1em;
+  display: inline-block;
+  border: 0 none;
+  width: 100%;
+  height: 3em;
+  border-radius: 3em;
+  outline: none;
+  padding: 0 1.5em;
+  cursor: text;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  font-weight: inherit;
+  font-size: 1.1rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  vertical-align: baseline;
+}
+
+@media (prefers-color-scheme: dark) {
+  .search-container input {
+    background-color: rgba(255, 255, 255, .1);
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAUCAYAAABvVQZ0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAT5JREFUeNqsVLtOw0AQtIMlRJHCEhUVMg398QEUSZnSfILzCXxDPsFu6XAJHWnTcS1lWsprKdmLxtKwvjVBYaTV7cm+udnX5fPb+yyBSmwhVmK/FfPZLyjUPhI8YtXYi23EOovs7PzyevAbsWeoGg5HNUHsCipX8F9TZDOstVgLPxIsxW6w3sHv6dJ2StkLbh6IPtR/AWRfSIET20H9D2U1hfaAgxY2KMagcBSmg9/rmwx0lBqTzGfHoVfVHxXgXzCjHNRHnnHke4vMGc2q0RBR0GSeCLlpLaJGFWKUszVuib32nih7iTFrjXAPyGnQ48c3Gu5AOVlMtMk6NZuf+FiC+AIhV0T+pBQ5ntXceIJKqKko2duJ2TwoLAz5QTVnagJaXWEO8y/wSMuKH9RTJoCTHyNZFidOUEfNu/8WYAAOXUT04MOtlwAAAABJRU5ErkJggg==);
+  }
+}
+
+.search-container input:hover,
+.search-container input:focus {
+  background-color: var(--bg-secondary);
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAUCAYAAABvVQZ0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAT5JREFUeNqsVLtOw0AQtIMlRJHCEhUVMg398QEUSZnSfILzCXxDPsFu6XAJHWnTcS1lWsprKdmLxtKwvjVBYaTV7cm+udnX5fPb+yyBSmwhVmK/FfPZLyjUPhI8YtXYi23EOovs7PzyevAbsWeoGg5HNUHsCipX8F9TZDOstVgLPxIsxW6w3sHv6dJ2StkLbh6IPtR/AWRfSIET20H9D2U1hfaAgxY2KMagcBSmg9/rmwx0lBqTzGfHoVfVHxXgXzCjHNRHnnHke4vMGc2q0RBR0GSeCLlpLaJGFWKUszVuib32nih7iTFrjXAPyGnQ48c3Gu5AOVlMtMk6NZuf+FiC+AIhV0T+pBQ5ntXceIJKqKko2duJ2TwoLAz5QTVnagJaXWEO8y/wSMuKH9RTJoCTHyNZFidOUEfNu/8WYAAOXUT04MOtlwAAAABJRU5ErkJggg==);
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  margin-bottom: 2rem;
+}
+
+.search-filters {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem;
+  overflow: visible;
+}
+
+.search-filters {
+  width: fit-content;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  justify-content: center;
+}
+
+.search-filters .filter-group {
+  min-width: 0;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.search-filters .filter-group:not(.checkboxes) {
+  height: 38px;
+}
+
+.search-filters .filter-group select {
+  height: 38px;
+  line-height: 1.2;
+}
+
+/* Let each control take exactly the width its longest option needs, so
+   "Australasia" is not clipped and the venue box is not oversized. */
+.search-filters .search-region-control {
+  flex: 0 0 auto;
+}
+
+.search-filters .search-region-control select,
+.search-filters .conference-set-control select {
+  width: auto;
+  max-width: 100%;
+}
+
+.search-filters #year-filter-group {
+  flex: 0 0 auto;
+}
+
+.search-filters .conference-set-control {
+  flex: 0 0 auto;
+}
+
+.search-filters .filter-group.checkboxes {
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  grid-column: auto;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+  gap: 0;
+}
+
+.search-filters .filter-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 34px;
+  padding: 0.35rem 0.6rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 1.25;
+  text-transform: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.search-filters .filter-checkbox:hover,
+.search-filters .filter-checkbox:focus-within {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+  border-color: var(--border-color);
+}
+
+.search-filters .filter-checkbox:has(input:checked) {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+  border-color: var(--border-color);
+}
+
+.search-filters .filter-checkbox input {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* The control itself is the tooltip trigger - there is no separate ⓘ - so the
+   help panel appears on hovering or tabbing to the control it describes. */
+.search-filters .tooltip-trigger {
+  position: relative;
+}
+
+/* Filter help runs longer than the 260px default; `tooltip-position.js` keeps the
+   wider panel beside its own control and slides it back on screen when one near
+   an edge (the venue set on the right, the first one on a phone) would overflow. */
+.search-filters {
+  position: relative;
+}
+
+.search-filters .tooltip-content {
+  width: min(340px, calc(100vw - 2rem));
+  /* The panel sits inside a <label>, where a stray click would toggle the
+     checkbox, and inside the hover target, where it would flicker. */
+  pointer-events: none;
+  /* It also inherits that label's small-caps treatment, which is meant for a
+     one-word control name, not a sentence of help text. */
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+
+@media (max-width: 640px) {
+  .search-filters {
+    flex-wrap: wrap;
+  }
+
+  .search-filters {
+    width: 100%;
+  }
+
+  .search-filters .filter-group {
+    flex: 1 1 auto;
+  }
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.375rem;
+}
+
+.filter-group.checkboxes {
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+  border-top: 1px dashed var(--border-color);
+  padding-top: 1rem;
+}
+
+.filter-group label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filter-group select {
+  width: 100%;
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  font-size: var(--text-sm);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.25em;
+}
+
+.filter-group select:hover {
+  border-color: var(--accent-color);
+}
+
+.filter-group select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.year-inputs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.year-inputs select {
+  flex: 1;
+}
+
+.search-filters .year-inputs select {
+  flex: 0 0 82px;
+  min-width: 82px;
+  padding-right: 1.5rem;
+  padding-left: 0.5rem;
+}
+
+.year-inputs span {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+option {
+  background-color: var(--bg-color);
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 1rem 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  transition: border-color 0.2s;
+  border-radius: 0;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--text-primary);
+}
+
+input[type="text"]::placeholder {
+  color: #ccc;
+}

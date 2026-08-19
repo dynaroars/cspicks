@@ -23,11 +23,11 @@ fi
 export OPENALEX_API_KEY
 OPENALEX_API_KEY=$(cat "$KEY_FILE")
 
-BEFORE_COUNT=$(node -e "console.log(Object.keys(JSON.parse(require('fs').readFileSync('public/professor_history_openalex.json'))).length)")
+BEFORE_COUNT=$(node -e "const d=JSON.parse(require('fs').readFileSync('public/professor_history_openalex.json')); console.log(Object.keys(d.people || d).length)")
 
 node scripts/build-openalex-history.js --daily-budget=900 >> "$LOG_FILE" 2>&1
 
-AFTER_COUNT=$(node -e "console.log(Object.keys(JSON.parse(require('fs').readFileSync('public/professor_history_openalex.json'))).length)")
+AFTER_COUNT=$(node -e "const d=JSON.parse(require('fs').readFileSync('public/professor_history_openalex.json')); console.log(Object.keys(d.people || d).length)")
 
 if [ "$AFTER_COUNT" -lt "$BEFORE_COUNT" ]; then
     echo "ABORT: professor count shrank ($BEFORE_COUNT -> $AFTER_COUNT), reverting and not committing" >> "$LOG_FILE"

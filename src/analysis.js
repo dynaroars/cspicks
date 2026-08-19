@@ -6,50 +6,48 @@ import { buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calcul
 import { renderInsightList, renderMetricCards } from './analysis-ui.js';
 import bundledRules from './csrankings-rules.generated.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
+import { state } from './analysis/state.js';
+import { renderDataHealth, renderRankStability } from './analysis/diagnostics.js';
+import { renderSchoolTrends } from './analysis/school-trends.js';
+import { isPubAtSchool, renderAreaTrends } from './analysis/area-trends.js';
+import { renderFacultyTrends } from './analysis/faculty-trends.js';
+import { publishedVenues, renderConferenceFilters, setupConferenceFilterButtons } from './analysis/conference-filters.js';
+import { renderSubfieldEffort } from './analysis/publishing-effort.js';
+import { renderConferenceTrends } from './analysis/conference-trends.js';
 
 function refreshActiveTabChart() {
-    if (!selectedTarget) return;
+    if (!state.selectedTarget) return;
     renderResearcherHighlights();
-    if (currentTab === 'schools') renderSchoolTrends();
-    else if (currentTab === 'areas') renderAreaTrends();
-    else if (currentTab === 'faculty') renderFacultyTrends();
-    else if (currentTab === 'effort') renderSubfieldEffort();
-    else if (currentTab === 'conf-trends') renderConferenceTrends();
-    else if (currentTab === 'collaboration') renderCollaborationStats();
-    else if (currentTab === 'stability') renderRankStability();
+    if (state.currentTab === 'schools') renderSchoolTrends();
+    else if (state.currentTab === 'areas') renderAreaTrends();
+    else if (state.currentTab === 'faculty') renderFacultyTrends();
+    else if (state.currentTab === 'effort') renderSubfieldEffort();
+    else if (state.currentTab === 'conf-trends') renderConferenceTrends();
+    else if (state.currentTab === 'collaboration') renderCollaborationStats();
+    else if (state.currentTab === 'stability') renderRankStability();
 }
 
 onThemeChange(refreshActiveTabChart);
 
-// State
-let rawData = [];
-let filters = null;
-let chartInstance = null;
-let currentTab = 'schools';
-let selectedTarget = null;
-let activeVenueRules = bundledRules;
-let venueRulesCheckedAt = null;
-let conferenceFilterContext = null;
-let analysisReady = false;
 
 // Called once by the Search page, which owns the data load and the filter bar.
 export async function initAnalysis(data, filterBar) {
-    rawData = data;
-    filters = filterBar;
+    state.rawData = data;
+    state.filters = filterBar;
     try {
-        activeVenueRules = await syncCsrankingsRules();
-        venueRulesCheckedAt = new Date();
+        state.activeVenueRules = await syncCsrankingsRules();
+        state.venueRulesCheckedAt = new Date();
 
         renderConferenceFilters();
         setupTabs();
         setupConferenceFilterButtons();
-        analysisReady = true;
+        state.analysisReady = true;
         if (new URLSearchParams(window.location.search).get('dataHealth') === 'true') {
             revealDataHealth();
         } else if (!document.getElementById('site-data-health')?.hidden) {
             renderDataHealth();
         }
-        if (selectedTarget) showSelectedTarget();
+        if (state.selectedTarget) showSelectedTarget();
         else showTargetPrompt();
     } catch (err) {
         console.error('Analysis load error:', err);
@@ -57,31 +55,31 @@ export async function initAnalysis(data, filterBar) {
 }
 
 function updateTargetMode() {
-    const researcherMode = selectedTarget?.type === 'researcher';
+    const researcherMode = state.selectedTarget?.type === 'researcher';
     document.body.classList.toggle('researcher-analysis', researcherMode);
     document.querySelectorAll('[data-school-only]').forEach(tab => {
         tab.style.display = researcherMode ? 'none' : 'inline-flex';
     });
-    const activeTab = document.querySelector(`.nav-tab[data-tab="${currentTab}"]`);
+    const activeTab = document.querySelector(`.nav-tab[data-tab="${state.currentTab}"]`);
     const incompatible = researcherMode && activeTab?.hasAttribute('data-school-only');
     if (incompatible) {
         document.querySelector('.nav-tab[data-tab="schools"]')?.click();
     }
 }
 
-function getTargetName() {
-    return selectedTarget?.name || '';
+export function getTargetName() {
+    return state.selectedTarget?.name || '';
 }
 
-function isPublicationForTarget(prof, pub) {
-    if (!selectedTarget) return false;
-    if (selectedTarget.type === 'researcher') return prof.name === selectedTarget.name;
-    return isPubAtSchool(prof, pub, selectedTarget.name);
+export function isPublicationForTarget(prof, pub) {
+    if (!state.selectedTarget) return false;
+    if (state.selectedTarget.type === 'researcher') return prof.name === state.selectedTarget.name;
+    return isPubAtSchool(prof, pub, state.selectedTarget.name);
 }
 
 function showTargetPrompt() {
-    chartInstance?.destroy();
-    chartInstance = null;
+    state.chartInstance?.destroy();
+    state.chartInstance = null;
     document.querySelectorAll('.view-section').forEach(view => { view.hidden = true; });
     const integratedSection = document.getElementById('integrated-analysis');
     if (integratedSection) integratedSection.hidden = true;
@@ -96,25 +94,25 @@ function showSelectedTarget() {
     }
     renderResearcherHighlights();
     renderConferenceFilters();
-    document.querySelector(`.nav-tab[data-tab="${currentTab}"]`)?.click();
+    document.querySelector(`.nav-tab[data-tab="${state.currentTab}"]`)?.click();
 }
 
 export function setAnalysisTarget(target) {
     if (!target?.name || !target?.type) {
-        selectedTarget = null;
-        if (analysisReady) showTargetPrompt();
+        state.selectedTarget = null;
+        if (state.analysisReady) showTargetPrompt();
         return;
     }
-    selectedTarget = { type: target.type, name: target.name };
-    conferenceFilterContext = null;
+    state.selectedTarget = { type: target.type, name: target.name };
+    state.conferenceFilterContext = null;
     updateTargetMode();
-    if (analysisReady) showSelectedTarget();
+    if (state.analysisReady) showSelectedTarget();
 }
 
 // Called when the shared filter bar changes.
 export function refreshAnalysis() {
-    if (selectedTarget) {
-        conferenceFilterContext = null;
+    if (state.selectedTarget) {
+        state.conferenceFilterContext = null;
         renderConferenceFilters();
         refreshActiveTabChart();
     }
@@ -128,7 +126,7 @@ function revealDataHealth() {
     const panel = document.getElementById('site-data-health');
     if (!panel) return;
     panel.hidden = false;
-    if (analysisReady) renderDataHealth();
+    if (state.analysisReady) renderDataHealth();
 }
 
 function hideDataHealth() {
@@ -164,8 +162,8 @@ document.addEventListener('click', event => {
     hideDataHealth();
 });
 
-function getConferenceSet() {
-    return filters?.confSet || 'all-union';
+export function getConferenceSet() {
+    return state.filters?.confSet || 'all-union';
 }
 
 function setupTabs() {
@@ -179,9 +177,9 @@ function setupTabs() {
             // View Toggle
             document.querySelectorAll('.view-section').forEach(view => { view.hidden = true; });
             const tabName = tab.dataset.tab;
-            currentTab = tabName;
+            state.currentTab = tabName;
 
-            if (!selectedTarget) {
+            if (!state.selectedTarget) {
                 showTargetPrompt();
                 return;
             }
@@ -218,16 +216,16 @@ function setupTabs() {
     });
 }
 
-function getAnalysisData() {
-    const { startYear: start, endYear: end, region, confSet, historyMap, aliasMap } = filters;
-    const current = filterByYears(rawData, start, end, region, historyMap, aliasMap, confSet);
-    const prior = buildPriorPeriodData(rawData, start, end, region, historyMap, aliasMap, confSet);
+export function getAnalysisData() {
+    const { startYear: start, endYear: end, region, confSet, historyMap, aliasMap } = state.filters;
+    const current = filterByYears(state.rawData, start, end, region, historyMap, aliasMap, confSet);
+    const prior = buildPriorPeriodData(state.rawData, start, end, region, historyMap, aliasMap, confSet);
     return { current, prior, start, end, confSet };
 }
 
-function getResearcherPatterns() {
-    if (selectedTarget?.type !== 'researcher') return null;
-    const professor = rawData.professors?.[getTargetName()];
+export function getResearcherPatterns() {
+    if (state.selectedTarget?.type !== 'researcher') return null;
+    const professor = state.rawData.professors?.[getTargetName()];
     if (!professor) return null;
     const { current, start, end, confSet } = getAnalysisData();
     return calculateResearcherPatterns(professor, current.professors, {
@@ -276,11 +274,11 @@ function loadCoauthors(name) {
     if (coauthorsByResearcher.has(name)) return;
     coauthorsByResearcher.set(name, 'loading');
     renderResearcherHighlights();
-    fetchFrequentCoauthors(name, { startYear: filters.startYear, endYear: filters.endYear })
+    fetchFrequentCoauthors(name, { startYear: state.filters.startYear, endYear: state.filters.endYear })
         .then(coauthors => {
             coauthorsByResearcher.set(name, coauthors);
             // The user may have moved on while DBLP was answering.
-            if (selectedTarget?.type === 'researcher' && getTargetName() === name) renderResearcherHighlights();
+            if (state.selectedTarget?.type === 'researcher' && getTargetName() === name) renderResearcherHighlights();
         })
         .catch(() => {
             coauthorsByResearcher.delete(name);
@@ -309,14 +307,14 @@ function renderResearcherHighlights() {
             : '<button type="button" class="inline-link" data-action="load-coauthors">Show most frequent coauthors (from DBLP)</button>');
 }
 
-function renderResearcherActivityMetrics(patterns) {
+export function renderResearcherActivityMetrics(patterns) {
     const container = document.getElementById('ranking-stats');
     if (!container) return;
     if (!patterns) {
         container.innerHTML = '';
         return;
     }
-    const selectedYears = filters.endYear - filters.startYear + 1;
+    const selectedYears = state.filters.endYear - state.filters.startYear + 1;
     const momentum = patterns.momentum === null ? '—' : `${patterns.momentum >= 0 ? '+' : ''}${patterns.momentum.toFixed(0)}%`;
     container.innerHTML = renderMetricCards([
         { label: 'Active years', value: `${patterns.activeYears.length} / ${selectedYears}`, help: 'Years with at least one eligible pub in the selected conference set.' },
@@ -345,10 +343,10 @@ function renderSchoolAreaInsights() {
         `Area growth against the field (vs. the preceding ${priorLength} years)`);
 }
 
-function renderResearcherAreaInsights(patterns) {
+export function renderResearcherAreaInsights(patterns) {
     const container = document.getElementById('area-insights');
     if (!container) return;
-    if (!patterns || selectedTarget?.type !== 'researcher') {
+    if (!patterns || state.selectedTarget?.type !== 'researcher') {
         renderSchoolAreaInsights();
         return;
     }
@@ -367,10 +365,10 @@ function renderResearcherAreaInsights(patterns) {
     ], 'Research-area patterns');
 }
 
-function renderResearcherVenueInsights(patterns) {
+export function renderResearcherVenueInsights(patterns) {
     const container = document.getElementById('venue-insights');
     if (!container) return;
-    if (!patterns || selectedTarget?.type !== 'researcher') {
+    if (!patterns || state.selectedTarget?.type !== 'researcher') {
         container.innerHTML = '';
         return;
     }
@@ -387,7 +385,7 @@ function renderResearcherVenueInsights(patterns) {
 
 function renderCollaborationStats() {
     const container = document.getElementById('collaboration-stats');
-    if (!container || !rawData?.professors) return;
+    if (!container || !state.rawData?.professors) return;
     const { current, prior } = getAnalysisData();
     const schoolName = getTargetName();
     const metrics = calculateSchoolMetrics(current, prior, schoolName);
@@ -433,919 +431,3 @@ const stabilityCache = new Map();
 // sweeps are shared so the later caller joins the running one.
 const stabilitySweeps = new Map();
 let stabilityToken = 0;
-
-function buildStabilitySweep(cacheKey, onProgress) {
-    if (stabilityCache.has(cacheKey)) return Promise.resolve(stabilityCache.get(cacheKey));
-    const running = stabilitySweeps.get(cacheKey);
-    if (running) {
-        running.listeners.add(onProgress);
-        return running.promise;
-    }
-
-    const listeners = new Set([onProgress]);
-    const { region, historyMap, aliasMap, endYear } = filters;
-    const promise = (async () => {
-        const variants = rankStabilityVariants(endYear);
-        const samples = [];
-        for (const variant of variants) {
-            // Each pass is ~100ms over the full dataset; yielding between them keeps
-            // the page responsive instead of freezing it for a second and a half.
-            await new Promise(resolve => setTimeout(resolve, 0));
-            samples.push(collectVariantRanks(rawData, variant, { region, historyMap, aliasMap }));
-            listeners.forEach(listener => listener?.(samples.length, variants.length));
-        }
-        stabilityCache.set(cacheKey, samples);
-        stabilitySweeps.delete(cacheKey);
-        return samples;
-    })().catch(error => {
-        stabilitySweeps.delete(cacheKey);
-        throw error;
-    });
-
-    stabilitySweeps.set(cacheKey, { listeners, promise });
-    return promise;
-}
-
-/**
- * Departures needed to leave a rank band. Deliberately reports counts and the
- * resulting positions only: which specific people carry a department is not
- * something this should publish, and naming them would invite exactly the
- * personnel conclusions the project does not support.
- */
-function renderFragility(schoolName) {
-    const { current } = getAnalysisData();
-    const fragility = calculateFragility(current, schoolName);
-    if (!fragility || !fragility.steps.length) return '';
-
-    const bands = fragility.thresholds
-        .filter(threshold => fragility.rank <= threshold)
-        .map(threshold => {
-            const departures = fragility.exits[threshold];
-            return `<div class="diagnostic-stat"><span>Leaves the top ${threshold}</span><strong>${
-                departures === undefined ? `more than ${fragility.steps.length}` : `${departures} ${departures === 1 ? 'departure' : 'departures'}`
-            }</strong><small>of ${fragility.facultyCount} publishing faculty</small></div>`;
-        });
-    if (!bands.length) return '';
-
-    const trajectory = fragility.steps.slice(0, 5)
-        .map((step, index) => `<div><span>${index + 1} ${index === 0 ? 'departure' : 'departures'}</span><strong>#${step.rank}</strong></div>`)
-        .join('');
-
-    return `
-        <h3>How much does this rank depend on a few people?</h3>
-        <p class="summary-note">Removing the faculty whose absence would cost this university the most, one at a time, and re-ranking it against every other university unchanged.</p>
-        <div class="diagnostic-grid">${bands.join('')}</div>
-        <div class="metric-table fragility-trajectory">${trajectory}</div>
-        <p class="summary-note">Individual names are deliberately omitted: this measures how concentrated a department's output is, not any person's worth.</p>`;
-}
-
-async function renderRankStability() {
-    const container = document.getElementById('stability-stats');
-    if (!container || !rawData?.professors) return;
-    const schoolName = getTargetName();
-    const { region, historical, endYear } = filters;
-    const cacheKey = `${region}|${historical ? 'history' : 'current'}|${endYear}`;
-    const token = ++stabilityToken;
-
-    const cached = stabilityCache.get(cacheKey);
-    if (!cached) {
-        container.innerHTML = `<h2>${escapeHtml(schoolName)} rank stability</h2>
-            <p class="summary-note" id="stability-progress">Recomputing the ranking under every setting…</p>`;
-    }
-
-    const samples = await buildStabilitySweep(cacheKey, (done, total) => {
-        if (token !== stabilityToken) return;
-        const progress = document.getElementById('stability-progress');
-        if (progress) progress.textContent = `Recomputing the ranking under every setting… ${done} of ${total}`;
-    });
-    // A newer render (or a different target) started while this one was running.
-    if (token !== stabilityToken || getTargetName() !== schoolName) return;
-
-    const summary = summarizeRankStability(samples, schoolName);
-    if (!summary) {
-        container.innerHTML = `<h2>${escapeHtml(schoolName)} rank stability</h2>
-            <p>This university does not rank under any of the settings tested.</p>`;
-        return;
-    }
-
-    const spans = [...new Set(samples.map(sample => sample.variant.span))];
-    const sets = [...new Set(samples.map(sample => sample.variant.confSet))];
-    const cell = (span, confSet) => {
-        const row = summary.rows.find(item => item.span === span && item.confSet === confSet);
-        if (!row || !Number.isFinite(row.rank)) return '<td class="stability-cell">—</td>';
-        const extreme = row.rank === summary.best ? ' stability-best'
-            : row.rank === summary.worst ? ' stability-worst' : '';
-        return `<td class="stability-cell${extreme}"><strong>#${row.rank}</strong><small>of ${row.of}</small></td>`;
-    };
-
-    container.innerHTML = `
-        <h2>${escapeHtml(schoolName)} rank stability</h2>
-        <p class="summary-note">The same university, ranked ${summary.settings} ways: every look-back window against every conference set, with the region held at your current selection.</p>
-        ${renderMetricCards([
-            { label: 'Best case', value: `#${summary.best}`, help: 'The most favourable combination of look-back window and conference set.' },
-            { label: 'Worst case', value: `#${summary.worst}`, help: 'The least favourable combination of look-back window and conference set.' },
-            { label: 'Median', value: `#${summary.median}`, help: 'Middle rank across all settings tested — a more honest single number than any one of them.' },
-            { label: 'Spread', value: `${summary.spread} places`, className: summary.stable ? 'confidence-high' : 'confidence-review', help: summary.stable ? 'The rank holds steady across settings, so it reflects the department rather than the choice of settings.' : 'The rank moves substantially across settings, so any single number — including the one on the search page — is largely an artifact of those choices.' }
-        ], 'Rank stability')}
-        <table class="stability-table">
-            <caption>Rank by look-back window and conference set</caption>
-            <thead><tr><th scope="col">Window</th>${sets.map(set => `<th scope="col">${escapeHtml(CONF_SET_LABELS[set] || set)}</th>`).join('')}</tr></thead>
-            <tbody>${spans.map(span => `<tr><th scope="row">Last ${span} years</th>${sets.map(set => cell(span, set)).join('')}</tr>`).join('')}</tbody>
-        </table>
-        ${renderFragility(schoolName)}
-        <div class="data-caveat"><strong>How to read this:</strong> ${summary.stable
-            ? 'A narrow spread means the position is a property of the department, not of the settings.'
-            : `A ${summary.spread}-place spread means the headline rank is largely a consequence of which years and venues are counted. Treat any single rank — including this site's — as one point in that range.`}${summary.unranked ? ` This university is unranked under ${summary.unranked} of the ${summary.settings} settings.` : ''} Region is held fixed because a rank among US universities and a rank worldwide answer different questions and cannot be pooled into one range.</div>
-    `;
-}
-
-function renderDataHealth() {
-    const container = document.getElementById('data-health-stats');
-    if (!container || !rawData?.professors) return;
-    const { current, start, end, confSet } = getAnalysisData();
-    const selectedReport = calculateParityReport(rawData, current, confSet, {
-        perCapita: Boolean(filters?.perCapita),
-        historical: Boolean(filters?.historical)
-    });
-    // This baseline is deliberately independent of the visible view. Selecting
-    // CORE, per-capita, or History must not turn a healthy CSRankings-default
-    // implementation into a false "No"; those are view customizations, not
-    // parity failures.
-    const defaultData = filterByYears(rawData, start, end, filters.region, null, null, 'csrankings-default');
-    const defaultReport = calculateParityReport(rawData, defaultData, 'csrankings-default');
-    const syncDate = venueRulesCheckedAt || new Date(activeVenueRules.syncedAt);
-    const syncText = Number.isNaN(syncDate.getTime()) ? 'Unknown' : syncDate.toLocaleString();
-    const internalOk = selectedReport.totalMismatches === 0 && selectedReport.rankOrderIssues === 0;
-    const selectedMode = selectedReport.divergences.length
-        ? selectedReport.divergences.join(', ')
-        : 'CSRankings default';
-    container.innerHTML = `
-        <h2>CS Picks health · ${start}–${end}</h2>
-        <p class="summary-note">Health checks whether CS Picks’ source data, calculations, metadata, and venue rules are available and internally consistent.</p>
-        <div class="diagnostic-grid">
-            <div class="diagnostic-stat"><span>Matches CSRankings default</span><strong class="${defaultReport.matchesCsrankings ? 'confidence-high' : 'confidence-review'}">${defaultReport.matchesCsrankings ? 'Yes' : 'No'}</strong><small>${defaultReport.matchesCsrankings ? 'official venue set, current affiliations, and total ranking' : `${defaultReport.totalMismatches + defaultReport.rankOrderIssues} baseline inconsistencies`}</small></div>
-            <div class="diagnostic-stat"><span>Current selection</span><strong>${selectedReport.divergences.length ? 'Customized' : 'Default'}</strong><small>${escapeHtml(selectedMode)}</small></div>
-            <div class="diagnostic-stat"><span>Selected-view invariants</span><strong class="${internalOk ? 'confidence-high' : 'confidence-review'}">${internalOk ? 'Pass' : 'Review'}</strong><small>${selectedReport.totalMismatches + selectedReport.rankOrderIssues} total or rank-order inconsistencies</small></div>
-            <div class="diagnostic-stat"><span>Institution metadata</span><strong>${selectedReport.institutionCoverage.toFixed(0)}%</strong><small>country or region present</small></div>
-            <div class="diagnostic-stat"><span>Venue rules checked</span><strong>${escapeHtml(syncText)}</strong><small>upstream venue parser · ${escapeHtml(activeVenueRules.sourceVersion || 'bundled fallback')}</small></div>
-        </div>
-        <div class="data-caveat"><strong>What “matches” means:</strong> CSPicks recomputes the selected region and years with CSRankings’ default venues, current affiliations, total department scoring, and the same upstream CSV inputs. It verifies internal totals and rank ordering. CSRankings does not publish a static result table API, so a brief difference can still occur if csrankings.org has deployed newer source data than this browser session.</div>
-    `;
-}
-
-function renderSchoolAnalysisSummary(current, prior, schoolName) {
-    const container = document.getElementById('ranking-stats');
-    if (!container) return;
-    const school = current.schools[schoolName];
-    const metrics = calculateSchoolMetrics(current, prior, schoolName);
-    if (!school || !metrics) {
-        container.innerHTML = '';
-        return;
-    }
-
-    const rankMovement = metrics.rankDelta === null
-        ? '—'
-        : metrics.rankDelta === 0 ? 'No change' : `${metrics.rankDelta > 0 ? '▲' : '▼'} ${Math.abs(metrics.rankDelta)}`;
-    const growth = `${metrics.growth >= 0 ? '+' : ''}${metrics.growth.toFixed(0)}%`;
-    const confidenceClass = metrics.confidence.toLowerCase();
-    container.innerHTML = renderMetricCards([
-        { label: 'Rank movement', value: rankMovement, help: 'Change in rank versus the immediately preceding period of the same length. An upward arrow means the univ improved.' },
-        { label: 'Momentum', value: growth, help: 'Percentage change in adjusted pub count versus the preceding period of the same length.' },
-        { label: 'Median / faculty', value: metrics.medianPerFaculty.toFixed(1), help: 'Median adjusted pub count among the univ’s active faculty in the selected period.' },
-        { label: 'Top-3 concentration', value: `${metrics.top3Share.toFixed(0)}%`, help: `Share of adjusted pub count produced by the three highest-output faculty. Top one: ${metrics.top1Share.toFixed(0)}%; top five: ${metrics.top5Share.toFixed(0)}%.` },
-        { label: 'Breadth', value: `${metrics.activeAreas} active · ${metrics.sustainedAreas} sustained`, help: `Active is the number of areas with output. Sustained means active in this and the preceding period. ${metrics.topTenAreas} areas currently rank in the top 10.` },
-        { label: 'Team-size proxy', value: `${metrics.impliedTeamSize.toFixed(1)}×`, help: 'Raw pub count divided by adjusted pub count. This estimates coauthor intensity, not cross-univ collaboration.' },
-        { label: 'Profile completeness', value: metrics.confidence, className: `confidence-${confidenceClass}`, help: `Completeness of author homepage and Google Scholar profile fields. Coverage: ${metrics.profileCoverage.toFixed(0)}%.` }
-    ], 'University statistics');
-}
-
-async function renderSchoolTrends() {
-    try {
-        const canvas = document.getElementById('rankingChart');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        const targetName = getTargetName();
-        const { startYear, endYear } = filters;
-        if (startYear > endYear) return;
-
-        if (selectedTarget.type === 'researcher') {
-            renderResearcherActivityMetrics(getResearcherPatterns());
-            const professor = rawData.professors[targetName];
-            const confSet = getConferenceSet();
-            const labels = [];
-            const paperCounts = [];
-            const adjustedCounts = [];
-            for (let year = startYear; year <= endYear; year++) {
-                labels.push(year);
-                const yearlyPublications = (professor?.pubs || [])
-                    .filter(pub => pub.year === year && publicationMatchesConferenceSet(pub, confSet));
-                paperCounts.push(yearlyPublications.reduce((sum, pub) => sum + (pub.count || 0), 0));
-                adjustedCounts.push(yearlyPublications.reduce((sum, pub) => sum + (pub.adjustedcount || 0), 0));
-            }
-
-            chartInstance = drawChart(ctx, chartInstance, {
-                type: 'line',
-                data: {
-                    labels,
-                    datasets: [{
-                        label: 'Papers',
-                        data: paperCounts,
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.08)',
-                        tension: 0.2,
-                        fill: false,
-                        pointRadius: 4,
-                        pointHoverRadius: 6
-                    }, {
-                        label: 'Adjusted count',
-                        data: adjustedCounts,
-                        borderColor: '#10b981',
-                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                        tension: 0.2,
-                        fill: true,
-                        pointRadius: 4,
-                        pointHoverRadius: 6
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            title: { display: true, text: 'Publication count' },
-                            beginAtZero: true
-                        }
-                    },
-                    plugins: {
-                        title: { display: true, text: 'Publication trends · papers and adjusted count' },
-                        tooltip: {
-                            callbacks: {
-                                footer: items => {
-                                    const index = items[0]?.dataIndex;
-                                    return index === undefined ? '' : `${paperCounts[index]} papers (${adjustedCounts[index].toFixed(1)} adjusted)`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-            return;
-        }
-
-        const targetSchool = targetName;
-        const { current, prior } = getAnalysisData();
-        renderSchoolAnalysisSummary(current, prior, targetSchool);
-
-        const labels = [];
-        const rankPoints = [];
-        const publicationPoints = [];
-        const region = filters.region;
-        const regionLabel = filters.element.querySelector('#region-select')?.selectedOptions?.[0]?.textContent || 'US';
-
-        const windowSize = 10;
-        const overallMinYear = startYear - (windowSize - 1);
-        const overallMaxYear = endYear;
-
-        // Pre-filter publications once to drastically improve loop performance
-        const preFilteredData = {
-            schools: rawData.schools,
-            professors: {}
-        };
-        Object.entries(rawData.professors).forEach(([name, prof]) => {
-            const filteredPubs = prof.pubs.filter(p => p.year >= overallMinYear && p.year <= overallMaxYear);
-            if (filteredPubs.length > 0) {
-                preFilteredData.professors[name] = {
-                    ...prof,
-                    pubs: filteredPubs
-                };
-            }
-        });
-
-        for (let y = startYear; y <= endYear; y++) {
-            const wStart = y - (windowSize - 1);
-            const wEnd = y;
-
-            const result = filterByYears(preFilteredData, wStart, wEnd, region, filters.historyMap, filters.aliasMap, getConferenceSet());
-            const school = result.schools[targetSchool];
-
-            labels.push(y);
-            rankPoints.push(school ? school.rank : null);
-            publicationPoints.push(Object.values(rawData.professors).reduce((total, professor) => {
-                const yearlyOutput = professor.pubs
-                    .filter(pub => pub.year === y
-                        && publicationMatchesConferenceSet(pub, getConferenceSet())
-                        && isPubAtSchool(professor, pub, targetSchool))
-                    .reduce((sum, pub) => sum + pub.adjustedcount, 0);
-                return total + yearlyOutput;
-            }, 0));
-        }
-
-        chartInstance = drawChart(ctx, chartInstance, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Adjusted publication count',
-                    data: publicationPoints,
-                    borderColor: '#10b981',
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                    yAxisID: 'y',
-                    tension: 0.2,
-                    fill: true,
-                    pointRadius: 4,
-                    pointHoverRadius: 6
-                }, {
-                    label: `Rank in ${regionLabel}`,
-                    data: rankPoints,
-                    borderColor: '#6366f1',
-                    backgroundColor: 'rgba(99, 102, 241, 0.08)',
-                    yAxisID: 'y1',
-                    tension: 0.2,
-                    fill: false,
-                    pointRadius: 4,
-                    pointHoverRadius: 6
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: { display: true, text: 'Adjusted Publication Count' }
-                    },
-                    y1: {
-                        reverse: true,
-                        title: { display: true, text: `${regionLabel} Rank (10-year window)` },
-                        suggestedMin: 1,
-                        suggestedMax: 100,
-                        position: 'right',
-                        grid: { drawOnChartArea: false }
-                    }
-                },
-                plugins: {
-                    title: { display: true, text: 'Publication output and regional rank' }
-                }
-            }
-        });
-    } catch (e) {
-        console.error('Error rendering school trends:', e);
-    }
-}
-
-function isPubAtSchool(prof, pub, targetSchool) {
-    if (!filters.historical) return prof.affiliation === targetSchool;
-    return getPublicationSchools(prof, pub, filters.historyMap, filters.aliasMap).includes(targetSchool);
-}
-
-// ------------------
-//    AREA TRENDS
-// ------------------
-function renderAreaTrends() {
-    const canvas = document.getElementById('areaChart');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-
-    const years = [];
-    const { startYear, endYear } = filters;
-
-    const stats = {};
-    for (let y = startYear; y <= endYear; y++) {
-        years.push(y);
-        stats[y] = {};
-    }
-
-    if (!rawData || !rawData.professors) {
-        console.error('No rawData available for Area Trends');
-        return;
-    }
-
-    const targetName = getTargetName();
-    const confSet = getConferenceSet();
-    const confMap = getConferenceAreaMap(confSet);
-
-    Object.values(rawData.professors).forEach(prof => {
-        prof.pubs.forEach(pub => {
-            if (pub.year >= startYear && pub.year <= endYear && publicationMatchesConferenceSet(pub, confSet)) {
-                if (isPublicationForTarget(prof, pub)) {
-                    const area = confMap[pub.area] || pub.area;
-                    if (!stats[pub.year][area]) stats[pub.year][area] = 0;
-                    stats[pub.year][area] += pub.adjustedcount;
-                }
-            }
-        });
-    });
-
-    const areaTotals = {};
-    Object.values(stats).forEach(yearStats => {
-        Object.entries(yearStats).forEach(([area, count]) => {
-            areaTotals[area] = (areaTotals[area] || 0) + count;
-        });
-    });
-
-    const topAreas = Object.entries(areaTotals)
-        .sort(([, a], [, b]) => b - a)
-
-        .map(([area]) => area);
-
-    const datasets = topAreas.map((area, index) => {
-        const data = years.map(y => stats[y][area] || 0);
-
-        const colors = [
-            '#3b82f6', '#ef4444', '#10b981', '#f59e0b',
-            '#8b5cf6', '#ec4899', '#6366f1', '#14b8a6',
-            '#06b6d4', '#f97316'
-        ];
-
-        return {
-            label: areaLabels[area] || area,
-            data: data,
-            borderColor: colors[index % colors.length],
-            backgroundColor: colors[index % colors.length],
-            tension: 0.3,
-            fill: false,
-            pointRadius: 3,
-            borderWidth: 2
-        };
-    });
-
-    chartInstance = drawChart(ctx, chartInstance, {
-        type: 'line',
-        data: {
-            labels: years,
-            datasets: datasets
-        },
-        options: {
-            interaction: {
-                mode: 'nearest',
-                axis: 'x',
-                intersect: false
-            },
-            scales: {
-                y: {
-                    title: { display: true, text: 'Adjusted Publication Count' },
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: true,
-                    text: 'Research-area growth'
-                }
-            }
-        }
-    });
-
-    const legendContainer = document.getElementById('area-legend');
-    if (legendContainer) {
-        // Researchers get a colour key; schools keep the per-area toggles.
-        const researcherMode = selectedTarget?.type === 'researcher';
-        legendContainer.innerHTML = `
-            <div class="analysis-area-legend-title">Areas</div>
-            <div class="analysis-area-options">
-              ${datasets.map((ds, i) => (researcherMode
-                ? `<span class="analysis-area-option is-static">
-                    <span class="analysis-area-swatch" style="background: ${ds.borderColor};"></span>
-                    <span>${ds.label}</span>
-                  </span>`
-                : `<label class="analysis-area-option">
-                    <input type="checkbox" checked data-index="${i}" style="accent-color: ${ds.borderColor};">
-                    <span>${ds.label}</span>
-                  </label>`)).join('')}
-            </div>
-        `;
-
-        legendContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-            cb.addEventListener('change', (e) => {
-                const index = parseInt(e.target.dataset.index);
-                chartInstance.setDatasetVisibility(index, e.target.checked);
-                chartInstance.update();
-            });
-        });
-    }
-    renderResearcherAreaInsights(getResearcherPatterns());
-}
-
-// --------------------------------------------------------------------------
-// FACULTY DIVERSITY TRENDS
-// --------------------------------------------------------------------------
-function renderFacultyTrends() {
-    const canvas = document.getElementById('diversityChart');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-
-    const years = [];
-    const { startYear, endYear } = filters;
-    const windowSize = 3; // 3-year window for diversity check
-
-    const diversityRates = [];
-    const facultyCounts = [];
-    const multiAreaCounts = [];
-    const targetSchool = getTargetName();
-    const confSet = getConferenceSet();
-    const confMap = getConferenceAreaMap(confSet);
-
-    for (let y = startYear; y <= endYear; y++) {
-        years.push(y);
-
-        const wStart = y - windowSize + 1;
-        const wEnd = y;
-
-        // Count distinct areas per author in this window
-        const authorAreas = {};
-
-        Object.values(rawData.professors).forEach(prof => {
-            prof.pubs.forEach(pub => {
-                if (pub.year >= wStart && pub.year <= wEnd && publicationMatchesConferenceSet(pub, confSet)) {
-                    if (isPubAtSchool(prof, pub, targetSchool)) {
-                        if (!authorAreas[prof.name]) authorAreas[prof.name] = new Set();
-                        const area = confMap[pub.area] || pub.area;
-                        authorAreas[prof.name].add(area);
-                    }
-                }
-            });
-        });
-
-        let multiAreaCount = 0;
-        const authors = Object.keys(authorAreas);
-        const activeAuthors = authors.length;
-
-        if (activeAuthors > 0) {
-            authors.forEach(name => {
-                if (authorAreas[name].size > 1) multiAreaCount++;
-            });
-            diversityRates.push((multiAreaCount / activeAuthors) * 100);
-        } else {
-            diversityRates.push(0);
-        }
-
-        facultyCounts.push(activeAuthors);
-        multiAreaCounts.push(multiAreaCount);
-    }
-
-    chartInstance = drawChart(ctx, chartInstance, {
-        type: 'line',
-        data: {
-            labels: years,
-            datasets: [
-                {
-                    label: '% Multi-Area Faculty',
-                    data: diversityRates,
-                    borderColor: '#8b5cf6',
-                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                    tension: 0.3,
-                    fill: true,
-                    pointRadius: 4,
-                    yAxisID: 'y'
-                },
-                {
-                    label: 'Active Faculty Count',
-                    data: facultyCounts,
-                    borderColor: '#f59e0b',
-                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
-                    tension: 0.3,
-                    fill: false,
-                    pointRadius: 3,
-                    borderDash: [5, 5],
-                    yAxisID: 'y1'
-                }
-            ]
-        },
-        options: {
-            interaction: {
-                mode: 'index',
-                intersect: false
-            },
-            scales: {
-                y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    title: { display: true, text: '% Multi-Area' },
-                    beginAtZero: true,
-                    suggestedMax: 60
-                },
-                y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    title: { display: true, text: 'Faculty Count' },
-                    beginAtZero: true,
-                    grid: {
-                        drawOnChartArea: false
-                    }
-                }
-            },
-            plugins: {
-                tooltip: {
-                    callbacks: {
-                        afterBody: function (context) {
-                            const idx = context[0].dataIndex;
-                            return `Multi-Area: ${multiAreaCounts[idx]} of ${facultyCounts[idx]} faculty`;
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Faculty publishing in 2+ research areas (3-year rolling window)'
-                }
-            }
-        }
-    });
-}
-
-function setupConferenceFilterButtons() {
-    const selectAllBtn = document.getElementById('conf-select-all');
-    const clearAllBtn = document.getElementById('conf-clear-all');
-
-    if (selectAllBtn) {
-        selectAllBtn.addEventListener('click', () => {
-            document.querySelectorAll('#conf-trends-view input[type="checkbox"]:not(:disabled)').forEach(cb => {
-                cb.checked = true;
-            });
-            renderConferenceTrends();
-        });
-    }
-
-    if (clearAllBtn) {
-        clearAllBtn.addEventListener('click', () => {
-            document.querySelectorAll('#conf-trends-view input[type="checkbox"]').forEach(cb => {
-                cb.checked = false;
-            });
-            renderConferenceTrends();
-        });
-    }
-
-    // The checkbox list is rebuilt when the target, years, or conference set
-    // changes, so listen on its stable parent rather than on individual inputs.
-    document.getElementById('conf-checkbox-groups')?.addEventListener('change', event => {
-        if (event.target.matches('input[type="checkbox"]')) {
-            renderConferenceTrends();
-        }
-    });
-}
-
-function publishedVenues() {
-    const { startYear, endYear } = filters;
-    const confSet = getConferenceSet();
-    const venues = new Set();
-    Object.values(rawData.professors).forEach(prof => {
-        prof.pubs.forEach(pub => {
-            if (pub.year < startYear || pub.year > endYear) return;
-            if (!publicationMatchesConferenceSet(pub, confSet)) return;
-            if (isPublicationForTarget(prof, pub)) venues.add(pub.area);
-        });
-    });
-    return venues;
-}
-
-function renderConferenceFilters() {
-    const container = document.getElementById('conf-checkbox-groups');
-    const panel = document.getElementById('conference-filter-panel');
-    if (!container) return;
-    // A single researcher publishes at few venues; picking among them adds
-    // controls without adding information.
-    const researcherMode = selectedTarget?.type === 'researcher';
-    if (panel) panel.hidden = researcherMode;
-    if (researcherMode) {
-        container.innerHTML = '';
-        conferenceFilterContext = null;
-        return;
-    }
-    if (!selectedTarget) {
-        container.innerHTML = '';
-        conferenceFilterContext = null;
-        return;
-    }
-
-    const { startYear, endYear } = filters;
-    const confSet = getConferenceSet();
-    const context = [
-        selectedTarget.type,
-        selectedTarget.name,
-        startYear,
-        endYear,
-        confSet,
-        filters.historical
-    ].join('|');
-
-    // Preserve checkbox choices while merely redrawing the chart. A changed
-    // analysis context gets a fresh list with all actually published venues
-    // selected by default.
-    if (conferenceFilterContext === context) return;
-    conferenceFilterContext = context;
-
-    const publishedConferences = publishedVenues();
-
-    const groups = [
-        { title: 'AI, Data & Language', areas: ['ai', 'vision', 'mlmining', 'nlp', 'inforet'] },
-        { title: 'Computer Systems', areas: ['arch', 'ops', 'comm', 'mobile', 'metrics', 'hpc', 'bed', 'da'] },
-        { title: 'Theory, Security & DB', areas: ['act', 'crypt', 'log', 'sec', 'mod'] },
-        { title: 'Programming & SE', areas: ['plan', 'soft'] },
-        { title: 'Interdisciplinary', areas: ['graph', 'chi', 'robotics', 'visualization', 'bio', 'ecom', 'csed'] }
-    ];
-    const displayNames = {
-        nips: 'NeurIPS',
-        oakland: 'IEEE S&P',
-        usenixsec: 'USENIX Security',
-        usenixatc: 'USENIX ATC',
-        chiconf: 'CHI',
-        'siggraph-asia': 'SIGGRAPH Asia'
-    };
-    const venues = Object.entries(getConferenceAreaMap(confSet))
-        .filter(([venue]) => publishedConferences.has(venue));
-
-    if (venues.length === 0) {
-        container.innerHTML = '<p class="data-caveat">No publications at conferences in this set and time range.</p>';
-        return;
-    }
-
-    container.innerHTML = groups.map(group => ({
-        ...group,
-        venues: venues
-            .filter(([, area]) => group.areas.includes(area))
-            .sort(([venueA], [venueB]) => venueA.localeCompare(venueB))
-    })).filter(group => group.venues.length > 0).map(group => {
-        return `
-            <div class="conf-group">
-                <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.25rem;">${escapeHtml(group.title)}</h4>
-                <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem;">
-                    ${group.venues.map(([venue, area]) => `
-                        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
-                            <input type="checkbox" value="${escapeHtml(venue)}" checked>
-                            ${escapeHtml(displayNames[venue] || venue.toUpperCase())} (${escapeHtml(areaLabels[area] || area)})
-                        </label>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    }).join('');
-}
-function renderSubfieldEffort() {
-    const canvas = document.getElementById('effortChart');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-
-    const { startYear, endYear } = filters;
-    const targetSchool = getTargetName();
-    const confSet = getConferenceSet();
-    const effort = calculatePublishingEffort(rawData.professors, {
-        startYear,
-        endYear,
-        parentAreas: getConferenceAreaMap(confSet),
-        includesPublication: (prof, pub) => publicationMatchesConferenceSet(pub, confSet) && isPubAtSchool(prof, pub, targetSchool)
-    });
-    const chartData = effort.subfields.map(item => ({
-        ...item,
-        label: areaLabels[item.subfield] || item.subfield
-    }));
-
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const barColor = isDark ? '#36c5f0' : '#475569';
-
-    chartInstance = drawChart(ctx, chartInstance, {
-        type: 'bar',
-        data: {
-            labels: chartData.map(d => d.label),
-            datasets: [{
-                label: 'Adjusted Count/Active Faculty/Year',
-                data: chartData.map(d => d.effort),
-                backgroundColor: barColor,
-                borderColor: barColor,
-                borderWidth: 1
-            }]
-        },
-        options: {
-            indexAxis: 'y',
-            scales: {
-                x: {
-                    title: { display: true, text: 'Adjusted Count / Active Faculty / Year' },
-                    beginAtZero: true
-                },
-                y: {
-                    ticks: {
-                        font: { size: 10 }
-                    }
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    text: `Publishing effort (${startYear}-${endYear})`
-                },
-                tooltip: {
-                    callbacks: {
-                        afterLabel: function (context) {
-                            const dataIndex = context.dataIndex;
-                            const d = chartData[dataIndex];
-                            return [
-                                `Adjusted count: ${d.total.toFixed(2)}`,
-                                `Researchers in area: ${d.activeResearchers}`,
-                                `Active school faculty: ${effort.activeFaculty}`
-                            ];
-                        }
-                    }
-                }
-            }
-        }
-    });
-}
-
-function renderConferenceTrends() {
-    const canvas = document.getElementById('confTrendsChart');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-
-    const { startYear, endYear } = filters;
-    const targetName = getTargetName();
-    const confSet = getConferenceSet();
-
-    renderConferenceFilters();
-
-    // get list of selected conferences
-    const checkedCheckboxes = document.querySelectorAll('#conf-trends-view input[type="checkbox"]:checked:not(:disabled)');
-    const selectedConfs = selectedTarget?.type === 'researcher'
-        ? [...publishedVenues()]
-        : Array.from(checkedCheckboxes).map(cb => cb.value);
-
-    const years = [];
-    const stats = {}; // year -> { conf -> count }
-    for (let y = startYear; y <= endYear; y++) {
-        years.push(y);
-        stats[y] = {};
-        selectedConfs.forEach(conf => {
-            stats[y][conf] = 0;
-        });
-    }
-
-    // Aggregate conference publication volume
-    Object.values(rawData.professors).forEach(prof => {
-        prof.pubs.forEach(pub => {
-            if (pub.year >= startYear && pub.year <= endYear && publicationMatchesConferenceSet(pub, confSet)) {
-                if (!isPublicationForTarget(prof, pub)) {
-                    return;
-                }
-                const conf = pub.area;
-                if (stats[pub.year] && Object.prototype.hasOwnProperty.call(stats[pub.year], conf)) {
-                    stats[pub.year][conf] += pub.adjustedcount;
-                }
-            }
-        });
-    });
-
-    const colors = [
-        '#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6',
-        '#ec4899', '#6366f1', '#14b8a6', '#06b6d4', '#f97316',
-        '#84cc16', '#a855f7', '#0f172a', '#e11d48', '#34d399'
-    ];
-
-    const datasets = selectedConfs.map((conf, index) => {
-        const data = years.map(y => stats[y][conf] || 0);
-        return {
-            label: conf.toUpperCase(),
-            data: data,
-            borderColor: colors[index % colors.length],
-            backgroundColor: colors[index % colors.length],
-            tension: 0.3,
-            fill: false,
-            pointRadius: 3,
-            borderWidth: 2
-        };
-    });
-
-    chartInstance = drawChart(ctx, chartInstance, {
-        type: 'line',
-        data: {
-            labels: years,
-            datasets: datasets
-        },
-        options: {
-            interaction: {
-                mode: 'index',
-                intersect: false
-            },
-            scales: {
-                y: {
-                    title: { display: true, text: 'Adjusted Publication Count' },
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    text: `Conference adjusted-count trends (${startYear}-${endYear})`
-                }
-            }
-        }
-    });
-    renderResearcherVenueInsights(getResearcherPatterns());
-}

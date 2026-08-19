@@ -26,6 +26,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { decodeAffiliationHistory, encodeAffiliationHistory } from '../src/affiliation-history-format.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -260,7 +261,7 @@ function convertToHistoryFormat(openAlexData) {
 function writeMergedOutput(progress) {
     let base = {};
     if (fs.existsSync(OUTPUT_JSON)) {
-        base = JSON.parse(fs.readFileSync(OUTPUT_JSON, 'utf-8'));
+        base = decodeAffiliationHistory(JSON.parse(fs.readFileSync(OUTPUT_JSON, 'utf-8')));
     }
 
     const merged = { ...base };
@@ -270,7 +271,12 @@ function writeMergedOutput(progress) {
         if (history) merged[name] = history;
     }
 
-    fs.writeFileSync(OUTPUT_JSON, JSON.stringify(merged, null, 2));
+    let aliasTemplate = {};
+    if (fs.existsSync(SCHOOL_ALIASES_OUTPUT)) {
+        aliasTemplate = JSON.parse(fs.readFileSync(SCHOOL_ALIASES_OUTPUT, 'utf-8'));
+    }
+    const compact = encodeAffiliationHistory(merged, aliasTemplate);
+    fs.writeFileSync(OUTPUT_JSON, JSON.stringify(compact));
     console.log(`Saved ${Object.keys(merged).length} professors to ${OUTPUT_JSON}`);
 
     const schoolNames = new Set();
@@ -279,10 +285,6 @@ function writeMergedOutput(progress) {
     }
     const schoolList = Array.from(schoolNames).sort();
 
-    let aliasTemplate = {};
-    if (fs.existsSync(SCHOOL_ALIASES_OUTPUT)) {
-        aliasTemplate = JSON.parse(fs.readFileSync(SCHOOL_ALIASES_OUTPUT, 'utf-8'));
-    }
     schoolList.forEach(s => { if (!(s in aliasTemplate)) aliasTemplate[s] = s; });
 
     fs.writeFileSync(SCHOOL_ALIASES_OUTPUT, JSON.stringify(aliasTemplate, null, 2));

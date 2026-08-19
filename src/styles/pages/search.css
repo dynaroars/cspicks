@@ -1,0 +1,589 @@
+/* =========================================
+   Search-first interface
+   ========================================= */
+.search-page #app {
+  display: flex;
+  flex-direction: column;
+  max-width: 1080px;
+  min-height: calc(100vh - 54px);
+  padding-top: 1.75rem;
+}
+
+.search-page header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(3.5rem, 8vh, 7rem);
+}
+
+.search-page header h1 {
+  font-size: 2.15rem;
+  letter-spacing: -0.04em;
+}
+
+.search-page .top-nav {
+  margin: 0 !important;
+  gap: 1.25rem !important;
+}
+
+.search-page .top-nav a {
+  color: var(--text-secondary) !important;
+  border-bottom: 0 !important;
+  font-size: var(--text-sm);
+  font-weight: 500 !important;
+}
+
+.search-page .top-nav a:hover {
+  color: var(--text-primary) !important;
+}
+
+.search-page .search-section {
+  order: 1;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2rem;
+}
+
+.search-intro {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Once a search is running, the hero gives its space back to the results. */
+.has-search-query header {
+  margin-bottom: 1.75rem;
+}
+
+.has-search-query .search-intro {
+  margin-bottom: 1rem;
+}
+
+.has-search-query .search-intro h2 {
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+}
+
+.search-intro h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.45rem);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.universal-search {
+  position: relative;
+  width: 100%;
+}
+
+.search-page .search-container {
+  margin-bottom: 0.85rem;
+}
+
+.search-page .search-container input {
+  width: 100%;
+  height: 66px;
+  padding: 0 3.5rem 0 1.5rem;
+  color: var(--text-primary);
+  background: var(--card-bg) !important;
+  background-image: none !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 18px;
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
+  font-size: 1.15rem;
+  text-indent: 0;
+}
+
+.search-page .search-container input:focus {
+  border-color: var(--text-primary) !important;
+  box-shadow: 0 16px 42px rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="dark"] .search-page .search-container input {
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.3);
+}
+
+.universal-search::after {
+  position: absolute;
+  top: 21px;
+  right: 1.4rem;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text-secondary);
+  border-radius: 50%;
+  content: '';
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.universal-search::before {
+  position: absolute;
+  top: 39px;
+  right: 1.25rem;
+  z-index: 1;
+  width: 8px;
+  height: 2px;
+  background: var(--text-secondary);
+  content: '';
+  opacity: 0.55;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.universal-suggestions {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  right: 0;
+  left: 0;
+  z-index: 200;
+  max-height: min(480px, 62vh);
+  overflow-y: auto;
+  padding: 0.4rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.18);
+}
+
+.universal-suggestions[hidden] {
+  display: none;
+}
+
+[data-theme="dark"] .universal-suggestions {
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.5);
+}
+
+.universal-suggestion-group {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem 0.3rem;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+/* Says how many matches the group holds when the list is trimmed. */
+.universal-suggestion-count {
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.universal-suggestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  color: var(--text-primary);
+  background: transparent;
+  border: 0;
+  border-radius: 10px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.universal-suggestion small {
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.universal-suggestion:hover,
+.universal-suggestion.active {
+  background: var(--hover-bg);
+}
+
+.universal-suggestion-empty {
+  padding: 1rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.search-examples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 30px;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+/* The rows flow into one wrapping line: "Try All <examples…>". */
+.search-examples-row {
+  display: contents;
+}
+
+.search-examples button {
+  padding: 0.2rem 0.5rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  font: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--border-color);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.search-examples button:hover {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+}
+
+.search-page .search-filters {
+  width: 100%;
+  margin: 1rem auto 0;
+  padding: 0.35rem 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.funding-definition {
+  margin: -0.55rem 0 0.8rem;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+
+.funding-years {
+  display: flex;
+  align-items: end;
+  gap: 0.3rem;
+  height: 80px;
+  max-width: 560px;
+  padding-top: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.funding-year {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: end;
+  width: 28px;
+  height: 100%;
+  text-align: center;
+}
+
+.funding-year > span {
+  display: block;
+  width: 100%;
+  min-height: 4px;
+  background: var(--primary-color);
+  border-radius: 4px 4px 0 0;
+}
+
+.funding-year small {
+  padding: 0.15rem 0;
+  color: var(--text-secondary);
+  font-size: 0.62rem;
+}
+
+.funding-awards {
+  display: grid;
+  margin-top: 0.55rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.funding-award {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  color: inherit;
+  border-bottom: 1px solid var(--border-color);
+  text-decoration: none;
+}
+
+.funding-award strong,
+.funding-award small {
+  display: block;
+}
+
+.funding-award strong {
+  font-size: var(--text-sm);
+}
+
+.funding-award small {
+  margin-top: 0.15rem;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+
+.funding-award .funding-award-period {
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.funding-award b {
+  color: var(--primary-color);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+.funding-award-amount {
+  min-width: max-content;
+  text-align: right;
+}
+
+.funding-award .funding-award-amount-detail {
+  max-width: 290px;
+  margin-top: 0.2rem;
+  white-space: normal;
+}
+
+.funding-award .funding-award-amount-label {
+  margin-top: 0.1rem;
+  text-align: right;
+}
+
+.funding-award:hover strong {
+  text-decoration: underline;
+}
+
+.filter-sentence-prefix {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.search-page .search-filters .filter-group:not(.checkboxes),
+.search-page .search-filters .filter-group select {
+  height: 34px;
+}
+
+.search-page .search-filters select {
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  background-color: transparent;
+  border-color: transparent;
+  font-weight: 500;
+}
+
+.search-page .search-filters select:hover,
+.search-page .search-filters select:focus {
+  background-color: var(--hover-bg);
+  border-color: var(--border-color);
+}
+
+.search-page .search-filters.funding-filters {
+  justify-content: center;
+  margin-top: 0.35rem;
+}
+
+.search-page .funding-filters .filter-sentence-prefix {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.search-page #search-context-header {
+  order: 3;
+}
+
+.search-page #comparison-results,
+.search-page #funding-comparison {
+  order: 4;
+}
+
+.search-page main {
+  order: 5;
+}
+
+/* Default view: ranked universities on the left, people on the right. */
+.showing-rankings main,
+.showing-rankings .funding-results-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3rem;
+  align-items: start;
+  width: 100%;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.showing-rankings main > section:empty {
+  display: none;
+}
+
+.showing-rankings #school-results,
+.showing-rankings #funding-school-results {
+  grid-column: 1;
+}
+
+.showing-rankings #prof-results,
+.showing-rankings #area-people-results,
+.showing-rankings #funding-faculty-results {
+  grid-column: 2;
+}
+
+/* Names and badges share a narrow column, so keep the header compact. */
+.showing-rankings .card-header h2 {
+  font-size: 1.05rem;
+}
+
+.showing-rankings .card-badge {
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+.showing-rankings .results-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.search-page #integrated-analysis {
+  order: 6;
+}
+
+.search-page .card {
+  padding: 1.35rem 0;
+  background: transparent;
+  border-width: 1px 0 0;
+  box-shadow: none;
+}
+
+.search-page .results-grid {
+  gap: 0.65rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.search-page .card.collapsed {
+  padding: 0.7rem 0;
+}
+
+.search-page .card.collapsed h2 {
+  margin: 0;
+  font-size: var(--text-lg);
+  line-height: 1.3;
+}
+
+.search-page .card:not(.collapsed) > .card-header {
+  cursor: default;
+}
+
+.search-page .card:hover {
+  border-color: var(--border-color);
+  box-shadow: none;
+}
+
+.search-page .section-title {
+  grid-column: 1 / -1;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  border: 0;
+  font-size: var(--text-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.search-page footer {
+  position: static;
+}
+
+@media (max-width: 760px) {
+  .showing-rankings main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .showing-rankings #school-results,
+  .showing-rankings #prof-results,
+  .showing-rankings #area-people-results,
+  .showing-rankings #funding-school-results,
+  .showing-rankings #funding-faculty-results {
+    grid-column: 1;
+  }
+
+  .search-page #app {
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  .search-page header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .search-page .top-nav {
+    flex-wrap: wrap;
+  }
+
+  .search-page .search-filters {
+    flex-wrap: wrap;
+  }
+
+  .filter-sentence-prefix {
+    width: 100%;
+    text-align: center;
+  }
+
+  .universal-suggestion {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+}
+
+.diagnostic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.diagnostic-stat {
+  padding: 0.8rem;
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.diagnostic-stat span,
+.diagnostic-stat strong,
+.diagnostic-stat small { display: block; }
+.diagnostic-stat span { color: var(--text-secondary); font-size: var(--text-xs); text-transform: uppercase; }
+.diagnostic-stat strong { margin: 0.2rem 0; color: var(--text-primary); }
+.diagnostic-stat small { color: var(--text-secondary); }
+
+.data-caveat {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  color: var(--text-secondary);
+  background: color-mix(in srgb, #f59e0b 8%, var(--card-bg));
+  border-left: 3px solid #f59e0b;
+  font-size: var(--text-sm);
+}
+
+.metric-table > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.fragility-trajectory {
+  margin-top: 0.75rem;
+}
+
+.fragility-trajectory > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: var(--text-sm);
+}

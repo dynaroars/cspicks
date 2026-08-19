@@ -1,4 +1,10 @@
 import Papa from 'papaparse';
+import { decodeAffiliationHistory } from './affiliation-history-format.js';
+import { schoolAliases } from './data/institution-aliases.js';
+import { getConferenceAreaMap, numAreas, publicationMatchesConferenceSet, topLevelAreas } from './data/conference-sets.js';
+
+export { conferenceAliases, schoolAliases } from './data/institution-aliases.js';
+export { CONFERENCE_SET_IDS, coreAMap, coreAStarMap, getConferenceAreaMap, nextTier, normalizeConferenceSet, parentMap, publicationMatchesConferenceSet } from './data/conference-sets.js';
 
 const currentYear = new Date().getFullYear();
 export const DEFAULT_END_YEAR = currentYear;
@@ -7,150 +13,6 @@ export const DEFAULT_START_YEAR = DEFAULT_END_YEAR - 10;
 const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
 let affiliationDataPromise = null;
 
-
-export const schoolAliases = {
-  'gmu': 'George Mason University',
-  'cmu': 'Carnegie Mellon University',
-  'mit': 'Massachusetts Inst. of Technology',
-  'nyu': 'New York University',
-  'uiuc': 'Univ. of Illinois at Urbana-Champaign',
-  'ucb': 'Univ. of California - Berkeley',
-  'ucla': 'Univ. of California - Los Angeles',
-  'ucsd': 'Univ. of California - San Diego',
-  'gatech': 'Georgia Institute of Technology',
-  'uw': 'Univ. of Washington',
-  'ut': 'Univ. of Texas at Austin',
-  'umd': 'Univ. of Maryland - College Park',
-  'unc': 'Univ. of North Carolina - Chapel Hill',
-  'usc': 'Univ. of Southern California',
-  'uci': 'Univ. of California - Irvine',
-  'ucd': 'Univ. of California - Davis',
-  'ucsb': 'Univ. of California - Santa Barbara',
-  'ucsc': 'Univ. of California - Santa Cruz',
-  'uva': 'University of Virginia',
-  'vt': 'Virginia Tech',
-  'wpi': 'Worcester Polytechnic Institute',
-  'wustl': 'Washington University in St. Louis',
-  'pitt': 'University of Pittsburgh',
-  'psu': 'Pennsylvania State University',
-  'osu': 'Ohio State University',
-  'iu': 'Indiana University',
-  'umn': 'University of Minnesota',
-  'wisc': 'University of Wisconsin–Madison',
-  'mu': 'University of Missouri',
-  'msu': 'Michigan State University',
-  'umich': 'University of Michigan',
-  'nd': 'University of Notre Dame',
-  'upenn': 'University of Pennsylvania',
-  'vandy': 'Vanderbilt University',
-  'tamu': 'Texas A&M University',
-  'ttu': 'Texas Tech University',
-  'uh': 'University of Houston',
-  'asu': 'Arizona State University',
-  'uofa': 'University of Arizona',
-  'ucf': 'University of Central Florida',
-  'fiu': 'Florida International University',
-  'fsu': 'Florida State University',
-  'uf': 'University of Florida',
-  'rit': 'Rochester Institute of Technology',
-  'ritchie': 'Colorado School of Mines',
-  'neu': 'Northeastern University',
-  'umd-bc': 'University of Maryland, Baltimore County',
-  'ucfla': 'University of California, Fresno',
-  'sjsu': 'San Jose State University',
-  'sfsu': 'San Francisco State University',
-  'cpp': 'Cal Poly Pomona',
-  'slo': 'Cal Poly San Luis Obispo',
-  // Canada
-  'uoft': 'University of Toronto',
-  'ubc': 'University of British Columbia',
-  'mcgill': 'McGill University',
-  'waterloo': 'University of Waterloo',
-  'sfu': 'Simon Fraser University',
-  'alberta': 'University of Alberta',
-  'mcmaster': 'McMaster University',
-  'queensu': 'Queen\'s University',
-
-  // UK
-  'oxford': 'University of Oxford',
-  'cambridge': 'University of Cambridge',
-  'imperial': 'Imperial College London',
-  'ucl': 'University College London',
-  'edinburgh': 'University of Edinburgh',
-  'kcl': 'King\'s College London',
-  'manchester': 'University of Manchester',
-  'bristol': 'University of Bristol',
-  'warwick': 'University of Warwick',
-  'glasgow': 'University of Glasgow',
-
-  // Europe (non-UK)
-  'eth': 'ETH Zurich',
-  'epfl': 'École Polytechnique Fédérale de Lausanne',
-  'tum': 'Technical University of Munich',
-  'tu-berlin': 'Technical University of Berlin',
-  'sorbonne': 'Sorbonne University',
-  'ens': 'École Normale Supérieure',
-  'tudelft': 'Delft University of Technology',
-  'kth': 'KTH Royal Institute of Technology',
-  'chalmers': 'Chalmers University of Technology',
-  'upc': 'Polytechnic University of Catalonia',
-  'polimi': 'Polytechnic University of Milan',
-  'sapienza': 'Sapienza University of Rome',
-
-  // Asia
-  'sjtu': 'Shanghai Jiao Tong University',
-  'hkust': 'Hong Kong University of Science and Technology',
-  'hku': 'University of Hong Kong',
-  'cuhk': 'Chinese University of Hong Kong',
-  'ntu': 'National Taiwan University',
-  'ntu-sg': 'Nanyang Technological University',
-  'nus': 'National University of Singapore',
-  'kaist': 'Korea Advanced Institute of Science and Technology',
-  'postech': 'Pohang University of Science and Technology',
-  'iitb': 'Indian Institute of Technology Bombay',
-  'iitd': 'Indian Institute of Technology Delhi',
-  'iitk': 'Indian Institute of Technology Kanpur',
-  'iisc': 'Indian Institute of Science',
-
-  // Australia
-  'anu': 'Australian National University',
-  'unsw': 'University of New South Wales',
-  'usyd': 'University of Sydney',
-  'unimelb': 'University of Melbourne',
-  'uq': 'University of Queensland',
-
-  // Middle East
-  'weizmann': 'Weizmann Institute of Science',
-  'technion': 'Technion-Israel Institute of Technology',
-  'tau': 'Tel Aviv University',
-  'kaust': 'King Abdullah University of Science and Technology',
-  'aus': 'American University of Sharjah'
-
-};
-
-export const conferenceAliases = {
-  'neurips': 'nips',
-  // CSRankings files CHI under "chiconf"; "chi" alone is the HCI area's key.
-  'chi conference': 'chiconf',
-  'siggraph asia': 'siggraph-asia'
-};
-
-
-export const nextTier = {
-  'ase': true,
-  'issta': true,
-  'icde': true,
-  'pods': true,
-  'hpca': true,
-  'ndss': true,
-  'eurosys': true,
-  'eurographics': true,
-  'fast': true,
-  'usenixatc': true,
-  'icfp': true,
-  'oopsla': true,
-  'kdd': true
-};
 
 let dataPromise = null;
 
@@ -320,7 +182,7 @@ export function loadAffiliationData() {
       fetchCsv(`${GITHUB_RAW}/manual_affiliations.csv`)
     ])
       .then(([history, aliases, manual]) => ({
-        historyMap: mergeAffiliationHistory(history, manual),
+        historyMap: mergeAffiliationHistory(decodeAffiliationHistory(history), manual),
         aliasMap: aliases || {}
       }))
       .catch(error => {
@@ -331,128 +193,6 @@ export function loadAffiliationData() {
 
   return affiliationDataPromise;
 }
-
-// Map conferences to top-level areas (from csrankings.ts)
-export const parentMap = {
-  'aaai': 'ai', 'ijcai': 'ai',
-  'cvpr': 'vision', 'eccv': 'vision', 'iccv': 'vision',
-  'icml': 'mlmining', 'iclr': 'mlmining', 'kdd': 'mlmining', 'nips': 'mlmining',
-  'acl': 'nlp', 'emnlp': 'nlp', 'naacl': 'nlp',
-  'sigir': 'inforet', 'www': 'inforet',
-  'asplos': 'arch', 'isca': 'arch', 'micro': 'arch', 'hpca': 'arch',
-  'ccs': 'sec', 'oakland': 'sec', 'usenixsec': 'sec', 'ndss': 'sec',
-  'vldb': 'mod', 'sigmod': 'mod', 'icde': 'mod', 'pods': 'mod',
-  'dac': 'da', 'iccad': 'da',
-  'emsoft': 'bed', 'rtas': 'bed', 'rtss': 'bed',
-  'sc': 'hpc', 'hpdc': 'hpc', 'ics': 'hpc',
-  'mobicom': 'mobile', 'mobisys': 'mobile', 'sensys': 'mobile',
-  'imc': 'metrics', 'sigmetrics': 'metrics',
-  'osdi': 'ops', 'sosp': 'ops', 'eurosys': 'ops', 'fast': 'ops', 'usenixatc': 'ops',
-  'popl': 'plan', 'pldi': 'plan', 'oopsla': 'plan', 'icfp': 'plan',
-  'fse': 'soft', 'icse': 'soft', 'ase': 'soft', 'issta': 'soft',
-  'nsdi': 'comm', 'sigcomm': 'comm',
-  'siggraph': 'graph', 'siggraph-asia': 'graph', 'eurographics': 'graph',
-  'focs': 'act', 'soda': 'act', 'stoc': 'act',
-  'crypto': 'crypt', 'eurocrypt': 'crypt',
-  'cav': 'log', 'lics': 'log',
-  'ismb': 'bio', 'recomb': 'bio',
-  'ec': 'ecom', 'wine': 'ecom',
-  'chiconf': 'chi', 'ubicomp': 'chi', 'uist': 'chi',
-  'icra': 'robotics', 'iros': 'robotics', 'rss': 'robotics',
-  'vis': 'visualization', 'vr': 'visualization',
-  'sigcse': 'csed'
-};
-
-// CORE A* conferences
-export const coreAStarMap = {
-  // AI
-  'aaai': 'ai', 'ijcai': 'ai', 'aamas': 'ai', 'kr': 'ai', 'icaps': 'ai',
-  // ML
-  'icml': 'mlmining', 'nips': 'mlmining', 'iclr': 'mlmining', 'kdd': 'mlmining', 'colt': 'mlmining', 'icdm': 'mlmining',
-  // CV
-  'cvpr': 'vision', 'iccv': 'vision', 'eccv': 'vision',
-  // NLP
-  'acl': 'nlp', 'emnlp': 'nlp',
-  // Security
-  'oakland': 'sec', 'usenixsec': 'sec', 'ccs': 'sec', 'ndss': 'sec',
-  // Systems & Architecture
-  'osdi': 'ops', 'sosp': 'ops', 'isca': 'arch', 'asplos': 'arch', 'hpca': 'arch',
-  // Theory & Logic
-  'stoc': 'act', 'focs': 'act', 'soda': 'act', 'cav': 'log', 'lics': 'log', 'podc': 'act',
-  // HCI
-  'chiconf': 'chi', 'uist': 'chi',
-  // Networks
-  'sigcomm': 'comm', 'infocom': 'comm', 'sensys': 'mobile', 'mobicom': 'mobile', 'percom': 'mobile', 'ipsn': 'mobile',
-  // Graphics & Multimedia
-  'siggraph': 'graph', 'siggraph-asia': 'graph', 'acmmm': 'graph', 'vr': 'graph', 'ismar': 'graph',
-  // SE
-  'icse': 'soft', 'fse': 'soft', 'ase': 'soft',
-  // PL
-  'popl': 'plan', 'pldi': 'plan',
-  // Databases / Info Retrieval
-  'sigmod': 'mod', 'vldb': 'mod', 'icde': 'mod', 'pods': 'mod', 'sigir': 'inforet', 'www': 'inforet',
-  // Measurement / Performance
-  'sigmetrics': 'metrics',
-  // RT
-  'rtss': 'bed',
-  // Economics
-  'ec': 'ecom'
-};
-
-// CORE A venues must map to a CSRankings research area. Using booleans here
-// caused venue identifiers such as "pets" to leak into charts as fake areas.
-export const coreAMap = {
-  'acsac': 'sec', 'aied': 'csed', 'aistats': 'mlmining', 'alenex': 'act', 'asiacrypt': 'crypt', 'assets': 'chi',
-  'bmvc': 'vision', 'bpm': 'soft', 'cade': 'log', 'caise': 'soft', 'ccc': 'act', 'cgo': 'arch', 'ches': 'crypt',
-  'cidr': 'mod', 'cikm': 'inforet', 'conext': 'comm', 'cp': 'act', 'cscw': 'chi', 'csf': 'sec', 'dis': 'chi',
-  'disc': 'act', 'dsn': 'ops', 'eacl': 'nlp', 'ease': 'soft', 'ecai': 'ai', 'ecir': 'inforet', 'ecoop': 'plan',
-  'er': 'mod', 'esa': 'act', 'esem': 'soft', 'esop': 'plan', 'esorics': 'sec', 'eurosys': 'ops', 'fast': 'ops',
-  'fc': 'crypt', 'foga': 'ai', 'fpga': 'da', 'gd': 'visualization', 'gecco': 'ai', 'hotos': 'ops', 'hpdc': 'hpc',
-  'iccad': 'da', 'icdar': 'vision', 'icdcs': 'ops', 'icdt': 'mod', 'icer': 'csed', 'icfp': 'plan', 'icme': 'graph',
-  'ics': 'hpc', 'icsa': 'soft', 'icsoc': 'soft', 'icws': 'soft', 'icwsm': 'inforet', 'ijcar': 'log', 'imc': 'metrics',
-  'interspeech': 'nlp', 'ipdps': 'hpc', 'iros': 'robotics', 'islped': 'da', 'ismb': 'bio', 'issre': 'soft',
-  'issta': 'soft', 'iswc': 'inforet', 'itc': 'da', 'itcs': 'act', 'iui': 'chi', 'lak': 'csed', 'miccai': 'vision',
-  'middleware': 'ops', 'mmsys': 'graph', 'msr': 'soft', 'naacl': 'nlp', 'oopsla': 'plan', 'pets': 'sec',
-  'ppsn': 'ai', 're': 'soft', 'recsys': 'inforet', 'rtas': 'bed', 'rtss': 'bed', 'sat': 'log', 'sdm': 'mlmining',
-  'seams': 'soft', 'sigcse': 'csed', 'sigspatial': 'mod', 'soups': 'sec', 'stacs': 'act', 'tacas': 'log',
-  'uai': 'ai', 'usenixatc': 'ops', 'wacv': 'vision', 'wsdm': 'inforet'
-};
-
-export const CONFERENCE_SET_IDS = ['csrankings-default', 'csrankings', 'core', 'core-a', 'all-union'];
-
-export function normalizeConferenceSet(confSet) {
-  return CONFERENCE_SET_IDS.includes(confSet) ? confSet : 'all-union';
-}
-
-export function publicationMatchesConferenceSet(publication, confSet = 'all-union') {
-  const selectedSet = normalizeConferenceSet(confSet);
-  if (selectedSet === 'core') return Boolean(coreAStarMap[publication.area]);
-  if (selectedSet === 'core-a') return Boolean(coreAStarMap[publication.area] || coreAMap[publication.area]);
-  if (selectedSet === 'all-union') {
-    return Boolean(parentMap[publication.area] || coreAStarMap[publication.area] || coreAMap[publication.area]);
-  }
-  // Upstream scrapes venues it never assigns to an area (PoPETs, for example);
-  // CSRankings itself counts none of them, so neither set may include one.
-  if (!parentMap[publication.area]) return false;
-  if (selectedSet === 'csrankings-default') return !nextTier[publication.area];
-  return true;
-}
-
-export function getConferenceAreaMap(confSet = 'all-union') {
-  const selectedSet = normalizeConferenceSet(confSet);
-  if (selectedSet === 'core' || selectedSet === 'core-a' || selectedSet === 'all-union') {
-    // CORE occasionally categorizes a venue differently from CSRankings, so
-    // CORE's mapping must win when both contain the venue.
-    return selectedSet === 'core'
-      ? { ...parentMap, ...coreAStarMap }
-      : { ...parentMap, ...coreAStarMap, ...coreAMap };
-  }
-  return parentMap;
-}
-
-// Get unique top-level areas
-const topLevelAreas = [...new Set(Object.values(parentMap))];
-const numAreas = topLevelAreas.length;
 
 // build-openalex-history.js resolves each professor by searching OpenAlex for
 // their name and taking the single top-relevance result, with no check that

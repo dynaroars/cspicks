@@ -1,0 +1,161 @@
+/* Shared visual language for Compare, Discoveries, and Simulator */
+.tool-page #app {
+  max-width: 1080px;
+  min-height: calc(100vh - 54px);
+  padding-top: 1.75rem;
+}
+
+.tool-page header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(3rem, 7vh, 5.5rem);
+}
+
+.tool-page header h1 {
+  font-size: 2.15rem;
+  letter-spacing: -0.04em;
+}
+
+.tool-page .top-nav {
+  margin: 0;
+  gap: 1.25rem;
+}
+
+.tool-page .top-nav a {
+  color: var(--text-secondary);
+  border-bottom: 0;
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.tool-page .top-nav a:hover,
+.tool-page .top-nav a.active,
+.tool-page .top-nav a[aria-current="page"] {
+  color: var(--text-primary);
+  border-bottom: 0;
+}
+
+.tool-content {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.tool-intro {
+  max-width: 780px;
+  margin: 0 auto 2.25rem;
+  text-align: center;
+}
+
+.tool-intro .eyebrow {
+  margin-bottom: 0.35rem;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tool-intro h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.tool-intro > p:last-child {
+  max-width: 680px;
+  margin: 0.75rem auto 0;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.tool-page .filters.search-filters {
+  width: 100%;
+  max-width: 880px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0.5rem;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.tool-page .filters.search-filters select {
+  background-color: transparent;
+  border-color: transparent;
+  font-weight: 500;
+}
+
+.tool-page .filters.search-filters select:hover,
+.tool-page .filters.search-filters select:focus {
+  background-color: var(--hover-bg);
+  border-color: var(--border-color);
+}
+
+.tool-page .chart-container {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: none;
+}
+
+.simulator-tool-page .simulator-disclaimer {
+  max-width: 880px;
+  margin-bottom: 1rem;
+  border-radius: 14px;
+}
+
+.simulator-tool-page .simulator-filters {
+  width: min(100%, 620px);
+  max-width: 620px;
+  margin-bottom: 2rem;
+}
+
+.simulator-tool-page .simulator-workflow {
+  max-width: 880px;
+  padding: 1.5rem 0 0;
+  background: transparent;
+  border-width: 1px 0 0;
+  border-radius: 0;
+}
+
+.simulator-tool-page .sim-step > input[type="search"],
+.simulator-tool-page .sim-step > textarea {
+  padding: 0.9rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+}
+
+.simulator-tool-page .sim-step > input[type="search"] {
+  min-height: 56px;
+}
+
+.tool-page footer {
+  position: static;
+  margin-top: 3rem;
+  background: transparent;
+}
+
+@media (max-width: 760px) {
+  .tool-page #app {
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  .tool-page header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .tool-page .top-nav,
+  .tool-page .filters.search-filters {
+    flex-wrap: wrap;
+  }
+}

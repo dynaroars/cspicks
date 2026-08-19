@@ -1,0 +1,291 @@
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sim-step {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sim-step.hidden {
+  display: none;
+}
+
+/* These are type="search", so the input[type="text"] rule above never reaches
+   them — they have to carry their own themed color or they inherit the UA's
+   black and vanish against the dark card background. */
+.sim-step input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--card-bg);
+  transition: border-color 0.2s;
+}
+
+.sim-step input:focus {
+  border-color: var(--text-primary);
+  outline: none;
+}
+
+.sim-list {
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-top: 0.5rem;
+}
+
+.sim-item {
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.1s;
+}
+
+.sim-item:hover {
+  background: var(--hover-bg);
+}
+
+.sim-item:last-child {
+  border-bottom: none;
+}
+
+.selected-item {
+  background: var(--hover-bg);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.selected-item::before {
+  content: '✓';
+  color: #10b981;
+  font-weight: bold;
+}
+
+/* Simulator textarea */
+.sim-step textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--card-bg);
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color 0.2s;
+}
+
+.sim-step input::placeholder,
+.sim-step textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.75;
+}
+
+.sim-step textarea:focus {
+  border-color: var(--text-primary);
+  outline: none;
+}
+
+/* Candidate result cards */
+.candidate-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.candidate-card.loading {
+  opacity: 0.6;
+}
+
+.candidate-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.candidate-medal {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.candidate-info {
+  flex: 1;
+}
+
+.candidate-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+/* Area Pills in Simulator */
+.area-pill {
+  font-size: 0.78em;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-weight: 600;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.area-pill.positive {
+  background: var(--impact-pos-bg);
+  color: var(--impact-pos-text);
+}
+
+.area-pill.negative {
+  background: var(--impact-neg-bg);
+  color: var(--impact-neg-text);
+}
+
+.area-pill.neutral {
+  background: var(--impact-neu-bg);
+  color: var(--impact-neu-text);
+}
+
+.candidate-stats {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.candidate-area-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.area-breakdown-tag {
+  font-size: 0.78em;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: var(--hover-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.area-breakdown-tag strong {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.candidate-impact {
+  text-align: right;
+}
+
+.candidate-rank-delta {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.candidate-rank-delta.positive {
+  color: var(--impact-pos-text);
+}
+
+.candidate-rank-delta.negative {
+  color: var(--impact-neg-text);
+}
+
+.candidate-rank-delta.neutral {
+  color: var(--text-secondary);
+}
+
+/* Papers toggle */
+.papers-toggle {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.papers-toggle:hover {
+  text-decoration: underline;
+}
+
+.papers-list {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+  display: none;
+}
+
+.papers-list.visible {
+  display: block;
+}
+
+.paper-item {
+  font-size: 0.8rem;
+  padding: 0.4rem 0;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.paper-item:last-child {
+  border-bottom: none;
+}
+
+.paper-venue {
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: uppercase;
+}
+
+.paper-year {
+  color: var(--text-secondary);
+}
+
+.btn-secondary {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-secondary:hover {
+  background: var(--hover-bg);
+  border-color: var(--text-secondary);
+}

@@ -290,8 +290,9 @@ function setupForm() {
 async function init() {
   renderForm();
   try {
-    const module = await import('./data/conferences.json');
-    records = module.default;
+    const response = await fetch(new URL('./data/conferences.json', import.meta.url));
+    if (!response.ok) throw new Error(`Conference data request failed (${response.status})`);
+    records = await response.json();
     recordsByEdition = new Map();
     records.forEach(entry => {
       const key = editionKey(entry.name, entry.year);

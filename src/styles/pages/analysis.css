@@ -1,0 +1,267 @@
+/* A floating panel, not an inline section: it must never force the reader to
+   scroll away from mid-list to see it, since the lists it sits alongside
+   lazy-load more of themselves as the reader scrolls. */
+.site-data-health {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 500;
+  width: min(420px, calc(100vw - 2rem));
+  max-height: min(75vh, 620px);
+  overflow-y: auto;
+  animation: data-health-pop-in 0.18s ease-out;
+}
+
+.site-data-health[hidden] {
+  display: none;
+}
+
+.site-data-health .diagnostic-panel {
+  position: relative;
+  padding-right: 2.75rem;
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.28);
+}
+
+.data-health-close {
+  position: absolute;
+  z-index: 1;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.data-health-close:hover {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+}
+
+.data-health-close svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@keyframes data-health-pop-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 640px) {
+  .site-data-health {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    width: auto;
+  }
+}
+
+.integrated-analysis .eyebrow {
+  margin-bottom: 0.25rem;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.analysis-nav-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.analysis-nav-tabs .nav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.5rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.analysis-nav-tabs .nav-tab.active {
+  color: var(--primary-color);
+  background: var(--primary-light);
+}
+
+.researcher-analysis .analysis-nav-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.researcher-analysis .analysis-nav-tabs .nav-tab {
+  justify-content: center;
+  width: 100%;
+}
+
+.analysis-tab-info {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  line-height: 1;
+  cursor: help;
+}
+
+.integrated-analysis .analysis-view-card {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.integrated-analysis .chart-container {
+  position: relative;
+  height: 400px;
+}
+
+/* One column for the whole panel: every tab, and both target types, line up.
+   880px matches the search box above, so the page reads as one column. */
+.analysis-nav-tabs,
+.integrated-analysis .view-section > *,
+#researcher-highlights > * {
+  width: 100%;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.integrated-analysis .analysis-tall-chart {
+  height: 600px;
+}
+
+.integrated-analysis .view-section,
+.analysis-area-layout,
+/* Researchers get a read-only key, so the swatch replaces the checkbox. */
+.analysis-area-option.is-static {
+  cursor: default;
+}
+
+.analysis-area-swatch {
+  flex: none;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 3px;
+}
+
+.analysis-conference-filter {
+  width: 100%;
+  max-width: 100%;
+}
+
+.integrated-analysis .view-section {
+  min-height: 640px;
+}
+
+.analysis-area-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.analysis-area-legend {
+  width: 100%;
+  min-width: 0;
+  padding: 1rem;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.analysis-area-legend-title {
+  margin-bottom: 0.65rem;
+  font-weight: 600;
+}
+
+.analysis-area-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.analysis-area-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.analysis-conference-filter {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.analysis-conference-filter h3 {
+  margin: 0 0 1rem;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+}
+
+.analysis-conference-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.analysis-conference-actions .btn-secondary {
+  padding: 0.25rem 0.75rem;
+  color: var(--text-primary);
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.analysis-conference-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 720px) {
+  .researcher-analysis .analysis-nav-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .analysis-area-layout {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .analysis-area-options {
+    gap: 0.45rem 0.8rem;
+  }
+}

@@ -224,8 +224,13 @@ cspicks/
 │   ├── schedule-data.js             # Date, grouping, filtering, and sorting rules
 │   └── schedule-render.js           # Native CS Picks schedule cards
 ├── src/
-│   ├── data.js                       # Data loading, filtering, ranking pipeline
-│   ├── metrics.js                    # School/researcher/subfield metrics and Discoveries insights
+│   ├── data.js                       # Compatibility entry for loading, filtering, and ranking
+│   ├── data/                         # Institution aliases and conference-set definitions
+│   ├── metrics.js                    # Compatibility exports for domain metrics
+│   ├── metrics/                      # School, researcher, discovery, comparison, and ranking metrics
+│   ├── analysis/                     # Analysis renderers grouped by tab and responsibility
+│   ├── simulator/                    # Candidate resolution and result rendering
+│   ├── styles/                       # Foundation, component, and page-specific styles
 │   ├── filters.js                    # Shared region/year/venue/history filter bar
 │   ├── charts.js                     # Chart.js defaults, redraw, and theme handling
 │   ├── main.js                       # Search page controller (also drives the Discoveries view)
