@@ -53,6 +53,12 @@ Live at **[cspicks.roars.dev](https://cspicks.roars.dev)**.
 - **University-level and subfield-level**: one set of cards asks "which universities moved," a second asks "which research areas themselves grew, shrank, or changed leaders" region-wide.
 - **Stable, shareable per-card links**: every card has its own `#fragment` URL and a Copy Link button; opening that link scrolls to and highlights the exact card.
 
+### 10. CS Conference Schedule
+- **Conference and research-area search**: Find conference dates and submission timelines with the same autocomplete behavior as the rest of CS Picks.
+- **Shared venue sets**: Switch among CSRankings and CORE conference sets using the same definitions as publication search.
+- **Applicant-focused window**: The schedule opens to the current and following conference year and understands multiple or rolling submission cycles.
+- **Self-contained data**: Conference schedules live under `csconfs/data/`, are maintained through agent-assisted research of official conference sites, and deploy with this project; no external checkout or runtime service is required.
+
 ## 🔗 URL architecture & sharing
 
 Every page keeps the URL in sync with what's on screen, so any view is a link that reproduces itself — no login, no server-side state.
@@ -62,6 +68,7 @@ Every page keeps the URL in sync with what's on screen, so any view is a link th
 | Search (`index.html`) | `q` (the search text, including `A vs B`), `target`/`targetType` (the selected analysis target), plus region/years/venue set/rankings/history/per-capita from the shared filter bar |
 | Discoveries (`index.html?view=discoveries`) | `view=discoveries`, region/years/venue set/history/per-capita, plus a `#fragment` per card (`#discovery-fastest-growing-subfields`, etc.) that scrolls to and briefly highlights that card on load — or `q`/`target` once the visitor searches for something |
 | Simulator (`simulator.html`) | Filters, `univ` (selected university), and `candidates` (the raw candidate names/DBLP links) — opening the link pre-fills the setup one click from a result, without re-querying DBLP on load |
+| CS Confs (`csconfs.html`) | `q`, conference-year range, venue set, and whether only upcoming conferences are shown |
 | Funding (`funding.html`) | `q` (search or `A vs B`) plus the year-range filter |
 
 Filter choices also persist across page navigations via `localStorage`, so switching between Search and Discoveries, or clicking into Simulator or Funding, doesn't silently reset the region or year range.
@@ -73,7 +80,7 @@ Every page has an unobtrusive **Copy Link** button in the header (`src/share.js`
 - Every page ships baseline `<title>`, meta description, canonical link, and OpenGraph/Twitter card tags in its HTML `<head>`, so a crawler that never runs JS still sees something accurate.
 - `src/seo.js` sharpens those tags client-side once a specific view (a university, a comparison, a Discoveries filter set) is on screen.
 - `public/og-image.png` is the site-wide social preview image, regenerated with `npm run og:image` (uses Playwright's already-installed Chromium to screenshot `scripts/og-card-template.html` — no new dependency). A true per-page dynamic OG image isn't possible on a static GitHub Pages deploy without a server, so this is the "best static alternative": one well-designed card, with per-page title/description still set dynamically in the tags above.
-- `public/sitemap.xml` lists the four static pages plus one deep link per university straight into its Search-page research profile. Regenerate it after a meaningful CSRankings roster change with `npm run sitemap` (`scripts/generate-sitemap.mjs`).
+- `public/sitemap.xml` lists the six static pages plus one deep link per university straight into its Search-page research profile. Regenerate it after a meaningful CSRankings roster change with `npm run sitemap` (`scripts/generate-sitemap.mjs`).
 - `public/robots.txt` allows all crawlers and points at the sitemap.
 
 ## 📊 Analytics
@@ -211,6 +218,11 @@ cspicks/
 │   ├── og-image.png                     # Site-wide social preview image
 │   ├── sitemap.xml                      # Static pages + one deep link per university
 │   └── robots.txt
+├── csconfs/                         # Conference-schedule page and synchronized data
+│   ├── data/                        # Locally maintained conference schedules
+│   ├── main.js                      # Search/filter/URL controller
+│   ├── schedule-data.js             # Date, grouping, filtering, and sorting rules
+│   └── schedule-render.js           # Native CS Picks schedule cards
 ├── src/
 │   ├── data.js                       # Data loading, filtering, ranking pipeline
 │   ├── metrics.js                    # School/researcher/subfield metrics and Discoveries insights
@@ -242,6 +254,8 @@ cspicks/
 │   ├── generate-og-image.mjs         # Renders og-card-template.html to public/og-image.png
 │   └── generate-sitemap.mjs          # Generates public/sitemap.xml from the CSRankings roster
 ├── index.html                        # Search, results, integrated analysis, and the Discoveries view
+├── csconfs.html                      # CS conference schedule
+├── csconfs-submit.html               # Conference submission/correction form
 ├── funding.html                      # Nationwide NSF funding beta
 ├── simulator.html                    # Ranking simulator page
 ├── FAQ.md                            # GitHub-hosted methods and data documentation

@@ -28,6 +28,8 @@ Each eligible paper contributes `1.0` in total, divided equally among its author
 ### Where does the data come from?
 
 - [CSRankings](https://csrankings.org/) supplies the faculty roster, publication data, venue taxonomy, and institution information.
+- The locally maintained schedule under `csconfs/data/` supplies conference dates and submission timelines. Entries marked Estimated are projections and should be confirmed on the linked conference website. Deadline countdowns use Anywhere on Earth (UTC−12), and schedule year filters refer to the conference year rather than the submission year.
+- Schedule records are maintained through agent-assisted research of official conference and sponsoring-society websites, plus contributor corrections. Historical acceptance totals came from [emeryberger/csconferences](https://github.com/emeryberger/csconferences). Third-party deadline lists may provide leads, but they are not authoritative sources for updates.
 - [DBLP](https://dblp.org/) supplies author-search and publication metadata used by the simulator.
 - [OpenAlex](https://openalex.org/) and manually reviewed corrections supply estimated historical affiliations.
 

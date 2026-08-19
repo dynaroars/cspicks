@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Builds public/sitemap.xml: the four static pages, plus one deep link per
+ * Builds public/sitemap.xml: the six static pages, plus one deep link per
  * university straight into its Search-page research profile (the same
  * ?q=&target=&targetType=school URL the site's own links use, which sets a
  * university-specific <title>/description/canonical on load - see
@@ -38,6 +38,8 @@ const staticPages = [
   url(`${ORIGIN}/`, { changefreq: 'daily', priority: '1.0' }),
   url(`${ORIGIN}/?view=discoveries`, { changefreq: 'daily', priority: '0.9' }),
   url(`${ORIGIN}/simulator.html`, { changefreq: 'weekly', priority: '0.6' }),
+  url(`${ORIGIN}/csconfs.html`, { changefreq: 'daily', priority: '0.8' }),
+  url(`${ORIGIN}/csconfs-submit.html`, { changefreq: 'monthly', priority: '0.3' }),
   url(`${ORIGIN}/funding.html`, { changefreq: 'weekly', priority: '0.7' })
 ];
 
@@ -53,4 +55,4 @@ ${[...staticPages, ...schoolPages].join('\n')}
 `;
 
 await fs.writeFile(OUTPUT, xml);
-console.log(`Wrote ${schools.length} university pages + 4 static pages to ${OUTPUT.pathname}`);
+console.log(`Wrote ${schools.length} university pages + 6 static pages to ${OUTPUT.pathname}`);

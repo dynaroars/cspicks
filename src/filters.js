@@ -44,16 +44,18 @@ function readStoredFilters() {
   }
 }
 
-function storeFilters(state) {
+function storeFilters(state, persisted = {}) {
   try {
-    globalThis.localStorage?.setItem(FILTER_STORAGE_KEY, JSON.stringify({
-      startYear: state.startYear,
-      endYear: state.endYear,
-      confSet: state.confSet,
-      rankings: state.rankings,
-      historical: state.historical,
-      perCapita: state.perCapita
-    }));
+    const stored = readStoredFilters();
+    if (persisted.years) {
+      stored.startYear = state.startYear;
+      stored.endYear = state.endYear;
+    }
+    if (persisted.confSet) stored.confSet = state.confSet;
+    if (persisted.rankings) stored.rankings = state.rankings;
+    if (persisted.history) stored.historical = state.historical;
+    if (persisted.percapita) stored.perCapita = state.perCapita;
+    globalThis.localStorage?.setItem(FILTER_STORAGE_KEY, JSON.stringify(stored));
   } catch {
     // Filters still work for this page without storage.
   }
@@ -98,6 +100,9 @@ function yearOptions(min, max, selected) {
  *
  * fields   — any of 'region', 'years', 'rankings', 'history', 'percapita',
  *            'confSet'; render order is fixed here, not by this array
+ * defaults — optional initial values used before stored choices and URL params
+ * persist  — per-field booleans; Schedule disables year persistence so its
+ *            current/next-year window cannot overwrite publication filters
  * onChange — called after any control changes, with the controller
  * The controller exposes the current values plus `apply(rawData)`, which runs
  * `filterByYears` with the right history maps for the current History setting.
@@ -109,6 +114,8 @@ export function createFilterBar(mount, {
   prefixId = '',
   label = 'Filters',
   className = '',
+  defaults = {},
+  persist = {},
   params = new URLSearchParams(window.location.search),
   onChange = () => {}
 } = {}) {
@@ -116,26 +123,33 @@ export function createFilterBar(mount, {
   if (!element) throw new Error('createFilterBar: mount element not found');
 
   const has = field => fields.includes(field);
+  const persisted = {
+    years: persist.years ?? has('years'),
+    confSet: persist.confSet ?? has('confSet'),
+    rankings: persist.rankings ?? has('rankings'),
+    history: persist.history ?? has('history'),
+    percapita: persist.percapita ?? has('percapita')
+  };
   const state = {
     region: has('region') ? getInitialRegion() : 'world',
-    startYear: DEFAULT_START_YEAR,
-    endYear: DEFAULT_END_YEAR,
-    confSet: 'all-union',
-    rankings: false,
-    historical: false,
+    startYear: defaults.startYear ?? DEFAULT_START_YEAR,
+    endYear: defaults.endYear ?? DEFAULT_END_YEAR,
+    confSet: defaults.confSet ?? 'all-union',
+    rankings: defaults.rankings ?? false,
+    historical: defaults.historical ?? false,
     // Off by default so the default view reproduces official CSRankings
     // (which ranks by department total, not by output per faculty member).
-    perCapita: false
+    perCapita: defaults.perCapita ?? false
   };
 
   // A link's parameters win; otherwise the reader's last choices apply.
   const stored = readStoredFilters();
-  if (Number.isFinite(stored.startYear)) state.startYear = stored.startYear;
-  if (Number.isFinite(stored.endYear)) state.endYear = stored.endYear;
-  if (stored.confSet) state.confSet = normalizeConferenceSet(stored.confSet);
-  if (typeof stored.rankings === 'boolean') state.rankings = stored.rankings;
-  if (typeof stored.historical === 'boolean') state.historical = stored.historical;
-  if (typeof stored.perCapita === 'boolean') state.perCapita = stored.perCapita;
+  if (persisted.years && Number.isFinite(stored.startYear)) state.startYear = stored.startYear;
+  if (persisted.years && Number.isFinite(stored.endYear)) state.endYear = stored.endYear;
+  if (persisted.confSet && stored.confSet) state.confSet = normalizeConferenceSet(stored.confSet);
+  if (persisted.rankings && typeof stored.rankings === 'boolean') state.rankings = stored.rankings;
+  if (persisted.history && typeof stored.historical === 'boolean') state.historical = stored.historical;
+  if (persisted.percapita && typeof stored.perCapita === 'boolean') state.perCapita = stored.perCapita;
 
   if (params.has('region') && REGION_IDS.has(params.get('region'))) state.region = params.get('region');
   if (params.has('start')) {
@@ -152,7 +166,7 @@ export function createFilterBar(mount, {
   if (params.has('percapita')) state.perCapita = params.get('percapita') === 'true';
   state.startYear = Math.min(Math.max(state.startYear, years.min), years.max);
   state.endYear = Math.min(Math.max(state.endYear, years.min), years.max);
-  storeFilters(state);
+  storeFilters(state, persisted);
 
   element.className = ['filters', 'search-filters', className].filter(Boolean).join(' ');
   element.setAttribute('aria-label', label);
@@ -262,7 +276,7 @@ export function createFilterBar(mount, {
       }
     }
     if (confSelect) state.confSet = confSelect.value;
-    storeFilters(state);
+    storeFilters(state, persisted);
   };
 
   [regionSelect, startSelect, endSelect, confSelect].forEach(control => {
@@ -274,13 +288,13 @@ export function createFilterBar(mount, {
 
   rankingsToggle?.addEventListener('change', () => {
     state.rankings = rankingsToggle.checked;
-    storeFilters(state);
+    storeFilters(state, persisted);
     onChange(controller);
   });
 
   perCapitaToggle?.addEventListener('change', () => {
     state.perCapita = perCapitaToggle.checked;
-    storeFilters(state);
+    storeFilters(state, persisted);
     onChange(controller);
   });
 
@@ -289,7 +303,7 @@ export function createFilterBar(mount, {
     try {
       if (historyToggle.checked) await loadHistoryMaps();
       state.historical = historyToggle.checked;
-      storeFilters(state);
+      storeFilters(state, persisted);
       onChange(controller);
     } catch (error) {
       console.error('Failed to load historical affiliation data:', error);

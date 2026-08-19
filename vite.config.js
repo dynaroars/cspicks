@@ -8,6 +8,8 @@ export default defineConfig({
             input: {
                 main: resolve(__dirname, 'index.html'),
                 simulator: resolve(__dirname, 'simulator.html'),
+                csconfs: resolve(__dirname, 'csconfs.html'),
+                csconfsSubmit: resolve(__dirname, 'csconfs-submit.html'),
                 funding: resolve(__dirname, 'funding.html'),
             },
         },

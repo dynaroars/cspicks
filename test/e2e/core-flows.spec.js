@@ -81,6 +81,46 @@ test.beforeEach(async ({ page }) => {
   await mockUpstreams(page);
 });
 
+test('CS Confs reuses search behavior and defaults to this and next conference year', async ({ page }) => {
+  await page.goto('./csconfs.html');
+  await expect(page.getByRole('link', { name: '📅 CS Confs' })).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('#start-year')).toHaveValue(String(fixtureYear));
+  await expect(page.locator('#end-year')).toHaveValue(String(fixtureYear + 1));
+  await expect(page.locator('#end-year option')).toHaveCount(2);
+  await expect(page.locator('#csconfs-results .schedule-card').first()).toBeVisible();
+  await expect(page.locator('.search-examples')).toContainText('Try:');
+  await expect(page.locator('#csconfs-examples button')).toHaveCount(4);
+
+  await page.locator('#csconfs-search').fill('PLD');
+  await expect(page.locator('#universal-suggestions')).toBeVisible();
+  await expect(page.locator('#universal-suggestions')).toContainText('PLDI');
+  await page.getByRole('option', { name: /PLDI/ }).click();
+  await expect(page.locator('#csconfs-results .schedule-card')).toHaveCount(1);
+  await expect(page.locator('#csconfs-results')).toContainText(`PLDI ${fixtureYear + 1}`);
+  await expect(page).toHaveURL(/q=PLDI/);
+
+  await page.locator('#csconfs-search').fill('Security');
+  await expect(page.locator('#universal-suggestions')).toContainText('Research areas');
+  await expect(page.locator('#csconfs-results .schedule-card').first()).toBeVisible();
+  await expect(page).toHaveURL(/q=Security/);
+});
+
+test('CS Confs submission page prefills an existing entry and offers email or GitHub delivery', async ({ page }) => {
+  await page.goto('./csconfs-submit.html');
+  await page.getByLabel('Correct an existing entry').check();
+  await page.locator('#target').fill('PLDI');
+  await expect(page.locator('#conference-correction-suggestions')).toBeVisible();
+  await page.locator('#conference-correction-suggestions button', { hasText: 'PLDI 2027' }).click();
+  await expect(page.locator('#name')).toHaveValue('PLDI');
+  await expect(page.locator('#venueKeys')).toHaveValue('pldi');
+  await expect(page.locator('#acceptanceRate')).toHaveValue('');
+  await expect(page.locator('#submissions')).toHaveValue('');
+  await expect(page.locator('#estimated')).not.toBeChecked();
+  await expect(page.locator('#verified')).not.toBeChecked();
+  await expect(page.getByRole('button', { name: 'Send by email' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Submit as a GitHub issue' })).toBeVisible();
+});
+
 test('default view ranks universities and people side by side, and clears stale analysis after a region change', async ({ page }) => {
   // Pinned to the CSRankings ordering: per-capita is the default, and it omits
   // departments below five publishing faculty, which this fixture is.
@@ -349,6 +389,7 @@ test('suggestions list every match and complete the second side of a vs query', 
 
 test('example searches run without opening autocomplete', async ({ page }) => {
   await page.goto('./');
+  await expect(page.locator('.search-examples')).toContainText('Try:');
   const example = page.locator('[data-search-example]').first();
   const query = await example.getAttribute('data-search-example');
   await example.click();

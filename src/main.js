@@ -447,7 +447,7 @@ function renderSearchExamples() {
     ...pair(familiarConferences)
   ];
 
-  fixedContainer.innerHTML = '<span>Examples:</span>';
+  fixedContainer.innerHTML = '<span>Try:</span>';
   container.innerHTML = examples
     .filter((item, index, all) => all.findIndex(other => other.query === item.query) === index)
     .map(item => `<button type="button" data-search-example="${escapeHtml(item.query)}">${escapeHtml(item.label)}</button>`)
