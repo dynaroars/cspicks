@@ -353,4 +353,30 @@ Institution names are normalized and matched to the most specific institution so
 CS Picks fetches public scholarly metadata on demand and does not store names entered into Search or the simulator as user-submitted personal data. To report an affiliation correction or other discrepancy, [open a GitHub issue](https://github.com/dynaroars/cspicks/issues) with the name, correction, supporting source, and applicable years. CS Picks is inspired by [CSRankings](https://csrankings.org/); historical affiliation estimates use [OpenAlex](https://openalex.org/) plus manually reviewed corrections.
 
 ## 📝 License
-Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
+
+Original CS Picks source code and project material are available under the
+[MIT License](LICENSE). The repository also contains third-party data,
+metadata, dependencies, and assets that are not relicensed by MIT. See
+the source-specific notes below before redistributing those materials.
+
+### Data and asset licensing
+
+The MIT license applies to original CS Picks source code and other original
+project material to the extent that Roars Lab owns the rights to it. It does
+not relicense material obtained from external sources.
+
+| Material | Source | Reuse notes |
+| --- | --- | --- |
+| Faculty, publication, institution, and venue data | [CSRankings](https://github.com/emeryberger/CSrankings) | Follow the current CSRankings repository license and attribution requirements. |
+| Publication and author metadata used by the simulator | [DBLP](https://dblp.org/) | DBLP’s dataset is released under CC0, with attribution/source-link guidance. Follow DBLP’s [current terms and conditions](https://dblp.org/faq/1474583.html). |
+| Historical affiliation data and institution mappings | [OpenAlex](https://openalex.org/) | OpenAlex describes its data as [CC0/public domain](https://help.openalex.org/data/how-its-built/). This applies to OpenAlex metadata, not to the underlying scholarly works or full text, which retain their own rights. |
+| Award records and investigator metadata | [NSF Award Search](https://www.nsf.gov/funding/award-search) | These are public government records, but the snapshot and matching process are project-specific. Verify current NSF terms and source attribution before redistribution. |
+| Conference schedule records | `csconfs/data/conferences.json` | Curated project data assembled from the official conference and sponsoring-organization pages linked in each record. Verify those source terms before reuse. |
+| Fonts and JavaScript dependencies | Their respective upstream projects | Each dependency keeps its own license; see `package-lock.json` and the upstream project for details. |
+
+The files under `public/` are deployable snapshots or project-generated
+transformations. The MIT license should not be interpreted as permission to
+reuse third-party contents without complying with the applicable source terms.
+When in doubt, use the source links above and retain the source attribution
+included in the files and application documentation. Source terms can change,
+so downstream redistributors should verify them at the time of reuse.

@@ -79,8 +79,7 @@ See "Routine Maintenance" in README.md.
   over the database in `public/grants.json` (industry gifts, NSF calls, DARPA, DOE, DoD, foundations, societies).
 - `grants-submit.html` + `src/grants/submit.js` — single unified submission/correction form for proposing
   new CS research awards or updating existing entries via GitHub Issue or email.
-- `README.md` — GitHub-hosted FAQ, methodology, limitations, and data documentation. `PRODUCT.md` has the
-  brand/design-principles brief (tone, anti-references, accessibility bar) worth checking before UI/CSS work.
+- `README.md` — GitHub-hosted FAQ, methodology, limitations, and data documentation.
 
 **Shared page infrastructure** — prefer these over per-page copies:
 - `src/filters.js` — `createFilterBar(mount, { fields, years, onChange })` renders the region / year-range /
@@ -248,4 +247,3 @@ npx playwright test test/e2e/grants.spec.js test/e2e/grants-submit.spec.js  # Ru
 
 - `test/unit/*.test.js` uses Node's native test runner (`node --test`).
 - `test/e2e/*.spec.js` uses Playwright to test all pages (`index.html`, `simulator.html`, `csconfs.html`, `csconfs-submit.html`, `grants.html`, `grants-submit.html`, `nsf.html`).
-
