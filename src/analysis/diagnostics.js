@@ -145,42 +145,29 @@ export function renderDataHealth() {
     // parity failures.
     const defaultData = filterByYears(state.rawData, start, end, state.filters.region, null, null, 'csrankings-default');
     const defaultReport = calculateParityReport(state.rawData, defaultData, 'csrankings-default');
-    const corpusDiag = calculateCorpusDiagnostics(state.rawData, current);
     const syncDate = state.venueRulesCheckedAt || new Date(state.activeVenueRules.syncedAt);
     const syncText = Number.isNaN(syncDate.getTime()) ? 'Unknown' : syncDate.toLocaleString();
     const internalOk = selectedReport.totalMismatches === 0 && selectedReport.rankOrderIssues === 0;
     const selectedMode = selectedReport.divergences.length
         ? selectedReport.divergences.join(', ')
         : 'CSRankings default';
-    const topAreaName = corpusDiag.topArea ? (areaLabels[corpusDiag.topArea.key] || corpusDiag.topArea.key) : 'None';
+    const disambiguatedCount = Object.keys(state.rawData.professors || {}).filter(name =>
+        /\s+\d+$|\s+\[\d+\]|\s+\(.*\)/.test(name) || (state.rawData.professors[name]?.unitNotes && state.rawData.professors[name].unitNotes.length > 0)
+    ).length;
+
     container.innerHTML = `
-        <h2>CS Picks health · ${start}–${end}</h2>
-        <p class="summary-note">Health checks whether CS Picks’ source data, calculations, metadata, and venue rules are available, internally consistent, and informationally sound.</p>
+        <h2>CS Picks data health · ${start}–${end}</h2>
+        <p class="summary-note">Health checks whether CS Picks’ source data, calculations, metadata, and venue rules are available and internally consistent.</p>
         
-        <h3>Engine Invariants & Parity</h3>
         <div class="diagnostic-grid">
             <div class="diagnostic-stat"><span>Matches CSRankings default</span><strong class="${defaultReport.matchesCsrankings ? 'confidence-high' : 'confidence-review'}">${defaultReport.matchesCsrankings ? 'Yes' : 'No'}</strong><small>${defaultReport.matchesCsrankings ? 'official venue set, current affiliations, and total ranking' : `${defaultReport.totalMismatches + defaultReport.rankOrderIssues} baseline inconsistencies`}</small></div>
             <div class="diagnostic-stat"><span>Current selection</span><strong>${selectedReport.divergences.length ? 'Customized' : 'Default'}</strong><small>${escapeHtml(selectedMode)}</small></div>
             <div class="diagnostic-stat"><span>Selected-view invariants</span><strong class="${internalOk ? 'confidence-high' : 'confidence-review'}">${internalOk ? 'Pass' : 'Review'}</strong><small>${selectedReport.totalMismatches + selectedReport.rankOrderIssues} total or rank-order inconsistencies</small></div>
             <div class="diagnostic-stat"><span>Institution metadata</span><strong>${selectedReport.institutionCoverage.toFixed(0)}%</strong><small>country or region present</small></div>
             <div class="diagnostic-stat"><span>Author profile links</span><strong>${selectedReport.profileCoverage.toFixed(0)}%</strong><small>homepage or scholar ID mapped</small></div>
+            <div class="diagnostic-stat"><span>Disambiguated authors</span><strong>${disambiguatedCount.toLocaleString()}</strong><small>distinct unit/disambiguation tags</small></div>
             <div class="diagnostic-stat"><span>Venue rules checked</span><strong>${escapeHtml(syncText)}</strong><small>upstream venue parser · ${escapeHtml(state.activeVenueRules.sourceVersion || 'bundled fallback')}</small></div>
             <div class="diagnostic-stat"><span>Repository updated</span><strong id="health-repo-updated">Checking...</strong><small><a id="health-repo-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer">dynaroars/cspicks</a></small></div>
-        </div>
-
-        <h3>Field Diversity & Information Entropy</h3>
-        <div class="diagnostic-grid">
-            <div class="diagnostic-stat"><span>Shannon Area Entropy</span><strong>${corpusDiag.entropy.toFixed(2)} nats</strong><small>${corpusDiag.normalizedEntropy.toFixed(0)}% uniform across 26 subfields</small></div>
-            <div class="diagnostic-stat"><span>Field Concentration (HHI)</span><strong>${corpusDiag.hhi.toLocaleString()}</strong><small>${corpusDiag.hhi < 1500 ? 'Low / highly diversified' : corpusDiag.hhi < 2500 ? 'Moderate' : 'Concentrated'}</small></div>
-            <div class="diagnostic-stat"><span>Dominant Subfield</span><strong>${escapeHtml(topAreaName)}</strong><small>${corpusDiag.topArea ? `${corpusDiag.topArea.share.toFixed(1)}% of adjusted output` : 'None'}</small></div>
-        </div>
-
-        <h3>Faculty & Collaboration Graph</h3>
-        <div class="diagnostic-grid">
-            <div class="diagnostic-stat"><span>Faculty Output Gini</span><strong>${corpusDiag.gini.toFixed(2)}</strong><small>Top 10% faculty authored ${corpusDiag.top10Concentration.toFixed(0)}% of output</small></div>
-            <div class="diagnostic-stat"><span>Interdisciplinary Bridge</span><strong>${corpusDiag.bridgeRatio.toFixed(0)}%</strong><small>active faculty publishing in ≥2 subfields</small></div>
-            <div class="diagnostic-stat"><span>Co-authorship Depth</span><strong>${corpusDiag.coauthorshipDepth.toFixed(1)}</strong><small>avg team size (raw-to-adjusted ratio)</small></div>
-            <div class="diagnostic-stat"><span>Disambiguated Authors</span><strong>${corpusDiag.disambiguatedAuthors.toLocaleString()}</strong><small>researchers with distinct unit/id tags</small></div>
         </div>
 
         <div class="data-caveat"><strong>What “matches” means:</strong> CSPicks recomputes the selected region and years with CSRankings’ default venues, current affiliations, total department scoring, and the same upstream CSV inputs. It verifies internal totals and rank ordering. CSRankings does not publish a static result table API, so a brief difference can still occur if csrankings.org has deployed newer source data than this browser session.</div>
