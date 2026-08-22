@@ -134,7 +134,6 @@
 
 .discovery-info .tooltip-content {
   width: min(290px, calc(100vw - 2rem));
-  font-weight: 400;
 }
 
 /* Rank Stability Matrix Table */

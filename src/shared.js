@@ -200,6 +200,18 @@ export function updateChartDefaults(Chart) {
   Chart.defaults.plugins.legend.labels.color = colors.text;
   Chart.defaults.scale.ticks.color = colors.text;
   Chart.defaults.scale.title.color = colors.text;
+  if (Chart.defaults.plugins?.tooltip) {
+    Chart.defaults.plugins.tooltip.backgroundColor = '#2d2d2d';
+    Chart.defaults.plugins.tooltip.titleColor = '#ffffff';
+    Chart.defaults.plugins.tooltip.bodyColor = '#ffffff';
+    Chart.defaults.plugins.tooltip.footerColor = '#ffffff';
+    Chart.defaults.plugins.tooltip.padding = { top: 6, bottom: 6, left: 10, right: 10 };
+    Chart.defaults.plugins.tooltip.cornerRadius = 6;
+    Chart.defaults.plugins.tooltip.titleFont = { family: 'Inter, sans-serif', size: 12, weight: '600' };
+    Chart.defaults.plugins.tooltip.bodyFont = { family: 'Inter, sans-serif', size: 12, weight: '400' };
+    Chart.defaults.plugins.tooltip.footerFont = { family: 'Inter, sans-serif', size: 12, weight: '400' };
+    Chart.defaults.plugins.tooltip.boxPadding = 4;
+  }
 }
 
 /**

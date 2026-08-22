@@ -191,7 +191,6 @@
 
 .comparison-measure .tooltip-content {
   width: min(340px, calc(100vw - 2rem));
-  text-transform: none;
 }
 
 .comparison-name-list {
