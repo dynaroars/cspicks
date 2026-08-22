@@ -160,14 +160,54 @@ export function renderDataHealth() {
         <p class="summary-note">Health checks whether CS Picks’ source data, calculations, metadata, and venue rules are available and internally consistent.</p>
         
         <div class="diagnostic-grid">
-            <div class="diagnostic-stat"><span>Matches CSRankings default</span><strong class="${defaultReport.matchesCsrankings ? 'confidence-high' : 'confidence-review'}">${defaultReport.matchesCsrankings ? 'Yes' : 'No'}</strong><small>${defaultReport.matchesCsrankings ? 'official venue set, current affiliations, and total ranking' : `${defaultReport.totalMismatches + defaultReport.rankOrderIssues} baseline inconsistencies`}</small></div>
-            <div class="diagnostic-stat"><span>Current selection</span><strong>${selectedReport.divergences.length ? 'Customized' : 'Default'}</strong><small>${escapeHtml(selectedMode)}</small></div>
-            <div class="diagnostic-stat"><span>Selected-view invariants</span><strong class="${internalOk ? 'confidence-high' : 'confidence-review'}">${internalOk ? 'Pass' : 'Review'}</strong><small>${selectedReport.totalMismatches + selectedReport.rankOrderIssues} total or rank-order inconsistencies</small></div>
-            <div class="diagnostic-stat"><span>Institution metadata</span><strong>${selectedReport.institutionCoverage.toFixed(0)}%</strong><small>country or region present</small></div>
-            <div class="diagnostic-stat"><span>Author profile links</span><strong>${selectedReport.profileCoverage.toFixed(0)}%</strong><small>homepage or scholar ID mapped</small></div>
-            <div class="diagnostic-stat"><span>Disambiguated authors</span><strong>${disambiguatedCount.toLocaleString()}</strong><small>distinct unit/disambiguation tags</small></div>
-            <div class="diagnostic-stat"><span>Venue rules checked</span><strong>${escapeHtml(syncText)}</strong><small>upstream venue parser · ${escapeHtml(state.activeVenueRules.sourceVersion || 'bundled fallback')}</small></div>
-            <div class="diagnostic-stat"><span>Repository updated</span><strong id="health-repo-updated">Checking...</strong><small><a id="health-repo-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer">dynaroars/cspicks</a></small></div>
+            <div class="diagnostic-stat tooltip-trigger">
+                <span>Matches CSRankings default</span>
+                <strong class="${defaultReport.matchesCsrankings ? 'confidence-high' : 'confidence-review'}">${defaultReport.matchesCsrankings ? 'Yes' : 'No'}</strong>
+                <small>${defaultReport.matchesCsrankings ? 'official venue set, current affiliations, and total ranking' : `${defaultReport.totalMismatches + defaultReport.rankOrderIssues} baseline inconsistencies`}</small>
+                <span class="tooltip-content" role="tooltip">Recomputes rankings with official default rules to verify zero baseline parity drift.</span>
+            </div>
+            <div class="diagnostic-stat tooltip-trigger">
+                <span>Current selection</span>
+                <strong>${selectedReport.divergences.length ? 'Customized' : 'Default'}</strong>
+                <small>${escapeHtml(selectedMode)}</small>
+                <span class="tooltip-content" role="tooltip">Active filter configuration (e.g. customized venue sets, historical affiliations, or per-capita).</span>
+            </div>
+            <div class="diagnostic-stat tooltip-trigger">
+                <span>Selected-view invariants</span>
+                <strong class="${internalOk ? 'confidence-high' : 'confidence-review'}">${internalOk ? 'Pass' : 'Review'}</strong>
+                <small>${selectedReport.totalMismatches + selectedReport.rankOrderIssues} total or rank-order inconsistencies</small>
+                <span class="tooltip-content" role="tooltip">Ensures mathematical consistency: strict rank monotonicity and subfield score conservation.</span>
+            </div>
+            <div class="diagnostic-stat tooltip-trigger">
+                <span>Institution metadata</span>
+                <strong>${selectedReport.institutionCoverage.toFixed(0)}%</strong>
+                <small>country or region present</small>
+                <span class="tooltip-content" role="tooltip">Coverage percentage of universities with mapped country and region attributes.</span>
+            </div>
+            <div class="diagnostic-stat tooltip-trigger">
+                <span>Author profile links</span>
+                <strong>${selectedReport.profileCoverage.toFixed(0)}%</strong>
+                <small>homepage or scholar ID mapped</small>
+                <span class="tooltip-content" role="tooltip">Coverage percentage of active faculty with verified homepage or Google Scholar ID links.</span>
+            </div>
+            <div class="diagnostic-stat tooltip-trigger">
+                <span>Disambiguated authors</span>
+                <strong>${disambiguatedCount.toLocaleString()}</strong>
+                <small>distinct unit/disambiguation tags</small>
+                <span class="tooltip-content" role="tooltip">Faculty disambiguated via numerical/unit suffixes to prevent multi-person publication collisions.</span>
+            </div>
+            <div class="diagnostic-stat tooltip-trigger">
+                <span>Venue rules checked</span>
+                <strong>${escapeHtml(syncText)}</strong>
+                <small>upstream venue parser · ${escapeHtml(state.activeVenueRules.sourceVersion || 'bundled fallback')}</small>
+                <span class="tooltip-content" role="tooltip">Timestamp and source version of the upstream CSRankings venue parser rules sync.</span>
+            </div>
+            <div class="diagnostic-stat tooltip-trigger">
+                <span>Repository updated</span>
+                <strong id="health-repo-updated">Checking...</strong>
+                <small><a id="health-repo-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer">dynaroars/cspicks</a></small>
+                <span class="tooltip-content" role="tooltip">Latest commit and relative update time for the dynaroars/cspicks GitHub repository.</span>
+            </div>
         </div>
 
         <div class="data-caveat"><strong>What “matches” means:</strong> CSPicks recomputes the selected region and years with CSRankings’ default venues, current affiliations, total department scoring, and the same upstream CSV inputs. It verifies internal totals and rank ordering. CSRankings does not publish a static result table API, so a brief difference can still occur if csrankings.org has deployed newer source data than this browser session.</div>

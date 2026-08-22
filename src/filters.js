@@ -6,10 +6,10 @@ import { getInitialRegion, rememberRegion } from './shared.js';
 // This module owns their markup, state, persistence, and the affiliation data
 // that History mode needs, so pages only declare which fields they want.
 
-const CONF_SET_HELP = 'Chooses which venues count. CSRankings (Default) follows the primary conference set; CSRankings (All) adds the extended, next-tier venues; the CORE options use CORE conference tiers; All (Union) combines every venue from all of the above.';
-const HISTORY_HELP = 'Credits pubs to the univ where the author worked when each was published, not their current one. Use the year selectors to focus on a historical period.';
-const RANKINGS_HELP = 'Numbers the result lists and shows each univ\'s overall and per-area rank for the selected region, years, and conference set.';
-const PER_CAPITA_HELP = 'Ranks univs by average output per prof rather than by departmental total, so a large dept is not favoured over a productive one. Univs with fewer than 5 publishing profs are omitted.';
+const CONF_SET_HELP = 'Select conference venues: CSRankings default/all, CORE tiers, or union of all sets.';
+const HISTORY_HELP = 'Credits papers to the university where the author was affiliated when published.';
+const RANKINGS_HELP = 'Displays overall and per-area ranks for institutions in the selected view.';
+const PER_CAPITA_HELP = 'Ranks universities by output per faculty member (min. 5 active faculty).';
 
 const REGIONS = [
   ['world', 'World'],

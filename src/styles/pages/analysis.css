@@ -257,10 +257,20 @@
 }
 
 .diagnostic-stat {
+  position: relative;
   padding: 0.8rem;
   background: var(--hover-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
+  cursor: help;
+}
+
+.diagnostic-stat .tooltip-content {
+  width: min(220px, calc(100vw - 2rem));
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.35;
+  padding: 0.45rem 0.7rem;
 }
 
 .diagnostic-stat span,

@@ -33,14 +33,54 @@ function renderDataHealth() {
     <h2>NSF funding data health</h2>
     <p class="summary-note">This audit reports the freshness and field coverage of the nationwide NSF snapshot matched to the current CS faculty roster.</p>
     <div class="diagnostic-grid">
-      <div class="diagnostic-stat"><span>Roster sync</span><strong class="${coverageComplete ? 'confidence-high' : 'confidence-review'}">${coverageComplete ? 'Complete' : 'Review'}</strong><small>${Number(coverage.failures || 0).toLocaleString()} API failures</small></div>
-      <div class="diagnostic-stat"><span>Universities checked</span><strong>${Number(coverage.institutionsChecked || 0).toLocaleString()} / ${Number(coverage.institutionsTotal || 0).toLocaleString()}</strong><small>current roster institutions</small></div>
-      <div class="diagnostic-stat"><span>Faculty checked</span><strong>${Number(coverage.facultyChecked || 0).toLocaleString()} / ${Number(coverage.facultyTotal || 0).toLocaleString()}</strong><small>current-roster faculty</small></div>
-      <div class="diagnostic-stat"><span>Matched awards</span><strong>${awards.length.toLocaleString()}</strong><small>nationwide NSF snapshot</small></div>
-      <div class="diagnostic-stat"><span>Program managers</span><strong>${percentage(managerCount)}%</strong><small>${managerCount.toLocaleString()} awards populated</small></div>
-      <div class="diagnostic-stat"><span>Project dates</span><strong>${percentage(datedCount)}%</strong><small>${datedCount.toLocaleString()} awards with start and end dates</small></div>
-      <div class="diagnostic-stat"><span>Snapshot synchronized</span><strong>${escapeHtml(syncText)}</strong><small>schema version ${escapeHtml(String(dataset.schemaVersion || 'unknown'))}</small></div>
-      <div class="diagnostic-stat"><span>Repository updated</span><strong id="nsf-repo-updated">Checking...</strong><small><a id="nsf-repo-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer">dynaroars/cspicks</a></small></div>
+      <div class="diagnostic-stat tooltip-trigger">
+        <span>Roster sync</span>
+        <strong class="${coverageComplete ? 'confidence-high' : 'confidence-review'}">${coverageComplete ? 'Complete' : 'Review'}</strong>
+        <small>${Number(coverage.failures || 0).toLocaleString()} API failures</small>
+        <span class="tooltip-content" role="tooltip">Status of NSF API award matching across current CS faculty roster.</span>
+      </div>
+      <div class="diagnostic-stat tooltip-trigger">
+        <span>Universities checked</span>
+        <strong>${Number(coverage.institutionsChecked || 0).toLocaleString()} / ${Number(coverage.institutionsTotal || 0).toLocaleString()}</strong>
+        <small>current roster institutions</small>
+        <span class="tooltip-content" role="tooltip">Number of CS institutions evaluated for NSF award records.</span>
+      </div>
+      <div class="diagnostic-stat tooltip-trigger">
+        <span>Faculty checked</span>
+        <strong>${Number(coverage.facultyChecked || 0).toLocaleString()} / ${Number(coverage.facultyTotal || 0).toLocaleString()}</strong>
+        <small>current-roster faculty</small>
+        <span class="tooltip-content" role="tooltip">Number of individual faculty members queried against NSF investigator awards.</span>
+      </div>
+      <div class="diagnostic-stat tooltip-trigger">
+        <span>Matched awards</span>
+        <strong>${awards.length.toLocaleString()}</strong>
+        <small>nationwide NSF snapshot</small>
+        <span class="tooltip-content" role="tooltip">Total NSF awards matched to current CS faculty in the dataset snapshot.</span>
+      </div>
+      <div class="diagnostic-stat tooltip-trigger">
+        <span>Program managers</span>
+        <strong>${percentage(managerCount)}%</strong>
+        <small>${managerCount.toLocaleString()} awards populated</small>
+        <span class="tooltip-content" role="tooltip">Percentage of matched awards with identified NSF program managers.</span>
+      </div>
+      <div class="diagnostic-stat tooltip-trigger">
+        <span>Project dates</span>
+        <strong>${percentage(datedCount)}%</strong>
+        <small>${datedCount.toLocaleString()} awards with start and end dates</small>
+        <span class="tooltip-content" role="tooltip">Percentage of matched awards with valid project start and end dates.</span>
+      </div>
+      <div class="diagnostic-stat tooltip-trigger">
+        <span>Snapshot synchronized</span>
+        <strong>${escapeHtml(syncText)}</strong>
+        <small>schema version ${escapeHtml(String(dataset.schemaVersion || 'unknown'))}</small>
+        <span class="tooltip-content" role="tooltip">Timestamp of the latest nationwide NSF snapshot rebuild.</span>
+      </div>
+      <div class="diagnostic-stat tooltip-trigger">
+        <span>Repository updated</span>
+        <strong id="nsf-repo-updated">Checking...</strong>
+        <small><a id="nsf-repo-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer">dynaroars/cspicks</a></small>
+        <span class="tooltip-content" role="tooltip">Latest commit and relative update time for the dynaroars/cspicks GitHub repository.</span>
+      </div>
     </div>
     <div class="data-caveat"><strong>Scope limitation:</strong> Matching is limited to current CS faculty on the roster and may miss name variants or prior affiliations. Intended amounts are divided equally among listed PIs and co-PIs.</div>
   `;

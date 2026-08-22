@@ -367,9 +367,12 @@ option {
 }
 
 .search-filters .tooltip-content {
-  width: min(340px, calc(100vw - 2rem));
+  width: min(220px, calc(100vw - 2rem));
   pointer-events: none;
   font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  padding: 0.45rem 0.7rem;
 }
 
 /* Funding Filters Variant */
