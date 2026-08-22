@@ -5,6 +5,7 @@ import { buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calcul
 import { renderInsightList, renderMetricCards } from '../analysis-ui.js';
 import { state } from './state.js';
 import { getAnalysisData, getConferenceSet, getResearcherPatterns, getTargetName, isPublicationForTarget, renderResearcherActivityMetrics } from '../analysis.js';
+import { isPubAtSchool } from './area-trends.js';
 
 export function renderSchoolAnalysisSummary(current, prior, schoolName) {
     const container = document.getElementById('ranking-stats');

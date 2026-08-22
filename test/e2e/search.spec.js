@@ -348,6 +348,48 @@ test('CORE A conference trends include a published ASE venue', async ({ page }) 
   await expect(page.locator('#conf-checkbox-groups')).toContainText('ASE');
 });
 
+test('university analysis renders Activity, Faculty Diversity, and Publishing Effort tabs without errors', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
+
+  await page.goto('./');
+  await page.locator('#main-search').fill('George Mason University');
+  await expect(page.locator('#integrated-analysis')).toBeVisible();
+
+  // 1. Activity tab (default active tab for schools)
+  await expect(page.locator('#school-trends-view')).toBeVisible();
+  await expect(page.locator('#ranking-stats')).toContainText('Rank movement');
+  await expect(page.locator('#ranking-stats')).toContainText('Momentum');
+  await expect(page.locator('#rankingChart')).toBeVisible();
+
+  // 2. Faculty Diversity tab
+  await page.getByRole('tab', { name: /Faculty Diversity/ }).click();
+  await expect(page.locator('#faculty-diversity-view')).toBeVisible();
+  await expect(page.locator('#diversityChart')).toBeVisible();
+
+  // 3. Publishing Effort tab
+  await page.getByRole('tab', { name: /Publishing Effort/ }).click();
+  await expect(page.locator('#effort-view')).toBeVisible();
+  await expect(page.locator('#effortChart')).toBeVisible();
+
+  // 4. Area Growth tab
+  await page.getByRole('tab', { name: /Area Growth/ }).click();
+  await expect(page.locator('#area-growth-view')).toBeVisible();
+  await expect(page.locator('#areaChart')).toBeVisible();
+
+  // 5. Collaboration tab
+  await page.getByRole('tab', { name: /Collaboration/ }).click();
+  await expect(page.locator('#collaboration-view')).toBeVisible();
+  await expect(page.locator('#collaboration-stats')).toBeVisible();
+
+  // 6. Rank Stability tab
+  await page.getByRole('tab', { name: /Rank Stability/ }).click();
+  await expect(page.locator('#stability-view')).toBeVisible();
+
+  // Verify zero page/console uncaught errors occurred across all tab transitions
+  expect(pageErrors).toEqual([]);
+});
+
 test('historical mode loads affiliation data without an extra status box', async ({ page }) => {
   await page.goto('./');
   await expect(page.locator('#history-warning')).toHaveCount(0);

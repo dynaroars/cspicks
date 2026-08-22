@@ -5,6 +5,7 @@ import { buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calcul
 import { renderInsightList, renderMetricCards } from '../analysis-ui.js';
 import { state } from './state.js';
 import { getAnalysisData, getConferenceSet, getTargetName, isPublicationForTarget } from '../analysis.js';
+import { isPubAtSchool } from './area-trends.js';
 
 export function renderFacultyTrends() {
     const canvas = document.getElementById('diversityChart');
