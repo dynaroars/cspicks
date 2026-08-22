@@ -58,7 +58,7 @@ export function renderScheduleCard(group, now = Date.now()) {
           ? `${escapeHtml(main.name)} ${main.year}`
           : `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(main.name)} ${main.year}</a>`}</h2>
         ${main.estimated ? '<span class="schedule-estimated" title="Projected from an earlier timeline; confirm on the conference website">Estimated</span>' : ''}
-        ${main.verified ? '<span class="schedule-verified" title="Verified in the source schedule">Verified</span>' : ''}
+        ${main.verified ? '<span class="schedule-verified" role="img" aria-label="Information reviewed" title="Information reviewed from available sources; not an endorsement or guarantee">✓</span>' : ''}
       </div>
       ${main.description ? `<p class="schedule-description">${escapeHtml(main.description)}</p>` : ''}
       ${areas.length ? `<p class="schedule-areas">${areas.map(area => `<span>${escapeHtml(area)}</span>`).join('')}</p>` : ''}
