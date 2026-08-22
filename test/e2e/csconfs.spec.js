@@ -116,7 +116,7 @@ test('CS Confs submission page prefills an existing entry and offers email or Gi
   await expect(page.locator('#acceptanceRate')).toHaveValue('');
   await expect(page.locator('#submissions')).toHaveValue('');
   await expect(page.locator('#estimated')).not.toBeChecked();
-  await expect(page.locator('#verified')).not.toBeChecked();
+  await expect(page.locator('#verified')).toBeChecked();
   await expect(page.getByRole('button', { name: 'Send by email' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Submit as a GitHub issue' })).toBeVisible();
 });
