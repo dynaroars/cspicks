@@ -387,7 +387,7 @@ test('region defaults are locale-aware and a user choice carries across every ta
   await page.goto('simulator.html');
   await expect(page.locator('#region-select')).toHaveValue('europe');
   await expect(page.locator('.tool-intro .eyebrow')).toHaveCount(0);
-  await page.goto('funding.html');
+  await page.goto('nsf.html');
   await expect(page.locator('#funding-award-count')).toContainText('NSF CS awards during');
 
   await page.goto('./?region=world');

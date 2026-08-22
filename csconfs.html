@@ -4,12 +4,6 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
-    const applySystemTheme = () => document.documentElement.setAttribute('data-theme', systemTheme.matches ? 'dark' : 'light');
-    applySystemTheme();
-    systemTheme.addEventListener('change', applySystemTheme);
-  </script>
   <title>CS Picks - CS Conference Schedule</title>
   <meta name="description" content="Search computer science conference dates, submission deadlines, research areas, and venue sets." />
   <link rel="canonical" href="https://cspicks.roars.dev/csconfs.html" />
@@ -35,7 +29,7 @@
       </div>
       <nav class="top-nav" aria-label="Primary navigation">
         <a href="index.html">🔎 Search</a><a href="index.html?view=discoveries">🔭 Discoveries</a><a href="simulator.html">☠️ Simulator</a>
-        <a href="csconfs.html" class="active" aria-current="page">📅 CS Confs</a><a href="funding.html">🇺🇸 NSF Funding</a>
+        <a href="csconfs.html" class="active" aria-current="page">📅 CS Confs</a><a href="nsf.html">🇺🇸 NSF Funding</a><a href="grants.html">🏆 Awards &amp; Grants</a>
       </nav>
     </header>
     <section class="search-section">

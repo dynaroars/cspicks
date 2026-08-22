@@ -12,8 +12,10 @@
 .schedule-estimated, .schedule-verified { padding: .15rem .42rem; border-radius: 999px; font-size: .67rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
 .schedule-estimated { color: #9a6700; background: #fff2bf; }
 .schedule-verified { color: #17653a; background: #dff7e8; }
-[data-theme="dark"] .schedule-estimated { color: #ffd66b; background: #4a3b12; }
-[data-theme="dark"] .schedule-verified { color: #86e3ad; background: #173e29; }
+@media (prefers-color-scheme: dark) {
+  .schedule-estimated { color: #ffd66b; background: #4a3b12; }
+  .schedule-verified { color: #86e3ad; background: #173e29; }
+}
 .schedule-description { margin: .45rem 0 .65rem; color: var(--text-secondary); }
 .schedule-areas { display: flex; flex-wrap: wrap; gap: .35rem; margin: .5rem 0; }
 .schedule-areas span { border: 1px solid var(--border-color); background: var(--bg-secondary); border-radius: 999px; padding: .2rem .5rem; color: var(--text-secondary); font-size: .74rem; }

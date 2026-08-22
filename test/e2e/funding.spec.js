@@ -82,7 +82,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('NSF funding beta searches nationwide data and aggregates fractional awards', async ({ page }) => {
-  await page.goto('funding.html');
+  await page.goto('nsf.html');
   await expect(page.getByRole('link', { name: '🇺🇸 NSF Funding' })).toHaveAttribute('aria-current', 'page');
   await expect(page.locator('.funding-warning')).toHaveCount(0);
   await expect(page.locator('#funding-award-count')).toContainText(/[\d,]+ NSF CS awards during/);
@@ -166,7 +166,7 @@ test('NSF funding beta searches nationwide data and aggregates fractional awards
 });
 
 test('funding compares two universities with vs', async ({ page }) => {
-  await page.goto('funding.html?q=George%20Mason%20University%20vs%20Univ.%20of%20Illinois%20at%20Urbana-Champaign');
+  await page.goto('nsf.html?q=George%20Mason%20University%20vs%20Univ.%20of%20Illinois%20at%20Urbana-Champaign');
   const comparison = page.locator('#funding-comparison');
   await expect(comparison).toBeVisible();
   await expect(comparison.locator('.comparison-scoreboard')).toContainText('NSF awards');
@@ -176,16 +176,16 @@ test('funding compares two universities with vs', async ({ page }) => {
   await expect(page.locator('#funding-school-results .funding-card')).toHaveCount(0);
   await expect(comparison.locator('.funding-card.collapsed')).toHaveCount(0);
 
-  await page.goto('funding.html?q=George%20Mason%20University%20vs%20Nowhere%20Tech');
+  await page.goto('nsf.html?q=George%20Mason%20University%20vs%20Nowhere%20Tech');
   await expect(comparison).toContainText('No match found');
 
-  await page.goto('funding.html?q=George%20Mason%20University');
+  await page.goto('nsf.html?q=George%20Mason%20University');
   await expect(page.locator('#funding-school-results .funding-card').first()).toBeVisible();
   await expect(comparison).toBeHidden();
 });
 
 test('funding suggestions complete both sides of a vs query', async ({ page }) => {
-  await page.goto('funding.html');
+  await page.goto('nsf.html');
   const listbox = page.locator('#universal-suggestions');
   // A comparison chip advertises the mode before anything is typed.
   await expect(page.locator('#funding-examples button', { hasText: ' vs ' })).toHaveCount(1);

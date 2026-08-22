@@ -182,7 +182,9 @@ export function getConferenceLabel(key) {
 }
 
 export function getChartColors() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const isDark = typeof window !== 'undefined' && window.matchMedia
+    ? window.matchMedia('(prefers-color-scheme: dark)').matches
+    : false;
   return {
     text: isDark ? '#e0e0e0' : '#666666',
     grid: isDark ? '#3d4043' : '#e5e7eb',

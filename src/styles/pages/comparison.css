@@ -1,38 +1,6 @@
-/* Rosters of people sit beside the university tiles in the same card, so they
-   match those tiles' type size rather than defaulting to body copy. */
-.comparison-name-list {
-  margin: 0;
-  font-size: var(--text-xs);
-  line-height: 1.7;
-}
-
-.diagnostic-panel {
-  padding: 1.5rem;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-}
-
-.diagnostic-panel h2,
-.diagnostic-panel h3 {
-  margin-bottom: 0.75rem;
-  color: var(--text-primary);
-  font-family: var(--font-heading);
-}
-
-.diagnostic-panel h3 { margin-top: 1.25rem; }
-
-.integrated-analysis {
-  width: 100%;
-  max-width: 100%;
-  margin: 1.25rem auto 0;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.integrated-analysis[hidden] {
-  display: none;
-}
+/* ==========================================================================
+   Head-to-Head Comparison Views (Institutions, Faculty, Areas, Venues)
+   ========================================================================== */
 
 .comparison-results {
   width: 100%;
@@ -67,7 +35,6 @@
   border-radius: 12px;
 }
 
-/* The full per-area detail closes the comparison rather than opening it. */
 .comparison-chart-section {
   margin-top: 1.5rem;
 }
@@ -84,6 +51,7 @@
   font-weight: 500;
 }
 
+/* Comparison Summary Cards */
 .comparison-summary {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -117,9 +85,14 @@
   font-size: 0.85rem;
 }
 
-/* Blue = first target, green = second, matching the chart's two series. */
-.comparison-side-a { --comparison-accent: rgba(37, 99, 235, 1); }
-.comparison-side-b { --comparison-accent: rgba(16, 185, 129, 1); }
+/* Comparison Color Series */
+.comparison-side-a {
+  --comparison-accent: rgba(37, 99, 235, 1);
+}
+
+.comparison-side-b {
+  --comparison-accent: rgba(16, 185, 129, 1);
+}
 
 .comparison-verdict,
 .comparison-notice,
@@ -128,7 +101,6 @@
   grid-column: 1 / -1;
 }
 
-/* The one line a reader can stop at, so it carries the most weight on the page. */
 .comparison-verdict p {
   margin: 0;
   color: var(--text-primary);
@@ -137,19 +109,15 @@
   line-height: 1.5;
 }
 
-.comparison-scoreboard {
-  grid-column: 1 / -1;
+.comparison-verdict .comparison-side-a,
+.comparison-verdict .comparison-side-b {
+  color: var(--comparison-accent);
+  font-weight: 700;
 }
 
-/* Turing/ACM Fellow badges sit under the name in the head-to-head header,
-   right-aligned like the rest of that column. */
-.comparison-table thead th .faculty-honors {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.25rem;
-  margin-top: 0.35rem;
-  font-weight: 500;
+/* Scoreboard Table */
+.comparison-scoreboard {
+  grid-column: 1 / -1;
 }
 
 .comparison-table {
@@ -170,10 +138,34 @@
   font-weight: 600;
 }
 
+.comparison-table thead th .faculty-honors {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  margin-top: 0.35rem;
+  font-weight: 500;
+}
+
 .comparison-table tbody th {
   color: var(--text-secondary);
   font-weight: 500;
   text-align: left;
+}
+
+.comparison-table tbody tr:last-child th,
+.comparison-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.comparison-table td {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.comparison-table td.is-leader {
+  color: var(--comparison-accent);
+  font-weight: 700;
 }
 
 .comparison-measure {
@@ -202,45 +194,23 @@
   text-transform: none;
 }
 
-.comparison-table tbody tr:last-child th,
-.comparison-table tbody tr:last-child td {
-  border-bottom: 0;
+.comparison-name-list {
+  margin: 0;
+  font-size: var(--text-xs);
+  line-height: 1.7;
 }
 
-.comparison-table td {
-  color: var(--text-secondary);
-  font-variant-numeric: tabular-nums;
-}
-
-/* The better number in each row carries its side's color and weight. */
-.comparison-table td.is-leader {
-  color: var(--comparison-accent);
-  font-weight: 700;
-}
-
-.visually-hidden {
-  position: absolute;
-  overflow: hidden;
-  clip-path: inset(50%);
-  width: 1px;
-  height: 1px;
-  white-space: nowrap;
-}
-
-.comparison-verdict .comparison-side-a,
-.comparison-verdict .comparison-side-b {
-  color: var(--comparison-accent);
-  font-weight: 700;
-}
-
+/* Comparison Notice & Empty State */
 .comparison-notice {
   padding: 2rem;
-  border-style: dashed;
+  border: 1px dashed var(--border-color);
+  border-radius: 12px;
   text-align: center;
 }
 
 .comparison-notice h4 {
   margin-bottom: 0.5rem;
+  color: var(--text-primary);
 }
 
 .comparison-notice p {
@@ -249,9 +219,9 @@
   font-size: var(--text-sm);
 }
 
-/* The two funding cards sit side by side beneath the head-to-head table. */
 .comparison-cards {
   grid-column: 1 / -1;
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
   gap: 2rem;
 }
@@ -284,24 +254,8 @@
   color: var(--comparison-accent);
 }
 
-.funding-results-container {
-  width: 100%;
-  max-width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.funding-results-container .results-grid {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.funding-status {
-  margin: 0.5rem 0;
-  color: var(--text-secondary);
-  font-size: var(--text-sm);
-  text-align: center;
-}
-
-.funding-status:empty {
-  display: none;
+@media (max-width: 640px) {
+  .comparison-leads {
+    grid-template-columns: 1fr;
+  }
 }

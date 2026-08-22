@@ -73,9 +73,11 @@ See "Routine Maintenance" in README.md.
 - `simulator.html` + `src/simulator.js` — standalone ranking-impact workflow for adding, transferring, or
   removing faculty. Pure name-matching and rank-impact calculations live in `src/simulation.js`;
   `src/dblp-search-ui.js` renders the DBLP candidate-search UI.
-- `funding.html` + `src/funding.js` — standalone NSF funding search over the synchronized snapshot in
+- `nsf.html` + `src/funding.js` — standalone NSF funding search over the synchronized snapshot in
   `public/nsf-awards.json`. Attribution and card rendering live in `src/nsf.js`; Discoveries also reads it
   for its funding sections. Search itself carries no NSF data and never loads the snapshot.
+- `grants.html` + `src/grants/main.js` — standalone CS research awards, fellowships, and grants explorer
+  over the database in `public/grants.json` (industry gifts, NSF calls, DARPA, DOE, DoD, foundations, societies).
 - `FAQ.md` — GitHub-hosted FAQ, methodology, limitations, and data documentation. `PRODUCT.md` has the
   brand/design-principles brief (tone, anti-references, accessibility bar) worth checking before UI/CSS work.
 
@@ -139,8 +141,8 @@ so modules loaded together on Search share one download and parse of the canonic
 - `src/shared.js` — small cross-page utilities: area labels, Chart.js theme colors, name cleanup,
   HTML escaping, inline-value encoding, and external URL validation.
 
-**Charts**: Chart.js throughout, colors driven by `data-theme` attribute on `<html>` (light/dark), synced via
-`updateChartDefaults()` in `shared.js`.
+**Charts**: Chart.js throughout, colors driven by OS color scheme (`prefers-color-scheme: dark/light`), synced via
+`updateChartDefaults()` in `shared.js` and `onThemeChange()` in `charts.js`.
 
 **No build-time data fetching** — CSRankings data is fetched at page load, while OpenAlex data is fetched on
 demand when Historical Mode is enabled. `postbuild` deliberately excludes the large local copies from `dist/`.
@@ -156,16 +158,74 @@ Discoveries must be reproducible from the same data every other page uses — ne
 2. **Render it** in `src/discoveries.js` via the shared `card(title, help, body, className)` helper — it
    slugifies the title into a stable `id` (`discovery-<slug>`), wires the ⓘ tooltip from `help`, and adds a
    Copy Link button for free. Use `schoolLink()`/`areaLink()` to link names back into Search.
-3. **Add a unit test** in `test/data.test.js` with a small synthetic fixture asserting ranking/thresholds;
-   `test/e2e/core-flows.spec.js` already covers the URL/share/hash-scroll mechanics generically.
+3. **Add a unit test** in `test/unit/` asserting ranking/thresholds.
 
 Keep the `help` text honest about methodology (thresholds, "prior period" definition, exclusions) — it's the
 only methodology note most readers see.
 
+## 🏆 Crawling & Updating CS Research Awards & Grants (`public/grants.json`)
+
+The `grants.html` explorer reads from `public/grants.json`. Future AI agents can systematically discover, verify, and update funding opportunities using this standardized workflow without having to re-analyze the whole system:
+
+### 1. Targeted Web Search Queries by Category
+When searching the web for new calls, updated deadlines, or funding programs, run these high-yield query patterns:
+
+- **Federal Agencies (US & Global)**:
+  - NSF: `"NSF CAREER solicitation computer science"`, `"NSF CRII solicitation CISE"`, `"NSF CISE Core programs medium small"`
+  - DARPA: `"DARPA Young Faculty Award YFA solicitation"`, `"DARPA I2O open BAA"`, `"DARPA DSO office-wide BAA"`
+  - DOE: `"DOE Early Career Research Program FOA computer science"`, `"DOE CSGF Computational Science Graduate Fellowship"`
+  - DoD / Service Labs: `"ONR Young Investigator Program YIP"`, `"AFOSR Young Investigator Program BAA"`, `"ARO Early Career Program Scientists Engineers"`
+  - NIH & NASA: `"NIH R01 computer science machine learning"`, `"NASA Space Technology Graduate Research Opportunities NSTGRO"`
+
+- **Tech Industry Research & Frontier AI**:
+  - Google: `"Google Research Scholar Program faculty"`, `"Google PhD Fellowship computer science"`, `"Google Academic Research Awards"`
+  - Microsoft: `"Microsoft Research PhD Fellowship"`, `"Microsoft Research Faculty Fellowship"`
+  - Meta: `"Meta Research PhD Fellowship"`, `"Meta Research RFP grants AI systems security"`
+  - Amazon: `"Amazon Research Awards ARA call for proposals"`, `"Amazon PhD Fellowship"`
+  - Apple & NVIDIA: `"Apple Scholars in AI/ML PhD Fellowship"`, `"NVIDIA Graduate Fellowship Program"`, `"NVIDIA Academic Hardware Grant"`
+  - AI Frontier Labs: `"OpenAI Researcher Access Program academic"`, `"OpenAI academic frontier model grants"`, `"Anthropic researcher access program"`
+  - Other Tech: `"<Company> Research Award OR Fellowship computer science"` (Adobe, Qualcomm, IBM, Samsung GRO, Sony Research Award, Bloomberg, Cisco, Snap, Intel)
+
+- **Foundations, Non-Profits & Societies**:
+  - Foundations: `"Alfred P. Sloan Research Fellowships Computer Science"`, `"Packard Fellowships Science Engineering"`, `"Simons Investigators Theoretical Computer Science"`, `"Schmidt Sciences AI2050 Fellowships"`, `"Hertz Foundation Graduate Fellowship"`, `"National GEM Consortium Fellowship"`, `"Burroughs Wellcome Fund Career Awards at the Scientific Interface"`
+  - Societies: `"CRA Outstanding Undergraduate Researcher Award"`, `"CRA-WP Graduate Research Fellowship"`, `"ACM Doctoral Dissertation Award"`
+
+### 2. Schema Specification for `public/grants.json`
+Every entry in `public/grants.json` MUST adhere to this structure:
+```json
+{
+  "id": "unique-kebab-case-id",
+  "name": "Full Formal Name of Award or Solicitation",
+  "shortName": "Concise Short Name",
+  "sponsor": "Sponsoring Agency or Company (e.g. NSF, Google Research, DARPA)",
+  "sponsorCategory": "Government | Industry | Non-Profit / Foundation | Professional Society",
+  "targetAudience": ["Faculty", "PhD Students", "Undergraduate Students", "Postdocs"],
+  "whoFor": "Clear, human-readable audience description (e.g., Untenured Assistant Professors, 3rd-year PhD students)",
+  "deadline": "Clear description of deadline / cycle (e.g., Annual (Late July), Rolling / Year-Round)",
+  "deadlineMonth": 0,
+  "amount": "Funding amount and perks (e.g., $500,000+ over 5 years, $42,000/yr stipend + tuition)",
+  "summary": "1-2 sentence description of scope, purpose, and research goals.",
+  "eligibility": [
+    "Key eligibility rule 1",
+    "Key eligibility rule 2"
+  ],
+  "topics": ["AI/ML", "Systems", "Security & Privacy", "Theory", "Robotics", "HCI"],
+  "url": "https://official-program-or-rfp-url.org",
+  "featured": true
+}
+```
+*Note on `deadlineMonth`*: Set to `1..12` for the primary annual deadline month, or `0` for rolling/year-round/open calls (used by chronological sorting).
+
+### 3. Verification & Validation Commands
+After adding or modifying grants in `public/grants.json`:
+```bash
+npm test                      # Runs test/unit/grants.test.js (asserts schema, unique IDs, and filter integrity)
+npm run build                 # Verifies Vite bundle compilation and asset generation
+npx playwright test test/e2e/grants.spec.js  # Runs Playwright E2E verification
+```
+
 ## Testing notes
 
-- `test/data.test.js` is a single `node:test` file; there's no per-file split, so grep the file for the
-  behavior you're touching before adding a new `test(...)` block near related ones.
-- `test/e2e/core-flows.spec.js` (Playwright) exercises cross-page URL state, share links, and hash-scroll
-  behavior generically — new interactive features usually don't need their own e2e spec unless they add a
-  genuinely new interaction pattern.
+- `test/unit/*.test.js` uses Node's native test runner (`node --test`).
+- `test/e2e/*.spec.js` uses Playwright to test all pages (`index.html`, `simulator.html`, `csconfs.html`, `nsf.html`, `grants.html`).
+

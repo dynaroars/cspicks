@@ -1,68 +1,14 @@
-/* A floating panel, not an inline section: it must never force the reader to
-   scroll away from mid-list to see it, since the lists it sits alongside
-   lazy-load more of themselves as the reader scrolls. */
-.site-data-health {
-  position: fixed;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  z-index: 500;
-  width: min(420px, calc(100vw - 2rem));
-  max-height: min(75vh, 620px);
-  overflow-y: auto;
-  animation: data-health-pop-in 0.18s ease-out;
-}
+/* ==========================================================================
+   Integrated School & Researcher Analysis View
+   ========================================================================== */
 
-.site-data-health[hidden] {
-  display: none;
-}
-
-.site-data-health .diagnostic-panel {
-  position: relative;
-  padding-right: 2.75rem;
-  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.28);
-}
-
-.data-health-close {
-  position: absolute;
-  z-index: 1;
-  top: 0.6rem;
-  right: 0.6rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  padding: 0;
-  color: var(--text-secondary);
-  background: transparent;
-  border: 0;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-.data-health-close:hover {
-  color: var(--text-primary);
-  background: var(--hover-bg);
-}
-
-.data-health-close svg {
-  width: 1rem;
-  height: 1rem;
-}
-
-@keyframes data-health-pop-in {
-  from { opacity: 0; transform: translateY(12px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@media (max-width: 640px) {
-  .site-data-health {
-    left: 1rem;
-    right: 1rem;
-    bottom: 1rem;
-    width: auto;
-  }
+/* Container & Header */
+.integrated-analysis {
+  width: 100%;
+  max-width: 100%;
+  margin: 1.25rem auto 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .integrated-analysis .eyebrow {
@@ -74,6 +20,32 @@
   text-transform: uppercase;
 }
 
+.integrated-analysis .analysis-view-card {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.integrated-analysis .view-section {
+  min-height: 640px;
+  cursor: default;
+}
+
+.analysis-nav-tabs,
+.integrated-analysis .view-section > *,
+#researcher-highlights > * {
+  width: 100%;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Analysis Navigation Tabs */
 .analysis-nav-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -96,6 +68,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .analysis-nav-tabs .nav-tab.active {
@@ -124,64 +97,264 @@
   cursor: help;
 }
 
-.integrated-analysis .analysis-view-card {
+/* Researcher Insights & Highlights */
+.analysis-insights {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 2rem;
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--hover-bg);
+  border-left: 3px solid var(--primary-color);
+  border-radius: 0 8px 8px 0;
+}
+
+.analysis-insights h3 {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.analysis-insights ul {
+  margin: 0.35rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.analysis-insights li + li {
+  margin-top: 0.2rem;
+}
+
+#researcher-highlights {
+  width: 100%;
+  max-width: 100%;
+}
+
+#researcher-highlights [data-action="load-coauthors"] {
+  margin: -0.5rem 0 1rem 1rem;
+  font-size: var(--text-sm);
+}
+
+/* School Metrics Grid */
+.school-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.5rem;
+  max-width: 860px;
+  margin-bottom: 1rem;
+}
+
+.school-metric {
+  flex: 0 0 auto;
+  width: max-content;
+  max-width: min(100%, 310px);
+  padding: 0.55rem 0.65rem;
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.school-metric span,
+.school-metric strong {
+  display: block;
+}
+
+.school-metric span {
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: 0.68rem;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.school-metric strong {
+  margin-top: 0.1rem;
+  color: var(--text-primary);
+  font-size: 0.86rem;
+}
+
+.school-metric .metric-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem;
+  overflow: visible;
+  white-space: normal;
+}
+
+.school-metric .metric-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.school-metric .metric-info {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  overflow: visible;
+  color: var(--text-secondary);
+  cursor: help;
+  font-size: 0.72rem;
+  line-height: 1;
+  text-transform: none;
+}
+
+.school-metric .metric-info .tooltip-content {
+  width: min(260px, calc(100vw - 2rem));
+  overflow: visible;
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: none;
+  white-space: normal;
+}
+
+.analysis-school-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: none;
+  margin-top: 0.5rem;
+}
+
+.analysis-school-metrics .school-metric {
+  width: auto;
+  max-width: none;
+}
+
+.analysis-school-metrics .school-metric small {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  text-transform: none;
+}
+
+/* Diagnostic Panels & Tables */
+.diagnostic-panel {
   padding: 1.5rem;
   background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.integrated-analysis .chart-container {
-  position: relative;
-  height: 400px;
+.diagnostic-panel h2,
+.diagnostic-panel h3 {
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
 }
 
-/* One column for the whole panel: every tab, and both target types, line up.
-   880px matches the search box above, so the page reads as one column. */
-.analysis-nav-tabs,
-.integrated-analysis .view-section > *,
-#researcher-highlights > * {
-  width: 100%;
-  max-width: 100%;
-  margin-right: auto;
-  margin-left: auto;
+.diagnostic-panel h3 {
+  margin-top: 1.25rem;
 }
 
-.integrated-analysis .analysis-tall-chart {
-  height: 600px;
+.diagnostic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
-.integrated-analysis .view-section,
-.analysis-area-layout,
-/* Researchers get a read-only key, so the swatch replaces the checkbox. */
-.analysis-area-option.is-static {
-  cursor: default;
+.diagnostic-stat {
+  padding: 0.8rem;
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
 }
 
-.analysis-area-swatch {
-  flex: none;
-  width: 0.7rem;
-  height: 0.7rem;
-  border-radius: 3px;
+.diagnostic-stat span,
+.diagnostic-stat strong,
+.diagnostic-stat small {
+  display: block;
 }
 
-.analysis-conference-filter {
-  width: 100%;
-  max-width: 100%;
+.diagnostic-stat span {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
 }
 
-.integrated-analysis .view-section {
-  min-height: 640px;
+.diagnostic-stat strong {
+  margin: 0.2rem 0;
+  color: var(--text-primary);
 }
 
+.diagnostic-stat small {
+  color: var(--text-secondary);
+}
+
+.data-caveat {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  color: var(--text-secondary);
+  background: color-mix(in srgb, #f59e0b 8%, var(--card-bg));
+  border-left: 3px solid #f59e0b;
+  font-size: var(--text-sm);
+}
+
+.metric-table > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.fragility-trajectory {
+  margin-top: 0.75rem;
+}
+
+.fragility-trajectory > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: var(--text-sm);
+}
+
+.summary-note {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.rank-gap-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.5rem;
+}
+
+.rank-gap-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 0.5rem;
+  padding: 0.6rem;
+  background: var(--hover-bg);
+  border-radius: 7px;
+}
+
+.rank-gap-item strong {
+  overflow: hidden;
+  max-width: 12rem;
+  color: var(--text-primary);
+  font-size: var(--text-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rank-gap-item small {
+  grid-column: 1 / -1;
+  color: var(--text-secondary);
+}
+
+/* Area Legend & Options */
 .analysis-area-layout {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  cursor: default;
 }
 
 .analysis-area-legend {
@@ -214,7 +387,21 @@
   white-space: nowrap;
 }
 
+.analysis-area-option.is-static {
+  cursor: default;
+}
+
+.analysis-area-swatch {
+  flex: none;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 3px;
+}
+
+/* Conference Filtering */
 .analysis-conference-filter {
+  width: 100%;
+  max-width: 100%;
   margin-bottom: 1.5rem;
   padding: 1.5rem;
   background: var(--card-bg);
@@ -251,6 +438,14 @@
   gap: 1.5rem;
 }
 
+/* Responsive Rules */
+@media (max-width: 900px) {
+  .analysis-school-metrics,
+  .diagnostic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 720px) {
   .researcher-analysis .analysis-nav-tabs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -263,5 +458,14 @@
 
   .analysis-area-options {
     gap: 0.45rem 0.8rem;
+  }
+
+  .analysis-school-metrics,
+  .diagnostic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .integrated-analysis .view-section {
+    min-height: 520px;
   }
 }

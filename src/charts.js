@@ -8,11 +8,21 @@ updateChartDefaults(Chart);
 
 const themeListeners = new Set();
 
-new MutationObserver(mutations => {
-  if (!mutations.some(mutation => mutation.attributeName === 'data-theme')) return;
-  updateChartDefaults(Chart);
-  themeListeners.forEach(listener => listener());
-}).observe(document.documentElement, { attributes: true });
+const colorSchemeQuery = typeof window !== 'undefined' && window.matchMedia
+  ? window.matchMedia('(prefers-color-scheme: dark)')
+  : null;
+
+if (colorSchemeQuery) {
+  const handleThemeChange = () => {
+    updateChartDefaults(Chart);
+    themeListeners.forEach(listener => listener());
+  };
+  if (colorSchemeQuery.addEventListener) {
+    colorSchemeQuery.addEventListener('change', handleThemeChange);
+  } else if (colorSchemeQuery.addListener) {
+    colorSchemeQuery.addListener(handleThemeChange);
+  }
+}
 
 /** Re-renders charts when the user switches between light and dark. */
 export function onThemeChange(listener) {

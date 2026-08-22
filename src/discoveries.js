@@ -81,7 +81,7 @@ function schoolLink(name) {
 }
 
 function fundingSchoolLink(name) {
-  return `<a class="discovery-school" href="funding.html?q=${encodeURIComponent(name)}" title="Explore NSF funding for ${escapeHtml(name)}">${escapeHtml(getInstitutionShortName(name))}</a>`;
+  return `<a class="discovery-school" href="nsf.html?q=${encodeURIComponent(name)}" title="Explore NSF funding for ${escapeHtml(name)}">${escapeHtml(getInstitutionShortName(name))}</a>`;
 }
 
 function areaLink(area) {
@@ -214,7 +214,7 @@ export function renderDiscoveries(rawData, filters, nsfData) {
         ${card('Publication rank ahead of funding rank', 'Universities whose publication rank is substantially stronger than their rank by matched attributed NSF funding. Missing matches can affect this comparison.', fundingList(fundingInsights.publicationsAhead, item => `
           <span>${fundingSchoolLink(item.school.name)}<small>publications #${item.publicationRank} · funding #${item.fundingRank}</small></span><strong>${Math.abs(item.gap)} places</strong>`), 'discovery-risk')}
         ${card('Largest matched collaborative projects', 'Largest full project values involving at least one matched current CS professor, reconstructed from exact-title NSF sibling awards. Other project portions can belong to collaborators outside the roster; transfer records for the same lead investigator count only once.', fundingList(fundingInsights.largestCollaborations, award => `
-          <span><a class="discovery-school" href="funding.html?q=${encodeURIComponent(award.title)}" title="Explore this collaborative project">${escapeHtml(award.title.replace(/^Collaborative (?:Research|Resaerch):\s*/i, ''))}</a><small>${award.collaborativeAwardCount} institutional portions</small></span><strong>${formatFunding(award.collaborativeTotalAmount)}</strong>`), 'discovery-featured discovery-wide')}
+          <span><a class="discovery-school" href="nsf.html?q=${encodeURIComponent(award.title)}" title="Explore this collaborative project">${escapeHtml(award.title.replace(/^Collaborative (?:Research|Resaerch):\s*/i, ''))}</a><small>${award.collaborativeAwardCount} institutional portions</small></span><strong>${formatFunding(award.collaborativeTotalAmount)}</strong>`), 'discovery-featured discovery-wide')}
       </div>` : ''}
   `;
 }

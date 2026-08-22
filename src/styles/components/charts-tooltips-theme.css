@@ -1,19 +1,99 @@
-/* Activity Graph */
+/* ==========================================================================
+   Chart Containers, Tooltips, Activity Sparklines, and Attribution Breakdown
+   ========================================================================== */
+
+/* Chart Containers */
+.chart-container {
+  position: relative;
+  height: 400px;
+}
+
+.analysis-tall-chart {
+  height: 600px;
+}
+
+/* Tooltips */
+#global-tooltip {
+  position: fixed;
+  z-index: 10000;
+  display: none;
+  max-width: 300px;
+  padding: 8px 12px;
+  color: #ffffff;
+  background: #1f2937;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: pre-wrap;
+  pointer-events: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip-trigger {
+  position: relative;
+}
+
+.tooltip-trigger .tooltip-content {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2d2d2d;
+  color: #ffffff;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.4;
+  width: min(260px, calc(100vw - 2rem));
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.tooltip-trigger .tooltip-content::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: var(--tip-arrow-x, 50%);
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #2d2d2d;
+}
+
+.tooltip-trigger .tooltip-content.tooltip-below::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: #2d2d2d;
+}
+
+.tooltip-trigger:hover .tooltip-content,
+.tooltip-trigger:focus .tooltip-content,
+.tooltip-trigger:focus-within .tooltip-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Activity Sparkline Graph */
 .activity-graph {
   margin: 1rem 0;
   padding: 0.8rem;
   background: var(--hover-bg);
-  border-radius: 8px;
   border: 1px solid var(--border-color);
+  border-radius: 8px;
 }
 
 .activity-graph h4 {
   margin: 0 0 0.8rem 0;
-  font-size: 0.85em;
   color: var(--text-secondary);
+  font-size: 0.85em;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .activity-bars {
@@ -41,135 +121,24 @@
 .year-column .bar {
   width: 100%;
   max-width: 20px;
+  min-height: 2px;
   background-color: var(--text-secondary);
   border-radius: 3px 3px 0 0;
   transition: height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
-  min-height: 2px;
 }
 
 .year-column:hover .bar {
   background-color: var(--accent-color);
-  opacity: 1 !important;
-}
-
-.year-label {
-  font-size: 10px;
-  color: var(--text-secondary);
-  margin-top: 4px;
-}
-
-#global-tooltip {
-  position: fixed;
-  background: #1f2937;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 11px;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 10000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  display: none;
-  font-weight: 500;
-  max-width: 300px;
-  white-space: pre-wrap;
-}
-
-
-/* Fix for tooltip clipping and z-index */
-.card:not(.collapsed) {
-  z-index: 50;
-  position: relative;
-}
-
-.card:not(.collapsed) .card-content {
-  overflow: visible !important;
-}
-
-.tooltip-trigger .tooltip-content {
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #2d2d2d;
-  color: #fff;
-  padding: 0.6rem 0.9rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 400;
-  line-height: 1.4;
-  width: min(260px, calc(100vw - 2rem));
-  text-align: left;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  z-index: 1000;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
-
-/* `tooltip-position.js` pins the panel to its own ⓘ and, when the panel has to
-   shift to stay on screen, reports where the icon ended up as --tip-arrow-x so
-   the arrow keeps pointing at it. The 50% fallback covers the pre-script paint. */
-.tooltip-trigger .tooltip-content::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: var(--tip-arrow-x, 50%);
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: #2d2d2d;
-}
-
-.tooltip-trigger .tooltip-content.tooltip-below::after {
-  top: auto;
-  bottom: 100%;
-  border-top-color: transparent;
-  border-bottom-color: #2d2d2d;
-}
-
-.tooltip-trigger:hover .tooltip-content,
-.tooltip-trigger:focus .tooltip-content,
-.tooltip-trigger:focus-within .tooltip-content {
-  visibility: visible;
   opacity: 1;
 }
 
-/* =========================================
-   View Transitions API & Premium Easing
-   ========================================= */
-
-/* circular theme toggle sweep transition */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
+.year-label {
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-size: 10px;
 }
 
-::view-transition-old(root) {
-  z-index: 1;
-}
-
-::view-transition-new(root) {
-  z-index: 9999;
-}
-
-/* Ensure prefers-reduced-motion turns off view transitions */
-@media (prefers-reduced-motion: reduce) {
-
-  ::view-transition-group(*),
-  ::view-transition-old(*),
-  ::view-transition-new(*) {
-    animation: none !important;
-    transition: none !important;
-  }
-
-  .discovery-highlighted {
-    animation: none;
-    box-shadow: 0 0 0 3px var(--primary-color);
-  }
-}
-
-/* Sits after the subfield sections, so it needs room to read as its own block. */
+/* Attribution & Contribution Breakdown */
 .school-rank-attribution {
   margin: 2rem 0 0.5rem 0;
   font-family: var(--font-body);
@@ -188,19 +157,19 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.8rem 1rem;
-  font-weight: 600;
-  font-size: 1rem;
-  font-family: var(--font-heading);
   color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   user-select: none;
   list-style: none;
 }
 
 .attribution-summary::before {
-  content: '▸';
   margin-right: 0.45rem;
   color: var(--text-secondary);
+  content: '▸';
 }
 
 .attribution-details[open] .attribution-summary::before {
@@ -212,8 +181,60 @@
 }
 
 .attribution-summary:hover {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: var(--hover-bg);
   color: var(--text-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  .attribution-summary:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+}
+
+.attribution-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 1.25rem 1.25rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.contribution-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.contribution-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+.contribution-label {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.contribution-value {
+  color: var(--text-secondary);
+  font-family: monospace;
+}
+
+.contribution-bar-container {
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  background-color: var(--hover-bg);
+  border-radius: 5px;
+}
+
+.contribution-bar {
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: 0 5px 5px 0;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contribution-tooltip {
@@ -230,106 +251,73 @@
   white-space: normal;
 }
 
-[data-theme="dark"] .attribution-summary:hover {
-  background-color: rgba(255, 255, 255, 0.02);
+/* Site Data Health Modal */
+.site-data-health {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 500;
+  width: min(420px, calc(100vw - 2rem));
+  max-height: min(75vh, 620px);
+  overflow-y: auto;
+  animation: data-health-pop-in 0.18s ease-out;
 }
 
-.attribution-content {
-  padding: 1rem 1.25rem 1.25rem;
-  border-top: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.site-data-health[hidden] {
+  display: none;
 }
 
-.contribution-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+.site-data-health .diagnostic-panel {
+  position: relative;
+  padding-right: 2.75rem;
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.28);
 }
 
-.contribution-info {
-  display: flex;
-  justify-content: space-between;
+.data-health-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 1;
+  display: inline-flex;
   align-items: center;
-  font-size: 0.95rem;
-}
-
-.contribution-label {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.contribution-value {
-  color: var(--text-secondary);
-  font-family: monospace;
-}
-
-/* Track is the recessive gridline; the bar is the only loud thing in the row. */
-.contribution-bar-container {
-  height: 10px;
-  background-color: var(--hover-bg);
-  border-radius: 5px;
-  overflow: hidden;
-  width: 100%;
-}
-
-/* Square where it leaves the baseline, rounded at the data end. */
-.contribution-bar {
-  height: 100%;
-  border-radius: 0 5px 5px 0;
-  background: var(--primary-color);
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.top-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
   justify-content: center;
-  margin-bottom: 1rem;
-}
-
-.top-nav a {
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
   color: var(--text-secondary);
-  font-weight: 600;
-  text-decoration: none;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.top-nav a.active,
-.top-nav a[aria-current="page"] {
-  color: var(--primary-color);
-  border-bottom: 2px solid var(--primary-color);
+.data-health-close:hover {
+  color: var(--text-primary);
+  background: var(--hover-bg);
 }
 
-@media (max-width: 900px) {
-  .analysis-school-metrics,
-  .diagnostic-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+.data-health-close svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@keyframes data-health-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
-@media (max-width: 720px) {
-  .analysis-school-metrics,
-  .diagnostic-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .integrated-analysis .view-section {
-    min-height: 520px;
-  }
-
-  .simulator-workflow {
-    padding: 1rem;
-  }
-
-  .candidate-header {
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .candidate-impact {
-    width: 100%;
-    text-align: left;
+@media (max-width: 640px) {
+  .site-data-health {
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    width: auto;
   }
 }

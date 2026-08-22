@@ -1,0 +1,1968 @@
+[
+  {
+    "id": "nsf-career",
+    "name": "NSF Faculty Early Career Development Program (CAREER)",
+    "shortName": "NSF CAREER",
+    "sponsor": "National Science Foundation (NSF)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Untenured Assistant Professors on tenure track",
+    "deadline": "Fourth Monday in July (Annual)",
+    "deadlineMonth": 7,
+    "amount": "$500,000 to $600,000+ over 5 years",
+    "summary": "NSF premier early-career award supporting junior faculty who exemplify the role of teacher-scholars through outstanding research, excellent education, and the integration of education and research within the context of the mission of their organizations.",
+    "eligibility": [
+      "Hold a doctoral degree in a field supported by NSF",
+      "Tenure-track Assistant Professor (or equivalent) at an eligible US academic institution by submission date",
+      "Untenured as of October 1 following proposal submission",
+      "Maximum of 3 CAREER proposal submissions in lifetime"
+    ],
+    "topics": [
+      "General CS",
+      "AI/ML",
+      "Systems",
+      "Software Engineering",
+      "Cybersecurity",
+      "Theory & Algorithms",
+      "Robotics",
+      "HCI",
+      "Networks"
+    ],
+    "url": "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career",
+    "featured": true
+  },
+  {
+    "id": "nsf-crii",
+    "name": "NSF CISE Research Initiation Initiative (CRII)",
+    "shortName": "NSF CRII",
+    "sponsor": "National Science Foundation (NSF - CISE)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Untenured CS faculty in first 3 years without prior federal PI funding (\"Mini-CAREER\")",
+    "deadline": "Third Wednesday in September (Annual)",
+    "deadlineMonth": 9,
+    "amount": "Up to $175,000 over 2 years",
+    "summary": "Enables early-career CS faculty without prior federal research support to launch independent research programs, fund their first graduate student, and acquire preliminary results to compete for future NSF CAREER and Core awards.",
+    "eligibility": [
+      "Primary appointment in computer science, information science, or computer engineering in the US",
+      "In first 3 years of tenure-track or equivalent research appointment",
+      "Must NOT have received any prior federal grant as a PI (fellowships/workshops excepted)"
+    ],
+    "topics": [
+      "Computer Science",
+      "Information Systems",
+      "Networking",
+      "Cyber-Physical Systems",
+      "Algorithms",
+      "AI/ML"
+    ],
+    "url": "https://new.nsf.gov/funding/opportunities/computer-information-science-engineering-research",
+    "featured": true
+  },
+  {
+    "id": "nsf-cise-core",
+    "name": "NSF CISE Core Programs (CCF, CNS, IIS, OAC)",
+    "shortName": "NSF CISE Core (Small / Medium / Large)",
+    "sponsor": "National Science Foundation (NSF)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "All CS faculty, research professors, and multi-institution collaborative teams",
+    "deadline": "Small: Rolling (No deadline); Medium: Late October; Large: Late September",
+    "deadlineMonth": 10,
+    "amount": "Small: up to $600k (3 yrs); Medium: $600k\u2013$1.2M (4 yrs); Large: $1.2M\u2013$3M+ (5 yrs)",
+    "summary": "The flagship foundational research program across CISE divisions: Computing and Communication Foundations (CCF), Computer and Network Systems (CNS), Information and Intelligent Systems (IIS), and Advanced Cyberinfrastructure (OAC).",
+    "eligibility": [
+      "Faculty and researchers at accredited US academic and non-profit research institutions",
+      "Open to all career stages (junior, mid-career, and senior investigators)"
+    ],
+    "topics": [
+      "Algorithms",
+      "Software & Hardware Foundations",
+      "Networking & Cloud",
+      "AI/ML",
+      "Robotics",
+      "HCI",
+      "Cybersecurity",
+      "Cyberinfrastructure"
+    ],
+    "url": "https://new.nsf.gov/cise",
+    "featured": true
+  },
+  {
+    "id": "nsf-grfp",
+    "name": "NSF Graduate Research Fellowship Program (GRFP)",
+    "shortName": "NSF GRFP",
+    "sponsor": "National Science Foundation (NSF)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "PhD Students",
+      "Master's Students",
+      "Undergraduate Students"
+    ],
+    "whoFor": "Undergraduate seniors & 1st/2nd year graduate students",
+    "deadline": "Late October (Annual)",
+    "deadlineMonth": 10,
+    "amount": "$37,000/yr stipend + $16,000 cost-of-education allowance for 3 years ($159,000 total)",
+    "summary": "Recognizes and supports outstanding graduate students in NSF-supported STEM disciplines pursuing research-based master's and doctoral degrees. Highly prestigious fellowship offering 3 years of flexible research freedom.",
+    "eligibility": [
+      "US Citizens, US Nationals, or Permanent Residents",
+      "Undergraduate seniors or 1st/2nd year graduate students",
+      "Pursuing research-based MS or PhD in STEM fields including Computer Science"
+    ],
+    "topics": [
+      "General CS",
+      "AI/ML",
+      "Systems",
+      "Theory",
+      "Robotics",
+      "Security & Privacy",
+      "HCI"
+    ],
+    "url": "https://www.nsfgrfp.org/",
+    "featured": true
+  },
+  {
+    "id": "darpa-yfa",
+    "name": "DARPA Young Faculty Award (YFA)",
+    "shortName": "DARPA YFA",
+    "sponsor": "Defense Advanced Research Projects Agency (DARPA)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Untenured Assistant and Associate Professors in first 3 years of appointment",
+    "deadline": "Exec Summary: October; Full Proposal: December / January (Annual)",
+    "deadlineMonth": 12,
+    "amount": "Up to $500,000 over 24 months + $500,000 Director's Fellowship option (up to $1M total)",
+    "summary": "Identifies and engages rising stars in junior faculty positions across US academia to expose them to DoD needs and DARPA's high-risk, high-payoff research model in computer science, quantum, autonomy, and microelectronics.",
+    "eligibility": [
+      "US academic institutions only",
+      "Assistant or Associate Professors within first 3 years of tenure-track or non-tenured position",
+      "US Citizens, Permanent Residents, or foreign nationals with US university appointment"
+    ],
+    "topics": [
+      "AI & Autonomy",
+      "Cybersecurity & Formal Methods",
+      "Quantum Computing",
+      "Novel Computing Architectures",
+      "Robotics",
+      "RF & Photonics"
+    ],
+    "url": "https://www.darpa.mil/work-with-us/for-universities/young-faculty-award",
+    "featured": true
+  },
+  {
+    "id": "darpa-open-baa",
+    "name": "DARPA Office-Wide Broad Agency Announcements (I2O, DSO, MTO, STO)",
+    "shortName": "DARPA Office BAAs",
+    "sponsor": "Defense Advanced Research Projects Agency (DARPA)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "University faculty, research labs, and industry consortia",
+    "deadline": "Rolling / Year-round submission window per office BAA",
+    "deadlineMonth": 0,
+    "amount": "Typically $1,000,000 to $10,000,000+ across multi-year phases",
+    "summary": "DARPA technical offices solicit revolutionary research proposals that bridge the gap between fundamental research and groundbreaking national security capabilities in artificial intelligence, software synthesis, and cyber resilience.",
+    "eligibility": [
+      "Open to university researchers, national labs, non-profits, and industry teams",
+      "Submission of abstract / executive summary recommended before full proposal"
+    ],
+    "topics": [
+      "AI/ML Reasoning",
+      "Cyber Defense & Synthesis",
+      "Human-Machine Teaming",
+      "Microarchitecture",
+      "Trustworthy Computing",
+      "Quantum"
+    ],
+    "url": "https://www.darpa.mil/work-with-us/opportunities",
+    "featured": false
+  },
+  {
+    "id": "doe-early-career",
+    "name": "DOE Early Career Research Program",
+    "shortName": "DOE Early Career Award",
+    "sponsor": "Department of Energy (DOE) Office of Science",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Tenure-track Assistant & Associate Professors within 12 years of PhD",
+    "deadline": "Pre-proposal: January; Full proposal: April (Annual)",
+    "deadlineMonth": 4,
+    "amount": "At least $875,000 over 5 years (university faculty)",
+    "summary": "Bolsters the nation's scientific workforce by supporting the exceptional research of rising scientists in programs funded by the DOE Office of Science, notably Advanced Scientific Computing Research (ASCR).",
+    "eligibility": [
+      "Untenured, tenure-track Assistant or Associate Professor at an accredited US university",
+      "Within 12 years of PhD receipt",
+      "Primary author and investigator of research proposal"
+    ],
+    "topics": [
+      "High Performance Computing (HPC)",
+      "Quantum Information Science",
+      "Scientific AI/ML",
+      "Applied Mathematics",
+      "Exascale Systems"
+    ],
+    "url": "https://science.osti.gov/early-career",
+    "featured": true
+  },
+  {
+    "id": "doe-csgf",
+    "name": "Department of Energy Computational Science Graduate Fellowship (DOE CSGF)",
+    "shortName": "DOE CSGF",
+    "sponsor": "Department of Energy (DOE) / Krell Institute",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "PhD Students",
+      "Undergraduate Students"
+    ],
+    "whoFor": "PhD students using high-performance computing for scientific discovery",
+    "deadline": "Mid January (Annual)",
+    "deadlineMonth": 1,
+    "amount": "Full tuition & fees, $45,000 annual stipend, $1,000 academic allowance/yr, and 12-week practicum at a DOE national lab",
+    "summary": "Trains leaders in high-performance computing, scientific computing, and computational engineering. Fellows complete a fully funded practicum at a DOE national laboratory (e.g. LLNL, ORNL, LBNL, ANL).",
+    "eligibility": [
+      "US Citizens or Permanent Residents",
+      "Senior undergraduates or first-year graduate students",
+      "Full-time study toward a PhD in CS, applied mathematics, or computational science"
+    ],
+    "topics": [
+      "High Performance Computing (HPC)",
+      "Scientific Computing",
+      "Parallel Systems",
+      "AI for Science",
+      "Algorithms"
+    ],
+    "url": "https://www.krellinst.org/csgf/",
+    "featured": true
+  },
+  {
+    "id": "onr-yip",
+    "name": "Office of Naval Research (ONR) Young Investigator Program (YIP)",
+    "shortName": "ONR YIP",
+    "sponsor": "Office of Naval Research (ONR)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Tenure-track academic faculty within 7 years of PhD",
+    "deadline": "Late March / Early April (Annual)",
+    "deadlineMonth": 3,
+    "amount": "Up to $750,000 over 3 years ($250,000/year)",
+    "summary": "Attracts outstanding academic scientists and engineers to naval research. Awards support research in autonomous systems, cybersecurity, machine learning, robotics, and command-and-control architectures.",
+    "eligibility": [
+      "US Citizens, Permanent Residents, or foreign nationals holding a tenure-track faculty position in the US",
+      "Received PhD within past 7 years",
+      "Research aligned with naval mission potential"
+    ],
+    "topics": [
+      "Autonomous Systems",
+      "Cybersecurity",
+      "AI/ML Decision Making",
+      "Robotics",
+      "Computer Vision",
+      "Distributed Sensing"
+    ],
+    "url": "https://www.nre.navy.mil/work-with-us/funding-opportunities/young-investigator-program-yip",
+    "featured": true
+  },
+  {
+    "id": "afosr-yip",
+    "name": "Air Force Young Investigator Research Program (YIP)",
+    "shortName": "AFOSR YIP",
+    "sponsor": "Air Force Office of Scientific Research (AFOSR)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Early-career scientists and engineers within 7 years of PhD",
+    "deadline": "Early June (Annual)",
+    "deadlineMonth": 6,
+    "amount": "Up to $450,000 over 3 years ($150,000/year)",
+    "summary": "Fosters creative basic research in science and engineering, enhances early career development of outstanding young investigators, and increases engagement in Air Force and Space Force technical challenges.",
+    "eligibility": [
+      "US Citizens, US Nationals, or Permanent Residents",
+      "Full-time tenure-track faculty appointment at a US research institution",
+      "Received PhD within 7 years of application deadline"
+    ],
+    "topics": [
+      "Trustworthy AI",
+      "Complex Networks",
+      "Computational Cognition",
+      "Quantum Computing",
+      "Formal Verification",
+      "Autonomous Systems"
+    ],
+    "url": "https://www.afrl.af.mil/AFOSR/",
+    "featured": false
+  },
+  {
+    "id": "aro-early-career",
+    "name": "Army Research Office (ARO) Early Career Program",
+    "shortName": "ARO Early Career",
+    "sponsor": "Army Research Laboratory / ARO",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Tenure-track faculty within 5 years of PhD or academic appointment",
+    "deadline": "Rolling under core ARO BAA (Annual review)",
+    "deadlineMonth": 0,
+    "amount": "Up to $360,000 over 3 years ($120,000/year)",
+    "summary": "Supports junior faculty researchers focusing on fundamental basic research in computing, networking, cybersecurity, distributed systems, and multi-agent AI relevant to future defense needs.",
+    "eligibility": [
+      "Tenure-track faculty at accredited US universities",
+      "Within 5 years of receiving doctorate or holding academic faculty appointment"
+    ],
+    "topics": [
+      "Information Networks",
+      "Cybersecurity",
+      "Robotics & Autonomy",
+      "AI/ML for Tactical Edge",
+      "Quantum Information"
+    ],
+    "url": "https://www.arl.army.mil/who-we-are/directorates/aro/",
+    "featured": false
+  },
+  {
+    "id": "ndseg-fellowship",
+    "name": "National Defense Science and Engineering Graduate (NDSEG) Fellowship",
+    "shortName": "NDSEG Fellowship",
+    "sponsor": "Department of Defense (DoD - Air Force, Army, Navy)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "PhD Students",
+      "Undergraduate Students"
+    ],
+    "whoFor": "PhD students pursuing research of interest to DoD defense laboratories",
+    "deadline": "Late November / Early December (Annual)",
+    "deadlineMonth": 11,
+    "amount": "Full tuition and mandatory fees, $43,200 annual stipend, and up to $1,400/yr health insurance for 3 years",
+    "summary": "Awarded by the Air Force Office of Scientific Research, Army Research Office, and Office of Naval Research to increase the number of US citizens trained in science and engineering disciplines of military importance.",
+    "eligibility": [
+      "US Citizens and US Nationals only",
+      "Undergraduate seniors or first/second-year doctoral students",
+      "Pursuing doctoral degrees in CS, electrical engineering, cognitive science, or related fields"
+    ],
+    "topics": [
+      "AI/ML",
+      "Cybersecurity",
+      "Systems",
+      "Autonomous Systems",
+      "Quantum Computing",
+      "Computer Vision"
+    ],
+    "url": "https://ndseg.sysplus.com/",
+    "featured": true
+  },
+  {
+    "id": "dod-smart-scholarship",
+    "name": "Science, Mathematics, and Research for Transformation (SMART) Scholarship",
+    "shortName": "DoD SMART Scholarship",
+    "sponsor": "Department of Defense (DoD)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Undergraduate Students",
+      "Master's Students",
+      "PhD Students"
+    ],
+    "whoFor": "Undergraduate, Master's, and PhD students in defense-critical STEM fields",
+    "deadline": "Early December (Annual)",
+    "deadlineMonth": 12,
+    "amount": "Full tuition, $30,000\u2013$46,000 annual stipend, health insurance, paid summer internships, and guaranteed civilian DoD employment upon graduation",
+    "summary": "The SMART Scholarship-for-Service Program provides full tuition, annual stipends, and post-graduation civilian employment at DoD laboratories and research centers across the US.",
+    "eligibility": [
+      "US Citizens only",
+      "Cumulative GPA of 3.0 or higher",
+      "Undergraduate or graduate student in approved STEM major",
+      "Ability to obtain security clearance and commit to post-graduation DoD civilian service"
+    ],
+    "topics": [
+      "Cybersecurity",
+      "AI/ML",
+      "Systems",
+      "Networking",
+      "Software Engineering",
+      "Robotics"
+    ],
+    "url": "https://www.smartscholarship.org/",
+    "featured": false
+  },
+  {
+    "id": "nih-r01-r21-cs",
+    "name": "NIH Grants for Biomedical Computing & AI (R01 / R21 / NLM / BRAIN)",
+    "shortName": "NIH CS & AI Grants (R01/R21)",
+    "sponsor": "National Institutes of Health (NIH)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "CS faculty working on computational biology, medical AI, bioinformatics, and health informatics",
+    "deadline": "February, June, October (Standard NIH 3-cycle review)",
+    "deadlineMonth": 2,
+    "amount": "R21: Up to $275,000 over 2 years; R01: $1,250,000 to $2,500,000+ over 5 years",
+    "summary": "Major NIH funding mechanisms (via NLM, NCI, NHGRI, and BRAIN Initiative) for CS and AI researchers applying machine learning, computer vision, algorithms, and data science to human health, genomics, and neuroscience.",
+    "eligibility": [
+      "Open to all university faculty and principal investigators",
+      "Early Stage Investigator (ESI) status provides favorable R01 paylines for investigators within 10 years of PhD"
+    ],
+    "topics": [
+      "Medical AI",
+      "Computational Biology",
+      "Bioinformatics",
+      "Computer Vision for Healthcare",
+      "Health Informatics",
+      "Algorithms for Genomics"
+    ],
+    "url": "https://grants.nih.gov/grants/how-to-apply-application-guide.html",
+    "featured": false
+  },
+  {
+    "id": "nasa-nstgro",
+    "name": "NASA Space Technology Graduate Research Opportunities (NSTGRO)",
+    "shortName": "NASA NSTGRO / STRG",
+    "sponsor": "NASA",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "PhD Students",
+      "Master's Students"
+    ],
+    "whoFor": "Graduate students conducting research on space computing, autonomy, and technology",
+    "deadline": "Late October / Early November (Annual)",
+    "deadlineMonth": 10,
+    "amount": "Up to $84,000/year (stipend, tuition allowance, health insurance, and NASA center research allowance)",
+    "summary": "Sponsored by NASA's Space Technology Mission Directorate (STMD), this fellowship funds graduate research in space-relevant computer systems, autonomous robotics, fault-tolerant computing, and onboard AI.",
+    "eligibility": [
+      "US Citizens only",
+      "Enrolled in or accepted to an accredited US graduate program",
+      "Research aligned with NASA space technology focus areas"
+    ],
+    "topics": [
+      "Robotics",
+      "Autonomous Systems",
+      "Fault-Tolerant Computing",
+      "AI/ML",
+      "Computer Vision",
+      "Embedded Systems"
+    ],
+    "url": "https://www.nasa.gov/directorates/stmd/strg/nstgro/",
+    "featured": false
+  },
+  {
+    "id": "nasa-esi-ecf",
+    "name": "NASA Early Career Faculty (ECF) & Early Stage Innovations (ESI)",
+    "shortName": "NASA Early Career Faculty",
+    "sponsor": "NASA Space Technology Mission Directorate",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Untenured Assistant Professors in space computing and robotics",
+    "deadline": "March / April (Annual SpaceTech call)",
+    "deadlineMonth": 3,
+    "amount": "Up to $650,000 over 3 years ($200,000/yr base)",
+    "summary": "Challenges early-career university faculty to examine the theoretical and practical feasibility of bold, high-risk space computing, autonomous navigation, and radiation-hardened architectures.",
+    "eligibility": [
+      "Untenured Assistant Professor at accredited US university",
+      "US Citizens or Permanent Residents preferred",
+      "Proposals must target specific NASA SpaceTech topics"
+    ],
+    "topics": [
+      "Robotics & Autonomous Navigation",
+      "Fault-Tolerant Space Computing",
+      "Computer Vision for Space",
+      "Radiation-Tolerant Architectures"
+    ],
+    "url": "https://www.nasa.gov/directorates/stmd/early-career-faculty/",
+    "featured": false
+  },
+  {
+    "id": "google-phd-fellowship",
+    "name": "Google PhD Fellowship Program",
+    "shortName": "Google PhD Fellowship",
+    "sponsor": "Google",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "Outstanding PhD students in CS and related areas (University nominated)",
+    "deadline": "April / May (Annual nomination window)",
+    "deadlineMonth": 4,
+    "amount": "Full tuition and fees for up to 3 years + $40,000\u2013$50,000/yr stipend + Google Research mentor",
+    "summary": "Google PhD Fellowships directly support graduate students doing exceptional research in computer science and adjacent fields. Selected fellows are paired with a Google Research Mentor.",
+    "eligibility": [
+      "Full-time PhD students enrolled at participating universities",
+      "Nomination submitted by university department",
+      "Research focus in algorithms, machine learning, systems, NLP, perception, security"
+    ],
+    "topics": [
+      "AI/ML",
+      "Natural Language Processing",
+      "Computer Vision",
+      "Systems",
+      "Algorithms",
+      "Quantum Computing",
+      "Security & Privacy",
+      "HCI"
+    ],
+    "url": "https://research.google/outreach/phd-fellowship/",
+    "featured": true
+  },
+  {
+    "id": "google-research-scholar",
+    "name": "Google Research Scholar Program",
+    "shortName": "Google Research Scholar",
+    "sponsor": "Google",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Early-career faculty within 7 years of PhD",
+    "deadline": "Late November / Early December (Annual)",
+    "deadlineMonth": 11,
+    "amount": "Up to $60,000 unrestricted research gift + Google sponsor pairing",
+    "summary": "Aims to support world-class research conducted by early-career professors worldwide in computer science and related fields. Provides unrestricted financial gifts rather than grants.",
+    "eligibility": [
+      "Full-time faculty member at an accredited university worldwide",
+      "Received PhD within 7 years of submission deadline",
+      "Application submitted directly by the faculty PI"
+    ],
+    "topics": [
+      "AI/ML",
+      "Algorithms & Optimization",
+      "Human-Computer Interaction",
+      "Privacy & Security",
+      "Systems",
+      "Natural Language Processing",
+      "Quantum"
+    ],
+    "url": "https://research.google/outreach/research-scholar-program/",
+    "featured": true
+  },
+  {
+    "id": "amazon-research-awards",
+    "name": "Amazon Research Awards (ARA) - Faculty Call for Proposals",
+    "shortName": "Amazon Research Awards",
+    "sponsor": "Amazon Science",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Full-time faculty members and university research scientists",
+    "deadline": "Spring & Fall cycles (e.g., Nov 1, May 15)",
+    "deadlineMonth": 11,
+    "amount": "Up to $80,000\u2013$100,000 unrestricted cash gift + up to $40,000 in AWS promotional credits",
+    "summary": "Provides unrestricted funds and AWS compute credits to academic researchers across diverse tracks including Foundation Models, AI for Science, Robotics, Information Security, and Sustainability.",
+    "eligibility": [
+      "Full-time faculty member at an accredited academic institution",
+      "PI may submit one proposal per call cycle",
+      "Resulting IP remains with the university (unrestricted gift)"
+    ],
+    "topics": [
+      "AI/ML",
+      "Foundation Models",
+      "Robotics",
+      "Information Security",
+      "Automated Reasoning",
+      "Cloud Systems",
+      "Sustainability"
+    ],
+    "url": "https://www.amazon.science/research-awards/call-for-proposals",
+    "featured": true
+  },
+  {
+    "id": "amazon-phd-fellowship",
+    "name": "Amazon PhD Fellowship Program",
+    "shortName": "Amazon PhD Fellowship",
+    "sponsor": "Amazon",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "PhD students in automated reasoning, cloud systems, robotics, and ML (Invited universities)",
+    "deadline": "Fall / Early Winter (Annual)",
+    "deadlineMonth": 10,
+    "amount": "Full tuition and living stipend for one academic year + $10,000 in AWS promotional credits",
+    "summary": "Supports PhD candidates at invited universities whose research will shape future technologies in cloud systems, automated reasoning, operations research, robotics, and machine learning.",
+    "eligibility": [
+      "PhD student in good standing at invited institutions",
+      "Nominated by university department chair",
+      "Research focus aligned with Amazon Science domains"
+    ],
+    "topics": [
+      "Automated Reasoning",
+      "Cloud Systems",
+      "Robotics",
+      "Operations Research",
+      "Machine Learning",
+      "Computer Vision"
+    ],
+    "url": "https://www.amazon.science/research-awards/fellowships",
+    "featured": false
+  },
+  {
+    "id": "meta-phd-fellowship",
+    "name": "Meta Research PhD Fellowship (formerly Facebook Fellowship)",
+    "shortName": "Meta PhD Fellowship",
+    "sponsor": "Meta Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "Full-time PhD students in computer science and engineering worldwide",
+    "deadline": "Mid September (Annual)",
+    "deadlineMonth": 9,
+    "amount": "Tuition and fees paid for up to 2 years + $42,000 annual living stipend + conference travel support ($5,000)",
+    "summary": "Supports promising doctoral students engaged in innovative and relevant research across computing disciplines including AI, AR/VR, database systems, networking, security, and hardware.",
+    "eligibility": [
+      "Enrolled full-time in a PhD program at an accredited university worldwide",
+      "Research aligned with Meta Research focus areas",
+      "Open to international students and domestic students alike"
+    ],
+    "topics": [
+      "AI/ML",
+      "AR/VR & Graphics",
+      "Computer Vision",
+      "Database Systems",
+      "Distributed Systems",
+      "Security & Privacy",
+      "Networking"
+    ],
+    "url": "https://research.facebook.com/fellowship/",
+    "featured": true
+  },
+  {
+    "id": "meta-research-awards",
+    "name": "Meta Research Awards (RFPs in AI, Systems, Security, XR)",
+    "shortName": "Meta Research Awards",
+    "sponsor": "Meta Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty and principal investigators worldwide responding to focused thematic RFPs",
+    "deadline": "Rolling RFP cycles throughout the year (e.g. March, July, October)",
+    "deadlineMonth": 0,
+    "amount": "$50,000 to $100,000 unrestricted cash gifts per awarded proposal",
+    "summary": "Meta issues periodic Calls for Proposals across specialized computer science subfields including Large Language Model safety, augmented reality audio, compiler optimization, database acceleration, and cryptography.",
+    "eligibility": [
+      "Open to university faculty and accredited research institutions worldwide",
+      "Short proposal submitted directly in response to specific RFP topics",
+      "All funded research is open and published publicly"
+    ],
+    "topics": [
+      "AI Safety & Security",
+      "AR/VR & Graphics",
+      "Compiler Optimization",
+      "Databases & Infrastructure",
+      "Privacy-Preserving Tech",
+      "Networking"
+    ],
+    "url": "https://research.facebook.com/research-awards/",
+    "featured": false
+  },
+  {
+    "id": "microsoft-phd-fellowship",
+    "name": "Microsoft Research PhD Fellowship",
+    "shortName": "Microsoft PhD Fellowship",
+    "sponsor": "Microsoft Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "3rd year PhD students in CS, electrical engineering, and applied mathematics (University nominated)",
+    "deadline": "June / July (Annual)",
+    "deadlineMonth": 6,
+    "amount": "100% tuition and fees for 2 academic years + $42,000 annual stipend + Microsoft Research summit invitation",
+    "summary": "A two-year fellowship program for PhD students in their third year of doctoral studies. Identifies and supports emerging researchers across North America, Europe, Asia, and Latin America.",
+    "eligibility": [
+      "Must be in 3rd year of PhD program",
+      "Nominated by department chair / university",
+      "Demonstrated exceptional potential in computing research"
+    ],
+    "topics": [
+      "AI/ML",
+      "Systems & Architecture",
+      "Theory & Algorithms",
+      "Security & Cryptography",
+      "HCI",
+      "Programming Languages"
+    ],
+    "url": "https://www.microsoft.com/en-us/research/academic-program/phd-fellowship/",
+    "featured": true
+  },
+  {
+    "id": "microsoft-faculty-fellowship",
+    "name": "Microsoft Research Faculty Fellowship",
+    "shortName": "Microsoft Faculty Fellowship",
+    "sponsor": "Microsoft Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Early-career tenure-track faculty who show exceptional research leadership (University nominated)",
+    "deadline": "Fall / Early Winter (Annual nomination)",
+    "deadlineMonth": 10,
+    "amount": "$100,000 unrestricted research gift + Azure compute credits + engagement with Microsoft researchers",
+    "summary": "Recognizes emerging academic faculty leaders whose research demonstrates novel breakthroughs and profound potential to impact the broader computing community.",
+    "eligibility": [
+      "Tenure-track Assistant Professor at an accredited university in first 4 years of appointment",
+      "Nominated by university leadership",
+      "Demonstrated exceptional research trajectory and innovative vision"
+    ],
+    "topics": [
+      "AI/ML",
+      "Systems",
+      "Programming Languages",
+      "Security",
+      "Theory",
+      "HCI",
+      "Quantum Computing"
+    ],
+    "url": "https://www.microsoft.com/en-us/research/academic-program/faculty-fellowship/",
+    "featured": true
+  },
+  {
+    "id": "apple-phd-fellowship",
+    "name": "Apple Scholars in AI/ML PhD Fellowship",
+    "shortName": "Apple PhD Fellowship",
+    "sponsor": "Apple",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "PhD students in machine learning, vision, NLP, and on-device AI (University nominated)",
+    "deadline": "Late Fall (Annual university nomination)",
+    "deadlineMonth": 10,
+    "amount": "Full tuition and fees for 2 years + annual living stipend + mentorship from Apple AI/ML researchers + internship opportunities",
+    "summary": "Recognizes graduate students pursuing research in artificial intelligence and machine learning, offering funding, mentorship, and opportunities to intern with Apple's ML research teams.",
+    "eligibility": [
+      "Full-time PhD student at participating university in final 2\u20133 years of study",
+      "Nominated by eligible academic institution",
+      "Specialization in machine learning, computer vision, speech, robotics, or privacy"
+    ],
+    "topics": [
+      "AI/ML",
+      "Computer Vision",
+      "Natural Language Processing",
+      "On-Device AI",
+      "Speech Processing",
+      "Robotics"
+    ],
+    "url": "https://machinelearning.apple.com/updates/apple-scholars-aiml",
+    "featured": true
+  },
+  {
+    "id": "nvidia-graduate-fellowship",
+    "name": "NVIDIA Graduate Fellowship Program",
+    "shortName": "NVIDIA Graduate Fellowship",
+    "sponsor": "NVIDIA",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "PhD students in GPU computing, computer architecture, graphics, AI, and systems",
+    "deadline": "Mid September (Annual)",
+    "deadlineMonth": 9,
+    "amount": "Up to $60,000 per award + access to NVIDIA GPU clusters + summer research internship offer",
+    "summary": "Supports doctoral students who are advancing GPU computing, computer graphics, parallel computing architecture, and accelerated machine learning systems.",
+    "eligibility": [
+      "Must have completed at least one year of PhD studies by the time of application",
+      "Major in Computer Science, Electrical Engineering, or related discipline",
+      "Research actively leveraging GPUs / accelerated computing"
+    ],
+    "topics": [
+      "GPU Architecture",
+      "Computer Graphics",
+      "Parallel Computing",
+      "AI/ML Systems",
+      "Robotics",
+      "High Performance Computing"
+    ],
+    "url": "https://www.nvidia.com/en-us/research/graduate-fellowships/",
+    "featured": true
+  },
+  {
+    "id": "nvidia-hardware-grant",
+    "name": "NVIDIA Academic Hardware Grant Program",
+    "shortName": "NVIDIA Hardware Grants",
+    "sponsor": "NVIDIA",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty and principal investigators needing GPU acceleration for research and teaching",
+    "deadline": "Quarterly rolling review (Annual submission windows)",
+    "deadlineMonth": 0,
+    "amount": "High-end workstation GPUs (RTX 6000 Ada), enterprise server cards, or NVIDIA DGX Cloud credits",
+    "summary": "Grants cutting-edge NVIDIA GPUs and compute resources to university faculty researchers exploring breakthrough applications in AI, graphics, robotics, and computational science.",
+    "eligibility": [
+      "Faculty member or research director at accredited university",
+      "Proposals must demonstrate how NVIDIA accelerated computing will advance the research"
+    ],
+    "topics": [
+      "AI/ML Training",
+      "Computer Vision",
+      "Robotics",
+      "Computer Graphics",
+      "Scientific Computing",
+      "HPC"
+    ],
+    "url": "https://www.nvidia.com/en-us/research/academic-hardware-grant-program/",
+    "featured": false
+  },
+  {
+    "id": "sloan-research-fellowship",
+    "name": "Alfred P. Sloan Research Fellowships in Computer Science",
+    "shortName": "Sloan Research Fellowship",
+    "sponsor": "Alfred P. Sloan Foundation",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Tenure-track faculty in CS and related fields within 6 years of PhD (Department nominated)",
+    "deadline": "September 15 (Annual nomination)",
+    "deadlineMonth": 9,
+    "amount": "$75,000 two-year flexible unrestricted fellowship",
+    "summary": "One of the most prestigious early-career honors in science and computing. Often considered a leading indicator of future Nobel and Turing Laureates, recognizing extraordinary research achievements and promise.",
+    "eligibility": [
+      "Tenure-track faculty appointment at a US or Canadian university",
+      "PhD awarded within the last 6 years",
+      "Nominated by department chair or distinguished senior scholar with 3 external reference letters"
+    ],
+    "topics": [
+      "Theory of Computation",
+      "AI/ML",
+      "Systems & Architecture",
+      "Quantum Computing",
+      "Security & Cryptography",
+      "Graphics & Vision"
+    ],
+    "url": "https://sloan.org/fellowships",
+    "featured": true
+  },
+  {
+    "id": "packard-fellowship",
+    "name": "Packard Fellowships for Science and Engineering",
+    "shortName": "Packard Fellowship",
+    "sponsor": "David and Lucile Packard Foundation",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty members in first 3 years of tenure-track appointment (Invited university nomination)",
+    "deadline": "March (Institutional nomination) / April (Full proposal)",
+    "deadlineMonth": 4,
+    "amount": "$875,000 over 5 years of flexible, unrestricted research funding",
+    "summary": "Provides early-career scientists and engineers with flexible, visionary funding to take risks, explore unproven ideas, and establish creative frontiers across computing and natural sciences.",
+    "eligibility": [
+      "Faculty member in first three years of tenure-track appointment",
+      "Invited research universities in the US may each nominate two candidates per year"
+    ],
+    "topics": [
+      "Computer Science",
+      "Quantum Information",
+      "AI/ML",
+      "Bio-computation",
+      "Robotics",
+      "Applied Mathematics"
+    ],
+    "url": "https://www.packard.org/what-we-fund/science/packard-fellowships-for-science-and-engineering/",
+    "featured": true
+  },
+  {
+    "id": "simons-investigators-cs",
+    "name": "Simons Investigators in Theoretical Computer Science & Mathematics",
+    "shortName": "Simons Investigators",
+    "sponsor": "Simons Foundation",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Established theoretical CS and math faculty leaders (Institutional nomination)",
+    "deadline": "October / November (Annual nomination window)",
+    "deadlineMonth": 10,
+    "amount": "$100,000/yr for 5 years for research + $10,000/yr to PI department + $10,000/yr indirect costs ($600,000 total)",
+    "summary": "Provides stable, long-term unrestricted research support to outstanding scientists, enabling them to undertake foundational theoretical breakthroughs in algorithms, complexity, and quantum computing.",
+    "eligibility": [
+      "Tenured faculty at an institution in the US, Canada, UK, or Europe",
+      "Nomination submitted by university president, provost, or dean",
+      "Distinguished record in theoretical computer science"
+    ],
+    "topics": [
+      "Theoretical Computer Science",
+      "Computational Complexity",
+      "Algorithms",
+      "Quantum Computing",
+      "Information Theory",
+      "Cryptography"
+    ],
+    "url": "https://www.simonsfoundation.org/grant/simons-investigators/",
+    "featured": true
+  },
+  {
+    "id": "hertz-fellowship",
+    "name": "Fannie and John Hertz Foundation Graduate Fellowship",
+    "shortName": "Hertz Fellowship",
+    "sponsor": "Hertz Foundation",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "PhD Students",
+      "Undergraduate Students"
+    ],
+    "whoFor": "Graduating seniors & 1st-year PhD students in applied computing and physical sciences",
+    "deadline": "Late October (Annual)",
+    "deadlineMonth": 10,
+    "amount": "Up to $250,000 over 5 years (stipend + full tuition + lifelong fellowship community)",
+    "summary": "The Hertz Fellowship provides 5 years of flexible, unrestricted funding to innovators in applied physical and biological sciences, mathematics, and computing. Hertz Fellows gain lifelong mentoring, peer networking, and total freedom in their PhD research.",
+    "eligibility": [
+      "US Citizens or Permanent Residents",
+      "College seniors or first-year PhD students",
+      "Pursuing a PhD in applied physical, biological sciences, math, or computer science"
+    ],
+    "topics": [
+      "General CS",
+      "AI/ML",
+      "Applied Math",
+      "Quantum Computing",
+      "Systems",
+      "Robotics"
+    ],
+    "url": "https://hertzfoundation.org/fellowships/application",
+    "featured": true
+  },
+  {
+    "id": "qualcomm-innovation-fellowship",
+    "name": "Qualcomm Innovation Fellowship (QInF)",
+    "shortName": "Qualcomm QInF",
+    "sponsor": "Qualcomm",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "Teams of 2 PhD students proposing innovative research in computing and wireless tech",
+    "deadline": "December / January (Proposal deadline)",
+    "deadlineMonth": 12,
+    "amount": "$100,000 fellowship per winning student team ($50,000 per student) + Qualcomm mentor guidance",
+    "summary": "Encourages teams of two PhD students from participating universities in the US, Canada, Europe, and India to formulate joint proposals in mobile computing, wireless communications, edge AI, and semiconductors.",
+    "eligibility": [
+      "Teams of two PhD students enrolled at participating universities",
+      "Must submit a joint proposal endorsed by faculty advisors",
+      "Proposal in Qualcomm priority research fields"
+    ],
+    "topics": [
+      "Edge AI",
+      "Mobile Computing",
+      "Computer Architecture",
+      "Wireless Networks",
+      "Autonomous Driving",
+      "Security"
+    ],
+    "url": "https://www.qualcomm.com/research/university-relations/innovation-fellowship",
+    "featured": true
+  },
+  {
+    "id": "ibm-phd-fellowship",
+    "name": "IBM PhD Fellowship Award Program",
+    "shortName": "IBM PhD Fellowship",
+    "sponsor": "IBM",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "PhD students in AI, quantum computing, hybrid cloud, and security (University nominated)",
+    "deadline": "Late October / Early November (Annual)",
+    "deadlineMonth": 10,
+    "amount": "Up to $40,000 stipend + $20,000 education allowance over 2 academic years + pairing with IBM Research mentor",
+    "summary": "Intensely competitive worldwide program supporting graduate students solving challenging problems in AI, quantum information science, cybersecurity, and open-source infrastructure.",
+    "eligibility": [
+      "Nominated by a faculty member at an accredited university",
+      "Must be enrolled full-time in PhD program with at least 2 years remaining",
+      "Research matching IBM core interest areas"
+    ],
+    "topics": [
+      "Quantum Computing",
+      "Trustworthy AI",
+      "Hybrid Cloud",
+      "Cybersecurity",
+      "Operating Systems",
+      "Semiconductors"
+    ],
+    "url": "https://www.ibm.com/university/awards/phdfellowship.html",
+    "featured": true
+  },
+  {
+    "id": "sony-research-award",
+    "name": "Sony Research Award Program (Faculty Innovation & Focused Research)",
+    "shortName": "Sony Research Award",
+    "sponsor": "Sony Group Corporation",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Principal investigators and university professors in US, Canada, Europe, and Asia",
+    "deadline": "Mid September (Annual)",
+    "deadlineMonth": 9,
+    "amount": "Faculty Innovation Award: up to $100,000/yr; Focused Research Award: up to $150,000/yr",
+    "summary": "Provides sponsored research funding for cutting-edge academic research in AI, sensing, robotics, computer vision, audio processing, and human-machine interaction, with direct collaboration with Sony R&D teams.",
+    "eligibility": [
+      "Full-time faculty member (Assistant, Associate, or Full Professor) at accredited universities in eligible countries",
+      "Proposals must align with annual list of target research themes published by Sony"
+    ],
+    "topics": [
+      "Computer Vision",
+      "Audio Processing",
+      "Robotics & Control",
+      "AI/ML",
+      "Sensing & Materials",
+      "Human-Computer Interaction"
+    ],
+    "url": "https://www.sony.com/en/SonyInfo/research-award-program/",
+    "featured": true
+  },
+  {
+    "id": "adobe-research-fellowship",
+    "name": "Adobe Research Fellowship",
+    "shortName": "Adobe Research Fellowship",
+    "sponsor": "Adobe Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "Graduate PhD students in computer vision, graphics, audio, HCI, and generative media",
+    "deadline": "Late September (Annual)",
+    "deadlineMonth": 9,
+    "amount": "$10,000 one-time unrestricted gift + 1-year Creative Cloud subscription + guaranteed Adobe research internship interview",
+    "summary": "Recognizes outstanding graduate students worldwide carrying out exceptional research in computer graphics, computer vision, human-computer interaction, and computational creativity.",
+    "eligibility": [
+      "Full-time PhD student enrolled at an accredited university worldwide",
+      "Completed at least one year of PhD study",
+      "Research in graphics, vision, HCI, NLP, or audio"
+    ],
+    "topics": [
+      "Computer Graphics",
+      "Computer Vision",
+      "Human-Computer Interaction (HCI)",
+      "Generative AI",
+      "Audio & Speech",
+      "Animation"
+    ],
+    "url": "https://research.adobe.com/fellowship/",
+    "featured": false
+  },
+  {
+    "id": "adobe-data-science-awards",
+    "name": "Adobe Data Science Research Awards",
+    "shortName": "Adobe Data Science Awards",
+    "sponsor": "Adobe Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty researchers in big data, multimodal understanding, and marketing analytics",
+    "deadline": "Periodic / Annual call",
+    "deadlineMonth": 0,
+    "amount": "Up to $50,000 unrestricted research gift",
+    "summary": "Supports academic faculty members developing innovative algorithms and statistical models in data science, generative content analytics, customer journey modeling, and large-scale data visualization.",
+    "eligibility": [
+      "Faculty member at accredited university",
+      "Research in data science, multimodal AI, or analytics"
+    ],
+    "topics": [
+      "Data Science",
+      "Multimodal AI",
+      "Analytics",
+      "Machine Learning",
+      "Information Visualization"
+    ],
+    "url": "https://research.adobe.com/data-science-research-awards/",
+    "featured": false
+  },
+  {
+    "id": "adobe-women-in-tech",
+    "name": "Adobe Research Women-in-Technology Scholarship",
+    "shortName": "Adobe Women-in-Tech",
+    "sponsor": "Adobe Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Undergraduate Students",
+      "Master's Students"
+    ],
+    "whoFor": "Female undergraduate and master's students in computer science worldwide",
+    "deadline": "Late October / Early November (Annual)",
+    "deadlineMonth": 10,
+    "amount": "$10,000 financial award + Creative Cloud membership + opportunity to interview for Adobe internship",
+    "summary": "Designed to create gender diversity in technology by encouraging outstanding female undergraduate and master's students studying computer science and related technical fields.",
+    "eligibility": [
+      "Identify as female",
+      "Enrolled as undergraduate or master's student in CS, CE, or related STEM field",
+      "Demonstrated leadership and passion for computing"
+    ],
+    "topics": [
+      "General CS",
+      "HCI",
+      "Software Engineering",
+      "AI/ML",
+      "Data Science"
+    ],
+    "url": "https://research.adobe.com/scholarship/",
+    "featured": false
+  },
+  {
+    "id": "bloomberg-ds-fellowship",
+    "name": "Bloomberg Data Science Ph.D. Fellowship",
+    "shortName": "Bloomberg PhD Fellowship",
+    "sponsor": "Bloomberg",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "PhD students working in data science, NLP, information retrieval, and machine learning",
+    "deadline": "Early December (Annual)",
+    "deadlineMonth": 12,
+    "amount": "Full tuition and fees + living stipend + $3,000 conference travel budget + paid 14-week summer internship at Bloomberg",
+    "summary": "Provides multi-year financial support and professional development for PhD students conducting research in data science, natural language processing, information extraction, and ML systems.",
+    "eligibility": [
+      "Enrolled full-time in a PhD program at an accredited university",
+      "Research focused on data science, NLP, machine learning, or information retrieval",
+      "Available for 14-week summer internship in New York or London"
+    ],
+    "topics": [
+      "Data Science",
+      "Natural Language Processing",
+      "Information Retrieval",
+      "Machine Learning",
+      "Knowledge Graphs"
+    ],
+    "url": "https://www.bloomberg.com/company/values/tech-at-bloomberg/data-science/academic-engagement-programs/data-science-ph-d-fellowship/",
+    "featured": false
+  },
+  {
+    "id": "cisco-research-rfps",
+    "name": "Cisco Research Open RFPs & Faculty Grants",
+    "shortName": "Cisco Research Grants",
+    "sponsor": "Cisco Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "University faculty and academic research teams",
+    "deadline": "Rolling / Year-round submission window",
+    "deadlineMonth": 0,
+    "amount": "Typically $60,000 to $120,000 unrestricted research gift + Cisco engineer pairing",
+    "summary": "Cisco Research continuously funds academic research addressing strategic challenges in next-generation networking, cloud-native infrastructure, generative AI operations, and Zero Trust security.",
+    "eligibility": [
+      "Tenured and tenure-track faculty at accredited universities worldwide",
+      "Proposal must align with an active open RFP topic listed on Cisco Research portal"
+    ],
+    "topics": [
+      "Next-Gen Networking",
+      "Cloud Architecture",
+      "Zero Trust Cybersecurity",
+      "Edge Computing",
+      "Quantum Networking",
+      "Distributed AI"
+    ],
+    "url": "https://research.cisco.com/open-rfps",
+    "featured": false
+  },
+  {
+    "id": "bell-labs-prize",
+    "name": "Nokia Bell Labs Prize",
+    "shortName": "Bell Labs Prize",
+    "sponsor": "Nokia Bell Labs",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
+    "whoFor": "Academic faculty, postdocs, and innovators in designated countries",
+    "deadline": "Mid April (Annual)",
+    "deadlineMonth": 4,
+    "amount": "1st Prize: $100,000; 2nd Prize: $50,000; 3rd Prize: $25,000 unrestricted cash prize + collaboration with Bell Labs researchers",
+    "summary": "A global competition for innovators with disruptive ideas in information and communications technology, seeking ideas that have the potential to change humanity by a factor of 10x.",
+    "eligibility": [
+      "Open to university faculty, graduate researchers, and independent innovators in eligible participating countries",
+      "Proposals must present game-changing computing/communication innovations"
+    ],
+    "topics": [
+      "Information & Communication Tech",
+      "Optical Computing",
+      "Wireless & 6G",
+      "AI/ML Systems",
+      "Robotics & Automation"
+    ],
+    "url": "https://www.bell-labs.com/collaboration-opportunities/prize/",
+    "featured": false
+  },
+  {
+    "id": "jpmorgan-ai-awards",
+    "name": "JPMorgan Chase AI Research Awards & Faculty Fellowships",
+    "shortName": "JPMorgan AI Awards",
+    "sponsor": "JPMorgan Chase AI Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty in machine learning, NLP, cryptography, graph neural networks, and multi-agent systems",
+    "deadline": "Spring / Annual RFP cycle",
+    "deadlineMonth": 3,
+    "amount": "$100,000 to $150,000 unrestricted research gift",
+    "summary": "Recognizes faculty conducting fundamental AI research with applications to financial services, algorithmic fairness, synthetic data, multi-agent game theory, and secure multiparty computing.",
+    "eligibility": [
+      "Full-time faculty member at accredited university",
+      "Research in AI, machine learning, cryptography, multi-agent systems, or operations research"
+    ],
+    "topics": [
+      "AI/ML",
+      "Financial Technology",
+      "Graph Neural Networks",
+      "Multi-Agent Systems",
+      "Fairness & Explainability",
+      "Cryptography"
+    ],
+    "url": "https://www.jpmorgan.com/technology/artificial-intelligence/research-awards",
+    "featured": false
+  },
+  {
+    "id": "intel-faculty-awards",
+    "name": "Intel Research & Early Career Faculty Awards",
+    "shortName": "Intel Research Grants",
+    "sponsor": "Intel Labs",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty conducting research in computer architecture, hardware security, and neuromorphic computing",
+    "deadline": "Rolling / Annual invitation cycles",
+    "deadlineMonth": 0,
+    "amount": "Unrestricted research gifts, silicon hardware donations, and access to Intel testbeds",
+    "summary": "Supports university professors driving innovations in silicon photonics, confidential computing, neuromorphic hardware (Loihi), quantum computing, and domain-specific hardware accelerators.",
+    "eligibility": [
+      "Full-time faculty member in CS, CE, or Electrical Engineering",
+      "Invitation and open RFP tracks through Intel University Relations"
+    ],
+    "topics": [
+      "Computer Architecture",
+      "Hardware Security",
+      "Neuromorphic Computing",
+      "Quantum Computing",
+      "Silicon Photonics",
+      "Edge AI"
+    ],
+    "url": "https://www.intel.com/content/www/us/en/research/overview.html",
+    "featured": false
+  },
+  {
+    "id": "samsung-gro",
+    "name": "Samsung Global Research Outreach (GRO) Program",
+    "shortName": "Samsung GRO Program",
+    "sponsor": "Samsung Electronics / SAIT",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "University professors and faculty researchers worldwide",
+    "deadline": "August (Annual proposal deadline)",
+    "deadlineMonth": 8,
+    "amount": "Up to $150,000 per year (renewable up to 3 years, $450,000 total)",
+    "summary": "Samsung's flagship annual academic call for research proposals in emerging compute paradigms, next-generation semiconductor devices, neural processing units, computer vision, and robotics.",
+    "eligibility": [
+      "Full-time faculty member at an accredited university worldwide",
+      "Initial 2-page proposal submitted against specific annual GRO research themes"
+    ],
+    "topics": [
+      "Semiconductors & NPU",
+      "Computer Vision",
+      "Robotics & AI",
+      "Quantum Computing",
+      "Display & Sensors",
+      "Security"
+    ],
+    "url": "https://www.sait.samsung.co.kr/saithome/about/collabo_overview.do",
+    "featured": true
+  },
+  {
+    "id": "draper-scholar-program",
+    "name": "Draper Scholar Program",
+    "shortName": "Draper Scholar Program",
+    "sponsor": "Draper Laboratory",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "PhD Students",
+      "Master's Students"
+    ],
+    "whoFor": "MS and PhD students in autonomous systems, cybersecurity, microelectronics, and AI",
+    "deadline": "Mid December (Annual)",
+    "deadlineMonth": 12,
+    "amount": "Full university tuition + monthly living stipend + workspace and laboratory access at Draper",
+    "summary": "Draper Scholars conduct their thesis and dissertation research under the joint supervision of a university faculty advisor and a Draper technical staff member in Cambridge, MA.",
+    "eligibility": [
+      "Enrolled in an accredited master's or doctoral degree program",
+      "US Citizenship typically required due to national defense research focus",
+      "Research in autonomy, space, cyber, or bio-systems"
+    ],
+    "topics": [
+      "Autonomous Systems",
+      "Cybersecurity",
+      "Robotics",
+      "Embedded Computing",
+      "Fault-Tolerant Systems"
+    ],
+    "url": "https://www.draper.com/careers/scholar-program",
+    "featured": false
+  },
+  {
+    "id": "snap-research-fellowship",
+    "name": "Snap Research Fellowship",
+    "shortName": "Snap Research Fellowship",
+    "sponsor": "Snap Inc.",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "PhD students in computer graphics, computer vision, HCI, and computational imaging",
+    "deadline": "November (Annual)",
+    "deadlineMonth": 11,
+    "amount": "$10,000 one-time award + interview for a Snap Research summer internship",
+    "summary": "Supports doctoral students who are advancing the state of the art in augmented reality, creative computing, human-computer interaction, and computational photography.",
+    "eligibility": [
+      "Full-time PhD student at an accredited university",
+      "Research in computer vision, graphics, computational imaging, or HCI"
+    ],
+    "topics": [
+      "Augmented Reality",
+      "Computer Vision",
+      "Computer Graphics",
+      "HCI",
+      "Computational Photography"
+    ],
+    "url": "https://research.snap.com/fellowships.html",
+    "featured": false
+  },
+  {
+    "id": "symantec-norton-fellowship",
+    "name": "Gen Digital / Symantec Research Labs Graduate Fellowship",
+    "shortName": "Symantec / Norton Fellowship",
+    "sponsor": "Gen Digital (NortonLifeLock / Symantec)",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "PhD students in cybersecurity, privacy, systems security, and cryptography",
+    "deadline": "January (Annual)",
+    "deadlineMonth": 1,
+    "amount": "$20,000 award towards tuition and research expenses + paid summer research residency",
+    "summary": "Funds graduate students who are pioneering solutions in practical computer security, malware analysis, online fraud detection, software vulnerabilities, and user privacy.",
+    "eligibility": [
+      "Enrolled in a PhD program in computer science or related discipline",
+      "Demonstrated track record of publication in security/privacy venues (IEEE S&P, USENIX Security, CCS, NDSS)"
+    ],
+    "topics": [
+      "Cybersecurity",
+      "Privacy",
+      "Malware Analysis",
+      "Systems Security",
+      "Applied Cryptography"
+    ],
+    "url": "https://www.gendigital.com/us/en/careers/",
+    "featured": false
+  },
+  {
+    "id": "cra-undergrad-award",
+    "name": "CRA Outstanding Undergraduate Researcher Award",
+    "shortName": "CRA Undergrad Award",
+    "sponsor": "Computing Research Association (CRA)",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "Undergraduate Students"
+    ],
+    "whoFor": "Undergraduate students in North American universities showing outstanding CS research potential",
+    "deadline": "Mid October (Annual department nomination)",
+    "deadlineMonth": 10,
+    "amount": "National recognition, financial award for winners, and travel support to major CS research conferences",
+    "summary": "Celebrates North American undergraduate students who show exceptional potential in computer science research. Nominated by their department chair, winners frequently author publications at top peer-reviewed conferences.",
+    "eligibility": [
+      "Enrolled as an undergraduate at a North American university",
+      "Nominated by department chair or faculty sponsor",
+      "Demonstrated original research contribution in CS"
+    ],
+    "topics": [
+      "General CS",
+      "Theory",
+      "AI/ML",
+      "Systems",
+      "Security",
+      "HCI",
+      "Graphics"
+    ],
+    "url": "https://cra.org/cra-awards/undergraduate-researcher-award/",
+    "featured": true
+  },
+  {
+    "id": "cra-wp-grad-fellowship",
+    "name": "Computing Research Association (CRA-WP) Graduate Research Fellowship",
+    "shortName": "CRA-WP Fellowship",
+    "sponsor": "CRA Committee on Widening Participation (CRA-WP)",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "Women and underrepresented doctoral researchers in computing",
+    "deadline": "February (Annual)",
+    "deadlineMonth": 2,
+    "amount": "Multi-year research fellowship + mentoring tracks + travel grants to CRA-WP workshops",
+    "summary": "Programs and fellowships organized by CRA-WP to sustain and advance the careers of women, underrepresented minorities, and persons with disabilities in computing research.",
+    "eligibility": [
+      "Enrolled in graduate computing program",
+      "Focus on broadening participation in computing research"
+    ],
+    "topics": [
+      "General CS",
+      "AI/ML",
+      "Software Systems",
+      "Theory",
+      "Computer Engineering"
+    ],
+    "url": "https://cra.org/cra-wp/cra-graduate-fellowship/",
+    "featured": false
+  },
+  {
+    "id": "acm-doctoral-dissertation",
+    "name": "ACM Doctoral Dissertation Award",
+    "shortName": "ACM Dissertation Award",
+    "sponsor": "Association for Computing Machinery (ACM)",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
+    "whoFor": "Recent doctoral graduates whose dissertation represents the most outstanding CS thesis of the year",
+    "deadline": "October 31 (Annual university nomination)",
+    "deadlineMonth": 10,
+    "amount": "$20,000 prize for winner ($10,000 for honorable mention) + publication in ACM Digital Library series + recognition at annual ACM Awards Banquet",
+    "summary": "The highest honor for a computer science doctoral dissertation. Each degree-granting institution worldwide may nominate up to two dissertations defended during the previous academic year.",
+    "eligibility": [
+      "PhD dissertation completed and accepted within the previous academic year",
+      "Nominated by candidate's academic institution (max 2 per university)",
+      "Recognized for fundamental theoretical or practical breakthrough in CS"
+    ],
+    "topics": [
+      "Theory & Algorithms",
+      "AI/ML",
+      "Systems & Architecture",
+      "Programming Languages",
+      "Security & Cryptography",
+      "Computer Graphics"
+    ],
+    "url": "https://awards.acm.org/doctoral-dissertation",
+    "featured": true
+  },
+  {
+    "id": "gem-fellowship",
+    "name": "National GEM Consortium Graduate Fellowship",
+    "shortName": "GEM Fellowship",
+    "sponsor": "National GEM Consortium",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "PhD Students",
+      "Master's Students"
+    ],
+    "whoFor": "Underrepresented minority students in graduate engineering and CS programs",
+    "deadline": "Early November (Annual)",
+    "deadlineMonth": 11,
+    "amount": "Full tuition & fees at GEM member universities + minimum $16,000 stipend + paid corporate summer internships",
+    "summary": "GEM recruits high-achieving Black, Hispanic, and Native American students into technical master's and doctoral careers, pairing university tuition support with paid research internships at top tech corporations and national labs.",
+    "eligibility": [
+      "US Citizens or Permanent Residents",
+      "Underrepresented minority status (African American, Hispanic American, Native American)",
+      "Enrolled or planning to enroll in an MS or PhD STEM program with min 3.0 GPA"
+    ],
+    "topics": [
+      "General CS",
+      "Software Engineering",
+      "AI/ML",
+      "Data Science",
+      "Systems",
+      "Cybersecurity"
+    ],
+    "url": "https://www.gemfellowship.org/",
+    "featured": false
+  },
+  {
+    "id": "ford-foundation-fellowship",
+    "name": "Ford Foundation Predoctoral & Dissertation Fellowships",
+    "shortName": "Ford Foundation Fellowship",
+    "sponsor": "National Academies of Sciences / Ford Foundation",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "Doctoral students committed to diverse representation in university faculty",
+    "deadline": "Early December (Annual)",
+    "deadlineMonth": 12,
+    "amount": "$28,000 annual stipend for predoctoral (3 years) or $31,000 for dissertation year",
+    "summary": "Administered by the National Academies, this program seeks to increase the diversity of college and university faculties by supporting scholars with superior scholarship and demonstrated commitment to diversity.",
+    "eligibility": [
+      "US Citizens, US Nationals, or Permanent Residents",
+      "Enrolled in research-based PhD program in the US",
+      "Demonstrated commitment to diversity and a career in university teaching and research"
+    ],
+    "topics": [
+      "General CS",
+      "HCI",
+      "AI/ML",
+      "Social Computing",
+      "Fairness & Ethics in AI"
+    ],
+    "url": "https://sites.nationalacademies.org/pga/fordfellowships/",
+    "featured": false
+  },
+  {
+    "id": "aaas-stpf",
+    "name": "AAAS Science & Technology Policy Fellowship (STPF)",
+    "shortName": "AAAS STPF",
+    "sponsor": "American Association for the Advancement of Science (AAAS)",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "Postdocs",
+      "Faculty",
+      "PhD Students"
+    ],
+    "whoFor": "PhD scientists and computing researchers contributing to federal public policy",
+    "deadline": "November 1 (Annual)",
+    "deadlineMonth": 11,
+    "amount": "$89,000\u2013$116,000 annual stipend + health insurance + professional development allowance",
+    "summary": "Provides opportunity for doctoral-level computing researchers and scientists to spend a year working in federal executive, legislative, or judicial offices in Washington DC advising on AI policy, cybersecurity, and national tech initiatives.",
+    "eligibility": [
+      "Hold a doctoral degree (PhD) by application deadline",
+      "US Citizenship required",
+      "Solid scientific/engineering credentials and interest in public policy"
+    ],
+    "topics": [
+      "AI Governance & Policy",
+      "Cybersecurity Policy",
+      "Data Privacy",
+      "Technology Strategy",
+      "National Security"
+    ],
+    "url": "https://www.aaas.org/programs/science-technology-policy-fellowships",
+    "featured": false
+  },
+  {
+    "id": "schlumberger-faculty-future",
+    "name": "Schlumberger Foundation Faculty for the Future Fellowship",
+    "shortName": "Faculty for the Future",
+    "sponsor": "Schlumberger Foundation",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
+    "whoFor": "Women scientists from developing & emerging countries pursuing PhD or Postdoc in STEM",
+    "deadline": "Early November (Annual)",
+    "deadlineMonth": 11,
+    "amount": "Up to $50,000/year for PhD studies and up to $40,000/year for Postdoctoral study",
+    "summary": "Supports women from developing and emerging countries who are pursuing PhD or postdoctoral research in computing and STEM disciplines at leading universities worldwide, with commitment to return to home country academia.",
+    "eligibility": [
+      "Female citizen of a developing country / emerging economy",
+      "Enrolled or admitted to PhD or Postdoc program abroad",
+      "Committed to return to home country to teach and conduct academic research"
+    ],
+    "topics": [
+      "General CS",
+      "Data Science",
+      "AI/ML",
+      "Scientific Computing",
+      "Environmental CS"
+    ],
+    "url": "https://www.fftf.slb.com/",
+    "featured": false
+  },
+  {
+    "id": "mozilla-technology-fund",
+    "name": "Mozilla Technology Fund & Mozilla Awards",
+    "shortName": "Mozilla Tech Fund",
+    "sponsor": "Mozilla Foundation",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Open-source technologists, academic researchers, and faculty building public-interest tech",
+    "deadline": "Spring / Summer (Annual)",
+    "deadlineMonth": 5,
+    "amount": "$25,000 to $100,000 project grants",
+    "summary": "Provides grants to open-source technologists, academics, and researchers who are developing tools and research that shift the AI ecosystem towards openness, accountability, and public benefit.",
+    "eligibility": [
+      "Open-source projects with working prototypes and public code repositories",
+      "University faculty, civil society technologists, and independent developers worldwide"
+    ],
+    "topics": [
+      "Open Source AI",
+      "Algorithmic Accountability",
+      "Data Privacy",
+      "Ethical Computing",
+      "Web Standards"
+    ],
+    "url": "https://foundation.mozilla.org/en/what-we-fund/awards/",
+    "featured": false
+  },
+  {
+    "id": "latticex-foundation-grants",
+    "name": "LatticeX Foundation Research Grants",
+    "shortName": "LatticeX Grants",
+    "sponsor": "LatticeX Foundation",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Postdocs"
+    ],
+    "whoFor": "Researchers and developers in privacy-preserving computing and cryptography",
+    "deadline": "Rolling / Open submission",
+    "deadlineMonth": 0,
+    "amount": "$20,000 to $100,000 project grants",
+    "summary": "Supports academic research and open-source infrastructure development in secure multiparty computation (MPC), zero-knowledge proofs (ZKP), and privacy-preserving distributed systems.",
+    "eligibility": [
+      "Open to university researchers, graduate students, and independent cryptographic developers worldwide"
+    ],
+    "topics": [
+      "Privacy-Preserving Computing",
+      "Zero-Knowledge Proofs",
+      "Applied Cryptography",
+      "Secure MPC",
+      "Decentralized Systems"
+    ],
+    "url": "https://latticex.foundation/grants",
+    "featured": false
+  },
+  {
+    "id": "netapp-faculty-grants",
+    "name": "NetApp Faculty Research Grants",
+    "shortName": "NetApp Research Grants",
+    "sponsor": "NetApp Advanced Technology Group",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty in storage systems, file systems, and cloud data architecture",
+    "deadline": "Periodic RFP / Fall",
+    "deadlineMonth": 10,
+    "amount": "$25,000 to $50,000 unrestricted research gift",
+    "summary": "Supports academic research in modern data management, distributed storage architectures, NVMe/flash optimization, and cloud storage systems.",
+    "eligibility": [
+      "Full-time faculty member at an accredited university",
+      "Research in storage systems, operating systems, or cloud infrastructure"
+    ],
+    "topics": [
+      "Storage Systems",
+      "Operating Systems",
+      "File Systems",
+      "Distributed Data Management",
+      "Cloud Infrastructure"
+    ],
+    "url": "https://www.netapp.com/atg/research-grants/",
+    "featured": false
+  },
+  {
+    "id": "qualcomm-faculty-awards",
+    "name": "Qualcomm Faculty Research Awards",
+    "shortName": "Qualcomm Faculty Awards",
+    "sponsor": "Qualcomm University Relations",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Key faculty researchers in mobile computing, RF, multimedia, and wireless AI",
+    "deadline": "Invitation & Annual review",
+    "deadlineMonth": 0,
+    "amount": "Unrestricted research gifts ($50,000 to $100,000)",
+    "summary": "Awarded to faculty leaders whose cutting-edge research in wireless technologies, video codecs, embedded AI hardware, and edge computing aligns with Qualcomm's technical roadmap.",
+    "eligibility": [
+      "Invited faculty members with active collaboration or proposal review through Qualcomm University Relations"
+    ],
+    "topics": [
+      "Wireless Networks",
+      "Multimedia Systems",
+      "Embedded AI",
+      "RF & Antenna Systems",
+      "Edge Computing"
+    ],
+    "url": "https://www.qualcomm.com/research/university-relations",
+    "featured": false
+  },
+  {
+    "id": "vmware-academic-program",
+    "name": "VMware / Broadcom Academic Research Grants & Faculty Programs",
+    "shortName": "VMware Academic Program",
+    "sponsor": "VMware by Broadcom",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty in virtualization, cloud operating systems, hypervisors, and distributed networking",
+    "deadline": "Rolling / Periodic calls",
+    "deadlineMonth": 0,
+    "amount": "Research gifts, VMware software licenses, and direct interaction with VMware research staff",
+    "summary": "Supports university professors and researchers pushing the boundaries of virtualization, multi-cloud platforms, distributed systems verification, and network virtualization.",
+    "eligibility": [
+      "Full-time faculty and researchers at accredited academic institutions"
+    ],
+    "topics": [
+      "Virtualization",
+      "Operating Systems",
+      "Cloud Infrastructure",
+      "Distributed Systems",
+      "Formal Verification"
+    ],
+    "url": "https://www.vmware.com/company/research/faculty-programs.html",
+    "featured": false
+  },
+  {
+    "id": "consumer-reports-digital-lab",
+    "name": "Consumer Reports Digital Lab Fellowship",
+    "shortName": "Consumer Reports Fellowship",
+    "sponsor": "Consumer Reports Digital Lab",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Faculty, postdocs, and graduate researchers studying digital consumer privacy, dark patterns, and algorithm transparency",
+    "deadline": "Spring / Annual cycle",
+    "deadlineMonth": 3,
+    "amount": "$25,000 to $50,000 project fellowship grant",
+    "summary": "Funds researchers and technologists investigating consumer cybersecurity, deceptive design patterns in web/mobile apps, algorithmic bias, and privacy-invasive smart home devices.",
+    "eligibility": [
+      "Open to university faculty, postdocs, and advanced PhD students",
+      "Proposals must center on actionable consumer privacy, digital rights, and tech accountability"
+    ],
+    "topics": [
+      "Privacy & Surveillance",
+      "Dark Patterns & HCI",
+      "Algorithmic Fairness",
+      "IoT Security",
+      "Digital Rights"
+    ],
+    "url": "https://digital-lab.consumerreports.org",
+    "featured": false
+  },
+  {
+    "id": "comcast-innovative-research",
+    "name": "Comcast Innovation Research Awards",
+    "shortName": "Comcast Research Awards",
+    "sponsor": "Comcast NBCUniversal",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty researchers in broadband networking, edge computing, streaming video, and cyber defense",
+    "deadline": "Periodic / Open proposals",
+    "deadlineMonth": 0,
+    "amount": "$20,000 to $60,000 seed research grants",
+    "summary": "Supports university researchers advancing technologies in next-generation broadband access networks (DOCSIS/fiber), video streaming protocols, CDN caching, and automated network telemetry.",
+    "eligibility": [
+      "Academic faculty members at accredited research universities",
+      "Proposals targeting networking, video encoding, CDN, or cyber defense"
+    ],
+    "topics": [
+      "Broadband Networking",
+      "Video Streaming & Codecs",
+      "Edge Cloud & CDN",
+      "Cybersecurity",
+      "Network Telemetry"
+    ],
+    "url": "https://tech.comcast.com",
+    "featured": false
+  },
+  {
+    "id": "att-labs-fellowship",
+    "name": "AT&T Labs Fellowship Program",
+    "shortName": "AT&T Labs Fellowship",
+    "sponsor": "AT&T Labs",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students",
+      "Master's Students"
+    ],
+    "whoFor": "Underrepresented minority and female graduate students in computing and telecommunications",
+    "deadline": "November (Annual)",
+    "deadlineMonth": 11,
+    "amount": "Tuition and fees + annual living stipend + mentorship and summer internship with AT&T Labs researchers",
+    "summary": "Created to support underrepresented minorities and women pursuing doctoral degrees in computer science, statistics, electrical engineering, and telecommunications.",
+    "eligibility": [
+      "US Citizens or Permanent Residents",
+      "Enrolled in or admitted to a graduate STEM program",
+      "Underrepresented minority or woman in computing"
+    ],
+    "topics": [
+      "Telecommunications",
+      "Networking",
+      "Data Science",
+      "AI/ML",
+      "Cloud Computing",
+      "Cybersecurity"
+    ],
+    "url": "https://www.research.att.com/programs/fellowships",
+    "featured": false
+  },
+  {
+    "id": "huawei-research-fellowship",
+    "name": "Huawei Research Fellowship Program",
+    "shortName": "Huawei Research Fellowship",
+    "sponsor": "Huawei Technologies",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
+    "whoFor": "PhD researchers and postdocs in communication algorithms, optics, and systems architecture",
+    "deadline": "Rolling / Annual cycles",
+    "deadlineMonth": 0,
+    "amount": "Comprehensive research funding and international lab collaboration support",
+    "summary": "Supports exceptional doctoral and postdoctoral researchers addressing fundamental theoretical and engineering problems in 5G/6G wireless communications, distributed operating systems, and optical computing.",
+    "eligibility": [
+      "PhD student or Postdoc in CS, EE, or applied physics",
+      "International research proposals welcome"
+    ],
+    "topics": [
+      "Wireless Communications",
+      "Operating Systems",
+      "Algorithms",
+      "Optical Computing",
+      "Distributed AI"
+    ],
+    "url": "https://www.huawei.com/en/industry-insights/industry/huawei-research-fellowship-program",
+    "featured": false
+  },
+  {
+    "id": "xerox-technical-minority",
+    "name": "Xerox Technical Minority Scholarship Program",
+    "shortName": "Xerox Minority Scholarship",
+    "sponsor": "Xerox",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Undergraduate Students",
+      "Master's Students",
+      "PhD Students"
+    ],
+    "whoFor": "Minority undergraduate and graduate students in technical computing and engineering fields",
+    "deadline": "Late September (Annual)",
+    "deadlineMonth": 9,
+    "amount": "$1,000\u2013$10,000 scholarship awards",
+    "summary": "Provides financial assistance to undergraduate and graduate minority students studying computer science, software engineering, imaging science, and related technical disciplines.",
+    "eligibility": [
+      "US Citizen or Permanent Resident",
+      "Minority background (African American, Hispanic, Asian, Native American, Pacific Islander)",
+      "Full-time student with GPA 3.0+"
+    ],
+    "topics": [
+      "General CS",
+      "Software Engineering",
+      "Imaging Science",
+      "Data Analytics"
+    ],
+    "url": "https://www.xerox.com/en-us/jobs/minority-scholarships",
+    "featured": false
+  },
+  {
+    "id": "schmidt-sciences-ai2050",
+    "name": "Schmidt Sciences AI2050 Fellowships",
+    "shortName": "Schmidt AI2050",
+    "sponsor": "Schmidt Sciences",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
+    "whoFor": "Early-career tenure-track faculty and senior researchers tackling hard problems in AI",
+    "deadline": "Annual (Letter of Intent in October)",
+    "deadlineMonth": 10,
+    "amount": "Up to 00,000 for Early Career, 00,000+ for Senior Fellows",
+    "summary": "Funds bold interdisciplinary research addressing critical hard problems in AI to ensure artificial intelligence benefits humanity by 2050, covering AI safety, governance, transparency, and AI-driven scientific discovery.",
+    "eligibility": [
+      "Faculty at degree-granting universities worldwide",
+      "Early Career Fellows must be within early stage of tenure-track appointment",
+      "Open to theoretical, technical, and sociotechnical research in AI"
+    ],
+    "topics": [
+      "AI/ML",
+      "AI Safety & Ethics",
+      "Theory",
+      "Interdisciplinary"
+    ],
+    "url": "https://www.schmidtsciences.org/ai2050/",
+    "featured": true
+  },
+  {
+    "id": "openai-academic-researcher-grants",
+    "name": "OpenAI Researcher Access Program & Frontier Grants",
+    "shortName": "OpenAI Researcher Access",
+    "sponsor": "OpenAI",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Postdocs"
+    ],
+    "whoFor": "Academic faculty, postdocs, and doctoral students conducting research on AI safety, capabilities, and scientific discovery",
+    "deadline": "Rolling Application Cycles",
+    "deadlineMonth": 0,
+    "amount": "Subsidized API compute credits (,000\u20135,000+) & frontier model access",
+    "summary": "Provides university researchers and students with free and subsidized access to OpenAI frontier models (GPT-4o, reasoning models, and APIs) to accelerate research in AI safety, alignment, evaluation, and scientific exploration.",
+    "eligibility": [
+      "Affiliated with an accredited academic or non-profit research institution",
+      "Research focused on responsible AI deployment, alignment, evaluation, or domain science",
+      "Must commit to publishing open academic findings"
+    ],
+    "topics": [
+      "AI/ML",
+      "AI Safety & Ethics",
+      "NLP",
+      "Systems"
+    ],
+    "url": "https://openai.com/form/researcher-access-program/",
+    "featured": true
+  },
+  {
+    "id": "bwf-casi-award",
+    "name": "Burroughs Wellcome Fund Career Awards at the Scientific Interface (CASI)",
+    "shortName": "BWF CASI Award",
+    "sponsor": "Burroughs Wellcome Fund",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
+    "whoFor": "Postdocs with PhD in Computer Science or quantitative fields transitioning to tenure-track faculty",
+    "deadline": "Annual (Pre-proposal in September)",
+    "deadlineMonth": 9,
+    "amount": "60,000 over 5 years (bridging postdoc to faculty)",
+    "summary": "Supports early-career researchers trained in computer science, machine learning, mathematics, and quantitative disciplines who apply computational methods to biological and life sciences questions during their transition to university faculty.",
+    "eligibility": [
+      "Hold a PhD in computer science, physics, mathematics, or engineering",
+      "Must have at least 12 months and not more than 48 months of postdoctoral experience",
+      "Must not hold or have accepted a tenure-track faculty appointment at time of application"
+    ],
+    "topics": [
+      "AI/ML",
+      "Comp. Biology",
+      "Algorithms",
+      "Theory"
+    ],
+    "url": "https://www.bwfund.org/funding-opportunities/interfaces-in-science/career-awards-at-the-scientific-interface/",
+    "featured": false
+  }
+]

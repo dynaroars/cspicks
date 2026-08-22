@@ -1,4 +1,198 @@
-/* Shared look for the "Copy link" control on discovery cards. */
+/* ==========================================================================
+   Discoveries Tab & Rank Stability Matrix
+   ========================================================================== */
+
+/* Discoveries Grid & Cards */
+.discovery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.discovery-card {
+  position: relative;
+  overflow: visible;
+  padding: 1.2rem;
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+.discovery-card:hover,
+.discovery-card:focus-within {
+  z-index: 20;
+}
+
+.discovery-featured {
+  border-left: 3px solid #10b981;
+}
+
+.discovery-risk {
+  border-left: 3px solid var(--impact-neg-text);
+}
+
+.discovery-wide {
+  grid-column: 1 / -1;
+}
+
+.discovery-section-heading {
+  margin-top: 2.5rem;
+}
+
+.diagnostic-panel .discovery-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.7rem;
+  font-size: 1rem;
+}
+
+/* Discoveries List Items */
+.discovery-list {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.discovery-list li {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr) minmax(6.5rem, auto);
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.discovery-list li:last-child {
+  border-bottom: 0;
+}
+
+.discovery-list li > span:not(.discovery-position) {
+  min-width: 0;
+}
+
+.discovery-list small {
+  display: block;
+  color: var(--text-secondary);
+}
+
+.discovery-list strong {
+  justify-self: end;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.discovery-position {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+
+.discovery-empty {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.discovery-school {
+  display: block;
+  overflow: hidden;
+  max-width: 100%;
+  padding: 0;
+  color: var(--text-primary);
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 650;
+  line-height: 1.3;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.discovery-school:hover,
+.discovery-school:focus-visible {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.discovery-info {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  overflow: visible;
+  color: var(--text-secondary);
+  cursor: help;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.discovery-info .tooltip-content {
+  width: min(290px, calc(100vw - 2rem));
+  font-weight: 400;
+}
+
+/* Rank Stability Matrix Table */
+.stability-table {
+  width: 100%;
+  margin-top: 1rem;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.stability-table caption {
+  margin-bottom: 0.6rem;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  text-align: left;
+}
+
+.stability-table th,
+.stability-table td {
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.stability-table thead th {
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+.stability-table tbody th {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.stability-cell strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.stability-cell small {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+
+.stability-best {
+  background: color-mix(in srgb, #10b981 14%, var(--card-bg));
+}
+
+.stability-worst {
+  background: color-mix(in srgb, #ef4444 12%, var(--card-bg));
+}
+
+/* Share Button Control */
 .share-button {
   display: inline-flex;
   flex: none;
@@ -34,85 +228,40 @@
   border-color: var(--impact-pos-text);
 }
 
-/* Briefly marks the card a shared #fragment link pointed at, so the reader
-   can tell which one of a full grid they were sent to. */
 .discovery-highlighted {
   animation: discovery-highlight-pulse 2.2s ease-out;
 }
 
 @keyframes discovery-highlight-pulse {
-  0% { box-shadow: 0 0 0 3px var(--primary-color); }
-  100% { box-shadow: 0 0 0 3px transparent; }
+  0% {
+    box-shadow: 0 0 0 3px var(--primary-color);
+  }
+  100% {
+    box-shadow: 0 0 0 3px transparent;
+  }
 }
 
-.discovery-info {
-  position: relative;
-  display: inline-flex;
-  flex: none;
-  overflow: visible;
-  color: var(--text-secondary);
-  cursor: help;
-  font-size: 0.75rem;
-  line-height: 1;
-}
-
-.discovery-info .tooltip-content {
-  width: min(290px, calc(100vw - 2rem));
-  font-weight: 400;
-}
-
-.discovery-list {
-  display: grid;
-  gap: 0.25rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.discovery-list li {
-  display: grid;
-  grid-template-columns: 1.25rem minmax(0, 1fr) minmax(6.5rem, auto);
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.45rem 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.discovery-list li:last-child { border-bottom: 0; }
-.discovery-list li > span:not(.discovery-position) { min-width: 0; }
-.discovery-list small { display: block; color: var(--text-secondary); }
-.discovery-list strong {
-  justify-self: end;
+/* Context Disclaimer / Caution Note */
+.context-note,
+.simulator-disclaimer.context-note {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 880px;
+  margin: 0.5rem auto 1rem;
+  padding: 0.65rem 0.8rem;
   color: var(--text-primary);
-  font-size: var(--text-sm);
-  text-align: right;
-  white-space: nowrap;
-}
-.discovery-position { color: var(--text-secondary); font-size: var(--text-xs); }
-.discovery-empty { color: var(--text-secondary); font-size: var(--text-sm); }
-
-.discovery-school {
-  display: block;
-  overflow: hidden;
-  max-width: 100%;
-  padding: 0;
-  color: var(--text-primary);
-  background: none;
-  border: 0;
-  font: inherit;
-  font-size: var(--text-sm);
-  font-weight: 650;
-  line-height: 1.3;
+  background: color-mix(in srgb, #ef4444 5%, var(--card-bg));
+  border: 1px solid color-mix(in srgb, #ef4444 22%, var(--border-color));
+  border-left: 3px solid #dc2626;
+  border-radius: 8px;
+  font-size: var(--text-xs);
+  line-height: 1.5;
   text-align: left;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  cursor: pointer;
 }
 
-.discovery-school:hover,
-.discovery-school:focus-visible {
-  color: var(--primary-color);
-  text-decoration: underline;
+.context-note strong {
+  color: var(--impact-neg-text);
+  font-weight: 600;
 }
 
 @media (max-width: 760px) {
@@ -123,44 +272,9 @@
   .discovery-wide {
     grid-column: auto;
   }
-}
 
-.school-metric span {
-  overflow: hidden;
-  color: var(--text-secondary);
-  font-size: 0.68rem;
-  text-overflow: ellipsis;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.school-metric strong {
-  margin-top: 0.1rem;
-  color: var(--text-primary);
-  font-size: 0.86rem;
-}
-
-.confidence-high { color: var(--impact-pos-text) !important; }
-.confidence-review { color: var(--impact-neg-text) !important; }
-
-
-
-.card-subtitle {
-  color: var(--text-secondary);
-  margin-bottom: 0.5rem;
-  font-size: var(--text-sm);
-  font-weight: 400;
-  font-family: var(--font-body);
-}
-
-.card-stats {
-  font-size: var(--text-sm);
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
-}
-
-.card-links {
-  display: flex;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  .stability-table th,
+  .stability-table td {
+    padding: 0.45rem 0.3rem;
+  }
 }

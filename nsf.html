@@ -4,20 +4,14 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
-    const applySystemTheme = () => document.documentElement.setAttribute('data-theme', systemTheme.matches ? 'dark' : 'light');
-    applySystemTheme();
-    systemTheme.addEventListener('change', applySystemTheme);
-  </script>
   <title>CS Picks - NSF Funding Explorer</title>
   <meta name="description" content="Search NSF-funded CS faculty and departments nationwide. Explore award trends, funding growth, and department-level NSF funding portfolios built from official NSF Award Search data.">
-  <link rel="canonical" href="https://cspicks.roars.dev/funding.html">
+  <link rel="canonical" href="https://cspicks.roars.dev/nsf.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CS Picks">
   <meta property="og:title" content="CS Picks - NSF Funding Explorer">
   <meta property="og:description" content="Search NSF-funded CS faculty and departments nationwide. Explore award trends, funding growth, and department-level NSF funding portfolios built from official NSF Award Search data.">
-  <meta property="og:url" content="https://cspicks.roars.dev/funding.html">
+  <meta property="og:url" content="https://cspicks.roars.dev/nsf.html">
   <meta property="og:image" content="https://cspicks.roars.dev/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -49,7 +43,8 @@
         <a href="index.html?view=discoveries">🔭 Discoveries</a>
         <a href="simulator.html">☠️ Simulator</a>
         <a href="csconfs.html">📅 CS Confs</a>
-        <a href="funding.html" class="active" aria-current="page">🇺🇸 NSF Funding</a>
+        <a href="nsf.html" class="active" aria-current="page">🇺🇸 NSF Funding</a>
+        <a href="grants.html">🏆 Awards &amp; Grants</a>
       </nav>
     </header>
 

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS Picks - CS Research Awards, Fellowships &amp; Grants</title>
+  <meta name="description" content="Search computer science research grants, fellowships, and awards for faculty and students across NSF, DARPA, DOE, DoD, tech industry (Google, Amazon, Meta, Microsoft, Apple, NVIDIA), and non-profits." />
+  <link rel="canonical" href="https://cspicks.roars.dev/grants.html" />
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CS Picks">
+  <meta property="og:title" content="CS Picks - CS Research Awards, Fellowships &amp; Grants">
+  <meta property="og:description" content="Search computer science research grants, fellowships, and awards for faculty and students across NSF, DARPA, DOE, DoD, tech industry, and foundations.">
+  <meta property="og:url" content="https://cspicks.roars.dev/grants.html">
+  <meta property="og:image" content="https://cspicks.roars.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CS Picks - CS Research Awards, Fellowships &amp; Grants">
+  <meta name="twitter:description" content="Search computer science research grants, fellowships, and industry awards.">
+  <meta name="twitter:image" content="https://cspicks.roars.dev/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+  <link rel="stylesheet" href="./src/grants/grants.css">
+</head>
+<body class="search-page grants-page">
+  <div id="app">
+    <header>
+      <div class="title-row">
+        <a class="site-title-link" href="index.html" aria-label="Reset CS Picks"><h1>CS Picks</h1></a>
+        <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
+        <a class="icon-link" href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer" aria-label="FAQ, methods and data" title="FAQ, methods &amp; data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.9 2.9 0 0 1 5.6 1c0 2-2.8 2.4-2.8 4.2"/><circle cx="12" cy="17.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a class="icon-link roars-link" href="https://roars.dev" target="_blank" rel="noopener noreferrer" aria-label="ROARS Lab" title="ROARS Lab"></a>
+      </div>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="index.html">🔎 Search</a>
+        <a href="index.html?view=discoveries">🔭 Discoveries</a>
+        <a href="simulator.html">☠️ Simulator</a>
+        <a href="csconfs.html">📅 CS Confs</a>
+        <a href="nsf.html">🇺🇸 NSF Funding</a>
+        <a href="grants.html" class="active" aria-current="page">🏆 Awards &amp; Grants</a>
+      </nav>
+    </header>
+
+    <section class="search-section">
+      <div class="search-intro">
+        <h2>Explore CS research awards &amp; grants</h2>
+        <p>Find fellowships, early-career awards, industry gifts, and government grants for CS faculty and students.</p>
+      </div>
+
+      <div class="search-container">
+        <div class="universal-search">
+          <input type="search" id="grants-search" placeholder="Loading awards and grants data…" disabled autofocus autocomplete="off" aria-autocomplete="list" aria-controls="universal-suggestions" aria-expanded="false">
+          <div id="universal-suggestions" class="universal-suggestions" role="listbox" hidden></div>
+        </div>
+      </div>
+
+      <div class="search-examples" aria-label="Try award and grant searches">
+        <span>Try:</span>
+        <span id="grants-examples" class="search-examples-row"></span>
+      </div>
+
+      <div class="search-filters" role="search" aria-label="Filter grants and awards">
+        <div class="filter-group">
+          <select id="audience-select" aria-label="Filter by audience">
+            <option value="all">All (Faculty &amp; Students)</option>
+            <option value="faculty">Faculty</option>
+            <option value="students">Students</option>
+            <option value="postdoc">Postdocs</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <select id="sponsor-category-select" aria-label="Filter by sponsor">
+            <option value="all">All Sponsors</option>
+            <option value="government">Government</option>
+            <option value="industry">Industry</option>
+            <option value="foundation">Foundations</option>
+            <option value="society">Societies</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <select id="topic-select" aria-label="Filter by research topic">
+            <option value="all">All Topics</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <select id="deadline-select" aria-label="Filter by deadline">
+            <option value="all">All Deadlines</option>
+            <option value="rolling">Rolling / Open</option>
+            <option value="fixed">Fixed Annual</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <select id="sort-select" aria-label="Sort awards">
+            <option value="featured">Featured First</option>
+            <option value="deadline">Upcoming Deadline</option>
+            <option value="name">Name</option>
+            <option value="sponsor">Sponsor</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <main class="grants-results-container">
+      <div class="grants-status-bar">
+        <div id="grants-status" role="status" aria-live="polite">Loading awards and grants…</div>
+        <div id="grants-count" class="grants-count-highlight"></div>
+      </div>
+
+      <section id="grants-results" class="grants-results-grid" aria-label="CS Awards and Grants"></section>
+
+      <p class="context-note" style="margin-top: 2rem;">
+        Funding amounts, eligibility criteria, and submission deadlines are subject to change. Always verify current solicitation details and request-for-proposals (RFP) on the official sponsor program page before applying.
+      </p>
+    </main>
+  </div>
+  <script type="module" src="/src/grants/main.js"></script>
+</body>
+</html>

@@ -69,9 +69,10 @@ Every page keeps the URL in sync with what's on screen, so any view is a link th
 | Discoveries (`index.html?view=discoveries`) | `view=discoveries`, region/years/venue set/history/per-capita, plus a `#fragment` per card (`#discovery-fastest-growing-subfields`, etc.) that scrolls to and briefly highlights that card on load — or `q`/`target` once the visitor searches for something |
 | Simulator (`simulator.html`) | Filters, `univ` (selected university), and `candidates` (the raw candidate names/DBLP links) — opening the link pre-fills the setup one click from a result, without re-querying DBLP on load |
 | CS Confs (`csconfs.html`) | `q`, conference-year range, venue set, and whether only upcoming conferences are shown |
-| Funding (`funding.html`) | `q` (search or `A vs B`) plus the year-range filter |
+| NSF Funding (`nsf.html`) | `q` (search or `A vs B`) plus the year-range filter |
+| Awards & Grants (`grants.html`) | `q`, `audience`, `sponsor`, `topic`, `deadline`, and `sort` filters |
 
-Filter choices also persist across page navigations via `localStorage`, so switching between Search and Discoveries, or clicking into Simulator or Funding, doesn't silently reset the region or year range.
+Filter choices also persist across page navigations via `localStorage`, so switching between Search and Discoveries, or clicking into Simulator, NSF Funding, or Awards & Grants, doesn't silently reset the region or year range.
 
 Every page has an unobtrusive **Copy Link** button in the header (`src/share.js`): the Web Share API's native sheet where the browser offers one, a clipboard copy otherwise. Discoveries cards each get their own copy of the same control, scoped to that card's fragment. `src/seo.js` keeps `<title>`, the meta description, canonical link, and OpenGraph/Twitter tags in sync with the same state, so a shared link's title and social preview describe the actual view, not just the generic homepage.
 
@@ -88,7 +89,7 @@ Every page has an unobtrusive **Copy Link** button in the header (`src/share.js`
 No analytics are wired to a real account by default — `src/analytics.js`'s calls are safe no-ops until one is configured, and nothing here can invent credentials for you. To enable lightweight, cookie-free tracking:
 
 1. Sign up at [plausible.io](https://plausible.io) (or self-host it) and register `cspicks.roars.dev`.
-2. Uncomment the `<script defer data-domain="cspicks.roars.dev" src="https://plausible.io/js/script.js">` tag near the bottom of each page's `<head>` (`index.html`, `simulator.html`, `funding.html`).
+2. Uncomment the `<script defer data-domain="cspicks.roars.dev" src="https://plausible.io/js/script.js">` tag near the bottom of each page's `<head>` (`index.html`, `simulator.html`, `csconfs.html`, `nsf.html`, `grants.html`).
 3. Deploy. Plausible's dashboard then answers: visits, popular pages (via its own pathname-based pageviews), and referral sources out of the box.
 
 `src/analytics.js` additionally fires custom events — `View` (by page and kind: school/researcher/area/search-results), `Comparison`, and `Discovery Share`, each tagged with `page: 'search' | 'discoveries'` where relevant — at the same points the URL updates, so "popular university pages," "popular research fields," "comparison usage," and "Discoveries traffic" are answerable from Plausible's custom-event breakdowns even though those views share one static HTML file per page. Swap the calls in `analytics.js` for another tool's API (e.g. GoatCounter) if preferred; nothing else needs to change.
@@ -261,7 +262,8 @@ cspicks/
 ├── index.html                        # Search, results, integrated analysis, and the Discoveries view
 ├── csconfs.html                      # CS conference schedule
 ├── csconfs-submit.html               # Conference submission/correction form
-├── funding.html                      # Nationwide NSF funding beta
+├── nsf.html                          # Nationwide NSF funding explorer
+├── grants.html                       # CS research awards, fellowships & grants explorer
 ├── simulator.html                    # Ranking simulator page
 ├── FAQ.md                            # GitHub-hosted methods and data documentation
 └── README.md
@@ -273,6 +275,7 @@ cspicks/
 - [DBLP](https://dblp.org/) - Publication metadata and author profiles
 - [OpenAlex](https://openalex.org/) - Historical affiliation data
 - [NSF Award Search](https://www.nsf.gov/funding/award-search) - NSF awards, investigators, program managers, programs, dates, and intended amounts
+- **CS Research Awards & Fellowships** (`public/grants.json`) - Curated database of 65+ major CS research awards, faculty fellowships, student grants, and industry RFPs (NSF, DARPA, DOE, DoD, tech industry, and foundations)
 
 ## 📝 License
 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.

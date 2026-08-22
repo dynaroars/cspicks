@@ -27,7 +27,9 @@ export function renderSubfieldEffort() {
         label: areaLabels[item.subfield] || item.subfield
     }));
 
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const isDark = typeof window !== 'undefined' && window.matchMedia
+        ? window.matchMedia('(prefers-color-scheme: dark)').matches
+        : false;
     const barColor = isDark ? '#36c5f0' : '#475569';
 
     state.chartInstance = drawChart(ctx, state.chartInstance, {
