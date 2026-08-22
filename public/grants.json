@@ -64,19 +64,19 @@
     "featured": true
   },
   {
-    "id": "nsf-cise-core",
-    "name": "NSF CISE Core Programs (CCF, CNS, IIS, OAC)",
-    "shortName": "NSF CISE Core (Small / Medium / Large)",
+    "id": "nsf-future-core",
+    "name": "NSF Future Computing Research (Future CoRe)",
+    "shortName": "NSF Future CoRe",
     "sponsor": "National Science Foundation (NSF)",
     "sponsorCategory": "Government",
     "targetAudience": [
       "Faculty"
     ],
     "whoFor": "All CS faculty, research professors, and multi-institution collaborative teams",
-    "deadline": "Small: Rolling (No deadline); Medium: Late October; Large: Late September",
+    "deadline": "Target dates: second Thursday in September and first Thursday in February (annual); proposals accepted anytime",
     "deadlineMonth": 10,
-    "amount": "Small: up to $600k (3 yrs); Medium: $600k\u2013$1.2M (4 yrs); Large: $1.2M\u2013$3M+ (5 yrs)",
-    "summary": "The flagship foundational research program across CISE divisions: Computing and Communication Foundations (CCF), Computer and Network Systems (CNS), Information and Intelligent Systems (IIS), and Advanced Cyberinfrastructure (OAC).",
+    "amount": "Dependent on availability of funds; estimated 400\u2013600 awards",
+    "summary": "NSF's current cross-division CISE research solicitation spanning future computing programs such as Algorithmic Foundations, Computer Systems Research, Cyber-Physical Systems, and Software and Hardware Foundations.",
     "eligibility": [
       "Faculty and researchers at accredited US academic and non-profit research institutions",
       "Open to all career stages (junior, mid-career, and senior investigators)"
@@ -91,7 +91,37 @@
       "Cybersecurity",
       "Cyberinfrastructure"
     ],
-    "url": "https://new.nsf.gov/cise",
+    "url": "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing",
+    "featured": true
+  },
+  {
+    "id": "nsf-csgrad4us",
+    "name": "NSF Computer and Information Science and Engineering Graduate Fellowships (CSGrad4US)",
+    "shortName": "NSF CSGrad4US",
+    "sponsor": "National Science Foundation (NSF - CISE)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "Early-career bachelor's degree holders returning to academia to pursue a research-based CISE doctorate",
+    "deadline": "May 31 (Annual)",
+    "deadlineMonth": 5,
+    "amount": "$159,000 total: $37,000 annual stipend + $16,000 annual cost-of-education allowance for 3 years",
+    "summary": "A two-phase NSF fellowship for early-career professionals with computing experience who want to enter a research-based doctoral program in computer science, computer engineering, or information science.",
+    "eligibility": [
+      "US citizens, nationals, or permanent residents",
+      "Bachelor's degree completed before January 1 of the application year",
+      "Must not have enrolled in or applied to a CISE doctoral program"
+    ],
+    "topics": [
+      "General CS",
+      "AI/ML",
+      "Systems",
+      "Security",
+      "Theory & Algorithms",
+      "HCI"
+    ],
+    "url": "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate",
     "featured": true
   },
   {
@@ -2412,8 +2442,8 @@
   },
   {
     "id": "nsf-cybercorps-sfs",
-    "name": "NSF CyberCorps: Scholarship for Service (SFS)",
-    "shortName": "NSF CyberCorps SFS",
+    "name": "NSF CyberAICorps: Scholarship for Service (CyberAI SFS)",
+    "shortName": "NSF CyberAI SFS",
     "sponsor": "National Science Foundation (NSF) & Cybersecurity and Infrastructure Security Agency (CISA)",
     "sponsorCategory": "Government",
     "targetAudience": [
@@ -2422,12 +2452,12 @@
       "PhD Students"
     ],
     "whoFor": "Undergraduate, Master's, and PhD students in computer science, cybersecurity, and information assurance",
-    "deadline": "Institutional Deadlines (Varies by participating university; typically Fall/Spring cycles)",
-    "deadlineMonth": 11,
-    "amount": "Full university tuition and fees + annual stipend (7,000 for undergrads, 7,000 for graduate students) + ,000 health insurance/professional allowance per year for up to 3 years",
-    "summary": "Prestige federal scholarship-for-service providing 100% full tuition and substantial living stipends in exchange for post-graduation service in federal, state, or tribal cybersecurity roles.",
+    "deadline": "Scholarship Track: third Tuesday in July; Innovation Track: April 3 target date (Annual)",
+    "deadlineMonth": 7,
+    "amount": "Institutional scholarship support; student awards typically cover tuition, fees, stipend, and professional development for a service commitment",
+    "summary": "NSF's updated scholarship-for-service and education-innovation program adds AI to the longstanding cybersecurity workforce model. Scholarship recipients serve in a government AI or cybersecurity role for at least the length of the scholarship.",
     "eligibility": [
-      "US Citizens or Permanent Residents enrolled full-time at an SFS-participating university",
+      "US Citizens or Permanent Residents enrolled full-time at a CyberAI SFS-participating university",
       "Undergraduate juniors/seniors, Master's, or PhD students in CS or cybersecurity",
       "Ability to obtain federal security clearance and complete summer internships"
     ],
@@ -2439,7 +2469,7 @@
       "Networks",
       "Operating Systems"
     ],
-    "url": "https://www.sfs.opm.gov/",
+    "url": "https://www.nsf.gov/funding/opportunities/cyberai-sfs-cyberaicorps-scholarship-service/nsf26-503/solicitation",
     "featured": true
   },
   {
