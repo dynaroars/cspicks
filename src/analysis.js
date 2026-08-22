@@ -421,13 +421,3 @@ const CONF_SET_LABELS = {
     core: 'CORE A* only',
     'all-union': 'All (union)'
 };
-
-// One sweep serves every school, so it is cached per region rather than per
-// school. Historical mode changes which school a publication counts for, so it
-// is part of the key too.
-const stabilityCache = new Map();
-// A sweep takes over a second, and re-entering the tab or picking another
-// school during it would otherwise start a second identical one. In-flight
-// sweeps are shared so the later caller joins the running one.
-const stabilitySweeps = new Map();
-let stabilityToken = 0;
