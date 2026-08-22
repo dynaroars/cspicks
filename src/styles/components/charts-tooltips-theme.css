@@ -257,8 +257,8 @@
   right: 1.5rem;
   bottom: 1.5rem;
   z-index: 500;
-  width: min(420px, calc(100vw - 2rem));
-  max-height: min(75vh, 620px);
+  width: min(520px, calc(100vw - 2rem));
+  max-height: min(85vh, 720px);
   overflow-y: auto;
   animation: data-health-pop-in 0.18s ease-out;
 }
