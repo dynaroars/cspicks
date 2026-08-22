@@ -34,7 +34,7 @@ export function renderGrantCard(grant) {
           </div>
           <div class="grant-badges">
             <span class="grant-cat-badge ${catClass}">${escapeHtml(grant.sponsorCategory)}</span>
-            ${grant.featured ? '<span class="grant-featured-badge">★ Featured</span>' : ''}
+            ${grant.featured ? '<span class="grant-featured-badge" title="Highlighted award" aria-label="Highlighted award">★</span>' : ''}
           </div>
         </div>
 
