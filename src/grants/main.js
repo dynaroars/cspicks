@@ -72,6 +72,7 @@ function render() {
       <div class="universal-suggestion-empty" style="padding: 3rem 1rem; text-align: center; color: var(--text-secondary);">
         <h3>No matching awards or grants found</h3>
         <p style="margin-top: 0.5rem;">Try broadening your search terms or clearing some filters.</p>
+        <button type="button" class="btn-secondary" id="reset-grants-filters" style="margin-top: 1rem; padding: 0.5rem 1.25rem; border-radius: 8px; cursor: pointer;">Reset all filters</button>
       </div>
     `;
   } else {
@@ -146,8 +147,26 @@ function setupExamples() {
 }
 
 function setupDelegatedListeners() {
-  // Topic clicks and sponsor clicks on cards
+  // Topic clicks, sponsor clicks, and reset on cards
   resultsContainer.addEventListener('click', event => {
+    const resetBtn = event.target.closest('#reset-grants-filters');
+    if (resetBtn) {
+      input.value = '';
+      const audEl = document.getElementById('audience-select');
+      const sponEl = document.getElementById('sponsor-category-select');
+      const topEl = document.getElementById('topic-select');
+      const deadEl = document.getElementById('deadline-select');
+      const sortEl = document.getElementById('sort-select');
+      if (audEl) audEl.value = 'all';
+      if (sponEl) sponEl.value = 'all';
+      if (topEl) topEl.value = 'all';
+      if (deadEl) deadEl.value = 'all';
+      if (sortEl) sortEl.value = 'featured';
+      render();
+      input.focus();
+      return;
+    }
+
     const topicBtn = event.target.closest('[data-search-topic]');
     if (topicBtn) {
       input.value = topicBtn.dataset.searchTopic;
@@ -186,6 +205,15 @@ function setupDelegatedListeners() {
     document.getElementById(id)?.addEventListener('change', () => {
       render();
     });
+  });
+
+  // Slash key to focus search
+  document.addEventListener('keydown', event => {
+    if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) {
+      event.preventDefault();
+      input.focus();
+      input.select();
+    }
   });
 }
 
