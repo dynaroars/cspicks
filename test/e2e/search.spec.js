@@ -232,9 +232,13 @@ test('professor cards show official roster distinctions', async ({ page }) => {
   await expect(card).toContainText('3 papers (1.5 adjusted)');
   await expect(card.getByRole('link', { name: 'ORCID' })).toHaveAttribute('href', 'https://orcid.org/0000-0001-2345-6789');
   await expect(card).toContainText('Unit: Tech');
+  await expect(card.locator('.papers-list')).toBeHidden();
   await card.locator('[data-action="toggle-papers"]').click();
+  await expect(card.locator('.papers-list')).toBeVisible();
   await expect(card.locator('.papers-list')).toContainText(`ICSE ${fixtureYear}: 2 paper(s), 1.00 adjusted`);
   await expect(card.locator('.papers-list')).toContainText(`ASE ${fixtureYear}: 1 paper(s), 0.50 adjusted`);
+  await card.locator('[data-action="toggle-papers"]').click();
+  await expect(card.locator('.papers-list')).toBeHidden();
 });
 
 test('official aliases resolve professors and schools show country and department links', async ({ page }) => {
