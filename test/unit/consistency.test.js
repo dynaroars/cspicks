@@ -17,7 +17,6 @@ const HTML_PAGES = [
 
 const EXPECTED_NAV_ITEMS = [
   '🔎 Search',
-  '🔭 Discoveries',
   '☠️ Simulator',
   '📅 CS Confs',
   '💰 Awards & Grants',

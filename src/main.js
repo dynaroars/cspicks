@@ -57,14 +57,14 @@ const isDiscoveries = params.get('view') === 'discoveries';
 function updateNavActive() {
   const searchLink = document.getElementById('nav-search');
   const discoveriesLink = document.getElementById('nav-discoveries');
-  searchLink.classList.toggle('active', !isDiscoveries);
-  discoveriesLink.classList.toggle('active', isDiscoveries);
+  searchLink?.classList.toggle('active', !isDiscoveries);
+  discoveriesLink?.classList.toggle('active', isDiscoveries);
   if (isDiscoveries) {
-    searchLink.removeAttribute('aria-current');
-    discoveriesLink.setAttribute('aria-current', 'page');
+    searchLink?.removeAttribute('aria-current');
+    discoveriesLink?.setAttribute('aria-current', 'page');
   } else {
-    discoveriesLink.removeAttribute('aria-current');
-    searchLink.setAttribute('aria-current', 'page');
+    discoveriesLink?.removeAttribute('aria-current');
+    searchLink?.setAttribute('aria-current', 'page');
   }
 }
 

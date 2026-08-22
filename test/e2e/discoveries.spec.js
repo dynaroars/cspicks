@@ -81,9 +81,9 @@ test.beforeEach(async ({ page }) => {
   await mockUpstreams(page);
 });
 
-test('the Discoveries nav link shows insight cards in place of the university/faculty lists', async ({ page }) => {
+test('the Discoveries view shows insight cards without a separate nav link', async ({ page }) => {
   await page.goto('./?view=discoveries&percapita=false');
-  await expect(page.getByRole('link', { name: '🔭 Discoveries' })).toHaveAttribute('aria-current', 'page');
+  await expect(page.locator('#nav-discoveries')).toHaveCount(0);
   // Same shell as Search - header, filter bar, search box, examples - but the
   // insight-card grid takes the place of the default university/faculty lists.
   await expect(page.locator('#filter-bar')).toBeVisible();
