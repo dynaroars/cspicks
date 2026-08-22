@@ -195,7 +195,8 @@
   display: contents;
 }
 
-.search-examples button {
+.search-examples button,
+.search-examples a {
   padding: 0.2rem 0.5rem;
   color: var(--text-secondary);
   background: transparent;
@@ -209,7 +210,8 @@
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-.search-examples button:hover {
+.search-examples button:hover,
+.search-examples a:hover {
   color: var(--text-primary);
   background: var(--hover-bg);
 }
