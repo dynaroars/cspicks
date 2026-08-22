@@ -36,6 +36,7 @@ describe('site-wide navigation and markup consistency', () => {
       assert.ok(content.includes('class="site-title-link"'), `${file} missing .site-title-link`);
       assert.ok(content.includes('class="github-link"'), `${file} missing .github-link`);
       assert.ok(content.includes('FAQ, methods and data'), `${file} missing FAQ link`);
+      assert.ok(content.includes('href="https://github.com/dynaroars/cspicks/blob/main/README.md"'), `${file} missing README documentation link`);
       assert.ok(content.includes('class="icon-link roars-link"'), `${file} missing ROARS Lab link`);
 
       // Extract top-nav contents

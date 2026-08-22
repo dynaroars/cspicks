@@ -90,7 +90,7 @@ test('simulator preserves CSRankings suffixes and accepts an exact DBLP profile 
   // The former footer links now live beside the title as icons.
   await expect(page.locator('footer')).toHaveCount(0);
   await expect(page.getByRole('link', { name: 'ROARS Lab' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'FAQ, methods and data' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'FAQ, methods and data' })).toHaveAttribute('href', /README\.md$/);
   await page.locator('#sim-univ-search').fill('George Mason');
   await page.locator('#sim-univ-results .sim-item').click();
 

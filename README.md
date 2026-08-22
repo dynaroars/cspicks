@@ -266,8 +266,7 @@ cspicks/
 ├── grants.html                       # CS research awards, fellowships & grants explorer
 ├── grants-submit.html                # Award/grant submission and edit form
 ├── simulator.html                    # Ranking simulator page
-├── FAQ.md                            # GitHub-hosted methods and data documentation
-└── README.md
+└── README.md                         # GitHub-hosted FAQ, methods, and data documentation
 ```
 
 ## 📊 Data Sources
@@ -277,6 +276,81 @@ cspicks/
 - [OpenAlex](https://openalex.org/) - Historical affiliation data
 - [NSF Award Search](https://www.nsf.gov/funding/award-search) - NSF awards, investigators, program managers, programs, dates, and intended amounts
 - **CS Research Awards & Fellowships** (`public/grants.json`) - Curated database of 85+ major CS research awards, faculty fellowships, student grants, and industry RFPs (NSF, DARPA, DOE, DoD, tech industry, and foundations)
+
+## ❓ FAQ, Methods, and Data
+
+### How are rankings calculated?
+
+CS Picks follows the CSRankings approach and uses the geometric mean of adjusted publication counts across research areas. This rewards breadth across computer science rather than dominance in only one area.
+
+```text
+Score = (product of (adjusted count + 1)) ^ (1 / number of areas)
+```
+
+Each eligible paper contributes `1.0` in total, divided equally among its authors. For example, each author of a four-author paper receives an adjusted publication count of `0.25`. CS Picks always uses this fractional-author credit.
+
+### What do the university statistics mean?
+
+- **Rank movement** compares the selected period with the immediately preceding period of equal length.
+- **Momentum** is the percentage change in adjusted publication count between those periods.
+- **Median per faculty** is the median adjusted publication count among active faculty.
+- **Top-three concentration** is the share produced by the university’s three highest-output faculty.
+- **Breadth** counts active and sustained research areas.
+- **Team-size proxy** divides raw publication count by adjusted publication count. It describes coauthor intensity, but cannot distinguish internal from cross-university collaboration.
+
+### What does History mode do?
+
+By default, every eligible paper is credited to its author’s current CSRankings institution. History mode instead attempts to credit a paper to the institution where the author was affiliated in the publication year. Historical affiliation records are estimates and can be incomplete or incorrect, especially for older years, visiting positions, and renamed institutions.
+
+### What does the Rankings checkbox do?
+
+Off by default, result lists read as plain lists of universities and people. Turning it on shows university overall and per-area ranks for the selected region, years, and conference set, and ranks people by adjusted publication count over the same selection. Equal values share a rank.
+
+### Can I compare two universities or professors?
+
+Yes. On Search and NSF Funding, type both names separated by `vs`, such as `Carnegie Mellon University vs Univ. of Illinois at Urbana-Champaign`. Both search boxes autocomplete, and the second target must be the same kind of target as the first. Search compares publication output by research area; NSF Funding compares awards, attributed funding, and matched CS faculty.
+
+### What do the conference-set options mean?
+
+- **CSRankings (Default)** uses the primary CSRankings venue set and excludes optional next-tier venues.
+- **CSRankings (All)** includes both the primary and extended CSRankings venues.
+- **CORE A\*** includes only conferences mapped to the CORE A* tier.
+- **CORE A\*/A** includes conferences mapped to either the CORE A* or A tier.
+
+Conference definitions can change upstream. CS Picks synchronizes its venue rules from CSRankings when possible and keeps a bundled fallback.
+
+### How does the ranking simulator work?
+
+Choose a target university and one or more researchers. Current faculty are modeled as removals, faculty at another ranked university as transfers, and external DBLP researchers as additions. The simulator applies their eligible publication records to the selected period and conference set, then recalculates overall and per-area ranks. Results are hypothetical and should not be interpreted as predictions, hiring recommendations, or evaluations of individuals.
+
+### Where does the data come from?
+
+- [CSRankings](https://csrankings.org/) supplies the faculty roster, publication data, venue taxonomy, and institution information.
+- The locally maintained schedule under `csconfs/data/` supplies conference dates and submission timelines. Estimated entries should be confirmed on the linked conference website. Deadline countdowns use Anywhere on Earth (UTC−12), and schedule year filters refer to the conference year.
+- Schedule records are maintained through research of official conference and sponsoring-society websites plus contributor corrections. Historical acceptance totals came from [emeryberger/csconferences](https://github.com/emeryberger/csconferences).
+- [DBLP](https://dblp.org/) supplies author-search and publication metadata used by the simulator.
+- [OpenAlex](https://openalex.org/) and manually reviewed corrections supply estimated historical affiliations.
+- [NSF Award Search](https://www.nsf.gov/funding/award-search) supplies the public award records used by the NSF funding beta.
+
+### How does the NSF Funding beta work?
+
+The synchronizer searches current CSRankings faculty as primary investigators and retains an award only when its NSF recipient matches the faculty member’s current CSRankings institution. For awards with multiple investigators, NSF’s estimated total award amount is divided equally among all PIs and co-PIs; university totals sum the shares assigned to matched current faculty. This is a matched-faculty statistic, not a university’s complete NSF portfolio.
+
+Institution names are normalized and matched to the most specific institution so branch campuses are not absorbed by a flagship. The synchronizer records roster and publication-table name variants in `public/nsf-name-crosswalk.csv`. It also distinguishes confirmed transfers and enriches collaborative projects with exact-title sibling awards while keeping each university’s local attribution unchanged.
+
+### What are the data limitations?
+
+- Historical affiliations are assembled from automated sources and manual corrections; coverage is uneven.
+- Current-roster mode assigns past work to current institutions and is not a historical department ranking.
+- Publication, author, conference, and eligibility records can change when upstream sources update.
+- The collaboration statistic is a coauthor-intensity proxy, not a measurement of cross-institution collaboration.
+- NSF investigator matching can miss name variants and deliberately excludes awards made to another institution, even when they may belong to the same faculty member’s earlier career.
+- NSF dollar totals use estimated total award amounts grouped by award year; they are not annual expenditures or fiscal-year obligations.
+- A passing Data Health audit means the calculation is internally consistent with loaded inputs, not that every deployed upstream page is identical at that moment.
+
+### Privacy, corrections, and acknowledgments
+
+CS Picks fetches public scholarly metadata on demand and does not store names entered into Search or the simulator as user-submitted personal data. To report an affiliation correction or other discrepancy, [open a GitHub issue](https://github.com/dynaroars/cspicks/issues) with the name, correction, supporting source, and applicable years. CS Picks is inspired by [CSRankings](https://csrankings.org/); historical affiliation estimates use [OpenAlex](https://openalex.org/) plus manually reviewed corrections.
 
 ## 📝 License
 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
