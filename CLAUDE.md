@@ -78,6 +78,8 @@ See "Routine Maintenance" in README.md.
   for its funding sections. Search itself carries no NSF data and never loads the snapshot.
 - `grants.html` + `src/grants/main.js` — standalone CS research awards, fellowships, and grants explorer
   over the database in `public/grants.json` (industry gifts, NSF calls, DARPA, DOE, DoD, foundations, societies).
+- `grants-submit.html` + `src/grants/submit.js` — single unified submission/correction form for proposing
+  new CS research awards or updating existing entries via GitHub Issue or email.
 - `FAQ.md` — GitHub-hosted FAQ, methodology, limitations, and data documentation. `PRODUCT.md` has the
   brand/design-principles brief (tone, anti-references, accessibility bar) worth checking before UI/CSS work.
 

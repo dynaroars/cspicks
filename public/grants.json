@@ -1964,5 +1964,450 @@
     ],
     "url": "https://www.bwfund.org/funding-opportunities/interfaces-in-science/career-awards-at-the-scientific-interface/",
     "featured": false
+  },
+  {
+    "id": "nsf-satc",
+    "name": "NSF Secure and Trustworthy Cyberspace (SaTC 2.0)",
+    "shortName": "NSF SaTC",
+    "sponsor": "National Science Foundation (NSF - CISE / SBE / EHR)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "CS faculty and research investigators in cybersecurity, privacy, cryptography, and trustworthy systems",
+    "deadline": "Annual (Small: Rolling / Open; Medium & Large: September/October)",
+    "deadlineMonth": 10,
+    "amount": "Small (00,000), Medium (,200,000), Large (,000,000+), and Center grants",
+    "summary": "NSF flagship cybersecurity research program funding foundational computer science in network security, systems privacy, hardware root-of-trust, applied cryptography, formal verification, and sociotechnical security.",
+    "eligibility": [
+      "Faculty at accredited US universities and non-profit research institutions",
+      "Open to single-investigator (Small) and collaborative multi-institution teams (Medium/Large)",
+      "Interdisciplinary proposals bridging CS with social sciences and economics encouraged"
+    ],
+    "topics": [
+      "Security",
+      "Cryptography",
+      "Systems",
+      "Operating Systems",
+      "HCI"
+    ],
+    "url": "https://www.nsf.gov/funding/opportunities/satc-secure-and-trustworthy-cyberspace",
+    "featured": true
+  },
+  {
+    "id": "nsf-ai-institutes",
+    "name": "NSF National Artificial Intelligence Research Institutes",
+    "shortName": "NSF AI Institutes",
+    "sponsor": "National Science Foundation (NSF) & Federal Partners",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Multi-university collaborative consortia of faculty and research leaders in artificial intelligence",
+    "deadline": "Biennial Calls (Preliminary Proposal in January, Full Proposal in May)",
+    "deadlineMonth": 5,
+    "amount": "Up to 0,000,000 per institute over 5 years (,000,000/year)",
+    "summary": "Large-scale national research hubs advancing foundational AI theory, neuro-symbolic learning, trustworthy autonomy, and multidisciplinary AI applications in scientific discovery, agriculture, education, and cybersecurity.",
+    "eligibility": [
+      "US higher education institutions leading multi-organization consortia",
+      "Requires substantial research vision, educational outreach, and workforce development plans"
+    ],
+    "topics": [
+      "AI/ML",
+      "Robotics",
+      "Vision",
+      "NLP",
+      "Theory",
+      "Interdisciplinary"
+    ],
+    "url": "https://www.nsf.gov/funding/opportunities/national-artificial-intelligence-research-institutes",
+    "featured": true
+  },
+  {
+    "id": "nsf-robotics-frr",
+    "name": "NSF Foundational Research in Robotics (FRR)",
+    "shortName": "NSF Robotics (FRR)",
+    "sponsor": "National Science Foundation (NSF - CISE / ENG)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Faculty and principal investigators advancing fundamental robotic intelligence and physical autonomy",
+    "deadline": "Rolling / Accepted Anytime without Deadlines",
+    "deadlineMonth": 0,
+    "amount": "00,000 to ,500,000 over 3 to 4 years",
+    "summary": "Funds core computer science and engineering breakthroughs in robotic perception, motion planning, manipulation, human-robot interaction, reinforcement learning for control, and autonomous cyber-physical systems.",
+    "eligibility": [
+      "Faculty at US degree-granting universities",
+      "Proposals must demonstrate fundamental theoretical or physical robotics contributions beyond incremental application"
+    ],
+    "topics": [
+      "Robotics",
+      "AI/ML",
+      "Vision",
+      "Systems",
+      "HCI"
+    ],
+    "url": "https://www.nsf.gov/funding/opportunities/frr-foundational-research-robotics",
+    "featured": false
+  },
+  {
+    "id": "nsf-shf",
+    "name": "NSF Software and Hardware Foundations (SHF)",
+    "shortName": "NSF SHF Core",
+    "sponsor": "National Science Foundation (NSF - CISE / CCF)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Faculty in software engineering, programming languages, compilers, computer architecture, and EDA",
+    "deadline": "Small: Accepted Anytime; Medium: November; Large: September",
+    "deadlineMonth": 11,
+    "amount": "Small (up to 00,000), Medium (up to ,200,000), Large (up to ,000,000)",
+    "summary": "The core NSF program supporting research at the boundary of hardware and software, covering software design, verification, program synthesis, compiler optimizations, energy-efficient microarchitecture, parallel architectures, and design automation.",
+    "eligibility": [
+      "Tenure-track and research faculty at US universities",
+      "Single-PI and collaborative proposals eligible"
+    ],
+    "topics": [
+      "Software Engineering",
+      "Programming Languages",
+      "Architecture",
+      "Design Automation",
+      "Logic & Verification"
+    ],
+    "url": "https://www.nsf.gov/funding/opportunities/cise-core-programs",
+    "featured": false
+  },
+  {
+    "id": "nsf-algorithmic-foundations",
+    "name": "NSF Algorithmic Foundations (AF)",
+    "shortName": "NSF AF Core",
+    "sponsor": "National Science Foundation (NSF - CISE / CCF)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Faculty and theoretical CS researchers in algorithms, complexity, and quantum computing",
+    "deadline": "Small: Accepted Anytime; Medium: November; Large: September",
+    "deadlineMonth": 11,
+    "amount": "Small (up to 00,000), Medium (up to ,200,000)",
+    "summary": "Supports foundational research in theoretical computer science, including design and analysis of algorithms, computational complexity, algorithmic game theory, randomized algorithms, computational geometry, and quantum algorithms.",
+    "eligibility": [
+      "Faculty at US colleges and universities",
+      "Proposals focused on fundamental mathematical algorithms and complexity bounds"
+    ],
+    "topics": [
+      "Theory",
+      "Algorithms",
+      "Quantum",
+      "Econ & Computation"
+    ],
+    "url": "https://www.nsf.gov/funding/opportunities/cise-core-programs",
+    "featured": false
+  },
+  {
+    "id": "nsf-cyber-physical-systems",
+    "name": "NSF Cyber-Physical Systems (CPS)",
+    "shortName": "NSF CPS",
+    "sponsor": "National Science Foundation (NSF - CISE / ENG / DHS / DOT)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Faculty researching deeply integrated computing, sensing, networking, and physical actuation",
+    "deadline": "Annual (October / November)",
+    "deadlineMonth": 10,
+    "amount": "Small (up to 00,000), Medium (up to ,200,000), Frontier (,000,000)",
+    "summary": "Funds research engineering cyber-physical systems that integrate computing algorithms with physical processes, including smart cities, autonomous vehicles, industrial IoT, medical devices, and smart power grids.",
+    "eligibility": [
+      "Faculty at US academic institutions",
+      "Encourages cross-disciplinary partnerships between CS, electrical engineering, and domain stakeholders"
+    ],
+    "topics": [
+      "Embedded & Real-Time",
+      "Systems",
+      "Robotics",
+      "Networks",
+      "Security"
+    ],
+    "url": "https://www.nsf.gov/funding/opportunities/cps-cyber-physical-systems",
+    "featured": false
+  },
+  {
+    "id": "nsf-pose",
+    "name": "NSF Pathways to Enable Open-Source Ecosystems (POSE)",
+    "shortName": "NSF POSE",
+    "sponsor": "National Science Foundation (NSF - TIP Directorate)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Faculty, research scientists, and developers managing mature academic open-source CS artifacts",
+    "deadline": "Annual (Phase I in March, Phase II in September)",
+    "deadlineMonth": 9,
+    "amount": "Phase I (Scoping: 00,000 for 1 yr), Phase II (Execution: ,500,000 for 2 yrs)",
+    "summary": "Supports scaling academic open-source software, hardware, and data tools into self-sustaining, secure, and widely adopted open-source ecosystems that solve national and societal challenges.",
+    "eligibility": [
+      "Must have an existing, publicly available open-source product with demonstrated user adoption",
+      "Open to US universities and non-profit organizations"
+    ],
+    "topics": [
+      "Software Engineering",
+      "Systems",
+      "AI/ML",
+      "Interdisciplinary"
+    ],
+    "url": "https://www.nsf.gov/funding/opportunities/pose-pathways-enable-open-source-ecosystems",
+    "featured": false
+  },
+  {
+    "id": "nsf-reu-sites",
+    "name": "NSF Research Experiences for Undergraduates (REU Sites in CS)",
+    "shortName": "NSF REU Sites",
+    "sponsor": "National Science Foundation (NSF - CISE)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Undergraduate Students"
+    ],
+    "whoFor": "Faculty PIs hosting cohorts of 8-12 undergraduate CS student researchers over 10-week summer programs",
+    "deadline": "Annual (Late August / September)",
+    "deadlineMonth": 8,
+    "amount": "50,000 to 00,000 over 3 years (stipends, housing, travel, and faculty mentoring costs)",
+    "summary": "Provides grants to CS departments and faculty to establish intensive summer research programs for undergraduate students, broadening participation in computer science graduate studies.",
+    "eligibility": [
+      "US colleges, universities, and non-profit research organizations",
+      "Student participants must be US citizens, nationals, or permanent residents"
+    ],
+    "topics": [
+      "CS Education",
+      "AI/ML",
+      "Security",
+      "Systems",
+      "Theory"
+    ],
+    "url": "https://www.nsf.gov/funding/opportunities/reu-research-experiences-undergraduates",
+    "featured": false
+  },
+  {
+    "id": "darpa-i2o-open-baa",
+    "name": "DARPA Information Innovation Office (I2O) Open BAA",
+    "shortName": "DARPA I2O BAA",
+    "sponsor": "Defense Advanced Research Projects Agency (DARPA - I2O)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "University professors, research laboratories, and industry teams proposing revolutionary computing concepts",
+    "deadline": "Open Year-Round (Open BAA HR001126S0001 through November 2026)",
+    "deadlineMonth": 0,
+    "amount": ",000,000 to 0,000,000+ multi-year contracts and grants",
+    "summary": "DARPA flagship office BAA funding non-consensus computer science in trustworthy and neuro-symbolic AI, autonomous software remediation, cyber reasoning systems, human-machine symbiosis, and resilient distributed networks.",
+    "eligibility": [
+      "Open to all academic institutions, non-profits, and industry entities worldwide",
+      "Proposals must challenge conventional paradigms and offer transformative technical leaps"
+    ],
+    "topics": [
+      "AI/ML",
+      "Security",
+      "Systems",
+      "Software Engineering",
+      "Theory"
+    ],
+    "url": "https://www.darpa.mil/our-research/offices-and-programs/information-innovation-office",
+    "featured": true
+  },
+  {
+    "id": "darpa-disruptioneering",
+    "name": "DARPA Disruptioneering & Disruption Opportunities (DOs)",
+    "shortName": "DARPA Disruptioneering",
+    "sponsor": "Defense Advanced Research Projects Agency (DARPA - DSO / I2O / MTO)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
+    "whoFor": "Faculty and innovators proposing rapid-turnaround, high-risk, high-impact exploratory CS concepts",
+    "deadline": "Rolling Open Solicitations with Short Thematic BAA Windows",
+    "deadlineMonth": 0,
+    "amount": "Up to ,000,000 for Phase 1 (9 to 18 months, with rapid 90-day evaluation)",
+    "summary": "Fast-track funding mechanism designed to quickly test radical ideas and determine whether a disruptive computing concept warrants a full-scale DARPA multi-million-dollar program.",
+    "eligibility": [
+      "Universities, non-profits, and commercial researchers",
+      "Requires concise proposals demonstrating quick feasibility prototypes within 9-18 months"
+    ],
+    "topics": [
+      "AI/ML",
+      "Architecture",
+      "Quantum",
+      "Security",
+      "Systems"
+    ],
+    "url": "https://www.darpa.mil/work-with-us/opportunities",
+    "featured": false
+  },
+  {
+    "id": "darpa-mto-open-baa",
+    "name": "DARPA Microsystems Technology Office (MTO) Open BAA",
+    "shortName": "DARPA MTO BAA",
+    "sponsor": "Defense Advanced Research Projects Agency (DARPA - MTO)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Faculty and researchers in hardware architecture, EDA, chip design, photonics, and hardware security",
+    "deadline": "Open Year-Round (Continuous BAA Submissions)",
+    "deadlineMonth": 0,
+    "amount": ",000,000 to ,000,000+",
+    "summary": "Funds revolutionary computing hardware research, including heterogeneous chiplet architectures, neuromorphic computing, optical/photonic interconnects, quantum micro-architectures, and hardware security root-of-trust.",
+    "eligibility": [
+      "Open to academic, government, and commercial entities"
+    ],
+    "topics": [
+      "Architecture",
+      "Design Automation",
+      "Hardware Security",
+      "Quantum",
+      "Embedded & Real-Time"
+    ],
+    "url": "https://www.darpa.mil/our-research/offices-and-programs/microsystems-technology-office",
+    "featured": false
+  },
+  {
+    "id": "doe-ascr-open-foa",
+    "name": "DOE Advanced Scientific Computing Research (ASCR) Open FOA",
+    "shortName": "DOE ASCR Open FOA",
+    "sponsor": "Department of Energy (DOE) Office of Science",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Faculty and scientists in high-performance computing, scientific AI/ML, and quantum computing for science",
+    "deadline": "Annual Continuously Open Call (Pre-application required, full proposal by May)",
+    "deadlineMonth": 5,
+    "amount": "00,000 to ,000,000+ per year for 3 to 5 years",
+    "summary": "Supports fundamental computer science and applied mathematics for extreme-scale supercomputing, scientific machine learning (SciML), exascale memory systems, distributed workflow orchestration, and quantum information science.",
+    "eligibility": [
+      "US academic institutions, national laboratories, and non-profits",
+      "Proposals must align with DOE scientific computational mission"
+    ],
+    "topics": [
+      "HPC",
+      "AI/ML",
+      "Systems",
+      "Quantum",
+      "Algorithms"
+    ],
+    "url": "https://science.osti.gov/ascr/Funding-Opportunities",
+    "featured": true
+  },
+  {
+    "id": "doe-scidac",
+    "name": "DOE Scientific Discovery through Advanced Computing (SciDAC)",
+    "shortName": "DOE SciDAC",
+    "sponsor": "Department of Energy (DOE - ASCR / BES / HEP / NP / FES / BER)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Collaborative multi-institutional teams linking CS algorithms researchers with domain scientists",
+    "deadline": "Periodic Multi-Year Calls (Typically Winter / Spring)",
+    "deadlineMonth": 4,
+    "amount": ",000,000 to ,000,000 per year per partnership/institute for 5 years",
+    "summary": "Creates multidisciplinary partnerships between computer science researchers and physical scientists to develop next-generation software frameworks, solvers, and AI algorithms running on DOE leadership supercomputers.",
+    "eligibility": [
+      "Academic consortia and national lab partnerships",
+      "Requires tight co-design between computer scientists and domain science teams"
+    ],
+    "topics": [
+      "HPC",
+      "Algorithms",
+      "AI/ML",
+      "Systems",
+      "Software Engineering"
+    ],
+    "url": "https://www.scidac.gov/",
+    "featured": true
+  },
+  {
+    "id": "doe-qis-centers",
+    "name": "DOE National Quantum Information Science Research Centers",
+    "shortName": "DOE Quantum Centers",
+    "sponsor": "Department of Energy (DOE) Office of Science",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Faculty and researchers in quantum algorithms, quantum architectures, and quantum error mitigation",
+    "deadline": "Periodic Center & FOA Calls",
+    "deadlineMonth": 3,
+    "amount": ",000,000 to 5,000,000 per center/project",
+    "summary": "Funds comprehensive research into quantum computing systems, quantum compilers, algorithms for quantum simulation, distributed quantum networks, and fault-tolerant quantum software stacks.",
+    "eligibility": [
+      "US universities and research institutes participating in national QIS research initiatives"
+    ],
+    "topics": [
+      "Quantum",
+      "Theory",
+      "Architecture",
+      "Algorithms"
+    ],
+    "url": "https://science.osti.gov/Initiatives/QIS",
+    "featured": false
+  },
+  {
+    "id": "doe-arpa-e-open",
+    "name": "DOE ARPA-E OPEN & Energy-Efficient Computing Calls",
+    "shortName": "DOE ARPA-E",
+    "sponsor": "Department of Energy (ARPA-E)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Faculty and innovators developing high-efficiency computing architectures, smart grid AI, and datacenter algorithms",
+    "deadline": "Periodic Open Announcements (Every 3 years + targeted topic calls)",
+    "deadlineMonth": 4,
+    "amount": "00,000 to ,000,000 per project over 2 to 3 years",
+    "summary": "Funds high-risk, transformational computing and algorithms technology that can achieve massive reductions in datacenter energy consumption, optimize power grid operations, or pioneer ultra-low-power edge computing.",
+    "eligibility": [
+      "US universities, national laboratories, startups, and large businesses",
+      "Requires bold technological departures from incremental commercial roadmaps"
+    ],
+    "topics": [
+      "Architecture",
+      "Systems",
+      "AI/ML",
+      "Design Automation",
+      "Optimization"
+    ],
+    "url": "https://arpa-e.energy.gov/funding-opportunities",
+    "featured": false
   }
 ]

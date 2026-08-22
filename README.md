@@ -264,6 +264,7 @@ cspicks/
 ├── csconfs-submit.html               # Conference submission/correction form
 ├── nsf.html                          # Nationwide NSF funding explorer
 ├── grants.html                       # CS research awards, fellowships & grants explorer
+├── grants-submit.html                # Award/grant submission and edit form
 ├── simulator.html                    # Ranking simulator page
 ├── FAQ.md                            # GitHub-hosted methods and data documentation
 └── README.md

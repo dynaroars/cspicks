@@ -296,6 +296,24 @@
   text-decoration: underline;
 }
 
+.grant-footer-btns {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.grant-edit-link {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.grant-edit-link:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
 .grant-share-btn {
   display: inline-flex;
   align-items: center;

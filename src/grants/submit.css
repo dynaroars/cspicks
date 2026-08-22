@@ -1,0 +1,255 @@
+/* ==========================================================================
+   Awards & Grants Submission / Edit Form Styles
+   ========================================================================== */
+
+.grants-submit-container {
+  width: min(820px, calc(100% - 2rem));
+  margin: 0 auto 4rem;
+}
+
+.submit-intro {
+  margin-bottom: 2rem;
+}
+
+.submit-intro h2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+.submit-intro p {
+  margin-top: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.submit-kicker a {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  text-decoration: none;
+}
+
+.submit-kicker a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.grants-submit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: var(--card-bg);
+}
+
+.submit-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.submit-section[hidden],
+[hidden] {
+  display: none !important;
+}
+
+.submit-section > label,
+.submit-section legend {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.submit-section input[type="text"],
+.submit-section input[type="url"],
+.submit-section input[type="number"],
+.submit-section select,
+.submit-section textarea {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-color);
+  color: var(--text-primary);
+  font: inherit;
+  box-sizing: border-box;
+}
+
+.submit-section textarea {
+  resize: vertical;
+}
+
+.submit-section input:focus,
+.submit-section select:focus,
+.submit-section textarea:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 1px;
+}
+
+.submit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.submit-choice {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: var(--text-primary) !important;
+  font-weight: 400 !important;
+  cursor: pointer;
+}
+
+.submit-checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  padding: 0.25rem 0;
+}
+
+.submit-help {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  margin: 0.2rem 0 0;
+}
+
+.submit-warning {
+  color: var(--impact-neg-text);
+}
+
+.submit-target {
+  position: relative;
+}
+
+.grant-correction-suggestions {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow-dropdown);
+}
+
+.grant-correction-suggestion {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.6rem 0.85rem;
+  border: 0;
+  border-bottom: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-primary);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.grant-correction-suggestion:last-child {
+  border-bottom: 0;
+}
+
+.grant-correction-suggestion span {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
+
+.grant-correction-suggestion:hover,
+.grant-correction-suggestion:focus-visible {
+  background: var(--hover-bg);
+}
+
+.submit-review-card {
+  margin-top: 1.5rem;
+  padding: 1.35rem 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+
+.submit-review-card h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+}
+
+.submit-review-card pre {
+  margin: 0.75rem 0 1.25rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.submit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.submit-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.2rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: var(--bg-color);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.submit-button:hover {
+  opacity: 0.9;
+}
+
+.submit-button-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.submit-button-secondary:hover {
+  background: var(--hover-bg);
+}
+
+@media (max-width: 640px) {
+  .grants-submit-container {
+    width: min(100% - 1rem, 820px);
+  }
+  .grants-submit-form {
+    padding: 1rem;
+  }
+  .submit-grid {
+    grid-template-columns: 1fr;
+  }
+  .submit-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .submit-button {
+    justify-content: center;
+  }
+}

@@ -12,6 +12,7 @@ export default defineConfig({
                 csconfsSubmit: resolve(__dirname, 'csconfs-submit.html'),
                 nsf: resolve(__dirname, 'nsf.html'),
                 grants: resolve(__dirname, 'grants.html'),
+                grantsSubmit: resolve(__dirname, 'grants-submit.html'),
             },
         },
     },

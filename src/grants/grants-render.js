@@ -84,9 +84,14 @@ export function renderGrantCard(grant) {
         <a href="${url}" class="grant-action-link" target="_blank" rel="noopener noreferrer">
           Official Program &amp; RFP ${EXT_ICON}
         </a>
-        <button type="button" class="grant-share-btn" data-share-grant="${escapeHtml(grant.id)}" title="Copy link to this grant" aria-label="Copy link to ${escapeHtml(grant.name)}">
-          ${LINK_ICON} <span>Copy link</span>
-        </button>
+        <div class="grant-footer-btns">
+          <a href="grants-submit.html?id=${encodeURIComponent(grant.id)}" class="grant-edit-link" title="Suggest an edit for this award">
+            ✎ Suggest update
+          </a>
+          <button type="button" class="grant-share-btn" data-share-grant="${escapeHtml(grant.id)}" title="Copy link to this grant" aria-label="Copy link to ${escapeHtml(grant.name)}">
+            ${LINK_ICON} <span>Copy link</span>
+          </button>
+        </div>
       </div>
     </article>
   `;

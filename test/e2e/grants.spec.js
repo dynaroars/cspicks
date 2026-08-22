@@ -4,7 +4,7 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   await page.goto('grants.html');
 
   // Verify header and navigation
-  await expect(page.getByRole('link', { name: '🏆 Awards & Grants' })).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByRole('link', { name: '💰 Awards & Grants' })).toHaveAttribute('aria-current', 'page');
 
   // Check search input
   const input = page.locator('#grants-search');
