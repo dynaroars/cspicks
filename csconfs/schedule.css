@@ -6,7 +6,7 @@
 .schedule-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 38%); gap: 1.5rem; padding: 1.3rem 1.4rem; }
 .schedule-card-main { min-width: 0; }
 .schedule-card-title-row { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; }
-.schedule-card-title-row h2 { margin: 0; font: 700 1.2rem/1.25 Outfit, sans-serif; }
+.schedule-card-title-row h2 { margin: 0; font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; line-height: 1.25; }
 .schedule-card-title-row a { color: var(--text-primary); text-decoration: none; }
 .schedule-card-title-row a:hover { color: var(--accent-color); text-decoration: underline; }
 .schedule-estimated, .schedule-verified { padding: .15rem .42rem; border-radius: 999px; font-size: .67rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
@@ -15,6 +15,9 @@
 @media (prefers-color-scheme: dark) {
   .schedule-estimated { color: #ffd66b; background: #4a3b12; }
   .schedule-verified { color: #86e3ad; background: #173e29; }
+  .schedule-countdown { color: #86e3ad; }
+  .schedule-countdown.is-soon { color: #ffd66b; }
+  .schedule-countdown.is-urgent { color: #fca5a5; }
 }
 .schedule-description { margin: .45rem 0 .65rem; color: var(--text-secondary); }
 .schedule-areas { display: flex; flex-wrap: wrap; gap: .35rem; margin: .5rem 0; }

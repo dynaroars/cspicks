@@ -80,7 +80,7 @@
 
 .grant-title {
   margin: 0;
-  font-family: var(--font-heading, Outfit, sans-serif);
+  font-family: var(--font-heading);
   font-size: 1.22rem;
   font-weight: 700;
   line-height: 1.3;

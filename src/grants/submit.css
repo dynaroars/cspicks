@@ -195,7 +195,7 @@
   color: var(--text-primary);
   font-size: 0.82rem;
   overflow-x: auto;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-mono);
 }
 
 .submit-actions {

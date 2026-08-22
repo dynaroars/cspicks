@@ -439,6 +439,29 @@
   gap: 1.5rem;
 }
 
+.conf-group h4 {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.conf-group-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+}
+
+.conf-group-items label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
 /* Responsive Rules */
 @media (max-width: 900px) {
   .analysis-school-metrics,

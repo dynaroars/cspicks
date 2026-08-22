@@ -182,6 +182,35 @@
   content: '✓';
 }
 
+/* Simulator Primary Action Button */
+.simulator-primary {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bg-color);
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.simulator-primary:hover {
+  opacity: 0.92;
+}
+
+.simulator-primary:active {
+  transform: translateY(1px);
+}
+
+.simulator-primary:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 /* Faculty Selection Actions */
 .sim-selection-actions {
   display: flex;
@@ -190,15 +219,6 @@
 
 .sim-selection-actions .btn-secondary {
   flex: 1;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  color: var(--text-primary);
-  background: var(--hover-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font: inherit;
-  font-size: var(--text-sm);
-  cursor: pointer;
 }
 
 .sim-faculty-list {
@@ -252,10 +272,69 @@
   font-weight: 600;
 }
 
+.candidate-action-remove {
+  display: inline-block;
+  padding: 2px 6px;
+  margin-left: 8px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--impact-neg-text);
+  background: var(--impact-neg-bg);
+  border-radius: 4px;
+}
+
+.candidate-action-transfer {
+  display: inline-block;
+  padding: 2px 6px;
+  margin-left: 8px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.12);
+  border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .candidate-action-transfer {
+    color: #93c5fd;
+    background: rgba(37, 99, 235, 0.25);
+  }
+}
+
+.candidate-badge-roster {
+  display: inline-block;
+  padding: 2px 6px;
+  margin-left: 8px;
+  font-size: 0.7em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--impact-pos-text);
+  background: var(--impact-pos-bg);
+  border-radius: 4px;
+}
+
 .candidate-stats {
   margin-top: 0.25rem;
   color: var(--text-secondary);
   font-size: 0.85rem;
+}
+
+.candidate-stats-error {
+  color: var(--impact-neg-text);
+}
+
+.candidate-source-impact {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.candidate-source-impact span:first-child {
+  margin-right: 6px;
 }
 
 .candidate-impact {

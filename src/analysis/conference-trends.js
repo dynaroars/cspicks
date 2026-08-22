@@ -1,10 +1,9 @@
 import { drawChart } from '../charts.js';
-import { filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from '../data.js';
-import { areaLabels, cleanName, escapeHtml, getConferenceLabel } from '../shared.js';
-import { buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateParityReport, calculatePerCapita, calculatePublishingEffort, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from '../metrics.js';
-import { renderInsightList, renderMetricCards } from '../analysis-ui.js';
+import { publicationMatchesConferenceSet } from '../data.js';
+import { getConferenceLabel } from '../shared.js';
+import { renderInsightList } from '../analysis-ui.js';
 import { state } from './state.js';
-import { getAnalysisData, getConferenceSet, getResearcherPatterns, getTargetName, isPublicationForTarget, renderResearcherVenueInsights } from '../analysis.js';
+import { getConferenceSet, getResearcherPatterns, getTargetName, isPublicationForTarget, renderResearcherVenueInsights } from '../analysis.js';
 import { publishedVenues, renderConferenceFilters } from './conference-filters.js';
 
 export function renderConferenceTrends() {

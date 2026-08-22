@@ -1,10 +1,9 @@
-import { drawChart } from '../charts.js';
-import { filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from '../data.js';
-import { areaLabels, cleanName, escapeHtml, fetchLatestRepoCommit, formatRelativeTime, getConferenceLabel } from '../shared.js';
-import { buildPriorPeriodData, calculateAreaMomentum, calculateCorpusDiagnostics, calculateFragility, calculateParityReport, calculatePerCapita, calculatePublishingEffort, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from '../metrics.js';
-import { renderInsightList, renderMetricCards } from '../analysis-ui.js';
+import { filterByYears } from '../data.js';
+import { escapeHtml, fetchLatestRepoCommit, formatRelativeTime } from '../shared.js';
+import { calculateCorpusDiagnostics, calculateFragility, calculateParityReport, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from '../metrics.js';
+import { renderMetricCards } from '../analysis-ui.js';
 import { state } from './state.js';
-import { getAnalysisData, getConferenceSet, getTargetName, isPublicationForTarget } from '../analysis.js';
+import { CONF_SET_LABELS, getAnalysisData, getTargetName } from '../analysis.js';
 
 // One sweep serves every school, so it is cached per region rather than per
 // school. Historical mode changes which school a publication counts for, so it

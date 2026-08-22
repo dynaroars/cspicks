@@ -281,6 +281,28 @@ button.card-header {
   }
 }
 
+.honor-acm {
+  color: #1e40af;
+  background: color-mix(in srgb, #3b82f6 12%, var(--card-bg));
+  border-color: color-mix(in srgb, #3b82f6 45%, var(--border-color));
+}
+
+@media (prefers-color-scheme: dark) {
+  .honor-acm {
+    color: #93c5fd;
+  }
+}
+
+.card-stats {
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.card-stats strong {
+  color: var(--text-primary);
+}
+
 .confidence-high {
   color: var(--impact-pos-text) !important;
 }
@@ -385,6 +407,13 @@ button.card-header {
   border: 1px solid transparent;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.faculty-tag:hover,
+.faculty-tag:focus-visible {
+  background: var(--card-bg);
+  border-color: var(--border-color);
 }
 
 .faculty-tag-stats {

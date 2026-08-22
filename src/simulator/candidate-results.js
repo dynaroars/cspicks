@@ -19,7 +19,7 @@ export function renderCandidateResults(candidates) {
             <span class="candidate-medal">❌</span>
             <div class="candidate-info">
               <div class="candidate-name">${escapeHtml(c.name)}</div>
-              <div class="candidate-stats" style="color: #ef4444;">${escapeHtml(c.error)}</div>
+              <div class="candidate-stats candidate-stats-error">${escapeHtml(c.error)}</div>
             </div>
           </div>
         </div>
@@ -32,14 +32,14 @@ export function renderCandidateResults(candidates) {
 
     let actionLabel = '';
     if (c.isRemoval) {
-      actionLabel = `<span style="font-size: 0.8em; color: #ef4444; background: #fee2e2; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">Removing</span>`;
+      actionLabel = '<span class="candidate-action-remove">Removing</span>';
     } else if (c.sourceSchool) {
-      actionLabel = `<span style="font-size: 0.8em; color: #3b82f6; background: #dbeafe; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">from ${escapeHtml(c.sourceSchool.name)}</span>`;
+      actionLabel = `<span class="candidate-action-transfer">from ${escapeHtml(c.sourceSchool.name)}</span>`;
     }
 
     let dataSourceBadge = '';
     if (c.usedCSRankings) {
-      dataSourceBadge = `<span style="font-size: 0.7em; color: #059669; background: #d1fae5; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">Roster</span>`;
+      dataSourceBadge = '<span class="candidate-badge-roster">Roster</span>';
     }
 
     let sourceImpactHtml = '';
@@ -48,8 +48,8 @@ export function renderCandidateResults(candidates) {
       const sClass = sDelta > 0 ? 'positive' : (sDelta < 0 ? 'negative' : 'neutral');
       const sText = sDelta > 0 ? `+${sDelta}` : (sDelta < 0 ? `${sDelta}` : '±0');
       sourceImpactHtml = `
-          <div style="font-size: 0.85rem; margin-top: 4px; color: #666; display: flex; align-items: center; justify-content: flex-end;">
-             <span style="margin-right: 6px;">${escapeHtml(c.sourceSchool.name)}:</span>
+          <div class="candidate-source-impact">
+             <span>${escapeHtml(c.sourceSchool.name)}:</span>
              <span class="${sClass}" style="font-weight: 600;">${sText} ranks</span>
           </div>
       `;

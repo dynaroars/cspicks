@@ -205,11 +205,10 @@ export function updateChartDefaults(Chart) {
     Chart.defaults.plugins.tooltip.titleColor = '#ffffff';
     Chart.defaults.plugins.tooltip.bodyColor = '#ffffff';
     Chart.defaults.plugins.tooltip.footerColor = '#ffffff';
-    Chart.defaults.plugins.tooltip.padding = { top: 6, bottom: 6, left: 10, right: 10 };
-    Chart.defaults.plugins.tooltip.cornerRadius = 6;
-    Chart.defaults.plugins.tooltip.titleFont = { family: 'Inter, sans-serif', size: 12, weight: '600' };
-    Chart.defaults.plugins.tooltip.bodyFont = { family: 'Inter, sans-serif', size: 12, weight: '400' };
-    Chart.defaults.plugins.tooltip.footerFont = { family: 'Inter, sans-serif', size: 12, weight: '400' };
+    const fontStack = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+    Chart.defaults.plugins.tooltip.titleFont = { family: fontStack, size: 12, weight: '600' };
+    Chart.defaults.plugins.tooltip.bodyFont = { family: fontStack, size: 12, weight: '400' };
+    Chart.defaults.plugins.tooltip.footerFont = { family: fontStack, size: 12, weight: '400' };
     Chart.defaults.plugins.tooltip.boxPadding = 4;
   }
 }

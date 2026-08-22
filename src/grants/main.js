@@ -72,7 +72,7 @@ function render() {
       <div class="universal-suggestion-empty" style="padding: 3rem 1rem; text-align: center; color: var(--text-secondary);">
         <h3>No matching awards or grants found</h3>
         <p style="margin-top: 0.5rem;">Try broadening your search terms or clearing some filters.</p>
-        <button type="button" class="btn-secondary" id="reset-grants-filters" style="margin-top: 1rem; padding: 0.5rem 1.25rem; border-radius: 8px; cursor: pointer;">Reset all filters</button>
+        <button type="button" class="btn-secondary" id="reset-grants-filters" style="margin-top: 1rem;">Reset all filters</button>
       </div>
     `;
   } else {

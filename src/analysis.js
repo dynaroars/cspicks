@@ -418,7 +418,7 @@ function renderCollaborationStats() {
     `;
 }
 
-const CONF_SET_LABELS = {
+export const CONF_SET_LABELS = {
     'csrankings-default': 'CSRankings default',
     csrankings: 'CSRankings all',
     'core-a': 'CORE A + A*',
