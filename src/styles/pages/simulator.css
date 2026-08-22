@@ -52,19 +52,15 @@
 }
 
 .simulator-filters {
-  width: min(100%, 620px);
-  max-width: 620px;
-  margin: 0 auto 1.5rem;
-  padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-}
-
-.simulator-filters #year-filter-group {
-  flex: 1 1 220px;
-}
-
-.simulator-filters .conference-set-control {
-  flex: 1 1 270px;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 1.5rem;
+  padding: 0.35rem 0;
 }
 
 .simulator-workflow {

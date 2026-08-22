@@ -276,7 +276,7 @@ cspicks/
 - [DBLP](https://dblp.org/) - Publication metadata and author profiles
 - [OpenAlex](https://openalex.org/) - Historical affiliation data
 - [NSF Award Search](https://www.nsf.gov/funding/award-search) - NSF awards, investigators, program managers, programs, dates, and intended amounts
-- **CS Research Awards & Fellowships** (`public/grants.json`) - Curated database of 65+ major CS research awards, faculty fellowships, student grants, and industry RFPs (NSF, DARPA, DOE, DoD, tech industry, and foundations)
+- **CS Research Awards & Fellowships** (`public/grants.json`) - Curated database of 85+ major CS research awards, faculty fellowships, student grants, and industry RFPs (NSF, DARPA, DOE, DoD, tech industry, and foundations)
 
 ## 📝 License
 Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.

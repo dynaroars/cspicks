@@ -165,69 +165,89 @@ Discoveries must be reproducible from the same data every other page uses — ne
 Keep the `help` text honest about methodology (thresholds, "prior period" definition, exclusions) — it's the
 only methodology note most readers see.
 
-## 🏆 Crawling & Updating CS Research Awards & Grants (`public/grants.json`)
+## 💰 Crawling & Updating CS Research Awards, Grants & Fellowships (`public/grants.json`)
 
-The `grants.html` explorer reads from `public/grants.json`. Future AI agents can systematically discover, verify, and update funding opportunities using this standardized workflow without having to re-analyze the whole system:
+The `grants.html` explorer reads from `public/grants.json` and supports user submissions/corrections via `grants-submit.html`. Future AI agents can systematically discover, verify, and update funding opportunities using this standardized workflow without having to re-analyze the whole system:
 
 ### 1. Targeted Web Search Queries by Category
 When searching the web for new calls, updated deadlines, or funding programs, run these high-yield query patterns:
 
-- **Federal Agencies (US & Global)**:
-  - NSF: `"NSF CAREER solicitation computer science"`, `"NSF CRII solicitation CISE"`, `"NSF CISE Core programs medium small"`
-  - DARPA: `"DARPA Young Faculty Award YFA solicitation"`, `"DARPA I2O open BAA"`, `"DARPA DSO office-wide BAA"`
-  - DOE: `"DOE Early Career Research Program FOA computer science"`, `"DOE CSGF Computational Science Graduate Fellowship"`
+- **Federal Agencies (Faculty & Lab Solicitations)**:
+  - NSF: `"NSF CAREER solicitation computer science"`, `"NSF CRII solicitation CISE"`, `"NSF CISE Core programs medium small"`, `"NSF SaTC Secure and Trustworthy Cyberspace"`, `"NSF AI Institutes"`, `"NSF FRR Foundational Research in Robotics"`, `"NSF SHF Software Hardware Foundations"`, `"NSF CPS Cyber-Physical Systems"`, `"NSF POSE Open-Source Ecosystems"`
+  - DARPA: `"DARPA Young Faculty Award YFA solicitation"`, `"DARPA I2O open BAA HR001126S0001"`, `"DARPA Disruptioneering Disruption Opportunities"`, `"DARPA MTO open BAA"`
+  - DOE: `"DOE Early Career Research Program FOA computer science"`, `"DOE ASCR open FOA"`, `"DOE SciDAC partnerships institutes"`, `"DOE Quantum Information Science Centers"`, `"DOE ARPA-E open energy computing"`
   - DoD / Service Labs: `"ONR Young Investigator Program YIP"`, `"AFOSR Young Investigator Program BAA"`, `"ARO Early Career Program Scientists Engineers"`
-  - NIH & NASA: `"NIH R01 computer science machine learning"`, `"NASA Space Technology Graduate Research Opportunities NSTGRO"`
+  - NIH & NASA: `"NIH R01 computer science biomedical AI"`, `"NASA Early Career Faculty CS robotics"`
 
-- **Tech Industry Research & Frontier AI**:
-  - Google: `"Google Research Scholar Program faculty"`, `"Google PhD Fellowship computer science"`, `"Google Academic Research Awards"`
-  - Microsoft: `"Microsoft Research PhD Fellowship"`, `"Microsoft Research Faculty Fellowship"`
-  - Meta: `"Meta Research PhD Fellowship"`, `"Meta Research RFP grants AI systems security"`
-  - Amazon: `"Amazon Research Awards ARA call for proposals"`, `"Amazon PhD Fellowship"`
-  - Apple & NVIDIA: `"Apple Scholars in AI/ML PhD Fellowship"`, `"NVIDIA Graduate Fellowship Program"`, `"NVIDIA Academic Hardware Grant"`
-  - AI Frontier Labs: `"OpenAI Researcher Access Program academic"`, `"OpenAI academic frontier model grants"`, `"Anthropic researcher access program"`
-  - Other Tech: `"<Company> Research Award OR Fellowship computer science"` (Adobe, Qualcomm, IBM, Samsung GRO, Sony Research Award, Bloomberg, Cisco, Snap, Intel)
+- **Student Fellowships & Early-Career Grants (Undergrad, Master's, PhD)**:
+  - Federal / National: `"NSF Graduate Research Fellowship Program GRFP"`, `"DoD NDSEG Fellowship National Defense Science Engineering"`, `"DOE CSGF Computational Science Graduate Fellowship"`, `"DOE NNSA SSGF Stewardship Science"`, `"DOE NNSA LRGF Laboratory Residency"`, `"NSF CyberCorps Scholarship for Service SFS"`, `"DoD SMART Scholarship"`, `"NASA Space Technology Graduate Research Opportunities NSTGRO"`, `"NSF REU Sites Computer Science"`
+  - Industry PhD Fellowships: `"Google PhD Fellowship computer science"`, `"Meta Research PhD Fellowship"`, `"Microsoft Research PhD Fellowship"`, `"Microsoft Research Ada Lovelace Fellowship"`, `"Apple Scholars in AI/ML PhD Fellowship"`, `"NVIDIA Graduate Fellowship Program"`, `"Amazon PhD Fellowship"`, `"Jane Street Graduate Research Fellowship"`, `"Two Sigma PhD Fellowship"`, `"IBM PhD Fellowship Program"`, `"Qualcomm Innovation Fellowship QInF"`, `"Adobe Research Fellowship"`, `"Bloomberg Data Science PhD Fellowship"`, `"Snap Research Fellowship"`, `"Gen Digital Symantec Graduate Fellowship"`
+  - Foundations & Societies: `"Hertz Foundation Graduate Fellowship computing"`, `"National GEM Consortium Graduate Fellowship"`, `"Ford Foundation Predoctoral Fellowship"`, `"CRA Outstanding Undergraduate Researcher Award"`, `"CRA-WP Graduate Research Fellowship"`, `"ACM Doctoral Dissertation Award"`, `"NCWIT Collegiate Award"`
 
-- **Foundations, Non-Profits & Societies**:
-  - Foundations: `"Alfred P. Sloan Research Fellowships Computer Science"`, `"Packard Fellowships Science Engineering"`, `"Simons Investigators Theoretical Computer Science"`, `"Schmidt Sciences AI2050 Fellowships"`, `"Hertz Foundation Graduate Fellowship"`, `"National GEM Consortium Fellowship"`, `"Burroughs Wellcome Fund Career Awards at the Scientific Interface"`
-  - Societies: `"CRA Outstanding Undergraduate Researcher Award"`, `"CRA-WP Graduate Research Fellowship"`, `"ACM Doctoral Dissertation Award"`
+- **Tech Industry Faculty Awards & Academic RFPs**:
+  - Google: `"Google Research Scholar Program faculty"`, `"Google Academic Research Awards"`
+  - Microsoft: `"Microsoft Research Faculty Fellowship"`, `"Microsoft Accelerate Foundation Models"`
+  - Meta: `"Meta Research RFP grants AI systems security"`
+  - Amazon: `"Amazon Research Awards ARA call for proposals"`
+  - NVIDIA: `"NVIDIA Academic Hardware Grant"`, `"NVIDIA Applied Research Accelerator"`
+  - Frontier AI Labs: `"OpenAI Researcher Access Program academic"`, `"OpenAI academic frontier model grants"`, `"Anthropic researcher access program"`
+  - Other Industry: `"<Company> Research Award OR Faculty Fellowship computer science"` (Adobe, Qualcomm, IBM, Sony Research Award, Samsung GRO, Bloomberg, Cisco, Snap, Broadcom)
 
-### 2. Schema Specification for `public/grants.json`
+- **Prestigious Foundations & Non-Profits**:
+  - `"Alfred P. Sloan Research Fellowships Computer Science"`, `"David and Lucile Packard Fellowships Science Engineering"`, `"Simons Investigators Theoretical Computer Science"`, `"Schmidt Sciences AI2050 Fellowships"`, `"Burroughs Wellcome Fund Career Awards at the Scientific Interface CASI"`
+
+### 2. Standardized Audience Taxonomy
+In `targetAudience`, always use these exact strings to ensure dropdown filters work correctly:
+- `"Faculty"`: Tenure-track, tenured, and research faculty.
+- `"PhD Students"`: Doctoral candidates.
+- `"Undergraduate Students"`: College undergraduates and rising seniors.
+- `"Master's Students"`: MS / professional graduate students.
+- `"Postdocs"`: Postdoctoral scholars and fellows.
+
+### 3. Schema Specification for `public/grants.json`
 Every entry in `public/grants.json` MUST adhere to this structure:
 ```json
 {
   "id": "unique-kebab-case-id",
   "name": "Full Formal Name of Award or Solicitation",
   "shortName": "Concise Short Name",
-  "sponsor": "Sponsoring Agency or Company (e.g. NSF, Google Research, DARPA)",
+  "sponsor": "Sponsoring Agency or Company (e.g. NSF, Google Research, DARPA, DOE)",
   "sponsorCategory": "Government | Industry | Non-Profit / Foundation | Professional Society",
   "targetAudience": ["Faculty", "PhD Students", "Undergraduate Students", "Postdocs"],
-  "whoFor": "Clear, human-readable audience description (e.g., Untenured Assistant Professors, 3rd-year PhD students)",
-  "deadline": "Clear description of deadline / cycle (e.g., Annual (Late July), Rolling / Year-Round)",
-  "deadlineMonth": 0,
-  "amount": "Funding amount and perks (e.g., $500,000+ over 5 years, $42,000/yr stipend + tuition)",
+  "whoFor": "Clear, human-readable audience description (e.g., 1st/2nd-year PhD students, Untenured Assistant Professors)",
+  "deadline": "Clear description of deadline / cycle (e.g., Annual (Late October), Rolling / Open)",
+  "deadlineMonth": 10,
+  "amount": "Funding amount and perks (e.g., $37,000/yr stipend + tuition, $500,000+ over 5 years)",
   "summary": "1-2 sentence description of scope, purpose, and research goals.",
   "eligibility": [
-    "Key eligibility rule 1",
-    "Key eligibility rule 2"
+    "Key eligibility rule 1 (e.g. US citizenship / international eligibility)",
+    "Key eligibility rule 2 (e.g. university enrollment or tenure-track status)"
   ],
-  "topics": ["AI/ML", "Systems", "Security & Privacy", "Theory", "Robotics", "HCI"],
+  "topics": ["AI/ML", "Systems", "Security", "Theory", "Robotics", "HPC", "Quantum"],
   "url": "https://official-program-or-rfp-url.org",
   "featured": true
 }
 ```
-*Note on `deadlineMonth`*: Set to `1..12` for the primary annual deadline month, or `0` for rolling/year-round/open calls (used by chronological sorting).
+*Note on `deadlineMonth`*: Set to `1..12` for the primary annual deadline month, or `0` for rolling/year-round/open calls (used for chronological sorting).
 
-### 3. Verification & Validation Commands
+### 4. Reviewing User Submissions (`grants-submit.html`)
+When a user submits a new award proposal or edit via `grants-submit.html`:
+1. The submission generates structured JSON with the official URL, name, sponsor, audience, and eligibility details.
+2. Review the cited official program URL to verify legitimacy, deadline cycle, and funding terms.
+3. Add or update the corresponding record in `public/grants.json`.
+4. Run validation commands below before committing.
+
+### 5. Verification & Validation Commands
 After adding or modifying grants in `public/grants.json`:
 ```bash
-npm test                      # Runs test/unit/grants.test.js (asserts schema, unique IDs, and filter integrity)
-npm run build                 # Verifies Vite bundle compilation and asset generation
-npx playwright test test/e2e/grants.spec.js  # Runs Playwright E2E verification
+npm test                                            # Runs test/unit/*.test.js (asserts schema completeness, unique IDs, and filter integrity)
+npm run build                                       # Verifies Vite multi-page bundle compilation
+npx playwright test test/e2e/grants.spec.js test/e2e/grants-submit.spec.js  # Runs Playwright E2E verification
 ```
 
 ## Testing notes
 
 - `test/unit/*.test.js` uses Node's native test runner (`node --test`).
-- `test/e2e/*.spec.js` uses Playwright to test all pages (`index.html`, `simulator.html`, `csconfs.html`, `nsf.html`, `grants.html`).
+- `test/e2e/*.spec.js` uses Playwright to test all pages (`index.html`, `simulator.html`, `csconfs.html`, `csconfs-submit.html`, `grants.html`, `grants-submit.html`, `nsf.html`).
+
 
