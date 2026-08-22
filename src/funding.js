@@ -3,7 +3,7 @@ import { parseComparisonQuery } from './comparison.js';
 import { compareNumber, renderComparisonNotice, renderScoreboard } from './compare-view.js';
 import { createFilterBar } from './filters.js';
 import { renderInfiniteLists } from './search-results.js';
-import { cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
+import { cleanName, escapeHtml, fetchLatestRepoCommit, formatRelativeTime, getInstitutionShortName } from './shared.js';
 import { createSuggestionBox, rankSuggestions } from './suggestion-box.js';
 import { initTooltipPositioning } from './tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
@@ -40,9 +40,24 @@ function renderDataHealth() {
       <div class="diagnostic-stat"><span>Program managers</span><strong>${percentage(managerCount)}%</strong><small>${managerCount.toLocaleString()} awards populated</small></div>
       <div class="diagnostic-stat"><span>Project dates</span><strong>${percentage(datedCount)}%</strong><small>${datedCount.toLocaleString()} awards with start and end dates</small></div>
       <div class="diagnostic-stat"><span>Snapshot synchronized</span><strong>${escapeHtml(syncText)}</strong><small>schema version ${escapeHtml(String(dataset.schemaVersion || 'unknown'))}</small></div>
+      <div class="diagnostic-stat"><span>Repository updated</span><strong id="nsf-repo-updated">Checking...</strong><small><a id="nsf-repo-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer">dynaroars/cspicks</a></small></div>
     </div>
     <div class="data-caveat"><strong>Scope limitation:</strong> Matching is limited to current CS faculty on the roster and may miss name variants or prior affiliations. Intended amounts are divided equally among listed PIs and co-PIs.</div>
   `;
+
+  fetchLatestRepoCommit().then(commit => {
+    const updatedEl = document.getElementById('nsf-repo-updated');
+    const linkEl = document.getElementById('nsf-repo-link');
+    if (updatedEl && commit?.date) {
+      updatedEl.textContent = formatRelativeTime(commit.date);
+    } else if (updatedEl) {
+      updatedEl.textContent = 'Active';
+    }
+    if (linkEl && commit?.sha) {
+      linkEl.href = commit.url || 'https://github.com/dynaroars/cspicks';
+      linkEl.textContent = `commit ${commit.sha}`;
+    }
+  });
 }
 
 // The panel floats in a fixed corner instead of sitting inline in the page,

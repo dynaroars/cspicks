@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import test from 'node:test';
 
 import { coreAMap, fetchCsv, filterByYears, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet } from '../../src/data.js';
-import { areaLabels, detectRegionFromLocales, encodeInlineValue, escapeHtml, getInstitutionShortName, safeExternalUrl, scoreSuggestionMatch } from '../../src/shared.js';
+import { areaLabels, detectRegionFromLocales, encodeInlineValue, escapeHtml, formatRelativeTime, getInstitutionShortName, safeExternalUrl, scoreSuggestionMatch } from '../../src/shared.js';
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../../src/simulation.js';
 import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl, topCoauthorsInWindow } from '../../src/dblp.js';
 import { parseCsrankingsRules } from '../../src/csrankings-rules.js';
@@ -273,6 +273,15 @@ test('rendering helpers neutralize markup and unsafe URLs', () => {
   assert.equal(getInstitutionShortName('George Mason University'), 'GMU');
   // No table entry and no suffix to drop: the name passes through untouched.
   assert.equal(getInstitutionShortName('Unmapped Institute of Technology'), 'Unmapped Institute of Technology');
+
+  const now = 1700000000000;
+  assert.equal(formatRelativeTime(now - 10000, now), 'just now');
+  assert.equal(formatRelativeTime(now - 60000, now), '1 min ago');
+  assert.equal(formatRelativeTime(now - 180000, now), '3 mins ago');
+  assert.equal(formatRelativeTime(now - 7200000, now), '2 hours ago');
+  assert.equal(formatRelativeTime(now - 86400000, now), 'yesterday');
+  assert.equal(formatRelativeTime(now - 86400000 * 5, now), '5 days ago');
+  assert.equal(formatRelativeTime('invalid-date', now), 'Unknown');
 });
 
 test('fetchCsv rejects HTTP failures', async () => {

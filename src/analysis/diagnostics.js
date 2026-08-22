@@ -1,6 +1,6 @@
 import { drawChart } from '../charts.js';
 import { filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from '../data.js';
-import { areaLabels, cleanName, escapeHtml, getConferenceLabel } from '../shared.js';
+import { areaLabels, cleanName, escapeHtml, fetchLatestRepoCommit, formatRelativeTime, getConferenceLabel } from '../shared.js';
 import { buildPriorPeriodData, calculateAreaMomentum, calculateCorpusDiagnostics, calculateFragility, calculateParityReport, calculatePerCapita, calculatePublishingEffort, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from '../metrics.js';
 import { renderInsightList, renderMetricCards } from '../analysis-ui.js';
 import { state } from './state.js';
@@ -165,6 +165,7 @@ export function renderDataHealth() {
             <div class="diagnostic-stat"><span>Institution metadata</span><strong>${selectedReport.institutionCoverage.toFixed(0)}%</strong><small>country or region present</small></div>
             <div class="diagnostic-stat"><span>Author profile links</span><strong>${selectedReport.profileCoverage.toFixed(0)}%</strong><small>homepage or scholar ID mapped</small></div>
             <div class="diagnostic-stat"><span>Venue rules checked</span><strong>${escapeHtml(syncText)}</strong><small>upstream venue parser · ${escapeHtml(state.activeVenueRules.sourceVersion || 'bundled fallback')}</small></div>
+            <div class="diagnostic-stat"><span>Repository updated</span><strong id="health-repo-updated">Checking...</strong><small><a id="health-repo-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer">dynaroars/cspicks</a></small></div>
         </div>
 
         <h3>Field Diversity & Information Entropy</h3>
@@ -184,4 +185,18 @@ export function renderDataHealth() {
 
         <div class="data-caveat"><strong>What “matches” means:</strong> CSPicks recomputes the selected region and years with CSRankings’ default venues, current affiliations, total department scoring, and the same upstream CSV inputs. It verifies internal totals and rank ordering. CSRankings does not publish a static result table API, so a brief difference can still occur if csrankings.org has deployed newer source data than this browser session.</div>
     `;
+
+    fetchLatestRepoCommit().then(commit => {
+        const updatedEl = document.getElementById('health-repo-updated');
+        const linkEl = document.getElementById('health-repo-link');
+        if (updatedEl && commit?.date) {
+            updatedEl.textContent = formatRelativeTime(commit.date);
+        } else if (updatedEl) {
+            updatedEl.textContent = 'Active';
+        }
+        if (linkEl && commit?.sha) {
+            linkEl.href = commit.url || 'https://github.com/dynaroars/cspicks';
+            linkEl.textContent = `commit ${commit.sha}`;
+        }
+    });
 }
