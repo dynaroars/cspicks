@@ -50,14 +50,14 @@
 
 .search-container input {
   width: 100%;
-  height: 66px;
-  padding: 0 3.5rem 0 1.5rem;
+  height: 48px;
+  padding: 0 3.25rem 0 1.25rem;
   color: var(--text-primary);
   background: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: 18px;
-  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
-  font-size: 1.15rem;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+  font-size: 1.05rem;
   font-family: inherit;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -79,10 +79,10 @@
 /* Search Magnifying Glass Icon */
 .universal-search::after {
   position: absolute;
-  top: 21px;
-  right: 1.4rem;
-  width: 20px;
-  height: 20px;
+  top: 15px;
+  right: 1.35rem;
+  width: 18px;
+  height: 18px;
   border: 2px solid var(--text-secondary);
   border-radius: 50%;
   content: '';
@@ -92,10 +92,10 @@
 
 .universal-search::before {
   position: absolute;
-  top: 39px;
-  right: 1.25rem;
+  top: 30px;
+  right: 1.2rem;
   z-index: 1;
-  width: 8px;
+  width: 7px;
   height: 2px;
   background: var(--text-secondary);
   content: '';
@@ -342,7 +342,7 @@ option {
   background: transparent;
   border: 1px solid transparent;
   border-radius: 8px;
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   font-weight: 500;
   line-height: 1.25;
   white-space: nowrap;
