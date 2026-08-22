@@ -8,7 +8,7 @@ import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../../src/
 import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl, topCoauthorsInWindow } from '../../src/dblp.js';
 import { parseCsrankingsRules } from '../../src/csrankings-rules.js';
 import { renderSchoolCard } from '../../src/search-cards.js';
-import { calculateAreaMomentum, calculateCorpusDiagnostics, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../../src/metrics.js';
+import { applyPerCapitaRanks, calculateAreaMomentum, calculateCorpusDiagnostics, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../../src/metrics.js';
 import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../../src/nsf.js';
 import { aoeDeadline, conferenceStart, deadlineStatus, filterSchedule, formatCalendarDate, groupConferences, scheduleSuggestions } from '../../csconfs/schedule-data.js';
 import { renderScheduleCard } from '../../csconfs/schedule-render.js';
@@ -468,6 +468,11 @@ test('per-faculty ranking reorders the field and ignores tiny departments', () =
   // One prolific person is not a department: below the floor it is omitted.
   assert.equal(perCapita.some(row => row.name === 'Tiny Institute'), false);
   assert.equal(calculatePerCapita(data, { minFaculty: 1 })[0].name, 'Tiny Institute');
+
+  applyPerCapitaRanks(data);
+  assert.equal(data.schools['Small College'].rank, 1);
+  assert.equal(data.schools['Big University'].rank, 2);
+  assert.equal(data.schools['Tiny Institute'].rank, null);
 });
 
 test('fragility counts the departures that move a university out of a rank band', () => {

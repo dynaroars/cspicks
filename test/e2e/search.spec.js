@@ -299,6 +299,18 @@ test('rankings toggle ranks universities and is remembered', async ({ page }) =>
   await expect(page.locator('#school-results .result-position')).toHaveCount(0);
 });
 
+test('university card reflects per-capita rank when Show Rankings and Per capita are enabled', async ({ page }) => {
+  await page.goto('./?q=George%20Mason%20University&rankings=true&percapita=false');
+  await expect(page.locator('#school-results .card')).toBeVisible();
+  await expect(page.locator('#school-results .result-position')).toHaveCount(1);
+  await page.locator('#main-search').blur();
+
+  await page.locator('#per-capita-mode').check();
+  await expect(page).toHaveURL(/percapita=true/);
+  // In the test fixture, GMU has < 5 faculty so it has no per-capita rank
+  await expect(page.locator('#school-results .result-position')).toHaveCount(0);
+});
+
 test('data health audits CSRankings default independently of the selected venue set', async ({ page }) => {
   await page.goto('./?confSet=core&percapita=true');
   await page.locator('#data-health-toggle').click();

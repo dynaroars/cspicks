@@ -2,7 +2,7 @@ import { drawChart, onThemeChange } from './charts.js';
 import { fetchFrequentCoauthors } from './dblp.js';
 import { filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from './data.js';
 import { areaLabels, cleanName, escapeHtml, getConferenceLabel } from './shared.js';
-import { buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateParityReport, calculatePerCapita, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from './metrics.js';
+import { applyPerCapitaRanks, buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateParityReport, calculatePerCapita, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from './metrics.js';
 import { renderInsightList, renderMetricCards } from './analysis-ui.js';
 import bundledRules from './csrankings-rules.generated.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
@@ -217,9 +217,13 @@ function setupTabs() {
 }
 
 export function getAnalysisData() {
-    const { startYear: start, endYear: end, region, confSet, historyMap, aliasMap } = state.filters;
+    const { startYear: start, endYear: end, region, confSet, historyMap, aliasMap, perCapita } = state.filters;
     const current = filterByYears(state.rawData, start, end, region, historyMap, aliasMap, confSet);
     const prior = buildPriorPeriodData(state.rawData, start, end, region, historyMap, aliasMap, confSet);
+    if (perCapita) {
+        applyPerCapitaRanks(current);
+        applyPerCapitaRanks(prior);
+    }
     return { current, prior, start, end, confSet };
 }
 

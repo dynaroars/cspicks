@@ -2,7 +2,7 @@ import { loadData, publicationMatchesConferenceSet, schoolAliases } from './data
 import { createFilterBar } from './filters.js';
 import { initAnalysis, refreshAnalysis, setAnalysisTarget } from './analysis.js';
 import { areaLabels, cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
-import { buildPriorPeriodData } from './metrics.js';
+import { applyPerCapitaRanks, buildPriorPeriodData } from './metrics.js';
 import { renderProfessorCard as renderProfessorCardView, renderSchoolCard as renderSchoolCardView } from './search-cards.js';
 import { clearSearchSections, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
 import { createDblpAuthorSearch } from './dblp-search-ui.js';
@@ -310,6 +310,9 @@ function updatePriorData() {
     filters.aliasMap,
     filters.confSet
   );
+  if (filters.perCapita) {
+    applyPerCapitaRanks(priorAppData);
+  }
 }
 
 function setupSearch() {

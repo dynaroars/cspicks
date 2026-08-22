@@ -1,4 +1,5 @@
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadAffiliationData, normalizeConferenceSet } from './data.js';
+import { applyPerCapitaRanks } from './metrics/per-capita.js';
 import { getInitialRegion, rememberRegion } from './shared.js';
 
 // Every page shows the same "region / years / conference set / rankings /
@@ -236,8 +237,12 @@ export function createFilterBar(mount, {
     },
 
     apply(rawData) {
-      return filterByYears(rawData, state.startYear, state.endYear, state.region,
+      const data = filterByYears(rawData, state.startYear, state.endYear, state.region,
         controller.historyMap, controller.aliasMap, state.confSet);
+      if (state.perCapita) {
+        applyPerCapitaRanks(data);
+      }
+      return data;
     },
 
     // Writes the shared filter params so every page produces the same URL shape.
