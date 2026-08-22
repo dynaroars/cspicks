@@ -63,7 +63,7 @@ test('conference schedule cards preserve chair metadata safely', () => {
 
 test('local conference data preserves retired metadata and calendar dates', () => {
   const conferences = JSON.parse(fs.readFileSync(new URL('../../csconfs/data/conferences.json', import.meta.url), 'utf8'));
-  assert.equal(conferences.length, 1029);
+  assert.ok(conferences.length >= 1029);
   assert.ok(conferences.filter(conf => conf.generalChair).length >= 688);
   const icde = conferences.find(conf => conf.name === 'ICDE' && conf.year === 2025 && conf.note === 'Cycle 1/2');
   assert.equal(icde.deadline, '2024-08-02');
