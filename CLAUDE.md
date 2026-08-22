@@ -17,7 +17,6 @@ npm test          # run the Node.js unit tests (test/data.test.js)
 npm run test:e2e  # Playwright e2e tests (test/e2e/); auto-starts the dev server on :4173
 npm run build      # production build to dist/ (multi-page: index, simulator, funding)
 npm run preview    # preview the production build
-npm run deploy      # build + postbuild + publish dist/ to GitHub Pages (gh-pages branch)
 ```
 
 Run a single Node unit test with `node --test-name-pattern="<substring>" test/data.test.js` (it's plain
