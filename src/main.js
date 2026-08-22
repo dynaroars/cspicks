@@ -430,7 +430,12 @@ function discoveryExampleItems() {
   const insights = calculateDiscoveryInsights(appData, priorAppData);
   const subfields = calculateSubfieldDiscoveries(appData, priorAppData);
   const short = name => getInstitutionShortName(name);
-  const add = (label, href, title) => examples.push({ label, href, title });
+  const discoveryHref = cardId => {
+    const params = filters.toParams();
+    params.set('view', 'discoveries');
+    return `index.html?${params.toString()}#${cardId}`;
+  };
+  const add = (label, cardId, title) => examples.push({ label, href: discoveryHref(cardId), title });
 
   sample(insights.rankClimbers, 1).forEach(item => {
     add(`${short(item.name)} rose ${item.metrics.rankDelta} spots`, 'discovery-biggest-rank-gains', 'View this rank-gain discovery');
