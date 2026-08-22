@@ -51,4 +51,18 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   const exampleBtn = page.locator('#grants-examples button').first();
   await exampleBtn.click();
   expect(await input.inputValue()).not.toBe('');
+
+  // Test Empty State and Reset All Filters Button
+  await input.fill('nonexistentawardxyz12345');
+  await expect(page.locator('.grant-card')).toHaveCount(0);
+  const resetBtn = page.locator('#reset-grants-filters');
+  await expect(resetBtn).toBeVisible();
+  await resetBtn.click();
+  await expect(input).toHaveValue('');
+  await expect(page.locator('.grant-card')).toHaveCount(initialCount);
+
+  // Test Keyboard Shortcut '/' to focus search input
+  await page.locator('header').click();
+  await page.keyboard.press('/');
+  await expect(input).toBeFocused();
 });
