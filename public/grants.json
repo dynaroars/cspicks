@@ -2409,5 +2409,211 @@
     ],
     "url": "https://arpa-e.energy.gov/funding-opportunities",
     "featured": false
+  },
+  {
+    "id": "nsf-cybercorps-sfs",
+    "name": "NSF CyberCorps: Scholarship for Service (SFS)",
+    "shortName": "NSF CyberCorps SFS",
+    "sponsor": "National Science Foundation (NSF) & Cybersecurity and Infrastructure Security Agency (CISA)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Undergraduate Students",
+      "Master's Students",
+      "PhD Students"
+    ],
+    "whoFor": "Undergraduate, Master's, and PhD students in computer science, cybersecurity, and information assurance",
+    "deadline": "Institutional Deadlines (Varies by participating university; typically Fall/Spring cycles)",
+    "deadlineMonth": 11,
+    "amount": "Full university tuition and fees + annual stipend (7,000 for undergrads, 7,000 for graduate students) + ,000 health insurance/professional allowance per year for up to 3 years",
+    "summary": "Prestige federal scholarship-for-service providing 100% full tuition and substantial living stipends in exchange for post-graduation service in federal, state, or tribal cybersecurity roles.",
+    "eligibility": [
+      "US Citizens or Permanent Residents enrolled full-time at an SFS-participating university",
+      "Undergraduate juniors/seniors, Master's, or PhD students in CS or cybersecurity",
+      "Ability to obtain federal security clearance and complete summer internships"
+    ],
+    "topics": [
+      "Security",
+      "Cybersecurity",
+      "Systems",
+      "Cryptography",
+      "Networks",
+      "Operating Systems"
+    ],
+    "url": "https://www.sfs.opm.gov/",
+    "featured": true
+  },
+  {
+    "id": "doe-nnsa-ssgf",
+    "name": "Department of Energy NNSA Stewardship Science Graduate Fellowship (DOE SSGF)",
+    "shortName": "DOE NNSA SSGF",
+    "sponsor": "Department of Energy (DOE) / National Nuclear Security Administration & Krell Institute",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "PhD Students",
+      "Undergraduate Students"
+    ],
+    "whoFor": "PhD students in high-performance computing, numerical algorithms, computer architecture, and exascale simulation",
+    "deadline": "Mid January (Annual)",
+    "deadlineMonth": 1,
+    "amount": "Full tuition and required fees + 5,000 annual stipend + ,000 academic allowance/year + 12-week practicum at LLNL, LANL, or Sandia National Labs for up to 4 years",
+    "summary": "Provides comprehensive fellowship support for doctoral students specializing in high-performance computing, scientific algorithms, and extreme-scale physics simulations critical to national stewardship science.",
+    "eligibility": [
+      "US Citizens or Permanent Residents",
+      "Senior undergraduates or 1st/2nd year PhD students in CS, computational science, or applied math",
+      "Full-time study toward a PhD at an accredited US university"
+    ],
+    "topics": [
+      "HPC",
+      "Scientific Computing",
+      "Algorithms",
+      "Architecture",
+      "Parallel Systems"
+    ],
+    "url": "https://www.krellinst.org/ssgf/",
+    "featured": true
+  },
+  {
+    "id": "doe-nnsa-lrgf",
+    "name": "Department of Energy NNSA Laboratory Residency Graduate Fellowship (DOE LRGF)",
+    "shortName": "DOE NNSA LRGF",
+    "sponsor": "Department of Energy (DOE) / NNSA & Krell Institute",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "2nd-year or later doctoral students in computer science, HPC, and computational science collaborating directly with DOE labs",
+    "deadline": "Mid March (Annual)",
+    "deadlineMonth": 3,
+    "amount": "Full tuition and required fees + 5,000 annual stipend + dedicated research residency at a DOE NNSA laboratory for up to 4 years",
+    "summary": "Provides graduate students pursuing PhDs in computational science and computing systems the opportunity to spend a minimum of two 12-week terms conducting doctoral research on-site at DOE national laboratories.",
+    "eligibility": [
+      "US Citizens or Permanent Residents",
+      "Must have completed at least one year of doctoral study at a US university"
+    ],
+    "topics": [
+      "HPC",
+      "Systems",
+      "Algorithms",
+      "Architecture",
+      "AI for Science"
+    ],
+    "url": "https://www.krellinst.org/lrgf/",
+    "featured": false
+  },
+  {
+    "id": "msr-ada-lovelace-fellowship",
+    "name": "Microsoft Research Ada Lovelace Fellowship",
+    "shortName": "Microsoft Ada Lovelace Fellowship",
+    "sponsor": "Microsoft Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "Second-year PhD students in computer science from groups underrepresented in computing",
+    "deadline": "Mid August (Annual)",
+    "deadlineMonth": 8,
+    "amount": "Full tuition and fees for up to 3 academic years + 2,000 annual stipend + invitation to annual Microsoft Research PhD Summit",
+    "summary": "Aims to increase the pipeline of diverse talent receiving computing PhD degrees by providing three full years of tuition and living stipends for outstanding underrepresented doctoral researchers.",
+    "eligibility": [
+      "Second-year doctoral students in CS, electrical engineering, or mathematics at North American universities",
+      "Self-identify as a woman, Black/African American, Hispanic/Latinx, Indigenous, or person with disabilities",
+      "Nomination by university department required"
+    ],
+    "topics": [
+      "AI/ML",
+      "Systems",
+      "Theory",
+      "Security",
+      "HCI",
+      "Programming Languages"
+    ],
+    "url": "https://www.microsoft.com/en-us/research/academic-program/ada-lovelace-fellowship/",
+    "featured": true
+  },
+  {
+    "id": "two-sigma-phd-fellowship",
+    "name": "Two Sigma PhD Fellowship",
+    "shortName": "Two Sigma PhD Fellowship",
+    "sponsor": "Two Sigma",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "Doctoral students in computer science, machine learning, distributed systems, and statistics",
+    "deadline": "Mid May (Annual)",
+    "deadlineMonth": 5,
+    "amount": "Up to 5,000 toward university tuition and living expenses for 1 academic year + Two Sigma research mentorship",
+    "summary": "Supports doctoral students who are expanding the boundaries of computer science, machine learning, distributed data systems, and algorithmic modeling.",
+    "eligibility": [
+      "Enrolled in a PhD program at an accredited North American university",
+      "In their 3rd, 4th, or 5th year of doctoral studies during the fellowship period"
+    ],
+    "topics": [
+      "AI/ML",
+      "Distributed Systems",
+      "Data Management",
+      "Algorithms",
+      "Optimization"
+    ],
+    "url": "https://www.twosigma.com/fellowships/",
+    "featured": false
+  },
+  {
+    "id": "jane-street-phd-fellowship",
+    "name": "Jane Street Graduate Research Fellowship",
+    "shortName": "Jane Street Fellowship",
+    "sponsor": "Jane Street",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "Graduate students in computer science, programming languages, algorithms, and machine learning",
+    "deadline": "Late November (Annual)",
+    "deadlineMonth": 11,
+    "amount": "Full tuition and academic fees + 5,000 living stipend + invitation to Jane Street NYC research summit",
+    "summary": "Provides full tuition and stipend support for students doing foundational research in computer science, functional programming languages, compiler design, software verification, and algorithmic theory.",
+    "eligibility": [
+      "PhD students in computer science, mathematics, or related quantitative disciplines at recognized universities worldwide",
+      "Students in any year of their PhD are eligible"
+    ],
+    "topics": [
+      "Programming Languages",
+      "Software Engineering",
+      "Theory",
+      "Algorithms",
+      "AI/ML",
+      "Compilers"
+    ],
+    "url": "https://www.janestreet.com/fellowship/",
+    "featured": false
+  },
+  {
+    "id": "ncwit-collegiate-award",
+    "name": "NCWIT Collegiate Award",
+    "shortName": "NCWIT Collegiate Award",
+    "sponsor": "National Center for Women & Information Technology (NCWIT)",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Undergraduate Students",
+      "Master's Students",
+      "PhD Students"
+    ],
+    "whoFor": "Women, gender-nonconforming, and underrepresented undergraduate and graduate students in computing",
+    "deadline": "Late October / Early November (Annual)",
+    "deadlineMonth": 11,
+    "amount": "Up to 0,000 cash prize per winner (,500 for finalists) + trip to annual NCWIT Summit + national recognition",
+    "summary": "Honors undergraduate and graduate students identifying as women, gender-queer, or non-binary for their technical contributions to projects in computer science, software design, and engineering.",
+    "eligibility": [
+      "Enrolled in an accredited US university or college as an undergraduate or graduate student in computing"
+    ],
+    "topics": [
+      "General CS",
+      "AI/ML",
+      "HCI",
+      "Software Engineering",
+      "Robotics"
+    ],
+    "url": "https://www.aspirations.org/award-programs/collegiate-award",
+    "featured": false
   }
 ]

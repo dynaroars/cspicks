@@ -19,14 +19,15 @@ let suggestions = null;
 
 const DEFAULT_EXAMPLES = [
   'NSF CAREER',
+  'NSF GRFP',
+  'DOE CSGF',
+  'NDSEG',
   'Google PhD Fellowship',
   'DARPA YFA',
-  'Amazon Research Awards',
   'Sloan Research Fellowship',
   'AI/ML',
-  'Cybersecurity',
   'PhD Students',
-  'Early-Career Faculty'
+  'Undergraduate'
 ];
 
 function getFilterState() {
