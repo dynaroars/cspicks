@@ -81,7 +81,7 @@ Every page has an unobtrusive **Copy Link** button in the header (`src/share.js`
 - Every page ships baseline `<title>`, meta description, canonical link, and OpenGraph/Twitter card tags in its HTML `<head>`, so a crawler that never runs JS still sees something accurate.
 - `src/seo.js` sharpens those tags client-side once a specific view (a university, a comparison, a Discoveries filter set) is on screen.
 - `public/og-image.png` is the site-wide social preview image, regenerated with `npm run og:image` (uses Playwright's already-installed Chromium to screenshot `scripts/og-card-template.html` — no new dependency). A true per-page dynamic OG image isn't possible on a static GitHub Pages deploy without a server, so this is the "best static alternative": one well-designed card, with per-page title/description still set dynamically in the tags above.
-- `public/sitemap.xml` lists the six static pages plus one deep link per university straight into its Search-page research profile. Regenerate it after a meaningful CSRankings roster change with `npm run sitemap` (`scripts/generate-sitemap.mjs`).
+- `public/sitemap.xml` lists the eight static pages plus one deep link per university straight into its Search-page research profile. Regenerate it after a meaningful CSRankings roster change with `npm run sitemap` (`scripts/generate-sitemap.mjs`).
 - `public/robots.txt` allows all crawlers and points at the sitemap.
 
 ## 📊 Analytics
