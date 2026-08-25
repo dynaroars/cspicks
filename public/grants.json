@@ -1967,6 +1967,94 @@
     "featured": true
   },
   {
+    "id": "openai-chatgpt-academic-researchers",
+    "name": "ChatGPT for Academic Researchers",
+    "shortName": "ChatGPT for Academic Researchers",
+    "sponsor": "OpenAI",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
+    "whoFor": "Current research faculty and postdoctoral researchers at research-active, degree-granting universities, with a first-authored (or co-authored) paper on arXiv, bioRxiv, or ChemRxiv within the last 3 years",
+    "deadline": "Rolling (staged rollout: 10,000 researchers in initial cohort, expanding to 100,000 through 2027)",
+    "deadlineMonth": 0,
+    "amount": "Free ChatGPT Team workspace for 12 months (1 owner + up to 4 verified collaborator seats); no API credits included",
+    "summary": "Complimentary access to OpenAI's frontier ChatGPT models for research faculty and postdocs, aimed at accelerating scientific discovery across STEM fields; verified via SheerID and a qualifying preprint.",
+    "eligibility": [
+      "Affiliated with an accredited, research-active degree-granting college or university",
+      "Currently a research faculty member or postdoctoral researcher (not open to grad/undergrad students)",
+      "Author or co-author on a paper posted to arXiv, bioRxiv, or ChemRxiv within the past 3 years (a journal publication alone does not qualify)",
+      "Research field among Biological Sciences, Chemistry and Materials, Computer Science, Earth and Planetary Sciences, Engineering, Mathematics, or Physics"
+    ],
+    "topics": [
+      "AI/ML",
+      "Systems"
+    ],
+    "url": "https://openai.com/index/chatgpt-for-academic-researchers/",
+    "featured": false
+  },
+  {
+    "id": "anthropic-ai-for-science",
+    "name": "Anthropic's AI for Science Program",
+    "shortName": "Anthropic AI for Science",
+    "sponsor": "Anthropic",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Postdocs"
+    ],
+    "whoFor": "Academic and nonprofit researchers (including biotech/independent scientists) pursuing high-impact scientific research, especially in biology and life sciences",
+    "deadline": "Rolling; reviewed on the first Monday of each month",
+    "deadlineMonth": 0,
+    "amount": "Up to $20,000 in Claude API credits over 6 months (API only, not the Claude web app; standard generally-available models only)",
+    "summary": "Distributes free Claude API credits to academic and nonprofit researchers working on scientifically impactful projects — biology and life sciences, chemistry, medicine, environmental science, physics, earth sciences, and computer science — where AI can meaningfully accelerate the work.",
+    "eligibility": [
+      "Affiliated with an academic institution, nonprofit, or similar research organization (biotech startups and independent scientists also considered)",
+      "Applicant is at least 18 (or the age of majority in their jurisdiction)",
+      "Research proposal is evaluated on scientific merit, potential impact, technical feasibility, and team credentials in the subject area and in AI",
+      "Must agree to Anthropic's Usage Policy; standard Trust & Safety enforcement applies"
+    ],
+    "topics": [
+      "AI/ML",
+      "AI for Science"
+    ],
+    "url": "https://www.anthropic.com/news/ai-for-science-program",
+    "featured": false
+  },
+  {
+    "id": "anthropic-fellows-program",
+    "name": "Anthropic Fellows Program",
+    "shortName": "Anthropic Fellows",
+    "sponsor": "Anthropic",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students",
+      "Master's Students",
+      "Postdocs"
+    ],
+    "whoFor": "Technically strong researchers/engineers (no PhD required) who want to transition into empirical AI safety, security, or alignment research, mentored full-time by Anthropic researchers",
+    "deadline": "Rolling applications for periodic cohorts (next cohort starts ~January 2027)",
+    "deadlineMonth": 0,
+    "amount": "$3,850/week stipend (~$2,310 GBP, ~$4,300 CAD) plus a ~$15,000/month compute budget, for a 4-month full-time fellowship",
+    "summary": "A 4-month, full-time research fellowship pairing emerging technical talent with Anthropic researcher mentors on empirical AI safety, security, ML systems, reinforcement learning, or economics/societal-impact projects, with an emphasis on producing public research outputs.",
+    "eligibility": [
+      "No PhD or specific credential required — selection is based on ability to execute on research (strong coding/Python skills, comfort with ambiguous problems)",
+      "Requires existing work authorization in the US, UK, or Canada (no visa sponsorship)",
+      "Based in Berkeley or London, or remote-friendly within eligible countries",
+      "~25-50% of past fellows have historically received full-time offers afterward"
+    ],
+    "topics": [
+      "AI/ML",
+      "AI Safety & Ethics",
+      "Security",
+      "Systems"
+    ],
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5183044008",
+    "featured": true
+  },
+  {
     "id": "bwf-casi-award",
     "name": "Burroughs Wellcome Fund Career Awards at the Scientific Interface (CASI)",
     "shortName": "BWF CASI Award",
