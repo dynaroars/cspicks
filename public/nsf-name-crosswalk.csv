@@ -1,5 +1,5 @@
 # Faculty whose CSRankings roster name differs from their publication-table name.
-# Generated 2026-08-22T17:34:20.242Z by scripts/sync-nsf-roster-names.mjs.
+# Generated 2026-08-27T00:38:09.312Z by scripts/sync-nsf-roster-names.mjs.
 # The publication-table name is what the site matches on; edit a row to correct a resolution.
 faculty_name,roster_name,affiliation
 Aaron D. Striegel,Aaron Striegel,University of Notre Dame
