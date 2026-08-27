@@ -232,9 +232,13 @@ test('professor cards show official roster distinctions', async ({ page }) => {
   await expect(card).toContainText('3 papers (1.5 adjusted)');
   await expect(card.getByRole('link', { name: 'ORCID' })).toHaveAttribute('href', 'https://orcid.org/0000-0001-2345-6789');
   await expect(card).toContainText('Unit: Tech');
+  await expect(card.locator('.papers-list')).toBeHidden();
   await card.locator('[data-action="toggle-papers"]').click();
+  await expect(card.locator('.papers-list')).toBeVisible();
   await expect(card.locator('.papers-list')).toContainText(`ICSE ${fixtureYear}: 2 paper(s), 1.00 adjusted`);
   await expect(card.locator('.papers-list')).toContainText(`ASE ${fixtureYear}: 1 paper(s), 0.50 adjusted`);
+  await card.locator('[data-action="toggle-papers"]').click();
+  await expect(card.locator('.papers-list')).toBeHidden();
 });
 
 test('official aliases resolve professors and schools show country and department links', async ({ page }) => {
@@ -295,6 +299,18 @@ test('rankings toggle ranks universities and is remembered', async ({ page }) =>
   await expect(page.locator('#school-results .result-position')).toHaveCount(0);
 });
 
+test('university card reflects per-capita rank when Show Rankings and Per capita are enabled', async ({ page }) => {
+  await page.goto('./?q=George%20Mason%20University&rankings=true&percapita=false');
+  await expect(page.locator('#school-results .card')).toBeVisible();
+  await expect(page.locator('#school-results .result-position')).toHaveCount(1);
+  await page.locator('#main-search').blur();
+
+  await page.locator('#per-capita-mode').check();
+  await expect(page).toHaveURL(/percapita=true/);
+  // In the test fixture, GMU has < 5 faculty so it has no per-capita rank
+  await expect(page.locator('#school-results .result-position')).toHaveCount(0);
+});
+
 test('data health audits CSRankings default independently of the selected venue set', async ({ page }) => {
   await page.goto('./?confSet=core&percapita=true');
   await page.locator('#data-health-toggle').click();
@@ -344,6 +360,48 @@ test('CORE A conference trends include a published ASE venue', async ({ page }) 
   await expect(page.locator('#conf-checkbox-groups')).toContainText('ASE');
 });
 
+test('university analysis renders Activity, Faculty Diversity, and Publishing Effort tabs without errors', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
+
+  await page.goto('./');
+  await page.locator('#main-search').fill('George Mason University');
+  await expect(page.locator('#integrated-analysis')).toBeVisible();
+
+  // 1. Activity tab (default active tab for schools)
+  await expect(page.locator('#school-trends-view')).toBeVisible();
+  await expect(page.locator('#ranking-stats')).toContainText('Rank movement');
+  await expect(page.locator('#ranking-stats')).toContainText('Momentum');
+  await expect(page.locator('#rankingChart')).toBeVisible();
+
+  // 2. Faculty Diversity tab
+  await page.getByRole('tab', { name: /Faculty Diversity/ }).click();
+  await expect(page.locator('#faculty-diversity-view')).toBeVisible();
+  await expect(page.locator('#diversityChart')).toBeVisible();
+
+  // 3. Publishing Effort tab
+  await page.getByRole('tab', { name: /Publishing Effort/ }).click();
+  await expect(page.locator('#effort-view')).toBeVisible();
+  await expect(page.locator('#effortChart')).toBeVisible();
+
+  // 4. Area Growth tab
+  await page.getByRole('tab', { name: /Area Growth/ }).click();
+  await expect(page.locator('#area-growth-view')).toBeVisible();
+  await expect(page.locator('#areaChart')).toBeVisible();
+
+  // 5. Collaboration tab
+  await page.getByRole('tab', { name: /Collaboration/ }).click();
+  await expect(page.locator('#collaboration-view')).toBeVisible();
+  await expect(page.locator('#collaboration-stats')).toBeVisible();
+
+  // 6. Rank Stability tab
+  await page.getByRole('tab', { name: /Rank Stability/ }).click();
+  await expect(page.locator('#stability-view')).toBeVisible();
+
+  // Verify zero page/console uncaught errors occurred across all tab transitions
+  expect(pageErrors).toEqual([]);
+});
+
 test('historical mode loads affiliation data without an extra status box', async ({ page }) => {
   await page.goto('./');
   await expect(page.locator('#history-warning')).toHaveCount(0);
@@ -387,7 +445,7 @@ test('region defaults are locale-aware and a user choice carries across every ta
   await page.goto('simulator.html');
   await expect(page.locator('#region-select')).toHaveValue('europe');
   await expect(page.locator('.tool-intro .eyebrow')).toHaveCount(0);
-  await page.goto('funding.html');
+  await page.goto('nsf.html');
   await expect(page.locator('#funding-award-count')).toContainText('NSF CS awards during');
 
   await page.goto('./?region=world');

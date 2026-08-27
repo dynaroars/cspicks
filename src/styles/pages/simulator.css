@@ -1,0 +1,427 @@
+/* ==========================================================================
+   Ranking Simulator Tool & Faculty Transfer Model
+   ========================================================================== */
+
+.tool-content {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.tool-intro {
+  max-width: 780px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.tool-intro .eyebrow {
+  margin-bottom: 0.35rem;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tool-intro h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.tool-intro > p:last-child {
+  max-width: 680px;
+  margin: 0.75rem auto 0;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.simulator-page {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.simulator-disclaimer {
+  max-width: 880px;
+  margin-bottom: 1rem;
+  border-radius: 14px;
+}
+
+.simulator-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 1.5rem;
+  padding: 0.35rem 0;
+}
+
+.simulator-workflow {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+}
+
+.simulator-workflow.hidden,
+.simulator-loading.hidden,
+#sim-loading.hidden {
+  display: none;
+}
+
+.simulator-loading {
+  padding: 3rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Workflow Steps & Inputs */
+.sim-step {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sim-step.hidden {
+  display: none;
+}
+
+.sim-step input,
+.sim-step textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  transition: border-color 0.2s ease;
+}
+
+.sim-step input[type="search"] {
+  min-height: 56px;
+}
+
+.sim-step textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.sim-step input:focus,
+.sim-step textarea:focus {
+  border-color: var(--text-primary);
+  outline: none;
+}
+
+.sim-step input::placeholder,
+.sim-step textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.sim-list {
+  max-height: 250px;
+  overflow-y: auto;
+  margin-top: 0.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.sim-list:empty {
+  display: none;
+}
+
+.sim-item {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  border: 0;
+  border-bottom: 1px solid var(--border-color);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.sim-item:hover {
+  background: var(--hover-bg);
+}
+
+.sim-item:last-child {
+  border-bottom: none;
+}
+
+.selected-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  color: var(--text-primary);
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.selected-item::before {
+  color: #10b981;
+  font-weight: 700;
+  content: '✓';
+}
+
+/* Simulator Primary Action Button */
+.simulator-primary {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bg-color);
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.simulator-primary:hover {
+  opacity: 0.92;
+}
+
+.simulator-primary:active {
+  transform: translateY(1px);
+}
+
+.simulator-primary:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Faculty Selection Actions */
+.sim-selection-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sim-selection-actions .btn-secondary {
+  flex: 1;
+}
+
+.sim-faculty-list {
+  max-height: 220px;
+  overflow-y: auto;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+
+.sim-list-heading {
+  padding: 0.45rem 0.65rem;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Candidate Impact Cards */
+.candidate-card {
+  margin-bottom: 0.75rem;
+  padding: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.candidate-card.loading {
+  opacity: 0.6;
+}
+
+.candidate-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.candidate-medal {
+  flex-shrink: 0;
+  font-size: 1.5rem;
+}
+
+.candidate-info {
+  flex: 1;
+}
+
+.candidate-name {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.candidate-action-remove {
+  display: inline-block;
+  padding: 2px 6px;
+  margin-left: 8px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--impact-neg-text);
+  background: var(--impact-neg-bg);
+  border-radius: 4px;
+}
+
+.candidate-action-transfer {
+  display: inline-block;
+  padding: 2px 6px;
+  margin-left: 8px;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.12);
+  border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .candidate-action-transfer {
+    color: #93c5fd;
+    background: rgba(37, 99, 235, 0.25);
+  }
+}
+
+.candidate-badge-roster {
+  display: inline-block;
+  padding: 2px 6px;
+  margin-left: 8px;
+  font-size: 0.7em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--impact-pos-text);
+  background: var(--impact-pos-bg);
+  border-radius: 4px;
+}
+
+.candidate-stats {
+  margin-top: 0.25rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.candidate-stats-error {
+  color: var(--impact-neg-text);
+}
+
+.candidate-source-impact {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.candidate-source-impact span:first-child {
+  margin-right: 6px;
+}
+
+.candidate-impact {
+  text-align: right;
+}
+
+.candidate-rank-delta {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.candidate-rank-delta.positive {
+  color: var(--impact-pos-text);
+}
+
+.candidate-rank-delta.negative {
+  color: var(--impact-neg-text);
+}
+
+.candidate-rank-delta.neutral {
+  color: var(--text-secondary);
+}
+
+.candidate-area-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+/* Area Pills & Impact Tags */
+.area-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-size: 0.78em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.area-pill.positive {
+  background: var(--impact-pos-bg);
+  color: var(--impact-pos-text);
+}
+
+.area-pill.negative {
+  background: var(--impact-neg-bg);
+  color: var(--impact-neg-text);
+}
+
+.area-pill.neutral {
+  background: var(--impact-neu-bg);
+  color: var(--impact-neu-text);
+}
+
+.area-breakdown-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 9px;
+  color: var(--text-primary);
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 99px;
+  font-size: 0.78em;
+  white-space: nowrap;
+}
+
+.area-breakdown-tag strong {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .simulator-workflow {
+    padding: 1rem;
+  }
+
+  .candidate-header {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .candidate-impact {
+    width: 100%;
+    text-align: left;
+  }
+}

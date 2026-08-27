@@ -69,9 +69,10 @@ Every page keeps the URL in sync with what's on screen, so any view is a link th
 | Discoveries (`index.html?view=discoveries`) | `view=discoveries`, region/years/venue set/history/per-capita, plus a `#fragment` per card (`#discovery-fastest-growing-subfields`, etc.) that scrolls to and briefly highlights that card on load — or `q`/`target` once the visitor searches for something |
 | Simulator (`simulator.html`) | Filters, `univ` (selected university), and `candidates` (the raw candidate names/DBLP links) — opening the link pre-fills the setup one click from a result, without re-querying DBLP on load |
 | CS Confs (`csconfs.html`) | `q`, conference-year range, venue set, and whether only upcoming conferences are shown |
-| Funding (`funding.html`) | `q` (search or `A vs B`) plus the year-range filter |
+| NSF Funding (`nsf.html`) | `q` (search or `A vs B`) plus the year-range filter |
+| Awards & Grants (`grants.html`) | `q`, `audience`, `sponsor`, `topic`, `deadline`, and `sort` filters |
 
-Filter choices also persist across page navigations via `localStorage`, so switching between Search and Discoveries, or clicking into Simulator or Funding, doesn't silently reset the region or year range.
+Filter choices also persist across page navigations via `localStorage`, so switching between Search and Discoveries, or clicking into Simulator, NSF Funding, or Awards & Grants, doesn't silently reset the region or year range.
 
 Every page has an unobtrusive **Copy Link** button in the header (`src/share.js`): the Web Share API's native sheet where the browser offers one, a clipboard copy otherwise. Discoveries cards each get their own copy of the same control, scoped to that card's fragment. `src/seo.js` keeps `<title>`, the meta description, canonical link, and OpenGraph/Twitter tags in sync with the same state, so a shared link's title and social preview describe the actual view, not just the generic homepage.
 
@@ -80,7 +81,7 @@ Every page has an unobtrusive **Copy Link** button in the header (`src/share.js`
 - Every page ships baseline `<title>`, meta description, canonical link, and OpenGraph/Twitter card tags in its HTML `<head>`, so a crawler that never runs JS still sees something accurate.
 - `src/seo.js` sharpens those tags client-side once a specific view (a university, a comparison, a Discoveries filter set) is on screen.
 - `public/og-image.png` is the site-wide social preview image, regenerated with `npm run og:image` (uses Playwright's already-installed Chromium to screenshot `scripts/og-card-template.html` — no new dependency). A true per-page dynamic OG image isn't possible on a static GitHub Pages deploy without a server, so this is the "best static alternative": one well-designed card, with per-page title/description still set dynamically in the tags above.
-- `public/sitemap.xml` lists the six static pages plus one deep link per university straight into its Search-page research profile. Regenerate it after a meaningful CSRankings roster change with `npm run sitemap` (`scripts/generate-sitemap.mjs`).
+- `public/sitemap.xml` lists the eight static pages plus one deep link per university straight into its Search-page research profile. Regenerate it after a meaningful CSRankings roster change with `npm run sitemap` (`scripts/generate-sitemap.mjs`).
 - `public/robots.txt` allows all crawlers and points at the sitemap.
 
 ## 📊 Analytics
@@ -88,7 +89,7 @@ Every page has an unobtrusive **Copy Link** button in the header (`src/share.js`
 No analytics are wired to a real account by default — `src/analytics.js`'s calls are safe no-ops until one is configured, and nothing here can invent credentials for you. To enable lightweight, cookie-free tracking:
 
 1. Sign up at [plausible.io](https://plausible.io) (or self-host it) and register `cspicks.roars.dev`.
-2. Uncomment the `<script defer data-domain="cspicks.roars.dev" src="https://plausible.io/js/script.js">` tag near the bottom of each page's `<head>` (`index.html`, `simulator.html`, `funding.html`).
+2. Uncomment the `<script defer data-domain="cspicks.roars.dev" src="https://plausible.io/js/script.js">` tag near the bottom of each page's `<head>` (`index.html`, `simulator.html`, `csconfs.html`, `nsf.html`, `grants.html`).
 3. Deploy. Plausible's dashboard then answers: visits, popular pages (via its own pathname-based pageviews), and referral sources out of the box.
 
 `src/analytics.js` additionally fires custom events — `View` (by page and kind: school/researcher/area/search-results), `Comparison`, and `Discovery Share`, each tagged with `page: 'search' | 'discoveries'` where relevant — at the same points the URL updates, so "popular university pages," "popular research fields," "comparison usage," and "Discoveries traffic" are answerable from Plausible's custom-event breakdowns even though those views share one static HTML file per page. Swap the calls in `analytics.js` for another tool's API (e.g. GoatCounter) if preferred; nothing else needs to change.
@@ -261,10 +262,11 @@ cspicks/
 ├── index.html                        # Search, results, integrated analysis, and the Discoveries view
 ├── csconfs.html                      # CS conference schedule
 ├── csconfs-submit.html               # Conference submission/correction form
-├── funding.html                      # Nationwide NSF funding beta
+├── nsf.html                          # Nationwide NSF funding explorer
+├── grants.html                       # CS research awards, fellowships & grants explorer
+├── grants-submit.html                # Award/grant submission and edit form
 ├── simulator.html                    # Ranking simulator page
-├── FAQ.md                            # GitHub-hosted methods and data documentation
-└── README.md
+└── README.md                         # GitHub-hosted FAQ, methods, and data documentation
 ```
 
 ## 📊 Data Sources
@@ -273,6 +275,108 @@ cspicks/
 - [DBLP](https://dblp.org/) - Publication metadata and author profiles
 - [OpenAlex](https://openalex.org/) - Historical affiliation data
 - [NSF Award Search](https://www.nsf.gov/funding/award-search) - NSF awards, investigators, program managers, programs, dates, and intended amounts
+- **CS Research Awards & Fellowships** (`public/grants.json`) - Curated database of 85+ major CS research awards, faculty fellowships, student grants, and industry RFPs (NSF, DARPA, DOE, DoD, tech industry, and foundations)
+
+## ❓ FAQ, Methods, and Data
+
+### How are rankings calculated?
+
+CS Picks follows the CSRankings approach and uses the geometric mean of adjusted publication counts across research areas. This rewards breadth across computer science rather than dominance in only one area.
+
+```text
+Score = (product of (adjusted count + 1)) ^ (1 / number of areas)
+```
+
+Each eligible paper contributes `1.0` in total, divided equally among its authors. For example, each author of a four-author paper receives an adjusted publication count of `0.25`. CS Picks always uses this fractional-author credit.
+
+### What do the university statistics mean?
+
+- **Rank movement** compares the selected period with the immediately preceding period of equal length.
+- **Momentum** is the percentage change in adjusted publication count between those periods.
+- **Median per faculty** is the median adjusted publication count among active faculty.
+- **Top-three concentration** is the share produced by the university’s three highest-output faculty.
+- **Breadth** counts active and sustained research areas.
+- **Team-size proxy** divides raw publication count by adjusted publication count. It describes coauthor intensity, but cannot distinguish internal from cross-university collaboration.
+
+### What does History mode do?
+
+By default, every eligible paper is credited to its author’s current CSRankings institution. History mode instead attempts to credit a paper to the institution where the author was affiliated in the publication year. Historical affiliation records are estimates and can be incomplete or incorrect, especially for older years, visiting positions, and renamed institutions.
+
+### What does the Rankings checkbox do?
+
+Off by default, result lists read as plain lists of universities and people. Turning it on shows university overall and per-area ranks for the selected region, years, and conference set, and ranks people by adjusted publication count over the same selection. Equal values share a rank.
+
+### Can I compare two universities or professors?
+
+Yes. On Search and NSF Funding, type both names separated by `vs`, such as `Carnegie Mellon University vs Univ. of Illinois at Urbana-Champaign`. Both search boxes autocomplete, and the second target must be the same kind of target as the first. Search compares publication output by research area; NSF Funding compares awards, attributed funding, and matched CS faculty.
+
+### What do the conference-set options mean?
+
+- **CSRankings (Default)** uses the primary CSRankings venue set and excludes optional next-tier venues.
+- **CSRankings (All)** includes both the primary and extended CSRankings venues.
+- **CORE A\*** includes only conferences mapped to the CORE A* tier.
+- **CORE A\*/A** includes conferences mapped to either the CORE A* or A tier.
+
+Conference definitions can change upstream. CS Picks synchronizes its venue rules from CSRankings when possible and keeps a bundled fallback.
+
+### How does the ranking simulator work?
+
+Choose a target university and one or more researchers. Current faculty are modeled as removals, faculty at another ranked university as transfers, and external DBLP researchers as additions. The simulator applies their eligible publication records to the selected period and conference set, then recalculates overall and per-area ranks. Results are hypothetical and should not be interpreted as predictions, hiring recommendations, or evaluations of individuals.
+
+### Where does the data come from?
+
+- [CSRankings](https://csrankings.org/) supplies the faculty roster, publication data, venue taxonomy, and institution information.
+- The locally maintained schedule under `csconfs/data/` supplies conference dates and submission timelines. Estimated entries should be confirmed on the linked conference website. Deadline countdowns use Anywhere on Earth (UTC−12), and schedule year filters refer to the conference year.
+- Schedule records are maintained through research of official conference and sponsoring-society websites plus contributor corrections. Historical acceptance totals came from [emeryberger/csconferences](https://github.com/emeryberger/csconferences).
+- [DBLP](https://dblp.org/) supplies author-search and publication metadata used by the simulator.
+- [OpenAlex](https://openalex.org/) and manually reviewed corrections supply estimated historical affiliations.
+- [NSF Award Search](https://www.nsf.gov/funding/award-search) supplies the public award records used by the NSF funding beta.
+
+### How does the NSF Funding beta work?
+
+The synchronizer searches current CSRankings faculty as primary investigators and retains an award only when its NSF recipient matches the faculty member’s current CSRankings institution. For awards with multiple investigators, NSF’s estimated total award amount is divided equally among all PIs and co-PIs; university totals sum the shares assigned to matched current faculty. This is a matched-faculty statistic, not a university’s complete NSF portfolio.
+
+Institution names are normalized and matched to the most specific institution so branch campuses are not absorbed by a flagship. The synchronizer records roster and publication-table name variants in `public/nsf-name-crosswalk.csv`. It also distinguishes confirmed transfers and enriches collaborative projects with exact-title sibling awards while keeping each university’s local attribution unchanged.
+
+### What are the data limitations?
+
+- Historical affiliations are assembled from automated sources and manual corrections; coverage is uneven.
+- Current-roster mode assigns past work to current institutions and is not a historical department ranking.
+- Publication, author, conference, and eligibility records can change when upstream sources update.
+- The collaboration statistic is a coauthor-intensity proxy, not a measurement of cross-institution collaboration.
+- NSF investigator matching can miss name variants and deliberately excludes awards made to another institution, even when they may belong to the same faculty member’s earlier career.
+- NSF dollar totals use estimated total award amounts grouped by award year; they are not annual expenditures or fiscal-year obligations.
+- A passing Data Health audit means the calculation is internally consistent with loaded inputs, not that every deployed upstream page is identical at that moment.
+
+### Privacy, corrections, and acknowledgments
+
+CS Picks fetches public scholarly metadata on demand and does not store names entered into Search or the simulator as user-submitted personal data. To report an affiliation correction or other discrepancy, [open a GitHub issue](https://github.com/dynaroars/cspicks/issues) with the name, correction, supporting source, and applicable years. CS Picks is inspired by [CSRankings](https://csrankings.org/); historical affiliation estimates use [OpenAlex](https://openalex.org/) plus manually reviewed corrections.
 
 ## 📝 License
-Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
+
+Original CS Picks source code and project material are available under the
+[MIT License](LICENSE). The repository also contains third-party data,
+metadata, dependencies, and assets that are not relicensed by MIT. See
+the source-specific notes below before redistributing those materials.
+
+### Data and asset licensing
+
+The MIT license applies to original CS Picks source code and other original
+project material to the extent that Roars Lab owns the rights to it. It does
+not relicense material obtained from external sources.
+
+| Material | Source | Reuse notes |
+| --- | --- | --- |
+| Faculty, publication, institution, and venue data | [CSRankings](https://github.com/emeryberger/CSrankings) | Follow the current CSRankings repository license and attribution requirements. |
+| Publication and author metadata used by the simulator | [DBLP](https://dblp.org/) | DBLP’s dataset is released under CC0, with attribution/source-link guidance. Follow DBLP’s [current terms and conditions](https://dblp.org/faq/1474583.html). |
+| Historical affiliation data and institution mappings | [OpenAlex](https://openalex.org/) | OpenAlex describes its data as [CC0/public domain](https://help.openalex.org/data/how-its-built/). This applies to OpenAlex metadata, not to the underlying scholarly works or full text, which retain their own rights. |
+| Award records and investigator metadata | [NSF Award Search](https://www.nsf.gov/funding/award-search) | These are public government records, but the snapshot and matching process are project-specific. Verify current NSF terms and source attribution before redistribution. |
+| Conference schedule records | `csconfs/data/conferences.json` | Curated project data assembled from the official conference and sponsoring-organization pages linked in each record. Verify those source terms before reuse. |
+| Fonts and JavaScript dependencies | Their respective upstream projects | Each dependency keeps its own license; see `package-lock.json` and the upstream project for details. |
+
+The files under `public/` are deployable snapshots or project-generated
+transformations. The MIT license should not be interpreted as permission to
+reuse third-party contents without complying with the applicable source terms.
+When in doubt, use the source links above and retain the source attribution
+included in the files and application documentation. Source terms can change,
+so downstream redistributors should verify them at the time of reuse.

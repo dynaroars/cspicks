@@ -8,7 +8,7 @@ import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../../src/
 import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl, topCoauthorsInWindow } from '../../src/dblp.js';
 import { parseCsrankingsRules } from '../../src/csrankings-rules.js';
 import { renderSchoolCard } from '../../src/search-cards.js';
-import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../../src/metrics.js';
+import { applyPerCapitaRanks, calculateAreaMomentum, calculateCorpusDiagnostics, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../../src/metrics.js';
 import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../../src/nsf.js';
 import { aoeDeadline, conferenceStart, deadlineStatus, filterSchedule, formatCalendarDate, groupConferences, scheduleSuggestions } from '../../csconfs/schedule-data.js';
 import { renderScheduleCard } from '../../csconfs/schedule-render.js';
@@ -308,6 +308,49 @@ test('parity audit validates ranked data', () => {
   assert.equal(inconsistent.totalMismatches, 1);
 });
 
+test('corpus diagnostics compute Shannon entropy, HHI, Gini, and graph metrics', () => {
+  const raw = {
+    professors: {
+      'Alice [1]': { unitNotes: ['1'] },
+      Bob: {},
+      Charlie: {}
+    }
+  };
+  const filtered = {
+    professors: {
+      'Alice [1]': { totalCount: 6, totalAdjusted: 3, pubs: [{ area: 'ai' }, { area: 'vision' }] },
+      Bob: { totalCount: 2, totalAdjusted: 1, pubs: [{ area: 'ai' }] },
+      Charlie: { totalCount: 0, totalAdjusted: 0, pubs: [] }
+    },
+    schools: {
+      SchoolA: {
+        totalAdjusted: 4,
+        areas: {
+          ai: { adjusted: 2 },
+          vision: { adjusted: 2 }
+        }
+      }
+    }
+  };
+
+  const diagnostics = calculateCorpusDiagnostics(raw, filtered);
+  assert.equal(diagnostics.activeFacultyCount, 2);
+  // With equal split across 2 areas (p = 0.5 each): H = - (0.5 ln 0.5 + 0.5 ln 0.5) = ln 2 ≈ 0.693 nats, 100% uniformity
+  assert.ok(Math.abs(diagnostics.entropy - Math.log(2)) < 1e-4);
+  assert.ok(Math.abs(diagnostics.normalizedEntropy - 100) < 1e-4);
+  // HHI = 50^2 + 50^2 = 5000
+  assert.equal(diagnostics.hhi, 5000);
+  // Alice has 2 subfields, Bob has 1 -> 50% bridge ratio
+  assert.equal(diagnostics.bridgeRatio, 50);
+  // Coauthorship depth: 8 raw / 4 adjusted = 2.0
+  assert.equal(diagnostics.coauthorshipDepth, 2);
+  // Disambiguated authors count: 'Alice [1]' has unit notes
+  assert.equal(diagnostics.disambiguatedAuthors, 1);
+  // Gini is > 0 since Alice has 3 and Bob has 1
+  assert.ok(diagnostics.gini > 0);
+  assert.ok(diagnostics.top10Concentration > 0);
+});
+
 test('area momentum compares a school against the field, not against itself', () => {
   const school = (name, areas) => ({ name, areaAdjustedCounts: areas, areas: {}, totalAdjusted: 0 });
   const current = { schools: {
@@ -425,6 +468,11 @@ test('per-faculty ranking reorders the field and ignores tiny departments', () =
   // One prolific person is not a department: below the floor it is omitted.
   assert.equal(perCapita.some(row => row.name === 'Tiny Institute'), false);
   assert.equal(calculatePerCapita(data, { minFaculty: 1 })[0].name, 'Tiny Institute');
+
+  applyPerCapitaRanks(data);
+  assert.equal(data.schools['Small College'].rank, 1);
+  assert.equal(data.schools['Big University'].rank, 2);
+  assert.equal(data.schools['Tiny Institute'].rank, null);
 });
 
 test('fragility counts the departures that move a university out of a rank band', () => {

@@ -1,10 +1,7 @@
-import { drawChart } from '../charts.js';
-import { filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from '../data.js';
-import { areaLabels, cleanName, escapeHtml, getConferenceLabel } from '../shared.js';
-import { buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateParityReport, calculatePerCapita, calculatePublishingEffort, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from '../metrics.js';
-import { renderInsightList, renderMetricCards } from '../analysis-ui.js';
+import { getConferenceAreaMap, publicationMatchesConferenceSet } from '../data.js';
+import { areaLabels, escapeHtml } from '../shared.js';
 import { state } from './state.js';
-import { getAnalysisData, getConferenceSet, getTargetName, isPublicationForTarget } from '../analysis.js';
+import { getConferenceSet, isPublicationForTarget } from '../analysis.js';
 import { renderConferenceTrends } from './conference-trends.js';
 
 export function setupConferenceFilterButtons() {
@@ -121,10 +118,10 @@ export function renderConferenceFilters() {
     })).filter(group => group.venues.length > 0).map(group => {
         return `
             <div class="conf-group">
-                <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.25rem;">${escapeHtml(group.title)}</h4>
-                <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem;">
+                <h4>${escapeHtml(group.title)}</h4>
+                <div class="conf-group-items">
                     ${group.venues.map(([venue, area]) => `
-                        <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                        <label>
                             <input type="checkbox" value="${escapeHtml(venue)}" checked>
                             ${escapeHtml(displayNames[venue] || venue.toUpperCase())} (${escapeHtml(areaLabels[area] || area)})
                         </label>

@@ -153,6 +153,14 @@ async function init() {
     setupExamples();
     render();
     input.focus();
+
+    document.addEventListener('keydown', event => {
+      if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) {
+        event.preventDefault();
+        input.focus();
+        input.select();
+      }
+    });
   } catch (error) {
     console.error('Failed to load conference schedules:', error);
     status.textContent = 'Conference schedule data could not be loaded. Please try again.';

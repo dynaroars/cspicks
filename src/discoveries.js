@@ -1,5 +1,5 @@
 import { filterByYears } from './data.js';
-import { applyPerCapitaRanks, buildPriorPeriodData, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
+import { applyPerCapitaRanks, buildPriorPeriodData, calculateCorpusDiagnostics, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
 import { buildFundingIndex, calculateFundingDiscoveries, formatFunding } from './nsf.js';
 import { SITE_NAME } from './seo.js';
 import { shareUrl } from './share.js';
@@ -81,7 +81,7 @@ function schoolLink(name) {
 }
 
 function fundingSchoolLink(name) {
-  return `<a class="discovery-school" href="funding.html?q=${encodeURIComponent(name)}" title="Explore NSF funding for ${escapeHtml(name)}">${escapeHtml(getInstitutionShortName(name))}</a>`;
+  return `<a class="discovery-school" href="nsf.html?q=${encodeURIComponent(name)}" title="Explore NSF funding for ${escapeHtml(name)}">${escapeHtml(getInstitutionShortName(name))}</a>`;
 }
 
 function areaLink(area) {
@@ -111,6 +111,8 @@ export function renderDiscoveries(rawData, filters, nsfData) {
   }
   const insights = calculateDiscoveryInsights(current, prior);
   const subfields = calculateSubfieldDiscoveries(current, prior);
+  const corpusDiag = calculateCorpusDiagnostics(rawData, current);
+  const topAreaName = corpusDiag.topArea ? (areaLabels[corpusDiag.topArea.key] || corpusDiag.topArea.key) : 'None';
   const span = end - start + 1;
   const priorStart = start - span;
   const priorEnd = start - 1;
@@ -197,6 +199,34 @@ export function renderDiscoveries(rawData, filters, nsfData) {
         <span>${areaLink(item.area)}<small>${escapeHtml(getInstitutionShortName(item.formerLeader))} → ${escapeHtml(getInstitutionShortName(item.newLeader))}</small></span>
         <strong>new leader</strong>`, emptySubfield), 'discovery-featured discovery-wide')}
     </div>
+    <h2 class="discovery-section-heading">Research diversity, concentration & collaboration</h2>
+    <p class="summary-note">Macro field entropy across 26 subfields, publication inequality among faculty, and interdisciplinary collaboration depth for ${start}–${end}.</p>
+    <div class="discovery-grid">
+      ${card(
+        'Research field diversity (Shannon Entropy)',
+        'Shannon Entropy measures how evenly research output is distributed across all 26 computer science subfields. Higher entropy (closer to 100% uniformity) means research is well-balanced across Systems, AI, Theory, and Applications, rather than heavily dominated by a single discipline.',
+        `<span>${corpusDiag.entropy.toFixed(2)} nats · ${corpusDiag.normalizedEntropy.toFixed(0)}% uniformity<small>Across 26 computer science subfields</small></span><strong class="${corpusDiag.normalizedEntropy >= 80 ? 'confidence-high' : ''}">${corpusDiag.normalizedEntropy >= 80 ? 'Well Balanced' : 'Field Skewed'}</strong>`,
+        'discovery-featured'
+      )}
+      ${card(
+        'Field concentration index (HHI)',
+        'The Herfindahl–Hirschman Index (HHI) measures concentration among research areas. Scores under 1,500 indicate a diversified spread across subfields; scores above 2,500 indicate high concentration in a few dominant subfields.',
+        `<span>HHI: ${corpusDiag.hhi.toLocaleString()} index<small>Dominant subfield: ${escapeHtml(topAreaName)} (${corpusDiag.topArea ? corpusDiag.topArea.share.toFixed(1) : '0'}% of output)</small></span><strong class="${corpusDiag.hhi < 1500 ? 'confidence-high' : 'confidence-review'}">${corpusDiag.hhi < 1500 ? 'Diversified' : 'Concentrated'}</strong>`,
+        'discovery-featured'
+      )}
+      ${card(
+        'Faculty output distribution (Gini)',
+        'The Gini coefficient measures inequality of publication output among active faculty (0 = perfect equality where every professor published the same amount; 1 = maximum inequality where one person produced everything). Academic CS typically ranges between 0.45 and 0.60.',
+        `<span>Gini: ${corpusDiag.gini.toFixed(2)}<small>Top 10% faculty authored ${corpusDiag.top10Concentration.toFixed(0)}% of adjusted output</small></span><strong>${corpusDiag.top10Concentration.toFixed(0)}% top-10% share</strong>`,
+        'discovery-featured'
+      )}
+      ${card(
+        'Cross-disciplinary bridge researchers',
+        'The percentage of active professors who published papers across two or more distinct subfields in this period, reflecting interdisciplinary breadth and cross-area research connectivity.',
+        `<span>${corpusDiag.bridgeRatio.toFixed(0)}% cross-field faculty<small>Average team depth: ${corpusDiag.coauthorshipDepth.toFixed(1)} authors per publication</small></span><strong class="confidence-high">${corpusDiag.activeFacultyCount.toLocaleString()} active faculty</strong>`,
+        'discovery-featured'
+      )}
+    </div>
     ${(region === 'us' || region === 'world') ? `
       <h2 class="discovery-section-heading">NSF funding patterns across US universities</h2>
       <p class="summary-note">These include only awards attached to matched current US CS faculty—not every NSF award at each university. Dollar attribution remains local even when a matched faculty member’s collaborative project spans several institutions.</p>
@@ -214,7 +244,7 @@ export function renderDiscoveries(rawData, filters, nsfData) {
         ${card('Publication rank ahead of funding rank', 'Universities whose publication rank is substantially stronger than their rank by matched attributed NSF funding. Missing matches can affect this comparison.', fundingList(fundingInsights.publicationsAhead, item => `
           <span>${fundingSchoolLink(item.school.name)}<small>publications #${item.publicationRank} · funding #${item.fundingRank}</small></span><strong>${Math.abs(item.gap)} places</strong>`), 'discovery-risk')}
         ${card('Largest matched collaborative projects', 'Largest full project values involving at least one matched current CS professor, reconstructed from exact-title NSF sibling awards. Other project portions can belong to collaborators outside the roster; transfer records for the same lead investigator count only once.', fundingList(fundingInsights.largestCollaborations, award => `
-          <span><a class="discovery-school" href="funding.html?q=${encodeURIComponent(award.title)}" title="Explore this collaborative project">${escapeHtml(award.title.replace(/^Collaborative (?:Research|Resaerch):\s*/i, ''))}</a><small>${award.collaborativeAwardCount} institutional portions</small></span><strong>${formatFunding(award.collaborativeTotalAmount)}</strong>`), 'discovery-featured discovery-wide')}
+          <span><a class="discovery-school" href="nsf.html?q=${encodeURIComponent(award.title)}" title="Explore this collaborative project">${escapeHtml(award.title.replace(/^Collaborative (?:Research|Resaerch):\s*/i, ''))}</a><small>${award.collaborativeAwardCount} institutional portions</small></span><strong>${formatFunding(award.collaborativeTotalAmount)}</strong>`), 'discovery-featured discovery-wide')}
       </div>` : ''}
   `;
 }

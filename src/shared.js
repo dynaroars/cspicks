@@ -182,7 +182,9 @@ export function getConferenceLabel(key) {
 }
 
 export function getChartColors() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const isDark = typeof window !== 'undefined' && window.matchMedia
+    ? window.matchMedia('(prefers-color-scheme: dark)').matches
+    : false;
   return {
     text: isDark ? '#e0e0e0' : '#666666',
     grid: isDark ? '#3d4043' : '#e5e7eb',
@@ -198,6 +200,17 @@ export function updateChartDefaults(Chart) {
   Chart.defaults.plugins.legend.labels.color = colors.text;
   Chart.defaults.scale.ticks.color = colors.text;
   Chart.defaults.scale.title.color = colors.text;
+  if (Chart.defaults.plugins?.tooltip) {
+    Chart.defaults.plugins.tooltip.backgroundColor = '#2d2d2d';
+    Chart.defaults.plugins.tooltip.titleColor = '#ffffff';
+    Chart.defaults.plugins.tooltip.bodyColor = '#ffffff';
+    Chart.defaults.plugins.tooltip.footerColor = '#ffffff';
+    const fontStack = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+    Chart.defaults.plugins.tooltip.titleFont = { family: fontStack, size: 12, weight: '600' };
+    Chart.defaults.plugins.tooltip.bodyFont = { family: fontStack, size: 12, weight: '400' };
+    Chart.defaults.plugins.tooltip.footerFont = { family: fontStack, size: 12, weight: '400' };
+    Chart.defaults.plugins.tooltip.boxPadding = 4;
+  }
 }
 
 /**
@@ -315,4 +328,46 @@ export function safeExternalUrl(value) {
   } catch {
     return '#';
   }
+}
+
+export function formatRelativeTime(dateInput, now = Date.now()) {
+  const time = typeof dateInput === 'number' ? dateInput : new Date(dateInput).getTime();
+  if (Number.isNaN(time)) return 'Unknown';
+  const diffSec = Math.max(0, Math.floor((now - time) / 1000));
+  if (diffSec < 60) return 'just now';
+  const diffMin = Math.floor(diffSec / 60);
+  if (diffMin < 60) return `${diffMin} min${diffMin === 1 ? '' : 's'} ago`;
+  const diffHours = Math.floor(diffMin / 60);
+  if (diffHours < 24) return `${diffHours} hour${diffHours === 1 ? '' : 's'} ago`;
+  const diffDays = Math.floor(diffHours / 24);
+  if (diffDays === 1) return 'yesterday';
+  if (diffDays < 30) return `${diffDays} days ago`;
+  const diffMonths = Math.floor(diffDays / 30);
+  if (diffMonths < 12) return `${diffMonths} month${diffMonths === 1 ? '' : 's'} ago`;
+  const diffYears = Math.floor(diffDays / 365);
+  return `${diffYears} year${diffYears === 1 ? '' : 's'} ago`;
+}
+
+let cachedRepoCommit = null;
+let repoCommitPromise = null;
+
+export async function fetchLatestRepoCommit() {
+  if (cachedRepoCommit) return cachedRepoCommit;
+  if (!repoCommitPromise) {
+    repoCommitPromise = fetch('https://api.github.com/repos/dynaroars/cspicks/commits?per_page=1')
+      .then(res => (res.ok ? res.json() : null))
+      .then(data => {
+        if (Array.isArray(data) && data[0]) {
+          cachedRepoCommit = {
+            sha: data[0].sha.slice(0, 7),
+            fullSha: data[0].sha,
+            date: data[0].commit?.committer?.date || data[0].commit?.author?.date,
+            url: `https://github.com/dynaroars/cspicks/commit/${data[0].sha}`
+          };
+        }
+        return cachedRepoCommit;
+      })
+      .catch(() => null);
+  }
+  return repoCommitPromise;
 }

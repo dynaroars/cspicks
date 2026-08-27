@@ -1,10 +1,10 @@
 import { drawChart } from '../charts.js';
-import { filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from '../data.js';
-import { areaLabels, cleanName, escapeHtml, getConferenceLabel } from '../shared.js';
-import { buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateParityReport, calculatePerCapita, calculatePublishingEffort, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from '../metrics.js';
-import { renderInsightList, renderMetricCards } from '../analysis-ui.js';
+import { getConferenceAreaMap, parentMap, publicationMatchesConferenceSet } from '../data.js';
+import { calculateParityReport } from '../metrics.js';
+import { renderInsightList } from '../analysis-ui.js';
 import { state } from './state.js';
-import { getAnalysisData, getConferenceSet, getTargetName, isPublicationForTarget } from '../analysis.js';
+import { getConferenceSet, getTargetName } from '../analysis.js';
+import { isPubAtSchool } from './area-trends.js';
 
 export function renderFacultyTrends() {
     const canvas = document.getElementById('diversityChart');

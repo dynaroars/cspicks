@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit award or grant - CS Picks</title>
+  <meta name="description" content="Suggest a new computer science research award, fellowship, or grant, or correct an existing CS Picks entry." />
+  <link rel="canonical" href="https://cspicks.roars.dev/grants-submit.html" />
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CS Picks">
+  <meta property="og:title" content="Submit award or grant - CS Picks">
+  <meta property="og:description" content="Suggest a new computer science research award, fellowship, or grant, or correct an existing CS Picks entry.">
+  <meta property="og:url" content="https://cspicks.roars.dev/grants-submit.html">
+  <meta property="og:image" content="https://cspicks.roars.dev/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Submit award or grant - CS Picks">
+  <meta name="twitter:description" content="Suggest a new computer science research award, fellowship, or grant, or correct an existing CS Picks entry.">
+  <meta name="twitter:image" content="https://cspicks.roars.dev/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+  <link rel="stylesheet" href="./src/grants/submit.css">
+</head>
+<body class="search-page grants-submit-page">
+  <div id="app">
+    <header>
+      <div class="title-row">
+        <a class="site-title-link" href="index.html" aria-label="CS Picks home"><h1>CS Picks</h1></a>
+        <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
+        <a class="icon-link roars-link" href="https://roars.dev" target="_blank" rel="noopener noreferrer" aria-label="ROARS Lab" title="ROARS Lab"></a>
+      </div>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="index.html">🔎 Search</a>
+        <a href="simulator.html">☠️ Simulator</a>
+        <a href="csconfs.html">📅 CS Confs</a>
+        <a href="grants.html" class="active" aria-current="page">💰 Awards &amp; Grants</a>
+        <a href="nsf.html">🇺🇸 NSF Funding</a>
+      </nav>
+    </header>
+
+    <main class="grants-submit-container">
+      <div class="submit-intro">
+        <p class="submit-kicker"><a href="grants.html">← Awards &amp; grants explorer</a></p>
+        <h2>Submit or update an award / grant</h2>
+        <p>Suggest a new call for proposals or propose an update to an existing award. You only need to provide the official link (other fields are optional); maintainers review every submission.</p>
+      </div>
+
+      <div id="submission-form-root"></div>
+    </main>
+  </div>
+  <script type="module" src="/src/grants/submit.js"></script>
+</body>
+</html>

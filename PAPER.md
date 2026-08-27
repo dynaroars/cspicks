@@ -39,7 +39,17 @@ CSPicks already provides a useful experimental foundation:
 - Rank movement, momentum, breadth, faculty concentration, median productivity, team-size proxies, and area growth measured against the field.
 - Peer discovery by area profile at other universities, and coauthor lookup from DBLP.
 - NSF award attribution for matched current faculty, with fractional PI/co-PI shares.
+- A nationwide NSF funding explorer with award-year trends, program search,
+  institution/faculty comparisons, and a visible data-health audit.
+- A maintained conference schedule with research-area search, shared venue
+  sets, current/upcoming-year filtering, multiple submission cycles, and
+  official source links.
+- A curated CS research awards, fellowships, and opportunities explorer with
+  audience, sponsor, topic, deadline, and sort filters, plus reviewed
+  submission/correction forms.
 - Rank-gap explanations, data-health diagnostics, and shareable views.
+- URL-preserved state and Copy Link controls across search, comparisons,
+  Discoveries, the simulator, funding, grants, and conference views.
 
 These features should be instrumented and validated before expanding the product substantially.
 
@@ -469,11 +479,13 @@ The minimum publishable evaluation above assumes frozen analysis scripts and ver
 
 ### Phase 2 — High-value user features
 
-- Rank stability panel.
-- Concentration and effective-contributor view.
-- Venue sensitivity matrix.
-- Personalized research-fit explorer.
-- Faithful explanation and provenance panel.
+- Harden and evaluate the deployed rank stability panel.
+- Harden and evaluate the deployed concentration and effective-contributor view.
+- Harden and evaluate the deployed venue sensitivity matrix.
+- Extend the deployed research-fit, conference-schedule, funding, and grants
+  workflows with provenance and freshness checks.
+- Add a faithful explanation and provenance panel where current inline notes are
+  insufficient.
 
 ### Phase 3 — Research-only prototypes
 

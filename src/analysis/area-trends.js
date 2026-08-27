@@ -1,10 +1,10 @@
 import { drawChart } from '../charts.js';
-import { filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from '../data.js';
-import { areaLabels, cleanName, escapeHtml, getConferenceLabel } from '../shared.js';
-import { buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateParityReport, calculatePerCapita, calculatePublishingEffort, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from '../metrics.js';
-import { renderInsightList, renderMetricCards } from '../analysis-ui.js';
+import { getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from '../data.js';
+import { areaLabels, escapeHtml } from '../shared.js';
+import { calculateAreaMomentum } from '../metrics.js';
+import { renderInsightList } from '../analysis-ui.js';
 import { state } from './state.js';
-import { getAnalysisData, getConferenceSet, getResearcherPatterns, getTargetName, isPublicationForTarget, renderResearcherAreaInsights } from '../analysis.js';
+import { getConferenceSet, getResearcherPatterns, getTargetName, isPublicationForTarget, renderResearcherAreaInsights } from '../analysis.js';
 
 export function isPubAtSchool(prof, pub, targetSchool) {
     if (!state.filters.historical) return prof.affiliation === targetSchool;

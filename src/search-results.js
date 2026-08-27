@@ -376,7 +376,11 @@ export function searchSchools(query) {
         return tokens.every(token => name.includes(token)) ||
           originalTokens.every(token => name.includes(token));
       })
-      .sort((a, b) => a.rank - b.rank);
+      .sort((a, b) => {
+        const rankA = Number.isFinite(a.rank) ? a.rank : Infinity;
+        const rankB = Number.isFinite(b.rank) ? b.rank : Infinity;
+        return rankA - rankB || a.name.localeCompare(b.name);
+      });
   }
 
   const container = document.getElementById('school-results');

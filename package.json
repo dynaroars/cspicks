@@ -2,10 +2,8 @@
   "name": "cspicks",
   "private": true,
   "version": "0.0.0",
+  "license": "MIT",
   "type": "module",
-  "engines": {
-    "node": ">=22"
-  },
   "scripts": {
     "dev": "vite",
     "test": "node --test test/unit/*.test.js",
@@ -21,13 +19,10 @@
     "sitemap": "node scripts/generate-sitemap.mjs",
     "build": "vite build",
     "postbuild": "rm -f dist/professor_history_openalex.json dist/school-aliases.json && rm -rf dist/data",
-    "preview": "vite preview",
-    "predeploy": "npm run build && npm run postbuild",
-    "deploy": "gh-pages -d dist"
+    "preview": "vite preview"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
-    "gh-pages": "^6.3.0",
     "vite": "^7.2.4"
   },
   "dependencies": {

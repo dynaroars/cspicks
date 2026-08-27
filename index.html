@@ -5,12 +5,6 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
-    const applySystemTheme = () => document.documentElement.setAttribute('data-theme', systemTheme.matches ? 'dark' : 'light');
-    applySystemTheme();
-    systemTheme.addEventListener('change', applySystemTheme);
-  </script>
   <title>CS Picks - Find the Right CS PhD Program and Advisor</title>
   <meta name="description" content="Find the right CS PhD program and research advisor. Explore professors, universities, research strengths, publication trends, and NSF funding using open academic data.">
   <link rel="canonical" href="https://cspicks.roars.dev/">
@@ -26,6 +20,16 @@
   <meta name="twitter:title" content="CS Picks - Find the Right CS PhD Program and Advisor">
   <meta name="twitter:description" content="Explore professors, universities, research strengths, publication trends, and NSF funding using open academic data.">
   <meta name="twitter:image" content="https://cspicks.roars.dev/og-image.png">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "CS Picks",
+      "url": "https://cspicks.roars.dev/",
+      "description": "Find the right CS PhD program and research advisor. Explore professors, universities, research strengths, publication trends, and NSF funding using open academic data.",
+      "inLanguage": "en"
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -44,16 +48,15 @@
       <div class="title-row">
         <a class="site-title-link" href="index.html" aria-label="Reset CS Picks"><h1>CS Picks</h1></a>
         <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
-        <a class="icon-link" href="https://github.com/dynaroars/cspicks/blob/main/FAQ.md" target="_blank" rel="noopener noreferrer" aria-label="FAQ, methods and data" title="FAQ, methods &amp; data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.9 2.9 0 0 1 5.6 1c0 2-2.8 2.4-2.8 4.2"/><circle cx="12" cy="17.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
         <a class="icon-link" id="data-health-toggle" href="?dataHealth=true#site-data-health" aria-label="Data health" title="Data health"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h4l2.5-6 4 12L16 12h5"/></svg></a>
         <a class="icon-link roars-link" href="https://roars.dev" target="_blank" rel="noopener noreferrer" aria-label="ROARS Lab" title="ROARS Lab"></a>
       </div>
       <nav class="top-nav" aria-label="Primary navigation">
         <a href="index.html" id="nav-search">🔎 Search</a>
-        <a href="index.html?view=discoveries" id="nav-discoveries">🔭 Discoveries</a>
         <a href="simulator.html">☠️ Simulator</a>
         <a href="csconfs.html">📅 CS Confs</a>
-        <a href="funding.html">🇺🇸 NSF Funding</a>
+        <a href="grants.html">💰 Awards &amp; Grants</a>
+        <a href="nsf.html">🇺🇸 NSF Funding</a>
       </nav>
     </header>
 

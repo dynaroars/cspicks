@@ -2,7 +2,7 @@ import { drawChart, onThemeChange } from './charts.js';
 import { fetchFrequentCoauthors } from './dblp.js';
 import { filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from './data.js';
 import { areaLabels, cleanName, escapeHtml, getConferenceLabel } from './shared.js';
-import { buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateParityReport, calculatePerCapita, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from './metrics.js';
+import { applyPerCapitaRanks, buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateParityReport, calculatePerCapita, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from './metrics.js';
 import { renderInsightList, renderMetricCards } from './analysis-ui.js';
 import bundledRules from './csrankings-rules.generated.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
@@ -217,9 +217,13 @@ function setupTabs() {
 }
 
 export function getAnalysisData() {
-    const { startYear: start, endYear: end, region, confSet, historyMap, aliasMap } = state.filters;
+    const { startYear: start, endYear: end, region, confSet, historyMap, aliasMap, perCapita } = state.filters;
     const current = filterByYears(state.rawData, start, end, region, historyMap, aliasMap, confSet);
     const prior = buildPriorPeriodData(state.rawData, start, end, region, historyMap, aliasMap, confSet);
+    if (perCapita) {
+        applyPerCapitaRanks(current);
+        applyPerCapitaRanks(prior);
+    }
     return { current, prior, start, end, confSet };
 }
 
@@ -414,20 +418,10 @@ function renderCollaborationStats() {
     `;
 }
 
-const CONF_SET_LABELS = {
+export const CONF_SET_LABELS = {
     'csrankings-default': 'CSRankings default',
     csrankings: 'CSRankings all',
     'core-a': 'CORE A + A*',
     core: 'CORE A* only',
     'all-union': 'All (union)'
 };
-
-// One sweep serves every school, so it is cached per region rather than per
-// school. Historical mode changes which school a publication counts for, so it
-// is part of the key too.
-const stabilityCache = new Map();
-// A sweep takes over a second, and re-entering the tab or picking another
-// school during it would otherwise start a second identical one. In-flight
-// sweeps are shared so the later caller joins the running one.
-const stabilitySweeps = new Map();
-let stabilityToken = 0;

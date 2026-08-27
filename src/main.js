@@ -2,7 +2,7 @@ import { loadData, publicationMatchesConferenceSet, schoolAliases } from './data
 import { createFilterBar } from './filters.js';
 import { initAnalysis, refreshAnalysis, setAnalysisTarget } from './analysis.js';
 import { areaLabels, cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
-import { buildPriorPeriodData } from './metrics.js';
+import { applyPerCapitaRanks, buildPriorPeriodData, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
 import { renderProfessorCard as renderProfessorCardView, renderSchoolCard as renderSchoolCardView } from './search-cards.js';
 import { clearSearchSections, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
 import { createDblpAuthorSearch } from './dblp-search-ui.js';
@@ -11,6 +11,7 @@ import { createSearchSuggestionBox } from './search-suggestions.js';
 import { initTooltipPositioning } from './tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
 import { trackComparison, trackView } from './analytics.js';
+import { aoeDeadline, filterSchedule, formatCalendarDate } from '../csconfs/schedule-data.js';
 
 let rawData = null;
 let appData = { professors: {}, schools: {} };
@@ -18,6 +19,7 @@ let priorAppData = { professors: {}, schools: {} };
 let filters = null;
 let selectedAnalysisTarget = null;
 let nsfData = null;
+let conferenceSchedule = [];
 // Discoveries' cards (and the NSF fetch they need) are dead weight on every
 // plain Search visit, so they're loaded as a separate chunk only when the
 // page was actually reached via the Discoveries nav link, not statically
@@ -55,14 +57,14 @@ const isDiscoveries = params.get('view') === 'discoveries';
 function updateNavActive() {
   const searchLink = document.getElementById('nav-search');
   const discoveriesLink = document.getElementById('nav-discoveries');
-  searchLink.classList.toggle('active', !isDiscoveries);
-  discoveriesLink.classList.toggle('active', isDiscoveries);
+  searchLink?.classList.toggle('active', !isDiscoveries);
+  discoveriesLink?.classList.toggle('active', isDiscoveries);
   if (isDiscoveries) {
-    searchLink.removeAttribute('aria-current');
-    discoveriesLink.setAttribute('aria-current', 'page');
+    searchLink?.removeAttribute('aria-current');
+    discoveriesLink?.setAttribute('aria-current', 'page');
   } else {
-    discoveriesLink.removeAttribute('aria-current');
-    searchLink.setAttribute('aria-current', 'page');
+    discoveriesLink?.removeAttribute('aria-current');
+    searchLink?.setAttribute('aria-current', 'page');
   }
 }
 
@@ -105,14 +107,24 @@ async function init() {
   initTooltipPositioning();
 
   try {
+    const schedulePromise = fetch('./csconfs/data/conferences.json')
+      .then(response => response.ok ? response.json() : [])
+      .catch(error => {
+        console.warn('Conference schedule examples could not be loaded:', error);
+        return [];
+      });
+
     if (isDiscoveries) {
       discoveriesApi = await discoveriesModulePromise;
       discoveriesApi.setupCardSharing(filters);
-      const [loadedData, loadedNsfData] = await Promise.all([loadData(), discoveriesApi.fetchDiscoveriesNsfData()]);
+      const [loadedData, loadedNsfData, loadedSchedule] = await Promise.all([loadData(), discoveriesApi.fetchDiscoveriesNsfData(), schedulePromise]);
       rawData = loadedData;
       nsfData = loadedNsfData;
+      conferenceSchedule = loadedSchedule;
     } else {
-      rawData = await loadData();
+      const [loadedData, loadedSchedule] = await Promise.all([loadData(), schedulePromise]);
+      rawData = loadedData;
+      conferenceSchedule = loadedSchedule;
     }
     await filters.ready();
 
@@ -310,6 +322,9 @@ function updatePriorData() {
     filters.aliasMap,
     filters.confSet
   );
+  if (filters.perCapita) {
+    applyPerCapitaRanks(priorAppData);
+  }
 }
 
 function setupSearch() {
@@ -410,6 +425,77 @@ function sample(items, count) {
   return available.slice(0, count);
 }
 
+function discoveryExampleItems() {
+  const examples = [];
+  const insights = calculateDiscoveryInsights(appData, priorAppData);
+  const subfields = calculateSubfieldDiscoveries(appData, priorAppData);
+  const short = name => getInstitutionShortName(name);
+  const discoveryHref = cardId => {
+    const params = filters.toParams();
+    params.set('view', 'discoveries');
+    return `index.html?${params.toString()}#${cardId}`;
+  };
+  const add = (label, cardId, title) => examples.push({ label, href: discoveryHref(cardId), title });
+
+  sample(insights.rankClimbers, 1).forEach(item => {
+    add(`${short(item.name)} rose ${item.metrics.rankDelta} spots`, 'discovery-biggest-rank-gains', 'View this rank-gain discovery');
+  });
+  sample(insights.momentum, 1).forEach(item => {
+    add(`${short(item.name)} grew ${item.metrics.growth.toFixed(0)}%`, 'discovery-fastest-growing-output', 'View this growth discovery');
+  });
+  sample(insights.areaBreakouts, 1).forEach(item => {
+    const area = areaLabels[item.area] || item.area;
+    add(`${area} is rising at ${short(item.name)}`, 'discovery-fastest-growing-research-areas', 'View this research-area discovery');
+  });
+  sample(subfields.growth, 1).forEach(item => {
+    const area = areaLabels[item.area] || item.area;
+    add(`${area} grew ${item.growth.toFixed(0)}%`, 'discovery-fastest-growing-subfields', 'View this subfield discovery');
+  });
+  return examples;
+}
+
+function findAreaQuery(query) {
+  const normalized = query.trim().toLowerCase();
+  const compact = normalized.replace(/[^a-z0-9]/g, '');
+  return Object.entries(areaLabels).find(([key, label]) => {
+    const labelCompact = label.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const words = normalized.split(/[^a-z0-9]+/).filter(word => word.length >= 4);
+    return compact === key || labelCompact.includes(compact) || compact.includes(labelCompact)
+      || words.some(word => label.toLowerCase().includes(word));
+  })?.[0] || null;
+}
+
+function deadlineExampleItems(query) {
+  if (!query.trim() || conferenceSchedule.length === 0) return [];
+  const areaQuery = findAreaQuery(query);
+  const scheduleQuery = areaQuery || query;
+  const groups = filterSchedule(conferenceSchedule, {
+    startYear: new Date().getFullYear(),
+    endYear: new Date().getFullYear() + 1,
+    confSet: filters.confSet,
+    query: scheduleQuery,
+    upcomingOnly: true
+  });
+  const deadlines = groups.map(group => {
+    const deadline = group
+      .map(conference => ({ conference, instant: aoeDeadline(conference.deadline) }))
+      .filter(item => item.instant !== null && item.instant >= Date.now())
+      .sort((a, b) => a.instant - b.instant)[0];
+    return deadline ? { group, deadline } : null;
+  }).filter(Boolean);
+
+  return sample(deadlines, 2).map(({ group, deadline }) => {
+    const name = group[0].name;
+    const label = `${name} deadline ${formatCalendarDate(deadline.conference.deadline)}`;
+    const targetQuery = areaQuery ? (areaLabels[areaQuery] || areaQuery) : name;
+    return {
+      label,
+      href: `csconfs.html?q=${encodeURIComponent(targetQuery)}`,
+      title: `View ${name} deadlines in CS Confs`
+    };
+  });
+}
+
 function renderSearchExamples() {
   const fixedContainer = document.getElementById('search-example-fixed');
   const container = document.getElementById('search-example-items');
@@ -447,10 +533,21 @@ function renderSearchExamples() {
     ...pair(familiarConferences)
   ];
 
+  const query = document.getElementById('main-search')?.value.trim() || '';
+  const contextualItems = [
+    ...sample(discoveryExampleItems(), 2),
+    ...(query.length >= 2 ? deadlineExampleItems(query) : [])
+  ];
+
   fixedContainer.innerHTML = '<span>Try:</span>';
-  container.innerHTML = examples
-    .filter((item, index, all) => all.findIndex(other => other.query === item.query) === index)
-    .map(item => `<button type="button" data-search-example="${escapeHtml(item.query)}">${escapeHtml(item.label)}</button>`)
+  container.innerHTML = [...examples, ...contextualItems]
+    .filter((item, index, all) => {
+      const key = item.href || item.query;
+      return all.findIndex(other => (other.href || other.query) === key) === index;
+    })
+    .map(item => item.href
+      ? `<a class="search-example-link" href="${escapeHtml(item.href)}" title="${escapeHtml(item.title || item.label)}">${escapeHtml(item.label)}</a>`
+      : `<button type="button" data-search-example="${escapeHtml(item.query)}">${escapeHtml(item.label)}</button>`)
     .join('');
 }
 

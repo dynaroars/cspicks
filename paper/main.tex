@@ -60,8 +60,9 @@ attribution of both departmental score and individual faculty output; a
 \emph{per-faculty} ordering that measures output per head rather than in
 aggregate; a \emph{fragility} analysis reporting how many departures would move
 a department out of its rank band; head-to-head comparison of two departments,
-two researchers, two subfields, or two venues; and a funding view over NSF
-awards attributed to the same roster.
+two researchers, two subfields, or two venues; a funding view over NSF awards
+attributed to the same roster; and applicant-facing context through conference
+deadlines and a curated explorer for CS research awards and fellowships.
 
 Applying the stability sweep to all 190 ranked U.S.\ departments produces our
 central empirical finding: rank stability is highly unevenly distributed. The
@@ -140,6 +141,9 @@ enough to run many times in a browser. Our contributions are:
   \item \textbf{A funding view} (\S\ref{sec:nsfmethod}) over NSF awards
     attributed to the same roster, which lets a publication-based ordering be
     checked against an independently produced one.
+  \item \textbf{Applicant-facing context} through a maintained conference
+    schedule, a curated CS research awards and fellowships explorer, and
+    shareable URLs that preserve the filters and view state behind a result.
   \item \textbf{An empirical characterization} (\S\ref{sec:results}) of rank
     stability, venue sensitivity, output concentration, per-faculty ordering,
     fragility, the individual-researcher distribution, the subfield
@@ -266,6 +270,14 @@ are generated offline and loaded on demand. NSF award
 records~\cite{nsfawards}, synchronized offline and attributed fractionally
 among principal investigators, support a separate funding view
 (\S\ref{sec:nsfmethod}).
+
+Two additional applicant-facing datasets are maintained locally. Conference
+schedule records cover current and upcoming editions, including multiple
+submission cycles and rolling deadlines, and are linked to official conference
+or sponsoring-organization pages. The grants explorer uses a curated snapshot
+of CS research awards, fellowships, and related opportunities. Neither dataset
+is used in the publication ranking; they provide decision context around the
+research and funding signals.
 
 \subsection{The filtering and ranking pipeline}
 
@@ -503,11 +515,14 @@ computation they can inspect, there is no server-side state that could
 personalize or silently alter a ranking, and the tool cannot accumulate a
 record of who looked up whom.
 
-The application comprises four pages --- search and analysis, a ranking-impact
-simulator, a discoveries feed, and an NSF funding explorer --- each with its
-own entry module, sharing a common filter bar, chart layer, and autocomplete
-component. The canonical data load is memoized, so modules loaded together
-share a single download and parse.
+The application comprises five user-facing workflows --- search and analysis
+(including the Discoveries view), a ranking-impact simulator, a conference
+schedule, an NSF funding explorer, and a CS research awards and fellowships
+explorer --- each with its own entry module, sharing URL-aware controls,
+autocomplete, accessibility conventions, and visual components. Submission and
+correction forms accompany the conference and grants workflows. The canonical
+publication-data load is memoized, so modules loaded together share a single
+download and parse.
 
 \subsection{Performance}
 
@@ -526,6 +541,8 @@ cache.
 
 Two datasets are too large or too slow to build at page load and are generated
 offline: OpenAlex-derived affiliation histories, and the NSF award snapshot.
+Conference schedules and the grants snapshot are maintained as local,
+reviewable data rather than fetched from a runtime service.
 
 Correctness is maintained by a unit suite covering the filtering, scoring, and
 ranking logic, rendering safety, and the metric definitions introduced here,
@@ -629,6 +646,18 @@ institutions or investigators.
 A permanently visible data-health panel reports snapshot freshness, roster
 coverage, and the matching caveats of \S\ref{sec:nsfmethod}, because a funding
 figure invites more precise interpretation than it can support.
+
+\subsection{Conference schedule and grants explorer}
+
+The conference page searches venues and research areas using the same
+autocomplete conventions as the publication views. It exposes conference-year
+ranges, shared venue sets, upcoming-only filtering, and multiple submission
+cycles, while keeping the source record and official event link visible. A
+separate grants page searches curated CS research awards, fellowships, and
+related opportunities by audience, sponsor, topic, deadline, and sort order.
+Both pages encode their state in the URL. Their submission forms route proposed
+records and corrections through review rather than silently changing the public
+snapshot.
 
 \section{Features and results}
 \label{sec:results}
@@ -1871,6 +1900,12 @@ by a single script, so figures can be refreshed, but any specific value in this
 paper should be read as of its generation date rather than as a stable
 property.
 
+\paragraph{Applicant-context data changes.} Conference dates, submission
+deadlines, awards, fellowships, and grant opportunities are maintained records,
+not stable measurements. They can become outdated or change at the source, so
+the schedule and grants workflows expose source links and review caveats rather
+than presenting them as guaranteed opportunities.
+
 \section{Ethical considerations}
 \label{sec:ethics}
 
@@ -1932,8 +1967,9 @@ resolves a quarter of the fragility cases we examined.
 
 We believe the appropriate response is not to propose a better ranking, but to
 report the envelope alongside the number, and to supply the more local
-information --- which subfield, which faculty, which funding --- that the
-decision actually turns on.
+information --- which subfield, which faculty, which funding, which conference
+deadlines, and which research opportunities --- that the decision actually
+turns on.
 
 \bibliographystyle{plain}
 \bibliography{refs}

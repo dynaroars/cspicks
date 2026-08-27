@@ -8,7 +8,7 @@ import { syncCsrankingsRules } from './csrankings-rules.js';
 import { initTooltipPositioning } from './tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
 import { trackView } from './analytics.js';
-import './styles/simulator.css';
+import './styles/pages/simulator.css';
 import { performCandidatesAnalysis } from './simulator/candidate-analysis.js';
 import { renderCandidateResults } from './simulator/candidate-results.js';
 
@@ -341,11 +341,36 @@ function setupFilters() {
   filters = createFilterBar('#filter-bar', {
     label: 'Simulator filters',
     fields: ['region', 'years', 'history', 'percapita', 'confSet'],
-    years: { min: 2000, max: DEFAULT_END_YEAR },
+    years: { min: 1970, max: DEFAULT_END_YEAR },
     className: 'simulator-filters',
     onChange: () => {
       appData = filters.apply(rawData);
       refreshPerCapitaRanks();
+
+      if (selectedUniv) {
+        const updatedSchool = appData.schools[selectedUniv.name];
+        if (updatedSchool) {
+          selectedUniv = updatedSchool;
+          const rankLabel = currentRankLabel(selectedUniv);
+          const display1 = document.getElementById('selected-univ-display');
+          const display2 = document.getElementById('selected-univ-display-results');
+          if (display1) display1.textContent = `Target: ${selectedUniv.name} (${rankLabel})`;
+          if (display2) display2.textContent = `Target: ${selectedUniv.name} (${rankLabel})`;
+
+          const candidatesStep = document.getElementById('step-candidates');
+          if (candidatesStep && !candidatesStep.classList.contains('hidden')) {
+            populateFacultyList(selectedUniv);
+          }
+
+          const resultsStep = document.getElementById('step-results');
+          if (resultsStep && !resultsStep.classList.contains('hidden')) {
+            runAnalysis();
+          }
+          updateSimulatorUrl();
+          return;
+        }
+      }
+
       resetSimulation();
     }
   });

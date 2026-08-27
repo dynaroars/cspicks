@@ -63,6 +63,81 @@ export function calculateParityReport(rawData, filteredData, confSet = 'csrankin
   };
 }
 
+export function calculateCorpusDiagnostics(rawData, filteredData) {
+  const activeProfs = Object.values(filteredData.professors || {}).filter(p => (p.totalAdjusted || 0) > 0);
+  const areaTotals = {};
+  let totalAdjusted = 0;
+  for (const school of Object.values(filteredData.schools || {})) {
+    for (const [area, info] of Object.entries(school.areas || {})) {
+      const adj = info.adjusted || 0;
+      areaTotals[area] = (areaTotals[area] || 0) + adj;
+      totalAdjusted += adj;
+    }
+  }
+
+  // 1. Shannon Entropy & Field HHI
+  const areaEntries = Object.entries(areaTotals).sort((a, b) => b[1] - a[1]);
+  let entropy = 0;
+  let hhi = 0;
+  for (const [, count] of areaEntries) {
+    const p = totalAdjusted > 0 ? count / totalAdjusted : 0;
+    if (p > 0) entropy -= p * Math.log(p);
+    hhi += Math.pow(p * 100, 2);
+  }
+  const maxEntropy = areaEntries.length > 0 ? Math.log(areaEntries.length) : 0;
+  const normalizedEntropy = maxEntropy > 0 ? (entropy / maxEntropy) * 100 : 0;
+
+  // 2. Gini coefficient of faculty output
+  const scores = activeProfs.map(p => p.totalAdjusted || 0).sort((a, b) => a - b);
+  const n = scores.length;
+  const sumScores = scores.reduce((a, b) => a + b, 0);
+  let gini = 0;
+  if (n > 0 && sumScores > 0) {
+    let weightedSum = 0;
+    for (let i = 0; i < n; i++) {
+      weightedSum += (2 * (i + 1) - n - 1) * scores[i];
+    }
+    gini = weightedSum / (n * sumScores);
+  }
+
+  // Top 10% concentration
+  const top10Count = Math.max(1, Math.round(n * 0.1));
+  const top10Sum = scores.slice(-top10Count).reduce((a, b) => a + b, 0);
+  const top10Concentration = sumScores > 0 ? (top10Sum / sumScores) * 100 : 0;
+
+  // 3. Interdisciplinary bridge ratio (authors with >= 2 subfields)
+  const bridgeProfs = activeProfs.filter(p => {
+    const uniqueAreas = new Set((p.pubs || []).map(pub => pub.area));
+    return uniqueAreas.size >= 2;
+  });
+  const bridgeRatio = activeProfs.length > 0 ? (bridgeProfs.length / activeProfs.length) * 100 : 0;
+
+  // 4. Team size / co-authorship depth
+  let totalRawCount = 0;
+  for (const prof of activeProfs) {
+    totalRawCount += prof.totalCount || 0;
+  }
+  const coauthorshipDepth = totalAdjusted > 0 ? (totalRawCount / totalAdjusted) : 1;
+
+  // 5. Name disambiguation pressure in raw roster
+  const disambiguatedAuthors = Object.keys(rawData.professors || {}).filter(name =>
+    /\s+\d+$|\s+\[\d+\]|\s+\(.*\)/.test(name) || (rawData.professors[name]?.unitNotes && rawData.professors[name].unitNotes.length > 0)
+  ).length;
+
+  return {
+    entropy,
+    normalizedEntropy,
+    hhi: Math.round(hhi),
+    topArea: areaEntries[0] ? { key: areaEntries[0][0], share: totalAdjusted > 0 ? (areaEntries[0][1] / totalAdjusted) * 100 : 0 } : null,
+    gini,
+    top10Concentration,
+    bridgeRatio,
+    coauthorshipDepth,
+    disambiguatedAuthors,
+    activeFacultyCount: activeProfs.length
+  };
+}
+
 /**
  * Measure how a school's fractional publication output is distributed across
  * subfields. The denominator is the school's full set of active faculty in the
