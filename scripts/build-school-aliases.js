@@ -84,15 +84,7 @@ function loadCSRankingsInstitutions() {
  */
 function collectOpenAlexSchools() {
     const history = JSON.parse(fs.readFileSync(OPENALEX_HISTORY, 'utf-8'));
-    const schools = new Set();
-
-    for (const prof of Object.values(history)) {
-        for (const aff of prof) {
-            schools.add(aff.school);
-        }
-    }
-
-    return Array.from(schools);
+    return Array.from(new Set(history.schools));
 }
 
 // Manual overrides for known problematic mappings
