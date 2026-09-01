@@ -22,3 +22,7 @@ research-area mappings. Historical acceptance and submission totals came from
 
 These are credits, not runtime or maintenance dependencies: the deployed page
 reads only the local JSON file.
+
+The automated maintainer stores its latest research outcome and official
+field-level sources in `../maintenance/checks.json`. That provenance file is
+not loaded by the site and does not replace this directory's source of truth.

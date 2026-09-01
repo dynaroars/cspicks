@@ -51,6 +51,98 @@ timeline itself is officially confirmed.
 5. Review the cited official pages, then apply confirmed results centrally to
    every cycle of the corresponding conference edition.
 
+## Automated weekly maintenance
+
+The repository includes a resumable controller that turns this workflow into
+a bounded weekly job:
+
+```bash
+npm run maintain:csconfs -- run
+```
+
+The default run selects six high-priority conference series, researches each
+series in a separate LLM invocation, applies the completed batch, runs the
+required checks, commits directly to `main`, and pushes. Use `--no-push` to
+leave the successful commit local.
+
+Useful commands include:
+
+```bash
+# Inspect the next batch without agents, state changes, Git operations, or writes.
+npm run maintain:csconfs -- run --dry-run
+
+# Research one series or choose Claude instead of the default Codex provider.
+npm run maintain:csconfs -- run --conference PLDI
+npm run maintain:csconfs -- run --agent claude
+
+# Process a capped sweep in restartable six-series batches.
+npm run maintain:csconfs -- run --total 30 --limit 6
+
+# Force a complete sweep, including recently checked series.
+npm run maintain:csconfs -- run --all
+
+# Inspect, stop, and later resume the saved run.
+npm run maintain:csconfs -- status
+npm run maintain:csconfs -- stop
+npm run maintain:csconfs -- run
+
+# Abandon a stopped checkpoint while preserving its logs.
+npm run maintain:csconfs -- reset
+```
+
+The default queue prioritizes missing or `TBD` deadlines, estimated or
+unverified editions, suspicious year-specific URLs, inconsistent cycles,
+impossible date ordering, missing next editions, and finally records whose
+official-site check is older than 30 days. `--stale-days N` changes that final
+interval. A `NOT FOUND` result is deferred for 21 days so a weekly run does not
+spend tokens repeatedly checking an unannounced edition.
+
+### Resumption and state
+
+Operational state and full agent logs live outside the checkout under
+`~/.local/state/cspicks-csconfs-maintenance` by default. Override that location
+with `CSCONFS_MAINTENANCE_STATE_DIR`. The controller checkpoints after every
+structured research result and before each apply, check, commit, and push
+stage.
+
+Research is collected before the repository is changed. If an agent reaches a
+token or rate limit, the controller pauses with the accepted proposals still
+saved and normally leaves the checkout clean. Running the same command later
+resumes automatically. An explicitly supplied `--agent codex|claude` may be
+used to switch providers when resuming.
+
+The controller also records the latest outcome, directly supporting official
+URLs, and field-level evidence in `csconfs/maintenance/checks.json`. That file
+is maintenance provenance; `data/conferences.json` remains the only runtime
+schedule source.
+
+For a weekly cron entry, use an explicit repository path and capture output:
+
+```cron
+17 6 * * 1 cd /path/to/cspicks && npm run maintain:csconfs -- run >> "$HOME/.local/state/cspicks-csconfs-maintenance/cron.log" 2>&1
+```
+
+### Agent configuration and safety
+
+Codex must be authenticated and is invoked with live search in a read-only
+sandbox. Claude is limited to read/search/fetch tools. The controller alone
+writes JSON and runs Git. Provider defaults may be overridden with:
+
+```text
+CSCONFS_CODEX_MODEL
+CSCONFS_CODEX_REASONING_EFFORT
+CSCONFS_CLAUDE_MODEL
+CSCONFS_AGENT_TIMEOUT_MINUTES
+```
+
+A new run requires a clean `main` checkout and begins with a fast-forward-only
+pull. The controller refuses unrelated working-tree changes, never deletes
+historical editions, rejects estimates presented as verified facts, prevents
+known dates from being erased, and requires official source evidence for every
+changed factual field. New editions require explicit official proof of the
+edition and year. If validation or tests fail, the checkpoint is retained for
+inspection rather than silently publishing partial work.
+
 A suitable research brief is:
 
 ```text
@@ -118,7 +210,7 @@ After editing, run:
 ```bash
 npm test
 npm run build
-npx playwright test test/e2e/core-flows.spec.js --grep "CS Confs"
+npx playwright test test/e2e/csconfs.spec.js
 ```
 
 Also inspect the diff to ensure changes are limited to the intended conference
