@@ -155,6 +155,8 @@ interface VerdictEntry {
   totalAdjusted?: number;
 }
 
+type VerdictSide = 'a' | 'b';
+
 /**
  * Decide the one line a reader should be able to stop at. "Leads in N areas"
  * measures breadth; the headline measure — rank for schools, adjusted output
@@ -171,7 +173,7 @@ export function describeVerdict(
   aWins: number,
   bWins: number
 ) {
-  const headline = type === 'school'
+  const headline: { leader: VerdictSide | null, phrase: string, verb: string } = type === 'school'
     // Rank is the headline for a school, and lower wins.
     ? {
       leader: entryA.rank === entryB.rank ? null : (entryA.rank < entryB.rank ? 'a' : 'b'),
@@ -189,7 +191,7 @@ export function describeVerdict(
         verb: 'has more output'
       };
     })();
-  const areaLeader = aWins === bWins ? null : (aWins > bWins ? 'a' : 'b');
+  const areaLeader: VerdictSide | null = aWins === bWins ? null : (aWins > bWins ? 'a' : 'b');
   const kind = !headline.leader && !areaLeader ? 'even'
     : !headline.leader ? 'breadth-only'
       : !areaLeader || headline.leader === areaLeader ? 'agree'

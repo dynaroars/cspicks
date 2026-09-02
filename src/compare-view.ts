@@ -1,6 +1,52 @@
 import { drawChart } from './charts.js';
 import { areaLabels, cleanName, escapeHtml } from './shared.js';
 import { describeVerdict } from './metrics.js';
+import type { Chart, ChartConfiguration, ChartItem } from 'chart.js';
+import type { AreaStats } from './types.js';
+import type { compareAreas } from './metrics/discoveries.js';
+
+type ComparisonSide = 'a' | 'b';
+type ComparisonType = 'school' | 'researcher';
+type ScoreValue = string | number | null | undefined;
+
+export interface ComparisonEntry {
+    areas: Record<string, AreaStats>;
+    totalCount: number;
+    totalAdjusted: number;
+    rank?: number;
+    facultyAdjustedCounts?: Record<string, number>;
+    affiliation?: string;
+    totalPapers?: number;
+    turingAwardYear?: number | null;
+    acmFellowYear?: number | null;
+}
+
+export interface ScoreboardRow {
+    label: string;
+    help?: string;
+    a: ScoreValue;
+    b: ScoreValue;
+    format?: (value: ScoreValue) => string;
+    lowerWins?: boolean;
+}
+
+interface ComparisonData {
+    areaList: string[];
+    labels: string[];
+    dataA: number[];
+    dataB: number[];
+}
+
+interface ComparisonSummaryOptions extends ComparisonData {
+    type: ComparisonType;
+    nameA: string;
+    nameB: string;
+    entryA: ComparisonEntry;
+    entryB: ComparisonEntry;
+}
+
+interface ComparisonInsight { area: string; margin: string }
+type AreaComparison = ReturnType<typeof compareAreas>;
 
 export const compareColors = {
     a: { fill: 'rgba(37, 99, 235, 0.7)', line: 'rgba(37, 99, 235, 1)' },
@@ -8,7 +54,7 @@ export const compareColors = {
 };
 
 // Areas ordered by combined weight, so the biggest differences sit at the top of the chart.
-export function buildComparison(entryA, entryB) {
+export function buildComparison(entryA: ComparisonEntry, entryB: ComparisonEntry): ComparisonData {
     const allAreas = new Set([...Object.keys(entryA.areas || {}), ...Object.keys(entryB.areas || {})]);
     const areaList = Array.from(allAreas).sort((a, b) => {
         const totalA = (entryA.areas[a]?.adjusted || 0) + (entryB.areas[a]?.adjusted || 0);
@@ -24,7 +70,11 @@ export function buildComparison(entryA, entryB) {
     };
 }
 
-export function renderComparisonChart(canvas, previous, { labels, dataA, dataB, nameA, nameB }) {
+export function renderComparisonChart(
+    canvas: ChartItem,
+    previous: Chart | null,
+    { labels, dataA, dataB, nameA, nameB }: ComparisonData & { nameA: string, nameB: string }
+) {
     return drawChart(canvas, previous, {
         type: 'bar',
         data: {
@@ -75,22 +125,22 @@ export function renderComparisonChart(canvas, previous, { labels, dataA, dataB, 
     });
 }
 
-export const compareNumber = value => Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 1 });
+export const compareNumber = (value: ScoreValue) => Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 1 });
 
 /**
  * A head-to-head table of two entities. Each row is
  * `{ label, a, b, format, lowerWins }`; the better of two numeric values is
  * marked, and non-numeric rows (an affiliation, say) are shown without a winner.
  */
-export function renderScoreboard(safeNameA, safeNameB, rows) {
-  const cell = (row, side) => {
+export function renderScoreboard(safeNameA: string, safeNameB: string, rows: ScoreboardRow[]) {
+  const cell = (row: ScoreboardRow, side: ComparisonSide) => {
     const value = row[side];
     const other = row[side === 'a' ? 'b' : 'a'];
     const wins = Number.isFinite(value) && Number.isFinite(other)
       && (row.lowerWins ? value < other : value > other);
     return `<td class="comparison-side-${side}${wins ? ' is-leader' : ''}">${escapeHtml((row.format || compareNumber)(value))}</td>`;
   };
-  const measure = row => row.help
+  const measure = (row: ScoreboardRow) => row.help
     ? `<span class="tooltip-trigger comparison-measure" tabindex="0" aria-label="About ${escapeHtml(row.label)}">${escapeHtml(row.label)} <span class="comparison-measure-info" aria-hidden="true">ⓘ</span><span class="tooltip-content" role="tooltip">${escapeHtml(row.help)}</span></span>`
     : escapeHtml(row.label);
 
@@ -106,21 +156,21 @@ export function renderScoreboard(safeNameA, safeNameB, rows) {
     </div>`;
 }
 
-export const sideSpan = (side, name) => `<span class="comparison-side-${side}">${name}</span>`;
+export const sideSpan = (side: ComparisonSide, name: string) => `<span class="comparison-side-${side}">${name}</span>`;
 
 // Turing Award / ACM Fellow badges sit next to the name in the head-to-head
 // header rather than a separate card.
-function honorBadges(entry) {
+function honorBadges(entry: ComparisonEntry) {
   return [
     entry.turingAwardYear ? `<span class="honor-badge honor-turing" title="Turing Award recipient in ${entry.turingAwardYear}">🏆 Turing Award · ${entry.turingAwardYear}</span>` : '',
     entry.acmFellowYear ? `<span class="honor-badge honor-acm" title="Named an ACM Fellow in ${entry.acmFellowYear}">ACM Fellow · ${entry.acmFellowYear}</span>` : ''
   ].filter(Boolean).join('');
 }
 
-function verdict(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins, areaCount) {
+function verdict(type: ComparisonType, safeNameA: string, safeNameB: string, entryA: ComparisonEntry, entryB: ComparisonEntry, aWins: number, bWins: number, areaCount: number) {
   const { leader, phrase, verb, areaLeader, kind } = describeVerdict(type, entryA, entryB, aWins, bWins);
-  const named = side => sideSpan(side, side === 'a' ? safeNameA : safeNameB);
-  const areaPhrase = side => `${side === 'a' ? aWins : bWins} of ${areaCount} areas`;
+  const named = (side: ComparisonSide) => sideSpan(side, side === 'a' ? safeNameA : safeNameB);
+  const areaPhrase = (side: ComparisonSide) => `${side === 'a' ? aWins : bWins} of ${areaCount} areas`;
 
   let line;
   if (kind === 'even') {
@@ -141,26 +191,26 @@ function verdict(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins, areaC
 
 // "Leads in N areas" says who is broader, not who is bigger, so the summary
 // opens with the totals that decide the ranking.
-function scoreboard(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins) {
+function scoreboard(type: ComparisonType, safeNameA: string, safeNameB: string, entryA: ComparisonEntry, entryB: ComparisonEntry, aWins: number, bWins: number) {
   const number = compareNumber;
-  const facultyCount = entry => Object.keys(entry.facultyAdjustedCounts || {}).length;
-  const rows = type === 'school'
+  const facultyCount = (entry: ComparisonEntry) => Object.keys(entry.facultyAdjustedCounts || {}).length;
+  const rows: ScoreboardRow[] = type === 'school'
     ? [
-      { label: 'Overall rank', help: 'Position among universities in the selected region, years, and venue set. The score is the geometric mean of adjusted publication counts plus one across every top-level CSRankings area; equal scores share a rank.', a: entryA.rank, b: entryB.rank, format: value => `#${value}`, lowerWins: true },
+      { label: 'Overall rank', help: 'Position among universities in the selected region, years, and venue set. The score is the geometric mean of adjusted publication counts plus one across every top-level CSRankings area; equal scores share a rank.', a: entryA.rank, b: entryB.rank, format: (value: ScoreValue) => `#${value}`, lowerWins: true },
       { label: 'Papers', help: 'Non-fractional publication credit summed across publishing faculty for the selected years and venues. A paper coauthored by multiple listed faculty can contribute once for each listed author, so this is not a deduplicated paper count.', a: Math.ceil(entryA.totalCount || 0), b: Math.ceil(entryB.totalCount || 0), format: number },
       { label: 'Adjusted count', help: 'The same publication output after each author receives fractional credit based on the paper’s author count. University totals sum that credit across eligible faculty.', a: entryA.totalAdjusted, b: entryB.totalAdjusted, format: number },
       { label: 'Publishing faculty', help: 'Distinct faculty with at least one eligible publication in the selected years and venue set. Faculty with no counted output in this window are not included.', a: facultyCount(entryA), b: facultyCount(entryB), format: number },
       { label: 'Areas led', help: 'Number of research areas where this university has a higher adjusted count than the other university. It compares only this pair; it is not the number of regional #1 rankings.', a: aWins, b: bWins, format: number }
     ]
     : [
-      { label: 'University', help: 'Current CSRankings affiliation. Enable History when you want publications credited to estimated affiliations at publication time.', a: entryA.affiliation || '—', b: entryB.affiliation || '—', format: value => String(value) },
+      { label: 'University', help: 'Current CSRankings affiliation. Enable History when you want publications credited to estimated affiliations at publication time.', a: entryA.affiliation || '—', b: entryB.affiliation || '—', format: (value: ScoreValue) => String(value) },
       { label: 'Papers', help: 'Eligible publications attributed to this researcher in the selected years and venue set, before fractional author adjustment.', a: entryA.totalPapers ?? Math.ceil(entryA.totalCount || 0), b: entryB.totalPapers ?? Math.ceil(entryB.totalCount || 0), format: number },
       { label: 'Adjusted count', help: 'Sum of the researcher’s fractional authorship credit for eligible publications. A paper’s credit is divided according to its author count.', a: entryA.totalAdjusted, b: entryB.totalAdjusted, format: number },
       { label: 'Active areas', help: 'Top-level research areas in which the researcher has eligible publication output during the selected period.', a: Object.keys(entryA.areas || {}).length, b: Object.keys(entryB.areas || {}).length, format: number },
       { label: 'Areas led', help: 'Number of research areas where this researcher has a higher adjusted count than the other researcher. This is a pairwise comparison, not a regional rank.', a: aWins, b: bWins, format: number }
     ];
 
-  const headerName = (safeName, entry) => {
+  const headerName = (safeName: string, entry: ComparisonEntry) => {
     if (type !== 'researcher') return safeName;
     const badges = honorBadges(entry);
     return badges ? `${safeName}<span class="faculty-honors">${badges}</span>` : safeName;
@@ -169,14 +219,14 @@ function scoreboard(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins) {
   return renderScoreboard(headerName(safeNameA, entryA), headerName(safeNameB, entryB), rows);
 }
 
-export function renderComparisonSummary(container, { type, nameA, nameB, entryA, entryB, areaList, dataA, dataB }) {
+export function renderComparisonSummary(container: HTMLElement, { type, nameA, nameB, entryA, entryB, areaList, dataA, dataB }: ComparisonSummaryOptions) {
     const safeNameA = escapeHtml(nameA);
     const safeNameB = escapeHtml(nameB);
 
     let aWins = 0;
     let bWins = 0;
-    const insightsA = [];
-    const insightsB = [];
+    const insightsA: ComparisonInsight[] = [];
+    const insightsB: ComparisonInsight[] = [];
 
     areaList.forEach((area, i) => {
         const valA = dataA[i];
@@ -207,7 +257,7 @@ export function renderComparisonSummary(container, { type, nameA, nameB, entryA,
     let html = verdict(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins, areaList.length)
         + scoreboard(type, safeNameA, safeNameB, entryA, entryB, aWins, bWins);
 
-    const leadColumn = (side, name, insights) => `
+    const leadColumn = (side: ComparisonSide, name: string, insights: ComparisonInsight[]) => `
         <div class="comparison-lead-column comparison-side-${side}">
             <h4>${name} leads</h4>
             ${insights.map(insight => `
@@ -229,11 +279,11 @@ export function renderComparisonSummary(container, { type, nameA, nameB, entryA,
 // A capped, expandable name list: the first dozen inline, the rest behind a
 // <details> disclosure - the same "+N more" pattern used for a professor's
 // affiliation history, since a common area's roster can run to hundreds.
-function nameList(names, emptyText) {
+function nameList(names: string[], emptyText: string) {
   if (!names.length) return `<p class="summary-note">${escapeHtml(emptyText)}</p>`;
   // The query keeps CSRankings' disambiguated name so the link resolves, but
   // the label drops the trailing digits the way every other view does.
-  const link = name => `<a href="index.html?q=${encodeURIComponent(name)}">${escapeHtml(cleanName(name))}</a>`;
+  const link = (name: string) => `<a href="index.html?q=${encodeURIComponent(name)}">${escapeHtml(cleanName(name))}</a>`;
   const shown = names.slice(0, 12);
   const rest = names.slice(12);
   const shownHtml = shown.map(link).join(', ');
@@ -241,7 +291,7 @@ function nameList(names, emptyText) {
   return `<p class="comparison-name-list">${shownHtml}<details class="affiliation-history"><summary>+${rest.length} more</summary><span>${rest.map(link).join(', ')}</span></details></p>`;
 }
 
-function schoolList(rows, emptyText, labelA, labelB) {
+function schoolList(rows: AreaComparison['bothSchools'], emptyText: string, labelA: string, labelB: string) {
   if (!rows.length) return `<p class="summary-note">${escapeHtml(emptyText)}</p>`;
   const shown = rows.slice(0, 9);
   const html = `<div class="rank-gap-list">${shown.map(row => `
@@ -258,26 +308,34 @@ function schoolList(rows, emptyText, labelA, labelB) {
  * area-level counterpart to renderComparisonSummary. `noun` names what is
  * being compared so the copy reads correctly for either kind.
  */
-export function renderAreaComparison(container, { labelA, labelB, cmp, noun = 'fields' }) {
+export function renderAreaComparison(container: HTMLElement, { labelA, labelB, cmp, noun = 'fields' }: {
+  labelA: string;
+  labelB: string;
+  cmp: AreaComparison;
+  noun?: 'fields' | 'venues';
+}) {
   const safeA = escapeHtml(labelA);
   const safeB = escapeHtml(labelB);
   const { a, b, bothFaculty, bothSchools } = cmp;
-  const growthText = value => `${value > 0 ? '+' : ''}${value.toFixed(0)}%`;
+  const growthText = (value: ScoreValue) => {
+    const numericValue = Number(value || 0);
+    return `${numericValue > 0 ? '+' : ''}${numericValue.toFixed(0)}%`;
+  };
 
   const biggerSide = a.currentTotal === b.currentTotal ? null : (a.currentTotal > b.currentTotal ? 'a' : 'b');
   const fasterSide = a.growth === b.growth ? null : (a.growth > b.growth ? 'a' : 'b');
-  const named = side => sideSpan(side, side === 'a' ? safeA : safeB);
-  let verdictLine;
+  const named = (side: ComparisonSide) => sideSpan(side, side === 'a' ? safeA : safeB);
+  let verdictLine: string;
   if (!biggerSide && !fasterSide) {
     verdictLine = `${safeA} and ${safeB} are evenly matched on both region-wide output and growth.`;
   } else {
-    const parts = [];
+    const parts: string[] = [];
     if (biggerSide) parts.push(`${named(biggerSide)} has the larger region-wide output`);
     if (fasterSide) parts.push(`${named(fasterSide)} is growing faster`);
     verdictLine = `${parts.join(', and ')}.`;
   }
 
-  const rows = [
+  const rows: ScoreboardRow[] = [
     { label: 'Region-wide adjusted count', help: `Fractional publication credit for this ${noun === 'venues' ? 'venue' : 'field'}, summed across every university in the selected region and years. Each author receives a fraction of a paper based on its author count.`, a: a.currentTotal, b: b.currentTotal },
     { label: 'Growth vs. prior period', help: 'Percentage change in region-wide adjusted count versus the immediately preceding period of equal length. For example, a 2022–2026 selection is compared with 2017–2021.', a: a.growth, b: b.growth, format: growthText },
     { label: 'Active universities', help: `Distinct universities with a positive adjusted count in this ${noun === 'venues' ? 'venue' : 'field'} during the selected period.`, a: a.schools.length, b: b.schools.length },
@@ -308,7 +366,7 @@ export function renderAreaComparison(container, { labelA, labelB, cmp, noun = 'f
   `;
 }
 
-export function renderComparisonNotice(container, title, message) {
+export function renderComparisonNotice(container: HTMLElement, title: string, message: string) {
     container.innerHTML = `
         <div class="summary-card comparison-notice">
             <h4>${escapeHtml(title)}</h4>

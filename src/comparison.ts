@@ -3,16 +3,34 @@ import { buildComparison, renderAreaComparison, renderComparisonChart, renderCom
 import { compareAreas, compareConferences } from './metrics.js';
 import { findMatchingArea, findMatchingConference } from './search-results.js';
 import { areaLabels, cleanName, getConferenceLabel } from './shared.js';
+import type { Chart } from 'chart.js';
+import type { AnalysisTarget } from './analysis/state.js';
+import type { FilteredData } from './types.js';
+
+type ComparisonTarget = AnalysisTarget | { type: 'area' | 'conference', name: string };
+
+export interface ResolvedComparison {
+  left: string;
+  right: string;
+  a: ComparisonTarget | null;
+  b: ComparisonTarget | null;
+}
+
+interface ComparisonContext {
+  readonly appData: FilteredData;
+  readonly priorAppData: FilteredData;
+  resolveTarget: (term: string) => AnalysisTarget | null;
+}
 
 // "CMU vs MIT" — head-to-head mode for the Search page. The page injects its
 // filtered data and target resolver; everything else lives here.
 const COMPARISON_SEPARATOR = /\s+(?:vs\.?|versus)\s+/i;
 
-let ctx = null;
-let comparisonChart = null;
-let activeComparison = null;
+let ctx: ComparisonContext = null!;
+let comparisonChart: Chart | null = null;
+let activeComparison: ResolvedComparison | null = null;
 
-export function initComparison(context) {
+export function initComparison(context: ComparisonContext) {
   ctx = context;
 }
 
@@ -30,12 +48,12 @@ onThemeChange(() => {
   if (activeComparison) renderComparison(activeComparison);
 });
 
-export function splitComparisonQuery(value) {
+export function splitComparisonQuery(value: string) {
   const match = value.match(/^(.*\s+(?:vs\.?|versus)\s+)(.*)$/i);
   return match ? { prefix: match[1], term: match[2] } : { prefix: '', term: value };
 }
 
-export function parseComparisonQuery(query) {
+export function parseComparisonQuery(query: string) {
   const parts = (query || '').split(COMPARISON_SEPARATOR);
   if (parts.length !== 2) return null;
   const [left, right] = parts.map(part => part.trim());
@@ -47,7 +65,7 @@ export function parseComparisonQuery(query) {
 // Databases" behave like any other comparison without a new syntax to learn.
 // Venues are checked before areas because a few venue names ("Logic and
 // Verification") would otherwise be swallowed by an area prefix match.
-function resolveComparisonTarget(term) {
+function resolveComparisonTarget(term: string): ComparisonTarget | null {
   const target = ctx.resolveTarget(term);
   if (target) return target;
   const conference = findMatchingConference(term.trim());
@@ -56,7 +74,7 @@ function resolveComparisonTarget(term) {
   return area ? { type: 'area', name: area } : null;
 }
 
-export function resolveComparison(query) {
+export function resolveComparison(query: string): ResolvedComparison | null {
   const parsed = parseComparisonQuery(query);
   if (!parsed) return null;
   return {
@@ -77,14 +95,14 @@ export function hideComparison() {
   document.getElementById('comparison-summary').innerHTML = '';
 }
 
-function displayName(target) {
+function displayName(target: ComparisonTarget) {
   if (target.type === 'researcher') return cleanName(target.name);
   if (target.type === 'area') return areaLabels[target.name] || target.name;
   if (target.type === 'conference') return getConferenceLabel(target.name);
   return target.name;
 }
 
-export function renderComparison(comparison) {
+export function renderComparison(comparison: ResolvedComparison) {
   const section = document.getElementById('comparison-results');
   if (!section) return;
 
@@ -142,6 +160,6 @@ export function renderComparison(comparison) {
   document.getElementById('comparison-title').textContent = `${nameA} vs ${nameB}`;
   const data = buildComparison(entryA, entryB);
   chartBox.hidden = false;
-  comparisonChart = renderComparisonChart(document.getElementById('comparisonChart'), comparisonChart, { ...data, nameA, nameB });
+  comparisonChart = renderComparisonChart(document.querySelector<HTMLCanvasElement>('#comparisonChart')!, comparisonChart, { ...data, nameA, nameB });
   renderComparisonSummary(summary, { ...data, type: a.type, nameA, nameB, entryA, entryB });
 }

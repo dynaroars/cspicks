@@ -225,3 +225,10 @@ conference schedule loading, chart-independent timers, affiliation tuples, and r
 sentinels. The repository total is now 104, all confined to `comparison.ts` and
 `compare-view.ts`. All normal verification gates pass (8 test files, 88 bundled modules).
 Resume by typing those two files together, then enable `noImplicitAny` in `tsconfig.json`.
+
+Checkpoint 2026-09-02 (`noImplicitAny` complete): typed the comparison controller and rendering
+boundary, including shared entity, chart, scoreboard, verdict, and area-comparison contracts.
+The funding page continues to reuse the now-typed scoreboard API. Enabled `noImplicitAny` in
+`tsconfig.json`; the repository passes it with zero diagnostics. All normal verification gates
+pass (8 test files, 88 bundled modules). Resume Phase 4 by taking a fresh `strictNullChecks`
+baseline and reducing it in dependency order before enabling that option.
