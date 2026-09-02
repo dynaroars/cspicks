@@ -65,9 +65,14 @@ async function loadDataFromSources(): Promise<RawData> {
 
   const professors: Record<string, Professor> = {};
   const schools: Record<string, School> = {};
-  const turingByName = new Map(turingWinners.map(row => [row.name?.trim(), Number(row.year)]));
-  const acmFellowByName = new Map(acmFellows.map(row => [row.name?.trim(), Number(row.year)]));
-  const countryByCode = new Map(countries.map(row => [row.alpha_2?.trim().toLowerCase(), row.name?.trim()]));
+  const turingByName = new Map<string, number>();
+  const acmFellowByName = new Map<string, number>();
+  const countryByCode = new Map<string, string>();
+  turingWinners.forEach(row => { if (row.name?.trim()) turingByName.set(row.name.trim(), Number(row.year)); });
+  acmFellows.forEach(row => { if (row.name?.trim()) acmFellowByName.set(row.name.trim(), Number(row.year)); });
+  countries.forEach(row => {
+    if (row.alpha_2?.trim() && row.name?.trim()) countryByCode.set(row.alpha_2.trim().toLowerCase(), row.name.trim());
+  });
 
   // turing.csv/acm-fellows.csv list plain names, but CSRankings' roster
   // appends a disambiguation number ("Vipin Kumar 0001") to names that
@@ -80,9 +85,9 @@ async function loadDataFromSources(): Promise<RawData> {
     const name = row.name.trim();
     const base = name.replace(/\s+\d{4}$/, '');
     if (!rosterNamesByBase.has(base)) rosterNamesByBase.set(base, new Set());
-    rosterNamesByBase.get(base).add(name);
+    rosterNamesByBase.get(base)!.add(name);
   });
-  const lookupHonor = (honorMap: Map<string | undefined, number>, name: string) => {
+  const lookupHonor = (honorMap: Map<string, number>, name: string) => {
     if (honorMap.has(name)) return honorMap.get(name);
     const base = name.replace(/\s+\d{4}$/, '');
     if (base === name || !honorMap.has(base)) return null;
@@ -93,13 +98,14 @@ async function loadDataFromSources(): Promise<RawData> {
     if (row.name?.trim() && row.affiliation?.trim()) {
       const name = row.name.trim();
       const affiliation = row.affiliation.trim();
+      const orcid = row.orcid?.trim() || '';
       professors[name] = {
         name: name,
         affiliation,
         homepage: row.homepage,
         scholarid: row.scholarid,
-        orcid: /^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/i.test(row.orcid?.trim()) && row.orcid !== '0000-0000-0000-0000'
-          ? row.orcid.trim()
+        orcid: /^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/i.test(orcid) && orcid !== '0000-0000-0000-0000'
+          ? orcid
           : null,
         aliases: [],
         unitNotes: [],
@@ -122,19 +128,21 @@ async function loadDataFromSources(): Promise<RawData> {
   let invalidPublicationRows = 0;
   authorInfo.forEach(row => {
     const annotatedName = row.name?.trim();
-    const year = Number.parseInt(row.year, 10);
-    const count = Number.parseFloat(row.count);
-    const adjustedcount = Number.parseFloat(row.adjustedcount);
+    const year = Number.parseInt(row.year || '', 10);
+    const count = Number.parseFloat(row.count || '');
+    const adjustedcount = Number.parseFloat(row.adjustedcount || '');
     if (!annotatedName || !row.area?.trim() || !Number.isFinite(year)
       || !Number.isFinite(count) || !Number.isFinite(adjustedcount)) {
       invalidPublicationRows++;
       return;
     }
     const noteMatch = annotatedName.match(/^(.*?)\s+\[([^\]]+)\]$/);
-    const name = noteMatch ? noteMatch[1].trim() : annotatedName;
-    if (professors[name]) {
-      if (noteMatch && !professors[name].unitNotes.includes(noteMatch[2])) {
-        professors[name].unitNotes.push(noteMatch[2]);
+    const name = noteMatch ? noteMatch[1]!.trim() : annotatedName;
+    const professor = professors[name];
+    if (professor) {
+      const unitNote = noteMatch?.[2];
+      if (unitNote && !professor.unitNotes.includes(unitNote)) {
+        professor.unitNotes.push(unitNote);
       }
 
       // Skip next-tier conferences (matches CSRankings default behavior)
@@ -142,7 +150,7 @@ async function loadDataFromSources(): Promise<RawData> {
       //   return;
       // }
 
-      professors[name].pubs.push({
+      professor.pubs.push({
         area: row.area.trim(),
         year,
         count,
@@ -158,15 +166,17 @@ async function loadDataFromSources(): Promise<RawData> {
     const name = row.institution?.trim();
     if (!name) return;
     if (schools[name]) {
-      schools[name].region = row.region;
-      schools[name].country = row.countryabbrv;
-      schools[name].countryName = countryByCode.get(row.countryabbrv?.trim().toLowerCase()) || row.countryabbrv;
+      const countryCode = row.countryabbrv?.trim().toLowerCase();
+      schools[name].region = row.region || null;
+      schools[name].country = row.countryabbrv || null;
+      schools[name].countryName = (countryCode ? countryByCode.get(countryCode) : undefined) || row.countryabbrv;
       schools[name].homepage = row.homepage || null;
     }
   });
 
   const attachAlias = (alias?: string, canonical?: string) => {
-    const professor = professors[canonical?.trim()];
+    const canonicalName = canonical?.trim();
+    const professor = canonicalName ? professors[canonicalName] : undefined;
     const normalizedAlias = alias?.trim();
     if (professor && normalizedAlias && normalizedAlias !== professor.name && !professor.aliases.includes(normalizedAlias)) {
       professor.aliases.push(normalizedAlias);
@@ -175,14 +185,16 @@ async function loadDataFromSources(): Promise<RawData> {
   dblpAliases.forEach(row => attachAlias(row.alias, row.name));
   nameChanges.forEach(row => {
     attachAlias(row.old_name, row.new_name);
-    const professor = professors[row.new_name?.trim()];
-    if (professor && !professor.orcid && /^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/i.test(row.orcid?.trim())) {
-      professor.orcid = row.orcid.trim();
+    const canonicalName = row.new_name?.trim();
+    const professor = canonicalName ? professors[canonicalName] : undefined;
+    const orcid = row.orcid?.trim() || '';
+    if (professor && !professor.orcid && /^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/i.test(orcid)) {
+      professor.orcid = orcid;
     }
   });
 
   for (const name in professors) {
-    if (professors[name].pubs.length === 0) {
+    if (professors[name]?.pubs.length === 0) {
       delete professors[name];
     }
   }
@@ -241,7 +253,7 @@ const IMPLAUSIBLE_HISTORY_INSTITUTION_COUNT = 8;
 
 function isImplausibleHistory(history: AffiliationSegment[], currentAffiliation: string, aliasMap: SchoolAliasMap | null) {
   const resolved = new Set(history.map(segment =>
-    Object.prototype.hasOwnProperty.call(aliasMap || {}, segment.school) ? aliasMap[segment.school] : segment.school));
+    aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, segment.school) ? aliasMap[segment.school]! : segment.school));
   return resolved.size >= IMPLAUSIBLE_HISTORY_INSTITUTION_COUNT && !resolved.has(currentAffiliation);
 }
 
@@ -250,7 +262,7 @@ export function getPublicationSchools(
   publication: Publication,
   historyMap: AffiliationHistory | null = null,
   aliasMap: SchoolAliasMap | null = null
-) {
+): string[] {
   const fallback = [professor.affiliation];
   const history = historyMap?.[professor.name];
 
@@ -269,7 +281,7 @@ export function getPublicationSchools(
 
   const schools = matches
     .map(segment => Object.prototype.hasOwnProperty.call(aliasMap || {}, segment.school)
-      ? aliasMap[segment.school]
+      ? aliasMap![segment.school]!
       : segment.school)
     .filter(Boolean);
 
@@ -293,8 +305,8 @@ function makeRegionTest(schools: Record<string, School>, region: string) {
 function emptySchool(name: string, source?: School): FilteredSchool {
   return {
     name,
-    region: source?.region,
-    country: source?.country,
+    region: source?.region ?? null,
+    country: source?.country ?? null,
     countryName: source?.countryName,
     homepage: source?.homepage,
     areas: {},
@@ -321,8 +333,7 @@ function collectFilteredData(
   const filteredProfs: Record<string, FilteredProfessor> = {};
   const filteredSchools: Record<string, FilteredSchool> = {};
 
-  for (const name in professors) {
-    const prof = professors[name];
+  for (const [name, prof] of Object.entries(professors)) {
     if (!historyMap && !isInRegion(prof.affiliation)) continue;
 
     const inRange = prof.pubs.filter(pub =>
@@ -439,7 +450,7 @@ export function assignCompetitionRanks<T>(items: T[], valueOf: (item: T) => numb
 }
 
 function rankSchools(schoolList: FilteredSchool[]) {
-  schoolList.sort((a, b) => b.score - a.score || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+  schoolList.sort((a, b) => (b.score || 0) - (a.score || 0) || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
 
   let rank = 0;
   let ties = 1;
@@ -452,7 +463,7 @@ function rankSchools(schoolList: FilteredSchool[]) {
       ties++;
     }
     school.rank = rank;
-    previousScore = school.score;
+    previousScore = school.score!;
   });
 
   topLevelAreas.forEach(area => {
@@ -514,7 +525,7 @@ export async function fetchCsv<T = Record<string, string>>(url: string): Promise
       comments: "#",
       complete: (results) => {
         if (results.errors?.length) {
-          reject(new Error(`Failed to parse CSV from ${url}: ${results.errors[0].message}`));
+          reject(new Error(`Failed to parse CSV from ${url}: ${results.errors[0]!.message}`));
           return;
         }
         resolve(results.data);
@@ -552,7 +563,8 @@ export function mergeAffiliationHistory(
 
   const filtered: AffiliationHistory = {};
   for (const name in historyMap) {
-    filtered[name] = filterSabbaticals(historyMap[name]);
+    const affiliations = historyMap[name];
+    if (affiliations) filtered[name] = filterSabbaticals(affiliations);
   }
 
   if (!manualList || manualList.length === 0) return filtered;
@@ -567,14 +579,14 @@ export function mergeAffiliationHistory(
     if (!manualGroups[name]) manualGroups[name] = [];
     manualGroups[name].push({
       school: item.school.trim(),
-      start: parseInt(item.start) || 1970,
-      end: parseInt(item.end) || currentYear
+      start: parseInt(item.start || '') || 1970,
+      end: parseInt(item.end || '') || currentYear
     });
   });
 
   // Apply manual overrides
   for (const name in manualGroups) {
-    merged[name] = manualGroups[name];
+    merged[name] = manualGroups[name]!;
   }
 
   return merged;

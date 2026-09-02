@@ -247,3 +247,10 @@ stability metrics. The central `FilteredSchool.rank` contract now explicitly per
 matching per-capita mode when a department falls below its faculty threshold. The repository
 total is now 623. All normal verification gates pass (8 test files, 88 bundled modules).
 Resume with `data.ts` and the remaining metrics before moving to services and controllers.
+
+Checkpoint 2026-09-02 (`strictNullChecks` data pass): cleared all null-safety diagnostics from
+`data.ts`. CSV ingestion now narrows optional source fields before parsing/indexing, affiliation
+and alias lookups have explicit fallbacks, filtered-professor construction iterates known entries,
+and ranking/history operations guard indexed values. The repository total is now 578. All normal
+verification gates pass (8 test files, 88 bundled modules). Resume with the remaining domain
+metrics, then DBLP/simulation services.
