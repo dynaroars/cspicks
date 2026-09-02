@@ -13,14 +13,14 @@ const STORE = 'dblp-coauthors';
 const DB_VERSION = 1;
 const TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
-let dbPromise = null;
+let dbPromise: Promise<IDBDatabase | null> | null = null;
 
-function openDb() {
+function openDb(): Promise<IDBDatabase | null> {
   if (dbPromise) return dbPromise;
   const idb = globalThis.indexedDB;
   if (!idb) return (dbPromise = Promise.resolve(null));
 
-  dbPromise = new Promise(resolve => {
+  dbPromise = new Promise<IDBDatabase | null>(resolve => {
     let request;
     try {
       request = idb.open(DB_NAME, DB_VERSION);
@@ -40,8 +40,8 @@ function openDb() {
   return dbPromise;
 }
 
-function transact(db, mode, run) {
-  return new Promise(resolve => {
+function transact<T>(db: IDBDatabase, mode: IDBTransactionMode, run: (store: IDBObjectStore) => IDBRequest<T> | null): Promise<T | null> {
+  return new Promise<T | null>(resolve => {
     let store;
     try {
       store = db.transaction(STORE, mode).objectStore(STORE);
@@ -60,10 +60,10 @@ function transact(db, mode, run) {
 }
 
 /** Cached value for `key`, or null when absent, expired, or unavailable. */
-export async function readCached(key) {
+export async function readCached<T>(key: string): Promise<T | null> {
   const db = await openDb();
   if (!db) return null;
-  const entry = await transact(db, 'readonly', store => store.get(key));
+  const entry = await transact<{ value: T, storedAt: number }>(db, 'readonly', store => store.get(key));
   if (!entry || typeof entry.storedAt !== 'number') return null;
   if (Date.now() - entry.storedAt > TTL_MS) {
     // Expired entries are dropped on read; there is no separate sweep.
@@ -73,7 +73,7 @@ export async function readCached(key) {
   return entry.value ?? null;
 }
 
-export async function writeCached(key, value) {
+export async function writeCached(key: string, value: unknown) {
   const db = await openDb();
   if (!db) return;
   await transact(db, 'readwrite', store => store.put({ value, storedAt: Date.now() }, key));

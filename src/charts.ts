@@ -1,4 +1,5 @@
 import Chart from 'chart.js/auto';
+import type { ChartConfiguration, ChartItem } from 'chart.js';
 import { updateChartDefaults } from './shared.js';
 
 // Single owner of Chart.js: defaults, light/dark reaction, and the
@@ -6,7 +7,7 @@ import { updateChartDefaults } from './shared.js';
 
 updateChartDefaults(Chart);
 
-const themeListeners = new Set();
+const themeListeners = new Set<() => void>();
 
 const colorSchemeQuery = typeof window !== 'undefined' && window.matchMedia
   ? window.matchMedia('(prefers-color-scheme: dark)')
@@ -25,7 +26,7 @@ if (colorSchemeQuery) {
 }
 
 /** Re-renders charts when the user switches between light and dark. */
-export function onThemeChange(listener) {
+export function onThemeChange(listener: () => void) {
   themeListeners.add(listener);
   return () => themeListeners.delete(listener);
 }
@@ -41,13 +42,13 @@ const baseOptions = {
  * one level deep onto the shared defaults, so callers only state what makes
  * their chart different.
  */
-export function drawChart(target, previous, config) {
+export function drawChart(target: string | ChartItem, previous: Chart | null, config: ChartConfiguration) {
   previous?.destroy();
   const element = typeof target === 'string' ? document.getElementById(target) : target;
   if (!element) return null;
   // Accepts a canvas, a canvas id, or an already-created 2D context.
-  const context = typeof element.getContext === 'function' ? element.getContext('2d') : element;
-  return new Chart(context, {
+  if (typeof target === 'string' && !(element instanceof HTMLCanvasElement)) return null;
+  return new Chart(element as ChartItem, {
     ...config,
     options: { ...baseOptions, ...config.options }
   });

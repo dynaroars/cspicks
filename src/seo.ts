@@ -9,7 +9,7 @@ export const SITE_NAME = 'CS Picks';
 export const SITE_ORIGIN = 'https://cspicks.roars.dev';
 const DEFAULT_DESCRIPTION = 'Find the right CS PhD program and research advisor. Explore professors, universities, research strengths, publication trends, and NSF funding using open academic data.';
 
-function setMeta(selector, attr, value, content) {
+function setMeta(selector: string, attr: string, value: string, content: string) {
   let el = document.head.querySelector(selector);
   if (!el) {
     el = document.createElement('meta');
@@ -19,16 +19,16 @@ function setMeta(selector, attr, value, content) {
   el.setAttribute('content', content);
 }
 
-function setName(name, content) {
+function setName(name: string, content: string) {
   setMeta(`meta[name="${name}"]`, 'name', name, content);
 }
 
-function setProperty(property, content) {
+function setProperty(property: string, content: string) {
   setMeta(`meta[property="${property}"]`, 'property', property, content);
 }
 
-function setCanonical(href) {
-  let link = document.head.querySelector('link[rel="canonical"]');
+function setCanonical(href: string) {
+  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
   if (!link) {
     link = document.createElement('link');
     link.rel = 'canonical';
@@ -45,7 +45,7 @@ function setCanonical(href) {
  * path        — pathname + search to canonicalize, e.g. "/?q=George+Mason...".
  *               Defaults to the current location, so most callers can omit it.
  */
-export function updatePageMeta({ title, description, path } = {}) {
+export function updatePageMeta({ title, description, path }: { title?: string, description?: string, path?: string } = {}) {
   const safeDescription = description || DEFAULT_DESCRIPTION;
   if (title) document.title = title;
   setName('description', safeDescription);

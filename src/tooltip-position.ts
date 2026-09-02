@@ -7,19 +7,19 @@ const GAP = 8;          // space between the icon and the panel
 const EDGE = 8;         // minimum distance from the viewport edge
 const ARROW_INSET = 12; // keeps the arrow inside the panel's rounded corners
 
-let activeTrigger = null;
+let activeTrigger: HTMLElement | null = null;
 let frame = 0;
 
-function clamp(value, min, max) {
+function clamp(value: number, min: number, max: number) {
   if (max < min) return min;
   return Math.min(Math.max(value, min), max);
 }
 
-function panelOf(trigger) {
-  return trigger.querySelector(':scope > .tooltip-content');
+function panelOf(trigger: HTMLElement) {
+  return trigger.querySelector<HTMLElement>(':scope > .tooltip-content');
 }
 
-function reset(panel) {
+function reset(panel: HTMLElement) {
   panel.style.position = 'fixed';
   panel.style.left = '0px';
   panel.style.top = '0px';
@@ -30,7 +30,7 @@ function reset(panel) {
   panel.style.maxWidth = `${Math.max(window.innerWidth - EDGE * 2, 0)}px`;
 }
 
-function clear(panel) {
+function clear(panel: HTMLElement) {
   panel.classList.remove('tooltip-below');
   panel.style.removeProperty('--tip-arrow-x');
   for (const prop of ['position', 'left', 'top', 'right', 'bottom', 'transform', 'margin', 'max-width']) {
@@ -38,7 +38,7 @@ function clear(panel) {
   }
 }
 
-function place(trigger) {
+function place(trigger: HTMLElement) {
   const panel = panelOf(trigger);
   if (!panel) return;
 
@@ -58,14 +58,14 @@ function place(trigger) {
   panel.style.setProperty('--tip-arrow-x', `${Math.round(arrowX)}px`);
 }
 
-function open(trigger) {
+function open(trigger: HTMLElement) {
   if (activeTrigger === trigger) return;
   if (activeTrigger) close(activeTrigger);
   activeTrigger = trigger;
   place(trigger);
 }
 
-function close(trigger) {
+function close(trigger: HTMLElement) {
   const panel = panelOf(trigger);
   if (panel) clear(panel);
   if (activeTrigger === trigger) activeTrigger = null;
@@ -89,28 +89,28 @@ export function initTooltipPositioning() {
   if (document.body) document.body.dataset.tooltipPositioning = 'on';
 
   document.addEventListener('pointerover', event => {
-    const trigger = event.target.closest?.('.tooltip-trigger');
+    const trigger = event.target instanceof Element ? event.target.closest<HTMLElement>('.tooltip-trigger') : null;
     if (trigger) open(trigger);
-    else if (activeTrigger && !activeTrigger.contains(event.target)) close(activeTrigger);
+    else if (activeTrigger && (!(event.target instanceof Node) || !activeTrigger.contains(event.target))) close(activeTrigger);
   });
 
   document.addEventListener('pointerout', event => {
-    const trigger = event.target.closest?.('.tooltip-trigger');
+    const trigger = event.target instanceof Element ? event.target.closest<HTMLElement>('.tooltip-trigger') : null;
     if (!trigger || trigger !== activeTrigger) return;
-    if (trigger.contains(event.relatedTarget)) return;
+    if (event.relatedTarget instanceof Node && trigger.contains(event.relatedTarget)) return;
     if (trigger.matches(':focus-within')) return;
     close(trigger);
   });
 
   document.addEventListener('focusin', event => {
-    const trigger = event.target.closest?.('.tooltip-trigger');
+    const trigger = event.target instanceof Element ? event.target.closest<HTMLElement>('.tooltip-trigger') : null;
     if (trigger) open(trigger);
   });
 
   document.addEventListener('focusout', event => {
-    const trigger = event.target.closest?.('.tooltip-trigger');
+    const trigger = event.target instanceof Element ? event.target.closest<HTMLElement>('.tooltip-trigger') : null;
     if (!trigger || trigger !== activeTrigger) return;
-    if (trigger.contains(event.relatedTarget)) return;
+    if (event.relatedTarget instanceof Node && trigger.contains(event.relatedTarget)) return;
     if (trigger.matches(':hover')) return;
     close(trigger);
   });

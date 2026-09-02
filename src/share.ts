@@ -1,6 +1,6 @@
 // Shared "Copy link" action: the Web Share API's native sheet when the
 // browser offers one (mostly mobile), a clipboard copy otherwise.
-async function copyToClipboard(text) {
+async function copyToClipboard(text: string) {
   try {
     await navigator.clipboard.writeText(text);
     return true;
@@ -16,13 +16,13 @@ async function copyToClipboard(text) {
  * constructing a DOM node per card. Returns what happened, so the caller can
  * give its own feedback (a title flip, a class toggle, etc).
  */
-export async function shareUrl(url, { title, text } = {}) {
+export async function shareUrl(url: string, { title, text }: { title?: string, text?: string } = {}) {
   if (navigator.share) {
     try {
       await navigator.share({ url, title, text });
       return 'shared';
     } catch (err) {
-      if (err?.name === 'AbortError') return 'cancelled';
+      if (err instanceof DOMException && err.name === 'AbortError') return 'cancelled';
     }
   }
   return (await copyToClipboard(url)) ? 'copied' : 'failed';

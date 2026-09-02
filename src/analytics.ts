@@ -20,21 +20,28 @@ function doNotTrack() {
     && (navigator.doNotTrack === '1' || window.doNotTrack === '1' || navigator.msDoNotTrack === '1');
 }
 
-function track(eventName, props) {
+function track(eventName: string, props?: Record<string, string>) {
   if (typeof window === 'undefined' || typeof window.plausible !== 'function') return;
   if (doNotTrack()) return;
   window.plausible(eventName, props ? { props } : undefined);
 }
 
 /** kind: 'school' | 'researcher' | 'area' | 'conference' | 'comparison' | 'default' */
-export function trackView(kind, page = 'search') {
+export function trackView(kind: string, page = 'search') {
   track('View', { page, kind });
 }
 
-export function trackComparison(entityType, page = 'search') {
+export function trackComparison(entityType: string, page = 'search') {
   track('Comparison', { page, type: entityType });
 }
 
-export function trackDiscoveryShare(cardId) {
+export function trackDiscoveryShare(cardId: string) {
   track('Discovery Share', { card: cardId });
+}
+declare global {
+  interface Window {
+    doNotTrack?: string;
+    plausible?: (eventName: string, options?: { props: Record<string, string> }) => void;
+  }
+  interface Navigator { msDoNotTrack?: string }
 }

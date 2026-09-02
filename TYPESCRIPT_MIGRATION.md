@@ -9,7 +9,7 @@ run the listed verification commands, and update this file in the same commit.
 - [x] Phase 0 — tooling and CI guardrails
 - [x] Phase 1 — shared domain types and typed external-data boundaries
 - [x] Phase 2 — foundation modules (`shared`, data helpers, `data`, metrics)
-- [ ] Phase 3 — shared UI infrastructure and page controllers
+- [ ] Phase 3 — shared UI infrastructure and page controllers (in progress)
 - [ ] Phase 4 — strict mode, remaining tests/scripts as appropriate, final CI gate
 
 ## Decisions
@@ -97,6 +97,17 @@ and renderers, and convert HTML page entry modules last.
 
 Convert shared controllers and UI utilities before page entry modules. Update HTML entry paths
 only if Vite requires it; `.js` paths normally resolve converted `.ts` sources.
+
+Checkpoint 2026-09-01: converted the leaf infrastructure modules `analytics`, `seo`, `share`,
+`submission`, `charts`, `dblp-cache`, and `tooltip-position` to TypeScript. This added typed
+browser analytics globals, metadata/share inputs, generic IndexedDB transactions, Chart.js
+configuration and target types, and safe DOM event narrowing. All three verification commands
+pass (8 test files, 88 bundled modules).
+
+Resume with the remaining non-page shared modules: `csrankings-rules`, `simulation`, `nsf`,
+grants data/rendering, search cards/results/suggestions, comparison, filters, DBLP, and analysis
+helpers. Convert `main`, `simulator`, `funding`, grants entry modules, and other page controllers
+after their dependencies.
 
 ### Phase 4
 
