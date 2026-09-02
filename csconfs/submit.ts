@@ -4,14 +4,16 @@ import {
   buildConferenceGithubIssueUrl,
   buildConferenceSubmissionContent,
 } from './submission.js';
+import type { ConferenceRecord } from './types.js';
 
 const root = document.getElementById('submission-form-root');
-let records = [];
-let recordsByEdition = new Map();
+let records: ConferenceRecord[] = [];
+let recordsByEdition = new Map<string, ConferenceRecord[]>();
+type ConferenceForm = HTMLFormElement;
 
-const text = value => value == null ? '' : String(value);
-const nullable = value => value.trim() || null;
-const editionKey = (name, year) => `${name.trim().toLocaleLowerCase()}\u0000${year}`;
+const text = (value: unknown) => value == null ? '' : String(value);
+const nullable = (value: string) => value.trim() || null;
+const editionKey = (name: string, year: string | number) => `${name.trim().toLocaleLowerCase()}\u0000${year}`;
 
 function renderForm() {
   root.innerHTML = `
@@ -131,32 +133,37 @@ function renderForm() {
     </form>`;
 }
 
-function entryLabel(entry) {
+const inputField = (form: ConferenceForm, name: string) =>
+  form.elements.namedItem(name) as HTMLInputElement;
+const selectedKind = (form: ConferenceForm) =>
+  form.querySelector<HTMLInputElement>('input[name="kind"]:checked')!;
+
+function entryLabel(entry: ConferenceRecord) {
   return `${entry.name} ${entry.year}${entry.note ? ` · ${entry.note}` : ''}`;
 }
 
-function populateEntry(form, entry) {
+function populateEntry(form: ConferenceForm, entry: ConferenceRecord) {
   for (const field of ['name', 'year', 'description', 'link', 'seriesLink', 'date', 'place', 'abstractDeadline', 'deadline', 'rebuttalDate', 'notificationDate', 'note', 'generalChair', 'programChair']) {
-    form[field].value = text(entry[field]);
+    inputField(form, field).value = text(entry[field as keyof ConferenceRecord]);
   }
-  form.venueKeys.value = (entry.venueKeys || []).join(', ');
-  form.acceptanceRate.value = text(entry.acceptanceRate);
-  form.submissions.value = text(entry.submissions);
-  form.estimated.checked = Boolean(entry.estimated);
-  form.verified.checked = Boolean(entry.verified);
-  form.sourceUrl.value = entry.link || entry.seriesLink || '';
+  inputField(form, 'venueKeys').value = (entry.venueKeys || []).join(', ');
+  inputField(form, 'acceptanceRate').value = text(entry.acceptanceRate);
+  inputField(form, 'submissions').value = text(entry.submissions);
+  inputField(form, 'estimated').checked = Boolean(entry.estimated);
+  inputField(form, 'verified').checked = Boolean(entry.verified);
+  inputField(form, 'sourceUrl').value = entry.link || entry.seriesLink || '';
   form.dataset.targetName = entry.name;
-  form.dataset.targetYear = entry.year;
+  form.dataset.targetYear = String(entry.year);
   form.dataset.targetNote = entry.note || '';
 }
 
-function renderDuplicateWarning(form) {
+function renderDuplicateWarning(form: ConferenceForm) {
   const warning = document.getElementById('conference-duplicate-warning');
-  if (form.kind.value !== 'new') {
+  if (selectedKind(form).value !== 'new') {
     warning.hidden = true;
     return;
   }
-  const existing = recordsByEdition.get(editionKey(form.name.value, form.year.value))?.[0];
+  const existing = recordsByEdition.get(editionKey(inputField(form, 'name').value, inputField(form, 'year').value))?.[0];
   if (!existing) {
     warning.hidden = true;
     warning.innerHTML = '';
@@ -166,52 +173,54 @@ function renderDuplicateWarning(form) {
   warning.hidden = false;
 }
 
-function inheritVenueKeys(form) {
-  if (form.venueKeys.value.trim()) return;
-  const name = form.name.value.trim().toLocaleLowerCase();
+function inheritVenueKeys(form: ConferenceForm) {
+  const venueKeys = inputField(form, 'venueKeys');
+  if (venueKeys.value.trim()) return;
+  const name = inputField(form, 'name').value.trim().toLocaleLowerCase();
   const matching = records.find(entry => entry.name.toLocaleLowerCase() === name);
-  if (matching) form.venueKeys.value = matching.venueKeys.join(', ');
+  if (matching) venueKeys.value = matching.venueKeys.join(', ');
 }
 
-function buildSubmission(form) {
-  const kind = form.kind.value;
+function buildSubmission(form: ConferenceForm) {
+  const kind = selectedKind(form).value;
+  const value = (name: string) => inputField(form, name).value;
   const entry = {
-    name: form.name.value.trim(),
-    venueKeys: form.venueKeys.value.split(',').map(value => value.trim()).filter(Boolean),
-    year: Number(form.year.value),
-    description: form.description.value.trim(),
-    link: form.link.value.trim(),
-    seriesLink: nullable(form.seriesLink.value),
-    date: nullable(form.date.value),
-    place: nullable(form.place.value),
-    abstractDeadline: nullable(form.abstractDeadline.value),
-    deadline: nullable(form.deadline.value),
-    rebuttalDate: nullable(form.rebuttalDate.value),
-    notificationDate: nullable(form.notificationDate.value),
-    note: nullable(form.note.value),
-    generalChair: nullable(form.generalChair.value),
-    programChair: nullable(form.programChair.value),
-    acceptanceRate: form.acceptanceRate.value === '' ? null : Number(form.acceptanceRate.value),
-    submissions: form.submissions.value === '' ? null : Number(form.submissions.value),
-    estimated: form.estimated.checked,
-    verified: form.verified.checked,
+    name: value('name').trim(),
+    venueKeys: value('venueKeys').split(',').map(item => item.trim()).filter(Boolean),
+    year: Number(value('year')),
+    description: value('description').trim(),
+    link: value('link').trim(),
+    seriesLink: nullable(value('seriesLink')),
+    date: nullable(value('date')),
+    place: nullable(value('place')),
+    abstractDeadline: nullable(value('abstractDeadline')),
+    deadline: nullable(value('deadline')),
+    rebuttalDate: nullable(value('rebuttalDate')),
+    notificationDate: nullable(value('notificationDate')),
+    note: nullable(value('note')),
+    generalChair: nullable(value('generalChair')),
+    programChair: nullable(value('programChair')),
+    acceptanceRate: value('acceptanceRate') === '' ? null : Number(value('acceptanceRate')),
+    submissions: value('submissions') === '' ? null : Number(value('submissions')),
+    estimated: inputField(form, 'estimated').checked,
+    verified: inputField(form, 'verified').checked,
   };
   return {
     type: kind,
     target: kind === 'correction' ? {
-      name: form.dataset.targetName || form.name.value.trim(),
-      year: Number(form.dataset.targetYear || form.year.value),
+      name: form.dataset.targetName || value('name').trim(),
+      year: Number(form.dataset.targetYear || value('year')),
       note: form.dataset.targetNote || null,
     } : null,
-    sourceUrl: form.sourceUrl.value.trim(),
-    notes: form.notes.value.trim(),
+    sourceUrl: value('sourceUrl').trim(),
+    notes: value('notes').trim(),
     entry,
   };
 }
 
 function setupForm() {
-  const form = document.getElementById('conference-submit-form');
-  const target = form.target;
+  const form = document.getElementById('conference-submit-form') as ConferenceForm;
+  const target = inputField(form, 'target');
   const suggestions = document.getElementById('conference-correction-suggestions');
   let matches = [];
 
@@ -239,7 +248,7 @@ function setupForm() {
   };
 
   form.querySelectorAll('input[name="kind"]').forEach(radio => radio.addEventListener('change', () => {
-    const correction = form.kind.value === 'correction';
+    const correction = selectedKind(form).value === 'correction';
     document.getElementById('correction-target-row').hidden = !correction;
     target.required = correction;
     renderDuplicateWarning(form);
@@ -248,20 +257,20 @@ function setupForm() {
   target.addEventListener('input', () => showSuggestions(target.value.trim().toLocaleLowerCase()));
   target.addEventListener('blur', () => window.setTimeout(hideSuggestions, 150));
   suggestions.addEventListener('click', event => {
-    const button = event.target.closest('[data-index]');
+    const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-index]') : null;
     if (button) chooseEntry(matches[Number(button.dataset.index)]);
   });
 
-  form.name.addEventListener('input', () => {
+  inputField(form, 'name').addEventListener('input', () => {
     inheritVenueKeys(form);
     renderDuplicateWarning(form);
   });
-  form.year.addEventListener('input', () => renderDuplicateWarning(form));
+  inputField(form, 'year').addEventListener('input', () => renderDuplicateWarning(form));
   document.getElementById('conference-duplicate-warning').addEventListener('click', event => {
-    if (!event.target.closest('#switch-to-correction')) return;
-    const existing = recordsByEdition.get(editionKey(form.name.value, form.year.value))?.[0];
+    if (!(event.target instanceof Element) || !event.target.closest('#switch-to-correction')) return;
+    const existing = recordsByEdition.get(editionKey(inputField(form, 'name').value, inputField(form, 'year').value))?.[0];
     if (!existing) return;
-    form.kind.value = 'correction';
+    form.querySelector<HTMLInputElement>('input[name="kind"][value="correction"]')!.checked = true;
     document.getElementById('correction-target-row').hidden = false;
     target.required = true;
     chooseEntry(existing);
@@ -271,15 +280,16 @@ function setupForm() {
     event.preventDefault();
     inheritVenueKeys(form);
     if (!form.reportValidity()) return;
-    if (form.kind.value === 'new' && recordsByEdition.has(editionKey(form.name.value, form.year.value))) {
+    if (selectedKind(form).value === 'new' && recordsByEdition.has(editionKey(inputField(form, 'name').value, inputField(form, 'year').value))) {
       renderDuplicateWarning(form);
-      form.name.focus();
+      inputField(form, 'name').focus();
       return;
     }
     const submission = buildSubmission(form);
     const label = `${submission.entry.name} ${submission.entry.year}`;
     const content = buildConferenceSubmissionContent(submission);
-    if (event.submitter?.value === 'github') {
+    const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
+    if (submitter?.value === 'github') {
       window.open(buildConferenceGithubIssueUrl(label, content), '_blank', 'noopener,noreferrer');
     } else {
       window.location.href = buildConferenceEmailUrl(label, content);

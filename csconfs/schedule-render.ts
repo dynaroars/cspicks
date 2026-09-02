@@ -1,8 +1,9 @@
 import { escapeHtml, safeExternalUrl } from '../src/shared.js';
 import { conferenceAreas, deadlineStatus, formatCalendarDate } from './schedule-data.js';
 import { areaLabels } from '../src/shared.js';
+import type { ConferenceGroup, ConferenceRecord } from './types.js';
 
-function renderCycle(conf, now, showLabel) {
+function renderCycle(conf: ConferenceRecord, now: number, showLabel: boolean) {
   const status = deadlineStatus(conf.deadline, now);
   const dates = [
     ['Abstract', formatCalendarDate(conf.abstractDeadline)],
@@ -18,16 +19,16 @@ function renderCycle(conf, now, showLabel) {
   </div>`;
 }
 
-function eventDate(conf) {
+function eventDate(conf: ConferenceRecord) {
   if (!conf.date) return '';
   return formatCalendarDate(conf.date) || String(conf.date);
 }
 
-export function renderScheduleCard(group, now = Date.now()) {
+export function renderScheduleCard(group: ConferenceGroup, now = Date.now()) {
   const main = group[0];
   const href = safeExternalUrl(main.link || main.seriesLink);
   const areas = conferenceAreas(main).map(area => areaLabels[area] || area.toUpperCase());
-  const multiplePeople = value => /,|&|\band\b/i.test(value);
+  const multiplePeople = (value: string) => /,|&|\band\b/i.test(value);
   const extras = [
     [eventDate(main), main.place].filter(Boolean).join(' · '),
     main.generalChair ? `General chair${multiplePeople(main.generalChair) ? 's' : ''}: ${main.generalChair}` : '',
@@ -36,7 +37,7 @@ export function renderScheduleCard(group, now = Date.now()) {
       ? `Acceptance: ${main.acceptanceRate.toFixed(2)}%${main.submissions ? ` of ${main.submissions.toLocaleString()} submissions` : ''}`
       : ''
   ].filter(Boolean);
-  const cycleOrder = conf => {
+  const cycleOrder = (conf: ConferenceRecord): [number, number] => {
     const status = deadlineStatus(conf.deadline, now);
     if (status.instant !== null && status.instant >= now) return [0, status.instant];
     if (status.instant === null) return [1, 0];

@@ -175,3 +175,12 @@ Checkpoint 2026-09-02 (strictness baseline): enabled `noImplicitReturns`,
 gates are `noImplicitAny` (360 diagnostics across 30 files) and `strictNullChecks` (418 across
 34 files). Keep tests and manual build scripts in JavaScript; next convert the five `csconfs`
 browser modules, then reduce `noImplicitAny` diagnostics by dependency layer before enabling it.
+
+Checkpoint 2026-09-02 (`csconfs`): converted all five conference-schedule browser modules and
+added a shared conference record/group contract. Typed schedule filtering, date/deadline helpers,
+rendering, autocomplete, and page state. The submission controller now retrieves named controls
+through `form.elements`, avoiding collisions with built-in `HTMLFormElement.name` and `.target`.
+All verification gates pass (8 test files, 88 bundled modules).
+
+Resume by reducing `noImplicitAny` diagnostics in dependency order, starting with `shared`, data,
+and metrics before controllers. Tests and manual build scripts remain JavaScript by design.

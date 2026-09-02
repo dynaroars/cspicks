@@ -6,21 +6,23 @@ import { trackView } from '../src/analytics.js';
 import { escapeHtml } from '../src/shared.js';
 import { filterSchedule, scheduleSuggestions } from './schedule-data.js';
 import { renderScheduleCard } from './schedule-render.js';
+import type { FilterController } from '../src/filters.js';
+import type { ConferenceRecord } from './types.js';
 
 const params = new URLSearchParams(location.search);
 const currentYear = new Date().getFullYear();
-const input = document.getElementById('csconfs-search');
+const input = document.querySelector<HTMLInputElement>('#csconfs-search')!;
 const results = document.getElementById('csconfs-results');
 const status = document.getElementById('csconfs-status');
-let conferences = [];
-let filters;
+let conferences: ConferenceRecord[] = [];
+let filters: FilterController;
 let suggestions;
 
 function updateUrl() {
   const next = filters.toParams();
   const query = input.value.trim();
   if (query) next.set('q', query);
-  if (!document.getElementById('upcoming-only').checked) next.set('upcoming', 'false');
+  if (!document.querySelector<HTMLInputElement>('#upcoming-only')!.checked) next.set('upcoming', 'false');
   history.replaceState({}, '', `${location.pathname}?${next}`);
   updatePageMeta({
     title: query ? `${query} - CS Conference Schedule - ${SITE_NAME}` : `${SITE_NAME} - CS Conference Schedule`,
@@ -32,7 +34,7 @@ function updateUrl() {
 
 function render() {
   if (!conferences.length) return;
-  const upcomingOnly = document.getElementById('upcoming-only').checked;
+  const upcomingOnly = document.querySelector<HTMLInputElement>('#upcoming-only')!.checked;
   const groups = filterSchedule(conferences, {
     startYear: filters.startYear,
     endYear: filters.endYear,
@@ -69,7 +71,7 @@ function buildSuggestions() {
   });
 }
 
-function sample(items, count) {
+function sample<T>(items: T[], count: number) {
   const available = [...items];
   for (let index = available.length - 1; index > 0; index--) {
     const swapIndex = Math.floor(Math.random() * (index + 1));
@@ -85,7 +87,7 @@ function renderExamples() {
     endYear: filters.endYear,
     confSet: filters.confSet,
     query: '',
-    upcomingOnly: document.getElementById('upcoming-only').checked
+    upcomingOnly: document.querySelector<HTMLInputElement>('#upcoming-only')!.checked
   });
   const items = scheduleSuggestions(eligibleGroups.flat(), filters.startYear, filters.endYear, filters.confSet);
   // Show both query types, shuffled together just like Search's fresh sample.
@@ -99,7 +101,7 @@ function renderExamples() {
 
 function setupExamples() {
   document.getElementById('csconfs-examples').addEventListener('click', event => {
-    const button = event.target.closest('[data-search-example]');
+    const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-search-example]') : null;
     if (!button) return;
     input.value = button.dataset.searchExample;
     render();

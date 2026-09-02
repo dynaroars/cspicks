@@ -1,9 +1,11 @@
 import { getConferenceAreaMap, publicationMatchesConferenceSet } from '../src/data.js';
 import { areaLabels } from '../src/shared.js';
+import type { ConferenceSetId } from '../src/data/conference-sets.js';
+import type { ConferenceGroup, ConferenceRecord } from './types.js';
 
 const DAY = 86400000;
 
-export function calendarParts(value) {
+export function calendarParts(value: unknown): [number, number, number] | null {
   if (!value || String(value).toUpperCase() === 'TBD') return null;
   const text = String(value).trim();
   const iso = /^(\d{4})-(\d{2})-(\d{2})/.exec(text);
@@ -16,12 +18,12 @@ export function calendarParts(value) {
   return null;
 }
 
-export function aoeDeadline(value) {
+export function aoeDeadline(value: unknown) {
   const parts = calendarParts(value);
   return parts ? Date.UTC(parts[0], parts[1] - 1, parts[2] + 1, 11, 59, 59, 999) : null;
 }
 
-export function conferenceStart(value, fallbackYear) {
+export function conferenceStart(value: unknown, fallbackYear: number) {
   if (!value) return null;
   const text = String(value).trim();
   const iso = /^(\d{4})-(\d{2})-(\d{2})/.exec(text);
@@ -36,14 +38,14 @@ export function conferenceStart(value, fallbackYear) {
   return Date.UTC(Number(yearMatch?.[1] || fallbackYear), month, Number(dayMatch?.[1] || 1));
 }
 
-export function formatCalendarDate(value) {
+export function formatCalendarDate(value: unknown) {
   const parts = calendarParts(value);
   if (!parts) return value && String(value).toUpperCase() !== 'TBD' ? String(value) : '';
   return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
     .format(new Date(Date.UTC(parts[0], parts[1] - 1, parts[2])));
 }
 
-export function deadlineStatus(value, now = Date.now()) {
+export function deadlineStatus(value: unknown, now = Date.now()) {
   const instant = aoeDeadline(value);
   if (instant === null) return { text: 'TBD', className: 'is-tbd', instant: null };
   if (instant < now) return { text: 'Passed', className: 'is-passed', instant };
@@ -56,13 +58,13 @@ export function deadlineStatus(value, now = Date.now()) {
   };
 }
 
-export function conferenceAreas(conf) {
+export function conferenceAreas(conf: ConferenceRecord) {
   const map = getConferenceAreaMap('all-union');
   return [...new Set(conf.venueKeys.map(key => map[key]).filter(Boolean))];
 }
 
-export function groupConferences(conferences) {
-  const grouped = new Map();
+export function groupConferences(conferences: ConferenceRecord[]) {
+  const grouped = new Map<string, ConferenceRecord[]>();
   for (const conf of conferences) {
     const key = `${conf.name}\u0000${conf.year}`;
     if (!grouped.has(key)) grouped.set(key, []);
@@ -71,7 +73,7 @@ export function groupConferences(conferences) {
   return [...grouped.values()];
 }
 
-function isUpcoming(group, now) {
+function isUpcoming(group: ConferenceGroup, now: number) {
   if (group.some(conf => {
     const deadline = aoeDeadline(conf.deadline);
     return deadline !== null && deadline >= now;
@@ -81,11 +83,11 @@ function isUpcoming(group, now) {
   return group[0].year > new Date(now).getUTCFullYear();
 }
 
-function nextDeadline(group, now) {
+function nextDeadline(group: ConferenceGroup, now: number) {
   return Math.min(...group.map(conf => aoeDeadline(conf.deadline)).filter(value => value !== null && value >= now));
 }
 
-function scheduleSortKey(group, now) {
+function scheduleSortKey(group: ConferenceGroup, now: number) {
   const deadline = nextDeadline(group, now);
   if (Number.isFinite(deadline)) return deadline;
   const event = conferenceStart(group[0].date, group[0].year);
@@ -94,20 +96,20 @@ function scheduleSortKey(group, now) {
   return event !== null && event >= now ? 1e16 + event : Infinity;
 }
 
-function searchText(group) {
+function searchText(group: ConferenceGroup) {
   const conf = group[0];
   const areas = conferenceAreas(conf).map(area => `${area} ${areaLabels[area] || ''}`);
   return [conf.name, conf.description, conf.place, ...conf.venueKeys, ...areas].filter(Boolean).join(' ').toLowerCase();
 }
 
-export function filterSchedule(conferences, {
+export function filterSchedule(conferences: ConferenceRecord[], {
   startYear,
   endYear,
   confSet = 'all-union',
   query = '',
   upcomingOnly = true,
   now = Date.now()
-}) {
+}: { startYear: number, endYear: number, confSet?: ConferenceSetId, query?: string, upcomingOnly?: boolean, now?: number }) {
   const normalized = query.trim().toLowerCase();
   return groupConferences(conferences)
     .filter(group => group[0].year >= startYear && group[0].year <= endYear)
@@ -124,11 +126,11 @@ export function filterSchedule(conferences, {
     });
 }
 
-export function scheduleSuggestions(conferences, startYear, endYear, confSet) {
+export function scheduleSuggestions(conferences: ConferenceRecord[], startYear: number, endYear: number, confSet: ConferenceSetId) {
   const eligible = conferences.filter(conf => conf.year >= startYear && conf.year <= endYear
     && conf.venueKeys.some(area => publicationMatchesConferenceSet({ area }, confSet)));
   const names = [...new Set(eligible.map(conf => conf.name))].sort();
-  const areaCounts = new Map();
+  const areaCounts = new Map<string, number>();
   groupConferences(eligible).forEach(group => {
     conferenceAreas(group[0]).forEach(area => areaCounts.set(area, (areaCounts.get(area) || 0) + 1));
   });
