@@ -36,7 +36,9 @@ function parsePairMap(source: string, name: string): IssueMap {
   const entries: IssueMap = {};
   const pattern = /(\d{4})\s*:\s*\(\s*(\d+)\s*,\s*(?:"([^"]+)"|'([^']+)'|(\d+))\s*\)/g;
   for (const match of body.matchAll(pattern)) {
-    entries[match[1]] = [Number(match[2]), match[3] || match[4] || Number(match[5])];
+    const year = match[1];
+    if (!year) continue;
+    entries[year] = [Number(match[2]), match[3] || match[4] || Number(match[5])];
   }
   if (Object.keys(entries).length === 0) throw new Error(`Unable to parse ${name}`);
   return entries;
@@ -47,8 +49,8 @@ function combineIssues(primary: IssueMap, secondary: IssueMap): IssueMap {
   for (const year of new Set([...Object.keys(primary), ...Object.keys(secondary)])) {
     const first = primary[year];
     const second = secondary[year];
-    if (first && second && first[0] === second[0]) combined[year] = [first[0], first[1], second[1]];
-    else if (first) combined[year] = [first[0], first[1], null];
+    if (first && second && first[0] === second[0]) combined[year] = [first[0]!, first[1]!, second[1]!];
+    else if (first) combined[year] = [first[0]!, first[1]!, null];
   }
   return combined;
 }

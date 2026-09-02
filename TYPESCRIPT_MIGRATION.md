@@ -261,3 +261,10 @@ guarded indexed accumulators and fragility candidates, and encoded the establish
 Map lookup invariants used by discovery comparisons. The repository total is now 503. All normal
 verification gates pass (8 test files, 88 bundled modules). Resume with DBLP, CSRankings rules,
 NSF, and simulation domain services before page controllers.
+
+Checkpoint 2026-09-02 (`strictNullChecks` DBLP/NSF service pass): cleared null-safety
+diagnostics from the CSRankings-rule parser, DBLP client, and NSF aggregation/rendering service.
+External response paths now validate required identifiers and XML nodes, generated rule-table
+lookups guard missing issue families, and funding dates/ranks explicitly narrow nullable values.
+The repository total is now 453. All normal verification gates pass (8 test files, 88 bundled
+modules). Resume with `simulation.ts`, then the simulator controller and candidate renderers.

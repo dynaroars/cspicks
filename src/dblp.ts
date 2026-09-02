@@ -24,7 +24,7 @@ export function parseDblpProfileUrl(value: unknown) {
         const match = url.pathname.match(/^\/pid\/(.+?)(?:\.(?:html|xml))?\/?$/i);
         if (!match) return null;
 
-        const pid = match[1]
+        const pid = match[1]!
             .split('/')
             .map(segment => decodeURIComponent(segment))
             .join('/');
@@ -62,25 +62,25 @@ export function normalizeDblpVenue(venue: string, metadata: { number?: unknown, 
         return /^ASE(?: \(\d+\))?$/i.test(booktitle) ? 'ase' : null;
     }
     if (venue === 'tog') {
-        const issue = rules.issues.tog[year];
+        const issue = rules.issues.tog?.[year];
         if (!issue || volume !== issue[0]) return null;
         if (Number(number) === issue[1]) return 'siggraph';
         if (Number(number) === issue[2]) return 'siggraph-asia';
         return null;
     }
     if (venue === 'cgf') {
-        const issue = rules.issues.cgf[year];
+        const issue = rules.issues.cgf?.[year];
         return issue && volume === issue[0] && Number(number) === issue[1] ? 'eurographics' : null;
     }
     if (venue === 'tvcg') {
-        const issue = rules.issues.tvcg[year];
+        const issue = rules.issues.tvcg?.[year];
         if (!issue || volume !== issue[0]) return null;
         if (Number(number) === issue[1]) return 'vis';
         if (issue[2] !== null && Number(number) === issue[2]) return 'vr';
         return null;
     }
     if (venue === 'bioinformatics') {
-        const issue = rules.issues.ismb[year];
+        const issue = rules.issues.ismb?.[year];
         return issue && volume === issue[0] && String(metadata.number) === issue[1] ? 'ismb' : null;
     }
     return rules.venueAliases[venue] || venue;
@@ -111,11 +111,10 @@ export async function searchAuthor(name: string): Promise<DblpAuthorResult[]> {
 
         if (!authorHits) return [];
 
-        return authorHits.map(h => ({
-            name: h.info.author,
-            pid: h.info.url.split('/pid/')[1],
-            url: h.info.url
-        }));
+        return authorHits.flatMap(h => {
+            const pid = h.info.url.split('/pid/')[1];
+            return pid ? [{ name: h.info.author, pid, url: h.info.url }] : [];
+        });
     } catch (err) {
         console.error("DBLP Search Error:", err);
         return [];
@@ -173,7 +172,7 @@ async function fetchDblp(url: string, attempts = 3): Promise<Response> {
  * more rate-limited requests, and a returning reader pays nothing at all.
  */
 async function fetchCoauthorRecords(name: string): Promise<DblpCoauthorRecord[]> {
-    if (coauthorCache.has(name)) return coauthorCache.get(name);
+    if (coauthorCache.has(name)) return coauthorCache.get(name)!;
 
     const request = (async () => {
         const stored = await readCached<DblpCoauthorRecord[]>(name);
@@ -185,7 +184,8 @@ async function fetchCoauthorRecords(name: string): Promise<DblpCoauthorRecord[]>
         const target = hits.find(hit => hit.info?.author?.toLowerCase() === name.toLowerCase());
         if (!target) return [];
 
-        const pid = target.info.url.split('/pid/')[1];
+        const pid = target.info!.url.split('/pid/')[1];
+        if (!pid) return [];
         const profile = await fetchDblp(`https://dblp.org/pid/${pid}.xml`);
         const xml = parseDblpXml(await profile.text());
         if (!xml.getElementsByTagName('dblpperson').length) {
@@ -273,7 +273,8 @@ export async function fetchAuthorStats(pid: string, startYear = 2015, endYear = 
         if (personNode) {
             const authorNodes = personNode.getElementsByTagName("author");
             for (let i = 0; i < authorNodes.length; i++) {
-                if (authorNodes[i].textContent) aliases.push(authorNodes[i].textContent!);
+                const authorNode = authorNodes[i];
+                if (authorNode?.textContent) aliases.push(authorNode.textContent);
             }
         }
 
@@ -290,7 +291,7 @@ export async function fetchAuthorStats(pid: string, startYear = 2015, endYear = 
         const records = xmlDoc.getElementsByTagName("r");
 
         for (let i = 0; i < records.length; i++) {
-            const record = records[i];
+            const record = records[i]!;
             const pub = record.firstElementChild;
             if (!pub) continue;
 
@@ -308,7 +309,7 @@ export async function fetchAuthorStats(pid: string, startYear = 2015, endYear = 
             const keyParts = key.split('/');
             if (keyParts.length < 2) continue;
 
-            const dblpVenue = keyParts[1];
+            const dblpVenue = keyParts[1]!;
             const booktitleNode = pub.getElementsByTagName("booktitle")[0];
             const numberNode = pub.getElementsByTagName("number")[0];
             const volumeNode = pub.getElementsByTagName("volume")[0];
@@ -323,13 +324,14 @@ export async function fetchAuthorStats(pid: string, startYear = 2015, endYear = 
             if (!publicationMatchesConferenceSet({ area: confKey }, confSet)) continue;
 
             const pagesNode = pub.getElementsByTagName("pages")[0];
-            if (!hasEligiblePageRange(pagesNode?.textContent, dblpVenue, booktitleNode?.textContent)) continue;
+            if (!hasEligiblePageRange(pagesNode?.textContent, dblpVenue, booktitleNode?.textContent || '')) continue;
 
             const authors = pub.getElementsByTagName("author");
             const authorCount = authors.length || 1;
 
             const adjusted = 1.0 / authorCount;
             const area = conferenceAreaMap[confKey] || parentMap[confKey];
+            if (!area) continue;
 
             const titleNode = pub.getElementsByTagName("title")[0];
             const title = titleNode ? titleNode.textContent : "Untitled";
@@ -337,11 +339,9 @@ export async function fetchAuthorStats(pid: string, startYear = 2015, endYear = 
             stats.totalAdjusted += adjusted;
             stats.totalPapers += 1;
 
-            if (!stats.areas[area]) {
-                stats.areas[area] = { count: 0, adjusted: 0 };
-            }
-            stats.areas[area].count += 1;
-            stats.areas[area].adjusted += adjusted;
+            const areaStats = stats.areas[area] || (stats.areas[area] = { count: 0, adjusted: 0 });
+            areaStats.count += 1;
+            areaStats.adjusted += adjusted;
 
             stats.papers.push({
                 title: title,

@@ -102,7 +102,9 @@ const fundingDateFormatter = new Intl.DateTimeFormat('en-US', {
 function parseFundingDate(value: unknown) {
   const match = String(value || '').match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
   if (!match) return null;
-  const [, month, day, year] = match.map(Number);
+  const month = Number(match[1]);
+  const day = Number(match[2]);
+  const year = Number(match[3]);
   const date = new Date(Date.UTC(year, month - 1, day));
   return date.getUTCFullYear() === year
     && date.getUTCMonth() === month - 1
@@ -127,7 +129,7 @@ export function formatAwardPeriod(award: Pick<NsfAward, 'startDate' | 'endDate'>
   const start = parseFundingDate(award?.startDate);
   const end = parseFundingDate(award?.endDate);
   if (!start && !end) return '';
-  if (!start) return `Ends ${fundingDateFormatter.format(end)}`;
+  if (!start) return `Ends ${fundingDateFormatter.format(end!)}`;
   if (!end) return `Starts ${fundingDateFormatter.format(start)}`;
   const duration = fundingDurationLabel(start, end);
   return `${fundingDateFormatter.format(start)} – ${fundingDateFormatter.format(end)}${duration ? ` · ${duration}` : ''}`;
@@ -216,7 +218,7 @@ function awardAmount(award: AttributedNsfAward, affiliation: string | null) {
   const obligated = award.obligatedAmount || 0;
   const institution = getInstitutionShortName(affiliation || award.awardee || 'matched university');
   const collaborativeDetail = (award.collaborativeTotalAmount ?? 0) > Math.max(estimatedTotal, obligated)
-    ? `<small class="funding-award-amount-detail">(${escapeHtml(formatFunding(award.collaborativeTotalAmount))} collaborative intended total; ${escapeHtml(formatFunding(estimatedTotal || obligated))} local intended award)</small>`
+    ? `<small class="funding-award-amount-detail">(${escapeHtml(formatFunding(award.collaborativeTotalAmount || 0))} collaborative intended total; ${escapeHtml(formatFunding(estimatedTotal || obligated))} local intended award)</small>`
     : '';
   const transferDetail = !collaborativeDetail && confirmedTransferAwards.has(String(award.id))
     ? `<small class="funding-award-amount-detail">(${escapeHtml(formatFunding(obligated))} obligated to ${escapeHtml(institution)})</small>`
@@ -304,12 +306,13 @@ export function calculateFundingDiscoveries(current: FundingIndex, prior: Fundin
   });
   const substantive = changes.filter(item => item.priorAmount >= 100000 && item.school.attributedAmount >= 100000);
   const fundingRanks = new Map(current.schools.map((school, index) => [school.name, index + 1]));
-  const rankGaps = current.schools.map(school => {
+  const rankGaps = current.schools.flatMap(school => {
     const publication = publicationSchools[school.name];
-    if (!publication || school.attributedAmount < 100000 || publication.totalAdjusted < 2) return null;
+    if (!publication || school.attributedAmount < 100000 || publication.totalAdjusted < 2
+      || !Number.isFinite(publication.rank)) return [];
     const fundingRank = fundingRanks.get(school.name)!;
-    return { school, fundingRank, publicationRank: publication.rank, gap: publication.rank - fundingRank };
-  }).filter(Boolean);
+    return [{ school, fundingRank, publicationRank: publication.rank!, gap: publication.rank! - fundingRank }];
+  });
   const collaborative = new Map<string, NsfAward>();
   current.awards.filter(award => award.collaborativeTotalAmount).forEach(award => {
     const key = `${award.title}|${award.collaborativeTotalAmount}`;
@@ -318,8 +321,8 @@ export function calculateFundingDiscoveries(current: FundingIndex, prior: Fundin
 
   return {
     topFunding: current.schools.slice(0, 5),
-    fastestGrowth: substantive.filter(item => item.growth > 0).sort((a, b) => b.growth - a.growth).slice(0, 5),
-    fastestDecline: substantive.filter(item => item.growth < 0).sort((a, b) => a.growth - b.growth).slice(0, 5),
+    fastestGrowth: substantive.filter(item => (item.growth || 0) > 0).sort((a, b) => (b.growth || 0) - (a.growth || 0)).slice(0, 5),
+    fastestDecline: substantive.filter(item => (item.growth || 0) < 0).sort((a, b) => (a.growth || 0) - (b.growth || 0)).slice(0, 5),
     broadParticipation: [...current.schools].sort((a, b) => b.faculty.length - a.faculty.length || b.attributedAmount - a.attributedAmount).slice(0, 5),
     fundingAhead: rankGaps.filter(item => item.gap > 0).sort((a, b) => b.gap - a.gap).slice(0, 5),
     publicationsAhead: rankGaps.filter(item => item.gap < 0).sort((a, b) => a.gap - b.gap).slice(0, 5),
