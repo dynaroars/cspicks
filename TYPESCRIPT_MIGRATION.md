@@ -111,9 +111,13 @@ contracts, and typed grants filtering/rendering. Corrected the NSF dataset contr
 an array) and the per-capita helper to accept both school maps and arrays. All verification gates
 pass (8 test files, 88 bundled modules).
 
-Resume with search cards/results/suggestions, comparison, filters, DBLP, suggestion-box, and
-analysis helpers. Convert `main`, `simulator`, `funding`, grants entry modules, and other page
-controllers after their dependencies.
+Checkpoint 2026-09-02 (autocomplete and DBLP): converted `suggestion-box`,
+`search-suggestions`, `dblp`, and `dblp-search-ui`. Added reusable suggestion item/group
+contracts, typed DBLP search/profile/coauthor data, generic serialized request handling, and
+safe nullable DOM parsing. All verification gates pass (8 test files, 88 bundled modules).
+
+Resume with search cards/results, comparison, filters, and analysis helpers. Convert `main`,
+`simulator`, `funding`, grants entry modules, and other page controllers after their dependencies.
 
 ### Phase 4
 

@@ -1,6 +1,8 @@
 import { getConferenceAreaMap, publicationMatchesConferenceSet, schoolAliases } from './data.js';
 import { areaLabels, cleanName, countryFlag, getConferenceLabel } from './shared.js';
 import { createSuggestionBox, rankSuggestions } from './suggestion-box.js';
+import type { FilteredData } from './types.js';
+import type { SuggestionItem } from './suggestion-box.js';
 
 // The Search box's autocomplete: universities, professors, areas, and
 // conferences, ranked by how well they match what has been typed.
@@ -10,7 +12,12 @@ import { createSuggestionBox, rankSuggestions } from './suggestion-box.js';
 // matches exist when it has to trim.
 const GROUP_LIMITS = { schools: 12, professors: 25, areas: 8, conferences: 8 };
 
-export function createSearchSuggestionBox({ input, listbox, getContext, onSelect }) {
+export function createSearchSuggestionBox({ input, listbox, getContext, onSelect }: {
+  input: HTMLInputElement;
+  listbox: HTMLElement;
+  getContext: () => { appData: FilteredData | null, confSet: string };
+  onSelect: (item: SuggestionItem, prefix: string) => void;
+}) {
   return createSuggestionBox({
     input,
     listbox,
@@ -20,7 +27,7 @@ export function createSearchSuggestionBox({ input, listbox, getContext, onSelect
       const { appData, confSet } = getContext();
       if (!appData) return null;
 
-      const aliasesBySchool = new Map();
+      const aliasesBySchool = new Map<string, string[]>();
       Object.entries(schoolAliases).forEach(([alias, school]) => {
         if (!aliasesBySchool.has(school)) aliasesBySchool.set(school, []);
         aliasesBySchool.get(school).push(alias);

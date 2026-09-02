@@ -1,12 +1,14 @@
 import { searchAuthor, fetchAuthorStats } from './dblp.js';
 import { areaLabels, escapeHtml, safeExternalUrl } from './shared.js';
+import type { FilteredData } from './types.js';
 
-export function createDblpAuthorSearch(getContext) {
+export function createDblpAuthorSearch(getContext: () => { appData: FilteredData, startYear: number, endYear: number, confSet: string }) {
   let sequence = 0;
 
-  return async function searchDblpAuthors(query) {
+  return async function searchDblpAuthors(query: string) {
     const requestSequence = ++sequence;
     const container = document.getElementById('dblp-results');
+    if (!container) return;
     if (query.length < 2) {
       container.innerHTML = '';
       return;

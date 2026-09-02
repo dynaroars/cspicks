@@ -1,6 +1,25 @@
 import { escapeHtml, scoreSuggestionMatch } from './shared.js';
 import { splitComparisonQuery } from './comparison.js';
 
+export interface SuggestionItem {
+  kind?: string;
+  label: string;
+  value?: string;
+  detail: string;
+  searchTerms?: string;
+  flag?: string;
+  target?: { type: string, name: string };
+  type?: string;
+  grantId?: string;
+}
+
+export interface SuggestionGroup {
+  items: SuggestionItem[];
+  total: number;
+}
+
+export type SuggestionGroups = Array<[string, SuggestionGroup]>;
+
 // The autocomplete menu shared by Search and NSF Funding: keyboard handling,
 // ARIA wiring, and the grouped listbox markup. Each page supplies its own rows
 // through `getGroups`, so the two boxes look and behave alike over different
@@ -8,7 +27,7 @@ import { splitComparisonQuery } from './comparison.js';
 
 // Ranks candidates for one group and keeps the best `limit`, reporting how many
 // matched in total so a trimmed group can say "12 of 84".
-export function rankSuggestions(items, query, limit) {
+export function rankSuggestions<T extends SuggestionItem>(items: T[], query: string, limit: number) {
   const matches = items
     .map(item => ({ item, score: scoreSuggestionMatch(`${item.label} ${item.searchTerms || ''}`, query) }))
     .filter(match => Number.isFinite(match.score))
@@ -18,8 +37,14 @@ export function rankSuggestions(items, query, limit) {
 
 // getGroups(query, { comparing }) returns `[label, { items, total }]` pairs, or
 // null when the page has no data to offer yet.
-export function createSuggestionBox({ input, listbox, getGroups, onSelect, emptyText = 'No matching result' }) {
-  let suggestions = [];
+export function createSuggestionBox({ input, listbox, getGroups, onSelect, emptyText = 'No matching result' }: {
+  input: HTMLInputElement;
+  listbox: HTMLElement;
+  getGroups: (query: string, options: { comparing: boolean }) => SuggestionGroups | null;
+  onSelect: (item: SuggestionItem, prefix: string) => void;
+  emptyText?: string;
+}) {
+  let suggestions: SuggestionItem[] = [];
   let activeIndex = -1;
   let comparePrefix = '';
 
@@ -32,7 +57,7 @@ export function createSuggestionBox({ input, listbox, getGroups, onSelect, empty
     input.removeAttribute('aria-activedescendant');
   };
 
-  const render = queryValue => {
+  const render = (queryValue: string) => {
     // While typing "A vs B", complete the trailing side only.
     const { prefix, term } = splitComparisonQuery(queryValue);
     comparePrefix = prefix;
@@ -63,7 +88,7 @@ export function createSuggestionBox({ input, listbox, getGroups, onSelect, empty
     input.setAttribute('aria-expanded', 'true');
   };
 
-  const moveActive = delta => {
+  const moveActive = (delta: number) => {
     if (!suggestions.length) return;
     activeIndex = (activeIndex + delta + suggestions.length) % suggestions.length;
     listbox.querySelectorAll('.universal-suggestion').forEach((element, index) => {
@@ -78,7 +103,7 @@ export function createSuggestionBox({ input, listbox, getGroups, onSelect, empty
     }
   };
 
-  const choose = item => {
+  const choose = (item?: SuggestionItem) => {
     if (!item) return;
     const prefix = comparePrefix;
     close();
@@ -87,7 +112,7 @@ export function createSuggestionBox({ input, listbox, getGroups, onSelect, empty
 
   listbox.addEventListener('pointerdown', event => event.preventDefault());
   listbox.addEventListener('click', event => {
-    const option = event.target.closest('.universal-suggestion');
+    const option = event.target instanceof Element ? event.target.closest<HTMLElement>('.universal-suggestion') : null;
     if (option) choose(suggestions[Number(option.dataset.index)]);
   });
 

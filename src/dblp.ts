@@ -1,8 +1,20 @@
 import { getConferenceAreaMap, parentMap, publicationMatchesConferenceSet } from './data.js';
 import { readCached, writeCached } from './dblp-cache.js';
 import { getCsrankingsRules, syncCsrankingsRules } from './csrankings-rules.js';
+import type { AreaStats } from './types.js';
 
-export function parseDblpProfileUrl(value) {
+export interface DblpAuthorResult { name: string, pid: string, url: string }
+export interface DblpCoauthorRecord { name: string, years: Record<string, number> }
+export interface DblpAuthorStats {
+    totalAdjusted: number;
+    totalPapers: number;
+    totalDblpPublications: number;
+    areas: Record<string, AreaStats>;
+    papers: Array<{ title: string | null, venue: string, year: number, adjusted: number, area: string }>;
+    aliases: string[];
+}
+
+export function parseDblpProfileUrl(value: unknown) {
     try {
         const url = new URL(String(value ?? '').trim());
         const hostname = url.hostname.toLowerCase();
@@ -24,7 +36,7 @@ export function parseDblpProfileUrl(value) {
     }
 }
 
-export function normalizeDblpVenue(venue, metadata = {}) {
+export function normalizeDblpVenue(venue: string, metadata: { number?: unknown, booktitle?: unknown, year?: unknown, volume?: unknown } = {}) {
     const rules = getCsrankingsRules();
     const number = String(metadata.number || '').trim().toLowerCase();
     const booktitle = String(metadata.booktitle || '').trim();
@@ -74,7 +86,7 @@ export function normalizeDblpVenue(venue, metadata = {}) {
     return rules.venueAliases[venue] || venue;
 }
 
-export function hasEligiblePageRange(pages, dblpVenue, booktitle = '') {
+export function hasEligiblePageRange(pages: string | null | undefined, dblpVenue: string, booktitle = '') {
     const isNeuripsKey = dblpVenue === 'nips' || dblpVenue === 'neurips';
     if (isNeuripsKey && !/^(?:nips|neurips)$/i.test(booktitle.trim())) return false;
     if (!pages) return isNeuripsKey;
@@ -89,12 +101,12 @@ export function hasEligiblePageRange(pages, dblpVenue, booktitle = '') {
         .includes(dblpVenue);
 }
 
-export async function searchAuthor(name) {
+export async function searchAuthor(name: string): Promise<DblpAuthorResult[]> {
     try {
         const authorUrl = `https://dblp.org/search/author/api?q=${encodeURIComponent(name)}&format=json&h=60`;
         const authorRes = await fetch(authorUrl);
         if (!authorRes.ok) throw new Error(`DBLP returned ${authorRes.status}`);
-        const authorData = await authorRes.json();
+        const authorData = await authorRes.json() as { result: { hits: { hit?: Array<{ info: { author: string, url: string } }> } } };
         const authorHits = authorData.result.hits.hit;
 
         if (!authorHits) return [];
@@ -110,18 +122,18 @@ export async function searchAuthor(name) {
     }
 }
 
-const coauthorCache = new Map();
+const coauthorCache = new Map<string, Promise<DblpCoauthorRecord[]>>();
 const COAUTHOR_RETRY_AFTER_MS = 60_000;
 
 // DBLP rate-limits bursts (a 429 arrives without CORS headers, so the browser
 // reports it as a CORS failure). Requests are therefore serialized with a gap,
 // and transient failures are retried instead of being cached as "no results".
 const DBLP_REQUEST_GAP_MS = 1200;
-let dblpQueue = Promise.resolve();
+let dblpQueue: Promise<void> = Promise.resolve();
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
 
-function parseDblpXml(text) {
+function parseDblpXml(text: string) {
     const xml = new DOMParser().parseFromString(text, 'text/xml');
     if (xml.getElementsByTagName('parsererror').length > 0 || !xml.documentElement) {
         throw new Error('DBLP returned malformed XML');
@@ -129,13 +141,13 @@ function parseDblpXml(text) {
     return xml;
 }
 
-function queueDblpRequest(task) {
+function queueDblpRequest<T>(task: () => Promise<T>): Promise<T> {
     const result = dblpQueue.then(task);
-    dblpQueue = result.catch(() => {}).then(() => sleep(DBLP_REQUEST_GAP_MS));
+    dblpQueue = result.then(() => undefined, () => undefined).then(() => sleep(DBLP_REQUEST_GAP_MS));
     return result;
 }
 
-async function fetchDblp(url, attempts = 3) {
+async function fetchDblp(url: string, attempts = 3): Promise<Response> {
     for (let attempt = 1; ; attempt++) {
         try {
             const response = await queueDblpRequest(() => fetch(url));
@@ -160,15 +172,16 @@ async function fetchDblp(url, attempts = 3) {
  * profile answers every window, so changing the year filter no longer costs two
  * more rate-limited requests, and a returning reader pays nothing at all.
  */
-async function fetchCoauthorRecords(name) {
+async function fetchCoauthorRecords(name: string): Promise<DblpCoauthorRecord[]> {
     if (coauthorCache.has(name)) return coauthorCache.get(name);
 
     const request = (async () => {
-        const stored = await readCached(name);
+        const stored = await readCached<DblpCoauthorRecord[]>(name);
         if (stored) return stored;
 
         const search = await fetchDblp(`https://dblp.org/search/author/api?q=${encodeURIComponent(name)}&format=json&h=60`);
-        const hits = (await search.json()).result?.hits?.hit || [];
+        const searchData = await search.json() as { result?: { hits?: { hit?: Array<{ info?: { author?: string, url: string } }> } } };
+        const hits = searchData.result?.hits?.hit || [];
         const target = hits.find(hit => hit.info?.author?.toLowerCase() === name.toLowerCase());
         if (!target) return [];
 
@@ -184,10 +197,10 @@ async function fetchCoauthorRecords(name) {
         const person = xml.getElementsByTagName('person')[0];
         if (person) {
             Array.from(person.getElementsByTagName('author'))
-                .forEach(node => self.add(node.textContent.trim().toLowerCase()));
+                .forEach(node => self.add((node.textContent || '').trim().toLowerCase()));
         }
 
-        const records = new Map();
+        const records = new Map<string, DblpCoauthorRecord>();
         Array.from(xml.getElementsByTagName('r')).forEach(record => {
             const publication = record.firstElementChild;
             if (!publication) return;
@@ -195,7 +208,7 @@ async function fetchCoauthorRecords(name) {
             if (!Number.isFinite(year)) return;
 
             new Set(Array.from(publication.getElementsByTagName('author'))
-                .map(node => node.textContent.trim())
+                .map(node => (node.textContent || '').trim())
                 .filter(author => author && !self.has(author.toLowerCase()))
             ).forEach(author => {
                 let entry = records.get(author);
@@ -220,9 +233,9 @@ async function fetchCoauthorRecords(name) {
 }
 
 /** Top coauthors within a year window, derived from cached per-year counts. */
-export function topCoauthorsInWindow(records, { startYear, endYear, limit = 3 } = {}) {
-    const inWindow = year => (!Number.isFinite(startYear) || year >= startYear)
-        && (!Number.isFinite(endYear) || year <= endYear);
+export function topCoauthorsInWindow(records: DblpCoauthorRecord[], { startYear, endYear, limit = 3 }: { startYear?: number, endYear?: number, limit?: number } = {}) {
+    const inWindow = (year: number) => (!Number.isFinite(startYear) || year >= startYear!)
+        && (!Number.isFinite(endYear) || year <= endYear!);
 
     return (records || [])
         .map(record => ({
@@ -236,11 +249,11 @@ export function topCoauthorsInWindow(records, { startYear, endYear, limit = 3 } 
 }
 
 /** Most frequent coauthors in a year window, for the researcher summary. */
-export async function fetchFrequentCoauthors(name, options = {}) {
+export async function fetchFrequentCoauthors(name: string, options: { startYear?: number, endYear?: number, limit?: number } = {}) {
     return topCoauthorsInWindow(await fetchCoauthorRecords(name), options);
 }
 
-export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date().getFullYear(), confSet = 'all-union') {
+export async function fetchAuthorStats(pid: string, startYear = 2015, endYear = new Date().getFullYear(), confSet = 'all-union'): Promise<DblpAuthorStats | null> {
     const url = `https://dblp.org/pid/${pid}.xml`;
 
     try {
@@ -255,16 +268,16 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
         }
 
         // Extract author aliases from the <person> element
-        const aliases = [];
+        const aliases: string[] = [];
         const personNode = xmlDoc.getElementsByTagName("person")[0];
         if (personNode) {
             const authorNodes = personNode.getElementsByTagName("author");
             for (let i = 0; i < authorNodes.length; i++) {
-                aliases.push(authorNodes[i].textContent);
+                if (authorNodes[i].textContent) aliases.push(authorNodes[i].textContent!);
             }
         }
 
-        const stats = {
+        const stats: DblpAuthorStats = {
             totalAdjusted: 0,
             totalPapers: 0,
             totalDblpPublications: 0,
@@ -283,7 +296,7 @@ export async function fetchAuthorStats(pid, startYear = 2015, endYear = new Date
 
             const yearNode = pub.getElementsByTagName("year")[0];
             if (!yearNode) continue;
-            const year = parseInt(yearNode.textContent);
+            const year = parseInt(yearNode.textContent || '');
 
             if (isNaN(year) || year < startYear || year > endYear) continue;
 
