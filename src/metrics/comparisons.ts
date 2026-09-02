@@ -28,8 +28,9 @@ export function calculateParityReport(rawData: RawData, filteredData: FilteredDa
     const areaTotal = Object.values(school.areas || {}).reduce((sum, area) => sum + area.adjusted, 0);
     return Math.abs(areaTotal - school.totalAdjusted) > 1e-6;
   }).length;
-  const sorted = [...schools].sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name));
-  const rankOrderIssues = sorted.filter((school, index) => index > 0 && school.score > sorted[index - 1].score).length;
+  const sorted = [...schools].sort((a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.name.localeCompare(b.name));
+  const rankOrderIssues = sorted.filter((school, index) => index > 0
+    && (school.score || 0) > (sorted[index - 1]?.score || 0)).length;
   const institutionCoverage = percent(
     schools.filter(school => school.country || school.region).length,
     schools.length
@@ -96,7 +97,7 @@ export function calculateCorpusDiagnostics(rawData: RawData, filteredData: Filte
   if (n > 0 && sumScores > 0) {
     let weightedSum = 0;
     for (let i = 0; i < n; i++) {
-      weightedSum += (2 * (i + 1) - n - 1) * scores[i];
+      weightedSum += (2 * (i + 1) - n - 1) * scores[i]!;
     }
     gini = weightedSum / (n * sumScores);
   }
@@ -151,7 +152,7 @@ export function calculateCorpusDiagnostics(rawData: RawData, filteredData: Filte
 const formatAdjusted = (value: unknown) => Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 1 });
 
 interface VerdictEntry {
-  rank?: number;
+  rank?: number | null;
   totalAdjusted?: number;
 }
 
@@ -173,11 +174,13 @@ export function describeVerdict(
   aWins: number,
   bWins: number
 ) {
+  const rankA = entryA.rank;
+  const rankB = entryB.rank;
   const headline: { leader: VerdictSide | null, phrase: string, verb: string } = type === 'school'
     // Rank is the headline for a school, and lower wins.
     ? {
-      leader: entryA.rank === entryB.rank ? null : (entryA.rank < entryB.rank ? 'a' : 'b'),
-      phrase: `#${entryA.rank} vs #${entryB.rank}`,
+      leader: rankA === rankB ? null : rankA == null ? 'b' : rankB == null ? 'a' : rankA < rankB ? 'a' : 'b',
+      phrase: `${rankA == null ? 'unranked' : `#${rankA}`} vs ${rankB == null ? 'unranked' : `#${rankB}`}`,
       verb: 'ranks higher'
     }
     : (() => {

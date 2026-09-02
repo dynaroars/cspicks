@@ -18,7 +18,7 @@ export function calculateDiscoveryInsights(currentData: FilteredData, priorData:
 
   const schools = Object.values(currentData?.schools || {}).map(school => {
     const prior = priorData?.schools?.[school.name];
-    const metrics = calculateSchoolMetrics(currentData, priorData, school.name);
+    const metrics = calculateSchoolMetrics(currentData, priorData, school.name)!;
     const priorAreas = Object.values(prior?.areas || {}).filter(area => area.adjusted > 0).length;
     const topArea = Object.entries(school.areas || {})
       .map(([area, values]) => ({ area, credit: values.adjusted || 0 }))
@@ -53,7 +53,7 @@ export function calculateDiscoveryInsights(currentData: FilteredData, priorData:
         ? percent(topArea.credit, school.totalAdjusted)
         : 0
     };
-  }).filter(item => item.metrics);
+  });
 
   const take = <T>(items: T[], compare: (a: T, b: T) => number) => [...items].sort(compare).slice(0, limit);
   const established = schools.filter(item =>
@@ -88,12 +88,12 @@ export function calculateDiscoveryInsights(currentData: FilteredData, priorData:
 
   return {
     rankClimbers: take(
-      established.filter(item => item.metrics.rankDelta > 0),
-      (a, b) => b.metrics.rankDelta - a.metrics.rankDelta || a.metrics.rank - b.metrics.rank
+      established.filter(item => (item.metrics.rankDelta || 0) > 0),
+      (a, b) => (b.metrics.rankDelta || 0) - (a.metrics.rankDelta || 0) || (a.metrics.rank || Infinity) - (b.metrics.rank || Infinity)
     ),
     rankDroppers: take(
-      established.filter(item => item.metrics.rankDelta < 0),
-      (a, b) => a.metrics.rankDelta - b.metrics.rankDelta || a.metrics.rank - b.metrics.rank
+      established.filter(item => (item.metrics.rankDelta || 0) < 0),
+      (a, b) => (a.metrics.rankDelta || 0) - (b.metrics.rankDelta || 0) || (a.metrics.rank || Infinity) - (b.metrics.rank || Infinity)
     ),
     momentum: take(
       established.filter(item => item.metrics.growth > 0),
@@ -125,7 +125,7 @@ export function calculateDiscoveryInsights(currentData: FilteredData, priorData:
     ),
     focusedPowerhouses: take(
       substantive.filter(item => item.focusArea),
-      (a, b) => b.focusArea.specialization - a.focusArea.specialization || b.focusArea.regionalShare - a.focusArea.regionalShare
+      (a, b) => b.focusArea!.specialization - a.focusArea!.specialization || b.focusArea!.regionalShare - a.focusArea!.regionalShare
     ),
     areaBreakouts: take(areaBreakouts, (a, b) => b.gain - a.gain || b.currentCredit - a.currentCredit),
     areaDeclines: take(areaDeclines, (a, b) => a.gain - b.gain || b.priorCredit - a.priorCredit)
@@ -255,7 +255,7 @@ export function compareAreas(currentData: FilteredData, priorData: FilteredData,
   const bothSchools = a.schools
     .filter(row => creditBByName.has(row.name))
     .map(row => ({ name: row.name, creditA: row.credit, creditB: creditBByName.get(row.name) }))
-    .sort((x, y) => (y.creditA + y.creditB) - (x.creditA + x.creditB));
+    .sort((x, y) => (y.creditA + y.creditB!) - (x.creditA + x.creditB!));
 
   return { a, b, bothFaculty, bothSchools };
 }
@@ -308,7 +308,7 @@ export function compareConferences(currentData: FilteredData, priorData: Filtere
   const bothSchools = a.schools
     .filter(row => creditBByName.has(row.name))
     .map(row => ({ name: row.name, creditA: row.credit, creditB: creditBByName.get(row.name) }))
-    .sort((x, y) => (y.creditA + y.creditB) - (x.creditA + x.creditB));
+    .sort((x, y) => (y.creditA + y.creditB!) - (x.creditA + x.creditB!));
 
   return { a, b, bothFaculty, bothSchools };
 }

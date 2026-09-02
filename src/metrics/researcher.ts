@@ -22,14 +22,14 @@ export function calculateResearcherPatterns(
   const venues: Record<string, { count: number, adjusted: number, years: Set<number> }> = {};
   publications.forEach(pub => {
     if (!yearly[pub.year]) yearly[pub.year] = { count: 0, adjusted: 0 };
-    yearly[pub.year].count += pub.count || 0;
-    yearly[pub.year].adjusted += pub.adjustedcount || 0;
+    yearly[pub.year]!.count += pub.count || 0;
+    yearly[pub.year]!.adjusted += pub.adjustedcount || 0;
     const area = areaMap[pub.area] || pub.area;
     areas[area] = (areas[area] || 0) + (pub.adjustedcount || 0);
     if (!venues[pub.area]) venues[pub.area] = { count: 0, adjusted: 0, years: new Set() };
-    venues[pub.area].count += pub.count || 0;
-    venues[pub.area].adjusted += pub.adjustedcount || 0;
-    venues[pub.area].years.add(pub.year);
+    venues[pub.area]!.count += pub.count || 0;
+    venues[pub.area]!.adjusted += pub.adjustedcount || 0;
+    venues[pub.area]!.years.add(pub.year);
   });
 
   const activeYears = Object.keys(yearly).map(Number).sort((a, b) => a - b);
@@ -38,7 +38,7 @@ export function calculateResearcherPatterns(
   const totalPapers = sumBy(publications, pub => pub.count || 0);
   const peak = Object.entries(yearly).sort(([, a], [, b]) => b.adjusted - a.adjusted)[0];
   let activeStreak = 1;
-  for (let index = activeYears.length - 1; index > 0 && activeYears[index] - activeYears[index - 1] === 1; index--) activeStreak++;
+  for (let index = activeYears.length - 1; index > 0 && activeYears[index]! - activeYears[index - 1]! === 1; index--) activeStreak++;
 
   const recentStart = Math.max(startYear, endYear - 2);
   const priorStart = Math.max(startYear, recentStart - 3);
@@ -72,8 +72,8 @@ export function calculateResearcherPatterns(
     && earlyPrimary[1] >= 0.5 && recentPrimary[1] >= 0.5
     ? { from: earlyPrimary[0], to: recentPrimary[0], midpoint }
     : null;
-  const emergingAreas = Object.keys(recentAreas).filter(area => (recentAreas[area] || 0) >= 0.5 && !(earlyAreas[area] > 0));
-  const dormantAreas = Object.keys(earlyAreas).filter(area => (earlyAreas[area] || 0) >= 0.5 && !(recentAreas[area] > 0));
+  const emergingAreas = Object.keys(recentAreas).filter(area => (recentAreas[area] || 0) >= 0.5 && !((earlyAreas[area] || 0) > 0));
+  const dormantAreas = Object.keys(earlyAreas).filter(area => (earlyAreas[area] || 0) >= 0.5 && !((recentAreas[area] || 0) > 0));
 
   const topVenue = Object.entries(venues).sort(([, a], [, b]) => b.adjusted - a.adjusted)[0] || null;
   const venueConcentration = topVenue ? percent(topVenue[1].adjusted, totalAdjusted) : 0;

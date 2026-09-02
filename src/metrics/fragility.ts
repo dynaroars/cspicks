@@ -10,6 +10,7 @@ export function calculateFragility(filteredData: FilteredData, schoolName: strin
 } = {}) {
   const school = filteredData?.schools?.[schoolName];
   if (!school || !Number.isFinite(school.rank)) return null;
+  const schoolRank = school.rank!;
 
   // Per-person, per-area credit, accumulated by the data pipeline.
   const contributions: Record<string, Record<string, number>> = {};
@@ -29,16 +30,16 @@ export function calculateFragility(filteredData: FilteredData, schoolName: strin
 
   let areaCounts = { ...school.areaAdjustedCounts };
   const remaining = new Set(names);
-  const steps = [];
+  const steps: Array<{ removed: string, score: number, rank: number }> = [];
   const exits: Record<number, number> = {};
   // A department already outside a threshold needs no departures to leave it.
-  thresholds.forEach(threshold => { if (school.rank > threshold) exits[threshold] = 0; });
+  thresholds.forEach(threshold => { if (schoolRank > threshold) exits[threshold] = 0; });
 
   for (let removed = 1; removed <= maxRemovals && remaining.size; removed++) {
-    let best = null;
+    let best: { name: string, exact: number, counts: Record<string, number> } | null = null;
     for (const name of remaining) {
       const trial = { ...areaCounts };
-      Object.entries(contributions[name]).forEach(([area, adjusted]) => {
+      Object.entries(contributions[name]!).forEach(([area, adjusted]) => {
         trial[area] = Math.max(0, (trial[area] || 0) - adjusted);
       });
       // Compare on the unrounded mean: in a large department every single
@@ -48,6 +49,7 @@ export function calculateFragility(filteredData: FilteredData, schoolName: strin
       const exact = geometricMeanScore(trial);
       if (!best || exact < best.exact) best = { name, exact, counts: trial };
     }
+    if (!best) break;
     areaCounts = best.counts;
     remaining.delete(best.name);
     // Ranking is against other departments' rounded scores, so report rounded.
@@ -60,5 +62,5 @@ export function calculateFragility(filteredData: FilteredData, schoolName: strin
     if (thresholds.every(threshold => threshold in exits) && steps.length >= minSteps) break;
   }
 
-  return { rank: school.rank, score: school.score, facultyCount: names.length, steps, exits, thresholds };
+  return { rank: schoolRank, score: school.score, facultyCount: names.length, steps, exits, thresholds };
 }

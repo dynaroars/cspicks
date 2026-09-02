@@ -254,3 +254,10 @@ and alias lookups have explicit fallbacks, filtered-professor construction itera
 and ranking/history operations guard indexed values. The repository total is now 578. All normal
 verification gates pass (8 test files, 88 bundled modules). Resume with the remaining domain
 metrics, then DBLP/simulation services.
+
+Checkpoint 2026-09-02 (`strictNullChecks` metrics pass): cleared all remaining null-safety
+diagnostics under `src/metrics/`. Made unavailable ranks explicit in parity/verdict logic,
+guarded indexed accumulators and fragility candidates, and encoded the established-school and
+Map lookup invariants used by discovery comparisons. The repository total is now 503. All normal
+verification gates pass (8 test files, 88 bundled modules). Resume with DBLP, CSRankings rules,
+NSF, and simulation domain services before page controllers.
