@@ -9,7 +9,7 @@ export function calendarParts(value: unknown): [number, number, number] | null {
   if (!value || String(value).toUpperCase() === 'TBD') return null;
   const text = String(value).trim();
   const iso = /^(\d{4})-(\d{2})-(\d{2})/.exec(text);
-  if (iso) return [Number(iso[1]), Number(iso[2]), Number(iso[3])];
+  if (iso) return [Number(iso[1]!), Number(iso[2]!), Number(iso[3]!)];
   // Event ranges are display text, not single instants. Native Date parsing
   // famously reads "January 10-16, 2027" as January 10, 2016.
   if (/\b\d{1,2}\s*[-–—]\s*\d{1,2}\b/.test(text)) return null;
@@ -27,11 +27,11 @@ export function conferenceStart(value: unknown, fallbackYear: number) {
   if (!value) return null;
   const text = String(value).trim();
   const iso = /^(\d{4})-(\d{2})-(\d{2})/.exec(text);
-  if (iso) return Date.UTC(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]));
+  if (iso) return Date.UTC(Number(iso[1]!), Number(iso[2]!) - 1, Number(iso[3]!));
   const monthNames = 'january february march april may june july august september october november december';
   const match = text.toLowerCase().match(new RegExp(`(${monthNames.split(' ').join('|')}|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*[^0-9]*([0-9]{1,2})?`, 'i'));
   if (!match) return null;
-  const month = monthNames.split(' ').findIndex(name => name.startsWith(match[1].slice(0, 3).toLowerCase()));
+  const month = monthNames.split(' ').findIndex(name => name.startsWith(match[1]!.slice(0, 3).toLowerCase()));
   const yearMatch = text.match(/\b(20\d{2})\b/);
   const withoutYear = text.replace(/\b20\d{2}\b/g, '');
   const dayMatch = withoutYear.match(/\b([1-9]|[12][0-9]|3[01])\b/);
@@ -60,7 +60,7 @@ export function deadlineStatus(value: unknown, now = Date.now()) {
 
 export function conferenceAreas(conf: ConferenceRecord) {
   const map = getConferenceAreaMap('all-union');
-  return [...new Set(conf.venueKeys.map(key => map[key]).filter(Boolean))];
+  return [...new Set(conf.venueKeys.map(key => map[key]).filter((area): area is string => Boolean(area)))];
 }
 
 export function groupConferences(conferences: ConferenceRecord[]) {
@@ -68,9 +68,9 @@ export function groupConferences(conferences: ConferenceRecord[]) {
   for (const conf of conferences) {
     const key = `${conf.name}\u0000${conf.year}`;
     if (!grouped.has(key)) grouped.set(key, []);
-    grouped.get(key).push(conf);
+    grouped.get(key)!.push(conf);
   }
-  return [...grouped.values()];
+  return [...grouped.values()] as ConferenceGroup[];
 }
 
 function isUpcoming(group: ConferenceGroup, now: number) {
@@ -84,7 +84,8 @@ function isUpcoming(group: ConferenceGroup, now: number) {
 }
 
 function nextDeadline(group: ConferenceGroup, now: number) {
-  return Math.min(...group.map(conf => aoeDeadline(conf.deadline)).filter(value => value !== null && value >= now));
+  return Math.min(...group.map(conf => aoeDeadline(conf.deadline))
+    .filter((value): value is number => value !== null && value >= now));
 }
 
 function scheduleSortKey(group: ConferenceGroup, now: number) {

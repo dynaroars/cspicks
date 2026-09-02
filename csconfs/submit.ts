@@ -6,7 +6,7 @@ import {
 } from './submission.js';
 import type { ConferenceRecord } from './types.js';
 
-const root = document.getElementById('submission-form-root');
+const root = document.getElementById('submission-form-root')!;
 let records: ConferenceRecord[] = [];
 let recordsByEdition = new Map<string, ConferenceRecord[]>();
 type ConferenceForm = HTMLFormElement;
@@ -158,7 +158,7 @@ function populateEntry(form: ConferenceForm, entry: ConferenceRecord) {
 }
 
 function renderDuplicateWarning(form: ConferenceForm) {
-  const warning = document.getElementById('conference-duplicate-warning');
+  const warning = document.getElementById('conference-duplicate-warning')!;
   if (selectedKind(form).value !== 'new') {
     warning.hidden = true;
     return;
@@ -221,7 +221,7 @@ function buildSubmission(form: ConferenceForm) {
 function setupForm() {
   const form = document.getElementById('conference-submit-form') as ConferenceForm;
   const target = inputField(form, 'target');
-  const suggestions = document.getElementById('conference-correction-suggestions');
+  const suggestions = document.getElementById('conference-correction-suggestions')!;
   let matches: ConferenceRecord[] = [];
 
   const hideSuggestions = () => {
@@ -249,7 +249,7 @@ function setupForm() {
 
   form.querySelectorAll('input[name="kind"]').forEach(radio => radio.addEventListener('change', () => {
     const correction = selectedKind(form).value === 'correction';
-    document.getElementById('correction-target-row').hidden = !correction;
+    document.getElementById('correction-target-row')!.hidden = !correction;
     target.required = correction;
     renderDuplicateWarning(form);
   }));
@@ -258,7 +258,8 @@ function setupForm() {
   target.addEventListener('blur', () => window.setTimeout(hideSuggestions, 150));
   suggestions.addEventListener('click', event => {
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-index]') : null;
-    if (button) chooseEntry(matches[Number(button.dataset.index)]);
+    const entry = button ? matches[Number(button.dataset.index)] : undefined;
+    if (entry) chooseEntry(entry);
   });
 
   inputField(form, 'name').addEventListener('input', () => {
@@ -266,12 +267,12 @@ function setupForm() {
     renderDuplicateWarning(form);
   });
   inputField(form, 'year').addEventListener('input', () => renderDuplicateWarning(form));
-  document.getElementById('conference-duplicate-warning').addEventListener('click', event => {
+  document.getElementById('conference-duplicate-warning')!.addEventListener('click', event => {
     if (!(event.target instanceof Element) || !event.target.closest('#switch-to-correction')) return;
     const existing = recordsByEdition.get(editionKey(inputField(form, 'name').value, inputField(form, 'year').value))?.[0];
     if (!existing) return;
     form.querySelector<HTMLInputElement>('input[name="kind"][value="correction"]')!.checked = true;
-    document.getElementById('correction-target-row').hidden = false;
+    document.getElementById('correction-target-row')!.hidden = false;
     target.required = true;
     chooseEntry(existing);
   });
@@ -307,7 +308,7 @@ async function init() {
     records.forEach(entry => {
       const key = editionKey(entry.name, entry.year);
       if (!recordsByEdition.has(key)) recordsByEdition.set(key, []);
-      recordsByEdition.get(key).push(entry);
+      recordsByEdition.get(key)!.push(entry);
     });
     setupForm();
   } catch (error) {

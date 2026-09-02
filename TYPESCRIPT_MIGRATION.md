@@ -294,3 +294,10 @@ boundaries; optional URL, suggestion, discovery-module, observer, rank, dataset,
 deadline values are narrowed before use. The repository total is 274. All normal verification
 gates pass (8 test files, 88 bundled modules). Resume with conference schedule/submission pages,
 then funding and grants.
+
+Checkpoint 2026-09-02 (`strictNullChecks` conference pass): cleared all null-safety diagnostics
+from conference schedule data/rendering, its page controller, and conference submission. Modeled
+conference groups as non-empty tuples, narrowed mapped research areas/deadlines, and guarded
+required DOM and correction-record lookups. The repository total is 187. All normal verification
+gates pass (8 test files, 88 bundled modules). Resume with funding and grants, then analysis and
+comparison UI.

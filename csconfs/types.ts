@@ -20,5 +20,4 @@ export interface ConferenceRecord {
   verified?: boolean;
 }
 
-export type ConferenceGroup = ConferenceRecord[];
-
+export type ConferenceGroup = [ConferenceRecord, ...ConferenceRecord[]];

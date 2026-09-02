@@ -34,7 +34,7 @@ export function renderScheduleCard(group: ConferenceGroup, now = Date.now()) {
     main.generalChair ? `General chair${multiplePeople(main.generalChair) ? 's' : ''}: ${main.generalChair}` : '',
     main.programChair ? `Program chair${multiplePeople(main.programChair) ? 's' : ''}: ${main.programChair}` : '',
     Number.isFinite(main.acceptanceRate)
-      ? `Acceptance: ${main.acceptanceRate.toFixed(2)}%${main.submissions ? ` of ${main.submissions.toLocaleString()} submissions` : ''}`
+      ? `Acceptance: ${main.acceptanceRate!.toFixed(2)}%${main.submissions ? ` of ${main.submissions.toLocaleString()} submissions` : ''}`
       : ''
   ].filter(Boolean);
   const cycleOrder = (conf: ConferenceRecord): [number, number] => {
@@ -50,7 +50,7 @@ export function renderScheduleCard(group: ConferenceGroup, now = Date.now()) {
   });
   const renderedCycles = cycles.length <= 2
     ? cycles.map(conf => renderCycle(conf, now, cycles.length > 1)).join('')
-    : `${renderCycle(cycles[0], now, true)}<details class="schedule-more-cycles"><summary>Show all ${cycles.length} submission cycles</summary>${cycles.slice(1).map(conf => renderCycle(conf, now, true)).join('')}</details>`;
+    : `${renderCycle(cycles[0]!, now, true)}<details class="schedule-more-cycles"><summary>Show all ${cycles.length} submission cycles</summary>${cycles.slice(1).map(conf => renderCycle(conf, now, true)).join('')}</details>`;
 
   return `<article class="card schedule-card" data-name="${escapeHtml(`${main.name} ${main.year}`)}">
     <div class="schedule-card-main">

@@ -13,8 +13,8 @@ import type { ConferenceRecord } from './types.js';
 const params = new URLSearchParams(location.search);
 const currentYear = new Date().getFullYear();
 const input = document.querySelector<HTMLInputElement>('#csconfs-search')!;
-const results = document.getElementById('csconfs-results');
-const status = document.getElementById('csconfs-status');
+const results = document.getElementById('csconfs-results')!;
+const status = document.getElementById('csconfs-status')!;
 let conferences: ConferenceRecord[] = [];
 let filters: FilterController;
 let suggestions: ReturnType<typeof CreateSuggestionBox>;
@@ -48,7 +48,7 @@ function render() {
   status.textContent = groups.length
     ? `${groups.length} matching${suffix} conference${groups.length === 1 ? '' : 's'}`
     : `No conferences match these years, venue set, and search terms.`;
-  document.getElementById('csconfs-count').textContent = `${groups.length} conferences during`;
+  document.getElementById('csconfs-count')!.textContent = `${groups.length} conferences during`;
   updateUrl();
   trackView(input.value.trim() ? 'search-results' : 'default', 'csconfs');
 }
@@ -56,7 +56,7 @@ function render() {
 function buildSuggestions() {
   return createSuggestionBox({
     input,
-    listbox: document.getElementById('universal-suggestions'),
+    listbox: document.getElementById('universal-suggestions')!,
     emptyText: 'No matching conference or research area',
     getGroups: query => {
       const items = scheduleSuggestions(conferences, filters.startYear, filters.endYear, filters.confSet);
@@ -76,7 +76,7 @@ function sample<T>(items: T[], count: number) {
   const available = [...items];
   for (let index = available.length - 1; index > 0; index--) {
     const swapIndex = Math.floor(Math.random() * (index + 1));
-    [available[index], available[swapIndex]] = [available[swapIndex], available[index]];
+    [available[index], available[swapIndex]] = [available[swapIndex]!, available[index]!];
   }
   return available.slice(0, count);
 }
@@ -96,15 +96,15 @@ function renderExamples() {
     ...sample(items.conferences, 2),
     ...sample(items.areas, 2)
   ], 4);
-  document.getElementById('csconfs-examples').innerHTML = examples
+  document.getElementById('csconfs-examples')!.innerHTML = examples
     .map(item => `<button type="button" data-search-example="${escapeHtml(item.label)}">${escapeHtml(item.label)}</button>`).join('');
 }
 
 function setupExamples() {
-  document.getElementById('csconfs-examples').addEventListener('click', event => {
+  document.getElementById('csconfs-examples')!.addEventListener('click', event => {
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-search-example]') : null;
     if (!button) return;
-    input.value = button.dataset.searchExample;
+    input.value = button.dataset.searchExample || '';
     render();
     input.focus();
     suggestions.close();
@@ -135,7 +135,7 @@ async function init() {
       <span class="tooltip-content" id="upcoming-only-help" role="tooltip">Shows conferences with a future submission deadline or conference date. Conference deadlines use Anywhere on Earth time.</span>
     </label>
   </div>`);
-  document.getElementById('upcoming-only').addEventListener('change', () => {
+  document.getElementById('upcoming-only')!.addEventListener('change', () => {
     render();
     renderExamples();
   });
@@ -158,7 +158,7 @@ async function init() {
     input.focus();
 
     document.addEventListener('keydown', event => {
-      if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) {
+      if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName || '')) {
         event.preventDefault();
         input.focus();
         input.select();
