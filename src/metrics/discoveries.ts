@@ -1,8 +1,11 @@
 import { CONFERENCE_SET_IDS, assignCompetitionRanks, filterByYears, geometricMeanScore, getConferenceAreaMap, publicationMatchesConferenceSet } from '../data.js';
 import { percent } from './math.js';
 import { calculateSchoolMetrics } from './school.js';
+import type { FilteredData } from '../types.js';
 
-export function calculateDiscoveryInsights(currentData, priorData, limit = 5) {
+type SchoolCredit = { name: string, credit: number };
+
+export function calculateDiscoveryInsights(currentData: FilteredData, priorData: FilteredData, limit = 5) {
   const regionalAreaTotals = {};
   let regionalTotal = 0;
   Object.values(currentData?.schools || {}).forEach(school => {
@@ -134,15 +137,15 @@ export function calculateDiscoveryInsights(currentData, priorData, limit = 5) {
  * shrank, broadened, narrowed, or changed leader region-wide. Same
  * equal-length-period comparison and minimum-credit guards.
  */
-export function calculateSubfieldDiscoveries(currentData, priorData, limit = 5) {
-  const areasOf = data => Object.values(data?.schools || {}).flatMap(school => Object.keys(school.areas || {}));
+export function calculateSubfieldDiscoveries(currentData: FilteredData, priorData: FilteredData, limit = 5) {
+  const areasOf = (data: FilteredData) => Object.values(data.schools).flatMap(school => Object.keys(school.areas || {}));
   const areas = new Set([...areasOf(currentData), ...areasOf(priorData)]);
 
-  const activeSchools = (data, area) => Object.values(data?.schools || {})
+  const activeSchools = (data: FilteredData, area: string): SchoolCredit[] => Object.values(data.schools)
     .map(school => ({ name: school.name, credit: school.areas?.[area]?.adjusted || 0 }))
     .filter(row => row.credit > 0);
 
-  const leadersOf = rows => {
+  const leadersOf = (rows: SchoolCredit[]) => {
     const max = rows.reduce((best, row) => Math.max(best, row.credit), 0);
     return max > 0 ? rows.filter(row => row.credit === max).map(row => row.name) : [];
   };
@@ -169,7 +172,7 @@ export function calculateSubfieldDiscoveries(currentData, priorData, limit = 5) 
     };
   });
 
-  const take = (items, compare) => [...items].sort(compare).slice(0, limit);
+  const take = <T>(items: T[], compare: (a: T, b: T) => number) => [...items].sort(compare).slice(0, limit);
   // Both periods need at least a small amount of real output, so a subfield
   // with a couple of stray publications doesn't dominate a percentage list.
   const established = summaries.filter(s => s.priorTotal >= 2 && s.currentTotal >= 2);
@@ -205,24 +208,24 @@ export function calculateSubfieldDiscoveries(currentData, priorData, limit = 5) 
  * active in both - the area-level counterpart to a school-vs-school or
  * researcher-vs-researcher comparison.
  */
-export function compareAreas(currentData, priorData, areaA, areaB) {
-  const schoolsIn = (data, area) => Object.values(data?.schools || {})
+export function compareAreas(currentData: FilteredData, priorData: FilteredData, areaA: string, areaB: string) {
+  const schoolsIn = (data: FilteredData, area: string): SchoolCredit[] => Object.values(data.schools)
     .map(school => ({ name: school.name, credit: school.areas?.[area]?.adjusted || 0 }))
     .filter(row => row.credit > 0)
     .sort((a, b) => b.credit - a.credit);
 
-  const facultyIn = (data, area) => {
-    const names = new Set();
-    Object.values(data?.schools || {}).forEach(school => {
+  const facultyIn = (data: FilteredData, area: string) => {
+    const names = new Set<string>();
+    Object.values(data.schools).forEach(school => {
       (school.areas?.[area]?.faculty || []).forEach(name => names.add(name));
     });
     return names;
   };
 
-  const totalOf = (data, area) => Object.values(data?.schools || {})
+  const totalOf = (data: FilteredData, area: string) => Object.values(data.schools)
     .reduce((sum, school) => sum + (school.areas?.[area]?.adjusted || 0), 0);
 
-  const sideOf = area => {
+  const sideOf = (area: string) => {
     const currentTotal = totalOf(currentData, area);
     const priorTotal = totalOf(priorData, area);
     const currentFaculty = facultyIn(currentData, area);
@@ -262,10 +265,10 @@ export function compareAreas(currentData, priorData, areaA, areaB) {
  * so venue totals have to come from each professor's own publication list,
  * where the conference key survives.
  */
-export function compareConferences(currentData, priorData, confA, confB) {
-  const collect = (data, conf) => {
-    const totals = { conf, total: 0, schools: new Map(), faculty: new Set() };
-    Object.values(data?.professors || {}).forEach(professor => {
+export function compareConferences(currentData: FilteredData, priorData: FilteredData, confA: string, confB: string) {
+  const collect = (data: FilteredData, conf: string) => {
+    const totals = { conf, total: 0, schools: new Map<string, number>(), faculty: new Set<string>() };
+    Object.values(data.professors).forEach(professor => {
       const credit = (professor.pubs || [])
         .filter(pub => pub.area === conf)
         .reduce((sum, pub) => sum + (Number(pub.adjustedcount) || 0), 0);
@@ -278,7 +281,7 @@ export function compareConferences(currentData, priorData, confA, confB) {
     return totals;
   };
 
-  const build = conf => {
+  const build = (conf: string) => {
     const now = collect(currentData, conf);
     const before = collect(priorData, conf);
     return {

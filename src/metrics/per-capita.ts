@@ -1,6 +1,7 @@
 import { assignCompetitionRanks } from '../data.js';
+import type { FilteredData, FilteredSchool } from '../types.js';
 
-export function rankSchoolsPerCapita(schools, { minFaculty = 5 } = {}) {
+export function rankSchoolsPerCapita(schools: Record<string, FilteredSchool>, { minFaculty = 5 } = {}) {
   const rows = Object.values(schools || {})
     .map(school => {
       const facultyCount = Object.keys(school.facultyAdjustedCounts || {}).length;
@@ -19,7 +20,7 @@ export function rankSchoolsPerCapita(schools, { minFaculty = 5 } = {}) {
   return assignCompetitionRanks(rows, row => row.perCapita);
 }
 
-export function calculatePerCapita(filteredData, options) {
+export function calculatePerCapita(filteredData: FilteredData, options?: { minFaculty?: number }) {
   return rankSchoolsPerCapita(filteredData?.schools, options);
 }
 
@@ -31,7 +32,7 @@ export function calculatePerCapita(filteredData, options) {
  * rank entirely rather than keep the departmental-total one, matching how the
  * per-capita toggle omits them from the search results list.
  */
-export function applyPerCapitaRanks(filteredData, options) {
+export function applyPerCapitaRanks(filteredData: FilteredData, options?: { minFaculty?: number }) {
   const ranked = calculatePerCapita(filteredData, options);
   const rankedSchools = new Set();
   ranked.forEach(row => {

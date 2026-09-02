@@ -1,9 +1,10 @@
 import { hasProfileValue, median, percent } from './math.js';
+import type { FilteredData, FilteredProfessor } from '../types.js';
 
-export function getSchoolFaculty(filteredData, schoolName) {
+export function getSchoolFaculty(filteredData: FilteredData, schoolName: string): FilteredProfessor[] {
   const school = filteredData.schools?.[schoolName];
   if (!school) return [];
-  const names = new Set();
+  const names = new Set<string>();
   Object.values(school.areas || {}).forEach(area => {
     (area.faculty || []).forEach(name => names.add(name));
   });
@@ -12,7 +13,7 @@ export function getSchoolFaculty(filteredData, schoolName) {
     .filter(Boolean);
 }
 
-export function calculateSchoolMetrics(currentData, priorData, schoolName) {
+export function calculateSchoolMetrics(currentData: FilteredData, priorData: FilteredData | null, schoolName: string) {
   const school = currentData.schools?.[schoolName];
   if (!school) return null;
   const prior = priorData?.schools?.[schoolName];
@@ -29,7 +30,8 @@ export function calculateSchoolMetrics(currentData, priorData, schoolName) {
   const activeAreas = Object.entries(school.areas || {}).filter(([, area]) => area.adjusted > 0);
   const sustainedAreas = activeAreas.filter(([area]) => (prior?.areas?.[area]?.adjusted || 0) > 0).length;
   const profileFields = faculty.length * 2;
-  const profileFieldsPresent = faculty.reduce((sum, prof) => sum + hasProfileValue(prof.homepage) + hasProfileValue(prof.scholarid), 0);
+  const profileFieldsPresent = faculty.reduce((sum, prof) => sum
+    + Number(hasProfileValue(prof.homepage)) + Number(hasProfileValue(prof.scholarid)), 0);
   const profileCoverage = percent(profileFieldsPresent, profileFields);
   const confidence = profileCoverage >= 80 ? 'High' : profileCoverage >= 50 ? 'Medium' : 'Review';
 

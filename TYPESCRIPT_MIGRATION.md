@@ -8,7 +8,7 @@ run the listed verification commands, and update this file in the same commit.
 
 - [x] Phase 0 — tooling and CI guardrails
 - [x] Phase 1 — shared domain types and typed external-data boundaries
-- [ ] Phase 2 — foundation modules (`shared`, data helpers, `data`, metrics) (in progress)
+- [x] Phase 2 — foundation modules (`shared`, data helpers, `data`, metrics)
 - [ ] Phase 3 — shared UI infrastructure and page controllers
 - [ ] Phase 4 — strict mode, remaining tests/scripts as appropriate, final CI gate
 
@@ -83,7 +83,15 @@ Checkpoint 2026-09-01 (data foundation): converted `src/data/conference-sets.js`
 union, typed lookup maps, real generic CSV parsing, and concrete raw/filtered data dictionaries.
 All three verification commands pass (8 test files, 88 bundled modules).
 
-Resume Phase 2 with `src/metrics/math.js`, then the other metric modules, and finally the barrel.
+Completed 2026-09-01: converted all ten modules under `src/metrics/` plus the `src/metrics.js`
+barrel. Shared metric entry points now use `RawData`, `FilteredData`, professor/school types,
+typed numeric dictionaries, generic math helpers, and explicit rank-stability contracts.
+Verification passed (`npm run typecheck`, `npm test`, and `npm run build`; 8 test files and
+88 bundled modules).
+
+Next step: Phase 3 should inventory remaining `src/**/*.js` by dependency. Start with leaf
+infrastructure (`analytics`, `seo`, `share`, tooltip/cache/chart helpers), then shared controllers
+and renderers, and convert HTML page entry modules last.
 
 ### Phase 3
 

@@ -1,7 +1,12 @@
 import { CONFERENCE_SET_IDS, assignCompetitionRanks, filterByYears, geometricMeanScore, getConferenceAreaMap, publicationMatchesConferenceSet } from '../data.js';
 import { cosineSimilarity, percent, sumBy, topEntry } from './math.js';
+import type { FilteredProfessor } from '../types.js';
 
-export function calculateResearcherPatterns(professor, peers = {}, options = {}) {
+export function calculateResearcherPatterns(
+  professor: FilteredProfessor | null,
+  peers: Record<string, FilteredProfessor> = {},
+  options: { startYear?: number, endYear?: number, confSet?: string, areaMap?: Record<string, string> } = {}
+) {
   if (!professor) return null;
   const startYear = Number(options.startYear);
   const endYear = Number(options.endYear);
@@ -12,9 +17,9 @@ export function calculateResearcherPatterns(professor, peers = {}, options = {})
   );
   if (!publications.length) return null;
 
-  const yearly = {};
-  const areas = {};
-  const venues = {};
+  const yearly: Record<number, { count: number, adjusted: number }> = {};
+  const areas: Record<string, number> = {};
+  const venues: Record<string, { count: number, adjusted: number, years: Set<number> }> = {};
   publications.forEach(pub => {
     if (!yearly[pub.year]) yearly[pub.year] = { count: 0, adjusted: 0 };
     yearly[pub.year].count += pub.count || 0;
@@ -51,8 +56,8 @@ export function calculateResearcherPatterns(professor, peers = {}, options = {})
     ? -sumBy(areaShares, share => share * Math.log(share)) / Math.log(areaShares.length)
     : 0;
   const midpoint = Math.floor((startYear + endYear) / 2);
-  const periodAreas = range => {
-    const counts = {};
+  const periodAreas = (range: (publication: FilteredProfessor['pubs'][number]) => boolean) => {
+    const counts: Record<string, number> = {};
     publications.filter(range).forEach(pub => {
       const area = areaMap[pub.area] || pub.area;
       counts[area] = (counts[area] || 0) + (pub.adjustedcount || 0);
@@ -73,8 +78,8 @@ export function calculateResearcherPatterns(professor, peers = {}, options = {})
   const topVenue = Object.entries(venues).sort(([, a], [, b]) => b.adjusted - a.adjusted)[0] || null;
   const venueConcentration = topVenue ? percent(topVenue[1].adjusted, totalAdjusted) : 0;
   const mostPersistentVenue = Object.entries(venues).sort(([, a], [, b]) => b.years.size - a.years.size || b.adjusted - a.adjusted)[0] || null;
-  const earlyVenues = {};
-  const recentVenues = {};
+  const earlyVenues: Record<string, number> = {};
+  const recentVenues: Record<string, number> = {};
   publications.forEach(pub => {
     const target = pub.year <= midpoint ? earlyVenues : recentVenues;
     target[pub.area] = (target[pub.area] || 0) + (pub.adjustedcount || 0);
@@ -101,7 +106,7 @@ export function calculateResearcherPatterns(professor, peers = {}, options = {})
     .sort((a, b) => b.similarity - a.similarity || a.name.localeCompare(b.name))
     .slice(0, 3);
 
-  const highlights = [];
+  const highlights: string[] = [];
   if (pivot) highlights.push(`Primary research emphasis shifted between the earlier and later halves of the selected period.`);
   if (momentum !== null && Math.abs(momentum) >= 25) highlights.push(`Recent three-year adjusted output is ${Math.abs(momentum).toFixed(0)}% ${momentum > 0 ? 'higher' : 'lower'} than the preceding three-year window.`);
   if (primaryArea && percent(primaryArea[1], totalAdjusted) >= 60) highlights.push(`${percent(primaryArea[1], totalAdjusted).toFixed(0)}% of adjusted output is concentrated in one research area.`);

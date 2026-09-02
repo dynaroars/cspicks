@@ -1,7 +1,8 @@
 import { CONFERENCE_SET_IDS, assignCompetitionRanks, filterByYears, geometricMeanScore, getConferenceAreaMap, publicationMatchesConferenceSet } from '../data.js';
 import { hasProfileValue, percent } from './math.js';
+import type { FilteredData, FilteredSchool, RawData } from '../types.js';
 
-export function explainRankGap(schoolA, schoolB) {
+export function explainRankGap(schoolA: FilteredSchool | null, schoolB: FilteredSchool | null) {
   const areas = new Set([
     ...Object.keys(schoolA?.areaAdjustedCounts || {}),
     ...Object.keys(schoolB?.areaAdjustedCounts || {})
@@ -20,7 +21,7 @@ export function explainRankGap(schoolA, schoolB) {
  * list, and History reattributes publications to past affiliations, so a
  * "matches CSRankings" claim has to account for all three.
  */
-export function calculateParityReport(rawData, filteredData, confSet = 'csrankings-default', modes = {}) {
+export function calculateParityReport(rawData: RawData, filteredData: FilteredData, confSet = 'csrankings-default', modes: { perCapita?: boolean, historical?: boolean } = {}) {
   const schools = Object.values(filteredData.schools || {});
   const professors = Object.values(filteredData.professors || {});
   const totalMismatches = schools.filter(school => {
@@ -63,9 +64,9 @@ export function calculateParityReport(rawData, filteredData, confSet = 'csrankin
   };
 }
 
-export function calculateCorpusDiagnostics(rawData, filteredData) {
+export function calculateCorpusDiagnostics(rawData: RawData, filteredData: FilteredData) {
   const activeProfs = Object.values(filteredData.professors || {}).filter(p => (p.totalAdjusted || 0) > 0);
-  const areaTotals = {};
+  const areaTotals: Record<string, number> = {};
   let totalAdjusted = 0;
   for (const school of Object.values(filteredData.schools || {})) {
     for (const [area, info] of Object.entries(school.areas || {})) {

@@ -1,9 +1,26 @@
 import { CONFERENCE_SET_IDS, assignCompetitionRanks, filterByYears, geometricMeanScore, getConferenceAreaMap, publicationMatchesConferenceSet } from '../data.js';
 import { median } from './math.js';
+import type { ConferenceSetId } from '../data/conference-sets.js';
+import type { AffiliationHistory, RawData, SchoolAliasMap } from '../types.js';
+
+export interface RankStabilityVariant {
+  key: string;
+  span: number;
+  confSet: ConferenceSetId;
+  startYear: number;
+  endYear: number;
+}
+
+export interface RankStabilitySample {
+  key: string;
+  variant: RankStabilityVariant;
+  ranks: Record<string, number>;
+  ranked: number;
+}
 
 export const RANK_STABILITY_WINDOWS = [5, 10, 20, 30];
 
-export function rankStabilityVariants(endYear) {
+export function rankStabilityVariants(endYear: number): RankStabilityVariant[] {
   return RANK_STABILITY_WINDOWS.flatMap(span => CONFERENCE_SET_IDS.map(confSet => ({
     key: `${span}|${confSet}`,
     span,
@@ -19,13 +36,17 @@ export function rankStabilityVariants(endYear) {
  * One sweep run. Returns every school's rank under this variant, so a single
  * pass over the data serves every school rather than one.
  */
-export function collectVariantRanks(rawData, variant, { region, historyMap, aliasMap }) {
+export function collectVariantRanks(
+  rawData: RawData,
+  variant: RankStabilityVariant,
+  { region, historyMap, aliasMap }: { region: string, historyMap: AffiliationHistory | null, aliasMap: SchoolAliasMap | null }
+): RankStabilitySample {
   const data = filterByYears(rawData, variant.startYear, variant.endYear, region, historyMap, aliasMap, variant.confSet);
-  const ranks = {};
+  const ranks: Record<string, number> = {};
   let ranked = 0;
   Object.values(data.schools).forEach(school => {
     if (!school.name || !Number.isFinite(school.rank)) return;
-    ranks[school.name] = school.rank;
+    ranks[school.name] = school.rank!;
     ranked++;
   });
   return { key: variant.key, variant, ranks, ranked };
@@ -36,7 +57,7 @@ export function collectVariantRanks(rawData, variant, { region, historyMap, alia
  * `collectVariantRanks` results; variants where the school never ranks are
  * reported rather than silently dropped.
  */
-export function summarizeRankStability(samples, schoolName) {
+export function summarizeRankStability(samples: RankStabilitySample[], schoolName: string) {
   const rows = samples.map(sample => ({
     span: sample.variant.span,
     confSet: sample.variant.confSet,
@@ -46,7 +67,7 @@ export function summarizeRankStability(samples, schoolName) {
   const ranked = rows.filter(row => Number.isFinite(row.rank));
   if (!ranked.length) return null;
 
-  const values = ranked.map(row => row.rank);
+  const values = ranked.map(row => row.rank as number);
   const best = Math.min(...values);
   const worst = Math.max(...values);
   return {

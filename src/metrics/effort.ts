@@ -1,17 +1,22 @@
-
+import type { FilteredData, Professor, Publication } from '../types.js';
 
 export function calculatePublishingEffort(
-  professors,
-  { startYear, endYear, parentAreas, includesPublication }
+  professors: Record<string, Professor>,
+  { startYear, endYear, parentAreas, includesPublication }: {
+    startYear: number;
+    endYear: number;
+    parentAreas: Record<string, string>;
+    includesPublication: (professor: Professor, publication: Publication) => boolean;
+  }
 ) {
   const years = endYear - startYear + 1;
   if (!Number.isFinite(years) || years <= 0) {
     return { activeFaculty: 0, subfields: [] };
   }
 
-  const facultyOutput = [];
+  const facultyOutput: Record<string, number>[] = [];
   Object.values(professors || {}).forEach(professor => {
-    const output = {};
+    const output: Record<string, number> = {};
     (professor.pubs || []).forEach(publication => {
       if (publication.year < startYear || publication.year > endYear) return;
       if (!includesPublication(professor, publication)) return;
@@ -26,8 +31,8 @@ export function calculatePublishingEffort(
   const activeFaculty = facultyOutput.length;
   if (!activeFaculty) return { activeFaculty: 0, subfields: [] };
 
-  const totals = {};
-  const researchers = {};
+  const totals: Record<string, number> = {};
+  const researchers: Record<string, number> = {};
   facultyOutput.forEach(output => {
     Object.entries(output).forEach(([subfield, credit]) => {
       totals[subfield] = (totals[subfield] || 0) + credit;
@@ -45,13 +50,13 @@ export function calculatePublishingEffort(
   return { activeFaculty, subfields };
 }
 
-export function calculateAreaMomentum(current, prior, schoolName, { minAdjusted = 2, limit = 4 } = {}) {
+export function calculateAreaMomentum(current: FilteredData, prior: FilteredData | null, schoolName: string, { minAdjusted = 2, limit = 4 } = {}) {
   const currentSchool = current?.schools?.[schoolName];
   if (!currentSchool) return [];
   const priorSchool = prior?.schools?.[schoolName];
 
-  const fieldTotals = data => {
-    const totals = {};
+  const fieldTotals = (data: FilteredData | null) => {
+    const totals: Record<string, number> = {};
     Object.values(data?.schools || {}).forEach(school => {
       Object.entries(school.areaAdjustedCounts || {}).forEach(([area, value]) => {
         totals[area] = (totals[area] || 0) + value;
@@ -59,7 +64,7 @@ export function calculateAreaMomentum(current, prior, schoolName, { minAdjusted 
     });
     return totals;
   };
-  const growth = (now, before) => before > 0 ? ((now - before) / before) * 100 : null;
+  const growth = (now: number, before: number) => before > 0 ? ((now - before) / before) * 100 : null;
 
   const fieldNow = fieldTotals(current);
   const fieldBefore = fieldTotals(prior);

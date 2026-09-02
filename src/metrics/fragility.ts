@@ -1,6 +1,7 @@
 import { geometricMeanScore } from '../data.js';
+import type { FilteredData } from '../types.js';
 
-export function calculateFragility(filteredData, schoolName, {
+export function calculateFragility(filteredData: FilteredData, schoolName: string, {
   thresholds = [10, 25, 50],
   maxRemovals = 15,
   // Keep going past the last threshold so the trajectory shows a curve rather
@@ -11,7 +12,7 @@ export function calculateFragility(filteredData, schoolName, {
   if (!school || !Number.isFinite(school.rank)) return null;
 
   // Per-person, per-area credit, accumulated by the data pipeline.
-  const contributions = {};
+  const contributions: Record<string, Record<string, number>> = {};
   Object.entries(school.areas || {}).forEach(([area, data]) => {
     Object.entries(data.facultyStats || {}).forEach(([name, stats]) => {
       if (!contributions[name]) contributions[name] = {};
@@ -23,8 +24,8 @@ export function calculateFragility(filteredData, schoolName, {
 
   const otherScores = Object.values(filteredData.schools)
     .filter(other => other.name !== schoolName && Number.isFinite(other.score))
-    .map(other => other.score);
-  const rankOf = score => 1 + otherScores.filter(other => other > score).length;
+    .map(other => other.score ?? 0);
+  const rankOf = (score: number) => 1 + otherScores.filter(other => other > score).length;
 
   let areaCounts = { ...school.areaAdjustedCounts };
   const remaining = new Set(names);
