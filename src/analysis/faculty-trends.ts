@@ -37,9 +37,10 @@ export function renderFacultyTrends() {
             prof.pubs.forEach(pub => {
                 if (pub.year >= wStart && pub.year <= wEnd && publicationMatchesConferenceSet(pub, confSet)) {
                     if (isPubAtSchool(prof, pub, targetSchool)) {
-                        if (!authorAreas[prof.name]) authorAreas[prof.name] = new Set();
+                        const areas = authorAreas[prof.name] || new Set<string>();
+                        authorAreas[prof.name] = areas;
                         const area = confMap[pub.area] || pub.area;
-                        authorAreas[prof.name].add(area);
+                        areas.add(area);
                     }
                 }
             });
@@ -51,7 +52,7 @@ export function renderFacultyTrends() {
 
         if (activeAuthors > 0) {
             authors.forEach(name => {
-                if (authorAreas[name].size > 1) multiAreaCount++;
+                if (authorAreas[name]!.size > 1) multiAreaCount++;
             });
             diversityRates.push((multiAreaCount / activeAuthors) * 100);
         } else {
@@ -119,7 +120,8 @@ export function renderFacultyTrends() {
                 tooltip: {
                     callbacks: {
                         afterBody: function (context) {
-                            const idx = context[0].dataIndex;
+                            const idx = context[0]?.dataIndex;
+                            if (idx === undefined) return '';
                             return `Multi-Area: ${multiAreaCounts[idx]} of ${facultyCounts[idx]} faculty`;
                         }
                     }

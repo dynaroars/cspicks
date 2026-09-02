@@ -68,6 +68,7 @@ export function renderSubfieldEffort() {
                         afterLabel: function (context) {
                             const dataIndex = context.dataIndex;
                             const d = chartData[dataIndex];
+                            if (!d) return [];
                             return [
                                 `Adjusted count: ${d.total.toFixed(2)}`,
                                 `Researchers in area: ${d.activeResearchers}`,

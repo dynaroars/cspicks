@@ -20,8 +20,8 @@ const stabilitySweeps = new Map<string, {
 }>();
 let stabilityToken = 0;
 
-export function buildStabilitySweep(cacheKey: string, onProgress: (done: number, total: number) => void) {
-    if (stabilityCache.has(cacheKey)) return Promise.resolve(stabilityCache.get(cacheKey));
+export function buildStabilitySweep(cacheKey: string, onProgress: (done: number, total: number) => void): Promise<RankStabilitySample[]> {
+    if (stabilityCache.has(cacheKey)) return Promise.resolve(stabilityCache.get(cacheKey)!);
     const running = stabilitySweeps.get(cacheKey);
     if (running) {
         running.listeners.add(onProgress);
@@ -159,7 +159,7 @@ export function renderDataHealth() {
     // parity failures.
     const defaultData = filterByYears(state.rawData, start, end, state.filters.region, null, null, 'csrankings-default');
     const defaultReport = calculateParityReport(state.rawData, defaultData, 'csrankings-default');
-    const syncDate = state.venueRulesCheckedAt || new Date(state.activeVenueRules.syncedAt);
+    const syncDate = state.venueRulesCheckedAt || new Date(state.activeVenueRules.syncedAt || '');
     const syncText = Number.isNaN(syncDate.getTime()) ? 'Unknown' : syncDate.toLocaleString();
     const internalOk = selectedReport.totalMismatches === 0 && selectedReport.rankOrderIssues === 0;
     const selectedMode = selectedReport.divergences.length

@@ -45,7 +45,7 @@ export async function renderSchoolTrends() {
         const { startYear, endYear } = state.filters;
         if (startYear > endYear) return;
 
-        if (state.selectedTarget.type === 'researcher') {
+        if (state.selectedTarget?.type === 'researcher') {
             renderResearcherActivityMetrics(getResearcherPatterns());
             const professor = state.rawData.professors[targetName];
             const confSet = getConferenceSet();
@@ -97,7 +97,7 @@ export async function renderSchoolTrends() {
                             callbacks: {
                                 footer: items => {
                                     const index = items[0]?.dataIndex;
-                                    return index === undefined ? '' : `${paperCounts[index]} papers (${adjustedCounts[index].toFixed(1)} adjusted)`;
+                                    return index === undefined ? '' : `${paperCounts[index]} papers (${(adjustedCounts[index] || 0).toFixed(1)} adjusted)`;
                                 }
                             }
                         }
@@ -112,7 +112,7 @@ export async function renderSchoolTrends() {
         renderSchoolAnalysisSummary(current, prior, targetSchool);
 
         const labels: number[] = [];
-        const rankPoints: Array<number | null | undefined> = [];
+        const rankPoints: Array<number | null> = [];
         const publicationPoints: number[] = [];
         const region = state.filters.region;
         const regionLabel = state.filters.element.querySelector<HTMLSelectElement>('#region-select')?.selectedOptions?.[0]?.textContent || 'US';
@@ -144,7 +144,7 @@ export async function renderSchoolTrends() {
             const school = result.schools[targetSchool];
 
             labels.push(y);
-            rankPoints.push(school ? school.rank : null);
+            rankPoints.push(school?.rank ?? null);
             publicationPoints.push(Object.values(state.rawData.professors).reduce((total, professor) => {
                 const yearlyOutput = professor.pubs
                     .filter(pub => pub.year === y

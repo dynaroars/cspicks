@@ -308,3 +308,10 @@ now use explicit DOM boundaries, optional dataset/query values are narrowed befo
 and comparison formatter callbacks accept the full scoreboard value domain. The repository
 total is 121. All normal verification gates pass (8 test files, 88 bundled modules). Resume with
 the analysis helpers/controller, then discoveries, search UI, and comparison UI.
+
+Checkpoint 2026-09-02 (`strictNullChecks` analysis pass): cleared the analysis controller and
+all analysis-helper diagnostics. Empty researcher histories, missing peaks/primary areas,
+in-flight stability sweeps, sparse yearly accumulators, and absent chart tooltip points now have
+explicit fallbacks or guards. The repository total is 80. All normal verification gates pass
+(8 test files, 88 bundled modules). Resume with discoveries and the shared search components,
+then type `comparison.ts` and `compare-view.ts` together.

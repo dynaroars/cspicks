@@ -31,7 +31,7 @@ export function renderConferenceTrends() {
         years.push(y);
         stats[y] = {};
         selectedConfs.forEach(conf => {
-            stats[y][conf] = 0;
+            stats[y]![conf] = 0;
         });
     }
 
@@ -44,7 +44,7 @@ export function renderConferenceTrends() {
                 }
                 const conf = pub.area;
                 if (stats[pub.year] && Object.prototype.hasOwnProperty.call(stats[pub.year], conf)) {
-                    stats[pub.year][conf] += pub.adjustedcount;
+                    stats[pub.year]![conf] = (stats[pub.year]![conf] || 0) + pub.adjustedcount;
                 }
             }
         });
@@ -57,12 +57,12 @@ export function renderConferenceTrends() {
     ];
 
     const datasets = selectedConfs.map((conf, index) => {
-        const data = years.map(y => stats[y][conf] || 0);
+        const data = years.map(y => stats[y]![conf] || 0);
         return {
             label: conf.toUpperCase(),
             data: data,
-            borderColor: colors[index % colors.length],
-            backgroundColor: colors[index % colors.length],
+            borderColor: colors[index % colors.length]!,
+            backgroundColor: colors[index % colors.length]!,
             tension: 0.3,
             fill: false,
             pointRadius: 3,

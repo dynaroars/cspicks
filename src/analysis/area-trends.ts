@@ -45,8 +45,8 @@ export function renderAreaTrends() {
             if (pub.year >= startYear && pub.year <= endYear && publicationMatchesConferenceSet(pub, confSet)) {
                 if (isPublicationForTarget(prof, pub)) {
                     const area = confMap[pub.area] || pub.area;
-                    if (!stats[pub.year][area]) stats[pub.year][area] = 0;
-                    stats[pub.year][area] += pub.adjustedcount;
+                    const yearStats = stats[pub.year]!;
+                    yearStats[area] = (yearStats[area] || 0) + pub.adjustedcount;
                 }
             }
         });
@@ -65,7 +65,7 @@ export function renderAreaTrends() {
         .map(([area]) => area);
 
     const datasets = topAreas.map((area, index) => {
-        const data = years.map(y => stats[y][area] || 0);
+        const data = years.map(y => stats[y]![area] || 0);
 
         const colors = [
             '#3b82f6', '#ef4444', '#10b981', '#f59e0b',
@@ -76,8 +76,8 @@ export function renderAreaTrends() {
         return {
             label: areaLabels[area] || area,
             data: data,
-            borderColor: colors[index % colors.length],
-            backgroundColor: colors[index % colors.length],
+            borderColor: colors[index % colors.length]!,
+            backgroundColor: colors[index % colors.length]!,
             tension: 0.3,
             fill: false,
             pointRadius: 3,

@@ -195,25 +195,25 @@ function setupTabs() {
             }
 
             if (tabName === 'schools') {
-                document.getElementById('school-trends-view').hidden = false;
+                document.getElementById('school-trends-view')!.hidden = false;
                 renderSchoolTrends();
             } else if (tabName === 'areas') {
-                document.getElementById('area-growth-view').hidden = false;
+                document.getElementById('area-growth-view')!.hidden = false;
                 renderAreaTrends();
             } else if (tabName === 'faculty') {
-                document.getElementById('faculty-diversity-view').hidden = false;
+                document.getElementById('faculty-diversity-view')!.hidden = false;
                 renderFacultyTrends();
             } else if (tabName === 'effort') {
-                document.getElementById('effort-view').hidden = false;
+                document.getElementById('effort-view')!.hidden = false;
                 renderSubfieldEffort();
             } else if (tabName === 'conf-trends') {
-                document.getElementById('conf-trends-view').hidden = false;
+                document.getElementById('conf-trends-view')!.hidden = false;
                 renderConferenceTrends();
             } else if (tabName === 'collaboration') {
-                document.getElementById('collaboration-view').hidden = false;
+                document.getElementById('collaboration-view')!.hidden = false;
                 renderCollaborationStats();
             } else if (tabName === 'stability') {
-                document.getElementById('stability-view').hidden = false;
+                document.getElementById('stability-view')!.hidden = false;
                 renderRankStability();
             }
 
@@ -334,7 +334,7 @@ export function renderResearcherActivityMetrics(patterns: ResearcherPatterns | n
     container.innerHTML = renderMetricCards([
         { label: 'Active years', value: `${patterns.activeYears.length} / ${selectedYears}`, help: 'Years with at least one eligible pub in the selected conference set.' },
         { label: 'Consistency', value: `${patterns.consistency.toFixed(0)}%`, help: 'Share of selected years with at least one eligible pub.' },
-        { label: 'Peak year', value: `${patterns.peak.year}`, detail: `${Math.ceil(patterns.peak.count)} papers (${patterns.peak.adjusted.toFixed(1)} adjusted)`, help: 'Year with the highest adjusted pub count.' },
+        { label: 'Peak year', value: patterns.peak ? `${patterns.peak.year}` : '—', detail: patterns.peak ? `${Math.ceil(patterns.peak.count)} papers (${patterns.peak.adjusted.toFixed(1)} adjusted)` : 'No eligible publications', help: 'Year with the highest adjusted pub count.' },
         { label: 'Active streak', value: `${patterns.activeStreak} ${patterns.activeStreak === 1 ? 'year' : 'years'}`, detail: `ending ${patterns.activeYears.at(-1)}`, help: 'Consecutive active years ending at the latest active year in the selection.' },
         { label: 'Recent momentum', value: momentum, detail: 'latest 3 years vs previous 3', help: 'Percentage change in adjusted count between the latest three-year window and the preceding three-year window.' },
         { label: 'Yearly variability', value: `${(patterns.volatility * 100).toFixed(0)}%`, detail: 'relative to mean output', help: 'Variation in annual adjusted count relative to its yearly mean. Lower values indicate steadier output across the selected period.' }
@@ -353,7 +353,7 @@ function renderSchoolAreaInsights() {
             const label = areaLabels[entry.area] || entry.area;
             const sign = (value: number) => `${value >= 0 ? '+' : ''}${value.toFixed(0)}%`;
             const verdict = entry.delta >= 0 ? 'outpacing' : 'trailing';
-            return `${label}: ${sign(entry.growth)} here versus ${sign(entry.fieldGrowth)} across the selected region — ${verdict} the field by ${Math.abs(entry.delta).toFixed(0)} points (${entry.prior.toFixed(1)} → ${entry.current.toFixed(1)} adjusted).`;
+            return `${label}: ${sign(entry.growth!)} here versus ${sign(entry.fieldGrowth!)} across the selected region — ${verdict} the field by ${Math.abs(entry.delta).toFixed(0)} points (${entry.prior.toFixed(1)} → ${entry.current.toFixed(1)} adjusted).`;
         }),
         `Area growth against the field (vs. the preceding ${priorLength} years)`);
 }
@@ -371,7 +371,7 @@ export function renderResearcherAreaInsights(patterns: ResearcherPatterns | null
     const emerging = patterns.emergingAreas.map(area => areaLabels[area] || area).join(', ') || 'None';
     const dormant = patterns.dormantAreas.map(area => areaLabels[area] || area).join(', ') || 'None';
     container.innerHTML = renderMetricCards([
-        { label: 'Primary area', value: areaLabels[patterns.primaryArea[0]] || patterns.primaryArea[0], detail: `${patterns.primaryAreaShare.toFixed(0)}% of adjusted output`, help: 'Research area with the largest adjusted pub count.' },
+        { label: 'Primary area', value: patterns.primaryArea ? areaLabels[patterns.primaryArea[0]] || patterns.primaryArea[0] : '—', detail: `${patterns.primaryAreaShare.toFixed(0)}% of adjusted output`, help: 'Research area with the largest adjusted pub count.' },
         { label: 'Research breadth', value: `${patterns.breadth} ${patterns.breadth === 1 ? 'area' : 'areas'}`, help: 'Number of research areas with eligible output.' },
         { label: 'Area balance', value: `${patterns.balance.toFixed(0)}%`, help: 'Normalized entropy of adjusted output across active areas. Higher means output is more evenly distributed.' },
         { label: 'Trajectory', value: trajectory, help: 'Compares the primary area in the earlier and later halves of the selected period; small totals are ignored.' },
@@ -392,8 +392,8 @@ export function renderResearcherVenueInsights(patterns: ResearcherPatterns | nul
         : 'No clear shift';
     container.innerHTML = renderMetricCards([
         { label: 'Venue breadth', value: `${patterns.venueBreadth} venues`, help: 'Number of eligible conferences with output in the selected period.' },
-        { label: 'Primary venue', value: getConferenceLabel(patterns.topVenue[0]), detail: `${patterns.venueConcentration.toFixed(0)}% of adjusted output`, help: 'Conference with the largest adjusted pub count.' },
-        { label: 'Venue persistence', value: getConferenceLabel(patterns.mostPersistentVenue[0]), detail: `${patterns.mostPersistentVenue[1].years.size} active years`, help: 'Conference appearing in the greatest number of distinct years.' },
+        { label: 'Primary venue', value: patterns.topVenue ? getConferenceLabel(patterns.topVenue[0]) : '—', detail: `${patterns.venueConcentration.toFixed(0)}% of adjusted output`, help: 'Conference with the largest adjusted pub count.' },
+        { label: 'Venue persistence', value: patterns.mostPersistentVenue ? getConferenceLabel(patterns.mostPersistentVenue[0]) : '—', detail: patterns.mostPersistentVenue ? `${patterns.mostPersistentVenue[1].years.size} active years` : 'No eligible venues', help: 'Conference appearing in the greatest number of distinct years.' },
         { label: 'Venue trajectory', value: shift, help: 'Compares the highest-output venue in the earlier and later halves of the selected period.' }
     ], 'Conference patterns');
 }
@@ -412,7 +412,7 @@ function renderCollaborationStats() {
     const leaders = Object.values(current.schools)
         .map(school => ({ school, metrics: calculateSchoolMetrics(current, prior, school.name) }))
         .filter(item => item.metrics)
-        .sort((a, b) => b.metrics.impliedTeamSize - a.metrics.impliedTeamSize)
+        .sort((a, b) => b.metrics!.impliedTeamSize - a.metrics!.impliedTeamSize)
         .slice(0, 10);
 
     container.innerHTML = `
@@ -425,7 +425,7 @@ function renderCollaborationStats() {
         </div>
         <div class="data-caveat"><strong>Source limitation:</strong> The source data is aggregated per author and does not expose paper identifiers or coauthor affiliations, so CSPicks cannot reliably separate internal from cross-university collaborations. The proxy above measures coauthor intensity without inventing that split.</div>
         <h3>Highest team-size proxies</h3>
-        <div class="metric-table">${leaders.map((item, index) => `<div><span>${index + 1}. ${escapeHtml(item.school.name)}</span><strong>${item.metrics.impliedTeamSize.toFixed(2)}×</strong></div>`).join('')}</div>
+        <div class="metric-table">${leaders.map((item, index) => `<div><span>${index + 1}. ${escapeHtml(item.school.name)}</span><strong>${item.metrics!.impliedTeamSize.toFixed(2)}×</strong></div>`).join('')}</div>
     `;
 }
 
