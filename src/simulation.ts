@@ -14,24 +14,24 @@ export interface SimulationOperation {
 }
 
 function levenshtein(a: string, b: string) {
-  const matrix: number[][] = [];
-  for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
-  for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
+  const matrix = Array.from({ length: b.length + 1 }, () => Array<number>(a.length + 1).fill(0));
+  for (let i = 0; i <= b.length; i++) { matrix[i]![0] = i; }
+  for (let j = 0; j <= a.length; j++) { matrix[0]![j] = j; }
 
   for (let i = 1; i <= b.length; i++) {
     for (let j = 1; j <= a.length; j++) {
       if (b.charAt(i - 1) === a.charAt(j - 1)) {
-        matrix[i][j] = matrix[i - 1][j - 1];
+        matrix[i]![j] = matrix[i - 1]![j - 1]!;
       } else {
-        matrix[i][j] = Math.min(
-          matrix[i - 1][j - 1] + 1,
-          matrix[i][j - 1] + 1,
-          matrix[i - 1][j] + 1
+        matrix[i]![j] = Math.min(
+          matrix[i - 1]![j - 1]! + 1,
+          matrix[i]![j - 1]! + 1,
+          matrix[i - 1]![j]! + 1
         );
       }
     }
   }
-  return matrix[b.length][a.length];
+  return matrix[b.length]![a.length]!;
 }
 
 export function parseCandidateNames(value: unknown) {
@@ -51,18 +51,20 @@ export function fuzzyMatch(nameA: string, nameB: string) {
   // Split into parts and compare
   const partsA = a.split(/\s+/).filter(p => p.length > 0);
   const partsB = b.split(/\s+/).filter(p => p.length > 0);
+  if (!partsA.length || !partsB.length) return false;
 
   // Extract first and last names
-  const firstA = partsA[0].replace(/\.$/, '');
-  const lastA = partsA[partsA.length - 1];
-  const firstB = partsB[0].replace(/\.$/, '');
-  const lastB = partsB[partsB.length - 1];
+  const firstA = partsA[0]!.replace(/\.$/, '');
+  const lastA = partsA[partsA.length - 1]!;
+  const firstB = partsB[0]!.replace(/\.$/, '');
+  const lastB = partsB[partsB.length - 1]!;
+  if (!firstA || !firstB) return false;
 
   // Check: same last name AND (same first name OR one is initial of other)
   if (lastA === lastB) {
     if (firstA === firstB) return true;
     // Check if one first name starts with the other (handles initials like S. vs Samuel)
-    if (firstA.startsWith(firstB[0]) || firstB.startsWith(firstA[0])) {
+    if (firstA.startsWith(firstB[0]!) || firstB.startsWith(firstA[0]!)) {
       const shorter = firstA.length < firstB.length ? firstA : firstB;
       const longer = firstA.length < firstB.length ? firstB : firstA;
       // Only allow prefix match if the shorter one is an initial or short enough
@@ -130,20 +132,19 @@ export function calculateRankImpact(schools: Record<string, FilteredSchool>, ops
 
   // Apply stats changes
   ops.forEach(op => {
-    const clone = schoolClones.get(op.school.name);
+    const clone = schoolClones.get(op.school.name)!;
     let adjustedDelta = 0;
     for (const [area, areaStats] of Object.entries(op.stats.areas)) {
       const val = typeof areaStats === 'number' ? areaStats : areaStats.adjusted;
-      if (!clone.areas[area]) {
-        clone.areas[area] = { count: 0, adjusted: 0, faculty: [], facultyStats: {} };
-      }
-      const beforeAdjusted = clone.areas[area].adjusted;
+      const cloneArea = clone.areas[area]
+        || (clone.areas[area] = { count: 0, adjusted: 0, faculty: [], facultyStats: {} });
+      const beforeAdjusted = cloneArea.adjusted;
       if (op.isRemoval) {
-        clone.areas[area].adjusted = Math.max(0, clone.areas[area].adjusted - val);
+        cloneArea.adjusted = Math.max(0, cloneArea.adjusted - val);
       } else {
-        clone.areas[area].adjusted += val;
+        cloneArea.adjusted += val;
       }
-      adjustedDelta += clone.areas[area].adjusted - beforeAdjusted;
+      adjustedDelta += cloneArea.adjusted - beforeAdjusted;
     }
     clone.totalAdjusted = Math.max(0, (clone.totalAdjusted || 0) + adjustedDelta);
     // Keep facultyAdjustedCounts (headcount) in sync with the same add/remove,
@@ -209,9 +210,9 @@ export function calculateRankImpact(schools: Record<string, FilteredSchool>, ops
     let rank = 0;
     let previousValue: number | null = null;
     sorted.forEach((school, index) => {
-      const value = school.areas[area].adjusted;
+      const value = school.areas[area]!.adjusted;
       if (value !== previousValue) rank = index + 1;
-      if (areaRanksAfter[school.name] !== undefined) areaRanksAfter[school.name][area] = rank;
+      if (areaRanksAfter[school.name] !== undefined) areaRanksAfter[school.name]![area] = rank;
       previousValue = value;
     });
   });
@@ -224,12 +225,12 @@ export function calculateRankImpact(schools: Record<string, FilteredSchool>, ops
     // minFaculty line (in or out) as a direct result of this op has no
     // per-capita rank on that side, and the delta is reported as unavailable
     // rather than guessed at.
-    const rankBefore = perCapita ? (perCapitaRanksBefore.get(op.school.name) ?? null) : op.school.rank;
-    const rankAfter = perCapita ? (perCapitaRanksAfter.get(op.school.name) ?? null) : overallRanks.get(op.school.name);
+    const rankBefore = perCapita ? (perCapitaRanksBefore!.get(op.school.name) ?? null) : op.school.rank;
+    const rankAfter = perCapita ? (perCapitaRanksAfter!.get(op.school.name) ?? null) : overallRanks.get(op.school.name);
     const delta = (rankBefore != null && rankAfter != null) ? rankBefore - rankAfter : null;
 
-    const areaDeltasBefore = areaRanksBefore[op.school.name];
-    const areaDeltasAfter = areaRanksAfter[op.school.name];
+    const areaDeltasBefore = areaRanksBefore[op.school.name] || {};
+    const areaDeltasAfter = areaRanksAfter[op.school.name] || {};
     const areaDeltas: Record<string, unknown> = {};
     areaList.forEach(area => {
       const before = areaDeltasBefore[area];

@@ -268,3 +268,9 @@ External response paths now validate required identifiers and XML nodes, generat
 lookups guard missing issue families, and funding dates/ranks explicitly narrow nullable values.
 The repository total is now 453. All normal verification gates pass (8 test files, 88 bundled
 modules). Resume with `simulation.ts`, then the simulator controller and candidate renderers.
+
+Checkpoint 2026-09-02 (`strictNullChecks` simulation-engine pass): cleared `simulation.ts` by
+building a fully initialized Levenshtein matrix, rejecting empty normalized names, retaining
+non-null cloned-school/area references, and making optional rank-map branches explicit. The
+repository total is now 417. All normal verification gates pass (8 test files, 88 bundled
+modules). Resume with the simulator controller and candidate analysis/results modules.
