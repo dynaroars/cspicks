@@ -281,3 +281,9 @@ narrowed DBLP fetches, aliases, suffixes, source impacts, and faculty keys befor
 analysis/results now have zero null-safety diagnostics. The repository total is 396. All normal
 verification gates pass (8 test files, 88 bundled modules). Resume with `simulator.ts`, then the
 remaining page controllers and renderers.
+
+Checkpoint 2026-09-02 (`strictNullChecks` simulator-controller pass): cleared all 48 diagnostics
+from `simulator.ts`. Required page elements now use the controller's typed DOM boundary, while
+dynamic school/profile/list selections are checked before use and nullable timers are cleared
+safely. The repository total is 348. All normal verification gates pass (8 test files,
+88 bundled modules). Resume with the search pipeline (`search-results.ts` and `main.ts`).

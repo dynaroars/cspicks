@@ -29,7 +29,7 @@ const selectedDblpProfiles = new Map<string, DblpAuthorResult>();
 const byId = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 
 function resetFacultySearch() {
-  clearTimeout(dblpSearchTimer);
+  if (dblpSearchTimer) clearTimeout(dblpSearchTimer);
   dblpSearchSequence++;
   facultyFilter = '';
   dblpFacultyResults = [];
@@ -66,7 +66,7 @@ function findLocalFaculty(filter: string) {
 
   return Object.keys(appData.professors)
     .filter(name => cleanName(name).toLowerCase().includes(normalized)
-      || (appData.professors[name].aliases || []).some(alias => cleanName(alias).toLowerCase().includes(normalized)))
+      || (appData.professors[name]?.aliases || []).some(alias => cleanName(alias).toLowerCase().includes(normalized)))
     .sort((a, b) => {
       const nameA = cleanName(a).toLowerCase();
       const nameB = cleanName(b).toLowerCase();
@@ -135,6 +135,7 @@ function renderFacultyList(filter = facultyFilter) {
     const checkbox = label.querySelector<HTMLInputElement>('input[type="checkbox"]')!;
     checkbox.addEventListener('change', () => {
       const name = label.dataset.name;
+      if (!name) return;
       const lines = candidatesInput.value.split('\n').map(n => n.trim()).filter(n => n);
       if (checkbox.checked) {
         addCandidate(name);
@@ -150,6 +151,7 @@ function renderFacultyList(filter = facultyFilter) {
   listEl.querySelectorAll<HTMLElement>('.sim-dblp-result').forEach(button => {
     button.addEventListener('click', () => {
       const profile = dblpFacultyResults[Number(button.dataset.index)];
+      if (!profile) return;
       addCandidate(profile.name, profile);
       renderFacultyList();
     });
@@ -162,7 +164,7 @@ function searchFaculty(filter: string) {
   const localMatches = findLocalFaculty(facultyFilter);
   dblpFacultyLoading = facultyFilter.length >= 2 && localMatches.length === 0;
   const sequence = ++dblpSearchSequence;
-  clearTimeout(dblpSearchTimer);
+  if (dblpSearchTimer) clearTimeout(dblpSearchTimer);
   renderFacultyList();
 
   if (facultyFilter.length < 2 || localMatches.length > 0) return;
@@ -181,29 +183,29 @@ function resetSimulation() {
   resetFacultySearch();
   selectedDblpProfiles.clear();
   selectedUniv = null;
-  document.getElementById('step-univ-first').classList.remove('hidden');
-  document.getElementById('step-candidates').classList.add('hidden');
-  document.getElementById('step-results').classList.add('hidden');
+  byId('step-univ-first').classList.remove('hidden');
+  byId('step-candidates').classList.add('hidden');
+  byId('step-results').classList.add('hidden');
   byId<HTMLInputElement>('sim-univ-search').value = '';
   byId<HTMLTextAreaElement>('sim-candidates-input').value = '';
-  document.getElementById('sim-univ-results').innerHTML = '';
-  document.getElementById('sim-candidates-results').innerHTML = '';
-  document.getElementById('sim-faculty-list').innerHTML = '';
+  byId('sim-univ-results').innerHTML = '';
+  byId('sim-candidates-results').innerHTML = '';
+  byId('sim-faculty-list').innerHTML = '';
   byId<HTMLInputElement>('sim-faculty-search').value = '';
   if (filters) updateSimulatorUrl();
 }
 
 function resetCandidates() {
   if (!selectedUniv) return;
-  document.getElementById('step-results').classList.add('hidden');
-  document.getElementById('step-candidates').classList.remove('hidden');
+  byId('step-results').classList.add('hidden');
+  byId('step-candidates').classList.remove('hidden');
   byId<HTMLTextAreaElement>('sim-candidates-input').value = '';
   selectedDblpProfiles.clear();
-  document.getElementById('sim-candidates-results').innerHTML = '';
+  byId('sim-candidates-results').innerHTML = '';
   byId<HTMLInputElement>('sim-faculty-search').value = '';
   populateFacultyList(selectedUniv);
   updateSimulatorUrl();
-  document.getElementById('sim-faculty-search').focus();
+  byId('sim-faculty-search').focus();
 }
 
 let selectedUniv: FilteredSchool | null = null;
@@ -227,19 +229,19 @@ function setupSimulator() {
   const candidatesInput = byId<HTMLTextAreaElement>('sim-candidates-input');
   const analyzeBtn = byId<HTMLButtonElement>('sim-analyze-btn');
 
-  document.getElementById('sim-reset-btn').addEventListener('click', resetSimulation);
-  document.getElementById('sim-change-candidates-btn').addEventListener('click', resetCandidates);
+  byId('sim-reset-btn').addEventListener('click', resetSimulation);
+  byId('sim-change-candidates-btn').addEventListener('click', resetCandidates);
   byId<HTMLInputElement>('sim-faculty-search').addEventListener('input', event =>
     searchFaculty((event.currentTarget as HTMLInputElement).value));
 
-  document.getElementById('sim-select-all').addEventListener('click', () => {
+  byId('sim-select-all').addEventListener('click', () => {
     document.querySelectorAll<HTMLInputElement>('#sim-faculty-list input[type="checkbox"]:not(:checked)').forEach(checkbox => {
       checkbox.checked = true;
       checkbox.dispatchEvent(new Event('change'));
     });
   });
 
-  document.getElementById('sim-deselect-all').addEventListener('click', () => {
+  byId('sim-deselect-all').addEventListener('click', () => {
     document.querySelectorAll<HTMLInputElement>('#sim-faculty-list input[type="checkbox"]:checked').forEach(checkbox => {
       checkbox.checked = false;
       checkbox.dispatchEvent(new Event('change'));
@@ -248,7 +250,7 @@ function setupSimulator() {
 
   univSearch.addEventListener('input', event => {
     const query = (event.currentTarget as HTMLInputElement).value.trim().toLowerCase();
-    const container = document.getElementById('sim-univ-results');
+    const container = byId('sim-univ-results');
     if (!query) {
       container.innerHTML = '';
       return;
@@ -266,11 +268,14 @@ function setupSimulator() {
 
     container.querySelectorAll<HTMLElement>('.sim-item').forEach(item => {
       item.addEventListener('click', () => {
-        selectedUniv = appData.schools[item.dataset.name];
-        document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name} (${currentRankLabel(selectedUniv)})`;
-        document.getElementById('step-univ-first').classList.add('hidden');
-        document.getElementById('step-candidates').classList.remove('hidden');
-        populateFacultyList(selectedUniv);
+        const schoolName = item.dataset.name;
+        const school = schoolName ? appData.schools[schoolName] : undefined;
+        if (!school) return;
+        selectedUniv = school;
+        byId('selected-univ-display').textContent = `Target: ${school.name} (${currentRankLabel(school)})`;
+        byId('step-univ-first').classList.add('hidden');
+        byId('step-candidates').classList.remove('hidden');
+        populateFacultyList(school);
         updateSimulatorUrl();
         candidatesInput.focus();
       });
@@ -300,13 +305,13 @@ async function runAnalysis() {
   const names = parseCandidateNames(candidatesInput.value);
   if (names.length === 0) return;
 
-  document.getElementById('step-candidates').classList.add('hidden');
-  document.getElementById('step-results').classList.remove('hidden');
-  document.getElementById('selected-univ-display-results').textContent = `Target: ${selectedUniv.name} (${currentRankLabel(selectedUniv)})`;
+  byId('step-candidates').classList.add('hidden');
+  byId('step-results').classList.remove('hidden');
+  byId('selected-univ-display-results').textContent = `Target: ${selectedUniv.name} (${currentRankLabel(selectedUniv)})`;
   updateSimulatorUrl();
 
-  const loading = document.getElementById('sim-loading');
-  const resultsContainer = document.getElementById('sim-candidates-results');
+  const loading = byId('sim-loading');
+  const resultsContainer = byId('sim-candidates-results');
   loading.classList.remove('hidden');
   resultsContainer.innerHTML = '';
 
@@ -316,6 +321,7 @@ async function runAnalysis() {
   resultsContainer.querySelectorAll('.papers-toggle').forEach(button => {
     button.addEventListener('click', () => {
       const list = button.nextElementSibling;
+      if (!list) return;
       list.classList.toggle('visible');
       button.textContent = list.classList.contains('visible') ? '▼ Hide Papers' : '▶ Show Papers';
     });
@@ -391,9 +397,9 @@ function restoreFromUrl() {
   const school = univName && appData.schools[univName];
   if (!school) return;
   selectedUniv = school;
-  document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name} (${currentRankLabel(selectedUniv)})`;
-  document.getElementById('step-univ-first').classList.add('hidden');
-  document.getElementById('step-candidates').classList.remove('hidden');
+  byId('selected-univ-display').textContent = `Target: ${selectedUniv.name} (${currentRankLabel(selectedUniv)})`;
+  byId('step-univ-first').classList.add('hidden');
+  byId('step-candidates').classList.remove('hidden');
   populateFacultyList(selectedUniv);
   const candidates = params.get('candidates');
   if (candidates) byId<HTMLTextAreaElement>('sim-candidates-input').value = candidates;
@@ -411,12 +417,12 @@ async function init() {
     refreshPerCapitaRanks();
     setupSimulator();
     restoreFromUrl();
-    document.getElementById('sim-loading-page').classList.add('hidden');
-    document.getElementById('simulator-workflow').classList.remove('hidden');
-    document.getElementById('sim-univ-search').focus();
+    byId('sim-loading-page').classList.add('hidden');
+    byId('simulator-workflow').classList.remove('hidden');
+    byId('sim-univ-search').focus();
   } catch (error) {
     console.error('Failed to initialize simulator:', error);
-    document.getElementById('sim-loading-page').textContent = 'Unable to load ranking data. Please try again.';
+    byId('sim-loading-page').textContent = 'Unable to load ranking data. Please try again.';
   }
 }
 
