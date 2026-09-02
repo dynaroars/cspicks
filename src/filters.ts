@@ -1,6 +1,43 @@
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadAffiliationData, normalizeConferenceSet } from './data.js';
 import { applyPerCapitaRanks } from './metrics/per-capita.js';
 import { getInitialRegion, rememberRegion } from './shared.js';
+import type { ConferenceSetId } from './data/conference-sets.js';
+import type { AffiliationHistory, FilteredData, RawData, SchoolAliasMap } from './types.js';
+
+type FilterField = 'region' | 'years' | 'rankings' | 'history' | 'percapita' | 'confSet';
+interface FilterState {
+  region: string;
+  startYear: number;
+  endYear: number;
+  confSet: ConferenceSetId;
+  rankings: boolean;
+  historical: boolean;
+  perCapita: boolean;
+}
+type PersistedFields = Partial<Record<'years' | 'confSet' | 'rankings' | 'history' | 'percapita', boolean>>;
+
+export interface FilterController extends FilterState {
+  element: Element;
+  readonly historyMap: AffiliationHistory | null;
+  readonly aliasMap: SchoolAliasMap | null;
+  setDisabled(disabled: boolean): void;
+  apply(rawData: RawData): FilteredData;
+  toParams(target?: URLSearchParams): URLSearchParams;
+  ready(): Promise<FilterController>;
+}
+
+interface FilterBarOptions {
+  fields?: FilterField[];
+  years?: { min: number, max: number };
+  prefix?: string;
+  prefixId?: string;
+  label?: string;
+  className?: string;
+  defaults?: Partial<FilterState>;
+  persist?: PersistedFields;
+  params?: URLSearchParams;
+  onChange?: (controller: FilterController) => void;
+}
 
 // Every page shows the same "region / years / conference set / rankings /
 // history" controls.
@@ -12,7 +49,7 @@ const HISTORY_HELP = 'Credits papers to the university where the author was affi
 const RANKINGS_HELP = 'Displays overall and per-area ranks for institutions in the selected view.';
 const PER_CAPITA_HELP = 'Ranks universities by output per faculty member (min. 5 active faculty).';
 
-const REGIONS = [
+const REGIONS: Array<[string, string]> = [
   ['world', 'World'],
   ['us', 'USA'],
   ['europe', 'Europe'],
@@ -22,7 +59,7 @@ const REGIONS = [
 ];
 const REGION_IDS = new Set(REGIONS.map(([value]) => value));
 
-const CONF_SETS = [
+const CONF_SETS: Array<[ConferenceSetId, string]> = [
   ['csrankings-default', 'CSRankings (Default)'],
   ['csrankings', 'CSRankings (All)'],
   ['core', 'CORE A*'],
@@ -37,7 +74,7 @@ const FILTER_STORAGE_KEY = 'cspicks:filters:v3';
 
 // Filter choices follow the reader from page to page, so clicking through to
 // another university or tool does not silently reset them.
-function readStoredFilters() {
+function readStoredFilters(): Partial<FilterState> {
   try {
     return JSON.parse(globalThis.localStorage?.getItem(FILTER_STORAGE_KEY) || '{}') || {};
   } catch {
@@ -45,7 +82,7 @@ function readStoredFilters() {
   }
 }
 
-function storeFilters(state, persisted = {}) {
+function storeFilters(state: FilterState, persisted: PersistedFields = {}) {
   try {
     const stored = readStoredFilters();
     if (persisted.years) {
@@ -62,7 +99,7 @@ function storeFilters(state, persisted = {}) {
   }
 }
 
-let affiliationData = null;
+let affiliationData: { historyMap: AffiliationHistory, aliasMap: SchoolAliasMap } | null = null;
 
 // Shared across pages: the affiliation history is large, so load it at most once.
 export async function loadHistoryMaps() {
@@ -78,17 +115,17 @@ export async function loadHistoryMaps() {
 // measures whichever element carries `.tooltip-trigger`, so the panel lines up
 // with the whole control. Callers put `tooltip-trigger` on that element and
 // point the input's aria-describedby at this id.
-function helpPanel(id, help) {
+function helpPanel(id: string, help: string) {
   return `<span class="tooltip-content" id="${id}" role="tooltip">${help}</span>`;
 }
 
-function optionsHtml(entries, selected) {
+function optionsHtml(entries: Array<[string, string]>, selected: string) {
   return entries
     .map(([value, label]) => `<option value="${value}"${value === selected ? ' selected' : ''}>${label}</option>`)
     .join('');
 }
 
-function yearOptions(min, max, selected) {
+function yearOptions(min: number, max: number, selected: number) {
   let html = '';
   for (let year = min; year <= max; year++) {
     html += `<option value="${year}"${year === selected ? ' selected' : ''}>${year}</option>`;
@@ -108,7 +145,7 @@ function yearOptions(min, max, selected) {
  * The controller exposes the current values plus `apply(rawData)`, which runs
  * `filterByYears` with the right history maps for the current History setting.
  */
-export function createFilterBar(mount, {
+export function createFilterBar(mount: string | Element, {
   fields = ['region', 'years', 'rankings', 'history', 'confSet'],
   years = { min: 1970, max: new Date().getFullYear() + 1 },
   prefix = '',
@@ -119,11 +156,11 @@ export function createFilterBar(mount, {
   persist = {},
   params = new URLSearchParams(window.location.search),
   onChange = () => {}
-} = {}) {
+}: FilterBarOptions = {}): FilterController {
   const element = typeof mount === 'string' ? document.querySelector(mount) : mount;
   if (!element) throw new Error('createFilterBar: mount element not found');
 
-  const has = field => fields.includes(field);
+  const has = (field: FilterField) => fields.includes(field);
   const persisted = {
     years: persist.years ?? has('years'),
     confSet: persist.confSet ?? has('confSet'),
@@ -131,7 +168,7 @@ export function createFilterBar(mount, {
     history: persist.history ?? has('history'),
     percapita: persist.percapita ?? has('percapita')
   };
-  const state = {
+  const state: FilterState = {
     region: has('region') ? getInitialRegion() : 'world',
     startYear: defaults.startYear ?? DEFAULT_START_YEAR,
     endYear: defaults.endYear ?? DEFAULT_END_YEAR,
@@ -210,15 +247,15 @@ export function createFilterBar(mount, {
     </div>` : ''}
   `;
 
-  const regionSelect = element.querySelector('#region-select');
-  const startSelect = element.querySelector('#start-year');
-  const endSelect = element.querySelector('#end-year');
-  const confSelect = element.querySelector('#conf-set');
-  const rankingsToggle = element.querySelector('#show-rankings');
-  const historyToggle = element.querySelector('#historical-mode');
-  const perCapitaToggle = element.querySelector('#per-capita-mode');
+  const regionSelect = element.querySelector<HTMLSelectElement>('#region-select');
+  const startSelect = element.querySelector<HTMLSelectElement>('#start-year');
+  const endSelect = element.querySelector<HTMLSelectElement>('#end-year');
+  const confSelect = element.querySelector<HTMLSelectElement>('#conf-set');
+  const rankingsToggle = element.querySelector<HTMLInputElement>('#show-rankings');
+  const historyToggle = element.querySelector<HTMLInputElement>('#historical-mode');
+  const perCapitaToggle = element.querySelector<HTMLInputElement>('#per-capita-mode');
 
-  const controller = {
+  const controller: FilterController = {
     element,
     get region() { return state.region; },
     get startYear() { return state.startYear; },
@@ -231,12 +268,12 @@ export function createFilterBar(mount, {
     get aliasMap() { return state.historical ? affiliationData?.aliasMap || null : null; },
 
     setDisabled(disabled) {
-      element.querySelectorAll('input, select, button').forEach(control => {
+      element.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLButtonElement>('input, select, button').forEach(control => {
         control.disabled = disabled;
       });
     },
 
-    apply(rawData) {
+    apply(rawData: RawData) {
       const data = filterByYears(rawData, state.startYear, state.endYear, state.region,
         controller.historyMap, controller.aliasMap, state.confSet);
       if (state.perCapita) {
@@ -276,11 +313,11 @@ export function createFilterBar(mount, {
       state.endYear = Number(endSelect.value);
       if (state.startYear > state.endYear) {
         [state.startYear, state.endYear] = [state.endYear, state.startYear];
-        startSelect.value = state.startYear;
-        endSelect.value = state.endYear;
+        startSelect.value = String(state.startYear);
+        endSelect.value = String(state.endYear);
       }
     }
-    if (confSelect) state.confSet = confSelect.value;
+    if (confSelect) state.confSet = normalizeConferenceSet(confSelect.value);
     storeFilters(state, persisted);
   };
 

@@ -122,8 +122,13 @@ conference-level school aggregation, and infinite-list state while preserving th
 module cycle between suggestions and comparison. All verification gates pass (8 test files,
 88 bundled modules).
 
-Resume with `filters` and analysis helpers. Convert `main`, `simulator`, `funding`, grants entry
-modules, and other page controllers after their dependencies.
+Checkpoint 2026-09-02 (filters): converted the shared filter controller and its persistence
+helpers. Added typed filter state/controller options, conference-set normalization, and typed
+DOM controls while retaining the existing JavaScript import specifiers. All verification gates
+pass (8 test files, 88 bundled modules).
+
+Resume with analysis helpers. Convert `main`, `simulator`, `funding`, grants entry modules, and
+other page controllers after their dependencies.
 
 ### Phase 4
 
