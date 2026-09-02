@@ -136,6 +136,7 @@ const REGION_STORAGE_KEY = 'cspicks:preferred-region';
 
 export function detectRegionFromLocales(locales: readonly (string | undefined)[] = []) {
   for (const locale of locales) {
+    if (!locale) continue;
     try {
       const parsedLocale = new Intl.Locale(locale);
       const region = (parsedLocale.region || parsedLocale.maximize().region)?.toUpperCase();
@@ -155,10 +156,10 @@ export function detectRegionFromLocales(locales: readonly (string | undefined)[]
 
 export function getInitialRegion(search = globalThis.location?.search || '') {
   const queryRegion = new URLSearchParams(search).get('region');
-  if (VALID_REGIONS.has(queryRegion)) return queryRegion;
+  if (queryRegion && VALID_REGIONS.has(queryRegion)) return queryRegion;
   try {
     const stored = globalThis.localStorage?.getItem(REGION_STORAGE_KEY);
-    if (VALID_REGIONS.has(stored)) return stored;
+    if (stored && VALID_REGIONS.has(stored)) return stored;
   } catch {
     // Privacy modes can disable storage.
   }
@@ -302,7 +303,7 @@ export function getInstitutionShortName(name: string) {
   if (mapped) return mapped;
   const match = String(name || '').match(/^(.+) University$/);
   if (!match) return name;
-  const rest = match[1];
+  const rest = match[1]!;
   return !/\s/.test(rest) || /\sState$/.test(rest) ? rest : name;
 }
 

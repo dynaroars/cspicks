@@ -82,7 +82,7 @@ export function calculateAreaMomentum(current: FilteredData, prior: FilteredData
     })
     .filter(entry => entry.growth !== null && entry.fieldGrowth !== null
       && entry.current >= minAdjusted && entry.prior >= minAdjusted)
-    .map(entry => ({ ...entry, delta: entry.growth - entry.fieldGrowth }))
+    .map(entry => ({ ...entry, delta: entry.growth! - entry.fieldGrowth! }))
     .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta))
     .slice(0, limit);
 }

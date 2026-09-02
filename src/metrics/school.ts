@@ -10,7 +10,7 @@ export function getSchoolFaculty(filteredData: FilteredData, schoolName: string)
   });
   return [...names]
     .map(name => filteredData.professors?.[name])
-    .filter(Boolean);
+    .filter((professor): professor is FilteredProfessor => Boolean(professor));
 }
 
 export function calculateSchoolMetrics(currentData: FilteredData, priorData: FilteredData | null, schoolName: string) {

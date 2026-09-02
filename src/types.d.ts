@@ -54,7 +54,7 @@ export interface FilteredSchool extends School {
   totalCount: number;
   totalAdjusted: number;
   score?: number;
-  rank?: number;
+  rank?: number | null;
   areaRanks?: StringMap<number>;
   perCapitaScore?: number;
   perCapitaRank?: number;

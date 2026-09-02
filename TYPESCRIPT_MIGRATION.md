@@ -240,3 +240,10 @@ shared utilities and leaf metrics, then data/domain services, then controllers a
 enable `strictNullChecks` only after the standalone run reaches zero. Continue using
 `npx tsc --noEmit --strictNullChecks` to measure progress, with the three normal gates at every
 checkpoint.
+
+Checkpoint 2026-09-02 (`strictNullChecks` shared/leaf pass): cleared null-safety diagnostics
+from shared locale/region/name helpers and the leaf math, effort, per-capita, school, and
+stability metrics. The central `FilteredSchool.rank` contract now explicitly permits `null`,
+matching per-capita mode when a department falls below its faculty threshold. The repository
+total is now 623. All normal verification gates pass (8 test files, 88 bundled modules).
+Resume with `data.ts` and the remaining metrics before moving to services and controllers.
