@@ -1,7 +1,24 @@
+// @ts-check
+
 import Papa from 'papaparse';
 import { decodeAffiliationHistory } from './affiliation-history-format.js';
 import { schoolAliases } from './data/institution-aliases.js';
 import { getConferenceAreaMap, numAreas, publicationMatchesConferenceSet, topLevelAreas } from './data/conference-sets.js';
+
+/** @typedef {import('./types.js').AffiliationHistory} AffiliationHistory */
+/** @typedef {import('./types.js').CsrankingsFacultyRow} CsrankingsFacultyRow */
+/** @typedef {import('./types.js').CountryRow} CountryRow */
+/** @typedef {import('./types.js').DblpAliasRow} DblpAliasRow */
+/** @typedef {import('./types.js').FilteredData} FilteredData */
+/** @typedef {import('./types.js').HonorRow} HonorRow */
+/** @typedef {import('./types.js').InstitutionRow} InstitutionRow */
+/** @typedef {import('./types.js').ManualAffiliationRow} ManualAffiliationRow */
+/** @typedef {import('./types.js').NameChangeRow} NameChangeRow */
+/** @typedef {import('./types.js').PublicationRow} PublicationRow */
+/** @typedef {import('./types.js').Professor} Professor */
+/** @typedef {import('./types.js').RawData} RawData */
+/** @typedef {import('./types.js').School} School */
+/** @typedef {import('./types.js').SchoolAliasMap} SchoolAliasMap */
 
 export { conferenceAliases, schoolAliases } from './data/institution-aliases.js';
 export { CONFERENCE_SET_IDS, coreAMap, coreAStarMap, getConferenceAreaMap, nextTier, normalizeConferenceSet, parentMap, publicationMatchesConferenceSet } from './data/conference-sets.js';
@@ -11,11 +28,14 @@ export const DEFAULT_END_YEAR = currentYear;
 export const DEFAULT_START_YEAR = DEFAULT_END_YEAR - 10;
 
 const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
+/** @type {Promise<{historyMap: AffiliationHistory, aliasMap: SchoolAliasMap}> | null} */
 let affiliationDataPromise = null;
 
 
+/** @type {Promise<RawData> | null} */
 let dataPromise = null;
 
+/** @returns {Promise<RawData>} */
 export function loadData() {
   if (!dataPromise) {
     dataPromise = loadDataFromSources().catch(error => {
@@ -27,22 +47,29 @@ export function loadData() {
 }
 
 async function loadDataFromSources() {
+  /**
+   * @template T
+   * @param {string} url
+   * @returns {Promise<T[]>}
+   */
   const optionalCsv = url => fetchCsv(url).catch(error => {
     console.warn(`Optional CSRankings metadata unavailable: ${url}`, error);
     return [];
   });
   const [csrankings, authorInfo, institutions, turingWinners, acmFellows, countries, dblpAliases, nameChanges] = await Promise.all([
-    fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv'),
-    fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/generated-author-info.csv'),
-    fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/institutions.csv'),
-    optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/turing.csv'),
-    optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/acm-fellows.csv'),
-    optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/countries.csv'),
-    optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/dblp-aliases.csv'),
-    optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/name-changes.csv')
+    /** @type {Promise<CsrankingsFacultyRow[]>} */ (fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv')),
+    /** @type {Promise<PublicationRow[]>} */ (fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/generated-author-info.csv')),
+    /** @type {Promise<InstitutionRow[]>} */ (fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/institutions.csv')),
+    /** @type {Promise<HonorRow[]>} */ (optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/turing.csv')),
+    /** @type {Promise<HonorRow[]>} */ (optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/acm-fellows.csv')),
+    /** @type {Promise<CountryRow[]>} */ (optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/countries.csv')),
+    /** @type {Promise<DblpAliasRow[]>} */ (optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/dblp-aliases.csv')),
+    /** @type {Promise<NameChangeRow[]>} */ (optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/name-changes.csv'))
   ]);
 
+  /** @type {Record<string, Professor>} */
   const professors = {};
+  /** @type {Record<string, School>} */
   const schools = {};
   const turingByName = new Map(turingWinners.map(row => [row.name?.trim(), Number(row.year)]));
   const acmFellowByName = new Map(acmFellows.map(row => [row.name?.trim(), Number(row.year)]));
@@ -69,11 +96,12 @@ async function loadDataFromSources() {
   };
 
   csrankings.forEach(row => {
-    if (row.name) {
+    if (row.name?.trim() && row.affiliation?.trim()) {
       const name = row.name.trim();
+      const affiliation = row.affiliation.trim();
       professors[name] = {
         name: name,
-        affiliation: row.affiliation,
+        affiliation,
         homepage: row.homepage,
         scholarid: row.scholarid,
         orcid: /^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/i.test(row.orcid?.trim()) && row.orcid !== '0000-0000-0000-0000'
@@ -86,9 +114,9 @@ async function loadDataFromSources() {
         pubs: []
       };
 
-      if (!schools[row.affiliation]) {
-        schools[row.affiliation] = {
-          name: row.affiliation,
+      if (!schools[affiliation]) {
+        schools[affiliation] = {
+          name: affiliation,
           areas: {},
           region: null,
           country: null
@@ -450,6 +478,11 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
   return { professors: filteredProfs, schools: filteredSchools };
 }
 
+/**
+ * @template T
+ * @param {string} url
+ * @returns {Promise<T[]>}
+ */
 export async function fetchCsv(url) {
   const response = await fetch(url);
   if (!response.ok) {

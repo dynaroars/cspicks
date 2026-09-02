@@ -1,7 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import { filterGrants, grantsSuggestions } from '../../src/grants/grants-data.js';
+import { filterGrants, grantsSuggestions, parseGrants } from '../../src/grants/grants-data.js';
+
+test('grants parser rejects malformed external data', () => {
+  assert.throws(() => parseGrants({}), /Invalid grants dataset/);
+  assert.throws(() => parseGrants([{ id: 'incomplete' }]), /Invalid grants dataset/);
+});
 
 test('grants dataset contains required schema fields and is non-empty', async () => {
   const fileContent = await fs.readFile(new URL('../../public/grants.json', import.meta.url), 'utf8');

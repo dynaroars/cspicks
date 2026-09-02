@@ -7,7 +7,7 @@ run the listed verification commands, and update this file in the same commit.
 ## Status
 
 - [x] Phase 0 — tooling and CI guardrails
-- [ ] Phase 1 — shared domain types and typed external-data boundaries
+- [x] Phase 1 — shared domain types and typed external-data boundaries
 - [ ] Phase 2 — foundation modules (`shared`, data helpers, `data`, metrics)
 - [ ] Phase 3 — shared UI infrastructure and page controllers
 - [ ] Phase 4 — strict mode, remaining tests/scripts as appropriate, final CI gate
@@ -53,6 +53,19 @@ Next step: begin Phase 1 by inventorying the actual data shapes produced and con
 Create a type-only module for the core `Professor`, `Publication`, `School`, raw CSV row,
 filtered-data, affiliation-history, NSF-award, and grants shapes. Apply `// @ts-check` to the
 data boundary modules and use Papa Parse generics plus runtime narrowing for fetched inputs.
+
+Completed 2026-09-01. Added `src/types.d.ts`, typed the CSV promises feeding `src/data.js`,
+enabled JavaScript checking on the ranking/grants/affiliation boundaries, and added runtime
+narrowing for grants, NSF awards, and affiliation-history JSON. Malformed grants and NSF
+payloads now fail explicitly instead of flowing into the UI. Verification passed:
+
+- `npm test` — 8 test files passed, including new malformed-payload cases
+- `npm run typecheck`
+- `npm run build` — 88 modules transformed
+
+Next step: Phase 2 starts with `src/shared.js` and dependency-free leaf utilities. Rename a
+small batch to `.ts`, preserve `.js` import specifiers, and run all three verification commands
+before proceeding to `src/data/*` and `src/data.js`.
 
 ### Phase 2
 

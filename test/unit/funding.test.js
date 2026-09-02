@@ -9,10 +9,15 @@ import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl, topCoaut
 import { parseCsrankingsRules } from '../../src/csrankings-rules.js';
 import { renderSchoolCard } from '../../src/search-cards.js';
 import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../../src/metrics.js';
-import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../../src/nsf.js';
+import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, parseNsfDataset, renderFundingFacultyCard } from '../../src/nsf.js';
 import { aoeDeadline, conferenceStart, deadlineStatus, filterSchedule, formatCalendarDate, groupConferences, scheduleSuggestions } from '../../csconfs/schedule-data.js';
 import { renderScheduleCard } from '../../csconfs/schedule-render.js';
 import { buildConferenceEmailUrl, buildConferenceGithubIssueUrl, buildConferenceSubmissionContent } from '../../csconfs/submission.js';
+
+test('NSF parser rejects malformed external data', () => {
+  assert.throws(() => parseNsfDataset(null), /Invalid NSF dataset/);
+  assert.throws(() => parseNsfDataset({ awards: [{ id: 'incomplete' }] }), /Invalid NSF awards dataset/);
+});
 test('browser locales map to supported regions and unknown locales fall back to World', () => {
   assert.equal(detectRegionFromLocales(['en-US']), 'us');
   assert.equal(detectRegionFromLocales(['fr-CA']), 'canada');

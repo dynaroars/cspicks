@@ -1,5 +1,52 @@
 import { cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
 
+/** @typedef {import('./types.js').NsfAward} NsfAward */
+/** @typedef {import('./types.js').NsfDataset} NsfDataset */
+
+/** @param {unknown} value @returns {value is string | null} */
+function isNullableString(value) {
+  return value === null || typeof value === 'string';
+}
+
+/** @param {unknown} value @returns {value is NsfAward} */
+function isNsfAward(value) {
+  if (!value || typeof value !== 'object') return false;
+  const award = /** @type {Record<string, unknown>} */ (value);
+  return typeof award.id === 'string'
+    && typeof award.title === 'string'
+    && typeof award.awardee === 'string'
+    && typeof award.awardDate === 'string'
+    && typeof award.startDate === 'string'
+    && typeof award.endDate === 'string'
+    && typeof award.obligatedAmount === 'number'
+    && typeof award.estimatedAmount === 'number'
+    && typeof award.directorate === 'string'
+    && typeof award.division === 'string'
+    && typeof award.program === 'string'
+    && typeof award.programManager === 'string'
+    && typeof award.active === 'boolean'
+    && Array.isArray(award.investigators)
+    && award.investigators.every(person => {
+      if (!person || typeof person !== 'object') return false;
+      const investigator = /** @type {Record<string, unknown>} */ (person);
+      return typeof investigator.name === 'string'
+        && typeof investigator.role === 'string'
+        && isNullableString(investigator.facultyName)
+        && isNullableString(investigator.rosterName)
+        && isNullableString(investigator.affiliation);
+    });
+}
+
+/** @param {unknown} payload @returns {NsfDataset} */
+export function parseNsfDataset(payload) {
+  if (!payload || typeof payload !== 'object') throw new Error('Invalid NSF dataset');
+  const dataset = /** @type {Record<string, unknown>} */ (payload);
+  if (!Array.isArray(dataset.awards) || !dataset.awards.every(isNsfAward)) {
+    throw new Error('Invalid NSF awards dataset');
+  }
+  return /** @type {NsfDataset} */ (payload);
+}
+
 // Confirmed NSF award transfers need an explicit marker: estimated funding can
 // exceed current obligations for ordinary continuing grants as well.
 const confirmedTransferAwards = new Set(['2304748']);

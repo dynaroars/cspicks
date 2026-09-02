@@ -1,10 +1,49 @@
+// @ts-check
+
 /**
  * CS Awards & Grants Data Engine
  * Handles dataset loading, querying, structured filtering, and autocomplete indexing.
  */
 
+/** @typedef {import('../types.js').Grant} Grant */
+
+/** @type {Grant[] | null} */
 let cachedGrants = null;
 
+/**
+ * Validate the fields the grants UI relies on before treating fetched JSON as
+ * application data. Optional presentation fields remain optional.
+ * @param {unknown} value
+ * @returns {value is Grant}
+ */
+function isGrant(value) {
+  if (!value || typeof value !== 'object') return false;
+  const grant = /** @type {Record<string, unknown>} */ (value);
+  return typeof grant.id === 'string'
+    && typeof grant.name === 'string'
+    && typeof grant.shortName === 'string'
+    && typeof grant.sponsor === 'string'
+    && typeof grant.sponsorCategory === 'string'
+    && Array.isArray(grant.targetAudience)
+    && typeof grant.whoFor === 'string'
+    && typeof grant.deadline === 'string'
+    && typeof grant.deadlineMonth === 'number'
+    && typeof grant.amount === 'string'
+    && typeof grant.summary === 'string'
+    && Array.isArray(grant.eligibility)
+    && Array.isArray(grant.topics)
+    && typeof grant.url === 'string';
+}
+
+/** @param {unknown} payload @returns {Grant[]} */
+export function parseGrants(payload) {
+  if (!Array.isArray(payload) || !payload.every(isGrant)) {
+    throw new Error('Invalid grants dataset');
+  }
+  return payload;
+}
+
+/** @returns {Promise<Grant[]>} */
 export async function loadGrantsData() {
   if (cachedGrants) return cachedGrants;
   const url = new URL('../../public/grants.json', import.meta.url).href;
@@ -12,13 +51,17 @@ export async function loadGrantsData() {
   if (!response.ok) {
     const fallback = await fetch('./grants.json');
     if (!fallback.ok) throw new Error(`Failed to load grants data (${response.status})`);
-    cachedGrants = await fallback.json();
+    cachedGrants = parseGrants(await fallback.json());
     return cachedGrants;
   }
-  cachedGrants = await response.json();
+  cachedGrants = parseGrants(await response.json());
   return cachedGrants;
 }
 
+/**
+ * @param {Grant[]} grants
+ * @param {{query?: string, audience?: string, sponsorCategory?: string, status?: string, topic?: string, deadlineFilter?: string, sortBy?: string}} [filters]
+ */
 export function filterGrants(grants, {
   query = '',
   audience = 'all',
@@ -132,6 +175,7 @@ export function filterGrants(grants, {
   return results;
 }
 
+/** @param {Grant[]} grants */
 export function grantsSuggestions(grants) {
   const awardItems = [];
   const sponsorSet = new Map();

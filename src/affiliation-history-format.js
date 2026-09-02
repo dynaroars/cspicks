@@ -1,19 +1,52 @@
+// @ts-check
+
+/** @typedef {import('./types.js').AffiliationHistory} AffiliationHistory */
+/** @typedef {import('./types.js').SchoolAliasMap} SchoolAliasMap */
+
 export const AFFILIATION_HISTORY_FORMAT = 'cspicks-affiliations-v1';
 
+/** @param {unknown} payload @returns {AffiliationHistory} */
 export function decodeAffiliationHistory(payload) {
-  if (!payload || payload.format !== AFFILIATION_HISTORY_FORMAT) return payload || {};
+  if (!payload || typeof payload !== 'object') return {};
+  const record = /** @type {Record<string, unknown>} */ (payload);
+  if (record.format !== AFFILIATION_HISTORY_FORMAT) {
+    return isAffiliationHistory(record) ? record : {};
+  }
 
-  const schools = payload.schools || [];
-  return Object.fromEntries(Object.entries(payload.people || {}).map(([name, segments]) => [
+  const schools = Array.isArray(record.schools) && record.schools.every(school => typeof school === 'string')
+    ? record.schools
+    : [];
+  const people = record.people && typeof record.people === 'object'
+    ? /** @type {Record<string, unknown>} */ (record.people)
+    : {};
+  return Object.fromEntries(Object.entries(people).map(([name, value]) => [
     name,
-    segments.map(([start, end, schoolIndex]) => ({
-      start,
-      end,
-      school: schools[schoolIndex]
-    }))
+    Array.isArray(value) ? value.flatMap(segment => {
+      if (!Array.isArray(segment) || segment.length !== 3) return [];
+      const [start, end, schoolIndex] = segment;
+      const school = typeof schoolIndex === 'number' ? schools[schoolIndex] : undefined;
+      return typeof start === 'number' && typeof end === 'number' && school
+        ? [{ start, end, school }]
+        : [];
+    }) : []
   ]));
 }
 
+/** @param {Record<string, unknown>} value @returns {value is AffiliationHistory} */
+function isAffiliationHistory(value) {
+  return Object.values(value).every(segments => Array.isArray(segments) && segments.every(segment => {
+    if (!segment || typeof segment !== 'object') return false;
+    const item = /** @type {Record<string, unknown>} */ (segment);
+    return typeof item.school === 'string'
+      && typeof item.start === 'number'
+      && typeof item.end === 'number';
+  }));
+}
+
+/**
+ * @param {AffiliationHistory} history
+ * @param {SchoolAliasMap} [aliasMap]
+ */
 export function encodeAffiliationHistory(history, aliasMap = {}) {
   const schools = [];
   const schoolIndexes = new Map();

@@ -1,4 +1,4 @@
-import { buildFundingIndex, formatFunding, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, renderFundingFacultyCard, renderFundingSchoolCard } from './nsf.js';
+import { buildFundingIndex, formatFunding, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, parseNsfDataset, renderFundingFacultyCard, renderFundingSchoolCard } from './nsf.js';
 import { parseComparisonQuery } from './comparison.js';
 import { compareNumber, renderComparisonNotice, renderScoreboard } from './compare-view.js';
 import { createFilterBar } from './filters.js';
@@ -358,7 +358,7 @@ async function init() {
   setupYears();
   const response = await fetch('./nsf-awards.json');
   if (!response.ok) throw new Error(`NSF dataset returned ${response.status}`);
-  dataset = await response.json();
+  dataset = parseNsfDataset(await response.json());
   setIndex();
   const input = document.getElementById('funding-search');
   input.disabled = false;

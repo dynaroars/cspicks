@@ -1,6 +1,6 @@
 import { filterByYears } from './data.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateCorpusDiagnostics, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
-import { buildFundingIndex, calculateFundingDiscoveries, formatFunding } from './nsf.js';
+import { buildFundingIndex, calculateFundingDiscoveries, formatFunding, parseNsfDataset } from './nsf.js';
 import { SITE_NAME } from './seo.js';
 import { shareUrl } from './share.js';
 import { trackDiscoveryShare } from './analytics.js';
@@ -47,7 +47,7 @@ export function getDiscoveriesMeta(filters) {
 export async function fetchDiscoveriesNsfData() {
   const response = await fetch('./nsf-awards.json');
   if (!response.ok) throw new Error(`NSF dataset returned ${response.status}`);
-  return response.json();
+  return parseNsfDataset(await response.json());
 }
 
 // One flash for whichever share button was just clicked, matching the label
