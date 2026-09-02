@@ -30,7 +30,7 @@ export function calculateFragility(filteredData: FilteredData, schoolName: strin
   let areaCounts = { ...school.areaAdjustedCounts };
   const remaining = new Set(names);
   const steps = [];
-  const exits = {};
+  const exits: Record<number, number> = {};
   // A department already outside a threshold needs no departures to leave it.
   thresholds.forEach(threshold => { if (school.rank > threshold) exits[threshold] = 0; });
 

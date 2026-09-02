@@ -4,9 +4,10 @@ import { calculateSchoolMetrics } from './school.js';
 import type { FilteredData } from '../types.js';
 
 type SchoolCredit = { name: string, credit: number };
+type AreaChange = { name: string, area: string, currentCredit: number, priorCredit: number, gain: number };
 
 export function calculateDiscoveryInsights(currentData: FilteredData, priorData: FilteredData, limit = 5) {
-  const regionalAreaTotals = {};
+  const regionalAreaTotals: Record<string, number> = {};
   let regionalTotal = 0;
   Object.values(currentData?.schools || {}).forEach(school => {
     regionalTotal += school.totalAdjusted || 0;
@@ -54,7 +55,7 @@ export function calculateDiscoveryInsights(currentData: FilteredData, priorData:
     };
   }).filter(item => item.metrics);
 
-  const take = (items, compare) => [...items].sort(compare).slice(0, limit);
+  const take = <T>(items: T[], compare: (a: T, b: T) => number) => [...items].sort(compare).slice(0, limit);
   const established = schools.filter(item =>
     item.prior?.rank && item.prior.totalAdjusted >= 2 && item.school.totalAdjusted >= 2
   );
@@ -65,8 +66,8 @@ export function calculateDiscoveryInsights(currentData: FilteredData, priorData:
     item.school.totalAdjusted >= 5 && item.metrics.facultyCount >= 5
   );
 
-  const areaBreakouts = [];
-  const areaDeclines = [];
+  const areaBreakouts: AreaChange[] = [];
+  const areaDeclines: AreaChange[] = [];
   schools.forEach(item => {
     const areas = new Set([
       ...Object.keys(item.school.areas || {}),

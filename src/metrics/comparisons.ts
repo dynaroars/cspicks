@@ -148,7 +148,12 @@ export function calculateCorpusDiagnostics(rawData: RawData, filteredData: Filte
  * high.
  */
 
-const formatAdjusted = value => Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 1 });
+const formatAdjusted = (value: unknown) => Number(value || 0).toLocaleString(undefined, { maximumFractionDigits: 1 });
+
+interface VerdictEntry {
+  rank?: number;
+  totalAdjusted?: number;
+}
 
 /**
  * Decide the one line a reader should be able to stop at. "Leads in N areas"
@@ -159,7 +164,13 @@ const formatAdjusted = value => Number(value || 0).toLocaleString(undefined, { m
  *
  * Returns the decision only, so the branches can be tested without markup.
  */
-export function describeVerdict(type, entryA, entryB, aWins, bWins) {
+export function describeVerdict(
+  type: 'school' | 'researcher',
+  entryA: VerdictEntry,
+  entryB: VerdictEntry,
+  aWins: number,
+  bWins: number
+) {
   const headline = type === 'school'
     // Rank is the headline for a school, and lower wins.
     ? {

@@ -197,3 +197,9 @@ maps, affiliation resolution, publication aggregation, school scoring, and gener
 ranking. Added runtime narrowing for the fetched school-alias JSON. `data.ts` now has zero
 `noImplicitAny` diagnostics and the repository total is 232. All normal verification gates pass.
 Resume with the remaining metrics modules, led by `metrics/discoveries.ts`.
+
+Checkpoint 2026-09-02 (`noImplicitAny` metrics pass): cleared every remaining metrics diagnostic
+by typing generic discovery sorting, regional-area and area-change dictionaries, comparison
+verdict inputs, formatting values, and numeric fragility-threshold exits. The repository total is
+now 189. All normal verification gates pass. Resume with simulation/DBLP services, then analysis
+and page controllers; leave `compare-view` until its comparison-domain contracts are established.
