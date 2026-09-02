@@ -37,6 +37,7 @@ function getFilterState() {
     query: input ? input.value.trim() : '',
     audience: document.getElementById('audience-select')?.value || 'all',
     sponsorCategory: document.getElementById('sponsor-category-select')?.value || 'all',
+    status: document.getElementById('status-select')?.value || 'all',
     topic: document.getElementById('topic-select')?.value || 'all',
     deadlineFilter: document.getElementById('deadline-select')?.value || 'all',
     sortBy: document.getElementById('sort-select')?.value || 'featured'
@@ -48,6 +49,7 @@ function updateUrl(filterState) {
   if (filterState.query) next.set('q', filterState.query);
   if (filterState.audience !== 'all') next.set('audience', filterState.audience);
   if (filterState.sponsorCategory !== 'all') next.set('sponsor', filterState.sponsorCategory);
+  if (filterState.status !== 'all') next.set('status', filterState.status);
   if (filterState.topic !== 'all') next.set('topic', filterState.topic);
   if (filterState.deadlineFilter !== 'all') next.set('deadline', filterState.deadlineFilter);
   if (filterState.sortBy !== 'featured') next.set('sort', filterState.sortBy);
@@ -158,11 +160,13 @@ function setupDelegatedListeners() {
       const sponEl = document.getElementById('sponsor-category-select');
       const topEl = document.getElementById('topic-select');
       const deadEl = document.getElementById('deadline-select');
+      const statusEl = document.getElementById('status-select');
       const sortEl = document.getElementById('sort-select');
       if (audEl) audEl.value = 'all';
       if (sponEl) sponEl.value = 'all';
       if (topEl) topEl.value = 'all';
       if (deadEl) deadEl.value = 'all';
+      if (statusEl) statusEl.value = 'all';
       if (sortEl) sortEl.value = 'featured';
       render();
       input.focus();
@@ -203,7 +207,7 @@ function setupDelegatedListeners() {
   });
 
   // Filter change listeners
-  ['audience-select', 'sponsor-category-select', 'topic-select', 'deadline-select', 'sort-select'].forEach(id => {
+  ['audience-select', 'sponsor-category-select', 'topic-select', 'deadline-select', 'status-select', 'sort-select'].forEach(id => {
     document.getElementById(id)?.addEventListener('change', () => {
       render();
     });
@@ -250,6 +254,10 @@ function populateFilterOptions(grants) {
   if (params.get('deadline')) {
     const dEl = document.getElementById('deadline-select');
     if (dEl) dEl.value = params.get('deadline');
+  }
+  if (params.get('status')) {
+    const statusEl = document.getElementById('status-select');
+    if (statusEl) statusEl.value = params.get('status');
   }
   if (params.get('sort')) {
     const sEl = document.getElementById('sort-select');

@@ -39,6 +39,15 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   // Clear search
   await input.fill('');
 
+  // Historical programs are clearly labeled and independently filterable.
+  const statusSelect = page.locator('#status-select');
+  await statusSelect.selectOption('historical');
+  const historicalCards = page.locator('.grant-card');
+  expect(await historicalCards.count()).toBeGreaterThanOrEqual(6);
+  await expect(page.locator('.grant-status-badge').first()).toHaveText('Historical');
+  await expect(page).toHaveURL(/status=historical/);
+  await statusSelect.selectOption('all');
+
   // Test Audience Filter: Faculty
   const audienceSelect = page.locator('#audience-select');
   await audienceSelect.selectOption('faculty');

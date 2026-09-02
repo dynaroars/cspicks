@@ -70,7 +70,7 @@ Every page keeps the URL in sync with what's on screen, so any view is a link th
 | Simulator (`simulator.html`) | Filters, `univ` (selected university), and `candidates` (the raw candidate names/DBLP links) — opening the link pre-fills the setup one click from a result, without re-querying DBLP on load |
 | CS Confs (`csconfs.html`) | `q`, conference-year range, venue set, and whether only upcoming conferences are shown |
 | NSF Funding (`nsf.html`) | `q` (search or `A vs B`) plus the year-range filter |
-| Awards & Grants (`grants.html`) | `q`, `audience`, `sponsor`, `topic`, `deadline`, and `sort` filters |
+| Awards & Grants (`grants.html`) | `q`, `audience`, `sponsor`, `topic`, `deadline`, `status`, and `sort` filters |
 
 Filter choices also persist across page navigations via `localStorage`, so switching between Search and Discoveries, or clicking into Simulator, NSF Funding, or Awards & Grants, doesn't silently reset the region or year range.
 
@@ -275,7 +275,7 @@ cspicks/
 - [DBLP](https://dblp.org/) - Publication metadata and author profiles
 - [OpenAlex](https://openalex.org/) - Historical affiliation data
 - [NSF Award Search](https://www.nsf.gov/funding/award-search) - NSF awards, investigators, program managers, programs, dates, and intended amounts
-- **CS Research Awards & Fellowships** (`public/grants.json`) - Curated database of 150+ national and state-specific CS research awards, faculty fellowships, student grants, and industry RFPs (NSF, NASA, EPSCoR, DARPA, DOE, DoD, tech industry, and foundations)
+- **CS Research Awards & Fellowships** (`public/grants.json`) - Curated database of 170+ national, state-specific, and historical CS research awards, faculty fellowships, student grants, honors, and industry RFPs (NSF, NASA, EPSCoR, DARPA, DOE, DoD, tech industry, foundations, and professional societies)
 
 ## ❓ FAQ, Methods, and Data
 

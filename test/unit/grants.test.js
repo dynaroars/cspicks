@@ -26,7 +26,27 @@ test('grants dataset contains required schema fields and is non-empty', async ()
       assert.ok(Array.isArray(grant.locations) && grant.locations.length > 0,
         `Grant ${grant.id} locations should be a non-empty array when provided`);
     }
+    if (grant.status !== undefined) {
+      assert.equal(grant.status, 'historical', `Grant ${grant.id} has unsupported status`);
+    }
   }
+});
+
+test('grants filtering separates current and historical programs', async () => {
+  const fileContent = await fs.readFile(new URL('../../public/grants.json', import.meta.url), 'utf8');
+  const grants = JSON.parse(fileContent);
+
+  const historical = filterGrants(grants, { status: 'historical' });
+  assert.ok(historical.length >= 6);
+  assert.ok(historical.every(g => g.status === 'historical'));
+  assert.ok(historical.some(g => g.id === 'google-faculty-research-awards'));
+
+  const current = filterGrants(grants, { status: 'current' });
+  assert.ok(current.length > historical.length);
+  assert.ok(current.every(g => g.status !== 'historical'));
+
+  const facebookHistory = filterGrants(grants, { query: 'historical Facebook faculty' });
+  assert.ok(facebookHistory.some(g => g.id === 'meta-research-awards'));
 });
 
 test('grants filtering filters by audience and sponsor category', async () => {

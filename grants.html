@@ -97,6 +97,14 @@
         </div>
 
         <div class="filter-group">
+          <select id="status-select" aria-label="Filter by program status">
+            <option value="all">All Statuses</option>
+            <option value="current">Current / Recurring</option>
+            <option value="historical">Historical / Inactive</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
           <select id="sort-select" aria-label="Sort awards">
             <option value="featured">Featured First</option>
             <option value="deadline">Upcoming Deadline</option>
@@ -116,7 +124,7 @@
       <section id="grants-results" class="grants-results-grid" aria-label="CS Awards and Grants"></section>
 
       <p class="context-note" style="margin-top: 2rem;">
-        Funding amounts, eligibility criteria, and submission deadlines are subject to change. Always verify current solicitation details and request-for-proposals (RFP) on the official sponsor program page before applying.
+        Historical programs are retained for grant-history and CV research and are labeled “Historical.” Funding amounts, eligibility criteria, and submission deadlines are subject to change. Always verify current solicitation details and request-for-proposals (RFP) on the official sponsor program page before applying.
       </p>
     </main>
   </div>

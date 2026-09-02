@@ -224,11 +224,12 @@ Every entry in `public/grants.json` MUST adhere to this structure:
   "topics": ["AI/ML", "Systems", "Security", "Theory", "Robotics", "HPC", "Quantum"],
   "locations": ["State or jurisdiction names when eligibility is geographically limited"],
   "locationLabel": "Optional concise display label such as 28 EPSCoR jurisdictions",
+  "status": "historical",
   "url": "https://official-program-or-rfp-url.org",
   "featured": true
 }
 ```
-`locations` and `locationLabel` are optional. Add them when eligibility is limited by state, territory, commonwealth, or another named jurisdiction so geographic searches and card labels remain accurate.
+`locations`, `locationLabel`, and `status` are optional. Add the geographic fields when eligibility is limited by state, territory, commonwealth, or another named jurisdiction. Set `status` to `historical` only when a discontinued or inactive program is intentionally retained for archival research; clearly state the historical date range in `deadline` and do not present an old deadline as current.
 
 *Note on `deadlineMonth`*: Set to `1..12` for the primary annual deadline month, or `0` for rolling/year-round/open calls (used for chronological sorting).
 

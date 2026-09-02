@@ -23,6 +23,7 @@ export function filterGrants(grants, {
   query = '',
   audience = 'all',
   sponsorCategory = 'all',
+  status = 'all',
   topic = 'all',
   deadlineFilter = 'all',
   sortBy = 'featured'
@@ -30,6 +31,10 @@ export function filterGrants(grants, {
   const q = String(query || '').trim().toLowerCase();
 
   let results = grants.filter(grant => {
+    // Program status filter. Records without a status are treated as current.
+    if (status === 'historical' && grant.status !== 'historical') return false;
+    if (status === 'current' && grant.status === 'historical') return false;
+
     // Audience filter
     if (audience !== 'all') {
       const auds = (grant.targetAudience || []).map(a => a.toLowerCase());
@@ -58,6 +63,7 @@ export function filterGrants(grants, {
 
     // Deadline / Timing filter
     if (deadlineFilter !== 'all') {
+      if (grant.status === 'historical') return false;
       if (deadlineFilter === 'rolling') {
         if (grant.deadlineMonth !== 0 && !grant.deadline.toLowerCase().includes('rolling')) return false;
       } else if (deadlineFilter === 'fixed') {
@@ -78,6 +84,7 @@ export function filterGrants(grants, {
         grant.summary,
         grant.amount,
         grant.deadline,
+        grant.status === 'historical' ? 'historical inactive discontinued archived' : 'current active',
         ...(grant.locations || []),
         ...(grant.topics || []),
         ...(grant.eligibility || [])

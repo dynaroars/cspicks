@@ -26,7 +26,7 @@ export function renderGrantCard(grant) {
   );
 
   return `
-    <article class="grant-card ${grant.featured ? 'is-featured' : ''}" id="${escapeHtml(grant.id)}" data-grant-id="${escapeHtml(grant.id)}">
+    <article class="grant-card ${grant.featured ? 'is-featured' : ''} ${grant.status === 'historical' ? 'is-historical' : ''}" id="${escapeHtml(grant.id)}" data-grant-id="${escapeHtml(grant.id)}">
       <div class="grant-card-header">
         <div class="grant-title-row">
           <div class="grant-title-wrap">
@@ -37,6 +37,7 @@ export function renderGrantCard(grant) {
             </h2>
           </div>
           <div class="grant-badges">
+            ${grant.status === 'historical' ? '<span class="grant-status-badge">Historical</span>' : ''}
             <span class="grant-cat-badge ${catClass}">${escapeHtml(grant.sponsorCategory)}</span>
             ${grant.featured ? '<span class="grant-featured-badge" title="Highlighted award" aria-label="Highlighted award">★</span>' : ''}
           </div>
