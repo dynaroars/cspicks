@@ -63,7 +63,8 @@ function flashShareButton(button: HTMLElement, message: string) {
   button.classList.add('is-flashed');
   clearTimeout(flashTimers.get(button));
   flashTimers.set(button, setTimeout(() => {
-    button.setAttribute('title', original);
+    if (original === null) button.removeAttribute('title');
+    else button.setAttribute('title', original);
     button.classList.remove('is-flashed');
   }, 1800));
 }
@@ -148,22 +149,22 @@ export function renderDiscoveries(rawData: RawData, filters: FilterController, n
     <p class="summary-note">Current period: ${start}–${end}. Comparison period: ${priorStart}–${priorEnd}. Select a university to explore its results and analysis.</p>
     <div class="discovery-grid">
       ${card('Biggest rank gains', 'Universities that moved up the most places compared with the preceding equal-length period. Both periods must have an adjusted publication count of at least 2.', list(insights.rankClimbers, item => `
-        <span>${schoolLink(item.name)}<small>#${item.prior.rank} → #${item.metrics.rank}</small></span>
+        <span>${schoolLink(item.name)}<small>#${item.prior!.rank} → #${item.metrics.rank}</small></span>
         <strong class="confidence-high">+${item.metrics.rankDelta} places</strong>`), 'discovery-featured')}
       ${card('Biggest rank declines', 'Universities that moved down the most places compared with the preceding equal-length period. Both periods must have an adjusted publication count of at least 2.', list(insights.rankDroppers, item => `
-        <span>${schoolLink(item.name)}<small>#${item.prior.rank} → #${item.metrics.rank}</small></span>
+        <span>${schoolLink(item.name)}<small>#${item.prior!.rank} → #${item.metrics.rank}</small></span>
         <strong class="confidence-review">${item.metrics.rankDelta} places</strong>`), 'discovery-risk')}
       ${card('Fastest-growing output', 'Compares the university\'s adjusted publication count in your selected years with the equally long period immediately before. Example: increasing from 10 to 15 is 50% growth. Both periods must have an adjusted count of at least 2.', list(insights.momentum, item => `
-        <span>${schoolLink(item.name)}<small>${number(item.prior.totalAdjusted)} → ${number(item.school.totalAdjusted)} adjusted count</small></span>
+        <span>${schoolLink(item.name)}<small>${number(item.prior!.totalAdjusted)} → ${number(item.school.totalAdjusted)} adjusted count</small></span>
         <strong>+${item.metrics.growth.toFixed(0)}%</strong>`), 'discovery-featured')}
       ${card('Fastest-shrinking output', 'Compares the university\'s adjusted publication count in your selected years with the equally long period immediately before. Example: decreasing from 10 to 6 is a 40% decline. Both periods must have an adjusted count of at least 2.', list(insights.slowdowns, item => `
-        <span>${schoolLink(item.name)}<small>${number(item.prior.totalAdjusted)} → ${number(item.school.totalAdjusted)} adjusted count</small></span>
+        <span>${schoolLink(item.name)}<small>${number(item.prior!.totalAdjusted)} → ${number(item.school.totalAdjusted)} adjusted count</small></span>
         <strong class="confidence-review">${item.metrics.growth.toFixed(0)}%</strong>`), 'discovery-risk')}
       ${card('Largest adjusted-count gains', 'Largest absolute increase in adjusted publication count. This complements percentage growth, which favors smaller starting points.', list(insights.outputGains, item => `
         <span>${schoolLink(item.name)}<small>${number(item.school.totalAdjusted)} current adjusted count</small></span>
         <strong>+${number(item.outputGain)}</strong>`), 'discovery-featured')}
       ${card('Largest adjusted-count losses', 'Largest absolute decrease in adjusted publication count compared with the preceding period.', list(insights.outputLosses, item => `
-        <span>${schoolLink(item.name)}<small>${number(item.prior.totalAdjusted)} → ${number(item.school.totalAdjusted)} adjusted count</small></span>
+        <span>${schoolLink(item.name)}<small>${number(item.prior!.totalAdjusted)} → ${number(item.school.totalAdjusted)} adjusted count</small></span>
         <strong class="confidence-review">${number(item.outputGain)}</strong>`), 'discovery-risk')}
       ${card('Expanding research breadth', 'Universities adding the most active top-level research areas compared with the preceding period.', list(insights.breadthBuilders, item => `
         <span>${schoolLink(item.name)}<small>${item.metrics.activeAreas} active areas now</small></span>
@@ -181,8 +182,8 @@ export function renderDiscoveries(rawData: RawData, filters: FilterController, n
         <span>${schoolLink(item.name)}<small>${item.metrics.facultyCount} active faculty</small></span>
         <strong>${item.metrics.top3Share.toFixed(0)}% top-3</strong>`), 'discovery-featured')}
       ${card('Regional specializations', 'Areas where a university is much more focused than the selected region overall. The university must also rank in the region\'s top 25 for that area, with a total adjusted count of at least 5, 3 active faculty, and an area adjusted count of at least 2.', list(insights.focusedPowerhouses, item => `
-        <span>${schoolLink(item.name)}<small>${escapeHtml(areaLabels[item.focusArea.area] || item.focusArea.area)} · ${item.focusArea.portfolioShare.toFixed(0)}% school vs ${item.focusArea.regionalBaseline.toFixed(0)}% region · #${item.focusArea.areaRank}</small></span>
-        <strong>${item.focusArea.specialization.toFixed(1)}× region</strong>`), 'discovery-featured')}
+        <span>${schoolLink(item.name)}<small>${escapeHtml(areaLabels[item.focusArea!.area] || item.focusArea!.area)} · ${item.focusArea!.portfolioShare.toFixed(0)}% school vs ${item.focusArea!.regionalBaseline.toFixed(0)}% region · #${item.focusArea!.areaRank}</small></span>
+        <strong>${item.focusArea!.specialization.toFixed(1)}× region</strong>`), 'discovery-featured')}
     </div>
     <h2 class="discovery-section-heading">Notable patterns across subfields</h2>
     <p class="summary-note">Region-wide, not per university: how each research area itself is growing, shrinking, spreading across more departments, or changing leaders.</p>
@@ -200,7 +201,7 @@ export function renderDiscoveries(rawData: RawData, filters: FilterController, n
         <span>${areaLink(item.area)}<small>${item.priorSchoolCount} → ${item.schoolCount} universities</small></span>
         <strong class="confidence-review">${item.schoolGain}</strong>`, emptySubfield), 'discovery-risk')}
       ${card('Changing of the guard', 'Subfields whose single leading university (by area adjusted count) differs from the preceding period. Both periods must have an area adjusted count of at least 2 for the subfield overall.', list(subfields.leadershipChanges, item => `
-        <span>${areaLink(item.area)}<small>${escapeHtml(getInstitutionShortName(item.formerLeader))} → ${escapeHtml(getInstitutionShortName(item.newLeader))}</small></span>
+        <span>${areaLink(item.area)}<small>${escapeHtml(getInstitutionShortName(item.formerLeader!))} → ${escapeHtml(getInstitutionShortName(item.newLeader!))}</small></span>
         <strong>new leader</strong>`, emptySubfield), 'discovery-featured discovery-wide')}
     </div>
     <h2 class="discovery-section-heading">Research diversity, concentration & collaboration</h2>
@@ -238,9 +239,9 @@ export function renderDiscoveries(rawData: RawData, filters: FilterController, n
         ${card('Largest attributed NSF portfolios', 'Universities with the most intended NSF funding attributed to matched current CS faculty in the selected years.', fundingList(fundingInsights.topFunding, school => `
           <span>${fundingSchoolLink(school.name)}<small>${school.awards.length} matched awards</small></span><strong>${formatFunding(school.attributedAmount)}</strong>`), 'discovery-featured')}
         ${card('Fastest-growing NSF funding', 'Largest percentage increases in attributed NSF funding versus the preceding equal-length period. Both periods must contain at least $100,000.', fundingList(fundingInsights.fastestGrowth, item => `
-          <span>${fundingSchoolLink(item.school.name)}<small>${formatFunding(item.priorAmount)} → ${formatFunding(item.school.attributedAmount)}</small></span><strong>+${item.growth.toFixed(0)}%</strong>`), 'discovery-featured')}
+          <span>${fundingSchoolLink(item.school.name)}<small>${formatFunding(item.priorAmount)} → ${formatFunding(item.school.attributedAmount)}</small></span><strong>+${item.growth!.toFixed(0)}%</strong>`), 'discovery-featured')}
         ${card('Fastest-declining NSF funding', 'Largest percentage decreases in attributed NSF funding versus the preceding equal-length period. Both periods must contain at least $100,000.', fundingList(fundingInsights.fastestDecline, item => `
-          <span>${fundingSchoolLink(item.school.name)}<small>${formatFunding(item.priorAmount)} → ${formatFunding(item.school.attributedAmount)}</small></span><strong class="confidence-review">${item.growth.toFixed(0)}%</strong>`), 'discovery-risk')}
+          <span>${fundingSchoolLink(item.school.name)}<small>${formatFunding(item.priorAmount)} → ${formatFunding(item.school.attributedAmount)}</small></span><strong class="confidence-review">${item.growth!.toFixed(0)}%</strong>`), 'discovery-risk')}
         ${card('Broadest funded participation', 'Universities with the most distinct current-roster faculty matched to NSF awards in the selected years.', fundingList(fundingInsights.broadParticipation, school => `
           <span>${fundingSchoolLink(school.name)}<small>${formatFunding(school.attributedAmount)} attributed</small></span><strong>${school.faculty.length} faculty</strong>`), 'discovery-featured')}
         ${card('Funding rank ahead of publication rank', 'Universities whose rank by attributed NSF funding is substantially stronger than their publication rank. This is a descriptive mismatch, not a quality judgment.', fundingList(fundingInsights.fundingAhead, item => `
@@ -248,7 +249,7 @@ export function renderDiscoveries(rawData: RawData, filters: FilterController, n
         ${card('Publication rank ahead of funding rank', 'Universities whose publication rank is substantially stronger than their rank by matched attributed NSF funding. Missing matches can affect this comparison.', fundingList(fundingInsights.publicationsAhead, item => `
           <span>${fundingSchoolLink(item.school.name)}<small>publications #${item.publicationRank} · funding #${item.fundingRank}</small></span><strong>${Math.abs(item.gap)} places</strong>`), 'discovery-risk')}
         ${card('Largest matched collaborative projects', 'Largest full project values involving at least one matched current CS professor, reconstructed from exact-title NSF sibling awards. Other project portions can belong to collaborators outside the roster; transfer records for the same lead investigator count only once.', fundingList(fundingInsights.largestCollaborations, award => `
-          <span><a class="discovery-school" href="nsf.html?q=${encodeURIComponent(award.title)}" title="Explore this collaborative project">${escapeHtml(award.title.replace(/^Collaborative (?:Research|Resaerch):\s*/i, ''))}</a><small>${award.collaborativeAwardCount} institutional portions</small></span><strong>${formatFunding(award.collaborativeTotalAmount)}</strong>`), 'discovery-featured discovery-wide')}
+          <span><a class="discovery-school" href="nsf.html?q=${encodeURIComponent(award.title)}" title="Explore this collaborative project">${escapeHtml(award.title.replace(/^Collaborative (?:Research|Resaerch):\s*/i, ''))}</a><small>${award.collaborativeAwardCount} institutional portions</small></span><strong>${formatFunding(award.collaborativeTotalAmount || 0)}</strong>`), 'discovery-featured discovery-wide')}
       </div>` : ''}
   `;
 }

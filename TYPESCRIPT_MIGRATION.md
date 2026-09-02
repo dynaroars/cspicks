@@ -315,3 +315,11 @@ in-flight stability sweeps, sparse yearly accumulators, and absent chart tooltip
 explicit fallbacks or guards. The repository total is 80. All normal verification gates pass
 (8 test files, 88 bundled modules). Resume with discoveries and the shared search components,
 then type `comparison.ts` and `compare-view.ts` together.
+
+Checkpoint 2026-09-02 (`strictNullChecks` discovery/search pass): cleared discoveries, DBLP
+search UI, filter restoration, search cards, search suggestions, and the shared suggestion box.
+Filtered discovery records now expose their established-period invariants at rendering, DBLP
+results narrow successful author/stat responses, and sparse affiliation/query values are handled
+explicitly. The repository total is 32, all in `comparison.ts` and `compare-view.ts`. All normal
+verification gates pass (8 test files, 88 bundled modules). Resume by clearing those two files,
+then enable strict mode globally and audit the remaining JavaScript inventory.

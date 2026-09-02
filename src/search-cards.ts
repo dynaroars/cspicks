@@ -42,7 +42,7 @@ export function getDBLPUrl(originalName: string) {
   }
   parts.pop();
   const firstNames = encodeURIComponent(parts.join(' ').replace(/\s/g, '_').replace(/-/g, '='));
-  return `https://dblp.org/pers/hd/${lastName[0].toLowerCase()}/${lastName}:${firstNames}`;
+  return `https://dblp.org/pers/hd/${(lastName[0] || '_').toLowerCase()}/${lastName}:${firstNames}`;
 }
 
 // Inline so the icons inherit the theme's text color and cost no extra request.
@@ -80,13 +80,13 @@ function renderAffiliations(prof: FilteredProfessor, context: CardContext) {
   const pubYears = new Set(prof.pubs.map(pub => pub.year));
   const schoolsWithPapers = new Set<string>();
   prof.pubs.forEach(pub => {
-    historyMap[prof.name]
+    historyMap[prof.name]!
       .filter(segment => pub.year >= segment.start && pub.year <= segment.end)
       .forEach(segment => schoolsWithPapers.add(aliasMap?.[segment.school] || segment.school));
   });
 
   const affiliations = new Map<string, { start: number, end: number }>();
-  historyMap[prof.name].forEach(segment => {
+  historyMap[prof.name]!.forEach(segment => {
     const hasPapers = Array.from(pubYears).some(year => year >= segment.start && year <= segment.end);
     const significant = segment.end - segment.start + 1 >= 2 || segment.end >= currentYear;
     const school = aliasMap?.[segment.school] || segment.school;
@@ -105,8 +105,8 @@ function renderAffiliations(prof: FilteredProfessor, context: CardContext) {
     const endLabel = range.end >= currentYear ? 'current' : range.end;
     return renderAffiliationLink(school, range.start === range.end ? `${range.start}` : `${range.start}–${endLabel}`);
   };
-  if (sorted.length === 1) return format(sorted[0]);
-  return `${format(sorted[0])}<details class="affiliation-history"><summary>+${sorted.length - 1} more</summary><span>${sorted.slice(1).map(format).join(', ')}</span></details>`;
+  if (sorted.length === 1) return format(sorted[0]!);
+  return `${format(sorted[0]!)}<details class="affiliation-history"><summary>+${sorted.length - 1} more</summary><span>${sorted.slice(1).map(format).join(', ')}</span></details>`;
 }
 
 export function renderProfessorCard(prof: FilteredProfessor, context: CardContext) {
@@ -173,7 +173,7 @@ function renderSubfieldContributions(school: FilteredSchool) {
   // Bars are scaled against the largest share, not against 100%. Every area's
   // share is small (the top one is usually under 8%), so drawing each bar at its
   // literal percentage of the width leaves 26 near-identical stubs.
-  const topWeight = contributions[0].weight;
+  const topWeight = contributions[0]!.weight;
   return `<div class="school-rank-attribution"><details class="attribution-details" open><summary class="attribution-summary"><span>Subfield Share of This University's Score</span><span class="tooltip-trigger contribution-tooltip" tabindex="0" aria-label="About this university's score breakdown">ⓘ<span class="tooltip-content">${escapeHtml(SCORE_MIX_HELP)}</span></span></summary><div class="attribution-content">${contributions.map(item => {
     const percentage = item.weight / totalWeight * 100;
     return `<div class="contribution-item"><div class="contribution-info"><span class="contribution-label">${escapeHtml(areaLabels[item.area] || item.area)}</span><span class="contribution-value">${item.value.toFixed(1)} adjusted (${percentage.toFixed(1)}%)</span></div><div class="contribution-bar-container"><div class="contribution-bar" style="width: ${(item.weight / topWeight * 100).toFixed(1)}%;"></div></div></div>`;

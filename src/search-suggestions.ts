@@ -30,7 +30,7 @@ export function createSearchSuggestionBox({ input, listbox, getContext, onSelect
       const aliasesBySchool = new Map<string, string[]>();
       Object.entries(schoolAliases).forEach(([alias, school]) => {
         if (!aliasesBySchool.has(school)) aliasesBySchool.set(school, []);
-        aliasesBySchool.get(school).push(alias);
+        aliasesBySchool.get(school)!.push(alias);
       });
 
       const schools = rankSuggestions(Object.values(appData.schools).map(school => ({

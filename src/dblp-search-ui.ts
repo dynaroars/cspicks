@@ -23,14 +23,16 @@ export function createDblpAuthorSearch(getContext: () => { appData: FilteredData
       const checked = await Promise.all(candidates.map(async author => {
         try {
           const stats = await fetchAuthorStats(author.pid, startYear, endYear, confSet);
-          return stats?.totalAdjusted > 0 ? { ...author, stats } : null;
+          return (stats?.totalAdjusted || 0) > 0 ? { ...author, stats: { ...stats, totalAdjusted: stats!.totalAdjusted! } } : null;
         } catch {
           return null;
         }
       }));
       if (requestSequence !== sequence) return;
 
-      const authors = checked.filter(Boolean).sort((a, b) => b.stats.totalAdjusted - a.stats.totalAdjusted);
+      const authors = checked
+        .filter((author): author is NonNullable<typeof author> => author !== null)
+        .sort((a, b) => b.stats.totalAdjusted - a.stats.totalAdjusted);
       if (!authors.length) {
         container.innerHTML = '';
         return;
@@ -40,7 +42,7 @@ export function createDblpAuthorSearch(getContext: () => { appData: FilteredData
         <div class="section-header dblp-section-header"><h3>Other Authors (DBLP)</h3></div>
         <div class="compact-list dblp-compact-list">
           ${authors.map(author => {
-            const areas = Object.entries(author.stats.areas).sort(([, a], [, b]) => b.adjusted - a.adjusted);
+            const areas = Object.entries(author.stats.areas || {}).sort(([, a], [, b]) => b.adjusted - a.adjusted);
             const pid = String(author.pid).split('/').map(encodeURIComponent).join('/');
             const url = safeExternalUrl(`https://dblp.org/pid/${pid}.html`);
             return `<div class="card collapsed compact-card">

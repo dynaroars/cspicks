@@ -50,7 +50,7 @@ onThemeChange(() => {
 
 export function splitComparisonQuery(value: string) {
   const match = value.match(/^(.*\s+(?:vs\.?|versus)\s+)(.*)$/i);
-  return match ? { prefix: match[1], term: match[2] } : { prefix: '', term: value };
+  return match ? { prefix: match[1]!, term: match[2]! } : { prefix: '', term: value };
 }
 
 export function parseComparisonQuery(query: string) {

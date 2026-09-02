@@ -182,23 +182,24 @@ export function createFilterBar(mount: string | Element, {
 
   // A link's parameters win; otherwise the reader's last choices apply.
   const stored = readStoredFilters();
-  if (persisted.years && Number.isFinite(stored.startYear)) state.startYear = stored.startYear;
-  if (persisted.years && Number.isFinite(stored.endYear)) state.endYear = stored.endYear;
+  if (persisted.years && Number.isFinite(stored.startYear)) state.startYear = stored.startYear!;
+  if (persisted.years && Number.isFinite(stored.endYear)) state.endYear = stored.endYear!;
   if (persisted.confSet && stored.confSet) state.confSet = normalizeConferenceSet(stored.confSet);
   if (persisted.rankings && typeof stored.rankings === 'boolean') state.rankings = stored.rankings;
   if (persisted.history && typeof stored.historical === 'boolean') state.historical = stored.historical;
   if (persisted.percapita && typeof stored.perCapita === 'boolean') state.perCapita = stored.perCapita;
 
-  if (params.has('region') && REGION_IDS.has(params.get('region'))) state.region = params.get('region');
+  const regionParam = params.get('region');
+  if (regionParam && REGION_IDS.has(regionParam)) state.region = regionParam;
   if (params.has('start')) {
-    const startYear = Number.parseInt(params.get('start'), 10);
+    const startYear = Number.parseInt(params.get('start')!, 10);
     if (Number.isFinite(startYear)) state.startYear = startYear;
   }
   if (params.has('end')) {
-    const endYear = Number.parseInt(params.get('end'), 10);
+    const endYear = Number.parseInt(params.get('end')!, 10);
     if (Number.isFinite(endYear)) state.endYear = endYear;
   }
-  if (params.has('confSet')) state.confSet = normalizeConferenceSet(params.get('confSet'));
+  if (params.has('confSet')) state.confSet = normalizeConferenceSet(params.get('confSet')!);
   if (params.has('rankings')) state.rankings = params.get('rankings') === 'true';
   if (params.has('historical')) state.historical = params.get('historical') === 'true';
   if (params.has('percapita')) state.perCapita = params.get('percapita') === 'true';
