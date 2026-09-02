@@ -191,3 +191,9 @@ grant sorting/submission dictionaries, and per-capita rank callbacks. This clear
 `noImplicitAny` diagnostics from `shared`, `dblp-cache`, `dblp-search-ui`, `grants-data`, the
 grants submission controller, and `metrics/per-capita`, reducing the total from 366 to 296.
 All normal verification gates pass. Resume with `data.ts`, then the remaining metrics modules.
+
+Checkpoint 2026-09-02 (`noImplicitAny` data pass): fully typed `data.ts` loading, honor/alias
+maps, affiliation resolution, publication aggregation, school scoring, and generic competition
+ranking. Added runtime narrowing for the fetched school-alias JSON. `data.ts` now has zero
+`noImplicitAny` diagnostics and the repository total is 232. All normal verification gates pass.
+Resume with the remaining metrics modules, led by `metrics/discoveries.ts`.

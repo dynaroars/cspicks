@@ -4,6 +4,8 @@ import { schoolAliases } from './data/institution-aliases.js';
 import { getConferenceAreaMap, numAreas, publicationMatchesConferenceSet, topLevelAreas } from './data/conference-sets.js';
 import type {
   AffiliationHistory,
+  AffiliationSegment,
+  AreaStats,
   CsrankingsFacultyRow,
   CountryRow,
   DblpAliasRow,
@@ -45,10 +47,10 @@ export function loadData(): Promise<RawData> {
   return dataPromise;
 }
 
-async function loadDataFromSources() {
+async function loadDataFromSources(): Promise<RawData> {
   const optionalCsv = <T>(url: string): Promise<T[]> => fetchCsv<T>(url).catch(error => {
     console.warn(`Optional CSRankings metadata unavailable: ${url}`, error);
-    return [];
+    return [] as T[];
   });
   const [csrankings, authorInfo, institutions, turingWinners, acmFellows, countries, dblpAliases, nameChanges] = await Promise.all([
     fetchCsv<CsrankingsFacultyRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv'),
@@ -72,7 +74,7 @@ async function loadDataFromSources() {
   // collide with someone else in the roster. Strip it and retry, but only
   // when exactly one roster entry shares that base name — an award can't be
   // safely credited to either of two people with the same name.
-  const rosterNamesByBase = new Map();
+  const rosterNamesByBase = new Map<string, Set<string>>();
   csrankings.forEach(row => {
     if (!row.name) return;
     const name = row.name.trim();
@@ -80,7 +82,7 @@ async function loadDataFromSources() {
     if (!rosterNamesByBase.has(base)) rosterNamesByBase.set(base, new Set());
     rosterNamesByBase.get(base).add(name);
   });
-  const lookupHonor = (honorMap, name) => {
+  const lookupHonor = (honorMap: Map<string | undefined, number>, name: string) => {
     if (honorMap.has(name)) return honorMap.get(name);
     const base = name.replace(/\s+\d{4}$/, '');
     if (base === name || !honorMap.has(base)) return null;
@@ -163,7 +165,7 @@ async function loadDataFromSources() {
     }
   });
 
-  const attachAlias = (alias, canonical) => {
+  const attachAlias = (alias?: string, canonical?: string) => {
     const professor = professors[canonical?.trim()];
     const normalizedAlias = alias?.trim();
     if (professor && normalizedAlias && normalizedAlias !== professor.name && !professor.aliases.includes(normalizedAlias)) {
@@ -188,10 +190,18 @@ async function loadDataFromSources() {
   return { professors, schools };
 }
 
-async function fetchJson(url) {
+async function fetchJson(url: string): Promise<unknown> {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Failed to fetch JSON (${response.status}) from ${url}`);
   return response.json();
+}
+
+function parseSchoolAliasMap(value: unknown): SchoolAliasMap {
+  if (!value || typeof value !== 'object' || Array.isArray(value)
+    || !Object.values(value).every(alias => typeof alias === 'string')) {
+    throw new Error('Invalid school alias dataset');
+  }
+  return value as SchoolAliasMap;
 }
 
 export function loadAffiliationData() {
@@ -199,11 +209,11 @@ export function loadAffiliationData() {
     affiliationDataPromise = Promise.all([
       fetchJson(`${GITHUB_RAW}/professor_history_openalex.json`),
       fetchJson(`${GITHUB_RAW}/school-aliases.json`),
-      fetchCsv(`${GITHUB_RAW}/manual_affiliations.csv`)
+      fetchCsv<ManualAffiliationRow>(`${GITHUB_RAW}/manual_affiliations.csv`)
     ])
       .then(([history, aliases, manual]) => ({
         historyMap: mergeAffiliationHistory(decodeAffiliationHistory(history), manual),
-        aliasMap: aliases || {}
+        aliasMap: parseSchoolAliasMap(aliases)
       }))
       .catch(error => {
         affiliationDataPromise = null;
@@ -229,13 +239,18 @@ export function loadAffiliationData() {
 // the benefit of the doubt and is used as-is.
 const IMPLAUSIBLE_HISTORY_INSTITUTION_COUNT = 8;
 
-function isImplausibleHistory(history, currentAffiliation, aliasMap) {
+function isImplausibleHistory(history: AffiliationSegment[], currentAffiliation: string, aliasMap: SchoolAliasMap | null) {
   const resolved = new Set(history.map(segment =>
     Object.prototype.hasOwnProperty.call(aliasMap || {}, segment.school) ? aliasMap[segment.school] : segment.school));
   return resolved.size >= IMPLAUSIBLE_HISTORY_INSTITUTION_COUNT && !resolved.has(currentAffiliation);
 }
 
-export function getPublicationSchools(professor, publication, historyMap = null, aliasMap = null) {
+export function getPublicationSchools(
+  professor: Professor,
+  publication: Publication,
+  historyMap: AffiliationHistory | null = null,
+  aliasMap: SchoolAliasMap | null = null
+) {
   const fallback = [professor.affiliation];
   const history = historyMap?.[professor.name];
 
@@ -262,8 +277,8 @@ export function getPublicationSchools(professor, publication, historyMap = null,
 }
 
 
-function makeRegionTest(schools, region) {
-  return schoolName => {
+function makeRegionTest(schools: Record<string, School>, region: string) {
+  return (schoolName: string) => {
     const school = schools[schoolName];
     if (!school) return region === 'world';
     if (region === 'world') return true;
@@ -314,8 +329,8 @@ function collectFilteredData(
       pub.year >= startYear && pub.year <= endYear && publicationMatchesConferenceSet(pub, confSet));
     if (inRange.length === 0) continue;
 
-    const areaStats = {};
-    const credited = [];
+    const areaStats: Record<string, AreaStats> = {};
+    const credited: Publication[] = [];
 
     inRange.forEach(pub => {
       const pubSchools = getPublicationSchools(prof, pub, historyMap, aliasMap).filter(isInRegion);
@@ -376,7 +391,7 @@ function collectFilteredData(
  * hypothetical score — the fragility analysis, the simulator — uses this exact
  * formula rather than a second copy that could drift from it.
  */
-export function scoreFromAreaCounts(areaAdjustedCounts) {
+export function scoreFromAreaCounts(areaAdjustedCounts: Record<string, number>) {
   return Math.round(10.0 * geometricMeanScore(areaAdjustedCounts)) / 10.0;
 }
 
@@ -386,14 +401,14 @@ export function scoreFromAreaCounts(areaAdjustedCounts) {
  * scores — which departure costs a department the most — must compare these,
  * and round only the value it reports.
  */
-export function geometricMeanScore(areaAdjustedCounts) {
+export function geometricMeanScore(areaAdjustedCounts: Record<string, number>) {
   const product = topLevelAreas.reduce((score, area) =>
     score * ((areaAdjustedCounts?.[area] || 0) + 1.0), 1.0);
   return Math.pow(product, 1 / numAreas);
 }
 
 // Stage 2: CSRankings' geometric mean over every top-level area.
-function scoreSchools(schoolList) {
+function scoreSchools(schoolList: FilteredSchool[]) {
   schoolList.forEach(school => {
     school.score = scoreFromAreaCounts(school.areaAdjustedCounts);
   });
@@ -404,11 +419,11 @@ function scoreSchools(schoolList) {
  * Standard competition ranking: equal values share a rank and the next value
  * skips ahead, so ties never invent an ordering the data does not support.
  */
-export function assignCompetitionRanks(items, valueOf) {
+export function assignCompetitionRanks<T>(items: T[], valueOf: (item: T) => number): Array<T & { rank: number }> {
   const ordered = [...items].sort((a, b) => valueOf(b) - valueOf(a));
   let rank = 0;
   let ties = 1;
-  let previousValue = null;
+  let previousValue: number | null = null;
   ordered.forEach(item => {
     const value = valueOf(item);
     if (value !== previousValue) {
@@ -417,13 +432,13 @@ export function assignCompetitionRanks(items, valueOf) {
     } else {
       ties++;
     }
-    item.rank = rank;
+    (item as T & { rank: number }).rank = rank;
     previousValue = value;
   });
-  return ordered;
+  return ordered as Array<T & { rank: number }>;
 }
 
-function rankSchools(schoolList) {
+function rankSchools(schoolList: FilteredSchool[]) {
   schoolList.sort((a, b) => b.score - a.score || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
 
   let rank = 0;
@@ -441,12 +456,12 @@ function rankSchools(schoolList) {
   });
 
   topLevelAreas.forEach(area => {
-    const areaValue = school => school.areas[area]?.adjusted || 0;
+    const areaValue = (school: FilteredSchool) => school.areas[area]?.adjusted || 0;
     const ranked = schoolList.filter(school => areaValue(school) > 0)
       .sort((a, b) => areaValue(b) - areaValue(a));
 
     let areaRank = 0;
-    let previousValue = null;
+    let previousValue: number | null = null;
     ranked.forEach((school, index) => {
       const value = areaValue(school);
       if (value !== previousValue) areaRank = index + 1;
@@ -462,7 +477,15 @@ function rankSchools(schoolList) {
  * (optionally re-crediting them to historical affiliations), then aggregate and
  * rank schools. Returns `{ professors, schools }` keyed by name.
  */
-export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DEFAULT_END_YEAR, region = 'us', historyMap = null, aliasMap = null, confSet = 'all-union') {
+export function filterByYears(
+  data: RawData,
+  startYear = DEFAULT_START_YEAR,
+  endYear = DEFAULT_END_YEAR,
+  region = 'us',
+  historyMap: AffiliationHistory | null = null,
+  aliasMap: SchoolAliasMap | null = null,
+  confSet = 'all-union'
+): FilteredData {
   const history = historyMap && Object.keys(historyMap).length > 0 ? historyMap : null;
   const isInRegion = makeRegionTest(data.schools, region);
   const { filteredProfs, filteredSchools } = collectFilteredData(
@@ -503,7 +526,7 @@ export async function fetchCsv<T = Record<string, string>>(url: string): Promise
 
 // Discards 1-year affiliations if the professor has a longer (2+ year)
 // overlapping affiliation during that same period.
-function filterSabbaticals(affiliations) {
+function filterSabbaticals(affiliations: AffiliationSegment[]) {
   if (!affiliations || affiliations.length <= 1) return affiliations;
 
   return affiliations.filter(aff => {
@@ -521,10 +544,13 @@ function filterSabbaticals(affiliations) {
   });
 }
 
-export function mergeAffiliationHistory(historyMap, manualList) {
+export function mergeAffiliationHistory(
+  historyMap: AffiliationHistory | null,
+  manualList: ManualAffiliationRow[]
+): AffiliationHistory {
   if (!historyMap) historyMap = {};
 
-  const filtered = {};
+  const filtered: AffiliationHistory = {};
   for (const name in historyMap) {
     filtered[name] = filterSabbaticals(historyMap[name]);
   }
@@ -534,7 +560,7 @@ export function mergeAffiliationHistory(historyMap, manualList) {
   const merged = { ...filtered };
 
   // Group manual entries by name
-  const manualGroups = {};
+  const manualGroups: AffiliationHistory = {};
   manualList.forEach(item => {
     if (!item.name || !item.school) return;
     const name = item.name.trim();
