@@ -78,7 +78,7 @@ function extendInfiniteLists() {
   const sentinel = document.createElement('div');
   sentinel.className = 'list-sentinel';
   longest.container.appendChild(sentinel);
-  infiniteObserver.observe(sentinel);
+  infiniteObserver?.observe(sentinel);
 }
 
 export function renderInfiniteLists(columns: Array<Omit<InfiniteColumn, 'rendered'>>) {
@@ -86,8 +86,9 @@ export function renderInfiniteLists(columns: Array<Omit<InfiniteColumn, 'rendere
   infiniteColumns = columns.map(column => ({ ...column, rendered: 0 }));
   infiniteColumns.forEach(column => { column.container.innerHTML = ''; });
   infiniteObserver = new IntersectionObserver(entries => {
-    if (!entries[0].isIntersecting) return;
-    infiniteObserver.unobserve(entries[0].target);
+    const entry = entries[0];
+    if (!entry?.isIntersecting) return;
+    infiniteObserver?.unobserve(entry.target);
     extendInfiniteLists();
   }, { rootMargin: '600px' });
   extendInfiniteLists();
@@ -136,6 +137,7 @@ export function searchAreaPeople(query: string) {
         const count = confPubs.reduce((sum, pub) => sum + pub.count, 0);
         const adjusted = confPubs.reduce((sum, pub) => sum + pub.adjustedcount, 0);
         const parentArea = getConferenceAreaMap(ctx.filters.confSet)[confKey];
+        if (!parentArea) return null;
         return {
           ...p,
           pubs: confPubs,
@@ -212,18 +214,18 @@ export function searchProfessorByAffiliation(name: string, affiliation: string) 
       return b.totalAdjusted - a.totalAdjusted;
     });
 
-  const container = document.getElementById('prof-results');
+  const container = byId('prof-results');
   container.classList.toggle('single-result', results.length === 1);
   container.innerHTML = results
     .slice(0, 50)
     .map(prof => ctx.renderProfessorCard(prof))
     .join('');
 
-  document.getElementById('conference-results').innerHTML = '';
-  document.getElementById('school-results').innerHTML = '';
-  document.getElementById('area-people-results').innerHTML = '';
-  document.getElementById('dblp-results').innerHTML = '';
-  document.getElementById('search-context-header').style.display = 'none';
+  byId('conference-results').innerHTML = '';
+  byId('school-results').innerHTML = '';
+  byId('area-people-results').innerHTML = '';
+  byId('dblp-results').innerHTML = '';
+  byId('search-context-header').style.display = 'none';
 
   const selectedProfessor = results.find(professor => professor.name === name)
     || (results.length === 1 ? results[0] : null);
@@ -251,7 +253,7 @@ export function searchProfessors(query: string) {
     })
     .sort((a, b) => b.totalAdjusted - a.totalAdjusted);
 
-  const container = document.getElementById('prof-results');
+  const container = byId('prof-results');
   container.classList.toggle('single-result', results.length === 1);
   container.innerHTML = '';
 
@@ -280,8 +282,9 @@ export function searchProfessors(query: string) {
   };
 
   profObserver = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      profObserver.unobserve(entries[0].target);
+    const entry = entries[0];
+    if (entry?.isIntersecting) {
+      profObserver?.unobserve(entry.target);
       renderChunk();
     }
   }, { rootMargin: '400px' });
@@ -314,16 +317,16 @@ export function searchSchools(query: string) {
   const confKeyMatch = findMatchingConference(query);
   const matchedArea = findMatchingArea(effectiveQuery);
 
-  let results;
+  let results: FilteredSchool[];
 
-  document.getElementById('conference-results').innerHTML = '';
-  const header = document.getElementById('search-context-header');
+  byId('conference-results').innerHTML = '';
+  const header = byId('search-context-header');
 
   if (confKeyMatch) {
     header.textContent = getConferenceFullLabel(confKeyMatch);
     header.style.display = 'block';
   } else if (matchedArea) {
-    header.textContent = areaLabels[matchedArea];
+    header.textContent = areaLabels[matchedArea] || matchedArea;
     header.style.display = 'block';
   } else {
     header.style.display = 'none';
@@ -345,16 +348,15 @@ export function searchSchools(query: string) {
         ).filter(schoolName => ctx.appData.schools[schoolName]);
 
         publicationSchools.forEach(schoolName => {
-          if (!schoolStats[schoolName]) {
-            schoolStats[schoolName] = { adjusted: 0, count: 0, faculty: [], facultyStats: {} };
+          const stats = schoolStats[schoolName]
+            || (schoolStats[schoolName] = { adjusted: 0, count: 0, faculty: [], facultyStats: {} });
+          stats.adjusted += pub.adjustedcount;
+          stats.count += pub.count;
+          if (!stats.faculty.includes(profName)) {
+            stats.faculty.push(profName);
           }
-          schoolStats[schoolName].adjusted += pub.adjustedcount;
-          schoolStats[schoolName].count += pub.count;
-          if (!schoolStats[schoolName].faculty.includes(profName)) {
-            schoolStats[schoolName].faculty.push(profName);
-          }
-          const facultyStats = schoolStats[schoolName].facultyStats[profName]
-            || (schoolStats[schoolName].facultyStats[profName] = { count: 0, adjusted: 0 });
+          const facultyStats = stats.facultyStats[profName]
+            || (stats.facultyStats[profName] = { count: 0, adjusted: 0 });
           facultyStats.count += pub.count;
           facultyStats.adjusted += pub.adjustedcount;
         });
@@ -380,8 +382,8 @@ export function searchSchools(query: string) {
           totalAdjusted: stats.adjusted
         };
       })
-      .filter(s => s)
-      .sort((a, b) => b.areas[confKeyMatch].adjusted - a.areas[confKeyMatch].adjusted);
+      .filter((school): school is FilteredSchool => Boolean(school))
+      .sort((a, b) => b.areas[confKeyMatch]!.adjusted - a.areas[confKeyMatch]!.adjusted);
 
   } else if (matchedArea) {
     // Area Search Mode
@@ -406,11 +408,11 @@ export function searchSchools(query: string) {
       .sort((a, b) => {
         const rankA = Number.isFinite(a.rank) ? a.rank : Infinity;
         const rankB = Number.isFinite(b.rank) ? b.rank : Infinity;
-        return rankA - rankB || a.name.localeCompare(b.name);
+        return (rankA ?? Infinity) - (rankB ?? Infinity) || a.name.localeCompare(b.name);
       });
   }
 
-  const container = document.getElementById('school-results');
+  const container = byId('school-results');
   container.classList.toggle('single-result', results.length === 1);
   const filterKey = confKeyMatch || matchedArea;
   // Area views rank by that area; conference views have no stored rank, so the
@@ -447,18 +449,18 @@ export function showDefaultRankings() {
     ? calculatePerCapita(ctx.appData).map(row => ({ ...row.school, perCapitaRank: row.rank, perCapita: row.perCapita }))
     : Object.values(ctx.appData.schools)
       .filter(school => school.name && Number.isFinite(school.rank))
-      .sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name));
+      .sort((a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.name.localeCompare(b.name));
   const professors = Object.values(ctx.appData.professors)
     .sort((a, b) => b.totalAdjusted - a.totalAdjusted || a.name.localeCompare(b.name));
 
-  document.getElementById('prof-results').classList.remove('single-result');
-  document.getElementById('school-results').classList.remove('single-result');
+  byId('prof-results').classList.remove('single-result');
+  byId('school-results').classList.remove('single-result');
   // No headings or ordinals here: the two columns and their order say enough.
   renderInfiniteLists([
-    { container: document.getElementById('school-results'), items: schools, renderItem: school => ctx.renderSchoolCard(school, null, { compactNames: true, ...(perCapita ? { rankOverride: school.perCapitaRank } : {}) }) },
-    { container: document.getElementById('prof-results'), items: professors, renderItem: professor => ctx.renderProfessorCard(professor, { compactNames: true }) }
+    { container: byId('school-results'), items: schools, renderItem: school => ctx.renderSchoolCard(school, null, { compactNames: true, ...(perCapita ? { rankOverride: school.perCapitaRank } : {}) }) },
+    { container: byId('prof-results'), items: professors, renderItem: professor => ctx.renderProfessorCard(professor, { compactNames: true }) }
   ]);
   document.querySelectorAll('#conference-results, #area-people-results, #dblp-results')
     .forEach(container => { container.innerHTML = ''; });
-  document.getElementById('search-context-header').style.display = 'none';
+  byId('search-context-header').style.display = 'none';
 }

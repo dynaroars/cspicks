@@ -38,10 +38,10 @@ interface SearchExample {
   title?: string;
 }
 
-function getCardContext() {
+function getCardContext(): CardContext & { confSet: string } {
   return {
     appData,
-    rawData,
+    rawData: rawData!,
     historyMap: filters.historyMap,
     aliasMap: filters.aliasMap,
     historicalMode: filters.historical,
@@ -127,7 +127,7 @@ async function init() {
       });
 
     if (isDiscoveries) {
-      discoveriesApi = await discoveriesModulePromise;
+      discoveriesApi = await discoveriesModulePromise!;
       discoveriesApi.setupCardSharing(filters);
       const [loadedData, loadedNsfData, loadedSchedule] = await Promise.all([loadData(), discoveriesApi.fetchDiscoveriesNsfData(), schedulePromise]);
       rawData = loadedData;
@@ -150,14 +150,15 @@ async function init() {
     searchInput.disabled = false;
 
     if (params.has('q')) {
-      searchInput.value = params.get('q');
+      const initialQuery = params.get('q') || '';
+      searchInput.value = initialQuery;
       document.body.classList.add('has-search-query');
-      const comparing = runQuery(params.get('q'));
+      const comparing = runQuery(initialQuery);
       const linkedTargetName = params.get('target');
       const linkedTargetType = params.get('targetType');
-      const linkedTargetExists = linkedTargetType === 'school'
-        ? Boolean(rawData.schools[linkedTargetName])
-        : linkedTargetType === 'researcher' && Boolean(rawData.professors[linkedTargetName]);
+      const linkedTargetExists = Boolean(linkedTargetName) && (linkedTargetType === 'school'
+        ? Boolean(rawData.schools[linkedTargetName!])
+        : linkedTargetType === 'researcher' && Boolean(rawData.professors[linkedTargetName!]));
       if (linkedTargetExists && !comparing && linkedTargetName) {
         if (linkedTargetType === 'school' || linkedTargetType === 'researcher') {
           displayIntegratedAnalysis({ type: linkedTargetType, name: linkedTargetName });
@@ -166,13 +167,13 @@ async function init() {
       // A shared link's title/description have to be right on first paint,
       // not only after the next interaction - updateURL() is what normally
       // triggers this, but nothing here calls it (the URL is already correct).
-      updateSeoForCurrentView(params.get('q'));
+      updateSeoForCurrentView(initialQuery);
     } else {
       showLandingState();
       // Only meaningful right after the initial render - a card's #fragment
       // link should land on that card once, not re-scroll on every later
       // filter change that re-renders the grid.
-      if (isDiscoveries) discoveriesApi.scrollToHashDiscovery();
+      if (isDiscoveries) discoveriesApi?.scrollToHashDiscovery();
     }
 
     searchInput.focus();
@@ -193,7 +194,7 @@ function saveExpandedCards() {
       const header = card.querySelector('.card-header h2, .card-header h3');
       if (header) {
         const fullText = header.textContent.trim();
-        const nameOnly = fullText.split('#')[0].trim();
+        const nameOnly = (fullText.split('#')[0] || '').trim();
         expandedCards.add(nameOnly);
       }
     }
@@ -211,7 +212,7 @@ function restoreExpandedCards(expandedCards: Set<string>) {
       shouldExpand = true;
     } else if (header) {
       const fullText = header.textContent.trim();
-      const nameOnly = fullText.split('#')[0].trim();
+      const nameOnly = (fullText.split('#')[0] || '').trim();
       if (expandedCards.has(nameOnly)) {
         shouldExpand = true;
       }
@@ -262,7 +263,7 @@ function updateSeoForCurrentView(query: string | null | undefined) {
       title: `${trimmed} - ${SITE_NAME}`,
       description: `Head-to-head comparison: ${trimmed}. Publication trends, research strengths, and rank breakdowns on CS Picks.`
     });
-    trackComparison(activeComparisonType(), page);
+    trackComparison(activeComparisonType() || 'unknown', page);
     return;
   }
   if (selectedAnalysisTarget) {
@@ -290,8 +291,8 @@ function showLandingState() {
     displayIntegratedAnalysis(null);
     hideComparison();
     clearSearchSections();
-    document.getElementById('discovery-stats').hidden = false;
-    discoveriesApi.renderDiscoveries(rawData, filters, nsfData);
+    document.getElementById('discovery-stats')!.hidden = false;
+    if (discoveriesApi && rawData && nsfData) discoveriesApi.renderDiscoveries(rawData, filters, nsfData);
   } else {
     showDefaultRankings();
   }
@@ -301,7 +302,7 @@ function showLandingState() {
 // the Discoveries landing grid the same way it replaces Search's default
 // rankings - this just also needs to hide the card grid first.
 function hideDiscoveryCards() {
-  if (isDiscoveries) document.getElementById('discovery-stats').hidden = true;
+  if (isDiscoveries) document.getElementById('discovery-stats')!.hidden = true;
 }
 
 function refreshData() {
@@ -330,6 +331,7 @@ function refreshData() {
 }
 
 function updatePriorData() {
+  if (!rawData) return;
   priorAppData = buildPriorPeriodData(
     rawData,
     filters.startYear,
@@ -348,7 +350,7 @@ function setupSearch() {
   const mainSearch = document.querySelector<HTMLInputElement>('#main-search')!;
   const suggestionBox = createSearchSuggestionBox({
     input: mainSearch,
-    listbox: document.getElementById('universal-suggestions'),
+    listbox: document.getElementById('universal-suggestions')!,
     getContext: () => ({ appData: rawData ? appData : null, confSet: filters.confSet }),
     onSelect: (item, comparePrefix) => {
       mainSearch.value = `${comparePrefix}${item.label}`;
@@ -361,11 +363,11 @@ function setupSearch() {
       }
 
       hideDiscoveryCards();
-      const query = item.value.toLowerCase();
+      const query = (item.value || item.label).toLowerCase();
       searchProfessors(query);
       searchSchools(query);
       searchAreaPeople(query);
-      document.getElementById('dblp-results').innerHTML = '';
+      document.getElementById('dblp-results')!.innerHTML = '';
       displayIntegratedAnalysis(item.target || null);
       updateURL();
     }
@@ -373,7 +375,7 @@ function setupSearch() {
 
   let debounceTimer: ReturnType<typeof setTimeout> | undefined;
   mainSearch.addEventListener('input', event => {
-    clearTimeout(debounceTimer);
+    if (debounceTimer) clearTimeout(debounceTimer);
     const rawQuery = (event.currentTarget as HTMLInputElement).value;
 
     displayIntegratedAnalysis(null);
@@ -397,8 +399,9 @@ function setupSearch() {
       ? event.target.closest<HTMLElement>('[data-search-example]')
       : null;
     if (exampleButton) {
-      clearTimeout(debounceTimer);
+      if (debounceTimer) clearTimeout(debounceTimer);
       const query = exampleButton.dataset.searchExample;
+      if (!query) return;
       mainSearch.value = query;
       document.body.classList.add('has-search-query');
       displayIntegratedAnalysis(null);
@@ -416,9 +419,11 @@ function setupSearch() {
     const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
     const searchAction = target.closest<HTMLElement>('[data-action="search-query"]');
-    if (searchAction) setSearchQuery(searchAction.dataset.query);
+    if (searchAction?.dataset.query) setSearchQuery(searchAction.dataset.query);
     const professorAction = target.closest<HTMLElement>('[data-action="professor-at-school"]');
-    if (professorAction) searchProfessorByAffiliation(professorAction.dataset.professorName, professorAction.dataset.affiliation);
+    if (professorAction?.dataset.professorName && professorAction.dataset.affiliation) {
+      searchProfessorByAffiliation(professorAction.dataset.professorName, professorAction.dataset.affiliation);
+    }
     const cardAction = target.closest<HTMLElement>('[data-action="open-target"]');
     if (cardAction) {
       cardAction.closest('.card')?.classList.toggle('collapsed');
@@ -444,7 +449,7 @@ function sample<T>(items: T[], count: number): T[] {
   const available = [...items];
   for (let index = available.length - 1; index > 0; index--) {
     const swapIndex = Math.floor(Math.random() * (index + 1));
-    [available[index], available[swapIndex]] = [available[swapIndex], available[index]];
+    [available[index], available[swapIndex]] = [available[swapIndex]!, available[index]!];
   }
   return available.slice(0, count);
 }
@@ -503,13 +508,13 @@ function deadlineExampleItems(query: string) {
   const deadlines = groups.map(group => {
     const deadline = group
       .map(conference => ({ conference, instant: aoeDeadline(conference.deadline) }))
-      .filter(item => item.instant !== null && item.instant >= Date.now())
+      .filter((item): item is { conference: ConferenceRecord, instant: number } => item.instant !== null && item.instant >= Date.now())
       .sort((a, b) => a.instant - b.instant)[0];
     return deadline ? { group, deadline } : null;
-  }).filter(Boolean);
+  }).filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   return sample(deadlines, 2).map(({ group, deadline }) => {
-    const name = group[0].name;
+    const name = group[0]!.name;
     const label = `${name} deadline ${formatCalendarDate(deadline.conference.deadline)}`;
     const targetQuery = areaQuery ? (areaLabels[areaQuery] || areaQuery) : name;
     return {
@@ -591,7 +596,7 @@ function resolveAnalysisTarget(query: string): AnalysisTarget | null {
       || (professor.aliases || []).some(alias => alias.toLowerCase() === normalized || cleanName(alias).toLowerCase() === normalized)
   );
   return exactResearchers.length === 1
-    ? { type: 'researcher', name: exactResearchers[0].name }
+    ? { type: 'researcher', name: exactResearchers[0]!.name }
     : null;
 }
 
@@ -632,7 +637,7 @@ function runQuery(query: string, { includeDblp = true }: { includeDblp?: boolean
   searchSchools(normalized);
   searchAreaPeople(normalized);
   if (includeDblp) searchDBLPAuthors(normalized);
-  else document.getElementById('dblp-results').innerHTML = '';
+  else document.getElementById('dblp-results')!.innerHTML = '';
   updateIntegratedAnalysis(normalized);
   return false;
 }
@@ -647,7 +652,7 @@ function showIntegratedAnalysis(type: AnalysisTarget['type'], name: string) {
   searchProfessors(query);
   searchSchools(query);
   searchAreaPeople(query);
-  document.getElementById('dblp-results').innerHTML = '';
+  document.getElementById('dblp-results')!.innerHTML = '';
   displayIntegratedAnalysis({ type, name });
   updateURL();
 }

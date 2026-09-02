@@ -287,3 +287,10 @@ from `simulator.ts`. Required page elements now use the controller's typed DOM b
 dynamic school/profile/list selections are checked before use and nullable timers are cleared
 safely. The repository total is 348. All normal verification gates pass (8 test files,
 88 bundled modules). Resume with the search pipeline (`search-results.ts` and `main.ts`).
+
+Checkpoint 2026-09-02 (`strictNullChecks` search pass): cleared all null-safety diagnostics from
+the main controller and search-results pipeline. Required result containers use typed DOM
+boundaries; optional URL, suggestion, discovery-module, observer, rank, dataset, and conference
+deadline values are narrowed before use. The repository total is 274. All normal verification
+gates pass (8 test files, 88 bundled modules). Resume with conference schedule/submission pages,
+then funding and grants.
