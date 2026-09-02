@@ -7,7 +7,7 @@ import { getConferenceSet, getTargetName } from '../analysis.js';
 import { isPubAtSchool } from './area-trends.js';
 
 export function renderFacultyTrends() {
-    const canvas = document.getElementById('diversityChart');
+    const canvas = document.querySelector<HTMLCanvasElement>('#diversityChart');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -31,7 +31,7 @@ export function renderFacultyTrends() {
         const wEnd = y;
 
         // Count distinct areas per author in this window
-        const authorAreas = {};
+        const authorAreas: Record<string, Set<string>> = {};
 
         Object.values(state.rawData.professors).forEach(prof => {
             prof.pubs.forEach(pub => {

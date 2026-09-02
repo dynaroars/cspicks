@@ -10,7 +10,7 @@ export function setupConferenceFilterButtons() {
 
     if (selectAllBtn) {
         selectAllBtn.addEventListener('click', () => {
-            document.querySelectorAll('#conf-trends-view input[type="checkbox"]:not(:disabled)').forEach(cb => {
+            document.querySelectorAll<HTMLInputElement>('#conf-trends-view input[type="checkbox"]:not(:disabled)').forEach(cb => {
                 cb.checked = true;
             });
             renderConferenceTrends();
@@ -19,7 +19,7 @@ export function setupConferenceFilterButtons() {
 
     if (clearAllBtn) {
         clearAllBtn.addEventListener('click', () => {
-            document.querySelectorAll('#conf-trends-view input[type="checkbox"]').forEach(cb => {
+            document.querySelectorAll<HTMLInputElement>('#conf-trends-view input[type="checkbox"]').forEach(cb => {
                 cb.checked = false;
             });
             renderConferenceTrends();
@@ -29,7 +29,7 @@ export function setupConferenceFilterButtons() {
     // The checkbox list is rebuilt when the target, years, or conference set
     // changes, so listen on its stable parent rather than on individual inputs.
     document.getElementById('conf-checkbox-groups')?.addEventListener('change', event => {
-        if (event.target.matches('input[type="checkbox"]')) {
+        if (event.target instanceof Element && event.target.matches('input[type="checkbox"]')) {
             renderConferenceTrends();
         }
     });
@@ -38,7 +38,7 @@ export function setupConferenceFilterButtons() {
 export function publishedVenues() {
     const { startYear, endYear } = state.filters;
     const confSet = getConferenceSet();
-    const venues = new Set();
+    const venues = new Set<string>();
     Object.values(state.rawData.professors).forEach(prof => {
         prof.pubs.forEach(pub => {
             if (pub.year < startYear || pub.year > endYear) return;

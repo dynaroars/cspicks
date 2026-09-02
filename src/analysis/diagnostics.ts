@@ -4,18 +4,22 @@ import { calculateCorpusDiagnostics, calculateFragility, calculateParityReport, 
 import { renderMetricCards } from '../analysis-ui.js';
 import { state } from './state.js';
 import { CONF_SET_LABELS, getAnalysisData, getTargetName } from '../analysis.js';
+import type { RankStabilitySample } from '../metrics/stability.js';
 
 // One sweep serves every school, so it is cached per region rather than per
 // school. Historical mode changes which school a publication counts for, so it
 // is part of the key too.
-const stabilityCache = new Map();
+const stabilityCache = new Map<string, RankStabilitySample[]>();
 // A sweep takes over a second, and re-entering the tab or picking another
 // school during it would otherwise start a second identical one. In-flight
 // sweeps are shared so the later caller joins the running one.
-const stabilitySweeps = new Map();
+const stabilitySweeps = new Map<string, {
+    listeners: Set<(done: number, total: number) => void>;
+    promise: Promise<RankStabilitySample[]>;
+}>();
 let stabilityToken = 0;
 
-export function buildStabilitySweep(cacheKey, onProgress) {
+export function buildStabilitySweep(cacheKey: string, onProgress: (done: number, total: number) => void) {
     if (stabilityCache.has(cacheKey)) return Promise.resolve(stabilityCache.get(cacheKey));
     const running = stabilitySweeps.get(cacheKey);
     if (running) {
@@ -27,7 +31,7 @@ export function buildStabilitySweep(cacheKey, onProgress) {
     const { region, historyMap, aliasMap, endYear } = state.filters;
     const promise = (async () => {
         const variants = rankStabilityVariants(endYear);
-        const samples = [];
+        const samples: RankStabilitySample[] = [];
         for (const variant of variants) {
             // Each pass is ~100ms over the full dataset; yielding between them keeps
             // the page responsive instead of freezing it for a second and a half.
@@ -184,7 +188,7 @@ export function renderDataHealth() {
 
     fetchLatestRepoCommit().then(commit => {
         const updatedEl = document.getElementById('health-repo-updated');
-        const linkEl = document.getElementById('health-repo-link');
+        const linkEl = document.querySelector<HTMLAnchorElement>('#health-repo-link');
         if (updatedEl && commit?.date) {
             updatedEl.textContent = formatRelativeTime(commit.date);
         } else if (updatedEl) {

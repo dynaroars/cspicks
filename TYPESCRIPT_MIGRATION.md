@@ -127,7 +127,13 @@ helpers. Added typed filter state/controller options, conference-set normalizati
 DOM controls while retaining the existing JavaScript import specifiers. All verification gates
 pass (8 test files, 88 bundled modules).
 
-Resume with analysis helpers. Convert `main`, `simulator`, `funding`, grants entry modules, and
+Checkpoint 2026-09-02 (analysis): converted `analysis`, `analysis-ui`, and all eight modules in
+`src/analysis/`. Added shared analysis state/target contracts, metric-card inputs, typed chart
+and form DOM access, stability-sweep promises, and raw/filtered data boundaries. The conversion
+also made two missing `school-trends` data imports explicit. All verification gates pass (8 test
+files, 88 bundled modules).
+
+Resume with `discoveries`, then convert `main`, `simulator`, `funding`, grants entry modules, and
 other page controllers after their dependencies.
 
 ### Phase 4

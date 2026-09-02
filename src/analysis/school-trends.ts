@@ -5,8 +5,10 @@ import { renderInsightList, renderMetricCards } from '../analysis-ui.js';
 import { state } from './state.js';
 import { getAnalysisData, getConferenceSet, getResearcherPatterns, getTargetName, isPublicationForTarget, renderResearcherActivityMetrics } from '../analysis.js';
 import { isPubAtSchool } from './area-trends.js';
+import { filterByYears, publicationMatchesConferenceSet } from '../data.js';
+import type { FilteredData, RawData } from '../types.js';
 
-export function renderSchoolAnalysisSummary(current, prior, schoolName) {
+export function renderSchoolAnalysisSummary(current: FilteredData, prior: FilteredData, schoolName: string) {
     const container = document.getElementById('ranking-stats');
     if (!container) return;
     const school = current.schools[schoolName];
@@ -34,7 +36,7 @@ export function renderSchoolAnalysisSummary(current, prior, schoolName) {
 
 export async function renderSchoolTrends() {
     try {
-        const canvas = document.getElementById('rankingChart');
+        const canvas = document.querySelector<HTMLCanvasElement>('#rankingChart');
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
@@ -113,14 +115,14 @@ export async function renderSchoolTrends() {
         const rankPoints = [];
         const publicationPoints = [];
         const region = state.filters.region;
-        const regionLabel = state.filters.element.querySelector('#region-select')?.selectedOptions?.[0]?.textContent || 'US';
+        const regionLabel = state.filters.element.querySelector<HTMLSelectElement>('#region-select')?.selectedOptions?.[0]?.textContent || 'US';
 
         const windowSize = 10;
         const overallMinYear = startYear - (windowSize - 1);
         const overallMaxYear = endYear;
 
         // Pre-filter publications once to drastically improve loop performance
-        const preFilteredData = {
+        const preFilteredData: RawData = {
             schools: state.rawData.schools,
             professors: {}
         };

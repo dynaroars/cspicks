@@ -14,6 +14,10 @@ import { renderFacultyTrends } from './analysis/faculty-trends.js';
 import { publishedVenues, renderConferenceFilters, setupConferenceFilterButtons } from './analysis/conference-filters.js';
 import { renderSubfieldEffort } from './analysis/publishing-effort.js';
 import { renderConferenceTrends } from './analysis/conference-trends.js';
+import type { ConferenceSetId } from './data/conference-sets.js';
+import type { FilterController } from './filters.js';
+import type { Professor, Publication, RawData } from './types.js';
+import type { AnalysisTarget } from './analysis/state.js';
 
 function refreshActiveTabChart() {
     if (!state.selectedTarget) return;
@@ -31,7 +35,7 @@ onThemeChange(refreshActiveTabChart);
 
 
 // Called once by the Search page, which owns the data load and the filter bar.
-export async function initAnalysis(data, filterBar) {
+export async function initAnalysis(data: RawData, filterBar: FilterController) {
     state.rawData = data;
     state.filters = filterBar;
     try {
@@ -57,13 +61,13 @@ export async function initAnalysis(data, filterBar) {
 function updateTargetMode() {
     const researcherMode = state.selectedTarget?.type === 'researcher';
     document.body.classList.toggle('researcher-analysis', researcherMode);
-    document.querySelectorAll('[data-school-only]').forEach(tab => {
+    document.querySelectorAll<HTMLElement>('[data-school-only]').forEach(tab => {
         tab.style.display = researcherMode ? 'none' : 'inline-flex';
     });
     const activeTab = document.querySelector(`.nav-tab[data-tab="${state.currentTab}"]`);
     const incompatible = researcherMode && activeTab?.hasAttribute('data-school-only');
     if (incompatible) {
-        document.querySelector('.nav-tab[data-tab="schools"]')?.click();
+        document.querySelector<HTMLElement>('.nav-tab[data-tab="schools"]')?.click();
     }
 }
 
@@ -71,7 +75,7 @@ export function getTargetName() {
     return state.selectedTarget?.name || '';
 }
 
-export function isPublicationForTarget(prof, pub) {
+export function isPublicationForTarget(prof: Professor, pub: Publication) {
     if (!state.selectedTarget) return false;
     if (state.selectedTarget.type === 'researcher') return prof.name === state.selectedTarget.name;
     return isPubAtSchool(prof, pub, state.selectedTarget.name);
@@ -80,7 +84,7 @@ export function isPublicationForTarget(prof, pub) {
 function showTargetPrompt() {
     state.chartInstance?.destroy();
     state.chartInstance = null;
-    document.querySelectorAll('.view-section').forEach(view => { view.hidden = true; });
+    document.querySelectorAll<HTMLElement>('.view-section').forEach(view => { view.hidden = true; });
     const integratedSection = document.getElementById('integrated-analysis');
     if (integratedSection) integratedSection.hidden = true;
     const highlights = document.getElementById('researcher-highlights');
@@ -94,15 +98,16 @@ function showSelectedTarget() {
     }
     renderResearcherHighlights();
     renderConferenceFilters();
-    document.querySelector(`.nav-tab[data-tab="${state.currentTab}"]`)?.click();
+    document.querySelector<HTMLElement>(`.nav-tab[data-tab="${state.currentTab}"]`)?.click();
 }
 
-export function setAnalysisTarget(target) {
+export function setAnalysisTarget(target: Partial<AnalysisTarget> | null | undefined) {
     if (!target?.name || !target?.type) {
         state.selectedTarget = null;
         if (state.analysisReady) showTargetPrompt();
         return;
     }
+    if (target.type !== 'school' && target.type !== 'researcher') return;
     state.selectedTarget = { type: target.type, name: target.name };
     state.conferenceFilterContext = null;
     updateTargetMode();
@@ -158,16 +163,17 @@ document.addEventListener('keydown', event => {
 document.addEventListener('click', event => {
     const panel = document.getElementById('site-data-health');
     if (!panel || panel.hidden) return;
-    if (panel.contains(event.target) || event.target.closest('#data-health-toggle')) return;
+    const target = event.target instanceof Element ? event.target : null;
+    if (target && (panel.contains(target) || target.closest('#data-health-toggle'))) return;
     hideDataHealth();
 });
 
-export function getConferenceSet() {
+export function getConferenceSet(): ConferenceSetId {
     return state.filters?.confSet || 'all-union';
 }
 
 function setupTabs() {
-    document.querySelectorAll('.nav-tab').forEach(tab => {
+    document.querySelectorAll<HTMLElement>('.nav-tab').forEach(tab => {
         tab.addEventListener('click', () => {
             const scrollPosition = { left: window.scrollX, top: window.scrollY };
             // UI Toggle
@@ -175,8 +181,9 @@ function setupTabs() {
             tab.classList.add('active');
 
             // View Toggle
-            document.querySelectorAll('.view-section').forEach(view => { view.hidden = true; });
+            document.querySelectorAll<HTMLElement>('.view-section').forEach(view => { view.hidden = true; });
             const tabName = tab.dataset.tab;
+            if (!tabName) return;
             state.currentTab = tabName;
 
             if (!state.selectedTarget) {
@@ -290,7 +297,7 @@ function loadCoauthors(name) {
 }
 
 document.getElementById('researcher-highlights')?.addEventListener('click', event => {
-    if (event.target.closest('[data-action="load-coauthors"]')) loadCoauthors(getTargetName());
+    if (event.target instanceof Element && event.target.closest('[data-action="load-coauthors"]')) loadCoauthors(getTargetName());
 });
 
 function renderResearcherHighlights() {

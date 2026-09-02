@@ -1,6 +1,14 @@
 import { escapeHtml } from './shared.js';
 
-function metricLabel(label, help) {
+export interface MetricCard {
+  label: string;
+  value: string | number;
+  help?: string;
+  className?: string;
+  detail?: string;
+}
+
+function metricLabel(label: string, help?: string) {
   if (!help) return `<span>${escapeHtml(label)}</span>`;
   return `<span class="metric-label-row">
     <span class="metric-label">${escapeHtml(label)}</span>
@@ -10,7 +18,7 @@ function metricLabel(label, help) {
   </span>`;
 }
 
-export function renderMetricCards(metrics, ariaLabel = 'Statistics') {
+export function renderMetricCards(metrics: MetricCard[], ariaLabel = 'Statistics') {
   return `<div class="school-metrics analysis-school-metrics" aria-label="${escapeHtml(ariaLabel)}">
     ${metrics.map(metric => `<div class="school-metric">
       ${metricLabel(metric.label, metric.help)}
@@ -20,7 +28,7 @@ export function renderMetricCards(metrics, ariaLabel = 'Statistics') {
   </div>`;
 }
 
-export function renderInsightList(insights, title = 'Notable patterns') {
+export function renderInsightList(insights: string[] | null | undefined, title = 'Notable patterns') {
   if (!insights?.length) return '';
   return `<section class="analysis-insights">
     <h3>${escapeHtml(title)}</h3>

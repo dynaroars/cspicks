@@ -8,7 +8,7 @@ import { getConferenceSet, getTargetName } from '../analysis.js';
 import { isPubAtSchool } from './area-trends.js';
 
 export function renderSubfieldEffort() {
-    const canvas = document.getElementById('effortChart');
+    const canvas = document.querySelector<HTMLCanvasElement>('#effortChart');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;

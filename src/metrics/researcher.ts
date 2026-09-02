@@ -1,9 +1,9 @@
 import { CONFERENCE_SET_IDS, assignCompetitionRanks, filterByYears, geometricMeanScore, getConferenceAreaMap, publicationMatchesConferenceSet } from '../data.js';
 import { cosineSimilarity, percent, sumBy, topEntry } from './math.js';
-import type { FilteredProfessor } from '../types.js';
+import type { FilteredProfessor, Professor, Publication } from '../types.js';
 
 export function calculateResearcherPatterns(
-  professor: FilteredProfessor | null,
+  professor: Professor | null,
   peers: Record<string, FilteredProfessor> = {},
   options: { startYear?: number, endYear?: number, confSet?: string, areaMap?: Record<string, string> } = {}
 ) {
@@ -56,7 +56,7 @@ export function calculateResearcherPatterns(
     ? -sumBy(areaShares, share => share * Math.log(share)) / Math.log(areaShares.length)
     : 0;
   const midpoint = Math.floor((startYear + endYear) / 2);
-  const periodAreas = (range: (publication: FilteredProfessor['pubs'][number]) => boolean) => {
+  const periodAreas = (range: (publication: Publication) => boolean) => {
     const counts: Record<string, number> = {};
     publications.filter(range).forEach(pub => {
       const area = areaMap[pub.area] || pub.area;

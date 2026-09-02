@@ -5,8 +5,9 @@ import { calculateAreaMomentum } from '../metrics.js';
 import { renderInsightList } from '../analysis-ui.js';
 import { state } from './state.js';
 import { getConferenceSet, getResearcherPatterns, getTargetName, isPublicationForTarget, renderResearcherAreaInsights } from '../analysis.js';
+import type { Professor, Publication } from '../types.js';
 
-export function isPubAtSchool(prof, pub, targetSchool) {
+export function isPubAtSchool(prof: Professor, pub: Publication, targetSchool: string) {
     if (!state.filters.historical) return prof.affiliation === targetSchool;
     return getPublicationSchools(prof, pub, state.filters.historyMap, state.filters.aliasMap).includes(targetSchool);
 }
@@ -15,7 +16,7 @@ export function isPubAtSchool(prof, pub, targetSchool) {
 //    AREA TRENDS
 // ------------------
 export function renderAreaTrends() {
-    const canvas = document.getElementById('areaChart');
+    const canvas = document.querySelector<HTMLCanvasElement>('#areaChart');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -24,7 +25,7 @@ export function renderAreaTrends() {
     const years = [];
     const { startYear, endYear } = state.filters;
 
-    const stats = {};
+    const stats: Record<number, Record<string, number>> = {};
     for (let y = startYear; y <= endYear; y++) {
         years.push(y);
         stats[y] = {};
@@ -51,7 +52,7 @@ export function renderAreaTrends() {
         });
     });
 
-    const areaTotals = {};
+    const areaTotals: Record<string, number> = {};
     Object.values(stats).forEach(yearStats => {
         Object.entries(yearStats).forEach(([area, count]) => {
             areaTotals[area] = (areaTotals[area] || 0) + count;
@@ -133,11 +134,12 @@ export function renderAreaTrends() {
             </div>
         `;
 
-        legendContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        legendContainer.querySelectorAll<HTMLInputElement>('input[type="checkbox"]').forEach(cb => {
             cb.addEventListener('change', (e) => {
-                const index = parseInt(e.target.dataset.index);
-                state.chartInstance.setDatasetVisibility(index, e.target.checked);
-                state.chartInstance.update();
+                const input = e.currentTarget as HTMLInputElement;
+                const index = parseInt(input.dataset.index || '', 10);
+                state.chartInstance?.setDatasetVisibility(index, input.checked);
+                state.chartInstance?.update();
             });
         });
     }

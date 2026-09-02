@@ -7,7 +7,7 @@ import { getConferenceSet, getResearcherPatterns, getTargetName, isPublicationFo
 import { publishedVenues, renderConferenceFilters } from './conference-filters.js';
 
 export function renderConferenceTrends() {
-    const canvas = document.getElementById('confTrendsChart');
+    const canvas = document.querySelector<HTMLCanvasElement>('#confTrendsChart');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -20,13 +20,13 @@ export function renderConferenceTrends() {
     renderConferenceFilters();
 
     // get list of selected conferences
-    const checkedCheckboxes = document.querySelectorAll('#conf-trends-view input[type="checkbox"]:checked:not(:disabled)');
+    const checkedCheckboxes = document.querySelectorAll<HTMLInputElement>('#conf-trends-view input[type="checkbox"]:checked:not(:disabled)');
     const selectedConfs = state.selectedTarget?.type === 'researcher'
         ? [...publishedVenues()]
         : Array.from(checkedCheckboxes).map(cb => cb.value);
 
     const years = [];
-    const stats = {}; // year -> { conf -> count }
+    const stats: Record<number, Record<string, number>> = {}; // year -> { conf -> count }
     for (let y = startYear; y <= endYear; y++) {
         years.push(y);
         stats[y] = {};
