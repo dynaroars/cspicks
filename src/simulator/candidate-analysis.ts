@@ -5,7 +5,7 @@ import { calculateRankImpact, fuzzyMatch } from '../simulation.js';
 import type { DblpAuthorResult } from '../dblp.js';
 import type { FilterController } from '../filters.js';
 import type { FilteredData, FilteredSchool } from '../types.js';
-import type { CandidateResult } from './candidate-results.js';
+import type { CandidateResult, CandidateStats } from './candidate-results.js';
 
 export async function performCandidatesAnalysis(
   selectedUniv: FilteredSchool,
@@ -48,7 +48,7 @@ export async function performCandidatesAnalysis(
         }
       }
 
-      let stats;
+      let stats: CandidateStats;
       let displayName = name;
       let usedCSRankings = false;
 

@@ -180,7 +180,7 @@ export function calculateRankImpact(schools: Record<string, FilteredSchool>, ops
   allSchools.sort((a, b) => b._simScore - a._simScore || a.name.localeCompare(b.name));
 
   let overallRank = 0;
-  let previousScore = null;
+  let previousScore: number | null = null;
   const overallRanks = new Map<string, number>();
   allSchools.forEach((school, index) => {
     if (school._simScore !== previousScore) overallRank = index + 1;
@@ -207,7 +207,7 @@ export function calculateRankImpact(schools: Record<string, FilteredSchool>, ops
       .filter(s => (s.areas[area]?.adjusted || 0) > 0)
       .sort((a, b) => (b.areas[area]?.adjusted || 0) - (a.areas[area]?.adjusted || 0));
     let rank = 0;
-    let previousValue = null;
+    let previousValue: number | null = null;
     sorted.forEach((school, index) => {
       const value = school.areas[area].adjusted;
       if (value !== previousValue) rank = index + 1;

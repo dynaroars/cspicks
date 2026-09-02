@@ -143,7 +143,7 @@ function parseDblpXml(text: string) {
 
 function queueDblpRequest<T>(task: () => Promise<T>): Promise<T> {
     const result = dblpQueue.then(task);
-    dblpQueue = result.then(() => undefined, () => undefined).then(() => sleep(DBLP_REQUEST_GAP_MS));
+    dblpQueue = result.then((): void => {}, (): void => {}).then(() => sleep(DBLP_REQUEST_GAP_MS));
     return result;
 }
 
@@ -224,8 +224,8 @@ async function fetchCoauthorRecords(name: string): Promise<DblpCoauthorRecord[]>
     })().catch(error => {
         // Let a later visit try again rather than remembering the outage.
         console.error('DBLP coauthor lookup failed:', error);
-        setTimeout(() => coauthorCache.delete(name), COAUTHOR_RETRY_AFTER_MS);
-        return [];
+        setTimeout((): void => { coauthorCache.delete(name); }, COAUTHOR_RETRY_AFTER_MS);
+        return [] as DblpCoauthorRecord[];
     });
 
     coauthorCache.set(name, request);

@@ -1,4 +1,5 @@
 import { areaLabels, escapeHtml } from '../shared.js';
+import type { AreaStats } from '../types.js';
 
 type AreaDelta = number | {
   delta?: number;
@@ -11,14 +12,7 @@ type AreaDelta = number | {
 export interface CandidateResult {
   name: string;
   error?: string | null;
-  stats?: {
-    totalAdjusted: number;
-    totalPapers: number;
-    totalDblpPublications?: number;
-    areas: Record<string, number | { count: number, adjusted: number }>;
-    papers: Array<{ venue: string, year: number, count?: number, adjusted: number }>;
-    aliases?: string[];
-  };
+  stats?: CandidateStats;
   rankDelta?: number | null;
   currentRank?: number | null;
   newRank?: number | null;
@@ -28,11 +22,27 @@ export interface CandidateResult {
   sourceSchool?: { name: string, delta: number | null } | null;
 }
 
+export interface CandidateStats {
+  totalAdjusted: number;
+  totalPapers: number;
+  totalDblpPublications?: number;
+  areas: Record<string, AreaStats>;
+  papers: Array<{
+    title?: string | null;
+    venue: string;
+    year: number;
+    count?: number;
+    adjusted: number;
+    area?: string;
+  }>;
+  aliases?: string[];
+}
+
 // Under Per capita, a department can sit on either side of the 5-faculty
 // minimum before or after the hypothetical change, so either rank can be
 // unavailable rather than a number — shown plainly instead of guessed at.
 function rankMoveLabel(before: number | null | undefined, after: number | null | undefined, deltaText: string) {
-  const label = rank => rank == null ? 'not ranked' : `#${rank}`;
+  const label = (rank: number | null | undefined) => rank == null ? 'not ranked' : `#${rank}`;
   return `${label(before)} → ${label(after)} (${deltaText})`;
 }
 

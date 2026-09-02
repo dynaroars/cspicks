@@ -203,3 +203,10 @@ by typing generic discovery sorting, regional-area and area-change dictionaries,
 verdict inputs, formatting values, and numeric fragility-threshold exits. The repository total is
 now 189. All normal verification gates pass. Resume with simulation/DBLP services, then analysis
 and page controllers; leave `compare-view` until its comparison-domain contracts are established.
+
+Checkpoint 2026-09-02 (`noImplicitAny` simulation/DBLP pass): cleared all remaining diagnostics
+from the DBLP client, simulation engine, candidate analysis, and candidate results. Added a shared
+candidate-stat contract compatible with both roster and DBLP records, typed ranking sentinels,
+queue callbacks, retry cleanup, and empty-result fallbacks. The repository total is now 172.
+All normal verification gates pass (8 test files, 88 bundled modules). Resume with analysis and
+page controllers; keep `compare-view` for the final comparison-domain pass.
