@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "test": "node --test test/unit/*.test.js",
+    "test": "node --import tsx --test test/unit/*.test.js",
     "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit",
     "check:size": "node scripts/check-project-size.mjs",
     "sync:csrankings-rules": "node scripts/sync-csrankings-rules.mjs",
     "sync:nsf": "node scripts/sync-nsf-awards.mjs",
@@ -23,6 +24,10 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
+    "@types/he": "^1.2.3",
+    "@types/papaparse": "^5.5.2",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2",
     "vite": "^7.2.4"
   },
   "dependencies": {
