@@ -10,7 +10,7 @@ run the listed verification commands, and update this file in the same commit.
 - [x] Phase 1 — shared domain types and typed external-data boundaries
 - [x] Phase 2 — foundation modules (`shared`, data helpers, `data`, metrics)
 - [x] Phase 3 — shared UI infrastructure and page controllers
-- [ ] Phase 4 — strict mode, remaining tests/scripts as appropriate, final CI gate
+- [ ] Phase 4 — strict mode, remaining tests/scripts as appropriate, final CI gate (in progress)
 
 ## Decisions
 
@@ -168,3 +168,10 @@ belong in the final conversion scope.
 
 Enable strict options incrementally, resolve all remaining diagnostics, decide whether manual
 scripts merit conversion, and keep typechecking mandatory in CI.
+
+Checkpoint 2026-09-02 (strictness baseline): enabled `noImplicitReturns`,
+`noFallthroughCasesInSwitch`, `noImplicitOverride`, `noUncheckedIndexedAccess`, and
+`useUnknownInCatchVariables`; each passes across the migrated application. The remaining major
+gates are `noImplicitAny` (360 diagnostics across 30 files) and `strictNullChecks` (418 across
+34 files). Keep tests and manual build scripts in JavaScript; next convert the five `csconfs`
+browser modules, then reduce `noImplicitAny` diagnostics by dependency layer before enabling it.

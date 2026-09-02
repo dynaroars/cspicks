@@ -9,7 +9,12 @@
     "noEmit": true,
     "isolatedModules": true,
     "skipLibCheck": true,
-    "strict": false
+    "strict": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "useUnknownInCatchVariables": true
   },
   "include": ["src/**/*.js", "src/**/*.ts", "csconfs/**/*.js", "csconfs/**/*.ts"],
   "exclude": ["dist", "node_modules", "public"]
