@@ -2,9 +2,21 @@ import { getConferenceAreaMap, publicationMatchesConferenceSet } from '../data.j
 import { cleanName } from '../shared.js';
 import { searchAuthor, fetchAuthorStats, parseDblpProfileUrl } from '../dblp.js';
 import { calculateRankImpact, fuzzyMatch } from '../simulation.js';
+import type { DblpAuthorResult } from '../dblp.js';
+import type { FilterController } from '../filters.js';
+import type { FilteredData, FilteredSchool } from '../types.js';
+import type { CandidateResult } from './candidate-results.js';
 
-export async function performCandidatesAnalysis(selectedUniv, uniqueNames, { filters, selectedDblpProfiles, appData }) {
-  const candidateResults = [];
+export async function performCandidatesAnalysis(
+  selectedUniv: FilteredSchool,
+  uniqueNames: string[],
+  { filters, selectedDblpProfiles, appData }: {
+    filters: FilterController;
+    selectedDblpProfiles: Map<string, DblpAuthorResult>;
+    appData: FilteredData;
+  }
+) {
+  const candidateResults: CandidateResult[] = [];
 
   const confMap = getConferenceAreaMap(filters.confSet);
 
@@ -15,7 +27,7 @@ export async function performCandidatesAnalysis(selectedUniv, uniqueNames, { fil
       if (!selectedDblpProfile && appData.professors[name]) {
         profData = appData.professors[name];
       } else if (!selectedDblpProfile) {
-        const targetFacultyNames = new Set();
+        const targetFacultyNames = new Set<string>();
         Object.values(selectedUniv.areas).forEach(a => a.faculty.forEach(f => targetFacultyNames.add(f)));
         for (const fName of targetFacultyNames) {
           if (fuzzyMatch(fName, name)) {
@@ -106,7 +118,7 @@ export async function performCandidatesAnalysis(selectedUniv, uniqueNames, { fil
           dblpSuffix = suffixMatch[2];
         }
 
-        let best = linkedProfile || selectedDblpProfile;
+        let best: DblpAuthorResult | (NonNullable<typeof linkedProfile> & { name?: string }) | undefined = linkedProfile || selectedDblpProfile;
         if (!best) {
           const searchResults = await searchAuthor(searchName);
           if (dblpSuffix) {
@@ -158,7 +170,7 @@ export async function performCandidatesAnalysis(selectedUniv, uniqueNames, { fil
         });
       }
 
-      const targetFaculty = new Set();
+      const targetFaculty = new Set<string>();
       Object.values(selectedUniv.areas).forEach(a => a.faculty.forEach(f => targetFaculty.add(f)));
 
       // Check if any alias matches target school faculty
@@ -178,7 +190,7 @@ export async function performCandidatesAnalysis(selectedUniv, uniqueNames, { fil
         outerSource:
         for (const s of Object.values(appData.schools)) {
           if (s.name === selectedUniv.name) continue;
-          const sFaculty = new Set();
+          const sFaculty = new Set<string>();
           Object.values(s.areas).forEach(a => a.faculty.forEach(f => sFaculty.add(f)));
 
           for (const nameVariant of namesToCheck) {
@@ -224,8 +236,9 @@ export async function performCandidatesAnalysis(selectedUniv, uniqueNames, { fil
       });
     } catch (err) {
       console.error('Simulator error for:', name, err);
-      console.error('Stack:', err.stack);
-      candidateResults.push({ name, error: `An unexpected error occurred while retrieving data: ${err.message}. Please try again.` });
+      const error = err instanceof Error ? err : new Error(String(err));
+      console.error('Stack:', error.stack);
+      candidateResults.push({ name, error: `An unexpected error occurred while retrieving data: ${error.message}. Please try again.` });
     }
   }
 

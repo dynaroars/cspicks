@@ -144,7 +144,12 @@ helpers, search inputs, and delegated DOM actions. Tightened shared suggestion/s
 analysis targets to the supported school/researcher union. All verification gates pass (8 test
 files, 88 bundled modules).
 
-Resume with `simulator`, then convert `funding`, grants entry modules, and other page controllers.
+Checkpoint 2026-09-02 (simulator): converted the simulator controller, candidate analysis, and
+candidate results. Added explicit candidate/area-impact shapes, DBLP-profile maps, raw/filtered
+data state, school inputs, and typed form/list controls. Added the ambient CSS-module declaration
+needed by TypeScript page entries. All verification gates pass (8 test files, 88 bundled modules).
+
+Resume with `funding`, then convert the two grants entry modules and other page controllers.
 
 ### Phase 4
 

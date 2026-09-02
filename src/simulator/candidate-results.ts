@@ -1,14 +1,42 @@
 import { areaLabels, escapeHtml } from '../shared.js';
 
+type AreaDelta = number | {
+  delta?: number;
+  dropped?: boolean;
+  entered?: boolean;
+  wasRank?: number;
+  nowRank?: number;
+};
+
+export interface CandidateResult {
+  name: string;
+  error?: string | null;
+  stats?: {
+    totalAdjusted: number;
+    totalPapers: number;
+    totalDblpPublications?: number;
+    areas: Record<string, number | { count: number, adjusted: number }>;
+    papers: Array<{ venue: string, year: number, count?: number, adjusted: number }>;
+    aliases?: string[];
+  };
+  rankDelta?: number | null;
+  currentRank?: number | null;
+  newRank?: number | null;
+  areaDeltas?: Record<string, AreaDelta>;
+  isRemoval?: boolean;
+  usedCSRankings?: boolean;
+  sourceSchool?: { name: string, delta: number | null } | null;
+}
+
 // Under Per capita, a department can sit on either side of the 5-faculty
 // minimum before or after the hypothetical change, so either rank can be
 // unavailable rather than a number — shown plainly instead of guessed at.
-function rankMoveLabel(before, after, deltaText) {
+function rankMoveLabel(before: number | null | undefined, after: number | null | undefined, deltaText: string) {
   const label = rank => rank == null ? 'not ranked' : `#${rank}`;
   return `${label(before)} → ${label(after)} (${deltaText})`;
 }
 
-export function renderCandidateResults(candidates) {
+export function renderCandidateResults(candidates: CandidateResult[]) {
   const medals = ['🥇', '🥈', '🥉'];
 
   return candidates.map((c, i) => {
@@ -56,7 +84,7 @@ export function renderCandidateResults(candidates) {
     }
 
     const papersHtml = c.stats.papers.slice(0, 20).map(p => {
-      const countLabel = p.count > 1 ? `${Math.round(p.count)} papers` : '1 paper';
+      const countLabel = (p.count || 0) > 1 ? `${Math.round(p.count || 0)} papers` : '1 paper';
       return `
       <div class="paper-item">
         <span class="paper-venue">${escapeHtml(p.venue)}</span>
@@ -77,10 +105,10 @@ export function renderCandidateResults(candidates) {
       .map(area => {
         let d = (c.areaDeltas || {})[area];
         if (d === undefined) d = { delta: 0 };
-        return [area, d];
+        return [area, d] as [string, AreaDelta];
       })
       .sort(([, a], [, b]) => {
-        const getVal = (x) => {
+        const getVal = (x: AreaDelta) => {
           if (typeof x === 'number') return Math.abs(x);
           if (x && (x.dropped || x.entered)) return 1000;
           if (x && x.delta !== undefined) return Math.abs(x.delta);
@@ -93,15 +121,15 @@ export function renderCandidateResults(candidates) {
       <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px;">
         ${areaDeltaEntries.map(([area, d]) => {
       const label = escapeHtml(areaLabels[area] || area);
-      if (d && d.dropped) {
+      if (typeof d !== 'number' && d.dropped) {
         return `<span class="area-pill negative">↓ ${label} (Unranked - was #${d.wasRank})</span>`;
       }
-      if (d && d.entered) {
+      if (typeof d !== 'number' && d.entered) {
         return `<span class="area-pill positive">↑ ${label} +New (→ #${d.nowRank})</span>`;
       }
 
-      const deltaVal = d && d.delta !== undefined ? d.delta : (typeof d === 'number' ? d : 0);
-      const nowRank = d && d.nowRank !== undefined ? d.nowRank : null;
+      const deltaVal = typeof d === 'number' ? d : (d.delta || 0);
+      const nowRank = typeof d === 'number' ? null : (d.nowRank ?? null);
 
       if (deltaVal === 0) {
         return `<span class="area-pill neutral">${label} ±0${nowRank ? ` (#${nowRank})` : ''}</span>`;
@@ -128,7 +156,11 @@ export function renderCandidateResults(candidates) {
             <div class="candidate-stats">${Object.keys(c.stats.areas).length} areas, ${paperSummary}, ${c.stats.totalAdjusted.toFixed(1)} adjusted</div>
             <div class="candidate-area-breakdown">
               ${Object.entries(c.stats.areas)
-        .sort(([, a], [, b]) => (b.count || b) - (a.count || a))
+        .sort(([, a], [, b]) => {
+          const aCount = typeof a === 'number' ? a : a.count;
+          const bCount = typeof b === 'number' ? b : b.count;
+          return bCount - aCount;
+        })
         .map(([area, areaStats]) => {
           const count = typeof areaStats === 'number' ? Math.ceil(areaStats) : (areaStats.count || 0);
           const adj = typeof areaStats === 'number' ? areaStats : (areaStats.adjusted || 0);

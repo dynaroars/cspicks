@@ -11,18 +11,22 @@ import { trackView } from './analytics.js';
 import './styles/pages/simulator.css';
 import { performCandidatesAnalysis } from './simulator/candidate-analysis.js';
 import { renderCandidateResults } from './simulator/candidate-results.js';
+import type { DblpAuthorResult } from './dblp.js';
+import type { FilterController } from './filters.js';
+import type { FilteredData, FilteredSchool, RawData } from './types.js';
 
-let rawData = null;
-let appData = { professors: {}, schools: {} };
-let filters = null;
+let rawData: RawData = null!;
+let appData: FilteredData = { professors: {}, schools: {} };
+let filters: FilterController = null!;
 
-let simFacultyArr = [];
+let simFacultyArr: string[] = [];
 let facultyFilter = '';
-let dblpFacultyResults = [];
+let dblpFacultyResults: DblpAuthorResult[] = [];
 let dblpFacultyLoading = false;
-let dblpSearchTimer = null;
+let dblpSearchTimer: ReturnType<typeof setTimeout> | null = null;
 let dblpSearchSequence = 0;
-const selectedDblpProfiles = new Map();
+const selectedDblpProfiles = new Map<string, DblpAuthorResult>();
+const byId = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 
 function resetFacultySearch() {
   clearTimeout(dblpSearchTimer);
@@ -32,8 +36,8 @@ function resetFacultySearch() {
   dblpFacultyLoading = false;
 }
 
-function populateFacultyList(school) {
-  const facultySet = new Set();
+function populateFacultyList(school: FilteredSchool) {
+  const facultySet = new Set<string>();
   Object.values(school.areas).forEach(a => a.faculty.forEach(f => facultySet.add(f)));
   simFacultyArr = Array.from(facultySet).sort((a, b) => {
     const profA = appData.professors[a];
@@ -46,8 +50,8 @@ function populateFacultyList(school) {
   renderFacultyList();
 }
 
-function addCandidate(name, dblpProfile = null) {
-  const candidatesInput = document.getElementById('sim-candidates-input');
+function addCandidate(name: string, dblpProfile: DblpAuthorResult | null = null) {
+  const candidatesInput = byId<HTMLTextAreaElement>('sim-candidates-input');
   const names = parseCandidateNames(candidatesInput.value);
   if (dblpProfile) selectedDblpProfiles.set(name.toLowerCase(), dblpProfile);
   if (!names.some(candidate => candidate.toLowerCase() === name.toLowerCase())) {
@@ -56,7 +60,7 @@ function addCandidate(name, dblpProfile = null) {
   }
 }
 
-function findLocalFaculty(filter) {
+function findLocalFaculty(filter: string) {
   const normalized = filter.trim().toLowerCase();
   if (!normalized) return simFacultyArr;
 
@@ -75,7 +79,7 @@ function findLocalFaculty(filter) {
 
 function renderFacultyList(filter = facultyFilter) {
   const listEl = document.getElementById('sim-faculty-list');
-  const candidatesInput = document.getElementById('sim-candidates-input');
+  const candidatesInput = byId<HTMLTextAreaElement>('sim-candidates-input');
   if (!listEl || !candidatesInput) return;
 
   const filtered = findLocalFaculty(filter);
@@ -128,7 +132,7 @@ function renderFacultyList(filter = facultyFilter) {
   listEl.innerHTML = `${localHeading}${localHtml}${dblpHtml}`;
 
   listEl.querySelectorAll('label').forEach(label => {
-    const checkbox = label.querySelector('input[type="checkbox"]');
+    const checkbox = label.querySelector<HTMLInputElement>('input[type="checkbox"]')!;
     checkbox.addEventListener('change', () => {
       const name = label.dataset.name;
       const lines = candidatesInput.value.split('\n').map(n => n.trim()).filter(n => n);
@@ -143,7 +147,7 @@ function renderFacultyList(filter = facultyFilter) {
     });
   });
 
-  listEl.querySelectorAll('.sim-dblp-result').forEach(button => {
+  listEl.querySelectorAll<HTMLElement>('.sim-dblp-result').forEach(button => {
     button.addEventListener('click', () => {
       const profile = dblpFacultyResults[Number(button.dataset.index)];
       addCandidate(profile.name, profile);
@@ -152,7 +156,7 @@ function renderFacultyList(filter = facultyFilter) {
   });
 }
 
-function searchFaculty(filter) {
+function searchFaculty(filter: string) {
   facultyFilter = filter.trim();
   dblpFacultyResults = [];
   const localMatches = findLocalFaculty(facultyFilter);
@@ -180,12 +184,12 @@ function resetSimulation() {
   document.getElementById('step-univ-first').classList.remove('hidden');
   document.getElementById('step-candidates').classList.add('hidden');
   document.getElementById('step-results').classList.add('hidden');
-  document.getElementById('sim-univ-search').value = '';
-  document.getElementById('sim-candidates-input').value = '';
+  byId<HTMLInputElement>('sim-univ-search').value = '';
+  byId<HTMLTextAreaElement>('sim-candidates-input').value = '';
   document.getElementById('sim-univ-results').innerHTML = '';
   document.getElementById('sim-candidates-results').innerHTML = '';
   document.getElementById('sim-faculty-list').innerHTML = '';
-  document.getElementById('sim-faculty-search').value = '';
+  byId<HTMLInputElement>('sim-faculty-search').value = '';
   if (filters) updateSimulatorUrl();
 }
 
@@ -193,56 +197,57 @@ function resetCandidates() {
   if (!selectedUniv) return;
   document.getElementById('step-results').classList.add('hidden');
   document.getElementById('step-candidates').classList.remove('hidden');
-  document.getElementById('sim-candidates-input').value = '';
+  byId<HTMLTextAreaElement>('sim-candidates-input').value = '';
   selectedDblpProfiles.clear();
   document.getElementById('sim-candidates-results').innerHTML = '';
-  document.getElementById('sim-faculty-search').value = '';
+  byId<HTMLInputElement>('sim-faculty-search').value = '';
   populateFacultyList(selectedUniv);
   updateSimulatorUrl();
   document.getElementById('sim-faculty-search').focus();
 }
 
-let selectedUniv = null;
+let selectedUniv: FilteredSchool | null = null;
 // Recomputed whenever appData changes; keyed by school name, same rule as the
 // Per capita toggle on Search and Discoveries (calculatePerCapita).
-let perCapitaRanks = new Map();
+let perCapitaRanks = new Map<string, number>();
 
 function refreshPerCapitaRanks() {
   perCapitaRanks = new Map(calculatePerCapita(appData).map(row => [row.name, row.rank]));
 }
 
 // The rank shown next to a school name, in whichever mode Per capita is set to.
-function currentRankLabel(school) {
+function currentRankLabel(school: FilteredSchool) {
   if (!filters.perCapita) return `#${school.rank}`;
   const rank = perCapitaRanks.get(school.name);
   return rank ? `#${rank}` : 'not ranked — fewer than 5 faculty';
 }
 
 function setupSimulator() {
-  const univSearch = document.getElementById('sim-univ-search');
-  const candidatesInput = document.getElementById('sim-candidates-input');
-  const analyzeBtn = document.getElementById('sim-analyze-btn');
+  const univSearch = byId<HTMLInputElement>('sim-univ-search');
+  const candidatesInput = byId<HTMLTextAreaElement>('sim-candidates-input');
+  const analyzeBtn = byId<HTMLButtonElement>('sim-analyze-btn');
 
   document.getElementById('sim-reset-btn').addEventListener('click', resetSimulation);
   document.getElementById('sim-change-candidates-btn').addEventListener('click', resetCandidates);
-  document.getElementById('sim-faculty-search').addEventListener('input', event => searchFaculty(event.target.value));
+  byId<HTMLInputElement>('sim-faculty-search').addEventListener('input', event =>
+    searchFaculty((event.currentTarget as HTMLInputElement).value));
 
   document.getElementById('sim-select-all').addEventListener('click', () => {
-    document.querySelectorAll('#sim-faculty-list input[type="checkbox"]:not(:checked)').forEach(checkbox => {
+    document.querySelectorAll<HTMLInputElement>('#sim-faculty-list input[type="checkbox"]:not(:checked)').forEach(checkbox => {
       checkbox.checked = true;
       checkbox.dispatchEvent(new Event('change'));
     });
   });
 
   document.getElementById('sim-deselect-all').addEventListener('click', () => {
-    document.querySelectorAll('#sim-faculty-list input[type="checkbox"]:checked').forEach(checkbox => {
+    document.querySelectorAll<HTMLInputElement>('#sim-faculty-list input[type="checkbox"]:checked').forEach(checkbox => {
       checkbox.checked = false;
       checkbox.dispatchEvent(new Event('change'));
     });
   });
 
   univSearch.addEventListener('input', event => {
-    const query = event.target.value.trim().toLowerCase();
+    const query = (event.currentTarget as HTMLInputElement).value.trim().toLowerCase();
     const container = document.getElementById('sim-univ-results');
     if (!query) {
       container.innerHTML = '';
@@ -259,7 +264,7 @@ function setupSimulator() {
       </button>
     `).join('');
 
-    container.querySelectorAll('.sim-item').forEach(item => {
+    container.querySelectorAll<HTMLElement>('.sim-item').forEach(item => {
       item.addEventListener('click', () => {
         selectedUniv = appData.schools[item.dataset.name];
         document.getElementById('selected-univ-display').textContent = `Target: ${selectedUniv.name} (${currentRankLabel(selectedUniv)})`;
@@ -290,7 +295,7 @@ function setupSimulator() {
 }
 
 async function runAnalysis() {
-  const candidatesInput = document.getElementById('sim-candidates-input');
+  const candidatesInput = byId<HTMLTextAreaElement>('sim-candidates-input');
   if (!selectedUniv) return;
   const names = parseCandidateNames(candidatesInput.value);
   if (names.length === 0) return;
@@ -324,7 +329,7 @@ async function runAnalysis() {
 function updateSimulatorUrl() {
   const params = filters.toParams();
   if (selectedUniv) params.set('univ', selectedUniv.name);
-  const candidatesInput = document.getElementById('sim-candidates-input');
+  const candidatesInput = byId<HTMLTextAreaElement>('sim-candidates-input');
   const candidates = candidatesInput?.value.trim();
   if (candidates) params.set('candidates', candidates);
   window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
@@ -391,7 +396,7 @@ function restoreFromUrl() {
   document.getElementById('step-candidates').classList.remove('hidden');
   populateFacultyList(selectedUniv);
   const candidates = params.get('candidates');
-  if (candidates) document.getElementById('sim-candidates-input').value = candidates;
+  if (candidates) byId<HTMLTextAreaElement>('sim-candidates-input').value = candidates;
 }
 
 async function init() {
