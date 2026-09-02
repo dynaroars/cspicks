@@ -232,3 +232,11 @@ The funding page continues to reuse the now-typed scoreboard API. Enabled `noImp
 `tsconfig.json`; the repository passes it with zero diagnostics. All normal verification gates
 pass (8 test files, 88 bundled modules). Resume Phase 4 by taking a fresh `strictNullChecks`
 baseline and reducing it in dependency order before enabling that option.
+
+Checkpoint 2026-09-02 (`strictNullChecks` baseline): with `noImplicitAny` enabled, the fresh
+null-safety run reports 639 diagnostics across 41 files. The earlier 418 estimate was taken while
+implicit `any` still masked nullable paths, so 639 is the new authoritative baseline. Start with
+shared utilities and leaf metrics, then data/domain services, then controllers and renderers;
+enable `strictNullChecks` only after the standalone run reaches zero. Continue using
+`npx tsc --noEmit --strictNullChecks` to measure progress, with the three normal gates at every
+checkpoint.
