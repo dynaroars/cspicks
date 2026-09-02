@@ -1,14 +1,11 @@
-// @ts-check
-
 /**
  * CS Awards & Grants Data Engine
  * Handles dataset loading, querying, structured filtering, and autocomplete indexing.
  */
 
-/** @typedef {import('../types.js').Grant} Grant */
+import type { Grant } from '../types.js';
 
-/** @type {Grant[] | null} */
-let cachedGrants = null;
+let cachedGrants: Grant[] | null = null;
 
 /**
  * Validate the fields the grants UI relies on before treating fetched JSON as
@@ -16,9 +13,9 @@ let cachedGrants = null;
  * @param {unknown} value
  * @returns {value is Grant}
  */
-function isGrant(value) {
+function isGrant(value: unknown): value is Grant {
   if (!value || typeof value !== 'object') return false;
-  const grant = /** @type {Record<string, unknown>} */ (value);
+  const grant = value as Record<string, unknown>;
   return typeof grant.id === 'string'
     && typeof grant.name === 'string'
     && typeof grant.shortName === 'string'
@@ -36,7 +33,7 @@ function isGrant(value) {
 }
 
 /** @param {unknown} payload @returns {Grant[]} */
-export function parseGrants(payload) {
+export function parseGrants(payload: unknown): Grant[] {
   if (!Array.isArray(payload) || !payload.every(isGrant)) {
     throw new Error('Invalid grants dataset');
   }
@@ -44,7 +41,7 @@ export function parseGrants(payload) {
 }
 
 /** @returns {Promise<Grant[]>} */
-export async function loadGrantsData() {
+export async function loadGrantsData(): Promise<Grant[]> {
   if (cachedGrants) return cachedGrants;
   const url = new URL('../../public/grants.json', import.meta.url).href;
   const response = await fetch(url).catch(() => fetch('./grants.json'));
@@ -62,7 +59,7 @@ export async function loadGrantsData() {
  * @param {Grant[]} grants
  * @param {{query?: string, audience?: string, sponsorCategory?: string, status?: string, topic?: string, deadlineFilter?: string, sortBy?: string}} [filters]
  */
-export function filterGrants(grants, {
+export function filterGrants(grants: Grant[], {
   query = '',
   audience = 'all',
   sponsorCategory = 'all',
@@ -70,7 +67,7 @@ export function filterGrants(grants, {
   topic = 'all',
   deadlineFilter = 'all',
   sortBy = 'featured'
-} = {}) {
+}: { query?: string, audience?: string, sponsorCategory?: string, status?: string, topic?: string, deadlineFilter?: string, sortBy?: string } = {}) {
   const q = String(query || '').trim().toLowerCase();
 
   let results = grants.filter(grant => {
@@ -176,7 +173,7 @@ export function filterGrants(grants, {
 }
 
 /** @param {Grant[]} grants */
-export function grantsSuggestions(grants) {
+export function grantsSuggestions(grants: Grant[]) {
   const awardItems = [];
   const sponsorSet = new Map();
   const topicSet = new Map();

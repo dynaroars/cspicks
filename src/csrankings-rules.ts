@@ -1,12 +1,22 @@
 import fallbackRules from './csrankings-rules.generated.js';
 
+type Issue = Array<string | number | null>;
+type IssueMap = Record<string, Issue>;
+export interface CsrankingsRules {
+  source: string;
+  sourceVersion?: string;
+  syncedAt?: string;
+  venueAliases: Record<string, string>;
+  issues: Record<string, IssueMap>;
+}
+
 export const CSRANKINGS_RULES_URL =
   'https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/util/csrankings.py';
 
-let activeRules = fallbackRules;
-let syncPromise = null;
+let activeRules: CsrankingsRules = fallbackRules;
+let syncPromise: Promise<CsrankingsRules> | null = null;
 
-function extractDictionary(source, name) {
+function extractDictionary(source: string, name: string) {
   const marker = `${name} = {`;
   const start = source.indexOf(marker);
   if (start < 0) throw new Error(`Missing ${name}`);
@@ -21,9 +31,9 @@ function extractDictionary(source, name) {
   throw new Error(`Unclosed ${name}`);
 }
 
-function parsePairMap(source, name) {
+function parsePairMap(source: string, name: string): IssueMap {
   const body = extractDictionary(source, name);
-  const entries = {};
+  const entries: IssueMap = {};
   const pattern = /(\d{4})\s*:\s*\(\s*(\d+)\s*,\s*(?:"([^"]+)"|'([^']+)'|(\d+))\s*\)/g;
   for (const match of body.matchAll(pattern)) {
     entries[match[1]] = [Number(match[2]), match[3] || match[4] || Number(match[5])];
@@ -32,8 +42,8 @@ function parsePairMap(source, name) {
   return entries;
 }
 
-function combineIssues(primary, secondary) {
-  const combined = {};
+function combineIssues(primary: IssueMap, secondary: IssueMap): IssueMap {
+  const combined: IssueMap = {};
   for (const year of new Set([...Object.keys(primary), ...Object.keys(secondary)])) {
     const first = primary[year];
     const second = secondary[year];
@@ -43,7 +53,7 @@ function combineIssues(primary, secondary) {
   return combined;
 }
 
-export function parseCsrankingsRules(source) {
+export function parseCsrankingsRules(source: string): CsrankingsRules {
   const tog = combineIssues(
     parsePairMap(source, 'TOG_SIGGRAPH_Volume'),
     parsePairMap(source, 'TOG_SIGGRAPH_Asia_Volume')

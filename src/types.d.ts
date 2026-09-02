@@ -162,11 +162,39 @@ export interface NsfDataset {
   schemaVersion?: number;
   source?: string;
   sourceUrl?: string;
-  scope?: string;
+  scope?: string[];
   coverage?: unknown;
   methodology?: unknown;
   syncedAt?: string;
   rosterNamesSyncedAt?: string;
+}
+
+export interface AttributedNsfAward extends NsfAward {
+  role?: string;
+  attributedAmount: number;
+}
+
+export interface FundingFaculty {
+  name: string;
+  affiliation: string | null;
+  awards: AttributedNsfAward[];
+  attributedAmount: number;
+  totalAwardAmount: number;
+}
+
+export interface FundingSchool {
+  name: string;
+  awards: AttributedNsfAward[];
+  faculty: string[];
+  attributedAmount: number;
+}
+
+export interface FundingIndex {
+  awards: NsfAward[];
+  faculty: FundingFaculty[];
+  facultyByName: Map<string, FundingFaculty>;
+  facultyByNormalizedName: Map<string, FundingFaculty | null>;
+  schools: FundingSchool[];
 }
 
 export interface Grant {

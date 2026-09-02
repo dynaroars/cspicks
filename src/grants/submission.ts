@@ -2,7 +2,7 @@ import { GITHUB_REPO, SUBMISSION_EMAIL, buildSubmissionContent, createSubmission
 
 export { GITHUB_REPO, SUBMISSION_EMAIL };
 
-export function buildGrantSubmissionContent(submission) {
+export function buildGrantSubmissionContent(submission: unknown) {
   return buildSubmissionContent(submission);
 }
 

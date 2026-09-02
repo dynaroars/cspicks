@@ -1,9 +1,20 @@
 import { parentMap, scoreFromAreaCounts } from './data.js';
 import { rankSchoolsPerCapita } from './metrics.js';
 import { cleanName } from './shared.js';
+import type { AreaStats, FilteredSchool } from './types.js';
 
-function levenshtein(a, b) {
-  const matrix = [];
+type CandidateAreaStats = number | Pick<AreaStats, 'adjusted'>;
+type SimulatedSchool = FilteredSchool & { _simScore: number };
+
+export interface SimulationOperation {
+  school: FilteredSchool;
+  stats: { areas: Record<string, CandidateAreaStats> };
+  isRemoval: boolean;
+  facultyKey?: string;
+}
+
+function levenshtein(a: string, b: string) {
+  const matrix: number[][] = [];
   for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
   for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
 
@@ -23,7 +34,7 @@ function levenshtein(a, b) {
   return matrix[b.length][a.length];
 }
 
-export function parseCandidateNames(value) {
+export function parseCandidateNames(value: unknown) {
   return [...new Set(
     String(value ?? '')
       .split(/\r?\n/)
@@ -32,7 +43,7 @@ export function parseCandidateNames(value) {
   )];
 }
 
-export function fuzzyMatch(nameA, nameB) {
+export function fuzzyMatch(nameA: string, nameB: string) {
   const a = cleanName(nameA).toLowerCase();
   const b = cleanName(nameB).toLowerCase();
   if (a === b) return true;
@@ -79,11 +90,11 @@ export function fuzzyMatch(nameA, nameB) {
   return false;
 }
 
-function rankSchoolsByPerCapita(schoolList, minFaculty) {
+function rankSchoolsByPerCapita(schoolList: FilteredSchool[], minFaculty: number) {
   return new Map(rankSchoolsPerCapita(schoolList, { minFaculty }).map(row => [row.name, row.rank]));
 }
 
-function cloneSchoolForSimulation(school) {
+function cloneSchoolForSimulation(school: FilteredSchool): SimulatedSchool {
   const totalAdjusted = Number.isFinite(school.totalAdjusted)
     ? school.totalAdjusted
     : Object.values(school.areas || {}).reduce((sum, area) => sum + (area.adjusted || 0), 0);
@@ -98,7 +109,8 @@ function cloneSchoolForSimulation(school) {
     facultyAdjustedCounts: { ...(school.facultyAdjustedCounts || {}) },
     facultyCounts: { ...(school.facultyCounts || {}) },
     areaAdjustedCounts: { ...(school.areaAdjustedCounts || {}) },
-    areaRanks: { ...(school.areaRanks || {}) }
+    areaRanks: { ...(school.areaRanks || {}) },
+    _simScore: 0
   };
 }
 
@@ -108,8 +120,8 @@ function cloneSchoolForSimulation(school) {
  * spelling being removed, or the candidate's own name being added — and only
  * matters when `perCapita` is on, since it drives the denominator.
  */
-export function calculateRankImpact(schools, ops, { perCapita = false, minFaculty = 5 } = {}) {
-  const schoolClones = new Map();
+export function calculateRankImpact(schools: Record<string, FilteredSchool>, ops: SimulationOperation[], { perCapita = false, minFaculty = 5 } = {}) {
+  const schoolClones = new Map<string, SimulatedSchool>();
   ops.forEach(op => {
     if (!schoolClones.has(op.school.name)) {
       schoolClones.set(op.school.name, cloneSchoolForSimulation(op.school));
@@ -123,7 +135,7 @@ export function calculateRankImpact(schools, ops, { perCapita = false, minFacult
     for (const [area, areaStats] of Object.entries(op.stats.areas)) {
       const val = typeof areaStats === 'number' ? areaStats : areaStats.adjusted;
       if (!clone.areas[area]) {
-        clone.areas[area] = { count: 0, adjusted: 0, faculty: [] };
+        clone.areas[area] = { count: 0, adjusted: 0, faculty: [], facultyStats: {} };
       }
       const beforeAdjusted = clone.areas[area].adjusted;
       if (op.isRemoval) {
@@ -140,7 +152,7 @@ export function calculateRankImpact(schools, ops, { perCapita = false, minFacult
       if (!clone.facultyAdjustedCounts) clone.facultyAdjustedCounts = {};
       if (op.isRemoval) delete clone.facultyAdjustedCounts[op.facultyKey];
       else {
-        const total = Object.values(op.stats.areas).reduce((sum, areaStats) =>
+        const total = Object.values(op.stats.areas).reduce<number>((sum, areaStats) =>
           sum + (typeof areaStats === 'number' ? areaStats : areaStats.adjusted || 0), 0);
         clone.facultyAdjustedCounts[op.facultyKey] = total;
       }
@@ -148,17 +160,17 @@ export function calculateRankImpact(schools, ops, { perCapita = false, minFacult
   });
 
   // Construct full list for ranking
-  const allSchools = Object.values(schools).map(school =>
-    schoolClones.has(school.name) ? schoolClones.get(school.name) : { ...school }
+  const allSchools: SimulatedSchool[] = Object.values(schools).map(school =>
+    schoolClones.get(school.name) ?? { ...school, _simScore: 0 }
   );
 
-  const areas = new Set();
+  const areas = new Set<string>();
   Object.values(parentMap).forEach(a => areas.add(a));
   const areaList = Array.from(areas);
 
   // The ranking formula lives in data.js; a hypothetical score has to use that
   // one rather than a copy here that could drift from it.
-  const calcScore = (s) => scoreFromAreaCounts(
+  const calcScore = (s: SimulatedSchool) => scoreFromAreaCounts(
     Object.fromEntries(areaList.map(area => [area, s.areas[area]?.adjusted || 0])));
 
   allSchools.forEach(s => {
@@ -169,7 +181,7 @@ export function calculateRankImpact(schools, ops, { perCapita = false, minFacult
 
   let overallRank = 0;
   let previousScore = null;
-  const overallRanks = new Map();
+  const overallRanks = new Map<string, number>();
   allSchools.forEach((school, index) => {
     if (school._simScore !== previousScore) overallRank = index + 1;
     overallRanks.set(school.name, overallRank);
@@ -183,8 +195,8 @@ export function calculateRankImpact(schools, ops, { perCapita = false, minFacult
   const perCapitaRanksAfter = perCapita ? rankSchoolsByPerCapita(allSchools, minFaculty) : null;
 
   // area rankings for simulation
-  const areaRanksBefore = {};
-  const areaRanksAfter = {};
+  const areaRanksBefore: Record<string, Record<string, number>> = {};
+  const areaRanksAfter: Record<string, Record<string, number>> = {};
   ops.forEach(op => {
     areaRanksBefore[op.school.name] = op.school.areaRanks || {};
     areaRanksAfter[op.school.name] = {};
@@ -204,7 +216,7 @@ export function calculateRankImpact(schools, ops, { perCapita = false, minFacult
     });
   });
 
-  const deltaMap = new Map();
+  const deltaMap = new Map<string, { overall: number | null, areas: Record<string, unknown>, rankBefore: number | null | undefined, rankAfter: number | null | undefined }>();
   ops.forEach(op => {
     // rankBefore/rankAfter always reflect the active mode, so a caller reading
     // just `overall` (and, for display, `rankBefore`) never has to branch on
@@ -218,7 +230,7 @@ export function calculateRankImpact(schools, ops, { perCapita = false, minFacult
 
     const areaDeltasBefore = areaRanksBefore[op.school.name];
     const areaDeltasAfter = areaRanksAfter[op.school.name];
-    const areaDeltas = {};
+    const areaDeltas: Record<string, unknown> = {};
     areaList.forEach(area => {
       const before = areaDeltasBefore[area];
       const after = areaDeltasAfter[area];

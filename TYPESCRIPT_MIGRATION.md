@@ -104,10 +104,16 @@ browser analytics globals, metadata/share inputs, generic IndexedDB transactions
 configuration and target types, and safe DOM event narrowing. All three verification commands
 pass (8 test files, 88 bundled modules).
 
-Resume with the remaining non-page shared modules: `csrankings-rules`, `simulation`, `nsf`,
-grants data/rendering, search cards/results/suggestions, comparison, filters, DBLP, and analysis
-helpers. Convert `main`, `simulator`, `funding`, grants entry modules, and other page controllers
-after their dependencies.
+Checkpoint 2026-09-01 (domain services): converted `csrankings-rules`, `simulation`, `nsf`,
+`grants-data`, `grants-render`, and the grants submission adapter. Added explicit CSRankings
+rule/issue maps, simulation operations and cloned-school types, funding index/faculty/school
+contracts, and typed grants filtering/rendering. Corrected the NSF dataset contract (`scope` is
+an array) and the per-capita helper to accept both school maps and arrays. All verification gates
+pass (8 test files, 88 bundled modules).
+
+Resume with search cards/results/suggestions, comparison, filters, DBLP, suggestion-box, and
+analysis helpers. Convert `main`, `simulator`, `funding`, grants entry modules, and other page
+controllers after their dependencies.
 
 ### Phase 4
 

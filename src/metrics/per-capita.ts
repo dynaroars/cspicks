@@ -1,7 +1,7 @@
 import { assignCompetitionRanks } from '../data.js';
 import type { FilteredData, FilteredSchool } from '../types.js';
 
-export function rankSchoolsPerCapita(schools: Record<string, FilteredSchool>, { minFaculty = 5 } = {}) {
+export function rankSchoolsPerCapita(schools: Record<string, FilteredSchool> | FilteredSchool[], { minFaculty = 5 } = {}) {
   const rows = Object.values(schools || {})
     .map(school => {
       const facultyCount = Object.keys(school.facultyAdjustedCounts || {}).length;
