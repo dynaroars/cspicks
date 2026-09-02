@@ -7,15 +7,17 @@ import { createSuggestionBox, rankSuggestions } from '../suggestion-box.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
 import { escapeHtml } from '../shared.js';
+import type { Grant } from '../types.js';
 
 const params = new URLSearchParams(window.location.search);
-const input = document.getElementById('grants-search');
+const input = document.querySelector<HTMLInputElement>('#grants-search')!;
 const resultsContainer = document.getElementById('grants-results');
 const statusText = document.getElementById('grants-status');
 const countElement = document.getElementById('grants-count');
 
-let allGrants = [];
+let allGrants: Grant[] = [];
 let suggestions = null;
+const selectById = (id: string) => document.getElementById(id) as HTMLSelectElement | null;
 
 const DEFAULT_EXAMPLES = [
   'NSF CAREER',
@@ -35,12 +37,12 @@ const DEFAULT_EXAMPLES = [
 function getFilterState() {
   return {
     query: input ? input.value.trim() : '',
-    audience: document.getElementById('audience-select')?.value || 'all',
-    sponsorCategory: document.getElementById('sponsor-category-select')?.value || 'all',
-    status: document.getElementById('status-select')?.value || 'all',
-    topic: document.getElementById('topic-select')?.value || 'all',
-    deadlineFilter: document.getElementById('deadline-select')?.value || 'all',
-    sortBy: document.getElementById('sort-select')?.value || 'featured'
+    audience: selectById('audience-select')?.value || 'all',
+    sponsorCategory: selectById('sponsor-category-select')?.value || 'all',
+    status: selectById('status-select')?.value || 'all',
+    topic: selectById('topic-select')?.value || 'all',
+    deadlineFilter: selectById('deadline-select')?.value || 'all',
+    sortBy: selectById('sort-select')?.value || 'featured'
   };
 }
 
@@ -141,7 +143,7 @@ function setupExamples() {
   `).join('');
 
   container.addEventListener('click', event => {
-    const button = event.target.closest('[data-search-example]');
+    const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-search-example]') : null;
     if (!button) return;
     input.value = button.dataset.searchExample;
     render();
@@ -153,15 +155,17 @@ function setupExamples() {
 function setupDelegatedListeners() {
   // Topic clicks, sponsor clicks, and reset on cards
   resultsContainer.addEventListener('click', event => {
-    const resetBtn = event.target.closest('#reset-grants-filters');
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+    const resetBtn = target.closest('#reset-grants-filters');
     if (resetBtn) {
       input.value = '';
-      const audEl = document.getElementById('audience-select');
-      const sponEl = document.getElementById('sponsor-category-select');
-      const topEl = document.getElementById('topic-select');
-      const deadEl = document.getElementById('deadline-select');
-      const statusEl = document.getElementById('status-select');
-      const sortEl = document.getElementById('sort-select');
+      const audEl = selectById('audience-select');
+      const sponEl = selectById('sponsor-category-select');
+      const topEl = selectById('topic-select');
+      const deadEl = selectById('deadline-select');
+      const statusEl = selectById('status-select');
+      const sortEl = selectById('sort-select');
       if (audEl) audEl.value = 'all';
       if (sponEl) sponEl.value = 'all';
       if (topEl) topEl.value = 'all';
@@ -173,7 +177,7 @@ function setupDelegatedListeners() {
       return;
     }
 
-    const topicBtn = event.target.closest('[data-search-topic]');
+    const topicBtn = target.closest<HTMLElement>('[data-search-topic]');
     if (topicBtn) {
       input.value = topicBtn.dataset.searchTopic;
       render();
@@ -181,7 +185,7 @@ function setupDelegatedListeners() {
       return;
     }
 
-    const sponsorBtn = event.target.closest('[data-search-sponsor]');
+    const sponsorBtn = target.closest<HTMLElement>('[data-search-sponsor]');
     if (sponsorBtn) {
       input.value = sponsorBtn.dataset.searchSponsor;
       render();
@@ -189,7 +193,7 @@ function setupDelegatedListeners() {
       return;
     }
 
-    const shareBtn = event.target.closest('[data-share-grant]');
+    const shareBtn = target.closest<HTMLElement>('[data-share-grant]');
     if (shareBtn) {
       const grantId = shareBtn.dataset.shareGrant;
       const shareUrl = `${window.location.origin}${window.location.pathname}?q=${encodeURIComponent(grantId)}#${grantId}`;
@@ -223,10 +227,10 @@ function setupDelegatedListeners() {
   });
 }
 
-function populateFilterOptions(grants) {
-  const topicSelect = document.getElementById('topic-select');
+function populateFilterOptions(grants: Grant[]) {
+  const topicSelect = selectById('topic-select');
   if (topicSelect) {
-    const allTopics = new Set();
+    const allTopics = new Set<string>();
     grants.forEach(g => (g.topics || []).forEach(t => allTopics.add(t)));
     const sortedTopics = Array.from(allTopics).sort();
     sortedTopics.forEach(top => {
@@ -240,27 +244,27 @@ function populateFilterOptions(grants) {
   // Restore initial URL parameters
   if (params.get('q')) input.value = params.get('q');
   if (params.get('audience')) {
-    const audEl = document.getElementById('audience-select');
+    const audEl = selectById('audience-select');
     if (audEl) audEl.value = params.get('audience');
   }
   if (params.get('sponsor')) {
-    const sponEl = document.getElementById('sponsor-category-select');
+    const sponEl = selectById('sponsor-category-select');
     if (sponEl) sponEl.value = params.get('sponsor');
   }
   if (params.get('topic')) {
-    const topEl = document.getElementById('topic-select');
+    const topEl = selectById('topic-select');
     if (topEl) topEl.value = params.get('topic');
   }
   if (params.get('deadline')) {
-    const dEl = document.getElementById('deadline-select');
+    const dEl = selectById('deadline-select');
     if (dEl) dEl.value = params.get('deadline');
   }
   if (params.get('status')) {
-    const statusEl = document.getElementById('status-select');
+    const statusEl = selectById('status-select');
     if (statusEl) statusEl.value = params.get('status');
   }
   if (params.get('sort')) {
-    const sEl = document.getElementById('sort-select');
+    const sEl = selectById('sort-select');
     if (sEl) sEl.value = params.get('sort');
   }
 }

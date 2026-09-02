@@ -8,10 +8,11 @@ import {
   buildGrantGithubIssueUrl,
   buildGrantSubmissionContent
 } from './submission.js';
+import type { Grant } from '../types.js';
 
 const root = document.getElementById('submission-form-root');
-let allGrants = [];
-let grantsById = new Map();
+let allGrants: Grant[] = [];
+let grantsById = new Map<string, Grant>();
 
 function renderForm() {
   root.innerHTML = `
@@ -116,22 +117,22 @@ function getFormData() {
   const form = document.getElementById('grants-submit-form');
   if (!form) return null;
 
-  const kind = form.querySelector('input[name="kind"]:checked')?.value || 'new';
-  const url = form.querySelector('#url')?.value.trim();
-  const name = form.querySelector('#name')?.value.trim();
-  const sponsor = form.querySelector('#sponsor')?.value.trim();
-  const sponsorCategory = form.querySelector('#sponsorCategory')?.value;
-  const deadline = form.querySelector('#deadline')?.value.trim();
-  const amount = form.querySelector('#amount')?.value.trim();
-  const summary = form.querySelector('#summary')?.value.trim();
-  const comments = form.querySelector('#comments')?.value.trim();
-  const topicsRaw = form.querySelector('#topics')?.value.trim();
+  const kind = form.querySelector<HTMLInputElement>('input[name="kind"]:checked')?.value || 'new';
+  const url = form.querySelector<HTMLInputElement>('#url')?.value.trim();
+  const name = form.querySelector<HTMLInputElement>('#name')?.value.trim();
+  const sponsor = form.querySelector<HTMLInputElement>('#sponsor')?.value.trim();
+  const sponsorCategory = form.querySelector<HTMLSelectElement>('#sponsorCategory')?.value;
+  const deadline = form.querySelector<HTMLInputElement>('#deadline')?.value.trim();
+  const amount = form.querySelector<HTMLInputElement>('#amount')?.value.trim();
+  const summary = form.querySelector<HTMLTextAreaElement>('#summary')?.value.trim();
+  const comments = form.querySelector<HTMLTextAreaElement>('#comments')?.value.trim();
+  const topicsRaw = form.querySelector<HTMLInputElement>('#topics')?.value.trim();
 
   const targetAudience = [];
-  if (form.querySelector('input[name="audience_faculty"]')?.checked) targetAudience.push('Faculty');
-  if (form.querySelector('input[name="audience_phd"]')?.checked) targetAudience.push('PhD Students');
-  if (form.querySelector('input[name="audience_undergrad"]')?.checked) targetAudience.push('Undergraduate Students');
-  if (form.querySelector('input[name="audience_postdoc"]')?.checked) targetAudience.push('Postdocs');
+  if (form.querySelector<HTMLInputElement>('input[name="audience_faculty"]')?.checked) targetAudience.push('Faculty');
+  if (form.querySelector<HTMLInputElement>('input[name="audience_phd"]')?.checked) targetAudience.push('PhD Students');
+  if (form.querySelector<HTMLInputElement>('input[name="audience_undergrad"]')?.checked) targetAudience.push('Undergraduate Students');
+  if (form.querySelector<HTMLInputElement>('input[name="audience_postdoc"]')?.checked) targetAudience.push('Postdocs');
 
   const topics = topicsRaw ? topicsRaw.split(',').map(t => t.trim()).filter(Boolean) : [];
 
@@ -159,24 +160,24 @@ function getFormData() {
   return { kind, url, name, submission };
 }
 
-function prefillFromGrant(grant) {
+function prefillFromGrant(grant: Grant | undefined) {
   const form = document.getElementById('grants-submit-form');
   if (!form || !grant) return;
 
-  if (grant.url) form.querySelector('#url').value = grant.url;
-  if (grant.name) form.querySelector('#name').value = grant.name;
-  if (grant.sponsor) form.querySelector('#sponsor').value = grant.sponsor;
-  if (grant.sponsorCategory) form.querySelector('#sponsorCategory').value = grant.sponsorCategory;
-  if (grant.deadline) form.querySelector('#deadline').value = grant.deadline;
-  if (grant.amount) form.querySelector('#amount').value = grant.amount;
-  if (grant.summary) form.querySelector('#summary').value = grant.summary;
-  if (grant.topics) form.querySelector('#topics').value = grant.topics.join(', ');
+  if (grant.url) form.querySelector<HTMLInputElement>('#url')!.value = grant.url;
+  if (grant.name) form.querySelector<HTMLInputElement>('#name')!.value = grant.name;
+  if (grant.sponsor) form.querySelector<HTMLInputElement>('#sponsor')!.value = grant.sponsor;
+  if (grant.sponsorCategory) form.querySelector<HTMLSelectElement>('#sponsorCategory')!.value = grant.sponsorCategory;
+  if (grant.deadline) form.querySelector<HTMLInputElement>('#deadline')!.value = grant.deadline;
+  if (grant.amount) form.querySelector<HTMLInputElement>('#amount')!.value = grant.amount;
+  if (grant.summary) form.querySelector<HTMLTextAreaElement>('#summary')!.value = grant.summary;
+  if (grant.topics) form.querySelector<HTMLInputElement>('#topics')!.value = grant.topics.join(', ');
 
   const auds = (grant.targetAudience || []).map(a => a.toLowerCase());
-  const facEl = form.querySelector('input[name="audience_faculty"]');
-  const phdEl = form.querySelector('input[name="audience_phd"]');
-  const undEl = form.querySelector('input[name="audience_undergrad"]');
-  const postEl = form.querySelector('input[name="audience_postdoc"]');
+  const facEl = form.querySelector<HTMLInputElement>('input[name="audience_faculty"]');
+  const phdEl = form.querySelector<HTMLInputElement>('input[name="audience_phd"]');
+  const undEl = form.querySelector<HTMLInputElement>('input[name="audience_undergrad"]');
+  const postEl = form.querySelector<HTMLInputElement>('input[name="audience_postdoc"]');
 
   if (facEl) facEl.checked = auds.some(a => a.includes('faculty'));
   if (phdEl) phdEl.checked = auds.some(a => a.includes('phd') || a.includes('doctoral') || a.includes('student'));
@@ -192,8 +193,8 @@ function updateReview() {
 
   const reviewCard = document.getElementById('submit-review-card');
   const reviewJson = document.getElementById('review-json');
-  const ghLink = document.getElementById('github-issue-link');
-  const emailLink = document.getElementById('email-submit-link');
+  const ghLink = document.querySelector<HTMLAnchorElement>('#github-issue-link')!;
+  const emailLink = document.querySelector<HTMLAnchorElement>('#email-submit-link')!;
 
   const content = buildGrantSubmissionContent(submission);
   reviewJson.textContent = content;
@@ -209,12 +210,12 @@ function updateReview() {
 function setupEvents() {
   const form = document.getElementById('grants-submit-form');
   const targetRow = document.getElementById('correction-target-row');
-  const targetInput = document.getElementById('target');
+  const targetInput = document.querySelector<HTMLInputElement>('#target')!;
   const suggestionsBox = document.getElementById('grant-correction-suggestions');
   const copyBtn = document.getElementById('copy-json-btn');
 
   // Mode radio change
-  form.querySelectorAll('input[name="kind"]').forEach(radio => {
+  form.querySelectorAll<HTMLInputElement>('input[name="kind"]').forEach(radio => {
     radio.addEventListener('change', () => {
       if (radio.value === 'correction') {
         targetRow.hidden = false;
@@ -255,7 +256,7 @@ function setupEvents() {
   });
 
   suggestionsBox.addEventListener('click', event => {
-    const btn = event.target.closest('[data-grant-id]');
+    const btn = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-grant-id]') : null;
     if (!btn) return;
     const grant = grantsById.get(btn.dataset.grantId);
     if (grant) {
@@ -266,7 +267,8 @@ function setupEvents() {
   });
 
   document.addEventListener('click', e => {
-    if (!targetInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+    const target = e.target instanceof Node ? e.target : null;
+    if (target && !targetInput.contains(target) && !suggestionsBox.contains(target)) {
       suggestionsBox.hidden = true;
     }
   });
@@ -274,7 +276,7 @@ function setupEvents() {
   // Form submit
   form.addEventListener('submit', event => {
     event.preventDefault();
-    const urlInput = form.querySelector('#url');
+    const urlInput = form.querySelector<HTMLInputElement>('#url')!;
     if (!urlInput.value.trim()) {
       urlInput.focus();
       urlInput.reportValidity();
@@ -306,11 +308,11 @@ async function init() {
     const params = new URLSearchParams(window.location.search);
     const grantId = params.get('id') || params.get('edit');
     if (grantId && grantsById.has(grantId)) {
-      const correctionRadio = document.querySelector('input[name="kind"][value="correction"]');
+      const correctionRadio = document.querySelector<HTMLInputElement>('input[name="kind"][value="correction"]');
       if (correctionRadio) {
         correctionRadio.checked = true;
         document.getElementById('correction-target-row').hidden = false;
-        document.getElementById('target').value = grantsById.get(grantId).name;
+        document.querySelector<HTMLInputElement>('#target')!.value = grantsById.get(grantId)!.name;
       }
       prefillFromGrant(grantsById.get(grantId));
     }
