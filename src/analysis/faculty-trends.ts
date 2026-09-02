@@ -13,13 +13,13 @@ export function renderFacultyTrends() {
     if (!ctx) return;
 
 
-    const years = [];
+    const years: number[] = [];
     const { startYear, endYear } = state.filters;
     const windowSize = 3; // 3-year window for diversity check
 
-    const diversityRates = [];
-    const facultyCounts = [];
-    const multiAreaCounts = [];
+    const diversityRates: number[] = [];
+    const facultyCounts: number[] = [];
+    const multiAreaCounts: number[] = [];
     const targetSchool = getTargetName();
     const confSet = getConferenceSet();
     const confMap = getConferenceAreaMap(confSet);

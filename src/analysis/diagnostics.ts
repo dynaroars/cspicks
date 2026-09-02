@@ -5,6 +5,7 @@ import { renderMetricCards } from '../analysis-ui.js';
 import { state } from './state.js';
 import { CONF_SET_LABELS, getAnalysisData, getTargetName } from '../analysis.js';
 import type { RankStabilitySample } from '../metrics/stability.js';
+import type { ConferenceSetId } from '../data/conference-sets.js';
 
 // One sweep serves every school, so it is cached per region rather than per
 // school. Historical mode changes which school a publication counts for, so it
@@ -57,7 +58,7 @@ export function buildStabilitySweep(cacheKey: string, onProgress: (done: number,
  * something this should publish, and naming them would invite exactly the
  * personnel conclusions the project does not support.
  */
-export function renderFragility(schoolName) {
+export function renderFragility(schoolName: string) {
     const { current } = getAnalysisData();
     const fragility = calculateFragility(current, schoolName);
     if (!fragility || !fragility.steps.length) return '';
@@ -115,7 +116,7 @@ export async function renderRankStability() {
 
     const spans = [...new Set(samples.map(sample => sample.variant.span))];
     const sets = [...new Set(samples.map(sample => sample.variant.confSet))];
-    const cell = (span, confSet) => {
+    const cell = (span: number, confSet: ConferenceSetId) => {
         const row = summary.rows.find(item => item.span === span && item.confSet === confSet);
         if (!row || !Number.isFinite(row.rank)) return '<td class="stability-cell">—</td>';
         const extreme = row.rank === summary.best ? ' stability-best'

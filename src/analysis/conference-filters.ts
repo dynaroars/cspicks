@@ -94,7 +94,7 @@ export function renderConferenceFilters() {
         { title: 'Programming & SE', areas: ['plan', 'soft'] },
         { title: 'Interdisciplinary', areas: ['graph', 'chi', 'robotics', 'visualization', 'bio', 'ecom', 'csed'] }
     ];
-    const displayNames = {
+    const displayNames: Record<string, string> = {
         nips: 'NeurIPS',
         oakland: 'IEEE S&P',
         usenixsec: 'USENIX Security',

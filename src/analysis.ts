@@ -19,6 +19,9 @@ import type { FilterController } from './filters.js';
 import type { Professor, Publication, RawData } from './types.js';
 import type { AnalysisTarget } from './analysis/state.js';
 
+type ResearcherPatterns = NonNullable<ReturnType<typeof calculateResearcherPatterns>>;
+type FrequentCoauthors = Awaited<ReturnType<typeof fetchFrequentCoauthors>>;
+
 function refreshActiveTabChart() {
     if (!state.selectedTarget) return;
     renderResearcherHighlights();
@@ -247,11 +250,12 @@ export function getResearcherPatterns() {
     });
 }
 
-const peerNames = peers => peers.map(peer => `${cleanName(peer.name)} (${peer.affiliation})`).join('; ');
+const peerNames = (peers: ResearcherPatterns['similarPeers']) => peers
+    .map(peer => `${cleanName(peer.name)} (${peer.affiliation})`).join('; ');
 
-function researcherHighlightText(patterns) {
+function researcherHighlightText(patterns: ResearcherPatterns | null) {
     if (!patterns) return [];
-    const insights = [];
+    const insights: string[] = [];
     if (patterns.pivot) {
         insights.push(`Research emphasis shifted from ${areaLabels[patterns.pivot.from] || patterns.pivot.from} to ${areaLabels[patterns.pivot.to] || patterns.pivot.to} between the earlier and later halves of this period.`);
     }
@@ -270,18 +274,18 @@ function researcherHighlightText(patterns) {
 
 // Coauthors come from DBLP, which rate-limits bursts, so the lookup happens
 // only when the reader asks for it rather than on every profile view.
-const coauthorsByResearcher = new Map();
+const coauthorsByResearcher = new Map<string, 'loading' | FrequentCoauthors>();
 
-function coauthorHighlight(name) {
-    const state = coauthorsByResearcher.get(name);
-    if (state === 'loading') return ['Looking up coauthors on DBLP…'];
-    if (!state) return [];
-    if (!state.length) return ['No DBLP coauthors found for this name and period.'];
-    return [`Most frequent coauthors: ${state.map(person =>
+function coauthorHighlight(name: string) {
+    const coauthorState = coauthorsByResearcher.get(name);
+    if (coauthorState === 'loading') return ['Looking up coauthors on DBLP…'];
+    if (!coauthorState) return [];
+    if (!coauthorState.length) return ['No DBLP coauthors found for this name and period.'];
+    return [`Most frequent coauthors: ${coauthorState.map(person =>
         `${person.name} (${person.papers} ${person.papers === 1 ? 'paper' : 'papers'})`).join('; ')}.`];
 }
 
-function loadCoauthors(name) {
+function loadCoauthors(name: string) {
     if (coauthorsByResearcher.has(name)) return;
     coauthorsByResearcher.set(name, 'loading');
     renderResearcherHighlights();
@@ -318,7 +322,7 @@ function renderResearcherHighlights() {
             : '<button type="button" class="inline-link" data-action="load-coauthors">Show most frequent coauthors (from DBLP)</button>');
 }
 
-export function renderResearcherActivityMetrics(patterns) {
+export function renderResearcherActivityMetrics(patterns: ResearcherPatterns | null) {
     const container = document.getElementById('ranking-stats');
     if (!container) return;
     if (!patterns) {
@@ -347,14 +351,14 @@ function renderSchoolAreaInsights() {
     container.innerHTML = renderInsightList(
         momentum.map(entry => {
             const label = areaLabels[entry.area] || entry.area;
-            const sign = value => `${value >= 0 ? '+' : ''}${value.toFixed(0)}%`;
+            const sign = (value: number) => `${value >= 0 ? '+' : ''}${value.toFixed(0)}%`;
             const verdict = entry.delta >= 0 ? 'outpacing' : 'trailing';
             return `${label}: ${sign(entry.growth)} here versus ${sign(entry.fieldGrowth)} across the selected region — ${verdict} the field by ${Math.abs(entry.delta).toFixed(0)} points (${entry.prior.toFixed(1)} → ${entry.current.toFixed(1)} adjusted).`;
         }),
         `Area growth against the field (vs. the preceding ${priorLength} years)`);
 }
 
-export function renderResearcherAreaInsights(patterns) {
+export function renderResearcherAreaInsights(patterns: ResearcherPatterns | null) {
     const container = document.getElementById('area-insights');
     if (!container) return;
     if (!patterns || state.selectedTarget?.type !== 'researcher') {
@@ -376,7 +380,7 @@ export function renderResearcherAreaInsights(patterns) {
     ], 'Research-area patterns');
 }
 
-export function renderResearcherVenueInsights(patterns) {
+export function renderResearcherVenueInsights(patterns: ResearcherPatterns | null) {
     const container = document.getElementById('venue-insights');
     if (!container) return;
     if (!patterns || state.selectedTarget?.type !== 'researcher') {

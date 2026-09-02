@@ -210,3 +210,10 @@ candidate-stat contract compatible with both roster and DBLP records, typed rank
 queue callbacks, retry cleanup, and empty-result fallbacks. The repository total is now 172.
 All normal verification gates pass (8 test files, 88 bundled modules). Resume with analysis and
 page controllers; keep `compare-view` for the final comparison-domain pass.
+
+Checkpoint 2026-09-02 (`noImplicitAny` analysis pass): cleared the analysis controller and all
+analysis-helper diagnostics. Reused inferred researcher-pattern and DBLP-coauthor contracts,
+typed chart series and stability-table keys, and widened the conference display-name lookup at
+its dynamic venue boundary. The repository total is now 144. All normal verification gates pass
+(8 test files, 88 bundled modules). Resume with the small page controllers and search cards,
+then type `comparison` and `compare-view` together as the final `noImplicitAny` slice.

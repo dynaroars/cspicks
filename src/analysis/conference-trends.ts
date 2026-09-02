@@ -25,7 +25,7 @@ export function renderConferenceTrends() {
         ? [...publishedVenues()]
         : Array.from(checkedCheckboxes).map(cb => cb.value);
 
-    const years = [];
+    const years: number[] = [];
     const stats: Record<number, Record<string, number>> = {}; // year -> { conf -> count }
     for (let y = startYear; y <= endYear; y++) {
         years.push(y);

@@ -49,9 +49,9 @@ export async function renderSchoolTrends() {
             renderResearcherActivityMetrics(getResearcherPatterns());
             const professor = state.rawData.professors[targetName];
             const confSet = getConferenceSet();
-            const labels = [];
-            const paperCounts = [];
-            const adjustedCounts = [];
+            const labels: number[] = [];
+            const paperCounts: number[] = [];
+            const adjustedCounts: number[] = [];
             for (let year = startYear; year <= endYear; year++) {
                 labels.push(year);
                 const yearlyPublications = (professor?.pubs || [])
@@ -111,9 +111,9 @@ export async function renderSchoolTrends() {
         const { current, prior } = getAnalysisData();
         renderSchoolAnalysisSummary(current, prior, targetSchool);
 
-        const labels = [];
-        const rankPoints = [];
-        const publicationPoints = [];
+        const labels: number[] = [];
+        const rankPoints: Array<number | null | undefined> = [];
+        const publicationPoints: number[] = [];
         const region = state.filters.region;
         const regionLabel = state.filters.element.querySelector<HTMLSelectElement>('#region-select')?.selectedOptions?.[0]?.textContent || 'US';
 

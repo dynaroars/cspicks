@@ -22,7 +22,7 @@ export function renderAreaTrends() {
     if (!ctx) return;
 
 
-    const years = [];
+    const years: number[] = [];
     const { startYear, endYear } = state.filters;
 
     const stats: Record<number, Record<string, number>> = {};
