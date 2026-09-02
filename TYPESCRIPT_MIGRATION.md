@@ -138,8 +138,13 @@ Added raw-data, NSF-dataset, and filter-controller boundaries; generic card-list
 safe share-button event/timer handling. All verification gates pass (8 test files, 88 bundled
 modules).
 
-Resume with `main`, then convert `simulator`, `funding`, grants entry modules, and other page
-controllers after their dependencies.
+Checkpoint 2026-09-02 (main page): converted the primary search/discoveries controller. Typed
+its raw/filtered data and lazy-module state, analysis targets, card options, randomized example
+helpers, search inputs, and delegated DOM actions. Tightened shared suggestion/search-result
+analysis targets to the supported school/researcher union. All verification gates pass (8 test
+files, 88 bundled modules).
+
+Resume with `simulator`, then convert `funding`, grants entry modules, and other page controllers.
 
 ### Phase 4
 

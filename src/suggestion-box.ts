@@ -8,7 +8,7 @@ export interface SuggestionItem {
   detail: string;
   searchTerms?: string;
   flag?: string;
-  target?: { type: string, name: string };
+  target?: { type: 'school' | 'researcher', name: string };
   type?: string;
   grantId?: string;
 }

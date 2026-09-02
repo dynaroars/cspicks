@@ -12,19 +12,23 @@ import { initTooltipPositioning } from './tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
 import { trackComparison, trackView } from './analytics.js';
 import { aoeDeadline, filterSchedule, formatCalendarDate } from '../csconfs/schedule-data.js';
+import type { AnalysisTarget } from './analysis/state.js';
+import type { FilterController } from './filters.js';
+import type { CardContext } from './search-cards.js';
+import type { FilteredData, FilteredProfessor, FilteredSchool, NsfDataset, RawData } from './types.js';
 
-let rawData = null;
-let appData = { professors: {}, schools: {} };
-let priorAppData = { professors: {}, schools: {} };
-let filters = null;
-let selectedAnalysisTarget = null;
-let nsfData = null;
-let conferenceSchedule = [];
+let rawData: RawData | null = null;
+let appData: FilteredData = { professors: {}, schools: {} };
+let priorAppData: FilteredData = { professors: {}, schools: {} };
+let filters: FilterController = null!;
+let selectedAnalysisTarget: AnalysisTarget | null = null;
+let nsfData: NsfDataset | null = null;
+let conferenceSchedule: any[] = [];
 // Discoveries' cards (and the NSF fetch they need) are dead weight on every
 // plain Search visit, so they're loaded as a separate chunk only when the
 // page was actually reached via the Discoveries nav link, not statically
 // imported here.
-let discoveriesApi = null;
+let discoveriesApi: typeof import('./discoveries.js') | null = null;
 
 function getCardContext() {
   return {
@@ -37,17 +41,17 @@ function getCardContext() {
     endYear: filters.endYear,
     confSet: filters.confSet,
     showRankings: filters.rankings,
-    currentQuery: document.getElementById('main-search')?.value.toLowerCase().trim() || ''
+    currentQuery: document.querySelector<HTMLInputElement>('#main-search')?.value.toLowerCase().trim() || ''
   };
 }
 
 const searchDBLPAuthors = createDblpAuthorSearch(getCardContext);
 
-function renderProfessorCard(professor, options = {}) {
+function renderProfessorCard(professor: FilteredProfessor, options: Partial<CardContext> = {}) {
   return renderProfessorCardView(professor, { ...getCardContext(), ...options });
 }
 
-function renderSchoolCard(school, filterArea = null, options = {}) {
+function renderSchoolCard(school: FilteredSchool, filterArea: string | null = null, options: Partial<CardContext> = {}) {
   return renderSchoolCardView(school, filterArea, { ...getCardContext(), ...options });
 }
 
@@ -133,7 +137,7 @@ async function init() {
     renderSearchExamples();
     await initAnalysis(rawData, filters);
 
-    const searchInput = document.getElementById('main-search');
+    const searchInput = document.querySelector<HTMLInputElement>('#main-search')!;
     searchInput.placeholder = "Search professors, universities, areas (e.g., graphics), or conferences (e.g., PLDI)";
     searchInput.disabled = false;
 
@@ -146,7 +150,11 @@ async function init() {
       const linkedTargetExists = linkedTargetType === 'school'
         ? Boolean(rawData.schools[linkedTargetName])
         : linkedTargetType === 'researcher' && Boolean(rawData.professors[linkedTargetName]);
-      if (linkedTargetExists && !comparing) displayIntegratedAnalysis({ type: linkedTargetType, name: linkedTargetName });
+      if (linkedTargetExists && !comparing && linkedTargetName) {
+        if (linkedTargetType === 'school' || linkedTargetType === 'researcher') {
+          displayIntegratedAnalysis({ type: linkedTargetType, name: linkedTargetName });
+        }
+      }
       // A shared link's title/description have to be right on first paint,
       // not only after the next interaction - updateURL() is what normally
       // triggers this, but nothing here calls it (the URL is already correct).
@@ -162,12 +170,13 @@ async function init() {
     searchInput.focus();
   } catch (err) {
     console.error('Failed to load data:', err);
-    document.querySelector('main').innerHTML = '<p class="load-error">Error loading data. Please try again.</p>';
+    const main = document.querySelector('main');
+    if (main) main.innerHTML = '<p class="load-error">Error loading data. Please try again.</p>';
   }
 }
 
 function saveExpandedCards() {
-  const expandedCards = new Set();
+  const expandedCards = new Set<string>();
   document.querySelectorAll('.card:not(.collapsed)').forEach(card => {
     const nameAttr = card.getAttribute('data-name');
     if (nameAttr) {
@@ -184,8 +193,8 @@ function saveExpandedCards() {
   return expandedCards;
 }
 
-function restoreExpandedCards(expandedCards) {
-  document.querySelectorAll('.card').forEach(card => {
+function restoreExpandedCards(expandedCards: Set<string>) {
+  document.querySelectorAll<HTMLElement>('.card').forEach(card => {
     const nameAttr = card.getAttribute('data-name');
     const header = card.querySelector('.card-header h2, .card-header h3');
 
@@ -213,7 +222,7 @@ function updateURL() {
   const params = filters.toParams();
 
   if (isDiscoveries) params.set('view', 'discoveries');
-  const q = document.getElementById('main-search').value;
+  const q = document.querySelector<HTMLInputElement>('#main-search')!.value;
   if (q) params.set('q', q);
   if (selectedAnalysisTarget) {
     params.set('target', selectedAnalysisTarget.name);
@@ -228,7 +237,7 @@ function updateURL() {
 // Keeps <title>/description/canonical honest about what's on screen, so a
 // copied link previews the actual view rather than the generic homepage -
 // every call site that reproduces the URL (updateURL) reproduces the title too.
-function updateSeoForCurrentView(query) {
+function updateSeoForCurrentView(query: string | null | undefined) {
   const page = isDiscoveries ? 'discoveries' : 'search';
   const trimmed = (query || '').trim();
   if (!trimmed) {
@@ -297,7 +306,7 @@ function refreshData() {
   renderSearchExamples();
 
   // Re-run current search
-  const query = document.getElementById('main-search').value;
+  const query = document.querySelector<HTMLInputElement>('#main-search')!.value;
   if (query.length >= 2) {
     runQuery(query);
   } else {
@@ -328,7 +337,7 @@ function updatePriorData() {
 }
 
 function setupSearch() {
-  const mainSearch = document.getElementById('main-search');
+  const mainSearch = document.querySelector<HTMLInputElement>('#main-search')!;
   const suggestionBox = createSearchSuggestionBox({
     input: mainSearch,
     listbox: document.getElementById('universal-suggestions'),
@@ -357,7 +366,7 @@ function setupSearch() {
   let debounceTimer;
   mainSearch.addEventListener('input', event => {
     clearTimeout(debounceTimer);
-    const rawQuery = event.target.value;
+    const rawQuery = (event.currentTarget as HTMLInputElement).value;
 
     displayIntegratedAnalysis(null);
     updateURL();
@@ -376,7 +385,9 @@ function setupSearch() {
   });
 
   document.querySelector('.search-examples')?.addEventListener('click', event => {
-    const exampleButton = event.target.closest('[data-search-example]');
+    const exampleButton = event.target instanceof Element
+      ? event.target.closest<HTMLElement>('[data-search-example]')
+      : null;
     if (exampleButton) {
       clearTimeout(debounceTimer);
       const query = exampleButton.dataset.searchExample;
@@ -394,18 +405,23 @@ function setupSearch() {
   });
 
   document.querySelector('main')?.addEventListener('click', event => {
-    const searchAction = event.target.closest('[data-action="search-query"]');
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+    const searchAction = target.closest<HTMLElement>('[data-action="search-query"]');
     if (searchAction) setSearchQuery(searchAction.dataset.query);
-    const professorAction = event.target.closest('[data-action="professor-at-school"]');
+    const professorAction = target.closest<HTMLElement>('[data-action="professor-at-school"]');
     if (professorAction) searchProfessorByAffiliation(professorAction.dataset.professorName, professorAction.dataset.affiliation);
-    const cardAction = event.target.closest('[data-action="open-target"]');
+    const cardAction = target.closest<HTMLElement>('[data-action="open-target"]');
     if (cardAction) {
       cardAction.closest('.card')?.classList.toggle('collapsed');
-      showIntegratedAnalysis(cardAction.dataset.targetType, cardAction.dataset.targetName);
+      const { targetType, targetName } = cardAction.dataset;
+      if ((targetType === 'school' || targetType === 'researcher') && targetName) {
+        showIntegratedAnalysis(targetType, targetName);
+      }
     }
-    const toggleAction = event.target.closest('[data-action="toggle-card"]');
+    const toggleAction = target.closest<HTMLElement>('[data-action="toggle-card"]');
     if (toggleAction) toggleAction.closest('.card')?.classList.toggle('collapsed');
-    const papersAction = event.target.closest('[data-action="toggle-papers"]');
+    const papersAction = target.closest<HTMLElement>('[data-action="toggle-papers"]');
     if (papersAction) {
       const list = papersAction.nextElementSibling;
       list?.classList.toggle('visible');
@@ -416,7 +432,7 @@ function setupSearch() {
 
 // Shared by the example chips and the "Applying for a CS PhD?" callout, both
 // of which pick a fresh, random handful of real areas/schools each render.
-function sample(items, count) {
+function sample<T>(items: T[], count: number): T[] {
   const available = [...items];
   for (let index = available.length - 1; index > 0; index--) {
     const swapIndex = Math.floor(Math.random() * (index + 1));
@@ -454,7 +470,7 @@ function discoveryExampleItems() {
   return examples;
 }
 
-function findAreaQuery(query) {
+function findAreaQuery(query: string) {
   const normalized = query.trim().toLowerCase();
   const compact = normalized.replace(/[^a-z0-9]/g, '');
   return Object.entries(areaLabels).find(([key, label]) => {
@@ -465,7 +481,7 @@ function findAreaQuery(query) {
   })?.[0] || null;
 }
 
-function deadlineExampleItems(query) {
+function deadlineExampleItems(query: string) {
   if (!query.trim() || conferenceSchedule.length === 0) return [];
   const areaQuery = findAreaQuery(query);
   const scheduleQuery = areaQuery || query;
@@ -509,7 +525,11 @@ function renderSearchExamples() {
     .filter(professor => professor.totalAdjusted > 0);
   const asProfessor = professor => ({ label: cleanName(professor.name), query: professor.name });
 
-  const pair = items => {
+  interface SearchExample {
+    label: string;
+    query: string;
+  }
+  const pair = (items: SearchExample[]) => {
     const [a, b] = sample(items, 2);
     return a && b ? [{ label: `${a.label} vs ${b.label}`, query: `${a.query} vs ${b.query}` }] : [];
   };
@@ -533,7 +553,7 @@ function renderSearchExamples() {
     ...pair(familiarConferences)
   ];
 
-  const query = document.getElementById('main-search')?.value.trim() || '';
+  const query = document.querySelector<HTMLInputElement>('#main-search')?.value.trim() || '';
   const contextualItems = [
     ...sample(discoveryExampleItems(), 2),
     ...(query.length >= 2 ? deadlineExampleItems(query) : [])
@@ -551,7 +571,7 @@ function renderSearchExamples() {
     .join('');
 }
 
-function resolveAnalysisTarget(query) {
+function resolveAnalysisTarget(query: string): AnalysisTarget | null {
   const normalized = query.trim().toLowerCase();
   if (!normalized || !appData) return null;
 
@@ -571,13 +591,13 @@ function resolveAnalysisTarget(query) {
     : null;
 }
 
-function displayIntegratedAnalysis(target) {
+function displayIntegratedAnalysis(target: AnalysisTarget | null) {
   selectedAnalysisTarget = target ? { type: target.type, name: target.name } : null;
   document.body.classList.toggle('has-analysis-target', Boolean(target));
   setAnalysisTarget(selectedAnalysisTarget);
 }
 
-function updateIntegratedAnalysis(query) {
+function updateIntegratedAnalysis(query: string) {
   displayIntegratedAnalysis(resolveAnalysisTarget(query));
 }
 
@@ -589,7 +609,7 @@ function updateIntegratedAnalysis(query) {
 
 // Runs a query through either the comparison view or the regular search
 // sections. Returns true when the query was handled as a comparison.
-function runQuery(query, { includeDblp = true } = {}) {
+function runQuery(query: string, { includeDblp = true }: { includeDblp?: boolean } = {}) {
   hideDiscoveryCards();
   // Fresh suggestions for each search rather than the set drawn at page load.
   renderSearchExamples();
@@ -613,9 +633,9 @@ function runQuery(query, { includeDblp = true } = {}) {
   return false;
 }
 
-function showIntegratedAnalysis(type, name) {
+function showIntegratedAnalysis(type: AnalysisTarget['type'], name: string) {
   hideDiscoveryCards();
-  const input = document.getElementById('main-search');
+  const input = document.querySelector<HTMLInputElement>('#main-search')!;
   input.value = type === 'researcher' ? cleanName(name) : name;
   document.body.classList.add('has-search-query');
   hideComparison();
@@ -629,8 +649,8 @@ function showIntegratedAnalysis(type, name) {
 }
 
 
-function setSearchQuery(query) {
-  const input = document.getElementById('main-search');
+function setSearchQuery(query: string) {
+  const input = document.querySelector<HTMLInputElement>('#main-search')!;
   input.value = query;
   input.dispatchEvent(new Event('input', { bubbles: true }));
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -646,7 +666,7 @@ function setupTooltips() {
 
   // Use event delegation for dynamic elements
   document.addEventListener('mouseover', (e) => {
-    const target = e.target.closest('.year-column');
+    const target = e.target instanceof Element ? e.target.closest('.year-column') : null;
     if (target) {
       const text = target.getAttribute('data-tooltip');
       if (text) {
@@ -674,7 +694,7 @@ function setupTooltips() {
   });
 
   document.addEventListener('mouseout', (e) => {
-    const target = e.target.closest('.year-column');
+    const target = e.target instanceof Element ? e.target.closest('.year-column') : null;
     if (target) {
       tooltip.style.display = 'none';
     }

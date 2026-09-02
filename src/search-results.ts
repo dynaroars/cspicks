@@ -3,6 +3,7 @@ import { areaLabels, cleanName, escapeHtml, getConferenceFullLabel, getConferenc
 import { calculatePerCapita } from './metrics.js';
 import type { AffiliationHistory, FilteredData, FilteredProfessor, FilteredSchool, SchoolAliasMap, SchoolAreaStats } from './types.js';
 import type { CardContext } from './search-cards.js';
+import type { AnalysisTarget } from './analysis/state.js';
 
 interface SearchResultsContext {
   appData: FilteredData;
@@ -15,7 +16,7 @@ interface SearchResultsContext {
   renderProfessorCard: (professor: FilteredProfessor, overrides?: Partial<CardContext>) => string;
   renderSchoolCard: (school: FilteredSchool, filterArea: string | null, overrides?: Partial<CardContext>) => string;
   hideComparison: () => void;
-  displayIntegratedAnalysis: (target: { type: string, name: string } | null) => void;
+  displayIntegratedAnalysis: (target: AnalysisTarget | null) => void;
   updateURL: () => void;
 }
 
