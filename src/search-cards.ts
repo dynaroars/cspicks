@@ -1,14 +1,30 @@
 import he from 'he';
 import { schoolAliases } from './data.js';
 import { areaLabels, cleanName, countryFlag, escapeHtml, getConferenceLabel, getInstitutionShortName, safeExternalUrl } from './shared.js';
+import type { AffiliationHistory, AreaStats, FilteredData, FilteredProfessor, FilteredSchool, RawData, SchoolAliasMap, SchoolAreaStats } from './types.js';
 
-function actionAttributes(action, values = {}) {
+export interface CardContext {
+  appData: FilteredData;
+  rawData: RawData;
+  currentQuery: string;
+  startYear: number;
+  endYear: number;
+  historicalMode?: boolean;
+  historyMap?: AffiliationHistory | null;
+  aliasMap?: SchoolAliasMap | null;
+  showRankings?: boolean;
+  rankOverride?: number;
+  scopedStats?: boolean;
+  compactNames?: boolean;
+}
+
+function actionAttributes(action: string, values: Record<string, unknown> = {}) {
   return Object.entries({ action, ...values })
     .map(([key, value]) => `data-${key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}="${escapeHtml(value)}"`)
     .join(' ');
 }
 
-export function getDBLPUrl(originalName) {
+export function getDBLPUrl(originalName: string) {
   let name = originalName
     .replace(/ Jr\./g, '_Jr.')
     .replace(/ II/g, '_II')
@@ -19,7 +35,7 @@ export function getDBLPUrl(originalName) {
     .replace(/;/g, '=');
 
   const parts = name.split(' ');
-  let lastName = parts.at(-1);
+  let lastName = parts.at(-1) || '';
   if (parseInt(lastName) > 0) {
     const suffix = parts.pop();
     lastName = `${parts.at(-1)}_${suffix}`;
@@ -37,11 +53,11 @@ const profileIcons = {
   dblp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 4h9l5 5v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/><path d="M14 4v5h5M8 13h8M8 17h5"/></svg>'
 };
 
-function profileLink(url, kind, label) {
+function profileLink(url: string, kind: keyof typeof profileIcons, label: string) {
   return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}">${profileIcons[kind]}</a>`;
 }
 
-function renderProfileLinks(prof) {
+function renderProfileLinks(prof: FilteredProfessor) {
   const homepage = safeExternalUrl(prof.homepage);
   const links = [
     homepage !== '#' ? profileLink(homepage, 'website', 'Website') : '',
@@ -52,24 +68,24 @@ function renderProfileLinks(prof) {
   return `<span class="profile-links">${links}</span>`;
 }
 
-function renderAffiliationLink(school, yearRange = '') {
+function renderAffiliationLink(school: string, yearRange = '') {
   return `<button type="button" class="inline-link" ${actionAttributes('search-query', { query: school })}>${escapeHtml(school)}</button>${yearRange ? ` <span class="affiliation-years">(${escapeHtml(yearRange)})</span>` : ''}`;
 }
 
-function renderAffiliations(prof, context) {
+function renderAffiliations(prof: FilteredProfessor, context: CardContext) {
   const { historicalMode, historyMap, aliasMap, rawData, startYear, endYear } = context;
   if (!historicalMode || !historyMap?.[prof.name]) return renderAffiliationLink(prof.affiliation);
 
   const currentYear = new Date().getFullYear();
   const pubYears = new Set(prof.pubs.map(pub => pub.year));
-  const schoolsWithPapers = new Set();
+  const schoolsWithPapers = new Set<string>();
   prof.pubs.forEach(pub => {
     historyMap[prof.name]
       .filter(segment => pub.year >= segment.start && pub.year <= segment.end)
       .forEach(segment => schoolsWithPapers.add(aliasMap?.[segment.school] || segment.school));
   });
 
-  const affiliations = new Map();
+  const affiliations = new Map<string, { start: number, end: number }>();
   historyMap[prof.name].forEach(segment => {
     const hasPapers = Array.from(pubYears).some(year => year >= segment.start && year <= segment.end);
     const significant = segment.end - segment.start + 1 >= 2 || segment.end >= currentYear;
@@ -93,7 +109,7 @@ function renderAffiliations(prof, context) {
   return `${format(sorted[0])}<details class="affiliation-history"><summary>+${sorted.length - 1} more</summary><span>${sorted.slice(1).map(format).join(', ')}</span></details>`;
 }
 
-export function renderProfessorCard(prof, context) {
+export function renderProfessorCard(prof: FilteredProfessor, context: CardContext) {
   // A professor's flag is their current institution's country.
   const profCountry = context.rawData?.schools?.[prof.affiliation];
   const profRank = Number.isFinite(context.rankOverride) ? context.rankOverride : prof.rank;
@@ -147,7 +163,7 @@ export function renderProfessorCard(prof, context) {
 // above is what answers that.
 const SCORE_MIX_HELP = 'A univ\'s CSRankings score is the geometric mean of its output across all areas, where each area enters as ln(adjusted pubs + 1). This splits that score into the share each area supplies. The percentages are internal to this univ and always add up to 100%, so a large share means the area drives this univ\'s own score \u2014 not that it leads other univs in that area. For standing against other univs, use the ranked subfield list above.';
 
-function renderSubfieldContributions(school) {
+function renderSubfieldContributions(school: FilteredSchool) {
   const contributions = Object.entries(school.areaAdjustedCounts || {})
     .filter(([, value]) => value > 0)
     .map(([area, value]) => ({ area, value, weight: Math.log(value + 1) }))
@@ -164,7 +180,7 @@ function renderSubfieldContributions(school) {
   }).join('')}</div></details></div>`;
 }
 
-function facultyButton(name, school, stats, rank = null) {
+function facultyButton(name: string, school: string, stats: AreaStats, rank: number | null = null) {
   const paperCount = Math.ceil(stats.count);
   const rankPrefix = Number.isFinite(rank) ? `<span class="faculty-tag-rank">${rank}.</span> ` : '';
   return `<button type="button" class="faculty-tag" ${actionAttributes('professor-at-school', { professorName: name, affiliation: school })}>${rankPrefix}<span>${escapeHtml(cleanName(name))}</span> <small class="faculty-tag-stats">${paperCount} ${paperCount === 1 ? 'paper' : 'papers'} (${stats.adjusted.toFixed(1)} adjusted)</small></button>`;
@@ -173,7 +189,7 @@ function facultyButton(name, school, stats, rank = null) {
 // What one professor contributed to one area at one school. Pre-aggregated by
 // the data pipeline; the fallback covers school objects assembled by a search
 // (conference views) rather than by `filterByYears`.
-function areaFacultyStats(data, area, name, appData) {
+function areaFacultyStats(data: SchoolAreaStats, area: string, name: string, appData: FilteredData): AreaStats {
   const stored = data.facultyStats?.[name];
   if (stored) return stored;
   const prof = appData.professors[name];
@@ -187,9 +203,9 @@ function areaFacultyStats(data, area, name, appData) {
 
 // The whole department in one list, ordered by output — the view CSRankings
 // gives when a university is expanded.
-function renderFacultyRoster(school, context) {
+function renderFacultyRoster(school: FilteredSchool, context: CardContext) {
   const counts = school.facultyCounts || {};
-  const roster = Object.entries(school.facultyAdjustedCounts || {})
+  const roster: Array<{ name: string, stats: AreaStats, rank?: number }> = Object.entries(school.facultyAdjustedCounts || {})
     .map(([name, adjusted]) => ({ name, stats: { count: counts[name] || 0, adjusted } }))
     .sort((a, b) => b.stats.adjusted - a.stats.adjusted || cleanName(a.name).localeCompare(cleanName(b.name)));
   if (!roster.length) return '';
@@ -213,9 +229,9 @@ function renderFacultyRoster(school, context) {
   return `<div class="school-faculty-roster"><div class="faculty-list">${tags}</div></div>`;
 }
 
-export function renderSchoolCard(school, filterArea, context) {
+export function renderSchoolCard(school: FilteredSchool, filterArea: string | null, context: CardContext) {
   const { appData, currentQuery } = context;
-  const sortedAreas = filterArea
+  const sortedAreas: Array<[string, SchoolAreaStats]> = filterArea
     ? (school.areas[filterArea] ? [[filterArea, school.areas[filterArea]]] : [])
     : Object.entries(school.areas).sort(([a], [b]) => (school.areaRanks?.[a] || 9999) - (school.areaRanks?.[b] || 9999));
   const exact = school.name.toLowerCase() === currentQuery

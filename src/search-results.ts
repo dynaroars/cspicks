@@ -1,13 +1,39 @@
 import { assignCompetitionRanks, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet, schoolAliases, conferenceAliases } from './data.js';
 import { areaLabels, cleanName, escapeHtml, getConferenceFullLabel, getConferenceLabel } from './shared.js';
 import { calculatePerCapita } from './metrics.js';
+import type { AffiliationHistory, FilteredData, FilteredProfessor, FilteredSchool, SchoolAliasMap, SchoolAreaStats } from './types.js';
+import type { CardContext } from './search-cards.js';
+
+interface SearchResultsContext {
+  appData: FilteredData;
+  filters: {
+    confSet: string;
+    historyMap: AffiliationHistory | null;
+    aliasMap: SchoolAliasMap | null;
+    perCapita?: boolean;
+  };
+  renderProfessorCard: (professor: FilteredProfessor, overrides?: Partial<CardContext>) => string;
+  renderSchoolCard: (school: FilteredSchool, filterArea: string | null, overrides?: Partial<CardContext>) => string;
+  hideComparison: () => void;
+  displayIntegratedAnalysis: (target: { type: string, name: string } | null) => void;
+  updateURL: () => void;
+}
+
+interface InfiniteColumn {
+  container: HTMLElement;
+  items: any[];
+  renderItem: (item: any, position: number) => string;
+  rendered: number;
+}
+
+const byId = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 
 // Renders the Search page's result sections. The page injects its live state
 // and callbacks through `ctx` so these functions stay free of module globals.
-let ctx = null;
-let profObserver = null;
+let ctx: SearchResultsContext;
+let profObserver: IntersectionObserver | null = null;
 
-export function initSearchResults(context) {
+export function initSearchResults(context: SearchResultsContext) {
   ctx = context;
 }
 
@@ -21,8 +47,8 @@ function exitRankingsView() {
 // scrolls, so neither column is capped at an arbitrary length. Both columns
 // grow together, keeping the two lists the same length.
 const CHUNK_SIZE = 20;
-let infiniteObserver = null;
-let infiniteColumns = [];
+let infiniteObserver: IntersectionObserver | null = null;
+let infiniteColumns: InfiniteColumn[] = [];
 
 function stopInfiniteLists() {
   infiniteObserver?.disconnect();
@@ -54,7 +80,7 @@ function extendInfiniteLists() {
   infiniteObserver.observe(sentinel);
 }
 
-export function renderInfiniteLists(columns) {
+export function renderInfiniteLists(columns: Array<Omit<InfiniteColumn, 'rendered'>>) {
   stopInfiniteLists();
   infiniteColumns = columns.map(column => ({ ...column, rendered: 0 }));
   infiniteColumns.forEach(column => { column.container.innerHTML = ''; });
@@ -68,9 +94,9 @@ export function renderInfiniteLists(columns) {
 
 // Search renders its columns from separate functions; collecting them for the
 // end of the tick lets both grow in step without the callers coordinating.
-let queuedColumns = [];
+let queuedColumns: Array<Omit<InfiniteColumn, 'rendered'>> = [];
 
-function queueInfiniteList(container, items, renderItem) {
+function queueInfiniteList(container: HTMLElement, items: any[], renderItem: InfiniteColumn['renderItem']) {
   container.innerHTML = '';
   if (!queuedColumns.length) {
     queueMicrotask(() => {
@@ -82,7 +108,7 @@ function queueInfiniteList(container, items, renderItem) {
   queuedColumns.push({ container, items, renderItem });
 }
 
-export function findMatchingConference(query) {
+export function findMatchingConference(query: string) {
   const normalized = (conferenceAliases[query] || query).toLowerCase();
   // Venues answer to their identifier and to the label the interface shows,
   // so "usenixsec", "USENIX Security" and "IEEE S&P" all resolve.
@@ -92,12 +118,12 @@ export function findMatchingConference(query) {
   ) || null;
 }
 
-export function searchAreaPeople(query) {
+export function searchAreaPeople(query: string) {
   exitRankingsView();
-  const container = document.getElementById('area-people-results');
+  const container = byId('area-people-results');
   container.innerHTML = '';
 
-  let topProfs = [];
+  let topProfs: Array<FilteredProfessor & { resultAdjusted: number }> = [];
   const title = 'Professors';
   const confKey = findMatchingConference(query);
 
@@ -119,7 +145,7 @@ export function searchAreaPeople(query) {
           resultAdjusted: adjusted
         };
       })
-      .filter(p => p && p.resultAdjusted > 0)
+      .filter((p): p is FilteredProfessor & { resultAdjusted: number } => Boolean(p && p.resultAdjusted > 0))
       .sort((a, b) => b.resultAdjusted - a.resultAdjusted || cleanName(a.name).localeCompare(cleanName(b.name)));
   } else {
     const areaMatch = Object.entries(areaLabels).find(([key, label]) =>
@@ -144,7 +170,7 @@ export function searchAreaPeople(query) {
             resultAdjusted: stats.adjusted
           };
         })
-        .filter(Boolean)
+        .filter((p): p is FilteredProfessor & { resultAdjusted: number } => Boolean(p))
         .sort((a, b) => b.resultAdjusted - a.resultAdjusted || cleanName(a.name).localeCompare(cleanName(b.name)));
     }
   }
@@ -156,7 +182,7 @@ export function searchAreaPeople(query) {
     topProfs.map(prof => ({ name: prof.name, resultAdjusted: prof.resultAdjusted })),
     entry => entry.resultAdjusted
   ).map(entry => [entry.name, entry.rank]));
-  queueInfiniteList(document.getElementById('area-people-results'), topProfs,
+  queueInfiniteList(byId('area-people-results'), topProfs,
     professor => ctx.renderProfessorCard(professor, {
       scopedStats: true,
       compactNames: true,
@@ -164,9 +190,9 @@ export function searchAreaPeople(query) {
     }));
 }
 
-export function searchProfessorByAffiliation(name, affiliation) {
+export function searchProfessorByAffiliation(name: string, affiliation: string) {
   exitRankingsView();
-  const input = document.getElementById('main-search');
+  const input = byId<HTMLInputElement>('main-search');
   input.value = cleanName(name);
   ctx.hideComparison();
 
@@ -208,7 +234,7 @@ export function searchProfessorByAffiliation(name, affiliation) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-export function searchProfessors(query) {
+export function searchProfessors(query: string) {
   exitRankingsView();
   if (profObserver) {
     profObserver.disconnect();
@@ -262,7 +288,7 @@ export function searchProfessors(query) {
   renderChunk();
 }
 
-export function findMatchingArea(query) {
+export function findMatchingArea(query: string) {
   const q = query.toLowerCase();
 
   if (areaLabels[q]) return q;
@@ -281,7 +307,7 @@ export function findMatchingArea(query) {
   return null;
 }
 
-export function searchSchools(query) {
+export function searchSchools(query: string) {
   exitRankingsView();
   const effectiveQuery = schoolAliases[query] || query;
   const confKeyMatch = findMatchingConference(query);
@@ -303,7 +329,7 @@ export function searchSchools(query) {
   }
 
   if (confKeyMatch) {
-    const schoolStats = {};
+    const schoolStats: Record<string, SchoolAreaStats> = {};
 
     Object.entries(ctx.appData.professors).forEach(([profName, prof]) => {
       const pubsInConf = prof.pubs.filter(p => p.area === confKeyMatch);
