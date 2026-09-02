@@ -37,7 +37,8 @@ export async function performCandidatesAnalysis(
         }
         if (!profData) {
           for (const pName of Object.keys(appData.professors)) {
-            if (!pName.toLowerCase().includes(name.split(' ').pop().toLowerCase()) &&
+            const lastName = name.split(' ').pop()?.toLowerCase() || '';
+            if (!pName.toLowerCase().includes(lastName) &&
               Math.abs(pName.length - name.length) > 3) continue;
 
             if (fuzzyMatch(pName, name)) {
@@ -114,8 +115,8 @@ export async function performCandidatesAnalysis(
         let dblpSuffix = null;
         const suffixMatch = name.match(/^(.+?)\s+(\d{4})$/);
         if (suffixMatch) {
-          searchName = suffixMatch[1];
-          dblpSuffix = suffixMatch[2];
+          searchName = suffixMatch[1]!;
+          dblpSuffix = suffixMatch[2]!;
         }
 
         let best: DblpAuthorResult | (NonNullable<typeof linkedProfile> & { name?: string }) | undefined = linkedProfile || selectedDblpProfile;
@@ -147,12 +148,13 @@ export async function performCandidatesAnalysis(
 
         displayName = best.name || `DBLP profile ${best.pid}`;
 
-        stats = await fetchAuthorStats(best.pid, filters.startYear, filters.endYear, filters.confSet);
-        if (!stats) {
+        const fetchedStats = await fetchAuthorStats(best.pid, filters.startYear, filters.endYear, filters.confSet);
+        if (!fetchedStats) {
           candidateResults.push({ name, error: 'We couldn\'t retrieve publication records from DBLP. Please verify the profile is accessible.' });
           continue;
         }
-        if (!best.name && stats.aliases?.length) displayName = stats.aliases[0];
+        stats = fetchedStats;
+        if (!best.name && stats.aliases?.length) displayName = stats.aliases[0]!;
       }
 
       let sourceSchool = null;
@@ -207,13 +209,13 @@ export async function performCandidatesAnalysis(
 
       const ops = [];
       if (isRemovalMode) {
-        ops.push({ school: selectedUniv, stats, isRemoval: true, facultyKey: matchedFacultyName });
+        ops.push({ school: selectedUniv, stats, isRemoval: true, facultyKey: matchedFacultyName || undefined });
       } else {
         ops.push({ school: selectedUniv, stats, isRemoval: false, facultyKey: displayName });
       }
 
       if (sourceSchool && !isRemovalMode) {
-        ops.push({ school: sourceSchool, stats, isRemoval: true, facultyKey: matchedFacultyName });
+        ops.push({ school: sourceSchool, stats, isRemoval: true, facultyKey: matchedFacultyName || undefined });
       }
       const impactMap = calculateRankImpact(appData.schools, ops, { perCapita: filters.perCapita });
       const targetImpact = impactMap.get(selectedUniv.name) || { overall: 0, areas: {}, rankBefore: selectedUniv.rank, rankAfter: selectedUniv.rank };

@@ -1,18 +1,11 @@
 import { areaLabels, escapeHtml } from '../shared.js';
 import type { AreaStats } from '../types.js';
+import type { SimulationAreaDelta } from '../simulation.js';
 
-type AreaDelta = number | {
-  delta?: number;
-  dropped?: boolean;
-  entered?: boolean;
-  wasRank?: number;
-  nowRank?: number;
-};
+type AreaDelta = SimulationAreaDelta;
 
-export interface CandidateResult {
+interface CandidateResultBase {
   name: string;
-  error?: string | null;
-  stats?: CandidateStats;
   rankDelta?: number | null;
   currentRank?: number | null;
   newRank?: number | null;
@@ -21,6 +14,18 @@ export interface CandidateResult {
   usedCSRankings?: boolean;
   sourceSchool?: { name: string, delta: number | null } | null;
 }
+
+interface CandidateFailure extends CandidateResultBase {
+  error: string;
+  stats?: never;
+}
+
+interface CandidateSuccess extends CandidateResultBase {
+  error?: null;
+  stats: CandidateStats;
+}
+
+export type CandidateResult = CandidateFailure | CandidateSuccess;
 
 export interface CandidateStats {
   totalAdjusted: number;
@@ -50,7 +55,7 @@ export function renderCandidateResults(candidates: CandidateResult[]) {
   const medals = ['🥇', '🥈', '🥉'];
 
   return candidates.map((c, i) => {
-    if (c.error) {
+    if (!c.stats) {
       return `
         <div class="candidate-card">
           <div class="candidate-header">
@@ -63,6 +68,8 @@ export function renderCandidateResults(candidates: CandidateResult[]) {
         </div>
       `;
     }
+
+    const stats = c.stats;
 
     const medal = i < 3 ? medals[i] : `#${i + 1}`;
     const deltaClass = c.rankDelta == null ? 'neutral' : c.rankDelta > 0 ? 'positive' : (c.rankDelta < 0 ? 'negative' : 'neutral');
@@ -83,6 +90,14 @@ export function renderCandidateResults(candidates: CandidateResult[]) {
     let sourceImpactHtml = '';
     if (c.sourceSchool) {
       const sDelta = c.sourceSchool.delta;
+      if (sDelta == null) {
+        sourceImpactHtml = `
+          <div class="candidate-source-impact">
+             <span>${escapeHtml(c.sourceSchool.name)}:</span>
+             <span class="neutral" style="font-weight: 600;">rank unavailable</span>
+          </div>
+        `;
+      } else {
       const sClass = sDelta > 0 ? 'positive' : (sDelta < 0 ? 'negative' : 'neutral');
       const sText = sDelta > 0 ? `+${sDelta}` : (sDelta < 0 ? `${sDelta}` : '±0');
       sourceImpactHtml = `
@@ -91,9 +106,10 @@ export function renderCandidateResults(candidates: CandidateResult[]) {
              <span class="${sClass}" style="font-weight: 600;">${sText} ranks</span>
           </div>
       `;
+      }
     }
 
-    const papersHtml = c.stats.papers.slice(0, 20).map(p => {
+    const papersHtml = stats.papers.slice(0, 20).map(p => {
       const countLabel = (p.count || 0) > 1 ? `${Math.round(p.count || 0)} papers` : '1 paper';
       return `
       <div class="paper-item">
@@ -104,13 +120,13 @@ export function renderCandidateResults(candidates: CandidateResult[]) {
     `;
     }).join('');
 
-    const countedPaperLabel = `${c.stats.totalPapers} rank-counted ${c.stats.totalPapers === 1 ? 'paper' : 'papers'}`;
-    const paperSummary = Number.isFinite(c.stats.totalDblpPublications)
-      ? `${countedPaperLabel} of ${c.stats.totalDblpPublications} DBLP publications in the selected years`
-      : `${c.stats.totalPapers} ${c.stats.totalPapers === 1 ? 'paper' : 'papers'}`;
+    const countedPaperLabel = `${stats.totalPapers} rank-counted ${stats.totalPapers === 1 ? 'paper' : 'papers'}`;
+    const paperSummary = Number.isFinite(stats.totalDblpPublications)
+      ? `${countedPaperLabel} of ${stats.totalDblpPublications} DBLP publications in the selected years`
+      : `${stats.totalPapers} ${stats.totalPapers === 1 ? 'paper' : 'papers'}`;
 
     // Show all areas the candidate publishes in, with rank delta for each
-    const allAreas = Object.keys(c.stats.areas);
+    const allAreas = Object.keys(stats.areas);
     const areaDeltaEntries = allAreas
       .map(area => {
         let d = (c.areaDeltas || {})[area];
@@ -163,9 +179,9 @@ export function renderCandidateResults(candidates: CandidateResult[]) {
               ${actionLabel}
               ${dataSourceBadge}
             </div>
-            <div class="candidate-stats">${Object.keys(c.stats.areas).length} areas, ${paperSummary}, ${c.stats.totalAdjusted.toFixed(1)} adjusted</div>
+            <div class="candidate-stats">${Object.keys(stats.areas).length} areas, ${paperSummary}, ${stats.totalAdjusted.toFixed(1)} adjusted</div>
             <div class="candidate-area-breakdown">
-              ${Object.entries(c.stats.areas)
+              ${Object.entries(stats.areas)
         .sort(([, a], [, b]) => {
           const aCount = typeof a === 'number' ? a : a.count;
           const bCount = typeof b === 'number' ? b : b.count;

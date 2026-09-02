@@ -274,3 +274,10 @@ building a fully initialized Levenshtein matrix, rejecting empty normalized name
 non-null cloned-school/area references, and making optional rank-map branches explicit. The
 repository total is now 417. All normal verification gates pass (8 test files, 88 bundled
 modules). Resume with the simulator controller and candidate analysis/results modules.
+
+Checkpoint 2026-09-02 (`strictNullChecks` simulator-candidate pass): made simulation area-impact
+results a typed public contract, modeled candidate outcomes as success/failure variants, and
+narrowed DBLP fetches, aliases, suffixes, source impacts, and faculty keys before use. Candidate
+analysis/results now have zero null-safety diagnostics. The repository total is 396. All normal
+verification gates pass (8 test files, 88 bundled modules). Resume with `simulator.ts`, then the
+remaining page controllers and renderers.

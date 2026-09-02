@@ -13,6 +13,17 @@ export interface SimulationOperation {
   facultyKey?: string;
 }
 
+export type SimulationAreaDelta =
+  | number
+  | { delta?: number, dropped?: boolean, entered?: boolean, wasRank?: number, nowRank?: number };
+
+export interface SimulationImpact {
+  overall: number | null;
+  areas: Record<string, SimulationAreaDelta>;
+  rankBefore: number | null | undefined;
+  rankAfter: number | null | undefined;
+}
+
 function levenshtein(a: string, b: string) {
   const matrix = Array.from({ length: b.length + 1 }, () => Array<number>(a.length + 1).fill(0));
   for (let i = 0; i <= b.length; i++) { matrix[i]![0] = i; }
@@ -217,7 +228,7 @@ export function calculateRankImpact(schools: Record<string, FilteredSchool>, ops
     });
   });
 
-  const deltaMap = new Map<string, { overall: number | null, areas: Record<string, unknown>, rankBefore: number | null | undefined, rankAfter: number | null | undefined }>();
+  const deltaMap = new Map<string, SimulationImpact>();
   ops.forEach(op => {
     // rankBefore/rankAfter always reflect the active mode, so a caller reading
     // just `overall` (and, for display, `rankBefore`) never has to branch on
@@ -231,7 +242,7 @@ export function calculateRankImpact(schools: Record<string, FilteredSchool>, ops
 
     const areaDeltasBefore = areaRanksBefore[op.school.name] || {};
     const areaDeltasAfter = areaRanksAfter[op.school.name] || {};
-    const areaDeltas: Record<string, unknown> = {};
+    const areaDeltas: Record<string, SimulationAreaDelta> = {};
     areaList.forEach(area => {
       const before = areaDeltasBefore[area];
       const after = areaDeltasAfter[area];
