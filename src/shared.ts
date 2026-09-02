@@ -1,4 +1,4 @@
-export const areaLabels = {
+export const areaLabels: Record<string, string> = {
   'ai': 'AI',
   'vision': 'Computer Vision',
   'mlmining': 'Machine Learning',
@@ -28,7 +28,7 @@ export const areaLabels = {
   'csed': 'CS Education'
 };
 
-export const conferenceLabels = {
+export const conferenceLabels: Record<string, string> = {
   nips: 'NeurIPS',
   chiconf: 'CHI',
   'siggraph-asia': 'SIGGRAPH Asia',
@@ -40,7 +40,7 @@ export const conferenceLabels = {
 
 // Spelled-out venue names for the CSRankings venue set, so a result header can
 // say what an abbreviation stands for.
-const conferenceFullNames = {
+const conferenceFullNames: Record<string, string> = {
   aaai: 'AAAI Conference on Artificial Intelligence',
   ijcai: 'International Joint Conference on Artificial Intelligence',
   cvpr: 'Conference on Computer Vision and Pattern Recognition',
@@ -122,7 +122,7 @@ const conferenceFullNames = {
 };
 
 /** "ICSE (International Conference on Software Engineering)" when known. */
-export function getConferenceFullLabel(key) {
+export function getConferenceFullLabel(key: string) {
   const label = getConferenceLabel(key);
   const full = conferenceFullNames[key];
   return full && !label.includes('(') ? `${label} (${full})` : label;
@@ -168,7 +168,7 @@ export function getInitialRegion(search = globalThis.location?.search || '') {
   return detectRegionFromLocales(locales);
 }
 
-export function rememberRegion(region) {
+export function rememberRegion(region: string) {
   if (!VALID_REGIONS.has(region)) return;
   try {
     globalThis.localStorage?.setItem(REGION_STORAGE_KEY, region);
@@ -177,7 +177,7 @@ export function rememberRegion(region) {
   }
 }
 
-export function getConferenceLabel(key) {
+export function getConferenceLabel(key: string) {
   return conferenceLabels[key] || key.toUpperCase();
 }
 
@@ -192,7 +192,7 @@ export function getChartColors() {
   };
 }
 
-export function updateChartDefaults(Chart) {
+export function updateChartDefaults(Chart: { defaults: any }) {
   const colors = getChartColors();
   Chart.defaults.color = colors.text;
   Chart.defaults.borderColor = colors.grid;
@@ -218,7 +218,7 @@ export function updateChartDefaults(Chart) {
  * Infinity means no match). The last tier lets every query token match the
  * start of some word, so "michael goodrich" still finds "Michael T. Goodrich".
  */
-export function scoreSuggestionMatch(text, query) {
+export function scoreSuggestionMatch(text: string, query: string) {
   const normalized = text.toLowerCase();
   if (normalized.startsWith(query)) return 0;
   const words = normalized.split(/\s+/);
@@ -229,11 +229,11 @@ export function scoreSuggestionMatch(text, query) {
   return Infinity;
 }
 
-export function cleanName(name) {
+export function cleanName(name: string) {
   return name.replace(/\s+\d+$/, '');
 }
 
-const institutionShortNames = {
+const institutionShortNames: Record<string, string> = {
   // Keys are CSRankings' own spellings, which are not always the institution's
   // canonical name ("Univ. of California - Berkeley", not "University of
   // California, Berkeley"). Every key here is verified to exist in the roster;
@@ -276,7 +276,7 @@ const institutionShortNames = {
 // CSRankings publishes a flag per country alongside its institution data.
 const CSRANKINGS_FLAGS = 'https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/flags';
 
-export function countryFlag(countryCode, countryName = '') {
+export function countryFlag(countryCode: unknown, countryName = '') {
   const code = String(countryCode || '').toLowerCase();
   if (!/^[a-z]{2}$/.test(code)) return '';
   const label = escapeHtml(countryName || code.toUpperCase());
@@ -297,7 +297,7 @@ export function countryFlag(countryCode, countryName = '') {
  * without it. Verified against the full CSRankings roster: 159 of 702 names
  * shorten, and no two collapse to the same string.
  */
-export function getInstitutionShortName(name) {
+export function getInstitutionShortName(name: string) {
   const mapped = institutionShortNames[name];
   if (mapped) return mapped;
   const match = String(name || '').match(/^(.+) University$/);
@@ -306,7 +306,7 @@ export function getInstitutionShortName(name) {
   return !/\s/.test(rest) || /\sState$/.test(rest) ? rest : name;
 }
 
-export function escapeHtml(value) {
+export function escapeHtml(value: unknown) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -317,11 +317,11 @@ export function escapeHtml(value) {
 
 // Produces a value that is safe inside a quoted inline-handler argument.
 // decodeURIComponent() must be used by the handler before consuming it.
-export function encodeInlineValue(value) {
+export function encodeInlineValue(value: unknown) {
   return encodeURIComponent(String(value ?? '')).replace(/'/g, '%27');
 }
 
-export function safeExternalUrl(value) {
+export function safeExternalUrl(value: unknown) {
   try {
     const url = new URL(String(value ?? ''));
     return url.protocol === 'http:' || url.protocol === 'https:' ? url.href : '#';
@@ -330,7 +330,7 @@ export function safeExternalUrl(value) {
   }
 }
 
-export function formatRelativeTime(dateInput, now = Date.now()) {
+export function formatRelativeTime(dateInput: string | number | Date, now = Date.now()) {
   const time = typeof dateInput === 'number' ? dateInput : new Date(dateInput).getTime();
   if (Number.isNaN(time)) return 'Unknown';
   const diffSec = Math.max(0, Math.floor((now - time) / 1000));
@@ -348,26 +348,34 @@ export function formatRelativeTime(dateInput, now = Date.now()) {
   return `${diffYears} year${diffYears === 1 ? '' : 's'} ago`;
 }
 
-let cachedRepoCommit = null;
-let repoCommitPromise = null;
+export interface RepoCommit {
+  sha: string;
+  fullSha: string;
+  date?: string;
+  url: string;
+}
+
+let cachedRepoCommit: RepoCommit | null = null;
+let repoCommitPromise: Promise<RepoCommit | null> | null = null;
 
 export async function fetchLatestRepoCommit() {
   if (cachedRepoCommit) return cachedRepoCommit;
   if (!repoCommitPromise) {
     repoCommitPromise = fetch('https://api.github.com/repos/dynaroars/cspicks/commits?per_page=1')
       .then(res => (res.ok ? res.json() : null))
-      .then(data => {
+      .then((data: unknown) => {
         if (Array.isArray(data) && data[0]) {
+          const record = data[0] as { sha: string, commit?: { committer?: { date?: string }, author?: { date?: string } } };
           cachedRepoCommit = {
-            sha: data[0].sha.slice(0, 7),
-            fullSha: data[0].sha,
-            date: data[0].commit?.committer?.date || data[0].commit?.author?.date,
-            url: `https://github.com/dynaroars/cspicks/commit/${data[0].sha}`
+            sha: record.sha.slice(0, 7),
+            fullSha: record.sha,
+            date: record.commit?.committer?.date || record.commit?.author?.date,
+            url: `https://github.com/dynaroars/cspicks/commit/${record.sha}`
           };
         }
         return cachedRepoCommit;
       })
-      .catch(() => null);
+      .catch((): null => null);
   }
   return repoCommitPromise;
 }

@@ -35,7 +35,7 @@ function openDb(): Promise<IDBDatabase | null> {
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => resolve(null);
     request.onblocked = () => resolve(null);
-  }).catch(() => null);
+  }).catch((): null => null);
 
   return dbPromise;
 }
@@ -67,7 +67,7 @@ export async function readCached<T>(key: string): Promise<T | null> {
   if (!entry || typeof entry.storedAt !== 'number') return null;
   if (Date.now() - entry.storedAt > TTL_MS) {
     // Expired entries are dropped on read; there is no separate sweep.
-    await transact(db, 'readwrite', store => store.delete(key));
+    await transact<undefined>(db, 'readwrite', store => store.delete(key));
     return null;
   }
   return entry.value ?? null;

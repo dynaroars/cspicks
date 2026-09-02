@@ -136,7 +136,7 @@ function getFormData() {
 
   const topics = topicsRaw ? topicsRaw.split(',').map(t => t.trim()).filter(Boolean) : [];
 
-  const submission = {
+  const submission: Record<string, string | string[] | null> = {
     submissionType: kind === 'correction' ? 'edit_existing_award' : 'new_award_proposal',
     officialUrl: url || null,
     awardName: name || null,

@@ -184,3 +184,10 @@ All verification gates pass (8 test files, 88 bundled modules).
 
 Resume by reducing `noImplicitAny` diagnostics in dependency order, starting with `shared`, data,
 and metrics before controllers. Tests and manual build scripts remain JavaScript by design.
+
+Checkpoint 2026-09-02 (`noImplicitAny` shared/leaf pass): typed shared labels, name/URL/date
+helpers, repository commit responses, Chart.js default integration, IndexedDB expiry writes,
+grant sorting/submission dictionaries, and per-capita rank callbacks. This clears all
+`noImplicitAny` diagnostics from `shared`, `dblp-cache`, `dblp-search-ui`, `grants-data`, the
+grants submission controller, and `metrics/per-capita`, reducing the total from 366 to 296.
+All normal verification gates pass. Resume with `data.ts`, then the remaining metrics modules.

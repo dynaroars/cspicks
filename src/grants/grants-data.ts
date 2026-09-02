@@ -149,7 +149,7 @@ export function filterGrants(grants: Grant[], {
       return a.name.localeCompare(b.name);
     }
     if (sortBy === 'deadline') {
-      const getMonthOrder = m => {
+      const getMonthOrder = (m: number) => {
         if (m === 0) return 99; // rolling at end
         return (m - currentMonth + 12) % 12;
       };

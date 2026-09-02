@@ -17,7 +17,7 @@ export function rankSchoolsPerCapita(schools: Record<string, FilteredSchool> | F
       };
     })
     .filter(row => row.name && row.facultyCount >= minFaculty);
-  return assignCompetitionRanks(rows, row => row.perCapita);
+  return assignCompetitionRanks(rows, (row: typeof rows[number]) => row.perCapita);
 }
 
 export function calculatePerCapita(filteredData: FilteredData, options?: { minFaculty?: number }) {
