@@ -13,7 +13,7 @@ export interface ComparisonEntry {
     areas: Record<string, AreaStats>;
     totalCount: number;
     totalAdjusted: number;
-    rank?: number;
+    rank?: number | null;
     facultyAdjustedCounts?: Record<string, number>;
     affiliation?: string;
     totalPapers?: number;
@@ -108,7 +108,7 @@ export function renderComparisonChart(
                     yAlign: 'center',
                     caretSize: 0,
                     callbacks: {
-                        label: (context) => `${context.dataset.label}: ${context.parsed.x.toFixed(1)} adjusted`
+                        label: (context) => `${context.dataset.label}: ${Number(context.parsed.x || 0).toFixed(1)} adjusted`
                     }
                 }
             },
@@ -136,7 +136,8 @@ export function renderScoreboard(safeNameA: string, safeNameB: string, rows: Sco
   const cell = (row: ScoreboardRow, side: ComparisonSide) => {
     const value = row[side];
     const other = row[side === 'a' ? 'b' : 'a'];
-    const wins = Number.isFinite(value) && Number.isFinite(other)
+    const wins = typeof value === 'number' && typeof other === 'number'
+      && Number.isFinite(value) && Number.isFinite(other)
       && (row.lowerWins ? value < other : value > other);
     return `<td class="comparison-side-${side}${wins ? ' is-leader' : ''}">${escapeHtml((row.format || compareNumber)(value))}</td>`;
   };
@@ -176,14 +177,14 @@ function verdict(type: ComparisonType, safeNameA: string, safeNameB: string, ent
   if (kind === 'even') {
     line = `${named('a')} and ${named('b')} are evenly matched — ${phrase}, and neither leads in more areas.`;
   } else if (kind === 'breadth-only') {
-    line = `Level on the headline measure (${phrase}), but ${named(areaLeader)} leads in more areas (${areaPhrase(areaLeader)}).`;
+    line = `Level on the headline measure (${phrase}), but ${named(areaLeader!)} leads in more areas (${areaPhrase(areaLeader!)}).`;
   } else if (kind === 'agree') {
     const also = areaLeader
-      ? ` and leads in ${areaPhrase(leader)}`
+      ? ` and leads in ${areaPhrase(leader!)}`
       : ', though the two lead in an equal number of areas';
-    line = `${named(leader)} ${verb} — ${phrase}${also}.`;
+    line = `${named(leader!)} ${verb} — ${phrase}${also}.`;
   } else {
-    line = `${named(leader)} ${verb} (${phrase}), but ${named(areaLeader)} is broader, leading in ${areaPhrase(areaLeader)}.`;
+    line = `${named(leader!)} ${verb} (${phrase}), but ${named(areaLeader!)} is broader, leading in ${areaPhrase(areaLeader!)}.`;
   }
 
   return `<div class="summary-card comparison-verdict"><p>${line}</p></div>`;
@@ -229,8 +230,8 @@ export function renderComparisonSummary(container: HTMLElement, { type, nameA, n
     const insightsB: ComparisonInsight[] = [];
 
     areaList.forEach((area, i) => {
-        const valA = dataA[i];
-        const valB = dataB[i];
+        const valA = dataA[i] ?? 0;
+        const valB = dataB[i] ?? 0;
         const diff = Math.abs(valA - valB);
         const label = areaLabels[area] || area;
 

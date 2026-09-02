@@ -5,6 +5,7 @@ import { findMatchingArea, findMatchingConference } from './search-results.js';
 import { areaLabels, cleanName, getConferenceLabel } from './shared.js';
 import type { Chart } from 'chart.js';
 import type { AnalysisTarget } from './analysis/state.js';
+import type { ComparisonEntry } from './compare-view.js';
 import type { FilteredData } from './types.js';
 
 type ComparisonTarget = AnalysisTarget | { type: 'area' | 'conference', name: string };
@@ -91,8 +92,8 @@ export function hideComparison() {
   const section = document.getElementById('comparison-results');
   if (!section) return;
   section.hidden = true;
-  document.getElementById('comparison-chart-container').hidden = true;
-  document.getElementById('comparison-summary').innerHTML = '';
+  document.getElementById('comparison-chart-container')!.hidden = true;
+  document.getElementById('comparison-summary')!.innerHTML = '';
 }
 
 function displayName(target: ComparisonTarget) {
@@ -108,11 +109,11 @@ export function renderComparison(comparison: ResolvedComparison) {
 
   activeComparison = comparison;
   const { a, b, left, right } = comparison;
-  const summary = document.getElementById('comparison-summary');
-  const chartBox = document.getElementById('comparison-chart-container');
+  const summary = document.getElementById('comparison-summary')!;
+  const chartBox = document.getElementById('comparison-chart-container')!;
   section.hidden = false;
   chartBox.hidden = true;
-  document.getElementById('comparison-title').textContent = `${left} vs ${right}`;
+  document.getElementById('comparison-title')!.textContent = `${left} vs ${right}`;
 
   if (!a || !b) {
     const missing = !a ? left : right;
@@ -134,7 +135,7 @@ export function renderComparison(comparison: ResolvedComparison) {
   if (a.type === 'area' || a.type === 'conference') {
     const nameA = displayName(a);
     const nameB = displayName(b);
-    document.getElementById('comparison-title').textContent = `${nameA} vs ${nameB}`;
+    document.getElementById('comparison-title')!.textContent = `${nameA} vs ${nameB}`;
     const isConference = a.type === 'conference';
     const cmp = isConference
       ? compareConferences(ctx.appData, ctx.priorAppData, a.name, b.name)
@@ -157,9 +158,11 @@ export function renderComparison(comparison: ResolvedComparison) {
     return;
   }
 
-  document.getElementById('comparison-title').textContent = `${nameA} vs ${nameB}`;
-  const data = buildComparison(entryA, entryB);
+  document.getElementById('comparison-title')!.textContent = `${nameA} vs ${nameB}`;
+  const comparisonEntryA: ComparisonEntry = entryA;
+  const comparisonEntryB: ComparisonEntry = entryB;
+  const data = buildComparison(comparisonEntryA, comparisonEntryB);
   chartBox.hidden = false;
   comparisonChart = renderComparisonChart(document.querySelector<HTMLCanvasElement>('#comparisonChart')!, comparisonChart, { ...data, nameA, nameB });
-  renderComparisonSummary(summary, { ...data, type: a.type, nameA, nameB, entryA, entryB });
+  renderComparisonSummary(summary, { ...data, type: a.type, nameA, nameB, entryA: comparisonEntryA, entryB: comparisonEntryB });
 }
