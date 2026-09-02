@@ -7,6 +7,7 @@ import { escapeHtml } from '../src/shared.js';
 import { filterSchedule, scheduleSuggestions } from './schedule-data.js';
 import { renderScheduleCard } from './schedule-render.js';
 import type { FilterController } from '../src/filters.js';
+import type { createSuggestionBox as CreateSuggestionBox } from '../src/suggestion-box.js';
 import type { ConferenceRecord } from './types.js';
 
 const params = new URLSearchParams(location.search);
@@ -16,7 +17,7 @@ const results = document.getElementById('csconfs-results');
 const status = document.getElementById('csconfs-status');
 let conferences: ConferenceRecord[] = [];
 let filters: FilterController;
-let suggestions;
+let suggestions: ReturnType<typeof CreateSuggestionBox>;
 
 function updateUrl() {
   const next = filters.toParams();

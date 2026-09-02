@@ -217,3 +217,11 @@ typed chart series and stability-table keys, and widened the conference display-
 its dynamic venue boundary. The repository total is now 144. All normal verification gates pass
 (8 test files, 88 bundled modules). Resume with the small page controllers and search cards,
 then type `comparison` and `compare-view` together as the final `noImplicitAny` slice.
+
+Checkpoint 2026-09-02 (`noImplicitAny` page-controller pass): cleared the search, funding,
+grants, conference-schedule, conference-submission, and search-card diagnostics. Typed shared
+suggestion-box handles, page filter state, funding comparison inputs, randomized examples,
+conference schedule loading, chart-independent timers, affiliation tuples, and ranking
+sentinels. The repository total is now 104, all confined to `comparison.ts` and
+`compare-view.ts`. All normal verification gates pass (8 test files, 88 bundled modules).
+Resume by typing those two files together, then enable `noImplicitAny` in `tsconfig.json`.

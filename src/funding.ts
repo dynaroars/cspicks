@@ -31,7 +31,7 @@ function renderDataHealth() {
   const coverage = dataset.coverage || {};
   const managerCount = awards.filter(award => award.programManager).length;
   const datedCount = awards.filter(award => award.startDate && award.endDate).length;
-  const percentage = count => awards.length ? (count / awards.length * 100).toFixed(1) : '0.0';
+  const percentage = (count: number) => awards.length ? (count / awards.length * 100).toFixed(1) : '0.0';
   const syncDate = new Date(dataset.syncedAt);
   const syncText = Number.isNaN(syncDate.getTime()) ? 'Unknown' : syncDate.toLocaleString();
   const coverageComplete = coverage.complete && coverage.failures === 0;
@@ -160,7 +160,7 @@ function updateUrl() {
   updateSeoForCurrentView(query);
 }
 
-function updateSeoForCurrentView(query) {
+function updateSeoForCurrentView(query: string) {
   if (!query) {
     updatePageMeta({ title: `${SITE_NAME} - NSF Funding Explorer` });
     trackView('default', 'funding');
@@ -185,7 +185,7 @@ function resolveFundingTarget(name: string): FundingTarget | null {
   return person ? { type: 'faculty', name: cleanName(person.name), record: person } : null;
 }
 
-function renderFundingComparison(parsed) {
+function renderFundingComparison(parsed: NonNullable<ReturnType<typeof parseComparisonQuery>>) {
   const section = document.getElementById('funding-comparison');
   const summary = document.getElementById('funding-comparison-summary');
   section.hidden = false;
@@ -214,7 +214,7 @@ function renderFundingComparison(parsed) {
     return;
   }
 
-  const money = value => formatFunding(value || 0);
+  const money = (value: number | string) => formatFunding(Number(value) || 0);
   const aRecord = a.record as FundingSchool & FundingFaculty;
   const bRecord = b.record as FundingSchool & FundingFaculty;
   const rows = a.type === 'school'
@@ -231,7 +231,7 @@ function renderFundingComparison(parsed) {
       }
     ]
     : [
-      { label: 'University', help: 'The investigator’s current CSRankings affiliation used for conservative award matching.', a: aRecord.affiliation || '—', b: bRecord.affiliation || '—', format: value => String(value) },
+      { label: 'University', help: 'The investigator’s current CSRankings affiliation used for conservative award matching.', a: aRecord.affiliation || '—', b: bRecord.affiliation || '—', format: (value: number | string) => String(value) },
       { label: 'NSF awards', help: 'Distinct NSF awards matched to this faculty member within the selected award years.', a: aRecord.awards.length, b: bRecord.awards.length },
       { label: 'Intended share', help: 'The faculty member’s fractional share of intended award amounts, dividing each award equally among all listed investigators.', a: aRecord.attributedAmount, b: bRecord.attributedAmount, format: money },
       { label: 'Full project value', help: 'Sum of the complete intended values of matched projects before fractional attribution. This can include portions belonging to other investigators or institutions.', a: aRecord.totalAwardAmount, b: bRecord.totalAwardAmount, format: money }
@@ -273,7 +273,7 @@ function render(query = '') {
   // Universities left, people right, both growing on scroll — as on Search.
   document.body.classList.toggle('showing-rankings', !normalized);
   // The record you searched for opens; the rest stay as names.
-  const isTarget = value => Boolean(normalized)
+  const isTarget = (value: string) => Boolean(normalized)
     && cleanName(String(value)).toLowerCase() === cleanName(normalized).toLowerCase();
   // Viewing one university: the people under it are its faculty, shown in full.
   const underOneSchool = schools.length === 1 && isTarget(schools[0].name);
@@ -293,8 +293,8 @@ function render(query = '') {
 // with the index rather than on every keystroke.
 function setIndex() {
   index = buildFundingIndex(dataset, filters.startYear, filters.endYear);
-  const awardCount = count => `${count} NSF ${count === 1 ? 'award' : 'awards'}`;
-  const programs = new Map();
+  const awardCount = (count: number) => `${count} NSF ${count === 1 ? 'award' : 'awards'}`;
+  const programs = new Map<string, number>();
   index.awards.forEach(award => {
     if (award.program) programs.set(award.program, (programs.get(award.program) || 0) + 1);
   });
@@ -346,7 +346,7 @@ function rebuild() {
 
 function renderExamples() {
   const examples = document.getElementById('funding-examples');
-  const chip = (query, label) =>
+  const chip = (query: string, label: string) =>
     `<button type="button" data-query="${escapeHtml(query)}">${escapeHtml(label)}</button>`;
   // Two best-funded universities that have a short name, so the "A vs B" chip
   // advertising head-to-head mode stays one line — as on Search.

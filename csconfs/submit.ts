@@ -222,14 +222,14 @@ function setupForm() {
   const form = document.getElementById('conference-submit-form') as ConferenceForm;
   const target = inputField(form, 'target');
   const suggestions = document.getElementById('conference-correction-suggestions');
-  let matches = [];
+  let matches: ConferenceRecord[] = [];
 
   const hideSuggestions = () => {
     suggestions.hidden = true;
     target.setAttribute('aria-expanded', 'false');
   };
 
-  const showSuggestions = query => {
+  const showSuggestions = (query: string) => {
     matches = records.filter(entry => {
       const searchable = `${entry.name} ${entry.year} ${entry.note || ''} ${entry.place || ''}`.toLocaleLowerCase();
       return searchable.includes(query);
@@ -240,7 +240,7 @@ function setupForm() {
     target.setAttribute('aria-expanded', 'true');
   };
 
-  const chooseEntry = entry => {
+  const chooseEntry = (entry: ConferenceRecord) => {
     target.value = entryLabel(entry);
     populateEntry(form, entry);
     hideSuggestions();

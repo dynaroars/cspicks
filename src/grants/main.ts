@@ -8,6 +8,7 @@ import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
 import { escapeHtml } from '../shared.js';
 import type { Grant } from '../types.js';
+import type { createSuggestionBox as CreateSuggestionBox } from '../suggestion-box.js';
 
 const params = new URLSearchParams(window.location.search);
 const input = document.querySelector<HTMLInputElement>('#grants-search')!;
@@ -16,7 +17,7 @@ const statusText = document.getElementById('grants-status');
 const countElement = document.getElementById('grants-count');
 
 let allGrants: Grant[] = [];
-let suggestions = null;
+let suggestions: ReturnType<typeof CreateSuggestionBox> | null = null;
 const selectById = (id: string) => document.getElementById(id) as HTMLSelectElement | null;
 
 const DEFAULT_EXAMPLES = [
@@ -46,7 +47,7 @@ function getFilterState() {
   };
 }
 
-function updateUrl(filterState) {
+function updateUrl(filterState: ReturnType<typeof getFilterState>) {
   const next = new URLSearchParams();
   if (filterState.query) next.set('q', filterState.query);
   if (filterState.audience !== 'all') next.set('audience', filterState.audience);

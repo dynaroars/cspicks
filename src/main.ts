@@ -16,6 +16,7 @@ import type { AnalysisTarget } from './analysis/state.js';
 import type { FilterController } from './filters.js';
 import type { CardContext } from './search-cards.js';
 import type { FilteredData, FilteredProfessor, FilteredSchool, NsfDataset, RawData } from './types.js';
+import type { ConferenceRecord } from '../csconfs/types.js';
 
 let rawData: RawData | null = null;
 let appData: FilteredData = { professors: {}, schools: {} };
@@ -23,12 +24,19 @@ let priorAppData: FilteredData = { professors: {}, schools: {} };
 let filters: FilterController = null!;
 let selectedAnalysisTarget: AnalysisTarget | null = null;
 let nsfData: NsfDataset | null = null;
-let conferenceSchedule: any[] = [];
+let conferenceSchedule: ConferenceRecord[] = [];
 // Discoveries' cards (and the NSF fetch they need) are dead weight on every
 // plain Search visit, so they're loaded as a separate chunk only when the
 // page was actually reached via the Discoveries nav link, not statically
 // imported here.
 let discoveriesApi: typeof import('./discoveries.js') | null = null;
+
+interface SearchExample {
+  label: string;
+  query?: string;
+  href?: string;
+  title?: string;
+}
 
 function getCardContext() {
   return {
@@ -111,9 +119,9 @@ async function init() {
   initTooltipPositioning();
 
   try {
-    const schedulePromise = fetch('./csconfs/data/conferences.json')
-      .then(response => response.ok ? response.json() : [])
-      .catch(error => {
+    const schedulePromise: Promise<ConferenceRecord[]> = fetch('./csconfs/data/conferences.json')
+      .then(response => response.ok ? response.json() as Promise<ConferenceRecord[]> : [] as ConferenceRecord[])
+      .catch((error): ConferenceRecord[] => {
         console.warn('Conference schedule examples could not be loaded:', error);
         return [];
       });
@@ -363,7 +371,7 @@ function setupSearch() {
     }
   });
 
-  let debounceTimer;
+  let debounceTimer: ReturnType<typeof setTimeout> | undefined;
   mainSearch.addEventListener('input', event => {
     clearTimeout(debounceTimer);
     const rawQuery = (event.currentTarget as HTMLInputElement).value;
@@ -442,16 +450,16 @@ function sample<T>(items: T[], count: number): T[] {
 }
 
 function discoveryExampleItems() {
-  const examples = [];
+  const examples: SearchExample[] = [];
   const insights = calculateDiscoveryInsights(appData, priorAppData);
   const subfields = calculateSubfieldDiscoveries(appData, priorAppData);
-  const short = name => getInstitutionShortName(name);
-  const discoveryHref = cardId => {
+  const short = (name: string) => getInstitutionShortName(name);
+  const discoveryHref = (cardId: string) => {
     const params = filters.toParams();
     params.set('view', 'discoveries');
     return `index.html?${params.toString()}#${cardId}`;
   };
-  const add = (label, cardId, title) => examples.push({ label, href: discoveryHref(cardId), title });
+  const add = (label: string, cardId: string, title: string) => examples.push({ label, href: discoveryHref(cardId), title });
 
   sample(insights.rankClimbers, 1).forEach(item => {
     add(`${short(item.name)} rose ${item.metrics.rankDelta} spots`, 'discovery-biggest-rank-gains', 'View this rank-gain discovery');
@@ -520,29 +528,25 @@ function renderSearchExamples() {
   // One randomized example of each kind of query the search box accepts, so
   // the row demonstrates the whole vocabulary and stays fresh on every reload.
   const schools = Object.values(appData.schools).filter(school => school.name);
-  const asSchool = school => ({ label: getInstitutionShortName(school.name), query: school.name });
+  const asSchool = (school: FilteredSchool) => ({ label: getInstitutionShortName(school.name), query: school.name });
   const rankedProfessors = Object.values(appData.professors)
     .filter(professor => professor.totalAdjusted > 0);
-  const asProfessor = professor => ({ label: cleanName(professor.name), query: professor.name });
+  const asProfessor = (professor: FilteredProfessor) => ({ label: cleanName(professor.name), query: professor.name });
 
-  interface SearchExample {
-    label: string;
-    query: string;
-  }
-  const pair = (items: SearchExample[]) => {
+  const pair = (items: SearchExample[]): SearchExample[] => {
     const [a, b] = sample(items, 2);
     return a && b ? [{ label: `${a.label} vs ${b.label}`, query: `${a.query} vs ${b.query}` }] : [];
   };
   // Prefer schools with a short name so a comparison chip stays on one line.
   const abbreviated = schools.map(asSchool).filter(entry => entry.label !== entry.query);
 
-  const conferenceLabel = area => (area === 'nips' ? 'NeurIPS' : area.toUpperCase());
+  const conferenceLabel = (area: string) => (area === 'nips' ? 'NeurIPS' : area.toUpperCase());
   const familiarConferences = ['pldi', 'nips', 'icml', 'cvpr', 'sigcomm', 'sosp', 'chi', 'sigmod', 'fse', 'icse']
     .filter(area => publicationMatchesConferenceSet({ area }, filters.confSet))
     .map(area => ({ label: conferenceLabel(area), query: conferenceLabel(area) }));
   const areaItems = Object.values(areaLabels).map(label => ({ label, query: label }));
 
-  const examples = [
+  const examples: SearchExample[] = [
     ...sample(areaItems, 1),
     ...sample(schools, 1).map(asSchool),
     ...sample(rankedProfessors, 1).map(asProfessor),
@@ -554,7 +558,7 @@ function renderSearchExamples() {
   ];
 
   const query = document.querySelector<HTMLInputElement>('#main-search')?.value.trim() || '';
-  const contextualItems = [
+  const contextualItems: SearchExample[] = [
     ...sample(discoveryExampleItems(), 2),
     ...(query.length >= 2 ? deadlineExampleItems(query) : [])
   ];

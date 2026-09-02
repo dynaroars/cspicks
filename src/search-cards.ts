@@ -101,7 +101,7 @@ function renderAffiliations(prof: FilteredProfessor, context: CardContext) {
 
   const sorted = [...affiliations.entries()].sort(([, a], [, b]) => b.end - a.end || b.start - a.start);
   if (!sorted.length) return renderAffiliationLink(prof.affiliation);
-  const format = ([school, range]) => {
+  const format = ([school, range]: [string, { start: number, end: number }]) => {
     const endLabel = range.end >= currentYear ? 'current' : range.end;
     return renderAffiliationLink(school, range.start === range.end ? `${range.start}` : `${range.start}–${endLabel}`);
   };
@@ -213,7 +213,7 @@ function renderFacultyRoster(school: FilteredSchool, context: CardContext) {
   // Ranks tie on the number the tag actually shows, so two people both listed
   // as "3.4 adjusted" never carry different ranks.
   let rank = 0;
-  let previous = null;
+  let previous: string | null = null;
   roster.forEach(entry => {
     const shown = entry.stats.adjusted.toFixed(1);
     if (shown !== previous) rank += 1;
