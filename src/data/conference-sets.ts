@@ -1,4 +1,6 @@
-export const nextTier = {
+import type { Publication } from '../types.js';
+
+export const nextTier: Record<string, true> = {
   'ase': true,
   'issta': true,
   'icde': true,
@@ -15,7 +17,7 @@ export const nextTier = {
 };
 
 // Map conferences to top-level areas (from csrankings.ts)
-export const parentMap = {
+export const parentMap: Record<string, string> = {
   'aaai': 'ai', 'ijcai': 'ai',
   'cvpr': 'vision', 'eccv': 'vision', 'iccv': 'vision',
   'icml': 'mlmining', 'iclr': 'mlmining', 'kdd': 'mlmining', 'nips': 'mlmining',
@@ -46,7 +48,7 @@ export const parentMap = {
 };
 
 // CORE A* conferences
-export const coreAStarMap = {
+export const coreAStarMap: Record<string, string> = {
   // AI
   'aaai': 'ai', 'ijcai': 'ai', 'aamas': 'ai', 'kr': 'ai', 'icaps': 'ai',
   // ML
@@ -83,7 +85,7 @@ export const coreAStarMap = {
 
 // CORE A venues must map to a CSRankings research area. Using booleans here
 // caused venue identifiers such as "pets" to leak into charts as fake areas.
-export const coreAMap = {
+export const coreAMap: Record<string, string> = {
   'acsac': 'sec', 'aied': 'csed', 'aistats': 'mlmining', 'alenex': 'act', 'asiacrypt': 'crypt', 'assets': 'chi',
   'bmvc': 'vision', 'bpm': 'soft', 'cade': 'log', 'caise': 'soft', 'ccc': 'act', 'cgo': 'arch', 'ches': 'crypt',
   'cidr': 'mod', 'cikm': 'inforet', 'conext': 'comm', 'cp': 'act', 'cscw': 'chi', 'csf': 'sec', 'dis': 'chi',
@@ -100,13 +102,16 @@ export const coreAMap = {
   'uai': 'ai', 'usenixatc': 'ops', 'wacv': 'vision', 'wsdm': 'inforet'
 };
 
-export const CONFERENCE_SET_IDS = ['csrankings-default', 'csrankings', 'core', 'core-a', 'all-union'];
+export const CONFERENCE_SET_IDS = ['csrankings-default', 'csrankings', 'core', 'core-a', 'all-union'] as const;
+export type ConferenceSetId = typeof CONFERENCE_SET_IDS[number];
 
-export function normalizeConferenceSet(confSet) {
-  return CONFERENCE_SET_IDS.includes(confSet) ? confSet : 'all-union';
+export function normalizeConferenceSet(confSet: string): ConferenceSetId {
+  return (CONFERENCE_SET_IDS as readonly string[]).includes(confSet)
+    ? confSet as ConferenceSetId
+    : 'all-union';
 }
 
-export function publicationMatchesConferenceSet(publication, confSet = 'all-union') {
+export function publicationMatchesConferenceSet(publication: Pick<Publication, 'area'>, confSet = 'all-union') {
   const selectedSet = normalizeConferenceSet(confSet);
   if (selectedSet === 'core') return Boolean(coreAStarMap[publication.area]);
   if (selectedSet === 'core-a') return Boolean(coreAStarMap[publication.area] || coreAMap[publication.area]);
@@ -120,7 +125,7 @@ export function publicationMatchesConferenceSet(publication, confSet = 'all-unio
   return true;
 }
 
-export function getConferenceAreaMap(confSet = 'all-union') {
+export function getConferenceAreaMap(confSet = 'all-union'): Record<string, string> {
   const selectedSet = normalizeConferenceSet(confSet);
   if (selectedSet === 'core' || selectedSet === 'core-a' || selectedSet === 'all-union') {
     // CORE occasionally categorizes a venue differently from CSRankings, so

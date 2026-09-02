@@ -1,24 +1,26 @@
-// @ts-check
-
 import Papa from 'papaparse';
 import { decodeAffiliationHistory } from './affiliation-history-format.js';
 import { schoolAliases } from './data/institution-aliases.js';
 import { getConferenceAreaMap, numAreas, publicationMatchesConferenceSet, topLevelAreas } from './data/conference-sets.js';
-
-/** @typedef {import('./types.js').AffiliationHistory} AffiliationHistory */
-/** @typedef {import('./types.js').CsrankingsFacultyRow} CsrankingsFacultyRow */
-/** @typedef {import('./types.js').CountryRow} CountryRow */
-/** @typedef {import('./types.js').DblpAliasRow} DblpAliasRow */
-/** @typedef {import('./types.js').FilteredData} FilteredData */
-/** @typedef {import('./types.js').HonorRow} HonorRow */
-/** @typedef {import('./types.js').InstitutionRow} InstitutionRow */
-/** @typedef {import('./types.js').ManualAffiliationRow} ManualAffiliationRow */
-/** @typedef {import('./types.js').NameChangeRow} NameChangeRow */
-/** @typedef {import('./types.js').PublicationRow} PublicationRow */
-/** @typedef {import('./types.js').Professor} Professor */
-/** @typedef {import('./types.js').RawData} RawData */
-/** @typedef {import('./types.js').School} School */
-/** @typedef {import('./types.js').SchoolAliasMap} SchoolAliasMap */
+import type {
+  AffiliationHistory,
+  CsrankingsFacultyRow,
+  CountryRow,
+  DblpAliasRow,
+  FilteredData,
+  FilteredProfessor,
+  FilteredSchool,
+  HonorRow,
+  InstitutionRow,
+  ManualAffiliationRow,
+  NameChangeRow,
+  Publication,
+  PublicationRow,
+  Professor,
+  RawData,
+  School,
+  SchoolAliasMap
+} from './types.js';
 
 export { conferenceAliases, schoolAliases } from './data/institution-aliases.js';
 export { CONFERENCE_SET_IDS, coreAMap, coreAStarMap, getConferenceAreaMap, nextTier, normalizeConferenceSet, parentMap, publicationMatchesConferenceSet } from './data/conference-sets.js';
@@ -28,15 +30,12 @@ export const DEFAULT_END_YEAR = currentYear;
 export const DEFAULT_START_YEAR = DEFAULT_END_YEAR - 10;
 
 const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
-/** @type {Promise<{historyMap: AffiliationHistory, aliasMap: SchoolAliasMap}> | null} */
-let affiliationDataPromise = null;
+let affiliationDataPromise: Promise<{historyMap: AffiliationHistory, aliasMap: SchoolAliasMap}> | null = null;
 
 
-/** @type {Promise<RawData> | null} */
-let dataPromise = null;
+let dataPromise: Promise<RawData> | null = null;
 
-/** @returns {Promise<RawData>} */
-export function loadData() {
+export function loadData(): Promise<RawData> {
   if (!dataPromise) {
     dataPromise = loadDataFromSources().catch(error => {
       dataPromise = null;
@@ -47,30 +46,23 @@ export function loadData() {
 }
 
 async function loadDataFromSources() {
-  /**
-   * @template T
-   * @param {string} url
-   * @returns {Promise<T[]>}
-   */
-  const optionalCsv = url => fetchCsv(url).catch(error => {
+  const optionalCsv = <T>(url: string): Promise<T[]> => fetchCsv<T>(url).catch(error => {
     console.warn(`Optional CSRankings metadata unavailable: ${url}`, error);
     return [];
   });
   const [csrankings, authorInfo, institutions, turingWinners, acmFellows, countries, dblpAliases, nameChanges] = await Promise.all([
-    /** @type {Promise<CsrankingsFacultyRow[]>} */ (fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv')),
-    /** @type {Promise<PublicationRow[]>} */ (fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/generated-author-info.csv')),
-    /** @type {Promise<InstitutionRow[]>} */ (fetchCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/institutions.csv')),
-    /** @type {Promise<HonorRow[]>} */ (optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/turing.csv')),
-    /** @type {Promise<HonorRow[]>} */ (optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/acm-fellows.csv')),
-    /** @type {Promise<CountryRow[]>} */ (optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/countries.csv')),
-    /** @type {Promise<DblpAliasRow[]>} */ (optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/dblp-aliases.csv')),
-    /** @type {Promise<NameChangeRow[]>} */ (optionalCsv('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/name-changes.csv'))
+    fetchCsv<CsrankingsFacultyRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv'),
+    fetchCsv<PublicationRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/generated-author-info.csv'),
+    fetchCsv<InstitutionRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/institutions.csv'),
+    optionalCsv<HonorRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/turing.csv'),
+    optionalCsv<HonorRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/acm-fellows.csv'),
+    optionalCsv<CountryRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/countries.csv'),
+    optionalCsv<DblpAliasRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/dblp-aliases.csv'),
+    optionalCsv<NameChangeRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/name-changes.csv')
   ]);
 
-  /** @type {Record<string, Professor>} */
-  const professors = {};
-  /** @type {Record<string, School>} */
-  const schools = {};
+  const professors: Record<string, Professor> = {};
+  const schools: Record<string, School> = {};
   const turingByName = new Map(turingWinners.map(row => [row.name?.trim(), Number(row.year)]));
   const acmFellowByName = new Map(acmFellows.map(row => [row.name?.trim(), Number(row.year)]));
   const countryByCode = new Map(countries.map(row => [row.alpha_2?.trim().toLowerCase(), row.name?.trim()]));
@@ -283,7 +275,7 @@ function makeRegionTest(schools, region) {
   };
 }
 
-function emptySchool(name, source) {
+function emptySchool(name: string, source?: School): FilteredSchool {
   return {
     name,
     region: source?.region,
@@ -301,10 +293,18 @@ function emptySchool(name, source) {
 
 // Stage 1: keep the publications inside the year range, conference set, and
 // region, crediting each one to its school(s) as it goes.
-function collectFilteredData({ professors, schools }, startYear, endYear, isInRegion, historyMap, aliasMap, confSet) {
+function collectFilteredData(
+  { professors, schools }: RawData,
+  startYear: number,
+  endYear: number,
+  isInRegion: (school: string) => boolean,
+  historyMap: AffiliationHistory | null,
+  aliasMap: SchoolAliasMap | null,
+  confSet: string
+): { filteredProfs: Record<string, FilteredProfessor>, filteredSchools: Record<string, FilteredSchool> } {
   const confMap = getConferenceAreaMap(confSet);
-  const filteredProfs = {};
-  const filteredSchools = {};
+  const filteredProfs: Record<string, FilteredProfessor> = {};
+  const filteredSchools: Record<string, FilteredSchool> = {};
 
   for (const name in professors) {
     const prof = professors[name];
@@ -478,19 +478,14 @@ export function filterByYears(data, startYear = DEFAULT_START_YEAR, endYear = DE
   return { professors: filteredProfs, schools: filteredSchools };
 }
 
-/**
- * @template T
- * @param {string} url
- * @returns {Promise<T[]>}
- */
-export async function fetchCsv(url) {
+export async function fetchCsv<T = Record<string, string>>(url: string): Promise<T[]> {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch CSV (${response.status}) from ${url}`);
   }
   const text = await response.text();
   return new Promise((resolve, reject) => {
-    Papa.parse(text, {
+    Papa.parse<T>(text, {
       header: true,
       skipEmptyLines: true,
       comments: "#",

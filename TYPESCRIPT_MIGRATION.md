@@ -78,8 +78,12 @@ Checkpoint 2026-09-01: converted `src/shared.js` to `src/shared.ts` and
 TypeScript, `tsx`, and Vite. Verification passed (`npm run typecheck`, `npm test`, and
 `npm run build`; 8 test files and 88 bundled modules).
 
-Resume Phase 2 with the dependency-free modules under `src/data/`, then convert `src/data.js`.
-After that, convert `src/metrics/math.js`, the other metric modules, and finally the barrel.
+Checkpoint 2026-09-01 (data foundation): converted `src/data/conference-sets.js`,
+`src/data/institution-aliases.js`, and `src/data.js` to TypeScript. Added a typed conference-set
+union, typed lookup maps, real generic CSV parsing, and concrete raw/filtered data dictionaries.
+All three verification commands pass (8 test files, 88 bundled modules).
+
+Resume Phase 2 with `src/metrics/math.js`, then the other metric modules, and finally the barrel.
 
 ### Phase 3
 

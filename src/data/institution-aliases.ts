@@ -1,4 +1,4 @@
-export const schoolAliases = {
+export const schoolAliases: Record<string, string> = {
   'gmu': 'George Mason University',
   'cmu': 'Carnegie Mellon University',
   'mit': 'Massachusetts Inst. of Technology',
@@ -118,7 +118,7 @@ export const schoolAliases = {
 
 };
 
-export const conferenceAliases = {
+export const conferenceAliases: Record<string, string> = {
   'neurips': 'nips',
   // CSRankings files CHI under "chiconf"; "chi" alone is the HCI area's key.
   'chi conference': 'chiconf',
