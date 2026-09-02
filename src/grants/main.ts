@@ -12,7 +12,7 @@ import type { createSuggestionBox as CreateSuggestionBox } from '../suggestion-b
 
 const params = new URLSearchParams(window.location.search);
 const input = document.querySelector<HTMLInputElement>('#grants-search')!;
-const resultsContainer = document.getElementById('grants-results');
+const resultsContainer = document.getElementById('grants-results')!;
 const statusText = document.getElementById('grants-status');
 const countElement = document.getElementById('grants-count');
 
@@ -110,7 +110,7 @@ function handleHashScroll() {
 function buildSuggestions() {
   return createSuggestionBox({
     input,
-    listbox: document.getElementById('universal-suggestions'),
+    listbox: document.getElementById('universal-suggestions')!,
     emptyText: 'No matching grant, sponsor, or topic',
     getGroups: query => {
       const items = grantsSuggestions(allGrants);
@@ -146,7 +146,7 @@ function setupExamples() {
   container.addEventListener('click', event => {
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-search-example]') : null;
     if (!button) return;
-    input.value = button.dataset.searchExample;
+    input.value = button.dataset.searchExample || '';
     render();
     input.focus();
     if (suggestions) suggestions.close();
@@ -180,7 +180,7 @@ function setupDelegatedListeners() {
 
     const topicBtn = target.closest<HTMLElement>('[data-search-topic]');
     if (topicBtn) {
-      input.value = topicBtn.dataset.searchTopic;
+      input.value = topicBtn.dataset.searchTopic || '';
       render();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -188,7 +188,7 @@ function setupDelegatedListeners() {
 
     const sponsorBtn = target.closest<HTMLElement>('[data-search-sponsor]');
     if (sponsorBtn) {
-      input.value = sponsorBtn.dataset.searchSponsor;
+      input.value = sponsorBtn.dataset.searchSponsor || '';
       render();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -196,15 +196,16 @@ function setupDelegatedListeners() {
 
     const shareBtn = target.closest<HTMLElement>('[data-share-grant]');
     if (shareBtn) {
-      const grantId = shareBtn.dataset.shareGrant;
+      const grantId = shareBtn.dataset.shareGrant || '';
       const shareUrl = `${window.location.origin}${window.location.pathname}?q=${encodeURIComponent(grantId)}#${grantId}`;
       navigator.clipboard.writeText(shareUrl).then(() => {
-        const originalText = shareBtn.querySelector('span').textContent;
+        const label = shareBtn.querySelector<HTMLElement>('span')!;
+        const originalText = label.textContent;
         shareBtn.classList.add('is-copied');
-        shareBtn.querySelector('span').textContent = 'Copied!';
+        label.textContent = 'Copied!';
         window.setTimeout(() => {
           shareBtn.classList.remove('is-copied');
-          shareBtn.querySelector('span').textContent = originalText;
+          label.textContent = originalText;
         }, 1800);
       });
       window.location.hash = grantId;
@@ -220,7 +221,7 @@ function setupDelegatedListeners() {
 
   // Slash key to focus search
   document.addEventListener('keydown', event => {
-    if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) {
+    if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName || '')) {
       event.preventDefault();
       input.focus();
       input.select();
@@ -243,30 +244,30 @@ function populateFilterOptions(grants: Grant[]) {
   }
 
   // Restore initial URL parameters
-  if (params.get('q')) input.value = params.get('q');
+  if (params.get('q')) input.value = params.get('q')!;
   if (params.get('audience')) {
     const audEl = selectById('audience-select');
-    if (audEl) audEl.value = params.get('audience');
+    if (audEl) audEl.value = params.get('audience')!;
   }
   if (params.get('sponsor')) {
     const sponEl = selectById('sponsor-category-select');
-    if (sponEl) sponEl.value = params.get('sponsor');
+    if (sponEl) sponEl.value = params.get('sponsor')!;
   }
   if (params.get('topic')) {
     const topEl = selectById('topic-select');
-    if (topEl) topEl.value = params.get('topic');
+    if (topEl) topEl.value = params.get('topic')!;
   }
   if (params.get('deadline')) {
     const dEl = selectById('deadline-select');
-    if (dEl) dEl.value = params.get('deadline');
+    if (dEl) dEl.value = params.get('deadline')!;
   }
   if (params.get('status')) {
     const statusEl = selectById('status-select');
-    if (statusEl) statusEl.value = params.get('status');
+    if (statusEl) statusEl.value = params.get('status')!;
   }
   if (params.get('sort')) {
     const sEl = selectById('sort-select');
-    if (sEl) sEl.value = params.get('sort');
+    if (sEl) sEl.value = params.get('sort')!;
   }
 }
 
@@ -279,7 +280,7 @@ async function init() {
     input.disabled = false;
     input.placeholder = 'Search awards, sponsors, topics, states, or eligibility (e.g. Space Grant, EPSCoR, Google PhD)...';
     input.addEventListener('input', () => {
-      suggestions.render(input.value);
+      suggestions!.render(input.value);
       render();
     });
 

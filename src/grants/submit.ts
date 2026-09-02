@@ -10,7 +10,7 @@ import {
 } from './submission.js';
 import type { Grant } from '../types.js';
 
-const root = document.getElementById('submission-form-root');
+const root = document.getElementById('submission-form-root')!;
 let allGrants: Grant[] = [];
 let grantsById = new Map<string, Grant>();
 
@@ -191,8 +191,8 @@ function updateReview() {
   const { kind, url, name, submission } = getFormData() || {};
   if (!url) return;
 
-  const reviewCard = document.getElementById('submit-review-card');
-  const reviewJson = document.getElementById('review-json');
+  const reviewCard = document.getElementById('submit-review-card')!;
+  const reviewJson = document.getElementById('review-json')!;
   const ghLink = document.querySelector<HTMLAnchorElement>('#github-issue-link')!;
   const emailLink = document.querySelector<HTMLAnchorElement>('#email-submit-link')!;
 
@@ -208,10 +208,10 @@ function updateReview() {
 }
 
 function setupEvents() {
-  const form = document.getElementById('grants-submit-form');
-  const targetRow = document.getElementById('correction-target-row');
+  const form = document.getElementById('grants-submit-form')!;
+  const targetRow = document.getElementById('correction-target-row')!;
   const targetInput = document.querySelector<HTMLInputElement>('#target')!;
-  const suggestionsBox = document.getElementById('grant-correction-suggestions');
+  const suggestionsBox = document.getElementById('grant-correction-suggestions')!;
   const copyBtn = document.getElementById('copy-json-btn');
 
   // Mode radio change
@@ -258,7 +258,8 @@ function setupEvents() {
   suggestionsBox.addEventListener('click', event => {
     const btn = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-grant-id]') : null;
     if (!btn) return;
-    const grant = grantsById.get(btn.dataset.grantId);
+    const grantId = btn.dataset.grantId;
+    const grant = grantId ? grantsById.get(grantId) : undefined;
     if (grant) {
       targetInput.value = grant.name;
       suggestionsBox.hidden = true;
@@ -287,7 +288,7 @@ function setupEvents() {
 
   // Copy JSON button
   copyBtn?.addEventListener('click', () => {
-    const reviewJson = document.getElementById('review-json');
+    const reviewJson = document.getElementById('review-json')!;
     navigator.clipboard.writeText(reviewJson.textContent).then(() => {
       const orig = copyBtn.textContent;
       copyBtn.textContent = 'Copied!';
@@ -311,7 +312,7 @@ async function init() {
       const correctionRadio = document.querySelector<HTMLInputElement>('input[name="kind"][value="correction"]');
       if (correctionRadio) {
         correctionRadio.checked = true;
-        document.getElementById('correction-target-row').hidden = false;
+        document.getElementById('correction-target-row')!.hidden = false;
         document.querySelector<HTMLInputElement>('#target')!.value = grantsById.get(grantId)!.name;
       }
       prefillFromGrant(grantsById.get(grantId));

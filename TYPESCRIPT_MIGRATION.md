@@ -301,3 +301,10 @@ conference groups as non-empty tuples, narrowed mapped research areas/deadlines,
 required DOM and correction-record lookups. The repository total is 187. All normal verification
 gates pass (8 test files, 88 bundled modules). Resume with funding and grants, then analysis and
 comparison UI.
+
+Checkpoint 2026-09-02 (`strictNullChecks` funding/grants pass): cleared all null-safety
+diagnostics from the NSF funding explorer and both grants controllers. Required page elements
+now use explicit DOM boundaries, optional dataset/query values are narrowed before assignment,
+and comparison formatter callbacks accept the full scoreboard value domain. The repository
+total is 121. All normal verification gates pass (8 test files, 88 bundled modules). Resume with
+the analysis helpers/controller, then discoveries, search UI, and comparison UI.

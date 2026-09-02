@@ -19,6 +19,7 @@ let filters: FilterController = null!;
 let dataset: NsfDataset = null!;
 let index: FundingIndex = null!;
 let suggestionItems: Record<'schools' | 'faculty' | 'programs', SuggestionItem[]> | null = null;
+const byId = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 
 type FundingTarget =
   | { type: 'school', name: string, record: FundingSchool }
@@ -32,7 +33,7 @@ function renderDataHealth() {
   const managerCount = awards.filter(award => award.programManager).length;
   const datedCount = awards.filter(award => award.startDate && award.endDate).length;
   const percentage = (count: number) => awards.length ? (count / awards.length * 100).toFixed(1) : '0.0';
-  const syncDate = new Date(dataset.syncedAt);
+  const syncDate = new Date(dataset.syncedAt || '');
   const syncText = Number.isNaN(syncDate.getTime()) ? 'Unknown' : syncDate.toLocaleString();
   const coverageComplete = coverage.complete && coverage.failures === 0;
 
@@ -186,13 +187,13 @@ function resolveFundingTarget(name: string): FundingTarget | null {
 }
 
 function renderFundingComparison(parsed: NonNullable<ReturnType<typeof parseComparisonQuery>>) {
-  const section = document.getElementById('funding-comparison');
-  const summary = document.getElementById('funding-comparison-summary');
+  const section = byId('funding-comparison');
+  const summary = byId('funding-comparison-summary');
   section.hidden = false;
-  document.getElementById('funding-comparison-title').textContent = `${parsed.left} vs ${parsed.right}`;
+  byId('funding-comparison-title').textContent = `${parsed.left} vs ${parsed.right}`;
   document.body.classList.remove('showing-rankings');
   ['funding-school-results', 'funding-faculty-results'].forEach(id => {
-    document.getElementById(id).innerHTML = '';
+    byId(id).innerHTML = '';
   });
 
   const a = resolveFundingTarget(parsed.left);
@@ -214,7 +215,7 @@ function renderFundingComparison(parsed: NonNullable<ReturnType<typeof parseComp
     return;
   }
 
-  const money = (value: number | string) => formatFunding(Number(value) || 0);
+  const money = (value: unknown) => formatFunding(Number(value) || 0);
   const aRecord = a.record as FundingSchool & FundingFaculty;
   const bRecord = b.record as FundingSchool & FundingFaculty;
   const rows = a.type === 'school'
@@ -231,7 +232,7 @@ function renderFundingComparison(parsed: NonNullable<ReturnType<typeof parseComp
       }
     ]
     : [
-      { label: 'University', help: 'The investigator’s current CSRankings affiliation used for conservative award matching.', a: aRecord.affiliation || '—', b: bRecord.affiliation || '—', format: (value: number | string) => String(value) },
+      { label: 'University', help: 'The investigator’s current CSRankings affiliation used for conservative award matching.', a: aRecord.affiliation || '—', b: bRecord.affiliation || '—', format: (value: unknown) => String(value) },
       { label: 'NSF awards', help: 'Distinct NSF awards matched to this faculty member within the selected award years.', a: aRecord.awards.length, b: bRecord.awards.length },
       { label: 'Intended share', help: 'The faculty member’s fractional share of intended award amounts, dividing each award equally among all listed investigators.', a: aRecord.attributedAmount, b: bRecord.attributedAmount, format: money },
       { label: 'Full project value', help: 'Sum of the complete intended values of matched projects before fractional attribution. This can include portions belonging to other investigators or institutions.', a: aRecord.totalAwardAmount, b: bRecord.totalAwardAmount, format: money }
@@ -249,14 +250,14 @@ function hideFundingComparison() {
   const section = document.getElementById('funding-comparison');
   if (!section || section.hidden) return;
   section.hidden = true;
-  document.getElementById('funding-comparison-summary').innerHTML = '';
+  byId('funding-comparison-summary').innerHTML = '';
 }
 
 function render(query = '') {
   const normalized = query.trim();
   const comparison = parseComparisonQuery(normalized);
   if (comparison) {
-    document.getElementById('funding-status').textContent = '';
+    byId('funding-status').textContent = '';
     renderFundingComparison(comparison);
     updateUrl();
     return;
@@ -267,22 +268,22 @@ function render(query = '') {
     ...index.faculty.filter(record => fundingFacultyNameMatches(record, normalized)),
     ...index.faculty.filter(record => !fundingFacultyNameMatches(record, normalized) && fundingMatches(record, normalized))
   ] : index.faculty;
-  const schoolContainer = document.getElementById('funding-school-results');
-  const facultyContainer = document.getElementById('funding-faculty-results');
-  document.getElementById('funding-award-count').textContent = `${index.awards.length.toLocaleString()} NSF CS awards during`;
+  const schoolContainer = byId('funding-school-results');
+  const facultyContainer = byId('funding-faculty-results');
+  byId('funding-award-count').textContent = `${index.awards.length.toLocaleString()} NSF CS awards during`;
   // Universities left, people right, both growing on scroll — as on Search.
   document.body.classList.toggle('showing-rankings', !normalized);
   // The record you searched for opens; the rest stay as names.
   const isTarget = (value: string) => Boolean(normalized)
     && cleanName(String(value)).toLowerCase() === cleanName(normalized).toLowerCase();
   // Viewing one university: the people under it are its faculty, shown in full.
-  const underOneSchool = schools.length === 1 && isTarget(schools[0].name);
+  const underOneSchool = schools.length === 1 && isTarget(schools[0]!.name);
   renderInfiniteLists([
     { container: schoolContainer, items: schools, renderItem: school => renderFundingSchoolCard(school, { expanded: isTarget(school.name) }) },
     { container: facultyContainer, items: faculty, renderItem: record => renderFundingFacultyCard(record, { expanded: isTarget(record.name), collapsible: !underOneSchool }) }
   ]);
 
-  const status = document.getElementById('funding-status');
+  const status = byId('funding-status');
   status.textContent = normalized && !schools.length && !faculty.length
     ? `No matched funding records found for “${normalized}” in this year range.`
     : '';
@@ -320,7 +321,7 @@ function setIndex() {
 function setupSuggestions(input: HTMLInputElement) {
   return createSuggestionBox({
     input,
-    listbox: document.getElementById('universal-suggestions'),
+    listbox: byId('universal-suggestions'),
     emptyText: 'No matching NSF funding record',
     getGroups: (query, { comparing }) => {
       if (!suggestionItems) return null;
@@ -345,7 +346,7 @@ function rebuild() {
 }
 
 function renderExamples() {
-  const examples = document.getElementById('funding-examples');
+  const examples = byId('funding-examples');
   const chip = (query: string, label: string) =>
     `<button type="button" data-query="${escapeHtml(query)}">${escapeHtml(label)}</button>`;
   // Two best-funded universities that have a short name, so the "A vs B" chip
@@ -359,7 +360,7 @@ function renderExamples() {
   ).join('')}${index.faculty.slice(0, 3).map(record =>
     chip(record.name, record.name.replace(/\s+\d{4}$/, ''))
   ).join('')}${abbreviated.length === 2
-    ? chip(`${abbreviated[0].query} vs ${abbreviated[1].query}`, `${abbreviated[0].label} vs ${abbreviated[1].label}`)
+    ? chip(`${abbreviated[0]!.query} vs ${abbreviated[1]!.query}`, `${abbreviated[0]!.label} vs ${abbreviated[1]!.label}`)
     : ''}`;
 }
 
@@ -394,10 +395,10 @@ async function init() {
     render(input.value);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-  document.getElementById('funding-examples').addEventListener('click', event => {
+  byId('funding-examples').addEventListener('click', event => {
     const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>('button') : null;
     if (!button) return;
-    input.value = button.dataset.query;
+    input.value = button.dataset.query || '';
     render(input.value);
   });
   input.focus();
@@ -405,5 +406,5 @@ async function init() {
 
 init().catch(error => {
   console.error(error);
-  document.getElementById('funding-status').textContent = 'NSF funding data could not be loaded.';
+  byId('funding-status').textContent = 'NSF funding data could not be loaded.';
 });
