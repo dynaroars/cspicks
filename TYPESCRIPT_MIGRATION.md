@@ -8,7 +8,7 @@ run the listed verification commands, and update this file in the same commit.
 
 - [x] Phase 0 — tooling and CI guardrails
 - [x] Phase 1 — shared domain types and typed external-data boundaries
-- [ ] Phase 2 — foundation modules (`shared`, data helpers, `data`, metrics)
+- [ ] Phase 2 — foundation modules (`shared`, data helpers, `data`, metrics) (in progress)
 - [ ] Phase 3 — shared UI infrastructure and page controllers
 - [ ] Phase 4 — strict mode, remaining tests/scripts as appropriate, final CI gate
 
@@ -72,6 +72,14 @@ before proceeding to `src/data/*` and `src/data.js`.
 Convert in dependency order: shared/leaf utilities; `src/data/*` and affiliation-history;
 `src/data.js`; `src/metrics/math.js`; remaining `src/metrics/*`; the `src/metrics.js` barrel.
 Convert one coherent batch at a time and verify after each batch.
+
+Checkpoint 2026-09-01: converted `src/shared.js` to `src/shared.ts` and
+`src/affiliation-history-format.js` to `.ts`. Explicit `.js` imports continue to resolve under
+TypeScript, `tsx`, and Vite. Verification passed (`npm run typecheck`, `npm test`, and
+`npm run build`; 8 test files and 88 bundled modules).
+
+Resume Phase 2 with the dependency-free modules under `src/data/`, then convert `src/data.js`.
+After that, convert `src/metrics/math.js`, the other metric modules, and finally the barrel.
 
 ### Phase 3
 

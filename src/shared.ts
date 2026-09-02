@@ -134,7 +134,7 @@ const ASIA_COUNTRIES = new Set('AF AM AZ BH BD BT BN KH CN GE HK IN ID IR IQ IL 
 const AUSTRALASIA_COUNTRIES = new Set('AU NZ FJ PG SB VU WS TO KI FM MH PW NR TV'.split(' '));
 const REGION_STORAGE_KEY = 'cspicks:preferred-region';
 
-export function detectRegionFromLocales(locales = []) {
+export function detectRegionFromLocales(locales: readonly (string | undefined)[] = []) {
   for (const locale of locales) {
     try {
       const parsedLocale = new Intl.Locale(locale);

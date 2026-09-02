@@ -1,14 +1,10 @@
-// @ts-check
-
-/** @typedef {import('./types.js').AffiliationHistory} AffiliationHistory */
-/** @typedef {import('./types.js').SchoolAliasMap} SchoolAliasMap */
+import type { AffiliationHistory, SchoolAliasMap } from './types.js';
 
 export const AFFILIATION_HISTORY_FORMAT = 'cspicks-affiliations-v1';
 
-/** @param {unknown} payload @returns {AffiliationHistory} */
-export function decodeAffiliationHistory(payload) {
+export function decodeAffiliationHistory(payload: unknown): AffiliationHistory {
   if (!payload || typeof payload !== 'object') return {};
-  const record = /** @type {Record<string, unknown>} */ (payload);
+  const record = payload as Record<string, unknown>;
   if (record.format !== AFFILIATION_HISTORY_FORMAT) {
     return isAffiliationHistory(record) ? record : {};
   }
@@ -17,7 +13,7 @@ export function decodeAffiliationHistory(payload) {
     ? record.schools
     : [];
   const people = record.people && typeof record.people === 'object'
-    ? /** @type {Record<string, unknown>} */ (record.people)
+    ? record.people as Record<string, unknown>
     : {};
   return Object.fromEntries(Object.entries(people).map(([name, value]) => [
     name,
@@ -32,28 +28,23 @@ export function decodeAffiliationHistory(payload) {
   ]));
 }
 
-/** @param {Record<string, unknown>} value @returns {value is AffiliationHistory} */
-function isAffiliationHistory(value) {
+function isAffiliationHistory(value: Record<string, unknown>): value is AffiliationHistory {
   return Object.values(value).every(segments => Array.isArray(segments) && segments.every(segment => {
     if (!segment || typeof segment !== 'object') return false;
-    const item = /** @type {Record<string, unknown>} */ (segment);
+    const item = segment as Record<string, unknown>;
     return typeof item.school === 'string'
       && typeof item.start === 'number'
       && typeof item.end === 'number';
   }));
 }
 
-/**
- * @param {AffiliationHistory} history
- * @param {SchoolAliasMap} [aliasMap]
- */
-export function encodeAffiliationHistory(history, aliasMap = {}) {
-  const schools = [];
-  const schoolIndexes = new Map();
-  const people = {};
+export function encodeAffiliationHistory(history: AffiliationHistory, aliasMap: SchoolAliasMap = {}) {
+  const schools: string[] = [];
+  const schoolIndexes = new Map<string, number>();
+  const people: Record<string, [number, number, number][]> = {};
 
   for (const [name, segments] of Object.entries(decodeAffiliationHistory(history))) {
-    const encoded = [];
+    const encoded: [number, number, number][] = [];
     for (const segment of segments || []) {
       const school = Object.prototype.hasOwnProperty.call(aliasMap, segment.school)
         ? aliasMap[segment.school]
