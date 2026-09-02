@@ -163,7 +163,14 @@ export interface NsfDataset {
   source?: string;
   sourceUrl?: string;
   scope?: string[];
-  coverage?: unknown;
+  coverage?: {
+    complete?: boolean;
+    failures?: number;
+    institutionsChecked?: number;
+    institutionsTotal?: number;
+    facultyChecked?: number;
+    facultyTotal?: number;
+  };
   methodology?: unknown;
   syncedAt?: string;
   rosterNamesSyncedAt?: string;

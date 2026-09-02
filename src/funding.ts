@@ -8,14 +8,21 @@ import { createSuggestionBox, rankSuggestions } from './suggestion-box.js';
 import { initTooltipPositioning } from './tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
 import { trackComparison, trackView } from './analytics.js';
+import type { FilterController } from './filters.js';
+import type { SuggestionGroups, SuggestionItem } from './suggestion-box.js';
+import type { FundingFaculty, FundingIndex, FundingSchool, NsfDataset } from './types.js';
 
 const params = new URLSearchParams(window.location.search);
 const currentYear = new Date().getFullYear();
 const SUGGESTION_LIMITS = { schools: 12, faculty: 25, programs: 8 };
-let filters = null;
-let dataset = null;
-let index = null;
-let suggestionItems = null;
+let filters: FilterController = null!;
+let dataset: NsfDataset = null!;
+let index: FundingIndex = null!;
+let suggestionItems: Record<'schools' | 'faculty' | 'programs', SuggestionItem[]> | null = null;
+
+type FundingTarget =
+  | { type: 'school', name: string, record: FundingSchool }
+  | { type: 'faculty', name: string, record: FundingFaculty };
 
 function renderDataHealth() {
   const container = document.getElementById('nsf-data-health-stats');
@@ -87,7 +94,7 @@ function renderDataHealth() {
 
   fetchLatestRepoCommit().then(commit => {
     const updatedEl = document.getElementById('nsf-repo-updated');
-    const linkEl = document.getElementById('nsf-repo-link');
+    const linkEl = document.querySelector<HTMLAnchorElement>('#nsf-repo-link');
     if (updatedEl && commit?.date) {
       updatedEl.textContent = formatRelativeTime(commit.date);
     } else if (updatedEl) {
@@ -126,7 +133,8 @@ function setupDataHealth() {
     if (event.key === 'Escape') hide();
   });
   document.addEventListener('click', event => {
-    if (panel.hidden || panel.contains(event.target) || event.target.closest('#nsf-data-health-toggle')) return;
+    const target = event.target instanceof Element ? event.target : null;
+    if (panel.hidden || (target && (panel.contains(target) || target.closest('#nsf-data-health-toggle')))) return;
     hide();
   });
 }
@@ -146,7 +154,7 @@ function setupYears() {
 
 function updateUrl() {
   const next = filters.toParams();
-  const query = document.getElementById('funding-search').value.trim();
+  const query = document.querySelector<HTMLInputElement>('#funding-search')!.value.trim();
   if (query) next.set('q', query);
   history.replaceState({}, '', `${location.pathname}?${next}`);
   updateSeoForCurrentView(query);
@@ -169,7 +177,7 @@ function updateSeoForCurrentView(query) {
 }
 
 // "A vs B" compares two universities or two people, as on Search.
-function resolveFundingTarget(name) {
+function resolveFundingTarget(name: string): FundingTarget | null {
   const wanted = cleanName(name).toLowerCase();
   const school = index.schools.find(record => record.name.toLowerCase() === wanted);
   if (school) return { type: 'school', name: school.name, record: school };
@@ -207,29 +215,31 @@ function renderFundingComparison(parsed) {
   }
 
   const money = value => formatFunding(value || 0);
+  const aRecord = a.record as FundingSchool & FundingFaculty;
+  const bRecord = b.record as FundingSchool & FundingFaculty;
   const rows = a.type === 'school'
     ? [
-      { label: 'NSF awards', help: 'Distinct NSF awards matched to current CSRankings faculty at this university within the selected award years.', a: a.record.awards.length, b: b.record.awards.length },
-      { label: 'Intended funding attributed', help: 'Sum of intended award amounts fractionally attributed to matched faculty. Each award is divided equally among its listed investigators before matched shares are assigned to universities.', a: a.record.attributedAmount, b: b.record.attributedAmount, format: money },
-      { label: 'CS faculty with awards', help: 'Distinct current CSRankings faculty matched to at least one included NSF award.', a: a.record.faculty.length, b: b.record.faculty.length },
+      { label: 'NSF awards', help: 'Distinct NSF awards matched to current CSRankings faculty at this university within the selected award years.', a: aRecord.awards.length, b: bRecord.awards.length },
+      { label: 'Intended funding attributed', help: 'Sum of intended award amounts fractionally attributed to matched faculty. Each award is divided equally among its listed investigators before matched shares are assigned to universities.', a: aRecord.attributedAmount, b: bRecord.attributedAmount, format: money },
+      { label: 'CS faculty with awards', help: 'Distinct current CSRankings faculty matched to at least one included NSF award.', a: aRecord.faculty.length, b: bRecord.faculty.length },
       {
         label: 'Average per matched faculty',
         help: 'Attributed intended funding divided by the number of matched CS faculty with awards. Faculty without a matched award are not included in the denominator.',
-        a: a.record.attributedAmount / Math.max(1, a.record.faculty.length),
-        b: b.record.attributedAmount / Math.max(1, b.record.faculty.length),
+        a: aRecord.attributedAmount / Math.max(1, aRecord.faculty.length),
+        b: bRecord.attributedAmount / Math.max(1, bRecord.faculty.length),
         format: money
       }
     ]
     : [
-      { label: 'University', help: 'The investigator’s current CSRankings affiliation used for conservative award matching.', a: a.record.affiliation || '—', b: b.record.affiliation || '—', format: value => String(value) },
-      { label: 'NSF awards', help: 'Distinct NSF awards matched to this faculty member within the selected award years.', a: a.record.awards.length, b: b.record.awards.length },
-      { label: 'Intended share', help: 'The faculty member’s fractional share of intended award amounts, dividing each award equally among all listed investigators.', a: a.record.attributedAmount, b: b.record.attributedAmount, format: money },
-      { label: 'Full project value', help: 'Sum of the complete intended values of matched projects before fractional attribution. This can include portions belonging to other investigators or institutions.', a: a.record.totalAwardAmount, b: b.record.totalAwardAmount, format: money }
+      { label: 'University', help: 'The investigator’s current CSRankings affiliation used for conservative award matching.', a: aRecord.affiliation || '—', b: bRecord.affiliation || '—', format: value => String(value) },
+      { label: 'NSF awards', help: 'Distinct NSF awards matched to this faculty member within the selected award years.', a: aRecord.awards.length, b: bRecord.awards.length },
+      { label: 'Intended share', help: 'The faculty member’s fractional share of intended award amounts, dividing each award equally among all listed investigators.', a: aRecord.attributedAmount, b: bRecord.attributedAmount, format: money },
+      { label: 'Full project value', help: 'Sum of the complete intended values of matched projects before fractional attribution. This can include portions belonging to other investigators or institutions.', a: aRecord.totalAwardAmount, b: bRecord.totalAwardAmount, format: money }
     ];
 
   summary.innerHTML = renderScoreboard(escapeHtml(a.name), escapeHtml(b.name), rows.map(row => ({ format: compareNumber, ...row })))
     + `<div class="results-grid comparison-cards">
-        ${[a, b].map(side => (side.type === 'school'
+        ${([a, b] as FundingTarget[]).map(side => (side.type === 'school'
           ? renderFundingSchoolCard(side.record, { collapsible: false })
           : renderFundingFacultyCard(side.record, { collapsible: false }))).join('')}
       </div>`;
@@ -307,14 +317,14 @@ function setIndex() {
   };
 }
 
-function setupSuggestions(input) {
+function setupSuggestions(input: HTMLInputElement) {
   return createSuggestionBox({
     input,
     listbox: document.getElementById('universal-suggestions'),
     emptyText: 'No matching NSF funding record',
     getGroups: (query, { comparing }) => {
       if (!suggestionItems) return null;
-      const groups = [
+      const groups: SuggestionGroups = [
         ['Universities', rankSuggestions(suggestionItems.schools, query, SUGGESTION_LIMITS.schools)],
         ['Professors', rankSuggestions(suggestionItems.faculty, query, SUGGESTION_LIMITS.faculty)]
       ];
@@ -331,7 +341,7 @@ function setupSuggestions(input) {
 
 function rebuild() {
   setIndex();
-  render(document.getElementById('funding-search').value);
+  render(document.querySelector<HTMLInputElement>('#funding-search')!.value);
 }
 
 function renderExamples() {
@@ -360,7 +370,7 @@ async function init() {
   if (!response.ok) throw new Error(`NSF dataset returned ${response.status}`);
   dataset = parseNsfDataset(await response.json());
   setIndex();
-  const input = document.getElementById('funding-search');
+  const input = document.querySelector<HTMLInputElement>('#funding-search')!;
   input.disabled = false;
   input.placeholder = 'Search university, professor, award, or NSF program';
   input.value = params.get('q') || '';
@@ -375,15 +385,17 @@ async function init() {
   // Clicking a card searches for that university or professor, the way
   // clicking a Search result opens that target.
   document.querySelector('.funding-results-container')?.addEventListener('click', event => {
-    const header = event.target.closest('[data-action="open-funding-target"]');
-    const name = header?.closest('.card')?.dataset.name;
+    const header = event.target instanceof Element
+      ? event.target.closest('[data-action="open-funding-target"]')
+      : null;
+    const name = header?.closest<HTMLElement>('.card')?.dataset.name;
     if (!name || input.value.trim().toLowerCase() === name.toLowerCase()) return;
     input.value = name;
     render(input.value);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
   document.getElementById('funding-examples').addEventListener('click', event => {
-    const button = event.target.closest('button');
+    const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>('button') : null;
     if (!button) return;
     input.value = button.dataset.query;
     render(input.value);

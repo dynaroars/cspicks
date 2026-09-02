@@ -149,7 +149,13 @@ candidate results. Added explicit candidate/area-impact shapes, DBLP-profile map
 data state, school inputs, and typed form/list controls. Added the ambient CSS-module declaration
 needed by TypeScript page entries. All verification gates pass (8 test files, 88 bundled modules).
 
-Resume with `funding`, then convert the two grants entry modules and other page controllers.
+Checkpoint 2026-09-02 (funding): converted the NSF funding page controller. Added typed dataset
+coverage metadata, funding index and discriminated comparison targets, suggestion groups, and
+safe form/delegated-event handling. All verification gates pass (8 test files, 88 bundled
+modules).
+
+Resume with the two grants entry modules. The only other JavaScript source is the generated
+CSRankings-rules artifact, which should remain generated rather than be hand-converted.
 
 ### Phase 4
 
