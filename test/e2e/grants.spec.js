@@ -25,6 +25,11 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   await expect(page.locator('.grant-card')).toHaveCount(1);
   await expect(page.locator('.grant-title')).toContainText('Sloan Research');
 
+  // State names are indexed for location-specific programs.
+  await input.fill('California Space Grant');
+  await expect(page.locator('.grant-card')).toHaveCount(1);
+  await expect(page.locator('.grant-title')).toContainText('NASA State Space Grant');
+
   // Test Search Suggestions
   const suggestionsBox = page.locator('#universal-suggestions');
   await input.fill('Google');

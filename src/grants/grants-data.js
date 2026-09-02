@@ -78,6 +78,7 @@ export function filterGrants(grants, {
         grant.summary,
         grant.amount,
         grant.deadline,
+        ...(grant.locations || []),
         ...(grant.topics || []),
         ...(grant.eligibility || [])
       ].join(' ').toLowerCase();
@@ -135,7 +136,7 @@ export function grantsSuggestions(grants) {
     awardItems.push({
       label: grant.shortName || grant.name,
       detail: `${grant.sponsor} • ${grant.whoFor}`,
-      searchTerms: `${grant.name} ${grant.sponsor} ${(grant.topics || []).join(' ')}`,
+      searchTerms: `${grant.name} ${grant.sponsor} ${(grant.locations || []).join(' ')} ${(grant.topics || []).join(' ')}`,
       type: 'award',
       grantId: grant.id
     });

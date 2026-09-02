@@ -22,6 +22,10 @@ test('grants dataset contains required schema fields and is non-empty', async ()
     ids.add(grant.id);
     assert.ok(Array.isArray(grant.targetAudience) && grant.targetAudience.length > 0,
       `Grant ${grant.id} targetAudience should be a non-empty array`);
+    if (grant.locations !== undefined) {
+      assert.ok(Array.isArray(grant.locations) && grant.locations.length > 0,
+        `Grant ${grant.id} locations should be a non-empty array when provided`);
+    }
   }
 });
 
@@ -70,6 +74,12 @@ test('grants filtering performs text query search across name, sponsor, topics a
   assert.ok(virginiaMatches.length >= 6);
   assert.ok(virginiaMatches.some(g => g.id === 'cci-cyber-as-a-service'));
   assert.ok(virginiaMatches.some(g => g.id === 'vipc-higher-education-proof-of-concept'));
+
+  const stateMatches = filterGrants(grants, { query: 'Wyoming EPSCoR' });
+  assert.ok(stateMatches.some(g => g.id === 'nsf-epscor-research-fellows'));
+
+  const spaceGrantMatches = filterGrants(grants, { query: 'California Space Grant' });
+  assert.ok(spaceGrantMatches.some(g => g.id === 'nasa-space-grant-consortia'));
 });
 
 test('grants suggestions extract awards, sponsors, topics, and audiences', async () => {

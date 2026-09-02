@@ -20,6 +20,10 @@ export function renderGrantCard(grant) {
   const catClass = getCategoryClass(grant.sponsorCategory);
   const eligibilityItems = (grant.eligibility || []).map(item => `<li>${escapeHtml(item)}</li>`).join('');
   const topicChips = (grant.topics || []).map(t => `<button type="button" class="grant-topic-chip" data-search-topic="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('');
+  const locationText = grant.locationLabel || (
+    grant.locations?.length === 1 ? grant.locations[0] :
+      grant.locations?.length ? `${grant.locations.length} eligible jurisdictions` : ''
+  );
 
   return `
     <article class="grant-card ${grant.featured ? 'is-featured' : ''}" id="${escapeHtml(grant.id)}" data-grant-id="${escapeHtml(grant.id)}">
@@ -60,6 +64,11 @@ export function renderGrantCard(grant) {
           <span class="grant-meta-label">Funding &amp; Perks</span>
           <span class="grant-meta-val">${escapeHtml(grant.amount)}</span>
         </div>
+
+        ${locationText ? `<div class="grant-meta-item">
+          <span class="grant-meta-label">Geographic Eligibility</span>
+          <span class="grant-meta-val">${escapeHtml(locationText)}</span>
+        </div>` : ''}
       </div>
 
       <div class="grant-body">

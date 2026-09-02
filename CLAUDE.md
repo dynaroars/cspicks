@@ -222,10 +222,14 @@ Every entry in `public/grants.json` MUST adhere to this structure:
     "Key eligibility rule 2 (e.g. university enrollment or tenure-track status)"
   ],
   "topics": ["AI/ML", "Systems", "Security", "Theory", "Robotics", "HPC", "Quantum"],
+  "locations": ["State or jurisdiction names when eligibility is geographically limited"],
+  "locationLabel": "Optional concise display label such as 28 EPSCoR jurisdictions",
   "url": "https://official-program-or-rfp-url.org",
   "featured": true
 }
 ```
+`locations` and `locationLabel` are optional. Add them when eligibility is limited by state, territory, commonwealth, or another named jurisdiction so geographic searches and card labels remain accurate.
+
 *Note on `deadlineMonth`*: Set to `1..12` for the primary annual deadline month, or `0` for rolling/year-round/open calls (used for chronological sorting).
 
 ### 4. Reviewing User Submissions (`grants-submit.html`)

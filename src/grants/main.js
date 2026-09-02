@@ -24,6 +24,8 @@ const DEFAULT_EXAMPLES = [
   'NDSEG',
   'Google PhD Fellowship',
   'DARPA YFA',
+  'Space Grant',
+  'EPSCoR',
   'Sloan Research Fellowship',
   'AI/ML',
   'PhD Students',
@@ -262,7 +264,7 @@ async function init() {
     suggestions = buildSuggestions();
 
     input.disabled = false;
-    input.placeholder = 'Search awards, sponsors, topics, or eligibility (e.g. NSF CAREER, Google PhD, DARPA)...';
+    input.placeholder = 'Search awards, sponsors, topics, states, or eligibility (e.g. Space Grant, EPSCoR, Google PhD)...';
     input.addEventListener('input', () => {
       suggestions.render(input.value);
       render();
