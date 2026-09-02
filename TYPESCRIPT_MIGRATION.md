@@ -133,8 +133,13 @@ and form DOM access, stability-sweep promises, and raw/filtered data boundaries.
 also made two missing `school-trends` data imports explicit. All verification gates pass (8 test
 files, 88 bundled modules).
 
-Resume with `discoveries`, then convert `main`, `simulator`, `funding`, grants entry modules, and
-other page controllers after their dependencies.
+Checkpoint 2026-09-02 (discoveries): converted the discovery renderer and sharing controller.
+Added raw-data, NSF-dataset, and filter-controller boundaries; generic card-list rendering; and
+safe share-button event/timer handling. All verification gates pass (8 test files, 88 bundled
+modules).
+
+Resume with `main`, then convert `simulator`, `funding`, grants entry modules, and other page
+controllers after their dependencies.
 
 ### Phase 4
 

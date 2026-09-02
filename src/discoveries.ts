@@ -5,14 +5,16 @@ import { SITE_NAME } from './seo.js';
 import { shareUrl } from './share.js';
 import { trackDiscoveryShare } from './analytics.js';
 import { areaLabels, escapeHtml, getInstitutionShortName } from './shared.js';
+import type { FilterController } from './filters.js';
+import type { NsfDataset, RawData } from './types.js';
 
 const shareIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
 
-function slugify(title) {
+function slugify(title: string) {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
-const regionLabels = {
+const regionLabels: Record<string, string> = {
   world: 'worldwide',
   us: 'US',
   europe: 'European',
@@ -23,7 +25,7 @@ const regionLabels = {
 
 // Every page that reads or writes the Discoveries URL agrees on this shape:
 // the shared filter params plus `view=discoveries`.
-export function discoveriesParams(filters) {
+export function discoveriesParams(filters: FilterController) {
   const params = filters.toParams();
   params.set('view', 'discoveries');
   return params;
@@ -32,11 +34,11 @@ export function discoveriesParams(filters) {
 // Each card's own shareable URL: current filters plus a fragment that
 // scrollToHashDiscovery() below picks up on load, so "share this card" reaches
 // the one the reader meant, not just the top of the page.
-function discoveryCardUrl(id, filters) {
+function discoveryCardUrl(id: string, filters: FilterController) {
   return `${window.location.origin}${window.location.pathname}?${discoveriesParams(filters)}#${id}`;
 }
 
-export function getDiscoveriesMeta(filters) {
+export function getDiscoveriesMeta(filters: FilterController) {
   const region = regionLabels[filters.region] || filters.region;
   return {
     title: `Discoveries: ${filters.startYear}-${filters.endYear} ${region} CS trends - ${SITE_NAME}`,
@@ -53,15 +55,17 @@ export async function fetchDiscoveriesNsfData() {
 // One flash for whichever share button was just clicked, matching the label
 // swap createShareButton uses elsewhere, so all "Copy link" controls behave
 // identically regardless of which page rendered them.
-function flashShareButton(button, message) {
+const flashTimers = new WeakMap<HTMLElement, ReturnType<typeof setTimeout>>();
+
+function flashShareButton(button: HTMLElement, message: string) {
   const original = button.getAttribute('title');
   button.setAttribute('title', message);
   button.classList.add('is-flashed');
-  clearTimeout(button._flashTimer);
-  button._flashTimer = setTimeout(() => {
+  clearTimeout(flashTimers.get(button));
+  flashTimers.set(button, setTimeout(() => {
     button.setAttribute('title', original);
     button.classList.remove('is-flashed');
-  }, 1800);
+  }, 1800));
 }
 
 export function scrollToHashDiscovery() {
@@ -74,24 +78,24 @@ export function scrollToHashDiscovery() {
   setTimeout(() => card.classList.remove('discovery-highlighted'), 2200);
 }
 
-function schoolLink(name) {
+function schoolLink(name: string) {
   const shortName = getInstitutionShortName(name);
   const target = encodeURIComponent(name);
   return `<a class="discovery-school" href="index.html?q=${target}" title="${escapeHtml(name)}" aria-label="Explore ${escapeHtml(name)}">${escapeHtml(shortName)}</a>`;
 }
 
-function fundingSchoolLink(name) {
+function fundingSchoolLink(name: string) {
   return `<a class="discovery-school" href="nsf.html?q=${encodeURIComponent(name)}" title="Explore NSF funding for ${escapeHtml(name)}">${escapeHtml(getInstitutionShortName(name))}</a>`;
 }
 
-function areaLink(area) {
+function areaLink(area: string) {
   const label = areaLabels[area] || area;
   return `<a class="discovery-school" href="index.html?q=${encodeURIComponent(label)}" title="Explore ${escapeHtml(label)}">${escapeHtml(label)}</a>`;
 }
 
-export function renderDiscoveries(rawData, filters, nsfData) {
+export function renderDiscoveries(rawData: RawData, filters: FilterController, nsfData: NsfDataset) {
   const container = document.getElementById('discovery-stats');
-  if (!rawData || !nsfData) return;
+  if (!container || !rawData || !nsfData) return;
   const { startYear: start, endYear: end, region, confSet, historyMap: history, aliasMap: aliases } = filters;
 
   if (start > end) {
@@ -116,13 +120,13 @@ export function renderDiscoveries(rawData, filters, nsfData) {
   const span = end - start + 1;
   const priorStart = start - span;
   const priorEnd = start - 1;
-  const number = value => Number(value || 0).toFixed(1);
+  const number = (value: unknown) => Number(value || 0).toFixed(1);
   const empty = '<p class="discovery-empty">No university met the minimum evidence threshold.</p>';
   const emptySubfield = '<p class="discovery-empty">No subfield met the minimum evidence threshold.</p>';
-  const list = (items, row, emptyText = empty) => items.length
+  const list = <T>(items: T[], row: (item: T) => string, emptyText = empty) => items.length
     ? `<ol class="discovery-list">${items.map((item, index) => `<li><span class="discovery-position">${index + 1}</span>${row(item)}</li>`).join('')}</ol>`
     : emptyText;
-  const card = (title, help, body, className = '') => {
+  const card = (title: string, help: string, body: string, className = '') => {
     const id = `discovery-${slugify(title)}`;
     return `
     <section class="discovery-card ${className}" id="${id}">
@@ -135,7 +139,7 @@ export function renderDiscoveries(rawData, filters, nsfData) {
   const funding = buildFundingIndex(nsfData, start, end);
   const priorFunding = buildFundingIndex(nsfData, priorStart, priorEnd);
   const fundingInsights = calculateFundingDiscoveries(funding, priorFunding, current.schools);
-  const fundingList = (items, row) => items.length
+  const fundingList = <T>(items: T[], row: (item: T) => string) => items.length
     ? `<ol class="discovery-list">${items.map((item, index) => `<li><span class="discovery-position">${index + 1}</span>${row(item)}</li>`).join('')}</ol>`
     : empty;
 
@@ -249,16 +253,20 @@ export function renderDiscoveries(rawData, filters, nsfData) {
   `;
 }
 
-export function setupCardSharing(filters) {
+export function setupCardSharing(filters: FilterController) {
   document.getElementById('discovery-stats')?.addEventListener('click', async event => {
-    const button = event.target.closest('[data-share-id]');
+    const button = event.target instanceof Element
+      ? event.target.closest<HTMLElement>('[data-share-id]')
+      : null;
     if (!button) return;
-    const outcome = await shareUrl(discoveryCardUrl(button.dataset.shareId, filters), {
-      title: `${button.dataset.shareTitle} - CS Picks Discoveries`,
-      text: button.dataset.shareTitle
+    const shareId = button.dataset.shareId || '';
+    const shareTitle = button.dataset.shareTitle || '';
+    const outcome = await shareUrl(discoveryCardUrl(shareId, filters), {
+      title: `${shareTitle} - CS Picks Discoveries`,
+      text: shareTitle
     });
     if (outcome === 'copied') flashShareButton(button, 'Copied!');
     else if (outcome === 'failed') flashShareButton(button, 'Copy failed');
-    trackDiscoveryShare(button.dataset.shareId);
+    trackDiscoveryShare(shareId);
   });
 }
