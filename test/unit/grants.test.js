@@ -65,6 +65,11 @@ test('grants filtering performs text query search across name, sponsor, topics a
   const darpaMatches = filterGrants(grants, { query: 'DARPA' });
   assert.ok(darpaMatches.length >= 2);
   assert.ok(darpaMatches.some(g => g.id === 'darpa-yfa'));
+
+  const virginiaMatches = filterGrants(grants, { query: 'Virginia' });
+  assert.ok(virginiaMatches.length >= 6);
+  assert.ok(virginiaMatches.some(g => g.id === 'cci-cyber-as-a-service'));
+  assert.ok(virginiaMatches.some(g => g.id === 'vipc-higher-education-proof-of-concept'));
 });
 
 test('grants suggestions extract awards, sponsors, topics, and audiences', async () => {
