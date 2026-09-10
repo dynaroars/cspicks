@@ -227,7 +227,7 @@ async function fetchJson(url: string): Promise<unknown> {
 
 function parseSchoolAliasMap(value: unknown): SchoolAliasMap {
   if (!value || typeof value !== 'object' || Array.isArray(value)
-    || !Object.values(value).every(alias => typeof alias === 'string')) {
+    || !Object.values(value).every(alias => alias === null || typeof alias === 'string')) {
     throw new Error('Invalid school alias dataset');
   }
   return value as SchoolAliasMap;
@@ -270,7 +270,7 @@ const IMPLAUSIBLE_HISTORY_INSTITUTION_COUNT = 8;
 
 function isImplausibleHistory(history: AffiliationSegment[], currentAffiliation: string, aliasMap: SchoolAliasMap | null) {
   const resolved = new Set(history.map(segment =>
-    aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, segment.school) ? aliasMap[segment.school]! : segment.school));
+    (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, segment.school) ? aliasMap[segment.school] : null) ?? segment.school));
   return resolved.size >= IMPLAUSIBLE_HISTORY_INSTITUTION_COUNT && !resolved.has(currentAffiliation);
 }
 
