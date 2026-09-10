@@ -1087,20 +1087,20 @@
     ],
     "year": 2027,
     "description": "ACM Special Interest Group on Data Communication Conference",
-    "link": "https://www.sigcomm.org/",
+    "link": "https://conferences.sigcomm.org/sigcomm/2027/",
     "seriesLink": "https://www.sigcomm.org/",
-    "date": "2027-09-08",
-    "place": "Atlanta, GA, USA",
-    "abstractDeadline": "2027-01-24",
-    "deadline": "2027-01-31",
+    "date": "August 8–12, 2027",
+    "place": "Bangkok, Thailand",
+    "abstractDeadline": null,
+    "deadline": null,
     "rebuttalDate": null,
     "notificationDate": null,
     "note": null,
     "programChair": "Ranjita Bhagwan, Nate Foster, Aurojit Panda, Scott Shenker",
     "acceptanceRate": null,
     "submissions": null,
-    "estimated": true,
-    "verified": false,
+    "estimated": false,
+    "verified": true,
     "generalChair": "Kanchana Kanchanasut, Jim Kurose"
   },
   {
@@ -1168,9 +1168,9 @@
     "programChair": null,
     "acceptanceRate": null,
     "submissions": null,
-    "estimated": true,
-    "verified": false,
-    "generalChair": null
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Takahito Tejima"
   },
   {
     "name": "SIGIR",
@@ -1561,7 +1561,7 @@
     "acceptanceRate": null,
     "submissions": null,
     "estimated": false,
-    "verified": false,
+    "verified": true,
     "generalChair": "Meikang Qiu, Brendan Saltaformaggio, Saman Zonouz"
   },
   {

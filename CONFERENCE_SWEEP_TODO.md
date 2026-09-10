@@ -30,11 +30,12 @@ scattered Markdown instructions; use `MAINTENANCE.md` as the single playbook.
 
 Prioritize current/upcoming records with missing or suspect official details:
 
-- SIGCOMM 2027: verify whether notification dates are published; Atlanta and
-  organizing chairs are confirmed.
+- SIGCOMM 2027: event details and organizing chairs are confirmed; submission
+  and notification dates remain TBA.
 - MobiCom 2027: verify place when the official site announces it.
 - MobiSys 2027: place is confirmed as Ho Chi Minh City; all dates remain TBA.
-- SIGGRAPH Asia 2027: Tokyo/date confirmed; submission dates remain unannounced.
+- SIGGRAPH Asia 2027: Tokyo/date and conference chair confirmed; submission
+  dates remain unannounced.
 - AAAI 2028, ASPLOS 2028, CAV 2028, CCS 2028, CHI 2028, EuroSys 2028, SIGMOD
   2028, SOSP 2028: check official future-edition announcements; do not infer
   dates or places.
@@ -48,4 +49,3 @@ Prioritize current/upcoming records with missing or suspect official details:
 
 `main` was clean and synced after `77a9d36`. The last validation passed all
 unit tests, typecheck, build, and 2 CS Confs browser tests.
-
