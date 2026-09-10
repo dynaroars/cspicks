@@ -180,7 +180,15 @@ async function init() {
   } catch (err) {
     console.error('Failed to load data:', err);
     const main = document.querySelector('main');
-    if (main) main.innerHTML = '<p class="load-error">Error loading data. Please try again.</p>';
+    if (main) {
+      const detail = err instanceof Error ? err.message : String(err);
+      main.innerHTML = `<div class="load-error">
+        <p>Error loading data. This usually means a network request to CSRankings' GitHub-hosted data was blocked or interrupted - check that an ad blocker or privacy extension isn't blocking raw.githubusercontent.com, then retry.</p>
+        <p><button type="button" id="load-error-retry">Try again</button></p>
+        <p class="load-error-detail">${escapeHtml(detail)}</p>
+      </div>`;
+      document.getElementById('load-error-retry')?.addEventListener('click', () => window.location.reload());
+    }
   }
 }
 

@@ -349,6 +349,12 @@ footer button:hover {
   text-align: center;
 }
 
+.load-error-detail {
+  font-size: 0.85em;
+  opacity: 0.75;
+  font-family: monospace;
+}
+
 .view {
   display: none;
   animation: fadeIn 0.5s ease-out;

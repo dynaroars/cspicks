@@ -67,7 +67,7 @@ unescaped `&` in a tick label is an alignment tab and kills the build).
 
 The NSF blocks read `public/nsf-awards.json` from the working tree rather than
 the network, so run `npm run sync:nsf:names` first if the roster has moved on
-(see "Routine Maintenance" in the repo README).
+(see `MAINTENANCE.md` at the repo root).
 
 ## arXiv
 

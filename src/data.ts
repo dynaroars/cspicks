@@ -202,15 +202,32 @@ async function loadDataFromSources(): Promise<RawData> {
   return { professors, schools };
 }
 
+// raw.githubusercontent.com is a CDN edge, so a single dropped connection or
+// slow byte-stream shouldn't take down the whole page load - retry transient
+// failures (network errors, 429, 5xx) before giving up. 4xx other than 429
+// means the URL itself is wrong, so retrying won't help.
+async function fetchWithRetry(url: string, attempts = 3): Promise<Response> {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const response = await fetch(url);
+      const retryableStatus = response.status >= 500 || response.status === 429;
+      if (response.ok || !retryableStatus || attempt >= attempts) return response;
+    } catch (error) {
+      if (attempt >= attempts) throw error;
+    }
+    await new Promise(resolve => setTimeout(resolve, 400 * 2 ** (attempt - 1)));
+  }
+}
+
 async function fetchJson(url: string): Promise<unknown> {
-  const response = await fetch(url);
+  const response = await fetchWithRetry(url);
   if (!response.ok) throw new Error(`Failed to fetch JSON (${response.status}) from ${url}`);
   return response.json();
 }
 
 function parseSchoolAliasMap(value: unknown): SchoolAliasMap {
   if (!value || typeof value !== 'object' || Array.isArray(value)
-    || !Object.values(value).every(alias => typeof alias === 'string')) {
+    || !Object.values(value).every(alias => alias === null || typeof alias === 'string')) {
     throw new Error('Invalid school alias dataset');
   }
   return value as SchoolAliasMap;
@@ -253,7 +270,7 @@ const IMPLAUSIBLE_HISTORY_INSTITUTION_COUNT = 8;
 
 function isImplausibleHistory(history: AffiliationSegment[], currentAffiliation: string, aliasMap: SchoolAliasMap | null) {
   const resolved = new Set(history.map(segment =>
-    aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, segment.school) ? aliasMap[segment.school]! : segment.school));
+    (aliasMap && Object.prototype.hasOwnProperty.call(aliasMap, segment.school) ? aliasMap[segment.school] : null) ?? segment.school));
   return resolved.size >= IMPLAUSIBLE_HISTORY_INSTITUTION_COUNT && !resolved.has(currentAffiliation);
 }
 
@@ -513,7 +530,7 @@ export function filterByYears(
 }
 
 export async function fetchCsv<T = Record<string, string>>(url: string): Promise<T[]> {
-  const response = await fetch(url);
+  const response = await fetchWithRetry(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch CSV (${response.status}) from ${url}`);
   }
