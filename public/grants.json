@@ -277,62 +277,64 @@
   },
   {
     "id": "onr-yip",
-    "name": "Office of Naval Research (ONR) Young Investigator Program (YIP)",
+    "name": "Office of Naval Research (ONR) Fiscal Year 2027 Young Investigator Program (YIP)",
     "shortName": "ONR YIP",
     "sponsor": "Office of Naval Research (ONR)",
     "sponsorCategory": "Government",
     "targetAudience": [
       "Faculty"
     ],
-    "whoFor": "Tenure-track academic faculty within 7 years of PhD",
-    "deadline": "Late March / Early April (Annual)",
-    "deadlineMonth": 3,
-    "amount": "Up to $750,000 over 3 years ($250,000/year)",
-    "summary": "Attracts outstanding academic scientists and engineers to naval research. Awards support research in autonomous systems, cybersecurity, machine learning, robotics, and command-and-control architectures.",
+    "whoFor": "Early-career faculty in their first or second full-time tenure-track or equivalent appointment",
+    "deadline": "October 30, 2026 at 5:00 PM ET (proposal deadline; annual program)",
+    "deadlineMonth": 10,
+    "amount": "Typically $750,000 over 3 years ($250,000/year); up to 25 awards anticipated",
+    "summary": "Supports exceptional early-career scientists and engineers conducting innovative basic or applied research aligned with the Department of the Navy's science and technology priorities, including AI, autonomy, cyber, networking, sensing, and quantum technologies.",
     "eligibility": [
-      "US Citizens, Permanent Residents, or foreign nationals holding a tenure-track faculty position in the US",
-      "Received PhD within past 7 years",
-      "Research aligned with naval mission potential"
+      "US citizen, national, or permanent resident holding a first or second full-time tenure-track or equivalent faculty position",
+      "Received a PhD or equivalent degree on or after January 1, 2019",
+      "Must be employed by an eligible US institution of higher education or qualifying scientific/educational nonprofit",
+      "Single-PI proposal only; tenured faculty and prior ONR YIP award recipients are ineligible"
     ],
     "topics": [
-      "Autonomous Systems",
-      "Cybersecurity",
-      "AI/ML Decision Making",
+      "Artificial Intelligence & Autonomy",
+      "Cybersecurity & Networking",
+      "Sensors & Sensing",
+      "Quantum Science",
       "Robotics",
-      "Computer Vision",
-      "Distributed Sensing"
+      "Cyber-Physical Systems"
     ],
-    "url": "https://www.nre.navy.mil/work-with-us/funding-opportunities/young-investigator-program-yip",
+    "url": "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf",
     "featured": true
   },
   {
     "id": "afosr-yip",
-    "name": "Air Force Young Investigator Research Program (YIP)",
+    "name": "Air Force Fiscal Year 2027 Young Investigator Research Program (YIP)",
     "shortName": "AFOSR YIP",
     "sponsor": "Air Force Office of Scientific Research (AFOSR)",
     "sponsorCategory": "Government",
     "targetAudience": [
       "Faculty"
     ],
-    "whoFor": "Early-career scientists and engineers within 7 years of PhD",
-    "deadline": "Early June (Annual)",
-    "deadlineMonth": 6,
+    "whoFor": "Early-career scientists and engineers at eligible academic, industry, or nonprofit research organizations",
+    "deadline": "December 4, 2026 at 11:59 PM ET (full proposal; white paper due October 9)",
+    "deadlineMonth": 12,
     "amount": "Up to $450,000 over 3 years ($150,000/year)",
-    "summary": "Fosters creative basic research in science and engineering, enhances early career development of outstanding young investigators, and increases engagement in Air Force and Space Force technical challenges.",
+    "summary": "Fosters creative basic research in science and engineering, enhances early-career development of outstanding young investigators, and increases engagement with Air Force and Space Force mission challenges. White papers are required before full proposals.",
     "eligibility": [
-      "US Citizens, US Nationals, or Permanent Residents",
-      "Full-time tenure-track faculty appointment at a US research institution",
-      "Received PhD within 7 years of application deadline"
+      "US citizen, national, or permanent resident employed full-time in a regular, non-contractor position",
+      "Received a PhD or equivalent degree on or after April 1, 2019",
+      "Eligible host: US higher-education institution, industrial laboratory, for-profit, or nonprofit research organization",
+      "Researchers at FFRDCs or Department of War laboratories are ineligible"
     ],
     "topics": [
-      "Trustworthy AI",
-      "Complex Networks",
-      "Computational Cognition",
-      "Quantum Computing",
-      "Formal Verification",
-      "Autonomous Systems"
+      "Artificial Intelligence",
+      "Autonomy & Robotics",
+      "Quantum Information Science",
+      "Cybersecurity",
+      "Networks & Communications",
+      "Computational Science"
     ],
-    "url": "https://www.afrl.af.mil/AFOSR/",
+    "url": "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0",
     "featured": false
   },
   {
