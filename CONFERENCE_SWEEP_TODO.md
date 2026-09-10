@@ -26,26 +26,28 @@ diff, run `npm test`, `npm run typecheck`, `npm run build`, and
 Documentation consolidation commits `0a4ff25` and `8e10e56` removed the old
 scattered Markdown instructions; use `MAINTENANCE.md` as the single playbook.
 
-## Next research targets
+## Remaining watch list
 
-Prioritize current/upcoming records with missing or suspect official details:
+The current audit is complete. Continue monitoring these items during the
+weekly/monthly maintenance sweep, and update only when official pages publish
+new facts:
 
-- SIGCOMM 2027: event details and organizing chairs are confirmed; submission
-  and notification dates remain TBA.
-- MobiCom 2027: verify place when the official site announces it.
-- MobiSys 2027: place is confirmed as Ho Chi Minh City; all dates remain TBA.
-- SIGGRAPH Asia 2027: Tokyo/date and conference chair confirmed; submission
-  dates remain unannounced.
-- AAAI 2028, ASPLOS 2028, CAV 2028, CCS 2028, CHI 2028, EuroSys 2028, SIGMOD
-  2028, SOSP 2028: check official future-edition announcements; do not infer
-  dates or places.
-- ASE 2027, UIST 2027, EMNLP 2027, SIGIR 2027, ISCA 2027, MICRO 2027,
-  IJCAI 2027, and NAACL 2027: audit edition links and missing fields.
-- OSDI/NSDI, IEEE S&P, FAST, VLDB, ICDE, SIGMETRICS, and other multi-cycle
-  records: fill rebuttal/notification dates only from official CFP pages and
-  apply shared metadata to every cycle.
+- MobiCom 2027: place is still unpublished; the official page has the summer
+  cycle dates and leaves the winter cycle TBA.
+- MobiSys 2027: Ho Chi Minh City is confirmed, but dates and submission
+  details remain unpublished on the official series page.
+- SIGCOMM 2027: event, place, and chairs are confirmed; submission and
+  notification dates remain TBA.
+- SIGGRAPH Asia 2027: Tokyo, dates, and conference chair are confirmed;
+  submission dates remain unannounced.
+- AAAI 2028, ASPLOS 2028, CAV 2028, CCS 2028, CHI 2028, EuroSys 2028,
+  SIGMOD 2028, and SOSP 2028: no validated official edition announcement;
+  their unsupported projected dates and links were removed.
+- ASE, UIST, EMNLP, ISCA, and MICRO 2027: no validated official edition
+  schedule was available during this sweep; do not infer one.
 
 ## Current state
 
-`main` was clean and synced after `77a9d36`. The last validation passed all
-unit tests, typecheck, build, and 2 CS Confs browser tests.
+The sweep batches are committed on `main` after each validation pass. The
+latest validation passed all unit tests, typecheck, build, and 2 CS Confs
+browser tests.
