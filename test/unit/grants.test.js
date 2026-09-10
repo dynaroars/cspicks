@@ -1,7 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import { filterGrants, grantsSuggestions } from '../../src/grants/grants-data.js';
+import { filterGrants, grantsSuggestions, parseGrants } from '../../src/grants/grants-data.js';
+
+test('grants parser rejects malformed external data', () => {
+  assert.throws(() => parseGrants({}), /Invalid grants dataset/);
+  assert.throws(() => parseGrants([{ id: 'incomplete' }]), /Invalid grants dataset/);
+});
 
 test('grants dataset contains required schema fields and is non-empty', async () => {
   const fileContent = await fs.readFile(new URL('../../public/grants.json', import.meta.url), 'utf8');
@@ -22,7 +27,31 @@ test('grants dataset contains required schema fields and is non-empty', async ()
     ids.add(grant.id);
     assert.ok(Array.isArray(grant.targetAudience) && grant.targetAudience.length > 0,
       `Grant ${grant.id} targetAudience should be a non-empty array`);
+    if (grant.locations !== undefined) {
+      assert.ok(Array.isArray(grant.locations) && grant.locations.length > 0,
+        `Grant ${grant.id} locations should be a non-empty array when provided`);
+    }
+    if (grant.status !== undefined) {
+      assert.equal(grant.status, 'historical', `Grant ${grant.id} has unsupported status`);
+    }
   }
+});
+
+test('grants filtering separates current and historical programs', async () => {
+  const fileContent = await fs.readFile(new URL('../../public/grants.json', import.meta.url), 'utf8');
+  const grants = JSON.parse(fileContent);
+
+  const historical = filterGrants(grants, { status: 'historical' });
+  assert.ok(historical.length >= 6);
+  assert.ok(historical.every(g => g.status === 'historical'));
+  assert.ok(historical.some(g => g.id === 'google-faculty-research-awards'));
+
+  const current = filterGrants(grants, { status: 'current' });
+  assert.ok(current.length > historical.length);
+  assert.ok(current.every(g => g.status !== 'historical'));
+
+  const facebookHistory = filterGrants(grants, { query: 'historical Facebook faculty' });
+  assert.ok(facebookHistory.some(g => g.id === 'meta-research-awards'));
 });
 
 test('grants filtering filters by audience and sponsor category', async () => {
@@ -65,6 +94,17 @@ test('grants filtering performs text query search across name, sponsor, topics a
   const darpaMatches = filterGrants(grants, { query: 'DARPA' });
   assert.ok(darpaMatches.length >= 2);
   assert.ok(darpaMatches.some(g => g.id === 'darpa-yfa'));
+
+  const virginiaMatches = filterGrants(grants, { query: 'Virginia' });
+  assert.ok(virginiaMatches.length >= 6);
+  assert.ok(virginiaMatches.some(g => g.id === 'cci-cyber-as-a-service'));
+  assert.ok(virginiaMatches.some(g => g.id === 'vipc-higher-education-proof-of-concept'));
+
+  const stateMatches = filterGrants(grants, { query: 'Wyoming EPSCoR' });
+  assert.ok(stateMatches.some(g => g.id === 'nsf-epscor-research-fellows'));
+
+  const spaceGrantMatches = filterGrants(grants, { query: 'California Space Grant' });
+  assert.ok(spaceGrantMatches.some(g => g.id === 'nasa-space-grant-consortia'));
 });
 
 test('grants suggestions extract awards, sponsors, topics, and audiences', async () => {

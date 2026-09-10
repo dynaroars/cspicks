@@ -25,6 +25,11 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   await expect(page.locator('.grant-card')).toHaveCount(1);
   await expect(page.locator('.grant-title')).toContainText('Sloan Research');
 
+  // State names are indexed for location-specific programs.
+  await input.fill('California Space Grant');
+  await expect(page.locator('.grant-card')).toHaveCount(1);
+  await expect(page.locator('.grant-title')).toContainText('NASA State Space Grant');
+
   // Test Search Suggestions
   const suggestionsBox = page.locator('#universal-suggestions');
   await input.fill('Google');
@@ -33,6 +38,15 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
 
   // Clear search
   await input.fill('');
+
+  // Historical programs are clearly labeled and independently filterable.
+  const statusSelect = page.locator('#status-select');
+  await statusSelect.selectOption('historical');
+  const historicalCards = page.locator('.grant-card');
+  expect(await historicalCards.count()).toBeGreaterThanOrEqual(6);
+  await expect(page.locator('.grant-status-badge').first()).toHaveText('Historical');
+  await expect(page).toHaveURL(/status=historical/);
+  await statusSelect.selectOption('all');
 
   // Test Audience Filter: Faculty
   const audienceSelect = page.locator('#audience-select');
