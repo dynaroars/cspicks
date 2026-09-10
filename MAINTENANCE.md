@@ -391,6 +391,20 @@ npx playwright test test/e2e/core-flows.spec.js --grep "CS Confs"
 Also inspect the diff to ensure changes are limited to the intended
 conference editions and all cycles received the same shared metadata.
 
+### Data credits
+
+`csconfs/data/conferences.json` is versioned and deployed with CS Picks; the
+page never fetches schedule data from another repository or service. The
+records were assembled through official conference-site research and
+contributor corrections, preserving the final unpublished metadata work from
+the retired schedule project (dates, places, chairs, verification status,
+expanded rolling-deadline cycles). [CSRankings](https://csrankings.org/) and
+[CORE](https://portal.core.edu.au/conf-ranks/) define the venue sets and
+research-area mappings referenced by each record's `venueKeys`. Historical
+acceptance and submission totals came from
+[emeryberger/csconferences](https://github.com/emeryberger/csconferences).
+These are credits, not runtime or maintenance dependencies.
+
 ## 6. Grants, fellowships & research awards (`public/grants.json`)
 
 `grants.html` reads from `public/grants.json` and supports user
