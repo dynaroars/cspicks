@@ -133,66 +133,13 @@ No analytics are wired to a real account by default — `src/analytics.js`'s cal
     npm run deploy
     ```
 
-## 🔁 Routine Maintenance
+## 🔁 Maintenance
 
-Two upstream sources move at very different speeds, so refreshing them is two different jobs.
-
-| How often | Command | Cost | What it does |
-| --- | --- | --- | --- |
-| **Monthly, or after any CSRankings roster update** | `npm run sync:nsf:names` | 2 CSV downloads, seconds | Re-resolves NSF investigators to the name CSRankings' publication table uses, and rewrites `public/nsf-name-crosswalk.csv` |
-| Quarterly, or when award data looks stale | `npm run sync:nsf:all` | Thousands of NSF API queries, hours | Re-queries the NSF Award Search API for every faculty/institution pair |
-| After changing institution or name matching | `npm run sync:nsf:rebuild` | Local cache only, seconds | Rebuilds the dataset from `.nsf-sync-cache.json` with no API access |
-
-**Run `npm run sync:nsf:names` regularly.** CSRankings spells some faculty differently in `csrankings.csv` than in `generated-author-info.csv`, and the site matches on the latter. Without this refresh, faculty hired or renamed since the last award sync silently show no funding. It needs no NSF API access, so it is safe to run any time — commit the resulting `public/nsf-awards.json` and `public/nsf-name-crosswalk.csv`.
-
-The crosswalk is meant to be read: each row records a name that needed resolving. Correcting a wrong row by hand is a legitimate fix.
-
-```bash
-npm run sync:nsf:names   # then review the diff in public/nsf-name-crosswalk.csv
-npm test && npm run build
-```
-
-## 💰 Refreshing NSF Funding Data
-
-The browser does not query NSF directly. NSF rejects browser-origin requests, and live per-user requests would make results dependent on API availability and unstable name matching. Instead, the funding page lazily loads a synchronized static dataset only when someone opens `funding.html`.
-
-To synchronize all US institutions in the current CSRankings roster:
-
-```bash
-npm run sync:nsf:all
-```
-
-The synchronizer:
-
-- queries the official NSF Award Search API for each unique faculty/institution pair;
-- accepts awards only when the NSF recipient matches the current CSRankings institution;
-- retains all listed PIs and co-PIs for fractional attribution;
-- finds exact-title sibling awards for collaborative projects and deduplicates institution-transfer records;
-- checkpoints progress in the ignored `.nsf-sync-cache.json` file;
-- resumes incomplete runs without repeating completed queries.
-
-To force a targeted faculty refresh while diagnosing a name variant:
-
-```bash
-npm run sync:nsf:all -- --faculty "Hoang-Dung Tran"
-```
-- writes the deployable dataset to `public/nsf-awards.json`, including explicit coverage totals.
-
-NSF records awards under legal names (`Regents of the University of Michigan - Flint`), informal ones (`Georgia Tech Research Corporation`), and expansions of names CSRankings abbreviates (`Massachusetts Institute of Technology` vs `Massachusetts Inst. of Technology`). The synchronizer normalizes those forms, keeps an alias list for names it cannot derive, and assigns each awardee to the *most specific* matching institution so a flagship never claims its branch campus's awards.
-
-To build a deliberately scoped dataset for one institution instead:
-
-```bash
-npm run sync:nsf -- --school "George Mason University"
-```
-
-Run the nationwide command again before deployment when you want to refresh NSF data. `npm run deploy` does not contact NSF automatically.
-
-### Funding interpretation
-
-An award's estimated total amount (its intended amount) is divided equally among every listed PI and co-PI. University totals sum the shares assigned to matched current CSRankings faculty. These are matched-faculty statistics—not complete university NSF portfolios, annual expenditures, fiscal-year obligation totals, or measures of research quality.
-
-Awards made to a professor's former institution are intentionally excluded. Name variants, missing co-PIs, transfers, supplements, and NSF data changes can still cause omissions.
+All data-refresh workflows — NSF funding sync, CS Conference schedule
+research, grants/awards crawling, OpenAlex history, CSRankings taxonomy sync,
+sitemap/OG regeneration — are documented in one place:
+[**MAINTENANCE.md**](MAINTENANCE.md). Start there for cadence, exact
+commands, schemas, and research/verification discipline.
 
 ## 🌱 Growing CSPicks
 
