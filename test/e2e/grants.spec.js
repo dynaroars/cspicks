@@ -25,6 +25,12 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   await expect(page.locator('.grant-card')).toHaveCount(1);
   await expect(page.locator('.grant-title')).toContainText('Sloan Research');
 
+  // Estimated annual deadlines remain discoverable and visibly marked.
+  await input.fill('ONR CNR Fellows');
+  await expect(page.locator('.grant-card')).toHaveCount(1);
+  await expect(page.locator('.grant-estimated-badge')).toHaveText('Estimated');
+  await expect(page.locator('.grant-meta-val').filter({ hasText: /Estimated July 3, 2027/ })).toBeVisible();
+
   // State names are indexed for location-specific programs.
   await input.fill('California Space Grant');
   await expect(page.locator('.grant-card')).toHaveCount(1);

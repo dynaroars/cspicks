@@ -3,6 +3,7 @@
  */
 import { escapeHtml, safeExternalUrl } from '../shared.js';
 import type { Grant } from '../types.js';
+import { grantDeadlinePresentation } from './grants-data.js';
 
 const LINK_ICON = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
 const EXT_ICON = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
@@ -25,6 +26,7 @@ export function renderGrantCard(grant: Grant) {
     grant.locations?.length === 1 ? grant.locations[0] :
       grant.locations?.length ? `${grant.locations.length} eligible jurisdictions` : ''
   );
+  const deadline = grantDeadlinePresentation(grant);
 
   return `
     <article class="grant-card ${grant.featured ? 'is-featured' : ''} ${grant.status === 'historical' ? 'is-historical' : ''}" id="${escapeHtml(grant.id)}" data-grant-id="${escapeHtml(grant.id)}">
@@ -39,6 +41,7 @@ export function renderGrantCard(grant: Grant) {
           </div>
           <div class="grant-badges">
             ${grant.status === 'historical' ? '<span class="grant-status-badge">Historical</span>' : ''}
+            ${deadline.estimated ? '<span class="grant-estimated-badge" title="Projected from the latest published cycle; confirm on the official program page">Estimated</span>' : ''}
             <span class="grant-cat-badge ${catClass}">${escapeHtml(grant.sponsorCategory)}</span>
             ${grant.featured ? '<span class="grant-featured-badge" title="Highlighted award" aria-label="Highlighted award">★</span>' : ''}
           </div>
@@ -59,7 +62,7 @@ export function renderGrantCard(grant: Grant) {
 
         <div class="grant-meta-item">
           <span class="grant-meta-label">Deadline / Cycle</span>
-          <span class="grant-meta-val">${escapeHtml(grant.deadline)}</span>
+          <span class="grant-meta-val">${escapeHtml(deadline.text)}</span>
         </div>
 
         <div class="grant-meta-item">

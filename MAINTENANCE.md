@@ -494,9 +494,15 @@ Every entry MUST adhere to this structure:
 }
 ```
 
-`locations`, `locationLabel`, and `status` are optional. Add the geographic
+`locations`, `locationLabel`, `estimated`, and `status` are optional. Add the geographic
 fields when eligibility is limited by state, territory, commonwealth, or
-another named jurisdiction. Set `status` to `historical` only when a
+another named jurisdiction. For an annual program, preserve a dated prior
+cycle in `deadline` rather than overwriting it with a guess: the grants UI
+automatically projects a passed dated annual deadline to the next cycle and
+labels it **Estimated**, while `deadlineMonth` keeps it discoverable in
+deadline filtering and sorting. Use `"estimated": true` only when an
+explicitly labeled projection is needed but no dated prior cycle can support
+the automatic projection. Set `status` to `historical` only when a
 discontinued or inactive program is intentionally retained for archival
 research; clearly state the historical date range in `deadline` and do not
 present an old deadline as current.

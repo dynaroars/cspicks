@@ -223,6 +223,8 @@ export interface Grant {
   topics: string[];
   url: string;
   featured?: boolean;
+  /** Deadline is an explicitly labeled projection, not a sponsor-confirmed date. */
+  estimated?: boolean;
   status?: 'historical' | string;
   locations?: string[];
   locationLabel?: string;

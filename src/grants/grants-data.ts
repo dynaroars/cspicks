@@ -7,6 +7,41 @@ import type { Grant } from '../types.js';
 
 let cachedGrants: Grant[] | null = null;
 
+const monthNumbers: Record<string, number> = {
+  january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+  july: 6, august: 7, september: 8, october: 9, november: 10, december: 11
+};
+
+/**
+ * Give an expired, dated annual call a next-cycle projection without
+ * overwriting the source-backed deadline in the dataset.  This keeps annual
+ * opportunities discoverable in deadline order while clearly distinguishing
+ * the projection from a sponsor-published date.
+ */
+export function grantDeadlinePresentation(grant: Grant, now = new Date()) {
+  const deadline = grant.deadline;
+  if (!/\bannual(?:ly)?\b/i.test(deadline)) return { text: deadline, estimated: Boolean(grant.estimated) };
+
+  const match = deadline.match(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:st|nd|rd|th)?[,]?\s+(20\d{2})\b/i);
+  if (!match) return { text: deadline, estimated: Boolean(grant.estimated) };
+
+  const [, monthName, dayText, yearText] = match;
+  const month = monthNumbers[monthName!.toLowerCase()];
+  const day = Number(dayText);
+  let projectedYear = Number(yearText);
+  if (month === undefined || !Number.isInteger(day)) return { text: deadline, estimated: Boolean(grant.estimated) };
+
+  const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  while (Date.UTC(projectedYear, month, day) < today) projectedYear += 1;
+  if (projectedYear === Number(yearText)) return { text: deadline, estimated: Boolean(grant.estimated) };
+
+  const projectedDate = `${monthName} ${day}, ${projectedYear}`;
+  return {
+    text: `Estimated ${deadline.replace(match[0], projectedDate)}`,
+    estimated: true
+  };
+}
+
 /**
  * Validate the fields the grants UI relies on before treating fetched JSON as
  * application data. Optional presentation fields remain optional.
@@ -29,7 +64,8 @@ function isGrant(value: unknown): value is Grant {
     && typeof grant.summary === 'string'
     && Array.isArray(grant.eligibility)
     && Array.isArray(grant.topics)
-    && typeof grant.url === 'string';
+    && typeof grant.url === 'string'
+    && (grant.estimated === undefined || typeof grant.estimated === 'boolean');
 }
 
 /** @param {unknown} payload @returns {Grant[]} */

@@ -108,6 +108,7 @@
 
 .grant-cat-badge,
 .grant-status-badge,
+.grant-estimated-badge,
 .grant-featured-badge {
   padding: 0.18rem 0.55rem;
   border-radius: 999px;
@@ -121,6 +122,11 @@
   color: #9a3412;
   background: rgba(234, 88, 12, 0.12);
   border: 1px solid rgba(234, 88, 12, 0.28);
+}
+
+.grant-estimated-badge {
+  color: #9a6700;
+  background: #fff2bf;
 }
 
 .grant-card.is-historical {
@@ -170,6 +176,7 @@
   .category-soc { color: #fde68a; background: rgba(245, 158, 11, 0.22); }
   .grant-featured-badge { color: #fde68a; background: rgba(245, 158, 11, 0.25); }
   .grant-status-badge { color: #fdba74; background: rgba(234, 88, 12, 0.22); }
+  .grant-estimated-badge { color: #ffd66b; background: #4a3b12; }
 }
 
 .grant-sponsor-row {

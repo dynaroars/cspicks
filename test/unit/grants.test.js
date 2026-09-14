@@ -1,11 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import { filterGrants, grantsSuggestions, parseGrants } from '../../src/grants/grants-data.js';
+import { filterGrants, grantDeadlinePresentation, grantsSuggestions, parseGrants } from '../../src/grants/grants-data.js';
 
 test('grants parser rejects malformed external data', () => {
   assert.throws(() => parseGrants({}), /Invalid grants dataset/);
   assert.throws(() => parseGrants([{ id: 'incomplete' }]), /Invalid grants dataset/);
+  assert.throws(() => parseGrants([{
+    id: 'bad-estimate', name: 'Example', shortName: 'Example', sponsor: 'Example', sponsorCategory: 'Government',
+    targetAudience: ['Faculty'], whoFor: 'Faculty', deadline: 'Annual', deadlineMonth: 1, amount: '$1',
+    summary: 'Example', eligibility: [], topics: [], url: 'https://example.com', estimated: 'yes'
+  }]), /Invalid grants dataset/);
 });
 
 test('grants dataset contains required schema fields and is non-empty', async () => {
@@ -52,6 +57,20 @@ test('grants filtering separates current and historical programs', async () => {
 
   const facebookHistory = filterGrants(grants, { query: 'historical Facebook faculty' });
   assert.ok(facebookHistory.some(g => g.id === 'meta-research-awards'));
+});
+
+test('annual past deadlines project to the next cycle and retain a sortable deadline month', async () => {
+  const fileContent = await fs.readFile(new URL('../../public/grants.json', import.meta.url), 'utf8');
+  const grants = JSON.parse(fileContent);
+  const cnrFellows = grants.find(g => g.id === 'onr-cnr-fellows');
+
+  assert.equal(cnrFellows.deadlineMonth, 7);
+  assert.match(cnrFellows.deadline, /^July 3, 2026/);
+  assert.deepEqual(
+    grantDeadlinePresentation(cnrFellows, new Date('2026-09-14T12:00:00Z')),
+    { text: 'Estimated July 3, 2027 (inaugural nomination deadline; ONR says the program will be offered annually)', estimated: true }
+  );
+  assert.ok(filterGrants(grants, { deadlineFilter: '7' }).some(g => g.id === 'onr-cnr-fellows'));
 });
 
 test('grants filtering filters by audience and sponsor category', async () => {
