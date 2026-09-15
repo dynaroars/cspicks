@@ -390,6 +390,22 @@ button.card-header {
   padding-bottom: 0.5rem;
 }
 
+.school-area-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.area-overview-link {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.75em;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--text-secondary);
+  text-underline-offset: 3px;
+}
+
 .faculty-list {
   display: flex;
   flex-wrap: wrap;

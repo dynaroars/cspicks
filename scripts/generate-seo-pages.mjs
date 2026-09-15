@@ -97,6 +97,16 @@ function renderSchoolPage(school, faculty, allSchools) {
     }))
   });
 
+  const breadcrumbJson = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Universities', item: `${ORIGIN}/index.html?region=${school.region || 'world'}` },
+      { '@type': 'ListItem', position: 3, name: school.name, item: canonicalUrl }
+    ]
+  });
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,6 +127,7 @@ function renderSchoolPage(school, faculty, allSchools) {
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${ORIGIN}/og-image.png">
   <script type="application/ld+json">${schemaJson}</script>
+  <script type="application/ld+json">${breadcrumbJson}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
@@ -240,7 +251,27 @@ function renderAreaPage(areaKey, areaName, topSchools, topProfessors) {
       '@type': 'DefinedTerm',
       name: areaName,
       description: `Computer Science research subfield: ${areaName}`
+    },
+    mainEntity: {
+      '@type': 'ItemList',
+      name: `Top Universities in ${areaName}`,
+      itemListElement: topSchools.slice(0, 30).map((s, idx) => ({
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: s.name,
+        url: `${ORIGIN}/schools/${slugify(s.name)}/`
+      }))
     }
+  });
+
+  const breadcrumbJson = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Research Areas', item: `${ORIGIN}/index.html?view=discoveries` },
+      { '@type': 'ListItem', position: 3, name: areaName, item: canonicalUrl }
+    ]
   });
 
   return `<!DOCTYPE html>
@@ -263,6 +294,7 @@ function renderAreaPage(areaKey, areaName, topSchools, topProfessors) {
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${ORIGIN}/og-image.png">
   <script type="application/ld+json">${schemaJson}</script>
+  <script type="application/ld+json">${breadcrumbJson}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">

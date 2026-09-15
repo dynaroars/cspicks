@@ -269,6 +269,7 @@ export function renderSchoolCard(school: FilteredSchool, filterArea: string | nu
         .map(entry => facultyButton(entry.name, school.name, entry.stats))
         .join('');
       const paperCount = Math.ceil(data.count);
-      return `<div class="school-area-section"><div class="school-area-header"><button type="button" class="inline-link" ${actionAttributes('search-query', { query: areaLabels[area] || area })}>${escapeHtml(prefix + label)}</button><span>${paperCount} ${paperCount === 1 ? 'paper' : 'papers'} (${data.adjusted.toFixed(1)} adjusted)</span></div><div class="faculty-list">${facultyHtml}</div></div>`;
+      const areaOverviewLink = areaLabels[area] ? ` <a href="/areas/${slugify(label)}/" class="area-overview-link" title="${escapeHtml(label)} overview page">Overview</a>` : '';
+      return `<div class="school-area-section"><div class="school-area-header"><span class="school-area-title"><button type="button" class="inline-link" ${actionAttributes('search-query', { query: areaLabels[area] || area })}>${escapeHtml(prefix + label)}</button>${areaOverviewLink}</span><span>${paperCount} ${paperCount === 1 ? 'paper' : 'papers'} (${data.adjusted.toFixed(1)} adjusted)</span></div><div class="faculty-list">${facultyHtml}</div></div>`;
     }).join('')}</div>${renderSubfieldContributions(school)}</div></div>`;
 }
