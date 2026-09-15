@@ -129,6 +129,16 @@ export default {
         43,
         4,
         6
+      ],
+      "2025": [
+        44,
+        4,
+        6
+      ],
+      "2026": [
+        45,
+        4,
+        6
       ]
     },
     "cgf": {
@@ -442,6 +452,6 @@ export default {
       ]
     }
   },
-  "sourceVersion": "W/\"06e0fac9895e7b2096e0caedf00b9feab80ac57bc080d0ec4ca2f839488b5b50\"",
-  "syncedAt": "2026-08-27T00:39:25.673Z"
+  "sourceVersion": "W/\"fd9421113e60a15f833cbad24cec070ced273e3d9f83bbeed61581dc48ce1c3c\"",
+  "syncedAt": "2026-09-15T01:12:38.138Z"
 };

@@ -1,7 +1,7 @@
 import { writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
-import { CSRANKINGS_RULES_URL, parseCsrankingsRules } from '../src/csrankings-rules.js';
+import { CSRANKINGS_RULES_URL, parseCsrankingsRules } from '../src/csrankings-rules.ts';
 
 const response = await fetch(CSRANKINGS_RULES_URL);
 if (!response.ok) throw new Error(`CSRankings returned ${response.status}`);

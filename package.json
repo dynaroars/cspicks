@@ -10,7 +10,7 @@
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
     "check:size": "node scripts/check-project-size.mjs",
-    "sync:csrankings-rules": "node scripts/sync-csrankings-rules.mjs",
+    "sync:csrankings-rules": "node --import tsx scripts/sync-csrankings-rules.mjs",
     "sync:nsf": "node scripts/sync-nsf-awards.mjs",
     "sync:nsf:all": "node scripts/sync-nsf-awards.mjs --all-us",
     "sync:nsf:names": "node scripts/sync-nsf-roster-names.mjs",

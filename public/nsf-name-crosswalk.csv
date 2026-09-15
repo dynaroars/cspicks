@@ -1,11 +1,12 @@
 # Faculty whose CSRankings roster name differs from their publication-table name.
-# Generated 2026-08-27T00:38:09.312Z by scripts/sync-nsf-roster-names.mjs.
+# Generated 2026-09-15T01:12:20.508Z by scripts/sync-nsf-roster-names.mjs.
 # The publication-table name is what the site matches on; edit a row to correct a resolution.
 faculty_name,roster_name,affiliation
 Aaron D. Striegel,Aaron Striegel,University of Notre Dame
 Abdou S. Youssef,Abdou Youssef,George Washington University
 Abusayeed M. Saifullah,Abusayeed Saifullah,University of Texas at Dallas
 Adji Bousso Dieng,Adji B. Dieng,Princeton University
+Ahmed H. Qureshi,Ahmed Hussain Qureshi,Purdue University
 Alberto E. Cerpa,Alberto Cerpa,Univ. of California - Merced
 Alex Pang,Alex T. Pang,Univ. of California - Santa Cruz
 Alexander H. Nelson 0001,Alexander Nelson 0001,University of Arkansas
@@ -47,6 +48,7 @@ Dale F. Reed,Dale Reed,University of Illinois at Chicago
 Daniel J. Hsu,Daniel Hsu 0001,Columbia University
 Daniel Chester,Daniel L. Chester,University of Delaware
 Daniel Lopresti,Daniel P. Lopresti,Lehigh University
+Daniel Ritchie,Daniel Ritchie 0001,Brown University
 Daniel R. Sheldon,Daniel Sheldon,Univ. of Massachusetts Amherst
 Danielle Szafir,Danielle Albers Szafir,University of North Carolina
 Danny Z. Chen,Danny Ziyi Chen,University of Notre Dame
@@ -75,11 +77,13 @@ Eric K. Torng,Eric Torng,Michigan State University
 Erin Solovey,Erin Treacy Solovey,Worcester Polytechnic Institute
 Feng Zhu 0010,Feng Zhu 0006,University of Alabama - Huntsville
 Fernando D. Diaz,Fernando Diaz 0001,Carnegie Mellon University
+George K. Atia,George Atia,University of Central Florida
 Gita Sukthankar,Gita Reese Sukthankar,University of Central Florida
 Gursimran S. Walia,Gursimran Singh Walia,Augusta University
 Hung M. La,Hung Manh La,University of Nevada
 Ibrahim Baggili,Ibrahim M. Baggili,Louisiana State University
 Igor Fabio Steinmacher,Igor Steinmacher,Northern Arizona University
+Ioannis T. Pavlidis,Ioannis Pavlidis,University of Houston
 Isaac Kim 0001,Isaac H. Kim,Univ. of California - Davis
 Ivan I. Garibay,Ivan Garibay,University of Central Florida
 Jaijeet Roychowdhury,Jaijeet S. Roychowdhury,Univ. of California - Berkeley
@@ -144,11 +148,13 @@ Ming-Deh Huang,Ming-Deh A. Huang,University of Southern California
 Mohammad T. Hajiaghayi,Mohammad Hajiaghayi,Univ. of Maryland - College Park
 Nam Wook Kim,Nam Sung Kim,Boston College
 Narain Gehani,Narain H. Gehani,NJIT
+Nasir D. Memon,Nasir Memon,New York University
 Neil T. Dantam,Neil Dantam,Colorado School of Mines
 Neil T. Spring,Neil Spring,Univ. of Maryland - College Park
 Neil Gong 0001,Neil Zhenqiang Gong,Duke University
 Nicholas A. Diakopoulos,Nicholas Diakopoulos,Northwestern University
 Nicholas J. Hopper,Nicholas Hopper,University of Minnesota
+Nikil D. Dutt,Nikil Dutt,Univ. of California - Irvine
 Nikolaos P. Papanikolopoulos,Nikolaos Papanikolopoulos,University of Minnesota
 Nikolay A. Atanasov,Nikolay Atanasov 0001,Univ. of California - San Diego
 Nikos P. Chrisochoides,Nikos Chrisochoides,Old Dominion University
@@ -222,5 +228,6 @@ William Wang 0001,William Yang Wang,Univ. of California - Santa Barbara
 Wolfgang Bein,Wolfgang W. Bein,University of Nevada Las Vegas
 Xavier M. Tricoche,Xavier Tricoche,Purdue University
 Xia Hu 0001,Xia Ben Hu,Rice University
+Xiao Chen 0001,Xiao Chen 0002,Texas State University
 Xiaolin Hu 0002,Xiaolin Hu 0001,Georgia State University
 Zhijie Shi,Zhijie Jerry Shi,University of Connecticut
