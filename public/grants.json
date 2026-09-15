@@ -75,7 +75,7 @@
     "whoFor": "All CS faculty, research professors, and multi-institution collaborative teams",
     "deadline": "Target dates: second Thursday in September and first Thursday in February (annual); proposals accepted anytime",
     "deadlineMonth": 10,
-    "amount": "Dependent on availability of funds; estimated 400\u2013600 awards",
+    "amount": "Dependent on availability of funds; estimated 400–600 awards",
     "summary": "NSF's current cross-division CISE research solicitation spanning future computing programs such as Algorithmic Foundations, Computer Systems Research, Cyber-Physical Systems, and Software and Hardware Foundations.",
     "eligibility": [
       "Faculty and researchers at accredited US academic and non-profit research institutions",
@@ -470,7 +470,7 @@
     "whoFor": "Undergraduate, Master's, and PhD students in defense-critical STEM fields",
     "deadline": "Early December (Annual)",
     "deadlineMonth": 12,
-    "amount": "Full tuition, $30,000\u2013$46,000 annual stipend, health insurance, paid summer internships, and guaranteed civilian DoD employment upon graduation",
+    "amount": "Full tuition, $30,000–$46,000 annual stipend, health insurance, paid summer internships, and guaranteed civilian DoD employment upon graduation",
     "summary": "The SMART Scholarship-for-Service Program provides full tuition, annual stipends, and post-graduation civilian employment at DoD laboratories and research centers across the US.",
     "eligibility": [
       "US Citizens only",
@@ -589,7 +589,7 @@
     "whoFor": "Outstanding PhD students in CS and related areas (University nominated)",
     "deadline": "April / May (Annual nomination window)",
     "deadlineMonth": 4,
-    "amount": "Full tuition and fees for up to 3 years + $40,000\u2013$50,000/yr stipend + Google Research mentor",
+    "amount": "Full tuition and fees for up to 3 years + $40,000–$50,000/yr stipend + Google Research mentor",
     "summary": "Google PhD Fellowships directly support graduate students doing exceptional research in computer science and adjacent fields. Selected fellows are paired with a Google Research Mentor.",
     "eligibility": [
       "Full-time PhD students enrolled at participating universities",
@@ -652,7 +652,7 @@
     "whoFor": "Full-time faculty members and university research scientists",
     "deadline": "Spring & Fall cycles (e.g., Nov 1, May 15)",
     "deadlineMonth": 11,
-    "amount": "Up to $80,000\u2013$100,000 unrestricted cash gift + up to $40,000 in AWS promotional credits",
+    "amount": "Up to $80,000–$100,000 unrestricted cash gift + up to $40,000 in AWS promotional credits",
     "summary": "Provides unrestricted funds and AWS compute credits to academic researchers across diverse tracks including Foundation Models, AI for Science, Robotics, Information Security, and Sustainability.",
     "eligibility": [
       "Full-time faculty member at an accredited academic institution",
@@ -840,7 +840,7 @@
     "amount": "Full tuition and fees for 2 years + annual living stipend + mentorship from Apple AI/ML researchers + internship opportunities",
     "summary": "Recognizes graduate students pursuing research in artificial intelligence and machine learning, offering funding, mentorship, and opportunities to intern with Apple's ML research teams.",
     "eligibility": [
-      "Full-time PhD student at participating university in final 2\u20133 years of study",
+      "Full-time PhD student at participating university in final 2–3 years of study",
       "Nominated by eligible academic institution",
       "Specialization in machine learning, computer vision, speech, robotics, or privacy"
     ],
@@ -1635,7 +1635,7 @@
     "whoFor": "PhD scientists and computing researchers contributing to federal public policy",
     "deadline": "November 1 (Annual)",
     "deadlineMonth": 11,
-    "amount": "$89,000\u2013$116,000 annual stipend + health insurance + professional development allowance",
+    "amount": "$89,000–$116,000 annual stipend + health insurance + professional development allowance",
     "summary": "Provides opportunity for doctoral-level computing researchers and scientists to spend a year working in federal executive, legislative, or judicial offices in Washington DC advising on AI policy, cybersecurity, and national tech initiatives.",
     "eligibility": [
       "Hold a doctoral degree (PhD) by application deadline",
@@ -1955,7 +1955,7 @@
     "whoFor": "Minority undergraduate and graduate students in technical computing and engineering fields",
     "deadline": "Late September (Annual)",
     "deadlineMonth": 9,
-    "amount": "$1,000\u2013$10,000 scholarship awards",
+    "amount": "$1,000–$10,000 scholarship awards",
     "summary": "Provides financial assistance to undergraduate and graduate minority students studying computer science, software engineering, imaging science, and related technical disciplines.",
     "eligibility": [
       "US Citizen or Permanent Resident",
@@ -2014,7 +2014,7 @@
     "whoFor": "Academic faculty, postdocs, and doctoral students conducting research on AI safety, capabilities, and scientific discovery",
     "deadline": "Rolling Application Cycles",
     "deadlineMonth": 0,
-    "amount": "Subsidized API compute credits (,000\u20135,000+) & frontier model access",
+    "amount": "Subsidized API compute credits (,000–5,000+) & frontier model access",
     "summary": "Provides university researchers and students with free and subsidized access to OpenAI frontier models (GPT-4o, reasoning models, and APIs) to accelerate research in AI safety, alignment, evaluation, and scientific exploration.",
     "eligibility": [
       "Affiliated with an accredited academic or non-profit research institution",
@@ -2804,14 +2804,25 @@
     "shortName": "ACM Senior Member",
     "sponsor": "Association for Computing Machinery (ACM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Established computing professionals with at least 10 years of professional experience",
     "deadline": "Quarterly: March 3, June 3, September 3, and December 3 (Annual)",
     "deadlineMonth": 9,
     "amount": "Professional membership honor; no cash award",
     "summary": "ACM's self-nominated advanced member grade recognizes demonstrated performance and accomplishment that sets a computing professional apart from peers.",
-    "eligibility": ["At least 10 years of professional experience in computing; the highest completed degree counts toward the experience requirement", "At least 5 years of professional ACM membership in the preceding 10 years", "Three endorsements from ACM professional members are required"],
-    "topics": ["General CS", "Professional Recognition", "Research Leadership"],
+    "eligibility": [
+      "At least 10 years of professional experience in computing; the highest completed degree counts toward the experience requirement",
+      "At least 5 years of professional ACM membership in the preceding 10 years",
+      "Three endorsements from ACM professional members are required"
+    ],
+    "topics": [
+      "General CS",
+      "Professional Recognition",
+      "Research Leadership"
+    ],
     "url": "https://awards.acm.org/senior-members/nominations",
     "featured": true
   },
@@ -2821,14 +2832,25 @@
     "shortName": "ACM Distinguished Member",
     "sponsor": "Association for Computing Machinery (ACM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Accomplished mid- and senior-career computing professionals with significant field impact",
     "deadline": "August 1, 2027 (Annual; AoE)",
     "deadlineMonth": 8,
     "amount": "Professional membership honor; no cash award",
     "summary": "Recognizes ACM members who have achieved a significant level of accomplishment or made a significant impact in computing, computer science, or information technology.",
-    "eligibility": ["At least 15 years of professional experience in computing; degree credit may count toward the total", "At least 5 years of professional ACM membership in the preceding 10 years", "Nomination by another ACM professional member with 4 to 5 endorsements"],
-    "topics": ["General CS", "Professional Recognition", "Research Leadership", "Service"],
+    "eligibility": [
+      "At least 15 years of professional experience in computing; degree credit may count toward the total",
+      "At least 5 years of professional ACM membership in the preceding 10 years",
+      "Nomination by another ACM professional member with 4 to 5 endorsements"
+    ],
+    "topics": [
+      "General CS",
+      "Professional Recognition",
+      "Research Leadership",
+      "Service"
+    ],
     "url": "https://awards.acm.org/distinguished-members/nominations",
     "featured": true
   },
@@ -2838,14 +2860,25 @@
     "shortName": "ACM Fellow",
     "sponsor": "Association for Computing Machinery (ACM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Senior computing researchers and professionals with lasting technical or leadership impact",
     "deadline": "September 7 (Annual)",
     "deadlineMonth": 9,
     "amount": "ACM's highest membership grade; no cash award",
     "summary": "Recognizes the top 1% of ACM members for outstanding accomplishments in computing and information technology or outstanding service to ACM and the larger computing community.",
-    "eligibility": ["At least 5 years of continuous professional ACM membership before the deadline", "Lasting impact on computing through technical, professional, educational, or leadership contributions", "Peer nomination and endorsements required; self-nominations are not accepted"],
-    "topics": ["General CS", "Professional Recognition", "Research Leadership", "Service"],
+    "eligibility": [
+      "At least 5 years of continuous professional ACM membership before the deadline",
+      "Lasting impact on computing through technical, professional, educational, or leadership contributions",
+      "Peer nomination and endorsements required; self-nominations are not accepted"
+    ],
+    "topics": [
+      "General CS",
+      "Professional Recognition",
+      "Research Leadership",
+      "Service"
+    ],
     "url": "https://awards.acm.org/fellows/nominations",
     "featured": true
   },
@@ -2855,14 +2888,26 @@
     "shortName": "IEEE Senior Member",
     "sponsor": "Institute of Electrical and Electronics Engineers (IEEE)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Experienced engineers, computer scientists, educators, and technical leaders",
     "deadline": "Rolling; review panels meet approximately six times per year (submit at least 7 days before a panel)",
     "deadlineMonth": 0,
     "amount": "Professional membership honor; engraved plaque and recognition benefits",
     "summary": "IEEE's highest membership grade available by application recognizes professional maturity and significant performance in IEEE-designated technical fields.",
-    "eligibility": ["At least 10 years of professional practice, with education credit available", "Significant performance during at least 5 years", "Three IEEE Senior Member or Fellow references for self-applicants; two when nominated by a Senior Member or Fellow"],
-    "topics": ["Computer Engineering", "General CS", "Professional Recognition", "Research Leadership"],
+    "eligibility": [
+      "At least 10 years of professional practice, with education credit available",
+      "Significant performance during at least 5 years",
+      "Three IEEE Senior Member or Fellow references for self-applicants; two when nominated by a Senior Member or Fellow"
+    ],
+    "topics": [
+      "Computer Engineering",
+      "General CS",
+      "Professional Recognition",
+      "Research Leadership"
+    ],
     "url": "https://www.ieee.org/membership/senior/",
     "featured": true
   },
@@ -2872,14 +2917,25 @@
     "shortName": "IEEE Fellow",
     "sponsor": "Institute of Electrical and Electronics Engineers (IEEE)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Senior researchers and technical leaders with extraordinary accomplishments in IEEE fields",
     "deadline": "February 7 (Annual; all nomination materials and references due)",
     "deadlineMonth": 2,
     "amount": "IEEE's highest membership grade; no cash award",
     "summary": "Recognizes unusual distinction and an outstanding record of accomplishments that have contributed importantly to engineering, science, and technology and brought significant value to society.",
-    "eligibility": ["Must hold IEEE Senior Member or Life Senior Member grade when nominated", "At least 5 years of IEEE membership in good standing before the year of elevation", "Nomination by another person; self-nominations are not allowed"],
-    "topics": ["Computer Engineering", "General CS", "Professional Recognition", "Research Leadership"],
+    "eligibility": [
+      "Must hold IEEE Senior Member or Life Senior Member grade when nominated",
+      "At least 5 years of IEEE membership in good standing before the year of elevation",
+      "Nomination by another person; self-nominations are not allowed"
+    ],
+    "topics": [
+      "Computer Engineering",
+      "General CS",
+      "Professional Recognition",
+      "Research Leadership"
+    ],
     "url": "https://www.computer.org/volunteering/awards/fellows",
     "featured": true
   },
@@ -2889,14 +2945,25 @@
     "shortName": "IEEE CS Distinguished Contributor",
     "sponsor": "IEEE Computer Society",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Long-standing IEEE Computer Society members with documented technical contributions",
     "deadline": "Application window typically May to July; July 24, 2026 for the 2026 cycle",
     "deadlineMonth": 7,
     "amount": "Professional recognition and plaque; no cash award",
     "summary": "Recognizes technical contributions through applied or pure computing to the profession, the computing community, and humanity, with substantial contributions made through IEEE Computer Society activities.",
-    "eligibility": ["At least 10 cumulative years of IEEE Computer Society membership, including 5 consecutive years", "At least 100 documented contribution points, with 50 tied to IEEE Computer Society activities", "Open to IEEE Computer Society members and affiliates"],
-    "topics": ["General CS", "Professional Recognition", "Technical Leadership", "Service"],
+    "eligibility": [
+      "At least 10 cumulative years of IEEE Computer Society membership, including 5 consecutive years",
+      "At least 100 documented contribution points, with 50 tied to IEEE Computer Society activities",
+      "Open to IEEE Computer Society members and affiliates"
+    ],
+    "topics": [
+      "General CS",
+      "Professional Recognition",
+      "Technical Leadership",
+      "Service"
+    ],
     "url": "https://www.computer.org/membership/distinguished-contributors",
     "featured": false
   },
@@ -2906,14 +2973,26 @@
     "shortName": "AAAI Senior Member",
     "sponsor": "Association for the Advancement of Artificial Intelligence (AAAI)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "AI researchers and professionals with significant scholarship, leadership, or service accomplishments",
     "deadline": "October 16, 2026 (Annual; 11:59 PM)",
     "deadlineMonth": 10,
     "amount": "Professional membership honor; certificate and pin",
     "summary": "Recognizes AAAI members who have achieved significant accomplishments in artificial intelligence through scholarship, leadership, or professional service.",
-    "eligibility": ["At least 5 consecutive years of AAAI membership", "At least 10 years of professional activity", "Nomination by another person and at least two references, including one AAAI Fellow or Senior Member"],
-    "topics": ["AI/ML", "Professional Recognition", "Research Leadership", "Service"],
+    "eligibility": [
+      "At least 5 consecutive years of AAAI membership",
+      "At least 10 years of professional activity",
+      "Nomination by another person and at least two references, including one AAAI Fellow or Senior Member"
+    ],
+    "topics": [
+      "AI/ML",
+      "Professional Recognition",
+      "Research Leadership",
+      "Service"
+    ],
     "url": "https://aaai.org/about-aaai/aaai-awards/aaai-senior-member-status/",
     "featured": true
   },
@@ -2923,14 +3002,25 @@
     "shortName": "AAAI Fellow",
     "sponsor": "Association for the Advancement of Artificial Intelligence (AAAI)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Established AI researchers and leaders with significant and sustained contributions",
     "deadline": "October 16, 2026 (Annual)",
     "deadlineMonth": 10,
     "amount": "Lifetime professional honor; no cash award",
     "summary": "Honors a small percentage of the AAAI membership for intellectual leadership and significant, sustained research, practice, or service contributions to artificial intelligence.",
-    "eligibility": ["Current AAAI membership with a sustained record of AI contributions", "Peer nomination and independent reference letters required", "Self-nominations are not accepted"],
-    "topics": ["AI/ML", "Professional Recognition", "Research Leadership", "Service"],
+    "eligibility": [
+      "Current AAAI membership with a sustained record of AI contributions",
+      "Peer nomination and independent reference letters required",
+      "Self-nominations are not accepted"
+    ],
+    "topics": [
+      "AI/ML",
+      "Professional Recognition",
+      "Research Leadership",
+      "Service"
+    ],
     "url": "https://aaai.org/about-aaai/aaai-awards/the-aaai-fellows-program/aaai-fellows-nomination-letter/",
     "featured": true
   },
@@ -2940,14 +3030,26 @@
     "shortName": "SIAM Fellow",
     "sponsor": "Society for Industrial and Applied Mathematics (SIAM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Senior researchers in applied mathematics, computational science, data science, and related CS areas",
     "deadline": "October 15, 2026 for the 2027 class (Annual)",
     "deadlineMonth": 10,
     "amount": "Professional honor; no cash award",
     "summary": "Recognizes SIAM members for exceptional contributions to applied mathematics, computational science, data science, and related education or professional service.",
-    "eligibility": ["Regular SIAM member for at least 7 of the preceding 10 years", "Normally at least 15 years in the profession after the PhD or highest degree", "Nomination by three SIAM members with two recommendation letters"],
-    "topics": ["Computational Science", "Data Science", "Optimization", "Theory & Algorithms", "Professional Recognition"],
+    "eligibility": [
+      "Regular SIAM member for at least 7 of the preceding 10 years",
+      "Normally at least 15 years in the profession after the PhD or highest degree",
+      "Nomination by three SIAM members with two recommendation letters"
+    ],
+    "topics": [
+      "Computational Science",
+      "Data Science",
+      "Optimization",
+      "Theory & Algorithms",
+      "Professional Recognition"
+    ],
     "url": "https://www.siam.org/programs-initiatives/prizes-awards/fellows-program/eligibility/",
     "featured": false
   },
@@ -2957,14 +3059,27 @@
     "shortName": "INFORMS Senior Member",
     "sponsor": "Institute for Operations Research and the Management Sciences (INFORMS)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Established operations research, analytics, optimization, and data science professionals",
     "deadline": "Quarterly: February 28, May 31, August 31, and November 30 (Annual)",
     "deadlineMonth": 11,
     "amount": "Professional membership honor; certificate and recognition benefits",
     "summary": "A self-applied recognition for long-standing INFORMS members who actively contribute to the operations research and analytics community.",
-    "eligibility": ["At least 5 continuous years as a regular INFORMS member", "Meet at least 3 of 4 engagement criteria covering community membership, events, volunteering, and online contribution", "CV or resume and self-attestation required"],
-    "topics": ["Operations Research", "Optimization", "Data Science", "AI/ML", "Professional Recognition"],
+    "eligibility": [
+      "At least 5 continuous years as a regular INFORMS member",
+      "Meet at least 3 of 4 engagement criteria covering community membership, events, volunteering, and online contribution",
+      "CV or resume and self-attestation required"
+    ],
+    "topics": [
+      "Operations Research",
+      "Optimization",
+      "Data Science",
+      "AI/ML",
+      "Professional Recognition"
+    ],
     "url": "https://www.informs.org/Recognizing-Excellence/Senior-Membership",
     "featured": false
   },
@@ -2974,14 +3089,27 @@
     "shortName": "AAAI/SIGAI Dissertation Award",
     "sponsor": "AAAI and ACM Special Interest Group on Artificial Intelligence (SIGAI)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students", "Postdocs"],
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Recent PhD graduates with exceptional dissertations in artificial intelligence",
     "deadline": "Late November (Annual; November 21 in the 2025 cycle)",
     "deadlineMonth": 11,
     "amount": "Award presentation and invited talk at the AAAI Conference",
     "summary": "Recognizes and encourages superior research and writing by doctoral candidates across the theory and practice of artificial intelligence.",
-    "eligibility": ["Dissertation successfully defended during the award's stated annual eligibility window", "English-language dissertation required", "One nomination per PhD-granting institution, submitted by the thesis advisor"],
-    "topics": ["AI/ML", "Natural Language Processing", "Computer Vision", "Robotics", "Multi-Agent Systems"],
+    "eligibility": [
+      "Dissertation successfully defended during the award's stated annual eligibility window",
+      "English-language dissertation required",
+      "One nomination per PhD-granting institution, submitted by the thesis advisor"
+    ],
+    "topics": [
+      "AI/ML",
+      "Natural Language Processing",
+      "Computer Vision",
+      "Robotics",
+      "Multi-Agent Systems"
+    ],
     "url": "https://aaai.org/about-aaai/aaai-awards/aaai-acm-sigai-doctoral-dissertation-award/aaai-acm-sigai-doctoral-dissertation-award-call/",
     "featured": true
   },
@@ -2991,14 +3119,26 @@
     "shortName": "SIGCOMM Dissertation Award",
     "sponsor": "ACM Special Interest Group on Data Communication (SIGCOMM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students", "Postdocs"],
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Recent PhD graduates in computer networking and data communication",
     "deadline": "December 1 (Annual)",
     "deadlineMonth": 12,
     "amount": "$1,500 honorarium, plaque, and complimentary SIGCOMM registration",
     "summary": "Recognizes excellent doctoral thesis research in computer networking and data communication.",
-    "eligibility": ["Dissertation defended and accepted during the 12 months before the deadline", "One nomination per academic department", "Nominee must be a SIGCOMM member; no self-nominations"],
-    "topics": ["Networks", "Distributed Systems", "Internet Measurement", "Wireless & Mobile Computing"],
+    "eligibility": [
+      "Dissertation defended and accepted during the 12 months before the deadline",
+      "One nomination per academic department",
+      "Nominee must be a SIGCOMM member; no self-nominations"
+    ],
+    "topics": [
+      "Networks",
+      "Distributed Systems",
+      "Internet Measurement",
+      "Wireless & Mobile Computing"
+    ],
     "url": "https://www.sigcomm.org/awards/doctoral-dissertation-award-nominations",
     "featured": false
   },
@@ -3008,14 +3148,26 @@
     "shortName": "SIGSAC Dissertation Award",
     "sponsor": "ACM Special Interest Group on Security, Audit and Control (SIGSAC)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students", "Postdocs"],
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Recent PhD graduates in computer and information security and privacy",
     "deadline": "June 30 (Annual; AoE)",
     "deadlineMonth": 6,
     "amount": "$1,500 honorarium, plaque, and complimentary ACM CCS registration",
     "summary": "Recognizes excellent doctoral dissertation research in computer security, information security, and privacy.",
-    "eligibility": ["Dissertation defended in the preceding calendar year and filed by the stated January cutoff", "One nomination per academic department", "Nominator must be a SIGSAC member; no self-nominations"],
-    "topics": ["Cybersecurity", "Privacy", "Cryptography", "Trustworthy Computing"],
+    "eligibility": [
+      "Dissertation defended in the preceding calendar year and filed by the stated January cutoff",
+      "One nomination per academic department",
+      "Nominator must be a SIGSAC member; no self-nominations"
+    ],
+    "topics": [
+      "Cybersecurity",
+      "Privacy",
+      "Cryptography",
+      "Trustworthy Computing"
+    ],
     "url": "https://www.sigsac.org/award/diss-awards.html",
     "featured": false
   },
@@ -3025,14 +3177,26 @@
     "shortName": "SIGSOFT Dissertation Award",
     "sponsor": "ACM Special Interest Group on Software Engineering (SIGSOFT)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students", "Postdocs"],
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Recent PhD graduates with outstanding dissertations in software engineering",
     "deadline": "October 19, 2026 (Annual)",
     "deadlineMonth": 10,
     "amount": "Typically $1,000 honorarium plus travel support to ICSE",
     "summary": "Presented annually for outstanding doctoral dissertations that make important research contributions to software engineering.",
-    "eligibility": ["Dissertation dated within the annual eligibility window preceding the deadline", "Dissertation may be nominated only once", "Nomination package includes dissertation summary, related publications, and support letters"],
-    "topics": ["Software Engineering", "Programming Languages", "Software Testing", "Program Analysis"],
+    "eligibility": [
+      "Dissertation dated within the annual eligibility window preceding the deadline",
+      "Dissertation may be nominated only once",
+      "Nomination package includes dissertation summary, related publications, and support letters"
+    ],
+    "topics": [
+      "Software Engineering",
+      "Programming Languages",
+      "Software Testing",
+      "Program Analysis"
+    ],
     "url": "https://www2.sigsoft.org/awards/dissertation/",
     "featured": false
   },
@@ -3042,14 +3206,26 @@
     "shortName": "SIGMOD Jim Gray Award",
     "sponsor": "ACM Special Interest Group on Management of Data (SIGMOD)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students", "Postdocs"],
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Recent PhD graduates whose dissertations advance large-scale data management",
     "deadline": "March 20 (Annual; March 20, 2026 for the 2026 cycle)",
     "deadlineMonth": 3,
     "amount": "Plaque, conference recognition, and an opportunity to present at ACM SIGMOD",
     "summary": "Recognizes excellent doctoral research in database systems and large-scale data management.",
-    "eligibility": ["Dissertation accepted during the award's stated annual eligibility period", "One nomination per academic department", "English-language dissertation and advisor nomination letter required"],
-    "topics": ["Data Management", "Databases", "Data Systems", "Machine Learning Systems"],
+    "eligibility": [
+      "Dissertation accepted during the award's stated annual eligibility period",
+      "One nomination per academic department",
+      "English-language dissertation and advisor nomination letter required"
+    ],
+    "topics": [
+      "Data Management",
+      "Databases",
+      "Data Systems",
+      "Machine Learning Systems"
+    ],
     "url": "https://sigmod.org/sigmod-awards/doctoral-dissertation-award/",
     "featured": false
   },
@@ -3059,14 +3235,27 @@
     "shortName": "Reynolds Dissertation Award",
     "sponsor": "ACM Special Interest Group on Programming Languages (SIGPLAN)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students", "Postdocs"],
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Recent PhD graduates with outstanding dissertations in programming languages",
     "deadline": "January 22 (Annual; nominations accepted anytime)",
     "deadlineMonth": 1,
     "amount": "$1,000 prize and recognition at a major SIGPLAN conference",
     "summary": "Recognizes an outstanding doctoral dissertation in programming languages, emphasizing the clarity and rigor embodied by John C. Reynolds's work.",
-    "eligibility": ["Dissertation submitted for the doctoral degree in the year before the deadline", "English-language dissertation required", "Nomination statement and at least two reference letters required"],
-    "topics": ["Programming Languages", "Compilers", "Formal Methods", "Program Analysis", "Software Engineering"],
+    "eligibility": [
+      "Dissertation submitted for the doctoral degree in the year before the deadline",
+      "English-language dissertation required",
+      "Nomination statement and at least two reference letters required"
+    ],
+    "topics": [
+      "Programming Languages",
+      "Compilers",
+      "Formal Methods",
+      "Program Analysis",
+      "Software Engineering"
+    ],
     "url": "https://www.sigplan.org/Awards/Dissertation/",
     "featured": false
   },
@@ -3076,14 +3265,27 @@
     "shortName": "SIGMETRICS Dissertation Award",
     "sponsor": "ACM Special Interest Group for the Computer Systems Performance Evaluation Community (SIGMETRICS)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students", "Postdocs"],
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Recent PhD graduates in performance evaluation and analysis of computer systems",
     "deadline": "August 15 (Annual; August 15, 2026 for the 2026 cycle)",
     "deadlineMonth": 8,
     "amount": "$1,000 honorarium, plaque, and complimentary SIGMETRICS registration",
     "summary": "Recognizes excellent thesis research involving measurement, modeling, analysis, or design of computing systems and networks.",
-    "eligibility": ["Final dissertation defense during the 12 months before the deadline", "English-language dissertation required", "Supervisor nomination with two endorsement letters"],
-    "topics": ["Systems", "Networks", "Performance Evaluation", "Cloud Computing", "Cyber-Physical Systems"],
+    "eligibility": [
+      "Final dissertation defense during the 12 months before the deadline",
+      "English-language dissertation required",
+      "Supervisor nomination with two endorsement letters"
+    ],
+    "topics": [
+      "Systems",
+      "Networks",
+      "Performance Evaluation",
+      "Cloud Computing",
+      "Cyber-Physical Systems"
+    ],
     "url": "https://www.sigmetrics.org/awards.shtml",
     "featured": false
   },
@@ -3093,14 +3295,26 @@
     "shortName": "ACM-W Rising Star",
     "sponsor": "ACM Council on Women in Computing (ACM-W)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Women and non-binary early-career computing researchers with significant research impact",
     "deadline": "Late January (Annual; January 23, 2026 for the 2025-26 cycle)",
     "deadlineMonth": 1,
     "amount": "$1,000 stipend and commemorative plaque",
     "summary": "Recognizes an early-career researcher whose work has significantly influenced computing through citations, creation of a research area, technology transfer, or societal impact.",
-    "eligibility": ["Identifies as a woman or non-binary person in computing", "Within 10 years of receiving a terminal degree", "Must be an ACM member at nomination; self-nominations are encouraged"],
-    "topics": ["General CS", "Early Career", "Professional Recognition", "Research Impact"],
+    "eligibility": [
+      "Identifies as a woman or non-binary person in computing",
+      "Within 10 years of receiving a terminal degree",
+      "Must be an ACM member at nomination; self-nominations are encouraged"
+    ],
+    "topics": [
+      "General CS",
+      "Early Career",
+      "Professional Recognition",
+      "Research Impact"
+    ],
     "url": "https://women.acm.org/awards/rising-star-award/",
     "featured": true
   },
@@ -3110,14 +3324,26 @@
     "shortName": "SIGSAC Early-Career Award",
     "sponsor": "ACM Special Interest Group on Security, Audit and Control (SIGSAC)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Early-career researchers making exceptional contributions to security and privacy",
     "deadline": "September 4, 2026 (Annual)",
     "deadlineMonth": 9,
     "amount": "$1,500 prize, plaque or certificate, and ACM CCS registration waiver",
     "summary": "Recognizes exceptional early-career research contributions to computer security and privacy, broadly defined.",
-    "eligibility": ["Open to early-career researchers in the security and privacy community", "Nomination by another person with three independent endorsements", "ACM or SIGSAC membership is not required"],
-    "topics": ["Cybersecurity", "Privacy", "Cryptography", "Early Career"],
+    "eligibility": [
+      "Open to early-career researchers in the security and privacy community",
+      "Nomination by another person with three independent endorsements",
+      "ACM or SIGSAC membership is not required"
+    ],
+    "topics": [
+      "Cybersecurity",
+      "Privacy",
+      "Cryptography",
+      "Early Career"
+    ],
     "url": "https://sigsac.hosting.acm.org/award/early-career-award.html",
     "featured": false
   },
@@ -3127,14 +3353,26 @@
     "shortName": "SIGMETRICS Rising Star",
     "sponsor": "ACM Special Interest Group for the Computer Systems Performance Evaluation Community (SIGMETRICS)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Researchers within 7 years of the PhD with outstanding potential in systems performance research",
     "deadline": "Annual; consult the current call on the official awards page",
     "deadlineMonth": 0,
     "amount": "$1,500 honorarium or conference travel expenses and a plaque",
     "summary": "Recognizes a rising researcher demonstrating outstanding potential to create impactful ideas, paradigms, and tools for performance analysis of computer and communication systems.",
-    "eligibility": ["Within 7 years of receiving the PhD, with documented career interruptions considered", "Research in analytical or empirical performance evaluation of computing and communication systems", "Peer nomination required"],
-    "topics": ["Systems", "Networks", "Performance Evaluation", "Early Career"],
+    "eligibility": [
+      "Within 7 years of receiving the PhD, with documented career interruptions considered",
+      "Research in analytical or empirical performance evaluation of computing and communication systems",
+      "Peer nomination required"
+    ],
+    "topics": [
+      "Systems",
+      "Networks",
+      "Performance Evaluation",
+      "Early Career"
+    ],
     "url": "https://www.sigmetrics.org/awards.shtml",
     "featured": false
   },
@@ -3144,14 +3382,26 @@
     "shortName": "SIGCOMM Rising Star",
     "sponsor": "ACM Special Interest Group on Data Communication (SIGCOMM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Early-career researchers making outstanding contributions to communication networks",
     "deadline": "July 15 (Annual)",
     "deadlineMonth": 7,
     "amount": "Professional research honor and recognition at ACM SIGCOMM",
     "summary": "Recognizes a young researcher for outstanding early-career research contributions to computer communication networks.",
-    "eligibility": ["Normally within 10 years of receiving the highest university degree", "Outstanding research contributions to communication networks", "Peer nomination required"],
-    "topics": ["Networks", "Distributed Systems", "Wireless & Mobile Computing", "Early Career"],
+    "eligibility": [
+      "Normally within 10 years of receiving the highest university degree",
+      "Outstanding research contributions to communication networks",
+      "Peer nomination required"
+    ],
+    "topics": [
+      "Networks",
+      "Distributed Systems",
+      "Wireless & Mobile Computing",
+      "Early Career"
+    ],
     "url": "https://www.sigcomm.org/awards",
     "featured": false
   },
@@ -3161,14 +3411,25 @@
     "shortName": "Mark Weiser Award",
     "sponsor": "ACM Special Interest Group on Operating Systems (SIGOPS)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Operating-systems researchers known for creative, innovative, and potentially high-risk work",
     "deadline": "September 1 (Annual; September 1, 2026 for the 2026 cycle)",
     "deadlineMonth": 9,
     "amount": "$1,000 prize and presentation at SOSP or OSDI",
     "summary": "Recognizes creativity and innovation in operating-systems research in the visionary spirit of Mark Weiser.",
-    "eligibility": ["Career must have begun no earlier than 20 years before nomination", "Research contributions must be in operating systems, broadly construed", "Peer nomination required"],
-    "topics": ["Operating Systems", "Systems", "Distributed Systems", "Research Innovation"],
+    "eligibility": [
+      "Career must have begun no earlier than 20 years before nomination",
+      "Research contributions must be in operating systems, broadly construed",
+      "Peer nomination required"
+    ],
+    "topics": [
+      "Operating Systems",
+      "Systems",
+      "Distributed Systems",
+      "Research Innovation"
+    ],
     "url": "https://sigops.org/awards/mw/",
     "featured": false
   },
@@ -3178,14 +3439,26 @@
     "shortName": "George Michael HPC Fellowship",
     "sponsor": "ACM and IEEE Computer Society",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students"],
+    "targetAudience": [
+      "PhD Students"
+    ],
     "whoFor": "Full-time PhD students worldwide conducting high-performance computing research",
     "deadline": "May 1, 2027 (Annual; next announced deadline)",
     "deadlineMonth": 5,
     "amount": "$5,000 honorarium plus travel expenses to attend the SC Conference",
     "summary": "Supports exceptional PhD students researching HPC applications, networking, storage, or large-scale data analysis on leading systems.",
-    "eligibility": ["Enrolled full time in an accredited PhD program", "At least one year of study completed and at least one year remaining after the deadline", "Self-nomination with a confidential endorsement from the PhD advisor"],
-    "topics": ["High-Performance Computing", "Systems", "Networking", "Storage", "Data Science"],
+    "eligibility": [
+      "Enrolled full time in an accredited PhD program",
+      "At least one year of study completed and at least one year remaining after the deadline",
+      "Self-nomination with a confidential endorsement from the PhD advisor"
+    ],
+    "topics": [
+      "High-Performance Computing",
+      "Systems",
+      "Networking",
+      "Storage",
+      "Data Science"
+    ],
     "url": "https://prod-awards.acm.bloomreach.cloud/hpc-fellows/nominations",
     "featured": true
   },
@@ -3195,14 +3468,26 @@
     "shortName": "SIGKDD Dissertation Award",
     "sponsor": "ACM Special Interest Group on Knowledge Discovery and Data Mining (SIGKDD)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students", "Postdocs"],
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Recent PhD graduates whose dissertations advance data science, data mining, or knowledge discovery",
     "deadline": "May 19, 2026 (Annual cycle)",
     "deadlineMonth": 5,
     "amount": "$2,500 prize, plaque, and complimentary KDD conference registration",
     "summary": "Recognizes outstanding doctoral research in the theory and practice of knowledge discovery and data mining.",
-    "eligibility": ["Dissertation must meet the current call's completion window", "Nomination package and dissertation submission required", "Up to two runners-up may also be recognized"],
-    "topics": ["Data Science", "Data Mining", "Machine Learning", "Artificial Intelligence"],
+    "eligibility": [
+      "Dissertation must meet the current call's completion window",
+      "Nomination package and dissertation submission required",
+      "Up to two runners-up may also be recognized"
+    ],
+    "topics": [
+      "Data Science",
+      "Data Mining",
+      "Machine Learning",
+      "Artificial Intelligence"
+    ],
     "url": "https://kdd2026.kdd.org/call-for-nominations-2026-sigkdd-dissertation-award/",
     "featured": false
   },
@@ -3212,14 +3497,26 @@
     "shortName": "SIGCHI Dissertation Award",
     "sponsor": "ACM Special Interest Group on Computer-Human Interaction (SIGCHI)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students", "Postdocs"],
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Recent PhD graduates with exceptional dissertations in human-computer interaction",
     "deadline": "Annual; consult the current call on the official award page",
     "deadlineMonth": 0,
     "amount": "Prestigious dissertation recognition from the international HCI community",
     "summary": "Honors the most outstanding dissertations that significantly advance human-computer interaction.",
-    "eligibility": ["Dissertation completed within the award's stated September-to-August window", "Nomination by the dissertation advisor; no self-nominations", "Nominee must be a SIGCHI member and each department may submit one nomination"],
-    "topics": ["Human-Computer Interaction", "User Experience", "Accessibility", "Social Computing"],
+    "eligibility": [
+      "Dissertation completed within the award's stated September-to-August window",
+      "Nomination by the dissertation advisor; no self-nominations",
+      "Nominee must be a SIGCHI member and each department may submit one nomination"
+    ],
+    "topics": [
+      "Human-Computer Interaction",
+      "User Experience",
+      "Accessibility",
+      "Social Computing"
+    ],
     "url": "https://sigchi.org/people/sigchi-awards/dissertation-award/",
     "featured": false
   },
@@ -3229,14 +3526,26 @@
     "shortName": "SIGGRAPH Dissertation Award",
     "sponsor": "ACM Special Interest Group on Computer Graphics and Interactive Techniques (SIGGRAPH)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students", "Postdocs"],
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Recent PhD graduates whose dissertations make notable contributions to computer graphics",
     "deadline": "January 31 (Annual)",
     "deadlineMonth": 1,
     "amount": "Plaque, full SIGGRAPH conference registration, and travel reimbursement",
     "summary": "Recognizes outstanding doctoral research in computer graphics and interactive techniques.",
-    "eligibility": ["Dissertation completed during the preceding calendar year", "Advisor or department nomination required", "Research must fall within the broad scope of computer graphics and interactive techniques"],
-    "topics": ["Computer Graphics", "Visualization", "Virtual Reality", "Computer Vision"],
+    "eligibility": [
+      "Dissertation completed during the preceding calendar year",
+      "Advisor or department nomination required",
+      "Research must fall within the broad scope of computer graphics and interactive techniques"
+    ],
+    "topics": [
+      "Computer Graphics",
+      "Visualization",
+      "Virtual Reality",
+      "Computer Vision"
+    ],
     "url": "https://www.siggraph.org/awards/outstanding-doctoral-dissertation-award/",
     "featured": false
   },
@@ -3246,14 +3555,26 @@
     "shortName": "SIGMOBILE Dissertation Award",
     "sponsor": "ACM Special Interest Group on Mobility of Systems, Users, Data and Computing (SIGMOBILE)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students", "Postdocs"],
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Recent PhD graduates in mobile, sensor, wireless, or ubiquitous computing",
     "deadline": "April 17, 2026 (Annual cycle)",
     "deadlineMonth": 4,
     "amount": "$1,000 prize, plaque, and complimentary conference registration",
     "summary": "Recognizes excellent dissertation research in mobile systems, wireless networks, sensing, and ubiquitous computing.",
-    "eligibility": ["Dissertation must meet the completion dates in the current call", "Nomination by the dissertation advisor or another qualified researcher", "Up to two runners-up may also be recognized"],
-    "topics": ["Wireless & Mobile Computing", "Networking", "Internet of Things", "Ubiquitous Computing"],
+    "eligibility": [
+      "Dissertation must meet the completion dates in the current call",
+      "Nomination by the dissertation advisor or another qualified researcher",
+      "Up to two runners-up may also be recognized"
+    ],
+    "topics": [
+      "Wireless & Mobile Computing",
+      "Networking",
+      "Internet of Things",
+      "Ubiquitous Computing"
+    ],
     "url": "https://www.sigmobile.org/grav/news/article-8",
     "featured": false
   },
@@ -3263,14 +3584,26 @@
     "shortName": "SIGARCH/TCCA Dissertation Award",
     "sponsor": "ACM SIGARCH and IEEE Computer Society TCCA",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["PhD Students", "Postdocs"],
+    "targetAudience": [
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Recent PhD graduates with outstanding dissertations in computer architecture",
     "deadline": "Annual; consult the current call on the official award page",
     "deadlineMonth": 0,
     "amount": "$1,000 prize and professional recognition",
     "summary": "Honors an outstanding doctoral dissertation that makes a significant contribution to computer architecture.",
-    "eligibility": ["Dissertation defended or deposited during the preceding calendar year", "Advisor nomination required; self-nominations are not accepted", "Nominee must be a member of ACM SIGARCH or IEEE CS TCCA"],
-    "topics": ["Computer Architecture", "Hardware", "High-Performance Computing", "Systems"],
+    "eligibility": [
+      "Dissertation defended or deposited during the preceding calendar year",
+      "Advisor nomination required; self-nominations are not accepted",
+      "Nominee must be a member of ACM SIGARCH or IEEE CS TCCA"
+    ],
+    "topics": [
+      "Computer Architecture",
+      "Hardware",
+      "High-Performance Computing",
+      "Systems"
+    ],
     "url": "https://www.sigarch.org/benefit/awards/acm-sigarch-ieee-cs-tcca-outstanding-dissertation-award/",
     "featured": false
   },
@@ -3280,14 +3613,25 @@
     "shortName": "ACM Prize in Computing",
     "sponsor": "Association for Computing Machinery (ACM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Mid-career computing researchers whose recent work has transformed a field",
     "deadline": "December 15, 2026",
     "deadlineMonth": 12,
     "amount": "$250,000 prize",
     "summary": "Recognizes an early-to-mid-career fundamental contribution in computing that has already had broad impact.",
-    "eligibility": ["Typically 8 to 16 years after the terminal degree, with exceptions considered", "Peer nomination with three to five endorsers", "ACM membership is not required"],
-    "topics": ["General CS", "Research Impact", "Mid-Career", "Professional Recognition"],
+    "eligibility": [
+      "Typically 8 to 16 years after the terminal degree, with exceptions considered",
+      "Peer nomination with three to five endorsers",
+      "ACM membership is not required"
+    ],
+    "topics": [
+      "General CS",
+      "Research Impact",
+      "Mid-Career",
+      "Professional Recognition"
+    ],
     "url": "https://prod-awards.acm.bloomreach.cloud/acm-prize/nominations",
     "featured": true
   },
@@ -3297,14 +3641,26 @@
     "shortName": "Grace Murray Hopper Award",
     "sponsor": "Association for Computing Machinery (ACM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Early-career computing professionals responsible for a major technical or service contribution",
     "deadline": "December 15, 2026",
     "deadlineMonth": 12,
     "amount": "$35,000 prize plus travel expenses",
     "summary": "Recognizes a single major technical or service contribution made at an early age in a computing career.",
-    "eligibility": ["Contribution must have been made when the nominee was 35 years old or younger", "Peer nomination and endorsement letters required", "ACM membership is not required"],
-    "topics": ["General CS", "Early Career", "Research Innovation", "Professional Recognition"],
+    "eligibility": [
+      "Contribution must have been made when the nominee was 35 years old or younger",
+      "Peer nomination and endorsement letters required",
+      "ACM membership is not required"
+    ],
+    "topics": [
+      "General CS",
+      "Early Career",
+      "Research Innovation",
+      "Professional Recognition"
+    ],
     "url": "https://prod-awards.acm.bloomreach.cloud/hopper/nominations",
     "featured": true
   },
@@ -3314,14 +3670,25 @@
     "shortName": "ACM Athena Lecturer",
     "sponsor": "Association for Computing Machinery (ACM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Preeminent women researchers with fundamental computing contributions and sustained community impact",
     "deadline": "December 15, 2026",
     "deadlineMonth": 12,
     "amount": "$40,000 prize, invited ACM conference lecture, and travel expenses",
     "summary": "Celebrates a woman researcher for fundamental technical contributions together with meaningful service or mentoring.",
-    "eligibility": ["Nominee must be a woman researcher in computing", "Sustained or enduring technical impact plus service or mentoring", "Peer nomination and endorsement letters required"],
-    "topics": ["General CS", "Research Impact", "Mentoring", "Professional Recognition"],
+    "eligibility": [
+      "Nominee must be a woman researcher in computing",
+      "Sustained or enduring technical impact plus service or mentoring",
+      "Peer nomination and endorsement letters required"
+    ],
+    "topics": [
+      "General CS",
+      "Research Impact",
+      "Mentoring",
+      "Professional Recognition"
+    ],
     "url": "https://prod-awards.acm.bloomreach.cloud/athena/nominations",
     "featured": true
   },
@@ -3331,14 +3698,25 @@
     "shortName": "Kanellakis Award",
     "sponsor": "Association for Computing Machinery (ACM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Researchers whose theoretical work has had a significant, demonstrable effect on computing practice",
     "deadline": "December 15, 2026",
     "deadlineMonth": 12,
     "amount": "$30,000 prize plus travel expenses",
     "summary": "Honors theoretical accomplishments that have materially improved information technology through practical impact.",
-    "eligibility": ["Open to an individual or a group for a particular theoretical achievement", "Demonstrable and significant effect on practice", "Peer nomination with supporting endorsements"],
-    "topics": ["Theory", "Algorithms", "Research Impact", "Technology Transfer"],
+    "eligibility": [
+      "Open to an individual or a group for a particular theoretical achievement",
+      "Demonstrable and significant effect on practice",
+      "Peer nomination with supporting endorsements"
+    ],
+    "topics": [
+      "Theory",
+      "Algorithms",
+      "Research Impact",
+      "Technology Transfer"
+    ],
     "url": "https://prod-awards.acm.bloomreach.cloud/kanellakis/nominations",
     "featured": false
   },
@@ -3348,14 +3726,25 @@
     "shortName": "Karlstrom Educator Award",
     "sponsor": "Association for Computing Machinery (ACM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Faculty making innovative and influential contributions to computing education",
     "deadline": "December 15, 2026",
     "deadlineMonth": 12,
     "amount": "$30,000 prize plus travel expenses",
     "summary": "Recognizes an outstanding computing educator for advancing teaching, curricula, or educational practice.",
-    "eligibility": ["Computing educator at a baccalaureate-granting institution", "Open to both early-career and experienced educators", "Peer nomination with three to five endorsements"],
-    "topics": ["Computing Education", "Teaching", "Curriculum", "Professional Recognition"],
+    "eligibility": [
+      "Computing educator at a baccalaureate-granting institution",
+      "Open to both early-career and experienced educators",
+      "Peer nomination with three to five endorsements"
+    ],
+    "topics": [
+      "Computing Education",
+      "Teaching",
+      "Curriculum",
+      "Professional Recognition"
+    ],
     "url": "https://prod-awards.acm.bloomreach.cloud/karlstrom/nominations",
     "featured": false
   },
@@ -3365,14 +3754,25 @@
     "shortName": "Allen Newell Award",
     "sponsor": "ACM and Association for the Advancement of Artificial Intelligence (AAAI)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Researchers whose careers bridge computing disciplines or connect computing with other fields",
     "deadline": "December 15, 2026",
     "deadlineMonth": 12,
     "amount": "$30,000 prize plus travel expenses",
     "summary": "Honors career contributions with breadth across computing or that bridge computing and other disciplines.",
-    "eligibility": ["Career-scale body of work demonstrating unusual breadth or interdisciplinary impact", "Peer nomination with supporting endorsements", "ACM and AAAI membership are not required"],
-    "topics": ["General CS", "Artificial Intelligence", "Interdisciplinary Research", "Research Impact"],
+    "eligibility": [
+      "Career-scale body of work demonstrating unusual breadth or interdisciplinary impact",
+      "Peer nomination with supporting endorsements",
+      "ACM and AAAI membership are not required"
+    ],
+    "topics": [
+      "General CS",
+      "Artificial Intelligence",
+      "Interdisciplinary Research",
+      "Research Impact"
+    ],
     "url": "https://prod-awards.acm.bloomreach.cloud/newell/nominations",
     "featured": false
   },
@@ -3382,14 +3782,25 @@
     "shortName": "Thacker Breakthrough Award",
     "sponsor": "Association for Computing Machinery (ACM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Researchers at any career stage responsible for a surprising, disruptive computing breakthrough",
     "deadline": "December 15, 2026 (Biennial)",
     "deadlineMonth": 12,
     "amount": "$100,000 prize plus travel expenses",
     "summary": "Recognizes a leapfrog computing contribution that changes prevailing assumptions or opens a new direction.",
-    "eligibility": ["Open to candidates at any career stage", "Contribution should be surprising, disruptive, or previously deemed unlikely", "Peer nomination with supporting endorsements"],
-    "topics": ["General CS", "Research Innovation", "Breakthrough Research", "Professional Recognition"],
+    "eligibility": [
+      "Open to candidates at any career stage",
+      "Contribution should be surprising, disruptive, or previously deemed unlikely",
+      "Peer nomination with supporting endorsements"
+    ],
+    "topics": [
+      "General CS",
+      "Research Innovation",
+      "Breakthrough Research",
+      "Professional Recognition"
+    ],
     "url": "https://prod-awards.acm.bloomreach.cloud/thacker/nominations",
     "featured": false
   },
@@ -3399,14 +3810,25 @@
     "shortName": "Ken Kennedy Award",
     "sponsor": "ACM and IEEE Computer Society",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Researchers advancing HPC programmability or productivity while contributing to community and mentoring",
     "deadline": "June 30, 2026 (Annual)",
     "deadlineMonth": 6,
     "amount": "$5,000 honorarium and recognition at the SC Conference",
     "summary": "Recognizes substantial contributions to programmability or productivity in high-performance computing together with community service or mentoring.",
-    "eligibility": ["Significant technical contribution to HPC programmability or productivity", "Substantial service, mentoring, or educational contribution", "Peer nomination with two endorsements; self-nominations are not accepted"],
-    "topics": ["High-Performance Computing", "Programming Languages", "Systems", "Mentoring"],
+    "eligibility": [
+      "Significant technical contribution to HPC programmability or productivity",
+      "Substantial service, mentoring, or educational contribution",
+      "Peer nomination with two endorsements; self-nominations are not accepted"
+    ],
+    "topics": [
+      "High-Performance Computing",
+      "Programming Languages",
+      "Systems",
+      "Mentoring"
+    ],
     "url": "https://www.computer.org/volunteering/awards/kennedy",
     "featured": false
   },
@@ -3416,14 +3838,25 @@
     "shortName": "McCluskey Technical Achievement",
     "sponsor": "IEEE Computer Society",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Researchers responsible for an innovative computer science or engineering contribution made relatively recently",
     "deadline": "October 1 (Annual; October 1, 2026 for the current cycle)",
     "deadlineMonth": 10,
     "amount": "$2,000 honorarium, certificate, and recognition at an IEEE Computer Society event",
     "summary": "Recognizes an innovative technical achievement that has had substantial impact within roughly the past decade.",
-    "eligibility": ["Achievement generally made within the past 10 years and no more than 15 years ago", "Peer nomination with two endorsements", "Self-nominations are not accepted"],
-    "topics": ["General CS", "Technical Achievement", "Research Impact", "Professional Recognition"],
+    "eligibility": [
+      "Achievement generally made within the past 10 years and no more than 15 years ago",
+      "Peer nomination with two endorsements",
+      "Self-nominations are not accepted"
+    ],
+    "topics": [
+      "General CS",
+      "Technical Achievement",
+      "Research Impact",
+      "Professional Recognition"
+    ],
     "url": "https://www.computer.org/volunteering/awards/technical-achievement/",
     "featured": false
   },
@@ -3433,14 +3866,25 @@
     "shortName": "W. Wallace McDowell Award",
     "sponsor": "IEEE Computer Society",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Researchers with an outstanding recent contribution to computing theory, design, education, or practice",
     "deadline": "October 1, 2026 (Annual)",
     "deadlineMonth": 10,
     "amount": "$2,000 honorarium and bronze medal",
     "summary": "Honors a specific outstanding recent theoretical, design, educational, practical, or related computing contribution.",
-    "eligibility": ["Nomination must center on a specific recent contribution", "Peer nomination with three endorsements", "Self-nominations are not accepted"],
-    "topics": ["General CS", "Technical Achievement", "Research Impact", "Computing Education"],
+    "eligibility": [
+      "Nomination must center on a specific recent contribution",
+      "Peer nomination with three endorsements",
+      "Self-nominations are not accepted"
+    ],
+    "topics": [
+      "General CS",
+      "Technical Achievement",
+      "Research Impact",
+      "Computing Education"
+    ],
     "url": "https://www.computer.org/volunteering/awards/mcdowell",
     "featured": false
   },
@@ -3450,14 +3894,25 @@
     "shortName": "Harry H. Goode Award",
     "sponsor": "IEEE Computer Society",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Researchers with major contributions to information processing",
     "deadline": "October 1, 2026 (Annual)",
     "deadlineMonth": 10,
     "amount": "$2,000 honorarium and bronze medal",
     "summary": "Recognizes an outstanding single contribution or a body of contributions to information processing.",
-    "eligibility": ["Outstanding contribution to information processing", "Peer nomination with three endorsements", "Self-nominations are not accepted"],
-    "topics": ["General CS", "Information Processing", "Research Impact", "Professional Recognition"],
+    "eligibility": [
+      "Outstanding contribution to information processing",
+      "Peer nomination with three endorsements",
+      "Self-nominations are not accepted"
+    ],
+    "topics": [
+      "General CS",
+      "Information Processing",
+      "Research Impact",
+      "Professional Recognition"
+    ],
     "url": "https://www.computer.org/volunteering/awards/goode",
     "featured": false
   },
@@ -3467,14 +3922,25 @@
     "shortName": "Mary Kenneth Keller Award",
     "sponsor": "IEEE Computer Society",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Faculty with outstanding contributions to undergraduate computing education",
     "deadline": "October 1, 2026 (Annual)",
     "deadlineMonth": 10,
     "amount": "$2,000 honorarium and certificate",
     "summary": "Recognizes exceptional undergraduate teaching and educational contributions in computer science and engineering.",
-    "eligibility": ["Faculty member in a degree program in computer science, computer engineering, or a related field", "Peer nomination with two endorsements", "Self-nominations are not accepted"],
-    "topics": ["Computing Education", "Undergraduate Education", "Teaching", "Professional Recognition"],
+    "eligibility": [
+      "Faculty member in a degree program in computer science, computer engineering, or a related field",
+      "Peer nomination with two endorsements",
+      "Self-nominations are not accepted"
+    ],
+    "topics": [
+      "Computing Education",
+      "Undergraduate Education",
+      "Teaching",
+      "Professional Recognition"
+    ],
     "url": "https://www.computer.org/volunteering/awards/cse-undergrad-teaching",
     "featured": false
   },
@@ -3484,14 +3950,26 @@
     "shortName": "TCHPC Early Career Award",
     "sponsor": "IEEE Computer Society Technical Community on High Performance Computing (TCHPC)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Researchers within five years of the PhD making influential HPC contributions",
     "deadline": "July 14, 2026 (Annual cycle)",
     "deadlineMonth": 7,
     "amount": "$1,000 honorarium, plaque, SC registration, and four hotel nights",
     "summary": "Recognizes outstanding, influential, and potentially long-lasting early-career contributions in high-performance computing.",
-    "eligibility": ["Within five years of receiving the PhD for the stated cycle", "Active IEEE Computer Society and TCHPC membership", "Peer nomination required; self-nominations are not accepted"],
-    "topics": ["High-Performance Computing", "Systems", "Parallel Computing", "Early Career"],
+    "eligibility": [
+      "Within five years of receiving the PhD for the stated cycle",
+      "Active IEEE Computer Society and TCHPC membership",
+      "Peer nomination required; self-nominations are not accepted"
+    ],
+    "topics": [
+      "High-Performance Computing",
+      "Systems",
+      "Parallel Computing",
+      "Early Career"
+    ],
     "url": "https://www.computer.org/ieee-cs-tchpc-early-career-researchers-award-for-excellence-in-high-performance-computing-2026",
     "featured": false
   },
@@ -3501,14 +3979,26 @@
     "shortName": "TCDE Rising Star",
     "sponsor": "IEEE Computer Society Technical Committee on Data Engineering (TCDE)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Database and data-engineering researchers in the first five years after the PhD",
     "deadline": "February 20, 2026 (Annual cycle)",
     "deadlineMonth": 2,
     "amount": "Recognition plaque",
     "summary": "Recognizes an outstanding whole body of early-career work in database systems and data engineering.",
-    "eligibility": ["Within the first five years after completing the PhD, with parental-leave adjustments", "Peer nomination with three supporting letters", "Self-nominations are not accepted"],
-    "topics": ["Databases", "Data Engineering", "Data Systems", "Early Career"],
+    "eligibility": [
+      "Within the first five years after completing the PhD, with parental-leave adjustments",
+      "Peer nomination with three supporting letters",
+      "Self-nominations are not accepted"
+    ],
+    "topics": [
+      "Databases",
+      "Data Engineering",
+      "Data Systems",
+      "Early Career"
+    ],
     "url": "https://tc.computer.org/tcde/awards/",
     "featured": false
   },
@@ -3518,14 +4008,26 @@
     "shortName": "TCSE Rising Star",
     "sponsor": "IEEE Computer Society Technical Community on Software Engineering (TCSE)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Early post-PhD researchers making exceptional contributions to software engineering",
     "deadline": "October 6 registration; October 20 nomination (2026 award cycle)",
     "deadlineMonth": 10,
     "amount": "Plaque and presentation at the IEEE/ACM International Conference on Software Engineering",
     "summary": "Recognizes unusually strong contributions to software engineering or software development early in a post-PhD career.",
-    "eligibility": ["Normally no more than six years beyond the PhD", "Nominee must be an IEEE Computer Society and TCSE member", "Peer nomination with two referees"],
-    "topics": ["Software Engineering", "Programming Languages", "Early Career", "Research Impact"],
+    "eligibility": [
+      "Normally no more than six years beyond the PhD",
+      "Nominee must be an IEEE Computer Society and TCSE member",
+      "Peer nomination with two referees"
+    ],
+    "topics": [
+      "Software Engineering",
+      "Programming Languages",
+      "Early Career",
+      "Research Impact"
+    ],
     "url": "https://tc.computer.org/tcse/2026-tcse-awards-call-for-nominations/",
     "featured": false
   },
@@ -3535,14 +4037,26 @@
     "shortName": "SIGIR Early Career Award",
     "sponsor": "ACM Special Interest Group on Information Retrieval (SIGIR)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Information-retrieval researchers within seven years of completing the PhD",
     "deadline": "May 1, 2026 (Annual cycle)",
     "deadlineMonth": 5,
     "amount": "$1,000 award plus up to $2,000 in travel support",
     "summary": "Recognizes outstanding early-career contributions to information retrieval research.",
-    "eligibility": ["Within seven years of receiving the PhD, with qualifying career breaks considered", "Work must make substantial contributions to information retrieval", "Nomination package required under the current SIGIR call"],
-    "topics": ["Information Retrieval", "Search", "Natural Language Processing", "Early Career"],
+    "eligibility": [
+      "Within seven years of receiving the PhD, with qualifying career breaks considered",
+      "Work must make substantial contributions to information retrieval",
+      "Nomination package required under the current SIGIR call"
+    ],
+    "topics": [
+      "Information Retrieval",
+      "Search",
+      "Natural Language Processing",
+      "Early Career"
+    ],
     "url": "https://sigir.org/awards/sigir-ecr-awards/",
     "featured": false
   },
@@ -3552,14 +4066,26 @@
     "shortName": "SIGMOBILE Rockstar",
     "sponsor": "ACM Special Interest Group on Mobility of Systems, Users, Data and Computing (SIGMOBILE)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Early-career researchers with outstanding impact in mobile and wireless computing",
     "deadline": "June 5, 2026 (Annual cycle)",
     "deadlineMonth": 6,
     "amount": "Distinguished early-career recognition from ACM SIGMOBILE",
     "summary": "Recognizes an early-career researcher whose technical work and community impact stand out in mobile computing.",
-    "eligibility": ["Within 10 years of the highest degree or under age 40 at the deadline", "Peer nomination with three to five endorsements", "Self-nominations are not accepted"],
-    "topics": ["Wireless & Mobile Computing", "Networking", "Ubiquitous Computing", "Early Career"],
+    "eligibility": [
+      "Within 10 years of the highest degree or under age 40 at the deadline",
+      "Peer nomination with three to five endorsements",
+      "Self-nominations are not accepted"
+    ],
+    "topics": [
+      "Wireless & Mobile Computing",
+      "Networking",
+      "Ubiquitous Computing",
+      "Early Career"
+    ],
     "url": "https://www.sigmobile.org/grav/awards/rockstar-award",
     "featured": false
   },
@@ -3569,14 +4095,26 @@
     "shortName": "CCI Tech Transfer Fund",
     "sponsor": "Commonwealth Cyber Initiative (CCI)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Cybersecurity faculty at Virginia public primarily undergraduate institutions or institutions without a technology transfer office",
     "deadline": "Rolling / Open",
     "deadlineMonth": 0,
     "amount": "Up to $8,000 for patent, legal, and other commercialization support",
     "summary": "Helps eligible CCI researchers at Virginia institutions move cybersecurity research toward commercialization by covering technology-transfer professional services.",
-    "eligibility": ["PI-eligible researcher or faculty member at a public Virginia CCI institution", "Home institution must be primarily undergraduate or lack a technology transfer office", "Faculty may receive support only once and must enroll in Virginia's ICAP program"],
-    "topics": ["Cybersecurity", "Technology Transfer", "Commercialization", "Entrepreneurship", "Virginia"],
+    "eligibility": [
+      "PI-eligible researcher or faculty member at a public Virginia CCI institution",
+      "Home institution must be primarily undergraduate or lack a technology transfer office",
+      "Faculty may receive support only once and must enroll in Virginia's ICAP program"
+    ],
+    "topics": [
+      "Cybersecurity",
+      "Technology Transfer",
+      "Commercialization",
+      "Entrepreneurship",
+      "Virginia"
+    ],
     "url": "https://cyberinitiative.org/proposals/ongoing-calls/cci-tech-transfer-support-fund.html",
     "featured": true
   },
@@ -3586,14 +4124,26 @@
     "shortName": "CCI Cyber as a Service",
     "sponsor": "Commonwealth Cyber Initiative (CCI)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Virginia public-institution faculty leading student-delivered cybersecurity service projects",
     "deadline": "Rolling / Open",
     "deadlineMonth": 0,
     "amount": "Up to $15,000 per project",
     "summary": "Funds projects in which Virginia college students provide services such as penetration testing or cyber-risk analysis to a local small business or nonprofit while building workforce-ready skills.",
-    "eligibility": ["PI-eligible researcher or faculty member at a Virginia public institution of higher education", "Students must be the primary paid service providers", "The participating business or nonprofit must be locally operated in the same county as the PI's institution"],
-    "topics": ["Cybersecurity", "Cybersecurity Education", "Workforce Development", "Experiential Learning", "Virginia"],
+    "eligibility": [
+      "PI-eligible researcher or faculty member at a Virginia public institution of higher education",
+      "Students must be the primary paid service providers",
+      "The participating business or nonprofit must be locally operated in the same county as the PI's institution"
+    ],
+    "topics": [
+      "Cybersecurity",
+      "Cybersecurity Education",
+      "Workforce Development",
+      "Experiential Learning",
+      "Virginia"
+    ],
     "url": "https://cyberinitiative.org/proposals/ongoing-calls/cfp-cyber-as-a-service.html",
     "featured": true
   },
@@ -3603,14 +4153,27 @@
     "shortName": "CCI+A CATAPULT & ASCEND",
     "sponsor": "Commonwealth Cyber Initiative (CCI)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Virginia public-university faculty and Virginia-based startup teams commercializing cybersecurity technology",
     "deadline": "March 2, 2026 (2026 cycle closed)",
     "deadlineMonth": 3,
     "amount": "Up to $75,000 per project plus CCI+A commercialization programming",
     "summary": "Supports translational development and university-startup collaboration that moves Virginia cybersecurity research toward market-ready products, licensing, partnerships, or startup formation.",
-    "eligibility": ["A faculty member at a Virginia public institution of higher education must serve as PI", "Team must be Virginia-based; participating startups must have at least 51% of operations in Virginia", "Project must retain a meaningful cybersecurity focus and participate fully in the CCI+A program"],
-    "topics": ["Cybersecurity", "Technology Transfer", "Commercialization", "Startups", "Entrepreneurship", "Virginia"],
+    "eligibility": [
+      "A faculty member at a Virginia public institution of higher education must serve as PI",
+      "Team must be Virginia-based; participating startups must have at least 51% of operations in Virginia",
+      "Project must retain a meaningful cybersecurity focus and participate fully in the CCI+A program"
+    ],
+    "topics": [
+      "Cybersecurity",
+      "Technology Transfer",
+      "Commercialization",
+      "Startups",
+      "Entrepreneurship",
+      "Virginia"
+    ],
     "url": "https://cyberinitiative.org/proposals/2026-calls/2026-cci-a-funds.html",
     "featured": true
   },
@@ -3620,14 +4183,26 @@
     "shortName": "CCI Experiential Learning",
     "sponsor": "Commonwealth Cyber Initiative (CCI)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Virginia CCI faculty creating cross-institution cybersecurity workforce experiences for students",
     "deadline": "April 24, 2026 (2026 cycle closed)",
     "deadlineMonth": 4,
     "amount": "Up to $100,000 per project",
     "summary": "Funds experiential programs that prepare Virginia students for cybersecurity careers through work with prospective employers and participation across multiple CCI institutions.",
-    "eligibility": ["PI-eligible researcher or faculty member at a public Virginia CCI institution", "Program must benefit students at more than one CCI institution", "Students must gain workforce experience with potential future employers"],
-    "topics": ["Cybersecurity", "Cybersecurity Education", "Workforce Development", "Experiential Learning", "Virginia"],
+    "eligibility": [
+      "PI-eligible researcher or faculty member at a public Virginia CCI institution",
+      "Program must benefit students at more than one CCI institution",
+      "Students must gain workforce experience with potential future employers"
+    ],
+    "topics": [
+      "Cybersecurity",
+      "Cybersecurity Education",
+      "Workforce Development",
+      "Experiential Learning",
+      "Virginia"
+    ],
     "url": "https://cyberinitiative.org/proposals/2026-calls/2026-experiential-learning-program.html",
     "featured": false
   },
@@ -3637,14 +4212,27 @@
     "shortName": "CCI NoVa Critical Infrastructure",
     "sponsor": "Commonwealth Cyber Initiative (CCI) Northern Virginia Node",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Northern Virginia CCI researchers studying cybersecurity and resilient critical infrastructure, especially data centers",
     "deadline": "June 5, 2026 (2026 cycle closed)",
     "deadlineMonth": 6,
     "amount": "Up to $100,000 per proposal",
     "summary": "Supports cross-disciplinary Northern Virginia research on the security and resilience of data centers and other critical infrastructure such as energy, transportation, water, communications, and financial systems.",
-    "eligibility": ["Lead PI must be affiliated with a CCI Northern Virginia Node institution", "Project must address cybersecurity and critical infrastructure", "Expression of intent and institution-approved proposal required for the 2026 cycle"],
-    "topics": ["Cybersecurity", "Critical Infrastructure", "Data Centers", "Cyber-Physical Systems", "Resilience", "Virginia"],
+    "eligibility": [
+      "Lead PI must be affiliated with a CCI Northern Virginia Node institution",
+      "Project must address cybersecurity and critical infrastructure",
+      "Expression of intent and institution-approved proposal required for the 2026 cycle"
+    ],
+    "topics": [
+      "Cybersecurity",
+      "Critical Infrastructure",
+      "Data Centers",
+      "Cyber-Physical Systems",
+      "Resilience",
+      "Virginia"
+    ],
     "url": "https://cyberinitiative.org/about/regional-structure/northern-virginia-node/nova-node-research/call-for-proposals--cybersecurity-and-critical-infrastructure--w.html",
     "featured": false
   },
@@ -3654,15 +4242,31 @@
     "shortName": "Virginia CCF HE POC",
     "sponsor": "Virginia Innovation Partnership Corporation (VIPC)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Virginia universities and nonprofit research institutes commercializing early-stage research technologies",
     "deadline": "Two cycles expected annually; Spring 2026 closed, next opportunity expected Fall 2026",
     "deadlineMonth": 4,
     "amount": "$75,000 or $150,000 by track; selected advanced projects may be invited to seek up to $300,000",
     "summary": "Advances Virginia research-derived innovations through technology validation, market exploration, and prototype development, including projects in cybersecurity, IT, data science, autonomous systems, and communications.",
-    "eligibility": ["Eligible Virginia higher-education institution, Virginia-based nonprofit research institute, consortium, or federal research facility", "Technology must align with a targeted Virginia industry sector", "At least a one-to-one match is required and an authorized institutional representative must submit"],
-    "topics": ["Cybersecurity", "IT & Data Science", "Autonomous Systems", "Communications", "Technology Transfer", "Commercialization", "Virginia"],
-    "locations": ["Virginia"],
+    "eligibility": [
+      "Eligible Virginia higher-education institution, Virginia-based nonprofit research institute, consortium, or federal research facility",
+      "Technology must align with a targeted Virginia industry sector",
+      "At least a one-to-one match is required and an authorized institutional representative must submit"
+    ],
+    "topics": [
+      "Cybersecurity",
+      "IT & Data Science",
+      "Autonomous Systems",
+      "Communications",
+      "Technology Transfer",
+      "Commercialization",
+      "Virginia"
+    ],
+    "locations": [
+      "Virginia"
+    ],
     "url": "https://www.virginiaipc.org/funding/he-poc/",
     "featured": true
   },
@@ -3672,15 +4276,87 @@
     "shortName": "NASA Space Grant Consortia",
     "sponsor": "NASA National Space Grant College and Fellowship Project",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty", "PhD Students", "Master's Students", "Undergraduate Students"],
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Master's Students",
+      "Undergraduate Students"
+    ],
     "whoFor": "Students and faculty applying through one of NASA's 52 state, District of Columbia, or Puerto Rico Space Grant consortia",
     "deadline": "Varies by state consortium and program; many annual cycles fall between late fall and spring",
     "deadlineMonth": 0,
     "amount": "Varies by consortium; includes graduate fellowships, scholarships, research awards, internships, travel, and faculty development",
     "summary": "NASA's nationwide Space Grant network funds state-administered opportunities at affiliate institutions in every state, DC, and Puerto Rico. CS applicants are strong fits when their work supports aerospace, autonomy, robotics, AI, data systems, cybersecurity, remote sensing, or other NASA-relevant STEM areas.",
-    "eligibility": ["Apply through the consortium serving the relevant state or jurisdiction", "Student awards commonly require US citizenship and enrollment at an affiliate institution; verify local rules", "Faculty and research opportunities, award amounts, and deadlines are set by each consortium"],
-    "topics": ["Aerospace", "AI/ML", "Autonomous Systems", "Robotics", "Cybersecurity", "Data Science", "Remote Sensing", "Space Systems", "State-Specific"],
-    "locations": ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"],
+    "eligibility": [
+      "Apply through the consortium serving the relevant state or jurisdiction",
+      "Student awards commonly require US citizenship and enrollment at an affiliate institution; verify local rules",
+      "Faculty and research opportunities, award amounts, and deadlines are set by each consortium"
+    ],
+    "topics": [
+      "Aerospace",
+      "AI/ML",
+      "Autonomous Systems",
+      "Robotics",
+      "Cybersecurity",
+      "Data Science",
+      "Remote Sensing",
+      "Space Systems",
+      "State-Specific"
+    ],
+    "locations": [
+      "Alabama",
+      "Alaska",
+      "Arizona",
+      "Arkansas",
+      "California",
+      "Colorado",
+      "Connecticut",
+      "Delaware",
+      "District of Columbia",
+      "Florida",
+      "Georgia",
+      "Hawaii",
+      "Idaho",
+      "Illinois",
+      "Indiana",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Maryland",
+      "Massachusetts",
+      "Michigan",
+      "Minnesota",
+      "Mississippi",
+      "Missouri",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Jersey",
+      "New Mexico",
+      "New York",
+      "North Carolina",
+      "North Dakota",
+      "Ohio",
+      "Oklahoma",
+      "Oregon",
+      "Pennsylvania",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Tennessee",
+      "Texas",
+      "Utah",
+      "Vermont",
+      "Virginia",
+      "Washington",
+      "West Virginia",
+      "Wisconsin",
+      "Wyoming"
+    ],
     "locationLabel": "All 50 states, DC, and Puerto Rico",
     "url": "https://www.nasa.gov/learning-resources/national-space-grant-college-and-fellowship-project/consortium-directors/",
     "featured": true
@@ -3691,15 +4367,62 @@
     "shortName": "State EPSCoR Opportunities",
     "sponsor": "National Science Foundation (NSF EPSCoR) and jurisdiction offices",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty", "PhD Students", "Master's Students", "Undergraduate Students", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Master's Students",
+      "Undergraduate Students",
+      "Postdocs"
+    ],
     "whoFor": "Researchers and students at institutions in NSF EPSCoR jurisdictions seeking locally administered seed, pilot, travel, workforce, or research-development support",
     "deadline": "Varies by jurisdiction and local EPSCoR office",
     "deadlineMonth": 0,
     "amount": "Varies by jurisdiction and active state project",
     "summary": "NSF's official directory links to every eligible jurisdiction's EPSCoR office, where locally administered seed grants, pilot awards, student research, travel, workshops, and proposal-development calls are posted. Availability varies with each jurisdiction's active awards and state plan.",
-    "eligibility": ["Applicant must meet the local EPSCoR office or active project's institutional and residency rules", "Eligibility is frozen through FY 2027 for the 28 listed jurisdictions", "Consult the official jurisdiction site for current calls rather than assuming every local mechanism is continuously offered"],
-    "topics": ["General CS", "AI/ML", "Cyberinfrastructure", "Research Capacity", "Workforce Development", "Seed Funding", "State-Specific"],
-    "locations": ["Alabama", "Alaska", "Arkansas", "Delaware", "Guam", "Hawaii", "Idaho", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Mississippi", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Mexico", "North Dakota", "Oklahoma", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Vermont", "U.S. Virgin Islands", "West Virginia", "Wyoming"],
+    "eligibility": [
+      "Applicant must meet the local EPSCoR office or active project's institutional and residency rules",
+      "Eligibility is frozen through FY 2027 for the 28 listed jurisdictions",
+      "Consult the official jurisdiction site for current calls rather than assuming every local mechanism is continuously offered"
+    ],
+    "topics": [
+      "General CS",
+      "AI/ML",
+      "Cyberinfrastructure",
+      "Research Capacity",
+      "Workforce Development",
+      "Seed Funding",
+      "State-Specific"
+    ],
+    "locations": [
+      "Alabama",
+      "Alaska",
+      "Arkansas",
+      "Delaware",
+      "Guam",
+      "Hawaii",
+      "Idaho",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Mississippi",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Mexico",
+      "North Dakota",
+      "Oklahoma",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Vermont",
+      "U.S. Virgin Islands",
+      "West Virginia",
+      "Wyoming"
+    ],
     "locationLabel": "28 NSF EPSCoR jurisdictions",
     "url": "https://www.nsf.gov/funding/initiatives/epscor/state-websites",
     "featured": true
@@ -3710,15 +4433,60 @@
     "shortName": "NSF EPSCoR EGFP",
     "sponsor": "National Science Foundation (NSF EPSCoR)",
     "sponsorCategory": "Government",
-    "targetAudience": ["PhD Students", "Master's Students", "Undergraduate Students"],
+    "targetAudience": [
+      "PhD Students",
+      "Master's Students",
+      "Undergraduate Students"
+    ],
     "whoFor": "New or continuing graduate students with a recent NSF GRFP Honorable Mention who will study at a designated institution in an EPSCoR jurisdiction",
     "deadline": "Institutional competition was June 1, 2026; student applications follow designated-program ETAP cycles",
     "deadlineMonth": 6,
     "amount": "$37,000 annual stipend plus $16,000 annual cost-of-education allowance for 3 years",
     "summary": "Creates a second fellowship path for strong GRFP applicants by supporting recent Honorable Mention recipients in participating graduate programs located in EPSCoR jurisdictions, including NSF-supported computer science fields.",
-    "eligibility": ["Received NSF GRFP Honorable Mention no more than three years before the institutional proposal deadline", "Must be accepted by an EGFP-designated institution and program through NSF ETAP", "Fellowship must be used at an institution in an eligible EPSCoR jurisdiction"],
-    "topics": ["General CS", "AI/ML", "Systems", "Cybersecurity", "Theory", "Graduate Fellowship", "EPSCoR"],
-    "locations": ["Alabama", "Alaska", "Arkansas", "Delaware", "Guam", "Hawaii", "Idaho", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Mississippi", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Mexico", "North Dakota", "Oklahoma", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Vermont", "U.S. Virgin Islands", "West Virginia", "Wyoming"],
+    "eligibility": [
+      "Received NSF GRFP Honorable Mention no more than three years before the institutional proposal deadline",
+      "Must be accepted by an EGFP-designated institution and program through NSF ETAP",
+      "Fellowship must be used at an institution in an eligible EPSCoR jurisdiction"
+    ],
+    "topics": [
+      "General CS",
+      "AI/ML",
+      "Systems",
+      "Cybersecurity",
+      "Theory",
+      "Graduate Fellowship",
+      "EPSCoR"
+    ],
+    "locations": [
+      "Alabama",
+      "Alaska",
+      "Arkansas",
+      "Delaware",
+      "Guam",
+      "Hawaii",
+      "Idaho",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Mississippi",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Mexico",
+      "North Dakota",
+      "Oklahoma",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Vermont",
+      "U.S. Virgin Islands",
+      "West Virginia",
+      "Wyoming"
+    ],
     "url": "https://www.nsf.gov/funding/opportunities/egfp-nsf-epscor-graduate-fellowship-program",
     "featured": true
   },
@@ -3728,15 +4496,59 @@
     "shortName": "NSF EPSCoR Research Fellows",
     "sponsor": "National Science Foundation (NSF EPSCoR) and NASA",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Early- and mid-career faculty in EPSCoR jurisdictions building a substantial collaboration with a nationally prominent research host",
     "deadline": "April 13, 2027 (second Tuesday in April annually thereafter)",
     "deadlineMonth": 4,
     "amount": "Up to $300,000 for the NSF track or $360,000 for the NASA track over up to 24 months",
     "summary": "Supports extended or periodic visits to a leading academic, government, private, or NASA research site so investigators can learn techniques, access unique facilities, and establish collaborations that transform their research trajectory.",
-    "eligibility": ["PI must hold an early- or mid-career research appointment at an eligible institution in an EPSCoR jurisdiction", "A meaningful host-site collaboration and at least one month total of research visits are expected", "One trainee from an EPSCoR jurisdiction may participate"],
-    "topics": ["General CS", "AI/ML", "Systems", "Cybersecurity", "HPC", "Research Collaboration", "Early Career", "EPSCoR"],
-    "locations": ["Alabama", "Alaska", "Arkansas", "Delaware", "Guam", "Hawaii", "Idaho", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Mississippi", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Mexico", "North Dakota", "Oklahoma", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Vermont", "U.S. Virgin Islands", "West Virginia", "Wyoming"],
+    "eligibility": [
+      "PI must hold an early- or mid-career research appointment at an eligible institution in an EPSCoR jurisdiction",
+      "A meaningful host-site collaboration and at least one month total of research visits are expected",
+      "One trainee from an EPSCoR jurisdiction may participate"
+    ],
+    "topics": [
+      "General CS",
+      "AI/ML",
+      "Systems",
+      "Cybersecurity",
+      "HPC",
+      "Research Collaboration",
+      "Early Career",
+      "EPSCoR"
+    ],
+    "locations": [
+      "Alabama",
+      "Alaska",
+      "Arkansas",
+      "Delaware",
+      "Guam",
+      "Hawaii",
+      "Idaho",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Mississippi",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Mexico",
+      "North Dakota",
+      "Oklahoma",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Vermont",
+      "U.S. Virgin Islands",
+      "West Virginia",
+      "Wyoming"
+    ],
     "url": "https://www.nsf.gov/funding/opportunities/epscor-research-infrastructure-improvement-epscor-research",
     "featured": true
   },
@@ -3746,15 +4558,58 @@
     "shortName": "NSF EPSCoR FEC",
     "sponsor": "National Science Foundation (NSF EPSCoR)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Faculty teams spanning at least two EPSCoR jurisdictions with complementary research capabilities",
     "deadline": "Letter of intent: December 15, 2026; Full proposal: January 26, 2027",
     "deadlineMonth": 1,
     "amount": "Up to $4,000,000 over up to 4 years for two-jurisdiction collaborations",
     "summary": "Funds investigator-driven, interjurisdictional teams pursuing NSF-aligned research that no participating jurisdiction could address as effectively alone while building sustainable STEM capacity.",
-    "eligibility": ["Project must include researchers from at least two eligible EPSCoR jurisdictions", "Lead organization may submit one proposal to the competition", "Research must align with NSF priorities and include integrated research, education, and capacity building"],
-    "topics": ["General CS", "AI/ML", "Cyberinfrastructure", "Advanced Wireless", "Quantum", "Research Collaboration", "EPSCoR"],
-    "locations": ["Alabama", "Alaska", "Arkansas", "Delaware", "Guam", "Hawaii", "Idaho", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Mississippi", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Mexico", "North Dakota", "Oklahoma", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Vermont", "U.S. Virgin Islands", "West Virginia", "Wyoming"],
+    "eligibility": [
+      "Project must include researchers from at least two eligible EPSCoR jurisdictions",
+      "Lead organization may submit one proposal to the competition",
+      "Research must align with NSF priorities and include integrated research, education, and capacity building"
+    ],
+    "topics": [
+      "General CS",
+      "AI/ML",
+      "Cyberinfrastructure",
+      "Advanced Wireless",
+      "Quantum",
+      "Research Collaboration",
+      "EPSCoR"
+    ],
+    "locations": [
+      "Alabama",
+      "Alaska",
+      "Arkansas",
+      "Delaware",
+      "Guam",
+      "Hawaii",
+      "Idaho",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Mississippi",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Mexico",
+      "North Dakota",
+      "Oklahoma",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Vermont",
+      "U.S. Virgin Islands",
+      "West Virginia",
+      "Wyoming"
+    ],
     "url": "https://www.nsf.gov/funding/opportunities/epscor-research-infrastructure-improvement-program-focused",
     "featured": true
   },
@@ -3764,15 +4619,58 @@
     "shortName": "NSF EPSCoR E-RISE",
     "sponsor": "National Science Foundation (NSF EPSCoR)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Institutional and cross-sector faculty teams building sustainable research capacity in an EPSCoR jurisdiction",
     "deadline": "August 10, 2027 (second Tuesday in August annually thereafter)",
     "deadlineMonth": 8,
     "amount": "Up to $8,000,000 over 4 years, with a potential renewal award up to $4,500,000",
     "summary": "Supports collaborative, hypothesis- or problem-driven research incubators that create durable teams, workforce pathways, research products, and competitiveness in an emerging or interdisciplinary STEM area aligned with jurisdiction priorities.",
-    "eligibility": ["Lead organization must be eligible under the solicitation and located in an EPSCoR jurisdiction", "Only one lead submission per organization", "Project must align with the jurisdiction's science and technology priorities and include a clear research goal"],
-    "topics": ["General CS", "AI/ML", "Cyberinfrastructure", "Research Capacity", "Workforce Development", "Interdisciplinary Research", "EPSCoR"],
-    "locations": ["Alabama", "Alaska", "Arkansas", "Delaware", "Guam", "Hawaii", "Idaho", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Mississippi", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Mexico", "North Dakota", "Oklahoma", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Vermont", "U.S. Virgin Islands", "West Virginia", "Wyoming"],
+    "eligibility": [
+      "Lead organization must be eligible under the solicitation and located in an EPSCoR jurisdiction",
+      "Only one lead submission per organization",
+      "Project must align with the jurisdiction's science and technology priorities and include a clear research goal"
+    ],
+    "topics": [
+      "General CS",
+      "AI/ML",
+      "Cyberinfrastructure",
+      "Research Capacity",
+      "Workforce Development",
+      "Interdisciplinary Research",
+      "EPSCoR"
+    ],
+    "locations": [
+      "Alabama",
+      "Alaska",
+      "Arkansas",
+      "Delaware",
+      "Guam",
+      "Hawaii",
+      "Idaho",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Mississippi",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Mexico",
+      "North Dakota",
+      "Oklahoma",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Vermont",
+      "U.S. Virgin Islands",
+      "West Virginia",
+      "Wyoming"
+    ],
     "url": "https://www.nsf.gov/funding/opportunities/e-rise-epscor-research-infrastructure-improvement-program-epscor",
     "featured": false
   },
@@ -3782,15 +4680,57 @@
     "shortName": "NSF EPSCoR E-CORE",
     "sponsor": "National Science Foundation (NSF EPSCoR)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Jurisdiction-wide teams strengthening research infrastructure, cyberinfrastructure, workforce, and innovation pathways",
     "deadline": "July 20, 2027 (third Tuesday in July annually thereafter)",
     "deadlineMonth": 7,
     "amount": "Up to $10,000,000 over 4 years, with a potential renewal award up to $8,000,000",
     "summary": "Builds sustainable, jurisdiction-wide research ecosystem cores such as cyberinfrastructure, facilities, research administration, early-career pathways, technology transfer, and workforce development.",
-    "eligibility": ["Lead organization and project must meet the EPSCoR-jurisdiction requirements in the solicitation", "One lead submission per organization", "Project must be jurisdiction-wide and align with documented ecosystem needs and priorities"],
-    "topics": ["Cyberinfrastructure", "Research Infrastructure", "Research Capacity", "Technology Transfer", "Workforce Development", "EPSCoR"],
-    "locations": ["Alabama", "Alaska", "Arkansas", "Delaware", "Guam", "Hawaii", "Idaho", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Mississippi", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Mexico", "North Dakota", "Oklahoma", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Vermont", "U.S. Virgin Islands", "West Virginia", "Wyoming"],
+    "eligibility": [
+      "Lead organization and project must meet the EPSCoR-jurisdiction requirements in the solicitation",
+      "One lead submission per organization",
+      "Project must be jurisdiction-wide and align with documented ecosystem needs and priorities"
+    ],
+    "topics": [
+      "Cyberinfrastructure",
+      "Research Infrastructure",
+      "Research Capacity",
+      "Technology Transfer",
+      "Workforce Development",
+      "EPSCoR"
+    ],
+    "locations": [
+      "Alabama",
+      "Alaska",
+      "Arkansas",
+      "Delaware",
+      "Guam",
+      "Hawaii",
+      "Idaho",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Mississippi",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Mexico",
+      "North Dakota",
+      "Oklahoma",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Vermont",
+      "U.S. Virgin Islands",
+      "West Virginia",
+      "Wyoming"
+    ],
     "url": "https://www.nsf.gov/funding/opportunities/e-core-epscor-research-infrastructure-improvement-program-epscor",
     "featured": false
   },
@@ -3800,15 +4740,63 @@
     "shortName": "NASA EPSCoR Research & R3",
     "sponsor": "National Aeronautics and Space Administration (NASA EPSCoR)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty", "PhD Students", "Master's Students", "Undergraduate Students", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Master's Students",
+      "Undergraduate Students",
+      "Postdocs"
+    ],
     "whoFor": "Faculty-led research teams in NASA EPSCoR jurisdictions working on NASA-aligned science and technology",
     "deadline": "Annual or periodic NASA solicitations with earlier internal deadlines set by each jurisdiction's EPSCoR director",
     "deadlineMonth": 0,
     "amount": "R3 awards are typically about $100,000 for one year; Research award amounts and duration are set by each solicitation",
     "summary": "NASA EPSCoR develops aerospace research capacity through jurisdiction-nominated Research awards and faster R3 projects tied to specific NASA needs. Relevant CS areas include AI, autonomy, robotics, cybersecurity, remote sensing, scientific computing, and space systems.",
-    "eligibility": ["Proposal must originate in an eligible NASA EPSCoR jurisdiction", "Applicants normally enter through their jurisdiction's NASA EPSCoR director because NASA limits jurisdiction-level submissions", "Research must align with NASA mission and technology priorities"],
-    "topics": ["AI/ML", "Autonomous Systems", "Robotics", "Cybersecurity", "Remote Sensing", "Scientific Computing", "Space Systems", "EPSCoR"],
-    "locations": ["Alabama", "Alaska", "Arkansas", "Delaware", "Guam", "Hawaii", "Idaho", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Mississippi", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Mexico", "North Dakota", "Oklahoma", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Vermont", "U.S. Virgin Islands", "West Virginia", "Wyoming"],
+    "eligibility": [
+      "Proposal must originate in an eligible NASA EPSCoR jurisdiction",
+      "Applicants normally enter through their jurisdiction's NASA EPSCoR director because NASA limits jurisdiction-level submissions",
+      "Research must align with NASA mission and technology priorities"
+    ],
+    "topics": [
+      "AI/ML",
+      "Autonomous Systems",
+      "Robotics",
+      "Cybersecurity",
+      "Remote Sensing",
+      "Scientific Computing",
+      "Space Systems",
+      "EPSCoR"
+    ],
+    "locations": [
+      "Alabama",
+      "Alaska",
+      "Arkansas",
+      "Delaware",
+      "Guam",
+      "Hawaii",
+      "Idaho",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Mississippi",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Mexico",
+      "North Dakota",
+      "Oklahoma",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Vermont",
+      "U.S. Virgin Islands",
+      "West Virginia",
+      "Wyoming"
+    ],
     "url": "https://www.nasa.gov/learning-resources/established-program-to-stimulate-competitive-research/epscor-award-announcements/",
     "featured": true
   },
@@ -3818,15 +4806,70 @@
     "shortName": "DoD DEPSCoR Research Collaboration",
     "sponsor": "U.S. Department of Defense (DEPSCoR / AFOSR)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Tenured or tenure-track faculty in eligible states and territories who have never led a directly funded DoD prime research award",
     "deadline": "April 5, 2027",
     "deadlineMonth": 4,
     "amount": "Up to $600,000 total over 3 years ($200,000 per year)",
     "summary": "Pairs a DoD-new investigator with an experienced DoD-funded collaborator to conduct basic science and engineering research relevant to national security while building durable research capacity.",
-    "eligibility": ["Applicant must be full-time tenured or tenure-track faculty at an eligible-state institution of higher education", "Applicant must never have served as PI on a prior directly funded DoD prime research award", "Collaborator must have led an active DoD prime research award during the solicitation's qualifying period"],
-    "topics": ["Cybersecurity", "AI/ML", "Autonomy", "Networks", "Quantum", "HCI", "Systems", "National Security", "DEPSCoR"],
-    "locations": ["Alabama", "Alaska", "Arizona", "Arkansas", "Connecticut", "Delaware", "District of Columbia", "Guam", "Hawaii", "Idaho", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "North Dakota", "Oklahoma", "Oregon", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "U.S. Virgin Islands", "Vermont", "West Virginia", "Wisconsin", "Wyoming"],
+    "eligibility": [
+      "Applicant must be full-time tenured or tenure-track faculty at an eligible-state institution of higher education",
+      "Applicant must never have served as PI on a prior directly funded DoD prime research award",
+      "Collaborator must have led an active DoD prime research award during the solicitation's qualifying period"
+    ],
+    "topics": [
+      "Cybersecurity",
+      "AI/ML",
+      "Autonomy",
+      "Networks",
+      "Quantum",
+      "HCI",
+      "Systems",
+      "National Security",
+      "DEPSCoR"
+    ],
+    "locations": [
+      "Alabama",
+      "Alaska",
+      "Arizona",
+      "Arkansas",
+      "Connecticut",
+      "Delaware",
+      "District of Columbia",
+      "Guam",
+      "Hawaii",
+      "Idaho",
+      "Indiana",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Minnesota",
+      "Mississippi",
+      "Missouri",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Jersey",
+      "New Mexico",
+      "North Dakota",
+      "Oklahoma",
+      "Oregon",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Tennessee",
+      "U.S. Virgin Islands",
+      "Vermont",
+      "West Virginia",
+      "Wisconsin",
+      "Wyoming"
+    ],
     "url": "https://simpler.grants.gov/opportunity/b1489614-88c5-4534-a1ef-ffafdd1ba9d0",
     "featured": true
   },
@@ -3836,15 +4879,67 @@
     "shortName": "DoD DEPSCoR Capacity Building",
     "sponsor": "U.S. Department of Defense (DEPSCoR / AFOSR)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Institutions of higher education in eligible states and territories building DoD-relevant science and engineering research capacity",
     "deadline": "April 5, 2027",
     "deadlineMonth": 4,
     "amount": "$750,000 to $1,500,000 over 2 years",
     "summary": "Supports institutional strategies that increase the number of researchers capable of DoD-relevant work and strengthen infrastructure, planning, and execution of competitive national-security research.",
-    "eligibility": ["Lead applicant must be an institution of higher education in an eligible DEPSCoR state or territory", "Proposal must advance basic research excellence relevant to DoD priorities", "Institutional capacity-building strategy is required"],
-    "topics": ["Cybersecurity", "AI/ML", "Autonomy", "Networks", "Quantum", "Research Infrastructure", "National Security", "DEPSCoR"],
-    "locations": ["Alabama", "Alaska", "Arkansas", "Connecticut", "Delaware", "District of Columbia", "Guam", "Hawaii", "Idaho", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "North Dakota", "Oklahoma", "Oregon", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "U.S. Virgin Islands", "Vermont", "West Virginia", "Wisconsin", "Wyoming"],
+    "eligibility": [
+      "Lead applicant must be an institution of higher education in an eligible DEPSCoR state or territory",
+      "Proposal must advance basic research excellence relevant to DoD priorities",
+      "Institutional capacity-building strategy is required"
+    ],
+    "topics": [
+      "Cybersecurity",
+      "AI/ML",
+      "Autonomy",
+      "Networks",
+      "Quantum",
+      "Research Infrastructure",
+      "National Security",
+      "DEPSCoR"
+    ],
+    "locations": [
+      "Alabama",
+      "Alaska",
+      "Arkansas",
+      "Connecticut",
+      "Delaware",
+      "District of Columbia",
+      "Guam",
+      "Hawaii",
+      "Idaho",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Minnesota",
+      "Mississippi",
+      "Missouri",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Jersey",
+      "New Mexico",
+      "North Dakota",
+      "Oklahoma",
+      "Oregon",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Tennessee",
+      "U.S. Virgin Islands",
+      "Vermont",
+      "West Virginia",
+      "Wisconsin",
+      "Wyoming"
+    ],
     "url": "https://simpler.grants.gov/opportunity/86ea6263-7d76-4576-961b-68f7388bf810",
     "featured": false
   },
@@ -3854,15 +4949,61 @@
     "shortName": "DOE EPSCoR State-Lab Partnerships",
     "sponsor": "Department of Energy (DOE) Office of Science",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty", "PhD Students", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Researchers in EPSCoR jurisdictions partnering with scientists and facilities at DOE national laboratories",
     "deadline": "2026 cycle closed May 21; biennial partnership competitions alternate with implementation awards",
     "deadlineMonth": 5,
     "amount": "Up to $1,000,000 over 4 years",
     "summary": "Supports fundamental energy-relevant research collaborations that connect EPSCoR faculty and trainees with DOE national-laboratory expertise, user facilities, advanced computing, and other unique capabilities.",
-    "eligibility": ["Project funds must go to institutions in eligible EPSCoR jurisdictions", "A substantive collaboration with a DOE national laboratory researcher is required", "Projects must include undergraduate, graduate, or postdoctoral participation and align with an Office of Science program"],
-    "topics": ["High-Performance Computing", "AI/ML", "Quantum", "Scientific Computing", "Data Science", "Energy Systems", "Research Collaboration", "EPSCoR"],
-    "locations": ["Alabama", "Alaska", "Arkansas", "Delaware", "Guam", "Hawaii", "Idaho", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Mississippi", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Mexico", "North Dakota", "Oklahoma", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Vermont", "U.S. Virgin Islands", "West Virginia", "Wyoming"],
+    "eligibility": [
+      "Project funds must go to institutions in eligible EPSCoR jurisdictions",
+      "A substantive collaboration with a DOE national laboratory researcher is required",
+      "Projects must include undergraduate, graduate, or postdoctoral participation and align with an Office of Science program"
+    ],
+    "topics": [
+      "High-Performance Computing",
+      "AI/ML",
+      "Quantum",
+      "Scientific Computing",
+      "Data Science",
+      "Energy Systems",
+      "Research Collaboration",
+      "EPSCoR"
+    ],
+    "locations": [
+      "Alabama",
+      "Alaska",
+      "Arkansas",
+      "Delaware",
+      "Guam",
+      "Hawaii",
+      "Idaho",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Mississippi",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Mexico",
+      "North Dakota",
+      "Oklahoma",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Vermont",
+      "U.S. Virgin Islands",
+      "West Virginia",
+      "Wyoming"
+    ],
     "url": "https://science.osti.gov/bes/epscor/How-to-Apply",
     "featured": true
   },
@@ -3872,15 +5013,56 @@
     "shortName": "USDA AFRI EPSCoR Grants",
     "sponsor": "USDA National Institute of Food and Agriculture (NIFA)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty", "PhD Students", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Postdocs"
+    ],
     "whoFor": "Investigators and trainees in USDA EPSCoR states applying AI, data science, robotics, cyber-physical systems, or computing to food, agriculture, natural resources, and rural systems",
     "deadline": "Varies by the AFRI Foundational, Education, or Strengthening program area",
     "deadlineMonth": 0,
     "amount": "Varies by AFRI program; mechanisms include seed, equipment, sabbatical, workshop, standard, CAP, and pre/postdoctoral awards",
     "summary": "Provides reserved and strengthening funding paths for eligible institutions and investigators in underfunded states. Computing proposals can fit precision agriculture, agricultural robotics, trustworthy AI, sensing, data systems, cybersecurity, and resilient food systems.",
-    "eligibility": ["For FY 2026, applicant must satisfy the applicable AFRI rules and the USDA EPSCoR, small/mid-sized, or minority-serving institution criteria", "Strengthening eligibility and allowed applicant types differ by AFRI notice", "Research must address an AFRI priority in food, agriculture, natural resources, or related systems"],
-    "topics": ["AI/ML", "Data Science", "Robotics", "Cyber-Physical Systems", "IoT", "Cybersecurity", "Agricultural Technology", "EPSCoR"],
-    "locations": ["Alaska", "Connecticut", "Delaware", "District of Columbia", "Guam", "Hawaii", "Idaho", "Kentucky", "Maine", "Montana", "Nevada", "New Jersey", "New Mexico", "North Dakota", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Utah", "U.S. Virgin Islands", "Vermont", "West Virginia", "Wyoming"],
+    "eligibility": [
+      "For FY 2026, applicant must satisfy the applicable AFRI rules and the USDA EPSCoR, small/mid-sized, or minority-serving institution criteria",
+      "Strengthening eligibility and allowed applicant types differ by AFRI notice",
+      "Research must address an AFRI priority in food, agriculture, natural resources, or related systems"
+    ],
+    "topics": [
+      "AI/ML",
+      "Data Science",
+      "Robotics",
+      "Cyber-Physical Systems",
+      "IoT",
+      "Cybersecurity",
+      "Agricultural Technology",
+      "EPSCoR"
+    ],
+    "locations": [
+      "Alaska",
+      "Connecticut",
+      "Delaware",
+      "District of Columbia",
+      "Guam",
+      "Hawaii",
+      "Idaho",
+      "Kentucky",
+      "Maine",
+      "Montana",
+      "Nevada",
+      "New Jersey",
+      "New Mexico",
+      "North Dakota",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Utah",
+      "U.S. Virgin Islands",
+      "Vermont",
+      "West Virginia",
+      "Wyoming"
+    ],
     "url": "https://www.nifa.usda.gov/grants/programs/agriculture-food-research-initiative/afri-fase-epscor-program",
     "featured": false
   },
@@ -3890,15 +5072,58 @@
     "shortName": "NIH INBRE State Opportunities",
     "sponsor": "National Institutes of Health (NIH / NIGMS)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty", "PhD Students", "Master's Students", "Undergraduate Students", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Master's Students",
+      "Undergraduate Students",
+      "Postdocs"
+    ],
     "whoFor": "Faculty and students in IDeA states seeking locally administered biomedical research, mentoring, pilot funding, core access, and training",
     "deadline": "Varies by each state's active INBRE network and local call",
     "deadlineMonth": 0,
     "amount": "Varies by state network; commonly includes faculty pilot awards, student research stipends, mentoring, and shared research infrastructure",
     "summary": "INBRE supports a statewide network in every IDeA state and Puerto Rico. CS researchers can participate through bioinformatics, biomedical data science, health AI, imaging, computational biology, software, and research cyberinfrastructure projects.",
-    "eligibility": ["Applicant must meet the rules of an active INBRE network in an IDeA-eligible jurisdiction", "Local calls often prioritize network and primarily undergraduate institutions", "Research must be relevant to biomedical or behavioral science"],
-    "topics": ["Biomedical AI", "Bioinformatics", "Health Data Science", "Computational Biology", "Imaging", "Research Infrastructure", "State-Specific"],
-    "locations": ["Alaska", "Arkansas", "Delaware", "Hawaii", "Idaho", "Kansas", "Kentucky", "Louisiana", "Maine", "Mississippi", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Mexico", "North Dakota", "Oklahoma", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Vermont", "West Virginia", "Wyoming"],
+    "eligibility": [
+      "Applicant must meet the rules of an active INBRE network in an IDeA-eligible jurisdiction",
+      "Local calls often prioritize network and primarily undergraduate institutions",
+      "Research must be relevant to biomedical or behavioral science"
+    ],
+    "topics": [
+      "Biomedical AI",
+      "Bioinformatics",
+      "Health Data Science",
+      "Computational Biology",
+      "Imaging",
+      "Research Infrastructure",
+      "State-Specific"
+    ],
+    "locations": [
+      "Alaska",
+      "Arkansas",
+      "Delaware",
+      "Hawaii",
+      "Idaho",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Mississippi",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Mexico",
+      "North Dakota",
+      "Oklahoma",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Vermont",
+      "West Virginia",
+      "Wyoming"
+    ],
     "url": "https://nigms.nih.gov/Research/DRCB/IDeA/Pages/INBRE",
     "featured": true
   },
@@ -3908,15 +5133,55 @@
     "shortName": "NIH IDeA COBRE",
     "sponsor": "National Institutes of Health (NIH / NIGMS)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty", "Postdocs"],
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
     "whoFor": "Institutions and faculty teams in IDeA states building biomedical research centers, faculty pipelines, and research cores",
     "deadline": "COBRE-D: September 25, 2026 and January 25, 2027; later cycles follow the current NIH notices",
     "deadlineMonth": 9,
     "amount": "Large multi-year center awards; budgets and phase-specific limits are defined in the current COBRE-D, COBRE-E, and COBRE-S notices",
     "summary": "Builds or expands institutional biomedical research centers through early-career faculty recruitment and development, research projects, shared facilities, and sustainable core infrastructure. Computational health, biomedical AI, bioinformatics, and data-science centers can fit when scientifically grounded.",
-    "eligibility": ["Limited competition for eligible institutions in IDeA states and Puerto Rico", "Institution and active-COBRE caps apply", "Development, expansion, and sustainability phases have distinct eligibility requirements"],
-    "topics": ["Biomedical AI", "Bioinformatics", "Health Data Science", "Computational Biology", "Research Infrastructure", "Faculty Development", "IDeA"],
-    "locations": ["Alaska", "Arkansas", "Delaware", "Hawaii", "Idaho", "Kansas", "Kentucky", "Louisiana", "Maine", "Mississippi", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Mexico", "North Dakota", "Oklahoma", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Vermont", "West Virginia", "Wyoming"],
+    "eligibility": [
+      "Limited competition for eligible institutions in IDeA states and Puerto Rico",
+      "Institution and active-COBRE caps apply",
+      "Development, expansion, and sustainability phases have distinct eligibility requirements"
+    ],
+    "topics": [
+      "Biomedical AI",
+      "Bioinformatics",
+      "Health Data Science",
+      "Computational Biology",
+      "Research Infrastructure",
+      "Faculty Development",
+      "IDeA"
+    ],
+    "locations": [
+      "Alaska",
+      "Arkansas",
+      "Delaware",
+      "Hawaii",
+      "Idaho",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Mississippi",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Mexico",
+      "North Dakota",
+      "Oklahoma",
+      "Puerto Rico",
+      "Rhode Island",
+      "South Carolina",
+      "South Dakota",
+      "Vermont",
+      "West Virginia",
+      "Wyoming"
+    ],
     "url": "https://nigms.nih.gov/Research/DRCB/IDeA/Pages/COBRE",
     "featured": false
   },
@@ -3926,14 +5191,29 @@
     "shortName": "DoD DURIP",
     "sponsor": "U.S. Department of Defense (AFOSR, ARO, ONR)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "University faculty seeking research equipment or instrumentation for defense-relevant science and engineering",
     "deadline": "November 6, 2026",
     "deadlineMonth": 11,
     "amount": "$50,000 to $7,000,000 under the AFOSR announcement; service-specific limits may differ",
     "summary": "Funds acquisition of research equipment that expands a US university's ability to conduct defense-relevant research and educate scientists and engineers, including computing, networking, autonomy, cyber, AI, and quantum infrastructure.",
-    "eligibility": ["Accredited US public or private institution of higher education", "Equipment must support research and education relevant to national defense", "For-profit organizations are not eligible"],
-    "topics": ["Research Equipment", "Cybersecurity", "AI/ML", "Autonomous Systems", "Networks", "Quantum", "HPC", "National Security"],
+    "eligibility": [
+      "Accredited US public or private institution of higher education",
+      "Equipment must support research and education relevant to national defense",
+      "For-profit organizations are not eligible"
+    ],
+    "topics": [
+      "Research Equipment",
+      "Cybersecurity",
+      "AI/ML",
+      "Autonomous Systems",
+      "Networks",
+      "Quantum",
+      "HPC",
+      "National Security"
+    ],
     "url": "https://simpler.grants.gov/opportunity/84c7f111-baf9-4729-8daf-eb09376a6d45",
     "featured": true
   },
@@ -3943,14 +5223,30 @@
     "shortName": "DoD HBCU/TCU Equipment",
     "sponsor": "U.S. Department of Defense (Army Research Laboratory)",
     "sponsorCategory": "Government",
-    "targetAudience": ["Faculty"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Faculty at eligible HBCUs and Tribal Colleges or Universities building defense-relevant STEM research and education capabilities",
     "deadline": "October 9, 2026",
     "deadlineMonth": 10,
     "amount": "$200,000 to $1,500,000 for equipment or instrumentation",
     "summary": "Supports acquisition of equipment that creates or expands research capabilities aligned with DoD interests and strengthens student participation in defense-relevant STEM fields, including computer science and engineering.",
-    "eligibility": ["Applicant must meet the federal definition of an HBCU or Tribal College or University", "Request must be for equipment or instrumentation rather than student support", "Proposal must explain alignment with DoD research interests and impact on student research participation"],
-    "topics": ["Research Equipment", "Cybersecurity", "AI/ML", "Autonomous Systems", "Networks", "Quantum", "HPC", "HBCU", "Tribal Colleges"],
+    "eligibility": [
+      "Applicant must meet the federal definition of an HBCU or Tribal College or University",
+      "Request must be for equipment or instrumentation rather than student support",
+      "Proposal must explain alignment with DoD research interests and impact on student research participation"
+    ],
+    "topics": [
+      "Research Equipment",
+      "Cybersecurity",
+      "AI/ML",
+      "Autonomous Systems",
+      "Networks",
+      "Quantum",
+      "HPC",
+      "HBCU",
+      "Tribal Colleges"
+    ],
     "url": "https://simpler.grants.gov/opportunity/21fbbec4-85d7-43b9-b481-86bbf46b845b",
     "featured": true
   },
@@ -3960,14 +5256,29 @@
     "shortName": "Google Faculty Research Awards",
     "sponsor": "Google Research",
     "sponsorCategory": "Industry",
-    "targetAudience": ["Faculty", "PhD Students"],
+    "targetAudience": [
+      "Faculty",
+      "PhD Students"
+    ],
     "whoFor": "Faculty worldwide whose proposals aligned with Google's computer science research interests",
     "deadline": "Inactive / Historical (deprecated in 2019)",
     "deadlineMonth": 0,
     "amount": "One-year university research gifts; commonly supported a graduate student working with the faculty PI",
     "summary": "Google's former open-call faculty program supported more than 2,000 academics at roughly 400 universities in over 50 countries before being replaced by newer faculty-engagement programs.",
-    "eligibility": ["Faculty member at an eligible university during an open annual call", "Proposal aligned with a published Google research area", "Award was made to the university rather than directly to the investigator"],
-    "topics": ["AI/ML", "Systems", "Security & Privacy", "HCI", "Theory & Algorithms", "Networking", "Historical Programs"],
+    "eligibility": [
+      "Faculty member at an eligible university during an open annual call",
+      "Proposal aligned with a published Google research area",
+      "Award was made to the university rather than directly to the investigator"
+    ],
+    "topics": [
+      "AI/ML",
+      "Systems",
+      "Security & Privacy",
+      "HCI",
+      "Theory & Algorithms",
+      "Networking",
+      "Historical Programs"
+    ],
     "url": "https://research.google/programs-and-events/past-programs/faculty-research-awards/",
     "status": "historical",
     "featured": false
@@ -3978,14 +5289,29 @@
     "shortName": "Yahoo FREP",
     "sponsor": "Yahoo Research",
     "sponsorCategory": "Industry",
-    "targetAudience": ["Faculty", "PhD Students"],
+    "targetAudience": [
+      "Faculty",
+      "PhD Students"
+    ],
     "whoFor": "University faculty collaborating with Yahoo scientists on internet and computing research",
     "deadline": "Inactive / Historical (founded 2012; confirmed awards through 2019)",
     "deadlineMonth": 0,
     "amount": "Research grant; amount varied by annual call and was not consistently published",
     "summary": "Historical faculty collaboration program that funded professors and students in machine learning, distributed systems, security, recommendation, multimedia, and related internet research.",
-    "eligibility": ["Faculty-led university proposal", "Research aligned with Yahoo Research interests", "Collaboration with Yahoo research scientists was central to the program"],
-    "topics": ["AI/ML", "Distributed Systems", "Security & Privacy", "Recommender Systems", "Multimedia", "Internet Research", "Historical Programs"],
+    "eligibility": [
+      "Faculty-led university proposal",
+      "Research aligned with Yahoo Research interests",
+      "Collaboration with Yahoo research scientists was central to the program"
+    ],
+    "topics": [
+      "AI/ML",
+      "Distributed Systems",
+      "Security & Privacy",
+      "Recommender Systems",
+      "Multimedia",
+      "Internet Research",
+      "Historical Programs"
+    ],
     "url": "https://yahooresearch.tumblr.com/post/187608558221/congratulations-2019-faculty-and-research",
     "status": "historical",
     "featured": false
@@ -3996,14 +5322,29 @@
     "shortName": "HP Labs IRP",
     "sponsor": "HP Labs",
     "sponsorCategory": "Industry",
-    "targetAudience": ["Faculty", "PhD Students"],
+    "targetAudience": [
+      "Faculty",
+      "PhD Students"
+    ],
     "whoFor": "Faculty-led academic teams proposing collaborative projects with HP Labs",
     "deadline": "Inactive / Historical (annual program launched in 2008)",
     "deadlineMonth": 0,
     "amount": "Up to $100,000 per academic year, formerly renewable for up to three years",
     "summary": "Historical global open-innovation call that paired university investigators and graduate students with HP Labs researchers on published computing and technology topics.",
-    "eligibility": ["Faculty PI at a university", "Proposal addressed an HP Labs topic and identified a collaborative project", "Funding was primarily intended to support a graduate student working with the PI"],
-    "topics": ["Systems", "Cloud Computing", "Data Science", "Security", "Networking", "Sustainable Computing", "Historical Programs"],
+    "eligibility": [
+      "Faculty PI at a university",
+      "Proposal addressed an HP Labs topic and identified a collaborative project",
+      "Funding was primarily intended to support a graduate student working with the PI"
+    ],
+    "topics": [
+      "Systems",
+      "Cloud Computing",
+      "Data Science",
+      "Security",
+      "Networking",
+      "Sustainable Computing",
+      "Historical Programs"
+    ],
     "url": "https://shiftleft.com/mirrors/www.hpl.hp.com/news/2012/jan-mar/pdf/HPL_AR_2011_web.pdf",
     "status": "historical",
     "featured": false
@@ -4014,14 +5355,27 @@
     "shortName": "Microsoft Dissertation Grant",
     "sponsor": "Microsoft Research",
     "sponsorCategory": "Industry",
-    "targetAudience": ["PhD Students"],
+    "targetAudience": [
+      "PhD Students"
+    ],
     "whoFor": "Doctoral students from groups historically underrepresented in computing at North American universities",
     "deadline": "Inactive / Historical (documented 2017–2019 program)",
     "deadlineMonth": 0,
     "amount": "Up to $25,000 toward dissertation research in the documented 2019 cycle",
     "summary": "Historical dissertation-stage grant designed to broaden participation in computing research by helping doctoral students complete research and move toward academic careers.",
-    "eligibility": ["Doctoral student at a North American university under the historical rules", "Member of a group underrepresented in computing", "Dissertation research aligned with computer science or a closely related field"],
-    "topics": ["Dissertation Research", "Broadening Participation", "AI/ML", "Systems", "HCI", "Historical Programs"],
+    "eligibility": [
+      "Doctoral student at a North American university under the historical rules",
+      "Member of a group underrepresented in computing",
+      "Dissertation research aligned with computer science or a closely related field"
+    ],
+    "topics": [
+      "Dissertation Research",
+      "Broadening Participation",
+      "AI/ML",
+      "Systems",
+      "HCI",
+      "Historical Programs"
+    ],
     "url": "https://www.microsoft.com/en-us/research/blog/announcing-the-2019-microsoft-research-dissertation-grant-recipients/",
     "status": "historical",
     "featured": false
@@ -4032,14 +5386,27 @@
     "shortName": "Facebook Emerging Scholar Award",
     "sponsor": "Facebook Research (now Meta)",
     "sponsorCategory": "Industry",
-    "targetAudience": ["PhD Students"],
+    "targetAudience": [
+      "PhD Students"
+    ],
     "whoFor": "Early-stage PhD students from groups historically underrepresented in computer science and engineering",
     "deadline": "Inactive / Historical (2017-era program)",
     "deadlineMonth": 0,
     "amount": "Two academic years of tuition, a $37,000 annual stipend, and up to $5,000 for conference travel under the historical call",
     "summary": "Historical Facebook fellowship-track award intended to encourage talented underrepresented students to continue doctoral study and pursue innovative computing research.",
-    "eligibility": ["Enrolled early in a PhD program during the historical competition", "Studying computer science, computer engineering, electrical engineering, systems architecture, or a related field", "Program focused on students from underrepresented groups"],
-    "topics": ["AI/ML", "Systems", "Computer Engineering", "Broadening Participation", "Doctoral Research", "Historical Programs"],
+    "eligibility": [
+      "Enrolled early in a PhD program during the historical competition",
+      "Studying computer science, computer engineering, electrical engineering, systems architecture, or a related field",
+      "Program focused on students from underrepresented groups"
+    ],
+    "topics": [
+      "AI/ML",
+      "Systems",
+      "Computer Engineering",
+      "Broadening Participation",
+      "Doctoral Research",
+      "Historical Programs"
+    ],
     "url": "https://research.facebook.com/fellowship/",
     "status": "historical",
     "featured": false
@@ -4050,14 +5417,25 @@
     "shortName": "Turing Award",
     "sponsor": "Association for Computing Machinery (ACM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Researchers"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Researchers with a lasting, trend-setting technical contribution to computing",
     "deadline": "January (Annual nomination cycle; verify current date)",
     "deadlineMonth": 1,
     "amount": "$1,000,000 prize, with financial support from Google",
     "summary": "ACM's oldest and most prestigious award recognizes a technical achievement of lasting and major importance to the computing field.",
-    "eligibility": ["Nomination by others; no self-nominations", "ACM membership is not required", "Nomination must identify a particular outstanding and trend-setting technical achievement"],
-    "topics": ["Lifetime Achievement", "Computer Science", "Technical Impact", "Research Honors"],
+    "eligibility": [
+      "Nomination by others; no self-nominations",
+      "ACM membership is not required",
+      "Nomination must identify a particular outstanding and trend-setting technical achievement"
+    ],
+    "topics": [
+      "Lifetime Achievement",
+      "Computer Science",
+      "Technical Impact",
+      "Research Honors"
+    ],
     "url": "https://awards.acm.org/turing",
     "featured": true
   },
@@ -4067,14 +5445,26 @@
     "shortName": "ACM Software System Award",
     "sponsor": "Association for Computing Machinery (ACM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Researchers"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Individuals or institutions that developed a software system with lasting influence",
     "deadline": "January (Annual nomination cycle; verify current date)",
     "deadlineMonth": 1,
     "amount": "$35,000 prize, with financial support from IBM",
     "summary": "Recognizes a software system whose lasting influence is reflected in contributions to concepts, commercial acceptance, or both.",
-    "eligibility": ["Third-party nomination through ACM", "May recognize an individual, team, or institution", "System must demonstrate sustained conceptual or practical influence"],
-    "topics": ["Software Systems", "Programming Languages", "Open Source", "Systems", "Research Honors"],
+    "eligibility": [
+      "Third-party nomination through ACM",
+      "May recognize an individual, team, or institution",
+      "System must demonstrate sustained conceptual or practical influence"
+    ],
+    "topics": [
+      "Software Systems",
+      "Programming Languages",
+      "Open Source",
+      "Systems",
+      "Research Honors"
+    ],
     "url": "https://awards.acm.org/software-system",
     "featured": true
   },
@@ -4084,14 +5474,27 @@
     "shortName": "Gordon Bell Prize",
     "sponsor": "Association for Computing Machinery (ACM)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Researchers", "PhD Students"],
+    "targetAudience": [
+      "Faculty",
+      "PhD Students"
+    ],
     "whoFor": "Research teams demonstrating outstanding achievement in high-performance computing applications",
     "deadline": "Varies with the annual SC conference submission cycle",
     "deadlineMonth": 4,
     "amount": "$10,000 prize",
     "summary": "Annual honor for innovative applications of high-performance computing, typically emphasizing major performance advances and important scientific or engineering results.",
-    "eligibility": ["Work is evaluated through the annual Gordon Bell/SC submission process", "Team-based nominations and papers are common", "Results must demonstrate exceptional HPC achievement"],
-    "topics": ["HPC", "Parallel Computing", "Scientific Computing", "Supercomputing", "Research Honors"],
+    "eligibility": [
+      "Work is evaluated through the annual Gordon Bell/SC submission process",
+      "Team-based nominations and papers are common",
+      "Results must demonstrate exceptional HPC achievement"
+    ],
+    "topics": [
+      "HPC",
+      "Parallel Computing",
+      "Scientific Computing",
+      "Supercomputing",
+      "Research Honors"
+    ],
     "url": "https://awards.acm.org/bell",
     "featured": false
   },
@@ -4101,14 +5504,26 @@
     "shortName": "Eckert-Mauchly Award",
     "sponsor": "ACM and IEEE Computer Society",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Researchers"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Researchers with major contributions to computer and digital systems architecture",
     "deadline": "Typically October (Annual nomination; verify current date)",
     "deadlineMonth": 10,
     "amount": "$5,000 prize",
     "summary": "Joint ACM–IEEE Computer Society honor for outstanding contributions to the hardware-software design and analysis of computer and digital systems architecture.",
-    "eligibility": ["Third-party nomination", "Recognizes sustained or seminal impact in computer architecture", "Award may recognize contributors from academia or industry"],
-    "topics": ["Computer Architecture", "Hardware Systems", "Processors", "Memory Systems", "Research Honors"],
+    "eligibility": [
+      "Third-party nomination",
+      "Recognizes sustained or seminal impact in computer architecture",
+      "Award may recognize contributors from academia or industry"
+    ],
+    "topics": [
+      "Computer Architecture",
+      "Hardware Systems",
+      "Processors",
+      "Memory Systems",
+      "Research Honors"
+    ],
     "url": "https://awards.acm.org/eckert-mauchly",
     "featured": true
   },
@@ -4118,14 +5533,25 @@
     "shortName": "Knuth Prize",
     "sponsor": "ACM SIGACT and IEEE TCMF",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Researchers"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Researchers with sustained, high-impact contributions to the foundations of computer science",
     "deadline": "July 1, 2026 for the documented cycle; annual nominations",
     "deadlineMonth": 7,
     "amount": "Prize and invited lecture at STOC or FOCS",
     "summary": "Annual theory honor for major research accomplishments over an extended period, with attention to seminal foundational work and potentially educational contributions.",
-    "eligibility": ["Anyone in the theoretical computer science community may nominate", "Award is made to one individual, not a group", "Recent nominations remain under consideration for five years"],
-    "topics": ["Theory & Algorithms", "Foundations of Computing", "Complexity Theory", "Research Honors"],
+    "eligibility": [
+      "Anyone in the theoretical computer science community may nominate",
+      "Award is made to one individual, not a group",
+      "Recent nominations remain under consideration for five years"
+    ],
+    "topics": [
+      "Theory & Algorithms",
+      "Foundations of Computing",
+      "Complexity Theory",
+      "Research Honors"
+    ],
     "url": "https://www.sigact.sigact.hosting.acm.org/prizes/knuth.html",
     "featured": true
   },
@@ -4135,14 +5561,27 @@
     "shortName": "Gödel Prize",
     "sponsor": "ACM SIGACT and EATCS",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Researchers", "PhD Students"],
+    "targetAudience": [
+      "Faculty",
+      "PhD Students"
+    ],
     "whoFor": "Authors of outstanding papers in theoretical computer science",
     "deadline": "Annual nomination cycle; the 2026 cycle is closed",
     "deadlineMonth": 0,
     "amount": "$5,000 prize shared among the authors",
     "summary": "Annual ACM SIGACT–EATCS prize recognizing exceptional theoretical computer science papers, presented alternately at STOC and ICALP.",
-    "eligibility": ["Nominated work must meet the cycle's publication-window rules", "Award recognizes a paper or connected body of papers", "Authors share the prize"],
-    "topics": ["Theory & Algorithms", "Complexity Theory", "Mathematical Foundations", "Research Papers", "Research Honors"],
+    "eligibility": [
+      "Nominated work must meet the cycle's publication-window rules",
+      "Award recognizes a paper or connected body of papers",
+      "Authors share the prize"
+    ],
+    "topics": [
+      "Theory & Algorithms",
+      "Complexity Theory",
+      "Mathematical Foundations",
+      "Research Papers",
+      "Research Honors"
+    ],
     "url": "https://sigact.sigact.hosting.acm.org/prizes/g%C3%B6del.html",
     "featured": true
   },
@@ -4152,14 +5591,27 @@
     "shortName": "IMU Abacus Medal",
     "sponsor": "International Mathematical Union (IMU)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Researchers"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Researchers under the award's age threshold with outstanding contributions to mathematical aspects of information science",
     "deadline": "Every four years before the International Congress of Mathematicians; 2026 nominations closed",
     "deadlineMonth": 0,
     "amount": "Gold medal and €10,000",
     "summary": "Prestigious quadrennial honor covering mathematical computer science, algorithms, complexity, cryptography, computer vision, information processing, scientific computing, optimization, and related areas.",
-    "eligibility": ["Recipient's 40th birthday must not occur before January 1 of the ICM award year", "Confidential third-party nomination; self-nominations are strongly discouraged", "Award is presented at the International Congress of Mathematicians"],
-    "topics": ["Theory & Algorithms", "Cryptography", "Scientific Computing", "Optimization", "Mathematical Foundations", "Research Honors"],
+    "eligibility": [
+      "Recipient's 40th birthday must not occur before January 1 of the ICM award year",
+      "Confidential third-party nomination; self-nominations are strongly discouraged",
+      "Award is presented at the International Congress of Mathematicians"
+    ],
+    "topics": [
+      "Theory & Algorithms",
+      "Cryptography",
+      "Scientific Computing",
+      "Optimization",
+      "Mathematical Foundations",
+      "Research Honors"
+    ],
     "url": "https://www.mathunion.org/imu-awards/imu-abacus-medal",
     "featured": true
   },
@@ -4169,15 +5621,86 @@
     "shortName": "IEEE von Neumann Medal",
     "sponsor": "Institute of Electrical and Electronics Engineers (IEEE)",
     "sponsorCategory": "Professional Society",
-    "targetAudience": ["Faculty", "Researchers"],
+    "targetAudience": [
+      "Faculty"
+    ],
     "whoFor": "Researchers with outstanding achievements in computer-related science and technology",
     "deadline": "June 15 (Annual IEEE Medals nomination cycle; endorsements due July 1)",
     "deadlineMonth": 6,
     "amount": "IEEE medal and major professional recognition",
     "summary": "One of IEEE's top-tier medals, recognizing exceptional achievements across the broad span of computer-related science and technology.",
-    "eligibility": ["Third-party nomination; self-nominations are not permitted", "Nominations use the IEEE Awards portal", "Recognizes a record of outstanding technical achievement"],
-    "topics": ["Computer Science", "Computer Engineering", "Technical Achievement", "Lifetime Achievement", "Research Honors"],
+    "eligibility": [
+      "Third-party nomination; self-nominations are not permitted",
+      "Nominations use the IEEE Awards portal",
+      "Recognizes a record of outstanding technical achievement"
+    ],
+    "topics": [
+      "Computer Science",
+      "Computer Engineering",
+      "Technical Achievement",
+      "Lifetime Achievement",
+      "Research Honors"
+    ],
     "url": "https://corporate-awards.ieee.org/award/ieee-john-von-neumann-medal/",
+    "featured": true
+  },
+  {
+    "id": "google-academic-research-awards",
+    "name": "Google Academic Research Awards (GARA)",
+    "shortName": "Google Academic Research Awards",
+    "sponsor": "Google Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty and principal investigators conducting foundational and applied research in computer science and technology",
+    "deadline": "Annual Call for Proposals (typically August)",
+    "deadlineMonth": 8,
+    "amount": "Up to 00,000 unrestricted research gift",
+    "summary": "Supports foundational and applied computer science research in key technical focus areas (such as quantum computing, security, and AI), pairing academic PIs with Google research sponsors.",
+    "eligibility": [
+      "Full-time assistant, associate, or full professor at an accredited degree-granting university",
+      "Must advise graduate or undergraduate students and actively conduct computing research",
+      "Maximum of 1 proposal submission per principal investigator per funding cycle"
+    ],
+    "topics": [
+      "AI/ML",
+      "Quantum",
+      "Security",
+      "Systems",
+      "Theory"
+    ],
+    "url": "https://research.google/programs-and-events/google-academic-research-awards/",
+    "featured": true
+  },
+  {
+    "id": "microsoft-accelerating-foundation-models",
+    "name": "Microsoft Research Accelerating Foundation Models Research (AFMR)",
+    "shortName": "MSR AFMR Grants",
+    "sponsor": "Microsoft Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Postdocs"
+    ],
+    "whoFor": "Academic faculty and research teams exploring foundation models, AI alignment, application safety, and scientific discovery",
+    "deadline": "Rolling / Periodic RFP Calls",
+    "deadlineMonth": 0,
+    "amount": "Azure cloud compute credits, Azure OpenAI API model access (GPT-4), open-source model resources, and MSR research engagement",
+    "summary": "Provides academic researchers with hosted access to foundation models and Azure cloud computing resources to advance research in AI alignment, safety, interdisciplinary applications, and automated scientific discovery.",
+    "eligibility": [
+      "Affiliated with an accredited academic or non-profit research institution",
+      "Proposals evaluated on technical merit, alignment with responsible AI principles, and public dissemination plan"
+    ],
+    "topics": [
+      "AI/ML",
+      "AI Safety & Ethics",
+      "Systems",
+      "NLP",
+      "Interdisciplinary"
+    ],
+    "url": "https://www.microsoft.com/en-us/research/academic-program/accelerating-foundation-models-research/",
     "featured": true
   }
 ]
