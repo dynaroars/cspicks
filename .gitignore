@@ -24,6 +24,8 @@ dist-ssr
 *.sw?
 # Data
 public/data/*.csv
+public/schools/
+public/areas/
 remote_history.json
 debug_gmu_history.js
 .nsf-sync-cache.json

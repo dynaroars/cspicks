@@ -1,6 +1,6 @@
 import he from 'he';
 import { schoolAliases } from './data.js';
-import { areaLabels, cleanName, countryFlag, escapeHtml, getConferenceLabel, getInstitutionShortName, safeExternalUrl } from './shared.js';
+import { areaLabels, cleanName, countryFlag, escapeHtml, getConferenceLabel, getInstitutionShortName, safeExternalUrl, slugify } from './shared.js';
 import type { AffiliationHistory, AreaStats, FilteredData, FilteredProfessor, FilteredSchool, RawData, SchoolAliasMap, SchoolAreaStats } from './types.js';
 
 export interface CardContext {
@@ -258,7 +258,7 @@ export function renderSchoolCard(school: FilteredSchool, filterArea: string | nu
 
   return `<div class="card${exact ? '' : ' collapsed'}" data-name="${escapeHtml(school.name)}">
     <${headerTag} class="card-header" ${headerAttributes}><h2>${rankPrefix}${countryFlag(school.country, school.countryName)}${escapeHtml(context.compactNames ? getInstitutionShortName(school.name) : school.name)}${badges}</h2></${headerTag}>
-    <div class="card-content">${institutionMetadata || departmentHomepage !== '#' ? `<div class="school-metadata">${institutionMetadata ? `<span>${escapeHtml(institutionMetadata)}</span>` : ''}${departmentHomepage !== '#' ? `<a href="${escapeHtml(departmentHomepage)}" target="_blank" rel="noopener noreferrer">Department website</a>` : ''}</div>` : ''}${filterArea ? '' : renderFacultyRoster(school, context)}<div class="stats-list">${sortedAreas.map(([area, data]) => {
+    <div class="card-content">${institutionMetadata || departmentHomepage !== '#' ? `<div class="school-metadata">${institutionMetadata ? `<span>${escapeHtml(institutionMetadata)}</span>` : ''}${departmentHomepage !== '#' ? `<a href="${escapeHtml(departmentHomepage)}" target="_blank" rel="noopener noreferrer">Department website</a>` : ''}<a href="/schools/${slugify(school.name)}/">Overview page</a></div>` : `<div class="school-metadata"><a href="/schools/${slugify(school.name)}/">Overview page</a></div>`}${filterArea ? '' : renderFacultyRoster(school, context)}<div class="stats-list">${sortedAreas.map(([area, data]) => {
       const prefix = filterArea || !context.showRankings ? '' : (school.areaRanks?.[area] ? `${school.areaRanks[area]}. ` : '');
       const label = areaLabels[area] || getConferenceLabel(area);
       // Each name carries what that person published *in this area*, not their

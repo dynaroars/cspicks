@@ -18,8 +18,9 @@
     "compact:history": "node scripts/compact-openalex-history.mjs",
     "sync:nsf:rebuild": "node scripts/sync-nsf-awards.mjs --all-us --cache-only",
     "og:image": "node scripts/generate-og-image.mjs",
-    "sitemap": "node scripts/generate-sitemap.mjs",
-    "build": "vite build",
+    "sitemap": "node --import tsx scripts/generate-sitemap.mjs",
+    "generate:seo": "node --import tsx scripts/generate-seo-pages.mjs",
+    "build": "vite build && node --import tsx scripts/generate-seo-pages.mjs",
     "postbuild": "rm -f dist/professor_history_openalex.json dist/school-aliases.json && rm -rf dist/data",
     "preview": "vite preview"
   },

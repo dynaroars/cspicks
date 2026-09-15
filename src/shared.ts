@@ -234,7 +234,14 @@ export function cleanName(name: string) {
   return name.replace(/\s+\d+$/, '');
 }
 
-const institutionShortNames: Record<string, string> = {
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+export const institutionShortNames: Record<string, string> = {
   // Keys are CSRankings' own spellings, which are not always the institution's
   // canonical name ("Univ. of California - Berkeley", not "University of
   // California, Berkeley"). Every key here is verified to exist in the roster;
