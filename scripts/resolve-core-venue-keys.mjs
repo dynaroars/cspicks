@@ -4,21 +4,32 @@
  *
  * EXPANSION_PLAN.md Step 1.3: automatically resolve each CORE-only venue
  * acronym (from scripts/data/core-extra-venues.json) to its DBLP stream key,
- * without hand-verification. Chain of independent signals, each only
- * handing off to the next when it can't resolve confidently:
+ * without hand-verification.
  *
- *   1. Wikidata "DBLP venue ID" (P8926) — primary. Looked up via the plain
- *      REST API (wbsearchentities + wbgetentities), not the SPARQL query
- *      service, because in practice the REST endpoints have proven far more
- *      reliable to reach than query.wikidata.org's SPARQL endpoint.
- *   2. DBLP venue-search API (dblp.org/search/venue/api) — fallback for
- *      anything Wikidata doesn't have a P8926 claim for.
- *   3. DBLP existence/activity check — confirm the resolved key actually has
- *      a live, multi-year index page on DBLP.
+ * Resolution source: Wikidata's "DBLP venue ID" (P8926) claim, looked up via
+ * the plain REST API (wbsearchentities + wbgetentities) — the SPARQL query
+ * service proved less reliable to reach in practice, so the plain REST
+ * endpoints are used instead.
  *
- * Anything that fails every signal is written to the `unresolved` list
- * rather than guessed at — dropped from this round of the expansion, not
- * blocking it.
+ * This deliberately does NOT query dblp.org itself. dblp.org runs "Anubis",
+ * an anti-bot proof-of-work wall that returns an explicit Access Denied page
+ * to headless/scripted clients (confirmed while building this — plain
+ * fetch() gets connection resets, and a real headless Chromium context gets
+ * an explicit Anubis denial page rather than DBLP content). That's a
+ * deliberate access control DBLP put up specifically to stop scripted
+ * querying, so this script does not attempt to evade it (no fingerprint
+ * spoofing, no stealth-automation workarounds) — DBLP already publishes a
+ * sanctioned bulk-access channel for exactly this kind of use: the full
+ * `dblp.xml.gz` dump. EXPANSION_PLAN.md Step 2 downloads that dump anyway to
+ * build the actual publication-count dataset, so the "does this resolved key
+ * really exist, and does it have real volume" cross-check that would
+ * otherwise need a live DBLP existence check is folded into that same dump
+ * pass instead (see Step 2) — free byproduct of the one download, no second
+ * network dependency on dblp.org at all.
+ *
+ * Anything Wikidata can't resolve confidently is written to `unresolved`
+ * with reason `no-wikidata-signal` and picked up by Step 2's dump-based
+ * cross-check, not guessed at here.
  *
  * Usage: node scripts/resolve-core-venue-keys.mjs
  * Input:  scripts/data/core-extra-venues.json
@@ -32,15 +43,13 @@ const INPUT = fileURLToPath(new URL('data/core-extra-venues.json', import.meta.u
 const OUTPUT = fileURLToPath(new URL('data/core-venue-dblp-keys.json', import.meta.url));
 
 const WIKIDATA_SEARCH_DELAY_MS = 400;
-const DBLP_SEARCH_DELAY_MS = 1200; // dblp.org rate-limits bursts; match src/dblp.ts's pacing
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /** Fetch with retries + backoff; returns null (not a throw) if every attempt fails,
- *  since some upstream services in this pipeline are known to be flaky/unreachable
- *  from certain networks, and a single dead lookup must not kill the whole run. */
+ *  since a single dead lookup must not kill the whole run. */
 async function fetchJsonWithRetry(url, { attempts = 3, timeoutMs = 15000 } = {}) {
   for (let attempt = 1; attempt <= attempts; attempt++) {
     const controller = new AbortController();
@@ -62,7 +71,10 @@ async function fetchJsonWithRetry(url, { attempts = 3, timeoutMs = 15000 } = {})
   return null;
 }
 
-/** Step 1: Wikidata P8926 lookup via the REST API. */
+/** Wikidata P8926 lookup via the REST API. Returns `null` if the acronym
+ *  matched nothing on Wikidata at all; `{ ambiguous, candidates }` if
+ *  multiple unrelated venues share the acronym and can't be disambiguated
+ *  automatically; otherwise a resolved `{ dblpKey, ... }`. */
 async function resolveViaWikidata(acronym) {
   const searchUrl = `https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${encodeURIComponent(acronym)}&language=en&format=json&limit=10`;
   const searchData = await fetchJsonWithRetry(searchUrl);
@@ -119,98 +131,27 @@ async function resolveViaWikidata(acronym) {
   return { ambiguous: true, candidates: pool };
 }
 
-/** Step 2: DBLP's own venue-search API, scored by title similarity. */
-function tokenize(text) {
-  return new Set(String(text || '').toLowerCase().match(/[a-z0-9]+/g) || []);
-}
-
-function jaccardSimilarity(a, b) {
-  const setA = tokenize(a);
-  const setB = tokenize(b);
-  if (!setA.size || !setB.size) return 0;
-  let intersection = 0;
-  for (const token of setA) if (setB.has(token)) intersection++;
-  return intersection / (setA.size + setB.size - intersection);
-}
-
-async function resolveViaDblpSearch(acronym, fullName) {
-  const query = fullName || acronym;
-  const url = `https://dblp.org/search/venue/api?q=${encodeURIComponent(query)}&format=json&h=20`;
-  const data = await fetchJsonWithRetry(url, { attempts: 2, timeoutMs: 10000 });
-  const hits = data?.result?.hits?.hit || [];
-  if (!hits.length) return null;
-
-  const scored = hits
-    .map(hit => {
-      const info = hit.info || {};
-      const urlPath = String(info.url || '');
-      const keyMatch = urlPath.match(/\/db\/(conf|journals)\/([^/]+)\//);
-      if (!keyMatch) return null;
-      return {
-        dblpKey: `${keyMatch[1]}/${keyMatch[2]}`,
-        kind: keyMatch[1],
-        venueTitle: info.venue,
-        similarity: jaccardSimilarity(fullName || acronym, info.venue)
-      };
-    })
-    .filter(Boolean)
-    .sort((a, b) => b.similarity - a.similarity);
-
-  const best = scored[0];
-  if (!best || best.similarity < 0.5) return null;
-  return { ...best, confidence: 'dblp-search' };
-}
-
-/** Step 3: confirm the resolved key is a real, multi-edition DBLP stream. */
-async function checkDblpExistence(dblpKey) {
-  const url = `https://dblp.org/db/${dblpKey}/`;
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 10000);
-  try {
-    const res = await fetch(url, { signal: controller.signal });
-    clearTimeout(timer);
-    return res.ok;
-  } catch {
-    clearTimeout(timer);
-    return null; // null = "couldn't check", distinct from false = "checked, doesn't exist"
-  }
-}
-
 async function main() {
   const input = JSON.parse(await readFile(INPUT, 'utf-8'));
   const results = {};
   const unresolved = [];
-  let dblpUnreachableCount = 0;
 
   for (const { acronym, area, tier } of input.extraVenues) {
     await sleep(WIKIDATA_SEARCH_DELAY_MS);
-    let resolution = await resolveViaWikidata(acronym);
+    const resolution = await resolveViaWikidata(acronym);
 
     if (resolution?.ambiguous) {
       unresolved.push({ acronym, reason: 'ambiguous-wikidata-matches', candidates: resolution.candidates });
       continue;
     }
 
-    if (!resolution) {
-      await sleep(DBLP_SEARCH_DELAY_MS);
-      resolution = await resolveViaDblpSearch(acronym, resolution?.label);
-    }
-
-    if (!resolution) {
-      unresolved.push({ acronym, reason: 'no-signal-matched' });
+    if (!resolution?.dblpKey) {
+      unresolved.push({ acronym, reason: 'no-wikidata-signal' });
       continue;
     }
 
-    const kind = resolution.kind || (resolution.dblpKey.startsWith('journals/') ? 'journals' : 'conf');
+    const kind = resolution.dblpKey.startsWith('journals/') ? 'journals' : 'conf';
     const normalizedKey = resolution.dblpKey.includes('/') ? resolution.dblpKey : `conf/${resolution.dblpKey}`;
-
-    await sleep(DBLP_SEARCH_DELAY_MS);
-    const exists = await checkDblpExistence(normalizedKey);
-    if (exists === null) dblpUnreachableCount++;
-    if (exists === false) {
-      unresolved.push({ acronym, reason: 'resolved-key-not-live-on-dblp', attemptedKey: normalizedKey, confidence: resolution.confidence });
-      continue;
-    }
 
     results[acronym] = {
       area,
@@ -218,9 +159,12 @@ async function main() {
       dblpKey: normalizedKey,
       kind,
       confidence: resolution.confidence,
-      wikidataId: resolution.wikidataId || null,
-      label: resolution.label || resolution.venueTitle || null,
-      existenceChecked: exists === true
+      wikidataId: resolution.wikidataId,
+      label: resolution.label,
+      // Not yet cross-checked against real DBLP data — Step 2's dump parse
+      // does this for free per EXPANSION_PLAN.md; treat as provisional
+      // until that pass confirms nonzero, multi-year publication volume.
+      existenceChecked: false
     };
   }
 
@@ -228,18 +172,14 @@ async function main() {
     generatedAt: new Date().toISOString(),
     resolvedCount: Object.keys(results).length,
     unresolvedCount: unresolved.length,
-    dblpUnreachableCount,
-    note: dblpUnreachableCount > 0
-      ? `dblp.org was unreachable for ${dblpUnreachableCount} existence check(s) during this run; those entries are marked existenceChecked: false and should be re-verified on a re-run once DBLP is reachable, per EXPANSION_PLAN.md Step 1.3's automated chain (this is a network-availability note, not a resolution failure).`
-      : null,
+    note: 'Resolved via Wikidata only (P8926 "DBLP venue ID"); dblp.org itself was not queried — see file header on Anubis. Existence/volume cross-checks for these keys, and DBLP-search-based resolution for entries in `unresolved`, happen during Step 2\'s dump parse instead.',
     resolved: results,
     unresolved
   };
 
   await writeFile(OUTPUT, `${JSON.stringify(output, null, 2)}\n`);
-  console.log(`Resolved ${output.resolvedCount}/${input.extraVenues.length} venues.`);
-  console.log(`Unresolved: ${output.unresolvedCount}.`);
-  if (dblpUnreachableCount) console.log(`DBLP unreachable for ${dblpUnreachableCount} existence check(s) — see output notes.`);
+  console.log(`Resolved ${output.resolvedCount}/${input.extraVenues.length} venues via Wikidata.`);
+  console.log(`Unresolved (deferred to Step 2's dump cross-check): ${output.unresolvedCount}.`);
   console.log(`Written to ${OUTPUT}`);
 }
 

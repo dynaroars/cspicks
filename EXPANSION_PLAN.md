@@ -63,14 +63,22 @@ Two options were considered:
 | Precedent | New pattern, but code (`fetchAuthorStats`) already exists for it | Exactly what CSRankings' own build pipeline does (`Makefile` downloads `dblp.xml.gz`, C++/Python tooling filters it) — we're just adding a wider venue map on the same input |
 | Risk | Rate-limit churn, partial-failure bookkeeping at faculty scale | One large streaming-XML pass; must not attempt to load the file into memory (`DOMParser` won't work — needs a SAX/stream parser) |
 
-**Decision: Option B.** Download the full DBLP dump once (per refresh cycle),
-stream-parse it, and emit rows only for `(author name ∈ roster) AND (venue ∈
-EXTRA_VENUES)`. This sidesteps DBLP's live rate limits entirely and reuses the
-exact same identity space CSRankings already committed to `csrankings.csv`.
+**Decision: Option B — and it turns out to be required, not just preferred.**
+While building Step 1, live requests to `dblp.org` (via plain `fetch()`,
+`curl`, and even a headless Chromium/Playwright context) were all blocked or
+denied by **Anubis**, an anti-bot proof-of-work wall DBLP runs specifically
+against scripted/headless clients. That rules out Option A entirely for any
+*automated* pipeline, including using `fetchAuthorStats` from a Node script
+as a scripted cross-check tool — it would hit the same wall, since the wall
+targets non-interactive/headless request patterns, not just high volume.
+Downloading the sanctioned bulk dump instead of querying the live site
+sidesteps this cleanly, and reuses the exact same identity space CSRankings
+already committed to `csrankings.csv`.
 
-Live-API `fetchAuthorStats` logic remains valuable as a **cross-check tool**
-(Step 6) — spot-verify a handful of faculty's counts from the bulk parse
-against a live per-author fetch — but should not be the production pipeline.
+`fetchAuthorStats` is still useful, but only for a **human, in their own
+regular browser**, doing an occasional manual spot-check (Step 6) — that's
+normal interactive use of the site, not scripted automation, and is not
+something this plan should try to replace with a script.
 
 ## Step-by-step plan
 
@@ -93,30 +101,45 @@ against a live per-author fetch — but should not be the production pipeline.
    Build `scripts/resolve-core-venue-keys.mjs` as a chain of automated,
    independent signals, each one only handing off to the next when it can't
    resolve confidently:
-   1. **Wikidata lookup (primary).** Many CS conferences have a "DBLP venue
-      ID" property (P8926). Run a single SPARQL query against Wikidata's
-      endpoint for all 86 official names at once; anything with a P8926 hit
-      is resolved with high confidence, no guessing involved.
-   2. **DBLP venue-search API (fallback).** For anything Wikidata misses,
-      query `https://dblp.org/search/venue/api?q=<full official name>&format=json`
-      — search by full name (from Step 1.2's CORE data), not acronym, since
-      acronyms collide (e.g. "MM"). Score every returned candidate by string
-      similarity between the CORE full name and DBLP's `venue` field; accept
-      only the top candidate if it clears a similarity threshold (e.g. 0.8),
-      otherwise leave it unresolved rather than guessing.
-   3. **Automated existence/activity check.** For every key resolved by (1)
-      or (2), fetch `https://dblp.org/db/conf/<key>/` (or `journals/<key>/`)
-      and confirm it 200s and lists multiple years/editions — catches a
-      plausible-looking but wrong or dead key automatically.
-   4. **Post-parse anomaly detection (belt-and-suspenders, in Step 2).**
-      Since the bulk parser already streams the entire dump, tally total
-      papers-per-year for every resolved key for free and flag implausibly
-      low volume or a non-contiguous year history as a likely wrong mapping.
-   Anything that fails all four signals goes into a small `unresolved.json`
-   report and is **dropped from this round** rather than blocking the
-   project or requiring a manual lookup — a missing venue just means that
-   venue's papers aren't counted yet, which is strictly better than a wrong
-   mapping silently mis-counting faculty.
+   1. **Wikidata lookup (primary, and — see below — currently the *only*
+      live network signal).** Many CS conferences have a "DBLP venue ID"
+      property (P8926). Query Wikidata's plain REST API
+      (`wbsearchentities` + `wbgetentities`, not the SPARQL query service,
+      which proved less reliable to reach) for each acronym; anything with a
+      P8926 claim is resolved with high confidence, no guessing involved. A
+      sitelinks-count tiebreaker handles the case where two unrelated
+      conference series share an acronym (confirmed live: "AAMAS" matches
+      both the real agents conference and an obscure unrelated workshop on
+      Wikidata — the one with a Wikipedia article is reliably the real one).
+      Implemented in `scripts/resolve-core-venue-keys.mjs`.
+   2. **No live DBLP querying.** `dblp.org` runs **Anubis**, an anti-bot
+      proof-of-work wall, and it actively denies scripted/headless clients —
+      confirmed while building this: plain `fetch()`/`curl` get connection
+      resets, and a real headless Chromium context (via Playwright, already
+      a devDependency here) gets served an explicit "Access Denied" Anubis
+      page rather than DBLP content. That is a deliberate control DBLP put
+      up specifically to stop this kind of scripted access, so this project
+      does not attempt to evade it (no fingerprint spoofing, no
+      stealth-automation). DBLP already publishes the sanctioned bulk-access
+      channel for exactly this need — the full dump — so both jobs originally
+      planned as live calls move into Step 2 instead:
+      - **DBLP-search-equivalent resolution** for anything Wikidata can't
+        resolve: Step 2's dump parser can look up a candidate stream's full
+        title (present in the dump itself, e.g. via a `<proceedings>`
+        record's `<title>`) and score it against the acronym's full name the
+        same way a live venue-search would, with no network call at all.
+      - **Existence/activity/volume validation** for every resolved key:
+        since the dump parser already streams the entire file, tallying
+        papers-per-year for a candidate key is a free byproduct of the same
+        pass, and flags implausibly low volume or non-contiguous year
+        history as a likely wrong mapping — strictly better evidence than an
+        HTTP 200 check would have been anyway.
+   Anything Wikidata can't resolve is written to `unresolved` with reason
+   `no-wikidata-signal` and picked up in Step 2, not guessed at in Step 1.
+   Anything that fails both signals is **dropped from this round** rather
+   than blocking the project or requiring a manual lookup — a missing venue
+   just means that venue's papers aren't counted yet, which is strictly
+   better than a wrong mapping silently mis-counting faculty.
    Journal-shaped `EXTRA_VENUES` entries (if any) still need the same
    `normalizeDblpVenue`-style issue/volume handling already present in
    `src/dblp.ts` for TOG/CGF/TVCG/etc. — the resolution chain above should
@@ -130,8 +153,15 @@ against a live per-author fetch — but should not be the production pipeline.
 
 ### Step 2 — Acquire and stream-parse the DBLP dump
 
-1. Download `https://dblp.org/xml/release/dblp.xml.gz` (and the matching
-   `dblp.dtd`) — large (multi-GB compressed); do not commit it or any
+1. **Acquisition is manual, not scripted** (see the pre-flight checklist —
+   `dblp.xml.gz` is behind the same Anubis wall as the live site; a scripted
+   `fetch`/`curl` gets served a challenge page instead of the file). A human
+   downloads `https://dblp.org/xml/release/dblp.xml.gz` (and the matching
+   `dblp.dtd`) via their own regular browser — Anubis's proof-of-work
+   challenge resolves transparently for a real browser session in a few
+   seconds, so this is a one-click download, not a workaround — and passes
+   the local file path to `scripts/build-core-extra-pubs.js` as an argument.
+   The file is large (multi-GB compressed); do not commit it or any
    intermediate to the repo (`.gitignore` it, same treatment as
    `.openalex-ror-progress.json`).
 2. Use a streaming XML parser (e.g. `sax` or `saxes` via npm — DBLP's own
@@ -140,12 +170,23 @@ against a live per-author fetch — but should not be the production pipeline.
    pipe) so the raw XML is never fully materialized on disk or in memory.
 3. Build an in-memory `Set` of roster names from `generated-author-info.csv`
    (`name` column, already DBLP-disambiguated strings like `A. B. Siddique
-   0001`) and a `Map<name, dept>` from `csrankings.csv`/`generated-author-info.csv`
-   for the output rows' `dept` field.
-4. For each `<article>`/`<inproceedings>` record in the dump:
-   - Extract the DBLP key's stream segment (`key="conf/<stream>/..."` or
-     `journals/<stream>/...`), map it through the Step 1 table to a CORE
-     acronym; skip if not in `EXTRA_VENUES`'s DBLP-key set.
+   0001`) — `dept` is not needed (see Step 3's note: the ranking pipeline
+   joins publications to professors by `name` alone).
+4. **Resolve `unresolved` venues from Step 1 using the dump itself, and
+   validate every `resolved` venue's key, all as one pass over the same
+   data** (this is the "Step 2" signal referenced in Step 1.3):
+   - For candidate stream keys (both Step 1's resolved keys and plausible
+     guesses for `unresolved` acronyms — e.g. `conf/<lowercased-acronym>` and
+     any stream whose `<proceedings>`/`<booktitle>` title scores well against
+     the acronym's known full name), tally total papers-per-year across the
+     *entire* dump (not just roster-matched authors — this is nearly free
+     during a full streaming pass).
+   - Accept a resolved key only if it shows plausible, multi-year real-world
+     volume (catches both a wrong Step 1 mapping and a wrong guessed key).
+     Anything that still doesn't clear this bar stays unresolved and is
+     excluded from the output, logged for a later look rather than guessed.
+5. For each `<article>`/`<inproceedings>` record whose stream key matches an
+   accepted `EXTRA_VENUES` key:
    - For each `<author>` text node, check set membership against the roster
      name set (exact string match — no fuzzy matching needed, since both
      sides are DBLP's own canonical strings).
@@ -157,9 +198,10 @@ against a live per-author fetch — but should not be the production pipeline.
      need `normalizeDblpVenue`'s journal-issue gymnastics, but verify).
    - Compute `adjusted = 1 / authorCount` per paper per matched roster author,
      matching CSRankings' own weighting.
-5. Emit one row per `(name, area, year)` aggregate — same shape as
-   `generated-author-info.csv`: `name, dept, area, count, adjustedcount, year`
-   — to a new generated file, e.g. `public/core-extra-author-info.csv` (or
+6. Emit one row per `(name, area, year)` aggregate — same shape as the
+   columns `src/data.ts` actually reads from `generated-author-info.csv`:
+   `name, area, count, adjustedcount, year` (no `dept` column — see Step 3) —
+   to a new generated file, e.g. `public/core-extra-author-info.csv` (or
    `.json` if a keyed-by-name structure is more convenient for the merge step
    in Step 3; CSV keeps the shape symmetric with the file it extends).
 
@@ -232,9 +274,11 @@ existing OpenAlex/NSF entries:
 
 | Cadence | Domain | Action |
 |---|---|---|
-| **Quarterly, or when DBLP publishes a new dump** | CORE A/A* extra publications | `node scripts/build-core-extra-pubs.js` (re-download dump, re-parse, overwrite `public/core-extra-author-info.csv`) |
+| **Quarterly, or when DBLP publishes a new dump** | CORE A/A* extra publications | A human downloads a fresh `dblp.xml.gz` via their own browser (see Step 2.1 — the URL is behind Anubis, so this can't be scripted), then runs `node scripts/build-core-extra-pubs.js <path-to-dump>` to re-parse and overwrite `public/core-extra-author-info.csv` |
 
-Quarterly matches the existing NSF full-sync cadence and is reasonable given
+This is the one step in the whole pipeline that stays manual rather than
+automatable end-to-end, specifically because of Anubis. Quarterly matches
+the existing NSF full-sync cadence and is reasonable given
 DBLP's own release cadence (dumps are refreshed roughly monthly, but faculty
 rosters and CORE rankings themselves don't change fast enough to justify more
 frequent reruns).
@@ -252,16 +296,19 @@ frequent reruns).
   visible ranking number relative to the default set, for a school/area known
   to have coverage in the extra dataset.
 
-### Step 6 — Spot-check against the live API
+### Step 6 — Manual spot-check (human, regular browser — not scripted)
 
-Before trusting the bulk-parsed dataset, pick ~10-20 faculty across a few
-`EXTRA_VENUES` (especially ones with tricky DBLP-key mappings from Step 1) and
-compare their extra-dataset paper counts against a live call to the existing
-`fetchAuthorStats` (temporarily pointed at a `confSet` that includes only
-those venues) for the same person. Mismatches point at either a wrong DBLP-key
-mapping (Step 1) or a parser bug (Step 2), not a live-API vs. bulk-dump
-discrepancy — the dump and the live API are the same underlying DBLP data,
-just fetched two different ways.
+Before trusting the bulk-parsed dataset, a person should pick ~10-20 faculty
+across a few `EXTRA_VENUES` (especially ones with tricky DBLP-key mappings
+from Step 1) and manually compare their extra-dataset paper counts against
+their DBLP profile page, viewed normally in a browser (or via the Simulator
+page's existing `fetchAuthorStats`-backed UI, which runs client-side in a
+real user's browser and is unaffected by Anubis the way a scripted
+maintenance job would be). Mismatches point at either a wrong DBLP-key
+mapping (Step 1) or a parser bug (Step 2) — the dump and the live site are
+the same underlying DBLP data, just viewed two different ways. This step is
+explicitly a manual QA pass, not something to automate into a script, per
+the Anubis note above.
 
 ## Pre-flight checklist (do before writing Step 1's code)
 
@@ -276,10 +323,26 @@ just fetched two different ways.
   at a 40 MiB cap). Add `public/core-extra-author-info.csv` to that list once
   it exists, even though it's expected to be small (it's the roster ∩
   86-venue intersection, not the full dump).
-- **Confirm DBLP's dump terms allow this use** — DBLP explicitly publishes
-  `dblp.xml.gz` for bulk reuse/research, but do a one-line sanity check of
-  their current terms page before building a script around it, same as any
-  other upstream data dependency this repo already leans on.
+- **The dump download URL is behind Anubis too — verified, not assumed.**
+  `curl`/`fetch` against `https://dblp.org/xml/release/dblp.xml.gz` return
+  HTTP 200 with `content-type: text/html`, and the body is Anubis's "Making
+  sure you're not a bot!" challenge page, not gzip data — confirmed by
+  inspecting the actual response body, not just the status code (an earlier,
+  wrong pass at this check only looked at the status code and incorrectly
+  concluded the dump was reachable). So Step 2 **cannot start with a
+  scripted download** any more than Step 1 could use a scripted DBLP query.
+  Anubis's proof-of-work challenge is designed to resolve transparently in a
+  few seconds for a real browser, so the realistic path is: **a human
+  downloads `dblp.xml.gz` once via their own regular browser** (this is
+  normal, permitted interactive use of a public resource, not evasion) and
+  saves it locally; `scripts/build-core-extra-pubs.js` (Step 2) then takes a
+  local file path as input and never attempts to fetch the dump itself. This
+  also changes Step 4's cadence entry: the quarterly refresh is a
+  human-triggered download + a script run against that local file, not an
+  unattended automated job.
+  Confirm DBLP's dump terms still allow this kind of bulk reuse once
+  downloaded, same as any other upstream data dependency this repo already
+  leans on (this part doesn't change).
 - **Decide rollout visibility**: ship the new dataset and immediately update
   `CONF_SET_HELP` (Step 3.5), or land it quietly and update the copy in a
   follow-up once real coverage numbers can be sanity-checked in production.
