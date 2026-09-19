@@ -33586,6 +33586,98 @@
     "generalChair": null
   },
   {
+    "name": "ACSAC",
+    "venueKeys": [
+      "acsac"
+    ],
+    "year": 2018,
+    "description": "Annual Computer Security Applications Conference",
+    "link": null,
+    "seriesLink": "https://www.acsac.org/",
+    "date": "December 3-7, 2018",
+    "place": "San Juan, Puerto Rico",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ACSAC",
+    "venueKeys": [
+      "acsac"
+    ],
+    "year": 2017,
+    "description": "Annual Computer Security Applications Conference",
+    "link": null,
+    "seriesLink": "https://www.acsac.org/",
+    "date": "December 4-8, 2017",
+    "place": "Orlando, FL, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ACSAC",
+    "venueKeys": [
+      "acsac"
+    ],
+    "year": 2016,
+    "description": "Annual Computer Security Applications Conference",
+    "link": null,
+    "seriesLink": "https://www.acsac.org/",
+    "date": "December 5-9, 2016",
+    "place": "Los Angeles, CA, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ACSAC",
+    "venueKeys": [
+      "acsac"
+    ],
+    "year": 2015,
+    "description": "Annual Computer Security Applications Conference",
+    "link": null,
+    "seriesLink": "https://www.acsac.org/",
+    "date": "December 7-11, 2015",
+    "place": "Los Angeles, CA, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "AIED",
     "venueKeys": [
       "aied"
@@ -35518,6 +35610,98 @@
     "generalChair": null
   },
   {
+    "name": "CHES",
+    "venueKeys": [
+      "ches"
+    ],
+    "year": 2018,
+    "description": "Conference on Cryptographic Hardware and Embedded Systems",
+    "link": null,
+    "seriesLink": "https://ches.iacr.org/",
+    "date": null,
+    "place": "Amsterdam, Netherlands",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "CHES",
+    "venueKeys": [
+      "ches"
+    ],
+    "year": 2017,
+    "description": "Conference on Cryptographic Hardware and Embedded Systems",
+    "link": null,
+    "seriesLink": "https://ches.iacr.org/",
+    "date": "September 25-28, 2017",
+    "place": "Taipei, Taiwan",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "CHES",
+    "venueKeys": [
+      "ches"
+    ],
+    "year": 2016,
+    "description": "Conference on Cryptographic Hardware and Embedded Systems",
+    "link": null,
+    "seriesLink": "https://ches.iacr.org/",
+    "date": "August 17-19, 2016",
+    "place": "Santa Barbara, CA, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "CHES",
+    "venueKeys": [
+      "ches"
+    ],
+    "year": 2015,
+    "description": "Conference on Cryptographic Hardware and Embedded Systems",
+    "link": null,
+    "seriesLink": "https://ches.iacr.org/",
+    "date": "September 13-16, 2015",
+    "place": "Saint-Malo, France",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "CIDR",
     "venueKeys": [
       "cidr"
@@ -36829,6 +37013,98 @@
     "generalChair": null
   },
   {
+    "name": "CSF",
+    "venueKeys": [
+      "csf"
+    ],
+    "year": 2018,
+    "description": "IEEE Computer Security Foundations Symposium",
+    "link": null,
+    "seriesLink": "https://www.ieee-security.org/TC/CSFindex.html",
+    "date": "July 9-12, 2018",
+    "place": "Oxford, UK (part of FLoC 2018)",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "CSF",
+    "venueKeys": [
+      "csf"
+    ],
+    "year": 2017,
+    "description": "IEEE Computer Security Foundations Symposium",
+    "link": null,
+    "seriesLink": "https://www.ieee-security.org/TC/CSFindex.html",
+    "date": null,
+    "place": "Santa Barbara, CA, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "CSF",
+    "venueKeys": [
+      "csf"
+    ],
+    "year": 2016,
+    "description": "IEEE Computer Security Foundations Symposium",
+    "link": null,
+    "seriesLink": "https://www.ieee-security.org/TC/CSFindex.html",
+    "date": "June 27 - July 1, 2016",
+    "place": "Lisbon, Portugal",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "CSF",
+    "venueKeys": [
+      "csf"
+    ],
+    "year": 2015,
+    "description": "IEEE Computer Security Foundations Symposium",
+    "link": null,
+    "seriesLink": "https://www.ieee-security.org/TC/CSFindex.html",
+    "date": "July 13-17, 2015",
+    "place": "Verona, Italy",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "DIS",
     "venueKeys": [
       "dis"
@@ -37368,6 +37644,98 @@
     "seriesLink": "https://www.dependability.org/",
     "date": "June 24-27, 2019",
     "place": "Portland, OR, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "DSN",
+    "venueKeys": [
+      "dsn"
+    ],
+    "year": 2018,
+    "description": "IEEE/IFIP International Conference on Dependable Systems and Networks",
+    "link": null,
+    "seriesLink": "https://www.dependability.org/",
+    "date": "June 25-28, 2018",
+    "place": "Luxembourg City, Luxembourg",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "DSN",
+    "venueKeys": [
+      "dsn"
+    ],
+    "year": 2017,
+    "description": "IEEE/IFIP International Conference on Dependable Systems and Networks",
+    "link": null,
+    "seriesLink": "https://www.dependability.org/",
+    "date": null,
+    "place": "Denver, CO, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "DSN",
+    "venueKeys": [
+      "dsn"
+    ],
+    "year": 2016,
+    "description": "IEEE/IFIP International Conference on Dependable Systems and Networks",
+    "link": null,
+    "seriesLink": "https://www.dependability.org/",
+    "date": null,
+    "place": "Toulouse, France",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "DSN",
+    "venueKeys": [
+      "dsn"
+    ],
+    "year": 2015,
+    "description": "IEEE/IFIP International Conference on Dependable Systems and Networks",
+    "link": null,
+    "seriesLink": "https://www.dependability.org/",
+    "date": null,
+    "place": "Rio de Janeiro, Brazil",
     "abstractDeadline": null,
     "deadline": null,
     "rebuttalDate": null,
@@ -38922,6 +39290,98 @@
     "generalChair": null
   },
   {
+    "name": "ESORICS",
+    "venueKeys": [
+      "esorics"
+    ],
+    "year": 2018,
+    "description": "European Symposium on Research in Computer Security",
+    "link": null,
+    "seriesLink": "https://conf.laas.fr/esorics/",
+    "date": "September 3-7, 2018",
+    "place": "Barcelona, Spain",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ESORICS",
+    "venueKeys": [
+      "esorics"
+    ],
+    "year": 2017,
+    "description": "European Symposium on Research in Computer Security",
+    "link": null,
+    "seriesLink": "https://conf.laas.fr/esorics/",
+    "date": "September 11-13, 2017",
+    "place": "Oslo, Norway",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ESORICS",
+    "venueKeys": [
+      "esorics"
+    ],
+    "year": 2016,
+    "description": "European Symposium on Research in Computer Security",
+    "link": null,
+    "seriesLink": "https://conf.laas.fr/esorics/",
+    "date": null,
+    "place": "Heraklion, Crete, Greece",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ESORICS",
+    "venueKeys": [
+      "esorics"
+    ],
+    "year": 2015,
+    "description": "European Symposium on Research in Computer Security",
+    "link": null,
+    "seriesLink": "https://conf.laas.fr/esorics/",
+    "date": null,
+    "place": "Vienna, Austria",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "FC",
     "venueKeys": [
       "fc"
@@ -39093,6 +39553,98 @@
     "seriesLink": "https://ifca.ai/fc/",
     "date": "February 18-22, 2019",
     "place": "St. Kitts, Saint Kitts and Nevis",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "FC",
+    "venueKeys": [
+      "fc"
+    ],
+    "year": 2018,
+    "description": "Financial Cryptography and Data Security",
+    "link": null,
+    "seriesLink": "https://ifca.ai/fc/",
+    "date": "February 26 - March 2, 2018",
+    "place": "Nieuwpoort, Curaçao",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "FC",
+    "venueKeys": [
+      "fc"
+    ],
+    "year": 2017,
+    "description": "Financial Cryptography and Data Security",
+    "link": null,
+    "seriesLink": "https://ifca.ai/fc/",
+    "date": "April 3-7, 2017",
+    "place": "Sliema, Malta",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "FC",
+    "venueKeys": [
+      "fc"
+    ],
+    "year": 2016,
+    "description": "Financial Cryptography and Data Security",
+    "link": null,
+    "seriesLink": "https://ifca.ai/fc/",
+    "date": "February 22-26, 2016",
+    "place": "Christ Church, Barbados",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "FC",
+    "venueKeys": [
+      "fc"
+    ],
+    "year": 2015,
+    "description": "Financial Cryptography and Data Security",
+    "link": null,
+    "seriesLink": "https://ifca.ai/fc/",
+    "date": "January 26-30, 2015",
+    "place": "San Juan, Puerto Rico",
     "abstractDeadline": null,
     "deadline": null,
     "rebuttalDate": null,
