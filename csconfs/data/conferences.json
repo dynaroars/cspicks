@@ -30374,7 +30374,7 @@
     "description": "IEEE Visualization Conference",
     "link": "https://www.vis.org/",
     "seriesLink": "https://www.vis.org/",
-    "date": "2026-11-02",
+    "date": "November 9-13, 2026",
     "place": "Boston, MA",
     "abstractDeadline": "2026-03-21",
     "deadline": "2026-03-31",
@@ -30384,7 +30384,7 @@
     "programChair": "Alfie Abdul-Rahman, Tushar Athawale, John Thompson",
     "acceptanceRate": null,
     "submissions": null,
-    "estimated": true,
+    "estimated": false,
     "verified": true,
     "generalChair": "Arvind Satyanarayan, Lace Padilla, Hendrik Strobelt, Lane Harrison"
   },
@@ -31928,6 +31928,52 @@
     "submissions": null,
     "estimated": false,
     "verified": true
+  },
+  {
+    "name": "VR",
+    "venueKeys": [
+      "vr"
+    ],
+    "year": 2026,
+    "description": "IEEE Conference on Virtual Reality and 3D User Interfaces",
+    "link": "https://ieeevr.org/2026/",
+    "seriesLink": "https://ieeevr.org/",
+    "date": "March 21-25, 2026",
+    "place": "EXCO, Daegu, South Korea",
+    "abstractDeadline": "2025-09-05",
+    "deadline": "2025-09-12",
+    "rebuttalDate": null,
+    "notificationDate": "2025-12-12",
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "JungHyun Han, Soon Ki Jung, Gerard J. Kim (Korea University / Kyungpook National University)"
+  },
+  {
+    "name": "VR",
+    "venueKeys": [
+      "vr"
+    ],
+    "year": 2027,
+    "description": "IEEE Conference on Virtual Reality and 3D User Interfaces",
+    "link": "https://ieeevr.org/2027/",
+    "seriesLink": "https://ieeevr.org/",
+    "date": "February 27 - March 3, 2027",
+    "place": "Melbourne, Australia",
+    "abstractDeadline": "2026-08-24",
+    "deadline": "2026-08-31",
+    "rebuttalDate": null,
+    "notificationDate": "2026-11-30",
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
   },
   {
     "name": "VR",
