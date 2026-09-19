@@ -44,7 +44,8 @@ interface FilterBarOptions {
 // This module owns their markup, state, persistence, and the affiliation data
 // that History mode needs, so pages only declare which fields they want.
 
-const CONF_SET_HELP = 'Select conference venues: CSRankings default/all, CORE tiers, or union of all sets.';
+const CONF_SET_HELP = 'Select conference venues: CSRankings default/all, CORE tiers, or union of all sets. '
+  + 'Some CORE A/A* venues (e.g. TACAS) show no results because CSRankings itself never collects their publications, not because of a filter here.';
 const HISTORY_HELP = 'Credits papers to the university where the author was affiliated when published.';
 const RANKINGS_HELP = 'Displays overall and per-area ranks for institutions in the selected view.';
 const PER_CAPITA_HELP = 'Ranks universities by output per faculty member (min. 5 active faculty).';
