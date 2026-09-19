@@ -1,7 +1,7 @@
 # CS Picks PR & Issue Audit Agent (`AUDIT_ISSUES_PRS.md`)
 
-> **Autonomous Goal Directive (`/goal TASKS/AUDIT_ISSUES_PRS.md`):**  
-> Inspect all open GitHub Pull Requests, PR topic branches, and open GitHub Issues in the `cspicks` repository (`../cspicks`). Validate all proposed changes against live evidence, schema contracts, and local tests (`npm test && npm run typecheck && npm run build && git diff --check`). Squash-merge clean, verified PRs into `main`, delete merged topic branches, and post detailed comment updates or close resolved issues. Iterate in bounded batches until all open PRs and issues are completely audited.
+> **Autonomous Goal Directive (`/goal TASKS/AUDIT_ISSUES_PRS.md`):**
+> Execute the task workflow across **ALL BATCHES CONTINUOUSLY** until **100% of items in the repository are fully audited and processed**. Inspect all open GitHub Pull Requests, PR topic branches, and open GitHub Issues in the `cspicks` repository (`../cspicks`). Validate all proposed changes against live evidence, schema contracts, and local tests (`npm test && npm run typecheck && npm run build && git diff --check`). Squash-merge clean, verified PRs into `main`, delete merged topic branches, and post detailed comment updates or close resolved issues. Iterate in bounded batches until all open PRs and issues are completely audited. Do NOT stop execution until ALL batches are completed!
 
 ---
 

@@ -1,7 +1,7 @@
 # CS Conference Schedule Audit (`audit_cs_conferences.md`)
 
-> **Autonomous Goal Directive (`/goal TASKS/audit_cs_conferences.md`):**  
-> Systematically audit and update Computer Science conference schedules in `csconfs/data/conferences.json` and `csconfs/data/deadlines.json`. Execute the audit and update workflow across **ALL CONFERENCES AND BATCHES CONTINUOUSLY** until **100% of tracked conference series are fully verified**. Perform multi-query deep web research on official conference websites for upcoming conference editions, submission deadlines, locations, PC chairs, and submission portal links. Submit all updates as a GitHub PR (or GitHub Issue for unconfirmed dates). Return to `main` and **IMMEDIATELY PROCEED TO THE NEXT BATCH**. Do NOT stop execution after a single batch — continue looping until ALL conferences are completely audited.
+> **Autonomous Goal Directive (`/goal TASKS/audit_cs_conferences.md`):**
+> Execute the task workflow across **ALL BATCHES CONTINUOUSLY** until **100% of items in the repository are fully audited and processed**. Systematically audit and update Computer Science conference schedules in `csconfs/data/conferences.json` and `csconfs/data/deadlines.json`. Execute the audit and update workflow across **ALL CONFERENCES AND BATCHES CONTINUOUSLY** until **100% of tracked conference series are fully verified**. Perform multi-query deep web research on official conference websites for upcoming conference editions, submission deadlines, locations, PC chairs, and submission portal links. Submit all updates as a GitHub PR (or GitHub Issue for unconfirmed dates). Return to `main` and **IMMEDIATELY PROCEED TO THE NEXT BATCH**. Do NOT stop execution after a single batch — continue looping until ALL conferences are completely audited. Do NOT stop execution until ALL batches are completed!
 
 ---
 

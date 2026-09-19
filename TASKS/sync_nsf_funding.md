@@ -1,7 +1,7 @@
 # NSF Funding & Name Crosswalk Sync (`sync_nsf_funding.md`)
 
-> **Autonomous Goal Directive (`/goal TASKS/sync_nsf_funding.md`):**  
-> Synchronize NSF award funding data and maintain the faculty name crosswalk mapping in `public/nsf-name-crosswalk.csv` and `public/nsf-awards.json`. Audit unmatched faculty between CSRankings rosters and NSF award records, run `npm run sync:nsf:names` and local rebuild commands, and verify institutional attribution rules. Submit all data updates as a GitHub PR. Never commit directly to `main`.
+> **Autonomous Goal Directive (`/goal TASKS/sync_nsf_funding.md`):**
+> Execute the task workflow across **ALL BATCHES CONTINUOUSLY** until **100% of items in the repository are fully audited and processed**. Synchronize NSF award funding data and maintain the faculty name crosswalk mapping in `public/nsf-name-crosswalk.csv` and `public/nsf-awards.json`. Audit unmatched faculty between CSRankings rosters and NSF award records, run `npm run sync:nsf:names` and local rebuild commands, and verify institutional attribution rules. Submit all data updates as a GitHub PR. Never commit directly to `main`. Do NOT stop execution until ALL batches are completed!
 
 ---
 

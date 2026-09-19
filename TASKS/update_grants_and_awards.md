@@ -1,7 +1,7 @@
 # Grants & Fellowships Audit (`update_grants_and_awards.md`)
 
-> **Autonomous Goal Directive (`/goal TASKS/update_grants_and_awards.md`):**  
-> Audit and update research grant opportunities and fellowship listings in `public/grants.json`. Execute the audit workflow across **ALL GRANT CATEGORIES AND BATCHES CONTINUOUSLY** until **100% of listed grant entries are fully verified**. Perform thorough web research across funding agency portals (NSF, DARPA, NIH, Sloan Foundation, Google Research Grants, Amazon Research Awards, etc.) to discover new call cycles, verify upcoming submission deadlines, update eligibility criteria and sponsor tags, and archive expired opportunities. Submit updates as a GitHub PR. Return to `main` and **IMMEDIATELY PROCEED TO THE NEXT BATCH**. Do NOT stop execution until ALL grants are verified!
+> **Autonomous Goal Directive (`/goal TASKS/update_grants_and_awards.md`):**
+> Execute the task workflow across **ALL BATCHES CONTINUOUSLY** until **100% of items in the repository are fully audited and processed**. Audit and update research grant opportunities and fellowship listings in `public/grants.json`. Execute the audit workflow across **ALL GRANT CATEGORIES AND BATCHES CONTINUOUSLY** until **100% of listed grant entries are fully verified**. Perform thorough web research across funding agency portals (NSF, DARPA, NIH, Sloan Foundation, Google Research Grants, Amazon Research Awards, etc.) to discover new call cycles, verify upcoming submission deadlines, update eligibility criteria and sponsor tags, and archive expired opportunities. Submit updates as a GitHub PR. Return to `main` and **IMMEDIATELY PROCEED TO THE NEXT BATCH**. Do NOT stop execution until ALL grants are verified! Do NOT stop execution until ALL batches are completed!
 
 ---
 

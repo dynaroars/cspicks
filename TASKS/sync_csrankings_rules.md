@@ -1,7 +1,7 @@
 # CSRankings Rules & Static Assets Sync (`sync_csrankings_rules.md`)
 
-> **Autonomous Goal Directive (`/goal TASKS/sync_csrankings_rules.md`):**  
-> Audit and synchronize CSRankings taxonomy rules, venue mappings, sitemaps, and social preview cards. Execute `npm run sync:csrankings-rules`, `npm run sitemap`, `npm run og:image`, and `npm run check:size` to verify static asset integrity. Submit updates as a GitHub PR. Never commit directly to `main`.
+> **Autonomous Goal Directive (`/goal TASKS/sync_csrankings_rules.md`):**
+> Execute the task workflow across **ALL BATCHES CONTINUOUSLY** until **100% of items in the repository are fully audited and processed**. Audit and synchronize CSRankings taxonomy rules, venue mappings, sitemaps, and social preview cards. Execute `npm run sync:csrankings-rules`, `npm run sitemap`, `npm run og:image`, and `npm run check:size` to verify static asset integrity. Submit updates as a GitHub PR. Never commit directly to `main`. Do NOT stop execution until ALL batches are completed!
 
 ---
 

@@ -1,7 +1,7 @@
 # Manual Affiliation Overrides Audit (`verify_manual_affiliations.md`)
 
-> **Autonomous Goal Directive (`/goal TASKS/verify_manual_affiliations.md`):**  
-> Audit and update manual affiliation overrides in `public/manual_affiliations.csv`. Research author movement history, faculty hires, transfers, and institutional renames to fix OpenAlex affiliation errors. Verify move dates against official faculty homepages, press releases, and CVs. Submit all edits as a GitHub PR. Never commit directly to `main`.
+> **Autonomous Goal Directive (`/goal TASKS/verify_manual_affiliations.md`):**
+> Execute the task workflow across **ALL BATCHES CONTINUOUSLY** until **100% of items in the repository are fully audited and processed**. Audit and update manual affiliation overrides in `public/manual_affiliations.csv`. Research author movement history, faculty hires, transfers, and institutional renames to fix OpenAlex affiliation errors. Verify move dates against official faculty homepages, press releases, and CVs. Submit all edits as a GitHub PR. Never commit directly to `main`. Do NOT stop execution until ALL batches are completed!
 
 ---
 
