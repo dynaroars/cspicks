@@ -4792,7 +4792,7 @@
     "description": "ACM Conference on Economics and Computation",
     "link": "https://ec.sigecom.org/",
     "seriesLink": null,
-    "date": "2026-07-07",
+    "date": "July 6-10, 2026",
     "place": "Rome, Italy",
     "abstractDeadline": "2026-02-03",
     "deadline": "2026-02-10",
@@ -4802,8 +4802,8 @@
     "programChair": "Alex Teytelboym, Matt Weinberg",
     "acceptanceRate": null,
     "submissions": null,
-    "estimated": true,
-    "verified": false,
+    "estimated": false,
+    "verified": true,
     "generalChair": "Stefano Leonardi"
   },
   {
@@ -24342,7 +24342,7 @@
     "description": "ACM Technical Symposium on Computer Science Education",
     "link": "https://sigcse.sigcse.org/",
     "seriesLink": null,
-    "date": "2026-02-26",
+    "date": "February 18-21, 2026",
     "place": "St. Louis, MO",
     "abstractDeadline": "2025-07-14",
     "deadline": "2025-07-21",
@@ -24352,8 +24352,8 @@
     "programChair": "James Prather, Natalie Kiesler, Eric Fouh",
     "acceptanceRate": null,
     "submissions": null,
-    "estimated": true,
-    "verified": false,
+    "estimated": false,
+    "verified": true,
     "generalChair": "Timothy Yuen, Deepti Joshi"
   },
   {
