@@ -33241,6 +33241,98 @@
     "generalChair": null
   },
   {
+    "name": "AAMAS",
+    "venueKeys": [
+      "aamas"
+    ],
+    "year": 2018,
+    "description": "International Conference on Autonomous Agents and Multiagent Systems",
+    "link": null,
+    "seriesLink": "https://www.ifaamas.org/",
+    "date": "July 10-15, 2018",
+    "place": "Stockholm, Sweden",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "AAMAS",
+    "venueKeys": [
+      "aamas"
+    ],
+    "year": 2017,
+    "description": "International Conference on Autonomous Agents and Multiagent Systems",
+    "link": null,
+    "seriesLink": "https://www.ifaamas.org/",
+    "date": "May 8-12, 2017",
+    "place": "São Paulo, Brazil",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "AAMAS",
+    "venueKeys": [
+      "aamas"
+    ],
+    "year": 2016,
+    "description": "International Conference on Autonomous Agents and Multiagent Systems",
+    "link": null,
+    "seriesLink": "https://www.ifaamas.org/",
+    "date": null,
+    "place": "Singapore",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "AAMAS",
+    "venueKeys": [
+      "aamas"
+    ],
+    "year": 2015,
+    "description": "International Conference on Autonomous Agents and Multiagent Systems",
+    "link": null,
+    "seriesLink": "https://www.ifaamas.org/",
+    "date": "May 4-8, 2015",
+    "place": "Istanbul, Turkey",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "ACM MM",
     "venueKeys": [
       "acmmm"
@@ -34033,6 +34125,98 @@
     "seriesLink": "https://virtual.aistats.org/",
     "date": "April 16-18, 2019",
     "place": "Naha, Okinawa, Japan",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "AISTATS",
+    "venueKeys": [
+      "aistats"
+    ],
+    "year": 2018,
+    "description": "International Conference on Artificial Intelligence and Statistics",
+    "link": null,
+    "seriesLink": "https://virtual.aistats.org/",
+    "date": "April 9-11, 2018",
+    "place": "Playa Blanca, Lanzarote, Canary Islands, Spain",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "AISTATS",
+    "venueKeys": [
+      "aistats"
+    ],
+    "year": 2017,
+    "description": "International Conference on Artificial Intelligence and Statistics",
+    "link": null,
+    "seriesLink": "https://virtual.aistats.org/",
+    "date": "April 20-22, 2017",
+    "place": "Fort Lauderdale, FL, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "AISTATS",
+    "venueKeys": [
+      "aistats"
+    ],
+    "year": 2016,
+    "description": "International Conference on Artificial Intelligence and Statistics",
+    "link": null,
+    "seriesLink": "https://virtual.aistats.org/",
+    "date": "May 9-11, 2016",
+    "place": "Cadiz, Spain",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "AISTATS",
+    "venueKeys": [
+      "aistats"
+    ],
+    "year": 2015,
+    "description": "International Conference on Artificial Intelligence and Statistics",
+    "link": null,
+    "seriesLink": "https://virtual.aistats.org/",
+    "date": "May 9-12, 2015",
+    "place": "San Diego, CA, USA",
     "abstractDeadline": null,
     "deadline": null,
     "rebuttalDate": null,
@@ -38508,6 +38692,52 @@
     "generalChair": null
   },
   {
+    "name": "ECAI",
+    "venueKeys": [
+      "ecai"
+    ],
+    "year": 2018,
+    "description": "European Conference on Artificial Intelligence",
+    "link": null,
+    "seriesLink": "https://www.eurai.org/",
+    "date": "July 13-19, 2018",
+    "place": "Stockholm, Sweden (jointly with IJCAI-ECAI 2018)",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ECAI",
+    "venueKeys": [
+      "ecai"
+    ],
+    "year": 2016,
+    "description": "European Conference on Artificial Intelligence",
+    "link": null,
+    "seriesLink": "https://www.eurai.org/",
+    "date": "August 29 - September 2, 2016",
+    "place": "The Hague, Netherlands",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "ECIR",
     "venueKeys": [
       "ecir"
@@ -40578,6 +40808,52 @@
     "generalChair": null
   },
   {
+    "name": "FOGA",
+    "venueKeys": [
+      "foga"
+    ],
+    "year": 2017,
+    "description": "Foundations of Genetic Algorithms",
+    "link": null,
+    "seriesLink": "https://sig.sigevo.org/FOGAs",
+    "date": "January 12-15, 2017",
+    "place": "Copenhagen, Denmark",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "FOGA",
+    "venueKeys": [
+      "foga"
+    ],
+    "year": 2015,
+    "description": "Foundations of Genetic Algorithms",
+    "link": null,
+    "seriesLink": "https://sig.sigevo.org/FOGAs",
+    "date": "January 17-20, 2015",
+    "place": "Aberystwyth, UK",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "FPGA",
     "venueKeys": [
       "fpga"
@@ -41117,6 +41393,98 @@
     "seriesLink": "https://gecco-2027.sigevo.org/",
     "date": null,
     "place": "Prague, Czech Republic",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "GECCO",
+    "venueKeys": [
+      "gecco"
+    ],
+    "year": 2018,
+    "description": "Genetic and Evolutionary Computation Conference",
+    "link": null,
+    "seriesLink": "https://gecco-2027.sigevo.org/",
+    "date": "July 15-19, 2018",
+    "place": "Kyoto, Japan",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "GECCO",
+    "venueKeys": [
+      "gecco"
+    ],
+    "year": 2017,
+    "description": "Genetic and Evolutionary Computation Conference",
+    "link": null,
+    "seriesLink": "https://gecco-2027.sigevo.org/",
+    "date": "July 15-19, 2017",
+    "place": "Berlin, Germany",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "GECCO",
+    "venueKeys": [
+      "gecco"
+    ],
+    "year": 2016,
+    "description": "Genetic and Evolutionary Computation Conference",
+    "link": null,
+    "seriesLink": "https://gecco-2027.sigevo.org/",
+    "date": "July 20-24, 2016",
+    "place": "Denver, CO, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "GECCO",
+    "venueKeys": [
+      "gecco"
+    ],
+    "year": 2015,
+    "description": "Genetic and Evolutionary Computation Conference",
+    "link": null,
+    "seriesLink": "https://gecco-2027.sigevo.org/",
+    "date": "July 11-15, 2015",
+    "place": "Madrid, Spain",
     "abstractDeadline": null,
     "deadline": null,
     "rebuttalDate": null,
@@ -48283,6 +48651,29 @@
     "generalChair": null
   },
   {
+    "name": "PPSN",
+    "venueKeys": [
+      "ppsn"
+    ],
+    "year": 2018,
+    "description": "International Conference on Parallel Problem Solving from Nature",
+    "link": null,
+    "seriesLink": "https://ppsn-conference.org/",
+    "date": "September 8-12, 2018",
+    "place": "Coimbra, Portugal",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "RE",
     "venueKeys": [
       "re"
@@ -51260,6 +51651,98 @@
     "seriesLink": "https://www.auai.org/",
     "date": null,
     "place": "Tel Aviv, Israel",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "UAI",
+    "venueKeys": [
+      "uai"
+    ],
+    "year": 2018,
+    "description": "Conference on Uncertainty in Artificial Intelligence",
+    "link": null,
+    "seriesLink": "https://www.auai.org/",
+    "date": "August 6-10, 2018",
+    "place": "Monterey, CA, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "UAI",
+    "venueKeys": [
+      "uai"
+    ],
+    "year": 2017,
+    "description": "Conference on Uncertainty in Artificial Intelligence",
+    "link": null,
+    "seriesLink": "https://www.auai.org/",
+    "date": "August 11-15, 2017",
+    "place": "Sydney, Australia",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "UAI",
+    "venueKeys": [
+      "uai"
+    ],
+    "year": 2016,
+    "description": "Conference on Uncertainty in Artificial Intelligence",
+    "link": null,
+    "seriesLink": "https://www.auai.org/",
+    "date": null,
+    "place": "Jersey City, NJ, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "UAI",
+    "venueKeys": [
+      "uai"
+    ],
+    "year": 2015,
+    "description": "Conference on Uncertainty in Artificial Intelligence",
+    "link": null,
+    "seriesLink": "https://www.auai.org/",
+    "date": "July 12-16, 2015",
+    "place": "Amsterdam, Netherlands",
     "abstractDeadline": null,
     "deadline": null,
     "rebuttalDate": null,
