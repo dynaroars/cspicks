@@ -9,6 +9,8 @@ This directory contains executable task playbooks for maintaining the **CS Picks
 Each playbook is pre-configured with an **Autonomous Goal Directive** header. You can trigger any workflow by typing `/goal TASKS/<filename>.md`:
 
 ```bash
+/goal TASKS/discover_new_conferences.md
+/goal TASKS/discover_new_grants.md
 /goal TASKS/audit_cs_conferences.md
 /goal TASKS/update_grants_and_awards.md
 /goal TASKS/sync_nsf_funding.md
@@ -23,7 +25,7 @@ Each playbook is pre-configured with an **Autonomous Goal Directive** header. Yo
 
 To preserve git history and ensure multi-agent safety:
 
-1. **Maintenance Agents DO NOT commit directly to `main`**:
+1. **Maintenance & Discovery Agents DO NOT commit directly to `main`**:
    - All maintenance updates, schema fixes, and verified data refreshes MUST be committed on a dedicated topic branch (e.g. `task/audit-csconfs-batch-1`) and submitted as a **GitHub Pull Request**.
    - If an update is ambiguous, unconfirmed by official sources, or requires maintainer decision, create a **GitHub Issue** detailing the finding instead of pushing a PR.
 
@@ -38,6 +40,8 @@ To preserve git history and ensure multi-agent safety:
 
 | Playbook | Purpose | Core Output |
 | :--- | :--- | :--- |
+| [`discover_new_conferences.md`](discover_new_conferences.md) | Search ACM/IEEE calendars and WikiCFP to discover new CS conferences and workshops. | `csconfs/data/conferences.json` PRs |
+| [`discover_new_grants.md`](discover_new_grants.md) | Search funding agencies, foundations, and tech giants for new grant programs and fellowships. | `public/grants.json` PRs |
 | [`audit_cs_conferences.md`](audit_cs_conferences.md) | Audit upcoming CS conference dates, submission deadlines, locations, PC chairs, and submission URLs. | `csconfs/data/conferences.json`, `csconfs/data/deadlines.json` PRs |
 | [`update_grants_and_awards.md`](update_grants_and_awards.md) | Refresh grant opportunities, deadline dates, award sponsors, eligibility criteria, and topic tags. | `public/grants.json` PRs |
 | [`sync_nsf_funding.md`](sync_nsf_funding.md) | Synchronize NSF awards data and verify author crosswalk name matching. | `public/nsf-awards.json`, `public/nsf-name-crosswalk.csv` PRs |
