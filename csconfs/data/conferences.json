@@ -34828,6 +34828,52 @@
     "generalChair": null
   },
   {
+    "name": "CADE",
+    "venueKeys": [
+      "cade"
+    ],
+    "year": 2017,
+    "description": "International Conference on Automated Deduction",
+    "link": null,
+    "seriesLink": "https://cadeinc.org/",
+    "date": "August 6-11, 2017",
+    "place": "Gothenburg, Sweden",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "CADE",
+    "venueKeys": [
+      "cade"
+    ],
+    "year": 2015,
+    "description": "International Conference on Automated Deduction",
+    "link": null,
+    "seriesLink": "https://cadeinc.org/",
+    "date": "August 1-7, 2015",
+    "place": "Berlin, Germany",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "CAiSE",
     "venueKeys": [
       "caise"
@@ -40233,6 +40279,98 @@
     "generalChair": null
   },
   {
+    "name": "ICAPS",
+    "venueKeys": [
+      "icaps"
+    ],
+    "year": 2018,
+    "description": "International Conference on Automated Planning and Scheduling",
+    "link": null,
+    "seriesLink": "https://icaps-conference.org/",
+    "date": "June 24-29, 2018",
+    "place": "Delft, Netherlands",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ICAPS",
+    "venueKeys": [
+      "icaps"
+    ],
+    "year": 2017,
+    "description": "International Conference on Automated Planning and Scheduling",
+    "link": null,
+    "seriesLink": "https://icaps-conference.org/",
+    "date": "June 18-23, 2017",
+    "place": "Pittsburgh, PA, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ICAPS",
+    "venueKeys": [
+      "icaps"
+    ],
+    "year": 2016,
+    "description": "International Conference on Automated Planning and Scheduling",
+    "link": null,
+    "seriesLink": "https://icaps-conference.org/",
+    "date": "June 12-17, 2016",
+    "place": "London, UK",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ICAPS",
+    "venueKeys": [
+      "icaps"
+    ],
+    "year": 2015,
+    "description": "International Conference on Automated Planning and Scheduling",
+    "link": null,
+    "seriesLink": "https://icaps-conference.org/",
+    "date": "June 7-11, 2015",
+    "place": "Jerusalem, Israel",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "ICDAR",
     "venueKeys": [
       "icdar"
@@ -42244,6 +42382,52 @@
     "seriesLink": "https://ijcar.org/",
     "date": "July 1-4, 2020",
     "place": "Paris, France (co-located with FSCD 2020)",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "IJCAR",
+    "venueKeys": [
+      "ijcar"
+    ],
+    "year": 2018,
+    "description": "International Joint Conference on Automated Reasoning",
+    "link": null,
+    "seriesLink": "https://ijcar.org/",
+    "date": "July 14-17, 2018",
+    "place": "Oxford, UK (part of FLoC 2018)",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "IJCAR",
+    "venueKeys": [
+      "ijcar"
+    ],
+    "year": 2016,
+    "description": "International Joint Conference on Automated Reasoning",
+    "link": null,
+    "seriesLink": "https://ijcar.org/",
+    "date": "June 27 - July 2, 2016",
+    "place": "Coimbra, Portugal",
     "abstractDeadline": null,
     "deadline": null,
     "rebuttalDate": null,
@@ -44314,6 +44498,52 @@
     "seriesLink": "https://kr.org/",
     "date": "September 12-18, 2020",
     "place": "Virtual (originally Rhodes, Greece)",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "KR",
+    "venueKeys": [
+      "kr"
+    ],
+    "year": 2018,
+    "description": "International Conference on Principles of Knowledge Representation and Reasoning",
+    "link": null,
+    "seriesLink": "https://kr.org/",
+    "date": "October 30 - November 2, 2018",
+    "place": "Tempe, AZ, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "KR",
+    "venueKeys": [
+      "kr"
+    ],
+    "year": 2016,
+    "description": "International Conference on Principles of Knowledge Representation and Reasoning",
+    "link": null,
+    "seriesLink": "https://kr.org/",
+    "date": "April 25-29, 2016",
+    "place": "Cape Town, South Africa",
     "abstractDeadline": null,
     "deadline": null,
     "rebuttalDate": null,
