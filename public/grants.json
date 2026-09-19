@@ -5702,5 +5702,168 @@
     ],
     "url": "https://www.microsoft.com/en-us/research/academic-program/accelerating-foundation-models-research/",
     "featured": true
+  },
+  {
+    "id": "dod-muri",
+    "name": "DoD Multidisciplinary University Research Initiative (MURI)",
+    "shortName": "DoD MURI",
+    "sponsor": "Department of Defense (Army, Navy/ONR, Air Force)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty PIs leading multidisciplinary university teams (often multi-institution) on basic research of interest to DoD",
+    "deadline": "Annual (white papers spring, full proposals late summer; topics vary each cycle)",
+    "deadlineMonth": 5,
+    "amount": "Typically $500,000 to ~$1.5 million per year for an initial 3 years, with up to 2 optional additional years (up to 5 years total)",
+    "summary": "Supports teams of researchers spanning more than one traditional science/engineering discipline to accelerate basic research of high priority to the DoD, with annually refreshed topic areas across the Army, Navy, and Air Force basic research offices.",
+    "eligibility": [
+      "U.S. institutions of higher education with degree-granting science/engineering programs (individually or as a consortium)",
+      "One institution serves as the lead/primary awardee; industry, DoD labs, and FFRDCs may collaborate but cannot receive MURI funds directly",
+      "Proposals must address one of the year's published multidisciplinary topic areas"
+    ],
+    "topics": [
+      "AI/ML",
+      "Robotics",
+      "Security",
+      "Systems",
+      "Defense Research"
+    ],
+    "url": "https://www.onr.navy.mil/education-outreach/sponsored-research/university-research-initiatives/muri",
+    "featured": false
+  },
+  {
+    "id": "nsf-mri",
+    "name": "NSF Major Research Instrumentation (MRI) Program",
+    "shortName": "NSF MRI",
+    "sponsor": "National Science Foundation (NSF)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty and research teams at U.S. institutions seeking to acquire or develop shared-use research instrumentation",
+    "deadline": "Annual submission window (typically mid-October to mid-November; NSF paused the FY2026 window, next window anticipated FY2027)",
+    "deadlineMonth": 10,
+    "amount": "Track 1: >$100,000 to <$1.4 million; Track 2: $1.4 million to $4 million (cost-sharing currently waived)",
+    "summary": "Funds the acquisition or development of shared-use, multi-user research instruments that advance science and engineering research and research training capacity, including instrumentation for computing, sensing, and data-intensive research.",
+    "eligibility": [
+      "U.S. institutions of higher education (PhD-granting and non-PhD-granting) or 501(c)(3) not-for-profit research organizations, individually or as a consortium",
+      "Instrument must be for shared, multi-user use rather than a single investigator's exclusive use",
+      "Submission limits apply per institution per competition (e.g., up to 2 Track 1 proposals)"
+    ],
+    "topics": [
+      "Systems",
+      "HPC",
+      "AI/ML",
+      "General CS"
+    ],
+    "url": "https://www.nsf.gov/funding/opportunities/mri-major-research-instrumentation-program",
+    "featured": false
+  },
+  {
+    "id": "sigbed-early-career",
+    "name": "ACM SIGBED Early Career Researcher Award",
+    "shortName": "SIGBED Early Career Award",
+    "sponsor": "ACM SIGBED",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Junior researchers working on embedded, real-time, and cyber-physical systems who earned their PhD on or after January 1, 2018",
+    "deadline": "Annual (Late June)",
+    "deadlineMonth": 6,
+    "amount": "$2,000 honorarium plus an engraved plaque, presented at ESWeek",
+    "summary": "Recognizes outstanding contributions by junior researchers in embedded, real-time, and cyber-physical systems, honoring early-career work that has already made a significant impact on the field.",
+    "eligibility": [
+      "Active SIGBED member",
+      "PhD awarded on or after January 1, 2018",
+      "Demonstrated research concentration in embedded/real-time/cyber-physical systems publication venues"
+    ],
+    "topics": [
+      "Cyber-Physical Systems",
+      "Embedded Systems",
+      "Systems"
+    ],
+    "url": "https://sigbed.org/awards/",
+    "featured": false
+  },
+  {
+    "id": "sigbed-paul-caspi-dissertation",
+    "name": "ACM SIGBED Paul Caspi Memorial Dissertation Award",
+    "shortName": "SIGBED Caspi Dissertation Award",
+    "sponsor": "ACM SIGBED",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "Recent PhD graduates whose dissertation advances the science of embedded, real-time, or cyber-physical systems",
+    "deadline": "Annual (Early July)",
+    "deadlineMonth": 7,
+    "amount": "$2,000 honorarium plus an award certificate and website citation",
+    "summary": "Recognizes an outstanding doctoral dissertation that significantly advances the state of the art in embedded, real-time, or cyber-physical systems, honoring the legacy of Dr. Paul Caspi.",
+    "eligibility": [
+      "Dissertation must be dated within the eligible ~2-year window preceding the award cycle",
+      "Dissertation topic must focus on embedded, real-time, or cyber-physical systems research"
+    ],
+    "topics": [
+      "Cyber-Physical Systems",
+      "Embedded Systems",
+      "Systems"
+    ],
+    "url": "https://sigbed.org/awards/",
+    "featured": false
+  },
+  {
+    "id": "sigcse-early-career",
+    "name": "ACM SIGCSE Early Career Researcher Award",
+    "shortName": "SIGCSE Early Career Award",
+    "sponsor": "ACM SIGCSE",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Computing education researchers in the early stages of their academic careers",
+    "deadline": "Annual (Nomination intent by mid-August; nominations due September 1)",
+    "deadlineMonth": 9,
+    "amount": "Recognition award (plaque/citation); presented at a SIGCSE-sponsored conference",
+    "summary": "Recognizes and encourages outstanding contributions to computing education research by early-career academics, highlighting innovative work that addresses challenges in computing education or offers new theoretical or empirical insight.",
+    "eligibility": [
+      "Early-stage academic career in computing education research (program established 2025)",
+      "Nominators encouraged to notify the SIGCSE Vice Chair of intent to nominate in advance of the deadline"
+    ],
+    "topics": [
+      "STEM Education",
+      "General CS"
+    ],
+    "url": "https://sigcse.org/programs/awards/early-career.html",
+    "featured": false
+  },
+  {
+    "id": "cohere-labs-catalyst-grants",
+    "name": "Cohere Labs Catalyst Grants",
+    "shortName": "Cohere Labs Catalyst Grants",
+    "sponsor": "Cohere Labs (Cohere)",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "PhD Students"
+    ],
+    "whoFor": "Academic researchers and civic/public-impact organizations building AI research projects for public benefit or open science",
+    "deadline": "Rolling / Open",
+    "deadlineMonth": 0,
+    "amount": "API credits providing access to Cohere's frontier language models (amount varies by project scope)",
+    "summary": "Provides academic and public-impact researchers with API access to Cohere's language models to remove cost barriers to AI research, supporting projects in areas such as education, healthcare accessibility, cultural representation in AI, climate/sustainability, and AI safety.",
+    "eligibility": [
+      "Affiliated with an academic institution, civic organization, or public-impact entity",
+      "Project must demonstrate public benefit or open-science research goals",
+      "AI safety research findings must be responsibly disclosed to Cohere prior to publication"
+    ],
+    "topics": [
+      "AI/ML",
+      "NLP",
+      "Foundation Models"
+    ],
+    "url": "https://cohere.com/research/grants",
+    "featured": false
   }
 ]
