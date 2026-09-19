@@ -164,6 +164,13 @@ the next ~2 months (these change most and matter most to visitors), plus a
 By default, update current and upcoming editions only. Older entries are
 historical backfill and should be changed only when specifically needed.
 
+Tracked venues cover every CORE A* and CORE A conference referenced by
+`src/data/conference-sets.ts` (`coreAStarMap` / `coreAMap`), not just
+CSRankings' own default/next-tier set. 89 CORE A/A* series were added as
+skeleton records (`verified: false`, only `name`/`venueKeys`/`description`
+populated, `year: 2026` placeholder) without researched dates — prioritize
+these in upcoming passes over re-verifying already-populated entries.
+
 Search records by `name` and `year`. Conferences with multiple submission
 cycles have several objects with the same name and year. Research the shared
 conference details once, then update every cycle for that edition.
