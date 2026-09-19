@@ -34460,6 +34460,98 @@
     "generalChair": null
   },
   {
+    "name": "ASIACRYPT",
+    "venueKeys": [
+      "asiacrypt"
+    ],
+    "year": 2018,
+    "description": "International Conference on the Theory and Application of Cryptology and Information Security",
+    "link": null,
+    "seriesLink": "https://iacr.org/meetings/asiacrypt/",
+    "date": "December 2-6, 2018",
+    "place": "Brisbane, Australia",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ASIACRYPT",
+    "venueKeys": [
+      "asiacrypt"
+    ],
+    "year": 2017,
+    "description": "International Conference on the Theory and Application of Cryptology and Information Security",
+    "link": null,
+    "seriesLink": "https://iacr.org/meetings/asiacrypt/",
+    "date": "December 3-7, 2017",
+    "place": "Hong Kong, China",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ASIACRYPT",
+    "venueKeys": [
+      "asiacrypt"
+    ],
+    "year": 2016,
+    "description": "International Conference on the Theory and Application of Cryptology and Information Security",
+    "link": null,
+    "seriesLink": "https://iacr.org/meetings/asiacrypt/",
+    "date": "December 4-8, 2016",
+    "place": "Hanoi, Vietnam",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ASIACRYPT",
+    "venueKeys": [
+      "asiacrypt"
+    ],
+    "year": 2015,
+    "description": "International Conference on the Theory and Application of Cryptology and Information Security",
+    "link": null,
+    "seriesLink": "https://iacr.org/meetings/asiacrypt/",
+    "date": "November 29 - December 3, 2015",
+    "place": "Auckland, New Zealand",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "ASSETS",
     "venueKeys": [
       "assets"
@@ -46351,6 +46443,98 @@
     "generalChair": null
   },
   {
+    "name": "PETS",
+    "venueKeys": [
+      "pets"
+    ],
+    "year": 2018,
+    "description": "Privacy Enhancing Technologies Symposium",
+    "link": null,
+    "seriesLink": "https://petsymposium.org/",
+    "date": "July 24-27, 2018",
+    "place": "Barcelona, Spain",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "PETS",
+    "venueKeys": [
+      "pets"
+    ],
+    "year": 2017,
+    "description": "Privacy Enhancing Technologies Symposium",
+    "link": null,
+    "seriesLink": "https://petsymposium.org/",
+    "date": "July 18-21, 2017",
+    "place": "Minneapolis, MN, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "PETS",
+    "venueKeys": [
+      "pets"
+    ],
+    "year": 2016,
+    "description": "Privacy Enhancing Technologies Symposium",
+    "link": null,
+    "seriesLink": "https://petsymposium.org/",
+    "date": "July 19-22, 2016",
+    "place": "Darmstadt, Germany",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "PETS",
+    "venueKeys": [
+      "pets"
+    ],
+    "year": 2015,
+    "description": "Privacy Enhancing Technologies Symposium",
+    "link": null,
+    "seriesLink": "https://petsymposium.org/",
+    "date": "June 30 - July 2, 2015",
+    "place": "Philadelphia, PA, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "PODC",
     "venueKeys": [
       "podc"
@@ -48385,6 +48569,98 @@
     "seriesLink": "https://soups.page/",
     "date": "August 11-13, 2019",
     "place": "Santa Clara, CA, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "SOUPS",
+    "venueKeys": [
+      "soups"
+    ],
+    "year": 2018,
+    "description": "Symposium on Usable Privacy and Security",
+    "link": null,
+    "seriesLink": "https://soups.page/",
+    "date": "August 12-14, 2018",
+    "place": "Baltimore, MD, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "SOUPS",
+    "venueKeys": [
+      "soups"
+    ],
+    "year": 2017,
+    "description": "Symposium on Usable Privacy and Security",
+    "link": null,
+    "seriesLink": "https://soups.page/",
+    "date": "July 12-14, 2017",
+    "place": "Santa Clara, CA, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "SOUPS",
+    "venueKeys": [
+      "soups"
+    ],
+    "year": 2016,
+    "description": "Symposium on Usable Privacy and Security",
+    "link": null,
+    "seriesLink": "https://soups.page/",
+    "date": "June 22-24, 2016",
+    "place": "Denver, CO, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "SOUPS",
+    "venueKeys": [
+      "soups"
+    ],
+    "year": 2015,
+    "description": "Symposium on Usable Privacy and Security",
+    "link": null,
+    "seriesLink": "https://soups.page/",
+    "date": "July 22-24, 2015",
+    "place": "Ottawa, Canada",
     "abstractDeadline": null,
     "deadline": null,
     "rebuttalDate": null,
