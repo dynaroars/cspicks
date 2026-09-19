@@ -119,16 +119,33 @@ not via Agent/subagent):
 10. ICRA, IROS, RSS, RTSS, EMSOFT (robotics/embedded)
 11. EC, KDD, SIGCSE TS (misc)
 
-## Phase 2 (not started): research the 89 new CORE A/A* skeleton series
+## Phase 2: research the 89 new CORE A/A* skeleton series — **Done.**
 
-List of names is in `/tmp/new_confs.json` if that tmp file still exists this
-session (it's ephemeral — regenerate from the venue-key diff if gone: compare
-`coreAStarMap`/`coreAMap` keys in `src/data/conference-sets.ts` against
-`venueKeys` already present in `csconfs/data/conferences.json` with
-`year >= 2026`). These currently have **no date data at all** — `link`,
-`seriesLink`, `date`, `place`, and every deadline field are `null`,
-`verified: false`. This is real, large research work (up to 89 official-site
-lookups), not a quick pass.
+All 89 series (AAMAS through WSDM, see commit list below) now have real
+dates/deadlines/chairs researched from official sources, applied across 16
+batches (~5-7 series each), each followed by `npm test` + `npm run build`
+and a commit. A few series have partial data where the official site itself
+hadn't published full details yet (e.g. ICME 2027, AISTATS 2027 location,
+HotOS/ICS/CADE/GECCO/FOGA 2027 deadlines) — those are left `estimated: true,
+verified: false` with a `note` explaining the gap, per the "unknown beats
+wrong" rule. The duplicate-cycle sanity check (see script above) was rerun
+and is clean.
+
+Commits (in order): `e9a2cbd` FOCS/STOC/SODA/ITCS/CCC/ALENEX, `ca02515`
+ESA/STACS/COLT/CP/SAT, `28516bc` CADE/IJCAR/KR/ICAPS, `56fc9ff`
+ESORICS/CHES/CSF/FC/ACSAC/DSN, `89a3b04` PETS/SOUPS/ASIACRYPT, `7908828`
+INFOCOM/CoNEXT/ICDCS/IPDPS/PODC/DISC, `d24f3c5`
+HotOS/Middleware/ICS/IPSN/SenSys/ISLPED, `13d814a` ESOP/ECOOP, `226083e`
+CIDR/ICDT/CIKM/WSDM/SDM/ICDM, `4b8aec2`
+AISTATS/UAI/GECCO/PPSN/FOGA/AAMAS/ECAI, `b23c7f0`
+BMVC/WACV/ACM MM/ICME/MICCAI/ICDAR, `31b1205` EACL/ECIR/Interspeech,
+`f6ff73f` CSCW/DIS/IUI/ASSETS/ICWSM, `59abb91`
+ESEM/EASE/ICSA/ISSRE/SEAMS/MSR/ICER, `dbb5a3f`
+FPGA/ITC/ISMAR/PerCom/MMSys/ICSOC/ICWS, `ba76fa8`
+BPM/CAiSE/ER/GD/LAK/AIED/RE/RecSys/SIGSPATIAL/TACAS.
+
+Remaining follow-up (not urgent): ICME 2027's official site had no
+confirmed dates at research time — recheck in a future weekly/monthly pass.
 
 ## Workflow reminders for whoever resumes
 
