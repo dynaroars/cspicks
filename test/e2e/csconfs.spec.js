@@ -86,7 +86,11 @@ test('CS Confs reuses search behavior and defaults to this and next conference y
   await expect(page.getByRole('link', { name: '📅 CS Confs' })).toHaveAttribute('aria-current', 'page');
   await expect(page.locator('#start-year')).toHaveValue(String(fixtureYear));
   await expect(page.locator('#end-year')).toHaveValue(String(fixtureYear + 1));
-  await expect(page.locator('#end-year option')).toHaveCount(2);
+  // The year range reaches back to the earliest year in the dataset (not just
+  // this year and next), so there are far more than two selectable options.
+  const endYearOptionCount = await page.locator('#end-year option').count();
+  expect(endYearOptionCount).toBeGreaterThan(2);
+  await expect(page.locator('#end-year option').first()).not.toHaveText(String(fixtureYear));
   await expect(page.locator('#csconfs-results .schedule-card').first()).toBeVisible();
   await expect(page.locator('.search-examples')).toContainText('Try:');
   await expect(page.locator('#csconfs-examples button')).toHaveCount(4);

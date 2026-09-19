@@ -113,38 +113,40 @@ function setupExamples() {
 }
 
 async function init() {
-  filters = createFilterBar('#filter-bar', {
-    label: 'Conference schedule filters',
-    fields: ['years', 'confSet'],
-    years: { min: currentYear, max: currentYear + 1 },
-    defaults: { startYear: currentYear, endYear: currentYear + 1 },
-    persist: { years: false },
-    prefix: 'Conference years',
-    prefixId: 'csconfs-count',
-    className: 'csconfs-filters',
-    params,
-    onChange: () => {
-      render();
-      renderExamples();
-    }
-  });
-  filters.element.insertAdjacentHTML('beforeend', `<div class="filter-group checkboxes">
-    <label for="upcoming-only" class="filter-checkbox tooltip-trigger">
-      <input type="checkbox" id="upcoming-only"${params.get('upcoming') === 'false' ? '' : ' checked'} aria-describedby="upcoming-only-help">
-      <span>Upcoming only</span>
-      <span class="tooltip-content" id="upcoming-only-help" role="tooltip">Shows conferences with a future submission deadline or conference date. Conference deadlines use Anywhere on Earth time.</span>
-    </label>
-  </div>`);
-  document.getElementById('upcoming-only')!.addEventListener('change', () => {
-    render();
-    renderExamples();
-  });
-  initTooltipPositioning();
-
   try {
     const response = await fetch(new URL('./data/conferences.json', import.meta.url));
     if (!response.ok) throw new Error(`Conference data request failed (${response.status})`);
     conferences = await response.json();
+
+    const earliestYear = conferences.reduce((min, conf) => Math.min(min, conf.year), currentYear);
+    filters = createFilterBar('#filter-bar', {
+      label: 'Conference schedule filters',
+      fields: ['years', 'confSet'],
+      years: { min: earliestYear, max: currentYear + 1 },
+      defaults: { startYear: currentYear, endYear: currentYear + 1 },
+      persist: { years: false },
+      prefix: 'Conference years',
+      prefixId: 'csconfs-count',
+      className: 'csconfs-filters',
+      params,
+      onChange: () => {
+        render();
+        renderExamples();
+      }
+    });
+    filters.element.insertAdjacentHTML('beforeend', `<div class="filter-group checkboxes">
+      <label for="upcoming-only" class="filter-checkbox tooltip-trigger">
+        <input type="checkbox" id="upcoming-only"${params.get('upcoming') === 'false' ? '' : ' checked'} aria-describedby="upcoming-only-help">
+        <span>Upcoming only</span>
+        <span class="tooltip-content" id="upcoming-only-help" role="tooltip">Shows conferences with a future submission deadline or conference date. Conference deadlines use Anywhere on Earth time.</span>
+      </label>
+    </div>`);
+    document.getElementById('upcoming-only')!.addEventListener('change', () => {
+      render();
+      renderExamples();
+    });
+    initTooltipPositioning();
+
     suggestions = buildSuggestions();
     input.disabled = false;
     input.placeholder = 'Search conferences or research areas (e.g., PLDI or Security)';
