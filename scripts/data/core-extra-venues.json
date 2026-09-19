@@ -1,0 +1,439 @@
+{
+  "generatedAt": "2026-09-19T22:49:34.980Z",
+  "note": "CORE A/A* venues declared in src/data/conference-sets.ts that CSRankings' own generated-author-info.csv does not contain any rows for (verified by diffing live CSV areas against parentMap/nextTier). See EXPANSION_PLAN.md.",
+  "csrankingsVenueCount": 77,
+  "coreDeclaredVenueCount": 148,
+  "extraVenueCount": 86,
+  "extraVenues": [
+    {
+      "acronym": "aamas",
+      "area": "ai",
+      "tier": "core-a-star"
+    },
+    {
+      "acronym": "acmmm",
+      "area": "graph",
+      "tier": "core-a-star"
+    },
+    {
+      "acronym": "acsac",
+      "area": "sec",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "aied",
+      "area": "csed",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "aistats",
+      "area": "mlmining",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "alenex",
+      "area": "act",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "asiacrypt",
+      "area": "crypt",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "assets",
+      "area": "chi",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "bmvc",
+      "area": "vision",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "bpm",
+      "area": "soft",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "cade",
+      "area": "log",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "caise",
+      "area": "soft",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "ccc",
+      "area": "act",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "cgo",
+      "area": "arch",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "ches",
+      "area": "crypt",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "cidr",
+      "area": "mod",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "cikm",
+      "area": "inforet",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "colt",
+      "area": "mlmining",
+      "tier": "core-a-star"
+    },
+    {
+      "acronym": "conext",
+      "area": "comm",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "cp",
+      "area": "act",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "cscw",
+      "area": "chi",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "csf",
+      "area": "sec",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "dis",
+      "area": "chi",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "disc",
+      "area": "act",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "dsn",
+      "area": "ops",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "eacl",
+      "area": "nlp",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "ease",
+      "area": "soft",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "ecai",
+      "area": "ai",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "ecir",
+      "area": "inforet",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "ecoop",
+      "area": "plan",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "er",
+      "area": "mod",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "esa",
+      "area": "act",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "esem",
+      "area": "soft",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "esop",
+      "area": "plan",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "esorics",
+      "area": "sec",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "fc",
+      "area": "crypt",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "foga",
+      "area": "ai",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "fpga",
+      "area": "da",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "gd",
+      "area": "visualization",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "gecco",
+      "area": "ai",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "hotos",
+      "area": "ops",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "icaps",
+      "area": "ai",
+      "tier": "core-a-star"
+    },
+    {
+      "acronym": "icdar",
+      "area": "vision",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "icdcs",
+      "area": "ops",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "icdm",
+      "area": "mlmining",
+      "tier": "core-a-star"
+    },
+    {
+      "acronym": "icdt",
+      "area": "mod",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "icer",
+      "area": "csed",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "icme",
+      "area": "graph",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "icsa",
+      "area": "soft",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "icsoc",
+      "area": "soft",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "icws",
+      "area": "soft",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "icwsm",
+      "area": "inforet",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "ijcar",
+      "area": "log",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "infocom",
+      "area": "comm",
+      "tier": "core-a-star"
+    },
+    {
+      "acronym": "interspeech",
+      "area": "nlp",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "ipdps",
+      "area": "hpc",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "ipsn",
+      "area": "mobile",
+      "tier": "core-a-star"
+    },
+    {
+      "acronym": "islped",
+      "area": "da",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "ismar",
+      "area": "graph",
+      "tier": "core-a-star"
+    },
+    {
+      "acronym": "issre",
+      "area": "soft",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "iswc",
+      "area": "inforet",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "itc",
+      "area": "da",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "itcs",
+      "area": "act",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "iui",
+      "area": "chi",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "kr",
+      "area": "ai",
+      "tier": "core-a-star"
+    },
+    {
+      "acronym": "lak",
+      "area": "csed",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "miccai",
+      "area": "vision",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "middleware",
+      "area": "ops",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "mmsys",
+      "area": "graph",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "msr",
+      "area": "soft",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "percom",
+      "area": "mobile",
+      "tier": "core-a-star"
+    },
+    {
+      "acronym": "pets",
+      "area": "sec",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "podc",
+      "area": "act",
+      "tier": "core-a-star"
+    },
+    {
+      "acronym": "ppsn",
+      "area": "ai",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "re",
+      "area": "soft",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "recsys",
+      "area": "inforet",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "sat",
+      "area": "log",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "sdm",
+      "area": "mlmining",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "seams",
+      "area": "soft",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "sigspatial",
+      "area": "mod",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "soups",
+      "area": "sec",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "stacs",
+      "area": "act",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "tacas",
+      "area": "log",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "uai",
+      "area": "ai",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "wacv",
+      "area": "vision",
+      "tier": "core-a"
+    },
+    {
+      "acronym": "wsdm",
+      "area": "inforet",
+      "tier": "core-a"
+    }
+  ]
+}
