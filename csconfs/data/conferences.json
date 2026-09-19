@@ -51388,6 +51388,29 @@
     "generalChair": null
   },
   {
+    "name": "PPSN",
+    "venueKeys": [
+      "ppsn"
+    ],
+    "year": 2016,
+    "description": "International Conference on Parallel Problem Solving from Nature",
+    "link": null,
+    "seriesLink": "https://ppsn-conference.org/",
+    "date": "September 17-21, 2016",
+    "place": "Edinburgh, UK",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
     "name": "RE",
     "venueKeys": [
       "re"
