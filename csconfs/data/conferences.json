@@ -5942,7 +5942,7 @@
     "description": "International Conference on Embedded Software",
     "link": "https://esweek.org/emsoft/",
     "seriesLink": null,
-    "date": "2026-09-28",
+    "date": "October 4-9, 2026 (part of ESWeek 2026)",
     "place": "Barcelona, Spain",
     "abstractDeadline": "2026-03-23",
     "deadline": "2026-03-30",
@@ -5952,7 +5952,7 @@
     "programChair": "Borzoo Bonakdarpour, Li-Pin Chang",
     "acceptanceRate": null,
     "submissions": null,
-    "estimated": true,
+    "estimated": false,
     "verified": true,
     "generalChair": "Andy Pimentel, Mohammad Al Faruque"
   },
