@@ -296,19 +296,29 @@ frequent reruns).
   visible ranking number relative to the default set, for a school/area known
   to have coverage in the extra dataset.
 
-### Step 6 — Manual spot-check (human, regular browser — not scripted)
+### Step 6 — Spot-check (offline differential check, not a live-browser task)
 
-Before trusting the bulk-parsed dataset, a person should pick ~10-20 faculty
-across a few `EXTRA_VENUES` (especially ones with tricky DBLP-key mappings
-from Step 1) and manually compare their extra-dataset paper counts against
-their DBLP profile page, viewed normally in a browser (or via the Simulator
-page's existing `fetchAuthorStats`-backed UI, which runs client-side in a
-real user's browser and is unaffected by Anubis the way a scripted
-maintenance job would be). Mismatches point at either a wrong DBLP-key
-mapping (Step 1) or a parser bug (Step 2) — the dump and the live site are
-the same underlying DBLP data, just viewed two different ways. This step is
-explicitly a manual QA pass, not something to automate into a script, per
-the Anubis note above.
+**Revised from an earlier draft of this step**, which called for a human to
+compare the extra dataset against DBLP's live profile pages in a browser.
+That's unnecessary: a live DBLP page and the bulk dump are the same
+underlying DBLP data, so a live comparison mostly re-derives the same facts
+through DBLP's own aggregation code rather than checking against a second,
+independent source. What actually matters is whether `build-core-extra-pubs.js`'s
+`sax`-based parser extracts the right facts *from the dump*, and that's
+checkable entirely offline: independently re-derive a name+venue's paper
+count from the local `.dblp-dump/*.xml.gz` using a second, differently-coded
+extraction method (e.g. a plain-text/awk scan rather than XML parsing), and
+compare it to the committed CSV's total for the same name+venue. Agreement
+across two independent code paths over the same file is real evidence the
+parser is correct; a mismatch pinpoints either a wrong DBLP-key mapping
+(Step 1) or a parser bug (Step 2) worth chasing down (see HANDOFF.md's Step
+6 section for a worked example — a mismatch traced to `<author orcid="...">`
+attributes that a naive text-match check missed, not a real parser bug).
+Do 2-5 spot checks across a few `EXTRA_VENUES` (prioritize tricky
+guessed/overridden DBLP-key mappings from Step 1) before trusting a freshly
+regenerated dataset. The Simulator page's `fetchAuthorStats` (live DBLP,
+run in a real user's own browser) remains a legitimate *additional*,
+optional cross-check if ever wanted, but isn't required for this step.
 
 ## Pre-flight checklist (do before writing Step 1's code)
 

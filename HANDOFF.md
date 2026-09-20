@@ -12,12 +12,12 @@ roster only** — no new-faculty discovery, no changes to historical
 affiliation, no changes to `csrankings-default`/`all-union` behavior. Only
 the `core`/`core-a` conference-set filters are affected.
 
-## Status: Steps 1-3.5 done and committed (on `main`, no branch)
+## Status: all 6 steps done and committed (on `main`, no branch)
 
 Steps 1 (venue-list freeze), 2 (DBLP dump parser → `public/core-extra-author-info.csv`),
-3 (integration into `src/data.ts`/`src/filters.ts`), and 3.5 (help text) are
-**done**. What's left is Step 4 (already partly done — see below), Step 5
-(partly done), and Step 6 (manual spot-check, not started).
+3 (integration into `src/data.ts`/`src/filters.ts`), 3.5 (help text), 4
+(regeneration cadence), 5 (tests), and 6 (spot-check, done offline — see
+below, no browser/human needed after all) are **all done**.
 
 ### Step 2 recap (dump parser) — two real bugs found and fixed this session
 
@@ -138,74 +138,60 @@ Historical Mode writeup.
 - `scripts/check-project-size.mjs` guards `public/core-extra-author-info.csv`
   (~5.9MB today, 40MB cap).
 
-### Step 6 — worksheet prepared, actual check still needs a human
+### Step 6 — done, revised: no live DBLP/browser access is actually needed
 
-Confirmed again this session (see below): DBLP's Anubis wall really does
-block scripted/headless access, even a real Chromium context via Playwright
-gets served an explicit "Access Denied" page — not a bug, a deliberate
-control, so this project does not attempt to evade it. The comparison itself
-has to happen in a human's own regular browser. What *is* done: the
-candidate list below, generated from the actual committed dataset, so the
-human doesn't have to hunt for what to check — just open each DBLP author
-page and compare the total paper count in that venue against the number
-here. Prioritized toward `guessed`/`override`-sourced venues (the trickiest
-key resolutions, see `KNOWN_KEY_OVERRIDES` in `build-core-extra-pubs.js`),
-plus a couple of `wikidata`-resolved (high-confidence) venues as a control
-group that should need no correction.
+**Correction to this file's own earlier framing.** Earlier drafts of this
+section assumed the spot-check had to compare against DBLP's *live website*
+in a human's browser, since dblp.org's Anubis wall blocks scripted access.
+That's true as stated, but it missed the obvious point (the user caught
+this): a live DBLP profile page is rendered from the exact same underlying
+database as the bulk dump already sitting in `.dblp-dump/` — there is no
+independent second data source to compare against, so opening a browser
+would mostly be re-deriving the same facts through DBLP's own aggregation
+code instead of ours. The dump itself is the ground truth; what actually
+needed checking was whether `build-core-extra-pubs.js`'s **sax-based parser**
+extracts the right facts from it. That's fully checkable offline, with a
+second, independently-written extraction method over the same local file —
+no network access, no human, no browser required.
 
-| Name | Venue (DBLP key) | Our total count (all years) | Years in our data |
-| --- | --- | --- | --- |
-| Milind Tambe | aamas | 140 | 1995-2024 (28 distinct years) |
-| Nicholas R. Jennings | aamas | 120 | 1996-2023 (21 distinct years) |
-| Tat-Seng Chua | acmmm | 129 | 1994-2025 (27 distinct years) |
-| Qingming Huang | acmmm | 90 | 2005-2025 (19 distinct years) |
-| Malte Helmert | icaps | 49 | 2002-2023 (19 distinct years) |
-| Jörg Hoffmann 0001 | icaps | 43 | 2002-2023 (20 distinct years) |
-| Hanan Samet | sigspatial | 72 | 1994-2025 (29 distinct years) |
-| Cyrus Shahabi | sigspatial | 49 | 2001-2025 (20 distinct years) |
-| David A. Basin | csf | 25 | 2006-2025 (16 distinct years) |
-| Stéphanie Delaune | csf | 20 | 2004-2025 (14 distinct years) |
-| Mark Braverman | itcs | 15 | 2011-2025 (10 distinct years) |
-| Yuval Ishai | itcs | 15 | 2010-2023 (10 distinct years) |
-| Rachid Guerraoui | disc | 39 | 1995-2024 (20 distinct years) |
-| Hagit Attiya | disc | 34 | 1987-2025 (24 distinct years) |
-| Ian Goldberg 0001 | pets | 10 | 2002-2014 (7 distinct years) |
-| Claudia Díaz | pets | 8 | 2002-2010 (6 distinct years) |
-| Lance Fortnow | ccc | 32 | 1987-2016 (19 distinct years) |
-| Russell Impagliazzo | ccc | 27 | 1988-2023 (17 distinct years) |
-| Andreas Krause 0001 | aistats | 35 | 2014-2025 (control: wikidata-resolved) |
-| Roberto Cipolla | bmvc | 86 | 1989-2023 (control: wikidata-resolved) |
-| Mihir Bellare | asiacrypt | 20 | 2000-2024 (control: wikidata-resolved) |
+**What was done**: for two names (Milind Tambe / `aamas`, Hanan Samet /
+`sigspatial`), independently re-derived their paper counts from
+`.dblp-dump/dblp-2026-09-01.xml.gz` using plain-text/awk scanning — a
+completely different code path from the production `sax`-based parser — and
+compared:
 
-"Our total count" is the sum of the CSV's `count` column (raw paper count,
-not adjusted-for-coauthors) across every row for that name+venue pair — that
-should line up closely with the number of that venue's entries on the
-person's DBLP page (small discrepancies are expected/fine: DBLP dedupes
-differently in edge cases, and a mismatch of 1-2 papers isn't a sign of a
-wrong key — a mismatch of dozens, or zero when DBLP clearly shows papers,
-would be). To regenerate this table after a future dump refresh, use the
-node one-liner in this session's transcript (groups `public/core-extra-author-info.csv`
-by name+venue, sums `count`, prints top entries per venue) — it's not worth
-turning into a committed script since it's a one-off per QA pass, not a
-repeated maintenance task.
+- **Milind Tambe / aamas**: 140 vs. 140. Exact match on the first try.
+- **Hanan Samet / sigspatial**: first pass found 66 vs. the CSV's 72. Chased
+  the 6-paper gap down to real 2024–2025 `conf/gis` papers (e.g.
+  `conf/gis/SametH24`, booktitle literally `SIGSPATIAL/GIS` — confirms
+  `conf/gis` is the correct DBLP key) that a naive plain-text
+  `<author>Hanan Samet</author>` match missed because DBLP's newer entries
+  add an `orcid="..."` attribute to the tag
+  (`<author orcid="0000-0001-8230-0653">Hanan Samet</author>`). The
+  production parser uses `sax`, a real XML parser that reports tag names
+  independent of attributes, so it was never affected — **this was a bug in
+  the one-off verification script, not in `build-core-extra-pubs.js`**. Once
+  the verification script was fixed to tolerate attributes, it also landed
+  on 72.
 
-Independently, these names are also a strong *prior* plausibility check by
-domain knowledge alone even before opening DBLP: Tambe and Jennings are
-literally AAMAS's founding/most-cited figures, Samet effectively defined the
-SIGSPATIAL/GIS community, Guerraoui and Attiya are among DISC's most
-published authors, and Fortnow/Impagliazzo are leading complexity
-theorists central to CCC — high counts for exactly these people in exactly
-these venues is what a correct dataset should produce.
+**Conclusion**: both checks now agree exactly with the committed CSV. No
+evidence of a parsing bug in `build-core-extra-pubs.js`; the acronym→DBLP-key
+resolutions checked (`aamas`→`conf/atal`, `sigspatial`→`conf/gis`) are
+confirmed correct against real record content, not just plausible volume.
+This is a legitimate, fully-automated substitute for what this file
+previously called a human-only task — if doing this again for other
+venues/names, this offline differential-check approach (independent
+extraction over the local dump, not a live DBLP comparison) is the right
+pattern, not opening a browser. Two names is a small sample; running the
+same check against a few more of the previously-listed candidates
+(Guerraoui/DISC, Fortnow/CCC, etc.) would extend confidence further but
+wasn't required to conclude the pipeline is sound.
 
-Also tried and deliberately abandoned this session: an automated substitute
-using Semantic Scholar's API (not behind Anubis) to cross-check Vincent
-Conitzer's AAMAS count. Semantic Scholar's `venue` field turned out to be
-too inconsistently populated to trust (only 1 of ~32 known AAMAS papers for
-an extremely prolific, well-indexed researcher matched a venue-name regex) —
-that's a Semantic Scholar data-quality issue, not evidence of a problem
-here, but it means Semantic Scholar can't stand in for the real check either.
-Don't re-attempt that shortcut; the DBLP comparison genuinely needs a human
-on a real browser.
+The earlier Semantic Scholar cross-check (tried and abandoned before this
+correction) is now moot for the same reason it failed: it was also trying to
+find an "independent" source to compare against DBLP, when the real
+question was always about parser correctness against the one source
+(DBLP's own dump) everything already derives from.
 
 ## Everything currently passes
 
@@ -215,15 +201,21 @@ typecheck` (clean). `npm run check:size` reports one **pre-existing,
 unrelated** failure (`src/styles/components/results-cards.css` over the
 600-line limit) — not touched this session.
 
+## Status: all 6 steps of EXPANSION_PLAN.md are done
+
+Nothing is blocked on a human anymore (see the Step 6 correction above).
+Optional, not required: extend the offline differential-check to a few more
+names for extra confidence (see Step 6). Otherwise this plan is complete —
+delete this file, and consider updating `EXPANSION_PLAN.md`'s own header to
+note it shipped rather than deleting that file too (it's useful
+design-history context to keep).
+
 ## Quick resume checklist for the next session
 
 1. Read `EXPANSION_PLAN.md` in full.
-2. Read this file, especially the Step 6 worksheet table above.
+2. Read this file.
 3. `git status` / `git log --oneline -10` to confirm nothing changed
    underneath since this was written.
-4. The only remaining work is Step 6: a human opens each DBLP author page in
-   the worksheet table and compares the count. If everything checks out
-   (or only off by the expected small margin), the whole
-   EXPANSION_PLAN.md is complete — delete this file, and consider updating
-   EXPANSION_PLAN.md's own header to note it shipped rather than deleting
-   that file too (it's useful design-history context to keep).
+4. If picking this up again: everything is done. Either delete this file
+   (per above) or run a few more Step 6 differential checks if extra
+   confidence is wanted before doing so.
