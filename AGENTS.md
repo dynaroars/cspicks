@@ -27,8 +27,8 @@ npm run preview    # preview the production build
 Run a single Node unit test with `node --test-name-pattern="<substring>" test/data.test.js` (it's plain
 `node:test`, not a runner with its own CLI). The suite covers core data filtering, ranking, CSV errors,
 NSF attribution, and rendering safety; no linter is configured. `postbuild` strips large data files
-(`professor_history_openalex.json`, `school-aliases.json`, `data/`) from `dist/` since those are fetched from
-raw GitHub at runtime rather than bundled.
+(`professor_history_openalex.json`, `school-aliases.json`, `core-extra-author-info.csv`, `data/`) from `dist/`
+since those are fetched from raw GitHub at runtime rather than bundled.
 
 Data-generation scripts (run manually, not part of the build) and their cadence, plus every other
 data-refresh workflow — NSF funding sync, CS Conference schedule research, grants/awards crawling, OpenAlex
@@ -117,7 +117,18 @@ so modules loaded together on Search share one download and parse of the canonic
    institution names to CSRankings' abbreviated names. `public/manual_affiliations.csv` holds community
    corrections to bad OpenAlex data, merged in via `mergeAffiliationHistory()`. These assets are loaded only
    when the user enables Historical Mode.
-4. Area/conference taxonomy (area labels, parent conference→area map, CORE A/A* conference sets, "next tier"
+4. **CORE A/A* extra publications**: `public/core-extra-author-info.csv` (generated offline by
+   `scripts/build-core-extra-pubs.js` from a bulk DBLP dump — see `MAINTENANCE.md` §2.5) covers publications in
+   CORE A/A* venues CSRankings' own `generated-author-info.csv` doesn't track, for the existing roster only. Its
+   `area` column holds a venue key exactly like `generated-author-info.csv` does (not a resolved research
+   area — `getConferenceAreaMap`/`publicationMatchesConferenceSet` resolve that at query time). `loadData()`
+   deliberately does **not** delete roster members with zero CSRankings-tracked publications, since a
+   meaningful fraction of them (~5,000) only publish in these extra venues and would otherwise never get a
+   chance to have this data attached; `collectFilteredData`'s per-query `inRange.length === 0` check already
+   keeps them invisible everywhere else. `loadCoreExtraPubs()` lazily fetches and caches this CSV, merged into
+   `filterByYears`'s query at the year/confSet-filter step (before ranking) only when `confSet` is `core` or
+   `core-a` — see `src/filters.ts`'s `corePubsMap`, loaded the same way Historical Mode lazy-loads its data.
+5. Area/conference taxonomy (area labels, parent conference→area map, CORE A/A* conference sets, "next tier"
    conferences) lives as static lookup tables in `src/data.js` / `src/shared.js`.
 
 **Other modules:**
@@ -129,8 +140,9 @@ so modules loaded together on Search share one download and parse of the canonic
 **Charts**: Chart.js throughout, colors driven by OS color scheme (`prefers-color-scheme: dark/light`), synced via
 `updateChartDefaults()` in `shared.js` and `onThemeChange()` in `charts.js`.
 
-**No build-time data fetching** — CSRankings data is fetched at page load, while OpenAlex data is fetched on
-demand when Historical Mode is enabled. `postbuild` deliberately excludes the large local copies from `dist/`.
+**No build-time data fetching** — CSRankings data is fetched at page load, while OpenAlex data and the
+CORE A/A* extra-publications CSV are each fetched on demand (Historical Mode / CORE A/A* conference-set
+selection, respectively). `postbuild` deliberately excludes the large local copies from `dist/`.
 
 ## Adding a new Discovery
 

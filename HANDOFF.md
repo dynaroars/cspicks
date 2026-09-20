@@ -118,9 +118,22 @@ Done:
   again, keep in mind `selectOption('core-a')` doesn't wait for the async
   extra-data fetch; the test waits for `#conf-set` to re-enable first.
 
-Not done:
-- No dedicated e2e case for `confSet=core` (only `core-a` is covered) —
-  low priority, `core` is a subset of `core-a`'s logic path.
+Also added since: an e2e case for `confSet=core` (CORE A* only, fixture
+professor "Alan Astar" / "Star Extra University", venue `aamas`) alongside
+the existing `core-a` case — both conference-set branches of the merge are
+now covered. `AGENTS.md`'s data-pipeline section also now documents
+`core-extra-author-info.csv`/`loadCoreExtraPubs()` alongside the existing
+Historical Mode writeup.
+
+Tried and deliberately abandoned: an automated substitute for Step 6 using
+Semantic Scholar's API (not behind Anubis) to cross-check a known AAMAS-heavy
+researcher's (Vincent Conitzer) paper count. Semantic Scholar's `venue`
+field turned out to be too inconsistently populated to trust (only 1/32
+known AAMAS papers matched a venue-name regex for an extremely prolific,
+well-indexed researcher) — treat that as a Semantic Scholar data-quality
+issue, not evidence of a problem in `core-extra-author-info.csv`. Confirms
+Step 6 genuinely needs a human looking at real DBLP profile pages, per the
+plan's original reasoning; don't re-attempt this particular shortcut.
 
 ### Step 4 (regeneration cadence) — mostly done
 
