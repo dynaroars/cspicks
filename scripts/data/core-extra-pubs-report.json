@@ -1,0 +1,700 @@
+{
+  "generatedAt": "2026-09-20T03:32:02.811Z",
+  "dumpPath": ".dblp-dump/dblp-2026-09-01.xml.gz",
+  "recordsSeen": 8396492,
+  "matchedVenueRecords": 292627,
+  "rosterMatchedPapers": 222562,
+  "outputRowCount": 153556,
+  "accepted": {
+    "aamas": {
+      "acronym": "aamas",
+      "dblpKey": "conf/atal",
+      "area": "ai",
+      "source": "wikidata",
+      "totalPapers": 8345,
+      "distinctYears": 30
+    },
+    "aied": {
+      "acronym": "aied",
+      "dblpKey": "conf/aied",
+      "area": "csed",
+      "source": "wikidata",
+      "totalPapers": 3161,
+      "distinctYears": 17
+    },
+    "aistats": {
+      "acronym": "aistats",
+      "dblpKey": "conf/aistats",
+      "area": "mlmining",
+      "source": "wikidata",
+      "totalPapers": 4516,
+      "distinctYears": 19
+    },
+    "caise": {
+      "acronym": "caise",
+      "dblpKey": "conf/caise",
+      "area": "soft",
+      "source": "wikidata",
+      "totalPapers": 3668,
+      "distinctYears": 38
+    },
+    "cgo": {
+      "acronym": "cgo",
+      "dblpKey": "conf/cgo",
+      "area": "arch",
+      "source": "wikidata",
+      "totalPapers": 766,
+      "distinctYears": 24
+    },
+    "conext": {
+      "acronym": "conext",
+      "dblpKey": "conf/conext",
+      "area": "comm",
+      "source": "wikidata",
+      "totalPapers": 1360,
+      "distinctYears": 21
+    },
+    "cscw": {
+      "acronym": "cscw",
+      "dblpKey": "conf/cscw",
+      "area": "chi",
+      "source": "wikidata",
+      "totalPapers": 3160,
+      "distinctYears": 28
+    },
+    "ecai": {
+      "acronym": "ecai",
+      "dblpKey": "conf/ecai",
+      "area": "ai",
+      "source": "wikidata",
+      "totalPapers": 5843,
+      "distinctYears": 25
+    },
+    "ecir": {
+      "acronym": "ecir",
+      "dblpKey": "conf/ecir",
+      "area": "inforet",
+      "source": "wikidata",
+      "totalPapers": 2991,
+      "distinctYears": 28
+    },
+    "ecoop": {
+      "acronym": "ecoop",
+      "dblpKey": "conf/ecoop",
+      "area": "plan",
+      "source": "wikidata",
+      "totalPapers": 1563,
+      "distinctYears": 40
+    },
+    "foga": {
+      "acronym": "foga",
+      "dblpKey": "conf/foga",
+      "area": "ai",
+      "source": "wikidata",
+      "totalPapers": 315,
+      "distinctYears": 18
+    },
+    "fpga": {
+      "acronym": "fpga",
+      "dblpKey": "conf/fpga",
+      "area": "da",
+      "source": "wikidata",
+      "totalPapers": 1710,
+      "distinctYears": 33
+    },
+    "gecco": {
+      "acronym": "gecco",
+      "dblpKey": "conf/gecco",
+      "area": "ai",
+      "source": "wikidata",
+      "totalPapers": 11587,
+      "distinctYears": 27
+    },
+    "hotos": {
+      "acronym": "hotos",
+      "dblpKey": "conf/hotos",
+      "area": "ops",
+      "source": "wikidata",
+      "totalPapers": 532,
+      "distinctYears": 18
+    },
+    "icdt": {
+      "acronym": "icdt",
+      "dblpKey": "conf/icdt",
+      "area": "mod",
+      "source": "wikidata",
+      "totalPapers": 781,
+      "distinctYears": 29
+    },
+    "icme": {
+      "acronym": "icme",
+      "dblpKey": "conf/icmcs",
+      "area": "graph",
+      "source": "wikidata",
+      "totalPapers": 12583,
+      "distinctYears": 32
+    },
+    "icsa": {
+      "acronym": "icsa",
+      "dblpKey": "conf/icsa",
+      "area": "soft",
+      "source": "wikidata",
+      "totalPapers": 822,
+      "distinctYears": 10
+    },
+    "interspeech": {
+      "acronym": "interspeech",
+      "dblpKey": "conf/interspeech",
+      "area": "nlp",
+      "source": "wikidata",
+      "totalPapers": 28538,
+      "distinctYears": 38
+    },
+    "ipdps": {
+      "acronym": "ipdps",
+      "dblpKey": "conf/ipps",
+      "area": "hpc",
+      "source": "wikidata",
+      "totalPapers": 10686,
+      "distinctYears": 36
+    },
+    "ipsn": {
+      "acronym": "ipsn",
+      "dblpKey": "conf/ipsn",
+      "area": "mobile",
+      "source": "wikidata",
+      "totalPapers": 1342,
+      "distinctYears": 22
+    },
+    "islped": {
+      "acronym": "islped",
+      "dblpKey": "conf/islped",
+      "area": "da",
+      "source": "wikidata",
+      "totalPapers": 2128,
+      "distinctYears": 32
+    },
+    "iui": {
+      "acronym": "iui",
+      "dblpKey": "conf/iui",
+      "area": "chi",
+      "source": "wikidata",
+      "totalPapers": 3194,
+      "distinctYears": 31
+    },
+    "miccai": {
+      "acronym": "miccai",
+      "dblpKey": "conf/miccai",
+      "area": "vision",
+      "source": "wikidata",
+      "totalPapers": 15765,
+      "distinctYears": 28
+    },
+    "ppsn": {
+      "acronym": "ppsn",
+      "dblpKey": "conf/ppsn",
+      "area": "ai",
+      "source": "wikidata",
+      "totalPapers": 1760,
+      "distinctYears": 19
+    },
+    "recsys": {
+      "acronym": "recsys",
+      "dblpKey": "conf/recsys",
+      "area": "inforet",
+      "source": "wikidata",
+      "totalPapers": 2897,
+      "distinctYears": 19
+    },
+    "sdm": {
+      "acronym": "sdm",
+      "dblpKey": "conf/sdm",
+      "area": "mlmining",
+      "source": "wikidata",
+      "totalPapers": 2062,
+      "distinctYears": 25
+    },
+    "tacas": {
+      "acronym": "tacas",
+      "dblpKey": "conf/tacas",
+      "area": "log",
+      "source": "wikidata",
+      "totalPapers": 1576,
+      "distinctYears": 32
+    },
+    "wacv": {
+      "acronym": "wacv",
+      "dblpKey": "conf/wacv",
+      "area": "vision",
+      "source": "wikidata",
+      "totalPapers": 7070,
+      "distinctYears": 26
+    },
+    "wsdm": {
+      "acronym": "wsdm",
+      "dblpKey": "conf/wsdm",
+      "area": "inforet",
+      "source": "wikidata",
+      "totalPapers": 2249,
+      "distinctYears": 19
+    },
+    "acmmm": {
+      "acronym": "acmmm",
+      "dblpKey": "conf/mm",
+      "area": "graph",
+      "source": "override",
+      "totalPapers": 12919,
+      "distinctYears": 33
+    },
+    "acsac": {
+      "acronym": "acsac",
+      "dblpKey": "conf/acsac",
+      "area": "sec",
+      "source": "guessed",
+      "totalPapers": 1847,
+      "distinctYears": 36
+    },
+    "alenex": {
+      "acronym": "alenex",
+      "dblpKey": "conf/alenex",
+      "area": "act",
+      "source": "guessed",
+      "totalPapers": 463,
+      "distinctYears": 27
+    },
+    "asiacrypt": {
+      "acronym": "asiacrypt",
+      "dblpKey": "conf/asiacrypt",
+      "area": "crypt",
+      "source": "guessed",
+      "totalPapers": 1848,
+      "distinctYears": 33
+    },
+    "assets": {
+      "acronym": "assets",
+      "dblpKey": "conf/assets",
+      "area": "chi",
+      "source": "guessed",
+      "totalPapers": 2102,
+      "distinctYears": 27
+    },
+    "bmvc": {
+      "acronym": "bmvc",
+      "dblpKey": "conf/bmvc",
+      "area": "vision",
+      "source": "guessed",
+      "totalPapers": 5115,
+      "distinctYears": 38
+    },
+    "bpm": {
+      "acronym": "bpm",
+      "dblpKey": "conf/bpm",
+      "area": "soft",
+      "source": "guessed",
+      "totalPapers": 2580,
+      "distinctYears": 24
+    },
+    "cade": {
+      "acronym": "cade",
+      "dblpKey": "conf/cade",
+      "area": "log",
+      "source": "guessed",
+      "totalPapers": 1984,
+      "distinctYears": 37
+    },
+    "ccc": {
+      "acronym": "ccc",
+      "dblpKey": "conf/coco",
+      "area": "act",
+      "source": "override",
+      "totalPapers": 1344,
+      "distinctYears": 42
+    },
+    "ches": {
+      "acronym": "ches",
+      "dblpKey": "conf/ches",
+      "area": "crypt",
+      "source": "guessed",
+      "totalPapers": 618,
+      "distinctYears": 20
+    },
+    "cidr": {
+      "acronym": "cidr",
+      "dblpKey": "conf/cidr",
+      "area": "mod",
+      "source": "guessed",
+      "totalPapers": 697,
+      "distinctYears": 16
+    },
+    "cikm": {
+      "acronym": "cikm",
+      "dblpKey": "conf/cikm",
+      "area": "inforet",
+      "source": "guessed",
+      "totalPapers": 10461,
+      "distinctYears": 34
+    },
+    "colt": {
+      "acronym": "colt",
+      "dblpKey": "conf/colt",
+      "area": "mlmining",
+      "source": "guessed",
+      "totalPapers": 2655,
+      "distinctYears": 38
+    },
+    "cp": {
+      "acronym": "cp",
+      "dblpKey": "conf/cp",
+      "area": "act",
+      "source": "guessed",
+      "totalPapers": 1985,
+      "distinctYears": 32
+    },
+    "csf": {
+      "acronym": "csf",
+      "dblpKey": "conf/csfw",
+      "area": "sec",
+      "source": "override",
+      "totalPapers": 971,
+      "distinctYears": 38
+    },
+    "dis": {
+      "acronym": "dis",
+      "dblpKey": "conf/dis",
+      "area": "chi",
+      "source": "guessed",
+      "totalPapers": 1134,
+      "distinctYears": 28
+    },
+    "disc": {
+      "acronym": "disc",
+      "dblpKey": "conf/wdag",
+      "area": "act",
+      "source": "override",
+      "totalPapers": 1481,
+      "distinctYears": 38
+    },
+    "dsn": {
+      "acronym": "dsn",
+      "dblpKey": "conf/dsn",
+      "area": "ops",
+      "source": "guessed",
+      "totalPapers": 2626,
+      "distinctYears": 27
+    },
+    "eacl": {
+      "acronym": "eacl",
+      "dblpKey": "conf/eacl",
+      "area": "nlp",
+      "source": "guessed",
+      "totalPapers": 3733,
+      "distinctYears": 20
+    },
+    "ease": {
+      "acronym": "ease",
+      "dblpKey": "conf/ease",
+      "area": "soft",
+      "source": "guessed",
+      "totalPapers": 942,
+      "distinctYears": 20
+    },
+    "er": {
+      "acronym": "er",
+      "dblpKey": "conf/er",
+      "area": "mod",
+      "source": "guessed",
+      "totalPapers": 3000,
+      "distinctYears": 44
+    },
+    "esa": {
+      "acronym": "esa",
+      "dblpKey": "conf/esa",
+      "area": "act",
+      "source": "guessed",
+      "totalPapers": 2428,
+      "distinctYears": 34
+    },
+    "esem": {
+      "acronym": "esem",
+      "dblpKey": "conf/esem",
+      "area": "soft",
+      "source": "guessed",
+      "totalPapers": 1062,
+      "distinctYears": 19
+    },
+    "esop": {
+      "acronym": "esop",
+      "dblpKey": "conf/esop",
+      "area": "plan",
+      "source": "guessed",
+      "totalPapers": 976,
+      "distinctYears": 35
+    },
+    "esorics": {
+      "acronym": "esorics",
+      "dblpKey": "conf/esorics",
+      "area": "sec",
+      "source": "guessed",
+      "totalPapers": 2281,
+      "distinctYears": 30
+    },
+    "fc": {
+      "acronym": "fc",
+      "dblpKey": "conf/fc",
+      "area": "crypt",
+      "source": "guessed",
+      "totalPapers": 1370,
+      "distinctYears": 29
+    },
+    "gd": {
+      "acronym": "gd",
+      "dblpKey": "conf/gd",
+      "area": "visualization",
+      "source": "guessed",
+      "totalPapers": 1483,
+      "distinctYears": 32
+    },
+    "icaps": {
+      "acronym": "icaps",
+      "dblpKey": "conf/aips",
+      "area": "ai",
+      "source": "override",
+      "totalPapers": 1505,
+      "distinctYears": 27
+    },
+    "icdar": {
+      "acronym": "icdar",
+      "dblpKey": "conf/icdar",
+      "area": "vision",
+      "source": "guessed",
+      "totalPapers": 4758,
+      "distinctYears": 19
+    },
+    "icdcs": {
+      "acronym": "icdcs",
+      "dblpKey": "conf/icdcs",
+      "area": "ops",
+      "source": "guessed",
+      "totalPapers": 4500,
+      "distinctYears": 45
+    },
+    "icdm": {
+      "acronym": "icdm",
+      "dblpKey": "conf/icdm",
+      "area": "mlmining",
+      "source": "guessed",
+      "totalPapers": 7190,
+      "distinctYears": 25
+    },
+    "icer": {
+      "acronym": "icer",
+      "dblpKey": "conf/icer",
+      "area": "csed",
+      "source": "guessed",
+      "totalPapers": 880,
+      "distinctYears": 22
+    },
+    "icsoc": {
+      "acronym": "icsoc",
+      "dblpKey": "conf/icsoc",
+      "area": "soft",
+      "source": "guessed",
+      "totalPapers": 2025,
+      "distinctYears": 23
+    },
+    "icws": {
+      "acronym": "icws",
+      "dblpKey": "conf/icws",
+      "area": "soft",
+      "source": "guessed",
+      "totalPapers": 2563,
+      "distinctYears": 23
+    },
+    "icwsm": {
+      "acronym": "icwsm",
+      "dblpKey": "conf/icwsm",
+      "area": "inforet",
+      "source": "guessed",
+      "totalPapers": 2106,
+      "distinctYears": 19
+    },
+    "infocom": {
+      "acronym": "infocom",
+      "dblpKey": "conf/infocom",
+      "area": "comm",
+      "source": "guessed",
+      "totalPapers": 13010,
+      "distinctYears": 41
+    },
+    "ismar": {
+      "acronym": "ismar",
+      "dblpKey": "conf/ismar",
+      "area": "graph",
+      "source": "guessed",
+      "totalPapers": 3284,
+      "distinctYears": 27
+    },
+    "issre": {
+      "acronym": "issre",
+      "dblpKey": "conf/issre",
+      "area": "soft",
+      "source": "guessed",
+      "totalPapers": 2443,
+      "distinctYears": 35
+    },
+    "iswc": {
+      "acronym": "iswc",
+      "dblpKey": "conf/iswc",
+      "area": "inforet",
+      "source": "guessed",
+      "totalPapers": 944,
+      "distinctYears": 27
+    },
+    "itc": {
+      "acronym": "itc",
+      "dblpKey": "conf/itc",
+      "area": "da",
+      "source": "guessed",
+      "totalPapers": 4907,
+      "distinctYears": 44
+    },
+    "itcs": {
+      "acronym": "itcs",
+      "dblpKey": "conf/innovations",
+      "area": "act",
+      "source": "override",
+      "totalPapers": 1196,
+      "distinctYears": 17
+    },
+    "kr": {
+      "acronym": "kr",
+      "dblpKey": "conf/kr",
+      "area": "ai",
+      "source": "guessed",
+      "totalPapers": 1750,
+      "distinctYears": 23
+    },
+    "lak": {
+      "acronym": "lak",
+      "dblpKey": "conf/lak",
+      "area": "csed",
+      "source": "guessed",
+      "totalPapers": 1412,
+      "distinctYears": 16
+    },
+    "middleware": {
+      "acronym": "middleware",
+      "dblpKey": "conf/middleware",
+      "area": "ops",
+      "source": "guessed",
+      "totalPapers": 1765,
+      "distinctYears": 25
+    },
+    "mmsys": {
+      "acronym": "mmsys",
+      "dblpKey": "conf/mmsys",
+      "area": "graph",
+      "source": "guessed",
+      "totalPapers": 884,
+      "distinctYears": 17
+    },
+    "msr": {
+      "acronym": "msr",
+      "dblpKey": "conf/msr",
+      "area": "soft",
+      "source": "guessed",
+      "totalPapers": 1448,
+      "distinctYears": 23
+    },
+    "percom": {
+      "acronym": "percom",
+      "dblpKey": "conf/percom",
+      "area": "mobile",
+      "source": "guessed",
+      "totalPapers": 4011,
+      "distinctYears": 24
+    },
+    "pets": {
+      "acronym": "pets",
+      "dblpKey": "conf/pet",
+      "area": "sec",
+      "source": "override",
+      "totalPapers": 214,
+      "distinctYears": 13
+    },
+    "podc": {
+      "acronym": "podc",
+      "dblpKey": "conf/podc",
+      "area": "act",
+      "source": "guessed",
+      "totalPapers": 2449,
+      "distinctYears": 45
+    },
+    "re": {
+      "acronym": "re",
+      "dblpKey": "conf/re",
+      "area": "soft",
+      "source": "guessed",
+      "totalPapers": 2934,
+      "distinctYears": 32
+    },
+    "sat": {
+      "acronym": "sat",
+      "dblpKey": "conf/sat",
+      "area": "log",
+      "source": "guessed",
+      "totalPapers": 932,
+      "distinctYears": 24
+    },
+    "seams": {
+      "acronym": "seams",
+      "dblpKey": "conf/seams",
+      "area": "soft",
+      "source": "guessed",
+      "totalPapers": 156,
+      "distinctYears": 6
+    },
+    "sigspatial": {
+      "acronym": "sigspatial",
+      "dblpKey": "conf/gis",
+      "area": "mod",
+      "source": "override",
+      "totalPapers": 3404,
+      "distinctYears": 33
+    },
+    "soups": {
+      "acronym": "soups",
+      "dblpKey": "conf/soups",
+      "area": "sec",
+      "source": "guessed",
+      "totalPapers": 613,
+      "distinctYears": 22
+    },
+    "stacs": {
+      "acronym": "stacs",
+      "dblpKey": "conf/stacs",
+      "area": "act",
+      "source": "guessed",
+      "totalPapers": 2372,
+      "distinctYears": 43
+    },
+    "uai": {
+      "acronym": "uai",
+      "dblpKey": "conf/uai",
+      "area": "ai",
+      "source": "guessed",
+      "totalPapers": 3800,
+      "distinctYears": 41
+    }
+  },
+  "rejected": {
+    "ijcar": {
+      "acronym": "ijcar",
+      "dblpKey": "conf/ijcar",
+      "area": "log",
+      "source": "guessed",
+      "totalPapers": 97,
+      "distinctYears": 2
+    }
+  }
+}

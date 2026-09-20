@@ -13,6 +13,7 @@
     "sync:csrankings-rules": "node --import tsx scripts/sync-csrankings-rules.mjs",
     "core-extra:list-venues": "node --import tsx scripts/list-core-extra-venues.mjs",
     "core-extra:resolve-keys": "node scripts/resolve-core-venue-keys.mjs",
+    "core-extra:build-pubs": "node scripts/build-core-extra-pubs.js",
     "sync:nsf": "node scripts/sync-nsf-awards.mjs",
     "sync:nsf:all": "node scripts/sync-nsf-awards.mjs --all-us",
     "sync:nsf:names": "node scripts/sync-nsf-roster-names.mjs",
@@ -23,13 +24,14 @@
     "sitemap": "node --import tsx scripts/generate-sitemap.mjs",
     "generate:seo": "node --import tsx scripts/generate-seo-pages.mjs",
     "build": "vite build && node --import tsx scripts/generate-seo-pages.mjs",
-    "postbuild": "rm -f dist/professor_history_openalex.json dist/school-aliases.json && rm -rf dist/data",
+    "postbuild": "rm -f dist/professor_history_openalex.json dist/school-aliases.json dist/core-extra-author-info.csv && rm -rf dist/data",
     "preview": "vite preview"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@types/he": "^1.2.3",
     "@types/papaparse": "^5.5.2",
+    "sax": "^1.6.1",
     "tsx": "^4.23.13",
     "typescript": "^7.0.2",
     "vite": "^7.2.4"

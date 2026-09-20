@@ -34,6 +34,9 @@ debug_gmu_history.js
 # (with real DBLP reachability) produces a trustworthy result. See
 # EXPANSION_PLAN.md Step 1.
 scripts/data/core-venue-dblp-keys.json
+# EXPANSION_PLAN.md Step 2 input: the DBLP bulk dump, downloaded manually
+# (dblp.org is behind an anti-bot wall that blocks scripted downloads).
+.dblp-dump/
 
 .gemini/
 .impeccable/
