@@ -125,16 +125,6 @@ now covered. `AGENTS.md`'s data-pipeline section also now documents
 `core-extra-author-info.csv`/`loadCoreExtraPubs()` alongside the existing
 Historical Mode writeup.
 
-Tried and deliberately abandoned: an automated substitute for Step 6 using
-Semantic Scholar's API (not behind Anubis) to cross-check a known AAMAS-heavy
-researcher's (Vincent Conitzer) paper count. Semantic Scholar's `venue`
-field turned out to be too inconsistently populated to trust (only 1/32
-known AAMAS papers matched a venue-name regex for an extremely prolific,
-well-indexed researcher) — treat that as a Semantic Scholar data-quality
-issue, not evidence of a problem in `core-extra-author-info.csv`. Confirms
-Step 6 genuinely needs a human looking at real DBLP profile pages, per the
-plan's original reasoning; don't re-attempt this particular shortcut.
-
 ### Step 4 (regeneration cadence) — mostly done
 
 - `MAINTENANCE.md` gained a cadence-table row and a full "2.5. CORE A/A*
@@ -148,25 +138,92 @@ plan's original reasoning; don't re-attempt this particular shortcut.
 - `scripts/check-project-size.mjs` guards `public/core-extra-author-info.csv`
   (~5.9MB today, 40MB cap).
 
-### Step 6 — not started
+### Step 6 — worksheet prepared, actual check still needs a human
 
-A human should do a manual, regular-browser spot-check (not scripted —
-Anubis) comparing ~10-20 faculty across a few EXTRA_VENUES against their
-real DBLP profile page. Not done this session.
+Confirmed again this session (see below): DBLP's Anubis wall really does
+block scripted/headless access, even a real Chromium context via Playwright
+gets served an explicit "Access Denied" page — not a bug, a deliberate
+control, so this project does not attempt to evade it. The comparison itself
+has to happen in a human's own regular browser. What *is* done: the
+candidate list below, generated from the actual committed dataset, so the
+human doesn't have to hunt for what to check — just open each DBLP author
+page and compare the total paper count in that venue against the number
+here. Prioritized toward `guessed`/`override`-sourced venues (the trickiest
+key resolutions, see `KNOWN_KEY_OVERRIDES` in `build-core-extra-pubs.js`),
+plus a couple of `wikidata`-resolved (high-confidence) venues as a control
+group that should need no correction.
+
+| Name | Venue (DBLP key) | Our total count (all years) | Years in our data |
+| --- | --- | --- | --- |
+| Milind Tambe | aamas | 140 | 1995-2024 (28 distinct years) |
+| Nicholas R. Jennings | aamas | 120 | 1996-2023 (21 distinct years) |
+| Tat-Seng Chua | acmmm | 129 | 1994-2025 (27 distinct years) |
+| Qingming Huang | acmmm | 90 | 2005-2025 (19 distinct years) |
+| Malte Helmert | icaps | 49 | 2002-2023 (19 distinct years) |
+| Jörg Hoffmann 0001 | icaps | 43 | 2002-2023 (20 distinct years) |
+| Hanan Samet | sigspatial | 72 | 1994-2025 (29 distinct years) |
+| Cyrus Shahabi | sigspatial | 49 | 2001-2025 (20 distinct years) |
+| David A. Basin | csf | 25 | 2006-2025 (16 distinct years) |
+| Stéphanie Delaune | csf | 20 | 2004-2025 (14 distinct years) |
+| Mark Braverman | itcs | 15 | 2011-2025 (10 distinct years) |
+| Yuval Ishai | itcs | 15 | 2010-2023 (10 distinct years) |
+| Rachid Guerraoui | disc | 39 | 1995-2024 (20 distinct years) |
+| Hagit Attiya | disc | 34 | 1987-2025 (24 distinct years) |
+| Ian Goldberg 0001 | pets | 10 | 2002-2014 (7 distinct years) |
+| Claudia Díaz | pets | 8 | 2002-2010 (6 distinct years) |
+| Lance Fortnow | ccc | 32 | 1987-2016 (19 distinct years) |
+| Russell Impagliazzo | ccc | 27 | 1988-2023 (17 distinct years) |
+| Andreas Krause 0001 | aistats | 35 | 2014-2025 (control: wikidata-resolved) |
+| Roberto Cipolla | bmvc | 86 | 1989-2023 (control: wikidata-resolved) |
+| Mihir Bellare | asiacrypt | 20 | 2000-2024 (control: wikidata-resolved) |
+
+"Our total count" is the sum of the CSV's `count` column (raw paper count,
+not adjusted-for-coauthors) across every row for that name+venue pair — that
+should line up closely with the number of that venue's entries on the
+person's DBLP page (small discrepancies are expected/fine: DBLP dedupes
+differently in edge cases, and a mismatch of 1-2 papers isn't a sign of a
+wrong key — a mismatch of dozens, or zero when DBLP clearly shows papers,
+would be). To regenerate this table after a future dump refresh, use the
+node one-liner in this session's transcript (groups `public/core-extra-author-info.csv`
+by name+venue, sums `count`, prints top entries per venue) — it's not worth
+turning into a committed script since it's a one-off per QA pass, not a
+repeated maintenance task.
+
+Independently, these names are also a strong *prior* plausibility check by
+domain knowledge alone even before opening DBLP: Tambe and Jennings are
+literally AAMAS's founding/most-cited figures, Samet effectively defined the
+SIGSPATIAL/GIS community, Guerraoui and Attiya are among DISC's most
+published authors, and Fortnow/Impagliazzo are leading complexity
+theorists central to CCC — high counts for exactly these people in exactly
+these venues is what a correct dataset should produce.
+
+Also tried and deliberately abandoned this session: an automated substitute
+using Semantic Scholar's API (not behind Anubis) to cross-check Vincent
+Conitzer's AAMAS count. Semantic Scholar's `venue` field turned out to be
+too inconsistently populated to trust (only 1 of ~32 known AAMAS papers for
+an extremely prolific, well-indexed researcher matched a venue-name regex) —
+that's a Semantic Scholar data-quality issue, not evidence of a problem
+here, but it means Semantic Scholar can't stand in for the real check either.
+Don't re-attempt that shortcut; the DBLP comparison genuinely needs a human
+on a real browser.
 
 ## Everything currently passes
 
-`npm test` (80/80 unit tests), `npx playwright test` (39/39 e2e across every
-page), `npm run typecheck` (clean). `npm run check:size` reports one
-**pre-existing, unrelated** failure (`src/styles/components/results-cards.css`
-over the 600-line limit) — not touched this session.
+`npm test` (80/80 unit tests), `npx playwright test` (40/40 e2e across every
+page, including both the `core` and `core-a` merge cases), `npm run
+typecheck` (clean). `npm run check:size` reports one **pre-existing,
+unrelated** failure (`src/styles/components/results-cards.css` over the
+600-line limit) — not touched this session.
 
 ## Quick resume checklist for the next session
 
 1. Read `EXPANSION_PLAN.md` in full.
-2. Read this file.
+2. Read this file, especially the Step 6 worksheet table above.
 3. `git status` / `git log --oneline -10` to confirm nothing changed
    underneath since this was written.
-4. Remaining work, in priority order: Step 6 (manual DBLP spot-check —
-   needs a human), then optionally a `confSet=core` e2e case, then delete
-   this file once the whole plan is considered shipped.
+4. The only remaining work is Step 6: a human opens each DBLP author page in
+   the worksheet table and compares the count. If everything checks out
+   (or only off by the expected small margin), the whole
+   EXPANSION_PLAN.md is complete — delete this file, and consider updating
+   EXPANSION_PLAN.md's own header to note it shipped rather than deleting
+   that file too (it's useful design-history context to keep).
