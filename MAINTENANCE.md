@@ -33,6 +33,7 @@ source doesn't confirm a fact, leave it `null`/`TBD`/unset and say so.
 | **Monthly** | CS Conference schedule | Full audit pass across all current/upcoming editions, not just near-term ones | Medium-high (web research) |
 | **Quarterly** | NSF award data | `npm run sync:nsf:all` | High (thousands of API calls, hours) |
 | **Quarterly, or when upstream changes** | CSRankings taxonomy/venue rules | `npm run sync:csrankings-rules` | Low |
+| **Quarterly, or when DBLP publishes a new dump** | CORE A/A* extra publications | A human downloads a fresh `dblp.xml.gz` via their own browser (dblp.org blocks scripted downloads), then `npm run core-extra:build-pubs -- <path-to-dump>` | Medium (manual download + a few minutes of local parsing) |
 | **On demand** | NSF award data (scoped) | `npm run sync:nsf -- --school "<name>"` or `--faculty "<name>"` | Low-medium |
 | **On demand, after name-matching changes** | NSF award data (no API) | `npm run sync:nsf:rebuild` | Local cache only |
 | **On demand, when reports look wrong** | OpenAlex history / school aliases full rebuild | `node scripts/build-openalex-history.js`, `node scripts/build-school-aliases.js` | High (large API usage) |
@@ -66,6 +67,36 @@ npm run sync:csrankings-rules   # rebuilds src/csrankings-rules.generated.js fro
 
 Run after CSRankings adds/renames a conference or changes CORE tier
 membership. This is the fallback used until a client-side sync overrides it.
+
+## 2.5. CORE A/A* extra publications (`public/core-extra-author-info.csv`)
+
+CSRankings' own `generated-author-info.csv` only tracks its own venue set;
+selecting the "CORE A*" or "CORE A*/A" conference-set filter also needs
+publications in CORE A/A* venues CSRankings doesn't track (see
+`EXPANSION_PLAN.md` for the full design). That data comes from a bulk DBLP
+dump, not a live API — `dblp.org` runs an anti-bot wall (Anubis) that blocks
+scripted downloads, so refreshing this is **manual, not automatable
+end-to-end**:
+
+1. A human downloads a fresh `dblp.xml.gz` (and its matching `.dtd`) from
+   `https://dblp.org/xml/release/` via their own regular browser — Anubis's
+   challenge resolves transparently for a real browser in a few seconds.
+2. `npm run core-extra:build-pubs -- <path-to-dump.xml.gz>` re-parses it and
+   overwrites `public/core-extra-author-info.csv` and
+   `scripts/data/core-extra-pubs-report.json`.
+3. Check the report's `rejected` section: a venue that drops out (implausible
+   volume) or a previously-rejected one that now clears the bar changes the
+   exact count `src/filters.ts`'s `CONF_SET_HELP` text cites — update that
+   text's venue count/example if it drifts.
+4. Re-run `npm test` (the CSV schema test in `test/unit/data.test.js` will
+   catch a malformed regenerate) and commit the new CSV alongside the
+   updated report.
+
+`scripts/resolve-core-venue-keys.mjs` (Wikidata-based acronym→DBLP-key
+resolution) can also be re-run independently if CORE's own venue list
+changes (`npm run core-extra:resolve-keys`), but doesn't need to run every
+quarter — the dump-based parse in `build-core-extra-pubs.js` re-validates and
+guesses keys anyway.
 
 ## 3. NSF funding data
 

@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-20T03:32:02.811Z",
+  "generatedAt": "2026-09-20T03:55:55.584Z",
   "dumpPath": ".dblp-dump/dblp-2026-09-01.xml.gz",
   "recordsSeen": 8396492,
   "matchedVenueRecords": 292627,
   "rosterMatchedPapers": 222562,
-  "outputRowCount": 153556,
+  "outputRowCount": 166393,
   "accepted": {
     "aamas": {
       "acronym": "aamas",

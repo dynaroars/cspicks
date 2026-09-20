@@ -1,8 +1,8 @@
-import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadAffiliationData, normalizeConferenceSet } from './data.js';
+import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadAffiliationData, loadCoreExtraPubs, normalizeConferenceSet } from './data.js';
 import { applyPerCapitaRanks } from './metrics/per-capita.js';
 import { getInitialRegion, rememberRegion } from './shared.js';
 import type { ConferenceSetId } from './data/conference-sets.js';
-import type { AffiliationHistory, FilteredData, RawData, SchoolAliasMap } from './types.js';
+import type { AffiliationHistory, FilteredData, Publication, RawData, SchoolAliasMap } from './types.js';
 
 type FilterField = 'region' | 'years' | 'rankings' | 'history' | 'percapita' | 'confSet';
 interface FilterState {
@@ -20,6 +20,7 @@ export interface FilterController extends FilterState {
   element: Element;
   readonly historyMap: AffiliationHistory | null;
   readonly aliasMap: SchoolAliasMap | null;
+  readonly corePubsMap: Map<string, Publication[]> | null;
   setDisabled(disabled: boolean): void;
   apply(rawData: RawData): FilteredData;
   toParams(target?: URLSearchParams): URLSearchParams;
@@ -45,7 +46,7 @@ interface FilterBarOptions {
 // that History mode needs, so pages only declare which fields they want.
 
 const CONF_SET_HELP = 'Select conference venues: CSRankings default/all, CORE tiers, or union of all sets. '
-  + 'Some CORE A/A* venues (e.g. TACAS) show no results because CSRankings itself never collects their publications, not because of a filter here.';
+  + 'CORE A/A* now includes publications in 85 CORE-only venues (e.g. AAMAS, TACAS, AISTATS) that CSRankings itself never tracks, sourced from a separate DBLP-derived dataset — one venue (IJCAR) still shows no results because its DBLP history is currently too thin to trust, not because of a filter here.';
 const HISTORY_HELP = 'Credits papers to the university where the author was affiliated when published.';
 const RANKINGS_HELP = 'Displays overall and per-area ranks for institutions in the selected view.';
 const PER_CAPITA_HELP = 'Ranks universities by output per faculty member (min. 5 active faculty).';
@@ -59,6 +60,8 @@ const REGIONS: Array<[string, string]> = [
   ['australasia', 'Australasia']
 ];
 const REGION_IDS = new Set(REGIONS.map(([value]) => value));
+
+const isCoreConfSet = (confSet: ConferenceSetId) => confSet === 'core' || confSet === 'core-a';
 
 const CONF_SETS: Array<[ConferenceSetId, string]> = [
   ['csrankings-default', 'CSRankings (Default)'],
@@ -109,6 +112,17 @@ export async function loadHistoryMaps() {
     affiliationData = { historyMap: data.historyMap, aliasMap: data.aliasMap };
   }
   return affiliationData;
+}
+
+let coreExtraPubs: Map<string, Publication[]> | null = null;
+
+// Shared across pages, same treatment as affiliation history: only fetched
+// once a reader actually selects the CORE A/A* conference set.
+async function loadCoreExtraPubsMap() {
+  if (!coreExtraPubs) {
+    coreExtraPubs = await loadCoreExtraPubs();
+  }
+  return coreExtraPubs;
 }
 
 // The help panel hangs off the control itself rather than a separate ⓘ, so
@@ -268,6 +282,7 @@ export function createFilterBar(mount: string | Element, {
     get perCapita() { return state.perCapita; },
     get historyMap() { return state.historical ? affiliationData?.historyMap || null : null; },
     get aliasMap() { return state.historical ? affiliationData?.aliasMap || null : null; },
+    get corePubsMap() { return isCoreConfSet(state.confSet) ? coreExtraPubs : null; },
 
     setDisabled(disabled) {
       element.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLButtonElement>('input, select, button').forEach(control => {
@@ -277,7 +292,7 @@ export function createFilterBar(mount: string | Element, {
 
     apply(rawData: RawData) {
       const data = filterByYears(rawData, state.startYear, state.endYear, state.region,
-        controller.historyMap, controller.aliasMap, state.confSet);
+        controller.historyMap, controller.aliasMap, state.confSet, controller.corePubsMap);
       if (state.perCapita) {
         applyPerCapitaRanks(data);
       }
@@ -298,9 +313,11 @@ export function createFilterBar(mount: string | Element, {
       return target;
     },
 
-    // Loads affiliation data if the page starts with History already enabled.
+    // Loads affiliation/CORE-extra data if the page starts with History
+    // enabled or CORE A/A* already selected (e.g. via a shared URL).
     async ready() {
       if (state.historical) await loadHistoryMaps();
+      if (isCoreConfSet(state.confSet)) await loadCoreExtraPubsMap();
       return controller;
     }
   };
@@ -319,15 +336,34 @@ export function createFilterBar(mount: string | Element, {
         endSelect.value = String(state.endYear);
       }
     }
-    if (confSelect) state.confSet = normalizeConferenceSet(confSelect.value);
     storeFilters(state, persisted);
   };
 
-  [regionSelect, startSelect, endSelect, confSelect].forEach(control => {
+  [regionSelect, startSelect, endSelect].forEach(control => {
     control?.addEventListener('change', () => {
       readControls();
       onChange(controller);
     });
+  });
+
+  // Split out from the group above: selecting CORE A/A* needs an async fetch
+  // of the extra-venue dataset (see loadCoreExtraPubsMap) before `apply()`
+  // can reflect it, same reasoning as the History toggle below.
+  confSelect?.addEventListener('change', async () => {
+    const nextConfSet = normalizeConferenceSet(confSelect.value);
+    if (isCoreConfSet(nextConfSet) && !coreExtraPubs) {
+      confSelect.disabled = true;
+      try {
+        await loadCoreExtraPubsMap();
+      } catch (error) {
+        console.error('Failed to load CORE A/A* extra publication data:', error);
+      } finally {
+        confSelect.disabled = false;
+      }
+    }
+    state.confSet = nextConfSet;
+    readControls();
+    onChange(controller);
   });
 
   rankingsToggle?.addEventListener('change', () => {

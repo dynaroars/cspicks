@@ -7,6 +7,7 @@ const csrankings = `name,affiliation,homepage,scholarid,orcid
 Hai Duong 0001,George Mason University,https://example.test/hai,hai,0000-0001-2345-6789
 Alice Example,Univ. of Illinois at Urbana-Champaign,https://example.test/alice,alice,0000-0000-0000-0000
 Erin Europe,University of Oxford,https://example.test/erin,erin,0000-0000-0000-0000
+Cora Coreman,Core Extra University,https://example.test/cora,cora,
 `;
 const authorInfo = `name,area,year,count,adjustedcount
 Hai Duong 0001 [Tech],icse,${fixtureYear},2,1
@@ -19,6 +20,16 @@ const institutions = `institution,region,countryabbrv,homepage
 George Mason University,northamerica,us,https://cs.gmu.test/
 Univ. of Illinois at Urbana-Champaign,northamerica,us,https://cs.illinois.test/
 University of Oxford,europe,uk,https://cs.oxford.test/
+Core Extra University,northamerica,us,https://cs.coreextra.test/
+`;
+// Cora Coreman has zero rows in `authorInfo` above (no CSRankings-tracked
+// publications) but one row here, in a CORE-A-only venue (aistats, mapped to
+// mlmining) — exercises the "would previously have been deleted before the
+// merge ever ran" case from EXPANSION_PLAN.md Step 3. The `area` column here
+// is a venue key, matching generated-author-info.csv's own convention, not
+// the resolved research area.
+const coreExtraAuthorInfo = `name,area,count,adjustedcount,year
+Cora Coreman,aistats,1,1,${fixtureYear}
 `;
 const countries = `name,alpha_2
 United States of America,US
@@ -58,6 +69,7 @@ async function mockUpstreams(page) {
     if (url.endsWith('/professor_history_openalex.json')) return route.fulfill({ body: history, contentType: 'application/json' });
     if (url.endsWith('/school-aliases.json')) return route.fulfill({ body: '{}', contentType: 'application/json' });
     if (url.endsWith('/manual_affiliations.csv')) return route.fulfill({ body: 'name,school,start,end\n', contentType: 'text/csv' });
+    if (url.endsWith('/core-extra-author-info.csv')) return route.fulfill({ body: coreExtraAuthorInfo, contentType: 'text/csv' });
     return route.abort();
   });
   await page.route('https://dblp.org/**', route => {
@@ -349,6 +361,20 @@ test('conference and area queries list universities beside their people', async 
   await expect(page.locator('[data-show-more-schools], [data-show-more-people]')).toHaveCount(0);
   // The header names the venue and spells out the abbreviation.
   await expect(page.locator('#search-context-header')).toHaveText('ICSE (International Conference on Software Engineering)');
+});
+
+test('a professor with only a CORE-only-venue publication appears under CORE A/A* but not the default view', async ({ page }) => {
+  await page.goto('./?q=Core%20Extra%20University');
+  await expect(page.locator('#school-results .card')).toHaveCount(0);
+
+  await page.goto('./');
+  await page.locator('#conf-set').selectOption('core-a');
+  // Selecting CORE A/A* triggers an async fetch of the extra-venue dataset;
+  // the select is disabled for the duration (see src/filters.ts), so wait for
+  // it to re-enable before searching.
+  await expect(page.locator('#conf-set')).toBeEnabled();
+  await page.locator('#main-search').fill('Core Extra University');
+  await expect(page.locator('#school-results .card')).toHaveCount(1);
 });
 
 test('CORE A conference trends include a published ASE venue', async ({ page }) => {

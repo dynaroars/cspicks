@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
+import Papa from 'papaparse';
 
-import { coreAMap, fetchCsv, filterByYears, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet } from '../../src/data.js';
+import { coreAMap, coreAStarMap, fetchCsv, filterByYears, getConferenceAreaMap, getPublicationSchools, nextTier, parentMap, publicationMatchesConferenceSet } from '../../src/data.js';
 import { areaLabels, detectRegionFromLocales, encodeInlineValue, escapeHtml, formatRelativeTime, getInstitutionShortName, safeExternalUrl, scoreSuggestionMatch } from '../../src/shared.js';
 import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../../src/simulation.js';
 import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl, topCoauthorsInWindow } from '../../src/dblp.js';
@@ -158,6 +159,30 @@ test('rankings always use fractional credit', () => {
   assert.equal(legacyRawArgument.schools.A.areaRanks.mlmining, 2);
 });
 
+test('CORE-extra publications only surface for a professor under core/core-a, not other conference sets', () => {
+  // A professor with zero CSRankings-tracked publications (would previously
+  // have been deleted from `professors` at load time) but a real CORE-only
+  // publication (aistats: CORE A only, absent from parentMap).
+  const data = {
+    schools: { A: { country: 'us' } },
+    professors: { P: { name: 'P', affiliation: 'A', pubs: [] } }
+  };
+  const corePubsMap = new Map([['P', [{ area: 'aistats', year: 2025, count: 1, adjustedcount: 1 }]]]);
+
+  const coreResult = filterByYears(data, 2025, 2025, 'us', null, null, 'core-a', corePubsMap);
+  assert.ok(coreResult.professors.P, 'CORE-extra publication should surface the professor under core-a');
+  assert.equal(coreResult.professors.P.totalAdjusted, 1);
+
+  const defaultResult = filterByYears(data, 2025, 2025, 'us', null, null, 'csrankings-default', corePubsMap);
+  assert.equal(defaultResult.professors.P, undefined, 'CORE-extra data must not leak into csrankings-default');
+
+  const unionResult = filterByYears(data, 2025, 2025, 'us', null, null, 'all-union', corePubsMap);
+  assert.equal(unionResult.professors.P, undefined, 'CORE-extra data must not leak into all-union either');
+
+  const noMapResult = filterByYears(data, 2025, 2025, 'us', null, null, 'core-a');
+  assert.equal(noMapResult.professors.P, undefined, 'a professor with no base pubs stays absent without corePubsMap');
+});
+
 test('conference-set rules consistently distinguish default, extended, and CORE venues', () => {
   assert.equal(publicationMatchesConferenceSet({ area: 'icse' }, 'csrankings-default'), true);
   assert.equal(publicationMatchesConferenceSet({ area: 'ase' }, 'csrankings-default'), false);
@@ -182,6 +207,19 @@ test('all-union unions CSRankings and CORE venues', () => {
   assert.equal(publicationMatchesConferenceSet({ area: 'icse' }, 'all-union'), true);
   assert.equal(publicationMatchesConferenceSet({ area: 'nonexistent-venue' }, 'all-union'), false);
   assert.equal(getConferenceAreaMap('all-union').aistats, 'mlmining');
+});
+
+test('EXTRA_VENUES (CORE-only venues) never overlap CSRankings-tracked venues', () => {
+  // Guards the no-double-counting invariant EXPANSION_PLAN.md Step 3.4 relies
+  // on: scripts/build-core-extra-pubs.js only emits rows for venues in this
+  // set, so a paper credited via generated-author-info.csv can never also be
+  // credited via the CORE-extra dataset.
+  const csrankingsVenues = new Set([...Object.keys(parentMap), ...Object.keys(nextTier)]);
+  const coreVenues = new Set([...Object.keys(coreAMap), ...Object.keys(coreAStarMap)]);
+  const extraVenues = [...coreVenues].filter(venue => !csrankingsVenues.has(venue));
+  const overlap = extraVenues.filter(venue => csrankingsVenues.has(venue));
+  assert.equal(overlap.length, 0);
+  assert.ok(extraVenues.length > 0, 'sanity check: CORE declares at least one venue CSRankings does not track');
 });
 
 test('every CORE A venue maps to a real research area', () => {
@@ -282,6 +320,30 @@ test('rendering helpers neutralize markup and unsafe URLs', () => {
   assert.equal(formatRelativeTime(now - 86400000, now), 'yesterday');
   assert.equal(formatRelativeTime(now - 86400000 * 5, now), '5 days ago');
   assert.equal(formatRelativeTime('invalid-date', now), 'Unknown');
+});
+
+test('core-extra-author-info.csv matches the schema src/data.ts\'s loadCoreExtraPubs expects', () => {
+  const csv = fs.readFileSync(new URL('../../public/core-extra-author-info.csv', import.meta.url), 'utf8');
+  const { data: rows, meta } = Papa.parse(csv, { header: true, skipEmptyLines: true });
+
+  assert.deepEqual(meta.fields, ['name', 'area', 'count', 'adjustedcount', 'year']);
+  assert.ok(rows.length > 0, 'expected at least one row');
+
+  // Mirrors generated-author-info.csv's own convention: the `area` column
+  // actually holds a venue key (e.g. "aistats"), which src/data.ts resolves
+  // to a research area at query time via coreAMap/coreAStarMap — it must not
+  // be the already-resolved area name, or publicationMatchesConferenceSet's
+  // acronym-keyed lookup silently never matches these rows.
+  const extraVenues = new Set(Object.keys(coreAMap).concat(Object.keys(coreAStarMap))
+    .filter(venue => !parentMap[venue] && !nextTier[venue]));
+
+  for (const row of rows.slice(0, 2000)) {
+    assert.ok(row.name && !/\s+\[[^\]]+\]$/.test(row.name), `row name "${row.name}" must be a plain roster name, no [unit] suffix`);
+    assert.ok(extraVenues.has(row.area), `row area "${row.area}" must be one of EXTRA_VENUES' venue keys, not a resolved research area`);
+    assert.ok(Number.isFinite(Number.parseInt(row.year, 10)));
+    assert.ok(Number.isFinite(Number.parseFloat(row.count)));
+    assert.ok(Number.isFinite(Number.parseFloat(row.adjustedcount)));
+  }
 });
 
 test('fetchCsv rejects HTTP failures', async () => {

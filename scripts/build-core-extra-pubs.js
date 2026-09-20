@@ -212,8 +212,13 @@ async function parseDump({ dumpPath, entities, venueKeyTable, rosterNames }) {
           const adjusted = 1 / current.authors.length;
           for (const authorName of rosterAuthorsHere) {
             rosterMatchedPapers++;
-            const bucketKey = `${authorName}\u0000${venueMeta.area}\u0000${current.year}`;
-            const bucket = rowsByBucket.get(bucketKey) || { name: authorName, area: venueMeta.area, year: current.year, count: 0, adjustedcount: 0 };
+            // The output CSV's `area` column actually holds a *venue key*, matching
+            // generated-author-info.csv's own convention (e.g. "icse", not "plan") —
+            // src/data.ts's getConferenceAreaMap()/publicationMatchesConferenceSet()
+            // both key coreAMap/coreAStarMap by venue acronym and resolve the research
+            // area from that at query time, so the resolved area itself must not go here.
+            const bucketKey = `${authorName}\u0000${venueMeta.acronym}\u0000${current.year}`;
+            const bucket = rowsByBucket.get(bucketKey) || { name: authorName, area: venueMeta.acronym, year: current.year, count: 0, adjustedcount: 0 };
             bucket.count += 1;
             bucket.adjustedcount += adjusted;
             rowsByBucket.set(bucketKey, bucket);
@@ -293,8 +298,8 @@ async function main() {
   const { accepted, rejected } = validateVenues(venueKeyTable, volumeByKey);
   console.log(`Venue validation: ${Object.keys(accepted).length} accepted, ${Object.keys(rejected).length} rejected (implausible volume).`);
 
-  const acceptedAreas = new Set(Object.values(accepted).map(v => v.area));
-  const outputRows = [...rowsByBucket.values()].filter(row => acceptedAreas.has(row.area));
+  const acceptedAcronyms = new Set(Object.keys(accepted));
+  const outputRows = [...rowsByBucket.values()].filter(row => acceptedAcronyms.has(row.area));
 
   const csv = Papa.unparse(outputRows.map(r => ({
     name: r.name,

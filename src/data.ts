@@ -193,11 +193,15 @@ async function loadDataFromSources(): Promise<RawData> {
     }
   });
 
-  for (const name in professors) {
-    if (professors[name]?.pubs.length === 0) {
-      delete professors[name];
-    }
-  }
+  // Deliberately not deleting professors whose `pubs` ended up empty here:
+  // ~13,600 of the ~34,600 roster members have zero CSRankings-tracked
+  // publications, and roughly a third of those *do* have CORE-only-venue
+  // publications (see loadCoreExtraPubs below), which are merged in at query
+  // time by collectFilteredData rather than here. Deleting eagerly would
+  // remove those entries before the merge ever gets a chance to run.
+  // collectFilteredData's own `inRange.length === 0` check already excludes
+  // anyone with no publications matching a given query, so this is
+  // behaviorally identical to the old eager delete for every other view.
 
   return { professors, schools };
 }
@@ -251,6 +255,49 @@ export function loadAffiliationData() {
   }
 
   return affiliationDataPromise;
+}
+
+let coreExtraPubsPromise: Promise<Map<string, Publication[]>> | null = null;
+
+/**
+ * Lazily fetches `public/core-extra-author-info.csv` (EXPANSION_PLAN.md Step 2's
+ * output: publications in CORE A/A* venues CSRankings itself doesn't track, for
+ * the existing roster only) and groups it by name. Only loaded when the reader
+ * actually selects the `core`/`core-a` conference set — see `filterByYears`'s
+ * `corePubsMap` parameter for how it's merged in.
+ */
+export function loadCoreExtraPubs(): Promise<Map<string, Publication[]>> {
+  if (!coreExtraPubsPromise) {
+    coreExtraPubsPromise = fetchCsv<PublicationRow>(`${GITHUB_RAW}/core-extra-author-info.csv`)
+      .then(rows => {
+        const byName = new Map<string, Publication[]>();
+        let invalidRows = 0;
+        for (const row of rows) {
+          const name = row.name?.trim();
+          const year = Number.parseInt(row.year || '', 10);
+          const count = Number.parseFloat(row.count || '');
+          const adjustedcount = Number.parseFloat(row.adjustedcount || '');
+          if (!name || !row.area?.trim() || !Number.isFinite(year)
+            || !Number.isFinite(count) || !Number.isFinite(adjustedcount)) {
+            invalidRows++;
+            continue;
+          }
+          const pubs = byName.get(name) || [];
+          pubs.push({ area: row.area.trim(), year, count, adjustedcount });
+          byName.set(name, pubs);
+        }
+        if (invalidRows) {
+          console.warn(`Ignored ${invalidRows} malformed CORE-extra publication row(s).`);
+        }
+        return byName;
+      })
+      .catch(error => {
+        coreExtraPubsPromise = null;
+        throw error;
+      });
+  }
+
+  return coreExtraPubsPromise;
 }
 
 // build-openalex-history.js resolves each professor by searching OpenAlex for
@@ -344,16 +391,23 @@ function collectFilteredData(
   isInRegion: (school: string) => boolean,
   historyMap: AffiliationHistory | null,
   aliasMap: SchoolAliasMap | null,
-  confSet: string
+  confSet: string,
+  corePubsMap: Map<string, Publication[]> | null = null
 ): { filteredProfs: Record<string, FilteredProfessor>, filteredSchools: Record<string, FilteredSchool> } {
   const confMap = getConferenceAreaMap(confSet);
   const filteredProfs: Record<string, FilteredProfessor> = {};
   const filteredSchools: Record<string, FilteredSchool> = {};
+  // The extra dataset only covers CORE-only venues, so it's only relevant
+  // when the reader actually selected one of those conference sets.
+  const includeCoreExtras = corePubsMap && (confSet === 'core' || confSet === 'core-a');
 
   for (const [name, prof] of Object.entries(professors)) {
     if (!historyMap && !isInRegion(prof.affiliation)) continue;
 
-    const inRange = prof.pubs.filter(pub =>
+    const allPubs = includeCoreExtras && corePubsMap.has(name)
+      ? [...prof.pubs, ...corePubsMap.get(name)!]
+      : prof.pubs;
+    const inRange = allPubs.filter(pub =>
       pub.year >= startYear && pub.year <= endYear && publicationMatchesConferenceSet(pub, confSet));
     if (inRange.length === 0) continue;
 
@@ -512,12 +566,13 @@ export function filterByYears(
   region = 'us',
   historyMap: AffiliationHistory | null = null,
   aliasMap: SchoolAliasMap | null = null,
-  confSet = 'all-union'
+  confSet = 'all-union',
+  corePubsMap: Map<string, Publication[]> | null = null
 ): FilteredData {
   const history = historyMap && Object.keys(historyMap).length > 0 ? historyMap : null;
   const isInRegion = makeRegionTest(data.schools, region);
   const { filteredProfs, filteredSchools } = collectFilteredData(
-    data, startYear, endYear, isInRegion, history, aliasMap, confSet);
+    data, startYear, endYear, isInRegion, history, aliasMap, confSet, corePubsMap);
 
   const schoolList = Object.values(filteredSchools).filter(school => school.name);
   scoreSchools(schoolList);
