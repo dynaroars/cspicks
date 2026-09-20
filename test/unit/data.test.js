@@ -173,6 +173,10 @@ test('CORE-extra publications only surface for a professor under core/core-a, no
   assert.ok(coreResult.professors.P, 'CORE-extra publication should surface the professor under core-a');
   assert.equal(coreResult.professors.P.totalAdjusted, 1);
 
+  const coreAOnlyResult = filterByYears(data, 2025, 2025, 'us', null, null, 'core-a-only', corePubsMap);
+  assert.ok(coreAOnlyResult.professors.P, 'CORE-extra publication should also surface under core-a-only');
+  assert.equal(coreAOnlyResult.professors.P.totalAdjusted, 1);
+
   const defaultResult = filterByYears(data, 2025, 2025, 'us', null, null, 'csrankings-default', corePubsMap);
   assert.equal(defaultResult.professors.P, undefined, 'CORE-extra data must not leak into csrankings-default');
 
@@ -190,6 +194,11 @@ test('conference-set rules consistently distinguish default, extended, and CORE 
   assert.equal(publicationMatchesConferenceSet({ area: 'ase' }, 'core'), true);
   assert.equal(publicationMatchesConferenceSet({ area: 'issta' }, 'core'), false);
   assert.equal(publicationMatchesConferenceSet({ area: 'issta' }, 'core-a'), true);
+  // core-a-only is CORE A tier venues alone, excluding A*.
+  assert.equal(publicationMatchesConferenceSet({ area: 'aistats' }, 'core-a-only'), true);
+  assert.equal(publicationMatchesConferenceSet({ area: 'aamas' }, 'core-a-only'), false);
+  assert.equal(getConferenceAreaMap('core-a-only').aistats, 'mlmining');
+  assert.equal(getConferenceAreaMap('core-a-only').aamas, undefined);
   assert.equal(publicationMatchesConferenceSet({ area: 'fast' }, 'csrankings-default'), false);
   assert.equal(publicationMatchesConferenceSet({ area: 'fast' }, 'csrankings'), true);
   assert.equal(publicationMatchesConferenceSet({ area: 'usenixatc' }, 'csrankings-default'), false);

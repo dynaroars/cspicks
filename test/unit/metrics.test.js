@@ -382,8 +382,8 @@ test('area momentum compares a school against the field, not against itself', ()
 
 test('rank stability sweeps every window and conference set, holding region fixed', () => {
   const variants = rankStabilityVariants(2026);
-  assert.equal(variants.length, 20);
-  assert.deepEqual([...new Set(variants.map(v => v.confSet))], ['csrankings-default', 'csrankings', 'core', 'core-a', 'all-union']);
+  assert.equal(variants.length, 24);
+  assert.deepEqual([...new Set(variants.map(v => v.confSet))], ['csrankings-default', 'csrankings', 'core', 'core-a-only', 'core-a', 'all-union']);
   // Windows are inclusive of both endpoints, so a 5-year window is 2022–2026.
   assert.deepEqual(variants[0], { key: '5|csrankings-default', span: 5, confSet: 'csrankings-default', startYear: 2022, endYear: 2026 });
 
@@ -403,17 +403,18 @@ test('rank stability sweeps every window and conference set, holding region fixe
 
   const steady = summarizeRankStability(samples, 'Steady');
   const swingy = summarizeRankStability(samples, 'Swingy');
-  assert.equal(steady.settings, 20);
+  assert.equal(steady.settings, 24);
   // Steady leads wherever ASE is excluded and trails wherever it counts, so the
   // same department holds two different ranks depending on the setting alone.
   assert.equal(steady.best, 1);
   assert.equal(steady.worst, 2);
   assert.equal(steady.spread, 1);
   assert.equal(steady.stable, true);
-  // Swingy simply does not exist under the four default-venue settings.
+  // Swingy simply does not exist under the settings that exclude ASE
+  // (csrankings-default and core-a-only), across all four windows.
   assert.equal(swingy.best, 1);
-  assert.equal(swingy.unranked, 4, 'settings where a school never ranks are reported, not dropped');
-  assert.equal(swingy.rows.filter(row => row.rank === null).length, 4);
+  assert.equal(swingy.unranked, 8, 'settings where a school never ranks are reported, not dropped');
+  assert.equal(swingy.rows.filter(row => row.rank === null).length, 8);
   assert.equal(summarizeRankStability(samples, 'Nonexistent University'), null);
 });
 

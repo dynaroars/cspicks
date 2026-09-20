@@ -399,7 +399,8 @@ function collectFilteredData(
   const filteredSchools: Record<string, FilteredSchool> = {};
   // The extra dataset only covers CORE-only venues, so it's only relevant
   // when the reader actually selected one of those conference sets.
-  const includeCoreExtras = corePubsMap && (confSet === 'core' || confSet === 'core-a');
+  const includeCoreExtras = corePubsMap
+    && (confSet === 'core' || confSet === 'core-a-only' || confSet === 'core-a');
 
   for (const [name, prof] of Object.entries(professors)) {
     if (!historyMap && !isInRegion(prof.affiliation)) continue;

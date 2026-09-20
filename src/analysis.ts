@@ -433,6 +433,7 @@ export const CONF_SET_LABELS = {
     'csrankings-default': 'CSRankings default',
     csrankings: 'CSRankings all',
     'core-a': 'CORE A + A*',
+    'core-a-only': 'CORE A only',
     core: 'CORE A* only',
     'all-union': 'All (union)'
 };

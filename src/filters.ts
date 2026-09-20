@@ -61,12 +61,14 @@ const REGIONS: Array<[string, string]> = [
 ];
 const REGION_IDS = new Set(REGIONS.map(([value]) => value));
 
-const isCoreConfSet = (confSet: ConferenceSetId) => confSet === 'core' || confSet === 'core-a';
+const isCoreConfSet = (confSet: ConferenceSetId) =>
+  confSet === 'core' || confSet === 'core-a-only' || confSet === 'core-a';
 
 const CONF_SETS: Array<[ConferenceSetId, string]> = [
   ['csrankings-default', 'CSRankings (Default)'],
   ['csrankings', 'CSRankings (All)'],
   ['core', 'CORE A*'],
+  ['core-a-only', 'CORE A'],
   ['core-a', 'CORE A*/A'],
   ['all-union', 'All (Union)']
 ];

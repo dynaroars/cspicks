@@ -102,7 +102,7 @@ export const coreAMap: Record<string, string> = {
   'uai': 'ai', 'usenixatc': 'ops', 'wacv': 'vision', 'wsdm': 'inforet'
 };
 
-export const CONFERENCE_SET_IDS = ['csrankings-default', 'csrankings', 'core', 'core-a', 'all-union'] as const;
+export const CONFERENCE_SET_IDS = ['csrankings-default', 'csrankings', 'core', 'core-a-only', 'core-a', 'all-union'] as const;
 export type ConferenceSetId = typeof CONFERENCE_SET_IDS[number];
 
 export function normalizeConferenceSet(confSet: string): ConferenceSetId {
@@ -114,6 +114,7 @@ export function normalizeConferenceSet(confSet: string): ConferenceSetId {
 export function publicationMatchesConferenceSet(publication: Pick<Publication, 'area'>, confSet = 'all-union') {
   const selectedSet = normalizeConferenceSet(confSet);
   if (selectedSet === 'core') return Boolean(coreAStarMap[publication.area]);
+  if (selectedSet === 'core-a-only') return Boolean(coreAMap[publication.area]);
   if (selectedSet === 'core-a') return Boolean(coreAStarMap[publication.area] || coreAMap[publication.area]);
   if (selectedSet === 'all-union') {
     return Boolean(parentMap[publication.area] || coreAStarMap[publication.area] || coreAMap[publication.area]);
@@ -127,12 +128,12 @@ export function publicationMatchesConferenceSet(publication: Pick<Publication, '
 
 export function getConferenceAreaMap(confSet = 'all-union'): Record<string, string> {
   const selectedSet = normalizeConferenceSet(confSet);
-  if (selectedSet === 'core' || selectedSet === 'core-a' || selectedSet === 'all-union') {
+  if (selectedSet === 'core' || selectedSet === 'core-a-only' || selectedSet === 'core-a' || selectedSet === 'all-union') {
     // CORE occasionally categorizes a venue differently from CSRankings, so
     // CORE's mapping must win when both contain the venue.
-    return selectedSet === 'core'
-      ? { ...parentMap, ...coreAStarMap }
-      : { ...parentMap, ...coreAStarMap, ...coreAMap };
+    if (selectedSet === 'core') return { ...parentMap, ...coreAStarMap };
+    if (selectedSet === 'core-a-only') return { ...parentMap, ...coreAMap };
+    return { ...parentMap, ...coreAStarMap, ...coreAMap };
   }
   return parentMap;
 }
