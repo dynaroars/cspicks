@@ -1,5 +1,12 @@
 import { cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
+import type { KeywordSpec } from './search-keywords.js';
 import type { AttributedNsfAward, FilteredSchool, FundingFaculty, FundingIndex, FundingSchool, NsfAward, NsfDataset } from './types.js';
+
+export const NSF_KEYWORD_SPECS: KeywordSpec[] = [
+  { key: 'pi', aliases: ['faculty', 'name'], example: 'pi: Smith', description: 'Principal investigator (faculty) name' },
+  { key: 'institution', aliases: ['school', 'university'], example: 'institution: MIT', description: 'University/institution name' },
+  { key: 'program', aliases: ['division', 'directorate'], example: 'program: CAREER', description: 'NSF program, division, or directorate' }
+];
 
 /** @param {unknown} value @returns {value is string | null} */
 function isNullableString(value: unknown): value is string | null {

@@ -24,7 +24,8 @@
 .schedule-areas { display: flex; flex-wrap: wrap; gap: .35rem; margin: .5rem 0; }
 .schedule-areas span { border: 1px solid var(--border-color); background: var(--bg-secondary); border-radius: 999px; padding: .2rem .5rem; color: var(--text-secondary); font-size: .74rem; }
 .schedule-extra { margin: .28rem 0; color: var(--text-secondary); font-size: .84rem; }
-.schedule-series-link { display: inline-block; margin-top: .35rem; font-size: .82rem; }
+.schedule-series-link { display: inline-block; margin-top: .35rem; font-size: .82rem; color: var(--accent-color); }
+.schedule-series-link:hover { text-decoration: none; }
 .schedule-card-cycles { display: grid; align-content: start; gap: .75rem; }
 .schedule-cycle { position: relative; border-left: 3px solid var(--border-color); padding: .1rem 0 .1rem .9rem; }
 .schedule-cycle-label { display: block; margin-bottom: .35rem; color: var(--text-secondary); font-size: .75rem; }
@@ -32,10 +33,12 @@
 .schedule-countdown.is-soon { color: #9a6700; }
 .schedule-countdown.is-urgent { color: #b42318; }
 .schedule-countdown.is-passed, .schedule-countdown.is-tbd { color: var(--text-secondary); }
-.schedule-dates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .35rem .8rem; margin: 0; }
+.schedule-date-remaining { display: inline; margin-bottom: 0; margin-left: .4rem; font-size: .7rem; font-weight: 600; white-space: nowrap; }
+.schedule-dates { display: grid; grid-template-columns: 1fr; gap: .35rem .8rem; margin: 0; }
 .schedule-dates div { display: flex; justify-content: space-between; gap: .6rem; font-size: .78rem; }
 .schedule-dates dt { color: var(--text-secondary); }
 .schedule-dates dd { margin: 0; color: var(--text-primary); font-weight: 600; text-align: right; white-space: nowrap; }
+.schedule-dates div.is-passed { opacity: .6; text-decoration: line-through; text-decoration-thickness: 1px; }
 .schedule-tbd { margin: 0; color: var(--text-secondary); font-size: .8rem; }
 .schedule-more-cycles summary { cursor: pointer; color: var(--primary-color); font-size: .8rem; font-weight: 600; }
 .schedule-more-cycles[open] summary { margin-bottom: .75rem; }

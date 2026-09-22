@@ -1,12 +1,15 @@
 /**
  * CS Awards & Grants Main Controller
  */
-import { loadGrantsData, filterGrants, grantsSuggestions } from './grants-data.js';
+import { GRANTS_KEYWORD_SPECS, loadGrantsData, filterGrants, grantsSuggestions } from './grants-data.js';
 import { renderGrantCard } from './grants-render.js';
 import { createSuggestionBox, rankSuggestions } from '../suggestion-box.js';
+import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
 import { escapeHtml } from '../shared.js';
+import { createFavoritesStore, wireFavoriteToggles } from '../favorites.js';
+import { keywordHelpIcon } from '../search-keywords.js';
 import type { Grant } from '../types.js';
 import type { createSuggestionBox as CreateSuggestionBox } from '../suggestion-box.js';
 
@@ -15,6 +18,7 @@ const input = document.querySelector<HTMLInputElement>('#grants-search')!;
 const resultsContainer = document.getElementById('grants-results')!;
 const statusText = document.getElementById('grants-status');
 const countElement = document.getElementById('grants-count');
+const favorites = createFavoritesStore('cspicks:grants-favorites');
 
 let allGrants: Grant[] = [];
 let suggestions: ReturnType<typeof CreateSuggestionBox> | null = null;
@@ -83,7 +87,7 @@ function render() {
       </div>
     `;
   } else {
-    resultsContainer.innerHTML = filtered.map(renderGrantCard).join('');
+    resultsContainer.innerHTML = filtered.map(grant => renderGrantCard(grant, favorites.isFavorite)).join('');
   }
 
   const countStr = `${filtered.length} award${filtered.length === 1 ? '' : 's'} &amp; grant${filtered.length === 1 ? '' : 's'}`;
@@ -283,6 +287,12 @@ async function init() {
       suggestions!.render(input.value);
       render();
     });
+
+    const searchBox = input.closest<HTMLElement>('.universal-search')!;
+    searchBox.classList.add('has-search-help');
+    searchBox.insertAdjacentHTML('afterbegin', keywordHelpIcon(GRANTS_KEYWORD_SPECS, 'grants-search-help'));
+    wireFavoriteToggles(resultsContainer, favorites);
+    initTooltipPositioning();
 
     setupExamples();
     setupDelegatedListeners();

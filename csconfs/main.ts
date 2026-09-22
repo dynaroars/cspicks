@@ -4,7 +4,9 @@ import { initTooltipPositioning } from '../src/tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../src/seo.js';
 import { trackView } from '../src/analytics.js';
 import { escapeHtml } from '../src/shared.js';
-import { filterSchedule, scheduleSuggestions } from './schedule-data.js';
+import { createFavoritesStore, wireFavoriteToggles } from '../src/favorites.js';
+import { keywordHelpIcon } from '../src/search-keywords.js';
+import { CSCONFS_KEYWORD_SPECS, filterSchedule, scheduleSuggestions } from './schedule-data.js';
 import { renderScheduleCard } from './schedule-render.js';
 import type { FilterController } from '../src/filters.js';
 import type { createSuggestionBox as CreateSuggestionBox } from '../src/suggestion-box.js';
@@ -15,6 +17,7 @@ const currentYear = new Date().getFullYear();
 const input = document.querySelector<HTMLInputElement>('#csconfs-search')!;
 const results = document.getElementById('csconfs-results')!;
 const status = document.getElementById('csconfs-status')!;
+const favorites = createFavoritesStore('cspicks:csconfs-favorites');
 let conferences: ConferenceRecord[] = [];
 let filters: FilterController;
 let suggestions: ReturnType<typeof CreateSuggestionBox>;
@@ -43,7 +46,7 @@ function render() {
     query: input.value,
     upcomingOnly
   });
-  results.innerHTML = groups.map(group => renderScheduleCard(group)).join('');
+  results.innerHTML = groups.map(group => renderScheduleCard(group, Date.now(), favorites.isFavorite)).join('');
   const suffix = upcomingOnly ? ' upcoming' : '';
   status.textContent = groups.length
     ? `${groups.length} matching${suffix} conference${groups.length === 1 ? '' : 's'}`
@@ -145,6 +148,10 @@ async function init() {
       render();
       renderExamples();
     });
+    const searchBox = input.closest<HTMLElement>('.universal-search')!;
+    searchBox.classList.add('has-search-help');
+    searchBox.insertAdjacentHTML('afterbegin', keywordHelpIcon(CSCONFS_KEYWORD_SPECS, 'csconfs-search-help'));
+    wireFavoriteToggles(results, favorites);
     initTooltipPositioning();
 
     suggestions = buildSuggestions();

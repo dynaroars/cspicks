@@ -43,6 +43,9 @@
   --impact-neg-text: #dc2626;
   --impact-neu-bg: rgba(128, 128, 128, 0.12);
   --impact-neu-text: #666666;
+
+  --favorite-color: #b45309;
+  --favorite-hover: #92400e;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,6 +67,9 @@
     --tag-text: #cbd5e1;
     --focus-ring: #7dd3fc;
     --warning: #fbbf24;
+
+    --favorite-color: #ffd66b;
+    --favorite-hover: #ffe299;
 
     --shadow-search-focus: 0 14px 38px rgba(0, 0, 0, 0.3);
     --shadow-dropdown: 0 22px 60px rgba(0, 0, 0, 0.5);
@@ -324,6 +330,43 @@ footer button:hover {
 .btn-secondary:focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
+}
+
+.favorite-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.favorite-toggle svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+}
+
+.favorite-toggle.is-favorite svg {
+  fill: currentColor;
+}
+
+.favorite-toggle.is-favorite {
+  color: var(--favorite-color);
+}
+
+.favorite-toggle:hover,
+.favorite-toggle:focus-visible {
+  color: var(--text-primary);
+}
+
+.favorite-toggle.is-favorite:hover,
+.favorite-toggle.is-favorite:focus-visible {
+  color: var(--favorite-hover);
 }
 
 .country-flag {

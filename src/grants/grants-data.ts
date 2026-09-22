@@ -3,9 +3,19 @@
  * Handles dataset loading, querying, structured filtering, and autocomplete indexing.
  */
 
+import { matchesKeyword, parseKeywordQuery } from '../search-keywords.js';
+import type { KeywordSpec } from '../search-keywords.js';
 import type { Grant } from '../types.js';
 
 let cachedGrants: Grant[] | null = null;
+
+export const GRANTS_KEYWORD_SPECS: KeywordSpec[] = [
+  { key: 'sponsor', example: 'sponsor: NSF', description: 'Sponsoring agency, foundation, or company' },
+  { key: 'audience', aliases: ['who'], example: 'audience: postdoc', description: 'Who the award is for (faculty, PhD, undergrad, postdoc)' },
+  { key: 'topic', aliases: ['area'], example: 'topic: AI', description: 'Research topic or area covered' },
+  { key: 'loc', aliases: ['location', 'state'], example: 'loc: California', description: 'Eligible state/jurisdiction, for state-specific awards' },
+  { key: 'status', example: 'status: historical', description: '"current" (default) or "historical" (discontinued) awards' }
+];
 
 const monthNumbers: Record<string, number> = {
   january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
@@ -104,12 +114,18 @@ export function filterGrants(grants: Grant[], {
   deadlineFilter = 'all',
   sortBy = 'featured'
 }: { query?: string, audience?: string, sponsorCategory?: string, status?: string, topic?: string, deadlineFilter?: string, sortBy?: string } = {}) {
-  const q = String(query || '').trim().toLowerCase();
+  const { filters: keywordFilters, rest } = parseKeywordQuery(String(query || ''), GRANTS_KEYWORD_SPECS);
+  const q = rest.trim().toLowerCase();
 
   let results = grants.filter(grant => {
     // Program status filter. Records without a status are treated as current.
     if (status === 'historical' && grant.status !== 'historical') return false;
     if (status === 'current' && grant.status === 'historical') return false;
+    if (!matchesKeyword(keywordFilters.status, grant.status === 'historical' ? 'historical' : 'current')) return false;
+    if (!matchesKeyword(keywordFilters.sponsor, grant.sponsor)) return false;
+    if (!matchesKeyword(keywordFilters.audience, (grant.targetAudience || []).join(' '))) return false;
+    if (!matchesKeyword(keywordFilters.topic, (grant.topics || []).join(' '))) return false;
+    if (!matchesKeyword(keywordFilters.loc, [grant.locationLabel, ...(grant.locations || [])].filter(Boolean).join(' '))) return false;
 
     // Audience filter
     if (audience !== 'all') {

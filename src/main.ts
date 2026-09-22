@@ -12,11 +12,19 @@ import { initTooltipPositioning } from './tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
 import { trackComparison, trackView } from './analytics.js';
 import { aoeDeadline, filterSchedule, formatCalendarDate } from '../csconfs/schedule-data.js';
+import { keywordHelpIcon, parseKeywordQuery } from './search-keywords.js';
+import type { KeywordSpec } from './search-keywords.js';
 import type { AnalysisTarget } from './analysis/state.js';
 import type { FilterController } from './filters.js';
 import type { CardContext } from './search-cards.js';
 import type { FilteredData, FilteredProfessor, FilteredSchool, NsfDataset, RawData } from './types.js';
 import type { ConferenceRecord } from '../csconfs/types.js';
+
+const MAIN_KEYWORD_SPECS: KeywordSpec[] = [
+  { key: 'school', aliases: ['university', 'univ'], example: 'school: MIT', description: 'Search only universities/schools' },
+  { key: 'prof', aliases: ['professor', 'person', 'faculty'], example: 'prof: Hinton', description: 'Search only professors' },
+  { key: 'area', aliases: ['topic', 'conf'], example: 'area: security', description: 'Search only a research area or conference' }
+];
 
 let rawData: RawData | null = null;
 let appData: FilteredData = { professors: {}, schools: {} };
@@ -356,6 +364,9 @@ function updatePriorData() {
 
 function setupSearch() {
   const mainSearch = document.querySelector<HTMLInputElement>('#main-search')!;
+  const searchBox = mainSearch.closest<HTMLElement>('.universal-search')!;
+  searchBox.classList.add('has-search-help');
+  searchBox.insertAdjacentHTML('afterbegin', keywordHelpIcon(MAIN_KEYWORD_SPECS, 'main-search-help'));
   const suggestionBox = createSearchSuggestionBox({
     input: mainSearch,
     listbox: document.getElementById('universal-suggestions')!,
@@ -630,7 +641,10 @@ function runQuery(query: string, { includeDblp = true }: { includeDblp?: boolean
   hideDiscoveryCards();
   // Fresh suggestions for each search rather than the set drawn at page load.
   renderSearchExamples();
-  const comparison = resolveComparison(query);
+  const { filters: keywordFilters, rest } = parseKeywordQuery(query, MAIN_KEYWORD_SPECS);
+  const scope = keywordFilters.school ? 'school' : keywordFilters.prof ? 'prof' : keywordFilters.area ? 'area' : null;
+  const effective = scope ? keywordFilters[scope]![0]! : rest;
+  const comparison = resolveComparison(effective);
   if (comparison) {
     clearSearchSections();
     displayIntegratedAnalysis(null);
@@ -640,11 +654,14 @@ function runQuery(query: string, { includeDblp = true }: { includeDblp?: boolean
 
   hideComparison();
   document.body.classList.remove('showing-rankings');
-  const normalized = query.toLowerCase();
-  searchProfessors(normalized);
-  searchSchools(normalized);
-  searchAreaPeople(normalized);
-  if (includeDblp) searchDBLPAuthors(normalized);
+  const normalized = effective.toLowerCase();
+  if (!scope || scope === 'school') searchSchools(normalized);
+  else { document.getElementById('school-results')!.innerHTML = ''; document.getElementById('conference-results')!.innerHTML = ''; }
+  if (!scope || scope === 'prof') searchProfessors(normalized);
+  else document.getElementById('prof-results')!.innerHTML = '';
+  if (!scope || scope === 'area') searchAreaPeople(normalized);
+  else document.getElementById('area-people-results')!.innerHTML = '';
+  if (includeDblp && !scope) searchDBLPAuthors(normalized);
   else document.getElementById('dblp-results')!.innerHTML = '';
   updateIntegratedAnalysis(normalized);
   return false;

@@ -48,6 +48,49 @@
   width: 100%;
 }
 
+.universal-search.has-search-help input {
+  padding-left: 3rem;
+}
+
+.universal-search .search-help-info {
+  position: absolute;
+  top: 50%;
+  left: 1.1rem;
+  z-index: 2;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: help;
+}
+
+.search-help-content {
+  width: min(320px, calc(100vw - 2rem));
+  text-align: left;
+}
+
+.search-help-list {
+  margin: 0.35rem 0;
+  padding-left: 1.1rem;
+}
+
+.search-help-list li {
+  margin-bottom: 0.5rem;
+}
+
+.search-help-list li:last-child {
+  margin-bottom: 0;
+}
+
+.search-help-list code {
+  color: #ffd66b;
+  font-family: var(--font-mono);
+}
+
+.search-help-example {
+  color: #cbd5e1;
+}
+
 .search-container input {
   width: 100%;
   height: 48px;

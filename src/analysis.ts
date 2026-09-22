@@ -1,7 +1,7 @@
 import { drawChart, onThemeChange } from './charts.js';
 import { fetchFrequentCoauthors } from './dblp.js';
 import { filterByYears, getConferenceAreaMap, getPublicationSchools, parentMap, publicationMatchesConferenceSet } from './data.js';
-import { areaLabels, cleanName, escapeHtml, getConferenceLabel } from './shared.js';
+import { areaLabels, cleanName, escapeHtml, getConferenceLabel, getInstitutionShortName } from './shared.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateParityReport, calculatePerCapita, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from './metrics.js';
 import { renderInsightList, renderMetricCards } from './analysis-ui.js';
 import bundledRules from './csrankings-rules.generated.js';
@@ -250,8 +250,16 @@ export function getResearcherPatterns() {
     });
 }
 
+function nameLink(name: string) {
+    return `<a class="inline-link" href="index.html?q=${encodeURIComponent(name)}">${escapeHtml(cleanName(name))}</a>`;
+}
+
+function schoolLink(name: string) {
+    return `<a class="inline-link" href="index.html?q=${encodeURIComponent(name)}" title="${escapeHtml(name)}">${escapeHtml(getInstitutionShortName(name))}</a>`;
+}
+
 const peerNames = (peers: ResearcherPatterns['similarPeers']) => peers
-    .map(peer => `${cleanName(peer.name)} (${peer.affiliation})`).join('; ');
+    .map(peer => `${nameLink(peer.name)} (${schoolLink(peer.affiliation)})`).join('; ');
 
 function researcherHighlightText(patterns: ResearcherPatterns | null) {
     if (!patterns) return [];
@@ -282,7 +290,7 @@ function coauthorHighlight(name: string) {
     if (!coauthorState) return [];
     if (!coauthorState.length) return ['No DBLP coauthors found for this name and period.'];
     return [`Most frequent coauthors: ${coauthorState.map(person =>
-        `${person.name} (${person.papers} ${person.papers === 1 ? 'paper' : 'papers'})`).join('; ')}.`];
+        `${nameLink(person.name)} (${person.papers} ${person.papers === 1 ? 'paper' : 'papers'})`).join('; ')}.`];
 }
 
 function loadCoauthors(name: string) {
@@ -316,7 +324,7 @@ function renderResearcherHighlights() {
 
     const name = getTargetName();
     const insights = [...researcherHighlightText(patterns), ...coauthorHighlight(name)];
-    container.innerHTML = renderInsightList(insights, 'Profile highlights')
+    container.innerHTML = renderInsightList(insights, 'Profile highlights', true)
         + (coauthorsByResearcher.has(name)
             ? ''
             : '<button type="button" class="inline-link" data-action="load-coauthors">Show most frequent coauthors (from DBLP)</button>');

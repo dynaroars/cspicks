@@ -1,21 +1,27 @@
-import { escapeHtml, safeExternalUrl } from '../src/shared.js';
+import { countryFlag, escapeHtml, safeExternalUrl } from '../src/shared.js';
 import { conferenceAreas, deadlineStatus, formatCalendarDate } from './schedule-data.js';
 import { areaLabels } from '../src/shared.js';
+import { parsePlace } from './place.js';
+import { favoriteToggleButton } from '../src/favorites.js';
 import type { ConferenceGroup, ConferenceRecord } from './types.js';
 
 function renderCycle(conf: ConferenceRecord, now: number, showLabel: boolean) {
   const status = deadlineStatus(conf.deadline, now);
-  const dates = [
-    ['Abstract', formatCalendarDate(conf.abstractDeadline)],
-    ['Submission', formatCalendarDate(conf.deadline)],
-    ['Rebuttal', formatCalendarDate(conf.rebuttalDate)],
-    ['Notification', formatCalendarDate(conf.notificationDate)]
-  ].filter(([, value]) => value);
+  const dates = ([
+    ['Abstract', conf.abstractDeadline],
+    ['Submission', conf.deadline],
+    ['Rebuttal', conf.rebuttalDate],
+    ['Notification', conf.notificationDate]
+  ] as const)
+    .map(([label, raw]) => [label, formatCalendarDate(raw), deadlineStatus(raw, now)] as const)
+    .filter(([, value]) => value);
   return `<div class="schedule-cycle">
     ${showLabel && conf.note ? `<strong class="schedule-cycle-label">${escapeHtml(conf.note)}</strong>` : ''}
     <span class="schedule-countdown ${status.className}">${escapeHtml(status.text)}</span>
-    ${dates.length ? `<dl class="schedule-dates">${dates.map(([label, value]) =>
-      `<div><dt>${label}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>` : '<p class="schedule-tbd">Submission timeline TBD</p>'}
+    ${dates.length ? `<dl class="schedule-dates">${dates.map(([label, value, dateStatus]) =>
+      `<div${dateStatus.className === 'is-passed' ? ' class="is-passed"' : ''}><dt>${label}</dt><dd>${escapeHtml(value)}${dateStatus.instant !== null
+        ? ` <span class="schedule-countdown schedule-date-remaining ${dateStatus.className}">${escapeHtml(dateStatus.text)}</span>`
+        : ''}</dd></div>`).join('')}</dl>` : '<p class="schedule-tbd">Submission timeline TBD</p>'}
   </div>`;
 }
 
@@ -24,13 +30,16 @@ function eventDate(conf: ConferenceRecord) {
   return formatCalendarDate(conf.date) || String(conf.date);
 }
 
-export function renderScheduleCard(group: ConferenceGroup, now = Date.now()) {
+export function renderScheduleCard(group: ConferenceGroup, now = Date.now(), isFavorite: (id: string) => boolean = () => false) {
   const main = group[0];
+  const favoriteId = `${main.name} ${main.year}`;
   const href = safeExternalUrl(main.link || main.seriesLink);
   const areas = conferenceAreas(main).map(area => areaLabels[area] || area.toUpperCase());
   const multiplePeople = (value: string) => /,|&|\band\b/i.test(value);
+  const place = parsePlace(main.place);
   const extras = [
-    [eventDate(main), main.place].filter(Boolean).join(' · '),
+    eventDate(main),
+    place ? place.display : '',
     main.generalChair ? `General chair${multiplePeople(main.generalChair) ? 's' : ''}: ${main.generalChair}` : '',
     main.programChair ? `Program chair${multiplePeople(main.programChair) ? 's' : ''}: ${main.programChair}` : '',
     Number.isFinite(main.acceptanceRate)
@@ -52,14 +61,16 @@ export function renderScheduleCard(group: ConferenceGroup, now = Date.now()) {
     ? cycles.map(conf => renderCycle(conf, now, cycles.length > 1)).join('')
     : `${renderCycle(cycles[0]!, now, true)}<details class="schedule-more-cycles"><summary>Show all ${cycles.length} submission cycles</summary>${cycles.slice(1).map(conf => renderCycle(conf, now, true)).join('')}</details>`;
 
-  return `<article class="card schedule-card" data-name="${escapeHtml(`${main.name} ${main.year}`)}">
+  return `<article class="card schedule-card" data-name="${escapeHtml(favoriteId)}">
     <div class="schedule-card-main">
       <div class="schedule-card-title-row">
+        ${place?.countryCode ? countryFlag(place.countryCode, place.display) : ''}
         <h2>${href === '#'
           ? `${escapeHtml(main.name)} ${main.year}`
           : `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(main.name)} ${main.year}</a>`}</h2>
         ${main.estimated ? '<span class="schedule-estimated" title="Projected from an earlier timeline; confirm on the conference website">Estimated</span>' : ''}
         ${main.verified ? '<span class="schedule-verified" role="img" aria-label="Information reviewed" title="Information reviewed from available sources; not an endorsement or guarantee">✓</span>' : ''}
+        ${favoriteToggleButton(favoriteId, isFavorite(favoriteId))}
       </div>
       ${main.description ? `<p class="schedule-description">${escapeHtml(main.description)}</p>` : ''}
       ${areas.length ? `<p class="schedule-areas">${areas.map(area => `<span>${escapeHtml(area)}</span>`).join('')}</p>` : ''}

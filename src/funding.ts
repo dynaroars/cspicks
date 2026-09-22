@@ -1,4 +1,4 @@
-import { buildFundingIndex, formatFunding, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, parseNsfDataset, renderFundingFacultyCard, renderFundingSchoolCard } from './nsf.js';
+import { buildFundingIndex, formatFunding, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, NSF_KEYWORD_SPECS, parseNsfDataset, renderFundingFacultyCard, renderFundingSchoolCard } from './nsf.js';
 import { parseComparisonQuery } from './comparison.js';
 import { compareNumber, renderComparisonNotice, renderScoreboard } from './compare-view.js';
 import { createFilterBar } from './filters.js';
@@ -6,6 +6,7 @@ import { renderInfiniteLists } from './search-results.js';
 import { cleanName, escapeHtml, fetchLatestRepoCommit, formatRelativeTime, getInstitutionShortName } from './shared.js';
 import { createSuggestionBox, rankSuggestions } from './suggestion-box.js';
 import { initTooltipPositioning } from './tooltip-position.js';
+import { keywordHelpIcon, matchesKeyword, parseKeywordQuery } from './search-keywords.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
 import { trackComparison, trackView } from './analytics.js';
 import type { FilterController } from './filters.js';
@@ -254,20 +255,28 @@ function hideFundingComparison() {
 }
 
 function render(query = '') {
-  const normalized = query.trim();
+  const { filters: keywordFilters, rest } = parseKeywordQuery(query, NSF_KEYWORD_SPECS);
+  const normalized = rest.trim();
   const comparison = parseComparisonQuery(normalized);
-  if (comparison) {
+  if (comparison && !Object.keys(keywordFilters).length) {
     byId('funding-status').textContent = '';
     renderFundingComparison(comparison);
     updateUrl();
     return;
   }
   hideFundingComparison();
-  const schools = normalized ? index.schools.filter(record => fundingSchoolNameMatches(record, normalized)) : index.schools;
-  const faculty = normalized ? [
+  const awardProgramText = (awards: { program?: string, division?: string, directorate?: string }[]) =>
+    awards.map(award => `${award.program || ''} ${award.division || ''} ${award.directorate || ''}`).join(' ');
+  const schools = (normalized ? index.schools.filter(record => fundingSchoolNameMatches(record, normalized)) : index.schools)
+    .filter(record => matchesKeyword(keywordFilters.institution, record.name))
+    .filter(record => matchesKeyword(keywordFilters.program, awardProgramText(record.awards)));
+  const faculty = (normalized ? [
     ...index.faculty.filter(record => fundingFacultyNameMatches(record, normalized)),
     ...index.faculty.filter(record => !fundingFacultyNameMatches(record, normalized) && fundingMatches(record, normalized))
-  ] : index.faculty;
+  ] : index.faculty)
+    .filter(record => matchesKeyword(keywordFilters.pi, record.name))
+    .filter(record => matchesKeyword(keywordFilters.institution, record.affiliation || ''))
+    .filter(record => matchesKeyword(keywordFilters.program, awardProgramText(record.awards)));
   const schoolContainer = byId('funding-school-results');
   const facultyContainer = byId('funding-faculty-results');
   byId('funding-award-count').textContent = `${index.awards.length.toLocaleString()} NSF CS awards during`;
@@ -375,6 +384,9 @@ async function init() {
   input.disabled = false;
   input.placeholder = 'Search university, professor, award, or NSF program';
   input.value = params.get('q') || '';
+  const searchBox = input.closest<HTMLElement>('.universal-search')!;
+  searchBox.classList.add('has-search-help');
+  searchBox.insertAdjacentHTML('afterbegin', keywordHelpIcon(NSF_KEYWORD_SPECS, 'funding-search-help'));
   setupDataHealth();
   renderExamples();
   render(input.value);

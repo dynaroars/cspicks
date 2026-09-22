@@ -415,6 +415,16 @@ filters. Compound events may have more than one key.
 - Keep external links on `http` or `https`.
 - Preserve `estimated` when only the location or chairs have been confirmed.
 - Keep the JSON valid and do not remove old editions during routine updates.
+- `place` should be just `City, Country` (e.g. `"Kyoto, Japan"`) — for the US,
+  `City, ST, US` (e.g. `"Austin, TX, US"`), using the two-letter state code.
+  Do not include the venue/hotel/convention-center name. For a virtual or
+  hybrid edition, use `"Virtual"`/`"Virtual Conference"`/`"Hybrid"` rather than
+  encoding the origin city in parentheses — `csconfs/place.ts` (`parsePlace`)
+  renders this field and derives the country flag shown next to the
+  conference name from the trailing country/state token, so an unrecognized
+  or non-conforming value just won't get a flag (harmless, but worth fixing
+  when you're already touching that record). Extend `COUNTRY_CODES` in
+  `csconfs/place.ts` when a genuinely new country shows up.
 
 ### Verification
 

@@ -28,10 +28,10 @@ export function renderMetricCards(metrics: MetricCard[], ariaLabel = 'Statistics
   </div>`;
 }
 
-export function renderInsightList(insights: string[] | null | undefined, title = 'Notable patterns') {
+export function renderInsightList(insights: string[] | null | undefined, title = 'Notable patterns', rawHtml = false) {
   if (!insights?.length) return '';
   return `<section class="analysis-insights">
     <h3>${escapeHtml(title)}</h3>
-    <ul>${insights.map(insight => `<li>${escapeHtml(insight)}</li>`).join('')}</ul>
+    <ul>${insights.map(insight => `<li>${rawHtml ? insight : escapeHtml(insight)}</li>`).join('')}</ul>
   </section>`;
 }
