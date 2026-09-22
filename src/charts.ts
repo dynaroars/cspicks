@@ -1,17 +1,18 @@
 import {
   BarController, BarElement, CategoryScale, Chart, Filler, Legend,
-  LinearScale, LineController, LineElement, PointElement, Tooltip
+  LinearScale, LineController, LineElement, PointElement, Title, Tooltip
 } from 'chart.js';
 import type { ChartConfiguration, ChartItem } from 'chart.js';
 import { updateChartDefaults } from './shared.js';
 
-// Only bar/line charts with a linear+category axis, fill, tooltip, and legend
-// are used anywhere in this app (see src/analysis/*.ts, src/compare-view.ts) —
+// Only bar/line charts with a linear+category axis, fill, tooltip, legend,
+// and title (chart titles and axis titles both use the Title plugin) are
+// used anywhere in this app (see src/analysis/*.ts, src/compare-view.ts) —
 // registering just those instead of `chart.js/auto` (which pulls in every
 // controller/scale/plugin Chart.js ships) meaningfully shrinks the bundle.
 Chart.register(
   BarController, BarElement, LineController, LineElement, PointElement,
-  CategoryScale, LinearScale, Filler, Tooltip, Legend
+  CategoryScale, LinearScale, Filler, Tooltip, Legend, Title
 );
 
 // Single owner of Chart.js: defaults, light/dark reaction, and the
