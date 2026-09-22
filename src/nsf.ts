@@ -298,10 +298,6 @@ export function fundingSchoolNameMatches(record: FundingSchool, query: string) {
   return query.trim().toLowerCase().split(/\s+/).every(token => name.includes(token));
 }
 
-export function fundingScopeLabel(dataset: NsfDataset) {
-  return (dataset?.scope || []).map(getInstitutionShortName).join(', ') || 'No institutions';
-}
-
 export function calculateFundingDiscoveries(current: FundingIndex, prior: FundingIndex, publicationSchools: Record<string, FilteredSchool> = {}) {
   const currentByName = new Map(current.schools.map(school => [school.name, school]));
   const priorByName = new Map(prior.schools.map(school => [school.name, school]));

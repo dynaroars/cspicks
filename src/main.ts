@@ -127,7 +127,7 @@ async function init() {
   initTooltipPositioning();
 
   try {
-    const schedulePromise: Promise<ConferenceRecord[]> = fetch('./csconfs/data/conferences.json')
+    const schedulePromise: Promise<ConferenceRecord[]> = fetch(new URL('../csconfs/data/conferences.json', import.meta.url))
       .then(response => response.ok ? response.json() as Promise<ConferenceRecord[]> : [] as ConferenceRecord[])
       .catch((error): ConferenceRecord[] => {
         console.warn('Conference schedule examples could not be loaded:', error);
