@@ -9,7 +9,7 @@
       "Faculty"
     ],
     "whoFor": "Untenured Assistant Professors on tenure track",
-    "deadline": "Fourth Monday in July (Annual)",
+    "deadline": "July 22, 2026 at 5:00 PM submitter local time (Annual fourth Monday in July; NSF 22-586)",
     "deadlineMonth": 7,
     "amount": "$500,000 to $600,000+ over 5 years",
     "summary": "NSF premier early-career award supporting junior faculty who exemplify the role of teacher-scholars through outstanding research, excellent education, and the integration of education and research within the context of the mission of their organizations.",
@@ -43,7 +43,7 @@
       "Faculty"
     ],
     "whoFor": "Untenured CS faculty in first 3 years without prior federal PI funding (\"Mini-CAREER\")",
-    "deadline": "Third Wednesday in September (Annual)",
+    "deadline": "September 16, 2026 at 5:00 PM submitter local time (Annual third Wednesday in September; NSF 23-576)",
     "deadlineMonth": 9,
     "amount": "Up to $175,000 over 2 years",
     "summary": "Enables early-career CS faculty without prior federal research support to launch independent research programs, fund their first graduate student, and acquire preliminary results to compete for future NSF CAREER and Core awards.",
@@ -104,7 +104,7 @@
       "PhD Students"
     ],
     "whoFor": "Early-career bachelor's degree holders returning to academia to pursue a research-based CISE doctorate",
-    "deadline": "May 31 (Annual)",
+    "deadline": "May 30, 2026 at 5:00 PM submitter local time (Annual late May; NSF DCL)",
     "deadlineMonth": 5,
     "amount": "$159,000 total: $37,000 annual stipend + $16,000 annual cost-of-education allowance for 3 years",
     "summary": "A two-phase NSF fellowship for early-career professionals with computing experience who want to enter a research-based doctoral program in computer science, computer engineering, or information science.",
@@ -167,7 +167,7 @@
       "Faculty"
     ],
     "whoFor": "Untenured Assistant and Associate Professors in first 3 years of appointment",
-    "deadline": "Exec Summary: October; Full Proposal: December / January (Annual)",
+    "deadline": "Executive Summary: October 17, 2025; Full Proposal: December 10, 2025 at 4:00 PM ET (Annual cycle; DARPA-RA-25-01)",
     "deadlineMonth": 12,
     "amount": "Up to $500,000 over 24 months + $500,000 Director's Fellowship option (up to $1M total)",
     "summary": "Identifies and engages rising stars in junior faculty positions across US academia to expose them to DoD needs and DARPA's high-risk, high-payoff research model in computer science, quantum, autonomy, and microelectronics.",
@@ -226,7 +226,7 @@
       "Faculty"
     ],
     "whoFor": "Tenure-track Assistant & Associate Professors within 12 years of PhD",
-    "deadline": "Pre-proposal: January; Full proposal: April (Annual)",
+    "deadline": "Pre-application: January 30, 2026 at 5:00 PM ET; Full Proposal: April 29, 2026 at 11:59 PM ET (Annual; DE-FOA-0003460)",
     "deadlineMonth": 4,
     "amount": "At least $875,000 over 5 years (university faculty)",
     "summary": "Bolsters the nation's scientific workforce by supporting the exceptional research of rising scientists in programs funded by the DOE Office of Science, notably Advanced Scientific Computing Research (ASCR).",
@@ -256,7 +256,7 @@
       "Undergraduate Students"
     ],
     "whoFor": "PhD students using high-performance computing for scientific discovery",
-    "deadline": "Mid January (Annual)",
+    "deadline": "January 15, 2026 at 5:00 PM CST (Annual mid-January; reference letters due January 22)",
     "deadlineMonth": 1,
     "amount": "Full tuition & fees, $45,000 annual stipend, $1,000 academic allowance/yr, and 12-week practicum at a DOE national lab",
     "summary": "Trains leaders in high-performance computing, scientific computing, and computational engineering. Fellows complete a fully funded practicum at a DOE national laboratory (e.g. LLNL, ORNL, LBNL, ANL).",
@@ -314,7 +314,7 @@
       "Faculty"
     ],
     "whoFor": "Early-career faculty in their first or second full-time tenure-track or equivalent appointment",
-    "deadline": "October 30, 2026 at 5:00 PM ET (proposal deadline; annual program)",
+    "deadline": "October 30, 2026 at 5:00 PM ET (Annual proposal deadline; FOA N00014-25-S-F003)",
     "deadlineMonth": 10,
     "amount": "Typically $750,000 over 3 years ($250,000/year); up to 25 awards anticipated",
     "summary": "Supports exceptional early-career scientists and engineers conducting innovative basic or applied research aligned with the Department of the Navy's science and technology priorities, including AI, autonomy, cyber, networking, sensing, and quantum technologies.",
@@ -376,7 +376,7 @@
       "Faculty"
     ],
     "whoFor": "Early-career scientists and engineers at eligible academic, industry, or nonprofit research organizations",
-    "deadline": "December 4, 2026 at 11:59 PM ET (full proposal; white paper due October 9)",
+    "deadline": "White paper: October 9, 2026; Full proposal: December 4, 2026 at 11:59 PM ET (Annual; FOA-AFRL-AFOSR-2026-0002)",
     "deadlineMonth": 12,
     "amount": "Up to $450,000 over 3 years ($150,000/year)",
     "summary": "Fosters creative basic research in science and engineering, enhances early-career development of outstanding young investigators, and increases engagement with Air Force and Space Force mission challenges. White papers are required before full proposals.",
@@ -436,7 +436,7 @@
       "Undergraduate Students"
     ],
     "whoFor": "PhD students pursuing research of interest to DoD defense laboratories",
-    "deadline": "Late November / Early December (Annual)",
+    "deadline": "November 21, 2025 at 11:59 PM ET (Annual mid-to-late November; reference letters due December 1)",
     "deadlineMonth": 11,
     "amount": "Full tuition and mandatory fees, $43,200 annual stipend, and up to $1,400/yr health insurance for 3 years",
     "summary": "Awarded by the Air Force Office of Scientific Research, Army Research Office, and Office of Naval Research to increase the number of US citizens trained in science and engineering disciplines of military importance.",
@@ -468,7 +468,7 @@
       "PhD Students"
     ],
     "whoFor": "Undergraduate, Master's, and PhD students in defense-critical STEM fields",
-    "deadline": "Early December (Annual)",
+    "deadline": "December 5, 2025 at 5:00 PM EST (Annual first Friday of December; opens August 1)",
     "deadlineMonth": 12,
     "amount": "Full tuition, $30,000–$46,000 annual stipend, health insurance, paid summer internships, and guaranteed civilian DoD employment upon graduation",
     "summary": "The SMART Scholarship-for-Service Program provides full tuition, annual stipends, and post-graduation civilian employment at DoD laboratories and research centers across the US.",
@@ -529,7 +529,7 @@
       "Master's Students"
     ],
     "whoFor": "Graduate students conducting research on space computing, autonomy, and technology",
-    "deadline": "Late October / Early November (Annual)",
+    "deadline": "October 31, 2025 at 6:00 PM ET (Annual late October; 80HQTR25NOA01-25NSTGRO_A1)",
     "deadlineMonth": 10,
     "amount": "Up to $84,000/year (stipend, tuition allowance, health insurance, and NASA center research allowance)",
     "summary": "Sponsored by NASA's Space Technology Mission Directorate (STMD), this fellowship funds graduate research in space-relevant computer systems, autonomous robotics, fault-tolerant computing, and onboard AI.",
@@ -587,7 +587,7 @@
       "PhD Students"
     ],
     "whoFor": "Outstanding PhD students in CS and related areas (University nominated)",
-    "deadline": "April / May (Annual nomination window)",
+    "deadline": "April 30, 2026 (Annual Spring university nomination window; typically late April / early May)",
     "deadlineMonth": 4,
     "amount": "Full tuition and fees for up to 3 years + $40,000–$50,000/yr stipend + Google Research mentor",
     "summary": "Google PhD Fellowships directly support graduate students doing exceptional research in computer science and adjacent fields. Selected fellows are paired with a Google Research Mentor.",
@@ -619,8 +619,8 @@
       "Faculty"
     ],
     "whoFor": "Early-career faculty within 7 years of PhD",
-    "deadline": "Late November / Early December (Annual)",
-    "deadlineMonth": 11,
+    "deadline": "January 27, 2025 at 11:59:59 PM AoE (Annual; typically opens Nov/Dec, closes late Jan or late Nov at 11:59 PM AoE)",
+    "deadlineMonth": 1,
     "amount": "Up to $60,000 unrestricted research gift + Google sponsor pairing",
     "summary": "Aims to support world-class research conducted by early-career professors worldwide in computer science and related fields. Provides unrestricted financial gifts rather than grants.",
     "eligibility": [
@@ -650,8 +650,8 @@
       "Faculty"
     ],
     "whoFor": "Full-time faculty members and university research scientists",
-    "deadline": "Spring & Fall cycles (e.g., Nov 1, May 15)",
-    "deadlineMonth": 11,
+    "deadline": "May 13, 2026 at 11:59 PM PT (Spring cycle) / November 12, 2025 at 11:59 PM PT (Fall cycle)",
+    "deadlineMonth": 5,
     "amount": "Up to $80,000–$100,000 unrestricted cash gift + up to $40,000 in AWS promotional credits",
     "summary": "Provides unrestricted funds and AWS compute credits to academic researchers across diverse tracks including Foundation Models, AI for Science, Robotics, Information Security, and Sustainability.",
     "eligibility": [
@@ -711,7 +711,7 @@
       "PhD Students"
     ],
     "whoFor": "Full-time PhD students in computer science and engineering worldwide",
-    "deadline": "Mid September (Annual)",
+    "deadline": "September 20, 2026 (Annual September 20 at 11:59 PM PDT; reference letters October 6)",
     "deadlineMonth": 9,
     "amount": "Tuition and fees paid for up to 2 years + $42,000 annual living stipend + conference travel support ($5,000)",
     "summary": "Supports promising doctoral students engaged in innovative and relevant research across computing disciplines including AI, AR/VR, database systems, networking, security, and hardware.",
@@ -773,8 +773,8 @@
       "PhD Students"
     ],
     "whoFor": "3rd year PhD students in CS, electrical engineering, and applied mathematics (University nominated)",
-    "deadline": "June / July (Annual)",
-    "deadlineMonth": 6,
+    "deadline": "December 16, 2025 at 11:59 PM ET (Annual; unified Microsoft Research Fellowship)",
+    "deadlineMonth": 12,
     "amount": "100% tuition and fees for 2 academic years + $42,000 annual stipend + Microsoft Research summit invitation",
     "summary": "A two-year fellowship program for PhD students in their third year of doctoral studies. Identifies and supports emerging researchers across North America, Europe, Asia, and Latin America.",
     "eligibility": [
@@ -835,8 +835,8 @@
       "PhD Students"
     ],
     "whoFor": "PhD students in machine learning, vision, NLP, and on-device AI (University nominated)",
-    "deadline": "Late Fall (Annual university nomination)",
-    "deadlineMonth": 10,
+    "deadline": "September 8, 2026 (Annual invited university nomination; internal deadlines July/August)",
+    "deadlineMonth": 9,
     "amount": "Full tuition and fees for 2 years + annual living stipend + mentorship from Apple AI/ML researchers + internship opportunities",
     "summary": "Recognizes graduate students pursuing research in artificial intelligence and machine learning, offering funding, mentorship, and opportunities to intern with Apple's ML research teams.",
     "eligibility": [
@@ -865,7 +865,7 @@
       "PhD Students"
     ],
     "whoFor": "PhD students in GPU computing, computer architecture, graphics, AI, and systems",
-    "deadline": "Mid September (Annual)",
+    "deadline": "September 12, 2026 at 3:00 PM PT (Annual Mid-September; strictly 3:00 PM PT)",
     "deadlineMonth": 9,
     "amount": "Up to $60,000 per award + access to NVIDIA GPU clusters + summer research internship offer",
     "summary": "Supports doctoral students who are advancing GPU computing, computer graphics, parallel computing architecture, and accelerated machine learning systems.",
@@ -924,7 +924,7 @@
       "Faculty"
     ],
     "whoFor": "Tenure-track faculty in CS and related fields within 6 years of PhD (Department nominated)",
-    "deadline": "September 15 (Annual nomination)",
+    "deadline": "September 15, 2026 at 11:59 PM EDT (Annual fixed statutory deadline)",
     "deadlineMonth": 9,
     "amount": "$75,000 two-year flexible unrestricted fellowship",
     "summary": "One of the most prestigious early-career honors in science and computing. Often considered a leading indicator of future Nobel and Turing Laureates, recognizing extraordinary research achievements and promise.",
@@ -954,7 +954,7 @@
       "Faculty"
     ],
     "whoFor": "Faculty members in first 3 years of tenure-track appointment (Invited university nomination)",
-    "deadline": "March (Institutional nomination) / April (Full proposal)",
+    "deadline": "March 15 (Institutional nomination); April 20 at 5:00 PM PT (Full proposal; Annual)",
     "deadlineMonth": 4,
     "amount": "$875,000 over 5 years of flexible, unrestricted research funding",
     "summary": "Provides early-career scientists and engineers with flexible, visionary funding to take risks, explore unproven ideas, and establish creative frontiers across computing and natural sciences.",
@@ -983,8 +983,8 @@
       "Faculty"
     ],
     "whoFor": "Established theoretical CS and math faculty leaders (Institutional nomination)",
-    "deadline": "October / November (Annual nomination window)",
-    "deadlineMonth": 10,
+    "deadline": "Historical (program discontinued in 2023; historically late October / early November)",
+    "deadlineMonth": 11,
     "amount": "$100,000/yr for 5 years for research + $10,000/yr to PI department + $10,000/yr indirect costs ($600,000 total)",
     "summary": "Provides stable, long-term unrestricted research support to outstanding scientists, enabling them to undertake foundational theoretical breakthroughs in algorithms, complexity, and quantum computing.",
     "eligibility": [
@@ -1001,7 +1001,8 @@
       "Cryptography"
     ],
     "url": "https://www.simonsfoundation.org/grant/simons-investigators/",
-    "featured": true
+    "featured": true,
+    "status": "historical"
   },
   {
     "id": "hertz-fellowship",
@@ -1014,7 +1015,7 @@
       "Undergraduate Students"
     ],
     "whoFor": "Graduating seniors & 1st-year PhD students in applied computing and physical sciences",
-    "deadline": "Late October (Annual)",
+    "deadline": "October 30, 2026 at 11:59 PM PT (Annual; reference evaluations due first Monday in November at 6:00 PM PT)",
     "deadlineMonth": 10,
     "amount": "Up to $250,000 over 5 years (stipend + full tuition + lifelong fellowship community)",
     "summary": "The Hertz Fellowship provides 5 years of flexible, unrestricted funding to innovators in applied physical and biological sciences, mathematics, and computing. Hertz Fellows gain lifelong mentoring, peer networking, and total freedom in their PhD research.",
@@ -1044,7 +1045,7 @@
       "PhD Students"
     ],
     "whoFor": "Teams of 2 PhD students proposing innovative research in computing and wireless tech",
-    "deadline": "December / January (Proposal deadline)",
+    "deadline": "December 1, 2025 at 10:00 AM PST (Annual first Monday of December at 10:00 AM PST)",
     "deadlineMonth": 12,
     "amount": "$100,000 fellowship per winning student team ($50,000 per student) + Qualcomm mentor guidance",
     "summary": "Encourages teams of two PhD students from participating universities in the US, Canada, Europe, and India to formulate joint proposals in mobile computing, wireless communications, edge AI, and semiconductors.",
@@ -1074,8 +1075,8 @@
       "PhD Students"
     ],
     "whoFor": "PhD students in AI, quantum computing, hybrid cloud, and security (University nominated)",
-    "deadline": "Late October / Early November (Annual)",
-    "deadlineMonth": 10,
+    "deadline": "August 30, 2024 at 11:59 PM ET (Annual late summer faculty nomination; historically late October)",
+    "deadlineMonth": 8,
     "amount": "Up to $40,000 stipend + $20,000 education allowance over 2 academic years + pairing with IBM Research mentor",
     "summary": "Intensely competitive worldwide program supporting graduate students solving challenging problems in AI, quantum information science, cybersecurity, and open-source infrastructure.",
     "eligibility": [
@@ -1104,7 +1105,7 @@
       "Faculty"
     ],
     "whoFor": "Principal investigators and university professors in US, Canada, Europe, and Asia",
-    "deadline": "Mid September (Annual)",
+    "deadline": "September 15, 2026 at 11:59 PM PDT (Annual mid-September; program typically opens mid-July)",
     "deadlineMonth": 9,
     "amount": "Faculty Innovation Award: up to $100,000/yr; Focused Research Award: up to $150,000/yr",
     "summary": "Provides sponsored research funding for cutting-edge academic research in AI, sensing, robotics, computer vision, audio processing, and human-machine interaction, with direct collaboration with Sony R&D teams.",
@@ -1133,8 +1134,8 @@
       "PhD Students"
     ],
     "whoFor": "Graduate PhD students in computer vision, graphics, audio, HCI, and generative media",
-    "deadline": "Late September (Annual)",
-    "deadlineMonth": 9,
+    "deadline": "April 30 at 11:59 PM IST (Regional India AI cycle; global open cycle retired after 2021)",
+    "deadlineMonth": 4,
     "amount": "$10,000 one-time unrestricted gift + 1-year Creative Cloud subscription + guaranteed Adobe research internship interview",
     "summary": "Recognizes outstanding graduate students worldwide carrying out exceptional research in computer graphics, computer vision, human-computer interaction, and computational creativity.",
     "eligibility": [
@@ -1221,8 +1222,8 @@
       "PhD Students"
     ],
     "whoFor": "PhD students working in data science, NLP, information retrieval, and machine learning",
-    "deadline": "Early December (Annual)",
-    "deadlineMonth": 12,
+    "deadline": "September 25, 2026 at 11:59 PM AoE (Annual late September; shifted from historical mid-December)",
+    "deadlineMonth": 9,
     "amount": "Full tuition and fees + living stipend + $3,000 conference travel budget + paid 14-week summer internship at Bloomberg",
     "summary": "Provides multi-year financial support and professional development for PhD students conducting research in data science, natural language processing, information extraction, and ML systems.",
     "eligibility": [
@@ -1280,7 +1281,7 @@
       "Postdocs"
     ],
     "whoFor": "Academic faculty, postdocs, and innovators in designated countries",
-    "deadline": "Mid April (Annual)",
+    "deadline": "April 24, 2026 at 11:59 PM ET (Annual Spring proposal cutoff; opens early March)",
     "deadlineMonth": 4,
     "amount": "1st Prize: $100,000; 2nd Prize: $50,000; 3rd Prize: $25,000 unrestricted cash prize + collaboration with Bell Labs researchers",
     "summary": "A global competition for innovators with disruptive ideas in information and communications technology, seeking ideas that have the potential to change humanity by a factor of 10x.",
@@ -1308,8 +1309,8 @@
       "Faculty"
     ],
     "whoFor": "Faculty in machine learning, NLP, cryptography, graph neural networks, and multi-agent systems",
-    "deadline": "Spring / Annual RFP cycle",
-    "deadlineMonth": 3,
+    "deadline": "May 31, 2026 at 11:59 PM ET (Faculty Awards) / June 15, 2026 (PhD Fellowships; Annual)",
+    "deadlineMonth": 5,
     "amount": "$100,000 to $150,000 unrestricted research gift",
     "summary": "Recognizes faculty conducting fundamental AI research with applications to financial services, algorithmic fairness, synthetic data, multi-agent game theory, and secure multiparty computing.",
     "eligibility": [
@@ -1366,7 +1367,7 @@
       "Faculty"
     ],
     "whoFor": "University professors and faculty researchers worldwide",
-    "deadline": "August (Annual proposal deadline)",
+    "deadline": "August 20, 2026 at 9:00 AM KST (Annual August proposal deadline; opens June)",
     "deadlineMonth": 8,
     "amount": "Up to $150,000 per year (renewable up to 3 years, $450,000 total)",
     "summary": "Samsung's flagship annual academic call for research proposals in emerging compute paradigms, next-generation semiconductor devices, neural processing units, computer vision, and robotics.",
@@ -1396,8 +1397,8 @@
       "Master's Students"
     ],
     "whoFor": "MS and PhD students in autonomous systems, cybersecurity, microelectronics, and AI",
-    "deadline": "Mid December (Annual)",
-    "deadlineMonth": 12,
+    "deadline": "January 15 (Faculty proposals); February 1 at 11:59 PM EST (Scholar applications; Annual)",
+    "deadlineMonth": 2,
     "amount": "Full university tuition + monthly living stipend + workspace and laboratory access at Draper",
     "summary": "Draper Scholars conduct their thesis and dissertation research under the joint supervision of a university faculty advisor and a Draper technical staff member in Cambridge, MA.",
     "eligibility": [
@@ -1425,7 +1426,7 @@
       "PhD Students"
     ],
     "whoFor": "PhD students in computer graphics, computer vision, HCI, and computational imaging",
-    "deadline": "November (Annual)",
+    "deadline": "November 11, 2022 at 11:59 PM PT (Annual mid-November cycle)",
     "deadlineMonth": 11,
     "amount": "$10,000 one-time award + interview for a Snap Research summer internship",
     "summary": "Supports doctoral students who are advancing the state of the art in augmented reality, creative computing, human-computer interaction, and computational photography.",
@@ -1481,7 +1482,7 @@
       "Undergraduate Students"
     ],
     "whoFor": "Undergraduate students in North American universities showing outstanding CS research potential",
-    "deadline": "Mid October (Annual department nomination)",
+    "deadline": "October 14, 2026 at 9:00 PM ET (Annual mid-October; department nomination limit applies)",
     "deadlineMonth": 10,
     "amount": "National recognition, financial award for winners, and travel support to major CS research conferences",
     "summary": "Celebrates North American undergraduate students who show exceptional potential in computer science research. Nominated by their department chair, winners frequently author publications at top peer-reviewed conferences.",
@@ -1512,7 +1513,7 @@
       "PhD Students"
     ],
     "whoFor": "Women and underrepresented doctoral researchers in computing",
-    "deadline": "February (Annual)",
+    "deadline": "February 1 at 23:59 ET (SWSIS scholarship) / November 30 (Grad Cohort) / December 4 (CRA-E Fellows)",
     "deadlineMonth": 2,
     "amount": "Multi-year research fellowship + mentoring tracks + travel grants to CRA-WP workshops",
     "summary": "Programs and fellowships organized by CRA-WP to sustain and advance the careers of women, underrepresented minorities, and persons with disabilities in computing research.",
@@ -1572,7 +1573,7 @@
       "Master's Students"
     ],
     "whoFor": "Underrepresented minority students in graduate engineering and CS programs",
-    "deadline": "Early November (Annual)",
+    "deadline": "November 13, 2026 at 11:59 PM ET (Annual second Friday of November; member university applications due Jan 15)",
     "deadlineMonth": 11,
     "amount": "Full tuition & fees at GEM member universities + minimum $16,000 stipend + paid corporate summer internships",
     "summary": "GEM recruits high-achieving Black, Hispanic, and Native American students into technical master's and doctoral careers, pairing university tuition support with paid research internships at top tech corporations and national labs.",
@@ -1602,7 +1603,7 @@
       "PhD Students"
     ],
     "whoFor": "Doctoral students committed to diverse representation in university faculty",
-    "deadline": "Early December (Annual)",
+    "deadline": "Historical (program discontinued in 2023; historically early December at 5:00 PM EST)",
     "deadlineMonth": 12,
     "amount": "$28,000 annual stipend for predoctoral (3 years) or $31,000 for dissertation year",
     "summary": "Administered by the National Academies, this program seeks to increase the diversity of college and university faculties by supporting scholars with superior scholarship and demonstrated commitment to diversity.",
@@ -1619,7 +1620,8 @@
       "Fairness & Ethics in AI"
     ],
     "url": "https://sites.nationalacademies.org/pga/fordfellowships/",
-    "featured": false
+    "featured": false,
+    "status": "historical"
   },
   {
     "id": "aaas-stpf",
@@ -1982,8 +1984,8 @@
       "Postdocs"
     ],
     "whoFor": "Early-career tenure-track faculty and senior researchers tackling hard problems in AI",
-    "deadline": "Annual (Letter of Intent in October)",
-    "deadlineMonth": 10,
+    "deadline": "November 15 at 11:59 PM ET (Annual Early Career cohort; special open RFPs in April)",
+    "deadlineMonth": 11,
     "amount": "Up to 00,000 for Early Career, 00,000+ for Senior Fellows",
     "summary": "Funds bold interdisciplinary research addressing critical hard problems in AI to ensure artificial intelligence benefits humanity by 2050, covering AI safety, governance, transparency, and AI-driven scientific discovery.",
     "eligibility": [
@@ -2129,8 +2131,8 @@
       "Postdocs"
     ],
     "whoFor": "Postdocs with PhD in Computer Science or quantitative fields transitioning to tenure-track faculty",
-    "deadline": "Annual (Pre-proposal in September)",
-    "deadlineMonth": 9,
+    "deadline": "August 14, 2026 at 3:00 PM EDT (Pre-proposal LOI); January 11, 2027 at 3:00 PM EST (Full proposal; Annual)",
+    "deadlineMonth": 8,
     "amount": "60,000 over 5 years (bridging postdoc to faculty)",
     "summary": "Supports early-career researchers trained in computer science, machine learning, mathematics, and quantitative disciplines who apply computational methods to biological and life sciences questions during their transition to university faculty.",
     "eligibility": [
@@ -2159,8 +2161,8 @@
       "PhD Students"
     ],
     "whoFor": "CS faculty and research investigators in cybersecurity, privacy, cryptography, and trustworthy systems",
-    "deadline": "Annual (Small: Rolling / Open; Medium & Large: September/October)",
-    "deadlineMonth": 10,
+    "deadline": "Small: Accepted anytime; Medium: September 23, 2026; Large: September 30, 2026 at 5:00 PM local time (NSF 24-504)",
+    "deadlineMonth": 9,
     "amount": "Small (00,000), Medium (,200,000), Large (,000,000+), and Center grants",
     "summary": "NSF flagship cybersecurity research program funding foundational computer science in network security, systems privacy, hardware root-of-trust, applied cryptography, formal verification, and sociotechnical security.",
     "eligibility": [
@@ -2190,7 +2192,7 @@
       "PhD Students"
     ],
     "whoFor": "Multi-university collaborative consortia of faculty and research leaders in artificial intelligence",
-    "deadline": "Biennial Calls (Preliminary Proposal in January, Full Proposal in May)",
+    "deadline": "Preliminary Proposal: January 12, 2026; Full Proposal: May 15, 2026 at 5:00 PM local time (Biennial theme calls; NSF 24-541)",
     "deadlineMonth": 5,
     "amount": "Up to 0,000,000 per institute over 5 years (,000,000/year)",
     "summary": "Large-scale national research hubs advancing foundational AI theory, neuro-symbolic learning, trustworthy autonomy, and multidisciplinary AI applications in scientific discovery, agriculture, education, and cybersecurity.",
@@ -2310,7 +2312,7 @@
       "PhD Students"
     ],
     "whoFor": "Faculty researching deeply integrated computing, sensing, networking, and physical actuation",
-    "deadline": "Annual (October / November)",
+    "deadline": "Small & Medium: October 28, 2026 at 5:00 PM local time (Annual late October; NSF 24-581)",
     "deadlineMonth": 10,
     "amount": "Small (up to 00,000), Medium (up to ,200,000), Frontier (,000,000)",
     "summary": "Funds research engineering cyber-physical systems that integrate computing algorithms with physical processes, including smart cities, autonomous vehicles, industrial IoT, medical devices, and smart power grids.",
@@ -2340,7 +2342,7 @@
       "PhD Students"
     ],
     "whoFor": "Faculty, research scientists, and developers managing mature academic open-source CS artifacts",
-    "deadline": "Annual (Phase I in March, Phase II in September)",
+    "deadline": "Phase I: March 12, 2026; Phase II: September 10, 2026 at 5:00 PM local time (Annual; NSF 24-557)",
     "deadlineMonth": 9,
     "amount": "Phase I (Scoping: 00,000 for 1 yr), Phase II (Execution: ,500,000 for 2 yrs)",
     "summary": "Supports scaling academic open-source software, hardware, and data tools into self-sustaining, secure, and widely adopted open-source ecosystems that solve national and societal challenges.",
@@ -2368,8 +2370,8 @@
       "Undergraduate Students"
     ],
     "whoFor": "Faculty PIs hosting cohorts of 8-12 undergraduate CS student researchers over 10-week summer programs",
-    "deadline": "Annual (Late August / September)",
-    "deadlineMonth": 8,
+    "deadline": "September 10, 2026 at 5:00 PM submitter local time (Annual second Wednesday of September; NSF 23-601)",
+    "deadlineMonth": 9,
     "amount": "50,000 to 00,000 over 3 years (stipends, housing, travel, and faculty mentoring costs)",
     "summary": "Provides grants to CS departments and faculty to establish intensive summer research programs for undergraduate students, broadening participation in computer science graduate studies.",
     "eligibility": [
@@ -2635,7 +2637,7 @@
       "Undergraduate Students"
     ],
     "whoFor": "PhD students in high-performance computing, numerical algorithms, computer architecture, and exascale simulation",
-    "deadline": "Mid January (Annual)",
+    "deadline": "January 14, 2026 at 5:00 PM CST (Annual mid-January; reference letters due January 21)",
     "deadlineMonth": 1,
     "amount": "Full tuition and required fees + 5,000 annual stipend + ,000 academic allowance/year + 12-week practicum at LLNL, LANL, or Sandia National Labs for up to 4 years",
     "summary": "Provides comprehensive fellowship support for doctoral students specializing in high-performance computing, scientific algorithms, and extreme-scale physics simulations critical to national stewardship science.",
@@ -2664,7 +2666,7 @@
       "PhD Students"
     ],
     "whoFor": "2nd-year or later doctoral students in computer science, HPC, and computational science collaborating directly with DOE labs",
-    "deadline": "Mid March (Annual)",
+    "deadline": "March 18, 2026 at 5:00 PM CDT (Annual mid-March; reference letters due March 25)",
     "deadlineMonth": 3,
     "amount": "Full tuition and required fees + 5,000 annual stipend + dedicated research residency at a DOE NNSA laboratory for up to 4 years",
     "summary": "Provides graduate students pursuing PhDs in computational science and computing systems the opportunity to spend a minimum of two 12-week terms conducting doctoral research on-site at DOE national laboratories.",
@@ -2692,7 +2694,7 @@
       "PhD Students"
     ],
     "whoFor": "Second-year PhD students in computer science from groups underrepresented in computing",
-    "deadline": "Mid August (Annual)",
+    "deadline": "Historical (folded into Microsoft Research PhD Fellowship in 2021; historically August 14 / Sept 28)",
     "deadlineMonth": 8,
     "amount": "Full tuition and fees for up to 3 academic years + 2,000 annual stipend + invitation to annual Microsoft Research PhD Summit",
     "summary": "Aims to increase the pipeline of diverse talent receiving computing PhD degrees by providing three full years of tuition and living stipends for outstanding underrepresented doctoral researchers.",
@@ -2710,7 +2712,8 @@
       "Programming Languages"
     ],
     "url": "https://www.microsoft.com/en-us/research/academic-program/ada-lovelace-fellowship/",
-    "featured": true
+    "featured": true,
+    "status": "historical"
   },
   {
     "id": "two-sigma-phd-fellowship",
@@ -2722,8 +2725,8 @@
       "PhD Students"
     ],
     "whoFor": "Doctoral students in computer science, machine learning, distributed systems, and statistics",
-    "deadline": "Mid May (Annual)",
-    "deadlineMonth": 5,
+    "deadline": "September 25, 2026 at 12:00 PM noon ET (Annual late September at 12:00 PM ET)",
+    "deadlineMonth": 9,
     "amount": "Up to 5,000 toward university tuition and living expenses for 1 academic year + Two Sigma research mentorship",
     "summary": "Supports doctoral students who are expanding the boundaries of computer science, machine learning, distributed data systems, and algorithmic modeling.",
     "eligibility": [
@@ -2750,7 +2753,7 @@
       "PhD Students"
     ],
     "whoFor": "Graduate students in computer science, programming languages, algorithms, and machine learning",
-    "deadline": "Late November (Annual)",
+    "deadline": "November 13, 2026 at 11:59 PM AoE (Annual mid-November)",
     "deadlineMonth": 11,
     "amount": "Full tuition and academic fees + 5,000 living stipend + invitation to Jane Street NYC research summit",
     "summary": "Provides full tuition and stipend support for students doing foundational research in computer science, functional programming languages, compiler design, software verification, and algorithmic theory.",
@@ -2781,8 +2784,8 @@
       "PhD Students"
     ],
     "whoFor": "Women, gender-nonconforming, and underrepresented undergraduate and graduate students in computing",
-    "deadline": "Late October / Early November (Annual)",
-    "deadlineMonth": 11,
+    "deadline": "October 15, 2026 at 11:59 PM HST (Annual mid-October; 11:59 PM Hawaii Standard Time)",
+    "deadlineMonth": 10,
     "amount": "Up to 0,000 cash prize per winner (,500 for finalists) + trip to annual NCWIT Summit + national recognition",
     "summary": "Honors undergraduate and graduate students identifying as women, gender-queer, or non-binary for their technical contributions to projects in computer science, software design, and engineering.",
     "eligibility": [
@@ -3358,8 +3361,8 @@
       "Postdocs"
     ],
     "whoFor": "Researchers within 7 years of the PhD with outstanding potential in systems performance research",
-    "deadline": "Annual; consult the current call on the official awards page",
-    "deadlineMonth": 0,
+    "deadline": "February 28, 2026 at 23:59 AoE (Annual late February; presented at SIGMETRICS)",
+    "deadlineMonth": 2,
     "amount": "$1,500 honorarium or conference travel expenses and a plaque",
     "summary": "Recognizes a rising researcher demonstrating outstanding potential to create impactful ideas, paradigms, and tools for performance analysis of computer and communication systems.",
     "eligibility": [
@@ -3502,8 +3505,8 @@
       "Postdocs"
     ],
     "whoFor": "Recent PhD graduates with exceptional dissertations in human-computer interaction",
-    "deadline": "Annual; consult the current call on the official award page",
-    "deadlineMonth": 0,
+    "deadline": "October 31, 2026 at 23:59 AoE (Annual October 31; shifted for longer committee review before CHI)",
+    "deadlineMonth": 10,
     "amount": "Prestigious dissertation recognition from the international HCI community",
     "summary": "Honors the most outstanding dissertations that significantly advance human-computer interaction.",
     "eligibility": [
@@ -3589,8 +3592,8 @@
       "Postdocs"
     ],
     "whoFor": "Recent PhD graduates with outstanding dissertations in computer architecture",
-    "deadline": "Annual; consult the current call on the official award page",
-    "deadlineMonth": 0,
+    "deadline": "February 1, 2026 at 23:59 AoE (Annual February 1; presented at ISCA)",
+    "deadlineMonth": 2,
     "amount": "$1,000 prize and professional recognition",
     "summary": "Honors an outstanding doctoral dissertation that makes a significant contribution to computer architecture.",
     "eligibility": [
@@ -5421,8 +5424,8 @@
       "Faculty"
     ],
     "whoFor": "Researchers with a lasting, trend-setting technical contribution to computing",
-    "deadline": "January (Annual nomination cycle; verify current date)",
-    "deadlineMonth": 1,
+    "deadline": "December 15, 2026 at 23:59 AoE (Annual ACM Awards cycle)",
+    "deadlineMonth": 12,
     "amount": "$1,000,000 prize, with financial support from Google",
     "summary": "ACM's oldest and most prestigious award recognizes a technical achievement of lasting and major importance to the computing field.",
     "eligibility": [
@@ -5449,8 +5452,8 @@
       "Faculty"
     ],
     "whoFor": "Individuals or institutions that developed a software system with lasting influence",
-    "deadline": "January (Annual nomination cycle; verify current date)",
-    "deadlineMonth": 1,
+    "deadline": "December 15 (Annual ACM Awards cycle; currently under committee review)",
+    "deadlineMonth": 12,
     "amount": "$35,000 prize, with financial support from IBM",
     "summary": "Recognizes a software system whose lasting influence is reflected in contributions to concepts, commercial acceptance, or both.",
     "eligibility": [
@@ -5508,8 +5511,8 @@
       "Faculty"
     ],
     "whoFor": "Researchers with major contributions to computer and digital systems architecture",
-    "deadline": "Typically October (Annual nomination; verify current date)",
-    "deadlineMonth": 10,
+    "deadline": "March 1, 2026 at 23:59 ET (Annual March 1; presented at ISCA)",
+    "deadlineMonth": 3,
     "amount": "$5,000 prize",
     "summary": "Joint ACM–IEEE Computer Society honor for outstanding contributions to the hardware-software design and analysis of computer and digital systems architecture.",
     "eligibility": [
@@ -5537,7 +5540,7 @@
       "Faculty"
     ],
     "whoFor": "Researchers with sustained, high-impact contributions to the foundations of computer science",
-    "deadline": "July 1, 2026 for the documented cycle; annual nominations",
+    "deadline": "July 1, 2026 at 23:59 AoE (Annual July 1 cycle; presented at STOC/FOCS)",
     "deadlineMonth": 7,
     "amount": "Prize and invited lecture at STOC or FOCS",
     "summary": "Annual theory honor for major research accomplishments over an extended period, with attention to seminal foundational work and potentially educational contributions.",
@@ -5566,8 +5569,8 @@
       "PhD Students"
     ],
     "whoFor": "Authors of outstanding papers in theoretical computer science",
-    "deadline": "Annual nomination cycle; the 2026 cycle is closed",
-    "deadlineMonth": 0,
+    "deadline": "April 11, 2026 at 23:59 AoE (Annual mid-April; presented at STOC/ICALP)",
+    "deadlineMonth": 4,
     "amount": "$5,000 prize shared among the authors",
     "summary": "Annual ACM SIGACT–EATCS prize recognizing exceptional theoretical computer science papers, presented alternately at STOC and ICALP.",
     "eligibility": [
@@ -5654,7 +5657,7 @@
       "Faculty"
     ],
     "whoFor": "Faculty and principal investigators conducting foundational and applied research in computer science and technology",
-    "deadline": "Annual Call for Proposals (typically August)",
+    "deadline": "August 7, 2026 at 11:59:59 PM AoE (Annual thematic call; July/August at 11:59 PM AoE)",
     "deadlineMonth": 8,
     "amount": "Up to 00,000 unrestricted research gift",
     "summary": "Supports foundational and applied computer science research in key technical focus areas (such as quantum computing, security, and AI), pairing academic PIs with Google research sponsors.",
@@ -5713,8 +5716,8 @@
       "Faculty"
     ],
     "whoFor": "Faculty PIs leading multidisciplinary university teams (often multi-institution) on basic research of interest to DoD",
-    "deadline": "Annual (white papers spring, full proposals late summer; topics vary each cycle)",
-    "deadlineMonth": 5,
+    "deadline": "White paper: May 16, 2025; Full proposal: September 5, 2025 at 11:59 PM ET (Annual; N00014-25-S-F001)",
+    "deadlineMonth": 9,
     "amount": "Typically $500,000 to ~$1.5 million per year for an initial 3 years, with up to 2 optional additional years (up to 5 years total)",
     "summary": "Supports teams of researchers spanning more than one traditional science/engineering discipline to accelerate basic research of high priority to the DoD, with annually refreshed topic areas across the Army, Navy, and Air Force basic research offices.",
     "eligibility": [
@@ -5770,7 +5773,7 @@
       "Faculty"
     ],
     "whoFor": "Junior researchers working on embedded, real-time, and cyber-physical systems who earned their PhD on or after January 1, 2018",
-    "deadline": "Annual (Late June)",
+    "deadline": "June 30, 2026 at 23:59 AoE (Annual June 30; presented at ESWEEK)",
     "deadlineMonth": 6,
     "amount": "$2,000 honorarium plus an engraved plaque, presented at ESWeek",
     "summary": "Recognizes outstanding contributions by junior researchers in embedded, real-time, and cyber-physical systems, honoring early-career work that has already made a significant impact on the field.",
@@ -5797,7 +5800,7 @@
       "PhD Students"
     ],
     "whoFor": "Recent PhD graduates whose dissertation advances the science of embedded, real-time, or cyber-physical systems",
-    "deadline": "Annual (Early July)",
+    "deadline": "July 5, 2026 at 23:59 AoE (Annual July 5; presented at ESWEEK)",
     "deadlineMonth": 7,
     "amount": "$2,000 honorarium plus an award certificate and website citation",
     "summary": "Recognizes an outstanding doctoral dissertation that significantly advances the state of the art in embedded, real-time, or cyber-physical systems, honoring the legacy of Dr. Paul Caspi.",
@@ -5823,7 +5826,7 @@
       "Faculty"
     ],
     "whoFor": "Computing education researchers in the early stages of their academic careers",
-    "deadline": "Annual (Nomination intent by mid-August; nominations due September 1)",
+    "deadline": "September 1, 2026 at 23:59 AoE (Annual September 1; nomination intent by August 15)",
     "deadlineMonth": 9,
     "amount": "Recognition award (plaque/citation); presented at a SIGCSE-sponsored conference",
     "summary": "Recognizes and encourages outstanding contributions to computing education research by early-career academics, highlighting innovative work that addresses challenges in computing education or offers new theoretical or empirical insight.",
@@ -5876,7 +5879,7 @@
       "Faculty"
     ],
     "whoFor": "Mid-career faculty and independent researchers in computer science demonstrating exceptional productive scholarship",
-    "deadline": "Annual (Mid-September)",
+    "deadline": "September 15, 2026 at 11:59 PM EDT (Annual mid-September)",
     "deadlineMonth": 9,
     "amount": "Variable grant tailored to project needs, typically ~$40,000–$55,000+",
     "summary": "Offers fellowships to mid-career scholars and scientists in computer science who have demonstrated exceptional capacity for productive scholarship or exceptional creative ability.",
@@ -5934,7 +5937,7 @@
       "Postdocs"
     ],
     "whoFor": "Recent PhD graduates with no more than 3 years of postdoctoral work in CS, mathematics, data science, or computational science",
-    "deadline": "Annual (Late October)",
+    "deadline": "October 30, 2026 at 23:59:59 PST (Annual late October)",
     "deadlineMonth": 10,
     "amount": "Competitive salary ($146,000–$151,000/yr) plus research travel allowance, benefits, and relocation support",
     "summary": "Offers prestigious postdoctoral appointments at Berkeley Lab for outstanding researchers to participate in collaborative research spanning computer science, mathematics, AI/ML, and computational science applied to scientific discovery.",
@@ -5962,7 +5965,7 @@
       "Postdocs"
     ],
     "whoFor": "Exceptional early-career PhD scientists in computing, computational physics, data science, and engineering",
-    "deadline": "Annual (Early October / October 1)",
+    "deadline": "October 1, 2026 at 11:59 PM PST (Annual October 1)",
     "deadlineMonth": 10,
     "amount": "$12,663/month (~$152,000/yr) starting stipend plus comprehensive benefits and an independent research budget",
     "summary": "Highly competitive postdoctoral program designed to attract outstanding scientists and engineers in computer science, HPC, and applied mathematics to pursue independent research with mentorship from LLNL scientists.",
@@ -5990,7 +5993,7 @@
       "Faculty"
     ],
     "whoFor": "Researchers and practitioners recognized for outstanding contributions in the application of high-performance computers using innovative approaches",
-    "deadline": "Annual (Late June / June 30)",
+    "deadline": "June 30, 2026 at 23:59 ET (Annual June 30; presented at SC)",
     "deadlineMonth": 6,
     "amount": "$2,000 honorarium, engraved certificate, and presentation at SC (Supercomputing)",
     "summary": "Recognizes innovative contributions in the application of high-performance computers to solve large computational problems, particularly honoring developers of widely used software tools and systems.",
@@ -6016,7 +6019,7 @@
       "Faculty"
     ],
     "whoFor": "Pioneering computer engineers and researchers recognized for innovative contributions to high-performance computing systems",
-    "deadline": "Annual (Late June / June 30)",
+    "deadline": "June 30, 2026 at 23:59 ET (Annual June 30; presented at SC)",
     "deadlineMonth": 6,
     "amount": "$10,000 honorarium, crystal memento, and illuminated certificate",
     "summary": "Recognizes innovative contributions to high-performance computing systems that best exemplify the creative spirit of Seymour Cray, honoring systems deployed at scale that have made a lasting impact on HPC.",
