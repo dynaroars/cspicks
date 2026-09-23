@@ -1,6 +1,7 @@
 @import './styles/foundation.css';
 @import './styles/components/filters.css';
 @import './styles/components/results-cards.css';
+@import './styles/components/funding-cards.css';
 @import './styles/components/charts-tooltips-theme.css';
 @import './styles/pages/analysis.css';
 @import './styles/pages/comparison.css';

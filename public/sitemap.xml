@@ -2,4423 +2,4423 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://cspicks.roars.dev/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/?view=discoveries</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/simulator.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/csconfs.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/csconfs-submit.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/nsf.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/grants.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/grants-submit.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/ai/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/computer-vision/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/machine-learning/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/nlp/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/info-retrieval/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/architecture/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/security/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/databases/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/design-automation/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/embedded-real-time/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/hpc/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/mobile-computing/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/measurement/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/operating-systems/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/programming-languages/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/software-engineering/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/networks/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/graphics/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/algorithms/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/cryptography/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/logic-verification/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/comp-biology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/econ-computation/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/hci/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/robotics/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/visualization/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/areas/cs-education/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/aueb/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/aalborg-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/aalto-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/aarhus-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/aberystwyth-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/adelaide-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/air-force-inst-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/american-university-in-cairo/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/american-university-of-beirut/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ariel-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/arizona-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ashoka-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/auburn-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/augusta-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/australian-national-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/bits-pilani/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/bits-pilani-goa/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/buet/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/bupt/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/babe-bolyai-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/bar-ilan-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/bauhaus-university-weimar/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/baylor-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/beihang-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/beijing-institute-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/beijing-jiaotong-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/beijing-normal-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ben-gurion-university-of-the-negev/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/bielefeld-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/bilkent-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/binghamton-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/birkbeck-university-of-london/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/bocconi-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/boise-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/boston-college/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/boston-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/bo-azi-i-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/brandeis-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/brandenburg-univ-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/brigham-young-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/brno-university-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/brock-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/brown-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/brunel-university-london/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/bundeswehr-university-munich/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/cispa-helmholtz-center/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/cmi/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/cristal/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/cuhk-sz/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/cuny/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/cwi/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/california-inst-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/cardiff-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/carleton-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/carnegie-mellon-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/case-western-reserve-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/central-south-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/chalmers-gu/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/charles-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/chinese-academy-of-sciences/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/chinese-university-of-hong-kong/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/chongqing-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/chulalongkorn-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/chung-ang-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/city-university-of-hong-kong/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/city-university-of-london/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/city-university-of-macau/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/claremont-graduate-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/clemson-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/cleveland-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/college-of-william-and-mary/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/colorado-school-of-mines/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/colorado-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/columbia-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/concordia-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/cornell-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/cyprus-university-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/czech-technical-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/daiict/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/dgist/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/dtu/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/dalhousie-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/dartmouth-college/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/de-la-salle-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/depaul-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/delhi-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/drexel-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/duke-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/durham-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/epfl/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/eth-zurich/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ets-montreal/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/eurecom/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/east-china-normal-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ecole-normale-superieure/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ecole-normale-superieure-de-cachan/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ecole-normale-superieure-de-lyon/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ecole-normale-superieure-de-rennes/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/emory-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/federal-university-of-bahia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/federal-university-of-rio-grande/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/florida-atlantic-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/florida-institute-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/florida-international-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/florida-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/freie-universitaet-berlin/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/friedrich-schiller-university-jena/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/fudan-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/gist/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/gssi/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/galatasaray-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/george-mason-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/george-washington-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/georgetown-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/georgia-institute-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/georgia-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/goethe-university-frankfurt/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/goldsmiths-university-of-london/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/graz-university-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/griffith-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/hkust/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/hse-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/hust/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/hacettepe-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/hamburg-university-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/hangzhou-dianzi-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/hanyang-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/harbin-institute-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/harvard-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/hasso-plattner-institute/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/hebrew-university-of-jerusalem/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/heidelberg-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/henan-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/heriot-watt-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/hong-kong-baptist-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/humboldt-university-of-berlin/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/hunan-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/igdtuw/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iiit-bangalore/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iiit-delhi/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iiit-hyderabad/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iisc-bangalore/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-bhu-varanasi/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-bhilai/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-bhubaneswar/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-bombay/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-delhi/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-dharwad/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-gandhinagar/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-goa/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-guwahati/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-hyderabad/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-indore/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-jammu/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-jodhpur/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-kanpur/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-kharagpur/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-madras/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-mandi/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-palakkad/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-patna/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-roorkee/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-ropar/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iit-tirupati/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/imdea-networks-institute/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/imdea-software-institute/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/imsc/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/inria/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/insait/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ipi-pan/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ipm/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/isi-kolkata/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ist-austria/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/it-university-of-copenhagen/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iupui/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iust/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/illinois-institute-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/imperial-college-london/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/indiana-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/indiana-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/institute-of-science-tokyo/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/iowa-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/istanbul-technical-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/izmir-institute-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/jku-linz/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/just/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/jacobs-university-bremen/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/jadavpur-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/jaypee-univ-of-info-tech/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/jilin-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/johns-hopkins-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/kaist/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/kaust/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/kiit-bhubaneswar/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/kmutnb/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/kth-royal-inst-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ku-leuven/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/kansas-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/karlsruhe-inst-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/keio-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/kempelen-institute-kinit/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/kent-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/king-abdulaziz-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/king-s-college-london/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/korea-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ko-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/kyoto-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/kyung-hee-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/kyungpook-national-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/liu-post/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/lmu-munich/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/lums/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/lancaster-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/lebanese-american-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/lehigh-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/leiden-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/loughborough-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/louisiana-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/louisiana-tech-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/lund-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/mbzuai/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/must/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/maastricht-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/macquarie-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/malm-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/manipal-academy-of-higher-education/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/masaryk-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/masdar-institute/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/massachusetts-inst-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/massey-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/max-planck-society/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/maynooth-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/mcgill-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/mcmaster-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/memorial-univ-of-newfoundland/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/michigan-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/michigan-technological-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/middle-east-technical-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/middlesex-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/mississippi-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/missouri-s-t/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/mohammed-vi-polytechnic-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/monash-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/monash-university-indonesia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/monash-university-malaysia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/montana-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/m-lardalen-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/naist/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/niser/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/njit/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ntnu/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ntua/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/nwpu/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/nyu-abu-dhabi/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/nyu-shanghai/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/nanjing-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/nankai-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/nanyang-technological-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/national-cheng-kung-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/national-chiao-tung-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/national-chung-cheng-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/national-inst-of-informatics/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/national-inst-of-tech-silchar/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/national-inst-of-tech-warangal/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/national-taiwan-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/national-tsing-hua-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/national-university-of-singapore/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/naval-postgraduate-school/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/new-mexico-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/new-mexico-tech/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/new-york-tech/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/new-york-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/north-carolina-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/north-dakota-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/northeastern-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/northeastern-university-china/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/northern-arizona-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/northwest-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/northwestern-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/nova-southeastern-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ohsu/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/oakland-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ohio-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ohio-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/oklahoma-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/old-dominion-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ontario-tech-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/open-university-uk/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/oregon-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/osaka-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/postech/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ptit/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/puc-rio/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/puc-rs/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/pucpr/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/paderborn-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/peking-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/pennsylvania-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/plaksha-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/politecnico-di-milano/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/polytechnic-univ-of-catalonia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/polytechnique-montreal/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/portland-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/princeton-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/purdue-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/qatar-computing-research-inst/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/qatar-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/queen-mary-university-of-london/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/queen-s-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/queen-s-university-belfast/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/queensland-univ-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/queen-s-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/rmit-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/rwth-aachen-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/radboud-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ravenshaw-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/renmin-university-of-china/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/rensselaer-polytechnic-institute/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/rice-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/rochester-inst-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/royal-holloway-univ-of-london/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/royal-military-college-of-canada/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ruhr-university-bochum/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/rutgers-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/siu-carbondale/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/suat/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/sufe/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/sustech/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/sutd/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/saarland-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/sabanc-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/saint-louis-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/sapienza-university-of-rome/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/scuola-superiore-sant-anna/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/seoul-national-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/shahid-beheshti-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/shandong-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/shanghai-jiao-tong-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/shanghaitech-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/sharif-university-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/shenzhen-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/shiv-nadar-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/sichuan-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/simon-fraser-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/simula-uib/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/singapore-management-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/soochow-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/south-asian-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/south-china-univ-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/southeast-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/southern-methodist-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/stanford-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/stellenbosch-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/stevens-institute-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/stony-brook-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/sun-yat-sen-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/sungkyunkwan-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/syracuse-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/thws/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tobb-et/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tti-chicago/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-berlin/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-braunschweig/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-chemnitz/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-clausthal/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-darmstadt/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-delft/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-dortmund/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-dresden/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-eindhoven/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-freiberg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-ilmenau/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-kaiserslautern/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-munich/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tu-wien/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tallinn-university-of-technology/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tampere-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tata-inst-of-fundamental-research/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/teias/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/technion/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tel-aviv-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/temple-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/texas-a-m-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/texas-a-m-at-qatar/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/texas-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/texas-tech-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/the-catholic-university-of-korea/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/the-hong-kong-polytechnic-univ/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/the-university-of-alabama/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tianjin-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tilburg-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tohoku-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tongji-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/toronto-metropolitan-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/towson-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/trinity-college-dublin/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tsinghua-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tufts-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/tulane-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/uaeu/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/uc-chile/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/uccs/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/uestc/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/uff/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ufmg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ufms/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ufpe/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ufpr/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ufrgs/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ufrj/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ufu/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/unc-charlotte/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/unc-greensboro/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/unicamp/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/unist/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/unsw/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/usp/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/usp-icmc/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/ustc/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/uit-the-arctic-univ-of-norway/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-arkansas-little-rock/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-california-berkeley/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-california-davis/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-california-irvine/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-california-los-angeles/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-california-merced/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-california-riverside/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-california-san-diego/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-california-santa-barbara/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-california-santa-cruz/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-illinois-at-urbana-champaign/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-louisiana-lafayette/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-maryland-baltimore-county/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-maryland-college-park/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-massachusetts-amherst/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-massachusetts-dartmouth/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-missouri-kansas-city/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-modena-and-reggio-emilia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/univ-of-wisconsin-milwaukee/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universidad-nacional-de-c-rdoba/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universidad-rey-juan-carlos/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universidad-de-chile/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universidad-de-zaragoza/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universidad-de-los-andes/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universidade-federal-de-vi-osa/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universidade-nova-de-lisboa/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universidade-de-bras-lia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universidade-de-lisboa/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-college-dublin/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-college-london/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-at-albany-suny/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-at-buffalo/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-a-coru-a/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-aberdeen/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-alabama-birmingham/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-alabama-huntsville/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-alberta/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-amsterdam/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-antwerp/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-arizona/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-arkansas/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-athens/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-auckland/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-augsburg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-bamberg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-basel/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-bath/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-bayreuth/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-bergen/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-bern/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-birmingham/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-bonn/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-bremen/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-bristol/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-british-columbia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-buenos-aires/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-cagliari/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-calgary/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-cambridge/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-canterbury/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-cape-town/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-catania/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-central-florida/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-chicago/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-cincinnati/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-cologne/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-colorado-denver/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-colorado-boulder/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-connecticut/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-copenhagen/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-crete/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-delaware/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-delhi/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-denver/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-dhaka/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-duisburg-essen/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-dundee/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-d-sseldorf/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-edinburgh/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-erlangen-nuremberg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-essex/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-exeter/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-florida/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-freiburg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-fribourg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-georgia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-glasgow/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-groningen/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-guelph/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-g-ttingen/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-haifa/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-halle-wittenberg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-hamburg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-hannover/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-hawaii-at-manoa/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-helsinki/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-hildesheim/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-hong-kong/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-houston/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-idaho/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-illinois-at-chicago/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-innsbruck/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-ioannina/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-iowa/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-jinan/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-jordan/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-kansas/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-kassel/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-kent/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-kentucky/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-kiel/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-klagenfurt/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-koblenz-landau/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-konstanz/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-l-aquila/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-latvia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-leeds/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-leipzig/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-liverpool/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-louisville/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-luxembourg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-l-beck/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-macau/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-magdeburg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-maine/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-mainz/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-malaya/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-malta/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-manchester/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-manitoba/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-mannheim/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-marburg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-massachusetts-boston/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-massachusetts-lowell/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-melbourne/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-memphis/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-miami/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-michigan/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-michigan-dearborn/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-minnesota/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-mississippi/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-missouri/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-molise/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-montreal/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-moratuwa/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-murcia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-m-nster/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-nebraska/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-nebraska-omaha/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-nevada/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-nevada-las-vegas/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-new-brunswick/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-new-hampshire/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-new-mexico/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-new-orleans/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-newcastle/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-nicosia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-north-carolina/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-north-texas/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-notre-dame/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-nottingham/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-oklahoma/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-oldenburg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-oregon/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-osnabr-ck/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-otago/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-ottawa/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-oxford/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-padova/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-passau/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-patras/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-pennsylvania/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-peradeniya/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-piraeus/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-pisa/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-pittsburgh/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-potsdam/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-queensland/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-regensburg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-regina/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-rhode-island/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-rochester/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-rostock/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-salerno/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-salzburg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-sannio/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-saskatchewan/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-sheffield/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-siegen/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-south-carolina/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-south-florida/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-southampton/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-southern-california/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-southern-mississippi/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-st-andrews/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-strathclyde/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-stuttgart/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-surrey/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-sussex/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-sydney/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-szeged/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-tartu/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-technology-sydney/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-tennessee/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-texas-el-paso/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-texas-at-arlington/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-texas-at-austin/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-texas-at-dallas/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-texas-at-san-antonio/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-tokyo/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-toronto/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-trento/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-trier/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-tsukuba/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-tulsa/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-twente/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-t-bingen/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-udine/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-ulm/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-utah/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-vermont/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-victoria/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-vienna/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-virginia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-waikato/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-warsaw/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-warwick/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-washington/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-waterloo/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-western-australia/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-windsor/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-wisconsin-madison/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-wollongong/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-wroclaw/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-wuppertal/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-wyoming/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-w-rzburg/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-york/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-zurich/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/university-of-the-witwatersrand/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universit-della-svizzera-italiana/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universit-jean-monnet/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universit-laval/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universit-paris-dauphine/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universit-de-sherbrooke/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universit-du-qu-bec-montr-al/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/universit-libre-de-bruxelles/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/uppsala-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/utah-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/utrecht-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/vistec/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/vnit-nagpur/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/vnu-univ-of-eng-and-tech/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/vu-amsterdam/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/vanderbilt-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/victoria-university-of-wellington/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/vinuniversity/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/virginia-commonwealth-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/virginia-tech/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/waseda-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/washington-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/washington-university-in-st-louis/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/wayne-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/weizmann-institute-of-science/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/west-virginia-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/western-michigan-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/western-sydney-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/western-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/westlake-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/wichita-state-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/worcester-polytechnic-institute/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/wuhan-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/xi-an-jiaotong-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/xiamen-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/xidian-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/yale-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/yangzhou-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/yonsei-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/york-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/y-ld-z-technical-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/zhejiang-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cspicks.roars.dev/schools/zye-in-university/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
