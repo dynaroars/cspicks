@@ -15,9 +15,9 @@ Ensure the Grants & Awards tool (`grants.html`) displays current, authoritative 
 
 1. **Continuous Execution Mandate:** Do NOT stop after a single batch. Iterate through **all grant entries** until the full dataset is complete.
 2. **Authoritative Provenance**: Only add or update grants with verified official call-for-proposal URLs.
-3. **Schema Integrity**:
+3. **Schema Integrity & Concrete Dates**:
    - `public/grants.json` array of objects (`id`, `name`, `sponsor`, `amount`, `deadline`, `url`, `audience`, `topic`, `status`).
-   - Deadline strings MUST use ISO format (`YYYY-MM-DD`).
+   - Whenever possible, save and show concrete calendar dates (e.g. `October 20, 2026 (Annual Mid-October; reference letters October 16)`) for historical reference, auditability, and automatic cycle projection.
 4. **Local Verification**:
    - Every batch MUST run and pass:
      ```bash

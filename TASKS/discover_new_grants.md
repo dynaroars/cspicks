@@ -15,8 +15,8 @@ Proactively expand the Grants & Fellowships directory (`grants.html`) with new c
 
 1. **Required Schema**:
    - `id`, `name`, `sponsor`, `amount`, `deadline`, `url`, `audience`, `topic`, `status`.
-2. **ISO Date Format**:
-   - Deadline strings MUST use ISO format (`YYYY-MM-DD`).
+2. **Concrete Dates for Historical Reference**:
+   - Whenever possible, save and show concrete calendar dates (e.g. `October 20, 2026 (Annual Mid-October; reference letters October 16)`) for historical reference, auditability, and automatic cycle projection.
 3. **Local Verification**:
    ```bash
    npm test && npm run typecheck && npm run build && git diff --check
