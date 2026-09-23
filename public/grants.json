@@ -5865,5 +5865,171 @@
     ],
     "url": "https://cohere.com/research/grants",
     "featured": false
+  },
+  {
+    "id": "guggenheim-fellowship-cs",
+    "name": "Guggenheim Fellowship in Computer Science",
+    "shortName": "Guggenheim Fellowship",
+    "sponsor": "John Simon Guggenheim Memorial Foundation",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Mid-career faculty and independent researchers in computer science demonstrating exceptional productive scholarship",
+    "deadline": "Annual (Mid-September)",
+    "deadlineMonth": 9,
+    "amount": "Variable grant tailored to project needs, typically ~$40,000–$55,000+",
+    "summary": "Offers fellowships to mid-career scholars and scientists in computer science who have demonstrated exceptional capacity for productive scholarship or exceptional creative ability.",
+    "eligibility": [
+      "Citizens or permanent residents of the United States or Canada",
+      "Mid-career professionals with a strong record of published research",
+      "Not open to current undergraduate or graduate students"
+    ],
+    "topics": [
+      "General CS",
+      "Theory",
+      "AI/ML",
+      "Systems"
+    ],
+    "url": "https://www.gf.org",
+    "featured": true
+  },
+  {
+    "id": "macarthur-fellowship",
+    "name": "MacArthur Fellowship (\"Genius Grant\")",
+    "shortName": "MacArthur Fellowship",
+    "sponsor": "John D. and Catherine T. MacArthur Foundation",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
+    "whoFor": "Exceptionally creative scientists, engineers, and computing pioneers demonstrating extraordinary originality and dedication",
+    "deadline": "Rolling / Ongoing (Confidential nomination only)",
+    "deadlineMonth": 0,
+    "amount": "$800,000 unrestricted, no-strings-attached stipend paid over 5 years",
+    "summary": "Awarded to talented individuals in computing and across disciplines who have shown extraordinary originality and dedication in their creative pursuits and a marked capacity for self-direction.",
+    "eligibility": [
+      "U.S. citizens or residents of the United States",
+      "Selection by confidential, invitation-only external nomination pool (no direct applications accepted)",
+      "Cannot hold elective office or advanced government positions"
+    ],
+    "topics": [
+      "General CS",
+      "AI/ML",
+      "Theory",
+      "Robotics",
+      "Systems"
+    ],
+    "url": "https://www.macfound.org/programs/fellows/",
+    "featured": true
+  },
+  {
+    "id": "lbnl-alvarez-hopper-fellowship",
+    "name": "LBNL Luis W. Alvarez & Grace Hopper Postdoctoral Fellowships in Computing Sciences",
+    "shortName": "Alvarez & Hopper Postdoc Fellowships",
+    "sponsor": "Lawrence Berkeley National Laboratory (DOE)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Postdocs"
+    ],
+    "whoFor": "Recent PhD graduates with no more than 3 years of postdoctoral work in CS, mathematics, data science, or computational science",
+    "deadline": "Annual (Late October)",
+    "deadlineMonth": 10,
+    "amount": "Competitive salary ($146,000–$151,000/yr) plus research travel allowance, benefits, and relocation support",
+    "summary": "Offers prestigious postdoctoral appointments at Berkeley Lab for outstanding researchers to participate in collaborative research spanning computer science, mathematics, AI/ML, and computational science applied to scientific discovery.",
+    "eligibility": [
+      "Ph.D. in computer science, mathematics, data science, or a computational science discipline",
+      "No more than 3 years of postdoctoral work completed",
+      "Must have Ph.D. conferred by the start of the fellowship appointment"
+    ],
+    "topics": [
+      "HPC",
+      "Systems",
+      "AI/ML",
+      "Scientific Computing"
+    ],
+    "url": "https://jobs.lbl.gov",
+    "featured": false
+  },
+  {
+    "id": "llnl-lawrence-fellowship",
+    "name": "LLNL Lawrence Postdoctoral Fellowship",
+    "shortName": "LLNL Lawrence Fellowship",
+    "sponsor": "Lawrence Livermore National Laboratory (DOE)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Postdocs"
+    ],
+    "whoFor": "Exceptional early-career PhD scientists in computing, computational physics, data science, and engineering",
+    "deadline": "Annual (Early October / October 1)",
+    "deadlineMonth": 10,
+    "amount": "$12,663/month (~$152,000/yr) starting stipend plus comprehensive benefits and an independent research budget",
+    "summary": "Highly competitive postdoctoral program designed to attract outstanding scientists and engineers in computer science, HPC, and applied mathematics to pursue independent research with mentorship from LLNL scientists.",
+    "eligibility": [
+      "Ph.D. completed within one year of application or to be completed before appointment start",
+      "Open to U.S. and non-U.S. citizens (subject to visa and lab clearance)",
+      "Independent research proposal required"
+    ],
+    "topics": [
+      "HPC",
+      "AI/ML",
+      "Systems",
+      "General CS"
+    ],
+    "url": "https://st.llnl.gov/opportunities/postdocs/lawrence-fellowship",
+    "featured": false
+  },
+  {
+    "id": "ieee-cs-fernbach-award",
+    "name": "IEEE Computer Society Sidney Fernbach Award",
+    "shortName": "IEEE Sidney Fernbach Award",
+    "sponsor": "IEEE Computer Society",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Researchers and practitioners recognized for outstanding contributions in the application of high-performance computers using innovative approaches",
+    "deadline": "Annual (Late June / June 30)",
+    "deadlineMonth": 6,
+    "amount": "$2,000 honorarium, engraved certificate, and presentation at SC (Supercomputing)",
+    "summary": "Recognizes innovative contributions in the application of high-performance computers to solve large computational problems, particularly honoring developers of widely used software tools and systems.",
+    "eligibility": [
+      "Open to individuals worldwide recognized for pioneering applications in HPC",
+      "Nominations submitted via IEEE Computer Society Awards portal"
+    ],
+    "topics": [
+      "HPC",
+      "Systems",
+      "Scientific Computing"
+    ],
+    "url": "https://www.computer.org/volunteering/awards/fernbach",
+    "featured": false
+  },
+  {
+    "id": "ieee-cs-seymour-cray-award",
+    "name": "IEEE Computer Society Seymour Cray Computer Engineering Award",
+    "shortName": "IEEE Seymour Cray Award",
+    "sponsor": "IEEE Computer Society",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Pioneering computer engineers and researchers recognized for innovative contributions to high-performance computing systems",
+    "deadline": "Annual (Late June / June 30)",
+    "deadlineMonth": 6,
+    "amount": "$10,000 honorarium, crystal memento, and illuminated certificate",
+    "summary": "Recognizes innovative contributions to high-performance computing systems that best exemplify the creative spirit of Seymour Cray, honoring systems deployed at scale that have made a lasting impact on HPC.",
+    "eligibility": [
+      "Open to researchers and computer system engineers in the high-performance computing community",
+      "Nominations submitted via IEEE Computer Society Awards portal"
+    ],
+    "topics": [
+      "HPC",
+      "Systems",
+      "Architecture"
+    ],
+    "url": "https://www.computer.org/volunteering/awards/cray",
+    "featured": false
   }
 ]
