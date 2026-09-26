@@ -25,7 +25,12 @@ OPENALEX_API_KEY=$(cat "$KEY_FILE")
 
 BEFORE_COUNT=$(node -e "const d=JSON.parse(require('fs').readFileSync('public/professor_history_openalex.json')); console.log(Object.keys(d.people || d).length)")
 
-node scripts/build-openalex-history.js --daily-budget=900 >> "$LOG_FILE" 2>&1
+# tsx: the script imports src/*.ts modules through .js specifiers.
+if ! node --import tsx scripts/build-openalex-history.js --daily-budget=900 >> "$LOG_FILE" 2>&1; then
+    echo "ABORT: build-openalex-history.js failed (see error above), reverting and not committing" >> "$LOG_FILE"
+    git checkout -- public/professor_history_openalex.json public/school-aliases.json
+    exit 1
+fi
 
 AFTER_COUNT=$(node -e "const d=JSON.parse(require('fs').readFileSync('public/professor_history_openalex.json')); console.log(Object.keys(d.people || d).length)")
 
