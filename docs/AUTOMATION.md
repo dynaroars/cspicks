@@ -33,17 +33,17 @@ Ordering rule: the auditor runs at 04:00 UTC and every producer starts between 0
 a producer creates is at least ~17 hours old at the next audit, past the auditor's 12-hour
 minimum. Keep new routines inside those windows.
 
-| Key | Model | Cron (UTC) | ET | Section |
-| :-- | :-- | :-- | :-- | :-- |
-| `audit` | Opus 5.5 | `0 4 * * 4` | Thu 12 AM | [Auditor](#auditor-audit) |
-| `confs` | Sonnet 5 | `0 8 * * 1` | Mon 4 AM | [Conference audit](#conference-audit-confs) |
-| `grants` | Sonnet 5 | `30 8 1,15 * *` | 1st and 15th, 4:30 AM | [Grants audit](#grants-audit-grants) |
-| `data-sync` | Sonnet 5 | `30 8 3 * *` | 3rd of month, 4:30 AM | [Mechanical data sync](#mechanical-data-sync-data-sync) |
-| `confs-discover` | Sonnet 5 | `0 9 8 * *` | 8th of month, 5 AM | [Discover conferences](#discover-conferences-confs-discover) |
-| `grants-discover` | Sonnet 5 | `0 9 22 * *` | 22nd of month, 5 AM | [Discover grants](#discover-grants-grants-discover) |
-| `affiliations` | Sonnet 5 | `30 9 10 1,4,7,10 *` | 10th of Jan/Apr/Jul/Oct, 5:30 AM | [Manual affiliations](#manual-affiliations-affiliations) |
+| Key | Routine id | Model | Cron (UTC) | ET | Section |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `audit` | `trig_01RgGWz3Xjw6gXvqPYgixP7C` | Opus 5.5 | `0 4 * * 4` | Thu 12 AM | [Auditor](#auditor-audit) |
+| `confs` | `trig_018AYNAaQfwJC2rx8JX2zZKo` | Sonnet 5 | `0 8 * * 1` | Mon 4 AM | [Conference audit](#conference-audit-confs) |
+| `grants` | `trig_01LuUf649h8NwKMEftjktkmS` | Sonnet 5 | `30 8 1,15 * *` | 1st and 15th, 4:30 AM | [Grants audit](#grants-audit-grants) |
+| `data-sync` | `trig_014ksNYkkzyHVxS2Kub4LqsG` | Sonnet 5 | `30 8 3 * *` | 3rd of month, 4:30 AM | [Mechanical data sync](#mechanical-data-sync-data-sync) |
+| `confs-discover` | `trig_01LZM6T6zVarUND6Uvh6HUTh` | Sonnet 5 | `0 9 8 * *` | 8th of month, 5 AM | [Discover conferences](#discover-conferences-confs-discover) |
+| `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5 | `0 9 22 * *` | 22nd of month, 5 AM | [Discover grants](#discover-grants-grants-discover) |
+| `affiliations` | `trig_01Q8yhHMcPqZZJspxcr4iw7n` | Sonnet 5 | `30 9 10 1,4,7,10 *` | 10th of Jan/Apr/Jul/Oct, 5:30 AM | [Manual affiliations](#manual-affiliations-affiliations) |
 
-Routine ids are listed at <https://claude.ai/code/routines>. Each routine attaches only the
+Each routine attaches only the
 `Claude_Docs` connector. Don't add `Claude_Code_Remote`: with it, a run that opens a PR schedules
 hourly "Re-check PR" reminders until the PR is merged.
 
