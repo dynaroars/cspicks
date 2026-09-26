@@ -1,0 +1,544 @@
+{
+  "generatedAt": "2026-09-20T03:05:03.392Z",
+  "resolvedCount": 29,
+  "unresolvedCount": 57,
+  "note": "Resolved via Wikidata only (P8926 \"DBLP venue ID\"); dblp.org itself was not queried — see file header on Anubis. Existence/volume cross-checks for these keys, and DBLP-search-based resolution for entries in `unresolved`, happen during Step 2's dump parse instead.",
+  "resolved": {
+    "aamas": {
+      "area": "ai",
+      "tier": "core-a-star",
+      "dblpKey": "conf/atal",
+      "kind": "conf",
+      "confidence": "wikidata-sitelink-disambiguated",
+      "wikidataId": "Q6049588",
+      "label": "International Conference on Autonomous Agents and Multiagent Systems",
+      "existenceChecked": false
+    },
+    "aied": {
+      "area": "csed",
+      "tier": "core-a",
+      "dblpKey": "conf/aied",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105692995",
+      "label": "International Conference on Artificial Intelligence in Education",
+      "existenceChecked": false
+    },
+    "aistats": {
+      "area": "mlmining",
+      "tier": "core-a",
+      "dblpKey": "conf/aistats",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q47449932",
+      "label": "International Conference on Artificial Intelligence and Statistics",
+      "existenceChecked": false
+    },
+    "caise": {
+      "area": "soft",
+      "tier": "core-a",
+      "dblpKey": "conf/caise",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105693402",
+      "label": "International Conference on Advanced Information Systems Engineering",
+      "existenceChecked": false
+    },
+    "cgo": {
+      "area": "arch",
+      "tier": "core-a",
+      "dblpKey": "conf/cgo",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105623484",
+      "label": "IEEE/ACM International Symposium on Code Generation and Optimization",
+      "existenceChecked": false
+    },
+    "conext": {
+      "area": "comm",
+      "tier": "core-a",
+      "dblpKey": "conf/conext",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105693551",
+      "label": "Conference on Emerging Network Experiment and Technology",
+      "existenceChecked": false
+    },
+    "cscw": {
+      "area": "chi",
+      "tier": "core-a",
+      "dblpKey": "conf/cscw",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q21682678",
+      "label": "Computer Supported Cooperative Work",
+      "existenceChecked": false
+    },
+    "ecai": {
+      "area": "ai",
+      "tier": "core-a",
+      "dblpKey": "conf/ecai",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q1376472",
+      "label": "European Conference on Artificial Intelligence",
+      "existenceChecked": false
+    },
+    "ecir": {
+      "area": "inforet",
+      "tier": "core-a",
+      "dblpKey": "conf/ecir",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q5412436",
+      "label": "European Conference on Information Retrieval",
+      "existenceChecked": false
+    },
+    "ecoop": {
+      "area": "plan",
+      "tier": "core-a",
+      "dblpKey": "conf/ecoop",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q5412438",
+      "label": "European Conference on Object-Oriented Programming",
+      "existenceChecked": false
+    },
+    "foga": {
+      "area": "ai",
+      "tier": "core-a",
+      "dblpKey": "conf/foga",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105692802",
+      "label": "Foundations of Genetic Algorithms",
+      "existenceChecked": false
+    },
+    "fpga": {
+      "area": "da",
+      "tier": "core-a",
+      "dblpKey": "conf/fpga",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105693471",
+      "label": "Symposium on Field Programmable Gate Arrays",
+      "existenceChecked": false
+    },
+    "gecco": {
+      "area": "ai",
+      "tier": "core-a",
+      "dblpKey": "conf/gecco",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q25101551",
+      "label": "Genetic and Evolutionary Computation Conference",
+      "existenceChecked": false
+    },
+    "hotos": {
+      "area": "ops",
+      "tier": "core-a",
+      "dblpKey": "conf/hotos",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105623490",
+      "label": "USENIX Workshop on Hot Topics in Operating Systems",
+      "existenceChecked": false
+    },
+    "icdt": {
+      "area": "mod",
+      "tier": "core-a",
+      "dblpKey": "conf/icdt",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105703576",
+      "label": "International Conference on Database Theory",
+      "existenceChecked": false
+    },
+    "icme": {
+      "area": "graph",
+      "tier": "core-a",
+      "dblpKey": "conf/icmcs",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105692834",
+      "label": "IEEE International Conference on Multimedia and Expo",
+      "existenceChecked": false
+    },
+    "icsa": {
+      "area": "soft",
+      "tier": "core-a",
+      "dblpKey": "conf/icsa",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105699972",
+      "label": "International Conference on Software Architecture",
+      "existenceChecked": false
+    },
+    "interspeech": {
+      "area": "nlp",
+      "tier": "core-a",
+      "dblpKey": "conf/interspeech",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105692771",
+      "label": "Conference of the International Speech Communication Association",
+      "existenceChecked": false
+    },
+    "ipdps": {
+      "area": "hpc",
+      "tier": "core-a",
+      "dblpKey": "conf/ipps",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q6052324",
+      "label": "International Parallel and Distributed Processing Symposium",
+      "existenceChecked": false
+    },
+    "ipsn": {
+      "area": "mobile",
+      "tier": "core-a-star",
+      "dblpKey": "conf/ipsn",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q6049638",
+      "label": "International Conference on Information Processing in Sensor Networks",
+      "existenceChecked": false
+    },
+    "islped": {
+      "area": "da",
+      "tier": "core-a",
+      "dblpKey": "conf/islped",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105696111",
+      "label": "International Symposium on Low Power Electronics and Design",
+      "existenceChecked": false
+    },
+    "iui": {
+      "area": "chi",
+      "tier": "core-a",
+      "dblpKey": "conf/iui",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105693434",
+      "label": "International Conference on Intelligent User Interfaces",
+      "existenceChecked": false
+    },
+    "miccai": {
+      "area": "vision",
+      "tier": "core-a",
+      "dblpKey": "conf/miccai",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105693710",
+      "label": "International Conference on Medical Image Computing and Computer-Assisted Intervention",
+      "existenceChecked": false
+    },
+    "ppsn": {
+      "area": "ai",
+      "tier": "core-a",
+      "dblpKey": "conf/ppsn",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q97656984",
+      "label": "Parallel Problem Solving from Nature",
+      "existenceChecked": false
+    },
+    "recsys": {
+      "area": "inforet",
+      "tier": "core-a",
+      "dblpKey": "conf/recsys",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q20888918",
+      "label": "The ACM Conference Series on Recommender Systems",
+      "existenceChecked": false
+    },
+    "sdm": {
+      "area": "mlmining",
+      "tier": "core-a",
+      "dblpKey": "conf/sdm",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105623487",
+      "label": "SIAM International Conference on Data Mining",
+      "existenceChecked": false
+    },
+    "tacas": {
+      "area": "log",
+      "tier": "core-a",
+      "dblpKey": "conf/tacas",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105693137",
+      "label": "International Conference on Tools and Algorithms for Construction and Analysis of Systems",
+      "existenceChecked": false
+    },
+    "wacv": {
+      "area": "vision",
+      "tier": "core-a",
+      "dblpKey": "conf/wacv",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105693556",
+      "label": "IEEE Workshop/Winter Conference on Applications of Computer Vision",
+      "existenceChecked": false
+    },
+    "wsdm": {
+      "area": "inforet",
+      "tier": "core-a",
+      "dblpKey": "conf/wsdm",
+      "kind": "conf",
+      "confidence": "wikidata",
+      "wikidataId": "Q105491181",
+      "label": "Web Search and Data Mining",
+      "existenceChecked": false
+    }
+  },
+  "unresolved": [
+    {
+      "acronym": "acmmm",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "acsac",
+      "reason": "ambiguous-wikidata-matches",
+      "candidates": [
+        {
+          "wikidataId": "Q105692755",
+          "label": "Annual Computer Security Applications Conference",
+          "description": "conference series",
+          "sitelinkCount": 0,
+          "dblpKey": "conf/acsac"
+        },
+        {
+          "wikidataId": "Q105698415",
+          "label": "Asia-Pacific Computer Systems Architecture Conference",
+          "description": "conference series",
+          "sitelinkCount": 0,
+          "dblpKey": "conf/aPcsac"
+        }
+      ]
+    },
+    {
+      "acronym": "alenex",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "asiacrypt",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "assets",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "bmvc",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "bpm",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "cade",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "ccc",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "ches",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "cidr",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "cikm",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "colt",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "cp",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "csf",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "dis",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "disc",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "dsn",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "eacl",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "ease",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "er",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "esa",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "esem",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "esop",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "esorics",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "fc",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "gd",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "icaps",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "icdar",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "icdcs",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "icdm",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "icer",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "icsoc",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "icws",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "icwsm",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "ijcar",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "infocom",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "ismar",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "issre",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "iswc",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "itc",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "itcs",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "kr",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "lak",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "middleware",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "mmsys",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "msr",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "percom",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "pets",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "podc",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "re",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "sat",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "seams",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "sigspatial",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "soups",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "stacs",
+      "reason": "no-wikidata-signal"
+    },
+    {
+      "acronym": "uai",
+      "reason": "no-wikidata-signal"
+    }
+  ]
+}
