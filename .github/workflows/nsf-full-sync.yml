@@ -14,6 +14,10 @@ on:
       attempt:
         description: Continuation attempt (set automatically)
         default: '1'
+      allow_drop:
+        description: Open a PR even if awards drop more than MAX_DROP_PERCENT (after a human/auditor explained the drop)
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -94,7 +98,7 @@ jobs:
           ATTEMPT: ${{ inputs.attempt || '1' }}
         run: |
           if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
-            gh workflow run nsf-full-sync.yml --ref main -f attempt=$((ATTEMPT + 1))
+            gh workflow run nsf-full-sync.yml --ref main -f attempt=$((ATTEMPT + 1)) -f allow_drop=${{ inputs.allow_drop || false }}
             echo "Incomplete; dispatched attempt $((ATTEMPT + 1))."
           else
             tail -40 sync.log > tail.txt
@@ -129,7 +133,7 @@ jobs:
             exit 0
           fi
           stats=$(git diff --stat public/nsf-awards.json public/nsf-name-crosswalk.csv | tail -1)
-          if [ "$DROP" = "yes" ]; then
+          if [ "$DROP" = "yes" ] && [ "${{ inputs.allow_drop }}" != "true" ]; then
             gh issue create --title "[scheduled:nsf-full] NSF resync dropped awards ($BEFORE -> $AFTER)" \
               --body "The quarterly resync ([run]($run_url)) completed, but the award count fell by more than ${MAX_DROP_PERCENT}% ($BEFORE -> $AFTER), which MAINTENANCE.md treats as a sign upstream changed shape. Not opening a PR. Diff: $stats"
             exit 0
