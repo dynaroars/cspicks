@@ -102,8 +102,12 @@ Follow `TASKS/AUDIT_ISSUES_PRS.md`, with these rules taking precedence:
   `main`, resolve conflicts, re-validate, and merge.
 - Side-finding and correction Issues: verify live. If confirmed, fix on `main`, validate, push,
   and close with what changed and the source. If the evidence is wrong, close with the reason.
-- Action PRs (`[scheduled:nsf-full]`, `[scheduled:dblp]`) contain generated data, not researched
-  facts: check the diff shape per MAINTENANCE.md's verification checklist (no near-total rewrite,
+- Action PRs (`[scheduled:nsf-full]`, `[scheduled:dblp]`) are opened by the workflow's
+  `GITHUB_TOKEN`, so GitHub doesn't link their CI to the PR: `gh pr checks` shows nothing and the
+  `pull_request` run sits at "action_required". The workflow dispatches the build on the branch
+  instead; treat CI as green when
+  `gh api repos/dynaroars/cspicks/commits/<head sha>/check-runs` shows `build` = `success`. They
+  contain generated data, not researched facts: check the diff shape per MAINTENANCE.md's verification checklist (no near-total rewrite,
   no unexplained drop) and spot-check a few rows instead of re-verifying every fact. For `dblp`,
   update the venue count in `CONF_SET_HELP` (src/filters.ts) if the accepted count changed.
 - Submission Issues (from `grants-submit.html` or `csconfs-submit.html`): a submission is a lead,
