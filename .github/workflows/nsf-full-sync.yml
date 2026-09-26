@@ -1,0 +1,148 @@
+name: Quarterly NSF full resync
+
+# Model-free replacement for running `npm run sync:nsf:all` by hand (MAINTENANCE.md §3). The sync is
+# resumable through .nsf-sync-cache.json, which is kept in the Actions cache per quarter: the first
+# run of a quarter starts empty (a full re-query), and a run that times out or has failures
+# re-dispatches itself to continue. A complete, sane result becomes a `[scheduled:nsf-full]` PR for
+# the auditor routine (docs/AUTOMATION.md).
+
+on:
+  schedule:
+    - cron: '0 8 2 1,4,7,10 *' # 2nd of Jan/Apr/Jul/Oct, 08:00 UTC
+  workflow_dispatch:
+    inputs:
+      attempt:
+        description: Continuation attempt (set automatically)
+        default: '1'
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: nsf-full-sync
+  cancel-in-progress: false
+
+env:
+  MAX_ATTEMPTS: 6
+  MAX_DROP_PERCENT: 10
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Quarter key
+        id: quarter
+        run: echo "key=nsf-sync-$(date -u +%Y)-q$(( ($(date -u +%-m) - 1) / 3 + 1 ))" >> "$GITHUB_OUTPUT"
+
+      - name: Restore this quarter's sync cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .nsf-sync-cache.json
+          key: ${{ steps.quarter.outputs.key }}-${{ github.run_id }}
+          restore-keys: ${{ steps.quarter.outputs.key }}-
+
+      - name: Record current totals
+        run: |
+          node -e "const d=require('./public/nsf-awards.json'); const n=(d.awards||[]).length; console.log(n)" > before-awards.txt || echo 0 > before-awards.txt
+          cat before-awards.txt
+
+      - name: Run the NSF sync (stops before the job timeout)
+        id: sync
+        continue-on-error: true
+        run: timeout 300m npm run sync:nsf:all 2>&1 | tee sync.log
+        shell: bash -o pipefail {0}
+
+      - name: Save the sync cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .nsf-sync-cache.json
+          key: ${{ steps.quarter.outputs.key }}-${{ github.run_id }}
+
+      - name: Decide what to do
+        id: decide
+        run: |
+          complete=$(node -e "const c=require('./public/nsf-awards.json').coverage||{}; console.log(c.complete===true && c.failures===0 ? 'yes' : 'no')")
+          if [ "${{ steps.sync.outcome }}" != "success" ]; then complete=no; fi
+          before=$(cat before-awards.txt)
+          after=$(node -e "const d=require('./public/nsf-awards.json'); console.log((d.awards||[]).length)")
+          echo "complete=$complete before=$before after=$after"
+          drop=no
+          if [ "$before" -gt 0 ] && [ $(( (before - after) * 100 / before )) -gt "$MAX_DROP_PERCENT" ]; then drop=yes; fi
+          {
+            echo "complete=$complete"
+            echo "before=$before"
+            echo "after=$after"
+            echo "drop=$drop"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Continue in a new run
+        if: steps.decide.outputs.complete != 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ATTEMPT: ${{ inputs.attempt || '1' }}
+        run: |
+          if [ "$ATTEMPT" -lt "$MAX_ATTEMPTS" ]; then
+            gh workflow run nsf-full-sync.yml --ref main -f attempt=$((ATTEMPT + 1))
+            echo "Incomplete; dispatched attempt $((ATTEMPT + 1))."
+          else
+            tail -40 sync.log > tail.txt
+            {
+              echo "The quarterly NSF resync didn't complete after $MAX_ATTEMPTS attempts ([last run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}))."
+              echo
+              echo '```'; cat tail.txt; echo '```'
+            } > body.md
+            gh issue create --title "[scheduled:nsf-full] NSF resync incomplete" --body-file body.md
+          fi
+
+      - name: Validate
+        if: steps.decide.outputs.complete == 'yes'
+        run: |
+          npm test
+          npm run typecheck
+          npm run build
+          npm run check:size
+          git diff --check
+
+      - name: Open a PR (or an Issue if the result looks wrong)
+        if: steps.decide.outputs.complete == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BEFORE: ${{ steps.decide.outputs.before }}
+          AFTER: ${{ steps.decide.outputs.after }}
+          DROP: ${{ steps.decide.outputs.drop }}
+        run: |
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          if git diff --quiet public/nsf-awards.json public/nsf-name-crosswalk.csv; then
+            echo "No changes."
+            exit 0
+          fi
+          stats=$(git diff --stat public/nsf-awards.json public/nsf-name-crosswalk.csv | tail -1)
+          if [ "$DROP" = "yes" ]; then
+            gh issue create --title "[scheduled:nsf-full] NSF resync dropped awards ($BEFORE -> $AFTER)" \
+              --body "The quarterly resync ([run]($run_url)) completed, but the award count fell by more than ${MAX_DROP_PERCENT}% ($BEFORE -> $AFTER), which MAINTENANCE.md treats as a sign upstream changed shape. Not opening a PR. Diff: $stats"
+            exit 0
+          fi
+          branch="task/nsf-full-$(date -u +%Y-%m-%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add public/nsf-awards.json public/nsf-name-crosswalk.csv
+          git commit -m "data(nsf): quarterly full NSF resync ($(date -u +%Y-%m-%d))"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "[scheduled:nsf-full] Quarterly NSF full resync ($(date -u +%Y-%m-%d))" \
+            --body "Automated \`npm run sync:nsf:all\` ([run]($run_url)); coverage complete with 0 failures. Awards: $BEFORE -> $AFTER. Diff: $stats. Validated with test, typecheck, build, check:size. Auditor: check the diff shape per MAINTENANCE.md's verification checklist."
+          # PRs opened with GITHUB_TOKEN don't trigger CI; dispatch the build on the branch.
+          gh workflow run deploy.yml --ref "$branch"

@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -29,13 +29,14 @@ jobs:
       - run: npm run typecheck
       - run: npm run build
       - run: npm run postbuild
-      - if: github.event_name != 'pull_request'
+      - if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy:
-    if: github.event_name != 'pull_request'
+    # Only main deploys; PR and branch dispatch runs (automation PRs) just build.
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:

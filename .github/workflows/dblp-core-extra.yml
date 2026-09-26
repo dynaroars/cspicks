@@ -1,0 +1,135 @@
+name: Quarterly DBLP CORE A/A* refresh
+
+# Model-free replacement for the manual DBLP dump step in MAINTENANCE.md §2.5. dblp.org's bot wall
+# blocks scripted downloads, but Schloss Dagstuhl publishes the same monthly releases (with md5
+# checksums) at drops.dagstuhl.de. This picks the newest release, skips it if the current CSV was
+# already built from it, rebuilds public/core-extra-author-info.csv, and opens a
+# `[scheduled:dblp]` PR for the auditor routine (docs/AUTOMATION.md).
+
+on:
+  schedule:
+    - cron: '30 8 6 1,4,7,10 *' # 6th of Jan/Apr/Jul/Oct, 08:30 UTC
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Rebuild even if the CSV was already built from the newest release
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: dblp-core-extra
+  cancel-in-progress: false
+
+env:
+  DROPS: https://drops.dagstuhl.de
+  MAX_DROP_PERCENT: 10
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Find the newest DBLP release
+        id: release
+        run: |
+          set -euo pipefail
+          for offset in 0 1 2 3; do
+            d=$(date -u -d "$(date -u +%Y-%m-01) -${offset} month" +%Y-%m-01)
+            url="$DROPS/storage/artifacts/dblp/xml/${d:0:4}/dblp-$d.xml.gz"
+            if curl -sfI "$url" > /dev/null; then
+              echo "date=$d" >> "$GITHUB_OUTPUT"
+              echo "url=$url" >> "$GITHUB_OUTPUT"
+              echo "Newest release: $d"
+              exit 0
+            fi
+          done
+          echo "::error::No DBLP release found on $DROPS for the last 4 months."
+          exit 1
+
+      - name: Skip if already built from this release
+        id: current
+        run: |
+          built=$(node -e "console.log(require('./scripts/data/core-extra-pubs-report.json').dumpPath||'')")
+          echo "Current CSV built from: $built"
+          if [ "${{ inputs.force }}" != "true" ] && [ "$(basename "$built")" = "dblp-${{ steps.release.outputs.date }}.xml.gz" ]; then
+            echo "skip=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=no" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Download and verify the dump and DTD
+        if: steps.current.outputs.skip == 'no'
+        run: |
+          set -euo pipefail
+          d=${{ steps.release.outputs.date }}
+          mkdir -p .dblp-dump
+          cd .dblp-dump
+          curl -sfSL -o "dblp-$d.xml.gz" "${{ steps.release.outputs.url }}"
+          curl -sfSL -o "dblp-$d.xml.gz.md5" "${{ steps.release.outputs.url }}.md5"
+          md5sum -c "dblp-$d.xml.gz.md5"
+          dtd=$(curl -sfSL "$DROPS/entities/artifact/10.4230/dblp.xml.$d" | grep -oE 'dblp\.xml\.dtd\.[0-9]{4}-[0-9]{2}-[0-9]{2}' | head -1 | sed 's/dblp\.xml\.dtd\.//')
+          [ -n "$dtd" ] || { echo "::error::Couldn't find the DTD version for release $d"; exit 1; }
+          curl -sfSL -o "dblp-$dtd.dtd" "$DROPS/storage/artifacts/dblp/xml/${dtd:0:4}/dblp-$dtd.dtd"
+          echo "$(curl -sfSL "$DROPS/storage/artifacts/dblp/xml/${dtd:0:4}/dblp-$dtd.dtd.md5" | cut -d' ' -f1)  dblp-$dtd.dtd" | md5sum -c
+          echo "DTD=.dblp-dump/dblp-$dtd.dtd" >> "$GITHUB_ENV"
+
+      - name: Rebuild CORE A/A* extra publications
+        if: steps.current.outputs.skip == 'no'
+        run: |
+          node -e "console.log(require('./scripts/data/core-extra-pubs-report.json').outputRowCount||0)" > before-rows.txt
+          npm run core-extra:build-pubs -- ".dblp-dump/dblp-${{ steps.release.outputs.date }}.xml.gz" "--dtd=$DTD"
+
+      - name: Validate
+        if: steps.current.outputs.skip == 'no'
+        run: |
+          npm test
+          npm run typecheck
+          npm run build
+          npm run check:size
+          git diff --check
+
+      - name: Open a PR (or an Issue if the result looks wrong)
+        if: steps.current.outputs.skip == 'no'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          d=${{ steps.release.outputs.date }}
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          if git diff --quiet public/core-extra-author-info.csv scripts/data/core-extra-pubs-report.json; then
+            echo "No changes."
+            exit 0
+          fi
+          before=$(cat before-rows.txt)
+          summary=$(node -e "const r=require('./scripts/data/core-extra-pubs-report.json'); const a=Object.keys(r.accepted||{}), j=Object.keys(r.rejected||{}); console.log(r.outputRowCount+' rows; '+a.length+' venues accepted, '+j.length+' rejected ('+j.join(', ')+')')")
+          after=$(node -e "console.log(require('./scripts/data/core-extra-pubs-report.json').outputRowCount)")
+          if [ "$before" -gt 0 ] && [ $(( (before - after) * 100 / before )) -gt "$MAX_DROP_PERCENT" ]; then
+            gh issue create --title "[scheduled:dblp] DBLP refresh dropped rows ($before -> $after)" \
+              --body "Rebuilding from DBLP release $d ([run]($run_url)) cut \`core-extra-author-info.csv\` by more than ${MAX_DROP_PERCENT}% ($before -> $after rows). Not opening a PR. Report: $summary"
+            exit 0
+          fi
+          branch="task/dblp-$d"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add public/core-extra-author-info.csv scripts/data/core-extra-pubs-report.json
+          git commit -m "data(core-extra): rebuild from DBLP release $d"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "[scheduled:dblp] Rebuild CORE A/A* extra publications from DBLP $d" \
+            --body "Automated MAINTENANCE.md §2.5 refresh ([run]($run_url)) from the Dagstuhl mirror of DBLP release $d (md5 verified). Rows: $before -> $after. Report: $summary. Validated with test, typecheck, build, check:size. Auditor: per §2.5 step 3, if the accepted venue count changed, update the venue count/example cited in \`CONF_SET_HELP\` (src/filters.ts)."
+          # PRs opened with GITHUB_TOKEN don't trigger CI; dispatch the build on the branch.
+          gh workflow run deploy.yml --ref "$branch"

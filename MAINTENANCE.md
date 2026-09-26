@@ -31,9 +31,9 @@ source doesn't confirm a fact, leave it `null`/`TBD`/unset and say so.
 | **Monthly** | NSF name matching | `npm run sync:nsf:names` | Low (2 CSV downloads) |
 | **Monthly** | Grants/Awards | Scan for new call cycles, deadline updates, and expired entries | Medium (web research) |
 | **Monthly** | CS Conference schedule | Full audit pass across all current/upcoming editions, not just near-term ones | Medium-high (web research) |
-| **Quarterly** | NSF award data | `npm run sync:nsf:all` | High (thousands of API calls, hours) |
+| **Quarterly (automated)** | NSF award data | `npm run sync:nsf:all` via `.github/workflows/nsf-full-sync.yml`, which opens a PR (see docs/AUTOMATION.md) | High (thousands of API calls, hours) |
 | **Quarterly, or when upstream changes** | CSRankings taxonomy/venue rules | `npm run sync:csrankings-rules` | Low |
-| **Quarterly, or when DBLP publishes a new dump** | CORE A/A* extra publications | A human downloads a fresh `dblp.xml.gz` via their own browser (dblp.org blocks scripted downloads), then `npm run core-extra:build-pubs -- <path-to-dump>` | Medium (manual download + a few minutes of local parsing) |
+| **Quarterly (automated)** | CORE A/A* extra publications | `.github/workflows/dblp-core-extra.yml` downloads the newest release from the Dagstuhl mirror and runs `npm run core-extra:build-pubs`, then opens a PR | Medium (1 GB download + a few minutes of parsing) |
 | **On demand** | NSF award data (scoped) | `npm run sync:nsf -- --school "<name>"` or `--faculty "<name>"` | Low-medium |
 | **On demand, after name-matching changes** | NSF award data (no API) | `npm run sync:nsf:rebuild` | Local cache only |
 | **On demand, when reports look wrong** | OpenAlex history / school aliases full rebuild | `node scripts/build-openalex-history.js`, `node scripts/build-school-aliases.js` | High (large API usage) |
@@ -74,13 +74,16 @@ CSRankings' own `generated-author-info.csv` only tracks its own venue set;
 selecting the "CORE A*" or "CORE A*/A" conference-set filter also needs
 publications in CORE A/A* venues CSRankings doesn't track (see
 `EXPANSION_PLAN.md` for the full design). That data comes from a bulk DBLP
-dump, not a live API — `dblp.org` runs an anti-bot wall (Anubis) that blocks
-scripted downloads, so refreshing this is **manual, not automatable
-end-to-end**:
+dump, not a live API. `dblp.org` runs an anti-bot wall (Anubis) that blocks
+scripted downloads, but Schloss Dagstuhl mirrors every monthly release, with
+md5 checksums, at
+`https://drops.dagstuhl.de/storage/artifacts/dblp/xml/<YYYY>/dblp-<YYYY-MM-DD>.xml.gz`
+(the DTD sits alongside as `dblp-<version>.dtd`). The quarterly
+`.github/workflows/dblp-core-extra.yml` Action does the steps below and opens
+a PR; to run them by hand:
 
-1. A human downloads a fresh `dblp.xml.gz` (and its matching `.dtd`) from
-   `https://dblp.org/xml/release/` via their own regular browser — Anubis's
-   challenge resolves transparently for a real browser in a few seconds.
+1. Download a fresh dump and its matching `.dtd` from the Dagstuhl mirror
+   above (or from `https://dblp.org/xml/release/` in a regular browser).
 2. `npm run core-extra:build-pubs -- <path-to-dump.xml.gz>` re-parses it and
    overwrites `public/core-extra-author-info.csv` and
    `scripts/data/core-extra-pubs-report.json`.

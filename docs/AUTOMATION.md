@@ -53,8 +53,8 @@ Outside the cloud:
 | :-- | :-- | :-- | :-- |
 | OpenAlex affiliation history | Owner's crontab: `15 3 * * * …/scripts/daily-openalex-sync.sh` | Daily 3:15 AM local | Budget-capped, commits and pushes to `main` itself; log in `.openalex-cron.log`. It aborts (and reverts) on a script crash instead of logging "No changes". |
 | Automation watchdog | GitHub Action `.github/workflows/automation-watchdog.yml` | Mondays 12:00 UTC; manual via `gh workflow run automation-watchdog.yml` | Opens or comments on one "Automation watchdog (automated)" Issue when a PR has been open more than 10 days or nothing `[scheduled:*]` appeared in 10 days; closes it when checks pass. No model involved. |
-| Full NSF resync | Owner, by hand (`npm run sync:nsf:all`) | Quarterly | Hours of NSF API calls; too long for a cloud run. |
-| CORE A/A* extra publications | Owner, by hand (MAINTENANCE.md §2.5) | When DBLP publishes a new dump | dblp.org blocks scripted downloads of the dump. |
+| Full NSF resync | GitHub Action `.github/workflows/nsf-full-sync.yml` | 2nd of Jan/Apr/Jul/Oct, 08:00 UTC; manual via `gh workflow run nsf-full-sync.yml` | Runs `sync:nsf:all` with its resume cache kept per quarter; an incomplete run re-dispatches itself (up to 6 attempts, then an Issue). Opens a `[scheduled:nsf-full]` PR, or an Issue if awards drop more than 10%. |
+| CORE A/A* extra publications | GitHub Action `.github/workflows/dblp-core-extra.yml` | 6th of Jan/Apr/Jul/Oct, 08:30 UTC; manual via `gh workflow run dblp-core-extra.yml` | Downloads the newest DBLP release from the Dagstuhl mirror (dblp.org itself blocks scripts), verifies md5, skips if already built from it, rebuilds per MAINTENANCE.md §2.5, and opens a `[scheduled:dblp]` PR (or an Issue if rows drop more than 10%). |
 
 ## Conventions for every scheduled run
 
@@ -102,6 +102,10 @@ Follow `TASKS/AUDIT_ISSUES_PRS.md`, with these rules taking precedence:
   `main`, resolve conflicts, re-validate, and merge.
 - Side-finding and correction Issues: verify live. If confirmed, fix on `main`, validate, push,
   and close with what changed and the source. If the evidence is wrong, close with the reason.
+- Action PRs (`[scheduled:nsf-full]`, `[scheduled:dblp]`) contain generated data, not researched
+  facts: check the diff shape per MAINTENANCE.md's verification checklist (no near-total rewrite,
+  no unexplained drop) and spot-check a few rows instead of re-verifying every fact. For `dblp`,
+  update the venue count in `CONF_SET_HELP` (src/filters.ts) if the accepted count changed.
 - Submission Issues (from `grants-submit.html` or `csconfs-submit.html`): a submission is a lead,
   not a source. Verify the official URL, then apply it per MAINTENANCE.md §5/§6, or close with the
   reason.
