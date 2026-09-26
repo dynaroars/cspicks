@@ -1,6 +1,6 @@
 # CS Picks Autonomous Task Suite (`TASKS/`)
 
-This directory contains executable task playbooks for maintaining the **CS Picks** codebase and data files (`csconfs/data/conferences.json`, `csconfs/data/deadlines.json`, `public/grants.json`, `public/nsf-awards.json`, `public/nsf-name-crosswalk.csv`, `public/manual_affiliations.csv`, etc.).
+This directory contains executable task playbooks for maintaining the **CS Picks** codebase and data files (`csconfs/data/conferences.json`, `public/grants.json`, `public/nsf-awards.json`, `public/nsf-name-crosswalk.csv`, `public/manual_affiliations.csv`, etc.).
 
 ---
 
@@ -18,6 +18,10 @@ Each playbook is pre-configured with an **Autonomous Goal Directive** header. Yo
 /goal TASKS/sync_csrankings_rules.md
 /goal TASKS/AUDIT_ISSUES_PRS.md
 ```
+
+---
+
+Scheduled cloud routines run these playbooks with batch caps, titles, and a review handoff defined in [`docs/AUTOMATION.md`](../docs/AUTOMATION.md), which takes precedence over the "continue until 100%" directives for unattended runs.
 
 ---
 
@@ -42,7 +46,7 @@ To preserve git history and ensure multi-agent safety:
 | :--- | :--- | :--- |
 | [`discover_new_conferences.md`](discover_new_conferences.md) | Search ACM/IEEE calendars and WikiCFP to discover new CS conferences and workshops. | `csconfs/data/conferences.json` PRs |
 | [`discover_new_grants.md`](discover_new_grants.md) | Search funding agencies, foundations, and tech giants for new grant programs and fellowships. | `public/grants.json` PRs |
-| [`audit_cs_conferences.md`](audit_cs_conferences.md) | Audit upcoming CS conference dates, submission deadlines, locations, PC chairs, and submission URLs. | `csconfs/data/conferences.json`, `csconfs/data/deadlines.json` PRs |
+| [`audit_cs_conferences.md`](audit_cs_conferences.md) | Audit upcoming CS conference dates, submission deadlines, locations, PC chairs, and submission URLs. | `csconfs/data/conferences.json` PRs |
 | [`update_grants_and_awards.md`](update_grants_and_awards.md) | Refresh grant opportunities, deadline dates, award sponsors, eligibility criteria, and topic tags. | `public/grants.json` PRs |
 | [`sync_nsf_funding.md`](sync_nsf_funding.md) | Synchronize NSF awards data and verify author crosswalk name matching. | `public/nsf-awards.json`, `public/nsf-name-crosswalk.csv` PRs |
 | [`verify_manual_affiliations.md`](verify_manual_affiliations.md) | Audit and correct manual OpenAlex affiliation overrides for professors and universities. | `public/manual_affiliations.csv` PRs |

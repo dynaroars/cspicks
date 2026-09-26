@@ -6,6 +6,8 @@ This file provides guidance to AI coding agents (Claude Code, Codex, Cursor, Aid
 
 - Commit directly to `main` by default.
 - Do not create a feature branch unless the user explicitly requests one.
+- Exception: scheduled/unattended routine runs follow [docs/AUTOMATION.md](docs/AUTOMATION.md) instead —
+  producers open PRs (never push to `main`) and stop at their batch cap; the auditor routine merges.
 
 ## What this is
 

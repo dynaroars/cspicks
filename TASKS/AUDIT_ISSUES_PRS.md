@@ -30,7 +30,7 @@ For each open Pull Request:
    git diff main...<branch-name>
    ```
 2. **Data & Schema Verification**:
-   - For `csconfs/data/conferences.json` and `deadlines.json`: Verify that dates, submission URLs, locations, and conference year ranges follow `MAINTENANCE.md` standards.
+   - For `csconfs/data/conferences.json`: Verify that dates, submission URLs, locations, and conference year ranges follow `MAINTENANCE.md` standards.
    - For `public/grants.json`: Verify sponsor, deadline ISO strings, topic tags, and URL provenance.
    - For `public/nsf-name-crosswalk.csv`: Confirm faculty name matching against CSRankings and NSF recipient records.
    - For `public/manual_affiliations.csv`: Confirm start/end years and institutional affiliation names.

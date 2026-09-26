@@ -1,0 +1,74 @@
+name: Weekly automation watchdog
+
+# Model-free check that the scheduled cloud routines are still working. It can't see the routines,
+# only their GitHub output: producers stopping shows up as no new scheduled work, and the auditor
+# stopping shows up as PRs left open. Keeps one Issue open while something is wrong.
+
+on:
+  schedule:
+    - cron: '0 12 * * 1' # Mondays, 12:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check routine output and open or close the watchdog Issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          STALE_PR_DAYS: 10
+          QUIET_DAYS: 10
+        run: |
+          set -euo pipefail
+          title="Automation watchdog (automated)"
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          pr_cutoff=$(date -u -d "-${STALE_PR_DAYS} days" +%Y-%m-%dT%H:%M:%SZ)
+          quiet_cutoff=$(date -u -d "-${QUIET_DAYS} days" +%Y-%m-%dT%H:%M:%SZ)
+          problems=""
+
+          # The auditor runs weekly and takes PRs older than 12 hours, so none should sit this long.
+          stale=$(gh pr list --state open --limit 100 --json number,title,createdAt \
+            --jq ".[] | select(.createdAt < \"$pr_cutoff\") | \"- #\(.number) \(.title) (opened \(.createdAt[:10]))\"")
+          if [ -n "$stale" ]; then
+            problems+="### PRs open more than ${STALE_PR_DAYS} days"$'\n'
+            problems+="The auditor may have stopped, or these PRs are stuck (red CI, conflict, rejected but not closed)."$'\n\n'
+            problems+="$stale"$'\n\n'
+          fi
+
+          # Any producer PR or Issue counts as the routines being alive.
+          scheduled=$(gh search prs --repo "$GH_REPO" "scheduled" --created ">=${quiet_cutoff:0:10}" --limit 100 --json title \
+            --jq '[.[] | select(.title | startswith("[scheduled:"))] | length')
+          scheduled_issues=$(gh search issues --repo "$GH_REPO" "scheduled" --created ">=${quiet_cutoff:0:10}" --limit 100 --json title \
+            --jq '[.[] | select(.title | startswith("[scheduled:"))] | length')
+          if [ "$scheduled" -eq 0 ] && [ "$scheduled_issues" -eq 0 ]; then
+            problems+="### No scheduled output in ${QUIET_DAYS} days"$'\n'
+            problems+="No \`[scheduled:*]\` PR or Issue since ${quiet_cutoff:0:10}. The cloud routines have likely stopped; check https://claude.ai/code/routines and the environment."$'\n\n'
+          fi
+
+          existing=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')
+          if [ -z "$problems" ]; then
+            echo "All checks passed."
+            if [ -n "$existing" ]; then
+              gh issue close "$existing" --comment "Checks passed on $(date -u +%Y-%m-%d) ([workflow run]($run_url)). Closing."
+            fi
+            exit 0
+          fi
+
+          {
+            echo "Watchdog run from $(date -u +%Y-%m-%d) ([workflow run]($run_url)). See \`docs/AUTOMATION.md\`."
+            echo
+            printf '%s' "$problems"
+          } > body.md
+          cat body.md
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file body.md
+          else
+            gh issue create --title "$title" --body-file body.md
+          fi
