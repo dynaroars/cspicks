@@ -99,7 +99,9 @@ jobs:
           npm run typecheck
           npm run build
           npm run check:size
-          git diff --check
+          # The generated CSV uses Papa.unparse's CRLF line endings, which --check reports as
+          # trailing whitespace on every changed row.
+          git diff --check -- . ':!public/core-extra-author-info.csv'
 
       - name: Open a PR (or an Issue if the result looks wrong)
         if: steps.current.outputs.skip == 'no'
