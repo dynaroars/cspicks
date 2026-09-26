@@ -27,7 +27,7 @@ concurrency:
 
 env:
   MAX_ATTEMPTS: 6
-  MAX_DROP_PERCENT: 10
+  MAX_DROP_PERCENT: 3
 
 jobs:
   sync:

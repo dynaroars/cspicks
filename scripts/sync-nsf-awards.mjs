@@ -258,6 +258,23 @@ async function fetchJson(url, attempts = 4) {
   throw lastError;
 }
 
+// The award APIs report errors (including throttling) as a 200 response with a
+// serviceNotification instead of results; an empty result is `award: []` with no
+// notification. Retry those, then throw so the caller counts a failure instead of
+// recording a person or project as checked with no awards.
+async function fetchAwardPage(url, attempts = 4) {
+  for (let attempt = 1; ; attempt++) {
+    const response = (await fetchJson(url)).response || {};
+    const notification = response.serviceNotification;
+    if (!notification) return response;
+    if (attempt >= attempts) {
+      const first = Array.isArray(notification) ? notification[0] : notification;
+      throw new Error(`NSF service notification ${first?.notificationCode || ''}: ${first?.notificationMessage || JSON.stringify(notification)}`.slice(0, 300));
+    }
+    await new Promise(resolve => setTimeout(resolve, attempt * 3000));
+  }
+}
+
 async function fetchAwardsForFaculty(faculty) {
   const awards = [];
   for (const queryName of facultyQueryNames(faculty.name)) {
@@ -267,9 +284,7 @@ async function fetchAwardsForFaculty(faculty) {
       url.searchParams.set('pdPIName', queryName);
       url.searchParams.set('rpp', '25');
       url.searchParams.set('offset', String(offset));
-      const payload = await fetchJson(url);
-      const response = payload.response || {};
-      if (response.serviceNotification) break;
+      const response = await fetchAwardPage(url);
       const page = response.award || [];
       awards.push(...page.filter(award =>
         facultyNameMatches(faculty.name, award.pdPIName)
@@ -296,9 +311,7 @@ async function fetchCollaborativeAwards(title) {
     url.searchParams.set('keyword', `"${searchWords}"`);
     url.searchParams.set('rpp', '25');
     url.searchParams.set('offset', String(offset));
-    const payload = await fetchJson(url);
-    const response = payload.response || {};
-    if (response.serviceNotification) return awards;
+    const response = await fetchAwardPage(url);
     const page = response.award || [];
     awards.push(...page.filter(award => projectTitleKey(award.title) === projectTitleKey(title)));
     const total = Number(response.metadata?.totalCount) || 0;
