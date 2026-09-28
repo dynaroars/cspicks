@@ -1,4 +1,203 @@
 {
   "version": 1,
-  "series": {}
+  "series": {
+    "DISC": {
+      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "outcome": "complete",
+      "summary": "DISC 2026 (Rome, Nov 9-13 2026): confirmed submission deadline, registration/abstract deadline, rebuttal window, notification date, PC chair, and organizing co-chairs from the official 2026 edition site; record previously had these fields null. DISC 2027 has not yet been announced (no next-edition link, CFP, or dates on the series site); no record created.",
+      "checkedUrls": [
+        "https://www.disc-conference.org/wp/",
+        "https://www.disc-conference.org/wp/disc2026/",
+        "https://www.disc-conference.org/wp/disc2026/committee/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2026,
+          "sources": [
+            {
+              "field": "deadline",
+              "url": "https://www.disc-conference.org/wp/disc2026/",
+              "evidence": "Important Dates: Submission deadline June 1, 2026 (23:59 AoE); Paper registration May 27, 2026; Rebuttal phase July 21-25, 2026; Notification August 5, 2026."
+            },
+            {
+              "field": "programChair",
+              "url": "https://www.disc-conference.org/wp/disc2026/committee/",
+              "evidence": "Program Committee Chair listed as Keren Censor-Hillel, Technion, Israel."
+            },
+            {
+              "field": "generalChair",
+              "url": "https://www.disc-conference.org/wp/disc2026/committee/",
+              "evidence": "Organizing Committee co-chairs listed as Ioannis Chatzigiannakis and Andrea Vitaletti, Sapienza University Italy."
+            }
+          ]
+        }
+      ]
+    },
+    "ACL": {
+      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "outcome": "not_found",
+      "summary": "ACL 2027 (Kyoto, Aug 17-22 2027) Important Dates section shows ARR submission deadline, commitment deadline, notification, and camera-ready all as TBA; matches the existing TBD deadline value. No new official facts to add.",
+      "checkedUrls": [
+        "https://2027.aclweb.org/"
+      ],
+      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "proposals": []
+    },
+    "CCC": {
+      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "outcome": "complete",
+      "summary": "CCC 2027 (Seattle, WA, Jul 19-22 2027 at University of Washington) confirmed on the official series site: location, dates, and general chair Swastik Kopparty match the record. Fixed place field to drop the venue name per schema (was including \"University of Washington\"), and flipped estimated/verified since the edition is officially confirmed. Submission deadline not yet posted.",
+      "checkedUrls": [
+        "https://computationalcomplexity.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "place",
+              "url": "https://computationalcomplexity.org/",
+              "evidence": "Homepage states CCC 2027 will be held July 19-22, Seattle, USA, at the University of Washington."
+            },
+            {
+              "field": "verified",
+              "url": "https://computationalcomplexity.org/",
+              "evidence": "Dates, location, and general chair (Swastik Kopparty) are stated as confirmed conference details on the official site, not merely a planning estimate."
+            }
+          ]
+        }
+      ]
+    },
+    "CHES": {
+      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "outcome": "complete",
+      "summary": "CHES 2027 (Cancun, Sep 6-9 2027) uses journal-style rolling review (TCHES); confirmed the four TCHES 2027 submission round deadlines (2026-07-15, 2026-10-15, 2027-01-15, 2027-04-15, all AoE) on the official edition site and folded them into the note. No single conference-wide deadline field applies, consistent with every other CHES record in the dataset.",
+      "checkedUrls": [
+        "https://ches.iacr.org/2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "deadline",
+              "url": "https://ches.iacr.org/2027/",
+              "evidence": "Important Dates lists four TCHES 2027 submission rounds: 15 July 2026, 15 Oct 2026, 15 Jan 2027, 15 April 2027 (23:59:59 AoE)."
+            }
+          ]
+        }
+      ]
+    },
+    "COLT": {
+      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "outcome": "not_found",
+      "summary": "COLT 2027 (Tokyo, Jun 28-Jul 2 2027) official site lists submission deadline and all review-timeline milestones as \"Date TBD\", and program chairs as TBD; matches existing record. No new official facts to add.",
+      "checkedUrls": [
+        "https://learningtheory.org/colt2027/"
+      ],
+      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "proposals": []
+    },
+    "EMNLP": {
+      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "outcome": "not_found",
+      "summary": "EMNLP 2027 official site (emnlp.org) has no 2027-specific content yet (redirects to SIGDAT with no dates/location/chairs beyond the existing region/timing note). No new official facts to add.",
+      "checkedUrls": [
+        "https://emnlp.org/"
+      ],
+      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "proposals": []
+    },
+    "FOGA": {
+      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "outcome": "not_found",
+      "summary": "FOGA 2027 official site (foga2027.dei.uc.pt) currently shows only the event name and host city (Coimbra, Portugal), matching the existing record; no dates, deadlines, or chairs published yet.",
+      "checkedUrls": [
+        "https://foga2027.dei.uc.pt/"
+      ],
+      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "proposals": []
+    },
+    "HotOS": {
+      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "outcome": "complete",
+      "summary": "HotOS 2027 (May 24-26 2027) official site names the venue as Burghausen, Bavaria, Germany, organized by TU Munich's Systems Research Group; place was previously null. Submission deadline and other milestones remain \"To Be Announced\".",
+      "checkedUrls": [
+        "https://sigops.org/s/conferences/hotos/2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "place",
+              "url": "https://sigops.org/s/conferences/hotos/2027/",
+              "evidence": "Page states HotOS 2027 will be held May 24-26, 2027, Burghausen, Bavaria, Germany, organized by the Systems Research Group at TU Munich."
+            }
+          ]
+        }
+      ]
+    },
+    "ICCV": {
+      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "outcome": "not_found",
+      "summary": "ICCV 2027 (Hong Kong Convention and Expo Center, Oct 2-8 2027) reconfirmed dates and location match the existing verified record on both the homepage and the /Conferences/2027 page; no submission deadline or chair names published yet beyond what is already recorded.",
+      "checkedUrls": [
+        "https://iccv.thecvf.com/",
+        "https://iccv.thecvf.com/Conferences/2027"
+      ],
+      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "proposals": []
+    },
+    "ICME": {
+      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "outcome": "not_found",
+      "summary": "ICME 2027 (Xiamen, China, mid-2027) location and general chair already match official/steering-committee sources; the only official document found (IEEE SPS call for host proposals) is the 2025-dated bid process that selected Xiamen, not a call for papers. No author-facing deadlines published yet.",
+      "checkedUrls": [
+        "https://signalprocessingsociety.org/events/call-proposals-ieee-icme-2027"
+      ],
+      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "proposals": []
+    },
+    "ICS": {
+      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "outcome": "complete",
+      "summary": "ICS 2027 (part of FCRC 2027) official site confirms Atlanta, GA as host city but states \"Dates and the organizing committee will be announced here\" for everything else. Reformatted place to drop venue/parenthetical text per schema and moved the FCRC context into note.",
+      "checkedUrls": [
+        "https://www.ics-conference.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "place",
+              "url": "https://www.ics-conference.org/",
+              "evidence": "Page states the 41st ICS will be held in Atlanta, Georgia, USA, as part of ACM FCRC; dates and organizing committee not yet announced."
+            }
+          ]
+        }
+      ]
+    },
+    "IPSN": {
+      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "outcome": "not_found",
+      "summary": "Reconfirmed via the official SenSys 2027 site that IPSN has no standalone edition from 2026 onward (merged into SenSys/CPS-IoT Week with IoTDI); IPSN's own record is unchanged. Incidentally, the same official page gave confirmed place/dates for the merged successor (SenSys 2027: Boulder, CO, US, May 17-20, 2027), which were applied to the existing SenSys 2027 record as a zero-extra-research correction sourced from the identical page already linked from IPSN's record.",
+      "checkedUrls": [
+        "https://sensys.acm.org/2027/"
+      ],
+      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "proposals": []
+    }
+  }
 }
