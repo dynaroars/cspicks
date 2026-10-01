@@ -52753,8 +52753,8 @@
     "description": "ACM Conference on Embedded Networked Sensor Systems",
     "link": "https://sensys.acm.org/2027/",
     "seriesLink": "https://sensys.acm.org/",
-    "date": "May 17-20, 2027",
-    "place": "Boulder, CO, US",
+    "date": "Co-located with CPS-IoT Week 2027",
+    "place": null,
     "abstractDeadline": "2026-10-29",
     "deadline": "2026-11-05",
     "rebuttalDate": null,
@@ -52764,8 +52764,8 @@
     "programChair": "Wen Hu, JeongGil Ko, Marco Zimmerling",
     "acceptanceRate": null,
     "submissions": null,
-    "estimated": false,
-    "verified": true
+    "estimated": true,
+    "verified": false
   },
   {
     "name": "SenSys",

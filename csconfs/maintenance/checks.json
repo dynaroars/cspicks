@@ -192,7 +192,7 @@
     "IPSN": {
       "lastCheckedAt": "2026-09-28T08:10:31.732Z",
       "outcome": "not_found",
-      "summary": "Reconfirmed via the official SenSys 2027 site that IPSN has no standalone edition from 2026 onward (merged into SenSys/CPS-IoT Week with IoTDI); IPSN's own record is unchanged. Incidentally, the same official page gave confirmed place/dates for the merged successor (SenSys 2027: Boulder, CO, US, May 17-20, 2027), which were applied to the existing SenSys 2027 record as a zero-extra-research correction sourced from the identical page already linked from IPSN's record.",
+      "summary": "Reconfirmed via the official SenSys 2027 site that IPSN has no standalone edition from 2026 onward (merged into SenSys/CPS-IoT Week with IoTDI); IPSN's own record is unchanged. The SenSys 2027 page lists \"May 17–20, 2027, Boulder, CO, USA\" but immediately follows it with an editor's placeholder (\"FIXME: IS IT?\"), so the SenSys 2027 record was left unconfirmed (auditor, 2026-10-01).",
       "checkedUrls": [
         "https://sensys.acm.org/2027/"
       ],
