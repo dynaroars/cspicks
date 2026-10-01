@@ -650,10 +650,10 @@
       "Faculty"
     ],
     "whoFor": "Full-time faculty members and university research scientists",
-    "deadline": "May 13, 2026 at 11:59 PM PT (Spring cycle) / November 12, 2025 at 11:59 PM PT (Fall cycle)",
-    "deadlineMonth": 5,
+    "deadline": "November 4, 2026 (Fall 2026 cycle; prior: May 13, 2026 Spring, November 12, 2025 Fall)",
+    "deadlineMonth": 11,
     "amount": "Up to $80,000–$100,000 unrestricted cash gift + up to $40,000 in AWS promotional credits",
-    "summary": "Provides unrestricted funds and AWS compute credits to academic researchers across diverse tracks including Foundation Models, AI for Science, Robotics, Information Security, and Sustainability.",
+    "summary": "Provides unrestricted gifts and AWS compute credits to academic researchers. Fall 2026 tracks: Agentic AI, AI for Information Security, Amazon Security, Automated Reasoning, AWS Cryptography, Build on Trainium, Multilingual and Contextual AI Evaluation, On-Device Multimodal Perception, and Synthetic Data Generation for Multimodal Perception.",
     "eligibility": [
       "Full-time faculty member at an accredited academic institution",
       "PI may submit one proposal per call cycle",
@@ -661,12 +661,13 @@
     ],
     "topics": [
       "AI/ML",
-      "Foundation Models",
-      "Robotics",
+      "Agentic AI",
       "Information Security",
+      "Cryptography",
       "Automated Reasoning",
       "Cloud Systems",
-      "Sustainability"
+      "Computer Vision",
+      "Multilingual AI"
     ],
     "url": "https://www.amazon.science/research-awards/call-for-proposals",
     "featured": true
