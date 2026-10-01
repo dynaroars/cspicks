@@ -9,9 +9,9 @@
       "Faculty"
     ],
     "whoFor": "Untenured Assistant Professors on tenure track",
-    "deadline": "July 22, 2026 at 5:00 PM submitter local time (Annual fourth Monday in July; NSF 22-586)",
+    "deadline": "July 22, 2026 at 5:00 PM submitter local time (Annual fourth Wednesday in July, changed from the former fourth-Monday rule; NSF 22-586)",
     "deadlineMonth": 7,
-    "amount": "$500,000 to $600,000+ over 5 years",
+    "amount": "Minimum $400,000 over 5 years (CISE typically funds one month of PI salary/year, one grad student/year, and two trips/year)",
     "summary": "NSF premier early-career award supporting junior faculty who exemplify the role of teacher-scholars through outstanding research, excellent education, and the integration of education and research within the context of the mission of their organizations.",
     "eligibility": [
       "Hold a doctoral degree in a field supported by NSF",
@@ -42,11 +42,11 @@
     "targetAudience": [
       "Faculty"
     ],
-    "whoFor": "Untenured CS faculty in first 3 years without prior federal PI funding (\"Mini-CAREER\")",
-    "deadline": "September 16, 2026 at 5:00 PM submitter local time (Annual third Wednesday in September; NSF 23-576)",
-    "deadlineMonth": 9,
-    "amount": "Up to $175,000 over 2 years",
-    "summary": "Enables early-career CS faculty without prior federal research support to launch independent research programs, fund their first graduate student, and acquire preliminary results to compete for future NSF CAREER and Core awards.",
+    "whoFor": "Untenured CS faculty in first 3 years without prior federal PI funding (\"Mini-CAREER\") — program discontinued",
+    "deadline": "September 16, 2026 at 5:00 PM submitter local time (last active cycle; NSF 23-576, posted April 2023). NSF's program page now shows \"Program status: Archived\" with no successor solicitation listed as of October 2026.",
+    "deadlineMonth": 0,
+    "amount": "Up to $175,000 over 2 years (while active)",
+    "summary": "Enabled early-career CS faculty without prior federal research support to launch independent research programs, fund their first graduate student, and acquire preliminary results to compete for future NSF CAREER and Core awards. Retained here for reference; NSF's own program page lists it as archived with no replacement announced.",
     "eligibility": [
       "Primary appointment in computer science, information science, or computer engineering in the US",
       "In first 3 years of tenure-track or equivalent research appointment",
@@ -60,8 +60,9 @@
       "Algorithms",
       "AI/ML"
     ],
-    "url": "https://new.nsf.gov/funding/opportunities/computer-information-science-engineering-research",
-    "featured": true
+    "status": "historical",
+    "url": "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952",
+    "featured": false
   },
   {
     "id": "nsf-future-core",
@@ -835,9 +836,9 @@
       "PhD Students"
     ],
     "whoFor": "PhD students in machine learning, vision, NLP, and on-device AI (University nominated)",
-    "deadline": "September 8, 2026 (Annual invited university nomination; internal deadlines July/August)",
+    "deadline": "September 8, 2026 (Annual sponsor nomination deadline; universities set their own earlier internal deadlines, e.g. August 3, 2026)",
     "deadlineMonth": 9,
-    "amount": "Full tuition and fees for 2 years + annual living stipend + mentorship from Apple AI/ML researchers + internship opportunities",
+    "amount": "Full tuition and fees for 2 years (Fall 2027–Summer 2029 cohort) + $40,000 annual living-expenses gift + $5,000 annual research-travel gift",
     "summary": "Recognizes graduate students pursuing research in artificial intelligence and machine learning, offering funding, mentorship, and opportunities to intern with Apple's ML research teams.",
     "eligibility": [
       "Full-time PhD student at participating university in final 2–3 years of study",
@@ -865,9 +866,9 @@
       "PhD Students"
     ],
     "whoFor": "PhD students in GPU computing, computer architecture, graphics, AI, and systems",
-    "deadline": "September 12, 2026 at 3:00 PM PT (Annual Mid-September; strictly 3:00 PM PT)",
-    "deadlineMonth": 9,
-    "amount": "Up to $60,000 per award + access to NVIDIA GPU clusters + summer research internship offer",
+    "deadline": "October 30, 2026, including recommendation letters (applications open September 30, 2026; shifted later in the year from the prior mid-September cycle)",
+    "deadlineMonth": 10,
+    "amount": "Up to $60,000 per award + required paid summer internship at an eligible NVIDIA office before the award year",
     "summary": "Supports doctoral students who are advancing GPU computing, computer graphics, parallel computing architecture, and accelerated machine learning systems.",
     "eligibility": [
       "Must have completed at least one year of PhD studies by the time of application",
@@ -924,9 +925,9 @@
       "Faculty"
     ],
     "whoFor": "Tenure-track faculty in CS and related fields within 6 years of PhD (Department nominated)",
-    "deadline": "September 15, 2026 at 11:59 PM EDT (Annual fixed statutory deadline)",
+    "deadline": "September 15, 2026 at 11:59 PM EDT (2027 Fellowships cycle; next cycle's nominations open July 15, 2027 and close September 15, 2027)",
     "deadlineMonth": 9,
-    "amount": "$75,000 two-year flexible unrestricted fellowship",
+    "amount": "$75,000 over 2 years (does not cover institutional overhead)",
     "summary": "One of the most prestigious early-career honors in science and computing. Often considered a leading indicator of future Nobel and Turing Laureates, recognizing extraordinary research achievements and promise.",
     "eligibility": [
       "Tenure-track faculty appointment at a US or Canadian university",
@@ -2151,7 +2152,7 @@
   },
   {
     "id": "nsf-satc",
-    "name": "NSF Secure and Trustworthy Cyberspace (SaTC 2.0)",
+    "name": "NSF Security, Privacy, and Trust in Cyberspace (SaTC 2.0)",
     "shortName": "NSF SaTC",
     "sponsor": "National Science Foundation (NSF - CISE / SBE / EHR)",
     "sponsorCategory": "Government",
@@ -2161,13 +2162,13 @@
       "PhD Students"
     ],
     "whoFor": "CS faculty and research investigators in cybersecurity, privacy, cryptography, and trustworthy systems",
-    "deadline": "Small: Accepted anytime; Medium: September 23, 2026; Large: September 30, 2026 at 5:00 PM local time (NSF 24-504)",
+    "deadline": "September 28, 2026 at 5:00 PM local time (Research/Education target date; last Monday in September, annually thereafter; next target date January 25, 2027 — last Monday in January; NSF 25-515)",
     "deadlineMonth": 9,
-    "amount": "Small (00,000), Medium (,200,000), Large (,000,000+), and Center grants",
-    "summary": "NSF flagship cybersecurity research program funding foundational computer science in network security, systems privacy, hardware root-of-trust, applied cryptography, formal verification, and sociotechnical security.",
+    "amount": "Research (RES): up to $1,200,000 over up to 4 years; Education (EDU): up to $500,000 over up to 3 years ($600,000 with an education-research collaborator); Seedling (SEED): up to $300,000 over up to 2 years. Program total ~$60,000,000/year.",
+    "summary": "NSF's rebooted flagship cybersecurity and privacy program (SaTC 2.0, replacing the former Small/Medium/Large/Frontier structure with RES/EDU/SEED tracks), funding foundational computer science in network security, systems privacy, hardware root-of-trust, applied cryptography, generative-AI security, open-source software security, quantum security, supply-chain security, and sociotechnical security.",
     "eligibility": [
-      "Faculty at accredited US universities and non-profit research institutions",
-      "Open to single-investigator (Small) and collaborative multi-institution teams (Medium/Large)",
+      "PI holds a tenured/tenure-track position or a primary full-time paid research or teaching appointment at an eligible US institution of higher education or non-profit, non-academic organization",
+      "Per-PI limit of 4 proposals per rolling 12-month period (max 2 RES, 1 EDU, 1 SEED)",
       "Interdisciplinary proposals bridging CS with social sciences and economics encouraged"
     ],
     "topics": [
@@ -2177,7 +2178,7 @@
       "Operating Systems",
       "HCI"
     ],
-    "url": "https://www.nsf.gov/funding/opportunities/satc-secure-and-trustworthy-cyberspace",
+    "url": "https://www.nsf.gov/funding/opportunities/satc-20-security-privacy-trust-cyberspace/nsf25-515/solicitation",
     "featured": true
   },
   {
@@ -2332,8 +2333,8 @@
   },
   {
     "id": "nsf-pose",
-    "name": "NSF Pathways to Enable Open-Source Ecosystems (POSE)",
-    "shortName": "NSF POSE",
+    "name": "NSF Pathways to Enable Secure Open-Source Ecosystems (PESOSE, formerly POSE)",
+    "shortName": "NSF PESOSE (POSE)",
     "sponsor": "National Science Foundation (NSF - TIP Directorate)",
     "sponsorCategory": "Government",
     "targetAudience": [
@@ -2342,10 +2343,10 @@
       "PhD Students"
     ],
     "whoFor": "Faculty, research scientists, and developers managing mature academic open-source CS artifacts",
-    "deadline": "Phase I: March 12, 2026; Phase II: September 10, 2026 at 5:00 PM local time (Annual; NSF 24-557)",
-    "deadlineMonth": 9,
-    "amount": "Phase I (Scoping: 00,000 for 1 yr), Phase II (Execution: ,500,000 for 2 yrs)",
-    "summary": "Supports scaling academic open-source software, hardware, and data tools into self-sustaining, secure, and widely adopted open-source ecosystems that solve national and societal challenges.",
+    "deadline": "Track 1 (Phase I): March 2, 2027 (first Tuesday in March, annually thereafter); Tracks 2/3 (Phase II): September 7, 2027 (first Tuesday in September, annually thereafter); NSF 26-506, superseding the archived POSE solicitation NSF 24-606",
+    "deadlineMonth": 3,
+    "amount": "Track 1 (Scoping): up to $300,000; Track 2 (Establish/Expand) and Track 3 (Secure/Sustain): up to $1,500,000 each; ~40-60 awards expected program-wide",
+    "summary": "Supports scaling academic open-source software, hardware, and data tools into self-sustaining, secure, and widely adopted open-source ecosystems. Renamed from POSE to PESOSE in the NSF 26-506 solicitation, adding an explicit security/sustainability track alongside scoping and expansion.",
     "eligibility": [
       "Must have an existing, publicly available open-source product with demonstrated user adoption",
       "Open to US universities and non-profit organizations"
@@ -2356,7 +2357,7 @@
       "AI/ML",
       "Interdisciplinary"
     ],
-    "url": "https://www.nsf.gov/funding/opportunities/pose-pathways-enable-open-source-ecosystems",
+    "url": "https://www.nsf.gov/funding/opportunities/pesose-pathways-enable-secure-open-source-ecosystems/nsf26-506",
     "featured": false
   },
   {
@@ -2370,9 +2371,9 @@
       "Undergraduate Students"
     ],
     "whoFor": "Faculty PIs hosting cohorts of 8-12 undergraduate CS student researchers over 10-week summer programs",
-    "deadline": "September 10, 2026 at 5:00 PM submitter local time (Annual second Wednesday of September; NSF 23-601)",
-    "deadlineMonth": 9,
-    "amount": "50,000 to 00,000 over 3 years (stipends, housing, travel, and faculty mentoring costs)",
+    "deadline": "August 19, 2026 at 5:00 PM submitter local time (deadline rule changed from the second Wednesday of September to the third Wednesday of August; next cycle August 18, 2027; NSF 23-601)",
+    "deadlineMonth": 8,
+    "amount": "$50,000 to $400,000 over up to 3 years (stipends, housing, travel, and faculty mentoring costs); NSF expects roughly 175 new Site awards per year",
     "summary": "Provides grants to CS departments and faculty to establish intensive summer research programs for undergraduate students, broadening participation in computer science graduate studies.",
     "eligibility": [
       "US colleges, universities, and non-profit research organizations",
@@ -2725,13 +2726,14 @@
       "PhD Students"
     ],
     "whoFor": "Doctoral students in computer science, machine learning, distributed systems, and statistics",
-    "deadline": "September 25, 2026 at 12:00 PM noon ET (Annual late September at 12:00 PM ET)",
+    "deadline": "September 25, 2026 at 12:00 PM noon ET (Annual; reference letters accepted through November 2, 2026)",
     "deadlineMonth": 9,
-    "amount": "Up to 5,000 toward university tuition and living expenses for 1 academic year + Two Sigma research mentorship",
+    "amount": "Up to $75,000/yr for 2 consecutive academic years (tuition, fees, and living stipend) + a $10,000 one-time payment to the recipient; runners-up receive a $10,000 one-time payment",
     "summary": "Supports doctoral students who are expanding the boundaries of computer science, machine learning, distributed data systems, and algorithmic modeling.",
     "eligibility": [
-      "Enrolled in a PhD program at an accredited North American university",
-      "In their 3rd, 4th, or 5th year of doctoral studies during the fellowship period"
+      "Full-time PhD student at an accredited US university, in 3rd year or beyond with at least 2 years of study remaining",
+      "Research in applied mathematics, AI/computer science, finance/econometrics, physics, or statistics",
+      "Not a Two Sigma employee/relative, and not already receiving another industry fellowship"
     ],
     "topics": [
       "AI/ML",
@@ -2740,7 +2742,7 @@
       "Algorithms",
       "Optimization"
     ],
-    "url": "https://www.twosigma.com/fellowships/",
+    "url": "https://www.twosigma.com/graduate-students/phd-fellowships/",
     "featured": false
   },
   {
@@ -3280,7 +3282,7 @@
     "eligibility": [
       "Final dissertation defense during the 12 months before the deadline",
       "English-language dissertation required",
-      "Supervisor nomination with two endorsement letters"
+      "Supervisor nomination with two endorsement letters; a supervisor may nominate at most 2 students per year"
     ],
     "topics": [
       "Systems",
@@ -3337,9 +3339,9 @@
     "amount": "$1,500 prize, plaque or certificate, and ACM CCS registration waiver",
     "summary": "Recognizes exceptional early-career research contributions to computer security and privacy, broadly defined.",
     "eligibility": [
-      "Open to early-career researchers in the security and privacy community",
-      "Nomination by another person with three independent endorsements",
-      "ACM or SIGSAC membership is not required"
+      "PhD earned in 2020 or later",
+      "Nomination by another person, with a CV, a two-page nomination statement, and three endorsement letters",
+      "Self-nominations and committee members as nominee/nominator/endorser are not permitted"
     ],
     "topics": [
       "Cybersecurity",
@@ -3963,9 +3965,9 @@
     "amount": "$1,000 honorarium, plaque, SC registration, and four hotel nights",
     "summary": "Recognizes outstanding, influential, and potentially long-lasting early-career contributions in high-performance computing.",
     "eligibility": [
-      "Within five years of receiving the PhD for the stated cycle",
+      "Within five years of receiving the PhD as of January 1 of the award year",
       "Active IEEE Computer Society and TCHPC membership",
-      "Peer nomination required; self-nominations are not accepted"
+      "Peer nomination required; self-nominations are not accepted; each nominator may submit at most one candidate per cycle"
     ],
     "topics": [
       "High-Performance Computing",
@@ -5555,7 +5557,7 @@
       "Complexity Theory",
       "Research Honors"
     ],
-    "url": "https://www.sigact.sigact.hosting.acm.org/prizes/knuth.html",
+    "url": "https://www.sigact.org/prizes/knuth.html",
     "featured": true
   },
   {
@@ -5800,12 +5802,12 @@
       "PhD Students"
     ],
     "whoFor": "Recent PhD graduates whose dissertation advances the science of embedded, real-time, or cyber-physical systems",
-    "deadline": "July 5, 2026 at 23:59 AoE (Annual July 5; presented at ESWEEK)",
-    "deadlineMonth": 7,
+    "deadline": "June 30, 2026 (2026 cycle; presented at ESWEEK 2026)",
+    "deadlineMonth": 6,
     "amount": "$2,000 honorarium plus an award certificate and website citation",
     "summary": "Recognizes an outstanding doctoral dissertation that significantly advances the state of the art in embedded, real-time, or cyber-physical systems, honoring the legacy of Dr. Paul Caspi.",
     "eligibility": [
-      "Dissertation must be dated within the eligible ~2-year window preceding the award cycle",
+      "For the 2026 cycle, dissertation dated between April 1, 2024 and March 31, 2026",
       "Dissertation topic must focus on embedded, real-time, or cyber-physical systems research"
     ],
     "topics": [
