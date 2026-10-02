@@ -43,7 +43,7 @@ minimum. Keep new routines inside those windows.
 | `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5 | `0 9 22 * *` | 22nd of month, 5 AM | [Discover grants](#discover-grants-grants-discover) |
 | `affiliations` | `trig_01Q8yhHMcPqZZJspxcr4iw7n` | Sonnet 5 | `30 9 10 1,4,7,10 *` | 10th of Jan/Apr/Jul/Oct, 5:30 AM | [Manual affiliations](#manual-affiliations-affiliations) |
 
-One-time: `review` (Opus 5.5) runs once on 2026-10-26 at 14:00 UTC (10 AM ET), after the schedule
+One-time: `review` (`trig_01GJP3xjZBugMSfyEHkN5EBC`, Opus 5.5) runs once on 2026-10-26 at 14:00 UTC (10 AM ET), after the schedule
 changed on 2026-10-02 (nightly audit, confs every other day, grants twice weekly). It changes
 nothing and files one `[scheduled:review] Automation setup review (2026-10-26)` Issue with
 per-routine results (PRs opened, facts changed, merge rate, `not_found` share, blocked sources,
@@ -98,7 +98,7 @@ them share these rules:
 Follow `TASKS/AUDIT_ISSUES_PRS.md`, with these rules taking precedence:
 
 - Scope: open PRs and Issues created at least 12 hours ago, oldest first, skipping anything this
-  session created. At most 6 PRs and 10 Issues per run.
+  session created. At most 5 PRs and 10 Issues per run.
 - PRs: check out the PR, merge fresh `main` into it, and run the full validation from the
   conventions. Re-verify a sample of at least a third of the changed facts (and every changed
   deadline) against the cited official URLs. Require green CI on the PR. Merge with
