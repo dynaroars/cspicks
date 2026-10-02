@@ -2343,7 +2343,7 @@
       "PhD Students"
     ],
     "whoFor": "Faculty, research scientists, and developers managing mature academic open-source CS artifacts",
-    "deadline": "Track 1 (Phase I): March 2, 2027 (first Tuesday in March, annually thereafter); Tracks 2/3 (Phase II): September 7, 2027 (first Tuesday in September, annually thereafter); NSF 26-506, superseding the archived POSE solicitation NSF 24-606",
+    "deadline": "Track 1 (Phase I): March 2, 2027 (first Tuesday in March, annually thereafter); Tracks 2/3 (Phase II): September 7, 2027 (first Tuesday in September, annually thereafter); NSF 26-506 (the earlier POSE solicitation NSF 24-606 is archived)",
     "deadlineMonth": 3,
     "amount": "Track 1 (Scoping): up to $300,000; Track 2 (Establish/Expand) and Track 3 (Secure/Sustain): up to $1,500,000 each; ~40-60 awards expected program-wide",
     "summary": "Supports scaling academic open-source software, hardware, and data tools into self-sustaining, secure, and widely adopted open-source ecosystems. Renamed from POSE to PESOSE in the NSF 26-506 solicitation, adding an explicit security/sustainability track alongside scoping and expansion.",
@@ -5802,8 +5802,8 @@
       "PhD Students"
     ],
     "whoFor": "Recent PhD graduates whose dissertation advances the science of embedded, real-time, or cyber-physical systems",
-    "deadline": "June 30, 2026 (2026 cycle; presented at ESWEEK 2026)",
-    "deadlineMonth": 6,
+    "deadline": "July 5, 2026 (2026 cycle; presented at ESWEEK 2026)",
+    "deadlineMonth": 7,
     "amount": "$2,000 honorarium plus an award certificate and website citation",
     "summary": "Recognizes an outstanding doctoral dissertation that significantly advances the state of the art in embedded, real-time, or cyber-physical systems, honoring the legacy of Dr. Paul Caspi.",
     "eligibility": [
