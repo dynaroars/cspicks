@@ -87,7 +87,10 @@ them share these rules:
    a broken page, a stale chair) go in a separate `[scheduled:<key>] Side finding: …` Issue with
    the evidence, at most 3 per run, deduplicated against open Issues. Don't fix them in your PR.
 8. **No follow-ups.** Once your PR/Issues are open, stop. Don't schedule check-ins, reminders,
-   wakeups, or re-armed routines to watch CI or the PR; the auditor handles review.
+   wakeups, or re-armed routines to watch CI or the PR; the auditor handles review. This includes
+   the session's built-in PR-watching tools (`subscribe_pr_activity` and similar, from the
+   `claude-code-remote` MCP server): never call them, even though they're offered after a PR is
+   opened. Subscribing is what makes a run schedule hourly "Re-check PR" reminders.
 9. **Summary.** End with items processed, changes made, PR/Issue links, side findings filed,
    items skipped with reasons, and any blocked sources.
 
