@@ -28,22 +28,28 @@ goal is reached across runs, not within one.
 Cloud routines live at <https://claude.ai/code/routines> (environment: Default). Cron is UTC; ET is
 shown for convenience (EDT; subtract an hour in winter).
 
-Ordering rule: the auditor runs at 04:00 UTC and every producer starts between 08:00 and
-09:30 UTC. So an audit never runs while that day's producers are still working, and everything
-a producer creates is at least ~17 hours old at the next audit, past the auditor's 12-hour
-minimum. Keep new routines inside those windows.
+Ordering rule: the auditor runs at 16:00 UTC and every producer starts between 19:00 and 01:30 UTC.
+So an audit never runs while that day's producers are still working, and everything a producer creates
+is at least ~14 hours old at the next audit, past the auditor's 12-hour minimum. Keep new routines
+inside those windows.
+
+Spread rule (token budget): the owner's other routines (VietProfs: audit 03:00, links 05:00, discover
+08:00, portraits/honors 11:00, relationships 14:00 UTC, Mon-Sat) share the same usage limit that resets
+every ~5 hours. So the CS Picks routines sit in the otherwise idle 16:00-02:00 UTC stretch: no more than
+two routines of the two repos start within any 3 hours, and the two Opus audits are 13 hours apart.
+Check VietProfs' times before moving anything here.
 
 | Key | Routine id | Model | Cron (UTC) | ET | Section |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| `audit` | `trig_01RgGWz3Xjw6gXvqPYgixP7C` | Opus 5.5 | `0 4 * * *` | Daily 12 AM | [Auditor](#auditor-audit) |
-| `confs` | `trig_018AYNAaQfwJC2rx8JX2zZKo` | Sonnet 5.5 | `0 8 * * 0,2,4,6` | Sun, Tue, Thu, Sat 4 AM | [Conference audit](#conference-audit-confs) |
-| `grants` | `trig_01LuUf649h8NwKMEftjktkmS` | Sonnet 5.5 | `30 8 * * 3,6` | Wed and Sat 4:30 AM | [Grants audit](#grants-audit-grants) |
-| `data-sync` | `trig_014ksNYkkzyHVxS2Kub4LqsG` | Sonnet 5 | `30 8 3 * *` | 3rd of month, 4:30 AM | [Mechanical data sync](#mechanical-data-sync-data-sync) |
-| `confs-discover` | `trig_01LZM6T6zVarUND6Uvh6HUTh` | Sonnet 5 | `0 9 8 * *` | 8th of month, 5 AM | [Discover conferences](#discover-conferences-confs-discover) |
-| `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5 | `0 9 22 * *` | 22nd of month, 5 AM | [Discover grants](#discover-grants-grants-discover) |
-| `affiliations` | `trig_01Q8yhHMcPqZZJspxcr4iw7n` | Sonnet 5 | `30 9 10 1,4,7,10 *` | 10th of Jan/Apr/Jul/Oct, 5:30 AM | [Manual affiliations](#manual-affiliations-affiliations) |
+| `audit` | `trig_01RgGWz3Xjw6gXvqPYgixP7C` | Opus 5.5 | `0 16 * * *` | Daily 12 PM | [Auditor](#auditor-audit) |
+| `confs` | `trig_018AYNAaQfwJC2rx8JX2zZKo` | Sonnet 5.5 | `0 20 * * 0,2,4,6` | Sun, Tue, Thu, Sat 4 PM | [Conference audit](#conference-audit-confs) |
+| `grants` | `trig_01LuUf649h8NwKMEftjktkmS` | Sonnet 5.5 | `0 23 * * 3,6` | Wed and Sat 7 PM | [Grants audit](#grants-audit-grants) |
+| `data-sync` | `trig_014ksNYkkzyHVxS2Kub4LqsG` | Sonnet 5 | `30 0 3 * *` | 3rd of month, 8:30 PM (2nd) | [Mechanical data sync](#mechanical-data-sync-data-sync) |
+| `confs-discover` | `trig_01LZM6T6zVarUND6Uvh6HUTh` | Sonnet 5 | `0 1 8 * *` | 8th of month, 9 PM (7th) | [Discover conferences](#discover-conferences-confs-discover) |
+| `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5 | `0 1 22 * *` | 22nd of month, 9 PM (21st) | [Discover grants](#discover-grants-grants-discover) |
+| `affiliations` | `trig_01Q8yhHMcPqZZJspxcr4iw7n` | Sonnet 5 | `30 1 10 1,4,7,10 *` | 10th of Jan/Apr/Jul/Oct, 9:30 PM (9th) | [Manual affiliations](#manual-affiliations-affiliations) |
 
-One-time: `review` (`trig_01GJP3xjZBugMSfyEHkN5EBC`, Opus 5.5) runs once on 2026-10-26 at 14:00 UTC (10 AM ET), after the schedule
+One-time: `review` (`trig_01GJP3xjZBugMSfyEHkN5EBC`, Opus 5.5) runs once on 2026-10-26 at 20:00 UTC (4 PM ET), after the schedule
 changed on 2026-10-02 (nightly audit, confs every other day, grants twice weekly). It changes
 nothing and files one `[scheduled:review] Automation setup review (2026-10-26)` Issue with
 per-routine results (PRs opened, facts changed, merge rate, `not_found` share, blocked sources,
