@@ -9,7 +9,7 @@
       "Faculty"
     ],
     "whoFor": "Untenured Assistant Professors on tenure track",
-    "deadline": "July 22, 2026 at 5:00 PM submitter local time (Annual fourth Wednesday in July, changed from the former fourth-Monday rule; NSF 22-586)",
+    "deadline": "July 22, 2026 at 5:00 PM submitter local time (Annual fourth Wednesday in July; NSF 22-586)",
     "deadlineMonth": 7,
     "amount": "Minimum $400,000 over 5 years (CISE typically funds one month of PI salary/year, one grad student/year, and two trips/year)",
     "summary": "NSF premier early-career award supporting junior faculty who exemplify the role of teacher-scholars through outstanding research, excellent education, and the integration of education and research within the context of the mission of their organizations.",
@@ -43,7 +43,7 @@
       "Faculty"
     ],
     "whoFor": "Untenured CS faculty in first 3 years without prior federal PI funding (\"Mini-CAREER\") — program discontinued",
-    "deadline": "September 16, 2026 at 5:00 PM submitter local time (last active cycle; NSF 23-576, posted April 2023). NSF's program page now shows \"Program status: Archived\" with no successor solicitation listed as of October 2026.",
+    "deadline": "Historical (program archived; under NSF 23-576 the deadline was the third Wednesday in September, e.g. September 20, 2023). NSF's program page shows \"Program status: Archived\" (last updated April 29, 2025) with no successor solicitation listed.",
     "deadlineMonth": 0,
     "amount": "Up to $175,000 over 2 years (while active)",
     "summary": "Enabled early-career CS faculty without prior federal research support to launch independent research programs, fund their first graduate student, and acquire preliminary results to compete for future NSF CAREER and Core awards. Retained here for reference; NSF's own program page lists it as archived with no replacement announced.",
@@ -837,9 +837,9 @@
       "PhD Students"
     ],
     "whoFor": "PhD students in machine learning, vision, NLP, and on-device AI (University nominated)",
-    "deadline": "September 8, 2026 (Annual sponsor nomination deadline; universities set their own earlier internal deadlines, e.g. August 3, 2026)",
+    "deadline": "September 8, 2026 (Annual invited university nomination; internal deadlines July/August)",
     "deadlineMonth": 9,
-    "amount": "Full tuition and fees for 2 years (Fall 2027–Summer 2029 cohort) + $40,000 annual living-expenses gift + $5,000 annual research-travel gift",
+    "amount": "Full tuition and fees for 2 years + annual living stipend + mentorship from Apple AI/ML researchers + internship opportunities",
     "summary": "Recognizes graduate students pursuing research in artificial intelligence and machine learning, offering funding, mentorship, and opportunities to intern with Apple's ML research teams.",
     "eligibility": [
       "Full-time PhD student at participating university in final 2–3 years of study",
@@ -926,9 +926,9 @@
       "Faculty"
     ],
     "whoFor": "Tenure-track faculty in CS and related fields within 6 years of PhD (Department nominated)",
-    "deadline": "September 15, 2026 at 11:59 PM EDT (2027 Fellowships cycle; next cycle's nominations open July 15, 2027 and close September 15, 2027)",
+    "deadline": "September 15, 2026 at 11:59 PM EDT (Annual fixed statutory deadline)",
     "deadlineMonth": 9,
-    "amount": "$75,000 over 2 years (does not cover institutional overhead)",
+    "amount": "$75,000 two-year flexible unrestricted fellowship",
     "summary": "One of the most prestigious early-career honors in science and computing. Often considered a leading indicator of future Nobel and Turing Laureates, recognizing extraordinary research achievements and promise.",
     "eligibility": [
       "Tenure-track faculty appointment at a US or Canadian university",
@@ -2374,7 +2374,7 @@
     "whoFor": "Faculty PIs hosting cohorts of 8-12 undergraduate CS student researchers over 10-week summer programs",
     "deadline": "August 19, 2026 at 5:00 PM submitter local time (deadline rule changed from the second Wednesday of September to the third Wednesday of August; next cycle August 18, 2027; NSF 23-601)",
     "deadlineMonth": 8,
-    "amount": "$50,000 to $400,000 over up to 3 years (stipends, housing, travel, and faculty mentoring costs); NSF expects roughly 175 new Site awards per year",
+    "amount": "Typically $100,000-$155,000 per year for a 3-year Site award (NSF sets no firm upper or lower limit; summer costs generally not to exceed $1,550 per student per week); NSF expects roughly 175 new Site awards per year",
     "summary": "Provides grants to CS departments and faculty to establish intensive summer research programs for undergraduate students, broadening participation in computer science graduate studies.",
     "eligibility": [
       "US colleges, universities, and non-profit research organizations",
