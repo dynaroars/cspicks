@@ -124,3 +124,35 @@ test('CS Confs submission page prefills an existing entry and offers email or Gi
   await expect(page.getByRole('button', { name: 'Send by email' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Submit as a GitHub issue' })).toBeVisible();
 });
+
+test('CS Confs new submission is a single free-text box, with optional detailed fields', async ({ page }) => {
+  await page.goto('./csconfs-submit.html');
+  await expect(page.locator('#quick')).toBeVisible();
+  await expect(page.locator('#structured-fields')).toBeHidden();
+  await page.locator('#quick').fill('Please add a filter by location. https://example.org/conf');
+  await page.evaluate(() => { window.open = (u) => { window.__opened = String(u); return null; }; });
+  await page.getByRole('button', { name: 'Submit as a GitHub issue' }).click();
+  const url = new URL(await page.evaluate(() => window.__opened));
+  expect(url.searchParams.get('title')).toContain('https://example.org/conf');
+  expect(url.searchParams.get('body')).toContain('filter by location');
+
+  await page.locator('#quick-details-toggle').click();
+  await expect(page.locator('#structured-fields')).toBeVisible();
+  await expect(page.locator('#name')).toBeEnabled();
+});
+
+test('CS Confs location and deadline selects narrow the schedule and persist in the URL', async ({ page }) => {
+  await page.goto('./csconfs.html');
+  await expect(page.locator('#csconfs-results .schedule-card').first()).toBeVisible();
+  const before = await page.locator('#csconfs-results .schedule-card').count();
+  await page.locator('#location-select').selectOption({ label: 'North America' });
+  await expect(page).toHaveURL(/loc=north\+america/);
+  const canada = await page.locator('#csconfs-results .schedule-card').count();
+  expect(canada).toBeGreaterThan(0);
+  expect(canada).toBeLessThan(before);
+  await page.locator('#deadline-mode').selectOption('passed');
+  await expect(page).toHaveURL(/deadline=passed/);
+  await page.goto('./csconfs.html?loc=europe&deadline=open');
+  await expect(page.locator('#location-select')).toHaveValue('europe');
+  await expect(page.locator('#deadline-mode')).toHaveValue('open');
+});

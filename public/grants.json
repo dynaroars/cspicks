@@ -651,10 +651,10 @@
       "Faculty"
     ],
     "whoFor": "Full-time faculty members and university research scientists",
-    "deadline": "May 13, 2026 at 11:59 PM PT (Spring cycle) / November 12, 2025 at 11:59 PM PT (Fall cycle)",
-    "deadlineMonth": 5,
+    "deadline": "November 4, 2026 (Fall 2026 cycle; prior: May 13, 2026 Spring, November 12, 2025 Fall)",
+    "deadlineMonth": 11,
     "amount": "Up to $80,000–$100,000 unrestricted cash gift + up to $40,000 in AWS promotional credits",
-    "summary": "Provides unrestricted funds and AWS compute credits to academic researchers across diverse tracks including Foundation Models, AI for Science, Robotics, Information Security, and Sustainability.",
+    "summary": "Provides unrestricted gifts and AWS compute credits to academic researchers. Fall 2026 tracks: Agentic AI, AI for Information Security, Amazon Security, Automated Reasoning, AWS Cryptography, Build on Trainium, Multilingual and Contextual AI Evaluation, On-Device Multimodal Perception, and Synthetic Data Generation for Multimodal Perception.",
     "eligibility": [
       "Full-time faculty member at an accredited academic institution",
       "PI may submit one proposal per call cycle",
@@ -662,12 +662,13 @@
     ],
     "topics": [
       "AI/ML",
-      "Foundation Models",
-      "Robotics",
+      "Agentic AI",
       "Information Security",
+      "Cryptography",
       "Automated Reasoning",
       "Cloud Systems",
-      "Sustainability"
+      "Computer Vision",
+      "Multilingual AI"
     ],
     "url": "https://www.amazon.science/research-awards/call-for-proposals",
     "featured": true
@@ -1223,7 +1224,7 @@
       "PhD Students"
     ],
     "whoFor": "PhD students working in data science, NLP, information retrieval, and machine learning",
-    "deadline": "September 25, 2026 at 11:59 PM AoE (Annual late September; shifted from historical mid-December)",
+    "deadline": "September 25, 2026 at 11:59 PM AoE (last cycle, 2027-2028 fellows; next cycle TBA, not yet announced; the official page was unavailable as of October 2026)",
     "deadlineMonth": 9,
     "amount": "Full tuition and fees + living stipend + $3,000 conference travel budget + paid 14-week summer internship at Bloomberg",
     "summary": "Provides multi-year financial support and professional development for PhD students conducting research in data science, natural language processing, information extraction, and ML systems.",
@@ -2134,7 +2135,7 @@
     "whoFor": "Postdocs with PhD in Computer Science or quantitative fields transitioning to tenure-track faculty",
     "deadline": "August 14, 2026 at 3:00 PM EDT (Pre-proposal LOI); January 11, 2027 at 3:00 PM EST (Full proposal; Annual)",
     "deadlineMonth": 8,
-    "amount": "60,000 over 5 years (bridging postdoc to faculty)",
+    "amount": "$560,000 over 5 years (bridging postdoc to faculty)",
     "summary": "Supports early-career researchers trained in computer science, machine learning, mathematics, and quantitative disciplines who apply computational methods to biological and life sciences questions during their transition to university faculty.",
     "eligibility": [
       "Hold a PhD in computer science, physics, mathematics, or engineering",

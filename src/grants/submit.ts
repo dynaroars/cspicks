@@ -8,6 +8,7 @@ import {
   buildGrantGithubIssueUrl,
   buildGrantSubmissionContent
 } from './submission.js';
+import { DELIVERY_BUTTONS, QUICK_SECTION, deliver, quickLabel, quickPayload, setupQuickMode } from '../submit-quick.js';
 import type { Grant } from '../types.js';
 
 const root = document.getElementById('submission-form-root')!;
@@ -22,6 +23,10 @@ function renderForm() {
         <label class="submit-choice"><input type="radio" name="kind" value="new" checked> Add a new award / call for proposals</label>
         <label class="submit-choice"><input type="radio" name="kind" value="correction"> Edit or update an existing award</label>
       </fieldset>
+
+      ${QUICK_SECTION}
+
+      <div id="structured-fields" hidden>
 
       <div class="submit-section submit-target" id="correction-target-row" hidden>
         <label for="target">Select existing award to edit</label>
@@ -94,22 +99,10 @@ function renderForm() {
         <label for="comments">Additional Notes / Eligibility Details</label>
         <textarea id="comments" name="comments" rows="2" placeholder="Any specific eligibility criteria, citizenship rules, or nomination requirements..."></textarea>
       </div>
-
-      <div class="submit-actions">
-        <button type="submit" class="submit-button" id="generate-button">Review &amp; Submit</button>
       </div>
+
+      ${DELIVERY_BUTTONS}
     </form>
-
-    <div id="submit-review-card" class="submit-review-card" hidden>
-      <h3>Review Your Proposal</h3>
-      <p class="submit-help">Choose how you'd like to submit this update for review:</p>
-      <pre id="review-json"></pre>
-      <div class="submit-actions">
-        <a id="github-issue-link" class="submit-button" target="_blank" rel="noopener noreferrer">Submit via GitHub Issue ↗</a>
-        <a id="email-submit-link" class="submit-button submit-button-secondary">Submit via Email ✉</a>
-        <button type="button" class="submit-button submit-button-secondary" id="copy-json-btn">Copy JSON</button>
-      </div>
-    </div>
   `;
 }
 
@@ -184,27 +177,6 @@ function prefillFromGrant(grant: Grant | undefined) {
   if (undEl) undEl.checked = auds.some(a => a.includes('undergrad'));
   if (postEl) postEl.checked = auds.some(a => a.includes('postdoc'));
 
-  updateReview();
-}
-
-function updateReview() {
-  const { kind, url, name, submission } = getFormData() || {};
-  if (!url) return;
-
-  const reviewCard = document.getElementById('submit-review-card')!;
-  const reviewJson = document.getElementById('review-json')!;
-  const ghLink = document.querySelector<HTMLAnchorElement>('#github-issue-link')!;
-  const emailLink = document.querySelector<HTMLAnchorElement>('#email-submit-link')!;
-
-  const content = buildGrantSubmissionContent(submission);
-  reviewJson.textContent = content;
-
-  const label = name ? `${name} (${url})` : url;
-  ghLink.href = buildGrantGithubIssueUrl(label, content);
-  emailLink.href = buildGrantEmailUrl(label, content);
-
-  reviewCard.hidden = false;
-  reviewCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function setupEvents() {
@@ -212,11 +184,13 @@ function setupEvents() {
   const targetRow = document.getElementById('correction-target-row')!;
   const targetInput = document.querySelector<HTMLInputElement>('#target')!;
   const suggestionsBox = document.getElementById('grant-correction-suggestions')!;
-  const copyBtn = document.getElementById('copy-json-btn');
+  const quick = setupQuickMode(form as HTMLFormElement);
+  quick.apply();
 
   // Mode radio change
   form.querySelectorAll<HTMLInputElement>('input[name="kind"]').forEach(radio => {
     radio.addEventListener('change', () => {
+      quick.apply();
       if (radio.value === 'correction') {
         targetRow.hidden = false;
         targetInput.focus();
@@ -277,23 +251,15 @@ function setupEvents() {
   // Form submit
   form.addEventListener('submit', event => {
     event.preventDefault();
-    const urlInput = form.querySelector<HTMLInputElement>('#url')!;
-    if (!urlInput.value.trim()) {
-      urlInput.focus();
-      urlInput.reportValidity();
+    const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
+    const builders = { github: buildGrantGithubIssueUrl, email: buildGrantEmailUrl };
+    if (!(form as HTMLFormElement).reportValidity()) return;
+    if (quick.isQuick()) {
+      deliver(submitter, quickLabel(form as HTMLFormElement), buildGrantSubmissionContent(quickPayload(form as HTMLFormElement)), builders);
       return;
     }
-    updateReview();
-  });
-
-  // Copy JSON button
-  copyBtn?.addEventListener('click', () => {
-    const reviewJson = document.getElementById('review-json')!;
-    navigator.clipboard.writeText(reviewJson.textContent).then(() => {
-      const orig = copyBtn.textContent;
-      copyBtn.textContent = 'Copied!';
-      window.setTimeout(() => (copyBtn.textContent = orig), 1800);
-    });
+    const { url, name, submission } = getFormData()!;
+    deliver(submitter, name ? `${name} (${url})` : url!, buildGrantSubmissionContent(submission), builders);
   });
 }
 
@@ -312,7 +278,7 @@ async function init() {
       const correctionRadio = document.querySelector<HTMLInputElement>('input[name="kind"][value="correction"]');
       if (correctionRadio) {
         correctionRadio.checked = true;
-        document.getElementById('correction-target-row')!.hidden = false;
+        correctionRadio.dispatchEvent(new Event('change'));
         document.querySelector<HTMLInputElement>('#target')!.value = grantsById.get(grantId)!.name;
       }
       prefillFromGrant(grantsById.get(grantId));

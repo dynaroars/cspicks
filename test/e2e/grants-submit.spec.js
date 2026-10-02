@@ -26,17 +26,29 @@ test('Grants submit page supports both new award submission and existing award e
   await expect(page.locator('#sponsor')).toHaveValue(/NSF/);
   await expect(page.locator('#url')).toHaveValue(/nsf\.gov/);
 
-  // Test Submitting review preview
-  const generateBtn = page.locator('#generate-button');
-  await generateBtn.click();
+  // Edit mode shows the structured fields and delivers straight to a GitHub draft
+  await expect(page.locator('#structured-fields')).toBeVisible();
+  await page.evaluate(() => { window.open = (u) => { window.__opened = String(u); return null; }; });
+  await page.getByRole('button', { name: 'Submit as a GitHub issue' }).click();
+  const url = new URL(await page.evaluate(() => window.__opened));
+  expect(url.href).toMatch(/github\.com\/dynaroars\/cspicks\/issues\/new/);
+  expect(url.searchParams.get('body')).toContain('nsf.gov');
+});
 
-  const reviewCard = page.locator('#submit-review-card');
-  await expect(reviewCard).toBeVisible();
-  await expect(page.locator('#review-json')).toContainText('nsf.gov');
+test('grants new submission is a single free-text box, with optional detailed fields', async ({ page }) => {
+  await page.goto('grants-submit.html');
+  await expect(page.locator('#quick')).toBeVisible();
+  await expect(page.locator('#structured-fields')).toBeHidden();
+  await page.locator('#quick').fill('https://example.org/award - also please add a filter for international students');
+  await page.evaluate(() => { window.open = (u) => { window.__opened = String(u); return null; }; });
+  await page.getByRole('button', { name: 'Submit as a GitHub issue' }).click();
+  const url = new URL(await page.evaluate(() => window.__opened));
+  expect(url.searchParams.get('title')).toContain('https://example.org/award');
+  expect(url.searchParams.get('body')).toContain('international students');
 
-  const githubLink = page.locator('#github-issue-link');
-  await expect(githubLink).toHaveAttribute('href', /github\.com\/dynaroars\/cspicks\/issues\/new/);
-
-  const emailLink = page.locator('#email-submit-link');
-  await expect(emailLink).toHaveAttribute('href', /mailto:root@roars\.dev/);
+  await page.locator('#quick-details-toggle').click();
+  await expect(page.locator('#structured-fields')).toBeVisible();
+  await expect(page.locator('#quick')).toBeHidden();
+  await page.locator('#quick-back-button').click();
+  await expect(page.locator('#quick')).toBeVisible();
 });

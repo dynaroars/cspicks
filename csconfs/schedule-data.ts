@@ -1,14 +1,15 @@
 import { getConferenceAreaMap, publicationMatchesConferenceSet } from '../src/data.js';
 import { areaLabels } from '../src/shared.js';
 import { matchesKeyword, parseKeywordQuery } from '../src/search-keywords.js';
-import { parsePlace } from './place.js';
+import { locationMatches } from './place.js';
 import type { KeywordSpec } from '../src/search-keywords.js';
 import type { ConferenceSetId } from '../src/data/conference-sets.js';
 import type { ConferenceGroup, ConferenceRecord } from './types.js';
 
 export const CSCONFS_KEYWORD_SPECS: KeywordSpec[] = [
-  { key: 'loc', aliases: ['location', 'country'], example: 'loc: usa', description: 'Country or US state the conference is held in' },
+  { key: 'loc', aliases: ['location', 'country'], example: 'loc: europe', description: 'Country, US state, region (Europe, Asia, …) or city the conference is held in' },
   { key: 'area', aliases: ['topic'], example: 'area: security', description: 'Research area the conference covers' },
+  { key: 'deadline', example: 'deadline: passed', description: '"open" (deadline still ahead), "passed" (deadline over, conference still ahead), or "all" (include past conferences)' },
   { key: 'verified', aliases: ['status'], example: 'verified: yes', description: '"yes" for reviewed listings, "no" for unverified/estimated ones' }
 ];
 
@@ -82,6 +83,31 @@ export function groupConferences(conferences: ConferenceRecord[]) {
   return [...grouped.values()] as ConferenceGroup[];
 }
 
+export type DeadlineMode = 'upcoming' | 'open' | 'passed' | 'all';
+export const DEADLINE_MODES: DeadlineMode[] = ['upcoming', 'open', 'passed', 'all'];
+
+function hasOpenDeadline(group: ConferenceGroup, now: number) {
+  return group.some(conf => {
+    const deadline = aoeDeadline(conf.deadline);
+    return deadline !== null && deadline >= now;
+  });
+}
+
+// Main-track deadline is over (at least one known, none still ahead) but the conference itself
+// has not started yet: too late to submit, still worth planning to attend.
+function isPassedButAhead(group: ConferenceGroup, now: number) {
+  if (hasOpenDeadline(group, now) || !group.some(conf => aoeDeadline(conf.deadline) !== null)) return false;
+  const event = conferenceStart(group[0].date, group[0].year);
+  return event !== null && event >= now;
+}
+
+function matchesDeadline(group: ConferenceGroup, mode: DeadlineMode, now: number) {
+  if (mode === 'all') return true;
+  if (mode === 'open') return hasOpenDeadline(group, now);
+  if (mode === 'passed') return isPassedButAhead(group, now);
+  return isUpcoming(group, now);
+}
+
 function isUpcoming(group: ConferenceGroup, now: number) {
   if (group.some(conf => {
     const deadline = aoeDeadline(conf.deadline);
@@ -114,9 +140,7 @@ function searchText(group: ConferenceGroup) {
 
 function matchesLocation(group: ConferenceGroup, values: string[] | undefined) {
   if (!values || !values.length) return true;
-  const place = parsePlace(group[0].place);
-  const haystack = [place?.display, place?.countryCode, group[0].place].filter(Boolean).join(' ');
-  return matchesKeyword(values, haystack);
+  return values.every(value => locationMatches(group[0].place, value));
 }
 
 function matchesArea(group: ConferenceGroup, values: string[] | undefined) {
@@ -142,18 +166,22 @@ export function filterSchedule(conferences: ConferenceRecord[], {
   confSet = 'all-union',
   query = '',
   upcomingOnly = true,
+  deadline,
+  location = '',
   now = Date.now()
-}: { startYear: number, endYear: number, confSet?: ConferenceSetId, query?: string, upcomingOnly?: boolean, now?: number }) {
+}: { startYear: number, endYear: number, confSet?: ConferenceSetId, query?: string, upcomingOnly?: boolean, deadline?: DeadlineMode, location?: string, now?: number }) {
   const { filters, rest } = parseKeywordQuery(query, CSCONFS_KEYWORD_SPECS);
   const normalized = rest.trim().toLowerCase();
+  const typedMode = filters.deadline?.[0] as DeadlineMode | undefined;
+  const mode: DeadlineMode = typedMode && DEADLINE_MODES.includes(typedMode) ? typedMode : deadline ?? (upcomingOnly ? 'upcoming' : 'all');
   return groupConferences(conferences)
     .filter(group => group[0].year >= startYear && group[0].year <= endYear)
     .filter(group => group[0].venueKeys.some(area => publicationMatchesConferenceSet({ area }, confSet)))
     .filter(group => !normalized || searchText(group).includes(normalized))
-    .filter(group => matchesLocation(group, filters.loc))
+    .filter(group => matchesLocation(group, [...(filters.loc || []), ...(location ? [location] : [])]))
     .filter(group => matchesArea(group, filters.area))
     .filter(group => matchesVerified(group, filters.verified))
-    .filter(group => !upcomingOnly || isUpcoming(group, now))
+    .filter(group => matchesDeadline(group, mode, now))
     .sort((a, b) => {
       const deadlineA = scheduleSortKey(a, now);
       const deadlineB = scheduleSortKey(b, now);

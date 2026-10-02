@@ -17,7 +17,8 @@ export interface ParsedKeywordQuery {
   rest: string;
 }
 
-const TOKEN_RE = /(^|\s)([a-z][a-z0-9_-]{0,20}):("[^"]*"|'[^']*'|\S+)/gi;
+// Whitespace after the colon is allowed ("loc: usa"), matching the help text's own examples.
+const TOKEN_RE = /(^|\s)([a-z][a-z0-9_-]{0,20}):[ \t]*("[^"]*"|'[^']*'|\S+)/gi;
 
 export function parseKeywordQuery(raw: string, specs: KeywordSpec[]): ParsedKeywordQuery {
   const keyByAlias = new Map<string, string>();

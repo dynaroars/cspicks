@@ -6,8 +6,10 @@ import { trackView } from '../src/analytics.js';
 import { escapeHtml } from '../src/shared.js';
 import { createFavoritesStore, wireFavoriteToggles } from '../src/favorites.js';
 import { keywordHelpIcon } from '../src/search-keywords.js';
-import { CSCONFS_KEYWORD_SPECS, filterSchedule, scheduleSuggestions } from './schedule-data.js';
+import { CSCONFS_KEYWORD_SPECS, DEADLINE_MODES, filterSchedule, scheduleSuggestions } from './schedule-data.js';
+import { LOCATION_REGIONS } from './place.js';
 import { renderScheduleCard } from './schedule-render.js';
+import type { DeadlineMode } from './schedule-data.js';
 import type { FilterController } from '../src/filters.js';
 import type { createSuggestionBox as CreateSuggestionBox } from '../src/suggestion-box.js';
 import type { ConferenceRecord } from './types.js';
@@ -22,11 +24,15 @@ let conferences: ConferenceRecord[] = [];
 let filters: FilterController;
 let suggestions: ReturnType<typeof CreateSuggestionBox>;
 
+const deadlineMode = () => (document.querySelector<HTMLSelectElement>('#deadline-mode')!.value || 'upcoming') as DeadlineMode;
+const locationValue = () => document.querySelector<HTMLSelectElement>('#location-select')!.value;
+
 function updateUrl() {
   const next = filters.toParams();
   const query = input.value.trim();
   if (query) next.set('q', query);
-  if (!document.querySelector<HTMLInputElement>('#upcoming-only')!.checked) next.set('upcoming', 'false');
+  if (deadlineMode() !== 'upcoming') next.set('deadline', deadlineMode());
+  if (locationValue()) next.set('loc', locationValue());
   history.replaceState({}, '', `${location.pathname}?${next}`);
   updatePageMeta({
     title: query ? `${query} - CS Conference Schedule - ${SITE_NAME}` : `${SITE_NAME} - CS Conference Schedule`,
@@ -38,16 +44,17 @@ function updateUrl() {
 
 function render() {
   if (!conferences.length) return;
-  const upcomingOnly = document.querySelector<HTMLInputElement>('#upcoming-only')!.checked;
+  const mode = deadlineMode();
   const groups = filterSchedule(conferences, {
     startYear: filters.startYear,
     endYear: filters.endYear,
     confSet: filters.confSet,
     query: input.value,
-    upcomingOnly
+    deadline: mode,
+    location: locationValue()
   });
   results.innerHTML = groups.map(group => renderScheduleCard(group, Date.now(), favorites.isFavorite)).join('');
-  const suffix = upcomingOnly ? ' upcoming' : '';
+  const suffix = mode === 'upcoming' ? ' upcoming' : mode === 'open' ? ' open-deadline' : mode === 'passed' ? ' past-deadline, still ahead' : '';
   status.textContent = groups.length
     ? `${groups.length} matching${suffix} conference${groups.length === 1 ? '' : 's'}`
     : `No conferences match these years, venue set, and search terms.`;
@@ -91,7 +98,8 @@ function renderExamples() {
     endYear: filters.endYear,
     confSet: filters.confSet,
     query: '',
-    upcomingOnly: document.querySelector<HTMLInputElement>('#upcoming-only')!.checked
+    deadline: deadlineMode(),
+    location: locationValue()
   });
   const items = scheduleSuggestions(eligibleGroups.flat(), filters.startYear, filters.endYear, filters.confSet);
   // Show both query types, shuffled together just like Search's fresh sample.
@@ -137,17 +145,30 @@ async function init() {
         renderExamples();
       }
     });
-    filters.element.insertAdjacentHTML('beforeend', `<div class="filter-group checkboxes">
-      <label for="upcoming-only" class="filter-checkbox tooltip-trigger">
-        <input type="checkbox" id="upcoming-only"${params.get('upcoming') === 'false' ? '' : ' checked'} aria-describedby="upcoming-only-help">
-        <span>Upcoming only</span>
-        <span class="tooltip-content" id="upcoming-only-help" role="tooltip">Shows conferences with a future submission deadline or conference date. Conference deadlines use Anywhere on Earth time.</span>
-      </label>
-    </div>`);
-    document.getElementById('upcoming-only')!.addEventListener('change', () => {
+    const wantedLocation = (params.get('loc') || '').toLowerCase();
+    const wantedDeadline = params.get('deadline') || (params.get('upcoming') === 'false' ? 'all' : 'upcoming');
+    const option = (value: string, label: string, selected: boolean) => `<option value="${escapeHtml(value)}"${selected ? ' selected' : ''}>${escapeHtml(label)}</option>`;
+    const deadlineLabels: Record<DeadlineMode, string> = {
+      upcoming: 'Upcoming (open deadline or event ahead)',
+      open: 'Deadline still open',
+      passed: 'Deadline passed, event still ahead',
+      all: 'All, including past conferences'
+    };
+    filters.element.insertAdjacentHTML('beforeend', `
+      <div class="filter-group">
+        <select id="location-select" aria-label="Conference location">
+          ${option('', 'Anywhere', !wantedLocation)}
+          ${option('united states', 'United States', wantedLocation === 'united states')}
+          ${LOCATION_REGIONS.map(region => option(region, region.replace(/\b\w/g, c => c.toUpperCase()), region === wantedLocation)).join('')}
+        </select>
+      </div>
+      <div class="filter-group">
+        <select id="deadline-mode" aria-label="Deadline status">${DEADLINE_MODES.map(mode => option(mode, deadlineLabels[mode], mode === wantedDeadline)).join('')}</select>
+      </div>`);
+    ['location-select', 'deadline-mode'].forEach(id => document.getElementById(id)!.addEventListener('change', () => {
       render();
       renderExamples();
-    });
+    }));
     const searchBox = input.closest<HTMLElement>('.universal-search')!;
     searchBox.classList.add('has-search-help');
     searchBox.insertAdjacentHTML('afterbegin', keywordHelpIcon(CSCONFS_KEYWORD_SPECS, 'csconfs-search-help'));

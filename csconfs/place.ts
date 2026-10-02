@@ -97,3 +97,65 @@ export function parsePlace(rawPlace: string | null | undefined): ParsedPlace | n
   // rather than guessing a flag.
   return { display: `${city}, ${last}`, countryCode: null };
 }
+
+const REGION_COUNTRIES: Record<string, string[]> = {
+  'north america': ['us', 'ca', 'mx', 'pr', 'cw', 'bb', 'kn', 'gd', 'do', 'cr'],
+  'south america': ['br', 'cl', 'ar', 'pe'],
+  europe: ['it', 'de', 'gb', 'fr', 'es', 'pt', 'nl', 'gr', 'at', 'se', 'dk', 'ie', 'cz', 'ch', 'fi', 'pl', 'lu', 'be', 'no', 'cy', 'hr', 'si', 'is', 'hu', 'ee', 'mt', 'ua', 'lv', 'rs', 'tr'],
+  asia: ['cn', 'hk', 'jp', 'sg', 'kr', 'in', 'tw', 'th', 'my', 'vn', 'il', 'ae'],
+  australasia: ['au', 'nz'],
+  africa: ['ma', 'za', 'tn', 'rw']
+};
+
+export const LOCATION_REGIONS = Object.keys(REGION_COUNTRIES);
+
+const REGION_OF_COUNTRY = new Map(Object.entries(REGION_COUNTRIES).flatMap(([region, codes]) => codes.map(code => [code, region] as const)));
+
+const COUNTRY_NAME_OVERRIDES: Record<string, string> = {
+  gb: 'United Kingdom', kr: 'South Korea', ae: 'United Arab Emirates', nl: 'Netherlands',
+  cz: 'Czechia', us: 'United States', cw: 'Curaçao'
+};
+
+const titleCase = (value: string) => value.replace(/\b[a-zà-ÿ]/g, letter => letter.toUpperCase());
+
+export function countryName(code: string) {
+  if (COUNTRY_NAME_OVERRIDES[code]) return COUNTRY_NAME_OVERRIDES[code]!;
+  const name = Object.keys(COUNTRY_CODES).find(key => COUNTRY_CODES[key] === code && key.length > 2);
+  return name ? titleCase(name) : code.toUpperCase();
+}
+
+
+/**
+ * Lowercase terms a `loc:` filter may match exactly for a place: its country (every spelling),
+ * US state name, and region. Two-letter codes are deliberately not terms ("ca" is both Canada and
+ * California); free-text fragments like a city are matched separately as substrings.
+ */
+export function placeTerms(rawPlace: string | null | undefined) {
+  const terms = new Set<string>();
+  const place = parsePlace(rawPlace);
+  if (!place?.countryCode) return terms;
+  const code = place.countryCode;
+  const region = REGION_OF_COUNTRY.get(code);
+  if (region) terms.add(region);
+  if (region === 'australasia') terms.add('oceania');
+  terms.add(countryName(code).toLowerCase());
+  for (const [name, countryCode] of Object.entries(COUNTRY_CODES)) if (countryCode === code && name.length > 2) terms.add(name);
+  if (code === 'us') {
+    ['us', 'usa', 'united states', 'united states of america'].forEach(term => terms.add(term));
+    const state = place.display.split(', ').find(part => US_STATE_ABBREVIATIONS.has(part));
+    const stateName = Object.keys(US_STATE_NAMES).find(name => US_STATE_NAMES[name] === state && !name.startsWith('washington d'));
+    if (stateName) terms.add(stateName);
+  }
+  if (code === 'gb') terms.add('uk');
+  return terms;
+}
+
+const plain = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+export function locationMatches(rawPlace: string | null | undefined, value: string) {
+  const wanted = plain(value.trim());
+  if (!wanted) return true;
+  if ([...placeTerms(rawPlace)].some(term => plain(term) === wanted)) return true;
+  // Cities and venues: substring on the raw text, but only for fragments long enough not to be noise.
+  return wanted.length >= 4 && plain(rawPlace || '').includes(wanted);
+}
