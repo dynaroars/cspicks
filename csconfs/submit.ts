@@ -4,6 +4,7 @@ import {
   buildConferenceGithubIssueUrl,
   buildConferenceSubmissionContent,
 } from './submission.js';
+import { DELIVERY_BUTTONS, QUICK_SECTION, deliver, quickLabel, quickPayload, setupQuickMode } from '../src/submit-quick.js';
 import type { ConferenceRecord } from './types.js';
 
 const root = document.getElementById('submission-form-root')!;
@@ -23,6 +24,10 @@ function renderForm() {
         <label class="submit-choice"><input type="radio" name="kind" value="new" checked> Add a new conference edition</label>
         <label class="submit-choice"><input type="radio" name="kind" value="correction"> Correct an existing entry</label>
       </fieldset>
+
+      ${QUICK_SECTION}
+
+      <div id="structured-fields" hidden>
 
       <div class="submit-section submit-target" id="correction-target-row" hidden>
         <label for="target">Existing conference entry *</label>
@@ -124,12 +129,9 @@ function renderForm() {
       <div class="submit-section submit-attestation">
         <label class="submit-choice"><input id="attest" name="attest" type="checkbox" required> I confirm that the proposed facts come from the official conference, sponsoring society, or official proceedings—not a deadline aggregator or an inferred prior-year schedule.</label>
       </div>
-
-      <div class="submit-actions">
-        <button type="submit" class="submit-button" name="delivery" value="email">Send by email</button>
-        <button type="submit" class="submit-button submit-button-secondary" name="delivery" value="github">Submit as a GitHub issue</button>
       </div>
-      <p class="submit-help">Email opens a pre-filled message and requires no account. GitHub opens a pre-filled issue. This site sends no data to a backend.</p>
+
+      ${DELIVERY_BUTTONS}
     </form>`;
 }
 
@@ -223,6 +225,8 @@ function setupForm() {
   const target = inputField(form, 'target');
   const suggestions = document.getElementById('conference-correction-suggestions')!;
   let matches: ConferenceRecord[] = [];
+  const quick = setupQuickMode(form);
+  quick.apply();
 
   const hideSuggestions = () => {
     suggestions.hidden = true;
@@ -251,6 +255,7 @@ function setupForm() {
     const correction = selectedKind(form).value === 'correction';
     document.getElementById('correction-target-row')!.hidden = !correction;
     target.required = correction;
+    quick.apply();
     renderDuplicateWarning(form);
   }));
 
@@ -274,11 +279,19 @@ function setupForm() {
     form.querySelector<HTMLInputElement>('input[name="kind"][value="correction"]')!.checked = true;
     document.getElementById('correction-target-row')!.hidden = false;
     target.required = true;
+    quick.apply();
     chooseEntry(existing);
   });
 
   form.addEventListener('submit', event => {
     event.preventDefault();
+    const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
+    const builders = { github: buildConferenceGithubIssueUrl, email: buildConferenceEmailUrl };
+    if (quick.isQuick()) {
+      if (!form.reportValidity()) return;
+      deliver(submitter, quickLabel(form), buildConferenceSubmissionContent(quickPayload(form)), builders);
+      return;
+    }
     inheritVenueKeys(form);
     if (!form.reportValidity()) return;
     if (selectedKind(form).value === 'new' && recordsByEdition.has(editionKey(inputField(form, 'name').value, inputField(form, 'year').value))) {
@@ -287,14 +300,7 @@ function setupForm() {
       return;
     }
     const submission = buildSubmission(form);
-    const label = `${submission.entry.name} ${submission.entry.year}`;
-    const content = buildConferenceSubmissionContent(submission);
-    const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
-    if (submitter?.value === 'github') {
-      window.open(buildConferenceGithubIssueUrl(label, content), '_blank', 'noopener,noreferrer');
-    } else {
-      window.location.href = buildConferenceEmailUrl(label, content);
-    }
+    deliver(submitter, `${submission.entry.name} ${submission.entry.year}`, buildConferenceSubmissionContent(submission), builders);
   });
 }
 
