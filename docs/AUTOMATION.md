@@ -161,7 +161,8 @@ historical status). Cap: 20 entries in `public/grants.json`.
 
 First, fix corrupted `amount` strings (Issue #13: a past automated edit stripped `$` plus the digit
 after it, leaving text like `Small (00,000), Medium (,200,000)`). List them with
-`node -e "for (const e of require('./public/grants.json')) if (/(^|[ (+])(,\\d{3}|\\d{2},\\d{3})/.test(e.amount||'') && !/[$€£]/.test(e.amount)) console.log(e.id, e.amount)"`
+`node -e "for (const e of require('./public/grants.json')) if (/(^|[ (+])(,\d{3}|\d{2},\d{3})/.test(e.amount||'') && !/[$€£]/.test(e.amount)) console.log(e.id, e.amount)"`
+(The pattern is a heuristic: also eyeball every `amount` that starts with a bare number or comma.)
 and re-derive each amount from the official solicitation or call page (the entry's landing page often
 omits dollar figures; follow it to the solicitation). Never guess the lost digit. If no official page
 states the amount, set `amount` to `Amount varies; see the official call page` and list the entry in
