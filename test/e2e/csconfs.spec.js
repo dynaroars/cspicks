@@ -140,3 +140,19 @@ test('CS Confs new submission is a single free-text box, with optional detailed 
   await expect(page.locator('#structured-fields')).toBeVisible();
   await expect(page.locator('#name')).toBeEnabled();
 });
+
+test('CS Confs location and deadline selects narrow the schedule and persist in the URL', async ({ page }) => {
+  await page.goto('./csconfs.html');
+  await expect(page.locator('#csconfs-results .schedule-card').first()).toBeVisible();
+  const before = await page.locator('#csconfs-results .schedule-card').count();
+  await page.locator('#location-select').selectOption({ label: 'North America' });
+  await expect(page).toHaveURL(/loc=north\+america/);
+  const canada = await page.locator('#csconfs-results .schedule-card').count();
+  expect(canada).toBeGreaterThan(0);
+  expect(canada).toBeLessThan(before);
+  await page.locator('#deadline-mode').selectOption('passed');
+  await expect(page).toHaveURL(/deadline=passed/);
+  await page.goto('./csconfs.html?loc=europe&deadline=open');
+  await expect(page.locator('#location-select')).toHaveValue('europe');
+  await expect(page.locator('#deadline-mode')).toHaveValue('open');
+});
