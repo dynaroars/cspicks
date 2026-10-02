@@ -35,13 +35,20 @@ minimum. Keep new routines inside those windows.
 
 | Key | Routine id | Model | Cron (UTC) | ET | Section |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| `audit` | `trig_01RgGWz3Xjw6gXvqPYgixP7C` | Opus 5.5 | `0 4 * * 1,4` | Mon and Thu 12 AM | [Auditor](#auditor-audit) |
+| `audit` | `trig_01RgGWz3Xjw6gXvqPYgixP7C` | Opus 5.5 | `0 4 * * *` | Daily 12 AM | [Auditor](#auditor-audit) |
 | `confs` | `trig_018AYNAaQfwJC2rx8JX2zZKo` | Sonnet 5 | `0 8 * * 0,2,4,6` | Sun, Tue, Thu, Sat 4 AM | [Conference audit](#conference-audit-confs) |
 | `grants` | `trig_01LuUf649h8NwKMEftjktkmS` | Sonnet 5 | `30 8 * * 3,6` | Wed and Sat 4:30 AM | [Grants audit](#grants-audit-grants) |
 | `data-sync` | `trig_014ksNYkkzyHVxS2Kub4LqsG` | Sonnet 5 | `30 8 3 * *` | 3rd of month, 4:30 AM | [Mechanical data sync](#mechanical-data-sync-data-sync) |
 | `confs-discover` | `trig_01LZM6T6zVarUND6Uvh6HUTh` | Sonnet 5 | `0 9 8 * *` | 8th of month, 5 AM | [Discover conferences](#discover-conferences-confs-discover) |
 | `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5 | `0 9 22 * *` | 22nd of month, 5 AM | [Discover grants](#discover-grants-grants-discover) |
 | `affiliations` | `trig_01Q8yhHMcPqZZJspxcr4iw7n` | Sonnet 5 | `30 9 10 1,4,7,10 *` | 10th of Jan/Apr/Jul/Oct, 5:30 AM | [Manual affiliations](#manual-affiliations-affiliations) |
+
+One-time: `review` (Opus 5.5) runs once on 2026-10-26 at 14:00 UTC (10 AM ET), after the schedule
+changed on 2026-10-02 (nightly audit, confs every other day, grants twice weekly). It changes
+nothing and files one `[scheduled:review] Automation setup review (2026-10-26)` Issue with
+per-routine results (PRs opened, facts changed, merge rate, `not_found` share, blocked sources,
+backlog size from `npm run maintain:csconfs -- --dry-run --limit 400`) and a recommendation to
+raise, keep, or lower each frequency. Until then, leave the setup alone unless something is broken.
 
 Each routine attaches only the
 `Claude_Docs` connector. Don't add `Claude_Code_Remote`: with it, a run that opens a PR schedules
