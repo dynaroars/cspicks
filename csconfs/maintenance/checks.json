@@ -46,53 +46,24 @@
       "proposals": []
     },
     "CCC": {
-      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
-      "outcome": "complete",
-      "summary": "CCC 2027 (Seattle, WA, Jul 19-22 2027 at University of Washington) confirmed on the official series site: location, dates, and general chair Swastik Kopparty match the record. Fixed place field to drop the venue name per schema (was including \"University of Washington\"), and flipped estimated/verified since the edition is officially confirmed. Submission deadline not yet posted.",
+      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "outcome": "incomplete",
+      "summary": "CCC 2027 (Seattle, July 19-22, 2027) confirmed on the series site; no call for papers, submission deadline, or notification date posted yet. The site names Swastik Kopparty only as \"chair of CCC 2027\"; role left unchanged.",
       "checkedUrls": [
         "https://computationalcomplexity.org/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "place",
-              "url": "https://computationalcomplexity.org/",
-              "evidence": "Homepage states CCC 2027 will be held July 19-22, Seattle, USA, at the University of Washington."
-            },
-            {
-              "field": "verified",
-              "url": "https://computationalcomplexity.org/",
-              "evidence": "Dates, location, and general chair (Swastik Kopparty) are stated as confirmed conference details on the official site, not merely a planning estimate."
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "CHES": {
-      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
-      "outcome": "complete",
-      "summary": "CHES 2027 (Cancun, Sep 6-9 2027) uses journal-style rolling review (TCHES); confirmed the four TCHES 2027 submission round deadlines (2026-07-15, 2026-10-15, 2027-01-15, 2027-04-15, all AoE) on the official edition site and folded them into the note. No single conference-wide deadline field applies, consistent with every other CHES record in the dataset.",
+      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "outcome": "incomplete",
+      "summary": "CHES 2027 (Cancún, September 6-9, 2027) matches the record; rolling TCHES rounds, no single conference-wide deadline. No changes.",
       "checkedUrls": [
         "https://ches.iacr.org/2027/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "deadline",
-              "url": "https://ches.iacr.org/2027/",
-              "evidence": "Important Dates lists four TCHES 2027 submission rounds: 15 July 2026, 15 Oct 2026, 15 Jan 2027, 15 April 2027 (23:59:59 AoE)."
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "COLT": {
       "lastCheckedAt": "2026-09-28T08:10:31.732Z",
@@ -125,9 +96,9 @@
       "proposals": []
     },
     "HotOS": {
-      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
       "outcome": "complete",
-      "summary": "HotOS 2027 (May 24-26 2027) official site names the venue as Burghausen, Bavaria, Germany, organized by TU Munich's Systems Research Group; place was previously null. Submission deadline and other milestones remain \"To Be Announced\".",
+      "summary": "HotOS XXI (May 24-26, 2027, Burghausen) confirmed; added paper submission deadline and author notification. No separate abstract deadline stated.",
       "checkedUrls": [
         "https://sigops.org/s/conferences/hotos/2027/"
       ],
@@ -138,9 +109,14 @@
           "year": 2027,
           "sources": [
             {
-              "field": "place",
+              "field": "deadline",
               "url": "https://sigops.org/s/conferences/hotos/2027/",
-              "evidence": "Page states HotOS 2027 will be held May 24-26, 2027, Burghausen, Bavaria, Germany, organized by the Systems Research Group at TU Munich."
+              "evidence": "Paper/Panel Proposal Submission: February 1, 2027."
+            },
+            {
+              "field": "notificationDate",
+              "url": "https://sigops.org/s/conferences/hotos/2027/",
+              "evidence": "Author Notifications: April 9, 2027."
             }
           ]
         }
@@ -168,26 +144,14 @@
       "proposals": []
     },
     "ICS": {
-      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
-      "outcome": "complete",
-      "summary": "ICS 2027 (part of FCRC 2027) official site confirms Atlanta, GA as host city but states \"Dates and the organizing committee will be announced here\" for everything else. Reformatted place to drop venue/parenthetical text per schema and moved the FCRC context into note.",
+      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "outcome": "not_found",
+      "summary": "ICS 2027 page says Atlanta as part of FCRC; dates and organizing committee still \"to be announced\". No submission deadlines.",
       "checkedUrls": [
         "https://www.ics-conference.org/"
       ],
-      "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "place",
-              "url": "https://www.ics-conference.org/",
-              "evidence": "Page states the 41st ICS will be held in Atlanta, Georgia, USA, as part of ACM FCRC; dates and organizing committee not yet announced."
-            }
-          ]
-        }
-      ]
+      "deferredUntil": "2026-10-24T20:09:18.954Z",
+      "proposals": []
     },
     "IPSN": {
       "lastCheckedAt": "2026-09-28T08:10:31.732Z",
@@ -197,6 +161,140 @@
         "https://sensys.acm.org/2027/"
       ],
       "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "proposals": []
+    },
+    "LAK": {
+      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "outcome": "incomplete",
+      "summary": "LAK27 (Recife, March 8-12, 2027) confirmed on series and edition pages; the fetched pages did not show paper deadline, notification, or chairs. Existing abstract deadline not re-verified.",
+      "checkedUrls": [
+        "https://www.solaresearch.org/events/lak/",
+        "https://www.solaresearch.org/events/lak/lak27/",
+        "https://www.solaresearch.org/events/lak/lak27/call-for-papers/ (404)"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "LICS": {
+      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "outcome": "incomplete",
+      "summary": "LICS 2027 (Montreal, June 21-24, 2027; PC chairs Pablo Barceló and Alexandra Silva) matches the record; no submission deadlines posted. Record stays estimated.",
+      "checkedUrls": [
+        "https://lics.siglog.org/lics27/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "MobiSys": {
+      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "outcome": "complete",
+      "summary": "MobiSys 2027 (Ho Chi Minh City, June 21-25, 2027): added conference dates, abstract/paper deadlines, and notification from the official edition page.",
+      "checkedUrls": [
+        "https://www.sigmobile.org/mobisys/2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "date",
+              "url": "https://www.sigmobile.org/mobisys/2027/",
+              "evidence": "June 21-25, 2027."
+            },
+            {
+              "field": "abstractDeadline",
+              "url": "https://www.sigmobile.org/mobisys/2027/",
+              "evidence": "Abstract registration: November 27, 2026."
+            },
+            {
+              "field": "deadline",
+              "url": "https://www.sigmobile.org/mobisys/2027/",
+              "evidence": "Paper submission: December 4, 2026."
+            },
+            {
+              "field": "notificationDate",
+              "url": "https://www.sigmobile.org/mobisys/2027/",
+              "evidence": "Final decisions: March 6, 2027."
+            }
+          ]
+        }
+      ]
+    },
+    "SIGCOMM": {
+      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "outcome": "incomplete",
+      "summary": "SIGCOMM 2027 (Bangkok, August 8-12, 2027) matches the record; official site lists submission deadlines as TBA. No changes.",
+      "checkedUrls": [
+        "https://conferences.sigcomm.org/sigcomm/2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "SIGGRAPH Asia": {
+      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "outcome": "not_found",
+      "summary": "asia.siggraph.org/2027/ returns 404; the series site links a SIGGRAPH Asia 2027 entry but its content was not retrievable. Dates and papers deadline unverified.",
+      "checkedUrls": [
+        "https://asia.siggraph.org/",
+        "https://asia.siggraph.org/2027/ (404)"
+      ],
+      "deferredUntil": "2026-10-24T20:09:18.954Z",
+      "proposals": []
+    },
+    "SIGIR": {
+      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "outcome": "complete",
+      "summary": "SIGIR 2027 (San Jose, July 18-24, 2027): added abstract and full-paper deadlines and notification from the official site.",
+      "checkedUrls": [
+        "https://sigir2027.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "abstractDeadline",
+              "url": "https://sigir2027.org/",
+              "evidence": "Abstract deadline: January 14, 2027."
+            },
+            {
+              "field": "deadline",
+              "url": "https://sigir2027.org/",
+              "evidence": "Full paper submission: January 21, 2027."
+            },
+            {
+              "field": "notificationDate",
+              "url": "https://sigir2027.org/",
+              "evidence": "Notification of acceptance: April 5, 2027."
+            }
+          ]
+        }
+      ]
+    },
+    "UIST": {
+      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "outcome": "not_found",
+      "summary": "uist.acm.org/2027/ returns 404 and the series site only shows UIST 2026; no 2027 announcement. Record link still names 2026 and a 2027 abstract deadline contradicts its note; left for a later run.",
+      "checkedUrls": [
+        "https://uist.acm.org/",
+        "https://uist.acm.org/2027/ (404)"
+      ],
+      "deferredUntil": "2026-10-24T20:09:18.954Z",
+      "proposals": []
+    },
+    "USENIX ATC": {
+      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "outcome": "not_found",
+      "summary": "usenix.org/conference/atc27 returns 404 and the USENIX conferences list shows no ATC 2027 entry; the existing record could not be verified.",
+      "checkedUrls": [
+        "https://www.usenix.org/conference/atc27 (404)",
+        "https://www.usenix.org/conferences"
+      ],
+      "deferredUntil": "2026-10-24T20:09:18.954Z",
       "proposals": []
     }
   }
