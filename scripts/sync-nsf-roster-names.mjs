@@ -15,11 +15,18 @@ const AUTHOR_INFO_URL = 'https://raw.githubusercontent.com/emeryberger/CSranking
 const AWARDS = new URL('../public/nsf-awards.json', import.meta.url);
 const CROSSWALK = new URL('../public/nsf-name-crosswalk.csv', import.meta.url);
 
+// Must match nameWords in sync-nsf-awards.mjs, or this script and the full sync
+// resolve different names: accents and hyphens are folded ("Jana Kosecká" and
+// "Jana Kosecka", "Chen-Ching Liu" and "Chen Liu 0027" are the same identity).
 function nameWords(name) {
   return String(name || '')
-    .replace(/\s+\d+$/, '')
+    .replace(/\s+\d{4}$/, '')
+    .trim()
     .toLowerCase()
-    .replace(/[.]/g, ' ')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
     .split(/\s+/)
     .filter(Boolean);
 }
