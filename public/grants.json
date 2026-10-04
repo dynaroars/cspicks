@@ -2194,9 +2194,9 @@
       "PhD Students"
     ],
     "whoFor": "Multi-university collaborative consortia of faculty and research leaders in artificial intelligence",
-    "deadline": "Preliminary Proposal: January 12, 2026; Full Proposal: May 15, 2026 at 5:00 PM local time (Biennial theme calls; NSF 24-541)",
-    "deadlineMonth": 5,
-    "amount": "Up to 0,000,000 per institute over 5 years (,000,000/year)",
+    "deadline": "No upcoming due date; NSF is waiting for a new solicitation (last cycle: full proposals May 15, 2026; NSF 24-541)",
+    "deadlineMonth": 0,
+    "amount": "Amount varies; see the official call page",
     "summary": "Large-scale national research hubs advancing foundational AI theory, neuro-symbolic learning, trustworthy autonomy, and multidisciplinary AI applications in scientific discovery, agriculture, education, and cybersecurity.",
     "eligibility": [
       "US higher education institutions leading multi-organization consortia",
@@ -2227,7 +2227,7 @@
     "whoFor": "Faculty and principal investigators advancing fundamental robotic intelligence and physical autonomy",
     "deadline": "Rolling / Accepted Anytime without Deadlines",
     "deadlineMonth": 0,
-    "amount": "00,000 to ,500,000 over 3 to 4 years",
+    "amount": "Amount varies; see the official call page",
     "summary": "Funds core computer science and engineering breakthroughs in robotic perception, motion planning, manipulation, human-robot interaction, reinforcement learning for control, and autonomous cyber-physical systems.",
     "eligibility": [
       "Faculty at US degree-granting universities",
@@ -2255,9 +2255,9 @@
       "PhD Students"
     ],
     "whoFor": "Faculty in software engineering, programming languages, compilers, computer architecture, and EDA",
-    "deadline": "Small: Accepted Anytime; Medium: November; Large: September",
-    "deadlineMonth": 11,
-    "amount": "Small (up to 00,000), Medium (up to ,200,000), Large (up to ,000,000)",
+    "deadline": "Small: Accepted Anytime; Large: September 14–28, 2027 (NSF 24-572; prior window Sept 15–29, 2025); Medium: see program page",
+    "deadlineMonth": 9,
+    "amount": "Small (up to $600,000 over 3 years), Medium (up to $1,200,000 over 4 years), Large ($3,000,000–$5,000,000 over 3–5 years)",
     "summary": "The core NSF program supporting research at the boundary of hardware and software, covering software design, verification, program synthesis, compiler optimizations, energy-efficient microarchitecture, parallel architectures, and design automation.",
     "eligibility": [
       "Tenure-track and research faculty at US universities",
@@ -2287,7 +2287,7 @@
     "whoFor": "Faculty and theoretical CS researchers in algorithms, complexity, and quantum computing",
     "deadline": "Small: Accepted Anytime; Medium: November; Large: September",
     "deadlineMonth": 11,
-    "amount": "Small (up to 00,000), Medium (up to ,200,000)",
+    "amount": "Small (up to $600,000 over 3 years), Medium (up to $1,200,000 over 4 years)",
     "summary": "Supports foundational research in theoretical computer science, including design and analysis of algorithms, computational complexity, algorithmic game theory, randomized algorithms, computational geometry, and quantum algorithms.",
     "eligibility": [
       "Faculty at US colleges and universities",
@@ -2316,7 +2316,7 @@
     "whoFor": "Faculty researching deeply integrated computing, sensing, networking, and physical actuation",
     "deadline": "Small & Medium: October 28, 2026 at 5:00 PM local time (Annual late October; NSF 24-581)",
     "deadlineMonth": 10,
-    "amount": "Small (up to 00,000), Medium (up to ,200,000), Frontier (,000,000)",
+    "amount": "Amount varies; see the official call page",
     "summary": "Funds research engineering cyber-physical systems that integrate computing algorithms with physical processes, including smart cities, autonomous vehicles, industrial IoT, medical devices, and smart power grids.",
     "eligibility": [
       "Faculty at US academic institutions",
@@ -2433,7 +2433,7 @@
     "whoFor": "Faculty and innovators proposing rapid-turnaround, high-risk, high-impact exploratory CS concepts",
     "deadline": "Rolling Open Solicitations with Short Thematic BAA Windows",
     "deadlineMonth": 0,
-    "amount": "Up to ,000,000 for Phase 1 (9 to 18 months, with rapid 90-day evaluation)",
+    "amount": "Amount varies; see the official call page",
     "summary": "Fast-track funding mechanism designed to quickly test radical ideas and determine whether a disruptive computing concept warrants a full-scale DARPA multi-million-dollar program.",
     "eligibility": [
       "Universities, non-profits, and commercial researchers",
@@ -2492,7 +2492,7 @@
     "whoFor": "Faculty and scientists in high-performance computing, scientific AI/ML, and quantum computing for science",
     "deadline": "Annual Continuously Open Call (Pre-application required, full proposal by May)",
     "deadlineMonth": 5,
-    "amount": "00,000 to ,000,000+ per year for 3 to 5 years",
+    "amount": "Amount varies; see the official call page",
     "summary": "Supports fundamental computer science and applied mathematics for extreme-scale supercomputing, scientific machine learning (SciML), exascale memory systems, distributed workflow orchestration, and quantum information science.",
     "eligibility": [
       "US academic institutions, national laboratories, and non-profits",
@@ -2522,7 +2522,7 @@
     "whoFor": "Collaborative multi-institutional teams linking CS algorithms researchers with domain scientists",
     "deadline": "Periodic Multi-Year Calls (Typically Winter / Spring)",
     "deadlineMonth": 4,
-    "amount": ",000,000 to ,000,000 per year per partnership/institute for 5 years",
+    "amount": "Amount varies; see the official call page",
     "summary": "Creates multidisciplinary partnerships between computer science researchers and physical scientists to develop next-generation software frameworks, solvers, and AI algorithms running on DOE leadership supercomputers.",
     "eligibility": [
       "Academic consortia and national lab partnerships",
@@ -2552,7 +2552,7 @@
     "whoFor": "Faculty and researchers in quantum algorithms, quantum architectures, and quantum error mitigation",
     "deadline": "Periodic Center & FOA Calls",
     "deadlineMonth": 3,
-    "amount": ",000,000 to 5,000,000 per center/project",
+    "amount": "Amount varies; see the official call page",
     "summary": "Funds comprehensive research into quantum computing systems, quantum compilers, algorithms for quantum simulation, distributed quantum networks, and fault-tolerant quantum software stacks.",
     "eligibility": [
       "US universities and research institutes participating in national QIS research initiatives"
