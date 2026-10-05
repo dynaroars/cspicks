@@ -48,7 +48,7 @@
     "CCC": {
       "lastCheckedAt": "2026-10-04T20:14:58.622Z",
       "outcome": "not_found",
-      "summary": "CCC 2027 site confirms July 19-22, 2027, Seattle. No CFP, deadline, or notification published yet; the page names Swastik Kopparty as PC chair, whereas the local record lists him as generalChair (role mismatch, left unchanged).",
+      "summary": "CCC 2027 site confirms July 19-22, 2027, Seattle. No CFP, deadline, or notification published yet; the page says only \"The chair of CCC 2027 will be Swastik Kopparty\" without naming the role, so the existing generalChair value is left unchanged.",
       "checkedUrls": [
         "https://computationalcomplexity.org/"
       ],
