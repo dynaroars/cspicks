@@ -380,6 +380,216 @@
       ],
       "deferredUntil": "2026-10-25T20:14:58.622Z",
       "proposals": []
+    },
+    "EuroSys": {
+      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "outcome": "incomplete",
+      "summary": "EuroSys 2027 (Rabat, Apr 19-23 2027; fall cycle abstract Sep 17 / paper Sep 24 2026) matches the official site. EuroSys 2028 not announced anywhere on the official site; left unchanged.",
+      "checkedUrls": [
+        "https://2027.eurosys.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "FAST": {
+      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "outcome": "complete",
+      "summary": "FAST 2027 matches the official CFP. FAST 2026 cycle 1 had cycle 2 notification date copied in and missing author response; fixed from the FAST 26 CFP; date format normalized. FAST 2028 has no official dates/deadlines yet.",
+      "checkedUrls": [
+        "https://www.usenix.org/conference/fast27/call-for-papers",
+        "https://www.usenix.org/conference/fast26/call-for-papers"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2026,
+          "sources": [
+            {
+              "field": "notificationDate",
+              "url": "https://www.usenix.org/conference/fast26/call-for-papers",
+              "evidence": "Spring cycle: author response May 20-22 2025, notification June 5 2025; fall cycle: response Nov 18-20 2025, notification Dec 8 2025."
+            }
+          ]
+        }
+      ]
+    },
+    "ICML": {
+      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "outcome": "incomplete",
+      "summary": "ICML Future Meetings page lists only 2027: South America and 2028: Eastern United States; no dates, city, or deadlines announced. Existing records consistent; unchanged.",
+      "checkedUrls": [
+        "https://icml.cc/",
+        "https://icml.cc/Conferences/FutureMeetings"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "IJCAI": {
+      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "outcome": "incomplete",
+      "summary": "IJCAI-2027 (Kyoto Aug 7-13; Hengqin Aug 15-17) matches the official Future Conferences page. Page gives no 2027 deadlines/chairs and nothing for 2028; unchanged.",
+      "checkedUrls": [
+        "https://www.ijcai.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "ISSTA": {
+      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "outcome": "complete",
+      "summary": "ISSTA 2027 official dates page: Singapore, Sep 7-10 2027; response Mar 22-25; initial notification Apr 20. Record had date copied as 2027-10-03 and wrong response/notification; corrected. ISSTA 2028 not announced on the official site.",
+      "checkedUrls": [
+        "https://conf.researchr.org/home/issta-2027",
+        "https://conf.researchr.org/dates/issta-2027"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "date",
+              "url": "https://conf.researchr.org/dates/issta-2027",
+              "evidence": "ISSTA 2027 held September 7-10, 2027 in Singapore."
+            },
+            {
+              "field": "rebuttalDate",
+              "url": "https://conf.researchr.org/dates/issta-2027",
+              "evidence": "Author response period March 22-25, 2027."
+            },
+            {
+              "field": "notificationDate",
+              "url": "https://conf.researchr.org/dates/issta-2027",
+              "evidence": "Initial notification April 20, 2027."
+            }
+          ]
+        }
+      ]
+    },
+    "NeurIPS": {
+      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "outcome": "incomplete",
+      "summary": "Official Future Meetings page says 2027: Europe, 2028: Western United States, with no dates or city. Removed unsupported 2027 date range; kept estimated deadlines flagged estimated.",
+      "checkedUrls": [
+        "https://neurips.cc/Conferences/FutureMeetings"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "date",
+              "url": "https://neurips.cc/Conferences/FutureMeetings",
+              "evidence": "Only the continent (Europe) is stated for 2027; no dates."
+            }
+          ]
+        }
+      ]
+    },
+    "SIGMOD": {
+      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "outcome": "incomplete",
+      "summary": "SIGMOD/PODS 2027 (June 13-19 2027, Huntington Beach, CA) matches the official site. No 2028 information published; cycle deadlines not re-verifiable from the home page, unchanged.",
+      "checkedUrls": [
+        "https://2027.sigmod.org/",
+        "https://www.sigmod.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "SOSP": {
+      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "outcome": "not_found",
+      "summary": "sosp.org lists SOSP only through 2026; the sigops.org 2027 page has no SOSP 2027 dates, deadlines or chairs, and nothing for 2028. Unchanged.",
+      "checkedUrls": [
+        "https://sosp.org/",
+        "https://sigops.org/s/conferences/sosp/2027/"
+      ],
+      "deferredUntil": "2026-10-27T20:16:29.176Z",
+      "proposals": []
+    },
+    "ICDE": {
+      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "outcome": "complete",
+      "summary": "ICDE 2027 official site: Copenhagen, May 17-21 2027; round 1 deadline Jun 11 2026. Cycle 1 record had the wrong link (icde.github.io) and date 2027-05-04; corrected to match cycle 2.",
+      "checkedUrls": [
+        "https://icde2027.github.io/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "date",
+              "url": "https://icde2027.github.io/",
+              "evidence": "43rd ICDE, Copenhagen, Denmark, May 17-21, 2027."
+            }
+          ]
+        }
+      ]
+    },
+    "NSDI": {
+      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "outcome": "complete",
+      "summary": "NSDI 2027 and 2026 records match the official CFPs; only the NSDI 2026 date dash format was normalized.",
+      "checkedUrls": [
+        "https://www.usenix.org/conference/nsdi27/call-for-papers",
+        "https://www.usenix.org/conference/nsdi26/call-for-papers"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "OOPSLA": {
+      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "outcome": "incomplete",
+      "summary": "SPLASH 2027 site: Prague Oct 10-15 2027; Round 1 submission Oct 14 2026, author response Dec 1-5 2026, notification Feb 12 2027; Round 2 submission Apr 7 2027. Fixed round 1 response/notification; nulled round 2 response/notification which the site does not state. OOPSLA 2026 pages (researchr/splashcon) returned 404, so the 2026 \"notification precedes rebuttal\" issue is unverified.",
+      "checkedUrls": [
+        "https://2027.splashcon.org/",
+        "https://splashcon.org/2027",
+        "https://2026.splashcon.org/track/splash-2026-oopsla"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "notificationDate",
+              "url": "https://2027.splashcon.org/",
+              "evidence": "Round 1 notification Fri 12 Feb 2027; author response Dec 1-5, 2026."
+            }
+          ]
+        }
+      ]
+    },
+    "USENIX Security": {
+      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "outcome": "complete",
+      "summary": "USENIX Security 2027 CFP: cycle 1 rebuttal Nov 5-12 2026, cycle 2 rebuttal Apr 8-15 2027; cycle 1 record wrongly had the cycle 2 rebuttal.",
+      "checkedUrls": [
+        "https://www.usenix.org/conference/usenixsecurity27/call-for-papers"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "rebuttalDate",
+              "url": "https://www.usenix.org/conference/usenixsecurity27/call-for-papers",
+              "evidence": "Cycle 1 rebuttal Nov 5-12, 2026; cycle 2 rebuttal Apr 8-15, 2027."
+            }
+          ]
+        }
+      ]
     }
   }
 }
