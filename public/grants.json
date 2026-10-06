@@ -2404,7 +2404,7 @@
     "whoFor": "University professors, research laboratories, and industry teams proposing revolutionary computing concepts",
     "deadline": "Open Year-Round (Open BAA HR001126S0001 through November 2026)",
     "deadlineMonth": 0,
-    "amount": ",000,000 to 0,000,000+ multi-year contracts and grants",
+    "amount": "Amount varies; see the official call page",
     "summary": "DARPA flagship office BAA funding non-consensus computer science in trustworthy and neuro-symbolic AI, autonomous software remediation, cyber reasoning systems, human-machine symbiosis, and resilient distributed networks.",
     "eligibility": [
       "Open to all academic institutions, non-profits, and industry entities worldwide",
@@ -2417,7 +2417,7 @@
       "Software Engineering",
       "Theory"
     ],
-    "url": "https://www.darpa.mil/our-research/offices-and-programs/information-innovation-office",
+    "url": "https://www.darpa.mil/about/offices/ipto",
     "featured": true
   },
   {
@@ -2451,9 +2451,9 @@
   },
   {
     "id": "darpa-mto-open-baa",
-    "name": "DARPA Microsystems Technology Office (MTO) Open BAA",
-    "shortName": "DARPA MTO BAA",
-    "sponsor": "Defense Advanced Research Projects Agency (DARPA - MTO)",
+    "name": "DARPA Multi X Office (MXO, formerly Microsystems Technology Office) Open BAA",
+    "shortName": "DARPA MXO BAA",
+    "sponsor": "Defense Advanced Research Projects Agency (DARPA - MXO, formerly MTO)",
     "sponsorCategory": "Government",
     "targetAudience": [
       "Faculty",
@@ -2463,7 +2463,7 @@
     "whoFor": "Faculty and researchers in hardware architecture, EDA, chip design, photonics, and hardware security",
     "deadline": "Open Year-Round (Continuous BAA Submissions)",
     "deadlineMonth": 0,
-    "amount": ",000,000 to ,000,000+",
+    "amount": "Amount varies; see the official call page",
     "summary": "Funds revolutionary computing hardware research, including heterogeneous chiplet architectures, neuromorphic computing, optical/photonic interconnects, quantum micro-architectures, and hardware security root-of-trust.",
     "eligibility": [
       "Open to academic, government, and commercial entities"
@@ -2475,7 +2475,7 @@
       "Quantum",
       "Embedded & Real-Time"
     ],
-    "url": "https://www.darpa.mil/our-research/offices-and-programs/microsystems-technology-office",
+    "url": "https://www.darpa.mil/about/offices/mxo",
     "featured": false
   },
   {
@@ -2787,12 +2787,14 @@
       "PhD Students"
     ],
     "whoFor": "Women, gender-nonconforming, and underrepresented undergraduate and graduate students in computing",
-    "deadline": "October 15, 2026 at 11:59 PM HST (Annual mid-October; 11:59 PM Hawaii Standard Time)",
-    "deadlineMonth": 10,
-    "amount": "Up to 0,000 cash prize per winner (,500 for finalists) + trip to annual NCWIT Summit + national recognition",
+    "deadline": "November 18, 2025 at 8:00 PM ET (2026 award preliminary round; finalist round due January 27, 2026)",
+    "deadlineMonth": 11,
+    "amount": "$7,500 cash per Award Winner; $2,500 cash per Honorable Mention (finalists receive a certificate, no cash) + national recognition",
     "summary": "Honors undergraduate and graduate students identifying as women, gender-queer, or non-binary for their technical contributions to projects in computer science, software design, and engineering.",
     "eligibility": [
-      "Enrolled in an accredited US university or college as an undergraduate or graduate student in computing"
+      "Enrolled in a post-secondary institution with a computing or engineering major",
+      "U.S. citizen, permanent resident, or meets the substantial presence test; at least 18 years old",
+      "Member of the AiC Community"
     ],
     "topics": [
       "General CS",
@@ -2801,7 +2803,7 @@
       "Software Engineering",
       "Robotics"
     ],
-    "url": "https://www.aspirations.org/award-programs/collegiate-award",
+    "url": "https://www.aspirations.org/award-programs/aic-collegiate-award",
     "featured": false
   },
   {
