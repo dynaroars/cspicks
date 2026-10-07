@@ -548,7 +548,7 @@
     "OOPSLA": {
       "lastCheckedAt": "2026-10-06T20:16:29.176Z",
       "outcome": "incomplete",
-      "summary": "SPLASH 2027 site: Prague Oct 10-15 2027; Round 1 submission Oct 14 2026, author response Dec 1-5 2026, notification Feb 12 2027; Round 2 submission Apr 7 2027. Fixed round 1 response/notification; nulled round 2 response/notification which the site does not state. OOPSLA 2026 pages (researchr/splashcon) returned 404, so the 2026 \"notification precedes rebuttal\" issue is unverified.",
+      "summary": "SPLASH 2027 site: Prague Oct 10-15 2027; Round 1 submission Oct 14 2026, author response Dec 1-5 2026, initial notification Dec 18 2026 (final notification after revision Feb 12 2027); Round 2 submission Apr 7 2027. Fixed round 1 response/notification; nulled round 2 response/notification which the site does not state. OOPSLA 2026 pages (researchr/splashcon) returned 404, so the 2026 \"notification precedes rebuttal\" issue is unverified.",
       "checkedUrls": [
         "https://2027.splashcon.org/",
         "https://splashcon.org/2027",
@@ -563,7 +563,7 @@
             {
               "field": "notificationDate",
               "url": "https://2027.splashcon.org/",
-              "evidence": "Round 1 notification Fri 12 Feb 2027; author response Dec 1-5, 2026."
+              "evidence": "Round 1 notification Fri 18 Dec 2026 (final notification after revision Fri 12 Feb 2027); author response Dec 1-5, 2026."
             }
           ]
         }
