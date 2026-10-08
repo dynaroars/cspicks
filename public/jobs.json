@@ -1721,6 +1721,28 @@
     "verified": true
   },
   {
+    "id": "umflint-asst-prof-cs-cybersecurity-ai-2026",
+    "school": "University of Michigan-Flint",
+    "department": "Division of Computing, College of Innovation and Technology",
+    "title": "Assistant Professor, Tenure-Track Faculty (Computer Science)",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "sec",
+      "ai"
+    ],
+    "state": "MI",
+    "city": "Flint",
+    "deadline": "2027-02-07",
+    "rolling": false,
+    "postedDate": "2026-08-13",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://apply.interfolio.com/190883",
+    "summary": "Multiple tenure-track assistant professor positions in cybersecurity, AI, and related fields as part of a large college hiring initiative.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "unm-asst-prof-cs-2026",
     "school": "University of New Mexico",
     "department": "Computer Science",

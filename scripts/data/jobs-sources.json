@@ -21,9 +21,9 @@
     "facultyCount": 240,
     "jobsUrl": "https://www.cc.gatech.edu/faculty-position-opportunities",
     "state": "GA",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T23:00:00Z",
     "outcome": "incomplete",
-    "summary": "Faculty opportunities page showed only 2024-25 era postings with no deadlines or URLs; no current cycle postings confirmed.",
+    "summary": "School of CS hiring page and AcademicJobsOnline show the 2025-26 TTT2026 search (deadline 2025-12-31); no 2026-27 search yet.",
     "checkedUrls": [
       "https://www.cc.gatech.edu/",
       "https://www.cc.gatech.edu/faculty-position-opportunities"
@@ -128,13 +128,13 @@
     "facultyCount": 145,
     "jobsUrl": null,
     "state": "MI",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "blocked",
-    "summary": "Department faculty-hiring page returned 403.",
+    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "outcome": "complete",
+    "summary": "CSE faculty-hiring page says positions for the next cycle have not been posted yet; recheck in November.",
     "checkedUrls": [
       "https://cse.engin.umich.edu/about/faculty-hiring/"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   },
   {
     "school": "New York University",
@@ -276,15 +276,15 @@
     "facultyCount": 114,
     "jobsUrl": "https://www.cs.purdue.edu/hiring/index.html",
     "state": "IN",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "blocked",
-    "summary": "Hiring page linked from homepage but returned 403/404 to the crawler, so no postings could be verified.",
+    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Department hiring pages still describe 2024-25 and 2025-26 searches; no 2026-27 CS posting found.",
     "checkedUrls": [
       "https://www.cs.purdue.edu/",
       "https://www.cs.purdue.edu/hiring/index.html",
       "https://www.cs.purdue.edu/hiring/"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   },
   {
     "school": "Univ. of California - Santa Cruz",
@@ -612,13 +612,13 @@
     "facultyCount": 85,
     "jobsUrl": null,
     "state": "VA",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "blocked",
-    "summary": "Fetch safety check was rate-limited; search only surfaced Fall 2026-start postings with Jan 2026 deadlines (open until filled) that could not be verified on the official page, so none added.",
+    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "outcome": "complete",
+    "summary": "University jobs board shows only staff roles for the College of Engineering and Computing right now; earlier chair and term-faculty ads are not listed.",
     "checkedUrls": [
       "https://cs.gmu.edu/"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   },
   {
     "school": "Rutgers University",
@@ -671,14 +671,14 @@
     "facultyCount": 84,
     "jobsUrl": "https://recruit.ucdavis.edu/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "blocked",
-    "summary": "Department site returned 403 and the UC Recruit portal showed no listings without search; no official CS posting verified.",
+    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Department job page lists older postdoc ads; no 2026-27 tenure-track CS search found.",
     "checkedUrls": [
       "https://cs.ucdavis.edu/",
       "https://recruit.ucdavis.edu/"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   },
   {
     "school": "Oregon State University",
@@ -1007,14 +1007,14 @@
     "facultyCount": 62,
     "jobsUrl": null,
     "state": "CA",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "blocked",
-    "summary": "Fetch safety check was rate-limited and the guessed employment URL returned 404; no hiring page verified.",
+    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "outcome": "complete",
+    "summary": "UCLA Academic Recruit lists only part-time lecturer and adjunct CS positions for 2026-27; no tenure-track CS search yet.",
     "checkedUrls": [
       "https://www.cs.ucla.edu/",
       "https://www.cs.ucla.edu/employment/"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   },
   {
     "school": "Tufts University",
@@ -3005,12 +3005,12 @@
     "facultyCount": 0,
     "jobsUrl": null,
     "state": "MI",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "blocked",
-    "summary": "Site returned 403; search found no current CS postings (the cybersecurity search was closed).",
+    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "outcome": "complete",
+    "summary": "Interfolio 190883 (Computing, deadline 2027-02-07) recorded; a second Flint computing posting (careers.umich.edu 282692) was seen only in search results.",
     "checkedUrls": [
       "https://www.umflint.edu/cit/"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   }
 ]
