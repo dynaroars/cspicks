@@ -23851,6 +23851,29 @@
     "verified": true
   },
   {
+    "name": "SC",
+    "venueKeys": [
+      "sc"
+    ],
+    "year": 2026,
+    "description": "International Conference for High Performance Computing, Networking, Storage, and Analysis",
+    "link": "https://sc26.supercomputing.org/",
+    "seriesLink": "https://supercomputing.org/",
+    "date": "November 15–20, 2026",
+    "place": "Chicago, IL, USA (McCormick Place)",
+    "abstractDeadline": "2026-04-01",
+    "deadline": "2026-04-08",
+    "rebuttalDate": "2026-06-08–2026-06-11",
+    "notificationDate": "2026-07-01",
+    "note": null,
+    "generalChair": "Kevin Hayden",
+    "programChair": "Sally Ellingson, Verónica G. Melesse Vergara",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true
+  },
+  {
     "name": "SIGCOMM",
     "venueKeys": [
       "sigcomm"
