@@ -382,121 +382,117 @@
       "proposals": []
     },
     "EuroSys": {
-      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
       "outcome": "incomplete",
-      "summary": "EuroSys 2027 (Rabat, Apr 19-23 2027; fall cycle abstract Sep 17 / paper Sep 24 2026) matches the official site. EuroSys 2028 not announced anywhere on the official site; left unchanged.",
+      "summary": "EuroSys 2027 (Rabat, Apr 19-23 2027) dates, place, deadlines and PCs match the official site; added author-response dates from the CFP. EuroSys 2028 not announced.",
       "checkedUrls": [
-        "https://2027.eurosys.org/"
-      ],
-      "deferredUntil": null,
-      "proposals": []
-    },
-    "FAST": {
-      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
-      "outcome": "complete",
-      "summary": "FAST 2027 matches the official CFP. FAST 2026 cycle 1 had cycle 2 notification date copied in and missing author response; fixed from the FAST 26 CFP; date format normalized. FAST 2028 has no official dates/deadlines yet.",
-      "checkedUrls": [
-        "https://www.usenix.org/conference/fast27/call-for-papers",
-        "https://www.usenix.org/conference/fast26/call-for-papers"
+        "https://2027.eurosys.org/",
+        "https://2027.eurosys.org/cfp.html"
       ],
       "deferredUntil": null,
       "proposals": [
         {
           "action": "update",
-          "year": 2026,
+          "year": 2027,
           "sources": [
             {
+              "field": "rebuttalDate",
+              "url": "https://2027.eurosys.org/cfp.html",
+              "evidence": "Author responses due Jul 31, 2026 (spring) and Jan 8, 2027 (fall)."
+            },
+            {
               "field": "notificationDate",
-              "url": "https://www.usenix.org/conference/fast26/call-for-papers",
-              "evidence": "Spring cycle: author response May 20-22 2025, notification June 5 2025; fall cycle: response Nov 18-20 2025, notification Dec 8 2025."
+              "url": "https://2027.eurosys.org/cfp.html",
+              "evidence": "Notification Aug 21, 2026 and Jan 29, 2027 (matches record)."
             }
           ]
         }
       ]
     },
-    "ICML": {
-      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+    "FAST": {
+      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
       "outcome": "incomplete",
-      "summary": "ICML Future Meetings page lists only 2027: South America and 2028: Eastern United States; no dates, city, or deadlines announced. Existing records consistent; unchanged.",
+      "summary": "FAST 2027 record matches the official CFP for both cycles (dates, place, deadlines, response windows, notifications, PCs). FAST 2028 has no announced deadlines.",
       "checkedUrls": [
-        "https://icml.cc/",
+        "https://www.usenix.org/conference/fast27/call-for-papers"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "ICML": {
+      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
+      "outcome": "incomplete",
+      "summary": "icml.cc FutureMeetings lists 2027 in South America and 2028 in Eastern United States only; no city, dates, or deadlines announced. No change.",
+      "checkedUrls": [
         "https://icml.cc/Conferences/FutureMeetings"
       ],
       "deferredUntil": null,
       "proposals": []
     },
     "IJCAI": {
-      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
-      "outcome": "incomplete",
-      "summary": "IJCAI-2027 (Kyoto Aug 7-13; Hengqin Aug 15-17) matches the official Future Conferences page. Page gives no 2027 deadlines/chairs and nothing for 2028; unchanged.",
+      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
+      "outcome": "complete",
+      "summary": "IJCAI 2027 record had 2026-era dates; corrected to the official 2027 site: abstract Jan 4, paper Jan 11, notification Apr 21 2027. Removed unsupported rebuttal date (2027-04-07 was the 2026 value); chairs not verified.",
       "checkedUrls": [
-        "https://www.ijcai.org/"
+        "https://2027.ijcai.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "abstractDeadline",
+              "url": "https://2027.ijcai.org/",
+              "evidence": "Abstract submission January 4, 2027 (23:59 AoE)."
+            },
+            {
+              "field": "deadline",
+              "url": "https://2027.ijcai.org/",
+              "evidence": "Full paper submission January 11, 2027."
+            },
+            {
+              "field": "notificationDate",
+              "url": "https://2027.ijcai.org/",
+              "evidence": "Paper notification April 21, 2027."
+            },
+            {
+              "field": "link",
+              "url": "https://2027.ijcai.org/",
+              "evidence": "Official 2027 edition site."
+            }
+          ]
+        }
+      ]
+    },
+    "ISSTA": {
+      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
+      "outcome": "incomplete",
+      "summary": "ISSTA 2027 (Singapore, Sep 7-10 2027) dates, place and research-track deadlines match the official page; chairs not shown in fetched content. ISSTA 2028 not announced.",
+      "checkedUrls": [
+        "https://conf.researchr.org/home/issta-2027"
       ],
       "deferredUntil": null,
       "proposals": []
     },
-    "ISSTA": {
-      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
-      "outcome": "complete",
-      "summary": "ISSTA 2027 official dates page: Singapore, Sep 7-10 2027; response Mar 22-25; initial notification Apr 20. Record had date copied as 2027-10-03 and wrong response/notification; corrected. ISSTA 2028 not announced on the official site.",
-      "checkedUrls": [
-        "https://conf.researchr.org/home/issta-2027",
-        "https://conf.researchr.org/dates/issta-2027"
-      ],
-      "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://conf.researchr.org/dates/issta-2027",
-              "evidence": "ISSTA 2027 held September 7-10, 2027 in Singapore."
-            },
-            {
-              "field": "rebuttalDate",
-              "url": "https://conf.researchr.org/dates/issta-2027",
-              "evidence": "Author response period March 22-25, 2027."
-            },
-            {
-              "field": "notificationDate",
-              "url": "https://conf.researchr.org/dates/issta-2027",
-              "evidence": "Initial notification April 20, 2027."
-            }
-          ]
-        }
-      ]
-    },
     "NeurIPS": {
-      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
       "outcome": "incomplete",
-      "summary": "Official Future Meetings page says 2027: Europe, 2028: Western United States, with no dates or city. Removed unsupported 2027 date range; kept estimated deadlines flagged estimated.",
+      "summary": "neurips.cc FutureMeetings lists 2027 in Europe and 2028 in Western United States only; no city, dates, or deadlines. No change.",
       "checkedUrls": [
         "https://neurips.cc/Conferences/FutureMeetings"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://neurips.cc/Conferences/FutureMeetings",
-              "evidence": "Only the continent (Europe) is stated for 2027; no dates."
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "SIGMOD": {
-      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
       "outcome": "incomplete",
-      "summary": "SIGMOD/PODS 2027 (June 13-19 2027, Huntington Beach, CA) matches the official site. No 2028 information published; cycle deadlines not re-verifiable from the home page, unchanged.",
+      "summary": "SIGMOD 2027 dates and place (Jun 13-19, Huntington Beach) confirmed; the Important Dates page was not read, so cycle deadlines are unchanged and unverified this run. SIGMOD 2028 not announced.",
       "checkedUrls": [
-        "https://2027.sigmod.org/",
-        "https://www.sigmod.org/"
+        "https://sigmod.org/",
+        "https://2027.sigmod.org/"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -546,28 +542,15 @@
       "proposals": []
     },
     "OOPSLA": {
-      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
-      "outcome": "incomplete",
-      "summary": "SPLASH 2027 site: Prague Oct 10-15 2027; Round 1 submission Oct 14 2026, author response Dec 1-5 2026, initial notification Dec 18 2026 (final notification after revision Feb 12 2027); Round 2 submission Apr 7 2027. Fixed round 1 response/notification; nulled round 2 response/notification which the site does not state. OOPSLA 2026 pages (researchr/splashcon) returned 404, so the 2026 \"notification precedes rebuttal\" issue is unverified.",
+      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
+      "outcome": "not_found",
+      "summary": "splashcon.org/2027 and 2026.splashcon.org OOPSLA track pages returned 404, so no fact could be verified. Round 1 2026 rebuttalDate (2026-05-18) precedes nothing sensible vs notification 2025-12-17 and looks copied from round 2; left for a later run.",
       "checkedUrls": [
-        "https://2027.splashcon.org/",
         "https://splashcon.org/2027",
         "https://2026.splashcon.org/track/splash-2026-oopsla"
       ],
-      "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "notificationDate",
-              "url": "https://2027.splashcon.org/",
-              "evidence": "Round 1 notification Fri 18 Dec 2026 (final notification after revision Fri 12 Feb 2027); author response Dec 1-5, 2026."
-            }
-          ]
-        }
-      ]
+      "deferredUntil": "2026-10-29T20:16:09.646Z",
+      "proposals": []
     },
     "USENIX Security": {
       "lastCheckedAt": "2026-10-06T20:16:29.176Z",
@@ -586,6 +569,65 @@
               "field": "rebuttalDate",
               "url": "https://www.usenix.org/conference/usenixsecurity27/call-for-papers",
               "evidence": "Cycle 1 rebuttal Nov 5-12, 2026; cycle 2 rebuttal Apr 8-15, 2027."
+            }
+          ]
+        }
+      ]
+    },
+    "ASE": {
+      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
+      "outcome": "not_found",
+      "summary": "ase-conferences.org and the ASE 2026 site list nothing about ASE 2027 (dates, place, deadlines). No change.",
+      "checkedUrls": [
+        "https://www.ase-conferences.org/",
+        "https://conf.researchr.org/home/ase-2026"
+      ],
+      "deferredUntil": "2026-10-29T20:16:09.646Z",
+      "proposals": []
+    },
+    "ICWSM": {
+      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
+      "outcome": "not_found",
+      "summary": "icwsm.org/2027 confirms Edinburgh, Scotland but states no dates or deadlines on the pages read (\"More information coming soon\"). No change.",
+      "checkedUrls": [
+        "https://www.icwsm.org/2027/",
+        "https://www.icwsm.org/2027/schedule/"
+      ],
+      "deferredUntil": "2026-10-29T20:16:09.646Z",
+      "proposals": []
+    },
+    "MICRO": {
+      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
+      "outcome": "not_found",
+      "summary": "microarch.org shows MICRO 2026 (Athens, Oct 31-Nov 4 2026) but nothing on MICRO 2027. No change.",
+      "checkedUrls": [
+        "https://www.microarch.org/"
+      ],
+      "deferredUntil": "2026-10-29T20:16:09.646Z",
+      "proposals": []
+    },
+    "SenSys": {
+      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
+      "outcome": "complete",
+      "summary": "SenSys 2027 official site: May 17-20 2027, Boulder CO; round 2 abstract Oct 29 / paper Nov 5 2026, notification Jan 28 2027 (matched record). Set date and place; marked verified. Chairs not on page read.",
+      "checkedUrls": [
+        "https://sensys.acm.org/2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "date",
+              "url": "https://sensys.acm.org/2027/",
+              "evidence": "May 17-20, 2027"
+            },
+            {
+              "field": "place",
+              "url": "https://sensys.acm.org/2027/",
+              "evidence": "Boulder, CO, USA"
             }
           ]
         }
