@@ -449,6 +449,38 @@
     "verified": true
   },
   {
+    "id": "kennesaw-chair-cs-2026",
+    "school": "Kennesaw State University",
+    "department": "College of Computing and Software Engineering",
+    "title": "Chair of the Department of Computer Science",
+    "track": "leadership",
+    "level": "full",
+    "areas": [],
+    "state": "GA",
+    "city": "Marietta",
+    "url": "https://careers.hprod.onehcm.usg.edu/psc/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=301839&PostingSeq=1",
+    "summary": "Department chair search for the Department of Computer Science.",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "kennesaw-open-rank-prof-data-science-2026",
+    "school": "Kennesaw State University",
+    "department": "College of Computing and Software Engineering",
+    "title": "Open Rank Professor of Data Science and Analytics",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [],
+    "state": "GA",
+    "city": "Kennesaw",
+    "url": "https://careers.hprod.onehcm.usg.edu/psc/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=300372&PostingSeq=1",
+    "summary": "Open-rank faculty position in data science and analytics.",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "montana-asst-prof-cs-2026",
     "school": "Montana State University",
     "department": "Gianforte School of Computing",
@@ -1451,6 +1483,29 @@
     "verified": true
   },
   {
+    "id": "uh-asst-prof-pl-compilers-systems-2026",
+    "school": "University of Houston",
+    "department": "Department of Computer Science",
+    "title": "Assistant Professor - Programming Languages, Compilers, and Computer Systems",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "plan",
+      "ops",
+      "arch",
+      "hpc"
+    ],
+    "state": "TX",
+    "city": "Houston",
+    "rolling": true,
+    "startDate": "2027-09-01",
+    "url": "https://careers.uh.edu/jobs/assistant-professor-programming-languages-compilers-and-computer-systems-houston-texas-united-states",
+    "summary": "Tenure-track position in programming languages, compilers, operating systems, computer architecture, and high-performance computing; review continues until filled.",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "uidaho-asst-prof-cs-2026",
     "school": "University of Idaho",
     "department": "Computer Science, College of Engineering",
@@ -1798,6 +1853,24 @@
     "source": "crawl",
     "deadline": "2026-11-15",
     "postedDate": "2026-09-21",
+    "verified": true
+  },
+  {
+    "id": "vcu-postdoc-ai-cybersecurity-2026",
+    "school": "Virginia Commonwealth University",
+    "department": "Department of Electrical and Computer Engineering",
+    "title": "Postdoctoral Research Associate - AI for Cybersecurity",
+    "track": "postdoc",
+    "areas": [
+      "sec",
+      "ai"
+    ],
+    "state": "VA",
+    "city": "Richmond",
+    "url": "https://vcujobs.com/jobs/postdoctoral-research-associate-ai-for-cybersecurity-vcu-main-campus-virginia-united-states",
+    "summary": "Postdoctoral position in the College of Engineering working on AI for cybersecurity.",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
     "verified": true
   },
   {

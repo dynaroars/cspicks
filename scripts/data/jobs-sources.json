@@ -787,17 +787,17 @@
     "school": "Columbia University",
     "homepage": "https://www.cs.columbia.edu/",
     "facultyCount": 73,
-    "jobsUrl": null,
+    "jobsUrl": "https://www.cs.columbia.edu/open-positions/",
     "state": "NY",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "blocked",
-    "summary": "Engineering faculty-jobs page returned 403 and department pages 404; search showed only a junior-faculty ad with July 2026 start and Dec 2025 review date, which appears to be a past cycle.",
+    "lastCheckedAt": "2026-10-08T20:00:00Z",
+    "outcome": "complete",
+    "summary": "Department open-positions page links Interfolio 176021, which describes a July 1, 2026 start (last cycle); no current posting.",
     "checkedUrls": [
       "https://www.cs.columbia.edu/about/employment/",
       "https://www.cs.columbia.edu/about/open-positions/",
       "https://engineering.columbia.edu/faculty-job-opportunities"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   },
   {
     "school": "University of South Florida",
@@ -1485,9 +1485,9 @@
     "facultyCount": 40,
     "jobsUrl": "https://careers.uh.edu/jobs/search/uh-central-faculty",
     "state": "TX",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T20:00:00Z",
     "outcome": "incomplete",
-    "summary": "Search leads suggest a multimodal AI/NLP tenure-track role and a CS chair search, but the official posting pages could not be fetched (empty/403), so nothing was verified or added.",
+    "summary": "University board lists a CS tenure-track posting (recorded); other CS-related postings were not confirmed.",
     "checkedUrls": [
       "https://www2.cs.uh.edu",
       "https://careers.uh.edu/jobs/assistant-or-associate-professor-multimodal-artificial-intelligence-ai-and-natural-language-processing-nlp-houston-texas-united-states",
@@ -2276,11 +2276,11 @@
     "school": "Virginia Commonwealth University",
     "homepage": "https://egr.vcu.edu/departments/computer-science/",
     "facultyCount": 21,
-    "jobsUrl": "https://egr.vcu.edu/careers/",
+    "jobsUrl": "https://vcujobs.com/jobs/search",
     "state": "VA",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T20:00:00Z",
     "outcome": "incomplete",
-    "summary": "Page only links to vcujobs.com, which returned no readable content.",
+    "summary": "University board lists an AI-for-cybersecurity postdoc in ECE (recorded); no CS faculty posting found.",
     "checkedUrls": [
       "https://egr.vcu.edu/careers/",
       "https://vcujobs.com/jobs/search?query=computer+science"
@@ -2974,9 +2974,9 @@
     "facultyCount": 0,
     "jobsUrl": "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
     "state": "GA",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T20:00:00Z",
     "outcome": "incomplete",
-    "summary": "College jobs page lists a CS chair, CS postdoc, and data science lecturer/professor openings, but the USG PeopleSoft posting pages require cookies and could not be read, so no details could be verified.",
+    "summary": "CCSE job page links PeopleSoft postings; the chair and open-rank data science professor are recorded, the other four postings did not render.",
     "checkedUrls": [
       "https://ccse.kennesaw.edu/",
       "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
