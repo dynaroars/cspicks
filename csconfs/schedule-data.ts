@@ -74,6 +74,20 @@ export function conferenceAreas(conf: ConferenceRecord) {
   return [...new Set(conf.venueKeys.map(key => map[key]).filter((area): area is string => Boolean(area)))];
 }
 
+export interface ConferenceTag { label: string; kind: 'csrankings' | 'core-astar' | 'core-a'; title: string }
+
+// Ranking-membership badges: CSRankings (default or next-tier) and CORE A*/A.
+export function conferenceTags(conf: ConferenceRecord): ConferenceTag[] {
+  if (conf.other) return [];
+  const tags: ConferenceTag[] = [];
+  const has = (set: ConferenceSetId) => conf.venueKeys.some(area => publicationMatchesConferenceSet({ area }, set));
+  if (has('csrankings-default')) tags.push({ label: 'CSRankings', kind: 'csrankings', title: 'Counted in the default CSRankings ranking' });
+  else if (has('csrankings')) tags.push({ label: 'CSRankings (next tier)', kind: 'csrankings', title: 'Tracked by CSRankings as a next-tier venue; not counted in the default ranking' });
+  if (has('core')) tags.push({ label: 'CORE A*', kind: 'core-astar', title: 'Rated A* in the CORE conference ranking' });
+  else if (has('core-a-only')) tags.push({ label: 'CORE A', kind: 'core-a', title: 'Rated A in the CORE conference ranking' });
+  return tags;
+}
+
 // Curated "other venues" carry no CSRankings/CORE key, so only the unrestricted
 // All (Union) set shows them; every ranking-derived set ignores them.
 export function matchesConferenceSet(conf: ConferenceRecord, confSet: ConferenceSetId) {

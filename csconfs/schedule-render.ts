@@ -1,5 +1,5 @@
 import { countryFlag, escapeHtml, safeExternalUrl } from '../src/shared.js';
-import { conferenceAreas, deadlineStatus, formatCalendarDate } from './schedule-data.js';
+import { conferenceAreas, conferenceTags, deadlineStatus, formatCalendarDate } from './schedule-data.js';
 import { areaLabels } from '../src/shared.js';
 import { parsePlace } from './place.js';
 import { favoriteToggleButton } from '../src/favorites.js';
@@ -35,6 +35,7 @@ export function renderScheduleCard(group: ConferenceGroup, now = Date.now(), isF
   const favoriteId = `${main.name} ${main.year}`;
   const href = safeExternalUrl(main.link || main.seriesLink);
   const areas = conferenceAreas(main).map(area => areaLabels[area] || area.toUpperCase());
+  const tags = conferenceTags(main);
   const multiplePeople = (value: string) => /,|&|\band\b/i.test(value);
   const place = parsePlace(main.place);
   const extras = [
@@ -73,6 +74,7 @@ export function renderScheduleCard(group: ConferenceGroup, now = Date.now(), isF
         ${main.verified ? '<span class="schedule-verified" role="img" aria-label="Information reviewed" title="Information reviewed from available sources; not an endorsement or guarantee">✓</span>' : ''}
         ${favoriteToggleButton(favoriteId, isFavorite(favoriteId))}
       </div>
+      ${tags.length ? `<p class="schedule-tags">${tags.map(tag => `<span class="schedule-tag schedule-tag-${tag.kind}" title="${escapeHtml(tag.title)}">${escapeHtml(tag.label)}</span>`).join('')}</p>` : ''}
       ${main.description ? `<p class="schedule-description">${escapeHtml(main.description)}</p>` : ''}
       ${areas.length ? `<p class="schedule-areas">${areas.map(area => `<span>${escapeHtml(area)}</span>`).join('')}</p>` : ''}
       ${extras.map(line => `<p class="schedule-extra">${escapeHtml(line)}</p>`).join('')}

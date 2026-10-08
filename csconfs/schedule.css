@@ -23,6 +23,16 @@
   .schedule-countdown.is-urgent { color: #fca5a5; }
 }
 .schedule-description { margin: .45rem 0 .65rem; color: var(--text-secondary); }
+.schedule-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin: .4rem 0 0; }
+.schedule-tag { padding: .12rem .45rem; border-radius: 4px; font-size: .68rem; font-weight: 700; }
+.schedule-tag-csrankings { color: #17653a; background: #dff7e8; }
+.schedule-tag-core-astar { color: #8a1c4a; background: #ffe0ee; }
+.schedule-tag-core-a { color: #3b4fb8; background: #e4e8ff; }
+@media (prefers-color-scheme: dark) {
+  .schedule-tag-csrankings { color: #86e3ad; background: #173e29; }
+  .schedule-tag-core-astar { color: #ffb3d4; background: #4a1530; }
+  .schedule-tag-core-a { color: #b8c4ff; background: #25295c; }
+}
 .schedule-areas { display: flex; flex-wrap: wrap; gap: .35rem; margin: .5rem 0; }
 .schedule-areas span { border: 1px solid var(--border-color); background: var(--bg-secondary); border-radius: 999px; padding: .2rem .5rem; color: var(--text-secondary); font-size: .74rem; }
 .schedule-extra { margin: .28rem 0; color: var(--text-secondary); font-size: .84rem; }
