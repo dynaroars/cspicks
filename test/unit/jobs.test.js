@@ -155,3 +155,19 @@ test('shipped jobs dataset is valid, unique, and uses CSRankings school names', 
     entry.areas.forEach(area => assert.ok(area, `${entry.id}: empty area`));
   });
 });
+
+test('render step keeps hiring links and drops student-career boilerplate', async () => {
+  const { pickHiringLinks, condenseText } = await import('../../scripts/jobs-render.mjs');
+  const links = pickHiringLinks([
+    ['Faculty Positions', 'https://cs.example.edu/positions'],
+    ['Faculty Positions', 'https://cs.example.edu/positions'],
+    ['Career Services', 'https://cs.example.edu/career'],
+    ['Assistant Professor, Security', 'https://apply.interfolio.com/1'],
+    ['Employment', 'mailto:hr@example.edu'],
+    ['News: we are hiring a dean', 'https://cs.example.edu/news/1'],
+    ['Equal Employment Opportunity', 'https://example.edu/eeo']
+  ]);
+  assert.deepEqual(links.map(([text]) => text), ['Faculty Positions', 'Assistant Professor, Security']);
+  assert.equal(condenseText('a\n\n\n\nb   \nc', 100), 'a\n\nb\nc');
+  assert.equal(condenseText('x'.repeat(50), 10).length, 10);
+});

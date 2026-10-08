@@ -19,6 +19,7 @@
     "sync:nsf:names": "node scripts/sync-nsf-roster-names.mjs",
     "maintain:csconfs": "node scripts/csconfs-maintain.mjs",
     "maintain:jobs": "node scripts/jobs-maintain.mjs",
+    "render:jobs": "node scripts/jobs-render.mjs",
     "compact:history": "node scripts/compact-openalex-history.mjs",
     "sync:nsf:rebuild": "node scripts/sync-nsf-awards.mjs --all-us --cache-only",
     "og:image": "node scripts/generate-og-image.mjs",
