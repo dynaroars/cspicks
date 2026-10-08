@@ -87,6 +87,7 @@ export function deadlineLabel(job: Job, now = Date.now()) {
   const days = Math.ceil((deadline - now) / DAY);
   const when = formatDay(job.deadline);
   const prefix = job.rolling ? 'Priority date ' : '';
+  if (job.rolling && deadline < now) return { text: `Rolling review · priority date ${when} passed`, className: '' };
   if (days <= 0) return { text: `${prefix}${when} · closes today (AoE)`, className: 'is-urgent' };
   const left = `${days} day${days === 1 ? '' : 's'} left`;
   return { text: `${prefix}${when} · ${left}`, className: days <= 7 ? 'is-urgent' : days <= 30 ? 'is-soon' : '' };

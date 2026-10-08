@@ -13,7 +13,10 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/194202",
     "summary": "Listed on the Fulton Schools hiring page; posting detail page could not be rendered, so other fields are unknown.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2026-10-29",
+    "postedDate": "2026-09-29",
+    "verified": true
   },
   {
     "id": "asu-prof-ai-real-world-2026",
@@ -29,7 +32,10 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/194258",
     "summary": "Listed on the Fulton Schools hiring page; posting detail page could not be rendered, so other fields are unknown.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2026-10-29",
+    "postedDate": "2026-09-29",
+    "verified": true
   },
   {
     "id": "asu-prof-quantum-computing-2026",
@@ -45,7 +51,10 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/194270",
     "summary": "Listed on the Fulton Schools hiring page; posting detail page could not be rendered, so other fields are unknown.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2026-10-29",
+    "postedDate": "2026-09-29",
+    "verified": true
   },
   {
     "id": "binghamton-asst-assoc-strive-ai-2026",
@@ -83,7 +92,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://www.bu.edu/cds-faculty/culture-community/join-us/faculty-positions/aise/",
     "summary": "Tenure-track hire in data science and AI for science, including computational biology and physical and earth sciences; rolling review through Apr 30, 2027.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "bu-cds-asst-prof-hcai-2026",
@@ -104,7 +114,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://www.bu.edu/cds-faculty/culture-community/join-us/faculty-positions/hcai/",
     "summary": "Tenure-track hire studying human and societal dimensions of computing, data science and AI; priority to applications by Oct 31, 2026, review through Apr 30, 2027.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "bu-cds-chair-ai-2026",
@@ -125,7 +136,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://www.bu.edu/cds-faculty/culture-community/join-us/faculty-positions/ai-chair/",
     "summary": "Tenured endowed chair search in AI spanning machine learning, NLP and LLMs, scientific ML, and sociotechnical systems.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "bu-cds-teaching-stream-2026",
@@ -145,7 +157,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://www.bu.edu/cds-faculty/culture-community/join-us/faculty-positions/teaching/",
     "summary": "Teaching-stream faculty for foundational and elective computing and data science courses; rolling review through Apr 30, 2027.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "brown-asst-prof-compbio-2026",
@@ -163,7 +176,10 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/189906",
     "summary": "Assistant professor in computational approaches to biological questions, with priority on RNA biology. Complete applications encouraged by October 15; considered until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-08-01",
+    "verified": true,
+    "deadline": "2026-10-15"
   },
   {
     "id": "brown-prof-practice-ai-2026",
@@ -180,7 +196,10 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/192839",
     "summary": "Two teaching-focused positions (one junior, one senior) teaching foundational and advanced AI courses for graduate programs. Full consideration for applications submitted by November 1; later applications may be considered until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2026-11-01",
+    "postedDate": "2026-09-21",
+    "verified": true
   },
   {
     "id": "caltech-cdsf-postdoc-2026",
@@ -192,12 +211,13 @@
     "state": "CA",
     "city": "Pasadena",
     "deadline": "2026-12-01",
-    "rolling": false,
+    "rolling": true,
     "reviewBegins": "2026-11-15",
     "lastSeenAt": "2026-10-08",
     "url": "https://www.cms.caltech.edu/about/positions/cdsf",
     "summary": "Postdoctoral fellowship in computing and data science with societal benefit, for positions beginning Fall 2027.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "cmu-csd-faculty-systems-2026",
@@ -213,11 +233,14 @@
     ],
     "state": "PA",
     "city": "Pittsburgh",
-    "rolling": true,
+    "rolling": false,
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/189576",
     "summary": "The department lists open tenure-track faculty hiring with an emphasis on Systems this year, plus a teaching-track faculty search for core undergraduate and master's courses. No deadline is stated on the page.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2026-12-16",
+    "postedDate": "2026-08-10",
+    "verified": true
   },
   {
     "id": "cornell-lecturer-cornell-tech-2026",
@@ -235,7 +258,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://bowers.cornell.edu/careers",
     "summary": "Non-tenure-track teaching role at Cornell Tech teaching large master's courses in AI/ML, CS foundations, data science, or urban computing.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "fiu-open-rank-prof-2026",
@@ -255,7 +279,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://www.cis.fiu.edu/about/faculty-positions/#536305",
     "summary": "Open-rank search in AI, cybersecurity, health/biomedical informatics, robotics, and systems, plus cluster hires on risk modeling and coastal resilience. Applications accepted until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "fiu-teaching-prof-2026",
@@ -269,7 +294,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://www.cis.fiu.edu/about/faculty-positions/#536263",
     "summary": "Teaching-focused role covering courses such as secure programming, programming languages, mobile apps, cloud DevOps and data science. Applications accepted until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "georgetown-bertrand-chair-ai-2026",
@@ -287,7 +313,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://cs.georgetown.edu/position/bertrand-chair-in-artificial-intelligence/",
     "summary": "Endowed chair seeking a senior AI researcher to do high-impact research on AI and its societal effects and teach at all levels.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "harvard-postdoc-ai-for-society-2026",
@@ -303,7 +330,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://academicpositions.harvard.edu/postings/16034",
     "summary": "Postdoc in the Teamcore Group on AI for societal benefit such as public health, conservation, and public safety. Applications reviewed on a rolling basis.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "harvard-postdoc-embodied-minds-2026",
@@ -319,7 +347,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://academicpositions.harvard.edu/postings/16446",
     "summary": "Postdoc developing generative AI methods and models for intelligent agents, including applications to scientific settings.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "harvard-postdoc-rl-foundation-models-2026",
@@ -336,7 +365,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://academicpositions.harvard.edu/postings/15600",
     "summary": "Postdoc working on large-scale reinforcement learning for post-training of foundation models. Start dates are flexible.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "harvard-postdoc-visual-computing-2026",
@@ -354,7 +384,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://academicpositions.harvard.edu/postings/15475",
     "summary": "One-year postdoc (second year possible) in graphics, visualization, and computer vision, available immediately.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "harvard-tt-prof-cs-ai-2026",
@@ -373,7 +404,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://academicpositions.harvard.edu/postings/16840",
     "summary": "Tenure-track CS faculty search focused on AI and bridging AI with other areas of computer science. Review begins November 15, 2026 and continues until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "jhu-tenure-track-cs-2026",
@@ -394,73 +426,9 @@
     "url": "https://apply.interfolio.com/194231",
     "summary": "Multiple tracks at all ranks; all areas of CS welcome, with focus on AI systems, AI safety and security, reasoning and alignment, and AI ethics and policy. Full consideration by Dec 1, 2026.",
     "source": "crawl",
-    "anyArea": true
-  },
-  {
-    "id": "lsu-asst-prof-ai-2026",
-    "school": "Louisiana State University",
-    "department": "Division of Computer Science and Engineering",
-    "title": "Assistant Professor (Artificial Intelligence)",
-    "track": "tenure-track",
-    "level": "assistant",
-    "areas": [
-      "ai"
-    ],
-    "state": "LA",
-    "city": "Baton Rouge",
-    "rolling": false,
-    "lastSeenAt": "2026-10-08",
-    "url": "https://lsu.wd1.myworkdayjobs.com/en-US/LSU/job/3325-Patrick-F-Taylor-Hall/Assistant-Professor--Artificial-Intelligence-_R00098730",
-    "source": "crawl"
-  },
-  {
-    "id": "lsu-asst-prof-cybersecurity-2026",
-    "school": "Louisiana State University",
-    "department": "Division of Computer Science and Engineering",
-    "title": "Assistant Professor (Cybersecurity)",
-    "track": "tenure-track",
-    "level": "assistant",
-    "areas": [
-      "sec"
-    ],
-    "state": "LA",
-    "city": "Baton Rouge",
-    "rolling": false,
-    "lastSeenAt": "2026-10-08",
-    "url": "https://lsu.wd1.myworkdayjobs.com/en-US/LSU/job/3325-Patrick-F-Taylor-Hall/Assistant-Professor--Cybersecurity-_R00098732",
-    "source": "crawl"
-  },
-  {
-    "id": "lsu-asst-prof-swe-systems-2026",
-    "school": "Louisiana State University",
-    "department": "Division of Computer Science and Engineering",
-    "title": "Assistant Professor (Software Engineering & Systems)",
-    "track": "tenure-track",
-    "level": "assistant",
-    "areas": [
-      "soft",
-      "ops"
-    ],
-    "state": "LA",
-    "city": "Baton Rouge",
-    "rolling": false,
-    "lastSeenAt": "2026-10-08",
-    "url": "https://lsu.wd1.myworkdayjobs.com/en-US/LSU/job/3325-Patrick-F-Taylor-Hall/Assistant-Professor--Software-Engineering---Systems-_R00098695",
-    "source": "crawl"
-  },
-  {
-    "id": "lsu-instructor-pir-2026",
-    "school": "Louisiana State University",
-    "department": "Division of Computer Science and Engineering",
-    "title": "Instructor or Professional In Residence (multiple positions)",
-    "track": "teaching",
-    "areas": [],
-    "state": "LA",
-    "city": "Baton Rouge",
-    "rolling": false,
-    "lastSeenAt": "2026-10-08",
-    "url": "https://lsu.wd1.myworkdayjobs.com/en-US/LSU/job/3325-Patrick-F-Taylor-Hall/Instructor-or-Professional-In-Residence--Multiple-Positions-Available-_R00100501",
-    "source": "crawl"
+    "anyArea": true,
+    "postedDate": "2026-09-26",
+    "verified": true
   },
   {
     "id": "montana-asst-prof-cs-2026",
@@ -481,7 +449,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://jobs.montana.edu/postings/52706",
     "summary": "Two tenure-track positions; preferred expertise in AI, cybersecurity, data science, ML, quantum, and/or systems, but all areas welcome. Applications accepted until an adequate pool is established.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "nps-asst-assoc-prof-cs-2026",
@@ -539,22 +508,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://northeastern.wd1.myworkdayjobs.com/careers/job/Boston-MA-Main-Campus/Part-Time-Lecturer---MS-in-Cybersecurity--Khoury-College-of-Computer-Sciences_R141718",
     "summary": "Part-time teaching position for the MS in Cybersecurity program, listed on the Khoury teaching-faculty careers page.",
-    "source": "crawl"
-  },
-  {
-    "id": "northeastern-lecturer-online-2026",
-    "school": "Northeastern University",
-    "department": "Khoury College of Computer Sciences",
-    "title": "Part-Time Lecturer, Online",
-    "track": "teaching",
-    "areas": [],
-    "state": "MA",
-    "city": "Boston",
-    "rolling": false,
-    "lastSeenAt": "2026-10-08",
-    "url": "https://northeastern.wd1.myworkdayjobs.com/careers/job/Boston-MA-Main-Campus/Part-Time-Lecturer-Online---Khoury-College-of-Computer-Sciences_R134811",
-    "summary": "Part-time online teaching position listed on the Khoury teaching-faculty careers page.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "northeastern-prof-physical-human-ai-2026",
@@ -573,7 +528,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://northeastern.wd1.myworkdayjobs.com/careers/job/Boston-MA-Main-Campus/Assistant-Associate-Full-Professor--Khoury-College-of-Computer-Sciences_R142434",
     "summary": "Multiple tenure-track positions for academic year 2027-28 or 2028-29 in any CS area connecting to physical AI, human-centered AI, AI and software engineering, or AI safety/security/alignment. Review begins November 15, 2026 and continues until the search is completed.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "northwestern-asst-assoc-prof-aiml-pl-2026",
@@ -597,7 +553,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://facultyrecruiting.northwestern.edu/apply/MjYzMw==",
     "summary": "Tenure-track Assistant or Associate Professor in AI/ML (all areas) and in compilers and programming languages, including intersections with HPC, architecture, and networking. Full consideration by Nov 6, 2026; later applications reviewed on a rolling basis.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "northwestern-asst-assoc-prof-quantum-2026",
@@ -618,7 +575,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://facultyrecruiting.northwestern.edu/apply/MjY0NQ==",
     "summary": "Joint CS and ECE tenure-track position in quantum computing and quantum information, spanning algorithms, systems architecture, and software. Full consideration by Dec 1, 2026; rolling afterwards.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "osu-asst-prof-ai-world-models-2026",
@@ -633,11 +591,14 @@
     ],
     "state": "OH",
     "city": "Columbus",
-    "rolling": false,
+    "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/194540",
     "summary": "AI world models, multimodal and spatiotemporal learning, and embodied or agentic AI.",
-    "source": "crawl"
+    "source": "crawl",
+    "reviewBegins": "2026-10-16",
+    "postedDate": "2026-09-28",
+    "verified": true
   },
   {
     "id": "osu-asst-prof-responsible-ai-cyber-2026",
@@ -652,11 +613,14 @@
     ],
     "state": "OH",
     "city": "Columbus",
-    "rolling": false,
+    "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/193969",
     "summary": "Cybersecurity of AI or AI for cybersecurity, and responsible AI auditing and governance.",
-    "source": "crawl"
+    "source": "crawl",
+    "reviewBegins": "2026-11-01",
+    "postedDate": "2026-09-18",
+    "verified": true
   },
   {
     "id": "osu-prof-foundational-ai-2026",
@@ -670,11 +634,14 @@
     ],
     "state": "OH",
     "city": "Columbus",
-    "rolling": false,
+    "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/193970",
     "summary": "Open-rank search on theoretical and foundational principles for next-generation AI, listed for a start as early as Fall 2027.",
-    "source": "crawl"
+    "source": "crawl",
+    "reviewBegins": "2026-11-01",
+    "postedDate": "2026-09-18",
+    "verified": true
   },
   {
     "id": "osu-timashev-prof-plse-2026",
@@ -689,11 +656,14 @@
     ],
     "state": "OH",
     "city": "Columbus",
-    "rolling": false,
+    "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/193971",
     "summary": "Endowed professorship at any rank in programming languages and software engineering, listed for a start as early as Fall 2027.",
-    "source": "crawl"
+    "source": "crawl",
+    "reviewBegins": "2026-11-01",
+    "postedDate": "2026-09-18",
+    "verified": true
   },
   {
     "id": "osu-eecs-ecampus-instructor-pool-2026",
@@ -709,7 +679,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://jobs.oregonstate.edu/postings/177641",
     "summary": "Part-time, fixed-term, non-tenure-track remote instructors for EECS E-campus courses, appointed term by term. Master's degree required, PhD preferred.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "psu-open-rank-cs-huck-2026",
@@ -731,7 +702,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://engr.psu.edu/academic-positions/details.aspx?Job_Req=REQ_0000074193",
     "summary": "Multi-year cluster hire of faculty at the intersection of computer science and the life sciences, covering AI/ML, robotics, AI security and computational biology. Successful candidates join the Huck Institutes of the Life Sciences.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "princeton-asst-prof-quantum-2026",
@@ -749,7 +721,10 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/191224",
     "summary": "Assistant professor position in quantum information theory and quantum computer science.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2027-08-17",
+    "postedDate": "2026-08-17",
+    "verified": true
   },
   {
     "id": "princeton-postdoc-all-areas-2026",
@@ -765,7 +740,10 @@
     "url": "https://apply.interfolio.com/181987",
     "summary": "Postdoctoral position open to all areas of computer science.",
     "source": "crawl",
-    "anyArea": true
+    "anyArea": true,
+    "deadline": "2027-03-01",
+    "postedDate": "2026-03-01",
+    "verified": true
   },
   {
     "id": "princeton-postdoc-cs-cogsci-2026",
@@ -800,7 +778,10 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/186904",
     "summary": "Postdoctoral position in quantum computing and reinforcement learning algorithms.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2026-11-01",
+    "postedDate": "2026-05-22",
+    "verified": true
   },
   {
     "id": "princeton-postdoc-theory-ml-2026",
@@ -818,7 +799,10 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/191810",
     "summary": "Postdoctoral position in theoretical CS and theoretical machine learning.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2026-11-15",
+    "postedDate": "2026-08-26",
+    "verified": true
   },
   {
     "id": "princeton-prof-ai-2026",
@@ -836,7 +820,9 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/193577",
     "summary": "Senior faculty position in artificial intelligence.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-09-15",
+    "verified": true
   },
   {
     "id": "princeton-prof-compbioeng-2026",
@@ -850,11 +836,14 @@
     ],
     "state": "NJ",
     "city": "Princeton",
-    "rolling": false,
+    "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/191394",
     "summary": "Faculty position in computational bioengineering at any rank.",
-    "source": "crawl"
+    "source": "crawl",
+    "reviewBegins": "2026-11-01",
+    "postedDate": "2026-08-17",
+    "verified": true
   },
   {
     "id": "sbu-ai-innovation-research-asst-prof-2026",
@@ -871,7 +860,9 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/183806",
     "summary": "Research assistant professor role in a university-wide AI research initiative.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-04-03",
+    "verified": true
   },
   {
     "id": "tamu-cse-open-rank-faculty-2026",
@@ -883,11 +874,14 @@
     "areas": [],
     "state": "TX",
     "city": "College Station",
-    "rolling": false,
+    "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/192732",
     "summary": "Department-listed open-rank tenure-track or tenured faculty search in computer science and engineering. Deadline, areas and start date are not stated on the department listing.",
-    "source": "crawl"
+    "source": "crawl",
+    "reviewBegins": "2026-12-01",
+    "postedDate": "2026-09-10",
+    "verified": true
   },
   {
     "id": "txstate-postdoc-pool-cs-2026",
@@ -917,7 +911,9 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/186087",
     "summary": "Ongoing search for part-time lecturers for in-person and online courses.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-05-07",
+    "verified": true
   },
   {
     "id": "tufts-cybersecurity-postdoc-2026",
@@ -934,7 +930,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://engineering.tufts.edu/cs/about/job-opportunities",
     "summary": "Renewable one-year appointments; preference for human factors of cybersecurity, healthcare cybersecurity, or anonymous communications.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "tufts-tiai-director-stern-prof-2026",
@@ -954,7 +951,9 @@
     "url": "https://apply.interfolio.com/193535",
     "summary": "Leads the Tufts Institute for AI; open to any area of AI, foundations to use-inspired. Full professor, exceptional associate candidates also encouraged.",
     "source": "crawl",
-    "startDate": "2027-09-01"
+    "startDate": "2027-09-01",
+    "postedDate": "2026-09-14",
+    "verified": true
   },
   {
     "id": "tulane-prof-of-practice-cs-2026",
@@ -975,7 +974,9 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://tulane-ibqejb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/2003",
     "summary": "Teaching-focused professor of practice; areas listed include PL and compilers, cybersecurity, databases, distributed systems and operating systems; review begins Jan 1, 2027.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-10-07",
+    "verified": true
   },
   {
     "id": "uncg-asst-prof-cs-2026",
@@ -996,7 +997,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://spartantalent.uncg.edu/postings/36021",
     "summary": "Tenure-track assistant professor with preference for computer systems or theoretical computer science; other CS areas considered. Best consideration by October 31, 2026, open until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "ucb-asst-prof-ai-biology-2026",
@@ -1013,13 +1015,15 @@
     "state": "CA",
     "city": "Berkeley",
     "deadline": "2026-11-09",
-    "rolling": false,
+    "rolling": true,
     "reviewBegins": "2026-11-09",
     "startDate": "2027-07-01",
     "lastSeenAt": "2026-10-08",
     "url": "https://aprecruit.berkeley.edu/JPF05560",
     "summary": "Joint EECS and Center for Computational Biology search for AI/ML methods for learning from complex biological data.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-09-25",
+    "verified": true
   },
   {
     "id": "ucb-lecturer-pool-2026",
@@ -1035,7 +1039,9 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://aprecruit.berkeley.edu/JPF04955",
     "summary": "Pool of temporary lecturers for EE and CS courses as openings arise.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2025-06-10",
+    "verified": true
   },
   {
     "id": "ucb-prof-quantum-materials-2026",
@@ -1048,12 +1054,14 @@
     "state": "CA",
     "city": "Berkeley",
     "deadline": "2026-12-07",
-    "rolling": false,
+    "rolling": true,
     "startDate": "2027-07-01",
     "lastSeenAt": "2026-10-08",
     "url": "https://aprecruit.berkeley.edu/JPF05584",
     "summary": "Joint EECS/MSE position spanning semiconductors, low-power AI hardware, photonics and quantum materials.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-09-29",
+    "verified": true
   },
   {
     "id": "uci-cs-lecturer-pool-2026",
@@ -1064,12 +1072,13 @@
     "areas": [],
     "state": "CA",
     "city": "Irvine",
-    "deadline": "2027-06-30",
     "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://recruit.ap.uci.edu/JPF10233",
     "summary": "Open pool of part-time lecturers for graduate and undergraduate CS courses; hiring not guaranteed.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-07-01",
+    "verified": true
   },
   {
     "id": "uci-cs-postdoc-pool-2026",
@@ -1080,12 +1089,13 @@
     "areas": [],
     "state": "CA",
     "city": "Irvine",
-    "deadline": "2027-06-30",
     "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://recruit.ap.uci.edu/JPF10230",
     "summary": "Open pool for future postdoc appointments funded by faculty grants; no specific openings guaranteed.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-07-01",
+    "verified": true
   },
   {
     "id": "uci-informatics-lecturer-pool-2026",
@@ -1096,12 +1106,13 @@
     "areas": [],
     "state": "CA",
     "city": "Irvine",
-    "deadline": "2027-06-30",
     "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://recruit.ap.uci.edu/JPF10366",
     "summary": "Open pool of lecturers for future Informatics teaching needs; hiring not guaranteed.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-09-22",
+    "verified": true
   },
   {
     "id": "uci-informatics-postdoc-pool-2026",
@@ -1112,12 +1123,13 @@
     "areas": [],
     "state": "CA",
     "city": "Irvine",
-    "deadline": "2027-06-30",
     "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://recruit.ap.uci.edu/JPF10364",
     "summary": "Open pool for future Informatics postdoc appointments; no specific openings guaranteed.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-09-22",
+    "verified": true
   },
   {
     "id": "uci-open-rank-ai-ml-2026",
@@ -1139,7 +1151,9 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://recruit.ap.uci.edu/JPF10341",
     "summary": "Tenure-track or tenured hire in AI and machine learning, expected at assistant rank; joins the Center for Machine Learning and Intelligent Systems.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-10-05",
+    "verified": true
   },
   {
     "id": "uci-open-rank-hci-informatics-2026",
@@ -1153,14 +1167,15 @@
     ],
     "state": "CA",
     "city": "Irvine",
-    "deadline": "2027-04-01",
     "rolling": true,
     "reviewBegins": "2026-12-05",
     "startDate": "2027-07-01",
     "lastSeenAt": "2026-10-08",
     "url": "https://recruit.ap.uci.edu/JPF10388",
     "summary": "Open-rank HCI faculty hire for candidates who build working systems and study their societal effects.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-09-02",
+    "verified": true
   },
   {
     "id": "uci-open-rank-systems-2026",
@@ -1184,7 +1199,9 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://recruit.ap.uci.edu/JPF10340",
     "summary": "Open-rank tenure-track or tenured position in computer systems, including operating systems, databases, compilers, architecture, storage and distributed systems.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-09-02",
+    "verified": true
   },
   {
     "id": "ucmerced-lecturer-cse-2026",
@@ -1195,14 +1212,14 @@
     "areas": [],
     "state": "CA",
     "city": "Merced",
-    "deadline": "2027-05-18",
     "rolling": true,
     "startDate": "2026-07-01",
     "postedDate": "2026-04-16",
     "lastSeenAt": "2026-10-08",
     "url": "https://aprecruit.ucmerced.edu/JPF02097",
     "summary": "Limited-term lecturer positions teaching undergraduate CSE courses for 2026-2027. Applications accepted until May 18, 2027; later reviews are considered if unfilled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "ucsd-adjunct-prof-cse-2026",
@@ -1214,13 +1231,13 @@
     "areas": [],
     "state": "CA",
     "city": "San Diego",
-    "deadline": "2027-07-29",
     "rolling": true,
     "postedDate": "2026-07-29",
     "lastSeenAt": "2026-10-08",
     "url": "https://apol-recruit.ucsd.edu/JPF04582",
     "summary": "Open search for non-tenure-track adjunct professors in all areas of computer science and engineering. Applications are reviewed on a rolling basis; final date is July 29, 2027.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "ucsc-cse-lecturer-pool-2026",
@@ -1239,7 +1256,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://recruit.ucsc.edu/JPF02088",
     "summary": "Ongoing pool for temporary lecturer appointments, usually one quarter at a time, teaching CSE courses; valid for appointments from fall 2026 through fall 2027. Applications after the review date are considered only if the position is unfilled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "umass-teaching-faculty-robotics-ai-2026",
@@ -1259,7 +1277,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://careers.umass.edu/jobs/teaching-faculty-lecturer-sr-lecturer-robotics-ai-amherst-massachusetts-united-states",
     "summary": "Two non-tenure-track teaching positions, one focused on robotics and one primarily on AI. Exceptional candidates in other areas of computer science and informatics may also apply.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "colorado-asst-prof-ai-2026",
@@ -1281,7 +1300,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://jobs.colorado.edu/jobs/JobDetail/Tenure-Track-Faculty-in-Artificial-Intelligence/74736",
     "summary": "Two assistant professor positions in AI, including foundations of machine learning, multimodal models, AI safety, embodied AI and reasoning. Full consideration by Nov 1, 2026; applications accepted until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "colorado-asst-prof-arch-systems-2026",
@@ -1305,7 +1325,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://jobs.colorado.edu/jobs/JobDetail/Tenure-Track-Faculty-in-Computer-Architecture-and-Systems/74811",
     "summary": "Assistant professor search in computer architecture and systems, including networking, operating systems, distributed systems, databases and mobile systems. Full consideration by Nov 15, 2026; applications accepted until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "colorado-asst-prof-quantum-2026",
@@ -1326,7 +1347,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://jobs.colorado.edu/jobs/JobDetail/Tenure-Track-Faculty-in-Quantum-Computation/74741",
     "summary": "Assistant professor search in quantum computation, including quantum algorithms, complexity, error correction, quantum optimization and quantum machine learning. Full consideration by Nov 15, 2026; applications accepted until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "ufl-prof-ai-models-jax-2026",
@@ -1346,7 +1368,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://explore.jobs.ufl.edu/en-us/job/537329/assistantassociatefull-professor-ai-models-systems-and-applications",
     "summary": "Tenure-track or tenured position at the Jacksonville campus focused on AI models and systems applied to domains such as manufacturing, healthcare, and energy. Full-consideration date of September 1, 2026 has passed but the committee continues accepting applications until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "uidaho-asst-prof-cs-2026",
@@ -1368,7 +1391,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://uidaho.peopleadmin.com/postings/52963",
     "summary": "Full-time tenure-track role in computer science, cybersecurity, or AI with a research program and graduate mentoring. Open until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "uidaho-clinical-asst-prof-cs-2026",
@@ -1390,7 +1414,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://uidaho.peopleadmin.com/postings/52958",
     "summary": "Two non-tenure-track, mostly teaching positions in computer science, cybersecurity, or AI. Open until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "uidaho-clinical-faculty-cs-cyber-2026",
@@ -1411,7 +1436,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://uidaho.peopleadmin.com/postings/52386",
     "summary": "Non-tenure-track teaching-focused position in computer science and cybersecurity courses. Listed as open until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "uidaho-postdoc-cyber-ai-2026",
@@ -1431,7 +1457,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://uidaho.peopleadmin.com/postings/51302",
     "summary": "Research position on cyber-physical systems security, critical infrastructure protection, and adversarial machine learning. Listed as open until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "uiowa-postdoc-theory-2026",
@@ -1448,7 +1475,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://jobs.uiowa.edu/postdoc/view/4675",
     "summary": "One-year postdoc (possible second year) in the theory group on sampling problems in distributed and parallel computing; no teaching duties.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "uky-asst-prof-cs-2026",
@@ -1468,23 +1496,8 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://ukjobs.uky.edu/postings/650924",
     "summary": "Tenure-track assistant professor search open to all areas of CS, with priority in AI/machine learning, AI security, and systems support for AI. Open until filled; 9-month appointment starting August 2027.",
-    "source": "crawl"
-  },
-  {
-    "id": "louisville-asst-prof-term-cse-2026",
-    "school": "University of Louisville",
-    "department": "Computer Science & Engineering",
-    "title": "Assistant Professor Term (R108898)",
-    "track": "teaching",
-    "level": "assistant",
-    "areas": [],
-    "state": "KY",
-    "city": "Louisville",
-    "rolling": false,
-    "lastSeenAt": "2026-10-08",
-    "url": "https://uofl.wd1.myworkdayjobs.com/en-US/UofLCareerSite/job/Assistant-Professor-Term_R108898",
-    "summary": "Term assistant professor posting linked from the Speed School careers page; detail page could not be rendered.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "umb-asst-prof-quantum-2026",
@@ -1497,13 +1510,14 @@
     "state": "MA",
     "city": "Boston",
     "deadline": "2026-12-01",
-    "rolling": false,
+    "rolling": true,
     "reviewBegins": "2026-12-01",
     "startDate": "2027-09-01",
     "lastSeenAt": "2026-10-08",
     "url": "https://employmentopportunities.umb.edu/en-us/job/530139/assistant-professor-quantum-information-computing",
     "summary": "Tenure-track search in quantum computing and/or quantum information; full consideration by Dec 1, 2026.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "memphis-asst-prof-cs-2026",
@@ -1527,7 +1541,9 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://ibqajb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/760/",
     "summary": "Tenure-track assistant professor open to all areas of CS, with emphasis on AI/ML, cybersecurity and quantum computing. Screening begins Nov 30, 2026 and continues until the search is concluded; Fall 2027 start.",
-    "source": "crawl"
+    "source": "crawl",
+    "postedDate": "2026-09-28",
+    "verified": true
   },
   {
     "id": "unm-asst-prof-cs-2026",
@@ -1544,11 +1560,12 @@
     "city": "Albuquerque",
     "deadline": "2026-12-05",
     "rolling": true,
-    "postedDate": "2026-10-06",
+    "postedDate": "2026-09-25",
     "lastSeenAt": "2026-10-08",
     "url": "https://unm.csod.com/ux/ats/careersite/18/home/requisition/38093",
     "summary": "Entry-level tenure-track position open to all areas of computing, with preferred expertise in quantum computing, theory and algorithms, or cybersecurity. Best-consideration date December 5, 2026; open until filled.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "utk-asst-prof-ce-2026",
@@ -1564,7 +1581,10 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/193072",
     "summary": "Listed on the EECS faculty job board for two computer engineering positions; detail page could not be rendered.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2026-11-30",
+    "postedDate": "2026-09-05",
+    "verified": true
   },
   {
     "id": "utk-asst-prof-cs-2026",
@@ -1576,11 +1596,14 @@
     "areas": [],
     "state": "TN",
     "city": "Knoxville",
-    "rolling": false,
+    "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/192692",
     "summary": "Listed on the EECS faculty job board for two computer science positions; detail page could not be rendered.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2026-10-15",
+    "postedDate": "2026-09-01",
+    "verified": true
   },
   {
     "id": "utk-dongarra-prof-hpc-2026",
@@ -1592,11 +1615,14 @@
     "areas": [],
     "state": "TN",
     "city": "Knoxville",
-    "rolling": false,
+    "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/192921",
     "summary": "Endowed associate/full professorship in high performance computing that also directs the Innovative Computing Laboratory.",
-    "source": "crawl"
+    "source": "crawl",
+    "reviewBegins": "2026-10-26",
+    "postedDate": "2026-09-03",
+    "verified": true
   },
   {
     "id": "utaustin-instructional-faculty-2026",
@@ -1624,11 +1650,15 @@
     "areas": [],
     "state": "TX",
     "city": "Austin",
-    "rolling": true,
+    "rolling": false,
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/194129",
     "summary": "Open-rank tenured/tenure-track search for the 2026-2027 recruiting season; applicants are encouraged to apply early since interviews begin in the fall.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2027-05-31",
+    "postedDate": "2026-09-22",
+    "verified": true,
+    "reviewBegins": "2026-12-01"
   },
   {
     "id": "utd-part-time-lecturer-cs-2026",
@@ -1640,12 +1670,13 @@
     "state": "TX",
     "city": "Richardson",
     "deadline": "2027-07-31",
-    "rolling": false,
+    "rolling": true,
     "startDate": "2026-08-16",
     "lastSeenAt": "2026-10-08",
     "url": "https://jobs.utdallas.edu/postings/32722",
     "summary": "Part-time teaching of undergraduate CS classes and labs; posting open through July 2027.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "uw-ai-teaching-faculty-2026",
@@ -1659,12 +1690,15 @@
     ],
     "state": "WA",
     "city": "Seattle",
-    "rolling": false,
+    "rolling": true,
     "startDate": "2027-09-16",
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/194076",
     "summary": "AI-focused teaching faculty position at the assistant or associate level, listed on the department employment page.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2026-11-15",
+    "postedDate": "2026-09-21",
+    "verified": true
   },
   {
     "id": "uw-open-rank-cse-2026",
@@ -1677,12 +1711,15 @@
     "anyArea": true,
     "state": "WA",
     "city": "Seattle",
-    "rolling": false,
+    "rolling": true,
     "startDate": "2027-09-01",
     "lastSeenAt": "2026-10-08",
     "url": "https://apply.interfolio.com/194089",
     "summary": "Open-rank tenure-track faculty position across all areas of computer science and computer engineering.",
-    "source": "crawl"
+    "source": "crawl",
+    "deadline": "2026-11-15",
+    "postedDate": "2026-09-21",
+    "verified": true
   },
   {
     "id": "vt-tenure-track-cs-2026",
@@ -1693,10 +1730,11 @@
     "areas": [],
     "state": "VA",
     "city": "Blacksburg",
-    "rolling": false,
+    "rolling": true,
     "lastSeenAt": "2026-10-08",
     "url": "https://website.cs.vt.edu/About/faculty-search/2026-tenure-track-position.html",
     "summary": "Full-time tenure-track appointment building an externally funded research program and teaching and mentoring students. Rank and areas are not stated on the department page.",
-    "source": "crawl"
+    "source": "crawl",
+    "verified": true
   }
 ]
