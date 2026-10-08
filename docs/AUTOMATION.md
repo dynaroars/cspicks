@@ -192,6 +192,7 @@ Playbook: `TASKS/audit_us_jobs.md` and MAINTENANCE.md §6.5 (schema, official-so
 Cap: 10 schools. Crawling each school's own department hiring page is the main source of `public/jobs.json`;
 `jobs-submit.html` submissions are leads the auditor verifies.
 
+0. **Browser check (every run that has schools due).** Run `npx playwright install --with-deps chromium` and then `npm run render:jobs -- https://apply.interfolio.com/194231`; the output should contain `Tenure-Track Faculty 2026-2027`. State the result in the PR description ("render step: works" or the exact error). If the install or render fails, continue with WebFetch only, and open one Issue titled `[scheduled:jobs] Render step unavailable` with the exact error (skip it if one is already open) so the owner can fix the environment.
 1. Pick the queue with `npm run maintain:jobs -- --limit 10`. It puts never-checked schools first (largest
    CSRankings faculty first), then schools due for a recheck (season-aware: more often August to February, and
    more often for schools with open postings). If `scripts/data/jobs-sources.json` is missing a US school, run
