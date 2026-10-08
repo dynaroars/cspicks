@@ -201,9 +201,9 @@
     "facultyCount": 136,
     "jobsUrl": "https://www.rit.edu/fa/careerzone/faculty",
     "state": "NY",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:51:22Z",
     "outcome": "incomplete",
-    "summary": "Department site has no hiring page; RIT career portal (Brassring) could not be read, and the only lead (AI search 9904BR) closed 2026-03-01.",
+    "summary": "Search shows an AI assistant/associate professor requisition (9904BR) for an August 2026 start (last cycle); careers.rit.edu not readable.",
     "checkedUrls": [
       "https://www.rit.edu/computing/department-computer-science",
       "https://www.rit.edu/fa/careerzone/faculty",
@@ -387,9 +387,9 @@
     "facultyCount": 103,
     "jobsUrl": "https://csc.ncsu.edu/employment/",
     "state": "NC",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:51:22Z",
     "outcome": "incomplete",
-    "summary": "Employment page lists a postdoc and a research engineer but the NCSU posting pages could not be loaded to verify details, so none were added; no faculty openings listed.",
+    "summary": "Search found only a department-head search (2025) and a mirror of CSC postings; the department employment page did not render a 2026-27 ad.",
     "checkedUrls": [
       "https://csc.ncsu.edu/",
       "https://csc.ncsu.edu/employment/",
@@ -805,9 +805,9 @@
     "facultyCount": 72,
     "jobsUrl": "https://www.usf.edu/engineering/cse/",
     "state": "FL",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:51:22Z",
     "outcome": "incomplete",
-    "summary": "Department hiring pages returned 404 and jobs.usf.edu was not reachable; third-party leads suggest open Fall 2026 searches but nothing official was verified.",
+    "summary": "Bellini College hiring pages moved (404); search mirrors show Fall 2026 starts only.",
     "checkedUrls": [
       "https://www.cse.usf.edu",
       "https://www.usf.edu/engineering/cse/",
@@ -867,9 +867,9 @@
     "facultyCount": 68,
     "jobsUrl": "https://www.clemson.edu/human-resources/careers/search-jobs/faculty-positions.html",
     "state": "SC",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:51:22Z",
     "outcome": "incomplete",
-    "summary": "Department site has no hiring page and the HR faculty listing renders dynamically; no official current posting could be seen.",
+    "summary": "Only 2025 School of Computing ads found; no 2026-27 posting yet.",
     "checkedUrls": [
       "https://www.clemson.edu/cecas/departments/computing/",
       "https://www.clemson.edu/cecas/departments/computing/about/resources.html",
@@ -1140,9 +1140,9 @@
     "facultyCount": 55,
     "jobsUrl": "https://careers.msu.edu/jobs/search",
     "state": "MI",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:51:22Z",
     "outcome": "incomplete",
-    "summary": "Department site redirects to the college page with no listings; the MSU careers board did not render, so no postings could be verified.",
+    "summary": "Only a fixed-term teaching specialist and an older joint CSE/ECE AI-hardware search with inconsistent dates; no confirmable 2026-27 tenure-track CS ad.",
     "checkedUrls": [
       "https://www.cse.msu.edu/",
       "https://engineering.msu.edu/about/departments/cse",
@@ -1157,14 +1157,14 @@
     "facultyCount": 54,
     "jobsUrl": null,
     "state": "NH",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "not_found",
-    "summary": "No current CS faculty postings found; only 2023-2024 era postings turned up and the homepage lists no employment link.",
+    "lastCheckedAt": "2026-10-08T14:51:22Z",
+    "outcome": "complete",
+    "summary": "No 2026-27 CS faculty search found; the latest CS ads were the 2024 cycle.",
     "checkedUrls": [
       "https://web.cs.dartmouth.edu/",
       "https://web.cs.dartmouth.edu/news"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   },
   {
     "school": "University of North Texas",
@@ -1220,14 +1220,14 @@
     "facultyCount": 52,
     "jobsUrl": null,
     "state": "IA",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "not_found",
-    "summary": "Department homepage has no jobs link; a department chair search page returned 404 and no current official posting was verified.",
+    "lastCheckedAt": "2026-10-08T14:51:22Z",
+    "outcome": "incomplete",
+    "summary": "A March 2026 open-rank AI search and a teaching professor ad were seen on mirrors only; jobs.iastate.edu was not readable.",
     "checkedUrls": [
       "https://www.cs.iastate.edu/",
       "https://www.cs.iastate.edu/we-are-searching-our-next-department-chair"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   },
   {
     "school": "University of Kansas",
@@ -1235,13 +1235,13 @@
     "facultyCount": 52,
     "jobsUrl": null,
     "state": "KS",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "not_found",
-    "summary": "No faculty postings on the EECS site; only a link to university-wide employment.ku.edu.",
+    "lastCheckedAt": "2026-10-08T14:51:22Z",
+    "outcome": "incomplete",
+    "summary": "Only a spring 2027 EE instructor posting; older CS notices without dates.",
     "checkedUrls": [
       "https://eecs.ku.edu/"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   },
   {
     "school": "Stevens Institute of Technology",
@@ -1249,9 +1249,9 @@
     "facultyCount": 49,
     "jobsUrl": null,
     "state": "NJ",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Department site unreachable; the 2026 tenure-track search (School of Computing) is reported closed (May 31, 2026) on a lead site.",
+    "lastCheckedAt": "2026-10-08T14:51:22Z",
+    "outcome": "complete",
+    "summary": "The 2026 School of Computing search (Stevens-CS-TT2026) closed 2026-05-31; no newer search yet.",
     "checkedUrls": [
       "https://www.cs.stevens.edu",
       "https://www.stevens.edu/school-computing",
@@ -1265,14 +1265,14 @@
     "facultyCount": 49,
     "jobsUrl": null,
     "state": "MO",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "not_found",
-    "summary": "No CSE hiring page found on the department site and no current CSE posting located via search.",
+    "lastCheckedAt": "2026-10-08T14:51:22Z",
+    "outcome": "incomplete",
+    "summary": "No dated CSE faculty search; the data-visualization listing has no date and statistics/data science searches are outside CS.",
     "checkedUrls": [
       "https://cse.washu.edu/",
       "https://cse.washu.edu/about/employment/index.html"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   },
   {
     "school": "University of Kentucky",
