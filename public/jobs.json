@@ -426,6 +426,30 @@
     "verified": true
   },
   {
+    "id": "iu-quantum-computer-science-2026",
+    "school": "Indiana University",
+    "department": "Department of Computer Science (Faculty 100)",
+    "title": "Tenured/Tenure-Track Assistant or Associate Professor in Quantum Computer Science",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "crypt",
+      "act",
+      "plan",
+      "sec"
+    ],
+    "state": "IN",
+    "city": "Bloomington",
+    "reviewBegins": "2026-11-01",
+    "rolling": true,
+    "startDate": "2027-08-01",
+    "url": "https://indiana.peopleadmin.com/postings/34402",
+    "summary": "Faculty 100 hire in the theory and systems of quantum computing: quantum security and cryptography, error correction, algorithms and complexity, and quantum programming languages and verification.",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "jhu-tenure-track-cs-2026",
     "school": "Johns Hopkins University",
     "department": "Department of Computer Science",
@@ -1826,6 +1850,36 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://jobs.utdallas.edu/postings/32722",
     "summary": "Part-time teaching of undergraduate CS classes and labs; posting open through July 2027.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "uva-open-rank-tenure-cs-2026",
+    "school": "University of Virginia",
+    "department": "Department of Computer Science",
+    "title": "Open Rank Tenure or Tenure-Track Faculty in Computer Science",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai",
+      "mlmining",
+      "ops",
+      "arch",
+      "sec",
+      "crypt",
+      "soft",
+      "plan",
+      "act",
+      "robotics",
+      "chi"
+    ],
+    "anyArea": true,
+    "state": "VA",
+    "city": "Charlottesville",
+    "postedDate": "2026-09-17",
+    "url": "https://apply.interfolio.com/190949",
+    "summary": "Multiple tenured or tenure-track positions at all ranks across computer science, with particular interest in candidates who strengthen the university AI research efforts.",
+    "lastSeenAt": "2026-10-08",
     "source": "crawl",
     "verified": true
   },

@@ -96,16 +96,16 @@
     "school": "Indiana University",
     "homepage": "https://cs.indiana.edu/",
     "facultyCount": 148,
-    "jobsUrl": null,
+    "jobsUrl": "https://indiana.peopleadmin.com/postings/search",
     "state": "IN",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "not_found",
-    "summary": "cs.indiana.edu redirects to the Luddy unit page, which lists no open positions or hiring page.",
+    "lastCheckedAt": "2026-10-08T22:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Quantum CS posting (peopleadmin 34402) recorded; a second CS/ISE AI-for-life-sciences open-rank search (review Nov 14, 2026) was seen only on a third-party mirror.",
     "checkedUrls": [
       "https://cs.indiana.edu/about/employment/index.html",
       "https://luddy.iu.edu/academics/units/computer-science.html"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   },
   {
     "school": "Univ. of Maryland - College Park",
@@ -415,15 +415,15 @@
     "school": "University of Virginia",
     "homepage": "https://engineering.virginia.edu/department/computer-science",
     "facultyCount": 99,
-    "jobsUrl": null,
+    "jobsUrl": "https://apply.interfolio.com/190949",
     "state": "VA",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "blocked",
-    "summary": "Department site returned 403; search hinted at a 2026 open-rank posting (review Nov 15, 2026) but no official page was reachable, so not added.",
+    "lastCheckedAt": "2026-10-08T22:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Department employment page is behind a Cloudflare bot check (not bypassed); the open-rank CS search was found on Interfolio 190949 and recorded.",
     "checkedUrls": [
       "https://engineering.virginia.edu/department/computer-science"
     ],
-    "deferredUntil": "2026-10-29T12:00:00Z"
+    "deferredUntil": null
   },
   {
     "school": "UNC - Charlotte",
