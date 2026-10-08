@@ -1278,6 +1278,25 @@
     "verified": true
   },
   {
+    "id": "umd-professional-track-ai-cs-education-2026",
+    "school": "Univ. of Maryland - College Park",
+    "department": "Department of Computer Science",
+    "title": "Lecturer, Senior Lecturer, Assistant or Associate Clinical Professor, or Professor of the Practice (AI tools in CS education)",
+    "track": "teaching",
+    "level": "open",
+    "areas": [
+      "csed",
+      "ai"
+    ],
+    "state": "MD",
+    "city": "College Park",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://www.cs.umd.edu/job/2026/jr103397-lecturer-senior-lecturer-assistant-or-associate-clinical-professor-or-professor",
+    "summary": "Professional-track faculty member leading curriculum and course development around the impact of AI tools on computer science education, plus core teaching.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "umass-teaching-faculty-robotics-ai-2026",
     "school": "Univ. of Massachusetts Amherst",
     "department": "Manning College of Information and Computer Sciences",
