@@ -261,6 +261,29 @@
     "verified": true
   },
   {
+    "id": "wm-cs-postdoc-rail-2026",
+    "school": "College of William and Mary",
+    "department": "Computer Science",
+    "title": "Postdoctoral Fellow of Computer Science (Robust and Adaptive Intelligence)",
+    "track": "postdoc",
+    "areas": [
+      "ai",
+      "plan",
+      "mlmining"
+    ],
+    "state": "VA",
+    "city": "Williamsburg",
+    "rolling": false,
+    "reviewBegins": "2026-08-10",
+    "startDate": "2026-09-10",
+    "postedDate": "2026-07-23",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://williammary.wd12.myworkdayjobs.com/WM/job/Posting-Location---William--Mary/Postdoctoral-Fellow-of-Computer-Science--Robust-and-Adaptive-Intelligence-_JR101939",
+    "summary": "One-year postdoc on AI routing under uncertainty and explainable sequential decision-making. Listing still marked Open; late applications considered if needed after the Aug 10 review date.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "cornell-lecturer-cornell-tech-2026",
     "school": "Cornell University",
     "department": "Computer Science (Cornell Tech)",
@@ -426,6 +449,92 @@
     "verified": true
   },
   {
+    "school": "Indiana University",
+    "department": "Luddy School of Informatics, Computing, and Engineering (Computer Science or Intelligent Systems Engineering)",
+    "title": "Open Rank, Tenured/Tenure-Track Faculty Position in Artificial Intelligence for Life Sciences",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai",
+      "bio"
+    ],
+    "state": "IN",
+    "city": "Bloomington",
+    "rolling": true,
+    "reviewBegins": "2026-11-14",
+    "startDate": "2027-08-01",
+    "lastSeenAt": "2026-10-08",
+    "summary": "Open-rank search for AI, including generative AI, bridging biomolecular data and clinical insight, housed in Computer Science or Intelligent Systems Engineering. Full consideration by Nov 14, 2026; open until filled.",
+    "source": "crawl",
+    "verified": true,
+    "id": "indiana-ai-life-sciences-2026",
+    "url": "https://indiana.peopleadmin.com/postings/34529"
+  },
+  {
+    "school": "Indiana University",
+    "department": "Luddy School of Informatics, Computing, and Engineering (Department of Informatics)",
+    "title": "Open Rank, Tenured/Tenure-Track Faculty Position in Cybersecurity",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "sec"
+    ],
+    "state": "IN",
+    "city": "Bloomington",
+    "rolling": true,
+    "reviewBegins": "2026-12-01",
+    "startDate": "2027-08-01",
+    "lastSeenAt": "2026-10-08",
+    "summary": "Open-rank cybersecurity position in the Department of Informatics at Luddy. Review begins Dec 1, 2026 and continues until filled.",
+    "source": "crawl",
+    "verified": true,
+    "id": "indiana-cybersecurity-2026",
+    "url": "https://indiana.peopleadmin.com/postings/34528"
+  },
+  {
+    "school": "Indiana University",
+    "department": "Luddy School of Informatics, Computing, and Engineering (Department of Computer Science)",
+    "title": "Tenured/Tenure-Track Assistant or Associate Professor in Quantum Computer Science",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "act",
+      "sec"
+    ],
+    "state": "IN",
+    "city": "Bloomington",
+    "rolling": true,
+    "reviewBegins": "2026-11-01",
+    "startDate": "2027-08-01",
+    "lastSeenAt": "2026-10-08",
+    "summary": "Faculty 100 search in quantum computer science covering theory, software systems, security, and applications. Full consideration by Nov 1, 2026; open until filled.",
+    "source": "crawl",
+    "verified": true,
+    "id": "indiana-quantum-cs-2026",
+    "url": "https://indiana.peopleadmin.com/postings/34409"
+  },
+  {
+    "school": "Indiana University",
+    "department": "Luddy School of Informatics, Computing, and Engineering",
+    "title": "Open Rank, Tenured/Tenure-Track Faculty Position in Robotics",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "robotics"
+    ],
+    "state": "IN",
+    "city": "Bloomington",
+    "rolling": true,
+    "reviewBegins": "2026-11-15",
+    "startDate": "2027-08-01",
+    "lastSeenAt": "2026-10-08",
+    "summary": "Open-rank tenure-track search in human-centered robotics (interaction, embodied intelligence, robots in human environments) supporting the new B.S. in Robotics. Full consideration for applications received by Nov 15, 2026; accepted until filled.",
+    "source": "crawl",
+    "verified": true,
+    "id": "indiana-robotics-2026",
+    "url": "https://indiana.peopleadmin.com/postings/34548"
+  },
+  {
     "id": "iu-quantum-computer-science-2026",
     "school": "Indiana University",
     "department": "Department of Computer Science (Faculty 100)",
@@ -583,6 +692,64 @@
     "url": "https://nps.edu/documents/105988552/107158161/CS+Lect-SR+Lect+HERC+AY26.pdf/6118c36b-dc41-fe76-e99d-f1bacbd10b9d?t=1782827016698",
     "summary": "Non-tenure-track teaching position favoring AI, data science, cybersecurity and networking; US citizenship and Secret clearance eligibility required.",
     "source": "crawl"
+  },
+  {
+    "id": "nmsu-assistant-professor-ai-education-2026",
+    "school": "New Mexico State University",
+    "department": "Computer Science",
+    "title": "Assistant Professor - Artificial Intelligence Education (two positions)",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "csed"
+    ],
+    "state": "NM",
+    "city": "Las Cruces",
+    "deadline": "2026-10-16",
+    "rolling": false,
+    "lastSeenAt": "2026-10-08",
+    "url": "https://careers.nmsu.edu/jobs/assistant-professor-artificial-intelligence-education-las-cruces-new-mexico-united-states",
+    "summary": "Two tenure-track Applied AI positions in an interdisciplinary cluster hire tied to the Institute for Applied Practice in AI and Machine Learning, focused on teaching and learning of AI, curriculum and credentialing.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "nmsu-college-assistant-professor-2026",
+    "school": "New Mexico State University",
+    "department": "Computer Science",
+    "title": "College Assistant Professor",
+    "track": "teaching",
+    "level": "assistant",
+    "areas": [],
+    "state": "NM",
+    "city": "Las Cruces",
+    "deadline": "2026-10-30",
+    "rolling": false,
+    "lastSeenAt": "2026-10-08",
+    "url": "https://careers.nmsu.edu/jobs/college-assistant-professor-las-cruces-new-mexico-united-states-a2750562-96c8-46b8-a2a4-479016a7e235",
+    "summary": "Teaching-focused 9-month faculty role (12 credits per semester) in the Computer Science department; requires a PhD in computer science or related areas.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "nyu-faculty-fellow-2026",
+    "school": "New York University",
+    "department": "Courant Institute, Computer Science",
+    "title": "Assistant Professor / Faculty Fellow (non-tenure-track)",
+    "track": "postdoc",
+    "level": "assistant",
+    "areas": [],
+    "anyArea": true,
+    "state": "NY",
+    "city": "New York",
+    "rolling": false,
+    "reviewBegins": "2027-02-01",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://cs.nyu.edu/dynamic/jobs/openings/",
+    "summary": "Two- or three-year non-tenure-track Faculty Fellow appointment with one course per semester; all areas of computer science considered. Full consideration for applications by February 1, 2027.",
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "northeastern-lecturer-ms-cybersecurity-2026",
@@ -754,6 +921,26 @@
     "source": "crawl",
     "reviewBegins": "2026-11-01",
     "postedDate": "2026-09-18",
+    "verified": true
+  },
+  {
+    "id": "okstate-cs-cybersecurity-2026",
+    "school": "Oklahoma State University",
+    "department": "Computer Science",
+    "title": "Open Rank Professor of Computer Science (cybersecurity)",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "sec"
+    ],
+    "state": "OK",
+    "city": "Stillwater",
+    "rolling": true,
+    "startDate": "2027-08-01",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://jobs.okstate.edu/jobs/open-rank-professor-of-computer-science-af9557-stillwater-oklahoma-united-states",
+    "summary": "Open-rank tenure-track position preferring cybersecurity (digital forensics, malware analysis, security operations). Accepted until filled; priority date 2026-12-01.",
+    "source": "crawl",
     "verified": true
   },
   {
@@ -937,6 +1124,48 @@
     "verified": true
   },
   {
+    "id": "scu-ece-digital-systems-2026",
+    "school": "Santa Clara University",
+    "department": "Electrical and Computer Engineering",
+    "title": "Electrical and Computer Engineering Assistant Professor - Digital Systems",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "arch",
+      "bed",
+      "sec"
+    ],
+    "state": "CA",
+    "city": "Santa Clara",
+    "rolling": true,
+    "startDate": "2027-09-01",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://wd1.myworkdaysite.com/en-US/recruiting/scu/scu/job/Electrical-and-Computer-Engineering-Assistant-Professor---Digital-Systems_R7814-1",
+    "summary": "Tenure-track ECE position in digital systems: embedded and cyber-physical systems, computer architecture, SoC, AI hardware, and secure systems. Open until filled, starting Sept 2027.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "scu-ece-robotics-ai-2026",
+    "school": "Santa Clara University",
+    "department": "Electrical and Computer Engineering",
+    "title": "Electrical and Computer Engineering Assistant Professor - Robotics & AI",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "robotics",
+      "ai"
+    ],
+    "state": "CA",
+    "city": "Santa Clara",
+    "rolling": true,
+    "lastSeenAt": "2026-10-08",
+    "url": "https://wd1.myworkdaysite.com/en-US/recruiting/scu/scu/job/Electrical-and-Computer-Engineering-Assistant-Professor---Robotics---AI_R7815",
+    "summary": "Tenure-track ECE position in robotics (perception, planning, safety-critical systems) and principled uses of AI, starting fall 2027. Open until filled.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "sbu-ai-innovation-research-asst-prof-2026",
     "school": "Stony Brook University",
     "department": "Computer Science / AI Innovation Institute",
@@ -988,6 +1217,91 @@
     "url": "https://cs.txst.edu/employment/faculty-jobs.html",
     "summary": "Department is building a candidate pool for postdoctoral scholars in computer science; searches remain open until filled.",
     "source": "crawl"
+  },
+  {
+    "school": "The University of Alabama",
+    "department": "Department of Computer Science",
+    "title": "Computer Science - Assistant Professor (530199)",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "soft"
+    ],
+    "state": "AL",
+    "city": "Tuscaloosa",
+    "deadline": "2027-03-31",
+    "rolling": false,
+    "lastSeenAt": "2026-10-08",
+    "summary": "Multiple tenure-track positions across all domains of computer science, with particular interest in AI with a software engineering focus. Posting shows a closing date of Mar 31, 2027.",
+    "source": "crawl",
+    "verified": true,
+    "id": "alabama-cs-assistant-2026",
+    "anyArea": true,
+    "url": "https://careers.ua.edu/jobs/computer-science-assistant-professor-530199-tuscaloosa-alabama-united-states"
+  },
+  {
+    "school": "The University of Alabama",
+    "department": "Department of Computer Science",
+    "title": "Computer Science - Associate Professor (530200)",
+    "track": "tenure-track",
+    "level": "associate",
+    "areas": [
+      "ai",
+      "soft"
+    ],
+    "state": "AL",
+    "city": "Tuscaloosa",
+    "deadline": "2027-03-31",
+    "rolling": false,
+    "lastSeenAt": "2026-10-08",
+    "summary": "Associate-rank counterpart of the department's multi-rank tenure-track search across all CS domains, with AI plus software engineering of particular interest. Posting shows a closing date of Mar 31, 2027.",
+    "source": "crawl",
+    "verified": true,
+    "id": "alabama-cs-associate-2026",
+    "anyArea": true,
+    "url": "https://careers.ua.edu/jobs/computer-science-associate-professor-530200-tuscaloosa-alabama-united-states"
+  },
+  {
+    "school": "The University of Alabama",
+    "department": "Department of Computer Science",
+    "title": "Computer Science - Renewable Contract Teaching Assistant Professor (530198)",
+    "track": "teaching",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "soft"
+    ],
+    "state": "AL",
+    "city": "Tuscaloosa",
+    "deadline": "2027-03-31",
+    "rolling": false,
+    "lastSeenAt": "2026-10-08",
+    "summary": "Full-time non-tenure-track, three-year renewable teaching position in AI with a software engineering focus. Posting shows a closing date of Mar 31, 2027.",
+    "source": "crawl",
+    "verified": true,
+    "id": "alabama-cs-teaching-2026",
+    "url": "https://careers.ua.edu/jobs/computer-science-renewable-contract-teaching-assistant-professor-530198-tuscaloosa-alabama-united-states"
+  },
+  {
+    "id": "ttic-tenure-track-2026",
+    "school": "TTI Chicago",
+    "department": "Toyota Technological Institute at Chicago",
+    "title": "Tenure-track / tenured / visiting faculty in computer science",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "robotics"
+    ],
+    "anyArea": true,
+    "state": "IL",
+    "city": "Chicago",
+    "rolling": true,
+    "lastSeenAt": "2026-10-08",
+    "url": "https://www.ttic.edu/faculty-hiring/",
+    "summary": "Broad computer science search at assistant, associate, full, or visiting rank, with a particular wish to expand robotics. Applications reviewed until filled; full review not guaranteed after December 1 (year not stated on the page).",
+    "source": "crawl",
+    "verified": true
   },
   {
     "id": "tufts-cs-adjunct-lecturers-2026",
@@ -1331,6 +1645,64 @@
     "verified": true
   },
   {
+    "id": "ucsd-assistant-professor-2026",
+    "school": "Univ. of California - San Diego",
+    "department": "Computer Science and Engineering",
+    "title": "Assistant Professor - CSE",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [],
+    "anyArea": true,
+    "state": "CA",
+    "city": "La Jolla",
+    "rolling": false,
+    "reviewBegins": "2026-12-01",
+    "postedDate": "2026-09-16",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://apol-recruit.ucsd.edu/JPF04649",
+    "summary": "Tenure-track assistant professor positions in all areas of computer science and engineering. Next review date Dec 1, 2026; applications accepted until June 2, 2027.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "ucsd-postdoc-encore-2026",
+    "school": "Univ. of California - San Diego",
+    "department": "Computer Science and Engineering",
+    "title": "Postdoctoral Fellowship, EnCORE Institute for Emerging CORE Methods in Data Science",
+    "track": "postdoc",
+    "areas": [],
+    "state": "CA",
+    "city": "La Jolla",
+    "rolling": true,
+    "reviewBegins": "2027-03-01",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://cse.ucsd.edu/administration/human-resources/recruitment/faculty-position/postdoctoral-fellowship-institute",
+    "summary": "Multiple NSF TRIPODS EnCORE postdocs spanning theoretical CS, math, and statistics across UCSD, UCLA, UT Austin and Penn. Materials due Mar 1, 2027 for full consideration; site stays open until filled.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "ucsd-postdoc-lei-2026",
+    "school": "Univ. of California - San Diego",
+    "department": "Computer Science and Engineering",
+    "title": "Postdoctoral Fellowship, Lab for Emerging Intelligence",
+    "track": "postdoc",
+    "areas": [
+      "act",
+      "ai"
+    ],
+    "state": "CA",
+    "city": "La Jolla",
+    "rolling": true,
+    "startDate": "2027-07-01",
+    "postedDate": "2026-07-01",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://cse.ucsd.edu/administration/human-resources/recruitment/faculty-position/postdoctoral-position",
+    "summary": "Two-year postdoc with Prof. Ramamohan Paturi in computational complexity or AI. Rolling review; apply by Dec 14, 2026 for full consideration.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "ucsc-cse-lecturer-pool-2026",
     "school": "Univ. of California - Santa Cruz",
     "department": "Computer Science and Engineering",
@@ -1389,6 +1761,25 @@
     "summary": "Two non-tenure-track teaching positions, one focused on robotics and one primarily on AI. Exceptional candidates in other areas of computer science and informatics may also apply.",
     "source": "crawl",
     "verified": true
+  },
+  {
+    "school": "University at Buffalo",
+    "department": "Computational & Data-Enabled Science & Engineering (Institute for Artificial Intelligence and Data Science)",
+    "title": "Assistant Professor of Teaching (Lecturer, 10 months)",
+    "track": "teaching",
+    "level": "assistant",
+    "areas": [],
+    "state": "NY",
+    "city": "Buffalo",
+    "rolling": true,
+    "startDate": "2026-09-01",
+    "postedDate": "2026-01-06",
+    "lastSeenAt": "2026-10-08",
+    "summary": "Teaching-track lecturer position with UB's Institute for AI and Data Science; deadline listed as open until filled, posted Jan 6, 2026 with a Sept 1, 2026 target fill date that has passed.",
+    "source": "crawl",
+    "verified": true,
+    "id": "buffalo-teaching-iad-2026",
+    "url": "https://www.ubjobs.buffalo.edu/postings/64720"
   },
   {
     "id": "uchicago-asst-prof-cs-2026",
@@ -1543,6 +1934,48 @@
     "url": "https://careers.uh.edu/jobs/assistant-professor-programming-languages-compilers-and-computer-systems-houston-texas-united-states",
     "summary": "Tenure-track position in programming languages, compilers, operating systems, computer architecture, and high-performance computing; review continues until filled.",
     "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "uh-cs-quantum-asst-prof-2026",
+    "school": "University of Houston",
+    "department": "Computer Science",
+    "title": "Assistant Professor - Quantum Information Science",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "crypt",
+      "hpc"
+    ],
+    "state": "TX",
+    "city": "Houston",
+    "rolling": true,
+    "startDate": "2027-09-01",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://careers.uh.edu/jobs/assistant-professor-quantum-information-science-houston-texas-united-states",
+    "summary": "Presidential Frontier Faculty tenure-track position in quantum information science, including quantum algorithms, networking, cryptography, and quantum-HPC integration. Anticipated start September 1, 2027.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "uh-cs-robotics-asst-prof-2026",
+    "school": "University of Houston",
+    "department": "Computer Science",
+    "title": "Assistant Professor - Human-Centered Robotics and Assistive Systems",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "robotics",
+      "ai"
+    ],
+    "state": "TX",
+    "city": "Houston",
+    "rolling": true,
+    "startDate": "2027-09-01",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://careers.uh.edu/jobs/assistant-professor-human-centered-robotics-and-assistive-systems-houston-texas-united-states",
+    "summary": "Presidential Frontier Faculty tenure-track position in human-centered robotics, wearable and assistive robotics, brain-computer interfaces, and embodied AI. Anticipated start September 1, 2027.",
     "source": "crawl",
     "verified": true
   },
@@ -1743,6 +2176,28 @@
     "verified": true
   },
   {
+    "id": "unlv-cybersecurity-ai-lecturer-2026",
+    "school": "University of Nevada Las Vegas",
+    "department": "Department of Applied and Interdisciplinary Engineering, Howard R. Hughes College of Engineering",
+    "title": "Lecturer / Assistant Professor-in-Residence, Cybersecurity (AI expertise)",
+    "track": "teaching",
+    "level": "assistant",
+    "areas": [
+      "sec",
+      "ai"
+    ],
+    "state": "NV",
+    "city": "Las Vegas",
+    "rolling": true,
+    "reviewBegins": "2026-09-01",
+    "startDate": "2027-07-01",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://nshe.wd1.myworkdayjobs.com/en-US/UNLV-External/job/UNLV1-Main-Campus-Las-Vegas/Lecturer---Assistant-Professor-in-Residence--Cybersecurity--College-of-Engineering--R0152399-_R0152399",
+    "summary": "Nine-month non-tenure-track teaching position in cybersecurity with AI expertise, starting July 2027. Open until filled; review began September 1, 2026.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "unm-asst-prof-cs-2026",
     "school": "University of New Mexico",
     "department": "Computer Science",
@@ -1761,6 +2216,45 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://unm.csod.com/ux/ats/careersite/18/home/requisition/38093",
     "summary": "Entry-level tenure-track position open to all areas of computing, with preferred expertise in quantum computing, theory and algorithms, or cybersecurity. Best-consideration date December 5, 2026; open until filled.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "uri-postdoc-cybersecurity-2026",
+    "school": "University of Rhode Island",
+    "department": "Electrical, Computer & Biomedical Engineering",
+    "title": "Postdoctoral Fellow (Interdisciplinary / Cyber Security)",
+    "track": "postdoc",
+    "areas": [
+      "sec"
+    ],
+    "state": "RI",
+    "city": "Kingston",
+    "rolling": true,
+    "reviewBegins": "2026-07-06",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://jobs.uri.edu/postings/16786",
+    "summary": "Grant-funded postdoc on cybersecurity and communication networks for industrial control systems such as power grids; open until filled.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "usm-cs-assistant-professor-2026",
+    "school": "University of Southern Mississippi",
+    "department": "School of Computing Sciences and Computer Engineering",
+    "title": "Assistant Professor in Computer Science",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai"
+    ],
+    "state": "MS",
+    "city": "Hattiesburg",
+    "rolling": true,
+    "postedDate": "2026-09-11",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://usm.csod.com/ux/ats/careersite/1/home/requisition/5545?c=usm",
+    "summary": "Tenure-track CS position supporting program growth in artificial intelligence and intelligent systems; open until filled. No visa sponsorship offered.",
     "source": "crawl",
     "verified": true
   },
@@ -1949,6 +2443,28 @@
     "verified": true
   },
   {
+    "id": "vcu-engineering-senior-faculty-2026",
+    "school": "Virginia Commonwealth University",
+    "department": "College of Engineering (appointment to one of five departments including Computer Science)",
+    "title": "Associate Professor/Professor (Strategic Senior Faculty)",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai",
+      "robotics",
+      "sec"
+    ],
+    "state": "VA",
+    "city": "Richmond",
+    "rolling": true,
+    "reviewBegins": "2026-08-01",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://vcujobs.com/jobs/associate-professor-professor-vcu-main-campus-virginia-united-states",
+    "summary": "Senior tenured hire in the College of Engineering with research thrusts in AI, autonomous systems and computing, health, and sustainability; related areas such as robotics and cybersecurity are considered. Review started August 1, 2026 and continues until filled.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "vcu-postdoc-ai-cybersecurity-2026",
     "school": "Virginia Commonwealth University",
     "department": "Department of Electrical and Computer Engineering",
@@ -1963,6 +2479,24 @@
     "url": "https://vcujobs.com/jobs/postdoctoral-research-associate-ai-for-cybersecurity-vcu-main-campus-virginia-united-states",
     "summary": "Postdoctoral position in the College of Engineering working on AI for cybersecurity.",
     "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "vt-tenure-track-2026",
+    "school": "Virginia Tech",
+    "department": "Computer Science",
+    "title": "Tenure-Track Faculty Position in Computer Science",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [],
+    "state": "VA",
+    "city": "Blacksburg",
+    "rolling": true,
+    "reviewBegins": "2026-11-15",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://jobs.apply.vt.edu/jobs/tenure-track-faculty-position-in-computer-science-blacksburg-virginia-united-states",
+    "summary": "Open-rank tenure-track faculty search in the Department of Computer Science (College of Engineering), requiring a PhD in CS or a closely related field. Review date 11/15/2026, open until filled; no specific research area named.",
     "source": "crawl",
     "verified": true
   },
