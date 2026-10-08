@@ -49,6 +49,7 @@ async function seed() {
       outcome: null,
       summary: null,
       checkedUrls: [],
+      relatedUnits: [],
       deferredUntil: null
     });
     added += 1;

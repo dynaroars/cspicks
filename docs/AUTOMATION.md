@@ -198,7 +198,7 @@ Cap: 30 schools, worked sequentially by this one agent (never spawn subagents). 
    more often for schools with open postings). If `scripts/data/jobs-sources.json` is missing a US school, run
    `npm run maintain:jobs -- --seed` first.
 2. Crawl each school per §6.5. Many hiring and posting pages (Interfolio, Workday, PeopleAdmin, PeopleSoft, NEOGOV, JavaScript department sites) are empty shells to WebFetch, so when a page shows no content use the render step: run `npx playwright install --with-deps chromium` once, then `npm run render:jobs -- <url>` to read a page and `npm run render:jobs -- --links <homepage>` to find the hiring page. It is an ordinary browser; if a site still returns 403 or a challenge page, mark the school `blocked` and move on. Then find or confirm the official hiring page (`jobsUrl`), add or update records for
-   CS-relevant openings, set `lastSeenAt` on postings still live, and set `closedAt` on postings that are gone or
+   CS-relevant openings, including those in the school's other units that hire CS PhDs (IST/iSchool, ECE/EECS, data science; track them in `relatedUnits`, see §6.5), set `lastSeenAt` on postings still live, and set `closedAt` on postings that are gone or
    marked filled. Never delete a record; never copy facts from AcademicJobsOnline, HigherEdJobs, or social posts.
 3. Record each school's result in `scripts/data/jobs-sources.json` (`lastCheckedAt`, `outcome`, `summary`,
    `checkedUrls`, `deferredUntil` = +21 days for `not_found`/`blocked`, otherwise `null`). Open one PR even if only

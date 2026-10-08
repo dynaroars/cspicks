@@ -631,13 +631,22 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
    the department page both count as official. AcademicJobsOnline, HigherEdJobs, Indeed, LinkedIn, and
    social posts are leads only: follow them to the official posting, never copy facts from them. Record the
    page in `jobsUrl`.
-2. For every CS-relevant opening (computer science, computer engineering, AI, data science, cybersecurity,
-   or school/college-of-computing units), add or update one record. Skip positions plainly outside computing.
-3. For records already in `jobs.json` for this school: if the posting is still listed, set `lastSeenAt` to today
+2. **Look beyond the CS department.** Many schools hire CS PhDs into other units: information schools (IST,
+   iSchool, Informatics), ECE/EECS/electrical & computer engineering, data science, cybersecurity, and
+   college-of-computing or engineering-wide searches. After the CS page, find the school's other computing-adjacent
+   units (from the university's college/department directory or the engineering/information school site), read
+   their hiring pages, and list them in the sources row's `relatedUnits` (`[{ "name", "url" }]`) so later crawls
+   revisit them. Include a posting from such a unit when a CS PhD is plainly a target: it names computing, AI, ML,
+   data, security, networks, systems, or software, or it is an open or cluster search a CS PhD would apply to.
+   Skip positions plainly outside computing. Record the unit in `department` as it appears on the posting
+   (e.g. "College of Information Sciences and Technology"); `school` stays the CSRankings name.
+3. For every CS-relevant opening in the CS department itself (computer science, computer engineering, AI, data
+   science, cybersecurity, or school/college-of-computing units), add or update one record.
+4. For records already in `jobs.json` for this school: if the posting is still listed, set `lastSeenAt` to today
    and refresh changed facts; if it is gone or marked filled/closed on the official page, set `closedAt` to today.
    **Never delete records**: closed postings are the "older postings" archive.
-4. Record the result in the school's sources row (`lastCheckedAt`, `outcome` = `complete` | `incomplete` |
-   `blocked` | `not_found`, `summary`, `checkedUrls`). If no hiring page can be found or the site blocks the
+5. Record the result in the school's sources row (`lastCheckedAt`, `outcome` = `complete` | `incomplete` |
+   `blocked` | `not_found`, `summary`, `checkedUrls`, `relatedUnits`). If no hiring page can be found or the site blocks the
    crawler, set `outcome` and `deferredUntil` (+21 days) and add no postings. **Unknown beats wrong**: never guess a
    deadline, rank, or area.
 

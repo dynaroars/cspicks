@@ -2,7 +2,7 @@
 
 > **Autonomous Goal Directive (`/goal TASKS/audit_us_jobs.md`):**
 > Work through `npm run maintain:jobs -- --limit 30` in bounded batches. For each school, find its official
-> department hiring page, record every CS-relevant opening in `public/jobs.json`, keep `lastSeenAt` and `closedAt`
+> department hiring page, record every CS-relevant opening (including IST/ECE-style units that hire CS PhDs) in `public/jobs.json`, keep `lastSeenAt` and `closedAt`
 > current for postings already listed, and record the crawl result in `scripts/data/jobs-sources.json`.
 > Submit each batch as a GitHub PR on a topic branch. Never commit directly to `main`. Scheduled runs stop at the cap in
 > [`docs/AUTOMATION.md`](../docs/AUTOMATION.md) (`jobs`); the 100% goal is reached across runs.
@@ -36,11 +36,16 @@ If a page looks empty (Interfolio, Workday, PeopleAdmin, PeopleSoft, NEOGOV), re
 ## Per-school workflow
 
 1. Start at the school's `homepage` (sources row) and find the faculty-hiring / open-positions page. Save it as `jobsUrl`.
-2. List every open CS-relevant position. For each: add a new record (`source: "crawl"`, `verified: true`) or update the existing one.
-3. For each existing record of this school not found any more: if the official page shows it filled/closed, or the
+2. Also check the school's other units that hire CS PhDs: information schools (IST, iSchool, Informatics),
+   ECE/EECS, data science, cybersecurity, and college-wide or engineering-wide searches. Find their hiring pages,
+   list them in the sources row's `relatedUnits` (`[{ "name", "url" }]`) and revisit them on later crawls. Include a
+   posting when a CS PhD is plainly a target (it names computing, AI/ML, data, security, systems, software, or is an
+   open search); put the unit as written on the posting in `department`.
+3. List every open CS-relevant position. For each: add a new record (`source: "crawl"`, `verified: true`) or update the existing one.
+4. For each existing record of this school not found any more: if the official page shows it filled/closed, or the
    position page is gone, set `closedAt` to today.
-4. Update the sources row: `lastCheckedAt` (ISO time), `outcome` (`complete`, `incomplete`, `blocked`, `not_found`),
-   `summary`, `checkedUrls`, `state` (USPS), and `deferredUntil` (+21 days when `not_found` or `blocked`, else `null`).
+5. Update the sources row: `lastCheckedAt` (ISO time), `outcome` (`complete`, `incomplete`, `blocked`, `not_found`),
+   `summary`, `checkedUrls`, `relatedUnits`, `state` (USPS), and `deferredUntil` (+21 days when `not_found` or `blocked`, else `null`).
 
 ## Verification
 
