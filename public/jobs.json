@@ -376,6 +376,27 @@
     "source": "crawl"
   },
   {
+    "id": "jhu-tenure-track-cs-2026",
+    "school": "Johns Hopkins University",
+    "department": "Department of Computer Science",
+    "title": "Tenure-Track Faculty, Computer Science",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai",
+      "sec"
+    ],
+    "state": "MD",
+    "city": "Baltimore",
+    "deadline": "2026-12-01",
+    "rolling": false,
+    "lastSeenAt": "2026-10-08",
+    "url": "https://apply.interfolio.com/194231",
+    "summary": "Multiple tracks at all ranks; all areas of CS welcome, with focus on AI systems, AI safety and security, reasoning and alignment, and AI ethics and policy. Full consideration by Dec 1, 2026.",
+    "source": "crawl",
+    "anyArea": true
+  },
+  {
     "id": "lsu-asst-prof-ai-2026",
     "school": "Louisiana State University",
     "department": "Division of Computer Science and Engineering",
@@ -882,6 +903,58 @@
     "url": "https://cs.txst.edu/employment/faculty-jobs.html",
     "summary": "Department is building a candidate pool for postdoctoral scholars in computer science; searches remain open until filled.",
     "source": "crawl"
+  },
+  {
+    "id": "tufts-cs-adjunct-lecturers-2026",
+    "school": "Tufts University",
+    "department": "Department of Computer Science",
+    "title": "Adjunct Faculty (Part-Time Lecturers), Computer Science",
+    "track": "teaching",
+    "areas": [],
+    "state": "MA",
+    "city": "Medford",
+    "rolling": true,
+    "lastSeenAt": "2026-10-08",
+    "url": "https://apply.interfolio.com/186087",
+    "summary": "Ongoing search for part-time lecturers for in-person and online courses.",
+    "source": "crawl"
+  },
+  {
+    "id": "tufts-cybersecurity-postdoc-2026",
+    "school": "Tufts University",
+    "department": "Cybersecurity Center for the Public Good",
+    "title": "Postdoctoral Scholar, Cybersecurity Center for the Public Good",
+    "track": "postdoc",
+    "areas": [
+      "sec"
+    ],
+    "state": "MA",
+    "city": "Medford",
+    "rolling": true,
+    "lastSeenAt": "2026-10-08",
+    "url": "https://engineering.tufts.edu/cs/about/job-opportunities",
+    "summary": "Renewable one-year appointments; preference for human factors of cybersecurity, healthcare cybersecurity, or anonymous communications.",
+    "source": "crawl"
+  },
+  {
+    "id": "tufts-tiai-director-stern-prof-2026",
+    "school": "Tufts University",
+    "department": "Tufts Institute for AI (Computer Science)",
+    "title": "Director of the Tufts Institute for AI and Endowed Stern Family Professor",
+    "track": "leadership",
+    "level": "full",
+    "areas": [
+      "ai"
+    ],
+    "state": "MA",
+    "city": "Medford",
+    "deadline": "2026-12-15",
+    "rolling": true,
+    "lastSeenAt": "2026-10-08",
+    "url": "https://apply.interfolio.com/193535",
+    "summary": "Leads the Tufts Institute for AI; open to any area of AI, foundations to use-inspired. Full professor, exceptional associate candidates also encouraged.",
+    "source": "crawl",
+    "startDate": "2027-09-01"
   },
   {
     "id": "tulane-prof-of-practice-cs-2026",

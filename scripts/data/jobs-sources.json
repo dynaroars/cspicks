@@ -127,12 +127,14 @@
     "homepage": "https://cse.engin.umich.edu/",
     "facultyCount": 145,
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "deferredUntil": null
+    "state": "MI",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "blocked",
+    "summary": "Department faculty-hiring page returned 403.",
+    "checkedUrls": [
+      "https://cse.engin.umich.edu/about/faculty-hiring/"
+    ],
+    "deferredUntil": "2026-10-29T12:00:00Z"
   },
   {
     "school": "New York University",
@@ -227,12 +229,14 @@
     "school": "Johns Hopkins University",
     "homepage": "https://www.cs.jhu.edu/",
     "facultyCount": 125,
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://www.cs.jhu.edu/about/employment-opportunities",
+    "state": "MD",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "complete",
+    "summary": "Department page lists the 2026 tenure-track search (deadline 2026-12-01) and postdoc ads; only the tenure-track search is recorded because the postdoc ads have no dates.",
+    "checkedUrls": [
+      "https://www.cs.jhu.edu/about/employment-opportunities"
+    ],
     "deferredUntil": null
   },
   {
@@ -517,12 +521,14 @@
     "homepage": "https://engineering.vanderbilt.edu/departments/computer-science/",
     "facultyCount": 94,
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "deferredUntil": null
+    "state": "TN",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "not_found",
+    "summary": "Department page links no faculty positions.",
+    "checkedUrls": [
+      "https://engineering.vanderbilt.edu/departments/computer-science/"
+    ],
+    "deferredUntil": "2026-10-29T12:00:00Z"
   },
   {
     "school": "Univ. of Massachusetts Amherst",
@@ -619,11 +625,14 @@
     "homepage": "https://www.cs.rutgers.edu/",
     "facultyCount": 84,
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "NJ",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Department page 404; the redirected jobs.rutgers.edu posting did not render content.",
+    "checkedUrls": [
+      "https://www.cs.rutgers.edu/about/employment/details/tenure-track-tenured-positions-positions-in-computer-science",
+      "https://go.rutgers.edu/CSTTfaculty"
+    ],
     "deferredUntil": null
   },
   {
@@ -905,12 +914,14 @@
     "school": "University at Buffalo",
     "homepage": "https://cse.buffalo.edu",
     "facultyCount": 66,
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://engineering.buffalo.edu/computer-science-engineering/news-and-events/employment-opportunities.html",
+    "state": "NY",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Department page lists two Empire Innovation Professor searches (postings 52653, 59623) with no dates; page footer suggests it may be stale, so not recorded.",
+    "checkedUrls": [
+      "https://engineering.buffalo.edu/computer-science-engineering/news-and-events/employment-opportunities.html"
+    ],
     "deferredUntil": null
   },
   {
@@ -1009,12 +1020,14 @@
     "school": "Tufts University",
     "homepage": "https://engineering.tufts.edu/cs/",
     "facultyCount": 61,
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://engineering.tufts.edu/cs/about/job-opportunities",
+    "state": "MA",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "complete",
+    "summary": "Department job page lists the TIAI director search, adjunct lecturers, and a cybersecurity postdoc.",
+    "checkedUrls": [
+      "https://engineering.tufts.edu/cs/about/job-opportunities"
+    ],
     "deferredUntil": null
   },
   {
@@ -1296,11 +1309,13 @@
     "homepage": "https://www.cs.rochester.edu/",
     "facultyCount": 46,
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "NY",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "complete",
+    "summary": "Department recruiting page still describes the 2014-15 cycle; no open positions found on an official page.",
+    "checkedUrls": [
+      "https://cs.rochester.edu/u/www/people/recruit.html"
+    ],
     "deferredUntil": null
   },
   {
@@ -1396,12 +1411,14 @@
     "school": "Brigham Young University",
     "homepage": "https://cs.byu.edu",
     "facultyCount": 42,
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://cs.byu.edu/department/faculty-and-staff-positions",
+    "state": "UT",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "complete",
+    "summary": "Only listed posting (CFS Professional, 2 openings) closed 2026-10-04; professorial openings are posted on yjobs.byu.edu, which was not readable.",
+    "checkedUrls": [
+      "https://cs.byu.edu/department/faculty-and-staff-positions"
+    ],
     "deferredUntil": null
   },
   {
@@ -1677,12 +1694,14 @@
     "school": "Emory University",
     "homepage": "https://computerscience.emory.edu/",
     "facultyCount": 32,
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://computerscience.emory.edu/about/job-openings.html",
+    "state": "GA",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Department page lists a chair search and Theory/Systems, HCI, and teaching-track searches under a 2025 recruitment plan with no dates; not confirmed current.",
+    "checkedUrls": [
+      "https://computerscience.emory.edu/about/job-openings.html"
+    ],
     "deferredUntil": null
   },
   {
@@ -1781,12 +1800,12 @@
     "homepage": "https://www.towson.edu/fcsm/departments/computerinfosci/",
     "facultyCount": 30,
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
+    "state": "MD",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "not_found",
+    "summary": "No current computer science posting found.",
     "checkedUrls": [],
-    "deferredUntil": null
+    "deferredUntil": "2026-10-29T12:00:00Z"
   },
   {
     "school": "University of South Carolina",
@@ -2067,12 +2086,12 @@
     "homepage": "https://www.iit.edu/computer-science",
     "facultyCount": 24,
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
+    "state": "IL",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "not_found",
+    "summary": "Only a teaching-track search for the Mumbai campus (outside the US) was found.",
     "checkedUrls": [],
-    "deferredUntil": null
+    "deferredUntil": "2026-10-29T12:00:00Z"
   },
   {
     "school": "Portland State University",
@@ -2168,11 +2187,13 @@
     "homepage": "https://scds.uoregon.edu/cs",
     "facultyCount": 22,
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "OR",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "incomplete",
+    "summary": "UO careers posting did not render; the related search ad looks like the 2025-26 cycle.",
+    "checkedUrls": [
+      "https://careers.uoregon.edu/en-us/job/535563/assistant-professor-of-computer-science"
+    ],
     "deferredUntil": null
   },
   {
@@ -2450,12 +2471,14 @@
     "homepage": "https://cs.okstate.edu",
     "facultyCount": 17,
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "deferredUntil": null
+    "state": "OK",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "blocked",
+    "summary": "Department faculty page returned 403.",
+    "checkedUrls": [
+      "https://cas.okstate.edu/computer_science/about_us/tenure_track_assistant_professor.html"
+    ],
+    "deferredUntil": "2026-10-29T12:00:00Z"
   },
   {
     "school": "University of Idaho",
@@ -2554,10 +2577,10 @@
     "homepage": "https://www.ecs.baylor.edu/programs-departments/computer-science",
     "facultyCount": 15,
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
+    "state": "TX",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Search results suggest 2027-start tenure-track postings but no official page or deadlines could be read.",
     "checkedUrls": [],
     "deferredUntil": null
   },
@@ -2834,12 +2857,14 @@
     "school": "University of Wyoming",
     "homepage": "https://www.uwyo.edu/cosc/department/index.html",
     "facultyCount": 7,
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://www.uwyo.edu/president/initiatives/ai4wy/opportunities.html",
+    "state": "WY",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "incomplete",
+    "summary": "AI4WY page lists cluster hires and a research scientist role with no deadlines or dates; status unconfirmed.",
+    "checkedUrls": [
+      "https://www.uwyo.edu/president/initiatives/ai4wy/opportunities.html"
+    ],
     "deferredUntil": null
   },
   {
@@ -2936,12 +2961,12 @@
     "homepage": "https://liu.edu/post/academics/school-of-computer-science-and-innovation",
     "facultyCount": 4,
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
+    "state": "NY",
+    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "outcome": "not_found",
+    "summary": "No current computer science posting found.",
     "checkedUrls": [],
-    "deferredUntil": null
+    "deferredUntil": "2026-10-29T12:00:00Z"
   },
   {
     "school": "Kennesaw State University",
