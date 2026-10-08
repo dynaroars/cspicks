@@ -40,7 +40,8 @@ If a page looks empty (Interfolio, Workday, PeopleAdmin, PeopleSoft, NEOGOV), re
    ECE/EECS, data science, cybersecurity, and college-wide or engineering-wide searches. Find their hiring pages,
    list them in the sources row's `relatedUnits` (`[{ "name", "url" }]`) and revisit them on later crawls. Include a
    posting when a CS PhD is plainly a target (it names computing, AI/ML, data, security, systems, software, or is an
-   open search); put the unit as written on the posting in `department`.
+   open search); put the unit as written on the posting in `department`. Set `relatedCheckedAt` (ISO time) on the
+   sources row when done; `npm run maintain:jobs -- --related N` lists schools still unchecked.
 3. List every open CS-relevant position. For each: add a new record (`source: "crawl"`, `verified: true`) or update the existing one.
 4. For each existing record of this school not found any more: if the official page shows it filled/closed, or the
    position page is gone, set `closedAt` to today.

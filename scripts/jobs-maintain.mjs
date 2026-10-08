@@ -6,6 +6,7 @@
  *
  *   npm run maintain:jobs -- --seed              add any US CSRankings school missing from the sources file
  *   npm run maintain:jobs -- --limit 12          print the next schools to crawl (default 30)
+ *   npm run maintain:jobs -- --related 20       print schools whose non-CS units (IST, ECE, data science) were never checked
  *   npm run maintain:jobs -- --stats             coverage and posting counts
  */
 import fs from 'node:fs/promises';
@@ -50,6 +51,7 @@ async function seed() {
       summary: null,
       checkedUrls: [],
       relatedUnits: [],
+      relatedCheckedAt: null,
       deferredUntil: null
     });
     added += 1;
@@ -91,10 +93,23 @@ export function buildQueue(sources, jobs, now = Date.now()) {
     .sort((a, b) => a.dueInDays - b.dueInDays || b.source.facultyCount - a.source.facultyCount || a.source.school.localeCompare(b.source.school));
 }
 
+/** Schools whose non-CS units (information schools, ECE, data science) have never been crawled, largest roster first. */
+export function buildRelatedQueue(sources) {
+  return sources
+    .filter(source => !source.relatedCheckedAt && source.outcome !== 'blocked')
+    .sort((a, b) => b.facultyCount - a.facultyCount || a.school.localeCompare(b.school));
+}
+
 async function main() {
   if (flag('seed')) return seed();
   const sources = await readJson(SOURCES, []);
   const jobs = await readJson(JOBS, []);
+  if (flag('related')) {
+    const queue = buildRelatedQueue(sources).slice(0, Number(option('related', '20')));
+    if (!queue.length) return console.log('Every school has had its non-CS units checked.');
+    queue.forEach((source, index) => console.log(`${index + 1}. ${source.school}  CS hiring page: ${source.jobsUrl || 'unknown'}  dept: ${source.homepage || 'unknown'}`));
+    return;
+  }
   if (flag('stats')) {
     const checked = sources.filter(source => source.lastCheckedAt).length;
     const withUrl = sources.filter(source => source.jobsUrl).length;

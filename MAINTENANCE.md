@@ -610,7 +610,8 @@ recheck interval has elapsed. Fully read schools are season-aware: postings appe
 postings are rechecked every 7 days in season (14 off-season) and others every 21 days (60 off-season).
 Schools whose last crawl was unfinished come due much sooner: `incomplete` after 1 day, `not_found` after 10,
 `blocked` after 14.
-`npm run maintain:jobs -- --stats` shows coverage.
+`npm run maintain:jobs -- --related N` lists schools whose non-CS units (IST, ECE, data science) have never
+been checked (no `relatedCheckedAt`); set `relatedCheckedAt` when you finish a school's other units. `--stats` shows coverage.
 
 ### Reading JavaScript pages (`npm run render:jobs`)
 
