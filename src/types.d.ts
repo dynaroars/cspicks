@@ -229,3 +229,36 @@ export interface Grant {
   locations?: string[];
   locationLabel?: string;
 }
+
+export type JobTrack = 'tenure-track' | 'teaching' | 'research' | 'postdoc' | 'visiting' | 'leadership';
+export type JobLevel = 'assistant' | 'associate' | 'full' | 'open';
+
+/** One US academic job posting in `public/jobs.json`. Dates are ISO `YYYY-MM-DD`. */
+export interface Job {
+  id: string;
+  /** CSRankings institution name, so cards can link back into Search. */
+  school: string;
+  department: string;
+  title: string;
+  track: JobTrack;
+  level?: JobLevel | null;
+  /** CSRankings area keys (`ai`, `sec`, …); empty means open to any area. */
+  areas: string[];
+  /** USPS state code. */
+  state: string;
+  city?: string | null;
+  deadline?: string | null;
+  /** Reviews applications until filled; `deadline` is then a priority date or null. */
+  rolling?: boolean;
+  reviewBegins?: string | null;
+  startDate?: string | null;
+  postedDate?: string | null;
+  /** Last time a crawl or submission confirmed the posting was live. */
+  lastSeenAt: string;
+  /** Set when the posting is known closed or filled. */
+  closedAt?: string | null;
+  url: string;
+  summary?: string | null;
+  source: 'crawl' | 'submission';
+  verified?: boolean;
+}

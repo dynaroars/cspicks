@@ -70,6 +70,7 @@ Every page keeps the URL in sync with what's on screen, so any view is a link th
 | Simulator (`simulator.html`) | Filters, `univ` (selected university), and `candidates` (the raw candidate names/DBLP links) — opening the link pre-fills the setup one click from a result, without re-querying DBLP on load |
 | CS Confs (`csconfs.html`) | `q`, conference-year range, venue set, and whether only upcoming conferences are shown |
 | NSF Funding (`nsf.html`) | `q` (search or `A vs B`) plus the year-range filter |
+| US Jobs (`jobs.html`) | `q`, `track`, `level`, `area`, `state`, `status` (`active` default, `closed`, `all`), `sort`, and `view` (`position`, `school`) filters |
 | Awards & Grants (`grants.html`) | `q`, `audience`, `sponsor`, `topic`, `deadline`, `status`, and `sort` filters |
 
 Filter choices also persist across page navigations via `localStorage`, so switching between Search and Discoveries, or clicking into Simulator, NSF Funding, or Awards & Grants, doesn't silently reset the region or year range.
@@ -212,6 +213,8 @@ cspicks/
 ├── nsf.html                          # Nationwide NSF funding explorer
 ├── grants.html                       # CS research awards, fellowships & grants explorer
 ├── grants-submit.html                # Award/grant submission and edit form
+├── jobs.html                         # US academic CS jobs explorer
+├── jobs-submit.html                  # Job posting submission and edit form
 ├── simulator.html                    # Ranking simulator page
 └── README.md                         # GitHub-hosted FAQ, methods, and data documentation
 ```

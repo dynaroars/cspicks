@@ -13,6 +13,7 @@ Each playbook is pre-configured with an **Autonomous Goal Directive** header. Yo
 /goal TASKS/discover_new_grants.md
 /goal TASKS/audit_cs_conferences.md
 /goal TASKS/update_grants_and_awards.md
+/goal TASKS/audit_us_jobs.md
 /goal TASKS/sync_nsf_funding.md
 /goal TASKS/verify_manual_affiliations.md
 /goal TASKS/sync_csrankings_rules.md
@@ -48,6 +49,7 @@ To preserve git history and ensure multi-agent safety:
 | [`discover_new_grants.md`](discover_new_grants.md) | Search funding agencies, foundations, and tech giants for new grant programs and fellowships. | `public/grants.json` PRs |
 | [`audit_cs_conferences.md`](audit_cs_conferences.md) | Audit upcoming CS conference dates, submission deadlines, locations, PC chairs, and submission URLs. | `csconfs/data/conferences.json` PRs |
 | [`update_grants_and_awards.md`](update_grants_and_awards.md) | Refresh grant opportunities, deadline dates, award sponsors, eligibility criteria, and topic tags. | `public/grants.json` PRs |
+| [`audit_us_jobs.md`](audit_us_jobs.md) | Crawl US CSRankings departments' official hiring pages for faculty, teaching, research, and postdoc openings; keep open/closed state current. | `public/jobs.json`, `scripts/data/jobs-sources.json` PRs |
 | [`sync_nsf_funding.md`](sync_nsf_funding.md) | Synchronize NSF awards data and verify author crosswalk name matching. | `public/nsf-awards.json`, `public/nsf-name-crosswalk.csv` PRs |
 | [`verify_manual_affiliations.md`](verify_manual_affiliations.md) | Audit and correct manual OpenAlex affiliation overrides for professors and universities. | `public/manual_affiliations.csv` PRs |
 | [`sync_csrankings_rules.md`](sync_csrankings_rules.md) | Update CSRankings taxonomy venue rules, rebuild sitemaps, OG images, and verify repo size limits. | Rules & generated static asset PRs |

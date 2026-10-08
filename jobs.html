@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS Picks - US Academic CS Jobs</title>
+  <meta name="description" content="Search open US computer science faculty, teaching, research, and postdoc positions by school, CSRankings area, and state, with deadlines and school rankings." />
+  <link rel="canonical" href="https://cspicks.roars.dev/jobs.html" />
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CS Picks">
+  <meta property="og:title" content="CS Picks - US Academic CS Jobs">
+  <meta property="og:description" content="Open US computer science faculty, teaching, research, and postdoc positions by school, area, and state.">
+  <meta property="og:url" content="https://cspicks.roars.dev/jobs.html">
+  <meta property="og:image" content="https://cspicks.roars.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CS Picks - US Academic CS Jobs">
+  <meta name="twitter:description" content="Open US computer science faculty, teaching, research, and postdoc positions by school, area, and state.">
+  <meta name="twitter:image" content="https://cspicks.roars.dev/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+  <link rel="stylesheet" href="./src/jobs/jobs.css">
+</head>
+<body class="search-page jobs-page">
+  <div id="app">
+    <header>
+      <div class="title-row">
+        <a class="site-title-link" href="index.html" aria-label="Reset CS Picks"><h1>CS Picks</h1></a>
+        <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
+        <a class="icon-link roars-link" href="https://roars.dev" target="_blank" rel="noopener noreferrer" aria-label="ROARS Lab" title="ROARS Lab"></a>
+      </div>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="index.html">🔎 Search</a>
+        <a href="simulator.html">☠️ Simulator</a>
+        <a href="csconfs.html">📅 CS Confs</a>
+        <a href="grants.html">💰 Awards &amp; Grants</a>
+        <a href="jobs.html" class="active" aria-current="page">🎓 US Jobs</a>
+        <a href="nsf.html">🇺🇸 NSF Funding</a>
+      </nav>
+    </header>
+
+    <section class="search-section">
+      <div class="search-intro">
+        <h2>Explore US academic computer science jobs</h2>
+        <p>Faculty, teaching-track, research, and postdoc openings at CSRankings schools, with deadlines and each school's ranking. <a href="jobs-submit.html">Submit or update a posting.</a></p>
+      </div>
+
+      <div class="search-container">
+        <div class="universal-search">
+          <input type="search" id="jobs-search" placeholder="Loading jobs…" disabled autofocus autocomplete="off" aria-autocomplete="list" aria-controls="universal-suggestions" aria-expanded="false">
+          <div id="universal-suggestions" class="universal-suggestions" role="listbox" hidden></div>
+        </div>
+      </div>
+
+      <div class="search-examples" aria-label="Try job searches">
+        <span>Try:</span>
+        <span id="jobs-examples" class="search-examples-row"></span>
+      </div>
+
+      <div class="search-filters" role="search" aria-label="Filter jobs">
+        <div class="filter-group">
+          <select id="track-select" aria-label="Position type">
+            <option value="all">All Position Types</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select id="level-select" aria-label="Rank">
+            <option value="all">Any Rank</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select id="area-select" aria-label="Research area">
+            <option value="all">All Areas</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select id="state-select" aria-label="State">
+            <option value="all">All States</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select id="status-select" aria-label="Posting status">
+            <option value="active">Active (open) postings</option>
+            <option value="closed">Closed / older postings</option>
+            <option value="all">All postings</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select id="sort-select" aria-label="Sort postings">
+            <option value="deadline">Soonest Deadline</option>
+            <option value="posted">Recently Posted</option>
+            <option value="school">School Name</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select id="view-select" aria-label="Group postings">
+            <option value="position">View: By position</option>
+            <option value="school">View: By school</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <main class="jobs-results-container">
+      <details class="job-map-details" open>
+        <summary>Map by state <span id="map-hint">(click a state to filter)</span></summary>
+        <div id="jobs-map" class="job-map" role="group" aria-label="Positions by state"></div>
+      </details>
+
+      <div class="jobs-status-bar">
+        <div id="jobs-status" role="status" aria-live="polite">Loading jobs…</div>
+        <div id="jobs-count" class="jobs-count-highlight"></div>
+      </div>
+
+      <section id="jobs-results" class="jobs-results" aria-label="US academic CS jobs"></section>
+
+      <p class="context-note">
+        Postings are collected from public department and university hiring pages and community submissions, then reviewed; a checkmark means a posting was checked against its official page, not that CS Picks endorses the employer. A posting stays listed as active until its deadline passes (or, with no deadline, until it has not been confirmed for 90 days); select “Closed / older postings” to browse earlier ones. Deadlines are interpreted as Anywhere on Earth. Always confirm details and apply on the official page. School rankings are CSRankings (US, last 10 years) and are informational only.
+      </p>
+    </main>
+  </div>
+  <script type="module" src="/src/jobs/main.js"></script>
+</body>
+</html>

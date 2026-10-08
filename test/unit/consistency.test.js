@@ -12,6 +12,8 @@ const HTML_PAGES = [
   'csconfs-submit.html',
   'grants.html',
   'grants-submit.html',
+  'jobs.html',
+  'jobs-submit.html',
   'nsf.html'
 ];
 
@@ -20,6 +22,7 @@ const EXPECTED_NAV_ITEMS = [
   '☠️ Simulator',
   '📅 CS Confs',
   '💰 Awards & Grants',
+  '🎓 US Jobs',
   '🇺🇸 NSF Funding'
 ];
 

@@ -13,6 +13,8 @@ export default defineConfig({
                 nsf: resolve(__dirname, 'nsf.html'),
                 grants: resolve(__dirname, 'grants.html'),
                 grantsSubmit: resolve(__dirname, 'grants-submit.html'),
+                jobs: resolve(__dirname, 'jobs.html'),
+                jobsSubmit: resolve(__dirname, 'jobs-submit.html'),
             },
         },
     },

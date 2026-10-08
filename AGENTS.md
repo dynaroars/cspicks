@@ -22,7 +22,7 @@ JSON files in `public/`, then processed in the browser.
 npm run dev       # vite dev server at http://localhost:5173/
 npm test          # run the Node.js unit tests (test/data.test.js)
 npm run test:e2e  # Playwright e2e tests (test/e2e/); auto-starts the dev server on :4173
-npm run build      # production build to dist/ (multi-page: index, simulator, funding)
+npm run build      # production build to dist/ (multi-page: index, simulator, funding, csconfs, grants, jobs)
 npm run preview    # preview the production build
 ```
 
@@ -64,6 +64,13 @@ project.
   for its funding sections. Search itself carries no NSF data and never loads the snapshot.
 - `grants.html` + `src/grants/main.js` — standalone CS research awards, fellowships, and grants explorer
   over the database in `public/grants.json` (industry gifts, NSF calls, DARPA, DOE, DoD, foundations, societies).
+- `jobs.html` + `src/jobs/main.ts` — US academic CS jobs explorer over `public/jobs.json`. Modeled on the grants page
+  (select filters, search box, card list) with a position/school view toggle and a US state tile map. `jobs-data.ts`
+  owns loading, the active/closed definition (`isActive`: not closed, deadline not passed, or confirmed within 90 days),
+  filtering, and grouping; `jobs-render.ts` the cards and map; school rank chips load lazily from `loadData()`. Crawled
+  from CSRankings departments by a scheduled routine (MAINTENANCE.md §6.5); queue/seed tooling is
+  `scripts/jobs-maintain.mjs` with state in `scripts/data/jobs-sources.json`.
+- `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
 - `grants-submit.html` + `src/grants/submit.js` — single unified submission/correction form for proposing
   new CS research awards or updating existing entries via GitHub Issue or email.
 - `README.md` — GitHub-hosted FAQ, methodology, limitations, and data documentation.
@@ -173,4 +180,4 @@ it before doing any data-refresh or web-research task on this project.
 ## Testing notes
 
 - `test/unit/*.test.js` uses Node's native test runner (`node --test`).
-- `test/e2e/*.spec.js` uses Playwright to test all pages (`index.html`, `simulator.html`, `csconfs.html`, `csconfs-submit.html`, `grants.html`, `grants-submit.html`, `nsf.html`).
+- `test/e2e/*.spec.js` uses Playwright to test all pages (`index.html`, `simulator.html`, `csconfs.html`, `csconfs-submit.html`, `grants.html`, `grants-submit.html`, `jobs.html`, `jobs-submit.html`, `nsf.html`).

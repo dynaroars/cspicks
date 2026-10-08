@@ -29,6 +29,7 @@ source doesn't confirm a fact, leave it `null`/`TBD`/unset and say so.
 | **Daily (automated)** | OpenAlex affiliation history | `scripts/daily-openalex-sync.sh` via cron — already running, no action needed unless it stalls (check `.openalex-cron.log`) | Low, budget-capped |
 | **Weekly** | CS Conference schedule | Scan series with deadlines in the next ~2 months for newly announced dates/venues/chairs | Medium (web research) |
 | **Monthly** | NSF name matching | `npm run sync:nsf:names` | Low (2 CSV downloads) |
+| **Season-aware (automated)** | US academic jobs | `npm run maintain:jobs -- --limit 10` lists the schools due; the scheduled agent crawls their hiring pages into `public/jobs.json` (§6.5) | Medium (web research) |
 | **Monthly** | Grants/Awards | Scan for new call cycles, deadline updates, and expired entries | Medium (web research) |
 | **Monthly** | CS Conference schedule | Full audit pass across all current/upcoming editions, not just near-term ones | Medium-high (web research) |
 | **Quarterly (automated)** | NSF award data | `npm run sync:nsf:all` via `.github/workflows/nsf-full-sync.yml`, which opens a PR (see docs/AUTOMATION.md) | High (thousands of API calls, hours) |
@@ -37,6 +38,7 @@ source doesn't confirm a fact, leave it `null`/`TBD`/unset and say so.
 | **On demand** | NSF award data (scoped) | `npm run sync:nsf -- --school "<name>"` or `--faculty "<name>"` | Low-medium |
 | **On demand, after name-matching changes** | NSF award data (no API) | `npm run sync:nsf:rebuild` | Local cache only |
 | **On demand, when reports look wrong** | OpenAlex history / school aliases full rebuild | `node scripts/build-openalex-history.js`, `node scripts/build-school-aliases.js` | High (large API usage) |
+| **When submissions arrive** | Jobs submissions | Review `jobs-submit.html` output against the department's own posting, then update `public/jobs.json` (§6.5) | Low |
 | **When submissions arrive** | Grants corrections/submissions | Review `grants-submit.html` output against the official URL, then update `public/grants.json` | Low-medium |
 | **Before a release, or when the roster changes materially** | Sitemap, OG image | `npm run sitemap`, `npm run og:image` | Low |
 | **Periodically, or when adding large files** | Repo size guard | `node scripts/check-project-size.mjs` | Low |
@@ -590,6 +592,82 @@ When a submission arrives:
 npm test                                            # Runs test/unit/*.test.js (asserts schema completeness, unique IDs, and filter integrity)
 npm run build                                       # Verifies Vite multi-page bundle compilation
 npx playwright test test/e2e/grants.spec.js test/e2e/grants-submit.spec.js  # Runs Playwright E2E verification
+```
+
+## 6.5. US academic jobs (`public/jobs.json`)
+
+`jobs.html` reads `public/jobs.json`: faculty, teaching-track, research, postdoc, visiting, and
+chair/dean openings at US CSRankings schools. **The main source is crawling each school's own
+department hiring page**, not third-party boards. People can also submit postings through
+`jobs-submit.html`, but a submission is a lead, never a source.
+
+Crawl state lives in `scripts/data/jobs-sources.json` (one row per US CSRankings school, seeded from
+CSRankings' `institutions.csv` with `npm run maintain:jobs -- --seed`; re-run it when CSRankings adds US
+schools). Each row holds the school's `homepage`, the discovered `jobsUrl`, `state`, and the last crawl's
+`lastCheckedAt` / `outcome` / `summary` / `checkedUrls` / `deferredUntil`. `npm run maintain:jobs -- --limit N`
+prints the queue: never-checked schools first (largest CSRankings faculty count first), then schools whose
+recheck interval has elapsed. Intervals are season-aware: postings appear August to January, so schools with open
+postings are rechecked every 7 days in season (14 off-season) and others every 21 days (60 off-season).
+`npm run maintain:jobs -- --stats` shows coverage.
+
+### Crawling a school (playbook: `TASKS/audit_us_jobs.md`)
+
+1. Find the department's own faculty-hiring or "open positions" page, starting from the `homepage` in the
+   sources row (look for Employment / Careers / Open Positions / Join Us links). University HR portals and
+   the department page both count as official. AcademicJobsOnline, HigherEdJobs, Indeed, LinkedIn, and
+   social posts are leads only: follow them to the official posting, never copy facts from them. Record the
+   page in `jobsUrl`.
+2. For every CS-relevant opening (computer science, computer engineering, AI, data science, cybersecurity,
+   or school/college-of-computing units), add or update one record. Skip positions plainly outside computing.
+3. For records already in `jobs.json` for this school: if the posting is still listed, set `lastSeenAt` to today
+   and refresh changed facts; if it is gone or marked filled/closed on the official page, set `closedAt` to today.
+   **Never delete records**: closed postings are the "older postings" archive.
+4. Record the result in the school's sources row (`lastCheckedAt`, `outcome` = `complete` | `incomplete` |
+   `blocked` | `not_found`, `summary`, `checkedUrls`). If no hiring page can be found or the site blocks the
+   crawler, set `outcome` and `deferredUntil` (+21 days) and add no postings. **Unknown beats wrong**: never guess a
+   deadline, rank, or area.
+
+### Schema (`public/jobs.json`, an array)
+
+| Field | Notes |
+| --- | --- |
+| `id` | Stable kebab-case slug: `<school-short>-<role-slug>-<yyyy>`; never reused, never changed. |
+| `school` | The exact CSRankings institution name (as in `jobs-sources.json`); a unit test enforces it. |
+| `department`, `title` | As on the posting. |
+| `track` | `tenure-track`, `teaching`, `research`, `postdoc`, `visiting`, `leadership`. |
+| `level` | `assistant`, `associate`, `full`, `open`, or null when the posting has no rank (postdocs, lecturers). |
+| `areas` | CSRankings area keys (`src/shared.ts` `areaLabels`: `ai`, `sec`, `plan`, …). Empty array means open to all areas. Only list areas the posting names. |
+| `state`, `city` | USPS state code (required) and city. |
+| `deadline` | ISO `YYYY-MM-DD`, or null when none is stated. Interpreted as Anywhere on Earth. |
+| `rolling` | `true` when the posting reviews until filled; `deadline` is then a priority date or null. |
+| `reviewBegins`, `startDate`, `postedDate` | ISO dates, only when the posting states them. |
+| `lastSeenAt` | ISO date the posting was last confirmed live. Required. |
+| `closedAt` | ISO date the posting was seen closed/filled; omit while open. |
+| `url` | The official posting URL (https). One record per URL. |
+| `summary` | At most two sentences, paraphrased; never paste a posting. |
+| `source` | `crawl` or `submission`. |
+| `verified` | `true` once checked against the official page. |
+
+### How "active" works
+
+The page shows active postings by default. A posting is active unless `closedAt` is set, or its deadline
+has passed, or (when it has no deadline, or is rolling) it has not been confirmed (`lastSeenAt`) in 90
+days. The status select ("Closed / older postings", "All postings") and the `status:` keyword reveal the
+rest. This is why crawls must keep `lastSeenAt` current for postings with no deadline.
+
+### Reviewing user submissions (`jobs-submit.html`)
+
+A submission arrives as a GitHub Issue or email with a JSON payload. Open the official URL, confirm the
+position exists and the facts match, then add or update the record (`source: "submission"`, `verified: true`),
+or close the Issue with the reason. For "closed or filled" reports, confirm on the official page before
+setting `closedAt`.
+
+### Verification
+
+```bash
+npm test                                   # test/unit/jobs.test.js: schema, unique ids/URLs, CSRankings school names
+npm run build
+npx playwright test test/e2e/jobs.spec.js
 ```
 
 ## 7. Sitemap & OG image

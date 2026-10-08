@@ -44,6 +44,7 @@ Check VietProfs' times before moving anything here.
 | `audit` | `trig_01RgGWz3Xjw6gXvqPYgixP7C` | Opus 5.5 | `0 16 * * *` | Daily 12 PM | [Auditor](#auditor-audit) |
 | `confs` | `trig_018AYNAaQfwJC2rx8JX2zZKo` | Sonnet 5.5 | `0 20 * * 0,2,4,6` | Sun, Tue, Thu, Sat 4 PM | [Conference audit](#conference-audit-confs) |
 | `grants` | `trig_01LuUf649h8NwKMEftjktkmS` | Sonnet 5.5 | `0 23 * * 3,6` | Wed and Sat 7 PM | [Grants audit](#grants-audit-grants) |
+| `jobs` | *(create at claude.ai/code/routines; id TBD)* | Sonnet 5.5 | `0 22 * * 1,3,5` | Mon, Wed, Fri 6 PM | [US jobs crawl](#us-jobs-crawl-jobs) |
 | `data-sync` | `trig_014ksNYkkzyHVxS2Kub4LqsG` | Sonnet 5 | `30 0 3 * *` | 3rd of month, 8:30 PM (2nd) | [Mechanical data sync](#mechanical-data-sync-data-sync) |
 | `confs-discover` | `trig_01LZM6T6zVarUND6Uvh6HUTh` | Sonnet 5 | `0 1 8 * *` | 8th of month, 9 PM (7th) | [Discover conferences](#discover-conferences-confs-discover) |
 | `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5 | `0 1 22 * *` | 22nd of month, 9 PM (21st) | [Discover grants](#discover-grants-grants-discover) |
@@ -126,8 +127,8 @@ Follow `TASKS/AUDIT_ISSUES_PRS.md`, with these rules taking precedence:
   contain generated data, not researched facts: check the diff shape per MAINTENANCE.md's verification checklist (no near-total rewrite,
   no unexplained drop) and spot-check a few rows instead of re-verifying every fact. For `dblp`,
   update the venue count in `CONF_SET_HELP` (src/filters.ts) if the accepted count changed.
-- Submission Issues (from `grants-submit.html` or `csconfs-submit.html`): a submission is a lead,
-  not a source. Verify the official URL, then apply it per MAINTENANCE.md §5/§6, or close with the
+- Submission Issues (from `grants-submit.html`, `csconfs-submit.html`, or `jobs-submit.html`): a submission is a lead,
+  not a source. Verify the official URL, then apply it per MAINTENANCE.md §5/§6/§6.5, or close with the
   reason.
 - Needs an owner decision (conflicting official sources, a policy question, anything that would
   delete data): comment with findings and a recommendation, and leave it open.
@@ -184,6 +185,26 @@ within the next 90 days, then entries with no concrete date in `deadline`. Break
 PRs. For each entry, confirm the official page, update the deadline/amount/eligibility, keep
 concrete historical dates as §6 describes, and set `"status": "historical"` for discontinued
 programs rather than deleting them. Keep `id`s stable.
+
+### US jobs crawl (`jobs`)
+
+Playbook: `TASKS/audit_us_jobs.md` and MAINTENANCE.md §6.5 (schema, official-source rules, how "active" works).
+Cap: 10 schools. Crawling each school's own department hiring page is the main source of `public/jobs.json`;
+`jobs-submit.html` submissions are leads the auditor verifies.
+
+1. Pick the queue with `npm run maintain:jobs -- --limit 10`. It puts never-checked schools first (largest
+   CSRankings faculty first), then schools due for a recheck (season-aware: more often August to February, and
+   more often for schools with open postings). If `scripts/data/jobs-sources.json` is missing a US school, run
+   `npm run maintain:jobs -- --seed` first.
+2. Crawl each school per §6.5: find or confirm the official hiring page (`jobsUrl`), add or update records for
+   CS-relevant openings, set `lastSeenAt` on postings still live, and set `closedAt` on postings that are gone or
+   marked filled. Never delete a record; never copy facts from AcademicJobsOnline, HigherEdJobs, or social posts.
+3. Record each school's result in `scripts/data/jobs-sources.json` (`lastCheckedAt`, `outcome`, `summary`,
+   `checkedUrls`, `deferredUntil` = +21 days for `not_found`/`blocked`, otherwise `null`). Open one PR even if only
+   the sources file changed.
+4. Every new or changed deadline and every `closedAt` goes in the PR description with its official URL; the
+   auditor re-verifies all of them. Postings whose deadline is unclear are added with `deadline: null` and
+   a note in the PR, not a guess. Don't add a posting you can't tie to an official URL.
 
 ### Mechanical data sync (`data-sync`)
 
