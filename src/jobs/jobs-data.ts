@@ -4,6 +4,7 @@
  */
 import { matchesKeyword, parseKeywordQuery } from '../search-keywords.js';
 import { areaLabels } from '../shared.js';
+import { FAVORITES_KEYWORD_SPEC } from '../favorites.js';
 import { US_STATES, resolveState } from './states.js';
 import type { KeywordSpec } from '../search-keywords.js';
 import type { Job, JobLevel, JobTrack } from '../types.js';
@@ -36,7 +37,8 @@ export const JOBS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'loc', aliases: ['state', 'location'], example: 'loc: texas', description: 'US state (name or two-letter code) or city' },
   { key: 'track', example: 'track: teaching', description: 'tenure-track, teaching, research, postdoc, visiting, or leadership' },
   { key: 'level', aliases: ['rank'], example: 'level: assistant', description: 'assistant, associate, full, or open rank' },
-  { key: 'status', example: 'status: closed', description: '"active" (default), "closed" (older postings), or "all"' }
+  { key: 'status', example: 'status: closed', description: '"active" (default), "closed" (older postings), or "all"' },
+  FAVORITES_KEYWORD_SPEC
 ];
 
 export type StatusFilter = 'active' | 'closed' | 'all';

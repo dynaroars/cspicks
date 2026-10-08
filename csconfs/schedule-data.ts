@@ -2,6 +2,7 @@ import { getConferenceAreaMap, publicationMatchesConferenceSet } from '../src/da
 import { areaLabels } from '../src/shared.js';
 import { matchesKeyword, parseKeywordQuery } from '../src/search-keywords.js';
 import { locationMatches } from './place.js';
+import { FAVORITES_KEYWORD_SPEC } from '../src/favorites.js';
 import type { KeywordSpec } from '../src/search-keywords.js';
 import type { ConferenceSetId } from '../src/data/conference-sets.js';
 import type { ConferenceGroup, ConferenceRecord } from './types.js';
@@ -10,7 +11,8 @@ export const CSCONFS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'loc', aliases: ['location', 'country'], example: 'loc: europe', description: 'Country, US state, region (Europe, Asia, …) or city the conference is held in' },
   { key: 'area', aliases: ['topic'], example: 'area: security', description: 'Research area the conference covers' },
   { key: 'deadline', example: 'deadline: passed', description: '"open" (deadline still ahead), "passed" (deadline over, conference still ahead), or "all" (include past conferences)' },
-  { key: 'verified', aliases: ['status'], example: 'verified: yes', description: '"yes" for reviewed listings, "no" for unverified/estimated ones' }
+  { key: 'verified', aliases: ['status'], example: 'verified: yes', description: '"yes" for reviewed listings, "no" for unverified/estimated ones' },
+  FAVORITES_KEYWORD_SPEC
 ];
 
 const DAY = 86400000;

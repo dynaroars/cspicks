@@ -5,6 +5,7 @@
 
 import { matchesKeyword, parseKeywordQuery } from '../search-keywords.js';
 import type { KeywordSpec } from '../search-keywords.js';
+import { FAVORITES_KEYWORD_SPEC } from '../favorites.js';
 import type { Grant } from '../types.js';
 
 let cachedGrants: Grant[] | null = null;
@@ -14,7 +15,8 @@ export const GRANTS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'audience', aliases: ['who'], example: 'audience: postdoc', description: 'Who the award is for (faculty, PhD, undergrad, postdoc)' },
   { key: 'topic', aliases: ['area'], example: 'topic: AI', description: 'Research topic or area covered' },
   { key: 'loc', aliases: ['location', 'state'], example: 'loc: California', description: 'Eligible state/jurisdiction, for state-specific awards' },
-  { key: 'status', example: 'status: historical', description: '"current" (default) or "historical" (discontinued) awards' }
+  { key: 'status', example: 'status: historical', description: '"current" (default) or "historical" (discontinued) awards' },
+  FAVORITES_KEYWORD_SPEC
 ];
 
 const monthNumbers: Record<string, number> = {

@@ -97,6 +97,10 @@ project.
   place derived-metric logic should live rather than being duplicated per page.
 - `src/analysis-ui.js` — shared HTML-rendering helpers (metric cards, labeled tooltips) used by the
   Search-page analysis panel; keeps `analysis.js` focused on orchestration.
+- `src/favorites.ts` — browser-local ★ favorites (localStorage, one key per page; no account or sync) used by CS Confs,
+  Awards & Grants, and US Jobs: the star button, a "★ Favorites only (N)" select (`#favorites-select`, URL `favorites=only`),
+  the `favorites: only` search keyword, and starred-first ordering. Pages pass their own id function (`job.id`, `grant.id`,
+  `<name> <year>`) to `prioritizeFavorites`/`onlyFavorites` and call `onFavoriteChange` after `wireFavoriteToggles`.
 - `src/seo.js` / `src/share.js` / `src/analytics.js` — growth/discoverability infra used by every page:
   `seo.js` keeps `<title>`/description/canonical/OpenGraph tags in sync with the on-screen view, `share.js`
   is the reusable Copy Link / Web Share control, and `analytics.js` fires opt-in, no-op-by-default usage

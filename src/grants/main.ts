@@ -8,7 +8,7 @@ import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
 import { escapeHtml } from '../shared.js';
-import { createFavoritesStore, wireFavoriteToggles } from '../favorites.js';
+import { createFavoritesStore, favoritesSelect, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { keywordHelpIcon } from '../search-keywords.js';
 import type { Grant } from '../types.js';
 import type { createSuggestionBox as CreateSuggestionBox } from '../suggestion-box.js';
@@ -47,7 +47,8 @@ function getFilterState() {
     status: selectById('status-select')?.value || 'all',
     topic: selectById('topic-select')?.value || 'all',
     deadlineFilter: selectById('deadline-select')?.value || 'all',
-    sortBy: selectById('sort-select')?.value || 'featured'
+    sortBy: selectById('sort-select')?.value || 'featured',
+    favorites: selectById('favorites-select')?.value || 'all'
   };
 }
 
@@ -60,6 +61,7 @@ function updateUrl(filterState: ReturnType<typeof getFilterState>) {
   if (filterState.topic !== 'all') next.set('topic', filterState.topic);
   if (filterState.deadlineFilter !== 'all') next.set('deadline', filterState.deadlineFilter);
   if (filterState.sortBy !== 'featured') next.set('sort', filterState.sortBy);
+  if (filterState.favorites === 'only') next.set('favorites', 'only');
 
   const newUrl = next.toString() ? `${window.location.pathname}?${next}${window.location.hash}` : `${window.location.pathname}${window.location.hash}`;
   window.history.replaceState({}, '', newUrl);
@@ -76,13 +78,15 @@ function updateUrl(filterState: ReturnType<typeof getFilterState>) {
 function render() {
   if (!allGrants.length) return;
   const filterState = getFilterState();
-  const filtered = filterGrants(allGrants, filterState);
+  const favoritesOnly = wantsFavoritesOnly(filterState.query, filterState.favorites);
+  const matched = filterGrants(allGrants, filterState);
+  const filtered = favoritesOnly ? onlyFavorites(matched, grant => grant.id, favorites) : prioritizeFavorites(matched, grant => grant.id, favorites);
 
   if (!filtered.length) {
     resultsContainer.innerHTML = `
       <div class="universal-suggestion-empty" style="padding: 3rem 1rem; text-align: center; color: var(--text-secondary);">
-        <h3>No matching awards or grants found</h3>
-        <p style="margin-top: 0.5rem;">Try broadening your search terms or clearing some filters.</p>
+        <h3>${favoritesOnly ? 'No starred awards or grants match' : 'No matching awards or grants found'}</h3>
+        <p style="margin-top: 0.5rem;">${favoritesOnly ? 'Star an award with the ☆ button to keep it here, or switch back to “All items”.' : 'Try broadening your search terms or clearing some filters.'}</p>
         <button type="button" class="btn-secondary" id="reset-grants-filters" style="margin-top: 1rem;">Reset all filters</button>
       </div>
     `;
@@ -177,6 +181,8 @@ function setupDelegatedListeners() {
       if (deadEl) deadEl.value = 'all';
       if (statusEl) statusEl.value = 'all';
       if (sortEl) sortEl.value = 'featured';
+      const favEl = selectById('favorites-select');
+      if (favEl) favEl.value = 'all';
       render();
       input.focus();
       return;
@@ -217,7 +223,7 @@ function setupDelegatedListeners() {
   });
 
   // Filter change listeners
-  ['audience-select', 'sponsor-category-select', 'topic-select', 'deadline-select', 'status-select', 'sort-select'].forEach(id => {
+  ['audience-select', 'sponsor-category-select', 'topic-select', 'deadline-select', 'status-select', 'sort-select', 'favorites-select'].forEach(id => {
     document.getElementById(id)?.addEventListener('change', () => {
       render();
     });
@@ -278,6 +284,7 @@ function populateFilterOptions(grants: Grant[]) {
 async function init() {
   try {
     allGrants = await loadGrantsData();
+    document.getElementById('favorites-filter')!.innerHTML = favoritesSelect(params.get('favorites') === 'only' ? 'only' : 'all', favorites.all().length);
     populateFilterOptions(allGrants);
     suggestions = buildSuggestions();
 
@@ -292,6 +299,7 @@ async function init() {
     searchBox.classList.add('has-search-help');
     searchBox.insertAdjacentHTML('afterbegin', keywordHelpIcon(GRANTS_KEYWORD_SPECS, 'grants-search-help'));
     wireFavoriteToggles(resultsContainer, favorites);
+    onFavoriteChange(resultsContainer, favorites, render);
     initTooltipPositioning();
 
     setupExamples();

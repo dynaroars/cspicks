@@ -9,7 +9,7 @@ import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
 import { areaLabels, escapeHtml } from '../shared.js';
-import { createFavoritesStore, wireFavoriteToggles } from '../favorites.js';
+import { createFavoritesStore, favoritesSelect, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { keywordHelpIcon } from '../search-keywords.js';
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadData } from '../data.js';
 import type { JobFilters, StatusFilter } from './jobs-data.js';
@@ -42,13 +42,14 @@ function state() {
     state: select('state-select').value,
     status: select('status-select').value as StatusFilter,
     sortBy: select('sort-select').value as JobFilters['sortBy'],
-    view: select('view-select').value
+    view: select('view-select').value,
+    favorites: select('favorites-select').value
   };
 }
 
 function updateUrl(current: ReturnType<typeof state>) {
   const next = new URLSearchParams();
-  const defaults: Record<string, string> = { track: 'all', level: 'all', area: 'all', state: 'all', status: 'active', sortBy: 'deadline', view: 'position' };
+  const defaults: Record<string, string> = { track: 'all', level: 'all', area: 'all', state: 'all', status: 'active', sortBy: 'deadline', view: 'position', favorites: 'all' };
   const names: Record<string, string> = { sortBy: 'sort' };
   if (current.query) next.set('q', current.query);
   (Object.keys(defaults) as Array<keyof typeof current>).forEach(key => {
@@ -67,16 +68,19 @@ function render() {
   if (!allJobs.length && !statusText.dataset.loaded) return;
   const current = state();
   const filters: JobFilters = { ...current, now: Date.now() };
-  const shown = filterJobs(allJobs, filters);
+  const favoritesOnly = wantsFavoritesOnly(current.query, current.favorites);
+  // Starred postings lead the list; "favorites only" hides the rest.
+  const byFavorites = (list: Job[]) => favoritesOnly ? onlyFavorites(list, job => job.id, favorites) : prioritizeFavorites(list, job => job.id, favorites);
+  const shown = byFavorites(filterJobs(allJobs, filters));
   // The map ignores its own state filter so every state keeps a count.
-  const counts = stateCounts(filterJobs(allJobs, filters, true));
+  const counts = stateCounts(byFavorites(filterJobs(allJobs, filters, true)));
   mapElement.innerHTML = renderStateMap(STATE_TILE_ROWS, counts, current.state);
 
   const now = Date.now();
   if (!shown.length) {
     results.innerHTML = `<div class="jobs-empty">
-      <h3>${allJobs.length ? 'No matching positions' : 'No postings yet'}</h3>
-      <p>${allJobs.length
+      <h3>${favoritesOnly ? 'No starred positions match' : allJobs.length ? 'No matching positions' : 'No postings yet'}</h3>
+      <p>${favoritesOnly ? 'Star a posting with the ☆ button to keep it here, or switch back to “All items”.' : allJobs.length
         ? 'Try broadening your search, choosing “All postings”, or clearing some filters.'
         : 'Postings are added as department hiring pages are crawled and as people submit them.'}
         You can also <a href="jobs-submit.html">submit a posting</a>.</p>
@@ -111,6 +115,7 @@ function populateOptions() {
   add('area-select', Object.entries(areaLabels).sort((a, b) => a[1].localeCompare(b[1])));
   add('state-select', Object.entries(US_STATES));
 
+  select('favorites-select').value = params.get('favorites') === 'only' ? 'only' : 'all';
   const restore: Array<[string, string]> = [['track', 'track-select'], ['level', 'level-select'], ['area', 'area-select'], ['state', 'state-select'], ['status', 'status-select'], ['view', 'view-select']];
   restore.forEach(([param, id]) => {
     const value = params.get(param);
@@ -149,10 +154,11 @@ function setupEvents() {
     select('status-select').value = 'active';
     select('sort-select').value = 'deadline';
     select('view-select').value = 'position';
+    select('favorites-select').value = 'all';
     render();
     input.focus();
   };
-  ['track-select', 'level-select', 'area-select', 'state-select', 'status-select', 'sort-select', 'view-select']
+  ['track-select', 'level-select', 'area-select', 'state-select', 'status-select', 'sort-select', 'view-select', 'favorites-select']
     .forEach(id => select(id).addEventListener('change', render));
 
   mapElement.addEventListener('click', event => {
@@ -216,6 +222,7 @@ async function init() {
   try {
     allJobs = await loadJobsData();
     statusText.dataset.loaded = 'true';
+    document.getElementById('favorites-filter')!.innerHTML = favoritesSelect(params.get('favorites') === 'only' ? 'only' : 'all', favorites.all().length);
     populateOptions();
     suggestions = buildSuggestions();
     input.disabled = false;
@@ -224,6 +231,7 @@ async function init() {
     searchBox.classList.add('has-search-help');
     searchBox.insertAdjacentHTML('afterbegin', keywordHelpIcon(JOBS_KEYWORD_SPECS, 'jobs-search-help'));
     wireFavoriteToggles(results, favorites);
+    onFavoriteChange(results, favorites, render);
     initTooltipPositioning();
     setupEvents();
     render();

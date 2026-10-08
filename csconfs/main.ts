@@ -4,7 +4,7 @@ import { initTooltipPositioning } from '../src/tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../src/seo.js';
 import { trackView } from '../src/analytics.js';
 import { escapeHtml } from '../src/shared.js';
-import { createFavoritesStore, wireFavoriteToggles } from '../src/favorites.js';
+import { createFavoritesStore, favoritesSelect, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../src/favorites.js';
 import { keywordHelpIcon } from '../src/search-keywords.js';
 import { CSCONFS_KEYWORD_SPECS, DEADLINE_MODES, filterSchedule, scheduleSuggestions } from './schedule-data.js';
 import { LOCATION_REGIONS } from './place.js';
@@ -26,6 +26,7 @@ let suggestions: ReturnType<typeof CreateSuggestionBox>;
 
 const deadlineMode = () => (document.querySelector<HTMLSelectElement>('#deadline-mode')!.value || 'upcoming') as DeadlineMode;
 const locationValue = () => document.querySelector<HTMLSelectElement>('#location-select')!.value;
+const favoritesValue = () => document.querySelector<HTMLSelectElement>('#favorites-select')?.value || 'all';
 
 function updateUrl() {
   const next = filters.toParams();
@@ -33,6 +34,7 @@ function updateUrl() {
   if (query) next.set('q', query);
   if (deadlineMode() !== 'upcoming') next.set('deadline', deadlineMode());
   if (locationValue()) next.set('loc', locationValue());
+  if (favoritesValue() === 'only') next.set('favorites', 'only');
   history.replaceState({}, '', `${location.pathname}?${next}`);
   updatePageMeta({
     title: query ? `${query} - CS Conference Schedule - ${SITE_NAME}` : `${SITE_NAME} - CS Conference Schedule`,
@@ -45,7 +47,8 @@ function updateUrl() {
 function render() {
   if (!conferences.length) return;
   const mode = deadlineMode();
-  const groups = filterSchedule(conferences, {
+  const favoritesOnly = wantsFavoritesOnly(input.value, favoritesValue());
+  const matched = filterSchedule(conferences, {
     startYear: filters.startYear,
     endYear: filters.endYear,
     confSet: filters.confSet,
@@ -53,11 +56,13 @@ function render() {
     deadline: mode,
     location: locationValue()
   });
+  const favoriteIdOf = (group: typeof matched[number]) => `${group[0].name} ${group[0].year}`;
+  const groups = favoritesOnly ? onlyFavorites(matched, favoriteIdOf, favorites) : prioritizeFavorites(matched, favoriteIdOf, favorites);
   results.innerHTML = groups.map(group => renderScheduleCard(group, Date.now(), favorites.isFavorite)).join('');
   const suffix = mode === 'upcoming' ? ' upcoming' : mode === 'open' ? ' open-deadline' : mode === 'passed' ? ' past-deadline, still ahead' : '';
   status.textContent = groups.length
     ? `${groups.length} matching${suffix} conference${groups.length === 1 ? '' : 's'}`
-    : `No conferences match these years, venue set, and search terms.`;
+    : favoritesOnly ? 'No starred conferences match. Star a conference with the ☆ button, or switch back to “All items”.' : `No conferences match these years, venue set, and search terms.`;
   document.getElementById('csconfs-count')!.textContent = `${groups.length} conferences during`;
   updateUrl();
   trackView(input.value.trim() ? 'search-results' : 'default', 'csconfs');
@@ -164,8 +169,9 @@ async function init() {
       </div>
       <div class="filter-group">
         <select id="deadline-mode" aria-label="Deadline status">${DEADLINE_MODES.map(mode => option(mode, deadlineLabels[mode], mode === wantedDeadline)).join('')}</select>
-      </div>`);
-    ['location-select', 'deadline-mode'].forEach(id => document.getElementById(id)!.addEventListener('change', () => {
+      </div>
+      <div class="filter-group">${favoritesSelect(params.get('favorites') === 'only' ? 'only' : 'all', favorites.all().length)}</div>`);
+    ['location-select', 'deadline-mode', 'favorites-select'].forEach(id => document.getElementById(id)!.addEventListener('change', () => {
       render();
       renderExamples();
     }));
@@ -173,6 +179,7 @@ async function init() {
     searchBox.classList.add('has-search-help');
     searchBox.insertAdjacentHTML('afterbegin', keywordHelpIcon(CSCONFS_KEYWORD_SPECS, 'csconfs-search-help'));
     wireFavoriteToggles(results, favorites);
+    onFavoriteChange(results, favorites, render);
     initTooltipPositioning();
 
     suggestions = buildSuggestions();
