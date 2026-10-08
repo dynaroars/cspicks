@@ -57,6 +57,24 @@
     "verified": true
   },
   {
+    "id": "augusta-sccs-tenure-track-open-2026",
+    "school": "Augusta University",
+    "department": "School of Computer and Cyber Sciences",
+    "title": "Tenure-Track and Tenured Faculty (Assistant, Associate, Professor)",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [],
+    "anyArea": true,
+    "state": "GA",
+    "city": "Augusta",
+    "rolling": true,
+    "url": "https://www.augusta.edu/ccs/faculty-positions.php",
+    "summary": "Standing invitation for positions in all mainstream areas of computing, including computer science, cybersecurity, information systems, and data science; review continues until filled.",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "binghamton-asst-assoc-strive-ai-2026",
     "school": "Binghamton University",
     "department": "School of Computing",
@@ -1281,6 +1299,48 @@
     "verified": true
   },
   {
+    "id": "uchicago-asst-prof-cs-2026",
+    "school": "University of Chicago",
+    "department": "Department of Computer Science",
+    "title": "Assistant Professor of Computer Science",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "robotics"
+    ],
+    "anyArea": true,
+    "state": "IL",
+    "city": "Chicago",
+    "reviewBegins": "2026-10-15",
+    "rolling": true,
+    "postedDate": "2026-09-15",
+    "url": "https://apply.interfolio.com/193574",
+    "summary": "Broad-area search across computer science, with particular interest in systems, AI, and robotics / embodied intelligence.",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "uchicago-senior-instructional-prof-mscapp-2026",
+    "school": "University of Chicago",
+    "department": "Department of Computer Science",
+    "title": "Senior Instructional Professor and Associate Academic Director, MS-CAPP",
+    "track": "teaching",
+    "level": "open",
+    "areas": [],
+    "state": "IL",
+    "city": "Chicago",
+    "reviewBegins": "2026-08-26",
+    "rolling": true,
+    "postedDate": "2026-07-27",
+    "url": "https://apply.interfolio.com/189510",
+    "summary": "Career-track teaching position (up to five-year renewable term) that also serves as associate academic director of the MS in Computational Analysis and Public Policy.",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "colorado-asst-prof-ai-2026",
     "school": "University of Colorado Boulder",
     "department": "Department of Computer Science",
@@ -1734,6 +1794,27 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://website.cs.vt.edu/About/faculty-search/2026-tenure-track-position.html",
     "summary": "Full-time tenure-track appointment building an externally funded research program and teaching and mentoring students. Rank and areas are not stated on the department page.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "wichita-asst-prof-cybersecurity-2026",
+    "school": "Wichita State University",
+    "department": "Electrical and Computer Engineering",
+    "title": "Assistant Professor of Cybersecurity",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "sec"
+    ],
+    "state": "KS",
+    "city": "Wichita",
+    "deadline": "2026-12-01",
+    "rolling": true,
+    "startDate": "2027-08-01",
+    "url": "https://jobs.wichita.edu/jobs/assistant-professor-of-cybersecurity-wichita-kansas-united-states",
+    "summary": "Tenure-track cybersecurity position in the College of Engineering with a priority deadline of December 1, 2026.",
+    "lastSeenAt": "2026-10-08",
     "source": "crawl",
     "verified": true
   }
