@@ -610,6 +610,18 @@ recheck interval has elapsed. Intervals are season-aware: postings appear August
 postings are rechecked every 7 days in season (14 off-season) and others every 21 days (60 off-season).
 `npm run maintain:jobs -- --stats` shows coverage.
 
+### Reading JavaScript pages (`npm run render:jobs`)
+
+Plain fetch tools return only the app shell for Interfolio, Workday, PeopleAdmin, PeopleSoft, NEOGOV and many department sites. `scripts/jobs-render.mjs` renders a page in headless Chromium (Playwright, already a devDependency; install the browser once with `npx playwright install --with-deps chromium`):
+
+```bash
+npm run render:jobs -- https://apply.interfolio.com/194231          # visible text of a posting
+npm run render:jobs -- --links https://www.cs.example.edu/           # likely hiring page and posting links on a homepage
+npm run render:jobs -- --out /tmp/pages url1 url2 ...                # one file per URL
+```
+
+It is an ordinary browser session with no user-agent spoofing. A 403 or challenge page still means the site is `blocked`: record that and move on. Typical flow: render the homepage with `--links` to find the hiring page, render that page, then render each posting URL to read its deadline, review date, and posted date.
+
 ### Crawling a school (playbook: `TASKS/audit_us_jobs.md`)
 
 1. Find the department's own faculty-hiring or "open positions" page, starting from the `homepage` in the

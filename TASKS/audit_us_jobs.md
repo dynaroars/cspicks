@@ -29,6 +29,10 @@ active/closed definition are in **MAINTENANCE.md §6.5**; read it first.
 5b. **CSRankings names.** `school` must be the exact institution name in `scripts/data/jobs-sources.json`.
 6. **One record per posting URL**; keep `id`s stable and unique.
 
+## Reading JavaScript pages
+
+If a page looks empty (Interfolio, Workday, PeopleAdmin, PeopleSoft, NEOGOV), render it: `npx playwright install --with-deps chromium` once, then `npm run render:jobs -- <url>` (page text) or `npm run render:jobs -- --links <homepage>` (hiring links). See MAINTENANCE.md §6.5. Do not bypass a 403 or challenge page; mark that school `blocked`.
+
 ## Per-school workflow
 
 1. Start at the school's `homepage` (sources row) and find the faculty-hiring / open-positions page. Save it as `jobsUrl`.
