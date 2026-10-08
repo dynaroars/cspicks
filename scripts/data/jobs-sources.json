@@ -52,9 +52,9 @@
     "facultyCount": 170,
     "jobsUrl": "https://siebelschool.illinois.edu/about/positions/faculty-positions",
     "state": "IL",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T21:00:00Z",
     "outcome": "complete",
-    "summary": "Only the Ira Cohen Chair is listed, with full consideration date of 2026-04-30 and a listing reported closed 2026-09-30, so omitted.",
+    "summary": "Faculty-positions page lists only the Ira R. Cohen endowed chair (consideration date 2026-04-30); no 2026-27 searches posted yet. Recheck in November.",
     "checkedUrls": [
       "https://siebelschool.illinois.edu/about/positions/faculty-positions",
       "https://siebelschool.illinois.edu/about/positions/faculty-positions/instructional-faculty"
@@ -67,9 +67,9 @@
     "facultyCount": 159,
     "jobsUrl": "https://www.eecs.mit.edu/career-opportunities-at-eecs/",
     "state": "MA",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T21:00:00Z",
     "outcome": "complete",
-    "summary": "EECS page only shows the search with a Dec 1, 2025 deadline (July 2026 start); the search portal is closed, so nothing open.",
+    "summary": "EECS career-opportunities page shows no open CS faculty searches yet (page renders only a short stub).",
     "checkedUrls": [
       "https://www.eecs.mit.edu/career-opportunities-at-eecs/",
       "https://faculty-searches.mit.edu/eecs"
@@ -217,9 +217,9 @@
     "facultyCount": 130,
     "jobsUrl": "https://www.cs.wisc.edu/people/faculty-staff-recruitment/",
     "state": "WI",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T21:00:00Z",
     "outcome": "incomplete",
-    "summary": "Recruitment page lists RISE-AI NLP and RISE-THRIVE assistant professor ads without stated deadlines; search indicates the NLP deadline (2026-01-14) passed, and no current posting could be verified, so none added.",
+    "summary": "Recruitment page still describes the 2025-26 RISE searches (August 2026 start); the posting pages moved or were removed.",
     "checkedUrls": [
       "https://www.cs.wisc.edu/people/faculty-staff-recruitment/"
     ],
@@ -307,9 +307,9 @@
     "facultyCount": 112,
     "jobsUrl": "https://www.cs.utah.edu/people/faculty/hiring/",
     "state": "UT",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
-    "outcome": "complete",
-    "summary": "Department hiring page lists two postings, but both PeopleAdmin postings show a 2026-04-01 close date and start July 2026 (2025-26 cycle), so none are open.",
+    "lastCheckedAt": "2026-10-08T21:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Hiring page shows two position headings (lecturing professor, tenure-track assistant professor) with no readable details or dates.",
     "checkedUrls": [
       "https://www.cs.utah.edu/people/faculty/hiring/",
       "https://utah.peopleadmin.com/postings/190584",
@@ -403,9 +403,9 @@
     "facultyCount": 101,
     "jobsUrl": "https://www.cis.upenn.edu/open-faculty-positions/",
     "state": "PA",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T21:00:00Z",
     "outcome": "complete",
-    "summary": "Official page lists tenure-track, lecturer and practice-professor categories but states the site is closed to applicants at this time.",
+    "summary": "CIS open-positions page says the application sites are closed at this time; recheck later in the fall.",
     "checkedUrls": [
       "https://www.cis.upenn.edu/open-faculty-positions/"
     ],
@@ -716,9 +716,9 @@
     "facultyCount": 78,
     "jobsUrl": "https://cs.unc.edu/about/faculty-hiring/",
     "state": "NC",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T21:00:00Z",
     "outcome": "complete",
-    "summary": "Page lists an assistant professor search with screening from Dec 2025 and no application link until Fall 2026, so omitted as not currently verifiable.",
+    "summary": "Faculty-hiring page says the 2026-27 application link will be posted in Fall 2026; recheck.",
     "checkedUrls": [
       "https://cs.unc.edu/about/faculty-hiring/"
     ],
@@ -760,9 +760,9 @@
     "facultyCount": 77,
     "jobsUrl": "https://www1.cs.ucr.edu/cse-employment",
     "state": "CA",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T21:00:00Z",
     "outcome": "complete",
-    "summary": "Employment page shows only a 2025-2026 cycle lecturer listing and says faculty recruitments are filled/closing; no 2026-27 openings found, so nothing added.",
+    "summary": "Employment page still describes the 2025-26 cycle.",
     "checkedUrls": [
       "https://www1.cs.ucr.edu/cse-employment"
     ],
@@ -821,9 +821,9 @@
     "facultyCount": 71,
     "jobsUrl": "https://cs.njit.edu/open-faculty-positions",
     "state": "NJ",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-08T21:00:00Z",
     "outcome": "complete",
-    "summary": "Only listing is a tenure-track ad for Fall 2026 start with Dec 31, 2025 full-consideration date, which looks stale; omitted.",
+    "summary": "Open-faculty page describes a Fall 2026 start (last cycle); no 2026-27 ad yet.",
     "checkedUrls": [
       "https://cs.njit.edu/",
       "https://cs.njit.edu/open-faculty-positions"
