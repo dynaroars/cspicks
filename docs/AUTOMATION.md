@@ -44,7 +44,7 @@ Check VietProfs' times before moving anything here.
 | `audit` | `trig_01RgGWz3Xjw6gXvqPYgixP7C` | Opus 5.5 | `0 16 * * *` | Daily 12 PM | [Auditor](#auditor-audit) |
 | `confs` | `trig_018AYNAaQfwJC2rx8JX2zZKo` | Sonnet 5.5 | `0 20 * * 0,2,4,6` | Sun, Tue, Thu, Sat 4 PM | [Conference audit](#conference-audit-confs) |
 | `grants` | `trig_01LuUf649h8NwKMEftjktkmS` | Sonnet 5.5 | `0 23 * * 3,6` | Wed and Sat 7 PM | [Grants audit](#grants-audit-grants) |
-| `jobs` | `trig_01PkBRvYwVSWTCqsCtsNZpPg` | Sonnet 5.5 | `0 22 * * 1,3,5` | Mon, Wed, Fri 6 PM | [US jobs crawl](#us-jobs-crawl-jobs) |
+| `jobs` | `trig_01PkBRvYwVSWTCqsCtsNZpPg` | Sonnet 5.5 | `0 22 * * 1,5` | Mon and Fri 6 PM | [US jobs crawl](#us-jobs-crawl-jobs) |
 | `data-sync` | `trig_014ksNYkkzyHVxS2Kub4LqsG` | Sonnet 5 | `30 0 3 * *` | 3rd of month, 8:30 PM (2nd) | [Mechanical data sync](#mechanical-data-sync-data-sync) |
 | `confs-discover` | `trig_01LZM6T6zVarUND6Uvh6HUTh` | Sonnet 5 | `0 1 8 * *` | 8th of month, 9 PM (7th) | [Discover conferences](#discover-conferences-confs-discover) |
 | `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5 | `0 1 22 * *` | 22nd of month, 9 PM (21st) | [Discover grants](#discover-grants-grants-discover) |
@@ -189,11 +189,11 @@ programs rather than deleting them. Keep `id`s stable.
 ### US jobs crawl (`jobs`)
 
 Playbook: `TASKS/audit_us_jobs.md` and MAINTENANCE.md §6.5 (schema, official-source rules, how "active" works).
-Cap: 10 schools. Crawling each school's own department hiring page is the main source of `public/jobs.json`;
+Cap: 30 schools, worked sequentially by this one agent (never spawn subagents). Runs Monday and Friday, the two weekdays with no other routine, so it never overlaps `confs` (Sun/Tue/Thu/Sat 20:00) or `grants` (Wed/Sat 23:00). Crawling each school's own department hiring page is the main source of `public/jobs.json`;
 `jobs-submit.html` submissions are leads the auditor verifies.
 
 0. **Browser check (every run that has schools due).** Run `npx playwright install --with-deps chromium` and then `npm run render:jobs -- https://apply.interfolio.com/194231`; the output should contain `Tenure-Track Faculty 2026-2027`. State the result in the PR description ("render step: works" or the exact error). If the install or render fails, continue with WebFetch only, and open one Issue titled `[scheduled:jobs] Render step unavailable` with the exact error (skip it if one is already open) so the owner can fix the environment.
-1. Pick the queue with `npm run maintain:jobs -- --limit 10`. It puts never-checked schools first (largest
+1. Pick the queue with `npm run maintain:jobs -- --limit 30`. It puts never-checked schools first (largest
    CSRankings faculty first), then schools due for a recheck (season-aware: more often August to February, and
    more often for schools with open postings). If `scripts/data/jobs-sources.json` is missing a US school, run
    `npm run maintain:jobs -- --seed` first.

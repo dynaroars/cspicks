@@ -1,7 +1,7 @@
 # Crawl US Academic CS Jobs (`audit_us_jobs.md`)
 
 > **Autonomous Goal Directive (`/goal TASKS/audit_us_jobs.md`):**
-> Work through `npm run maintain:jobs -- --limit 10` in bounded batches. For each school, find its official
+> Work through `npm run maintain:jobs -- --limit 30` in bounded batches. For each school, find its official
 > department hiring page, record every CS-relevant opening in `public/jobs.json`, keep `lastSeenAt` and `closedAt`
 > current for postings already listed, and record the crawl result in `scripts/data/jobs-sources.json`.
 > Submit each batch as a GitHub PR on a topic branch. Never commit directly to `main`. Scheduled runs stop at the cap in

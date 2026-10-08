@@ -5,7 +5,7 @@
  * department's hiring page, and edits public/jobs.json and scripts/data/jobs-sources.json.
  *
  *   npm run maintain:jobs -- --seed              add any US CSRankings school missing from the sources file
- *   npm run maintain:jobs -- --limit 12          print the next schools to crawl (default 12)
+ *   npm run maintain:jobs -- --limit 12          print the next schools to crawl (default 30)
  *   npm run maintain:jobs -- --stats             coverage and posting counts
  */
 import fs from 'node:fs/promises';
@@ -100,7 +100,7 @@ async function main() {
     console.log(`${sources.length} schools: ${checked} checked, ${withUrl} with a known hiring page; ${jobs.length} postings (${jobs.filter(job => !job.closedAt).length} not marked closed).`);
     return;
   }
-  const limit = Number(option('limit', '12'));
+  const limit = Number(option('limit', '30'));
   const queue = buildQueue(sources, jobs).slice(0, limit);
   if (!queue.length) return console.log('Nothing is due. Run with --seed if the sources file is empty.');
   queue.forEach(({ source, reason }, index) => console.log(

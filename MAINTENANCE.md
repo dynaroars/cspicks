@@ -29,7 +29,7 @@ source doesn't confirm a fact, leave it `null`/`TBD`/unset and say so.
 | **Daily (automated)** | OpenAlex affiliation history | `scripts/daily-openalex-sync.sh` via cron — already running, no action needed unless it stalls (check `.openalex-cron.log`) | Low, budget-capped |
 | **Weekly** | CS Conference schedule | Scan series with deadlines in the next ~2 months for newly announced dates/venues/chairs | Medium (web research) |
 | **Monthly** | NSF name matching | `npm run sync:nsf:names` | Low (2 CSV downloads) |
-| **Season-aware (automated)** | US academic jobs | `npm run maintain:jobs -- --limit 10` lists the schools due; the scheduled agent crawls their hiring pages into `public/jobs.json` (§6.5) | Medium (web research) |
+| **Season-aware (automated)** | US academic jobs | `npm run maintain:jobs -- --limit 30` lists the schools due; the scheduled agent crawls their hiring pages into `public/jobs.json` (§6.5) | Medium (web research) |
 | **Monthly** | Grants/Awards | Scan for new call cycles, deadline updates, and expired entries | Medium (web research) |
 | **Monthly** | CS Conference schedule | Full audit pass across all current/upcoming editions, not just near-term ones | Medium-high (web research) |
 | **Quarterly (automated)** | NSF award data | `npm run sync:nsf:all` via `.github/workflows/nsf-full-sync.yml`, which opens a PR (see docs/AUTOMATION.md) | High (thousands of API calls, hours) |
