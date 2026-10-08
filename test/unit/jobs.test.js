@@ -179,3 +179,19 @@ test('render step keeps hiring links and drops student-career boilerplate', asyn
   assert.equal(condenseText('a\n\n\n\nb   \nc', 100), 'a\n\nb\nc');
   assert.equal(condenseText('x'.repeat(50), 10).length, 10);
 });
+
+test('departmentKind classifies units that hire CS PhDs', async () => {
+  const { departmentKind, filterJobs } = await import('../../src/jobs/jobs-data.ts');
+  assert.equal(departmentKind('College of Information Sciences and Technology'), 'information');
+  assert.equal(departmentKind('Electrical and Computer Engineering'), 'ece');
+  assert.equal(departmentKind('Electrical Engineering and Computer Science'), 'ece');
+  assert.equal(departmentKind('School of Computing and Information'), 'cs');
+  assert.equal(departmentKind('Department of Computer Science'), 'cs');
+  assert.equal(departmentKind('Data Science Institute'), 'data');
+  assert.equal(departmentKind('Ira A. Fulton Schools of Engineering'), 'other');
+  const base = { track: 'tenure-track', level: 'open', areas: [], state: 'PA', url: 'https://x.edu', summary: '', source: 'crawl', lastSeenAt: new Date().toISOString().slice(0, 10) };
+  const jobs = [{ ...base, id: 'a', school: 'A', title: 'T', department: 'College of Information Sciences and Technology' },
+    { ...base, id: 'b', school: 'B', title: 'T', department: 'Department of Statistics' }];
+  assert.deepEqual(filterJobs(jobs, { dept: 'information' }).map(j => j.id), ['a']);
+  assert.deepEqual(filterJobs(jobs, { query: 'dept: data' }).map(j => j.id), ['b']);
+});

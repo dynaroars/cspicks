@@ -31,12 +31,37 @@ export const LEVEL_LABELS: Record<JobLevel, string> = {
   open: 'Open rank'
 };
 
+export type DepartmentKind = 'cs' | 'information' | 'ece' | 'data' | 'other';
+
+export const DEPARTMENT_LABELS: Record<DepartmentKind, string> = {
+  cs: 'Computer Science / Computing',
+  information: 'Information school (IST, iSchool)',
+  ece: 'Electrical & Computer Engineering',
+  data: 'Data Science / Statistics',
+  other: 'Other / college-wide'
+};
+
+/**
+ * Classifies a posting's unit from its department text. Many non-CS units hire CS PhDs, so the page lets
+ * people include or isolate them. EE-named units win first ("Electrical Engineering and Computer Science"
+ * is ECE-style); CS/computing names win over "information" ("School of Computing and Information").
+ */
+export function departmentKind(department: string): DepartmentKind {
+  const text = department.toLowerCase();
+  if (/electrical|\beecs\b|\bece\b|\becec\b/.test(text)) return 'ece';
+  if (/computer (and information )?(science|engineering)|computing|\bcs\b|\bcse\b/.test(text)) return 'cs';
+  if (/information|informatics|ischool|\bist\b/.test(text)) return 'information';
+  if (/data science|analytics|statistic/.test(text)) return 'data';
+  return 'other';
+}
+
 export const JOBS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'school', aliases: ['university'], example: 'school: stanford', description: 'University the position is at' },
   { key: 'area', aliases: ['topic'], example: 'area: security', description: 'CSRankings research area the position targets (postings open to all areas match any area)' },
   { key: 'loc', aliases: ['state', 'location'], example: 'loc: texas', description: 'US state (name or two-letter code) or city' },
   { key: 'track', example: 'track: teaching', description: 'tenure-track, teaching, research, postdoc, visiting, or leadership' },
   { key: 'level', aliases: ['rank'], example: 'level: assistant', description: 'assistant, associate, full, or open rank' },
+  { key: 'dept', aliases: ['department', 'unit'], example: 'dept: information', description: 'Hiring unit: cs, information (IST/iSchool), ece, data, or other' },
   { key: 'status', example: 'status: closed', description: '"active" (default), "closed" (older postings), or "all"' },
   FAVORITES_KEYWORD_SPEC
 ];
@@ -139,6 +164,7 @@ export async function loadJobsData(): Promise<Job[]> {
 export interface JobFilters {
   query?: string;
   track?: string;
+  dept?: string;
   level?: string;
   area?: string;
   state?: string;
@@ -172,7 +198,7 @@ function sortKey(job: Job, sortBy: JobSort, now: number) {
 
 /** `ignoreState` lets the state map count jobs per state without the state filter hiding the others. */
 export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = false) {
-  const { query = '', track = 'all', level = 'all', area = 'all', state = 'all', status = 'active', sortBy = 'deadline', now = Date.now() } = filters;
+  const { query = '', track = 'all', dept = 'all', level = 'all', area = 'all', state = 'all', status = 'active', sortBy = 'deadline', now = Date.now() } = filters;
   const { filters: keywords, rest } = parseKeywordQuery(query, JOBS_KEYWORD_SPECS);
   const statusKeyword = keywords.status?.[0];
   const wantStatus: StatusFilter = statusKeyword === 'closed' || statusKeyword === 'all' || statusKeyword === 'active'
@@ -185,6 +211,12 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
     if (wantStatus === 'closed' && active) return false;
     if (track !== 'all' && job.track !== track) return false;
     if (level !== 'all' && job.level !== level) return false;
+    if (dept !== 'all' && departmentKind(job.department) !== dept) return false;
+    if (keywords.dept) {
+      const kind = departmentKind(job.department);
+      // Short values ("cs", "ece") match the unit kind only; longer ones also match the posting's department text.
+      if (!keywords.dept.every(value => value === kind || (value.length > 3 && `${DEPARTMENT_LABELS[kind]} ${job.department}`.toLowerCase().includes(value)))) return false;
+    }
     // A posting open to all areas matches every area; one that names none matches none.
     if (area !== 'all' && !job.anyArea && !job.areas.includes(area)) return false;
     if (!ignoreState && state !== 'all' && job.state !== state) return false;

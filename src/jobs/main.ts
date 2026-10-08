@@ -1,7 +1,7 @@
 /**
  * US Jobs page controller: search, filters, state map, position/school views.
  */
-import { JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, TRACK_LABELS, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, stateCounts } from './jobs-data.js';
+import { DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, TRACK_LABELS, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, stateCounts } from './jobs-data.js';
 import { renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
 import { STATE_TILE_ROWS, US_STATES } from './states.js';
 import { createSuggestionBox, rankSuggestions } from '../suggestion-box.js';
@@ -31,13 +31,14 @@ let suggestions: ReturnType<typeof CreateSuggestionBox>;
 let schoolRanks = new Map<string, SchoolRank>();
 const ranks: RankLookup = school => schoolRanks.get(school);
 
-const EXAMPLES = ['Assistant professor', 'Teaching track', 'Postdoc', 'area: security', 'area: machine learning', 'loc: california', 'loc: texas', 'status: closed'];
+const EXAMPLES = ['Assistant professor', 'Teaching track', 'Postdoc', 'dept: information', 'dept: ece', 'area: security', 'area: machine learning', 'loc: california', 'loc: texas', 'status: closed'];
 
 function state() {
   return {
     query: input.value.trim(),
     track: select('track-select').value,
     level: select('level-select').value,
+    dept: select('dept-select').value,
     area: select('area-select').value,
     state: select('state-select').value,
     status: select('status-select').value as StatusFilter,
@@ -49,7 +50,7 @@ function state() {
 
 function updateUrl(current: ReturnType<typeof state>) {
   const next = new URLSearchParams();
-  const defaults: Record<string, string> = { track: 'all', level: 'all', area: 'all', state: 'all', status: 'active', sortBy: 'deadline', view: 'position', favorites: 'all' };
+  const defaults: Record<string, string> = { track: 'all', level: 'all', dept: 'all', area: 'all', state: 'all', status: 'active', sortBy: 'deadline', view: 'position', favorites: 'all' };
   const names: Record<string, string> = { sortBy: 'sort' };
   if (current.query) next.set('q', current.query);
   (Object.keys(defaults) as Array<keyof typeof current>).forEach(key => {
@@ -112,11 +113,12 @@ function populateOptions() {
   };
   add('track-select', Object.entries(TRACK_LABELS));
   add('level-select', Object.entries(LEVEL_LABELS));
+  add('dept-select', Object.entries(DEPARTMENT_LABELS));
   add('area-select', Object.entries(areaLabels).sort((a, b) => a[1].localeCompare(b[1])));
   add('state-select', Object.entries(US_STATES));
 
   select('favorites-select').value = params.get('favorites') === 'only' ? 'only' : 'all';
-  const restore: Array<[string, string]> = [['track', 'track-select'], ['level', 'level-select'], ['area', 'area-select'], ['state', 'state-select'], ['status', 'status-select'], ['view', 'view-select']];
+  const restore: Array<[string, string]> = [['track', 'track-select'], ['level', 'level-select'], ['dept', 'dept-select'], ['area', 'area-select'], ['state', 'state-select'], ['status', 'status-select'], ['view', 'view-select']];
   restore.forEach(([param, id]) => {
     const value = params.get(param);
     if (value && [...select(id).options].some(option => option.value === value)) select(id).value = value;
@@ -150,7 +152,7 @@ function buildSuggestions() {
 function setupEvents() {
   const resetFilters = () => {
     input.value = '';
-    ['track', 'level', 'area', 'state'].forEach(name => { select(`${name}-select`).value = 'all'; });
+    ['track', 'level', 'dept', 'area', 'state'].forEach(name => { select(`${name}-select`).value = 'all'; });
     select('status-select').value = 'active';
     select('sort-select').value = 'deadline';
     select('view-select').value = 'position';
@@ -158,7 +160,7 @@ function setupEvents() {
     render();
     input.focus();
   };
-  ['track-select', 'level-select', 'area-select', 'state-select', 'status-select', 'sort-select', 'view-select', 'favorites-select']
+  ['track-select', 'level-select', 'dept-select', 'area-select', 'state-select', 'status-select', 'sort-select', 'view-select', 'favorites-select']
     .forEach(id => select(id).addEventListener('change', render));
 
   mapElement.addEventListener('click', event => {
