@@ -21,7 +21,7 @@
     "facultyCount": 240,
     "jobsUrl": "https://www.cc.gatech.edu/faculty-position-opportunities",
     "state": "GA",
-    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "incomplete",
     "summary": "School of CS hiring page and AcademicJobsOnline show the 2025-26 TTT2026 search (deadline 2025-12-31); no 2026-27 search yet.",
     "checkedUrls": [
@@ -52,7 +52,7 @@
     "facultyCount": 170,
     "jobsUrl": "https://siebelschool.illinois.edu/about/positions/faculty-positions",
     "state": "IL",
-    "lastCheckedAt": "2026-10-08T21:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Faculty-positions page lists only the Ira R. Cohen endowed chair (consideration date 2026-04-30); no 2026-27 searches posted yet. Recheck in November.",
     "checkedUrls": [
@@ -67,7 +67,7 @@
     "facultyCount": 159,
     "jobsUrl": "https://www.eecs.mit.edu/career-opportunities-at-eecs/",
     "state": "MA",
-    "lastCheckedAt": "2026-10-08T21:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "EECS career-opportunities page shows no open CS faculty searches yet (page renders only a short stub).",
     "checkedUrls": [
@@ -98,7 +98,7 @@
     "facultyCount": 148,
     "jobsUrl": "https://indiana.peopleadmin.com/postings/search",
     "state": "IN",
-    "lastCheckedAt": "2026-10-08T22:30:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "incomplete",
     "summary": "Quantum CS posting (peopleadmin 34402) recorded; a second CS/ISE AI-for-life-sciences open-rank search (review Nov 14, 2026) was seen only on a third-party mirror.",
     "checkedUrls": [
@@ -113,7 +113,7 @@
     "facultyCount": 147,
     "jobsUrl": "https://www.cs.umd.edu/about/employment/all",
     "state": "MD",
-    "lastCheckedAt": "2026-10-08T19:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Department employment page lists three Workday postings; only the 2026 professional-track posting (JR103397) is current, the other two are 2025 ads.",
     "checkedUrls": [
@@ -128,7 +128,7 @@
     "facultyCount": 145,
     "jobsUrl": null,
     "state": "MI",
-    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "CSE faculty-hiring page says positions for the next cycle have not been posted yet; recheck in November.",
     "checkedUrls": [
@@ -217,7 +217,7 @@
     "facultyCount": 130,
     "jobsUrl": "https://www.cs.wisc.edu/people/faculty-staff-recruitment/",
     "state": "WI",
-    "lastCheckedAt": "2026-10-08T21:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "incomplete",
     "summary": "Recruitment page still describes the 2025-26 RISE searches (August 2026 start); the posting pages moved or were removed.",
     "checkedUrls": [
@@ -276,7 +276,7 @@
     "facultyCount": 114,
     "jobsUrl": "https://www.cs.purdue.edu/hiring/index.html",
     "state": "IN",
-    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "incomplete",
     "summary": "Department hiring pages still describe 2024-25 and 2025-26 searches; no 2026-27 CS posting found.",
     "checkedUrls": [
@@ -307,7 +307,7 @@
     "facultyCount": 112,
     "jobsUrl": "https://www.cs.utah.edu/people/faculty/hiring/",
     "state": "UT",
-    "lastCheckedAt": "2026-10-08T22:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Hiring page (expanded) describes a lecturing position beginning fall 2026 and a tenure-track opening from last cycle; no 2026-27 ad yet.",
     "checkedUrls": [
@@ -403,7 +403,7 @@
     "facultyCount": 101,
     "jobsUrl": "https://www.cis.upenn.edu/open-faculty-positions/",
     "state": "PA",
-    "lastCheckedAt": "2026-10-08T21:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "CIS open-positions page says the application sites are closed at this time; recheck later in the fall.",
     "checkedUrls": [
@@ -417,7 +417,7 @@
     "facultyCount": 99,
     "jobsUrl": "https://apply.interfolio.com/190949",
     "state": "VA",
-    "lastCheckedAt": "2026-10-08T22:30:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "incomplete",
     "summary": "Department employment page is behind a Cloudflare bot check (not bypassed); the open-rank CS search was found on Interfolio 190949 and recorded.",
     "checkedUrls": [
@@ -431,7 +431,7 @@
     "facultyCount": 98,
     "jobsUrl": "https://cci.charlotte.edu/applications-are-being-accepted-for-multiple-faculty-positions/",
     "state": "NC",
-    "lastCheckedAt": "2026-10-08T18:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "College job-opportunities page lists tenure-track and teaching openings, but the university jobs site shows only two adjunct postings for CCI; no tenure-track posting confirmed open.",
     "checkedUrls": [
@@ -612,7 +612,7 @@
     "facultyCount": 85,
     "jobsUrl": null,
     "state": "VA",
-    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "University jobs board shows only staff roles for the College of Engineering and Computing right now; earlier chair and term-faculty ads are not listed.",
     "checkedUrls": [
@@ -641,7 +641,7 @@
     "facultyCount": 84,
     "jobsUrl": "https://facultypositions.stanford.edu/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-08T18:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Central faculty-positions board shows 0 Computer Science listings; the department page links to it.",
     "checkedUrls": [
@@ -671,7 +671,7 @@
     "facultyCount": 84,
     "jobsUrl": "https://recruit.ucdavis.edu/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "incomplete",
     "summary": "Department job page lists older postdoc ads; no 2026-27 tenure-track CS search found.",
     "checkedUrls": [
@@ -716,7 +716,7 @@
     "facultyCount": 78,
     "jobsUrl": "https://cs.unc.edu/about/faculty-hiring/",
     "state": "NC",
-    "lastCheckedAt": "2026-10-08T21:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Faculty-hiring page says the 2026-27 application link will be posted in Fall 2026; recheck.",
     "checkedUrls": [
@@ -760,7 +760,7 @@
     "facultyCount": 77,
     "jobsUrl": "https://www1.cs.ucr.edu/cse-employment",
     "state": "CA",
-    "lastCheckedAt": "2026-10-08T21:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Employment page still describes the 2025-26 cycle.",
     "checkedUrls": [
@@ -789,7 +789,7 @@
     "facultyCount": 73,
     "jobsUrl": "https://www.cs.columbia.edu/open-positions/",
     "state": "NY",
-    "lastCheckedAt": "2026-10-08T20:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Department open-positions page links Interfolio 176021, which describes a July 1, 2026 start (last cycle); no current posting.",
     "checkedUrls": [
@@ -821,7 +821,7 @@
     "facultyCount": 71,
     "jobsUrl": "https://cs.njit.edu/open-faculty-positions",
     "state": "NJ",
-    "lastCheckedAt": "2026-10-08T21:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Open-faculty page describes a Fall 2026 start (last cycle); no 2026-27 ad yet.",
     "checkedUrls": [
@@ -851,7 +851,7 @@
     "facultyCount": 70,
     "jobsUrl": "https://computerscience.uchicago.edu/about/job-openings/",
     "state": "IL",
-    "lastCheckedAt": "2026-10-08T18:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Department faculty-positions page lists the Sep 2026 assistant professor search and the MS-CAPP senior instructional professor; both recorded.",
     "checkedUrls": [
@@ -930,7 +930,7 @@
     "facultyCount": 65,
     "jobsUrl": "https://www.augusta.edu/ccs/faculty-positions.php",
     "state": "GA",
-    "lastCheckedAt": "2026-10-08T18:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Department page carries a standing tenure-track invitation across computing; no dated postings.",
     "checkedUrls": [
@@ -1007,7 +1007,7 @@
     "facultyCount": 62,
     "jobsUrl": null,
     "state": "CA",
-    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "UCLA Academic Recruit lists only part-time lecturer and adjunct CS positions for 2026-27; no tenure-track CS search yet.",
     "checkedUrls": [
@@ -1485,7 +1485,7 @@
     "facultyCount": 40,
     "jobsUrl": "https://careers.uh.edu/jobs/search/uh-central-faculty",
     "state": "TX",
-    "lastCheckedAt": "2026-10-08T20:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "incomplete",
     "summary": "University board lists a CS tenure-track posting (recorded); other CS-related postings were not confirmed.",
     "checkedUrls": [
@@ -1516,7 +1516,7 @@
     "facultyCount": 39,
     "jobsUrl": "https://www.cs.arizona.edu/currently-open-positions",
     "state": "AZ",
-    "lastCheckedAt": "2026-10-08T18:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Department page still shows the 2025-26 ads (review began 2025-11-15); no current posting.",
     "checkedUrls": [
@@ -1606,7 +1606,7 @@
     "facultyCount": 35,
     "jobsUrl": "https://computing.unl.edu/employment-opportunities/",
     "state": "NE",
-    "lastCheckedAt": "2026-10-08T19:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "School of Computing lists three postings but the job system reports them unavailable (closed).",
     "checkedUrls": [
@@ -1638,7 +1638,7 @@
     "facultyCount": 34,
     "jobsUrl": "https://www.ics.hawaii.edu/jobs/",
     "state": "HI",
-    "lastCheckedAt": "2026-10-08T18:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Only the 2024-25 Software Engineering posting (closed 2025-02-21) was found.",
     "checkedUrls": [
@@ -2278,7 +2278,7 @@
     "facultyCount": 21,
     "jobsUrl": "https://vcujobs.com/jobs/search",
     "state": "VA",
-    "lastCheckedAt": "2026-10-08T20:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "incomplete",
     "summary": "University board lists an AI-for-cybersecurity postdoc in ECE (recorded); no CS faculty posting found.",
     "checkedUrls": [
@@ -2338,7 +2338,7 @@
     "facultyCount": 20,
     "jobsUrl": "https://jobs.wichita.edu/jobs/search/faculty-search",
     "state": "KS",
-    "lastCheckedAt": "2026-10-08T18:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "University jobs site lists an Assistant Professor of Cybersecurity (ECE) with a Dec 1, 2026 priority date; other listings are non-CS.",
     "checkedUrls": [
@@ -2974,7 +2974,7 @@
     "facultyCount": 0,
     "jobsUrl": "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
     "state": "GA",
-    "lastCheckedAt": "2026-10-08T20:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Chair, open-rank data science professor, and data science lecturer are recorded; four other listed postings no longer render (likely closed).",
     "checkedUrls": [
@@ -3005,7 +3005,7 @@
     "facultyCount": 0,
     "jobsUrl": null,
     "state": "MI",
-    "lastCheckedAt": "2026-10-08T23:00:00Z",
+    "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
     "summary": "Interfolio 190883 (Computing, deadline 2027-02-07) recorded; a second Flint computing posting (careers.umich.edu 282692) was seen only in search results.",
     "checkedUrls": [
