@@ -636,7 +636,8 @@ postings are rechecked every 7 days in season (14 off-season) and others every 2
 | `department`, `title` | As on the posting. |
 | `track` | `tenure-track`, `teaching`, `research`, `postdoc`, `visiting`, `leadership`. |
 | `level` | `assistant`, `associate`, `full`, `open`, or null when the posting has no rank (postdocs, lecturers). |
-| `areas` | CSRankings area keys (`src/shared.ts` `areaLabels`: `ai`, `sec`, `plan`, …). Empty array means open to all areas. Only list areas the posting names. |
+| `areas` | CSRankings area keys (`src/shared.ts` `areaLabels`: `ai`, `sec`, `plan`, …) for every area the posting specifically names ("security, systems, and AI" → `sec`, `ops`/`comm`/`arch` as named, `ai`). Empty when it names none; never infer an area from the department or the ad's tone. |
+| `anyArea` | `true` only when the posting explicitly says it is open to all / any areas of computer science ("all areas", "open to any area", "applicants in any area of CS"). Omit otherwise. A posting can have both named `areas` (e.g. "all areas, with emphasis on AI") and `anyArea`. |
 | `state`, `city` | USPS state code (required) and city. |
 | `deadline` | ISO `YYYY-MM-DD`, or null when none is stated. Interpreted as Anywhere on Earth. |
 | `rolling` | `true` when the posting reviews until filled; `deadline` is then a priority date or null. |

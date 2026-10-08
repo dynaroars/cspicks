@@ -242,8 +242,10 @@ export interface Job {
   title: string;
   track: JobTrack;
   level?: JobLevel | null;
-  /** CSRankings area keys (`ai`, `sec`, …); empty means open to any area. */
+  /** CSRankings area keys (`ai`, `sec`, …) the posting names; empty when it names none. */
   areas: string[];
+  /** The posting explicitly says it is open to all / any area. */
+  anyArea?: boolean;
   /** USPS state code. */
   state: string;
   city?: string | null;

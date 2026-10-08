@@ -25,7 +25,8 @@ active/closed definition are in **MAINTENANCE.md §6.5**; read it first.
 3. **Never delete.** Closed postings are the archive. Mark them with `closedAt`.
 4. **Keep `lastSeenAt` honest.** Set it to today only for postings you saw live on the official page this run.
    A posting with no deadline that is not re-confirmed for 90 days drops out of the default "active" view.
-5. **CSRankings names.** `school` must be the exact institution name in `scripts/data/jobs-sources.json`.
+5. **Areas.** Record every area the posting specifically names in `areas`; set `anyArea: true` when it explicitly says all/any areas. Both can apply. Never infer an area the posting doesn't state; empty `areas` without `anyArea` means unspecified.
+5b. **CSRankings names.** `school` must be the exact institution name in `scripts/data/jobs-sources.json`.
 6. **One record per posting URL**; keep `id`s stable and unique.
 
 ## Per-school workflow

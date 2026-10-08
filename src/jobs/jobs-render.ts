@@ -33,9 +33,10 @@ export function renderJobCard(job: Job, ranks: RankLookup, isFavorite: IsFavorit
   const href = safeExternalUrl(job.url);
   const deadline = deadlineLabel(job, now);
   const place = [job.city, job.state].filter(Boolean).join(', ');
-  const areaChips = job.areas.length
-    ? job.areas.map(area => `<button type="button" class="job-chip job-chip-area" data-search-area="${escapeHtml(area)}">${escapeHtml(areaLabels[area] || area)}</button>`).join('')
-    : '<span class="job-chip">Any area</span>';
+  const areaChips = [
+    ...job.areas.map(area => `<button type="button" class="job-chip job-chip-area" data-search-area="${escapeHtml(area)}">${escapeHtml(areaLabels[area] || area)}</button>`),
+    job.anyArea ? '<span class="job-chip" title="The posting says it is open to all areas">All areas</span>' : ''
+  ].join('');
   const dates = [
     job.reviewBegins ? `Review begins ${formatDay(job.reviewBegins)}` : '',
     job.startDate ? `Start ${formatDay(job.startDate)}` : '',

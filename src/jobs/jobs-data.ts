@@ -32,7 +32,7 @@ export const LEVEL_LABELS: Record<JobLevel, string> = {
 
 export const JOBS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'school', aliases: ['university'], example: 'school: stanford', description: 'University the position is at' },
-  { key: 'area', aliases: ['topic'], example: 'area: security', description: 'CSRankings research area the position targets' },
+  { key: 'area', aliases: ['topic'], example: 'area: security', description: 'CSRankings research area the position targets (postings open to all areas match any area)' },
   { key: 'loc', aliases: ['state', 'location'], example: 'loc: texas', description: 'US state (name or two-letter code) or city' },
   { key: 'track', example: 'track: teaching', description: 'tenure-track, teaching, research, postdoc, visiting, or leadership' },
   { key: 'level', aliases: ['rank'], example: 'level: assistant', description: 'assistant, associate, full, or open rank' },
@@ -106,6 +106,7 @@ function isJob(value: unknown): value is Job {
     && typeof job.track === 'string' && TRACKS.includes(job.track)
     && (job.level === undefined || job.level === null || (typeof job.level === 'string' && LEVELS.includes(job.level)))
     && Array.isArray(job.areas) && job.areas.every(area => typeof area === 'string')
+    && (job.anyArea === undefined || typeof job.anyArea === 'boolean')
     && typeof job.state === 'string' && job.state in US_STATES
     && typeof job.url === 'string'
     && typeof job.lastSeenAt === 'string' && dayParts(job.lastSeenAt) !== null
@@ -146,7 +147,7 @@ export interface JobFilters {
 function searchText(job: Job) {
   return [
     job.school, job.department, job.title, job.city, job.state, US_STATES[job.state],
-    TRACK_LABELS[job.track], job.level ? LEVEL_LABELS[job.level] : '', job.summary,
+    TRACK_LABELS[job.track], job.level ? LEVEL_LABELS[job.level] : '', job.summary, job.anyArea ? 'all areas any area open' : '',
     ...job.areas.map(area => `${area} ${areaLabels[area] || ''}`)
   ].filter(Boolean).join(' ').toLowerCase();
 }
@@ -181,11 +182,11 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
     if (wantStatus === 'closed' && active) return false;
     if (track !== 'all' && job.track !== track) return false;
     if (level !== 'all' && job.level !== level) return false;
-    if (area !== 'all' && job.areas.length && !job.areas.includes(area)) return false;
-    if (area !== 'all' && !job.areas.length) return false;
+    // A posting open to all areas matches every area; one that names none matches none.
+    if (area !== 'all' && !job.anyArea && !job.areas.includes(area)) return false;
     if (!ignoreState && state !== 'all' && job.state !== state) return false;
     if (!matchesKeyword(keywords.school, job.school)) return false;
-    if (!matchesKeyword(keywords.area, job.areas.map(key => `${key} ${areaLabels[key] || ''}`).join(' '))) return false;
+    if (keywords.area && !job.anyArea && !matchesKeyword(keywords.area, job.areas.map(key => `${key} ${areaLabels[key] || ''}`).join(' '))) return false;
     if (!matchesKeyword(keywords.track, `${job.track} ${TRACK_LABELS[job.track]}`)) return false;
     if (!matchesKeyword(keywords.level, job.level ? `${job.level} ${LEVEL_LABELS[job.level]}` : '')) return false;
     if (keywords.loc && !keywords.loc.every(value => stateMatches(job, value))) return false;

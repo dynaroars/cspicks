@@ -44,6 +44,12 @@ test('defaults to active postings; status filter and keyword reach older ones', 
 test('filters by track, area, state, rank, and free text', () => {
   assert.deepEqual(ids(filterJobs(jobs, { track: 'teaching', now: NOW })), ['ut-sec']);
   assert.deepEqual(ids(filterJobs(jobs, { area: 'sec', now: NOW })), ['ut-sec']);
+  // A posting that says it is open to all areas matches any area; one naming none matches none.
+  const open = job({ id: 'open-any', areas: [], anyArea: true });
+  assert.deepEqual(ids(filterJobs([...jobs, open], { area: 'sec', now: NOW })).sort(), ['open-any', 'ut-sec']);
+  assert.deepEqual(ids(filterJobs([open], { query: 'area: robotics', now: NOW })), ['open-any']);
+  assert.match(renderJobCard(open, () => undefined, () => false, NOW), /All areas/);
+  assert.ok(!/All areas|Any area/.test(renderJobCard(job({ areas: [] }), () => undefined, () => false, NOW)));
   assert.deepEqual(ids(filterJobs(jobs, { state: 'GA', now: NOW })), ['gt-ai-2026']);
   assert.deepEqual(ids(filterJobs(jobs, { level: 'assistant', now: NOW })), ['gt-ai-2026']);
   assert.deepEqual(ids(filterJobs(jobs, { query: 'atlanta', now: NOW })), ['gt-ai-2026']);
