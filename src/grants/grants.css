@@ -383,3 +383,22 @@
     width: min(100% - 1rem, 1080px);
   }
 }
+
+/* Filter row: many selects, so wrap, size each to its selected text, and outline it so the arrow
+   reads as part of its own dropdown instead of the next label. */
+.grants-page .search-filters {
+  flex-wrap: wrap;
+  row-gap: 0.5rem;
+  max-width: 1080px;
+}
+.grants-page .search-filters .filter-group select {
+  field-sizing: content;
+  max-width: 100%;
+  border-color: var(--border-color);
+  background-color: var(--bg-secondary);
+  background-position: right 0.55rem center;
+}
+.grants-page .search-filters .filter-group select:hover,
+.grants-page .search-filters .filter-group select:focus {
+  background-color: var(--hover-bg);
+}
