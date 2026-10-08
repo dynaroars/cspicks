@@ -261,6 +261,25 @@
     "verified": true
   },
   {
+    "id": "cmu-scs-stehlik-postdoc-2026",
+    "school": "Carnegie Mellon University",
+    "department": "School of Computer Science",
+    "title": "The SCS Mark Stehlik Postdoctoral Teaching Fellowship",
+    "track": "postdoc",
+    "areas": [
+      "csed"
+    ],
+    "state": "PA",
+    "city": "Pittsburgh",
+    "rolling": true,
+    "postedDate": "2026-01-01",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://apply.interfolio.com/124667",
+    "summary": "One-year, renewable teaching fellowship for recent PhDs, considered across all SCS departments; applications accepted at any time with reviews each spring.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "wm-cs-postdoc-rail-2026",
     "school": "College of William and Mary",
     "department": "Computer Science",
@@ -627,6 +646,26 @@
     "url": "https://careers.hprod.onehcm.usg.edu/psc/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=300372&PostingSeq=1",
     "summary": "Open-rank faculty position in data science and analytics.",
     "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "msstate-cse-instructor-2026",
+    "school": "Mississippi State University",
+    "department": "Computer Science and Engineering",
+    "title": "Instructor I, II, or III",
+    "track": "teaching",
+    "areas": [
+      "csed"
+    ],
+    "state": "MS",
+    "city": "Starkville",
+    "rolling": false,
+    "startDate": "2027-01-01",
+    "postedDate": "2026-09-10",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://explore.msujobs.msstate.edu/jobs/instructor-i-ii-or-iii-main-campus-starkville-ms-mississippi-united-states-98228e8d-a74c-4619-80fc-8085a9612f25",
+    "summary": "Non-tenure-track teaching position for undergraduate CS courses, advising, and curriculum work; no deadline stated.",
     "source": "crawl",
     "verified": true
   },
@@ -1384,6 +1423,50 @@
     "verified": true
   },
   {
+    "id": "uccs-cs-asst-teaching-2026",
+    "school": "UCCS",
+    "department": "Computer Science",
+    "title": "Assistant Teaching Professor - Computer Science",
+    "track": "teaching",
+    "level": "assistant",
+    "areas": [
+      "csed",
+      "sec"
+    ],
+    "state": "CO",
+    "city": "Colorado Springs",
+    "rolling": false,
+    "reviewBegins": "2026-10-05",
+    "startDate": "2027-01-11",
+    "postedDate": "2026-09-22",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://cu.taleo.net/careersection/2/jobdetail.ftl?job=41085",
+    "summary": "Teaching-track position covering undergraduate CS and cybersecurity courses; priority date Oct 5, 2026, posting still listed.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "uccs-cs-postdoc-cybersecurity-2026",
+    "school": "UCCS",
+    "department": "Computer Science",
+    "title": "Post Doctoral Associate (space cybersecurity)",
+    "track": "postdoc",
+    "areas": [
+      "sec"
+    ],
+    "state": "CO",
+    "city": "Colorado Springs",
+    "rolling": false,
+    "reviewBegins": "2026-09-26",
+    "startDate": "2026-10-15",
+    "postedDate": "2026-09-23",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://cu.taleo.net/careersection/2/jobdetail.ftl?job=41095",
+    "summary": "Research postdoc in the Laboratory for Cybersecurity Dynamics on space cybersecurity, funding-dependent for about nine months; priority date Sep 26, 2026.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "uncg-asst-prof-cs-2026",
     "school": "UNC - Greensboro",
     "department": "Computer Science",
@@ -1824,6 +1907,50 @@
     "verified": true
   },
   {
+    "id": "ucdenver-cse-asst-prof-2026",
+    "school": "University of Colorado - Denver",
+    "department": "Computer Science and Engineering",
+    "title": "Assistant Professor",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "vision",
+      "sec"
+    ],
+    "state": "CO",
+    "city": "Denver",
+    "rolling": true,
+    "reviewBegins": "2026-11-27",
+    "postedDate": "2026-09-15",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://cu.taleo.net/careersection/2/jobdetail.ftl?job=41101",
+    "summary": "Tenure-track position open to all CS areas, with priority to AI, quantum computing, health informatics, intelligent systems, cybersecurity, edge computing, computer vision, and cyber-physical systems; preference for applications by Nov 27, 2026.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "ucdenver-cse-lecturer-pool-2026",
+    "school": "University of Colorado - Denver",
+    "department": "Computer Science and Engineering",
+    "title": "Lecturer (part-time pool, AY26/27)",
+    "track": "teaching",
+    "areas": [
+      "sec",
+      "soft",
+      "csed"
+    ],
+    "state": "CO",
+    "city": "Denver",
+    "rolling": true,
+    "postedDate": "2026-04-24",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://cu.taleo.net/careersection/2/jobdetail.ftl?job=39732",
+    "summary": "Part-time per-course lecturer pool for AY26/27, seeking professionals for undergraduate security, discrete structures, and graduate software engineering.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "colorado-asst-prof-ai-2026",
     "school": "University of Colorado Boulder",
     "department": "Department of Computer Science",
@@ -1911,6 +2038,27 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://explore.jobs.ufl.edu/en-us/job/537329/assistantassociatefull-professor-ai-models-systems-and-applications",
     "summary": "Tenure-track or tenured position at the Jacksonville campus focused on AI models and systems applied to domains such as manufacturing, healthcare, and energy. Full-consideration date of September 1, 2026 has passed but the committee continues accepting applications until filled.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "uga-stat-iai-ai-systems-2026",
+    "school": "University of Georgia",
+    "department": "Statistics / Institute for Artificial Intelligence",
+    "title": "Associate Professor or Professor in the area of AI Systems and Causal Reasoning",
+    "track": "tenure-track",
+    "areas": [
+      "ai"
+    ],
+    "state": "GA",
+    "city": "Athens",
+    "rolling": true,
+    "reviewBegins": "2026-11-13",
+    "startDate": "2027-08-01",
+    "postedDate": "2026-10-05",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://www.ugajobsearch.com/postings/508244",
+    "summary": "Senior position jointly tied to the Department of Statistics and the Institute for AI; full consideration for applications by Nov 13, 2026, then open until filled.",
     "source": "crawl",
     "verified": true
   },
@@ -2400,6 +2548,28 @@
     "verified": true
   },
   {
+    "id": "uva-sds-nlp-2026",
+    "school": "University of Virginia",
+    "department": "School of Data Science",
+    "title": "Open Rank Tenured/Tenure Track Professor of Data Science in Natural Language Processing",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "nlp",
+      "ai"
+    ],
+    "state": "VA",
+    "city": "Charlottesville",
+    "rolling": true,
+    "reviewBegins": "2026-12-01",
+    "postedDate": "2026-09-18",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://apply.interfolio.com/191213",
+    "summary": "Open-rank NLP position emphasizing foundations of large language models, reasoning and agentic AI, and multimodal language; open until filled.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "uw-ai-teaching-faculty-2026",
     "school": "University of Washington",
     "department": "Paul G. Allen School of Computer Science & Engineering",
@@ -2513,6 +2683,30 @@
     "lastSeenAt": "2026-10-08",
     "url": "https://website.cs.vt.edu/About/faculty-search/2026-tenure-track-position.html",
     "summary": "Full-time tenure-track appointment building an externally funded research program and teaching and mentoring students. Rank and areas are not stated on the department page.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "wayne-cs-ai-health-2026",
+    "school": "Wayne State University",
+    "department": "Computer Science",
+    "title": "Open-rank Tenure-track Faculty Position - AI in Health and Medicine",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai",
+      "mlmining",
+      "vision",
+      "nlp"
+    ],
+    "state": "MI",
+    "city": "Detroit",
+    "rolling": true,
+    "reviewBegins": "2026-12-15",
+    "postedDate": "2026-09-25",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://waynetalent.csod.com/ux/ats/careersite/2/home/requisition/3655?c=waynetalent",
+    "summary": "Open-rank AI position emphasizing healthcare and biomedical applications, starting Fall 2027; full consideration by Dec 15, 2026, open until filled.",
     "source": "crawl",
     "verified": true
   },
