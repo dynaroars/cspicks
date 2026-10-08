@@ -606,8 +606,10 @@ CSRankings' `institutions.csv` with `npm run maintain:jobs -- --seed`; re-run it
 schools). Each row holds the school's `homepage`, the discovered `jobsUrl`, `state`, and the last crawl's
 `lastCheckedAt` / `outcome` / `summary` / `checkedUrls` / `deferredUntil`. `npm run maintain:jobs -- --limit N`
 prints the queue: never-checked schools first (largest CSRankings faculty count first), then schools whose
-recheck interval has elapsed. Intervals are season-aware: postings appear August to January, so schools with open
+recheck interval has elapsed. Fully read schools are season-aware: postings appear August to January, so those with open
 postings are rechecked every 7 days in season (14 off-season) and others every 21 days (60 off-season).
+Schools whose last crawl was unfinished come due much sooner: `incomplete` after 1 day, `not_found` after 10,
+`blocked` after 14.
 `npm run maintain:jobs -- --stats` shows coverage.
 
 ### Reading JavaScript pages (`npm run render:jobs`)

@@ -68,13 +68,21 @@ export function recheckDays(now, hasOpenJobs) {
   return inSeason ? 21 : 60;
 }
 
+/** Schools whose last crawl was unfinished come due much sooner than ones fully read. */
+export function intervalFor(source, now, hasOpenJobs) {
+  if (source.outcome === 'incomplete') return 1;
+  if (source.outcome === 'not_found') return 10;
+  if (source.outcome === 'blocked') return 14;
+  return recheckDays(now, hasOpenJobs);
+}
+
 export function buildQueue(sources, jobs, now = Date.now()) {
   const openSchools = new Set(jobs.filter(job => !job.closedAt).map(job => job.school));
   return sources
     .filter(source => !source.deferredUntil || Date.parse(source.deferredUntil) <= now)
     .map(source => {
       const checked = source.lastCheckedAt ? Date.parse(source.lastCheckedAt) : null;
-      const interval = recheckDays(now, openSchools.has(source.school));
+      const interval = intervalFor(source, now, openSchools.has(source.school));
       const dueInDays = checked === null ? -Infinity : (checked + interval * DAY - now) / DAY;
       return { source, dueInDays, reason: checked === null ? 'never checked' : `checked ${Math.floor((now - checked) / DAY)}d ago, every ${interval}d` };
     })

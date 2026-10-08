@@ -139,6 +139,14 @@ test('crawl queue prioritises never-checked, big schools, and open-posting schoo
   const queue = buildQueue(sources, [{ school: 'Open U' }], NOW).map(item => item.source.school);
   assert.deepEqual(queue, ['Big U', 'Small U', 'Open U']);
   assert.ok(recheckDays(NOW, true) < recheckDays(NOW, false));
+  // Unfinished crawls come due before fully read schools.
+  const day = 86400000;
+  const unfinished = buildQueue([
+    { school: 'Done U', facultyCount: 50, outcome: 'complete', lastCheckedAt: new Date(NOW - 4 * day).toISOString(), deferredUntil: null },
+    { school: 'Partial U', facultyCount: 5, outcome: 'incomplete', lastCheckedAt: new Date(NOW - 4 * day).toISOString(), deferredUntil: null },
+    { school: 'Lost U', facultyCount: 5, outcome: 'not_found', lastCheckedAt: new Date(NOW - 4 * day).toISOString(), deferredUntil: null }
+  ], [], NOW).map(item => item.source.school);
+  assert.deepEqual(unfinished, ['Partial U']);
   assert.ok(recheckDays(Date.UTC(2026, 5, 1), false) > recheckDays(NOW, false));
 });
 
