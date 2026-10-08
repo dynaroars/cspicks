@@ -227,7 +227,7 @@
       "Faculty"
     ],
     "whoFor": "Tenure-track Assistant & Associate Professors within 12 years of PhD",
-    "deadline": "Pre-application: January 30, 2026 at 5:00 PM ET; Full Proposal: April 29, 2026 at 11:59 PM ET (Annual; DE-FOA-0003460)",
+    "deadline": "Pre-application: March 24, 2026 at 5:00 PM ET; Full Proposal: June 2, 2026 at 11:59 PM ET (Annual)",
     "deadlineMonth": 4,
     "amount": "At least $875,000 over 5 years (university faculty)",
     "summary": "Bolsters the nation's scientific workforce by supporting the exceptional research of rising scientists in programs funded by the DOE Office of Science, notably Advanced Scientific Computing Research (ASCR).",
@@ -437,8 +437,8 @@
       "Undergraduate Students"
     ],
     "whoFor": "PhD students pursuing research of interest to DoD defense laboratories",
-    "deadline": "November 21, 2025 at 11:59 PM ET (Annual mid-to-late November; reference letters due December 1)",
-    "deadlineMonth": 11,
+    "deadline": "October 30, 2026 at 5:00 PM ET (FY2027 application period August 3 through October 30, 2026)",
+    "deadlineMonth": 10,
     "amount": "Full tuition and mandatory fees, $43,200 annual stipend, and up to $1,400/yr health insurance for 3 years",
     "summary": "Awarded by the Air Force Office of Scientific Research, Army Research Office, and Office of Naval Research to increase the number of US citizens trained in science and engineering disciplines of military importance.",
     "eligibility": [
@@ -777,7 +777,7 @@
     "whoFor": "3rd year PhD students in CS, electrical engineering, and applied mathematics (University nominated)",
     "deadline": "December 16, 2025 at 11:59 PM ET (Annual; unified Microsoft Research Fellowship)",
     "deadlineMonth": 12,
-    "amount": "100% tuition and fees for 2 academic years + $42,000 annual stipend + Microsoft Research summit invitation",
+    "amount": "Annual stipend by region of institution, including travel funding: $47,000 (US/Canada), $27,000 (Europe), $17,000 (other listed regions); paid as a one-time unrestricted gift to the institution",
     "summary": "A two-year fellowship program for PhD students in their third year of doctoral studies. Identifies and supports emerging researchers across North America, Europe, Asia, and Latin America.",
     "eligibility": [
       "Must be in 3rd year of PhD program",
@@ -2018,7 +2018,7 @@
     "whoFor": "Academic faculty, postdocs, and doctoral students conducting research on AI safety, capabilities, and scientific discovery",
     "deadline": "Rolling Application Cycles",
     "deadlineMonth": 0,
-    "amount": "Subsidized API compute credits (,000–5,000+) & frontier model access",
+    "amount": "Amount varies; see the official call page",
     "summary": "Provides university researchers and students with free and subsidized access to OpenAI frontier models (GPT-4o, reasoning models, and APIs) to accelerate research in AI safety, alignment, evaluation, and scientific exploration.",
     "eligibility": [
       "Affiliated with an accredited academic or non-profit research institution",
@@ -2580,7 +2580,7 @@
     "whoFor": "Faculty and innovators developing high-efficiency computing architectures, smart grid AI, and datacenter algorithms",
     "deadline": "Periodic Open Announcements (Every 3 years + targeted topic calls)",
     "deadlineMonth": 4,
-    "amount": "00,000 to ,000,000 per project over 2 to 3 years",
+    "amount": "Amount varies; see the official call page",
     "summary": "Funds high-risk, transformational computing and algorithms technology that can achieve massive reductions in datacenter energy consumption, optimize power grid operations, or pioneer ultra-low-power edge computing.",
     "eligibility": [
       "US universities, national laboratories, startups, and large businesses",
@@ -2670,7 +2670,7 @@
     "whoFor": "2nd-year or later doctoral students in computer science, HPC, and computational science collaborating directly with DOE labs",
     "deadline": "March 18, 2026 at 5:00 PM CDT (Annual mid-March; reference letters due March 25)",
     "deadlineMonth": 3,
-    "amount": "Full tuition and required fees + 5,000 annual stipend + dedicated research residency at a DOE NNSA laboratory for up to 4 years",
+    "amount": "Full tuition and required fees + $45,000 annual stipend + dedicated research residency at a DOE NNSA laboratory for up to 4 years",
     "summary": "Provides graduate students pursuing PhDs in computational science and computing systems the opportunity to spend a minimum of two 12-week terms conducting doctoral research on-site at DOE national laboratories.",
     "eligibility": [
       "US Citizens or Permanent Residents",
@@ -2698,7 +2698,7 @@
     "whoFor": "Second-year PhD students in computer science from groups underrepresented in computing",
     "deadline": "Historical (folded into Microsoft Research PhD Fellowship in 2021; historically August 14 / Sept 28)",
     "deadlineMonth": 8,
-    "amount": "Full tuition and fees for up to 3 academic years + 2,000 annual stipend + invitation to annual Microsoft Research PhD Summit",
+    "amount": "Amount varies; see the official call page",
     "summary": "Aims to increase the pipeline of diverse talent receiving computing PhD degrees by providing three full years of tuition and living stipends for outstanding underrepresented doctoral researchers.",
     "eligibility": [
       "Second-year doctoral students in CS, electrical engineering, or mathematics at North American universities",
@@ -2758,7 +2758,7 @@
     "whoFor": "Graduate students in computer science, programming languages, algorithms, and machine learning",
     "deadline": "November 13, 2026 at 11:59 PM AoE (Annual mid-November)",
     "deadlineMonth": 11,
-    "amount": "Full tuition and academic fees + 5,000 living stipend + invitation to Jane Street NYC research summit",
+    "amount": "Full tuition and fees covered for the upcoming academic year + $50,000 USD stipend (or local-currency equivalent)",
     "summary": "Provides full tuition and stipend support for students doing foundational research in computer science, functional programming languages, compiler design, software verification, and algorithmic theory.",
     "eligibility": [
       "PhD students in computer science, mathematics, or related quantitative disciplines at recognized universities worldwide",
@@ -2772,7 +2772,7 @@
       "AI/ML",
       "Compilers"
     ],
-    "url": "https://www.janestreet.com/fellowship/",
+    "url": "https://www.janestreet.com/join-jane-street/programs-and-events/graduate-research-fellowship/",
     "featured": false
   },
   {
@@ -5721,9 +5721,9 @@
       "Faculty"
     ],
     "whoFor": "Faculty PIs leading multidisciplinary university teams (often multi-institution) on basic research of interest to DoD",
-    "deadline": "White paper: May 16, 2025; Full proposal: September 5, 2025 at 11:59 PM ET (Annual; N00014-25-S-F001)",
-    "deadlineMonth": 9,
-    "amount": "Typically $500,000 to ~$1.5 million per year for an initial 3 years, with up to 2 optional additional years (up to 5 years total)",
+    "deadline": "Full proposals: April 9, 2027 at 5:00 PM ET (Annual; FY2027 MURI announcement)",
+    "deadlineMonth": 4,
+    "amount": "Typically $500,000 to about $1 million per year for an initial 3 years, with optional additional years (up to 5 years total)",
     "summary": "Supports teams of researchers spanning more than one traditional science/engineering discipline to accelerate basic research of high priority to the DoD, with annually refreshed topic areas across the Army, Navy, and Air Force basic research offices.",
     "eligibility": [
       "U.S. institutions of higher education with degree-granting science/engineering programs (individually or as a consortium)",
