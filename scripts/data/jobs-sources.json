@@ -307,9 +307,9 @@
     "facultyCount": 112,
     "jobsUrl": "https://www.cs.utah.edu/people/faculty/hiring/",
     "state": "UT",
-    "lastCheckedAt": "2026-10-08T21:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Hiring page shows two position headings (lecturing professor, tenure-track assistant professor) with no readable details or dates.",
+    "lastCheckedAt": "2026-10-08T22:00:00Z",
+    "outcome": "complete",
+    "summary": "Hiring page (expanded) describes a lecturing position beginning fall 2026 and a tenure-track opening from last cycle; no 2026-27 ad yet.",
     "checkedUrls": [
       "https://www.cs.utah.edu/people/faculty/hiring/",
       "https://utah.peopleadmin.com/postings/190584",
@@ -2975,8 +2975,8 @@
     "jobsUrl": "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
     "state": "GA",
     "lastCheckedAt": "2026-10-08T20:00:00Z",
-    "outcome": "incomplete",
-    "summary": "CCSE job page links PeopleSoft postings; the chair and open-rank data science professor are recorded, the other four postings did not render.",
+    "outcome": "complete",
+    "summary": "Chair, open-rank data science professor, and data science lecturer are recorded; four other listed postings no longer render (likely closed).",
     "checkedUrls": [
       "https://ccse.kennesaw.edu/",
       "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",

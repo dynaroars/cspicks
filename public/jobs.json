@@ -465,6 +465,23 @@
     "verified": true
   },
   {
+    "id": "kennesaw-lecturer-data-science-2026",
+    "school": "Kennesaw State University",
+    "department": "College of Computing and Software Engineering",
+    "title": "Lecturer of Data Science and Analytics",
+    "track": "teaching",
+    "areas": [],
+    "state": "GA",
+    "city": "Kennesaw",
+    "deadline": "2026-08-20",
+    "rolling": true,
+    "lastSeenAt": "2026-10-08",
+    "url": "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=300368&PostingSeq=1",
+    "summary": "Teaching-track lecturer in data science and analytics; the full-consideration date has passed but review continues.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
     "id": "kennesaw-open-rank-prof-data-science-2026",
     "school": "Kennesaw State University",
     "department": "College of Computing and Software Engineering",

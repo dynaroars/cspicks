@@ -11,7 +11,9 @@
  *   npm run render:jobs -- --links <url> [<url> ...]    print likely hiring/posting links (the second hop
  *                                                       from a department homepage to its hiring page)
  *   npm run render:jobs -- --out DIR <url> ...          write DIR/<n>.txt instead of printing
- *   options: --concurrency N (default 4), --max-chars N (default 6000 per page)
+ *   options: --concurrency N (default 4), --max-chars N (default 6000 per page),
+ *            --wait MS extra settle time for slow apps such as PeopleSoft (default 2500),
+ *            --expand click accordions and collapsed sections before reading the text
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -40,32 +42,48 @@ export function condenseText(text, maxChars = 6000) {
 }
 
 function parseArgs(argv) {
-  const args = { urls: [], links: false, out: null, concurrency: 4, maxChars: 6000 };
+  const args = { urls: [], links: false, out: null, concurrency: 4, maxChars: 6000, wait: 2500, expand: false };
   for (let i = 0; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === '--links') args.links = true;
     else if (arg === '--out') args.out = argv[++i];
     else if (arg === '--concurrency') args.concurrency = Number(argv[++i]) || 4;
     else if (arg === '--max-chars') args.maxChars = Number(argv[++i]) || 6000;
+    else if (arg === '--wait') args.wait = Number(argv[++i]) || 2500;
+    else if (arg === '--expand') args.expand = true;
     else if (/^https?:/i.test(arg)) args.urls.push(arg);
   }
   return args;
 }
 
-async function renderOne(browser, url, { links, maxChars }) {
+async function renderOne(browser, url, { links, maxChars, wait, expand }) {
   const page = await browser.newPage();
   try {
     const response = await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await page.getByText(/accept only necessary cookies/i).click({ timeout: 3000 }).catch(() => {});
     await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
-    await page.waitForTimeout(2500);
+    await page.waitForTimeout(wait);
+    if (expand) {
+      // Open accordions and collapsed sections (never links, never site navigation).
+      await page.evaluate(() => {
+        document.querySelectorAll('details:not([open])').forEach(d => d.setAttribute('open', ''));
+        document.querySelectorAll('[aria-expanded="false"], .accordion-header, .accordion-button, .elementor-tab-title, .et_pb_toggle_title')
+          .forEach(el => { if (el.tagName !== 'A' && !el.closest('nav, header, a')) el.click(); });
+      });
+      await page.waitForTimeout(1200);
+    }
     const status = response ? response.status() : 0;
     if (links) {
       const anchors = await page.evaluate(() => [...document.querySelectorAll('a[href]')]
         .map(a => [(a.innerText || a.getAttribute('aria-label') || '').trim(), a.href]));
       return `URL: ${page.url()} (HTTP ${status})\n${pickHiringLinks(anchors).map(([t, h]) => `${t}\t${h}`).join('\n')}`;
     }
-    const text = await page.evaluate(() => document.body.innerText);
+    let text = await page.evaluate(() => document.body.innerText);
+    if (expand) {
+      // innerText omits content hidden by CSS; textContent includes collapsed panels.
+      const hidden = await page.evaluate(() => [...document.querySelectorAll('main, [role="main"], article, .entry-content')].map(el => el.textContent.replace(/\s+/g, ' ').trim()).join('\n'));
+      text = `${text}\n\n--- full text including collapsed sections ---\n${hidden}`;
+    }
     return `URL: ${page.url()} (HTTP ${status})\n${condenseText(text, maxChars)}`;
   } catch (error) {
     return `URL: ${url}\nERROR: ${String(error.message).slice(0, 120)}`;
