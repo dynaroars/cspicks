@@ -205,6 +205,15 @@ skeleton records (`verified: false`, only `name`/`venueKeys`/`description`
 populated, `year: 2026` placeholder) without researched dates — prioritize
 these in upcoming passes over re-verifying already-populated entries.
 
+**Other venues.** A small owner-curated set of standing conferences outside the CSRankings and CORE A/A*
+sets (currently VMCAI, CPP, FormaliSE, NFM — Issue #24) is tracked with `"other": true`, an empty
+`venueKeys`, and a manual `area` (an `areaLabels` key such as `soft`, `plan`, `log`). They show an
+"Other venue" badge and appear only under the **All (Union)** conference set; every CSRankings/CORE set
+ignores them. They are audited by the same routine and workflows as every other series (the controller
+queues them by `name`). Never add one on your own: only the owner adds to this list (typically by
+approving an Issue), only standing conferences qualify (not workshops, which come and go), and the
+routine never changes `other` or `area` on an existing record.
+
 Search records by `name` and `year`. Conferences with multiple submission
 cycles have several objects with the same name and year. Research the shared
 conference details once, then update every cycle for that edition.

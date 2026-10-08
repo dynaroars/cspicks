@@ -68,6 +68,7 @@ export function renderScheduleCard(group: ConferenceGroup, now = Date.now(), isF
         <h2>${href === '#'
           ? `${escapeHtml(main.name)} ${main.year}`
           : `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(main.name)} ${main.year}</a>`}</h2>
+        ${main.other ? '<span class="schedule-other" title="Curated venue outside the CSRankings and CORE A/A* sets">Other venue</span>' : ''}
         ${main.estimated ? '<span class="schedule-estimated" title="Projected from an earlier timeline; confirm on the conference website">Estimated</span>' : ''}
         ${main.verified ? '<span class="schedule-verified" role="img" aria-label="Information reviewed" title="Information reviewed from available sources; not an endorsement or guarantee">✓</span>' : ''}
         ${favoriteToggleButton(favoriteId, isFavorite(favoriteId))}

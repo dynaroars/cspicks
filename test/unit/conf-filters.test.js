@@ -48,3 +48,11 @@ test('keyword parser accepts whitespace after the colon', () => {
   assert.deepEqual(parseKeywordQuery('loc: usa pldi', specs), { filters: { loc: ['usa'] }, rest: 'pldi' });
   assert.deepEqual(parseKeywordQuery('loc:"new york" pldi', specs), { filters: { loc: ['new york'] }, rest: 'pldi' });
 });
+
+test('other venues appear only under All (Union) and use their manual area', () => {
+  const withOther = [...conferences, { name: 'NFM', year: 2027, venueKeys: [], other: true, area: 'soft', deadline: '2026-11-10', date: 'May 2027', place: 'Houston, TX, US' }];
+  const run = options => filterSchedule(withOther, { ...base, deadline: 'all', ...options }).map(group => group[0].name);
+  assert.ok(run({ confSet: 'all-union' }).includes('NFM'));
+  for (const confSet of ['csrankings-default', 'csrankings', 'core', 'core-a-only', 'core-a']) assert.ok(!run({ confSet }).includes('NFM'), confSet);
+  assert.deepEqual(run({ confSet: 'all-union', query: 'area: software' }), ['NFM']);
+});

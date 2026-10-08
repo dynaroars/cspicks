@@ -160,6 +160,10 @@ patterns, stop conditions, schema, editing rules). Cap: 12 conference series.
    repeating the same series.
 4. Open one PR even if only `checks.json` changed.
 
+Owner-curated "other venues" (`"other": true`, empty `venueKeys`; MAINTENANCE.md §5) are audited
+like any other series, so the queue will include them. Keep `venueKeys: []`, `other`, and `area`
+exactly as they are.
+
 ### Grants audit (`grants`)
 
 Playbook: `TASKS/update_grants_and_awards.md` and MAINTENANCE.md §6 (schema, audience taxonomy,
@@ -199,7 +203,8 @@ No web research.
 Playbook: `TASKS/discover_new_conferences.md`. Cap: 5 new conference series. Dedup against every
 `name` and `venueKeys` value already in `csconfs/data/conferences.json` and against open PRs.
 `venueKeys` must be keys `src/data.ts` already recognizes; if a strong candidate has no
-recognized key, file it as an Issue instead of adding it. New records use `estimated`/`verified`
+recognized key, file it as an Issue instead of adding it. Never add an `"other": true` record: the
+owner curates that list (MAINTENANCE.md §5); suggest candidates in the same Issue. New records use `estimated`/`verified`
 honestly and leave unknown fields `null`.
 
 ### Discover grants (`grants-discover`)

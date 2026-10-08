@@ -61,10 +61,13 @@ const NULLABLE_STRING_FIELDS = [
   'seriesLink', 'date', 'place', 'abstractDeadline', 'deadline', 'rebuttalDate',
   'notificationDate', 'note', 'generalChair', 'programChair',
 ];
+// `other`/`area` mark curated venues outside the CSRankings/CORE sets; they are optional.
+const OPTIONAL_RECORD_FIELDS = new Set(['other', 'area']);
 const RECORD_FIELDS = new Set([
   'name', 'venueKeys', 'year', 'description', 'link', 'seriesLink', 'date', 'place',
   'abstractDeadline', 'deadline', 'rebuttalDate', 'notificationDate', 'note',
   'generalChair', 'programChair', 'acceptanceRate', 'submissions', 'estimated', 'verified',
+  ...OPTIONAL_RECORD_FIELDS,
 ]);
 
 let state = null;
@@ -553,9 +556,13 @@ function validHttpUrl(value) {
 function recordValidationError(record) {
   if (!record || typeof record !== 'object' || Array.isArray(record)) return 'record must be an object';
   for (const key of Object.keys(record)) if (!RECORD_FIELDS.has(key)) return `unsupported record field ${key}`;
-  for (const key of RECORD_FIELDS) if (!Object.hasOwn(record, key)) return `complete record is missing ${key}`;
+  for (const key of RECORD_FIELDS) if (!OPTIONAL_RECORD_FIELDS.has(key) && !Object.hasOwn(record, key)) return `complete record is missing ${key}`;
   if (typeof record.name !== 'string' || !record.name) return 'record needs a name';
-  if (!Array.isArray(record.venueKeys) || !record.venueKeys.length || record.venueKeys.some((key) => typeof key !== 'string' || !key)) return 'record needs venueKeys';
+  if (!Array.isArray(record.venueKeys) || record.venueKeys.some((key) => typeof key !== 'string' || !key)) return 'record needs venueKeys';
+  if (record.other === true) {
+    if (record.venueKeys.length) return 'other venues must have empty venueKeys';
+    if (typeof record.area !== 'string' || !record.area) return 'other venues need an area';
+  } else if (!record.venueKeys.length || record.other !== undefined || record.area !== undefined) return 'record needs venueKeys';
   if (!Number.isInteger(record.year)) return 'record needs an integer year';
   if (typeof record.description !== 'string' || !record.description) return 'record needs a description';
   if (!validHttpUrl(record.link)) return 'record needs an HTTP(S) link';
@@ -577,7 +584,7 @@ function recordValidationError(record) {
 function changedFields(before, after) {
   if (!before) return [...new Set(after.flatMap((record) => Object.keys(record)
     .filter((field) => record[field] !== null && record[field] !== undefined && record[field] !== 'TBD')))]
-    .filter((field) => !['name', 'venueKeys', 'year', 'description', 'acceptanceRate', 'submissions', 'note', 'estimated', 'verified'].includes(field));
+    .filter((field) => !['name', 'venueKeys', 'other', 'area', 'year', 'description', 'acceptanceRate', 'submissions', 'note', 'estimated', 'verified'].includes(field));
   const fields = new Set();
   const byNote = new Map(before.map((record) => [record.note ?? null, record]));
   for (const record of after) {
@@ -629,6 +636,7 @@ export function proposalValidationError(research, targetName, conferences, {
       if (error) return `${proposal.year}: ${error}`;
       if (record.name !== targetName || record.year !== proposal.year) return `${proposal.year}: record name/year does not match target`;
       if (!isDeepStrictEqual(record.venueKeys, latest.venueKeys)) return `${proposal.year}: venueKeys changed`;
+      if ((record.other ?? false) !== (latest.other ?? false) || (record.area ?? null) !== (latest.area ?? null)) return `${proposal.year}: other-venue marking changed`;
       if (record.description !== latest.description) return `${proposal.year}: description changed`;
     }
     const notes = proposal.records.map((record) => record.note ?? null);

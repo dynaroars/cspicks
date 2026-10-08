@@ -69,8 +69,16 @@ export function deadlineStatus(value: unknown, now = Date.now()) {
 }
 
 export function conferenceAreas(conf: ConferenceRecord) {
+  if (conf.other) return conf.area ? [conf.area] : [];
   const map = getConferenceAreaMap('all-union');
   return [...new Set(conf.venueKeys.map(key => map[key]).filter((area): area is string => Boolean(area)))];
+}
+
+// Curated "other venues" carry no CSRankings/CORE key, so only the unrestricted
+// All (Union) set shows them; every ranking-derived set ignores them.
+export function matchesConferenceSet(conf: ConferenceRecord, confSet: ConferenceSetId) {
+  if (conf.other) return confSet === 'all-union';
+  return conf.venueKeys.some(area => publicationMatchesConferenceSet({ area }, confSet));
 }
 
 export function groupConferences(conferences: ConferenceRecord[]) {
@@ -176,7 +184,7 @@ export function filterSchedule(conferences: ConferenceRecord[], {
   const mode: DeadlineMode = typedMode && DEADLINE_MODES.includes(typedMode) ? typedMode : deadline ?? (upcomingOnly ? 'upcoming' : 'all');
   return groupConferences(conferences)
     .filter(group => group[0].year >= startYear && group[0].year <= endYear)
-    .filter(group => group[0].venueKeys.some(area => publicationMatchesConferenceSet({ area }, confSet)))
+    .filter(group => matchesConferenceSet(group[0], confSet))
     .filter(group => !normalized || searchText(group).includes(normalized))
     .filter(group => matchesLocation(group, [...(filters.loc || []), ...(location ? [location] : [])]))
     .filter(group => matchesArea(group, filters.area))
@@ -194,7 +202,7 @@ export function filterSchedule(conferences: ConferenceRecord[], {
 
 export function scheduleSuggestions(conferences: ConferenceRecord[], startYear: number, endYear: number, confSet: ConferenceSetId) {
   const eligible = conferences.filter(conf => conf.year >= startYear && conf.year <= endYear
-    && conf.venueKeys.some(area => publicationMatchesConferenceSet({ area }, confSet)));
+    && matchesConferenceSet(conf, confSet));
   const names = [...new Set(eligible.map(conf => conf.name))].sort();
   const areaCounts = new Map<string, number>();
   groupConferences(eligible).forEach(group => {

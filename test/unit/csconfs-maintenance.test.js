@@ -181,3 +181,12 @@ test('agent failure and Git status helpers recognize resumable conditions', () =
     'new',
   ]);
 });
+
+test('proposal validation accepts other venues with empty venueKeys and keeps their marking', () => {
+  const other = overrides => record({ name: 'NFM', venueKeys: [], other: true, area: 'soft', ...overrides });
+  const before = [other()];
+  assert.equal(proposalValidationError(result([other({ deadline: '2026-11-13' })], { series: 'NFM' }), 'NFM', before, { currentYear: 2026 }), null);
+  assert.match(proposalValidationError(result([other({ area: 'plan' })], { series: 'NFM' }), 'NFM', before, { currentYear: 2026 }), /other-venue marking changed/);
+  assert.match(proposalValidationError(result([record({ venueKeys: [] })]), 'PLDI', [record()], { currentYear: 2026 }), /needs venueKeys/);
+  assert.match(proposalValidationError(result([other({ area: undefined })], { series: 'NFM' }), 'NFM', before, { currentYear: 2026 }), /need an area/);
+});

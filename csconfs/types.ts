@@ -2,6 +2,9 @@ export interface ConferenceRecord {
   name: string;
   year: number;
   venueKeys: string[];
+  /** Curated venue outside the CSRankings/CORE sets: `venueKeys` is empty and `area` names its research area. */
+  other?: boolean;
+  area?: string | null;
   description?: string | null;
   link?: string | null;
   seriesLink?: string | null;
