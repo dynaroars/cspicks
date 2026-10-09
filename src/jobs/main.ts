@@ -1,7 +1,7 @@
 /**
  * US Jobs page controller: search, filters, state map, position/school views.
  */
-import { DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, TRACK_LABELS, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, stateCounts } from './jobs-data.js';
+import { DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, TRACK_LABELS, VISA_FILTER_LABELS, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, stateCounts } from './jobs-data.js';
 import { renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
 import { exportFileName, jobsToMarkdown, restoreStarredIds } from './jobs-export.js';
 import { createMultiSelect } from './multi-select.js';
@@ -38,7 +38,8 @@ const MULTI_FILTERS = [
   ['dept', 'dept-select', 'Hiring unit', 'departments'],
   ['level', 'level-select', 'Rank', 'ranks'],
   ['area', 'area-select', 'Research area', 'areas'],
-  ['state', 'state-select', 'State', 'states']
+  ['state', 'state-select', 'State', 'states'],
+  ['visa', 'visa-select', 'Visa sponsorship', 'visa options']
 ] as const;
 type MultiKey = typeof MULTI_FILTERS[number][0];
 const multi = {} as Record<MultiKey, MultiSelect>;
@@ -49,7 +50,7 @@ let schoolRanks = new Map<string, SchoolRank>();
 const ranks: RankLookup = school => schoolRanks.get(school);
 const rankOf = (school: string) => schoolRanks.get(school)?.rank;
 
-const EXAMPLES = ['Assistant professor', 'Teaching track', 'Postdoc', 'dept: information', 'dept: ece', 'area: security', 'area: machine learning', 'loc: california', 'loc: texas', 'status: closed'];
+const EXAMPLES = ['Assistant professor', 'Teaching track', 'Postdoc', 'dept: information', 'dept: ece', 'area: security', 'area: machine learning', 'loc: california', 'loc: texas', 'visa: possible', 'status: closed'];
 
 function state() {
   return {
@@ -59,6 +60,7 @@ function state() {
     dept: multi.dept.values(),
     area: multi.area.values(),
     state: multi.state.values(),
+    visa: multi.visa.values(),
     status: select('status-select').value as StatusFilter,
     sortBy: select('sort-select').value as JobSort,
     view: select('view-select').value,
@@ -132,7 +134,8 @@ function populateOptions() {
     dept: Object.entries(DEPARTMENT_LABELS),
     level: Object.entries(LEVEL_LABELS),
     area: Object.entries(areaLabels).sort((a, b) => a[1].localeCompare(b[1])),
-    state: Object.entries(US_STATES)
+    state: Object.entries(US_STATES),
+    visa: Object.entries(VISA_FILTER_LABELS)
   };
   MULTI_FILTERS.forEach(([key, id, label, plural]) => {
     multi[key] = createMultiSelect(document.getElementById(id) as HTMLDetailsElement, { label, plural, options: entries[key], onChange: render });

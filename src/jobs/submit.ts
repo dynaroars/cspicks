@@ -3,7 +3,7 @@
  * postings; this is the lead channel for ones the crawl missed or got wrong.
  */
 import { areaLabels, escapeHtml } from '../shared.js';
-import { LEVEL_LABELS, TRACK_LABELS, loadJobsData } from './jobs-data.js';
+import { LEVEL_LABELS, TRACK_LABELS, VISA_LABELS, loadJobsData } from './jobs-data.js';
 import { US_STATES } from './states.js';
 import { buildJobEmailUrl, buildJobGithubIssueUrl, buildJobSubmissionContent } from './submission.js';
 import { DELIVERY_BUTTONS, QUICK_SECTION, deliver, quickLabel, quickPayload, setupQuickMode } from '../submit-quick.js';
@@ -59,6 +59,7 @@ function renderForm() {
         <div class="submit-section"><label for="areas">Research areas</label><input id="areas" name="areas" type="text" list="area-options" placeholder="e.g. Security, Machine Learning (blank if any area)"><datalist id="area-options">${Object.values(areaLabels).map(label => `<option value="${escapeHtml(label)}"></option>`).join('')}</datalist></div>
         <div class="submit-section"><label for="deadline">Application deadline</label><input id="deadline" name="deadline" type="date"></div>
       </div>
+      <div class="submit-section"><label for="visa">Visa sponsorship (as the posting states it)</label><select id="visa" name="visa">${options(Object.entries(VISA_LABELS), '-- Select (optional) --')}</select></div>
       <div class="submit-section">
         <label class="submit-choice"><input type="checkbox" id="rolling" name="rolling"> Reviews applications until filled (rolling)</label>
         <label class="submit-choice"><input type="checkbox" id="closed" name="closed"> This posting is closed or filled</label>
@@ -89,6 +90,7 @@ function getFormData() {
     city: value(form, '#city'),
     areas,
     deadline: value(form, '#deadline'),
+    visaSponsorship: value(form, '#visa'),
     rolling: form.querySelector<HTMLInputElement>('#rolling')?.checked || null,
     closedOrFilled: form.querySelector<HTMLInputElement>('#closed')?.checked || null,
     additionalNotes: value(form, '#comments')
@@ -113,6 +115,7 @@ function prefill(job: Job) {
   set('#city', job.city || '');
   set('#areas', job.areas.map(area => areaLabels[area] || area).join(', '));
   set('#deadline', job.deadline || '');
+  set('#visa', job.visaSponsorship || '');
   const rolling = form.querySelector<HTMLInputElement>('#rolling');
   if (rolling) rolling.checked = Boolean(job.rolling);
 }

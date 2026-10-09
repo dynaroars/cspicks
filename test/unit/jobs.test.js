@@ -155,7 +155,42 @@ test('parser rejects malformed data', () => {
   assert.throws(() => parseJobs([job({ state: 'ZZ' })]), /Invalid jobs dataset/);
   assert.throws(() => parseJobs([job({ track: 'janitor' })]), /Invalid jobs dataset/);
   assert.throws(() => parseJobs([job({ deadline: 'Dec 15' })]), /Invalid jobs dataset/);
+  assert.throws(() => parseJobs([job({ visaSponsorship: 'maybe' })]), /Invalid jobs dataset/);
   assert.equal(parseJobs([job()]).length, 1);
+  assert.equal(parseJobs([job({ visaSponsorship: 'case-by-case' })]).length, 1);
+});
+
+test('visa filter and keyword: stated policy, unchecked postings, and "possible"', () => {
+  const list = [job({ id: 'y', visaSponsorship: 'yes' }), job({ id: 'c', visaSponsorship: 'case-by-case' }), job({ id: 'n', visaSponsorship: 'no' }),
+    job({ id: 's', visaSponsorship: 'not-stated' }), job({ id: 'u' })];
+  const sorted = filters => ids(filterJobs(list, { now: NOW, ...filters })).sort();
+  assert.deepEqual(sorted({ visa: ['yes', 'case-by-case'] }), ['c', 'y']);
+  assert.deepEqual(sorted({ visa: ['unknown'] }), ['u']);
+  assert.deepEqual(sorted({ visa: 'all' }), ['c', 'n', 's', 'u', 'y']);
+  assert.deepEqual(sorted({ query: 'visa: possible' }), ['c', 's', 'u', 'y']);
+  assert.deepEqual(sorted({ query: 'visa: no' }), ['n'], '"no" must not match "not-stated"');
+  assert.deepEqual(sorted({ query: 'visa: not-stated' }), ['s']);
+  assert.deepEqual(sorted({ query: 'sponsorship: yes' }), ['y']);
+  assert.deepEqual(sorted({ query: 'visa: case' }), ['c']);
+  assert.deepEqual(sorted({ query: 'visa: bogus' }), []);
+});
+
+test('visa sponsorship tag sits after the position and rank tags, and the export lists it', () => {
+  const chip = value => renderJobCard(job({ visaSponsorship: value }), () => undefined, () => false, NOW);
+  assert.match(chip('yes'), /job-chip-visa is-yes[^>]*><span aria-hidden="true">✅<\/span> Visa sponsorship available</);
+  assert.match(chip('no'), /🚫<\/span> No visa sponsorship</);
+  assert.match(chip('case-by-case'), /⚖️<\/span> Visa sponsorship case by case/);
+  assert.match(chip('not-stated'), /job-chip-visa is-not-stated[^>]*><span aria-hidden="true">❔<\/span> Visa sponsorship not stated</);
+  assert.ok(!chip(undefined).includes('job-chip-visa'), 'unchecked postings get no tag');
+  const html = renderJobCard(job({ visaSponsorship: 'yes' }), () => ({ rank: 7, areaRanks: { ai: 3 } }), () => false, NOW);
+  const order = ['job-chip-track', 'job-chip-rank', 'job-chip-visa', 'job-chip-area'].map(name => html.indexOf(name));
+  assert.deepEqual([...order].sort((a, b) => a - b), order, 'track, level, rank, visa, then areas');
+  assert.deepEqual(ids(filterJobs([job({ visaSponsorship: 'no' }), job({ id: 'b', visaSponsorship: 'not-stated' })], { query: 'visa', now: NOW })), ['gt-ai-2026']);
+
+  const md = jobsToMarkdown([job({ visaSponsorship: 'no' }), job({ id: 'b', visaSponsorship: 'not-stated' }), job({ id: 'c' })], { now: NOW });
+  assert.match(md, /- \*\*Visa sponsorship:\*\* Not offered, per the posting/);
+  assert.match(md, /- \*\*Visa sponsorship:\*\* Not stated on the posting/);
+  assert.equal((md.match(/Visa sponsorship:/g) || []).length, 2, 'unchecked postings have no visa line');
 });
 
 test('state tile map places every state exactly once', () => {

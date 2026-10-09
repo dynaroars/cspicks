@@ -176,3 +176,12 @@ button.job-chip:hover { color: var(--accent-color); border-color: var(--accent-c
   margin: 1rem 0 0; padding: 0.55rem 0.8rem; border: 1px solid var(--border-color); border-radius: 8px;
   background: var(--bg-secondary); color: var(--text-primary); font-size: 0.88rem;
 }
+.job-chip-visa.is-not-stated { color: var(--text-secondary); }
+.job-chip-visa.is-yes { color: #17653a; background: #dff7e8; border-color: transparent; font-weight: 600; }
+.job-chip-visa.is-case-by-case { color: #8a5a00; background: #fff4d6; border-color: transparent; font-weight: 600; }
+.job-chip-visa.is-no { color: #9b1c1c; background: #fde8e8; border-color: transparent; font-weight: 600; }
+@media (prefers-color-scheme: dark) {
+  .job-chip-visa.is-yes { color: #86e3ad; background: #173e29; }
+  .job-chip-visa.is-case-by-case { color: #ffd66b; background: #3d3010; }
+  .job-chip-visa.is-no { color: #fca5a5; background: #4a1818; }
+}

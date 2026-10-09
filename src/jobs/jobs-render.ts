@@ -1,8 +1,8 @@
 import { areaLabels, escapeHtml, safeExternalUrl } from '../shared.js';
 import { favoriteToggleButton } from '../favorites.js';
-import { LEVEL_LABELS, TRACK_LABELS, deadlineLabel, filterValues, formatDay } from './jobs-data.js';
+import { LEVEL_LABELS, TRACK_LABELS, VISA_LABELS, deadlineLabel, filterValues, formatDay } from './jobs-data.js';
 import { US_STATES } from './states.js';
-import type { Job } from '../types.js';
+import type { Job, VisaSponsorship } from '../types.js';
 import type { FilterChoice, SchoolJobs } from './jobs-data.js';
 
 export interface SchoolRank { rank: number | null; areaRanks: Record<string, number> }
@@ -21,6 +21,15 @@ function rankChips(job: Job, ranks: RankLookup) {
     if (areaRank) chips.push(`<span class="job-chip job-chip-rank" title="CSRankings position in ${escapeHtml(areaLabels[area] || area)}">#${areaRank} ${escapeHtml(areaLabels[area] || area)}</span>`);
   });
   return chips.join('');
+}
+
+const VISA_EMOJI: Record<VisaSponsorship, string> = { yes: '✅', 'case-by-case': '⚖️', no: '🚫', 'not-stated': '❔' };
+
+/** Sits with the position and rank tags; postings nobody has read for sponsorship yet get no tag. */
+function visaChip(job: Job) {
+  const value = job.visaSponsorship;
+  if (!value) return '';
+  return `<span class="job-chip job-chip-visa is-${value}" title="As stated on the official posting; confirm with the department before applying"><span aria-hidden="true">${VISA_EMOJI[value]}</span> ${escapeHtml(VISA_LABELS[value])}</span>`;
 }
 
 export function schoolLinks(school: string) {
@@ -56,6 +65,7 @@ export function renderJobCard(job: Job, ranks: RankLookup, isFavorite: IsFavorit
       <span class="job-chip job-chip-track">${escapeHtml(TRACK_LABELS[job.track])}</span>
       ${job.level ? `<span class="job-chip">${escapeHtml(LEVEL_LABELS[job.level])}</span>` : ''}
       ${showSchool ? rankChips(job, ranks) : ''}
+      ${visaChip(job)}
       ${areaChips}
     </p>
     <p class="job-meta"><button type="button" class="job-state-btn" data-state="${escapeHtml(job.state)}" title="Show ${escapeHtml(US_STATES[job.state] || job.state)} only">📍 ${escapeHtml(place)}</button></p>

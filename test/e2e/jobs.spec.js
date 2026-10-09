@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 const day = offset => new Date(Date.now() + offset * 86400000).toISOString().slice(0, 10);
 const jobs = [
-  { id: 'gmu-soft', school: 'George Mason University', department: 'Computer Science', title: 'Assistant Professor, Software Engineering', track: 'tenure-track', level: 'assistant', areas: ['soft'], state: 'VA', city: 'Fairfax', deadline: day(20), lastSeenAt: day(-2), url: 'https://example.edu/gmu', source: 'crawl', verified: true },
+  { id: 'gmu-soft', school: 'George Mason University', department: 'Computer Science', title: 'Assistant Professor, Software Engineering', track: 'tenure-track', level: 'assistant', areas: ['soft'], state: 'VA', city: 'Fairfax', deadline: day(20), lastSeenAt: day(-2), url: 'https://example.edu/gmu', source: 'crawl', verified: true, visaSponsorship: 'yes' },
   { id: 'uiuc-teach', school: 'Univ. of Illinois at Urbana-Champaign', department: 'Siebel School', title: 'Teaching Professor', track: 'teaching', level: null, areas: [], state: 'IL', city: 'Urbana', deadline: null, rolling: true, lastSeenAt: day(-5), url: 'https://example.edu/uiuc', source: 'crawl' },
   { id: 'gmu-old', school: 'George Mason University', department: 'Computer Science', title: 'Postdoctoral Fellow', track: 'postdoc', level: null, areas: ['sec'], state: 'VA', city: 'Fairfax', deadline: day(-60), lastSeenAt: day(-90), url: 'https://example.edu/gmu-old', source: 'crawl' }
 ];
@@ -37,6 +37,8 @@ test('US Jobs shows only active postings by default and reveals older ones on re
   await expect(page.locator('.job-card')).toHaveCount(2);
   await expect(page.locator('.job-title').first()).toContainText('Software Engineering');
   await expect(page.locator('.job-card', { hasText: 'Teaching Professor' })).toContainText('Rolling review');
+  await expect(page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.job-chip-visa')).toHaveText('✅ Visa sponsorship available');
+  await expect(page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.job-chip-visa')).toHaveCount(0, { timeout: 1000 });
 
   await page.locator('#status-select').selectOption('closed');
   await expect(page.locator('.job-card')).toHaveCount(1);
@@ -88,6 +90,24 @@ test('search, filters, and the state map narrow the list', async ({ page }) => {
   await page.locator('.job-map-tile[data-state="IL"]').click();
   await expect(page.locator('.job-card')).toHaveCount(2);
   await expect(page.locator('#state-select summary')).toHaveText('All States');
+});
+
+test('visa filter and keyword narrow to what postings say about sponsorship', async ({ page }) => {
+  await page.goto('jobs.html');
+  const visa = page.locator('#visa-select');
+  await visa.locator('summary').click();
+  await visa.getByLabel('Sponsorship available').check();
+  await expect(page.locator('.job-card')).toHaveCount(1);
+  await expect(page.locator('.job-card')).toContainText('Software Engineering');
+  await expect(page).toHaveURL(/visa=yes/);
+  await visa.getByLabel('Not checked yet').check();
+  await expect(page.locator('.job-card')).toHaveCount(2);
+  await visa.getByRole('button', { name: 'Clear' }).click();
+
+  await page.locator('#jobs-search').fill('visa: no');
+  await expect(page.locator('.job-card')).toHaveCount(0);
+  await page.locator('#jobs-search').fill('visa: possible');
+  await expect(page.locator('.job-card')).toHaveCount(2);
 });
 
 test('several filter values restore from the URL, and older single-value links still work', async ({ page }) => {

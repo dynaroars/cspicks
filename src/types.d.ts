@@ -232,6 +232,8 @@ export interface Grant {
 
 export type JobTrack = 'tenure-track' | 'teaching' | 'research' | 'postdoc' | 'visiting' | 'leadership';
 export type JobLevel = 'assistant' | 'associate' | 'full' | 'open';
+/** `not-stated`: the posting was read and says nothing about sponsorship. */
+export type VisaSponsorship = 'yes' | 'no' | 'case-by-case' | 'not-stated';
 
 /** One US academic job posting in `public/jobs.json`. Dates are ISO `YYYY-MM-DD`. */
 export interface Job {
@@ -259,6 +261,8 @@ export interface Job {
   lastSeenAt: string;
   /** Set when the posting is known closed or filled. */
   closedAt?: string | null;
+  /** What the posting says about visa sponsorship; omitted until someone has read the posting for it. */
+  visaSponsorship?: VisaSponsorship;
   url: string;
   summary?: string | null;
   source: 'crawl' | 'submission';

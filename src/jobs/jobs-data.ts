@@ -7,7 +7,7 @@ import { areaLabels } from '../shared.js';
 import { FAVORITES_KEYWORD_SPEC } from '../favorites.js';
 import { US_STATES, resolveState } from './states.js';
 import type { KeywordSpec } from '../search-keywords.js';
-import type { Job, JobLevel, JobTrack } from '../types.js';
+import type { Job, JobLevel, JobTrack, VisaSponsorship } from '../types.js';
 
 let cachedJobs: Job[] | null = null;
 
@@ -30,6 +30,35 @@ export const LEVEL_LABELS: Record<JobLevel, string> = {
   full: 'Full',
   open: 'Open rank'
 };
+
+/** Card and export wording for what a posting says about visa sponsorship. */
+export const VISA_LABELS: Record<VisaSponsorship, string> = {
+  yes: 'Visa sponsorship available',
+  'case-by-case': 'Visa sponsorship case by case',
+  no: 'No visa sponsorship',
+  'not-stated': 'Visa sponsorship not stated'
+};
+
+/** Visa filter choices: the posting's stated policy, plus `unknown` for postings nobody has read for it yet. */
+export const VISA_FILTER_LABELS: Record<VisaSponsorship | 'unknown', string> = {
+  yes: '✅ Sponsorship available',
+  'case-by-case': '⚖️ Sponsorship case by case',
+  no: '🚫 No sponsorship',
+  'not-stated': '❔ Not stated on posting',
+  unknown: '⏳ Not checked yet'
+};
+
+/** `visa:` keyword values; `possible` keeps every posting that does not rule sponsorship out. */
+const VISA_KEYWORD_VALUES: Record<string, string[]> = {
+  yes: ['yes'], available: ['yes'], sponsor: ['yes'],
+  case: ['case-by-case'], 'case-by-case': ['case-by-case'], maybe: ['case-by-case'],
+  no: ['no'], none: ['no'],
+  'not-stated': ['not-stated'], unstated: ['not-stated'],
+  unknown: ['unknown'], unchecked: ['unknown'],
+  possible: ['yes', 'case-by-case', 'not-stated', 'unknown']
+};
+
+const visaKey = (job: Job) => job.visaSponsorship ?? 'unknown';
 
 export type DepartmentKind = 'cs' | 'information' | 'ece' | 'data' | 'other';
 
@@ -62,6 +91,7 @@ export const JOBS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'track', example: 'track: teaching', description: 'tenure-track, teaching, research, postdoc, visiting, or leadership' },
   { key: 'level', aliases: ['rank'], example: 'level: assistant', description: 'assistant, associate, full, or open rank' },
   { key: 'dept', aliases: ['department', 'unit'], example: 'dept: information', description: 'Hiring unit: cs, information (IST/iSchool), ece, data, or other' },
+  { key: 'visa', aliases: ['sponsorship'], example: 'visa: possible', description: 'What the posting says about visa sponsorship: yes, case, no, not-stated, unknown (not checked yet), or possible (anything but no)' },
   { key: 'status', example: 'status: closed', description: '"active" (default), "closed" (older postings), or "all"' },
   FAVORITES_KEYWORD_SPEC
 ];
@@ -139,6 +169,7 @@ function isJob(value: unknown): value is Job {
     && typeof job.url === 'string'
     && typeof job.lastSeenAt === 'string' && dayParts(job.lastSeenAt) !== null
     && isoOrNull(job.deadline) && isoOrNull(job.closedAt) && isoOrNull(job.postedDate)
+    && (job.visaSponsorship === undefined || (typeof job.visaSponsorship === 'string' && job.visaSponsorship in VISA_LABELS))
     && (job.source === 'crawl' || job.source === 'submission');
 }
 
@@ -171,6 +202,8 @@ export interface JobFilters {
   level?: FilterChoice;
   area?: FilterChoice;
   state?: FilterChoice;
+  /** `VISA_FILTER_LABELS` keys. */
+  visa?: FilterChoice;
   status?: StatusFilter;
   sortBy?: JobSort;
   /** Overall CSRankings rank per school, for the rank sorts; schools it cannot rank sort last. */
@@ -186,6 +219,7 @@ function searchText(job: Job) {
   return [
     job.school, job.department, job.title, job.city, job.state, US_STATES[job.state],
     TRACK_LABELS[job.track], job.level ? LEVEL_LABELS[job.level] : '', job.summary, job.anyArea ? 'all areas any area open' : '',
+    job.visaSponsorship && job.visaSponsorship !== 'not-stated' ? VISA_LABELS[job.visaSponsorship] : '',
     ...job.areas.map(area => `${area} ${areaLabels[area] || ''}`)
   ].filter(Boolean).join(' ').toLowerCase();
 }
@@ -224,6 +258,7 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
   const levels = filterValues(filters.level);
   const areas = filterValues(filters.area);
   const states = filterValues(filters.state);
+  const visas = filterValues(filters.visa);
   const { filters: keywords, rest } = parseKeywordQuery(query, JOBS_KEYWORD_SPECS);
   const statusKeyword = keywords.status?.[0];
   const wantStatus: StatusFilter = statusKeyword === 'closed' || statusKeyword === 'all' || statusKeyword === 'active'
@@ -245,6 +280,8 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
     // A posting open to all areas matches every area; one that names none matches none.
     if (areas.length && !job.anyArea && !areas.some(key => job.areas.includes(key))) return false;
     if (!ignoreState && states.length && !states.includes(job.state)) return false;
+    if (visas.length && !visas.includes(visaKey(job))) return false;
+    if (keywords.visa && !keywords.visa.every(value => (VISA_KEYWORD_VALUES[value] ?? []).includes(visaKey(job)))) return false;
     if (!matchesKeyword(keywords.school, job.school)) return false;
     if (keywords.area && !job.anyArea && !matchesKeyword(keywords.area, job.areas.map(key => `${key} ${areaLabels[key] || ''}`).join(' '))) return false;
     if (!matchesKeyword(keywords.track, `${job.track} ${TRACK_LABELS[job.track]}`)) return false;

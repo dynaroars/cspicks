@@ -6,10 +6,17 @@
 import { areaLabels, safeExternalUrl } from '../shared.js';
 import { DEPARTMENT_LABELS, LEVEL_LABELS, TRACK_LABELS, deadlineLabel, departmentKind, formatDay } from './jobs-data.js';
 import { US_STATES } from './states.js';
-import type { Job } from '../types.js';
+import type { Job, VisaSponsorship } from '../types.js';
 import type { RankLookup } from './jobs-render.js';
 
 const SITE_URL = 'https://cspicks.roars.dev';
+
+const VISA_TEXT: Record<VisaSponsorship, string> = {
+  yes: 'Available, per the posting',
+  'case-by-case': 'Case by case, per the posting',
+  no: 'Not offered, per the posting',
+  'not-stated': 'Not stated on the posting'
+};
 
 /** One line of Markdown text: collapse whitespace so a stray newline cannot break the list or heading. */
 const inline = (value: unknown) => String(value ?? '').replace(/\s+/g, ' ').trim();
@@ -44,6 +51,7 @@ export function jobsToMarkdown(jobs: Job[], { ranks = () => undefined, now = Dat
       ['Location', [job.city, US_STATES[job.state] || job.state].filter(Boolean).join(', ')],
       ['Position', [TRACK_LABELS[job.track], job.level ? LEVEL_LABELS[job.level] : ''].filter(Boolean).join(' · ')],
       ['Research areas', areas.join(', ') || 'Not specified'],
+      ['Visa sponsorship', job.visaSponsorship ? VISA_TEXT[job.visaSponsorship] : ''],
       ['Review begins', formatDay(job.reviewBegins)],
       ['Start date', formatDay(job.startDate)],
       ['Posted', formatDay(job.postedDate)],

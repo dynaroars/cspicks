@@ -644,7 +644,7 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
 3. For every CS-relevant opening in the CS department itself (computer science, computer engineering, AI, data
    science, cybersecurity, or school/college-of-computing units), add or update one record.
 4. For records already in `jobs.json` for this school: if the posting is still listed, set `lastSeenAt` to today
-   and refresh changed facts; if it is gone or marked filled/closed on the official page, set `closedAt` to today.
+   and refresh changed facts (and set `visaSponsorship` if the record has none yet); if it is gone or marked filled/closed on the official page, set `closedAt` to today.
    **Never delete records**: closed postings are the "older postings" archive.
 5. Record the result in the school's sources row (`lastCheckedAt`, `outcome` = `complete` | `incomplete` |
    `blocked` | `not_found`, `summary`, `checkedUrls`, `relatedUnits`). If no hiring page can be found or the site blocks the
@@ -668,6 +668,7 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
 | `reviewBegins`, `startDate`, `postedDate` | ISO dates, only when the posting states them. |
 | `lastSeenAt` | ISO date the posting was last confirmed live. Required. |
 | `closedAt` | ISO date the posting was seen closed/filled; omit while open. |
+| `visaSponsorship` | What the official posting itself says about visa / work-authorization sponsorship for international candidates: `yes` (it will sponsor, e.g. "H-1B sponsorship available"), `no` ("no visa sponsorship", "must be authorized to work in the US without sponsorship"), `case-by-case` ("may be considered", "eligible for sponsorship"), or `not-stated` (read it; it says nothing). Omit until someone has read the posting for it. Never infer from a university-wide HR policy, the school's reputation, or a third-party board; "sponsored research" is not visa sponsorship. |
 | `url` | The official posting URL (https). One record per URL. |
 | `summary` | At most two sentences, paraphrased; never paste a posting. |
 | `source` | `crawl` or `submission`. |

@@ -26,6 +26,10 @@ active/closed definition are in **MAINTENANCE.md §6.5**; read it first.
 4. **Keep `lastSeenAt` honest.** Set it to today only for postings you saw live on the official page this run.
    A posting with no deadline that is not re-confirmed for 90 days drops out of the default "active" view.
 5. **Areas.** Record every area the posting specifically names in `areas`; set `anyArea: true` when it explicitly says all/any areas. Both can apply. Never infer an area the posting doesn't state; empty `areas` without `anyArea` means unspecified.
+5a. **Visa sponsorship.** Read the official posting for what it says about sponsoring visas / work authorization and set
+   `visaSponsorship`: `yes`, `no`, `case-by-case`, or `not-stated` when it says nothing (MAINTENANCE.md §6.5). Only the posting
+   counts, not a university HR policy page; "sponsored research" is not visa sponsorship. When re-confirming an existing
+   record that has no `visaSponsorship`, read and set it, so older records fill in over time.
 5b. **CSRankings names.** `school` must be the exact institution name in `scripts/data/jobs-sources.json`.
 6. **One record per posting URL**; keep `id`s stable and unique.
 
