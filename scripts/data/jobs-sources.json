@@ -2235,10 +2235,11 @@
     "state": "TX",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Hiring index lists no positions; the AI/software tenure-track page is for a Fall 2026 start with a 2025 review date, so it was treated as stale.",
+    "summary": "Hiring index lists no positions; the AI/software tenure-track page is for a Fall 2026 start with a 2025 review date, so it was treated as stale. 2026-10-08: UTEP CS also has a Systems search (utep.edu/cs/hiring/computer_systems.html, stale Fall 2026 text) listed on AcademicJobs #7371617 with a Fall 2027 start; recorded as unverified. The earlier crawl missed that sub-page.",
     "checkedUrls": [
       "https://www.utep.edu/cs/Hiring",
-      "https://www.utep.edu/cs/hiring/ai_software.html"
+      "https://www.utep.edu/cs/hiring/ai_software.html",
+      "https://www.utep.edu/cs/hiring/computer_systems.html"
     ],
     "deferredUntil": null
   },

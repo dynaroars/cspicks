@@ -3331,5 +3331,32 @@
     "summary": "Two faculty searches (assistant, and associate/full) in Statistics and Data Science; a PhD in Statistics, Computer Science, or a related field is accepted, with machine learning and causal inference preferred.",
     "deadline": "2026-11-15",
     "reviewBegins": "2026-10-01"
+  },
+  {
+    "id": "utep-cs-asst-prof-systems-2026",
+    "school": "University of Texas - El Paso",
+    "department": "Department of Computer Science, Miguel A. Loya College of Engineering",
+    "title": "Assistant Professor of Computer Science (Systems)",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ops",
+      "bed",
+      "hpc",
+      "plan",
+      "soft",
+      "sec",
+      "comm"
+    ],
+    "state": "TX",
+    "city": "El Paso",
+    "deadline": null,
+    "rolling": true,
+    "postedDate": "2026-09-29",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://www.academicjobs.org/posting/7371617",
+    "summary": "Systems search (operating and distributed systems, embedded, HPC, compilers, PL, networks, systems security) for a Fall 2027 start, open until filled; industry experience valued. Details are from the AcademicJobs listing; UTEP's own page (computer_systems.html) still shows last cycle's ad, so this is not yet confirmed on an official page.",
+    "source": "submission",
+    "verified": false
   }
 ]
