@@ -165,13 +165,24 @@ button.job-chip:hover { color: var(--accent-color); border-color: var(--accent-c
 }
 .multi-select-clear:hover { background: var(--hover-bg); }
 
-.jobs-export-btn {
-  height: 34px; padding: 0.35rem 0.75rem; border: 1px solid var(--border-color); border-radius: 8px;
-  background: var(--bg-secondary); color: var(--text-primary); font: inherit; font-size: var(--text-sm); font-weight: 500;
-  white-space: nowrap; cursor: pointer; transition: background-color 0.2s;
+.jobs-favorites-actions { position: relative; }
+.jobs-favorites-actions summary {
+  display: flex; align-items: center; justify-content: center; width: 34px; height: 34px;
+  border-radius: 8px; color: var(--text-secondary); font-size: 1.35rem; cursor: pointer; list-style: none;
 }
-.jobs-export-btn:hover:not(:disabled) { background: var(--hover-bg); }
-.jobs-export-btn:disabled { opacity: 0.5; cursor: default; }
+.jobs-favorites-actions summary::-webkit-details-marker { display: none; }
+.jobs-favorites-actions summary:hover, .jobs-favorites-actions[open] summary { background: var(--hover-bg); }
+.jobs-favorites-menu {
+  position: absolute; top: calc(100% + 4px); right: 0; z-index: 30; min-width: 180px;
+  padding: 0.35rem; border: 1px solid var(--border-color); border-radius: 10px;
+  background: var(--card-bg); box-shadow: var(--shadow-dropdown);
+}
+.jobs-favorites-menu button {
+  width: 100%; padding: 0.6rem 0.75rem; border: 0; border-radius: 6px;
+  color: var(--text-primary); background: transparent; font: inherit; font-size: var(--text-sm);
+  text-align: left; white-space: nowrap; cursor: pointer;
+}
+.jobs-favorites-menu button:hover { background: var(--hover-bg); }
 .jobs-restore-note {
   margin: 1rem 0 0; padding: 0.55rem 0.8rem; border: 1px solid var(--border-color); border-radius: 8px;
   background: var(--bg-secondary); color: var(--text-primary); font-size: 0.88rem;

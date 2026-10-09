@@ -10,7 +10,7 @@ import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
 import { areaLabels, escapeHtml } from '../shared.js';
-import { createFavoritesStore, favoritesSelect, onFavoriteChange, onlyFavorites, prioritizeFavorites, updateFavoritesCount, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
+import { createFavoritesStore, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { keywordSuggestions, mountKeywordHelp, parseKeywordQuery, restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadData } from '../data.js';
 import type { JobFilters, JobSort } from './jobs-data.js';
@@ -27,6 +27,7 @@ const mapElement = document.getElementById('jobs-map')!;
 const favorites = createFavoritesStore('cspicks:jobs-favorites');
 const select = (id: string) => document.getElementById(id) as HTMLSelectElement;
 const exportButton = document.querySelector<HTMLButtonElement>('#export-favorites')!;
+const favoritesActions = document.querySelector<HTMLDetailsElement>('#favorites-actions')!;
 const restoreInput = document.querySelector<HTMLInputElement>('#restore-favorites-file')!;
 const restoreNote = document.getElementById('jobs-restore-note')!;
 const mapClear = document.querySelector<HTMLButtonElement>('#clear-map-states')!;
@@ -43,14 +44,13 @@ function state() {
   return {
     query: input.value.trim(),
     sortBy: select('sort-select').value as JobSort,
-    view: select('view-select').value,
-    favorites: select('favorites-select').value
+    view: select('view-select').value
   };
 }
 
 function updateUrl(current: ReturnType<typeof state>) {
   const next = new URLSearchParams();
-  const defaults = { sortBy: 'deadline', view: 'position', favorites: 'all' };
+  const defaults = { sortBy: 'deadline', view: 'position' };
   const names: Record<string, string> = { sortBy: 'sort' };
   if (current.query) next.set('q', current.query);
   (Object.keys(defaults) as Array<keyof typeof defaults>).forEach(key => {
@@ -69,7 +69,7 @@ function render() {
   if (!allJobs.length && !statusText.dataset.loaded) return;
   const current = state();
   const filters: JobFilters = { ...current, rankOf, now: Date.now() };
-  const favoritesOnly = wantsFavoritesOnly(current.query, current.favorites);
+  const favoritesOnly = wantsFavoritesOnly(current.query, 'all');
   // Starred postings lead the list; "favorites only" hides the rest.
   const byFavorites = (list: Job[]) => favoritesOnly ? onlyFavorites(list, job => job.id, favorites) : prioritizeFavorites(list, job => job.id, favorites);
   const shown = byFavorites(filterJobs(allJobs, filters));
@@ -85,7 +85,7 @@ function render() {
   if (!shown.length) {
     results.innerHTML = `<div class="jobs-empty">
       <h3>${favoritesOnly ? 'No starred positions match' : allJobs.length ? 'No matching positions' : 'No postings yet'}</h3>
-      <p>${favoritesOnly ? 'Star a posting with the ☆ button to keep it here, or switch back to “All items”.' : allJobs.length
+      <p>${favoritesOnly ? 'Star a posting with the ☆ button to keep it here, or clear “favorites: only” from search.' : allJobs.length
         ? 'Try broadening your search, searching “status: all”, or clearing some filters.'
         : 'Postings are added as department hiring pages are crawled and as people submit them.'}
         You can also <a href="jobs-submit.html">submit a posting</a>.</p>
@@ -113,12 +113,11 @@ function setFilter(key: string, values: string[]) {
 }
 
 function populateOptions() {
-  select('favorites-select').value = params.get('favorites') === 'only' ? 'only' : 'all';
   const view = params.get('view');
   if (view === 'school') select('view-select').value = view;
   const sort = params.get('sort');
   if (sort && (JOB_SORTS as string[]).includes(sort)) select('sort-select').value = sort;
-  input.value = restoreKeywordQuery(params, { track: 'track', dept: 'dept', level: 'level', area: 'area', state: 'loc', visa: 'visa', status: 'status' });
+  input.value = restoreKeywordQuery(params, { track: 'track', dept: 'dept', level: 'level', area: 'area', state: 'loc', visa: 'visa', status: 'status', favorites: 'favorites' });
 }
 
 function buildSuggestions() {
@@ -155,11 +154,10 @@ function setupEvents() {
     input.value = '';
     select('sort-select').value = 'deadline';
     select('view-select').value = 'position';
-    select('favorites-select').value = 'all';
     render();
     input.focus();
   };
-  ['sort-select', 'view-select', 'favorites-select']
+  ['sort-select', 'view-select']
     .forEach(id => select(id).addEventListener('change', render));
 
   // Map tiles add or remove a state, so several can be picked; chips on a card narrow to just that value.
@@ -173,8 +171,23 @@ function setupEvents() {
   });
 
   mapClear.addEventListener('click', () => setFilter('loc', []));
-  exportButton.addEventListener('click', exportFavorites);
-  document.getElementById('restore-favorites')!.addEventListener('click', () => restoreInput.click());
+  exportButton.addEventListener('click', () => {
+    exportFavorites();
+    favoritesActions.open = false;
+  });
+  document.getElementById('restore-favorites')!.addEventListener('click', () => {
+    favoritesActions.open = false;
+    restoreInput.click();
+  });
+  document.addEventListener('click', event => {
+    if (!favoritesActions.contains(event.target as Node)) favoritesActions.open = false;
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && favoritesActions.open) {
+      favoritesActions.open = false;
+      favoritesActions.querySelector('summary')!.focus();
+    }
+  });
   restoreInput.addEventListener('change', () => {
     const file = restoreInput.files?.[0];
     restoreInput.value = '';
@@ -222,8 +235,9 @@ function setupEvents() {
 
 function updateExportButton() {
   const count = favorites.all().length;
-  exportButton.disabled = count === 0;
-  exportButton.title = count ? `Download your ${count} starred position${count === 1 ? '' : 's'} as a Markdown file` : 'Star postings with ☆ to export them';
+  exportButton.hidden = count < 2;
+  exportButton.textContent = `Export ${count} favorites`;
+  exportButton.title = `Download your ${count} starred positions as a Markdown file`;
 }
 
 /** Every starred posting (closed ones too, whatever the filters), in the current sort order. */
@@ -248,7 +262,7 @@ async function restoreFavorites(file: File) {
   const { ids, unmatched } = restoreStarredIds(await file.text(), allJobs);
   const plural = (count: number) => `${count} posting${count === 1 ? '' : 's'}`;
   if (!ids.length && !unmatched) {
-    restoreNote.textContent = `No CS Picks postings found in “${file.name}”, so your stars were not changed. Choose a file made with “Export ★ (.md)”.`;
+    restoreNote.textContent = `No CS Picks postings found in “${file.name}”, so your stars were not changed. Choose a file made with “Export favorites”.`;
   } else {
     const wanted = new Set(ids);
     const removed = favorites.all().filter(id => !wanted.has(id));
@@ -260,7 +274,6 @@ async function restoreFavorites(file: File) {
     ].filter(Boolean).join(' ');
   }
   restoreNote.hidden = false;
-  updateFavoritesCount(favorites);
   updateExportButton();
   render();
 }
@@ -280,16 +293,17 @@ async function init() {
   try {
     allJobs = await loadJobsData();
     statusText.dataset.loaded = 'true';
-    document.getElementById('favorites-filter')!.innerHTML = favoritesSelect(params.get('favorites') === 'only' ? 'only' : 'all', favorites.all().length);
     populateOptions();
     suggestions = buildSuggestions();
     input.disabled = false;
     input.placeholder = 'Search jobs or use keywords: track: teaching loc: texas';
     mountKeywordHelp(input, JOBS_KEYWORD_SPECS, 'jobs-search-help', 'track: teaching loc: TX,VA level: assistant');
     wireFavoriteToggles(results, favorites);
-    onFavoriteChange(results, favorites, render);
     results.addEventListener('click', event => {
-      if (event.target instanceof Element && event.target.closest('[data-favorite-id]')) updateExportButton();
+      if (event.target instanceof Element && event.target.closest('[data-favorite-id]')) {
+        updateExportButton();
+        render();
+      }
     });
     updateExportButton();
     initTooltipPositioning();

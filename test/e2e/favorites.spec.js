@@ -7,29 +7,32 @@ const jobs = ['alpha', 'bravo', 'charlie'].map((name, index) => ({
   url: `https://example.edu/${name}`, source: 'crawl'
 }));
 
-test('US Jobs: star postings, show favorites only, and the choice persists', async ({ page }) => {
+test('US Jobs lists favorites first and supports favorites-only keywords without a dropdown', async ({ page }) => {
   await page.route('**/jobs.json', route => route.fulfill({ json: jobs }));
   await page.route('https://raw.githubusercontent.com/**', route => route.fulfill({ status: 404, body: '' }));
   await page.goto('jobs.html');
   await expect(page.locator('.job-card')).toHaveCount(3);
-  await expect(page.locator('#favorites-select option[value="only"]')).toHaveText('★ Favorites only (0)');
+  await expect(page.locator('#favorites-select')).toHaveCount(0);
 
   await page.locator('.job-card', { hasText: 'charlie' }).locator('.favorite-toggle').click();
-  await expect(page.locator('#favorites-select option[value="only"]')).toHaveText('★ Favorites only (1)');
-  // A reload shows the starred posting first even though it has the latest deadline.
+  // Stars move to the top immediately and persist across reloads.
+  await expect(page.locator('.job-title').first()).toContainText('charlie');
   await page.reload();
   await expect(page.locator('.job-title').first()).toContainText('charlie');
 
-  await page.locator('#favorites-select').selectOption('only');
+  await page.locator('#jobs-search').fill('favorites: only');
   await expect(page.locator('.job-card')).toHaveCount(1);
-  await expect(page).toHaveURL(/favorites=only/);
-  // Un-starring while filtered removes the card.
   await page.locator('.favorite-toggle').click();
   await expect(page.locator('.job-card')).toHaveCount(0);
   await expect(page.locator('.jobs-empty')).toContainText('No starred');
 
-  await page.locator('#favorites-select').selectOption('all');
+  await page.locator('#jobs-search').fill('');
   await expect(page.locator('.job-card')).toHaveCount(3);
+  await page.locator('.job-card', { hasText: 'bravo' }).locator('.favorite-toggle').click();
+  await page.goto('jobs.html?favorites=only');
+  await expect(page.locator('#jobs-search')).toHaveValue('favorites: only');
+  await expect(page.locator('.job-card')).toHaveCount(1);
+  await expect(page.locator('.job-card')).toContainText('bravo');
 });
 
 test('Awards & Grants and CS Confs have the favorites filter and the keyword', async ({ page }) => {

@@ -134,40 +134,62 @@ Alice Example,pldi,${new Date().getFullYear()},2,1
   await expect(page.locator('.job-school strong').first()).toHaveText('Univ. of Illinois at Urbana-Champaign');
 });
 
-test('exports starred postings as a Markdown file and restores them from it', async ({ page }) => {
+test('favorites actions hide export until multiple postings are starred, and restore an export', async ({ page }) => {
   await page.goto('jobs.html');
+  const actions = page.locator('#favorites-actions');
   const exportButton = page.locator('#export-favorites');
-  await expect(exportButton).toBeDisabled();
-  await page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.favorite-toggle').click();
-  await expect(exportButton).toBeEnabled();
+  await expect(actions).not.toHaveAttribute('open', '');
+  await actions.locator('summary').click();
+  await expect(exportButton).toBeHidden();
+  await expect(page.locator('#restore-favorites')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(actions).not.toHaveAttribute('open', '');
+  await expect(actions.locator('summary')).toBeFocused();
 
+  await page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.favorite-toggle').click();
+  await actions.locator('summary').click();
+  await expect(exportButton).toBeHidden();
+  await page.locator('#jobs-status').click();
+  await expect(actions).not.toHaveAttribute('open', '');
+
+  // Closed favorites also count, independently of which postings are shown.
+  await page.locator('#jobs-search').fill('status: all');
+  await page.locator('.job-card', { hasText: 'Postdoctoral Fellow' }).locator('.favorite-toggle').click();
+  await page.reload();
+  await actions.locator('summary').click();
+  await expect(exportButton).toBeVisible();
+  await expect(exportButton).toHaveText('Export 2 favorites');
   const [download] = await Promise.all([page.waitForEvent('download'), exportButton.click()]);
+  await expect(actions).not.toHaveAttribute('open', '');
   expect(download.suggestedFilename()).toMatch(/^cspicks-starred-jobs-\d{4}-\d{2}-\d{2}\.md$/);
   const text = await (await download.createReadStream()).toArray().then(chunks => Buffer.concat(chunks).toString('utf8'));
   expect(text).toContain('# Starred US academic CS jobs');
-  expect(text).toContain('## 1. Teaching Professor — Univ. of Illinois at Urbana-Champaign');
-  expect(text).toContain('<https://example.edu/uiuc>');
+  expect(text).toContain('Teaching Professor — Univ. of Illinois at Urbana-Champaign');
+  expect(text).toContain('Postdoctoral Fellow — George Mason University');
   expect(text).not.toContain('Software Engineering');
 
-  // Change the stars, then restore: the stars become exactly what the file lists.
-  const teaching = page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.favorite-toggle');
-  const software = page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.favorite-toggle');
-  await teaching.click();
-  await software.click();
-  await expect(page.locator('#favorites-select option[value="only"]')).toHaveText('★ Favorites only (1)');
-  await expect(software).toHaveAttribute('aria-pressed', 'true');
-  await page.locator('#restore-favorites-file').setInputFiles({ name: 'starred.md', mimeType: 'text/markdown', buffer: Buffer.from(text) });
-  await expect(page.locator('#jobs-restore-note')).toContainText('Restored 1 posting from “starred.md”; removed 1 other star.');
-  await expect(page.locator('#favorites-select option[value="only"]')).toHaveText('★ Favorites only (1)');
+  // Falling below two hides export; restore replaces the stars with those in the file.
+  await page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.favorite-toggle').click();
+  await actions.locator('summary').click();
+  await expect(exportButton).toBeHidden();
+  await page.keyboard.press('Escape');
+  await page.locator('.job-card', { hasText: 'Postdoctoral Fellow' }).locator('.favorite-toggle').click();
+  await page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.favorite-toggle').click();
+  await actions.locator('summary').click();
+  const [chooser] = await Promise.all([page.waitForEvent('filechooser'), page.locator('#restore-favorites').click()]);
+  await chooser.setFiles({ name: 'starred.md', mimeType: 'text/markdown', buffer: Buffer.from(text) });
+  await expect(actions).not.toHaveAttribute('open', '');
+  await expect(page.locator('#jobs-restore-note')).toContainText('Restored 2 postings from “starred.md”; removed 1 other star.');
+  await expect(page.locator('.favorite-toggle[aria-pressed="true"]')).toHaveCount(2);
   await expect(page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.favorite-toggle')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.job-card', { hasText: 'Postdoctoral Fellow' }).locator('.favorite-toggle')).toHaveAttribute('aria-pressed', 'true');
   await expect(page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.favorite-toggle')).toHaveAttribute('aria-pressed', 'false');
-  await expect(page.locator('.job-title').first()).toContainText('Teaching Professor');
-  await expect(exportButton).toBeEnabled();
+  await actions.locator('summary').click();
+  await expect(exportButton).toBeVisible();
 
-  // A file with no postings leaves the stars alone.
   await page.locator('#restore-favorites-file').setInputFiles({ name: 'notes.md', mimeType: 'text/markdown', buffer: Buffer.from('# Notes\n') });
   await expect(page.locator('#jobs-restore-note')).toContainText('No CS Picks postings found in “notes.md”, so your stars were not changed.');
-  await expect(page.locator('#favorites-select option[value="only"]')).toHaveText('★ Favorites only (1)');
+  await expect(page.locator('.favorite-toggle[aria-pressed="true"]')).toHaveCount(2);
 });
 
 test('by-school view groups postings and links into Search and Simulator, with rank chips', async ({ page }) => {
@@ -196,7 +218,7 @@ test('keyword help opens on click and keyboard, and scoped suggestions preserve 
   await page.goto('jobs.html');
   const input = page.locator('#jobs-search');
   await expect(input).toBeEnabled();
-  await expect(page.locator('.search-filters select')).toHaveCount(3);
+  await expect(page.locator('.search-filters select')).toHaveCount(2);
   const help = page.getByRole('button', { name: 'Search keywords and examples' });
   const panel = page.locator('#jobs-search-help');
   await expect(panel).toBeHidden();

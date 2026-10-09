@@ -71,12 +71,14 @@
             <option value="rank-desc">CSRankings: Bottom First</option>
           </select>
         </div>
-        <div class="filter-group" id="favorites-filter"></div>
         <div class="filter-group">
-          <button type="button" id="export-favorites" class="jobs-export-btn" disabled title="Star postings with ☆ to export them">⬇ Export ★ (.md)</button>
-        </div>
-        <div class="filter-group">
-          <button type="button" id="restore-favorites" class="jobs-export-btn" title="Replace your stars with exactly the postings listed in a Markdown file exported here">⬆ Restore ★ (.md)</button>
+          <details id="favorites-actions" class="jobs-favorites-actions">
+            <summary aria-label="Favorites actions" title="Favorites actions">⋯</summary>
+            <div class="jobs-favorites-menu">
+              <button type="button" id="export-favorites" hidden>Export favorites</button>
+              <button type="button" id="restore-favorites" title="Replace your stars with the postings in a previously exported file">Restore from file…</button>
+            </div>
+          </details>
           <input type="file" id="restore-favorites-file" accept=".md,.markdown,.txt,text/markdown,text/plain" hidden>
         </div>
         <div class="filter-group">
