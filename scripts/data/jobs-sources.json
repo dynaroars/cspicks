@@ -4973,13 +4973,22 @@
     "state": "WI",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Rendered the UWM Workday board and a computer science search; no CS department posting is open (only a Social Work AI and Data Science cluster role and staff jobs).",
+    "summary": "Rendered the UWM Workday board and a computer science search; no CS department posting is open (only a Social Work AI and Data Science cluster role and staff jobs). Non-CS units (2026-10-08): Workday search for professor shows only a Social Work AI & Data Science cluster role (requires social work research expertise; skipped), Social Work open rank, and non-faculty jobs. No CS-PhD-targeted posting.",
     "checkedUrls": [
       "https://uwm.edu/jobs/",
       "https://wisconsin.wd1.myworkdayjobs.com/UW_Milwaukee",
-      "https://wisconsin.wd1.myworkdayjobs.com/UW_Milwaukee?q=computer%20science"
+      "https://wisconsin.wd1.myworkdayjobs.com/UW_Milwaukee?q=computer%20science",
+      "https://wisconsin.wd1.myworkdayjobs.com/UW_Milwaukee?q=professor",
+      "https://wisconsin.wd1.myworkdayjobs.com/en-US/UW_Milwaukee/job/Milwaukee-WI/Associate-Full-Professor-in-Social-Work--AI---Data-Science-Cluster_JR10015029-1"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "UWM Workday board",
+        "url": "https://wisconsin.wd1.myworkdayjobs.com/UW_Milwaukee"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of Miami",
@@ -4989,13 +4998,24 @@
     "state": "FL",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "search.cs.miami.edu refuses connections; careers.miami.edu shows only a part-time CS lecturer pool and an ECE open-rank search (not CS, 2025 deadline); the quantum CS posting had a Dec 2025 deadline.",
+    "summary": "search.cs.miami.edu refuses connections; careers.miami.edu shows only a part-time CS lecturer pool and an ECE open-rank search (not CS, 2025 deadline); the quantum CS posting had a Dec 2025 deadline. Non-CS units (2026-10-08): Keyword searches (professor, artificial intelligence, data science, engineering professor) found only a part-time ECE lecturer, a business-school analytics role, and engineering-PhD-required COE searches; no CS-PhD-targeted posting. Did not open every COE open-rank listing.",
     "checkedUrls": [
       "http://search.cs.miami.edu",
       "https://csc.as.miami.edu/",
-      "https://careers.miami.edu/us/en/search-results?keywords=computer%20science"
+      "https://careers.miami.edu/us/en/search-results?keywords=computer%20science",
+      "https://careers.miami.edu/us/en/search-results?keywords=professor",
+      "https://careers.miami.edu/us/en/search-results?keywords=artificial%20intelligence",
+      "https://careers.miami.edu/us/en/search-results?keywords=data%20science",
+      "https://careers.miami.edu/us/en/search-results?keywords=engineering%20professor"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "University of Miami Careers",
+        "url": "https://careers.miami.edu/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of New Hampshire",
@@ -5005,13 +5025,25 @@
     "state": "NH",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Department careers page is student-career oriented with no faculty openings; searches found no current CS posting.",
+    "summary": "Department careers page is student-career oriented with no faculty openings; searches found no current CS posting. Non-CS units (2026-10-08): USNH Workday searches (professor, faculty, electrical, cyber, data science): the only computing-adjacent faculty ad is a Sociology technology-and-society role (sociology PhD; skipped) and a Keene State adjunct CS pool. No CS-PhD-targeted posting.",
     "checkedUrls": [
       "https://www.cs.unh.edu",
       "https://ceps.unh.edu/computer-science/",
-      "https://ceps.unh.edu/computer-science/careers"
+      "https://ceps.unh.edu/computer-science/careers",
+      "https://www.unh.edu/hr/careers",
+      "https://usnh.wd5.myworkdayjobs.com/Careers?q=professor",
+      "https://usnh.wd5.myworkdayjobs.com/Careers?q=faculty",
+      "https://usnh.wd5.myworkdayjobs.com/Careers?q=electrical",
+      "https://usnh.wd5.myworkdayjobs.com/Careers?q=cyber"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "USNH Workday careers",
+        "url": "https://usnh.wd5.myworkdayjobs.com/Careers"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of New Orleans",
@@ -5021,11 +5053,15 @@
     "state": "LA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "The site now redirects to LSU New Orleans; its CS page lists no openings and no LSU New Orleans CS faculty posting was found, but the LSU Workday board was not read.",
+    "summary": "The site now redirects to LSU New Orleans; its CS page lists no openings and no LSU New Orleans CS faculty posting was found, but the LSU Workday board was not read. Non-CS units (2026-10-08): Site is now LSU New Orleans; its employment page 404s and no Workday/HR board was located. Nothing recorded.",
     "checkedUrls": [
-      "https://www.lsuneworleans.edu/academics/cos/computer-science"
+      "https://www.lsuneworleans.edu/academics/cos/computer-science",
+      "https://www.lsuneworleans.edu/about/employment",
+      "https://www.lsuneworleans.edu/"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of Southern Mississippi",
@@ -5035,12 +5071,19 @@
     "state": "MS",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Read all pages of the USM Cornerstone board; one CS posting (tenure-track Assistant Professor in Computer Science) recorded.",
+    "summary": "Read all pages of the USM Cornerstone board; one CS posting (tenure-track Assistant Professor in Computer Science) recorded. Non-CS units (2026-10-08): Read first page of the Cornerstone board (75 faculty postings total); visible titles were non-computing (polymer, music, humanities, one postdoc). Existing CS record not re-confirmed on this pass.",
     "checkedUrls": [
       "https://usm.csod.com/ux/ats/careersite/1/home?c=usm",
       "https://usm.csod.com/ux/ats/careersite/1/home/requisition/5545?c=usm"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "USM Cornerstone careers",
+        "url": "https://usm.csod.com/ux/ats/careersite/1/home?c=usm"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "OHSU",
@@ -5065,12 +5108,22 @@
     "state": "CO",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Searched the official CU Taleo portal and read the CSE tenure-track assistant professor search and part-time lecturer pool; the department site has no hiring page.",
+    "summary": "Searched the official CU Taleo portal and read the CSE tenure-track assistant professor search and part-time lecturer pool; the department site has no hiring page. Non-CS units (2026-10-08): Taleo keyword searches (electrical, data, cyber, information) show only the already-recorded CSE posting 41101 for Denver; other hits are staff or Colorado Springs (a different CSRankings school).",
     "checkedUrls": [
       "https://cu.taleo.net/careersection/2/jobdetail.ftl?job=41101",
-      "https://cu.taleo.net/careersection/2/jobdetail.ftl?job=39732"
+      "https://cu.taleo.net/careersection/2/jobdetail.ftl?job=39732",
+      "https://cu.taleo.net/careersection/2/moresearch.ftl?lang=en&keyword=electrical",
+      "https://cu.taleo.net/careersection/2/moresearch.ftl?lang=en&keyword=cyber",
+      "https://cu.taleo.net/careersection/2/moresearch.ftl?lang=en&keyword=data"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "CU Taleo careers",
+        "url": "https://cu.taleo.net/careersection/2/moresearch.ftl?lang=en"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "New Mexico Tech",
@@ -5080,12 +5133,14 @@
     "state": "NM",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "HR page lists only IT staff/technician roles, no CS faculty openings.",
+    "summary": "HR page lists only IT staff/technician roles, no CS faculty openings. Non-CS units (2026-10-08): HR employment page lists staff and postdoc roles only (physics, geology, research); no computing faculty or computing postdoc postings.",
     "checkedUrls": [
       "https://www.nmt.edu/academics/compsci/index.php",
       "https://www.nmt.edu/hr/employment.php"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "New York Tech",
@@ -5095,11 +5150,21 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "iCIMS portal results did not render in the browser; no CS posting found by search.",
+    "summary": "iCIMS portal results did not render in the browser; no CS posting found by search. Non-CS units (2026-10-08): iCIMS portal (careers-nyit.icims.com) did not render job results in the browser; no faculty listing could be read and no posting found.",
     "checkedUrls": [
-      "https://careers-nyit.icims.com/jobs/search?ss=1&searchKeyword=professor"
+      "https://careers-nyit.icims.com/jobs/search?ss=1&searchKeyword=professor",
+      "https://www.nyit.edu/human_resources/careers",
+      "https://careers-nyit.icims.com/jobs/search?ss=1&searchKeyword=faculty",
+      "https://www.nyit.edu/engineering_computing/faculty_openings (404)"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "College of Engineering and Computing Sciences",
+        "url": "https://www.nyit.edu/academics/engineering-and-computing-sciences/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "SIU Carbondale",
@@ -5109,15 +5174,25 @@
     "state": "IL",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "School of Computing news lists Applied AI and Cybersecurity faculty ads for 2026-27 year with an Aug 11, 2026 start, so they are the prior cycle; none recorded.",
+    "summary": "School of Computing news lists Applied AI and Cybersecurity faculty ads for 2026-27 year with an Aug 11, 2026 start, so they are the prior cycle; none recorded. Non-CS units (2026-10-08): NEOGOV listings for 'faculty' (9) and 'engineering' (0) show only aviation, law and education NTT roles; no computing, ECE or data science postings.",
     "checkedUrls": [
       "https://www2.cs.siu.edu",
       "https://soc.siu.edu/news/index.php",
       "https://soc.siu.edu/news/articles/10-28-2025.php",
       "https://soc.siu.edu/news/articles/12-11-2025.php",
-      "https://www.schooljobs.com/careers/siu?keywords=computer"
+      "https://www.schooljobs.com/careers/siu?keywords=computer",
+      "https://www.schooljobs.com/careers/siu",
+      "https://www.schooljobs.com/careers/siu?keywords=faculty",
+      "https://www.schooljobs.com/careers/siu?keywords=engineering"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "SIU NEOGOV careers",
+        "url": "https://www.schooljobs.com/careers/siu"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of Alabama - Birmingham",
@@ -5127,13 +5202,30 @@
     "state": "AL",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "UAB PeopleAdmin searches for computer, computer science, cybersecurity, and AI show no CS department faculty postings (only biomedical informatics roles in medicine/public health).",
+    "summary": "UAB PeopleAdmin searches for computer, computer science, cybersecurity, and AI show no CS department faculty postings (only biomedical informatics roles in medicine/public health). Non-CS units (2026-10-08): PeopleAdmin searches for computer, data, cyber, informatics, artificial, electrical found only medical/biomedical informatics roles (chair, CRIO, biomedical postdocs, health-services AI postdocs) outside computing units; none recorded as CS-targeted.",
     "checkedUrls": [
       "https://www.uab.edu/cas/computerscience/",
       "https://uab.peopleadmin.com/postings/search?query=computer",
-      "https://uab.peopleadmin.com/postings/search?query=cybersecurity"
+      "https://uab.peopleadmin.com/postings/search?query=cybersecurity",
+      "https://uab.peopleadmin.com/postings/search",
+      "https://uab.peopleadmin.com/postings/search?query=data",
+      "https://uab.peopleadmin.com/postings/search?query=cyber",
+      "https://uab.peopleadmin.com/postings/search?query=informatics",
+      "https://uab.peopleadmin.com/postings/search?query=electrical",
+      "https://uab.peopleadmin.com/postings/search?query=artificial"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "UAB PeopleAdmin postings",
+        "url": "https://uab.peopleadmin.com/postings/search"
+      },
+      {
+        "name": "Department of Biomedical Informatics and Data Science (School of Medicine)",
+        "url": "https://uab.peopleadmin.com/postings/search?query=informatics"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "UNC - Greensboro",
@@ -5143,12 +5235,20 @@
     "state": "NC",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "One open tenure-track assistant professor position, best consideration October 31, 2026.",
+    "summary": "One open tenure-track assistant professor position, best consideration October 31, 2026. Non-CS units (2026-10-08): Existing CS assistant professor posting 36021 is still live; no other computing-related faculty postings found in the portal.",
     "checkedUrls": [
       "https://compsci.uncg.edu/",
-      "https://spartantalent.uncg.edu/postings/36021"
+      "https://spartantalent.uncg.edu/postings/36021",
+      "https://spartantalent.uncg.edu/postings/search?query=computer"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "UNCG Spartan Talent postings",
+        "url": "https://spartantalent.uncg.edu/postings/search"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Univ. of Arkansas - Little Rock",
@@ -5158,12 +5258,14 @@
     "state": "AR",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Searched UA System Workday for UA Little Rock professor/computer/cyber roles; no CS faculty posting found.",
+    "summary": "Searched UA System Workday for UA Little Rock professor/computer/cyber roles; no CS faculty posting found. Non-CS units (2026-10-08): Not re-crawled this run beyond prior check (UA System Workday showed no CS faculty posting); no new postings.",
     "checkedUrls": [
       "https://ualr.edu/computerinformationsciences/",
       "https://uasys.wd5.myworkdayjobs.com/UASYS?hiringCompany=720b21cbdf2401e26b5b1759c4019006&q=professor"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of Wyoming",
@@ -5173,12 +5275,21 @@
     "state": "WY",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "Official Oracle job board showed no School of Computing posting beyond a Botany joint plant genomics role (not CS); the AI4WY page links could not be resolved to a dated posting.",
+    "summary": "Official Oracle job board showed no School of Computing posting beyond a Botany joint plant genomics role (not CS); the AI4WY page links could not be resolved to a dated posting. Non-CS units (2026-10-08): UW Oracle board (keywords assistant professor, engineering) shows no computing, ECE, data or cybersecurity faculty/postdoc postings; engineering items are energy/petroleum lecturer, civil hydrogen postdoc, staff.",
     "checkedUrls": [
       "https://www.uwyo.edu/president/initiatives/ai4wy/opportunities.html",
-      "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=school%20of%20computing"
+      "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=school%20of%20computing",
+      "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=assistant%20professor",
+      "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=engineering"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "UW Candidate Experience (Oracle) - College of Engineering and Physical Sciences",
+        "url": "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Claremont Graduate University",
@@ -5188,13 +5299,20 @@
     "state": "CA",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Faculty jobs page states there are no open positions at this time.",
+    "summary": "Faculty jobs page states there are no open positions at this time. Non-CS units (2026-10-08): CGU faculty openings page states no open positions.",
     "checkedUrls": [
       "https://www.cgu.edu/school/center-for-information-systems-and-technology/",
       "https://www.cgu.edu/employment-opportunities/",
       "https://www.cgu.edu/employment-opportunities/faculty-jobs/"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "Center for Information Systems and Technology",
+        "url": "https://www.cgu.edu/school/center-for-information-systems-and-technology/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "North Dakota State University",
@@ -5204,13 +5322,20 @@
     "state": "ND",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Current NDSU job list (postings dated through 2026-10-07) contains no computer science or computing-related faculty postings.",
+    "summary": "Current NDSU job list (postings dated through 2026-10-07) contains no computer science or computing-related faculty postings. Non-CS units (2026-10-08): NDSU job list (through 2026-10-08) has no computing, ECE, data or cybersecurity faculty/research/postdoc postings.",
     "checkedUrls": [
       "https://www.ndsu.edu/computer-science",
       "https://www.ndsu.edu/employment",
       "https://www.ndsu.edu/employment/joblist"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "College of Engineering (ECE)",
+        "url": "https://www.ndsu.edu/engineering"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of Maine",
@@ -5220,13 +5345,22 @@
     "state": "ME",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "UMS careers site for UMaine shows only part-time CS/CIS adjunct roles and no full-time CS faculty openings.",
+    "summary": "UMS careers site for UMaine shows only part-time CS/CIS adjunct roles and no full-time CS faculty openings. Non-CS units (2026-10-08): UMS board keyword searches (professor, electrical) show no computing/ECE/information faculty or postdoc postings; a generic Assistant Research Professor (2026-08-07) lists no unit so was not included.",
     "checkedUrls": [
       "https://umaine.edu/cs/",
       "https://umaine.edu/hr/career-opportunities/",
-      "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=computer&mode=location"
+      "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=computer&mode=location",
+      "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=professor&mode=location",
+      "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=electrical&mode=location"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "UMS Careers (Oracle) - UMaine",
+        "url": "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of Mississippi",
@@ -5236,13 +5370,20 @@
     "state": "MS",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Workday faculty board (26 jobs) has no computer science postings; the two unlabeled Assistant Professor ads are Public Health.",
+    "summary": "Workday faculty board (26 jobs) has no computer science postings; the two unlabeled Assistant Professor ads are Public Health. Non-CS units (2026-10-08): Workday faculty board shows no computing/data/cyber postings; engineering items are mechanical engineering and a physics education research role only.",
     "checkedUrls": [
       "https://olemiss.edu/hr/um-careers/",
       "https://olemiss.wd12.myworkdayjobs.com/External__Faculty",
       "https://olemiss.wd12.myworkdayjobs.com/en-US/External__Faculty/job/University-MS/Assistant-Professor_JR103346"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "UM Workday Faculty board",
+        "url": "https://olemiss.wd12.myworkdayjobs.com/External__Faculty"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Louisiana Tech University",
@@ -5252,13 +5393,15 @@
     "state": "LA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "not_found",
-    "summary": "No official CS hiring page found; guessed HR and engineering employment URLs 404, and the College of Business page lists only Fall 2026 CIS positions, which are neither CS nor current.",
+    "summary": "No official CS hiring page found; guessed HR and engineering employment URLs 404, and the College of Business page lists only Fall 2026 CIS positions, which are neither CS nor current. Non-CS units (2026-10-08): latech.edu/employment 404s and no official hiring page for CS/engineering/cyber units was located within budget.",
     "checkedUrls": [
       "https://www.latech.edu/engineering-science/index.php/undergraduate-programs/computer-science/",
       "https://www.latech.edu/business/about/employment-opportunities.php",
       "https://www.latech.edu/employment/"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Indiana State University",
@@ -5268,14 +5411,17 @@
     "state": "IN",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "cs.indstate.edu has no current openings page content and the jobs.indstate.edu search could not be read; web search found no current CS faculty posting.",
+    "summary": "cs.indstate.edu has no current openings page content and the jobs.indstate.edu search could not be read; web search found no current CS faculty posting. Non-CS units (2026-10-08): jobs.indstate.edu search shell renders but listings could not be read through the keyword query; no CS/computing posting found.",
     "checkedUrls": [
       "https://cs.indstate.edu",
       "https://cs.indstate.edu/web/index.php/Careers",
       "https://cs.indstate.edu/info/positions.html",
-      "https://jobs.indstate.edu/postings/search?query=computer"
+      "https://jobs.indstate.edu/postings/search?query=computer",
+      "https://jobs.indstate.edu/postings/search"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "LIU Post",
@@ -5285,11 +5431,14 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "The LIU careers board lists no computer science faculty posting; the only related ad is a game design and development NTTA role, which is not CS.",
+    "summary": "The LIU careers board lists no computer science faculty posting; the only related ad is a game design and development NTTA role, which is not CS. Non-CS units (2026-10-08): LIU careers board rendered; no computing faculty posting visible in the search query.",
     "checkedUrls": [
-      "https://jobs.liu.edu/"
+      "https://jobs.liu.edu/",
+      "https://jobs.liu.edu/postings/search?query=computer"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Kennesaw State University",
@@ -5299,13 +5448,21 @@
     "state": "GA",
     "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
-    "summary": "Chair, open-rank data science professor, and data science lecturer are recorded; four other listed postings no longer render (likely closed).",
+    "summary": "Chair, open-rank data science professor, and data science lecturer are recorded; four other listed postings no longer render (likely closed). Non-CS units (2026-10-08): CCSE page still lists chair, data science lecturer and open-rank data science professor (existing records, live) plus a Computer Science Postdoctoral Researcher (JobOpeningId 300281) that is missing from jobs.json but whose PeopleSoft page would not render, so it was not recorded.",
     "checkedUrls": [
       "https://ccse.kennesaw.edu/",
       "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
-      "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=301839&PostingSeq=1"
+      "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=301839&PostingSeq=1",
+      "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=300281&PostingSeq=1"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "College of Computing and Software Engineering job openings",
+        "url": "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Santa Clara University",
@@ -5315,13 +5472,20 @@
     "state": "CA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Official tenure-track openings page (as of 9/8/26) lists two ECE searches (Robotics & AI; Digital Systems) in Engineering, both rendered and recorded; no CSE search listed.",
+    "summary": "Official tenure-track openings page (as of 9/8/26) lists two ECE searches (Robotics & AI; Digital Systems) in Engineering, both rendered and recorded; no CSE search listed. Non-CS units (2026-10-08): Openings page (as of 9/8/26) re-read; existing ECE records were not re-opened this run, so left unchanged; no new postings.",
     "checkedUrls": [
       "https://www.scu.edu/belonging/inclusive-hiring-and-recruitment/current-faculty-openings-tenure-track/",
       "https://wd1.myworkdaysite.com/en-US/recruiting/scu/scu/job/Electrical-and-Computer-Engineering-Assistant-Professor---Robotics---AI_R7815",
       "https://wd1.myworkdaysite.com/en-US/recruiting/scu/scu/job/Electrical-and-Computer-Engineering-Assistant-Professor---Digital-Systems_R7814-1"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "Faculty openings (tenure track)",
+        "url": "https://www.scu.edu/belonging/inclusive-hiring-and-recruitment/current-faculty-openings-tenure-track/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of Michigan-Flint",
@@ -5331,10 +5495,19 @@
     "state": "MI",
     "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
-    "summary": "Interfolio 190883 (Computing, deadline 2027-02-07) recorded; a second Flint computing posting (careers.umich.edu 282692) was seen only in search results.",
+    "summary": "Interfolio 190883 (Computing, deadline 2027-02-07) recorded; a second Flint computing posting (careers.umich.edu 282692) was seen only in search results. Non-CS units (2026-10-08): Second Division of Computing tenure-track posting (AI/cybersecurity) found on Interfolio 192932 (careers.umich.edu 282692); existing record 190883 not re-checked.",
     "checkedUrls": [
-      "https://www.umflint.edu/cit/"
+      "https://www.umflint.edu/cit/",
+      "https://careers.umich.edu/job_detail/282692",
+      "https://apply.interfolio.com/192932"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "College of Innovation and Technology, Division of Computing",
+        "url": "https://www.umflint.edu/cit/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   }
 ]

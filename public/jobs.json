@@ -4519,5 +4519,26 @@
     "lastSeenAt": "2026-10-08",
     "source": "crawl",
     "verified": true
+  },
+  {
+    "id": "umflint-cit-computing-asst-prof-ai-cybersecurity-2026",
+    "school": "University of Michigan-Flint",
+    "department": "College of Innovation and Technology, Division of Computing",
+    "title": "Assistant Professor (Tenure-Track) - Computing Division",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "sec"
+    ],
+    "state": "MI",
+    "city": "Flint",
+    "url": "https://apply.interfolio.com/192932",
+    "summary": "Multiple tenure-track assistant professor positions in the Division of Computing for expertise in AI, cybersecurity, or related fields. PhD in CS, cybersecurity, AI, data science, information science or related; the posting's header deadline (Feb 11, 2027) conflicts with its text (Jan 31, 2027), so no deadline is recorded.",
+    "reviewBegins": "2026-09-30",
+    "postedDate": "2026-09-14",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
   }
 ]
