@@ -330,7 +330,7 @@
     "state": "NY",
     "city": "New York",
     "rolling": false,
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "url": "https://bowers.cornell.edu/careers",
     "visaSponsorship": "not-stated",
     "summary": "Non-tenure-track teaching role at Cornell Tech teaching large master's courses in AI/ML, CS foundations, data science, or urban computing.",
@@ -1042,7 +1042,7 @@
     "deadline": "2026-12-15",
     "rolling": false,
     "postedDate": "2025-08-05",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "url": "https://jobs.oregonstate.edu/postings/177641",
     "visaSponsorship": "not-stated",
     "summary": "Part-time, fixed-term, non-tenure-track remote instructors for EECS E-campus courses, appointed term by term. Master's degree required, PhD preferred.",
@@ -2610,7 +2610,7 @@
     "state": "TX",
     "city": "Austin",
     "rolling": false,
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "url": "https://apply.interfolio.com/194129",
     "visaSponsorship": "not-stated",
     "summary": "Open-rank tenured/tenure-track search for the 2026-2027 recruiting season; applicants are encouraged to apply early since interviews begin in the fall.",
@@ -2666,7 +2666,7 @@
     "url": "https://apply.interfolio.com/190949",
     "visaSponsorship": "not-stated",
     "summary": "Multiple tenured or tenure-track positions at all ranks across computer science, with particular interest in candidates who strengthen the university AI research efforts.",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "source": "crawl",
     "verified": true
   },
@@ -2686,7 +2686,7 @@
     "rolling": true,
     "reviewBegins": "2026-12-01",
     "postedDate": "2026-09-18",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "url": "https://apply.interfolio.com/191213",
     "visaSponsorship": "not-stated",
     "summary": "Open-rank NLP position emphasizing foundations of large language models, reasoning and agentic AI, and multimodal language; open until filled.",
@@ -2834,7 +2834,7 @@
     "rolling": true,
     "reviewBegins": "2026-12-15",
     "postedDate": "2026-09-25",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "url": "https://waynetalent.csod.com/ux/ats/careersite/2/home/requisition/3655?c=waynetalent",
     "visaSponsorship": "not-stated",
     "summary": "Open-rank AI position emphasizing healthcare and biomedical applications, starting Fall 2027; full consideration by Dec 15, 2026, open until filled.",
@@ -3234,7 +3234,7 @@
     "rolling": true,
     "source": "crawl",
     "verified": true,
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "reviewBegins": "2026-11-05",
     "postedDate": "2026-10-05"
   },
@@ -3258,7 +3258,7 @@
     "rolling": true,
     "source": "crawl",
     "verified": true,
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "reviewBegins": "2026-11-01",
     "postedDate": "2026-10-04"
   },
@@ -3282,7 +3282,7 @@
     "rolling": false,
     "source": "crawl",
     "verified": true,
-    "lastSeenAt": "2026-10-08"
+    "lastSeenAt": "2026-10-09"
   },
   {
     "id": "purdue-pharmacy-ai-llm-postdoc-2026",
@@ -3304,7 +3304,7 @@
     "rolling": false,
     "source": "crawl",
     "verified": true,
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "postedDate": "2026-10-06"
   },
   {
@@ -3536,7 +3536,7 @@
     "rolling": true,
     "reviewBegins": "2026-11-01",
     "postedDate": "2026-09-18",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "source": "crawl",
     "verified": true
   },
@@ -3556,7 +3556,7 @@
     "visaSponsorship": "not-stated",
     "summary": "One-year postdoc developing machine unlearning and model editing methods for LLM biosecurity. Requires a PhD in data science, computer science, machine learning, or a related field.",
     "rolling": true,
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "source": "crawl",
     "verified": true
   },
@@ -3575,7 +3575,7 @@
     "url": "https://jobs.virginia.edu/us/en/job/R0086561/Postdoctoral-Research-Associate-Large-Foundation-Models-and-Causal-Inference-for-Scientific-Discovery",
     "visaSponsorship": "no",
     "summary": "Postdoc in the RISE Lab on foundation models, causal inference, and AI-enabled scientific discovery. Accepts a PhD in data science, computer science, machine learning, statistics, ECE, or information science.",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "source": "crawl",
     "verified": true
   },
@@ -3666,7 +3666,7 @@
     "url": "https://faculty.utexas.edu/career/191973",
     "visaSponsorship": "not-stated",
     "summary": "Open-rank, open-area search in the Department of Information starting Fall 2027; listed examples include human-centered AI, AI and health, HCI, and information security and privacy. Applicants from computer science and data science are explicitly welcome.",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "source": "crawl",
     "verified": true
   },
@@ -3688,7 +3688,7 @@
     "summary": "Multiple openings with emphasis on foundational AI, computer systems, and robotics and physical AI; PhD in electrical engineering, computer engineering, computer science, or related. Evaluation is ongoing, with applications by October 15, 2026 strongly encouraged.",
     "rolling": true,
     "postedDate": "2026-09-29",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "source": "crawl",
     "verified": true
   },
@@ -3711,7 +3711,7 @@
     "rolling": true,
     "deadline": "2026-11-13",
     "postedDate": "2026-09-14",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "source": "crawl",
     "verified": true
   },
@@ -4250,7 +4250,7 @@
     "rolling": true,
     "reviewBegins": "2026-10-15",
     "startDate": "2027",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "source": "crawl",
     "verified": true
   },
@@ -4407,7 +4407,7 @@
     "startDate": "2027-08-01"
   },
   {
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "source": "crawl",
     "verified": true,
     "id": "ou-polytechnic-applied-ai-open-rank-2026",
@@ -4450,7 +4450,7 @@
     "postedDate": "2026-08-27"
   },
   {
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-09",
     "source": "crawl",
     "verified": true,
     "id": "syracuse-eecs-postdoc-computer-architecture-2026",
