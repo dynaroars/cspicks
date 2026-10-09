@@ -158,9 +158,9 @@ test('visa filter and keyword: stated policy, unchecked postings, and "possible"
 
 test('visa sponsorship tag sits after the position and rank tags, and the export lists it', () => {
   const chip = value => renderJobCard(job({ visaSponsorship: value }), () => undefined, () => false, NOW);
-  assert.match(chip('yes'), /job-chip-visa is-yes[^>]*><span aria-hidden="true">✅<\/span> Visa sponsorship available</);
-  assert.match(chip('no'), /🚫<\/span> No visa sponsorship</);
-  assert.match(chip('case-by-case'), /⚖️<\/span> Visa sponsorship case by case/);
+  assert.match(chip('yes'), /job-chip-visa is-yes[^>]*>Visa sponsorship available</);
+  assert.match(chip('no'), />No visa sponsorship</);
+  assert.match(chip('case-by-case'), />Visa sponsorship case by case/);
   assert.doesNotMatch(chip('not-stated'), /job-chip-visa|Visa sponsorship not stated/);
   assert.ok(!chip(undefined).includes('job-chip-visa'), 'unchecked postings get no tag');
   const html = renderJobCard(job({ visaSponsorship: 'yes' }), () => ({ rank: 7, areaRanks: { ai: 3 } }), () => false, NOW);

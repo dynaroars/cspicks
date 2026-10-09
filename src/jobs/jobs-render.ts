@@ -3,7 +3,7 @@ import { areaLabels, escapeHtml, safeExternalUrl } from '../shared.js';
 import { opportunityHeader, opportunityDeadline, opportunityMeta } from '../opportunity-card.js';
 import { LEVEL_LABELS, TRACK_LABELS, VISA_LABELS, deadlineLabel, filterValues, formatDay } from './jobs-data.js';
 import { US_STATES } from './states.js';
-import type { Job, VisaSponsorship } from '../types.js';
+import type { Job } from '../types.js';
 import type { FilterChoice, SchoolJobs } from './jobs-data.js';
 
 export interface SchoolRank { rank: number | null; areaRanks: Record<string, number> }
@@ -23,13 +23,11 @@ function rankChips(job: Job, ranks: RankLookup) {
   return chips.join('');
 }
 
-const VISA_EMOJI: Record<VisaSponsorship, string> = { yes: '✅', 'case-by-case': '⚖️', no: '🚫', 'not-stated': '❔' };
-
 /** Sits with the position and rank tags; postings nobody has read for sponsorship yet get no tag. */
 function visaChip(job: Job) {
   const value = job.visaSponsorship;
   if (!value || value === 'not-stated') return '';
-  return `<span class="opportunity-chip job-chip job-chip-visa is-${value}" title="As stated on the official posting; confirm with the department before applying"><span aria-hidden="true">${VISA_EMOJI[value]}</span> ${escapeHtml(VISA_LABELS[value])}</span>`;
+  return `<span class="opportunity-chip job-chip job-chip-visa is-${value}" title="As stated on the official posting; confirm with the department before applying">${escapeHtml(VISA_LABELS[value])}</span>`;
 }
 
 export function schoolLinks(school: string) {
@@ -56,7 +54,6 @@ export function renderJobCard(job: Job, ranks: RankLookup, isFavorite: IsFavorit
   return `<article class="opportunity-card job-card" id="${escapeHtml(job.id)}" data-job-id="${escapeHtml(job.id)}">
     ${opportunityHeader({ id: job.id, title: job.title, url: href, kind: 'job', favorite: isFavorite(job.id),
       organizationHtml: showSchool ? `<button type="button" class="opportunity-filter-link job-school-btn" data-search-school="${escapeHtml(job.school)}"><strong>${escapeHtml(job.school)}</strong></button> · ${escapeHtml(job.department)}` : escapeHtml(job.department),
-      badgesHtml: job.verified ? '<span class="job-verified" role="img" aria-label="Information reviewed" title="Posting reviewed against the official page; not an endorsement">✓</span>' : '',
       tagsHtml: `<span class="opportunity-chip opportunity-chip-type job-chip-track">${escapeHtml(TRACK_LABELS[job.track])}</span>${job.level ? `<span class="opportunity-chip">${escapeHtml(LEVEL_LABELS[job.level])}</span>` : ''}` })}
     ${opportunityDeadline(deadline.text, { className: deadline.className || (!job.deadline || job.rolling ? '' : 'is-confirmed'), valueClass: 'job-deadline' })}
     ${opportunityMeta([

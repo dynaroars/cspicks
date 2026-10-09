@@ -43,11 +43,6 @@
 }
 
 /* Job-only annotations; card hierarchy and colors live in opportunity-cards.css. */
-.job-verified {
-  display: inline-grid; width: 1.35rem; height: 1.35rem; place-items: center; border-radius: 50%;
-  font-size: .8rem; line-height: 1; color: #17653a; background: #dff7e8;
-}
-@media (prefers-color-scheme: dark) { .job-verified { color: #86e3ad; background: #173e29; } }
 .job-school-btn { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; text-align: left; }
 .job-school-btn:hover { color: var(--accent-color); text-decoration: underline; }
 .job-meta { margin: .25rem 0; color: var(--text-secondary); font-size: .84rem; }

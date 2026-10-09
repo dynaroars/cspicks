@@ -176,11 +176,6 @@
   font-weight: 500;
 }
 
-.selected-item::before {
-  color: #10b981;
-  font-weight: 700;
-  content: '✓';
-}
 
 /* Simulator Primary Action Button */
 .simulator-primary {

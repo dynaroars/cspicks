@@ -17,13 +17,13 @@ export function awardDeadlineTone(text: string, estimated: boolean, historical: 
 /** Shared hierarchy for awards and jobs. HTML slots contain renderer-owned markup. */
 export function opportunityHeader(options: {
   id: string; title: string; url: string; kind: 'grant' | 'job';
-  favorite: boolean; organizationHtml: string; badgesHtml?: string; tagsHtml: string;
+  favorite: boolean; organizationHtml: string; tagsHtml: string;
 }) {
   const { kind } = options;
   return `<div class="opportunity-header ${kind}-card-header">
     <div class="opportunity-title-row">
       <h2 class="opportunity-title ${kind}-title"><a href="${escapeHtml(safeExternalUrl(options.url))}" target="_blank" rel="noopener noreferrer">${escapeHtml(options.title)}</a></h2>
-      <div class="opportunity-actions ${kind}-badges">${options.badgesHtml || ''}${favoriteToggleButton(options.id, options.favorite)}</div>
+      <div class="opportunity-actions ${kind}-badges">${favoriteToggleButton(options.id, options.favorite)}</div>
     </div>
     <p class="opportunity-organization ${kind === 'job' ? 'job-school' : 'grant-sponsor-row'}">${options.organizationHtml}</p>
     <div class="opportunity-tags">${options.tagsHtml}</div>

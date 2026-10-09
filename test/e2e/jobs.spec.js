@@ -38,7 +38,7 @@ test('US Jobs shows only active postings by default and reveals older ones on re
   await expect(page.locator('.job-card')).toHaveCount(2);
   await expect(page.locator('.job-title').first()).toContainText('Software Engineering');
   await expect(page.locator('.job-card', { hasText: 'Teaching Professor' })).toContainText('Rolling review');
-  await expect(page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.job-chip-visa')).toHaveText('✅ Visa sponsorship available');
+  await expect(page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.job-chip-visa')).toHaveText('Visa sponsorship available');
   await expect(page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.job-chip-visa')).toHaveCount(0, { timeout: 1000 });
 
   await page.locator('#jobs-search').fill('status: closed');

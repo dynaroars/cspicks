@@ -41,7 +41,7 @@ export const VISA_LABELS: Record<VisaSponsorship, string> = {
 
 /** Visa filter choices: the posting's stated policy, plus `unknown` for postings nobody has read for it yet. */
 export const VISA_FILTER_LABELS: Record<VisaSponsorship | 'unknown', string> = {
-  yes: '✅ Sponsorship available',
+  yes: 'Sponsorship available',
   'case-by-case': '⚖️ Sponsorship case by case',
   no: '🚫 No sponsorship',
   'not-stated': '❔ Not stated on posting',

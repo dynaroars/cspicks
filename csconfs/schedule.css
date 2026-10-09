@@ -9,15 +9,12 @@
 .schedule-card-title-row h2 { margin: 0; font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; line-height: 1.25; }
 .schedule-card-title-row a { color: var(--text-primary); text-decoration: none; }
 .schedule-card-title-row a:hover { color: var(--accent-color); text-decoration: underline; }
-.schedule-estimated, .schedule-verified { padding: .15rem .42rem; border-radius: 999px; font-size: .67rem; font-weight: 700; }
+.schedule-estimated { padding: .15rem .42rem; border-radius: 999px; font-size: .67rem; font-weight: 700; }
 .schedule-estimated { color: #9a6700; background: #fff2bf; }
 .schedule-other { padding: .15rem .42rem; border-radius: 999px; font-size: .67rem; font-weight: 700; color: #3b4fb8; background: #e4e8ff; }
-.schedule-verified { color: #17653a; background: #dff7e8; }
-.schedule-verified { display: inline-grid; width: 1.35rem; height: 1.35rem; padding: 0; place-items: center; border-radius: 50%; font-size: .8rem; line-height: 1; }
 @media (prefers-color-scheme: dark) {
   .schedule-estimated { color: #ffd66b; background: #4a3b12; }
   .schedule-other { color: #b8c4ff; background: #25295c; }
-  .schedule-verified { color: #86e3ad; background: #173e29; }
   .schedule-countdown { color: #86e3ad; }
   .schedule-countdown.is-soon { color: #ffd66b; }
   .schedule-countdown.is-urgent { color: #fca5a5; }
