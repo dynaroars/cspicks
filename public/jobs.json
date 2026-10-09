@@ -4398,5 +4398,126 @@
     "lastSeenAt": "2026-10-08",
     "source": "crawl",
     "verified": true
+  },
+  {
+    "id": "ksu-cs-cybersecurity-assistant-2026",
+    "school": "Kansas State University",
+    "department": "Computer Science",
+    "title": "Assistant Professor (Cybersecurity)",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "sec",
+      "ai"
+    ],
+    "state": "KS",
+    "city": "Manhattan",
+    "url": "https://careers.k-state.edu/jobs/assistant-professor-manhattan-kansas-united-states-1522e866-f8f7-4bed-add5-2f303c26b35a",
+    "summary": "Tenure-track cybersecurity position seeking foundational cybersecurity research applied to areas such as energy, formal methods, cyber-physical systems, and AI. Nine-month appointment.",
+    "deadline": "2026-11-07",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "tulane-cs-postdoc-peng-2026",
+    "school": "Tulane University",
+    "department": "Department of Computer Science",
+    "title": "Postdoctoral Fellow - Computer Science (Peng)",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "arch",
+      "hpc"
+    ],
+    "state": "LA",
+    "city": "New Orleans",
+    "url": "https://tulane-ibqejb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/1991",
+    "summary": "One-year renewable postdoc in Prof. Peng's group on deep learning and LLM accelerators, quantum computer architecture and compilers, blockchain accelerators, and computer architecture/HPC. Requires a PhD in CS, computer or electrical engineering, or a related area.",
+    "deadline": "2027-01-01",
+    "rolling": true,
+    "postedDate": "2026-09-22",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "tulane-cs-postdoc-ming-2026",
+    "school": "Tulane University",
+    "department": "Department of Computer Science",
+    "title": "Postdoctoral Fellow - Computer Science (Ming)",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "sec",
+      "plan"
+    ],
+    "state": "LA",
+    "city": "New Orleans",
+    "url": "https://tulane-ibqejb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/1919",
+    "summary": "Postdoc in Dr. Ming's group on language-based security for migrating legacy C/C++ software to memory-safe Rust (program analysis, safe Rust interface synthesis, runtime protection). Requires a PhD in CS, computer engineering, or a related area.",
+    "postedDate": "2026-09-14",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "tulane-cs-postdoc-rajan-2026",
+    "school": "Tulane University",
+    "department": "Department of Computer Science (School of Science and Engineering)",
+    "title": "Postdoctoral Fellow (Software Engineering / Programming Languages for AI-enabled systems)",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "se",
+      "plan",
+      "ai"
+    ],
+    "state": "LA",
+    "city": "New Orleans",
+    "url": "https://tulane-ibqejb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/1113",
+    "summary": "One or more postdocs supervised by Dr. Hridesh Rajan on SE/PL techniques for dependable AI-enabled systems; ICSE/FSE publications preferred. Start expected as early as Fall 2026.",
+    "postedDate": "2026-06-16",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "wichita-ece-hardware-security-asst-prof-2026",
+    "school": "Wichita State University",
+    "department": "Department of Electrical and Computer Engineering, College of Engineering",
+    "title": "Assistant Professor of Hardware Security",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "sec",
+      "arch"
+    ],
+    "state": "KS",
+    "city": "Wichita",
+    "url": "https://jobs.wichita.edu/jobs/assistant-professor-of-hardware-security-wichita-kansas-united-states",
+    "summary": "Tenure-track ECE search in hardware security, with priorities including secure computer architecture, secure chip design, and embedded/edge AI systems. Posting asks for a terminal degree in the direct field.",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "louisville-cse-ai-associate-2026",
+    "school": "University of Louisville",
+    "department": "Computer Science & Engineering",
+    "title": "Associate Professor (Open Rank), Artificial Intelligence",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai"
+    ],
+    "state": "KY",
+    "city": "Louisville",
+    "url": "https://uofl.wd1.myworkdayjobs.com/en-US/UofLCareerSite/job/Belknap-Campus/Associate-Professor--Open-Rank-_R109448",
+    "summary": "Full-time faculty position in artificial intelligence in the Speed School's CSE department, at tenure-track assistant or associate level or tenured associate level. Requires a PhD in computer science, computer engineering or a closely related field; start Fall 2027.",
+    "deadline": "2027-01-12",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
   }
 ]
