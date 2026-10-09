@@ -7,7 +7,7 @@
     "state": "PA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Read the CSD hiring page and both Interfolio postings it links (SCS all-tracks faculty, deadline Dec 16, 2026; Stehlik teaching postdoc, rolling). Non-CS units (2026-10-08): Read the CMU-wide faculty careers index (rendered list was truncated after Heinz, so SCS/Tepper/HCII sections were not seen) plus the ECE and INI Interfolio postings. Heinz College entries visible were adjunct/staff only; the old ECE Interfolio 174597 linked from the ECE page is closed, the current ECE posting is 193699.",
+    "summary": "Read the CSD hiring page and both Interfolio postings it links (SCS all-tracks faculty, deadline Dec 16, 2026; Stehlik teaching postdoc, rolling). Non-CS units (2026-10-08): Read the CMU-wide faculty careers index (rendered list was truncated after Heinz, so SCS/Tepper/HCII sections were not seen) plus the ECE and INI Interfolio postings. Heinz College entries visible were adjunct/staff only; the old ECE Interfolio 174597 linked from the ECE page is closed, the current ECE posting is 193699. Non-CS units, 2nd pass (2026-10-08): Read the full CMU faculty-careers index (SCS, HCII, Tepper, MCS, Heinz sections) and ECE page. Added the HCII learning-technologies postdoc; Heinz entries are staff/adjunct, Math/ICARM require math PhDs, EPP research-track is policy.",
     "checkedUrls": [
       "https://csd.cmu.edu/employment/faculty-hiring",
       "https://apply.interfolio.com/189576",
@@ -19,7 +19,8 @@
       "https://apply.interfolio.com/193412",
       "https://apply.interfolio.com/195163",
       "https://apply.interfolio.com/194802",
-      "https://www.cmu.edu/faculty-office/prospective/faculty-careers/index.html"
+      "https://www.cmu.edu/faculty-office/prospective/faculty-careers/index.html",
+      "https://apply.interfolio.com/187348"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -36,7 +37,7 @@
         "url": "https://www.cmu.edu/faculty-office/prospective/faculty-careers/index.html"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T18:00:00Z"
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Georgia Institute of Technology",
@@ -46,11 +47,14 @@
     "state": "GA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Hiring page says new positions will be posted soon; listed faculty postings are from 2024. Non-CS units (2026-10-08): ECE faculty-openings page lists an open-rank all-areas ECE search (deadline 2026-12-31) alongside narrow packaging/power searches whose dates have passed or are not CS-relevant. Other computing-adjacent units (School of Cybersecurity and Privacy, IDEaS) were not found to have separate hiring pages.",
+    "summary": "Hiring page says new positions will be posted soon; listed faculty postings are from 2024. Non-CS units (2026-10-08): ECE faculty-openings page lists an open-rank all-areas ECE search (deadline 2026-12-31) alongside narrow packaging/power searches whose dates have passed or are not CS-relevant. Other computing-adjacent units (School of Cybersecurity and Privacy, IDEaS) were not found to have separate hiring pages. Non-CS units, 2nd pass (2026-10-08): Checked CSE and Interactive Computing hiring pages; both still show the 2025-26 cycle (Dec 2025 deadlines), and the college-wide and Cybersecurity pages were not found or not reachable. No 2026-27 College of Computing postings found yet.",
     "checkedUrls": [
       "https://www.cc.gatech.edu/faculty-position-opportunities",
       "https://ece.gatech.edu/people/resources/faculty-openings",
-      "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=03000&JobOpeningId=277846&PostingSeq=1"
+      "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=03000&JobOpeningId=277846&PostingSeq=1",
+      "https://www.cse.gatech.edu/content/faculty-hiring",
+      "https://ic.gatech.edu/faculty-hiring",
+      "https://www.cc.gatech.edu/faculty-hiring"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -59,7 +63,7 @@
         "url": "https://ece.gatech.edu/people/resources/faculty-openings"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T18:00:00Z"
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Univ. of California - San Diego",
@@ -305,7 +309,7 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Read the Courant CS openings page; one current Faculty Fellow search, other tenure-track and visiting searches say to check back. Non-CS units (2026-10-08): Tandon CSE says Faculty Fellow applications open later in fall 2026 (no posting yet); the Tandon ECE page still shows a stale 2025 search; the CDS employment page returned 403 so it was not read. The existing Courant Faculty Fellow search is still listed.",
+    "summary": "Read the Courant CS openings page; one current Faculty Fellow search, other tenure-track and visiting searches say to check back. Non-CS units (2026-10-08): Tandon CSE says Faculty Fellow applications open later in fall 2026 (no posting yet); the Tandon ECE page still shows a stale 2025 search; the CDS employment page returned 403 so it was not read. The existing Courant Faculty Fellow search is still listed. Non-CS units, 2nd pass (2026-10-08): Tandon CSE says Faculty Fellow applications open later in fall 2026; Courant page still lists the Faculty Fellow search (deadline Feb 1, 2027); NYU Shanghai/Abu Dhabi are non-US. CDS employment page returned 403 and was not bypassed; Stern technology page showed no current posting.",
     "checkedUrls": [
       "https://cs.nyu.edu/",
       "https://cs.nyu.edu/dynamic/jobs/openings/",
@@ -313,7 +317,8 @@
       "https://engineering.nyu.edu/academics/departments/computer-science-and-engineering/available-faculty-positions",
       "https://engineering.nyu.edu/academics/departments/electrical-and-computer-engineering/available-positions",
       "https://engineering.nyu.edu/services/human-resources/careers-nyu-tandon",
-      "https://cds.nyu.edu/employment/"
+      "https://cds.nyu.edu/employment/",
+      "https://www.stern.nyu.edu/experience-stern/about/departments-centers-initiatives/academic-departments/tops/faculty-staff/position-openings/information-systems"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -391,7 +396,7 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "Bowers lists one Cornell Tech Lecturer/Senior Lecturer opening hosted on AcademicJobsOnline (posted Feb 2026, deadline March 1, 2026, review until filled); cs.cornell.edu job pages return 403, so no verifiable current official posting was added. Non-CS units (2026-10-08): Bowers careers lists only the Cornell Tech CS lecturer opening (already recorded); Information Science and Statistics/Data Science show no openings, and Cornell Tech's page says no 2025-26 openings in its other departments. The ECE hiring page was not found and hr.cornell.edu/jobs returned 403.",
+    "summary": "Bowers lists one Cornell Tech Lecturer/Senior Lecturer opening hosted on AcademicJobsOnline (posted Feb 2026, deadline March 1, 2026, review until filled); cs.cornell.edu job pages return 403, so no verifiable current official posting was added. Non-CS units (2026-10-08): Bowers careers lists only the Cornell Tech CS lecturer opening (already recorded); Information Science and Statistics/Data Science show no openings, and Cornell Tech's page says no 2025-26 openings in its other departments. The ECE hiring page was not found and hr.cornell.edu/jobs returned 403. Non-CS units, 2nd pass (2026-10-08): Bowers careers still lists only the Cornell Tech lecturer; ECE employment URL 404s and searches found no current 2026-27 Cornell ECE, Information Science, or Cornell Tech tenure-track postings.",
     "checkedUrls": [
       "https://bowers.cornell.edu/careers",
       "https://tech.cornell.edu/jobs/",
@@ -399,7 +404,9 @@
       "https://infosci.cornell.edu/",
       "https://stat.cornell.edu/",
       "https://www.ece.cornell.edu/",
-      "https://hr.cornell.edu/jobs"
+      "https://hr.cornell.edu/jobs",
+      "https://www.cs.cornell.edu/jobs",
+      "https://www.duffield.cornell.edu/ece/about/employment"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -412,7 +419,7 @@
         "url": "https://tech.cornell.edu/jobs/"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T18:00:00Z"
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Rochester Inst. of Technology",
@@ -575,14 +582,18 @@
     "state": "VA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Department page lists one tenure-track CS posting (jobs.apply.vt.edu 537614), rendered and read; review date 11/15/2026. Non-CS units (2026-10-08): Both existing CS tenure-track records are live on jobs.apply.vt.edu (537614, review date 11/15/2026). Two Institute for Advanced Computing postdocs found; the ECE department listing (5 postings per facet) could not be read because result lists did not render.",
+    "summary": "Department page lists one tenure-track CS posting (jobs.apply.vt.edu 537614), rendered and read; review date 11/15/2026. Non-CS units (2026-10-08): Both existing CS tenure-track records are live on jobs.apply.vt.edu (537614, review date 11/15/2026). Two Institute for Advanced Computing postdocs found; the ECE department listing (5 postings per facet) could not be read because result lists did not render. Non-CS units, 2nd pass (2026-10-08): Read the VT jobs board via keyword searches (computer, electrical, ECE, physical AI). Added the CS postdoc and the VTNSI AI T&E research position; the ECE systems/Physical AI posting pages from third-party mirrors are 404 on the official board, and ME robotics and AI-admin postdoc were skipped as non-CS targets.",
     "checkedUrls": [
       "https://website.cs.vt.edu/About/faculty-search.html",
       "https://website.cs.vt.edu/About/faculty-search/2026-tenure-track-position.html",
       "https://jobs.apply.vt.edu/jobs/tenure-track-faculty-position-in-computer-science-blacksburg-virginia-united-states",
       "https://jobs.apply.vt.edu/jobs/search?department=Institute+for+Advanced+Computing",
       "https://jobs.apply.vt.edu/jobs/search?department=Electrical+and+ComputerEngineering",
-      "https://ece.vt.edu/"
+      "https://ece.vt.edu/",
+      "https://jobs.apply.vt.edu/jobs/search?query=faculty+computer",
+      "https://jobs.apply.vt.edu/jobs/search?query=electrical",
+      "https://jobs.apply.vt.edu/jobs/search?query=physical+ai",
+      "https://jobs.apply.vt.edu/jobs/assistant-associate-full-professor-blacksburg-virginia-united-states"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -599,7 +610,7 @@
         "url": "https://jobs.apply.vt.edu/jobs/search?department=Commonwealth+Cyber+Initiative"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T18:00:00Z"
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Purdue University",
@@ -678,7 +689,7 @@
     "state": "UT",
     "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
-    "summary": "Hiring page (expanded) describes a lecturing position beginning fall 2026 and a tenure-track opening from last cycle; no 2026-27 ad yet. Non-CS units (2026-10-08): ECE has no dedicated hiring page found (old /about/employment URL 404s); PeopleAdmin keyword searches (electrical, data science, machine learning, cyber) show only an ECE Asia Campus (Korea) EE lecturer and a Biochemistry AI/ML tenure-track search, neither added (non-US / not a CS-PhD target). The ECE AI Hardware search closed 2026-05-31.",
+    "summary": "Hiring page (expanded) describes a lecturing position beginning fall 2026 and a tenure-track opening from last cycle; no 2026-27 ad yet. Non-CS units (2026-10-08): ECE has no dedicated hiring page found (old /about/employment URL 404s); PeopleAdmin keyword searches (electrical, data science, machine learning, cyber) show only an ECE Asia Campus (Korea) EE lecturer and a Biochemistry AI/ML tenure-track search, neither added (non-US / not a CS-PhD target). The ECE AI Hardware search closed 2026-05-31. Non-CS units, 2nd pass (2026-10-08): CS (Kahlert) hiring page and PeopleAdmin postings 188551 and 190584 are the prior cycle (July 2026 start), so not added; no 2026-27 Utah CS or ECE postings found. No ECE hiring page located.",
     "checkedUrls": [
       "https://www.cs.utah.edu/people/faculty/hiring/",
       "https://utah.peopleadmin.com/postings/190584",
@@ -699,7 +710,7 @@
         "url": "https://utah.peopleadmin.com/postings/search"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T18:00:00Z"
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of Washington",
@@ -709,14 +720,16 @@
     "state": "WA",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Two faculty postings listed (open-rank, AI teaching faculty); Interfolio pages did not render so deadlines are null. Non-CS units (2026-10-08): ECE (two assistant professor, all areas of ECE incl. AI/ML) and the Information School (AI tenure-track, IS/IM tenure-track on AI in organizations, IS/IM teaching-track) have live Interfolio postings. Statistics, Biomedical Informatics, HCDE and other units not checked (Statistics /about/jobs 404).",
+    "summary": "Two faculty postings listed (open-rank, AI teaching faculty); Interfolio pages did not render so deadlines are null. Non-CS units (2026-10-08): ECE (two assistant professor, all areas of ECE incl. AI/ML) and the Information School (AI tenure-track, IS/IM tenure-track on AI in organizations, IS/IM teaching-track) have live Interfolio postings. Statistics, Biomedical Informatics, HCDE and other units not checked (Statistics /about/jobs 404). Non-CS units, 2nd pass (2026-10-08): Read the iSchool faculty page and ECE openings; added the iSchool teaching-track IS/IM posting and the UW Bothell Computing & Software Systems tenure-track search (missing from jobs.json). LIS posting skipped as non-computing; Nursing and Foster postings not CS targets.",
     "checkedUrls": [
       "https://www.cs.washington.edu/who-we-are/employment-opportunites/",
       "https://apply.interfolio.com/194089",
       "https://apply.interfolio.com/194076",
       "https://www.ece.uw.edu/engage/job-openings/",
       "https://apply.interfolio.com/192876",
-      "https://ischool.uw.edu/about/jobs/faculty"
+      "https://ischool.uw.edu/about/jobs/faculty",
+      "https://apply.interfolio.com/192126",
+      "https://apply.interfolio.com/190493"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -729,7 +742,7 @@
         "url": "https://ischool.uw.edu/about/jobs/faculty"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T18:00:00Z"
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Univ. of California - Irvine",
@@ -808,7 +821,7 @@
     "state": "IL",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Careers page lists two open tenure-track searches (AI/ML and PL; joint quantum computing), both verified on the official faculty recruiting site. Non-CS units (2026-10-08): IEMS (AI/ML, optimization) and Statistics and Data Science (PhD in Statistics, CS or related; ML preferred) each have open searches; ECE lists no postings. The facultyrecruiting.northwestern.edu portal is behind a NetID login so only the department pages were read. Both existing CS records are still on the CS careers page.",
+    "summary": "Careers page lists two open tenure-track searches (AI/ML and PL; joint quantum computing), both verified on the official faculty recruiting site. Non-CS units (2026-10-08): IEMS (AI/ML, optimization) and Statistics and Data Science (PhD in Statistics, CS or related; ML preferred) each have open searches; ECE lists no postings. The facultyrecruiting.northwestern.edu portal is behind a NetID login so only the department pages were read. Both existing CS records are still on the CS careers page. Non-CS units, 2nd pass (2026-10-08): Facultyrecruiting portal is login-gated; found the McCormick-wide Open Rank AI Innovation posting via the Innovation Institute page. No new ECE or data-science postings found; CS records not rechecked.",
     "checkedUrls": [
       "https://www.mccormick.northwestern.edu/computer-science/careers",
       "https://facultyrecruiting.northwestern.edu/apply/MjYzMw==",
@@ -816,7 +829,8 @@
       "https://www.mccormick.northwestern.edu/industrial/career/index.html",
       "https://statistics.northwestern.edu/about/faculty-search-.html",
       "https://www.mccormick.northwestern.edu/electrical-computer/careers/index.html",
-      "https://facultyrecruiting.northwestern.edu/"
+      "https://facultyrecruiting.northwestern.edu/",
+      "https://niinstitute.kellogg.northwestern.edu/job-postings/open-rank-faculty-position-ai-innovation"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -833,7 +847,7 @@
         "url": "https://www.mccormick.northwestern.edu/electrical-computer/careers/index.html"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T18:00:00Z"
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "North Carolina State University",
@@ -907,7 +921,7 @@
     "state": "VA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "Department employment page is behind a Cloudflare check (not bypassed); found the open-rank CS search and a School of Data Science NLP search on Interfolio. Non-CS units (2026-10-08): School of Data Science has two open-rank faculty searches and several postdoc postings on UVA Jobs; the engineering.virginia.edu site (ECE, systems) returned 403 and was not bypassed.",
+    "summary": "Department employment page is behind a Cloudflare check (not bypassed); found the open-rank CS search and a School of Data Science NLP search on Interfolio. Non-CS units (2026-10-08): School of Data Science has two open-rank faculty searches and several postdoc postings on UVA Jobs; the engineering.virginia.edu site (ECE, systems) returned 403 and was not bypassed. Non-CS units, 2nd pass (2026-10-08): Confirmed both School of Data Science open-rank searches (NLP, Data and Society) are still listed with open Interfolio pages (review from Dec 1, 2026); both already recorded. UVA Engineering/ECE site not retried (403 earlier, not bypassed); postdoc records not re-opened.",
     "checkedUrls": [
       "https://apply.interfolio.com/190949",
       "https://apply.interfolio.com/191213",
@@ -927,12 +941,8 @@
         "url": "https://datascience.virginia.edu/faculty-jobs"
       },
       {
-        "name": "School of Data Science postdoctoral and staff positions",
+        "name": "School of Data Science join our team",
         "url": "https://datascience.virginia.edu/pages/join-our-team"
-      },
-      {
-        "name": "Electrical and Computer Engineering (Engineering site, 403)",
-        "url": "https://engineering.virginia.edu/department/electrical-and-computer-engineering"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -1033,7 +1043,7 @@
     "state": "IL",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Department open-positions page states no open tenure-track, teaching-track, or professional positions. Non-CS units (2026-10-08): ECE open-positions page lists no current postings in rendered text (tabs for faculty/staff empty); a web search showed only 2025-26 cycle ECE/quantum searches that closed Jan 2026. No UIC information-school unit found.",
+    "summary": "Department open-positions page states no open tenure-track, teaching-track, or professional positions. Non-CS units (2026-10-08): ECE open-positions page lists no current postings in rendered text (tabs for faculty/staff empty); a web search showed only 2025-26 cycle ECE/quantum searches that closed Jan 2026. No UIC information-school unit found. Non-CS units, 2nd pass (2026-10-08): ECE open-positions page re-rendered shows no listed faculty postings; web search surfaced only 2025-26 cycle UIC CS/quantum searches that closed Jan 2026. No 2026-27 posting verified.",
     "checkedUrls": [
       "https://cs.uic.edu/faculty-staff/open-positions/",
       "https://ece.uic.edu/faculty-and-staff/open-positions/"
@@ -1055,23 +1065,25 @@
     "state": "CA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "CS open-faculty-positions page (last updated June 2025) and the Viterbi positions page list no current CS posting. Non-CS units (2026-10-08): ECE open-positions page (last updated Feb 2025) shows only headings with no posting links in rendered text; Viterbi index links no current postings; a USC Careers ECE posting found by search returns 404. Nothing verifiable for 2026-27.",
+    "summary": "CS open-faculty-positions page (last updated June 2025) and the Viterbi positions page list no current CS posting. Non-CS units (2026-10-08): ECE open-positions page (last updated Feb 2025) shows only headings with no posting links in rendered text; Viterbi index links no current postings; a USC Careers ECE posting found by search returns 404. Nothing verifiable for 2026-27. Non-CS units, 2nd pass (2026-10-08): ECE page still shows only headings (last updated Feb 2025); USC Careers Viterbi division listing returns zero results and the CS open-rank posting found by search is a 404. No current 2026-27 posting verified.",
     "checkedUrls": [
       "https://www.cs.usc.edu/about/open-faculty-positions/",
       "https://viterbischool.usc.edu/faculty/positions-available/",
       "https://minghsiehece.usc.edu/about/open-positions/",
       "https://minghsiehece.usc.edu/jobs/",
-      "https://usccareers.usc.edu/job/los-angeles/open-rank-assistant-associate-full-professor-of-electrical-and-computer-engineering/1209/71640611472"
+      "https://usccareers.usc.edu/job/los-angeles/open-rank-assistant-associate-full-professor-of-electrical-and-computer-engineering/1209/71640611472",
+      "https://usccareers.usc.edu/business/custom_fields.division/usc%2520viterbi%2520school%2520of%2520engineering/1728-1209/5",
+      "https://usccareers.usc.edu/job/los-angeles/open-rank-assistant-associate-or-full-professor-of-computer-science/1209/60632249392"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Ming Hsieh Department of Electrical and Computer Engineering",
+        "name": "Ming Hsieh ECE open positions",
         "url": "https://minghsiehece.usc.edu/about/open-positions/"
       },
       {
-        "name": "Viterbi School positions available",
-        "url": "https://viterbischool.usc.edu/faculty/positions-available/"
+        "name": "USC Careers (Viterbi division)",
+        "url": "https://usccareers.usc.edu/business/custom_fields.division/usc%2520viterbi%2520school%2520of%2520engineering/1728-1209/5"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -1108,13 +1120,15 @@
     "state": "TN",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Department page links no openings; the College of Connected Computing assistant and senior Interfolio searches are both marked closed. Non-CS units (2026-10-08): The ECE national-security assistant professor Interfolio search (175243) is marked closed (2025-26 cycle). No department hiring page for ECE found; no data science or cybersecurity posting located.",
+    "summary": "Department page links no openings; the College of Connected Computing assistant and senior Interfolio searches are both marked closed. Non-CS units (2026-10-08): The ECE national-security assistant professor Interfolio search (175243) is marked closed (2025-26 cycle). No department hiring page for ECE found; no data science or cybersecurity posting located. Non-CS units, 2nd pass (2026-10-08): Engineering site and web search show no 2026-27 ECE, data science, cybersecurity or connected-computing postings; found only 2025-26 postings that have closed. vanderbilt.edu connected-computing and engineering faculty-staff pages return 404.",
     "checkedUrls": [
       "https://engineering.vanderbilt.edu/departments/computer-science/",
       "https://apply.interfolio.com/175958",
       "https://apply.interfolio.com/175978",
       "https://apply.interfolio.com/175243",
-      "https://engineering.vanderbilt.edu/"
+      "https://engineering.vanderbilt.edu/",
+      "https://www.vanderbilt.edu/connected-computing/",
+      "https://engineering.vanderbilt.edu/faculty-staff/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -1403,23 +1417,24 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Department page lists only the AI3 Research Assistant Professor (rendered on Interfolio, opened 2026-04-03, rolling) plus a staff advisor role. Non-CS units (2026-10-08): University faculty board lists no ECE, biomedical informatics or data science tenure-track search besides the already-recorded AI Institute research assistant professor; ECE has no hiring page found.",
+    "summary": "Department page lists only the AI3 Research Assistant Professor (rendered on Interfolio, opened 2026-04-03, rolling) plus a staff advisor role. Non-CS units (2026-10-08): University faculty board lists no ECE, biomedical informatics or data science tenure-track search besides the already-recorded AI Institute research assistant professor; ECE has no hiring page found. Non-CS units, 2nd pass (2026-10-08): Read the full university faculty Interfolio listing: besides the recorded AI Institute research assistant professor (ref 183806), only business, math, physics, humanities and biology searches appear (College of Business analytics practice/lecturer is not a CS-PhD target). The board lists a second AI Institute entry (ref 180454) whose Interfolio page redirects to login, so it was not recorded.",
     "checkedUrls": [
       "https://www.cs.stonybrook.edu/connect/faculty-staff-positions.html",
       "https://apply.interfolio.com/183806",
       "https://www.stonybrook.edu/faculty-jobs/positions/",
       "https://iacs.stonybrook.edu/opportunities/Open%20Positions",
-      "https://ece.stonybrook.edu/"
+      "https://ece.stonybrook.edu/",
+      "https://apply.interfolio.com/180454"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "AI Innovation Institute open positions",
-        "url": "https://iacs.stonybrook.edu/opportunities/Open%20Positions"
-      },
-      {
         "name": "Stony Brook faculty jobs board",
         "url": "https://www.stonybrook.edu/faculty-jobs/positions/"
+      },
+      {
+        "name": "AI Innovation Institute open positions",
+        "url": "https://iacs.stonybrook.edu/opportunities/Open%20Positions"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -1452,17 +1467,25 @@
     "state": "OR",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "The only EECS posting found is the E-campus instructor pool for 2025/2026 and Fall 2026, a prior-cycle ad; no 2026-27 tenure-track posting was verified. Non-CS units (2026-10-08): College of Engineering page only points to the OSU jobs portal (PeopleAdmin), whose search results did not render; no computing-related non-EECS posting verified.",
+    "summary": "The only EECS posting found is the E-campus instructor pool for 2025/2026 and Fall 2026, a prior-cycle ad; no 2026-27 tenure-track posting was verified. Non-CS units (2026-10-08): College of Engineering page only points to the OSU jobs portal (PeopleAdmin), whose search results did not render; no computing-related non-EECS posting verified. Non-CS units, 2nd pass (2026-10-08): Rendered OSU Jobs keyword searches (computer, data science, engineering, artificial intelligence); results are only adjunct/instructor pools and an advisor pool, none plainly CS PhD faculty. The already recorded EECS e-campus instructor pool (177641) is still listed.",
     "checkedUrls": [
       "https://jobs.oregonstate.edu/postings/177641",
       "https://engineering.oregonstate.edu/about/job-openings",
-      "https://jobs.oregonstate.edu/postings/search?query=professor"
+      "https://jobs.oregonstate.edu/postings/search?query=professor",
+      "https://jobs.oregonstate.edu/postings/search?query=computer",
+      "https://jobs.oregonstate.edu/postings/search?query=data+science",
+      "https://jobs.oregonstate.edu/postings/search?query=engineering",
+      "https://jobs.oregonstate.edu/postings/search?query=artificial+intelligence"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "College of Engineering job openings",
         "url": "https://engineering.oregonstate.edu/about/job-openings"
+      },
+      {
+        "name": "OSU Jobs PeopleAdmin search",
+        "url": "https://jobs.oregonstate.edu/postings/search"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -1560,7 +1583,7 @@
     "state": "NC",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Page states that if no positions are listed, the department is not currently seeking candidates; none listed. Non-CS units (2026-10-08): Pratt and ECE careers pages route to job listings that did not render any faculty postings; no ECE or data/AI unit posting verified.",
+    "summary": "Page states that if no positions are listed, the department is not currently seeking candidates; none listed. Non-CS units (2026-10-08): Pratt and ECE careers pages route to job listings that did not render any faculty postings; no ECE or data/AI unit posting verified. Non-CS units, 2nd pass (2026-10-08): Duke ECE employment page now returns not found and no Pratt/ECE/data-science posting verified; a web lead shows an AI-for-biology tenure-track cluster (deadline Nov 1, 2026) applied via AJO, but it sits in biology departments and no official Duke page was opened, so it was not recorded.",
     "checkedUrls": [
       "https://cs.duke.edu/",
       "https://cs.duke.edu/jobs",
@@ -1572,10 +1595,6 @@
       {
         "name": "Pratt School of Engineering careers",
         "url": "https://pratt.duke.edu/about/team/careers/"
-      },
-      {
-        "name": "Duke ECE employment",
-        "url": "https://ece.duke.edu/about/employment/"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -1588,18 +1607,24 @@
     "state": "CA",
     "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
-    "summary": "Employment page still describes the 2025-26 cycle. Non-CS units (2026-10-08): ECE employment page lists only a Lecturer in ECE (JPF02369) and a Power Systems postdoc (JPF02324), neither plainly targeting CS PhDs. BCOE college-level hiring pages were not found (404/DNS failure).",
+    "summary": "Employment page still describes the 2025-26 cycle. Non-CS units (2026-10-08): ECE employment page lists only a Lecturer in ECE (JPF02369) and a Power Systems postdoc (JPF02324), neither plainly targeting CS PhDs. BCOE college-level hiring pages were not found (404/DNS failure). Non-CS units, 2nd pass (2026-10-08): Read UCR's official AP Recruit board; ECE shows only a Lecturer and a Power Systems postdoc (not added). Found a CS-department postdoc (system security, JPF02353) missing from jobs.json and added it; no tenure-track CS/ECE/AI search listed.",
     "checkedUrls": [
       "https://www1.cs.ucr.edu/cse-employment",
       "https://ece.ucr.edu/employment",
       "https://engr.ucr.edu/employment",
-      "https://engr.ucr.edu/faculty-positions"
+      "https://engr.ucr.edu/faculty-positions",
+      "https://aprecruit.ucr.edu/apply",
+      "https://aprecruit.ucr.edu/JPF02353"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Electrical and Computer Engineering",
+        "name": "Electrical and Computer Engineering employment",
         "url": "https://ece.ucr.edu/employment"
+      },
+      {
+        "name": "UCR AP Recruit open recruitments",
+        "url": "https://aprecruit.ucr.edu/apply"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -1704,7 +1729,7 @@
     "state": "NJ",
     "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
-    "summary": "Open-faculty page describes a Fall 2026 start (last cycle); no 2026-27 ad yet. Non-CS units (2026-10-08): ECE faculty-positions page lists an Asst/Assoc/Full Professor in Quantum Computing and Engineering (linked to njit.csod.com requisition 5617, which did not resolve here, so not recorded; lead only). Workday board's faculty ads (Architecture, SAET director) are not CS-targeted.",
+    "summary": "Open-faculty page describes a Fall 2026 start (last cycle); no 2026-27 ad yet. Non-CS units (2026-10-08): ECE faculty-positions page lists an Asst/Assoc/Full Professor in Quantum Computing and Engineering (linked to njit.csod.com requisition 5617, which did not resolve here, so not recorded; lead only). Workday board's faculty ads (Architecture, SAET director) are not CS-targeted. Non-CS units, 2nd pass (2026-10-08): ECE page lists only a Quantum Computing and Engineering open-rank search linked to njit.csod.com requisition 5617; that host does not resolve from this environment, so the official posting could not be opened and nothing was recorded.",
     "checkedUrls": [
       "https://cs.njit.edu/",
       "https://cs.njit.edu/open-faculty-positions",
@@ -1719,14 +1744,6 @@
       {
         "name": "Hartmann Dept. of Electrical and Computer Engineering",
         "url": "https://ece.njit.edu/faculty-positions"
-      },
-      {
-        "name": "NJIT Careers (Workday)",
-        "url": "https://njit.wd108.myworkdayjobs.com/NJIT_Careers"
-      },
-      {
-        "name": "Ying Wu College of Computing",
-        "url": "https://computing.njit.edu/"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -1892,7 +1909,7 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Department lists two Empire Innovation Professor searches; the AI posting 52653 is unavailable and the Quantum EIP posting (59623/64873) dates from Oct 2025 (prior cycle), so skipped; recorded the IAD teaching-track posting 64720 (posted Jan 2026, open until filled). Non-CS units (2026-10-08): UB Jobs keyword searches (Electrical, AI, Data Science, Computer, Professor) show no new non-CS postings; the IAD teaching posting is still live and open until filled. A SEAS pooled postdoc posting is a 2024-25 re-post without computing focus and was skipped; the department pages for Electrical Engineering were not read separately.",
+    "summary": "Department lists two Empire Innovation Professor searches; the AI posting 52653 is unavailable and the Quantum EIP posting (59623/64873) dates from Oct 2025 (prior cycle), so skipped; recorded the IAD teaching-track posting 64720 (posted Jan 2026, open until filled). Non-CS units (2026-10-08): UB Jobs keyword searches (Electrical, AI, Data Science, Computer, Professor) show no new non-CS postings; the IAD teaching posting is still live and open until filled. A SEAS pooled postdoc posting is a 2024-25 re-post without computing focus and was skipped; the department pages for Electrical Engineering were not read separately. Non-CS units, 2nd pass (2026-10-08): No new pages opened beyond the earlier pass; existing IAD teaching record remains the only one. EE department hiring page still unread.",
     "checkedUrls": [
       "https://engineering.buffalo.edu/computer-science-engineering/news-and-events/employment-opportunities.html",
       "https://www.ubjobs.buffalo.edu/postings/59623",
@@ -1943,7 +1960,7 @@
     "state": "OH",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Rendered all four Interfolio faculty postings opened Sept 2026 with review dates. Non-CS units (2026-10-08): Read the College of Engineering and ECE hiring pages and every linked Interfolio posting; ECE lists two AI tenure-track searches. Non-engineering colleges (Arts and Sciences statistics/data) and TDAI were not found to have separate hiring pages; MAE, CBE and ISE AI-for-domain searches (192392, 194269, 195056) were left out as domain-engineering hires.",
+    "summary": "Rendered all four Interfolio faculty postings opened Sept 2026 with review dates. Non-CS units (2026-10-08): Read the College of Engineering and ECE hiring pages and every linked Interfolio posting; ECE lists two AI tenure-track searches. Non-engineering colleges (Arts and Sciences statistics/data) and TDAI were not found to have separate hiring pages; MAE, CBE and ISE AI-for-domain searches (192392, 194269, 195056) were left out as domain-engineering hires. Non-CS units, 2nd pass (2026-10-08): No additional non-CS postings beyond records already in jobs.json; domain-engineering AI searches remain excluded.",
     "checkedUrls": [
       "https://cse.osu.edu/department/tenuredtenure-track-faculty-positions",
       "https://apply.interfolio.com/193969",
@@ -1965,10 +1982,6 @@
       {
         "name": "Electrical & Computer Engineering faculty recruiting",
         "url": "https://ece.osu.edu/faculty-recruiting"
-      },
-      {
-        "name": "Translational Data Analytics Institute",
-        "url": "https://tdai.osu.edu/"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -2242,7 +2255,7 @@
     "state": "CT",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Job Opportunities page states there are currently no open faculty, staff or student positions. Non-CS units (2026-10-08): ece.uconn.edu, engineering.uconn.edu, jobs.uconn.edu and hr.uconn.edu all refused connections or timed out, and the UConn Workday site showed a service outage; no non-CS units could be read.",
+    "summary": "Job Opportunities page states there are currently no open faculty, staff or student positions. Non-CS units (2026-10-08): ece.uconn.edu, engineering.uconn.edu, jobs.uconn.edu and hr.uconn.edu all refused connections or timed out, and the UConn Workday site showed a service outage; no non-CS units could be read. Non-CS units, 2nd pass (2026-10-08): uconn.edu hosts (ece, computing.engineering) refused connections from this environment; web search showed only prior-cycle UConn postings.",
     "checkedUrls": [
       "https://computing.engineering.uconn.edu/",
       "https://computing.engineering.uconn.edu/about/job-opportunities/",
@@ -2250,7 +2263,8 @@
       "https://engineering.uconn.edu/",
       "https://jobs.uconn.edu/",
       "https://hr.uconn.edu/jobs/",
-      "https://uconn.wd1.myworkdayjobs.com/UConn"
+      "https://uconn.wd1.myworkdayjobs.com/UConn",
+      "https://computing.engineering.uconn.edu/about/job-opportunities"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -2259,8 +2273,8 @@
         "url": "https://ece.uconn.edu/"
       },
       {
-        "name": "UConn jobs",
-        "url": "https://jobs.uconn.edu/"
+        "name": "School of Computing job opportunities",
+        "url": "https://computing.engineering.uconn.edu/about/job-opportunities"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -2317,7 +2331,7 @@
     "state": "MI",
     "lastCheckedAt": "2026-10-08T18:32:19Z",
     "outcome": "incomplete",
-    "summary": "A CSE fixed-term AI/Cybersecurity position (job 1171186) was reported by search, but it does not appear in careers.msu.edu search results rendered by the browser; no tenure-track CS posting found. Non-CS units (2026-10-08): The MSU careers portal renders but its search ignores keywords and paginates, so ECE, CMSE, and college-wide postings could not be enumerated; search-engine leads (ECE Space Electronics, CMSE computing/data science education) could not be opened on the official portal. No postings added.",
+    "summary": "A CSE fixed-term AI/Cybersecurity position (job 1171186) was reported by search, but it does not appear in careers.msu.edu search results rendered by the browser; no tenure-track CS posting found. Non-CS units (2026-10-08): The MSU careers portal renders but its search ignores keywords and paginates, so ECE, CMSE, and college-wide postings could not be enumerated; search-engine leads (ECE Space Electronics, CMSE computing/data science education) could not be opened on the official portal. No postings added. Non-CS units, 2nd pass (2026-10-08): Opened the CMSE computational biology posting (Fall 2025 start, prior cycle); AI-on-Hardware CSE/ECE search opened Nov 2024 (prior cycle); CMSE computing/data/AI education search prefers an Aug 2026 start and its official page did not open. None recorded as current 2026-27.",
     "checkedUrls": [
       "https://careers.msu.edu/jobs/search?query=%22Computer+Science+and+Engineering%22",
       "https://careers.msu.edu/jobs/search?query=cybersecurity",
@@ -2325,16 +2339,14 @@
       "https://engineering.msu.edu/careers",
       "https://careers.msu.edu/jobs/search?query=professor",
       "https://careers.msu.edu/jobs/search?query=data+science",
-      "https://careers.msu.edu/jobs/search?query=tenure+system+computer"
+      "https://careers.msu.edu/jobs/search?query=tenure+system+computer",
+      "https://careers.msu.edu/jobs/ast-asc-full-professor-tenure-system-east-lansing-michigan-united-states-e144babd-a429-4a65-8dc9-e9e457645c85",
+      "https://careers.msu.edu/en-us/job/521127/astascfull-professor-tenure-system"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "College of Engineering careers",
-        "url": "https://engineering.msu.edu/careers"
-      },
-      {
-        "name": "MSU Careers (tenure-system faculty search)",
+        "name": "MSU Careers",
         "url": "https://careers.msu.edu/jobs/search"
       }
     ],
@@ -2485,7 +2497,7 @@
     "state": "KS",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "All 27 faculty/lecturer postings on KU Employment read; none are EECS or computing. Non-CS units (2026-10-08): Page 1 of the KU faculty listing (25 of 27 entries) shows no computing, EECS, data science or information postings (Aerospace, Mechanical, Architectural Engineering etc. are non-computing); page 2 was not opened and the earlier crawl read all 27 with none relevant.",
+    "summary": "All 27 faculty/lecturer postings on KU Employment read; none are EECS or computing. Non-CS units (2026-10-08): Page 1 of the KU faculty listing (25 of 27 entries) shows no computing, EECS, data science or information postings (Aerospace, Mechanical, Architectural Engineering etc. are non-computing); page 2 was not opened and the earlier crawl read all 27 with none relevant. Non-CS units, 2nd pass (2026-10-08): Rendered the full 27-entry KU faculty listing with deadlines; all are Aerospace, Mechanical, Civil/Architectural Engineering or non-computing units, none CS-targeted.",
     "checkedUrls": [
       "https://employment.ku.edu/jobs/faculty",
       "https://eecs.ku.edu/"
@@ -2493,7 +2505,7 @@
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "KU Employment faculty/lecturer/academic staff postings",
+        "name": "KU Employment faculty postings",
         "url": "https://employment.ku.edu/jobs/faculty"
       }
     ],
@@ -2507,7 +2519,7 @@
     "state": "NJ",
     "lastCheckedAt": "2026-10-08T14:51:22Z",
     "outcome": "complete",
-    "summary": "The 2026 School of Computing search (Stevens-CS-TT2026) closed 2026-05-31; no newer search yet. Non-CS units (2026-10-08): Stevens Workday careers site returned a Workday service-interruption page and no employment/ECE hiring page was found at guessed Stevens paths (404); no current ECE or data science posting surfaced in web search (an ECE open-rank search found was for a 2025 start).",
+    "summary": "The 2026 School of Computing search (Stevens-CS-TT2026) closed 2026-05-31; no newer search yet. Non-CS units (2026-10-08): Stevens Workday careers site returned a Workday service-interruption page and no employment/ECE hiring page was found at guessed Stevens paths (404); no current ECE or data science posting surfaced in web search (an ECE open-rank search found was for a 2025 start). Non-CS units, 2nd pass (2026-10-08): Official Stevens HR pages not reachable; search surfaced only the School of Computing search (deadline May 31, 2026, passed) and a 2025-start ECE search (prior cycle). No current non-CS posting confirmed.",
     "checkedUrls": [
       "https://www.cs.stevens.edu",
       "https://www.stevens.edu/school-computing",
@@ -2534,7 +2546,7 @@
     "state": "MO",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "CSE homepage shows no hiring link and searches/guessed employment paths found no current CS faculty posting; WashU Interfolio listing not located. Non-CS units (2026-10-08): Found the official Statistics and Data Science +AI tenure-track search (Interfolio 190458); the +AI cluster search is for natural-science and philosophy PhDs and was skipped. No ESE/McKelvey employment page found (404s), WashU jobs search and DSI site did not load usefully (404/403).",
+    "summary": "CSE homepage shows no hiring link and searches/guessed employment paths found no current CS faculty posting; WashU Interfolio listing not located. Non-CS units (2026-10-08): Found the official Statistics and Data Science +AI tenure-track search (Interfolio 190458); the +AI cluster search is for natural-science and philosophy PhDs and was skipped. No ESE/McKelvey employment page found (404s), WashU jobs search and DSI site did not load usefully (404/403). Non-CS units, 2nd pass (2026-10-08): Existing SDS +AI record remains the only one; ESE/McKelvey and DSI hiring pages not found in this pass.",
     "checkedUrls": [
       "https://cse.washu.edu/",
       "https://cse.washu.edu/about/employment.html",
@@ -2552,14 +2564,6 @@
       {
         "name": "Department of Statistics and Data Science",
         "url": "https://sds.washu.edu/statistics-data-science-faculty-search"
-      },
-      {
-        "name": "Electrical & Systems Engineering",
-        "url": "https://ese.washu.edu/"
-      },
-      {
-        "name": "+AI cluster search (Arts & Sciences)",
-        "url": "https://sds.washu.edu/cluster-hire-ai-modeling-physical-world-and-living-systems"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -2640,7 +2644,7 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Department recruiting page still describes the 2014-15 cycle; no open positions found on an official page. Non-CS units (2026-10-08): ECE employment page lists an AI circuits and systems tenure-track search (Interfolio) and a hardware-security postdoc; Goergen Institute for Data Science site had a certificate error and no other unit hiring pages were found.",
+    "summary": "Department recruiting page still describes the 2014-15 cycle; no open positions found on an official page. Non-CS units (2026-10-08): ECE employment page lists an AI circuits and systems tenure-track search (Interfolio) and a hardware-security postdoc; Goergen Institute for Data Science site had a certificate error and no other unit hiring pages were found. Non-CS units, 2nd pass (2026-10-08): Re-read ECE page and rendered Interfolio 194449 (open 2026-09-28, review from 2026-12-01; already in jobs.json). Hardware-security postdoc is email-only, GPU power side-channel, not added; Goergen Institute site not reachable for hiring pages.",
     "checkedUrls": [
       "https://cs.rochester.edu/u/www/people/recruit.html",
       "https://www.hajim.rochester.edu/ece/about/jobs.html",
@@ -2693,7 +2697,7 @@
     "state": "TX",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "CS site moved to caicc.utsa.edu with no current CS hiring page; only a 2025-cycle Computer Engineering ad was found. Non-CS units (2026-10-08): The Computer Engineering page lists six positions (Asst Prof Computer Architecture, Asst Prof VLSI/Quantum Computing, Assoc/Full Hardware Cybersecurity, joint AI Security with CS, joint Critical Infrastructure Security with ISC, plus a public-health cluster) with PeopleSoft apply links, but the UT System PeopleSoft portal redirected to an unrelated search page so no posting dates or details could be verified; none added.",
+    "summary": "CS site moved to caicc.utsa.edu with no current CS hiring page; only a 2025-cycle Computer Engineering ad was found. Non-CS units (2026-10-08): The Computer Engineering page lists six positions (Asst Prof Computer Architecture, Asst Prof VLSI/Quantum Computing, Assoc/Full Hardware Cybersecurity, joint AI Security with CS, joint Critical Infrastructure Security with ISC, plus a public-health cluster) with PeopleSoft apply links, but the UT System PeopleSoft portal redirected to an unrelated search page so no posting dates or details could be verified; none added. Non-CS units, 2nd pass (2026-10-08): Page lists six positions, all with review begins December 1, 2025 or deadline 12/31/2025, i.e. prior-cycle ads; PeopleSoft detail pages not verifiable, so none added.",
     "checkedUrls": [
       "https://www.cs.utsa.edu/",
       "https://caicc.utsa.edu/computer-science/",
@@ -2705,7 +2709,7 @@
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "College of AI, Cyber and Computing: Computer Engineering faculty positions",
+        "name": "CAICC Computer Engineering faculty positions",
         "url": "https://caicc.utsa.edu/computer-engineering/academic-positions.html"
       }
     ],
@@ -3074,21 +3078,18 @@
     "state": "PA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "Careers portal listing is paginated and only the first page was readable; no CS faculty posting seen (a CCI-tagged postdoc is a bioengineering lab job, not CS). Non-CS units (2026-10-08): CCI jobs page just points to the Careers portal; the portal shows 2 CCI and 2 Engineering listings but only first-page links were readable, none a CS-PhD faculty target (visible faculty/postdoc are Eye Institute or bio lab).",
+    "summary": "Careers portal listing is paginated and only the first page was readable; no CS faculty posting seen (a CCI-tagged postdoc is a bioengineering lab job, not CS). Non-CS units (2026-10-08): CCI jobs page just points to the Careers portal; the portal shows 2 CCI and 2 Engineering listings but only first-page links were readable, none a CS-PhD faculty target (visible faculty/postdoc are Eye Institute or bio lab). Non-CS units, 2nd pass (2026-10-08): Portal with query=professor returned 0 CCI and 0 Engineering listings; unfiltered list showed only Eye Institute and a non-computing postdoc among readable links. No CS-PhD target found.",
     "checkedUrls": [
       "https://drexel.edu/cci/about/jobs-at-cci/",
       "https://careers.drexel.edu/en-us/listing/",
-      "https://careers.drexel.edu/jobs/search"
+      "https://careers.drexel.edu/jobs/search",
+      "https://careers.drexel.edu/jobs/search?query=professor"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Drexel Careers portal (College of Computing & Informatics / Engineering filters)",
+        "name": "Drexel Careers portal",
         "url": "https://careers.drexel.edu/jobs/search"
-      },
-      {
-        "name": "CCI Jobs",
-        "url": "https://drexel.edu/cci/about/jobs-at-cci/"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -3132,12 +3133,13 @@
     "state": "VA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "W&M Workday board searched for computer/professor/faculty/data science; only a CS postdoc is relevant (recorded); adjunct pools are not current hires. Non-CS units (2026-10-08): No separate non-CS computing units with hiring pages found (data science program sits within A&S); the existing CS postdoc was not re-verified in this pass.",
+    "summary": "W&M Workday board searched for computer/professor/faculty/data science; only a CS postdoc is relevant (recorded); adjunct pools are not current hires. Non-CS units (2026-10-08): No separate non-CS computing units with hiring pages found (data science program sits within A&S); the existing CS postdoc was not re-verified in this pass. Non-CS units, 2nd pass (2026-10-08): Rendered the existing CS postdoc JR101939: still open, posted 30+ days ago. No other computing units found.",
     "checkedUrls": [
       "https://williammary.wd12.myworkdayjobs.com/WM",
       "https://cdsp.wm.edu/computerscience/",
       "https://www.wm.edu/as/datascience",
-      "https://www.wm.edu/as/computerscience/"
+      "https://www.wm.edu/as/computerscience/",
+      "https://williammary.wd12.myworkdayjobs.com/WM/job/Posting-Location---William--Mary/Postdoctoral-Fellow-of-Computer-Science--Robust-and-Adaptive-Intelligence-_JR101939"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -3241,7 +3243,7 @@
     "state": "TX",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Page lists only Fall 2026 postings with deadlines already passed (2026-01-05, 2026-05-15). Non-CS units (2026-10-08): ECE open-positions page lists only a Biosystems Engineering (EE/CompE biosensors) search, not CS-targeted. A cybersecurity ECE ad PDF exists but is no longer on the page and its deadline (reported Aug 31) has passed; Brassring search is JS-driven and only the recent-jobs list was read (no computing postings).",
+    "summary": "Page lists only Fall 2026 postings with deadlines already passed (2026-01-05, 2026-05-15). Non-CS units (2026-10-08): ECE open-positions page lists only a Biosystems Engineering (EE/CompE biosensors) search, not CS-targeted. A cybersecurity ECE ad PDF exists but is no longer on the page and its deadline (reported Aug 31) has passed; Brassring search is JS-driven and only the recent-jobs list was read (no computing postings). Non-CS units, 2nd pass (2026-10-08): ECE page lists only a Biosystems Engineering search (not CS-targeted). CS page lists Fall 2026 searches with deadlines Jan 5 and May 15, 2026 (passed). ECE cyber ad PDF has no readable deadline and is not on the page; not added.",
     "checkedUrls": [
       "https://www.depts.ttu.edu/cs/",
       "https://www.depts.ttu.edu/cs/department/jobs.php",
@@ -3253,12 +3255,12 @@
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Electrical & Computer Engineering Open Positions",
+        "name": "ECE Open Positions",
         "url": "https://www.depts.ttu.edu/ece/department/jobs.php"
       },
       {
-        "name": "TTU Work at Texas Tech faculty positions (Brassring)",
-        "url": "https://sjobs.brassring.com/TGnewUI/Search/Home/Home?partnerid=25898&siteid=5637"
+        "name": "CS Open Positions",
+        "url": "https://www.depts.ttu.edu/cs/department/jobs.php"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -3346,12 +3348,13 @@
     "state": "AZ",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "not_found",
-    "summary": "No hiring page on the school site and no official CS posting located by rendering or search. Non-CS units (2026-10-08): careers.nau.edu renders as an empty shell for search URLs; a search lead mentions a SICCS Computer Engineering assistant professor posting (Job ID 607684) but the official page could not be opened, so nothing was recorded.",
+    "summary": "No hiring page on the school site and no official CS posting located by rendering or search. Non-CS units (2026-10-08): careers.nau.edu renders as an empty shell for search URLs; a search lead mentions a SICCS Computer Engineering assistant professor posting (Job ID 607684) but the official page could not be opened, so nothing was recorded. Non-CS units, 2nd pass (2026-10-08): careers.nau.edu renders empty shells and posting URL returned 404 text; web search surfaced only undated mirrors (Job ID 607684) and an embedded-electronics semiconductor search, none verifiable on the official site.",
     "checkedUrls": [
       "https://nau.edu/school-informatics-computing-cyber-systems/",
       "https://nau.edu/human-resources/employment/",
       "https://careers.nau.edu/jobs?keywords=computer",
-      "https://careers.nau.edu/jobs/assistant-professor-computer-engineering-flagstaff-arizona-united-states"
+      "https://careers.nau.edu/jobs/assistant-professor-computer-engineering-flagstaff-arizona-united-states",
+      "https://careers.nau.edu/jobs/assistant-professor-embedded-electronics-flagstaff-arizona-united-states"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -3370,7 +3373,7 @@
     "state": "GA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Job-openings page still describes a recruitment plan for positions beginning in 2025 with no dates or reachable application links; no current 2026-27 posting found. Non-CS units (2026-10-08): Emory's faculty iCIMS portal renders no listings in headless mode and search found only 2024-era or undated ads; no 2026-27 non-CS posting verified.",
+    "summary": "Job-openings page still describes a recruitment plan for positions beginning in 2025 with no dates or reachable application links; no current 2026-27 posting found. Non-CS units (2026-10-08): Emory's faculty iCIMS portal renders no listings in headless mode and search found only 2024-era or undated ads; no 2026-27 non-CS posting verified. Non-CS units, 2nd pass (2026-10-08): CS openings page appears stale (positions to begin 2025; Interfolio 174513/174520/174521 are prior-cycle ids) so nothing added; no 2026-27 non-CS posting found by search.",
     "checkedUrls": [
       "https://computerscience.emory.edu/about/job-openings.html",
       "https://faculty-emory.icims.com/jobs/search",
@@ -3379,6 +3382,10 @@
     ],
     "deferredUntil": null,
     "relatedUnits": [
+      {
+        "name": "Emory CS job openings",
+        "url": "https://computerscience.emory.edu/about/job-openings.html"
+      },
       {
         "name": "Emory Faculty Positions (iCIMS)",
         "url": "https://faculty-emory.icims.com/jobs/search"
@@ -3417,7 +3424,7 @@
     "state": "GA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Department employment page renders no listed open positions. Non-CS units (2026-10-08): CIS department site shows no hiring page; Robinson careers URLs 404 and search found only past-cycle (2021-2024) postings.",
+    "summary": "Department employment page renders no listed open positions. Non-CS units (2026-10-08): CIS department site shows no hiring page; Robinson careers URLs 404 and search found only past-cycle (2021-2024) postings. Non-CS units, 2nd pass (2026-10-08): Web search surfaced only past-cycle (2016-2024) CIS postings; no current 2026-27 posting found.",
     "checkedUrls": [
       "https://csds.gsu.edu/employment-opportunities/",
       "https://cis.robinson.gsu.edu/",
@@ -3498,7 +3505,7 @@
     "state": "TX",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Hiring index lists no positions; the AI/software tenure-track page is for a Fall 2026 start with a 2025 review date, so it was treated as stale. 2026-10-08: UTEP CS also has a Systems search (utep.edu/cs/hiring/computer_systems.html, stale Fall 2026 text) listed on AcademicJobs #7371617 with a Fall 2027 start; recorded as unverified. The earlier crawl missed that sub-page. Non-CS units (2026-10-08): ECE lists four postings (EE/ECE assistant, full/associate, research AI-driven resource-constrained intelligent systems, microelectronics) on utep.interviewexchange.com, which returned HTTP 403 so none could be read or verified; none added. Existing record utep-cs-asst-prof-systems-2026 points at AcademicJobs and was not re-verified.",
+    "summary": "Hiring index lists no positions; the AI/software tenure-track page is for a Fall 2026 start with a 2025 review date, so it was treated as stale. 2026-10-08: UTEP CS also has a Systems search (utep.edu/cs/hiring/computer_systems.html, stale Fall 2026 text) listed on AcademicJobs #7371617 with a Fall 2027 start; recorded as unverified. The earlier crawl missed that sub-page. Non-CS units (2026-10-08): ECE lists four postings (EE/ECE assistant, full/associate, research AI-driven resource-constrained intelligent systems, microelectronics) on utep.interviewexchange.com, which returned HTTP 403 so none could be read or verified; none added. Existing record utep-cs-asst-prof-systems-2026 points at AcademicJobs and was not re-verified. Non-CS units, 2nd pass (2026-10-08): utep.interviewexchange.com still returns HTTP 403 (Cloudflare); not bypassed, so ECE postings stay unverified. Existing utep-cs-asst-prof-systems-2026 (AcademicJobs URL) not re-verified.",
     "checkedUrls": [
       "https://www.utep.edu/cs/Hiring",
       "https://www.utep.edu/cs/hiring/ai_software.html",
@@ -3553,7 +3560,7 @@
     "state": "MD",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Department new-positions page lists no tenure-track positions, only a generic adjunct call. Non-CS units (2026-10-08): No non-CS hiring pages (information systems, cybersecurity, data) found from the FCSM departments pages or university site; no postings recorded.",
+    "summary": "Department new-positions page lists no tenure-track positions, only a generic adjunct call. Non-CS units (2026-10-08): No non-CS hiring pages (information systems, cybersecurity, data) found from the FCSM departments pages or university site; no postings recorded. Non-CS units, 2nd pass (2026-10-08): Web search found only 2012-2021 Towson computing postings; no current posting located and no non-CS unit hiring page found.",
     "checkedUrls": [
       "https://www.towson.edu/fcsm/departments/computerinfosci/facultystaff/newpositions.html",
       "https://www.towson.edu/fcsm/",
@@ -3572,7 +3579,7 @@
     "state": "SC",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "The department jobs board has no faculty openings and the uscjobs.sc.edu recent-postings list and computer/computer-science searches show no CS or CSE faculty posting (the IIT-department posting 199394 is no longer available). Non-CS units (2026-10-08): ECE department page has no hiring page; uscjobs search results did not render postings in the captured text, so no related-unit postings could be confirmed.",
+    "summary": "The department jobs board has no faculty openings and the uscjobs.sc.edu recent-postings list and computer/computer-science searches show no CS or CSE faculty posting (the IIT-department posting 199394 is no longer available). Non-CS units (2026-10-08): ECE department page has no hiring page; uscjobs search results did not render postings in the captured text, so no related-unit postings could be confirmed. Non-CS units, 2nd pass (2026-10-08): Read uscjobs search for 'professor' pages 1-3, 'computer', 'electrical', 'assistant professor'; no current computing/data/AI/cyber tenure-track posting (CS adjunct pools, business analytics at Aiken/UPS and biostatistics excluded as non-CS-PhD targets; AI & Data Science in Sociology closed 03/12/2026).",
     "checkedUrls": [
       "https://www.cse.sc.edu/jobs",
       "https://uscjobs.sc.edu/postings/search",
@@ -3580,7 +3587,12 @@
       "https://www.sc.edu/study/colleges_schools/engineering_and_computing/",
       "https://www.sc.edu/study/colleges_schools/engineering_and_computing/departments/electrical_engineering/",
       "https://uscjobs.sc.edu/postings/search?query=engineering",
-      "https://uscjobs.sc.edu/postings/search?query=professor"
+      "https://uscjobs.sc.edu/postings/search?query=professor",
+      "https://uscjobs.sc.edu/postings/search?query=computer",
+      "https://uscjobs.sc.edu/postings/search?query=assistant+professor",
+      "https://uscjobs.sc.edu/postings/search?query=professor&page=2",
+      "https://uscjobs.sc.edu/postings/search?query=professor&page=3",
+      "https://uscjobs.sc.edu/postings/search?query=electrical"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -3599,7 +3611,7 @@
     "state": "DC",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Positions page lists a single post, the Bertrand Chair in AI, dated November 14, 2025 (2025-26 cycle), so not recorded as current. Non-CS units (2026-10-08): CS positions page still lists only the Bertrand Chair (existing record). McCourt School and university careers portal did not expose any computing faculty postings in this pass.",
+    "summary": "Positions page lists a single post, the Bertrand Chair in AI, dated November 14, 2025 (2025-26 cycle), so not recorded as current. Non-CS units (2026-10-08): CS positions page still lists only the Bertrand Chair (existing record). McCourt School and university careers portal did not expose any computing faculty postings in this pass. Non-CS units, 2nd pass (2026-10-08): Search found only the Bertrand Chair (existing record) and a Theory of Computing assistant professor post dated Nov 2025 (prior cycle, start Aug 2026; skipped). No new current posting.",
     "checkedUrls": [
       "https://cs.georgetown.edu/positions/",
       "https://careers.georgetown.edu/",
@@ -3687,7 +3699,7 @@
     "state": "MI",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "Department site times out; on the official Wayne Talent site found one CS posting (AI in Health and Medicine) but only 25 of 29 faculty listings loaded. Non-CS units (2026-10-08): Wayne Talent CSOD list only loads ~25 of 163 openings without scrolling, so non-CS units could not be fully read; the visible Academic/Faculty items (library-faculty SIS post, music, medicine) are not CS-PhD targets. Search-engine hits for ECE and business-school TISA posts had no confirmed current-cycle official posting.",
+    "summary": "Department site times out; on the official Wayne Talent site found one CS posting (AI in Health and Medicine) but only 25 of 29 faculty listings loaded. Non-CS units (2026-10-08): Wayne Talent CSOD list only loads ~25 of 163 openings without scrolling, so non-CS units could not be fully read; the visible Academic/Faculty items (library-faculty SIS post, music, medicine) are not CS-PhD targets. Search-engine hits for ECE and business-school TISA posts had no confirmed current-cycle official posting. Non-CS units, 2nd pass (2026-10-08): Search hits (CS systems/SE open rank, TISA business, ECE) were Fall 2026 or undated and not confirmed on an official current-cycle page, so none added; existing CS record not re-verified.",
     "checkedUrls": [
       "https://hr.wayne.edu/jobs",
       "https://waynetalent.csod.com/ux/ats/careersite/2/home?c=waynetalent",
@@ -3843,11 +3855,12 @@
     "state": "OH",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "No employment link on the CS site and the university job board did not render listings; search found no CS posting. Non-CS units (2026-10-08): Board lists 8 full-time faculty postings but the render exposed only one title (Management, not computing); no non-CS computing posting confirmed. The iSchool employment page is 404.",
+    "summary": "No employment link on the CS site and the university job board did not render listings; search found no CS posting. Non-CS units (2026-10-08): Board lists 8 full-time faculty postings but the render exposed only one title (Management, not computing); no non-CS computing posting confirmed. The iSchool employment page is 404. Non-CS units, 2nd pass (2026-10-08): Re-rendered faculty board (8 full-time items) and a 'computer' keyword search (only 1 faculty item); render does not expose titles, so no computing posting could be confirmed.",
     "checkedUrls": [
       "https://www.kent.edu/cs",
       "https://jobs.kent.edu/jobs/search/Faculty",
-      "https://www.kent.edu/ischool/employment"
+      "https://www.kent.edu/ischool/employment",
+      "https://jobs.kent.edu/jobs/search?query=computer"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -3866,7 +3879,7 @@
     "state": "PA",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Page lists only 2025-26 cycle ML/AI and robotics searches with Dec 2025 deadlines; none currently open. Non-CS units (2026-10-08): University faculty-jobs board (10 current postings) has no computing posting (ISE, ChemE, BioE, Physics, etc.); ECE employment page returned 403 so it is blocked.",
+    "summary": "Page lists only 2025-26 cycle ML/AI and robotics searches with Dec 2025 deadlines; none currently open. Non-CS units (2026-10-08): University faculty-jobs board (10 current postings) has no computing posting (ISE, ChemE, BioE, Physics, etc.); ECE employment page returned 403 so it is blocked. Non-CS units, 2nd pass (2026-10-08): Re-read the university faculty board (21 listings, latest posted 2026-10-08): ISE, ChemE, BioE, Physics, Economics, Biostatistics and Health Data Science (public health) and others, none a computing/CS-PhD target. ECE employment page remained 403 (blocked) and was not retried.",
     "checkedUrls": [
       "https://engineering.lehigh.edu/cse",
       "https://engineering.lehigh.edu/cse/contact/job-openings",
@@ -3880,10 +3893,6 @@
       {
         "name": "Lehigh Faculty & Research Jobs",
         "url": "https://facultyjobs.lehigh.edu/faculty"
-      },
-      {
-        "name": "Electrical and Computer Engineering employment",
-        "url": "https://engineering.lehigh.edu/ece/about/ece-employment-opportunities"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -3896,13 +3905,17 @@
     "state": "NV",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Read the UNLV Workday board for computer science, AI, cybersecurity and data science; recorded the cybersecurity/AI lecturer posting and skipped the CS Assistant Professor-in-Residence posting for a Fall 2026 start with no current dates. Non-CS units (2026-10-08): Web search found only the already-recorded cybersecurity/AI lecturer posting; Workday board not re-rendered this run so existing record not re-confirmed.",
+    "summary": "Read the UNLV Workday board for computer science, AI, cybersecurity and data science; recorded the cybersecurity/AI lecturer posting and skipped the CS Assistant Professor-in-Residence posting for a Fall 2026 start with no current dates. Non-CS units (2026-10-08): Web search found only the already-recorded cybersecurity/AI lecturer posting; Workday board not re-rendered this run so existing record not re-confirmed. Non-CS units, 2nd pass (2026-10-08): Rendered the Workday board (138 jobs) and keyword searches for computer/engineering/cybersecurity. Existing cybersecurity lecturer posting R0152399 is still listed; found one CS-department teaching posting (R0150748) missing from jobs.json, still listed as open until filled but states Fall 2026 start and is 30+ days old, so it may be stale.",
     "checkedUrls": [
       "https://www.unlv.edu/cs",
       "https://www.unlv.edu/jobs",
       "https://nshe.wd1.myworkdayjobs.com/UNLV-External?q=computer%20science",
       "https://nshe.wd1.myworkdayjobs.com/en-US/UNLV-External/job/UNLV1-Main-Campus-Las-Vegas/Assistant-Professor-in-Residence--Department-of-Computer-Science--College-of-Engineering--R0150748-_R0150748",
-      "https://www.unlv.edu/"
+      "https://www.unlv.edu/",
+      "https://nshe.wd1.myworkdayjobs.com/UNLV-External",
+      "https://nshe.wd1.myworkdayjobs.com/UNLV-External?q=computer",
+      "https://nshe.wd1.myworkdayjobs.com/UNLV-External?q=engineering",
+      "https://nshe.wd1.myworkdayjobs.com/UNLV-External?q=cybersecurity"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -3986,18 +3999,32 @@
     "state": "DC",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Announcements page lists only a 2024-2025 Professor of Practice marked open and otherwise closed postings; stale, so no current openings recorded. Non-CS units (2026-10-08): gwu.jobs search showed staff postings only and posting 122606 (CS) no longer resolves; faculty postings not surfaced. EMSE trustworthy-AI search seen in web search requires a systems engineering PhD and was skipped.",
+    "summary": "Announcements page lists only a 2024-2025 Professor of Practice marked open and otherwise closed postings; stale, so no current openings recorded. Non-CS units (2026-10-08): gwu.jobs search showed staff postings only and posting 122606 (CS) no longer resolves; faculty postings not surfaced. EMSE trustworthy-AI search seen in web search requires a systems engineering PhD and was skipped. Non-CS units, 2nd pass (2026-10-08): Searched gwu.jobs for professor (51 postings, pages 1-2 read), computer, engineering, data science, AI and cyber. Found a GW School of Business AI-cluster IS tenure-track search (accepts CS PhD) and an NSF TRAILS trustworthy-AI postdoc; no CS-department (SEAS) posting is listed (122606 no longer resolves).",
     "checkedUrls": [
       "https://cs.engineering.gwu.edu/",
       "https://cs.engineering.gwu.edu/announcements-position-openings",
       "https://www.gwu.jobs/postings/search?query=professor",
-      "https://www.gwu.jobs/postings/122606"
+      "https://www.gwu.jobs/postings/122606",
+      "https://www.gwu.jobs/postings/search?query=computer",
+      "https://www.gwu.jobs/postings/search?query=engineering",
+      "https://www.gwu.jobs/postings/search?query=data+science",
+      "https://www.gwu.jobs/postings/search?query=artificial+intelligence",
+      "https://www.gwu.jobs/postings/128943",
+      "https://www.gwu.jobs/postings/128516"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "GW jobs portal (SEAS)",
         "url": "https://www.gwu.jobs/postings/search"
+      },
+      {
+        "name": "School of Business, Information Systems and Technology Management",
+        "url": "https://business.gwu.edu/about/departments/information-systems-technology-management"
+      },
+      {
+        "name": "NSF TRAILS institute",
+        "url": "https://www.gwu.jobs/postings/128516"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -4010,7 +4037,7 @@
     "state": "IL",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "The department employment pages now redirect to the School of Computing home page and the HR portal listing shows only staff jobs by area; no current CS faculty posting could be confirmed on an official page. Non-CS units (2026-10-08): The department employment and ECE jobs URLs now redirect to program home pages and the HRMDirect portal lists only staff; the new ClearCompany portal requires sign-in. No faculty posting could be confirmed on an official page.",
+    "summary": "The department employment pages now redirect to the School of Computing home page and the HR portal listing shows only staff jobs by area; no current CS faculty posting could be confirmed on an official page. Non-CS units (2026-10-08): The department employment and ECE jobs URLs now redirect to program home pages and the HRMDirect portal lists only staff; the new ClearCompany portal requires sign-in. No faculty posting could be confirmed on an official page. Non-CS units, 2nd pass (2026-10-08): Department employment URLs (computer-science/employment, engineering open-positions) redirect to program home pages with no listings; web search surfaced only expired 2024-25 postings. No current faculty posting could be confirmed on an official page.",
     "checkedUrls": [
       "https://www.iit.edu/computer-science/employment",
       "https://www.iit.edu/hr/careers",
@@ -4018,17 +4045,19 @@
       "https://iit.clearcompany.com/careers/portal",
       "https://www.iit.edu/ece/jobs",
       "https://www.iit.edu/computer-science/employment/tenuredtenure-track-faculty",
-      "https://www.iit.edu/computer-science/employment/teaching-faculty"
+      "https://www.iit.edu/computer-science/employment/teaching-faculty",
+      "https://www.iit.edu/school-computing",
+      "https://www.iit.edu/engineering/about/open-positions"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Electrical and Computer Engineering",
-        "url": "https://www.iit.edu/ece"
-      },
-      {
         "name": "School of Computing (CS, ITM, Applied Math)",
         "url": "https://www.iit.edu/school-computing"
+      },
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://www.iit.edu/ece"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -4484,18 +4513,21 @@
     "state": "KS",
     "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
-    "summary": "University jobs site lists an Assistant Professor of Cybersecurity (ECE) with a Dec 1, 2026 priority date; other listings are non-CS. Non-CS units (2026-10-08): Faculty listing shows two ECE security searches (existing Cybersecurity, new Hardware Security); the rendered list showed only 8 of 29 faculty items, so some entries may be unseen. Hardware Security posting states no deadline.",
+    "summary": "University jobs site lists an Assistant Professor of Cybersecurity (ECE) with a Dec 1, 2026 priority date; other listings are non-CS. Non-CS units (2026-10-08): Faculty listing shows two ECE security searches (existing Cybersecurity, new Hardware Security); the rendered list showed only 8 of 29 faculty items, so some entries may be unseen. Hardware Security posting states no deadline. Non-CS units, 2nd pass (2026-10-08): Rendered the faculty list plus keyword searches (computer, electrical, data) to see beyond the first 8 of 29. Only the two existing ECE security searches are CS-relevant; others are mechanical, industrial, solid mechanics, criminal justice, arts, education. Hardware Security posting still states no deadline.",
     "checkedUrls": [
       "https://www.wichita.edu/SoC",
       "https://jobs.wichita.edu",
       "https://jobs.wichita.edu/jobs/search/faculty-search",
       "https://jobs.wichita.edu/jobs/assistant-professor-of-hardware-security-wichita-kansas-united-states",
-      "https://jobs.wichita.edu/jobs/assistant-professor-of-cybersecurity-wichita-kansas-united-states"
+      "https://jobs.wichita.edu/jobs/assistant-professor-of-cybersecurity-wichita-kansas-united-states",
+      "https://jobs.wichita.edu/jobs/search/faculty-search?query=computer",
+      "https://jobs.wichita.edu/jobs/search/faculty-search?query=electrical",
+      "https://jobs.wichita.edu/jobs/search/faculty-search?query=data"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Electrical and Computer Engineering (College of Engineering)",
+        "name": "WSU faculty jobs",
         "url": "https://jobs.wichita.edu/jobs/search/faculty-search"
       }
     ],
@@ -4555,7 +4587,7 @@
     "state": "MO",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Provost career page states there are no currently active faculty searches; the CS department page only links to HR. Non-CS units (2026-10-08): Provost career page lists no active searches; the UM eRecruit portal for UMKC could not be rendered (invalid portal), so HR postings were not checked.",
+    "summary": "Provost career page states there are no currently active faculty searches; the CS department page only links to HR. Non-CS units (2026-10-08): Provost career page lists no active searches; the UM eRecruit portal for UMKC could not be rendered (invalid portal), so HR postings were not checked. Non-CS units, 2nd pass (2026-10-08): UMKC HR careers page only links to the UM eRecruit portal, which could not be read; web search surfaced only an ECE tenure-track lead (Fall 2026 start, third-party board) that was not confirmed on an official page.",
     "checkedUrls": [
       "https://www.umkc.edu/hr/careers/index.html",
       "https://sse.umkc.edu/academics/programs/computer-science-and-information-technology.html",
@@ -4694,7 +4726,7 @@
     "state": "OK",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "One current CS open-rank cybersecurity posting verified; earlier visiting CS and ECE postings now return 404. Non-CS units (2026-10-08): Reviewed the faculty/instructor listing: Mechanical & Aerospace asst prof requires a mech/aero PhD, architecture, biosystems postdoc, business and librarian postings are not CS targets. An engineering-college 'Open-Rank Tenure-Track or Tenured Faculty 210551' and 'Post-Doctoral Fellow AF7753' appear in the list but I could not locate their posting URLs to read them. Existing CS cybersecurity posting is live.",
+    "summary": "One current CS open-rank cybersecurity posting verified; earlier visiting CS and ECE postings now return 404. Non-CS units (2026-10-08): Reviewed the faculty/instructor listing: Mechanical & Aerospace asst prof requires a mech/aero PhD, architecture, biosystems postdoc, business and librarian postings are not CS targets. An engineering-college 'Open-Rank Tenure-Track or Tenured Faculty 210551' and 'Post-Doctoral Fellow AF7753' appear in the list but I could not locate their posting URLs to read them. Existing CS cybersecurity posting is live. Non-CS units, 2nd pass (2026-10-08): Re-read faculty listing and multiple keyword searches; existing CS cybersecurity posting AF9557 is still live. Engineering-college open-rank 210551 (posted Oct 7) and 212552 (Sep 17), and postdoc AF7753, appear in the list but no posting URL could be obtained from the rendered page or web search, so they were not read or recorded.",
     "checkedUrls": [
       "https://jobs.okstate.edu/jobs/open-rank-professor-of-computer-science-af9557-stillwater-oklahoma-united-states",
       "https://jobs.okstate.edu/jobs/visiting-assistant-professor-of-computer-science-af7785-stillwater-oklahoma-united-states",
@@ -4702,12 +4734,16 @@
       "https://jobs.okstate.edu/jobs/assistant-professor-214515-stillwater-oklahoma-united-states",
       "https://jobs.okstate.edu/jobs/assistant-professor-212507-stillwater-oklahoma-united-states",
       "https://jobs.okstate.edu/jobs/postdoctoral-scholar-bf9457-stillwater-oklahoma-united-states",
-      "https://jobs.okstate.edu/jobs/professor-of-professional-practice-laboratory-director-af7850-stillwater-oklahoma-united-states"
+      "https://jobs.okstate.edu/jobs/professor-of-professional-practice-laboratory-director-af7850-stillwater-oklahoma-united-states",
+      "https://jobs.okstate.edu/jobs/search/search-page-oklahoma-state?page=2",
+      "https://jobs.okstate.edu/jobs/search?query=electrical+computer",
+      "https://jobs.okstate.edu/jobs/search?query=open-rank",
+      "https://jobs.okstate.edu/jobs/search?query=tenured+faculty"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "College of Engineering, Architecture and Technology (OSU HR portal)",
+        "name": "OSU HR portal faculty jobs",
         "url": "https://jobs.okstate.edu/jobs/search/search-page-oklahoma-state"
       }
     ],
@@ -4955,10 +4991,13 @@
     "state": "CO",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Read the full DU job listing (72 postings); only CS/ECE adjunct pools appear, no tenure-track, teaching-track, or postdoc CS roles. Non-CS units (2026-10-08): Jobs@DU lists 2 full-time faculty (both Law) and 2 postdoc/research posts; Ritchie School shows 8 postings, which the prior crawl found to be adjunct pools. Only the first page was re-read this run.",
+    "summary": "Read the full DU job listing (72 postings); only CS/ECE adjunct pools appear, no tenure-track, teaching-track, or postdoc CS roles. Non-CS units (2026-10-08): Jobs@DU lists 2 full-time faculty (both Law) and 2 postdoc/research posts; Ritchie School shows 8 postings, which the prior crawl found to be adjunct pools. Only the first page was re-read this run. Non-CS units, 2nd pass (2026-10-08): Re-read Jobs@DU listing with professor and computer keyword filters: full-time faculty are Law only, Ritchie School postings are adjunct pools (ECE, data science, systems engineering), and postdoc/research items are not computing.",
     "checkedUrls": [
       "https://jobs.du.edu/en-us/listing/",
-      "https://ritchieschool.du.edu/computer-science"
+      "https://ritchieschool.du.edu/computer-science",
+      "https://jobs.du.edu/",
+      "https://jobs.du.edu/en-us/listing/?query=professor",
+      "https://jobs.du.edu/en-us/filter/?search-keyword=computer"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -5052,7 +5091,7 @@
     "state": "FL",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "search.cs.miami.edu refuses connections; careers.miami.edu shows only a part-time CS lecturer pool and an ECE open-rank search (not CS, 2025 deadline); the quantum CS posting had a Dec 2025 deadline. Non-CS units (2026-10-08): Keyword searches (professor, artificial intelligence, data science, engineering professor) found only a part-time ECE lecturer, a business-school analytics role, and engineering-PhD-required COE searches; no CS-PhD-targeted posting. Did not open every COE open-rank listing.",
+    "summary": "search.cs.miami.edu refuses connections; careers.miami.edu shows only a part-time CS lecturer pool and an ECE open-rank search (not CS, 2025 deadline); the quantum CS posting had a Dec 2025 deadline. Non-CS units (2026-10-08): Keyword searches (professor, artificial intelligence, data science, engineering professor) found only a part-time ECE lecturer, a business-school analytics role, and engineering-PhD-required COE searches; no CS-PhD-targeted posting. Did not open every COE open-rank listing. Non-CS units, 2nd pass (2026-10-08): Phenom board returned no rendered results for 'computer science' in the browser; no CS-PhD posting found.",
     "checkedUrls": [
       "http://search.cs.miami.edu",
       "https://csc.as.miami.edu/",
@@ -5107,11 +5146,12 @@
     "state": "LA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "The site now redirects to LSU New Orleans; its CS page lists no openings and no LSU New Orleans CS faculty posting was found, but the LSU Workday board was not read. Non-CS units (2026-10-08): Site is now LSU New Orleans; its employment page 404s and no Workday/HR board was located. Nothing recorded.",
+    "summary": "The site now redirects to LSU New Orleans; its CS page lists no openings and no LSU New Orleans CS faculty posting was found, but the LSU Workday board was not read. Non-CS units (2026-10-08): Site is now LSU New Orleans; its employment page 404s and no Workday/HR board was located. Nothing recorded. Non-CS units, 2nd pass (2026-10-08): LSU New Orleans HR pages still 404; web search found only an aggregator snippet of an LSUNO CS posting that could not be confirmed officially.",
     "checkedUrls": [
       "https://www.lsuneworleans.edu/academics/cos/computer-science",
       "https://www.lsuneworleans.edu/about/employment",
-      "https://www.lsuneworleans.edu/"
+      "https://www.lsuneworleans.edu/",
+      "https://www.lsuneworleans.edu/human-resources"
     ],
     "deferredUntil": null,
     "relatedUnits": [],
@@ -5125,7 +5165,7 @@
     "state": "MS",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Read all pages of the USM Cornerstone board; one CS posting (tenure-track Assistant Professor in Computer Science) recorded. Non-CS units (2026-10-08): Read first page of the Cornerstone board (75 faculty postings total); visible titles were non-computing (polymer, music, humanities, one postdoc). Existing CS record not re-confirmed on this pass.",
+    "summary": "Read all pages of the USM Cornerstone board; one CS posting (tenure-track Assistant Professor in Computer Science) recorded. Non-CS units (2026-10-08): Read first page of the Cornerstone board (75 faculty postings total); visible titles were non-computing (polymer, music, humanities, one postdoc). Existing CS record not re-confirmed on this pass. Non-CS units, 2nd pass (2026-10-08): Opened the existing CS requisition 5545 directly; still live (posted 9/11/2026, open until filled).",
     "checkedUrls": [
       "https://usm.csod.com/ux/ats/careersite/1/home?c=usm",
       "https://usm.csod.com/ux/ats/careersite/1/home/requisition/5545?c=usm"
@@ -5213,18 +5253,20 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "iCIMS portal results did not render in the browser; no CS posting found by search. Non-CS units (2026-10-08): iCIMS portal (careers-nyit.icims.com) did not render job results in the browser; no faculty listing could be read and no posting found.",
+    "summary": "iCIMS portal results did not render in the browser; no CS posting found by search. Non-CS units (2026-10-08): iCIMS portal (careers-nyit.icims.com) did not render job results in the browser; no faculty listing could be read and no posting found. Non-CS units, 2nd pass (2026-10-08): Read the iCIMS 'professor' listing (11 results): all nursing, clinical, physics, math, biomedical or Jonesboro osteopathic roles; only CS-adjacent hit was an adjunct (excluded). No CS-PhD posting.",
     "checkedUrls": [
       "https://careers-nyit.icims.com/jobs/search?ss=1&searchKeyword=professor",
       "https://www.nyit.edu/human_resources/careers",
       "https://careers-nyit.icims.com/jobs/search?ss=1&searchKeyword=faculty",
-      "https://www.nyit.edu/engineering_computing/faculty_openings (404)"
+      "https://www.nyit.edu/engineering_computing/faculty_openings (404)",
+      "https://careers-nyit.icims.com/jobs/search?ss=1&searchKeyword=professor&in_iframe=1",
+      "https://careers-nyit.icims.com/jobs/4270/assistant-professor/job?in_iframe=1"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "College of Engineering and Computing Sciences",
-        "url": "https://www.nyit.edu/academics/engineering-and-computing-sciences/"
+        "name": "NYIT careers (iCIMS)",
+        "url": "https://careers-nyit.icims.com/jobs/search?ss=1&searchKeyword=professor"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
@@ -5321,7 +5363,7 @@
     "state": "AR",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Searched UA System Workday for UA Little Rock professor/computer/cyber roles; no CS faculty posting found. Non-CS units (2026-10-08): Not re-crawled this run beyond prior check (UA System Workday showed no CS faculty posting); no new postings.",
+    "summary": "Searched UA System Workday for UA Little Rock professor/computer/cyber roles; no CS faculty posting found. Non-CS units (2026-10-08): Not re-crawled this run beyond prior check (UA System Workday showed no CS faculty posting); no new postings. Non-CS units, 2nd pass (2026-10-08): Web search found no UALR CS posting; Workday not re-opened.",
     "checkedUrls": [
       "https://ualr.edu/computerinformationsciences/",
       "https://uasys.wd5.myworkdayjobs.com/UASYS?hiringCompany=720b21cbdf2401e26b5b1759c4019006&q=professor"
@@ -5456,11 +5498,12 @@
     "state": "LA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "not_found",
-    "summary": "No official CS hiring page found; guessed HR and engineering employment URLs 404, and the College of Business page lists only Fall 2026 CIS positions, which are neither CS nor current. Non-CS units (2026-10-08): latech.edu/employment 404s and no official hiring page for CS/engineering/cyber units was located within budget.",
+    "summary": "No official CS hiring page found; guessed HR and engineering employment URLs 404, and the College of Business page lists only Fall 2026 CIS positions, which are neither CS nor current. Non-CS units (2026-10-08): latech.edu/employment 404s and no official hiring page for CS/engineering/cyber units was located within budget. Non-CS units, 2nd pass (2026-10-08): Louisiana Tech Workday (ulsltu.wd1.myworkdayjobs.com/LATECHCareers) returned a Workday maintenance/500 page. A tenure-track cybersecurity CS posting (R-1559) appears only on third-party ACM (403) so it was not recorded.",
     "checkedUrls": [
       "https://www.latech.edu/engineering-science/index.php/undergraduate-programs/computer-science/",
       "https://www.latech.edu/business/about/employment-opportunities.php",
-      "https://www.latech.edu/employment/"
+      "https://www.latech.edu/employment/",
+      "https://ulsltu.wd1.myworkdayjobs.com/LATECHCareers"
     ],
     "deferredUntil": null,
     "relatedUnits": [],
@@ -5474,13 +5517,17 @@
     "state": "IN",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "cs.indstate.edu has no current openings page content and the jobs.indstate.edu search could not be read; web search found no current CS faculty posting. Non-CS units (2026-10-08): jobs.indstate.edu search shell renders but listings could not be read through the keyword query; no CS/computing posting found.",
+    "summary": "cs.indstate.edu has no current openings page content and the jobs.indstate.edu search could not be read; web search found no current CS faculty posting. Non-CS units (2026-10-08): jobs.indstate.edu search shell renders but listings could not be read through the keyword query; no CS/computing posting found. Non-CS units, 2nd pass (2026-10-08): Paged through all 4 pages of jobs.indstate.edu (102 postings) and the faculty query; only faculty postings were PT, PA, business analytics, construction mgmt, aviation, MSW, English. No CS/computing posting.",
     "checkedUrls": [
       "https://cs.indstate.edu",
       "https://cs.indstate.edu/web/index.php/Careers",
       "https://cs.indstate.edu/info/positions.html",
       "https://jobs.indstate.edu/postings/search?query=computer",
-      "https://jobs.indstate.edu/postings/search"
+      "https://jobs.indstate.edu/postings/search",
+      "https://jobs.indstate.edu/postings/search?query=faculty",
+      "https://jobs.indstate.edu/postings/search?page=2",
+      "https://jobs.indstate.edu/postings/search?page=3",
+      "https://jobs.indstate.edu/postings/search?page=4"
     ],
     "deferredUntil": null,
     "relatedUnits": [],
@@ -5511,7 +5558,7 @@
     "state": "GA",
     "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
-    "summary": "Chair, open-rank data science professor, and data science lecturer are recorded; four other listed postings no longer render (likely closed). Non-CS units (2026-10-08): CCSE page still lists chair, data science lecturer and open-rank data science professor (existing records, live) plus a Computer Science Postdoctoral Researcher (JobOpeningId 300281) that is missing from jobs.json but whose PeopleSoft page would not render, so it was not recorded.",
+    "summary": "Chair, open-rank data science professor, and data science lecturer are recorded; four other listed postings no longer render (likely closed). Non-CS units (2026-10-08): CCSE page still lists chair, data science lecturer and open-rank data science professor (existing records, live) plus a Computer Science Postdoctoral Researcher (JobOpeningId 300281) that is missing from jobs.json but whose PeopleSoft page would not render, so it was not recorded. Non-CS units, 2nd pass (2026-10-08): Postdoc JobOpeningId 300281 still not renderable (PeopleSoft cookie error); recorded as unverified from the CCSE page listing. Existing records not re-confirmed.",
     "checkedUrls": [
       "https://ccse.kennesaw.edu/",
       "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
@@ -5521,7 +5568,7 @@
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "College of Computing and Software Engineering job openings",
+        "name": "CCSE job openings",
         "url": "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php"
       }
     ],

@@ -4964,5 +4964,132 @@
     "lastSeenAt": "2026-10-08",
     "source": "crawl",
     "verified": true
+  },
+  {
+    "id": "cmu-hcii-learning-tech-ar-postdoc-2026",
+    "school": "Carnegie Mellon University",
+    "department": "School of Computer Science: HCII",
+    "title": "Post Doctoral Fellow - Learning Technologies and Augmented Reality",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "ai",
+      "chi"
+    ],
+    "state": "PA",
+    "city": "Pittsburgh",
+    "url": "https://apply.interfolio.com/187348",
+    "summary": "Postdoc in the HCI Institute on AI-assisted intelligent-tutoring authoring and a mixed-reality teacher support tool. Requires a PhD in learning technologies, HCI, educational data science, or a related field.",
+    "postedDate": "2026-05-28",
+    "rolling": true,
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "vt-cs-bhattacharya-ai-biomolecular-postdoc-2026",
+    "school": "Virginia Tech",
+    "department": "Computer Science",
+    "title": "Postdoctoral Associate (AI in Biomolecular Modeling)",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "ai",
+      "bio"
+    ],
+    "state": "VA",
+    "city": "Blacksburg",
+    "url": "https://jobs.apply.vt.edu/jobs/postdoctoral-associate-blacksburg-virginia-united-states-3c5f0d5a-f399-47a2-a53e-9743be88ee8b",
+    "summary": "Multiple postdocs in a Computer Science research group developing AI and scientific machine learning for biomolecular modeling and drug discovery. PhD in CS or related fields, awarded within four years.",
+    "reviewBegins": "2026-05-25",
+    "rolling": true,
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "uw-bothell-css-asst-prof-2026",
+    "school": "University of Washington",
+    "department": "University of Washington Bothell, School of STEM, Computing & Software Systems",
+    "title": "Assistant Professor - Computing & Software Systems",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "sec",
+      "ai",
+      "ops",
+      "hpc",
+      "soft",
+      "mod"
+    ],
+    "state": "WA",
+    "city": "Bothell",
+    "url": "https://apply.interfolio.com/190493",
+    "summary": "Tenure-track position in UW Bothell's Computing & Software Systems department, prioritizing cybersecurity, AI, systems, software engineering, cloud/edge computing, and databases. Requires a doctorate in computer science or a related field.",
+    "reviewBegins": "2026-10-15",
+    "postedDate": "2026-08-10",
+    "rolling": true,
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "northwestern-mccormick-ai-innovation-2026",
+    "school": "Northwestern University",
+    "department": "McCormick School of Engineering, with the Northwestern Innovation Institute",
+    "title": "Open Rank Faculty Position in AI Innovation",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai"
+    ],
+    "state": "IL",
+    "city": "Evanston",
+    "url": "https://niinstitute.kellogg.northwestern.edu/job-postings/open-rank-faculty-position-ai-innovation",
+    "summary": "Open-rank tenure-track or tenured position, housed in any McCormick department, for a scholar studying how AI reshapes innovation, scientific discovery, organizational decision-making, or networks, starting AY 2027-28.",
+    "reviewBegins": "2026-09-01",
+    "rolling": true,
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "ucr-cse-postdoc-system-security-2026",
+    "school": "Univ. of California - Riverside",
+    "department": "Computer Science & Engineering, Bourns College of Engineering",
+    "title": "Postdoctoral Scholar in Computer Science & Engineering FY26-27 (system security)",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "sec"
+    ],
+    "state": "CA",
+    "city": "Riverside",
+    "rolling": true,
+    "postedDate": "2026-09-11",
+    "startDate": "2027-01-01",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://aprecruit.ucr.edu/JPF02353",
+    "summary": "Two-year postdoc in system security (vulnerability discovery, program analysis), also open to all areas of CSE. Applications accepted through June 30, 2027; last review date was Sep 25, 2026.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "gwu-trails-ai-postdoc-2026",
+    "school": "George Washington University",
+    "department": "NSF Institute for Trustworthy AI in Law and Society (TRAILS)",
+    "title": "Postdoctoral Associate, Trustworthy AI (TRAILS)",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "ai"
+    ],
+    "state": "DC",
+    "city": "Washington",
+    "url": "https://www.gwu.jobs/postings/128516",
+    "summary": "One- or two-year postdoctoral fellowships for research on trustworthy AI techniques, tools, design and policy, in any related area; flexible start dates. PhD required; no deadline stated.",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
   }
 ]
