@@ -46,28 +46,23 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   await input.fill('');
 
   // Historical programs are clearly labeled and independently filterable.
-  const statusSelect = page.locator('#status-select');
-  await statusSelect.selectOption('historical');
+  await input.fill('status: historical');
   const historicalCards = page.locator('.grant-card');
   expect(await historicalCards.count()).toBeGreaterThanOrEqual(6);
   await expect(page.locator('.grant-status-badge').first()).toHaveText('Historical');
-  await expect(page).toHaveURL(/status=historical/);
-  await statusSelect.selectOption('all');
+  await expect(page).toHaveURL(/q=status/);
 
-  // Test Audience Filter: Faculty
-  const audienceSelect = page.locator('#audience-select');
-  await audienceSelect.selectOption('faculty');
+  await input.fill('audience: faculty');
   const facultyCount = await page.locator('.grant-card').count();
   expect(facultyCount).toBeGreaterThan(0);
   expect(facultyCount).toBeLessThan(initialCount);
 
-  // Test Sponsor Filter: Industry
-  const sponsorSelect = page.locator('#sponsor-category-select');
-  await sponsorSelect.selectOption('industry');
+  await input.fill('audience: faculty category: industry');
   const indCount = await page.locator('.grant-card').count();
   expect(indCount).toBeGreaterThan(0);
 
   // Test Examples Chip Click
+  await page.keyboard.press('Escape');
   const exampleBtn = page.locator('#grants-examples button').first();
   await exampleBtn.click();
   expect(await input.inputValue()).not.toBe('');
@@ -85,4 +80,33 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   await page.locator('.search-intro h2').click();
   await page.keyboard.press('/');
   await expect(input).toBeFocused();
+});
+
+test('awards keyword help fits mobile and legacy filters become editable search text', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('grants.html?audience=phd&sponsor=industry');
+  const input = page.locator('#grants-search');
+  await expect(input).toHaveValue('audience: phd category: industry');
+  await expect(page.locator('.grant-card').first()).toBeVisible();
+  await expect(page.locator('.search-filters select')).toHaveCount(2);
+  await page.reload();
+  await expect(input).toHaveValue('audience: phd category: industry');
+
+  const help = page.getByRole('button', { name: 'Search keywords and examples' });
+  await help.click();
+  const panel = page.locator('#grants-search-help');
+  await expect(panel).toBeVisible();
+  await expect(panel).toContainText('deadline: rolling');
+  const bounds = await panel.boundingBox();
+  expect(bounds.x).toBeGreaterThanOrEqual(0);
+  expect(bounds.x + bounds.width).toBeLessThanOrEqual(390);
+  await page.getByRole('button', { name: 'Close help' }).click();
+  await expect(panel).toBeHidden();
+
+  await input.fill('audience: phd sponsor: Goo');
+  await page.getByRole('option', { name: /Google/ }).first().click();
+  await expect(input).toHaveValue('audience: phd sponsor: Google');
+  await expect(page.locator('.grant-card').first()).toBeVisible();
+  await input.fill('');
+  await expect(page.locator('.grant-card').nth(40)).toBeVisible();
 });

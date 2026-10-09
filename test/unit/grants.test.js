@@ -138,3 +138,21 @@ test('grants suggestions extract awards, sponsors, topics, and audiences', async
 
   assert.ok(suggestions.sponsors.some(s => s.label.includes('NSF') || s.label.includes('Google') || s.label.includes('DARPA')));
 });
+
+test('keywords replace audience, category, topic, deadline, and status dropdowns', async () => {
+  const grants = JSON.parse(await fs.readFile(new URL('../../public/grants.json', import.meta.url), 'utf8'));
+  const ids = list => list.map(grant => grant.id);
+  for (const [query, filters] of [
+    ['audience: students', { audience: 'students' }],
+    ['audience: phd category: industry', { audience: 'phd', sponsorCategory: 'industry' }],
+    ['category: foundation', { sponsorCategory: 'foundation' }],
+    ['category: society', { sponsorCategory: 'society' }],
+    ['deadline: rolling', { deadlineFilter: 'rolling' }],
+    ['deadline: fixed', { deadlineFilter: 'fixed' }],
+    ['deadline: 7', { deadlineFilter: '7' }],
+    ['status: historical', { status: 'historical' }],
+    ['status: all', {}]
+  ]) assert.deepEqual(ids(filterGrants(grants, { query })), ids(filterGrants(grants, filters)), query);
+  assert.ok(filterGrants(grants, { query: 'sponsor: NSF audience: faculty' }).length > 0);
+  assert.ok(filterGrants(grants, { query: 'audience: faculty,phd' }).length > filterGrants(grants, { query: 'audience: faculty' }).length);
+});

@@ -6,7 +6,7 @@ import {
   buildGrantEmailUrl
 } from '../../src/grants/submission.js';
 
-test('grants submission helper formats reviewable JSON and URLs', () => {
+test('grants submission helper formats readable text and URLs', () => {
   const submission = {
     submissionType: 'new_award_proposal',
     officialUrl: 'https://example.com/rfp',
@@ -15,8 +15,9 @@ test('grants submission helper formats reviewable JSON and URLs', () => {
   };
 
   const content = buildGrantSubmissionContent(submission);
-  assert.ok(content.includes('"officialUrl": "https://example.com/rfp"'));
-  assert.ok(content.includes('"awardName": "Example Award"'));
+  assert.ok(content.includes('Official URL: https://example.com/rfp'));
+  assert.ok(content.includes('Award name: Example Award'));
+  assert.ok(content.includes('Submission type: new award proposal'));
 
   const githubUrl = buildGrantGithubIssueUrl('Example Award (https://example.com/rfp)', content);
   assert.ok(githubUrl.startsWith('https://github.com/dynaroars/cspicks/issues/new?'));

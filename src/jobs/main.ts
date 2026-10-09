@@ -4,18 +4,16 @@
 import { DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, TRACK_LABELS, VISA_FILTER_LABELS, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, stateCounts } from './jobs-data.js';
 import { renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
 import { exportFileName, jobsToMarkdown, restoreStarredIds } from './jobs-export.js';
-import { createMultiSelect, createSelection } from './multi-select.js';
-import { STATE_TILE_ROWS, US_STATES } from './states.js';
+import { STATE_TILE_ROWS, US_STATES, resolveState } from './states.js';
 import { createSuggestionBox, rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
 import { areaLabels, escapeHtml } from '../shared.js';
 import { createFavoritesStore, favoritesSelect, onFavoriteChange, onlyFavorites, prioritizeFavorites, updateFavoritesCount, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
-import { keywordHelpIcon } from '../search-keywords.js';
+import { keywordSuggestions, mountKeywordHelp, parseKeywordQuery, restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadData } from '../data.js';
-import type { JobFilters, JobSort, StatusFilter } from './jobs-data.js';
-import type { MultiSelect } from './multi-select.js';
+import type { JobFilters, JobSort } from './jobs-data.js';
 import type { RankLookup, SchoolRank } from './jobs-render.js';
 import type { Job } from '../types.js';
 import type { createSuggestionBox as CreateSuggestionBox } from '../suggestion-box.js';
@@ -33,37 +31,17 @@ const restoreInput = document.querySelector<HTMLInputElement>('#restore-favorite
 const restoreNote = document.getElementById('jobs-restore-note')!;
 const mapClear = document.querySelector<HTMLButtonElement>('#clear-map-states')!;
 
-/** Filters that accept several values: URL param, dropdown id, accessible name, count phrase. States have no
- * dropdown: the tile map picks them. */
-const MULTI_FILTERS = [
-  ['track', 'track-select', 'Position type', 'position types'],
-  ['dept', 'dept-select', 'Hiring unit', 'departments'],
-  ['level', 'level-select', 'Rank', 'ranks'],
-  ['area', 'area-select', 'Research area', 'areas'],
-  ['state', null, 'State', 'states'],
-  ['visa', 'visa-select', 'Visa sponsorship', 'visa options']
-] as const;
-type MultiKey = typeof MULTI_FILTERS[number][0];
-const multi = {} as Record<MultiKey, MultiSelect>;
-
 let allJobs: Job[] = [];
 let suggestions: ReturnType<typeof CreateSuggestionBox>;
 let schoolRanks = new Map<string, SchoolRank>();
 const ranks: RankLookup = school => schoolRanks.get(school);
 const rankOf = (school: string) => schoolRanks.get(school)?.rank;
 
-const EXAMPLES = ['Assistant professor', 'Teaching track', 'Postdoc', 'dept: information', 'dept: ece', 'area: security', 'area: machine learning', 'loc: california', 'loc: texas', 'visa: possible', 'status: closed'];
+const EXAMPLES = ['Assistant professor', 'Teaching track', 'Postdoc', 'dept: information', 'dept: ece', 'area: security', 'area: "machine learning"', 'loc: california', 'loc: texas', 'visa: possible', 'status: closed'];
 
 function state() {
   return {
     query: input.value.trim(),
-    track: multi.track.values(),
-    level: multi.level.values(),
-    dept: multi.dept.values(),
-    area: multi.area.values(),
-    state: multi.state.values(),
-    visa: multi.visa.values(),
-    status: select('status-select').value as StatusFilter,
     sortBy: select('sort-select').value as JobSort,
     view: select('view-select').value,
     favorites: select('favorites-select').value
@@ -72,11 +50,9 @@ function state() {
 
 function updateUrl(current: ReturnType<typeof state>) {
   const next = new URLSearchParams();
-  const defaults = { status: 'active', sortBy: 'deadline', view: 'position', favorites: 'all' };
+  const defaults = { sortBy: 'deadline', view: 'position', favorites: 'all' };
   const names: Record<string, string> = { sortBy: 'sort' };
   if (current.query) next.set('q', current.query);
-  // Several choices share one comma-separated param (`state=VA,MD`).
-  MULTI_FILTERS.forEach(([key]) => { if (current[key].length) next.set(key, current[key].join(',')); });
   (Object.keys(defaults) as Array<keyof typeof defaults>).forEach(key => {
     if (current[key] !== defaults[key]) next.set(names[key] || key, current[key]);
   });
@@ -99,16 +75,18 @@ function render() {
   const shown = byFavorites(filterJobs(allJobs, filters));
   // The map ignores its own state filter so every state keeps a count.
   const counts = stateCounts(byFavorites(filterJobs(allJobs, filters, true)));
-  mapElement.innerHTML = renderStateMap(STATE_TILE_ROWS, counts, current.state);
-  mapClear.hidden = !current.state.length;
-  mapClear.textContent = `Clear ${current.state.length === 1 ? US_STATES[current.state[0]!] : `${current.state.length} states`}`;
+  const locations = parseKeywordQuery(current.query, JOBS_KEYWORD_SPECS).filters.loc || [];
+  const selectedStates = locations.flatMap(value => value.split(',')).map(value => resolveState(value.trim())).filter((value): value is string => Boolean(value));
+  mapElement.innerHTML = renderStateMap(STATE_TILE_ROWS, counts, selectedStates);
+  mapClear.hidden = !selectedStates.length;
+  mapClear.textContent = `Clear ${selectedStates.length === 1 ? US_STATES[selectedStates[0]!] : `${selectedStates.length} states`}`;
 
   const now = Date.now();
   if (!shown.length) {
     results.innerHTML = `<div class="jobs-empty">
       <h3>${favoritesOnly ? 'No starred positions match' : allJobs.length ? 'No matching positions' : 'No postings yet'}</h3>
       <p>${favoritesOnly ? 'Star a posting with the ☆ button to keep it here, or switch back to “All items”.' : allJobs.length
-        ? 'Try broadening your search, choosing “All postings”, or clearing some filters.'
+        ? 'Try broadening your search, searching “status: all”, or clearing some filters.'
         : 'Postings are added as department hiring pages are crawled and as people submit them.'}
         You can also <a href="jobs-submit.html">submit a posting</a>.</p>
       ${allJobs.length ? '<button type="button" class="btn-secondary" id="reset-jobs-filters">Reset all filters</button>' : ''}
@@ -119,7 +97,8 @@ function render() {
     results.innerHTML = shown.map(job => renderJobCard(job, ranks, favorites.isFavorite, now)).join('');
   }
 
-  const label = current.status === 'active' ? 'active ' : current.status === 'closed' ? 'closed ' : '';
+  const status = parseKeywordQuery(current.query, JOBS_KEYWORD_SPECS).filters.status?.[0] || 'active';
+  const label = status === 'active' ? 'active ' : status === 'closed' ? 'closed ' : '';
   const schools = new Set(shown.map(job => job.school)).size;
   statusText.textContent = `Showing ${shown.length} ${label}position${shown.length === 1 ? '' : 's'}${shown.length ? ` at ${schools} school${schools === 1 ? '' : 's'}` : ''} of ${allJobs.length} listed`;
   countElement.textContent = `${shown.length} position${shown.length === 1 ? '' : 's'}`;
@@ -127,36 +106,19 @@ function render() {
   trackView(current.query ? 'search-results' : 'default', 'jobs');
 }
 
-function setFilter(key: MultiKey, values: string[]) {
-  multi[key].setValues(values);
+function setFilter(key: string, values: string[]) {
+  input.value = setQueryKeyword(input.value, key, values, JOBS_KEYWORD_SPECS);
   render();
+  suggestions.close();
 }
 
 function populateOptions() {
-  const entries: Record<MultiKey, Array<[string, string]>> = {
-    track: Object.entries(TRACK_LABELS),
-    dept: Object.entries(DEPARTMENT_LABELS),
-    level: Object.entries(LEVEL_LABELS),
-    area: Object.entries(areaLabels).sort((a, b) => a[1].localeCompare(b[1])),
-    state: Object.entries(US_STATES),
-    visa: Object.entries(VISA_FILTER_LABELS)
-  };
-  MULTI_FILTERS.forEach(([key, id, label, plural]) => {
-    multi[key] = id ? createMultiSelect(document.getElementById(id) as HTMLDetailsElement, { label, plural, options: entries[key], onChange: render }) : createSelection();
-    // Older links carry a single value; a comma list restores several.
-    const known = new Set(entries[key].map(([value]) => value));
-    multi[key].setValues((params.get(key) || '').split(',').filter(value => known.has(value)));
-  });
-
   select('favorites-select').value = params.get('favorites') === 'only' ? 'only' : 'all';
-  const restore: Array<[string, string]> = [['status', 'status-select'], ['view', 'view-select']];
-  restore.forEach(([param, id]) => {
-    const value = params.get(param);
-    if (value && [...select(id).options].some(option => option.value === value)) select(id).value = value;
-  });
+  const view = params.get('view');
+  if (view === 'school') select('view-select').value = view;
   const sort = params.get('sort');
   if (sort && (JOB_SORTS as string[]).includes(sort)) select('sort-select').value = sort;
-  input.value = params.get('q') || '';
+  input.value = restoreKeywordQuery(params, { track: 'track', dept: 'dept', level: 'level', area: 'area', state: 'loc', visa: 'visa', status: 'status' });
 }
 
 function buildSuggestions() {
@@ -166,6 +128,14 @@ function buildSuggestions() {
     emptyText: 'No matching school, area, or state',
     getGroups: query => {
       const items = jobsSuggestions(allJobs);
+      const choices = (labels: Record<string, string>) => Object.entries(labels).map(([value, label]) => ({ value, label, detail: 'Search filter' }));
+      const scoped = keywordSuggestions(input.value, JOBS_KEYWORD_SPECS, {
+        school: items.schools, area: Object.entries(areaLabels).map(([value, label]) => ({ value, label, detail: 'Research area' })),
+        loc: items.states, track: choices(TRACK_LABELS), level: choices(LEVEL_LABELS), dept: choices(DEPARTMENT_LABELS), visa: choices({ ...VISA_FILTER_LABELS, possible: 'Anything but no sponsorship' }),
+        status: choices({ active: 'Active postings', closed: 'Closed postings', all: 'All postings' }),
+        favorites: choices({ only: 'Starred postings only' })
+      });
+      if (scoped) return scoped;
       return [
         ['Schools', rankSuggestions(items.schools, query, 8)],
         ['Research areas', rankSuggestions(items.areas, query, 5)],
@@ -174,7 +144,7 @@ function buildSuggestions() {
       ];
     },
     onSelect: item => {
-      input.value = item.label;
+      input.value = item.value || item.label;
       render();
     }
   });
@@ -183,26 +153,26 @@ function buildSuggestions() {
 function setupEvents() {
   const resetFilters = () => {
     input.value = '';
-    MULTI_FILTERS.forEach(([key]) => multi[key].setValues([]));
-    select('status-select').value = 'active';
     select('sort-select').value = 'deadline';
     select('view-select').value = 'position';
     select('favorites-select').value = 'all';
     render();
     input.focus();
   };
-  ['status-select', 'sort-select', 'view-select', 'favorites-select']
+  ['sort-select', 'view-select', 'favorites-select']
     .forEach(id => select(id).addEventListener('change', render));
 
   // Map tiles add or remove a state, so several can be picked; chips on a card narrow to just that value.
   mapElement.addEventListener('click', event => {
     const tile = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-state]') : null;
     if (!tile) return;
-    multi.state.toggle(tile.dataset.state!);
-    render();
+    const locations = parseKeywordQuery(input.value, JOBS_KEYWORD_SPECS).filters.loc || [];
+    const values = locations.flatMap(value => value.split(',')).map(value => resolveState(value.trim()) || value.trim());
+    const code = tile.dataset.state!;
+    setFilter('loc', values.includes(code) ? values.filter(value => value !== code) : [...values, code]);
   });
 
-  mapClear.addEventListener('click', () => setFilter('state', []));
+  mapClear.addEventListener('click', () => setFilter('loc', []));
   exportButton.addEventListener('click', exportFavorites);
   document.getElementById('restore-favorites')!.addEventListener('click', () => restoreInput.click());
   restoreInput.addEventListener('change', () => {
@@ -217,14 +187,13 @@ function setupEvents() {
     if (target.closest('#reset-jobs-filters')) return resetFilters();
     const school = target.closest<HTMLElement>('[data-search-school]');
     if (school) {
-      input.value = `school: "${school.dataset.searchSchool}"`;
-      render();
+      setFilter('school', [school.dataset.searchSchool!]);
       return window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     const area = target.closest<HTMLElement>('[data-search-area]');
     if (area) return setFilter('area', [area.dataset.searchArea!]);
     const stateButton = target.closest<HTMLElement>('[data-state]');
-    if (stateButton) setFilter('state', [stateButton.dataset.state!]);
+    if (stateButton) setFilter('loc', [stateButton.dataset.state!]);
   });
 
   document.getElementById('jobs-examples')!.innerHTML = EXAMPLES.map(example =>
@@ -315,10 +284,8 @@ async function init() {
     populateOptions();
     suggestions = buildSuggestions();
     input.disabled = false;
-    input.placeholder = 'Search schools, areas, states, or position types (e.g. Georgia Tech, security, teaching track)';
-    const searchBox = input.closest<HTMLElement>('.universal-search')!;
-    searchBox.classList.add('has-search-help');
-    searchBox.insertAdjacentHTML('afterbegin', keywordHelpIcon(JOBS_KEYWORD_SPECS, 'jobs-search-help'));
+    input.placeholder = 'Search jobs or use keywords: track: teaching loc: texas';
+    mountKeywordHelp(input, JOBS_KEYWORD_SPECS, 'jobs-search-help', 'track: teaching loc: TX,VA level: assistant');
     wireFavoriteToggles(results, favorites);
     onFavoriteChange(results, favorites, render);
     results.addEventListener('click', event => {

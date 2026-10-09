@@ -78,7 +78,10 @@ test('conference submissions produce reviewable email and GitHub issue links', (
     entry: { name: 'PLDI', year: 2027, venueKeys: ['pldi'], deadline: '2026-11-08' }
   };
   const content = buildConferenceSubmissionContent(submission);
-  assert.deepEqual(JSON.parse(content), submission);
+  assert.match(content, /Type: correction/);
+  assert.match(content, /Target:\nName: PLDI\n\nYear: 2027/);
+  assert.match(content, /Venue keys: pldi/);
+  assert.match(content, /Deadline: 2026-11-08/);
 
   const email = new URL(buildConferenceEmailUrl('PLDI 2027', content));
   assert.equal(email.protocol, 'mailto:');
@@ -89,5 +92,6 @@ test('conference submissions produce reviewable email and GitHub issue links', (
   const issue = new URL(buildConferenceGithubIssueUrl('PLDI 2027', content));
   assert.equal(issue.origin + issue.pathname, 'https://github.com/dynaroars/cspicks/issues/new');
   assert.match(issue.searchParams.get('title'), /PLDI 2027/);
-  assert.match(issue.searchParams.get('body'), /```json/);
+  assert.ok(issue.searchParams.get('body').includes(content));
+  assert.doesNotMatch(issue.searchParams.get('body'), /```/);
 });

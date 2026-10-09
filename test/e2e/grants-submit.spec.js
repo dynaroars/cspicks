@@ -45,6 +45,8 @@ test('grants new submission is a single free-text box, with optional detailed fi
   const url = new URL(await page.evaluate(() => window.__opened));
   expect(url.searchParams.get('title')).toContain('https://example.org/award');
   expect(url.searchParams.get('body')).toContain('international students');
+  expect(url.searchParams.get('body')).not.toContain('```');
+  expect(url.searchParams.get('body')).not.toContain('"notes"');
 
   await page.locator('#quick-details-toggle').click();
   await expect(page.locator('#structured-fields')).toBeVisible();

@@ -3,7 +3,7 @@
  * Handles dataset loading, querying, structured filtering, and autocomplete indexing.
  */
 
-import { matchesKeyword, parseKeywordQuery } from '../search-keywords.js';
+import { matchesKeywordOptions, parseKeywordQuery } from '../search-keywords.js';
 import type { KeywordSpec } from '../search-keywords.js';
 import { FAVORITES_KEYWORD_SPEC } from '../favorites.js';
 import type { Grant } from '../types.js';
@@ -15,7 +15,9 @@ export const GRANTS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'audience', aliases: ['who'], example: 'audience: postdoc', description: 'Who the award is for (faculty, PhD, undergrad, postdoc)' },
   { key: 'topic', aliases: ['area'], example: 'topic: AI', description: 'Research topic or area covered' },
   { key: 'loc', aliases: ['location', 'state'], example: 'loc: California', description: 'Eligible state/jurisdiction, for state-specific awards' },
-  { key: 'status', example: 'status: historical', description: '"current" (default) or "historical" (discontinued) awards' },
+  { key: 'category', aliases: ['sponsor-category'], example: 'category: industry', description: 'Sponsor category: government, industry, foundation, or society' },
+  { key: 'deadline', example: 'deadline: rolling', description: 'rolling / open, fixed annual, or month number (1–12)' },
+  { key: 'status', example: 'status: historical', description: '"all" (default), "current", or "historical" (discontinued) awards' },
   FAVORITES_KEYWORD_SPEC
 ];
 
@@ -103,10 +105,33 @@ export async function loadGrantsData(): Promise<Grant[]> {
   return cachedGrants;
 }
 
-/**
- * @param {Grant[]} grants
- * @param {{query?: string, audience?: string, sponsorCategory?: string, status?: string, topic?: string, deadlineFilter?: string, sortBy?: string}} [filters]
- */
+function audienceMatches(grant: Grant, value: string) {
+  if (value === 'all') return true;
+  const text = grant.targetAudience.join(' ').toLowerCase();
+  if (value === 'students') return /student|phd|undergraduate|doctoral/.test(text);
+  if (value === 'phd') return /phd|doctoral/.test(text);
+  if (value === 'undergrad') return text.includes('undergraduate');
+  if (value === 'postdoc') return /postdoc|fellow/.test(text);
+  return text.includes(value);
+}
+
+function categoryMatches(grant: Grant, value: string) {
+  if (value === 'all') return true;
+  const text = grant.sponsorCategory.toLowerCase();
+  if (value === 'foundation') return /foundation|non-profit/.test(text);
+  if (value === 'society') return /society|professional/.test(text);
+  return text.includes(value);
+}
+
+function deadlineMatches(grant: Grant, value: string) {
+  if (value === 'all') return true;
+  if (grant.status === 'historical') return false;
+  const rolling = grant.deadlineMonth === 0 || /rolling/i.test(grant.deadline);
+  if (value === 'rolling') return rolling;
+  if (value === 'fixed') return !rolling;
+  return !Number.isNaN(Number(value)) && grant.deadlineMonth === Number(value);
+}
+
 export function filterGrants(grants: Grant[], {
   query = '',
   audience = 'all',
@@ -123,50 +148,19 @@ export function filterGrants(grants: Grant[], {
     // Program status filter. Records without a status are treated as current.
     if (status === 'historical' && grant.status !== 'historical') return false;
     if (status === 'current' && grant.status === 'historical') return false;
-    if (!matchesKeyword(keywordFilters.status, grant.status === 'historical' ? 'historical' : 'current')) return false;
-    if (!matchesKeyword(keywordFilters.sponsor, grant.sponsor)) return false;
-    if (!matchesKeyword(keywordFilters.audience, (grant.targetAudience || []).join(' '))) return false;
-    if (!matchesKeyword(keywordFilters.topic, (grant.topics || []).join(' '))) return false;
-    if (!matchesKeyword(keywordFilters.loc, [grant.locationLabel, ...(grant.locations || [])].filter(Boolean).join(' '))) return false;
+    if (!matchesKeywordOptions(keywordFilters.status, value => value === 'all' || value === (grant.status === 'historical' ? 'historical' : 'current'))) return false;
+    if (!matchesKeywordOptions(keywordFilters.sponsor, value => grant.sponsor.toLowerCase().includes(value))) return false;
+    if (!matchesKeywordOptions(keywordFilters.audience, value => audienceMatches(grant, value))) return false;
+    if (!matchesKeywordOptions(keywordFilters.category, value => categoryMatches(grant, value))) return false;
+    if (!matchesKeywordOptions(keywordFilters.topic, value => grant.topics.some(topic => topic.toLowerCase().includes(value)))) return false;
+    if (!matchesKeywordOptions(keywordFilters.loc, value => [grant.locationLabel, ...(grant.locations || [])].filter(Boolean).join(' ').toLowerCase().includes(value))) return false;
+    if (!matchesKeywordOptions(keywordFilters.deadline, value => deadlineMatches(grant, value))) return false;
 
-    // Audience filter
-    if (audience !== 'all') {
-      const auds = (grant.targetAudience || []).map(a => a.toLowerCase());
-      if (audience === 'faculty' && !auds.some(a => a.includes('faculty'))) return false;
-      if (audience === 'students' && !auds.some(a => a.includes('student') || a.includes('phd') || a.includes('undergraduate') || a.includes('doctoral'))) return false;
-      if (audience === 'phd' && !auds.some(a => a.includes('phd') || a.includes('doctoral'))) return false;
-      if (audience === 'undergrad' && !auds.some(a => a.includes('undergraduate'))) return false;
-      if (audience === 'postdoc' && !auds.some(a => a.includes('postdoc') || a.includes('fellow'))) return false;
-    }
-
-    // Sponsor Category filter
-    if (sponsorCategory !== 'all') {
-      const cat = (grant.sponsorCategory || '').toLowerCase();
-      if (sponsorCategory === 'government' && !cat.includes('government')) return false;
-      if (sponsorCategory === 'industry' && !cat.includes('industry')) return false;
-      if (sponsorCategory === 'foundation' && !cat.includes('foundation') && !cat.includes('non-profit')) return false;
-      if (sponsorCategory === 'society' && !cat.includes('society') && !cat.includes('professional')) return false;
-    }
-
-    // Topic filter
-    if (topic !== 'all') {
-      const topics = (grant.topics || []).map(t => t.toLowerCase());
-      const targetTopic = topic.toLowerCase();
-      if (!topics.some(t => t.includes(targetTopic) || targetTopic.includes(t))) return false;
-    }
-
-    // Deadline / Timing filter
-    if (deadlineFilter !== 'all') {
-      if (grant.status === 'historical') return false;
-      if (deadlineFilter === 'rolling') {
-        if (grant.deadlineMonth !== 0 && !grant.deadline.toLowerCase().includes('rolling')) return false;
-      } else if (deadlineFilter === 'fixed') {
-        if (grant.deadlineMonth === 0 || grant.deadline.toLowerCase().includes('rolling')) return false;
-      } else if (!Number.isNaN(Number(deadlineFilter))) {
-        const monthNum = Number(deadlineFilter);
-        if (grant.deadlineMonth !== monthNum) return false;
-      }
-    }
+    // Retain the pure filter API for callers using structured options.
+    if (!audienceMatches(grant, audience)) return false;
+    if (!categoryMatches(grant, sponsorCategory)) return false;
+    if (topic !== 'all' && !grant.topics.some(value => value.toLowerCase().includes(topic.toLowerCase()) || topic.toLowerCase().includes(value.toLowerCase()))) return false;
+    if (!deadlineMatches(grant, deadlineFilter)) return false;
 
     // Free-text Query filter
     if (q) {

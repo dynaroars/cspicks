@@ -9,7 +9,7 @@ import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
 import { escapeHtml } from '../shared.js';
 import { createFavoritesStore, favoritesSelect, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
-import { keywordHelpIcon } from '../search-keywords.js';
+import { keywordSuggestions, mountKeywordHelp, restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
 import type { Grant } from '../types.js';
 import type { createSuggestionBox as CreateSuggestionBox } from '../suggestion-box.js';
 
@@ -24,29 +24,11 @@ let allGrants: Grant[] = [];
 let suggestions: ReturnType<typeof CreateSuggestionBox> | null = null;
 const selectById = (id: string) => document.getElementById(id) as HTMLSelectElement | null;
 
-const DEFAULT_EXAMPLES = [
-  'NSF CAREER',
-  'NSF GRFP',
-  'DOE CSGF',
-  'NDSEG',
-  'Google PhD Fellowship',
-  'DARPA YFA',
-  'Space Grant',
-  'EPSCoR',
-  'Sloan Research Fellowship',
-  'AI/ML',
-  'PhD Students',
-  'Undergraduate'
-];
+const DEFAULT_EXAMPLES = ['NSF CAREER', 'Google PhD Fellowship', 'audience: phd', 'category: industry', 'sponsor: NSF audience: faculty', 'loc: California', 'deadline: rolling', 'status: historical'];
 
 function getFilterState() {
   return {
     query: input ? input.value.trim() : '',
-    audience: selectById('audience-select')?.value || 'all',
-    sponsorCategory: selectById('sponsor-category-select')?.value || 'all',
-    status: selectById('status-select')?.value || 'all',
-    topic: selectById('topic-select')?.value || 'all',
-    deadlineFilter: selectById('deadline-select')?.value || 'all',
     sortBy: selectById('sort-select')?.value || 'featured',
     favorites: selectById('favorites-select')?.value || 'all'
   };
@@ -55,11 +37,6 @@ function getFilterState() {
 function updateUrl(filterState: ReturnType<typeof getFilterState>) {
   const next = new URLSearchParams();
   if (filterState.query) next.set('q', filterState.query);
-  if (filterState.audience !== 'all') next.set('audience', filterState.audience);
-  if (filterState.sponsorCategory !== 'all') next.set('sponsor', filterState.sponsorCategory);
-  if (filterState.status !== 'all') next.set('status', filterState.status);
-  if (filterState.topic !== 'all') next.set('topic', filterState.topic);
-  if (filterState.deadlineFilter !== 'all') next.set('deadline', filterState.deadlineFilter);
   if (filterState.sortBy !== 'featured') next.set('sort', filterState.sortBy);
   if (filterState.favorites === 'only') next.set('favorites', 'only');
 
@@ -122,6 +99,14 @@ function buildSuggestions() {
     emptyText: 'No matching grant, sponsor, or topic',
     getGroups: query => {
       const items = grantsSuggestions(allGrants);
+      const choices = (values: string[]) => values.map(value => ({ label: value, detail: 'Search filter' }));
+      const scoped = keywordSuggestions(input.value, GRANTS_KEYWORD_SPECS, {
+        sponsor: items.sponsors, audience: choices(['faculty', 'students', 'phd', 'undergrad', 'postdoc']), topic: items.topics,
+        category: choices(['government', 'industry', 'foundation', 'society']),
+        deadline: choices(['rolling', 'fixed']), status: choices(['all', 'current', 'historical']),
+        loc: choices([...new Set(allGrants.flatMap(grant => grant.locations || []))]), favorites: choices(['only'])
+      });
+      if (scoped) return scoped;
       return [
         ['Awards & Fellowships', rankSuggestions(items.awards, query, 8)],
         ['Sponsors & Agencies', rankSuggestions(items.sponsors, query, 5)],
@@ -130,13 +115,13 @@ function buildSuggestions() {
       ];
     },
     onSelect: item => {
-      if (item.type === 'award' && item.grantId) {
-        input.value = item.label;
+      if (!item.value && item.type === 'award' && item.grantId) {
+        input.value = item.value || item.label;
         render();
         window.location.hash = item.grantId;
         handleHashScroll();
       } else {
-        input.value = item.label;
+        input.value = item.value || item.label;
         render();
       }
     }
@@ -169,17 +154,7 @@ function setupDelegatedListeners() {
     const resetBtn = target.closest('#reset-grants-filters');
     if (resetBtn) {
       input.value = '';
-      const audEl = selectById('audience-select');
-      const sponEl = selectById('sponsor-category-select');
-      const topEl = selectById('topic-select');
-      const deadEl = selectById('deadline-select');
-      const statusEl = selectById('status-select');
       const sortEl = selectById('sort-select');
-      if (audEl) audEl.value = 'all';
-      if (sponEl) sponEl.value = 'all';
-      if (topEl) topEl.value = 'all';
-      if (deadEl) deadEl.value = 'all';
-      if (statusEl) statusEl.value = 'all';
       if (sortEl) sortEl.value = 'featured';
       const favEl = selectById('favorites-select');
       if (favEl) favEl.value = 'all';
@@ -190,7 +165,7 @@ function setupDelegatedListeners() {
 
     const topicBtn = target.closest<HTMLElement>('[data-search-topic]');
     if (topicBtn) {
-      input.value = topicBtn.dataset.searchTopic || '';
+      input.value = setQueryKeyword(input.value, 'topic', [topicBtn.dataset.searchTopic!], GRANTS_KEYWORD_SPECS);
       render();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -198,7 +173,7 @@ function setupDelegatedListeners() {
 
     const sponsorBtn = target.closest<HTMLElement>('[data-search-sponsor]');
     if (sponsorBtn) {
-      input.value = sponsorBtn.dataset.searchSponsor || '';
+      input.value = setQueryKeyword(input.value, 'sponsor', [sponsorBtn.dataset.searchSponsor!], GRANTS_KEYWORD_SPECS);
       render();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -223,7 +198,7 @@ function setupDelegatedListeners() {
   });
 
   // Filter change listeners
-  ['audience-select', 'sponsor-category-select', 'topic-select', 'deadline-select', 'status-select', 'sort-select', 'favorites-select'].forEach(id => {
+  ['sort-select', 'favorites-select'].forEach(id => {
     document.getElementById(id)?.addEventListener('change', () => {
       render();
     });
@@ -239,65 +214,28 @@ function setupDelegatedListeners() {
   });
 }
 
-function populateFilterOptions(grants: Grant[]) {
-  const topicSelect = selectById('topic-select');
-  if (topicSelect) {
-    const allTopics = new Set<string>();
-    grants.forEach(g => (g.topics || []).forEach(t => allTopics.add(t)));
-    const sortedTopics = Array.from(allTopics).sort();
-    sortedTopics.forEach(top => {
-      const option = document.createElement('option');
-      option.value = top;
-      option.textContent = top;
-      topicSelect.appendChild(option);
-    });
-  }
-
-  // Restore initial URL parameters
-  if (params.get('q')) input.value = params.get('q')!;
-  if (params.get('audience')) {
-    const audEl = selectById('audience-select');
-    if (audEl) audEl.value = params.get('audience')!;
-  }
-  if (params.get('sponsor')) {
-    const sponEl = selectById('sponsor-category-select');
-    if (sponEl) sponEl.value = params.get('sponsor')!;
-  }
-  if (params.get('topic')) {
-    const topEl = selectById('topic-select');
-    if (topEl) topEl.value = params.get('topic')!;
-  }
-  if (params.get('deadline')) {
-    const dEl = selectById('deadline-select');
-    if (dEl) dEl.value = params.get('deadline')!;
-  }
-  if (params.get('status')) {
-    const statusEl = selectById('status-select');
-    if (statusEl) statusEl.value = params.get('status')!;
-  }
-  if (params.get('sort')) {
-    const sEl = selectById('sort-select');
-    if (sEl) sEl.value = params.get('sort')!;
-  }
+function restoreFilters() {
+  input.value = restoreKeywordQuery(params, { audience: 'audience', sponsor: 'category', topic: 'topic', deadline: 'deadline', status: 'status' });
+  const sort = params.get('sort');
+  const sortSelect = selectById('sort-select')!;
+  if (sort && [...sortSelect.options].some(option => option.value === sort)) sortSelect.value = sort;
 }
 
 async function init() {
   try {
     allGrants = await loadGrantsData();
     document.getElementById('favorites-filter')!.innerHTML = favoritesSelect(params.get('favorites') === 'only' ? 'only' : 'all', favorites.all().length);
-    populateFilterOptions(allGrants);
+    restoreFilters();
     suggestions = buildSuggestions();
 
     input.disabled = false;
-    input.placeholder = 'Search awards, sponsors, topics, states, or eligibility (e.g. Space Grant, EPSCoR, Google PhD)...';
+    input.placeholder = 'Search awards or use keywords: sponsor: NSF audience: phd';
     input.addEventListener('input', () => {
       suggestions!.render(input.value);
       render();
     });
 
-    const searchBox = input.closest<HTMLElement>('.universal-search')!;
-    searchBox.classList.add('has-search-help');
-    searchBox.insertAdjacentHTML('afterbegin', keywordHelpIcon(GRANTS_KEYWORD_SPECS, 'grants-search-help'));
+    mountKeywordHelp(input, GRANTS_KEYWORD_SPECS, 'grants-search-help', 'audience: phd category: industry topic: AI');
     wireFavoriteToggles(resultsContainer, favorites);
     onFavoriteChange(resultsContainer, favorites, render);
     initTooltipPositioning();

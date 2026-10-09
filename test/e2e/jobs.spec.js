@@ -40,13 +40,13 @@ test('US Jobs shows only active postings by default and reveals older ones on re
   await expect(page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.job-chip-visa')).toHaveText('✅ Visa sponsorship available');
   await expect(page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.job-chip-visa')).toHaveCount(0, { timeout: 1000 });
 
-  await page.locator('#status-select').selectOption('closed');
+  await page.locator('#jobs-search').fill('status: closed');
   await expect(page.locator('.job-card')).toHaveCount(1);
   await expect(page.locator('.job-card')).toContainText('Postdoctoral Fellow');
   await expect(page.locator('.job-deadline')).toContainText('Closed');
-  await expect(page).toHaveURL(/status=closed/);
+  await expect(page).toHaveURL(/q=status/);
 
-  await page.locator('#status-select').selectOption('all');
+  await page.locator('#jobs-search').fill('status: all');
   await expect(page.locator('.job-card')).toHaveCount(3);
 });
 
@@ -56,23 +56,13 @@ test('search, filters, and the state map narrow the list', async ({ page }) => {
   await expect(page.locator('.job-card')).toHaveCount(1);
   await page.locator('#jobs-search').fill('');
 
-  const track = page.locator('#track-select');
-  await track.locator('summary').click();
-  await track.getByLabel('Tenure-track').check();
+  await page.locator('#jobs-search').fill('track: tenure-track');
   await expect(page.locator('.job-card')).toHaveCount(1);
-  await expect(track.locator('summary')).toHaveText('Tenure-track');
-  // A second choice widens the filter instead of replacing it.
-  await track.getByLabel('Teaching track').check();
+  // Comma-separated alternatives preserve the old multi-choice filters.
+  await page.locator('#jobs-search').fill('track: tenure-track,teaching');
   await expect(page.locator('.job-card')).toHaveCount(2);
-  await expect(track.locator('summary')).toHaveText('2 position types');
-  await expect(page).toHaveURL(/track=tenure-track%2Cteaching|track=tenure-track,teaching/);
-  await page.keyboard.press('Escape');
-  await expect(track).not.toHaveAttribute('open', '');
-  await track.locator('summary').click();
-  await track.getByRole('button', { name: 'Clear' }).click();
-  await expect(track.locator('summary')).toHaveText('All Position Types');
+  await page.locator('#jobs-search').fill('');
   await page.locator('#jobs-status').click();
-  await expect(track).not.toHaveAttribute('open', '');
 
   // States are picked on the map only; there is no state dropdown.
   await expect(page.locator('#state-select')).toHaveCount(0);
@@ -82,13 +72,15 @@ test('search, filters, and the state map narrow the list', async ({ page }) => {
   await expect(virginia).toHaveAttribute('aria-label', 'Virginia: 1 position');
   await virginia.click();
   await expect(clearStates).toHaveText('Clear Virginia');
+  await expect(page.locator('#jobs-search')).toHaveValue('loc: VA');
   await expect(page.locator('.job-card')).toHaveCount(1);
-  await expect(page).toHaveURL(/state=VA/);
+  await expect(page).toHaveURL(/q=loc/);
   // Other states keep their counts while one is selected, and clicking another adds it.
   await expect(page.locator('.job-map-tile[data-state="IL"]')).toHaveAttribute('aria-label', 'Illinois: 1 position');
   await page.locator('.job-map-tile[data-state="IL"]').click();
   await expect(page.locator('.job-card')).toHaveCount(2);
   await expect(clearStates).toHaveText('Clear 2 states');
+  await expect(page.locator('#jobs-search')).toHaveValue(/loc: VA,IL/);
   await expect(page.locator('.job-map-tile[aria-pressed="true"]')).toHaveCount(2);
   await page.locator('.job-map-tile[data-state="VA"]').click();
   await expect(page.locator('.job-card')).toHaveCount(1);
@@ -101,15 +93,11 @@ test('search, filters, and the state map narrow the list', async ({ page }) => {
 
 test('visa filter and keyword narrow to what postings say about sponsorship', async ({ page }) => {
   await page.goto('jobs.html');
-  const visa = page.locator('#visa-select');
-  await visa.locator('summary').click();
-  await visa.getByLabel('Sponsorship available').check();
+  await page.locator('#jobs-search').fill('visa: yes');
   await expect(page.locator('.job-card')).toHaveCount(1);
   await expect(page.locator('.job-card')).toContainText('Software Engineering');
-  await expect(page).toHaveURL(/visa=yes/);
-  await visa.getByLabel('Not checked yet').check();
+  await page.locator('#jobs-search').fill('visa: yes,unknown');
   await expect(page.locator('.job-card')).toHaveCount(2);
-  await visa.getByRole('button', { name: 'Clear' }).click();
 
   await page.locator('#jobs-search').fill('visa: no');
   await expect(page.locator('.job-card')).toHaveCount(0);
@@ -121,12 +109,14 @@ test('several filter values restore from the URL, and older single-value links s
   await page.goto('jobs.html?state=VA,IL&track=teaching');
   await expect(page.locator('.job-card')).toHaveCount(1);
   await expect(page.locator('.job-card')).toContainText('Teaching Professor');
-  await expect(page.locator('.job-map-tile[aria-pressed="true"]')).toHaveCount(2);
-  await expect(page.locator('.job-map-tile[data-state="IL"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('#jobs-search')).toHaveValue(/loc: VA,IL/);
+  await expect(page.locator('#jobs-search')).toHaveValue('track: teaching loc: VA,IL');
+  await page.reload();
+  await expect(page.locator('.job-card')).toHaveCount(1);
 
   await page.goto('jobs.html?state=VA');
   await expect(page.locator('.job-card')).toHaveCount(1);
-  await expect(page.locator('#clear-map-states')).toHaveText('Clear Virginia');
+  await expect(page.locator('#jobs-search')).toHaveValue('loc: VA');
 });
 
 test('sorts by CSRankings rank in either direction', async ({ page }) => {
@@ -200,4 +190,35 @@ test('submit form is reachable and prefills a correction', async ({ page }) => {
   await expect(page.locator('input[name="kind"][value="correction"]')).toBeChecked();
   await expect(page.locator('#title')).toHaveValue('Assistant Professor, Software Engineering');
   await expect(page.locator('#state')).toHaveValue('VA');
+});
+
+test('keyword help opens on click and keyboard, and scoped suggestions preserve the query', async ({ page }) => {
+  await page.goto('jobs.html');
+  const input = page.locator('#jobs-search');
+  await expect(input).toBeEnabled();
+  await expect(page.locator('.search-filters select')).toHaveCount(3);
+  const help = page.getByRole('button', { name: 'Search keywords and examples' });
+  const panel = page.locator('#jobs-search-help');
+  await expect(panel).toBeHidden();
+  await help.click();
+  await expect(panel).toBeVisible();
+  await expect(panel).toContainText('track: teaching');
+  await expect(help).toHaveAttribute('aria-expanded', 'true');
+  await page.keyboard.press('Escape');
+  await expect(panel).toBeHidden();
+  await expect(help).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(panel).toBeVisible();
+  await page.locator('#jobs-status').click();
+  await expect(panel).toBeHidden();
+
+  await input.fill('loc: IL track: tea');
+  await expect(page.getByRole('option', { name: /Teaching track/ })).toBeVisible();
+  await page.getByRole('option', { name: /Teaching track/ }).click();
+  await expect(input).toHaveValue('loc: IL track: teaching');
+  await expect(page.locator('.job-card')).toHaveCount(1);
+
+  await page.goto('jobs.html?status=all');
+  await expect(input).toHaveValue('status: all');
+  await expect(page.locator('.job-card')).toHaveCount(3);
 });

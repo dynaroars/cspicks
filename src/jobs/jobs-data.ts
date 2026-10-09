@@ -2,7 +2,7 @@
  * US Jobs data engine: dataset loading, active/closed status, filtering, sorting,
  * per-school grouping, and autocomplete indexing.
  */
-import { matchesKeyword, parseKeywordQuery } from '../search-keywords.js';
+import { matchesKeywordOptions, parseKeywordQuery } from '../search-keywords.js';
 import { areaLabels } from '../shared.js';
 import { FAVORITES_KEYWORD_SPEC } from '../favorites.js';
 import { US_STATES, resolveState } from './states.js';
@@ -260,33 +260,34 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
   const states = filterValues(filters.state);
   const visas = filterValues(filters.visa);
   const { filters: keywords, rest } = parseKeywordQuery(query, JOBS_KEYWORD_SPECS);
-  const statusKeyword = keywords.status?.[0];
-  const wantStatus: StatusFilter = statusKeyword === 'closed' || statusKeyword === 'all' || statusKeyword === 'active'
-    ? statusKeyword : status;
   const terms = rest.trim().toLowerCase().split(/\s+/).filter(Boolean);
 
   const results = jobs.filter(job => {
     const active = isActive(job, now);
-    if (wantStatus === 'active' && !active) return false;
-    if (wantStatus === 'closed' && active) return false;
+    if (keywords.status?.length) {
+      if (!matchesKeywordOptions(keywords.status, value => value === 'all' || value === (active ? 'active' : 'closed'))) return false;
+    } else {
+      if (status === 'active' && !active) return false;
+      if (status === 'closed' && active) return false;
+    }
     if (tracks.length && !tracks.includes(job.track)) return false;
     if (levels.length && !levels.includes(job.level ?? '')) return false;
     if (depts.length && !depts.includes(departmentKind(job.department))) return false;
     if (keywords.dept) {
       const kind = departmentKind(job.department);
       // Short values ("cs", "ece") match the unit kind only; longer ones also match the posting's department text.
-      if (!keywords.dept.every(value => value === kind || (value.length > 3 && `${DEPARTMENT_LABELS[kind]} ${job.department}`.toLowerCase().includes(value)))) return false;
+      if (!matchesKeywordOptions(keywords.dept, value => value === kind || (value.length > 3 && `${DEPARTMENT_LABELS[kind]} ${job.department}`.toLowerCase().includes(value)))) return false;
     }
     // A posting open to all areas matches every area; one that names none matches none.
     if (areas.length && !job.anyArea && !areas.some(key => job.areas.includes(key))) return false;
     if (!ignoreState && states.length && !states.includes(job.state)) return false;
     if (visas.length && !visas.includes(visaKey(job))) return false;
-    if (keywords.visa && !keywords.visa.every(value => (VISA_KEYWORD_VALUES[value] ?? []).includes(visaKey(job)))) return false;
-    if (!matchesKeyword(keywords.school, job.school)) return false;
-    if (keywords.area && !job.anyArea && !matchesKeyword(keywords.area, job.areas.map(key => `${key} ${areaLabels[key] || ''}`).join(' '))) return false;
-    if (!matchesKeyword(keywords.track, `${job.track} ${TRACK_LABELS[job.track]}`)) return false;
-    if (!matchesKeyword(keywords.level, job.level ? `${job.level} ${LEVEL_LABELS[job.level]}` : '')) return false;
-    if (keywords.loc && !keywords.loc.every(value => stateMatches(job, value))) return false;
+    if (keywords.visa && !matchesKeywordOptions(keywords.visa, value => (VISA_KEYWORD_VALUES[value] ?? []).includes(visaKey(job)))) return false;
+    if (!matchesKeywordOptions(keywords.school, value => job.school.toLowerCase().includes(value))) return false;
+    if (keywords.area && !job.anyArea && !matchesKeywordOptions(keywords.area, value => job.areas.some(key => `${key} ${areaLabels[key] || ''}`.toLowerCase().includes(value)))) return false;
+    if (!matchesKeywordOptions(keywords.track, value => `${job.track} ${TRACK_LABELS[job.track]}`.toLowerCase().includes(value))) return false;
+    if (!matchesKeywordOptions(keywords.level, value => Boolean(job.level && `${job.level} ${LEVEL_LABELS[job.level]}`.toLowerCase().includes(value)))) return false;
+    if (!ignoreState && !matchesKeywordOptions(keywords.loc, value => stateMatches(job, value))) return false;
     if (!terms.length) return true;
     const text = searchText(job);
     return terms.every(term => text.includes(term));

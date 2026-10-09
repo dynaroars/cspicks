@@ -295,3 +295,10 @@ test('departmentKind classifies units that hire CS PhDs', async () => {
   assert.deepEqual(filterJobs(jobs, { dept: 'information' }).map(j => j.id), ['a']);
   assert.deepEqual(filterJobs(jobs, { query: 'dept: data' }).map(j => j.id), ['b']);
 });
+
+test('keyword alternatives combine with other filters and keep the state map counts', () => {
+  assert.deepEqual(ids(filterJobs(jobs, { query: 'track: teaching,postdoc loc: TX,CA', now: NOW })), ['ut-sec', 'ucsd-roll']);
+  assert.deepEqual(ids(filterJobs(jobs, { query: 'loc: TX,CA level: assistant', now: NOW })), []);
+  assert.deepEqual(ids(filterJobs(jobs, { query: 'loc: CA', now: NOW }, true)), ['ut-sec', 'gt-ai-2026', 'ucsd-roll']);
+  assert.equal(filterJobs(jobs, { query: 'status: active,closed', now: NOW }).length, jobs.length);
+});

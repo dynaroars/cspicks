@@ -70,8 +70,13 @@ Every page keeps the URL in sync with what's on screen, so any view is a link th
 | Simulator (`simulator.html`) | Filters, `univ` (selected university), and `candidates` (the raw candidate names/DBLP links) — opening the link pre-fills the setup one click from a result, without re-querying DBLP on load |
 | CS Confs (`csconfs.html`) | `q`, conference-year range, venue set, and whether only upcoming conferences are shown |
 | NSF Funding (`nsf.html`) | `q` (search or `A vs B`) plus the year-range filter |
-| US Jobs (`jobs.html`) | `q`, `track`, `level`, `area`, `state`, `status` (`active` default, `closed`, `all`), `sort`, and `view` (`position`, `school`) filters |
-| Awards & Grants (`grants.html`) | `q`, `audience`, `sponsor`, `topic`, `deadline`, `status`, and `sort` filters |
+| US Jobs (`jobs.html`) | `q` (keywords: `school:`, `track:`, `dept:`, `level:`, `area:`, `loc:`, `visa:`, `status:`), `sort`, `favorites`, and `view` (`position`, `school`); older filter params restore as keywords |
+| Awards & Grants (`grants.html`) | `q` (keywords: `sponsor:`, `audience:`, `category:`, `topic:`, `loc:`, `deadline:`, `status:`), `sort`, and `favorites`; older filter params restore as keywords |
+
+Jobs and Awards & Grants use search keywords for category filters. Click **ⓘ** inside search for usage and examples.
+Combine filters (e.g. `track: teaching loc: TX,VA` or `audience: phd category: industry`), quote values with spaces
+(e.g. `topic: "machine learning"`), and use commas for alternatives within one filter. Jobs shows active postings
+by default; `status: closed` or `status: all` also finds older postings.
 
 Filter choices also persist across page navigations via `localStorage`, so switching between Search and Discoveries, or clicking into Simulator, NSF Funding, or Awards & Grants, doesn't silently reset the region or year range.
 
