@@ -271,34 +271,31 @@
     "state": "MI",
     "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
-    "summary": "CSE faculty-hiring page says positions for the next cycle have not been posted yet; recheck in November. Non-CS units (2026-10-08): UMSI, EECS, ECE and MIDAS sites all return a Cloudflare bot challenge (HTTP 403); the university careers.umich.edu search page renders without any listings. No postings could be verified, so none were added.",
+    "summary": "CSE faculty-hiring page says positions for the next cycle have not been posted yet; recheck in November. Non-CS units (2026-10-08): UMSI, EECS, ECE and MIDAS sites all return a Cloudflare bot challenge (HTTP 403); the university careers.umich.edu search page renders without any listings. No postings could be verified, so none were added. Non-CS units (2026-10-08): The university-wide careers.umich.edu faculty browse page rendered (not blocked) and showed one clear CS-PhD target, the Robotics Human-Centered Embodied AI senior search. CSE, UMSI, EECS/ECE and MIDAS sites remain unreadable or unposted; LSA Statistics (statistics PhD) and Flint-campus CS/Computing postings were skipped.",
     "checkedUrls": [
       "https://cse.engin.umich.edu/about/faculty-hiring/",
       "https://www.si.umich.edu/about-umsi/careers",
       "https://eecs.engin.umich.edu/about/careers/",
       "https://ece.engin.umich.edu/about/employment/",
       "https://midas.umich.edu/jobs/",
-      "https://careers.umich.edu/search-jobs"
+      "https://careers.umich.edu/search-jobs",
+      "https://careers.umich.edu/browse-jobs/career_interests/230",
+      "https://careers.umich.edu/job_detail/283509",
+      "https://careers.umich.edu/job_detail/280385/asst-professor",
+      "https://cse.engin.umich.edu/people/faculty-hiring/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "School of Information",
-        "url": "https://www.si.umich.edu/about-umsi/careers"
+        "name": "Robotics Department (College of Engineering)",
+        "url": "https://robotics.umich.edu/jobs/"
       },
       {
-        "name": "EECS (CSE and ECE divisions)",
-        "url": "https://eecs.engin.umich.edu/about/careers/"
-      },
-      {
-        "name": "ECE employment",
-        "url": "https://ece.engin.umich.edu/about/employment/"
-      },
-      {
-        "name": "Michigan Institute for Data and AI in Society",
-        "url": "https://midas.umich.edu/jobs/"
+        "name": "U-M Careers: Instructional - Regular faculty listings",
+        "url": "https://careers.umich.edu/browse-jobs/career_interests/230"
       }
-    ]
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "New York University",
@@ -423,7 +420,7 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "incomplete",
-    "summary": "College page says applications for its listed positions have closed and the careers.rit.edu Brassring search app cannot be scripted; the cybersecurity page links openings without dates, so none verified. Non-CS units (2026-10-08): College and cybersecurity faculty-openings pages point to the careers.rit.edu Brassring app; the cybersecurity lecturer posting link shows expired/filled and the Brassring app cannot be scripted, so no posting could be verified. Kate Gleason engineering has no faculty-openings page (404).",
+    "summary": "College page says applications for its listed positions have closed and the careers.rit.edu Brassring search app cannot be scripted; the cybersecurity page links openings without dates, so none verified. Non-CS units (2026-10-08): College and cybersecurity faculty-openings pages point to the careers.rit.edu Brassring app; the cybersecurity lecturer posting link shows expired/filled and the Brassring app cannot be scripted, so no posting could be verified. Kate Gleason engineering has no faculty-openings page (404). Non-CS units (2026-10-08): The cybersecurity page links Brassring postings 1575593 and 1575594, but the Brassring page renders as expired/filled and the app cannot be enumerated; web-search leads for RIT computing postings were prior-cycle or third-party only, so nothing was verified.",
     "checkedUrls": [
       "https://www.rit.edu/fa/careerzone/faculty",
       "https://www.rit.edu/computing/faculty-openings",
@@ -431,15 +428,21 @@
       "https://sjobs.brassring.com/TGnewUI/Search/Home/Home?partnerid=25483&siteid=5291",
       "https://sjobs.brassring.com/TGnewUI/Search/Home/Home?partnerid=25483&siteid=5291#jobDetails=1575594_5291",
       "https://www.rit.edu/careers",
-      "https://www.rit.edu/engineering/faculty-openings"
+      "https://www.rit.edu/engineering/faculty-openings",
+      "https://sjobs.brassring.com/TGnewUI/Search/Home/Home?partnerid=25483&siteid=5291#jobDetails=1575593_5291"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "ESL Global Cybersecurity Institute / Department of Cybersecurity",
+        "name": "RIT Cybersecurity faculty openings",
         "url": "https://www.rit.edu/cybersecurity/faculty-openings"
+      },
+      {
+        "name": "Golisano College faculty openings",
+        "url": "https://www.rit.edu/computing/faculty-openings"
       }
-    ]
+    ],
+    "relatedCheckedAt": "2026-10-08T22:00:00Z"
   },
   {
     "school": "University of Wisconsin - Madison",
@@ -491,26 +494,39 @@
     "state": "MD",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Department page lists the 2026 tenure-track search (deadline 2026-12-01) and postdoc ads; only the tenure-track search is recorded because the postdoc ads have no dates. Non-CS units (2026-10-08): Existing CS tenure-track Interfolio posting 194231 is live (open Sep 26, 2026; full consideration Dec 1, 2026). jhu.edu, jobs.jhu.edu, engineering.jhu.edu, ai.jhu.edu and ece.jhu.edu all return 403 (Cloudflare), so non-CS units could not be read.",
+    "summary": "Department page lists the 2026 tenure-track search (deadline 2026-12-01) and postdoc ads; only the tenure-track search is recorded because the postdoc ads have no dates. Non-CS units (2026-10-08): Existing CS tenure-track Interfolio posting 194231 is live (open Sep 26, 2026; full consideration Dec 1, 2026). jhu.edu, jobs.jhu.edu, engineering.jhu.edu, ai.jhu.edu and ece.jhu.edu all return 403 (Cloudflare), so non-CS units could not be read. Non-CS units (2026-10-08): jhu.edu department sites still return Cloudflare 403, but facultyjobs.jhu.edu (the university faculty board, with its own public /api/positions list of 322 positions) is readable and each Interfolio posting opened. Recorded 14 CS-relevant postings across ECE, DSAI, Education, Government and Policy, Public Health and CS; skipped computational biology, chemical engineering, applied mathematics and statistics tenure search, materials, fluids, NIST PREP, and master's-level roles.",
     "checkedUrls": [
       "https://www.cs.jhu.edu/about/employment-opportunities",
       "https://apply.interfolio.com/194231",
       "https://www.ece.jhu.edu/about/employment",
       "https://jobs.jhu.edu/",
       "https://engineering.jhu.edu/faculty-openings/",
-      "https://ai.jhu.edu/"
+      "https://ai.jhu.edu/",
+      "https://facultyjobs.jhu.edu/positions",
+      "https://facultyjobs.jhu.edu/api/positions?page=1",
+      "https://apply.interfolio.com/194226",
+      "https://apply.interfolio.com/194924",
+      "https://apply.interfolio.com/193132",
+      "https://mathematics.jhu.edu/about/jobs (403)",
+      "https://ece.jhu.edu/about/employment/ (403)",
+      "https://jobs.jhu.edu/ (403)"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Whiting School of Engineering / DSAI Institute",
-        "url": "https://engineering.jhu.edu/"
+        "name": "JHU Faculty Careers board (all schools; public JSON API behind the page)",
+        "url": "https://facultyjobs.jhu.edu/positions"
       },
       {
-        "name": "Electrical and Computer Engineering",
-        "url": "https://www.ece.jhu.edu/"
+        "name": "Data Science and AI Institute faculty careers",
+        "url": "https://ai.jhu.edu/careers/careers-for-faculty/"
+      },
+      {
+        "name": "Department of Electrical and Computer Engineering (Interfolio posting 193404)",
+        "url": "https://apply.interfolio.com/193404"
       }
-    ]
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of Central Florida",
@@ -520,7 +536,7 @@
     "state": "FL",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Rendered the jobs.ucf.edu faculty list and searches for computer science, lecturer, AI and cybersecurity; no CS department posting is currently listed (the earlier R112110/R112473 snippets are not on the board), and the department's own jobs page 404s. Non-CS units (2026-10-08): CECS page only points to jobs.ucf.edu; the board renders but result links are not extractable. Searches (engineering, electrical, cybersecurity, AI, professor, postdoctoral) showed no clearly CS-targeted posting; a Faculty Cluster Initiative postdoc (R114048, HARP Lab: human factors, AI, risk, privacy) could not be opened to confirm its unit, so it was not recorded.",
+    "summary": "Rendered the jobs.ucf.edu faculty list and searches for computer science, lecturer, AI and cybersecurity; no CS department posting is currently listed (the earlier R112110/R112473 snippets are not on the board), and the department's own jobs page 404s. Non-CS units (2026-10-08): CECS page only points to jobs.ucf.edu; the board renders but result links are not extractable. Searches (engineering, electrical, cybersecurity, AI, professor, postdoctoral) showed no clearly CS-targeted posting; a Faculty Cluster Initiative postdoc (R114048, HARP Lab: human factors, AI, risk, privacy) could not be opened to confirm its unit, so it was not recorded. Non-CS units (2026-10-08): Rendered jobs.ucf.edu/jobs/search for computer, AI, postdoctoral, faculty, cybersecurity, data science, electrical, robotics and related queries and opened every faculty/postdoc posting; R114048 now opens (HARP Lab, Faculty Cluster Initiative). No CS-department or tenure-track CS-targeted posting is listed; recorded three postdocs (two past their Sep 14 close date but still on the board). Skipped business Miller chairs, the Data/Math/Stats school director (math/stats/data PhD), and non-computing roles.",
     "checkedUrls": [
       "https://jobs.ucf.edu/",
       "https://jobs.ucf.edu/jobs/search?query=Computer+Science",
@@ -531,19 +547,23 @@
       "https://jobs.ucf.edu/jobs/search?query=engineering",
       "https://jobs.ucf.edu/jobs/search?query=artificial",
       "https://jobs.ucf.edu/jobs/search?query=postdoctoral",
-      "https://jobs.ucf.edu/jobs/search?query=professor"
+      "https://jobs.ucf.edu/jobs/search?query=professor",
+      "https://jobs.ucf.edu/jobs/search?query=computer",
+      "https://jobs.ucf.edu/jobs/search?query=artificial+intelligence",
+      "https://jobs.ucf.edu/jobs/search?query=faculty"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "College of Engineering and Computer Science",
-        "url": "https://www.cecs.ucf.edu/faculty-career-opportunities/"
+        "name": "UCF Careers faculty board",
+        "url": "https://jobs.ucf.edu/jobs/search"
       },
       {
-        "name": "Jobs at UCF",
-        "url": "https://jobs.ucf.edu/"
+        "name": "School of Modeling, Simulation and Training",
+        "url": "https://jobs.ucf.edu/jobs/post-doctoral-scholar-orlando-florida-united-states-8870e8a1-1251-4599-ab66-10e0c92be726"
       }
-    ]
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Virginia Tech",
@@ -1207,7 +1227,7 @@
     "state": "NJ",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "complete",
-    "summary": "Read all Interfolio postings on the CS jobs page; 3 faculty and 3 postdoc postings are current, one postdoc posting on princeton.edu was blocked by a Cloudflare challenge. Non-CS units (2026-10-08): ece.princeton.edu and princeton.edu/acad-positions returned Cloudflare verification (403), so ECE, ORFE, and CSML hiring pages could not be read; no postings added. Web search surfaced only an ECE lecturer Interfolio lead (190113) and stale ORFE ads, unverified.",
+    "summary": "Read all Interfolio postings on the CS jobs page; 3 faculty and 3 postdoc postings are current, one postdoc posting on princeton.edu was blocked by a Cloudflare challenge. Non-CS units (2026-10-08): ece.princeton.edu and princeton.edu/acad-positions returned Cloudflare verification (403), so ECE, ORFE, and CSML hiring pages could not be read; no postings added. Web search surfaced only an ECE lecturer Interfolio lead (190113) and stale ORFE ads, unverified. Non-CS units (2026-10-08): ece.princeton.edu and princeton.edu/acad-positions remained 403, so Interfolio postings were used; one new ECE tenure-track posting (190824) found. ECE lecturer pool (190113) skipped as an occasional lecturer pool; quantum (191224) and AI (193577) postings already recorded.",
     "checkedUrls": [
       "https://www.cs.princeton.edu/jobs",
       "https://apply.interfolio.com/193577",
@@ -1220,19 +1240,19 @@
       "https://ece.princeton.edu/about-us/job-openings",
       "https://ece.princeton.edu",
       "https://csml.princeton.edu",
-      "https://www.princeton.edu/acad-positions"
+      "https://www.princeton.edu/acad-positions",
+      "https://apply.interfolio.com/190113",
+      "https://apply.interfolio.com/190824",
+      "https://ece.princeton.edu/about-ece/employment"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Electrical and Computer Engineering jobs",
-        "url": "https://ece.princeton.edu/about-us/job-openings"
-      },
-      {
-        "name": "Princeton academic positions",
-        "url": "https://www.princeton.edu/acad-positions"
+        "name": "Electrical and Computer Engineering",
+        "url": "https://apply.interfolio.com/190824"
       }
-    ]
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Pennsylvania State University",
@@ -1586,21 +1606,26 @@
     "state": "WA",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "Only listed openings (CS tenure-track, EE career-track) show January 2026 deadlines, which have passed, so none were recorded. Non-CS units (2026-10-08): school.eecs.wsu.edu and voiland.wsu.edu returned HTTP 403 to the renderer; WSU data science and jobs hosts did not resolve. Nothing recorded.",
+    "summary": "Only listed openings (CS tenure-track, EE career-track) show January 2026 deadlines, which have passed, so none were recorded. Non-CS units (2026-10-08): school.eecs.wsu.edu and voiland.wsu.edu returned HTTP 403 to the renderer; WSU data science and jobs hosts did not resolve. Nothing recorded. Non-CS units (2026-10-08): Read WSU's Workday careers board. The CS/AI career-track postings (R-15533) require only a master's for assistant rank, and the EE power-systems (R-15485), MME robotics and Bremerton EE teaching postings are EE/ME-oriented, so none were recorded.",
     "checkedUrls": [
       "https://school.eecs.wsu.edu/",
       "https://school.eecs.wsu.edu/faculty-openings/",
       "https://voiland.wsu.edu/employment/",
       "https://datascience.wsu.edu/",
-      "https://wsu.wsujobs.com/postings/search?query=computer"
+      "https://wsu.wsujobs.com/postings/search?query=computer",
+      "https://wsu.wd5.myworkdayjobs.com/en-US/WSU_Jobs",
+      "https://wsu.wd5.myworkdayjobs.com/WSU_Jobs/job/Pullman-WA/Assistant-Associate-Professor--Career-Track--Faculty-Positions-in-Computer-Science-and-Artificial-Intelligence_R-15533",
+      "https://wsu.wd5.myworkdayjobs.com/WSU_Jobs/job/Pullman-WA/Tenure-Track-Tenured-Faculty-Position-in-Electrical-Engineering_R-15485",
+      "https://wsu.wd5.myworkdayjobs.com/WSU_Jobs/job/Pullman-WA/Assistant-Professor_R-15328"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Voiland College of Engineering and Architecture",
-        "url": "https://voiland.wsu.edu/employment/"
+        "name": "WSU Jobs (Workday)",
+        "url": "https://wsu.wd5.myworkdayjobs.com/en-US/WSU_Jobs"
       }
-    ]
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Columbia University",
@@ -1610,30 +1635,27 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T14:50:26Z",
     "outcome": "complete",
-    "summary": "Department open-positions page links Interfolio 176021, which describes a July 1, 2026 start (last cycle); no current posting. Non-CS units (2026-10-08): Engineering, EE and Data Science Institute sites are behind a Cloudflare security challenge (403), not bypassed. CS open-positions page still describes a July 2026 start.",
+    "summary": "Department open-positions page links Interfolio 176021, which describes a July 1, 2026 start (last cycle); no current posting. Non-CS units (2026-10-08): Engineering, EE and Data Science Institute sites are behind a Cloudflare security challenge (403), not bypassed. CS open-positions page still describes a July 2026 start. Non-CS units (2026-10-08): CS department Open Positions page rendered but lists only the closed July 2026-start posting (Interfolio 176021 shows closed). Engineering, EE, DSI and IEOR sites returned 403 and were not bypassed.",
     "checkedUrls": [
       "https://www.cs.columbia.edu/about/employment/",
       "https://www.cs.columbia.edu/about/open-positions/",
       "https://engineering.columbia.edu/faculty-job-opportunities",
       "https://www.ee.columbia.edu/open-positions",
       "https://datascience.columbia.edu/about/careers/",
-      "https://www.cs.columbia.edu/open-positions/"
+      "https://www.cs.columbia.edu/open-positions/",
+      "https://apply.interfolio.com/176021",
+      "https://www.ee.columbia.edu/faculty-positions",
+      "https://datascience.columbia.edu/careers/",
+      "https://www.ieor.columbia.edu/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Columbia Engineering faculty job opportunities",
-        "url": "https://engineering.columbia.edu/faculty-job-opportunities"
-      },
-      {
-        "name": "Electrical Engineering open positions",
-        "url": "https://www.ee.columbia.edu/open-positions"
-      },
-      {
-        "name": "Data Science Institute careers",
-        "url": "https://datascience.columbia.edu/about/careers/"
+        "name": "Columbia CS Open Positions",
+        "url": "https://www.cs.columbia.edu/open-positions/"
       }
-    ]
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of South Florida",
@@ -1953,25 +1975,19 @@
     "state": "PA",
     "lastCheckedAt": "2026-10-08T12:00:00Z",
     "outcome": "complete",
-    "summary": "SCI recruiting page lists only searches with 2026 deadlines (Jan-Mar 2026) for Aug 2026 starts, which are stale, so none recorded. Non-CS units (2026-10-08): Swanson School open positions list only civil, industrial and an ECE chair search (not CS-targeted). The university Talent Center faculty list (pi.tt) returned a Bot Defense rejection and sci.pitt.edu did not resolve, so SCI/iSchool units could not be read.",
+    "summary": "SCI recruiting page lists only searches with 2026 deadlines (Jan-Mar 2026) for Aug 2026 starts, which are stale, so none recorded. Non-CS units (2026-10-08): Swanson School open positions list only civil, industrial and an ECE chair search (not CS-targeted). The university Talent Center faculty list (pi.tt) returned a Bot Defense rejection and sci.pitt.edu did not resolve, so SCI/iSchool units could not be read. Non-CS units (2026-10-08): sci.pitt.edu and www.sci.pitt.edu do not resolve from this environment, cs.pitt.edu returns Bot Defense rejection, and the Pitt Workday board returned HTTP 500. No current 2026-27 postings could be confirmed.",
     "checkedUrls": [
       "https://www.cs.pitt.edu/",
       "https://sci.pitt.edu/recruiting",
       "https://engineering.pitt.edu/ssoe-resources/ssoe-resources/open-positions/",
       "https://pi.tt/faculty-positions",
-      "https://www.join.pitt.edu/"
+      "https://www.join.pitt.edu/",
+      "https://www.sci.pitt.edu/recruiting",
+      "https://pitt.wd1.myworkdayjobs.com/en-US/pittcareers"
     ],
     "deferredUntil": null,
-    "relatedUnits": [
-      {
-        "name": "Swanson School of Engineering open positions",
-        "url": "https://engineering.pitt.edu/ssoe-resources/ssoe-resources/open-positions/"
-      },
-      {
-        "name": "Pitt Talent Center faculty positions",
-        "url": "https://pi.tt/faculty-positions"
-      }
-    ]
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T22:00:00Z"
   },
   {
     "school": "University of Texas at Arlington",

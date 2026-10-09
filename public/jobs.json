@@ -4748,5 +4748,157 @@
     "lastSeenAt": "2026-10-08",
     "source": "crawl",
     "verified": true
+  },
+  {
+    "id": "umich-robotics-hcai-senior-2026",
+    "school": "University of Michigan",
+    "department": "Robotics Department, College of Engineering",
+    "title": "Professor / Associate Professor in Human-Centered Embodied Artificial Intelligence (Robotics)",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai",
+      "vision"
+    ],
+    "state": "MI",
+    "city": "Ann Arbor",
+    "rolling": true,
+    "reviewBegins": "2026-11-01",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://careers.umich.edu/job_detail/283509/professor-associate-professor-human-centered-embodied-artificial-intelligence",
+    "summary": "Senior (promotion-ready assistant through full professor) tenure-track or tenured search in human-centered embodied AI, including human-robot interaction, foundation models and collaborative robotics. Applications submitted by 2026-12-15 receive full consideration.",
+    "postedDate": "2026-09-25",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "jhu-ece-tenure-track-ai-2026",
+    "school": "Johns Hopkins University",
+    "department": "Department of Electrical and Computer Engineering, Whiting School of Engineering",
+    "title": "Tenure-Track Positions in Electrical & Computer Engineering at All Ranks",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai",
+      "arch",
+      "robotics"
+    ],
+    "state": "MD",
+    "city": "Baltimore",
+    "url": "https://apply.interfolio.com/193404",
+    "summary": "Multiple tenure-track searches at all ranks in ECE and AI: AI hardware and systems, sensing and communications for AI, and autonomy, control and cyber-physical systems. Applications are reviewed as received.",
+    "rolling": true,
+    "postedDate": "2026-09-18",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "jhu-dsai-postdoc-scientific-ml-2026",
+    "school": "Johns Hopkins University",
+    "department": "Data Science and AI Institute (Applied Mathematics and Statistics), Whiting School of Engineering",
+    "title": "Postdoctoral Researcher in Scientific Machine Learning and Computational Biology",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "ai",
+      "mlmining",
+      "bio"
+    ],
+    "state": "MD",
+    "city": "Baltimore",
+    "url": "https://apply.interfolio.com/193840",
+    "summary": "Postdoc in the Maddu Lab on scientific machine learning, biophysical modeling and computational biology; CS is among the listed PhD fields. Reviewed on a rolling basis; the official board lists a close date of Oct 23, 2026.",
+    "deadline": "2026-10-23",
+    "rolling": true,
+    "postedDate": "2026-09-17",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "jhu-dsai-postdoc-machine-learning-2026",
+    "school": "Johns Hopkins University",
+    "department": "Data Science and AI Institute (Biomedical Engineering), Whiting School of Engineering",
+    "title": "Postdoctoral Researcher in Machine Learning",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "mlmining",
+      "ai"
+    ],
+    "state": "MD",
+    "city": "Baltimore",
+    "url": "https://apply.interfolio.com/193846",
+    "summary": "Postdoc in the Sulam Lab on foundations of machine learning, interpretable and trustworthy AI, and generative modeling; PhD in CS or a related field. Reviewed on a rolling basis; the official board lists a close date of Oct 9, 2026.",
+    "deadline": "2026-10-09",
+    "rolling": true,
+    "postedDate": "2026-09-17",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "jhu-education-quant-methods-aiml-2026",
+    "school": "Johns Hopkins University",
+    "department": "School of Education",
+    "title": "Assistant Professor, Quantitative Research Methodologist (AI/ML/NLP)",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "mlmining",
+      "nlp"
+    ],
+    "state": "MD",
+    "city": "Baltimore",
+    "url": "https://apply.interfolio.com/193721",
+    "summary": "Tenure-track quantitative methodologist with applied machine learning and NLP/LLM research methods; PhD fields include computer science.",
+    "rolling": true,
+    "reviewBegins": "2026-10-17",
+    "postedDate": "2026-09-17",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "jhu-cs-postdoc-causalml-2026",
+    "school": "Johns Hopkins University",
+    "department": "Department of Computer Science, Whiting School of Engineering",
+    "title": "Postdoctoral Fellow, CausalML Lab",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "ai",
+      "mlmining"
+    ],
+    "state": "MD",
+    "city": "Baltimore",
+    "url": "https://apply.interfolio.com/187731",
+    "summary": "Postdoc with Prof. Murat Kocaoglu on algorithms for causal decision making on non-IID time-series data; PhD in CS, statistics, EE or a related field.",
+    "postedDate": "2026-06-04",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "jhu-cs-postdoc-phillippy-genomics-2026",
+    "school": "Johns Hopkins University",
+    "department": "Department of Computer Science, Whiting School of Engineering",
+    "title": "Postdoctoral Fellow, Phillippy Lab",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "bio",
+      "act"
+    ],
+    "state": "MD",
+    "city": "Baltimore",
+    "url": "https://apply.interfolio.com/188681",
+    "summary": "Computer-science-based postdoc developing computational methods for genome assembly, comparative genomics and pangenomics; PhD in CS, data science or a related technical field.",
+    "postedDate": "2026-06-25",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
   }
 ]
