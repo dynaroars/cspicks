@@ -165,6 +165,7 @@ export function filterGrants(grants: Grant[], {
     // Free-text Query filter
     if (q) {
       const textToSearch = [
+        grant.id,
         grant.name,
         grant.shortName,
         grant.sponsor,

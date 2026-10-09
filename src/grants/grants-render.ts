@@ -1,3 +1,4 @@
+import { resultActions } from '../result-actions.js';
 /**
  * CS Awards & Grants Card Renderer
  */
@@ -6,8 +7,6 @@ import type { Grant } from '../types.js';
 import { grantDeadlinePresentation } from './grants-data.js';
 import { favoriteToggleButton } from '../favorites.js';
 
-const LINK_ICON = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
-const EXT_ICON = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
 
 function getCategoryClass(category: string) {
   const cat = String(category || '').toLowerCase();
@@ -44,7 +43,6 @@ export function renderGrantCard(grant: Grant, isFavorite: (id: string) => boolea
             ${grant.status === 'historical' ? '<span class="grant-status-badge">Historical</span>' : ''}
             ${deadline.estimated ? '<span class="grant-estimated-badge" title="Projected from the latest published cycle; confirm on the official program page">Estimated</span>' : ''}
             <span class="grant-cat-badge ${catClass}">${escapeHtml(grant.sponsorCategory)}</span>
-            ${grant.featured ? '<span class="grant-featured-badge" title="Highlighted award" aria-label="Highlighted award">★</span>' : ''}
             ${favoriteToggleButton(grant.id, isFavorite(grant.id))}
           </div>
         </div>
@@ -96,19 +94,9 @@ export function renderGrantCard(grant: Grant, isFavorite: (id: string) => boolea
         </div>
       </div>
 
-      <div class="grant-card-footer">
-        <a href="${url}" class="grant-action-link" target="_blank" rel="noopener noreferrer">
-          Official Program &amp; RFP ${EXT_ICON}
-        </a>
-        <div class="grant-footer-btns">
-          <a href="grants-submit.html?id=${encodeURIComponent(grant.id)}" class="grant-edit-link" title="Suggest an edit for this award">
-            ✎ Suggest update
-          </a>
-          <button type="button" class="grant-share-btn" data-share-grant="${escapeHtml(grant.id)}" title="Copy link to this grant" aria-label="Copy link to ${escapeHtml(grant.name)}">
-            ${LINK_ICON} <span>Copy link</span>
-          </button>
-        </div>
-      </div>
+      <div class="grant-card-footer result-card-footer">${resultActions(grant.name, `
+        <a href="grants-submit.html?id=${encodeURIComponent(grant.id)}" class="grant-edit-link">Suggest update</a>
+      `, `grants.html?q=${encodeURIComponent(grant.id)}#${encodeURIComponent(grant.id)}`)}</div>
     </article>
   `;
 }

@@ -293,6 +293,7 @@ export function searchProfessors(query: string) {
 }
 
 export function findMatchingArea(query: string) {
+  if (!query.trim()) return null;
   const q = query.toLowerCase();
 
   if (areaLabels[q]) return q;

@@ -68,14 +68,14 @@ Every page keeps the URL in sync with what's on screen, so any view is a link th
 | Search (`index.html`) | `q` (the search text, including `A vs B`), `target`/`targetType` (the selected analysis target), plus region/years/venue set/rankings/history/per-capita from the shared filter bar |
 | Discoveries (`index.html?view=discoveries`) | `view=discoveries`, region/years/venue set/history/per-capita, plus a `#fragment` per card (`#discovery-fastest-growing-subfields`, etc.) that scrolls to and briefly highlights that card on load — or `q`/`target` once the visitor searches for something |
 | Simulator (`simulator.html`) | Filters, `univ` (selected university), and `candidates` (the raw candidate names/DBLP links) — opening the link pre-fills the setup one click from a result, without re-querying DBLP on load |
-| CS Confs (`csconfs.html`) | `q`, conference-year range, venue set, and whether only upcoming conferences are shown |
+| CS Confs (`csconfs.html`) | `q` (keywords: `loc:`, `area:`, `deadline:`, `verified:`, `favorites:`), conference years, and venue set; older location/deadline/favorites links restore as keywords |
 | NSF Funding (`nsf.html`) | `q` (search or `A vs B`) plus the year-range filter |
 | US Jobs (`jobs.html`) | `q` (keywords: `school:`, `track:`, `dept:`, `level:`, `area:`, `loc:`, `visa:`, `status:`), `sort`, `favorites`, and `view` (`position`, `school`); older filter params restore as keywords |
 | Awards & Grants (`grants.html`) | `q` (keywords: `sponsor:`, `audience:`, `category:`, `topic:`, `loc:`, `deadline:`, `status:`), `sort`, and `favorites`; older filter params restore as keywords |
 
-Jobs and Awards & Grants use search keywords for category filters. Click **ⓘ** inside search for usage and examples.
+Every explorer uses the same search controls and clickable **ⓘ** help. Autocomplete offers keyword names and values while preserving the rest of your query. Jobs, Awards & Grants, and CS Confs use `favorites: only` and list starred results first immediately. Dataset settings and supporting views open on demand; their summaries show the active choices. Titles link to the official source, with secondary card actions in a **⋯** menu.
 Combine filters (e.g. `track: teaching loc: TX,VA` or `audience: phd category: industry`), quote values with spaces
-(e.g. `topic: "machine learning"`), and use commas for alternatives within one filter. Jobs shows active postings
+(e.g. `topic: "machine learning"`), and use commas for alternatives within one filter. Repeated filters require all values to match. Jobs shows active postings
 by default; `status: closed` or `status: all` also finds older postings.
 
 Filter choices also persist across page navigations via `localStorage`, so switching between Search and Discoveries, or clicking into Simulator, NSF Funding, or Awards & Grants, doesn't silently reset the region or year range.

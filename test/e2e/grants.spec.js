@@ -88,7 +88,7 @@ test('awards keyword help fits mobile and legacy filters become editable search 
   const input = page.locator('#grants-search');
   await expect(input).toHaveValue('audience: phd category: industry');
   await expect(page.locator('.grant-card').first()).toBeVisible();
-  await expect(page.locator('.search-filters select')).toHaveCount(2);
+  await expect(page.locator('.search-filters select')).toHaveCount(1);
   await page.reload();
   await expect(input).toHaveValue('audience: phd category: industry');
 
@@ -109,4 +109,19 @@ test('awards keyword help fits mobile and legacy filters become editable search 
   await expect(page.locator('.grant-card').first()).toBeVisible();
   await input.fill('');
   await expect(page.locator('.grant-card').nth(40)).toBeVisible();
+});
+
+test('award actions and shared links use the same compact result menu as Jobs', async ({ page }) => {
+  await page.goto('grants.html');
+  await expect(page.locator('.grant-card').first()).toBeVisible();
+  await expect(page.locator('#favorites-select')).toHaveCount(0);
+  const card = page.locator('.grant-card').first();
+  await card.locator('.result-actions summary').click();
+  await expect(card.getByRole('link', { name: 'Suggest update' })).toBeVisible();
+  await expect(card.getByRole('link', { name: /Official Program/ })).toHaveCount(0);
+  const name = await card.locator('.grant-title').textContent();
+  const link = await card.locator('[data-copy-result-url]').getAttribute('data-copy-result-url');
+  await page.goto(link);
+  await expect(page.locator('.grant-card')).toHaveCount(1);
+  await expect(page.locator('.grant-title')).toContainText(name.trim());
 });

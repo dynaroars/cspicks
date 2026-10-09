@@ -87,11 +87,16 @@ project.
   same everywhere.
 - `src/charts.js` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges
   shared defaults and destroys the previous chart; `onThemeChange(fn)` re-renders on light/dark switches.
-- `src/suggestion-box.js` — `createSuggestionBox({ input, listbox, getGroups, onSelect })` owns the
-  autocomplete menu's markup, keyboard handling, ARIA state, and the `A vs B` prefix logic (it completes the
-  trailing side only and tells `getGroups` it is comparing). Search supplies CSRankings groups through
-  `src/search-suggestions.js`; Funding supplies NSF universities, professors, and programs from its own
-  index. Both pages mount it on `<div id="universal-suggestions">` inside `.universal-search`.
+- `src/search-controls.ts` — shared search controller for Search/Discoveries, Funding, Jobs, Awards, and CS Confs:
+  keyword-name/value completion, the clickable ⓘ help popup, input events, `/` shortcut, up to four examples,
+  and URL updates. Pages supply their keyword specs, value sources, ordinary suggestion groups, and rendering
+  callbacks. `wireSearchInput` also serves the specialized Simulator workflow.
+- `src/suggestion-box.ts` — low-level autocomplete keyboard handling, listbox markup, and `A vs B` completion.
+- `src/search-keywords.ts` — parsing/alias resolution, quotes, comma alternatives (OR), repeated filters (AND),
+  query mutation, and migration of legacy URL filters into visible keywords. `src/search-query.ts` applies
+  combined university/researcher/subject constraints to Search records without changing their dataset metrics.
+- `src/result-actions.ts` — shared ⋯ card menus for Jobs, Awards, and CS Confs, including copy-link feedback,
+  outside-click/Escape dismissal, and the existing correction links.
 - `src/metrics.js` — the school/researcher/subfield metrics layer built on top of `data.js`'s filtered
   output: per-school metrics (movement, momentum, concentration, breadth, collaboration proxy), per-capita
   ranking, rank-stability variants, area-vs-area comparison, and the Discoveries insight calculators
@@ -100,11 +105,11 @@ project.
   place derived-metric logic should live rather than being duplicated per page.
 - `src/analysis-ui.js` — shared HTML-rendering helpers (metric cards, labeled tooltips) used by the
   Search-page analysis panel; keeps `analysis.js` focused on orchestration.
-- `src/favorites.ts` — browser-local ★ favorites (localStorage, one key per page; no account or sync) used by CS Confs,
-  Awards & Grants, and US Jobs: the star button, a "★ Favorites only (N)" select (`#favorites-select`, URL `favorites=only`),
-  the `favorites: only` search keyword, and starred-first ordering. US Jobs uses the keyword instead of the select;
-  its ⋯ favorites menu offers export with two or more stars. Pages pass their own id function (`job.id`, `grant.id`,
-  `<name> <year>`) to `prioritizeFavorites`/`onlyFavorites` and call `onFavoriteChange` after `wireFavoriteToggles`.
+- `src/favorites.ts` — browser-local ★ favorites used by CS Confs, Awards, and Jobs: stars reorder results
+  immediately, `favorites: only` narrows through the search box, and legacy `favorites=only` links migrate
+  into that keyword. No favorites dropdowns. Jobs offers Markdown export in its ⋯ menu with two or more
+  stars. Dataset settings, maps, analysis, score breakdowns, and methodology are closed by default and
+  available on demand; dataset-setting summaries show the active region/year/venue choices.
 - `src/seo.js` / `src/share.js` / `src/analytics.js` — growth/discoverability infra used by every page:
   `seo.js` keeps `<title>`/description/canonical/OpenGraph tags in sync with the on-screen view, `share.js`
   is the reusable Copy Link / Web Share control, and `analytics.js` fires opt-in, no-op-by-default usage

@@ -4,9 +4,10 @@ import { compareNumber, renderComparisonNotice, renderScoreboard } from './compa
 import { createFilterBar } from './filters.js';
 import { renderInfiniteLists } from './search-results.js';
 import { cleanName, escapeHtml, fetchLatestRepoCommit, formatRelativeTime, getInstitutionShortName } from './shared.js';
-import { createSuggestionBox, rankSuggestions } from './suggestion-box.js';
+import { rankSuggestions } from './suggestion-box.js';
 import { initTooltipPositioning } from './tooltip-position.js';
-import { mountKeywordHelp, matchesKeyword, parseKeywordQuery } from './search-keywords.js';
+import { matchesKeyword, parseKeywordQuery } from './search-keywords.js';
+import { createSearchControls, renderSearchExamples as renderExampleChips, updateSearchUrl } from './search-controls.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
 import { trackComparison, trackView } from './analytics.js';
 import type { FilterController } from './filters.js';
@@ -158,7 +159,7 @@ function updateUrl() {
   const next = filters.toParams();
   const query = document.querySelector<HTMLInputElement>('#funding-search')!.value.trim();
   if (query) next.set('q', query);
-  history.replaceState({}, '', `${location.pathname}?${next}`);
+  updateSearchUrl(next, query);
   updateSeoForCurrentView(query);
 }
 
@@ -328,9 +329,12 @@ function setIndex() {
 }
 
 function setupSuggestions(input: HTMLInputElement) {
-  return createSuggestionBox({
+  return createSearchControls({
     input,
     listbox: byId('universal-suggestions'),
+    specs: NSF_KEYWORD_SPECS, helpId: 'funding-search-help', example: 'institution: MIT program: CAREER',
+    examples: byId('funding-examples'), onQuery: query => render(query),
+    getKeywordSources: () => ({ institution: suggestionItems?.schools || [], pi: suggestionItems?.faculty || [], program: suggestionItems?.programs || [] }),
     emptyText: 'No matching NSF funding record',
     getGroups: (query, { comparing }) => {
       if (!suggestionItems) return null;
@@ -356,21 +360,18 @@ function rebuild() {
 
 function renderExamples() {
   const examples = byId('funding-examples');
-  const chip = (query: string, label: string) =>
-    `<button type="button" data-query="${escapeHtml(query)}">${escapeHtml(label)}</button>`;
   // Two best-funded universities that have a short name, so the "A vs B" chip
   // advertising head-to-head mode stays one line — as on Search.
   const abbreviated = index.schools
     .map(school => ({ label: getInstitutionShortName(school.name), query: school.name }))
     .filter(entry => entry.label !== entry.query)
     .slice(0, 2);
-  examples.innerHTML = `${index.schools.slice(0, 2).map(record =>
-    chip(record.name, record.name)
-  ).join('')}${index.faculty.slice(0, 3).map(record =>
-    chip(record.name, record.name.replace(/\s+\d{4}$/, ''))
-  ).join('')}${abbreviated.length === 2
-    ? chip(`${abbreviated[0]!.query} vs ${abbreviated[1]!.query}`, `${abbreviated[0]!.label} vs ${abbreviated[1]!.label}`)
-    : ''}`;
+  renderExampleChips(examples, [
+    ...index.schools.slice(0, 1).map(record => ({ label: getInstitutionShortName(record.name), query: record.name })),
+    ...index.faculty.slice(0, 1).map(record => ({ label: cleanName(record.name), query: record.name })),
+    { label: 'program: CAREER', query: 'program: CAREER' },
+    ...(abbreviated.length === 2 ? [{ label: `${abbreviated[0]!.label} vs ${abbreviated[1]!.label}`, query: `${abbreviated[0]!.query} vs ${abbreviated[1]!.query}` }] : [])
+  ]);
 }
 
 async function init() {
@@ -384,15 +385,10 @@ async function init() {
   input.disabled = false;
   input.placeholder = 'Search university, professor, award, or NSF program';
   input.value = params.get('q') || '';
-  mountKeywordHelp(input, NSF_KEYWORD_SPECS, 'funding-search-help', 'institution: MIT program: CAREER', 'Combine keywords to narrow your search. Quote values with spaces.');
   setupDataHealth();
   renderExamples();
   render(input.value);
   const suggestionBox = setupSuggestions(input);
-  input.addEventListener('input', () => {
-    suggestionBox.render(input.value);
-    render(input.value);
-  });
   // Clicking a card searches for that university or professor, the way
   // clicking a Search result opens that target.
   document.querySelector('.funding-results-container')?.addEventListener('click', event => {
@@ -404,12 +400,6 @@ async function init() {
     input.value = name;
     render(input.value);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-  byId('funding-examples').addEventListener('click', event => {
-    const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>('button') : null;
-    if (!button) return;
-    input.value = button.dataset.query || '';
-    render(input.value);
   });
   input.focus();
 }

@@ -1,3 +1,4 @@
+import { openDetails } from './helpers/disclosures.js';
 import { expect, test } from '@playwright/test';
 
 const day = offset => new Date(Date.now() + offset * 86400000).toISOString().slice(0, 10);
@@ -39,16 +40,19 @@ test('Awards & Grants and CS Confs have the favorites filter and the keyword', a
   await page.goto('grants.html');
   await expect(page.locator('.grant-card').first()).toBeVisible();
   await page.locator('.grant-card').nth(2).locator('.favorite-toggle').click();
-  await page.locator('#favorites-select').selectOption('only');
+  await openDetails(page, '#research-settings');
+  await page.locator('#grants-search').fill('favorites: only');
   await expect(page.locator('.grant-card')).toHaveCount(1);
-  await page.locator('#favorites-select').selectOption('all');
+  await openDetails(page, '#research-settings');
+  await page.locator('#grants-search').fill('');
   await page.locator('#grants-search').fill('favorites: only');
   await expect(page.locator('.grant-card')).toHaveCount(1);
 
   await page.goto('csconfs.html');
   await expect(page.locator('.schedule-card').first()).toBeVisible();
   await page.locator('.schedule-card').nth(1).locator('.favorite-toggle').click();
-  await page.locator('#favorites-select').selectOption('only');
+  await openDetails(page, '#research-settings');
+  await page.locator('#csconfs-search').fill('favorites: only');
   await expect(page.locator('.schedule-card')).toHaveCount(1);
-  await expect(page).toHaveURL(/favorites=only/);
+  await expect(page).toHaveURL(/q=favorites/);
 });

@@ -74,7 +74,7 @@
         </div>
       </div>
 
-      <div id="filter-bar"></div>
+      <details id="research-settings" class="search-options"><summary>Dataset settings</summary><div id="filter-bar"></div></details>
 
       <div class="search-examples" aria-label="Example searches">
         <div class="search-examples-row" id="search-example-fixed"></div>
@@ -107,7 +107,7 @@
       <section id="dblp-results" class="results-grid"></section>
     </main>
 
-    <section id="integrated-analysis" class="integrated-analysis" hidden aria-live="polite">
+    <details id="integrated-analysis" class="integrated-analysis search-options" hidden><summary>Analysis</summary>
       <div id="researcher-highlights" hidden></div>
 
       <div class="nav-tabs analysis-nav-tabs" role="tablist" aria-label="Analysis views">
@@ -169,7 +169,7 @@
       <div id="stability-view" class="view-section" hidden>
         <div id="stability-stats" class="diagnostic-panel"></div>
       </div>
-    </section>
+    </details>
 
     <section id="site-data-health" class="site-data-health" hidden aria-label="CS Picks health">
       <button type="button" id="data-health-close" class="data-health-close" aria-label="Close data health"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>

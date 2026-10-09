@@ -1,3 +1,4 @@
+import { openDetails } from './helpers/disclosures.js';
 import { expect, test } from '@playwright/test';
 
 // Keep fixture contents stable across calendar-year boundaries. The app's
@@ -86,7 +87,8 @@ test('the Discoveries view shows insight cards without a separate nav link', asy
   await expect(page.locator('#nav-discoveries')).toHaveCount(0);
   // Same shell as Search - header, filter bar, search box, examples - but the
   // insight-card grid takes the place of the default university/faculty lists.
-  await expect(page.locator('#filter-bar')).toBeVisible();
+  await expect(page.locator('#research-settings')).toBeVisible();
+  await expect(page.locator('#research-settings')).not.toHaveAttribute('open', '');
   await expect(page.locator('#main-search')).toBeVisible();
   await expect(page.locator('#discovery-stats')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Biggest rank gains' })).toBeVisible();
@@ -100,6 +102,7 @@ test('the Discoveries view shows insight cards without a separate nav link', asy
 
   await page.locator('#main-search').fill('');
   await expect(page.locator('#discovery-stats')).toBeVisible();
+  await openDetails(page, '#research-settings');
   await page.locator('#region-select').selectOption('europe');
   await expect(page).toHaveURL(/view=discoveries/);
   await expect(page).toHaveURL(/region=europe/);

@@ -1,74 +1,50 @@
 import { getConferenceAreaMap, publicationMatchesConferenceSet, schoolAliases } from './data.js';
 import { areaLabels, cleanName, countryFlag, getConferenceLabel } from './shared.js';
-import { createSuggestionBox, rankSuggestions } from './suggestion-box.js';
+import { rankSuggestions } from './suggestion-box.js';
+import { createSearchControls } from './search-controls.js';
 import type { FilteredData } from './types.js';
-import type { SuggestionItem } from './suggestion-box.js';
+import type { SuggestionGroups, SuggestionItem } from './suggestion-box.js';
 
-// The Search box's autocomplete: universities, professors, areas, and
-// conferences, ranked by how well they match what has been typed.
-//
-// The list is scrollable, so groups keep enough rows to hold every plausible
-// match — a surname like "Nguyen" has dozens — and each group says how many
-// matches exist when it has to trim.
-const GROUP_LIMITS = { schools: 12, professors: 25, areas: 8, conferences: 8 };
+type Context = { appData: FilteredData | null; confSet: string };
+function searchSources({ appData, confSet }: Context): Record<string, SuggestionItem[]> {
+  if (!appData) return { school: [], prof: [], area: [], conferences: [] };
+  const aliases = new Map<string, string[]>();
+  Object.entries(schoolAliases).forEach(([alias, school]) => aliases.set(school, [...(aliases.get(school) || []), alias]));
+  return {
+    school: Object.values(appData.schools).map(school => ({
+      kind: 'school', label: school.name, value: school.name, flag: countryFlag(school.country, school.countryName),
+      detail: Number.isFinite(school.rank) ? `University · #${school.rank}` : 'University',
+      searchTerms: (aliases.get(school.name) || []).join(' '), target: { type: 'school', name: school.name }
+    })),
+    prof: Object.values(appData.professors).map(professor => ({
+      kind: 'researcher', label: cleanName(professor.name), value: professor.name,
+      detail: professor.affiliation || 'Professor', searchTerms: (professor.aliases || []).join(' '),
+      target: { type: 'researcher', name: professor.name }
+    })),
+    area: Object.entries(areaLabels).map(([key, label]) => ({ kind: 'area', label, value: label, detail: 'Research area', searchTerms: key })),
+    conferences: Object.keys(getConferenceAreaMap(confSet)).filter(key => publicationMatchesConferenceSet({ area: key }, confSet))
+      .map(key => ({ kind: 'conference', label: getConferenceLabel(key), value: key, detail: 'Conference' }))
+  };
+}
 
-export function createSearchSuggestionBox({ input, listbox, getContext, onSelect }: {
-  input: HTMLInputElement;
-  listbox: HTMLElement;
-  getContext: () => { appData: FilteredData | null, confSet: string };
-  onSelect: (item: SuggestionItem, prefix: string) => void;
+export function createSearchSuggestionBox(options: Omit<Parameters<typeof createSearchControls>[0], 'getGroups' | 'getKeywordSources'> & {
+  getContext: () => Context;
 }) {
-  return createSuggestionBox({
-    input,
-    listbox,
-    onSelect,
+  return createSearchControls({
+    ...options,
     emptyText: 'No matching university, professor, area, or conference',
+    getKeywordSources: () => {
+      const sources = searchSources(options.getContext());
+      return { ...sources, area: [...sources.area!, ...sources.conferences!] };
+    },
     getGroups: (query, { comparing }) => {
-      const { appData, confSet } = getContext();
-      if (!appData) return null;
-
-      const aliasesBySchool = new Map<string, string[]>();
-      Object.entries(schoolAliases).forEach(([alias, school]) => {
-        if (!aliasesBySchool.has(school)) aliasesBySchool.set(school, []);
-        aliasesBySchool.get(school)!.push(alias);
-      });
-
-      const schools = rankSuggestions(Object.values(appData.schools).map(school => ({
-        kind: 'school',
-        label: school.name,
-        value: school.name,
-        flag: countryFlag(school.country, school.countryName),
-        detail: Number.isFinite(school.rank) ? `University · #${school.rank}` : 'University',
-        searchTerms: (aliasesBySchool.get(school.name) || []).join(' '),
-        target: { type: 'school', name: school.name }
-      })), query, GROUP_LIMITS.schools);
-      const professors = rankSuggestions(Object.values(appData.professors).map(professor => ({
-        kind: 'researcher',
-        label: cleanName(professor.name),
-        value: professor.name,
-        detail: professor.affiliation || 'Professor',
-        searchTerms: (professor.aliases || []).join(' '),
-        target: { type: 'researcher', name: professor.name }
-      })), query, GROUP_LIMITS.professors);
-
-      // Only entities can be compared, so "A vs …" narrows the menu.
-      if (comparing) return [['Universities', schools], ['Professors', professors]];
-
-      const areas = rankSuggestions(Object.entries(areaLabels).map(([key, label]) => ({
-        kind: 'area', label, value: label, detail: 'Research area', searchTerms: key
-      })), query, GROUP_LIMITS.areas);
-      const conferences = rankSuggestions(Object.keys(getConferenceAreaMap(confSet))
-        .filter(key => publicationMatchesConferenceSet({ area: key }, confSet))
-        .map(key => ({
-          kind: 'conference', label: getConferenceLabel(key), value: key, detail: 'Conference'
-        })), query, GROUP_LIMITS.conferences);
-
-      return [
-        ['Universities', schools],
-        ['Professors', professors],
-        ['Research areas', areas],
-        ['Conferences', conferences]
+      const sources = searchSources(options.getContext());
+      const groups: SuggestionGroups = [
+        ['Universities', rankSuggestions(sources.school!, query, 12)],
+        ['Professors', rankSuggestions(sources.prof!, query, 25)]
       ];
+      if (comparing) return groups;
+      return [...groups, ['Research areas', rankSuggestions(sources.area!, query, 8)], ['Conferences', rankSuggestions(sources.conferences!, query, 8)]];
     }
   });
 }

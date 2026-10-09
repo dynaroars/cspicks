@@ -283,6 +283,16 @@ function setupForm() {
     chooseEntry(existing);
   });
 
+  const requested = new URLSearchParams(location.search);
+  const edition = records.find(entry => entry.name === requested.get('name') && String(entry.year) === requested.get('year'));
+  if (edition) {
+    form.querySelector<HTMLInputElement>('input[name="kind"][value="correction"]')!.checked = true;
+    document.getElementById('correction-target-row')!.hidden = false;
+    target.required = true;
+    quick.apply();
+    chooseEntry(edition);
+  }
+
   form.addEventListener('submit', event => {
     event.preventDefault();
     const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;

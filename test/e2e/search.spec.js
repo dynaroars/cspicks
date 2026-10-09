@@ -1,3 +1,4 @@
+import { openDetails } from './helpers/disclosures.js';
 import { checkSearchHelp } from './helpers/search-help.js';
 import { expect, test } from '@playwright/test';
 
@@ -117,6 +118,7 @@ test('default view ranks universities and people side by side, and clears stale 
 
   await page.locator('#main-search').fill('George Mason University');
   await expect(page.locator('#integrated-analysis')).toBeVisible();
+  await openDetails(page, '#integrated-analysis');
   await expect(page.locator('#school-results .card-header')).toHaveJSProperty('tagName', 'DIV');
   await expect(page.locator('#school-results .toggle-icon')).toHaveCount(0);
   await expect(page.locator('#ranking-stats')).toContainText('Profile completeness');
@@ -124,9 +126,10 @@ test('default view ranks universities and people side by side, and clears stale 
   const analysisWidths = await analysisCards.evaluateAll(cards => cards.map(card => Math.round(card.getBoundingClientRect().width)));
   expect(analysisWidths.length).toBeGreaterThan(1);
   expect(new Set(analysisWidths).size).toBe(1);
-  // The score breakdown opens with the card; collapsing is the reader's choice.
+  // Supporting score details stay closed until explicitly opened.
   const contributions = page.locator('#school-results .attribution-details');
-  await expect(contributions).toHaveAttribute('open', '');
+  await expect(contributions).not.toHaveAttribute('open', '');
+  await contributions.locator('summary').click();
   await expect(contributions.locator('.attribution-content')).toBeVisible();
   await contributions.locator('summary').click();
   await expect(contributions.locator('.attribution-content')).toBeHidden();
@@ -137,6 +140,7 @@ test('default view ranks universities and people side by side, and clears stale 
   await expect(page.locator('#school-results .school-area-section .faculty-tag')).toContainText('Hai Duong 3 papers (1.5 adjusted)');
   await expect(page.locator('#school-results .school-area-header')).toContainText('3 papers (1.5 adjusted)');
 
+  await openDetails(page, '#research-settings');
   await page.locator('#region-select').selectOption('europe');
   await expect(page.locator('#integrated-analysis')).toBeHidden();
   await expect(page).not.toHaveURL(/target=/);
@@ -158,6 +162,7 @@ test('the shared filter bar stays a single roomy row', async ({ page }) => {
 
   await page.goto('./?percapita=false');
   await expect(page.locator('#school-results')).toContainText('GMU');
+  await openDetails(page, '#research-settings');
   const layout = await measurements();
   expect(layout.toggleWidths.every(width => width >= 80)).toBe(true);
   expect(layout.wraps).toBe(1);
@@ -169,12 +174,15 @@ for (const width of [1440, 820, 390]) {
     await page.goto('./?percapita=false');
     await page.locator('#main-search').fill('George Mason University');
     await expect(page.locator('#integrated-analysis')).toBeVisible();
+    await openDetails(page, '#integrated-analysis');
     await expect(page.locator('#ranking-stats')).toContainText('Profile completeness');
     // Dismiss the autocomplete overlay (it sits above everything) without touching
     // any control this test also wants to hover.
     await page.locator('#main-search').blur();
     await expect(page.locator('#universal-suggestions')).toBeHidden();
 
+    await openDetails(page, '#research-settings');
+    await openDetails(page, '#school-results .attribution-details');
     const triggers = page.locator([
       '#filter-bar .tooltip-trigger',
       '#integrated-analysis .analysis-tab-info:visible',
@@ -230,6 +238,7 @@ test('per-capita ordering is off by default and can be turned on', async ({ page
   await expect(page).not.toHaveURL(/percapita=true/);
   // Every fixture department is below the five-faculty floor, so switching the
   // ordering on leaves it with nothing to rank.
+  await openDetails(page, '#research-settings');
   await page.locator('#per-capita-mode').check();
   await expect(page.locator('#school-results .card')).toHaveCount(0);
   await expect(page).toHaveURL(/percapita=true/);
@@ -263,6 +272,7 @@ test('official aliases resolve professors and schools show country and departmen
   await page.locator('#main-search').fill('H. Duong');
   await expect(page.locator('#prof-results')).toContainText('Hai Duong');
   await expect(page.locator('#integrated-analysis')).toBeVisible();
+  await openDetails(page, '#integrated-analysis');
 
   await page.locator('#main-search').fill('George Mason University');
   const school = page.locator('#school-results .card');
@@ -298,6 +308,7 @@ test('rankings toggle ranks universities and is remembered', async ({ page }) =>
   await expect(page.locator('#school-results .card').first()).toBeVisible();
   await expect(page.locator('main .result-position')).toHaveCount(0);
 
+  await openDetails(page, '#research-settings');
   await page.locator('#show-rankings').check();
   await expect(page).toHaveURL(/rankings=true/);
   // Universities lead with their rank; people are numbered by list position.
@@ -322,6 +333,7 @@ test('university card reflects per-capita rank when Show Rankings and Per capita
   await expect(page.locator('#school-results .result-position')).toHaveCount(1);
   await page.locator('#main-search').blur();
 
+  await openDetails(page, '#research-settings');
   await page.locator('#per-capita-mode').check();
   await expect(page).toHaveURL(/percapita=true/);
   // In the test fixture, GMU has < 5 faculty so it has no per-capita rank
@@ -373,6 +385,7 @@ test('a professor with only a CORE-A-only-venue publication appears under CORE A
   await expect(page.locator('#school-results .card')).toHaveCount(0);
 
   await page.goto('./');
+  await openDetails(page, '#research-settings');
   await page.locator('#conf-set').selectOption('core-a');
   // Selecting CORE A/A* triggers an async fetch of the extra-venue dataset;
   // the select is disabled for the duration (see src/filters.ts), so wait for
@@ -387,6 +400,7 @@ test('a professor with only a CORE-A*-only-venue publication appears under CORE 
   await expect(page.locator('#school-results .card')).toHaveCount(0);
 
   await page.goto('./');
+  await openDetails(page, '#research-settings');
   await page.locator('#conf-set').selectOption('core');
   await expect(page.locator('#conf-set')).toBeEnabled();
   await page.locator('#main-search').fill('Star Extra University');
@@ -395,9 +409,11 @@ test('a professor with only a CORE-A*-only-venue publication appears under CORE 
 
 test('CORE A conference trends include a published ASE venue', async ({ page }) => {
   await page.goto('./');
+  await openDetails(page, '#research-settings');
   await page.locator('#conf-set').selectOption('core-a');
   await page.locator('#main-search').fill('George Mason University');
   await expect(page.locator('#integrated-analysis')).toBeVisible();
+  await openDetails(page, '#integrated-analysis');
   await page.getByRole('tab', { name: /Conference Trends/ }).click();
   await expect(page.locator('#conf-checkbox-groups')).toContainText('ASE');
 });
@@ -409,6 +425,7 @@ test('university analysis renders Activity, Faculty Diversity, and Publishing Ef
   await page.goto('./');
   await page.locator('#main-search').fill('George Mason University');
   await expect(page.locator('#integrated-analysis')).toBeVisible();
+  await openDetails(page, '#integrated-analysis');
 
   // 1. Activity tab (default active tab for schools)
   await expect(page.locator('#school-trends-view')).toBeVisible();
@@ -447,6 +464,7 @@ test('university analysis renders Activity, Faculty Diversity, and Publishing Ef
 test('historical mode loads affiliation data without an extra status box', async ({ page }) => {
   await page.goto('./');
   await expect(page.locator('#history-warning')).toHaveCount(0);
+  await openDetails(page, '#research-settings');
   await page.locator('#historical-mode').check();
   await expect(page.locator('#historical-mode')).toBeChecked();
 });
@@ -455,6 +473,7 @@ test('professor analysis shows activity, area, and venue patterns', async ({ pag
   await page.goto('./');
   await page.locator('#main-search').fill('Hai Duong');
   await expect(page.locator('#integrated-analysis')).toBeVisible();
+  await openDetails(page, '#integrated-analysis');
   // The school-only tabs, including Rank Stability, hide for a researcher.
   const visibleTabs = page.locator('.analysis-nav-tabs .nav-tab:visible');
   await expect(visibleTabs).toHaveCount(3);
@@ -480,6 +499,7 @@ test('professor analysis shows activity, area, and venue patterns', async ({ pag
 test('region defaults are locale-aware and a user choice carries across every tab', async ({ page }) => {
   await page.goto('./');
   await expect(page.locator('#region-select')).toHaveValue('us');
+  await openDetails(page, '#research-settings');
   await page.locator('#region-select').selectOption('europe');
 
   await page.goto('./?view=discoveries');
@@ -500,4 +520,30 @@ test('index.html uses the Jobs-style clickable search help', async ({ page }) =>
 
 test('index.html?view=discoveries uses the Jobs-style clickable search help', async ({ page }) => {
   await checkSearchHelp(page, { path: 'index.html?view=discoveries', inputId: 'main-search', panelId: 'main-search-help', example: 'school: MIT' });
+});
+
+test('shared search completes keywords and combines constraints without opening secondary views', async ({ page }) => {
+  await page.goto('index.html');
+  const input = page.locator('#main-search');
+  await expect(input).toBeEnabled();
+  await expect(page.locator('#research-settings')).not.toHaveAttribute('open', '');
+  await expect(page.locator('#search-example-items button, #search-example-items a')).toHaveCount(4);
+  await input.fill('scho');
+  await page.getByRole('option', { name: /^school:/ }).click();
+  await expect(input).toHaveValue('school: ');
+  await expect(page.getByRole('option', { name: /George Mason University/ })).toBeVisible();
+  await page.getByRole('option', { name: /George Mason University/ }).click();
+  await expect(input).toHaveValue('school: "George Mason University"');
+  await expect(page.locator('#school-results .card')).toHaveCount(1);
+  await expect(page.locator('#integrated-analysis')).not.toHaveAttribute('open', '');
+  await input.fill('school: "George Mason University" area: soft');
+  await page.getByRole('option', { name: /Software Engineering/ }).click();
+  await expect(input).toHaveValue('school: "George Mason University" area: "Software Engineering"');
+  await expect(page.locator('#school-results .card')).toHaveCount(1);
+  await expect(page.locator('#prof-results .card')).toHaveCount(1);
+  await expect(page.locator('#prof-results')).toContainText('Hai Duong');
+  await input.fill('school: "George Mason University" area: security');
+  await expect(page.locator('#school-results .card')).toHaveCount(0);
+  await input.fill('');
+  await expect(page.locator('#school-results .card').first()).toBeVisible();
 });

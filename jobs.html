@@ -89,7 +89,7 @@
     </section>
 
     <main class="jobs-results-container">
-      <details class="job-map-details" open>
+      <details class="job-map-details">
         <summary>Map by state <span id="map-hint">(click states to filter; click again to remove)</span></summary>
         <div id="jobs-map" class="job-map" role="group" aria-label="Positions by state"></div>
         <button type="button" id="clear-map-states" class="job-map-clear" hidden>Clear states</button>
@@ -102,9 +102,11 @@
 
       <section id="jobs-results" class="jobs-results" aria-label="US academic CS jobs"></section>
 
+      <details class="search-options context-details"><summary>About these job listings</summary>
       <p class="context-note">
         Postings are collected from public department and university hiring pages and community submissions, then reviewed; a checkmark means a posting was checked against its official page, not that CS Picks endorses the employer. A posting stays listed as active until its deadline passes (or, with no deadline, until it has not been confirmed for 90 days); search <code>status: closed</code> to browse earlier ones. Deadlines are interpreted as Anywhere on Earth. Always confirm details and apply on the official page. School rankings are CSRankings (US, last 10 years) and are informational only.
       </p>
+      </details>
     </main>
   </div>
   <script type="module" src="/src/jobs/main.js"></script>

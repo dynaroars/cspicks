@@ -5,6 +5,8 @@ export interface SuggestionItem {
   kind?: string;
   label: string;
   value?: string;
+  /** Completed keyword query; ordinary entity suggestions retain their own value. */
+  query?: string;
   detail: string;
   searchTerms?: string;
   flag?: string;

@@ -1,3 +1,4 @@
+import { openDetails } from './helpers/disclosures.js';
 import { expect, test } from '@playwright/test';
 
 const day = offset => new Date(Date.now() + offset * 86400000).toISOString().slice(0, 10);
@@ -68,6 +69,7 @@ test('search, filters, and the state map narrow the list', async ({ page }) => {
   await expect(page.locator('#state-select')).toHaveCount(0);
   const clearStates = page.locator('#clear-map-states');
   await expect(clearStates).toBeHidden();
+  await openDetails(page, '.job-map-details');
   const virginia = page.locator('.job-map-tile[data-state="VA"]');
   await expect(virginia).toHaveAttribute('aria-label', 'Virginia: 1 position');
   await virginia.click();
@@ -77,11 +79,13 @@ test('search, filters, and the state map narrow the list', async ({ page }) => {
   await expect(page).toHaveURL(/q=loc/);
   // Other states keep their counts while one is selected, and clicking another adds it.
   await expect(page.locator('.job-map-tile[data-state="IL"]')).toHaveAttribute('aria-label', 'Illinois: 1 position');
+  await openDetails(page, '.job-map-details');
   await page.locator('.job-map-tile[data-state="IL"]').click();
   await expect(page.locator('.job-card')).toHaveCount(2);
   await expect(clearStates).toHaveText('Clear 2 states');
   await expect(page.locator('#jobs-search')).toHaveValue(/loc: VA,IL/);
   await expect(page.locator('.job-map-tile[aria-pressed="true"]')).toHaveCount(2);
+  await openDetails(page, '.job-map-details');
   await page.locator('.job-map-tile[data-state="VA"]').click();
   await expect(page.locator('.job-card')).toHaveCount(1);
   await clearStates.click();
@@ -127,9 +131,11 @@ Alice Example,pldi,${new Date().getFullYear()},2,1
 ` }));
   await page.goto('jobs.html');
   await expect(page.locator('.job-chip-rank').first()).toBeVisible();
+  await openDetails(page, '#research-settings');
   await page.locator('#sort-select').selectOption('rank');
   await expect(page.locator('.job-school strong').first()).toHaveText('George Mason University');
   await expect(page).toHaveURL(/sort=rank/);
+  await openDetails(page, '#research-settings');
   await page.locator('#sort-select').selectOption('rank-desc');
   await expect(page.locator('.job-school strong').first()).toHaveText('Univ. of Illinois at Urbana-Champaign');
 });
@@ -211,7 +217,7 @@ test('keyword help opens on click and keyboard, and scoped suggestions preserve 
   await expect(help).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(panel).toBeVisible();
-  await page.locator('#jobs-status').click();
+  await page.locator('.search-intro h2').click();
   await expect(panel).toBeHidden();
 
   await input.fill('loc: IL track: tea');
@@ -223,4 +229,20 @@ test('keyword help opens on click and keyboard, and scoped suggestions preserve 
   await page.goto('jobs.html?status=all');
   await expect(input).toHaveValue('status: all');
   await expect(page.locator('.job-card')).toHaveCount(3);
+});
+
+test('job card secondary actions share a compact menu and links reproduce the posting', async ({ page }) => {
+  await page.goto('jobs.html');
+  await expect(page.locator('.job-card')).toHaveCount(2);
+  await expect(page.locator('.job-map-details')).not.toHaveAttribute('open', '');
+  const card = page.locator('.job-card', { hasText: 'Software Engineering' });
+  const menu = card.locator('.result-actions');
+  await expect(menu).not.toHaveAttribute('open', '');
+  await expect(card.getByRole('link', { name: 'View posting' })).toHaveCount(0);
+  await menu.locator('summary').click();
+  await expect(card.getByRole('link', { name: 'Suggest update' })).toBeVisible();
+  const link = await card.locator('[data-copy-result-url]').getAttribute('data-copy-result-url');
+  await page.goto(link);
+  await expect(page.locator('.job-card')).toHaveCount(1);
+  await expect(page.locator('.job-card')).toContainText('Software Engineering');
 });

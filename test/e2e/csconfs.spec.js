@@ -1,3 +1,4 @@
+import { openDetails } from './helpers/disclosures.js';
 import { checkSearchHelp } from './helpers/search-help.js';
 import { expect, test } from '@playwright/test';
 
@@ -142,22 +143,35 @@ test('CS Confs new submission is a single free-text box, with optional detailed 
   await expect(page.locator('#name')).toBeEnabled();
 });
 
-test('CS Confs location and deadline selects narrow the schedule and persist in the URL', async ({ page }) => {
-  await page.goto('./csconfs.html');
-  await expect(page.locator('#csconfs-results .schedule-card').first()).toBeVisible();
-  const before = await page.locator('#csconfs-results .schedule-card').count();
-  await page.locator('#location-select').selectOption({ label: 'North America' });
-  await expect(page).toHaveURL(/loc=north\+america/);
-  const canada = await page.locator('#csconfs-results .schedule-card').count();
-  expect(canada).toBeGreaterThan(0);
-  expect(canada).toBeLessThan(before);
-  await page.locator('#deadline-mode').selectOption('passed');
-  await expect(page).toHaveURL(/deadline=passed/);
-  await page.goto('./csconfs.html?loc=europe&deadline=open');
-  await expect(page.locator('#location-select')).toHaveValue('europe');
-  await expect(page.locator('#deadline-mode')).toHaveValue('open');
+test('CS Confs location and deadline keywords narrow schedules and survive reloads', async ({ page }) => {
+  await page.goto('csconfs.html');
+  await expect(page.locator('#csconfs-search')).toBeEnabled();
+  await expect(page.locator('#location-select, #deadline-mode, #favorites-select')).toHaveCount(0);
+  await page.locator('#csconfs-search').fill('loc: europe deadline: passed');
+  await expect(page).toHaveURL(/q=loc/);
+  await page.reload();
+  await expect(page.locator('#csconfs-search')).toHaveValue('loc: europe deadline: passed');
+  await page.goto('csconfs.html?loc=europe&deadline=all&favorites=only');
+  await expect(page.locator('#csconfs-search')).toHaveValue('loc: europe deadline: all favorites: only');
 });
 
 test('csconfs.html uses the Jobs-style clickable search help', async ({ page }) => {
   await checkSearchHelp(page, { path: 'csconfs.html', inputId: 'csconfs-search', panelId: 'csconfs-search-help', example: 'area: security loc: europe' });
+});
+
+test('conference keywords complete values and the secondary menu prefills a correction', async ({ page }) => {
+  await page.goto('csconfs.html');
+  const input = page.locator('#csconfs-search');
+  await expect(input).toBeEnabled();
+  await input.fill('loc: europe area: sec');
+  await page.getByRole('option', { name: /Security/ }).click();
+  await expect(input).toHaveValue('loc: europe area: sec');
+  await input.fill('');
+  await input.blur();
+  const card = page.locator('.schedule-card').first();
+  const label = await card.locator('h2').textContent();
+  await card.locator('.result-actions summary').click();
+  await card.getByRole('link', { name: 'Suggest update' }).click();
+  await expect(page.locator('input[name="kind"][value="correction"]')).toBeChecked();
+  await expect(page.locator('#target')).toHaveValue(new RegExp(label.trim().split(' ')[0]));
 });

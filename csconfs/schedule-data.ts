@@ -1,6 +1,6 @@
 import { getConferenceAreaMap, publicationMatchesConferenceSet } from '../src/data.js';
 import { areaLabels } from '../src/shared.js';
-import { matchesKeyword, parseKeywordQuery } from '../src/search-keywords.js';
+import { matchesKeyword, matchesKeywordOptions, parseKeywordQuery } from '../src/search-keywords.js';
 import { locationMatches } from './place.js';
 import { FAVORITES_KEYWORD_SPEC } from '../src/favorites.js';
 import type { KeywordSpec } from '../src/search-keywords.js';
@@ -10,7 +10,7 @@ import type { ConferenceGroup, ConferenceRecord } from './types.js';
 export const CSCONFS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'loc', aliases: ['location', 'country'], example: 'loc: europe', description: 'Country, US state, region (Europe, Asia, …) or city the conference is held in' },
   { key: 'area', aliases: ['topic'], example: 'area: security', description: 'Research area the conference covers' },
-  { key: 'deadline', example: 'deadline: passed', description: '"open" (deadline still ahead), "passed" (deadline over, conference still ahead), or "all" (include past conferences)' },
+  { key: 'deadline', example: 'deadline: passed', description: '"upcoming" (default), "open" (deadline still ahead), "passed" (deadline over, conference still ahead), or "all" (include past conferences)' },
   { key: 'verified', aliases: ['status'], example: 'verified: yes', description: '"yes" for reviewed listings, "no" for unverified/estimated ones' },
   FAVORITES_KEYWORD_SPEC
 ];
@@ -164,7 +164,7 @@ function searchText(group: ConferenceGroup) {
 
 function matchesLocation(group: ConferenceGroup, values: string[] | undefined) {
   if (!values || !values.length) return true;
-  return values.every(value => locationMatches(group[0].place, value));
+  return matchesKeywordOptions(values, value => locationMatches(group[0].place, value));
 }
 
 function matchesArea(group: ConferenceGroup, values: string[] | undefined) {
@@ -176,12 +176,7 @@ function matchesArea(group: ConferenceGroup, values: string[] | undefined) {
 
 function matchesVerified(group: ConferenceGroup, values: string[] | undefined) {
   if (!values || !values.length) return true;
-  const truthy = ['yes', 'true', 'verified', 'y'];
-  const wantVerified = values.some(value => truthy.includes(value));
-  const wantUnverified = values.some(value => !truthy.includes(value));
-  if (wantVerified && !group[0].verified) return false;
-  if (wantUnverified && group[0].verified) return false;
-  return true;
+  return matchesKeywordOptions(values, value => ['yes', 'true', 'verified', 'y'].includes(value) === Boolean(group[0].verified));
 }
 
 export function filterSchedule(conferences: ConferenceRecord[], {
@@ -205,7 +200,9 @@ export function filterSchedule(conferences: ConferenceRecord[], {
     .filter(group => matchesLocation(group, [...(filters.loc || []), ...(location ? [location] : [])]))
     .filter(group => matchesArea(group, filters.area))
     .filter(group => matchesVerified(group, filters.verified))
-    .filter(group => matchesDeadline(group, mode, now))
+    .filter(group => filters.deadline?.length
+      ? matchesKeywordOptions(filters.deadline, value => DEADLINE_MODES.includes(value as DeadlineMode) && matchesDeadline(group, value as DeadlineMode, now))
+      : matchesDeadline(group, mode, now))
     .sort((a, b) => {
       const deadlineA = scheduleSortKey(a, now);
       const deadlineB = scheduleSortKey(b, now);

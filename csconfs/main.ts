@@ -1,17 +1,20 @@
 import { createFilterBar } from '../src/filters.js';
-import { createSuggestionBox, rankSuggestions } from '../src/suggestion-box.js';
+import { rankSuggestions } from '../src/suggestion-box.js';
 import { initTooltipPositioning } from '../src/tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../src/seo.js';
 import { trackView } from '../src/analytics.js';
 import { escapeHtml } from '../src/shared.js';
-import { createFavoritesStore, favoritesSelect, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../src/favorites.js';
-import { mountKeywordHelp } from '../src/search-keywords.js';
+import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../src/favorites.js';
+import { keywordValue, parseKeywordQuery, restoreKeywordQuery } from '../src/search-keywords.js';
+import { createSearchControls, renderSearchExamples as renderExampleChips, searchChoices, updateSearchUrl } from '../src/search-controls.js';
+import { areaLabels } from '../src/shared.js';
+import { parsePlace } from './place.js';
 import { CSCONFS_KEYWORD_SPECS, DEADLINE_MODES, filterSchedule, scheduleSuggestions } from './schedule-data.js';
 import { LOCATION_REGIONS } from './place.js';
 import { renderScheduleCard } from './schedule-render.js';
 import type { DeadlineMode } from './schedule-data.js';
 import type { FilterController } from '../src/filters.js';
-import type { createSuggestionBox as CreateSuggestionBox } from '../src/suggestion-box.js';
+
 import type { ConferenceRecord } from './types.js';
 
 const params = new URLSearchParams(location.search);
@@ -22,20 +25,15 @@ const status = document.getElementById('csconfs-status')!;
 const favorites = createFavoritesStore('cspicks:csconfs-favorites');
 let conferences: ConferenceRecord[] = [];
 let filters: FilterController;
-let suggestions: ReturnType<typeof CreateSuggestionBox>;
+let suggestions: ReturnType<typeof createSearchControls>;
 
-const deadlineMode = () => (document.querySelector<HTMLSelectElement>('#deadline-mode')!.value || 'upcoming') as DeadlineMode;
-const locationValue = () => document.querySelector<HTMLSelectElement>('#location-select')!.value;
-const favoritesValue = () => document.querySelector<HTMLSelectElement>('#favorites-select')?.value || 'all';
+const deadlineMode = () => (parseKeywordQuery(input.value, CSCONFS_KEYWORD_SPECS).filters.deadline?.[0] || 'upcoming') as DeadlineMode;
 
 function updateUrl() {
   const next = filters.toParams();
   const query = input.value.trim();
   if (query) next.set('q', query);
-  if (deadlineMode() !== 'upcoming') next.set('deadline', deadlineMode());
-  if (locationValue()) next.set('loc', locationValue());
-  if (favoritesValue() === 'only') next.set('favorites', 'only');
-  history.replaceState({}, '', `${location.pathname}?${next}`);
+  updateSearchUrl(next, query);
   updatePageMeta({
     title: query ? `${query} - CS Conference Schedule - ${SITE_NAME}` : `${SITE_NAME} - CS Conference Schedule`,
     description: query
@@ -47,14 +45,13 @@ function updateUrl() {
 function render() {
   if (!conferences.length) return;
   const mode = deadlineMode();
-  const favoritesOnly = wantsFavoritesOnly(input.value, favoritesValue());
+  const favoritesOnly = wantsFavoritesOnly(input.value);
   const matched = filterSchedule(conferences, {
     startYear: filters.startYear,
     endYear: filters.endYear,
     confSet: filters.confSet,
     query: input.value,
     deadline: mode,
-    location: locationValue()
   });
   const favoriteIdOf = (group: typeof matched[number]) => `${group[0].name} ${group[0].year}`;
   const groups = favoritesOnly ? onlyFavorites(matched, favoriteIdOf, favorites) : prioritizeFavorites(matched, favoriteIdOf, favorites);
@@ -62,16 +59,26 @@ function render() {
   const suffix = mode === 'upcoming' ? ' upcoming' : mode === 'open' ? ' open-deadline' : mode === 'passed' ? ' past-deadline, still ahead' : '';
   status.textContent = groups.length
     ? `${groups.length} matching${suffix} conference${groups.length === 1 ? '' : 's'}`
-    : favoritesOnly ? 'No starred conferences match. Star a conference with the ☆ button, or switch back to “All items”.' : `No conferences match these years, venue set, and search terms.`;
+    : favoritesOnly ? 'No starred conferences match. Star a conference with the ☆ button, or clear “favorites: only” from search.' : `No conferences match these years, venue set, and search terms.`;
   document.getElementById('csconfs-count')!.textContent = `${groups.length} conferences during`;
   updateUrl();
   trackView(input.value.trim() ? 'search-results' : 'default', 'csconfs');
 }
 
 function buildSuggestions() {
-  return createSuggestionBox({
+  return createSearchControls({
     input,
     listbox: document.getElementById('universal-suggestions')!,
+    specs: CSCONFS_KEYWORD_SPECS, helpId: 'csconfs-search-help', example: 'area: security loc: europe',
+    examples: document.getElementById('csconfs-examples'), onQuery: () => render(),
+    getKeywordSources: () => {
+      const places = conferences.map(conf => parsePlace(conf.place)).filter(place => place != null);
+      return {
+        area: searchChoices(areaLabels),
+        loc: searchChoices([...new Set([...LOCATION_REGIONS, 'united states', ...places.flatMap(place => place.display.split(/,\s*/))])]),
+        deadline: searchChoices(DEADLINE_MODES), verified: searchChoices(['yes', 'no']), favorites: searchChoices(['only'])
+      };
+    },
     emptyText: 'No matching conference or research area',
     getGroups: query => {
       const items = scheduleSuggestions(conferences, filters.startYear, filters.endYear, filters.confSet);
@@ -81,7 +88,7 @@ function buildSuggestions() {
       ];
     },
     onSelect: item => {
-      input.value = item.label;
+      input.value = item.value || item.label;
       render();
     }
   });
@@ -104,7 +111,6 @@ function renderExamples() {
     confSet: filters.confSet,
     query: '',
     deadline: deadlineMode(),
-    location: locationValue()
   });
   const items = scheduleSuggestions(eligibleGroups.flat(), filters.startYear, filters.endYear, filters.confSet);
   // Show both query types, shuffled together just like Search's fresh sample.
@@ -112,20 +118,7 @@ function renderExamples() {
     ...sample(items.conferences, 2),
     ...sample(items.areas, 2)
   ], 4);
-  document.getElementById('csconfs-examples')!.innerHTML = examples
-    .map(item => `<button type="button" data-search-example="${escapeHtml(item.label)}">${escapeHtml(item.label)}</button>`).join('');
-}
-
-function setupExamples() {
-  document.getElementById('csconfs-examples')!.addEventListener('click', event => {
-    const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-search-example]') : null;
-    if (!button) return;
-    input.value = button.dataset.searchExample || '';
-    render();
-    input.focus();
-    suggestions.close();
-  });
-  renderExamples();
+  renderExampleChips(document.getElementById('csconfs-examples')!, examples.map(item => item.detail.startsWith('Research area') ? `area: ${keywordValue(item.label)}` : item.label));
 }
 
 async function init() {
@@ -150,55 +143,20 @@ async function init() {
         renderExamples();
       }
     });
-    const wantedLocation = (params.get('loc') || '').toLowerCase();
-    const wantedDeadline = params.get('deadline') || (params.get('upcoming') === 'false' ? 'all' : 'upcoming');
-    const option = (value: string, label: string, selected: boolean) => `<option value="${escapeHtml(value)}"${selected ? ' selected' : ''}>${escapeHtml(label)}</option>`;
-    const deadlineLabels: Record<DeadlineMode, string> = {
-      upcoming: 'Upcoming (open deadline or event ahead)',
-      open: 'Deadline still open',
-      passed: 'Deadline passed, event still ahead',
-      all: 'All, including past conferences'
-    };
-    filters.element.insertAdjacentHTML('beforeend', `
-      <div class="filter-group">
-        <select id="location-select" aria-label="Conference location">
-          ${option('', 'Anywhere', !wantedLocation)}
-          ${option('united states', 'United States', wantedLocation === 'united states')}
-          ${LOCATION_REGIONS.map(region => option(region, region.replace(/\b\w/g, c => c.toUpperCase()), region === wantedLocation)).join('')}
-        </select>
-      </div>
-      <div class="filter-group">
-        <select id="deadline-mode" aria-label="Deadline status">${DEADLINE_MODES.map(mode => option(mode, deadlineLabels[mode], mode === wantedDeadline)).join('')}</select>
-      </div>
-      <div class="filter-group">${favoritesSelect(params.get('favorites') === 'only' ? 'only' : 'all', favorites.all().length)}</div>`);
-    ['location-select', 'deadline-mode', 'favorites-select'].forEach(id => document.getElementById(id)!.addEventListener('change', () => {
-      render();
-      renderExamples();
-    }));
-    mountKeywordHelp(input, CSCONFS_KEYWORD_SPECS, 'csconfs-search-help', 'area: security loc: europe', 'Combine keywords to narrow your search. Quote values with spaces.');
+    input.value = restoreKeywordQuery(params, { loc: 'loc', deadline: 'deadline', favorites: 'favorites' });
+    if (params.get('upcoming') === 'false' && !params.has('deadline')) input.value += ' deadline: all';
     wireFavoriteToggles(results, favorites);
-    onFavoriteChange(results, favorites, render);
+    onFavoriteChange(results, render);
     initTooltipPositioning();
 
     suggestions = buildSuggestions();
     input.disabled = false;
     input.placeholder = 'Search conferences or research areas (e.g., PLDI or Security)';
-    input.value = params.get('q') || '';
-    input.addEventListener('input', () => {
-      suggestions.render(input.value);
-      render();
-    });
-    setupExamples();
+    renderExamples();
     render();
     input.focus();
 
-    document.addEventListener('keydown', event => {
-      if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName || '')) {
-        event.preventDefault();
-        input.focus();
-        input.select();
-      }
-    });
+
   } catch (error) {
     console.error('Failed to load conference schedules:', error);
     status.textContent = 'Conference schedule data could not be loaded. Please try again.';

@@ -6,12 +6,11 @@ function memoryStore(ids) {
   return { isFavorite: id => ids.includes(id), toggle: () => true, all: () => ids };
 }
 
-test('favorites: only is requested by the select or the search keyword', () => {
-  assert.equal(wantsFavoritesOnly('', 'only'), true);
-  assert.equal(wantsFavoritesOnly('favorites: only', 'all'), true);
-  assert.equal(wantsFavoritesOnly('starred: yes security', 'all'), true);
-  assert.equal(wantsFavoritesOnly('favorites: no', 'all'), false);
-  assert.equal(wantsFavoritesOnly('security', 'all'), false);
+test('favorites-only searches use the shared keyword and aliases', () => {
+  assert.equal(wantsFavoritesOnly('favorites: only'), true);
+  assert.equal(wantsFavoritesOnly('starred: yes security'), true);
+  assert.equal(wantsFavoritesOnly('favorites: no'), false);
+  assert.equal(wantsFavoritesOnly('security'), false);
 });
 
 test('starred items sort first, keeping their order, and only() filters', () => {

@@ -83,9 +83,8 @@ export const FAVORITES_KEYWORD_SPEC: KeywordSpec = {
   description: 'Show only the items you starred on this page ("only" or "yes")'
 };
 
-/** True when the select says "favorites only" or the query contains `favorites: only|yes`. */
-export function wantsFavoritesOnly(query: string, selectValue: string) {
-  if (selectValue === 'only') return true;
+/** True when the query requests only starred items. */
+export function wantsFavoritesOnly(query: string) {
   const value = parseKeywordQuery(String(query || ''), [FAVORITES_KEYWORD_SPEC]).filters.favorites?.[0];
   return value === 'only' || value === 'yes' || value === 'true';
 }
@@ -102,27 +101,13 @@ export function onlyFavorites<T>(items: T[], idOf: (item: T) => string, store: F
   return items.filter(item => ids.has(idOf(item)));
 }
 
-/** Markup for the "show" select every page adds next to its other filters. */
-export function favoritesSelect(selectedValue: string, count: number) {
-  return `<select id="favorites-select" aria-label="Favorites">
-    <option value="all"${selectedValue === 'only' ? '' : ' selected'}>All items</option>
-    <option value="only"${selectedValue === 'only' ? ' selected' : ''}>★ Favorites only (${count})</option>
-  </select>`;
-}
-
-export function updateFavoritesCount(store: FavoritesStore) {
-  const option = document.querySelector<HTMLOptionElement>('#favorites-select option[value="only"]');
-  if (option) option.textContent = `★ Favorites only (${store.all().length})`;
-}
-
 /**
- * After a star toggles: refresh the count, and re-render when only favorites are shown so an
- * un-starred card leaves the list. Register after `wireFavoriteToggles` so the store is updated first.
+ * After a star toggles: refresh the count and reorder the list immediately; an unstarred
+ * card leaves a favorites-only search. Register after `wireFavoriteToggles` so the store is updated first.
  */
-export function onFavoriteChange(container: HTMLElement, store: FavoritesStore, render: () => void) {
+export function onFavoriteChange(container: HTMLElement, render: () => void) {
   container.addEventListener('click', event => {
     if (!(event.target instanceof Element) || !event.target.closest('[data-favorite-id]')) return;
-    updateFavoritesCount(store);
-    if (document.querySelector<HTMLSelectElement>('#favorites-select')?.value === 'only') render();
+    render();
   });
 }

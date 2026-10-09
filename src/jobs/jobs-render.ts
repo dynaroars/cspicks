@@ -1,3 +1,4 @@
+import { resultActions } from '../result-actions.js';
 import { areaLabels, escapeHtml, safeExternalUrl } from '../shared.js';
 import { favoriteToggleButton } from '../favorites.js';
 import { LEVEL_LABELS, TRACK_LABELS, VISA_LABELS, deadlineLabel, filterValues, formatDay } from './jobs-data.js';
@@ -9,7 +10,6 @@ export interface SchoolRank { rank: number | null; areaRanks: Record<string, num
 export type RankLookup = (school: string) => SchoolRank | undefined;
 type IsFavorite = (id: string) => boolean;
 
-const EXT_ICON = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
 
 function rankChips(job: Job, ranks: RankLookup) {
   const info = ranks(job.school);
@@ -72,10 +72,7 @@ export function renderJobCard(job: Job, ranks: RankLookup, isFavorite: IsFavorit
     <p class="job-deadline ${deadline.className}">${escapeHtml(deadline.text)}</p>
     ${dates.length ? `<p class="job-meta">${dates.map(escapeHtml).join(' · ')}</p>` : ''}
     ${job.summary ? `<p class="job-summary">${escapeHtml(job.summary)}</p>` : ''}
-    <div class="job-card-footer">
-      <a class="job-apply" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">View posting ${EXT_ICON}</a>
-      <a class="job-edit" href="jobs-submit.html?id=${encodeURIComponent(job.id)}" title="Suggest an update for this posting">✎ Suggest update</a>
-    </div>
+    <div class="job-card-footer result-card-footer">${resultActions(job.title, `<a class="job-edit" href="jobs-submit.html?id=${encodeURIComponent(job.id)}">Suggest update</a>`, `jobs.html?q=${encodeURIComponent(job.id)}&status=all#${encodeURIComponent(job.id)}`)}</div>
   </article>`;
 }
 

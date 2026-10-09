@@ -2,7 +2,6 @@
    US Academic CS Jobs Explorer Styles
    ========================================================================== */
 
-.jobs-page .search-section { padding-bottom: 1.25rem; }
 .jobs-page .search-examples { margin-bottom: 0.85rem; }
 
 .jobs-results-container { width: min(1080px, calc(100% - 2rem)); margin: 0 auto 4rem; }
@@ -90,10 +89,8 @@ button.job-chip:hover { color: var(--accent-color); border-color: var(--accent-c
   .job-deadline.is-urgent { color: #fca5a5; }
 }
 .job-summary { margin: 0.5rem 0; color: var(--text-secondary); font-size: 0.9rem; }
-.job-card-footer { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin-top: 0.8rem; font-size: 0.84rem; }
-.job-apply { display: inline-flex; align-items: center; gap: 0.3rem; font-weight: 600; color: var(--accent-color); }
 .job-edit { color: var(--text-secondary); }
-.job-apply:hover, .job-edit:hover { text-decoration: none; opacity: 0.85; }
+.job-edit:hover { text-decoration: none; opacity: 0.85; }
 
 /* By-school view */
 .job-school-card { border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.2rem 0.2rem; margin: 0 0 1rem; background: var(--bg-secondary); }

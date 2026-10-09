@@ -217,7 +217,7 @@ export function filterValues(choice: FilterChoice | undefined): string[] {
 
 function searchText(job: Job) {
   return [
-    job.school, job.department, job.title, job.city, job.state, US_STATES[job.state],
+    job.id, job.school, job.department, job.title, job.city, job.state, US_STATES[job.state],
     TRACK_LABELS[job.track], job.level ? LEVEL_LABELS[job.level] : '', job.summary, job.anyArea ? 'all areas any area open' : '',
     job.visaSponsorship && job.visaSponsorship !== 'not-stated' ? VISA_LABELS[job.visaSponsorship] : '',
     ...job.areas.map(area => `${area} ${areaLabels[area] || ''}`)

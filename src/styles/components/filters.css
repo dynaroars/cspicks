@@ -6,7 +6,7 @@
 .search-section {
   width: 100%;
   max-width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .search-intro {
@@ -489,3 +489,34 @@ option {
     gap: 0.1rem;
   }
 }
+
+/* Dataset choices and supporting views are available without filling the landing page. */
+.search-options { margin: 0.75rem 0; }
+.search-options > summary {
+  width: fit-content; margin: 0 auto; padding: 0.45rem 0.65rem;
+  color: var(--text-secondary); font-size: var(--text-sm); cursor: pointer;
+}
+.search-options[open] > summary { color: var(--text-primary); }
+.search-options > summary:focus-visible { outline: 2px solid var(--primary-color); border-radius: 6px; }
+.result-actions { position: relative; display: inline-block; }
+.card:has(.result-actions[open]) { position: relative; z-index: 31; }
+.result-actions > summary {
+  display: flex; align-items: center; justify-content: center; min-width: 34px; min-height: 34px;
+  border-radius: 8px; color: var(--text-secondary); font-size: 1.25rem; cursor: pointer; list-style: none;
+}
+.result-actions > summary::-webkit-details-marker { display: none; }
+.result-actions > summary:hover, .result-actions[open] > summary { background: var(--hover-bg); }
+.result-actions-panel {
+  position: absolute; right: 0; top: calc(100% + 4px); z-index: 30;
+  min-width: 170px; max-width: calc(100vw - 2rem); padding: 0.35rem;
+  border: 1px solid var(--border-color); border-radius: 10px;
+  background: var(--card-bg); box-shadow: var(--shadow-dropdown);
+}
+.result-actions-panel a, .result-actions-panel button {
+  display: block; box-sizing: border-box; width: 100%; padding: 0.55rem 0.65rem; border: 0;
+  border-radius: 6px; background: transparent; color: var(--text-primary); font: inherit;
+  font-size: var(--text-sm); text-align: left; text-decoration: none; white-space: nowrap; cursor: pointer;
+}
+.result-actions-panel a:hover, .result-actions-panel button:hover { background: var(--hover-bg); }
+.result-card-footer { display: flex; justify-content: flex-end; align-items: center; grid-column: 1 / -1; margin-top: 0.5rem; font-size: var(--text-sm); }
+.result-action-feedback { position: absolute; right: 0; top: 100%; white-space: nowrap; color: var(--text-secondary); font-size: var(--text-xs); }

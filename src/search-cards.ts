@@ -174,7 +174,7 @@ function renderSubfieldContributions(school: FilteredSchool) {
   // share is small (the top one is usually under 8%), so drawing each bar at its
   // literal percentage of the width leaves 26 near-identical stubs.
   const topWeight = contributions[0]!.weight;
-  return `<div class="school-rank-attribution"><details class="attribution-details" open><summary class="attribution-summary"><span>Subfield Share of This University's Score</span><span class="tooltip-trigger contribution-tooltip" tabindex="0" aria-label="About this university's score breakdown">ⓘ<span class="tooltip-content">${escapeHtml(SCORE_MIX_HELP)}</span></span></summary><div class="attribution-content">${contributions.map(item => {
+  return `<div class="school-rank-attribution"><details class="attribution-details"><summary class="attribution-summary"><span>Subfield Share of This University's Score</span><span class="tooltip-trigger contribution-tooltip" tabindex="0" aria-label="About this university's score breakdown">ⓘ<span class="tooltip-content">${escapeHtml(SCORE_MIX_HELP)}</span></span></summary><div class="attribution-content">${contributions.map(item => {
     const percentage = item.weight / totalWeight * 100;
     return `<div class="contribution-item"><div class="contribution-info"><span class="contribution-label">${escapeHtml(areaLabels[item.area] || item.area)}</span><span class="contribution-value">${item.value.toFixed(1)} adjusted (${percentage.toFixed(1)}%)</span></div><div class="contribution-bar-container"><div class="contribution-bar" style="width: ${(item.weight / topWeight * 100).toFixed(1)}%;"></div></div></div>`;
   }).join('')}</div></details></div>`;

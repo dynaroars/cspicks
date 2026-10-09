@@ -224,3 +224,18 @@ test('funding stays off search results but appears in the Discoveries cards', as
 test('nsf.html uses the Jobs-style clickable search help', async ({ page }) => {
   await checkSearchHelp(page, { path: 'nsf.html', inputId: 'funding-search', panelId: 'funding-search-help', example: 'institution: MIT program: CAREER' });
 });
+
+test('funding keywords autocomplete their values while preserving other filters', async ({ page }) => {
+  await page.goto('nsf.html');
+  const input = page.locator('#funding-search');
+  await expect(input).toBeEnabled();
+  await input.fill('institution: "George Mason University" program: ');
+  const option = page.getByRole('option').first();
+  await expect(option).toBeVisible();
+  const label = await option.locator('span').textContent();
+  await option.click();
+  await expect(input).toHaveValue(new RegExp('^institution: "George Mason University" program: '));
+  expect(await input.inputValue()).toContain(label);
+  await page.reload();
+  expect(await input.inputValue()).toContain(label);
+});

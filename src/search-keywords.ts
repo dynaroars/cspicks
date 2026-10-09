@@ -50,7 +50,7 @@ export function parseKeywordQuery(raw: string, specs: KeywordSpec[]): ParsedKeyw
 export function matchesKeyword(values: string[] | undefined, haystack: string) {
   if (!values || !values.length) return true;
   const normalized = haystack.toLowerCase();
-  return values.every(value => normalized.includes(value));
+  return matchesKeywordOptions(values, value => normalized.includes(value));
 }
 
 /** Commas offer alternatives within a keyword; repeated keywords must all match. */
@@ -59,7 +59,9 @@ export function matchesKeywordOptions(values: string[] | undefined, matches: (va
 }
 
 export function keywordValue(value: string) {
-  return /\s/.test(value) ? `"${value.replace(/"/g, '')}"` : value;
+  if (!/\s|["']/.test(value)) return value;
+  const quote = value.includes('"') && !value.includes("'") ? "'" : '"';
+  return `${quote}${value.replaceAll(quote, '')}${quote}`;
 }
 
 export function setQueryKeyword(query: string, key: string, values: string[], specs: KeywordSpec[]) {
@@ -75,19 +77,19 @@ export function restoreKeywordQuery(params: URLSearchParams, mapping: Record<str
   const parts = [params.get('q') || ''];
   for (const [param, key] of Object.entries(mapping)) {
     const value = params.get(param);
-    if (value && (value !== 'all' || key === 'status')) parts.push(`${key}: ${keywordValue(value)}`);
+    if (value && (value !== 'all' || key === 'status' || key === 'deadline')) parts.push(`${key}: ${keywordValue(value)}`);
   }
   return parts.filter(Boolean).join(' ');
 }
 
 /** Complete the last keyword value while preserving the rest of the query. */
 export function keywordSuggestions(query: string, specs: KeywordSpec[], sources: Record<string, SuggestionItem[]>) {
-  const match = /(^|\s)([a-z][a-z0-9_-]*):\s*("[^"\n]*|[^\s]*)$/i.exec(query);
+  const match = /(^|\s)([a-z][a-z0-9_-]*):[ \t]*("[^"\n]*|'[^'\n]*'|[^\s]*)$/i.exec(query);
   if (!match) return null;
   const spec = specs.find(spec => [spec.key, ...(spec.aliases || [])].includes(match[2]!.toLowerCase()));
   if (!spec) return null;
   const prefix = query.slice(0, match.index) + match[1];
-  const typedValue = match[3]!.replace(/^"/, '');
+  const typedValue = match[3]!.replace(/^["']|["']$/g, '');
   const comma = typedValue.lastIndexOf(',');
   const alternatives = comma === -1 ? '' : typedValue.slice(0, comma + 1);
   const term = typedValue.slice(comma + 1).trim().toLowerCase();
@@ -96,7 +98,10 @@ export function keywordSuggestions(query: string, specs: KeywordSpec[], sources:
     .filter(match => Number.isFinite(match.score))
     .sort((a, b) => a.score - b.score || a.item.label.localeCompare(b.item.label));
   const group = { items: matches.slice(0, 8).map(match => match.item), total: matches.length };
-  return [[spec.key, { ...group, items: group.items.map(item => ({ ...item, value: `${prefix}${spec.key}: ${keywordValue(alternatives + (item.value || item.label))}` })) }]] as Array<[string, typeof group]>;
+  return [[spec.key, { ...group, items: group.items.map(item => {
+    const completed = `${prefix}${spec.key}: ${keywordValue(alternatives + (item.value || item.label))}`;
+    return { ...item, value: completed, query: completed };
+  }) }]] as Array<[string, typeof group]>;
 }
 
 /** Clickable, keyboard-accessible search help, following the VietProfs popup pattern. */

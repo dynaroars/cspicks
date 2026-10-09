@@ -1,3 +1,4 @@
+import { openDetails } from './helpers/disclosures.js';
 import { expect, test } from '@playwright/test';
 
 // Keep fixture contents stable across calendar-year boundaries. The app's
@@ -122,6 +123,7 @@ test('vs syntax compares two targets in place of search results', async ({ page 
   await page.locator('#main-search').fill('George Mason University');
   await expect(comparison).toBeHidden();
   await expect(page.locator('#integrated-analysis')).toBeVisible();
+  await openDetails(page, '#integrated-analysis');
 });
 
 test('vs syntax also compares two research areas, region-wide', async ({ page }) => {

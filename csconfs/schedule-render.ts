@@ -1,3 +1,4 @@
+import { resultActions } from '../src/result-actions.js';
 import { countryFlag, escapeHtml, safeExternalUrl } from '../src/shared.js';
 import { conferenceAreas, conferenceTags, deadlineStatus, formatCalendarDate } from './schedule-data.js';
 import { areaLabels } from '../src/shared.js';
@@ -78,9 +79,12 @@ export function renderScheduleCard(group: ConferenceGroup, now = Date.now(), isF
       ${main.description ? `<p class="schedule-description">${escapeHtml(main.description)}</p>` : ''}
       ${areas.length ? `<p class="schedule-areas">${areas.map(area => `<span>${escapeHtml(area)}</span>`).join('')}</p>` : ''}
       ${extras.map(line => `<p class="schedule-extra">${escapeHtml(line)}</p>`).join('')}
-      ${main.seriesLink && safeExternalUrl(main.seriesLink) !== href
-        ? `<a class="schedule-series-link" href="${escapeHtml(safeExternalUrl(main.seriesLink))}" target="_blank" rel="noopener noreferrer">Conference series</a>` : ''}
+
     </div>
     <div class="schedule-card-cycles">${renderedCycles}</div>
+    <div class="result-card-footer">${resultActions(favoriteId, `
+        ${main.seriesLink && safeExternalUrl(main.seriesLink) !== href ? `<a href="${escapeHtml(safeExternalUrl(main.seriesLink))}" target="_blank" rel="noopener noreferrer">Conference series</a>` : ''}
+        <a href="csconfs-submit.html?name=${encodeURIComponent(main.name)}&year=${main.year}">Suggest update</a>
+      `, `csconfs.html?q=${encodeURIComponent(main.name)}&start=${main.year}&end=${main.year}&deadline=all`)}</div>
   </article>`;
 }

@@ -2,10 +2,6 @@
    CS Awards, Grants & Fellowships Explorer Styles
    ========================================================================== */
 
-.grants-page .search-section {
-  padding-bottom: 1.25rem;
-}
-
 .grants-page .search-examples {
   margin-bottom: 0.85rem;
 }
@@ -108,8 +104,7 @@
 
 .grant-cat-badge,
 .grant-status-badge,
-.grant-estimated-badge,
-.grant-featured-badge {
+.grant-estimated-badge {
   padding: 0.18rem 0.55rem;
   border-radius: 999px;
   font-size: 0.72rem;
@@ -158,23 +153,11 @@
   background: var(--tag-bg);
 }
 
-.grant-featured-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 1.55rem;
-  min-height: 1.55rem;
-  color: #b45309;
-  background: rgba(245, 158, 11, 0.15);
-  border: 1px solid rgba(245, 158, 11, 0.4);
-}
-
 @media (prefers-color-scheme: dark) {
   .category-gov { color: #7dd3fc; background: rgba(2, 132, 199, 0.22); }
   .category-ind { color: #d8b4fe; background: rgba(147, 51, 234, 0.22); }
   .category-fnd { color: #6ee7b7; background: rgba(16, 185, 129, 0.22); }
   .category-soc { color: #fde68a; background: rgba(245, 158, 11, 0.22); }
-  .grant-featured-badge { color: #fde68a; background: rgba(245, 158, 11, 0.25); }
   .grant-status-badge { color: #fdba74; background: rgba(234, 88, 12, 0.22); }
   .grant-estimated-badge { color: #ffd66b; background: #4a3b12; }
 }
@@ -300,34 +283,6 @@
 }
 
 /* Footer Actions */
-.grant-card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1rem;
-  padding-top: 0;
-}
-
-.grant-action-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--primary-color);
-  text-decoration: none;
-}
-
-.grant-action-link:hover {
-  text-decoration: underline;
-}
-
-.grant-footer-btns {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-}
-
 .grant-edit-link {
   font-size: 0.78rem;
   color: var(--text-secondary);
@@ -338,38 +293,6 @@
 .grant-edit-link:hover {
   color: var(--primary-color);
   text-decoration: underline;
-}
-
-.grant-share-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  background: transparent;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 0.28rem 0.6rem;
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.grant-share-btn:hover {
-  background: var(--hover-bg);
-  color: var(--text-primary);
-}
-
-.grant-share-btn.is-copied {
-  background: rgba(16, 185, 129, 0.2);
-  color: #059669;
-  border-color: rgba(16, 185, 129, 0.4);
-}
-
-@media (prefers-color-scheme: dark) {
-  .grant-share-btn.is-copied {
-    color: #6ee7b7;
-    border-color: rgba(16, 185, 129, 0.5);
-  }
 }
 
 @media (max-width: 760px) {
@@ -384,8 +307,7 @@
   }
 }
 
-/* Filter row: many selects, so wrap, size each to its selected text, and outline it so the arrow
-   reads as part of its own dropdown instead of the next label. */
+/* Compact result sort control. */
 .grants-page .search-filters {
   flex-wrap: wrap;
   row-gap: 0.5rem;

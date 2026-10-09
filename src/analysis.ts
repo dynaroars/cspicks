@@ -47,6 +47,10 @@ export async function initAnalysis(data: RawData, filterBar: FilterController) {
 
         renderConferenceFilters();
         setupTabs();
+        document.getElementById('integrated-analysis')?.addEventListener('toggle', () => {
+            const panel = document.querySelector<HTMLDetailsElement>('#integrated-analysis');
+            if (panel?.open && state.selectedTarget) showSelectedTarget();
+        });
         setupConferenceFilterButtons();
         state.analysisReady = true;
         if (new URLSearchParams(window.location.search).get('dataHealth') === 'true') {
@@ -98,7 +102,10 @@ function showSelectedTarget() {
     const integratedSection = document.getElementById('integrated-analysis');
     if (integratedSection) {
         integratedSection.hidden = false;
+        const summary = integratedSection.querySelector(':scope > summary');
+        if (summary) summary.textContent = `Analysis · ${state.selectedTarget?.name || ''}`;
     }
+    if (!(integratedSection as HTMLDetailsElement | null)?.open) return;
     renderResearcherHighlights();
     renderConferenceFilters();
     document.querySelector<HTMLElement>(`.nav-tab[data-tab="${state.currentTab}"]`)?.click();
@@ -119,7 +126,7 @@ export function setAnalysisTarget(target: Partial<AnalysisTarget> | null | undef
 
 // Called when the shared filter bar changes.
 export function refreshAnalysis() {
-    if (state.selectedTarget) {
+    if (state.selectedTarget && document.querySelector<HTMLDetailsElement>('#integrated-analysis')?.open) {
         state.conferenceFilterContext = null;
         renderConferenceFilters();
         refreshActiveTabChart();

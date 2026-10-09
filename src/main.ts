@@ -1,3 +1,4 @@
+import { filterSearchRecords } from './search-query.js';
 import { loadData, publicationMatchesConferenceSet, schoolAliases } from './data.js';
 import { createFilterBar } from './filters.js';
 import { initAnalysis, refreshAnalysis, setAnalysisTarget } from './analysis.js';
@@ -12,8 +13,9 @@ import { initTooltipPositioning } from './tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
 import { trackComparison, trackView } from './analytics.js';
 import { aoeDeadline, filterSchedule, formatCalendarDate } from '../csconfs/schedule-data.js';
-import { mountKeywordHelp, parseKeywordQuery } from './search-keywords.js';
+import { parseKeywordQuery } from './search-keywords.js';
 import type { KeywordSpec } from './search-keywords.js';
+import { renderSearchExamples as renderExampleChips, updateSearchUrl } from './search-controls.js';
 import type { AnalysisTarget } from './analysis/state.js';
 import type { FilterController } from './filters.js';
 import type { CardContext } from './search-cards.js';
@@ -114,7 +116,10 @@ async function init() {
     resolveTarget: resolveAnalysisTarget
   });
   initSearchResults({
-    get appData() { return appData; },
+    get appData() {
+      const query = document.querySelector<HTMLInputElement>('#main-search')?.value || '';
+      return filterSearchRecords(appData, parseKeywordQuery(query, MAIN_KEYWORD_SPECS).filters, filters.confSet, { historyMap: filters.historyMap, aliasMap: filters.aliasMap });
+    },
     get filters() { return filters; },
     renderProfessorCard,
     renderSchoolCard,
@@ -254,8 +259,7 @@ function updateURL() {
     params.set('targetType', selectedAnalysisTarget.type);
   }
 
-  const newUrl = `${window.location.pathname}?${params.toString()}`;
-  window.history.replaceState({}, '', newUrl);
+  updateSearchUrl(params, q);
   updateSeoForCurrentView(q);
 }
 
@@ -364,10 +368,29 @@ function updatePriorData() {
 
 function setupSearch() {
   const mainSearch = document.querySelector<HTMLInputElement>('#main-search')!;
-  mountKeywordHelp(mainSearch, MAIN_KEYWORD_SPECS, 'main-search-help', 'school: MIT', 'Use one keyword to search a specific category. Quote values with spaces.');
+
+  let debounceTimer: ReturnType<typeof setTimeout> | undefined;
   const suggestionBox = createSearchSuggestionBox({
     input: mainSearch,
     listbox: document.getElementById('universal-suggestions')!,
+    specs: MAIN_KEYWORD_SPECS, helpId: 'main-search-help', example: 'school: MIT',
+    usage: 'Combine keywords to narrow universities, professors, and research areas. Quote values with spaces; commas mean either value.',
+    examples: document.getElementById('search-example-items'),
+    onQuery: query => {
+      if (debounceTimer) clearTimeout(debounceTimer);
+      document.body.classList.toggle('has-search-query', Boolean(query.trim()));
+      displayIntegratedAnalysis(null);
+      if (query.trim()) runQuery(query); else showLandingState();
+      updateURL();
+    },
+    onInput: rawQuery => {
+      if (debounceTimer) clearTimeout(debounceTimer);
+      displayIntegratedAnalysis(null);
+      updateURL();
+      document.body.classList.toggle('has-search-query', Boolean(rawQuery.trim()));
+      if (rawQuery.length < 2) { showLandingState(); return; }
+      debounceTimer = setTimeout(() => { runQuery(rawQuery); updateURL(); }, 300);
+    },
     getContext: () => ({ appData: rawData ? appData : null, confSet: filters.confSet }),
     onSelect: (item, comparePrefix) => {
       mainSearch.value = `${comparePrefix}${item.label}`;
@@ -387,48 +410,6 @@ function setupSearch() {
       document.getElementById('dblp-results')!.innerHTML = '';
       displayIntegratedAnalysis(item.target || null);
       updateURL();
-    }
-  });
-
-  let debounceTimer: ReturnType<typeof setTimeout> | undefined;
-  mainSearch.addEventListener('input', event => {
-    if (debounceTimer) clearTimeout(debounceTimer);
-    const rawQuery = (event.currentTarget as HTMLInputElement).value;
-
-    displayIntegratedAnalysis(null);
-    updateURL();
-    document.body.classList.toggle('has-search-query', Boolean(rawQuery.trim()));
-    suggestionBox.render(rawQuery);
-
-    if (rawQuery.length < 2) {
-      showLandingState();
-      return;
-    }
-
-    debounceTimer = setTimeout(() => {
-      runQuery(rawQuery);
-      updateURL();
-    }, 300);
-  });
-
-  document.querySelector('.search-examples')?.addEventListener('click', event => {
-    const exampleButton = event.target instanceof Element
-      ? event.target.closest<HTMLElement>('[data-search-example]')
-      : null;
-    if (exampleButton) {
-      if (debounceTimer) clearTimeout(debounceTimer);
-      const query = exampleButton.dataset.searchExample;
-      if (!query) return;
-      mainSearch.value = query;
-      document.body.classList.add('has-search-query');
-      displayIntegratedAnalysis(null);
-      runQuery(query);
-      updateURL();
-      mainSearch.focus();
-      // Focusing a populated search normally opens autocomplete. An example is
-      // already a complete query, so keep focus for easy editing but do not put
-      // a redundant suggestion menu over its results.
-      suggestionBox.close();
     }
   });
 
@@ -586,15 +567,10 @@ function renderSearchExamples() {
   ];
 
   fixedContainer.innerHTML = '<span>Try:</span>';
-  container.innerHTML = [...examples, ...contextualItems]
-    .filter((item, index, all) => {
-      const key = item.href || item.query;
-      return all.findIndex(other => (other.href || other.query) === key) === index;
-    })
-    .map(item => item.href
-      ? `<a class="search-example-link" href="${escapeHtml(item.href)}" title="${escapeHtml(item.title || item.label)}">${escapeHtml(item.label)}</a>`
-      : `<button type="button" data-search-example="${escapeHtml(item.query)}">${escapeHtml(item.label)}</button>`)
-    .join('');
+  renderExampleChips(container, [...contextualItems, ...examples].filter((item, index, all) => {
+    const key = item.href || item.query;
+    return all.findIndex(other => (other.href || other.query) === key) === index;
+  }));
 }
 
 function resolveAnalysisTarget(query: string): AnalysisTarget | null {
@@ -641,7 +617,9 @@ function runQuery(query: string, { includeDblp = true }: { includeDblp?: boolean
   renderSearchExamples();
   const { filters: keywordFilters, rest } = parseKeywordQuery(query, MAIN_KEYWORD_SPECS);
   const scope = keywordFilters.school ? 'school' : keywordFilters.prof ? 'prof' : keywordFilters.area ? 'area' : null;
-  const effective = scope ? keywordFilters[scope]![0]! : rest;
+  const values = scope ? keywordFilters[scope]! : [];
+  const singleValue = values.length === 1 && !values[0]!.includes(',') ? values[0]! : '';
+  const effective = scope ? (rest || singleValue) : rest;
   const comparison = resolveComparison(effective);
   if (comparison) {
     clearSearchSections();
@@ -653,15 +631,16 @@ function runQuery(query: string, { includeDblp = true }: { includeDblp?: boolean
   hideComparison();
   document.body.classList.remove('showing-rankings');
   const normalized = effective.toLowerCase();
-  if (!scope || scope === 'school') searchSchools(normalized);
+  if (!scope || scope === 'school' || Object.keys(keywordFilters).length > 1 || scope === 'area') searchSchools(Object.keys(keywordFilters).length > 1 ? rest : normalized);
   else { document.getElementById('school-results')!.innerHTML = ''; document.getElementById('conference-results')!.innerHTML = ''; }
-  if (!scope || scope === 'prof') searchProfessors(normalized);
+  if (!scope || scope === 'prof' || Object.keys(keywordFilters).length > 1) searchProfessors(scope === 'prof' ? (rest || singleValue) : rest);
   else document.getElementById('prof-results')!.innerHTML = '';
-  if (!scope || scope === 'area') searchAreaPeople(normalized);
+  if (!scope || (scope === 'area' && singleValue)) searchAreaPeople(normalized);
+  else if (scope === 'area') { document.getElementById('area-people-results')!.innerHTML = ''; searchProfessors(rest); }
   else document.getElementById('area-people-results')!.innerHTML = '';
   if (includeDblp && !scope) searchDBLPAuthors(normalized);
   else document.getElementById('dblp-results')!.innerHTML = '';
-  updateIntegratedAnalysis(normalized);
+  updateIntegratedAnalysis(Object.keys(keywordFilters).length > 1 ? '' : normalized);
   return false;
 }
 

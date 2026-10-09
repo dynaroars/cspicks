@@ -5,18 +5,18 @@ import { DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, TRACK_L
 import { renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
 import { exportFileName, jobsToMarkdown } from './jobs-export.js';
 import { STATE_TILE_ROWS, US_STATES, resolveState } from './states.js';
-import { createSuggestionBox, rankSuggestions } from '../suggestion-box.js';
+import { rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
 import { areaLabels, escapeHtml } from '../shared.js';
-import { createFavoritesStore, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
-import { keywordSuggestions, mountKeywordHelp, parseKeywordQuery, restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
+import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
+import { parseKeywordQuery, restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadData } from '../data.js';
 import type { JobFilters, JobSort } from './jobs-data.js';
 import type { RankLookup, SchoolRank } from './jobs-render.js';
 import type { Job } from '../types.js';
-import type { createSuggestionBox as CreateSuggestionBox } from '../suggestion-box.js';
+import { createSearchControls, renderSearchExamples, searchChoices, updateSearchUrl } from '../search-controls.js';
 
 const params = new URLSearchParams(window.location.search);
 const input = document.querySelector<HTMLInputElement>('#jobs-search')!;
@@ -31,12 +31,12 @@ const favoritesActions = document.querySelector<HTMLDetailsElement>('#favorites-
 const mapClear = document.querySelector<HTMLButtonElement>('#clear-map-states')!;
 
 let allJobs: Job[] = [];
-let suggestions: ReturnType<typeof CreateSuggestionBox>;
+let suggestions: ReturnType<typeof createSearchControls>;
 let schoolRanks = new Map<string, SchoolRank>();
 const ranks: RankLookup = school => schoolRanks.get(school);
 const rankOf = (school: string) => schoolRanks.get(school)?.rank;
 
-const EXAMPLES = ['Assistant professor', 'Teaching track', 'Postdoc', 'dept: information', 'dept: ece', 'area: security', 'area: "machine learning"', 'loc: california', 'loc: texas', 'visa: possible', 'status: closed'];
+const EXAMPLES = ['track: teaching', 'area: security', 'loc: texas', 'visa: possible'];
 
 function state() {
   return {
@@ -54,7 +54,7 @@ function updateUrl(current: ReturnType<typeof state>) {
   (Object.keys(defaults) as Array<keyof typeof defaults>).forEach(key => {
     if (current[key] !== defaults[key]) next.set(names[key] || key, current[key]);
   });
-  window.history.replaceState({}, '', next.toString() ? `${window.location.pathname}?${next}` : window.location.pathname);
+  updateSearchUrl(next, current.query);
   updatePageMeta({
     title: current.query ? `${current.query} - US Academic CS Jobs - ${SITE_NAME}` : `${SITE_NAME} - US Academic CS Jobs`,
     description: current.query
@@ -67,7 +67,7 @@ function render() {
   if (!allJobs.length && !statusText.dataset.loaded) return;
   const current = state();
   const filters: JobFilters = { ...current, rankOf, now: Date.now() };
-  const favoritesOnly = wantsFavoritesOnly(current.query, 'all');
+  const favoritesOnly = wantsFavoritesOnly(current.query);
   // Starred postings lead the list; "favorites only" hides the rest.
   const byFavorites = (list: Job[]) => favoritesOnly ? onlyFavorites(list, job => job.id, favorites) : prioritizeFavorites(list, job => job.id, favorites);
   const shown = byFavorites(filterJobs(allJobs, filters));
@@ -119,20 +119,23 @@ function populateOptions() {
 }
 
 function buildSuggestions() {
-  return createSuggestionBox({
+  return createSearchControls({
     input,
     listbox: document.getElementById('universal-suggestions')!,
+    specs: JOBS_KEYWORD_SPECS, helpId: 'jobs-search-help', example: 'track: teaching loc: TX,VA level: assistant',
+    examples: document.getElementById('jobs-examples'), onQuery: () => render(),
+    getKeywordSources: () => {
+      const items = jobsSuggestions(allJobs);
+      return {
+        school: items.schools, area: Object.entries(areaLabels).map(([value, label]) => ({ value, label, detail: 'Research area' })),
+        loc: items.states, track: searchChoices(TRACK_LABELS), level: searchChoices(LEVEL_LABELS), dept: searchChoices(DEPARTMENT_LABELS), visa: searchChoices({ ...VISA_FILTER_LABELS, possible: 'Anything but no sponsorship' }),
+        status: searchChoices({ active: 'Active postings', closed: 'Closed postings', all: 'All postings' }),
+        favorites: searchChoices({ only: 'Starred postings only' })
+      };
+    },
     emptyText: 'No matching school, area, or state',
     getGroups: query => {
       const items = jobsSuggestions(allJobs);
-      const choices = (labels: Record<string, string>) => Object.entries(labels).map(([value, label]) => ({ value, label, detail: 'Search filter' }));
-      const scoped = keywordSuggestions(input.value, JOBS_KEYWORD_SPECS, {
-        school: items.schools, area: Object.entries(areaLabels).map(([value, label]) => ({ value, label, detail: 'Research area' })),
-        loc: items.states, track: choices(TRACK_LABELS), level: choices(LEVEL_LABELS), dept: choices(DEPARTMENT_LABELS), visa: choices({ ...VISA_FILTER_LABELS, possible: 'Anything but no sponsorship' }),
-        status: choices({ active: 'Active postings', closed: 'Closed postings', all: 'All postings' }),
-        favorites: choices({ only: 'Starred postings only' })
-      });
-      if (scoped) return scoped;
       return [
         ['Schools', rankSuggestions(items.schools, query, 8)],
         ['Research areas', rankSuggestions(items.areas, query, 5)],
@@ -176,12 +179,7 @@ function setupEvents() {
   document.addEventListener('click', event => {
     if (!favoritesActions.contains(event.target as Node)) favoritesActions.open = false;
   });
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && favoritesActions.open) {
-      favoritesActions.open = false;
-      favoritesActions.querySelector('summary')!.focus();
-    }
-  });
+
   results.addEventListener('click', event => {
     const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
@@ -197,28 +195,8 @@ function setupEvents() {
     if (stateButton) setFilter('loc', [stateButton.dataset.state!]);
   });
 
-  document.getElementById('jobs-examples')!.innerHTML = EXAMPLES.map(example =>
-    `<button type="button" data-search-example="${escapeHtml(example)}">${escapeHtml(example)}</button>`).join('');
-  document.getElementById('jobs-examples')!.addEventListener('click', event => {
-    const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-search-example]') : null;
-    if (!button) return;
-    input.value = button.dataset.searchExample || '';
-    render();
-    input.focus();
-    suggestions.close();
-  });
+  renderSearchExamples(document.getElementById('jobs-examples')!, EXAMPLES);
 
-  input.addEventListener('input', () => {
-    suggestions.render(input.value);
-    render();
-  });
-  document.addEventListener('keydown', event => {
-    if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName || '')) {
-      event.preventDefault();
-      input.focus();
-      input.select();
-    }
-  });
 }
 
 function updateExportButton() {
@@ -263,14 +241,8 @@ async function init() {
     suggestions = buildSuggestions();
     input.disabled = false;
     input.placeholder = 'Search jobs or use keywords: track: teaching loc: texas';
-    mountKeywordHelp(input, JOBS_KEYWORD_SPECS, 'jobs-search-help', 'track: teaching loc: TX,VA level: assistant');
     wireFavoriteToggles(results, favorites);
-    results.addEventListener('click', event => {
-      if (event.target instanceof Element && event.target.closest('[data-favorite-id]')) {
-        updateExportButton();
-        render();
-      }
-    });
+    onFavoriteChange(results, () => { updateExportButton(); render(); });
     updateExportButton();
     initTooltipPositioning();
     setupEvents();

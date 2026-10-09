@@ -324,6 +324,19 @@ export function createFilterBar(mount: string | Element, {
     }
   };
 
+  const summarizeSettings = () => {
+    const summary = element.closest('details')?.querySelector('summary');
+    if (!summary) return;
+    const parts = [
+      has('region') ? REGIONS.find(([id]) => id === state.region)?.[1] : '',
+      has('years') ? `${state.startYear}–${state.endYear}` : '',
+      has('confSet') ? CONF_SETS.find(([id]) => id === state.confSet)?.[1] : '',
+      state.historical ? 'History' : '', state.perCapita ? 'Per capita' : '', state.rankings ? 'Rankings' : ''
+    ].filter(Boolean);
+    summary.textContent = `Dataset settings · ${parts.join(' · ')}`;
+  };
+  summarizeSettings();
+  element.addEventListener('change', () => queueMicrotask(summarizeSettings));
   const readControls = () => {
     if (regionSelect) {
       state.region = regionSelect.value;
@@ -339,11 +352,13 @@ export function createFilterBar(mount: string | Element, {
       }
     }
     storeFilters(state, persisted);
+    summarizeSettings();
   };
 
   [regionSelect, startSelect, endSelect].forEach(control => {
     control?.addEventListener('change', () => {
       readControls();
+      summarizeSettings();
       onChange(controller);
     });
   });
@@ -365,18 +380,21 @@ export function createFilterBar(mount: string | Element, {
     }
     state.confSet = nextConfSet;
     readControls();
+    summarizeSettings();
     onChange(controller);
   });
 
   rankingsToggle?.addEventListener('change', () => {
     state.rankings = rankingsToggle.checked;
     storeFilters(state, persisted);
+    summarizeSettings();
     onChange(controller);
   });
 
   perCapitaToggle?.addEventListener('change', () => {
     state.perCapita = perCapitaToggle.checked;
     storeFilters(state, persisted);
+    summarizeSettings();
     onChange(controller);
   });
 
@@ -386,6 +404,7 @@ export function createFilterBar(mount: string | Element, {
       if (historyToggle.checked) await loadHistoryMaps();
       state.historical = historyToggle.checked;
       storeFilters(state, persisted);
+      summarizeSettings();
       onChange(controller);
     } catch (error) {
       console.error('Failed to load historical affiliation data:', error);

@@ -1,6 +1,6 @@
 // Shared "Copy link" action: the Web Share API's native sheet when the
 // browser offers one (mostly mobile), a clipboard copy otherwise.
-async function copyToClipboard(text: string) {
+export async function copyToClipboard(text: string) {
   try {
     await navigator.clipboard.writeText(text);
     return true;

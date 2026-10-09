@@ -6,6 +6,7 @@ import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from './simulati
 import { calculatePerCapita } from './metrics.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
 import { initTooltipPositioning } from './tooltip-position.js';
+import { wireSearchInput } from './search-controls.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
 import { trackView } from './analytics.js';
 import './styles/pages/simulator.css';
@@ -231,8 +232,7 @@ function setupSimulator() {
 
   byId('sim-reset-btn').addEventListener('click', resetSimulation);
   byId('sim-change-candidates-btn').addEventListener('click', resetCandidates);
-  byId<HTMLInputElement>('sim-faculty-search').addEventListener('input', event =>
-    searchFaculty((event.currentTarget as HTMLInputElement).value));
+  wireSearchInput(byId<HTMLInputElement>('sim-faculty-search'), searchFaculty);
 
   byId('sim-select-all').addEventListener('click', () => {
     document.querySelectorAll<HTMLInputElement>('#sim-faculty-list input[type="checkbox"]:not(:checked)').forEach(checkbox => {
@@ -248,8 +248,8 @@ function setupSimulator() {
     });
   });
 
-  univSearch.addEventListener('input', event => {
-    const query = (event.currentTarget as HTMLInputElement).value.trim().toLowerCase();
+  wireSearchInput(univSearch, rawQuery => {
+    const query = rawQuery.trim().toLowerCase();
     const container = byId('sim-univ-results');
     if (!query) {
       container.innerHTML = '';
