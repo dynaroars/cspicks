@@ -103,7 +103,7 @@ project.
 - `src/favorites.ts` — browser-local ★ favorites (localStorage, one key per page; no account or sync) used by CS Confs,
   Awards & Grants, and US Jobs: the star button, a "★ Favorites only (N)" select (`#favorites-select`, URL `favorites=only`),
   the `favorites: only` search keyword, and starred-first ordering. US Jobs uses the keyword instead of the select;
-  its ⋯ favorites menu offers export with two or more stars and restore from a file. Pages pass their own id function (`job.id`, `grant.id`,
+  its ⋯ favorites menu offers export with two or more stars. Pages pass their own id function (`job.id`, `grant.id`,
   `<name> <year>`) to `prioritizeFavorites`/`onlyFavorites` and call `onFavoriteChange` after `wireFavoriteToggles`.
 - `src/seo.js` / `src/share.js` / `src/analytics.js` — growth/discoverability infra used by every page:
   `seo.js` keeps `<title>`/description/canonical/OpenGraph tags in sync with the on-screen view, `share.js`

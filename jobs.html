@@ -72,14 +72,12 @@
           </select>
         </div>
         <div class="filter-group">
-          <details id="favorites-actions" class="jobs-favorites-actions">
+          <details id="favorites-actions" class="jobs-favorites-actions" hidden>
             <summary aria-label="Favorites actions" title="Favorites actions">⋯</summary>
             <div class="jobs-favorites-menu">
               <button type="button" id="export-favorites" hidden>Export favorites</button>
-              <button type="button" id="restore-favorites" title="Replace your stars with the postings in a previously exported file">Restore from file…</button>
             </div>
           </details>
-          <input type="file" id="restore-favorites-file" accept=".md,.markdown,.txt,text/markdown,text/plain" hidden>
         </div>
         <div class="filter-group">
           <select id="view-select" aria-label="Group postings">
@@ -91,7 +89,6 @@
     </section>
 
     <main class="jobs-results-container">
-      <p id="jobs-restore-note" class="jobs-restore-note" role="status" hidden></p>
       <details class="job-map-details" open>
         <summary>Map by state <span id="map-hint">(click states to filter; click again to remove)</span></summary>
         <div id="jobs-map" class="job-map" role="group" aria-label="Positions by state"></div>

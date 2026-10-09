@@ -1,7 +1,6 @@
 /**
  * Markdown export of starred postings, so applicants can take their shortlist offline
- * (notes, a local AI assistant, a spreadsheet) after searching here, and the restore that
- * reads such a file back into the browser's stars.
+ * (notes, a local AI assistant, a spreadsheet) after searching here.
  */
 import { areaLabels, safeExternalUrl } from '../shared.js';
 import { DEPARTMENT_LABELS, LEVEL_LABELS, TRACK_LABELS, deadlineLabel, departmentKind, formatDay } from './jobs-data.js';
@@ -67,39 +66,4 @@ export function jobsToMarkdown(jobs: Job[], { ranks = () => undefined, now = Dat
   });
 
   return `${lines.join('\n').trimEnd()}\n`;
-}
-
-export interface RestoredStars {
-  /** Ids of postings found in the file, in file order, without repeats. */
-  ids: string[];
-  /** Posting sections that match no current posting (removed from the dataset, or edited by hand). */
-  unmatched: number;
-}
-
-/**
- * Finds the postings in an exported file. Each `## ` section is matched by its `CS Picks ID` line; sections
- * without one (files exported before ids were added) by their official posting URL, else by title and school.
- */
-export function restoreStarredIds(markdown: string, jobs: Job[]): RestoredStars {
-  const byId = new Map(jobs.map(job => [job.id, job]));
-  const unique = (key: (job: Job) => string) => {
-    const counts = new Map<string, Job[]>();
-    jobs.forEach(job => counts.set(key(job), [...(counts.get(key(job)) || []), job]));
-    return (value: string) => counts.get(value)?.length === 1 ? counts.get(value)![0] : undefined;
-  };
-  const byUrl = unique(job => safeExternalUrl(job.url));
-  const byHeading = unique(job => `${inline(job.title)} — ${inline(job.school)}`);
-
-  const ids: string[] = [];
-  let unmatched = 0;
-  String(markdown ?? '').replace(/\r\n?/g, '\n').split(/^## /m).slice(1).forEach(section => {
-    const heading = /^(?:\d+\.\s+)?(.*)$/m.exec(section)![1]!.trim();
-    const id = /^- \*\*CS Picks ID:\*\* `?([^`\s]+)`?\s*$/m.exec(section)?.[1];
-    const url = /^- \*\*Official posting:\*\* <([^>\s]+)>\s*$/m.exec(section)?.[1];
-    // An id that is no longer listed means the posting was removed; never guess a different one for it.
-    const job = id ? byId.get(id) : (url && byUrl(url)) || byHeading(heading);
-    if (!job) unmatched += 1;
-    else if (!ids.includes(job.id)) ids.push(job.id);
-  });
-  return { ids, unmatched };
 }

@@ -134,23 +134,15 @@ Alice Example,pldi,${new Date().getFullYear()},2,1
   await expect(page.locator('.job-school strong').first()).toHaveText('Univ. of Illinois at Urbana-Champaign');
 });
 
-test('favorites actions hide export until multiple postings are starred, and restore an export', async ({ page }) => {
+test('favorites menu offers only export and appears with multiple starred postings', async ({ page }) => {
   await page.goto('jobs.html');
   const actions = page.locator('#favorites-actions');
   const exportButton = page.locator('#export-favorites');
-  await expect(actions).not.toHaveAttribute('open', '');
-  await actions.locator('summary').click();
-  await expect(exportButton).toBeHidden();
-  await expect(page.locator('#restore-favorites')).toBeVisible();
-  await page.keyboard.press('Escape');
-  await expect(actions).not.toHaveAttribute('open', '');
-  await expect(actions.locator('summary')).toBeFocused();
-
+  await expect(actions).toBeHidden();
+  await expect(page.locator('input[type="file"]')).toHaveCount(0);
+  await expect(page.getByRole('button', { name: /Restore/ })).toHaveCount(0);
   await page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.favorite-toggle').click();
-  await actions.locator('summary').click();
-  await expect(exportButton).toBeHidden();
-  await page.locator('#jobs-status').click();
-  await expect(actions).not.toHaveAttribute('open', '');
+  await expect(actions).toBeHidden();
 
   // Closed favorites also count, independently of which postings are shown.
   await page.locator('#jobs-search').fill('status: all');
@@ -168,28 +160,16 @@ test('favorites actions hide export until multiple postings are starred, and res
   expect(text).toContain('Postdoctoral Fellow — George Mason University');
   expect(text).not.toContain('Software Engineering');
 
-  // Falling below two hides export; restore replaces the stars with those in the file.
-  await page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.favorite-toggle').click();
+  // Escape and outside clicks dismiss the menu; dropping to one star hides it entirely.
   await actions.locator('summary').click();
-  await expect(exportButton).toBeHidden();
   await page.keyboard.press('Escape');
-  await page.locator('.job-card', { hasText: 'Postdoctoral Fellow' }).locator('.favorite-toggle').click();
-  await page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.favorite-toggle').click();
-  await actions.locator('summary').click();
-  const [chooser] = await Promise.all([page.waitForEvent('filechooser'), page.locator('#restore-favorites').click()]);
-  await chooser.setFiles({ name: 'starred.md', mimeType: 'text/markdown', buffer: Buffer.from(text) });
   await expect(actions).not.toHaveAttribute('open', '');
-  await expect(page.locator('#jobs-restore-note')).toContainText('Restored 2 postings from “starred.md”; removed 1 other star.');
-  await expect(page.locator('.favorite-toggle[aria-pressed="true"]')).toHaveCount(2);
-  await expect(page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.favorite-toggle')).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('.job-card', { hasText: 'Postdoctoral Fellow' }).locator('.favorite-toggle')).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.favorite-toggle')).toHaveAttribute('aria-pressed', 'false');
+  await expect(actions.locator('summary')).toBeFocused();
   await actions.locator('summary').click();
-  await expect(exportButton).toBeVisible();
-
-  await page.locator('#restore-favorites-file').setInputFiles({ name: 'notes.md', mimeType: 'text/markdown', buffer: Buffer.from('# Notes\n') });
-  await expect(page.locator('#jobs-restore-note')).toContainText('No CS Picks postings found in “notes.md”, so your stars were not changed.');
-  await expect(page.locator('.favorite-toggle[aria-pressed="true"]')).toHaveCount(2);
+  await page.locator('#jobs-status').click();
+  await expect(actions).not.toHaveAttribute('open', '');
+  await page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.favorite-toggle').click();
+  await expect(actions).toBeHidden();
 });
 
 test('by-school view groups postings and links into Search and Simulator, with rank chips', async ({ page }) => {

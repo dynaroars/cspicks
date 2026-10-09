@@ -3,7 +3,7 @@
  */
 import { DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, TRACK_LABELS, VISA_FILTER_LABELS, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, stateCounts } from './jobs-data.js';
 import { renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
-import { exportFileName, jobsToMarkdown, restoreStarredIds } from './jobs-export.js';
+import { exportFileName, jobsToMarkdown } from './jobs-export.js';
 import { STATE_TILE_ROWS, US_STATES, resolveState } from './states.js';
 import { createSuggestionBox, rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
@@ -28,8 +28,6 @@ const favorites = createFavoritesStore('cspicks:jobs-favorites');
 const select = (id: string) => document.getElementById(id) as HTMLSelectElement;
 const exportButton = document.querySelector<HTMLButtonElement>('#export-favorites')!;
 const favoritesActions = document.querySelector<HTMLDetailsElement>('#favorites-actions')!;
-const restoreInput = document.querySelector<HTMLInputElement>('#restore-favorites-file')!;
-const restoreNote = document.getElementById('jobs-restore-note')!;
 const mapClear = document.querySelector<HTMLButtonElement>('#clear-map-states')!;
 
 let allJobs: Job[] = [];
@@ -175,10 +173,6 @@ function setupEvents() {
     exportFavorites();
     favoritesActions.open = false;
   });
-  document.getElementById('restore-favorites')!.addEventListener('click', () => {
-    favoritesActions.open = false;
-    restoreInput.click();
-  });
   document.addEventListener('click', event => {
     if (!favoritesActions.contains(event.target as Node)) favoritesActions.open = false;
   });
@@ -188,12 +182,6 @@ function setupEvents() {
       favoritesActions.querySelector('summary')!.focus();
     }
   });
-  restoreInput.addEventListener('change', () => {
-    const file = restoreInput.files?.[0];
-    restoreInput.value = '';
-    if (file) void restoreFavorites(file);
-  });
-
   results.addEventListener('click', event => {
     const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
@@ -235,6 +223,8 @@ function setupEvents() {
 
 function updateExportButton() {
   const count = favorites.all().length;
+  favoritesActions.hidden = count < 2;
+  if (favoritesActions.hidden) favoritesActions.open = false;
   exportButton.hidden = count < 2;
   exportButton.textContent = `Export ${count} favorites`;
   exportButton.title = `Download your ${count} starred positions as a Markdown file`;
@@ -252,30 +242,6 @@ function exportFavorites() {
   link.click();
   link.remove();
   setTimeout(() => URL.revokeObjectURL(url), 0);
-}
-
-/**
- * Makes the stars exactly the postings listed in an exported file: stars it lists are added, every
- * other star is removed. A file with no posting sections at all leaves the stars untouched.
- */
-async function restoreFavorites(file: File) {
-  const { ids, unmatched } = restoreStarredIds(await file.text(), allJobs);
-  const plural = (count: number) => `${count} posting${count === 1 ? '' : 's'}`;
-  if (!ids.length && !unmatched) {
-    restoreNote.textContent = `No CS Picks postings found in “${file.name}”, so your stars were not changed. Choose a file made with “Export favorites”.`;
-  } else {
-    const wanted = new Set(ids);
-    const removed = favorites.all().filter(id => !wanted.has(id));
-    removed.forEach(id => favorites.toggle(id));
-    ids.filter(id => !favorites.isFavorite(id)).forEach(id => favorites.toggle(id));
-    restoreNote.textContent = [
-      `Restored ${plural(ids.length)} from “${file.name}”${removed.length ? `; removed ${removed.length} other star${removed.length === 1 ? '' : 's'}` : ''}.`,
-      unmatched ? `${plural(unmatched)} could not be matched; they may have been removed from the listings.` : ''
-    ].filter(Boolean).join(' ');
-  }
-  restoreNote.hidden = false;
-  updateExportButton();
-  render();
 }
 
 /** Progressive enhancement: add CSRankings rank chips once the (large) roster has loaded. */
