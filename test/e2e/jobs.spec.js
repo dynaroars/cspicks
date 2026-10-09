@@ -74,22 +74,29 @@ test('search, filters, and the state map narrow the list', async ({ page }) => {
   await page.locator('#jobs-status').click();
   await expect(track).not.toHaveAttribute('open', '');
 
+  // States are picked on the map only; there is no state dropdown.
+  await expect(page.locator('#state-select')).toHaveCount(0);
+  const clearStates = page.locator('#clear-map-states');
+  await expect(clearStates).toBeHidden();
   const virginia = page.locator('.job-map-tile[data-state="VA"]');
   await expect(virginia).toHaveAttribute('aria-label', 'Virginia: 1 position');
   await virginia.click();
-  await expect(page.locator('#state-select summary')).toHaveText('Virginia');
+  await expect(clearStates).toHaveText('Clear Virginia');
   await expect(page.locator('.job-card')).toHaveCount(1);
   await expect(page).toHaveURL(/state=VA/);
   // Other states keep their counts while one is selected, and clicking another adds it.
   await expect(page.locator('.job-map-tile[data-state="IL"]')).toHaveAttribute('aria-label', 'Illinois: 1 position');
   await page.locator('.job-map-tile[data-state="IL"]').click();
   await expect(page.locator('.job-card')).toHaveCount(2);
-  await expect(page.locator('#state-select summary')).toHaveText('2 states');
+  await expect(clearStates).toHaveText('Clear 2 states');
   await expect(page.locator('.job-map-tile[aria-pressed="true"]')).toHaveCount(2);
   await page.locator('.job-map-tile[data-state="VA"]').click();
-  await page.locator('.job-map-tile[data-state="IL"]').click();
+  await expect(page.locator('.job-card')).toHaveCount(1);
+  await clearStates.click();
   await expect(page.locator('.job-card')).toHaveCount(2);
-  await expect(page.locator('#state-select summary')).toHaveText('All States');
+  await expect(page.locator('.job-map-tile[aria-pressed="true"]')).toHaveCount(0);
+  await expect(clearStates).toBeHidden();
+  await expect(page).not.toHaveURL(/state=/);
 });
 
 test('visa filter and keyword narrow to what postings say about sponsorship', async ({ page }) => {
@@ -114,12 +121,12 @@ test('several filter values restore from the URL, and older single-value links s
   await page.goto('jobs.html?state=VA,IL&track=teaching');
   await expect(page.locator('.job-card')).toHaveCount(1);
   await expect(page.locator('.job-card')).toContainText('Teaching Professor');
-  await expect(page.locator('#state-select summary')).toHaveText('2 states');
-  await expect(page.locator('#state-select').getByLabel('Illinois', { exact: true })).toBeChecked();
+  await expect(page.locator('.job-map-tile[aria-pressed="true"]')).toHaveCount(2);
+  await expect(page.locator('.job-map-tile[data-state="IL"]')).toHaveAttribute('aria-pressed', 'true');
 
   await page.goto('jobs.html?state=VA');
   await expect(page.locator('.job-card')).toHaveCount(1);
-  await expect(page.locator('#state-select summary')).toHaveText('Virginia');
+  await expect(page.locator('#clear-map-states')).toHaveText('Clear Virginia');
 });
 
 test('sorts by CSRankings rank in either direction', async ({ page }) => {

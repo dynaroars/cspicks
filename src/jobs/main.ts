@@ -4,7 +4,7 @@
 import { DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, TRACK_LABELS, VISA_FILTER_LABELS, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, stateCounts } from './jobs-data.js';
 import { renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
 import { exportFileName, jobsToMarkdown, restoreStarredIds } from './jobs-export.js';
-import { createMultiSelect } from './multi-select.js';
+import { createMultiSelect, createSelection } from './multi-select.js';
 import { STATE_TILE_ROWS, US_STATES } from './states.js';
 import { createSuggestionBox, rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
@@ -31,14 +31,16 @@ const select = (id: string) => document.getElementById(id) as HTMLSelectElement;
 const exportButton = document.querySelector<HTMLButtonElement>('#export-favorites')!;
 const restoreInput = document.querySelector<HTMLInputElement>('#restore-favorites-file')!;
 const restoreNote = document.getElementById('jobs-restore-note')!;
+const mapClear = document.querySelector<HTMLButtonElement>('#clear-map-states')!;
 
-/** Filters that accept several values: URL param, dropdown id, accessible name, count phrase. */
+/** Filters that accept several values: URL param, dropdown id, accessible name, count phrase. States have no
+ * dropdown: the tile map picks them. */
 const MULTI_FILTERS = [
   ['track', 'track-select', 'Position type', 'position types'],
   ['dept', 'dept-select', 'Hiring unit', 'departments'],
   ['level', 'level-select', 'Rank', 'ranks'],
   ['area', 'area-select', 'Research area', 'areas'],
-  ['state', 'state-select', 'State', 'states'],
+  ['state', null, 'State', 'states'],
   ['visa', 'visa-select', 'Visa sponsorship', 'visa options']
 ] as const;
 type MultiKey = typeof MULTI_FILTERS[number][0];
@@ -98,6 +100,8 @@ function render() {
   // The map ignores its own state filter so every state keeps a count.
   const counts = stateCounts(byFavorites(filterJobs(allJobs, filters, true)));
   mapElement.innerHTML = renderStateMap(STATE_TILE_ROWS, counts, current.state);
+  mapClear.hidden = !current.state.length;
+  mapClear.textContent = `Clear ${current.state.length === 1 ? US_STATES[current.state[0]!] : `${current.state.length} states`}`;
 
   const now = Date.now();
   if (!shown.length) {
@@ -138,7 +142,7 @@ function populateOptions() {
     visa: Object.entries(VISA_FILTER_LABELS)
   };
   MULTI_FILTERS.forEach(([key, id, label, plural]) => {
-    multi[key] = createMultiSelect(document.getElementById(id) as HTMLDetailsElement, { label, plural, options: entries[key], onChange: render });
+    multi[key] = id ? createMultiSelect(document.getElementById(id) as HTMLDetailsElement, { label, plural, options: entries[key], onChange: render }) : createSelection();
     // Older links carry a single value; a comma list restores several.
     const known = new Set(entries[key].map(([value]) => value));
     multi[key].setValues((params.get(key) || '').split(',').filter(value => known.has(value)));
@@ -198,6 +202,7 @@ function setupEvents() {
     render();
   });
 
+  mapClear.addEventListener('click', () => setFilter('state', []));
   exportButton.addEventListener('click', exportFavorites);
   document.getElementById('restore-favorites')!.addEventListener('click', () => restoreInput.click());
   restoreInput.addEventListener('change', () => {

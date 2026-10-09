@@ -46,7 +46,7 @@
     <section class="search-section">
       <div class="search-intro">
         <h2>Explore US academic computer science jobs</h2>
-        <p>Faculty, teaching-track, research, and postdoc openings at US universities, with deadlines and each school's ranking. <a href="jobs-submit.html">Submit or update a posting.</a></p>
+        <p>Faculty, teaching-track, research, and postdoc openings at US universities, with deadlines and each school's ranking.<br><a href="jobs-submit.html">Submit or update a posting.</a></p>
       </div>
 
       <div class="search-container">
@@ -73,9 +73,6 @@
         </div>
         <div class="filter-group">
           <details id="area-select" class="multi-select"><summary>All Areas</summary></details>
-        </div>
-        <div class="filter-group">
-          <details id="state-select" class="multi-select"><summary>All States</summary></details>
         </div>
         <div class="filter-group">
           <details id="visa-select" class="multi-select"><summary>Any Visa Sponsorship</summary></details>
@@ -116,8 +113,9 @@
     <main class="jobs-results-container">
       <p id="jobs-restore-note" class="jobs-restore-note" role="status" hidden></p>
       <details class="job-map-details" open>
-        <summary>Map by state <span id="map-hint">(click states to filter)</span></summary>
+        <summary>Map by state <span id="map-hint">(click states to filter; click again to remove)</span></summary>
         <div id="jobs-map" class="job-map" role="group" aria-label="Positions by state"></div>
+        <button type="button" id="clear-map-states" class="job-map-clear" hidden>Clear states</button>
       </details>
 
       <div class="jobs-status-bar">

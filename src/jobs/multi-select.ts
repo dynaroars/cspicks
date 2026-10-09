@@ -74,3 +74,13 @@ export function createMultiSelect(root: HTMLDetailsElement, { label, plural, opt
     toggle: value => setValues(values().includes(value) ? values().filter(entry => entry !== value) : [...values(), value])
   };
 }
+
+/** The same interface without a dropdown, for a filter picked elsewhere (the jobs page's state map). */
+export function createSelection(): MultiSelect {
+  let chosen: string[] = [];
+  return {
+    values: () => [...chosen],
+    setValues: values => { chosen = [...new Set(values)]; },
+    toggle: value => { chosen = chosen.includes(value) ? chosen.filter(entry => entry !== value) : [...chosen, value]; }
+  };
+}

@@ -185,3 +185,12 @@ button.job-chip:hover { color: var(--accent-color); border-color: var(--accent-c
   .job-chip-visa.is-case-by-case { color: #ffd66b; background: #3d3010; }
   .job-chip-visa.is-no { color: #fca5a5; background: #4a1818; }
 }
+.job-map-clear {
+  display: block; margin: 0.3rem auto 0.1rem; padding: 0.2rem 0.7rem; border: 1px solid var(--border-color); border-radius: 999px;
+  background: var(--bg-primary, transparent); color: var(--text-primary); font: inherit; font-size: 0.8rem; cursor: pointer;
+}
+.job-map-clear:hover { background: var(--hover-bg); }
+.job-map-clear[hidden] { display: none; }
+
+/* Intro: the submit link sits on its own line, and wrapping avoids a lone last word. */
+.jobs-page .search-intro p { text-wrap: pretty; }
