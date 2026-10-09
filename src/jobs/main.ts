@@ -3,7 +3,7 @@
  */
 import { DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, TRACK_LABELS, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, stateCounts } from './jobs-data.js';
 import { renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
-import { exportFileName, jobsToMarkdown } from './jobs-export.js';
+import { exportFileName, jobsToMarkdown, restoreStarredIds } from './jobs-export.js';
 import { createMultiSelect } from './multi-select.js';
 import { STATE_TILE_ROWS, US_STATES } from './states.js';
 import { createSuggestionBox, rankSuggestions } from '../suggestion-box.js';
@@ -11,7 +11,7 @@ import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
 import { areaLabels, escapeHtml } from '../shared.js';
-import { createFavoritesStore, favoritesSelect, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
+import { createFavoritesStore, favoritesSelect, onFavoriteChange, onlyFavorites, prioritizeFavorites, updateFavoritesCount, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { keywordHelpIcon } from '../search-keywords.js';
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadData } from '../data.js';
 import type { JobFilters, JobSort, StatusFilter } from './jobs-data.js';
@@ -29,6 +29,8 @@ const mapElement = document.getElementById('jobs-map')!;
 const favorites = createFavoritesStore('cspicks:jobs-favorites');
 const select = (id: string) => document.getElementById(id) as HTMLSelectElement;
 const exportButton = document.querySelector<HTMLButtonElement>('#export-favorites')!;
+const restoreInput = document.querySelector<HTMLInputElement>('#restore-favorites-file')!;
+const restoreNote = document.getElementById('jobs-restore-note')!;
 
 /** Filters that accept several values: URL param, dropdown id, accessible name, count phrase. */
 const MULTI_FILTERS = [
@@ -194,6 +196,12 @@ function setupEvents() {
   });
 
   exportButton.addEventListener('click', exportFavorites);
+  document.getElementById('restore-favorites')!.addEventListener('click', () => restoreInput.click());
+  restoreInput.addEventListener('change', () => {
+    const file = restoreInput.files?.[0];
+    restoreInput.value = '';
+    if (file) void restoreFavorites(file);
+  });
 
   results.addEventListener('click', event => {
     const target = event.target instanceof Element ? event.target : null;
@@ -253,6 +261,31 @@ function exportFavorites() {
   link.click();
   link.remove();
   setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
+/**
+ * Makes the stars exactly the postings listed in an exported file: stars it lists are added, every
+ * other star is removed. A file with no posting sections at all leaves the stars untouched.
+ */
+async function restoreFavorites(file: File) {
+  const { ids, unmatched } = restoreStarredIds(await file.text(), allJobs);
+  const plural = (count: number) => `${count} posting${count === 1 ? '' : 's'}`;
+  if (!ids.length && !unmatched) {
+    restoreNote.textContent = `No CS Picks postings found in “${file.name}”, so your stars were not changed. Choose a file made with “Export ★ (.md)”.`;
+  } else {
+    const wanted = new Set(ids);
+    const removed = favorites.all().filter(id => !wanted.has(id));
+    removed.forEach(id => favorites.toggle(id));
+    ids.filter(id => !favorites.isFavorite(id)).forEach(id => favorites.toggle(id));
+    restoreNote.textContent = [
+      `Restored ${plural(ids.length)} from “${file.name}”${removed.length ? `; removed ${removed.length} other star${removed.length === 1 ? '' : 's'}` : ''}.`,
+      unmatched ? `${plural(unmatched)} could not be matched; they may have been removed from the listings.` : ''
+    ].filter(Boolean).join(' ');
+  }
+  restoreNote.hidden = false;
+  updateFavoritesCount(favorites);
+  updateExportButton();
+  render();
 }
 
 /** Progressive enhancement: add CSRankings rank chips once the (large) roster has loaded. */

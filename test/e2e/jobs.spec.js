@@ -117,7 +117,7 @@ Alice Example,pldi,${new Date().getFullYear()},2,1
   await expect(page.locator('.job-school strong').first()).toHaveText('Univ. of Illinois at Urbana-Champaign');
 });
 
-test('exports starred postings as a Markdown file', async ({ page }) => {
+test('exports starred postings as a Markdown file and restores them from it', async ({ page }) => {
   await page.goto('jobs.html');
   const exportButton = page.locator('#export-favorites');
   await expect(exportButton).toBeDisabled();
@@ -131,6 +131,26 @@ test('exports starred postings as a Markdown file', async ({ page }) => {
   expect(text).toContain('## 1. Teaching Professor — Univ. of Illinois at Urbana-Champaign');
   expect(text).toContain('<https://example.edu/uiuc>');
   expect(text).not.toContain('Software Engineering');
+
+  // Change the stars, then restore: the stars become exactly what the file lists.
+  const teaching = page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.favorite-toggle');
+  const software = page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.favorite-toggle');
+  await teaching.click();
+  await software.click();
+  await expect(page.locator('#favorites-select option[value="only"]')).toHaveText('★ Favorites only (1)');
+  await expect(software).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('#restore-favorites-file').setInputFiles({ name: 'starred.md', mimeType: 'text/markdown', buffer: Buffer.from(text) });
+  await expect(page.locator('#jobs-restore-note')).toContainText('Restored 1 posting from “starred.md”; removed 1 other star.');
+  await expect(page.locator('#favorites-select option[value="only"]')).toHaveText('★ Favorites only (1)');
+  await expect(page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.favorite-toggle')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.favorite-toggle')).toHaveAttribute('aria-pressed', 'false');
+  await expect(page.locator('.job-title').first()).toContainText('Teaching Professor');
+  await expect(exportButton).toBeEnabled();
+
+  // A file with no postings leaves the stars alone.
+  await page.locator('#restore-favorites-file').setInputFiles({ name: 'notes.md', mimeType: 'text/markdown', buffer: Buffer.from('# Notes\n') });
+  await expect(page.locator('#jobs-restore-note')).toContainText('No CS Picks postings found in “notes.md”, so your stars were not changed.');
+  await expect(page.locator('#favorites-select option[value="only"]')).toHaveText('★ Favorites only (1)');
 });
 
 test('by-school view groups postings and links into Search and Simulator, with rank chips', async ({ page }) => {

@@ -172,3 +172,7 @@ button.job-chip:hover { color: var(--accent-color); border-color: var(--accent-c
 }
 .jobs-export-btn:hover:not(:disabled) { background: var(--hover-bg); }
 .jobs-export-btn:disabled { opacity: 0.5; cursor: default; }
+.jobs-restore-note {
+  margin: 1rem 0 0; padding: 0.55rem 0.8rem; border: 1px solid var(--border-color); border-radius: 8px;
+  background: var(--bg-secondary); color: var(--text-primary); font-size: 0.88rem;
+}

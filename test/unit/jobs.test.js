@@ -5,7 +5,7 @@ import {
   deadlineLabel, filterJobs, groupBySchool, isActive, jobsSuggestions, parseJobs, stateCounts
 } from '../../src/jobs/jobs-data.js';
 import { renderJobCard, renderSchoolCard, renderStateMap } from '../../src/jobs/jobs-render.js';
-import { exportFileName, jobsToMarkdown } from '../../src/jobs/jobs-export.js';
+import { exportFileName, jobsToMarkdown, restoreStarredIds } from '../../src/jobs/jobs-export.js';
 import { STATE_TILE_ROWS, US_STATES, resolveState } from '../../src/jobs/states.js';
 import { buildQueue, recheckDays } from '../../scripts/jobs-maintain.mjs';
 
@@ -113,6 +113,25 @@ test('starred postings export to Markdown with ranks, dates, and safe links', ()
   assert.ok(!md.includes('javascript:'));
   assert.ok(!md.includes('Start date'), 'empty fields are left out');
   assert.equal(exportFileName(NOW), 'cspicks-starred-jobs-2026-11-01.md');
+});
+
+test('restoring an exported file finds its postings by id, then URL, then title and school', () => {
+  const md = jobsToMarkdown([jobs[1], jobs[0]], { now: NOW });
+  assert.match(md, /- \*\*CS Picks ID:\*\* `ut-sec`/);
+  assert.deepEqual(restoreStarredIds(md, jobs), { ids: ['ut-sec', 'gt-ai-2026'], unmatched: 0 });
+  // Windows line endings and a repeated section still restore once each.
+  assert.deepEqual(restoreStarredIds(`${md}\n${md}`.replace(/\n/g, '\r\n'), jobs).ids, ['ut-sec', 'gt-ai-2026']);
+
+  // Files exported before ids were added: match by posting URL when unique, else by the heading.
+  const listed = [job({ id: 'a', url: 'https://example.edu/a' }), job({ id: 'b', title: 'Lecturer', url: 'https://example.edu/shared' }),
+    job({ id: 'c', title: 'Postdoc', url: 'https://example.edu/shared' })];
+  const legacy = jobsToMarkdown(listed, { now: NOW }).replace(/^- \*\*CS Picks ID:.*\n/gm, '');
+  assert.ok(!legacy.includes('CS Picks ID'));
+  assert.deepEqual(restoreStarredIds(legacy, listed), { ids: ['a', 'b', 'c'], unmatched: 0 });
+
+  // Postings no longer listed are counted, and unrelated Markdown restores nothing.
+  assert.deepEqual(restoreStarredIds(md, [jobs[0]]), { ids: ['gt-ai-2026'], unmatched: 1 });
+  assert.deepEqual(restoreStarredIds('# Notes\n\nNothing here.\n', jobs), { ids: [], unmatched: 0 });
 });
 
 test('state counts ignore the state filter; school grouping preserves order', () => {

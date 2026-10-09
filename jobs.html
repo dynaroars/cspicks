@@ -98,6 +98,10 @@
           <button type="button" id="export-favorites" class="jobs-export-btn" disabled title="Star postings with ☆ to export them">⬇ Export ★ (.md)</button>
         </div>
         <div class="filter-group">
+          <button type="button" id="restore-favorites" class="jobs-export-btn" title="Replace your stars with exactly the postings listed in a Markdown file exported here">⬆ Restore ★ (.md)</button>
+          <input type="file" id="restore-favorites-file" accept=".md,.markdown,.txt,text/markdown,text/plain" hidden>
+        </div>
+        <div class="filter-group">
           <select id="view-select" aria-label="Group postings">
             <option value="position">View: By position</option>
             <option value="school">View: By school</option>
@@ -107,6 +111,7 @@
     </section>
 
     <main class="jobs-results-container">
+      <p id="jobs-restore-note" class="jobs-restore-note" role="status" hidden></p>
       <details class="job-map-details" open>
         <summary>Map by state <span id="map-hint">(click states to filter)</span></summary>
         <div id="jobs-map" class="job-map" role="group" aria-label="Positions by state"></div>
