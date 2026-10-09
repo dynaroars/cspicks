@@ -3,6 +3,8 @@
  */
 import { DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, TRACK_LABELS, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, stateCounts } from './jobs-data.js';
 import { renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
+import { exportFileName, jobsToMarkdown } from './jobs-export.js';
+import { createMultiSelect } from './multi-select.js';
 import { STATE_TILE_ROWS, US_STATES } from './states.js';
 import { createSuggestionBox, rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
@@ -12,7 +14,8 @@ import { areaLabels, escapeHtml } from '../shared.js';
 import { createFavoritesStore, favoritesSelect, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { keywordHelpIcon } from '../search-keywords.js';
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadData } from '../data.js';
-import type { JobFilters, StatusFilter } from './jobs-data.js';
+import type { JobFilters, JobSort, StatusFilter } from './jobs-data.js';
+import type { MultiSelect } from './multi-select.js';
 import type { RankLookup, SchoolRank } from './jobs-render.js';
 import type { Job } from '../types.js';
 import type { createSuggestionBox as CreateSuggestionBox } from '../suggestion-box.js';
@@ -25,24 +28,37 @@ const countElement = document.getElementById('jobs-count')!;
 const mapElement = document.getElementById('jobs-map')!;
 const favorites = createFavoritesStore('cspicks:jobs-favorites');
 const select = (id: string) => document.getElementById(id) as HTMLSelectElement;
+const exportButton = document.querySelector<HTMLButtonElement>('#export-favorites')!;
+
+/** Filters that accept several values: URL param, dropdown id, accessible name, count phrase. */
+const MULTI_FILTERS = [
+  ['track', 'track-select', 'Position type', 'position types'],
+  ['dept', 'dept-select', 'Hiring unit', 'departments'],
+  ['level', 'level-select', 'Rank', 'ranks'],
+  ['area', 'area-select', 'Research area', 'areas'],
+  ['state', 'state-select', 'State', 'states']
+] as const;
+type MultiKey = typeof MULTI_FILTERS[number][0];
+const multi = {} as Record<MultiKey, MultiSelect>;
 
 let allJobs: Job[] = [];
 let suggestions: ReturnType<typeof CreateSuggestionBox>;
 let schoolRanks = new Map<string, SchoolRank>();
 const ranks: RankLookup = school => schoolRanks.get(school);
+const rankOf = (school: string) => schoolRanks.get(school)?.rank;
 
 const EXAMPLES = ['Assistant professor', 'Teaching track', 'Postdoc', 'dept: information', 'dept: ece', 'area: security', 'area: machine learning', 'loc: california', 'loc: texas', 'status: closed'];
 
 function state() {
   return {
     query: input.value.trim(),
-    track: select('track-select').value,
-    level: select('level-select').value,
-    dept: select('dept-select').value,
-    area: select('area-select').value,
-    state: select('state-select').value,
+    track: multi.track.values(),
+    level: multi.level.values(),
+    dept: multi.dept.values(),
+    area: multi.area.values(),
+    state: multi.state.values(),
     status: select('status-select').value as StatusFilter,
-    sortBy: select('sort-select').value as JobFilters['sortBy'],
+    sortBy: select('sort-select').value as JobSort,
     view: select('view-select').value,
     favorites: select('favorites-select').value
   };
@@ -50,11 +66,13 @@ function state() {
 
 function updateUrl(current: ReturnType<typeof state>) {
   const next = new URLSearchParams();
-  const defaults: Record<string, string> = { track: 'all', level: 'all', dept: 'all', area: 'all', state: 'all', status: 'active', sortBy: 'deadline', view: 'position', favorites: 'all' };
+  const defaults = { status: 'active', sortBy: 'deadline', view: 'position', favorites: 'all' };
   const names: Record<string, string> = { sortBy: 'sort' };
   if (current.query) next.set('q', current.query);
-  (Object.keys(defaults) as Array<keyof typeof current>).forEach(key => {
-    if (current[key] !== defaults[key]) next.set(names[key] || key, current[key]!);
+  // Several choices share one comma-separated param (`state=VA,MD`).
+  MULTI_FILTERS.forEach(([key]) => { if (current[key].length) next.set(key, current[key].join(',')); });
+  (Object.keys(defaults) as Array<keyof typeof defaults>).forEach(key => {
+    if (current[key] !== defaults[key]) next.set(names[key] || key, current[key]);
   });
   window.history.replaceState({}, '', next.toString() ? `${window.location.pathname}?${next}` : window.location.pathname);
   updatePageMeta({
@@ -68,7 +86,7 @@ function updateUrl(current: ReturnType<typeof state>) {
 function render() {
   if (!allJobs.length && !statusText.dataset.loaded) return;
   const current = state();
-  const filters: JobFilters = { ...current, now: Date.now() };
+  const filters: JobFilters = { ...current, rankOf, now: Date.now() };
   const favoritesOnly = wantsFavoritesOnly(current.query, current.favorites);
   // Starred postings lead the list; "favorites only" hides the rest.
   const byFavorites = (list: Job[]) => favoritesOnly ? onlyFavorites(list, job => job.id, favorites) : prioritizeFavorites(list, job => job.id, favorites);
@@ -101,24 +119,28 @@ function render() {
   trackView(current.query ? 'search-results' : 'default', 'jobs');
 }
 
-function setFilter(id: string, value: string) {
-  select(id).value = value;
+function setFilter(key: MultiKey, values: string[]) {
+  multi[key].setValues(values);
   render();
 }
 
 function populateOptions() {
-  const add = (id: string, entries: Array<[string, string]>) => {
-    const el = select(id);
-    entries.forEach(([value, label]) => el.add(new Option(label, value)));
+  const entries: Record<MultiKey, Array<[string, string]>> = {
+    track: Object.entries(TRACK_LABELS),
+    dept: Object.entries(DEPARTMENT_LABELS),
+    level: Object.entries(LEVEL_LABELS),
+    area: Object.entries(areaLabels).sort((a, b) => a[1].localeCompare(b[1])),
+    state: Object.entries(US_STATES)
   };
-  add('track-select', Object.entries(TRACK_LABELS));
-  add('level-select', Object.entries(LEVEL_LABELS));
-  add('dept-select', Object.entries(DEPARTMENT_LABELS));
-  add('area-select', Object.entries(areaLabels).sort((a, b) => a[1].localeCompare(b[1])));
-  add('state-select', Object.entries(US_STATES));
+  MULTI_FILTERS.forEach(([key, id, label, plural]) => {
+    multi[key] = createMultiSelect(document.getElementById(id) as HTMLDetailsElement, { label, plural, options: entries[key], onChange: render });
+    // Older links carry a single value; a comma list restores several.
+    const known = new Set(entries[key].map(([value]) => value));
+    multi[key].setValues((params.get(key) || '').split(',').filter(value => known.has(value)));
+  });
 
   select('favorites-select').value = params.get('favorites') === 'only' ? 'only' : 'all';
-  const restore: Array<[string, string]> = [['track', 'track-select'], ['level', 'level-select'], ['dept', 'dept-select'], ['area', 'area-select'], ['state', 'state-select'], ['status', 'status-select'], ['view', 'view-select']];
+  const restore: Array<[string, string]> = [['status', 'status-select'], ['view', 'view-select']];
   restore.forEach(([param, id]) => {
     const value = params.get(param);
     if (value && [...select(id).options].some(option => option.value === value)) select(id).value = value;
@@ -152,7 +174,7 @@ function buildSuggestions() {
 function setupEvents() {
   const resetFilters = () => {
     input.value = '';
-    ['track', 'level', 'dept', 'area', 'state'].forEach(name => { select(`${name}-select`).value = 'all'; });
+    MULTI_FILTERS.forEach(([key]) => multi[key].setValues([]));
     select('status-select').value = 'active';
     select('sort-select').value = 'deadline';
     select('view-select').value = 'position';
@@ -160,14 +182,18 @@ function setupEvents() {
     render();
     input.focus();
   };
-  ['track-select', 'level-select', 'dept-select', 'area-select', 'state-select', 'status-select', 'sort-select', 'view-select', 'favorites-select']
+  ['status-select', 'sort-select', 'view-select', 'favorites-select']
     .forEach(id => select(id).addEventListener('change', render));
 
+  // Map tiles add or remove a state, so several can be picked; chips on a card narrow to just that value.
   mapElement.addEventListener('click', event => {
     const tile = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-state]') : null;
     if (!tile) return;
-    setFilter('state-select', select('state-select').value === tile.dataset.state ? 'all' : tile.dataset.state!);
+    multi.state.toggle(tile.dataset.state!);
+    render();
   });
+
+  exportButton.addEventListener('click', exportFavorites);
 
   results.addEventListener('click', event => {
     const target = event.target instanceof Element ? event.target : null;
@@ -180,9 +206,9 @@ function setupEvents() {
       return window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     const area = target.closest<HTMLElement>('[data-search-area]');
-    if (area) return setFilter('area-select', area.dataset.searchArea!);
+    if (area) return setFilter('area', [area.dataset.searchArea!]);
     const stateButton = target.closest<HTMLElement>('[data-state]');
-    if (stateButton) setFilter('state-select', stateButton.dataset.state!);
+    if (stateButton) setFilter('state', [stateButton.dataset.state!]);
   });
 
   document.getElementById('jobs-examples')!.innerHTML = EXAMPLES.map(example =>
@@ -207,6 +233,26 @@ function setupEvents() {
       input.select();
     }
   });
+}
+
+function updateExportButton() {
+  const count = favorites.all().length;
+  exportButton.disabled = count === 0;
+  exportButton.title = count ? `Download your ${count} starred position${count === 1 ? '' : 's'} as a Markdown file` : 'Star postings with ☆ to export them';
+}
+
+/** Every starred posting (closed ones too, whatever the filters), in the current sort order. */
+function exportFavorites() {
+  const now = Date.now();
+  const starred = onlyFavorites(allJobs, job => job.id, favorites);
+  if (!starred.length) return;
+  const ordered = filterJobs(starred, { status: 'all', sortBy: state().sortBy, rankOf, now });
+  const url = URL.createObjectURL(new Blob([jobsToMarkdown(ordered, { ranks, now })], { type: 'text/markdown;charset=utf-8' }));
+  const link = Object.assign(document.createElement('a'), { href: url, download: exportFileName(now) });
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
 }
 
 /** Progressive enhancement: add CSRankings rank chips once the (large) roster has loaded. */
@@ -234,6 +280,10 @@ async function init() {
     searchBox.insertAdjacentHTML('afterbegin', keywordHelpIcon(JOBS_KEYWORD_SPECS, 'jobs-search-help'));
     wireFavoriteToggles(results, favorites);
     onFavoriteChange(results, favorites, render);
+    results.addEventListener('click', event => {
+      if (event.target instanceof Element && event.target.closest('[data-favorite-id]')) updateExportButton();
+    });
+    updateExportButton();
     initTooltipPositioning();
     setupEvents();
     render();

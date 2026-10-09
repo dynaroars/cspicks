@@ -65,7 +65,9 @@ project.
 - `grants.html` + `src/grants/main.js` — standalone CS research awards, fellowships, and grants explorer
   over the database in `public/grants.json` (industry gifts, NSF calls, DARPA, DOE, DoD, foundations, societies).
 - `jobs.html` + `src/jobs/main.ts` — US academic CS jobs explorer over `public/jobs.json`. Modeled on the grants page
-  (select filters, search box, card list) with a position/school view toggle and a US state tile map. `jobs-data.ts`
+  (search box, card list) but its type/department/rank/area/state filters are multi-choice checkbox dropdowns
+  (`src/jobs/multi-select.ts`, comma-separated URL params), with CSRankings rank sorts, a position/school view toggle,
+  a US state tile map, and a Markdown export of ★ starred postings (`src/jobs/jobs-export.ts`). `jobs-data.ts`
   owns loading, the active/closed definition (`isActive`: not closed, deadline not passed, or confirmed within 90 days),
   filtering, and grouping; `jobs-render.ts` the cards and map; school rank chips load lazily from `loadData()`. Crawled
   from CSRankings departments by a scheduled routine (MAINTENANCE.md §6.5); queue/seed tooling is

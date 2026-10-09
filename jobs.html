@@ -63,29 +63,19 @@
 
       <div class="search-filters" role="search" aria-label="Filter jobs">
         <div class="filter-group">
-          <select id="track-select" aria-label="Position type">
-            <option value="all">All Position Types</option>
-          </select>
+          <details id="track-select" class="multi-select"><summary>All Position Types</summary></details>
         </div>
         <div class="filter-group">
-          <select id="dept-select" aria-label="Hiring unit">
-            <option value="all">All Departments</option>
-          </select>
+          <details id="dept-select" class="multi-select"><summary>All Departments</summary></details>
         </div>
         <div class="filter-group">
-          <select id="level-select" aria-label="Rank">
-            <option value="all">Any Rank</option>
-          </select>
+          <details id="level-select" class="multi-select"><summary>Any Rank</summary></details>
         </div>
         <div class="filter-group">
-          <select id="area-select" aria-label="Research area">
-            <option value="all">All Areas</option>
-          </select>
+          <details id="area-select" class="multi-select"><summary>All Areas</summary></details>
         </div>
         <div class="filter-group">
-          <select id="state-select" aria-label="State">
-            <option value="all">All States</option>
-          </select>
+          <details id="state-select" class="multi-select"><summary>All States</summary></details>
         </div>
         <div class="filter-group">
           <select id="status-select" aria-label="Posting status">
@@ -99,9 +89,14 @@
             <option value="deadline">Soonest Deadline</option>
             <option value="posted">Recently Posted</option>
             <option value="school">School Name</option>
+            <option value="rank">CSRankings: Top First</option>
+            <option value="rank-desc">CSRankings: Bottom First</option>
           </select>
         </div>
         <div class="filter-group" id="favorites-filter"></div>
+        <div class="filter-group">
+          <button type="button" id="export-favorites" class="jobs-export-btn" disabled title="Star postings with ☆ to export them">⬇ Export ★ (.md)</button>
+        </div>
         <div class="filter-group">
           <select id="view-select" aria-label="Group postings">
             <option value="position">View: By position</option>
@@ -113,7 +108,7 @@
 
     <main class="jobs-results-container">
       <details class="job-map-details" open>
-        <summary>Map by state <span id="map-hint">(click a state to filter)</span></summary>
+        <summary>Map by state <span id="map-hint">(click states to filter)</span></summary>
         <div id="jobs-map" class="job-map" role="group" aria-label="Positions by state"></div>
       </details>
 

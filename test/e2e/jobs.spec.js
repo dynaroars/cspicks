@@ -54,20 +54,83 @@ test('search, filters, and the state map narrow the list', async ({ page }) => {
   await expect(page.locator('.job-card')).toHaveCount(1);
   await page.locator('#jobs-search').fill('');
 
-  await page.locator('#track-select').selectOption('tenure-track');
+  const track = page.locator('#track-select');
+  await track.locator('summary').click();
+  await track.getByLabel('Tenure-track').check();
   await expect(page.locator('.job-card')).toHaveCount(1);
-  await page.locator('#track-select').selectOption('all');
+  await expect(track.locator('summary')).toHaveText('Tenure-track');
+  // A second choice widens the filter instead of replacing it.
+  await track.getByLabel('Teaching track').check();
+  await expect(page.locator('.job-card')).toHaveCount(2);
+  await expect(track.locator('summary')).toHaveText('2 position types');
+  await expect(page).toHaveURL(/track=tenure-track%2Cteaching|track=tenure-track,teaching/);
+  await page.keyboard.press('Escape');
+  await expect(track).not.toHaveAttribute('open', '');
+  await track.locator('summary').click();
+  await track.getByRole('button', { name: 'Clear' }).click();
+  await expect(track.locator('summary')).toHaveText('All Position Types');
+  await page.locator('#jobs-status').click();
+  await expect(track).not.toHaveAttribute('open', '');
 
   const virginia = page.locator('.job-map-tile[data-state="VA"]');
   await expect(virginia).toHaveAttribute('aria-label', 'Virginia: 1 position');
   await virginia.click();
-  await expect(page.locator('#state-select')).toHaveValue('VA');
+  await expect(page.locator('#state-select summary')).toHaveText('Virginia');
   await expect(page.locator('.job-card')).toHaveCount(1);
   await expect(page).toHaveURL(/state=VA/);
-  // Other states keep their counts while one is selected.
+  // Other states keep their counts while one is selected, and clicking another adds it.
   await expect(page.locator('.job-map-tile[data-state="IL"]')).toHaveAttribute('aria-label', 'Illinois: 1 position');
-  await page.locator('.job-map-tile[data-state="VA"]').click();
+  await page.locator('.job-map-tile[data-state="IL"]').click();
   await expect(page.locator('.job-card')).toHaveCount(2);
+  await expect(page.locator('#state-select summary')).toHaveText('2 states');
+  await expect(page.locator('.job-map-tile[aria-pressed="true"]')).toHaveCount(2);
+  await page.locator('.job-map-tile[data-state="VA"]').click();
+  await page.locator('.job-map-tile[data-state="IL"]').click();
+  await expect(page.locator('.job-card')).toHaveCount(2);
+  await expect(page.locator('#state-select summary')).toHaveText('All States');
+});
+
+test('several filter values restore from the URL, and older single-value links still work', async ({ page }) => {
+  await page.goto('jobs.html?state=VA,IL&track=teaching');
+  await expect(page.locator('.job-card')).toHaveCount(1);
+  await expect(page.locator('.job-card')).toContainText('Teaching Professor');
+  await expect(page.locator('#state-select summary')).toHaveText('2 states');
+  await expect(page.locator('#state-select').getByLabel('Illinois', { exact: true })).toBeChecked();
+
+  await page.goto('jobs.html?state=VA');
+  await expect(page.locator('.job-card')).toHaveCount(1);
+  await expect(page.locator('#state-select summary')).toHaveText('Virginia');
+});
+
+test('sorts by CSRankings rank in either direction', async ({ page }) => {
+  // George Mason publishes more, so it outranks Illinois in this fixture.
+  await page.route('**/generated-author-info.csv', route => route.fulfill({ contentType: 'text/csv', body: `name,area,year,count,adjustedcount
+Hai Duong,icse,${new Date().getFullYear()},9,6
+Alice Example,pldi,${new Date().getFullYear()},2,1
+` }));
+  await page.goto('jobs.html');
+  await expect(page.locator('.job-chip-rank').first()).toBeVisible();
+  await page.locator('#sort-select').selectOption('rank');
+  await expect(page.locator('.job-school strong').first()).toHaveText('George Mason University');
+  await expect(page).toHaveURL(/sort=rank/);
+  await page.locator('#sort-select').selectOption('rank-desc');
+  await expect(page.locator('.job-school strong').first()).toHaveText('Univ. of Illinois at Urbana-Champaign');
+});
+
+test('exports starred postings as a Markdown file', async ({ page }) => {
+  await page.goto('jobs.html');
+  const exportButton = page.locator('#export-favorites');
+  await expect(exportButton).toBeDisabled();
+  await page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.favorite-toggle').click();
+  await expect(exportButton).toBeEnabled();
+
+  const [download] = await Promise.all([page.waitForEvent('download'), exportButton.click()]);
+  expect(download.suggestedFilename()).toMatch(/^cspicks-starred-jobs-\d{4}-\d{2}-\d{2}\.md$/);
+  const text = await (await download.createReadStream()).toArray().then(chunks => Buffer.concat(chunks).toString('utf8'));
+  expect(text).toContain('# Starred US academic CS jobs');
+  expect(text).toContain('## 1. Teaching Professor — Univ. of Illinois at Urbana-Champaign');
+  expect(text).toContain('<https://example.edu/uiuc>');
+  expect(text).not.toContain('Software Engineering');
 });
 
 test('by-school view groups postings and links into Search and Simulator, with rank chips', async ({ page }) => {

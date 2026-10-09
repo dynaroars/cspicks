@@ -5,6 +5,7 @@ import {
   deadlineLabel, filterJobs, groupBySchool, isActive, jobsSuggestions, parseJobs, stateCounts
 } from '../../src/jobs/jobs-data.js';
 import { renderJobCard, renderSchoolCard, renderStateMap } from '../../src/jobs/jobs-render.js';
+import { exportFileName, jobsToMarkdown } from '../../src/jobs/jobs-export.js';
 import { STATE_TILE_ROWS, US_STATES, resolveState } from '../../src/jobs/states.js';
 import { buildQueue, recheckDays } from '../../scripts/jobs-maintain.mjs';
 
@@ -67,6 +68,51 @@ test('sorts by soonest deadline with rolling last, by recency, and by school', (
   assert.deepEqual(ids(recent), ['b', 'a']);
   // Closed postings come after active ones in "all" view, most recently closed first.
   assert.deepEqual(ids(filterJobs(jobs, { status: 'all', now: NOW })).slice(0, 3), ['ut-sec', 'gt-ai-2026', 'ucsd-roll']);
+});
+
+test('filters take several values: any value within a filter, every filter at once', () => {
+  assert.deepEqual(ids(filterJobs(jobs, { track: ['teaching', 'postdoc'], now: NOW })), ['ut-sec', 'ucsd-roll']);
+  assert.deepEqual(ids(filterJobs(jobs, { state: ['GA', 'CA'], now: NOW })), ['gt-ai-2026', 'ucsd-roll']);
+  assert.deepEqual(ids(filterJobs(jobs, { track: ['teaching', 'postdoc'], state: ['CA'], now: NOW })), ['ucsd-roll']);
+  assert.deepEqual(ids(filterJobs(jobs, { area: ['ai', 'sec'], now: NOW })), ['ut-sec', 'gt-ai-2026']);
+  assert.deepEqual(ids(filterJobs(jobs, { level: ['assistant', 'full'], now: NOW })), ['gt-ai-2026']);
+  assert.deepEqual(ids(filterJobs(jobs, { dept: ['cs', 'ece'], now: NOW })), ['ut-sec', 'gt-ai-2026', 'ucsd-roll']);
+  assert.equal(filterJobs(jobs, { track: [], state: 'all', now: NOW }).length, 3, 'an empty list or "all" means no constraint');
+  const map = renderStateMap(STATE_TILE_ROWS, { GA: 3, CA: 1 }, ['GA', 'CA']);
+  assert.equal((map.match(/aria-pressed="true"/g) || []).length, 2);
+});
+
+test('rank sorts order schools by CSRankings rank, unranked schools last both ways', () => {
+  const rank = { 'Georgia Institute of Technology': 7, 'University of Texas at Austin': 9 };
+  const rankOf = school => rank[school];
+  assert.deepEqual(ids(filterJobs(jobs, { sortBy: 'rank', rankOf, now: NOW })), ['gt-ai-2026', 'ut-sec', 'ucsd-roll']);
+  assert.deepEqual(ids(filterJobs(jobs, { sortBy: 'rank-desc', rankOf, now: NOW })), ['ut-sec', 'gt-ai-2026', 'ucsd-roll']);
+  // A school's own postings go by soonest deadline; without ranks loaded, schools stay grouped by name.
+  const gt = [job({ id: 'gt-late', deadline: '2027-01-30' }), job({ id: 'gt-soon', deadline: '2026-11-20' })];
+  assert.deepEqual(ids(filterJobs(gt, { sortBy: 'rank', rankOf, now: NOW })), ['gt-soon', 'gt-late']);
+  assert.deepEqual(ids(filterJobs(jobs, { sortBy: 'rank', now: NOW })), ['gt-ai-2026', 'ucsd-roll', 'ut-sec']);
+});
+
+test('starred postings export to Markdown with ranks, dates, and safe links', () => {
+  const ranks = school => school === 'Georgia Institute of Technology' ? { rank: 7, areaRanks: { ai: 3 } } : undefined;
+  const md = jobsToMarkdown([
+    job({ reviewBegins: '2026-11-15', summary: 'Hiring in\n\nall of AI.' }),
+    job({ id: 'bad', school: 'Evil U', title: 'Lecturer\n# injected', url: 'javascript:alert(1)', areas: [], anyArea: true, level: null })
+  ], { ranks, now: NOW });
+  assert.match(md, /^# Starred US academic CS jobs\n/);
+  assert.match(md, /on 2026-11-01 · 2 positions\./);
+  assert.match(md, /## 1\. Assistant Professor, AI — Georgia Institute of Technology/);
+  assert.match(md, /- \*\*School:\*\* Georgia Institute of Technology \(#7 CSRankings\)/);
+  assert.match(md, /- \*\*Research areas:\*\* .+ \(#3 CSRankings\)/);
+  assert.match(md, /- \*\*Status:\*\* Dec 15, 2026 · 45 days left/);
+  assert.match(md, /- \*\*Review begins:\*\* Nov 15, 2026/);
+  assert.match(md, /- \*\*Official posting:\*\* <https:\/\/example\.edu\/jobs\/1>/);
+  assert.match(md, /> Hiring in all of AI\./);
+  assert.match(md, /## 2\. Lecturer # injected — Evil U/, 'newlines cannot start a new heading');
+  assert.match(md, /Research areas:\*\* Open to all areas/);
+  assert.ok(!md.includes('javascript:'));
+  assert.ok(!md.includes('Start date'), 'empty fields are left out');
+  assert.equal(exportFileName(NOW), 'cspicks-starred-jobs-2026-11-01.md');
 });
 
 test('state counts ignore the state filter; school grouping preserves order', () => {

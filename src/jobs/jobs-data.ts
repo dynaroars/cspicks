@@ -67,8 +67,8 @@ export const JOBS_KEYWORD_SPECS: KeywordSpec[] = [
 ];
 
 export type StatusFilter = 'active' | 'closed' | 'all';
-export type JobSort = 'deadline' | 'posted' | 'school';
-export const JOB_SORTS: JobSort[] = ['deadline', 'posted', 'school'];
+export type JobSort = 'deadline' | 'posted' | 'school' | 'rank' | 'rank-desc';
+export const JOB_SORTS: JobSort[] = ['deadline', 'posted', 'school', 'rank', 'rank-desc'];
 
 function dayParts(value: unknown): [number, number, number] | null {
   const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(value ?? '').trim());
@@ -161,16 +161,25 @@ export async function loadJobsData(): Promise<Job[]> {
   return cachedJobs;
 }
 
+/** One filter's chosen values: a list matches any of them; 'all', undefined, or an empty list means no constraint. */
+export type FilterChoice = string | string[];
+
 export interface JobFilters {
   query?: string;
-  track?: string;
-  dept?: string;
-  level?: string;
-  area?: string;
-  state?: string;
+  track?: FilterChoice;
+  dept?: FilterChoice;
+  level?: FilterChoice;
+  area?: FilterChoice;
+  state?: FilterChoice;
   status?: StatusFilter;
   sortBy?: JobSort;
+  /** Overall CSRankings rank per school, for the rank sorts; schools it cannot rank sort last. */
+  rankOf?: (school: string) => number | null | undefined;
   now?: number;
+}
+
+export function filterValues(choice: FilterChoice | undefined): string[] {
+  return (Array.isArray(choice) ? choice : [choice ?? 'all']).filter(value => value && value !== 'all');
 }
 
 function searchText(job: Job) {
@@ -196,9 +205,25 @@ function sortKey(job: Job, sortBy: JobSort, now: number) {
   return -(dayStart(job.postedDate) ?? dayStart(job.lastSeenAt) ?? 0);
 }
 
+/** Best CSRankings rank first (`rank`) or last (`rank-desc`); unranked schools, or ranks not loaded yet, go last either way. */
+function rankOrder(a: Job, b: Job, rankOf: JobFilters['rankOf'], descending: boolean) {
+  const rank = (job: Job) => {
+    const value = rankOf?.(job.school);
+    return typeof value === 'number' && Number.isFinite(value) ? value : null;
+  };
+  const [first, second] = [rank(a), rank(b)];
+  if (first === null || second === null) return Number(first === null) - Number(second === null);
+  return descending ? second - first : first - second;
+}
+
 /** `ignoreState` lets the state map count jobs per state without the state filter hiding the others. */
 export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = false) {
-  const { query = '', track = 'all', dept = 'all', level = 'all', area = 'all', state = 'all', status = 'active', sortBy = 'deadline', now = Date.now() } = filters;
+  const { query = '', status = 'active', sortBy = 'deadline', rankOf, now = Date.now() } = filters;
+  const tracks = filterValues(filters.track);
+  const depts = filterValues(filters.dept);
+  const levels = filterValues(filters.level);
+  const areas = filterValues(filters.area);
+  const states = filterValues(filters.state);
   const { filters: keywords, rest } = parseKeywordQuery(query, JOBS_KEYWORD_SPECS);
   const statusKeyword = keywords.status?.[0];
   const wantStatus: StatusFilter = statusKeyword === 'closed' || statusKeyword === 'all' || statusKeyword === 'active'
@@ -209,17 +234,17 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
     const active = isActive(job, now);
     if (wantStatus === 'active' && !active) return false;
     if (wantStatus === 'closed' && active) return false;
-    if (track !== 'all' && job.track !== track) return false;
-    if (level !== 'all' && job.level !== level) return false;
-    if (dept !== 'all' && departmentKind(job.department) !== dept) return false;
+    if (tracks.length && !tracks.includes(job.track)) return false;
+    if (levels.length && !levels.includes(job.level ?? '')) return false;
+    if (depts.length && !depts.includes(departmentKind(job.department))) return false;
     if (keywords.dept) {
       const kind = departmentKind(job.department);
       // Short values ("cs", "ece") match the unit kind only; longer ones also match the posting's department text.
       if (!keywords.dept.every(value => value === kind || (value.length > 3 && `${DEPARTMENT_LABELS[kind]} ${job.department}`.toLowerCase().includes(value)))) return false;
     }
     // A posting open to all areas matches every area; one that names none matches none.
-    if (area !== 'all' && !job.anyArea && !job.areas.includes(area)) return false;
-    if (!ignoreState && state !== 'all' && job.state !== state) return false;
+    if (areas.length && !job.anyArea && !areas.some(key => job.areas.includes(key))) return false;
+    if (!ignoreState && states.length && !states.includes(job.state)) return false;
     if (!matchesKeyword(keywords.school, job.school)) return false;
     if (keywords.area && !job.anyArea && !matchesKeyword(keywords.area, job.areas.map(key => `${key} ${areaLabels[key] || ''}`).join(' '))) return false;
     if (!matchesKeyword(keywords.track, `${job.track} ${TRACK_LABELS[job.track]}`)) return false;
@@ -230,10 +255,14 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
     return terms.every(term => text.includes(term));
   });
 
+  if (sortBy === 'school') return results.sort((a, b) => a.school.localeCompare(b.school) || a.title.localeCompare(b.title));
+  if (sortBy === 'rank' || sortBy === 'rank-desc') {
+    // Schools sharing a rank (and the unranked ones) stay grouped; a school's own postings go by soonest deadline.
+    return results.sort((a, b) => rankOrder(a, b, rankOf, sortBy === 'rank-desc') || a.school.localeCompare(b.school)
+      || sortKey(a, 'deadline', now) - sortKey(b, 'deadline', now) || a.title.localeCompare(b.title));
+  }
   return results.sort((a, b) =>
-    sortBy === 'school'
-      ? a.school.localeCompare(b.school) || a.title.localeCompare(b.title)
-      : sortKey(a, sortBy, now) - sortKey(b, sortBy, now) || a.school.localeCompare(b.school) || a.title.localeCompare(b.title));
+    sortKey(a, sortBy, now) - sortKey(b, sortBy, now) || a.school.localeCompare(b.school) || a.title.localeCompare(b.title));
 }
 
 export function stateCounts(jobs: Job[]) {

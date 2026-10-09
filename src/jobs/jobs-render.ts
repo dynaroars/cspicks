@@ -1,9 +1,9 @@
 import { areaLabels, escapeHtml, safeExternalUrl } from '../shared.js';
 import { favoriteToggleButton } from '../favorites.js';
-import { LEVEL_LABELS, TRACK_LABELS, deadlineLabel, formatDay } from './jobs-data.js';
+import { LEVEL_LABELS, TRACK_LABELS, deadlineLabel, filterValues, formatDay } from './jobs-data.js';
 import { US_STATES } from './states.js';
 import type { Job } from '../types.js';
-import type { SchoolJobs } from './jobs-data.js';
+import type { FilterChoice, SchoolJobs } from './jobs-data.js';
 
 export interface SchoolRank { rank: number | null; areaRanks: Record<string, number> }
 export type RankLookup = (school: string) => SchoolRank | undefined;
@@ -84,14 +84,16 @@ export function renderSchoolCard(group: SchoolJobs, ranks: RankLookup, isFavorit
   </section>`;
 }
 
-/** The US tile map: one button per state, shaded by posting count. `selected` is a USPS code or 'all'. */
-export function renderStateMap(rows: string[][], counts: Record<string, number>, selected: string) {
+/** The US tile map: one button per state, shaded by posting count. `selected` is USPS codes, one code, or 'all'. */
+export function renderStateMap(rows: string[][], counts: Record<string, number>, selected: FilterChoice) {
   const max = Math.max(1, ...Object.values(counts));
+  const chosen = new Set(filterValues(selected));
   const cells = rows.flat().map(code => {
     if (code === '.') return '<span class="job-map-gap" aria-hidden="true"></span>';
     const count = counts[code] || 0;
     const level = count === 0 ? 0 : Math.min(4, Math.ceil((count / max) * 4));
-    return `<button type="button" class="job-map-tile level-${level}${selected === code ? ' is-selected' : ''}" data-state="${code}" aria-pressed="${selected === code}" aria-label="${escapeHtml(US_STATES[code] || code)}: ${count} position${count === 1 ? '' : 's'}" title="${escapeHtml(US_STATES[code] || code)}: ${count}"${count === 0 && selected !== code ? ' data-empty="true"' : ''}><span>${code}</span><small>${count || ''}</small></button>`;
+    const isSelected = chosen.has(code);
+    return `<button type="button" class="job-map-tile level-${level}${isSelected ? ' is-selected' : ''}" data-state="${code}" aria-pressed="${isSelected}" aria-label="${escapeHtml(US_STATES[code] || code)}: ${count} position${count === 1 ? '' : 's'}" title="${escapeHtml(US_STATES[code] || code)}: ${count}"${count === 0 && !isSelected ? ' data-empty="true"' : ''}><span>${code}</span><small>${count || ''}</small></button>`;
   });
   return cells.join('');
 }
