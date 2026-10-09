@@ -1,3 +1,4 @@
+import { checkSearchHelp } from './helpers/search-help.js';
 import { expect, test } from '@playwright/test';
 
 // Keep fixture contents stable across calendar-year boundaries. The app's
@@ -491,4 +492,12 @@ test('region defaults are locale-aware and a user choice carries across every ta
 
   await page.goto('./?region=world');
   await expect(page.locator('#region-select')).toHaveValue('world');
+});
+
+test('index.html uses the Jobs-style clickable search help', async ({ page }) => {
+  await checkSearchHelp(page, { path: 'index.html', inputId: 'main-search', panelId: 'main-search-help', example: 'school: MIT' });
+});
+
+test('index.html?view=discoveries uses the Jobs-style clickable search help', async ({ page }) => {
+  await checkSearchHelp(page, { path: 'index.html?view=discoveries', inputId: 'main-search', panelId: 'main-search-help', example: 'school: MIT' });
 });

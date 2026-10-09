@@ -100,16 +100,16 @@ export function keywordSuggestions(query: string, specs: KeywordSpec[], sources:
 }
 
 /** Clickable, keyboard-accessible search help, following the VietProfs popup pattern. */
-export function mountKeywordHelp(input: HTMLInputElement, specs: KeywordSpec[], id: string, example: string) {
+export function mountKeywordHelp(input: HTMLInputElement, specs: KeywordSpec[], id: string, example: string, usage = 'Combine keywords to narrow your search. Quote values with spaces; commas mean either value.') {
   const box = input.closest<HTMLElement>('.universal-search')!;
   box.classList.add('has-search-help');
   box.insertAdjacentHTML('afterbegin', `<button type="button" class="search-help-info search-help-button" aria-label="Search keywords and examples" aria-haspopup="dialog" aria-expanded="false" aria-controls="${id}">ⓘ</button>
     <div class="search-help-panel" id="${id}" role="dialog" aria-label="Search keywords and examples" hidden>
       <strong>Search keywords</strong>
-      <p>Combine keywords to narrow your search. Quote values with spaces; commas mean either value.</p>
+      <p>${escapeHtml(usage)}</p>
       <p><code>${escapeHtml(example)}</code></p>
       <ul class="search-help-list">${specs.map(spec => `<li><code>${escapeHtml(spec.key)}:</code> ${escapeHtml(spec.description)}<br><span>e.g. <code>${escapeHtml(spec.example)}</code></span></li>`).join('')}</ul>
-      <p>Other text searches names and descriptions. <kbd>/</kbd> focuses search; <kbd>Esc</kbd> closes help.</p>
+      <p>Search without keywords for a general text search. <kbd>Esc</kbd> closes help.</p>
       <button type="button" class="search-help-close">Close help</button>
     </div>`);
   const button = box.querySelector<HTMLButtonElement>('.search-help-button')!;
@@ -130,17 +130,4 @@ export function mountKeywordHelp(input: HTMLInputElement, specs: KeywordSpec[], 
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !panel.hidden) close(true);
   });
-}
-
-export function keywordHelpIcon(specs: KeywordSpec[], tooltipId: string) {
-  const items = specs.map(spec =>
-    `<li><code>${escapeHtml(spec.key)}:</code> ${escapeHtml(spec.description)}<br><span class="search-help-example">e.g. <code>${escapeHtml(spec.example)}</code></span></li>`
-  ).join('');
-  return `<span class="tooltip-trigger search-help-info" tabindex="0" aria-label="Supported search keywords" aria-describedby="${escapeHtml(tooltipId)}">ⓘ
-    <span class="tooltip-content search-help-content" id="${escapeHtml(tooltipId)}" role="tooltip">
-      <strong>Search keywords</strong>
-      <ul class="search-help-list">${items}</ul>
-      Any other text still does a plain name/keyword search.
-    </span>
-  </span>`;
 }

@@ -1,3 +1,4 @@
+import { checkSearchHelp } from './helpers/search-help.js';
 import { expect, test } from '@playwright/test';
 
 // Keep fixture contents stable across calendar-year boundaries. The app's
@@ -218,4 +219,8 @@ test('funding stays off search results but appears in the Discoveries cards', as
   await expect(page.getByRole('heading', { name: 'NSF funding patterns across US universities' })).toBeVisible();
   await expect(page.getByRole('heading', { name: /Largest attributed NSF portfolios/ })).toBeVisible();
   await expect(page.getByRole('heading', { name: /Largest matched collaborative projects/ })).toBeVisible();
+});
+
+test('nsf.html uses the Jobs-style clickable search help', async ({ page }) => {
+  await checkSearchHelp(page, { path: 'nsf.html', inputId: 'funding-search', panelId: 'funding-search-help', example: 'institution: MIT program: CAREER' });
 });

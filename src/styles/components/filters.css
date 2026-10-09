@@ -64,11 +64,6 @@
   cursor: help;
 }
 
-.search-help-content {
-  width: min(320px, calc(100vw - 2rem));
-  text-align: left;
-}
-
 .search-help-list {
   margin: 0.35rem 0;
   padding-left: 1.1rem;
@@ -83,12 +78,8 @@
 }
 
 .search-help-list code {
-  color: #ffd66b;
+  color: var(--primary-color);
   font-family: var(--font-mono);
-}
-
-.search-help-example {
-  color: #cbd5e1;
 }
 
 .universal-search .search-help-button {

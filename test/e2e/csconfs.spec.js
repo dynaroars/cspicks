@@ -1,3 +1,4 @@
+import { checkSearchHelp } from './helpers/search-help.js';
 import { expect, test } from '@playwright/test';
 
 // Keep fixture contents stable across calendar-year boundaries. The app's
@@ -155,4 +156,8 @@ test('CS Confs location and deadline selects narrow the schedule and persist in 
   await page.goto('./csconfs.html?loc=europe&deadline=open');
   await expect(page.locator('#location-select')).toHaveValue('europe');
   await expect(page.locator('#deadline-mode')).toHaveValue('open');
+});
+
+test('csconfs.html uses the Jobs-style clickable search help', async ({ page }) => {
+  await checkSearchHelp(page, { path: 'csconfs.html', inputId: 'csconfs-search', panelId: 'csconfs-search-help', example: 'area: security loc: europe' });
 });

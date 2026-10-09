@@ -12,7 +12,7 @@ import { initTooltipPositioning } from './tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
 import { trackComparison, trackView } from './analytics.js';
 import { aoeDeadline, filterSchedule, formatCalendarDate } from '../csconfs/schedule-data.js';
-import { keywordHelpIcon, parseKeywordQuery } from './search-keywords.js';
+import { mountKeywordHelp, parseKeywordQuery } from './search-keywords.js';
 import type { KeywordSpec } from './search-keywords.js';
 import type { AnalysisTarget } from './analysis/state.js';
 import type { FilterController } from './filters.js';
@@ -364,9 +364,7 @@ function updatePriorData() {
 
 function setupSearch() {
   const mainSearch = document.querySelector<HTMLInputElement>('#main-search')!;
-  const searchBox = mainSearch.closest<HTMLElement>('.universal-search')!;
-  searchBox.classList.add('has-search-help');
-  searchBox.insertAdjacentHTML('afterbegin', keywordHelpIcon(MAIN_KEYWORD_SPECS, 'main-search-help'));
+  mountKeywordHelp(mainSearch, MAIN_KEYWORD_SPECS, 'main-search-help', 'school: MIT', 'Use one keyword to search a specific category. Quote values with spaces.');
   const suggestionBox = createSearchSuggestionBox({
     input: mainSearch,
     listbox: document.getElementById('universal-suggestions')!,
