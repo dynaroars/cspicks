@@ -70,13 +70,15 @@ export function renderScheduleCard(group: ConferenceGroup, now = Date.now(), isF
         <h2>${href === '#'
           ? `${escapeHtml(main.name)} ${main.year}`
           : `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(main.name)} ${main.year}</a>`}</h2>
-        ${main.other ? '<span class="schedule-other" title="Curated venue outside the CSRankings and CORE A/A* sets">Other venue</span>' : ''}
-        ${main.estimated ? '<span class="schedule-estimated" title="Projected from an earlier timeline; confirm on the conference website">Estimated</span>' : ''}
         ${favoriteToggleButton(favoriteId, isFavorite(favoriteId))}
       </div>
-      ${tags.length ? `<p class="schedule-tags">${tags.map(tag => `<span class="schedule-tag schedule-tag-${tag.kind}" title="${escapeHtml(tag.title)}">${escapeHtml(tag.label)}</span>`).join('')}</p>` : ''}
+      ${tags.length || areas.length || main.other || main.estimated ? `<p class="schedule-tags">
+        ${tags.map(tag => `<span class="schedule-tag schedule-tag-${tag.kind}" title="${escapeHtml(tag.title)}">${escapeHtml(tag.label)}</span>`).join('')}
+        ${areas.map(area => `<span class="schedule-tag schedule-tag-area">${escapeHtml(area)}</span>`).join('')}
+        ${main.other ? '<span class="schedule-tag schedule-other" title="Curated venue outside the CSRankings and CORE A/A* sets">Other venue</span>' : ''}
+        ${main.estimated ? '<span class="schedule-tag schedule-estimated" title="Projected from an earlier timeline; confirm on the conference website">Estimated</span>' : ''}
+      </p>` : ''}
       ${main.description ? `<p class="schedule-description">${escapeHtml(main.description)}</p>` : ''}
-      ${areas.length ? `<p class="schedule-areas">${areas.map(area => `<span>${escapeHtml(area)}</span>`).join('')}</p>` : ''}
       ${extras.map(line => `<p class="schedule-extra">${escapeHtml(line)}</p>`).join('')}
 
     </div>

@@ -9,9 +9,8 @@
 .schedule-card-title-row h2 { margin: 0; font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; line-height: 1.25; }
 .schedule-card-title-row a { color: var(--text-primary); text-decoration: none; }
 .schedule-card-title-row a:hover { color: var(--accent-color); text-decoration: underline; }
-.schedule-estimated { padding: .15rem .42rem; border-radius: 999px; font-size: .67rem; font-weight: 700; }
 .schedule-estimated { color: #9a6700; background: #fff2bf; }
-.schedule-other { padding: .15rem .42rem; border-radius: 999px; font-size: .67rem; font-weight: 700; color: #3b4fb8; background: #e4e8ff; }
+.schedule-other { color: #3b4fb8; background: #e4e8ff; }
 @media (prefers-color-scheme: dark) {
   .schedule-estimated { color: #ffd66b; background: #4a3b12; }
   .schedule-other { color: #b8c4ff; background: #25295c; }
@@ -20,8 +19,9 @@
   .schedule-countdown.is-urgent { color: #fca5a5; }
 }
 .schedule-description { margin: .45rem 0 .65rem; color: var(--text-secondary); }
-.schedule-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin: .4rem 0 0; }
-.schedule-tag { padding: .12rem .45rem; border-radius: 4px; font-size: .68rem; font-weight: 700; }
+.schedule-tags { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem; margin: .5rem 0; }
+.schedule-tag { border: 1px solid transparent; padding: .15rem .55rem; border-radius: 999px; font-size: .74rem; line-height: 1.4; font-weight: 600; }
+.schedule-tag-area { border-color: var(--border-color); background: var(--bg-secondary); color: var(--text-secondary); font-weight: 400; }
 .schedule-tag-csrankings { color: #17653a; background: #dff7e8; }
 .schedule-tag-core-astar { color: #8a1c4a; background: #ffe0ee; }
 .schedule-tag-core-a { color: #3b4fb8; background: #e4e8ff; }
@@ -30,8 +30,6 @@
   .schedule-tag-core-astar { color: #ffb3d4; background: #4a1530; }
   .schedule-tag-core-a { color: #b8c4ff; background: #25295c; }
 }
-.schedule-areas { display: flex; flex-wrap: wrap; gap: .35rem; margin: .5rem 0; }
-.schedule-areas span { border: 1px solid var(--border-color); background: var(--bg-secondary); border-radius: 999px; padding: .2rem .5rem; color: var(--text-secondary); font-size: .74rem; }
 .schedule-extra { margin: .28rem 0; color: var(--text-secondary); font-size: .84rem; }
 .schedule-series-link { display: inline-block; margin-top: .35rem; font-size: .82rem; color: var(--accent-color); }
 .schedule-series-link:hover { text-decoration: none; }
