@@ -42,55 +42,15 @@
   .job-map-tile.level-4 { background: #3fae6e; color: #04210f; border-color: #5fc98a; }
 }
 
-/* Position card */
-.job-card {
-  position: relative; border-top: 1px solid var(--border-color); padding: 1.35rem 0;
-  transition: background-color 0.2s ease;
-}
-.job-card:hover { background: color-mix(in srgb, var(--hover-bg) 42%, transparent); }
-.job-card.is-highlighted { outline: 2px solid var(--primary-color); outline-offset: -2px; background: var(--hover-bg); }
-.job-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; }
-.job-title { margin: 0; font-size: 1.12rem; line-height: 1.3; }
-.job-title a { color: var(--text-primary); text-decoration: none; }
-.job-title a:hover { color: var(--accent-color); text-decoration: underline; }
-.job-badges { display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0; }
+/* Job-only annotations; card hierarchy and colors live in opportunity-cards.css. */
 .job-verified {
   display: inline-grid; width: 1.35rem; height: 1.35rem; place-items: center; border-radius: 50%;
-  font-size: 0.8rem; line-height: 1; color: #17653a; background: #dff7e8;
+  font-size: .8rem; line-height: 1; color: #17653a; background: #dff7e8;
 }
 @media (prefers-color-scheme: dark) { .job-verified { color: #86e3ad; background: #173e29; } }
-.job-school { margin: 0.35rem 0 0; color: var(--text-secondary); font-size: 0.92rem; }
-.job-school-btn, .job-state-btn {
-  background: none; border: 0; padding: 0; margin: 0; font: inherit; color: var(--text-primary); cursor: pointer; text-align: left;
-}
-.job-school-btn:hover, .job-state-btn:hover { color: var(--accent-color); text-decoration: underline; }
-.job-state-btn { color: var(--text-secondary); }
-.job-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.6rem 0 0.4rem; }
-.job-chip {
-  border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-secondary);
-  border-radius: 999px; padding: 0.15rem 0.55rem; font: inherit; font-size: 0.74rem;
-}
-button.job-chip { cursor: pointer; }
-button.job-chip:hover { color: var(--accent-color); border-color: var(--accent-color); }
-.job-chip-track { color: #3b4fb8; background: #e4e8ff; border-color: transparent; font-weight: 700; }
-.job-chip-rank { color: #8a1c4a; background: #ffe0ee; border-color: transparent; font-weight: 700; }
-@media (prefers-color-scheme: dark) {
-  .job-chip-track { color: #b8c4ff; background: #25295c; }
-  .job-chip-rank { color: #ffb3d4; background: #4a1530; }
-}
-.job-meta { margin: 0.25rem 0; color: var(--text-secondary); font-size: 0.84rem; }
-.job-deadline { margin: 0.35rem 0; font-weight: 700; font-size: 0.86rem; color: #17653a; }
-.job-deadline.is-soon { color: #9a6700; }
-.job-deadline.is-urgent { color: #b42318; }
-.job-deadline.is-passed { color: var(--text-secondary); font-weight: 600; }
-@media (prefers-color-scheme: dark) {
-  .job-deadline { color: #86e3ad; }
-  .job-deadline.is-soon { color: #ffd66b; }
-  .job-deadline.is-urgent { color: #fca5a5; }
-}
-.job-summary { margin: 0.5rem 0; color: var(--text-secondary); font-size: 0.9rem; }
-.job-edit { color: var(--text-secondary); }
-.job-edit:hover { text-decoration: none; opacity: 0.85; }
+.job-school-btn { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; text-align: left; }
+.job-school-btn:hover { color: var(--accent-color); text-decoration: underline; }
+.job-meta { margin: .25rem 0; color: var(--text-secondary); font-size: .84rem; }
 
 /* By-school view */
 .job-school-card { border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.2rem 0.2rem; margin: 0 0 1rem; background: var(--bg-secondary); }
@@ -103,7 +63,6 @@ button.job-chip:hover { color: var(--accent-color); border-color: var(--accent-c
 @media (max-width: 640px) {
   .job-map { gap: 3px; }
   .job-map-tile small { display: none; }
-  .job-card-footer { flex-direction: column; align-items: flex-start; }
 }
 
 /* Filter row: many selects, so wrap, size each to its selected text, and outline it so the arrow

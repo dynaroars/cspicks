@@ -91,6 +91,10 @@ project.
   keyword-name/value completion, the clickable ⓘ help popup, input events, `/` shortcut, up to four examples,
   and URL updates. Pages supply their keyword specs, value sources, ordinary suggestion groups, and rendering
   callbacks. `wireSearchInput` also serves the specialized Simulator workflow.
+- `src/opportunity-card.ts` + `src/styles/components/opportunity-cards.css` — shared Awards/Jobs card
+  hierarchy, title/favorite row, organization, type tags, deadline/cycle, metadata, and visual tokens.
+  Keep presentation changes here so the two explorers remain familiar across tabs; page renderers supply
+  their domain-specific fields and preserve explicit estimated/historical/closed deadline states.
 - `src/suggestion-box.ts` — low-level autocomplete keyboard handling, listbox markup, and `A vs B` completion.
 - `src/search-keywords.ts` — parsing/alias resolution, quotes, comma alternatives (OR), repeated filters (AND),
   query mutation, and migration of legacy URL filters into visible keywords. `src/search-query.ts` applies

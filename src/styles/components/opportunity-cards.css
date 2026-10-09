@@ -1,0 +1,53 @@
+/* Shared opportunity presentation for Awards & Grants and US Jobs. */
+.opportunity-card {
+  position: relative; padding: 1.4rem 0; border-top: 1px solid var(--border-color);
+  background: transparent; transition: background-color .2s ease;
+}
+.opportunity-card:hover { background: color-mix(in srgb, var(--hover-bg) 42%, transparent); }
+.opportunity-card.is-highlighted { outline: 2px solid var(--primary-color); outline-offset: -2px; background: var(--hover-bg); }
+.opportunity-card:has(.result-actions[open]) { z-index: 31; }
+.opportunity-title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: .75rem; }
+.opportunity-title { flex: 1; min-width: 0; margin: 0; font-family: var(--font-heading); font-size: 1.18rem; font-weight: 700; line-height: 1.3; }
+.opportunity-title a { color: var(--text-primary); text-decoration: none; }
+.opportunity-title a:hover { color: var(--accent-color); text-decoration: underline; }
+.opportunity-actions { display: flex; align-items: center; gap: .4rem; flex-shrink: 0; }
+.opportunity-organization { margin: .35rem 0 .6rem; color: var(--text-secondary); font-size: .9rem; }
+.opportunity-filter-link { background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-align: left; }
+.opportunity-filter-link:hover { color: var(--accent-color); text-decoration: underline; }
+.opportunity-tags, .opportunity-topics { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem; margin: .6rem 0; }
+.opportunity-chip {
+  display: inline-block; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-secondary);
+  border-radius: 999px; padding: .15rem .55rem; font: inherit; font-size: .74rem; line-height: 1.4;
+}
+button.opportunity-chip { cursor: pointer; }
+button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--accent-color); }
+.opportunity-chip-type { color: var(--accent-color); background: color-mix(in srgb, var(--accent-color) 10%, var(--bg-secondary)); border-color: transparent; font-weight: 600; }
+.opportunity-label { color: var(--text-secondary); font-size: .72rem; font-weight: 600; line-height: 1.5; }
+.opportunity-deadline { display: grid; gap: .2rem; margin: .85rem 0; }
+.opportunity-deadline-value { color: var(--text-primary); font-size: .9rem; font-weight: 600; line-height: 1.5; }
+.opportunity-deadline-notes { display: inline-flex; flex-wrap: wrap; gap: .35rem; margin-left: .25rem; }
+.opportunity-deadline.is-confirmed .opportunity-deadline-value { color: #17653a; }
+.opportunity-deadline.is-soon .opportunity-deadline-value,
+.opportunity-deadline.is-estimated .opportunity-deadline-value { color: #8a5a00; }
+.opportunity-deadline.is-urgent .opportunity-deadline-value { color: #b42318; }
+.opportunity-deadline.is-passed .opportunity-deadline-value { color: var(--text-secondary); }
+.opportunity-deadline.is-estimated .opportunity-chip { color: #8a5a00; background: #fff4d6; border-color: transparent; }
+.opportunity-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .6rem 1.25rem; margin: .85rem 0; }
+.opportunity-meta-item { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+.opportunity-meta-value { color: var(--text-primary); font-size: .88rem; line-height: 1.5; }
+.opportunity-summary { margin: .85rem 0; color: var(--text-secondary); max-width: 78ch; font-size: .9rem; line-height: 1.55; }
+.opportunity-details { margin: .75rem 0; font-size: .86rem; }
+.opportunity-details summary { cursor: pointer; color: var(--text-secondary); }
+.opportunity-topics { margin-top: .85rem; }
+.opportunity-topics > .opportunity-label { margin-right: .2rem; }
+@media (prefers-color-scheme: dark) {
+  .opportunity-deadline.is-confirmed .opportunity-deadline-value { color: #86e3ad; }
+  .opportunity-deadline.is-soon .opportunity-deadline-value,
+  .opportunity-deadline.is-estimated .opportunity-deadline-value { color: #ffd66b; }
+  .opportunity-deadline.is-urgent .opportunity-deadline-value { color: #fca5a5; }
+  .opportunity-deadline.is-estimated .opportunity-chip { color: #ffd66b; background: #3d3010; }
+}
+@media (max-width: 640px) {
+  .opportunity-card { padding: 1.1rem 0; }
+  .opportunity-meta { grid-template-columns: 1fr; }
+}
