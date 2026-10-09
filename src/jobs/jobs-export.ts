@@ -50,7 +50,7 @@ export function jobsToMarkdown(jobs: Job[], { ranks = () => undefined, now = Dat
       ['Location', [job.city, US_STATES[job.state] || job.state].filter(Boolean).join(', ')],
       ['Position', [TRACK_LABELS[job.track], job.level ? LEVEL_LABELS[job.level] : ''].filter(Boolean).join(' · ')],
       ['Research areas', areas.join(', ') || 'Not specified'],
-      ['Visa sponsorship', job.visaSponsorship ? VISA_TEXT[job.visaSponsorship] : ''],
+      ['Visa sponsorship', job.visaSponsorship && job.visaSponsorship !== 'not-stated' ? VISA_TEXT[job.visaSponsorship] : ''],
       ['Review begins', formatDay(job.reviewBegins)],
       ['Start date', formatDay(job.startDate)],
       ['Posted', formatDay(job.postedDate)],

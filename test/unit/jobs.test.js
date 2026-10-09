@@ -161,7 +161,7 @@ test('visa sponsorship tag sits after the position and rank tags, and the export
   assert.match(chip('yes'), /job-chip-visa is-yes[^>]*><span aria-hidden="true">✅<\/span> Visa sponsorship available</);
   assert.match(chip('no'), /🚫<\/span> No visa sponsorship</);
   assert.match(chip('case-by-case'), /⚖️<\/span> Visa sponsorship case by case/);
-  assert.match(chip('not-stated'), /job-chip-visa is-not-stated[^>]*><span aria-hidden="true">❔<\/span> Visa sponsorship not stated</);
+  assert.doesNotMatch(chip('not-stated'), /job-chip-visa|Visa sponsorship not stated/);
   assert.ok(!chip(undefined).includes('job-chip-visa'), 'unchecked postings get no tag');
   const html = renderJobCard(job({ visaSponsorship: 'yes' }), () => ({ rank: 7, areaRanks: { ai: 3 } }), () => false, NOW);
   const order = ['job-chip-track', 'job-chip-rank', 'job-chip-visa', 'job-chip-area'].map(name => html.indexOf(name));
@@ -170,8 +170,8 @@ test('visa sponsorship tag sits after the position and rank tags, and the export
 
   const md = jobsToMarkdown([job({ visaSponsorship: 'no' }), job({ id: 'b', visaSponsorship: 'not-stated' }), job({ id: 'c' })], { now: NOW });
   assert.match(md, /- \*\*Visa sponsorship:\*\* Not offered, per the posting/);
-  assert.match(md, /- \*\*Visa sponsorship:\*\* Not stated on the posting/);
-  assert.equal((md.match(/Visa sponsorship:/g) || []).length, 2, 'unchecked postings have no visa line');
+  assert.doesNotMatch(md, /Not stated on the posting/);
+  assert.equal((md.match(/Visa sponsorship:/g) || []).length, 1, 'unchecked and unstated policies have no visa line');
 });
 
 test('state tile map places every state exactly once', () => {

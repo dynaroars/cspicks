@@ -28,7 +28,7 @@ const VISA_EMOJI: Record<VisaSponsorship, string> = { yes: '✅', 'case-by-case'
 /** Sits with the position and rank tags; postings nobody has read for sponsorship yet get no tag. */
 function visaChip(job: Job) {
   const value = job.visaSponsorship;
-  if (!value) return '';
+  if (!value || value === 'not-stated') return '';
   return `<span class="job-chip job-chip-visa is-${value}" title="As stated on the official posting; confirm with the department before applying"><span aria-hidden="true">${VISA_EMOJI[value]}</span> ${escapeHtml(VISA_LABELS[value])}</span>`;
 }
 
