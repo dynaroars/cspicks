@@ -4900,5 +4900,69 @@
     "lastSeenAt": "2026-10-08",
     "source": "crawl",
     "verified": true
+  },
+  {
+    "id": "baylor-cs-ai-2026",
+    "school": "Baylor University",
+    "department": "Computer Science",
+    "title": "Assistant or Associate Professor, Tenure Track or Tenured, Computer Science - Artificial Intelligence",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai",
+      "mlmining"
+    ],
+    "state": "TX",
+    "city": "Waco",
+    "url": "https://apply.interfolio.com/191028",
+    "summary": "Two positions in AI, data science, software engineering and machine learning; PhD in CS or related; August 2027 start.",
+    "deadline": "2026-12-31",
+    "rolling": false,
+    "postedDate": "2026-08-21",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "baylor-cs-cybersecurity-asst-2026",
+    "school": "Baylor University",
+    "department": "Computer Science",
+    "title": "Assistant Professor, Tenure Track, Computer Science - Cybersecurity",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "sec"
+    ],
+    "state": "TX",
+    "city": "Waco",
+    "url": "https://apply.interfolio.com/191026",
+    "summary": "Tenure-track cybersecurity position across all areas of security; PhD in CS or related; August 2027 start.",
+    "deadline": "2026-12-31",
+    "rolling": false,
+    "postedDate": "2026-08-21",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "baylor-cs-patterson-chair-cybersecurity-2026",
+    "school": "Baylor University",
+    "department": "Computer Science",
+    "title": "Patterson Endowed Chair of Cybersecurity and Professor, Tenured, Computer Science",
+    "track": "tenure-track",
+    "level": "full",
+    "areas": [
+      "sec"
+    ],
+    "state": "TX",
+    "city": "Waco",
+    "url": "https://apply.interfolio.com/190574",
+    "summary": "Tenured endowed chair in cybersecurity for an established research leader; August 2027 start.",
+    "deadline": "2026-12-31",
+    "rolling": false,
+    "postedDate": "2026-08-21",
+    "lastSeenAt": "2026-10-08",
+    "source": "crawl",
+    "verified": true
   }
 ]

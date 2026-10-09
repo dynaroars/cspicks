@@ -96,7 +96,7 @@ export function buildQueue(sources, jobs, now = Date.now()) {
 /** Schools whose non-CS units (information schools, ECE, data science) have never been crawled, largest roster first. */
 export function buildRelatedQueue(sources) {
   return sources
-    .filter(source => !source.relatedCheckedAt && source.outcome !== 'blocked')
+    .filter(source => !source.relatedCheckedAt)
     .sort((a, b) => b.facultyCount - a.facultyCount || a.school.localeCompare(b.school));
 }
 

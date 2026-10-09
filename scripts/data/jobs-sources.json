@@ -375,11 +375,13 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "blocked",
-    "summary": "Graduate Center CS site returns HTTP 403 to the browser; no official CS posting found via search.",
+    "summary": "Graduate Center CS site returns HTTP 403 to the browser; no official CS posting found via search. Non-CS units (2026-10-08): Graduate Center CS site is 403 and searches surfaced only 2025-cycle CUNY college CS postings (Queens, Hunter, Brooklyn, Baruch, CSI); no current 2026-27 official posting was opened.",
     "checkedUrls": [
       "https://www.gc.cuny.edu/computer-science"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T23:00:00Z"
   },
   {
     "school": "Cornell University",
@@ -1430,13 +1432,17 @@
     "state": "CA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "blocked",
-    "summary": "cs.ucdavis.edu returns a Cloudflare 403 block and recruit.ucdavis.edu rendered empty; search found no CS posting for 2026-27.",
+    "summary": "cs.ucdavis.edu returns a Cloudflare 403 block and recruit.ucdavis.edu rendered empty; search found no CS posting for 2026-27. Non-CS units (2026-10-08): cs.ucdavis.edu is a Cloudflare 403. recruit.ucdavis.edu /apply rendered only a partial list (nursing, agriculture), with no CS or ECE posting visible; search found no CS posting. A Philosophy/Linguistics computational-linguistics search (JPF07874) was skipped as not CS-targeted.",
     "checkedUrls": [
       "https://recruit.ucdavis.edu/",
       "https://cs.ucdavis.edu/",
-      "https://www.cs.ucdavis.edu/blog/open-faculty-positions-in-computer-science/"
+      "https://www.cs.ucdavis.edu/blog/open-faculty-positions-in-computer-science/",
+      "https://recruit.ucdavis.edu/apply",
+      "https://recruit.ucdavis.edu/JPF07822"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Oregon State University",
@@ -2713,12 +2719,20 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "blocked",
-    "summary": "Department page lists one STRIVE AI search (open until filled) but its posting on interviewexchange returned a 403, so no dates or details could be verified and it was not recorded.",
+    "summary": "Department page lists one STRIVE AI search (open until filled) but its posting on interviewexchange returned a 403, so no dates or details could be verified and it was not recorded. Non-CS units (2026-10-08): The department page now lists four senior-level AI positions (STRIVE AI associate/full, AI Interpretability/Alignment, Secure AI and Agentic Systems, AI Safety Foundations), open until filled. Posting pages on interviewexchange return 403, so no details could be verified and none were added; the existing STRIVE AI record (JOBID=195195) is unverified this run.",
     "checkedUrls": [
       "https://www.binghamton.edu/computer-science/about/faculty-openings.html",
-      "https://binghamton.interviewexchange.com/jobofferdetails.jsp?JOBID=195195"
+      "https://binghamton.interviewexchange.com/jobofferdetails.jsp?JOBID=195195",
+      "https://binghamton.interviewexchange.com/jobofferdetails.jsp?JOBID=205079"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "School of Computing faculty openings",
+        "url": "https://www.binghamton.edu/computer-science/about/faculty-openings.html"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "California Inst. of Technology",
@@ -3608,13 +3622,16 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "blocked",
-    "summary": "The university job board (Interview Exchange) returns a 403 and search found no official CS posting.",
+    "summary": "The university job board (Interview Exchange) returns a 403 and search found no official CS posting. Non-CS units (2026-10-08): The department employment page 404s and Interview Exchange is blocked; search found only visiting (non-tenure-track) CS/security postings and 2025-cycle searches, none opened officially.",
     "checkedUrls": [
       "https://www.albany.edu/computer-science",
       "https://www.albany.edu/human-resources/careers-ualbany",
-      "https://albany.interviewexchange.com/jobsrchresults.jsp?searchTerm=computer"
+      "https://albany.interviewexchange.com/jobsrchresults.jsp?searchTerm=computer",
+      "https://www.albany.edu/computer-science/employment"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T23:00:00Z"
   },
   {
     "school": "University of Nevada",
@@ -3650,14 +3667,17 @@
     "state": "UT",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "blocked",
-    "summary": "All usu.edu, cs.usu.edu and jobs.usu.edu pages fail with HTTP/2 protocol errors in headless browser; no official posting reachable.",
+    "summary": "All usu.edu, cs.usu.edu and jobs.usu.edu pages fail with HTTP/2 protocol errors in headless browser; no official posting reachable. Non-CS units (2026-10-08): Official usu.edu pages were not re-opened; web search only surfaced a Nov 2025 School of Computing posting (prior cycle, iCIMS page now 410 Gone) and non-CS-PhD roles. No current 2026-27 posting confirmed.",
     "checkedUrls": [
       "https://cs.usu.edu/",
       "https://jobs.usu.edu/",
       "https://www.usu.edu/cs/jobs/",
-      "https://engineering.usu.edu/about/employment-opportunities/"
+      "https://engineering.usu.edu/about/employment-opportunities/",
+      "https://careers-usu.icims.com/jobs/9680/school-of-computing-assistant-professor/job"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Wayne State University",
@@ -3949,11 +3969,14 @@
     "state": "MI",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "blocked",
-    "summary": "Department site returns 403 and no official Dearborn CIS posting surfaced in search.",
+    "summary": "Department site returns 403 and no official Dearborn CIS posting surfaced in search. Non-CS units (2026-10-08): Search found only older CIS postings (W25/F25) and an ECE F26 posting with Dec 2025 deadline; no current CIS or college-wide computing posting confirmed.",
     "checkedUrls": [
-      "https://umdearborn.edu/cecs/departments/computer-and-information-science"
+      "https://umdearborn.edu/cecs/departments/computer-and-information-science",
+      "https://careers.umich.edu/node/270411"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "George Washington University",
@@ -4602,12 +4625,15 @@
     "state": "MA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "blocked",
-    "summary": "brandeis.edu computer-science pages return HTTP 403 to the browser; search found no current posting.",
+    "summary": "brandeis.edu computer-science pages return HTTP 403 to the browser; search found no current posting. Non-CS units (2026-10-08): Brandeis CS page on AcademicJobsOnline shows no open positions; 2026 searches (lecturer, senior chair) have closed.",
     "checkedUrls": [
       "https://www.brandeis.edu/computer-science/",
-      "https://www.brandeis.edu/computer-science/tenuretrack_facultysearch.html"
+      "https://www.brandeis.edu/computer-science/tenuretrack_facultysearch.html",
+      "https://academicjobsonline.org/ajo/Brandeis/COSCI"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of New Mexico",
@@ -4758,13 +4784,15 @@
     "state": "WV",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "blocked",
-    "summary": "Department site and WVU careers site return 403; no official posting could be read.",
+    "summary": "Department site and WVU careers site return 403; no official posting could be read. Non-CS units (2026-10-08): lcsee.statler.wvu.edu and careers.wvu.edu return CloudFront 403; web search only surfaced undated third-party listings, so none added.",
     "checkedUrls": [
       "https://lcsee.statler.wvu.edu/",
       "https://jobs.wvu.edu",
       "https://wvu.taleo.net/careersection/faculty/jobsearch.ftl"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-08T23:00:00Z"
   },
   {
     "school": "Montana State University",
@@ -4852,12 +4880,22 @@
     "state": "TX",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "blocked",
-    "summary": "Official Baylor CS open-positions page sits behind a Cloudflare challenge (403); only third-party mirrors mention 2027-start roles, so none added.",
+    "summary": "Official Baylor CS open-positions page sits behind a Cloudflare challenge (403); only third-party mirrors mention 2027-start roles, so none added. Non-CS units (2026-10-08): Baylor CS open-positions page listed three Interfolio postings; all opened and verified (deadline 2026-12-31). Non-CS units not separately checked.",
     "checkedUrls": [
       "https://www.ecs.baylor.edu/programs-departments/computer-science",
-      "https://www.ecs.baylor.edu/departments-institutes/computer-science/open-cs-faculty-positions"
+      "https://www.ecs.baylor.edu/departments-institutes/computer-science/open-cs-faculty-positions",
+      "https://apply.interfolio.com/191028",
+      "https://apply.interfolio.com/191026",
+      "https://apply.interfolio.com/190574"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "Computer Science open faculty positions",
+        "url": "https://www.ecs.baylor.edu/departments-institutes/computer-science/open-cs-faculty-positions"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "Florida Institute of Technology",
@@ -5109,12 +5147,21 @@
     "state": "OR",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
     "outcome": "blocked",
-    "summary": "OHSU Workday returned a maintenance/unavailable page and the DICE site has no postings; no official posting verified.",
+    "summary": "OHSU Workday returned a maintenance/unavailable page and the DICE site has no postings; no official posting verified. Non-CS units (2026-10-08): OHSU faculty iCIMS board loads but listing is JS-driven; the one DICE AI/translational data science posting (38655) returned HTTP 410 Gone, so it is closed and not added.",
     "checkedUrls": [
       "https://www.ohsu.edu/school-of-medicine/medical-informatics-and-clinical-epidemiology/job-descriptions",
-      "https://ohsu.wd5.myworkdayjobs.com/en-US/External"
+      "https://ohsu.wd5.myworkdayjobs.com/en-US/External",
+      "https://facultycareers-ohsu.icims.com/jobs/search?ss=1",
+      "https://facultycareers-ohsu.icims.com/jobs/38655/associate-professor-of-translational-data-science-%26-artificial-intelligence/job?hub=6"
     ],
-    "deferredUntil": null
+    "deferredUntil": null,
+    "relatedUnits": [
+      {
+        "name": "DICE (Medical Informatics and Clinical Epidemiology)",
+        "url": "https://www.ohsu.edu/school-of-medicine/medical-informatics-and-clinical-epidemiology"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-08T20:00:00Z"
   },
   {
     "school": "University of Colorado - Denver",
