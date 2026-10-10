@@ -1,0 +1,3635 @@
+{
+  "checkedAt": "2026-10-10",
+  "scope": "First 25 original records; each field has an explicit evidence/completeness status; editorial filters are distinguished from funder terms.",
+  "audits": [
+    {
+      "id": "nsf-career",
+      "outcome": "patch-recommended",
+      "notes": "Official page inspected; unconfirmed fields remain for further audit.",
+      "sources": [
+        "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+      ],
+      "changes": [
+        {
+          "field": "deadline",
+          "current": "July 22, 2026 at 5:00 PM submitter local time (Annual fourth Wednesday in July; NSF 22-586)",
+          "value": "July 28, 2027 at 5:00 PM submitter local time (Annual fourth Wednesday in July; NSF 22-586)",
+          "source": "https://www.nsf.gov/funding/opportunities/career-faculty-early-career-development-program",
+          "evidence": "Upcoming due dates lists July 28, 2027 and organization local time.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "Hold a doctoral degree in a field supported by NSF",
+            "Tenure-track Assistant Professor (or equivalent) at an eligible US academic institution by submission date",
+            "Untenured as of October 1 following proposal submission",
+            "Maximum of 3 CAREER proposal submissions in lifetime"
+          ],
+          "value": [
+            "Hold a doctoral degree and conduct research in a field supported by NSF",
+            "Hold at least a 50% tenure-track or tenure-track-equivalent assistant professor position at an eligible U.S. institution and be untenured as of the annual deadline",
+            "Have not previously received a CAREER award",
+            "Maximum three reviewed CAREER competitions; one proposal per annual competition; no co-PIs"
+          ],
+          "source": "https://www.nsf.gov/funding/opportunities/career-faculty-early-career-development-program/nsf22-586/solicitation",
+          "evidence": "Eligibility is measured at annual deadline, not October 1; three reviewed competitions limit.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "amount": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "nsf-crii",
+      "outcome": "patch-recommended",
+      "notes": "Archived status confirmed; correction to archived eligibility recommended.",
+      "sources": [
+        "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+      ],
+      "changes": [
+        {
+          "field": "eligibility",
+          "current": [
+            "Primary appointment in computer science, information science, or computer engineering in the US",
+            "In first 3 years of tenure-track or equivalent research appointment",
+            "Must NOT have received any prior federal grant as a PI (fellowships/workshops excepted)"
+          ],
+          "value": [
+            "While active: primary appointment in computing at a non-Carnegie R1 institution or eligible nonprofit non-academic institution",
+            "Untenured faculty or research scientist within first three years of primary academic appointment and no more than six years after PhD",
+            "No previous post-PhD federal grant or contract as PI, subject to solicitation exceptions"
+          ],
+          "source": "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576",
+          "evidence": "Archived page describes non-R1 restriction and six-year PhD limit omitted locally.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "deadline": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "amount": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "status": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952/nsf23-576"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "nsf-future-core",
+      "outcome": "patch-recommended",
+      "notes": "Official page inspected; unconfirmed fields remain for further audit.",
+      "sources": [
+        "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+      ],
+      "changes": [
+        {
+          "field": "amount",
+          "current": "Dependent on availability of funds; estimated 400–600 awards",
+          "value": "Up to $1,000,000 over up to 4 years; typical projects $150,000–$250,000/year for 3–4 years",
+          "source": "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing",
+          "evidence": "Program page states per-project maximum and typical yearly budgets.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "deadline",
+          "current": "Target dates: second Thursday in September and first Thursday in February (annual); proposals accepted anytime",
+          "value": "February 4, 2027 and September 9, 2027 target dates; proposals accepted anytime (Annual first Thursday in February and second Thursday in September)",
+          "source": "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing",
+          "evidence": "Upcoming target dates explicitly announced; accepted anytime.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "Faculty and researchers at accredited US academic and non-profit research institutions",
+            "Open to all career stages (junior, mid-career, and senior investigators)"
+          ],
+          "value": [
+            "Faculty and researchers at eligible U.S. academic and nonprofit research institutions; all career stages",
+            "A person may serve as PI, co-PI, or Senior/Key Personnel on at most two Future CoRe proposals in any consecutive 12-month period"
+          ],
+          "source": "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing",
+          "evidence": "Program limit applies across all Future CoRe programs.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "deadlineMonth",
+          "current": 10,
+          "value": 0,
+          "source": "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing",
+          "evidence": "Official program accepts proposals anytime; February/September are target dates, so rolling month 0 follows dataset schema.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "amount": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "nsf-csgrad4us",
+      "outcome": "patch-recommended",
+      "notes": "Official page inspected; unconfirmed fields remain for further audit.",
+      "sources": [
+        "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+      ],
+      "changes": [
+        {
+          "field": "deadline",
+          "current": "May 30, 2026 at 5:00 PM submitter local time (Annual late May; NSF DCL)",
+          "value": "May 31 annually at 11:59 PM ET, including reference letters (NSF 24-033)",
+          "source": "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate",
+          "evidence": "DCL explicitly states May 31 annually 11:59 PM Eastern; local May 30 and 5 PM are wrong.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "US citizens, nationals, or permanent residents",
+            "Bachelor's degree completed before January 1 of the application year",
+            "Must not have enrolled in or applied to a CISE doctoral program"
+          ],
+          "value": [
+            "U.S. citizens, nationals, or permanent residents",
+            "Bachelor’s degree completed before January 1 of application year; demonstrated computing competency; no enrollment in a degree-granting program after January 1 of that year",
+            "Never enrolled in a CISE doctoral program and no pending doctoral application or admission offer",
+            "Complete the mentoring program and be prepared to enroll in a CISE PhD by fall within two years of mentoring acceptance"
+          ],
+          "source": "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate",
+          "evidence": "Detailed eligibility states degree-program enrollment and pending-application restrictions.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "amount": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "nsf-grfp",
+      "outcome": "patch-recommended",
+      "notes": "Official page inspected; unconfirmed fields remain for further audit.",
+      "sources": [
+        "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+      ],
+      "changes": [
+        {
+          "field": "deadline",
+          "current": "October 20, 2026 (Annual Mid-October; reference letters October 16)",
+          "value": "October 20, 2026 at 8:00 PM ET for Computer and Information Science and Engineering; reference letters October 16, 2026 at 8:00 PM ET (Annual program; FY2027 competition; NSF 26-526)",
+          "source": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
+          "evidence": "FY2027 solicitation gives field deadline and reference letter timing.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "US Citizens, US Nationals, or Permanent Residents",
+            "Undergraduate seniors or 1st/2nd year graduate students",
+            "Pursuing research-based MS or PhD in STEM fields including Computer Science"
+          ],
+          "value": [
+            "U.S. citizens, nationals, or permanent residents",
+            "Undergraduate seniors, bachelor’s degree holders with no prior graduate enrollment, eligible joint bachelor’s/master’s students, or first-year students in their first graduate degree with less than one academic year completed",
+            "Second-year graduate students are ineligible; graduate applicants may apply once",
+            "Eligible research-based master’s or doctoral program in an NSF-supported STEM field at an accredited nonprofit U.S. institution"
+          ],
+          "source": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
+          "evidence": "Section IV explicitly excludes second-year graduate students.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "whoFor",
+          "current": "Undergraduate seniors & 1st/2nd year graduate students",
+          "value": "Undergraduate seniors and eligible first-year graduate students pursuing research-based STEM degrees",
+          "source": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
+          "evidence": "Second-year students explicitly ineligible under NSF26-526.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "whoFor": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "amount": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "darpa-yfa",
+      "outcome": "patch-recommended",
+      "notes": "Latest Amendment5 read from official downloaded PDF; prior local dates and eligibility corrected. No 2027 solicitation confirmed; do not infer next dates.",
+      "sources": [
+        "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+        "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+      ],
+      "changes": [
+        {
+          "field": "url",
+          "current": "https://www.darpa.mil/work-with-us/for-universities/young-faculty-award",
+          "value": "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award",
+          "source": "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award",
+          "evidence": "Current DARPA official program URL discovered.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "deadline",
+          "current": "Executive Summary: October 17, 2025; Full Proposal: December 10, 2025 at 4:00 PM ET (Annual cycle; DARPA-RA-25-01)",
+          "value": "Executive summary: October 15, 2025 at 4:00 PM ET; full proposal: January 20, 2026 at 4:00 PM ET (Annual program; YFA2026; DARPARA2502 Amendment 5; next cycle not yet confirmed)",
+          "source": "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+          "evidence": "Latest amended official announcement moves full proposal to January20; local date and solicitation number wrong.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "deadlineMonth",
+          "current": 12,
+          "value": 1,
+          "source": "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+          "evidence": "Latest amended full proposal deadline is January20.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "amount",
+          "current": "Up to $500,000 over 24 months + $500,000 Director's Fellowship option (up to $1M total)",
+          "value": "Up to $500,000 for 24-month base + $500,000 for 12-month Director’s Fellowship option; optional U.S.-person graduate-student support up to $350,000",
+          "source": "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+          "evidence": "Amendment5 overview defines base, fellowship and new optional student support.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "whoFor",
+          "current": "Untenured Assistant and Associate Professors in first 3 years of appointment",
+          "value": "Tenure-track faculty, faculty within three years of tenure, or eligible nonprofit research institution investigators",
+          "source": "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+          "evidence": "Overview eligibility allows current tenure-track, recently tenured and nonprofit-equivalent appointments.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "US academic institutions only",
+            "Assistant or Associate Professors within first 3 years of tenure-track or non-tenured position",
+            "US Citizens, Permanent Residents, or foreign nationals with US university appointment"
+          ],
+          "value": [
+            "All personnel employed at U.S. institutions; PI in tenure-track appointment, within three years of tenure, or nonprofit equivalent within 12 years of doctorate",
+            "Prior funding cannot exceed $500,000 from DARPA or $1,250,000 from all DoD sources as prime or subawardee",
+            "Citizenship and affiliation restrictions apply to key/senior personnel; consult announcement Section IV"
+          ],
+          "source": "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+          "evidence": "Amendment5 overview gives appointment options, funding ceilings and specific citizenship restrictions.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "whoFor": {
+          "status": "correction-supported",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "correction-supported",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "amount": {
+          "status": "correction-supported",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "url": {
+          "status": "correction-supported",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://files.simpler.grants.gov/opportunities/d76dff15-c0b2-44b9-8e79-2ed9619b1db7/attachments/99786a40-038b-45f5-a6b1-0a867206a0ea/DARPARA2502-Amendment-05.pdf",
+            "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "darpa-open-baa",
+      "outcome": "patch-recommended",
+      "notes": "Official opportunities index confirms route; umbrella amount $1M–$10M is not substantiated by the index. Review office-specific BAAs; do not treat one umbrella amount as confirmed.",
+      "sources": [
+        "https://www.darpa.mil/work-with-us/opportunities"
+      ],
+      "changes": [
+        {
+          "field": "amount",
+          "current": "Typically $1,000,000 to $10,000,000+ across multi-year phases",
+          "value": "Varies by office, research topic and solicitation; consult the specific BAA for award budget and duration",
+          "source": "https://www.darpa.mil/work-with-us/opportunities",
+          "evidence": "Umbrella index represents many distinct funding opportunities and does not support one blanket numerical budget.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "name": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "sponsor": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "whoFor": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "deadline": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "amount": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "summary": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "eligibility": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "url": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.darpa.mil/work-with-us/opportunities"
+          ]
+        }
+      },
+      "completeness": "partial-audit-unconfirmed-fields-remain"
+    },
+    {
+      "id": "doe-early-career",
+      "outcome": "patch-recommended",
+      "notes": "2026 deadline and amount confirmed; no 2027 call found. Eligibility correction necessary.",
+      "sources": [
+        "https://science.osti.gov/early-career"
+      ],
+      "changes": [
+        {
+          "field": "eligibility",
+          "current": [
+            "Untenured, tenure-track Assistant or Associate Professor at an accredited US university",
+            "Within 12 years of PhD receipt",
+            "Primary author and investigator of research proposal"
+          ],
+          "value": [
+            "Untenured tenure-track assistant or associate professor at a U.S. academic institution, or eligible full-time DOE laboratory/user facility employee",
+            "Within 10 years of earning doctorate",
+            "Mandatory pre-application must be encouraged by DOE before full application"
+          ],
+          "source": "https://science.osti.gov/early-career",
+          "evidence": "2026 program announcement states 10 years and encouraged pre-application requirement.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "amount",
+          "current": "At least $875,000 over 5 years (university faculty)",
+          "value": "Approximately $875,000 over 5 years for universities; approximately $2,750,000 over 5 years for DOE laboratories or Office of Science user facilities",
+          "source": "https://science.osti.gov/early-career",
+          "evidence": "Program announcement gives approximate amounts, not a university minimum.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "deadline": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "amount": {
+          "status": "correction-supported",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/early-career"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "doe-csgf",
+      "outcome": "patch-recommended",
+      "notes": "New cohort confirmed; benefits confirmed separately ($45k stipend, tuition, $1k allowance, up to four years). How to Apply controls over isolated FAQ typo January 7, 2026.",
+      "sources": [
+        "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+        "https://www.krellinst.org/csgf/how-apply",
+        "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+      ],
+      "changes": [
+        {
+          "field": "deadline",
+          "current": "January 15, 2026 at 5:00 PM CST (Annual mid-January; reference letters due January 22)",
+          "value": "January 7, 2027 (Annual program; 2027–2028 incoming cohort; applications, transcripts, and reference letters due together)",
+          "source": "https://www.krellinst.org/csgf/how-apply",
+          "evidence": "How to Apply names January 7, 2027; old January 15 cycle superseded.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "US Citizens or Permanent Residents",
+            "Senior undergraduates or first-year graduate students",
+            "Full-time study toward a PhD in CS, applied mathematics, or computational science"
+          ],
+          "value": [
+            "U.S. citizens or lawful permanent residents planning full-time uninterrupted PhD study at an accredited U.S. university",
+            "Undergraduate seniors, first-year graduate students, employed individuals, and others entering graduate school; current master’s students must start the PhD at a different institution",
+            "Second-year or later graduate students and concurrent professional doctorate students are ineligible"
+          ],
+          "source": "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+          "evidence": "Eligibility page lists additional qualifying applicant groups.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "amount": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.krellinst.org/csgf/about-doe-csgf/eligibility-program-requirements",
+            "https://www.krellinst.org/csgf/how-apply",
+            "https://www.krellinst.org/csgf/about-doe-csgf/benefits-opportunities"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "doe-visiting-faculty-program",
+      "outcome": "patch-recommended",
+      "notes": "2027 dates discovered; $1600/week and travel/housing confirmed on Benefits.",
+      "sources": [
+        "https://science.osti.gov/wdts/vfp/Benefits",
+        "https://science.osti.gov/wdts/vfp/Key-Dates",
+        "https://science.osti.gov/wdts/vfp/Eligibility"
+      ],
+      "changes": [
+        {
+          "field": "deadline",
+          "current": "Summer 2026 cycle closed; the program is offered annually and the next application schedule has not yet been posted",
+          "value": "January 6, 2027 at 5:00 PM ET (Summer 2027; applications open October 14, 2026; DOE labels dates tentative)",
+          "source": "https://science.osti.gov/wdts/vfp/Key-Dates",
+          "evidence": "Key Dates announces Summer 2027 schedule while main page still says 2026 closed.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "deadlineMonth",
+          "current": 0,
+          "value": 1,
+          "source": "https://science.osti.gov/wdts/vfp/Key-Dates",
+          "evidence": "Primary deadline January 6.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "Full-time faculty at an eligible U.S. degree-granting college, university, or community college; all HBCUs are eligible",
+            "U.S. citizen or lawful permanent resident",
+            "Research must align with a DOE mission area; computer and computational sciences are eligible fields",
+            "Applicant and a DOE laboratory scientist jointly develop the research proposal"
+          ],
+          "value": [
+            "Full-time STEM faculty at a U.S. degree-granting institution not classified as Carnegie 2025 R1 or R2; all HBCUs eligible regardless of classification",
+            "U.S. citizen or lawful permanent resident",
+            "Research proposal co-developed with a host DOE laboratory researcher; computer/computational sciences eligible",
+            "Maximum five applications and five participation terms; Teaching Initiative track requires prior VFP/FaST participation"
+          ],
+          "source": "https://science.osti.gov/wdts/vfp/Eligibility",
+          "evidence": "Current eligibility gives explicit R1/R2 exclusions and participation limits.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "correction-supported",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "amount": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://science.osti.gov/wdts/vfp/Benefits",
+            "https://science.osti.gov/wdts/vfp/Key-Dates",
+            "https://science.osti.gov/wdts/vfp/Eligibility"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "onr-yip",
+      "outcome": "patch-recommended",
+      "notes": "FY2027 deadline, budget, citizenship, appointment, PhD cutoff and exclusions confirmed in NOFO.",
+      "sources": [
+        "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+      ],
+      "changes": [
+        {
+          "field": "deadline",
+          "current": "October 30, 2026 at 5:00 PM ET (Annual proposal deadline; FOA N00014-25-S-F003)",
+          "value": "October 30, 2026 at 5:00 PM ET (Annual program; FY2027; NOFO N0001426SF004)",
+          "source": "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf",
+          "evidence": "PDF cover gives correct NOFO and due date. Local FOA number is prior cycle.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "amount": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "eligibility": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "onr-cnr-fellows",
+      "outcome": "confirmed-no-change",
+      "notes": "Current official page confirms all core deadline/award/eligibility fields. 2026 nomination closed; future nomination date not announced.",
+      "sources": [
+        "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+      ],
+      "changes": [],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "deadline": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "amount": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "eligibility": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "afosr-yip",
+      "outcome": "patch-recommended",
+      "notes": "Dates, funding, citizenship and PhD cutoff confirmed; opportunity number correction and white-paper time needed.",
+      "sources": [
+        "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+      ],
+      "changes": [
+        {
+          "field": "deadline",
+          "current": "White paper: October 9, 2026; Full proposal: December 4, 2026 at 11:59 PM ET (Annual; FOA-AFRL-AFOSR-2026-0002)",
+          "value": "Required white paper: October 9, 2026 at 11:59 PM ET; Full proposal: December 4, 2026 at 11:59 PM ET (Annual program; FY2027; FA955026S0003)",
+          "source": "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0",
+          "evidence": "Official listing identifies FA955026S0003 and both dates; required white paper has already passed as of audit.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "amount": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "eligibility": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "aro-early-career",
+      "outcome": "patch-recommended",
+      "notes": "Official BAA search text confirms eligibility and $120k/year for 3 years; PDF fetch blocked. Current BAA version still needs confirmation; recommended patch avoids unsupported PhD condition.",
+      "sources": [
+        "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+      ],
+      "changes": [
+        {
+          "field": "eligibility",
+          "current": [
+            "Tenure-track faculty at accredited US universities",
+            "Within 5 years of receiving doctorate or holding academic faculty appointment"
+          ],
+          "value": [
+            "U.S. citizens, U.S. nationals, or lawful permanent residents",
+            "Held a tenure-track position at a U.S. institution of higher education for fewer than five years at application; equivalent appointments require institutional confirmation of consideration for permanent appointment"
+          ],
+          "source": "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf",
+          "evidence": "Official BAA search extract confirms time since appointment, not time since PhD, and citizenship restriction.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "whoFor",
+          "current": "Tenure-track faculty within 5 years of PhD or academic appointment",
+          "value": "Early-career faculty with fewer than five years in a tenure-track or eligible equivalent appointment",
+          "source": "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf",
+          "evidence": "BAA defines early career by faculty appointment tenure.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "name": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "sponsor": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "whoFor": {
+          "status": "correction-supported",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "deadline": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "amount": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "summary": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "url": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://arl.devcom.army.mil/wp-content/uploads/sites/3/2024/07/DEVCOM-ARL-BAA_W911NF23S0001-Amendment-3.pdf"
+          ]
+        }
+      },
+      "completeness": "partial-current-baa-version-check-required"
+    },
+    {
+      "id": "ndseg-fellowship",
+      "outcome": "patch-recommended",
+      "notes": "All core fields checked; benefit cap and missing three-years-remaining eligibility corrected. Official health page does not explicitly call its $1600 cap annual.",
+      "sources": [
+        "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+        "https://ndseg.sysplus.com/",
+        "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+        "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+      ],
+      "changes": [
+        {
+          "field": "eligibility",
+          "current": [
+            "US Citizens and US Nationals only",
+            "Undergraduate seniors or first/second-year doctoral students",
+            "Pursuing doctoral degrees in CS, electrical engineering, cognitive science, or related fields"
+          ],
+          "value": [
+            "U.S. citizens, dual citizens, or U.S. nationals; permanent residents are ineligible",
+            "Bachelor’s degree received by the fellowship application year; applying to, accepted to, or enrolled near the beginning of graduate study at an accredited U.S. institution",
+            "At least three years remaining in graduate degree at application",
+            "Research aligned with a specific DoD BAA topic"
+          ],
+          "source": "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+          "evidence": "Official eligibility lists all five criteria including degree date and three years remaining.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "amount",
+          "current": "Full tuition and mandatory fees, $43,200 annual stipend, and up to $1,400/yr health insurance for 3 years",
+          "value": "Full tuition and mandatory fees, $43,200 annual stipend for 3 years, institutional health insurance up to $1,600, and up to $5,000 total professional development travel",
+          "source": "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+          "evidence": "Official benefits page says health coverage up to total value $1600 (not local $1400/year); stipend/travel page gives $43200 and $5000 total.",
+          "confidence": "confirmed",
+          "additionalSources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "deadline": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "amount": {
+          "status": "correction-supported",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://ndseg.sysplus.com/NDSEG/fellows/Tuition-Fees-Benefits.aspx",
+            "https://ndseg.sysplus.com/",
+            "https://ndseg.sysplus.com/NDSEG/about/eligibility.aspx",
+            "https://ndseg.sysplus.com/NDSEG/fellows/Stipends-Travel.aspx"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "dod-smart-scholarship",
+      "outcome": "patch-recommended",
+      "notes": "Ordinary browser fully resolved JS shell. Source captures: /tmp/awards-render/1.txt, /tmp/awards-render/2.txt and /tmp/awards-render2/1.txt. Calendar-derived concrete date supported by official annual rule.",
+      "sources": [
+        "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+        "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+        "https://www.smartscholarship.org/smart"
+      ],
+      "changes": [
+        {
+          "field": "deadline",
+          "current": "December 5, 2025 at 5:00 PM EST (Annual first Friday of December; opens August 1)",
+          "value": "December 4, 2026 at 5:00 PM EST (Annual first Friday in December; opens August 1; supporting references due simultaneously)",
+          "source": "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+          "evidence": "Rendered official instructions state first Friday December 5PM EST; 2026 eligibility/current open countdown confirms current cycle. Calendar resolves December4.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "US Citizens only",
+            "Cumulative GPA of 3.0 or higher",
+            "Undergraduate or graduate student in approved STEM major",
+            "Ability to obtain security clearance and commit to post-graduation DoD civilian service"
+          ],
+          "value": [
+            "Citizen of the United States, Australia, Canada, New Zealand or United Kingdom",
+            "Age 18 or older by January 1, 2028; cumulative GPA at least 3.0/4.0",
+            "Enrolled or planning enrollment at a regionally accredited U.S. college/university for fall 2027 in an eligible STEM degree; requesting 1–5 years funding",
+            "Able to obtain and maintain security clearance; accept one year civilian DoW service per funded academic year and required summer internships"
+          ],
+          "source": "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+          "evidence": "Rendered 2026 eligibility includes five citizenships, current age/enrollment and service criteria.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "sponsor",
+          "current": "Department of Defense (DoD)",
+          "value": "Department of War (DoW)",
+          "source": "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+          "evidence": "Official current program branding names Department of War; stable ID retained.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "shortName",
+          "current": "DoD SMART Scholarship",
+          "value": "SMART Scholarship",
+          "source": "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+          "evidence": "Current official name does not require legacy DoD prefix.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "amount",
+          "current": "Full tuition, $30,000–$46,000 annual stipend, health insurance, paid summer internships, and guaranteed civilian DoD employment upon graduation",
+          "value": "Full tuition, $30,000–$46,000 annual stipend, health and book allowances, summer internships, and post-graduation civilian employment",
+          "source": "https://www.smartscholarship.org/smart",
+          "evidence": "Rendered home states stipend and full tuition; eligibility page states allowances, internships and career.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "summary",
+          "current": "The SMART Scholarship-for-Service Program provides full tuition, annual stipends, and post-graduation civilian employment at DoD laboratories and research centers across the US.",
+          "value": "The SMART Scholarship-for-Service Program supports bachelor’s, master’s and doctoral STEM students with tuition, stipends, summer internships and post-graduation civilian employment in the Department of War. Each funded academic year creates a one-year service commitment.",
+          "source": "https://www.smartscholarship.org/smart",
+          "evidence": "Rendered program page states current DoW workforce scope; eligibility gives one-for-one service.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "shortName": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "sponsor": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "amount": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "summary": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.smartscholarship.org/smart/en?id=smart_eligibility",
+            "https://www.smartscholarship.org/smart/en?id=kb_article&sys_id=0383c5d6db2a03006bb8f4b40f961956",
+            "https://www.smartscholarship.org/smart"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "nih-r01-r21-cs",
+      "outcome": "patch-recommended",
+      "notes": "Core mechanism claims checked against R01/R21 pages, standard dates and ESI policy. Umbrella entry remains generic: any particular NLM/BRAIN call requires its own NOFO.",
+      "sources": [
+        "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+        "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+        "https://grants.nih.gov/funding/activity-codes/R01",
+        "https://grants.nih.gov/funding/activity-codes/R21"
+      ],
+      "changes": [
+        {
+          "field": "amount",
+          "current": "R21: Up to $275,000 over 2 years; R01: $1,250,000 to $2,500,000+ over 5 years",
+          "value": "R21: up to $275,000 direct costs over 2 years, with no more than $200,000 in one year; R01: budget reflects project needs, generally up to 5 budget periods; opportunity-specific limits apply",
+          "source": "https://grants.nih.gov/funding/activity-codes/R01",
+          "evidence": "R01 page says budgets generally not limited; fixed local R01 range is unsupported. R21 separate official page confirms direct-cost cap.",
+          "confidence": "confirmed",
+          "additionalSources": [
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        {
+          "field": "deadline",
+          "current": "February, June, October (Standard NIH 3-cycle review)",
+          "value": "New R01: February 5, June 5, October 5; new R21: February 16, June 16, October 16 (5:00 PM applicant organization local time; standard dates only when the NOFO specifies them; weekend/holiday adjustments apply)",
+          "source": "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+          "evidence": "NIH table distinguishes new R01 and R21 standard due dates.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "Open to all university faculty and principal investigators",
+            "Early Stage Investigator (ESI) status provides favorable R01 paylines for investigators within 10 years of PhD"
+          ],
+          "value": [
+            "Eligible investigators and organizations must meet the chosen NOFO and participating institute requirements",
+            "ESI status requires terminal research degree or completion of postgraduate clinical training, whichever later, within 10 years and no prior substantial NIH independent research award; extensions may apply"
+          ],
+          "source": "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+          "evidence": "NIH definition includes prior substantial funding restriction omitted locally.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "amount": {
+          "status": "correction-supported",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://grants.nih.gov/policy-and-compliance/policy-topics/early-stage-investigators",
+            "https://grants.nih.gov/grants-process/submit/submission-policies/standard-due-dates",
+            "https://grants.nih.gov/funding/activity-codes/R01",
+            "https://grants.nih.gov/funding/activity-codes/R21"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "nasa-nstgro",
+      "outcome": "patch-recommended",
+      "notes": "Exact NSTGRO26 appendix fully checked for deadlines, award, eligibility and technical scope. Next cycle absent from official FY2026 index; prior Oct31 date superseded.",
+      "sources": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+        "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+      ],
+      "changes": [
+        {
+          "field": "url",
+          "current": "https://www.nasa.gov/directorates/stmd/strg/nstgro/",
+          "value": "https://www.nasa.gov/nasa-space-technology-graduate-research-opportunities-nstgro/",
+          "source": "https://www.nasa.gov/nasa-space-technology-graduate-research-opportunities-nstgro/",
+          "evidence": "Official migrated program page available.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "deadline",
+          "current": "October 31, 2025 at 6:00 PM ET (Annual late October; 80HQTR25NOA01-25NSTGRO_A1)",
+          "value": "January 29, 2026 at 6:00 PM ET; recommendation letters February 3, 2026 at 6:00 PM ET (Annual program; NSTGRO26; next cycle not yet announced)",
+          "source": "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+          "evidence": "Appendix cover lists actual NSTGRO26 dates.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "deadlineMonth",
+          "current": 10,
+          "value": 1,
+          "source": "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+          "evidence": "Primary actual cycle deadline January29.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "US Citizens only",
+            "Enrolled in or accepted to an accredited US graduate program",
+            "Research aligned with NASA space technology focus areas"
+          ],
+          "value": [
+            "U.S. citizen, national or permanent resident at proposal submission",
+            "Bachelor’s degree before fall 2026 and full-time master’s/doctoral enrollment at proposing accredited U.S. university in fall 2026",
+            "University advisor is PI and authorized organization representative submits; applicant meets one of the appendix eligibility profiles",
+            "Master’s support needed through fall 2027 or doctoral support through summer 2028; no professional/PhD dual-degree programs"
+          ],
+          "source": "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+          "evidence": "Appendix eligibility states national citizenship, degree/enrollment and remaining support requirements.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "amount",
+          "current": "Up to $84,000/year (stipend, tuition allowance, health insurance, and NASA center research allowance)",
+          "value": "Up to $84,000/year, renewed subject to progress and funding; up to 4 years total support",
+          "source": "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+          "evidence": "Appendix basic information confirms cap and maximum duration.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "correction-supported",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "amount": {
+          "status": "correction-supported",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "url": {
+          "status": "correction-supported",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1102288&solicitationId=%7BBFDA5B85-C3FB-CC50-8976-05CF024C0B61%7D&viewSolicitationDocument=1",
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26NSTGRO_B6"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "nasa-esi-ecf",
+      "outcome": "patch-recommended",
+      "notes": "Split: legacy id stays ECF; separately add supported ESI26 record. ECF25 summary and official program fully checked; current ECF appendix eligibility still needs exact full-text audit.",
+      "sources": [
+        "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+        "https://www.nasa.gov/early-career-faculty-ecf/"
+      ],
+      "changes": [
+        {
+          "field": "url",
+          "current": "https://www.nasa.gov/directorates/stmd/early-career-faculty/",
+          "value": "https://www.nasa.gov/early-career-faculty-ecf/",
+          "source": "https://www.nasa.gov/early-career-faculty-ecf/",
+          "evidence": "Old stored page 404; official ECF page migrated.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "name",
+          "current": "NASA Early Career Faculty (ECF) & Early Stage Innovations (ESI)",
+          "value": "NASA Early Career Faculty (ECF)",
+          "source": "https://www.nasa.gov/early-career-faculty-ecf/",
+          "evidence": "ECF is separate program from ESI; legacy id intentionally stable.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "amount",
+          "current": "Up to $650,000 over 3 years ($200,000/yr base)",
+          "value": "Up to $600,000 over 3 years, with no more than $200,000 in any year",
+          "source": "https://www.nasa.gov/early-career-faculty-ecf/",
+          "evidence": "ECF body explicitly says $600K total and $200K/year.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "summary",
+          "current": "Challenges early-career university faculty to examine the theoretical and practical feasibility of bold, high-risk space computing, autonomous navigation, and radiation-hardened architectures.",
+          "value": "Supports outstanding early-career faculty conducting innovative low technology-readiness research in specific NASA space technology topics. Awards are made to accredited U.S. universities under the ECF appendix to SpaceTech-REDDI.",
+          "source": "https://www.nasa.gov/early-career-faculty-ecf/",
+          "evidence": "Official ECF program scope.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "deadline",
+          "current": "March / April (Annual SpaceTech call)",
+          "value": "July 10, 2025 (Annual program; ECF25 full proposal; notice of intent June 10, 2025; next call not yet announced)",
+          "source": "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+          "evidence": "Rendered NSPIRES ECF25 summary confirms July10 and June10 dates, not March/April.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "deadlineMonth",
+          "current": 3,
+          "value": 7,
+          "source": "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+          "evidence": "ECF25 exact primary deadline July10.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "whoFor",
+          "current": "Untenured Assistant Professors in space computing and robotics",
+          "value": "Early-career faculty at accredited U.S. universities",
+          "source": "https://www.nasa.gov/early-career-faculty-ecf/",
+          "evidence": "Official program description gives scope; exact solicitation appointment restrictions require appendix.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "Untenured Assistant Professor at accredited US university",
+            "US Citizens or Permanent Residents preferred",
+            "Proposals must target specific NASA SpaceTech topics"
+          ],
+          "value": [
+            "Accredited U.S. university applies on behalf of an eligible early-career faculty researcher",
+            "Proposal must address the specific ECF appendix topics and satisfy its appointment and other eligibility rules"
+          ],
+          "source": "https://www.nasa.gov/early-career-faculty-ecf/",
+          "evidence": "Program page supports institution and topic rules; unsupported citizenship preference omitted.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "name": {
+          "status": "correction-supported",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "sponsor": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "whoFor": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "correction-supported",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "amount": {
+          "status": "correction-supported",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "summary": {
+          "status": "correction-supported",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "url": {
+          "status": "correction-supported",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://nspires.nasaprs.com/external/solicitations/summary.do?method=init&path=&solId=%7B54B05DD7-4E0D-9FA3-EC2A-D8203B7AF302%7D",
+            "https://www.nasa.gov/early-career-faculty-ecf/"
+          ]
+        }
+      },
+      "completeness": "partial-audit-unconfirmed-fields-remain"
+    },
+    {
+      "id": "google-phd-fellowship",
+      "outcome": "patch-recommended",
+      "notes": "2026 April 30 deadline confirmed; 2027 dates unannounced. Correct current US/Canada amount and eligibility.",
+      "sources": [
+        "https://research.google/programs-and-events/phd-fellowship/"
+      ],
+      "changes": [
+        {
+          "field": "url",
+          "current": "https://research.google/outreach/phd-fellowship/",
+          "value": "https://research.google/programs-and-events/phd-fellowship/",
+          "source": "https://research.google/programs-and-events/phd-fellowship/",
+          "evidence": "Stored URL redirects to current program page.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "amount",
+          "current": "Full tuition and fees for up to 3 years + $40,000–$50,000/yr stipend + Google Research mentor",
+          "value": "U.S./Canada: $85,000/year for up to 2 years toward education costs, living expenses, travel and equipment; benefits vary by region",
+          "source": "https://research.google/programs-and-events/phd-fellowship/",
+          "evidence": "FAQ states $85k/year effective from 2025 new recipients and up to 2 years.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "Full-time PhD students enrolled at participating universities",
+            "Nomination submitted by university department",
+            "Research focus in algorithms, machine learning, systems, NLP, perception, security"
+          ],
+          "value": [
+            "University nomination required; direct student applications not accepted",
+            "Full-time PhD enrollment throughout fellowship; U.S./Canada nominees must complete graduate coursework before award year",
+            "No comparable industry fellowship; prior Google PhD fellows and Google employees or their households are ineligible"
+          ],
+          "source": "https://research.google/programs-and-events/phd-fellowship/",
+          "evidence": "Current FAQ gives nomination, coursework and funding restrictions.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "deadline": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "amount": {
+          "status": "correction-supported",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "url": {
+          "status": "correction-supported",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/phd-fellowship/"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "google-research-scholar",
+      "outcome": "patch-recommended",
+      "notes": "Official FAQ confirms $60k, one year of work, seven-year eligibility and max three applications. New dated deadline not announced; prior January 2025 cycle needs archived verification.",
+      "sources": [
+        "https://research.google/programs-and-events/frequently-asked-questions/"
+      ],
+      "changes": [
+        {
+          "field": "url",
+          "current": "https://research.google/outreach/research-scholar-program/",
+          "value": "https://research.google/programs-and-events/frequently-asked-questions/",
+          "source": "https://research.google/programs-and-events/frequently-asked-questions/",
+          "evidence": "Old program URL now redirects to generic index; official FAQ retains program-specific terms.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "name": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "sponsor": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "whoFor": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "deadline": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "amount": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "summary": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "eligibility": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "url": {
+          "status": "correction-supported",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.google/programs-and-events/frequently-asked-questions/"
+          ]
+        }
+      },
+      "completeness": "partial-audit-unconfirmed-fields-remain"
+    },
+    {
+      "id": "amazon-research-awards",
+      "outcome": "patch-recommended",
+      "notes": "Fall 2026 November 4 and all nine tracks confirmed on index. Amount varies by track; blanket limit correction recommended.",
+      "sources": [
+        "https://www.amazon.science/research-awards/call-for-proposals",
+        "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+      ],
+      "changes": [
+        {
+          "field": "amount",
+          "current": "Up to $80,000–$100,000 unrestricted cash gift + up to $40,000 in AWS promotional credits",
+          "value": "Track-specific unrestricted gifts and AWS credits; Fall 2026 examples: Agentic AI averages no more than $70,000 cash + $50,000 credits; Automated Reasoning up to $80,000 cash + $40,000 credits",
+          "source": "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026",
+          "evidence": "Agentic AI award detail differs from local blanket $80–100k/$40k; Automated Reasoning page separately gives limits.",
+          "confidence": "confirmed",
+          "additionalSources": [
+            "https://www.amazon.science/research-awards/call-for-proposals/automated-reasoning-call-for-proposals-fall-2026"
+          ]
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "name": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "sponsor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "whoFor": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "deadline": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "amount": {
+          "status": "correction-supported",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "summary": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "eligibility": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "url": {
+          "status": "confirmed-at-program-or-solicitation-level",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/research-awards/call-for-proposals",
+            "https://www.amazon.science/research-awards/call-for-proposals/aws-agentic-ai-call-for-proposals-fall-2026"
+          ]
+        }
+      },
+      "completeness": "audited-core-facts"
+    },
+    {
+      "id": "amazon-phd-fellowship",
+      "outcome": "needs-review",
+      "notes": "Old stored fellowship page unavailable; distinct new AI PhD Fellowship (announced October 2025, two-year 2025–2027 support) confirmed. Recommend new record rather than silently conflating programs.",
+      "sources": [
+        "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+      ],
+      "changes": [],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "name": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "sponsor": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "whoFor": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "deadline": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "amount": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "summary": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "eligibility": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "url": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program"
+          ]
+        }
+      },
+      "completeness": "partial-audit-unconfirmed-fields-remain"
+    },
+    {
+      "id": "meta-phd-fellowship",
+      "outcome": "patch-recommended",
+      "notes": "Browser resolved redirect and explicit inactivity. Current amount/eligibility are not published; archived exact terms remain unconfirmed; current invented deadline removed. Capture /tmp/awards-render/3.txt.",
+      "sources": [
+        "https://research.facebook.com/fellows/"
+      ],
+      "changes": [
+        {
+          "field": "deadlineMonth",
+          "current": 9,
+          "value": 0,
+          "source": "https://research.facebook.com/fellows/",
+          "evidence": "No announced current cycle; remove unsupported exact deadline sorting.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "status",
+          "current": null,
+          "value": "historical",
+          "source": "https://research.facebook.com/fellows/",
+          "evidence": "Official archive only and explicit no-new-applications statement justify retained inactive historical record.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "featured",
+          "current": true,
+          "value": false,
+          "source": "https://research.facebook.com/fellows/",
+          "evidence": "Inactive archived program should not be presented as featured current opportunity.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "url",
+          "current": "https://research.facebook.com/fellowship/",
+          "value": "https://research.facebook.com/fellows/",
+          "source": "https://research.facebook.com/fellows/",
+          "evidence": "Ordinary browser confirms current archive endpoint.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "amount",
+          "current": "Tuition and fees paid for up to 2 years + $42,000 annual living stipend + conference travel support ($5,000)",
+          "value": "Historical fellowship benefits; no current award amount announced",
+          "source": "https://research.facebook.com/fellows/",
+          "evidence": "Current archive contains no new award terms; remove unsupported current financial representation.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "summary",
+          "current": "Supports promising doctoral students engaged in innovative and relevant research across computing disciplines including AI, AR/VR, database systems, networking, security, and hardware.",
+          "value": "Historical Meta/Facebook fellowship supporting doctoral computing research. Meta’s current fellows archive lists prior recipients and states that new applications are not being accepted.",
+          "source": "https://research.facebook.com/fellows/",
+          "evidence": "Archive status and recipient research fields establish retained historical scope.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "deadline",
+          "current": "September 20, 2026 (Annual September 20 at 11:59 PM PDT; reference letters October 6)",
+          "value": "Historical fellowship (2013–2023 recipients shown); Meta is not accepting new applications as of October 10, 2026",
+          "source": "https://research.facebook.com/fellows/",
+          "evidence": "Rendered archive lists recipients across these years and explicitly rejects new applications.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "name": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "sponsor": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "whoFor": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "correction-supported",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "amount": {
+          "status": "correction-supported",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "summary": {
+          "status": "correction-supported",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "eligibility": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "url": {
+          "status": "correction-supported",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        },
+        "featured": {
+          "status": "correction-supported",
+          "sources": [
+            "https://research.facebook.com/fellows/"
+          ]
+        }
+      },
+      "completeness": "inactive-status-confirmed-archived-terms-unconfirmed"
+    },
+    {
+      "id": "meta-research-awards",
+      "outcome": "patch-recommended",
+      "notes": "Browser shows historical RFPs dated 2020–2023 and winners-announced states. Existing archival representation reasonable; exact old eligibility depends on specific call. Privacy2022 official call checked confirms full-time faculty and sanctioned-country exclusions.",
+      "sources": [
+        "https://research.facebook.com/research-awards/",
+        "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+      ],
+      "changes": [
+        {
+          "field": "deadline",
+          "current": "Inactive / Historical (archived RFP program)",
+          "value": "Historical RFP archive (2020–2023 calls shown); no current open call confirmed as of October 10, 2026",
+          "source": "https://research.facebook.com/research-awards/",
+          "evidence": "Rendered archive shows historical calls and winners-announced states; no generic assertion of permanent discontinuation.",
+          "confidence": "confirmed"
+        },
+        {
+          "field": "eligibility",
+          "current": [
+            "Open to university faculty and accredited research institutions worldwide",
+            "Short proposal submitted directly in response to specific RFP topics",
+            "All funded research is open and published publicly"
+          ],
+          "value": [
+            "Historical calls generally required current full-time faculty at accredited institutions awarding research PhDs; applicant PI on resulting award",
+            "Each call had its own rules and applicable U.S./international legal restrictions"
+          ],
+          "source": "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/",
+          "evidence": "Official archived 2022 Privacy Enhancing Technologies call states faculty and legal restrictions; local unconditional worldwide eligibility overbroad.",
+          "confidence": "confirmed"
+        }
+      ],
+      "fieldChecks": {
+        "id": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "name": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "shortName": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "sponsor": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "sponsorCategory": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "targetAudience": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "whoFor": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "deadline": {
+          "status": "correction-supported",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "deadlineMonth": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "amount": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "summary": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "eligibility": {
+          "status": "correction-supported",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "topics": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "url": {
+          "status": "program-identity-or-scope-reviewed",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "status": {
+          "status": "unconfirmed-current-terms",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        },
+        "featured": {
+          "status": "reviewed-editorial-taxonomy",
+          "sources": [
+            "https://research.facebook.com/research-awards/",
+            "https://research.facebook.com/research-awards/2022-privacy-enhancing-technologies-request-for-proposals/"
+          ]
+        }
+      },
+      "completeness": "historical-index-and-sample-call-checked"
+    }
+  ],
+  "newEntries": [
+    {
+      "record": {
+        "id": "amazon-ai-phd-fellowship",
+        "name": "Amazon AI PhD Fellowship Program",
+        "shortName": "Amazon AI PhD Fellowship",
+        "sponsor": "Amazon",
+        "sponsorCategory": "Industry",
+        "targetAudience": [
+          "PhD Students"
+        ],
+        "whoFor": "PhD students selected by nine participating U.S. universities",
+        "deadline": "University selection for academic years 2025–2026 and 2026–2027; no public application deadline announced",
+        "deadlineMonth": 0,
+        "amount": "Two years of tuition, stipend and fee support plus shared AWS cloud credits; individual amount varies by university",
+        "summary": "Supports doctoral research in machine learning, computer vision, natural-language processing, agentic systems and related practical AI research. Fellows work with an Amazon scientific mentor.",
+        "eligibility": [
+          "Selected by Carnegie Mellon, Johns Hopkins, MIT, Stanford, UC Berkeley, UCLA, UIUC, UT Austin or University of Washington",
+          "Research aligned with practical AI disciplines; university selection process applies"
+        ],
+        "topics": [
+          "AI/ML",
+          "Computer Vision",
+          "Natural Language Processing",
+          "Agentic AI",
+          "Automated Reasoning"
+        ],
+        "url": "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program",
+        "featured": false
+      },
+      "source": "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program",
+      "evidence": "Official October 21, 2025 announcement establishes two academic years, nine universities, university-selected fellows, support and mentor."
+    },
+    {
+      "record": {
+        "id": "nasa-early-stage-innovations",
+        "name": "NASA Early Stage Innovations (ESI26)",
+        "shortName": "NASA ESI",
+        "sponsor": "NASA Research and Technology Mission Directorate",
+        "sponsorCategory": "Government",
+        "targetAudience": [
+          "Faculty"
+        ],
+        "whoFor": "Tenured or tenure-track faculty at U.S. institutions of higher education",
+        "deadline": "Mandatory preliminary proposal: August 13, 2026 at 5:00 PM ET; invited full proposal: December 16, 2026 at 5:00 PM ET (ESI26; full proposals by invitation only)",
+        "deadlineMonth": 12,
+        "amount": "Up to $750,000 over 3 years, no more than $250,000/year",
+        "summary": "Supports early-stage space technology research, including scientific machine learning, autonomous manufacturing, spacecraft navigation and robotic construction for lunar/Martian power systems. ESI26 uses mandatory preliminary proposals and invited full proposals.",
+        "eligibility": [
+          "U.S. institution of higher education; PI tenured or tenure-track at proposing institution",
+          "At most three proposals per PI/co-PI/co-investigator; at least 50% budget to proposing institution and at least 70% to U.S. institutions of higher education",
+          "Teaming restrictions apply; NASA Centers and JPL cannot collaborate"
+        ],
+        "topics": [
+          "AI/ML",
+          "Computational Science",
+          "Autonomous Systems",
+          "Robotics",
+          "Spacecraft Navigation"
+        ],
+        "url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26ESI_B2",
+        "featured": false
+      },
+      "source": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26ESI_B2",
+      "additionalSources": [
+        "https://nspires.nasaprs.com/external/viewrepositorydocument?cmdocumentid=1140209&solicitationId=%7B6C484060-6A93-367A-DBC6-394F5FA30B96%7D&viewSolicitationDocument=1"
+      ],
+      "evidence": "Official ESI26 summary and appendix identify two-stage dates, $750k cap, PI/budget requirements and computing topics."
+    }
+  ],
+  "newLeads": [
+    {
+      "program": "DOE NNSA SSGF",
+      "deadline": "January 5, 2027",
+      "source": "https://www.krellinst.org/ssgf/how-apply",
+      "notes": "Check existing dataset and complete computing eligibility before adding/updating."
+    },
+    {
+      "program": "DOE NNSA LRGF",
+      "deadline": "February 16, 2027",
+      "source": "https://www.krellinst.org/lrgf/how-apply",
+      "notes": "Check existing dataset and eligibility before adding/updating."
+    }
+  ]
+}

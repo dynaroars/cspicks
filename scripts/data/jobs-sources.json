@@ -3183,18 +3183,17 @@
     "school": "Univ. of Louisiana - Lafayette",
     "homepage": "https://computing.louisiana.edu/",
     "facultyCount": 35,
-    "jobsUrl": null,
+    "jobsUrl": "https://louisiana.csod.com/ats/careersite/search.aspx?site=1&c=louisiana",
     "state": "LA",
-    "lastCheckedAt": "2026-10-08T15:28:51Z",
+    "lastCheckedAt": "2026-10-10T17:26:23.497Z",
     "outcome": "incomplete",
-    "summary": "College site has no hiring page (postdocs page empty) and searches found no 2026 CS posting; university HR board not reached. Non-CS units (2026-10-08): University career site lists 34 openings; the only faculty posting is Assistant Professor (Athletic Training). No computing, ECE, or data units posting found.",
+    "summary": "Full sweep 2026-10-10: read all 34 careers-board entries across two pages and both ambiguous faculty details. Added ECE req2584, still listed/applyable but retaining November 2024 review and August 2025 preferred start. Architecture Digital Communication requires design/architecture qualifications, excluded. CS and engineering hiring sites return HTTP 500 database errors; department coverage and ECE timeline require follow-up.",
     "checkedUrls": [
       "https://computing.louisiana.edu/",
-      "https://computing.louisiana.edu/about-us/postdocs-and-visiting-scholars",
-      "https://humanresources.louisiana.edu/employment-opportunities",
-      "https://humanresources.louisiana.edu/employment-opportunities/faculty-unclassified-staff-position-announcements",
+      "https://engineering.louisiana.edu/about-us/employment-opportunities",
       "https://louisiana.csod.com/ats/careersite/search.aspx?site=1&c=louisiana",
-      "https://engineering.louisiana.edu/about-us/employment-opportunities"
+      "https://louisiana.csod.com/ux/ats/careersite/1/home/requisition/2584?c=louisiana",
+      "https://louisiana.csod.com/ux/ats/careersite/1/home/requisition/3965?c=louisiana"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -4342,18 +4341,19 @@
     "school": "Missouri S&T",
     "homepage": "https://cs.mst.edu/",
     "facultyCount": 21,
-    "jobsUrl": "https://provost.mst.edu/searches/",
+    "jobsUrl": "https://hr.mst.edu/careers/",
     "state": "MO",
-    "lastCheckedAt": "2026-10-08T15:28:51Z",
-    "outcome": "incomplete",
-    "summary": "The open-faculty page linked earlier is an ERP program page with no CS posting, and the provost searches page showed only a dean search; no CS faculty posting found. Non-CS units (2026-10-08): UM System eRecruit (reached via hr.mst.edu/careers) lists 25 faculty/research jobs; found two CS department postings (tenure-track and NTT teaching) and an ECE computer-engineering posting, none in jobs.json. IMPORTANT: eRecruit is PeopleSoft with session-only job pages, so no stable per-job URL was opened; all three records share the search-page url and need a per-job URL or de-duplication by the caller (urlNote). The CEC Dean search (hr.mst.edu/careers/searches/cecdeansearch/) was not recorded as it is a generic executive search.",
+    "lastCheckedAt": "2026-10-10T17:20:05.345Z",
+    "outcome": "complete",
+    "summary": "Full sweep 2026-10-10: read all 25 faculty/research listings on official eRecruit and the four CS/ECE posting details. Added CS assistant/associate faculty (review October 31), CS teaching faculty (rolling), CE assistant professor (November 1 priority), and ECE energy-optimization/ML postdoc (rolling). Retrieved permanent per-job URLs from share dialogs and verified each in a fresh browser session. Three faculty postings allow case-by-case sponsorship for candidates already in the U.S.; postdoc explicitly does not sponsor. Other listings require non-computing fields or are business executive searches.",
     "checkedUrls": [
-      "https://erp.mst.edu/people/openfacultypositions",
-      "https://provost.mst.edu/searches/",
-      "https://provost.mst.edu/searches/facultysearches/",
+      "https://cs.mst.edu/",
       "https://hr.mst.edu/careers/",
-      "https://hr.mst.edu/careers/searches/cecdeansearch/",
-      "https://erecruit.umsystem.edu/psp/tamext/ROLLA/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?FOCUS=Applicant&SiteId=10"
+      "https://erecruit.umsystem.edu/psp/tamext/ROLLA/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?FOCUS=Applicant&SiteId=10",
+      "https://erecruit.umsystem.edu/psp/tamext/ROLLA/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&SiteId=10&FOCUS=Applicant&SiteId=10&JobOpeningId=60984&PostingSeq=1",
+      "https://erecruit.umsystem.edu/psp/tamext/ROLLA/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&SiteId=10&FOCUS=Applicant&SiteId=10&JobOpeningId=60978&PostingSeq=1",
+      "https://erecruit.umsystem.edu/psp/tamext/ROLLA/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&SiteId=10&FOCUS=Applicant&SiteId=10&JobOpeningId=60994&PostingSeq=1",
+      "https://erecruit.umsystem.edu/psp/tamext/ROLLA/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&SiteId=10&FOCUS=Applicant&SiteId=10&JobOpeningId=59561&PostingSeq=1"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -4366,7 +4366,7 @@
         "url": "https://erecruit.umsystem.edu/psp/tamext/ROLLA/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?FOCUS=Applicant&SiteId=10"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z"
+    "relatedCheckedAt": "2026-10-10T17:20:05.345Z"
   },
   {
     "school": "Nova Southeastern University",
@@ -4886,17 +4886,13 @@
     "school": "Western Michigan University",
     "homepage": "https://wmich.edu/cs",
     "facultyCount": 16,
-    "jobsUrl": null,
+    "jobsUrl": "https://www.wmujobs.org/postings/search",
     "state": "MI",
-    "lastCheckedAt": "2026-10-08T15:28:51Z",
+    "lastCheckedAt": "2026-10-10T17:26:23.497Z",
     "outcome": "incomplete",
-    "summary": "Department site only has part-time instruction and career pages; no faculty hiring page or current posting found. Non-CS units (2026-10-08): WMU faculty board (11 postings) has no CS/ECE/computing roles; the only computing-adjacent one (Business Information Systems, cybersecurity) requires a Business CIS PhD from an AACSB school, so skipped.",
+    "summary": "Full sweep 2026-10-10: read all 11 official faculty listings and cybersecurity BIS posting 3819. That posting requires a Business Computer Information Systems PhD from an AACSB-certified university, so it does not target a CS PhD. No CS/ECE faculty listing. Department hiring pages and non-faculty research listings still need this sweep.",
     "checkedUrls": [
-      "https://wmich.edu/computer-science/careers",
-      "https://wmich.edu/computer-science/employment",
-      "https://wmich.edu/hr/jobs",
-      "https://www.wmujobs.org/",
-      "https://www.wmujobs.org/postings/search?utf8=%E2%9C%93&query=&query_v0_posted_at_date=&query_position_type_id[]=3&435=&commit=Search",
+      "https://www.wmujobs.org/postings/search?query=&query_position_type_id%5B%5D=3",
       "https://www.wmujobs.org/postings/3819"
     ],
     "deferredUntil": null,
@@ -5014,9 +5010,9 @@
     "facultyCount": 14,
     "jobsUrl": null,
     "state": "OK",
-    "lastCheckedAt": "2026-10-08T15:28:51Z",
+    "lastCheckedAt": "2026-10-10T17:17:16.206Z",
     "outcome": "incomplete",
-    "summary": "Search found no current CS faculty posting on official pages; the careers portal was not checked in a browser. Non-CS units (2026-10-08): Read all 43 requisitions via the Oracle CX board: no CS/ECE faculty. Skipped Instructional Assistant Professor of Cyber Studies (req 282; MS minimum, PhD only preferred), BIS assistant professor (business IS PhD) and a petroleum-engineering postdoc.",
+    "summary": "Search found no current CS faculty posting on official pages; the careers portal was not checked in a browser. Non-CS units (2026-10-08): Read all 43 requisitions via the Oracle CX board: no CS/ECE faculty. Skipped Instructional Assistant Professor of Cyber Studies (req 282; MS minimum, PhD only preferred), BIS assistant professor (business IS PhD) and a petroleum-engineering postdoc. Full sweep 2026-10-10: rendered live Oracle posting 282 and added full-time cybersecurity teaching position. The MS minimum does not exclude teaching faculty from dataset scope. Other units and entire board still require this sweep.",
     "checkedUrls": [
       "https://engineering.utulsa.edu/computer-science/",
       "https://utulsa-ibvjjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1",
@@ -5249,17 +5245,17 @@
     "school": "New York Tech",
     "homepage": "https://www.nyit.edu/academics/engineering-and-computing-sciences/computer-science/",
     "facultyCount": 9,
-    "jobsUrl": "https://www.nyit.edu/human_resources/careers",
+    "jobsUrl": "https://careers-nyit.icims.com/jobs/search",
     "state": "NY",
-    "lastCheckedAt": "2026-10-08T15:28:51Z",
-    "outcome": "incomplete",
-    "summary": "iCIMS portal results did not render in the browser; no CS posting found by search. Non-CS units (2026-10-08): iCIMS portal (careers-nyit.icims.com) did not render job results in the browser; no faculty listing could be read and no posting found. Non-CS units, 2nd pass (2026-10-08): Read the iCIMS 'professor' listing (11 results): all nursing, clinical, physics, math, biomedical or Jonesboro osteopathic roles; only CS-adjacent hit was an adjunct (excluded). No CS-PhD posting.",
+    "lastCheckedAt": "2026-10-10T17:26:23.497Z",
+    "outcome": "complete",
+    "summary": "Full sweep 2026-10-10: read all four pages of public iCIMS board through ordinary embedded frame, professor query, and ambiguous research/instructor details. No full-time CS/ECE/computing research or postdoc opening found; CS/ECE entries are adjunct pools. Research assistant 4219 is a biomedical technician; instructors 4209/4204 concern medical simulation/biomedical education; assistant professor 4270 requires MD/DO.",
     "checkedUrls": [
-      "https://careers-nyit.icims.com/jobs/search?ss=1&searchKeyword=professor",
-      "https://www.nyit.edu/human_resources/careers",
-      "https://careers-nyit.icims.com/jobs/search?ss=1&searchKeyword=faculty",
-      "https://www.nyit.edu/engineering_computing/faculty_openings (404)",
+      "https://careers-nyit.icims.com/jobs/search?ss=1&searchKeyword=computer&in_iframe=1",
       "https://careers-nyit.icims.com/jobs/search?ss=1&searchKeyword=professor&in_iframe=1",
+      "https://careers-nyit.icims.com/jobs/4219/research-assistant-temp/job?in_iframe=1",
+      "https://careers-nyit.icims.com/jobs/4209/instructor--mis-%28masters-in-simulation%29/job?in_iframe=1",
+      "https://careers-nyit.icims.com/jobs/4204/instructor/job?in_iframe=1",
       "https://careers-nyit.icims.com/jobs/4270/assistant-professor/job?in_iframe=1"
     ],
     "deferredUntil": null,
@@ -5269,7 +5265,7 @@
         "url": "https://careers-nyit.icims.com/jobs/search?ss=1&searchKeyword=professor"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z"
+    "relatedCheckedAt": "2026-10-10T17:26:23.497Z"
   },
   {
     "school": "SIU Carbondale",
@@ -5513,25 +5509,32 @@
     "school": "Indiana State University",
     "homepage": "https://cs.indstate.edu",
     "facultyCount": 4,
-    "jobsUrl": null,
+    "jobsUrl": "https://jobs.indstate.edu/postings/search",
     "state": "IN",
-    "lastCheckedAt": "2026-10-08T15:28:51Z",
-    "outcome": "incomplete",
-    "summary": "cs.indstate.edu has no current openings page content and the jobs.indstate.edu search could not be read; web search found no current CS faculty posting. Non-CS units (2026-10-08): jobs.indstate.edu search shell renders but listings could not be read through the keyword query; no CS/computing posting found. Non-CS units, 2nd pass (2026-10-08): Paged through all 4 pages of jobs.indstate.edu (102 postings) and the faculty query; only faculty postings were PT, PA, business analytics, construction mgmt, aviation, MSW, English. No CS/computing posting.",
+    "lastCheckedAt": "2026-10-10T17:26:23.497Z",
+    "outcome": "complete",
+    "summary": "Full sweep 2026-10-10: read CS homepage, all 79 currently public postings across three populated pages (fourth page empty), faculty query and Business Analytics detail. Added data/business analytics assistant professor (open until filled, August 15 priority, January 1 2027 start, no visa sponsorship). Other faculty positions are social work, physical therapy, physician assistant, construction management and aviation; student and staff jobs excluded.",
     "checkedUrls": [
       "https://cs.indstate.edu",
-      "https://cs.indstate.edu/web/index.php/Careers",
-      "https://cs.indstate.edu/info/positions.html",
-      "https://jobs.indstate.edu/postings/search?query=computer",
       "https://jobs.indstate.edu/postings/search",
-      "https://jobs.indstate.edu/postings/search?query=faculty",
       "https://jobs.indstate.edu/postings/search?page=2",
       "https://jobs.indstate.edu/postings/search?page=3",
-      "https://jobs.indstate.edu/postings/search?page=4"
+      "https://jobs.indstate.edu/postings/search?page=4",
+      "https://jobs.indstate.edu/postings/search?query=faculty",
+      "https://jobs.indstate.edu/postings/56526"
     ],
     "deferredUntil": null,
-    "relatedUnits": [],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z"
+    "relatedUnits": [
+      {
+        "name": "Marketing and Operations / Business Analytics",
+        "url": "https://jobs.indstate.edu/postings/56526"
+      },
+      {
+        "name": "University-wide careers board",
+        "url": "https://jobs.indstate.edu/postings/search"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-10T17:26:23.497Z"
   },
   {
     "school": "LIU Post",

@@ -1,0 +1,2293 @@
+{
+  "startedAt": "2026-10-10",
+  "scope": "Full official-source sweep: all US school job sources and postings, current/upcoming conference editions and next-edition discovery, all awards and new-call discovery.",
+  "jobs": [
+    {
+      "school": "Carnegie Mellon University",
+      "status": "pending"
+    },
+    {
+      "school": "Georgia Institute of Technology",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of California - San Diego",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of Illinois at Urbana-Champaign",
+      "status": "pending"
+    },
+    {
+      "school": "Massachusetts Inst. of Technology",
+      "status": "pending"
+    },
+    {
+      "school": "Northeastern University",
+      "status": "pending"
+    },
+    {
+      "school": "Indiana University",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of Maryland - College Park",
+      "status": "pending"
+    },
+    {
+      "school": "University of Michigan",
+      "status": "pending"
+    },
+    {
+      "school": "New York University",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of California - Berkeley",
+      "status": "pending"
+    },
+    {
+      "school": "CUNY",
+      "status": "pending"
+    },
+    {
+      "school": "Cornell University",
+      "status": "pending"
+    },
+    {
+      "school": "Rochester Inst. of Technology",
+      "status": "pending"
+    },
+    {
+      "school": "University of Wisconsin - Madison",
+      "status": "pending"
+    },
+    {
+      "school": "Johns Hopkins University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Central Florida",
+      "status": "pending"
+    },
+    {
+      "school": "Virginia Tech",
+      "status": "pending"
+    },
+    {
+      "school": "Purdue University",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of California - Santa Cruz",
+      "status": "pending"
+    },
+    {
+      "school": "University of Utah",
+      "status": "pending"
+    },
+    {
+      "school": "University of Washington",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of California - Irvine",
+      "status": "pending"
+    },
+    {
+      "school": "University of Colorado Boulder",
+      "status": "pending"
+    },
+    {
+      "school": "Northwestern University",
+      "status": "pending"
+    },
+    {
+      "school": "North Carolina State University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Pennsylvania",
+      "status": "pending"
+    },
+    {
+      "school": "University of Virginia",
+      "status": "pending"
+    },
+    {
+      "school": "UNC - Charlotte",
+      "status": "pending"
+    },
+    {
+      "school": "Arizona State University",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "Texas A&M University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Illinois at Chicago",
+      "status": "pending"
+    },
+    {
+      "school": "University of Southern California",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of Maryland - Baltimore County",
+      "status": "pending"
+    },
+    {
+      "school": "Vanderbilt University",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of Massachusetts Amherst",
+      "status": "pending"
+    },
+    {
+      "school": "University of Texas at Dallas",
+      "status": "pending"
+    },
+    {
+      "school": "University of Texas at Austin",
+      "status": "pending"
+    },
+    {
+      "school": "Princeton University",
+      "status": "pending"
+    },
+    {
+      "school": "Pennsylvania State University",
+      "status": "pending"
+    },
+    {
+      "school": "George Mason University",
+      "status": "pending"
+    },
+    {
+      "school": "Rutgers University",
+      "status": "pending"
+    },
+    {
+      "school": "Stanford University",
+      "status": "pending"
+    },
+    {
+      "school": "Stony Brook University",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of California - Davis",
+      "status": "pending"
+    },
+    {
+      "school": "Oregon State University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Minnesota",
+      "status": "pending"
+    },
+    {
+      "school": "University of North Carolina",
+      "status": "pending"
+    },
+    {
+      "school": "Boston University",
+      "status": "pending"
+    },
+    {
+      "school": "Duke University",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of California - Riverside",
+      "status": "pending"
+    },
+    {
+      "school": "Washington State University",
+      "status": "pending"
+    },
+    {
+      "school": "Columbia University",
+      "status": "pending"
+    },
+    {
+      "school": "University of South Florida",
+      "status": "pending"
+    },
+    {
+      "school": "NJIT",
+      "status": "pending"
+    },
+    {
+      "school": "University of Tennessee",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "University of Chicago",
+      "status": "pending"
+    },
+    {
+      "school": "Clemson University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Florida",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of California - Santa Barbara",
+      "status": "pending"
+    },
+    {
+      "school": "University at Buffalo",
+      "status": "pending"
+    },
+    {
+      "school": "Augusta University",
+      "status": "pending"
+    },
+    {
+      "school": "Ohio State University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Pittsburgh",
+      "status": "pending"
+    },
+    {
+      "school": "University of Texas at Arlington",
+      "status": "pending"
+    },
+    {
+      "school": "Rice University",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of California - Los Angeles",
+      "status": "pending"
+    },
+    {
+      "school": "Tufts University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Notre Dame",
+      "status": "pending"
+    },
+    {
+      "school": "Florida International University",
+      "status": "pending"
+    },
+    {
+      "school": "Harvard University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Delaware",
+      "status": "pending"
+    },
+    {
+      "school": "University of Connecticut",
+      "status": "pending"
+    },
+    {
+      "school": "Worcester Polytechnic Institute",
+      "status": "pending"
+    },
+    {
+      "school": "DePaul University",
+      "status": "pending"
+    },
+    {
+      "school": "Michigan State University",
+      "status": "pending"
+    },
+    {
+      "school": "Dartmouth College",
+      "status": "pending"
+    },
+    {
+      "school": "University of North Texas",
+      "status": "pending"
+    },
+    {
+      "school": "Yale University",
+      "status": "pending"
+    },
+    {
+      "school": "Brown University",
+      "status": "pending"
+    },
+    {
+      "school": "Iowa State University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Kansas",
+      "status": "pending"
+    },
+    {
+      "school": "Stevens Institute of Technology",
+      "status": "pending"
+    },
+    {
+      "school": "Washington University in St. Louis",
+      "status": "pending"
+    },
+    {
+      "school": "University of Kentucky",
+      "status": "pending"
+    },
+    {
+      "school": "University of Georgia",
+      "status": "pending"
+    },
+    {
+      "school": "University of Rochester",
+      "status": "pending"
+    },
+    {
+      "school": "University of Cincinnati",
+      "status": "pending"
+    },
+    {
+      "school": "University of Texas at San Antonio",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "Binghamton University",
+      "status": "pending"
+    },
+    {
+      "school": "California Inst. of Technology",
+      "status": "pending"
+    },
+    {
+      "school": "Rensselaer Polytechnic Institute",
+      "status": "pending"
+    },
+    {
+      "school": "University of Massachusetts Lowell",
+      "status": "pending"
+    },
+    {
+      "school": "Brigham Young University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Oklahoma",
+      "status": "pending"
+    },
+    {
+      "school": "Louisiana State University",
+      "status": "pending"
+    },
+    {
+      "school": "Colorado State University",
+      "status": "pending"
+    },
+    {
+      "school": "Syracuse University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Houston",
+      "status": "pending"
+    },
+    {
+      "school": "Texas State University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Arizona",
+      "status": "pending"
+    },
+    {
+      "school": "Drexel University",
+      "status": "pending"
+    },
+    {
+      "school": "Florida State University",
+      "status": "pending"
+    },
+    {
+      "school": "College of William and Mary",
+      "status": "pending"
+    },
+    {
+      "school": "Auburn University",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of Louisiana - Lafayette",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "University of Nebraska",
+      "status": "pending"
+    },
+    {
+      "school": "Texas Tech University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Hawaii at Manoa",
+      "status": "pending"
+    },
+    {
+      "school": "University of Nebraska - Omaha",
+      "status": "pending"
+    },
+    {
+      "school": "University of Vermont",
+      "status": "pending"
+    },
+    {
+      "school": "Northern Arizona University",
+      "status": "pending"
+    },
+    {
+      "school": "Emory University",
+      "status": "pending"
+    },
+    {
+      "school": "Florida Atlantic University",
+      "status": "pending"
+    },
+    {
+      "school": "Georgia State University",
+      "status": "pending"
+    },
+    {
+      "school": "Naval Postgraduate School",
+      "status": "pending"
+    },
+    {
+      "school": "University of Iowa",
+      "status": "pending"
+    },
+    {
+      "school": "University of Texas - El Paso",
+      "status": "pending"
+    },
+    {
+      "school": "Case Western Reserve University",
+      "status": "pending"
+    },
+    {
+      "school": "Towson University",
+      "status": "pending"
+    },
+    {
+      "school": "University of South Carolina",
+      "status": "pending"
+    },
+    {
+      "school": "Georgetown University",
+      "status": "pending"
+    },
+    {
+      "school": "University at Albany - SUNY",
+      "status": "pending"
+    },
+    {
+      "school": "University of Nevada",
+      "status": "pending"
+    },
+    {
+      "school": "Utah State University",
+      "status": "pending"
+    },
+    {
+      "school": "Wayne State University",
+      "status": "pending"
+    },
+    {
+      "school": "Boise State University",
+      "status": "pending"
+    },
+    {
+      "school": "Colorado School of Mines",
+      "status": "pending"
+    },
+    {
+      "school": "The University of Alabama",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of California - Merced",
+      "status": "pending"
+    },
+    {
+      "school": "IUPUI",
+      "status": "pending"
+    },
+    {
+      "school": "Kent State University",
+      "status": "pending"
+    },
+    {
+      "school": "Lehigh University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Nevada Las Vegas",
+      "status": "pending"
+    },
+    {
+      "school": "Old Dominion University",
+      "status": "pending"
+    },
+    {
+      "school": "Temple University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Michigan-Dearborn",
+      "status": "pending"
+    },
+    {
+      "school": "George Washington University",
+      "status": "pending"
+    },
+    {
+      "school": "Illinois Institute of Technology",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "Portland State University",
+      "status": "pending"
+    },
+    {
+      "school": "New Mexico State University",
+      "status": "pending"
+    },
+    {
+      "school": "Ohio University",
+      "status": "pending"
+    },
+    {
+      "school": "Oakland University",
+      "status": "pending"
+    },
+    {
+      "school": "UCCS",
+      "status": "pending"
+    },
+    {
+      "school": "University of Arkansas",
+      "status": "pending"
+    },
+    {
+      "school": "University of Oregon",
+      "status": "pending"
+    },
+    {
+      "school": "Boston College",
+      "status": "pending"
+    },
+    {
+      "school": "Cleveland State University",
+      "status": "pending"
+    },
+    {
+      "school": "Kansas State University",
+      "status": "pending"
+    },
+    {
+      "school": "Missouri S&T",
+      "status": "audited",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "Nova Southeastern University",
+      "status": "pending"
+    },
+    {
+      "school": "Virginia Commonwealth University",
+      "status": "pending"
+    },
+    {
+      "school": "Tulane University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Memphis",
+      "status": "pending"
+    },
+    {
+      "school": "University of Rhode Island",
+      "status": "pending"
+    },
+    {
+      "school": "Wichita State University",
+      "status": "pending"
+    },
+    {
+      "school": "Michigan Technological University",
+      "status": "pending"
+    },
+    {
+      "school": "TTI Chicago",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of Missouri - Kansas City",
+      "status": "pending"
+    },
+    {
+      "school": "University of Louisville",
+      "status": "pending"
+    },
+    {
+      "school": "University of Missouri",
+      "status": "pending"
+    },
+    {
+      "school": "Brandeis University",
+      "status": "pending"
+    },
+    {
+      "school": "University of New Mexico",
+      "status": "pending"
+    },
+    {
+      "school": "Mississippi State University",
+      "status": "pending"
+    },
+    {
+      "school": "Oklahoma State University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Idaho",
+      "status": "pending"
+    },
+    {
+      "school": "University of Massachusetts Boston",
+      "status": "pending"
+    },
+    {
+      "school": "West Virginia University",
+      "status": "pending"
+    },
+    {
+      "school": "Montana State University",
+      "status": "pending"
+    },
+    {
+      "school": "Southern Methodist University",
+      "status": "pending"
+    },
+    {
+      "school": "Western Michigan University",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "Baylor University",
+      "status": "pending"
+    },
+    {
+      "school": "Florida Institute of Technology",
+      "status": "pending"
+    },
+    {
+      "school": "University of Alabama - Huntsville",
+      "status": "pending"
+    },
+    {
+      "school": "University of Denver",
+      "status": "pending"
+    },
+    {
+      "school": "University of Tulsa",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "Air Force Inst. of Technology",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of Wisconsin - Milwaukee",
+      "status": "pending"
+    },
+    {
+      "school": "University of Miami",
+      "status": "pending"
+    },
+    {
+      "school": "University of New Hampshire",
+      "status": "pending"
+    },
+    {
+      "school": "University of New Orleans",
+      "status": "pending"
+    },
+    {
+      "school": "University of Southern Mississippi",
+      "status": "pending"
+    },
+    {
+      "school": "OHSU",
+      "status": "pending"
+    },
+    {
+      "school": "University of Colorado - Denver",
+      "status": "pending"
+    },
+    {
+      "school": "New Mexico Tech",
+      "status": "pending"
+    },
+    {
+      "school": "New York Tech",
+      "status": "audited",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "SIU Carbondale",
+      "status": "pending"
+    },
+    {
+      "school": "University of Alabama - Birmingham",
+      "status": "pending"
+    },
+    {
+      "school": "UNC - Greensboro",
+      "status": "pending"
+    },
+    {
+      "school": "Univ. of Arkansas - Little Rock",
+      "status": "pending"
+    },
+    {
+      "school": "University of Wyoming",
+      "status": "pending"
+    },
+    {
+      "school": "Claremont Graduate University",
+      "status": "pending"
+    },
+    {
+      "school": "North Dakota State University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Maine",
+      "status": "pending"
+    },
+    {
+      "school": "University of Mississippi",
+      "status": "pending"
+    },
+    {
+      "school": "Louisiana Tech University",
+      "status": "pending"
+    },
+    {
+      "school": "Indiana State University",
+      "status": "audited",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "LIU Post",
+      "status": "pending"
+    },
+    {
+      "school": "Kennesaw State University",
+      "status": "pending"
+    },
+    {
+      "school": "Santa Clara University",
+      "status": "pending"
+    },
+    {
+      "school": "University of Michigan-Flint",
+      "status": "pending"
+    }
+  ],
+  "conferences": [
+    {
+      "name": "AAAI",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-ai-2026-10-10.md"
+    },
+    {
+      "name": "ACL",
+      "status": "pending"
+    },
+    {
+      "name": "ASE",
+      "status": "pending"
+    },
+    {
+      "name": "ASPLOS",
+      "status": "partial-statistics-unverified",
+      "evidence": "data-sweep-confs-systems-2026-10-10.md"
+    },
+    {
+      "name": "CAV",
+      "status": "pending"
+    },
+    {
+      "name": "CCS",
+      "status": "pending"
+    },
+    {
+      "name": "CGO",
+      "status": "pending"
+    },
+    {
+      "name": "CHI",
+      "status": "pending"
+    },
+    {
+      "name": "Crypto",
+      "status": "pending"
+    },
+    {
+      "name": "CVPR",
+      "status": "pending"
+    },
+    {
+      "name": "DAC",
+      "status": "pending"
+    },
+    {
+      "name": "EC",
+      "status": "pending"
+    },
+    {
+      "name": "ECCV",
+      "status": "pending"
+    },
+    {
+      "name": "EMNLP",
+      "status": "pending"
+    },
+    {
+      "name": "EMSOFT",
+      "status": "pending"
+    },
+    {
+      "name": "Eurocrypt",
+      "status": "pending"
+    },
+    {
+      "name": "Eurographics",
+      "status": "pending"
+    },
+    {
+      "name": "EuroSys",
+      "status": "partial-statistics-unverified",
+      "evidence": "data-sweep-confs-systems-2026-10-10.md"
+    },
+    {
+      "name": "FAST",
+      "status": "pending"
+    },
+    {
+      "name": "FSE",
+      "status": "pending"
+    },
+    {
+      "name": "HPCA",
+      "status": "pending"
+    },
+    {
+      "name": "ICCAD",
+      "status": "pending"
+    },
+    {
+      "name": "ICCV",
+      "status": "pending"
+    },
+    {
+      "name": "ICDE",
+      "status": "pending"
+    },
+    {
+      "name": "ICFP",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-pl-2026-10-10.md"
+    },
+    {
+      "name": "ICLR",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-ai-2026-10-10.md"
+    },
+    {
+      "name": "ICML",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-ai-2026-10-10.md"
+    },
+    {
+      "name": "ICRA",
+      "status": "pending"
+    },
+    {
+      "name": "ICSE",
+      "status": "pending"
+    },
+    {
+      "name": "IEEE S&P",
+      "status": "pending"
+    },
+    {
+      "name": "IJCAI",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-ai-2026-10-10.md"
+    },
+    {
+      "name": "IMC",
+      "status": "pending"
+    },
+    {
+      "name": "IROS",
+      "status": "pending"
+    },
+    {
+      "name": "ISCA",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-systems-2026-10-10.md"
+    },
+    {
+      "name": "ISSTA",
+      "status": "pending"
+    },
+    {
+      "name": "KDD",
+      "status": "pending"
+    },
+    {
+      "name": "LICS",
+      "status": "pending"
+    },
+    {
+      "name": "MICRO",
+      "status": "pending"
+    },
+    {
+      "name": "MobiCom",
+      "status": "pending"
+    },
+    {
+      "name": "MobiSys",
+      "status": "pending"
+    },
+    {
+      "name": "NAACL",
+      "status": "pending"
+    },
+    {
+      "name": "NDSS",
+      "status": "pending"
+    },
+    {
+      "name": "NeurIPS",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-ai-2026-10-10.md"
+    },
+    {
+      "name": "NSDI",
+      "status": "pending"
+    },
+    {
+      "name": "OOPSLA",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-pl-2026-10-10.md"
+    },
+    {
+      "name": "OSDI",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-systems-2026-10-10.md"
+    },
+    {
+      "name": "PLDI",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-pl-2026-10-10.md"
+    },
+    {
+      "name": "PODS",
+      "status": "pending"
+    },
+    {
+      "name": "POPL",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-pl-2026-10-10.md"
+    },
+    {
+      "name": "RSS",
+      "status": "pending"
+    },
+    {
+      "name": "RTSS",
+      "status": "pending"
+    },
+    {
+      "name": "SC",
+      "status": "pending"
+    },
+    {
+      "name": "SIGCOMM",
+      "status": "pending"
+    },
+    {
+      "name": "SIGCSE TS",
+      "status": "pending"
+    },
+    {
+      "name": "SIGGRAPH",
+      "status": "pending"
+    },
+    {
+      "name": "SIGGRAPH Asia",
+      "status": "pending"
+    },
+    {
+      "name": "SIGIR",
+      "status": "pending"
+    },
+    {
+      "name": "SIGMETRICS",
+      "status": "pending"
+    },
+    {
+      "name": "SIGMOD",
+      "status": "pending"
+    },
+    {
+      "name": "SOSP",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-systems-2026-10-10.md"
+    },
+    {
+      "name": "UbiComp / ISWC",
+      "status": "pending"
+    },
+    {
+      "name": "UIST",
+      "status": "pending"
+    },
+    {
+      "name": "USENIX ATC",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-systems-2026-10-10.md"
+    },
+    {
+      "name": "USENIX Security",
+      "status": "pending"
+    },
+    {
+      "name": "VIS",
+      "status": "pending"
+    },
+    {
+      "name": "VLDB",
+      "status": "pending"
+    },
+    {
+      "name": "VR",
+      "status": "pending"
+    },
+    {
+      "name": "WWW",
+      "status": "pending"
+    },
+    {
+      "name": "AAMAS",
+      "status": "pending"
+    },
+    {
+      "name": "ACM MM",
+      "status": "pending"
+    },
+    {
+      "name": "ACSAC",
+      "status": "pending"
+    },
+    {
+      "name": "AIED",
+      "status": "pending"
+    },
+    {
+      "name": "AISTATS",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-ai-2026-10-10.md"
+    },
+    {
+      "name": "ALENEX",
+      "status": "pending"
+    },
+    {
+      "name": "ASIACRYPT",
+      "status": "pending"
+    },
+    {
+      "name": "ASSETS",
+      "status": "pending"
+    },
+    {
+      "name": "BMVC",
+      "status": "pending"
+    },
+    {
+      "name": "BPM",
+      "status": "pending"
+    },
+    {
+      "name": "CADE",
+      "status": "pending"
+    },
+    {
+      "name": "CAiSE",
+      "status": "pending"
+    },
+    {
+      "name": "CCC",
+      "status": "pending"
+    },
+    {
+      "name": "CHES",
+      "status": "pending"
+    },
+    {
+      "name": "CIDR",
+      "status": "pending"
+    },
+    {
+      "name": "CIKM",
+      "status": "pending"
+    },
+    {
+      "name": "COLT",
+      "status": "pending"
+    },
+    {
+      "name": "CoNEXT",
+      "status": "pending"
+    },
+    {
+      "name": "CP",
+      "status": "pending"
+    },
+    {
+      "name": "CSCW",
+      "status": "pending"
+    },
+    {
+      "name": "CSF",
+      "status": "pending"
+    },
+    {
+      "name": "DIS",
+      "status": "pending"
+    },
+    {
+      "name": "DISC",
+      "status": "pending"
+    },
+    {
+      "name": "DSN",
+      "status": "pending"
+    },
+    {
+      "name": "EACL",
+      "status": "pending"
+    },
+    {
+      "name": "EASE",
+      "status": "pending"
+    },
+    {
+      "name": "ECAI",
+      "status": "pending"
+    },
+    {
+      "name": "ECIR",
+      "status": "pending"
+    },
+    {
+      "name": "ECOOP",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-pl-2026-10-10.md"
+    },
+    {
+      "name": "ER",
+      "status": "pending"
+    },
+    {
+      "name": "ESA",
+      "status": "pending"
+    },
+    {
+      "name": "ESEM",
+      "status": "pending"
+    },
+    {
+      "name": "ESOP",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-pl-2026-10-10.md"
+    },
+    {
+      "name": "ESORICS",
+      "status": "pending"
+    },
+    {
+      "name": "FC",
+      "status": "pending"
+    },
+    {
+      "name": "FOCS",
+      "status": "pending"
+    },
+    {
+      "name": "FOGA",
+      "status": "pending"
+    },
+    {
+      "name": "FPGA",
+      "status": "pending"
+    },
+    {
+      "name": "GD",
+      "status": "pending"
+    },
+    {
+      "name": "GECCO",
+      "status": "pending"
+    },
+    {
+      "name": "HotOS",
+      "status": "pending"
+    },
+    {
+      "name": "ICAPS",
+      "status": "pending"
+    },
+    {
+      "name": "ICDAR",
+      "status": "pending"
+    },
+    {
+      "name": "ICDCS",
+      "status": "pending"
+    },
+    {
+      "name": "ICDM",
+      "status": "pending"
+    },
+    {
+      "name": "ICDT",
+      "status": "pending"
+    },
+    {
+      "name": "ICER",
+      "status": "pending"
+    },
+    {
+      "name": "ICME",
+      "status": "pending"
+    },
+    {
+      "name": "ICS",
+      "status": "pending"
+    },
+    {
+      "name": "ICSA",
+      "status": "pending"
+    },
+    {
+      "name": "ICSOC",
+      "status": "pending"
+    },
+    {
+      "name": "ICWS",
+      "status": "pending"
+    },
+    {
+      "name": "ICWSM",
+      "status": "pending"
+    },
+    {
+      "name": "IJCAR",
+      "status": "pending"
+    },
+    {
+      "name": "INFOCOM",
+      "status": "pending"
+    },
+    {
+      "name": "Interspeech",
+      "status": "pending"
+    },
+    {
+      "name": "IPDPS",
+      "status": "pending"
+    },
+    {
+      "name": "IPSN",
+      "status": "pending"
+    },
+    {
+      "name": "ISLPED",
+      "status": "pending"
+    },
+    {
+      "name": "ISMAR",
+      "status": "pending"
+    },
+    {
+      "name": "ISSRE",
+      "status": "pending"
+    },
+    {
+      "name": "ITC",
+      "status": "pending"
+    },
+    {
+      "name": "ITCS",
+      "status": "pending"
+    },
+    {
+      "name": "IUI",
+      "status": "pending"
+    },
+    {
+      "name": "KR",
+      "status": "pending"
+    },
+    {
+      "name": "LAK",
+      "status": "pending"
+    },
+    {
+      "name": "MICCAI",
+      "status": "pending"
+    },
+    {
+      "name": "Middleware",
+      "status": "pending"
+    },
+    {
+      "name": "MMSys",
+      "status": "pending"
+    },
+    {
+      "name": "MSR",
+      "status": "pending"
+    },
+    {
+      "name": "PerCom",
+      "status": "pending"
+    },
+    {
+      "name": "PETS",
+      "status": "pending"
+    },
+    {
+      "name": "PODC",
+      "status": "pending"
+    },
+    {
+      "name": "PPSN",
+      "status": "pending"
+    },
+    {
+      "name": "RE",
+      "status": "pending"
+    },
+    {
+      "name": "RecSys",
+      "status": "pending"
+    },
+    {
+      "name": "SAT",
+      "status": "pending"
+    },
+    {
+      "name": "SDM",
+      "status": "pending"
+    },
+    {
+      "name": "SEAMS",
+      "status": "pending"
+    },
+    {
+      "name": "SenSys",
+      "status": "pending"
+    },
+    {
+      "name": "SIGSPATIAL",
+      "status": "pending"
+    },
+    {
+      "name": "SODA",
+      "status": "pending"
+    },
+    {
+      "name": "SOUPS",
+      "status": "pending"
+    },
+    {
+      "name": "STACS",
+      "status": "pending"
+    },
+    {
+      "name": "STOC",
+      "status": "pending"
+    },
+    {
+      "name": "TACAS",
+      "status": "pending"
+    },
+    {
+      "name": "UAI",
+      "status": "pending"
+    },
+    {
+      "name": "WACV",
+      "status": "pending"
+    },
+    {
+      "name": "WSDM",
+      "status": "pending"
+    },
+    {
+      "name": "VMCAI",
+      "status": "pending"
+    },
+    {
+      "name": "CPP",
+      "status": "pending"
+    },
+    {
+      "name": "FormaliSE",
+      "status": "pending"
+    },
+    {
+      "name": "NFM",
+      "status": "pending"
+    }
+  ],
+  "awards": [
+    {
+      "id": "nsf-career",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nsf-crii",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nsf-future-core",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nsf-csgrad4us",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nsf-grfp",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "darpa-yfa",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "darpa-open-baa",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "doe-early-career",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "doe-csgf",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "doe-visiting-faculty-program",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "onr-yip",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "onr-cnr-fellows",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "afosr-yip",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "aro-early-career",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "ndseg-fellowship",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "dod-smart-scholarship",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nih-r01-r21-cs",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nasa-nstgro",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nasa-esi-ecf",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "google-phd-fellowship",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "google-research-scholar",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "amazon-research-awards",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "amazon-phd-fellowship",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "meta-phd-fellowship",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "meta-research-awards",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "microsoft-phd-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "microsoft-faculty-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "apple-phd-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "nvidia-graduate-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "nvidia-hardware-grant",
+      "status": "pending"
+    },
+    {
+      "id": "sloan-research-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "packard-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "simons-investigators-cs",
+      "status": "pending"
+    },
+    {
+      "id": "hertz-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "qualcomm-innovation-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "ibm-phd-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "sony-research-award",
+      "status": "pending"
+    },
+    {
+      "id": "adobe-research-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "adobe-data-science-awards",
+      "status": "pending"
+    },
+    {
+      "id": "adobe-women-in-tech",
+      "status": "pending"
+    },
+    {
+      "id": "bloomberg-ds-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "cisco-research-rfps",
+      "status": "pending"
+    },
+    {
+      "id": "bell-labs-prize",
+      "status": "pending"
+    },
+    {
+      "id": "jpmorgan-ai-awards",
+      "status": "pending"
+    },
+    {
+      "id": "intel-faculty-awards",
+      "status": "pending"
+    },
+    {
+      "id": "samsung-gro",
+      "status": "pending"
+    },
+    {
+      "id": "draper-scholar-program",
+      "status": "pending"
+    },
+    {
+      "id": "snap-research-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "symantec-norton-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "cra-undergrad-award",
+      "status": "pending"
+    },
+    {
+      "id": "cra-wp-grad-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "acm-doctoral-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "gem-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "ford-foundation-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "aaas-stpf",
+      "status": "pending"
+    },
+    {
+      "id": "schlumberger-faculty-future",
+      "status": "pending"
+    },
+    {
+      "id": "mozilla-technology-fund",
+      "status": "pending"
+    },
+    {
+      "id": "latticex-foundation-grants",
+      "status": "pending"
+    },
+    {
+      "id": "netapp-faculty-grants",
+      "status": "pending"
+    },
+    {
+      "id": "qualcomm-faculty-awards",
+      "status": "pending"
+    },
+    {
+      "id": "vmware-academic-program",
+      "status": "pending"
+    },
+    {
+      "id": "consumer-reports-digital-lab",
+      "status": "pending"
+    },
+    {
+      "id": "comcast-innovative-research",
+      "status": "pending"
+    },
+    {
+      "id": "att-labs-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "huawei-research-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "xerox-technical-minority",
+      "status": "pending"
+    },
+    {
+      "id": "schmidt-sciences-ai2050",
+      "status": "pending"
+    },
+    {
+      "id": "openai-academic-researcher-grants",
+      "status": "pending"
+    },
+    {
+      "id": "openai-chatgpt-academic-researchers",
+      "status": "pending"
+    },
+    {
+      "id": "anthropic-ai-for-science",
+      "status": "pending"
+    },
+    {
+      "id": "anthropic-fellows-program",
+      "status": "pending"
+    },
+    {
+      "id": "bwf-casi-award",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-satc",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-ai-institutes",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-robotics-frr",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-shf",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-algorithmic-foundations",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-cyber-physical-systems",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-pose",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-reu-sites",
+      "status": "pending"
+    },
+    {
+      "id": "darpa-i2o-open-baa",
+      "status": "pending"
+    },
+    {
+      "id": "darpa-disruptioneering",
+      "status": "pending"
+    },
+    {
+      "id": "darpa-mto-open-baa",
+      "status": "pending"
+    },
+    {
+      "id": "doe-ascr-open-foa",
+      "status": "pending"
+    },
+    {
+      "id": "doe-scidac",
+      "status": "pending"
+    },
+    {
+      "id": "doe-qis-centers",
+      "status": "pending"
+    },
+    {
+      "id": "doe-arpa-e-open",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-cybercorps-sfs",
+      "status": "pending"
+    },
+    {
+      "id": "doe-nnsa-ssgf",
+      "status": "pending"
+    },
+    {
+      "id": "doe-nnsa-lrgf",
+      "status": "pending"
+    },
+    {
+      "id": "msr-ada-lovelace-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "two-sigma-phd-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "jane-street-phd-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "ncwit-collegiate-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-senior-member",
+      "status": "pending"
+    },
+    {
+      "id": "acm-distinguished-member",
+      "status": "pending"
+    },
+    {
+      "id": "acm-fellow",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-senior-member",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-fellow",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-distinguished-contributor",
+      "status": "pending"
+    },
+    {
+      "id": "aaai-senior-member",
+      "status": "pending"
+    },
+    {
+      "id": "aaai-fellow",
+      "status": "pending"
+    },
+    {
+      "id": "siam-fellow",
+      "status": "pending"
+    },
+    {
+      "id": "informs-senior-member",
+      "status": "pending"
+    },
+    {
+      "id": "aaai-acm-sigai-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigcomm-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigsac-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigsoft-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigmod-jim-gray-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigplan-reynolds-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigmetrics-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-w-rising-star",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigsac-early-career",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigmetrics-rising-star",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigcomm-rising-star",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigops-mark-weiser",
+      "status": "pending"
+    },
+    {
+      "id": "acm-ieee-george-michael-hpc-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigkdd-doctoral-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigchi-doctoral-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-siggraph-doctoral-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigmobile-doctoral-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigarch-ieee-tcca-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-prize-in-computing",
+      "status": "pending"
+    },
+    {
+      "id": "acm-grace-murray-hopper-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-athena-lecturer-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-kanellakis-theory-practice-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-karlstrom-educator-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-aaai-allen-newell-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-thacker-breakthrough-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-ieee-ken-kennedy-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-mccluskey-technical-achievement",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-mcdowell-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-harry-goode-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-mary-keller-education-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-tchpc-early-career-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-tcde-rising-star-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-tcse-rising-star-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigir-early-career-researcher",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigmobile-rockstar-award",
+      "status": "pending"
+    },
+    {
+      "id": "cci-tech-transfer-support-fund",
+      "status": "pending"
+    },
+    {
+      "id": "cci-cyber-as-a-service",
+      "status": "pending"
+    },
+    {
+      "id": "cci-catapult-ascend",
+      "status": "pending"
+    },
+    {
+      "id": "cci-experiential-learning",
+      "status": "pending"
+    },
+    {
+      "id": "cci-nova-critical-infrastructure",
+      "status": "pending"
+    },
+    {
+      "id": "vipc-higher-education-proof-of-concept",
+      "status": "pending"
+    },
+    {
+      "id": "nasa-space-grant-consortia",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-epscor-jurisdiction-opportunities",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-epscor-graduate-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-epscor-research-fellows",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-epscor-focused-collaborations",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-epscor-e-rise",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-epscor-e-core",
+      "status": "pending"
+    },
+    {
+      "id": "nasa-epscor-research-r3",
+      "status": "pending"
+    },
+    {
+      "id": "dod-depscor-research-collaboration-2026",
+      "status": "pending"
+    },
+    {
+      "id": "dod-depscor-capacity-building-2026",
+      "status": "pending"
+    },
+    {
+      "id": "doe-epscor-state-lab-partnerships",
+      "status": "pending"
+    },
+    {
+      "id": "usda-afri-fase-epscor",
+      "status": "pending"
+    },
+    {
+      "id": "nih-idea-inbre",
+      "status": "pending"
+    },
+    {
+      "id": "nih-idea-cobre",
+      "status": "pending"
+    },
+    {
+      "id": "dod-durip-2027",
+      "status": "pending"
+    },
+    {
+      "id": "dod-hbcu-tcu-equipment-2027",
+      "status": "pending"
+    },
+    {
+      "id": "google-faculty-research-awards",
+      "status": "pending"
+    },
+    {
+      "id": "yahoo-frep",
+      "status": "pending"
+    },
+    {
+      "id": "hp-labs-innovation-research-program",
+      "status": "pending"
+    },
+    {
+      "id": "microsoft-dissertation-grant",
+      "status": "pending"
+    },
+    {
+      "id": "facebook-emerging-scholar-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-turing-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-software-system-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-gordon-bell-prize",
+      "status": "pending"
+    },
+    {
+      "id": "acm-ieee-eckert-mauchly-award",
+      "status": "pending"
+    },
+    {
+      "id": "knuth-prize",
+      "status": "pending"
+    },
+    {
+      "id": "godel-prize",
+      "status": "pending"
+    },
+    {
+      "id": "imu-abacus-medal",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-john-von-neumann-medal",
+      "status": "pending"
+    },
+    {
+      "id": "google-academic-research-awards",
+      "status": "pending"
+    },
+    {
+      "id": "microsoft-accelerating-foundation-models",
+      "status": "pending"
+    },
+    {
+      "id": "dod-muri",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-mri",
+      "status": "pending"
+    },
+    {
+      "id": "sigbed-early-career",
+      "status": "pending"
+    },
+    {
+      "id": "sigbed-paul-caspi-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "sigcse-early-career",
+      "status": "pending"
+    },
+    {
+      "id": "cohere-labs-catalyst-grants",
+      "status": "pending"
+    },
+    {
+      "id": "guggenheim-fellowship-cs",
+      "status": "pending"
+    },
+    {
+      "id": "macarthur-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "lbnl-alvarez-hopper-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "llnl-lawrence-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-fernbach-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-seymour-cray-award",
+      "status": "pending"
+    },
+    {
+      "id": "amazon-ai-phd-fellowship",
+      "status": "audited-new",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nasa-early-stage-innovations",
+      "status": "audited-new",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    }
+  ],
+  "discovery": {
+    "jobs": "pending",
+    "conferences": "pending",
+    "awards": "pending"
+  },
+  "verification": {
+    "unit": "npm test: passed (16 test files)",
+    "typecheck": "passed",
+    "build": "passed; optional upstream DBLP aliases CSV parse warning; load continues without it",
+    "jobsAwardsBrowser": "15 passed",
+    "conferencesBrowser": "passed; see /tmp/cspicks-sweep-confs-e2e.log",
+    "diffCheck": "passed",
+    "projectSize": "passed"
+  },
+  "capture": {
+    "sessionId": 94786,
+    "manifest": "/tmp/cspicks-full-jobs-capture/manifest.json",
+    "note": "Re-poll process handle before inferring it remains live. Captures are not evidence of completed review."
+  },
+  "discoveriesNote": "Discovery done within reviewed groups only; nationwide and remaining-program/series discovery pending."
+}

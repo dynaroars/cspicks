@@ -9,15 +9,15 @@
       "Faculty"
     ],
     "whoFor": "Untenured Assistant Professors on tenure track",
-    "deadline": "July 22, 2026 at 5:00 PM submitter local time (Annual fourth Wednesday in July; NSF 22-586)",
+    "deadline": "July 28, 2027 at 5:00 PM submitter local time (Annual fourth Wednesday in July; NSF 22-586)",
     "deadlineMonth": 7,
     "amount": "Minimum $400,000 over 5 years (CISE typically funds one month of PI salary/year, one grad student/year, and two trips/year)",
     "summary": "NSF premier early-career award supporting junior faculty who exemplify the role of teacher-scholars through outstanding research, excellent education, and the integration of education and research within the context of the mission of their organizations.",
     "eligibility": [
-      "Hold a doctoral degree in a field supported by NSF",
-      "Tenure-track Assistant Professor (or equivalent) at an eligible US academic institution by submission date",
-      "Untenured as of October 1 following proposal submission",
-      "Maximum of 3 CAREER proposal submissions in lifetime"
+      "Hold a doctoral degree and conduct research in a field supported by NSF",
+      "Hold at least a 50% tenure-track or tenure-track-equivalent assistant professor position at an eligible U.S. institution and be untenured as of the annual deadline",
+      "Have not previously received a CAREER award",
+      "Maximum three reviewed CAREER competitions; one proposal per annual competition; no co-PIs"
     ],
     "topics": [
       "General CS",
@@ -48,9 +48,9 @@
     "amount": "Up to $175,000 over 2 years (while active)",
     "summary": "Enabled early-career CS faculty without prior federal research support to launch independent research programs, fund their first graduate student, and acquire preliminary results to compete for future NSF CAREER and Core awards. Retained here for reference; NSF's own program page lists it as archived with no replacement announced.",
     "eligibility": [
-      "Primary appointment in computer science, information science, or computer engineering in the US",
-      "In first 3 years of tenure-track or equivalent research appointment",
-      "Must NOT have received any prior federal grant as a PI (fellowships/workshops excepted)"
+      "While active: primary appointment in computing at a non-Carnegie R1 institution or eligible nonprofit non-academic institution",
+      "Untenured faculty or research scientist within first three years of primary academic appointment and no more than six years after PhD",
+      "No previous post-PhD federal grant or contract as PI, subject to solicitation exceptions"
     ],
     "topics": [
       "Computer Science",
@@ -74,13 +74,13 @@
       "Faculty"
     ],
     "whoFor": "All CS faculty, research professors, and multi-institution collaborative teams",
-    "deadline": "Target dates: second Thursday in September and first Thursday in February (annual); proposals accepted anytime",
-    "deadlineMonth": 10,
-    "amount": "Dependent on availability of funds; estimated 400–600 awards",
+    "deadline": "February 4, 2027 and September 9, 2027 target dates; proposals accepted anytime (Annual first Thursday in February and second Thursday in September)",
+    "deadlineMonth": 0,
+    "amount": "Up to $1,000,000 over up to 4 years; typical projects $150,000–$250,000/year for 3–4 years",
     "summary": "NSF's current cross-division CISE research solicitation spanning future computing programs such as Algorithmic Foundations, Computer Systems Research, Cyber-Physical Systems, and Software and Hardware Foundations.",
     "eligibility": [
-      "Faculty and researchers at accredited US academic and non-profit research institutions",
-      "Open to all career stages (junior, mid-career, and senior investigators)"
+      "Faculty and researchers at eligible U.S. academic and nonprofit research institutions; all career stages",
+      "A person may serve as PI, co-PI, or Senior/Key Personnel on at most two Future CoRe proposals in any consecutive 12-month period"
     ],
     "topics": [
       "Algorithms",
@@ -105,14 +105,15 @@
       "PhD Students"
     ],
     "whoFor": "Early-career bachelor's degree holders returning to academia to pursue a research-based CISE doctorate",
-    "deadline": "May 30, 2026 at 5:00 PM submitter local time (Annual late May; NSF DCL)",
+    "deadline": "May 31 annually at 11:59 PM ET, including reference letters (NSF 24-033)",
     "deadlineMonth": 5,
     "amount": "$159,000 total: $37,000 annual stipend + $16,000 annual cost-of-education allowance for 3 years",
     "summary": "A two-phase NSF fellowship for early-career professionals with computing experience who want to enter a research-based doctoral program in computer science, computer engineering, or information science.",
     "eligibility": [
-      "US citizens, nationals, or permanent residents",
-      "Bachelor's degree completed before January 1 of the application year",
-      "Must not have enrolled in or applied to a CISE doctoral program"
+      "U.S. citizens, nationals, or permanent residents",
+      "Bachelor’s degree completed before January 1 of application year; demonstrated computing competency; no enrollment in a degree-granting program after January 1 of that year",
+      "Never enrolled in a CISE doctoral program and no pending doctoral application or admission offer",
+      "Complete the mentoring program and be prepared to enroll in a CISE PhD by fall within two years of mentoring acceptance"
     ],
     "topics": [
       "General CS",
@@ -136,15 +137,16 @@
       "Master's Students",
       "Undergraduate Students"
     ],
-    "whoFor": "Undergraduate seniors & 1st/2nd year graduate students",
-    "deadline": "October 20, 2026 (Annual Mid-October; reference letters October 16)",
+    "whoFor": "Undergraduate seniors and eligible first-year graduate students pursuing research-based STEM degrees",
+    "deadline": "October 20, 2026 at 8:00 PM ET for Computer and Information Science and Engineering; reference letters October 16, 2026 at 8:00 PM ET (Annual program; FY2027 competition; NSF 26-526)",
     "deadlineMonth": 10,
     "amount": "$37,000/yr stipend + $16,000 cost-of-education allowance for 3 years ($159,000 total)",
     "summary": "Recognizes and supports outstanding graduate students in NSF-supported STEM disciplines pursuing research-based master's and doctoral degrees. Highly prestigious fellowship offering 3 years of flexible research freedom.",
     "eligibility": [
-      "US Citizens, US Nationals, or Permanent Residents",
-      "Undergraduate seniors or 1st/2nd year graduate students",
-      "Pursuing research-based MS or PhD in STEM fields including Computer Science"
+      "U.S. citizens, nationals, or permanent residents",
+      "Undergraduate seniors, bachelor’s degree holders with no prior graduate enrollment, eligible joint bachelor’s/master’s students, or first-year students in their first graduate degree with less than one academic year completed",
+      "Second-year graduate students are ineligible; graduate applicants may apply once",
+      "Eligible research-based master’s or doctoral program in an NSF-supported STEM field at an accredited nonprofit U.S. institution"
     ],
     "topics": [
       "General CS",
@@ -167,15 +169,15 @@
     "targetAudience": [
       "Faculty"
     ],
-    "whoFor": "Untenured Assistant and Associate Professors in first 3 years of appointment",
-    "deadline": "Executive Summary: October 17, 2025; Full Proposal: December 10, 2025 at 4:00 PM ET (Annual cycle; DARPA-RA-25-01)",
-    "deadlineMonth": 12,
-    "amount": "Up to $500,000 over 24 months + $500,000 Director's Fellowship option (up to $1M total)",
+    "whoFor": "Tenure-track faculty, faculty within three years of tenure, or eligible nonprofit research institution investigators",
+    "deadline": "Executive summary: October 15, 2025 at 4:00 PM ET; full proposal: January 20, 2026 at 4:00 PM ET (Annual program; YFA2026; DARPARA2502 Amendment 5; next cycle not yet confirmed)",
+    "deadlineMonth": 1,
+    "amount": "Up to $500,000 for 24-month base + $500,000 for 12-month Director’s Fellowship option; optional U.S.-person graduate-student support up to $350,000",
     "summary": "Identifies and engages rising stars in junior faculty positions across US academia to expose them to DoD needs and DARPA's high-risk, high-payoff research model in computer science, quantum, autonomy, and microelectronics.",
     "eligibility": [
-      "US academic institutions only",
-      "Assistant or Associate Professors within first 3 years of tenure-track or non-tenured position",
-      "US Citizens, Permanent Residents, or foreign nationals with US university appointment"
+      "All personnel employed at U.S. institutions; PI in tenure-track appointment, within three years of tenure, or nonprofit equivalent within 12 years of doctorate",
+      "Prior funding cannot exceed $500,000 from DARPA or $1,250,000 from all DoD sources as prime or subawardee",
+      "Citizenship and affiliation restrictions apply to key/senior personnel; consult announcement Section IV"
     ],
     "topics": [
       "AI & Autonomy",
@@ -185,7 +187,7 @@
       "Robotics",
       "RF & Photonics"
     ],
-    "url": "https://www.darpa.mil/work-with-us/for-universities/young-faculty-award",
+    "url": "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award",
     "featured": true
   },
   {
@@ -200,7 +202,7 @@
     "whoFor": "University faculty, research labs, and industry consortia",
     "deadline": "Rolling / Year-round submission window per office BAA",
     "deadlineMonth": 0,
-    "amount": "Typically $1,000,000 to $10,000,000+ across multi-year phases",
+    "amount": "Varies by office, research topic and solicitation; consult the specific BAA for award budget and duration",
     "summary": "DARPA technical offices solicit revolutionary research proposals that bridge the gap between fundamental research and groundbreaking national security capabilities in artificial intelligence, software synthesis, and cyber resilience.",
     "eligibility": [
       "Open to university researchers, national labs, non-profits, and industry teams",
@@ -229,12 +231,12 @@
     "whoFor": "Tenure-track Assistant & Associate Professors within 12 years of PhD",
     "deadline": "Pre-application: March 24, 2026 at 5:00 PM ET; Full Proposal: June 2, 2026 at 11:59 PM ET (Annual)",
     "deadlineMonth": 4,
-    "amount": "At least $875,000 over 5 years (university faculty)",
+    "amount": "Approximately $875,000 over 5 years for universities; approximately $2,750,000 over 5 years for DOE laboratories or Office of Science user facilities",
     "summary": "Bolsters the nation's scientific workforce by supporting the exceptional research of rising scientists in programs funded by the DOE Office of Science, notably Advanced Scientific Computing Research (ASCR).",
     "eligibility": [
-      "Untenured, tenure-track Assistant or Associate Professor at an accredited US university",
-      "Within 12 years of PhD receipt",
-      "Primary author and investigator of research proposal"
+      "Untenured tenure-track assistant or associate professor at a U.S. academic institution, or eligible full-time DOE laboratory/user facility employee",
+      "Within 10 years of earning doctorate",
+      "Mandatory pre-application must be encouraged by DOE before full application"
     ],
     "topics": [
       "High Performance Computing (HPC)",
@@ -257,14 +259,14 @@
       "Undergraduate Students"
     ],
     "whoFor": "PhD students using high-performance computing for scientific discovery",
-    "deadline": "January 15, 2026 at 5:00 PM CST (Annual mid-January; reference letters due January 22)",
+    "deadline": "January 7, 2027 (Annual program; 2027–2028 incoming cohort; applications, transcripts, and reference letters due together)",
     "deadlineMonth": 1,
     "amount": "Full tuition & fees, $45,000 annual stipend, $1,000 academic allowance/yr, and 12-week practicum at a DOE national lab",
     "summary": "Trains leaders in high-performance computing, scientific computing, and computational engineering. Fellows complete a fully funded practicum at a DOE national laboratory (e.g. LLNL, ORNL, LBNL, ANL).",
     "eligibility": [
-      "US Citizens or Permanent Residents",
-      "Senior undergraduates or first-year graduate students",
-      "Full-time study toward a PhD in CS, applied mathematics, or computational science"
+      "U.S. citizens or lawful permanent residents planning full-time uninterrupted PhD study at an accredited U.S. university",
+      "Undergraduate seniors, first-year graduate students, employed individuals, and others entering graduate school; current master’s students must start the PhD at a different institution",
+      "Second-year or later graduate students and concurrent professional doctorate students are ineligible"
     ],
     "topics": [
       "High Performance Computing (HPC)",
@@ -286,15 +288,15 @@
       "Faculty"
     ],
     "whoFor": "Full-time faculty at eligible U.S. colleges, universities, and community colleges with limited STEM research infrastructure",
-    "deadline": "Summer 2026 cycle closed; the program is offered annually and the next application schedule has not yet been posted",
-    "deadlineMonth": 0,
+    "deadline": "January 6, 2027 at 5:00 PM ET (Summer 2027; applications open October 14, 2026; DOE labels dates tentative)",
+    "deadlineMonth": 1,
     "amount": "$1,600/week stipend for a 10-week summer appointment, plus travel and housing support",
     "summary": "Places faculty in funded research collaborations with DOE national-laboratory scientists to build research competitiveness and strengthen STEM teaching. Computer and computational sciences are eligible fields.",
     "eligibility": [
-      "Full-time faculty at an eligible U.S. degree-granting college, university, or community college; all HBCUs are eligible",
+      "Full-time STEM faculty at a U.S. degree-granting institution not classified as Carnegie 2025 R1 or R2; all HBCUs eligible regardless of classification",
       "U.S. citizen or lawful permanent resident",
-      "Research must align with a DOE mission area; computer and computational sciences are eligible fields",
-      "Applicant and a DOE laboratory scientist jointly develop the research proposal"
+      "Research proposal co-developed with a host DOE laboratory researcher; computer/computational sciences eligible",
+      "Maximum five applications and five participation terms; Teaching Initiative track requires prior VFP/FaST participation"
     ],
     "topics": [
       "Computational Science",
@@ -315,7 +317,7 @@
       "Faculty"
     ],
     "whoFor": "Early-career faculty in their first or second full-time tenure-track or equivalent appointment",
-    "deadline": "October 30, 2026 at 5:00 PM ET (Annual proposal deadline; FOA N00014-25-S-F003)",
+    "deadline": "October 30, 2026 at 5:00 PM ET (Annual program; FY2027; NOFO N0001426SF004)",
     "deadlineMonth": 10,
     "amount": "Typically $750,000 over 3 years ($250,000/year); up to 25 awards anticipated",
     "summary": "Supports exceptional early-career scientists and engineers conducting innovative basic or applied research aligned with the Department of the Navy's science and technology priorities, including AI, autonomy, cyber, networking, sensing, and quantum technologies.",
@@ -377,7 +379,7 @@
       "Faculty"
     ],
     "whoFor": "Early-career scientists and engineers at eligible academic, industry, or nonprofit research organizations",
-    "deadline": "White paper: October 9, 2026; Full proposal: December 4, 2026 at 11:59 PM ET (Annual; FOA-AFRL-AFOSR-2026-0002)",
+    "deadline": "Required white paper: October 9, 2026 at 11:59 PM ET; Full proposal: December 4, 2026 at 11:59 PM ET (Annual program; FY2027; FA955026S0003)",
     "deadlineMonth": 12,
     "amount": "Up to $450,000 over 3 years ($150,000/year)",
     "summary": "Fosters creative basic research in science and engineering, enhances early-career development of outstanding young investigators, and increases engagement with Air Force and Space Force mission challenges. White papers are required before full proposals.",
@@ -407,14 +409,14 @@
     "targetAudience": [
       "Faculty"
     ],
-    "whoFor": "Tenure-track faculty within 5 years of PhD or academic appointment",
+    "whoFor": "Early-career faculty with fewer than five years in a tenure-track or eligible equivalent appointment",
     "deadline": "Rolling under core ARO BAA (Annual review)",
     "deadlineMonth": 0,
     "amount": "Up to $360,000 over 3 years ($120,000/year)",
     "summary": "Supports junior faculty researchers focusing on fundamental basic research in computing, networking, cybersecurity, distributed systems, and multi-agent AI relevant to future defense needs.",
     "eligibility": [
-      "Tenure-track faculty at accredited US universities",
-      "Within 5 years of receiving doctorate or holding academic faculty appointment"
+      "U.S. citizens, U.S. nationals, or lawful permanent residents",
+      "Held a tenure-track position at a U.S. institution of higher education for fewer than five years at application; equivalent appointments require institutional confirmation of consideration for permanent appointment"
     ],
     "topics": [
       "Information Networks",
@@ -439,12 +441,13 @@
     "whoFor": "PhD students pursuing research of interest to DoD defense laboratories",
     "deadline": "October 30, 2026 at 5:00 PM ET (FY2027 application period August 3 through October 30, 2026)",
     "deadlineMonth": 10,
-    "amount": "Full tuition and mandatory fees, $43,200 annual stipend, and up to $1,400/yr health insurance for 3 years",
+    "amount": "Full tuition and mandatory fees, $43,200 annual stipend for 3 years, institutional health insurance up to $1,600, and up to $5,000 total professional development travel",
     "summary": "Awarded by the Air Force Office of Scientific Research, Army Research Office, and Office of Naval Research to increase the number of US citizens trained in science and engineering disciplines of military importance.",
     "eligibility": [
-      "US Citizens and US Nationals only",
-      "Undergraduate seniors or first/second-year doctoral students",
-      "Pursuing doctoral degrees in CS, electrical engineering, cognitive science, or related fields"
+      "U.S. citizens, dual citizens, or U.S. nationals; permanent residents are ineligible",
+      "Bachelor’s degree received by the fellowship application year; applying to, accepted to, or enrolled near the beginning of graduate study at an accredited U.S. institution",
+      "At least three years remaining in graduate degree at application",
+      "Research aligned with a specific DoD BAA topic"
     ],
     "topics": [
       "AI/ML",
@@ -460,8 +463,8 @@
   {
     "id": "dod-smart-scholarship",
     "name": "Science, Mathematics, and Research for Transformation (SMART) Scholarship",
-    "shortName": "DoD SMART Scholarship",
-    "sponsor": "Department of Defense (DoD)",
+    "shortName": "SMART Scholarship",
+    "sponsor": "Department of War (DoW)",
     "sponsorCategory": "Government",
     "targetAudience": [
       "Undergraduate Students",
@@ -469,15 +472,15 @@
       "PhD Students"
     ],
     "whoFor": "Undergraduate, Master's, and PhD students in defense-critical STEM fields",
-    "deadline": "December 5, 2025 at 5:00 PM EST (Annual first Friday of December; opens August 1)",
+    "deadline": "December 4, 2026 at 5:00 PM EST (Annual first Friday in December; opens August 1; supporting references due simultaneously)",
     "deadlineMonth": 12,
-    "amount": "Full tuition, $30,000–$46,000 annual stipend, health insurance, paid summer internships, and guaranteed civilian DoD employment upon graduation",
-    "summary": "The SMART Scholarship-for-Service Program provides full tuition, annual stipends, and post-graduation civilian employment at DoD laboratories and research centers across the US.",
+    "amount": "Full tuition, $30,000–$46,000 annual stipend, health and book allowances, summer internships, and post-graduation civilian employment",
+    "summary": "The SMART Scholarship-for-Service Program supports bachelor’s, master’s and doctoral STEM students with tuition, stipends, summer internships and post-graduation civilian employment in the Department of War. Each funded academic year creates a one-year service commitment.",
     "eligibility": [
-      "US Citizens only",
-      "Cumulative GPA of 3.0 or higher",
-      "Undergraduate or graduate student in approved STEM major",
-      "Ability to obtain security clearance and commit to post-graduation DoD civilian service"
+      "Citizen of the United States, Australia, Canada, New Zealand or United Kingdom",
+      "Age 18 or older by January 1, 2028; cumulative GPA at least 3.0/4.0",
+      "Enrolled or planning enrollment at a regionally accredited U.S. college/university for fall 2027 in an eligible STEM degree; requesting 1–5 years funding",
+      "Able to obtain and maintain security clearance; accept one year civilian DoW service per funded academic year and required summer internships"
     ],
     "topics": [
       "Cybersecurity",
@@ -500,13 +503,13 @@
       "Faculty"
     ],
     "whoFor": "CS faculty working on computational biology, medical AI, bioinformatics, and health informatics",
-    "deadline": "February, June, October (Standard NIH 3-cycle review)",
+    "deadline": "New R01: February 5, June 5, October 5; new R21: February 16, June 16, October 16 (5:00 PM applicant organization local time; standard dates only when the NOFO specifies them; weekend/holiday adjustments apply)",
     "deadlineMonth": 2,
-    "amount": "R21: Up to $275,000 over 2 years; R01: $1,250,000 to $2,500,000+ over 5 years",
+    "amount": "R21: up to $275,000 direct costs over 2 years, with no more than $200,000 in one year; R01: budget reflects project needs, generally up to 5 budget periods; opportunity-specific limits apply",
     "summary": "Major NIH funding mechanisms (via NLM, NCI, NHGRI, and BRAIN Initiative) for CS and AI researchers applying machine learning, computer vision, algorithms, and data science to human health, genomics, and neuroscience.",
     "eligibility": [
-      "Open to all university faculty and principal investigators",
-      "Early Stage Investigator (ESI) status provides favorable R01 paylines for investigators within 10 years of PhD"
+      "Eligible investigators and organizations must meet the chosen NOFO and participating institute requirements",
+      "ESI status requires terminal research degree or completion of postgraduate clinical training, whichever later, within 10 years and no prior substantial NIH independent research award; extensions may apply"
     ],
     "topics": [
       "Medical AI",
@@ -530,14 +533,15 @@
       "Master's Students"
     ],
     "whoFor": "Graduate students conducting research on space computing, autonomy, and technology",
-    "deadline": "October 31, 2025 at 6:00 PM ET (Annual late October; 80HQTR25NOA01-25NSTGRO_A1)",
-    "deadlineMonth": 10,
-    "amount": "Up to $84,000/year (stipend, tuition allowance, health insurance, and NASA center research allowance)",
+    "deadline": "January 29, 2026 at 6:00 PM ET; recommendation letters February 3, 2026 at 6:00 PM ET (Annual program; NSTGRO26; next cycle not yet announced)",
+    "deadlineMonth": 1,
+    "amount": "Up to $84,000/year, renewed subject to progress and funding; up to 4 years total support",
     "summary": "Sponsored by NASA's Space Technology Mission Directorate (STMD), this fellowship funds graduate research in space-relevant computer systems, autonomous robotics, fault-tolerant computing, and onboard AI.",
     "eligibility": [
-      "US Citizens only",
-      "Enrolled in or accepted to an accredited US graduate program",
-      "Research aligned with NASA space technology focus areas"
+      "U.S. citizen, national or permanent resident at proposal submission",
+      "Bachelor’s degree before fall 2026 and full-time master’s/doctoral enrollment at proposing accredited U.S. university in fall 2026",
+      "University advisor is PI and authorized organization representative submits; applicant meets one of the appendix eligibility profiles",
+      "Master’s support needed through fall 2027 or doctoral support through summer 2028; no professional/PhD dual-degree programs"
     ],
     "topics": [
       "Robotics",
@@ -547,27 +551,26 @@
       "Computer Vision",
       "Embedded Systems"
     ],
-    "url": "https://www.nasa.gov/directorates/stmd/strg/nstgro/",
+    "url": "https://www.nasa.gov/nasa-space-technology-graduate-research-opportunities-nstgro/",
     "featured": false
   },
   {
     "id": "nasa-esi-ecf",
-    "name": "NASA Early Career Faculty (ECF) & Early Stage Innovations (ESI)",
+    "name": "NASA Early Career Faculty (ECF)",
     "shortName": "NASA Early Career Faculty",
     "sponsor": "NASA Space Technology Mission Directorate",
     "sponsorCategory": "Government",
     "targetAudience": [
       "Faculty"
     ],
-    "whoFor": "Untenured Assistant Professors in space computing and robotics",
-    "deadline": "March / April (Annual SpaceTech call)",
-    "deadlineMonth": 3,
-    "amount": "Up to $650,000 over 3 years ($200,000/yr base)",
-    "summary": "Challenges early-career university faculty to examine the theoretical and practical feasibility of bold, high-risk space computing, autonomous navigation, and radiation-hardened architectures.",
+    "whoFor": "Early-career faculty at accredited U.S. universities",
+    "deadline": "July 10, 2025 (Annual program; ECF25 full proposal; notice of intent June 10, 2025; next call not yet announced)",
+    "deadlineMonth": 7,
+    "amount": "Up to $600,000 over 3 years, with no more than $200,000 in any year",
+    "summary": "Supports outstanding early-career faculty conducting innovative low technology-readiness research in specific NASA space technology topics. Awards are made to accredited U.S. universities under the ECF appendix to SpaceTech-REDDI.",
     "eligibility": [
-      "Untenured Assistant Professor at accredited US university",
-      "US Citizens or Permanent Residents preferred",
-      "Proposals must target specific NASA SpaceTech topics"
+      "Accredited U.S. university applies on behalf of an eligible early-career faculty researcher",
+      "Proposal must address the specific ECF appendix topics and satisfy its appointment and other eligibility rules"
     ],
     "topics": [
       "Robotics & Autonomous Navigation",
@@ -575,7 +578,7 @@
       "Computer Vision for Space",
       "Radiation-Tolerant Architectures"
     ],
-    "url": "https://www.nasa.gov/directorates/stmd/early-career-faculty/",
+    "url": "https://www.nasa.gov/early-career-faculty-ecf/",
     "featured": false
   },
   {
@@ -590,12 +593,12 @@
     "whoFor": "Outstanding PhD students in CS and related areas (University nominated)",
     "deadline": "April 30, 2026 (Annual Spring university nomination window; typically late April / early May)",
     "deadlineMonth": 4,
-    "amount": "Full tuition and fees for up to 3 years + $40,000–$50,000/yr stipend + Google Research mentor",
+    "amount": "U.S./Canada: $85,000/year for up to 2 years toward education costs, living expenses, travel and equipment; benefits vary by region",
     "summary": "Google PhD Fellowships directly support graduate students doing exceptional research in computer science and adjacent fields. Selected fellows are paired with a Google Research Mentor.",
     "eligibility": [
-      "Full-time PhD students enrolled at participating universities",
-      "Nomination submitted by university department",
-      "Research focus in algorithms, machine learning, systems, NLP, perception, security"
+      "University nomination required; direct student applications not accepted",
+      "Full-time PhD enrollment throughout fellowship; U.S./Canada nominees must complete graduate coursework before award year",
+      "No comparable industry fellowship; prior Google PhD fellows and Google employees or their households are ineligible"
     ],
     "topics": [
       "AI/ML",
@@ -607,7 +610,7 @@
       "Security & Privacy",
       "HCI"
     ],
-    "url": "https://research.google/outreach/phd-fellowship/",
+    "url": "https://research.google/programs-and-events/phd-fellowship/",
     "featured": true
   },
   {
@@ -638,7 +641,7 @@
       "Natural Language Processing",
       "Quantum"
     ],
-    "url": "https://research.google/outreach/research-scholar-program/",
+    "url": "https://research.google/programs-and-events/frequently-asked-questions/",
     "featured": true
   },
   {
@@ -653,7 +656,7 @@
     "whoFor": "Full-time faculty members and university research scientists",
     "deadline": "November 4, 2026 (Fall 2026 cycle; prior: May 13, 2026 Spring, November 12, 2025 Fall)",
     "deadlineMonth": 11,
-    "amount": "Up to $80,000–$100,000 unrestricted cash gift + up to $40,000 in AWS promotional credits",
+    "amount": "Track-specific unrestricted gifts and AWS credits; Fall 2026 examples: Agentic AI averages no more than $70,000 cash + $50,000 credits; Automated Reasoning up to $80,000 cash + $40,000 credits",
     "summary": "Provides unrestricted gifts and AWS compute credits to academic researchers. Fall 2026 tracks: Agentic AI, AI for Information Security, Amazon Security, Automated Reasoning, AWS Cryptography, Build on Trainium, Multilingual and Contextual AI Evaluation, On-Device Multimodal Perception, and Synthetic Data Generation for Multimodal Perception.",
     "eligibility": [
       "Full-time faculty member at an accredited academic institution",
@@ -713,10 +716,10 @@
       "PhD Students"
     ],
     "whoFor": "Full-time PhD students in computer science and engineering worldwide",
-    "deadline": "September 20, 2026 (Annual September 20 at 11:59 PM PDT; reference letters October 6)",
-    "deadlineMonth": 9,
-    "amount": "Tuition and fees paid for up to 2 years + $42,000 annual living stipend + conference travel support ($5,000)",
-    "summary": "Supports promising doctoral students engaged in innovative and relevant research across computing disciplines including AI, AR/VR, database systems, networking, security, and hardware.",
+    "deadline": "Historical fellowship (2013–2023 recipients shown); Meta is not accepting new applications as of October 10, 2026",
+    "deadlineMonth": 0,
+    "amount": "Historical fellowship benefits; no current award amount announced",
+    "summary": "Historical Meta/Facebook fellowship supporting doctoral computing research. Meta’s current fellows archive lists prior recipients and states that new applications are not being accepted.",
     "eligibility": [
       "Enrolled full-time in a PhD program at an accredited university worldwide",
       "Research aligned with Meta Research focus areas",
@@ -731,8 +734,9 @@
       "Security & Privacy",
       "Networking"
     ],
-    "url": "https://research.facebook.com/fellowship/",
-    "featured": true
+    "url": "https://research.facebook.com/fellows/",
+    "featured": false,
+    "status": "historical"
   },
   {
     "id": "meta-research-awards",
@@ -744,14 +748,13 @@
       "Faculty"
     ],
     "whoFor": "Faculty and principal investigators worldwide responding to focused thematic RFPs",
-    "deadline": "Inactive / Historical (archived RFP program)",
+    "deadline": "Historical RFP archive (2020–2023 calls shown); no current open call confirmed as of October 10, 2026",
     "deadlineMonth": 0,
     "amount": "Varied by call; awards were generally unrestricted university gifts",
     "summary": "Historical Meta/Facebook Research umbrella for focused faculty calls in AI, systems, security, networking, data management, and AR/VR. Retained as a record of a once-important industry funding route; no current open call is represented by this entry.",
     "eligibility": [
-      "Open to university faculty and accredited research institutions worldwide",
-      "Short proposal submitted directly in response to specific RFP topics",
-      "All funded research is open and published publicly"
+      "Historical calls generally required current full-time faculty at accredited institutions awarding research PhDs; applicant PI on resulting award",
+      "Each call had its own rules and applicable U.S./international legal restrictions"
     ],
     "topics": [
       "AI Safety & Security",
@@ -6038,6 +6041,63 @@
       "Architecture"
     ],
     "url": "https://www.computer.org/volunteering/awards/cray",
+    "featured": false
+  },
+  {
+    "id": "amazon-ai-phd-fellowship",
+    "name": "Amazon AI PhD Fellowship Program",
+    "shortName": "Amazon AI PhD Fellowship",
+    "sponsor": "Amazon",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "PhD students selected by nine participating U.S. universities",
+    "deadline": "University selection for academic years 2025–2026 and 2026–2027; no public application deadline announced",
+    "deadlineMonth": 0,
+    "amount": "Two years of tuition, stipend and fee support plus shared AWS cloud credits; individual amount varies by university",
+    "summary": "Supports doctoral research in machine learning, computer vision, natural-language processing, agentic systems and related practical AI research. Fellows work with an Amazon scientific mentor.",
+    "eligibility": [
+      "Selected by Carnegie Mellon, Johns Hopkins, MIT, Stanford, UC Berkeley, UCLA, UIUC, UT Austin or University of Washington",
+      "Research aligned with practical AI disciplines; university selection process applies"
+    ],
+    "topics": [
+      "AI/ML",
+      "Computer Vision",
+      "Natural Language Processing",
+      "Agentic AI",
+      "Automated Reasoning"
+    ],
+    "url": "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program",
+    "featured": false
+  },
+  {
+    "id": "nasa-early-stage-innovations",
+    "name": "NASA Early Stage Innovations (ESI26)",
+    "shortName": "NASA ESI",
+    "sponsor": "NASA Research and Technology Mission Directorate",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Tenured or tenure-track faculty at U.S. institutions of higher education",
+    "deadline": "Mandatory preliminary proposal: August 13, 2026 at 5:00 PM ET; invited full proposal: December 16, 2026 at 5:00 PM ET (ESI26; full proposals by invitation only)",
+    "deadlineMonth": 12,
+    "amount": "Up to $750,000 over 3 years, no more than $250,000/year",
+    "summary": "Supports early-stage space technology research, including scientific machine learning, autonomous manufacturing, spacecraft navigation and robotic construction for lunar/Martian power systems. ESI26 uses mandatory preliminary proposals and invited full proposals.",
+    "eligibility": [
+      "U.S. institution of higher education; PI tenured or tenure-track at proposing institution",
+      "At most three proposals per PI/co-PI/co-investigator; at least 50% budget to proposing institution and at least 70% to U.S. institutions of higher education",
+      "Teaming restrictions apply; NASA Centers and JPL cannot collaborate"
+    ],
+    "topics": [
+      "AI/ML",
+      "Computational Science",
+      "Autonomous Systems",
+      "Robotics",
+      "Spacecraft Navigation"
+    ],
+    "url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26ESI_B2",
     "featured": false
   }
 ]
