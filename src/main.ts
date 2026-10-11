@@ -5,8 +5,7 @@ import { initAnalysis, refreshAnalysis, setAnalysisTarget } from './analysis.js'
 import { areaLabels, cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
 import { renderProfessorCard as renderProfessorCardView, renderSchoolCard as renderSchoolCardView } from './search-cards.js';
-import { clearSearchSections, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
-import { createDblpAuthorSearch } from './dblp-search-ui.js';
+import { clearSearchSections, createDblpAuthorSearch, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
 import { activeComparisonType, hideComparison, initComparison, isComparing, renderComparison, resolveComparison } from './comparison.js';
 import { createSearchSuggestionBox } from './search-suggestions.js';
 import { initTooltipPositioning } from './tooltip-position.js';

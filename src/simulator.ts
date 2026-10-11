@@ -1,19 +1,18 @@
-import { loadData, getConferenceAreaMap, publicationMatchesConferenceSet, DEFAULT_END_YEAR } from './data.js';
-import { createFilterBar } from './filters.js';
-import { areaLabels, cleanName, escapeHtml } from './shared.js';
-import { searchAuthor, fetchAuthorStats, parseDblpProfileUrl } from './dblp.js';
-import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from './simulation.js';
-import { calculatePerCapita } from './metrics.js';
+import { trackView } from './analytics.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
-import { initTooltipPositioning } from './tooltip-position.js';
+import { DEFAULT_END_YEAR, getConferenceAreaMap, loadData, publicationMatchesConferenceSet } from './data.js';
+import { fetchAuthorStats, parseDblpProfileUrl, searchAuthor } from './dblp.js';
+import { createFilterBar } from './filters.js';
+import { calculatePerCapita } from './metrics.js';
 import { wireSearchInput } from './search-controls.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
-import { trackView } from './analytics.js';
-import { performCandidatesAnalysis } from './simulator/candidate-analysis.js';
-import { renderCandidateResults } from './simulator/candidate-results.js';
+import { areaLabels, cleanName, escapeHtml } from './shared.js';
+import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from './simulation.js';
+import { initTooltipPositioning } from './tooltip-position.js';
 import type { DblpAuthorResult } from './dblp.js';
 import type { FilterController } from './filters.js';
-import type { FilteredData, FilteredSchool, RawData } from './types.js';
+import type { SimulationAreaDelta } from './simulation.js';
+import type { AreaStats, FilteredData, FilteredSchool, RawData } from './types.js';
 
 let rawData: RawData = null!;
 let appData: FilteredData = { professors: {}, schools: {} };
@@ -426,3 +425,458 @@ async function init() {
 }
 
 init();
+
+export async function performCandidatesAnalysis(
+  selectedUniv: FilteredSchool,
+  uniqueNames: string[],
+  { filters, selectedDblpProfiles, appData }: {
+    filters: FilterController;
+    selectedDblpProfiles: Map<string, DblpAuthorResult>;
+    appData: FilteredData;
+  }
+) {
+  const candidateResults: CandidateResult[] = [];
+
+  const confMap = getConferenceAreaMap(filters.confSet);
+
+  for (const name of uniqueNames) {
+    try {
+      const selectedDblpProfile = selectedDblpProfiles.get(name.toLowerCase());
+      let profData = null;
+      if (!selectedDblpProfile && appData.professors[name]) {
+        profData = appData.professors[name];
+      } else if (!selectedDblpProfile) {
+        const targetFacultyNames = new Set<string>();
+        Object.values(selectedUniv.areas).forEach(a => a.faculty.forEach(f => targetFacultyNames.add(f)));
+        for (const fName of targetFacultyNames) {
+          if (fuzzyMatch(fName, name)) {
+            profData = appData.professors[fName];
+            break;
+          }
+        }
+        if (!profData) {
+          for (const pName of Object.keys(appData.professors)) {
+            const lastName = name.split(' ').pop()?.toLowerCase() || '';
+            if (!pName.toLowerCase().includes(lastName) &&
+              Math.abs(pName.length - name.length) > 3) continue;
+
+            if (fuzzyMatch(pName, name)) {
+              profData = appData.professors[pName];
+              break;
+            }
+          }
+        }
+      }
+
+      let stats: CandidateStats;
+      let displayName = name;
+      let usedCSRankings = false;
+
+      if (profData && profData.pubs && profData.pubs.length > 0) {
+        // Use CSRankings data for existing professors
+        displayName = cleanName(profData.name);
+
+        // Filter pubs by year range AND conference set
+        const yearFiltered = profData.pubs.filter(p => p.year >= filters.startYear && p.year <= filters.endYear);
+
+        const confFilteredPubs = yearFiltered.filter(p => publicationMatchesConferenceSet(p, filters.confSet));
+
+        console.log('CSRankings match for:', name, '→', profData.name, 'pubs:', profData.pubs.length, 'filtered:', confFilteredPubs.length);
+
+        if (confFilteredPubs.length === 0) {
+          // No papers in this year range/conf set - show as such
+          candidateResults.push({ name: displayName, error: `No publication records found in ${filters.startYear}–${filters.endYear} for the active conference set` });
+          continue;
+        }
+
+        usedCSRankings = true;
+
+        stats = {
+          totalAdjusted: 0,
+          totalPapers: 0,
+          areas: {},
+          papers: []
+        };
+
+        confFilteredPubs.forEach(pub => {
+          const area = confMap[pub.area] || pub.area;
+
+          stats.totalAdjusted += pub.adjustedcount;
+          stats.totalPapers += pub.count;
+
+          if (!stats.areas[area]) {
+            stats.areas[area] = { count: 0, adjusted: 0 };
+          }
+          stats.areas[area].count += pub.count;
+          stats.areas[area].adjusted += pub.adjustedcount;
+
+          stats.papers.push({
+            title: `${area.toUpperCase()} publication`,
+            venue: pub.area.toUpperCase(),
+            year: pub.year,
+            count: pub.count,
+            adjusted: pub.adjustedcount,
+            area: area
+          });
+        });
+
+        stats.papers.sort((a, b) => b.year - a.year);
+      } else {
+        // External candidate - query DBLP
+
+        const linkedProfile = parseDblpProfileUrl(name);
+        if (!linkedProfile && /^https?:\/\//i.test(name)) {
+          candidateResults.push({ name, error: 'Use a DBLP author-profile link containing /pid/, such as https://dblp.org/pid/12/3456.html' });
+          continue;
+        }
+
+        let searchName = name;
+        let dblpSuffix = null;
+        const suffixMatch = name.match(/^(.+?)\s+(\d{4})$/);
+        if (suffixMatch) {
+          searchName = suffixMatch[1]!;
+          dblpSuffix = suffixMatch[2]!;
+        }
+
+        let best: DblpAuthorResult | (NonNullable<typeof linkedProfile> & { name?: string }) | undefined = linkedProfile || selectedDblpProfile;
+        if (!best) {
+          const searchResults = await searchAuthor(searchName);
+          if (dblpSuffix) {
+            const numSuffix = parseInt(dblpSuffix, 10);
+            best = searchResults.find(r => {
+              if (numSuffix === 0) {
+                return !r.pid.includes('-');
+              }
+              return r.pid.endsWith(`-${numSuffix}`);
+            });
+            if (!best) {
+              best = searchResults.find(r =>
+                r.name.includes(dblpSuffix) || r.name.endsWith(dblpSuffix)
+              );
+            }
+            if (!best) best = searchResults[0];
+          } else {
+            best = searchResults[0];
+          }
+        }
+
+        if (!best) {
+          candidateResults.push({ name, error: 'No matching profile found in the faculty roster or DBLP search' });
+          continue;
+        }
+
+        displayName = best.name || `DBLP profile ${best.pid}`;
+
+        const fetchedStats = await fetchAuthorStats(best.pid, filters.startYear, filters.endYear, filters.confSet);
+        if (!fetchedStats) {
+          candidateResults.push({ name, error: 'We couldn\'t retrieve publication records from DBLP. Please verify the profile is accessible.' });
+          continue;
+        }
+        stats = fetchedStats;
+        if (!best.name && stats.aliases?.length) displayName = stats.aliases[0]!;
+      }
+
+      let sourceSchool = null;
+      let isRemovalMode = false;
+      // The roster spelling being removed (target school if isRemovalMode, or
+      // sourceSchool on a transfer) — needed under Per capita so the
+      // hypothetical faculty count drops by exactly this one entry.
+      let matchedFacultyName = null;
+
+      // Get all name variants to check (includes DBLP aliases)
+      const namesToCheck = [displayName];
+      if (stats.aliases && stats.aliases.length > 0) {
+        stats.aliases.forEach(alias => {
+          if (!namesToCheck.includes(alias)) namesToCheck.push(alias);
+        });
+      }
+
+      const targetFaculty = new Set<string>();
+      Object.values(selectedUniv.areas).forEach(a => a.faculty.forEach(f => targetFaculty.add(f)));
+
+      // Check if any alias matches target school faculty
+      outerRemoval:
+      for (const nameVariant of namesToCheck) {
+        for (const f of targetFaculty) {
+          if (fuzzyMatch(f, nameVariant)) {
+            isRemovalMode = true;
+            matchedFacultyName = f;
+            break outerRemoval;
+          }
+        }
+      }
+
+      // Check if any alias matches another school's faculty (transfer mode)
+      if (!isRemovalMode) {
+        outerSource:
+        for (const s of Object.values(appData.schools)) {
+          if (s.name === selectedUniv.name) continue;
+          const sFaculty = new Set<string>();
+          Object.values(s.areas).forEach(a => a.faculty.forEach(f => sFaculty.add(f)));
+
+          for (const nameVariant of namesToCheck) {
+            for (const f of sFaculty) {
+              if (fuzzyMatch(f, nameVariant)) {
+                sourceSchool = s;
+                matchedFacultyName = f;
+                break outerSource;
+              }
+            }
+          }
+        }
+      }
+
+      const ops = [];
+      if (isRemovalMode) {
+        ops.push({ school: selectedUniv, stats, isRemoval: true, facultyKey: matchedFacultyName || undefined });
+      } else {
+        ops.push({ school: selectedUniv, stats, isRemoval: false, facultyKey: displayName });
+      }
+
+      if (sourceSchool && !isRemovalMode) {
+        ops.push({ school: sourceSchool, stats, isRemoval: true, facultyKey: matchedFacultyName || undefined });
+      }
+      const impactMap = calculateRankImpact(appData.schools, ops, { perCapita: filters.perCapita });
+      const targetImpact = impactMap.get(selectedUniv.name) || { overall: 0, areas: {}, rankBefore: selectedUniv.rank, rankAfter: selectedUniv.rank };
+      const rankDelta = targetImpact.overall;
+      const areaDeltas = targetImpact.areas;
+      const sourceImpactEntry = sourceSchool ? impactMap.get(sourceSchool.name) : null;
+      const sourceImpact = sourceImpactEntry ? sourceImpactEntry.overall : null;
+
+      candidateResults.push({
+        name: displayName,
+        stats,
+        rankDelta,
+        currentRank: targetImpact.rankBefore,
+        newRank: targetImpact.rankAfter,
+        areaDeltas,
+        isRemoval: isRemovalMode,
+        usedCSRankings: usedCSRankings,
+        sourceSchool: sourceSchool ? { name: sourceSchool.name, delta: sourceImpact } : null,
+        error: null
+      });
+    } catch (err) {
+      console.error('Simulator error for:', name, err);
+      const error = err instanceof Error ? err : new Error(String(err));
+      console.error('Stack:', error.stack);
+      candidateResults.push({ name, error: `An unexpected error occurred while retrieving data: ${error.message}. Please try again.` });
+    }
+  }
+
+  candidateResults.sort((a, b) => {
+    if (a.error && !b.error) return 1;
+    if (!a.error && b.error) return -1;
+    // Sort by impact descending
+    return Math.abs(b.rankDelta || 0) - Math.abs(a.rankDelta || 0);
+  });
+
+  return candidateResults;
+}
+
+type AreaDelta = SimulationAreaDelta;
+
+interface CandidateResultBase {
+  name: string;
+  rankDelta?: number | null;
+  currentRank?: number | null;
+  newRank?: number | null;
+  areaDeltas?: Record<string, AreaDelta>;
+  isRemoval?: boolean;
+  usedCSRankings?: boolean;
+  sourceSchool?: { name: string, delta: number | null } | null;
+}
+
+interface CandidateFailure extends CandidateResultBase {
+  error: string;
+  stats?: never;
+}
+
+interface CandidateSuccess extends CandidateResultBase {
+  error?: null;
+  stats: CandidateStats;
+}
+
+export type CandidateResult = CandidateFailure | CandidateSuccess;
+
+export interface CandidateStats {
+  totalAdjusted: number;
+  totalPapers: number;
+  totalDblpPublications?: number;
+  areas: Record<string, AreaStats>;
+  papers: Array<{
+    title?: string | null;
+    venue: string;
+    year: number;
+    count?: number;
+    adjusted: number;
+    area?: string;
+  }>;
+  aliases?: string[];
+}
+
+// Under Per capita, a department can sit on either side of the 5-faculty
+// minimum before or after the hypothetical change, so either rank can be
+// unavailable rather than a number — shown plainly instead of guessed at.
+function rankMoveLabel(before: number | null | undefined, after: number | null | undefined, deltaText: string) {
+  const label = (rank: number | null | undefined) => rank == null ? 'not ranked' : `#${rank}`;
+  return `${label(before)} → ${label(after)} (${deltaText})`;
+}
+
+export function renderCandidateResults(candidates: CandidateResult[]) {
+  const medals = ['🥇', '🥈', '🥉'];
+
+  return candidates.map((c, i) => {
+    if (!c.stats) {
+      return `
+        <div class="candidate-card">
+          <div class="candidate-header">
+            <span class="candidate-medal">❌</span>
+            <div class="candidate-info">
+              <div class="candidate-name">${escapeHtml(c.name)}</div>
+              <div class="candidate-stats candidate-stats-error">${escapeHtml(c.error)}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    const stats = c.stats;
+
+    const medal = i < 3 ? medals[i] : `#${i + 1}`;
+    const deltaClass = c.rankDelta == null ? 'neutral' : c.rankDelta > 0 ? 'positive' : (c.rankDelta < 0 ? 'negative' : 'neutral');
+    const deltaText = c.rankDelta == null ? 'n/a' : c.rankDelta > 0 ? `+${c.rankDelta}` : (c.rankDelta < 0 ? `${c.rankDelta}` : '±0');
+
+    let actionLabel = '';
+    if (c.isRemoval) {
+      actionLabel = '<span class="candidate-action-remove">Removing</span>';
+    } else if (c.sourceSchool) {
+      actionLabel = `<span class="candidate-action-transfer">from ${escapeHtml(c.sourceSchool.name)}</span>`;
+    }
+
+    let dataSourceBadge = '';
+    if (c.usedCSRankings) {
+      dataSourceBadge = '<span class="candidate-badge-roster">Roster</span>';
+    }
+
+    let sourceImpactHtml = '';
+    if (c.sourceSchool) {
+      const sDelta = c.sourceSchool.delta;
+      if (sDelta == null) {
+        sourceImpactHtml = `
+          <div class="candidate-source-impact">
+             <span>${escapeHtml(c.sourceSchool.name)}:</span>
+             <span class="neutral" style="font-weight: 600;">rank unavailable</span>
+          </div>
+        `;
+      } else {
+      const sClass = sDelta > 0 ? 'positive' : (sDelta < 0 ? 'negative' : 'neutral');
+      const sText = sDelta > 0 ? `+${sDelta}` : (sDelta < 0 ? `${sDelta}` : '±0');
+      sourceImpactHtml = `
+          <div class="candidate-source-impact">
+             <span>${escapeHtml(c.sourceSchool.name)}:</span>
+             <span class="${sClass}" style="font-weight: 600;">${sText} ranks</span>
+          </div>
+      `;
+      }
+    }
+
+    const papersHtml = stats.papers.slice(0, 20).map(p => {
+      const countLabel = (p.count || 0) > 1 ? `${Math.round(p.count || 0)} papers` : '1 paper';
+      return `
+      <div class="paper-item">
+        <span class="paper-venue">${escapeHtml(p.venue)}</span>
+        <span class="paper-year">${p.year}</span>:
+        ${countLabel} <small>· ${p.adjusted.toFixed(2)} adjusted</small>
+      </div>
+    `;
+    }).join('');
+
+    const countedPaperLabel = `${stats.totalPapers} rank-counted ${stats.totalPapers === 1 ? 'paper' : 'papers'}`;
+    const paperSummary = Number.isFinite(stats.totalDblpPublications)
+      ? `${countedPaperLabel} of ${stats.totalDblpPublications} DBLP publications in the selected years`
+      : `${stats.totalPapers} ${stats.totalPapers === 1 ? 'paper' : 'papers'}`;
+
+    // Show all areas the candidate publishes in, with rank delta for each
+    const allAreas = Object.keys(stats.areas);
+    const areaDeltaEntries = allAreas
+      .map(area => {
+        let d = (c.areaDeltas || {})[area];
+        if (d === undefined) d = { delta: 0 };
+        return [area, d] as [string, AreaDelta];
+      })
+      .sort(([, a], [, b]) => {
+        const getVal = (x: AreaDelta) => {
+          if (typeof x === 'number') return Math.abs(x);
+          if (x && (x.dropped || x.entered)) return 1000;
+          if (x && x.delta !== undefined) return Math.abs(x.delta);
+          return 0;
+        };
+        return getVal(b) - getVal(a);
+      });
+
+    const areaPillsHtml = areaDeltaEntries.length > 0 ? `
+      <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px;">
+        ${areaDeltaEntries.map(([area, d]) => {
+      const label = escapeHtml(areaLabels[area] || area);
+      if (typeof d !== 'number' && d.dropped) {
+        return `<span class="area-pill negative">↓ ${label} (Unranked - was #${d.wasRank})</span>`;
+      }
+      if (typeof d !== 'number' && d.entered) {
+        return `<span class="area-pill positive">↑ ${label} +New (→ #${d.nowRank})</span>`;
+      }
+
+      const deltaVal = typeof d === 'number' ? d : (d.delta || 0);
+      const nowRank = typeof d === 'number' ? null : (d.nowRank ?? null);
+
+      if (deltaVal === 0) {
+        return `<span class="area-pill neutral">${label} ±0${nowRank ? ` (#${nowRank})` : ''}</span>`;
+      }
+      const arrow = deltaVal > 0 ? '↑' : '↓';
+      const sign = deltaVal > 0 ? '+' : '';
+      const cls = deltaVal > 0 ? 'positive' : 'negative';
+      return `<span class="area-pill ${cls}">${arrow} ${label} ${sign}${deltaVal} (→ #${nowRank})</span>`;
+    }).join('')}
+      </div>
+    ` : '';
+
+
+    return `
+      <div class="candidate-card">
+        <div class="candidate-header">
+          <span class="candidate-medal">${medal}</span>
+          <div class="candidate-info">
+            <div class="candidate-name">
+              ${escapeHtml(c.name)}
+              ${actionLabel}
+              ${dataSourceBadge}
+            </div>
+            <div class="candidate-stats">${Object.keys(stats.areas).length} areas, ${paperSummary}, ${stats.totalAdjusted.toFixed(1)} adjusted</div>
+            <div class="candidate-area-breakdown">
+              ${Object.entries(stats.areas)
+        .sort(([, a], [, b]) => {
+          const aCount = typeof a === 'number' ? a : a.count;
+          const bCount = typeof b === 'number' ? b : b.count;
+          return bCount - aCount;
+        })
+        .map(([area, areaStats]) => {
+          const count = typeof areaStats === 'number' ? Math.ceil(areaStats) : (areaStats.count || 0);
+          const label = escapeHtml(areaLabels[area] || area);
+          return `<span class="area-breakdown-tag">${label} <strong>(${count} ${count === 1 ? 'paper' : 'papers'})</strong></span>`;
+        }).join('')}
+            </div>
+            ${areaPillsHtml}
+          </div>
+          <div class="candidate-impact">
+            <div class="candidate-rank-delta ${deltaClass}">${rankMoveLabel(c.currentRank, c.newRank, deltaText)}</div>
+            ${sourceImpactHtml}
+          </div>
+        </div>
+        <button class="papers-toggle">▶ Show Papers</button>
+        <div class="papers-list">
+          ${papersHtml || '<div class="paper-item">No counted papers</div>'}
+        </div>
+      </div>
+    `;
+
+  }).join('');
+}
