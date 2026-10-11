@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-10",
+  "sources": [
+    {
+      "url": "https://www.cc.gatech.edu/faculty-position-opportunities",
+      "sha256": "b49f42d899b06604db481b857ff1c56cd2bfcc733375f62749ad937dbb9c4d72"
+    },
+    {
+      "url": "https://ece.gatech.edu/people/resources/faculty-openings",
+      "sha256": "12c44a19bfd7528ac2d9a4b5322f3121d41e9b20813a0b66a933ac21f3b1f0f8"
+    },
+    {
+      "url": "https://careers.hprod.onehcm.usg.edu/psc/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=03000&JobOpeningId=277846&PostingSeq=1&",
+      "sha256": "da12a1f8bf5e01a583fff728c5e10fd56c17564e4de9a2c5435a0c0ae97f1569"
+    }
+  ],
+  "updates": [
+    {
+      "before": {
+        "source": "crawl",
+        "verified": true,
+        "lastSeenAt": "2026-10-08",
+        "id": "gatech-ece-faculty-all-areas-2026",
+        "school": "Georgia Institute of Technology",
+        "department": "School of Electrical and Computer Engineering",
+        "title": "Tenure-Track Faculty Positions Open Rank: All Areas",
+        "track": "tenure-track",
+        "level": "open",
+        "areas": [],
+        "state": "GA",
+        "city": "Atlanta",
+        "url": "https://careers.hprod.onehcm.usg.edu/psc/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=03000&JobOpeningId=277846&PostingSeq=1",
+        "visaSponsorship": "not-stated",
+        "summary": "Open-rank tenure-track positions in all ECE-related research areas (electromagnetics and advanced packaging apply to separate calls). Full consideration for materials received by Dec 31, 2026.",
+        "deadline": "2026-12-31",
+        "rolling": null
+      },
+      "after": {
+        "source": "crawl",
+        "verified": true,
+        "lastSeenAt": "2026-10-10",
+        "id": "gatech-ece-faculty-all-areas-2026",
+        "school": "Georgia Institute of Technology",
+        "department": "School of Electrical and Computer Engineering",
+        "title": "Tenure-Track Faculty Positions Open Rank: All Areas",
+        "track": "tenure-track",
+        "level": "open",
+        "areas": [],
+        "state": "GA",
+        "city": "Atlanta",
+        "url": "https://careers.hprod.onehcm.usg.edu/psc/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=03000&JobOpeningId=277846&PostingSeq=1",
+        "visaSponsorship": "not-stated",
+        "summary": "Open-rank tenure-track positions in all ECE-related research areas (electromagnetics and advanced packaging apply to separate calls). Full consideration for materials received by Dec 31, 2026.",
+        "deadline": "2026-12-31",
+        "rolling": false
+      },
+      "explanation": "Live full posting confirmed; December 31 full-consideration date independently stated on the ECE department page. No explicit until-filled language, so rolling=false; visa sponsorship not stated."
+    }
+  ],
+  "remaining": [
+    "College of Computing listed individual faculty/teaching/research/postdoc details still need review.",
+    "ECE HI/AP application detail, distributed-energy leadership scope and other computing-adjacent units remain to check.",
+    "The College of Computing list contains 2023–2025 advertisements; availability cannot be inferred from their age."
+  ]
+}

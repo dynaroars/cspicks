@@ -2977,7 +2977,7 @@
   {
     "source": "crawl",
     "verified": true,
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-10",
     "id": "gatech-ece-faculty-all-areas-2026",
     "school": "Georgia Institute of Technology",
     "department": "School of Electrical and Computer Engineering",
@@ -2991,7 +2991,7 @@
     "visaSponsorship": "not-stated",
     "summary": "Open-rank tenure-track positions in all ECE-related research areas (electromagnetics and advanced packaging apply to separate calls). Full consideration for materials received by Dec 31, 2026.",
     "deadline": "2026-12-31",
-    "rolling": null
+    "rolling": false
   },
   {
     "source": "crawl",

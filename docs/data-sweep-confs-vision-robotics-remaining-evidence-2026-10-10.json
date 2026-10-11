@@ -1,0 +1,1280 @@
+{
+  "date": "2026-10-10",
+  "applied": [
+    {
+      "CONF": "CVPR",
+      "YEAR": 2028,
+      "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+      "FIELD": "generalChair",
+      "CURRENT": "T. Hassner, A. Tal, K. Derpanis, X. Liu",
+      "VALUE": "T. Hassner, A. Tal, R. Souvenir",
+      "SOURCE": "https://www.thecvf.com/?page_id=100",
+      "EVIDENCE": "The future-edition general-chair column differs from the stored mixed-role list.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "CVPR",
+        "year": 2028,
+        "deadline": null
+      }
+    },
+    {
+      "CONF": "CVPR",
+      "YEAR": 2028,
+      "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+      "FIELD": "programChair",
+      "CURRENT": null,
+      "VALUE": "K. Derpanis, X. Liu, R. Giryes, S. J. Kim, G. Varol",
+      "SOURCE": "https://www.thecvf.com/?page_id=100",
+      "EVIDENCE": "The separate program-chair column names five chairs.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "CVPR",
+        "year": 2028,
+        "deadline": null
+      }
+    },
+    {
+      "CONF": "CVPR",
+      "YEAR": 2028,
+      "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+      "FIELD": "place",
+      "CURRENT": "San Antonio, TX, USA",
+      "VALUE": "San Antonio, TX, US",
+      "SOURCE": "https://www.thecvf.com/?page_id=100",
+      "EVIDENCE": "Sponsor identifies San Antonio; normalized repository US country spelling.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "CVPR",
+        "year": 2028,
+        "deadline": null
+      }
+    },
+    {
+      "CONF": "CVPR",
+      "YEAR": 2026,
+      "EDITION_URL": "https://cvpr.thecvf.com/Conferences/2026",
+      "FIELD": "submissions",
+      "CURRENT": null,
+      "VALUE": 16092,
+      "SOURCE": "https://cvpr.thecvf.com/Conferences/2026/News/Closing",
+      "EVIDENCE": "Final June 22 closing report gives 16,092 submitted papers and 4,089 accepted presentations.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "CVPR",
+        "year": 2026,
+        "deadline": "2025-11-13"
+      }
+    },
+    {
+      "CONF": "CVPR",
+      "YEAR": 2026,
+      "EDITION_URL": "https://cvpr.thecvf.com/Conferences/2026",
+      "FIELD": "acceptanceRate",
+      "CURRENT": 25.42,
+      "VALUE": 25.41,
+      "SOURCE": "https://cvpr.thecvf.com/Conferences/2026/News/Closing",
+      "EVIDENCE": "Derived from final counts: 4089 / 16092 × 100 = 25.41%, rounded to two decimals. Earlier press release percentage differs; prefer final counts.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "CVPR",
+        "year": 2026,
+        "deadline": "2025-11-13"
+      }
+    },
+    {
+      "CONF": "ECCV",
+      "YEAR": 2026,
+      "EDITION_URL": "https://eccv.ecva.net/Conferences/2026",
+      "FIELD": "note",
+      "CURRENT": null,
+      "VALUE": "Paper registration and submission deadlines are 23:00 CET; rebuttal deadline is 23:00 CEST.",
+      "SOURCE": "https://eccv.ecva.net/Conferences/2026/CallForPapers",
+      "EVIDENCE": "The paper CFP explicitly specifies CET for February/March and CEST for May; do not assume AoE.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "ECCV",
+        "year": 2026,
+        "deadline": "2026-03-05"
+      }
+    },
+    {
+      "CONF": "ICCV",
+      "YEAR": 2027,
+      "EDITION_URL": "https://iccv.thecvf.com/",
+      "FIELD": "programChair",
+      "CURRENT": "Derek Hoiem, Adriana Kovashka, Philippos Mordohai, Jingyi Yu",
+      "VALUE": "Derek Hoiem, Adriana Kovashka, Philippos Mordohai, Marcus Rohrbach, Ping Tan, Jingyi Yu",
+      "SOURCE": "https://iccv.thecvf.com//Conferences/2027/Committees",
+      "EVIDENCE": "Edition committee body lists six program chairs, including two omitted locally. Page title is stale 2025; menu and committee heading/body identify 2027.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "ICCV",
+        "year": 2027,
+        "deadline": null
+      }
+    },
+    {
+      "CONF": "ICCV",
+      "YEAR": 2027,
+      "EDITION_URL": "https://iccv.thecvf.com/",
+      "FIELD": "estimated",
+      "CURRENT": false,
+      "VALUE": true,
+      "SOURCE": "https://iccv.thecvf.com/Conferences/2027/Dates",
+      "EVIDENCE": "Submission timeline has not been announced; MAINTENANCE requires estimated until timeline confirmed.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "ICCV",
+        "year": 2027,
+        "deadline": null
+      }
+    },
+    {
+      "CONF": "ICCV",
+      "YEAR": 2027,
+      "EDITION_URL": "https://iccv.thecvf.com/",
+      "FIELD": "verified",
+      "CURRENT": true,
+      "VALUE": false,
+      "SOURCE": "https://iccv.thecvf.com/Conferences/2027/Dates",
+      "EVIDENCE": "Dates page supplies event dates only; important submission schedule facts are NOT FOUND.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "ICCV",
+        "year": 2027,
+        "deadline": null
+      }
+    },
+    {
+      "CONF": "IROS",
+      "YEAR": 2027,
+      "EDITION_URL": "https://www.iros2027.org/",
+      "FIELD": "seriesLink",
+      "CURRENT": null,
+      "VALUE": "https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-past-and-future-venues/",
+      "SOURCE": "https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-past-and-future-venues/",
+      "EVIDENCE": "Sponsor page serves the stable past/future IROS series listing.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "IROS",
+        "year": 2027,
+        "deadline": "2027-03-01"
+      }
+    },
+    {
+      "CONF": "IROS",
+      "YEAR": 2027,
+      "EDITION_URL": "https://www.iros2027.org/",
+      "FIELD": "programChair",
+      "CURRENT": "Ross Hutton",
+      "VALUE": "Sami Haddadin",
+      "SOURCE": "https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-past-and-future-venues/",
+      "EVIDENCE": "Sponsor 2027 future-venues block names Sami Haddadin as program chair; stored Ross Hutton belongs to the prior edition.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "IROS",
+        "year": 2027,
+        "deadline": "2027-03-01"
+      }
+    },
+    {
+      "CONF": "IROS",
+      "YEAR": 2026,
+      "EDITION_URL": "https://2026.ieee-iros.org/",
+      "FIELD": "seriesLink",
+      "CURRENT": null,
+      "VALUE": "https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-past-and-future-venues/",
+      "SOURCE": "https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-past-and-future-venues/",
+      "EVIDENCE": "Sponsor page serves the stable past/future IROS series listing.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "IROS",
+        "year": 2026,
+        "deadline": "2026-03-02"
+      }
+    },
+    {
+      "CONF": "IROS",
+      "YEAR": 2026,
+      "EDITION_URL": "https://2026.ieee-iros.org/",
+      "FIELD": "programChair",
+      "CURRENT": "Ross Hutton",
+      "VALUE": "Ross Hatton",
+      "SOURCE": "https://2026.ieee-iros.org/about/organizing-committee/",
+      "EVIDENCE": "Edition committee spells program-chair surname Hatton, superseding sponsor misspelling Hutton.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "IROS",
+        "year": 2026,
+        "deadline": "2026-03-02"
+      }
+    },
+    {
+      "CONF": "IROS",
+      "YEAR": 2026,
+      "EDITION_URL": "https://2026.ieee-iros.org/",
+      "FIELD": "place",
+      "CURRENT": "Pittsburgh, Pennsylvania, USA",
+      "VALUE": "Pittsburgh, PA, US",
+      "SOURCE": "https://2026.ieee-iros.org/",
+      "EVIDENCE": "Edition home identifies Pittsburgh; repository place convention uses state abbreviation and US.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "IROS",
+        "year": 2026,
+        "deadline": "2026-03-02"
+      }
+    },
+    {
+      "CONF": "WACV",
+      "YEAR": 2027,
+      "EDITION_URL": "https://wacv.thecvf.com/Conferences/2027",
+      "FIELD": "place",
+      "CURRENT": "Disney Springs, Buena Vista, FL, USA",
+      "VALUE": "Lake Buena Vista, FL, US",
+      "SOURCE": "https://wacv.thecvf.com/Conferences/2027/Hotels",
+      "EVIDENCE": "Edition hotel page identifies Hilton Orlando Lake Buena Vista (normalize the city rather than Disney Springs branding).",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "WACV",
+        "year": 2027,
+        "deadline": "2026-06-26"
+      }
+    },
+    {
+      "CONF": "WACV",
+      "YEAR": 2027,
+      "EDITION_URL": "https://wacv.thecvf.com/Conferences/2027",
+      "FIELD": "place",
+      "CURRENT": "Disney Springs, Buena Vista, FL, USA",
+      "VALUE": "Lake Buena Vista, FL, US",
+      "SOURCE": "https://wacv.thecvf.com/Conferences/2027/Hotels",
+      "EVIDENCE": "Edition hotel page identifies Hilton Orlando Lake Buena Vista (normalize the city rather than Disney Springs branding).",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "WACV",
+        "year": 2027,
+        "deadline": "2026-08-28"
+      }
+    },
+    {
+      "CONF": "CVPR",
+      "YEAR": 2027,
+      "EDITION_URL": "https://cvpr.thecvf.com/Conferences/2027",
+      "FIELD": "place",
+      "CURRENT": "Seattle, WA, USA",
+      "VALUE": "Seattle, WA, US",
+      "SOURCE": "https://cvpr.thecvf.com/Conferences/2027",
+      "EVIDENCE": "Edition home confirms city and state; normalize country spelling to repository US convention.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "CVPR",
+        "year": 2027,
+        "deadline": "2026-11-16"
+      }
+    },
+    {
+      "CONF": "CVPR",
+      "YEAR": 2026,
+      "EDITION_URL": "https://cvpr.thecvf.com/Conferences/2026",
+      "FIELD": "place",
+      "CURRENT": "Denver, CO, USA",
+      "VALUE": "Denver, CO, US",
+      "SOURCE": "https://cvpr.thecvf.com/Conferences/2026",
+      "EVIDENCE": "Edition home confirms city and state; normalize country spelling to repository US convention.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "CVPR",
+        "year": 2026,
+        "deadline": "2025-11-13"
+      }
+    },
+    {
+      "CONF": "ICCV",
+      "YEAR": 2027,
+      "EDITION_URL": "https://iccv.thecvf.com/Conferences/2027",
+      "FIELD": "link",
+      "CURRENT": "https://iccv.thecvf.com/",
+      "VALUE": "https://iccv.thecvf.com/Conferences/2027",
+      "SOURCE": "https://iccv.thecvf.com/Conferences/2027",
+      "EVIDENCE": "Validated route body explicitly identifies ICCV2027 and event venue/dates; prefer edition-specific link over generic root.",
+      "CONFIDENCE": "confirmed",
+      "match": {
+        "name": "ICCV",
+        "year": 2027,
+        "deadline": null
+      }
+    },
+    {
+      "record": {
+        "date": null,
+        "place": "Los Angeles, CA, US",
+        "abstractDeadline": null,
+        "deadline": null,
+        "rebuttalDate": null,
+        "notificationDate": null,
+        "note": "Sponsor announces location and listed chairs; edition website and submission timetable not yet validated.",
+        "generalChair": "G. Hua, G. Mori, O. Russakovsky, S. Lucey",
+        "programChair": "G. Lee, J. Yuan, L. Sigal, S. Yeung-Levy, S. Huang, L. Leal-Taixe",
+        "acceptanceRate": null,
+        "submissions": null,
+        "name": "CVPR",
+        "venueKeys": [
+          "cvpr"
+        ],
+        "year": 2029,
+        "description": "Conference on Computer Vision and Pattern Recognition",
+        "link": "https://www.thecvf.com/?page_id=100",
+        "seriesLink": "https://cvpr.thecvf.com/",
+        "estimated": true,
+        "verified": false
+      },
+      "sources": [
+        {
+          "CONF": "CVPR",
+          "YEAR": 2029,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "place",
+          "CURRENT": "MISSING",
+          "VALUE": "Los Angeles, CA, US",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces city and role columns; initials retained without guessed expansions.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "CVPR",
+          "YEAR": 2029,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "generalChair",
+          "CURRENT": "MISSING",
+          "VALUE": "G. Hua, G. Mori, O. Russakovsky, S. Lucey",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces city and role columns; initials retained without guessed expansions.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "CVPR",
+          "YEAR": 2029,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "programChair",
+          "CURRENT": "MISSING",
+          "VALUE": "G. Lee, J. Yuan, L. Sigal, S. Yeung-Levy, S. Huang, L. Leal-Taixe",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces city and role columns; initials retained without guessed expansions.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "CVPR",
+          "YEAR": 2029,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "name",
+          "CURRENT": "MISSING",
+          "VALUE": "CVPR",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces city and role columns; initials retained without guessed expansions.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "CVPR",
+          "YEAR": 2029,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "year",
+          "CURRENT": "MISSING",
+          "VALUE": 2029,
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces city and role columns; initials retained without guessed expansions.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "CVPR",
+          "YEAR": 2029,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "link",
+          "CURRENT": "MISSING",
+          "VALUE": "https://www.thecvf.com/?page_id=100",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces city and role columns; initials retained without guessed expansions.",
+          "CONFIDENCE": "confirmed"
+        }
+      ],
+      "gaps": [
+        "date NOT FOUND",
+        "abstractDeadline NOT FOUND",
+        "deadline NOT FOUND",
+        "rebuttalDate NOT FOUND",
+        "notificationDate NOT FOUND",
+        "submissions NOT FOUND",
+        "acceptanceRate NOT FOUND"
+      ]
+    },
+    {
+      "record": {
+        "date": null,
+        "place": "Waikoloa, HI, US",
+        "abstractDeadline": null,
+        "deadline": null,
+        "rebuttalDate": null,
+        "notificationDate": null,
+        "note": "Sponsor announces location and listed chairs; edition website and submission timetable not yet validated.",
+        "generalChair": "J. Corso, K. Derpanis",
+        "programChair": "C. Xu, E. Dunn, B. Gong, S. Ostadabbas",
+        "acceptanceRate": null,
+        "submissions": null,
+        "name": "WACV",
+        "venueKeys": [
+          "wacv"
+        ],
+        "year": 2028,
+        "description": "IEEE Winter Conference on Applications of Computer Vision",
+        "link": "https://www.thecvf.com/?page_id=100",
+        "seriesLink": "https://wacv.thecvf.com/",
+        "estimated": true,
+        "verified": false
+      },
+      "sources": [
+        {
+          "CONF": "WACV",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "place",
+          "CURRENT": "MISSING",
+          "VALUE": "Waikoloa, HI, US",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces city and role columns; /Conferences/2028 currently HTTP 404.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "generalChair",
+          "CURRENT": "MISSING",
+          "VALUE": "J. Corso, K. Derpanis",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces city and role columns; /Conferences/2028 currently HTTP 404.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "programChair",
+          "CURRENT": "MISSING",
+          "VALUE": "C. Xu, E. Dunn, B. Gong, S. Ostadabbas",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces city and role columns; /Conferences/2028 currently HTTP 404.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "name",
+          "CURRENT": "MISSING",
+          "VALUE": "WACV",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces city and role columns; /Conferences/2028 currently HTTP 404.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "year",
+          "CURRENT": "MISSING",
+          "VALUE": 2028,
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces city and role columns; /Conferences/2028 currently HTTP 404.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "link",
+          "CURRENT": "MISSING",
+          "VALUE": "https://www.thecvf.com/?page_id=100",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces city and role columns; /Conferences/2028 currently HTTP 404.",
+          "CONFIDENCE": "confirmed"
+        }
+      ],
+      "gaps": [
+        "date NOT FOUND",
+        "abstractDeadline NOT FOUND",
+        "deadline NOT FOUND",
+        "rebuttalDate NOT FOUND",
+        "notificationDate NOT FOUND",
+        "submissions NOT FOUND",
+        "acceptanceRate NOT FOUND"
+      ]
+    },
+    {
+      "record": {
+        "date": null,
+        "place": "Lisbon, Portugal",
+        "abstractDeadline": null,
+        "deadline": null,
+        "rebuttalDate": null,
+        "notificationDate": null,
+        "note": "Sponsor announces location and listed chairs; edition website and submission timetable not yet validated.",
+        "generalChair": "D. Metaxas, C. Kambhamettu, W. Scheirer",
+        "programChair": null,
+        "acceptanceRate": null,
+        "submissions": null,
+        "name": "ICCV",
+        "venueKeys": [
+          "iccv"
+        ],
+        "year": 2031,
+        "description": "International Conference on Computer Vision",
+        "link": "https://www.thecvf.com/?page_id=100",
+        "seriesLink": "https://iccv.thecvf.com/",
+        "estimated": true,
+        "verified": false
+      },
+      "sources": [
+        {
+          "CONF": "ICCV",
+          "YEAR": 2031,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "place",
+          "CURRENT": "MISSING",
+          "VALUE": "Lisbon, Portugal",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces Lisbon and general chairs; program chairs TBD.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "ICCV",
+          "YEAR": 2031,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "generalChair",
+          "CURRENT": "MISSING",
+          "VALUE": "D. Metaxas, C. Kambhamettu, W. Scheirer",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces Lisbon and general chairs; program chairs TBD.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "ICCV",
+          "YEAR": 2031,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "name",
+          "CURRENT": "MISSING",
+          "VALUE": "ICCV",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces Lisbon and general chairs; program chairs TBD.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "ICCV",
+          "YEAR": 2031,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "year",
+          "CURRENT": "MISSING",
+          "VALUE": 2031,
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces Lisbon and general chairs; program chairs TBD.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "ICCV",
+          "YEAR": 2031,
+          "EDITION_URL": "https://www.thecvf.com/?page_id=100",
+          "FIELD": "link",
+          "CURRENT": "MISSING",
+          "VALUE": "https://www.thecvf.com/?page_id=100",
+          "SOURCE": "https://www.thecvf.com/?page_id=100",
+          "EVIDENCE": "Sponsor future-edition row announces Lisbon and general chairs; program chairs TBD.",
+          "CONFIDENCE": "confirmed"
+        }
+      ],
+      "gaps": [
+        "date NOT FOUND",
+        "abstractDeadline NOT FOUND",
+        "deadline NOT FOUND",
+        "rebuttalDate NOT FOUND",
+        "notificationDate NOT FOUND",
+        "programChair NOT FOUND",
+        "submissions NOT FOUND",
+        "acceptanceRate NOT FOUND"
+      ]
+    },
+    {
+      "record": {
+        "date": "May 15–19, 2028",
+        "place": null,
+        "abstractDeadline": null,
+        "deadline": null,
+        "rebuttalDate": null,
+        "notificationDate": null,
+        "note": "Official sponsor listings conflict on venue and paper deadline; both fields remain unknown.",
+        "generalChair": null,
+        "programChair": null,
+        "acceptanceRate": null,
+        "submissions": null,
+        "name": "ICRA",
+        "venueKeys": [
+          "icra"
+        ],
+        "year": 2028,
+        "description": "IEEE International Conference on Robotics and Automation",
+        "link": "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+        "seriesLink": null,
+        "estimated": true,
+        "verified": false
+      },
+      "sources": [
+        {
+          "CONF": "ICRA",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+          "FIELD": "date",
+          "CURRENT": "MISSING",
+          "VALUE": "May 15–19, 2028",
+          "SOURCE": "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+          "EVIDENCE": "Two sponsor entries agree on May 15–19 but disagree on venue and deadline; edition URL fails SSL.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "ICRA",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+          "FIELD": "name",
+          "CURRENT": "MISSING",
+          "VALUE": "ICRA",
+          "SOURCE": "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+          "EVIDENCE": "Two sponsor entries agree on May 15–19 but disagree on venue and deadline; edition URL fails SSL.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "ICRA",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+          "FIELD": "year",
+          "CURRENT": "MISSING",
+          "VALUE": 2028,
+          "SOURCE": "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+          "EVIDENCE": "Two sponsor entries agree on May 15–19 but disagree on venue and deadline; edition URL fails SSL.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "ICRA",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+          "FIELD": "link",
+          "CURRENT": "MISSING",
+          "VALUE": "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+          "SOURCE": "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+          "EVIDENCE": "Two sponsor entries agree on May 15–19 but disagree on venue and deadline; edition URL fails SSL.",
+          "CONFIDENCE": "confirmed"
+        }
+      ],
+      "gaps": [
+        "abstractDeadline NOT FOUND",
+        "deadline NOT FOUND",
+        "rebuttalDate NOT FOUND",
+        "notificationDate NOT FOUND",
+        "generalChair NOT FOUND",
+        "programChair NOT FOUND",
+        "submissions NOT FOUND",
+        "acceptanceRate NOT FOUND"
+      ]
+    },
+    {
+      "record": {
+        "date": "May 7–12, 2029",
+        "place": "Milan, Italy",
+        "abstractDeadline": null,
+        "deadline": "2028-09-15",
+        "rebuttalDate": null,
+        "notificationDate": null,
+        "note": null,
+        "generalChair": null,
+        "programChair": null,
+        "acceptanceRate": null,
+        "submissions": null,
+        "name": "ICRA",
+        "venueKeys": [
+          "icra"
+        ],
+        "year": 2029,
+        "description": "IEEE International Conference on Robotics and Automation",
+        "link": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+        "seriesLink": null,
+        "estimated": false,
+        "verified": true
+      },
+      "sources": [
+        {
+          "CONF": "ICRA",
+          "YEAR": 2029,
+          "EDITION_URL": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "FIELD": "date",
+          "CURRENT": "MISSING",
+          "VALUE": "May 7–12, 2029",
+          "SOURCE": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "EVIDENCE": "Official sponsor event gives date, Milan convention centre and September 15 paper deadline; edition URL fails SSL.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "ICRA",
+          "YEAR": 2029,
+          "EDITION_URL": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "FIELD": "place",
+          "CURRENT": "MISSING",
+          "VALUE": "Milan, Italy",
+          "SOURCE": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "EVIDENCE": "Official sponsor event gives date, Milan convention centre and September 15 paper deadline; edition URL fails SSL.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "ICRA",
+          "YEAR": 2029,
+          "EDITION_URL": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "FIELD": "deadline",
+          "CURRENT": "MISSING",
+          "VALUE": "2028-09-15",
+          "SOURCE": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "EVIDENCE": "Official sponsor event gives date, Milan convention centre and September 15 paper deadline; edition URL fails SSL.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "ICRA",
+          "YEAR": 2029,
+          "EDITION_URL": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "FIELD": "name",
+          "CURRENT": "MISSING",
+          "VALUE": "ICRA",
+          "SOURCE": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "EVIDENCE": "Official sponsor event gives date, Milan convention centre and September 15 paper deadline; edition URL fails SSL.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "ICRA",
+          "YEAR": 2029,
+          "EDITION_URL": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "FIELD": "year",
+          "CURRENT": "MISSING",
+          "VALUE": 2029,
+          "SOURCE": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "EVIDENCE": "Official sponsor event gives date, Milan convention centre and September 15 paper deadline; edition URL fails SSL.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "ICRA",
+          "YEAR": 2029,
+          "EDITION_URL": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "FIELD": "link",
+          "CURRENT": "MISSING",
+          "VALUE": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "SOURCE": "https://www.ieee-ras.org/event/2029-ieee-international-conference-on-robotics-and-automation-icra-68559/",
+          "EVIDENCE": "Official sponsor event gives date, Milan convention centre and September 15 paper deadline; edition URL fails SSL.",
+          "CONFIDENCE": "confirmed"
+        }
+      ],
+      "gaps": [
+        "abstractDeadline NOT FOUND",
+        "rebuttalDate NOT FOUND",
+        "notificationDate NOT FOUND",
+        "generalChair NOT FOUND",
+        "programChair NOT FOUND",
+        "submissions NOT FOUND",
+        "acceptanceRate NOT FOUND"
+      ]
+    },
+    {
+      "record": {
+        "date": null,
+        "place": "Sydney, Australia",
+        "abstractDeadline": null,
+        "deadline": null,
+        "rebuttalDate": null,
+        "notificationDate": null,
+        "note": "Future location approved; only one program co-chair established, complete committee and timeline unannounced.",
+        "generalChair": null,
+        "programChair": "Peter Corke",
+        "acceptanceRate": null,
+        "submissions": null,
+        "name": "IROS",
+        "venueKeys": [
+          "iros"
+        ],
+        "year": 2028,
+        "description": "IEEE/RSJ International Conference on Intelligent Robots and Systems",
+        "link": "https://www.ieee-ras.org/wp-content/uploads/2026/01/APPROVED_Minutes__March_28th__2025.pdf",
+        "seriesLink": "https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-past-and-future-venues/",
+        "estimated": true,
+        "verified": false
+      },
+      "sources": [
+        {
+          "CONF": "IROS",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.ieee-ras.org/wp-content/uploads/2026/01/APPROVED_Minutes__March_28th__2025.pdf",
+          "FIELD": "place",
+          "CURRENT": "MISSING",
+          "VALUE": "Sydney, Australia",
+          "SOURCE": "https://www.ieee-ras.org/wp-content/uploads/2026/01/APPROVED_Minutes__March_28th__2025.pdf",
+          "EVIDENCE": "Approved March 2025 sponsor minutes confirm Sydney selected; official sponsor member page identifies Peter Corke as program co-chair.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "IROS",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.ieee-ras.org/wp-content/uploads/2026/01/APPROVED_Minutes__March_28th__2025.pdf",
+          "FIELD": "programChair",
+          "CURRENT": "MISSING",
+          "VALUE": "Peter Corke",
+          "SOURCE": "https://www.ieee-ras.org/ras_member/peter-corke/",
+          "EVIDENCE": "Approved March 2025 sponsor minutes confirm Sydney selected; official sponsor member page identifies Peter Corke as program co-chair.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "IROS",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.ieee-ras.org/wp-content/uploads/2026/01/APPROVED_Minutes__March_28th__2025.pdf",
+          "FIELD": "name",
+          "CURRENT": "MISSING",
+          "VALUE": "IROS",
+          "SOURCE": "https://www.ieee-ras.org/wp-content/uploads/2026/01/APPROVED_Minutes__March_28th__2025.pdf",
+          "EVIDENCE": "Approved March 2025 sponsor minutes confirm Sydney selected; official sponsor member page identifies Peter Corke as program co-chair.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "IROS",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.ieee-ras.org/wp-content/uploads/2026/01/APPROVED_Minutes__March_28th__2025.pdf",
+          "FIELD": "year",
+          "CURRENT": "MISSING",
+          "VALUE": 2028,
+          "SOURCE": "https://www.ieee-ras.org/wp-content/uploads/2026/01/APPROVED_Minutes__March_28th__2025.pdf",
+          "EVIDENCE": "Approved March 2025 sponsor minutes confirm Sydney selected; official sponsor member page identifies Peter Corke as program co-chair.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "IROS",
+          "YEAR": 2028,
+          "EDITION_URL": "https://www.ieee-ras.org/wp-content/uploads/2026/01/APPROVED_Minutes__March_28th__2025.pdf",
+          "FIELD": "link",
+          "CURRENT": "MISSING",
+          "VALUE": "https://www.ieee-ras.org/wp-content/uploads/2026/01/APPROVED_Minutes__March_28th__2025.pdf",
+          "SOURCE": "https://www.ieee-ras.org/wp-content/uploads/2026/01/APPROVED_Minutes__March_28th__2025.pdf",
+          "EVIDENCE": "Approved March 2025 sponsor minutes confirm Sydney selected; official sponsor member page identifies Peter Corke as program co-chair.",
+          "CONFIDENCE": "confirmed"
+        }
+      ],
+      "gaps": [
+        "date NOT FOUND",
+        "abstractDeadline NOT FOUND",
+        "deadline NOT FOUND",
+        "rebuttalDate NOT FOUND",
+        "notificationDate NOT FOUND",
+        "generalChair NOT FOUND",
+        "submissions NOT FOUND",
+        "acceptanceRate NOT FOUND"
+      ]
+    },
+    {
+      "record": {
+        "date": "March 6–10, 2026 (workshops March 6–7; main conference March 8–10)",
+        "place": "Tucson, AZ, US",
+        "abstractDeadline": "2025-07-11",
+        "deadline": "2025-07-18",
+        "rebuttalDate": "2025-09-19",
+        "notificationDate": null,
+        "note": "Round 1/2; final-decision date unresolved: CFP November 5 vs Dates page November 6 UTC.",
+        "generalChair": "Rama Chellappa, Vitomir Štruc",
+        "programChair": "Brian Clipp, Naser Damer, Sharon X. Huang, Vlad Morariu",
+        "acceptanceRate": null,
+        "submissions": null,
+        "name": "WACV",
+        "venueKeys": [
+          "wacv"
+        ],
+        "year": 2026,
+        "description": "IEEE Winter Conference on Applications of Computer Vision",
+        "link": "https://wacv.thecvf.com/Conferences/2026",
+        "seriesLink": "https://wacv.thecvf.com/",
+        "estimated": true,
+        "verified": false
+      },
+      "sources": [
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "date",
+          "CURRENT": "MISSING",
+          "VALUE": "March 6–10, 2026 (workshops March 6–7; main conference March 8–10)",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026/Dates",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "place",
+          "CURRENT": "MISSING",
+          "VALUE": "Tucson, AZ, US",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "abstractDeadline",
+          "CURRENT": "MISSING",
+          "VALUE": "2025-07-11",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026/CallForPapers",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "deadline",
+          "CURRENT": "MISSING",
+          "VALUE": "2025-07-18",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026/CallForPapers",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "rebuttalDate",
+          "CURRENT": "MISSING",
+          "VALUE": "2025-09-19",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026/CallForPapers",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "generalChair",
+          "CURRENT": "MISSING",
+          "VALUE": "Rama Chellappa, Vitomir Štruc",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026/Organizers",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "programChair",
+          "CURRENT": "MISSING",
+          "VALUE": "Brian Clipp, Naser Damer, Sharon X. Huang, Vlad Morariu",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026/Organizers",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "name",
+          "CURRENT": "MISSING",
+          "VALUE": "WACV",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "year",
+          "CURRENT": "MISSING",
+          "VALUE": 2026,
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "link",
+          "CURRENT": "MISSING",
+          "VALUE": "https://wacv.thecvf.com/Conferences/2026",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        }
+      ],
+      "gaps": [
+        "notificationDate NOT FOUND",
+        "submissions NOT FOUND",
+        "acceptanceRate NOT FOUND",
+        "CFP final decisions November 5; Dates UTC timestamp November 6 07:59. Do not convert or choose without coordinator review."
+      ]
+    },
+    {
+      "record": {
+        "date": "March 6–10, 2026 (workshops March 6–7; main conference March 8–10)",
+        "place": "Tucson, AZ, US",
+        "abstractDeadline": "2025-09-12",
+        "deadline": "2025-09-19",
+        "rebuttalDate": null,
+        "notificationDate": null,
+        "note": "Round 2/2; final-decision date unresolved: CFP November 5 vs Dates page November 6 UTC.",
+        "generalChair": "Rama Chellappa, Vitomir Štruc",
+        "programChair": "Brian Clipp, Naser Damer, Sharon X. Huang, Vlad Morariu",
+        "acceptanceRate": null,
+        "submissions": null,
+        "name": "WACV",
+        "venueKeys": [
+          "wacv"
+        ],
+        "year": 2026,
+        "description": "IEEE Winter Conference on Applications of Computer Vision",
+        "link": "https://wacv.thecvf.com/Conferences/2026",
+        "seriesLink": "https://wacv.thecvf.com/",
+        "estimated": true,
+        "verified": false
+      },
+      "sources": [
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "date",
+          "CURRENT": "MISSING",
+          "VALUE": "March 6–10, 2026 (workshops March 6–7; main conference March 8–10)",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026/Dates",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "place",
+          "CURRENT": "MISSING",
+          "VALUE": "Tucson, AZ, US",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "abstractDeadline",
+          "CURRENT": "MISSING",
+          "VALUE": "2025-09-12",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026/CallForPapers",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "deadline",
+          "CURRENT": "MISSING",
+          "VALUE": "2025-09-19",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026/CallForPapers",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "generalChair",
+          "CURRENT": "MISSING",
+          "VALUE": "Rama Chellappa, Vitomir Štruc",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026/Organizers",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "programChair",
+          "CURRENT": "MISSING",
+          "VALUE": "Brian Clipp, Naser Damer, Sharon X. Huang, Vlad Morariu",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026/Organizers",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "name",
+          "CURRENT": "MISSING",
+          "VALUE": "WACV",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "year",
+          "CURRENT": "MISSING",
+          "VALUE": 2026,
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        },
+        {
+          "CONF": "WACV",
+          "YEAR": 2026,
+          "EDITION_URL": "https://wacv.thecvf.com/Conferences/2026",
+          "FIELD": "link",
+          "CURRENT": "MISSING",
+          "VALUE": "https://wacv.thecvf.com/Conferences/2026",
+          "SOURCE": "https://wacv.thecvf.com/Conferences/2026",
+          "EVIDENCE": "Official 2026 edition home, Dates, CFP and committee establish event and two rounds. Final decision calendar dates conflict and are left unknown.",
+          "CONFIDENCE": "confirmed"
+        }
+      ],
+      "gaps": [
+        "rebuttalDate NOT FOUND",
+        "notificationDate NOT FOUND",
+        "submissions NOT FOUND",
+        "acceptanceRate NOT FOUND",
+        "CFP final decisions November 5; Dates UTC timestamp November 6 07:59. Do not convert or choose without coordinator review."
+      ]
+    }
+  ],
+  "deferred": [
+    {
+      "CONF": "ICRA",
+      "YEAR": 2026,
+      "EDITION_URL": "https://2026.ieee-icra.org/",
+      "FIELD": "submissions",
+      "CURRENT": 4947,
+      "VALUE": 5088,
+      "SOURCE": "https://2026.ieee-icra.org/announcements/record-of-submissions/",
+      "EVIDENCE": "Official October 22, 2025 announcement says 5,088 submissions. Stored 4,947 could be post-withdrawal review count; this denominator distinction is unresolved.",
+      "CONFIDENCE": "needs-review",
+      "match": {
+        "name": "ICRA",
+        "year": 2026,
+        "deadline": "2025-09-15"
+      }
+    }
+  ],
+  "conflicts": [
+    {
+      "name": "ICRA",
+      "year": 2028,
+      "sources": [
+        "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+        "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-64236/"
+      ],
+      "evidence": "First source: Rio de Janeiro, September 15 2027 paper deadline. Second source: Guadalajara, August 16 2027. Event dates agree May 15–19. Neither source has established precedence."
+    },
+    {
+      "name": "WACV",
+      "year": 2026,
+      "sources": [
+        "https://wacv.thecvf.com/Conferences/2026/CallForPapers",
+        "https://wacv.thecvf.com/Conferences/2026/Dates"
+      ],
+      "evidence": "CFP November 5 versus Dates November 6 UTC final decisions; calendar-date rule prevents arbitrary timezone conversion."
+    }
+  ],
+  "remaining": [
+    {
+      "name": "CVPR",
+      "year": 2028,
+      "gaps": [
+        "Edition /Conferences/2028 returns HTTP 404; event dates and all submission milestones unannounced. Generic series link remains available."
+      ]
+    },
+    {
+      "name": "ECCV",
+      "year": 2026,
+      "gaps": [
+        "2026 submissions and acceptance rate NOT FOUND after edition home/program/accepted-paper and restricted official-domain searches. Next /Conferences/2028 returns 404; no ECVA next-edition announcement established."
+      ]
+    },
+    {
+      "name": "ICCV",
+      "year": 2027,
+      "gaps": [
+        "All paper milestones NOT FOUND; no full CFP timeline yet. Generic root serves 2027 correctly; year-specific /Conferences/2027 also available."
+      ]
+    },
+    {
+      "name": "ICRA",
+      "year": 2027,
+      "gaps": [
+        "Stored seriesLink icra.org not independently validated (web timeout); edition URL is validated."
+      ]
+    },
+    {
+      "name": "ICRA",
+      "year": 2026,
+      "gaps": [
+        "Statistics unresolved: official raw submissions 5,088 versus stored 4,947; stored acceptance 38.04% has no corroborated accepted count or denominator. Recommend retaining pending review rather than combining unlike metrics.",
+        "Stored seriesLink icra.org not independently validated (web timeout); edition URL is validated."
+      ]
+    },
+    {
+      "name": "IROS",
+      "year": 2027,
+      "gaps": [
+        "Stored edition domain ERR_NAME_NOT_RESOLVED; abstract/rebuttal/notification NOT FOUND via sponsor fallback."
+      ]
+    },
+    {
+      "name": "IROS",
+      "year": 2026,
+      "gaps": [
+        "Stored submissions 4,348 and acceptance 36.45% NOT FOUND in official edition/sponsor sources; not safe to assert or replace. March 5 permits modifications to papers submitted by March 2, not new submissions."
+      ]
+    }
+  ],
+  "additionalAnnouncedLeads": [
+    {
+      "name": "CVPR",
+      "years": [
+        2030,
+        2031
+      ],
+      "source": "https://www.thecvf.com/?page_id=100",
+      "evidence": "Sponsor confirms additional future editions in Denver and Seattle; report stops at next missing edition."
+    },
+    {
+      "name": "WACV",
+      "years": [
+        2029,
+        2030,
+        2031
+      ],
+      "source": "https://www.thecvf.com/?page_id=100",
+      "evidence": "Sponsor lists additional Waikoloa editions; report stops at next missing edition."
+    },
+    {
+      "name": "ICCV",
+      "years": [
+        2029
+      ],
+      "source": "https://www.thecvf.com/?page_id=100",
+      "evidence": "Sponsor lists 2029 with all metadata TBD; no useful confirmed fields to add beyond year."
+    }
+  ],
+  "coordinatorDecisions": [
+    "ICRA 2026 submissions retained: raw new total cannot be paired with an unverified stored rate.",
+    "WACV 2026 notification remains null due conflicting calendar dates in CFP and Dates pages.",
+    "New ICRA records do not copy the unvalidated icra.org series URL."
+  ]
+}

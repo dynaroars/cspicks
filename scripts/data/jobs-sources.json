@@ -65,15 +65,16 @@
     "jobsUrl": "https://www.cc.gatech.edu/faculty-position-opportunities",
     "state": "GA",
     "lastCheckedAt": "2026-10-08T15:28:51Z",
-    "outcome": "complete",
-    "summary": "Hiring page says new positions will be posted soon; listed faculty postings are from 2024. Non-CS units (2026-10-08): ECE faculty-openings page lists an open-rank all-areas ECE search (deadline 2026-12-31) alongside narrow packaging/power searches whose dates have passed or are not CS-relevant. Other computing-adjacent units (School of Cybersecurity and Privacy, IDEaS) were not found to have separate hiring pages. Non-CS units, 2nd pass (2026-10-08): Checked CSE and Interactive Computing hiring pages; both still show the 2025-26 cycle (Dec 2025 deadlines), and the college-wide and Cybersecurity pages were not found or not reachable. No 2026-27 College of Computing postings found yet.",
+    "outcome": "incomplete",
+    "summary": "Computing and ECE hiring indexes read; existing ECE all-areas posting confirmed, December 31 full-consideration date on department page. Listed Computing detail pages, ECE HI/AP call and broader adjacent-unit discovery remain.",
     "checkedUrls": [
       "https://www.cc.gatech.edu/faculty-position-opportunities",
       "https://ece.gatech.edu/people/resources/faculty-openings",
       "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=03000&JobOpeningId=277846&PostingSeq=1",
       "https://www.cse.gatech.edu/content/faculty-hiring",
       "https://ic.gatech.edu/faculty-hiring",
-      "https://www.cc.gatech.edu/faculty-hiring"
+      "https://www.cc.gatech.edu/faculty-hiring",
+      "https://careers.hprod.onehcm.usg.edu/psc/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=03000&JobOpeningId=277846&PostingSeq=1&"
     ],
     "deferredUntil": null,
     "relatedUnits": [

@@ -10,7 +10,9 @@
     },
     {
       "school": "Georgia Institute of Technology",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-gatech-initial-evidence-2026-10-10.json",
+      "remaining": "Computing and ECE hiring indexes read, ECE all-areas posting refreshed. Listed Computing faculty/research/teaching/postdoc details, ECE HI/AP call and other adjacent units remain."
     },
     {
       "school": "Univ. of California - San Diego",
@@ -836,7 +838,9 @@
     },
     {
       "name": "ASE",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-software-evidence-2026-10-10.json",
+      "remaining": "Current schedules corrected; unsupported future forecasts and missing acceptance statistics documented in docs/data-sweep-confs-software-2026-10-10.md."
     },
     {
       "name": "ASPLOS",
@@ -845,7 +849,9 @@
     },
     {
       "name": "CAV",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-software-evidence-2026-10-10.json",
+      "remaining": "Current schedules corrected; unsupported future forecasts and missing acceptance statistics documented in docs/data-sweep-confs-software-2026-10-10.md."
     },
     {
       "name": "CCS",
@@ -870,8 +876,8 @@
     {
       "name": "CVPR",
       "status": "partial",
-      "report": "docs/data-sweep-confs-vision-robotics-2026-10-10.md",
-      "remaining": "Other editions, statistics and discovery require completion; see report."
+      "report": "docs/data-sweep-confs-vision-robotics-remaining-evidence-2026-10-10.json",
+      "remaining": "Current editions and sponsor announcements reviewed; source conflicts, incomplete future schedules and unverified statistics documented in remaining evidence report."
     },
     {
       "name": "DAC",
@@ -883,7 +889,9 @@
     },
     {
       "name": "ECCV",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-vision-robotics-remaining-evidence-2026-10-10.json",
+      "remaining": "Current editions and sponsor announcements reviewed; source conflicts, incomplete future schedules and unverified statistics documented in remaining evidence report."
     },
     {
       "name": "EMNLP",
@@ -916,7 +924,9 @@
     },
     {
       "name": "FSE",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-software-evidence-2026-10-10.json",
+      "remaining": "Current schedules corrected; unsupported future forecasts and missing acceptance statistics documented in docs/data-sweep-confs-software-2026-10-10.md."
     },
     {
       "name": "HPCA",
@@ -928,11 +938,15 @@
     },
     {
       "name": "ICCV",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-vision-robotics-remaining-evidence-2026-10-10.json",
+      "remaining": "Current editions and sponsor announcements reviewed; source conflicts, incomplete future schedules and unverified statistics documented in remaining evidence report."
     },
     {
       "name": "ICDE",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-databases-evidence-2026-10-10.json",
+      "remaining": "Current schedules/cycles reviewed; missing statistics, PODS 2026 source year typos and incomplete next editions documented in database evidence report."
     },
     {
       "name": "ICFP",
@@ -952,12 +966,14 @@
     {
       "name": "ICRA",
       "status": "partial",
-      "report": "docs/data-sweep-confs-vision-robotics-2026-10-10.md",
-      "remaining": "Other editions, statistics and discovery require completion; see report."
+      "report": "docs/data-sweep-confs-vision-robotics-remaining-evidence-2026-10-10.json",
+      "remaining": "Current editions and sponsor announcements reviewed; source conflicts, incomplete future schedules and unverified statistics documented in remaining evidence report."
     },
     {
       "name": "ICSE",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-software-evidence-2026-10-10.json",
+      "remaining": "Current schedules corrected; unsupported future forecasts and missing acceptance statistics documented in docs/data-sweep-confs-software-2026-10-10.md."
     },
     {
       "name": "IEEE S&P",
@@ -976,7 +992,9 @@
     },
     {
       "name": "IROS",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-vision-robotics-remaining-evidence-2026-10-10.json",
+      "remaining": "Current editions and sponsor announcements reviewed; source conflicts, incomplete future schedules and unverified statistics documented in remaining evidence report."
     },
     {
       "name": "ISCA",
@@ -985,7 +1003,9 @@
     },
     {
       "name": "ISSTA",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-software-evidence-2026-10-10.json",
+      "remaining": "Current schedules corrected; unsupported future forecasts and missing acceptance statistics documented in docs/data-sweep-confs-software-2026-10-10.md."
     },
     {
       "name": "KDD",
@@ -1044,7 +1064,9 @@
     },
     {
       "name": "PODS",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-databases-evidence-2026-10-10.json",
+      "remaining": "Current schedules/cycles reviewed; missing statistics, PODS 2026 source year typos and incomplete next editions documented in database evidence report."
     },
     {
       "name": "POPL",
@@ -1089,7 +1111,9 @@
     },
     {
       "name": "SIGMOD",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-databases-evidence-2026-10-10.json",
+      "remaining": "Current schedules/cycles reviewed; missing statistics, PODS 2026 source year typos and incomplete next editions documented in database evidence report."
     },
     {
       "name": "SOSP",
@@ -1120,7 +1144,9 @@
     },
     {
       "name": "VLDB",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-databases-evidence-2026-10-10.json",
+      "remaining": "Current schedules/cycles reviewed; missing statistics, PODS 2026 source year typos and incomplete next editions documented in database evidence report."
     },
     {
       "name": "VR",
@@ -1316,7 +1342,9 @@
     },
     {
       "name": "ICDT",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-databases-evidence-2026-10-10.json",
+      "remaining": "Current schedules/cycles reviewed; missing statistics, PODS 2026 source year typos and incomplete next editions documented in database evidence report."
     },
     {
       "name": "ICER",
@@ -1476,7 +1504,9 @@
     },
     {
       "name": "TACAS",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-software-evidence-2026-10-10.json",
+      "remaining": "Current schedules corrected; unsupported future forecasts and missing acceptance statistics documented in docs/data-sweep-confs-software-2026-10-10.md."
     },
     {
       "name": "UAI",
@@ -1485,8 +1515,8 @@
     {
       "name": "WACV",
       "status": "partial",
-      "report": "docs/data-sweep-confs-vision-robotics-2026-10-10.md",
-      "remaining": "Other editions, statistics and discovery require completion; see report."
+      "report": "docs/data-sweep-confs-vision-robotics-remaining-evidence-2026-10-10.json",
+      "remaining": "Current editions and sponsor announcements reviewed; source conflicts, incomplete future schedules and unverified statistics documented in remaining evidence report."
     },
     {
       "name": "WSDM",
@@ -1647,15 +1677,20 @@
     },
     {
       "id": "apple-phd-fellowship",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json",
+      "remaining": "Current invitation-only nomination deadline, full funding terms and remaining-years eligibility are not in the public sponsor announcement; do not reuse campus/prior-year dates."
     },
     {
       "id": "nvidia-graduate-fellowship",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json"
     },
     {
       "id": "nvidia-hardware-grant",
-      "status": "pending"
+      "status": "audited-core-facts",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json",
+      "remaining": "Resource-specific CFP documents and any future reopening timetable require rechecking when applications resume."
     },
     {
       "id": "sloan-research-fellowship",
@@ -1664,23 +1699,29 @@
     },
     {
       "id": "packard-fellowship",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json"
     },
     {
       "id": "simons-investigators-cs",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json",
+      "remaining": "Archive confirms discontinuation and award duration; historical amount, geographic and nomination terms still need an accessible original solicitation."
     },
     {
       "id": "hertz-fellowship",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json"
     },
     {
       "id": "qualcomm-innovation-fellowship",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json"
     },
     {
       "id": "ibm-phd-fellowship",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json"
     },
     {
       "id": "sony-research-award",
