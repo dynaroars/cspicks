@@ -138,13 +138,13 @@ so modules loaded together on Search share one download and parse of the canonic
    All / CORE A / CORE A*), optionally reassigns publications to historical affiliations (see below), and
    computes per-area, per-school rank aggregates. Nearly every view calls this rather than touching raw data.
 3. **Historical affiliation mode**: `public/professor_history_openalex.json` (large, generated offline by
-   `scripts/build-openalex-history.js`) maps professors to their affiliation at time of publication, sourced
+   `scripts/build-openalex-history.mjs`) maps professors to their affiliation at time of publication, sourced
    from OpenAlex rather than current CSRankings affiliation. `public/school-aliases.json` bridges OpenAlex
    institution names to CSRankings' abbreviated names. `public/manual_affiliations.csv` holds community
    corrections to bad OpenAlex data, merged in via `mergeAffiliationHistory()`. These assets are loaded only
    when the user enables Historical Mode.
 4. **CORE A/A* extra publications**: `public/core-extra-author-info.csv` (generated offline by
-   `scripts/build-core-extra-pubs.js` from a bulk DBLP dump — see `TASKS/csrankings.md`) covers publications in
+   `scripts/build-core-extra-pubs.mjs` from a bulk DBLP dump — see `TASKS/csrankings.md`) covers publications in
    CORE A/A* venues CSRankings' own `generated-author-info.csv` doesn't track, for the existing roster only. Its
    `area` column holds a venue key exactly like `generated-author-info.csv` does (not a resolved research
    area — `getConferenceAreaMap`/`publicationMatchesConferenceSet` resolve that at query time). `loadData()`

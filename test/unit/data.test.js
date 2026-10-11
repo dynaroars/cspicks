@@ -109,7 +109,7 @@ test('current affiliation remains the fallback when a professor has no history',
 });
 
 test('an implausibly sprawling history that never mentions the current school is not trusted', () => {
-  // build-openalex-history.js resolves a professor by a bare name search with
+  // build-openalex-history.mjs resolves a professor by a bare name search with
   // no affiliation check, so a name that collides with a more prominent,
   // unrelated researcher elsewhere in OpenAlex silently attaches that other
   // person's entire career. The signature: many more institutions than one
@@ -219,7 +219,7 @@ test('all-union unions CSRankings and CORE venues', () => {
 
 test('EXTRA_VENUES (CORE-only venues) never overlap CSRankings-tracked venues', () => {
   // Guards the no-double-counting invariant EXPANSION_PLAN.md Step 3.4 relies
-  // on: scripts/build-core-extra-pubs.js only emits rows for venues in this
+  // on: scripts/build-core-extra-pubs.mjs only emits rows for venues in this
   // set, so a paper credited via generated-author-info.csv can never also be
   // credited via the CORE-extra dataset.
   const csrankingsVenues = new Set([...Object.keys(parentMap), ...Object.keys(nextTier)]);

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * build-core-extra-pubs.js
+ * build-core-extra-pubs.mjs
  *
  * EXPANSION_PLAN.md Step 2: stream-parse the full DBLP dump and emit
  * publication-count rows, in the same shape src/data.ts actually reads from
@@ -25,7 +25,7 @@
  * output and reported, not guessed at silently.
  *
  * Usage:
- *   node scripts/build-core-extra-pubs.js <path-to-dblp-xxxx.xml.gz> [--dtd=<path-to-dtd>]
+ *   node scripts/build-core-extra-pubs.mjs <path-to-dblp-xxxx.xml.gz> [--dtd=<path-to-dtd>]
  *
  * Input:  <dump>, scripts/data/core-extra-venues.json, scripts/data/core-venue-dblp-keys.json,
  *         csrankings.csv (fetched live from GitHub — not behind Anubis)
@@ -263,7 +263,7 @@ function validateVenues(venueKeyTable, volumeByKey) {
 async function main() {
   const { dumpPath, dtdPath: dtdArg } = parseArgs(process.argv.slice(2));
   if (!dumpPath || !existsSync(dumpPath)) {
-    console.error('Usage: node scripts/build-core-extra-pubs.js <path-to-dblp-xxxx.xml.gz> [--dtd=<path>]');
+    console.error('Usage: node scripts/build-core-extra-pubs.mjs <path-to-dblp-xxxx.xml.gz> [--dtd=<path>]');
     console.error('(dblp.org is behind an anti-bot wall — download the dump via a regular browser first; see EXPANSION_PLAN.md.)');
     process.exit(1);
   }

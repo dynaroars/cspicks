@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * build-openalex-history.js
+ * build-openalex-history.mjs
  *
  * Extracts professor affiliation history from OpenAlex API.
  * Replaces the CSRankings Git mining approach with automated API data.
@@ -16,9 +16,9 @@
  * committed file is safe to commit/push after any partial run.
  *
  * Usage:
- *   OPENALEX_API_KEY=... node scripts/build-openalex-history.js
- *   OPENALEX_API_KEY=... node scripts/build-openalex-history.js --daily-budget=900
- *   node scripts/build-openalex-history.js --test --limit=10
+ *   OPENALEX_API_KEY=... node scripts/build-openalex-history.mjs
+ *   OPENALEX_API_KEY=... node scripts/build-openalex-history.mjs --daily-budget=900
+ *   node scripts/build-openalex-history.mjs --test --limit=10
  *
  * Output: public/professor_history_openalex.json
  */

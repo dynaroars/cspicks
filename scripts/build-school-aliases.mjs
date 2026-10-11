@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * build-school-aliases.js
+ * build-school-aliases.mjs
  * 
  * Creates a mapping from OpenAlex school names to CSRankings school names.
  * Uses conservative normalization - only matches when names are very similar.
  * 
- * Usage: node scripts/build-school-aliases.js
+ * Usage: node scripts/build-school-aliases.mjs
  */
 
 import fs from 'fs';

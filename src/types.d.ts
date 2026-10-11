@@ -78,7 +78,7 @@ export interface AffiliationSegment {
 
 export type AffiliationHistory = StringMap<AffiliationSegment[]>;
 // null means the OpenAlex institution is intentionally excluded/unmatched -
-// see scripts/build-school-aliases.js - and callers fall back to the
+// see scripts/build-school-aliases.mjs - and callers fall back to the
 // original name rather than treating it as an error.
 export type SchoolAliasMap = StringMap<string | null>;
 

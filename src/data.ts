@@ -299,7 +299,7 @@ export function loadCoreExtraPubs(): Promise<Map<string, Publication[]>> {
   return coreExtraPubsPromise;
 }
 
-// build-openalex-history.js resolves each professor by searching OpenAlex for
+// build-openalex-history.mjs resolves each professor by searching OpenAlex for
 // their name and taking the single top-relevance result, with no check that
 // the match's own affiliations have anything to do with this person - for
 // anyone whose name collides with a more prominent, unrelated researcher in
