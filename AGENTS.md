@@ -75,8 +75,7 @@ playbook before any data-refresh or web-research task.
   school (CSRankings seeds the crawl list but is not a requirement), crawled by a scheduled routine (TASKS/jobs.md); queue/seed tooling is
   `scripts/jobs-maintain.mjs` with state in `scripts/data/jobs-sources.json`.
 - `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
-- `stats.html` + `src/stats.ts` — site stats (roster, conferences, awards, jobs; never the large NSF snapshot), a CSRankings-default parity check, and
-  repository activity from the GitHub API. Every page header links to it via the health icon, between the GitHub and
+- `stats.html` + `src/stats.ts` — site stats (roster, conferences, awards, jobs; never the large NSF snapshot) and repository activity from the GitHub API. Every page header links to it via the health icon, between the GitHub and
   ROARS Lab icons (all three share `.icon-link`; `test/unit/consistency.test.js` enforces the header on every page).
 - `grants-submit.html` + `src/grants/submit.ts` — single unified submission/correction form for proposing
   new CS research awards or updating existing entries via GitHub Issue or email.

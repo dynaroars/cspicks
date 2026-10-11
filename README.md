@@ -9,7 +9,7 @@ researchers. Live at **[cspicks.roars.dev](https://cspicks.roars.dev)**.
 - **CS Confs**: conference dates and submission deadlines.
 - **Awards & Grants**: fellowships, research awards, and funding calls.
 - **US Jobs**: academic CS openings at US universities.
-- **Stats**: what the site tracks, data checks, and recent repository activity.
+- **Stats**: what the site tracks and recent repository activity.
 
 Every view is a shareable URL. No backend: data comes from public sources and static JSON in `public/`.
 

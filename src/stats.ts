@@ -3,11 +3,10 @@
  * It deliberately skips the 14 MB NSF snapshot so the page stays fast.
  * The summarize* functions are pure so unit tests can check them; the page controller at the bottom only runs in a browser.
  */
-import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadData } from './data.js';
+import { loadData } from './data.js';
 import { numAreas } from './data/conference-sets.js';
 import { loadGrantsData } from './grants/grants-data.js';
 import { isActive, loadJobsData } from './jobs/jobs-data.js';
-import { calculateParityReport } from './metrics.js';
 import { escapeHtml, formatRelativeTime } from './shared.js';
 import type { ConferenceRecord, Grant, Job, RawData } from './types.js';
 
@@ -19,25 +18,19 @@ const percent = (part: number, whole: number) => whole ? `${Math.round(part / wh
 export function summarizeRoster(data: RawData): Stat[] {
   const professors = Object.values(data.professors);
   const schools = Object.values(data.schools);
-  const active = professors.filter(prof => prof.pubs.length > 0).length;
+  const active = professors.filter(prof => prof.pubs.length > 0);
+  // CSRankings lists alternate spellings of a person as extra rows sharing that person's homepage and affiliation.
+  const person = (prof: { homepage?: string, affiliation: string }) => `${prof.homepage}|${prof.affiliation}`;
+  const activeKeys = new Set(active.filter(prof => prof.homepage).map(person));
+  const alternates = professors.filter(prof => prof.pubs.length === 0 && prof.homepage && activeKeys.has(person(prof))).length;
   const countries = new Set(schools.map(school => school.country).filter(Boolean)).size;
   const us = schools.filter(school => school.country === 'us').length;
   return [
-    { label: 'Faculty', value: count(active), note: `${count(professors.length)} on the CSRankings roster`, help: 'Faculty with at least one CSRankings-tracked publication.' },
+    { label: 'Faculty', value: count(active.length), note: `with papers in CSRankings venues (of ${count(professors.length)} roster names)`,
+      help: `CSRankings' roster has ${count(professors.length)} name rows: ${count(alternates)} are alternate spellings of someone already listed, and the rest without papers in CSRankings-counted venues are kept only for the CORE A/A* option.` },
     { label: 'Universities', value: count(schools.length), note: `${count(us)} in the US`, help: 'Institutions listed in CSRankings.' },
     { label: 'Countries', value: count(countries), help: 'Countries with at least one listed institution.' },
     { label: 'Research areas', value: count(numAreas), help: 'CSRankings top-level research areas.' }
-  ];
-}
-
-/** Recomputes the US ranking with CSRankings' default rules and checks it is internally consistent. */
-export function summarizeDataChecks(data: RawData): Stat[] {
-  const filtered = filterByYears(data, DEFAULT_START_YEAR, DEFAULT_END_YEAR, 'us', null, null, 'csrankings-default');
-  const report = calculateParityReport(data, filtered, 'csrankings-default');
-  return [
-    { label: 'Matches CSRankings default', value: report.matchesCsrankings ? 'Yes' : 'No', note: `US, ${DEFAULT_START_YEAR}–${DEFAULT_END_YEAR}`, help: 'Rankings recomputed with the official default venues and current affiliations have no total or rank-order inconsistencies.' },
-    { label: 'Institution metadata', value: `${report.institutionCoverage.toFixed(0)}%`, note: 'country or region present' },
-    { label: 'Author profile links', value: `${report.profileCoverage.toFixed(0)}%`, note: 'homepage or Scholar ID' }
   ];
 }
 
@@ -65,7 +58,7 @@ export function summarizeJobs(jobs: Job[], now = Date.now()): Stat[] {
   const active = jobs.filter(job => isActive(job, now));
   return [
     { label: 'Active job postings', value: count(active.length), note: `${count(jobs.length)} listed including closed` },
-    { label: 'Hiring schools', value: count(new Set(active.map(job => job.school)).size), note: `in ${count(new Set(active.map(job => job.state)).size)} states` }
+    { label: 'Hiring universities', value: count(new Set(active.map(job => job.school)).size), note: `in ${count(new Set(active.map(job => job.state)).size)} states` }
   ];
 }
 
@@ -144,7 +137,6 @@ async function fetchJson(url: URL | string) {
 function init() {
   const roster = loadData();
   section('stats-roster', roster, data => renderStatGrid(summarizeRoster(data)));
-  section('stats-checks', roster, data => renderStatGrid(summarizeDataChecks(data)));
   section('stats-confs', fetchJson(new URL('../csconfs/data/conferences.json', import.meta.url)), confs => renderStatGrid(summarizeConferences(confs as ConferenceRecord[])));
   section('stats-grants', loadGrantsData(), grants => renderStatGrid(summarizeGrants(grants)));
   section('stats-jobs', loadJobsData(), jobs => renderStatGrid(summarizeJobs(jobs)));
