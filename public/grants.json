@@ -1366,24 +1366,24 @@
     "targetAudience": [
       "Faculty"
     ],
-    "whoFor": "University professors and faculty researchers worldwide",
-    "deadline": "August 20, 2026 at 9:00 AM KST (Annual August proposal deadline; opens June)",
+    "whoFor": "University professors and researchers at eligible universities worldwide",
+    "deadline": "August 23, 2026 at 23:59 UTC (2026 cycle closed)",
     "deadlineMonth": 8,
-    "amount": "Up to $150,000 per year (renewable up to 3 years, $450,000 total)",
-    "summary": "Samsung's flagship annual academic call for research proposals in emerging compute paradigms, next-generation semiconductor devices, neural processing units, computer vision, and robotics.",
+    "amount": "Not published; selected projects are funded for one year",
+    "summary": "Samsung's annual Global Research Outreach call funds one-year collaborative university research. The 2026 application period ran June 22–August 23 and is closed. Published 2026 themes include scientific AI, quantum computing, next-generation energy storage, semiconductor wastewater treatment, and additional themes in the program brochure.",
     "eligibility": [
-      "Full-time faculty member at an accredited university worldwide",
-      "Initial 2-page proposal submitted against specific annual GRO research themes"
+      "Applicant must be a university professor or researcher",
+      "Applicant's university must accept the GRO Research Agreement",
+      "The program does not fund equipment or cash donations, student projects, event sponsorships, or teaching activities",
+      "Postdoctoral researchers may collaborate, but their salary must come from another source"
     ],
     "topics": [
-      "Semiconductors & NPU",
-      "Computer Vision",
-      "Robotics & AI",
+      "Scientific AI",
       "Quantum Computing",
-      "Display & Sensors",
-      "Security"
+      "Energy Storage",
+      "Semiconductor Processes"
     ],
-    "url": "https://www.sait.samsung.co.kr/saithome/about/collabo_overview.do",
+    "url": "https://semiconductor.samsung.com/sait/event/global-research-outreach/",
     "featured": true
   },
   {
@@ -2005,7 +2005,7 @@
   },
   {
     "id": "openai-academic-researcher-grants",
-    "name": "OpenAI Researcher Access Program & Frontier Grants",
+    "name": "OpenAI Researcher Access Program",
     "shortName": "OpenAI Researcher Access",
     "sponsor": "OpenAI",
     "sponsorCategory": "Industry",
@@ -2014,21 +2014,26 @@
       "PhD Students",
       "Postdocs"
     ],
-    "whoFor": "Academic faculty, postdocs, and doctoral students conducting research on AI safety, capabilities, and scientific discovery",
-    "deadline": "Rolling Application Cycles",
+    "whoFor": "Researchers studying responsible AI deployment, AI risks, or societal impacts; early-stage researchers and those with limited resources are especially encouraged",
+    "deadline": "Applications reviewed quarterly in March, June, September, and December",
     "deadlineMonth": 0,
-    "amount": "Amount varies; see the official call page",
-    "summary": "Provides university researchers and students with free and subsidized access to OpenAI frontier models (GPT-4o, reasoning models, and APIs) to accelerate research in AI safety, alignment, evaluation, and scientific exploration.",
+    "amount": "Up to $1,000 in OpenAI API credits, valid for 12 months",
+    "summary": "OpenAI provides subsidized API credits for research into responsible AI deployment, associated risks, and AI's societal impact. Applications are reviewed once every three months; credits expire after one year and cannot be renewed.",
     "eligibility": [
-      "Affiliated with an accredited academic or non-profit research institution",
-      "Research focused on responsible AI deployment, alignment, evaluation, or domain science",
-      "Must commit to publishing open academic findings"
+      "Application must describe the research question and planned use of OpenAI products",
+      "Researcher must be in a country supported by the OpenAI API",
+      "Applicants should review the program's sharing and publication policy"
     ],
     "topics": [
       "AI/ML",
       "AI Safety & Ethics",
-      "NLP",
-      "Systems"
+      "Fairness and Representation",
+      "Societal Impact",
+      "Misuse Potential",
+      "Human-AI Interaction",
+      "Economic Impacts",
+      "Generalization and Transfer Learning",
+      "Multimodal Measurement"
     ],
     "url": "https://openai.com/form/researcher-access-program/",
     "featured": true
@@ -2044,15 +2049,14 @@
       "Postdocs"
     ],
     "whoFor": "Current research faculty and postdoctoral researchers at research-active, degree-granting universities, with a first-authored (or co-authored) paper on arXiv, bioRxiv, or ChemRxiv within the last 3 years",
-    "deadline": "Rolling (staged rollout: 10,000 researchers in initial cohort, expanding to 100,000 through 2027)",
+    "deadline": "New applicants are waitlisted; OpenAI said future selection rounds would reopen later in fall 2026",
     "deadlineMonth": 0,
-    "amount": "Free ChatGPT Team workspace for 12 months (1 owner + up to 4 verified collaborator seats); no API credits included",
-    "summary": "Complimentary access to OpenAI's frontier ChatGPT models for research faculty and postdocs, aimed at accelerating scientific discovery across STEM fields; verified via SheerID and a qualifying preprint.",
+    "amount": "Up to five free ChatGPT for Academic Researchers seats for 12 months per approved workspace; no API credits",
+    "summary": "OpenAI offers qualifying researchers free access to ChatGPT, ChatGPT Work, and Codex, with business data protections and up to four verified collaborators. As of its August 10, 2026 update, new applicants join a waitlist while initial seats are allocated; OpenAI plans to expand the program through 2027.",
     "eligibility": [
-      "Affiliated with an accredited, research-active degree-granting college or university",
-      "Currently a research faculty member or postdoctoral researcher (not open to grad/undergrad students)",
-      "Author or co-author on a paper posted to arXiv, bioRxiv, or ChemRxiv within the past 3 years (a journal publication alone does not qualify)",
-      "Research field among Biological Sciences, Chemistry and Materials, Computer Science, Earth and Planetary Sciences, Engineering, Mathematics, or Physics"
+      "Must be research faculty or postdoctoral researcher at an eligible academic institution in a supported country",
+      "Must verify affiliation and submit a paper posted to arXiv, bioRxiv, or ChemRxiv within the past three years that lists the applicant as an author",
+      "Eligible fields listed in the Help Center include biological sciences, chemistry and materials, computer science, Earth and planetary sciences, engineering, mathematics, and physics"
     ],
     "topics": [
       "AI/ML",
@@ -2072,22 +2076,21 @@
       "PhD Students",
       "Postdocs"
     ],
-    "whoFor": "Academic and nonprofit researchers (including biotech/independent scientists) pursuing high-impact scientific research, especially in biology and life sciences",
-    "deadline": "Rolling; reviewed on the first Monday of each month",
+    "whoFor": "Researchers pursuing high-impact scientific research",
+    "deadline": "Applications accepted; no fixed general deadline published",
     "deadlineMonth": 0,
-    "amount": "Up to $20,000 in Claude API credits over 6 months (API only, not the Claude web app; standard generally-available models only)",
-    "summary": "Distributes free Claude API credits to academic and nonprofit researchers working on scientifically impactful projects — biology and life sciences, chemistry, medicine, environmental science, physics, earth sciences, and computer science — where AI can meaningfully accelerate the work.",
+    "amount": "Up to $50,000 in Claude credits per project",
+    "summary": "Anthropic's AI for Science program provides Claude credits for high-impact research. Its August 2026 expansion broadened the program beyond biological sciences and says any researcher may apply; specialized calls may have separate scope and deadlines.",
     "eligibility": [
-      "Affiliated with an academic institution, nonprofit, or similar research organization (biotech startups and independent scientists also considered)",
-      "Applicant is at least 18 (or the age of majority in their jurisdiction)",
-      "Research proposal is evaluated on scientific merit, potential impact, technical feasibility, and team credentials in the subject area and in AI",
-      "Must agree to Anthropic's Usage Policy; standard Trust & Safety enforcement applies"
+      "Any researcher may apply; application evaluation and credits are subject to the official program rules",
+      "Applicants affiliated with an employer or university must obtain any required institutional consent",
+      "Eligibility is subject to Anthropic's official rules and applicable legal restrictions"
     ],
     "topics": [
       "AI/ML",
       "AI for Science"
     ],
-    "url": "https://www.anthropic.com/news/ai-for-science-program",
+    "url": "https://www.anthropic.com/news/expanding-support-for-scientists",
     "featured": false
   },
   {
@@ -2102,15 +2105,14 @@
       "Postdocs"
     ],
     "whoFor": "Technically strong researchers/engineers (no PhD required) who want to transition into empirical AI safety, security, or alignment research, mentored full-time by Anthropic researchers",
-    "deadline": "Rolling applications for periodic cohorts (next cohort starts ~January 2027)",
+    "deadline": "Rolling applications; apply by October 18, 2026 for the January 2027 cohort",
     "deadlineMonth": 0,
     "amount": "$3,850/week stipend (~$2,310 GBP, ~$4,300 CAD) plus a ~$15,000/month compute budget, for a 4-month full-time fellowship",
-    "summary": "A 4-month, full-time research fellowship pairing emerging technical talent with Anthropic researcher mentors on empirical AI safety, security, ML systems, reinforcement learning, or economics/societal-impact projects, with an emphasis on producing public research outputs.",
+    "summary": "A four-month, full-time research fellowship with Anthropic mentorship, stipend and compute support, aimed at producing public research outputs. The current January 2027 cohort application deadline is October 18, 2026.",
     "eligibility": [
-      "No PhD or specific credential required — selection is based on ability to execute on research (strong coding/Python skills, comfort with ambiguous problems)",
-      "Requires existing work authorization in the US, UK, or Canada (no visa sponsorship)",
-      "Based in Berkeley or London, or remote-friendly within eligible countries",
-      "~25-50% of past fellows have historically received full-time offers afterward"
+      "No PhD or specific credential required; applicants should have strong technical fundamentals and Python skills",
+      "Must be able to work full-time and have work authorization in the U.S., U.K., or Canada; visa sponsorship is not available",
+      "Remote participation is possible within eligible countries; shared workspaces are available in Berkeley and London"
     ],
     "topics": [
       "AI/ML",
@@ -6172,6 +6174,33 @@
       "AI/ML"
     ],
     "url": "https://cloud.google.com/edu/researchers",
+    "featured": false
+  },
+  {
+    "id": "anthropic-claude-scientists-plan",
+    "name": "Claude Team Plan for Scientists",
+    "shortName": "Claude for Scientists",
+    "sponsor": "Anthropic",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Postdocs"
+    ],
+    "whoFor": "Principal investigators or equivalent at academic or nonprofit research institutions, with researchers in their lab",
+    "deadline": "Verification available; initial rollout is limited to 10,000 seats",
+    "deadlineMonth": 0,
+    "amount": "Standard seats free for one year; premium seats with 5x usage limits cost $15 per month",
+    "summary": "Anthropic offers scientists at academic and nonprofit institutions a one-year Claude Team plan. A verified PI or equivalent can add researchers in their lab; this subscription offer is separate from AI for Science project credits.",
+    "eligibility": [
+      "Principal investigator or equivalent at an academic or nonprofit research institution",
+      "Verification required before adding lab researchers"
+    ],
+    "topics": [
+      "AI for Science",
+      "Scientific Research"
+    ],
+    "url": "https://www.anthropic.com/news/expanding-support-for-scientists",
     "featured": false
   }
 ]

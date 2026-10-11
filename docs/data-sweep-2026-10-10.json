@@ -1916,8 +1916,8 @@
       "id": "samsung-gro",
       "status": "partial",
       "report": "docs/data-sweep-awards-programs-check-evidence-2026-10-10.json",
-      "findings": "Reviewed available official program pages; corrected current links and unsupported or outdated cycle details.",
-      "remaining": "Recheck missing or future cycle terms when sponsor pages publish them; continue remaining program audit."
+      "findings": "Corrected 2026 cycle deadline, closed status, eligibility, term, and themes from the official GRO page.",
+      "remaining": "Wait for next annual call and continue remaining award-program audit."
     },
     {
       "id": "draper-scholar-program",
@@ -2011,19 +2011,31 @@
     },
     {
       "id": "openai-academic-researcher-grants",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-openai-anthropic-evidence-2026-10-10.json",
+      "findings": "Updated active program terms from official sponsor pages and recorded current cycle availability.",
+      "remaining": "Continue remaining award backlog; recheck program pages for changes to cycle terms."
     },
     {
       "id": "openai-chatgpt-academic-researchers",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-openai-anthropic-evidence-2026-10-10.json",
+      "findings": "Updated active program terms from official sponsor pages and recorded current cycle availability.",
+      "remaining": "Continue remaining award backlog; recheck program pages for changes to cycle terms."
     },
     {
       "id": "anthropic-ai-for-science",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-openai-anthropic-evidence-2026-10-10.json",
+      "findings": "Updated active program terms from official sponsor pages and recorded current cycle availability.",
+      "remaining": "Continue remaining award backlog; recheck program pages for changes to cycle terms."
     },
     {
       "id": "anthropic-fellows-program",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-openai-anthropic-evidence-2026-10-10.json",
+      "findings": "Updated active program terms from official sponsor pages and recorded current cycle availability.",
+      "remaining": "Continue remaining award backlog; recheck program pages for changes to cycle terms."
     },
     {
       "id": "bwf-casi-award",
@@ -2524,6 +2536,12 @@
       "status": "audited-new",
       "report": "docs/data-sweep-awards-google-bwf-evidence-2026-10-10.json",
       "findings": "Added current official cloud-credit offer; $5,000 amount and eligible audiences supported, detailed conditions/deadline unknown."
+    },
+    {
+      "id": "anthropic-claude-scientists-plan",
+      "status": "audited-new",
+      "report": "docs/data-sweep-awards-openai-anthropic-evidence-2026-10-10.json",
+      "findings": "Added current scientist workspace access offer from Anthropic’s official announcement."
     }
   ],
   "discovery": {
