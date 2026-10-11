@@ -88,7 +88,7 @@ test('awards keyword help fits mobile and legacy filters become editable search 
   const input = page.locator('#grants-search');
   await expect(input).toHaveValue('audience: phd category: industry');
   await expect(page.locator('.grant-card').first()).toBeVisible();
-  await expect(page.locator('.search-filters select')).toHaveCount(1);
+  await expect(page.locator('.search-filters select')).toHaveCount(2);
   await page.reload();
   await expect(input).toHaveValue('audience: phd category: industry');
 
@@ -124,4 +124,27 @@ test('award actions and shared links use the same compact result menu as Jobs', 
   await page.goto(link);
   await expect(page.locator('.grant-card')).toHaveCount(1);
   await expect(page.locator('.grant-title')).toContainText(name.trim());
+});
+
+test('Grants view select groups awards by sponsor, like Jobs by school', async ({ page }) => {
+  await page.goto('grants.html');
+  await expect(page.locator('.grant-card').first()).toBeVisible();
+  await expect(page.locator('#sort-select')).toBeVisible();
+  await expect(page.locator('#view-select')).toHaveValue('award');
+  await expect(page.locator('.grant-sponsor-group')).toHaveCount(0);
+
+  await page.locator('#view-select').selectOption('sponsor');
+  await expect(page).toHaveURL(/view=sponsor/);
+  const acm = page.locator('.grant-sponsor-group[aria-label="Association for Computing Machinery (ACM)"]');
+  await expect(acm).toBeVisible();
+  expect(await acm.locator('.grant-card').count()).toBeGreaterThan(1);
+
+  // The sponsor heading narrows the search to that sponsor.
+  await acm.locator('h2 button').click();
+  await expect(page.locator('#grants-search')).toHaveValue(/sponsor: .*ACM/);
+  await expect(page.locator('.grant-sponsor-group')).toHaveCount(1);
+
+  // The view survives a reload through the URL.
+  await page.reload();
+  await expect(page.locator('#view-select')).toHaveValue('sponsor');
 });

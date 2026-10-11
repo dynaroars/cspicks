@@ -11,7 +11,8 @@ import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { escapeHtml } from '../shared.js';
 import { rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
-import { filterGrants, grantDeadlinePresentation, GRANTS_KEYWORD_SPECS, grantsSuggestions, loadGrantsData } from './grants-data.js';
+import { filterGrants, grantDeadlinePresentation, GRANTS_KEYWORD_SPECS, grantsSuggestions, groupBySponsor, loadGrantsData } from './grants-data.js';
+import type { SponsorGrants } from './grants-data.js';
 import type { Grant } from '../types.js';
 
 const params = new URLSearchParams(window.location.search);
@@ -29,7 +30,8 @@ const DEFAULT_EXAMPLES = ['NSF CAREER', 'Google PhD Fellowship', 'audience: phd'
 function getFilterState() {
   return {
     query: input ? input.value.trim() : '',
-    sortBy: selectById('sort-select')?.value || 'featured'
+    sortBy: selectById('sort-select')?.value || 'featured',
+    view: selectById('view-select')?.value || 'award'
   };
 }
 
@@ -37,6 +39,7 @@ function updateUrl(filterState: ReturnType<typeof getFilterState>) {
   const next = new URLSearchParams();
   if (filterState.query) next.set('q', filterState.query);
   if (filterState.sortBy !== 'featured') next.set('sort', filterState.sortBy);
+  if (filterState.view !== 'award') next.set('view', filterState.view);
 
   updateSearchUrl(next, filterState.query);
 
@@ -64,6 +67,8 @@ function render() {
         <button type="button" class="btn-secondary" id="reset-grants-filters" style="margin-top: 1rem;">Reset all filters</button>
       </div>
     `;
+  } else if (filterState.view === 'sponsor') {
+    resultsContainer.innerHTML = groupBySponsor(filtered).map(group => renderSponsorGroup(group, favorites.isFavorite)).join('');
   } else {
     resultsContainer.innerHTML = filtered.map(grant => renderGrantCard(grant, favorites.isFavorite)).join('');
   }
@@ -71,7 +76,8 @@ function render() {
   const countStr = `${filtered.length} award${filtered.length === 1 ? '' : 's'} &amp; grant${filtered.length === 1 ? '' : 's'}`;
   if (countElement) countElement.innerHTML = countStr;
   if (statusText) {
-    statusText.textContent = `Showing ${filtered.length} of ${allGrants.length} funding opportunities`;
+    const sponsors = new Set(filtered.map(grant => grant.sponsor)).size;
+    statusText.textContent = `Showing ${filtered.length} of ${allGrants.length} funding opportunities${filtered.length ? ` from ${sponsors} sponsor${sponsors === 1 ? '' : 's'}` : ''}`;
   }
 
   updateUrl(filterState);
@@ -140,8 +146,8 @@ function setupDelegatedListeners() {
     const resetBtn = target.closest('#reset-grants-filters');
     if (resetBtn) {
       input.value = '';
-      const sortEl = selectById('sort-select');
-      if (sortEl) sortEl.value = 'featured';
+      selectById('sort-select')!.value = 'featured';
+      selectById('view-select')!.value = 'award';
       render();
       input.focus();
       return;
@@ -167,7 +173,7 @@ function setupDelegatedListeners() {
   });
 
   // Filter change listeners
-  ['sort-select'].forEach(id => {
+  ['sort-select', 'view-select'].forEach(id => {
     document.getElementById(id)?.addEventListener('change', () => {
       render();
     });
@@ -182,6 +188,7 @@ function restoreFilters() {
   const sort = params.get('sort');
   const sortSelect = selectById('sort-select')!;
   if (sort && [...sortSelect.options].some(option => option.value === sort)) sortSelect.value = sort;
+  if (params.get('view') === 'sponsor') selectById('view-select')!.value = 'sponsor';
 }
 
 async function init() {
@@ -213,6 +220,18 @@ async function init() {
 }
 
 init();
+
+/** By-sponsor view: one group card per sponsor, like US Jobs' by-school view. */
+function renderSponsorGroup(group: SponsorGrants, isFavorite: (id: string) => boolean) {
+  const count = group.grants.length;
+  return `<section class="opportunity-group grant-sponsor-group" aria-label="${escapeHtml(group.sponsor)}">
+    <header class="opportunity-group-header">
+      <h2><button type="button" data-search-sponsor="${escapeHtml(group.sponsor)}">${escapeHtml(group.sponsor)}</button></h2>
+      <p class="opportunity-group-meta">${escapeHtml(group.category)} · ${count} award${count === 1 ? '' : 's'}</p>
+    </header>
+    <div class="opportunity-group-items">${group.grants.map(grant => renderGrantCard(grant, isFavorite)).join('')}</div>
+  </section>`;
+}
 
 /** CS Awards & Grants cards use the same hierarchy as US Jobs. */
 function renderGrantCard(grant: Grant, isFavorite: (id: string) => boolean = () => false) {

@@ -1544,6 +1544,15 @@ button.card-header {
 /* ==== Shared Awards/Jobs opportunity cards ==== */
 
 /* Shared opportunity presentation for Awards & Grants and US Jobs. */
+/* Grouped views (Jobs by school, Awards by sponsor): one bordered card per group. */
+.opportunity-group { border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.2rem 0.2rem; margin: 0 0 1rem; background: var(--bg-secondary); }
+.opportunity-group-header h2 { margin: 0; font-size: 1.2rem; }
+.opportunity-group-header h2 button { background: none; border: 0; padding: 0; margin: 0; font: inherit; font-weight: 700; color: inherit; cursor: pointer; text-align: left; }
+.opportunity-group-header h2 button:hover { color: var(--accent-color); text-decoration: underline; }
+.opportunity-group-meta { margin: .25rem 0 .4rem; color: var(--text-secondary); font-size: .84rem; }
+.opportunity-group-items .opportunity-card:first-child { border-top: 0; }
+.opportunity-group-items .opportunity-card:hover { background: transparent; }
+
 .opportunity-card {
   position: relative; padding: 1.4rem 0; border-top: 1px solid var(--border-color);
   background: transparent; transition: background-color .2s ease;

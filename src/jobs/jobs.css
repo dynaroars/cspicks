@@ -47,13 +47,8 @@
 .job-school-btn:hover { color: var(--accent-color); text-decoration: underline; }
 .job-meta { margin: .25rem 0; color: var(--text-secondary); font-size: .84rem; }
 
-/* By-school view */
-.job-school-card { border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.2rem 0.2rem; margin: 0 0 1rem; background: var(--bg-secondary); }
-.job-school-card-header h2 { margin: 0; font-size: 1.2rem; }
-.job-school-card-header .job-school-btn { font-weight: 700; font-family: inherit; }
+/* By-school view (group card styles are shared in style.css) */
 .job-school-links { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 0.35rem 0 0.4rem; font-size: 0.84rem; }
-.job-school-card-jobs .job-card:first-child { border-top: 0; }
-.job-school-card-jobs .job-card:hover { background: transparent; }
 
 @media (max-width: 640px) {
   .job-map { gap: 3px; }

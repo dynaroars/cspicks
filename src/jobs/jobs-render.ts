@@ -69,15 +69,15 @@ export function renderJobCard(job: Job, ranks: RankLookup, isFavorite: IsFavorit
 export function renderSchoolCard(group: SchoolJobs, ranks: RankLookup, isFavorite: IsFavorite = () => false, now = Date.now()) {
   const info = ranks(group.school);
   const first = group.jobs[0]!;
-  return `<section class="job-school-card" aria-label="${escapeHtml(group.school)}">
-    <header class="job-school-card-header">
+  return `<section class="opportunity-group job-school-card" aria-label="${escapeHtml(group.school)}">
+    <header class="opportunity-group-header">
       <h2><button type="button" class="job-school-btn" data-search-school="${escapeHtml(group.school)}">${escapeHtml(group.school)}</button></h2>
       <p class="job-meta">${first.city ? `${escapeHtml(first.city)}, ` : ''}${escapeHtml(US_STATES[group.state] || group.state)}
         ${info?.rank ? `· <span class="opportunity-chip job-chip job-chip-rank" title="Overall CSRankings position (US, last 10 years)">#${info.rank} CSRankings</span>` : ''}
         · ${group.jobs.length} position${group.jobs.length === 1 ? '' : 's'}</p>
       <p class="job-school-links">${schoolLinks(group.school)}</p>
     </header>
-    <div class="job-school-card-jobs">${group.jobs.map(job => renderJobCard(job, ranks, isFavorite, now, false)).join('')}</div>
+    <div class="opportunity-group-items">${group.jobs.map(job => renderJobCard(job, ranks, isFavorite, now, false)).join('')}</div>
   </section>`;
 }
 

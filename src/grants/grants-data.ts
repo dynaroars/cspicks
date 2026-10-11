@@ -281,3 +281,15 @@ export function grantsSuggestions(grants: Grant[]) {
     audiences: Array.from(audienceSet.values())
   };
 }
+
+export interface SponsorGrants { sponsor: string, category: string, grants: Grant[] }
+
+/** Groups awards by sponsor, keeping the order of each sponsor's first appearance. */
+export function groupBySponsor(grants: Grant[]): SponsorGrants[] {
+  const groups = new Map<string, SponsorGrants>();
+  grants.forEach(grant => {
+    if (!groups.has(grant.sponsor)) groups.set(grant.sponsor, { sponsor: grant.sponsor, category: grant.sponsorCategory, grants: [] });
+    groups.get(grant.sponsor)!.grants.push(grant);
+  });
+  return [...groups.values()];
+}
