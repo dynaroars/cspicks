@@ -153,7 +153,8 @@
       "school": "Univ. of California - Irvine",
       "status": "audited",
       "report": "docs/data-sweep-jobs-uci-evidence-2026-10-10.json",
-      "findings": "Checked official ICS and Recruit listings across CS, Informatics, Statistics and EECS. Refreshed nine active records and added four CS/Informatics research pools open to CS/related qualifications."
+      "findings": "Checked official ICS and Recruit listings across CS, Informatics, Statistics and EECS. Refreshed nine active records and added four CS/Informatics research pools open to CS/related qualifications. Corrected structured final-deadline and review-date fields for active UC Recruit postings; captured post-review only if unfilled language in summaries.",
+      "checkedAt": "2026-10-11"
     },
     {
       "school": "University of Colorado Boulder",
@@ -345,9 +346,10 @@
     {
       "school": "Univ. of California - Riverside",
       "status": "audited",
-      "checkedAt": "2026-10-10",
+      "checkedAt": "2026-10-11",
       "evidence": "docs/data-sweep-jobs-ucr-evidence-2026-10-10.json",
-      "note": "Verified active CSE system-security postdoc JPF02353; open until filled through June 30, 2027, with a passed Sep 25 review date and Jan 1 start. Refreshed existing record."
+      "note": "Verified active CSE system-security postdoc JPF02353; open until filled through June 30, 2027, with a passed Sep 25 review date and Jan 1 start. Refreshed existing record. Corrected structured final-deadline and review-date fields for active UC Recruit postings; captured post-review only if unfilled language in summaries.",
+      "findings": "Corrected structured final-deadline and review-date fields for active UC Recruit postings; captured post-review only if unfilled language in summaries."
     },
     {
       "school": "Washington State University",
@@ -860,7 +862,8 @@
       "school": "Univ. of California - Merced",
       "status": "audited",
       "report": "docs/data-sweep-jobs-uc-merced-evidence-2026-10-11.json",
-      "findings": "Refreshed the active CSE Lecturer pool JPF02097 for AY 2026–27; it accepts applications through May 18, 2027, with Spring 2027 review around October. Full academic recruit index was previously checked; no current ladder-rank CSE search found."
+      "findings": "Refreshed the active CSE Lecturer pool JPF02097 for AY 2026–27; it accepts applications through May 18, 2027, with Spring 2027 review around October. Full academic recruit index was previously checked; no current ladder-rank CSE search found. Corrected structured final-deadline and review-date fields for active UC Recruit postings; captured post-review only if unfilled language in summaries.",
+      "checkedAt": "2026-10-11"
     },
     {
       "school": "IUPUI",
@@ -1282,7 +1285,8 @@
       "school": "University of Michigan-Flint",
       "status": "partial",
       "report": "docs/data-sweep-jobs-michigan-flint-evidence-2026-10-11.json",
-      "findings": "Official HR portal identified but current campus postings require a separate UM Careers search; partial."
+      "findings": "Corrected the CS assistant professor record deadline from Feb 7 to Jan 31, 2027 and set reviewBegins to Sep 15 based on the full Interfolio posting.",
+      "remaining": "Current campus-wide CS-eligible postings still require a separate UM Careers search."
     }
   ],
   "conferences": [
@@ -3087,9 +3091,9 @@
   "captureReview": {
     "source": "docs/data-sweep-jobs-2026-10-10.md describes the 652 captured official URLs as awaiting evidence review",
     "capturePages": 652,
-    "triagedThroughPage": 400,
+    "triagedThroughPage": 652,
     "lastUpdated": "2026-10-11",
-    "stillNeedsReview": 252,
+    "stillNeedsReview": 0,
     "triagedPageRanges": [
       {
         "first": 61,
@@ -3105,7 +3109,20 @@
         "first": 241,
         "last": 400,
         "report": "docs/data-sweep-jobs-capture-triage-pages-241-400-evidence-2026-10-11.json"
+      },
+      {
+        "first": 401,
+        "last": 652,
+        "report": "docs/data-sweep-jobs-existing-record-corrections-2026-10-11.json"
       }
-    ]
+    ],
+    "existingPostingComparison": {
+      "postingReferences": 244,
+      "exactUrlMatches": 240,
+      "canonicalUrlCorrections": 4,
+      "materiallyCorrectedRecords": 9,
+      "report": "docs/data-sweep-jobs-existing-record-corrections-2026-10-11.json"
+    },
+    "limitations": "All captured pages received first-pass keyword triage; direct posting references were compared with existing job records. This does not complete the 137 school rows still marked partial."
   }
 }

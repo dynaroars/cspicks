@@ -1,0 +1,40 @@
+{
+  "checkedAt": "2026-10-11",
+  "scope": "Existing-record audit against all 244 captured official posting references",
+  "method": "Compared posting URLs with public/jobs.json and checked captured detail text for existing deadlines and closure states. Individually reviewed discrepancies before changing records.",
+  "postingReferences": 244,
+  "exactUrlMatches": 240,
+  "alternateCanonicalUrlsCorrected": 4,
+  "correctedRecords": [
+    {
+      "id": "jhu-dsai-postdoc-machine-learning-2026",
+      "finding": "Interfolio states the Oct 9, 2026 application deadline has passed and directs candidates to contact the institution. Marked closed as of Oct 9."
+    },
+    {
+      "id": "umflint-asst-prof-cs-cybersecurity-ai-2026",
+      "finding": "Interfolio says review began Sep 15, 2026 and materials are due Jan 31, 2027; the stored deadline was incorrectly Feb 7. Corrected."
+    },
+    {
+      "ids": [
+        "uci-cs-lecturer-pool-2026",
+        "uci-cs-postdoc-pool-2026",
+        "uci-informatics-lecturer-pool-2026",
+        "uci-informatics-postdoc-pool-2026",
+        "uci-eecs-postdoc-pool-2026",
+        "ucmerced-lecturer-cse-2026",
+        "ucr-cse-postdoc-system-security-2026"
+      ],
+      "finding": "Seven UC Recruit records lacked a structured final application date. Added exact final dates and kept the post-review, only-if-unfilled condition in summaries."
+    },
+    {
+      "ids": [
+        "wm-cs-postdoc-rail-2026",
+        "psu-open-rank-cs-huck-2026",
+        "umass-lowell-miner-core-ai-open-2026",
+        "uh-manoa-ece-computer-engineering-2026"
+      ],
+      "finding": "The capture inventory used older URL variants; existing records now point to current canonical requisitions."
+    }
+  ],
+  "limitations": "All captured pages received first-pass keyword triage; this does not complete the 137 school rows still marked partial."
+}

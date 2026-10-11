@@ -9,8 +9,12 @@
     {
       "url": "https://www.umflint.edu/cit/contact-us/computer-science/",
       "finding": "Official CS faculty directory reviewed."
+    },
+    {
+      "url": "https://apply.interfolio.com/190883",
+      "finding": "Existing CS assistant professor record had an incorrect Feb 7, 2027 deadline. Full Interfolio posting states review begins Sep 15, 2026 and application materials are due Jan 31, 2027; corrected deadline and review date."
     }
   ],
   "findings": "Official HR portal identified but current campus postings require a separate UM Careers search; partial.",
-  "recordUpdates": "No job records changed pending full posting verification."
+  "recordUpdates": "Corrected existing CS assistant professor deadline (Jan 31, 2027; previously Feb 7) and review start date. Wider campus CS-eligible board scan remains incomplete."
 }

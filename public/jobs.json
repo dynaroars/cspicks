@@ -1683,14 +1683,15 @@
     "areas": [],
     "state": "CA",
     "city": "Irvine",
-    "rolling": true,
-    "lastSeenAt": "2026-10-10",
+    "rolling": false,
+    "lastSeenAt": "2026-10-11",
     "url": "https://recruit.ap.uci.edu/JPF10233",
     "visaSponsorship": "not-stated",
-    "summary": "Open pool of part-time lecturers for graduate and undergraduate CS courses; hiring not guaranteed.",
+    "summary": "Open pool of part-time lecturers for graduate and undergraduate CS courses; hiring is not guaranteed. Applications are accepted through June 30, 2027; submissions after the Aug 1, 2026 review date are considered only if the position remains unfilled.",
     "source": "crawl",
     "postedDate": "2026-07-01",
-    "verified": true
+    "verified": true,
+    "deadline": "2027-06-30"
   },
   {
     "id": "uci-cs-postdoc-pool-2026",
@@ -1701,14 +1702,15 @@
     "areas": [],
     "state": "CA",
     "city": "Irvine",
-    "rolling": true,
-    "lastSeenAt": "2026-10-10",
+    "rolling": false,
+    "lastSeenAt": "2026-10-11",
     "url": "https://recruit.ap.uci.edu/JPF10230",
     "visaSponsorship": "not-stated",
-    "summary": "Open pool for future postdoc appointments funded by faculty grants; no specific openings guaranteed.",
+    "summary": "Open pool for future CS postdoc appointments funded by faculty grants; hiring is not guaranteed. Applications are accepted through June 30, 2027; submissions after the Sep 8, 2026 review date are considered only if the position remains unfilled.",
     "source": "crawl",
     "postedDate": "2026-07-01",
-    "verified": true
+    "verified": true,
+    "deadline": "2027-06-30"
   },
   {
     "id": "uci-informatics-lecturer-pool-2026",
@@ -1719,14 +1721,15 @@
     "areas": [],
     "state": "CA",
     "city": "Irvine",
-    "rolling": true,
-    "lastSeenAt": "2026-10-10",
+    "rolling": false,
+    "lastSeenAt": "2026-10-11",
     "url": "https://recruit.ap.uci.edu/JPF10366",
     "visaSponsorship": "not-stated",
-    "summary": "Open pool of lecturers for future Informatics teaching needs; hiring not guaranteed.",
+    "summary": "Open pool of lecturers for future Informatics teaching needs; hiring is not guaranteed. Applications are accepted through June 30, 2027; submissions after the Oct 7, 2026 review date are considered only if the position remains unfilled.",
     "source": "crawl",
     "postedDate": "2026-09-22",
-    "verified": true
+    "verified": true,
+    "deadline": "2027-06-30"
   },
   {
     "id": "uci-informatics-postdoc-pool-2026",
@@ -1737,14 +1740,15 @@
     "areas": [],
     "state": "CA",
     "city": "Irvine",
-    "rolling": true,
-    "lastSeenAt": "2026-10-10",
+    "rolling": false,
+    "lastSeenAt": "2026-10-11",
     "url": "https://recruit.ap.uci.edu/JPF10364",
     "visaSponsorship": "not-stated",
-    "summary": "Open pool for future Informatics postdoc appointments; no specific openings guaranteed.",
+    "summary": "Open pool for future Informatics postdoc appointments; hiring is not guaranteed. Applications are accepted through June 30, 2027; submissions after the Oct 7, 2026 review date are considered only if the position remains unfilled.",
     "source": "crawl",
     "postedDate": "2026-09-22",
-    "verified": true
+    "verified": true,
+    "deadline": "2027-06-30"
   },
   {
     "id": "uci-open-rank-ai-ml-2026",
@@ -1831,15 +1835,16 @@
     "areas": [],
     "state": "CA",
     "city": "Merced",
-    "rolling": true,
+    "rolling": false,
     "startDate": "2026-07-01",
     "postedDate": "2026-04-16",
     "lastSeenAt": "2026-10-11",
     "url": "https://aprecruit.ucmerced.edu/JPF02097",
     "visaSponsorship": "not-stated",
-    "summary": "Limited-term lecturer positions teaching undergraduate CSE courses for 2026-2027. Applications accepted until May 18, 2027; later reviews are considered if unfilled.",
+    "summary": "Limited-term lecturer positions teaching undergraduate CSE courses for 2026–2027. Applications are accepted through May 18, 2027; submissions after the Aug 17, 2026 review date are considered only if the position remains unfilled.",
     "source": "crawl",
-    "verified": true
+    "verified": true,
+    "deadline": "2027-05-18"
   },
   {
     "id": "ucsd-adjunct-prof-cse-2026",
@@ -2647,15 +2652,16 @@
     ],
     "state": "MI",
     "city": "Flint",
-    "deadline": "2027-02-07",
+    "deadline": "2027-01-31",
     "rolling": false,
     "postedDate": "2026-08-13",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-11",
     "url": "https://apply.interfolio.com/190883",
     "visaSponsorship": "not-stated",
-    "summary": "Multiple tenure-track assistant professor positions in cybersecurity, AI, and related fields as part of a large college hiring initiative.",
+    "summary": "Multiple tenure-track assistant professor positions in cybersecurity, AI, and related fields in the Division of Computing. Candidates may select January 2027, August 2027, or January 2028 as a preferred start. Review began Sep 15, 2026; application materials are due Jan 31, 2027.",
     "source": "crawl",
-    "verified": true
+    "verified": true,
+    "reviewBegins": "2026-09-15"
   },
   {
     "id": "unlv-cybersecurity-ai-lecturer-2026",
@@ -3649,7 +3655,7 @@
   {
     "source": "crawl",
     "verified": true,
-    "lastSeenAt": "2026-10-10",
+    "lastSeenAt": "2026-10-11",
     "id": "uci-eecs-postdoc-pool-2026",
     "school": "Univ. of California - Irvine",
     "department": "Electrical Engineering and Computer Science, Henry Samueli School of Engineering",
@@ -3665,9 +3671,9 @@
     "city": "Irvine",
     "url": "https://recruit.ap.uci.edu/JPF10321",
     "visaSponsorship": "not-stated",
-    "summary": "Standing pool for postdoctoral scholars sponsored by EECS faculty across the department, including machine learning, embedded systems and security. Requires a PhD in EE or CS; open through Jul 9, 2027.",
-    "deadline": null,
-    "rolling": true,
+    "summary": "Standing pool for EECS postdoctoral scholars sponsored by faculty, including machine learning, embedded systems and security. Requires a PhD in EE or CS; applications are accepted through July 9, 2027, with post-review applications considered only if the position remains unfilled.",
+    "deadline": "2027-07-09",
+    "rolling": false,
     "postedDate": "2026-07-10"
   },
   {
@@ -5316,14 +5322,15 @@
     ],
     "state": "CA",
     "city": "Riverside",
-    "rolling": true,
+    "rolling": false,
     "postedDate": "2026-09-11",
     "startDate": "2027-01-01",
-    "lastSeenAt": "2026-10-10",
+    "lastSeenAt": "2026-10-11",
     "url": "https://aprecruit.ucr.edu/JPF02353",
-    "summary": "Two-year postdoc in system security (vulnerability discovery, program analysis), also open to all areas of CSE. Applications accepted through June 30, 2027; last review date was Sep 25, 2026.",
+    "summary": "Two-year CSE postdoc in system security, including vulnerability discovery, systems building and program analysis; other CSE areas are also welcome. Applications are accepted through June 30, 2027; submissions after the Sep 25, 2026 review date are considered only if the position remains unfilled. Anticipated Jan 1, 2027 start.",
     "source": "crawl",
-    "verified": true
+    "verified": true,
+    "deadline": "2027-06-30"
   },
   {
     "id": "gwu-trails-ai-postdoc-2026",

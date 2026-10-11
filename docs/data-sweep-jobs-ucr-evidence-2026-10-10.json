@@ -1,6 +1,6 @@
 {
   "school": "Univ. of California - Riverside",
-  "checkedAt": "2026-10-10",
+  "checkedAt": "2026-10-11",
   "checkedSources": [
     {
       "url": "https://aprecruit.ucr.edu/apply",
@@ -9,7 +9,18 @@
     {
       "url": "https://aprecruit.ucr.edu/JPF02353",
       "finding": "Active full-time CSE postdoc in system security, vulnerability discovery/analysis, system building and program analysis. PhD in CS&E or closely related required. Applications accepted after Sep 25 review only if position remains unfilled; anticipated Jan 1 2027 start."
+    },
+    {
+      "url": "official UC Recruit detail pages",
+      "records": [
+        "ucr-cse-postdoc-system-security-2026"
+      ],
+      "finding": "Corrected missing structured final application dates and review dates from current requisitions. Each explicitly says applications are accepted until the final date; applications after the most recent review date are considered only if the position remains unfilled. Added the final date as the closing deadline and preserved the post-review limitation in the record summary."
+    },
+    {
+      "url": "Official UC Recruit requisition details",
+      "finding": "Corrected missing structured final application dates from current requisitions. Each explicitly says applications are accepted until the final date; applications after the most recent review date are considered only if the position remains unfilled. Added the final date as the closing deadline and preserved the post-review limitation and review date in each record summary."
     }
   ],
-  "recordUpdates": "Refreshed existing job lastSeenAt. Its summary already records open-until-filled through Jun 30 and the elapsed review date."
+  "recordUpdates": "Refreshed existing job lastSeenAt. Its summary already records open-until-filled through Jun 30 and the elapsed review date. Corrected missing structured final application dates from current requisitions. Each explicitly says applications are accepted until the final date; applications after the most recent review date are considered only if the position remains unfilled. Added the final date as the closing deadline and preserved the post-review limitation and review date in each record summary."
 }
