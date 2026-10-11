@@ -869,7 +869,9 @@
     },
     {
       "name": "CVPR",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-vision-robotics-2026-10-10.md",
+      "remaining": "Other editions, statistics and discovery require completion; see report."
     },
     {
       "name": "DAC",
@@ -949,7 +951,9 @@
     },
     {
       "name": "ICRA",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-vision-robotics-2026-10-10.md",
+      "remaining": "Other editions, statistics and discovery require completion; see report."
     },
     {
       "name": "ICSE",
@@ -1480,7 +1484,9 @@
     },
     {
       "name": "WACV",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-vision-robotics-2026-10-10.md",
+      "remaining": "Other editions, statistics and discovery require completion; see report."
     },
     {
       "name": "WSDM",
@@ -2342,6 +2348,21 @@
     "typecheck": "passed",
     "build": "passed; optional upstream DBLP aliases CSV parse warning, nonfatal",
     "browser": "10 Jobs tests passed",
+    "diffCheck": "passed",
+    "projectSize": "passed"
+  },
+  "captureAdjacentUCSD": {
+    "sessionId": 53991,
+    "status": "completed",
+    "directory": "/tmp/ucsd-adjacent-candidates/",
+    "count": 19,
+    "note": "All captured details require evidence review before updates."
+  },
+  "verificationBatch4": {
+    "unit": "16 test files passed",
+    "typecheck": "passed",
+    "build": "passed; optional upstream DBLP aliases CSV parse warning, nonfatal",
+    "browser": "6 CS Confs tests passed",
     "diffCheck": "passed",
     "projectSize": "passed"
   }
