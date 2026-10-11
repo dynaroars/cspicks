@@ -23,13 +23,14 @@
     },
     {
       "program": "Samsung Global Research Outreach",
-      "url": "https://research.samsung.com/news/SRUK-Open-Innovation-ndash-An-introduction-to-OI-in-Europe",
-      "supports": "Official Samsung Research article describes the Global Research Outreach program as annual; the SAIT collaboration page timed out, so the previously listed cycle details and amounts were not independently confirmed in this check."
+      "url": "https://semiconductor.samsung.com/sait/event/global-research-outreach/",
+      "supports": "Official 2026 page states the application period was June 22–August 23, 2026 (23:59 UTC) and is closed; selected projects are funded for one year; eligibility is university professors/researchers whose university accepts the GRO Research Agreement; it explicitly excludes equipment/cash donations, student projects, event sponsorships, and teaching. The page lists scientific AI, quantum computing, next-generation energy storage and semiconductor wastewater treatment among 2026 themes; no fixed award amount is published."
     }
   ],
   "changes": [
     "Removed unsupported current-cycle claims from Adobe's unavailable scholarship listing.",
     "Updated Draper to the official 2026 dates, current closed state, citizenship and partner-university eligibility, and research area scope.",
-    "Updated Snap URL and removed the unsupported claim that the 2022 deadline is an annual current cycle."
+    "Updated Snap URL and removed the unsupported claim that the 2022 deadline is an annual current cycle.",
+    "Corrected Samsung GRO 2026 cycle date, closed status, one-year funding, eligibility and exclusions; removed unsupported annual amount and stale topic claims."
   ]
 }

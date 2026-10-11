@@ -2046,35 +2046,59 @@
     },
     {
       "id": "nsf-satc",
-      "status": "pending"
+      "status": "audited",
+      "findings": "Updated current availability, deadlines, eligibility, scope, and award limits from official NSF sources.",
+      "remaining": "Recheck when NSF publishes a new solicitation or updates program terms.",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json"
     },
     {
       "id": "nsf-ai-institutes",
-      "status": "pending"
+      "status": "audited",
+      "findings": "Updated current availability, deadlines, eligibility, scope, and award limits from official NSF sources.",
+      "remaining": "Recheck when NSF publishes a new solicitation or updates program terms.",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json"
     },
     {
       "id": "nsf-robotics-frr",
-      "status": "pending"
+      "status": "audited",
+      "findings": "Updated current availability, deadlines, eligibility, scope, and award limits from official NSF sources.",
+      "remaining": "Recheck when NSF publishes a new solicitation or updates program terms.",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json"
     },
     {
       "id": "nsf-shf",
-      "status": "pending"
+      "status": "audited",
+      "findings": "Updated current availability, deadlines, eligibility, scope, and award limits from official NSF sources.",
+      "remaining": "Recheck when NSF publishes a new solicitation or updates program terms.",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json"
     },
     {
       "id": "nsf-algorithmic-foundations",
-      "status": "pending"
+      "status": "audited",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json",
+      "findings": "Updated current solicitation name, scope, deadlines, amounts, and eligibility using official NSF sources.",
+      "remaining": "Recheck when NSF publishes or revises the solicitation."
     },
     {
       "id": "nsf-cyber-physical-systems",
-      "status": "pending"
+      "status": "audited",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json",
+      "findings": "Updated current solicitation name, scope, deadlines, amounts, and eligibility using official NSF sources.",
+      "remaining": "Recheck when NSF publishes or revises the solicitation."
     },
     {
       "id": "nsf-pose",
-      "status": "pending"
+      "status": "audited",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json",
+      "findings": "Updated current solicitation name, scope, deadlines, amounts, and eligibility using official NSF sources.",
+      "remaining": "Recheck when NSF publishes or revises the solicitation."
     },
     {
       "id": "nsf-reu-sites",
-      "status": "pending"
+      "status": "audited",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json",
+      "findings": "Updated current solicitation name, scope, deadlines, amounts, and eligibility using official NSF sources.",
+      "remaining": "Recheck when NSF publishes or revises the solicitation."
     },
     {
       "id": "darpa-i2o-open-baa",

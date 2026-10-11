@@ -2164,15 +2164,15 @@
       "Postdocs",
       "PhD Students"
     ],
-    "whoFor": "CS faculty and research investigators in cybersecurity, privacy, cryptography, and trustworthy systems",
-    "deadline": "September 28, 2026 at 5:00 PM local time (Research/Education target date; last Monday in September, annually thereafter; next target date January 25, 2027 — last Monday in January; NSF 25-515)",
-    "deadlineMonth": 9,
-    "amount": "Research (RES): up to $1,200,000 over up to 4 years; Education (EDU): up to $500,000 over up to 3 years ($600,000 with an education-research collaborator); Seedling (SEED): up to $300,000 over up to 2 years. Program total ~$60,000,000/year.",
-    "summary": "NSF's rebooted flagship cybersecurity and privacy program (SaTC 2.0, replacing the former Small/Medium/Large/Frontier structure with RES/EDU/SEED tracks), funding foundational computer science in network security, systems privacy, hardware root-of-trust, applied cryptography, generative-AI security, open-source software security, quantum security, supply-chain security, and sociotechnical security.",
+    "whoFor": "Researchers at eligible U.S. institutions working on cybersecurity, privacy, trust, and resilience across technical and social dimensions",
+    "deadline": "January 25, 2027 at 5:00 PM local time (target date; last Monday in January, annually thereafter). Proposals are accepted anytime; submissions outside target dates may miss a review panel (NSF 25-515).",
+    "deadlineMonth": 1,
+    "amount": "Research (RES): up to $1,200,000 over up to 4 years; Education (EDU): up to $500,000 over up to 3 years, with up to $100,000 additional only for qualifying education-research collaboration; Seedling (SEED): up to $300,000 over up to 2 years. Anticipated program funding: $60,000,000/year, subject to funds.",
+    "summary": "NSF’s multidisciplinary program aims to build trust in cyber ecosystems through research on security, privacy, and resilience. Its scope spans hardware, software, networks, data, people, organizations, and the physical world, integrating technical and social dimensions and education.",
     "eligibility": [
-      "PI holds a tenured/tenure-track position or a primary full-time paid research or teaching appointment at an eligible US institution of higher education or non-profit, non-academic organization",
-      "Per-PI limit of 4 proposals per rolling 12-month period (max 2 RES, 1 EDU, 1 SEED)",
-      "Interdisciplinary proposals bridging CS with social sciences and economics encouraged"
+      "Proposals are submitted by eligible U.S. institutions of higher education or U.S. nonprofit non-academic organizations directly associated with education or research",
+      "PI, co-PI, or senior/key personnel must hold a tenured or tenure-track position or a primary full-time paid research or teaching appointment at an eligible U.S.-based organization",
+      "Per person, no more than four proposals in any contiguous 12-month period: at most two RES, one EDU, and one SEED"
     ],
     "topics": [
       "Security",
@@ -2181,7 +2181,7 @@
       "Operating Systems",
       "HCI"
     ],
-    "url": "https://www.nsf.gov/funding/opportunities/satc-20-security-privacy-trust-cyberspace/nsf25-515/solicitation",
+    "url": "https://www.nsf.gov/funding/opportunities/nsf-satc-us-national-science-foundation-security-privacy-trust/nsf25-515/solicitation",
     "featured": true
   },
   {
@@ -2195,14 +2195,13 @@
       "Postdocs",
       "PhD Students"
     ],
-    "whoFor": "Multi-university collaborative consortia of faculty and research leaders in artificial intelligence",
-    "deadline": "No upcoming due date; NSF is waiting for a new solicitation (last cycle: full proposals May 15, 2026; NSF 24-541)",
+    "whoFor": "Multisector research teams proposing national AI research institutes when a new solicitation is published",
+    "deadline": "No upcoming due dates; NSF says Program 23-610 is waiting for a new publication.",
     "deadlineMonth": 0,
-    "amount": "Amount varies; see the official call page",
-    "summary": "Large-scale national research hubs advancing foundational AI theory, neuro-symbolic learning, trustworthy autonomy, and multidisciplinary AI applications in scientific discovery, agriculture, education, and cybersecurity.",
+    "amount": "No current award amount is published; check the next solicitation for funding terms.",
+    "summary": "NSF’s National AI Research Institutes program supports long-term, fundamental AI research through multisector institutes. The prior solicitation (NSF 23-610) covered AI for astronomical sciences, AI for discovery in materials research, and strengthening AI; NSF currently lists no upcoming due dates and is waiting for a new publication.",
     "eligibility": [
-      "US higher education institutions leading multi-organization consortia",
-      "Requires substantial research vision, educational outreach, and workforce development plans"
+      "Eligibility and consortium requirements depend on the next published solicitation; consult its terms before applying"
     ],
     "topics": [
       "AI/ML",
@@ -2226,14 +2225,14 @@
       "Postdocs",
       "PhD Students"
     ],
-    "whoFor": "Faculty and principal investigators advancing fundamental robotic intelligence and physical autonomy",
-    "deadline": "Rolling / Accepted Anytime without Deadlines",
+    "whoFor": "Researchers developing foundational capabilities for robots or classes of robots",
+    "deadline": "Proposals accepted anytime after August 1, 2020; no target date is listed.",
     "deadlineMonth": 0,
-    "amount": "Amount varies; see the official call page",
-    "summary": "Funds core computer science and engineering breakthroughs in robotic perception, motion planning, manipulation, human-robot interaction, reinforcement learning for control, and autonomous cyber-physical systems.",
+    "amount": "Amount varies; see the official program page and current NSF guidance.",
+    "summary": "NSF’s Foundational Research in Robotics program supports research on robotic systems combining substantial computational capability and physical complexity. Responsive proposals should focus on a robot or class of robots, aim to add or significantly improve useful capabilities, and address a fundamental gap in robotics.",
     "eligibility": [
-      "Faculty at US degree-granting universities",
-      "Proposals must demonstrate fundamental theoretical or physical robotics contributions beyond incremental application"
+      "Consult the NSF PAPPG and the program page for applicable proposer and personnel eligibility requirements",
+      "NSF encourages potential investigators to discuss project fit with an FRR program officer before submission"
     ],
     "topics": [
       "Robotics",
@@ -2256,14 +2255,13 @@
       "Postdocs",
       "PhD Students"
     ],
-    "whoFor": "Faculty in software engineering, programming languages, compilers, computer architecture, and EDA",
-    "deadline": "Small: Accepted Anytime; Large: September 14–28, 2027 (NSF 24-572; prior window Sept 15–29, 2025); Medium: see program page",
-    "deadlineMonth": 9,
-    "amount": "Small (up to $600,000 over 3 years), Medium (up to $1,200,000 over 4 years), Large ($3,000,000–$5,000,000 over 3–5 years)",
-    "summary": "The core NSF program supporting research at the boundary of hardware and software, covering software design, verification, program synthesis, compiler optimizations, energy-efficient microarchitecture, parallel architectures, and design automation.",
+    "whoFor": "Researchers in software and hardware foundations, including programming languages, systems, architecture, and design automation",
+    "deadline": "Proposals accepted anytime; target dates are February 4, 2027 and September 9, 2027 (projected from NSF 25-543’s annual first-Thursday-in-February and second-Thursday-in-September rule).",
+    "deadlineMonth": 2,
+    "amount": "Up to $1,000,000 over up to 4 years; typical projects are about $150,000–$250,000 per year for 3–4 years. Projects are discouraged from exceeding $300,000 in any year.",
+    "summary": "Software and Hardware Foundations (SHF) is a program within NSF’s Future Computing Research (Future CoRe) solicitation. It supports research and education that develop new knowledge in computing, communications, and information science and engineering; the current solicitation has one project class replacing the former small and medium classes.",
     "eligibility": [
-      "Tenure-track and research faculty at US universities",
-      "Single-PI and collaborative proposals eligible"
+      "Proposals may be submitted by eligible U.S. institutions of higher education, qualifying U.S. nonprofit non-academic organizations, and federally recognized Tribal Nations; see NSF 25-543 for full requirements"
     ],
     "topics": [
       "Software Engineering",
@@ -2272,12 +2270,12 @@
       "Design Automation",
       "Logic & Verification"
     ],
-    "url": "https://www.nsf.gov/funding/opportunities/cise-core-programs",
+    "url": "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing/nsf25-543/solicitation",
     "featured": false
   },
   {
     "id": "nsf-algorithmic-foundations",
-    "name": "NSF Algorithmic Foundations (AF)",
+    "name": "NSF Algorithmic Foundations (AF) — Future CoRe",
     "shortName": "NSF AF Core",
     "sponsor": "National Science Foundation (NSF - CISE / CCF)",
     "sponsorCategory": "Government",
@@ -2286,14 +2284,14 @@
       "Postdocs",
       "PhD Students"
     ],
-    "whoFor": "Faculty and theoretical CS researchers in algorithms, complexity, and quantum computing",
-    "deadline": "Small: Accepted Anytime; Medium: November; Large: September",
-    "deadlineMonth": 11,
-    "amount": "Small (up to $600,000 over 3 years), Medium (up to $1,200,000 over 4 years)",
-    "summary": "Supports foundational research in theoretical computer science, including design and analysis of algorithms, computational complexity, algorithmic game theory, randomized algorithms, computational geometry, and quantum algorithms.",
+    "whoFor": "Researchers developing foundational methods and theory across computer and information science and engineering",
+    "deadline": "Proposals accepted anytime; 2027 Future CoRe target dates are February 4 and September 9 (for review-cycle consideration).",
+    "deadlineMonth": 2,
+    "amount": "Up to $1,000,000 over up to 4 years across Future CoRe; typical projects are approximately $150,000–$250,000 per year for 3–4 years.",
+    "summary": "The Algorithmic Foundations program supports fundamental research in algorithms and related mathematical foundations as part of NSF CISE Future CoRe. Future CoRe proposals are accepted anytime, with target dates for review cycles; the solicitation sets a shared maximum project budget and PI submission limit across programs.",
     "eligibility": [
-      "Faculty at US colleges and universities",
-      "Proposals focused on fundamental mathematical algorithms and complexity bounds"
+      "Proposals are subject to the NSF 25-543 eligible organization and PI requirements",
+      "An individual may serve as PI, co-PI, or senior/key personnel on no more than two Future CoRe proposals in any consecutive 12-month period"
     ],
     "topics": [
       "Theory",
@@ -2301,13 +2299,13 @@
       "Quantum",
       "Econ & Computation"
     ],
-    "url": "https://www.nsf.gov/funding/opportunities/cise-core-programs",
+    "url": "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing",
     "featured": false
   },
   {
     "id": "nsf-cyber-physical-systems",
-    "name": "NSF Cyber-Physical Systems (CPS)",
-    "shortName": "NSF CPS",
+    "name": "NSF Cyber-Physical System Foundations and Connected Communities (CPS)",
+    "shortName": "NSF CPS (Future CoRe)",
     "sponsor": "National Science Foundation (NSF - CISE / ENG / DHS / DOT)",
     "sponsorCategory": "Government",
     "targetAudience": [
@@ -2315,14 +2313,14 @@
       "Postdocs",
       "PhD Students"
     ],
-    "whoFor": "Faculty researching deeply integrated computing, sensing, networking, and physical actuation",
-    "deadline": "Small & Medium: October 28, 2026 at 5:00 PM local time (Annual late October; NSF 24-581)",
-    "deadlineMonth": 10,
-    "amount": "Amount varies; see the official call page",
-    "summary": "Funds research engineering cyber-physical systems that integrate computing algorithms with physical processes, including smart cities, autonomous vehicles, industrial IoT, medical devices, and smart power grids.",
+    "whoFor": "Researchers advancing foundational cyber-physical systems and connected communities",
+    "deadline": "Proposals accepted anytime; 2027 Future CoRe target dates are February 4 and September 9 (for review-cycle consideration).",
+    "deadlineMonth": 2,
+    "amount": "Up to $1,000,000 over up to 4 years across Future CoRe; typical projects are approximately $150,000–$250,000 per year for 3–4 years.",
+    "summary": "The CPS program supports foundational research on cyber-physical systems as part of NSF CISE Future CoRe. The current Future CoRe solicitation replaces the separate NSF 24-581 CPS opportunity; proposals are accepted anytime, with target dates for review cycles.",
     "eligibility": [
-      "Faculty at US academic institutions",
-      "Encourages cross-disciplinary partnerships between CS, electrical engineering, and domain stakeholders"
+      "Proposals are subject to the NSF 25-543 eligible organization and PI requirements",
+      "An individual may serve as PI, co-PI, or senior/key personnel on no more than two Future CoRe proposals in any consecutive 12-month period"
     ],
     "topics": [
       "Embedded & Real-Time",
@@ -2331,7 +2329,7 @@
       "Networks",
       "Security"
     ],
-    "url": "https://www.nsf.gov/funding/opportunities/cps-cyber-physical-systems",
+    "url": "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing",
     "featured": false
   },
   {
@@ -2345,14 +2343,14 @@
       "Postdocs",
       "PhD Students"
     ],
-    "whoFor": "Faculty, research scientists, and developers managing mature academic open-source CS artifacts",
-    "deadline": "Track 1 (Phase I): March 2, 2027 (first Tuesday in March, annually thereafter); Tracks 2/3 (Phase II): September 7, 2027 (first Tuesday in September, annually thereafter); NSF 26-506 (the earlier POSE solicitation NSF 24-606 is archived)",
+    "whoFor": "Teams building sustainable, secure ecosystems around promising existing open-source research products",
+    "deadline": "Track 1: March 2, 2027; Tracks 2 and 3: September 7, 2027 (first Tuesday in September, annually thereafter). Due by 5 p.m. submitting organization local time; NSF 26-506.",
     "deadlineMonth": 3,
-    "amount": "Track 1 (Scoping): up to $300,000; Track 2 (Establish/Expand) and Track 3 (Secure/Sustain): up to $1,500,000 each; ~40-60 awards expected program-wide",
-    "summary": "Supports scaling academic open-source software, hardware, and data tools into self-sustaining, secure, and widely adopted open-source ecosystems. Renamed from POSE to PESOSE in the NSF 26-506 solicitation, adding an explicit security/sustainability track alongside scoping and expansion.",
+    "amount": "Track 1: up to $300,000; Track 2: up to $1,500,000; Track 3: up to $1,500,000. NSF anticipates 40–60 awards and $40,000,000 total, subject to funds.",
+    "summary": "PESOSE supports translation of open-source science and engineering products into safe and sustainable ecosystems. Tracks cover scoping/planning, establishing or expanding an ecosystem, and improving safety, security, and privacy of an existing ecosystem. Track 1 and 2 awardees must participate in I-Corps for PESOSE, subject to the solicitation terms.",
     "eligibility": [
-      "Must have an existing, publicly available open-source product with demonstrated user adoption",
-      "Open to US universities and non-profit organizations"
+      "Proposals are submitted by eligible organizations listed in NSF 26-506; PI eligibility is restricted based on organization and leadership authority",
+      "Multi-organization teams must designate one lead organization; organizations ineligible to submit may not receive subawards"
     ],
     "topics": [
       "Software Engineering",
@@ -2360,7 +2358,7 @@
       "AI/ML",
       "Interdisciplinary"
     ],
-    "url": "https://www.nsf.gov/funding/opportunities/pesose-pathways-enable-secure-open-source-ecosystems/nsf26-506",
+    "url": "https://www.nsf.gov/funding/opportunities/pesose-pathways-enable-secure-open-source-ecosystems/nsf26-506/solicitation",
     "featured": false
   },
   {
@@ -2373,14 +2371,14 @@
       "Faculty",
       "Undergraduate Students"
     ],
-    "whoFor": "Faculty PIs hosting cohorts of 8-12 undergraduate CS student researchers over 10-week summer programs",
-    "deadline": "August 19, 2026 at 5:00 PM submitter local time (deadline rule changed from the second Wednesday of September to the third Wednesday of August; next cycle August 18, 2027; NSF 23-601)",
+    "whoFor": "Faculty and research teams proposing undergraduate research sites in NSF-funded fields, including computer science",
+    "deadline": "August 18, 2027, by 5 p.m. submitting organization local time; third Wednesday in August, annually thereafter (NSF 23-601).",
     "deadlineMonth": 8,
-    "amount": "Typically $100,000-$155,000 per year for a 3-year Site award (NSF sets no firm upper or lower limit; summer costs generally not to exceed $1,550 per student per week); NSF expects roughly 175 new Site awards per year",
-    "summary": "Provides grants to CS departments and faculty to establish intensive summer research programs for undergraduate students, broadening participation in computer science graduate studies.",
+    "amount": "Award amounts vary by NSF unit and proposal; the current REU page estimates approximately 175 new Site awards and 1,150 new Supplement awards annually across NSF.",
+    "summary": "NSF REU supports active research participation by undergraduate students in NSF-funded research. REU Sites engage a cohort around a coherent research theme; Supplements support students within new, renewal, or ongoing NSF-funded projects. CISE is among the participating units.",
     "eligibility": [
-      "US colleges, universities, and non-profit research organizations",
-      "Student participants must be US citizens, nationals, or permanent residents"
+      "Student participants must be U.S. citizens, U.S. nationals, or U.S. permanent residents",
+      "Site proposer eligibility and budget guidance are set out in NSF 23-601 and applicable NSF unit guidance"
     ],
     "topics": [
       "CS Education",
