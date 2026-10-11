@@ -15,8 +15,8 @@ fails. Check `.openalex-cron.log` if Historical Mode data looks stale.
 Manual full rebuilds are rare and expensive:
 
 ```bash
-node scripts/build-openalex-history.js [--test --limit=10]   # full OpenAlex history rebuild
-node scripts/build-school-aliases.js                          # rebuild the OpenAlex → CSRankings name mapping
+node scripts/build-openalex-history.mjs [--test --limit=10]   # full OpenAlex history rebuild
+node scripts/build-school-aliases.mjs                         # rebuild the OpenAlex → CSRankings name mapping
 node scripts/compact-openalex-history.mjs                     # re-compact the history file's on-disk format
 ```
 

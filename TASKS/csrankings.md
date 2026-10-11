@@ -62,7 +62,7 @@ a PR; to run them by hand:
 `scripts/resolve-core-venue-keys.mjs` (Wikidata-based acronym→DBLP-key
 resolution) can also be re-run independently if CORE's own venue list
 changes (`npm run core-extra:resolve-keys`), but doesn't need to run every
-quarter — the dump-based parse in `build-core-extra-pubs.js` re-validates and
+quarter — the dump-based parse in `build-core-extra-pubs.mjs` re-validates and
 guesses keys anyway.
 
 ## Sitemap & OG image

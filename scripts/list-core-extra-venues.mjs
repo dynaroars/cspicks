@@ -2,7 +2,7 @@
 /**
  * list-core-extra-venues.mjs
  *
- * EXPANSION_PLAN.md Step 1.1: compute EXTRA_VENUES = (coreAMap ∪ coreAStarMap)
+ * CORE A/A* extra publications (TASKS/csrankings.md): compute EXTRA_VENUES = (coreAMap ∪ coreAStarMap)
  * − (parentMap ∪ nextTier) — the CORE A/A* venues that CSRankings' own
  * generated-author-info.csv does not track at all, and that this expansion
  * needs a supplementary DBLP-derived dataset for.
@@ -33,7 +33,7 @@ const extraVenues = [...coreVenues]
 
 const output = {
   generatedAt: new Date().toISOString(),
-  note: 'CORE A/A* venues declared in src/data/conference-sets.ts that CSRankings\' own generated-author-info.csv does not contain any rows for (verified by diffing live CSV areas against parentMap/nextTier). See EXPANSION_PLAN.md.',
+  note: 'CORE A/A* venues declared in src/data/conference-sets.ts that CSRankings\' own generated-author-info.csv does not contain any rows for (verified by diffing live CSV areas against parentMap/nextTier). See TASKS/csrankings.md.',
   csrankingsVenueCount: csrankingsVenues.size,
   coreDeclaredVenueCount: coreVenues.size,
   extraVenueCount: extraVenues.length,

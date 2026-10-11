@@ -2,7 +2,7 @@
 /**
  * resolve-core-venue-keys.mjs
  *
- * EXPANSION_PLAN.md Step 1.3: automatically resolve each CORE-only venue
+ * CORE A/A* extra publications (TASKS/csrankings.md): automatically resolve each CORE-only venue
  * acronym (from scripts/data/core-extra-venues.json) to its DBLP stream key,
  * without hand-verification.
  *
@@ -20,7 +20,7 @@
  * querying, so this script does not attempt to evade it (no fingerprint
  * spoofing, no stealth-automation workarounds) — DBLP already publishes a
  * sanctioned bulk-access channel for exactly this kind of use: the full
- * `dblp.xml.gz` dump. EXPANSION_PLAN.md Step 2 downloads that dump anyway to
+ * `dblp.xml.gz` dump. The extra-publications build (TASKS/csrankings.md) downloads that dump anyway to
  * build the actual publication-count dataset, so the "does this resolved key
  * really exist, and does it have real volume" cross-check that would
  * otherwise need a live DBLP existence check is folded into that same dump
@@ -162,7 +162,7 @@ async function main() {
       wikidataId: resolution.wikidataId,
       label: resolution.label,
       // Not yet cross-checked against real DBLP data — Step 2's dump parse
-      // does this for free per EXPANSION_PLAN.md; treat as provisional
+      // does this for free per TASKS/csrankings.md; treat as provisional
       // until that pass confirms nonzero, multi-year publication volume.
       existenceChecked: false
     };

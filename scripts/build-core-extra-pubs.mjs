@@ -2,7 +2,7 @@
 /**
  * build-core-extra-pubs.mjs
  *
- * EXPANSION_PLAN.md Step 2: stream-parse the full DBLP dump and emit
+ * CORE A/A* extra publications (TASKS/csrankings.md): stream-parse the full DBLP dump and emit
  * publication-count rows, in the same shape src/data.ts actually reads from
  * generated-author-info.csv (`name, area, count, adjustedcount, year`), for
  * publications in CORE A/A* venues CSRankings itself doesn't track — for the
@@ -11,7 +11,7 @@
  * exact match against a name already in csrankings.csv.
  *
  * dblp.org runs an anti-bot wall (Anubis) that blocks scripted downloads of
- * the dump (see EXPANSION_PLAN.md's pre-flight checklist), so this script
+ * the dump (see TASKS/csrankings.md), so this script
  * takes an already-downloaded local file rather than fetching it itself —
  * download dblp.xml.gz via a regular browser first.
  *
@@ -55,7 +55,7 @@ const MIN_TOTAL_PAPERS = 20;
 const MIN_DISTINCT_YEARS = 3;
 
 // DBLP's stream key sometimes differs from the venue acronym in ways neither
-// Wikidata's P8926 claim nor a `conf/<acronym>` guess can catch (EXPANSION_PLAN.md
+// Wikidata's P8926 claim nor a `conf/<acronym>` guess can catch (TASKS/csrankings.md
 // calls a few of these out by name). Confirmed against the actual dump content
 // (`zcat dblp-2026-09-01.xml.gz | grep ...`) before adding each entry here —
 // this is not a blind guess table, only substitutions for keys the guessed
@@ -264,7 +264,7 @@ async function main() {
   const { dumpPath, dtdPath: dtdArg } = parseArgs(process.argv.slice(2));
   if (!dumpPath || !existsSync(dumpPath)) {
     console.error('Usage: node scripts/build-core-extra-pubs.mjs <path-to-dblp-xxxx.xml.gz> [--dtd=<path>]');
-    console.error('(dblp.org is behind an anti-bot wall — download the dump via a regular browser first; see EXPANSION_PLAN.md.)');
+    console.error('(dblp.org is behind an anti-bot wall — download the dump via a regular browser first; see TASKS/csrankings.md.)');
     process.exit(1);
   }
 

@@ -22,13 +22,13 @@ JSON files in `public/`, then processed in the browser.
 
 ```bash
 npm run dev       # vite dev server at http://localhost:5173/
-npm test          # run the Node.js unit tests (test/data.test.js)
+npm test          # run the Node.js unit tests (test/unit/*.test.js)
 npm run test:e2e  # Playwright e2e tests (test/e2e/); auto-starts the dev server on :4173
 npm run build      # production build to dist/ (multi-page: index, simulator, funding, csconfs, grants, jobs)
 npm run preview    # preview the production build
 ```
 
-Run a single Node unit test with `node --test-name-pattern="<substring>" test/data.test.js` (it's plain
+Run a single Node unit test with `node --import tsx --test --test-name-pattern="<substring>" test/unit/<file>.test.js` (it's plain
 `node:test`, not a runner with its own CLI). The suite covers core data filtering, ranking, CSV errors,
 NSF attribution, and rendering safety; no linter is configured. `postbuild` strips large data files
 (`professor_history_openalex.json`, `school-aliases.json`, `core-extra-author-info.csv`, `data/`) from `dist/`

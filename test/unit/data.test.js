@@ -218,7 +218,7 @@ test('all-union unions CSRankings and CORE venues', () => {
 });
 
 test('EXTRA_VENUES (CORE-only venues) never overlap CSRankings-tracked venues', () => {
-  // Guards the no-double-counting invariant EXPANSION_PLAN.md Step 3.4 relies
+  // Guards the no-double-counting invariant the CORE A/A* extra publications rely
   // on: scripts/build-core-extra-pubs.mjs only emits rows for venues in this
   // set, so a paper credited via generated-author-info.csv can never also be
   // credited via the CORE-extra dataset.

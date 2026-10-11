@@ -30,7 +30,7 @@ Star Extra University,northamerica,us,https://cs.starextra.test/
 // CSRankings-tracked publications) but one row here — Cora in a CORE-A-only
 // venue (aistats), Alan in a CORE-A*-only venue (aamas) — exercising the
 // "would previously have been deleted before the merge ever ran" case from
-// EXPANSION_PLAN.md Step 3 for both the `core` and `core-a` conference sets.
+// the CORE A/A* extra-publications merge, for both the `core` and `core-a` conference sets.
 // The `area` column here is a venue key, matching generated-author-info.csv's
 // own convention, not the resolved research area.
 const coreExtraAuthorInfo = `name,area,count,adjustedcount,year

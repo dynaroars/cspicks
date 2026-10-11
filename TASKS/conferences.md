@@ -255,12 +255,12 @@ filters. Compound events may have more than one key.
   `City, ST, US` (e.g. `"Austin, TX, US"`), using the two-letter state code.
   Do not include the venue/hotel/convention-center name. For a virtual or
   hybrid edition, use `"Virtual"`/`"Virtual Conference"`/`"Hybrid"` rather than
-  encoding the origin city in parentheses — `csconfs/place.ts` (`parsePlace`)
+  encoding the origin city in parentheses — `src/csconfs/place.ts` (`parsePlace`)
   renders this field and derives the country flag shown next to the
   conference name from the trailing country/state token, so an unrecognized
   or non-conforming value just won't get a flag (harmless, but worth fixing
   when you're already touching that record). Extend `COUNTRY_CODES` in
-  `csconfs/place.ts` when a genuinely new country shows up.
+  `src/csconfs/place.ts` when a genuinely new country shows up.
 
 ## Verification
 

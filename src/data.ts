@@ -259,7 +259,7 @@ export function loadAffiliationData() {
 let coreExtraPubsPromise: Promise<Map<string, Publication[]>> | null = null;
 
 /**
- * Lazily fetches `public/core-extra-author-info.csv` (EXPANSION_PLAN.md Step 2's
+ * Lazily fetches `public/core-extra-author-info.csv` (`scripts/build-core-extra-pubs.mjs`'s
  * output: publications in CORE A/A* venues CSRankings itself doesn't track, for
  * the existing roster only) and groups it by name. Only loaded when the reader
  * actually selects the `core`/`core-a` conference set — see `filterByYears`'s
