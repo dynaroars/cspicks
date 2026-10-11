@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { countFromLink, renderCommits, renderStatGrid, summarizeConferences, summarizeGrants, summarizeJobs, summarizeNsf, summarizeRoster } from '../../src/stats.ts';
+import { countFromLink, renderCommits, renderStatGrid, summarizeConferences, summarizeGrants, summarizeJobs, summarizeRoster } from '../../src/stats.ts';
 
 const NOW = Date.UTC(2026, 9, 11);
 
@@ -41,13 +41,6 @@ test('grant and job stats split current/historical and active/closed', () => {
   assert.equal(active.value, '2');
   assert.equal(active.note, '3 listed including closed');
   assert.equal(schools.note, 'in 2 states');
-});
-
-test('NSF stats report awards, coverage, and the sync date', () => {
-  const [awards, faculty, synced] = summarizeNsf({ awards: [{}, {}], coverage: { facultyChecked: 10, institutionsChecked: 3 }, syncedAt: '2026-09-26T22:53:42Z' });
-  assert.equal(awards.value, '2');
-  assert.equal(faculty.note, 'at 3 US universities');
-  assert.equal(synced.value, '2026-09-26');
 });
 
 test('GitHub totals come from the Link header last page', () => {

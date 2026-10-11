@@ -27,10 +27,12 @@ const conferences = [
   { name: 'PLDI', year: 2099, venueKeys: ['pldi'], verified: true, deadline: '2098-11-01' },
   { name: 'ICSE', year: 2020, venueKeys: ['icse'], verified: false, deadline: '2019-08-01' }
 ];
-const nsf = { schemaVersion: 3, syncedAt: '2026-09-26T22:53:42Z', coverage: { complete: true, facultyChecked: 42, institutionsChecked: 7 }, awards: [] };
 const commit = (n, message) => ({ sha: `${n}`.repeat(40).slice(0, 40), html_url: `https://github.com/dynaroars/cspicks/commit/${n}`, commit: { message, author: { name: 'Tester', date: new Date(Date.now() - 3600000).toISOString() }, committer: { date: new Date(Date.now() - 3600000).toISOString() } } });
 
+let nsfRequested = false;
+
 async function mockData(page) {
+  nsfRequested = false;
   await page.route('https://raw.githubusercontent.com/**', route => {
     const url = route.request().url();
     if (url.endsWith('/csrankings.csv')) return route.fulfill({ body: csrankings, contentType: 'text/csv' });
@@ -41,7 +43,8 @@ async function mockData(page) {
   await page.route('**/jobs.json', route => route.fulfill({ json: jobs }));
   await page.route('**/grants.json', route => route.fulfill({ json: grants }));
   await page.route('**/conferences.json', route => route.fulfill({ json: conferences }));
-  await page.route('**/nsf-awards.json', route => route.fulfill({ json: nsf }));
+  // The stats page must never download the large NSF snapshot.
+  await page.route('**/nsf-awards.json', route => { nsfRequested = true; return route.fulfill({ json: { awards: [] } }); });
   await page.route('https://api.github.com/**', route => {
     const url = new URL(route.request().url());
     const last = (n) => ({ Link: `<${url.origin}${url.pathname}?per_page=1&page=${n}>; rel="last"`, 'Access-Control-Expose-Headers': 'Link' });
@@ -66,8 +69,7 @@ test('stats page lists what CS Picks tracks and recent repository activity', asy
   await expect(page.locator('#stats-confs')).toContainText('Upcoming deadlines1');
   await expect(page.locator('#stats-grants')).toContainText('1 current, 1 historical');
   await expect(page.locator('#stats-jobs')).toContainText('Active job postings1');
-  await expect(page.locator('#stats-nsf')).toContainText('at 7 US universities');
-  await expect(page.locator('#stats-nsf')).toContainText('2026-09-26');
+  await expect(page.locator('#stats-nsf')).toHaveCount(0);
 
   const repo = page.locator('#stats-repo');
   await expect(repo).toContainText('Commits534');
@@ -75,6 +77,7 @@ test('stats page lists what CS Picks tracks and recent repository activity', asy
   await expect(repo.locator('.stats-commits li')).toHaveCount(2);
   await expect(repo.locator('.stats-commits li').first()).toContainText('stats: add <b>page</b>');
   await expect(repo.locator('.stats-commits b')).toHaveCount(0);
+  expect(nsfRequested).toBe(false);
 });
 
 test('a failed source shows an error in its own section only', async ({ page }) => {

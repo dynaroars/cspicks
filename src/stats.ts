@@ -1,5 +1,6 @@
 /**
- * Stats page: what CS Picks tracks (faculty, universities, conferences, awards, jobs, NSF) and repository activity.
+ * Stats page: what CS Picks tracks (faculty, universities, conferences, awards, jobs) and repository activity.
+ * It deliberately skips the 14 MB NSF snapshot so the page stays fast.
  * The summarize* functions are pure so unit tests can check them; the page controller at the bottom only runs in a browser.
  */
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadData } from './data.js';
@@ -7,9 +8,8 @@ import { numAreas } from './data/conference-sets.js';
 import { loadGrantsData } from './grants/grants-data.js';
 import { isActive, loadJobsData } from './jobs/jobs-data.js';
 import { calculateParityReport } from './metrics.js';
-import { parseNsfDataset } from './nsf.js';
 import { escapeHtml, formatRelativeTime } from './shared.js';
-import type { ConferenceRecord, Grant, Job, NsfDataset, RawData } from './types.js';
+import type { ConferenceRecord, Grant, Job, RawData } from './types.js';
 
 export interface Stat { label: string, value: string, note?: string, help?: string }
 
@@ -66,16 +66,6 @@ export function summarizeJobs(jobs: Job[], now = Date.now()): Stat[] {
   return [
     { label: 'Active job postings', value: count(active.length), note: `${count(jobs.length)} listed including closed` },
     { label: 'Hiring schools', value: count(new Set(active.map(job => job.school)).size), note: `in ${count(new Set(active.map(job => job.state)).size)} states` }
-  ];
-}
-
-export function summarizeNsf(dataset: NsfDataset): Stat[] {
-  const coverage = dataset.coverage || {};
-  const synced = dataset.syncedAt ? new Date(dataset.syncedAt) : null;
-  return [
-    { label: 'NSF awards', value: count(dataset.awards.length), note: 'matched to current CS faculty' },
-    { label: 'Faculty checked', value: count(coverage.facultyChecked || 0), note: `at ${count(coverage.institutionsChecked || 0)} US universities` },
-    { label: 'NSF snapshot', value: synced && !Number.isNaN(synced.getTime()) ? synced.toISOString().slice(0, 10) : 'Unknown', note: 'last full sync' }
   ];
 }
 
@@ -158,7 +148,6 @@ function init() {
   section('stats-confs', fetchJson(new URL('../csconfs/data/conferences.json', import.meta.url)), confs => renderStatGrid(summarizeConferences(confs as ConferenceRecord[])));
   section('stats-grants', loadGrantsData(), grants => renderStatGrid(summarizeGrants(grants)));
   section('stats-jobs', loadJobsData(), jobs => renderStatGrid(summarizeJobs(jobs)));
-  section('stats-nsf', fetchJson('./nsf-awards.json'), payload => renderStatGrid(summarizeNsf(parseNsfDataset(payload))));
   section('stats-repo', loadRepoStats(), ({ stats, commits }) => `${renderStatGrid(stats)}<h3>Recent commits</h3>${renderCommits(commits)}`);
 }
 
