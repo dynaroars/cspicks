@@ -9,6 +9,12 @@
 
 Exact before/after evidence is in the adjacent `data-sweep-*-evidence-2026-10-10.json` files. The authoritative overall progress ledger is `data-sweep-2026-10-10.json`.
 
+## Existing jobs dataset audit (2026-10-11)
+
+- Schema audit of all 390 job records found unsupported track and level values, 25 invalid area-tag sets, two missing `areas` arrays, and one unsupported visa-sponsorship value. Invalid required fields would make the strict Jobs parser reject the dataset; invalid area tags also fail to match area filters.
+- Corrected the records and reran a read-only schema/taxonomy check: zero invalid records or area keys, with unique IDs and URLs. No test suite was run in this continuation.
+- Exact record-level changes are in `data-sweep-jobs-schema-audit-2026-10-11.json`.
+
 ## Verification
 
 All checks passed after the final dataset edits:

@@ -889,8 +889,8 @@
       "school": "University of Nevada Las Vegas",
       "status": "partial",
       "report": "docs/data-sweep-jobs-unlv-evidence-2026-10-11.json",
-      "findings": "Refreshed the live Cybersecurity lecturer posting R0152399 (review began Sep 1, 2026; July 2027 start). Workday still lists Assistant Professor-in-Residence R0150748 with Fall 2026 start but no current-cycle dates; retained the caveat and did not add it as a verified new role.",
-      "remaining": "Confirm whether R0150748 remains available; broader adjacent-unit discovery remains incomplete."
+      "findings": "Refreshed Cybersecurity Lecturer R0152399 and added three missing current roles: CS Assistant Professor-in-Residence R0150748 (still accepting applications despite its passed Fall 2026 start), Lee Business School cybersecurity teaching role R0150760 (CS master's explicitly accepted), and computational neuroimaging postdoc R0153454 (CS fit depends on domain expertise).",
+      "remaining": "Broader adjacent-unit discovery remains incomplete."
     },
     {
       "school": "Old Dominion University",

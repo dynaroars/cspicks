@@ -1415,7 +1415,10 @@
     "title": "Computer Science - Full Professor (530201)",
     "track": "tenure-track",
     "level": "full",
-    "areas": ["ai", "soft"],
+    "areas": [
+      "ai",
+      "soft"
+    ],
     "state": "AL",
     "city": "Tuscaloosa",
     "deadline": "2027-03-31",
@@ -1435,7 +1438,9 @@
     "title": "Computer Science - Director of Cyber Innovation Hub - Associate or Full Professor (530324)",
     "track": "tenure-track",
     "level": "associate",
-    "areas": ["security"],
+    "areas": [
+      "sec"
+    ],
     "state": "AL",
     "city": "Tuscaloosa",
     "deadline": "2027-03-31",
@@ -2723,6 +2728,66 @@
     "url": "https://nshe.wd1.myworkdayjobs.com/en-US/UNLV-External/job/UNLV1-Main-Campus-Las-Vegas/Lecturer---Assistant-Professor-in-Residence--Cybersecurity--College-of-Engineering--R0152399-_R0152399",
     "visaSponsorship": "not-stated",
     "summary": "Nine-month non-tenure-track teaching position in cybersecurity with AI expertise, starting July 2027. Open until filled; review began September 1, 2026.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "unlv-cs-assistant-professor-in-residence-2026",
+    "school": "University of Nevada Las Vegas",
+    "department": "Department of Computer Science, College of Engineering",
+    "title": "Assistant Professor-in-Residence, Computer Science (R0150748)",
+    "track": "teaching",
+    "level": "assistant",
+    "areas": ["plan"],
+    "state": "NV",
+    "city": "Las Vegas",
+    "rolling": true,
+    "lastSeenAt": "2026-10-11",
+    "url": "https://nshe.wd1.myworkdayjobs.com/en-US/UNLV-External/job/Assistant-Professor-in-Residence--Department-of-Computer-Science--College-of-Engineering--R0150748-_R0150748",
+    "visaSponsorship": "not-stated",
+    "summary": "Full-time non-tenure-track CS teaching role; PhD in Computer Science and R1 teaching experience required, with Programming Languages and Compiler Construction teaching preferred. Workday still offers an application and review continues until filled, although the stated Fall 2026 start has passed and no close date is listed.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "unlv-lee-cybersecurity-faculty-2026",
+    "school": "University of Nevada Las Vegas",
+    "department": "Department of Information Systems, Lee Business School",
+    "title": "Lecturer / Senior Lecturer / Assistant Professor-in-Residence of Cybersecurity (R0150760)",
+    "track": "teaching",
+    "level": "open",
+    "areas": [
+      "sec"
+    ],
+    "state": "NV",
+    "city": "Las Vegas",
+    "rolling": true,
+    "reviewBegins": "2026-03-23",
+    "lastSeenAt": "2026-10-11",
+    "url": "https://nshe.wd1.myworkdayjobs.com/en-US/UNLV-External/job/Lecturer-Senior-Lecturer-Assistant-Faculty-in-Residence-of-Cybersecurity--Lee-Business-School--R0150760-_R0150760",
+    "visaSponsorship": "not-stated",
+    "summary": "Online undergraduate cybersecurity teaching role in the Information Systems department, which jointly offers cybersecurity degrees with CS. A cybersecurity-related master’s including Computer Science is required; review began March 23, 2026, applications close Dec 31 or until filled.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "unlv-neuroimaging-postdoc-2026",
+    "school": "University of Nevada Las Vegas",
+    "department": "Department of Health Physics and Diagnostic Sciences, School of Integrated Health Sciences",
+    "title": "Postdoctoral Scholar, Neuroimaging (R0153454)",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "hpc"
+    ],
+    "state": "NV",
+    "city": "Las Vegas",
+    "rolling": true,
+    "reviewBegins": "2026-09-30",
+    "lastSeenAt": "2026-10-11",
+    "url": "https://nshe.wd1.myworkdayjobs.com/en-US/UNLV-external/job/UNLV1-Main-Campus-Las-Vegas/Postdoctoral-Scholar--Neuroimaging--Health-Physics-and-Diagnostic-Sciences--School-of-Integrated-Health-Sciences--R0153454-_R0153454",
+    "visaSponsorship": "not-stated",
+    "summary": "Computational neuroimaging postdoc developing MRI acquisition and analysis methods, reproducible pipelines, and HPC data workflows. Requires a PhD in psychology, neuroscience, MR physics, or a related field; CS candidates would need relevant neuroimaging expertise. Applications close Sep 11, 2027; review began Sep 30, 2026 until filled.",
     "source": "crawl",
     "verified": true
   },
@@ -4971,7 +5036,7 @@
     "track": "postdoc",
     "level": null,
     "areas": [
-      "se",
+      "sec",
       "plan",
       "ai"
     ],
@@ -7042,7 +7107,9 @@
     "track": "tenure-track",
     "level": "assistant",
     "areas": [
-      "theory"
+      "act",
+      "graph",
+      "log"
     ],
     "state": "IL",
     "city": "Chicago",
@@ -7290,6 +7357,7 @@
     "department": "Computer Science",
     "title": "Lecturer in Computer Science",
     "track": "teaching",
+    "areas": [],
     "state": "CA",
     "city": "Santa Barbara",
     "deadline": "2027-03-31",
@@ -7308,6 +7376,12 @@
     "title": "Empire Innovation Professor, Quantum Computing",
     "track": "tenure-track",
     "level": "open",
+    "areas": [
+      "act",
+      "comm",
+      "mlmining",
+      "crypt"
+    ],
     "state": "NY",
     "city": "Buffalo",
     "rolling": true,
@@ -7365,13 +7439,13 @@
     "school": "Univ. of California - Los Angeles",
     "department": "Computer Science",
     "title": "Lecturer - 2026-27 AY",
-    "track": "lecturer",
-    "level": "lecturer",
+    "track": "teaching",
+    "level": null,
     "areas": [
       "ai",
       "arch",
       "vision",
-      "db",
+      "mod",
       "soft"
     ],
     "state": "CA",
@@ -7395,8 +7469,7 @@
     "level": "open",
     "areas": [
       "vision",
-      "robotics",
-      "quantum"
+      "robotics"
     ],
     "anyArea": true,
     "state": "IN",
@@ -7414,8 +7487,8 @@
     "school": "Worcester Polytechnic Institute",
     "department": "Computer Science",
     "title": "Adjunct Faculty (Computer Science)",
-    "track": "lecturer",
-    "level": "lecturer",
+    "track": "teaching",
+    "level": null,
     "areas": [],
     "anyArea": true,
     "state": "MA",
@@ -7433,8 +7506,8 @@
     "school": "University of Connecticut",
     "department": "Computer Science and Engineering, Hartford Campus",
     "title": "Adjunct Faculty – Computer Science and Engineering (CSE 1010)",
-    "track": "lecturer",
-    "level": "lecturer",
+    "track": "teaching",
+    "level": null,
     "areas": [],
     "state": "CT",
     "city": "Hartford",
@@ -7474,8 +7547,8 @@
     "school": "DePaul University",
     "department": "Jarvis College of Computing & Digital Media / School of Computing",
     "title": "Adjunct Faculty in Artificial Intelligence",
-    "track": "lecturer",
-    "level": "lecturer",
+    "track": "teaching",
+    "level": null,
     "areas": [
       "ai"
     ],
@@ -7494,8 +7567,8 @@
     "school": "DePaul University",
     "department": "Jarvis College of Computing & Digital Media / School of Computing",
     "title": "Adjunct Faculty in Computer Science",
-    "track": "lecturer",
-    "level": "lecturer",
+    "track": "teaching",
+    "level": null,
     "areas": [],
     "state": "IL",
     "city": "Chicago",
@@ -7512,8 +7585,8 @@
     "school": "DePaul University",
     "department": "Jarvis College of Computing & Digital Media / School of Computing",
     "title": "Adjunct Faculty in Cybersecurity",
-    "track": "lecturer",
-    "level": "lecturer",
+    "track": "teaching",
+    "level": null,
     "areas": [
       "sec"
     ],
@@ -7532,8 +7605,8 @@
     "school": "DePaul University",
     "department": "Jarvis College of Computing & Digital Media / School of Computing",
     "title": "Adjunct Faculty in Data Science",
-    "track": "lecturer",
-    "level": "lecturer",
+    "track": "teaching",
+    "level": null,
     "areas": [
       "mlmining"
     ],
@@ -7552,10 +7625,10 @@
     "school": "DePaul University",
     "department": "Jarvis College of Computing & Digital Media / School of Computing",
     "title": "Adjunct Faculty in Database",
-    "track": "lecturer",
-    "level": "lecturer",
+    "track": "teaching",
+    "level": null,
     "areas": [
-      "db"
+      "mod"
     ],
     "state": "IL",
     "city": "Chicago",
@@ -7572,8 +7645,8 @@
     "school": "DePaul University",
     "department": "Jarvis College of Computing & Digital Media / School of Computing",
     "title": "Adjunct Faculty in Game Programming",
-    "track": "lecturer",
-    "level": "lecturer",
+    "track": "teaching",
+    "level": null,
     "areas": [
       "arch"
     ],
@@ -7592,10 +7665,10 @@
     "school": "DePaul University",
     "department": "Jarvis College of Computing & Digital Media / School of Computing",
     "title": "Adjunct Faculty in Human Computer Interaction",
-    "track": "lecturer",
-    "level": "lecturer",
+    "track": "teaching",
+    "level": null,
     "areas": [
-      "hci"
+      "chi"
     ],
     "state": "IL",
     "city": "Chicago",
@@ -7615,7 +7688,7 @@
     "track": "tenure-track",
     "level": "assistant",
     "areas": [
-      "hci"
+      "chi"
     ],
     "state": "CT",
     "city": "New Haven",
@@ -7691,10 +7764,11 @@
     "school": "Rensselaer Polytechnic Institute",
     "department": "Electrical, Computer, and Systems Engineering",
     "title": "Lecturer, Electrical, Computer and Systems Engineering",
-    "track": "lecturer",
+    "track": "teaching",
     "areas": [
       "ai",
-      "systems"
+      "arch",
+      "robotics"
     ],
     "state": "NY",
     "city": "Troy",
@@ -7711,7 +7785,7 @@
     "school": "University of Houston",
     "department": "Computer Science",
     "title": "Adjunct Faculty - Computer Science",
-    "track": "adjunct",
+    "track": "teaching",
     "areas": [],
     "anyArea": true,
     "state": "TX",
@@ -7787,7 +7861,7 @@
     "school": "University of Arizona",
     "department": "Computer Science",
     "title": "Lecturer/Senior Lecturer/Principal Lecturer, Computer Science",
-    "track": "lecturer",
+    "track": "teaching",
     "areas": [
       "ai"
     ],
@@ -7808,7 +7882,9 @@
     "title": "Research Associate II",
     "track": "research",
     "areas": [
-      "systems"
+      "comm",
+      "bed",
+      "ai"
     ],
     "state": "PA",
     "city": "Philadelphia",
@@ -7852,7 +7928,12 @@
     "track": "leadership",
     "areas": [
       "ai",
-      "systems"
+      "sec",
+      "plan",
+      "chi",
+      "comm",
+      "vision",
+      "hpc"
     ],
     "state": "FL",
     "city": "Tallahassee",
@@ -7891,7 +7972,10 @@
     "track": "tenure-track",
     "level": "assistant",
     "areas": [
-      "systems"
+      "arch",
+      "da",
+      "ai",
+      "sec"
     ],
     "state": "AL",
     "city": "Auburn",
@@ -7912,9 +7996,7 @@
     "title": "Assistant/Associate Professor – Microelectronics",
     "track": "tenure-track",
     "level": "open",
-    "areas": [
-      "systems"
-    ],
+    "areas": [],
     "state": "AL",
     "city": "Auburn",
     "rolling": true,
@@ -7954,7 +8036,8 @@
     "track": "tenure-track",
     "level": "open",
     "areas": [
-      "systems"
+      "arch",
+      "comm"
     ],
     "state": "NE",
     "city": "Lincoln",
@@ -7975,7 +8058,8 @@
     "title": "Postdoctoral Scholar, Electrical Engineering for UAV Sensors",
     "track": "postdoc",
     "areas": [
-      "systems"
+      "bed",
+      "arch"
     ],
     "state": "AZ",
     "city": "Flagstaff",
@@ -7995,7 +8079,8 @@
     "track": "postdoc",
     "areas": [
       "robotics",
-      "systems"
+      "comm",
+      "act"
     ],
     "state": "AZ",
     "city": "Flagstaff",
@@ -8014,11 +8099,7 @@
     "title": "Tenured/Tenure-Track Faculty in Business Analytics",
     "track": "tenure-track",
     "level": "open",
-    "areas": [
-      "ai",
-      "ml",
-      "ds"
-    ],
+    "areas": ["mlmining"],
     "state": "IA",
     "city": "Iowa City",
     "rolling": true,
@@ -8039,7 +8120,7 @@
     "level": "open",
     "areas": [
       "ai",
-      "ds"
+      "mlmining"
     ],
     "state": "SC",
     "city": "Columbia",
@@ -8061,8 +8142,7 @@
     "track": "postdoc",
     "areas": [
       "ai",
-      "ml",
-      "biomed"
+      "mlmining"
     ],
     "state": "IN",
     "city": "Indianapolis",
@@ -8106,7 +8186,7 @@
     "track": "tenure-track",
     "level": "open",
     "areas": [
-      "robo",
+      "robotics",
       "ai"
     ],
     "state": "PA",
@@ -8130,7 +8210,7 @@
     "level": "open",
     "areas": [
       "ai",
-      "ml",
+      "mlmining",
       "hpc"
     ],
     "state": "VA",
@@ -8177,9 +8257,8 @@
     "level": "assistant",
     "areas": [
       "ai",
-      "security",
-      "mlmining",
-      "systems"
+      "sec",
+      "mlmining"
     ],
     "state": "MI",
     "city": "Rochester",
@@ -8197,7 +8276,7 @@
     "department": "Computer Science",
     "title": "Pro Tem Instructor (Computer Science) - Open Pool",
     "track": "teaching",
-    "level": "instructor",
+    "level": null,
     "areas": [
       "csed"
     ],
@@ -8222,8 +8301,7 @@
     "level": "assistant",
     "areas": [
       "ai",
-      "security",
-      "quantum"
+      "sec"
     ],
     "state": "TN",
     "city": "Memphis",
@@ -8246,8 +8324,7 @@
     "level": "full",
     "areas": [
       "ai",
-      "systems",
-      "security"
+      "sec"
     ],
     "state": "LA",
     "city": "New Orleans",
@@ -8267,8 +8344,7 @@
     "track": "tenure-track",
     "level": "open",
     "areas": [
-      "ai",
-      "systems"
+      "ai"
     ],
     "state": "VA",
     "city": "Richmond",
@@ -8286,7 +8362,7 @@
     "department": "Gianforte School of Computing",
     "title": "Non-Tenure Track Faculty (Instructor Applicant Pool)",
     "track": "teaching",
-    "level": "instructor",
+    "level": null,
     "areas": [
       "csed"
     ],
@@ -8295,7 +8371,7 @@
     "rolling": true,
     "lastSeenAt": "2026-10-11",
     "url": "https://jobs.montana.edu/postings/50005",
-    "visaSponsorship": "not-eligible",
+    "visaSponsorship": "no",
     "summary": "Open part-time non-tenure-track pool for Gianforte School of Computing instruction; rolling review until positions are filled, applications retained up to two years. Not eligible for new visa sponsorship.",
     "source": "crawl",
     "verified": true
@@ -8326,7 +8402,7 @@
     "department": "Computer Science",
     "title": "Adjunct Faculty, Data Science",
     "track": "teaching",
-    "level": "instructor",
+    "level": null,
     "areas": [
       "mlmining"
     ],

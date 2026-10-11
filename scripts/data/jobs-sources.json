@@ -4181,7 +4181,7 @@
     "state": "NV",
     "lastCheckedAt": "2026-10-11T16:00:00Z",
     "outcome": "partial",
-    "summary": "Refreshed current Cybersecurity lecturer R0152399 (Sep 1 review, July 2027 start). Workday also lists CS Assistant Professor-in-Residence R0150748 with Fall 2026 start and no current-cycle dates, so treated as potentially stale. Wider adjacent-unit review remains incomplete.",
+    "summary": "Refreshed Cybersecurity Lecturer R0152399 and added three current roles: CS Assistant Professor-in-Residence R0150748 (Fall 2026 start has passed but Workday still accepts applications), Lee Business School cybersecurity teaching R0150760 (CS master's accepted), and neuroimaging postdoc R0153454 (CS fit depends on domain expertise). Wider adjacent-unit review remains incomplete.",
     "checkedUrls": [
       "https://www.unlv.edu/cs",
       "https://www.unlv.edu/jobs",
@@ -4191,13 +4191,25 @@
       "https://nshe.wd1.myworkdayjobs.com/UNLV-External",
       "https://nshe.wd1.myworkdayjobs.com/UNLV-External?q=computer",
       "https://nshe.wd1.myworkdayjobs.com/UNLV-External?q=engineering",
-      "https://nshe.wd1.myworkdayjobs.com/UNLV-External?q=cybersecurity"
+      "https://nshe.wd1.myworkdayjobs.com/UNLV-External?q=cybersecurity",
+      "https://nshe.wd1.myworkdayjobs.com/en-US/UNLV-External/job/Lecturer-Senior-Lecturer-Assistant-Faculty-in-Residence-of-Cybersecurity--Lee-Business-School--R0150760-_R0150760",
+      "https://nshe.wd1.myworkdayjobs.com/en-US/UNLV-external/job/UNLV1-Main-Campus-Las-Vegas/Postdoctoral-Scholar--Neuroimaging--Health-Physics-and-Diagnostic-Sciences--School-of-Integrated-Health-Sciences--R0153454-_R0153454",
+      "https://nshe.wd1.myworkdayjobs.com/en-US/UNLV-External/job/Assistant-Professor-In-Residence--College-of-Engineering-and-Honors-College--R0149901-_R0149901",
+      "https://nshe.wd1.myworkdayjobs.com/en-US/UNLV-External/job/Assistant-Professor-In-Residence--College-of-Engineering--R0150463-_R0150463"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "UNLV Workday external board",
         "url": "https://nshe.wd1.myworkdayjobs.com/UNLV-External"
+      },
+      {
+        "name": "Lee Business School Information Systems / Cybersecurity",
+        "url": "https://www.unlv.edu/business/departments/information-systems"
+      },
+      {
+        "name": "School of Integrated Health Sciences, Health Physics and Diagnostic Sciences",
+        "url": "https://www.unlv.edu/healthphysics"
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
