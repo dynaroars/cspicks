@@ -299,27 +299,14 @@
       "proposals": []
     },
     "WACV": {
-      "lastCheckedAt": "2026-10-04T20:14:58.622Z",
-      "outcome": "complete",
-      "summary": "WACV 2027 CFP lists two review rounds. Split into Round 1/2 (enrollment 2026-06-19, submission 2026-06-26) and Round 2/2 (enrollment 2026-08-21, submission 2026-08-28); both notify 2026-10-09. Rebuttal date left null (page gives an ambiguous Aug 28 revision period). Chairs not stated on page.",
+      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "outcome": "incomplete",
+      "summary": "wacv.thecvf.com shows only WACV 2027 (Disney Springs, Jan 4-8, 2027; decisions both rounds Oct 14, 2026), consistent with stored record. No WACV 2028 edition info found; WACV 2026 decision dates not available from the page. Records unchanged.",
       "checkedUrls": [
-        "https://wacv.thecvf.com/Conferences/2027/CallForPapers",
-        "https://wacv.thecvf.com/Conferences/2027/index.html"
+        "https://wacv.thecvf.com/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "deadline",
-              "url": "https://wacv.thecvf.com/Conferences/2027/CallForPapers",
-              "evidence": "Round 1 enrollment June 19, 2026, submission June 26, 2026; Round 2 enrollment August 21, 2026, submission August 28, 2026; final decisions October 9, 2026."
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "AAAI": {
       "lastCheckedAt": "2026-10-04T20:14:58.622Z",
@@ -423,14 +410,14 @@
       "proposals": []
     },
     "ISSTA": {
-      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
-      "outcome": "incomplete",
-      "summary": "ISSTA 2028 Shanghai and chairs match the record; dates/deadlines not published. conf.researchr.org/home/issta-2028 returned 404 at check time. ISSTA 2027 Singapore confirmed.",
+      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "outcome": "not_found",
+      "summary": "conf.researchr.org/home/issta-2028 returns 404; issta.org lists ISSTA 2028 in Shanghai without dates or a link. No deadlines found; record unchanged.",
       "checkedUrls": [
-        "https://www.issta.org/",
-        "https://conf.researchr.org/home/issta-2028"
+        "https://conf.researchr.org/home/issta-2028",
+        "https://www.issta.org/"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-01T20:15:21.687Z",
       "proposals": []
     },
     "NeurIPS": {
@@ -509,26 +496,14 @@
       "proposals": []
     },
     "USENIX Security": {
-      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
-      "outcome": "complete",
-      "summary": "USENIX Security 2027 CFP: cycle 1 rebuttal Nov 5-12 2026, cycle 2 rebuttal Apr 8-15 2027; cycle 1 record wrongly had the cycle 2 rebuttal.",
+      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "outcome": "not_found",
+      "summary": "usenixsecurity28 page exists but carries no dates, place or deadlines; stored Aug 16-18, 2028 Seattle could not be re-confirmed on it. The 2026 cycle-place disagreement (Baltimore, MD, USA vs US) is only a format difference. Record unchanged.",
       "checkedUrls": [
-        "https://www.usenix.org/conference/usenixsecurity27/call-for-papers"
+        "https://www.usenix.org/conference/usenixsecurity28"
       ],
-      "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "rebuttalDate",
-              "url": "https://www.usenix.org/conference/usenixsecurity27/call-for-papers",
-              "evidence": "Cycle 1 rebuttal Nov 5-12, 2026; cycle 2 rebuttal Apr 8-15, 2027."
-            }
-          ]
-        }
-      ]
+      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "proposals": []
     },
     "ASE": {
       "lastCheckedAt": "2026-10-08T20:16:09.646Z",
@@ -639,6 +614,100 @@
         "https://popl27.sigplan.org/"
       ],
       "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "proposals": []
+    },
+    "PODC": {
+      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "outcome": "incomplete",
+      "summary": "PODC 2027 (Reykjavik University, June 21-25, 2027) confirmed on the official edition site; the home and call-for-papers pages say only to watch for deadline information. No deadlines or notification dates published; record unchanged.",
+      "checkedUrls": [
+        "https://www.podc.org/podc2027/",
+        "https://www.podc.org/podc2027/call-for-papers/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "ACM MM": {
+      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "outcome": "not_found",
+      "summary": "ACM MM 2027 official site confirms Hong Kong with dates to be announced; no deadlines or chairs published. Record already matches; unchanged.",
+      "checkedUrls": [
+        "https://acmmm.hosting2.acm.org/"
+      ],
+      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "proposals": []
+    },
+    "CoNEXT": {
+      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "outcome": "not_found",
+      "summary": "SIGCOMM series page lists CoNEXT 2027 in Rio de Janeiro, 6-9 December 2027, still marked to be confirmed, and links an edition site (conferences.sigcomm.org/co-next/2027/) that returned no content to the fetcher. No deadlines found; record unchanged.",
+      "checkedUrls": [
+        "https://www.sigcomm.org/events/conext-conference",
+        "https://conferences.sigcomm.org/co-next/2027/"
+      ],
+      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "proposals": []
+    },
+    "KDD": {
+      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "outcome": "incomplete",
+      "summary": "KDD 2027 research-track CFP confirms cycle 1 dates already stored (abstract 2026-07-19, paper 2026-07-26, rebuttal Sep 29-Oct 13, notification 2026-11-14) and conference Aug 1-5, 2027 in San Jose. Cycle 2 only described as a February 2027 deadline for Resubmit papers with no exact dates; cycle 2 record stays TBD/estimated, unchanged.",
+      "checkedUrls": [
+        "https://kdd2027.kdd.org/",
+        "https://kdd2027.kdd.org/research-track-call-for-papers/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "IROS": {
+      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "outcome": "incomplete",
+      "summary": "IEEE RAS venues page confirms IROS 2027 Florence, Sep 26-Oct 1, 2027, General Chair Eugenio Guglielmelli, Program Chair Sami Haddadin (matches record) but gives no website link and no 2028 venue/dates. The stored 2027 link www.iros2027.org does not resolve (DNS failure), so it could not be validated; no replacement official URL found. Record unchanged.",
+      "checkedUrls": [
+        "https://www.iros2027.org/",
+        "https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-past-and-future-venues/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "ESOP": {
+      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "outcome": "not_found",
+      "summary": "ETAPS 2028 placeholder page confirms April 2-7, 2028 in Karlsruhe (KIT) but lists no ESOP deadlines or chairs. Record unchanged.",
+      "checkedUrls": [
+        "https://etaps.org/2028/"
+      ],
+      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "proposals": []
+    },
+    "TACAS": {
+      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "outcome": "not_found",
+      "summary": "ETAPS 2028 placeholder page confirms April 2-7, 2028 in Karlsruhe but lists no TACAS deadlines or chairs. Record unchanged.",
+      "checkedUrls": [
+        "https://etaps.org/2028/"
+      ],
+      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "proposals": []
+    },
+    "WWW": {
+      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "outcome": "not_found",
+      "summary": "thewebconf.org lists The Web Conference 2028 in Edmonton with date TBD; no deadlines or chairs. Record unchanged.",
+      "checkedUrls": [
+        "https://thewebconf.org/"
+      ],
+      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "proposals": []
+    },
+    "ACM ATC": {
+      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "outcome": "not_found",
+      "summary": "sigops.org/s/conferences/atc/2027/ returns 404; no ACM ATC 2027 announcement found. Record unchanged.",
+      "checkedUrls": [
+        "https://www.sigops.org/s/conferences/atc/2027/"
+      ],
+      "deferredUntil": "2026-11-01T20:15:21.687Z",
       "proposals": []
     }
   }
