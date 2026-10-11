@@ -1,6 +1,6 @@
 {
   "school": "Johns Hopkins University",
-  "checkedAt": "2026-10-10",
+  "checkedAt": "2026-10-11",
   "scope": "Current CS Department employment page and the linked application page for the CS tenure-track call. Prior sources row contains other departmental and university-wide findings from Oct 8, but those have not all been rechecked in this pass.",
   "findings": [
     {
@@ -19,7 +19,11 @@
     {
       "url": "https://apply.interfolio.com/194231",
       "finding": "Interfolio page returns no readable details in this browser; the CS department source itself provides the active listing and Dec 1 full-consideration date."
+    },
+    {
+      "url": "https://apply.interfolio.com/193846",
+      "finding": "Existing Sulam Lab ML postdoc record rechecked. Interfolio now displays “application deadline ... has passed,” lists Oct 9, 2026 as the deadline, and directs applicants to contact the institution. Marked closed on Oct 9; removed rolling status to prevent listing it as applicable."
     }
   ],
-  "deferred": "Refresh the university-wide faculty board and adjacent units, resolve missing application details where accessible, and verify the other existing records by 2026-10-17."
+  "deferred": "Other adjacent units and the remaining existing JHU records still require rechecking."
 }

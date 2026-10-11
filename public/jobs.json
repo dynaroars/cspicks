@@ -5078,13 +5078,14 @@
     "state": "MD",
     "city": "Baltimore",
     "url": "https://apply.interfolio.com/193846",
-    "summary": "Postdoc in the Sulam Lab on foundations of machine learning, interpretable and trustworthy AI, and generative modeling; PhD in CS or a related field. Reviewed on a rolling basis; the official board lists a close date of Oct 9, 2026.",
+    "summary": "Postdoc in the Sulam Lab on machine learning foundations, interpretable and trustworthy AI, and generative modeling; CS or related PhD accepted. Interfolio states the Oct 9, 2026 application deadline has passed and directs interested applicants to contact the institution.",
     "deadline": "2026-10-09",
-    "rolling": true,
+    "rolling": false,
     "postedDate": "2026-09-17",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-11",
     "source": "crawl",
-    "verified": true
+    "verified": true,
+    "closedAt": "2026-10-09"
   },
   {
     "id": "jhu-education-quant-methods-aiml-2026",
