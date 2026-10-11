@@ -224,7 +224,7 @@ function renderSchoolPage(school, faculty, allSchools) {
     </main>
 
     <footer>
-      <p>Data sourced from <a href="https://csrankings.org" target="_blank" rel="noopener noreferrer" style="color:inherit;">CSRankings</a>, DBLP, and open academic indices. Built with open-source tools for the CS community.</p>
+      <p>CS Picks brings together faculty and publication data (<a href="https://csrankings.org" target="_blank" rel="noopener noreferrer" style="color:inherit;">CSRankings</a>, DBLP, OpenAlex), NSF awards, and its own curated conference, award, and job listings. Built for CS PhD applicants and early-career researchers.</p>
     </footer>
   </div>
 </body>
@@ -383,7 +383,7 @@ function renderAreaPage(areaKey, areaName, topSchools, topProfessors) {
     </main>
 
     <footer>
-      <p>Data sourced from <a href="https://csrankings.org" target="_blank" rel="noopener noreferrer" style="color:inherit;">CSRankings</a> and DBLP. Built for prospective PhD students and CS researchers.</p>
+      <p>CS Picks brings together faculty and publication data (<a href="https://csrankings.org" target="_blank" rel="noopener noreferrer" style="color:inherit;">CSRankings</a>, DBLP, OpenAlex), NSF awards, and its own curated conference, award, and job listings. Built for CS PhD applicants and early-career researchers.</p>
     </footer>
   </div>
 </body>
