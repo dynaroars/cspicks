@@ -204,7 +204,19 @@ function buildFacultyResolver(faculty, resolveInstitution) {
     const exact = candidates.filter(row => fullNameKey(row.name) === fullNameKey(name));
     if (exact.length === 1) return exact[0];
     const uniqueNames = new Map(candidates.map(row => [fullNameKey(row.name), row]));
-    return uniqueNames.size === 1 ? [...uniqueNames.values()][0] : null;
+    // CSRankings lists one person's name variants as separate rows sharing a
+    // homepage and Scholar ID ("C. R. Ramakrishnan 0001" / "Cartic R.
+    // Ramakrishnan"); those are one person, not an ambiguity. Prefer the
+    // variant the publication table uses.
+    const people = new Map();
+    uniqueNames.forEach(row => {
+      const key = row.homepage && row.scholarid && row.scholarid !== 'NOSCHOLARPAGE'
+        ? `${row.homepage}|${row.scholarid}`
+        : `name:${fullNameKey(row.name)}`;
+      const prior = people.get(key);
+      if (!prior || (!publicationNames.has(prior.name) && publicationNames.has(row.name))) people.set(key, row);
+    });
+    return people.size === 1 ? [...people.values()][0] : null;
   };
 }
 
@@ -291,6 +303,11 @@ async function fetchAwardsForFaculty(faculty) {
         && institutionMatches(award.awardeeName || award.awardee, faculty.affiliation)
       ));
       const total = Number(response.metadata?.totalCount) || 0;
+      // An empty page before the reported total is a short read, not the end:
+      // fail so this person is retried instead of recorded as checked.
+      if (!page.length && offset < Math.min(total, 3000)) {
+        throw new Error(`Empty page at offset ${offset} of ${total} for ${queryName}`);
+      }
       offset += page.length;
       if (!page.length || offset >= total || offset >= 3000) break;
     } while (true);
