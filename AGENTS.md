@@ -76,7 +76,7 @@ project.
 - `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
 - `grants-submit.html` + `src/grants/submit.js` — single unified submission/correction form for proposing
   new CS research awards or updating existing entries via GitHub Issue or email.
-- `README.md` — GitHub-hosted FAQ, methodology, limitations, and data documentation.
+- `README.md` — a deliberately brief overview (features, dev commands, data sources, license); keep it short.
 
 **Shared page infrastructure** — prefer these over per-page copies:
 - `src/filters.js` — `createFilterBar(mount, { fields, years, onChange })` renders the region / year-range /
