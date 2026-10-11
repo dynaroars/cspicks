@@ -1202,15 +1202,13 @@
       "Undergraduate Students",
       "Master's Students"
     ],
-    "whoFor": "Female undergraduate and master's students in computer science worldwide",
-    "deadline": "Late October / Early November (Annual)",
-    "deadlineMonth": 10,
-    "amount": "$10,000 financial award + Creative Cloud membership + opportunity to interview for Adobe internship",
-    "summary": "Designed to create gender diversity in technology by encouraging outstanding female undergraduate and master's students studying computer science and related technical fields.",
+    "whoFor": "Eligibility and current application status are not confirmed",
+    "deadline": "Not announced",
+    "deadlineMonth": 0,
+    "amount": null,
+    "summary": "Adobe's former Women-in-Technology Scholarship page currently returns 404. The program's current availability, application dates, award amount, and eligibility could not be verified from an active official call.",
     "eligibility": [
-      "Identify as female",
-      "Enrolled as undergraduate or master's student in CS, CE, or related STEM field",
-      "Demonstrated leadership and passion for computing"
+      "Current eligibility terms are not published on an active official call"
     ],
     "topics": [
       "General CS",
@@ -1219,7 +1217,7 @@
       "AI/ML",
       "Data Science"
     ],
-    "url": "https://research.adobe.com/scholarship/",
+    "url": "https://research.adobe.com/",
     "featured": false
   },
   {
@@ -1399,23 +1397,24 @@
       "Master's Students"
     ],
     "whoFor": "MS and PhD students in autonomous systems, cybersecurity, microelectronics, and AI",
-    "deadline": "January 15 (Faculty proposals); February 1 at 11:59 PM EST (Scholar applications; Annual)",
+    "deadline": "February 1, 2026 (scholar applications; 2026 cycle closed)",
     "deadlineMonth": 2,
-    "amount": "Full university tuition + monthly living stipend + workspace and laboratory access at Draper",
-    "summary": "Draper Scholars conduct their thesis and dissertation research under the joint supervision of a university faculty advisor and a Draper technical staff member in Cambridge, MA.",
+    "amount": "Scholar award; amount not stated on the official program page",
+    "summary": "Draper Scholars combine graduate thesis research with hands-on work addressing national security challenges. The 2026 cycle is closed; applications were due February 1, 2026, and awards require enrollment in a thesis-bearing degree program at a partner university.",
     "eligibility": [
-      "Enrolled in an accredited master's or doctoral degree program",
-      "US Citizenship typically required due to national defense research focus",
-      "Research in autonomy, space, cyber, or bio-systems"
+      "Must be a U.S. citizen",
+      "Must be accepted and enrolled in a thesis-bearing degree program at a participating university",
+      "Research should align with one of Draper's 16 listed research areas"
     ],
     "topics": [
-      "Autonomous Systems",
-      "Cybersecurity",
-      "Robotics",
-      "Embedded Computing",
-      "Fault-Tolerant Systems"
+      "Artificial Intelligence and Machine Learning",
+      "Autonomy",
+      "Cyber",
+      "Hardened Microelectronics",
+      "Quantum Technology and Photonics",
+      "Space Technology"
     ],
-    "url": "https://www.draper.com/careers/scholar-program",
+    "url": "https://www.draper.com/education-programs/draper-scholars-program",
     "featured": false
   },
   {
@@ -1428,7 +1427,7 @@
       "PhD Students"
     ],
     "whoFor": "PhD students in computer graphics, computer vision, HCI, and computational imaging",
-    "deadline": "November 11, 2022 at 11:59 PM PT (Annual mid-November cycle)",
+    "deadline": "Not announced; official archive lists the 2022 fellowship",
     "deadlineMonth": 11,
     "amount": "$10,000 one-time award + interview for a Snap Research summer internship",
     "summary": "Supports doctoral students who are advancing the state of the art in augmented reality, creative computing, human-computer interaction, and computational photography.",
@@ -1443,7 +1442,7 @@
       "HCI",
       "Computational Photography"
     ],
-    "url": "https://research.snap.com/fellowships.html",
+    "url": "https://research.snap.com/event-programs.html",
     "featured": false
   },
   {

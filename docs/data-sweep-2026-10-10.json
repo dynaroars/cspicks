@@ -1860,11 +1860,17 @@
     },
     {
       "id": "adobe-women-in-tech",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-programs-check-evidence-2026-10-10.json",
+      "findings": "Reviewed available official program pages; corrected current links and unsupported or outdated cycle details.",
+      "remaining": "Recheck missing or future cycle terms when sponsor pages publish them; continue remaining program audit."
     },
     {
       "id": "bloomberg-ds-fellowship",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-programs-check-evidence-2026-10-10.json",
+      "findings": "Reviewed available official program pages; corrected current links and unsupported or outdated cycle details.",
+      "remaining": "Recheck missing or future cycle terms when sponsor pages publish them; continue remaining program audit."
     },
     {
       "id": "cisco-research-rfps",
@@ -1896,15 +1902,24 @@
     },
     {
       "id": "samsung-gro",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-programs-check-evidence-2026-10-10.json",
+      "findings": "Reviewed available official program pages; corrected current links and unsupported or outdated cycle details.",
+      "remaining": "Recheck missing or future cycle terms when sponsor pages publish them; continue remaining program audit."
     },
     {
       "id": "draper-scholar-program",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-programs-check-evidence-2026-10-10.json",
+      "findings": "Reviewed available official program pages; corrected current links and unsupported or outdated cycle details.",
+      "remaining": "Recheck missing or future cycle terms when sponsor pages publish them; continue remaining program audit."
     },
     {
       "id": "snap-research-fellowship",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-programs-check-evidence-2026-10-10.json",
+      "findings": "Reviewed available official program pages; corrected current links and unsupported or outdated cycle details.",
+      "remaining": "Recheck missing or future cycle terms when sponsor pages publish them; continue remaining program audit."
     },
     {
       "id": "symantec-norton-fellowship",
