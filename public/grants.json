@@ -777,15 +777,14 @@
     "targetAudience": [
       "PhD Students"
     ],
-    "whoFor": "3rd year PhD students in CS, electrical engineering, and applied mathematics (University nominated)",
-    "deadline": "December 16, 2025 at 11:59 PM ET (Annual; unified Microsoft Research Fellowship)",
-    "deadlineMonth": 12,
-    "amount": "Annual stipend by region of institution, including travel funding: $47,000 (US/Canada), $27,000 (Europe), $17,000 (other listed regions); paid as a one-time unrestricted gift to the institution",
-    "summary": "A two-year fellowship program for PhD students in their third year of doctoral studies. Identifies and supports emerging researchers across North America, Europe, Asia, and Latin America.",
+    "whoFor": "Historical university-nominated third-year PhD fellowship; the sponsor paused nominations in 2023",
+    "deadline": "Inactive / Historical (2022 cycle; nominations paused for 2023, no current call on official page)",
+    "deadlineMonth": 0,
+    "amount": "2022 Canada/US cycle: tuition and fees for two academic years, a $42,000 USD living-expense stipend, and Microsoft mentorship",
+    "summary": "Historical PhD fellowship whose official page retains the 2022 cycle and a 2023 pause announcement. The separate Microsoft Research Fellowship now covers challenge-based collaborations for faculty, PhD students and postdocs.",
     "eligibility": [
-      "Must be in 3rd year of PhD program",
-      "Nominated by department chair / university",
-      "Demonstrated exceptional potential in computing research"
+      "Historical 2022 Canada/US cycle: university-nominated third-year PhD student at a university in Canada or the United States",
+      "Research aligned with Microsoft; active full-time PhD enrollment throughout the two award years"
     ],
     "topics": [
       "AI/ML",
@@ -796,7 +795,8 @@
       "Programming Languages"
     ],
     "url": "https://www.microsoft.com/en-us/research/academic-program/phd-fellowship/",
-    "featured": true
+    "featured": false,
+    "status": "historical"
   },
   {
     "id": "microsoft-faculty-fellowship",
@@ -807,15 +807,15 @@
     "targetAudience": [
       "Faculty"
     ],
-    "whoFor": "Early-career tenure-track faculty who show exceptional research leadership (University nominated)",
+    "whoFor": "Historical early-career full-time faculty in the Americas (university or Microsoft nominated)",
     "deadline": "Inactive / Historical (last documented cycle: 2021)",
     "deadlineMonth": 0,
     "amount": "$100,000 per year for two years in the 2021 cycle",
     "summary": "Historical early-career faculty fellowship that recognized promising professors in the Americas pursuing high-impact computing research. The official page preserves the 2021 nomination cycle and recipients but does not advertise a current competition.",
     "eligibility": [
-      "Tenure-track Assistant Professor at an accredited university in first 4 years of appointment",
-      "Nominated by university leadership",
-      "Demonstrated exceptional research trajectory and innovative vision"
+      "2021 cycle: full-time faculty at a degree-granting institution in North or South America, with terminal degree received May 2016 or later; approved career delays considered",
+      "Conducting research, advising graduate students and teaching; research aligned with Microsoft",
+      "Nomination by university or Microsoft researcher required"
     ],
     "topics": [
       "AI/ML",
@@ -928,15 +928,15 @@
     "targetAudience": [
       "Faculty"
     ],
-    "whoFor": "Tenure-track faculty in CS and related fields within 6 years of PhD (Department nominated)",
-    "deadline": "September 15, 2026 at 11:59 PM EDT (Annual fixed statutory deadline)",
+    "whoFor": "Untenured tenure-track faculty in the US or Canada, with regular teaching duties (senior researcher nominated)",
+    "deadline": "September 15, 2026 (Annual; 2027 award nomination period closed)",
     "deadlineMonth": 9,
-    "amount": "$75,000 two-year flexible unrestricted fellowship",
-    "summary": "One of the most prestigious early-career honors in science and computing. Often considered a leading indicator of future Nobel and Turing Laureates, recognizing extraordinary research achievements and promise.",
+    "amount": "$75,000 over two years for research-supporting expenses; no indirect costs or overhead",
+    "summary": "Two-year fellowships supporting early-career researchers in computer science and other eligible sciences, selected for research accomplishments and promise. The 2027 award nomination period closed September 15, 2026.",
     "eligibility": [
-      "Tenure-track faculty appointment at a US or Canadian university",
-      "PhD awarded within the last 6 years",
-      "Nominated by department chair or distinguished senior scholar with 3 external reference letters"
+      "PhD or equivalent in an eligible field, including computer science or a related field",
+      "Untenured tenure-track faculty at a US or Canadian degree-granting institution as of September 15 of the nomination year, with regular teaching duties",
+      "Department head or other senior researcher nomination, plus three support letters; maximum three nominees per department per fellowship field"
     ],
     "topics": [
       "Theory of Computation",
@@ -6098,6 +6098,35 @@
       "Spacecraft Navigation"
     ],
     "url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26ESI_B2",
+    "featured": false
+  },
+  {
+    "id": "microsoft-research-fellowship",
+    "name": "Microsoft Research Fellowship",
+    "shortName": "Microsoft Research Fellowship",
+    "sponsor": "Microsoft Research",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Postdocs"
+    ],
+    "whoFor": "Faculty, active PhD students and postdocs at eligible accredited institutions; eligibility depends on the research challenge",
+    "deadline": "December 16, 2025 at 11:59 PM ET (2026 cycle closed; next call not announced)",
+    "deadlineMonth": 12,
+    "amount": "One-time unrestricted institutional gift including travel: $47,000 US/Canada, $27,000 Europe, $17,000 other eligible regions",
+    "summary": "Challenge-based research collaborations with Microsoft, distinct from the historical PhD and faculty fellowships. The 2026 call is closed; each challenge specifies which academic applicants may apply.",
+    "eligibility": [
+      "Based at a degree-granting institution in an eligible region listed by Microsoft; specific challenge may accept students, faculty, postdocs or a subset",
+      "PhD students submit directly; faculty proposals identify a participating student; postdocs require faculty advisor or department chair support",
+      "Proposal must address an announced challenge; student-led proposals require two recommendation letters"
+    ],
+    "topics": [
+      "AI/ML",
+      "Human-Computer Interaction",
+      "Research Collaboration"
+    ],
+    "url": "https://www.microsoft.com/en-us/research/academic-program/2026-microsoft-research-fellowship/",
     "featured": false
   }
 ]

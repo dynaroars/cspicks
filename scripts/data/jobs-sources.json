@@ -5,39 +5,58 @@
     "facultyCount": 274,
     "jobsUrl": "https://csd.cmu.edu/employment/faculty-hiring",
     "state": "PA",
-    "lastCheckedAt": "2026-10-08T15:28:51Z",
+    "lastCheckedAt": "2026-10-10T17:40:10Z",
     "outcome": "complete",
-    "summary": "Read the CSD hiring page and both Interfolio postings it links (SCS all-tracks faculty, deadline Dec 16, 2026; Stehlik teaching postdoc, rolling). Non-CS units (2026-10-08): Read the CMU-wide faculty careers index (rendered list was truncated after Heinz, so SCS/Tepper/HCII sections were not seen) plus the ECE and INI Interfolio postings. Heinz College entries visible were adjunct/staff only; the old ECE Interfolio 174597 linked from the ECE page is closed, the current ECE posting is 193699. Non-CS units, 2nd pass (2026-10-08): Read the full CMU faculty-careers index (SCS, HCII, Tepper, MCS, Heinz sections) and ECE page. Added the HCII learning-technologies postdoc; Heinz entries are staff/adjunct, Math/ICARM require math PhDs, EPP research-track is policy.",
+    "summary": "Full CSD/ECE hiring pages and complete CMU faculty careers index read. Read 27 relevant/ambiguous Interfolio postings plus INI; added 16 computing and adjacent faculty/postdoc roles, refreshed six recorded roles. SCS is school-wide all-tracks search, not CSD-only; ECE teaching postdoc cutoff March 31, 2027. BME, Xu and Lane postings remain live with explicitly preserved older cycle dates; no closure inferred. Design-only, part-time mentor and general math visiting/postdoc roles excluded.",
     "checkedUrls": [
       "https://csd.cmu.edu/employment/faculty-hiring",
+      "https://www.ece.cmu.edu/about/employment-opportunities.html",
+      "https://www.cmu.edu/faculty-office/prospective/faculty-careers/index.html",
       "https://apply.interfolio.com/189576",
       "https://apply.interfolio.com/124667",
-      "https://www.ece.cmu.edu/about/employment-opportunities.html",
-      "https://apply.interfolio.com/174597",
       "https://apply.interfolio.com/193699",
       "https://apply.interfolio.com/193308",
       "https://apply.interfolio.com/193412",
-      "https://apply.interfolio.com/195163",
+      "https://apply.interfolio.com/187348",
       "https://apply.interfolio.com/194802",
-      "https://www.cmu.edu/faculty-office/prospective/faculty-careers/index.html",
-      "https://apply.interfolio.com/187348"
+      "https://apply.interfolio.com/174277",
+      "https://apply.interfolio.com/193207",
+      "https://apply.interfolio.com/189268",
+      "https://apply.interfolio.com/184248",
+      "https://apply.interfolio.com/193550",
+      "https://apply.interfolio.com/189698",
+      "https://apply.interfolio.com/192164",
+      "https://apply.interfolio.com/177285",
+      "https://apply.interfolio.com/190552",
+      "https://apply.interfolio.com/84172",
+      "https://apply.interfolio.com/102184",
+      "https://apply.interfolio.com/152243",
+      "https://apply.interfolio.com/188135",
+      "https://apply.interfolio.com/192024",
+      "https://apply.interfolio.com/192180",
+      "https://apply.interfolio.com/195163",
+      "https://apply.interfolio.com/194725",
+      "https://apply.interfolio.com/194719",
+      "https://apply.interfolio.com/195298",
+      "https://apply.interfolio.com/194976",
+      "https://apply.interfolio.com/188311"
     ],
     "deferredUntil": null,
     "relatedUnits": [
+      {
+        "name": "CMU faculty careers: all schools and institutes",
+        "url": "https://www.cmu.edu/faculty-office/prospective/faculty-careers/index.html"
+      },
       {
         "name": "Electrical and Computer Engineering",
         "url": "https://www.ece.cmu.edu/about/employment-opportunities.html"
       },
       {
-        "name": "Information Networking Institute (INI)",
+        "name": "Information Networking Institute",
         "url": "https://apply.interfolio.com/193412"
-      },
-      {
-        "name": "CMU Vice Provost for Faculty - Faculty Careers (all-college index)",
-        "url": "https://www.cmu.edu/faculty-office/prospective/faculty-careers/index.html"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z"
+    "relatedCheckedAt": "2026-10-10T17:40:10Z"
   },
   {
     "school": "Georgia Institute of Technology",

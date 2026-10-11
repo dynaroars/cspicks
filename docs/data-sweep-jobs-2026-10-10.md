@@ -43,3 +43,9 @@ Missouri S&T share dialogs exposed permanent posting URLs; each was then opened 
 ## Full capture process
 
 An ordinary Chromium capture of all 652 known official hiring/related-unit/posting URLs was started using `scripts/jobs-render.mjs` in batches of 20. Manifest and batch checkpoints: `/tmp/cspicks-full-jobs-capture/`. Runner: `/tmp/full-jobs-capture.cjs`. Captures must be read and compared with the datasets before any school is marked complete or any posting re-confirmed/closed. URL inventory and captured text alone are not audit completion evidence.
+
+## Second review batch — CMU
+
+Reviewed the complete university faculty index, CSD/ECE hiring pages, and 28 relevant or ambiguous posting details. Added 16 faculty, teaching, leadership and postdoc roles; corrected/refreshed six prior records. Exact records, exclusions and official URLs are in `docs/data-sweep-jobs-cmu-evidence-2026-10-10.json`. Older BME, Xu and Lane advertisements are still live and retain their source dates with explicit historical timing notes.
+
+All 33 capture batches completed: 652 known official URLs. Other captures still require evidence review before a school or posting is marked checked.

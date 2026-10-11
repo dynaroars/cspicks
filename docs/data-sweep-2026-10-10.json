@@ -4,7 +4,9 @@
   "jobs": [
     {
       "school": "Carnegie Mellon University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-cmu-evidence-2026-10-10.json",
+      "findings": "16 added postings; six recorded postings refreshed/corrected; complete university faculty index and 28 detail pages reviewed."
     },
     {
       "school": "Georgia Institute of Technology",
@@ -825,7 +827,8 @@
     },
     {
       "name": "ACL",
-      "status": "pending"
+      "status": "schedule-audited",
+      "report": "docs/data-sweep-confs-nlp-2026-10-10.md"
     },
     {
       "name": "ASE",
@@ -842,7 +845,9 @@
     },
     {
       "name": "CCS",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-security-2026-10-10.md",
+      "remaining": "Statistics or explicitly documented source gaps remain in report."
     },
     {
       "name": "CGO",
@@ -854,7 +859,9 @@
     },
     {
       "name": "Crypto",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-security-2026-10-10.md",
+      "remaining": "Statistics or explicitly documented source gaps remain in report."
     },
     {
       "name": "CVPR",
@@ -874,7 +881,9 @@
     },
     {
       "name": "EMNLP",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-nlp-2026-10-10.md",
+      "remaining": "Statistics or explicitly documented source gaps remain in report."
     },
     {
       "name": "EMSOFT",
@@ -882,7 +891,9 @@
     },
     {
       "name": "Eurocrypt",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-security-2026-10-10.md",
+      "remaining": "Statistics or explicitly documented source gaps remain in report."
     },
     {
       "name": "Eurographics",
@@ -942,7 +953,9 @@
     },
     {
       "name": "IEEE S&P",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-security-2026-10-10.md",
+      "remaining": "Statistics or explicitly documented source gaps remain in report."
     },
     {
       "name": "IJCAI",
@@ -988,11 +1001,14 @@
     },
     {
       "name": "NAACL",
-      "status": "pending"
+      "status": "schedule-audited",
+      "report": "docs/data-sweep-confs-nlp-2026-10-10.md"
     },
     {
       "name": "NDSS",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-security-2026-10-10.md",
+      "remaining": "Statistics or explicitly documented source gaps remain in report."
     },
     {
       "name": "NeurIPS",
@@ -1087,7 +1103,8 @@
     },
     {
       "name": "USENIX Security",
-      "status": "pending"
+      "status": "schedule-audited",
+      "report": "docs/data-sweep-confs-security-2026-10-10.md"
     },
     {
       "name": "VIS",
@@ -1204,7 +1221,8 @@
     },
     {
       "name": "EACL",
-      "status": "pending"
+      "status": "schedule-audited",
+      "report": "docs/data-sweep-confs-nlp-2026-10-10.md"
     },
     {
       "name": "EASE",
@@ -1609,11 +1627,13 @@
     },
     {
       "id": "microsoft-phd-fellowship",
-      "status": "pending"
+      "status": "audited-core-facts",
+      "report": "docs/data-sweep-awards-microsoft-sloan-evidence-2026-10-10.json"
     },
     {
       "id": "microsoft-faculty-fellowship",
-      "status": "pending"
+      "status": "audited-core-facts",
+      "report": "docs/data-sweep-awards-microsoft-sloan-evidence-2026-10-10.json"
     },
     {
       "id": "apple-phd-fellowship",
@@ -1629,7 +1649,8 @@
     },
     {
       "id": "sloan-research-fellowship",
-      "status": "pending"
+      "status": "audited-core-facts",
+      "report": "docs/data-sweep-awards-microsoft-sloan-evidence-2026-10-10.json"
     },
     {
       "id": "packard-fellowship",
@@ -2268,6 +2289,11 @@
       "id": "nasa-early-stage-innovations",
       "status": "audited-new",
       "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "microsoft-research-fellowship",
+      "status": "audited-new",
+      "report": "docs/data-sweep-awards-microsoft-sloan-evidence-2026-10-10.json"
     }
   ],
   "discovery": {
@@ -2287,7 +2313,24 @@
   "capture": {
     "sessionId": 94786,
     "manifest": "/tmp/cspicks-full-jobs-capture/manifest.json",
-    "note": "Re-poll process handle before inferring it remains live. Captures are not evidence of completed review."
+    "note": "All33batches captured; each page still requires evidence review. Process completed successfully.",
+    "status": "completed",
+    "pages": 652
   },
-  "discoveriesNote": "Discovery done within reviewed groups only; nationwide and remaining-program/series discovery pending."
+  "discoveriesNote": "Discovery done within reviewed groups only; nationwide and remaining-program/series discovery pending.",
+  "captureCompletedAt": "2026-10-10",
+  "capturePages": 652,
+  "verificationBatch2": {
+    "unit": "npm test:16testfiles passed",
+    "typecheck": "passed",
+    "build": "passed; optional upstream DBLP aliases CSV parse warning, nonfatal",
+    "browser": "21 passed:Jobs,Awards,AwardsSubmit,CSConfs",
+    "diffCheck": "passed",
+    "projectSize": "passed"
+  },
+  "researchInterrupted": {
+    "visionRobotics": "Pending source review:CVPR2026abstractNov7;CVPR2027responseJan25–Feb1;ICRA2027paperSep16andcommittee;WACV2027notificationOct14bothcycles. Agent stopped on usage limit before durable report.",
+    "software": "Pending source review:ASE2026chairStefanWinter,responseMay25–27,initialnotificationJune18/finalrevisionsJuly29;ICSE2027responseSep23–25. Agent stopped before report.",
+    "databases": "Pending source review:ICDT2026missing,EDBTabsent,PODS2027Cycle2suspectduplicatedCycle1dates. Agent stopped before report."
+  }
 }
