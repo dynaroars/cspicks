@@ -1,0 +1,12 @@
+{
+  "school": "University of Missouri",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://erecruit.umsystem.edu/psc/tamext/COLUM/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Action=U&PAGE=HRS_APP_SCHJOB_FL&Page=HRS_APP_SCHJOB_FL&mobile-app=true&theme=dark",
+      "finding": "Official UM System job portal; visible results include current University of Missouri-Columbia postings, but CS faculty status not resolved."
+    }
+  ],
+  "findings": "The UM System career portal has current job listings, but available results did not expose a definitive current CS faculty posting or a complete filtered faculty result set. No record was added; the current CS-specific absence remains unverified.",
+  "recordUpdates": "No job records added or removed."
+}

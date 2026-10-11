@@ -1,0 +1,16 @@
+{
+  "school": "University of Southern Mississippi",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.usm.edu/computing-sciences-computer-engineering/index.php",
+      "finding": "Official CSCE page reviewed; the department site does not provide full detail for currently advertised roles."
+    },
+    {
+      "url": "https://usm.csod.com/ux/ats/careersite/1/home?c=usm",
+      "finding": "Official USM careers portal."
+    }
+  ],
+  "findings": "Sources row has prior confirmation of req. 5545 and the official portal. Fresh current role list was not completely re-read; keep partial pending reconciliation of the 2026–27 CSCE ads.",
+  "recordUpdates": "Additional official posting details remain to be checked before record changes."
+}

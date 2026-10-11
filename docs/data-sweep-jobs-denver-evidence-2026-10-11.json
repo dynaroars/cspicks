@@ -1,0 +1,20 @@
+{
+  "school": "University of Denver",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://jobs.du.edu/en-us/job/499044/adjunct-faculty-data-science",
+      "finding": "Job 499044; Department of Computer Science adjunct pool for AY 2026–27, online/in-person."
+    },
+    {
+      "url": "https://jobs.du.edu/en-us/listing/",
+      "finding": "Current university job list includes Ritchie School roles and links to official listings."
+    },
+    {
+      "url": "https://jobs.du.edu/en-us/job/499048/adjunct-faculty-systems-engineering",
+      "finding": "Systems Engineering adjunct pool belongs to ECE/Systems Engineering, not a general CS role."
+    }
+  ],
+  "findings": "Current Jobs@DU search identifies an active CS Department Adjunct Faculty, Data Science pool (Job 499044) for AY 2026–27, with applications accepted for future openings. The department-specific posting is an adjunct pool rather than an immediate course assignment. Other Ritchie School vacancy results were not fully enumerated in this pass; added the confirmed CS pool.",
+  "recordUpdates": "Added du-cs-adjunct-data-science-2026."
+}

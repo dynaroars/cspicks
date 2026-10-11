@@ -1,0 +1,12 @@
+{
+  "school": "University of Nebraska - Omaha",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://unomaha.peopleadmin.com/postings/search",
+      "finding": "Official UNO PeopleAdmin page and targeted keyword searches (computer/professor from the prior source check) list no current CS, CIST, or data-science faculty posting. University of Nebraska system board is separate-campus, with searches retained in prior checked URLs."
+    }
+  ],
+  "findings": "No current UNO CS/CIST/data-science faculty posting found in the campus applicant portal; adjacent broad search carried forward from prior evidence.",
+  "recordUpdates": "No job records added."
+}

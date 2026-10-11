@@ -1,0 +1,16 @@
+{
+  "school": "New Mexico Tech",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.nmt.edu/hr/employment.php",
+      "finding": "Official NMT employment page lists current openings by unit; no CS faculty or computing research/postdoctoral role surfaced."
+    },
+    {
+      "url": "https://www.nmt.edu/academicaffairs/staff.php",
+      "finding": "Official Academic Affairs roster identifies Computer Science and Engineering and Information Technology units."
+    }
+  ],
+  "findings": "Current official employment index and CS/IT unit directory reviewed; no CS-relevant opening identified.",
+  "recordUpdates": "No new job record identified in the reviewed sources."
+}

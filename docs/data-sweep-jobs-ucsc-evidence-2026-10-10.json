@@ -1,0 +1,36 @@
+{
+  "school": "Univ. of California - Santa Cruz",
+  "checkedAt": "2026-10-10",
+  "scope": "Full official UCSC Academic Recruit index; CSE, ECE, Computational Media and Technology Management current postings; previously recorded related-unit areas retained.",
+  "findings": [
+    {
+      "url": "https://recruit.ucsc.edu/apply",
+      "finding": "Current index lists active CSE Lecturer Pool JPF02088, CSE Adjunct Professor Pool JPF02069, CROSS Practitioner pool JPF02092, ECE Lecturer Pool JPF02089, Computational Media Lecturer Pool JPF02087, and Technology & Information Management Adjunct Pool JPF02072."
+    },
+    {
+      "url": "https://recruit.ucsc.edu/JPF02088",
+      "finding": "Active CSE lecturer pool covers all listed computer science and engineering course areas; most recent review Oct 9, 2026, applications through Aug 6, 2027. Refreshed."
+    },
+    {
+      "url": "https://recruit.ucsc.edu/JPF02069",
+      "finding": "CSE adjunct pool explicitly requires PhD in CS, computer engineering or related field and names CS areas. First review Oct 14, 2026, applications through Apr 30, 2027 if unfilled. Added."
+    },
+    {
+      "url": "https://recruit.ucsc.edu/JPF02092",
+      "finding": "CROSS Practitioner in Residence pool remains listed; role is a practitioner residency and not a conventional faculty/research appointment."
+    },
+    {
+      "url": "https://recruit.ucsc.edu/JPF02089",
+      "finding": "ECE lecturer pool requires MS in ECE or closely related field and teaches broad ECE topics; not recorded as a clear CS-PhD target."
+    },
+    {
+      "url": "https://recruit.ucsc.edu/JPF02087",
+      "finding": "Computational Media lecturer pool includes game AI/HCI topics but qualifications emphasize relevant industry experience or media/design degrees; not a clear CS-PhD target."
+    },
+    {
+      "url": "https://recruit.ucsc.edu/JPF02072",
+      "finding": "TIM adjunct pool includes software engineering, data mining, information retrieval and ML; explicitly requires a PhD in CS or related fields. Applications through Apr 30, 2027; added."
+    }
+  ],
+  "deferred": null
+}

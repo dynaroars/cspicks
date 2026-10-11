@@ -1,0 +1,8 @@
+{
+  "school":"Temple University","checkedAt":"2026-10-11",
+  "checkedSources":[
+    {"url":"https://cis.temple.edu/about/job_openings/","finding":"Current CIS page continues to advertise an AI tenure-track Assistant Professor search for a Fall 2026 start; by this check date the anticipated start has passed, so it is treated as prior-cycle/stale."},
+    {"url":"https://cis.temple.edu/about/job_openings/adjunct_faculty/","finding":"Adjunct page is a standing pool rather than a specific vacancy."},
+    {"url":"https://engineering.temple.edu/research-departments/employment-opportunities","finding":"Prior College of Engineering review found no other current computing/ECE search."}
+  ],"findings":"No verifiable current-cycle Temple CS faculty vacancy; existing AI ad is prior-cycle by start date.","recordUpdates":"No job records added."
+}

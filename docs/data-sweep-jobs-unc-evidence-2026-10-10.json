@@ -1,0 +1,19 @@
+{
+  "school": "University of North Carolina",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://unc.peopleadmin.com/postings/326792",
+      "finding": "UNC posts a full-time fixed-term open-rank AI-focused teaching professor in Data Science and Society (opened Oct 9; deadline Nov 16; PhD in CS/data science or related field) and an open-rank tenure-track neuroengineering cluster professor (opened Sep 8; deadline Nov 16; start July 2027), cross-listed with Computer Science/Biomedical Engineering/Neurosurgery."
+    },
+    {
+      "url": "https://unc.peopleadmin.com/postings/325091",
+      "finding": "UNC posts a full-time fixed-term open-rank AI-focused teaching professor in Data Science and Society (opened Oct 9; deadline Nov 16; PhD in CS/data science or related field) and an open-rank tenure-track neuroengineering cluster professor (opened Sep 8; deadline Nov 16; start July 2027), cross-listed with Computer Science/Biomedical Engineering/Neurosurgery."
+    },
+    {
+      "url": "https://unc.peopleadmin.com/postings/search",
+      "finding": "UNC posts a full-time fixed-term open-rank AI-focused teaching professor in Data Science and Society (opened Oct 9; deadline Nov 16; PhD in CS/data science or related field) and an open-rank tenure-track neuroengineering cluster professor (opened Sep 8; deadline Nov 16; start July 2027), cross-listed with Computer Science/Biomedical Engineering/Neurosurgery."
+    }
+  ],
+  "recordUpdates": "Added the AI-focused teaching professor and the joint neuroengineering tenure-track faculty search."
+}

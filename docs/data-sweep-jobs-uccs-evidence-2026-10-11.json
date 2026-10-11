@@ -1,0 +1,20 @@
+{
+  "school": "UCCS",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://cu.taleo.net/careersection/2/jobdetail.ftl?job=495332",
+      "finding": "Posting 41085, full-time CS Assistant Teaching Professor; posted Sep 22, priority date Oct 5, ongoing."
+    },
+    {
+      "url": "https://hr.uccs.edu/resources/prospective-employees/faqs",
+      "finding": "Official HR directs users to UCCS-filtered Career Opportunities for current listings."
+    },
+    {
+      "url": "https://eas.uccs.edu/cs/directory",
+      "finding": "Current CS faculty directory reviewed."
+    }
+  ],
+  "findings": "Current official UCCS HR posting 41085 confirms an Assistant Teaching Professor in Computer Science, posted Sep 22, 2026, ongoing with Oct 5 priority date; refreshed the existing record. No unverified faculty calls added.",
+  "recordUpdates": "Refreshed uccs-cs-asst-teaching-2026."
+}

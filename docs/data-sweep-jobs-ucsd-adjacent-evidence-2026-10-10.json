@@ -1,0 +1,432 @@
+{
+  "date": "2026-10-10",
+  "scope": "19 remaining captured UCSD computing-adjacent candidates; all posting text read and visa/work-authorization terms checked.",
+  "deadlinePolicy": "Explicit final cutoff stored as deadline with rolling=false; review dates retained separately or in summaries so postings do not stay active past hard cutoff.",
+  "evidence": [
+    {
+      "id": "ucsd-computational-molecular-biology-faculty-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04606",
+      "captureSha256": "8992e011cc51246606511622ca9c61252ce196e9d88cde33e7445161d31cfde8",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-computational-molecular-biology-faculty-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "Molecular Biology",
+        "title": "Assistant Professor of Computational and Experimental Molecular Biology",
+        "track": "tenure-track",
+        "level": "assistant",
+        "areas": [
+          "bio",
+          "ai",
+          "mlmining"
+        ],
+        "state": "CA",
+        "city": "San Diego",
+        "deadline": "2027-06-30",
+        "rolling": false,
+        "postedDate": "2026-09-09",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04606",
+        "visaSponsorship": "not-stated",
+        "summary": "Tenure-track molecular biology search combining computational and experimental research, including bioinformatics and AI/ML genomic analysis; requires a biology or related PhD and relevant research publications. October 9 review has passed; final cutoff June 30, 2027.",
+        "source": "crawl",
+        "verified": true
+      }
+    },
+    {
+      "id": "ucsd-cognitive-science-faculty-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04633",
+      "captureSha256": "0749e4fcd51b07bcfee7915b5821bc4d30626feaf44778754106af68ce89edeb",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-cognitive-science-faculty-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "Cognitive Science",
+        "title": "Assistant Professor in Cognitive Science",
+        "track": "tenure-track",
+        "level": "assistant",
+        "areas": [
+          "ai"
+        ],
+        "state": "CA",
+        "city": "San Diego",
+        "deadline": "2027-05-01",
+        "rolling": false,
+        "postedDate": "2026-09-09",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04633",
+        "visaSponsorship": "not-stated",
+        "summary": "Computational cognitive science search studying biological or artificial minds and intelligences; applicants need a relevant cognitive-science doctorate or ABD status, with degree completed by appointment. Full consideration November 9, 2026; final cutoff May 1, 2027.",
+        "source": "crawl",
+        "verified": true,
+        "reviewBegins": "2026-11-09"
+      }
+    },
+    {
+      "id": "ucsd-human-cognition-faculty-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04646",
+      "captureSha256": "a5159efa7910c71c504aa100a5b64a81ccf03ea1612dc12641be5664693d6be4",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-human-cognition-faculty-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "Psychology",
+        "title": "Assistant Professor in High-level Human Cognition",
+        "track": "tenure-track",
+        "level": "assistant",
+        "areas": [],
+        "state": "CA",
+        "city": "San Diego",
+        "deadline": "2027-05-01",
+        "rolling": false,
+        "postedDate": "2026-09-09",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04646",
+        "visaSponsorship": "not-stated",
+        "summary": "High-level human cognition research connecting experiments with formal/computational theories; requires a psychology, cognitive science, decision science or closely related PhD/ABD focused on this specialty, completed by appointment. Anticipated start July 1, 2027; October 9 review has passed and final cutoff is May 1, 2027.",
+        "source": "crawl",
+        "verified": true,
+        "startDate": "2027-07-01"
+      }
+    },
+    {
+      "id": "ucsd-oru-project-scientists-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04450",
+      "captureSha256": "0529d38a5ffd276ab0e3e011b0de601ad0567a74025df9b32f77f8ed752a0b4f",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-oru-project-scientists-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "Office of Research and Innovation — Organized Research Units",
+        "title": "Assistant, Associate, or Full Project Scientist/s (2026) Organized Research Units (Multi)",
+        "track": "research",
+        "level": "open",
+        "areas": [],
+        "state": "CA",
+        "city": "San Diego",
+        "deadline": "2027-02-28",
+        "rolling": false,
+        "postedDate": "2026-03-01",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04450",
+        "visaSponsorship": "not-stated",
+        "summary": "Non-tenured academic project-scientist pool across organized research units, explicitly accepting computer science and other relevant terminal degrees; applicants select a specialization unit and contribute to supervised research without formal teaching duties. Appointment depends on project funding and duration; October 5 review has passed, final cutoff February 28, 2027.",
+        "source": "crawl",
+        "verified": true
+      }
+    },
+    {
+      "id": "ucsd-nanosensing-ai-faculty-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04665",
+      "captureSha256": "d0e93fd2efc35082fef18bffff3c1d791ea04298273d28f249f2844f20cd7063",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-nanosensing-ai-faculty-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "Chemical and Nano Engineering",
+        "title": "Assistant Professor (Tenure Track)",
+        "track": "tenure-track",
+        "level": "assistant",
+        "areas": [
+          "ai",
+          "mlmining"
+        ],
+        "state": "CA",
+        "city": "San Diego",
+        "deadline": "2027-05-31",
+        "rolling": false,
+        "postedDate": "2026-09-30",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04665",
+        "visaSponsorship": "not-stated",
+        "summary": "Nanosensing, wearables and healthcare diagnostics search explicitly including AI/ML and digital health; requires a chemical/nanoengineering, materials science, bioengineering or closely related PhD by appointment. Portal review date October 31 conflicts with November 30 full-consideration wording in the description; final cutoff May 31, 2027.",
+        "source": "crawl",
+        "verified": true,
+        "reviewBegins": "2026-10-31"
+      }
+    },
+    {
+      "id": "ucsd-ai-bioprinting-project-scientist-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04648",
+      "captureSha256": "8e1de43868eee61ccba2327062a52188cd12839de825d4ed56c8ce3614f30ea8",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-ai-bioprinting-project-scientist-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "Chemical and Nano Engineering",
+        "title": "Assistant Project Scientist",
+        "track": "research",
+        "level": "assistant",
+        "areas": [
+          "ai",
+          "mlmining"
+        ],
+        "state": "CA",
+        "city": "San Diego",
+        "deadline": "2027-02-06",
+        "rolling": false,
+        "postedDate": "2026-09-21",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04648",
+        "visaSponsorship": "not-stated",
+        "summary": "Research on AI for bioprinting, DLP-based 3D bioprinter hardware/software and bioreactors; requires an ECE, bioengineering or related PhD plus relevant bioprinting and ML experience. Full consideration October 21, 2026; final cutoff February 6, 2027.",
+        "source": "crawl",
+        "verified": true,
+        "reviewBegins": "2026-10-21"
+      }
+    },
+    {
+      "id": "ucsd-design-lab-infill-project-scientist-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04666",
+      "captureSha256": "130e1ec5143678de7e17d2d3cea48370ea1e1c351e662f848c68b0fd786a148a",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-design-lab-infill-project-scientist-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "Design Lab",
+        "title": "Assistant Project Scientist",
+        "track": "research",
+        "level": "assistant",
+        "areas": [],
+        "state": "CA",
+        "city": "San Diego",
+        "deadline": "2027-10-05",
+        "rolling": false,
+        "postedDate": "2026-10-05",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04666",
+        "visaSponsorship": "not-stated",
+        "summary": "Part-time (25% effort) academic research role using R/Python and spatial data science to model land use, transport and emissions for a California Air Resources Board project; requires a data science, statistics, planning, policy or related doctorate. Full consideration October 23, 2026; final cutoff October 5, 2027.",
+        "source": "crawl",
+        "verified": true,
+        "reviewBegins": "2026-10-23"
+      }
+    },
+    {
+      "id": "ucsd-qualcomm-research-scientist-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04498",
+      "captureSha256": "2d62f9d763be07439aedf04c6af40aebee5ef6f8c7a785690062b8b7bb300c06",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-qualcomm-research-scientist-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "Qualcomm Institute",
+        "title": "Assistant, Associate or Full Research Scientist",
+        "track": "research",
+        "level": "open",
+        "areas": [],
+        "state": "CA",
+        "city": "San Diego",
+        "deadline": "2026-12-31",
+        "rolling": false,
+        "postedDate": "2026-05-12",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04498",
+        "visaSponsorship": "not-stated",
+        "summary": "Non-tenured research-scientist search in computational or engineering disciplines; requires a computational, engineering or closely related PhD, with independent research, extramural funding and publications expected. Appointment depends on project funding and duration; September 4 review has passed, final cutoff December 31, 2026.",
+        "source": "crawl",
+        "verified": true
+      }
+    },
+    {
+      "id": "ucsd-qualcomm-digital-twins-scientist-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04456",
+      "captureSha256": "2baacad2dce64f1aa6e0f0d4230d3d0f3a8ebd013f7a4a385e166dff6dbffbe7",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-qualcomm-digital-twins-scientist-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "Qualcomm Institute",
+        "title": "Associate/Full Research Scientist",
+        "track": "research",
+        "level": "open",
+        "areas": [],
+        "state": "CA",
+        "city": "San Diego",
+        "deadline": "2027-05-07",
+        "rolling": false,
+        "postedDate": "2026-05-08",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04456",
+        "visaSponsorship": "not-stated",
+        "summary": "Research-scientist search in remote sensing, mapping, modeling, multimodal digital documentation and digital twin synthesis; requires a relevant doctorate and independent scholarly impact, with grant development and publications expected. June 21 review has passed; final cutoff May 7, 2027.",
+        "source": "crawl",
+        "verified": true
+      }
+    },
+    {
+      "id": "ucsd-mae-adjunct-professor-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04564",
+      "captureSha256": "dffc8485d4e4e83b9ee4a50b7a746edd5ca04597271121122f51b63377139b76",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-mae-adjunct-professor-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "Mechanical and Aerospace Engineering",
+        "title": "Adjunct Professor Series in Mechanical & Aerospace Engineering (26-27 AY)",
+        "track": "teaching",
+        "level": "open",
+        "areas": [
+          "robotics"
+        ],
+        "state": "CA",
+        "city": "San Diego",
+        "deadline": "2027-07-28",
+        "rolling": false,
+        "postedDate": "2026-07-29",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04564",
+        "visaSponsorship": "not-stated",
+        "summary": "Non-tenure-track adjunct pool combining research, teaching and service, with robotics among named areas; requires a mechanical/aerospace engineering or equivalent doctorate, or at least 12 years of relevant senior industry leadership experience. Appointments follow department needs; August 14 review has passed, final cutoff July 28, 2027.",
+        "source": "crawl",
+        "verified": true
+      }
+    },
+    {
+      "id": "ucsd-igcc-technology-security-postdoc-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04619",
+      "captureSha256": "d55d47bf8bb70c2c072dce212ec547950ddd9b6926d3a86b363fc56f75cf731f",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-igcc-technology-security-postdoc-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "School of Global Policy and Strategy — Institute on Global Conflict and Cooperation",
+        "title": "Postdoctoral Scholar, Technology and International Security (IGCC)",
+        "track": "postdoc",
+        "level": null,
+        "areas": [
+          "ai",
+          "sec"
+        ],
+        "state": "DC",
+        "city": "Washington",
+        "deadline": "2027-08-24",
+        "rolling": false,
+        "postedDate": "2026-08-24",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04619",
+        "visaSponsorship": "not-stated",
+        "summary": "Up to six technology and international security fellowships, including AI and cyber research, based in residence in Washington, DC for 2027–29 (12-month participation also considered); computer science and other doctorates/ABD candidates are eligible, with PhD expected by September 1, 2027. Full consideration November 1, 2026; final cutoff August 24, 2027.",
+        "source": "crawl",
+        "verified": true,
+        "reviewBegins": "2026-11-01"
+      }
+    },
+    {
+      "id": "ucsd-moore-ocean-ml-postdoc-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04454",
+      "captureSha256": "88e7b93afb69dd740b6da91bce77392cf173faededd550f49ad46c95866affcc",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-moore-ocean-ml-postdoc-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "Mechanical and Aerospace Engineering",
+        "title": "Moore Postdoctoral Fellowship",
+        "track": "postdoc",
+        "level": null,
+        "areas": [
+          "mlmining"
+        ],
+        "state": "CA",
+        "city": "San Diego",
+        "deadline": "2027-02-01",
+        "rolling": false,
+        "postedDate": "2026-02-09",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04454",
+        "visaSponsorship": "not-stated",
+        "summary": "Two-year postdoc in scientific machine learning and reduced-order ocean state estimation, potentially renewable; requires an engineering, oceanography or related doctorate, relevant data-driven/ML background and numerical fluid dynamics or ocean-model experience. The live ad retains a Spring/Summer 2026 intended start; August 28 review has passed, final cutoff February 1, 2027.",
+        "source": "crawl",
+        "verified": true
+      }
+    },
+    {
+      "id": "ucsd-morimoto-soft-robotics-postdoc-2026",
+      "url": "https://apol-recruit.ucsd.edu/JPF04580",
+      "captureSha256": "8798e6a51a0fc1d0e617d8b86308262635321c0a57737cc9b4f1080c09cb03ed",
+      "checkedAt": "2026-10-10",
+      "decision": "added",
+      "after": {
+        "id": "ucsd-morimoto-soft-robotics-postdoc-2026",
+        "school": "Univ. of California - San Diego",
+        "department": "Mechanical and Aerospace Engineering",
+        "title": "Postdoctoral Scholar",
+        "track": "postdoc",
+        "level": null,
+        "areas": [
+          "robotics"
+        ],
+        "state": "CA",
+        "city": "San Diego",
+        "deadline": "2026-12-31",
+        "rolling": false,
+        "postedDate": "2026-07-23",
+        "lastSeenAt": "2026-10-10",
+        "url": "https://apol-recruit.ucsd.edu/JPF04580",
+        "visaSponsorship": "not-stated",
+        "summary": "Multiple Morimoto Lab postdocs developing autonomous soft, tip-extending robots for stroke treatment, including design, planning, controls and integration. Requires a mechanical engineering or related PhD with a strong robotics publication record; August 12 review has passed, final cutoff December 31, 2026.",
+        "source": "crawl",
+        "verified": true
+      }
+    },
+    {
+      "url": "https://apol-recruit.ucsd.edu/JPF04607",
+      "captureSha256": "0932ff4e753ad3f4c5cd4a59e56caf5bf909ce01a52439f8b0ee37e5284364a7",
+      "checkedAt": "2026-10-10",
+      "decision": "excluded",
+      "reason": "Biological imaging/experimental technologies search; no explicit computational focus in the call."
+    },
+    {
+      "url": "https://apol-recruit.ucsd.edu/JPF04662",
+      "captureSha256": "c09d786568c44db458e686f2c68170ec1b826801e045287a7152e8f4855e63e7",
+      "checkedAt": "2026-10-10",
+      "decision": "excluded",
+      "reason": "Mathematical statistics search without a named computing/AI/data-science target."
+    },
+    {
+      "url": "https://apol-recruit.ucsd.edu/JPF04449",
+      "captureSha256": "811b425c255aa8fa0ba96171e245de3576b9c43d5f31c9b740b45fe11ed522b6",
+      "checkedAt": "2026-10-10",
+      "decision": "excluded",
+      "reason": "Generic research-scientist pool without a computing specialization or explicit CS eligibility; specific Qualcomm Institute searches added instead."
+    },
+    {
+      "url": "https://apol-recruit.ucsd.edu/JPF04654",
+      "captureSha256": "2158abb0dab16baf703258c34afd0b10a737f23577b33dad438dbba4c6a9a5da",
+      "checkedAt": "2026-10-10",
+      "decision": "excluded",
+      "reason": "Public-health ASCEND education/program-evaluation role; requires public-health doctorate and no computing target."
+    },
+    {
+      "url": "https://apol-recruit.ucsd.edu/JPF04476",
+      "captureSha256": "7157ff4ed262517b113fb78879d528e0f3475d5b0d3a4fd25e73ad278ccf4245",
+      "checkedAt": "2026-10-10",
+      "decision": "excluded",
+      "reason": "General bioengineering project-scientist pool without a named computational specialty."
+    },
+    {
+      "url": "https://apol-recruit.ucsd.edu/JPF04565",
+      "captureSha256": "afe8e2e46cb3b55441e5e58e4f21167ee2e240ff9d7941c5063e9cfc5205cfae",
+      "checkedAt": "2026-10-10",
+      "decision": "deferred",
+      "reason": "Professional systems-engineering lecturer pool; computing-specific course/eligibility scope needs confirmation."
+    }
+  ],
+  "remaining": [
+    "Broader central-board ambiguous science/medicine research calls still need detail checks.",
+    "MAS lecturer computing-specific scope remains unconfirmed.",
+    "Chemical/nanoengineering priority-date conflict needs publisher clarification."
+  ]
+}

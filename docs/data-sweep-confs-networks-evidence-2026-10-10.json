@@ -1,0 +1,110 @@
+{
+  "checkedAt": "2026-10-10",
+  "changes": [
+    {
+      "name": "IMC",
+      "year": 2026,
+      "field": "link",
+      "before": "https://imc.org/",
+      "after": "https://conferences.sigcomm.org/imc/2026/"
+    },
+    {
+      "name": "IMC",
+      "year": 2026,
+      "field": "seriesLink",
+      "before": "https://imc.org/",
+      "after": "https://www.sigcomm.org/events/imc-conference"
+    },
+    {
+      "name": "IMC",
+      "year": 2026,
+      "field": "link",
+      "before": "https://imc.org/",
+      "after": "https://conferences.sigcomm.org/imc/2026/"
+    },
+    {
+      "name": "IMC",
+      "year": 2026,
+      "field": "seriesLink",
+      "before": "https://imc.org/",
+      "after": "https://www.sigcomm.org/events/imc-conference"
+    },
+    {
+      "name": "MobiCom",
+      "year": 2027,
+      "field": "note",
+      "before": null,
+      "after": "Author rebuttal period runs November 3–6, 2026. Official winter-round schedule fields are still TBD."
+    },
+    {
+      "name": "MobiSys",
+      "year": 2027,
+      "field": "generalChair",
+      "before": "Seung-Jae (June) Han",
+      "after": "VP Nguyen, Anh Nguyen"
+    },
+    {
+      "name": "MobiSys",
+      "year": 2027,
+      "field": "programChair",
+      "before": null,
+      "after": "Jun Han, Falko Dressler"
+    },
+    {
+      "name": "MobiSys",
+      "year": 2027,
+      "field": "rebuttalDate",
+      "before": null,
+      "after": "2027-02-08"
+    },
+    {
+      "name": "MobiSys",
+      "year": 2027,
+      "field": "note",
+      "before": null,
+      "after": "Rebuttal period runs February 8–12, 2027."
+    },
+    {
+      "name": "CoNEXT",
+      "year": 2026,
+      "field": "seriesLink",
+      "before": "https://conferences.sigcomm.org/co-next/",
+      "after": "https://www.sigcomm.org/events/conext-conference"
+    },
+    {
+      "name": "CoNEXT",
+      "year": 2027,
+      "field": "new edition record",
+      "before": null,
+      "after": "Sponsor-announced tentative date and location marked to be confirmed"
+    }
+  ],
+  "officialSources": [
+    "https://conferences.sigcomm.org/imc/2026/",
+    "https://www.sigcomm.org/events/imc-conference",
+    "https://conferences.sigcomm.org/imc/2026/cfp/",
+    "https://conferences.sigcomm.org/imc/2026/committees/",
+    "https://www.sigmobile.org/mobicom/2027/",
+    "https://www.sigmobile.org/mobicom/2027/cfp.html",
+    "https://www.sigmobile.org/mobicom/2027/committee.html",
+    "https://www.sigmobile.org/mobisys/2027/",
+    "https://www.sigmobile.org/mobisys/2027/organizing_committee/",
+    "https://www.sigmobile.org/mobisys/2027/call_for_papers/",
+    "https://www.usenix.org/conference/nsdi27",
+    "https://www.usenix.org/conference/nsdi27/call-for-papers",
+    "https://conferences.sigcomm.org/sigcomm/2027/",
+    "https://conferences.sigcomm.org/sigcomm/2027/organization/",
+    "https://www.sigcomm.org/events/conext-conference",
+    "https://conferences.sigcomm.org/co-next/2026/",
+    "https://conferences.sigcomm.org/co-next/2027/"
+  ],
+  "notFound": [
+    "IMC 2027 official edition; derived candidate URL returned 404.",
+    "MobiCom 2027 host city and winter-cycle deadlines remain TBD.",
+    "No NSDI general chair found on official edition page.",
+    "CoNEXT 2027 edition site, chairs, and CFP not validated; announced date/location explicitly tentative."
+  ],
+  "limitations": [
+    "No unsupported chair names were copied into general-chair/program-chair fields."
+  ]
+}

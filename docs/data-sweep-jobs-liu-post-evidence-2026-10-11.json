@@ -1,0 +1,16 @@
+{
+  "school": "LIU Post",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://liu.edu/post/academics/Faculty/Faculty",
+      "finding": "Official LIU Post faculty profiles page confirms Computer Science unit."
+    },
+    {
+      "url": "https://webapps.liu.edu/jobslegacy/index.html",
+      "finding": "Official LIU careers search page; current CS faculty posting not established from available results."
+    }
+  ],
+  "findings": "Official faculty and jobs pages checked; current CS role listing remains unresolved in the dynamic careers search. Partial.",
+  "recordUpdates": "No job records changed pending full posting verification."
+}

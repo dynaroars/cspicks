@@ -1,0 +1,28 @@
+{
+  "school": "Binghamton University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://www.binghamton.edu/computer-science/about/faculty-openings.html",
+      "finding": "Official School of Computing page, updated Oct 9, lists Associate or Full Professor – Safe AI and Society; senior faculty-level AI Interpretability/Alignment; Secure AI and Agentic Systems; and AI Safety Foundations. Says applications reviewed until filled."
+    },
+    {
+      "url": "https://binghamton.interviewexchange.com/jobofferdetails.jsp?JOBID=205079",
+      "finding": "Official linked application page returned HTTP 403; dates, rank, detailed requirements, and current application state could not be independently checked."
+    },
+    {
+      "url": "https://binghamton.interviewexchange.com/jobofferdetails.jsp?JOBID=205590",
+      "finding": "Official linked application page returned HTTP 403; dates, rank, detailed requirements, and current application state could not be independently checked."
+    },
+    {
+      "url": "https://binghamton.interviewexchange.com/jobofferdetails.jsp?JOBID=205592",
+      "finding": "Official linked application page returned HTTP 403; dates, rank, detailed requirements, and current application state could not be independently checked."
+    },
+    {
+      "url": "https://binghamton.interviewexchange.com/jobofferdetails.jsp?JOBID=205594",
+      "finding": "Official linked application page returned HTTP 403; dates, rank, detailed requirements, and current application state could not be independently checked."
+    }
+  ],
+  "findings": "The current department page confirms four current AI-related searches, but all four linked applications block detail review. Existing STRIVE AI record JOBID 195195 does not match the current posted list and remains unverified; no speculative replacement records added.",
+  "recordUpdates": "No job record added or refreshed because the existing application page is inaccessible and its title does not match the current four listings."
+}

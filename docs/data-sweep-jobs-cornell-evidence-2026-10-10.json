@@ -1,0 +1,34 @@
+{
+  "school": "Cornell University",
+  "checkedAt": "2026-10-10",
+  "scope": "Official Cornell Bowers, Cornell Tech, Cornell CS, ECE and central HR sources. Cornell CS hiring page returned 403; broad university-wide board and further adjacent units remain incomplete.",
+  "findings": [
+    {
+      "url": "https://bowers.cornell.edu/careers",
+      "finding": "Current Cornell Tech Lecturer/Senior Lecturer CS role remains listed, teaching master’s courses including AI/ML, CS foundations, data science, and urban computing. Existing record refreshed."
+    },
+    {
+      "url": "https://tech.cornell.edu/jobs/",
+      "finding": "Jobs page does not surface additional current academic CS postings."
+    },
+    {
+      "url": "https://www.cs.cornell.edu/information/jobpostings",
+      "finding": "Request returned 403; detailed CS department openings could not be independently reviewed."
+    },
+    {
+      "url": "https://www.duffield.cornell.edu/ece/open-faculty-and-staff-searches/",
+      "applicationUrl": "https://academicjobsonline.org/ajo/jobs/32961",
+      "finding": "Active Assistant Teaching Professor search focused on computer engineering; teaching includes digital electronics, embedded systems, digital VLSI, C/Python, digital logic/FPGA SoC and microcontrollers. Relevant-field PhD; full consideration 2027-02-01; rolling until filled, listed close 2027-03-15. Added."
+    },
+    {
+      "url": "https://www.duffield.cornell.edu/ece/open-faculty-and-staff-searches/",
+      "applicationUrl": "https://academicjobsonline.org/ajo/jobs/32962",
+      "finding": "Active ECE tenure-track search across all ECE areas, emphasizing computer engineering (AI hardware, architecture, VLSI), robotics, semiconductor, plasma, quantum. Doctorate in appropriate field; full consideration 2026-12-01, listed close 2027-01-15. Added."
+    },
+    {
+      "url": "https://hr.cornell.edu/jobs",
+      "finding": "Central HR jobs page checked; further targeted university-wide searches remain."
+    }
+  ],
+  "deferred": "Broaden central and adjacent-unit search, and recheck the inaccessible CS hiring page by 2026-10-17."
+}

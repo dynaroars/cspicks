@@ -1,0 +1,20 @@
+{
+  "school": "California Inst. of Technology",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://applications.caltech.edu/jobs",
+      "finding": "Official Caltech academic opportunities index lists no CMS faculty opening. It lists Postdoctoral Positions in Computing + Mathematical Sciences, covering Computer Science, Applied Mathematics, Communication & Networks, and Control & Systems."
+    },
+    {
+      "url": "https://www.cms.caltech.edu/about/positions",
+      "finding": "CMS department position index; existing computing postdoctoral fellowships were already recorded, but individual cycle dates were not re-opened in this pass."
+    },
+    {
+      "url": "https://www.eas.caltech.edu/about/positions",
+      "finding": "Official EAS positions page previously checked; no current CMS faculty role."
+    }
+  ],
+  "findings": "No current CMS faculty opening found. CMS postdoctoral positions remain advertised; individual fellowship program pages/date details were not revalidated in this pass.",
+  "recordUpdates": "Existing CMS postdoctoral program records were not changed; exact fellowship deadlines remain unverified in this check."
+}

@@ -382,119 +382,75 @@
       "proposals": []
     },
     "EuroSys": {
-      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
-      "outcome": "incomplete",
-      "summary": "EuroSys 2027 (Rabat, Apr 19-23 2027) dates, place, deadlines and PCs match the official site; added author-response dates from the CFP. EuroSys 2028 not announced.",
+      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "outcome": "not_found",
+      "summary": "EuroSys 2028 not announced on 2027 site or series pages. EuroSys 2027 (Rabat, Apr 19-23 2027; cycle 2 abstract Sep 17, paper Sep 24 2026) matches the record; no edits.",
       "checkedUrls": [
         "https://2027.eurosys.org/",
-        "https://2027.eurosys.org/cfp.html"
+        "https://www.eurosys.org/"
       ],
-      "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "rebuttalDate",
-              "url": "https://2027.eurosys.org/cfp.html",
-              "evidence": "Author responses due Jul 31, 2026 (spring) and Jan 8, 2027 (fall)."
-            },
-            {
-              "field": "notificationDate",
-              "url": "https://2027.eurosys.org/cfp.html",
-              "evidence": "Notification Aug 21, 2026 and Jan 29, 2027 (matches record)."
-            }
-          ]
-        }
-      ]
+      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "proposals": []
     },
     "FAST": {
-      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
-      "outcome": "incomplete",
-      "summary": "FAST 2027 record matches the official CFP for both cycles (dates, place, deadlines, response windows, notifications, PCs). FAST 2028 has no announced deadlines.",
+      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "outcome": "not_found",
+      "summary": "FAST 2028 page lists no dates, location, or deadlines yet; record left unchanged.",
       "checkedUrls": [
-        "https://www.usenix.org/conference/fast27/call-for-papers"
+        "https://www.usenix.org/conference/fast28"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-10-31T20:14:51.448Z",
       "proposals": []
     },
     "ICML": {
-      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
-      "outcome": "incomplete",
-      "summary": "icml.cc FutureMeetings lists 2027 in South America and 2028 in Eastern United States only; no city, dates, or deadlines announced. No change.",
+      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "outcome": "not_found",
+      "summary": "Official FutureMeetings page lists only South America (2027) and Eastern United States (2028); no dates or deadlines. Existing 2027 deadlines remain estimated.",
       "checkedUrls": [
         "https://icml.cc/Conferences/FutureMeetings"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-10-31T20:14:51.448Z",
       "proposals": []
     },
     "IJCAI": {
-      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
-      "outcome": "complete",
-      "summary": "IJCAI 2027 record had 2026-era dates; corrected to the official 2027 site: abstract Jan 4, paper Jan 11, notification Apr 21 2027. Removed unsupported rebuttal date (2027-04-07 was the 2026 value); chairs not verified.",
+      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "outcome": "incomplete",
+      "summary": "IJCAI 2027 (Kyoto Aug 7-13; Hengqin Aug 15-17; abstract Jan 4, paper Jan 11, notification Apr 21 2027) matches the record. No IJCAI 2028 info published.",
       "checkedUrls": [
         "https://2027.ijcai.org/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "abstractDeadline",
-              "url": "https://2027.ijcai.org/",
-              "evidence": "Abstract submission January 4, 2027 (23:59 AoE)."
-            },
-            {
-              "field": "deadline",
-              "url": "https://2027.ijcai.org/",
-              "evidence": "Full paper submission January 11, 2027."
-            },
-            {
-              "field": "notificationDate",
-              "url": "https://2027.ijcai.org/",
-              "evidence": "Paper notification April 21, 2027."
-            },
-            {
-              "field": "link",
-              "url": "https://2027.ijcai.org/",
-              "evidence": "Official 2027 edition site."
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "ISSTA": {
-      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
+      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
       "outcome": "incomplete",
-      "summary": "ISSTA 2027 (Singapore, Sep 7-10 2027) dates, place and research-track deadlines match the official page; chairs not shown in fetched content. ISSTA 2028 not announced.",
+      "summary": "ISSTA 2028 Shanghai and chairs match the record; dates/deadlines not published. conf.researchr.org/home/issta-2028 returned 404 at check time. ISSTA 2027 Singapore confirmed.",
       "checkedUrls": [
-        "https://conf.researchr.org/home/issta-2027"
+        "https://www.issta.org/",
+        "https://conf.researchr.org/home/issta-2028"
       ],
       "deferredUntil": null,
       "proposals": []
     },
     "NeurIPS": {
-      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
-      "outcome": "incomplete",
-      "summary": "neurips.cc FutureMeetings lists 2027 in Europe and 2028 in Western United States only; no city, dates, or deadlines. No change.",
+      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "outcome": "not_found",
+      "summary": "FutureMeetings lists only Europe (2027) and Western United States (2028); no dates or cities. No edits.",
       "checkedUrls": [
         "https://neurips.cc/Conferences/FutureMeetings"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-10-31T20:14:51.448Z",
       "proposals": []
     },
     "SIGMOD": {
-      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
-      "outcome": "incomplete",
-      "summary": "SIGMOD 2027 dates and place (Jun 13-19, Huntington Beach) confirmed; the Important Dates page was not read, so cycle deadlines are unchanged and unverified this run. SIGMOD 2028 not announced.",
+      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "outcome": "not_found",
+      "summary": "sigmod.org gives no SIGMOD 2028 location, dates, or site; only the 2027 CFP link. No edits.",
       "checkedUrls": [
-        "https://sigmod.org/",
-        "https://2027.sigmod.org/"
+        "https://sigmod.org/"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-10-31T20:14:51.448Z",
       "proposals": []
     },
     "SOSP": {
@@ -632,6 +588,58 @@
           ]
         }
       ]
+    },
+    "FSE": {
+      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "outcome": "not_found",
+      "summary": "FSE 2027 dates, Shenzhen, rebuttal window, and notification match the record; submission deadline not listed on the page. conf.researchr.org/home/fse-2028 returned 404 (not announced).",
+      "checkedUrls": [
+        "https://conf.researchr.org/home/fse-2027",
+        "https://conf.researchr.org/home/fse-2028"
+      ],
+      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "proposals": []
+    },
+    "ICSE": {
+      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "outcome": "not_found",
+      "summary": "ICSE 2028 not listed on the series page. ICSE 2027 (Dublin, Apr 25-May 1 2027) and chairs match the record; deadlines not on the page.",
+      "checkedUrls": [
+        "https://conf.researchr.org/series/icse",
+        "https://conf.researchr.org/home/icse-2027"
+      ],
+      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "proposals": []
+    },
+    "NDSS": {
+      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "outcome": "not_found",
+      "summary": "NDSS 2028 not announced. NDSS 2027 Seoul, Mar 22-26 2027 matches the record; deadlines not stated on the home page.",
+      "checkedUrls": [
+        "https://www.ndss-symposium.org/"
+      ],
+      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "proposals": []
+    },
+    "PLDI": {
+      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "outcome": "not_found",
+      "summary": "PLDI 2028 not announced. PLDI 2027 (Atlanta, Jun 5-11 2027; paper deadline Nov 12 2026; notification Mar 4 2027) matches the record.",
+      "checkedUrls": [
+        "https://pldi27.sigplan.org/"
+      ],
+      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "proposals": []
+    },
+    "POPL": {
+      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "outcome": "not_found",
+      "summary": "POPL 2028 not announced. POPL 2027 (Mexico City, Jan 10-16 2027) matches the record.",
+      "checkedUrls": [
+        "https://popl27.sigplan.org/"
+      ],
+      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "proposals": []
     }
   }
 }

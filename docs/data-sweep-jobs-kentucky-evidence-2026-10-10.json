@@ -1,0 +1,15 @@
+{
+  "school": "University of Kentucky",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://cs.engr.uky.edu/about-4/jobs",
+      "finding": "Official CS jobs page lists the current tenure-eligible assistant professor search for Aug 2027."
+    },
+    {
+      "url": "https://ukjobs.uky.edu/postings/650924",
+      "finding": "Official applicant portal states FE05056, tenure track, PhD CS or related, AI/ML, AI security, AI systems; applications accepted now, review begins immediately until filled."
+    }
+  ],
+  "recordUpdates": "Refreshed Assistant Professor in Computer Science/Engineering (FE05056), tenure-track, open until filled; Aug 2027 start; AI/ML, AI security, and systems for AI needs."
+}

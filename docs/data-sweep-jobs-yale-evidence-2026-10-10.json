@@ -1,0 +1,15 @@
+{
+  "school": "Yale University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://academicpositions.yale.edu/",
+      "finding": "Official Office of the Provost listing shows Assistant Professor, Human-Computer Interaction, Computer Science, New Haven, open date Oct 9, 2026."
+    },
+    {
+      "url": "https://apply.interfolio.com/194718",
+      "finding": "Official application destination from Yale listing; page details did not render."
+    }
+  ],
+  "recordUpdates": "Added Assistant Professor, Human-Computer Interaction (CS), listed in Yale’s official academic openings on Oct 9, 2026; direct Interfolio posting linked from the current index."
+}

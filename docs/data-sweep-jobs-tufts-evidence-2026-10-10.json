@@ -1,0 +1,19 @@
+{
+  "school": "Tufts University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://engineering.tufts.edu/cs/about/employment-opportunities",
+      "finding": "Official CS page lists TIAI Director/Endowed Professor with Dec 15 2026 full-consideration date and rolling review until filled; ongoing part-time CS lecturer applications; and a cybersecurity postdoc filled on a rolling basis. Existing matching records refreshed."
+    },
+    {
+      "url": "https://engineering.tufts.edu/about/employment-opportunities",
+      "finding": "School of Engineering page lists the CS part-time lecturer and TIAI Director roles; ECE and other faculty roles reviewed in prior October 8 pass."
+    },
+    {
+      "url": "https://apply.interfolio.com/193535",
+      "finding": "Official Interfolio application link for TIAI Director confirmed by CS page."
+    }
+  ],
+  "recordUpdates": "Refreshed the current TIAI Director, adjunct lecturer, and cybersecurity postdoc records from the CS department listing."
+}

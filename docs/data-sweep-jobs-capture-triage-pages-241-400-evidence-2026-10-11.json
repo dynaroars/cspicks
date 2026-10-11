@@ -1,0 +1,53 @@
+{
+  "scope": "Official hiring-page capture keyword triage",
+  "checkedAt": "2026-10-11",
+  "captureManifest": "/tmp/cspicks-full-jobs-capture/manifest.json",
+  "pages": {
+    "first": 241,
+    "last": 400
+  },
+  "method": "Read captured text files and extract hiring/job/postdoc/lecturer/deadline/status lines. This is discovery triage only; candidate postings require linked requisition review before marking school or job complete.",
+  "findings": [
+    {
+      "school": "University of Oklahoma",
+      "source": "https://www.ou.edu/coe/about/hiring",
+      "note": "HPC ECE faculty call visible among broad engineering posts; other computing-adjacent engineering roles require detail review."
+    },
+    {
+      "school": "Louisiana State University",
+      "source": "https://www.lsu.edu/eng/cse/people/employment.php",
+      "note": "Current CS page lists AI, cybersecurity, and software engineering/systems assistant professor searches; requisition details were not reviewed in this triage."
+    },
+    {
+      "school": "University of Houston",
+      "source": "https://www.uh.edu/nsm/computer-science/people/faculty-search/index.php",
+      "note": "Programming languages/compilers/systems, quantum information, and human-centered robotics searches are listed; all three matching records already exist."
+    },
+    {
+      "school": "University of New Mexico",
+      "source": "https://cs.unm.edu/news/2026/10/assistant-professor-position.html",
+      "note": "Current Dec 5, 2026 best-consideration deadline confirmed; existing requisition 38093 record retained."
+    },
+    {
+      "school": "University of Idaho",
+      "source": "https://uidaho.peopleadmin.com/postings/search?query=computer+science",
+      "note": "TT, clinical, and cybersecurity/AI postdoc calls match existing records."
+    },
+    {
+      "school": "University of Arizona",
+      "source": "https://www.cs.arizona.edu/currently-open-positions",
+      "note": "Page still exposes 2025 review timeline for TT posting; current career-track calls need current requisition availability review."
+    },
+    {
+      "school": "University of Hawaii at Manoa",
+      "source": "https://ece.hawaii.edu/resources/page/Faculty-Recruiting",
+      "note": "Current ECE computer engineering faculty call matches existing position #0084022 record; CS page itself contains 2024/2025 stale call and instructor pool."
+    },
+    {
+      "school": "University of Oklahoma",
+      "source": "https://www.ou.edu/coe/about/hiring",
+      "note": "Index contains computing-adjacent positions without enough linked details in capture to safely add all."
+    }
+  ],
+  "limitations": "No school was marked complete from keyword triage. Capture texts and direct posting pages were not all fully read in this pass."
+}

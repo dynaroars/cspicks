@@ -1,0 +1,35 @@
+{
+  "checkedAt": "2026-10-10",
+  "school": "Massachusetts Inst. of Technology",
+  "sources": [
+    {
+      "url": "https://faculty-searches.mit.edu/eecs/",
+      "supports": "Official central EECS faculty search seeks tenure-track faculty in any EECS area for July 2027 or mutually agreed start; complete applications and three letters due Dec. 1, 2026."
+    },
+    {
+      "url": "https://computing.mit.edu/faculty/faculty-openings/",
+      "supports": "MIT Schwarzman College page says core and shared faculty searches are currently closed."
+    },
+    {
+      "url": "https://www.eecs.mit.edu/career-opportunities-at-eecs/",
+      "supports": "Department page still displays the prior cycle (July 2026 start and Dec. 1, 2025 complete-application date), so it is stale relative to the current central search."
+    },
+    {
+      "url": "https://computing.mit.edu/research/postdoctoral-fellows-programs/tayebati-postdoctoral-fellowship-program/",
+      "supports": "Official call invites 2027–2028 cohort applications due Nov. 1, 2026; states disciplines, PhD eligibility window, two-year term, stipend range, start date, and no visa sponsorship."
+    },
+    {
+      "url": "https://computing.mit.edu/research/postdoctoral-fellows-programs/meteor-program/",
+      "supports": "Official call states Dec. 1, 2026 full-consideration date, CS/AI scope, one-year potentially renewable term, stipend range, U.S.-institution PhD requirement, and no visa sponsorship."
+    },
+    {
+      "url": "https://computing.mit.edu/cross-cutting/social-and-ethical-responsibilities-of-computing/serc-postdocs/",
+      "supports": "The page lists current SERC postdoctoral fellows for 2026–2027; it does not advertise a new open recruitment call."
+    }
+  ],
+  "changes": [
+    "Added live Tayebati and METEOR postdoctoral calls with official deadlines, eligibility, compensation, and visa terms.",
+    "Refreshed the live EECS faculty record and corrected its deadline from null to December 1, 2026 based on the central faculty-search portal.",
+    "Recorded the stale EECS departmental page conflict and current closure of the College core/shared searches."
+  ]
+}

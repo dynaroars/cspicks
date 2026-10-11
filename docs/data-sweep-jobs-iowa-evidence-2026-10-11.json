@@ -1,0 +1,24 @@
+{
+  "school": "University of Iowa",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://cs.uiowa.edu/news/2026/10",
+      "finding": "An October 7, 2026 department news item announces a theory-group postdoctoral fellow opening."
+    },
+    {
+      "url": "https://jobs.uiowa.edu/postdoc/view/4675",
+      "finding": "Existing detail page is the direct application record for the theory-group postdoc; retained the existing record and refreshed lastSeenAt."
+    },
+    {
+      "url": "https://jobs.uiowa.edu/faculty/view/76016",
+      "finding": "Official faculty requisition 76016 is a Tippie Business Analytics tenure-track search at Assistant/Associate/Full rank, starting Fall 2027. Advertising began Aug 14, 2026 and is extended until filled. It explicitly accepts a doctorate in Computer Science and highlights data science and supply chain management."
+    },
+    {
+      "url": "https://jobs.uiowa.edu/jobSearch/faculty/",
+      "finding": "Current faculty search portal lists Tippie College of Business openings; the requisition detail confirms the active Business Analytics search."
+    }
+  ],
+  "findings": "Recorded the current CS-eligible Tippie search and refreshed the current theory postdoc. This review does not complete broader campus-wide postdoc and adjacent-unit discovery.",
+  "recordUpdates": "Added uiowa-tippie-business-analytics-faculty-2026 and refreshed uiowa-postdoc-theory-2026."
+}

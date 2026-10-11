@@ -1,0 +1,20 @@
+{
+  "school": "Michigan Technological University",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.mtu.edu/computing/about/employment/",
+      "finding": "Official College of Computing employment page links to Michigan Tech jobs."
+    },
+    {
+      "url": "https://www.employment.mtu.edu/en-us/listing",
+      "finding": "Current portal listing reviewed; ECE Chair call is limited to internal candidates."
+    },
+    {
+      "url": "https://www.employment.mtu.edu/en-us/job/493884/visiting-assistant-teaching-professor",
+      "finding": "Older computing faculty search surfaced with an August 2026 start, treated as prior-cycle/stale."
+    }
+  ],
+  "findings": "Current College of Computing employment page directs applicants to the university portal. A current listing includes an internal-only ECE department chair search; a previously surfaced College of Computing cybersecurity faculty posting has a 2026 start and appears stale. No current externally open CS faculty role was verified; complete faculty vacancy search remains partial.",
+  "recordUpdates": "No job records added or removed."
+}

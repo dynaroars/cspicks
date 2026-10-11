@@ -1,0 +1,3130 @@
+{
+  "startedAt": "2026-10-10",
+  "scope": "Full official-source sweep: all US school job sources and postings, current/upcoming conference editions and next-edition discovery, all awards and new-call discovery.",
+  "jobs": [
+    {
+      "school": "Carnegie Mellon University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-cmu-evidence-2026-10-10.json",
+      "findings": "16 added postings; six recorded postings refreshed/corrected; complete university faculty index and 28 detail pages reviewed."
+    },
+    {
+      "school": "Georgia Institute of Technology",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-gatech-initial-evidence-2026-10-10.json",
+      "remaining": "Computing and ECE hiring indexes read, ECE all-areas posting refreshed. Listed Computing faculty/research/teaching/postdoc details, ECE HI/AP call and other adjacent units remain."
+    },
+    {
+      "school": "Univ. of California - San Diego",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-ucsd-adjacent-evidence-2026-10-10.json",
+      "remaining": "All 19 captured adjacent candidates reviewed: 13 added, five excluded, MAS systems-engineering teaching pool deferred. Broader ambiguous science/medicine central-board calls remain to review; nanosensing priority-date conflict remains documented."
+    },
+    {
+      "school": "Univ. of Illinois at Urbana-Champaign",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-ucsd-illinois-evidence-2026-10-10.json",
+      "remaining": "Illinois broader HR and departmental research discovery remains; Future Faculty Fellows current cycle and 2021 robotics availability are ambiguous."
+    },
+    {
+      "school": "Massachusetts Inst. of Technology",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-mit-evidence-2026-10-10.json",
+      "findings": "Confirmed the live EECS faculty call; added current Tayebati and METEOR postdoctoral calls; checked closed College searches and SERC postdoc page.",
+      "remaining": "Recheck when MIT posts new openings or updates these calls."
+    },
+    {
+      "school": "Northeastern University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-northeastern-evidence-2026-10-10.json",
+      "findings": "Rechecked Khoury and Engineering recruiting; refreshed three records and added six current CS-relevant teaching/faculty calls across CS, AI, robotics, and health informatics.",
+      "remaining": "Recheck as Northeastern posts or closes calls."
+    },
+    {
+      "school": "Indiana University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-indiana-evidence-2026-10-10.json",
+      "findings": "Rechecked eight active computing-related faculty and teaching records, corrected review dates, and added an active health-data research-professor posting that explicitly accepts CS PhDs. Screened adjacent AI, law, and health listings against their stated degree requirements.",
+      "remaining": "Recheck when IU posts or closes calls."
+    },
+    {
+      "school": "Univ. of Maryland - College Park",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-maryland-evidence-2026-10-10.json",
+      "findings": "Confirmed the existing CS professional-track opening and added six current CS/AIM/postdoctoral roles plus the explicitly open quantum cluster search. Targeted CS, AIM, UMIACS, ARLIS and ECE pages checked.",
+      "remaining": "Broader university-wide job-board discovery is incomplete; revisit by 2026-10-17."
+    },
+    {
+      "school": "University of Michigan",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-michigan-evidence-2026-10-10.json",
+      "findings": "Reviewed the Robotics Department’s current openings; added department-chair search and matched existing human-centered embodied AI role. CSE and university job-board sources remain partially inaccessible.",
+      "remaining": "CSE site returned Cloudflare verification and university careers search timed out; review accessible alternative official departments/records."
+    },
+    {
+      "school": "New York University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-nyu-evidence-2026-10-10.json",
+      "findings": "Refreshed the Courant Faculty Fellow record and added the active Courant CS adjunct pool. Rechecked Tandon CSE/ECE, CDS and Courant official pages.",
+      "remaining": "Tandon visiting-CS listing and CDS Interfolio-linked vacancies need a readable current status; broader university-wide discovery remains. Revisit by 2026-10-17."
+    },
+    {
+      "school": "Univ. of California - Berkeley",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-berkeley-evidence-2026-10-10.json",
+      "findings": "Verified and refreshed all five current CS-targeted faculty/teaching records against official AP Recruit pages and the EECS/CDSS indexes; confirmed the prior Engineering+AI listing is closed.",
+      "remaining": "Recheck when these postings close or new cycle listings appear."
+    },
+    {
+      "school": "CUNY",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-cuny-evidence-2026-10-10.json",
+      "findings": "Rechecked the official CUNY-wide portal and several campus pages. Current candidates include CCNY CS (ID 32906), John Jay Math & CS (ID 32823), and Baruch Information Systems (ID 32329); no dataset records added without readable official posting detail pages.",
+      "remaining": "Direct application details and broader campus coverage remain to verify; revisit by 2026-10-17."
+    },
+    {
+      "school": "Cornell University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-cornell-evidence-2026-10-10.json",
+      "findings": "Refreshed Cornell Tech CS lecturer; added two official Cornell ECE postings explicitly covering computer engineering, embedded systems, digital VLSI, AI hardware, and architecture.",
+      "remaining": "Cornell CS listing returned 403; broader Cornell computing-adjacent and central job-board searches remain. Revisit by 2026-10-17."
+    },
+    {
+      "school": "Rochester Inst. of Technology",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-rit-evidence-2026-10-10.json",
+      "findings": "Checked Golisano CS, Cybersecurity, RIT Careers/Workday, linked postings, and Engineering. Current official page says computing openings closed; BrassRing tenure-track and lecturer links resolve to expired/filled states. No live eligible posting verified."
+    },
+    {
+      "school": "University of Wisconsin - Madison",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-wisconsin-madison-evidence-2026-10-10.json",
+      "findings": "CS recruitment and iSchool checked; two CS RISE links now return 404, dated CHTC ML/AI job expired, iSchool has no open jobs, and ECE quantum posting is explicitly filled. Screened first 30 of 54 current campus faculty listings.",
+      "remaining": "Review the remaining 24 campus faculty listings and broader research postings; revisit by 2026-10-17."
+    },
+    {
+      "school": "Johns Hopkins University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-jhu-evidence-2026-10-10.json",
+      "findings": "Rechecked official CS opportunities page, refreshed current all-area TT search, and added current Normativity Lab and AI-for-healthcare postdoctoral listings. Rechecked existing Sulam Lab ML postdoc; the application deadline passed Oct 9 and the Interfolio page directs applicants to contact the institution, so the posting is now marked closed. Refreshed eight remaining existing records after direct requisition checks; Interfolio showed them available, and closed expired ML postdoc 193846.",
+      "remaining": "Broader central/adjacent-unit discovery remains."
+    },
+    {
+      "school": "University of Central Florida",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-ucf-evidence-2026-10-10.json",
+      "findings": "Official jobs board read; added the current-on-board CECS HARP privacy/cybersecurity postdoc and SMST AI/ML simulation postdoc, both explicitly accepting CS PhDs. Found the earlier R114048/R114025 leads missing from public/jobs.json.",
+      "remaining": "Review remaining computing-related faculty/postdoctoral entries on the 87-item board; revisit by 2026-10-17."
+    },
+    {
+      "school": "Virginia Tech",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-virginia-tech-evidence-2026-10-10.json",
+      "findings": "Refreshed the CS all-area TT search and added a new Mechanical Engineering robotics/AI TT search with CS explicitly included among acceptable PhD fields.",
+      "remaining": "CS department page and several filtered hiring queries were inaccessible in this pass; recheck prior ECE/IAC roles by 2026-10-17."
+    },
+    {
+      "school": "Purdue University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-purdue-evidence-2026-10-10.json",
+      "findings": "Rechecked ECE Indianapolis and the Animal Sciences AI posting. ECE remains open; animal-AI explicitly lists CS as an eligible PhD field and was refreshed.",
+      "remaining": "CS page returns 404, pharmacy AI postdoc detail inaccessible, and broader current job-board review remains; revisit by 2026-10-17."
+    },
+    {
+      "school": "Univ. of California - Santa Cruz",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-ucsc-evidence-2026-10-10.json",
+      "findings": "Reviewed the full official recruitments index and current computing-adjacent detail pages. Refreshed CSE lecturer pool; added CSE and Technology & Information Management adjunct pools, both explicitly accepting CS PhDs. ECE and Computational Media lecturer pools reviewed and excluded as not clearly targeting CS PhDs."
+    },
+    {
+      "school": "University of Utah",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-utah-evidence-2026-10-11.json",
+      "findings": "Official CS hiring page lists two positions, but both PeopleAdmin details specify April 1, 2026 close dates and Open Until Filled: No. No current posting remains."
+    },
+    {
+      "school": "University of Washington",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-washington-evidence-2026-10-10.json",
+      "findings": "Refreshed active Allen School, ECE and iSchool searches; added active iSchool teaching-track IS/IM call closing Oct 15.",
+      "remaining": "Interfolio details remain unreadable; Statistics, Biomedical Informatics, HCDE and wider university discovery remain."
+    },
+    {
+      "school": "Univ. of California - Irvine",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-uci-evidence-2026-10-10.json",
+      "findings": "Checked official ICS and Recruit listings across CS, Informatics, Statistics and EECS. Refreshed nine active records and added four CS/Informatics research pools open to CS/related qualifications. Corrected structured final-deadline and review-date fields for active UC Recruit postings; captured post-review only if unfilled language in summaries.",
+      "checkedAt": "2026-10-11"
+    },
+    {
+      "school": "University of Colorado Boulder",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-colorado-boulder-evidence-2026-10-10.json",
+      "findings": "Three live CS faculty searches confirmed; recurring CS teaching intake recorded; CU Jobs returned 406 during direct check.",
+      "remaining": "Reconfirm ECEE and GEM Lab postdoc through official board and find any Information Science openings."
+    },
+    {
+      "school": "Northwestern University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-northwestern-evidence-2026-10-10.json",
+      "findings": "Confirmed and refreshed the live CS-wide and joint CS/ECE quantum faculty searches.",
+      "remaining": "Recheck previously identified IEMS, Statistics and Data Science, ECE, and AI Innovation listings."
+    },
+    {
+      "school": "North Carolina State University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-nc-state-evidence-2026-10-10.json",
+      "findings": "Added the live CS secure software supply chain postdoc from the department employment page.",
+      "remaining": "The postdoc detail page and a second CS lab link render only the job-board shell; verify full details and finish adjacent-unit review."
+    },
+    {
+      "school": "University of Pennsylvania",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-penn-evidence-2026-10-10.json",
+      "findings": "Added three CIS positions newly listed on Penn’s official faculty jobs index.",
+      "remaining": "Interfolio and CIS descriptions were unreadable; verify details and refresh the ESE/adjacent-unit pass."
+    },
+    {
+      "school": "University of Virginia",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-uva-evidence-2026-10-10.json",
+      "findings": "Added current ECE AI/neuroimaging tenure-line role; marked two Data Science postdocs closed based on official filled notices.",
+      "remaining": "Interfolio details and one Research Associate posting are inaccessible; further adjacent-unit review remains."
+    },
+    {
+      "school": "UNC - Charlotte",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-unc-charlotte-evidence-2026-10-10.json",
+      "findings": "Added active CS adjunct lecturer pool and CCI CS-education teaching faculty search.",
+      "remaining": "CCI faculty openings show inconsistent status across the unit page and job board; verify their live details and finish related-unit scan."
+    },
+    {
+      "school": "Arizona State University",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "Texas A&M University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-texas-am-evidence-2026-10-10.json",
+      "findings": "Refreshed CSE, ECE, and Statistics/DS searches; all three current openings are still listed.",
+      "remaining": "ECE detail timed out; broad engineering/university adjacent-unit discovery remains."
+    },
+    {
+      "school": "University of Illinois at Chicago",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-uic-evidence-2026-10-10.json",
+      "note": "CS department has no current faculty/professional openings; recorded the adjacent MSCS mathematical computer science TT search. ECE page shows no current posting; campus-wide postdoc scan incomplete."
+    },
+    {
+      "school": "University of Southern California",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-usc-evidence-2026-10-10.json",
+      "note": "CS faculty page has no current posting; USC Careers only surfaces a 2025 CS open-rank record. ECE page is stale/has no current detail. Wider centers and postdocs still need a pass."
+    },
+    {
+      "school": "Univ. of Maryland - Baltimore County",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-umbc-evidence-2026-10-10.json",
+      "note": "COEIT faculty openings index lists CSEE, Information Systems, and Engineering/Computing Education as “To be announced.” No active CS-targeted faculty role surfaced; campus job/postdoc sweep incomplete."
+    },
+    {
+      "school": "Vanderbilt University",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-vanderbilt-evidence-2026-10-10.json",
+      "note": "Current CS faculty/recruitment pages show no advertised vacancy and central postdoc page has no CS-specific current listing. RASR bioinformatics-eligible role centers on experimental omics, excluded; broader adjacent-unit scan incomplete."
+    },
+    {
+      "school": "Univ. of Massachusetts Amherst",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-umass-amherst-evidence-2026-10-10.json",
+      "note": "Refreshed the two-position CICS teaching search (robotics + AI); confirmed rolling acceptance through spring 2027/until filled and Dec 31 suggested date for spring interview consideration. Wider postdoc/center pass incomplete."
+    },
+    {
+      "school": "University of Texas at Dallas",
+      "status": "partial",
+      "checkedAt": "2026-10-11",
+      "evidence": "docs/data-sweep-jobs-ut-dallas-evidence-2026-10-10.json",
+      "note": "CS Job Postings page points to department and university job portals; page does not render any opening details, and the campus portal fetch failed. Existing part-time lecturer record needs direct posting validation.",
+      "findings": "Verified existing CS lecturer requisition 32722 directly; corrected rolling=true to false because the official page says Open Until Filled: No. Posting closes Jul 31, 2027; desired Aug 16, 2026 start has passed.",
+      "remaining": "Broader university-wide research/postdoc scan remains incomplete."
+    },
+    {
+      "school": "University of Texas at Austin",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-ut-austin-evidence-2026-10-10.json",
+      "note": "CS department confirms 2026–27 recruiting and three active calls: broad CS tenure-line, joint Neuroscience/CS tenure-line, and open-rank instructional faculty. Interfolio details do not render; wider campus units remain to scan."
+    },
+    {
+      "school": "Princeton University",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-princeton-evidence-2026-10-10.json",
+      "note": "Official CS jobs index currently lists existing quantum faculty call, four CS postdoc calls, and AI/computational bioengineering faculty calls; records refreshed. Direct detail pages are inaccessible to verify deadlines and eligibility; broader units remain."
+    },
+    {
+      "school": "Pennsylvania State University",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-penn-state-evidence-2026-10-10.json",
+      "note": "Refreshed current IST cybersecurity/privacy, Applied AI, teaching, AI+health/foundational AI and postdoc postings; refreshed the University Park CS/Huck AI and life-sciences cluster search (full consideration Dec 7). Other campuses/units still need review."
+    },
+    {
+      "school": "George Mason University",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-george-mason-evidence-2026-10-10.json",
+      "note": "CS says it is hiring tenure/tenure-track and term faculty, but the current CEC job board lists seven staff/hourly jobs and no faculty or postdoc vacancy. Wider non-CEC center pass remains."
+    },
+    {
+      "school": "Rutgers University",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-rutgers-evidence-2026-10-10.json",
+      "note": "CS Employment page lists current Lecturers pool (added; primarily aimed at enrolled Rutgers students but qualified nonstudents receive consideration) and Fall 2026 graders/recitation instructors. No faculty search listed; adjacent-unit scan incomplete."
+    },
+    {
+      "school": "Stanford University",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-stanford-evidence-2026-10-10.json",
+      "note": "Current CS careers page lists a junior tenure-track faculty search (Assistant or untenured Associate); record added with department page link because apply portal returns 404. Detail/qualifications and broader postdoc scan incomplete."
+    },
+    {
+      "school": "Stony Brook University",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-stony-brook-evidence-2026-10-10.json",
+      "note": "Refreshed AI Innovation Research Assistant Professor and added active Clinical Data Science/Biomedical Informatics TT search (ref 187356); posting explicitly accepts CS/CE PhD with biomedical informatics research experience. Broader campus scan incomplete."
+    },
+    {
+      "school": "Univ. of California - Davis",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-uc-davis-evidence-2026-10-10.json",
+      "note": "CS Job Opportunities page (last updated July 30, 2025) still displays two postdoctoral advertisements, but it gives no dates and is over a year stale; no current 2026–27 activity confirmed, so neither was added. Broader campus scan incomplete."
+    },
+    {
+      "school": "Oregon State University",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-oregon-state-evidence-2026-10-10.json",
+      "note": "Refreshed E-Campus Instructor Pool to current official posting 172089 (closes Dec 15, 2026); EECS confirms continuous online CS instructor hiring. Wider EECS faculty/research position scan incomplete."
+    },
+    {
+      "school": "University of Minnesota",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-minnesota-evidence-2026-10-10.json",
+      "note": "Refreshed existing ECE computer-engineering/AI/optics tenure-track position from current dataset record; CS lab page found only undergraduate research assistant openings. Whole-campus research/postdoc scan incomplete."
+    },
+    {
+      "school": "University of North Carolina",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-unc-evidence-2026-10-10.json",
+      "note": "Added two current Data Science and Society openings: AI-focused fixed-term teaching professor (Nov 16 deadline) and joint neuroengineering cluster TT role (Nov 16 deadline). Other UNC/UNC Health units remain to scan."
+    },
+    {
+      "school": "Boston University",
+      "status": "audited",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-boston-university-evidence-2026-10-10.json",
+      "note": "Refreshed all four active 2026/2027 CDS searches from the current official positions index; the Oct 8 CS/Engineering/ECE scan found no other CS-targeted opening."
+    },
+    {
+      "school": "Duke University",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-duke-evidence-2026-10-10.json",
+      "note": "CS jobs index confirms no current CS department opening. Adjacent-unit scan is based on Oct 8 sources; broader campus discovery not refreshed."
+    },
+    {
+      "school": "Univ. of California - Riverside",
+      "status": "audited",
+      "checkedAt": "2026-10-11",
+      "evidence": "docs/data-sweep-jobs-ucr-evidence-2026-10-10.json",
+      "note": "Verified active CSE system-security postdoc JPF02353; open until filled through June 30, 2027, with a passed Sep 25 review date and Jan 1 start. Refreshed existing record. Corrected structured final-deadline and review-date fields for active UC Recruit postings; captured post-review only if unfilled language in summaries.",
+      "findings": "Corrected structured final-deadline and review-date fields for active UC Recruit postings; captured post-review only if unfilled language in summaries."
+    },
+    {
+      "school": "Washington State University",
+      "status": "audited",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-washington-state-evidence-2026-10-10.json",
+      "note": "Official EECS index confirms CS TT deadline Jan 14, 2026 and EE career-track deadline Jan 1, 2026 have passed; Oct 8 Workday/adjacent review found no additional active CS-targeted role."
+    },
+    {
+      "school": "Columbia University",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-columbia-evidence-2026-10-10.json",
+      "note": "CS page still advertises an assistant/associate professor call with July 1, 2026 start, but Interfolio reports it closed; not added. Broader Engineering/EE/DSI sites were blocked in prior scan."
+    },
+    {
+      "school": "University of South Florida",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-usf-evidence-2026-10-10.json",
+      "note": "Added two openings listed on Bellini/CITA Current Openings page: assistant research professor (38406) and robotics/ML postdoc (38144). Oracle job detail pages were inaccessible; wider USF unit refresh incomplete."
+    },
+    {
+      "school": "NJIT",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-njit-evidence-2026-10-10.json",
+      "note": "CS page still displays the Fall 2026 cybersecurity-priority TT search, but official AJO posting 30654 states applications are no longer accepted (listed until May 15, 2026). No active record added; other Ying Wu College units remain to scan."
+    },
+    {
+      "school": "University of Tennessee",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "University of Chicago",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-uchicago-evidence-2026-10-10.json",
+      "note": "Refreshed six current CS and Data Science faculty/teaching records listed on the official department and DSI job pages. Some linked portals render no details in this browser; broader campus scan incomplete."
+    },
+    {
+      "school": "Clemson University",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-clemson-evidence-2026-10-10.json",
+      "note": "Central Clemson faculty listing is JavaScript-rendered and showed no readable results; existing ECE search remains from prior official verification but was not independently refreshed today. Adjacent computing units remain."
+    },
+    {
+      "school": "University of Florida",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-university-of-florida-evidence-2026-10-10.json",
+      "note": "Refreshed open AI Models/Systems CISE faculty and ECE ML sensing roles; added AI/FinTech TT, Statistics/ML TT (CS PhDs eligible), and CS-eligible ISOM lecturer. Closed ECE TT search ended Sep 18. Wider campus scan incomplete."
+    },
+    {
+      "school": "Univ. of California - Santa Barbara",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-uc-santa-barbara-evidence-2026-10-10.json",
+      "note": "Added live CS Lecturer JPF03098 from current UC Recruit index. The CS page links old JPF02754 (410 Gone). Reviewed adjacent Engineering AI/Workplace and lecturer-pool roles; only CS posting clearly eligible; wider campus pass incomplete."
+    },
+    {
+      "school": "University at Buffalo",
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-university-at-buffalo-evidence-2026-10-10.json",
+      "note": "Added active CSE Quantum EIP, AI & Society department-chair search, and Information Science HCI/human-AI TT opening; refreshed IAD lecturer. Broader university scan incomplete."
+    },
+    {
+      "school": "Augusta University",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-augusta-university-evidence-2026-10-10.json",
+      "findings": "Refreshed the existing standing SCCS faculty invitation lastSeenAt. Existing AI & Health role retained based on prior official portal capture; current portal status could not be revalidated.",
+      "remaining": "Recheck the external HRMS portal for current dated SCCS and AI & Health postings."
+    },
+    {
+      "school": "Ohio State University",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-ohio-state-university-evidence-2026-10-10.json",
+      "findings": "Refreshed lastSeenAt on the four CSE postings still listed by its official page. ECE postings were not refreshed in this pass.",
+      "remaining": "Recheck Interfolio application availability and refresh the ECE postings and remaining college-wide units."
+    },
+    {
+      "school": "University of Pittsburgh",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-pittsburgh-evidence-2026-10-10.json",
+      "findings": "No current role added; the three SCI faculty searches have expired application full-consideration dates and past start dates. Broader units inaccessible and completion remains partial.",
+      "remaining": "Refresh SCI and broader university recruiting pages when 2026-27 postings appear."
+    },
+    {
+      "school": "University of Texas at Arlington",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-uta-evidence-2026-10-10.json",
+      "findings": "No job added because the public department page conflicts with its Fall 2026 start date and the application portal no longer exposes the referenced posting. Needs recheck with the department or portal.",
+      "remaining": "Verify whether the open-rank CSE search still accepts applications and whether the Fall 2026 cycle remains live."
+    },
+    {
+      "school": "Rice University",
+      "status": "audited",
+      "evidence": "docs/data-sweep-jobs-rice-evidence-2026-10-10.json",
+      "findings": "No CS-targeted position found on the current official faculty openings page.",
+      "remaining": "Recheck after Rice refreshes faculty opening listings."
+    },
+    {
+      "school": "Univ. of California - Los Angeles",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-ucla-evidence-2026-10-10.json",
+      "findings": "Added current part-time CS Lecturer 2026-27 posting JPF11345. No active tenure-stream CS posting found in this targeted pass.",
+      "remaining": "Recheck UCLA Academic Recruit for newly opened faculty searches and scan other schools for adjacent CS-eligible roles."
+    },
+    {
+      "school": "Tufts University",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-tufts-evidence-2026-10-10.json",
+      "findings": "Refreshed the current TIAI Director, adjunct lecturer, and cybersecurity postdoc records from the CS department listing.",
+      "remaining": "Recheck broader Tufts units and postdoc application status; search the live job portal for additional CS-adjacent roles."
+    },
+    {
+      "school": "University of Notre Dame",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-notre-dame-evidence-2026-10-10.json",
+      "findings": "Added the CSE any-rank tenure-track search using a stable text-fragment link to the official college posting page because its application link destination was not exposed. Existing EE posting not refreshed.",
+      "remaining": "Find a direct application URL and refresh remaining College of Engineering and ECE postings."
+    },
+    {
+      "school": "Florida International University",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-fiu-evidence-2026-10-10.json",
+      "findings": "Refreshed the existing open-rank tenured and teaching professor records; both remain listed as accepting applications until filled.",
+      "remaining": "Recheck broader college faculty searches outside KFSCIS."
+    },
+    {
+      "school": "Harvard University",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-harvard-evidence-2026-10-10.json",
+      "findings": "Refreshed the current CS tenure-track Professor record. Other previously tracked CS and related Harvard records remain unreviewed.",
+      "remaining": "Revalidate the remaining existing CS and adjacent Harvard postings, especially postdocs and deadline status."
+    },
+    {
+      "school": "University of Delaware",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-delaware-evidence-2026-10-10.json",
+      "findings": "No new CS/CIS position added. Search found an ECE tenure-track AI faculty search whose target start date August 2026 has passed; current open status was not revalidated. Broader live Talent Link search requires additional query review.",
+      "remaining": "Search live UD Careers for CS/CIS and AI postings; establish whether the ECE AI search still accepts applications."
+    },
+    {
+      "school": "University of Connecticut",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-uconn-evidence-2026-10-10.json",
+      "findings": "Recorded one UConn Hartford adjunct CSE 1010 opening for Fall 2026, with possible Spring 2027 availability, via the official HR page. Updated existing record if present.",
+      "remaining": "Confirm Spring 2027 continuation and scan current university faculty job postings."
+    },
+    {
+      "school": "Worcester Polytechnic Institute",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-wpi-evidence-2026-10-10.json",
+      "findings": "Added WPI Computer Science part-time adjunct applicant pool, filled as needed, and active until its posting closes.",
+      "remaining": "Find direct Workday posting ID and check whether current full-time faculty searches exist."
+    },
+    {
+      "school": "DePaul University",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-depaul-evidence-2026-10-10.json",
+      "findings": "Added seven current part-time School of Computing adjunct applicant pools: AI, Computer Science, Cybersecurity, Data Science, Database, Game Programming, and HCI. Individual position-detail URLs identify distinct job IDs; detail pages expose generic pool instructions only.",
+      "remaining": "Review adjunct course qualifications and search full-time roles for CS/AI faculty openings."
+    },
+    {
+      "school": "Michigan State University",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-michigan-state-evidence-2026-10-10.json",
+      "findings": "Added fixed-term open-rank MSU CSE faculty role in AI and cybersecurity, job 1171186, open until filled with review beginning Dec 1, 2026 and expected Aug 16, 2027 start.",
+      "remaining": "Search remaining MSU CSE/college postings beyond the current PageUp results."
+    },
+    {
+      "school": "Dartmouth College",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-dartmouth-evidence-2026-10-10.json",
+      "findings": "Added Tanner Chair in Next-Generation Sensing and Integrated Systems for Healthcare, a Thayer tenure-line search that explicitly accepts a CS PhD and names computational/intelligent sensing. Full-consideration date Jan 1, 2027; review continues until filled. No current CS department search found.",
+      "remaining": "Review other Dartmouth school-wide and Neukom Institute research openings for CS-eligible roles."
+    },
+    {
+      "school": "University of North Texas",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-unt-evidence-2026-10-10.json",
+      "findings": "No new CS/CSE job found. Prior Oct 8 scan found no current CSE role and a single adjacent data-science professorship already recorded; current UNT System jobs portal query could not be opened in this pass.",
+      "remaining": "Refresh UNT System job portal search when accessible and revalidate existing data-science professor posting."
+    },
+    {
+      "school": "Yale University",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-yale-evidence-2026-10-10.json",
+      "findings": "Added Assistant Professor, Human-Computer Interaction (CS), listed in Yale’s official academic openings on Oct 9, 2026; direct Interfolio posting linked from the current index.",
+      "remaining": "Review Yale posting details for review date and scan adjacent AI/computing positions at other Yale units."
+    },
+    {
+      "school": "Brown University",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-brown-evidence-2026-10-10.json",
+      "findings": "Refreshed two Professor of the Practice AI faculty roles (assistant and associate rank; one Interfolio posting) and the assistant professor computational biology tenure-track role. AI roles are open until filled with Nov 1 full-consideration date; computational biology accepts until filled with Oct 15 full-consideration date.",
+      "remaining": "Check wider Brown schools and the exact current Interfolio detail status; the CS department page confirms these active positions."
+    },
+    {
+      "school": "Iowa State University",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-iowa-state-evidence-2026-10-10.json",
+      "findings": "No new posting confirmed. Official jobs.iastate.edu provides job search landing page but application system is Workday and prior keyword-specific Workday pages rendered as a shell. Existing search remains incomplete.",
+      "remaining": "Complete Workday faculty and CSE/ECpE keyword review using an accessible portal or direct posted job pages."
+    },
+    {
+      "school": "University of Kansas",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-kansas-evidence-2026-10-10.json",
+      "findings": "Added Assistant Professor in Computer Science/AI (33947BR), a current tenure-track search in AI/ML, expected Aug 18, 2027. Official page conflicts on the review date: narrative says Nov 16, 2026, while metadata and the live listing show Nov 16, 2027; date omitted from record pending clarification.",
+      "remaining": "Resolve contradictory application review date and continue broader KU faculty portal scan."
+    },
+    {
+      "school": "Stevens Institute of Technology",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-stevens-evidence-2026-10-10.json",
+      "findings": "No new active CS-targeted role found. ECE page lists adjunct teaching for Spring 2026 and potentially Fall 2026, but both terms have begun/passed as of Oct 10; existing School of Computing tenure-track cycle has a May 31, 2026 deadline and is stale.",
+      "remaining": "Recheck School of Computing and ECE pages when 2027 positions are posted; verify whether WebCampus adjunct pool remains open."
+    },
+    {
+      "school": "Washington University in St. Louis",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-washu-evidence-2026-10-10.json",
+      "findings": "Refreshed the existing Statistics & Data Science open-rank tenure-track search (multiple positions, AI initiative), with applications reviewed from Oct 15 and Nov 15, 2026 full-consideration date. It is adjacent to CS; the official department accepts a PhD in statistics or a relevant data-science field, so CS relevance depends on applicant preparation.",
+      "remaining": "Check CSE-specific faculty pages and remaining university units for separate open roles."
+    },
+    {
+      "school": "University of Kentucky",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-kentucky-evidence-2026-10-10.json",
+      "findings": "Refreshed Assistant Professor in Computer Science/Engineering (FE05056), tenure-track, open until filled; Aug 2027 start; AI/ML, AI security, and systems for AI needs.",
+      "remaining": "Check wider UK Engineering and university faculty openings for additional computing roles."
+    },
+    {
+      "school": "University of Georgia",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-georgia-evidence-2026-10-10.json",
+      "findings": "Refreshed existing Associate Professor or Professor in AI Systems and Causal Reasoning (508244); current official AI Institute page posted Oct 9, 2026, accepts CS PhDs, Nov 13 full-consideration date. The CS security index says “currently accepting” but links to archived 2020 jobs, so those are not treated as current.",
+      "remaining": "Scan other UGA colleges and confirm official application details for 508244."
+    },
+    {
+      "school": "University of Rochester",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-rochester-evidence-2026-10-10.json",
+      "findings": "CS department currently lists no faculty openings. Refreshed existing ECE tenure-track AI circuits/systems assistant professor search, which accepts CS PhDs and reviews from Dec 1, 2026. Current ECE page also lists a GPU hardware-security/power-side-channel postdoc; added with email application and immediate rolling review.",
+      "remaining": "Check other Rochester schools and labs for additional CS-eligible roles."
+    },
+    {
+      "school": "University of Cincinnati",
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-cincinnati-evidence-2026-10-10.json",
+      "findings": "Added UC Blue Ash Assistant Professor, Mathematics & Computer Science (req 104279), tenure-track, Aug 15 2027 start, applications reviewed from Jan 11 2027 until filled. Minimum master’s plus specified graduate coursework and teaching experience.",
+      "remaining": "Review Cincinnati main campus and other colleges for additional CS/AI eligible positions."
+    },
+    {
+      "school": "University of Texas at San Antonio",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "Binghamton University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-binghamton-evidence-2026-10-10.json",
+      "findings": "Official page lists four AI faculty searches open until filled; all application detail pages returned 403. Existing STRIVE AI job record could not be matched to current list and remains unverified."
+    },
+    {
+      "school": "California Inst. of Technology",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-caltech-evidence-2026-10-10.json",
+      "findings": "Current Caltech academic index lists no CMS faculty opening and a CMS postdoctoral positions listing. Existing fellowship program pages and cycle dates were not individually revalidated."
+    },
+    {
+      "school": "Rensselaer Polytechnic Institute",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-rpi-evidence-2026-10-10.json",
+      "findings": "Added current ECSE Lecturer listing that expressly includes computer architecture, robotics, and AI; other general research pools are nonspecific."
+    },
+    {
+      "school": "University of Massachusetts Lowell",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-umass-lowell-evidence-2026-10-10.json",
+      "findings": "Refreshed existing Miner School open-rank core AI tenure-track role; official listing remains active and specifies September 2027 start."
+    },
+    {
+      "school": "Brigham Young University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-byu-evidence-2026-10-10.json",
+      "findings": "Current CS department page’s two Professional CFS openings have an Oct 4 deadline, now passed. Existing ECE CFS professorial posting remains recorded with a Dec 1 deadline from prior official evidence."
+    },
+    {
+      "school": "University of Oklahoma",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-oklahoma-evidence-2026-10-10.json",
+      "findings": "Current engineering index confirms existing Polytechnic applied-AI opening (target start Jan 2027 still possible) and lists an ECE tenure-track HPC role; application details inaccessible and CS tab blank."
+    },
+    {
+      "school": "Louisiana State University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-lsu-evidence-2026-10-10.json",
+      "findings": "CSE page lists four openings, but Workday detail pages are unreadable and current status could not be reconciled. Refreshed the existing ECE research faculty job with its previously recorded Feb 23, 2027 deadline."
+    },
+    {
+      "school": "Colorado State University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-colorado-state-evidence-2026-10-10.json",
+      "findings": "CS department instructor pool closed July 1, 2026; current page lists no other CS faculty role, and prior Workday search found no adjacent computing faculty/postdoc opening."
+    },
+    {
+      "school": "Syracuse University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-syracuse-evidence-2026-10-10.json",
+      "findings": "Existing computer architecture postdoc remains open until filled (posting #077700); canonical posting link corrected. No other CS faculty position found."
+    },
+    {
+      "school": "University of Houston",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-houston-evidence-2026-10-10.json",
+      "findings": "Added current official CS adjunct posting 496573, while flagging its anticipated Sept 1 start date has passed; existing TT/adjacent roles previously recorded, broader sweep not repeated."
+    },
+    {
+      "school": "Texas State University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-texas-state-evidence-2026-10-10.json",
+      "findings": "Refreshed CS postdoctoral pool and added explicit nontenure teaching pool through May 31, 2027; both are pools, not confirmed vacancies."
+    },
+    {
+      "school": "University of Arizona",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-arizona-evidence-2026-10-10.json",
+      "findings": "Added three current CS postings (TT, Professor of Practice, Lecturer) explicitly advertised as accepting applications. Department page provides no closing dates; linked ATS details did not render."
+    },
+    {
+      "school": "Drexel University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-drexel-evidence-2026-10-11.json",
+      "findings": "Added ECE Wireless Systems Lab Research Associate II (job 507203), which accepts CS master’s and covers wireless/systems/AI research. Excluded immunology postdoc."
+    },
+    {
+      "school": "Florida State University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-fsu-evidence-2026-10-11.json",
+      "findings": "Added 2027 TT Data Science & AI assistant professor (job 63490) plus chair and teaching searches still listed currently recruiting. Chair/teaching start dates have passed; HR detail pages may redirect to login."
+    },
+    {
+      "school": "College of William and Mary",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-william-and-mary-evidence-2026-10-11.json",
+      "findings": "Existing CS postdoc JR101939 remains Workday status Open, but expected Sep 10 start and Aug 10 full-consideration date passed; no new CS-specific posting found."
+    },
+    {
+      "school": "Auburn University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-auburn-evidence-2026-10-11.json",
+      "findings": "Added current ECE computer engineering TT and microelectronics TT roles (Nov 1 review; Aug 2027 starts), plus college engineering postdoc pool accepting CS/software PhDs."
+    },
+    {
+      "school": "Univ. of Louisiana - Lafayette",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "University of Nebraska",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-nebraska-evidence-2026-10-11.json",
+      "findings": "Added current UNL ECE Assistant/Associate Professor in computer engineering systems/architecture/networking (F_260100; review Dec 4). Three School of Computing webpage postings still have unavailable application listings."
+    },
+    {
+      "school": "Texas Tech University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-texas-tech-evidence-2026-10-11.json",
+      "findings": "Official CS page’s Fall 2026 tenure-track and professor-of-practice deadlines (Jan 5 and May 15) have passed. No CS-targeted ECE role from prior review."
+    },
+    {
+      "school": "University of Hawaii at Manoa",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-hawaii-manoa-evidence-2026-10-11.json",
+      "findings": "Refreshed current ECE open-rank Computer Engineering TT search, review Sep 28 until filled, Jan 2027 start. ICS software-engineering TT ad is prior-cycle and expired."
+    },
+    {
+      "school": "University of Nebraska - Omaha",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-nebraska-omaha-evidence-2026-10-11.json",
+      "findings": "Campus PeopleAdmin search remains without CS/CIST/data-science faculty openings; no added job."
+    },
+    {
+      "school": "University of Vermont",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-vermont-evidence-2026-10-11.json",
+      "findings": "No computing faculty/postdoc opening found; current ML engineer role is staff and outside academic faculty/postdoc dataset."
+    },
+    {
+      "school": "Northern Arizona University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-northern-arizona-evidence-2026-10-11.json",
+      "findings": "Added two Radiant Center UAV postdocs closing Oct 14: sensor-fusion electronics explicitly accepts Computer Engineering/Science PhDs; radio localization is adjacent robotics/algorithms with CS not explicitly named. No CS faculty opening."
+    },
+    {
+      "school": "Emory University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-emory-evidence-2026-10-11.json",
+      "findings": "Current CS page only advertises searches for positions beginning in 2025, with no current dates or verified live application posting; prior iCIMS searches surfaced no 2026-27 role."
+    },
+    {
+      "school": "Florida Atlantic University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-florida-atlantic-evidence-2026-10-11.json",
+      "findings": "EECS page’s Instructor and CS TT listings are 2020-cycle legacy ads; linked Workday requisitions unavailable. No current CS faculty role verified."
+    },
+    {
+      "school": "Georgia State University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-georgia-state-evidence-2026-10-11.json",
+      "findings": "Current official CS employment page lists no individual positions; prior campus-wide CIS/Robinson review found no current 2026–27 computing faculty role."
+    },
+    {
+      "school": "Naval Postgraduate School",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-naval-postgraduate-evidence-2026-10-11.json",
+      "findings": "Official CS openings page still advertises two Assistant/Associate Professor positions and a Lecturer/Senior Lecturer position; refreshed the two existing records. Related IS/ECE pages were previously checked with no qualifying opening."
+    },
+    {
+      "school": "University of Iowa",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-iowa-evidence-2026-10-11.json",
+      "findings": "Refreshed the October 7 theory postdoc and added an active Tippie Business Analytics tenure-track search that explicitly accepts Computer Science PhDs; posting started Aug 14, 2026, Fall 2027 start, extended until filled.",
+      "remaining": "Broader university-wide postdoc and adjacent-unit discovery remains incomplete."
+    },
+    {
+      "school": "University of Texas - El Paso",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-utep-evidence-2026-10-11.json",
+      "findings": "Official CS pages still show AI/software and systems searches for Fall 2026, with the AI/software review beginning Nov 15, 2025; a third-party Fall 2027 systems lead conflicts with the official page and remains unverified. Prior ECE application links returned 403.",
+      "remaining": "No current-cycle UTEP CS posting confirmed; recheck official hiring pages and inaccessible ECE requisitions."
+    },
+    {
+      "school": "Case Western Reserve University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-case-western-evidence-2026-10-11.json",
+      "findings": "Current CDS employment page says only “Look for Future Openings”; prior Interfolio and ECSE review found no active CDS role and excluded EE-specific searches. The 2024 CDS faculty call had a July 2025 start and is stale."
+    },
+    {
+      "school": "Towson University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-towson-evidence-2026-10-11.json",
+      "findings": "Current CIS page states no tenure-track positions. Its adjunct pool specifies Spring 2023 openings and is stale; prior campus search found no current adjacent computing vacancy."
+    },
+    {
+      "school": "University of South Carolina",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-south-carolina-evidence-2026-10-11.json",
+      "findings": "Added the currently listed CSE Department Chair search (CS/Computer Engineering PhD accepted; open until filled, though preferred March 24 review and Aug 2026 start have passed). Excluded a 2021-start Bioinformatics postdoc still surfaced on the portal as stale.",
+      "remaining": "Other four presidential faculty hires are described in the chair posting but have no individual current requisitions; broader units still need review."
+    },
+    {
+      "school": "Georgetown University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-georgetown-evidence-2026-10-11.json",
+      "findings": "CS positions page still lists only the Bertrand Chair dated Nov 14, 2025; current university portal search surfaced a CS department administrator role, which is staff rather than faculty/postdoc. No new qualifying current-cycle role."
+    },
+    {
+      "school": "University at Albany - SUNY",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-albany-evidence-2026-10-11.json",
+      "findings": "Current official CEHC index lists a Lecturer of Game Design & Development and part-time lecturers in Information Sciences/Informatics and Cybersecurity. Application details are routed through Interview Exchange, historically blocked, so exact openings and requisitions could not be validated.",
+      "remaining": "Confirm the current requisition details and whether the Computer Science department has a separate faculty search."
+    },
+    {
+      "school": "University of Nevada",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-nevada-evidence-2026-10-11.json",
+      "findings": "UNR Workday’s CSE-inclusive multi-specialty faculty call R0150166 closed June 2, 2026 (full consideration March 2); current CSE/engineering pages show no newer CS faculty search. Research Assistant postings in a lab are student/doctoral-track opportunities, excluded."
+    },
+    {
+      "school": "Utah State University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-utah-state-evidence-2026-10-11.json",
+      "findings": "The School of Computing Assistant Professor requisition 9680 is gone (HTTP 410); the official H-1B notice shows the prior Assistant Professor appointment ended July 31, 2026. No current-cycle posting surfaced."
+    },
+    {
+      "school": "Wayne State University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-wayne-state-evidence-2026-10-11.json",
+      "findings": "Refreshed the current AI-in-Health open-rank tenure-track role (requisition 3655; full consideration Dec 15, 2026; Fall 2027 start). The Wayne talent portal fetch failed during this pass; broader campus and ECE discovery is not fully revalidated.",
+      "remaining": "Recheck current requisition and adjacent units when the Wayne Talent portal is accessible."
+    },
+    {
+      "school": "Boise State University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-boise-state-evidence-2026-10-11.json",
+      "findings": "Current university and department recruitment pages reviewed; no current Computer Science faculty vacancy surfaced. Prior university board search found no adjacent computing faculty postings."
+    },
+    {
+      "school": "Colorado School of Mines",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-colorado-mines-evidence-2026-10-11.json",
+      "findings": "AI/Machine Learning CS faculty requisition JR108102 had a Mar 31, 2026 close date and Fall 2026 start; it is expired despite still appearing in a Workday search result. No current CSE postdoc or faculty role found."
+    },
+    {
+      "school": "The University of Alabama",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-alabama-evidence-2026-10-11.json",
+      "findings": "Reconciled all six current CS postings on the official faculty board. Found and added two missing active roles: Full Professor 530201 and Cyber Innovation Hub Associate/Full Professor 530324. Refreshed water-cluster Assistant Professor 530733 (open through Nov 7, 2026); no separate water-cluster Associate/Full posting is listed."
+    },
+    {
+      "school": "Univ. of California - Merced",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-uc-merced-evidence-2026-10-11.json",
+      "findings": "Refreshed the active CSE Lecturer pool JPF02097 for AY 2026–27; it accepts applications through May 18, 2027, with Spring 2027 review around October. Full academic recruit index was previously checked; no current ladder-rank CSE search found. Corrected structured final-deadline and review-date fields for active UC Recruit postings; captured post-review only if unfilled language in summaries.",
+      "checkedAt": "2026-10-11"
+    },
+    {
+      "school": "IUPUI",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-iupui-evidence-2026-10-11.json",
+      "findings": "The former IUPUI campus split into Purdue University in Indianapolis and IU Indianapolis. Current IU Indianapolis Luddy and School of Science openings list no CS faculty vacancy. The Purdue Indianapolis CS AI-for-health postdoc is recorded separately under Purdue University, its named employer."
+    },
+    {
+      "school": "Kent State University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-kent-state-evidence-2026-10-11.json",
+      "findings": "Added and confirmed active Computer Engineering Technology/Cybersecurity Engineering faculty req. 989308, which accepts a CS master’s. Current faculty and staff boards across campuses yielded no other active CS-specific or computing research/postdoc role. Expired East Liverpool IT/Cybersecurity req. 986988 and the generic regional adjunct pool were excluded."
+    },
+    {
+      "school": "Lehigh University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-lehigh-evidence-2026-10-11.json",
+      "findings": "Current official research-openings index still lists the joint CSE/ECE tenured Associate/Full Professor robotics search (CS accepted, open until filled). Its Dec 10, 2025 full-consideration date and July 1, 2026 start have passed, so record notes possible staleness.",
+      "remaining": "Recheck whether the joint robotics search remains active and validate the application link."
+    },
+    {
+      "school": "University of Nevada Las Vegas",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-unlv-evidence-2026-10-11.json",
+      "findings": "Refreshed Cybersecurity Lecturer R0152399 and added three missing current roles: CS Assistant Professor-in-Residence R0150748 (still accepting applications despite its passed Fall 2026 start), Lee Business School cybersecurity teaching role R0150760 (CS master's explicitly accepted), and computational neuroimaging postdoc R0153454 (CS fit depends on domain expertise).",
+      "remaining": "Broader adjacent-unit discovery remains incomplete."
+    },
+    {
+      "school": "Old Dominion University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-old-dominion-evidence-2026-10-11.json",
+      "findings": "Added a current tenured Associate/Full Professor search in accelerator science using AI/ML; CS is an accepted PhD field, review date Dec 31, 2026, open until filled. Older trustworthy-AI search R23220 was removed/redirected and treated as stale.",
+      "remaining": "Wider data science and cybersecurity unit postings need one more scan; some source pages redirect after requisitions expire."
+    },
+    {
+      "school": "Temple University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-temple-evidence-2026-10-11.json",
+      "findings": "CIS page still lists only the AI tenure-track search for a Fall 2026 start; this cycle’s start date has passed. Adjunct page is a standing pool, not a specific vacancy. Prior campus/engineering review found no other current CS-eligible role."
+    },
+    {
+      "school": "University of Michigan-Dearborn",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-michigan-dearborn-evidence-2026-10-11.json",
+      "findings": "Current UM Careers list and Dearborn employment portal reviewed; no current Dearborn Computer and Information Science or computing faculty search surfaced. Prior Dearborn-only searches found older cycle postings."
+    },
+    {
+      "school": "George Washington University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-george-washington-evidence-2026-10-11.json",
+      "findings": "Added current GW School of Business tenure-track AI/Information Systems assistant professor search (explicitly accepts CS PhDs; review begins Oct 26, 2026) and refreshed the current TRAILS AI postdoc. SEAS CS page still lists only a 2024–25 Professor of Practice call."
+    },
+    {
+      "school": "Illinois Institute of Technology",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "Portland State University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-portland-state-evidence-2026-10-11.json"
+    },
+    {
+      "school": "New Mexico State University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-new-mexico-state-evidence-2026-10-11.json"
+    },
+    {
+      "school": "Ohio University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-ohio-university-evidence-2026-10-11.json"
+    },
+    {
+      "school": "Oakland University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-oakland-evidence-2026-10-11.json",
+      "findings": "The official faculty postings index and current detail for CSE requisition 0000806 (posting 38939) confirm one tenure-track Assistant Professor search in AI, cybersecurity, data science, computer systems, or related area. Detail says review began Jan 15, 2026 and open until filled, but the stated Aug 15, 2026 start date has passed; current hiring activity cannot be confirmed. No other current CSE posting surfaced."
+    },
+    {
+      "school": "UCCS",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-uccs-evidence-2026-10-11.json",
+      "findings": "Current official UCCS HR posting 41085 confirms an Assistant Teaching Professor in Computer Science, posted Sep 22, 2026, ongoing with Oct 5 priority date; refreshed the existing record. No unverified faculty calls added."
+    },
+    {
+      "school": "University of Arkansas",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-arkansas-evidence-2026-10-11.json",
+      "findings": "The University of Arkansas EECS Workday listing includes an active Fall 2027 Assistant Professor search focused on semiconductor electronics/photonics/materials, with AI, neuromorphic, quantum computing, and MEMS among additional interests. The full posting’s required degree discipline and fit for CS applicants need verification; recorded as a candidate related opening pending that check."
+    },
+    {
+      "school": "University of Oregon",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-oregon-evidence-2026-10-11.json",
+      "findings": "The official UO Careers listing confirms an active CS Pro Tem Instructor open pool (Job 536882), accepting applications through July 28, 2027, reviewed as needs arise. Because UO announced a hiring freeze in May 2026 and some searches may be paused, the posting’s precise hiring status remains uncertain. No current CS tenure-track call surfaced in this pass."
+    },
+    {
+      "school": "Boston College",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-boston-college-evidence-2026-10-11.json",
+      "findings": "Current Computer Science department Job Openings page contains student teaching/lab assistant information only; no faculty call is listed. The Morrissey College open-positions page directs faculty applicants to department pages. No current CS faculty posting surfaced in this review."
+    },
+    {
+      "school": "Cleveland State University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-cleveland-state-university-evidence-2026-10-11.json",
+      "findings": "Official provost page describes faculty search procedures but does not list current vacancies. The connected PeopleAdmin system is the authoritative source, but this pass did not establish a complete current CS/engineering posting list. Earlier search results included no active CS posting; recheck is needed before treating absence as verified."
+    },
+    {
+      "school": "Kansas State University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-kansas-state-university-evidence-2026-10-11.json",
+      "findings": "Official CS employment page and HR posting confirm active tenure-track Assistant Professor in Cybersecurity, Req 521518, closing Nov 7, 2026; refreshed existing record. No additional computing faculty roles surfaced in the current faculty listings."
+    },
+    {
+      "school": "Missouri S&T",
+      "status": "audited",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "Nova Southeastern University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-nova-southeastern-university-evidence-2026-10-11.json",
+      "findings": "The official faculty portal shows an Engineering Adjunct pool and active Computing/Engineering faculty category listings, but the current category was not exhaustively resolved to determine whether any separate CS-eligible position is open. The Engineering Adjunct entry appears to be a standing Halmos College teaching pool; further review is needed."
+    },
+    {
+      "school": "Virginia Commonwealth University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-vcu-evidence-2026-10-11.json",
+      "findings": "Current VCU Careers listing confirms a strategic senior engineering faculty search that can be appointed in Computer Science and targets AI, autonomous systems, and computing; review began Aug 1, 2026 and continues until filled. Other CS department openings were not fully established in this pass. Added this broad engineering role."
+    },
+    {
+      "school": "Tulane University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-tulane-evidence-2026-10-11.json",
+      "findings": "The current SSE open-positions page lists Professor and Department Chair, Computer Science, a tenured faculty position requiring a CS or related PhD and Professor-level record. It has no visible review/deadline details in the listing, so current requisition status and timing remain unconfirmed. Added with an open-status caveat."
+    },
+    {
+      "school": "University of Memphis",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-memphis-evidence-2026-10-11.json",
+      "findings": "Official CS faculty-hiring page confirms an active tenure-track Assistant Professor search for Fall 2027, all CS areas with AI/ML, cybersecurity, and quantum computing emphasized; screening begins Nov 30, 2026. Added the role."
+    },
+    {
+      "school": "University of Rhode Island",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-rhode-island-evidence-2026-10-11.json",
+      "findings": "Current URI applicant portal results were checked against the CS and Statistics department faculty page. Current listings include non-CS positions such as Computer Systems Administrator (professional staff); the visible CS faculty page call is an October 2022 posting for a 2023 start and is stale. No current CS faculty opening surfaced."
+    },
+    {
+      "school": "Wichita State University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-wichita-state-evidence-2026-10-11.json",
+      "findings": "Current official careers posting confirms a tenure-track Assistant Professor of Cybersecurity in Electrical and Computer Engineering, with an EECS PhD program; priority deadline Dec 1, 2026, Fall 2027 start. Added this CS-adjacent role."
+    },
+    {
+      "school": "Michigan Technological University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-michigan-technological-evidence-2026-10-11.json",
+      "findings": "Current College of Computing employment page directs applicants to the university portal. A current listing includes an internal-only ECE department chair search; a previously surfaced College of Computing cybersecurity faculty posting has a 2026 start and appears stale. No current externally open CS faculty role was verified; complete faculty vacancy search remains partial."
+    },
+    {
+      "school": "TTI Chicago",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-tti-chicago-evidence-2026-10-11.json",
+      "findings": "Current TTIC faculty hiring page advertises broad tenure-track Assistant Professor and multiple Research Assistant Professor openings, plus visiting and senior faculty recruiting. TT TT review continues until filled; RAP screening starts Oct 30, 2026; neither guarantees full consideration after Dec 1. Added TT and RAP records."
+    },
+    {
+      "school": "Univ. of Missouri - Kansas City",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-univ-of-missouri-kansas-city-evidence-2026-10-11.json",
+      "findings": "Official job-site search did not yield a verifiable current CS faculty posting in the available results. The UMKC computing employment page and current faculty portal require a fuller direct search before recording a negative finding; no records added."
+    },
+    {
+      "school": "University of Louisville",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-louisville-evidence-2026-10-11.json",
+      "findings": "The official Workday listing shows a full-time non-tenure-track Teaching Assistant Professor (Term) in Computer Science and Engineering, beginning Spring 2027, but the stated application close date was Sept 29, 2026 and has passed. Current application status is uncertain; no new record was added pending confirmation."
+    },
+    {
+      "school": "University of Missouri",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-missouri-evidence-2026-10-11.json",
+      "findings": "The UM System career portal has current job listings, but available results did not expose a definitive current CS faculty posting or a complete filtered faculty result set. No record was added; the current CS-specific absence remains unverified."
+    },
+    {
+      "school": "Brandeis University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-brandeis-evidence-2026-10-11.json",
+      "findings": "The current Brandeis HR careers portal links to faculty vacancies, but the CS School page surfaced for this search is explicitly a Fall 2020 tenure-line call. No current CS faculty opening was found in the official sources reviewed."
+    },
+    {
+      "school": "University of New Mexico",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-new-mexico-evidence-2026-10-11.json",
+      "findings": "Official CS page confirms a new full-time tenure-track Assistant Professor search posted Oct 6, 2026, for all computing areas, especially quantum, theory/algorithms, and cybersecurity. Best-consideration deadline Dec 5, 2026; Req 38093. Refreshed the existing record."
+    },
+    {
+      "school": "Mississippi State University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-mississippi-state-evidence-2026-10-11.json",
+      "findings": "Official HR confirms a full-time non-tenure-track CSE Instructor position (Req 511191) opening Sep 10, with Jan 1, 2027 anticipated start; refreshed existing record. A separate CS adjunct at the Mississippi School for Mathematics and Science closed Aug 15, 2026 and a future full-time school-teacher role was only mentioned, so not added. Broader adjacent-unit review remains partial."
+    },
+    {
+      "school": "Oklahoma State University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-oklahoma-state-evidence-2026-10-11.json",
+      "findings": "Official CS posting AF9557 confirms an open-rank tenure-track CS position focused on cybersecurity, digital forensics, cyber investigations, reverse engineering, or malware analysis. August 2027 start; priority date Dec 1, 2026; accepted until filled. Refreshed existing record."
+    },
+    {
+      "school": "University of Idaho",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-idaho-evidence-2026-10-11.json",
+      "findings": "Current University of Idaho faculty portal lists the Department of Computer Science and Cybersecurity Assistant Clinical Faculty posting F001439P; a current careers search result also advertises a tenure-track Assistant Professor role in CS, Cybersecurity, or AI beginning August 2027. Existing records include both calls. Additional positions and details require review across all search pages, so marked partial. Directly rechecked all four current requisitions; corrected two false “yes” visa-sponsorship entries to “no”, captured “uncertain” for the two new 2027 roles as case-by-case, and flagged the older clinical role’s elapsed start date while preserving its official open-until-filled status.",
+      "remaining": "Review remaining University of Idaho computing-adjacent and campus postdoctoral listings.",
+      "checkedAt": "2026-10-11"
+    },
+    {
+      "school": "University of Massachusetts Boston",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-umass-boston-evidence-2026-10-11.json",
+      "findings": "The official PageUp posting (Job 528484) is a tenure-track CS Assistant Professor search for a Sept 1, 2026 start, but its full-consideration deadline was Dec 1, 2025 and that start date has passed. Current active hiring cannot be confirmed. Existing UMB quantum faculty record also needs status reconciliation; no new record added."
+    },
+    {
+      "school": "West Virginia University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-west-virginia-evidence-2026-10-11.json",
+      "findings": "Official WVU careers portal and Lane Department faculty sources were reviewed. The live faculty portal search did not expose a usable results list in this pass; surfaced Computer Science and Electrical Engineering Research Associate roles lack enough public detail here to determine faculty rank, eligibility, or appointment. No records added; current computing vacancies remain unresolved."
+    },
+    {
+      "school": "Montana State University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-montana-state-evidence-2026-10-11.json",
+      "findings": "The current CS opportunities page and HR detail confirm two tenure-track Assistant Professor openings in all CS areas, with review starting Nov 16, 2026 and continuing until an adequate pool is established. Also confirmed an open part-time non-tenure-track computing instructor pool, rolling until filled. Refreshed TT record and added the pool."
+    },
+    {
+      "school": "Southern Methodist University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-smu-evidence-2026-10-11.json",
+      "findings": "The current Lyle faculty openings page says SMU is expanding hiring into AY 2026–27 and explicitly includes Computer Science in a multi-department renewable-contract, non-tenure-track cluster hire. No CS-specific requisition, deadline, or qualifications are published on the page, so added as a provisional listing with caveat. Older CS tenure-track PDF (Fall 2023) is stale."
+    },
+    {
+      "school": "Western Michigan University",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "Baylor University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-baylor-evidence-2026-10-11.json",
+      "findings": "Current official CS open-positions page confirms three active searches: tenured Patterson Cybersecurity Chair, TT/tenured Assistant or Associate Professor in AI, and TT Assistant Professor in Cybersecurity. All three match existing records, refreshed their last-seen dates."
+    },
+    {
+      "school": "Florida Institute of Technology",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-florida-tech-evidence-2026-10-11.json",
+      "findings": "Official Florida Tech employment page directs applicants to posted openings and departmental faculty roles. The CS tenure-track Workday posting found in this pass is for an August 2025 start, so it is stale; current live CS role status was not established from the accessible search page."
+    },
+    {
+      "school": "University of Alabama - Huntsville",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-alabama-huntsville-evidence-2026-10-11.json",
+      "findings": "Current UAH HR faculty vacancies page states there are no vacant positions at the College of Engineering, which houses Computer Science; visible current faculty openings in other colleges are outside computing. ITSC page describes general research needs rather than a posted vacancy. No current CS faculty or postdoc opening found."
+    },
+    {
+      "school": "University of Denver",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-denver-evidence-2026-10-11.json",
+      "findings": "Current Jobs@DU search identifies an active CS Department Adjunct Faculty, Data Science pool (Job 499044) for AY 2026–27, with applications accepted for future openings. The department-specific posting is an adjunct pool rather than an immediate course assignment. Other Ritchie School vacancy results were not fully enumerated in this pass; added the confirmed CS pool."
+    },
+    {
+      "school": "University of Tulsa",
+      "status": "partial",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "Air Force Inst. of Technology",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-air-force-institute-of-technology-evidence-2026-10-11.json",
+      "findings": "AFIT’s official personnel page directs civilian vacancies to USAJobs. It currently lists a broad Engineering Physics postdoctoral fellowship through July 2027, but the public description does not identify a CS-specific area or establish CS eligibility. Faculty opportunities for active-duty personnel are routed through military career-field managers. No CS-specific role added; marked partial pending review of the USAJobs postdoc discipline."
+    },
+    {
+      "school": "Univ. of Wisconsin - Milwaukee",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-wisconsin-milwaukee-evidence-2026-10-11.json",
+      "findings": "UWM’s public HR page says external candidates search Workday and directs current employees to the internal Jobs Hub. Available public faculty listings did not identify a current Computer Science position; the full Workday results could not be verified externally. No record added."
+    },
+    {
+      "school": "University of Miami",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-miami-evidence-2026-10-11.json",
+      "findings": "University of Miami Careers page provides the official Faculty & Physicians search, but keyword/search results for Computer Science did not expose a department-specific faculty requisition in this pass. CS department page fetch was blocked; no current CS posting verified."
+    },
+    {
+      "school": "University of New Hampshire",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-new-hampshire-evidence-2026-10-11.json",
+      "findings": "Official UNH CS faculty page advertises a Lecturer call for an August 18, 2025 start with full-consideration date Dec 1, 2024; this is a prior-cycle notice. Current department pages and public USNH job portal search yielded no current CS faculty posting. No new record added."
+    },
+    {
+      "school": "University of New Orleans",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-university-of-new-orleans-evidence-2026-10-11.json",
+      "findings": "Current CS faculty position confirmed; entered with the official requisition URL. The full-consideration date has passed but the page says review continues until filled."
+    },
+    {
+      "school": "University of Southern Mississippi",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-southern-mississippi-evidence-2026-10-11.json",
+      "findings": "Sources row has prior confirmation of req. 5545 and the official portal. Fresh current role list was not completely re-read; keep partial pending reconciliation of the 2026–27 CSCE ads."
+    },
+    {
+      "school": "OHSU",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-ohsu-evidence-2026-10-11.json",
+      "findings": "Current official careers sources checked; JS-driven portal did not expose a complete current CS-relevant listing. Prior DICE posting 38655 returned 410 Gone. Partial."
+    },
+    {
+      "school": "University of Colorado - Denver",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-colorado-denver-evidence-2026-10-11.json",
+      "findings": "Previously recorded CSE postings need a live detail-page refresh; left partial."
+    },
+    {
+      "school": "New Mexico Tech",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-new-mexico-tech-evidence-2026-10-11.json",
+      "findings": "Current official employment index and CS/IT unit directory reviewed; no CS-relevant opening identified."
+    },
+    {
+      "school": "New York Tech",
+      "status": "audited",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "SIU Carbondale",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-siu-carbondale-evidence-2026-10-11.json",
+      "findings": "CS-specific openings are advertised, but the linked full notices must be reviewed before recording; remain partial."
+    },
+    {
+      "school": "University of Alabama - Birmingham",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-alabama-birmingham-evidence-2026-10-11.json",
+      "findings": "Official source identified, but current faculty-job listing is not readable from the indexed results; partial pending portal query."
+    },
+    {
+      "school": "UNC - Greensboro",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-unc-greensboro-evidence-2026-10-11.json",
+      "findings": "Current tenure-track CS search confirmed; existing dataset record re-confirmed against official department announcement."
+    },
+    {
+      "school": "Univ. of Arkansas - Little Rock",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-arkansas-little-rock-evidence-2026-10-11.json",
+      "findings": "Official Workday listing remains dynamically rendered and was not fully re-queried; prior search found no CS faculty posting. Partial."
+    },
+    {
+      "school": "University of Wyoming",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-wyoming-evidence-2026-10-11.json",
+      "findings": "Current university careers source identified, but current CS and adjacent listings were not fully resolved in the dynamic portal; partial."
+    },
+    {
+      "school": "Claremont Graduate University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-claremont-graduate-university-evidence-2026-10-11.json",
+      "findings": "No faculty openings listed by official faculty jobs page; no CS job record added."
+    },
+    {
+      "school": "North Dakota State University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-north-dakota-state-evidence-2026-10-11.json",
+      "findings": "The official job board shows two Computer Science listings in its department facet; title and requisition details must be resolved before adding records. Partial."
+    },
+    {
+      "school": "University of Maine",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-maine-evidence-2026-10-11.json",
+      "findings": "Prior portal search found part-time CS/CIS adjunct roles and no full-time faculty postings; current requisition state could not be fully rechecked. Partial."
+    },
+    {
+      "school": "University of Mississippi",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-mississippi-evidence-2026-10-11.json",
+      "findings": "Found CS-adjacent ECE visiting faculty posting JR102524, but its current status and details need verification before adding or refreshing a record; partial."
+    },
+    {
+      "school": "Louisiana Tech University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-louisiana-tech-evidence-2026-10-11.json",
+      "findings": "Two CS-adjacent Computer Information Systems faculty roles are advertised, but full Workday details remain unchecked; partial."
+    },
+    {
+      "school": "Indiana State University",
+      "status": "audited",
+      "evidence": "data-sweep-jobs-2026-10-10.md"
+    },
+    {
+      "school": "LIU Post",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-liu-post-evidence-2026-10-11.json",
+      "findings": "Official faculty and jobs pages checked; current CS role listing remains unresolved in the dynamic careers search. Partial."
+    },
+    {
+      "school": "Kennesaw State University",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-kennesaw-state-evidence-2026-10-11.json",
+      "findings": "Multiple computing college openings confirmed; full requisition details and record updates remain, so partial."
+    },
+    {
+      "school": "Santa Clara University",
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-santa-clara-evidence-2026-10-11.json",
+      "findings": "Current ECE Digital Systems and Robotics & AI postings re-confirmed; both existing records refreshed. Information Systems posting is CS-adjacent but remains outside the CS-specific count."
+    },
+    {
+      "school": "University of Michigan-Flint",
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-michigan-flint-evidence-2026-10-11.json",
+      "findings": "Corrected the CS assistant professor record deadline from Feb 7 to Jan 31, 2027 and set reviewBegins to Sep 15 based on the full Interfolio posting.",
+      "remaining": "Current campus-wide CS-eligible postings still require a separate UM Careers search."
+    }
+  ],
+  "conferences": [
+    {
+      "name": "AAAI",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-ai-2026-10-10.md"
+    },
+    {
+      "name": "ACL",
+      "status": "schedule-audited",
+      "report": "docs/data-sweep-confs-nlp-2026-10-10.md"
+    },
+    {
+      "name": "ASE",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-software-evidence-2026-10-10.json",
+      "remaining": "Current schedules corrected; unsupported future forecasts and missing acceptance statistics documented in docs/data-sweep-confs-software-2026-10-10.md."
+    },
+    {
+      "name": "ASPLOS",
+      "status": "partial-statistics-unverified",
+      "evidence": "data-sweep-confs-systems-2026-10-10.md"
+    },
+    {
+      "name": "CAV",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-software-evidence-2026-10-10.json",
+      "remaining": "Current schedules corrected; unsupported future forecasts and missing acceptance statistics documented in docs/data-sweep-confs-software-2026-10-10.md."
+    },
+    {
+      "name": "CCS",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-security-2026-10-10.md",
+      "remaining": "Statistics or explicitly documented source gaps remain in report."
+    },
+    {
+      "name": "CGO",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "CHI",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "Crypto",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-security-2026-10-10.md",
+      "remaining": "Statistics or explicitly documented source gaps remain in report."
+    },
+    {
+      "name": "CVPR",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-vision-robotics-remaining-evidence-2026-10-10.json",
+      "remaining": "Current editions and sponsor announcements reviewed; source conflicts, incomplete future schedules and unverified statistics documented in remaining evidence report."
+    },
+    {
+      "name": "DAC",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "EC",
+      "status": "pending"
+    },
+    {
+      "name": "ECCV",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-vision-robotics-remaining-evidence-2026-10-10.json",
+      "remaining": "Current editions and sponsor announcements reviewed; source conflicts, incomplete future schedules and unverified statistics documented in remaining evidence report."
+    },
+    {
+      "name": "EMNLP",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-nlp-2026-10-10.md",
+      "remaining": "Statistics or explicitly documented source gaps remain in report."
+    },
+    {
+      "name": "EMSOFT",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "Eurocrypt",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-security-2026-10-10.md",
+      "remaining": "Statistics or explicitly documented source gaps remain in report."
+    },
+    {
+      "name": "Eurographics",
+      "status": "pending"
+    },
+    {
+      "name": "EuroSys",
+      "status": "partial-statistics-unverified",
+      "evidence": "data-sweep-confs-systems-2026-10-10.md"
+    },
+    {
+      "name": "FAST",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-storage-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming editions; corrected known fields, represented Middleware’s two submission cycles, and added PODC 2027.",
+      "remaining": "Next edition announcements or unverified skeleton metadata remain for follow-up."
+    },
+    {
+      "name": "FSE",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-software-evidence-2026-10-10.json",
+      "remaining": "Current schedules corrected; unsupported future forecasts and missing acceptance statistics documented in docs/data-sweep-confs-software-2026-10-10.md."
+    },
+    {
+      "name": "HPCA",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "ICCAD",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "ICCV",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-vision-robotics-remaining-evidence-2026-10-10.json",
+      "remaining": "Current editions and sponsor announcements reviewed; source conflicts, incomplete future schedules and unverified statistics documented in remaining evidence report."
+    },
+    {
+      "name": "ICDE",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-databases-evidence-2026-10-10.json",
+      "remaining": "Current schedules/cycles reviewed; missing statistics, PODS 2026 source year typos and incomplete next editions documented in database evidence report."
+    },
+    {
+      "name": "ICFP",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-pl-2026-10-10.md"
+    },
+    {
+      "name": "ICLR",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-ai-2026-10-10.md"
+    },
+    {
+      "name": "ICML",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-ai-2026-10-10.md"
+    },
+    {
+      "name": "ICRA",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-vision-robotics-remaining-evidence-2026-10-10.json",
+      "remaining": "Current editions and sponsor announcements reviewed; source conflicts, incomplete future schedules and unverified statistics documented in remaining evidence report."
+    },
+    {
+      "name": "ICSE",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-software-evidence-2026-10-10.json",
+      "remaining": "Current schedules corrected; unsupported future forecasts and missing acceptance statistics documented in docs/data-sweep-confs-software-2026-10-10.md."
+    },
+    {
+      "name": "IEEE S&P",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-security-2026-10-10.md",
+      "remaining": "Statistics or explicitly documented source gaps remain in report."
+    },
+    {
+      "name": "IJCAI",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-ai-2026-10-10.md"
+    },
+    {
+      "name": "IMC",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-networks-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming sources; corrected official links and chair/rebuttal details, and added tentative sponsor-announced CoNEXT 2027 with uncertainty explicit.",
+      "remaining": "Future-edition and TBA fields remain unknown; recheck once sponsors publish CFPs."
+    },
+    {
+      "name": "IROS",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-vision-robotics-remaining-evidence-2026-10-10.json",
+      "remaining": "Current editions and sponsor announcements reviewed; source conflicts, incomplete future schedules and unverified statistics documented in remaining evidence report."
+    },
+    {
+      "name": "ISCA",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-systems-2026-10-10.md"
+    },
+    {
+      "name": "ISSTA",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-software-evidence-2026-10-10.json",
+      "remaining": "Current schedules corrected; unsupported future forecasts and missing acceptance statistics documented in docs/data-sweep-confs-software-2026-10-10.md."
+    },
+    {
+      "name": "KDD",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "LICS",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-theory-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming editions and applied schedule corrections or completed missing supported fields.",
+      "remaining": "Future edition announcements and unannounced CFP dates/chair details remain to be checked when available."
+    },
+    {
+      "name": "MICRO",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "MobiCom",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-networks-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming sources; corrected official links and chair/rebuttal details, and added tentative sponsor-announced CoNEXT 2027 with uncertainty explicit.",
+      "remaining": "Future-edition and TBA fields remain unknown; recheck once sponsors publish CFPs."
+    },
+    {
+      "name": "MobiSys",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-networks-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming sources; corrected official links and chair/rebuttal details, and added tentative sponsor-announced CoNEXT 2027 with uncertainty explicit.",
+      "remaining": "Future-edition and TBA fields remain unknown; recheck once sponsors publish CFPs."
+    },
+    {
+      "name": "NAACL",
+      "status": "schedule-audited",
+      "report": "docs/data-sweep-confs-nlp-2026-10-10.md"
+    },
+    {
+      "name": "NDSS",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-security-2026-10-10.md",
+      "remaining": "Statistics or explicitly documented source gaps remain in report."
+    },
+    {
+      "name": "NeurIPS",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-ai-2026-10-10.md"
+    },
+    {
+      "name": "NSDI",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-networks-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming sources; corrected official links and chair/rebuttal details, and added tentative sponsor-announced CoNEXT 2027 with uncertainty explicit.",
+      "remaining": "Future-edition and TBA fields remain unknown; recheck once sponsors publish CFPs."
+    },
+    {
+      "name": "OOPSLA",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-pl-2026-10-10.md"
+    },
+    {
+      "name": "OSDI",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-systems-2026-10-10.md"
+    },
+    {
+      "name": "PLDI",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-pl-2026-10-10.md"
+    },
+    {
+      "name": "PODS",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-databases-evidence-2026-10-10.json",
+      "remaining": "Current schedules/cycles reviewed; missing statistics, PODS 2026 source year typos and incomplete next editions documented in database evidence report."
+    },
+    {
+      "name": "POPL",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-pl-2026-10-10.md"
+    },
+    {
+      "name": "RSS",
+      "status": "pending"
+    },
+    {
+      "name": "RTSS",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-theory-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming editions and applied schedule corrections or completed missing supported fields.",
+      "remaining": "Future edition announcements and unannounced CFP dates/chair details remain to be checked when available."
+    },
+    {
+      "name": "SC",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-storage-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming editions; corrected known fields, represented Middleware’s two submission cycles, and added PODC 2027.",
+      "remaining": "Next edition announcements or unverified skeleton metadata remain for follow-up."
+    },
+    {
+      "name": "SIGCOMM",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-networks-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming sources; corrected official links and chair/rebuttal details, and added tentative sponsor-announced CoNEXT 2027 with uncertainty explicit.",
+      "remaining": "Future-edition and TBA fields remain unknown; recheck once sponsors publish CFPs."
+    },
+    {
+      "name": "SIGCSE TS",
+      "status": "pending"
+    },
+    {
+      "name": "SIGGRAPH",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "SIGGRAPH Asia",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "SIGIR",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "SIGMETRICS",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "SIGMOD",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-databases-evidence-2026-10-10.json",
+      "remaining": "Current schedules/cycles reviewed; missing statistics, PODS 2026 source year typos and incomplete next editions documented in database evidence report."
+    },
+    {
+      "name": "SOSP",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-systems-2026-10-10.md"
+    },
+    {
+      "name": "UbiComp / ISWC",
+      "status": "pending"
+    },
+    {
+      "name": "UIST",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "USENIX ATC",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-systems-2026-10-10.md"
+    },
+    {
+      "name": "USENIX Security",
+      "status": "schedule-audited",
+      "report": "docs/data-sweep-confs-security-2026-10-10.md"
+    },
+    {
+      "name": "VIS",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "VLDB",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-databases-evidence-2026-10-10.json",
+      "remaining": "Current schedules/cycles reviewed; missing statistics, PODS 2026 source year typos and incomplete next editions documented in database evidence report."
+    },
+    {
+      "name": "VR",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "WWW",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "AAMAS",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-other-evidence-2026-10-10.json",
+      "findings": "Checked official edition and schedule pages; applied supported schedule updates and retained announced unknowns.",
+      "remaining": "Future edition discovery and any unpublished program details remain to be checked."
+    },
+    {
+      "name": "ACM MM",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-other-evidence-2026-10-10.json",
+      "findings": "Checked official edition and schedule pages; applied supported schedule updates and retained announced unknowns.",
+      "remaining": "Future edition discovery and any unpublished program details remain to be checked."
+    },
+    {
+      "name": "ACSAC",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-other-evidence-2026-10-10.json",
+      "findings": "Checked official edition and schedule pages; applied supported schedule updates and retained announced unknowns.",
+      "remaining": "Future edition discovery and any unpublished program details remain to be checked."
+    },
+    {
+      "name": "AIED",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-other-evidence-2026-10-10.json",
+      "findings": "Checked official edition and schedule pages; applied supported schedule updates and retained announced unknowns.",
+      "remaining": "Future edition discovery and any unpublished program details remain to be checked."
+    },
+    {
+      "name": "AISTATS",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-ai-2026-10-10.md"
+    },
+    {
+      "name": "ALENEX",
+      "status": "pending"
+    },
+    {
+      "name": "ASIACRYPT",
+      "status": "pending"
+    },
+    {
+      "name": "ASSETS",
+      "status": "pending"
+    },
+    {
+      "name": "BMVC",
+      "status": "pending"
+    },
+    {
+      "name": "BPM",
+      "status": "pending"
+    },
+    {
+      "name": "CADE",
+      "status": "pending"
+    },
+    {
+      "name": "CAiSE",
+      "status": "pending"
+    },
+    {
+      "name": "CCC",
+      "status": "pending"
+    },
+    {
+      "name": "CHES",
+      "status": "pending"
+    },
+    {
+      "name": "CIDR",
+      "status": "pending"
+    },
+    {
+      "name": "CIKM",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "COLT",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-theory-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming editions and applied schedule corrections or completed missing supported fields.",
+      "remaining": "Future edition announcements and unannounced CFP dates/chair details remain to be checked when available."
+    },
+    {
+      "name": "CoNEXT",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-networks-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming sources; corrected official links and chair/rebuttal details, and added tentative sponsor-announced CoNEXT 2027 with uncertainty explicit.",
+      "remaining": "Future-edition and TBA fields remain unknown; recheck once sponsors publish CFPs."
+    },
+    {
+      "name": "CP",
+      "status": "pending"
+    },
+    {
+      "name": "CSCW",
+      "status": "pending"
+    },
+    {
+      "name": "CSF",
+      "status": "pending"
+    },
+    {
+      "name": "DIS",
+      "status": "pending"
+    },
+    {
+      "name": "DISC",
+      "status": "pending"
+    },
+    {
+      "name": "DSN",
+      "status": "pending"
+    },
+    {
+      "name": "EACL",
+      "status": "schedule-audited",
+      "report": "docs/data-sweep-confs-nlp-2026-10-10.md"
+    },
+    {
+      "name": "EASE",
+      "status": "pending"
+    },
+    {
+      "name": "ECAI",
+      "status": "pending"
+    },
+    {
+      "name": "ECIR",
+      "status": "pending"
+    },
+    {
+      "name": "ECOOP",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-pl-2026-10-10.md"
+    },
+    {
+      "name": "ER",
+      "status": "pending"
+    },
+    {
+      "name": "ESA",
+      "status": "pending"
+    },
+    {
+      "name": "ESEM",
+      "status": "pending"
+    },
+    {
+      "name": "ESOP",
+      "status": "schedule-audited",
+      "evidence": "data-sweep-confs-pl-2026-10-10.md"
+    },
+    {
+      "name": "ESORICS",
+      "status": "pending"
+    },
+    {
+      "name": "FC",
+      "status": "pending"
+    },
+    {
+      "name": "FOCS",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-theory-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming editions and applied schedule corrections or completed missing supported fields.",
+      "remaining": "Future edition announcements and unannounced CFP dates/chair details remain to be checked when available."
+    },
+    {
+      "name": "FOGA",
+      "status": "pending"
+    },
+    {
+      "name": "FPGA",
+      "status": "pending"
+    },
+    {
+      "name": "GD",
+      "status": "pending"
+    },
+    {
+      "name": "GECCO",
+      "status": "pending"
+    },
+    {
+      "name": "HotOS",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-storage-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming editions; corrected known fields, represented Middleware’s two submission cycles, and added PODC 2027.",
+      "remaining": "Next edition announcements or unverified skeleton metadata remain for follow-up."
+    },
+    {
+      "name": "ICAPS",
+      "status": "pending"
+    },
+    {
+      "name": "ICDAR",
+      "status": "pending"
+    },
+    {
+      "name": "ICDCS",
+      "status": "pending"
+    },
+    {
+      "name": "ICDM",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
+    },
+    {
+      "name": "ICDT",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-databases-evidence-2026-10-10.json",
+      "remaining": "Current schedules/cycles reviewed; missing statistics, PODS 2026 source year typos and incomplete next editions documented in database evidence report."
+    },
+    {
+      "name": "ICER",
+      "status": "pending"
+    },
+    {
+      "name": "ICME",
+      "status": "pending"
+    },
+    {
+      "name": "ICS",
+      "status": "pending"
+    },
+    {
+      "name": "ICSA",
+      "status": "pending"
+    },
+    {
+      "name": "ICSOC",
+      "status": "pending"
+    },
+    {
+      "name": "ICWS",
+      "status": "pending"
+    },
+    {
+      "name": "ICWSM",
+      "status": "pending"
+    },
+    {
+      "name": "IJCAR",
+      "status": "pending"
+    },
+    {
+      "name": "INFOCOM",
+      "status": "pending"
+    },
+    {
+      "name": "Interspeech",
+      "status": "pending"
+    },
+    {
+      "name": "IPDPS",
+      "status": "pending"
+    },
+    {
+      "name": "IPSN",
+      "status": "pending"
+    },
+    {
+      "name": "ISLPED",
+      "status": "pending"
+    },
+    {
+      "name": "ISMAR",
+      "status": "pending"
+    },
+    {
+      "name": "ISSRE",
+      "status": "pending"
+    },
+    {
+      "name": "ITC",
+      "status": "pending"
+    },
+    {
+      "name": "ITCS",
+      "status": "pending"
+    },
+    {
+      "name": "IUI",
+      "status": "pending"
+    },
+    {
+      "name": "KR",
+      "status": "pending"
+    },
+    {
+      "name": "LAK",
+      "status": "pending"
+    },
+    {
+      "name": "MICCAI",
+      "status": "pending"
+    },
+    {
+      "name": "Middleware",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-storage-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming editions; corrected known fields, represented Middleware’s two submission cycles, and added PODC 2027.",
+      "remaining": "Next edition announcements or unverified skeleton metadata remain for follow-up."
+    },
+    {
+      "name": "MMSys",
+      "status": "pending"
+    },
+    {
+      "name": "MSR",
+      "status": "pending"
+    },
+    {
+      "name": "PerCom",
+      "status": "pending"
+    },
+    {
+      "name": "PETS",
+      "status": "pending"
+    },
+    {
+      "name": "PODC",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-storage-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming editions; corrected known fields, represented Middleware’s two submission cycles, and added PODC 2027.",
+      "remaining": "Next edition announcements or unverified skeleton metadata remain for follow-up."
+    },
+    {
+      "name": "PPSN",
+      "status": "pending"
+    },
+    {
+      "name": "RE",
+      "status": "pending"
+    },
+    {
+      "name": "RecSys",
+      "status": "pending"
+    },
+    {
+      "name": "SAT",
+      "status": "pending"
+    },
+    {
+      "name": "SDM",
+      "status": "pending"
+    },
+    {
+      "name": "SEAMS",
+      "status": "pending"
+    },
+    {
+      "name": "SenSys",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-storage-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming editions; corrected known fields, represented Middleware’s two submission cycles, and added PODC 2027.",
+      "remaining": "Next edition announcements or unverified skeleton metadata remain for follow-up."
+    },
+    {
+      "name": "SIGSPATIAL",
+      "status": "pending"
+    },
+    {
+      "name": "SODA",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-theory-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming editions and applied schedule corrections or completed missing supported fields.",
+      "remaining": "Future edition announcements and unannounced CFP dates/chair details remain to be checked when available."
+    },
+    {
+      "name": "SOUPS",
+      "status": "pending"
+    },
+    {
+      "name": "STACS",
+      "status": "pending"
+    },
+    {
+      "name": "STOC",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-theory-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming editions and applied schedule corrections or completed missing supported fields.",
+      "remaining": "Future edition announcements and unannounced CFP dates/chair details remain to be checked when available."
+    },
+    {
+      "name": "TACAS",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-software-evidence-2026-10-10.json",
+      "remaining": "Current schedules corrected; unsupported future forecasts and missing acceptance statistics documented in docs/data-sweep-confs-software-2026-10-10.md."
+    },
+    {
+      "name": "UAI",
+      "status": "pending"
+    },
+    {
+      "name": "WACV",
+      "status": "partial",
+      "report": "docs/data-sweep-confs-vision-robotics-remaining-evidence-2026-10-10.json",
+      "remaining": "Current editions and sponsor announcements reviewed; source conflicts, incomplete future schedules and unverified statistics documented in remaining evidence report."
+    },
+    {
+      "name": "WSDM",
+      "status": "pending"
+    },
+    {
+      "name": "VMCAI",
+      "status": "pending"
+    },
+    {
+      "name": "CPP",
+      "status": "pending"
+    },
+    {
+      "name": "FormaliSE",
+      "status": "pending"
+    },
+    {
+      "name": "NFM",
+      "status": "pending"
+    }
+  ],
+  "awards": [
+    {
+      "id": "nsf-career",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nsf-crii",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nsf-future-core",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nsf-csgrad4us",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nsf-grfp",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "darpa-yfa",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "darpa-open-baa",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "doe-early-career",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "doe-csgf",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "doe-visiting-faculty-program",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "onr-yip",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "onr-cnr-fellows",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "afosr-yip",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "aro-early-career",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "ndseg-fellowship",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "dod-smart-scholarship",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nih-r01-r21-cs",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nasa-nstgro",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nasa-esi-ecf",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "google-phd-fellowship",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "google-research-scholar",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json",
+      "report": "docs/data-sweep-awards-google-bwf-evidence-2026-10-10.json",
+      "findings": "Updated latest known deadline and current-cycle discovery from official program and recipients pages.",
+      "remaining": "No 2026 call found; confirm if program resumes or remains retired."
+    },
+    {
+      "id": "amazon-research-awards",
+      "status": "audited",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "amazon-phd-fellowship",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "meta-phd-fellowship",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "meta-research-awards",
+      "status": "partial",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "microsoft-phd-fellowship",
+      "status": "audited-core-facts",
+      "report": "docs/data-sweep-awards-microsoft-sloan-evidence-2026-10-10.json"
+    },
+    {
+      "id": "microsoft-faculty-fellowship",
+      "status": "audited-core-facts",
+      "report": "docs/data-sweep-awards-microsoft-sloan-evidence-2026-10-10.json"
+    },
+    {
+      "id": "apple-phd-fellowship",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json",
+      "remaining": "Current invitation-only nomination deadline, full funding terms and remaining-years eligibility are not in the public sponsor announcement; do not reuse campus/prior-year dates."
+    },
+    {
+      "id": "nvidia-graduate-fellowship",
+      "status": "audited",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nvidia-hardware-grant",
+      "status": "audited-core-facts",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json",
+      "remaining": "Resource-specific CFP documents and any future reopening timetable require rechecking when applications resume."
+    },
+    {
+      "id": "sloan-research-fellowship",
+      "status": "audited-core-facts",
+      "report": "docs/data-sweep-awards-microsoft-sloan-evidence-2026-10-10.json"
+    },
+    {
+      "id": "packard-fellowship",
+      "status": "audited",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json"
+    },
+    {
+      "id": "simons-investigators-cs",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json",
+      "remaining": "Archive confirms discontinuation and award duration; historical amount, geographic and nomination terms still need an accessible original solicitation."
+    },
+    {
+      "id": "hertz-fellowship",
+      "status": "audited",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json"
+    },
+    {
+      "id": "qualcomm-innovation-fellowship",
+      "status": "audited",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json"
+    },
+    {
+      "id": "ibm-phd-fellowship",
+      "status": "audited",
+      "report": "docs/data-sweep-awards-industry-foundations-evidence-2026-10-10.json"
+    },
+    {
+      "id": "sony-research-award",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-industry-initial-evidence-2026-10-10.json",
+      "findings": "Reviewed sponsor pages; corrected 2026 Sony terms and Adobe current vs historical fellowship/program details.",
+      "remaining": "Monitor for next call announcements; continue review of other pending programs in category."
+    },
+    {
+      "id": "adobe-research-fellowship",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-industry-initial-evidence-2026-10-10.json",
+      "findings": "Reviewed sponsor pages; corrected 2026 Sony terms and Adobe current vs historical fellowship/program details.",
+      "remaining": "Monitor for next call announcements; continue review of other pending programs in category."
+    },
+    {
+      "id": "adobe-data-science-awards",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-industry-initial-evidence-2026-10-10.json",
+      "findings": "Reviewed sponsor pages; corrected 2026 Sony terms and Adobe current vs historical fellowship/program details.",
+      "remaining": "Monitor for next call announcements; continue review of other pending programs in category."
+    },
+    {
+      "id": "adobe-women-in-tech",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-programs-check-evidence-2026-10-10.json",
+      "findings": "Reviewed available official program pages; corrected current links and unsupported or outdated cycle details.",
+      "remaining": "Recheck missing or future cycle terms when sponsor pages publish them; continue remaining program audit."
+    },
+    {
+      "id": "bloomberg-ds-fellowship",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-programs-check-evidence-2026-10-10.json",
+      "findings": "Reviewed available official program pages; corrected current links and unsupported or outdated cycle details.",
+      "remaining": "Recheck missing or future cycle terms when sponsor pages publish them; continue remaining program audit."
+    },
+    {
+      "id": "cisco-research-rfps",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-current-check-evidence-2026-10-10.json",
+      "findings": "Reviewed official current program pages; removed stale or unsupported cycle terms and corrected active call details.",
+      "remaining": "Recheck for new cycles and review additional programs in the remaining awards backlog."
+    },
+    {
+      "id": "bell-labs-prize",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-current-check-evidence-2026-10-10.json",
+      "findings": "Reviewed official current program pages; removed stale or unsupported cycle terms and corrected active call details.",
+      "remaining": "Recheck for new cycles and review additional programs in the remaining awards backlog."
+    },
+    {
+      "id": "jpmorgan-ai-awards",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-current-check-evidence-2026-10-10.json",
+      "findings": "Reviewed official current program pages; removed stale or unsupported cycle terms and corrected active call details.",
+      "remaining": "Recheck for new cycles and review additional programs in the remaining awards backlog."
+    },
+    {
+      "id": "intel-faculty-awards",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-current-check-evidence-2026-10-10.json",
+      "findings": "Reviewed official current program pages; removed stale or unsupported cycle terms and corrected active call details.",
+      "remaining": "Recheck for new cycles and review additional programs in the remaining awards backlog."
+    },
+    {
+      "id": "samsung-gro",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-programs-check-evidence-2026-10-10.json",
+      "findings": "Corrected 2026 cycle deadline, closed status, eligibility, term, and themes from the official GRO page.",
+      "remaining": "Wait for next annual call and continue remaining award-program audit."
+    },
+    {
+      "id": "draper-scholar-program",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-programs-check-evidence-2026-10-10.json",
+      "findings": "Reviewed available official program pages; corrected current links and unsupported or outdated cycle details.",
+      "remaining": "Recheck missing or future cycle terms when sponsor pages publish them; continue remaining program audit."
+    },
+    {
+      "id": "snap-research-fellowship",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-programs-check-evidence-2026-10-10.json",
+      "findings": "Reviewed available official program pages; corrected current links and unsupported or outdated cycle details.",
+      "remaining": "Recheck missing or future cycle terms when sponsor pages publish them; continue remaining program audit."
+    },
+    {
+      "id": "symantec-norton-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "cra-undergrad-award",
+      "status": "pending"
+    },
+    {
+      "id": "cra-wp-grad-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "acm-doctoral-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "gem-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "ford-foundation-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "aaas-stpf",
+      "status": "pending"
+    },
+    {
+      "id": "schlumberger-faculty-future",
+      "status": "pending"
+    },
+    {
+      "id": "mozilla-technology-fund",
+      "status": "pending"
+    },
+    {
+      "id": "latticex-foundation-grants",
+      "status": "pending"
+    },
+    {
+      "id": "netapp-faculty-grants",
+      "status": "pending"
+    },
+    {
+      "id": "qualcomm-faculty-awards",
+      "status": "pending"
+    },
+    {
+      "id": "vmware-academic-program",
+      "status": "pending"
+    },
+    {
+      "id": "consumer-reports-digital-lab",
+      "status": "pending"
+    },
+    {
+      "id": "comcast-innovative-research",
+      "status": "pending"
+    },
+    {
+      "id": "att-labs-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "huawei-research-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "xerox-technical-minority",
+      "status": "pending"
+    },
+    {
+      "id": "schmidt-sciences-ai2050",
+      "status": "pending"
+    },
+    {
+      "id": "openai-academic-researcher-grants",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-openai-anthropic-evidence-2026-10-10.json",
+      "findings": "Updated active program terms from official sponsor pages and recorded current cycle availability.",
+      "remaining": "Continue remaining award backlog; recheck program pages for changes to cycle terms."
+    },
+    {
+      "id": "openai-chatgpt-academic-researchers",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-openai-anthropic-evidence-2026-10-10.json",
+      "findings": "Updated active program terms from official sponsor pages and recorded current cycle availability.",
+      "remaining": "Continue remaining award backlog; recheck program pages for changes to cycle terms."
+    },
+    {
+      "id": "anthropic-ai-for-science",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-openai-anthropic-evidence-2026-10-10.json",
+      "findings": "Updated active program terms from official sponsor pages and recorded current cycle availability.",
+      "remaining": "Continue remaining award backlog; recheck program pages for changes to cycle terms."
+    },
+    {
+      "id": "anthropic-fellows-program",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-openai-anthropic-evidence-2026-10-10.json",
+      "findings": "Updated active program terms from official sponsor pages and recorded current cycle availability.",
+      "remaining": "Continue remaining award backlog; recheck program pages for changes to cycle terms."
+    },
+    {
+      "id": "bwf-casi-award",
+      "status": "partial",
+      "report": "docs/data-sweep-awards-google-bwf-evidence-2026-10-10.json",
+      "findings": "Corrected CASI 2027 invitation-only deadline, research scope, eligibility, and current closed application status.",
+      "remaining": "Monitor for 2028 cycle announcement."
+    },
+    {
+      "id": "nsf-satc",
+      "status": "audited",
+      "findings": "Updated current availability, deadlines, eligibility, scope, and award limits from official NSF sources.",
+      "remaining": "Recheck when NSF publishes a new solicitation or updates program terms.",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nsf-ai-institutes",
+      "status": "audited",
+      "findings": "Updated current availability, deadlines, eligibility, scope, and award limits from official NSF sources.",
+      "remaining": "Recheck when NSF publishes a new solicitation or updates program terms.",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nsf-robotics-frr",
+      "status": "audited",
+      "findings": "Updated current availability, deadlines, eligibility, scope, and award limits from official NSF sources.",
+      "remaining": "Recheck when NSF publishes a new solicitation or updates program terms.",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nsf-shf",
+      "status": "audited",
+      "findings": "Updated current availability, deadlines, eligibility, scope, and award limits from official NSF sources.",
+      "remaining": "Recheck when NSF publishes a new solicitation or updates program terms.",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nsf-algorithmic-foundations",
+      "status": "audited",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json",
+      "findings": "Updated current solicitation name, scope, deadlines, amounts, and eligibility using official NSF sources.",
+      "remaining": "Recheck when NSF publishes or revises the solicitation."
+    },
+    {
+      "id": "nsf-cyber-physical-systems",
+      "status": "audited",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json",
+      "findings": "Updated current solicitation name, scope, deadlines, amounts, and eligibility using official NSF sources.",
+      "remaining": "Recheck when NSF publishes or revises the solicitation."
+    },
+    {
+      "id": "nsf-pose",
+      "status": "audited",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json",
+      "findings": "Updated current solicitation name, scope, deadlines, amounts, and eligibility using official NSF sources.",
+      "remaining": "Recheck when NSF publishes or revises the solicitation."
+    },
+    {
+      "id": "nsf-reu-sites",
+      "status": "audited",
+      "evidence": "data-sweep-awards-nsf-core-evidence-2026-10-10.json",
+      "findings": "Updated current solicitation name, scope, deadlines, amounts, and eligibility using official NSF sources.",
+      "remaining": "Recheck when NSF publishes or revises the solicitation."
+    },
+    {
+      "id": "darpa-i2o-open-baa",
+      "status": "pending"
+    },
+    {
+      "id": "darpa-disruptioneering",
+      "status": "pending"
+    },
+    {
+      "id": "darpa-mto-open-baa",
+      "status": "pending"
+    },
+    {
+      "id": "doe-ascr-open-foa",
+      "status": "pending"
+    },
+    {
+      "id": "doe-scidac",
+      "status": "pending"
+    },
+    {
+      "id": "doe-qis-centers",
+      "status": "pending"
+    },
+    {
+      "id": "doe-arpa-e-open",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-cybercorps-sfs",
+      "status": "pending"
+    },
+    {
+      "id": "doe-nnsa-ssgf",
+      "status": "pending"
+    },
+    {
+      "id": "doe-nnsa-lrgf",
+      "status": "pending"
+    },
+    {
+      "id": "msr-ada-lovelace-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "two-sigma-phd-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "jane-street-phd-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "ncwit-collegiate-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-senior-member",
+      "status": "pending"
+    },
+    {
+      "id": "acm-distinguished-member",
+      "status": "pending"
+    },
+    {
+      "id": "acm-fellow",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-senior-member",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-fellow",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-distinguished-contributor",
+      "status": "pending"
+    },
+    {
+      "id": "aaai-senior-member",
+      "status": "pending"
+    },
+    {
+      "id": "aaai-fellow",
+      "status": "pending"
+    },
+    {
+      "id": "siam-fellow",
+      "status": "pending"
+    },
+    {
+      "id": "informs-senior-member",
+      "status": "pending"
+    },
+    {
+      "id": "aaai-acm-sigai-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigcomm-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigsac-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigsoft-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigmod-jim-gray-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigplan-reynolds-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigmetrics-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-w-rising-star",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigsac-early-career",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigmetrics-rising-star",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigcomm-rising-star",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigops-mark-weiser",
+      "status": "pending"
+    },
+    {
+      "id": "acm-ieee-george-michael-hpc-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigkdd-doctoral-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigchi-doctoral-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-siggraph-doctoral-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigmobile-doctoral-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigarch-ieee-tcca-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "acm-prize-in-computing",
+      "status": "pending"
+    },
+    {
+      "id": "acm-grace-murray-hopper-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-athena-lecturer-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-kanellakis-theory-practice-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-karlstrom-educator-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-aaai-allen-newell-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-thacker-breakthrough-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-ieee-ken-kennedy-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-mccluskey-technical-achievement",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-mcdowell-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-harry-goode-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-mary-keller-education-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-tchpc-early-career-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-tcde-rising-star-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-tcse-rising-star-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigir-early-career-researcher",
+      "status": "pending"
+    },
+    {
+      "id": "acm-sigmobile-rockstar-award",
+      "status": "pending"
+    },
+    {
+      "id": "cci-tech-transfer-support-fund",
+      "status": "pending"
+    },
+    {
+      "id": "cci-cyber-as-a-service",
+      "status": "pending"
+    },
+    {
+      "id": "cci-catapult-ascend",
+      "status": "pending"
+    },
+    {
+      "id": "cci-experiential-learning",
+      "status": "pending"
+    },
+    {
+      "id": "cci-nova-critical-infrastructure",
+      "status": "pending"
+    },
+    {
+      "id": "vipc-higher-education-proof-of-concept",
+      "status": "pending"
+    },
+    {
+      "id": "nasa-space-grant-consortia",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-epscor-jurisdiction-opportunities",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-epscor-graduate-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-epscor-research-fellows",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-epscor-focused-collaborations",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-epscor-e-rise",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-epscor-e-core",
+      "status": "pending"
+    },
+    {
+      "id": "nasa-epscor-research-r3",
+      "status": "pending"
+    },
+    {
+      "id": "dod-depscor-research-collaboration-2026",
+      "status": "pending"
+    },
+    {
+      "id": "dod-depscor-capacity-building-2026",
+      "status": "pending"
+    },
+    {
+      "id": "doe-epscor-state-lab-partnerships",
+      "status": "pending"
+    },
+    {
+      "id": "usda-afri-fase-epscor",
+      "status": "pending"
+    },
+    {
+      "id": "nih-idea-inbre",
+      "status": "pending"
+    },
+    {
+      "id": "nih-idea-cobre",
+      "status": "pending"
+    },
+    {
+      "id": "dod-durip-2027",
+      "status": "pending"
+    },
+    {
+      "id": "dod-hbcu-tcu-equipment-2027",
+      "status": "pending"
+    },
+    {
+      "id": "google-faculty-research-awards",
+      "status": "pending"
+    },
+    {
+      "id": "yahoo-frep",
+      "status": "pending"
+    },
+    {
+      "id": "hp-labs-innovation-research-program",
+      "status": "pending"
+    },
+    {
+      "id": "microsoft-dissertation-grant",
+      "status": "pending"
+    },
+    {
+      "id": "facebook-emerging-scholar-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-turing-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-software-system-award",
+      "status": "pending"
+    },
+    {
+      "id": "acm-gordon-bell-prize",
+      "status": "pending"
+    },
+    {
+      "id": "acm-ieee-eckert-mauchly-award",
+      "status": "pending"
+    },
+    {
+      "id": "knuth-prize",
+      "status": "pending"
+    },
+    {
+      "id": "godel-prize",
+      "status": "pending"
+    },
+    {
+      "id": "imu-abacus-medal",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-john-von-neumann-medal",
+      "status": "pending"
+    },
+    {
+      "id": "google-academic-research-awards",
+      "status": "audited",
+      "report": "docs/data-sweep-awards-google-bwf-evidence-2026-10-10.json",
+      "findings": "Audited official 2026 call dates, eligible applicant category, current quantum-specific topics, and decision schedule."
+    },
+    {
+      "id": "microsoft-accelerating-foundation-models",
+      "status": "pending"
+    },
+    {
+      "id": "dod-muri",
+      "status": "pending"
+    },
+    {
+      "id": "nsf-mri",
+      "status": "pending"
+    },
+    {
+      "id": "sigbed-early-career",
+      "status": "pending"
+    },
+    {
+      "id": "sigbed-paul-caspi-dissertation",
+      "status": "pending"
+    },
+    {
+      "id": "sigcse-early-career",
+      "status": "pending"
+    },
+    {
+      "id": "cohere-labs-catalyst-grants",
+      "status": "pending"
+    },
+    {
+      "id": "guggenheim-fellowship-cs",
+      "status": "pending"
+    },
+    {
+      "id": "macarthur-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "lbnl-alvarez-hopper-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "llnl-lawrence-fellowship",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-fernbach-award",
+      "status": "pending"
+    },
+    {
+      "id": "ieee-cs-seymour-cray-award",
+      "status": "pending"
+    },
+    {
+      "id": "amazon-ai-phd-fellowship",
+      "status": "audited-new",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "nasa-early-stage-innovations",
+      "status": "audited-new",
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+    },
+    {
+      "id": "microsoft-research-fellowship",
+      "status": "audited-new",
+      "report": "docs/data-sweep-awards-microsoft-sloan-evidence-2026-10-10.json"
+    },
+    {
+      "id": "adobe-global-research-fellowship-historical",
+      "status": "audited-new",
+      "report": "docs/data-sweep-awards-industry-initial-evidence-2026-10-10.json",
+      "findings": "Added a clearly historical worldwide program record based on Adobe’s archived announcement."
+    },
+    {
+      "id": "google-cloud-research-credits",
+      "status": "audited-new",
+      "report": "docs/data-sweep-awards-google-bwf-evidence-2026-10-10.json",
+      "findings": "Added current official cloud-credit offer; $5,000 amount and eligible audiences supported, detailed conditions/deadline unknown."
+    },
+    {
+      "id": "anthropic-claude-scientists-plan",
+      "status": "audited-new",
+      "report": "docs/data-sweep-awards-openai-anthropic-evidence-2026-10-10.json",
+      "findings": "Added current scientist workspace access offer from Anthropic’s official announcement."
+    }
+  ],
+  "discovery": {
+    "jobs": "pending",
+    "conferences": "pending",
+    "awards": "pending"
+  },
+  "verification": {
+    "unit": "npm test: passed (16 test files)",
+    "typecheck": "passed",
+    "build": "passed; optional upstream DBLP aliases CSV parse warning; load continues without it",
+    "jobsAwardsBrowser": "15 passed",
+    "conferencesBrowser": "passed; see /tmp/cspicks-sweep-confs-e2e.log",
+    "diffCheck": "passed",
+    "projectSize": "passed"
+  },
+  "capture": {
+    "sessionId": 94786,
+    "manifest": "/tmp/cspicks-full-jobs-capture/manifest.json",
+    "note": "All33batches captured; each page still requires evidence review. Process completed successfully.",
+    "status": "completed",
+    "pages": 652
+  },
+  "discoveriesNote": "Discovery done within reviewed groups only; nationwide and remaining-program/series discovery pending.",
+  "captureCompletedAt": "2026-10-10",
+  "capturePages": 652,
+  "verificationBatch2": {
+    "unit": "npm test:16testfiles passed",
+    "typecheck": "passed",
+    "build": "passed; optional upstream DBLP aliases CSV parse warning, nonfatal",
+    "browser": "21 passed:Jobs,Awards,AwardsSubmit,CSConfs",
+    "diffCheck": "passed",
+    "projectSize": "passed"
+  },
+  "researchInterrupted": {
+    "visionRobotics": "Pending source review:CVPR2026abstractNov7;CVPR2027responseJan25–Feb1;ICRA2027paperSep16andcommittee;WACV2027notificationOct14bothcycles. Agent stopped on usage limit before durable report.",
+    "software": "Pending source review:ASE2026chairStefanWinter,responseMay25–27,initialnotificationJune18/finalrevisionsJuly29;ICSE2027responseSep23–25. Agent stopped before report.",
+    "databases": "Pending source review:ICDT2026missing,EDBTabsent,PODS2027Cycle2suspectduplicatedCycle1dates. Agent stopped before report."
+  },
+  "verificationBatch3": {
+    "unit": "npm test: 16 test files passed",
+    "browser": "npm run test:e2e: 68 passed",
+    "build": "Vite bundle completed; postbuild SEO generation failed because raw.githubusercontent.com DNS lookup returned EAI_AGAIN",
+    "diffCheck": "passed",
+    "projectSize": "passed"
+  },
+  "captureAdjacentUCSD": {
+    "sessionId": 53991,
+    "status": "completed",
+    "directory": "/tmp/ucsd-adjacent-candidates/",
+    "count": 19,
+    "note": "All captured details require evidence review before updates."
+  },
+  "verificationBatch4": {
+    "unit": "16 test files passed",
+    "typecheck": "passed",
+    "build": "passed; optional upstream DBLP aliases CSV parse warning, nonfatal",
+    "browser": "6 CS Confs tests passed",
+    "diffCheck": "passed",
+    "projectSize": "passed"
+  },
+  "captureReview": {
+    "source": "docs/data-sweep-jobs-2026-10-10.md describes the 652 captured official URLs as awaiting evidence review",
+    "capturePages": 652,
+    "triagedThroughPage": 652,
+    "lastUpdated": "2026-10-11",
+    "stillNeedsReview": 0,
+    "triagedPageRanges": [
+      {
+        "first": 61,
+        "last": 80,
+        "report": "docs/data-sweep-jobs-capture-review-batch-04-evidence-2026-10-11.json"
+      },
+      {
+        "first": 121,
+        "last": 240,
+        "report": "docs/data-sweep-jobs-capture-review-pages-121-240-evidence-2026-10-11.json"
+      },
+      {
+        "first": 241,
+        "last": 400,
+        "report": "docs/data-sweep-jobs-capture-triage-pages-241-400-evidence-2026-10-11.json"
+      },
+      {
+        "first": 401,
+        "last": 652,
+        "report": "docs/data-sweep-jobs-existing-record-corrections-2026-10-11.json"
+      }
+    ],
+    "existingPostingComparison": {
+      "postingReferences": 244,
+      "exactUrlMatches": 240,
+      "canonicalUrlCorrections": 4,
+      "materiallyCorrectedRecords": 14,
+      "report": "docs/data-sweep-jobs-existing-record-corrections-2026-10-11.json",
+      "visaAudit": "Explicit sponsorship fields checked across direct requisitions: two false yes values corrected to no; two uncertain values normalized to case-by-case; no other conflicts found."
+    },
+    "limitations": "All captured pages received first-pass keyword triage; direct posting references were compared with existing job records. This does not complete the 137 school rows still marked partial."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "school": "Texas State University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://jobs.hr.txstate.edu/postings/57301",
+      "finding": "Official posting 2026142NTL remains open until May 31, 2027 (review date June 1, 2027); temporary full/part-time CS teaching pool for possible fall 2026, spring 2027, summer 2027 needs; master’s minimum, PhD preferred. Explicitly says it does not mean a current need exists."
+    },
+    {
+      "url": "https://cs.txst.edu/employment/faculty-jobs.html",
+      "finding": "Department page also lists a CS Postdoctoral Scholars pool and part-time faculty pool as open. Postdoc pool page is general; no definite vacancy."
+    }
+  ],
+  "findings": "Recorded the bounded fiscal-year nontenure CS faculty pool and refreshed the existing postdoctoral pool. Do not represent either pool as a confirmed vacancy.",
+  "recordUpdates": "Added CS Nontenure Faculty Pool with May 31, 2027 close date and caveat that it is only a candidate pool; refreshed postdoc pool lastSeenAt."
+}

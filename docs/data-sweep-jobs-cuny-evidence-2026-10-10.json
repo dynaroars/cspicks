@@ -1,0 +1,37 @@
+{
+  "school": "CUNY",
+  "checkedAt": "2026-10-10",
+  "scope": "CUNY-wide careers portal plus Graduate Center CS, CCNY, Baruch, CSI, and John Jay official pages. This pass is partial: CUNYfirst application detail pages did not render in the available browser, and many campus pages remain unchecked.",
+  "checkedSources": [
+    {
+      "url": "https://www.gc.cuny.edu/computer-science",
+      "finding": "Graduate Center Computer Science page returns HTTP 403."
+    },
+    {
+      "url": "https://cuny.jobs/locations/new-york-ny/jobs/",
+      "finding": "CUNY-wide portal currently lists an Assistant Professor in Mathematics and Computer Science at John Jay; the page also exposes 163 New York City openings across campus and job categories."
+    },
+    {
+      "url": "https://cuny.jobs/locations/new-york/campus/city-college-of-new-york/job-category/faculty/jobs/",
+      "finding": "Official faculty category lists Assistant Professor (Tenure track) - Computer Science at CCNY. Search indexing identifies Job Opening ID 32906, two tenure-track positions, all CS areas, and December 7, 2026 closing date; the application details page itself could not be opened in the available browser."
+    },
+    {
+      "url": "https://hr.baruch.cuny.edu/careers/",
+      "finding": "Official Baruch HR page lists Assistant Professor-Information Systems, Job ID 32329, open until filled, review began July 1, 2026. Search indexing identifies cybersecurity preference and teaching in cybersecurity, information assurance, systems analysis, and programming; posting-level official details could not be opened directly."
+    },
+    {
+      "url": "https://www.jjay.cuny.edu/academics/departments/mathematics-computer-science",
+      "finding": "Official John Jay department page confirms the unit offers Computer Science and Information Security and Digital Forensics/Cybersecurity programs. The official CUNY portal lists an Assistant Professor vacancy (Job ID 32823); indexed posting details say CS PhD required, cybersecurity/AI focus, closing November 15, 2026, but the official application detail page did not render."
+    },
+    {
+      "url": "https://www.csi.cuny.edu/faculty-staff/human-resources/recruitment/jobs-csi",
+      "finding": "Official CSI careers page lists an Adjunct Lecturer - Computer Science PDF. That PDF explicitly describes teaching for academic year 2024-25 while saying open until filled; it was not treated as confirmed current because its term is historical. The CSI AI Instructor posting is a short course on AI literacy for older adults, not a computing faculty/research role."
+    },
+    {
+      "url": "https://cuny.jobs/",
+      "finding": "Official CUNY system-wide job portal surfaced campus postings, but its application detail rendering was unavailable."
+    }
+  ],
+  "decision": "No new public/jobs.json records added in this pass: active CS-targeted candidates surfaced, but their posting-level official details could not be verified from readable official posting pages. Follow up by searching CUNYfirst using the listed job-opening IDs and checking additional CUNY campuses.",
+  "followUp": "2026-10-17"
+}

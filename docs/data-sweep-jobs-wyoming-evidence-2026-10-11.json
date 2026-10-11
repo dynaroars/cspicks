@@ -1,0 +1,16 @@
+{
+  "school": "University of Wyoming",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.uwyo.edu/hr/prospective/index.html",
+      "finding": "Official HR page routes applicants to current university faculty and academic listings."
+    },
+    {
+      "url": "https://www.uwyo.edu/soc/index.html",
+      "finding": "Official School of Computing page reviewed; it distinguishes campus-wide computing collaboration from Computer Science/Computer Engineering units."
+    }
+  ],
+  "findings": "Current university careers source identified, but current CS and adjacent listings were not fully resolved in the dynamic portal; partial.",
+  "recordUpdates": "Additional official posting details remain to be checked before record changes."
+}

@@ -1,0 +1,20 @@
+{
+  "school": "University of Utah",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.cs.utah.edu/people/faculty/hiring/",
+      "finding": "The official CS hiring page still displays a Lecturing Assistant Professor and a tenure-track Assistant Professor search."
+    },
+    {
+      "url": "https://utah.peopleadmin.com/postings/188551",
+      "finding": "Official Lecturer requisition PRN01402CF states close date April 1, 2026 and Open Until Filled: No. The Fall 2026 start date is past."
+    },
+    {
+      "url": "https://utah.peopleadmin.com/postings/190584",
+      "finding": "Official tenure-track requisition PRN01429CF states close date April 1, 2026 and Open Until Filled: No."
+    }
+  ],
+  "findings": "Both searches still shown on the department index are closed in the official PeopleAdmin details. No new records added; no current CS opening verified.",
+  "recordUpdates": "None; no existing Utah job records."
+}

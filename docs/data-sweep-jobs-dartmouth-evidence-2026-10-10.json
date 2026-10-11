@@ -1,0 +1,19 @@
+{
+  "school": "Dartmouth College",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://engineering.dartmouth.edu/about/employment/ihotst-faculty",
+      "finding": "Current Tanner Chair tenure-line posting explicitly lists computer science as an eligible PhD and covers computational/intelligent sensing and integrated systems for healthcare; full consideration Jan 1, 2027, rolling review thereafter."
+    },
+    {
+      "url": "https://fas.dartmouth.edu/about/faculty-recruitment",
+      "finding": "Official faculty recruitment board link reviewed; no current CS faculty opening discovered there."
+    },
+    {
+      "url": "https://web.cs.dartmouth.edu/",
+      "finding": "CS department page and prior current news scan show no current CS-specific faculty search."
+    }
+  ],
+  "recordUpdates": "Added Tanner Chair in Next-Generation Sensing and Integrated Systems for Healthcare, a Thayer tenure-line search that explicitly accepts a CS PhD and names computational/intelligent sensing. Full-consideration date Jan 1, 2027; review continues until filled. No current CS department search found."
+}

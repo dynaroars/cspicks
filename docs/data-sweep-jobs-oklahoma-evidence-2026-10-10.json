@@ -1,0 +1,16 @@
+{
+  "school": "University of Oklahoma",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://www.ou.edu/coe/about/hiring",
+      "finding": "Official Gallogly College page, updated Aug 4, lists an open-rank Polytechnic applied-AI teaching position with target start Aug 2026 or Jan 2027 and a current School of ECE tenure-track HPC assistant professor opening. School of CS section is blank."
+    },
+    {
+      "url": "https://apply.interfolio.com/189883",
+      "finding": "Linked official Interfolio application page did not render details on current check; current status, eligibility specifics, and deadline could not be confirmed independently."
+    }
+  ],
+  "findings": "Refreshed the previously recorded Polytechnic applied-AI listing from the current College of Engineering index. The same index identifies an ECE HPC TT role potentially suitable for CS PhDs but application details were inaccessible, so no separate new record added.",
+  "recordUpdates": "Refreshed lastSeenAt on existing Applied AI record; ECE HPC role left for follow-up due to unavailable detail page."
+}

@@ -1,0 +1,10 @@
+{
+  "school":"Towson University",
+  "checkedAt":"2026-10-11",
+  "checkedSources":[
+    {"url":"https://www.towson.edu/fcsm/departments/computerinfosci/facultystaff/newpositions.html","finding":"The department page says there are no open tenure-track positions. The adjunct pool describes specific needs for Spring 2023; it is stale and not counted as a current vacancy."},
+    {"url":"https://www.towson.edu/provost/prospective/openpositions.html","finding":"Current faculty vacancies page lists no CS or computing faculty posting."}
+  ],
+  "findings":"No current CS faculty vacancy verified; the stale adjunct pool was excluded.",
+  "recordUpdates":"No job records added."
+}

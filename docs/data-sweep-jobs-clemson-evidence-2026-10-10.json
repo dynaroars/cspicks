@@ -1,0 +1,19 @@
+{
+  "school": "Clemson University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://www.clemson.edu/human-resources/careers/search-jobs/",
+      "finding": "Official hiring page links to faculty search."
+    },
+    {
+      "url": "https://www.clemson.edu/human-resources/careers/search-jobs/faculty-positions.html",
+      "finding": "Faculty positions page renders only client-side placeholders (currently {{filteredPositions.length}} and {{position.title}}), so current listings cannot be read through this interface."
+    },
+    {
+      "url": "https://apply.interfolio.com/193821",
+      "finding": "Existing dataset record is the ECE open-rank faculty posting from prior verification; current active status could not be independently confirmed today."
+    }
+  ],
+  "recordUpdates": "No record change. Marked partial because the live faculty search and CS/Computing adjacent units still need a readable current review."
+}

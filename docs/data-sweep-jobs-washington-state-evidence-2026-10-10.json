@@ -1,0 +1,15 @@
+{
+  "school": "Washington State University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://school.eecs.wsu.edu/faculty-openings/",
+      "finding": "Official EECS faculty openings page lists CS tenure-track search with Jan 14, 2026 closing date and EE career-track search with Jan 1, 2026 closing date; both deadlines passed."
+    },
+    {
+      "url": "https://wsu.wd5.myworkdayjobs.com/en-US/WSU_Jobs",
+      "finding": "Previously reviewed Oct 8; adjacent-unit Workday pass found no current CS-targeted role beyond reviewed postings."
+    }
+  ],
+  "recordUpdates": "No active job added. Prior Oct 8 adjacent-unit Workday scan remains current for this ledger pass."
+}

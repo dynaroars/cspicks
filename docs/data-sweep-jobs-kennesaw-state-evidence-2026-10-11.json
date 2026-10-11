@@ -1,0 +1,16 @@
+{
+  "school": "Kennesaw State University",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
+      "finding": "Official CCSE jobs page currently links a CS department chair search, CS postdoctoral researcher, Data Science lecturer, open-rank Data Science professor, and part-time data science, software engineering, and game development faculty. Exact requisitions/details remain to be reviewed."
+    },
+    {
+      "url": "https://campus.kennesaw.edu/faculty-staff/academic-affairs/faculty-affairs/faculty-openings.php",
+      "finding": "Official university faculty openings entry point."
+    }
+  ],
+  "findings": "Multiple computing college openings confirmed; full requisition details and record updates remain, so partial.",
+  "recordUpdates": "Additional official posting details remain to be checked before record changes."
+}

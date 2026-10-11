@@ -1,0 +1,16 @@
+{
+  "school": "UNC - Greensboro",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://compsci.uncg.edu/tenure-track-assistant-professor-position-available-3/",
+      "finding": "Official CS department announcement posted Sep. 18, 2026: tenure-track Assistant Professor, systems/theory preferred; other CS areas considered. Links to Spartan Talent requisition 36021."
+    },
+    {
+      "url": "https://spartantalent.uncg.edu/postings/36021",
+      "finding": "Official application page for the current CS tenure-track search."
+    }
+  ],
+  "findings": "Current tenure-track CS search confirmed; existing dataset record re-confirmed against official department announcement.",
+  "recordUpdates": "No new job record identified in the reviewed sources."
+}

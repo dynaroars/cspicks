@@ -1,0 +1,19 @@
+{
+  "school": "NJIT",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://cs.njit.edu/open-faculty-positions",
+      "finding": "Department page continues to describe a Fall 2026 cybersecurity-priority tenure-track faculty search and links AcademicJobsOnline 30654."
+    },
+    {
+      "url": "https://academicjobsonline.org/ajo/jobs/30654",
+      "finding": "Official application listing states listing/deadline passed; no new applications accepted. The listing was until May 15, 2026. Not included as active."
+    },
+    {
+      "url": "https://ece.njit.edu/faculty-positions",
+      "finding": "Prior Oct 8 scan found only an inaccessible quantum computing and engineering lead; adjacent computing units remain to scan."
+    }
+  ],
+  "recordUpdates": "No active posting added. The current CS page is stale relative to the closed application portal."
+}

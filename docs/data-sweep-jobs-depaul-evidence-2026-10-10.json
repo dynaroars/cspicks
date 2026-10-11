@@ -1,0 +1,15 @@
+{
+  "school": "DePaul University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://academics.depaul.edu/faculty-jobs/Pages/part-time.aspx",
+      "finding": "Official part-time role index lists open adjunct pools for AI (95121), CS (47757), cybersecurity (47758), data science (47773), database (47760), game programming (47765), and HCI (47768); these are separate School of Computing roles."
+    },
+    {
+      "url": "https://academics.depaul.edu/faculty-jobs/Pages/full-time.aspx",
+      "finding": "Official full-time faculty board reviewed; no CS-specific full-time role confirmed in the visible listing."
+    }
+  ],
+  "recordUpdates": "Added seven current part-time School of Computing adjunct applicant pools: AI, Computer Science, Cybersecurity, Data Science, Database, Game Programming, and HCI. Individual position-detail URLs identify distinct job IDs; detail pages expose generic pool instructions only."
+}

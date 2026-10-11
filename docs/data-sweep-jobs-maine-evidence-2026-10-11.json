@@ -1,0 +1,16 @@
+{
+  "school": "University of Maine",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://umaine.edu/hr/career-opportunities/",
+      "finding": "Official HR career opportunities source."
+    },
+    {
+      "url": "https://umaine.edu/cs/",
+      "finding": "Official School of Computing and Information Science page."
+    }
+  ],
+  "findings": "Prior portal search found part-time CS/CIS adjunct roles and no full-time faculty postings; current requisition state could not be fully rechecked. Partial.",
+  "recordUpdates": "No job records changed pending full posting verification."
+}

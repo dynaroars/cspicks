@@ -1,0 +1,16 @@
+{
+  "school": "OHSU",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.ohsu.edu/human-resources/faculty-and-physician-jobs-ohsu",
+      "finding": "Official OHSU faculty careers page links to the live faculty jobs portal."
+    },
+    {
+      "url": "https://careersat-ohsu.icims.com/jobs/search",
+      "finding": "Official OHSU jobs portal; results are JavaScript-driven and no current CS-specific faculty posting was surfaced."
+    }
+  ],
+  "findings": "Current official careers sources checked; JS-driven portal did not expose a complete current CS-relevant listing. Prior DICE posting 38655 returned 410 Gone. Partial.",
+  "recordUpdates": "No job records changed pending full posting verification."
+}

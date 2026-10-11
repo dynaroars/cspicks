@@ -1,0 +1,20 @@
+{
+  "school": "Kansas State University",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.cs.ksu.edu/about/employment/",
+      "finding": "Official CS employment page links to faculty and staff openings."
+    },
+    {
+      "url": "https://careers.k-state.edu/jobs/assistant-professor-manhattan-kansas-united-states-1522e866-f8f7-4bed-add5-2f303c26b35a",
+      "finding": "Req 521518, tenure-track CS Assistant Professor in cybersecurity; closes Nov 7, 2026; CS/Computer Engineering or related PhD; sponsorship eligible."
+    },
+    {
+      "url": "https://careers.k-state.edu/Featured-Jobs",
+      "finding": "Current featured jobs list includes the CS Assistant Professor."
+    }
+  ],
+  "findings": "Official CS employment page and HR posting confirm active tenure-track Assistant Professor in Cybersecurity, Req 521518, closing Nov 7, 2026; refreshed existing record. No additional computing faculty roles surfaced in the current faculty listings.",
+  "recordUpdates": "Refreshed ksu-cs-cybersecurity-assistant-2026."
+}

@@ -1,0 +1,16 @@
+{
+  "school": "University of Hawaii at Manoa",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.governmentjobs.com/jobs/5425207-0/assistant-associate-full-professor-0084022",
+      "finding": "Official State/GovernmentJobs posting 2026-01615 / position 0084022 remains open; tenure-track open-rank Computer Engineering; applications review from Sep 28 until filled; Jan 1, 2027 start or as soon as possible."
+    },
+    {
+      "url": "https://www.ics.hawaii.edu/jobs/",
+      "finding": "ICS page still shows only the Software Engineering TT call for Aug 2025 with review beginning Nov 2024 (expired) plus a general instructor-pool contact."
+    }
+  ],
+  "findings": "Refreshed the ECE computer engineering TT listing with canonical official application page; CS department’s own software-engineering TT posting is clearly expired.",
+  "recordUpdates": "Updated existing ECE job record canonical URL, verification date, review date, start date, and summary."
+}

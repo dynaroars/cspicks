@@ -1,0 +1,20 @@
+{
+  "school": "TTI Chicago",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.ttic.edu/faculty-hiring/",
+      "finding": "Active broad TT assistant professor, tenured senior, and multiple three-year RAP positions in CS; RAP screening begins Oct 30; full review not guaranteed after Dec 1."
+    },
+    {
+      "url": "https://faculty-application.ttic.edu/apply?track=faculty",
+      "finding": "Official TT application details and research-area list; full review not guaranteed after Dec 1."
+    },
+    {
+      "url": "https://www.ttic.edu/visiting-senior-hiring/",
+      "finding": "Visiting and senior faculty opportunities accept applications any time; before Jan 1 guaranteed full consideration."
+    }
+  ],
+  "findings": "Current TTIC faculty hiring page advertises broad tenure-track Assistant Professor and multiple Research Assistant Professor openings, plus visiting and senior faculty recruiting. TT TT review continues until filled; RAP screening starts Oct 30, 2026; neither guarantees full consideration after Dec 1. Added TT and RAP records.",
+  "recordUpdates": "Refreshed existing ttic-tenure-track-2026 to consolidate the listed tenure-track, RAP, visiting, and senior faculty tracks."
+}

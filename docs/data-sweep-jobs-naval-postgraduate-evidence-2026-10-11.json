@@ -1,0 +1,20 @@
+{
+  "school": "Naval Postgraduate School",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://nps.edu/web/cs/openings",
+      "finding": "The official CS openings page says the department seeks two Assistant/Associate Professors and a Lecturer/Senior Lecturer, and describes the positions as currently open."
+    },
+    {
+      "url": "https://nps.edu/web/is",
+      "finding": "Information Sciences was reviewed in the prior adjacent-unit pass; no openings page or qualifying vacancy was found."
+    },
+    {
+      "url": "https://nps.edu/web/ece",
+      "finding": "Electrical and Computer Engineering was reviewed in the prior adjacent-unit pass; a search-lead electromagnetics role required an EE PhD and was excluded."
+    }
+  ],
+  "findings": "The two existing CS faculty records are still supported by the current official department page. The Lecturer/Senior Lecturer opening has no independently accessible detail page in the current source, so no separate record was created.",
+  "recordUpdates": "Refreshed lastSeenAt to 2026-10-11 for nps-asst-assoc-prof-cs-2026 and nps-lecturer-cs-2026."
+}

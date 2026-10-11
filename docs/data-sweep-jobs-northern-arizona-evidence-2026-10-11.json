@@ -1,0 +1,20 @@
+{
+  "school": "Northern Arizona University",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://careers.nau.edu/jobs/postdoctoral-scholar-electrical-engineering-for-uav-sensors-flagstaff-arizona-united-states",
+      "finding": "Official NAU posting 609679, closes Oct 14, 2026. Embedded electronics, sensor fusion, PCB, FPGA/VHDL and embedded SW; PhD in EE, Computer Engineering/Science, or related; U.S. citizens and permanent residents only; no visa support."
+    },
+    {
+      "url": "https://careers.nau.edu/jobs/postdoctoral-scholar-robotic-radio-source-localization-flagstaff-arizona-united-states",
+      "finding": "Official NAU posting 609674, closes Oct 14, 2026. RF source localization/path planning algorithms and UAV software; preferred Python/C++, robotics, optimization, estimation. Minimum PhD in EE, ME, Robotics or closely related (CS not explicit); U.S. citizen/permanent-resident-only."
+    },
+    {
+      "url": "https://careers.nau.edu/jobs/search",
+      "finding": "Current official NAU job board lists only three faculty roles, none in CS, and five postdoctoral scholars at Radiant Center. Other visible postdocs are carbon science or lidar collection and were not determined to be CS-targeted."
+    }
+  ],
+  "findings": "Added two current Radiant Center UAV postdocs with explicit computing eligibility on one and a related-field qualification on the other. Neither is a CS department vacancy; both offer substantial embedded/software/algorithm work. The other postdocs are not clearly CS-targeted.",
+  "recordUpdates": "Added two Radiant Center postdoctoral roles closing Oct 14, with citizenship and PhD-field qualifications retained."
+}

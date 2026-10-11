@@ -1,0 +1,20 @@
+{
+  "school": "Boston College",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.bc.edu/bc-web/schools/morrissey/departments/computer-science/about/job-openings.html",
+      "finding": "Current CS department page lists student teaching/lab assistants and student jobs, no faculty opening."
+    },
+    {
+      "url": "https://www.bc.edu/bc-web/schools/morrissey/about/open-positions.html",
+      "finding": "Morrissey faculty openings are listed on department sites; CS department is linked."
+    },
+    {
+      "url": "https://www.bc.edu/bc-web/academics/sites/office-of-provost/faculty-gateway.html",
+      "finding": "Official BC faculty gateway reviewed."
+    }
+  ],
+  "findings": "Current Computer Science department Job Openings page contains student teaching/lab assistant information only; no faculty call is listed. The Morrissey College open-positions page directs faculty applicants to department pages. No current CS faculty posting surfaced in this review.",
+  "recordUpdates": "No job records added or removed."
+}

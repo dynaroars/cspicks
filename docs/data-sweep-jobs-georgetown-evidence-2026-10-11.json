@@ -1,0 +1,10 @@
+{
+  "school":"Georgetown University",
+  "checkedAt":"2026-10-11",
+  "checkedSources":[
+    {"url":"https://cs.georgetown.edu/positions/","finding":"Department currently lists one position, the Bertrand Chair in AI, dated Nov 14, 2025; no new 2026–27 CS position appears."},
+    {"url":"https://careers.georgetown.edu/","finding":"University portal reviewed; current CS department Program Administrator is an administrative staff role, not a faculty/postdoc position."}
+  ],
+  "findings":"No new qualifying current-cycle CS faculty or postdoctoral position found.",
+  "recordUpdates":"Refreshed lastSeenAt for georgetown-bertrand-chair-ai-2026."
+}

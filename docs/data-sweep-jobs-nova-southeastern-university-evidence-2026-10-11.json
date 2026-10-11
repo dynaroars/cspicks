@@ -1,0 +1,20 @@
+{
+  "school": "Nova Southeastern University",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://nsucareers.nova.edu/jobs/search/faculty-jobs",
+      "finding": "Faculty listings show an Engineering Adjunct pool and a Natural Sciences, Computing, Engineering, Oceanography category; current computing entries need full inspection."
+    },
+    {
+      "url": "https://nsucareers.nova.edu/jobs/search",
+      "finding": "Official NSU careers search portal."
+    },
+    {
+      "url": "https://www.nova.edu/resources/employment.html",
+      "finding": "Official NSU employment page directs candidates to the careers portal."
+    }
+  ],
+  "findings": "The official faculty portal shows an Engineering Adjunct pool and active Computing/Engineering faculty category listings, but the current category was not exhaustively resolved to determine whether any separate CS-eligible position is open. The Engineering Adjunct entry appears to be a standing Halmos College teaching pool; further review is needed.",
+  "recordUpdates": "No job records added or removed."
+}
