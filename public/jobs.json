@@ -3042,7 +3042,7 @@
   {
     "source": "crawl",
     "verified": true,
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-10",
     "id": "mit-eecs-tenure-track-2026",
     "school": "Massachusetts Inst. of Technology",
     "department": "Department of Electrical Engineering and Computer Science",
@@ -3057,8 +3057,8 @@
     "city": "Cambridge",
     "url": "https://faculty-searches.mit.edu/eecs",
     "visaSponsorship": "not-stated",
-    "summary": "Tenure-track positions at the assistant level (untenured associate or senior in special cases) in any area of electrical engineering, computer science, and AI and decision making. Reference letters are due Dec 1, 2026; an application deadline is not stated on the page.",
-    "deadline": null,
+    "summary": "Tenure-track EECS positions starting July 1, 2027 (or by mutual agreement thereafter), open to any area of electrical engineering, computer science, and AI and decision making. Complete applications, including at least three recommendation letters, are due December 1, 2026.",
+    "deadline": "2026-12-01",
     "rolling": null,
     "startDate": "2027-07-01"
   },
@@ -6149,6 +6149,45 @@
     "url": "https://robotics.umich.edu/about/jobs/",
     "visaSponsorship": "not-stated",
     "summary": "Department-chair search for a tenured full professor with a distinguished robotics or related-discipline record, academic leadership, research, teaching, and service. Applications are due November 15, 2026.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "mit-tayebati-postdoc-2027",
+    "school": "Massachusetts Inst. of Technology",
+    "department": "MIT Schwarzman College of Computing",
+    "title": "Tayebati Postdoctoral Fellowship Program (2027–2028 cohort)",
+    "track": "postdoc",
+    "areas": [
+      "ai"
+    ],
+    "state": "MA",
+    "city": "Cambridge",
+    "deadline": "2026-11-01",
+    "lastSeenAt": "2026-10-10",
+    "url": "https://computing.mit.edu/research/postdoctoral-fellows-programs/tayebati-postdoctoral-fellowship-program/",
+    "visaSponsorship": "no",
+    "summary": "Two-year postdoctoral fellowship combining AI with biology, brain and cognitive sciences, chemistry, materials science, music, or physics; stipend is $73,308–$90,000 annually plus benefits. Applicants must receive the PhD between January 1, 2024 and August 31, 2027 and start by September 1, 2027; MIT does not sponsor visas.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "mit-meteor-postdoc-2026",
+    "school": "Massachusetts Inst. of Technology",
+    "department": "MIT Schwarzman College of Computing / CSAIL",
+    "title": "METEOR Postdoctoral Fellowship Program",
+    "track": "postdoc",
+    "areas": [
+      "ai",
+      "chi"
+    ],
+    "state": "MA",
+    "city": "Cambridge",
+    "deadline": "2026-12-01",
+    "lastSeenAt": "2026-10-10",
+    "url": "https://computing.mit.edu/research/postdoctoral-fellows-programs/meteor-program/",
+    "visaSponsorship": "no",
+    "summary": "One-year postdoctoral appointment, potentially renewable for a second year, supporting computer science and AI research in areas including agentic AI, physical AI, trustworthy computing, and human–AI systems; stipend is $73,308–$90,000 annually plus benefits. Applicants need a PhD from a U.S. institution by the program start; MIT does not sponsor visas.",
     "source": "crawl",
     "verified": true
   }

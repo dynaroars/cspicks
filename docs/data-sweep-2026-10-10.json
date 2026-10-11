@@ -28,7 +28,10 @@
     },
     {
       "school": "Massachusetts Inst. of Technology",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-mit-evidence-2026-10-10.json",
+      "findings": "Confirmed the live EECS faculty call; added current Tayebati and METEOR postdoctoral calls; checked closed College searches and SERC postdoc page.",
+      "remaining": "Recheck when MIT posts new openings or updates these calls."
     },
     {
       "school": "Northeastern University",

@@ -202,27 +202,39 @@
     "facultyCount": 159,
     "jobsUrl": "https://www.eecs.mit.edu/career-opportunities-at-eecs/",
     "state": "MA",
-    "lastCheckedAt": "2026-10-08T14:50:26Z",
+    "lastCheckedAt": "2026-10-10T12:00:00Z",
     "outcome": "complete",
-    "summary": "EECS career-opportunities page shows no open CS faculty searches yet (page renders only a short stub). Non-CS units (2026-10-08): faculty-searches.mit.edu/eecs now carries a live EECS tenure-track search for July 2027 starts (any area of EE, CS, AI and decision making); the earlier crawl saw no EECS search, so it is added here. College of Computing core and shared searches are listed as closed.",
+    "summary": "Confirmed live EECS tenure-track search in the central MIT faculty-search portal and closed Schwarzman College core/shared searches. Added active Tayebati (2027–28) and METEOR postdoctoral calls from official program pages. Department career page still displays an expired 2025 deadline/2026 start, so the current central portal was used for the EECS opening. Checked SERC postdoc page, which lists current fellows rather than an open search.",
     "checkedUrls": [
       "https://www.eecs.mit.edu/career-opportunities-at-eecs/",
-      "https://faculty-searches.mit.edu/eecs",
+      "https://faculty-searches.mit.edu/eecs/",
       "https://faculty-searches.mit.edu/",
-      "https://computing.mit.edu/faculty/faculty-openings"
+      "https://computing.mit.edu/faculty/faculty-openings/",
+      "https://computing.mit.edu/research/postdoctoral-fellows-programs/",
+      "https://computing.mit.edu/research/postdoctoral-fellows-programs/tayebati-postdoctoral-fellowship-program/",
+      "https://computing.mit.edu/research/postdoctoral-fellows-programs/meteor-program/",
+      "https://computing.mit.edu/cross-cutting/social-and-ethical-responsibilities-of-computing/serc-postdocs/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Schwarzman College of Computing faculty openings",
-        "url": "https://computing.mit.edu/faculty/faculty-openings"
+        "name": "MIT Schwarzman College of Computing faculty openings",
+        "url": "https://computing.mit.edu/faculty/faculty-openings/"
       },
       {
         "name": "MIT Faculty Searches (School of Engineering / College of Computing)",
         "url": "https://faculty-searches.mit.edu/"
+      },
+      {
+        "name": "MIT Schwarzman College of Computing postdoctoral fellows",
+        "url": "https://computing.mit.edu/research/postdoctoral-fellows-programs/"
+      },
+      {
+        "name": "Social and Ethical Responsibilities of Computing postdocs",
+        "url": "https://computing.mit.edu/cross-cutting/social-and-ethical-responsibilities-of-computing/serc-postdocs/"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T18:00:00Z"
+    "relatedCheckedAt": "2026-10-10T12:00:00Z"
   },
   {
     "school": "Northeastern University",
