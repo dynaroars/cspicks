@@ -11,7 +11,7 @@ test('roster stats count active faculty, universities, US universities, and coun
   const schools = { x: { name: 'x', country: 'us' }, y: { name: 'y', country: 'us' }, z: { name: 'z', country: 'uk' } };
   const [faculty, universities, countries] = summarizeRoster({ professors, schools });
   assert.equal(faculty.value, '2');
-  assert.equal(faculty.note, 'with papers in CSRankings venues (of 3 roster names)');
+  assert.equal(faculty.note, 'with papers in tracked venues');
   assert.equal(universities.value, '3');
   assert.equal(universities.note, '2 in the US');
   assert.equal(countries.value, '2');

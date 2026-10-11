@@ -62,7 +62,8 @@ test('stats page lists what CS Picks tracks and recent repository activity', asy
   await expect(page.locator('.health-link')).toHaveAttribute('aria-current', 'page');
 
   await expect(page.locator('#stats-roster')).toContainText('Faculty2');
-  await expect(page.locator('#stats-roster')).toContainText('of 3 roster names');
+  await expect(page.locator('#stats-roster')).toContainText('with papers in tracked venues');
+  await expect(page.locator('main')).not.toContainText('CSRankings');
   await expect(page.locator('#stats-roster')).toContainText('1 in the US');
   await expect(page.locator('#stats-checks')).toHaveCount(0);
   // Every section header links to its page.

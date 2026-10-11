@@ -18,19 +18,14 @@ const percent = (part: number, whole: number) => whole ? `${Math.round(part / wh
 export function summarizeRoster(data: RawData): Stat[] {
   const professors = Object.values(data.professors);
   const schools = Object.values(data.schools);
-  const active = professors.filter(prof => prof.pubs.length > 0);
-  // CSRankings lists alternate spellings of a person as extra rows sharing that person's homepage and affiliation.
-  const person = (prof: { homepage?: string, affiliation: string }) => `${prof.homepage}|${prof.affiliation}`;
-  const activeKeys = new Set(active.filter(prof => prof.homepage).map(person));
-  const alternates = professors.filter(prof => prof.pubs.length === 0 && prof.homepage && activeKeys.has(person(prof))).length;
+  const active = professors.filter(prof => prof.pubs.length > 0).length;
   const countries = new Set(schools.map(school => school.country).filter(Boolean)).size;
   const us = schools.filter(school => school.country === 'us').length;
   return [
-    { label: 'Faculty', value: count(active.length), note: `with papers in CSRankings venues (of ${count(professors.length)} roster names)`,
-      help: `CSRankings' roster has ${count(professors.length)} name rows: ${count(alternates)} are alternate spellings of someone already listed, and the rest without papers in CSRankings-counted venues are kept only for the CORE A/A* option.` },
-    { label: 'Universities', value: count(schools.length), note: `${count(us)} in the US`, help: 'Institutions listed in CSRankings.' },
+    { label: 'Faculty', value: count(active), note: 'with papers in tracked venues', help: 'Faculty with at least one paper in a tracked conference. Alternate name spellings and people without tracked papers are not counted.' },
+    { label: 'Universities', value: count(schools.length), note: `${count(us)} in the US` },
     { label: 'Countries', value: count(countries), help: 'Countries with at least one listed institution.' },
-    { label: 'Research areas', value: count(numAreas), help: 'CSRankings top-level research areas.' }
+    { label: 'Research areas', value: count(numAreas) }
   ];
 }
 
