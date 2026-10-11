@@ -1754,7 +1754,10 @@
     {
       "id": "google-research-scholar",
       "status": "partial",
-      "evidence": "data-sweep-awards-evidence-2026-10-10.json"
+      "evidence": "data-sweep-awards-evidence-2026-10-10.json",
+      "report": "docs/data-sweep-awards-google-bwf-evidence-2026-10-10.json",
+      "findings": "Updated latest known deadline and current-cycle discovery from official program and recipients pages.",
+      "remaining": "No 2026 call found; confirm if program resumes or remains retired."
     },
     {
       "id": "amazon-research-awards",
@@ -1985,7 +1988,10 @@
     },
     {
       "id": "bwf-casi-award",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-google-bwf-evidence-2026-10-10.json",
+      "findings": "Corrected CASI 2027 invitation-only deadline, research scope, eligibility, and current closed application status.",
+      "remaining": "Monitor for 2028 cycle announcement."
     },
     {
       "id": "nsf-satc",
@@ -2397,7 +2403,9 @@
     },
     {
       "id": "google-academic-research-awards",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-awards-google-bwf-evidence-2026-10-10.json",
+      "findings": "Audited official 2026 call dates, eligible applicant category, current quantum-specific topics, and decision schedule."
     },
     {
       "id": "microsoft-accelerating-foundation-models",
@@ -2471,6 +2479,12 @@
       "status": "audited-new",
       "report": "docs/data-sweep-awards-industry-initial-evidence-2026-10-10.json",
       "findings": "Added a clearly historical worldwide program record based on Adobe’s archived announcement."
+    },
+    {
+      "id": "google-cloud-research-credits",
+      "status": "audited-new",
+      "report": "docs/data-sweep-awards-google-bwf-evidence-2026-10-10.json",
+      "findings": "Added current official cloud-credit offer; $5,000 amount and eligible audiences supported, detailed conditions/deadline unknown."
     }
   ],
   "discovery": {

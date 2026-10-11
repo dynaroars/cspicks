@@ -1,0 +1,143 @@
+{
+  "checkedAt": "2026-10-10",
+  "changes": [
+    {
+      "id": "bwf-casi-award",
+      "field": "deadline",
+      "before": "August 14, 2026 at 3:00 PM EDT (Pre-proposal LOI); January 11, 2027 at 3:00 PM EST (Full proposal; Annual)",
+      "after": "2026 LOI closed August 14 at 3 PM EDT; invited full proposals due January 11, 2027 at 3 PM EST (invitation required; program is not open to new applicants)"
+    },
+    {
+      "id": "bwf-casi-award",
+      "field": "deadlineMonth",
+      "before": 8,
+      "after": 1
+    },
+    {
+      "id": "bwf-casi-award",
+      "field": "whoFor",
+      "before": "Postdocs with PhD in Computer Science or quantitative fields transitioning to tenure-track faculty",
+      "after": "Postdoctoral researchers transitioning from physical, mathematical, computational science, or engineering training to interdisciplinary biological-sciences research and an independent faculty career"
+    },
+    {
+      "id": "bwf-casi-award",
+      "field": "summary",
+      "before": "Supports early-career researchers trained in computer science, machine learning, mathematics, and quantitative disciplines who apply computational methods to biological and life sciences questions during their transition to university faculty.",
+      "after": "Five-year, $560,000 transition award for interdisciplinary biological research using non-biological methods. In the 2027 cycle, only LOI applicants invited by November 13 may submit a full proposal by January 11, 2027; the LOI window closed August 14, 2026."
+    },
+    {
+      "id": "bwf-casi-award",
+      "field": "eligibility",
+      "before": [
+        "Hold a PhD in computer science, physics, mathematics, or engineering",
+        "Must have at least 12 months and not more than 48 months of postdoctoral experience",
+        "Must not hold or have accepted a tenure-track faculty appointment at time of application"
+      ],
+      "after": [
+        "PhD in mathematics, physics, chemistry, computer science, statistics, or engineering; biological-field PhDs may qualify with prior approval and demonstrated quantitative/computational expertise",
+        "At least 12 and no more than 60 months of postdoctoral research by the invited full-proposal deadline; first-author peer-reviewed publication required",
+        "Must not hold or have accepted a tenure-track assistant-professor appointment; research must use non-biological approaches to address biological-science questions",
+        "Eligible applicants are U.S. or Canadian citizens, permanent residents, or temporary residents with qualifying work authorization; grant recipient institution must be a U.S. or Canadian nonprofit"
+      ]
+    },
+    {
+      "id": "google-academic-research-awards",
+      "field": "deadline",
+      "before": "August 7, 2026 at 11:59:59 PM AoE (Annual thematic call; July/August at 11:59 PM AoE)",
+      "after": "2026 call closed August 7; proposal decisions scheduled October 30, 2026"
+    },
+    {
+      "id": "google-academic-research-awards",
+      "field": "deadlineMonth",
+      "before": 8,
+      "after": 0
+    },
+    {
+      "id": "google-academic-research-awards",
+      "field": "whoFor",
+      "before": "Faculty and principal investigators conducting foundational and applied research in computer science and technology",
+      "after": "Academic researchers at degree-granting institutions who advise students and conduct research in computing or technology"
+    },
+    {
+      "id": "google-academic-research-awards",
+      "field": "summary",
+      "before": "Supports foundational and applied computer science research in key technical focus areas (such as quantum computing, security, and AI), pairing academic PIs with Google research sponsors.",
+      "after": "Google’s 2026 global call focused on early fault-tolerant quantum algorithms and applications, and quantum-computing security. The call opened June 26 and closed August 7; proposal decisions are scheduled for October 30. Award amounts are not specified on the overview page."
+    },
+    {
+      "id": "google-academic-research-awards",
+      "field": "eligibility",
+      "before": [
+        "Full-time assistant, associate, or full professor at an accredited degree-granting university",
+        "Must advise graduate or undergraduate students and actively conduct computing research",
+        "Maximum of 1 proposal submission per principal investigator per funding cycle"
+      ],
+      "after": [
+        "Academic researcher at a degree-granting institution who advises students and conducts research in technology or computing",
+        "Only the current cycle’s published research areas are eligible; detailed application terms vary by RFP"
+      ]
+    },
+    {
+      "id": "google-academic-research-awards",
+      "field": "topics",
+      "before": [
+        "AI/ML",
+        "Quantum",
+        "Security",
+        "Systems",
+        "Theory"
+      ],
+      "after": [
+        "Quantum Computing",
+        "Quantum Computing Security"
+      ]
+    },
+    {
+      "id": "google-research-scholar",
+      "field": "deadline",
+      "before": "January 27, 2025 at 11:59:59 PM AoE (Annual; typically opens Nov/Dec, closes late Jan or late Nov at 11:59 PM AoE)",
+      "after": "Last published deadline: January 27, 2025; the official recipients page lists awards through 2025, with no 2026 application cycle found"
+    },
+    {
+      "id": "google-research-scholar",
+      "field": "deadlineMonth",
+      "before": 1,
+      "after": 0
+    },
+    {
+      "id": "google-research-scholar",
+      "field": "summary",
+      "before": "Aims to support world-class research conducted by early-career professors worldwide in computer science and related fields. Provides unrestricted financial gifts rather than grants.",
+      "after": "Google’s Research Scholar Program provided unrestricted gifts to early-career professors. The official recipients page covers 2020–2025; no current application window is listed on Google’s faculty programs page."
+    },
+    {
+      "id": "google-research-scholar",
+      "field": "featured",
+      "before": true,
+      "after": false
+    },
+    {
+      "id": "google-cloud-research-credits",
+      "field": "new record",
+      "before": null,
+      "after": "Official $5,000 research-credit offer added; terms/deadline details not published"
+    }
+  ],
+  "officialSources": [
+    "https://www.bwfund.org/grants/interfaces-in-science/career-awards-at-the-scientific-interface/",
+    "https://www.bwfund.org/wp-content/uploads/2026/06/BWF-CASI-RFP-2027_v2.pdf",
+    "https://research.google/programs-and-events/google-academic-research-awards/",
+    "https://research.google/programs-and-events/research-scholar-program/recipients/",
+    "https://research.google/programs-and-events/faculty-engagement/",
+    "https://cloud.google.com/edu/researchers"
+  ],
+  "findings": [
+    "BWF CASI 2027 LOI closed August 14; January 11 full-proposal deadline is for invitees only; program page states applications are not open.",
+    "Google Academic Research Awards 2026 call ran June 26–August 7, focused on two quantum research areas, and schedules decisions October 30. The overview does not publish award amounts.",
+    "Google Research Scholar Program page lists 2020–2025 recipients and uses past-tense program wording; the current faculty page lists Google Academic Research Awards and other programs instead. No 2026 Scholar call was found.",
+    "Google Cloud for Researchers page offers $5,000 research credits; Google Research’s faculty page lists faculty, postdocs, nonprofit-lab researchers, and PhD students as eligible for credits."
+  ],
+  "limitations": [
+    "Cloud-credit detailed terms, expiration, and deadline were not found on the reviewed official pages."
+  ]
+}

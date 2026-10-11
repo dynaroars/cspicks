@@ -623,10 +623,10 @@
       "Faculty"
     ],
     "whoFor": "Early-career faculty within 7 years of PhD",
-    "deadline": "January 27, 2025 at 11:59:59 PM AoE (Annual; typically opens Nov/Dec, closes late Jan or late Nov at 11:59 PM AoE)",
-    "deadlineMonth": 1,
+    "deadline": "Last published deadline: January 27, 2025; the official recipients page lists awards through 2025, with no 2026 application cycle found",
+    "deadlineMonth": 0,
     "amount": "Up to $60,000 unrestricted research gift + Google sponsor pairing",
-    "summary": "Aims to support world-class research conducted by early-career professors worldwide in computer science and related fields. Provides unrestricted financial gifts rather than grants.",
+    "summary": "Google’s Research Scholar Program provided unrestricted gifts to early-career professors. The official recipients page covers 2020–2025; no current application window is listed on Google’s faculty programs page.",
     "eligibility": [
       "Full-time faculty member at an accredited university worldwide",
       "Received PhD within 7 years of submission deadline",
@@ -642,7 +642,7 @@
       "Quantum"
     ],
     "url": "https://research.google/programs-and-events/frequently-asked-questions/",
-    "featured": true
+    "featured": false
   },
   {
     "id": "amazon-research-awards",
@@ -2140,15 +2140,16 @@
       "Faculty",
       "Postdocs"
     ],
-    "whoFor": "Postdocs with PhD in Computer Science or quantitative fields transitioning to tenure-track faculty",
-    "deadline": "August 14, 2026 at 3:00 PM EDT (Pre-proposal LOI); January 11, 2027 at 3:00 PM EST (Full proposal; Annual)",
-    "deadlineMonth": 8,
+    "whoFor": "Postdoctoral researchers transitioning from physical, mathematical, computational science, or engineering training to interdisciplinary biological-sciences research and an independent faculty career",
+    "deadline": "2026 LOI closed August 14 at 3 PM EDT; invited full proposals due January 11, 2027 at 3 PM EST (invitation required; program is not open to new applicants)",
+    "deadlineMonth": 1,
     "amount": "$560,000 over 5 years (bridging postdoc to faculty)",
-    "summary": "Supports early-career researchers trained in computer science, machine learning, mathematics, and quantitative disciplines who apply computational methods to biological and life sciences questions during their transition to university faculty.",
+    "summary": "Five-year, $560,000 transition award for interdisciplinary biological research using non-biological methods. In the 2027 cycle, only LOI applicants invited by November 13 may submit a full proposal by January 11, 2027; the LOI window closed August 14, 2026.",
     "eligibility": [
-      "Hold a PhD in computer science, physics, mathematics, or engineering",
-      "Must have at least 12 months and not more than 48 months of postdoctoral experience",
-      "Must not hold or have accepted a tenure-track faculty appointment at time of application"
+      "PhD in mathematics, physics, chemistry, computer science, statistics, or engineering; biological-field PhDs may qualify with prior approval and demonstrated quantitative/computational expertise",
+      "At least 12 and no more than 60 months of postdoctoral research by the invited full-proposal deadline; first-author peer-reviewed publication required",
+      "Must not hold or have accepted a tenure-track assistant-professor appointment; research must use non-biological approaches to address biological-science questions",
+      "Eligible applicants are U.S. or Canadian citizens, permanent residents, or temporary residents with qualifying work authorization; grant recipient institution must be a U.S. or Canadian nonprofit"
     ],
     "topics": [
       "AI/ML",
@@ -5669,22 +5670,18 @@
     "targetAudience": [
       "Faculty"
     ],
-    "whoFor": "Faculty and principal investigators conducting foundational and applied research in computer science and technology",
-    "deadline": "August 7, 2026 at 11:59:59 PM AoE (Annual thematic call; July/August at 11:59 PM AoE)",
-    "deadlineMonth": 8,
+    "whoFor": "Academic researchers at degree-granting institutions who advise students and conduct research in computing or technology",
+    "deadline": "2026 call closed August 7; proposal decisions scheduled October 30, 2026",
+    "deadlineMonth": 0,
     "amount": "Amount varies by RFP (often an unrestricted research gift); see the official call page",
-    "summary": "Supports foundational and applied computer science research in key technical focus areas (such as quantum computing, security, and AI), pairing academic PIs with Google research sponsors.",
+    "summary": "Google’s 2026 global call focused on early fault-tolerant quantum algorithms and applications, and quantum-computing security. The call opened June 26 and closed August 7; proposal decisions are scheduled for October 30. Award amounts are not specified on the overview page.",
     "eligibility": [
-      "Full-time assistant, associate, or full professor at an accredited degree-granting university",
-      "Must advise graduate or undergraduate students and actively conduct computing research",
-      "Maximum of 1 proposal submission per principal investigator per funding cycle"
+      "Academic researcher at a degree-granting institution who advises students and conducts research in technology or computing",
+      "Only the current cycle’s published research areas are eligible; detailed application terms vary by RFP"
     ],
     "topics": [
-      "AI/ML",
-      "Quantum",
-      "Security",
-      "Systems",
-      "Theory"
+      "Quantum Computing",
+      "Quantum Computing Security"
     ],
     "url": "https://research.google/programs-and-events/google-academic-research-awards/",
     "featured": true
@@ -6157,5 +6154,33 @@
     "url": "https://research.adobe.com/news/nurturing-the-next-generation-of-computer-scientists-the-adobe-research-fellowship/",
     "featured": false,
     "status": "historical"
+  },
+  {
+    "id": "google-cloud-research-credits",
+    "name": "Google Cloud Research Credits",
+    "shortName": "Google Cloud Credits",
+    "sponsor": "Google Cloud",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Faculty, postdoctoral, nonprofit-lab researchers, and PhD students in 70+ countries",
+    "deadline": "No application deadline published",
+    "deadlineMonth": 0,
+    "amount": "Up to $5,000 in Google Cloud research credits",
+    "summary": "Google Cloud advertises a research-credit offer for academic researchers. The official research page lists $5,000 in credits; detailed award conditions, expiration, and review timing were not published on the reviewed pages.",
+    "eligibility": [
+      "Faculty, postdoctoral, nonprofit-laboratory researchers, and PhD students are listed as eligible to apply for research award credits",
+      "Program page describes a research-credit offer available across more than 70 countries"
+    ],
+    "topics": [
+      "Cloud Computing",
+      "High-Performance Computing",
+      "AI/ML"
+    ],
+    "url": "https://cloud.google.com/edu/researchers",
+    "featured": false
   }
 ]
