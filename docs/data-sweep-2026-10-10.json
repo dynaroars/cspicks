@@ -1037,7 +1037,10 @@
     },
     {
       "name": "LICS",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-theory-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming editions and applied schedule corrections or completed missing supported fields.",
+      "remaining": "Future edition announcements and unannounced CFP dates/chair details remain to be checked when available."
     },
     {
       "name": "MICRO",
@@ -1106,7 +1109,10 @@
     },
     {
       "name": "RTSS",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-theory-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming editions and applied schedule corrections or completed missing supported fields.",
+      "remaining": "Future edition announcements and unannounced CFP dates/chair details remain to be checked when available."
     },
     {
       "name": "SC",
@@ -1277,7 +1283,10 @@
     },
     {
       "name": "COLT",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-theory-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming editions and applied schedule corrections or completed missing supported fields.",
+      "remaining": "Future edition announcements and unannounced CFP dates/chair details remain to be checked when available."
     },
     {
       "name": "CoNEXT",
@@ -1356,7 +1365,10 @@
     },
     {
       "name": "FOCS",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-theory-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming editions and applied schedule corrections or completed missing supported fields.",
+      "remaining": "Future edition announcements and unannounced CFP dates/chair details remain to be checked when available."
     },
     {
       "name": "FOGA",
@@ -1545,7 +1557,10 @@
     },
     {
       "name": "SODA",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-theory-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming editions and applied schedule corrections or completed missing supported fields.",
+      "remaining": "Future edition announcements and unannounced CFP dates/chair details remain to be checked when available."
     },
     {
       "name": "SOUPS",
@@ -1557,7 +1572,10 @@
     },
     {
       "name": "STOC",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-theory-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming editions and applied schedule corrections or completed missing supported fields.",
+      "remaining": "Future edition announcements and unannounced CFP dates/chair details remain to be checked when available."
     },
     {
       "name": "TACAS",
