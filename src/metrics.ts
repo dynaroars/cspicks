@@ -9,24 +9,24 @@ export function median(values: number[]): number {
   return sorted.length % 2 ? sorted[middle]! : (sorted[middle - 1]! + sorted[middle]!) / 2;
 }
 
-export function percent(part: number, total: number) {
+function percent(part: number, total: number) {
   return total > 0 ? (part / total) * 100 : 0;
 }
 
-export function hasProfileValue(value: unknown) {
+function hasProfileValue(value: unknown) {
   const normalized = String(value || '').trim().toLowerCase();
   return Boolean(normalized) && normalized !== 'noscholarpage' && normalized !== 'nohomepage';
 }
 
-export function sumBy<T>(items: T[], value: (item: T) => number) {
+function sumBy<T>(items: T[], value: (item: T) => number) {
   return items.reduce((total, item) => total + value(item), 0);
 }
 
-export function topEntry(counts: Record<string, number>) {
+function topEntry(counts: Record<string, number>) {
   return Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0] || null;
 }
 
-export function cosineSimilarity(first: Record<string, number>, second: Record<string, number>) {
+function cosineSimilarity(first: Record<string, number>, second: Record<string, number>) {
   const keys = new Set([...Object.keys(first), ...Object.keys(second)]);
   let dot = 0;
   let firstLength = 0;
@@ -46,7 +46,7 @@ export function buildPriorPeriodData(rawData: RawData, startYear: number, endYea
   return filterByYears(rawData, startYear - span, startYear - 1, region, historyMap, aliasMap, confSet);
 }
 
-export function getSchoolFaculty(filteredData: FilteredData, schoolName: string): FilteredProfessor[] {
+function getSchoolFaculty(filteredData: FilteredData, schoolName: string): FilteredProfessor[] {
   const school = filteredData.schools?.[schoolName];
   if (!school) return [];
   const names = new Set<string>();
@@ -300,7 +300,7 @@ export function calculateAreaMomentum(current: FilteredData, prior: FilteredData
     .slice(0, limit);
 }
 
-export interface RankStabilityVariant {
+interface RankStabilityVariant {
   key: string;
   span: number;
   confSet: ConferenceSetId;
@@ -315,7 +315,7 @@ export interface RankStabilitySample {
   ranked: number;
 }
 
-export const RANK_STABILITY_WINDOWS = [5, 10, 20, 30];
+const RANK_STABILITY_WINDOWS = [5, 10, 20, 30];
 
 export function rankStabilityVariants(endYear: number): RankStabilityVariant[] {
   return RANK_STABILITY_WINDOWS.flatMap(span => CONFERENCE_SET_IDS.map(confSet => ({

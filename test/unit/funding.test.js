@@ -12,7 +12,6 @@ import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, 
 import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, parseNsfDataset, renderFundingFacultyCard } from '../../src/nsf.js';
 import { aoeDeadline, conferenceStart, deadlineStatus, filterSchedule, formatCalendarDate, groupConferences, scheduleSuggestions } from '../../csconfs/schedule-data.js';
 import { renderScheduleCard } from '../../csconfs/schedule-render.js';
-import { buildConferenceEmailUrl, buildConferenceGithubIssueUrl, buildConferenceSubmissionContent } from '../../csconfs/submission.js';
 
 test('NSF parser rejects malformed external data', () => {
   assert.throws(() => parseNsfDataset(null), /Invalid NSF dataset/);

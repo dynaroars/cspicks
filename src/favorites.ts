@@ -13,7 +13,7 @@ function storage(): Storage | undefined {
   }
 }
 
-export interface FavoritesStore {
+interface FavoritesStore {
   isFavorite: (id: string) => boolean;
   toggle: (id: string) => boolean;
   all: () => string[];
@@ -55,7 +55,7 @@ export function favoriteToggleButton(id: string, favorited: boolean) {
   return `<button type="button" class="favorite-toggle${favorited ? ' is-favorite' : ''}" data-favorite-id="${escapeHtml(id)}" aria-pressed="${favorited ? 'true' : 'false'}" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}"><svg viewBox="0 0 24 24" aria-hidden="true">${STAR_ICON}</svg></button>`;
 }
 
-export function applyFavoriteToggle(button: HTMLElement, favorited: boolean) {
+function applyFavoriteToggle(button: HTMLElement, favorited: boolean) {
   button.classList.toggle('is-favorite', favorited);
   button.setAttribute('aria-pressed', favorited ? 'true' : 'false');
   const label = favorited ? 'Remove from favorites' : 'Add to favorites';

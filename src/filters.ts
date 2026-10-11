@@ -108,7 +108,7 @@ function storeFilters(state: FilterState, persisted: PersistedFields = {}) {
 let affiliationData: { historyMap: AffiliationHistory, aliasMap: SchoolAliasMap } | null = null;
 
 // Shared across pages: the affiliation history is large, so load it at most once.
-export async function loadHistoryMaps() {
+async function loadHistoryMaps() {
   if (!affiliationData) {
     const data = await loadAffiliationData();
     affiliationData = { historyMap: data.historyMap, aliasMap: data.aliasMap };

@@ -29,7 +29,7 @@ function visaChip(job: Job) {
   return `<span class="opportunity-chip job-chip job-chip-visa is-${value}" title="As stated on the official posting; confirm with the department before applying">${escapeHtml(VISA_LABELS[value])}</span>`;
 }
 
-export function schoolLinks(school: string) {
+function schoolLinks(school: string) {
   const name = encodeURIComponent(school);
   return `<a href="index.html?q=${name}" title="Faculty and rankings for ${escapeHtml(school)}">Faculty &amp; rank in Search</a>
     <a href="simulator.html?univ=${name}" title="Simulate adding a hire at ${escapeHtml(school)}">Simulate a hire</a>`;

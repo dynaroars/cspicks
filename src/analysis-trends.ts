@@ -6,7 +6,7 @@ import { calculatePublishingEffort, calculateSchoolMetrics } from './metrics.js'
 import { areaLabels, escapeHtml } from './shared.js';
 import type { FilteredData, Professor, Publication, RawData } from './types.js';
 
-export function renderSchoolAnalysisSummary(current: FilteredData, prior: FilteredData, schoolName: string) {
+function renderSchoolAnalysisSummary(current: FilteredData, prior: FilteredData, schoolName: string) {
     const container = document.getElementById('ranking-stats');
     if (!container) return;
     const school = current.schools[schoolName];
@@ -581,7 +581,7 @@ export function setupConferenceFilterButtons() {
     });
 }
 
-export function publishedVenues() {
+function publishedVenues() {
     const { startYear, endYear } = state.filters;
     const confSet = getConferenceSet();
     const venues = new Set<string>();

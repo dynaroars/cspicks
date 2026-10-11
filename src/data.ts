@@ -1,6 +1,5 @@
 import Papa from 'papaparse';
 import { decodeAffiliationHistory } from './affiliation-history-format.js';
-import { schoolAliases } from './data/institution-aliases.js';
 import { getConferenceAreaMap, numAreas, publicationMatchesConferenceSet, topLevelAreas } from './data/conference-sets.js';
 import type {
   AffiliationHistory,
@@ -628,7 +627,7 @@ function filterSabbaticals(affiliations: AffiliationSegment[]) {
   });
 }
 
-export function mergeAffiliationHistory(
+function mergeAffiliationHistory(
   historyMap: AffiliationHistory | null,
   manualList: ManualAffiliationRow[]
 ): AffiliationHistory {

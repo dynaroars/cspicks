@@ -18,7 +18,7 @@ export interface AnalysisTarget {
   name: string;
 }
 
-export interface AnalysisState {
+interface AnalysisState {
   rawData: RawData;
   filters: FilterController;
   chartInstance: Chart | null;
@@ -42,7 +42,7 @@ export const state: AnalysisState = {
   analysisReady: false
 };
 
-export interface MetricCard {
+interface MetricCard {
   label: string;
   value: string | number;
   help?: string;
@@ -70,7 +70,7 @@ export function renderMetricCards(metrics: MetricCard[], ariaLabel = 'Statistics
   </div>`;
 }
 
-export function renderInsightList(insights: string[] | null | undefined, title = 'Notable patterns', rawHtml = false) {
+function renderInsightList(insights: string[] | null | undefined, title = 'Notable patterns', rawHtml = false) {
   if (!insights?.length) return '';
   return `<section class="analysis-insights">
     <h3>${escapeHtml(title)}</h3>
@@ -503,7 +503,7 @@ function renderCollaborationStats() {
     `;
 }
 
-export const CONF_SET_LABELS = {
+const CONF_SET_LABELS = {
     'csrankings-default': 'CSRankings default',
     csrankings: 'CSRankings all',
     'core-a': 'CORE A + A*',
@@ -525,7 +525,7 @@ const stabilitySweeps = new Map<string, {
 }>();
 let stabilityToken = 0;
 
-export function buildStabilitySweep(cacheKey: string, onProgress: (done: number, total: number) => void): Promise<RankStabilitySample[]> {
+function buildStabilitySweep(cacheKey: string, onProgress: (done: number, total: number) => void): Promise<RankStabilitySample[]> {
     if (stabilityCache.has(cacheKey)) return Promise.resolve(stabilityCache.get(cacheKey)!);
     const running = stabilitySweeps.get(cacheKey);
     if (running) {
@@ -563,7 +563,7 @@ export function buildStabilitySweep(cacheKey: string, onProgress: (done: number,
  * something this should publish, and naming them would invite exactly the
  * personnel conclusions the project does not support.
  */
-export function renderFragility(schoolName: string) {
+function renderFragility(schoolName: string) {
     const { current } = getAnalysisData();
     const fragility = calculateFragility(current, schoolName);
     if (!fragility || !fragility.steps.length) return '';
@@ -590,7 +590,7 @@ export function renderFragility(schoolName: string) {
         <p class="summary-note">Individual names are deliberately omitted: this measures how concentrated a department's output is, not any person's worth.</p>`;
 }
 
-export async function renderRankStability() {
+async function renderRankStability() {
     const container = document.getElementById('stability-stats');
     if (!container || !state.rawData?.professors) return;
     const schoolName = getTargetName();

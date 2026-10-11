@@ -1,6 +1,6 @@
 import type { AffiliationHistory, SchoolAliasMap } from './types.js';
 
-export const AFFILIATION_HISTORY_FORMAT = 'cspicks-affiliations-v1';
+const AFFILIATION_HISTORY_FORMAT = 'cspicks-affiliations-v1';
 
 export function decodeAffiliationHistory(payload: unknown): AffiliationHistory {
   if (!payload || typeof payload !== 'object') return {};

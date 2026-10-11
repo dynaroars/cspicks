@@ -28,7 +28,7 @@ export const areaLabels: Record<string, string> = {
   'csed': 'CS Education'
 };
 
-export const conferenceLabels: Record<string, string> = {
+const conferenceLabels: Record<string, string> = {
   nips: 'NeurIPS',
   chiconf: 'CHI',
   'siggraph-asia': 'SIGGRAPH Asia',
@@ -182,7 +182,7 @@ export function getConferenceLabel(key: string) {
   return conferenceLabels[key] || key.toUpperCase();
 }
 
-export function getChartColors() {
+function getChartColors() {
   const isDark = typeof window !== 'undefined' && window.matchMedia
     ? window.matchMedia('(prefers-color-scheme: dark)').matches
     : false;
@@ -241,7 +241,7 @@ export function slugify(text: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
-export const institutionShortNames: Record<string, string> = {
+const institutionShortNames: Record<string, string> = {
   // Keys are CSRankings' own spellings, which are not always the institution's
   // canonical name ("Univ. of California - Berkeley", not "University of
   // California, Berkeley"). Every key here is verified to exist in the roster;
@@ -356,7 +356,7 @@ export function formatRelativeTime(dateInput: string | number | Date, now = Date
   return `${diffYears} year${diffYears === 1 ? '' : 's'} ago`;
 }
 
-export interface RepoCommit {
+interface RepoCommit {
   sha: string;
   fullSha: string;
   date?: string;

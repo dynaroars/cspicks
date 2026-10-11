@@ -12,7 +12,6 @@ import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, 
 import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../../src/nsf.js';
 import { aoeDeadline, conferenceStart, deadlineStatus, filterSchedule, formatCalendarDate, groupConferences, scheduleSuggestions } from '../../csconfs/schedule-data.js';
 import { renderScheduleCard } from '../../csconfs/schedule-render.js';
-import { buildConferenceEmailUrl, buildConferenceGithubIssueUrl, buildConferenceSubmissionContent } from '../../csconfs/submission.js';
 test('simulator name matching handles exact names, initials, and small typos', () => {
   assert.equal(fuzzyMatch('Samuel Madden', 'S. Madden'), true);
   assert.equal(fuzzyMatch('Barbara Liskov', 'Barbara Liskov'), true);

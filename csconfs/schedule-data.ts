@@ -17,7 +17,7 @@ export const CSCONFS_KEYWORD_SPECS: KeywordSpec[] = [
 
 const DAY = 86400000;
 
-export function calendarParts(value: unknown): [number, number, number] | null {
+function calendarParts(value: unknown): [number, number, number] | null {
   if (!value || String(value).toUpperCase() === 'TBD') return null;
   const text = String(value).trim();
   const iso = /^(\d{4})-(\d{2})-(\d{2})/.exec(text);
@@ -76,7 +76,7 @@ export function conferenceAreas(conf: ConferenceRecord) {
   return [...new Set(conf.venueKeys.map(key => map[key]).filter((area): area is string => Boolean(area)))];
 }
 
-export interface ConferenceTag { label: string; kind: 'csrankings' | 'core-astar' | 'core-a'; title: string }
+interface ConferenceTag { label: string; kind: 'csrankings' | 'core-astar' | 'core-a'; title: string }
 
 // Ranking-membership badges: CSRankings (default or next-tier) and CORE A*/A.
 export function conferenceTags(conf: ConferenceRecord): ConferenceTag[] {
@@ -92,7 +92,7 @@ export function conferenceTags(conf: ConferenceRecord): ConferenceTag[] {
 
 // Curated "other venues" carry no CSRankings/CORE key, so only the unrestricted
 // All (Union) set shows them; every ranking-derived set ignores them.
-export function matchesConferenceSet(conf: ConferenceRecord, confSet: ConferenceSetId) {
+function matchesConferenceSet(conf: ConferenceRecord, confSet: ConferenceSetId) {
   if (conf.other) return confSet === 'all-union';
   return conf.venueKeys.some(area => publicationMatchesConferenceSet({ area }, confSet));
 }

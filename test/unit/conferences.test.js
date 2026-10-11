@@ -12,7 +12,7 @@ import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, 
 import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../../src/nsf.js';
 import { aoeDeadline, conferenceStart, deadlineStatus, filterSchedule, formatCalendarDate, groupConferences, scheduleSuggestions } from '../../csconfs/schedule-data.js';
 import { renderScheduleCard } from '../../csconfs/schedule-render.js';
-import { buildConferenceEmailUrl, buildConferenceGithubIssueUrl, buildConferenceSubmissionContent } from '../../csconfs/submission.js';
+import { buildSubmissionContent, conferenceSubmission } from '../../src/submission.js';
 test('conference schedules group cycles and filter by conference year, venue set, and area', () => {
   const conferences = [
     { name: 'VLDB', year: 2027, venueKeys: ['vldb'], deadline: '2026-09-01', date: 'August 2027', description: 'Databases', note: 'Cycle 1' },
@@ -77,19 +77,19 @@ test('conference submissions produce reviewable email and GitHub issue links', (
     sourceUrl: 'https://example.test/pldi-2027',
     entry: { name: 'PLDI', year: 2027, venueKeys: ['pldi'], deadline: '2026-11-08' }
   };
-  const content = buildConferenceSubmissionContent(submission);
+  const content = buildSubmissionContent(submission);
   assert.match(content, /Type: correction/);
   assert.match(content, /Target:\nName: PLDI\n\nYear: 2027/);
   assert.match(content, /Venue keys: pldi/);
   assert.match(content, /Deadline: 2026-11-08/);
 
-  const email = new URL(buildConferenceEmailUrl('PLDI 2027', content));
+  const email = new URL(conferenceSubmission.buildEmailUrl('PLDI 2027', content));
   assert.equal(email.protocol, 'mailto:');
   assert.equal(email.pathname, 'root@roars.dev');
   assert.match(email.searchParams.get('subject'), /PLDI 2027/);
   assert.match(email.searchParams.get('body'), /example\.test\/pldi-2027/);
 
-  const issue = new URL(buildConferenceGithubIssueUrl('PLDI 2027', content));
+  const issue = new URL(conferenceSubmission.buildGithubIssueUrl('PLDI 2027', content));
   assert.equal(issue.origin + issue.pathname, 'https://github.com/dynaroars/cspicks/issues/new');
   assert.match(issue.searchParams.get('title'), /PLDI 2027/);
   assert.ok(issue.searchParams.get('body').includes(content));

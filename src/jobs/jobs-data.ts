@@ -12,7 +12,7 @@ let cachedJobs: Job[] | null = null;
 
 const DAY = 86400000;
 /** A posting with no deadline counts as active only while a crawl or submission has confirmed it this recently. */
-export const STALE_AFTER_DAYS = 90;
+const STALE_AFTER_DAYS = 90;
 
 export const TRACK_LABELS: Record<JobTrack, string> = {
   'tenure-track': 'Tenure-track',
@@ -59,7 +59,7 @@ const VISA_KEYWORD_VALUES: Record<string, string[]> = {
 
 const visaKey = (job: Job) => job.visaSponsorship ?? 'unknown';
 
-export type DepartmentKind = 'cs' | 'information' | 'ece' | 'data' | 'other';
+type DepartmentKind = 'cs' | 'information' | 'ece' | 'data' | 'other';
 
 export const DEPARTMENT_LABELS: Record<DepartmentKind, string> = {
   cs: 'Computer Science / Computing',
@@ -95,7 +95,7 @@ export const JOBS_KEYWORD_SPECS: KeywordSpec[] = [
   FAVORITES_KEYWORD_SPEC
 ];
 
-export type StatusFilter = 'active' | 'closed' | 'all';
+type StatusFilter = 'active' | 'closed' | 'all';
 export type JobSort = 'deadline' | 'posted' | 'school' | 'rank' | 'rank-desc';
 export const JOB_SORTS: JobSort[] = ['deadline', 'posted', 'school', 'rank', 'rank-desc'];
 
@@ -105,7 +105,7 @@ function dayParts(value: unknown): [number, number, number] | null {
 }
 
 /** End of the deadline day, Anywhere on Earth. */
-export function deadlineInstant(value: unknown) {
+function deadlineInstant(value: unknown) {
   const parts = dayParts(value);
   return parts ? Date.UTC(parts[0], parts[1] - 1, parts[2] + 1, 11, 59, 59, 999) : null;
 }

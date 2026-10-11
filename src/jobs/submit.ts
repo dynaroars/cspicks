@@ -5,7 +5,7 @@
 import { areaLabels, escapeHtml } from '../shared.js';
 import { LEVEL_LABELS, TRACK_LABELS, VISA_LABELS, loadJobsData } from './jobs-data.js';
 import { US_STATES } from './jobs-data.js';
-import { buildJobEmailUrl, buildJobGithubIssueUrl, buildJobSubmissionContent } from './submission.js';
+import { buildSubmissionContent, jobSubmission } from '../submission.js';
 import { DELIVERY_BUTTONS, QUICK_SECTION, deliver, quickLabel, quickPayload, setupQuickMode } from '../submit-quick.js';
 import type { Job } from '../types.js';
 
@@ -155,14 +155,14 @@ function setupEvents() {
   form.addEventListener('submit', event => {
     event.preventDefault();
     const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
-    const builders = { github: buildJobGithubIssueUrl, email: buildJobEmailUrl };
+    const builders = { github: jobSubmission.buildGithubIssueUrl, email: jobSubmission.buildEmailUrl };
     if (!form.reportValidity()) return;
     if (quick.isQuick()) {
-      deliver(submitter, quickLabel(form), buildJobSubmissionContent(quickPayload(form)), builders);
+      deliver(submitter, quickLabel(form), buildSubmissionContent(quickPayload(form)), builders);
       return;
     }
     const { url, title, submission } = getFormData();
-    deliver(submitter, title ? `${title} (${url})` : url, buildJobSubmissionContent(submission), builders);
+    deliver(submitter, title ? `${title} (${url})` : url, buildSubmissionContent(submission), builders);
   });
 }
 

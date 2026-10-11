@@ -426,7 +426,7 @@ async function init() {
 
 init();
 
-export async function performCandidatesAnalysis(
+async function performCandidatesAnalysis(
   selectedUniv: FilteredSchool,
   uniqueNames: string[],
   { filters, selectedDblpProfiles, appData }: {
@@ -696,9 +696,9 @@ interface CandidateSuccess extends CandidateResultBase {
   stats: CandidateStats;
 }
 
-export type CandidateResult = CandidateFailure | CandidateSuccess;
+type CandidateResult = CandidateFailure | CandidateSuccess;
 
-export interface CandidateStats {
+interface CandidateStats {
   totalAdjusted: number;
   totalPapers: number;
   totalDblpPublications?: number;
@@ -722,7 +722,7 @@ function rankMoveLabel(before: number | null | undefined, after: number | null |
   return `${label(before)} → ${label(after)} (${deltaText})`;
 }
 
-export function renderCandidateResults(candidates: CandidateResult[]) {
+function renderCandidateResults(candidates: CandidateResult[]) {
   const medals = ['🥇', '🥈', '🥉'];
 
   return candidates.map((c, i) => {

@@ -388,7 +388,7 @@ async function init() {
   setupDataHealth();
   renderExamples();
   render(input.value);
-  const suggestionBox = setupSuggestions(input);
+  setupSuggestions(input);
   // Clicking a card searches for that university or professor, the way
   // clicking a Search result opens that target.
   document.querySelector('.funding-results-container')?.addEventListener('click', event => {

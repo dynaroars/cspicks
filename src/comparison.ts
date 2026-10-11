@@ -10,7 +10,7 @@ import type { FilteredData } from './types.js';
 
 type ComparisonTarget = AnalysisTarget | { type: 'area' | 'conference', name: string };
 
-export interface ResolvedComparison {
+interface ResolvedComparison {
   left: string;
   right: string;
   a: ComparisonTarget | null;

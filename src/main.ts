@@ -369,7 +369,7 @@ function setupSearch() {
   const mainSearch = document.querySelector<HTMLInputElement>('#main-search')!;
 
   let debounceTimer: ReturnType<typeof setTimeout> | undefined;
-  const suggestionBox = createSearchSuggestionBox({
+  createSearchSuggestionBox({
     input: mainSearch,
     listbox: document.getElementById('universal-suggestions')!,
     specs: MAIN_KEYWORD_SPECS, helpId: 'main-search-help', example: 'school: MIT',

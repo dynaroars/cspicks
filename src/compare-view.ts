@@ -1,7 +1,7 @@
 import { drawChart } from './charts.js';
 import { areaLabels, cleanName, escapeHtml } from './shared.js';
 import { describeVerdict } from './metrics.js';
-import type { Chart, ChartConfiguration, ChartItem } from 'chart.js';
+import type { Chart, ChartItem } from 'chart.js';
 import type { AreaStats } from './types.js';
 import type { compareAreas } from './metrics.js';
 
@@ -21,7 +21,7 @@ export interface ComparisonEntry {
     acmFellowYear?: number | null;
 }
 
-export interface ScoreboardRow {
+interface ScoreboardRow {
     label: string;
     help?: string;
     a: ScoreValue;
@@ -48,7 +48,7 @@ interface ComparisonSummaryOptions extends ComparisonData {
 interface ComparisonInsight { area: string; margin: string }
 type AreaComparison = ReturnType<typeof compareAreas>;
 
-export const compareColors = {
+const compareColors = {
     a: { fill: 'rgba(37, 99, 235, 0.7)', line: 'rgba(37, 99, 235, 1)' },
     b: { fill: 'rgba(16, 185, 129, 0.7)', line: 'rgba(16, 185, 129, 1)' }
 };
@@ -157,7 +157,7 @@ export function renderScoreboard(safeNameA: string, safeNameB: string, rows: Sco
     </div>`;
 }
 
-export const sideSpan = (side: ComparisonSide, name: string) => `<span class="comparison-side-${side}">${name}</span>`;
+const sideSpan = (side: ComparisonSide, name: string) => `<span class="comparison-side-${side}">${name}</span>`;
 
 // Turing Award / ACM Fellow badges sit next to the name in the head-to-head
 // header rather than a separate card.

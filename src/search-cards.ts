@@ -24,7 +24,7 @@ function actionAttributes(action: string, values: Record<string, unknown> = {}) 
     .join(' ');
 }
 
-export function getDBLPUrl(originalName: string) {
+function getDBLPUrl(originalName: string) {
   let name = originalName
     .replace(/ Jr\./g, '_Jr.')
     .replace(/ II/g, '_II')

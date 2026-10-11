@@ -3,8 +3,8 @@ import { getConferenceAreaMap, parentMap, publicationMatchesConferenceSet } from
 import type { AreaStats } from './types.js';
 
 export interface DblpAuthorResult { name: string, pid: string, url: string }
-export interface DblpCoauthorRecord { name: string, years: Record<string, number> }
-export interface DblpAuthorStats {
+interface DblpCoauthorRecord { name: string, years: Record<string, number> }
+interface DblpAuthorStats {
     totalAdjusted: number;
     totalPapers: number;
     totalDblpPublications: number;
@@ -422,7 +422,7 @@ function transact<T>(db: IDBDatabase, mode: IDBTransactionMode, run: (store: IDB
 }
 
 /** Cached value for `key`, or null when absent, expired, or unavailable. */
-export async function readCached<T>(key: string): Promise<T | null> {
+async function readCached<T>(key: string): Promise<T | null> {
   const db = await openDb();
   if (!db) return null;
   const entry = await transact<{ value: T, storedAt: number }>(db, 'readonly', store => store.get(key));
@@ -435,7 +435,7 @@ export async function readCached<T>(key: string): Promise<T | null> {
   return entry.value ?? null;
 }
 
-export async function writeCached(key: string, value: unknown) {
+async function writeCached(key: string, value: unknown) {
   const db = await openDb();
   if (!db) return;
   await transact(db, 'readwrite', store => store.put({ value, storedAt: Date.now() }, key));

@@ -1,9 +1,5 @@
 import { escapeHtml } from '../src/shared.js';
-import {
-  buildConferenceEmailUrl,
-  buildConferenceGithubIssueUrl,
-  buildConferenceSubmissionContent,
-} from './submission.js';
+import { buildSubmissionContent, conferenceSubmission } from '../src/submission.js';
 import { DELIVERY_BUTTONS, QUICK_SECTION, deliver, quickLabel, quickPayload, setupQuickMode } from '../src/submit-quick.js';
 import type { ConferenceRecord } from './types.js';
 
@@ -296,10 +292,10 @@ function setupForm() {
   form.addEventListener('submit', event => {
     event.preventDefault();
     const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
-    const builders = { github: buildConferenceGithubIssueUrl, email: buildConferenceEmailUrl };
+    const builders = { github: conferenceSubmission.buildGithubIssueUrl, email: conferenceSubmission.buildEmailUrl };
     if (quick.isQuick()) {
       if (!form.reportValidity()) return;
-      deliver(submitter, quickLabel(form), buildConferenceSubmissionContent(quickPayload(form)), builders);
+      deliver(submitter, quickLabel(form), buildSubmissionContent(quickPayload(form)), builders);
       return;
     }
     inheritVenueKeys(form);
@@ -310,7 +306,7 @@ function setupForm() {
       return;
     }
     const submission = buildSubmission(form);
-    deliver(submitter, `${submission.entry.name} ${submission.entry.year}`, buildConferenceSubmissionContent(submission), builders);
+    deliver(submitter, `${submission.entry.name} ${submission.entry.year}`, buildSubmissionContent(submission), builders);
   });
 }
 

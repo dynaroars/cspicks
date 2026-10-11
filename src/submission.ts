@@ -1,5 +1,5 @@
-export const GITHUB_REPO = 'dynaroars/cspicks';
-export const SUBMISSION_EMAIL = 'root@roars.dev';
+const GITHUB_REPO = 'dynaroars/cspicks';
+const SUBMISSION_EMAIL = 'root@roars.dev';
 
 export function buildSubmissionContent(submission: unknown) {
   if (submission && typeof submission === 'object' && 'type' in submission &&
@@ -29,7 +29,7 @@ function formatSubmissionFields(value: unknown): string {
     }).join('\n\n');
 }
 
-export function createSubmissionUrlBuilders({ typeLabel, updateNoun, verifyNote, emailIntro }: {
+function createSubmissionUrlBuilders({ typeLabel, updateNoun, verifyNote, emailIntro }: {
   typeLabel: string;
   updateNoun: string;
   verifyNote: string;
@@ -52,3 +52,24 @@ export function createSubmissionUrlBuilders({ typeLabel, updateNoun, verifyNote,
     }
   };
 }
+
+export const jobSubmission = createSubmissionUrlBuilders({
+  typeLabel: 'job',
+  updateNoun: 'US academic CS job posting',
+  verifyNote: 'Please verify the posting on the official department or university page before adding it.',
+  emailIntro: 'Here is my proposed US academic CS job posting or update:'
+});
+
+export const grantSubmission = createSubmissionUrlBuilders({
+  typeLabel: 'award',
+  updateNoun: 'CS award / grant update',
+  verifyNote: 'Please verify the cited official URL before applying this update.',
+  emailIntro: 'Here is my proposed CS award / grant update:'
+});
+
+export const conferenceSubmission = createSubmissionUrlBuilders({
+  typeLabel: 'conference',
+  updateNoun: 'conference schedule update',
+  verifyNote: 'Please verify the cited official source before applying this update.',
+  emailIntro: 'Here is my proposed conference schedule update. The official source is included in the submission.'
+});

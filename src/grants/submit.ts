@@ -3,11 +3,7 @@
  */
 import { escapeHtml } from '../shared.js';
 import { loadGrantsData } from './grants-data.js';
-import {
-  buildGrantEmailUrl,
-  buildGrantGithubIssueUrl,
-  buildGrantSubmissionContent
-} from './submission.js';
+import { buildSubmissionContent, grantSubmission } from '../submission.js';
 import { DELIVERY_BUTTONS, QUICK_SECTION, deliver, quickLabel, quickPayload, setupQuickMode } from '../submit-quick.js';
 import type { Grant } from '../types.js';
 
@@ -252,14 +248,14 @@ function setupEvents() {
   form.addEventListener('submit', event => {
     event.preventDefault();
     const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
-    const builders = { github: buildGrantGithubIssueUrl, email: buildGrantEmailUrl };
+    const builders = { github: grantSubmission.buildGithubIssueUrl, email: grantSubmission.buildEmailUrl };
     if (!(form as HTMLFormElement).reportValidity()) return;
     if (quick.isQuick()) {
-      deliver(submitter, quickLabel(form as HTMLFormElement), buildGrantSubmissionContent(quickPayload(form as HTMLFormElement)), builders);
+      deliver(submitter, quickLabel(form as HTMLFormElement), buildSubmissionContent(quickPayload(form as HTMLFormElement)), builders);
       return;
     }
     const { url, name, submission } = getFormData()!;
-    deliver(submitter, name ? `${name} (${url})` : url!, buildGrantSubmissionContent(submission), builders);
+    deliver(submitter, name ? `${name} (${url})` : url!, buildSubmissionContent(submission), builders);
   });
 }
 

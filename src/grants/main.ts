@@ -22,7 +22,6 @@ const countElement = document.getElementById('grants-count');
 const favorites = createFavoritesStore('cspicks:grants-favorites');
 
 let allGrants: Grant[] = [];
-let suggestions: ReturnType<typeof createSearchControls> | null = null;
 const selectById = (id: string) => document.getElementById(id) as HTMLSelectElement | null;
 
 const DEFAULT_EXAMPLES = ['NSF CAREER', 'Google PhD Fellowship', 'audience: phd', 'category: industry', 'sponsor: NSF audience: faculty', 'loc: California', 'deadline: rolling', 'status: historical'];
@@ -189,7 +188,7 @@ async function init() {
   try {
     allGrants = await loadGrantsData();
     restoreFilters();
-    suggestions = buildSuggestions();
+    buildSuggestions();
 
     input.disabled = false;
     input.placeholder = 'Search awards or use keywords: sponsor: NSF audience: phd';
@@ -216,7 +215,7 @@ async function init() {
 init();
 
 /** CS Awards & Grants cards use the same hierarchy as US Jobs. */
-export function renderGrantCard(grant: Grant, isFavorite: (id: string) => boolean = () => false) {
+function renderGrantCard(grant: Grant, isFavorite: (id: string) => boolean = () => false) {
   const eligibilityItems = (grant.eligibility || []).map(item => `<li>${escapeHtml(item)}</li>`).join('');
   const topicChips = (grant.topics || []).map(t => `<button type="button" class="opportunity-chip grant-topic-chip" data-search-topic="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('');
   const locationText = grant.locationLabel || (

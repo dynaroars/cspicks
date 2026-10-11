@@ -49,7 +49,7 @@ const COUNTRY_CODES: Record<string, string> = {
   'costa rica': 'cr', grenada: 'gd', 'puerto rico': 'pr', pr: 'pr', serbia: 'rs'
 };
 
-export interface ParsedPlace {
+interface ParsedPlace {
   display: string;
   countryCode: string | null;
 }
@@ -130,7 +130,7 @@ export function countryName(code: string) {
  * US state name, and region. Two-letter codes are deliberately not terms ("ca" is both Canada and
  * California); free-text fragments like a city are matched separately as substrings.
  */
-export function placeTerms(rawPlace: string | null | undefined) {
+function placeTerms(rawPlace: string | null | undefined) {
   const terms = new Set<string>();
   const place = parsePlace(rawPlace);
   if (!place?.countryCode) return terms;

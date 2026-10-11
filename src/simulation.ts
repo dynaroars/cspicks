@@ -6,7 +6,7 @@ import type { AreaStats, FilteredSchool } from './types.js';
 type CandidateAreaStats = number | Pick<AreaStats, 'adjusted'>;
 type SimulatedSchool = FilteredSchool & { _simScore: number };
 
-export interface SimulationOperation {
+interface SimulationOperation {
   school: FilteredSchool;
   stats: { areas: Record<string, CandidateAreaStats> };
   isRemoval: boolean;
@@ -17,7 +17,7 @@ export type SimulationAreaDelta =
   | number
   | { delta?: number, dropped?: boolean, entered?: boolean, wasRank?: number, nowRank?: number };
 
-export interface SimulationImpact {
+interface SimulationImpact {
   overall: number | null;
   areas: Record<string, SimulationAreaDelta>;
   rankBefore: number | null | undefined;

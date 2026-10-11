@@ -3,7 +3,6 @@ import { rankSuggestions } from '../src/suggestion-box.js';
 import { initTooltipPositioning } from '../src/tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../src/seo.js';
 import { trackView } from '../src/analytics.js';
-import { escapeHtml } from '../src/shared.js';
 import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../src/favorites.js';
 import { keywordValue, parseKeywordQuery, restoreKeywordQuery } from '../src/search-keywords.js';
 import { createSearchControls, renderSearchExamples as renderExampleChips, searchChoices, updateSearchUrl } from '../src/search-controls.js';
@@ -25,7 +24,6 @@ const status = document.getElementById('csconfs-status')!;
 const favorites = createFavoritesStore('cspicks:csconfs-favorites');
 let conferences: ConferenceRecord[] = [];
 let filters: FilterController;
-let suggestions: ReturnType<typeof createSearchControls>;
 
 const deadlineMode = () => (parseKeywordQuery(input.value, CSCONFS_KEYWORD_SPECS).filters.deadline?.[0] || 'upcoming') as DeadlineMode;
 
@@ -149,7 +147,7 @@ async function init() {
     onFavoriteChange(results, render);
     initTooltipPositioning();
 
-    suggestions = buildSuggestions();
+    buildSuggestions();
     input.disabled = false;
     input.placeholder = 'Search conferences or research areas (e.g., PLDI or Security)';
     renderExamples();

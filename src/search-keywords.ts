@@ -13,7 +13,7 @@ export interface KeywordSpec {
   description: string;
 }
 
-export interface ParsedKeywordQuery {
+interface ParsedKeywordQuery {
   filters: Record<string, string[]>;
   rest: string;
 }

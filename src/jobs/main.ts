@@ -7,7 +7,7 @@ import { rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
-import { areaLabels, escapeHtml } from '../shared.js';
+import { areaLabels } from '../shared.js';
 import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { parseKeywordQuery, restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadData } from '../data.js';

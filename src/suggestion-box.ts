@@ -15,7 +15,7 @@ export interface SuggestionItem {
   grantId?: string;
 }
 
-export interface SuggestionGroup {
+interface SuggestionGroup {
   items: SuggestionItem[];
   total: number;
 }

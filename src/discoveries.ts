@@ -25,7 +25,7 @@ const regionLabels: Record<string, string> = {
 
 // Every page that reads or writes the Discoveries URL agrees on this shape:
 // the shared filter params plus `view=discoveries`.
-export function discoveriesParams(filters: FilterController) {
+function discoveriesParams(filters: FilterController) {
   const params = filters.toParams();
   params.set('view', 'discoveries');
   return params;

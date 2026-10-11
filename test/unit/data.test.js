@@ -13,7 +13,6 @@ import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, 
 import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../../src/nsf.js';
 import { aoeDeadline, conferenceStart, deadlineStatus, filterSchedule, formatCalendarDate, groupConferences, scheduleSuggestions } from '../../csconfs/schedule-data.js';
 import { renderScheduleCard } from '../../csconfs/schedule-render.js';
-import { buildConferenceEmailUrl, buildConferenceGithubIssueUrl, buildConferenceSubmissionContent } from '../../csconfs/submission.js';
 import { decodeAffiliationHistory, encodeAffiliationHistory } from '../../src/affiliation-history-format.js';
 function professor(name, affiliation, count, adjustedcount) {
   return {

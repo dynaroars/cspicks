@@ -6,7 +6,7 @@
 // link previews the thing it actually points to.
 
 export const SITE_NAME = 'CS Picks';
-export const SITE_ORIGIN = 'https://cspicks.roars.dev';
+const SITE_ORIGIN = 'https://cspicks.roars.dev';
 const DEFAULT_DESCRIPTION = 'Find the right CS PhD program and research advisor. Explore professors, universities, research strengths, publication trends, and NSF funding using open academic data.';
 
 function setMeta(selector: string, attr: string, value: string, content: string) {
