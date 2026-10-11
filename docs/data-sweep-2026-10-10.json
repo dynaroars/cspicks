@@ -1012,7 +1012,10 @@
     },
     {
       "name": "IMC",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-networks-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming sources; corrected official links and chair/rebuttal details, and added tentative sponsor-announced CoNEXT 2027 with uncertainty explicit.",
+      "remaining": "Future-edition and TBA fields remain unknown; recheck once sponsors publish CFPs."
     },
     {
       "name": "IROS",
@@ -1054,11 +1057,17 @@
     },
     {
       "name": "MobiCom",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-networks-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming sources; corrected official links and chair/rebuttal details, and added tentative sponsor-announced CoNEXT 2027 with uncertainty explicit.",
+      "remaining": "Future-edition and TBA fields remain unknown; recheck once sponsors publish CFPs."
     },
     {
       "name": "MobiSys",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-networks-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming sources; corrected official links and chair/rebuttal details, and added tentative sponsor-announced CoNEXT 2027 with uncertainty explicit.",
+      "remaining": "Future-edition and TBA fields remain unknown; recheck once sponsors publish CFPs."
     },
     {
       "name": "NAACL",
@@ -1078,7 +1087,10 @@
     },
     {
       "name": "NSDI",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-networks-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming sources; corrected official links and chair/rebuttal details, and added tentative sponsor-announced CoNEXT 2027 with uncertainty explicit.",
+      "remaining": "Future-edition and TBA fields remain unknown; recheck once sponsors publish CFPs."
     },
     {
       "name": "OOPSLA",
@@ -1126,7 +1138,10 @@
     },
     {
       "name": "SIGCOMM",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-networks-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming sources; corrected official links and chair/rebuttal details, and added tentative sponsor-announced CoNEXT 2027 with uncertainty explicit.",
+      "remaining": "Future-edition and TBA fields remain unknown; recheck once sponsors publish CFPs."
     },
     {
       "name": "SIGCSE TS",
@@ -1296,7 +1311,10 @@
     },
     {
       "name": "CoNEXT",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-networks-evidence-2026-10-10.json",
+      "findings": "Audited official current/upcoming sources; corrected official links and chair/rebuttal details, and added tentative sponsor-announced CoNEXT 2027 with uncertainty explicit.",
+      "remaining": "Future-edition and TBA fields remain unknown; recheck once sponsors publish CFPs."
     },
     {
       "name": "CP",
