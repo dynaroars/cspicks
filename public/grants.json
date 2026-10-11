@@ -1205,7 +1205,7 @@
     "whoFor": "Eligibility and current application status are not confirmed",
     "deadline": "Not announced",
     "deadlineMonth": 0,
-    "amount": null,
+    "amount": "Not announced",
     "summary": "Adobe's former Women-in-Technology Scholarship page currently returns 404. The program's current availability, application dates, award amount, and eligibility could not be verified from an active official call.",
     "eligibility": [
       "Current eligibility terms are not published on an active official call"
@@ -1317,7 +1317,7 @@
     "whoFor": "Faculty in machine learning, NLP, cryptography, graph neural networks, and multi-agent systems",
     "deadline": "Not announced",
     "deadlineMonth": 0,
-    "amount": null,
+    "amount": "Not announced",
     "summary": "JPMorganChase AI Research describes its research areas and collaborations with faculty, but the formerly linked AI Research Awards page and current application cycle could not be verified. No current award deadline, amount, or eligibility terms are published on the official AI Research pages reviewed.",
     "eligibility": [
       "Current award eligibility and application status are not published on the official pages reviewed"

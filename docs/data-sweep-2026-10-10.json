@@ -2564,10 +2564,9 @@
     "databases": "Pending source review:ICDT2026missing,EDBTabsent,PODS2027Cycle2suspectduplicatedCycle1dates. Agent stopped before report."
   },
   "verificationBatch3": {
-    "unit": "16 test files passed",
-    "typecheck": "passed",
-    "build": "passed; optional upstream DBLP aliases CSV parse warning, nonfatal",
-    "browser": "10 Jobs tests passed",
+    "unit": "npm test: 16 test files passed",
+    "browser": "npm run test:e2e: 68 passed",
+    "build": "Vite bundle completed; postbuild SEO generation failed because raw.githubusercontent.com DNS lookup returned EAI_AGAIN",
     "diffCheck": "passed",
     "projectSize": "passed"
   },
