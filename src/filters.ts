@@ -1,5 +1,5 @@
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadAffiliationData, loadCoreExtraPubs, normalizeConferenceSet } from './data.js';
-import { applyPerCapitaRanks } from './metrics/per-capita.js';
+import { applyPerCapitaRanks } from './metrics.js';
 import { getInitialRegion, rememberRegion } from './shared.js';
 import type { ConferenceSetId } from './data/conference-sets.js';
 import type { AffiliationHistory, FilteredData, Publication, RawData, SchoolAliasMap } from './types.js';

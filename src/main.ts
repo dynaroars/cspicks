@@ -16,7 +16,7 @@ import { aoeDeadline, filterSchedule, formatCalendarDate } from '../csconfs/sche
 import { parseKeywordQuery } from './search-keywords.js';
 import type { KeywordSpec } from './search-keywords.js';
 import { renderSearchExamples as renderExampleChips, updateSearchUrl } from './search-controls.js';
-import type { AnalysisTarget } from './analysis/state.js';
+import type { AnalysisTarget } from './analysis.js';
 import type { FilterController } from './filters.js';
 import type { CardContext } from './search-cards.js';
 import type { FilteredData, FilteredProfessor, FilteredSchool, NsfDataset, RawData } from './types.js';

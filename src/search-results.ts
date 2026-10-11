@@ -3,7 +3,7 @@ import { areaLabels, cleanName, escapeHtml, getConferenceFullLabel, getConferenc
 import { calculatePerCapita } from './metrics.js';
 import type { AffiliationHistory, FilteredData, FilteredProfessor, FilteredSchool, SchoolAliasMap, SchoolAreaStats } from './types.js';
 import type { CardContext } from './search-cards.js';
-import type { AnalysisTarget } from './analysis/state.js';
+import type { AnalysisTarget } from './analysis.js';
 
 interface SearchResultsContext {
   appData: FilteredData;

@@ -7,7 +7,7 @@ import { updateChartDefaults } from './shared.js';
 
 // Only bar/line charts with a linear+category axis, fill, tooltip, legend,
 // and title (chart titles and axis titles both use the Title plugin) are
-// used anywhere in this app (see src/analysis/*.ts, src/compare-view.ts) —
+// used anywhere in this app (see src/analysis*.ts, src/compare-view.ts) —
 // registering just those instead of `chart.js/auto` (which pulls in every
 // controller/scale/plugin Chart.js ships) meaningfully shrinks the bundle.
 Chart.register(

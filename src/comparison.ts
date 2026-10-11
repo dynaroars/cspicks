@@ -4,7 +4,7 @@ import { compareAreas, compareConferences } from './metrics.js';
 import { findMatchingArea, findMatchingConference } from './search-results.js';
 import { areaLabels, cleanName, getConferenceLabel } from './shared.js';
 import type { Chart } from 'chart.js';
-import type { AnalysisTarget } from './analysis/state.js';
+import type { AnalysisTarget } from './analysis.js';
 import type { ComparisonEntry } from './compare-view.js';
 import type { FilteredData } from './types.js';
 

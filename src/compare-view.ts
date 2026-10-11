@@ -3,7 +3,7 @@ import { areaLabels, cleanName, escapeHtml } from './shared.js';
 import { describeVerdict } from './metrics.js';
 import type { Chart, ChartConfiguration, ChartItem } from 'chart.js';
 import type { AreaStats } from './types.js';
-import type { compareAreas } from './metrics/discoveries.js';
+import type { compareAreas } from './metrics.js';
 
 type ComparisonSide = 'a' | 'b';
 type ComparisonType = 'school' | 'researcher';
