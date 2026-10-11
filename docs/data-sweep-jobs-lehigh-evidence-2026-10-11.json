@@ -1,9 +1,0 @@
-{
-  "school":"Lehigh University","checkedAt":"2026-10-11",
-  "checkedSources":[
-    {"url":"https://facultyjobs.lehigh.edu/research","finding":"Current official research-openings index still lists the joint CSE/ECE tenured Associate/Full robotics search, last posted Oct 16, 2025."},
-    {"url":"https://facultyjobs.lehigh.edu/node/1220","finding":"Official detail accepts CS, Computer Engineering, Electrical Engineering, Mechanical Engineering, or Robotics PhDs and says review continues until filled. Full-consideration Dec 10, 2025 and anticipated July 1, 2026 start have passed. Corrected the existing record: its summary already stated the full-consideration date, but the structured deadline/priority date was missing."},
-    {"url":"https://apply.interfolio.com/175150","finding":"Official application link from the posting resolves to the Interfolio application page. The browser exposes no application status/details there, so this alone does not establish whether the search remains available to applicants."},
-    {"url":"https://facultyjobs.lehigh.edu/faculty","finding":"Current faculty openings page reviewed; newer searches in other departments do not target CS PhDs."}
-  ],"findings":"Audited the retained senior robotics record and corrected a structured-field omission: set deadline 2025-12-10 for the source's full-consideration/priority date. The official index still lists the 2025 posting as open until filled despite its July 1, 2026 anticipated start; the Interfolio URL resolves but its current submission status is not visible. Do not infer closure from elapsed dates alone. Broader ECE vacancy checks remain constrained by the previously documented 403 response.","recordUpdates":"Added structured deadline 2025-12-10 to lehigh-cse-ece-tenured-robotics-prof-2026."
-}

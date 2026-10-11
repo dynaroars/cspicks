@@ -40,3 +40,6 @@ debug_gmu_history.js
 # Playwright artifacts
 test-results/
 playwright-report/
+
+# Crawl/audit evidence belongs in the PR or commit message, not in the repo
+docs/data-sweep*

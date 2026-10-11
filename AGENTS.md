@@ -6,6 +6,8 @@ This file provides guidance to AI coding agents (Claude Code, Codex, Cursor, Aid
 
 - Commit directly to `main` by default.
 - Do not create a feature branch unless the user explicitly requests one.
+- Never commit crawl/audit evidence or ledger files (e.g. `docs/data-sweep-*`). Put evidence in the commit message
+  or PR description; per-school crawl state already lives in `scripts/data/jobs-sources.json`.
 - Exception: scheduled/unattended routine runs follow [docs/AUTOMATION.md](docs/AUTOMATION.md) instead —
   producers open PRs (never push to `main`) and stop at their batch cap; the auditor routine merges.
 
