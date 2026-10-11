@@ -1,4 +1,4 @@
-import { filterSearchRecords } from './search-query.js';
+import { filterSearchRecords } from './search-results.js';
 import { loadData, publicationMatchesConferenceSet, schoolAliases } from './data.js';
 import { createFilterBar } from './filters.js';
 import { initAnalysis, refreshAnalysis, setAnalysisTarget } from './analysis.js';

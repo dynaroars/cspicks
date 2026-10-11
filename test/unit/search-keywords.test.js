@@ -34,7 +34,7 @@ test('keywords retain quoted values, aliases, and AND/OR semantics', async () =>
 });
 
 test('main-search keywords combine school, researcher, and publication subjects without changing metrics', async () => {
-  const { filterSearchRecords } = await import('../../src/search-query.js');
+  const { filterSearchRecords } = await import('../../src/search-results.js');
   const person = (name, affiliation, venue) => ({ name, affiliation, aliases: [], pubs: [{ area: venue, year: 2026, count: 1, adjustedcount: 1 }] });
   const data = {
     professors: { Alice: person('Alice', 'School One', 'icse'), Bob: person('Bob', 'School One', 'oakland'), Carol: person('Carol', 'School Two', 'icse') },

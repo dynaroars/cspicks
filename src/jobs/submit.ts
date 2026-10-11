@@ -4,7 +4,7 @@
  */
 import { areaLabels, escapeHtml } from '../shared.js';
 import { LEVEL_LABELS, TRACK_LABELS, VISA_LABELS, loadJobsData } from './jobs-data.js';
-import { US_STATES } from './states.js';
+import { US_STATES } from './jobs-data.js';
 import { buildJobEmailUrl, buildJobGithubIssueUrl, buildJobSubmissionContent } from './submission.js';
 import { DELIVERY_BUTTONS, QUICK_SECTION, deliver, quickLabel, quickPayload, setupQuickMode } from '../submit-quick.js';
 import type { Job } from '../types.js';

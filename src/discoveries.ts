@@ -2,7 +2,7 @@ import { filterByYears } from './data.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateCorpusDiagnostics, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
 import { buildFundingIndex, calculateFundingDiscoveries, formatFunding, parseNsfDataset } from './nsf.js';
 import { SITE_NAME } from './seo.js';
-import { shareUrl } from './share.js';
+import { shareUrl } from './result-actions.js';
 import { trackDiscoveryShare } from './analytics.js';
 import { areaLabels, escapeHtml, getInstitutionShortName } from './shared.js';
 import type { FilterController } from './filters.js';

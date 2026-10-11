@@ -4,9 +4,8 @@ import fs from 'node:fs/promises';
 import {
   deadlineLabel, filterJobs, groupBySchool, isActive, jobsSuggestions, parseJobs, stateCounts
 } from '../../src/jobs/jobs-data.js';
-import { renderJobCard, renderSchoolCard, renderStateMap } from '../../src/jobs/jobs-render.js';
-import { exportFileName, jobsToMarkdown } from '../../src/jobs/jobs-export.js';
-import { STATE_TILE_ROWS, US_STATES, resolveState } from '../../src/jobs/states.js';
+import { exportFileName, jobsToMarkdown, renderJobCard, renderSchoolCard, renderStateMap } from '../../src/jobs/jobs-render.js';
+import { STATE_TILE_ROWS, US_STATES, resolveState } from '../../src/jobs/jobs-data.js';
 import { buildQueue, recheckDays } from '../../scripts/jobs-maintain.mjs';
 
 const NOW = Date.UTC(2026, 10, 1, 12); // Nov 1, 2026

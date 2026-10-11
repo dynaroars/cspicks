@@ -1,9 +1,8 @@
+import { opportunityDeadline, opportunityHeader, opportunityMeta } from '../opportunity-card.js';
 import { resultActions } from '../result-actions.js';
 import { areaLabels, escapeHtml, safeExternalUrl } from '../shared.js';
-import { opportunityHeader, opportunityDeadline, opportunityMeta } from '../opportunity-card.js';
-import { LEVEL_LABELS, TRACK_LABELS, VISA_LABELS, deadlineLabel, filterValues, formatDay } from './jobs-data.js';
-import { US_STATES } from './states.js';
-import type { Job } from '../types.js';
+import { deadlineLabel, DEPARTMENT_LABELS, departmentKind, filterValues, formatDay, LEVEL_LABELS, TRACK_LABELS, US_STATES, VISA_LABELS } from './jobs-data.js';
+import type { Job, VisaSponsorship } from '../types.js';
 import type { FilterChoice, SchoolJobs } from './jobs-data.js';
 
 export interface SchoolRank { rank: number | null; areaRanks: Record<string, number> }
@@ -94,4 +93,68 @@ export function renderStateMap(rows: string[][], counts: Record<string, number>,
     return `<button type="button" class="job-map-tile level-${level}${isSelected ? ' is-selected' : ''}" data-state="${code}" aria-pressed="${isSelected}" aria-label="${escapeHtml(US_STATES[code] || code)}: ${count} position${count === 1 ? '' : 's'}" title="${escapeHtml(US_STATES[code] || code)}: ${count}"${count === 0 && !isSelected ? ' data-empty="true"' : ''}><span>${code}</span><small>${count || ''}</small></button>`;
   });
   return cells.join('');
+}
+
+/**
+ * Markdown export of starred postings, so applicants can take their shortlist offline
+ * (notes, a local AI assistant, a spreadsheet) after searching here.
+ */
+const SITE_URL = 'https://cspicks.roars.dev';
+
+const VISA_TEXT: Record<VisaSponsorship, string> = {
+  yes: 'Available, per the posting',
+  'case-by-case': 'Case by case, per the posting',
+  no: 'Not offered, per the posting',
+  'not-stated': 'Not stated on the posting'
+};
+
+/** One line of Markdown text: collapse whitespace so a stray newline cannot break the list or heading. */
+const inline = (value: unknown) => String(value ?? '').replace(/\s+/g, ' ').trim();
+
+export function exportFileName(now = Date.now()) {
+  return `cspicks-starred-jobs-${new Date(now).toISOString().slice(0, 10)}.md`;
+}
+
+export function jobsToMarkdown(jobs: Job[], { ranks = () => undefined, now = Date.now() }: { ranks?: RankLookup; now?: number } = {}) {
+  const lines = [
+    '# Starred US academic CS jobs',
+    '',
+    `Exported from CS Picks (${SITE_URL}/jobs.html) on ${new Date(now).toISOString().slice(0, 10)} · ${jobs.length} position${jobs.length === 1 ? '' : 's'}.`,
+    'Details come from public hiring pages and community submissions and may be out of date; confirm everything on the official posting before applying. CSRankings ranks are US, last 10 years.',
+    ''
+  ];
+
+  jobs.forEach((job, index) => {
+    const info = ranks(job.school);
+    const url = safeExternalUrl(job.url);
+    const areas = [
+      ...job.areas.map(area => {
+        const areaRank = info?.areaRanks[area];
+        return `${areaLabels[area] || area}${areaRank ? ` (#${areaRank} CSRankings)` : ''}`;
+      }),
+      job.anyArea ? 'Open to all areas' : ''
+    ].filter(Boolean);
+    const fields: Array<[string, string]> = [
+      ['Status', deadlineLabel(job, now).text],
+      ['School', `${job.school}${info?.rank ? ` (#${info.rank} CSRankings)` : ''}`],
+      ['Department', `${job.department} (${DEPARTMENT_LABELS[departmentKind(job.department)]})`],
+      ['Location', [job.city, US_STATES[job.state] || job.state].filter(Boolean).join(', ')],
+      ['Position', [TRACK_LABELS[job.track], job.level ? LEVEL_LABELS[job.level] : ''].filter(Boolean).join(' · ')],
+      ['Research areas', areas.join(', ') || 'Not specified'],
+      ['Visa sponsorship', job.visaSponsorship && job.visaSponsorship !== 'not-stated' ? VISA_TEXT[job.visaSponsorship] : ''],
+      ['Review begins', formatDay(job.reviewBegins)],
+      ['Start date', formatDay(job.startDate)],
+      ['Posted', formatDay(job.postedDate)],
+      ['Last confirmed live', formatDay(job.lastSeenAt)],
+      ['Official posting', url === '#' ? '' : `<${url}>`],
+      ['CS Picks', `<${SITE_URL}/jobs.html?q=${encodeURIComponent(`school: "${job.school}"`)}&status=all>`],
+      ['CS Picks ID', `\`${job.id}\``]
+    ];
+    lines.push(`## ${index + 1}. ${inline(job.title)} — ${inline(job.school)}`, '');
+    fields.forEach(([name, value]) => { if (inline(value)) lines.push(`- **${name}:** ${inline(value)}`); });
+    if (job.summary) lines.push('', `> ${inline(job.summary)}`);
+    lines.push('');
+  });
+
+  return `${lines.join('\n').trimEnd()}\n`;
 }

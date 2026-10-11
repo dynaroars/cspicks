@@ -1,10 +1,8 @@
 /**
  * US Jobs page controller: search, filters, state map, position/school views.
  */
-import { DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, TRACK_LABELS, VISA_FILTER_LABELS, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, stateCounts } from './jobs-data.js';
-import { renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
-import { exportFileName, jobsToMarkdown } from './jobs-export.js';
-import { STATE_TILE_ROWS, US_STATES, resolveState } from './states.js';
+import { DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, STATE_TILE_ROWS, TRACK_LABELS, US_STATES, VISA_FILTER_LABELS, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, resolveState, stateCounts } from './jobs-data.js';
+import { exportFileName, jobsToMarkdown, renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
 import { rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
