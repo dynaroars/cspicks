@@ -935,7 +935,10 @@
     },
     {
       "name": "FAST",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-storage-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming editions; corrected known fields, represented Middleware’s two submission cycles, and added PODC 2027.",
+      "remaining": "Next edition announcements or unverified skeleton metadata remain for follow-up."
     },
     {
       "name": "FSE",
@@ -1116,7 +1119,10 @@
     },
     {
       "name": "SC",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-storage-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming editions; corrected known fields, represented Middleware’s two submission cycles, and added PODC 2027.",
+      "remaining": "Next edition announcements or unverified skeleton metadata remain for follow-up."
     },
     {
       "name": "SIGCOMM",
@@ -1388,7 +1394,10 @@
     },
     {
       "name": "HotOS",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-storage-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming editions; corrected known fields, represented Middleware’s two submission cycles, and added PODC 2027.",
+      "remaining": "Next edition announcements or unverified skeleton metadata remain for follow-up."
     },
     {
       "name": "ICAPS",
@@ -1501,7 +1510,10 @@
     },
     {
       "name": "Middleware",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-storage-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming editions; corrected known fields, represented Middleware’s two submission cycles, and added PODC 2027.",
+      "remaining": "Next edition announcements or unverified skeleton metadata remain for follow-up."
     },
     {
       "name": "MMSys",
@@ -1521,7 +1533,10 @@
     },
     {
       "name": "PODC",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-storage-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming editions; corrected known fields, represented Middleware’s two submission cycles, and added PODC 2027.",
+      "remaining": "Next edition announcements or unverified skeleton metadata remain for follow-up."
     },
     {
       "name": "PPSN",
@@ -1549,7 +1564,10 @@
     },
     {
       "name": "SenSys",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-storage-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming editions; corrected known fields, represented Middleware’s two submission cycles, and added PODC 2027.",
+      "remaining": "Next edition announcements or unverified skeleton metadata remain for follow-up."
     },
     {
       "name": "SIGSPATIAL",
