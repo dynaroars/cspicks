@@ -279,9 +279,9 @@
     "facultyCount": 148,
     "jobsUrl": "https://indiana.peopleadmin.com/postings/search",
     "state": "IN",
-    "lastCheckedAt": "2026-10-08T15:28:51Z",
+    "lastCheckedAt": "2026-10-10T12:00:00Z",
     "outcome": "complete",
-    "summary": "Read the IU PeopleAdmin search and four Luddy CS-relevant postings (robotics, AI for life sciences, cybersecurity, quantum CS); skipped Mathematical AI (Mathematics dept) and microelectronics/circuits searches. Non-CS units (2026-10-08): Searched IU Academic Careers (PeopleAdmin) by computer, informatics, data science, AI, engineering and security keywords; found two new Luddy ISD microelectronics searches, an IU Columbus cybersecurity lecturer-track search and an IU South Bend AI tenure-track search. Skipped Mathematical AI, AI-Enabled Experiments (Statistics), Aging and Technology, Biostatistics (IUSM), Law and Emerging Technologies, and the expired Center for Possible Minds postdoc (May 2026 deadline).",
+    "summary": "Rechecked active Luddy faculty postings and IU Academic Careers. Confirmed AI life sciences, cybersecurity, robotics, quantum CS, microelectronics (assistant and senior), IU Columbus cyber-physical cybersecurity lecturer, and IU South Bend AI faculty listings. Added active IU School of Medicine research-professor role in biostatistics/health data science, which explicitly accepts CS PhDs. Also screened new Mathematical AI, Aging and Technology, Law and Emerging Technologies, and AI-enabled health experimentation in Statistics; left out because their stated disciplinary appointments/degree requirements do not clearly target CS PhDs.",
     "checkedUrls": [
       "https://indiana.peopleadmin.com/postings/search?query=computer",
       "https://indiana.peopleadmin.com/postings/34548",
@@ -317,7 +317,7 @@
         "url": "https://indiana.peopleadmin.com/postings/34320"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T18:00:00Z"
+    "relatedCheckedAt": "2026-10-10T12:00:00Z"
   },
   {
     "school": "Univ. of Maryland - College Park",

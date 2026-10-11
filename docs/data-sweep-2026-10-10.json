@@ -42,7 +42,10 @@
     },
     {
       "school": "Indiana University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-indiana-evidence-2026-10-10.json",
+      "findings": "Rechecked eight active computing-related faculty and teaching records, corrected review dates, and added an active health-data research-professor posting that explicitly accepts CS PhDs. Screened adjacent AI, law, and health listings against their stated degree requirements.",
+      "remaining": "Recheck when IU posts or closes calls."
     },
     {
       "school": "Univ. of Maryland - College Park",

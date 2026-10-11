@@ -517,10 +517,10 @@
     "state": "IN",
     "city": "Bloomington",
     "rolling": true,
-    "reviewBegins": "2026-11-14",
+    "reviewBegins": "2026-11-15",
     "startDate": "2027-08-01",
-    "lastSeenAt": "2026-10-08",
-    "summary": "Open-rank search for AI, including generative AI, bridging biomolecular data and clinical insight, housed in Computer Science or Intelligent Systems Engineering. Full consideration by Nov 14, 2026; open until filled.",
+    "lastSeenAt": "2026-10-10",
+    "summary": "Open-rank search for AI, including generative AI, bridging biomolecular data and clinical insight, housed in Computer Science or Intelligent Systems Engineering. Applications by November 14, 2026 receive full consideration; review begins November 15 and continues until filled.",
     "source": "crawl",
     "verified": true,
     "id": "indiana-ai-life-sciences-2026",
@@ -541,7 +541,7 @@
     "rolling": true,
     "reviewBegins": "2026-12-01",
     "startDate": "2027-08-01",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-10",
     "summary": "Open-rank cybersecurity position in the Department of Informatics at Luddy. Review begins Dec 1, 2026 and continues until filled.",
     "source": "crawl",
     "verified": true,
@@ -564,7 +564,7 @@
     "rolling": true,
     "reviewBegins": "2026-11-01",
     "startDate": "2027-08-01",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-10",
     "summary": "Faculty 100 search in quantum computer science covering theory, software systems, security, and applications. Full consideration by Nov 1, 2026; open until filled.",
     "source": "crawl",
     "verified": true,
@@ -579,15 +579,16 @@
     "track": "tenure-track",
     "level": "open",
     "areas": [
-      "robotics"
+      "robotics",
+      "chi"
     ],
     "state": "IN",
     "city": "Bloomington",
     "rolling": true,
-    "reviewBegins": "2026-11-15",
+    "reviewBegins": "2026-11-16",
     "startDate": "2027-08-01",
-    "lastSeenAt": "2026-10-08",
-    "summary": "Open-rank tenure-track search in human-centered robotics (interaction, embodied intelligence, robots in human environments) supporting the new B.S. in Robotics. Full consideration for applications received by Nov 15, 2026; accepted until filled.",
+    "lastSeenAt": "2026-10-10",
+    "summary": "Open-rank Luddy School search in human-centered robotics, including human-robot interaction, embodied intelligence, wearable systems, and robotics in human environments. Applications by November 15, 2026 receive full consideration; review begins November 16 and continues until filled.",
     "source": "crawl",
     "verified": true,
     "id": "indiana-robotics-2026",
@@ -615,7 +616,7 @@
     "url": "https://indiana.peopleadmin.com/postings/34402",
     "visaSponsorship": "not-stated",
     "summary": "Faculty 100 hire in the theory and systems of quantum computing: quantum security and cryptography, error correction, algorithms and complexity, and quantum programming languages and verification.",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-10",
     "source": "crawl",
     "verified": true
   },
@@ -3112,7 +3113,7 @@
     "summary": "Several assistant-professor positions in analog/mixed-signal ICs, digital VLSI and AI hardware, advanced packaging, and power electronics. Applications received by October 16, 2026 get full consideration and review continues until filled; PhD in engineering or a related field.",
     "source": "crawl",
     "verified": true,
-    "lastSeenAt": "2026-10-08"
+    "lastSeenAt": "2026-10-10"
   },
   {
     "id": "indiana-isd-microelectronics-senior-2026",
@@ -3135,7 +3136,7 @@
     "summary": "Several tenured associate/full positions in analog/mixed-signal ICs, digital VLSI and AI hardware, advanced packaging, and power electronics. Review begins October 16, 2026 and continues until positions are filled.",
     "source": "crawl",
     "verified": true,
-    "lastSeenAt": "2026-10-08"
+    "lastSeenAt": "2026-10-10"
   },
   {
     "id": "indiana-columbus-cybersecurity-cps-lecturer-2026",
@@ -3157,7 +3158,7 @@
     "summary": "Non-tenure-track lecturer, senior lecturer or teaching professor who will also direct a new B.S. in Cybersecurity for Cyber-Physical Systems. Full consideration for applications by October 15, 2026; search stays open until filled.",
     "source": "crawl",
     "verified": true,
-    "lastSeenAt": "2026-10-08"
+    "lastSeenAt": "2026-10-10"
   },
   {
     "id": "indiana-south-bend-cs-ai-2026",
@@ -3174,12 +3175,11 @@
     "url": "https://indiana.peopleadmin.com/postings/34320",
     "visaSponsorship": "not-stated",
     "deadline": null,
-    "rolling": false,
     "startDate": "2027-08-01",
-    "summary": "Tenure-track position for a CS PhD with research experience in artificial intelligence at a teaching-focused regional campus (three courses per semester). Best-consideration date is January 1, 2027; no firm deadline stated.",
+    "summary": "Tenure-track position for a CS PhD with AI research experience at a teaching-focused regional campus, with a typical four-course-per-semester load. January 1, 2027 is the best-consideration date; the posting does not give a firm close date.",
     "source": "crawl",
     "verified": true,
-    "lastSeenAt": "2026-10-08"
+    "lastSeenAt": "2026-10-10"
   },
   {
     "id": "ucb-ccb-computational-biomedicine-2026",
@@ -6308,6 +6308,28 @@
     "url": "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Boston-MA-Main-Campus/Assistant-Associate-Full-Professor---College-of-Engineering---Civil-and-Environmental-Engineering---Intelligent-Infrastructure---Boston_R142709",
     "visaSponsorship": "not-stated",
     "summary": "Tenure-track faculty search on intelligent infrastructure, construction and manufacturing, adaptive robotics, and digital twins, with opportunities for a joint appointment in Khoury College. Research examples include AI-enabled construction, digital twins, sensing, infrastructure control and inspection, and autonomous mobility; the stated degree requirement is civil or environmental engineering or a related field.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "indiana-biostat-health-data-research-prof-2026",
+    "school": "Indiana University",
+    "department": "Department of Biostatistics and Health Data Science, IU School of Medicine / Fairbanks School of Public Health",
+    "title": "Assistant Research Professor in Biostatistics and Health Data Science",
+    "track": "research",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "vision",
+      "bio"
+    ],
+    "state": "IN",
+    "city": "Indianapolis",
+    "rolling": true,
+    "lastSeenAt": "2026-10-10",
+    "url": "https://indiana.peopleadmin.com/postings/34574",
+    "visaSponsorship": "not-stated",
+    "summary": "Research faculty role in biostatistics, health data science, biomedical informatics, multimodal AI, medical imaging, and biomedical data platforms; the search continues until filled. Eligible PhD fields expressly include computer science, electrical engineering, informatics, data science, statistics, biomedical engineering, and related areas.",
     "source": "crawl",
     "verified": true
   }
