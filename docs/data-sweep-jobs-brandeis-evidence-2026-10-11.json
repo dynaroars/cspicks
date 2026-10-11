@@ -1,0 +1,16 @@
+{
+  "school": "Brandeis University",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.brandeis.edu/human-resources/careers/index.html",
+      "finding": "Current HR portal links faculty positions and staff/executive vacancies."
+    },
+    {
+      "url": "https://www.brandeis.edu/computer-science/tenuretrack_facultysearch.html",
+      "finding": "CS tenure-line notice is a Fall 2020 search; stale."
+    }
+  ],
+  "findings": "The current Brandeis HR careers portal links to faculty vacancies, but the CS School page surfaced for this search is explicitly a Fall 2020 tenure-line call. No current CS faculty opening was found in the official sources reviewed.",
+  "recordUpdates": "No job records added or removed."
+}

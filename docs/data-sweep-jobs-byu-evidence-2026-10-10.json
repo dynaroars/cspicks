@@ -1,0 +1,16 @@
+{
+  "school": "Brigham Young University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://cs.byu.edu/department/faculty-positions",
+      "finding": "Official CS department page lists two CFS Professional Faculty openings with August 2027 start and Oct 4, 2026 deadline; at the Oct 10 check the deadline has passed. The page also describes future CFS professorial/professional recruiting but gives no active posting."
+    },
+    {
+      "url": "https://byu.wd1.myworkdayjobs.com/faculty-careers/job/Provo-UT/Electrical-and-Computer-Engineering---CFS-Professorial-Faculty--2-Positions-_JR-11361",
+      "finding": "Existing ECE CFS professorial record was not individually renderable on Workday in this pass; retain prior recorded Dec 1, 2026 deadline and CS eligibility without asserting a fresh open-page confirmation."
+    }
+  ],
+  "findings": "No newly found CS posting is still within its stated application deadline. The previously recorded ECE CFS role has a Dec 1 deadline from the prior official check.",
+  "recordUpdates": "Refreshed lastSeenAt on existing ECE CFS role based on the prior checked official listing; no change to its deadline or terms."
+}

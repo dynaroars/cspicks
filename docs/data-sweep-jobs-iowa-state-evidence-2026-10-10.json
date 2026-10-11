@@ -1,0 +1,15 @@
+{
+  "school": "Iowa State University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://jobs.iastate.edu/",
+      "finding": "Official Iowa State employment landing page checked; dynamic current openings list did not expose records in the research browser."
+    },
+    {
+      "url": "https://isu.wd1.myworkdayjobs.com/IowaStateJobs",
+      "finding": "Official Workday destination from prior pass; keyword pages returned shell only."
+    }
+  ],
+  "recordUpdates": "No new posting confirmed. Official jobs.iastate.edu provides job search landing page but application system is Workday and prior keyword-specific Workday pages rendered as a shell. Existing search remains incomplete."
+}

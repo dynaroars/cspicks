@@ -1,0 +1,20 @@
+{
+  "school": "University of Colorado Boulder",
+  "checkedAt": "2026-10-10",
+  "scope": "Official Computer Science hiring page and attempted direct CU Boulder Jobs retrieval; adjacent Information Science department presence checked.",
+  "findings": [
+    {
+      "url": "https://www.colorado.edu/cs/jobs",
+      "finding": "Three tenure-track faculty searches remain publicly listed: Architecture and Systems, Quantum Computation and AI. The page also confirms semester-by-semester temporary teaching appointments; full-consideration dates are July 1, December 1 and March 1, with applications accepted until filled. Refreshed the three faculty records and added the teaching appointment pathway."
+    },
+    {
+      "url": "https://jobs.colorado.edu/jobs/SearchJobs/",
+      "finding": "Direct CU Jobs access returned HTTP 406 in this pass, so the ECEE position and GEM Lab postdoc mentioned in the prior source summary could not be reconfirmed against the official postings. No new details inferred from third-party job boards."
+    },
+    {
+      "url": "https://www.colorado.edu/cmdi/infoscience",
+      "finding": "Information Science department site describes computing-adjacent research but no hiring page/open posting was located in this pass."
+    }
+  ],
+  "deferred": "Recheck CU Jobs official board after access issue and inspect ECEE/Information Science openings."
+}

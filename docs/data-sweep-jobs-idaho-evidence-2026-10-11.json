@@ -1,0 +1,20 @@
+{
+  "school": "University of Idaho",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://uidaho.peopleadmin.com/postings/search?commit=Search&query_position_type_id%5B%5D=2&sort=225+desc",
+      "finding": "Current faculty search has 19 postings; includes CSE Assistant Clinical Faculty F001439P."
+    },
+    {
+      "url": "https://www.uidaho.edu/human-resources/applicant-resources",
+      "finding": "Official HR says all faculty searches are normally posted on the careers page."
+    },
+    {
+      "url": "https://www.uidaho.edu/engineering/academics/computer-science",
+      "finding": "Current Department of Computer Science and Cybersecurity page."
+    }
+  ],
+  "findings": "Current University of Idaho faculty portal lists the Department of Computer Science and Cybersecurity Assistant Clinical Faculty posting F001439P; a current careers search result also advertises a tenure-track Assistant Professor role in CS, Cybersecurity, or AI beginning August 2027. Existing records include both calls. Additional positions and details require review across all search pages, so marked partial.",
+  "recordUpdates": "Refreshed existing CS faculty records based on current portal; no additional listing IDs added in this pass."
+}

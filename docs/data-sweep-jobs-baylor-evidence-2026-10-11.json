@@ -1,0 +1,24 @@
+{
+  "school": "Baylor University",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.ecs.baylor.edu/departments-institutes/computer-science/open-cs-faculty-positions",
+      "finding": "Lists three active CS faculty positions: cybersecurity chair, AI assistant/associate, and cybersecurity assistant professor."
+    },
+    {
+      "url": "https://apply.interfolio.com/190574",
+      "finding": "Patterson Endowed Chair of Cybersecurity and Professor, tenured."
+    },
+    {
+      "url": "https://apply.interfolio.com/191028",
+      "finding": "Assistant/Associate Professor, tenure-track or tenured, AI."
+    },
+    {
+      "url": "https://apply.interfolio.com/191026",
+      "finding": "Assistant Professor, tenure-track, cybersecurity."
+    }
+  ],
+  "findings": "Current official CS open-positions page confirms three active searches: tenured Patterson Cybersecurity Chair, TT/tenured Assistant or Associate Professor in AI, and TT Assistant Professor in Cybersecurity. All three match existing records, refreshed their last-seen dates.",
+  "recordUpdates": "Refreshed three existing Baylor CS records."
+}

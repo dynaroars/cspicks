@@ -1,0 +1,16 @@
+{
+  "school": "University of Vermont",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.uvmjobs.com/postings/search",
+      "finding": "Current UVM 108-posting official board includes no computing department faculty role in the displayed faculty postings. It does show a Senior Machine Learning Engineer in Surgery (staff classification) and Research Computing Systems Engineer (staff); neither is an academic CS faculty/postdoctoral appointment."
+    },
+    {
+      "url": "https://www.uvm.edu/cems/careers-cems",
+      "finding": "CEMS careers page previously checked lists no Computer Science faculty posting; latest UVM board spot check does not surface one."
+    }
+  ],
+  "findings": "No academic CS, ECE, data-science faculty, or computing postdoc position surfaced. Current ML engineering role is staff rather than an academic appointment and not included in this faculty/jobs dataset.",
+  "recordUpdates": "No job record added."
+}

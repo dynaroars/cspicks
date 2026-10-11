@@ -1,0 +1,15 @@
+{
+  "school": "Oregon State University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://jobs.oregonstate.edu/postings/172089",
+      "finding": "Active EECS E-Campus Instructor Pool (P09323UF) posted Aug 5, 2025 and closes Dec 15, 2026; it covers fixed-term part-time instructor appointments for 2025/26 and Fall 2026. The official online CS teaching page says it is continuously hiring, with part-time/full-time teaching, instructor/professor of practice/professor of teaching tracks; the stale direct posting link was corrected."
+    },
+    {
+      "url": "https://engineering.oregonstate.edu/EECS/about/eecs-job-openings/online-cs-faculty-positions",
+      "finding": "Active EECS E-Campus Instructor Pool (P09323UF) posted Aug 5, 2025 and closes Dec 15, 2026; it covers fixed-term part-time instructor appointments for 2025/26 and Fall 2026. The official online CS teaching page says it is continuously hiring, with part-time/full-time teaching, instructor/professor of practice/professor of teaching tracks; the stale direct posting link was corrected."
+    }
+  ],
+  "recordUpdates": "Refreshed the existing E-Campus instructor record with the active posting URL and close date."
+}

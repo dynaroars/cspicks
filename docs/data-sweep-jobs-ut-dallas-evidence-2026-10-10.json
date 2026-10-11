@@ -1,0 +1,15 @@
+{
+  "school": "University of Texas at Dallas",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://cs.utdallas.edu/people/job-postings/",
+      "finding": "Official CS Job Postings page provides links to department and university job opportunities but exposes no specific current opening in its rendered content. Direct campus listing was unavailable to confirm the existing lecturer record; audit remains partial."
+    },
+    {
+      "url": "https://jobs.utdallas.edu/postings/32722",
+      "finding": "Official CS Job Postings page provides links to department and university job opportunities but exposes no specific current opening in its rendered content. Direct campus listing was unavailable to confirm the existing lecturer record; audit remains partial."
+    }
+  ],
+  "recordUpdates": "No job records changed; current audit is partial because official posting details could not be retrieved."
+}

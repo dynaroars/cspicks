@@ -1,0 +1,19 @@
+{
+  "school": "Brown University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://cs.brown.edu/about/positions/",
+      "finding": "Current CS positions page lists two AI Professor of the Practice appointments and an assistant professor tenure-track computational biology role with CS tenure home."
+    },
+    {
+      "url": "https://apply.interfolio.com/192839",
+      "finding": "Official Interfolio link for the AI practice faculty search; detail content did not render."
+    },
+    {
+      "url": "https://apply.interfolio.com/189906",
+      "finding": "Official Interfolio link for computational biology tenure-track search; detail content did not render."
+    }
+  ],
+  "recordUpdates": "Refreshed two Professor of the Practice AI faculty roles (assistant and associate rank; one Interfolio posting) and the assistant professor computational biology tenure-track role. AI roles are open until filled with Nov 1 full-consideration date; computational biology accepts until filled with Oct 15 full-consideration date."
+}

@@ -1,0 +1,7 @@
+{
+  "school":"University of Nevada Las Vegas","checkedAt":"2026-10-11",
+  "checkedSources":[
+    {"url":"https://nshe.wd1.myworkdayjobs.com/UNLV-External","finding":"Official Workday board previously showed current Cybersecurity lecturer R0152399 and CS Assistant Professor-in-Residence R0150748. Refreshed R0152399; R0150748 names a Fall 2026 start but has no current-cycle dates and may be stale."},
+    {"url":"https://www.unlv.edu/cs","finding":"Department source reviewed in prior adjacent pass; no separate new current-cycle faculty announcement identified."}
+  ],"findings":"Current cybersecurity lecturer record refreshed. The older in-residence listing remains unverified as active because its start cycle has passed.","recordUpdates":"Refreshed lastSeenAt to 2026-10-11 for unlv-cybersecurity-ai-lecturer-2026."
+}

@@ -1,0 +1,16 @@
+{
+  "school": "University of Alabama - Birmingham",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.uab.edu/faculty/jobs",
+      "finding": "Official UAB faculty jobs portal. Search results did not expose current CS requisition details."
+    },
+    {
+      "url": "https://www.uab.edu/cas/computerscience/",
+      "finding": "Official CS department page reviewed."
+    }
+  ],
+  "findings": "Official source identified, but current faculty-job listing is not readable from the indexed results; partial pending portal query.",
+  "recordUpdates": "No job records changed pending full posting verification."
+}

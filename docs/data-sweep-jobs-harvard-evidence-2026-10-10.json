@@ -1,0 +1,19 @@
+{
+  "school": "Harvard University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://seas.harvard.edu/about-us/employment-jobs",
+      "finding": "Official SEAS employment page links to the Harvard Academic Positions board for faculty, researchers, lecturers, postdocs, and fellows."
+    },
+    {
+      "url": "https://academicpositions.harvard.edu/postings/16840/print_preview",
+      "finding": "Official current SEAS CS tenure-track posting bridges AI with other CS areas, expects July 1, 2027 start, review begins Nov 15, 2026 and continues until filled. Existing record confirmed."
+    },
+    {
+      "url": "https://academicpositions.harvard.edu/postings/search?388%5B0%5D=8&commit=Search&page=2&sort=375+desc&utf8=%E2%9C%93",
+      "finding": "Harvard board search results currently include a Visual Computing postdoctoral listing; comprehensive status revalidation of all previously captured jobs not completed in this pass."
+    }
+  ],
+  "recordUpdates": "Refreshed the current CS tenure-track Professor record. Other previously tracked CS and related Harvard records remain unreviewed."
+}

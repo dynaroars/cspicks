@@ -1,0 +1,8 @@
+{
+  "school":"Boise State University","checkedAt":"2026-10-11",
+  "checkedSources":[
+    {"url":"https://www.boisestate.edu/jobs/","finding":"Current careers landing page reviewed; no current CS-specific faculty opening linked."},
+    {"url":"https://www.boisestate.edu/coen-cs/about/stats/","finding":"Computer Science department page reviewed for its jobs link; no new faculty requisition surfaced in this pass."},
+    {"url":"https://jobs.boisestate.edu/jobs/search?query=computer","finding":"Prior official job-board search for computer and professor found no CS or adjacent computing faculty opening."}
+  ],"findings":"No current Computer Science faculty vacancy verified.","recordUpdates":"No job records added."
+}

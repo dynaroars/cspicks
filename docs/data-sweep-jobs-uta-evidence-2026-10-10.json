@@ -1,0 +1,15 @@
+{
+  "school": "University of Texas at Arlington",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://www.uta.edu/academics/schools-colleges/engineering/academics/departments/cse/about/faculty-hiring",
+      "finding": "Official CSE page labels an open-rank tenure/tenure-track professor search as a current opening across CSE, with emphasis on AI/ML and generative-AI cybersecurity; tentative start is Fall 2026."
+    },
+    {
+      "url": "https://uta.peopleadmin.com/postings/32798",
+      "finding": "Official posting link redirected to generic PeopleAdmin search page; posting details and current accept-applications status could not be confirmed. Tentative Fall 2026 start is already underway."
+    }
+  ],
+  "recordUpdates": "No job added because the public department page conflicts with its Fall 2026 start date and the application portal no longer exposes the referenced posting. Needs recheck with the department or portal."
+}

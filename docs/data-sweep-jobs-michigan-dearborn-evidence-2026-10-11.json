@@ -1,0 +1,8 @@
+{
+  "school":"University of Michigan-Dearborn","checkedAt":"2026-10-11",
+  "checkedSources":[
+    {"url":"https://umdearborn.edu/human-resources/employment-recruitment","finding":"Dearborn HR directs all open positions to U-M Careers."},
+    {"url":"https://careers.umich.edu/search-jobs","finding":"Current U-M Careers results reviewed. Current faculty roles surfaced for other Dearborn departments and Flint campus, but no Dearborn Computer and Information Science role. CS research assistant result was Flint and student/work-study, excluded."},
+    {"url":"https://umdearborn.edu/cecs/departments/computer-and-information-science/our-faculty-research","finding":"Current CIS department page describes faculty and research; no hiring notice surfaced. Prior e-Recruit review also found only older-cycle CS/ECE ads."}
+  ],"findings":"No current UM-Dearborn CS/computing faculty opening verified.","recordUpdates":"No job records added."
+}

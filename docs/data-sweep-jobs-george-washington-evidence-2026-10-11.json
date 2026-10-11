@@ -1,0 +1,9 @@
+{
+  "school":"George Washington University","checkedAt":"2026-10-11",
+  "checkedSources":[
+    {"url":"https://www.gwu.jobs/postings/128943","finding":"Current School of Business ISTM tenure-track Assistant Professor, AI cluster posting. CS, Engineering, Information Systems, Business or related doctorate accepted; review begins Oct 26, 2026; Fall 2027 start; open until filled."},
+    {"url":"https://www.gwu.jobs/postings/128516","finding":"Current TRAILS postdoc posting opened Aug 31, 2026, no close date; seeks interdisciplinary trustworthy-AI research and requires a completed/near-complete PhD."},
+    {"url":"https://cs.engineering.gwu.edu/announcements-position-openings","finding":"SEAS CS openings page still only marks a 2024–25 Professor of Practice search open; this is a stale prior-cycle notice."},
+    {"url":"https://engineering.gwu.edu/faculty-research-associate-hardware-ai","finding":"Hardware for AI research associate requires an ECE PhD and extensive neuromorphic device fabrication experience; not treated as a general CS-eligible role."}
+  ],"findings":"Added the active ISTM tenure-track search that explicitly accepts CS PhDs and refreshed the TRAILS postdoc. No new SEAS CS faculty call.","recordUpdates":"Added gwu-istm-ai-assistant-professor-2027; refreshed gwu-trails-ai-postdoc-2026."
+}

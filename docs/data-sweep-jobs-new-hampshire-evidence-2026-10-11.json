@@ -1,0 +1,24 @@
+{
+  "school": "University of New Hampshire",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://ceps.unh.edu/computer-science/lecturer-computer-science",
+      "finding": "Lecturer call states Aug 18, 2025 start and Dec 1, 2024 full-consideration date; stale."
+    },
+    {
+      "url": "https://ceps.unh.edu/computer-science/faculty-staff-directory",
+      "finding": "Current CS faculty/staff directory reviewed."
+    },
+    {
+      "url": "https://jobs.usnh.edu/postings",
+      "finding": "Official USNH applicant portal reviewed; no current CS role established."
+    },
+    {
+      "url": "https://ceps.unh.edu/computer-science/careers",
+      "finding": "Department career page is directed toward student careers, not faculty vacancies."
+    }
+  ],
+  "findings": "Official UNH CS faculty page advertises a Lecturer call for an August 18, 2025 start with full-consideration date Dec 1, 2024; this is a prior-cycle notice. Current department pages and public USNH job portal search yielded no current CS faculty posting. No new record added.",
+  "recordUpdates": "No job records added; current openings were not verified."
+}

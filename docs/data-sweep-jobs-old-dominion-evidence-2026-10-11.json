@@ -1,0 +1,8 @@
+{
+  "school":"Old Dominion University","checkedAt":"2026-10-11",
+  "checkedSources":[
+    {"url":"https://jobs.odu.edu/postings/23963","finding":"Official F1117A tenured Associate/Full Professor posting in accelerator science uses AI/ML, data science, and engineering approaches; PhD in Computer Science is explicitly accepted. Opened July 25, 2026, review date Dec 31, 2026, open until filled."},
+    {"url":"https://jobs.odu.edu/postings/23220","finding":"Older School of Cybersecurity trustworthy-AI requisition redirects to the general jobs page. Original posting (F0144A) opened July 3, 2025 with review July 14, 2025; treated as prior-cycle/stale."},
+    {"url":"https://jobs.odu.edu/postings/search","finding":"Current faculty board was reviewed. Broader adjacent data-science/cybersecurity units need another targeted scan."}
+  ],"findings":"Added a live AI/ML accelerator-science faculty role with CS eligibility. Some older postings redirect after closure.","recordUpdates":"Added odu-accelerator-ai-ml-tenured-prof-2026."
+}

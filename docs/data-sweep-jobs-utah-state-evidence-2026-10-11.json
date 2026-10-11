@@ -1,0 +1,11 @@
+{
+  "school":"Utah State University",
+  "checkedAt":"2026-10-11",
+  "checkedSources":[
+    {"url":"https://careers-usu.icims.com/jobs/9680/school-of-computing-assistant-professor/job","finding":"School of Computing Assistant Professor requisition 9680 returns HTTP 410 Gone."},
+    {"url":"https://engineering.usu.edu/cs/files/2023-07-06-h-1b-notice-of-intent.pdf","finding":"Official labor notice describes a previous Computer Science Assistant Professor appointment from Aug 1, 2023 through July 31, 2026; that appointment period has ended."},
+    {"url":"https://engineering.usu.edu/about/employment-opportunities/","finding":"College of Engineering page was reviewed for active departmental announcements; no current School of Computing faculty posting verified."}
+  ],
+  "findings":"No current-cycle Computer Science faculty role found; prior Assistant Professor search has ended.",
+  "recordUpdates":"No job records added."
+}

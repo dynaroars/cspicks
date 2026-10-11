@@ -1,0 +1,24 @@
+{
+  "school": "University of Arizona",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://cs.arizona.edu/currently-open-positions",
+      "finding": "Current official CS page explicitly says \"NOW ACCEPTING APPLICATIONS\" for TT assistant/associate faculty, Professor of Practice at all ranks, and multiple lecturer ranks. TT review began Nov 15, 2025 and continues until filled; teaching career tracks have no deadline on page."
+    },
+    {
+      "url": "https://arizona.csod.com/ux/ats/careersite/4/home/requisition/24254?c=arizona&sq=req24254",
+      "finding": "Official linked Cornerstone application page did not render application details on this review, but is linked directly from current CS department page."
+    },
+    {
+      "url": "https://arizona.csod.com/ux/ats/careersite/4/home/requisition/23987?c=arizona&sq=req23987",
+      "finding": "Official linked Cornerstone application page did not render application details on this review, but is linked directly from current CS department page."
+    },
+    {
+      "url": "https://arizona.csod.com/ux/ats/careersite/4/home/requisition/23984?c=arizona&sq=req23984",
+      "finding": "Official linked Cornerstone application page did not render application details on this review, but is linked directly from current CS department page."
+    }
+  ],
+  "findings": "Added three current CS department roles exactly as the department is advertising them. Since the linked ATS pages do not render in this review and TT cycle dates are old, records rely on the current department page’s explicit active wording.",
+  "recordUpdates": "Added tenure-track, Professor of Practice, and Lecturer CS roles with source URLs and summaries; deadlines omitted because none are stated."
+}

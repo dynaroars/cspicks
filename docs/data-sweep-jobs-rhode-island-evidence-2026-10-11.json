@@ -1,0 +1,20 @@
+{
+  "school": "University of Rhode Island",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://jobs.uri.edu/postings/search",
+      "finding": "Current applicant portal search reviewed; computer systems administrator is staff, not faculty; no current CS faculty call visible."
+    },
+    {
+      "url": "https://web.uri.edu/cs/tenure-track-faculty-position-in-computer-science/",
+      "finding": "Only CS tenure-track page surfaced, dated Oct 17, 2022 for 2023–24 start; stale."
+    },
+    {
+      "url": "https://www.uri.edu/news/2026/01/update-on-state-fte-cap-and-uri-hiring/",
+      "finding": "URI guidance says tenure-track positions starting Fall 2026 or later are exempted from the temporary freeze; no current CS call identified."
+    }
+  ],
+  "findings": "Current URI applicant portal results were checked against the CS and Statistics department faculty page. Current listings include non-CS positions such as Computer Systems Administrator (professional staff); the visible CS faculty page call is an October 2022 posting for a 2023 start and is stale. No current CS faculty opening surfaced.",
+  "recordUpdates": "No job records added or removed."
+}

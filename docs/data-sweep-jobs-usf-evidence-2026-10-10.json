@@ -1,0 +1,15 @@
+{
+  "school": "University of South Florida",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://www.usf.edu/ai-cybersecurity-computing/centers/cita/hiring/openings.aspx",
+      "finding": "Official CITA/Bellini page lists Assistant Research Professor, job 38406, as current; full-time non-tenure research role jointly recruited, with CS teaching and preferred CS/related PhD. The same page lists Postdoctoral Scholar 38144 in robotics/ML; preferred PhD in CSE, ECE, robotics or related focusing on ML/robotics, rolling until filled. Direct Oracle detail pages were not readable."
+    },
+    {
+      "url": "https://www.usf.edu/arts-sciences/careers/open-positions.aspx",
+      "finding": "Current College of Arts & Sciences page lists School of Information assistant professor focused on data science, AI, health informatics and assistant professor of instruction in information science/IT, but application links are forthcoming; no record added without live application details."
+    }
+  ],
+  "recordUpdates": "Added two Bellini/CITA roles listed under Current Openings; visa and precise deadlines remain unstated because official job detail pages did not render."
+}

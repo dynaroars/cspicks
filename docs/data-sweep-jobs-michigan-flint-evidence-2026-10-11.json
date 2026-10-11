@@ -1,0 +1,16 @@
+{
+  "school": "University of Michigan-Flint",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.umflint.edu/human-resources/employment/",
+      "finding": "Official UM-Flint HR says regular faculty and staff postings are on careers.umich.edu and updated daily."
+    },
+    {
+      "url": "https://www.umflint.edu/cit/contact-us/computer-science/",
+      "finding": "Official CS faculty directory reviewed."
+    }
+  ],
+  "findings": "Official HR portal identified but current campus postings require a separate UM Careers search; partial.",
+  "recordUpdates": "No job records changed pending full posting verification."
+}

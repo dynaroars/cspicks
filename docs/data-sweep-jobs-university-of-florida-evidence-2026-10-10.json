@@ -1,0 +1,31 @@
+{
+  "school": "University of Florida",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://explore.jobs.ufl.edu/en-us/job/537329/assistantassociatefull-professor-ai-models-systems-and-applications",
+      "finding": "Current official CISE/Jacksonville tenure-track or tenured AI models/systems posting remains open until filled; PhD in CS/Engineering or closely related required; anticipated Jan 1, 2027 start. Existing record refreshed."
+    },
+    {
+      "url": "https://explore.jobs.ufl.edu/en-us/job/538999",
+      "finding": "Official ECE ML & Sensing research assistant scientist position appears in current computer science/engineering listings with an Oct 26, 2026 close; existing record refreshed."
+    },
+    {
+      "url": "https://explore.jobs.ufl.edu/cw/en-us/job/540807/ast-prof",
+      "finding": "Active ISOM tenure-track assistant professor in AI, FinTech, business analytics. PhD in business/CS/related and research/teaching in these fields required; starts Aug 2027; closes Oct 15, 2026."
+    },
+    {
+      "url": "https://explore.jobs.ufl.edu/cw/en-us/job/541386/assistant-professor-in-statistics",
+      "finding": "Two tenure-track Statistics assistant professor jobs starting Aug 16, 2027; CS PhD accepted. Areas include causal inference, Bayesian computation, statistics, and ML; review starts Nov 3, 2026, continuing until filled."
+    },
+    {
+      "url": "https://explore.jobs.ufl.edu/en-us/job/541095/lecturer",
+      "finding": "Active non-tenure-track ISOM lecturer starting Jan 2027. MS or PhD in CS or listed related field required; deadline Oct 12, 2026."
+    },
+    {
+      "url": "https://explore.jobs.ufl.edu/en-us/job/537282/assistantassociatefull-professor-electrical-computer-engineering",
+      "finding": "ECE multiple-rank faculty search had application close Sep 18, 2026 and anticipated Aug 2026 start; not added as current."
+    }
+  ],
+  "recordUpdates": "Added three current CS-eligible positions and refreshed two existing active records. No visa claims added where postings did not state sponsorship; whole-campus related-unit scan remains incomplete."
+}

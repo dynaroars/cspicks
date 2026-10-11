@@ -1,0 +1,19 @@
+{
+  "school": "Univ. of California - Los Angeles",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://recruit.apo.ucla.edu/JPF11345",
+      "finding": "Official Academic Recruit posting JPF11345 is a part-time Lecturer in Computer Science for 2026-27. Opened Sep 16, 2026; final date Jun 30, 2027; late applications reviewed if unfilled; PhD in CS or equivalent required."
+    },
+    {
+      "url": "https://www.cs.ucla.edu/faculty-recruitment-academic-and-staff-positions/",
+      "finding": "Department page contains historical faculty hiring text, so the live Academic Recruit posting is the source used for the current lecturer opening."
+    },
+    {
+      "url": "https://recruit.apo.ucla.edu/apply",
+      "finding": "UCLA open-recruitments index reviewed for other current CS positions; JPF11345 is the matching CS listing found in this pass."
+    }
+  ],
+  "recordUpdates": "Added current part-time CS Lecturer 2026-27 posting JPF11345. No active tenure-stream CS posting found in this targeted pass."
+}

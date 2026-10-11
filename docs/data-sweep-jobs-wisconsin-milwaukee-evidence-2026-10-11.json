@@ -1,0 +1,20 @@
+{
+  "school": "Univ. of Wisconsin - Milwaukee",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://uwm.edu/hr/jobs/",
+      "finding": "Official HR page says external job seekers search open positions; employees must use Workday Jobs Hub."
+    },
+    {
+      "url": "https://jobs.wisc.edu/jobs/search?category=Faculty",
+      "finding": "UW System faculty listing reviewed; no UWM CS position identified in visible results."
+    },
+    {
+      "url": "https://uwm.edu/computer-science/",
+      "finding": "Computer Science department URL was inaccessible to browser search."
+    }
+  ],
+  "findings": "UWM’s public HR page says external candidates search Workday and directs current employees to the internal Jobs Hub. Available public faculty listings did not identify a current Computer Science position; the full Workday results could not be verified externally. No record added.",
+  "recordUpdates": "No job records added; current openings were not verified."
+}

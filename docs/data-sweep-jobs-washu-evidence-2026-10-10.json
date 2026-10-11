@@ -1,0 +1,19 @@
+{
+  "school": "Washington University in St. Louis",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://sds.washu.edu/statistics-data-science-faculty-search",
+      "finding": "Official department page lists multiple TT openings at assistant/associate/full ranks for 2027, +AI initiative, doctorate in Statistics or relevant data science field; regular review from Oct 15 and Nov 15 full consideration."
+    },
+    {
+      "url": "https://apply.interfolio.com/190458",
+      "finding": "Official Interfolio application link; details did not render."
+    },
+    {
+      "url": "https://engineering.washu.edu/faculty/",
+      "finding": "CSE faculty directory reviewed; no recruitment listing on faculty directory."
+    }
+  ],
+  "recordUpdates": "Refreshed the existing Statistics & Data Science open-rank tenure-track search (multiple positions, AI initiative), with applications reviewed from Oct 15 and Nov 15, 2026 full-consideration date. It is adjacent to CS; the official department accepts a PhD in statistics or a relevant data-science field, so CS relevance depends on applicant preparation."
+}

@@ -1,0 +1,16 @@
+{
+  "school": "Florida Institute of Technology",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.fit.edu/employment/",
+      "finding": "Official employment page directs candidates to current openings and faculty/adjunct opportunities."
+    },
+    {
+      "url": "https://floridatech.wd5.myworkdayjobs.com/en-US/FloridaTechCareers/job/Tenure-Track-Assistant-Professor-in-Computer-Science--EECS-_R6204",
+      "finding": "CS TT posting R6204 states August 2025 start; prior-cycle/stale."
+    }
+  ],
+  "findings": "Official Florida Tech employment page directs applicants to posted openings and departmental faculty roles. The CS tenure-track Workday posting found in this pass is for an August 2025 start, so it is stale; current live CS role status was not established from the accessible search page.",
+  "recordUpdates": "No job records added or removed."
+}

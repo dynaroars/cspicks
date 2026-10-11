@@ -1,0 +1,20 @@
+{
+  "school": "Virginia Commonwealth University",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://careers.pageuppeople.com/1212/cw/en-us/job/45002098/associate-professorprofessor",
+      "finding": "Job 45002098: strategic senior engineering faculty hire; appointable in CS; AI/autonomous systems/computing focus; review started Aug 1, 2026, open until filled."
+    },
+    {
+      "url": "https://egr.vcu.edu/careers/",
+      "finding": "College of Engineering directs candidates to VCU Jobs."
+    },
+    {
+      "url": "https://careers.pageuppeople.com/1212/cw/en-us/Search/",
+      "finding": "Official VCU careers search."
+    }
+  ],
+  "findings": "Current VCU Careers listing confirms a strategic senior engineering faculty search that can be appointed in Computer Science and targets AI, autonomous systems, and computing; review began Aug 1, 2026 and continues until filled. Other CS department openings were not fully established in this pass. Added this broad engineering role.",
+  "recordUpdates": "Added vcu-engineering-senior-faculty-ai-computing-2026."
+}

@@ -1,0 +1,11 @@
+{
+  "school":"University of South Carolina",
+  "checkedAt":"2026-10-11",
+  "checkedSources":[
+    {"url":"https://uscjobs.sc.edu/postings/200847","finding":"Current official CSE Department Chair requisition FAC00001PO26 is open until filled and requires a CS, Computer Engineering, or closely related doctorate. Preferred review date was March 24, 2026; desired start was Aug 16, 2026. Added with both passed dates noted."},
+    {"url":"https://uscjobs.sc.edu/postings/161446","finding":"CSE Bioinformatics postdoc accepts a CS PhD but has a desired start date of March 1, 2021 and job-open date Feb 1, 2021; treated as a stale requisition despite its portal visibility."},
+    {"url":"https://uscjobs.sc.edu/postings/search?query=computer","finding":"Current CSE filtered listings also include an AI Center administrative coordinator (staff; excluded) and chair posting. Four additional presidential hires are mentioned in the chair ad but lack separate requisitions."}
+  ],
+  "findings":"Added the active-until-filled department chair role, clearly flagging its passed preferred review and start dates. The stale postdoc and administrative role were excluded. Additional planned searches remain unposted.",
+  "recordUpdates":"Added usc-cse-department-chair-2026."
+}

@@ -49,7 +49,10 @@
     },
     {
       "school": "Univ. of Maryland - College Park",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-maryland-evidence-2026-10-10.json",
+      "findings": "Confirmed the existing CS professional-track opening and added six current CS/AIM/postdoctoral roles plus the explicitly open quantum cluster search. Targeted CS, AIM, UMIACS, ARLIS and ECE pages checked.",
+      "remaining": "Broader university-wide job-board discovery is incomplete; revisit by 2026-10-17."
     },
     {
       "school": "University of Michigan",
@@ -60,83 +63,139 @@
     },
     {
       "school": "New York University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-nyu-evidence-2026-10-10.json",
+      "findings": "Refreshed the Courant Faculty Fellow record and added the active Courant CS adjunct pool. Rechecked Tandon CSE/ECE, CDS and Courant official pages.",
+      "remaining": "Tandon visiting-CS listing and CDS Interfolio-linked vacancies need a readable current status; broader university-wide discovery remains. Revisit by 2026-10-17."
     },
     {
       "school": "Univ. of California - Berkeley",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-berkeley-evidence-2026-10-10.json",
+      "findings": "Verified and refreshed all five current CS-targeted faculty/teaching records against official AP Recruit pages and the EECS/CDSS indexes; confirmed the prior Engineering+AI listing is closed.",
+      "remaining": "Recheck when these postings close or new cycle listings appear."
     },
     {
       "school": "CUNY",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-cuny-evidence-2026-10-10.json",
+      "findings": "Rechecked the official CUNY-wide portal and several campus pages. Current candidates include CCNY CS (ID 32906), John Jay Math & CS (ID 32823), and Baruch Information Systems (ID 32329); no dataset records added without readable official posting detail pages.",
+      "remaining": "Direct application details and broader campus coverage remain to verify; revisit by 2026-10-17."
     },
     {
       "school": "Cornell University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-cornell-evidence-2026-10-10.json",
+      "findings": "Refreshed Cornell Tech CS lecturer; added two official Cornell ECE postings explicitly covering computer engineering, embedded systems, digital VLSI, AI hardware, and architecture.",
+      "remaining": "Cornell CS listing returned 403; broader Cornell computing-adjacent and central job-board searches remain. Revisit by 2026-10-17."
     },
     {
       "school": "Rochester Inst. of Technology",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-rit-evidence-2026-10-10.json",
+      "findings": "Checked Golisano CS, Cybersecurity, RIT Careers/Workday, linked postings, and Engineering. Current official page says computing openings closed; BrassRing tenure-track and lecturer links resolve to expired/filled states. No live eligible posting verified."
     },
     {
       "school": "University of Wisconsin - Madison",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-wisconsin-madison-evidence-2026-10-10.json",
+      "findings": "CS recruitment and iSchool checked; two CS RISE links now return 404, dated CHTC ML/AI job expired, iSchool has no open jobs, and ECE quantum posting is explicitly filled. Screened first 30 of 54 current campus faculty listings.",
+      "remaining": "Review the remaining 24 campus faculty listings and broader research postings; revisit by 2026-10-17."
     },
     {
       "school": "Johns Hopkins University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-jhu-evidence-2026-10-10.json",
+      "findings": "Rechecked official CS opportunities page, refreshed current all-area TT search, and added current Normativity Lab and AI-for-healthcare postdoctoral listings.",
+      "remaining": "Interfolio details and broader central/adjacent-unit review remain; revisit by 2026-10-17."
     },
     {
       "school": "University of Central Florida",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-ucf-evidence-2026-10-10.json",
+      "findings": "Official jobs board read; added the current-on-board CECS HARP privacy/cybersecurity postdoc and SMST AI/ML simulation postdoc, both explicitly accepting CS PhDs. Found the earlier R114048/R114025 leads missing from public/jobs.json.",
+      "remaining": "Review remaining computing-related faculty/postdoctoral entries on the 87-item board; revisit by 2026-10-17."
     },
     {
       "school": "Virginia Tech",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-virginia-tech-evidence-2026-10-10.json",
+      "findings": "Refreshed the CS all-area TT search and added a new Mechanical Engineering robotics/AI TT search with CS explicitly included among acceptable PhD fields.",
+      "remaining": "CS department page and several filtered hiring queries were inaccessible in this pass; recheck prior ECE/IAC roles by 2026-10-17."
     },
     {
       "school": "Purdue University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-purdue-evidence-2026-10-10.json",
+      "findings": "Rechecked ECE Indianapolis and the Animal Sciences AI posting. ECE remains open; animal-AI explicitly lists CS as an eligible PhD field and was refreshed.",
+      "remaining": "CS page returns 404, pharmacy AI postdoc detail inaccessible, and broader current job-board review remains; revisit by 2026-10-17."
     },
     {
       "school": "Univ. of California - Santa Cruz",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-ucsc-evidence-2026-10-10.json",
+      "findings": "Reviewed the full official recruitments index and current computing-adjacent detail pages. Refreshed CSE lecturer pool; added CSE and Technology & Information Management adjunct pools, both explicitly accepting CS PhDs. ECE and Computational Media lecturer pools reviewed and excluded as not clearly targeting CS PhDs."
     },
     {
       "school": "University of Utah",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-utah-evidence-2026-10-11.json",
+      "findings": "Official CS hiring page lists two positions, but both PeopleAdmin details specify April 1, 2026 close dates and Open Until Filled: No. No current posting remains."
     },
     {
       "school": "University of Washington",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-washington-evidence-2026-10-10.json",
+      "findings": "Refreshed active Allen School, ECE and iSchool searches; added active iSchool teaching-track IS/IM call closing Oct 15.",
+      "remaining": "Interfolio details remain unreadable; Statistics, Biomedical Informatics, HCDE and wider university discovery remain."
     },
     {
       "school": "Univ. of California - Irvine",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-uci-evidence-2026-10-10.json",
+      "findings": "Checked official ICS and Recruit listings across CS, Informatics, Statistics and EECS. Refreshed nine active records and added four CS/Informatics research pools open to CS/related qualifications."
     },
     {
       "school": "University of Colorado Boulder",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-colorado-boulder-evidence-2026-10-10.json",
+      "findings": "Three live CS faculty searches confirmed; recurring CS teaching intake recorded; CU Jobs returned 406 during direct check.",
+      "remaining": "Reconfirm ECEE and GEM Lab postdoc through official board and find any Information Science openings."
     },
     {
       "school": "Northwestern University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-northwestern-evidence-2026-10-10.json",
+      "findings": "Confirmed and refreshed the live CS-wide and joint CS/ECE quantum faculty searches.",
+      "remaining": "Recheck previously identified IEMS, Statistics and Data Science, ECE, and AI Innovation listings."
     },
     {
       "school": "North Carolina State University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-nc-state-evidence-2026-10-10.json",
+      "findings": "Added the live CS secure software supply chain postdoc from the department employment page.",
+      "remaining": "The postdoc detail page and a second CS lab link render only the job-board shell; verify full details and finish adjacent-unit review."
     },
     {
       "school": "University of Pennsylvania",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-penn-evidence-2026-10-10.json",
+      "findings": "Added three CIS positions newly listed on Penn’s official faculty jobs index.",
+      "remaining": "Interfolio and CIS descriptions were unreadable; verify details and refresh the ESE/adjacent-unit pass."
     },
     {
       "school": "University of Virginia",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-uva-evidence-2026-10-10.json",
+      "findings": "Added current ECE AI/neuroimaging tenure-line role; marked two Data Science postdocs closed based on official filled notices.",
+      "remaining": "Interfolio details and one Research Associate posting are inaccessible; further adjacent-unit review remains."
     },
     {
       "school": "UNC - Charlotte",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-unc-charlotte-evidence-2026-10-10.json",
+      "findings": "Added active CS adjunct lecturer pool and CCI CS-education teaching faculty search.",
+      "remaining": "CCI faculty openings show inconsistent status across the unit page and job board; verify their live details and finish related-unit scan."
     },
     {
       "school": "Arizona State University",
@@ -145,103 +204,178 @@
     },
     {
       "school": "Texas A&M University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-texas-am-evidence-2026-10-10.json",
+      "findings": "Refreshed CSE, ECE, and Statistics/DS searches; all three current openings are still listed.",
+      "remaining": "ECE detail timed out; broad engineering/university adjacent-unit discovery remains."
     },
     {
       "school": "University of Illinois at Chicago",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-uic-evidence-2026-10-10.json",
+      "note": "CS department has no current faculty/professional openings; recorded the adjacent MSCS mathematical computer science TT search. ECE page shows no current posting; campus-wide postdoc scan incomplete."
     },
     {
       "school": "University of Southern California",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-usc-evidence-2026-10-10.json",
+      "note": "CS faculty page has no current posting; USC Careers only surfaces a 2025 CS open-rank record. ECE page is stale/has no current detail. Wider centers and postdocs still need a pass."
     },
     {
       "school": "Univ. of Maryland - Baltimore County",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-umbc-evidence-2026-10-10.json",
+      "note": "COEIT faculty openings index lists CSEE, Information Systems, and Engineering/Computing Education as “To be announced.” No active CS-targeted faculty role surfaced; campus job/postdoc sweep incomplete."
     },
     {
       "school": "Vanderbilt University",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-vanderbilt-evidence-2026-10-10.json",
+      "note": "Current CS faculty/recruitment pages show no advertised vacancy and central postdoc page has no CS-specific current listing. RASR bioinformatics-eligible role centers on experimental omics, excluded; broader adjacent-unit scan incomplete."
     },
     {
       "school": "Univ. of Massachusetts Amherst",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-umass-amherst-evidence-2026-10-10.json",
+      "note": "Refreshed the two-position CICS teaching search (robotics + AI); confirmed rolling acceptance through spring 2027/until filled and Dec 31 suggested date for spring interview consideration. Wider postdoc/center pass incomplete."
     },
     {
       "school": "University of Texas at Dallas",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-ut-dallas-evidence-2026-10-10.json",
+      "note": "CS Job Postings page points to department and university job portals; page does not render any opening details, and the campus portal fetch failed. Existing part-time lecturer record needs direct posting validation."
     },
     {
       "school": "University of Texas at Austin",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-ut-austin-evidence-2026-10-10.json",
+      "note": "CS department confirms 2026–27 recruiting and three active calls: broad CS tenure-line, joint Neuroscience/CS tenure-line, and open-rank instructional faculty. Interfolio details do not render; wider campus units remain to scan."
     },
     {
       "school": "Princeton University",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-princeton-evidence-2026-10-10.json",
+      "note": "Official CS jobs index currently lists existing quantum faculty call, four CS postdoc calls, and AI/computational bioengineering faculty calls; records refreshed. Direct detail pages are inaccessible to verify deadlines and eligibility; broader units remain."
     },
     {
       "school": "Pennsylvania State University",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-penn-state-evidence-2026-10-10.json",
+      "note": "Refreshed current IST cybersecurity/privacy, Applied AI, teaching, AI+health/foundational AI and postdoc postings; refreshed the University Park CS/Huck AI and life-sciences cluster search (full consideration Dec 7). Other campuses/units still need review."
     },
     {
       "school": "George Mason University",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-george-mason-evidence-2026-10-10.json",
+      "note": "CS says it is hiring tenure/tenure-track and term faculty, but the current CEC job board lists seven staff/hourly jobs and no faculty or postdoc vacancy. Wider non-CEC center pass remains."
     },
     {
       "school": "Rutgers University",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-rutgers-evidence-2026-10-10.json",
+      "note": "CS Employment page lists current Lecturers pool (added; primarily aimed at enrolled Rutgers students but qualified nonstudents receive consideration) and Fall 2026 graders/recitation instructors. No faculty search listed; adjacent-unit scan incomplete."
     },
     {
       "school": "Stanford University",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-stanford-evidence-2026-10-10.json",
+      "note": "Current CS careers page lists a junior tenure-track faculty search (Assistant or untenured Associate); record added with department page link because apply portal returns 404. Detail/qualifications and broader postdoc scan incomplete."
     },
     {
       "school": "Stony Brook University",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-stony-brook-evidence-2026-10-10.json",
+      "note": "Refreshed AI Innovation Research Assistant Professor and added active Clinical Data Science/Biomedical Informatics TT search (ref 187356); posting explicitly accepts CS/CE PhD with biomedical informatics research experience. Broader campus scan incomplete."
     },
     {
       "school": "Univ. of California - Davis",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-uc-davis-evidence-2026-10-10.json",
+      "note": "CS Job Opportunities page (last updated July 30, 2025) still displays two postdoctoral advertisements, but it gives no dates and is over a year stale; no current 2026–27 activity confirmed, so neither was added. Broader campus scan incomplete."
     },
     {
       "school": "Oregon State University",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-oregon-state-evidence-2026-10-10.json",
+      "note": "Refreshed E-Campus Instructor Pool to current official posting 172089 (closes Dec 15, 2026); EECS confirms continuous online CS instructor hiring. Wider EECS faculty/research position scan incomplete."
     },
     {
       "school": "University of Minnesota",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-minnesota-evidence-2026-10-10.json",
+      "note": "Refreshed existing ECE computer-engineering/AI/optics tenure-track position from current dataset record; CS lab page found only undergraduate research assistant openings. Whole-campus research/postdoc scan incomplete."
     },
     {
       "school": "University of North Carolina",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-unc-evidence-2026-10-10.json",
+      "note": "Added two current Data Science and Society openings: AI-focused fixed-term teaching professor (Nov 16 deadline) and joint neuroengineering cluster TT role (Nov 16 deadline). Other UNC/UNC Health units remain to scan."
     },
     {
       "school": "Boston University",
-      "status": "pending"
+      "status": "audited",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-boston-university-evidence-2026-10-10.json",
+      "note": "Refreshed all four active 2026/2027 CDS searches from the current official positions index; the Oct 8 CS/Engineering/ECE scan found no other CS-targeted opening."
     },
     {
       "school": "Duke University",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-duke-evidence-2026-10-10.json",
+      "note": "CS jobs index confirms no current CS department opening. Adjacent-unit scan is based on Oct 8 sources; broader campus discovery not refreshed."
     },
     {
       "school": "Univ. of California - Riverside",
-      "status": "pending"
+      "status": "audited",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-ucr-evidence-2026-10-10.json",
+      "note": "Verified active CSE system-security postdoc JPF02353; open until filled through June 30, 2027, with a passed Sep 25 review date and Jan 1 start. Refreshed existing record."
     },
     {
       "school": "Washington State University",
-      "status": "pending"
+      "status": "audited",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-washington-state-evidence-2026-10-10.json",
+      "note": "Official EECS index confirms CS TT deadline Jan 14, 2026 and EE career-track deadline Jan 1, 2026 have passed; Oct 8 Workday/adjacent review found no additional active CS-targeted role."
     },
     {
       "school": "Columbia University",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-columbia-evidence-2026-10-10.json",
+      "note": "CS page still advertises an assistant/associate professor call with July 1, 2026 start, but Interfolio reports it closed; not added. Broader Engineering/EE/DSI sites were blocked in prior scan."
     },
     {
       "school": "University of South Florida",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-usf-evidence-2026-10-10.json",
+      "note": "Added two openings listed on Bellini/CITA Current Openings page: assistant research professor (38406) and robotics/ML postdoc (38144). Oracle job detail pages were inaccessible; wider USF unit refresh incomplete."
     },
     {
       "school": "NJIT",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-njit-evidence-2026-10-10.json",
+      "note": "CS page still displays the Fall 2026 cybersecurity-priority TT search, but official AJO posting 30654 states applications are no longer accepted (listed until May 15, 2026). No active record added; other Ying Wu College units remain to scan."
     },
     {
       "school": "University of Tennessee",
@@ -250,131 +384,227 @@
     },
     {
       "school": "University of Chicago",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-uchicago-evidence-2026-10-10.json",
+      "note": "Refreshed six current CS and Data Science faculty/teaching records listed on the official department and DSI job pages. Some linked portals render no details in this browser; broader campus scan incomplete."
     },
     {
       "school": "Clemson University",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-clemson-evidence-2026-10-10.json",
+      "note": "Central Clemson faculty listing is JavaScript-rendered and showed no readable results; existing ECE search remains from prior official verification but was not independently refreshed today. Adjacent computing units remain."
     },
     {
       "school": "University of Florida",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-university-of-florida-evidence-2026-10-10.json",
+      "note": "Refreshed open AI Models/Systems CISE faculty and ECE ML sensing roles; added AI/FinTech TT, Statistics/ML TT (CS PhDs eligible), and CS-eligible ISOM lecturer. Closed ECE TT search ended Sep 18. Wider campus scan incomplete."
     },
     {
       "school": "Univ. of California - Santa Barbara",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-uc-santa-barbara-evidence-2026-10-10.json",
+      "note": "Added live CS Lecturer JPF03098 from current UC Recruit index. The CS page links old JPF02754 (410 Gone). Reviewed adjacent Engineering AI/Workplace and lecturer-pool roles; only CS posting clearly eligible; wider campus pass incomplete."
     },
     {
       "school": "University at Buffalo",
-      "status": "pending"
+      "status": "partial",
+      "checkedAt": "2026-10-10",
+      "evidence": "docs/data-sweep-jobs-university-at-buffalo-evidence-2026-10-10.json",
+      "note": "Added active CSE Quantum EIP, AI & Society department-chair search, and Information Science HCI/human-AI TT opening; refreshed IAD lecturer. Broader university scan incomplete."
     },
     {
       "school": "Augusta University",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-augusta-university-evidence-2026-10-10.json",
+      "findings": "Refreshed the existing standing SCCS faculty invitation lastSeenAt. Existing AI & Health role retained based on prior official portal capture; current portal status could not be revalidated.",
+      "remaining": "Recheck the external HRMS portal for current dated SCCS and AI & Health postings."
     },
     {
       "school": "Ohio State University",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-ohio-state-university-evidence-2026-10-10.json",
+      "findings": "Refreshed lastSeenAt on the four CSE postings still listed by its official page. ECE postings were not refreshed in this pass.",
+      "remaining": "Recheck Interfolio application availability and refresh the ECE postings and remaining college-wide units."
     },
     {
       "school": "University of Pittsburgh",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-pittsburgh-evidence-2026-10-10.json",
+      "findings": "No current role added; the three SCI faculty searches have expired application full-consideration dates and past start dates. Broader units inaccessible and completion remains partial.",
+      "remaining": "Refresh SCI and broader university recruiting pages when 2026-27 postings appear."
     },
     {
       "school": "University of Texas at Arlington",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-uta-evidence-2026-10-10.json",
+      "findings": "No job added because the public department page conflicts with its Fall 2026 start date and the application portal no longer exposes the referenced posting. Needs recheck with the department or portal.",
+      "remaining": "Verify whether the open-rank CSE search still accepts applications and whether the Fall 2026 cycle remains live."
     },
     {
       "school": "Rice University",
-      "status": "pending"
+      "status": "audited",
+      "evidence": "docs/data-sweep-jobs-rice-evidence-2026-10-10.json",
+      "findings": "No CS-targeted position found on the current official faculty openings page.",
+      "remaining": "Recheck after Rice refreshes faculty opening listings."
     },
     {
       "school": "Univ. of California - Los Angeles",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-ucla-evidence-2026-10-10.json",
+      "findings": "Added current part-time CS Lecturer 2026-27 posting JPF11345. No active tenure-stream CS posting found in this targeted pass.",
+      "remaining": "Recheck UCLA Academic Recruit for newly opened faculty searches and scan other schools for adjacent CS-eligible roles."
     },
     {
       "school": "Tufts University",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-tufts-evidence-2026-10-10.json",
+      "findings": "Refreshed the current TIAI Director, adjunct lecturer, and cybersecurity postdoc records from the CS department listing.",
+      "remaining": "Recheck broader Tufts units and postdoc application status; search the live job portal for additional CS-adjacent roles."
     },
     {
       "school": "University of Notre Dame",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-notre-dame-evidence-2026-10-10.json",
+      "findings": "Added the CSE any-rank tenure-track search using a stable text-fragment link to the official college posting page because its application link destination was not exposed. Existing EE posting not refreshed.",
+      "remaining": "Find a direct application URL and refresh remaining College of Engineering and ECE postings."
     },
     {
       "school": "Florida International University",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-fiu-evidence-2026-10-10.json",
+      "findings": "Refreshed the existing open-rank tenured and teaching professor records; both remain listed as accepting applications until filled.",
+      "remaining": "Recheck broader college faculty searches outside KFSCIS."
     },
     {
       "school": "Harvard University",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-harvard-evidence-2026-10-10.json",
+      "findings": "Refreshed the current CS tenure-track Professor record. Other previously tracked CS and related Harvard records remain unreviewed.",
+      "remaining": "Revalidate the remaining existing CS and adjacent Harvard postings, especially postdocs and deadline status."
     },
     {
       "school": "University of Delaware",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-delaware-evidence-2026-10-10.json",
+      "findings": "No new CS/CIS position added. Search found an ECE tenure-track AI faculty search whose target start date August 2026 has passed; current open status was not revalidated. Broader live Talent Link search requires additional query review.",
+      "remaining": "Search live UD Careers for CS/CIS and AI postings; establish whether the ECE AI search still accepts applications."
     },
     {
       "school": "University of Connecticut",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-uconn-evidence-2026-10-10.json",
+      "findings": "Recorded one UConn Hartford adjunct CSE 1010 opening for Fall 2026, with possible Spring 2027 availability, via the official HR page. Updated existing record if present.",
+      "remaining": "Confirm Spring 2027 continuation and scan current university faculty job postings."
     },
     {
       "school": "Worcester Polytechnic Institute",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-wpi-evidence-2026-10-10.json",
+      "findings": "Added WPI Computer Science part-time adjunct applicant pool, filled as needed, and active until its posting closes.",
+      "remaining": "Find direct Workday posting ID and check whether current full-time faculty searches exist."
     },
     {
       "school": "DePaul University",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-depaul-evidence-2026-10-10.json",
+      "findings": "Added seven current part-time School of Computing adjunct applicant pools: AI, Computer Science, Cybersecurity, Data Science, Database, Game Programming, and HCI. Individual position-detail URLs identify distinct job IDs; detail pages expose generic pool instructions only.",
+      "remaining": "Review adjunct course qualifications and search full-time roles for CS/AI faculty openings."
     },
     {
       "school": "Michigan State University",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-michigan-state-evidence-2026-10-10.json",
+      "findings": "Added fixed-term open-rank MSU CSE faculty role in AI and cybersecurity, job 1171186, open until filled with review beginning Dec 1, 2026 and expected Aug 16, 2027 start.",
+      "remaining": "Search remaining MSU CSE/college postings beyond the current PageUp results."
     },
     {
       "school": "Dartmouth College",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-dartmouth-evidence-2026-10-10.json",
+      "findings": "Added Tanner Chair in Next-Generation Sensing and Integrated Systems for Healthcare, a Thayer tenure-line search that explicitly accepts a CS PhD and names computational/intelligent sensing. Full-consideration date Jan 1, 2027; review continues until filled. No current CS department search found.",
+      "remaining": "Review other Dartmouth school-wide and Neukom Institute research openings for CS-eligible roles."
     },
     {
       "school": "University of North Texas",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-unt-evidence-2026-10-10.json",
+      "findings": "No new CS/CSE job found. Prior Oct 8 scan found no current CSE role and a single adjacent data-science professorship already recorded; current UNT System jobs portal query could not be opened in this pass.",
+      "remaining": "Refresh UNT System job portal search when accessible and revalidate existing data-science professor posting."
     },
     {
       "school": "Yale University",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-yale-evidence-2026-10-10.json",
+      "findings": "Added Assistant Professor, Human-Computer Interaction (CS), listed in Yale’s official academic openings on Oct 9, 2026; direct Interfolio posting linked from the current index.",
+      "remaining": "Review Yale posting details for review date and scan adjacent AI/computing positions at other Yale units."
     },
     {
       "school": "Brown University",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-brown-evidence-2026-10-10.json",
+      "findings": "Refreshed two Professor of the Practice AI faculty roles (assistant and associate rank; one Interfolio posting) and the assistant professor computational biology tenure-track role. AI roles are open until filled with Nov 1 full-consideration date; computational biology accepts until filled with Oct 15 full-consideration date.",
+      "remaining": "Check wider Brown schools and the exact current Interfolio detail status; the CS department page confirms these active positions."
     },
     {
       "school": "Iowa State University",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-iowa-state-evidence-2026-10-10.json",
+      "findings": "No new posting confirmed. Official jobs.iastate.edu provides job search landing page but application system is Workday and prior keyword-specific Workday pages rendered as a shell. Existing search remains incomplete.",
+      "remaining": "Complete Workday faculty and CSE/ECpE keyword review using an accessible portal or direct posted job pages."
     },
     {
       "school": "University of Kansas",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-kansas-evidence-2026-10-10.json",
+      "findings": "Added Assistant Professor in Computer Science/AI (33947BR), a current tenure-track search in AI/ML, expected Aug 18, 2027. Official page conflicts on the review date: narrative says Nov 16, 2026, while metadata and the live listing show Nov 16, 2027; date omitted from record pending clarification.",
+      "remaining": "Resolve contradictory application review date and continue broader KU faculty portal scan."
     },
     {
       "school": "Stevens Institute of Technology",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-stevens-evidence-2026-10-10.json",
+      "findings": "No new active CS-targeted role found. ECE page lists adjunct teaching for Spring 2026 and potentially Fall 2026, but both terms have begun/passed as of Oct 10; existing School of Computing tenure-track cycle has a May 31, 2026 deadline and is stale.",
+      "remaining": "Recheck School of Computing and ECE pages when 2027 positions are posted; verify whether WebCampus adjunct pool remains open."
     },
     {
       "school": "Washington University in St. Louis",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-washu-evidence-2026-10-10.json",
+      "findings": "Refreshed the existing Statistics & Data Science open-rank tenure-track search (multiple positions, AI initiative), with applications reviewed from Oct 15 and Nov 15, 2026 full-consideration date. It is adjacent to CS; the official department accepts a PhD in statistics or a relevant data-science field, so CS relevance depends on applicant preparation.",
+      "remaining": "Check CSE-specific faculty pages and remaining university units for separate open roles."
     },
     {
       "school": "University of Kentucky",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-kentucky-evidence-2026-10-10.json",
+      "findings": "Refreshed Assistant Professor in Computer Science/Engineering (FE05056), tenure-track, open until filled; Aug 2027 start; AI/ML, AI security, and systems for AI needs.",
+      "remaining": "Check wider UK Engineering and university faculty openings for additional computing roles."
     },
     {
       "school": "University of Georgia",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-georgia-evidence-2026-10-10.json",
+      "findings": "Refreshed existing Associate Professor or Professor in AI Systems and Causal Reasoning (508244); current official AI Institute page posted Oct 9, 2026, accepts CS PhDs, Nov 13 full-consideration date. The CS security index says “currently accepting” but links to archived 2020 jobs, so those are not treated as current.",
+      "remaining": "Scan other UGA colleges and confirm official application details for 508244."
     },
     {
       "school": "University of Rochester",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-rochester-evidence-2026-10-10.json",
+      "findings": "CS department currently lists no faculty openings. Refreshed existing ECE tenure-track AI circuits/systems assistant professor search, which accepts CS PhDs and reviews from Dec 1, 2026. Current ECE page also lists a GPU hardware-security/power-side-channel postdoc; added with email application and immediate rolling review.",
+      "remaining": "Check other Rochester schools and labs for additional CS-eligible roles."
     },
     {
       "school": "University of Cincinnati",
-      "status": "pending"
+      "status": "partial",
+      "evidence": "docs/data-sweep-jobs-cincinnati-evidence-2026-10-10.json",
+      "findings": "Added UC Blue Ash Assistant Professor, Mathematics & Computer Science (req 104279), tenure-track, Aug 15 2027 start, applications reviewed from Jan 11 2027 until filled. Minimum master’s plus specified graduate coursework and teaching experience.",
+      "remaining": "Review Cincinnati main campus and other colleges for additional CS/AI eligible positions."
     },
     {
       "school": "University of Texas at San Antonio",
@@ -383,67 +613,99 @@
     },
     {
       "school": "Binghamton University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-binghamton-evidence-2026-10-10.json",
+      "findings": "Official page lists four AI faculty searches open until filled; all application detail pages returned 403. Existing STRIVE AI job record could not be matched to current list and remains unverified."
     },
     {
       "school": "California Inst. of Technology",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-caltech-evidence-2026-10-10.json",
+      "findings": "Current Caltech academic index lists no CMS faculty opening and a CMS postdoctoral positions listing. Existing fellowship program pages and cycle dates were not individually revalidated."
     },
     {
       "school": "Rensselaer Polytechnic Institute",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-rpi-evidence-2026-10-10.json",
+      "findings": "Added current ECSE Lecturer listing that expressly includes computer architecture, robotics, and AI; other general research pools are nonspecific."
     },
     {
       "school": "University of Massachusetts Lowell",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-umass-lowell-evidence-2026-10-10.json",
+      "findings": "Refreshed existing Miner School open-rank core AI tenure-track role; official listing remains active and specifies September 2027 start."
     },
     {
       "school": "Brigham Young University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-byu-evidence-2026-10-10.json",
+      "findings": "Current CS department page’s two Professional CFS openings have an Oct 4 deadline, now passed. Existing ECE CFS professorial posting remains recorded with a Dec 1 deadline from prior official evidence."
     },
     {
       "school": "University of Oklahoma",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-oklahoma-evidence-2026-10-10.json",
+      "findings": "Current engineering index confirms existing Polytechnic applied-AI opening (target start Jan 2027 still possible) and lists an ECE tenure-track HPC role; application details inaccessible and CS tab blank."
     },
     {
       "school": "Louisiana State University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-lsu-evidence-2026-10-10.json",
+      "findings": "CSE page lists four openings, but Workday detail pages are unreadable and current status could not be reconciled. Refreshed the existing ECE research faculty job with its previously recorded Feb 23, 2027 deadline."
     },
     {
       "school": "Colorado State University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-colorado-state-evidence-2026-10-10.json",
+      "findings": "CS department instructor pool closed July 1, 2026; current page lists no other CS faculty role, and prior Workday search found no adjacent computing faculty/postdoc opening."
     },
     {
       "school": "Syracuse University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-syracuse-evidence-2026-10-10.json",
+      "findings": "Existing computer architecture postdoc remains open until filled (posting #077700); canonical posting link corrected. No other CS faculty position found."
     },
     {
       "school": "University of Houston",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-houston-evidence-2026-10-10.json",
+      "findings": "Added current official CS adjunct posting 496573, while flagging its anticipated Sept 1 start date has passed; existing TT/adjacent roles previously recorded, broader sweep not repeated."
     },
     {
       "school": "Texas State University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-texas-state-evidence-2026-10-10.json",
+      "findings": "Refreshed CS postdoctoral pool and added explicit nontenure teaching pool through May 31, 2027; both are pools, not confirmed vacancies."
     },
     {
       "school": "University of Arizona",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-arizona-evidence-2026-10-10.json",
+      "findings": "Added three current CS postings (TT, Professor of Practice, Lecturer) explicitly advertised as accepting applications. Department page provides no closing dates; linked ATS details did not render."
     },
     {
       "school": "Drexel University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-drexel-evidence-2026-10-11.json",
+      "findings": "Added ECE Wireless Systems Lab Research Associate II (job 507203), which accepts CS master’s and covers wireless/systems/AI research. Excluded immunology postdoc."
     },
     {
       "school": "Florida State University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-fsu-evidence-2026-10-11.json",
+      "findings": "Added 2027 TT Data Science & AI assistant professor (job 63490) plus chair and teaching searches still listed currently recruiting. Chair/teaching start dates have passed; HR detail pages may redirect to login."
     },
     {
       "school": "College of William and Mary",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-william-and-mary-evidence-2026-10-11.json",
+      "findings": "Existing CS postdoc JR101939 remains Workday status Open, but expected Sep 10 start and Aug 10 full-consideration date passed; no new CS-specific posting found."
     },
     {
       "school": "Auburn University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-auburn-evidence-2026-10-11.json",
+      "findings": "Added current ECE computer engineering TT and microelectronics TT roles (Nov 1 review; Aug 2027 starts), plus college engineering postdoc pool accepting CS/software PhDs."
     },
     {
       "school": "Univ. of Louisiana - Lafayette",
@@ -452,131 +714,206 @@
     },
     {
       "school": "University of Nebraska",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-nebraska-evidence-2026-10-11.json",
+      "findings": "Added current UNL ECE Assistant/Associate Professor in computer engineering systems/architecture/networking (F_260100; review Dec 4). Three School of Computing webpage postings still have unavailable application listings."
     },
     {
       "school": "Texas Tech University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-texas-tech-evidence-2026-10-11.json",
+      "findings": "Official CS page’s Fall 2026 tenure-track and professor-of-practice deadlines (Jan 5 and May 15) have passed. No CS-targeted ECE role from prior review."
     },
     {
       "school": "University of Hawaii at Manoa",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-hawaii-manoa-evidence-2026-10-11.json",
+      "findings": "Refreshed current ECE open-rank Computer Engineering TT search, review Sep 28 until filled, Jan 2027 start. ICS software-engineering TT ad is prior-cycle and expired."
     },
     {
       "school": "University of Nebraska - Omaha",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-nebraska-omaha-evidence-2026-10-11.json",
+      "findings": "Campus PeopleAdmin search remains without CS/CIST/data-science faculty openings; no added job."
     },
     {
       "school": "University of Vermont",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-vermont-evidence-2026-10-11.json",
+      "findings": "No computing faculty/postdoc opening found; current ML engineer role is staff and outside academic faculty/postdoc dataset."
     },
     {
       "school": "Northern Arizona University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-northern-arizona-evidence-2026-10-11.json",
+      "findings": "Added two Radiant Center UAV postdocs closing Oct 14: sensor-fusion electronics explicitly accepts Computer Engineering/Science PhDs; radio localization is adjacent robotics/algorithms with CS not explicitly named. No CS faculty opening."
     },
     {
       "school": "Emory University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-emory-evidence-2026-10-11.json",
+      "findings": "Current CS page only advertises searches for positions beginning in 2025, with no current dates or verified live application posting; prior iCIMS searches surfaced no 2026-27 role."
     },
     {
       "school": "Florida Atlantic University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-florida-atlantic-evidence-2026-10-11.json",
+      "findings": "EECS page’s Instructor and CS TT listings are 2020-cycle legacy ads; linked Workday requisitions unavailable. No current CS faculty role verified."
     },
     {
       "school": "Georgia State University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-georgia-state-evidence-2026-10-11.json",
+      "findings": "Current official CS employment page lists no individual positions; prior campus-wide CIS/Robinson review found no current 2026–27 computing faculty role."
     },
     {
       "school": "Naval Postgraduate School",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-naval-postgraduate-evidence-2026-10-11.json",
+      "findings": "Official CS openings page still advertises two Assistant/Associate Professor positions and a Lecturer/Senior Lecturer position; refreshed the two existing records. Related IS/ECE pages were previously checked with no qualifying opening."
     },
     {
       "school": "University of Iowa",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-iowa-evidence-2026-10-11.json",
+      "findings": "Refreshed the October 7 theory postdoc and added an active Tippie Business Analytics tenure-track search that explicitly accepts Computer Science PhDs; posting started Aug 14, 2026, Fall 2027 start, extended until filled.",
+      "remaining": "Broader university-wide postdoc and adjacent-unit discovery remains incomplete."
     },
     {
       "school": "University of Texas - El Paso",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-utep-evidence-2026-10-11.json",
+      "findings": "Official CS pages still show AI/software and systems searches for Fall 2026, with the AI/software review beginning Nov 15, 2025; a third-party Fall 2027 systems lead conflicts with the official page and remains unverified. Prior ECE application links returned 403.",
+      "remaining": "No current-cycle UTEP CS posting confirmed; recheck official hiring pages and inaccessible ECE requisitions."
     },
     {
       "school": "Case Western Reserve University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-case-western-evidence-2026-10-11.json",
+      "findings": "Current CDS employment page says only “Look for Future Openings”; prior Interfolio and ECSE review found no active CDS role and excluded EE-specific searches. The 2024 CDS faculty call had a July 2025 start and is stale."
     },
     {
       "school": "Towson University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-towson-evidence-2026-10-11.json",
+      "findings": "Current CIS page states no tenure-track positions. Its adjunct pool specifies Spring 2023 openings and is stale; prior campus search found no current adjacent computing vacancy."
     },
     {
       "school": "University of South Carolina",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-south-carolina-evidence-2026-10-11.json",
+      "findings": "Added the currently listed CSE Department Chair search (CS/Computer Engineering PhD accepted; open until filled, though preferred March 24 review and Aug 2026 start have passed). Excluded a 2021-start Bioinformatics postdoc still surfaced on the portal as stale.",
+      "remaining": "Other four presidential faculty hires are described in the chair posting but have no individual current requisitions; broader units still need review."
     },
     {
       "school": "Georgetown University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-georgetown-evidence-2026-10-11.json",
+      "findings": "CS positions page still lists only the Bertrand Chair dated Nov 14, 2025; current university portal search surfaced a CS department administrator role, which is staff rather than faculty/postdoc. No new qualifying current-cycle role."
     },
     {
       "school": "University at Albany - SUNY",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-albany-evidence-2026-10-11.json",
+      "findings": "Current official CEHC index lists a Lecturer of Game Design & Development and part-time lecturers in Information Sciences/Informatics and Cybersecurity. Application details are routed through Interview Exchange, historically blocked, so exact openings and requisitions could not be validated.",
+      "remaining": "Confirm the current requisition details and whether the Computer Science department has a separate faculty search."
     },
     {
       "school": "University of Nevada",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-nevada-evidence-2026-10-11.json",
+      "findings": "UNR Workday’s CSE-inclusive multi-specialty faculty call R0150166 closed June 2, 2026 (full consideration March 2); current CSE/engineering pages show no newer CS faculty search. Research Assistant postings in a lab are student/doctoral-track opportunities, excluded."
     },
     {
       "school": "Utah State University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-utah-state-evidence-2026-10-11.json",
+      "findings": "The School of Computing Assistant Professor requisition 9680 is gone (HTTP 410); the official H-1B notice shows the prior Assistant Professor appointment ended July 31, 2026. No current-cycle posting surfaced."
     },
     {
       "school": "Wayne State University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-wayne-state-evidence-2026-10-11.json",
+      "findings": "Refreshed the current AI-in-Health open-rank tenure-track role (requisition 3655; full consideration Dec 15, 2026; Fall 2027 start). The Wayne talent portal fetch failed during this pass; broader campus and ECE discovery is not fully revalidated.",
+      "remaining": "Recheck current requisition and adjacent units when the Wayne Talent portal is accessible."
     },
     {
       "school": "Boise State University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-boise-state-evidence-2026-10-11.json",
+      "findings": "Current university and department recruitment pages reviewed; no current Computer Science faculty vacancy surfaced. Prior university board search found no adjacent computing faculty postings."
     },
     {
       "school": "Colorado School of Mines",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-colorado-mines-evidence-2026-10-11.json",
+      "findings": "AI/Machine Learning CS faculty requisition JR108102 had a Mar 31, 2026 close date and Fall 2026 start; it is expired despite still appearing in a Workday search result. No current CSE postdoc or faculty role found."
     },
     {
       "school": "The University of Alabama",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-alabama-evidence-2026-10-11.json",
+      "findings": "Refreshed CS Hydrology/Hydroinformatics Assistant Professor requisition 530733; it is open through Nov 7, 2026 and seeks AI, HPC, and data-science approaches to water research. Existing CS faculty searches also remain in the official portal.",
+      "remaining": "Details for the related Associate and Full Professor water-research requisitions are not yet verified individually."
     },
     {
       "school": "Univ. of California - Merced",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-uc-merced-evidence-2026-10-11.json",
+      "findings": "Refreshed the active CSE Lecturer pool JPF02097 for AY 2026–27; it accepts applications through May 18, 2027, with Spring 2027 review around October. Full academic recruit index was previously checked; no current ladder-rank CSE search found."
     },
     {
       "school": "IUPUI",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-iupui-evidence-2026-10-11.json",
+      "findings": "The former IUPUI campus split into Purdue University in Indianapolis and IU Indianapolis. Added the current Purdue Indianapolis CS AI-for-health postdoc under Purdue University, matching the institution named on its posting. The Luddy Indianapolis openings page has no current CS faculty vacancy.",
+      "remaining": "Verify separate IU Indianapolis academic openings; IUPUI is no longer the current institution name."
     },
     {
       "school": "Kent State University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-kent-state-evidence-2026-10-11.json",
+      "findings": "Added current non-tenure-track Computer Engineering Technology/Cybersecurity Engineering faculty requisition 989308, closing Oct 30, 2026; it accepts a Computer Science master’s. Department-specific CS board has no opening.",
+      "remaining": "Review other computing-adjacent college and postdoctoral units."
     },
     {
       "school": "Lehigh University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-lehigh-evidence-2026-10-11.json",
+      "findings": "Current official research-openings index still lists the joint CSE/ECE tenured Associate/Full Professor robotics search (CS accepted, open until filled). Its Dec 10, 2025 full-consideration date and July 1, 2026 start have passed, so record notes possible staleness.",
+      "remaining": "Recheck whether the joint robotics search remains active and validate the application link."
     },
     {
       "school": "University of Nevada Las Vegas",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-unlv-evidence-2026-10-11.json",
+      "findings": "Refreshed the live Cybersecurity lecturer posting R0152399 (review began Sep 1, 2026; July 2027 start). Workday still lists Assistant Professor-in-Residence R0150748 with Fall 2026 start but no current-cycle dates; retained the caveat and did not add it as a verified new role.",
+      "remaining": "Confirm whether R0150748 remains available; broader adjacent-unit discovery remains incomplete."
     },
     {
       "school": "Old Dominion University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-old-dominion-evidence-2026-10-11.json",
+      "findings": "Added a current tenured Associate/Full Professor search in accelerator science using AI/ML; CS is an accepted PhD field, review date Dec 31, 2026, open until filled. Older trustworthy-AI search R23220 was removed/redirected and treated as stale.",
+      "remaining": "Wider data science and cybersecurity unit postings need one more scan; some source pages redirect after requisitions expire."
     },
     {
       "school": "Temple University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-temple-evidence-2026-10-11.json",
+      "findings": "CIS page still lists only the AI tenure-track search for a Fall 2026 start; this cycle’s start date has passed. Adjunct page is a standing pool, not a specific vacancy. Prior campus/engineering review found no other current CS-eligible role."
     },
     {
       "school": "University of Michigan-Dearborn",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-michigan-dearborn-evidence-2026-10-11.json",
+      "findings": "Current UM Careers list and Dearborn employment portal reviewed; no current Dearborn Computer and Information Science or computing faculty search surfaced. Prior Dearborn-only searches found older cycle postings."
     },
     {
       "school": "George Washington University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-george-washington-evidence-2026-10-11.json",
+      "findings": "Added current GW School of Business tenure-track AI/Information Systems assistant professor search (explicitly accepts CS PhDs; review begins Oct 26, 2026) and refreshed the current TRAILS AI postdoc. SEAS CS page still lists only a 2024–25 Professor of Practice call."
     },
     {
       "school": "Illinois Institute of Technology",
@@ -585,43 +922,60 @@
     },
     {
       "school": "Portland State University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-portland-state-evidence-2026-10-11.json"
     },
     {
       "school": "New Mexico State University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-new-mexico-state-evidence-2026-10-11.json"
     },
     {
       "school": "Ohio University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-ohio-university-evidence-2026-10-11.json"
     },
     {
       "school": "Oakland University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-oakland-evidence-2026-10-11.json",
+      "findings": "The official faculty postings index and current detail for CSE requisition 0000806 (posting 38939) confirm one tenure-track Assistant Professor search in AI, cybersecurity, data science, computer systems, or related area. Detail says review began Jan 15, 2026 and open until filled, but the stated Aug 15, 2026 start date has passed; current hiring activity cannot be confirmed. No other current CSE posting surfaced."
     },
     {
       "school": "UCCS",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-uccs-evidence-2026-10-11.json",
+      "findings": "Current official UCCS HR posting 41085 confirms an Assistant Teaching Professor in Computer Science, posted Sep 22, 2026, ongoing with Oct 5 priority date; refreshed the existing record. No unverified faculty calls added."
     },
     {
       "school": "University of Arkansas",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-arkansas-evidence-2026-10-11.json",
+      "findings": "The University of Arkansas EECS Workday listing includes an active Fall 2027 Assistant Professor search focused on semiconductor electronics/photonics/materials, with AI, neuromorphic, quantum computing, and MEMS among additional interests. The full posting’s required degree discipline and fit for CS applicants need verification; recorded as a candidate related opening pending that check."
     },
     {
       "school": "University of Oregon",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-oregon-evidence-2026-10-11.json",
+      "findings": "The official UO Careers listing confirms an active CS Pro Tem Instructor open pool (Job 536882), accepting applications through July 28, 2027, reviewed as needs arise. Because UO announced a hiring freeze in May 2026 and some searches may be paused, the posting’s precise hiring status remains uncertain. No current CS tenure-track call surfaced in this pass."
     },
     {
       "school": "Boston College",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-boston-college-evidence-2026-10-11.json",
+      "findings": "Current Computer Science department Job Openings page contains student teaching/lab assistant information only; no faculty call is listed. The Morrissey College open-positions page directs faculty applicants to department pages. No current CS faculty posting surfaced in this review."
     },
     {
       "school": "Cleveland State University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-cleveland-state-university-evidence-2026-10-11.json",
+      "findings": "Official provost page describes faculty search procedures but does not list current vacancies. The connected PeopleAdmin system is the authoritative source, but this pass did not establish a complete current CS/engineering posting list. Earlier search results included no active CS posting; recheck is needed before treating absence as verified."
     },
     {
       "school": "Kansas State University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-kansas-state-university-evidence-2026-10-11.json",
+      "findings": "Official CS employment page and HR posting confirm active tenure-track Assistant Professor in Cybersecurity, Req 521518, closing Nov 7, 2026; refreshed existing record. No additional computing faculty roles surfaced in the current faculty listings."
     },
     {
       "school": "Missouri S&T",
@@ -630,83 +984,123 @@
     },
     {
       "school": "Nova Southeastern University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-nova-southeastern-university-evidence-2026-10-11.json",
+      "findings": "The official faculty portal shows an Engineering Adjunct pool and active Computing/Engineering faculty category listings, but the current category was not exhaustively resolved to determine whether any separate CS-eligible position is open. The Engineering Adjunct entry appears to be a standing Halmos College teaching pool; further review is needed."
     },
     {
       "school": "Virginia Commonwealth University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-vcu-evidence-2026-10-11.json",
+      "findings": "Current VCU Careers listing confirms a strategic senior engineering faculty search that can be appointed in Computer Science and targets AI, autonomous systems, and computing; review began Aug 1, 2026 and continues until filled. Other CS department openings were not fully established in this pass. Added this broad engineering role."
     },
     {
       "school": "Tulane University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-tulane-evidence-2026-10-11.json",
+      "findings": "The current SSE open-positions page lists Professor and Department Chair, Computer Science, a tenured faculty position requiring a CS or related PhD and Professor-level record. It has no visible review/deadline details in the listing, so current requisition status and timing remain unconfirmed. Added with an open-status caveat."
     },
     {
       "school": "University of Memphis",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-memphis-evidence-2026-10-11.json",
+      "findings": "Official CS faculty-hiring page confirms an active tenure-track Assistant Professor search for Fall 2027, all CS areas with AI/ML, cybersecurity, and quantum computing emphasized; screening begins Nov 30, 2026. Added the role."
     },
     {
       "school": "University of Rhode Island",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-rhode-island-evidence-2026-10-11.json",
+      "findings": "Current URI applicant portal results were checked against the CS and Statistics department faculty page. Current listings include non-CS positions such as Computer Systems Administrator (professional staff); the visible CS faculty page call is an October 2022 posting for a 2023 start and is stale. No current CS faculty opening surfaced."
     },
     {
       "school": "Wichita State University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-wichita-state-evidence-2026-10-11.json",
+      "findings": "Current official careers posting confirms a tenure-track Assistant Professor of Cybersecurity in Electrical and Computer Engineering, with an EECS PhD program; priority deadline Dec 1, 2026, Fall 2027 start. Added this CS-adjacent role."
     },
     {
       "school": "Michigan Technological University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-michigan-technological-evidence-2026-10-11.json",
+      "findings": "Current College of Computing employment page directs applicants to the university portal. A current listing includes an internal-only ECE department chair search; a previously surfaced College of Computing cybersecurity faculty posting has a 2026 start and appears stale. No current externally open CS faculty role was verified; complete faculty vacancy search remains partial."
     },
     {
       "school": "TTI Chicago",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-tti-chicago-evidence-2026-10-11.json",
+      "findings": "Current TTIC faculty hiring page advertises broad tenure-track Assistant Professor and multiple Research Assistant Professor openings, plus visiting and senior faculty recruiting. TT TT review continues until filled; RAP screening starts Oct 30, 2026; neither guarantees full consideration after Dec 1. Added TT and RAP records."
     },
     {
       "school": "Univ. of Missouri - Kansas City",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-univ-of-missouri-kansas-city-evidence-2026-10-11.json",
+      "findings": "Official job-site search did not yield a verifiable current CS faculty posting in the available results. The UMKC computing employment page and current faculty portal require a fuller direct search before recording a negative finding; no records added."
     },
     {
       "school": "University of Louisville",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-louisville-evidence-2026-10-11.json",
+      "findings": "The official Workday listing shows a full-time non-tenure-track Teaching Assistant Professor (Term) in Computer Science and Engineering, beginning Spring 2027, but the stated application close date was Sept 29, 2026 and has passed. Current application status is uncertain; no new record was added pending confirmation."
     },
     {
       "school": "University of Missouri",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-missouri-evidence-2026-10-11.json",
+      "findings": "The UM System career portal has current job listings, but available results did not expose a definitive current CS faculty posting or a complete filtered faculty result set. No record was added; the current CS-specific absence remains unverified."
     },
     {
       "school": "Brandeis University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-brandeis-evidence-2026-10-11.json",
+      "findings": "The current Brandeis HR careers portal links to faculty vacancies, but the CS School page surfaced for this search is explicitly a Fall 2020 tenure-line call. No current CS faculty opening was found in the official sources reviewed."
     },
     {
       "school": "University of New Mexico",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-new-mexico-evidence-2026-10-11.json",
+      "findings": "Official CS page confirms a new full-time tenure-track Assistant Professor search posted Oct 6, 2026, for all computing areas, especially quantum, theory/algorithms, and cybersecurity. Best-consideration deadline Dec 5, 2026; Req 38093. Refreshed the existing record."
     },
     {
       "school": "Mississippi State University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-mississippi-state-evidence-2026-10-11.json",
+      "findings": "Official HR confirms a full-time non-tenure-track CSE Instructor position (Req 511191) opening Sep 10, with Jan 1, 2027 anticipated start; refreshed existing record. A separate CS adjunct at the Mississippi School for Mathematics and Science closed Aug 15, 2026 and a future full-time school-teacher role was only mentioned, so not added. Broader adjacent-unit review remains partial."
     },
     {
       "school": "Oklahoma State University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-oklahoma-state-evidence-2026-10-11.json",
+      "findings": "Official CS posting AF9557 confirms an open-rank tenure-track CS position focused on cybersecurity, digital forensics, cyber investigations, reverse engineering, or malware analysis. August 2027 start; priority date Dec 1, 2026; accepted until filled. Refreshed existing record."
     },
     {
       "school": "University of Idaho",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-idaho-evidence-2026-10-11.json",
+      "findings": "Current University of Idaho faculty portal lists the Department of Computer Science and Cybersecurity Assistant Clinical Faculty posting F001439P; a current careers search result also advertises a tenure-track Assistant Professor role in CS, Cybersecurity, or AI beginning August 2027. Existing records include both calls. Additional positions and details require review across all search pages, so marked partial."
     },
     {
       "school": "University of Massachusetts Boston",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-umass-boston-evidence-2026-10-11.json",
+      "findings": "The official PageUp posting (Job 528484) is a tenure-track CS Assistant Professor search for a Sept 1, 2026 start, but its full-consideration deadline was Dec 1, 2025 and that start date has passed. Current active hiring cannot be confirmed. Existing UMB quantum faculty record also needs status reconciliation; no new record added."
     },
     {
       "school": "West Virginia University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-west-virginia-evidence-2026-10-11.json",
+      "findings": "Official WVU careers portal and Lane Department faculty sources were reviewed. The live faculty portal search did not expose a usable results list in this pass; surfaced Computer Science and Electrical Engineering Research Associate roles lack enough public detail here to determine faculty rank, eligibility, or appointment. No records added; current computing vacancies remain unresolved."
     },
     {
       "school": "Montana State University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-montana-state-evidence-2026-10-11.json",
+      "findings": "The current CS opportunities page and HR detail confirm two tenure-track Assistant Professor openings in all CS areas, with review starting Nov 16, 2026 and continuing until an adequate pool is established. Also confirmed an open part-time non-tenure-track computing instructor pool, rolling until filled. Refreshed TT record and added the pool."
     },
     {
       "school": "Southern Methodist University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-smu-evidence-2026-10-11.json",
+      "findings": "The current Lyle faculty openings page says SMU is expanding hiring into AY 2026–27 and explicitly includes Computer Science in a multi-department renewable-contract, non-tenure-track cluster hire. No CS-specific requisition, deadline, or qualifications are published on the page, so added as a provisional listing with caveat. Older CS tenure-track PDF (Fall 2023) is stale."
     },
     {
       "school": "Western Michigan University",
@@ -715,19 +1109,27 @@
     },
     {
       "school": "Baylor University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-baylor-evidence-2026-10-11.json",
+      "findings": "Current official CS open-positions page confirms three active searches: tenured Patterson Cybersecurity Chair, TT/tenured Assistant or Associate Professor in AI, and TT Assistant Professor in Cybersecurity. All three match existing records, refreshed their last-seen dates."
     },
     {
       "school": "Florida Institute of Technology",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-florida-tech-evidence-2026-10-11.json",
+      "findings": "Official Florida Tech employment page directs applicants to posted openings and departmental faculty roles. The CS tenure-track Workday posting found in this pass is for an August 2025 start, so it is stale; current live CS role status was not established from the accessible search page."
     },
     {
       "school": "University of Alabama - Huntsville",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-alabama-huntsville-evidence-2026-10-11.json",
+      "findings": "Current UAH HR faculty vacancies page states there are no vacant positions at the College of Engineering, which houses Computer Science; visible current faculty openings in other colleges are outside computing. ITSC page describes general research needs rather than a posted vacancy. No current CS faculty or postdoc opening found."
     },
     {
       "school": "University of Denver",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-denver-evidence-2026-10-11.json",
+      "findings": "Current Jobs@DU search identifies an active CS Department Adjunct Faculty, Data Science pool (Job 499044) for AY 2026–27, with applications accepted for future openings. The department-specific posting is an adjunct pool rather than an immediate course assignment. Other Ritchie School vacancy results were not fully enumerated in this pass; added the confirmed CS pool."
     },
     {
       "school": "University of Tulsa",
@@ -736,39 +1138,57 @@
     },
     {
       "school": "Air Force Inst. of Technology",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-air-force-institute-of-technology-evidence-2026-10-11.json",
+      "findings": "AFIT’s official personnel page directs civilian vacancies to USAJobs. It currently lists a broad Engineering Physics postdoctoral fellowship through July 2027, but the public description does not identify a CS-specific area or establish CS eligibility. Faculty opportunities for active-duty personnel are routed through military career-field managers. No CS-specific role added; marked partial pending review of the USAJobs postdoc discipline."
     },
     {
       "school": "Univ. of Wisconsin - Milwaukee",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-wisconsin-milwaukee-evidence-2026-10-11.json",
+      "findings": "UWM’s public HR page says external candidates search Workday and directs current employees to the internal Jobs Hub. Available public faculty listings did not identify a current Computer Science position; the full Workday results could not be verified externally. No record added."
     },
     {
       "school": "University of Miami",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-miami-evidence-2026-10-11.json",
+      "findings": "University of Miami Careers page provides the official Faculty & Physicians search, but keyword/search results for Computer Science did not expose a department-specific faculty requisition in this pass. CS department page fetch was blocked; no current CS posting verified."
     },
     {
       "school": "University of New Hampshire",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-new-hampshire-evidence-2026-10-11.json",
+      "findings": "Official UNH CS faculty page advertises a Lecturer call for an August 18, 2025 start with full-consideration date Dec 1, 2024; this is a prior-cycle notice. Current department pages and public USNH job portal search yielded no current CS faculty posting. No new record added."
     },
     {
       "school": "University of New Orleans",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-university-of-new-orleans-evidence-2026-10-11.json",
+      "findings": "Current CS faculty position confirmed; entered with the official requisition URL. The full-consideration date has passed but the page says review continues until filled."
     },
     {
       "school": "University of Southern Mississippi",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-southern-mississippi-evidence-2026-10-11.json",
+      "findings": "Sources row has prior confirmation of req. 5545 and the official portal. Fresh current role list was not completely re-read; keep partial pending reconciliation of the 2026–27 CSCE ads."
     },
     {
       "school": "OHSU",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-ohsu-evidence-2026-10-11.json",
+      "findings": "Current official careers sources checked; JS-driven portal did not expose a complete current CS-relevant listing. Prior DICE posting 38655 returned 410 Gone. Partial."
     },
     {
       "school": "University of Colorado - Denver",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-colorado-denver-evidence-2026-10-11.json",
+      "findings": "Previously recorded CSE postings need a live detail-page refresh; left partial."
     },
     {
       "school": "New Mexico Tech",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-new-mexico-tech-evidence-2026-10-11.json",
+      "findings": "Current official employment index and CS/IT unit directory reviewed; no CS-relevant opening identified."
     },
     {
       "school": "New York Tech",
@@ -777,43 +1197,63 @@
     },
     {
       "school": "SIU Carbondale",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-siu-carbondale-evidence-2026-10-11.json",
+      "findings": "CS-specific openings are advertised, but the linked full notices must be reviewed before recording; remain partial."
     },
     {
       "school": "University of Alabama - Birmingham",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-alabama-birmingham-evidence-2026-10-11.json",
+      "findings": "Official source identified, but current faculty-job listing is not readable from the indexed results; partial pending portal query."
     },
     {
       "school": "UNC - Greensboro",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-unc-greensboro-evidence-2026-10-11.json",
+      "findings": "Current tenure-track CS search confirmed; existing dataset record re-confirmed against official department announcement."
     },
     {
       "school": "Univ. of Arkansas - Little Rock",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-arkansas-little-rock-evidence-2026-10-11.json",
+      "findings": "Official Workday listing remains dynamically rendered and was not fully re-queried; prior search found no CS faculty posting. Partial."
     },
     {
       "school": "University of Wyoming",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-wyoming-evidence-2026-10-11.json",
+      "findings": "Current university careers source identified, but current CS and adjacent listings were not fully resolved in the dynamic portal; partial."
     },
     {
       "school": "Claremont Graduate University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-claremont-graduate-university-evidence-2026-10-11.json",
+      "findings": "No faculty openings listed by official faculty jobs page; no CS job record added."
     },
     {
       "school": "North Dakota State University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-north-dakota-state-evidence-2026-10-11.json",
+      "findings": "The official job board shows two Computer Science listings in its department facet; title and requisition details must be resolved before adding records. Partial."
     },
     {
       "school": "University of Maine",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-maine-evidence-2026-10-11.json",
+      "findings": "Prior portal search found part-time CS/CIS adjunct roles and no full-time faculty postings; current requisition state could not be fully rechecked. Partial."
     },
     {
       "school": "University of Mississippi",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-mississippi-evidence-2026-10-11.json",
+      "findings": "Found CS-adjacent ECE visiting faculty posting JR102524, but its current status and details need verification before adding or refreshing a record; partial."
     },
     {
       "school": "Louisiana Tech University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-louisiana-tech-evidence-2026-10-11.json",
+      "findings": "Two CS-adjacent Computer Information Systems faculty roles are advertised, but full Workday details remain unchecked; partial."
     },
     {
       "school": "Indiana State University",
@@ -822,19 +1262,27 @@
     },
     {
       "school": "LIU Post",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-liu-post-evidence-2026-10-11.json",
+      "findings": "Official faculty and jobs pages checked; current CS role listing remains unresolved in the dynamic careers search. Partial."
     },
     {
       "school": "Kennesaw State University",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-kennesaw-state-evidence-2026-10-11.json",
+      "findings": "Multiple computing college openings confirmed; full requisition details and record updates remain, so partial."
     },
     {
       "school": "Santa Clara University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-santa-clara-evidence-2026-10-11.json",
+      "findings": "Current ECE Digital Systems and Robotics & AI postings re-confirmed; both existing records refreshed. Information Systems posting is CS-adjacent but remains outside the CS-specific count."
     },
     {
       "school": "University of Michigan-Flint",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-michigan-flint-evidence-2026-10-11.json",
+      "findings": "Official HR portal identified but current campus postings require a separate UM Careers search; partial."
     }
   ],
   "conferences": [
@@ -2635,5 +3083,29 @@
     "browser": "6 CS Confs tests passed",
     "diffCheck": "passed",
     "projectSize": "passed"
+  },
+  "captureReview": {
+    "source": "docs/data-sweep-jobs-2026-10-10.md describes the 652 captured official URLs as awaiting evidence review",
+    "capturePages": 652,
+    "triagedThroughPage": 400,
+    "lastUpdated": "2026-10-11",
+    "stillNeedsReview": 252,
+    "triagedPageRanges": [
+      {
+        "first": 61,
+        "last": 80,
+        "report": "docs/data-sweep-jobs-capture-review-batch-04-evidence-2026-10-11.json"
+      },
+      {
+        "first": 121,
+        "last": 240,
+        "report": "docs/data-sweep-jobs-capture-review-pages-121-240-evidence-2026-10-11.json"
+      },
+      {
+        "first": 241,
+        "last": 400,
+        "report": "docs/data-sweep-jobs-capture-triage-pages-241-400-evidence-2026-10-11.json"
+      }
+    ]
   }
 }

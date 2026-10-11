@@ -1,0 +1,27 @@
+{
+  "school": "Boston University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://www.bu.edu/cds-faculty/culture-community/join-us/faculty-positions/",
+      "finding": "Current official index lists four 2026/2027 searches: endowed AI chair; assistant professor in human-centered DS/AI; assistant professor in DS/AI for science and engineering; DS/AI teaching-stream faculty."
+    },
+    {
+      "url": "https://www.bu.edu/cds-faculty/culture-community/join-us/faculty-positions/ai-chair/",
+      "finding": "Current AI chair detail page remains listed from the official CDS index."
+    },
+    {
+      "url": "https://www.bu.edu/cds-faculty/culture-community/join-us/faculty-positions/hcai/",
+      "finding": "Current HCDS/AI assistant professor detail remains listed; priority date Oct 31 and review through Apr 30, 2027 per posting."
+    },
+    {
+      "url": "https://www.bu.edu/cds-faculty/culture-community/join-us/faculty-positions/aise/",
+      "finding": "Current DS/AI for Science & Engineering assistant professor detail remains listed; priority date Dec 1 and review through Apr 30, 2027 per posting."
+    },
+    {
+      "url": "https://www.bu.edu/cds-faculty/culture-community/join-us/faculty-positions/teaching/",
+      "finding": "Current DS/AI teaching-stream faculty detail remains listed; priority date Dec 1 and review through Apr 30, 2027 per posting."
+    }
+  ],
+  "recordUpdates": "Refreshed lastSeenAt on all four existing BU CDS records. CS, Engineering, ECE, and Systems Engineering pages were already reviewed Oct 8; no additional CS-targeted job identified."
+}

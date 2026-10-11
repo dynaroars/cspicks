@@ -1,0 +1,16 @@
+{
+  "school": "SIU Carbondale",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://soc.siu.edu/news/articles/12-11-2025.php",
+      "finding": "Official School of Computing page, updated Aug. 27, 2026, advertises tenure-track cybersecurity assistant professor, tenure-track Applied AI assistant professor, and Applied AI assistant lecturer for 2026–27 with Aug. 11, 2026 start. Full posting details and application status not established in this pass; do not add based on summary alone."
+    },
+    {
+      "url": "https://jobs.siu.edu/",
+      "finding": "Official SIU jobs portal is the application source; details were not verified."
+    }
+  ],
+  "findings": "CS-specific openings are advertised, but the linked full notices must be reviewed before recording; remain partial.",
+  "recordUpdates": "Additional official posting details remain to be checked before record changes."
+}

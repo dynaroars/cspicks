@@ -1,0 +1,16 @@
+{
+  "school": "University of Mississippi",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://olemiss.edu/hr/um-careers/",
+      "finding": "Official Ole Miss recruiting page says all jobs, including faculty, are posted in Workday."
+    },
+    {
+      "url": "https://olemiss.wd12.myworkdayjobs.com/External__Faculty/job/University-MS/Visiting-Instructional-Assistant-Professor---Electrical-and-Computer-Engineering_JR102524",
+      "finding": "Official Workday ECE visiting faculty requisition found by search; one-year term with anticipated Aug. 2026 start. Current application status not confirmed."
+    }
+  ],
+  "findings": "Found CS-adjacent ECE visiting faculty posting JR102524, but its current status and details need verification before adding or refreshing a record; partial.",
+  "recordUpdates": "No job records changed pending full posting verification."
+}

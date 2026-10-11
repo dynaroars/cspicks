@@ -1,0 +1,24 @@
+{
+  "school": "Rochester Inst. of Technology",
+  "checkedAt": "2026-10-10",
+  "scope": "Official Golisano College, cybersecurity institute, RIT Careers/Workday, linked requisitions, and RIT Engineering faculty openings.",
+  "findings": [
+    {
+      "url": "https://www.rit.edu/computing/faculty-openings",
+      "finding": "CS/computing page explicitly says applications have closed for current open positions and directs candidates to RIT careers."
+    },
+    {
+      "url": "https://www.rit.edu/cybersecurity/faculty-openings",
+      "finding": "Page still links cybersecurity tenure-track and lecturer jobs, but both linked BrassRing destinations report the posting has expired or the position has been filled."
+    },
+    {
+      "url": "https://rit.wd12.myworkdayjobs.com/",
+      "finding": "RIT Careers states all open positions are posted and managed through Workday; no current live CS-targeted posting confirmed in this review."
+    },
+    {
+      "url": "https://www.rit.edu/engineering/faculty-openings",
+      "finding": "Could not access this source in the available browser; related link retained for future checks."
+    }
+  ],
+  "deferred": null
+}

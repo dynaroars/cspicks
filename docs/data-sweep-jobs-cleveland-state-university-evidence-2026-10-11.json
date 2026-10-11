@@ -1,0 +1,16 @@
+{
+  "school": "Cleveland State University",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.csuohio.edu/faculty-affairs/full-time-faculty-searches",
+      "finding": "Official faculty-affairs page links PeopleAdmin as the faculty recruitment system but provides process guidance, not vacancy listings."
+    },
+    {
+      "url": "https://hrjobs.csuohio.edu/",
+      "finding": "Official applicant portal entry point; complete current CS search results were not verified."
+    }
+  ],
+  "findings": "Official provost page describes faculty search procedures but does not list current vacancies. The connected PeopleAdmin system is the authoritative source, but this pass did not establish a complete current CS/engineering posting list. Earlier search results included no active CS posting; recheck is needed before treating absence as verified.",
+  "recordUpdates": "No job records added or removed."
+}

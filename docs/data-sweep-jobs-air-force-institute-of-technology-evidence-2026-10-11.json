@@ -1,0 +1,16 @@
+{
+  "school": "Air Force Inst. of Technology",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.afit.edu/HR/",
+      "finding": "Official AFIT page lists civilian openings; current Postdoctoral Fellow belongs to Engineering Physics, closes July 27, 2027; broad role without specified eligible discipline."
+    },
+    {
+      "url": "https://www.afit.edu/BIOS/index.cfm?a=fac&ss=15",
+      "finding": "Current AFIT directory includes Computer Science faculty but no job listing."
+    }
+  ],
+  "findings": "AFIT’s official personnel page directs civilian vacancies to USAJobs. It currently lists a broad Engineering Physics postdoctoral fellowship through July 2027, but the public description does not identify a CS-specific area or establish CS eligibility. Faculty opportunities for active-duty personnel are routed through military career-field managers. No CS-specific role added; marked partial pending review of the USAJobs postdoc discipline.",
+  "recordUpdates": "No job records added; current openings were not verified."
+}

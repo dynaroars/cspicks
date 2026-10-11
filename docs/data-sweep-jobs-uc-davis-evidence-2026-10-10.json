@@ -1,0 +1,11 @@
+{
+  "school": "Univ. of California - Davis",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://cs.ucdavis.edu/job-opportunities",
+      "finding": "The official CS Job Opportunities page still displays a sea-level/ML postdoc and two AI security/privacy postdocs, but explicitly lists last update July 30, 2025 and provides no current posting or deadline dates. Could not verify these as live 2026–27 jobs, so they were not added."
+    }
+  ],
+  "recordUpdates": "No new job added; incomplete or stale official records are documented."
+}

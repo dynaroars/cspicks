@@ -1,0 +1,15 @@
+{
+  "school": "Worcester Polytechnic Institute",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://www.wpi.edu/academics/departments/computer-science/hiring",
+      "finding": "Official CS hiring page seeks part-time adjuncts for day/evening/online teaching, positions filled as needed; applicants remain in pool until posting closes."
+    },
+    {
+      "url": "https://www.wpi.wd5.myworkdayjobs.com/External",
+      "finding": "Official Workday apply destination; job ID/detail not exposed in this pass."
+    }
+  ],
+  "recordUpdates": "Added WPI Computer Science part-time adjunct applicant pool, filled as needed, and active until its posting closes."
+}

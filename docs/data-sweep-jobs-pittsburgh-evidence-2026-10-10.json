@@ -1,0 +1,23 @@
+{
+  "school": "University of Pittsburgh",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://www.sci.pitt.edu/recruiting",
+      "finding": "SCI page lists quantum algorithms tenure-stream, HCI/Digital Narrative open-rank teaching, and CS teaching assistant professor searches, all for Fall 2026; stated full-consideration deadlines are March 1 or Jan 16, 2026 and anticipated start Aug 15, 2026. These are past as of Oct 10, 2026 and were not recorded as active."
+    },
+    {
+      "url": "https://cfopitt.taleo.net/careersection/pitt_faculty_external/jobdetail.ftl?job=25006623&tz=GMT-05:00&tzname=America/New_York",
+      "finding": "Official apply link resolved to Talent Center but job detail text was not available; no evidence it is still accepting applications."
+    },
+    {
+      "url": "https://cfopitt.taleo.net/careersection/pitt_faculty_external/jobdetail.ftl?job=25006706&tz=GMT-05:00&tzname=America/New_York",
+      "finding": "Official apply link resolved to Talent Center but job detail text was not available; no evidence it is still accepting applications."
+    },
+    {
+      "url": "https://cfopitt.taleo.net/careersection/pitt_faculty_external/jobdetail.ftl?job=25006705&tz=GMT-05:00&tzname=America/New_York",
+      "finding": "Official apply link resolved to Talent Center but job detail text was not available; no evidence it is still accepting applications."
+    }
+  ],
+  "recordUpdates": "No current role added; the three SCI faculty searches have expired application full-consideration dates and past start dates. Broader units inaccessible and completion remains partial."
+}

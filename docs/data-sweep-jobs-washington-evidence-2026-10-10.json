@@ -1,0 +1,36 @@
+{
+  "school": "University of Washington",
+  "checkedAt": "2026-10-10",
+  "scope": "Official Paul G. Allen School, ECE and Information School hiring pages; linked Interfolio pages attempted for Allen and ECE; prior Bothell posting not rechecked in this pass.",
+  "findings": [
+    {
+      "url": "https://www.cs.washington.edu/who-we-are/employment-opportunites/",
+      "finding": "Current staff section says no positions. Two faculty calls remain listed: open-rank TT CSE across all CS/CE areas (start Sep 1, 2027) and AI-focused assistant/associate teaching professor (start Sep 16, 2027). Both refreshed."
+    },
+    {
+      "url": "https://apply.interfolio.com/194089",
+      "finding": "Application page returned no readable details in available browser; department listing confirms active CSE call."
+    },
+    {
+      "url": "https://apply.interfolio.com/194076",
+      "finding": "Application page returned no readable details in available browser; department listing confirms active AI teaching call."
+    },
+    {
+      "url": "https://www.ece.uw.edu/engage/job-openings/",
+      "finding": "Official ECE page lists two assistant professor tenure-track positions open until filled; existing record refreshed. Linked Interfolio details are unreadable."
+    },
+    {
+      "url": "https://apply.interfolio.com/192876",
+      "finding": "Interfolio page returned no readable details."
+    },
+    {
+      "url": "https://ischool.uw.edu/about/jobs/faculty",
+      "finding": "Confirmed active iSchool assistant professor AI (deadline Nov 15; priority Nov 10), IS/IM TT focused on AI in organizations (deadline Nov 1), and IS/IM teaching-track (two positions, deadline Oct 15). First two records refreshed; teaching-track listing added."
+    },
+    {
+      "url": "https://apply.interfolio.com/192126",
+      "finding": "Official iSchool listing provides requirements and deadline; linked Interfolio application also lists job."
+    }
+  ],
+  "deferred": "Screen Statistics, Biomedical Informatics, HCDE and broader university postings; revisit by 2026-10-17."
+}

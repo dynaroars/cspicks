@@ -1,0 +1,7 @@
+{
+  "school":"The University of Alabama","checkedAt":"2026-10-11",
+  "checkedSources":[
+    {"url":"https://careers.ua.edu/jobs/computer-science-hydrology-and-hydroinformatics-research-assistant-professor-530733-tuscaloosa-alabama-united-states","finding":"Official CS tenure-track Assistant Professor requisition 530733 is open until Nov 7, 2026. Research focus includes AI, heterogeneous/HPC and cloud/edge approaches, hydroinformatics, water data science, and hydrologic modeling."},
+    {"url":"https://careers.ua.edu/jobs/search/facultyjobs","finding":"Official faculty job board displays six Computer Science postings; 530733 is one current posting. Other existing assistant, associate and teaching searches remain in the dataset; water-related Associate/Full rank variants were not checked individually."}
+  ],"findings":"Current CS assistant-rank hydrology/hydroinformatics posting confirmed and refreshed. Related water-focused rank requisitions need individual review.","recordUpdates":"Refreshed lastSeenAt to 2026-10-11 for alabama-cs-hydroinformatics-assistant-2026."
+}

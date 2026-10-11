@@ -1,0 +1,15 @@
+{
+  "school": "Univ. of California - Riverside",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://aprecruit.ucr.edu/apply",
+      "finding": "Official AP Recruit lists JPF02353, Postdoctoral Scholar in Computer Science & Engineering FY26-27, open Sep 11 2026 through Jun 30 2027; review date Sep 25 2026."
+    },
+    {
+      "url": "https://aprecruit.ucr.edu/JPF02353",
+      "finding": "Active full-time CSE postdoc in system security, vulnerability discovery/analysis, system building and program analysis. PhD in CS&E or closely related required. Applications accepted after Sep 25 review only if position remains unfilled; anticipated Jan 1 2027 start."
+    }
+  ],
+  "recordUpdates": "Refreshed existing job lastSeenAt. Its summary already records open-until-filled through Jun 30 and the elapsed review date."
+}

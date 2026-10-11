@@ -1,0 +1,8 @@
+{
+  "school":"Lehigh University","checkedAt":"2026-10-11",
+  "checkedSources":[
+    {"url":"https://facultyjobs.lehigh.edu/research","finding":"Current official research-openings index still lists the joint CSE/ECE tenured Associate/Full robotics search."},
+    {"url":"https://facultyjobs.lehigh.edu/node/1220","finding":"Official detail accepts CS, Computer Engineering, Electrical Engineering, Mechanical Engineering, or Robotics PhDs and says review continues until filled. Full-consideration Dec 10, 2025 and anticipated July 1, 2026 start have passed."},
+    {"url":"https://facultyjobs.lehigh.edu/faculty","finding":"Current faculty openings page reviewed; newer searches in other departments do not target CS PhDs."}
+  ],"findings":"Added/refreshed the senior robotics search because the current official research index still lists it as open until filled; its past dates are clearly stated in the record. Broader ECE vacancy checks remain constrained by prior 403 response.","recordUpdates":"Added lehigh-cse-ece-tenured-robotics-prof-2026."
+}

@@ -1,0 +1,16 @@
+{
+  "school": "University of Memphis",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.memphis.edu/cs/hiring/",
+      "finding": "Current Fall 2027 CS tenure-track Assistant Professor call; application screening starts Nov 30, 2026."
+    },
+    {
+      "url": "https://workforum.memphis.edu/",
+      "finding": "Official university jobs portal linked for applying."
+    }
+  ],
+  "findings": "Official CS faculty-hiring page confirms an active tenure-track Assistant Professor search for Fall 2027, all CS areas with AI/ML, cybersecurity, and quantum computing emphasized; screening begins Nov 30, 2026. Added the role.",
+  "recordUpdates": "Added memphis-cs-assistant-professor-2027."
+}

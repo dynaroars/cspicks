@@ -1,0 +1,19 @@
+{
+  "school": "University of Rochester",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://www.cs.rochester.edu/about/recruit.html",
+      "finding": "Official CS employment page explicitly states no current faculty postings."
+    },
+    {
+      "url": "https://www.hajim.rochester.edu/ece/about/jobs.html",
+      "finding": "Official ECE page lists tenure-track assistant professor search in AI circuits/systems, AI hardware architecture, edge AI/robotics; CS PhD accepted; review begins Dec 1, 2026 and continues until filled."
+    },
+    {
+      "url": "https://apply.interfolio.com/194449",
+      "finding": "Official Interfolio application destination cited by ECE page."
+    }
+  ],
+  "recordUpdates": "CS department currently lists no faculty openings. Refreshed existing ECE tenure-track AI circuits/systems assistant professor search, which accepts CS PhDs and reviews from Dec 1, 2026."
+}

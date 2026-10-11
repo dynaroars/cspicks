@@ -1,0 +1,20 @@
+{
+  "school": "Drexel University",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://careers.drexel.edu/jobs/search?page=1",
+      "finding": "Current Drexel job board shows two College of Computing and Informatics/Engineering jobs: Postdoctoral Research Fellow and Research Associate II."
+    },
+    {
+      "url": "https://careers.drexel.edu/jobs/research-associate-ii-university-city-philadelphia-pa-pennsylvania-united-states",
+      "finding": "Research Associate II in ECE Wireless Systems Lab explicitly accepts an MS in EE, computer engineering, computer science, or related field; research covers wireless systems, networks, embedded systems, AI-enabled wireless, and CS collaborations; rolling review."
+    },
+    {
+      "url": "https://careers.drexel.edu/jobs/postdoctoral-research-fellow-university-city-philadelphia-pa-pennsylvania-united-states-8250802e-2afb-47ea-9d39-c1846787ffd4",
+      "finding": "Current Postdoctoral Research Fellow is in immunology, biomaterials, and chemical engineering; CS not among required PhD fields, so excluded."
+    }
+  ],
+  "findings": "Added current ECE Research Associate II as an adjacent CS-eligible research position. The other computing-college-adjacent postdoc is life-sciences experimental work with no CS degree eligibility.",
+  "recordUpdates": "Added ECE wireless research associate (job 507203); excluded unrelated immunology postdoc."
+}

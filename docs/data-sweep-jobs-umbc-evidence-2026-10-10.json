@@ -1,0 +1,19 @@
+{
+  "school": "Univ. of Maryland - Baltimore County",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://coeit.umbc.edu/faculty-job-openings/",
+      "finding": "UMBC COEIT official faculty openings page lists Computer Science and Electrical Engineering as “To be announced”; no active CS/ECE faculty search is listed. Information Systems and Engineering and Computing Education are also “To be announced.” No current CS-targeted posting found on this faculty index; current postdocs and campus listings were not comprehensively searched."
+    },
+    {
+      "url": "https://www.csee.umbc.edu/about/jobs/",
+      "finding": "UMBC COEIT official faculty openings page lists Computer Science and Electrical Engineering as “To be announced”; no active CS/ECE faculty search is listed. Information Systems and Engineering and Computing Education are also “To be announced.” No current CS-targeted posting found on this faculty index; current postdocs and campus listings were not comprehensively searched."
+    },
+    {
+      "url": "https://facultyjobs.umbc.edu/en-us/listing/",
+      "finding": "UMBC COEIT official faculty openings page lists Computer Science and Electrical Engineering as “To be announced”; no active CS/ECE faculty search is listed. Information Systems and Engineering and Computing Education are also “To be announced.” No current CS-targeted posting found on this faculty index; current postdocs and campus listings were not comprehensively searched."
+    }
+  ],
+  "recordUpdates": "No new active target role added; current official listings and remaining scope are documented."
+}

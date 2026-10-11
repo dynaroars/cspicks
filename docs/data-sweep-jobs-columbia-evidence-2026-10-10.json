@@ -1,0 +1,19 @@
+{
+  "school": "Columbia University",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://www.cs.columbia.edu/open-positions/",
+      "finding": "Department page lists Assistant Professor or Associate Professor of Computer Science in all areas, with a July 1, 2026 start date."
+    },
+    {
+      "url": "https://apply.interfolio.com/176021",
+      "finding": "Official application portal for the listed 2026-start job is closed; not recorded as active."
+    },
+    {
+      "url": "https://engineering.columbia.edu/faculty-job-opportunities",
+      "finding": "Engineering, EE, Data Science Institute, and IEOR pages were blocked by security challenges in the prior Oct 8 scan; broader campus pass remains incomplete."
+    }
+  ],
+  "recordUpdates": "No active job added: the only CS faculty job still shown on the department page has a past start date and a closed application portal."
+}

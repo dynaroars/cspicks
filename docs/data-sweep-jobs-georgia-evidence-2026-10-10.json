@@ -1,0 +1,24 @@
+{
+  "school": "University of Georgia",
+  "checkedAt": "2026-10-10",
+  "checkedSources": [
+    {
+      "url": "https://ai.uga.edu/news/stories/2026/tenure-track-faculty-position-fall-2027",
+      "finding": "Official UGA AI Institute/Statistics posting seeks associate/full tenure-track faculty in AI Systems and Causal Reasoning; PhD in CS accepted; Aug 1 2027 start; until filled, Nov 13 2026 full consideration."
+    },
+    {
+      "url": "https://www.ugajobsearch.com/postings/508244",
+      "finding": "Official UGA job record confirmed for this current search."
+    },
+    {
+      "url": "https://www.cs.uga.edu/hiring-tenure-track-assistant-professor-positions",
+      "finding": "CS department page claims two active assistant professor searches, but linked detail pages are dated Jan 2020 and Aug 2020 with start date 2020; treat index as stale rather than active."
+    },
+    {
+      "url": "https://ai.uga.edu/news/stories/2026/tenure-track-faculty-position-fall-2027",
+      "finding": "Official AI Institute story identifies current Senior Associate/Full Professor AI Systems and Causal Reasoning search with application link posting 508059, CS PhD accepted, Aug 1 2027 start, Nov 13 2026 full consideration, then open until filled."
+    }
+  ],
+  "recordUpdates": "Refreshed existing Associate Professor or Professor in AI Systems and Causal Reasoning (508244); current official AI Institute page posted Oct 9, 2026, accepts CS PhDs, Nov 13 full-consideration date. The CS security index says “currently accepting” but links to archived 2020 jobs, so those are not treated as current. Corrected AI Systems and Causal Reasoning record URL from 508244 to official current posting 508059 and confirmed schedule.",
+  "findings": " Corrected the prior job URL mismatch: current official position link is posting 508059; old 508244 was not the relevant link."
+}

@@ -1,0 +1,12 @@
+{
+  "school": "Texas Tech University",
+  "checkedAt": "2026-10-11",
+  "checkedSources": [
+    {
+      "url": "https://www.depts.ttu.edu/cs/department/jobs.php",
+      "finding": "Official CS page lists TT/tenured positions for Fall 2026 with Jan 5, 2026 deadline, and Professor of Practice roles for Fall 2026 with May 15, 2026 deadline. Both deadlines have passed. ECE pages previously checked had no CS-targeted current opening."
+    }
+  ],
+  "findings": "No current Texas Tech CS faculty job found: all department-advertised 2026 calls have passed deadlines. Prior adjacent ECE review found no CS-targeted opening.",
+  "recordUpdates": "No job records added."
+}

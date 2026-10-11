@@ -1,0 +1,25 @@
+{
+  "school": "Johns Hopkins University",
+  "checkedAt": "2026-10-10",
+  "scope": "Current CS Department employment page and the linked application page for the CS tenure-track call. Prior sources row contains other departmental and university-wide findings from Oct 8, but those have not all been rechecked in this pass.",
+  "findings": [
+    {
+      "url": "https://www.cs.jhu.edu/about/employment-opportunities/",
+      "applicationUrl": "https://apply.interfolio.com/194231",
+      "finding": "Current all-area CS tenure-track search remains listed; focus areas include AI systems, AI safety/security, reasoning/alignment and AI ethics/policy. Full consideration by 2026-12-01. Existing record refreshed."
+    },
+    {
+      "url": "https://www.cs.jhu.edu/about/employment-opportunities/",
+      "finding": "Current page lists a Normativity Lab postdoc focused on computational models of human normativity and AI alignment; qualification list explicitly includes CS PhDs. Added with no guessed deadline."
+    },
+    {
+      "url": "https://www.cs.jhu.edu/about/employment-opportunities/",
+      "finding": "Current page lists AI-for-healthcare postdoctoral openings in medical-image computing, human-AI interaction and vision-based robotic surgery; PhD completed before start and review until filled. Added."
+    },
+    {
+      "url": "https://apply.interfolio.com/194231",
+      "finding": "Interfolio page returns no readable details in this browser; the CS department source itself provides the active listing and Dec 1 full-consideration date."
+    }
+  ],
+  "deferred": "Refresh the university-wide faculty board and adjacent units, resolve missing application details where accessible, and verify the other existing records by 2026-10-17."
+}
