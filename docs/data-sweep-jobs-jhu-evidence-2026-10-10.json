@@ -23,6 +23,10 @@
     {
       "url": "https://apply.interfolio.com/193846",
       "finding": "Existing Sulam Lab ML postdoc record rechecked. Interfolio now displays “application deadline ... has passed,” lists Oct 9, 2026 as the deadline, and directs applicants to contact the institution. Marked closed on Oct 9; removed rolling status to prevent listing it as applicable."
+    },
+    {
+      "url": "Captured official requisitions https://apply.interfolio.com/193404, /193840, /193721, /187731, and /188681",
+      "finding": "Rechecked existing JHU ECE tenure-track, scientific ML postdoc, quantitative AI/ML/NLP faculty, CausalML postdoc, and Phillippy Lab postdoc records. Each direct Interfolio requisition remains available; the ML postdoc 193846 is handled separately as closed after its Oct 9 deadline."
     }
   ],
   "deferred": "Other adjacent units and the remaining existing JHU records still require rechecking."

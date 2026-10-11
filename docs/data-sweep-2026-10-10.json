@@ -106,8 +106,8 @@
       "school": "Johns Hopkins University",
       "status": "partial",
       "report": "docs/data-sweep-jobs-jhu-evidence-2026-10-10.json",
-      "findings": "Rechecked official CS opportunities page, refreshed current all-area TT search, and added current Normativity Lab and AI-for-healthcare postdoctoral listings. Rechecked existing Sulam Lab ML postdoc; the application deadline passed Oct 9 and the Interfolio page directs applicants to contact the institution, so the posting is now marked closed.",
-      "remaining": "Recheck additional JHU existing records and broader central/adjacent-unit opportunities; review remaining capture pages."
+      "findings": "Rechecked official CS opportunities page, refreshed current all-area TT search, and added current Normativity Lab and AI-for-healthcare postdoctoral listings. Rechecked existing Sulam Lab ML postdoc; the application deadline passed Oct 9 and the Interfolio page directs applicants to contact the institution, so the posting is now marked closed. Refreshed eight remaining existing records after direct requisition checks; Interfolio showed them available, and closed expired ML postdoc 193846.",
+      "remaining": "Broader central/adjacent-unit discovery remains."
     },
     {
       "school": "University of Central Florida",
