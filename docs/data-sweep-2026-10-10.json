@@ -1236,19 +1236,31 @@
     },
     {
       "name": "AAMAS",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-other-evidence-2026-10-10.json",
+      "findings": "Checked official edition and schedule pages; applied supported schedule updates and retained announced unknowns.",
+      "remaining": "Future edition discovery and any unpublished program details remain to be checked."
     },
     {
       "name": "ACM MM",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-other-evidence-2026-10-10.json",
+      "findings": "Checked official edition and schedule pages; applied supported schedule updates and retained announced unknowns.",
+      "remaining": "Future edition discovery and any unpublished program details remain to be checked."
     },
     {
       "name": "ACSAC",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-other-evidence-2026-10-10.json",
+      "findings": "Checked official edition and schedule pages; applied supported schedule updates and retained announced unknowns.",
+      "remaining": "Future edition discovery and any unpublished program details remain to be checked."
     },
     {
       "name": "AIED",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-other-evidence-2026-10-10.json",
+      "findings": "Checked official edition and schedule pages; applied supported schedule updates and retained announced unknowns.",
+      "remaining": "Future edition discovery and any unpublished program details remain to be checked."
     },
     {
       "name": "AISTATS",
