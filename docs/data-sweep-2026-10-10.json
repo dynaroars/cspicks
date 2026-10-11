@@ -874,10 +874,9 @@
     },
     {
       "school": "Kent State University",
-      "status": "partial",
+      "status": "audited",
       "report": "docs/data-sweep-jobs-kent-state-evidence-2026-10-11.json",
-      "findings": "Added current non-tenure-track Computer Engineering Technology/Cybersecurity Engineering faculty requisition 989308, closing Oct 30, 2026; it accepts a Computer Science master’s. Department-specific CS board has no opening.",
-      "remaining": "Review other computing-adjacent college and postdoctoral units."
+      "findings": "Added and confirmed active Computer Engineering Technology/Cybersecurity Engineering faculty req. 989308, which accepts a CS master’s. Current faculty and staff boards across campuses yielded no other active CS-specific or computing research/postdoc role. Expired East Liverpool IT/Cybersecurity req. 986988 and the generic regional adjunct pool were excluded."
     },
     {
       "school": "Lehigh University",
