@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-10-10",
+  "sources": [
+    {
+      "program": "Cisco Research Open RFPs",
+      "url": "https://research.cisco.com/open-rfps",
+      "supports": "Official list identifies currently accepting calls: quantum networking for distributed quantum computing and sensing; harnessing quantum networking to enhance classical applications; semiconductor reliability; conference sponsorships. Cisco says topics can be withdrawn as proposals are funded or interest is satisfied. Research funding FAQ defines eligible PI as full-time faculty or research staff and states U.S.-taxable institutions must be 501(c)(3)."
+    },
+    {
+      "program": "Nokia Bell Labs Prize",
+      "url": "https://www.nokia.com/bell-labs/collaboration-opportunities/prize/",
+      "supports": "Official page calls it annual and describes prizes plus collaboration opportunities, but the latest competition and winners shown are from 2023; no current 2026 deadline, amount, or application terms are listed."
+    },
+    {
+      "program": "JPMorganChase AI Research",
+      "url": "https://www.jpmorgan.com/US/en/technology/artificial-intelligence",
+      "supports": "Current official AI Research overview lists research areas and initiatives, but no AI Research Awards application page, current faculty award cycle, deadline, award amount, or eligibility. The older awards URL was not corroborated."
+    },
+    {
+      "program": "Intel Labs Academic Collaborations",
+      "url": "https://www.intel.com/content/www/us/en/research/academic-collaborations.html",
+      "supports": "Official page distinguishes the annual Rising Star Faculty Award and Outstanding Researcher Award from the Hardware Security Academic Award; links recent 2023–2024 winners and does not list an open submission cycle or deadline."
+    },
+    {
+      "program": "Intel Hardware Security Academic Award",
+      "url": "https://www.intel.com/content/www/us/en/security/security-practices/hardware-security-award-2026.html",
+      "supports": "Official 2026 page identifies finalists and says winners will be announced at the Intel Academic Security Conference; no open application dates or amount are listed."
+    }
+  ],
+  "changes": [
+    "Replaced Cisco topics and eligibility with current Open RFP list and official general requirements; removed unsupported typical funding amount.",
+    "Removed expired Bell Labs Prize deadline and unsupported cycle-specific eligibility and prize amounts; current call status is unknown.",
+    "Removed unsupported JPMorgan award deadline, amount, and eligibility; current official pages do not verify a live award call.",
+    "Separated Intel academic award types conceptually and removed unsupported blanket deadlines, amounts, and eligibility claims."
+  ]
+}

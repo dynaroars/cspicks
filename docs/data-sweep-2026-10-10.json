@@ -1868,19 +1868,31 @@
     },
     {
       "id": "cisco-research-rfps",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-current-check-evidence-2026-10-10.json",
+      "findings": "Reviewed official current program pages; removed stale or unsupported cycle terms and corrected active call details.",
+      "remaining": "Recheck for new cycles and review additional programs in the remaining awards backlog."
     },
     {
       "id": "bell-labs-prize",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-current-check-evidence-2026-10-10.json",
+      "findings": "Reviewed official current program pages; removed stale or unsupported cycle terms and corrected active call details.",
+      "remaining": "Recheck for new cycles and review additional programs in the remaining awards backlog."
     },
     {
       "id": "jpmorgan-ai-awards",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-current-check-evidence-2026-10-10.json",
+      "findings": "Reviewed official current program pages; removed stale or unsupported cycle terms and corrected active call details.",
+      "remaining": "Recheck for new cycles and review additional programs in the remaining awards backlog."
     },
     {
       "id": "intel-faculty-awards",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-current-check-evidence-2026-10-10.json",
+      "findings": "Reviewed official current program pages; removed stale or unsupported cycle terms and corrected active call details.",
+      "remaining": "Recheck for new cycles and review additional programs in the remaining awards backlog."
     },
     {
       "id": "samsung-gro",

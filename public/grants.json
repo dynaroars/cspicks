@@ -1261,21 +1261,20 @@
       "Faculty"
     ],
     "whoFor": "University faculty and academic research teams",
-    "deadline": "Rolling / Year-round submission window",
+    "deadline": "Open RFPs; submit as soon as possible (topics may be withdrawn)",
     "deadlineMonth": 0,
-    "amount": "Typically $60,000 to $120,000 unrestricted research gift + Cisco engineer pairing",
-    "summary": "Cisco Research continuously funds academic research addressing strategic challenges in next-generation networking, cloud-native infrastructure, generative AI operations, and Zero Trust security.",
+    "amount": "Not stated on the open RFP pages",
+    "summary": "Cisco Research is currently accepting proposals through topic-specific Open RFPs. The live list includes quantum networking for distributed quantum computing and sensing, applying quantum networking to classical applications, semiconductor reliability, and conference sponsorships. Topics may be withdrawn when funding or interest is satisfied.",
     "eligibility": [
-      "Tenured and tenure-track faculty at accredited universities worldwide",
-      "Proposal must align with an active open RFP topic listed on Cisco Research portal"
+      "The applicant and principal investigator must each be full-time faculty or research staff at a university or research institution",
+      "Students and adjunct or part-time staff may participate but may not be principal investigator",
+      "U.S.-taxable institutions must qualify as 501(c)(3) nonprofits",
+      "Proposal must align with an active Open RFP"
     ],
     "topics": [
-      "Next-Gen Networking",
-      "Cloud Architecture",
-      "Zero Trust Cybersecurity",
-      "Edge Computing",
       "Quantum Networking",
-      "Distributed AI"
+      "Semiconductor Reliability",
+      "Conference Sponsorships"
     ],
     "url": "https://research.cisco.com/open-rfps",
     "featured": false
@@ -1291,13 +1290,12 @@
       "Postdocs"
     ],
     "whoFor": "Academic faculty, postdocs, and innovators in designated countries",
-    "deadline": "April 24, 2026 at 11:59 PM ET (Annual Spring proposal cutoff; opens early March)",
-    "deadlineMonth": 4,
-    "amount": "1st Prize: $100,000; 2nd Prize: $50,000; 3rd Prize: $25,000 unrestricted cash prize + collaboration with Bell Labs researchers",
-    "summary": "A global competition for innovators with disruptive ideas in information and communications technology, seeking ideas that have the potential to change humanity by a factor of 10x.",
+    "deadline": "Not announced",
+    "deadlineMonth": 0,
+    "amount": "Cash prizes; current amounts not stated on the official page",
+    "summary": "An annual Nokia Bell Labs competition recognizing transformative innovations in science, technology, engineering, and mathematics. The official page currently features the 2023 competition and does not provide an open 2026 cycle or submission dates.",
     "eligibility": [
-      "Open to university faculty, graduate researchers, and independent innovators in eligible participating countries",
-      "Proposals must present game-changing computing/communication innovations"
+      "Current cycle eligibility and submission terms are not published on the official page"
     ],
     "topics": [
       "Information & Communication Tech",
@@ -1319,13 +1317,12 @@
       "Faculty"
     ],
     "whoFor": "Faculty in machine learning, NLP, cryptography, graph neural networks, and multi-agent systems",
-    "deadline": "May 31, 2026 at 11:59 PM ET (Faculty Awards) / June 15, 2026 (PhD Fellowships; Annual)",
-    "deadlineMonth": 5,
-    "amount": "$100,000 to $150,000 unrestricted research gift",
-    "summary": "Recognizes faculty conducting fundamental AI research with applications to financial services, algorithmic fairness, synthetic data, multi-agent game theory, and secure multiparty computing.",
+    "deadline": "Not announced",
+    "deadlineMonth": 0,
+    "amount": null,
+    "summary": "JPMorganChase AI Research describes its research areas and collaborations with faculty, but the formerly linked AI Research Awards page and current application cycle could not be verified. No current award deadline, amount, or eligibility terms are published on the official AI Research pages reviewed.",
     "eligibility": [
-      "Full-time faculty member at accredited university",
-      "Research in AI, machine learning, cryptography, multi-agent systems, or operations research"
+      "Current award eligibility and application status are not published on the official pages reviewed"
     ],
     "topics": [
       "AI/ML",
@@ -1335,7 +1332,7 @@
       "Fairness & Explainability",
       "Cryptography"
     ],
-    "url": "https://www.jpmorgan.com/technology/artificial-intelligence/research-awards",
+    "url": "https://www.jpmorgan.com/US/en/technology/artificial-intelligence",
     "featured": false
   },
   {
@@ -1347,24 +1344,19 @@
     "targetAudience": [
       "Faculty"
     ],
-    "whoFor": "Faculty conducting research in computer architecture, hardware security, and neuromorphic computing",
-    "deadline": "Rolling / Annual invitation cycles",
+    "whoFor": "Academic researchers; criteria vary by award program",
+    "deadline": "Not announced",
     "deadlineMonth": 0,
-    "amount": "Unrestricted research gifts, silicon hardware donations, and access to Intel testbeds",
-    "summary": "Supports university professors driving innovations in silicon photonics, confidential computing, neuromorphic hardware (Loihi), quantum computing, and domain-specific hardware accelerators.",
+    "amount": "Varies by program; no amount stated on the academic awards page",
+    "summary": "Intel Labs lists distinct academic awards: the annual Rising Star Faculty Award and Outstanding Researcher Award, plus the Hardware Security Academic Award. The official pages show recent recipients and the 2026 Hardware Security Award finalists, but do not publish an open application cycle or current deadlines.",
     "eligibility": [
-      "Full-time faculty member in CS, CE, or Electrical Engineering",
-      "Invitation and open RFP tracks through Intel University Relations"
+      "Eligibility and application terms vary by award; current terms are not published on the awards overview"
     ],
     "topics": [
-      "Computer Architecture",
       "Hardware Security",
-      "Neuromorphic Computing",
-      "Quantum Computing",
-      "Silicon Photonics",
-      "Edge AI"
+      "Academic Research"
     ],
-    "url": "https://www.intel.com/content/www/us/en/research/overview.html",
+    "url": "https://www.intel.com/content/www/us/en/research/academic-collaborations.html",
     "featured": false
   },
   {
