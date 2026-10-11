@@ -30,7 +30,7 @@ remote_history.json
 debug_gmu_history.js
 .nsf-sync-cache.json
 .openalex-ror-progress.json
-# EXPANSION_PLAN.md Step 2 input: the DBLP bulk dump, downloaded manually
+# CORE A/A* extra-publications input (TASKS/csrankings.md): the DBLP bulk dump, downloaded manually
 # (dblp.org is behind an anti-bot wall that blocks scripted downloads).
 .dblp-dump/
 

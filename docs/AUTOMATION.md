@@ -7,8 +7,7 @@ behavior is changed by editing this file, not the routine.
 
 ## How it fits together
 
-- **Producers** are cloud routines that each do one bounded maintenance task from `TASKS/` and
-  `MAINTENANCE.md`, then open a PR (data edits) or an Issue (anything needing a decision).
+- **Producers** are cloud routines that each do one bounded maintenance task from a `TASKS/` playbook, then open a PR (data edits) or an Issue (anything needing a decision).
 - **The auditor** is a separate cloud routine (Opus) that reviews those PRs and Issues after they
   have sat for at least 12 hours, re-verifies them against live sources, and merges, fixes, or
   closes them. A producer never reviews or merges its own work.
@@ -18,10 +17,8 @@ behavior is changed by editing this file, not the routine.
 
 ### Precedence for scheduled runs
 
-`AGENTS.md` and `MAINTENANCE.md` say to commit directly to `main`, and several playbooks say to
-"continue until 100% complete" or "do NOT stop". For scheduled runs, this file overrides both:
-producers open PRs and never push to `main`, and every run stops at its section's cap. The "100%"
-goal is reached across runs, not within one.
+`AGENTS.md` says to commit directly to `main`. For scheduled runs, this file overrides it: producers
+open PRs and never push to `main`, and every run stops at its section's cap.
 
 ## Schedule
 
@@ -68,15 +65,14 @@ Outside the cloud:
 | OpenAlex affiliation history | Owner's crontab: `15 3 * * * …/scripts/daily-openalex-sync.sh` | Daily 3:15 AM local | Budget-capped, commits and pushes to `main` itself; log in `.openalex-cron.log`. It aborts (and reverts) on a script crash instead of logging "No changes". |
 | Automation watchdog | GitHub Action `.github/workflows/automation-watchdog.yml` | Mondays 12:00 UTC; manual via `gh workflow run automation-watchdog.yml` | Opens or comments on one "Automation watchdog (automated)" Issue when a PR has been open more than 10 days or nothing `[scheduled:*]` appeared in 10 days; closes it when checks pass. No model involved. |
 | Full NSF resync | GitHub Action `.github/workflows/nsf-full-sync.yml` | 2nd of Jan/Apr/Jul/Oct, 08:00 UTC; manual via `gh workflow run nsf-full-sync.yml` | Runs `sync:nsf:all` with its resume cache kept per quarter; an incomplete run re-dispatches itself (up to 6 attempts, then an Issue). Opens a `[scheduled:nsf-full]` PR, or an Issue if awards drop more than 3%. |
-| CORE A/A* extra publications | GitHub Action `.github/workflows/dblp-core-extra.yml` | 6th of Jan/Apr/Jul/Oct, 08:30 UTC; manual via `gh workflow run dblp-core-extra.yml` | Downloads the newest DBLP release from the Dagstuhl mirror (dblp.org itself blocks scripts), verifies md5, skips if already built from it, rebuilds per MAINTENANCE.md §2.5, and opens a `[scheduled:dblp]` PR (or an Issue if rows drop more than 10%). |
+| CORE A/A* extra publications | GitHub Action `.github/workflows/dblp-core-extra.yml` | 6th of Jan/Apr/Jul/Oct, 08:30 UTC; manual via `gh workflow run dblp-core-extra.yml` | Downloads the newest DBLP release from the Dagstuhl mirror (dblp.org itself blocks scripts), verifies md5, skips if already built from it, rebuilds per `TASKS/csrankings.md`, and opens a `[scheduled:dblp]` PR (or an Issue if rows drop more than 10%). |
 
 ## Conventions for every scheduled run
 
 Every routine prompt says: "Read docs/AUTOMATION.md and follow the section for `<key>`." All of
 them share these rules:
 
-1. **Setup.** Read `AGENTS.md`, this section, the playbook your section names, and the
-   `MAINTENANCE.md` section it cites. Run `npm ci` (not `npm install`). Work sequentially; don't
+1. **Setup.** Read `AGENTS.md`, this section, and the playbook your section names. Run `npm ci` (not `npm install`). Work sequentially; don't
    spawn subagents. Use the GitHub MCP tools when `gh` is missing.
 2. **Caps.** Stay within the section's cap, then stop. Before starting, list open PRs and Issues
    titled `[scheduled:<key>]` and skip items they already touch.
@@ -105,7 +101,7 @@ them share these rules:
 
 ### Auditor (`audit`)
 
-Follow `TASKS/AUDIT_ISSUES_PRS.md`, with these rules taking precedence:
+Follow `TASKS/audit.md`, with these rules taking precedence:
 
 - Scope: open PRs and Issues created at least 12 hours ago, oldest first, skipping anything this
   session created. At most 5 PRs and 10 Issues per run.
@@ -128,7 +124,7 @@ Follow `TASKS/AUDIT_ISSUES_PRS.md`, with these rules taking precedence:
   no unexplained drop) and spot-check a few rows instead of re-verifying every fact. For `dblp`,
   update the venue count in `CONF_SET_HELP` (src/filters.ts) if the accepted count changed.
 - Submission Issues (from `grants-submit.html`, `csconfs-submit.html`, or `jobs-submit.html`): a submission is a lead,
-  not a source. Verify the official URL, then apply it per MAINTENANCE.md §5/§6/§6.5, or close with the
+  not a source. Verify the official URL, then apply it per the domain's `TASKS/` playbook, or close with the
   reason.
 - Needs an owner decision (conflicting official sources, a policy question, anything that would
   delete data): comment with findings and a recommendation, and leave it open.
@@ -145,13 +141,12 @@ Follow `TASKS/AUDIT_ISSUES_PRS.md`, with these rules taking precedence:
 
 ### Conference audit (`confs`)
 
-Playbook: `TASKS/audit_cs_conferences.md` and MAINTENANCE.md §5 (source priority, edition URL
-patterns, stop conditions, schema, editing rules). Cap: 12 conference series.
+Playbook: `TASKS/conferences.md`. Cap: 12 conference series.
 
 1. Pick the queue with `npm run maintain:csconfs -- --dry-run --limit 12`. It orders series by
    near-term deadlines and gaps, skips recently checked and deferred ones, and prints why each is
    due. Don't run the controller without `--dry-run`; this routine is the researcher.
-2. Research each series on its official site (Workflows A/B in §5). Update
+2. Research each series on its official site (Workflows A/B in the playbook). Update
    `csconfs/data/conferences.json` only with facts an official page states.
 3. For every series you researched, record the result in `csconfs/maintenance/checks.json` under
    `series.<name>`, in the controller's format: `lastCheckedAt` (ISO time), `outcome`
@@ -161,14 +156,13 @@ patterns, stop conditions, schema, editing rules). Cap: 12 conference series.
    repeating the same series.
 4. Open one PR even if only `checks.json` changed.
 
-Owner-curated "other venues" (`"other": true`, empty `venueKeys`; MAINTENANCE.md §5) are audited
+Owner-curated "other venues" (`"other": true`, empty `venueKeys`) are audited
 like any other series, so the queue will include them. Keep `venueKeys: []`, `other`, and `area`
 exactly as they are.
 
 ### Grants audit (`grants`)
 
-Playbook: `TASKS/update_grants_and_awards.md` and MAINTENANCE.md §6 (schema, audience taxonomy,
-historical status). Cap: 20 entries in `public/grants.json`.
+Playbook: `TASKS/grants.md`. Cap: 20 entries in `public/grants.json`.
 
 First, fix corrupted `amount` strings (Issue #13: a past automated edit stripped `$` plus the digit
 after it, leaving text like `Small (00,000), Medium (,200,000)`). List them with
@@ -183,33 +177,28 @@ Then pick entries in this order: deadline already passed (the next cycle may be 
 within the next 90 days, then entries with no concrete date in `deadline`. Break ties by rotating
 `sponsorCategory`, taking the category that appears least among the last few `[scheduled:grants]`
 PRs. For each entry, confirm the official page, update the deadline/amount/eligibility, keep
-concrete historical dates as §6 describes, and set `"status": "historical"` for discontinued
+concrete historical dates as the playbook describes, and set `"status": "historical"` for discontinued
 programs rather than deleting them. Keep `id`s stable.
 
 ### US jobs crawl (`jobs`)
 
-Playbook: `TASKS/audit_us_jobs.md` and MAINTENANCE.md §6.5 (schema, official-source rules, how "active" works).
-Cap: 30 schools, worked sequentially by this one agent (never spawn subagents). Runs Monday and Friday, the two weekdays with no other routine, so it never overlaps `confs` (Sun/Tue/Thu/Sat 20:00) or `grants` (Wed/Sat 23:00). Crawling each school's own department hiring page is the main source of `public/jobs.json`;
-`jobs-submit.html` submissions are leads the auditor verifies.
+Playbook: `TASKS/jobs.md`. Cap: 30 schools, worked sequentially by this one agent (never spawn subagents). Runs
+Monday and Friday, the two weekdays with no other routine.
 
-0. **Browser check (every run that has schools due).** Run `npx playwright install --with-deps chromium` and then `npm run render:jobs -- https://apply.interfolio.com/194231`; the output should contain `Tenure-Track Faculty 2026-2027`. State the result in the PR description ("render step: works" or the exact error). If the install or render fails, continue with WebFetch only, and open one Issue titled `[scheduled:jobs] Render step unavailable` with the exact error (skip it if one is already open) so the owner can fix the environment.
-1. Pick the queue with `npm run maintain:jobs -- --limit 30`. It puts never-checked schools first (largest
-   CSRankings faculty first), then schools due for a recheck (season-aware: more often August to February, and
-   more often for schools with open postings). If `scripts/data/jobs-sources.json` is missing a US school, run
-   `npm run maintain:jobs -- --seed` first.
-2. Crawl each school per §6.5. Many hiring and posting pages (Interfolio, Workday, PeopleAdmin, PeopleSoft, NEOGOV, JavaScript department sites) are empty shells to WebFetch, so when a page shows no content use the render step: run `npx playwright install --with-deps chromium` once, then `npm run render:jobs -- <url>` to read a page and `npm run render:jobs -- --links <homepage>` to find the hiring page. It is an ordinary browser; if a site still returns 403 or a challenge page, mark the school `blocked` and move on. Then find or confirm the official hiring page (`jobsUrl`), add or update records for
-   CS-relevant openings, including those in the school's other units that hire CS PhDs (IST/iSchool, ECE/EECS, data science; track them in `relatedUnits`, see §6.5), set `lastSeenAt` on postings still live, and set `closedAt` on postings that are gone or
-   marked filled. Never delete a record; never copy facts from AcademicJobsOnline, HigherEdJobs, or social posts.
-3. Record each school's result in `scripts/data/jobs-sources.json` (`lastCheckedAt`, `outcome`, `summary`,
-   `checkedUrls`, `deferredUntil` = +21 days for `not_found`/`blocked`, otherwise `null`). Open one PR even if only
-   the sources file changed.
-4. Every new or changed deadline and every `closedAt` goes in the PR description with its official URL; the
-   auditor re-verifies all of them. Postings whose deadline is unclear are added with `deadline: null` and
-   a note in the PR, not a guess. Don't add a posting you can't tie to an official URL.
+0. **Browser check (every run that has schools due).** Run `npx playwright install --with-deps chromium` and then
+   `npm run render:jobs -- https://apply.interfolio.com/194231`; the output should contain
+   `Tenure-Track Faculty 2026-2027`. State the result in the PR description ("render step: works" or the exact
+   error). If it fails, continue with WebFetch only and open one Issue titled `[scheduled:jobs] Render step
+   unavailable` with the exact error (skip if one is already open).
+1. Pick the queue with `npm run maintain:jobs -- --limit 30` (run `--seed` first if CSRankings added US schools).
+2. Crawl each school per the playbook and record its result in `scripts/data/jobs-sources.json`. Open one PR
+   even if only the sources file changed.
+3. Every new or changed deadline and every `closedAt` goes in the PR description with its official URL; the
+   auditor re-verifies all of them.
 
 ### Mechanical data sync (`data-sync`)
 
-Playbooks: `TASKS/sync_nsf_funding.md` (name matching only) and `TASKS/sync_csrankings_rules.md`.
+Playbooks: `TASKS/nsf.md` (name matching only) and `TASKS/csrankings.md`.
 No web research.
 
 1. `npm run sync:nsf:names`, then `npm run sync:csrankings-rules`, then `npm run check:size`.
@@ -222,23 +211,23 @@ No web research.
 
 ### Discover conferences (`confs-discover`)
 
-Playbook: `TASKS/discover_new_conferences.md`. Cap: 5 new conference series. Dedup against every
+Playbook: `TASKS/conferences.md` ("Discovering new series"). Cap: 5 new conference series. Dedup against every
 `name` and `venueKeys` value already in `csconfs/data/conferences.json` and against open PRs.
 `venueKeys` must be keys `src/data.ts` already recognizes; if a strong candidate has no
 recognized key, file it as an Issue instead of adding it. Never add an `"other": true` record: the
-owner curates that list (MAINTENANCE.md §5); suggest candidates in the same Issue. New records use `estimated`/`verified`
+owner curates that list; suggest candidates in the same Issue. New records use `estimated`/`verified`
 honestly and leave unknown fields `null`.
 
 ### Discover grants (`grants-discover`)
 
-Playbook: `TASKS/discover_new_grants.md` and the §6 search queries. Rotate: start with the query
+Playbook: `TASKS/grants.md` ("Discovering new programs"). Rotate: start with the query
 category least represented in recent `[scheduled:grants-discover]` PRs. Cap: 5 new entries. Dedup
 against every `id`, `name`, and `url` in `public/grants.json` and against open PRs. Each entry
 needs an official call page; skip programs known only from third-party lists.
 
 ### Manual affiliations (`affiliations`)
 
-Playbook: `TASKS/verify_manual_affiliations.md`. Re-check every row in
+Playbook: `TASKS/affiliations.md`. Re-check every row in
 `public/manual_affiliations.csv` against official appointment pages or CVs. Correct only what an
 official source contradicts, citing it per row. Rows you can't confirm stay as they are, listed in
 the PR description.

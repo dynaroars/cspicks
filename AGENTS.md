@@ -34,11 +34,9 @@ NSF attribution, and rendering safety; no linter is configured. `postbuild` stri
 (`professor_history_openalex.json`, `school-aliases.json`, `core-extra-author-info.csv`, `data/`) from `dist/`
 since those are fetched from raw GitHub at runtime rather than bundled.
 
-Data-generation scripts (run manually, not part of the build) and their cadence, plus every other
-data-refresh workflow — NSF funding sync, CS Conference schedule research, grants/awards crawling, OpenAlex
-history, CSRankings taxonomy sync, sitemap/OG regeneration — are documented in
-[**MAINTENANCE.md**](MAINTENANCE.md). Read it before doing any data-refresh or web-research task on this
-project.
+Every data-refresh workflow (conferences, grants, jobs, NSF, affiliations, CSRankings-derived data) has one
+playbook in `TASKS/`; [**MAINTENANCE.md**](MAINTENANCE.md) is the index with cadences. Read the relevant
+playbook before any data-refresh or web-research task.
 
 ## Architecture
 
@@ -73,7 +71,7 @@ project.
   a US state tile map, and a Markdown export of ★ starred postings (`src/jobs/jobs-export.ts`). `jobs-data.ts`
   owns loading, the active/closed definition (`isActive`: not closed, deadline not passed, or confirmed within 90 days),
   filtering, and grouping; `jobs-render.ts` the cards and map; school rank chips load lazily from `loadData()`. Covers any US
-  school (CSRankings seeds the crawl list but is not a requirement), crawled by a scheduled routine (MAINTENANCE.md §6.5); queue/seed tooling is
+  school (CSRankings seeds the crawl list but is not a requirement), crawled by a scheduled routine (TASKS/jobs.md); queue/seed tooling is
   `scripts/jobs-maintain.mjs` with state in `scripts/data/jobs-sources.json`.
 - `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
 - `grants-submit.html` + `src/grants/submit.js` — single unified submission/correction form for proposing
@@ -146,7 +144,7 @@ so modules loaded together on Search share one download and parse of the canonic
    corrections to bad OpenAlex data, merged in via `mergeAffiliationHistory()`. These assets are loaded only
    when the user enables Historical Mode.
 4. **CORE A/A* extra publications**: `public/core-extra-author-info.csv` (generated offline by
-   `scripts/build-core-extra-pubs.js` from a bulk DBLP dump — see `MAINTENANCE.md` §2.5) covers publications in
+   `scripts/build-core-extra-pubs.js` from a bulk DBLP dump — see `TASKS/csrankings.md`) covers publications in
    CORE A/A* venues CSRankings' own `generated-author-info.csv` doesn't track, for the existing roster only. Its
    `area` column holds a venue key exactly like `generated-author-info.csv` does (not a resolved research
    area — `getConferenceAreaMap`/`publicationMatchesConferenceSet` resolve that at query time). `loadData()`
@@ -187,14 +185,6 @@ Discoveries must be reproducible from the same data every other page uses — ne
 
 Keep the `help` text honest about methodology (thresholds, "prior period" definition, exclusions) — it's the
 only methodology note most readers see.
-
-## Data maintenance
-
-All data-refresh workflows — NSF funding sync, CS Conference schedule
-research, grants/awards crawling (search queries, schema, audience taxonomy,
-submission review), OpenAlex history, CSRankings taxonomy sync, sitemap/OG
-regeneration — are documented in [**MAINTENANCE.md**](MAINTENANCE.md). Read
-it before doing any data-refresh or web-research task on this project.
 
 ## Testing notes
 

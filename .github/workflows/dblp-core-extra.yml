@@ -1,6 +1,6 @@
 name: Quarterly DBLP CORE A/A* refresh
 
-# Model-free replacement for the manual DBLP dump step in MAINTENANCE.md §2.5. dblp.org's bot wall
+# Model-free replacement for the manual DBLP dump step in TASKS/csrankings.md. dblp.org's bot wall
 # blocks scripted downloads, but Schloss Dagstuhl publishes the same monthly releases (with md5
 # checksums) at drops.dagstuhl.de. This picks the newest release, skips it if the current CSV was
 # already built from it, rebuilds public/core-extra-author-info.csv, and opens a
@@ -132,6 +132,6 @@ jobs:
           git push origin "$branch"
           gh pr create --base main --head "$branch" \
             --title "[scheduled:dblp] Rebuild CORE A/A* extra publications from DBLP $d" \
-            --body "Automated MAINTENANCE.md §2.5 refresh ([run]($run_url)) from the Dagstuhl mirror of DBLP release $d (md5 verified). Rows: $before -> $after. Report: $summary. Validated with test, typecheck, build, check:size. Auditor: per §2.5 step 3, if the accepted venue count changed, update the venue count/example cited in \`CONF_SET_HELP\` (src/filters.ts)."
+            --body "Automated CORE A/A* extra-publications refresh ([run]($run_url)) from the Dagstuhl mirror of DBLP release $d (md5 verified). Rows: $before -> $after. Report: $summary. Validated with test, typecheck, build, check:size. Auditor: per §2.5 step 3, if the accepted venue count changed, update the venue count/example cited in \`CONF_SET_HELP\` (src/filters.ts)."
           # PRs opened with GITHUB_TOKEN don't trigger CI; dispatch the build on the branch.
           gh workflow run deploy.yml --ref "$branch"

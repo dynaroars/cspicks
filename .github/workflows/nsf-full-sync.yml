@@ -1,6 +1,6 @@
 name: Quarterly NSF full resync
 
-# Model-free replacement for running `npm run sync:nsf:all` by hand (MAINTENANCE.md §3). The sync is
+# Model-free replacement for running `npm run sync:nsf:all` by hand (TASKS/nsf.md). The sync is
 # resumable through .nsf-sync-cache.json, which is kept in the Actions cache per quarter: the first
 # run of a quarter starts empty (a full re-query), and a run that times out or has failures
 # re-dispatches itself to continue. A complete, sane result becomes a `[scheduled:nsf-full]` PR for

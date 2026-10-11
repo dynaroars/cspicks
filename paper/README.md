@@ -77,7 +77,7 @@ available to readers). This paper is LaTeX so the source can be posted.
 
 ## Related
 
-`PAPER.md` at the repo root holds the broader research plan and hypotheses
+`PLAN.md` in this directory holds the broader research plan and hypotheses
 (H1–H6). This paper covers H1 (rank stability), H2 (concentration, including the
 per-faculty ordering), H3 (fragility), and H5 (venue sensitivity); H4
 (historical attribution) and H6 (alternative credit models) are future work.
