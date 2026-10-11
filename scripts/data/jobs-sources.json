@@ -4220,16 +4220,21 @@
     "facultyCount": 25,
     "jobsUrl": "https://jobs.odu.edu/",
     "state": "VA",
-    "lastCheckedAt": "2026-10-11T17:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Added current accelerator-science tenured Associate/Full Professor posting F1117A; PhD in CS accepted, AI/ML focus, review Dec 31, 2026 and open until filled. Older trustworthy-AI research faculty record 23220 now redirects and was not treated as current. Wider adjacent units need review.",
+    "lastCheckedAt": "2026-10-11T04:42:00Z",
+    "outcome": "complete",
+    "summary": "Reverified active accelerator-science tenured Associate/Full Professor posting F1117A; PhD in CS accepted, review Dec 31, 2026, open until filled. Targeted current-board searches across CS, data science, and cybersecurity faculty/research postings found no additional CS-eligible active calls. Older trustworthy-AI (23220) and AI-special-education cluster (24481) pages redirect after closure; ODU engineering jobs page also retains stale prior-cycle listings.",
     "checkedUrls": [
       "https://jobs.odu.edu/",
       "https://jobs.odu.edu/postings/search?367=3&query_organizational_tier_1_id=any&query_organizational_tier_3_id=any&commit=Search",
       "https://www.odu.edu/employment",
       "https://jobs.odu.edu/postings/search?utf8=%E2%9C%93&query=&query_v0_5=&query_organizational_tier_1_id=any&query_organizational_tier_3_id=any&commit=Search",
       "https://jobs.odu.edu/postings/23963",
-      "https://jobs.odu.edu/postings/23220"
+      "https://jobs.odu.edu/postings/23220",
+      "https://jobs.odu.edu/postings/24481",
+      "https://jobs.odu.edu/postings/search?query=computer+science",
+      "https://jobs.odu.edu/postings/search?query=data+science",
+      "https://jobs.odu.edu/postings/search?query=cybersecurity",
+      "https://www.odu.edu/engineering/jobs"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -4238,7 +4243,7 @@
         "url": "https://jobs.odu.edu/"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z"
+    "relatedCheckedAt": "2026-10-11T04:42:00Z"
   },
   {
     "school": "Temple University",
