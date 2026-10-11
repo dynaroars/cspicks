@@ -49,3 +49,7 @@ An ordinary Chromium capture of all 652 known official hiring/related-unit/posti
 Reviewed the complete university faculty index, CSD/ECE hiring pages, and 28 relevant or ambiguous posting details. Added 16 faculty, teaching, leadership and postdoc roles; corrected/refreshed six prior records. Exact records, exclusions and official URLs are in `docs/data-sweep-jobs-cmu-evidence-2026-10-10.json`. Older BME, Xu and Lane advertisements are still live and retain their source dates with explicit historical timing notes.
 
 All 33 capture batches completed: 652 known official URLs. Other captures still require evidence review before a school or posting is marked checked.
+
+## Remaining UCSD candidate review
+
+Read all 19 captured adjacent postings, including full qualifications and work-authorization language. Added 13 roles, excluded five calls without a clear computing target, and deferred the MAS lecturer scope. Evidence and exact additions: `docs/data-sweep-jobs-ucsd-adjacent-evidence-2026-10-10.json`. The IGCC fellowship is located in Washington, DC, and the Design Lab research role is explicitly 25% effort. The nanosensing ad conflicts on October 31 versus November 30 priority dates; its final May 31, 2027 cutoff is explicit. UCSD remains partial pending the broader ambiguous science/medicine calls.
