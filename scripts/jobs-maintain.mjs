@@ -5,6 +5,8 @@
  * department's hiring page, and edits public/jobs.json and scripts/data/jobs-sources.json.
  *
  *   npm run maintain:jobs -- --seed              add any US CSRankings school missing from the sources file
+ *   npm run maintain:jobs -- --add "Texas Christian University" --homepage https://cs.tcu.edu/ --state TX
+ *                                                add a US school that is not in CSRankings (every US school is in scope)
  *   npm run maintain:jobs -- --limit 12          print the next schools to crawl (default 30)
  *   npm run maintain:jobs -- --related 20       print schools whose non-CS units (IST, ECE, data science) were never checked
  *   npm run maintain:jobs -- --stats             coverage and posting counts
@@ -31,6 +33,21 @@ async function fetchCsv(path) {
   return Papa.parse(await response.text(), { header: true, skipEmptyLines: true }).data;
 }
 
+const emptyRow = (school, homepage, facultyCount) => ({
+  school,
+  homepage,
+  facultyCount,
+  jobsUrl: null,
+  state: null,
+  lastCheckedAt: null,
+  outcome: null,
+  summary: null,
+  checkedUrls: [],
+  relatedUnits: [],
+  relatedCheckedAt: null,
+  deferredUntil: null
+});
+
 async function seed() {
   const [institutions, roster] = await Promise.all([fetchCsv('institutions.csv'), fetchCsv('csrankings.csv')]);
   const faculty = new Map();
@@ -40,20 +57,7 @@ async function seed() {
   let added = 0;
   for (const row of institutions) {
     if (row.countryabbrv !== 'us' || known.has(row.institution)) continue;
-    sources.push({
-      school: row.institution,
-      homepage: row.homepage || null,
-      facultyCount: faculty.get(row.institution) || 0,
-      jobsUrl: null,
-      state: null,
-      lastCheckedAt: null,
-      outcome: null,
-      summary: null,
-      checkedUrls: [],
-      relatedUnits: [],
-      relatedCheckedAt: null,
-      deferredUntil: null
-    });
+    sources.push(emptyRow(row.institution, row.homepage || null, faculty.get(row.institution) || 0));
     added += 1;
   }
   // Refresh counts for existing rows without touching crawl state.
@@ -61,6 +65,19 @@ async function seed() {
   sources.sort((a, b) => b.facultyCount - a.facultyCount || a.school.localeCompare(b.school));
   await fs.writeFile(SOURCES, `${JSON.stringify(sources, null, 2)}\n`);
   console.log(`Seeded ${added} new school(s); ${sources.length} total.`);
+}
+
+/** A US school CSRankings does not list. It keeps `csrankings: false` so `--seed` never confuses it with a roster school. */
+async function addSchool() {
+  const school = option('add', '').trim();
+  const state = option('state', '').trim().toUpperCase();
+  if (!school || school.startsWith('--')) throw new Error('Usage: --add "School Name" [--homepage URL] [--state XX]');
+  if (state && !/^[A-Z]{2}$/.test(state)) throw new Error(`--state must be a USPS code, got "${state}"`);
+  const sources = await readJson(SOURCES, []);
+  if (sources.some(source => source.school.toLowerCase() === school.toLowerCase())) return console.log(`${school} is already in the sources file.`);
+  sources.push({ ...emptyRow(school, option('homepage', null), 0), state: state || null, csrankings: false });
+  await fs.writeFile(SOURCES, `${JSON.stringify(sources, null, 2)}\n`);
+  console.log(`Added ${school}; ${sources.length} schools total.`);
 }
 
 /** Hiring season: postings appear August to January, so recheck more often then. */
@@ -102,6 +119,7 @@ export function buildRelatedQueue(sources) {
 
 async function main() {
   if (flag('seed')) return seed();
+  if (flag('add')) return addSchool();
   const sources = await readJson(SOURCES, []);
   const jobs = await readJson(JOBS, []);
   if (flag('related')) {

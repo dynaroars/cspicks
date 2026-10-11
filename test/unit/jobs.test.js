@@ -231,7 +231,7 @@ test('crawl queue prioritises never-checked, big schools, and open-posting schoo
   assert.ok(recheckDays(Date.UTC(2026, 5, 1), false) > recheckDays(NOW, false));
 });
 
-test('shipped jobs dataset is valid, unique, and uses CSRankings school names', async () => {
+test('shipped jobs dataset is valid, unique, and uses school names from jobs-sources.json', async () => {
   const data = parseJobs(JSON.parse(await fs.readFile(new URL('../../public/jobs.json', import.meta.url), 'utf8')));
   const sources = JSON.parse(await fs.readFile(new URL('../../scripts/data/jobs-sources.json', import.meta.url), 'utf8'));
   const schools = new Set(sources.map(source => source.school));
@@ -239,7 +239,7 @@ test('shipped jobs dataset is valid, unique, and uses CSRankings school names', 
   assert.equal(new Set(data.map(entry => entry.id)).size, data.length, 'ids are unique');
   assert.equal(new Set(data.map(entry => entry.url)).size, data.length, 'one record per posting URL');
   data.forEach(entry => {
-    assert.ok(schools.has(entry.school), `${entry.id}: "${entry.school}" is not a CSRankings school in jobs-sources.json`);
+    assert.ok(schools.has(entry.school), `${entry.id}: "${entry.school}" is not in jobs-sources.json (add it with maintain:jobs --add)`);
     assert.match(entry.url, /^https:\/\//);
     entry.areas.forEach(area => assert.ok(area, `${entry.id}: empty area`));
   });

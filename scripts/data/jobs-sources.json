@@ -5861,5 +5861,20 @@
       }
     ],
     "relatedCheckedAt": "2026-10-08T20:00:00Z"
+  },
+  {
+    "school": "Texas Christian University",
+    "homepage": "https://cs.tcu.edu/",
+    "facultyCount": 0,
+    "jobsUrl": null,
+    "state": "TX",
+    "lastCheckedAt": null,
+    "outcome": null,
+    "summary": null,
+    "checkedUrls": [],
+    "relatedUnits": [],
+    "relatedCheckedAt": null,
+    "deferredUntil": null,
+    "csrankings": false
   }
 ]

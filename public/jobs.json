@@ -8460,5 +8460,30 @@
     "summary": "Current ECE listing seeks a recent PhD for GPU power side-channel measurement and analysis, with hardware security, CUDA/profiling, instrumentation, or applied ML experience preferred. Apply by email with a CV, brief research statement, and three references; review begins immediately and continues until filled.",
     "source": "crawl",
     "verified": true
+  },
+  {
+    "id": "tcu-cs-assistant-professor-2026",
+    "school": "Texas Christian University",
+    "department": "Department of Computer Science",
+    "title": "Assistant Professor of Computer Science",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "sec"
+    ],
+    "anyArea": true,
+    "state": "TX",
+    "city": "Fort Worth",
+    "deadline": "2026-11-13",
+    "rolling": true,
+    "reviewBegins": "2026-11-13",
+    "postedDate": "2026-09-17",
+    "url": "https://jobs.tcu.edu/jobs/assistant-professor-of-computer-science-tcu-main-campus-texas-united-states",
+    "visaSponsorship": "not-stated",
+    "summary": "Two tenure-track assistant professor positions starting Fall 2027, open to all areas of computer science with particular interest in AI, cybersecurity and privacy, quantum computing, and cyber-physical/autonomous systems. Applications received by November 13, 2026 get full consideration; review continues until filled.",
+    "lastSeenAt": "2026-10-11",
+    "source": "submission",
+    "verified": true
   }
 ]

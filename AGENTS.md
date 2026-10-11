@@ -70,8 +70,8 @@ project.
   params restore as visible keywords. It has CSRankings rank sorts, a position/school view toggle,
   a US state tile map, and a Markdown export of ★ starred postings (`src/jobs/jobs-export.ts`). `jobs-data.ts`
   owns loading, the active/closed definition (`isActive`: not closed, deadline not passed, or confirmed within 90 days),
-  filtering, and grouping; `jobs-render.ts` the cards and map; school rank chips load lazily from `loadData()`. Crawled
-  from CSRankings departments by a scheduled routine (MAINTENANCE.md §6.5); queue/seed tooling is
+  filtering, and grouping; `jobs-render.ts` the cards and map; school rank chips load lazily from `loadData()`. Covers any US
+  school (CSRankings seeds the crawl list but is not a requirement), crawled by a scheduled routine (MAINTENANCE.md §6.5); queue/seed tooling is
   `scripts/jobs-maintain.mjs` with state in `scripts/data/jobs-sources.json`.
 - `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
 - `grants-submit.html` + `src/grants/submit.js` — single unified submission/correction form for proposing

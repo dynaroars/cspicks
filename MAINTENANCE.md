@@ -597,13 +597,15 @@ npx playwright test test/e2e/grants.spec.js test/e2e/grants-submit.spec.js  # Ru
 ## 6.5. US academic jobs (`public/jobs.json`)
 
 `jobs.html` reads `public/jobs.json`: faculty, teaching-track, research, postdoc, visiting, and
-chair/dean openings at US CSRankings schools. **The main source is crawling each school's own
+chair/dean openings at **any US school** — CSRankings membership is not required. CSRankings only seeds the crawl list
+and supplies the optional rank chips; schools it does not list simply show no rank. **The main source is crawling each school's own
 department hiring page**, not third-party boards. People can also submit postings through
 `jobs-submit.html`, but a submission is a lead, never a source.
 
-Crawl state lives in `scripts/data/jobs-sources.json` (one row per US CSRankings school, seeded from
-CSRankings' `institutions.csv` with `npm run maintain:jobs -- --seed`; re-run it when CSRankings adds US
-schools). Each row holds the school's `homepage`, the discovered `jobsUrl`, `state`, and the last crawl's
+Crawl state lives in `scripts/data/jobs-sources.json` (one row per US school: seeded from
+CSRankings' `institutions.csv` with `npm run maintain:jobs -- --seed`, re-run when CSRankings adds US
+schools; add any other US school, e.g. from a submission, with
+`npm run maintain:jobs -- --add "School Name" --homepage <url> --state XX`, which marks the row `csrankings: false`). Each row holds the school's `homepage`, the discovered `jobsUrl`, `state`, and the last crawl's
 `lastCheckedAt` / `outcome` / `summary` / `checkedUrls` / `deferredUntil`. `npm run maintain:jobs -- --limit N`
 prints the queue: never-checked schools first (largest CSRankings faculty count first), then schools whose
 recheck interval has elapsed. Fully read schools are season-aware: postings appear August to January, so those with open
@@ -640,7 +642,7 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
    revisit them. Include a posting from such a unit when a CS PhD is plainly a target: it names computing, AI, ML,
    data, security, networks, systems, or software, or it is an open or cluster search a CS PhD would apply to.
    Skip positions plainly outside computing. Record the unit in `department` as it appears on the posting
-   (e.g. "College of Information Sciences and Technology"); `school` stays the CSRankings name.
+   (e.g. "College of Information Sciences and Technology"); `school` stays the name in the sources row.
 3. For every CS-relevant opening in the CS department itself (computer science, computer engineering, AI, data
    science, cybersecurity, or school/college-of-computing units), add or update one record.
 4. For records already in `jobs.json` for this school: if the posting is still listed, set `lastSeenAt` to today
@@ -656,7 +658,7 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
 | Field | Notes |
 | --- | --- |
 | `id` | Stable kebab-case slug: `<school-short>-<role-slug>-<yyyy>`; never reused, never changed. |
-| `school` | The exact CSRankings institution name (as in `jobs-sources.json`); a unit test enforces it. |
+| `school` | The exact institution name in `jobs-sources.json` (the CSRankings name when CSRankings lists the school); a unit test enforces it. |
 | `department`, `title` | As on the posting. |
 | `track` | `tenure-track`, `teaching`, `research`, `postdoc`, `visiting`, `leadership`. |
 | `level` | `assistant`, `associate`, `full`, `open`, or null when the posting has no rank (postdocs, lecturers). |
@@ -685,13 +687,14 @@ rest. This is why crawls must keep `lastSeenAt` current for postings with no dea
 
 A submission arrives as a GitHub Issue or email with a JSON payload. Open the official URL, confirm the
 position exists and the facts match, then add or update the record (`source: "submission"`, `verified: true`),
-or close the Issue with the reason. For "closed or filled" reports, confirm on the official page before
+or close the Issue with the reason. If the school has no sources row yet, add it with `--add`; a school's absence
+from CSRankings is never a reason to reject. For "closed or filled" reports, confirm on the official page before
 setting `closedAt`.
 
 ### Verification
 
 ```bash
-npm test                                   # test/unit/jobs.test.js: schema, unique ids/URLs, CSRankings school names
+npm test                                   # test/unit/jobs.test.js: schema, unique ids/URLs, school names in jobs-sources.json
 npm run build
 npx playwright test test/e2e/jobs.spec.js
 ```

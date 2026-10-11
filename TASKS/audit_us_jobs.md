@@ -11,7 +11,7 @@
 
 ## Purpose & scope
 
-Keep the US Jobs page (`jobs.html`) accurate: postings at US CSRankings schools, faculty (tenure-track,
+Keep the US Jobs page (`jobs.html`) accurate: postings at any US school (CSRankings or not), faculty (tenure-track,
 teaching, research), postdocs, visiting, and chair/dean. The full schema, source rules, and the
 active/closed definition are in **MAINTENANCE.md §6.5**; read it first.
 
@@ -30,7 +30,9 @@ active/closed definition are in **MAINTENANCE.md §6.5**; read it first.
    `visaSponsorship`: `yes`, `no`, `case-by-case`, or `not-stated` when it says nothing (MAINTENANCE.md §6.5). Only the posting
    counts, not a university HR policy page; "sponsored research" is not visa sponsorship. When re-confirming an existing
    record that has no `visaSponsorship`, read and set it, so older records fill in over time.
-5b. **CSRankings names.** `school` must be the exact institution name in `scripts/data/jobs-sources.json`.
+5b. **School names.** `school` must be the exact institution name in `scripts/data/jobs-sources.json`. Every US
+   school is in scope: if a school (e.g. from a submission) has no row, add one with
+   `npm run maintain:jobs -- --add "School Name" --homepage <url> --state XX` rather than rejecting the posting.
 6. **One record per posting URL**; keep `id`s stable and unique.
 
 ## Reading JavaScript pages
@@ -58,6 +60,6 @@ If a page looks empty (Interfolio, Workday, PeopleAdmin, PeopleSoft, NEOGOV), re
 npm test && npm run typecheck && npm run build && git diff --check
 ```
 
-The unit test fails on a non-CSRankings school name, a duplicate id/URL, a bad date, or an invalid state. In the PR
+The unit test fails on a school name missing from `jobs-sources.json`, a duplicate id/URL, a bad date, or an invalid state. In the PR
 description list each changed deadline and each `closedAt` with its official URL, and the schools whose pages were
 blocked or unfindable.
