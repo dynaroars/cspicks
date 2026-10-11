@@ -677,7 +677,7 @@ export function renderDataHealth() {
     container.innerHTML = `
         <h2>CS Picks data health · ${start}–${end}</h2>
         <p class="summary-note">Health checks whether CS Picks’ source data, calculations, metadata, and venue rules are available and internally consistent.</p>
-        
+
         <div class="diagnostic-grid">
             <div class="diagnostic-stat tooltip-trigger"><span>Matches CSRankings default</span><strong class="${defaultReport.matchesCsrankings ? 'confidence-high' : 'confidence-review'}">${defaultReport.matchesCsrankings ? 'Yes' : 'No'}</strong><small>${defaultReport.matchesCsrankings ? 'official venue set, current affiliations, and total ranking' : `${defaultReport.totalMismatches + defaultReport.rankOrderIssues} baseline inconsistencies`}</small><span class="tooltip-content" role="tooltip">Recomputes rankings with official default rules to verify zero baseline parity drift.</span></div>
             <div class="diagnostic-stat tooltip-trigger"><span>Current selection</span><strong>${selectedReport.divergences.length ? 'Customized' : 'Default'}</strong><small>${escapeHtml(selectedMode)}</small><span class="tooltip-content" role="tooltip">Active filter configuration (e.g. customized venue sets, historical affiliations, or per-capita).</span></div>
