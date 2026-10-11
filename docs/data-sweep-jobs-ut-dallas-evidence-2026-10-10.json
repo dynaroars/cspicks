@@ -1,6 +1,6 @@
 {
   "school": "University of Texas at Dallas",
-  "checkedAt": "2026-10-10",
+  "checkedAt": "2026-10-11",
   "checkedSources": [
     {
       "url": "https://cs.utdallas.edu/people/job-postings/",
@@ -9,7 +9,11 @@
     {
       "url": "https://jobs.utdallas.edu/postings/32722",
       "finding": "Official CS Job Postings page provides links to department and university job opportunities but exposes no specific current opening in its rendered content. Direct campus listing was unavailable to confirm the existing lecturer record; audit remains partial."
+    },
+    {
+      "url": "https://jobs.utdallas.edu/postings/32722",
+      "finding": "Directly verified existing F01152P posting. Open date July 1, 2026; close date July 31, 2027; Open Until Filled: No; desired start Aug 16, 2026. Corrected the record’s rolling flag from true to false and called out the elapsed desired start date."
     }
   ],
-  "recordUpdates": "No job records changed; current audit is partial because official posting details could not be retrieved."
+  "recordUpdates": "Corrected CS lecturer F01152P rolling flag and clarified close date and elapsed desired start date. Broader university-wide research/postdoc scan remains incomplete."
 }

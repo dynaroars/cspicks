@@ -248,9 +248,11 @@
     {
       "school": "University of Texas at Dallas",
       "status": "partial",
-      "checkedAt": "2026-10-10",
+      "checkedAt": "2026-10-11",
       "evidence": "docs/data-sweep-jobs-ut-dallas-evidence-2026-10-10.json",
-      "note": "CS Job Postings page points to department and university job portals; page does not render any opening details, and the campus portal fetch failed. Existing part-time lecturer record needs direct posting validation."
+      "note": "CS Job Postings page points to department and university job portals; page does not render any opening details, and the campus portal fetch failed. Existing part-time lecturer record needs direct posting validation.",
+      "findings": "Verified existing CS lecturer requisition 32722 directly; corrected rolling=true to false because the official page says Open Until Filled: No. Posting closes Jul 31, 2027; desired Aug 16, 2026 start has passed.",
+      "remaining": "Broader university-wide research/postdoc scan remains incomplete."
     },
     {
       "school": "University of Texas at Austin",
