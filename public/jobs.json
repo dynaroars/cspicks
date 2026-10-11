@@ -8111,6 +8111,7 @@
     ],
     "state": "PA",
     "city": "Bethlehem",
+    "deadline": "2025-12-10",
     "rolling": true,
     "reviewBegins": "2025-11-01",
     "lastSeenAt": "2026-10-11",
