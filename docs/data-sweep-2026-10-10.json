@@ -3122,8 +3122,9 @@
       "postingReferences": 244,
       "exactUrlMatches": 240,
       "canonicalUrlCorrections": 4,
-      "materiallyCorrectedRecords": 9,
-      "report": "docs/data-sweep-jobs-existing-record-corrections-2026-10-11.json"
+      "materiallyCorrectedRecords": 13,
+      "report": "docs/data-sweep-jobs-existing-record-corrections-2026-10-11.json",
+      "visaAudit": "Explicit sponsorship fields checked across direct requisitions: two false yes values corrected to no; two uncertain values normalized to case-by-case; no other conflicts found."
     },
     "limitations": "All captured pages received first-pass keyword triage; direct posting references were compared with existing job records. This does not complete the 137 school rows still marked partial."
   }
