@@ -33,4 +33,6 @@ geometric-mean method. All results are estimates; confirm details on the officia
 
 ## License
 
-Code is [MIT](LICENSE). Third-party data keeps its own terms: follow the CSRankings license; DBLP and OpenAlex are CC0; NSF records are public government data.
+- **Code**: [MIT](LICENSE).
+- **Our curated datasets** (conferences `csconfs/data/`, awards and grants `public/grants.json`, jobs `public/jobs.json`, and other project-compiled data): [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/), so attribution is required, with no commercial use and no derivatives. MIT does not apply to them.
+- **Third-party data** keeps its own terms: follow the CSRankings license; DBLP and OpenAlex are CC0; NSF records are public government data.
