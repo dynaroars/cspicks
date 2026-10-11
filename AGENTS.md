@@ -41,94 +41,91 @@ playbook before any data-refresh or web-research task.
 ## Architecture
 
 **Multi-page app, one entry module per HTML page** (wired in `vite.config.js` as separate rollup inputs):
-- `index.html` + `src/main.js` — Search page. `main.js` is the page controller only: it owns the data load,
+- `index.html` + `src/main.ts` — Search page. `main.ts` is the page controller only: it owns the data load,
   the filter bar, URL state, and the example chips, then delegates to
-  `src/search-results.js` (result sections), `src/search-suggestions.js` (autocomplete),
-  `src/comparison.js` + `src/compare-view.js` (`A vs B` head-to-head mode), and `src/analysis.js`
+  `src/search-results.ts` (result sections, keyword record filtering, DBLP author search), `src/comparison.ts` +
+  `src/compare-view.ts` (`A vs B` head-to-head mode), and `src/analysis.ts` + `src/analysis-trends.ts`
   (the tabbed analysis panel, imported directly — no window globals or custom events). It also renders
   the Discoveries view (`?view=discoveries`, surfaced via the "🔭 Discoveries" nav link) in place of the
   normal search UI, reusing the same `filters` controller and `loadData()` call rather than standing up a
   second page: the header, filter bar, search box, and examples are identical to Search, but the default
   landing state puts the insight-card grid (`#discovery-stats`, inside `<main>`) where the university/
   faculty lists would otherwise sit. Typing an actual search still runs normally and replaces the cards
-  with real results (`hideDiscoveryCards()` in `main.js`) — Discoveries is a landing-state swap, not a
-  separate search experience. `src/discoveries.js` exports the pure rendering (`renderDiscoveries`) and
-  URL/meta helpers (`discoveriesParams`, `getDiscoveriesMeta`) that `main.js` drives. Computation for its
-  insights lives in `src/metrics.js` (university-level) and is never done inline — see "Adding a new
+  with real results (`hideDiscoveryCards()` in `main.ts`) — Discoveries is a landing-state swap, not a
+  separate search experience. `src/discoveries.ts` exports the pure rendering (`renderDiscoveries`) and
+  URL/meta helper (`getDiscoveriesMeta`) that `main.ts` drives. Computation for its
+  insights lives in `src/metrics.ts` (university-level) and is never done inline — see "Adding a new
   Discovery" below.
-- `simulator.html` + `src/simulator.js` — standalone ranking-impact workflow for adding, transferring, or
-  removing faculty. Pure name-matching and rank-impact calculations live in `src/simulation.js`;
-  `src/dblp-search-ui.js` renders the DBLP candidate-search UI.
-- `nsf.html` + `src/funding.js` — standalone NSF funding search over the synchronized snapshot in
-  `public/nsf-awards.json`. Attribution and card rendering live in `src/nsf.js`; Discoveries also reads it
+- `simulator.html` + `src/simulator.ts` — standalone ranking-impact workflow for adding, transferring, or
+  removing faculty. Pure name-matching and rank-impact calculations live in `src/simulation.ts`.
+- `nsf.html` + `src/funding.ts` — standalone NSF funding search over the synchronized snapshot in
+  `public/nsf-awards.json`. Attribution and card rendering live in `src/nsf.ts`; Discoveries also reads it
   for its funding sections. Search itself carries no NSF data and never loads the snapshot.
-- `grants.html` + `src/grants/main.js` — standalone CS research awards, fellowships, and grants explorer
+- `csconfs.html` + `src/csconfs/main.ts` (and `csconfs-submit.html` + `src/csconfs/submit.ts`) — CS conference
+  schedule explorer over `csconfs/data/conferences.json`.
+- `grants.html` + `src/grants/main.ts` — standalone CS research awards, fellowships, and grants explorer
   over the database in `public/grants.json` (industry gifts, NSF calls, DARPA, DOE, DoD, foundations, societies).
 - `jobs.html` + `src/jobs/main.ts` — US academic CS jobs explorer over `public/jobs.json`. Modeled on the grants page
   (search box, card list) with keyword filters (`track:`, `dept:`, `level:`, `area:`, `loc:`, `visa:`, `status:`),
   comma-separated alternatives, and a clickable search-help popup in `src/search-keywords.ts`. Legacy filter URL
   params restore as visible keywords. It has CSRankings rank sorts, a position/school view toggle,
-  a US state tile map, and a Markdown export of ★ starred postings (`src/jobs/jobs-export.ts`). `jobs-data.ts`
+  a US state tile map, and a Markdown export of ★ starred postings (in `src/jobs/jobs-render.ts`). `jobs-data.ts`
   owns loading, the active/closed definition (`isActive`: not closed, deadline not passed, or confirmed within 90 days),
   filtering, and grouping; `jobs-render.ts` the cards and map; school rank chips load lazily from `loadData()`. Covers any US
   school (CSRankings seeds the crawl list but is not a requirement), crawled by a scheduled routine (TASKS/jobs.md); queue/seed tooling is
   `scripts/jobs-maintain.mjs` with state in `scripts/data/jobs-sources.json`.
 - `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
-- `grants-submit.html` + `src/grants/submit.js` — single unified submission/correction form for proposing
+- `grants-submit.html` + `src/grants/submit.ts` — single unified submission/correction form for proposing
   new CS research awards or updating existing entries via GitHub Issue or email.
 - `README.md` — a deliberately brief overview (features, dev commands, data sources, license); keep it short.
 
 **Shared page infrastructure** — prefer these over per-page copies:
-- `src/filters.js` — `createFilterBar(mount, { fields, years, onChange })` renders the region / year-range /
+- `src/filters.ts` — `createFilterBar(mount, { fields, years, onChange })` renders the region / year-range /
   conference-set / History controls into a `<div id="filter-bar">`, owns their state, URL params, region
   persistence, and the one-time affiliation-history load. `filters.apply(rawData)` runs `filterByYears`
   with the right history maps; `filters.toParams()` writes the shared URL shape. Every page uses it, so
   the control ids (`#region-select`, `#start-year`, `#end-year`, `#conf-set`, `#historical-mode`) are the
   same everywhere.
-- `src/charts.js` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges
+- `src/charts.ts` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges
   shared defaults and destroys the previous chart; `onThemeChange(fn)` re-renders on light/dark switches.
+- `src/style.css` — the one shared stylesheet every page links (sections in cascade order); page-only CSS sits
+  beside its page module (`src/jobs/jobs.css`, `src/grants/*.css`, `src/csconfs/*.css`).
 - `src/search-controls.ts` — shared search controller for Search/Discoveries, Funding, Jobs, Awards, and CS Confs:
   keyword-name/value completion, the clickable ⓘ help popup, input events, `/` shortcut, up to four examples,
   and URL updates. Pages supply their keyword specs, value sources, ordinary suggestion groups, and rendering
   callbacks. `wireSearchInput` also serves the specialized Simulator workflow.
-- `src/opportunity-card.ts` + `src/styles/components/opportunity-cards.css` — shared Awards/Jobs card
+- `src/opportunity-card.ts` + the opportunity-cards section of `src/style.css` — shared Awards/Jobs card
   hierarchy, title/favorite row, organization, type tags, deadline/cycle, metadata, and visual tokens.
   Keep presentation changes here so the two explorers remain familiar across tabs; page renderers supply
   their domain-specific fields and preserve explicit estimated/historical/closed deadline states.
 - `src/suggestion-box.ts` — low-level autocomplete keyboard handling, listbox markup, and `A vs B` completion.
 - `src/search-keywords.ts` — parsing/alias resolution, quotes, comma alternatives (OR), repeated filters (AND),
-  query mutation, and migration of legacy URL filters into visible keywords. `src/search-query.ts` applies
-  combined university/researcher/subject constraints to Search records without changing their dataset metrics.
+  query mutation, and migration of legacy URL filters into visible keywords.
 - `src/result-actions.ts` — shared ⋯ card menus for Jobs, Awards, and CS Confs, including copy-link feedback,
-  outside-click/Escape dismissal, and the existing correction links.
-- `src/metrics.js` — the school/researcher/subfield metrics layer built on top of `data.js`'s filtered
+  outside-click/Escape dismissal, and the existing correction links; also the Copy Link / Web Share action.
+- `src/metrics.ts` — the school/researcher/subfield metrics layer built on top of `data.ts`'s filtered
   output: per-school metrics (movement, momentum, concentration, breadth, collaboration proxy), per-capita
   ranking, rank-stability variants, area-vs-area comparison, and the Discoveries insight calculators
   (`calculateDiscoveryInsights`, `calculateSubfieldDiscoveries`, `buildPriorPeriodData`). Consumed by
-  `analysis.js`/`analysis-ui.js`, `discoveries.js`, and `scripts/paper-stats.mjs` alike, so it's the one
+  `analysis.ts`/`analysis-trends.ts`, `discoveries.ts`, and `scripts/paper-stats.mjs` alike, so it's the one
   place derived-metric logic should live rather than being duplicated per page.
-- `src/analysis-ui.js` — shared HTML-rendering helpers (metric cards, labeled tooltips) used by the
-  Search-page analysis panel; keeps `analysis.js` focused on orchestration.
 - `src/favorites.ts` — browser-local ★ favorites used by CS Confs, Awards, and Jobs: stars reorder results
   immediately, `favorites: only` narrows through the search box, and legacy `favorites=only` links migrate
   into that keyword. No favorites dropdowns. Jobs offers Markdown export in its ⋯ menu with two or more
   stars. Dataset settings, maps, analysis, score breakdowns, and methodology are closed by default and
   available on demand; dataset-setting summaries show the active region/year/venue choices.
-- `src/seo.js` / `src/share.js` / `src/analytics.js` — growth/discoverability infra used by every page:
-  `seo.js` keeps `<title>`/description/canonical/OpenGraph tags in sync with the on-screen view, `share.js`
-  is the reusable Copy Link / Web Share control, and `analytics.js` fires opt-in, no-op-by-default usage
+- `src/seo.ts` / `src/analytics.ts` — growth/discoverability infra used by every page:
+  `seo.ts` keeps `<title>`/description/canonical/OpenGraph tags in sync with the on-screen view, and `analytics.ts` fires opt-in, no-op-by-default usage
   events (see README's Analytics section — nothing here talks to a network without a configured provider).
-- `src/csrankings-rules.js` (+ generated `src/csrankings-rules.generated.js`) — the area/venue taxonomy
+- `src/csrankings-rules.ts` (+ generated `src/csrankings-rules.generated.js`) — the area/venue taxonomy
   (venue aliases, CORE tier membership) mirrors upstream CSRankings' own Python source rather than being
   hand-maintained; `npm run sync:csrankings-rules` re-derives the generated file, which is the fallback
   used until/unless a client-side sync overrides it.
-- `src/dblp-cache.js` — IndexedDB-backed cache for DBLP profile lookups (DBLP rate-limits hard and a
-  lookup costs ~3s); degrades to a cache miss rather than throwing in Node or private browsing.
 
 Pages have independent filtered state and use plain `<a href>` navigation. `loadData()` memoizes its promise,
 so modules loaded together on Search share one download and parse of the canonical CSRankings inputs.
 
-**Data pipeline (`src/data.js` is the core of the app):**
+**Data pipeline (`src/data.ts` is the core of the app):**
 1. `loadData()` fetches three CSVs directly from `raw.githubusercontent.com/emeryberger/CSrankings` at
    runtime (csrankings.csv, generated-author-info.csv, institutions.csv) and joins them into
    `{ professors, schools }` keyed by name.
@@ -155,16 +152,17 @@ so modules loaded together on Search share one download and parse of the canonic
    `filterByYears`'s query at the year/confSet-filter step (before ranking) only when `confSet` is `core` or
    `core-a` — see `src/filters.ts`'s `corePubsMap`, loaded the same way Historical Mode lazy-loads its data.
 5. Area/conference taxonomy (area labels, parent conference→area map, CORE A/A* conference sets, "next tier"
-   conferences) lives as static lookup tables in `src/data.js` / `src/shared.js`.
+   conferences) lives as static lookup tables in `src/data.ts` / `src/shared.ts`.
 
 **Other modules:**
-- `src/dblp.js` — live queries to the public DBLP API (author search, per-author publication stats) used by
-  the simulator to let users try out hypothetical/real candidate faculty not yet in CSRankings.
-- `src/shared.js` — small cross-page utilities: area labels, Chart.js theme colors, name cleanup,
+- `src/dblp.ts` — live queries to the public DBLP API (author search, per-author publication stats) used by
+  the simulator to let users try out hypothetical/real candidate faculty not yet in CSRankings, with an
+  IndexedDB cache for profile lookups that degrades to a miss in Node or private browsing.
+- `src/shared.ts` — small cross-page utilities: area labels, Chart.js theme colors, name cleanup,
   HTML escaping, inline-value encoding, and external URL validation.
 
 **Charts**: Chart.js throughout, colors driven by OS color scheme (`prefers-color-scheme: dark/light`), synced via
-`updateChartDefaults()` in `shared.js` and `onThemeChange()` in `charts.js`.
+`updateChartDefaults()` in `shared.ts` and `onThemeChange()` in `charts.ts`.
 
 **No build-time data fetching** — CSRankings data is fetched at page load, while OpenAlex data and the
 CORE A/A* extra-publications CSV are each fetched on demand (Historical Mode / CORE A/A* conference-set
@@ -173,12 +171,12 @@ selection, respectively). `postbuild` deliberately excludes the large local copi
 ## Adding a new Discovery
 
 Discoveries must be reproducible from the same data every other page uses — never hardcoded or hand-picked.
-1. **Compute it** in `src/metrics.js`: add a case to `calculateDiscoveryInsights` (university-level) or
+1. **Compute it** in `src/metrics.ts`: add a case to `calculateDiscoveryInsights` (university-level) or
    `calculateSubfieldDiscoveries` (region-wide, per area), or a new pure function alongside them if the shape
    differs. Compare a current period against the equal-length prior period via `buildPriorPeriodData`, apply
    a minimum-evidence guard so a tiny denominator can't dominate the list, and return a ranked, capped
    (`limit`, default 5) array.
-2. **Render it** in `src/discoveries.js` via the shared `card(title, help, body, className)` helper — it
+2. **Render it** in `src/discoveries.ts` via the shared `card(title, help, body, className)` helper — it
    slugifies the title into a stable `id` (`discovery-<slug>`), wires the ⓘ tooltip from `help`, and adds a
    Copy Link button for free. Use `schoolLink()`/`areaLink()` to link names back into Search.
 3. **Add a unit test** in `test/unit/` asserting ranking/thresholds.
