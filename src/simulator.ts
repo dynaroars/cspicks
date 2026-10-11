@@ -9,7 +9,6 @@ import { initTooltipPositioning } from './tooltip-position.js';
 import { wireSearchInput } from './search-controls.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
 import { trackView } from './analytics.js';
-import './styles/pages/simulator.css';
 import { performCandidatesAnalysis } from './simulator/candidate-analysis.js';
 import { renderCandidateResults } from './simulator/candidate-results.js';
 import type { DblpAuthorResult } from './dblp.js';
