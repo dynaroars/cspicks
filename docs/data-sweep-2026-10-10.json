@@ -1079,7 +1079,9 @@
       "school": "University of Idaho",
       "status": "partial",
       "report": "docs/data-sweep-jobs-idaho-evidence-2026-10-11.json",
-      "findings": "Current University of Idaho faculty portal lists the Department of Computer Science and Cybersecurity Assistant Clinical Faculty posting F001439P; a current careers search result also advertises a tenure-track Assistant Professor role in CS, Cybersecurity, or AI beginning August 2027. Existing records include both calls. Additional positions and details require review across all search pages, so marked partial."
+      "findings": "Current University of Idaho faculty portal lists the Department of Computer Science and Cybersecurity Assistant Clinical Faculty posting F001439P; a current careers search result also advertises a tenure-track Assistant Professor role in CS, Cybersecurity, or AI beginning August 2027. Existing records include both calls. Additional positions and details require review across all search pages, so marked partial. Directly rechecked all four current requisitions; corrected two false “yes” visa-sponsorship entries to “no”, captured “uncertain” for the two new 2027 roles as case-by-case, and flagged the older clinical role’s elapsed start date while preserving its official open-until-filled status.",
+      "remaining": "Review remaining University of Idaho computing-adjacent and campus postdoctoral listings.",
+      "checkedAt": "2026-10-11"
     },
     {
       "school": "University of Massachusetts Boston",
