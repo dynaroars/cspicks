@@ -17,6 +17,6 @@
     "noUncheckedIndexedAccess": true,
     "useUnknownInCatchVariables": true
   },
-  "include": ["src/**/*.js", "src/**/*.ts", "csconfs/**/*.js", "csconfs/**/*.ts"],
+  "include": ["src/**/*.js", "src/**/*.ts"],
   "exclude": ["dist", "node_modules", "public"]
 }

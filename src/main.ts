@@ -1,4 +1,4 @@
-import { aoeDeadline, filterSchedule, formatCalendarDate } from '../csconfs/schedule-data.js';
+import { aoeDeadline, filterSchedule, formatCalendarDate } from './csconfs/schedule-data.js';
 import { initAnalysis, refreshAnalysis, setAnalysisTarget } from './analysis.js';
 import { trackComparison, trackView } from './analytics.js';
 import { activeComparisonType, hideComparison, initComparison, isComparing, renderComparison, resolveComparison } from './comparison.js';
@@ -13,13 +13,12 @@ import { SITE_NAME, updatePageMeta } from './seo.js';
 import { areaLabels, cleanName, countryFlag, escapeHtml, getConferenceLabel, getInstitutionShortName } from './shared.js';
 import { rankSuggestions } from './suggestion-box.js';
 import { initTooltipPositioning } from './tooltip-position.js';
-import type { ConferenceRecord } from '../csconfs/types.js';
 import type { AnalysisTarget } from './analysis.js';
 import type { FilterController } from './filters.js';
 import type { CardContext } from './search-cards.js';
 import type { KeywordSpec } from './search-keywords.js';
 import type { SuggestionGroups, SuggestionItem } from './suggestion-box.js';
-import type { FilteredData, FilteredProfessor, FilteredSchool, NsfDataset, RawData } from './types.js';
+import type { ConferenceRecord, FilteredData, FilteredProfessor, FilteredSchool, NsfDataset, RawData } from './types.js';
 
 const MAIN_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'school', aliases: ['university', 'univ'], example: 'school: MIT', description: 'Search only universities/schools' },

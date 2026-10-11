@@ -1,7 +1,7 @@
-import { escapeHtml } from '../src/shared.js';
-import { buildSubmissionContent, conferenceSubmission } from '../src/submission.js';
-import { DELIVERY_BUTTONS, QUICK_SECTION, deliver, quickLabel, quickPayload, setupQuickMode } from '../src/submit-quick.js';
-import type { ConferenceRecord } from './types.js';
+import { escapeHtml } from '../shared.js';
+import { buildSubmissionContent, conferenceSubmission } from '../submission.js';
+import { DELIVERY_BUTTONS, QUICK_SECTION, deliver, quickLabel, quickPayload, setupQuickMode } from '../submit-quick.js';
+import type { ConferenceRecord } from '../types.js';
 
 const root = document.getElementById('submission-form-root')!;
 let records: ConferenceRecord[] = [];
@@ -313,7 +313,7 @@ function setupForm() {
 async function init() {
   renderForm();
   try {
-    const response = await fetch(new URL('./data/conferences.json', import.meta.url));
+    const response = await fetch(new URL('../../csconfs/data/conferences.json', import.meta.url));
     if (!response.ok) throw new Error(`Conference data request failed (${response.status})`);
     records = await response.json();
     recordsByEdition = new Map();

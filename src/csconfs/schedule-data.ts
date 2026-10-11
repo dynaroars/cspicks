@@ -1,11 +1,11 @@
-import { getConferenceAreaMap, publicationMatchesConferenceSet } from '../src/data.js';
-import { areaLabels } from '../src/shared.js';
-import { matchesKeyword, matchesKeywordOptions, parseKeywordQuery } from '../src/search-keywords.js';
+import { getConferenceAreaMap, publicationMatchesConferenceSet } from '../data.js';
+import { areaLabels } from '../shared.js';
+import { matchesKeyword, matchesKeywordOptions, parseKeywordQuery } from '../search-keywords.js';
 import { locationMatches } from './place.js';
-import { FAVORITES_KEYWORD_SPEC } from '../src/favorites.js';
-import type { KeywordSpec } from '../src/search-keywords.js';
-import type { ConferenceSetId } from '../src/data/conference-sets.js';
-import type { ConferenceGroup, ConferenceRecord } from './types.js';
+import { FAVORITES_KEYWORD_SPEC } from '../favorites.js';
+import type { KeywordSpec } from '../search-keywords.js';
+import type { ConferenceSetId } from '../data/conference-sets.js';
+import type { ConferenceGroup, ConferenceRecord } from '../types.js';
 
 export const CSCONFS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'loc', aliases: ['location', 'country'], example: 'loc: europe', description: 'Country, US state, region (Europe, Asia, …) or city the conference is held in' },

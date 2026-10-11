@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { filterSchedule } from '../../csconfs/schedule-data.js';
-import { locationMatches } from '../../csconfs/place.js';
+import { filterSchedule } from '../../src/csconfs/schedule-data.js';
+import { locationMatches } from '../../src/csconfs/place.js';
 import { parseKeywordQuery } from '../../src/search-keywords.js';
 
 const now = Date.UTC(2026, 9, 1);

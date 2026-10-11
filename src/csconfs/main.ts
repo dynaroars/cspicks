@@ -1,20 +1,20 @@
-import { createFilterBar } from '../src/filters.js';
-import { rankSuggestions } from '../src/suggestion-box.js';
-import { initTooltipPositioning } from '../src/tooltip-position.js';
-import { SITE_NAME, updatePageMeta } from '../src/seo.js';
-import { trackView } from '../src/analytics.js';
-import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../src/favorites.js';
-import { keywordValue, parseKeywordQuery, restoreKeywordQuery } from '../src/search-keywords.js';
-import { createSearchControls, renderSearchExamples as renderExampleChips, searchChoices, updateSearchUrl } from '../src/search-controls.js';
-import { areaLabels } from '../src/shared.js';
+import { createFilterBar } from '../filters.js';
+import { rankSuggestions } from '../suggestion-box.js';
+import { initTooltipPositioning } from '../tooltip-position.js';
+import { SITE_NAME, updatePageMeta } from '../seo.js';
+import { trackView } from '../analytics.js';
+import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
+import { keywordValue, parseKeywordQuery, restoreKeywordQuery } from '../search-keywords.js';
+import { createSearchControls, renderSearchExamples as renderExampleChips, searchChoices, updateSearchUrl } from '../search-controls.js';
+import { areaLabels } from '../shared.js';
 import { parsePlace } from './place.js';
 import { CSCONFS_KEYWORD_SPECS, DEADLINE_MODES, filterSchedule, scheduleSuggestions } from './schedule-data.js';
 import { LOCATION_REGIONS } from './place.js';
 import { renderScheduleCard } from './schedule-render.js';
 import type { DeadlineMode } from './schedule-data.js';
-import type { FilterController } from '../src/filters.js';
+import type { FilterController } from '../filters.js';
 
-import type { ConferenceRecord } from './types.js';
+import type { ConferenceRecord } from '../types.js';
 
 const params = new URLSearchParams(location.search);
 const currentYear = new Date().getFullYear();
@@ -121,7 +121,7 @@ function renderExamples() {
 
 async function init() {
   try {
-    const response = await fetch(new URL('./data/conferences.json', import.meta.url));
+    const response = await fetch(new URL('../../csconfs/data/conferences.json', import.meta.url));
     if (!response.ok) throw new Error(`Conference data request failed (${response.status})`);
     conferences = await response.json();
 

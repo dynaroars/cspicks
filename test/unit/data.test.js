@@ -11,8 +11,8 @@ import { parseCsrankingsRules } from '../../src/csrankings-rules.js';
 import { renderSchoolCard } from '../../src/search-cards.js';
 import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../../src/metrics.js';
 import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../../src/nsf.js';
-import { aoeDeadline, conferenceStart, deadlineStatus, filterSchedule, formatCalendarDate, groupConferences, scheduleSuggestions } from '../../csconfs/schedule-data.js';
-import { renderScheduleCard } from '../../csconfs/schedule-render.js';
+import { aoeDeadline, conferenceStart, deadlineStatus, filterSchedule, formatCalendarDate, groupConferences, scheduleSuggestions } from '../../src/csconfs/schedule-data.js';
+import { renderScheduleCard } from '../../src/csconfs/schedule-render.js';
 import { decodeAffiliationHistory, encodeAffiliationHistory } from '../../src/affiliation-history-format.js';
 function professor(name, affiliation, count, adjustedcount) {
   return {

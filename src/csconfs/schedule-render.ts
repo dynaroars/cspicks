@@ -1,10 +1,10 @@
-import { resultActions } from '../src/result-actions.js';
-import { countryFlag, escapeHtml, safeExternalUrl } from '../src/shared.js';
+import { resultActions } from '../result-actions.js';
+import { countryFlag, escapeHtml, safeExternalUrl } from '../shared.js';
 import { conferenceAreas, conferenceTags, deadlineStatus, formatCalendarDate } from './schedule-data.js';
-import { areaLabels } from '../src/shared.js';
+import { areaLabels } from '../shared.js';
 import { parsePlace } from './place.js';
-import { favoriteToggleButton } from '../src/favorites.js';
-import type { ConferenceGroup, ConferenceRecord } from './types.js';
+import { favoriteToggleButton } from '../favorites.js';
+import type { ConferenceGroup, ConferenceRecord } from '../types.js';
 
 function renderCycle(conf: ConferenceRecord, now: number, showLabel: boolean) {
   const status = deadlineStatus(conf.deadline, now);
