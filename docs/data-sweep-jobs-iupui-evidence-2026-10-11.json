@@ -1,7 +1,8 @@
 {
   "school":"IUPUI","checkedAt":"2026-10-11",
   "checkedSources":[
-    {"url":"https://luddy.indianapolis.iu.edu/about/openings.html","finding":"Luddy School Indianapolis openings page has no current CS faculty vacancy. The former IUPUI campus split into Purdue University in Indianapolis and IU Indianapolis."},
+    {"url":"https://luddy.indianapolis.iu.edu/about/openings.html","finding":"Current Luddy School at IU Indianapolis openings page says there are no tenure-track openings. Its non-tenure-track listings are Lecturer in 3D Animation and Visual Effects and Lecturer in Library and Information Science, not CS; adjunct recruiting is a general pool, not a specific vacancy."},
+    {"url":"https://science.indianapolis.iu.edu/about/employment/index.html","finding":"Current School of Science academic openings page lists math, physics, earth science, biology, psychology and forensic science roles; no Computer Science opening. Page links to the IU academic careers board for all School of Science listings."},
     {"url":"https://careers.purdue.edu/job/Indianapolis-Post-Doc-Research-Associate-IN-46201/43308-en_US","finding":"Purdue University, Indianapolis CS postdoctoral requisition 43308 was posted Sept 28, 2026. It focuses on AI for health/medical science; added under Purdue University, the employer named in the official posting."}
-  ],"findings":"No current role under the former institution name; one current Purdue Indianapolis CS postdoc is recorded under Purdue. IU Indianapolis openings remain to be checked separately.","recordUpdates":"Added purdue-indy-cs-postdoc-ai-health-2026 under Purdue University."
+  ],"findings":"The former IUPUI campus split into Purdue University in Indianapolis and IU Indianapolis. Reviewed current IU Indianapolis Luddy and School of Science openings; neither lists an active CS faculty vacancy. The current Purdue Indianapolis CS AI-for-health postdoc is recorded separately under Purdue University, the named employer.","recordUpdates":"Added purdue-indy-cs-postdoc-ai-health-2026 under Purdue University."
 }

@@ -868,10 +868,9 @@
     },
     {
       "school": "IUPUI",
-      "status": "partial",
+      "status": "audited",
       "report": "docs/data-sweep-jobs-iupui-evidence-2026-10-11.json",
-      "findings": "The former IUPUI campus split into Purdue University in Indianapolis and IU Indianapolis. Added the current Purdue Indianapolis CS AI-for-health postdoc under Purdue University, matching the institution named on its posting. The Luddy Indianapolis openings page has no current CS faculty vacancy.",
-      "remaining": "Verify separate IU Indianapolis academic openings; IUPUI is no longer the current institution name."
+      "findings": "The former IUPUI campus split into Purdue University in Indianapolis and IU Indianapolis. Current IU Indianapolis Luddy and School of Science openings list no CS faculty vacancy. The Purdue Indianapolis CS AI-for-health postdoc is recorded separately under Purdue University, its named employer."
     },
     {
       "school": "Kent State University",
