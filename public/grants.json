@@ -591,9 +591,9 @@
       "PhD Students"
     ],
     "whoFor": "Outstanding PhD students in CS and related areas (University nominated)",
-    "deadline": "April 30, 2026 (Annual Spring university nomination window; typically late April / early May)",
+    "deadline": "2026 cycle: applications opened March 5 and closed April 30, 2026 (university nomination only; 2027 dates not yet posted)",
     "deadlineMonth": 4,
-    "amount": "U.S./Canada: $85,000/year for up to 2 years toward education costs, living expenses, travel and equipment; benefits vary by region",
+    "amount": "Canada/US: up to 2 years at US$85,000 per year for tuition, living expenses, travel, and equipment; other regions vary (e.g. Latin America up to 2 years at US$15,000 per year)",
     "summary": "Google PhD Fellowships directly support graduate students doing exceptional research in computer science and adjacent fields. Selected fellows are paired with a Google Research Mentor.",
     "eligibility": [
       "University nomination required; direct student applications not accepted",
@@ -642,7 +642,8 @@
       "Quantum"
     ],
     "url": "https://research.google/programs-and-events/frequently-asked-questions/",
-    "featured": false
+    "featured": false,
+    "status": "historical"
   },
   {
     "id": "amazon-research-awards",
@@ -3102,8 +3103,8 @@
       "Postdocs"
     ],
     "whoFor": "Recent PhD graduates with exceptional dissertations in artificial intelligence",
-    "deadline": "Late November (Annual; November 21 in the 2025 cycle)",
-    "deadlineMonth": 11,
+    "deadline": "October 29, 2026 at 11:59 PM AoE (Annual; previous cycle: November 21, 2025)",
+    "deadlineMonth": 10,
     "amount": "Award presentation and invited talk at the AAAI Conference",
     "summary": "Recognizes and encourages superior research and writing by doctoral candidates across the theory and practice of artificial intelligence.",
     "eligibility": [
