@@ -854,11 +854,10 @@
     ],
     "state": "MA",
     "city": "Boston",
-    "rolling": false,
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-10",
     "url": "https://northeastern.wd1.myworkdayjobs.com/careers/job/Boston-MA-Main-Campus/Part-Time-Lecturer---MS-in-Cybersecurity--Khoury-College-of-Computer-Sciences_R141718",
     "visaSponsorship": "not-stated",
-    "summary": "Part-time teaching position for the MS in Cybersecurity program, listed on the Khoury teaching-faculty careers page.",
+    "summary": "Part-time teaching faculty for Northeastern’s MS in Cybersecurity program, designing and delivering online or in-person courses in AI and machine learning in cybersecurity, threat hunting and incident response, and data privacy and protection. A master’s degree is required; a cybersecurity-related PhD and/or industry experience is preferred.",
     "source": "crawl",
     "verified": true
   },
@@ -870,16 +869,21 @@
     "track": "tenure-track",
     "level": "open",
     "areas": [
-      "ai"
+      "ai",
+      "chi",
+      "soft",
+      "plan",
+      "sec",
+      "crypt"
     ],
     "state": "MA",
     "city": "Boston",
     "rolling": true,
     "reviewBegins": "2026-11-15",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-10",
     "url": "https://northeastern.wd1.myworkdayjobs.com/careers/job/Boston-MA-Main-Campus/Assistant-Associate-Full-Professor--Khoury-College-of-Computer-Sciences_R142434",
     "visaSponsorship": "not-stated",
-    "summary": "Multiple tenure-track positions for academic year 2027-28 or 2028-29 in any CS area connecting to physical AI, human-centered AI, AI and software engineering, or AI safety/security/alignment. Review begins November 15, 2026 and continues until the search is completed.",
+    "summary": "Multiple tenure-track/tenured positions at all ranks across computer science, connected to physical AI, human-centered AI, AI and software engineering, and AI safety/security/alignment. The search covers Boston, Oakland, and Arlington, begins reviewing November 15, 2026, and continues until filled.",
     "source": "crawl",
     "verified": true
   },
@@ -3065,7 +3069,7 @@
   {
     "source": "crawl",
     "verified": true,
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-10",
     "id": "northeastern-ece-physical-ai-2026",
     "school": "Northeastern University",
     "department": "College of Engineering - Electrical and Computer Engineering",
@@ -3074,13 +3078,15 @@
     "level": "open",
     "areas": [
       "ai",
-      "vision"
+      "vision",
+      "robotics",
+      "chi"
     ],
     "state": "MA",
     "city": "Boston",
     "url": "https://northeastern.wd1.myworkdayjobs.com/careers/job/Boston-MA-Main-Campus/Assistant-Associate-Full-Professor---College-of-Engineering---Electrical-and-Computer-Engineering---Embodied--wearable---assistive-AI-Physical---Boston_R142638",
     "visaSponsorship": "not-stated",
-    "summary": "Tenure or tenure-track position in physical, embodied, wearable and assistive AI; named expertise includes AI/ML, computer vision, edge AI, and trustworthy AI. No deadline stated on the posting.",
+    "summary": "Tenure-track ECE faculty search in physical, embodied, wearable, and assistive AI, with examples including machine learning, multimodal sensing, computer vision, human-centric and trustworthy AI, and edge AI. The ad accepts PhDs in ECE, computer science, mathematics, physics, or closely related fields and permits joint appointments with Khoury College.",
     "deadline": null,
     "rolling": null,
     "postedDate": "2026-09-23"
@@ -6188,6 +6194,120 @@
     "url": "https://computing.mit.edu/research/postdoctoral-fellows-programs/meteor-program/",
     "visaSponsorship": "no",
     "summary": "One-year postdoctoral appointment, potentially renewable for a second year, supporting computer science and AI research in areas including agentic AI, physical AI, trustworthy computing, and human–AI systems; stipend is $73,308–$90,000 annually plus benefits. Applicants need a PhD from a U.S. institution by the program start; MIT does not sponsor visas.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "northeastern-lecturer-online-2026",
+    "school": "Northeastern University",
+    "department": "Khoury College of Computer Sciences",
+    "title": "Part-Time Online Lecturer, Khoury College of Computer Sciences",
+    "track": "teaching",
+    "areas": [
+      "mobile",
+      "ops",
+      "comm"
+    ],
+    "state": "MA",
+    "city": "Boston",
+    "lastSeenAt": "2026-10-10",
+    "url": "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Part-Time-Lecturer-Online---Khoury-College-of-Computer-Sciences_R134811",
+    "visaSponsorship": "not-stated",
+    "summary": "Online part-time teaching call for mobile app development, computer systems, and cloud computing; applicants need a master’s degree and industry experience, with a CS PhD preferred. The posting lists multiple U.S. campuses including Boston, Arlington, Miami, Oakland, and San Jose.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "northeastern-lecturer-seattle-2026",
+    "school": "Northeastern University",
+    "department": "Khoury College of Computer Sciences",
+    "title": "Part-Time Lecturer, Khoury College of Computer Sciences (Seattle)",
+    "track": "teaching",
+    "areas": [
+      "ai",
+      "robotics"
+    ],
+    "state": "WA",
+    "city": "Seattle",
+    "lastSeenAt": "2026-10-10",
+    "url": "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Part-Time-Lecturer--Khoury-College-of-Computer-Sciences--Seattle_R134844-1",
+    "visaSponsorship": "not-stated",
+    "summary": "Part-time lecturer opening to develop and teach graduate computer science courses at Northeastern’s Seattle campus, which offers MS programs in AI, robotics, computer science, and Align CS. A master’s degree and industry experience are required; a related PhD is preferred.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "northeastern-lecturer-arlington-2026",
+    "school": "Northeastern University",
+    "department": "Khoury College of Computer Sciences",
+    "title": "Part-Time Lecturer, Khoury College of Computer Sciences (Arlington)",
+    "track": "teaching",
+    "areas": [
+      "sec"
+    ],
+    "anyArea": true,
+    "state": "VA",
+    "city": "Arlington",
+    "lastSeenAt": "2026-10-10",
+    "url": "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Part-Time-Lecturer-Khoury-College-of-Computer-Sciences--Arlington_R134846",
+    "visaSponsorship": "not-stated",
+    "summary": "Part-time teaching faculty for Northeastern’s Arlington master’s programs in computer science and Align CS, with courses across computer science and cybersecurity. The posting requires a PhD in computer science or a related field.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "northeastern-hinf-lecturer-2026",
+    "school": "Northeastern University",
+    "department": "Khoury College of Computer Sciences / Bouvé College of Health Sciences",
+    "title": "Part-Time Lecturer, Health Informatics",
+    "track": "teaching",
+    "areas": [],
+    "state": "MA",
+    "city": "Boston",
+    "lastSeenAt": "2026-10-10",
+    "url": "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Health-Informatics-Part-Time-Lecturer--Khoury-College-of-Computer-Sciences-and-Bouve-College-of-Health-Sciences_R134812",
+    "visaSponsorship": "not-stated",
+    "summary": "Joint Khoury and Bouvé part-time teaching role to teach and develop online or on-campus courses in the graduate Health Informatics program. A master’s degree is required; a PhD in computer science, health science, or a related field is preferred.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "northeastern-bioe-robotic-rehab-lecturer-2026",
+    "school": "Northeastern University",
+    "department": "Department of Bioengineering",
+    "title": "Part-Time Lecturer, Bioengineering Design for Robotic Rehabilitation",
+    "track": "teaching",
+    "areas": [
+      "robotics",
+      "chi"
+    ],
+    "state": "MA",
+    "city": "Boston",
+    "lastSeenAt": "2026-10-10",
+    "url": "https://northeastern.wd1.myworkdayjobs.com/careers/job/boston-ma-main-campus/part-time-lecturer-for-bioengineering-design-for-robotic-rehabilitation_r139368",
+    "visaSponsorship": "not-stated",
+    "summary": "Part-time faculty member to co-teach a graduate bioengineering design course, leading robotics systems, engineering design, biomechanical analysis, and sensor integration from a user-centered design perspective. The course pairs engineering instruction with clinical rehabilitation and movement science.",
+    "source": "crawl",
+    "verified": true
+  },
+  {
+    "id": "northeastern-prof-intelligent-infrastructure-2026",
+    "school": "Northeastern University",
+    "department": "College of Engineering - Civil and Environmental Engineering",
+    "title": "Assistant/Associate/Full Professor, Intelligent Infrastructure",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai",
+      "robotics",
+      "plan"
+    ],
+    "state": "MA",
+    "city": "Boston",
+    "lastSeenAt": "2026-10-10",
+    "url": "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Boston-MA-Main-Campus/Assistant-Associate-Full-Professor---College-of-Engineering---Civil-and-Environmental-Engineering---Intelligent-Infrastructure---Boston_R142709",
+    "visaSponsorship": "not-stated",
+    "summary": "Tenure-track faculty search on intelligent infrastructure, construction and manufacturing, adaptive robotics, and digital twins, with opportunities for a joint appointment in Khoury College. Research examples include AI-enabled construction, digital twins, sensing, infrastructure control and inspection, and autonomous mobility; the stated degree requirement is civil or environmental engineering or a related field.",
     "source": "crawl",
     "verified": true
   }

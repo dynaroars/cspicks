@@ -242,25 +242,36 @@
     "facultyCount": 156,
     "jobsUrl": "https://www.khoury.northeastern.edu/careers/",
     "state": "MA",
-    "lastCheckedAt": "2026-10-08T12:00:00Z",
+    "lastCheckedAt": "2026-10-10T12:00:00Z",
     "outcome": "complete",
-    "summary": "Found one multi-line tenure-track posting and two part-time lecturer postings on Workday. Non-CS units (2026-10-08): College of Engineering hiring page lists an ECE physical/embodied AI tenure-track search (posted about Sep 23, 2026); the other listed searches (civil, mechanical, bio, chem) were not judged CS-targeted. WIoT research-professor link is dead.",
+    "summary": "Rechecked Khoury careers and tenure-track pages, College of Engineering faculty hiring, and indexed official Workday postings. Confirmed the existing Khoury CS/AI and ECE physical-AI calls, added active Khoury online/Seattle/Arlington teaching calls, a joint Health Informatics lecturer, a robotics rehabilitation lecturer, and the new CEE intelligent-infrastructure search. Excluded the coastal-infrastructure CEE search because its stated required doctorate is in civil/coastal/ocean engineering, despite its AI/security theme. Khoury teaching listing returned 403 in direct fetch; official Workday listings were read via search results.",
     "checkedUrls": [
       "https://www.khoury.northeastern.edu/careers/",
       "https://www.khoury.northeastern.edu/careers/tenure-track/",
       "https://www.khoury.northeastern.edu/careers/teaching-faculty/",
       "https://coe.northeastern.edu/faculty/faculty-hiring/",
-      "https://northeastern.wd1.myworkdayjobs.com/careers/job/Boston-MA-Main-Campus/Assistant-Associate-Full-Professor---College-of-Engineering---Electrical-and-Computer-Engineering---Embodied--wearable---assistive-AI-Physical---Boston_R142638",
-      "https://ece.northeastern.edu/"
+      "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Assistant-Associate-Full-Professor--Khoury-College-of-Computer-Sciences_R142434",
+      "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Assistant-Associate-Full-Professor---College-of-Engineering---Electrical-and-Computer-Engineering---Embodied--wearable---assistive-AI-Physical---Boston_R142638",
+      "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Part-Time-Lecturer-Online---Khoury-College-of-Computer-Sciences_R134811",
+      "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Part-Time-Lecturer--Khoury-College-of-Computer-Sciences--Seattle_R134844-1",
+      "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Part-Time-Lecturer-Khoury-College-of-Computer-Sciences--Arlington_R134846",
+      "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Health-Informatics-Part-Time-Lecturer--Khoury-College-of-Computer-Sciences-and-Bouve-College-of-Health-Sciences_R134812",
+      "https://northeastern.wd1.myworkdayjobs.com/careers/job/boston-ma-main-campus/part-time-lecturer-for-bioengineering-design-for-robotic-rehabilitation_r139368",
+      "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Boston-MA-Main-Campus/Assistant-Associate-Full-Professor---College-of-Engineering---Civil-and-Environmental-Engineering---Intelligent-Infrastructure---Boston_R142709",
+      "https://northeastern.wd1.myworkdayjobs.com/en-US/careers/job/Assistant-Associate-Full-Professor---College-of-Engineering---Civil-and-Environmental-Engineering---Critical-Infrastructure-Resilience-in-the-Coastal-Environment---Boston_R142637"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "College of Engineering faculty hiring (incl. ECE)",
+        "name": "College of Engineering faculty hiring (incl. ECE and CEE)",
         "url": "https://coe.northeastern.edu/faculty/faculty-hiring/"
+      },
+      {
+        "name": "Khoury College teaching faculty postings",
+        "url": "https://www.khoury.northeastern.edu/careers/teaching-faculty/"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T18:00:00Z"
+    "relatedCheckedAt": "2026-10-10T12:00:00Z"
   },
   {
     "school": "Indiana University",

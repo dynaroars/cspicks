@@ -35,7 +35,10 @@
     },
     {
       "school": "Northeastern University",
-      "status": "pending"
+      "status": "audited",
+      "report": "docs/data-sweep-jobs-northeastern-evidence-2026-10-10.json",
+      "findings": "Rechecked Khoury and Engineering recruiting; refreshed three records and added six current CS-relevant teaching/faculty calls across CS, AI, robotics, and health informatics.",
+      "remaining": "Recheck as Northeastern posts or closes calls."
     },
     {
       "school": "Indiana University",
