@@ -14,11 +14,15 @@
     },
     {
       "school": "Univ. of California - San Diego",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-ucsd-illinois-evidence-2026-10-10.json",
+      "remaining": "UCSD central-board adjacent calls still need detail review: JPF04606, JPF04607, JPF04633, JPF04646, JPF04662, JPF04449, JPF04450, JPF04665, JPF04648 and additional generic research calls."
     },
     {
       "school": "Univ. of Illinois at Urbana-Champaign",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-ucsd-illinois-evidence-2026-10-10.json",
+      "remaining": "Illinois broader HR and departmental research discovery remains; Future Faculty Fellows current cycle and 2021 robotics availability are ambiguous."
     },
     {
       "school": "Massachusetts Inst. of Technology",
@@ -2332,5 +2336,13 @@
     "visionRobotics": "Pending source review:CVPR2026abstractNov7;CVPR2027responseJan25–Feb1;ICRA2027paperSep16andcommittee;WACV2027notificationOct14bothcycles. Agent stopped on usage limit before durable report.",
     "software": "Pending source review:ASE2026chairStefanWinter,responseMay25–27,initialnotificationJune18/finalrevisionsJuly29;ICSE2027responseSep23–25. Agent stopped before report.",
     "databases": "Pending source review:ICDT2026missing,EDBTabsent,PODS2027Cycle2suspectduplicatedCycle1dates. Agent stopped before report."
+  },
+  "verificationBatch3": {
+    "unit": "16 test files passed",
+    "typecheck": "passed",
+    "build": "passed; optional upstream DBLP aliases CSV parse warning, nonfatal",
+    "browser": "10 Jobs tests passed",
+    "diffCheck": "passed",
+    "projectSize": "passed"
   }
 }

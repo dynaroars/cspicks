@@ -90,23 +90,29 @@
     "facultyCount": 185,
     "jobsUrl": "https://cse.ucsd.edu/administration/human-resources/recruitment/faculty-positions",
     "state": "CA",
-    "lastCheckedAt": "2026-10-08T15:28:51Z",
-    "outcome": "complete",
-    "summary": "CSE faculty-positions page lists four current postings (adjunct, assistant professor, two postdocs), all read. Non-CS units (2026-10-08): HDSI has an open AI & Public Policy ladder search and a Director search live; its other AI/ML and AI Systems & Security searches are closed. ECE has one open search (robotics, power, semiconductors, quantum) judged not a plain CS target.",
+    "lastCheckedAt": "2026-10-11T01:39:59Z",
+    "outcome": "incomplete",
+    "summary": "Read CSE, ECE and HDSI indexes and six existing postings; corrected missing final cutoffs and named areas. Added ECE robotics/quantum faculty, temporary data-science lecturer pool, CAIDA project scientist and campus postdoc pool. Three old HDSI calls explicitly closed. Design Lab faculty/postdoc positions filled. Read 225 central board titles; ambiguous adjacent postings still need detail review.",
     "checkedUrls": [
       "https://cse.ucsd.edu/administration/human-resources/recruitment/faculty-positions",
+      "https://datascience.ucsd.edu/employment/",
+      "https://www.ece.ucsd.edu/about/faculty-recruitment",
       "https://apol-recruit.ucsd.edu/JPF04582",
       "https://apol-recruit.ucsd.edu/JPF04649",
-      "https://cse.ucsd.edu/administration/human-resources/recruitment/faculty-position/postdoctoral-position",
       "https://cse.ucsd.edu/administration/human-resources/recruitment/faculty-position/postdoctoral-fellowship-institute",
-      "https://datascience.ucsd.edu/employment/",
-      "https://apol-recruit.ucsd.edu/JPF04397",
-      "https://apol-recruit.ucsd.edu/JPF04398",
+      "https://cse.ucsd.edu/administration/human-resources/recruitment/faculty-position/postdoctoral-position",
       "https://apol-recruit.ucsd.edu/JPF04399",
-      "https://apol-recruit.ucsd.edu/JPF04442",
       "https://apol-recruit.ucsd.edu/JPF04426",
-      "https://www.ece.ucsd.edu/about/faculty-recruitment",
-      "https://apol-recruit.ucsd.edu/JPF04656"
+      "https://apol-recruit.ucsd.edu/JPF04656",
+      "https://apol-recruit.ucsd.edu/JPF04377",
+      "https://designlab.ucsd.edu/opportunities/jobs.html",
+      "https://www.sdsc.edu/about/careers.html",
+      "https://apol-recruit.ucsd.edu/apply",
+      "https://apol-recruit.ucsd.edu/JPF04642",
+      "https://apol-recruit.ucsd.edu/JPF04451",
+      "https://apol-recruit.ucsd.edu/JPF04397",
+      "https://apol-recruit.ucsd.edu/JPF04442",
+      "https://apol-recruit.ucsd.edu/JPF04398"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -117,6 +123,18 @@
       {
         "name": "Electrical and Computer Engineering",
         "url": "https://www.ece.ucsd.edu/about/faculty-recruitment"
+      },
+      {
+        "name": "San Diego Supercomputer Center",
+        "url": "https://www.sdsc.edu/about/careers.html"
+      },
+      {
+        "name": "Design Lab",
+        "url": "https://designlab.ucsd.edu/opportunities/jobs.html"
+      },
+      {
+        "name": "University academic recruitment board",
+        "url": "https://apol-recruit.ucsd.edu/apply"
       }
     ],
     "relatedCheckedAt": "2026-10-08T18:00:00Z"
@@ -127,16 +145,19 @@
     "facultyCount": 170,
     "jobsUrl": "https://siebelschool.illinois.edu/about/positions/faculty-positions",
     "state": "IL",
-    "lastCheckedAt": "2026-10-08T14:50:26Z",
-    "outcome": "complete",
-    "summary": "Faculty-positions page lists only the Ira R. Cohen endowed chair (consideration date 2026-04-30); no 2026-27 searches posted yet. Recheck in November. Non-CS units (2026-10-08): ECE tenure-track page says no open faculty searches (description is commented out in the page source) and the teaching open-rank page says no open positions; iSchool lists no faculty or postdoc postings.",
+    "lastCheckedAt": "2026-10-11T01:39:59Z",
+    "outcome": "incomplete",
+    "summary": "Read Siebel faculty/postdoc pages and details, ECE no-open-search page and iSchool no faculty/postdoc page. Added Cohen CS/cancer chair (conditional sponsorship), Future Faculty Fellows (deadline year unknown and pages conflict) and still-linked 2021 robotics postdoc. NCSA careers lists no professional openings; its faculty/student opportunities page has no hiring call. Broader HR/research discovery remains.",
     "checkedUrls": [
       "https://siebelschool.illinois.edu/about/positions/faculty-positions",
-      "https://siebelschool.illinois.edu/about/positions/faculty-positions/instructional-faculty",
+      "https://siebelschool.illinois.edu/about/positions/postdoctoral",
       "https://ece.illinois.edu/about/jobs",
-      "https://ece.illinois.edu/about/jobs/faculty-tenure-track",
-      "https://ece.illinois.edu/about/jobs/teaching-openrank",
-      "https://ischool.illinois.edu/about/job-openings"
+      "https://ischool.illinois.edu/about/job-openings",
+      "https://illinois.csod.com/ux/ats/careersite/1/home/requisition/16214?c=illinois",
+      "https://siebelschool.illinois.edu/about/positions/postdoctoral/future-faculty-fellows",
+      "https://cobotfactory.web.illinois.edu/",
+      "https://www.ncsa.illinois.edu/about/careers/",
+      "https://www.ncsa.illinois.edu/resources-and-services/faculty-student-opportunities/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -147,6 +168,10 @@
       {
         "name": "School of Information Sciences (iSchool)",
         "url": "https://ischool.illinois.edu/about/job-openings"
+      },
+      {
+        "name": "National Center for Supercomputing Applications (NCSA)",
+        "url": "https://www.ncsa.illinois.edu/about/careers/"
       }
     ],
     "relatedCheckedAt": "2026-10-08T18:00:00Z"
