@@ -1,0 +1,164 @@
+{
+  "checkedAt": "2026-10-10",
+  "changes": [
+    {
+      "id": "sony-research-award",
+      "field": "deadline",
+      "before": "September 15, 2026 at 11:59 PM PDT (Annual mid-September; program typically opens mid-July)",
+      "after": "2026 call closed September 15, 2026; next call not announced (2026 application window July 15–September 15)"
+    },
+    {
+      "id": "sony-research-award",
+      "field": "deadlineMonth",
+      "before": 9,
+      "after": 0
+    },
+    {
+      "id": "sony-research-award",
+      "field": "whoFor",
+      "before": "Principal investigators and university professors in US, Canada, Europe, and Asia",
+      "after": "Full-time professors or researchers eligible to supervise PhD students at eligible university, educational, government, or nonprofit research institutions in the United States, Canada, India, and listed European countries"
+    },
+    {
+      "id": "sony-research-award",
+      "field": "eligibility",
+      "before": [
+        "Full-time faculty member (Assistant, Associate, or Full Professor) at accredited universities in eligible countries",
+        "Proposals must align with annual list of target research themes published by Sony"
+      ],
+      "after": [
+        "Full-time professor or researcher able to supervise PhD students; adjuncts and emeritus professors are ineligible",
+        "PI and any co-PIs must be at the same eligible institution",
+        "One-year proposal: Faculty Innovation up to $100,000; Focused Research up to $150,000; awards are sponsored research agreements and include overhead"
+      ]
+    },
+    {
+      "id": "sony-research-award",
+      "field": "summary",
+      "before": "Provides sponsored research funding for cutting-edge academic research in AI, sensing, robotics, computer vision, audio processing, and human-machine interaction, with direct collaboration with Sony R&D teams.",
+      "after": "Sony funds one-year faculty innovation and focused research proposals aligned with its annual keywords or focused themes. The 2026 call ran July 15–September 15; award terms and themes are negotiated or published for each cycle."
+    },
+    {
+      "id": "adobe-research-fellowship",
+      "field": "name",
+      "before": "Adobe Research Fellowship",
+      "after": "Adobe India AI Research Fellowship"
+    },
+    {
+      "id": "adobe-research-fellowship",
+      "field": "shortName",
+      "before": "Adobe Research Fellowship",
+      "after": "Adobe India AI Fellowship"
+    },
+    {
+      "id": "adobe-research-fellowship",
+      "field": "whoFor",
+      "before": "Graduate PhD students in computer vision, graphics, audio, HCI, and generative media",
+      "after": "Full-time PhD candidates at recognized Indian universities with at least 12 months remaining before degree completion"
+    },
+    {
+      "id": "adobe-research-fellowship",
+      "field": "deadline",
+      "before": "April 30 at 11:59 PM IST (Regional India AI cycle; global open cycle retired after 2021)",
+      "after": "2026 applications closed; next cycle and deadline not announced"
+    },
+    {
+      "id": "adobe-research-fellowship",
+      "field": "deadlineMonth",
+      "before": 4,
+      "after": 0
+    },
+    {
+      "id": "adobe-research-fellowship",
+      "field": "amount",
+      "before": "$10,000 one-time unrestricted gift + 1-year Creative Cloud subscription + guaranteed Adobe research internship interview",
+      "after": "₹12,00,000 one-time stipend for a 12-month fellowship; one-year access to selected Adobe tools"
+    },
+    {
+      "id": "adobe-research-fellowship",
+      "field": "summary",
+      "before": "Recognizes outstanding graduate students worldwide carrying out exceptional research in computer graphics, computer vision, human-computer interaction, and computational creativity.",
+      "after": "Supports PhD research in AI and related fields in India, including machine learning, computer vision, NLP, generative models, HCI, and databases/systems. The 2026 application round is closed; next-cycle timing is unannounced."
+    },
+    {
+      "id": "adobe-research-fellowship",
+      "field": "eligibility",
+      "before": [
+        "Full-time PhD student enrolled at an accredited university worldwide",
+        "Completed at least one year of PhD study",
+        "Research in graphics, vision, HCI, NLP, or audio"
+      ],
+      "after": [
+        "Full-time PhD candidate at a recognized university in India",
+        "At least 12 months must remain before PhD completion at application time",
+        "Research in AI/ML or a listed related field"
+      ]
+    },
+    {
+      "id": "adobe-research-fellowship",
+      "field": "topics",
+      "before": [
+        "Computer Graphics",
+        "Computer Vision",
+        "Human-Computer Interaction (HCI)",
+        "Generative AI",
+        "Audio & Speech",
+        "Animation"
+      ],
+      "after": [
+        "Artificial Intelligence and Machine Learning",
+        "Computer Vision",
+        "Natural Language Processing",
+        "Agent-based and Multi-agent Systems",
+        "Generative Models",
+        "Human-Computer Interaction",
+        "Databases and Systems Research"
+      ]
+    },
+    {
+      "id": "adobe-research-fellowship",
+      "field": "url",
+      "before": "https://research.adobe.com/fellowship/",
+      "after": "https://research.adobe.com/india-ai-research-fellowship/"
+    },
+    {
+      "id": "adobe-global-research-fellowship-historical",
+      "field": "new record",
+      "before": null,
+      "after": "Historical global program, last documented 2021"
+    },
+    {
+      "id": "adobe-data-science-awards",
+      "field": "deadline",
+      "before": "Periodic / Annual call",
+      "after": "No current deadline posted; page lists February 10 and August 11, 2023 as the latest explicit submission deadlines"
+    },
+    {
+      "id": "adobe-data-science-awards",
+      "field": "whoFor",
+      "before": "Faculty researchers in big data, multimodal understanding, and marketing analytics",
+      "after": "Full-time faculty members at North American universities"
+    },
+    {
+      "id": "adobe-data-science-awards",
+      "field": "summary",
+      "before": "Supports academic faculty members developing innovative algorithms and statistical models in data science, generative content analytics, customer journey modeling, and large-scale data visualization.",
+      "after": "Adobe lists an annual faculty research program on data science for marketing, with awards up to $50,000 as unrestricted university gifts. Its page still shows only 2023 deadlines and awardees; a current call date is not published."
+    }
+  ],
+  "officialSources": [
+    "https://www.sony.com/en/SonyInfo/research-award-program/",
+    "https://research.adobe.com/data-science-research-awards/",
+    "https://research.adobe.com/india-ai-research-fellowship/",
+    "https://research.adobe.com/news/nurturing-the-next-generation-of-computer-scientists-the-adobe-research-fellowship/"
+  ],
+  "findings": [
+    "Sony 2026 call ran July 15–September 15, 2026, offered up to $100,000 Faculty Innovation and $150,000 Focused Research; next call not announced.",
+    "Adobe data-science faculty grant page gives North American full-time faculty eligibility and up to $50,000; latest displayed deadlines and awardees are 2023.",
+    "Adobe currently documents a separate India AI Research Fellowship: 12-month, ₹12,00,000, 2026 applications closed, next-cycle timing not published.",
+    "Adobe’s archived worldwide fellowship announcement said 2021 applications were open and described $10,000 plus Creative Cloud and interview opportunity; preserved as historical rather than mixing terms into the India program."
+  ],
+  "limitations": [
+    "Bloomberg official fellowship page did not surface a current application cycle in the bounded search; its existing entry remains pending further official source review."
+  ]
+}

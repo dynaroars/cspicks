@@ -1,0 +1,250 @@
+{
+  "checkedAt": "2026-10-10",
+  "changes": [
+    {
+      "name": "KDD",
+      "year": 2027,
+      "field": "place",
+      "before": "San Jose, CA, USA",
+      "after": "San Jose, CA, US"
+    },
+    {
+      "name": "KDD",
+      "year": 2027,
+      "field": "rebuttalDate",
+      "before": null,
+      "after": "2026-09-29"
+    },
+    {
+      "name": "KDD",
+      "year": 2027,
+      "field": "note",
+      "before": null,
+      "after": "Author rebuttal period runs September 29–October 13, 2026. A second February 2027 research cycle is announced, but its dates remain TBD."
+    },
+    {
+      "name": "KDD",
+      "year": 2027,
+      "field": "programChair",
+      "before": "James Caverlee, David Gleich",
+      "after": "James Caverlee, David Gleich, Xiangliang Zhang, Jingrui He"
+    },
+    {
+      "name": "KDD",
+      "year": 2027,
+      "field": "new cycle record",
+      "before": null,
+      "after": "Cycle 2 dates TBD"
+    },
+    {
+      "name": "WWW",
+      "year": 2027,
+      "field": "rebuttalDate",
+      "before": "2026-12-21–2026-12-31",
+      "after": "2026-12-15"
+    },
+    {
+      "name": "WWW",
+      "year": 2027,
+      "field": "note",
+      "before": null,
+      "after": "Author rebuttal period runs December 15–20, 2026. The Research Track Chairs page does not identify a generic program-chair role; prior stored programChair names were not confirmed and were removed."
+    },
+    {
+      "name": "WWW",
+      "year": 2027,
+      "field": "programChair",
+      "before": "Luca Rossetto, Nicola Ferro, Jochen L. Leidner, Helen Huang, Lizi Liao",
+      "after": null
+    },
+    {
+      "name": "WWW",
+      "year": 2028,
+      "field": "new edition record",
+      "before": null,
+      "after": "Edmonton announced; dates/chairs TBD"
+    },
+    {
+      "name": "SIGGRAPH Asia",
+      "year": 2026,
+      "field": "abstractDeadline",
+      "before": null,
+      "after": "2026-05-05"
+    },
+    {
+      "name": "SIGGRAPH Asia",
+      "year": 2026,
+      "field": "deadline",
+      "before": "2026-05-13",
+      "after": "2026-05-12"
+    },
+    {
+      "name": "SIGGRAPH Asia",
+      "year": 2026,
+      "field": "note",
+      "before": null,
+      "after": "Technical Papers upload deadline was May 13, 2026; abstract May 5 and full paper May 12."
+    },
+    {
+      "name": "VIS",
+      "year": 2026,
+      "field": "link",
+      "before": "https://www.vis.org/",
+      "after": "https://ieeevis.org/year/2026/welcome/"
+    },
+    {
+      "name": "VIS",
+      "year": 2026,
+      "field": "seriesLink",
+      "before": "https://www.vis.org/",
+      "after": "https://ieeevis.org/"
+    },
+    {
+      "name": "VIS",
+      "year": 2026,
+      "field": "place",
+      "before": "Boston, MA",
+      "after": "Boston, MA, US"
+    },
+    {
+      "name": "VR",
+      "year": 2027,
+      "field": "generalChair",
+      "before": null,
+      "after": "Tim Dwyer, Richard Skarbez, Rob Teather"
+    },
+    {
+      "name": "VR",
+      "year": 2027,
+      "field": "programChair",
+      "before": null,
+      "after": "Bobby Bodenheimer, Anthony Steed"
+    },
+    {
+      "name": "CIKM",
+      "year": 2026,
+      "field": "generalChair",
+      "before": null,
+      "after": "Antonella Poggi, Nicola Ferro"
+    },
+    {
+      "name": "CIKM",
+      "year": 2026,
+      "field": "programChair",
+      "before": null,
+      "after": "Ioana Manolescu, Jiaxin Mao, Vanessa Murdock, Fabrizio Silvestri"
+    },
+    {
+      "name": "CIKM",
+      "year": 2026,
+      "field": "seriesLink",
+      "before": "http://www.cikmconference.org/",
+      "after": "https://www.cikmconference.org/"
+    },
+    {
+      "name": "ICDM",
+      "year": 2026,
+      "field": "abstractDeadline",
+      "before": "2026-05-30",
+      "after": null
+    },
+    {
+      "name": "ICDM",
+      "year": 2026,
+      "field": "link",
+      "before": "https://www3.cs.stonybrook.edu/~icdm2026/",
+      "after": "https://icdm2026.neu.edu.cn/main.htm"
+    },
+    {
+      "name": "ICDM",
+      "year": 2026,
+      "field": "generalChair",
+      "before": null,
+      "after": "Claudia Plant, Xiaochun Yang"
+    },
+    {
+      "name": "ICDM",
+      "year": 2026,
+      "field": "programChair",
+      "before": null,
+      "after": "Danai Koutra, Xiaofeng Gao"
+    },
+    {
+      "name": "UIST",
+      "year": 2026,
+      "field": "notificationDate",
+      "before": null,
+      "after": "2026-08-07"
+    },
+    {
+      "name": "UIST",
+      "year": 2026,
+      "field": "note",
+      "before": null,
+      "after": "Conditional acceptance decision June 27, 2026; final acceptance decision August 7, 2026."
+    },
+    {
+      "name": "SIGGRAPH",
+      "year": 2027,
+      "field": "deadline",
+      "before": "2027-01-21",
+      "after": "2027-01-28"
+    },
+    {
+      "name": "SIGGRAPH",
+      "year": 2027,
+      "field": "note",
+      "before": null,
+      "after": "Technical Papers page lists submission form deadline January 21, 2027, and paper deadline January 28; general submission overview still says dates TBD, so date conflict needs recheck."
+    }
+  ],
+  "officialSources": [
+    "https://kdd2027.kdd.org/",
+    "https://kdd2027.kdd.org/research-track-call-for-papers/",
+    "https://kdd2027.kdd.org/acm-kdd-2027-organizing-committee/",
+    "https://kdd2027.kdd.org/frequently-asked-questions/",
+    "https://sigir2027.org/",
+    "https://sigir2027.org/pages/general-chairs.html",
+    "https://sigir2027.org/pages/submit-tracks.html",
+    "https://www.sigmetrics.org/sigmetrics2027/",
+    "https://www.sigmetrics.org/sigmetrics2027/pages/cfp.html",
+    "https://www.sigmetrics.org/sigmetrics2027/pages/organization.html",
+    "https://www2027.thewebconf.org/",
+    "https://thewebconf.org/",
+    "https://www2027.thewebconf.org/important-dates/",
+    "https://www2027.thewebconf.org/organising-committee/",
+    "https://www2027.thewebconf.org/research-track-chairs/",
+    "https://cikm2026.diag.uniroma1.it/",
+    "https://cikm2026.diag.uniroma1.it/important-dates/",
+    "https://cikm2026.diag.uniroma1.it/organization-chairs/",
+    "https://cikm2026.diag.uniroma1.it/scientific-chairs/",
+    "https://www3.cs.stonybrook.edu/~icdm2026/",
+    "https://www3.cs.stonybrook.edu/~icdm2026/ImportantDates/list.htm",
+    "https://www3.cs.stonybrook.edu/~icdm2026/orgcmte/list.htm",
+    "https://chi2027.acm.org/",
+    "https://chi2027.acm.org/authors/papers/",
+    "https://uist.acm.org/2026/",
+    "https://uist.acm.org/2026/cfp/",
+    "https://s2027.siggraph.org/program/technical-papers/",
+    "https://s2027.siggraph.org/submit-to-siggraph/",
+    "https://asia.siggraph.org/2026/submissions/technical-papers/",
+    "https://asia.siggraph.org/2026/about-the-event/siggraph-asia-2027/",
+    "https://ieeevis.org/year/2026/welcome/",
+    "https://ieeevis.org/year/2026/info/call-participation/paper-submission-guidelines/",
+    "https://ieeevis.org/year/2026/info/committees/conference-committee/",
+    "https://ieeevr.org/2027/",
+    "https://ieeevr.org/2027/contribute/papers/",
+    "https://ieeevr.org/2027/committees/conference-committee/"
+  ],
+  "notFound": [
+    "No KDD 2028, SIGIR 2028, SIGMETRICS 2028, CIKM 2027, or ICDM 2027 official editions found.",
+    "CHI 2028 and UIST 2027 official edition details not found.",
+    "SIGGRAPH Asia has not announced the 2027 CFP/deadlines or program chair."
+  ],
+  "conflicts": [
+    "SIGGRAPH 2027 Technical Papers page lists Jan 21 submission-form / Jan 28 paper deadlines; the general submission overview still says dates TBD. Stored full-paper deadline corrected to Jan 28 with conflict note; abstractDeadline left null."
+  ],
+  "pending": [
+    "No value changed where chair role did not match a supported generic role. SIGIR 2027 program chair remains null. SIGGRAPH Technical Papers Chair is not copied into programChair."
+  ]
+}

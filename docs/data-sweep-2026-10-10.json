@@ -864,11 +864,17 @@
     },
     {
       "name": "CGO",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "CHI",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "Crypto",
@@ -884,7 +890,10 @@
     },
     {
       "name": "DAC",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "EC",
@@ -904,7 +913,10 @@
     },
     {
       "name": "EMSOFT",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "Eurocrypt",
@@ -933,11 +945,17 @@
     },
     {
       "name": "HPCA",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "ICCAD",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "ICCV",
@@ -1012,7 +1030,10 @@
     },
     {
       "name": "KDD",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "LICS",
@@ -1020,7 +1041,10 @@
     },
     {
       "name": "MICRO",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "MobiCom",
@@ -1098,19 +1122,31 @@
     },
     {
       "name": "SIGGRAPH",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "SIGGRAPH Asia",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "SIGIR",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "SIGMETRICS",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "SIGMOD",
@@ -1129,7 +1165,10 @@
     },
     {
       "name": "UIST",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "USENIX ATC",
@@ -1143,7 +1182,10 @@
     },
     {
       "name": "VIS",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "VLDB",
@@ -1153,11 +1195,17 @@
     },
     {
       "name": "VR",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "WWW",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "AAMAS",
@@ -1222,7 +1270,10 @@
     },
     {
       "name": "CIKM",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "COLT",
@@ -1341,7 +1392,10 @@
     },
     {
       "name": "ICDM",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-confs-hci-data-evidence-2026-10-10.json",
+      "findings": "Reviewed official current/upcoming edition sources; applied supported corrections and retained documented unknowns/conflicts.",
+      "remaining": "Next-edition discovery remains incomplete; recheck pending/estimated edition pages when sponsors announce them."
     },
     {
       "name": "ICDT",
@@ -1728,15 +1782,24 @@
     },
     {
       "id": "sony-research-award",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-industry-initial-evidence-2026-10-10.json",
+      "findings": "Reviewed sponsor pages; corrected 2026 Sony terms and Adobe current vs historical fellowship/program details.",
+      "remaining": "Monitor for next call announcements; continue review of other pending programs in category."
     },
     {
       "id": "adobe-research-fellowship",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-industry-initial-evidence-2026-10-10.json",
+      "findings": "Reviewed sponsor pages; corrected 2026 Sony terms and Adobe current vs historical fellowship/program details.",
+      "remaining": "Monitor for next call announcements; continue review of other pending programs in category."
     },
     {
       "id": "adobe-data-science-awards",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-awards-industry-initial-evidence-2026-10-10.json",
+      "findings": "Reviewed sponsor pages; corrected 2026 Sony terms and Adobe current vs historical fellowship/program details.",
+      "remaining": "Monitor for next call announcements; continue review of other pending programs in category."
     },
     {
       "id": "adobe-women-in-tech",
@@ -2348,6 +2411,12 @@
       "id": "microsoft-research-fellowship",
       "status": "audited-new",
       "report": "docs/data-sweep-awards-microsoft-sloan-evidence-2026-10-10.json"
+    },
+    {
+      "id": "adobe-global-research-fellowship-historical",
+      "status": "audited-new",
+      "report": "docs/data-sweep-awards-industry-initial-evidence-2026-10-10.json",
+      "findings": "Added a clearly historical worldwide program record based on Adobe’s archived announcement."
     }
   ],
   "discovery": {
