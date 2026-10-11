@@ -1,25 +1,25 @@
-import { filterSearchRecords } from './search-results.js';
-import { loadData, publicationMatchesConferenceSet, schoolAliases } from './data.js';
-import { createFilterBar } from './filters.js';
+import { aoeDeadline, filterSchedule, formatCalendarDate } from '../csconfs/schedule-data.js';
 import { initAnalysis, refreshAnalysis, setAnalysisTarget } from './analysis.js';
-import { areaLabels, cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
+import { trackComparison, trackView } from './analytics.js';
+import { activeComparisonType, hideComparison, initComparison, isComparing, renderComparison, resolveComparison } from './comparison.js';
+import { getConferenceAreaMap, loadData, publicationMatchesConferenceSet, schoolAliases } from './data.js';
+import { createFilterBar } from './filters.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
 import { renderProfessorCard as renderProfessorCardView, renderSchoolCard as renderSchoolCardView } from './search-cards.js';
-import { clearSearchSections, createDblpAuthorSearch, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
-import { activeComparisonType, hideComparison, initComparison, isComparing, renderComparison, resolveComparison } from './comparison.js';
-import { createSearchSuggestionBox } from './search-suggestions.js';
-import { initTooltipPositioning } from './tooltip-position.js';
-import { SITE_NAME, updatePageMeta } from './seo.js';
-import { trackComparison, trackView } from './analytics.js';
-import { aoeDeadline, filterSchedule, formatCalendarDate } from '../csconfs/schedule-data.js';
+import { createSearchControls, renderSearchExamples as renderExampleChips, updateSearchUrl } from './search-controls.js';
 import { parseKeywordQuery } from './search-keywords.js';
-import type { KeywordSpec } from './search-keywords.js';
-import { renderSearchExamples as renderExampleChips, updateSearchUrl } from './search-controls.js';
+import { clearSearchSections, createDblpAuthorSearch, filterSearchRecords, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
+import { SITE_NAME, updatePageMeta } from './seo.js';
+import { areaLabels, cleanName, countryFlag, escapeHtml, getConferenceLabel, getInstitutionShortName } from './shared.js';
+import { rankSuggestions } from './suggestion-box.js';
+import { initTooltipPositioning } from './tooltip-position.js';
+import type { ConferenceRecord } from '../csconfs/types.js';
 import type { AnalysisTarget } from './analysis.js';
 import type { FilterController } from './filters.js';
 import type { CardContext } from './search-cards.js';
+import type { KeywordSpec } from './search-keywords.js';
+import type { SuggestionGroups, SuggestionItem } from './suggestion-box.js';
 import type { FilteredData, FilteredProfessor, FilteredSchool, NsfDataset, RawData } from './types.js';
-import type { ConferenceRecord } from '../csconfs/types.js';
 
 const MAIN_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'school', aliases: ['university', 'univ'], example: 'school: MIT', description: 'Search only universities/schools' },
@@ -712,3 +712,48 @@ function setupTooltips() {
 }
 
 init();
+
+// Search autocomplete: suggestion sources and grouping for the main search box.
+type Context = { appData: FilteredData | null; confSet: string };
+function searchSources({ appData, confSet }: Context): Record<string, SuggestionItem[]> {
+  if (!appData) return { school: [], prof: [], area: [], conferences: [] };
+  const aliases = new Map<string, string[]>();
+  Object.entries(schoolAliases).forEach(([alias, school]) => aliases.set(school, [...(aliases.get(school) || []), alias]));
+  return {
+    school: Object.values(appData.schools).map(school => ({
+      kind: 'school', label: school.name, value: school.name, flag: countryFlag(school.country, school.countryName),
+      detail: Number.isFinite(school.rank) ? `University · #${school.rank}` : 'University',
+      searchTerms: (aliases.get(school.name) || []).join(' '), target: { type: 'school', name: school.name }
+    })),
+    prof: Object.values(appData.professors).map(professor => ({
+      kind: 'researcher', label: cleanName(professor.name), value: professor.name,
+      detail: professor.affiliation || 'Professor', searchTerms: (professor.aliases || []).join(' '),
+      target: { type: 'researcher', name: professor.name }
+    })),
+    area: Object.entries(areaLabels).map(([key, label]) => ({ kind: 'area', label, value: label, detail: 'Research area', searchTerms: key })),
+    conferences: Object.keys(getConferenceAreaMap(confSet)).filter(key => publicationMatchesConferenceSet({ area: key }, confSet))
+      .map(key => ({ kind: 'conference', label: getConferenceLabel(key), value: key, detail: 'Conference' }))
+  };
+}
+
+function createSearchSuggestionBox(options: Omit<Parameters<typeof createSearchControls>[0], 'getGroups' | 'getKeywordSources'> & {
+  getContext: () => Context;
+}) {
+  return createSearchControls({
+    ...options,
+    emptyText: 'No matching university, professor, area, or conference',
+    getKeywordSources: () => {
+      const sources = searchSources(options.getContext());
+      return { ...sources, area: [...sources.area!, ...sources.conferences!] };
+    },
+    getGroups: (query, { comparing }) => {
+      const sources = searchSources(options.getContext());
+      const groups: SuggestionGroups = [
+        ['Universities', rankSuggestions(sources.school!, query, 12)],
+        ['Professors', rankSuggestions(sources.prof!, query, 25)]
+      ];
+      if (comparing) return groups;
+      return [...groups, ['Research areas', rankSuggestions(sources.area!, query, 8)], ['Conferences', rankSuggestions(sources.conferences!, query, 8)]];
+    }
+  });
+}
