@@ -3124,7 +3124,7 @@
       "postingReferences": 244,
       "exactUrlMatches": 240,
       "canonicalUrlCorrections": 4,
-      "materiallyCorrectedRecords": 13,
+      "materiallyCorrectedRecords": 14,
       "report": "docs/data-sweep-jobs-existing-record-corrections-2026-10-11.json",
       "visaAudit": "Explicit sponsorship fields checked across direct requisitions: two false yes values corrected to no; two uncertain values normalized to case-by-case; no other conflicts found."
     },

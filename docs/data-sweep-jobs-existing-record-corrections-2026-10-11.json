@@ -43,10 +43,14 @@
         "uidaho-postdoc-cyber-ai-2026"
       ],
       "finding": "Full PeopleAdmin detail pages say sponsorship is unavailable for the older clinical faculty and postdoc (their records incorrectly said yes; corrected to no), and uncertain for the new 2027 TT and clinical roles (recorded as case-by-case)."
+    },
+    {
+      "id": "utd-part-time-lecturer-cs-2026",
+      "finding": "Direct posting 32722 said Open Until Filled: No, but the record had rolling=true. Corrected to non-rolling and noted the July 31, 2027 close date and passed Aug 16, 2026 desired start."
     }
   ],
   "limitations": "All captured pages received first-pass keyword triage; this does not complete the 137 school rows still marked partial.",
-  "materiallyUpdatedRecords": 13,
+  "materiallyUpdatedRecords": 14,
   "explicitVisaAudit": {
     "checked": 244,
     "incorrectlyMarkedYesCorrected": 2,
