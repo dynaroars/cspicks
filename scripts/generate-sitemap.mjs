@@ -48,7 +48,8 @@ const staticPages = [
   url(`${ORIGIN}/grants.html`, { changefreq: 'weekly', priority: '0.7' }),
   url(`${ORIGIN}/grants-submit.html`, { changefreq: 'monthly', priority: '0.3' }),
   url(`${ORIGIN}/jobs.html`, { changefreq: 'daily', priority: '0.8' }),
-  url(`${ORIGIN}/jobs-submit.html`, { changefreq: 'monthly', priority: '0.3' })
+  url(`${ORIGIN}/jobs-submit.html`, { changefreq: 'monthly', priority: '0.3' }),
+  url(`${ORIGIN}/stats.html`, { changefreq: 'weekly', priority: '0.4' })
 ];
 
 const schoolPages = schools.map(name => {

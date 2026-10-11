@@ -340,17 +340,6 @@ test('university card reflects per-capita rank when Show Rankings and Per capita
   await expect(page.locator('#school-results .result-position')).toHaveCount(0);
 });
 
-test('data health audits CSRankings default independently of the selected venue set', async ({ page }) => {
-  await page.goto('./?confSet=core&percapita=true');
-  await page.locator('#data-health-toggle').click();
-  const panel = page.locator('#site-data-health');
-  await expect(panel).toBeVisible();
-  await expect(panel).toContainText('Matches CSRankings defaultYes');
-  await expect(panel).toContainText('source data, calculations, metadata, and venue rules');
-  await expect(panel).toContainText('Current selectionCustomized');
-  await expect(panel).toContainText('a non-default venue set, per-capita ranking');
-});
-
 test('area queries rank universities within that area', async ({ page }) => {
   await page.goto('./?q=Software%20Engineering&rankings=true');
   await expect(page.locator('#school-results .card').first()).toBeVisible();

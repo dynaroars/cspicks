@@ -38,7 +38,8 @@ function renderHeader() {
   return `<header>
     <div class="title-row">
       <a class="site-title-link" href="/index.html" aria-label="Reset CS Picks"><h1>CS Picks</h1></a>
-      <a class="github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
+      <a class="icon-link github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
+      <a class="icon-link health-link" href="/stats.html" aria-label="Stats and data health" title="Stats &amp; data health"></a>
       <a class="icon-link roars-link" href="https://roars.dev" target="_blank" rel="noopener noreferrer" aria-label="ROARS Lab" title="ROARS Lab"></a>
     </div>
     <nav class="top-nav" aria-label="Primary navigation">
@@ -46,7 +47,7 @@ function renderHeader() {
       <a href="/simulator.html">☠️ Simulator</a>
       <a href="/csconfs.html">📅 CS Confs</a>
       <a href="/grants.html">💰 Awards &amp; Grants</a>
-        <a href="/jobs.html">🎓 US Jobs</a>
+      <a href="/jobs.html">🎓 US Jobs</a>
       <a href="/nsf.html">🇺🇸 NSF Funding</a>
     </nav>
   </header>`;

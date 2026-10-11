@@ -3,7 +3,7 @@ import { parseComparisonQuery } from './comparison.js';
 import { compareNumber, renderComparisonNotice, renderScoreboard } from './compare-view.js';
 import { createFilterBar } from './filters.js';
 import { renderInfiniteLists } from './search-results.js';
-import { cleanName, escapeHtml, fetchLatestRepoCommit, formatRelativeTime, getInstitutionShortName } from './shared.js';
+import { cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
 import { rankSuggestions } from './suggestion-box.js';
 import { initTooltipPositioning } from './tooltip-position.js';
 import { matchesKeyword, parseKeywordQuery } from './search-keywords.js';
@@ -26,121 +26,6 @@ const byId = <T extends HTMLElement = HTMLElement>(id: string) => document.getEl
 type FundingTarget =
   | { type: 'school', name: string, record: FundingSchool }
   | { type: 'faculty', name: string, record: FundingFaculty };
-
-function renderDataHealth() {
-  const container = document.getElementById('nsf-data-health-stats');
-  if (!container || !dataset) return;
-  const awards = dataset.awards || [];
-  const coverage = dataset.coverage || {};
-  const managerCount = awards.filter(award => award.programManager).length;
-  const datedCount = awards.filter(award => award.startDate && award.endDate).length;
-  const percentage = (count: number) => awards.length ? (count / awards.length * 100).toFixed(1) : '0.0';
-  const syncDate = new Date(dataset.syncedAt || '');
-  const syncText = Number.isNaN(syncDate.getTime()) ? 'Unknown' : syncDate.toLocaleString();
-  const coverageComplete = coverage.complete && coverage.failures === 0;
-
-  container.innerHTML = `
-    <h2>NSF funding data health</h2>
-    <p class="summary-note">This audit reports the freshness and field coverage of the nationwide NSF snapshot matched to the current CS faculty roster.</p>
-    <div class="diagnostic-grid">
-      <div class="diagnostic-stat tooltip-trigger">
-        <span>Roster sync</span>
-        <strong class="${coverageComplete ? 'confidence-high' : 'confidence-review'}">${coverageComplete ? 'Complete' : 'Review'}</strong>
-        <small>${Number(coverage.failures || 0).toLocaleString()} API failures</small>
-        <span class="tooltip-content" role="tooltip">Status of NSF API award matching across current CS faculty roster.</span>
-      </div>
-      <div class="diagnostic-stat tooltip-trigger">
-        <span>Universities checked</span>
-        <strong>${Number(coverage.institutionsChecked || 0).toLocaleString()} / ${Number(coverage.institutionsTotal || 0).toLocaleString()}</strong>
-        <small>current roster institutions</small>
-        <span class="tooltip-content" role="tooltip">Number of CS institutions evaluated for NSF award records.</span>
-      </div>
-      <div class="diagnostic-stat tooltip-trigger">
-        <span>Faculty checked</span>
-        <strong>${Number(coverage.facultyChecked || 0).toLocaleString()} / ${Number(coverage.facultyTotal || 0).toLocaleString()}</strong>
-        <small>current-roster faculty</small>
-        <span class="tooltip-content" role="tooltip">Number of individual faculty members queried against NSF investigator awards.</span>
-      </div>
-      <div class="diagnostic-stat tooltip-trigger">
-        <span>Matched awards</span>
-        <strong>${awards.length.toLocaleString()}</strong>
-        <small>nationwide NSF snapshot</small>
-        <span class="tooltip-content" role="tooltip">Total NSF awards matched to current CS faculty in the dataset snapshot.</span>
-      </div>
-      <div class="diagnostic-stat tooltip-trigger">
-        <span>Program managers</span>
-        <strong>${percentage(managerCount)}%</strong>
-        <small>${managerCount.toLocaleString()} awards populated</small>
-        <span class="tooltip-content" role="tooltip">Percentage of matched awards with identified NSF program managers.</span>
-      </div>
-      <div class="diagnostic-stat tooltip-trigger">
-        <span>Project dates</span>
-        <strong>${percentage(datedCount)}%</strong>
-        <small>${datedCount.toLocaleString()} awards with start and end dates</small>
-        <span class="tooltip-content" role="tooltip">Percentage of matched awards with valid project start and end dates.</span>
-      </div>
-      <div class="diagnostic-stat tooltip-trigger">
-        <span>Snapshot synchronized</span>
-        <strong>${escapeHtml(syncText)}</strong>
-        <small>schema version ${escapeHtml(String(dataset.schemaVersion || 'unknown'))}</small>
-        <span class="tooltip-content" role="tooltip">Timestamp of the latest nationwide NSF snapshot rebuild.</span>
-      </div>
-      <div class="diagnostic-stat tooltip-trigger">
-        <span>Repository updated</span>
-        <strong id="nsf-repo-updated">Checking...</strong>
-        <small><a id="nsf-repo-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer">dynaroars/cspicks</a></small>
-        <span class="tooltip-content" role="tooltip">Latest commit and relative update time for the dynaroars/cspicks GitHub repository.</span>
-      </div>
-    </div>
-    <div class="data-caveat"><strong>Scope limitation:</strong> Matching is limited to current CS faculty on the roster and may miss name variants or prior affiliations. Intended amounts are divided equally among listed PIs and co-PIs.</div>
-  `;
-
-  fetchLatestRepoCommit().then(commit => {
-    const updatedEl = document.getElementById('nsf-repo-updated');
-    const linkEl = document.querySelector<HTMLAnchorElement>('#nsf-repo-link');
-    if (updatedEl && commit?.date) {
-      updatedEl.textContent = formatRelativeTime(commit.date);
-    } else if (updatedEl) {
-      updatedEl.textContent = 'Active';
-    }
-    if (linkEl && commit?.sha) {
-      linkEl.href = commit.url || 'https://github.com/dynaroars/cspicks';
-      linkEl.textContent = `commit ${commit.sha}`;
-    }
-  });
-}
-
-// The panel floats in a fixed corner instead of sitting inline in the page,
-// so opening it never has to scroll the reader away from wherever they were.
-function setupDataHealth() {
-  const panel = document.getElementById('nsf-data-health');
-  const toggle = document.getElementById('nsf-data-health-toggle');
-  if (!panel || !toggle) return;
-  const hide = () => { panel.hidden = true; };
-  const reveal = () => {
-    panel.hidden = false;
-    renderDataHealth();
-  };
-  if (params.get('dataHealth') === 'true') reveal();
-  // Blocking default on mousedown (not click) stops the browser's own
-  // focus-follows-click from scrolling this off-screen toggle back into
-  // view, which would undo the point of a panel that doesn't move scroll.
-  toggle.addEventListener('mousedown', event => event.preventDefault());
-  toggle.addEventListener('click', event => {
-    event.preventDefault();
-    if (panel.hidden) reveal();
-    else hide();
-  });
-  document.getElementById('nsf-data-health-close')?.addEventListener('click', hide);
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') hide();
-  });
-  document.addEventListener('click', event => {
-    const target = event.target instanceof Element ? event.target : null;
-    if (panel.hidden || (target && (panel.contains(target) || target.closest('#nsf-data-health-toggle')))) return;
-    hide();
-  });
-}
 
 function setupYears() {
   filters = createFilterBar('#filter-bar', {
@@ -385,7 +270,6 @@ async function init() {
   input.disabled = false;
   input.placeholder = 'Search university, professor, award, or NSF program';
   input.value = params.get('q') || '';
-  setupDataHealth();
   renderExamples();
   render(input.value);
   setupSuggestions(input);

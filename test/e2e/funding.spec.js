@@ -94,26 +94,6 @@ test('NSF funding beta searches nationwide data and aggregates fractional awards
   const startYearBox = await page.locator('#start-year').boundingBox();
   expect(Math.abs((countLabelBox.y + countLabelBox.height / 2) - (startYearBox.y + startYearBox.height / 2))).toBeLessThan(2);
   await expect(page.locator('#funding-status')).toBeHidden();
-  await page.locator('#nsf-data-health-toggle').click();
-  await expect(page.locator('#nsf-data-health')).toBeVisible();
-  await expect(page.locator('#nsf-data-health-stats')).toContainText('NSF funding data health');
-  await expect(page.locator('#nsf-data-health-stats')).toContainText('Program managers');
-  // The panel floats over the page rather than extending it, so opening it
-  // neither moves the reader nor pushes the results around.
-  const floating = await page.evaluate(() => {
-    const panel = document.querySelector('#nsf-data-health');
-    const box = panel.getBoundingClientRect();
-    return {
-      position: getComputedStyle(panel).position,
-      onScreen: box.top >= 0 && box.bottom <= window.innerHeight + 1,
-      scrollY: window.scrollY
-    };
-  });
-  expect(floating.position).toBe('fixed');
-  expect(floating.onScreen).toBe(true);
-  expect(floating.scrollY).toBe(0);
-  await page.locator('#nsf-data-health-toggle').click();
-  await expect(page.locator('#nsf-data-health')).toBeHidden();
 
   // Like Search: universities left, people right, cards collapsed to names.
   await expect(page.locator('#funding-status')).toBeHidden();

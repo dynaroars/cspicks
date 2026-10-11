@@ -15,6 +15,7 @@ export default defineConfig({
                 grantsSubmit: resolve(__dirname, 'grants-submit.html'),
                 jobs: resolve(__dirname, 'jobs.html'),
                 jobsSubmit: resolve(__dirname, 'jobs-submit.html'),
+                stats: resolve(__dirname, 'stats.html'),
             },
         },
     },

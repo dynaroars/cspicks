@@ -4,8 +4,8 @@ import bundledRules from './csrankings-rules.generated.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
 import { filterByYears, getConferenceAreaMap } from './data.js';
 import { fetchFrequentCoauthors } from './dblp.js';
-import { applyPerCapitaRanks, buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateParityReport, calculateResearcherPatterns, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from './metrics.js';
-import { areaLabels, cleanName, escapeHtml, fetchLatestRepoCommit, formatRelativeTime, getConferenceLabel, getInstitutionShortName } from './shared.js';
+import { applyPerCapitaRanks, buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateResearcherPatterns, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from './metrics.js';
+import { areaLabels, cleanName, escapeHtml, getConferenceLabel, getInstitutionShortName } from './shared.js';
 import type { Chart } from './charts.js';
 import type { CsrankingsRules } from './csrankings-rules.js';
 import type { ConferenceSetId } from './data/conference-sets.js';
@@ -25,7 +25,6 @@ interface AnalysisState {
   currentTab: string;
   selectedTarget: AnalysisTarget | null;
   activeVenueRules: CsrankingsRules;
-  venueRulesCheckedAt: Date | null;
   conferenceFilterContext: string | null;
   analysisReady: boolean;
 }
@@ -37,7 +36,6 @@ export const state: AnalysisState = {
   currentTab: 'schools',
   selectedTarget: null,
   activeVenueRules: bundledRules as CsrankingsRules,
-  venueRulesCheckedAt: null,
   conferenceFilterContext: null,
   analysisReady: false
 };
@@ -102,7 +100,6 @@ export async function initAnalysis(data: RawData, filterBar: FilterController) {
     state.filters = filterBar;
     try {
         state.activeVenueRules = await syncCsrankingsRules();
-        state.venueRulesCheckedAt = new Date();
 
         renderConferenceFilters();
         setupTabs();
@@ -112,11 +109,6 @@ export async function initAnalysis(data: RawData, filterBar: FilterController) {
         });
         setupConferenceFilterButtons();
         state.analysisReady = true;
-        if (new URLSearchParams(window.location.search).get('dataHealth') === 'true') {
-            revealDataHealth();
-        } else if (!document.getElementById('site-data-health')?.hidden) {
-            renderDataHealth();
-        }
         if (state.selectedTarget) showSelectedTarget();
         else showTargetPrompt();
     } catch (err) {
@@ -190,52 +182,7 @@ export function refreshAnalysis() {
         renderConferenceFilters();
         refreshActiveTabChart();
     }
-    if (!document.getElementById('site-data-health')?.hidden) renderDataHealth();
 }
-
-// The panel floats in a fixed corner instead of sitting inline in the page,
-// so opening it never has to scroll the reader away from wherever they were
-// (in particular, away from the middle of the lazy-loaded rankings lists).
-function revealDataHealth() {
-    const panel = document.getElementById('site-data-health');
-    if (!panel) return;
-    panel.hidden = false;
-    if (state.analysisReady) renderDataHealth();
-}
-
-function hideDataHealth() {
-    const panel = document.getElementById('site-data-health');
-    if (panel) panel.hidden = true;
-}
-
-// Clicking a link the page has scrolled away from otherwise focuses it and
-// the browser scrolls it back into view - exactly the jump this panel is
-// meant to avoid. Blocking the default on mousedown (rather than click)
-// suppresses that focus-driven scroll while still letting the click fire;
-// keyboard activation (Enter/Space, no mousedown) is unaffected.
-document.getElementById('data-health-toggle')?.addEventListener('mousedown', event => event.preventDefault());
-
-document.getElementById('data-health-toggle')?.addEventListener('click', event => {
-    event.preventDefault();
-    const panel = document.getElementById('site-data-health');
-    if (!panel) return;
-    if (panel.hidden) revealDataHealth();
-    else hideDataHealth();
-});
-
-document.getElementById('data-health-close')?.addEventListener('click', hideDataHealth);
-
-document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') hideDataHealth();
-});
-
-document.addEventListener('click', event => {
-    const panel = document.getElementById('site-data-health');
-    if (!panel || panel.hidden) return;
-    const target = event.target instanceof Element ? event.target : null;
-    if (target && (panel.contains(target) || target.closest('#data-health-toggle'))) return;
-    hideDataHealth();
-});
 
 export function getConferenceSet(): ConferenceSetId {
     return state.filters?.confSet || 'all-union';
@@ -648,61 +595,4 @@ async function renderRankStability() {
             ? 'A narrow spread means the position is a property of the department, not of the settings.'
             : `A ${summary.spread}-place spread means the headline rank is largely a consequence of which years and venues are counted. Treat any single rank — including this site's — as one point in that range.`}${summary.unranked ? ` This university is unranked under ${summary.unranked} of the ${summary.settings} settings.` : ''} Region is held fixed because a rank among US universities and a rank worldwide answer different questions and cannot be pooled into one range.</div>
     `;
-}
-
-export function renderDataHealth() {
-    const container = document.getElementById('data-health-stats');
-    if (!container || !state.rawData?.professors) return;
-    const { current, start, end, confSet } = getAnalysisData();
-    const selectedReport = calculateParityReport(state.rawData, current, confSet, {
-        perCapita: Boolean(state.filters?.perCapita),
-        historical: Boolean(state.filters?.historical)
-    });
-    // This baseline is deliberately independent of the visible view. Selecting
-    // CORE, per-capita, or History must not turn a healthy CSRankings-default
-    // implementation into a false "No"; those are view customizations, not
-    // parity failures.
-    const defaultData = filterByYears(state.rawData, start, end, state.filters.region, null, null, 'csrankings-default');
-    const defaultReport = calculateParityReport(state.rawData, defaultData, 'csrankings-default');
-    const syncDate = state.venueRulesCheckedAt || new Date(state.activeVenueRules.syncedAt || '');
-    const syncText = Number.isNaN(syncDate.getTime()) ? 'Unknown' : syncDate.toLocaleString();
-    const internalOk = selectedReport.totalMismatches === 0 && selectedReport.rankOrderIssues === 0;
-    const selectedMode = selectedReport.divergences.length
-        ? selectedReport.divergences.join(', ')
-        : 'CSRankings default';
-    const disambiguatedCount = Object.keys(state.rawData.professors || {}).filter(name =>
-        /\s+\d+$|\s+\[\d+\]|\s+\(.*\)/.test(name) || (state.rawData.professors[name]?.unitNotes && state.rawData.professors[name].unitNotes.length > 0)
-    ).length;
-
-    container.innerHTML = `
-        <h2>CS Picks data health · ${start}–${end}</h2>
-        <p class="summary-note">Health checks whether CS Picks’ source data, calculations, metadata, and venue rules are available and internally consistent.</p>
-
-        <div class="diagnostic-grid">
-            <div class="diagnostic-stat tooltip-trigger"><span>Matches CSRankings default</span><strong class="${defaultReport.matchesCsrankings ? 'confidence-high' : 'confidence-review'}">${defaultReport.matchesCsrankings ? 'Yes' : 'No'}</strong><small>${defaultReport.matchesCsrankings ? 'official venue set, current affiliations, and total ranking' : `${defaultReport.totalMismatches + defaultReport.rankOrderIssues} baseline inconsistencies`}</small><span class="tooltip-content" role="tooltip">Recomputes rankings with official default rules to verify zero baseline parity drift.</span></div>
-            <div class="diagnostic-stat tooltip-trigger"><span>Current selection</span><strong>${selectedReport.divergences.length ? 'Customized' : 'Default'}</strong><small>${escapeHtml(selectedMode)}</small><span class="tooltip-content" role="tooltip">Active filter configuration (e.g. customized venue sets, historical affiliations, or per-capita).</span></div>
-            <div class="diagnostic-stat tooltip-trigger"><span>Selected-view invariants</span><strong class="${internalOk ? 'confidence-high' : 'confidence-review'}">${internalOk ? 'Pass' : 'Review'}</strong><small>${selectedReport.totalMismatches + selectedReport.rankOrderIssues} total or rank-order inconsistencies</small><span class="tooltip-content" role="tooltip">Ensures mathematical consistency: strict rank monotonicity and subfield score conservation.</span></div>
-            <div class="diagnostic-stat tooltip-trigger"><span>Institution metadata</span><strong>${selectedReport.institutionCoverage.toFixed(0)}%</strong><small>country or region present</small><span class="tooltip-content" role="tooltip">Coverage percentage of universities with mapped country and region attributes.</span></div>
-            <div class="diagnostic-stat tooltip-trigger"><span>Author profile links</span><strong>${selectedReport.profileCoverage.toFixed(0)}%</strong><small>homepage or scholar ID mapped</small><span class="tooltip-content" role="tooltip">Coverage percentage of active faculty with verified homepage or Google Scholar ID links.</span></div>
-            <div class="diagnostic-stat tooltip-trigger"><span>Disambiguated authors</span><strong>${disambiguatedCount.toLocaleString()}</strong><small>distinct unit/disambiguation tags</small><span class="tooltip-content" role="tooltip">Faculty disambiguated via numerical/unit suffixes to prevent multi-person publication collisions.</span></div>
-            <div class="diagnostic-stat tooltip-trigger"><span>Venue rules checked</span><strong>${escapeHtml(syncText)}</strong><small>upstream venue parser · ${escapeHtml(state.activeVenueRules.sourceVersion || 'bundled fallback')}</small><span class="tooltip-content" role="tooltip">Timestamp and source version of the upstream CSRankings venue parser rules sync.</span></div>
-            <div class="diagnostic-stat tooltip-trigger"><span>Repository updated</span><strong id="health-repo-updated">Checking...</strong><small><a id="health-repo-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer">dynaroars/cspicks</a></small><span class="tooltip-content" role="tooltip">Latest commit and relative update time for the dynaroars/cspicks GitHub repository.</span></div>
-        </div>
-
-        <div class="data-caveat"><strong>What “matches” means:</strong> CSPicks recomputes the selected region and years with CSRankings’ default venues, current affiliations, total department scoring, and the same upstream CSV inputs. It verifies internal totals and rank ordering. CSRankings does not publish a static result table API, so a brief difference can still occur if csrankings.org has deployed newer source data than this browser session.</div>
-    `;
-
-    fetchLatestRepoCommit().then(commit => {
-        const updatedEl = document.getElementById('health-repo-updated');
-        const linkEl = document.querySelector<HTMLAnchorElement>('#health-repo-link');
-        if (updatedEl && commit?.date) {
-            updatedEl.textContent = formatRelativeTime(commit.date);
-        } else if (updatedEl) {
-            updatedEl.textContent = 'Active';
-        }
-        if (linkEl && commit?.sha) {
-            linkEl.href = commit.url || 'https://github.com/dynaroars/cspicks';
-            linkEl.textContent = `commit ${commit.sha}`;
-        }
-    });
 }

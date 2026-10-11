@@ -158,7 +158,7 @@ h1 {
   gap: 0.75rem;
 }
 
-.github-link,
+/* Header icons (GitHub, stats/health, ROARS Lab): one size and style, glyphs drawn as masks in currentColor. */
 .icon-link {
   display: inline-flex;
   align-items: center;
@@ -167,43 +167,32 @@ h1 {
   height: 2rem;
   color: var(--text-secondary);
   border-radius: 50%;
+  text-decoration: none;
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-.icon-link svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.roars-link::before {
-  width: 1.5rem;
-  height: 1.5rem;
-  background: currentColor;
-  content: '';
-  mask: url('/roars-dino.png') center / contain no-repeat;
-  -webkit-mask: url('/roars-dino.png') center / contain no-repeat;
-}
-
-.github-link::before {
+.icon-link::before {
   width: 1.35rem;
   height: 1.35rem;
   background: currentColor;
   content: '';
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 .7a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2.2c-3.22.7-3.9-1.37-3.9-1.37-.52-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.74-1.56-2.57-.3-5.27-1.29-5.27-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.16 1.18A11 11 0 0 1 12 6.14c.98 0 1.96.13 2.88.38 2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.71 5.39-5.29 5.68.42.36.79 1.07.79 2.16v3.21c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z'/%3E%3C/svg%3E") center / contain no-repeat;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 .7a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2.2c-3.22.7-3.9-1.37-3.9-1.37-.52-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.74-1.56-2.57-.3-5.27-1.29-5.27-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.16 1.18A11 11 0 0 1 12 6.14c.98 0 1.96.13 2.88.38 2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.71 5.39-5.29 5.68.42.36.79 1.07.79 2.16v3.21c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: var(--icon) center / contain no-repeat;
+  -webkit-mask: var(--icon) center / contain no-repeat;
 }
 
-.github-link:hover,
-.github-link:focus-visible,
+.github-link { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 .7a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2.2c-3.22.7-3.9-1.37-3.9-1.37-.52-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.4-1.27.74-1.56-2.57-.3-5.27-1.29-5.27-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.16 1.18A11 11 0 0 1 12 6.14c.98 0 1.96.13 2.88.38 2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.71 5.39-5.29 5.68.42.36.79 1.07.79 2.16v3.21c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z'/%3E%3C/svg%3E"); }
+.health-link { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12h4.5l2.5-7 4.5 14 2.5-7H22'/%3E%3C/svg%3E"); }
+.roars-link { --icon: url('/roars-dino.png'); }
+/* The dino is wide and thin, so its glyph box is a little larger to match the others' visual weight. */
+.roars-link::before { width: 1.6rem; height: 1.6rem; }
+
 .icon-link:hover,
-.icon-link:focus-visible {
+.icon-link:focus-visible,
+.icon-link[aria-current="page"] {
   color: var(--text-primary);
   background: var(--hover-bg);
 }
 
-.github-link:focus-visible,
 .icon-link:focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;
@@ -1997,77 +1986,6 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
   width: min(360px, calc(100vw - 2rem));
 }
 
-/* Site Data Health Modal */
-.site-data-health {
-  position: fixed;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  z-index: 500;
-  width: min(520px, calc(100vw - 2rem));
-  max-height: min(85vh, 720px);
-  overflow-y: auto;
-  animation: data-health-pop-in 0.18s ease-out;
-}
-
-.site-data-health[hidden] {
-  display: none;
-}
-
-.site-data-health .diagnostic-panel {
-  position: relative;
-  padding-right: 2.75rem;
-  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.28);
-}
-
-.data-health-close {
-  position: absolute;
-  top: 0.6rem;
-  right: 0.6rem;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  padding: 0;
-  color: var(--text-secondary);
-  background: transparent;
-  border: 0;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-.data-health-close:hover {
-  color: var(--text-primary);
-  background: var(--hover-bg);
-}
-
-.data-health-close svg {
-  width: 1rem;
-  height: 1rem;
-}
-
-@keyframes data-health-pop-in {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@media (max-width: 640px) {
-  .site-data-health {
-    right: 1rem;
-    bottom: 1rem;
-    left: 1rem;
-    width: auto;
-  }
-}
-
 /* ==== Search: analysis panel ==== */
 
 /* ==========================================================================
@@ -3535,3 +3453,21 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
     text-align: left;
   }
 }
+
+/* ==== Stats page ==== */
+.stats-container { display: flex; flex-direction: column; gap: 1.75rem; margin-top: 0.5rem; }
+.stats-section h3 { margin: 0 0 0.75rem; font-family: var(--font-heading); font-size: 1.15rem; color: var(--text-primary); }
+.stats-section h3 a { color: inherit; text-decoration: none; }
+.stats-section h3 a:hover { color: var(--accent-color); text-decoration: underline; }
+.stats-grid { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.stats-grid .diagnostic-stat { cursor: default; }
+.stats-grid .diagnostic-stat.tooltip-trigger { cursor: help; }
+.stats-grid .diagnostic-stat strong { font-size: 1.5rem; font-family: var(--font-heading); }
+.stats-loading { color: var(--text-secondary); }
+.stats-commits { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--border-color); }
+.stats-commits li { display: flex; flex-direction: column; gap: 0.15rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border-color); }
+.stats-commits a { color: var(--text-primary); text-decoration: none; }
+.stats-commits a:hover { color: var(--accent-color); text-decoration: underline; }
+.stats-commits small { color: var(--text-secondary); }
+.stats-section .stats-body > h3 { margin-top: 1.25rem; font-size: 1rem; }
+@media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

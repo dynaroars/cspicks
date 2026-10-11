@@ -355,35 +355,3 @@ export function formatRelativeTime(dateInput: string | number | Date, now = Date
   const diffYears = Math.floor(diffDays / 365);
   return `${diffYears} year${diffYears === 1 ? '' : 's'} ago`;
 }
-
-interface RepoCommit {
-  sha: string;
-  fullSha: string;
-  date?: string;
-  url: string;
-}
-
-let cachedRepoCommit: RepoCommit | null = null;
-let repoCommitPromise: Promise<RepoCommit | null> | null = null;
-
-export async function fetchLatestRepoCommit() {
-  if (cachedRepoCommit) return cachedRepoCommit;
-  if (!repoCommitPromise) {
-    repoCommitPromise = fetch('https://api.github.com/repos/dynaroars/cspicks/commits?per_page=1')
-      .then(res => (res.ok ? res.json() : null))
-      .then((data: unknown) => {
-        if (Array.isArray(data) && data[0]) {
-          const record = data[0] as { sha: string, commit?: { committer?: { date?: string }, author?: { date?: string } } };
-          cachedRepoCommit = {
-            sha: record.sha.slice(0, 7),
-            fullSha: record.sha,
-            date: record.commit?.committer?.date || record.commit?.author?.date,
-            url: `https://github.com/dynaroars/cspicks/commit/${record.sha}`
-          };
-        }
-        return cachedRepoCommit;
-      })
-      .catch((): null => null);
-  }
-  return repoCommitPromise;
-}
