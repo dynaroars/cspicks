@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-10",
+  "school": "University of Michigan",
+  "result": "partial",
+  "sources": [
+    {
+      "url": "https://robotics.umich.edu/about/jobs/",
+      "httpStatus": 200,
+      "capture": "/tmp/cspicks-full-jobs-capture/batch-02/7.txt",
+      "checkedAt": "2026-10-08",
+      "findings": "Official Robotics Department jobs page lists current Department Chair and Professor/Associate Professor in Human-Centered Embodied AI openings. Chair description requires appointment at tenured full-professor level; application deadline November 15, 2026. Existing HCAI record matched the page; chair added."
+    },
+    {
+      "url": "https://cse.engin.umich.edu/",
+      "httpStatus": 403,
+      "capture": "/tmp/cspicks-full-jobs-capture/batch-02/6.txt",
+      "findings": "Cloudflare verification blocked the school CSE page; no attempt to bypass."
+    },
+    {
+      "url": "https://careers.umich.edu/browse-jobs/career_interests/230",
+      "capture": "/tmp/cspicks-full-jobs-capture/batch-02/8.txt",
+      "findings": "Navigation timed out; details remain unverified."
+    }
+  ],
+  "added": [
+    "umich-robotics-department-chair-2026"
+  ],
+  "remaining": "Schoolwide and CSE hiring sources were not fully accessible in these captures; continue source-by-source review."
+}

@@ -6130,5 +6130,26 @@
     "summary": "Multiple Morimoto Lab postdocs developing autonomous soft, tip-extending robots for stroke treatment, including design, planning, controls and integration. Requires a mechanical engineering or related PhD with a strong robotics publication record; August 12 review has passed, final cutoff December 31, 2026.",
     "source": "crawl",
     "verified": true
+  },
+  {
+    "id": "umich-robotics-department-chair-2026",
+    "school": "University of Michigan",
+    "department": "Robotics Department, College of Engineering",
+    "title": "Robotics Department Chair",
+    "track": "leadership",
+    "level": "full",
+    "areas": [
+      "robotics"
+    ],
+    "state": "MI",
+    "city": "Ann Arbor",
+    "rolling": false,
+    "deadline": "2026-11-15",
+    "lastSeenAt": "2026-10-08",
+    "url": "https://robotics.umich.edu/about/jobs/",
+    "visaSponsorship": "not-stated",
+    "summary": "Department-chair search for a tenured full professor with a distinguished robotics or related-discipline record, academic leadership, research, teaching, and service. Applications are due November 15, 2026.",
+    "source": "crawl",
+    "verified": true
   }
 ]

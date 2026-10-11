@@ -44,7 +44,10 @@
     },
     {
       "school": "University of Michigan",
-      "status": "pending"
+      "status": "partial",
+      "report": "docs/data-sweep-jobs-michigan-evidence-2026-10-10.json",
+      "findings": "Reviewed the Robotics Department’s current openings; added department-chair search and matched existing human-centered embodied AI role. CSE and university job-board sources remain partially inaccessible.",
+      "remaining": "CSE site returned Cloudflare verification and university careers search timed out; review accessible alternative official departments/records."
     },
     {
       "school": "New York University",
