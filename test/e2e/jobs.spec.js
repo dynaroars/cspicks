@@ -190,7 +190,7 @@ test('by-school view groups postings and links into Search and Simulator, with r
 
 test('submit form is reachable and prefills a correction', async ({ page }) => {
   await page.goto('jobs.html');
-  await page.getByRole('link', { name: 'Submit or update a posting.' }).click();
+  await page.getByRole('link', { name: 'Add or update info' }).click();
   await expect(page).toHaveURL(/jobs-submit\.html/);
   await expect(page.locator('#quick')).toBeVisible();
 

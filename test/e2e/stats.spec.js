@@ -121,3 +121,16 @@ test('the stats icon navigates to the stats page', async ({ page }) => {
   await expect(page).toHaveURL(/stats\.html$/);
   await expect(page.locator('.search-intro h2')).toHaveText('CS Picks by the numbers');
 });
+
+for (const [file, target] of [['csconfs.html', 'csconfs-submit.html'], ['grants.html', 'grants-submit.html'], ['jobs.html', 'jobs-submit.html']]) {
+  test(`${file} has one "Add or update info" button linking to its form`, async ({ page }) => {
+    await page.route('https://raw.githubusercontent.com/**', route => route.fulfill({ status: 404, body: '' }));
+    await page.goto(file);
+    const button = page.locator('.search-intro .submission-link');
+    await expect(button).toHaveCount(1);
+    await expect(button).toHaveText('Add or update info');
+    await expect(button).toHaveAttribute('href', target);
+    await expect(page.locator(`.search-intro a[href="${target}"]`)).toHaveCount(1);
+    expect(await button.evaluate(el => getComputedStyle(el).borderRadius)).toBe('999px');
+  });
+}

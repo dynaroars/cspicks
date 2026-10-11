@@ -1533,6 +1533,25 @@ button.card-header {
 /* ==== Shared Awards/Jobs opportunity cards ==== */
 
 /* Shared opportunity presentation for Awards & Grants and US Jobs. */
+/* "Add or update info" pill on CS Confs, Awards & Grants, and US Jobs (same style as VietProfs). */
+.submission-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  background: var(--primary-color);
+  color: var(--bg-color);
+  transition: opacity 0.2s ease;
+}
+.search-intro p .submission-link { text-decoration: none; color: var(--bg-color); }
+.submission-link:hover,
+.submission-link:focus-visible { opacity: 0.85; }
+.submission-link:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+
 /* Grouped views (Jobs by school, Awards by sponsor): one bordered card per group. */
 .opportunity-group { border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.2rem 0.2rem; margin: 0 0 1rem; background: var(--bg-secondary); }
 .opportunity-group-header h2 { margin: 0; font-size: 1.2rem; }
