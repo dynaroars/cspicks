@@ -855,10 +855,9 @@
     },
     {
       "school": "The University of Alabama",
-      "status": "partial",
+      "status": "audited",
       "report": "docs/data-sweep-jobs-alabama-evidence-2026-10-11.json",
-      "findings": "Refreshed CS Hydrology/Hydroinformatics Assistant Professor requisition 530733; it is open through Nov 7, 2026 and seeks AI, HPC, and data-science approaches to water research. Existing CS faculty searches also remain in the official portal.",
-      "remaining": "Details for the related Associate and Full Professor water-research requisitions are not yet verified individually."
+      "findings": "Reconciled all six current CS postings on the official faculty board. Found and added two missing active roles: Full Professor 530201 and Cyber Innovation Hub Associate/Full Professor 530324. Refreshed water-cluster Assistant Professor 530733 (open through Nov 7, 2026); no separate water-cluster Associate/Full posting is listed."
     },
     {
       "school": "Univ. of California - Merced",
