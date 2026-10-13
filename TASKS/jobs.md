@@ -1,4 +1,4 @@
-# US academic CS jobs (`public/jobs.json`)
+# Academic CS jobs (`public/jobs.json`)
 
 > **`/goal TASKS/jobs.md`**: Work through `npm run maintain:jobs -- --limit 30`: crawl each school's official hiring pages, keep `lastSeenAt`/`closedAt` current, and record the crawl in `scripts/data/jobs-sources.json`. Work in bounded batches and open a PR on a
 > topic branch for each; never push to `main`. Scheduled runs stop at the cap in
@@ -21,8 +21,8 @@ Validate every batch with `npm test && npm run typecheck && npm run build && git
    whose pages were blocked or unfindable.
 
 `jobs.html` reads `public/jobs.json`: faculty, teaching-track, research, postdoc, visiting, and
-chair/dean openings at **any US school** — CSRankings membership is not required. CSRankings only seeds the crawl list
-and supplies the optional rank chips; schools it does not list simply show no rank. **The main source is crawling each school's own
+chair/dean openings at US schools and verified international postings. CSRankings only seeds the US crawl list
+and supplies optional rank chips; schools it does not list simply show no rank. **The main US source is crawling each school's own
 department hiring page**, not third-party boards. People can also submit postings through
 `jobs-submit.html`, but a submission is a lead, never a source.
 
@@ -38,6 +38,37 @@ Schools whose last crawl was unfinished come due much sooner: `incomplete` after
 `blocked` after 14.
 `npm run maintain:jobs -- --related N` lists schools whose non-CS units (IST, ECE, data science) have never
 been checked (no `relatedCheckedAt`); set `relatedCheckedAt` when you finish a school's other units. `--stats` shows coverage.
+
+## The school record (`scripts/data/jobs-sources.json`) and rechecks
+
+`jobs-sources.json` is the durable record of every university whose site we crawl: `homepage` (CS/department), `jobsUrl` (the
+hiring page that actually works), `state`, `kind` (`R1`, `R2`, `liberal-arts`, `masters`, `teaching`, `community-college`; only
+set for schools outside CSRankings), `lastCheckedAt`, `outcome`, `summary`, `checkedUrls`, `relatedUnits`. Treat it as the memory
+between runs, so **always write a row back after visiting a school, including when nothing was open.** Many departments post late (hiring
+season runs August to January), so a zero-posting school is "not yet", not "never": set `outcome: complete`, and put "no open CS
+search on <date>; recheck <month>" in `summary`. The queue (`--limit N`) brings it back automatically (21 days in season).
+`scripts/data/jobs-extra-schools.json` is the seed list of non-CSRankings schools (liberal arts, R2/R3, regional/teaching,
+community colleges); register more with `npm run maintain:jobs -- --import <file.json>` (array of
+`{ school, state, homepage, jobsUrl?, kind? }`; existing rows keep their crawl state). After CSRankings schools are all
+checked, work the `csrankings: false` rows next, then import new ones.
+
+## International posting research
+
+For the ongoing international collection, check non-US CSRankings schools first; move to smaller
+universities after that list has been checked. Keep a durable record in the matching school's row in
+`scripts/data/jobs-sources.json`: set `jobsUrl` to the official hiring page (and add official adjacent-unit
+pages to `relatedUnits`), record the pages actually reviewed in `checkedUrls`, and update
+`lastCheckedAt` / `outcome` / `summary`. Record official hiring pages even when they show no current CS
+opening, since early-season pages may add roles later; a future pass should revisit those URLs. Mark a
+school `incomplete` if only selected postings or units were reviewed. Keep blocked or unfindable pages
+explicitly identified rather than treating them as checked. Use official university sources for posting
+details. Group multiple verified leads into each GitHub Issue batch; do not open one issue per lead. Keep
+the university website record updated even when a school has no leads, so later passes can revisit it as
+its hiring page changes. Add each verified live international posting directly to `public/jobs.json`, following
+the schema below and using one record per official posting URL. For international jobs, `country` is the ISO
+country code, `city` is the posted location, and `state` may hold a province/region or an empty string when
+the posting does not specify one. Set `lastSeenAt` only after confirming the official posting is live. Do not
+create a GitHub Issue for these entries unless the user asks for that workflow.
 
 ## Reading JavaScript pages (`npm run render:jobs`)
 
@@ -88,7 +119,7 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
 | `level` | `assistant`, `associate`, `full`, `open`, or null when the posting has no rank (postdocs, lecturers). |
 | `areas` | CSRankings area keys (`src/shared.ts` `areaLabels`: `ai`, `sec`, `plan`, …) for every area the posting specifically names ("security, systems, and AI" → `sec`, `ops`/`comm`/`arch` as named, `ai`). Empty when it names none; never infer an area from the department or the ad's tone. |
 | `anyArea` | `true` only when the posting explicitly says it is open to all / any areas of computer science ("all areas", "open to any area", "applicants in any area of CS"). Omit otherwise. A posting can have both named `areas` (e.g. "all areas, with emphasis on AI") and `anyArea`. |
-| `state`, `city` | USPS state code (required) and city. |
+| `state`, `city` | USPS state code for US postings; province/region or empty when unspecified internationally. City as stated in the posting. |
 | `deadline` | ISO `YYYY-MM-DD`, or null when none is stated. Interpreted as Anywhere on Earth. |
 | `rolling` | `true` when the posting reviews until filled; `deadline` is then a priority date or null. |
 | `reviewBegins`, `startDate`, `postedDate` | ISO dates, only when the posting states them. |

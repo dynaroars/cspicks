@@ -1,10 +1,9 @@
 /**
- * US Jobs submission and correction form. Crawling department pages is the main source of
+ * Academic CS Jobs submission and correction form. Crawling department pages is the main source of
  * postings; this is the lead channel for ones the crawl missed or got wrong.
  */
 import { areaLabels, escapeHtml } from '../shared.js';
 import { LEVEL_LABELS, TRACK_LABELS, VISA_LABELS, loadJobsData } from './jobs-data.js';
-import { US_STATES } from './jobs-data.js';
 import { buildSubmissionContent, jobSubmission } from '../submission.js';
 import { DELIVERY_BUTTONS, QUICK_SECTION, deliver, quickLabel, quickPayload, setupQuickMode } from '../submit-quick.js';
 import type { Job } from '../types.js';
@@ -52,7 +51,10 @@ function renderForm() {
         <div class="submit-section"><label for="level">Rank</label><select id="level" name="level">${options(Object.entries(LEVEL_LABELS), '-- Select (optional) --')}</select></div>
       </div>
       <div class="submit-grid">
-        <div class="submit-section"><label for="state">State</label><select id="state" name="state">${options(Object.entries(US_STATES), '-- Select (optional) --')}</select></div>
+        <div class="submit-section"><label for="country">Country code</label><input id="country" name="country" type="text" maxlength="2" placeholder="e.g. US, GB, IN"></div>
+        <div class="submit-section"><label for="state">State / province / region</label><input id="state" name="state" type="text" placeholder="e.g. CA, Ontario, England"></div>
+      </div>
+      <div class="submit-grid">
         <div class="submit-section"><label for="city">City</label><input id="city" name="city" type="text" placeholder="e.g. Atlanta"></div>
       </div>
       <div class="submit-grid">
@@ -86,6 +88,7 @@ function getFormData() {
     title: value(form, '#title'),
     positionType: value(form, '#track'),
     rank: value(form, '#level'),
+    country: value(form, '#country').toUpperCase(),
     state: value(form, '#state'),
     city: value(form, '#city'),
     areas,
@@ -111,6 +114,7 @@ function prefill(job: Job) {
   set('#title', job.title);
   set('#track', job.track);
   set('#level', job.level || '');
+  set('#country', (job.country || 'US').toUpperCase());
   set('#state', job.state);
   set('#city', job.city || '');
   set('#areas', job.areas.map(area => areaLabels[area] || area).join(', '));

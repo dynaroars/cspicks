@@ -235,7 +235,7 @@ export type JobLevel = 'assistant' | 'associate' | 'full' | 'open';
 /** `not-stated`: the posting was read and says nothing about sponsorship. */
 export type VisaSponsorship = 'yes' | 'no' | 'case-by-case' | 'not-stated';
 
-/** One US academic job posting in `public/jobs.json`. Dates are ISO `YYYY-MM-DD`. */
+/** One US or international academic job posting in `public/jobs.json`. Dates are ISO `YYYY-MM-DD`. */
 export interface Job {
   id: string;
   /** CSRankings institution name, so cards can link back into Search. */

@@ -55,9 +55,9 @@ function createSubmissionUrlBuilders({ typeLabel, updateNoun, verifyNote, emailI
 
 export const jobSubmission = createSubmissionUrlBuilders({
   typeLabel: 'job',
-  updateNoun: 'US academic CS job posting',
+  updateNoun: 'academic CS job posting',
   verifyNote: 'Please verify the posting on the official department or university page before adding it.',
-  emailIntro: 'Here is my proposed US academic CS job posting or update:'
+  emailIntro: 'Here is my proposed academic CS job posting or update:'
 });
 
 export const grantSubmission = createSubmissionUrlBuilders({

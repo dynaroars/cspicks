@@ -65,7 +65,7 @@ playbook before any data-refresh or web-research task.
   schedule explorer over `csconfs/data/conferences.json`.
 - `grants.html` + `src/grants/main.ts` — standalone CS research awards, fellowships, and grants explorer
   over the database in `public/grants.json` (industry gifts, NSF calls, DARPA, DOE, DoD, foundations, societies).
-- `jobs.html` + `src/jobs/main.ts` — US academic CS jobs explorer over `public/jobs.json`. Modeled on the grants page
+- `jobs.html` + `src/jobs/main.ts` — US and international academic CS jobs explorer over `public/jobs.json`. It supports country and continent filtering; the state tile map and CSRankings rank chips are US-specific. Modeled on the grants page
   (search box, card list) with keyword filters (`track:`, `dept:`, `level:`, `area:`, `loc:`, `visa:`, `status:`),
   comma-separated alternatives, and a clickable search-help popup in `src/search-keywords.ts`. Legacy filter URL
   params restore as visible keywords. It has CSRankings rank sorts, a position/school view toggle,
@@ -73,7 +73,12 @@ playbook before any data-refresh or web-research task.
   owns loading, the active/closed definition (`isActive`: not closed, deadline not passed, or confirmed within 90 days),
   filtering, and grouping; `jobs-render.ts` the cards and map; school rank chips load lazily from `loadData()`. Covers any US
   school (CSRankings seeds the crawl list but is not a requirement), crawled by a scheduled routine (TASKS/jobs.md); queue/seed tooling is
-  `scripts/jobs-maintain.mjs` with state in `scripts/data/jobs-sources.json`.
+  `scripts/jobs-maintain.mjs` with state in `scripts/data/jobs-sources.json` — the durable record of every school's department/hiring
+  URL and last-crawl outcome (including R2/R3, liberal-arts, regional, and community-college schools seeded from
+  `scripts/data/jobs-extra-schools.json`). Update a school's row after every visit, even when nothing was posted yet, so the next run rechecks it
+  (see TASKS/jobs.md, "The school record"). The same file is the durable website/revisit record for international
+  vacancy research. Verified international postings belong in `public/jobs.json`; keep the school website/revisit record current in
+  `scripts/data/jobs-sources.json`. Do not create GitHub Issues for these postings unless the user asks for that workflow.
 - `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
 - `stats.html` + `src/stats.ts` — site stats (roster, conferences, awards, jobs; never the large NSF snapshot) and repository activity from the GitHub API. Every page header links to it via the health icon, between the GitHub and
   ROARS Lab icons (all three share `.icon-link`; `test/unit/consistency.test.js` enforces the header on every page).

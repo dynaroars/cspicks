@@ -46,6 +46,7 @@ export function renderJobCard(job: Job, ranks: RankLookup, isFavorite: IsFavorit
   const href = safeExternalUrl(job.url);
   const deadline = deadlineLabel(job, now);
   const place = [job.city, job.state].filter(Boolean).join(', ');
+  const locationFilter = US_STATES[job.state] || place || job.country || '';
   const areaChips = [
     ...job.areas.map(area => `<button type="button" class="opportunity-chip job-chip job-chip-area" data-search-area="${escapeHtml(area)}">${escapeHtml(areaLabels[area] || area)}</button>`),
     job.anyArea ? '<span class="opportunity-chip job-chip" title="The posting says it is open to all areas">All areas</span>' : ''
@@ -63,7 +64,7 @@ export function renderJobCard(job: Job, ranks: RankLookup, isFavorite: IsFavorit
       tagsHtml: `<span class="opportunity-chip opportunity-chip-type job-chip-track">${escapeHtml(TRACK_LABELS[job.track])}</span>${job.level ? `<span class="opportunity-chip">${escapeHtml(LEVEL_LABELS[job.level])}</span>` : ''}` })}
     ${opportunityDeadline(deadline.text, { className: deadline.className || (!job.deadline || job.rolling ? '' : 'is-confirmed'), valueClass: 'job-deadline' })}
     ${opportunityMeta([
-      { label: 'Location', html: `<button type="button" class="opportunity-filter-link job-state-btn" data-state="${escapeHtml(job.state)}" title="Show ${escapeHtml(US_STATES[job.state] || job.state)} only">${escapeHtml(place)}</button>` },
+      { label: 'Location', html: `<button type="button" class="opportunity-filter-link job-state-btn" data-location="${escapeHtml(locationFilter)}" title="Show ${escapeHtml(locationFilter)} only">${escapeHtml(place)}</button>` },
       ...(dates.length ? [{ label: 'Other dates', value: dates.join(' · ') }] : [])
     ])}
     ${annotationChips ? `<div class="opportunity-tags job-chips">${annotationChips}</div>` : ''}
@@ -117,7 +118,7 @@ export function exportFileName(now = Date.now()) {
 
 export function jobsToMarkdown(jobs: Job[], { ranks = () => undefined, now = Date.now() }: { ranks?: RankLookup; now?: number } = {}) {
   const lines = [
-    '# Starred US academic CS jobs',
+    '# Starred academic CS jobs',
     '',
     `Exported from CS Picks (${SITE_URL}/jobs.html) on ${new Date(now).toISOString().slice(0, 10)} · ${jobs.length} position${jobs.length === 1 ? '' : 's'}.`,
     'Details come from public hiring pages and community submissions and may be out of date; confirm everything on the official posting before applying. CSRankings ranks are US, last 10 years.',

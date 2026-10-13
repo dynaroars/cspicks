@@ -141,7 +141,7 @@
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Hal\u0131c\u0131o\u011flu Data Science Institute (School of Computing, Information and Data Sciences)",
+        "name": "Halıcıoğlu Data Science Institute (School of Computing, Information and Data Sciences)",
         "url": "https://datascience.ucsd.edu/employment/"
       },
       {
@@ -212,7 +212,7 @@
     "state": "MA",
     "lastCheckedAt": "2026-10-10T12:00:00Z",
     "outcome": "complete",
-    "summary": "Confirmed live EECS tenure-track search in the central MIT faculty-search portal and closed Schwarzman College core/shared searches. Added active Tayebati (2027\u201328) and METEOR postdoctoral calls from official program pages. Department career page still displays an expired 2025 deadline/2026 start, so the current central portal was used for the EECS opening. Checked SERC postdoc page, which lists current fellows rather than an open search.",
+    "summary": "Confirmed live EECS tenure-track search in the central MIT faculty-search portal and closed Schwarzman College core/shared searches. Added active Tayebati (2027–28) and METEOR postdoctoral calls from official program pages. Department career page still displays an expired 2025 deadline/2026 start, so the current central portal was used for the EECS opening. Checked SERC postdoc page, which lists current fellows rather than an open search.",
     "checkedUrls": [
       "https://www.eecs.mit.edu/career-opportunities-at-eecs/",
       "https://faculty-searches.mit.edu/eecs/",
@@ -638,7 +638,7 @@
     "state": "WI",
     "lastCheckedAt": "2026-10-12T12:58:19Z",
     "outcome": "incomplete",
-    "summary": "Rechecked CS recruitment and reviewed the official UW\u2013Madison postdoc vacancy list for the supplied CRA lead. Verified the active ICU Data Science Lab postdoc (CS PhD accepted; Oct 30 deadline; rolling review) and added it; remaining central faculty and postdoc listings still need review.",
+    "summary": "Rechecked CS recruitment and reviewed the official UW–Madison postdoc vacancy list for the supplied CRA lead. Verified the active ICU Data Science Lab postdoc (CS PhD accepted; Oct 30 deadline; rolling review) and added it; remaining central faculty and postdoc listings still need review.",
     "checkedUrls": [
       "https://www.cs.wisc.edu/people/faculty-staff-recruitment/",
       "https://jobs.wisc.edu/jobs/assistant-professor-of-computer-sciences-natural-language-processing-rise-ai-madison-wisconsin-united-states",
@@ -1161,7 +1161,7 @@
     "state": "NC",
     "lastCheckedAt": "2026-10-10T21:00:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked the CCI hiring page and live university board. Added the Computer Science adjunct lecturer pool (official detail confirms closing Nov 9, 2026) and a CCI Teaching Assistant/Associate Professor CS-education search shown on the board; its detail page rendered only the job-board shell. CCI\u2019s broader page still lists multiple faculty categories whose live status/details could not be confirmed. ECE robotics/controls search remains open but requires an ECE or related PhD; not included as clearly CS-targeted. Broader related-unit scan remains.",
+    "summary": "Rechecked the CCI hiring page and live university board. Added the Computer Science adjunct lecturer pool (official detail confirms closing Nov 9, 2026) and a CCI Teaching Assistant/Associate Professor CS-education search shown on the board; its detail page rendered only the job-board shell. CCI’s broader page still lists multiple faculty categories whose live status/details could not be confirmed. ECE robotics/controls search remains open but requires an ECE or related PhD; not included as clearly CS-targeted. Broader related-unit scan remains.",
     "checkedUrls": [
       "https://cci.charlotte.edu/applications-are-being-accepted-for-multiple-faculty-positions/",
       "https://jobs.charlotte.edu/postings/search?commit=Search&query_organizational_tier_2_id%5B%5D=32&sort=1956+desc&utf8=%E2%9C%93",
@@ -2730,7 +2730,7 @@
     "state": "CT",
     "lastCheckedAt": "2026-10-10T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Faculty openings page lists no computer science positions (only applied math, environmental, materials). Non-CS units (2026-10-08): 2026-27 Yale Engineering openings are applied and computational mathematics, environmental engineering, and materials science; none is a computing or ECE search a CS PhD plainly targets. Statistics and Data Science faculty-search page returned 404. Current pass (2026-10-10): Added Assistant Professor, Human-Computer Interaction (CS), listed in Yale\u2019s official academic openings on Oct 9, 2026; direct Interfolio posting linked from the current index.",
+    "summary": "Faculty openings page lists no computer science positions (only applied math, environmental, materials). Non-CS units (2026-10-08): 2026-27 Yale Engineering openings are applied and computational mathematics, environmental engineering, and materials science; none is a computing or ECE search a CS PhD plainly targets. Statistics and Data Science faculty-search page returned 404. Current pass (2026-10-10): Added Assistant Professor, Human-Computer Interaction (CS), listed in Yale’s official academic openings on Oct 9, 2026; direct Interfolio posting linked from the current index.",
     "checkedUrls": [
       "https://engineering.yale.edu/computer-science/employment",
       "https://engineering.yale.edu/research-and-faculty/faculty-openings",
@@ -2948,7 +2948,7 @@
     "state": "GA",
     "lastCheckedAt": "2026-10-10T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "School of Computing page lists only fall 2025 searches; UGAJobSearch shows no current School of Computing posting, only a Statistics/Institute for AI senior AI search. Non-CS units (2026-10-08): Searched UGAJobSearch for professor, computer, engineering, data, AI, postdoctoral, informatics and security; the only CS-relevant posting is the existing Statistics/IAI AI systems search (still live, full consideration Nov 13, 2026). The School of Medicine biomedical-technology search and others are not CS-targeted. Current pass (2026-10-10): Refreshed existing Associate Professor or Professor in AI Systems and Causal Reasoning (508244); current official AI Institute page posted Oct 9, 2026, accepts CS PhDs, Nov 13 full-consideration date. The CS security index says \u201ccurrently accepting\u201d but links to archived 2020 jobs, so those are not treated as current.",
+    "summary": "School of Computing page lists only fall 2025 searches; UGAJobSearch shows no current School of Computing posting, only a Statistics/Institute for AI senior AI search. Non-CS units (2026-10-08): Searched UGAJobSearch for professor, computer, engineering, data, AI, postdoctoral, informatics and security; the only CS-relevant posting is the existing Statistics/IAI AI systems search (still live, full consideration Nov 13, 2026). The School of Medicine biomedical-technology search and others are not CS-targeted. Current pass (2026-10-10): Refreshed existing Associate Professor or Professor in AI Systems and Causal Reasoning (508244); current official AI Institute page posted Oct 9, 2026, accepts CS PhDs, Nov 13 full-consideration date. The CS security index says “currently accepting” but links to archived 2020 jobs, so those are not treated as current.",
     "checkedUrls": [
       "https://csci.franklin.uga.edu/our-open-positions",
       "https://www.ugajobsearch.com/postings/search?query=computing",
@@ -3014,7 +3014,7 @@
     "state": "OH",
     "lastCheckedAt": "2026-10-10T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "The CS tenure-track and educator postings render as not available; no current CS postings found. Non-CS units (2026-10-08): Searched UC jobs for engineering, data science, AI, cyber and IT terms; no CS-PhD-targeted faculty/research postings in non-CS units. UC Blue Ash Math and CS tenure-track (teaching-focused, introductory math/CS courses) skipped as not plainly a CS PhD search. Current pass (2026-10-10): Added UC Blue Ash Assistant Professor, Mathematics & Computer Science (req 104279), tenure-track, Aug 15 2027 start, applications reviewed from Jan 11 2027 until filled. Minimum master\u2019s plus specified graduate coursework and teaching experience.",
+    "summary": "The CS tenure-track and educator postings render as not available; no current CS postings found. Non-CS units (2026-10-08): Searched UC jobs for engineering, data science, AI, cyber and IT terms; no CS-PhD-targeted faculty/research postings in non-CS units. UC Blue Ash Math and CS tenure-track (teaching-focused, introductory math/CS courses) skipped as not plainly a CS PhD search. Current pass (2026-10-10): Added UC Blue Ash Assistant Professor, Mathematics & Computer Science (req 104279), tenure-track, Aug 15 2027 start, applications reviewed from Jan 11 2027 until filled. Minimum master’s plus specified graduate coursework and teaching experience.",
     "checkedUrls": [
       "https://www.ceas.uc.edu/academics/departments/computer-science.html",
       "https://jobs.uc.edu/job/Cincinnati-AssistantAssociateFull-Professor,-Department-of-Computer-Science-OH-45201/1299505300/",
@@ -3560,7 +3560,7 @@
     "state": "AL",
     "lastCheckedAt": "2026-10-11T10:00:00Z",
     "outcome": "complete",
-    "summary": "Current official ECE board has Computer Engineering TT and Microelectronics TT openings; College of Engineering postdoc pool accepts CS/software PhDs. The CS department\u2019s cybersecurity ad is prior-cycle, with Jan 2026 start.",
+    "summary": "Current official ECE board has Computer Engineering TT and Microelectronics TT openings; College of Engineering postdoc pool accepts CS/software PhDs. The CS department’s cybersecurity ad is prior-cycle, with Jan 2026 start.",
     "checkedUrls": [
       "https://www.eng.auburn.edu/comp/",
       "https://eng.auburn.edu/csse/hiring/",
@@ -3975,7 +3975,7 @@
     "state": "OH",
     "lastCheckedAt": "2026-10-11T13:00:00Z",
     "outcome": "complete",
-    "summary": "CDS employment index currently says \u201cLook for Future Openings.\u201d Prior university Interfolio and ECSE review found no active CDS vacancy; 2024 CDS call specified July 2025 start and is stale.",
+    "summary": "CDS employment index currently says “Look for Future Openings.” Prior university Interfolio and ECSE review found no active CDS vacancy; 2024 CDS call specified July 2025 start and is stale.",
     "checkedUrls": [
       "https://engineering.case.edu/computer-and-data-sciences/employment",
       "https://case.edu/academic-careers",
@@ -4140,7 +4140,7 @@
     "state": "UT",
     "lastCheckedAt": "2026-10-11T14:00:00Z",
     "outcome": "complete",
-    "summary": "School of Computing Assistant Professor requisition 9680 returns 410 Gone. Official H-1B notice confirms prior Assistant Professor appointment ran Aug 1, 2023\u2013July 31, 2026. No current 2026\u201327 role verified.",
+    "summary": "School of Computing Assistant Professor requisition 9680 returns 410 Gone. Official H-1B notice confirms prior Assistant Professor appointment ran Aug 1, 2023–July 31, 2026. No current 2026–27 role verified.",
     "checkedUrls": [
       "https://cs.usu.edu/",
       "https://jobs.usu.edu/",
@@ -4338,7 +4338,7 @@
     "state": "OH",
     "lastCheckedAt": "2026-10-11T16:00:00Z",
     "outcome": "partial",
-    "summary": "Current faculty board has no CS department opening but includes Computer Engineering Technology/Cybersecurity Engineering faculty requisition 989308, open through Oct 30, 2026 and accepting a CS master\u2019s. Broader computing-adjacent faculty/postdoc review remains.",
+    "summary": "Current faculty board has no CS department opening but includes Computer Engineering Technology/Cybersecurity Engineering faculty requisition 989308, open through Oct 30, 2026 and accepting a CS master’s. Broader computing-adjacent faculty/postdoc review remains.",
     "checkedUrls": [
       "https://www.kent.edu/cs",
       "https://jobs.kent.edu/jobs/search/Faculty",
@@ -4521,7 +4521,7 @@
     "state": "DC",
     "lastCheckedAt": "2026-10-11T17:00:00Z",
     "outcome": "complete",
-    "summary": "Added current School of Business ISTM AI-cluster tenure-track Assistant Professor posting 128943 (CS PhD explicitly accepted; review begins Oct 26) and refreshed TRAILS Postdoctoral Associate 128516, open from Aug 31 with no close date. SEAS CS announcement remains a stale 2024\u201325 PoP posting.",
+    "summary": "Added current School of Business ISTM AI-cluster tenure-track Assistant Professor posting 128943 (CS PhD explicitly accepted; review begins Oct 26) and refreshed TRAILS Postdoctoral Associate 128516, open from Aug 31 with no close date. SEAS CS announcement remains a stale 2024–25 PoP posting.",
     "checkedUrls": [
       "https://cs.engineering.gwu.edu/",
       "https://cs.engineering.gwu.edu/announcements-position-openings",
@@ -4637,7 +4637,7 @@
     "checkedUrls": [
       [
         "https://computerscience.nmsu.edu/news-events/open-positions.html",
-        "Official CS page lists the College Assistant Professor and Assistant Professor \u2013 Artificial Intelligence Education."
+        "Official CS page lists the College Assistant Professor and Assistant Professor – Artificial Intelligence Education."
       ],
       [
         "https://careers.nmsu.edu/jobs/assistant-professor-artificial-intelligence-education-las-cruces-new-mexico-united-states",
@@ -4766,7 +4766,7 @@
     "state": "AR",
     "lastCheckedAt": "2026-10-11T22:00:00Z",
     "outcome": "partial",
-    "summary": "The University of Arkansas EECS Workday listing includes an active Fall 2027 Assistant Professor search focused on semiconductor electronics/photonics/materials, with AI, neuromorphic, quantum computing, and MEMS among additional interests. The full posting\u2019s required degree discipline and fit for CS applicants need verification; recorded as a candidate related opening pending that check.",
+    "summary": "The University of Arkansas EECS Workday listing includes an active Fall 2027 Assistant Professor search focused on semiconductor electronics/photonics/materials, with AI, neuromorphic, quantum computing, and MEMS among additional interests. The full posting’s required degree discipline and fit for CS applicants need verification; recorded as a candidate related opening pending that check.",
     "checkedUrls": [
       "https://uasys.wd5.myworkdayjobs.com/en-US/UAF_External_Career_Site/job/Fayetteville-AR/Assistant-Professor---Electrical-Engineering---9-MONTH_R0091048",
       "https://hr.uark.edu/employee-resources/hiring.php"
@@ -4790,7 +4790,7 @@
     "state": "OR",
     "lastCheckedAt": "2026-10-11T18:30:00Z",
     "outcome": "partial",
-    "summary": "The official UO Careers listing confirms an active CS Pro Tem Instructor open pool (Job 536882), accepting applications through July 28, 2027, reviewed as needs arise. Because UO announced a hiring freeze in May 2026 and some searches may be paused, the posting\u2019s precise hiring status remains uncertain. No current CS tenure-track call surfaced in this pass.",
+    "summary": "The official UO Careers listing confirms an active CS Pro Tem Instructor open pool (Job 536882), accepting applications through July 28, 2027, reviewed as needs arise. Because UO announced a hiring freeze in May 2026 and some searches may be paused, the posting’s precise hiring status remains uncertain. No current CS tenure-track call surfaced in this pass.",
     "checkedUrls": [
       "https://careers.uoregon.edu/cw/en-us/job/536882/pro-tem-instructor-computer-science-open-pool",
       "https://www.careers.uoregon.edu/frequently-asked-questions-applicants",
@@ -5386,7 +5386,7 @@
     "state": "TX",
     "lastCheckedAt": "2026-10-12T00:00:00Z",
     "outcome": "partial",
-    "summary": "The current Lyle faculty openings page says SMU is expanding hiring into AY 2026\u201327 and explicitly includes Computer Science in a multi-department renewable-contract, non-tenure-track cluster hire. No CS-specific requisition, deadline, or qualifications are published on the page, so added as a provisional listing with caveat. Older CS tenure-track PDF (Fall 2023) is stale.",
+    "summary": "The current Lyle faculty openings page says SMU is expanding hiring into AY 2026–27 and explicitly includes Computer Science in a multi-department renewable-contract, non-tenure-track cluster hire. No CS-specific requisition, deadline, or qualifications are published on the page, so added as a provisional listing with caveat. Older CS tenure-track PDF (Fall 2023) is stale.",
     "checkedUrls": [
       "https://www.smu.edu/lyle/departments/faculty-openings",
       "https://www.smu.edu/lyle/departments/cs/about/open-positions",
@@ -5514,7 +5514,7 @@
     "state": "CO",
     "lastCheckedAt": "2026-10-12T01:00:00Z",
     "outcome": "partial",
-    "summary": "Current Jobs@DU search identifies an active CS Department Adjunct Faculty, Data Science pool (Job 499044) for AY 2026\u201327, with applications accepted for future openings. The department-specific posting is an adjunct pool rather than an immediate course assignment. Other Ritchie School vacancy results were not fully enumerated in this pass; added the confirmed CS pool.",
+    "summary": "Current Jobs@DU search identifies an active CS Department Adjunct Faculty, Data Science pool (Job 499044) for AY 2026–27, with applications accepted for future openings. The department-specific posting is an adjunct pool rather than an immediate course assignment. Other Ritchie School vacancy results were not fully enumerated in this pass; added the confirmed CS pool.",
     "checkedUrls": [
       "https://jobs.du.edu/en-us/job/499044/adjunct-faculty-data-science",
       "https://jobs.du.edu/en-us/listing/",
@@ -5568,7 +5568,7 @@
     "state": "OH",
     "lastCheckedAt": "2026-10-12T01:30:00Z",
     "outcome": "partial",
-    "summary": "AFIT\u2019s official personnel page directs civilian vacancies to USAJobs. It currently lists a broad Engineering Physics postdoctoral fellowship through July 2027, but the public description does not identify a CS-specific area or establish CS eligibility. Faculty opportunities for active-duty personnel are routed through military career-field managers. No CS-specific role added; marked partial pending review of the USAJobs postdoc discipline.",
+    "summary": "AFIT’s official personnel page directs civilian vacancies to USAJobs. It currently lists a broad Engineering Physics postdoctoral fellowship through July 2027, but the public description does not identify a CS-specific area or establish CS eligibility. Faculty opportunities for active-duty personnel are routed through military career-field managers. No CS-specific role added; marked partial pending review of the USAJobs postdoc discipline.",
     "checkedUrls": [
       "https://www.afit.edu/HR/",
       "https://www.afit.edu/BIOS/index.cfm?a=fac&ss=15"
@@ -5592,7 +5592,7 @@
     "state": "WI",
     "lastCheckedAt": "2026-10-12T01:30:00Z",
     "outcome": "partial",
-    "summary": "UWM\u2019s public HR page says external candidates search Workday and directs current employees to the internal Jobs Hub. Available public faculty listings did not identify a current Computer Science position; the full Workday results could not be verified externally. No record added.",
+    "summary": "UWM’s public HR page says external candidates search Workday and directs current employees to the internal Jobs Hub. Available public faculty listings did not identify a current Computer Science position; the full Workday results could not be verified externally. No record added.",
     "checkedUrls": [
       "https://uwm.edu/hr/jobs/",
       "https://jobs.wisc.edu/jobs/search?category=Faculty",
@@ -5691,7 +5691,7 @@
     "state": "MS",
     "lastCheckedAt": "2026-10-11T12:00:00Z",
     "outcome": "incomplete",
-    "summary": "Sources row has prior confirmation of req. 5545 and the official portal. Fresh current role list was not completely re-read; keep partial pending reconciliation of the 2026\u201327 CSCE ads.",
+    "summary": "Sources row has prior confirmation of req. 5545 and the official portal. Fresh current role list was not completely re-read; keep partial pending reconciliation of the 2026–27 CSCE ads.",
     "checkedUrls": [
       "https://usm.csod.com/ux/ats/careersite/1/home?c=usm",
       "https://usm.csod.com/ux/ats/careersite/1/home/requisition/5545?c=usm",
@@ -6141,7 +6141,7 @@
     "state": "ME",
     "lastCheckedAt": "2026-10-12T12:57:26Z",
     "outcome": "incomplete",
-    "summary": "Verified the open-rank Computer Science search R2372 on Bates\u2019 official current faculty postings page and followed its Interfolio application link. Broader computing-adjacent scan remains incomplete.",
+    "summary": "Verified the open-rank Computer Science search R2372 on Bates’ official current faculty postings page and followed its Interfolio application link. Broader computing-adjacent scan remains incomplete.",
     "checkedUrls": [
       "https://www.bates.edu/dof/welcome/hiring-and-personnel/current-faculty-job-postings/",
       "https://apply.interfolio.com/193312"
@@ -6187,7 +6187,7 @@
     "state": "CA",
     "lastCheckedAt": "2026-10-12T12:57:26Z",
     "outcome": "incomplete",
-    "summary": "Verified the open Computer Science tenure-track assistant professor posting on Cal Poly Pomona\u2019s official PageUp portal. Applications are reviewed from Oct 11, 2026 until filled; broader adjacent-unit scan remains incomplete.",
+    "summary": "Verified the open Computer Science tenure-track assistant professor posting on Cal Poly Pomona’s official PageUp portal. Applications are reviewed from Oct 11, 2026 until filled; broader adjacent-unit scan remains incomplete.",
     "checkedUrls": [
       "https://www.cpp.edu/cs/",
       "https://careers.cpp.edu/po/en-us/job/559402/computer-science-assistant-professor"
@@ -6284,7 +6284,7 @@
     "state": "NY",
     "lastCheckedAt": "2026-10-12T12:54:36Z",
     "outcome": "incomplete",
-    "summary": "Verified the supplied Computing Technology faculty posting on Marist\u2019s official careers portal. The wider school and related-unit scan remains incomplete.",
+    "summary": "Verified the supplied Computing Technology faculty posting on Marist’s official careers portal. The wider school and related-unit scan remains incomplete.",
     "checkedUrls": [
       "https://www.marist.edu/computer-science-math",
       "https://careers.marist.edu/cw/en-us/job/494040/assistant-professor-of-computing-technology-cybersecurity-and-it-infrastructure"
@@ -6324,7 +6324,7 @@
     "state": "OR",
     "lastCheckedAt": "2026-10-12T12:56:43Z",
     "outcome": "incomplete",
-    "summary": "Verified the active Computer Science tenure-stream position in computer systems on Reed\u2019s official page. Full consideration deadline is Oct 12, 2026; wider computing-adjacent scan remains incomplete.",
+    "summary": "Verified the active Computer Science tenure-stream position in computer systems on Reed’s official page. Full consideration deadline is Oct 12, 2026; wider computing-adjacent scan remains incomplete.",
     "checkedUrls": [
       "https://www.reed.edu/dean_of_faculty/facsearch/positions/assistant-professor-tenure-stream-faculty-position-in-computer-systems.html",
       "https://www.reed.edu/computer-science/faculty-search.html"
@@ -6418,7 +6418,7 @@
     "state": "AL",
     "lastCheckedAt": "2026-10-12T12:54:36Z",
     "outcome": "incomplete",
-    "summary": "Verified the Computer Science assistant professor posting on Troy\u2019s official employment site, posting 48513. The wider computing-adjacent unit scan remains incomplete.",
+    "summary": "Verified the Computer Science assistant professor posting on Troy’s official employment site, posting 48513. The wider computing-adjacent unit scan remains incomplete.",
     "checkedUrls": [
       "https://www.troyuniversityjobs.com/postings/search",
       "https://www.troyuniversityjobs.com/postings/48513"
@@ -6511,14 +6511,17 @@
     "facultyCount": 225,
     "country": "CN",
     "region": "asia",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://cs.pku.edu.cn/English/Open_Position/Faculty.htm",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-13T23:30:00Z",
+    "outcome": "leads_found",
+    "summary": "Current School of Computer Science faculty call posted 2026-09-14: tenure-track/tenured, all CS areas; initial materials due 2026-11-02; start Sept 2027 or mutually agreed date.",
+    "checkedUrls": [
+      "https://cs.pku.edu.cn/English/Open_Position/Faculty.htm",
+      "https://cs.pku.edu.cn/info/1175/6520.htm"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-13T23:30:00Z",
     "deferredUntil": null
   },
   {
@@ -6527,14 +6530,18 @@
     "facultyCount": 209,
     "country": "CN",
     "region": "asia",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://cs.nju.edu.cn/",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-13T23:58:00Z",
+    "outcome": "no_current_leads",
+    "summary": "Checked the Computer Science school current announcement index and linked University recruitment portal. April 2026 annual tenure-track hiring notice no longer appears among active Computer Science faculty calls; the portal current faculty list shows other schools, not CS. No current CS vacancy verified.",
+    "checkedUrls": [
+      "https://cs.nju.edu.cn/",
+      "https://cs.nju.edu.cn/1659/",
+      "https://rczp.nju.edu.cn/"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-13T23:58:00Z",
     "deferredUntil": null
   },
   {
@@ -6559,14 +6566,18 @@
     "facultyCount": 187,
     "country": "AU",
     "region": "australasia",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://careers.pageuppeople.com/1071/cw/en/listing/",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-13T23:30:00Z",
+    "outcome": "leads_found",
+    "summary": "Official Monash Malaysia careers portal reviewed. Current fixed-term Lecturer and Associate Professor vacancies in CS/data science/software engineering/AI/cybersecurity/quantum computing, both closing 2026-10-30.",
+    "checkedUrls": [
+      "https://careers.pageuppeople.com/1071/cw/en/listing/",
+      "https://careers.pageuppeople.com/1071/cw/en/job/495044/lecturer-computer-sciencedata-sciencesoftware-engineeringaicybersecurityquantum-computing",
+      "https://careers.pageuppeople.com/1071/cw/en/job/492728/associate-professor-computer-sciencedata-sciencesoftware-engineeringaicybersecurityquantum-computing"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-13T23:30:00Z",
     "deferredUntil": null
   },
   {
@@ -6575,14 +6586,16 @@
     "facultyCount": 181,
     "country": "GB",
     "region": "europe",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://informatics.ed.ac.uk/about/work-with-us/vacancies",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-13T23:58:00Z",
+    "outcome": "leads_found",
+    "summary": "Official School of Informatics vacancies page checked. Current Lecturer and Reader in Artificial Intelligence searches, both apply-by 2026-10-20.",
+    "checkedUrls": [
+      "https://informatics.ed.ac.uk/about/work-with-us/vacancies"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-13T23:58:00Z",
     "deferredUntil": null
   },
   {
@@ -6591,14 +6604,19 @@
     "facultyCount": 178,
     "country": "CN",
     "region": "asia",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://www.jobs.uestc.edu.cn/zrjs/ggjs/zpqs.htm",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-13T23:30:00Z",
+    "outcome": "leads_found",
+    "summary": "Official recruitment pages reviewed. Verified 2026 second-half university faculty recruitment across CS, cybersecurity, and software engineering (posted 2026-09-20), and an open-rank faculty/postdoctoral call at the National Key Laboratory of Intelligent Collaborative Computing Technology (posted 2026-08-28). Also reviewed a CS-school administrative assistant notice closing 2026-10-16; excluded as non-academic/non-research.",
+    "checkedUrls": [
+      "https://www.jobs.uestc.edu.cn/zrjs/ggjs/zpqs.htm",
+      "https://www.jobs.uestc.edu.cn/info/1068/3055.htm",
+      "https://www.jobs.uestc.edu.cn/info/1068/3505.htm",
+      "https://www.jobs.uestc.edu.cn/info/1017/3539.htm"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-13T23:30:00Z",
     "deferredUntil": null
   },
   {
@@ -6623,15 +6641,32 @@
     "facultyCount": 169,
     "country": "SG",
     "region": "asia",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://www.ntu.edu.sg/computing/careers/faculty-careers/tenure---tenure-track-positions",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-13T22:22:05Z",
+    "outcome": "leads_found",
+    "summary": "Reviewed the official CCDS faculty careers page and NTU Workday listings. Batch 41 contains four faculty searches and four research/teaching roles; batch 43 adds ten distinct Research Fellow postings across generative AI, ML theory, blockchain security, acoustic gait detection, multimodal AI, LLM assistants, robotics, software security, formal verification, and AI-for-science. The Workday postings do not state application deadlines; recheck before issue submission and application. Further college and adjacent-unit coverage remains.",
+    "checkedUrls": [
+      "https://www.ntu.edu.sg/computing/careers/faculty-careers/tenure---tenure-track-positions",
+      "https://www.ntu.edu.sg/computing/careers-CCDS/104",
+      "https://ntu.wd3.myworkdayjobs.com/en-US/Careers/job/Research-Associate--Computer-Science-_R00025803-1",
+      "https://ntu.wd3.myworkdayjobs.com/en-US/Careers/job/Lecturer--Senior-Lecturer--School-of-Computer-Science-and-Engineering-_R00016347-1",
+      "https://ntu.wd3.myworkdayjobs.com/en-US/Careers/job/NTU-Main-Campus-Singapore/Research-Associate--Computer-Science-_R00025134-1",
+      "https://ntu.wd3.myworkdayjobs.com/en-US/Careers/job/Research-Fellow--Computer-Science-_R00017311",
+      "https://ntu.wd3.myworkdayjobs.com/careers/job/ntu-main-campus-singapore/research-fellow--computer-science-_r00025787",
+      "https://ntu.wd3.myworkdayjobs.com/Careers/job/NTU-Main-Campus-Singapore/Research-Fellow--Computer-Science-Artificial-Intelligence-Machine-Learning-_R00025766",
+      "https://ntu.wd3.myworkdayjobs.com/en-US/Careers/job/NTU-Main-Campus-Singapore/Research-Fellow--Computer-Science-Computer-Engineering-_R00024092",
+      "https://ntu.wd3.myworkdayjobs.com/en-US/Careers/job/NTU-Main-Campus-Singapore/Research-Fellow--Computer-Science-Engineering-_R00024173",
+      "https://ntu.wd3.myworkdayjobs.com/en-US/Careers/job/Research-Fellow--Computer-Science-_R00025133",
+      "https://ntu.wd3.myworkdayjobs.com/en-US/Careers/job/Research-Fellow--Computer-Science-_R00024580",
+      "https://ntu.wd3.myworkdayjobs.com/en-US/Careers/job/Research-Fellow--Computer-Science-_R00021906",
+      "https://ntu.wd3.myworkdayjobs.com/en-US/Careers/job/Research-Fellow--Computer-Science---Software-Engineering---Artificial-Intelligence-_R00023654",
+      "https://ntu.wd3.myworkdayjobs.com/en-US/Careers/job/Research-Fellow--Computer-Science---Software-Engineering---Artificial-Intelligence-_R00025323",
+      "https://ntu.wd3.myworkdayjobs.com/en-US/Careers/job/Research-Fellow--Computer-Engineering-Computer-Science-Applied-Mathematics-_R00025461"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
-    "deferredUntil": null
+    "relatedCheckedAt": "2026-10-13T23:58:00Z",
+    "deferredUntil": "2026-10-20"
   },
   {
     "school": "University of Melbourne",
@@ -6656,13 +6691,15 @@
     "country": "CA",
     "region": "northamerica",
     "jobsUrl": "https://web.cs.toronto.edu/employment-opportunities",
-    "state": null,
-    "lastCheckedAt": "2026-10-13T14:50:00Z",
-    "outcome": "complete",
-    "summary": "Verified tenure-stream Assistant Professor in Data Science Computation via U of T Faculty Opportunities and Stats/CS portal.",
-    "checkedUrls": [],
+    "state": "checked",
+    "lastCheckedAt": "2026-10-13T23:45:00Z",
+    "outcome": "leads_found",
+    "summary": "Official CS employment page reviewed. Current full-time tenure-stream AI faculty search at Associate Professor/Professor rank (Hinton Chair eligible), July 2027 start; applications accepted until filled. Research postings currently report no openings.",
+    "checkedUrls": [
+      "https://web.cs.toronto.edu/employment-opportunities"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-13T23:45:00Z",
     "deferredUntil": null
   },
   {
@@ -6672,13 +6709,17 @@
     "country": "CA",
     "region": "northamerica",
     "jobsUrl": "https://cs.uwaterloo.ca/about/open-positions",
-    "state": null,
-    "lastCheckedAt": "2026-10-13T14:50:00Z",
-    "outcome": "complete",
-    "summary": "Verified tenure-stream positions (all ranks) and Assistant Professor Teaching Stream via official Cheriton School of CS portal.",
-    "checkedUrls": [],
+    "state": "checked",
+    "lastCheckedAt": "2026-10-13T23:45:00Z",
+    "outcome": "leads_found",
+    "summary": "Official Cheriton School CS hiring pages reviewed. Current multi-position tenure-stream faculty call in data systems, physical AI, robotics, quantum software and other CS fields; full consideration by 2026-11-13, until-filled review.",
+    "checkedUrls": [
+      "https://cs.uwaterloo.ca/about/open-positions",
+      "https://cs.uwaterloo.ca/about/facultyRecruiting/",
+      "https://cs.uwaterloo.ca/tenure-stream-faculty-positions"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-13T23:45:00Z",
     "deferredUntil": null
   },
   {
@@ -6687,14 +6728,16 @@
     "facultyCount": 157,
     "country": "KR",
     "region": "asia",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://cs.kaist.ac.kr/content?menu=9",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-13T23:45:00Z",
+    "outcome": "leads_found",
+    "summary": "Official School of Computing tenure-track faculty page reviewed. Open-rank tenured recruitment across CS; applications accepted year-round.",
+    "checkedUrls": [
+      "https://cs.kaist.ac.kr/content?menu=9"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-13T23:45:00Z",
     "deferredUntil": null
   },
   {
@@ -6703,15 +6746,27 @@
     "facultyCount": 151,
     "country": "NL",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://careers.tudelft.nl/go/All-jobs/9021002/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T22:22:05Z",
+    "outcome": "leads_found",
+    "summary": "Rechecked the official careers index and verified nine distinct current CS-relevant postings for international batch 42: four Assistant Professor vacancies covered by one posting/application, Assistant/Associate Professor in Visual Analytics, a 6G integration postdoc, four 6G PhD positions, a Sustainable Generative AI PhD, and a postdoc in computer proof assistants/algebra systems. Deadlines range from 2026-10-19 to 2026-11-01; recheck after 2026-10-19.",
+    "checkedUrls": [
+      "https://careers.tudelft.nl/go/All-jobs/9021002/",
+      "https://careers.tudelft.nl/job/Delft-Assistant-Professor-in-Computer-Science-2628-CD/1371842257/",
+      "https://careers.tudelft.nl/job/Delft-AssistantAssociate-Professor-in-Visual-Analytics-2628-CD/1372287357/",
+      "https://careers.tudelft.nl/job/Delft-Postdoc-FNS-in-6G-research-Integration-2628-CD/1374066157/",
+      "https://careers.tudelft.nl/job/Delft-PhD-position-Agentic-AI-for-Resource-Management-and-Resilient-Operations-in-6G-2628-CD/1374071557/",
+      "https://careers.tudelft.nl/job/Delft-PhD-position-Secure-multi-stakeholder-6G-orchestration-2628-CD/1374071357/",
+      "https://careers.tudelft.nl/job/Delft-PhD-position-6G-Native-Distributed-Intelligence-for-Physical-AI-2628-CD/1374292757/",
+      "https://careers.tudelft.nl/job/Delft-PhD-position-6G-resilience-planning-2628-CD/1374292657/",
+      "https://careers.tudelft.nl/job/Delft-Postdoc-Category-Theory%2C-Computer-Proof-Assistants-and-Computer-Algebra-Systems-2628-CD/1373970157/",
+      "https://careers.tudelft.nl/job/Delft-Assistant-Professor-in-Computer-Science-2628-CD/1371842257",
+      "https://careers.tudelft.nl/job/Delft-PhD-Position-Sustainable-Generative-AI-for-Digital-Sovereignty-2628-CD/1373343657/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-10-20"
   },
   {
     "school": "Shenzhen University",
@@ -6751,15 +6806,23 @@
     "facultyCount": 144,
     "country": "CN",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://cc.nankai.edu.cn/main.psp",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
-    "deferredUntil": null
+    "lastCheckedAt": "2026-10-14T00:30:00Z",
+    "outcome": "complete",
+    "summary": "Reviewed School of Computer Science and Cybersecurity hiring notices. The only 2026 staff ad found was for two administrative teaching-support staff and closed Apr 24; no active computing faculty or research vacancy confirmed. Revisit the hiring page next cycle.",
+    "checkedUrls": [
+      "https://cc.nankai.edu.cn/main.psp",
+      "https://cc.nankai.edu.cn/2026/0420/c13292a597006/page.htm"
+    ],
+    "relatedUnits": [
+      {
+        "name": "School of Software",
+        "url": "https://cs.nankai.edu.cn/info/1138/3499.htm"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-13T00:00:00Z",
+    "deferredUntil": "2026-11-14"
   },
   {
     "school": "Technion",
@@ -6767,12 +6830,16 @@
     "facultyCount": 140,
     "country": "IL",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://faculty-opening.cswp.cs.technion.ac.il/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Official Computer Science faculty-opening page invites tenure-track applications across fields and encourages submission by October 31, usually about one year ahead of appointment. Other Technion units and specific departmental calls not fully reviewed.",
+    "checkedUrls": [
+      "https://faculty-opening.cswp.cs.technion.ac.il/",
+      "https://hr.technion.ac.il/positions/",
+      "https://welcome2.technion.ac.il/en/join-technion/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -6783,15 +6850,18 @@
     "facultyCount": 138,
     "country": "CN",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://en.whu.edu.cn/Community/Recruitment.htm",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "incomplete",
+    "summary": "Reviewed official recruitment index and 2024 high-level talent notice. The notice includes School of Computer Science, School of Cyber Science and Engineering, and Wuhan Institute for Mathematics and AI faculty openings with no closing date shown; current availability is uncertain, so revisit before import.",
+    "checkedUrls": [
+      "https://en.whu.edu.cn/Community/Recruitment.htm",
+      "https://en.whu.edu.cn/info/5101/51671.htm"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "Seoul National University",
@@ -6847,15 +6917,25 @@
     "facultyCount": 125,
     "country": "GB",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.ucl.ac.uk/human-resources/working-ucl/jobs-ucl",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Reviewed the official central vacancies pages and added six active CS/CS-adjacent research roles (proof checking, two medical-AI posts, operations research, cancer digital twins, and computational LiDAR/point clouds) plus the Term 2 CS PGTA call. Nearest deadline is 2026-10-21; revisit after closing and recheck school and cross-faculty listings.",
+    "checkedUrls": [
+      "https://www.ucl.ac.uk/human-resources/working-ucl/jobs-ucl",
+      "https://www.mgmt.ucl.ac.uk/node/4869",
+      "https://www.ucl.ac.uk/pg-teaching-opportunities-hub/opportunities/pgta-computer-science-4",
+      "https://www.ucl.ac.uk/work-at-ucl/search-ucl-jobs/details?jobId=48811&jobTitle=Research+Fellow+in+Data-Parallel+Proof+Checking+for+Monoidal+Theories",
+      "https://www.ucl.ac.uk/work-at-ucl/search-ucl-jobs/details?jobId=48955&jobTitle=Research+Fellow+in+AI+for+Neonatal+Retinal+Imaging",
+      "https://www.ucl.ac.uk/work-at-ucl/search-ucl-jobs/details?jobId=48957&jobTitle=Research+Fellow",
+      "https://www.ucl.ac.uk/work-at-ucl/search-ucl-jobs/details?jobId=48613&jobTitle=Research+Fellow",
+      "https://www.ucl.ac.uk/work-at-ucl/search-ucl-jobs/details?jobId=48522&jobTitle=Research+Fellow+%2F+Senior+Research+Fellow+in+Software+Development+for+Cancer+Digital+Twins",
+      "https://www.ucl.ac.uk/work-at-ucl/search-ucl-jobs/details?jobId=48546&jobTitle=Research+Fellow%3A++3DTreePrint+Project"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-10-20"
   },
   {
     "school": "HKUST",
@@ -6863,15 +6943,24 @@
     "facultyCount": 123,
     "country": "HK",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://cse.hkust.edu.hk/admin/recruitment/faculty/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
-    "deferredUntil": null
+    "lastCheckedAt": "2026-10-13T20:36:24Z",
+    "outcome": "leads_found",
+    "summary": "Expanded the official CS faculty review to adjacent computing/engineering research units. Current calls: CSE 2027-28 all-rank faculty (priority date Dec 31 2026); ECE tenure-track Professor/Associate/Assistant Professor, rolling until filled; Cheng Kar-Shun Robotics Institute embodied AI and medical robots, all ranks, rolling. Recheck in November.",
+    "checkedUrls": [
+      "https://cse.hkust.edu.hk/admin/recruitment/faculty/",
+      "https://dossier.interfolio.com/apply/191104",
+      "https://ece.hkust.edu.hk/joinus",
+      "https://apply.interfolio.com/179626",
+      "https://apply.interfolio.com/185063"
+    ],
+    "relatedUnits": [
+      "Department of Electronic and Computer Engineering",
+      "Cheng Kar-Shun Robotics Institute"
+    ],
+    "relatedCheckedAt": "2026-10-13T20:36:24Z",
+    "deferredUntil": "2026-11-13"
   },
   {
     "school": "Harbin Institute of Technology",
@@ -6879,14 +6968,23 @@
     "facultyCount": 122,
     "country": "CN",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://ai.hit.edu.cn/12792/list.htm",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Official AI Research Institute page states it recruits faculty and full-time researchers year-round, including faculty, researchers, and postdocs, across AI, NLP, vision, HCI, and systems. Other HIT computing units and campuses not fully reviewed.",
+    "checkedUrls": [
+      "https://ai.hit.edu.cn/12792/list.htm",
+      "https://computing.hit.edu.cn/_s227/11271/list.psp",
+      "https://www.hit.edu.cn/11573/list.htm"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Artificial Intelligence Research Institute",
+        "url": "https://ai.hit.edu.cn/12792/list.htm"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-13T00:00:00Z",
     "deferredUntil": null
   },
   {
@@ -6911,15 +7009,27 @@
     "facultyCount": 121,
     "country": "DK",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://di.ku.dk/english/about/vacancies/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T22:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Department vacancy page rechecked. Three postings still accept applications: postdoc in computational writing / pharmaceutical data science education (deadline Oct 14), NLP PhD fellowship (Nov 8), and pooled CS instructors/teaching assistants for 2027 courses (Oct 18). The same page still displays old AI-reasoning postdoc (Sep 30), generative-AI resource-efficiency PhD (Oct 10), and HCI assistant professor (Oct 11); these are closed and excluded. Wider university units still need review.",
+    "checkedUrls": [
+      "https://di.ku.dk/english/about/vacancies/",
+      "https://employment.ku.dk/all-vacancies/?show=167227",
+      "https://employment.ku.dk/all-vacancies/?show=169533",
+      "https://employment.ku.dk/all-vacancies/?show=168707",
+      "https://employment.ku.dk/all-vacancies/?show=167176",
+      "https://employment.ku.dk/all-vacancies/?show=169080",
+      "https://employment.ku.dk/all-vacancies/?pxs_search=department+of+computer+science",
+      "https://employment.ku.dk/phd?show=170114",
+      "https://employment.ku.dk/all-vacancies/?show=170133",
+      "https://employment.ku.dk/all-vacancies/?show=170227",
+      "https://employment.ku.dk/all-vacancies/?show=166896"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-10-15"
   },
   {
     "school": "Chalmers/GU",
@@ -6938,7 +7048,7 @@
     "deferredUntil": null
   },
   {
-    "school": "University of A Coru\u00f1a",
+    "school": "University of A Coruña",
     "homepage": "https://pdi.udc.es",
     "facultyCount": 120,
     "country": "ES",
@@ -6975,12 +7085,20 @@
     "facultyCount": 119,
     "country": "GB",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.qub.ac.uk/sites/QUBJobVacancies/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Reviewed the university vacancy portal and School of Electronics, Electrical Engineering and Computer Science work-with-us page. Verified current AI Engineer, Research Fellow in post-quantum cryptographic architectures, and FortranFuture Ecosystem Lead research roles; other EEECS listings included a power-converter research post, excluded as outside computing. Revisit official pages after the October deadlines.",
+    "checkedUrls": [
+      "https://www.qub.ac.uk/sites/QUBJobVacancies/",
+      "https://www.qub.ac.uk/sites/QUBJobVacancies/ResearchJobs/",
+      "https://www.qub.ac.uk/sites/QUBJobVacancies/ProfessionalSupportJobs/",
+      "https://www.qub.ac.uk/schools/eeecs/About/WorkWithUs/",
+      "https://hrwebapp.qub.ac.uk/tlive_webrecruitment/wrd/run/ETREC107GF.open?LANG=USA&VACANCY_ID=494426XS2K&WVID=6273090Lgx",
+      "https://hrwebapp.qub.ac.uk/tlive_webrecruitment/wrd/run/ETREC107GF.open?LANG=USA&VACANCY_ID=480186XqCu&WVID=6273090Lgx",
+      "https://hrwebapp.qub.ac.uk/tlive_webrecruitment/wrd/run/ETREC107GF.open?LANG=USA&VACANCY_ID=989877Xq4s&WVID=6273090Lgx"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -6991,12 +7109,15 @@
     "facultyCount": 118,
     "country": "CN",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://ict.cas.cn/rczp/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Reviewed the Institute of Computing Technology recruitment index and current 2026 annual recruitment notice. The notice covers assistant researcher/special research assistant and engineer roles in computer science, systems, networks, big data, AI, and related fields; it directs applicants to the institute recruitment portal and states that the recruitment website remains open year-round. Revisit the portal for specific openings and status.",
+    "checkedUrls": [
+      "https://ict.cas.cn/rczp/",
+      "https://www.ict.cas.cn/rczp/202510/t20251015_7989499.html"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -7007,15 +7128,52 @@
     "facultyCount": 117,
     "country": "SG",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.comp.nus.edu.sg/cs/recruitment/tenure-track/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-13T22:24:22Z",
+    "outcome": "leads_found",
+    "summary": "Rechecked NUS Computer Science and related department/lab hiring pages. Batch 44 records seven distinct calls: two quantum-and-AI postdoc positions in one ad, Statistics & Data Science faculty and visiting-fellow calls, NUS-NCS quantum-safe security research staff, and three faculty-lab research openings in formal methods, NLP, Green AI, and IoT edge computing. Some are rolling lab-level invitations without a stated close date; confirm with the host. Earlier CS tenure-track and educator-track calls were already captured in batch 01 and are not duplicated here. Other NUS units remain unchecked.",
+    "checkedUrls": [
+      "https://www.comp.nus.edu.sg/cs/recruitment/tenure-track/",
+      "https://academicjobsonline.org/ajo/jobs/32512",
+      "https://yuxuanzhang1995.github.io/news/",
+      "https://www.comp.nus.edu.sg/cs/recruitment/",
+      "https://www.comp.nus.edu.sg/cs/recruitment/research/",
+      "https://careers.nus.edu.sg/NUS/search/?createNewAlert=false&locationsearch=&optionsFacetsDD_customfield2=Research+Staff&optionsFacetsDD_facility=Department+of+Computer+Science&optionsFacetsDD_shifttype=School+of+Computing&q=",
+      "https://www.stat.nus.edu.sg/jobs/",
+      "https://nus-ncs.nus.edu.sg/positionsavailable/",
+      "https://www.comp.nus.edu.sg/~umathur/",
+      "https://www.comp.nus.edu.sg/~nght/",
+      "https://ecolab.comp.nus.edu.sg/"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Statistics & Data Science jobs",
+        "url": "https://www.stat.nus.edu.sg/jobs/"
+      },
+      {
+        "name": "NUS-NCS Joint Laboratory for Cyber Security",
+        "url": "https://nus-ncs.nus.edu.sg/positionsavailable/"
+      },
+      {
+        "name": "Computer Science research staff page",
+        "url": "https://www.comp.nus.edu.sg/cs/recruitment/research/"
+      },
+      {
+        "name": "ECO Lab opportunities",
+        "url": "https://ecolab.comp.nus.edu.sg/"
+      },
+      {
+        "name": "FOCS Lab opportunities",
+        "url": "https://www.comp.nus.edu.sg/~umathur/"
+      },
+      {
+        "name": "Hwee Tou Ng NLP lab opportunities",
+        "url": "https://www.comp.nus.edu.sg/~nght/"
+      }
+    ],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-16"
   },
   {
     "school": "University of Glasgow",
@@ -7039,15 +7197,22 @@
     "facultyCount": 116,
     "country": "DK",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.dtu.dk/english/about/job-and-career/vacant-positions",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "incomplete",
+    "summary": "Reviewed DTU’s official careers portal and DTU Compute postings. Current CS/AI-relevant openings include postdocs in cybersecurity and cyber-deception (Nov 20), LLM/agentic AI for pathogen analysis (Oct 21), software systems integration for datacenter fleets (Oct 31), and a DTU Compute statistics professorship (Nov 1).",
+    "checkedUrls": [
+      "https://www.dtu.dk/english/about/job-and-career/vacant-positions",
+      "https://www.compute.dtu.dk/about-us",
+      "https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001/job/8336",
+      "https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001/job/8318/",
+      "https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001/job/8372",
+      "https://euraxess.ec.europa.eu/jobs/461998"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "University of Oxford",
@@ -7135,12 +7300,20 @@
     "facultyCount": 104,
     "country": "CN",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://hr.fudan.edu.cn/_t261/main.htm",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Reviewed official Fudan HR recruitment and postdoc listings. Verified current full-time postdoc calls in embodied intelligence and cross-media/medical AI (both long-term), plus engineer and senior engineer roles in generative AI/brain-computer interaction (deadline 2026-10-20). Only the main HR and postdoctoral listings and selected postings were reviewed; revisit for new openings.",
+    "checkedUrls": [
+      "https://hr.fudan.edu.cn/_t261/main.htm",
+      "https://hr.fudan.edu.cn/zrgw/list.htm",
+      "https://hr.fudan.edu.cn/4834/list.htm",
+      "https://hr.fudan.edu.cn/13/a6/c44442a791462/page.htm",
+      "https://hr.fudan.edu.cn/13/a5/c44442a791461/page.htm",
+      "https://hr.fudan.edu.cn/1c/71/c4947a793713/page.htm",
+      "https://hr.fudan.edu.cn/_t261/02/93/c4841a787091/page.htm"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -7151,15 +7324,33 @@
     "facultyCount": 104,
     "country": "AE",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://careers.mbzuai.ac.ae/vacancies/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
-    "deferredUntil": null
+    "lastCheckedAt": "2026-10-13T21:30:00Z",
+    "outcome": "leads_found",
+    "summary": "Official career catalogue lists 11 open roles in Computing and Mathematical Sciences, including faculty, robotics, HCI, postdoctoral AI/weather forecasting and statistics/ML, and research engineer positions. Ten CS/computing-related roles recorded in candidate batch 35; recheck each linked vacancy before issue creation. One NLP research scientist listing is located in California and excluded from international count.",
+    "checkedUrls": [
+      "https://careers.mbzuai.ac.ae/vacancies/",
+      "https://careers.mbzuai.ac.ae/faculty/?faculty=computing",
+      "https://apply.interfolio.com/195184",
+      "https://apply.interfolio.com/195110",
+      "https://apply.interfolio.com/195109",
+      "https://apply.interfolio.com/192905",
+      "https://apply.interfolio.com/193079",
+      "https://apply.interfolio.com/193660",
+      "https://apply.interfolio.com/193659",
+      "https://apply.interfolio.com/193663",
+      "https://apply.interfolio.com/193662",
+      "https://jobs.lever.co/ifm-us/1b258c12-5942-4487-9c92-fd4d18e40c6a"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Institute of Foundation Models",
+        "url": "https://careers.mbzuai.ac.ae/careers/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-13T21:30:00Z",
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "University of Southampton",
@@ -7167,14 +7358,31 @@
     "facultyCount": 104,
     "country": "GB",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://jobs.soton.ac.uk/vacancies.aspx?cat=-1&post=1",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-13T21:40:00Z",
+    "outcome": "leads_found",
+    "summary": "Current official careers listings and detail pages reviewed. Four computing/AI/robotics-related roles remain open: Responsible AI Translation (deadline Oct 14), Machine Learning Engineer—Ship Design & Hydrodynamics (Nov 16), Teaching Fellow—Robotics (Oct 22), and Horizon Europe FAST research fellow (Nov 4). A separate Event-Triggered Cloud Computing post closed Oct 12 and was excluded.",
+    "checkedUrls": [
+      "https://jobs.soton.ac.uk/vacancies.aspx?cat=-1&post=1",
+      "https://jobs.soton.ac.uk/vacancies.aspx?cat=150",
+      "https://jobs.soton.ac.uk/Vacancy.aspx?ref=3447026A3-R",
+      "https://jobs.soton.ac.uk/Vacancy.aspx?ref=3514626DA",
+      "https://jobs.soton.ac.uk/Vacancy.aspx?ref=3463326DA-R",
+      "https://jobs.soton.ac.uk/Vacancy.aspx?ref=3521426FP",
+      "https://jobs.soton.ac.uk/Vacancy.aspx?ref=3505326FP"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Electronics and Computer Science",
+        "url": "https://www.ecs.soton.ac.uk/workinghere"
+      },
+      {
+        "name": "School of Engineering",
+        "url": "https://www.southampton.ac.uk/engineering"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-13T21:40:00Z",
     "deferredUntil": null
   },
   {
@@ -7183,12 +7391,17 @@
     "facultyCount": 101,
     "country": "CH",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.epfl.ch/about/working/fr/faculty-positions-in-computer-communication-sciences-2/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "International research pass: verified official all-fields Computer & Communication Sciences faculty search and focused Security & Privacy search; both have 2026-11-01 deadlines. Other university units not reviewed.",
+    "checkedUrls": [
+      "https://www.epfl.ch/about/working/fr/faculty-positions-in-computer-communication-sciences-2/",
+      "https://facultyrecruiting.epfl.ch/position/65863683",
+      "https://www.epfl.ch/about/working/fr/faculty-positions-in-computer-communication-sciences-security-and-privacy-2/",
+      "https://facultyrecruiting.epfl.ch/position/65863684"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -7231,15 +7444,20 @@
     "facultyCount": 99,
     "country": "DK",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://en.itu.dk/About-ITU/Vacancies",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "incomplete",
+    "summary": "Official vacancies board reviewed. Current computing-related roles include a teaching assistant professorship supporting robotics prototyping in the REAL Lab (deadline 2026-10-26) and a computational social science postdoc using multimodal LLMs (deadline 2026-10-30). The board also links to ITU PhD vacancies, which are posted as available; no current open CS PhD found in this check.",
+    "checkedUrls": [
+      "https://en.itu.dk/About-ITU/Vacancies",
+      "https://candidate.hr-manager.net/ApplicationInit.aspx?DepartmentId=3439&MediaId=5&ProjectId=181915&cid=119",
+      "https://candidate.hr-manager.net/ApplicationInit.aspx?DepartmentId=3439&MediaId=5&ProjectId=181914&cid=119",
+      "https://en.itu.dk/Research/PhD-Programme/PhD-Positions"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "University of British Columbia",
@@ -7249,12 +7467,24 @@
     "region": "northamerica",
     "jobsUrl": "https://www.cs.ubc.ca/our-department/employment/faculty-positions",
     "state": null,
-    "lastCheckedAt": "2026-10-13T14:50:00Z",
-    "outcome": "complete",
-    "summary": "Verified tenure-track Assistant Professor of Teaching in Systems position via official UBC CS employment page and AJO.",
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "leads_found",
+    "summary": "Rechecked the CS jobs and faculty pages. The Assistant Professor of Teaching in Systems (tenure track) role is active, closing 2026-10-14. ECE computing-systems search remains separately recorded; broader UBC units are not fully reviewed.",
+    "checkedUrls": [
+      "https://www.cs.ubc.ca/our-department/employment/faculty-positions",
+      "https://ece.ubc.ca/about/openings/faculty-positions/",
+      "https://apply.ece.ubc.ca/",
+      "https://www.cs.ubc.ca/our-department/employment",
+      "https://www.cs.ubc.ca/jobs-careers/department-jobs",
+      "https://ubc.wd10.myworkdayjobs.com/en-US/ubcfacultyjobs/job/UBC-Vancouver-Campus---Vancouver-BC-Canada/Assistant-Professor-of-Teaching-in-Systems---Tenure-Track_JR25985"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Department of Electrical and Computer Engineering (ECE)",
+        "url": "https://ece.ubc.ca/about/openings/faculty-positions/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-13T00:00:00Z",
     "deferredUntil": null
   },
   {
@@ -7263,12 +7493,20 @@
     "facultyCount": 97,
     "country": "AU",
     "region": "australasia",
-    "jobsUrl": null,
+    "jobsUrl": "https://usyd.wd105.myworkdayjobs.com/en-GB/USYD_EXTERNAL_CAREER_SITE",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "leads_found",
+    "summary": "Rechecked the central Workday portal and School of Computer Science. The current Faculty of Engineering continuing academic campaign covering Computer Science and ECE is active through 2026-11-30 and is already captured in Batch 1. The Magma software research role (up to two, three-year positions) in Mathematics and Statistics is active through 2026-10-20 and is already captured in Batch 1. No additional active School of CS posting found in this pass; wider units remain incomplete.",
+    "checkedUrls": [
+      "https://usyd.wd105.myworkdayjobs.com/en-GB/USYD_EXTERNAL_CAREER_SITE/job/Multiple-Continuing--Tenure-Track--Academic-Positions---Faculty-of-Engineering--The-University-of-Sydney_0157992-1",
+      "https://usyd.wd105.myworkdayjobs.com/en-GB/USYD_EXTERNAL_CAREER_SITE/job/Camperdown-Campus/Magma-Research-Associate---Magma-Research-Fellow_0156699-1",
+      "https://usyd.wd105.myworkdayjobs.com/en-US/USYD_EXTERNAL_CAREER_SITE/job/Darlington-Campus/Postdoctoral-Research-Associate-Security-Applications-for-Data-Provenance_0152566-2",
+      "https://usyd.wd105.myworkdayjobs.com/en-GB/USYD_EXTERNAL_CAREER_SITE",
+      "https://usyd.wd105.myworkdayjobs.com/en-GB/USYD_EXTERNAL_CAREER_SITE/job/Associate-Professor-in-Computer-Science--Education-Focused-_0152330-2",
+      "https://usyd.wd105.myworkdayjobs.com/en-GB/USYD_EXTERNAL_CAREER_SITE/job/Postdoctoral-Research-Associate-in-Theoretical-Computer-Science-and-Algorithms_0148764-1",
+      "https://usyd.wd105.myworkdayjobs.com/en-US/USYD_EXTERNAL_CAREER_SITE/job/Postdoctoral-Research-Associate_0151255-1"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -7279,15 +7517,30 @@
     "facultyCount": 96,
     "country": "SE",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.kth.se/lediga-jobb/?l=en",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "incomplete",
+    "summary": "Reviewed KTH’s official vacancy board and 13 open CS/AI/robotics/security roles with deadlines Oct 14–Nov 5, 2026. See this batch draft for individual postings and URLs.",
+    "checkedUrls": [
+      "https://www.kth.se/lediga-jobb/?l=en",
+      "https://www.kth.se/lediga-jobb/972249?l=en",
+      "https://www.kth.se/lediga-jobb/970594?l=en",
+      "https://www.kth.se/lediga-jobb/963604?l=en",
+      "https://www.kth.se/lediga-jobb/976498?l=en",
+      "https://www.kth.se/lediga-jobb/977407?l=en",
+      "https://www.kth.se/lediga-jobb/972326?l=en",
+      "https://www.kth.se/lediga-jobb/971218?l=en",
+      "https://www.kth.se/lediga-jobb/973983?l=en",
+      "https://www.kth.se/lediga-jobb/967857?l=en",
+      "https://www.kth.se/lediga-jobb/939588?l=en",
+      "https://www.kth.se/lediga-jobb/970256?l=en",
+      "https://www.kth.se/lediga-jobb/972456?l=en",
+      "https://www.kth.se/lediga-jobb/974287?l=en"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "Sapienza University of Rome",
@@ -7311,15 +7564,30 @@
     "facultyCount": 95,
     "country": "CN",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://cse.seu.edu.cn/rczp/list.htm",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "incomplete",
+    "summary": "The School of Computer Science, Software Engineering, and Artificial Intelligence has an ongoing official faculty/research hiring call. Two lab pages also list current postdoctoral recruitment; one lists a research associate position. Cybersecurity school recruitment and university HR were not fully reviewed.",
+    "checkedUrls": [
+      "https://cse.seu.edu.cn/rczp/list.htm",
+      "https://cs.seu.edu.cn/csen/67394/list.htm",
+      "https://cse.seu.edu.cn/2025/0225/c48203a519385/page9.htm",
+      "https://cse.seu.edu.cn/2025/1216/c48203a548651/page9.htm",
+      "https://rsc.seu.edu.cn/rsc_en/22211/list.htm"
+    ],
+    "relatedUnits": [
+      {
+        "name": "School of Cyber Science and Engineering",
+        "url": "https://cyber.seu.edu.cn/wa_en/21605/list.htm"
+      },
+      {
+        "name": "School of Computer Science and Engineering / College of Software Engineering / School of Artificial Intelligence",
+        "url": "https://cs.seu.edu.cn/csen/67394/list.htm"
+      }
+    ],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-10-14"
   },
   {
     "school": "University of Alberta",
@@ -7327,15 +7595,19 @@
     "facultyCount": 95,
     "country": "CA",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.gsa.ualberta.ca/en/computing-science/about-the-department/career-opportunities.html",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "incomplete",
+    "summary": "Reviewed the department career page and its live Amii-linked opportunity. It lists a Postdoctoral Fellow in Multimodal Models and Machine Learning; the official application portal is live but did not expose readable details to this review. The page also has an Open Faculty Positions heading with no active listing shown. Recheck the portal before import.",
+    "checkedUrls": [
+      "https://www.gsa.ualberta.ca/en/computing-science/about-the-department/career-opportunities.html",
+      "https://www.amii.ca/about/career-opportunities",
+      "https://iaejup.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/UOA-Careers/job/3754"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "BUPT",
@@ -7359,13 +7631,33 @@
     "facultyCount": 94,
     "country": "NL",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://utwentecareers.nl/en/vacancies/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "complete",
+    "summary": "Reviewed the official academic vacancy board and the EEMCS faculty feed on 2026-10-13. Three active CS-relevant roles were listed: DeepFake detection PhD, Assistant Professor in Pervasive Systems, and rolling IC Design PhD. Recheck the board after current deadlines.",
+    "checkedUrls": [
+      "https://utwentecareers.nl/en/vacancies/",
+      "https://utwentecareers.nl/en/vacancies/2633/phd-position-on-explainable-deepfake-detection-using-foundation-models/",
+      "https://utwentecareers.nl/en/vacancies/2622/assistant-professor-in-pervasive-systems-sensing-systems-data-analytics/",
+      "https://utwentecareers.nl/en/vacancies/873/phd-position-in-ic-design-group/",
+      "https://www.utwente.nl/en/eemcs/energy/open_positions/",
+      "https://www.utwente.nl/en/eemcs/caes/vacancies/"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Design and Analysis of Communication Systems (DACS)",
+        "url": "https://www.utwente.nl/en/eemcs/dacs/vacancies/"
+      },
+      {
+        "name": "Computer Architecture for Embedded Systems (CAES)",
+        "url": "https://www.utwente.nl/en/eemcs/caes/vacancies/"
+      },
+      {
+        "name": "Energy group",
+        "url": "https://www.utwente.nl/en/eemcs/energy/open_positions/"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null
   },
@@ -7375,15 +7667,19 @@
     "facultyCount": 93,
     "country": "GB",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.jobs.manchester.ac.uk/Home/Job",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "incomplete",
+    "summary": "Reviewed the official university job portal and current Computer Science postings. Two active roles were verified: Research Associate in Ethereum (deadline 2026-10-15) and ICNS Research Associate in Neuromorphic Vision Systems (deadline 2026-10-20).",
+    "checkedUrls": [
+      "https://www.jobs.manchester.ac.uk/Home/Job",
+      "https://www.jobs.manchester.ac.uk/Job/JobDetail?JobId=45983",
+      "https://www.jobs.manchester.ac.uk/Job/JobDetail?JobId=46153"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "Ecole Normale Superieure de Lyon",
@@ -7403,16 +7699,19 @@
   },
   {
     "school": "National Chiao Tung University",
-    "homepage": "https://www.cs.nctu.edu.tw",
+    "homepage": "https://www.cs.nycu.edu.tw/",
     "facultyCount": 91,
     "country": "TW",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.cs.nycu.edu.tw/open-positions-announcement?locale=en",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "complete",
+    "summary": "The department is now part of National Yang Ming Chiao Tung University (NYCU). Its official open-positions page advertises tenure-track faculty at all ranks and CS areas with rolling review; the official department page records this merger and should be revisited during the next appointment cycle.",
+    "checkedUrls": [
+      "https://www.cs.nycu.edu.tw/open-positions-announcement?locale=en",
+      "https://www.cs.nycu.edu.tw/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -7439,12 +7738,15 @@
     "facultyCount": 91,
     "country": "GB",
     "region": "europe",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://www.bristol.ac.uk/jobs/find/",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-14T00:45:00Z",
+    "outcome": "complete",
+    "summary": "Checked the official job portal and current CS posting. Senior Lecturer in Industrial Computer Science (ACAD108487) closes 2026-11-01. The previous checked URL was an older role; updated the record to the current vacancy.",
+    "checkedUrls": [
+      "https://www.bristol.ac.uk/jobs/find/",
+      "https://www.bristol.ac.uk/jobs/find/details/?jobId=391684"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -7455,15 +7757,24 @@
     "facultyCount": 91,
     "country": "SE",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.uu.se/en/about-uu/join-us/jobs-and-vacancies",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "incomplete",
+    "summary": "Reviewed the official vacancies index and Department of Information Technology listings. Verified six current CS/AI-related openings: cybersecurity assistant professor; postdocs in foundation/world models, simulation-based inference, and program verification; and PhD positions in machine learning/uncertainty quantification and quantum program verification. Deadlines range 2026-10-15 through 2026-12-04.",
+    "checkedUrls": [
+      "https://www.uu.se/en/about-uu/join-us/jobs-and-vacancies",
+      "https://www.uu.se/en/about-uu/join-us/jobs-and-vacancies/job-details?query=971105",
+      "https://www.uu.se/en/about-uu/join-us/jobs-and-vacancies/job-details?query=970449",
+      "https://www.uu.se/en/about-uu/join-us/jobs-and-vacancies/job-details?query=972267",
+      "https://www.uu.se/en/about-uu/join-us/jobs-and-vacancies/job-details?query=961891",
+      "https://www.uu.se/en/about-uu/join-us/jobs-and-vacancies/job-details?query=969552",
+      "https://uu.varbi.com/en/pl?o=1&os=1&s=1&ss=2",
+      "https://uu.varbi.com/en/what%3A/jobID%3A239509/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "Concordia University",
@@ -7487,15 +7798,20 @@
     "facultyCount": 89,
     "country": "CN",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://ccst.jlu.edu.cn/info/1229/21177.htm",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "incomplete",
+    "summary": "The CS school posted a project-funded postdoctoral opening in AI, computational education, and HCI, open until filled. Jilin’s university-wide 2026 faculty campaign remains effective until the next annual notice, but the recruitment portal did not expose CS unit vacancies in this review.",
+    "checkedUrls": [
+      "https://ccst.jlu.edu.cn/info/1229/21177.htm",
+      "https://ccst.jlu.edu.cn/English/Recruitment.htm",
+      "https://www.jlu.edu.cn/info/1095/57563.m.htm",
+      "https://zprcb.jlu.edu.cn/talent-sys/public/home"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-10-14"
   },
   {
     "school": "Beihang University",
@@ -7503,12 +7819,15 @@
     "facultyCount": 88,
     "country": "CN",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://scse.buaa.edu.cn/info/1099/12374.htm",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "complete",
+    "summary": "The Computer Science School has a current year-round call for 5–10 Excellent Hundred Talents postdocs plus research postdocs recruited to meet PI/group needs. Applicants are directed to contact a prospective supervisor and submit materials through the school; recheck the call as positions fill.",
+    "checkedUrls": [
+      "https://scse.buaa.edu.cn/info/1099/12374.htm",
+      "https://scse.buaa.edu.cn/xwgg/gggs.htm"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -7535,12 +7854,18 @@
     "facultyCount": 88,
     "country": "JP",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.i.u-tokyo.ac.jp/recruit.shtml",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "complete",
+    "summary": "The Graduate School of Information Science and Technology recruitment page lists two current CS-relevant roles: one Assistant Professor in Computer Science (programming-language theory, deadline 2026-10-31) and one specially appointed Associate Professor/Lecturer/Assistant Professor for a generative-AI risk evaluation framework (deadline 2026-11-16). Recheck the department page after these deadlines.",
+    "checkedUrls": [
+      "https://www.i.u-tokyo.ac.jp/recruit.shtml",
+      "https://www.i.u-tokyo.ac.jp/news/files/Jori_002_CS_20260917_re.pdf",
+      "https://www.i.u-tokyo.ac.jp/news/files/Jori_003_CS_202620261007_JPN_2.pdf",
+      "https://www.u-tokyo.ac.jp/focus/en/jobs/index.php?focus=-2&kubun=Faculty+and+Research+Positions&order_by=-2",
+      "https://www.i.u-tokyo.ac.jp/edu/stud/data.shtml"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -7599,13 +7924,29 @@
     "facultyCount": 83,
     "country": "GB",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.kcl.ac.uk/jobs",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "incomplete",
+    "summary": "Reviewed official KCL jobs search, Natural, Mathematical & Engineering Sciences listings, and relevant current postings. Found Research Assistant/Associate in Operations Research (CS PhD explicitly accepted; closes 2026-10-25) and Lecturer in Digital Health Sciences & AI (relevant discipline includes AI; closes 2026-11-10). Informatics HCI post closed 2026-10-07; further units and listings need another pass.",
+    "checkedUrls": [
+      "https://www.kcl.ac.uk/jobs",
+      "https://www.kcl.ac.uk/jobs/search?sort=openDate",
+      "https://www.kcl.ac.uk/jobs/nmes-jobs?pageindex=0",
+      "https://www.kcl.ac.uk/jobs/160045-research-assistant-associate-in-operations-research",
+      "https://www.kcl.ac.uk/jobs/160405-lecturer-in-digital-health-sciences-and-ai",
+      "https://www.kcl.ac.uk/jobs/158027-postdoctoral-researcher-in-human-computer-interaction"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Department of Engineering",
+        "url": "https://www.kcl.ac.uk/engineering"
+      },
+      {
+        "name": "Department of AI and Personalised Health",
+        "url": "https://www.kcl.ac.uk/jobs/160405-lecturer-in-digital-health-sciences-and-ai"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null
   },
@@ -7615,13 +7956,30 @@
     "facultyCount": 83,
     "country": "ES",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://talenthub.upc.edu/en/jobs",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-13",
+    "outcome": "incomplete",
+    "summary": "Reviewed official UPC staff careers portal, Talent Hub R1/R2/R3 listings, and PDI competition updates. Found a current postdoctoral research role in Telematics Engineering on vehicular networks, electric-vehicle services, and machine learning (applications 2026-10-13 to 2026-10-19). Other post details and full PDI/adjacent-unit vacancies need another pass; recheck in November.",
+    "checkedUrls": [
+      "https://portal.personal.upc.edu/en/concursos",
+      "https://talenthub.upc.edu/en/jobs",
+      "https://talenthub.upc.edu/en/jobs/r1/r1-jobs",
+      "https://talenthub.upc.edu/en/jobs/r2/r2-jobs",
+      "https://talenthub.upc.edu/en/jobs/r3/r3-jobs",
+      "https://treballa.upc.edu/ca/convocatories-de-concursos/novetats-concursos-pdi",
+      "https://talenthub.upc.edu/en/jobs/r2/r2-jobs/investigador-a-per-desenvolupar-xarxes-vehiculars-i-serveis-de-vehicle-electric-mitjancant-tecniques-daprenentatge-automatic-codi-30267440022/investigador-a-per-desenvolupar-xarxes-vehiculars-i-serveis-de-vehicle-electric-mitjancant-tecniques-daprenentatge-automatic-codi-30267440022"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Department of Computer Architecture",
+        "url": "https://talenthub.upc.edu/en/jobs/r1/r1-jobs"
+      },
+      {
+        "name": "Department of Telematics Engineering",
+        "url": "https://talenthub.upc.edu/en/jobs/r2/r2-jobs"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null
   },
@@ -7727,12 +8085,15 @@
     "facultyCount": 79,
     "country": "HK",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://jobs1.cityu.edu.hk/apply/default.aspx",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "International research pass: official e-recruitment index listed an open-ended Professor / Associate Professor / Assistant Professor opening in Computer Science; linked details page blocked (403), so scope and dates remain unverified.",
+    "checkedUrls": [
+      "https://jobs1.cityu.edu.hk/apply/default.aspx",
+      "https://www.cityu.edu.hk/hro/en/job/current/academic.asp?ref=uac-r31025"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -8159,14 +8520,16 @@
     "facultyCount": 69,
     "country": "HK",
     "region": "asia",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://careers.pageuppeople.com/932/cw/en/job/537433/tenuretrack-professor-associate-professor-assistant-professor-several-posts-in-the-school-of-computing-and-data-science",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-13T23:30:00Z",
+    "outcome": "leads_found",
+    "summary": "Current School of Computing and Data Science faculty call, advertised 2026-09-29: several tenure-track posts across CS/AI/data science, rolling review through 2027-05-31 or until filled.",
+    "checkedUrls": [
+      "https://careers.pageuppeople.com/932/cw/en/job/537433/tenuretrack-professor-associate-professor-assistant-professor-several-posts-in-the-school-of-computing-and-data-science"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-13T23:30:00Z",
     "deferredUntil": null
   },
   {
@@ -8239,12 +8602,14 @@
     "facultyCount": 68,
     "country": "GB",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://qmul-jobs.tal.net/vx/lang-en-GB/mobile-0/appcentre-1/brand-4/xf-ef034c57b0be/candidate/so/pm/1/pl/3/opp/11456-2-x-Lecturer-in-Electronic-Engineering-or-Computer-Science-Teaching-Scholarship/en-GB",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "International research pass: verified the official two-post Lecturer in Electronic Engineering or Computer Science call; deadline 2026-10-22. Wider department and university hiring pages not reviewed.",
+    "checkedUrls": [
+      "https://qmul-jobs.tal.net/vx/lang-en-GB/mobile-0/appcentre-1/brand-4/xf-ef034c57b0be/candidate/so/pm/1/pl/3/opp/11456-2-x-Lecturer-in-Electronic-Engineering-or-Computer-Science-Teaching-Scholarship/en-GB"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -9290,7 +9655,7 @@
     "deferredUntil": null
   },
   {
-    "school": "University of T\u00fcbingen",
+    "school": "University of Tübingen",
     "homepage": "https://uni-tuebingen.de/en/faculties/faculty-of-science/departments/computer-science/department/",
     "facultyCount": 52,
     "country": "DE",
@@ -9386,7 +9751,7 @@
     "deferredUntil": null
   },
   {
-    "school": "University of L\u00fcbeck",
+    "school": "University of Lübeck",
     "homepage": "https://www.imis.uni-luebeck.de",
     "facultyCount": 50,
     "country": "DE",
@@ -9663,12 +10028,14 @@
     "facultyCount": 45,
     "country": "HK",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.polyu.edu.hk/hro/careers/globalsearch/fcms/?sc_lang=en",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "International research pass: verified the official global faculty search inviting applications for computing, data science and AI areas; no closing date shown. Department-specific and other university hiring pages not reviewed.",
+    "checkedUrls": [
+      "https://www.polyu.edu.hk/hro/careers/globalsearch/fcms/?sc_lang=en"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -9786,7 +10153,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Bo\u011fazi\u00e7i University",
+    "school": "Boğaziçi University",
     "homepage": "https://www.cmpe.boun.edu.tr",
     "facultyCount": 43,
     "country": "TR",
@@ -10026,7 +10393,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Universit\u00e9 du Qu\u00e9bec \u00e0 Montr\u00e9al",
+    "school": "Université du Québec à Montréal",
     "homepage": "https://professeurs.uqam.ca",
     "facultyCount": 41,
     "country": "CA",
@@ -10474,7 +10841,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Queen\u2019s University",
+    "school": "Queen’s University",
     "homepage": "https://www.cs.queensu.ca",
     "facultyCount": 36,
     "country": "CA",
@@ -10490,7 +10857,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Universit\u00e9 Jean Monnet",
+    "school": "Université Jean Monnet",
     "homepage": "https://perso.univ-st-etienne.fr",
     "facultyCount": 36,
     "country": "FR",
@@ -10506,7 +10873,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Universit\u00e9 Paris Dauphine",
+    "school": "Université Paris Dauphine",
     "homepage": "https://www.lamsade.dauphine.fr",
     "facultyCount": 36,
     "country": "FR",
@@ -10586,7 +10953,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Universit\u00e0 della Svizzera italiana",
+    "school": "Università della Svizzera italiana",
     "homepage": "https://search.usi.ch",
     "facultyCount": 35,
     "country": "CH",
@@ -10698,7 +11065,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Y\u0131ld\u0131z Technical University",
+    "school": "Yıldız Technical University",
     "homepage": "https://www.ce.yildiz.edu.tr",
     "facultyCount": 34,
     "country": "TR",
@@ -10762,7 +11129,7 @@
     "deferredUntil": null
   },
   {
-    "school": "University of Erlangen\u2013Nuremberg",
+    "school": "University of Erlangen–Nuremberg",
     "homepage": "https://lme.tf.fau.de",
     "facultyCount": 33,
     "country": "DE",
@@ -10970,7 +11337,7 @@
     "deferredUntil": null
   },
   {
-    "school": "University of W\u00fcrzburg",
+    "school": "University of Würzburg",
     "homepage": "https://www.informatik.uni-wuerzburg.de",
     "facultyCount": 31,
     "country": "DE",
@@ -11130,7 +11497,7 @@
     "deferredUntil": null
   },
   {
-    "school": "University of G\u00f6ttingen",
+    "school": "University of Göttingen",
     "homepage": "https://www.uni-goettingen.de/en/institute+of+computer+science/619480.html",
     "facultyCount": 29,
     "country": "DE",
@@ -11274,7 +11641,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Universidad Nacional de C\u00f3rdoba",
+    "school": "Universidad Nacional de Córdoba",
     "homepage": "https://cs.famaf.unc.edu.ar",
     "facultyCount": 28,
     "country": "AR",
@@ -11354,7 +11721,7 @@
     "deferredUntil": null
   },
   {
-    "school": "M\u00e4lardalen University",
+    "school": "Mälardalen University",
     "homepage": "https://www.es.mdh.se",
     "facultyCount": 27,
     "country": "SE",
@@ -11402,7 +11769,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Universit\u00e9 Laval",
+    "school": "Université Laval",
     "homepage": "https://www2.ift.ulaval.ca",
     "facultyCount": 27,
     "country": "CA",
@@ -11418,7 +11785,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Universit\u00e9 libre de Bruxelles",
+    "school": "Université libre de Bruxelles",
     "homepage": "https://www.ulb.ac.be",
     "facultyCount": 27,
     "country": "BE",
@@ -11647,12 +12014,20 @@
     "facultyCount": 25,
     "country": "FR",
     "region": "europe",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://recrutement.inria.fr/public/classic/fr/offres",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-13T22:34:00Z",
+    "outcome": "complete",
+    "summary": "Reviewed Inria’s official vacancies index and verified six current computing research roles. Four selected leads are in network AI, resource-efficient deep learning, human-robot interaction, and 5G broadcast ML; other live listings were screened for relevance. Revisit the index as late-October deadlines pass.",
+    "checkedUrls": [
+      "https://recrutement.inria.fr/public/classic/fr/offres",
+      "https://recrutement.inria.fr/public/classic/fr/offres/2026-10540",
+      "https://recrutement.inria.fr/public/classic/fr/offres/2026-10611",
+      "https://recrutement.inria.fr/public/classic/fr/offres/2026-10582",
+      "https://recrutement.inria.fr/public/classic/fr/offres/2026-10290",
+      "https://recrutement.inria.fr/public/classic/fr/offres/2026-10416",
+      "https://recrutement.inria.fr/public/classic/fr/offres/2026-09924"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -11722,7 +12097,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Universidade de Bras\u00edlia",
+    "school": "Universidade de Brasília",
     "homepage": "https://cic.unb.br",
     "facultyCount": 25,
     "country": "BR",
@@ -11738,7 +12113,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Universidade Federal de Vi\u00e7osa",
+    "school": "Universidade Federal de Viçosa",
     "homepage": "https://www2.dpi.ufv.br",
     "facultyCount": 25,
     "country": "BR",
@@ -11946,7 +12321,7 @@
     "deferredUntil": null
   },
   {
-    "school": "University of M\u00fcnster",
+    "school": "University of Münster",
     "homepage": "https://www.uni-muenster.de",
     "facultyCount": 23,
     "country": "DE",
@@ -12314,7 +12689,7 @@
     "deferredUntil": null
   },
   {
-    "school": "\u00d6zye\u011fin University",
+    "school": "Özyeğin University",
     "homepage": "https://cs.ozyegin.edu.tr/en",
     "facultyCount": 20,
     "country": "TR",
@@ -12458,7 +12833,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Universit\u00e9 de Sherbrooke",
+    "school": "Université de Sherbrooke",
     "homepage": "https://www.usherbrooke.ca",
     "facultyCount": 19,
     "country": "CA",
@@ -12570,7 +12945,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Ko\u00e7 University",
+    "school": "Koç University",
     "homepage": "https://mysite.ku.edu.tr",
     "facultyCount": 18,
     "country": "TR",
@@ -12618,7 +12993,7 @@
     "deferredUntil": null
   },
   {
-    "school": "TOBB ET\u00dc",
+    "school": "TOBB ETÜ",
     "homepage": "https://www.etu.edu.tr",
     "facultyCount": 18,
     "country": "TR",
@@ -13050,7 +13425,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Malm\u00f6 University",
+    "school": "Malmö University",
     "homepage": "https://mau.se",
     "facultyCount": 15,
     "country": "SE",
@@ -13418,7 +13793,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Sabanc\u0131 University",
+    "school": "Sabancı University",
     "homepage": "https://cs.sabanciuniv.edu/",
     "facultyCount": 13,
     "country": "TR",
@@ -13466,7 +13841,7 @@
     "deferredUntil": null
   },
   {
-    "school": "University of D\u00fcsseldorf",
+    "school": "University of Düsseldorf",
     "homepage": "https://www.cs.hhu.de",
     "facultyCount": 13,
     "country": "DE",
@@ -13658,7 +14033,7 @@
     "deferredUntil": null
   },
   {
-    "school": "University of Osnabr\u00fcck",
+    "school": "University of Osnabrück",
     "homepage": "https://www.informatik.uni-osnabrueck.de",
     "facultyCount": 11,
     "country": "DE",
@@ -14010,7 +14385,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Babe\u0219-Bolyai University",
+    "school": "Babeș-Bolyai University",
     "homepage": "https://www.cs.ubbcluj.ro",
     "facultyCount": 7,
     "country": "RO",
@@ -14666,7 +15041,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Istanbul University-Cerrahpa\u015fa",
+    "school": "Istanbul University-Cerrahpaşa",
     "homepage": "https://bilgisayarmuhendislik.iuc.edu.tr/en",
     "facultyCount": 0,
     "country": "TR",
@@ -14954,7 +15329,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Universit\u00e9 de Mons",
+    "school": "Université de Mons",
     "homepage": "https://web.umons.ac.be/fs-informatique/en/home/",
     "facultyCount": 0,
     "country": "BE",
@@ -14970,7 +15345,7 @@
     "deferredUntil": null
   },
   {
-    "school": "Universit\u00e9 Paris Cit\u00e9",
+    "school": "Université Paris Cité",
     "homepage": "https://math-info.u-paris.fr/en/homepage/",
     "facultyCount": 0,
     "country": "FR",

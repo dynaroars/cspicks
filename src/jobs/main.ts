@@ -1,5 +1,5 @@
 /**
- * US Jobs page controller: search, filters, state map, position/school views.
+ * Academic Jobs page controller: search, filters, US state map, position/school views.
  */
 import { CONTINENT_LABELS, DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, STATE_TILE_ROWS, TRACK_LABELS, US_STATES, VISA_FILTER_LABELS, continentCounts, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, resolveState, stateCounts } from './jobs-data.js';
 import { exportFileName, jobsToMarkdown, renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
@@ -56,10 +56,10 @@ function updateUrl(current: ReturnType<typeof state>) {
   });
   updateSearchUrl(next, current.query);
   updatePageMeta({
-    title: current.query ? `${current.query} - US Academic CS Jobs - ${SITE_NAME}` : `${SITE_NAME} - US Academic CS Jobs`,
+    title: current.query ? `${current.query} - Academic CS Jobs - ${SITE_NAME}` : `${SITE_NAME} - Academic CS Jobs`,
     description: current.query
-      ? `US academic computer science positions matching “${current.query}”.`
-      : 'Open US computer science faculty, teaching, research, and postdoc positions by school, area, and state.'
+      ? `Academic computer science positions matching “${current.query}” worldwide.`
+      : 'Open computer science faculty, teaching, research, and postdoc positions worldwide by school, area, country, and continent.'
   });
 }
 
@@ -222,8 +222,8 @@ function setupEvents() {
     }
     const area = target.closest<HTMLElement>('[data-search-area]');
     if (area) return setFilter('area', [area.dataset.searchArea!]);
-    const stateButton = target.closest<HTMLElement>('[data-state]');
-    if (stateButton) setFilter('loc', [stateButton.dataset.state!]);
+    const locationButton = target.closest<HTMLElement>('[data-location]');
+    if (locationButton) setFilter('loc', [locationButton.dataset.location!]);
   });
 
   renderSearchExamples(document.getElementById('jobs-examples')!, jobExamples());
