@@ -1,0 +1,186 @@
+/*
+ * Shared roars.dev UI baseline: design tokens, the search field, and the floating "+" button.
+ * VietProfs is the source of truth; cspicks vendors this file verbatim (src/vietprofs/, via npm run sync:vietprofs-ui there).
+ * Keep it free of site-specific selectors so both sites can use it unchanged.
+ */
+:root {
+  color-scheme: light dark;
+  --bg-color: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
+  --hover-bg: #f8fafc;
+  --accent: #0f172a;
+  --tag-bg: #f1f5f9;
+  --tag-text: #334155;
+  --focus-ring: #2563eb;
+  --favorite-color: #fbbf24;
+  --favorite-hover: #fcd34d;
+  --danger-color: #b42318;
+  --danger-hover: #8f1d14;
+  --bamboo-green: #2e9e64;
+  --bamboo-green-hover: #1d7a4c;
+  --accent-color: var(--bamboo-green);
+  --accent-dim: color-mix(in srgb, var(--bamboo-green) 55%, var(--card-bg));
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  --bg-surface: var(--card-bg);
+  --border-subtle: var(--border-color);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  --text-xs: 0.8rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-3xl: 2.25rem;
+
+  --star-inset: 0.65rem;
+  --star-gutter: 1.75rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #15181c;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --card-bg: #1c2126;
+    --border-color: #2d333b;
+    --hover-bg: #20262d;
+    --accent: #7dd3fc;
+    --tag-bg: #232a31;
+    --tag-text: #cbd5e1;
+    --focus-ring: #7dd3fc;
+    --danger-color: #ff6b6b;
+    --danger-hover: #ff9a9a;
+  }
+}
+
+.search-input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  padding: 0.6rem 0.25rem 0.6rem 0.9rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  outline: 0;
+}
+
+.search-input-shell {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+}
+
+.search-input-shell:focus-within {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.search-help-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+/* The button keeps a 44px tap target; only the inner circle is drawn inside the search field. */
+.search-help-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.search-help-btn:hover .search-help-icon,
+.search-help-btn[aria-expanded='true'] .search-help-icon {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+}
+
+.search-help-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: -4px;
+  border-radius: 50%;
+}
+
+/* Floating "+": the one primary action on a page, adding or updating an entry. */
+.add-fab {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--bamboo-green);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
+  transition: background-color 0.2s ease;
+}
+
+.add-fab:hover,
+.add-fab:focus-visible {
+  background: var(--bamboo-green-hover);
+}
+
+.add-fab:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.add-fab svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* Back-to-top stacks above the "+" button instead of covering it. */
+.add-fab ~ .back-to-top {
+  bottom: 6.25rem;
+  right: 2.375rem;
+}
+
+@media (max-width: 560px) {
+  .add-fab {
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .add-fab ~ .back-to-top {
+    bottom: 5.25rem;
+    right: 1.375rem;
+  }
+}

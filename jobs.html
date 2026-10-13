@@ -46,14 +46,12 @@
 
     <section class="search-section">
       <div class="search-intro">
-        <h2>Explore US academic computer science jobs</h2>
         <p>Faculty, teaching-track, research, and postdoc openings at US universities, with deadlines and each school's ranking.</p>
-        <p><a class="submission-link" href="jobs-submit.html">Add or update info</a></p>
       </div>
 
       <div class="search-container">
         <div class="universal-search">
-          <input type="search" id="jobs-search" placeholder="Loading jobs…" disabled autofocus autocomplete="off" aria-autocomplete="list" aria-controls="universal-suggestions" aria-expanded="false">
+          <div class="search-input-shell"><input type="search" class="search-input" id="jobs-search" placeholder="Loading jobs…" disabled autofocus autocomplete="off" aria-autocomplete="list" aria-controls="universal-suggestions" aria-expanded="false"></div>
           <div id="universal-suggestions" class="universal-suggestions" role="listbox" hidden></div>
         </div>
       </div>
@@ -65,12 +63,17 @@
 
       <div class="search-filters" role="search" aria-label="Filter jobs">
         <div class="filter-group">
+          <select id="continent-select" aria-label="Filter by continent">
+            <option value="world">🌐 World</option>
+          </select>
+        </div>
+        <div class="filter-group">
           <select id="sort-select" aria-label="Sort postings">
             <option value="deadline">Soonest Deadline</option>
             <option value="posted">Recently Posted</option>
             <option value="school">School Name</option>
-            <option value="rank">CSRankings: Top First</option>
-            <option value="rank-desc">CSRankings: Bottom First</option>
+            <option value="rank">Rank: Top First</option>
+            <option value="rank-desc">Rank: Bottom First</option>
           </select>
         </div>
         <div class="filter-group">
@@ -111,6 +114,7 @@
       </details>
     </main>
   </div>
+  <a class="add-fab" href="jobs-submit.html" aria-label="Add or update info" title="Add or update info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a>
   <script type="module" src="/src/jobs/main.js"></script>
 </body>
 </html>

@@ -118,7 +118,8 @@ export function createSuggestionBox({ input, listbox, getGroups, onSelect, empty
     if (option) choose(suggestions[Number(option.dataset.index)]);
   });
 
-  input.addEventListener('focus', () => render(input.value));
+  // Focus given on page load (focusSearchOnLoad) highlights the box without opening suggestions.
+  input.addEventListener('focus', () => { if (!input.dataset.quietFocus) render(input.value); });
   input.addEventListener('blur', () => window.setTimeout(close, 120));
   input.addEventListener('keydown', event => {
     if (event.key === 'ArrowDown') {

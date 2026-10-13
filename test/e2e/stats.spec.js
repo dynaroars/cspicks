@@ -102,11 +102,12 @@ test('stats page lists what CS Picks tracks and recent repository activity', asy
   expect(nsfRequested).toBe(false);
 
   const visitors = page.locator('#stats-traffic');
-  await expect(visitors.locator('.browser-metric-card')).toHaveCount(4);
+  await expect(visitors.locator('.browser-metric-card')).toHaveCount(2);
   await expect(visitors.locator('.browser-metric-card').first()).toContainText('12 today so far');
-  await expect(visitors.locator('.browser-metric-card').nth(2)).toContainText('excludes direct mobile Chrome');
+  await expect(visitors.locator('.browser-metric-card').nth(1)).toContainText('Countries reached');
   await expect(visitors).toContainText('Search');
-  await expect(visitors.locator('.privacy-note')).toContainText('browser beacons');
+  await expect(visitors.locator('.privacy-note')).toHaveCount(0);
+  await expect(visitors.locator('#refresh-stats-btn')).toBeVisible();
 });
 
 test('a failed source shows an error in its own section only', async ({ page }) => {
@@ -157,14 +158,14 @@ test('the stats icon navigates to the stats page', async ({ page }) => {
 });
 
 for (const [file, target] of [['csconfs.html', 'csconfs-submit.html'], ['grants.html', 'grants-submit.html'], ['jobs.html', 'jobs-submit.html']]) {
-  test(`${file} has one "Add or update info" button linking to its form`, async ({ page }) => {
+  test(`${file} has one floating "Add or update info" button linking to its form`, async ({ page }) => {
     await page.route('https://raw.githubusercontent.com/**', route => route.fulfill({ status: 404, body: '' }));
     await page.goto(file);
-    const button = page.locator('.search-intro .submission-link');
+    const button = page.locator('.add-fab');
     await expect(button).toHaveCount(1);
-    await expect(button).toHaveText('Add or update info');
+    await expect(button).toHaveAccessibleName('Add or update info');
     await expect(button).toHaveAttribute('href', target);
-    await expect(page.locator(`.search-intro a[href="${target}"]`)).toHaveCount(1);
-    expect(await button.evaluate(el => getComputedStyle(el).borderRadius)).toBe('999px');
+    await expect(page.locator(`a[href="${target}"]`)).toHaveCount(1);
+    expect(await button.evaluate(el => getComputedStyle(el).position)).toBe('fixed');
   });
 }

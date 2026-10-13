@@ -1,6 +1,6 @@
 /**
  * Shared visitor-traffic view for the /api/stats Worker (src/worker.ts), which serves every roars.dev site.
- * Used by VietProfs' stats page and copied verbatim into cspicks (src/traffic-view.ts): keep it free of
+ * Used by VietProfs' stats page and copied verbatim into cspicks (src/vietprofs/): keep it free of
  * site-specific imports and wording, and pass anything site-specific in through the render options.
  */
 
@@ -48,10 +48,11 @@ export function formatDate(value: string | null, withYear = true, withWeekday = 
   return new Intl.DateTimeFormat('en-US', { weekday: withWeekday ? 'short' : undefined, month: 'short', day: 'numeric', year: withYear ? 'numeric' : undefined, timeZone: 'UTC' }).format(date);
 }
 
+/** An exact moment, in the reader's own time zone. Daily rows stay in UTC because Cloudflare buckets them by UTC day. */
 export function formatTimestamp(value: string): string {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return 'Unknown time';
-  return `${new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'medium', timeZone: 'UTC' }).format(date)} UTC`;
+  return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }).format(date);
 }
 
 function days(count: number, noun = 'complete day'): string {
@@ -60,13 +61,9 @@ function days(count: number, noun = 'complete day'): string {
 
 export function renderMetrics(data: BrowserStatsResponse): string {
   const countries = data.countries.filter(country => country.pageViews > 0).length;
-  const week = days(data.last7Complete.days);
-  const today = data.today.collected ? ` · ${formatNumber(data.today.pageViews)} today so far` : '';
   const cards: Array<[label: string, value: string, detail: string]> = [
-    ['Average daily page views', formatNumber(data.last7Complete.avgPageViews), `${week}${today}`],
-    ['Browser page views', formatNumber(data.last7Complete.pageViews), week],
-    ['Browser visits', formatNumber(data.last7Complete.visits), `${week} · not unique people · excludes direct mobile Chrome`],
-    ['Countries reached', formatNumber(countries), week],
+    ['Average daily page views', formatNumber(data.last7Complete.avgPageViews), data.today.collected ? `${formatNumber(data.today.pageViews)} today so far` : ''],
+    ['Countries reached', formatNumber(countries), days(data.last7Complete.days)],
   ];
   return `<div class="browser-metric-grid">${cards.map(([label, value, detail]) => `<article class="browser-metric-card">
     <p class="browser-metric-label">${escapeHtml(label)}</p>

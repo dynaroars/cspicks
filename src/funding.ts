@@ -7,7 +7,7 @@ import { cleanName, escapeHtml, getInstitutionShortName } from './shared.js';
 import { rankSuggestions } from './suggestion-box.js';
 import { initTooltipPositioning } from './tooltip-position.js';
 import { matchesKeyword, parseKeywordQuery } from './search-keywords.js';
-import { createSearchControls, renderSearchExamples as renderExampleChips, updateSearchUrl } from './search-controls.js';
+import { createSearchControls, focusSearchOnLoad, renderSearchExamples as renderExampleChips, sample, updateSearchUrl } from './search-controls.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
 import { trackComparison, trackView } from './analytics.js';
 import type { FilterController } from './filters.js';
@@ -245,16 +245,16 @@ function rebuild() {
 
 function renderExamples() {
   const examples = byId('funding-examples');
-  // Two best-funded universities that have a short name, so the "A vs B" chip
-  // advertising head-to-head mode stays one line — as on Search.
-  const abbreviated = index.schools
+  // Random picks among the 25 best-funded, so the chips change on every load but always find awards.
+  // The "A vs B" chip uses schools with a short name so it stays one line, as on Search.
+  const abbreviated = sample(index.schools.slice(0, 25)
     .map(school => ({ label: getInstitutionShortName(school.name), query: school.name }))
-    .filter(entry => entry.label !== entry.query)
-    .slice(0, 2);
+    .filter(entry => entry.label !== entry.query), 2);
+  const program = sample(['CAREER', 'CNS', 'CCF', 'IIS', 'OAC', 'CRII'], 1)[0]!;
   renderExampleChips(examples, [
-    ...index.schools.slice(0, 1).map(record => ({ label: getInstitutionShortName(record.name), query: record.name })),
-    ...index.faculty.slice(0, 1).map(record => ({ label: cleanName(record.name), query: record.name })),
-    { label: 'program: CAREER', query: 'program: CAREER' },
+    ...sample(index.schools.slice(0, 25), 1).map(record => ({ label: getInstitutionShortName(record.name), query: record.name })),
+    ...sample(index.faculty.slice(0, 25), 1).map(record => ({ label: cleanName(record.name), query: record.name })),
+    { label: `program: ${program}`, query: `program: ${program}` },
     ...(abbreviated.length === 2 ? [{ label: `${abbreviated[0]!.label} vs ${abbreviated[1]!.label}`, query: `${abbreviated[0]!.query} vs ${abbreviated[1]!.query}` }] : [])
   ]);
 }
@@ -273,6 +273,7 @@ async function init() {
   renderExamples();
   render(input.value);
   setupSuggestions(input);
+  focusSearchOnLoad(input);
   // Clicking a card searches for that university or professor, the way
   // clicking a Search result opens that target.
   document.querySelector('.funding-results-container')?.addEventListener('click', event => {

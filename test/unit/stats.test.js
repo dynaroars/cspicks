@@ -69,7 +69,7 @@ test('visitor traffic folds today into the average card and escapes Worker-suppl
     categoryPeriod: { startDate: '2026-10-12', endDate: '2026-10-12', days: 1 },
     historicalTransition: { newSeriesStartedAt: '2026-10-12', oldSeriesRetainedInternally: true }
   });
-  assert.match(html, /Average daily page views[\s\S]*1 complete day · 5 today so far/);
+  assert.match(html, /Average daily page views[\s\S]*5 today so far/);
   assert.doesNotMatch(html, /Browser page views today/);
   assert.match(html, /Tue, Oct 13, 2026<\/strong> \(In progress\)/);
   assert.match(html, /&lt;b&gt;Other&lt;\/b&gt;/);

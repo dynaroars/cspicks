@@ -26,7 +26,7 @@ export async function checkSearchHelp(page, { path, inputId, panelId, example })
   await expect(panel).toBeHidden();
   await expect(button).toBeFocused();
   await button.click();
-  await page.locator('.search-intro h2').click();
+  await page.locator('.search-intro').click();
   await expect(panel).toBeHidden();
   await button.click();
   await panel.getByRole('button', { name: 'Close help' }).click();

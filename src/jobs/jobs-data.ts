@@ -34,7 +34,7 @@ export const LEVEL_LABELS: Record<JobLevel, string> = {
 export const VISA_LABELS: Record<VisaSponsorship, string> = {
   yes: 'Visa sponsorship available',
   'case-by-case': 'Visa sponsorship case by case',
-  no: 'No visa sponsorship',
+  no: 'Citizens or permanent residents only',
   'not-stated': 'Visa sponsorship not stated'
 };
 
@@ -42,7 +42,7 @@ export const VISA_LABELS: Record<VisaSponsorship, string> = {
 export const VISA_FILTER_LABELS: Record<VisaSponsorship | 'unknown', string> = {
   yes: 'Sponsorship available',
   'case-by-case': '⚖️ Sponsorship case by case',
-  no: '🚫 No sponsorship',
+  no: 'Citizens or permanent residents only',
   'not-stated': '❔ Not stated on posting',
   unknown: '⏳ Not checked yet'
 };
@@ -206,6 +206,8 @@ export interface JobFilters {
   area?: FilterChoice;
   state?: FilterChoice;
   country?: FilterChoice;
+  /** A `CONTINENT_LABELS` key; `world` or unset means everywhere. */
+  continent?: string;
   /** `VISA_FILTER_LABELS` keys. */
   visa?: FilterChoice;
   status?: StatusFilter;
@@ -292,6 +294,7 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
     if (areas.length && !job.anyArea && !areas.some(key => job.areas.includes(key))) return false;
     if (!ignoreState && states.length && !states.includes(job.state)) return false;
     if (countries.length && !countries.map(c => c.toUpperCase()).includes((job.country || 'US').toUpperCase())) return false;
+    if (filters.continent && filters.continent !== 'world' && jobContinent(job) !== filters.continent) return false;
     if (visas.length && !visas.includes(visaKey(job))) return false;
     if (keywords.visa && !matchesKeywordOptions(keywords.visa, value => (VISA_KEYWORD_VALUES[value] ?? []).includes(visaKey(job)))) return false;
     if (!matchesKeywordOptions(keywords.school, value => job.school.toLowerCase().includes(value))) return false;
@@ -317,6 +320,42 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
   }
   return results.sort((a, b) =>
     sortKey(a, sortBy, now) - sortKey(b, sortBy, now) || a.school.localeCompare(b.school) || a.title.localeCompare(b.title));
+}
+
+/** Continent choices for the location dropdown, labeled like VietProfs'. */
+export const CONTINENT_LABELS: Record<string, string> = {
+  'north-america': '🌎 North America',
+  'south-america': '🌎 South America',
+  europe: '🌍 Europe',
+  asia: '🌏 Asia',
+  australasia: '🌏 Australasia',
+  africa: '🌍 Africa'
+};
+
+// ISO 3166-1 alpha-2 codes, as in jobs.json; the Middle East counts as Asia, as on VietProfs.
+const CONTINENT_COUNTRIES: Record<string, string> = {
+  'north-america': 'US CA MX',
+  'south-america': 'BR AR CL CO PE UY',
+  europe: 'GB IE FR DE NL BE LU CH AT IT ES PT DK SE NO FI IS EE LV LT PL CZ SK HU RO BG GR CY MT SI HR RS TR RU UA',
+  asia: 'CN HK MO TW JP KR SG MY TH VN PH ID IN PK BD LK NP IL AE QA SA JO LB IR KW OM BH',
+  australasia: 'AU NZ',
+  africa: 'ZA EG MA NG KE TN GH ET'
+};
+const CONTINENT_BY_COUNTRY = new Map(Object.entries(CONTINENT_COUNTRIES)
+  .flatMap(([continent, codes]) => codes.split(' ').map(code => [code, continent] as const)));
+
+export function jobContinent(job: Job): string | undefined {
+  return CONTINENT_BY_COUNTRY.get((job.country || 'US').toUpperCase());
+}
+
+/** Postings per continent, most first; continents with none are left out. */
+export function continentCounts(jobs: Job[]): Array<[continent: string, count: number]> {
+  const counts = new Map<string, number>();
+  for (const job of jobs) {
+    const continent = jobContinent(job);
+    if (continent) counts.set(continent, (counts.get(continent) ?? 0) + 1);
+  }
+  return [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 }
 
 export function stateCounts(jobs: Job[]) {

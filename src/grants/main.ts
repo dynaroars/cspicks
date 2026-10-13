@@ -5,7 +5,7 @@ import { trackView } from '../analytics.js';
 import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { awardDeadlineTone, opportunityDeadline, opportunityHeader, opportunityMeta } from '../opportunity-card.js';
 import { resultActions } from '../result-actions.js';
-import { createSearchControls, renderSearchExamples, searchChoices, updateSearchUrl } from '../search-controls.js';
+import { createSearchControls, focusSearchOnLoad, renderSearchExamples, sample, searchChoices, updateSearchUrl } from '../search-controls.js';
 import { restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { escapeHtml } from '../shared.js';
@@ -135,7 +135,7 @@ function buildSuggestions() {
 }
 
 function setupExamples() {
-  renderSearchExamples(document.getElementById('grants-examples')!, DEFAULT_EXAMPLES);
+  renderSearchExamples(document.getElementById('grants-examples')!, sample(DEFAULT_EXAMPLES, 4));
 }
 
 function setupDelegatedListeners() {
@@ -206,6 +206,7 @@ async function init() {
     setupExamples();
     setupDelegatedListeners();
     render();
+    focusSearchOnLoad(input);
 
     if (window.location.hash) {
       window.setTimeout(handleHashScroll, 300);

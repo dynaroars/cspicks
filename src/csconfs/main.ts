@@ -5,7 +5,7 @@ import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
 import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { keywordValue, parseKeywordQuery, restoreKeywordQuery } from '../search-keywords.js';
-import { createSearchControls, renderSearchExamples as renderExampleChips, searchChoices, updateSearchUrl } from '../search-controls.js';
+import { createSearchControls, focusSearchOnLoad, renderSearchExamples as renderExampleChips, sample, searchChoices, updateSearchUrl } from '../search-controls.js';
 import { areaLabels } from '../shared.js';
 import { parsePlace } from './place.js';
 import { CSCONFS_KEYWORD_SPECS, DEADLINE_MODES, filterSchedule, scheduleSuggestions } from './schedule-data.js';
@@ -92,15 +92,6 @@ function buildSuggestions() {
   });
 }
 
-function sample<T>(items: T[], count: number) {
-  const available = [...items];
-  for (let index = available.length - 1; index > 0; index--) {
-    const swapIndex = Math.floor(Math.random() * (index + 1));
-    [available[index], available[swapIndex]] = [available[swapIndex]!, available[index]!];
-  }
-  return available.slice(0, count);
-}
-
 function renderExamples() {
   if (!conferences.length || !filters) return;
   const eligibleGroups = filterSchedule(conferences, {
@@ -152,7 +143,7 @@ async function init() {
     input.placeholder = 'Search conferences or research areas (e.g., PLDI or Security)';
     renderExamples();
     render();
-    input.focus();
+    focusSearchOnLoad(input);
 
 
   } catch (error) {

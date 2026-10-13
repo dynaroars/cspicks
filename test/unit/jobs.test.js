@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {
-  deadlineLabel, filterJobs, groupBySchool, isActive, jobsSuggestions, parseJobs, stateCounts
+  continentCounts, deadlineLabel, filterJobs, groupBySchool, isActive, jobsSuggestions, parseJobs, stateCounts
 } from '../../src/jobs/jobs-data.js';
 import { exportFileName, jobsToMarkdown, renderJobCard, renderSchoolCard, renderStateMap } from '../../src/jobs/jobs-render.js';
 import { STATE_TILE_ROWS, US_STATES, resolveState } from '../../src/jobs/jobs-data.js';
@@ -157,22 +157,19 @@ test('visa filter and keyword: stated policy, unchecked postings, and "possible"
   assert.deepEqual(sorted({ query: 'visa: bogus' }), []);
 });
 
-test('visa sponsorship tag sits after the position and rank tags, and the export lists it', () => {
-  const chip = value => renderJobCard(job({ visaSponsorship: value }), () => undefined, () => false, NOW);
-  assert.match(chip('yes'), /job-chip-visa is-yes[^>]*>Visa sponsorship available</);
-  assert.match(chip('no'), />No visa sponsorship</);
-  assert.match(chip('case-by-case'), />Visa sponsorship case by case/);
-  assert.doesNotMatch(chip('not-stated'), /job-chip-visa|Visa sponsorship not stated/);
-  assert.ok(!chip(undefined).includes('job-chip-visa'), 'unchecked postings get no tag');
-  const html = renderJobCard(job({ visaSponsorship: 'yes' }), () => ({ rank: 7, areaRanks: { ai: 3 } }), () => false, NOW);
+test('only an explicit residency restriction gets a tag, after the position and rank tags', () => {
+  const chip = (value, extra = {}) => renderJobCard(job({ visaSponsorship: value, ...extra }), () => undefined, () => false, NOW);
+  assert.match(chip('no'), /job-chip-visa is-no[^>]*>US citizens or permanent residents</);
+  assert.match(chip('no', { country: 'CA' }), />Citizens or permanent residents</);
+  for (const value of ['yes', 'case-by-case', 'not-stated', undefined]) assert.ok(!chip(value).includes('job-chip-visa'), String(value));
+  const html = renderJobCard(job({ visaSponsorship: 'no' }), () => ({ rank: 7, areaRanks: { ai: 3 } }), () => false, NOW);
   const order = ['job-chip-track', 'job-chip-rank', 'job-chip-visa', 'job-chip-area'].map(name => html.indexOf(name));
   assert.deepEqual([...order].sort((a, b) => a - b), order, 'track, level, rank, visa, then areas');
-  assert.deepEqual(ids(filterJobs([job({ visaSponsorship: 'no' }), job({ id: 'b', visaSponsorship: 'not-stated' })], { query: 'visa', now: NOW })), ['gt-ai-2026']);
+  assert.deepEqual(ids(filterJobs([job({ visaSponsorship: 'no' }), job({ id: 'b', visaSponsorship: 'not-stated' })], { query: 'citizens', now: NOW })), ['gt-ai-2026']);
 
   const md = jobsToMarkdown([job({ visaSponsorship: 'no' }), job({ id: 'b', visaSponsorship: 'not-stated' }), job({ id: 'c' })], { now: NOW });
-  assert.match(md, /- \*\*Visa sponsorship:\*\* Not offered, per the posting/);
-  assert.doesNotMatch(md, /Not stated on the posting/);
-  assert.equal((md.match(/Visa sponsorship:/g) || []).length, 1, 'unchecked and unstated policies have no visa line');
+  assert.match(md, /- \*\*Eligibility:\*\* US citizens or permanent residents only, per the posting/);
+  assert.equal((md.match(/Eligibility:/g) || []).length, 1, 'only the explicit restriction gets a line');
 });
 
 test('state tile map places every state exactly once', () => {
@@ -283,4 +280,14 @@ test('keyword alternatives combine with other filters and keep the state map cou
   assert.deepEqual(ids(filterJobs(jobs, { query: 'loc: TX,CA level: assistant', now: NOW })), []);
   assert.deepEqual(ids(filterJobs(jobs, { query: 'loc: CA', now: NOW }, true)), ['ut-sec', 'gt-ai-2026', 'ucsd-roll']);
   assert.equal(filterJobs(jobs, { query: 'status: active,closed', now: NOW }).length, jobs.length);
+});
+
+test('continent filter groups postings by country and counts only continents that have postings', () => {
+  const list = [
+    job({ id: 'us', country: 'US' }), job({ id: 'ca', country: 'CA' }), job({ id: 'none' }),
+    job({ id: 'uk', country: 'GB', state: '' }), job({ id: 'sg', country: 'SG', state: '' })
+  ];
+  assert.deepEqual(continentCounts(list), [['north-america', 3], ['asia', 1], ['europe', 1]]);
+  assert.deepEqual(filterJobs(list, { continent: 'europe', now: NOW }).map(item => item.id), ['uk']);
+  assert.equal(filterJobs(list, { continent: 'world', now: NOW }).length, 5);
 });

@@ -1,7 +1,7 @@
 /**
  * US Jobs page controller: search, filters, state map, position/school views.
  */
-import { DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, STATE_TILE_ROWS, TRACK_LABELS, US_STATES, VISA_FILTER_LABELS, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, resolveState, stateCounts } from './jobs-data.js';
+import { CONTINENT_LABELS, DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, STATE_TILE_ROWS, TRACK_LABELS, US_STATES, VISA_FILTER_LABELS, continentCounts, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, resolveState, stateCounts } from './jobs-data.js';
 import { exportFileName, jobsToMarkdown, renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
 import { rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
@@ -9,12 +9,12 @@ import { SITE_NAME, updatePageMeta } from '../seo.js';
 import { trackView } from '../analytics.js';
 import { areaLabels } from '../shared.js';
 import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
-import { parseKeywordQuery, restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
+import { keywordValue, parseKeywordQuery, restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
 import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadData } from '../data.js';
 import type { JobFilters, JobSort } from './jobs-data.js';
 import type { RankLookup, SchoolRank } from './jobs-render.js';
 import type { Job } from '../types.js';
-import { createSearchControls, renderSearchExamples, searchChoices, updateSearchUrl } from '../search-controls.js';
+import { createSearchControls, focusSearchOnLoad, renderSearchExamples, sample, searchChoices, updateSearchUrl } from '../search-controls.js';
 
 const params = new URLSearchParams(window.location.search);
 const input = document.querySelector<HTMLInputElement>('#jobs-search')!;
@@ -33,20 +33,22 @@ let suggestions: ReturnType<typeof createSearchControls>;
 let schoolRanks = new Map<string, SchoolRank>();
 const ranks: RankLookup = school => schoolRanks.get(school);
 const rankOf = (school: string) => schoolRanks.get(school)?.rank;
+// The continent options are built from the data, so a ?continent= value waits here until they exist.
+let continent = 'world';
 
-const EXAMPLES = ['track: teaching', 'area: security', 'loc: texas', 'visa: possible'];
 
 function state() {
   return {
     query: input.value.trim(),
     sortBy: select('sort-select').value as JobSort,
-    view: select('view-select').value
+    view: select('view-select').value,
+    continent
   };
 }
 
 function updateUrl(current: ReturnType<typeof state>) {
   const next = new URLSearchParams();
-  const defaults = { sortBy: 'deadline', view: 'position' };
+  const defaults = { sortBy: 'deadline', view: 'position', continent: 'world' };
   const names: Record<string, string> = { sortBy: 'sort' };
   if (current.query) next.set('q', current.query);
   (Object.keys(defaults) as Array<keyof typeof defaults>).forEach(key => {
@@ -69,6 +71,7 @@ function render() {
   // Starred postings lead the list; "favorites only" hides the rest.
   const byFavorites = (list: Job[]) => favoritesOnly ? onlyFavorites(list, job => job.id, favorites) : prioritizeFavorites(list, job => job.id, favorites);
   const shown = byFavorites(filterJobs(allJobs, filters));
+  renderContinentOptions(byFavorites(filterJobs(allJobs, { ...filters, continent: 'world' })));
   // The map ignores its own state filter so every state keeps a count.
   const counts = stateCounts(byFavorites(filterJobs(allJobs, filters, true)));
   const locations = parseKeywordQuery(current.query, JOBS_KEYWORD_SPECS).filters.loc || [];
@@ -102,6 +105,29 @@ function render() {
   trackView(current.query ? 'search-results' : 'default', 'jobs');
 }
 
+/** Only continents with matching postings are offered (plus the current choice, so it never vanishes). */
+function renderContinentOptions(jobs: Job[]) {
+  const counts = continentCounts(jobs);
+  if (continent !== 'world' && !counts.some(([key]) => key === continent)) counts.push([continent, 0]);
+  select('continent-select').innerHTML = [`<option value="world">🌐 World (${jobs.length})</option>`,
+    ...counts.map(([key, count]) => `<option value="${key}">${CONTINENT_LABELS[key]} (${count})</option>`)].join('');
+  select('continent-select').value = continent;
+}
+
+/** Four random keyword searches drawn from the active postings, so every chip finds something. */
+function jobExamples() {
+  const active = filterJobs(allJobs, { now: Date.now() });
+  const pick = <T,>(values: T[]) => sample([...new Set(values)], 1);
+  return sample([
+    ...pick(active.map(job => `track: ${job.track}`)),
+    ...pick(active.flatMap(job => job.areas).map(area => `area: ${keywordValue(areaLabels[area] || area)}`)),
+    ...pick(active.filter(job => US_STATES[job.state]).map(job => `loc: ${keywordValue(US_STATES[job.state]!)}`)),
+    ...pick(active.flatMap(job => job.level ? [`level: ${job.level}`] : [])),
+    ...pick(active.map(job => job.school)),
+    ...(filterJobs(active, { query: 'visa: possible', now: Date.now() }).length ? ['visa: possible'] : [])
+  ], 4);
+}
+
 function setFilter(key: string, values: string[]) {
   input.value = setQueryKeyword(input.value, key, values, JOBS_KEYWORD_SPECS);
   render();
@@ -111,6 +137,8 @@ function setFilter(key: string, values: string[]) {
 function populateOptions() {
   const view = params.get('view');
   if (view === 'school') select('view-select').value = view;
+  const requestedContinent = params.get('continent');
+  if (requestedContinent && requestedContinent in CONTINENT_LABELS) continent = requestedContinent;
   const sort = params.get('sort');
   if (sort && (JOB_SORTS as string[]).includes(sort)) select('sort-select').value = sort;
   input.value = restoreKeywordQuery(params, { track: 'track', dept: 'dept', level: 'level', area: 'area', state: 'loc', visa: 'visa', status: 'status', favorites: 'favorites' });
@@ -153,11 +181,16 @@ function setupEvents() {
     input.value = '';
     select('sort-select').value = 'deadline';
     select('view-select').value = 'position';
+    continent = 'world';
     render();
     input.focus();
   };
   ['sort-select', 'view-select']
     .forEach(id => select(id).addEventListener('change', render));
+  select('continent-select').addEventListener('change', () => {
+    continent = select('continent-select').value;
+    render();
+  });
 
   // Map tiles add or remove a state, so several can be picked; chips on a card narrow to just that value.
   mapElement.addEventListener('click', event => {
@@ -193,7 +226,7 @@ function setupEvents() {
     if (stateButton) setFilter('loc', [stateButton.dataset.state!]);
   });
 
-  renderSearchExamples(document.getElementById('jobs-examples')!, EXAMPLES);
+  renderSearchExamples(document.getElementById('jobs-examples')!, jobExamples());
 
 }
 
@@ -245,6 +278,7 @@ async function init() {
     initTooltipPositioning();
     setupEvents();
     render();
+    focusSearchOnLoad(input);
     void loadSchoolRanks();
   } catch (error) {
     console.error('Failed to load jobs data:', error);

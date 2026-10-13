@@ -38,7 +38,7 @@ test('US Jobs shows only active postings by default and reveals older ones on re
   await expect(page.locator('.job-card')).toHaveCount(2);
   await expect(page.locator('.job-title').first()).toContainText('Software Engineering');
   await expect(page.locator('.job-card', { hasText: 'Teaching Professor' })).toContainText('Rolling review');
-  await expect(page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.job-chip-visa')).toHaveText('Visa sponsorship available');
+  await expect(page.locator('.job-card', { hasText: 'Software Engineering' }).locator('.job-chip-visa')).toHaveCount(0, { timeout: 1000 });
   await expect(page.locator('.job-card', { hasText: 'Teaching Professor' }).locator('.job-chip-visa')).toHaveCount(0, { timeout: 1000 });
 
   await page.locator('#jobs-search').fill('status: closed');
@@ -204,7 +204,7 @@ test('keyword help opens on click and keyboard, and scoped suggestions preserve 
   await page.goto('jobs.html');
   const input = page.locator('#jobs-search');
   await expect(input).toBeEnabled();
-  await expect(page.locator('.search-filters select')).toHaveCount(2);
+  await expect(page.locator('.search-filters select')).toHaveCount(3);
   const help = page.getByRole('button', { name: 'Search keywords and examples' });
   const panel = page.locator('#jobs-search-help');
   await expect(panel).toBeHidden();
@@ -217,7 +217,7 @@ test('keyword help opens on click and keyboard, and scoped suggestions preserve 
   await expect(help).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(panel).toBeVisible();
-  await page.locator('.search-intro h2').click();
+  await page.locator('.search-intro').click();
   await expect(panel).toBeHidden();
 
   await input.fill('loc: IL track: tea');

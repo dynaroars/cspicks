@@ -46,14 +46,12 @@
 
     <section class="search-section">
       <div class="search-intro">
-        <h2>Explore Computer Science research awards &amp; grants</h2>
         <p>Find national and state-specific fellowships, early-career awards, industry gifts, and government grants for CS faculty and students.</p>
-        <p><a class="submission-link" href="grants-submit.html">Add or update info</a></p>
       </div>
 
       <div class="search-container">
         <div class="universal-search">
-          <input type="search" id="grants-search" placeholder="Loading awards and grants data…" disabled autofocus autocomplete="off" aria-autocomplete="list" aria-controls="universal-suggestions" aria-expanded="false">
+          <div class="search-input-shell"><input type="search" class="search-input" id="grants-search" placeholder="Loading awards and grants data…" disabled autofocus autocomplete="off" aria-autocomplete="list" aria-controls="universal-suggestions" aria-expanded="false"></div>
           <div id="universal-suggestions" class="universal-suggestions" role="listbox" hidden></div>
         </div>
       </div>
@@ -97,6 +95,7 @@
       </details>
     </main>
   </div>
+  <a class="add-fab" href="grants-submit.html" aria-label="Add or update info" title="Add or update info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a>
   <script type="module" src="/src/grants/main.js"></script>
 </body>
 </html>

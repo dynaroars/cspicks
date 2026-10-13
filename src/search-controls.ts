@@ -14,6 +14,28 @@ export function searchChoices(values: string[] | Record<string, string>, detail 
     : Object.entries(values).map(([value, label]) => ({ value, label, detail }));
 }
 
+/** A random `count` of `items` (Fisher–Yates), so every page's "Try" chips stay fresh on each load. */
+export function sample<T>(items: T[], count: number) {
+  const available = [...items];
+  for (let index = available.length - 1; index > 0; index--) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [available[index], available[swapIndex]] = [available[swapIndex]!, available[index]!];
+  }
+  return available.slice(0, count);
+}
+
+/**
+ * Every search page loads with its box disabled until data arrives, which defeats `autofocus`; call this
+ * once it is enabled. It leaves focus alone if the reader already moved it, and never scrolls the page.
+ */
+export function focusSearchOnLoad(input: HTMLInputElement) {
+  const active = document.activeElement;
+  if (active && active !== document.body) return;
+  input.dataset.quietFocus = 'true';
+  input.focus({ preventScroll: true });
+  delete input.dataset.quietFocus;
+}
+
 export function renderSearchExamples(container: HTMLElement, examples: Array<string | SearchExample>) {
   container.innerHTML = examples.slice(0, 4).map(example => {
     const item = typeof example === 'string' ? { label: example, query: example } : example;

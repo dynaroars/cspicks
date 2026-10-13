@@ -77,7 +77,7 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   await expect(page.locator('.grant-card')).toHaveCount(initialCount);
 
   // Test Keyboard Shortcut '/' to focus search input
-  await page.locator('.search-intro h2').click();
+  await page.locator('.search-intro').click();
   await page.keyboard.press('/');
   await expect(input).toBeFocused();
 });

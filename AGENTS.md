@@ -88,6 +88,10 @@ playbook before any data-refresh or web-research task.
   with the right history maps; `filters.toParams()` writes the shared URL shape. Every page uses it, so
   the control ids (`#region-select`, `#start-year`, `#end-year`, `#conf-set`, `#historical-mode`) are the
   same everywhere.
+- `src/vietprofs/` — verbatim copies of VietProfs' shared UI (`roars-ui.css`: design tokens, search field,
+  floating "+"; plus the visitor-traffic view). VietProfs is the baseline look: edit these there, then run
+  `npm run sync:vietprofs-ui`; `test/unit/vietprofs-ui.test.js` fails on local edits. `style.css` `@import`s
+  `roars-ui.css` first and holds only cspicks-specific rules on top.
 - `src/charts.ts` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges
   shared defaults and destroys the previous chart; `onThemeChange(fn)` re-renders on light/dark switches.
 - `src/style.css` — the one shared stylesheet every page links (sections in cascade order); page-only CSS sits

@@ -6,7 +6,7 @@ import { getConferenceAreaMap, loadData, publicationMatchesConferenceSet, school
 import { createFilterBar } from './filters.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
 import { renderProfessorCard as renderProfessorCardView, renderSchoolCard as renderSchoolCardView } from './search-cards.js';
-import { createSearchControls, renderSearchExamples as renderExampleChips, updateSearchUrl } from './search-controls.js';
+import { createSearchControls, focusSearchOnLoad, renderSearchExamples as renderExampleChips, sample, updateSearchUrl } from './search-controls.js';
 import { parseKeywordQuery } from './search-keywords.js';
 import { clearSearchSections, createDblpAuthorSearch, filterSearchRecords, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
@@ -187,7 +187,7 @@ async function init() {
       if (isDiscoveries) discoveriesApi?.scrollToHashDiscovery();
     }
 
-    searchInput.focus();
+    focusSearchOnLoad(searchInput);
   } catch (err) {
     console.error('Failed to load data:', err);
     const main = document.querySelector('main');
@@ -437,17 +437,6 @@ function setupSearch() {
       papersAction.textContent = list?.classList.contains('visible') ? '▼ Hide Papers' : '▶ Show Papers';
     }
   });
-}
-
-// Shared by the example chips and the "Applying for a CS PhD?" callout, both
-// of which pick a fresh, random handful of real areas/schools each render.
-function sample<T>(items: T[], count: number): T[] {
-  const available = [...items];
-  for (let index = available.length - 1; index > 0; index--) {
-    const swapIndex = Math.floor(Math.random() * (index + 1));
-    [available[index], available[swapIndex]] = [available[swapIndex]!, available[index]!];
-  }
-  return available.slice(0, count);
 }
 
 function discoveryExampleItems() {

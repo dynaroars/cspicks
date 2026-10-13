@@ -1,8 +1,8 @@
 import { opportunityDeadline, opportunityHeader, opportunityMeta } from '../opportunity-card.js';
 import { resultActions } from '../result-actions.js';
 import { areaLabels, escapeHtml, safeExternalUrl } from '../shared.js';
-import { deadlineLabel, DEPARTMENT_LABELS, departmentKind, filterValues, formatDay, LEVEL_LABELS, TRACK_LABELS, US_STATES, VISA_LABELS } from './jobs-data.js';
-import type { Job, VisaSponsorship } from '../types.js';
+import { deadlineLabel, DEPARTMENT_LABELS, departmentKind, filterValues, formatDay, LEVEL_LABELS, TRACK_LABELS, US_STATES } from './jobs-data.js';
+import type { Job } from '../types.js';
 import type { FilterChoice, SchoolJobs } from './jobs-data.js';
 
 export interface SchoolRank { rank: number | null; areaRanks: Record<string, number> }
@@ -22,11 +22,18 @@ function rankChips(job: Job, ranks: RankLookup) {
   return chips.join('');
 }
 
-/** Sits with the position and rank tags; postings nobody has read for sponsorship yet get no tag. */
+/** "US citizens or permanent residents" for a US posting; a posting elsewhere names no country. */
+function residencyLabel(job: Job) {
+  return `${(job.country || 'US').toUpperCase() === 'US' ? 'US citizens' : 'Citizens'} or permanent residents`;
+}
+
+/**
+ * Sits with the position and rank tags. Only an explicit restriction gets a tag: sponsorship that is
+ * available, case by case, unstated, or unchecked is the usual case and would just add noise.
+ */
 function visaChip(job: Job) {
-  const value = job.visaSponsorship;
-  if (!value || value === 'not-stated') return '';
-  return `<span class="opportunity-chip job-chip job-chip-visa is-${value}" title="As stated on the official posting; confirm with the department before applying">${escapeHtml(VISA_LABELS[value])}</span>`;
+  if (job.visaSponsorship !== 'no') return '';
+  return `<span class="opportunity-chip job-chip job-chip-visa is-no" title="As stated on the official posting; confirm with the department before applying">${escapeHtml(residencyLabel(job))}</span>`;
 }
 
 function schoolLinks(school: string) {
@@ -101,13 +108,6 @@ export function renderStateMap(rows: string[][], counts: Record<string, number>,
  */
 const SITE_URL = 'https://cspicks.roars.dev';
 
-const VISA_TEXT: Record<VisaSponsorship, string> = {
-  yes: 'Available, per the posting',
-  'case-by-case': 'Case by case, per the posting',
-  no: 'Not offered, per the posting',
-  'not-stated': 'Not stated on the posting'
-};
-
 /** One line of Markdown text: collapse whitespace so a stray newline cannot break the list or heading. */
 const inline = (value: unknown) => String(value ?? '').replace(/\s+/g, ' ').trim();
 
@@ -141,7 +141,7 @@ export function jobsToMarkdown(jobs: Job[], { ranks = () => undefined, now = Dat
       ['Location', [job.city, US_STATES[job.state] || job.state].filter(Boolean).join(', ')],
       ['Position', [TRACK_LABELS[job.track], job.level ? LEVEL_LABELS[job.level] : ''].filter(Boolean).join(' · ')],
       ['Research areas', areas.join(', ') || 'Not specified'],
-      ['Visa sponsorship', job.visaSponsorship && job.visaSponsorship !== 'not-stated' ? VISA_TEXT[job.visaSponsorship] : ''],
+      ['Eligibility', job.visaSponsorship === 'no' ? `${residencyLabel(job)} only, per the posting` : ''],
       ['Review begins', formatDay(job.reviewBegins)],
       ['Start date', formatDay(job.startDate)],
       ['Posted', formatDay(job.postedDate)],
