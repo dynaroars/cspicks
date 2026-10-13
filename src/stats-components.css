@@ -1,0 +1,245 @@
+/*
+ * Shared statistics components: metric cards, tables, the daily chart, notices, and loading/error boxes.
+ * Used by VietProfs' stats and connections pages and copied verbatim into cspicks (src/stats-components.css).
+ * Colors come from the host page's CSS variables, with fallbacks for any it does not define.
+ */
+
+.stats-snapshot {
+  margin: 0.9rem 0 1.25rem;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.refresh-stats-btn {
+  margin-left: 0.65rem;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--card-bg);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+.refresh-stats-btn:hover {
+  border-color: var(--accent);
+}
+
+.browser-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.75rem;
+}
+
+.browser-metric-card {
+  min-width: 0;
+  padding: 0.9rem 1rem;
+  background: var(--tag-bg, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: var(--radius-sm, 4px);
+}
+
+.browser-metric-label,
+
+.browser-metric-detail {
+  margin: 0;
+  color: var(--text-muted, #64748b);
+  font-size: var(--text-xs, 0.75rem);
+}
+
+.browser-metric-value {
+  margin: 0.25rem 0;
+  font-family: var(--font-mono);
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.stats-status-notice {
+  margin: 1rem 0;
+  padding: 0.8rem 1rem;
+  border-left: 4px solid var(--accent-color, #2563eb);
+  background: var(--tag-bg, rgba(37, 99, 235, 0.06));
+  font-size: var(--text-sm, 0.875rem);
+}
+
+.stats-status-warning {
+  border-left-color: #d97706;
+}
+
+.stat-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted, #64748b);
+}
+
+.stats-chart-container {
+  margin-top: 0.75rem;
+  padding: 1.25rem;
+  background: var(--tag-bg, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: var(--radius-sm, 4px);
+}
+
+.chart-legend {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--text-muted);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.legend-dot.dot-views {
+  background: var(--accent-dim, #60a5fa);
+}
+
+.stats-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.stats-svg .path-views {
+  stroke: var(--accent-dim, #60a5fa);
+}
+
+.stats-table-wrapper {
+  margin-top: 0.5rem;
+  overflow-x: auto;
+}
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm, 0.875rem);
+}
+
+.stats-table th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs, 0.75rem);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 2px solid var(--border-color, #e2e8f0);
+  padding: 0.5rem 0.5rem;
+}
+
+.stats-table td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+  vertical-align: middle;
+}
+
+.stats-table .num-col {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.country-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.flag-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.privacy-note {
+  padding: 1rem 1.25rem;
+  background: var(--tag-bg, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: var(--radius-sm, 4px);
+  font-size: var(--text-sm, 0.875rem);
+  line-height: 1.6;
+}
+
+.privacy-note ul {
+  margin-top: 0.5rem;
+  padding-left: 1.25rem;
+}
+
+.privacy-note li {
+  margin-bottom: 0.35rem;
+}
+
+.partial-row {
+  opacity: 0.85;
+}
+
+.stats-secondary-details summary {
+  cursor: pointer;
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--text-muted);
+  padding: 0.25rem 0;
+}
+
+.stats-secondary-details summary:hover {
+  color: var(--text-color);
+}
+
+.stats-error-box, .stats-loading-box {
+  padding: 2rem;
+  text-align: center;
+  background: var(--tag-bg, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: var(--radius-sm, 4px);
+  margin-top: 1rem;
+}
+
+.stats-error-box .error-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ef4444;
+  margin-bottom: 0.5rem;
+}
+
+.stats-error-box .error-detail {
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.retry-btn {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs, 0.75rem);
+  padding: 0.5rem 1rem;
+  background: var(--accent-color, #2563eb);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+}
+
+.retry-btn:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 560px) {
+  .stats-chart-container,
+  .privacy-note {
+    padding: 0.85rem;
+  }
+
+  .stats-chart-container {
+    overflow-x: hidden;
+  }
+}

@@ -1,5 +1,5 @@
 /**
- * Stats page: what CS Picks tracks (faculty, universities, conferences, awards, jobs) and repository activity.
+ * Stats page: what CS Picks tracks (faculty, universities, conferences, awards, jobs), visitor traffic, and repository activity.
  * It deliberately skips the 14 MB NSF snapshot so the page stays fast.
  * The summarize* functions are pure so unit tests can check them; the page controller at the bottom only runs in a browser.
  */
@@ -8,6 +8,10 @@ import { numAreas } from './data/conference-sets.js';
 import { loadGrantsData } from './grants/grants-data.js';
 import { isActive, loadJobsData } from './jobs/jobs-data.js';
 import { escapeHtml, formatRelativeTime } from './shared.js';
+import {
+  type BrowserStatsResponse, fetchTrafficStats, formatTimestamp, renderCategories, renderChart, renderCountries,
+  renderDailyTable, renderLoadError, renderMethodology, renderMetrics, renderNotice,
+} from './traffic-view.js';
 import type { ConferenceRecord, Grant, Job, RawData } from './types.js';
 
 export interface Stat { label: string, value: string, note?: string, help?: string }
@@ -123,6 +127,33 @@ function section<T>(id: string, load: Promise<T>, render: (value: T) => string) 
     });
 }
 
+// Visitor traffic comes from the shared roars.dev stats Worker, which lives in the VietProfs repo (src/worker.ts).
+// traffic-view.ts and stats-components.css are verbatim copies of VietProfs' files; change them there and copy back.
+const TRAFFIC_ENDPOINTS = ['/api/stats', 'https://cspicks.roars.dev/api/stats'];
+
+export function renderTraffic(data: BrowserStatsResponse) {
+  return `${renderNotice(data)}
+    <p class="stat-sub">Last successful snapshot: <time datetime="${escapeHtml(data.generatedAt)}">${escapeHtml(formatTimestamp(data.generatedAt))}</time></p>
+    ${renderMetrics(data)}
+    <h3>Daily browser traffic</h3>${renderChart(data.daily)}${renderDailyTable(data.daily)}
+    <h3>Countries reached</h3>${renderCountries(data)}
+    <h3>Page categories</h3>${renderCategories(data)}
+    <h3>Privacy &amp; methodology</h3>${renderMethodology()}`;
+}
+
+function loadTraffic(force = false) {
+  return fetchTrafficStats(TRAFFIC_ENDPOINTS, force)
+    .then(data => fill('stats-traffic', renderTraffic(data)))
+    .catch(error => {
+      console.error('Stats section stats-traffic failed:', error);
+      fill('stats-traffic', renderLoadError(error instanceof Error ? error.message : 'Unknown error'));
+      document.getElementById('retry-btn')?.addEventListener('click', () => {
+        fill('stats-traffic', '<p class="stats-loading">Loading visitor traffic…</p>');
+        void loadTraffic(true);
+      });
+    });
+}
+
 async function fetchJson(url: URL | string) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`${url} returned ${response.status}`);
@@ -135,6 +166,7 @@ function init() {
   section('stats-confs', fetchJson(new URL('../csconfs/data/conferences.json', import.meta.url)), confs => renderStatGrid(summarizeConferences(confs as ConferenceRecord[])));
   section('stats-grants', loadGrantsData(), grants => renderStatGrid(summarizeGrants(grants)));
   section('stats-jobs', loadJobsData(), jobs => renderStatGrid(summarizeJobs(jobs)));
+  void loadTraffic();
   section('stats-repo', loadRepoStats(), ({ stats, commits }) => `${renderStatGrid(stats)}<h3>Recent commits</h3>${renderCommits(commits)}`);
 }
 

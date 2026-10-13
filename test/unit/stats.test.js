@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { countFromLink, renderCommits, renderStatGrid, summarizeConferences, summarizeGrants, summarizeJobs, summarizeRoster } from '../../src/stats.ts';
+import { countFromLink, renderCommits, renderStatGrid, renderTraffic, summarizeConferences, summarizeGrants, summarizeJobs, summarizeRoster } from '../../src/stats.ts';
 
 const NOW = Date.UTC(2026, 9, 11);
 
@@ -54,4 +54,23 @@ test('stat and commit rendering escapes text', () => {
   assert.doesNotMatch(html, /<script>/);
   assert.match(html, /abcdef1/);
   assert.match(html, /2 hours ago/);
+});
+
+test('visitor traffic folds today into the average card and escapes Worker-supplied labels', () => {
+  const html = renderTraffic({
+    schemaVersion: 3, source: 'cloudflare-rum', generatedAt: '2026-10-13T12:00:00.000Z', timezone: 'UTC', status: 'ok', stale: false,
+    measurementStartedAt: '2026-10-12',
+    coverage: { firstDate: '2026-10-12', lastCompleteDate: '2026-10-12', completeDays7: 1, availableDays30: 1 },
+    today: { date: '2026-10-13', pageViews: 5, visits: 2, complete: false, collected: true },
+    last7Complete: { pageViews: 40, visits: 10, days: 1, avgPageViews: 40, avgVisits: 10 },
+    last30Available: { pageViews: 40, visits: 10, days: 1 },
+    daily: [{ date: '2026-10-12', pageViews: 40, visits: 10, status: 'complete' }, { date: '2026-10-13', pageViews: 5, visits: 2, status: 'partial' }],
+    countries: [], categories: [{ key: 'other', label: '<b>Other</b>', pageViews: 40, pct: 100 }], categoryTotal: 40,
+    categoryPeriod: { startDate: '2026-10-12', endDate: '2026-10-12', days: 1 },
+    historicalTransition: { newSeriesStartedAt: '2026-10-12', oldSeriesRetainedInternally: true }
+  });
+  assert.match(html, /Average daily page views[\s\S]*1 complete day · 5 today so far/);
+  assert.doesNotMatch(html, /Browser page views today/);
+  assert.match(html, /Tue, Oct 13, 2026<\/strong> \(In progress\)/);
+  assert.match(html, /&lt;b&gt;Other&lt;\/b&gt;/);
 });
