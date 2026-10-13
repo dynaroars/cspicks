@@ -2913,37 +2913,9 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
   margin: 0 auto;
 }
 
-.tool-intro {
-  max-width: 780px;
-  margin: 0 auto 1.5rem;
-  text-align: center;
-}
 
-.tool-intro .eyebrow {
-  margin-bottom: 0.35rem;
-  color: var(--text-secondary);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
 
-.tool-intro h2 {
-  margin: 0;
-  color: var(--text-primary);
-  font-family: var(--font-heading);
-  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.03em;
-}
 
-.tool-intro > p:last-child {
-  max-width: 680px;
-  margin: 0.75rem auto 0;
-  color: var(--text-secondary);
-  font-size: 1rem;
-}
 
 .simulator-page {
   max-width: 980px;
