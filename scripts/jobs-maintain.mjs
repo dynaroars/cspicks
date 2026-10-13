@@ -33,10 +33,12 @@ async function fetchCsv(path) {
   return Papa.parse(await response.text(), { header: true, skipEmptyLines: true }).data;
 }
 
-const emptyRow = (school, homepage, facultyCount) => ({
+const emptyRow = (school, homepage, facultyCount, country = 'US', region = 'northamerica') => ({
   school,
   homepage,
   facultyCount,
+  country,
+  region,
   jobsUrl: null,
   state: null,
   lastCheckedAt: null,
@@ -53,29 +55,45 @@ async function seed() {
   const faculty = new Map();
   roster.forEach(row => faculty.set(row.affiliation, (faculty.get(row.affiliation) || 0) + 1));
   const sources = await readJson(SOURCES, []);
-  const known = new Set(sources.map(source => source.school));
+  const known = new Map(sources.map(source => [source.school, source]));
   let added = 0;
   for (const row of institutions) {
-    if (row.countryabbrv !== 'us' || known.has(row.institution)) continue;
-    sources.push(emptyRow(row.institution, row.homepage || null, faculty.get(row.institution) || 0));
-    added += 1;
+    const country = (row.countryabbrv || 'us').toUpperCase();
+    const region = row.region || 'northamerica';
+    if (!known.has(row.institution)) {
+      sources.push(emptyRow(row.institution, row.homepage || null, faculty.get(row.institution) || 0, country, region));
+      added += 1;
+    } else {
+      const existing = known.get(row.institution);
+      if (!existing.country) existing.country = country;
+      if (!existing.region) existing.region = region;
+      existing.facultyCount = faculty.get(row.institution) ?? existing.facultyCount;
+    }
   }
-  // Refresh counts for existing rows without touching crawl state.
-  sources.forEach(source => { source.facultyCount = faculty.get(source.school) ?? source.facultyCount; });
-  sources.sort((a, b) => b.facultyCount - a.facultyCount || a.school.localeCompare(b.school));
+  sources.forEach(source => {
+    if (!source.country) source.country = 'US';
+    if (!source.region) source.region = 'northamerica';
+  });
+  sources.sort((a, b) => {
+    const aIsUS = (a.country || 'US') === 'US' ? 1 : 0;
+    const bIsUS = (b.country || 'US') === 'US' ? 1 : 0;
+    if (aIsUS !== bIsUS) return bIsUS - aIsUS;
+    return b.facultyCount - a.facultyCount || a.school.localeCompare(b.school);
+  });
   await fs.writeFile(SOURCES, `${JSON.stringify(sources, null, 2)}\n`);
   console.log(`Seeded ${added} new school(s); ${sources.length} total.`);
 }
 
-/** A US school CSRankings does not list. It keeps `csrankings: false` so `--seed` never confuses it with a roster school. */
+/** A school CSRankings does not list. It keeps `csrankings: false` so `--seed` never confuses it with a roster school. */
 async function addSchool() {
   const school = option('add', '').trim();
   const state = option('state', '').trim().toUpperCase();
-  if (!school || school.startsWith('--')) throw new Error('Usage: --add "School Name" [--homepage URL] [--state XX]');
-  if (state && !/^[A-Z]{2}$/.test(state)) throw new Error(`--state must be a USPS code, got "${state}"`);
+  const country = option('country', 'US').trim().toUpperCase();
+  if (!school || school.startsWith('--')) throw new Error('Usage: --add "School Name" [--homepage URL] [--state XX] [--country XX]');
+  if (country === 'US' && state && !/^[A-Z]{2}$/.test(state)) throw new Error(`--state must be a USPS code, got "${state}"`);
   const sources = await readJson(SOURCES, []);
   if (sources.some(source => source.school.toLowerCase() === school.toLowerCase())) return console.log(`${school} is already in the sources file.`);
-  sources.push({ ...emptyRow(school, option('homepage', null), 0), state: state || null, csrankings: false });
+  sources.push({ ...emptyRow(school, option('homepage', null), 0, country, country === 'US' ? 'northamerica' : null), state: state || null, csrankings: false });
   await fs.writeFile(SOURCES, `${JSON.stringify(sources, null, 2)}\n`);
   console.log(`Added ${school}; ${sources.length} schools total.`);
 }
@@ -96,10 +114,11 @@ export function intervalFor(source, now, hasOpenJobs) {
   return recheckDays(now, hasOpenJobs);
 }
 
-export function buildQueue(sources, jobs, now = Date.now()) {
+export function buildQueue(sources, jobs, now = Date.now(), country = null) {
   const openSchools = new Set(jobs.filter(job => !job.closedAt).map(job => job.school));
   return sources
     .filter(source => !source.deferredUntil || Date.parse(source.deferredUntil) <= now)
+    .filter(source => !country || (source.country || 'US').toUpperCase() === country.toUpperCase())
     .map(source => {
       const checked = source.lastCheckedAt ? Date.parse(source.lastCheckedAt) : null;
       const interval = intervalFor(source, now, openSchools.has(source.school));
@@ -107,7 +126,12 @@ export function buildQueue(sources, jobs, now = Date.now()) {
       return { source, dueInDays, reason: checked === null ? 'never checked' : `checked ${Math.floor((now - checked) / DAY)}d ago, every ${interval}d` };
     })
     .filter(item => item.dueInDays <= 0)
-    .sort((a, b) => a.dueInDays - b.dueInDays || b.source.facultyCount - a.source.facultyCount || a.source.school.localeCompare(b.source.school));
+    .sort((a, b) => {
+      const aIsUS = (a.source.country || 'US') === 'US' ? 1 : 0;
+      const bIsUS = (b.source.country || 'US') === 'US' ? 1 : 0;
+      if (aIsUS !== bIsUS) return bIsUS - aIsUS;
+      return a.dueInDays - b.dueInDays || b.source.facultyCount - a.source.facultyCount || a.source.school.localeCompare(b.source.school);
+    });
 }
 
 /** Schools whose non-CS units (information schools, ECE, data science) have never been crawled, largest roster first. */
@@ -135,7 +159,8 @@ async function main() {
     return;
   }
   const limit = Number(option('limit', '30'));
-  const queue = buildQueue(sources, jobs).slice(0, limit);
+  const country = option('country', null);
+  const queue = buildQueue(sources, jobs, Date.now(), country).slice(0, limit);
   if (!queue.length) return console.log('Nothing is due. Run with --seed if the sources file is empty.');
   queue.forEach(({ source, reason }, index) => console.log(
     `${index + 1}. ${source.school}  [${reason}]  hiring page: ${source.jobsUrl || 'unknown'}  dept: ${source.homepage || 'unknown'}`));

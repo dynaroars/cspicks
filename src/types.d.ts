@@ -248,7 +248,9 @@ export interface Job {
   areas: string[];
   /** The posting explicitly says it is open to all / any area. */
   anyArea?: boolean;
-  /** USPS state code. */
+  /** Country code or name (e.g. 'US', 'CA', 'UK', 'DE'); defaults to 'US'. */
+  country?: string;
+  /** USPS state code for US postings; province or region for others. */
   state: string;
   city?: string | null;
   deadline?: string | null;

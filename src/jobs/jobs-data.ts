@@ -87,6 +87,7 @@ export const JOBS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'school', aliases: ['university'], example: 'school: stanford', description: 'University the position is at' },
   { key: 'area', aliases: ['topic'], example: 'area: security', description: 'CSRankings research area the position targets (postings open to all areas match any area)' },
   { key: 'loc', aliases: ['state', 'location'], example: 'loc: texas', description: 'US state (name or two-letter code) or city' },
+  { key: 'country', aliases: ['nation'], example: 'country: us', description: 'Country (e.g. US, Canada, UK, Germany)' },
   { key: 'track', example: 'track: teaching', description: 'tenure-track, teaching, research, postdoc, visiting, or leadership' },
   { key: 'level', aliases: ['rank'], example: 'level: assistant', description: 'assistant, associate, full, or open rank' },
   { key: 'dept', aliases: ['department', 'unit'], example: 'dept: information', description: 'Hiring unit: cs, information (IST/iSchool), ece, data, or other' },
@@ -156,6 +157,8 @@ const isoOrNull = (value: unknown) => value === undefined || value === null || (
 function isJob(value: unknown): value is Job {
   if (!value || typeof value !== 'object') return false;
   const job = value as Record<string, unknown>;
+  const country = typeof job.country === 'string' ? job.country.toUpperCase() : 'US';
+  const isUS = country === 'US';
   return typeof job.id === 'string'
     && typeof job.school === 'string'
     && typeof job.department === 'string'
@@ -164,7 +167,8 @@ function isJob(value: unknown): value is Job {
     && (job.level === undefined || job.level === null || (typeof job.level === 'string' && LEVELS.includes(job.level)))
     && Array.isArray(job.areas) && job.areas.every(area => typeof area === 'string')
     && (job.anyArea === undefined || typeof job.anyArea === 'boolean')
-    && typeof job.state === 'string' && job.state in US_STATES
+    && (job.country === undefined || typeof job.country === 'string')
+    && typeof job.state === 'string' && (isUS ? job.state in US_STATES : true)
     && typeof job.url === 'string'
     && typeof job.lastSeenAt === 'string' && dayParts(job.lastSeenAt) !== null
     && isoOrNull(job.deadline) && isoOrNull(job.closedAt) && isoOrNull(job.postedDate)
@@ -201,6 +205,7 @@ export interface JobFilters {
   level?: FilterChoice;
   area?: FilterChoice;
   state?: FilterChoice;
+  country?: FilterChoice;
   /** `VISA_FILTER_LABELS` keys. */
   visa?: FilterChoice;
   status?: StatusFilter;
@@ -217,6 +222,7 @@ export function filterValues(choice: FilterChoice | undefined): string[] {
 function searchText(job: Job) {
   return [
     job.id, job.school, job.department, job.title, job.city, job.state, US_STATES[job.state],
+    job.country,
     TRACK_LABELS[job.track], job.level ? LEVEL_LABELS[job.level] : '', job.summary, job.anyArea ? 'all areas any area open' : '',
     job.visaSponsorship && job.visaSponsorship !== 'not-stated' ? VISA_LABELS[job.visaSponsorship] : '',
     ...job.areas.map(area => `${area} ${areaLabels[area] || ''}`)
@@ -225,7 +231,11 @@ function searchText(job: Job) {
 
 function stateMatches(job: Job, value: string) {
   const code = resolveState(value);
-  return code ? job.state === code : `${job.city || ''} ${US_STATES[job.state]}`.toLowerCase().includes(value.toLowerCase());
+  if (code) return job.state === code;
+  const country = (job.country || 'US').toLowerCase();
+  const val = value.toLowerCase();
+  if (country === val || (val === 'usa' && country === 'us') || (val === 'united states' && country === 'us')) return true;
+  return `${job.city || ''} ${US_STATES[job.state] || job.state} ${job.country || ''}`.toLowerCase().includes(val);
 }
 
 function sortKey(job: Job, sortBy: JobSort, now: number) {
@@ -257,6 +267,7 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
   const levels = filterValues(filters.level);
   const areas = filterValues(filters.area);
   const states = filterValues(filters.state);
+  const countries = filterValues(filters.country);
   const visas = filterValues(filters.visa);
   const { filters: keywords, rest } = parseKeywordQuery(query, JOBS_KEYWORD_SPECS);
   const terms = rest.trim().toLowerCase().split(/\s+/).filter(Boolean);
@@ -280,6 +291,7 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
     // A posting open to all areas matches every area; one that names none matches none.
     if (areas.length && !job.anyArea && !areas.some(key => job.areas.includes(key))) return false;
     if (!ignoreState && states.length && !states.includes(job.state)) return false;
+    if (countries.length && !countries.map(c => c.toUpperCase()).includes((job.country || 'US').toUpperCase())) return false;
     if (visas.length && !visas.includes(visaKey(job))) return false;
     if (keywords.visa && !matchesKeywordOptions(keywords.visa, value => (VISA_KEYWORD_VALUES[value] ?? []).includes(visaKey(job)))) return false;
     if (!matchesKeywordOptions(keywords.school, value => job.school.toLowerCase().includes(value))) return false;
@@ -287,6 +299,11 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
     if (!matchesKeywordOptions(keywords.track, value => `${job.track} ${TRACK_LABELS[job.track]}`.toLowerCase().includes(value))) return false;
     if (!matchesKeywordOptions(keywords.level, value => Boolean(job.level && `${job.level} ${LEVEL_LABELS[job.level]}`.toLowerCase().includes(value)))) return false;
     if (!ignoreState && !matchesKeywordOptions(keywords.loc, value => stateMatches(job, value))) return false;
+    if (keywords.country && !matchesKeywordOptions(keywords.country, value => {
+      const c = (job.country || 'US').toLowerCase();
+      const v = value.toLowerCase();
+      return c === v || (v === 'usa' && c === 'us') || (v === 'united states' && c === 'us');
+    })) return false;
     if (!terms.length) return true;
     const text = searchText(job);
     return terms.every(term => text.includes(term));
@@ -333,7 +350,7 @@ export function jobsSuggestions(jobs: Job[]) {
   return {
     schools: [...schools].map(([label, count]) => ({ label, detail: plural(count), searchTerms: label })).sort((a, b) => a.label.localeCompare(b.label)),
     areas: [...areas].map(([key, count]) => ({ label: areaLabels[key] || key, detail: `Research area · ${plural(count)}`, searchTerms: key })).sort((a, b) => a.label.localeCompare(b.label)),
-    states: [...states].map(([code, count]) => ({ label: US_STATES[code]!, detail: `State · ${plural(count)}`, searchTerms: `${code} ${US_STATES[code]}` })).sort((a, b) => a.label.localeCompare(b.label)),
+    states: [...states].map(([code, count]) => ({ label: US_STATES[code] || code, detail: `${US_STATES[code] ? 'State' : 'Region'} · ${plural(count)}`, searchTerms: `${code} ${US_STATES[code] || ''}`.trim() })).sort((a, b) => a.label.localeCompare(b.label)),
     tracks: (Object.keys(TRACK_LABELS) as JobTrack[]).map(key => ({ label: TRACK_LABELS[key], detail: 'Position type', searchTerms: key }))
   };
 }

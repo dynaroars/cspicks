@@ -58,6 +58,8 @@ test('filters by track, area, state, rank, and free text', () => {
   assert.deepEqual(ids(filterJobs(jobs, { query: 'school: "san diego" track: postdoc', now: NOW })), ['ucsd-roll']);
   assert.deepEqual(ids(filterJobs(jobs, { query: 'artificial', now: NOW })), []);
   assert.deepEqual(ids(filterJobs(jobs, { query: 'ai', now: NOW })), ['gt-ai-2026']);
+  assert.deepEqual(ids(filterJobs(jobs, { query: 'country: us', now: NOW })), ['ut-sec', 'gt-ai-2026', 'ucsd-roll']);
+  assert.deepEqual(ids(filterJobs(jobs, { query: 'country: ca', now: NOW })), []);
 });
 
 test('sorts by soonest deadline with rolling last, by recency, and by school', () => {
