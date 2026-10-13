@@ -134,6 +134,63 @@
   border-radius: 50%;
 }
 
+/* "Try" example chips and the filter dropdowns beside the search. */
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.examples-label {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
+.example-chip {
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  border: none;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+
+.example-chip:hover {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.field-select {
+  width: 100%;
+  min-width: 0;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field-select.is-active {
+  border-color: var(--bamboo-green);
+  background-color: color-mix(in srgb, var(--bamboo-green) 12%, var(--card-bg));
+  font-weight: 600;
+  box-shadow: 0 0 0 1px var(--bamboo-green);
+}
+
+.example-chip:focus-visible,
+.field-select:focus {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
 /* Floating "+": the one primary action on a page, adding or updating an entry. */
 .add-fab {
   position: fixed;
@@ -174,6 +231,15 @@
 }
 
 @media (max-width: 560px) {
+  .example-chip,
+  .field-select {
+    min-height: 44px;
+  }
+
+  .example-chip {
+    min-width: 44px;
+  }
+
   .add-fab {
     right: 1rem;
     bottom: 1rem;

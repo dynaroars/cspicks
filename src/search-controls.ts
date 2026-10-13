@@ -39,8 +39,8 @@ export function focusSearchOnLoad(input: HTMLInputElement) {
 export function renderSearchExamples(container: HTMLElement, examples: Array<string | SearchExample>) {
   container.innerHTML = examples.slice(0, 4).map(example => {
     const item = typeof example === 'string' ? { label: example, query: example } : example;
-    return item.href ? `<a href="${escapeHtml(item.href)}" title="${escapeHtml(item.title || item.label)}">${escapeHtml(item.label)}</a>`
-      : `<button type="button" data-search-example="${escapeHtml(item.query || item.label)}">${escapeHtml(item.label)}</button>`;
+    return item.href ? `<a class="example-chip" href="${escapeHtml(item.href)}" title="${escapeHtml(item.title || item.label)}">${escapeHtml(item.label)}</a>`
+      : `<button type="button" class="example-chip" data-search-example="${escapeHtml(item.query || item.label)}">${escapeHtml(item.label)}</button>`;
   }).join('');
 }
 

@@ -44,14 +44,3 @@
   row-gap: 0.5rem;
   max-width: 1080px;
 }
-.grants-page .search-filters .filter-group select {
-  field-sizing: content;
-  max-width: 100%;
-  border-color: var(--border-color);
-  background-color: var(--bg-secondary);
-  background-position: right 0.55rem center;
-}
-.grants-page .search-filters .filter-group select:hover,
-.grants-page .search-filters .filter-group select:focus {
-  background-color: var(--hover-bg);
-}

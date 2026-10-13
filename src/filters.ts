@@ -229,13 +229,13 @@ export function createFilterBar(mount: string | Element, {
   element.innerHTML = `
     ${prefix ? `<span class="filter-sentence-prefix"${prefixId ? ` id="${prefixId}"` : ''}>${prefix}</span>` : ''}
     ${has('region') ? `<div class="filter-group search-region-control">
-      <select id="region-select" aria-label="Region">${optionsHtml(REGIONS, state.region)}</select>
+      <select id="region-select" class="field-select" aria-label="Region">${optionsHtml(REGIONS, state.region)}</select>
     </div>` : ''}
     ${has('years') ? `<div class="filter-group" id="year-filter-group" aria-label="Year range">
       <div class="year-inputs">
-        <select id="start-year" aria-label="Start year">${yearOptions(years.min, years.max, state.startYear)}</select>
+        <select id="start-year" class="field-select" aria-label="Start year">${yearOptions(years.min, years.max, state.startYear)}</select>
         <span>to</span>
-        <select id="end-year" aria-label="End year">${yearOptions(years.min, years.max, state.endYear)}</select>
+        <select id="end-year" class="field-select" aria-label="End year">${yearOptions(years.min, years.max, state.endYear)}</select>
       </div>
     </div>` : ''}
     ${has('rankings') ? `<div class="filter-group checkboxes">
@@ -260,7 +260,7 @@ export function createFilterBar(mount: string | Element, {
       </label>
     </div>` : ''}
     ${has('confSet') ? `<div class="filter-group conference-set-control tooltip-trigger">
-      <select id="conf-set" aria-label="Conference set" aria-describedby="conf-set-help">${optionsHtml(CONF_SETS, state.confSet)}</select>
+      <select id="conf-set" class="field-select" aria-label="Conference set" aria-describedby="conf-set-help">${optionsHtml(CONF_SETS, state.confSet)}</select>
       ${helpPanel('conf-set-help', CONF_SET_HELP)}
     </div>` : ''}
   `;

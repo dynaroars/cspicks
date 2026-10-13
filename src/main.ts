@@ -553,7 +553,7 @@ function renderSearchExamples() {
     ...(query.length >= 2 ? deadlineExampleItems(query) : [])
   ];
 
-  fixedContainer.innerHTML = '<span>Try:</span>';
+  fixedContainer.innerHTML = '<span class="examples-label">Try:</span>';
   renderExampleChips(container, [...contextualItems, ...examples].filter((item, index, all) => {
     const key = item.href || item.query;
     return all.findIndex(other => (other.href || other.query) === key) === index;

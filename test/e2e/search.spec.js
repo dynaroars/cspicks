@@ -157,7 +157,8 @@ test('malformed shared filter parameters fall back to valid controls', async ({ 
 test('the shared filter bar stays a single roomy row', async ({ page }) => {
   const measurements = async () => page.locator('#filter-bar').evaluate(bar => ({
     toggleWidths: [...bar.querySelectorAll('.filter-checkbox')].map(label => Math.round(label.getBoundingClientRect().width)),
-    wraps: new Set([...bar.querySelectorAll('.filter-group')].map(group => Math.round(group.getBoundingClientRect().top))).size
+    // Rows by vertical center: bordered selects are a few px taller than the checkbox groups beside them.
+    wraps: new Set([...bar.querySelectorAll('.filter-group')].map(group => { const box = group.getBoundingClientRect(); return Math.round((box.top + box.bottom) / 20); })).size
   }));
 
   await page.goto('./?percapita=false');

@@ -89,7 +89,7 @@ test('NSF funding beta searches nationwide data and aggregates fractional awards
   await expect(page.locator('#funding-award-count')).toContainText(/[\d,]+ NSF CS awards during/);
   await expect(page.locator('.funding-filters')).not.toContainText('NSF · USA');
   await expect(page.locator('#start-year')).toHaveCSS('border-top-style', 'solid');
-  expect(await page.locator('#start-year').evaluate(element => getComputedStyle(element).backgroundImage)).not.toBe('none');
+  await expect(page.locator('#start-year')).toHaveClass(/field-select/);
   const countLabelBox = await page.locator('#funding-award-count').boundingBox();
   const startYearBox = await page.locator('#start-year').boundingBox();
   expect(Math.abs((countLabelBox.y + countLabelBox.height / 2) - (startYearBox.y + startYearBox.height / 2))).toBeLessThan(2);
@@ -217,5 +217,6 @@ test('funding keywords autocomplete their values while preserving other filters'
   await expect(input).toHaveValue(new RegExp('^institution: "George Mason University" program: '));
   expect(await input.inputValue()).toContain(label);
   await page.reload();
+  await expect(input).toBeEnabled(); // the query is restored once the NSF data has loaded
   expect(await input.inputValue()).toContain(label);
 });
