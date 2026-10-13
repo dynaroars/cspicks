@@ -5818,5 +5818,20 @@
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false
+  },
+  {
+    "school": "Reed College",
+    "homepage": "https://www.reed.edu/computer-science/",
+    "facultyCount": 0,
+    "jobsUrl": "https://www.reed.edu/dean_of_faculty/facsearch/",
+    "state": "OR",
+    "lastCheckedAt": null,
+    "outcome": null,
+    "summary": null,
+    "checkedUrls": [],
+    "relatedUnits": [],
+    "relatedCheckedAt": null,
+    "deferredUntil": null,
+    "csrankings": false
   }
 ]

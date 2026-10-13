@@ -8516,5 +8516,32 @@
     "summary": "Two tenure-track assistant professor positions in the CS department, in two cluster-hire priority areas: safeguarding AI in health, and computing for neuroengineering (architecture, embedded and real-time systems, neuromorphic computing). Screening begins December 1, 2026; start July 1, 2027.",
     "source": "crawl",
     "verified": true
+  },
+  {
+    "id": "reed-cs-asst-prof-computer-systems-2026",
+    "school": "Reed College",
+    "department": "Department of Computer Science",
+    "title": "Assistant Professor Tenure Stream Faculty Position in Computer Systems",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "comm",
+      "mod",
+      "sec",
+      "arch",
+      "ops",
+      "robotics"
+    ],
+    "state": "OR",
+    "city": "Portland",
+    "deadline": "2026-10-12",
+    "rolling": true,
+    "postedDate": "2026-08-20",
+    "url": "https://www.reed.edu/dean_of_faculty/facsearch/positions/assistant-professor-tenure-stream-faculty-position-in-computer-systems.html",
+    "visaSponsorship": "case-by-case",
+    "summary": "Tenure-stream assistant professor in computer systems broadly construed (e.g., networks, databases, security, distributed computing, architecture, operating systems, robotics), starting fall 2027 at an undergraduate liberal arts college. Applications by October 12, 2026 are guaranteed full consideration; review continues until filled.",
+    "lastSeenAt": "2026-10-13",
+    "source": "submission",
+    "verified": true
   }
 ]
