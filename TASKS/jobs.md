@@ -91,13 +91,15 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
    social posts are leads only: follow them to the official posting, never copy facts from them. Record the
    page in `jobsUrl`.
 2. **Look beyond the CS department.** Many schools hire CS PhDs into other units, so a CS department-only
-   search is incomplete. In particular, explicitly check Information Science and Technology (IST) units and
-   Electrical and Computer Engineering (ECE/ECEC) units; these units often advertise faculty roles suitable for CS
+   search is incomplete. In particular, explicitly search Information Science and Technology (IST) units and
+   Electrical and Computer Engineering (ECE/ECEC) units at every school, even when the CS page has no opening;
+   these units often advertise faculty roles suitable for CS
    researchers. Also check information schools (iSchool, Informatics), EECS, data science, cybersecurity, and
    college-of-computing or engineering-wide searches. After the CS page, find the school's other computing-adjacent
    units (from the university's college/department directory or the engineering/information school site), read
-   their hiring pages, and list them in the sources row's `relatedUnits` (`[{ "name", "url" }]`) so later crawls
-   revisit them. Include a posting from such a unit when a CS PhD is plainly a target: it names computing, AI, ML,
+   their hiring pages, and list each official department/hiring page in the sources row's `relatedUnits`
+   (`[{ "name", "url" }]`) even when no position is open, so later crawls revisit those exact pages. Include a
+   posting from such a unit when a CS PhD is plainly a target: it names computing, AI, ML,
    data, security, networks, systems, or software, or it is an open or cluster search a CS PhD would apply to.
    Skip positions plainly outside computing. Record the unit in `department` as it appears on the posting
    (e.g. "College of Information Sciences and Technology"); `school` stays the name in the sources row.

@@ -18237,12 +18237,22 @@
     "region": "northamerica",
     "jobsUrl": "https://utampa.wd1.myworkdayjobs.com/en-US/Faculty",
     "state": "FL",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-14T00:00:00Z",
+    "outcome": "complete",
+    "summary": "Reviewed current CS and Information and Technology Management faculty postings; both have live 2027 openings.",
+    "checkedUrls": [
+      "https://www.ut.edu/computer-science",
+      "https://utampa.wd1.myworkdayjobs.com/en-US/Faculty/job/Assistant-Professor--Computer-Science_R0011061-1",
+      "https://www.ut.edu/academics/sykes-college-of-business/information-and-technology-management-itm-degrees",
+      "https://utampa.wd1.myworkdayjobs.com/en-US/Faculty/job/Assistant-Professor-in-Cybersecurity_R0010796-1"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Information and Technology Management (ITM)",
+        "url": "https://www.ut.edu/academics/sykes-college-of-business/information-and-technology-management-itm-degrees"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T00:00:00Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"
@@ -20417,5 +20427,25 @@
     "deferredUntil": null,
     "csrankings": false,
     "kind": "liberal-arts"
+  },
+  {
+    "school": "Concord University",
+    "homepage": "https://www.concord.edu/academics/college-of-science-mathematics-and-health/department-of-mathematics-and-computer-science",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://jobs.concord.edu/postings/3418",
+    "state": "WV",
+    "lastCheckedAt": "2026-10-14T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Verified the live Computer Science faculty posting; related-unit scan remains incomplete.",
+    "checkedUrls": [
+      "https://www.concord.edu/academics/college-of-science-mathematics-and-health/department-of-mathematics-and-computer-science",
+      "https://jobs.concord.edu/postings/3418"
+    ],
+    "relatedUnits": [],
+    "relatedCheckedAt": null,
+    "deferredUntil": null,
+    "csrankings": false
   }
 ]

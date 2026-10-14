@@ -12897,5 +12897,74 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "concord-assistant-professor-cs-2027",
+    "school": "Concord University",
+    "department": "Department of Mathematics and Computer Science",
+    "title": "Assistant Professor of Computer Science",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "sec",
+      "mlmining",
+      "soft"
+    ],
+    "state": "WV",
+    "city": "Athens",
+    "rolling": true,
+    "lastSeenAt": "2026-10-14",
+    "url": "https://jobs.concord.edu/postings/3418",
+    "visaSponsorship": "case-by-case",
+    "summary": "Tenure-track faculty position beginning January or August 2027, with teaching across the Computer Science, Computer Information Systems, Cybersecurity, and Data Analytics programs. Review is underway and continues until filled; a PhD is required for the tenure-track appointment.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "utampa-assistant-professor-cs-2027",
+    "school": "The University of Tampa",
+    "department": "Department of Computer Science",
+    "title": "Assistant Professor, Computer Science",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "mlmining"
+    ],
+    "anyArea": true,
+    "state": "FL",
+    "city": "Tampa",
+    "rolling": true,
+    "startDate": "2027-08-01",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://utampa.wd1.myworkdayjobs.com/en-US/Faculty/job/Assistant-Professor--Computer-Science_R0011061-1",
+    "visaSponsorship": "not-stated",
+    "summary": "Full-time tenure-track position for the 2027–28 academic year, beginning August 2027. Candidates in all CS areas are considered, with AI and machine learning especially encouraged; review continues until filled.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "utampa-assistant-professor-itm-2027",
+    "school": "The University of Tampa",
+    "department": "Department of Information and Technology Management",
+    "title": "Assistant Professor, Information and Technology Management",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "soft"
+    ],
+    "state": "FL",
+    "city": "Tampa",
+    "rolling": true,
+    "startDate": "2027-08-01",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://utampa.wd1.myworkdayjobs.com/en-US/Faculty/job/Assistant-Professor-in-Cybersecurity_R0010796-1",
+    "visaSponsorship": "not-stated",
+    "summary": "Tenure-track ITM faculty role starting fall 2027, teaching information-systems topics including management information systems and programming, with research and service duties. Applicants need a PhD or ABD in management information systems or a related field; review continues until filled.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]
