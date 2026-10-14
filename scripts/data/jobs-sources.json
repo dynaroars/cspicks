@@ -5903,9 +5903,9 @@
     "facultyCount": 9,
     "jobsUrl": "https://uab.peopleadmin.com/postings/search",
     "state": "AL",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:26:45Z",
     "outcome": "incomplete",
-    "summary": "Official source identified, but current faculty-job listing is not readable from the indexed results; partial pending portal query.",
+    "summary": "Rechecked official UAB Faculty Jobs and current Computer Science and Electrical and Computer Engineering faculty pages. The PeopleAdmin portal remains dynamically rendered and no current CS/ECE faculty requisition could be verified from public indexed results; no new role added.",
     "checkedUrls": [
       "https://www.uab.edu/cas/computerscience/",
       "https://uab.peopleadmin.com/postings/search?query=computer",
@@ -5916,7 +5916,9 @@
       "https://uab.peopleadmin.com/postings/search?query=informatics",
       "https://uab.peopleadmin.com/postings/search?query=electrical",
       "https://uab.peopleadmin.com/postings/search?query=artificial",
-      "https://www.uab.edu/faculty/jobs"
+      "https://www.uab.edu/faculty/jobs",
+      "https://www.uab.edu/cas/computerscience/people/faculty-directory",
+      "https://www.uab.edu/engineering/ece/people/faculty"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -5925,11 +5927,15 @@
         "url": "https://uab.peopleadmin.com/postings/search"
       },
       {
-        "name": "Department of Biomedical Informatics and Data Science (School of Medicine)",
+        "name": "Department of Biomedical Informatics and Data Science",
         "url": "https://uab.peopleadmin.com/postings/search?query=informatics"
+      },
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://www.uab.edu/engineering/ece/people/faculty"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T03:26:45Z",
     "country": "US",
     "region": "northamerica"
   },
@@ -5939,14 +5945,15 @@
     "facultyCount": 8,
     "jobsUrl": "https://compsci.uncg.edu/tenure-track-assistant-professor-position-available-3/",
     "state": "NC",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:26:45Z",
     "outcome": "complete",
-    "summary": "Current tenure-track CS search confirmed; existing dataset record re-confirmed against official department announcement.",
+    "summary": "Rechecked the active tenure-track Assistant Professor Computer Science posting and official department hiring page. The post remains open until filled with best consideration by October 31, 2026; no current related-unit faculty opening was found.",
     "checkedUrls": [
       "https://compsci.uncg.edu/",
       "https://spartantalent.uncg.edu/postings/36021",
       "https://spartantalent.uncg.edu/postings/search?query=computer",
-      "https://compsci.uncg.edu/tenure-track-assistant-professor-position-available-3/"
+      "https://compsci.uncg.edu/tenure-track-assistant-professor-position-available-3/",
+      "https://compsci.uncg.edu/contact/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -5955,7 +5962,7 @@
         "url": "https://spartantalent.uncg.edu/postings/search"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T03:26:45Z",
     "country": "US",
     "region": "northamerica"
   },
@@ -5965,17 +5972,24 @@
     "facultyCount": 7,
     "jobsUrl": "https://ualr.edu/humanresources/jobs/",
     "state": "AR",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:26:45Z",
     "outcome": "incomplete",
-    "summary": "Official Workday listing remains dynamically rendered and was not fully re-queried; prior search found no CS faculty posting. Partial.",
+    "summary": "Reviewed the official UA Little Rock employment page, Workday posting R0087139, the School of Computer and Information Sciences pages, and ECE faculty information. Added the current nine-month Computer Science Assistant Professor opening. No current ECE faculty requisition was confirmed; the external Workday board still limits broader related-unit review.",
     "checkedUrls": [
       "https://ualr.edu/computerinformationsciences/",
       "https://uasys.wd5.myworkdayjobs.com/UASYS?hiringCompany=720b21cbdf2401e26b5b1759c4019006&q=professor",
-      "https://ualr.edu/humanresources/jobs/"
+      "https://ualr.edu/humanresources/jobs/",
+      "https://uasys.wd5.myworkdayjobs.com/en-US/UASYS/job/Assistant-Professor---STEM---9-Month_R0087139",
+      "https://ualr.edu/engineering/faculty-and-staff/"
     ],
     "deferredUntil": null,
-    "relatedUnits": [],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedUnits": [
+      {
+        "name": "School of Engineering and Engineering Technology (Electrical and Computer Engineering)",
+        "url": "https://ualr.edu/engineering/faculty-and-staff/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T03:26:45Z",
     "country": "US",
     "region": "northamerica"
   },
