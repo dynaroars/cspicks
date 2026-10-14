@@ -5946,9 +5946,9 @@
     "facultyCount": 9,
     "jobsUrl": "https://uab.peopleadmin.com/postings/search",
     "state": "AL",
-    "lastCheckedAt": "2026-10-14T03:26:45Z",
+    "lastCheckedAt": "2026-10-14T16:40:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked official UAB Faculty Jobs and current Computer Science and Electrical and Computer Engineering faculty pages. The PeopleAdmin portal remains dynamically rendered and no current CS/ECE faculty requisition could be verified from public indexed results; no new role added.",
+    "summary": "Reviewed the official Biomedical Informatics and Data Science careers page and current PeopleAdmin postings PF1078P, PF1071P and PF1072P; added one computational/AI postdoc and two separate AI/healthcare postdoc requisitions explicitly accepting CS and related computing PhDs. CS, ECE and the faculty portal were also reviewed; the broader faculty portal is dynamically rendered and wider adjacent-unit review remains incomplete.",
     "checkedUrls": [
       "https://www.uab.edu/cas/computerscience/",
       "https://uab.peopleadmin.com/postings/search?query=computer",
@@ -5961,24 +5961,29 @@
       "https://uab.peopleadmin.com/postings/search?query=artificial",
       "https://www.uab.edu/faculty/jobs",
       "https://www.uab.edu/cas/computerscience/people/faculty-directory",
-      "https://www.uab.edu/engineering/ece/people/faculty"
+      "https://www.uab.edu/engineering/ece/people/faculty",
+      "https://www.uab.edu/medicine/informatics/about/careers",
+      "https://uab.peopleadmin.com/postings/28404",
+      "https://uab.peopleadmin.com/postings/21059",
+      "https://uab.peopleadmin.com/postings/28390",
+      "https://uab.peopleadmin.com/postings/28391"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "UAB PeopleAdmin postings",
-        "url": "https://uab.peopleadmin.com/postings/search"
+        "name": "Biomedical Informatics and Data Science careers",
+        "url": "https://www.uab.edu/medicine/informatics/about/careers"
       },
       {
-        "name": "Department of Biomedical Informatics and Data Science",
-        "url": "https://uab.peopleadmin.com/postings/search?query=informatics"
+        "name": "UAB PeopleAdmin postings",
+        "url": "https://uab.peopleadmin.com/postings/search"
       },
       {
         "name": "Electrical and Computer Engineering",
         "url": "https://www.uab.edu/engineering/ece/people/faculty"
       }
     ],
-    "relatedCheckedAt": "2026-10-14T03:26:45Z",
+    "relatedCheckedAt": "2026-10-14T16:40:00Z",
     "country": "US",
     "region": "northamerica"
   },

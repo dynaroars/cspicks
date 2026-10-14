@@ -13038,5 +13038,68 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "uab-biomedical-informatics-postdoc-2026",
+    "school": "University of Alabama - Birmingham",
+    "department": "Department of Biomedical Informatics and Data Science",
+    "title": "Biomedical Informatics & Data Science - Postdoctoral Fellow",
+    "track": "postdoc",
+    "areas": [
+      "ai",
+      "mlmining"
+    ],
+    "state": "AL",
+    "city": "Birmingham",
+    "postedDate": "2026-09-01",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://uab.peopleadmin.com/postings/28404",
+    "visaSponsorship": "not-stated",
+    "summary": "Postdoctoral research in clinical informatics and precision health using computational, statistical, and AI methods on clinical, genomic, and other biomedical data. Requires a PhD in Bioinformatics or AI and Health Applications, with Python/R and machine-learning or AI experience; the official portal lists no close date and does not say the role is open until filled.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "uab-health-professions-ai-postdoc-pf1071-2026",
+    "school": "University of Alabama - Birmingham",
+    "department": "Health Services Administration, School of Health Professions",
+    "title": "School of Health Professions-PostDoc Scholar",
+    "track": "postdoc",
+    "areas": [
+      "ai",
+      "mlmining"
+    ],
+    "state": "AL",
+    "city": "Birmingham",
+    "postedDate": "2026-08-13",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://uab.peopleadmin.com/postings/28390",
+    "visaSponsorship": "not-stated",
+    "summary": "One of two three-year postdoctoral appointments applying AI, machine learning, deep learning, LLMs and generative AI to healthcare. Accepts a PhD in computer science, computer engineering, software engineering, data science, AI, biomedical informatics, electrical engineering, industrial/systems engineering, or a closely related computing field; this is separate requisition PF1071P.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "uab-health-professions-ai-postdoc-pf1072-2026",
+    "school": "University of Alabama - Birmingham",
+    "department": "Health Services Administration, School of Health Professions",
+    "title": "School of Health Professions-PostDoc Scholar",
+    "track": "postdoc",
+    "areas": [
+      "ai",
+      "mlmining"
+    ],
+    "state": "AL",
+    "city": "Birmingham",
+    "postedDate": "2026-08-19",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://uab.peopleadmin.com/postings/28391",
+    "visaSponsorship": "not-stated",
+    "summary": "One of two three-year postdoctoral appointments applying AI, machine learning, deep learning, LLMs and generative AI to healthcare. Accepts a PhD in computer science, computer engineering, software engineering, data science, AI, biomedical informatics, electrical engineering, industrial/systems engineering, or a closely related computing field; this is separate requisition PF1072P.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]
