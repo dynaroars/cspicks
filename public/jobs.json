@@ -13582,5 +13582,74 @@
     "verified": true,
     "country": "US",
     "summary": "Tenure-track associate/full professor search in the School of Business Information Systems Department. Requires a PhD and internationally recognized IS research integrating AI and advanced analytics with healthcare systems; the listing also welcomes candidates from related disciplines. Preferred application date Nov 15, 2026; review continues until filled. A CS background is relevant when the candidate meets the specified senior IS/healthcare research profile."
+  },
+  {
+    "id": "talladega-asst-prof-cs-cis-2026",
+    "school": "Talladega College",
+    "department": "Computer Science Department",
+    "title": "Assistant Professor of Computer Science/ Computer Information Systems",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "mod",
+      "comm",
+      "sec"
+    ],
+    "state": "AL",
+    "city": "Talladega",
+    "deadline": null,
+    "lastSeenAt": "2026-10-14",
+    "visaSponsorship": "not-stated",
+    "url": "https://www.talladega.edu/careers/assistant-professor-of-computer-science-computer-information-systems-1/",
+    "summary": "Tenure-track assistant professor to teach computer science, computer information systems, and cybersecurity courses, including programming, databases, and networking. The position is slated to begin in Fall 2026; the page gives no application deadline.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "talladega-chair-cs-assistant-professor-2026",
+    "school": "Talladega College",
+    "department": "Computer Science Department",
+    "title": "Chair of Computer Science and Assistant Professor",
+    "track": "leadership",
+    "level": "assistant",
+    "areas": [
+      "arch",
+      "comm",
+      "ops",
+      "soft"
+    ],
+    "state": "AL",
+    "city": "Talladega",
+    "deadline": null,
+    "lastSeenAt": "2026-10-14",
+    "visaSponsorship": "not-stated",
+    "url": "https://www.talladega.edu/careers/chair-of-computer-science-and-assistant-professor/",
+    "summary": "Department chair and assistant professor role leading the computer science program while teaching core CS subjects. The college seeks a PhD in computer science, computer information systems, or a closely related field; no application deadline is listed.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "okstate-msis-assistant-professor-cybersecurity-2027",
+    "school": "Oklahoma State University",
+    "department": "Management Science and Information Systems Department, Spears School of Business",
+    "title": "Assistant Professor (Management Science & Information Systems)",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "sec"
+    ],
+    "state": "OK",
+    "city": "Stillwater",
+    "deadline": null,
+    "rolling": true,
+    "lastSeenAt": "2026-10-14",
+    "visaSponsorship": "not-stated",
+    "url": "https://jobs.okstate.edu/jobs/assistant-professor-management-science-information-systems-stillwater-oklahoma-united-states",
+    "summary": "Tenure-track assistant professor in MIS, with departmental strengths in cybersecurity, data science, and health informatics. Applicants with a PhD in MIS or a related area are considered, and screening continues until filled.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]

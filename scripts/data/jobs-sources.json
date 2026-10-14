@@ -5374,13 +5374,14 @@
     "facultyCount": 17,
     "jobsUrl": "https://jobs.okstate.edu/jobs/search/search-page-oklahoma-state",
     "state": "OK",
-    "lastCheckedAt": "2026-10-14T03:40:00Z",
+    "lastCheckedAt": "2026-10-14T04:52:18Z",
     "outcome": "complete",
-    "summary": "Official CS posting AF9557 confirms the existing open-rank tenure-track CS cybersecurity position. Also checked ECE and found open-rank tenure-track/tenured Computer Engineering position 212552, which explicitly accepts a CS PhD and covers architecture, ML, software engineering, cybersecurity, and related areas; no closing date stated.",
+    "summary": "Checked official CS and ECE hiring pages and the Spears School of Business MSIS faculty posting. The MSIS role prioritizes cybersecurity and data science and is open to PhDs in MIS or a related area; the official posting says screening continues until filled.",
     "checkedUrls": [
       "https://jobs.okstate.edu/jobs/open-rank-professor-of-computer-science-af9557-stillwater-oklahoma-united-states",
       "https://jobs.okstate.edu/jobs/search",
-      "https://jobs.okstate.edu/jobs/open-rank-tenure-track-tenured-faculty-212552-stillwater-oklahoma-united-states"
+      "https://jobs.okstate.edu/jobs/open-rank-tenure-track-tenured-faculty-212552-stillwater-oklahoma-united-states",
+      "https://jobs.okstate.edu/jobs/assistant-professor-management-science-information-systems-stillwater-oklahoma-united-states"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -5391,9 +5392,13 @@
       {
         "name": "OSU HR portal faculty jobs",
         "url": "https://jobs.okstate.edu/jobs/search/search-page-oklahoma-state"
+      },
+      {
+        "name": "Management Science and Information Systems (MSIS), Spears School of Business",
+        "url": "https://jobs.okstate.edu/jobs/assistant-professor-management-science-information-systems-stillwater-oklahoma-united-states"
       }
     ],
-    "relatedCheckedAt": "2026-10-14T03:40:00Z",
+    "relatedCheckedAt": "2026-10-14T04:52:18Z",
     "country": "US",
     "region": "northamerica",
     "kind": "R1"
@@ -20575,6 +20580,34 @@
       }
     ],
     "relatedCheckedAt": "2026-10-14T04:44:48Z",
+    "deferredUntil": null,
+    "csrankings": false
+  },
+  {
+    "school": "Talladega College",
+    "homepage": "https://www.talladega.edu/computer-science/",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://www.talladega.edu/careers/",
+    "state": "AL",
+    "lastCheckedAt": "2026-10-14T04:52:18Z",
+    "outcome": "complete",
+    "summary": "Checked the official CS department site, the complete employment listings, both live CS faculty searches, and the Information Technology department page. No additional IT faculty opening was listed; revisit the saved pages next run.",
+    "checkedUrls": [
+      "https://www.talladega.edu/computer-science/",
+      "https://www.talladega.edu/careers/",
+      "https://www.talladega.edu/careers/assistant-professor-of-computer-science-computer-information-systems-1/",
+      "https://www.talladega.edu/careers/chair-of-computer-science-and-assistant-professor/",
+      "https://www.talladega.edu/information-technology/"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Information Technology Department",
+        "url": "https://www.talladega.edu/information-technology/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T04:52:18Z",
     "deferredUntil": null,
     "csrankings": false
   }
