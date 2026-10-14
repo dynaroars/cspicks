@@ -9590,7 +9590,7 @@
     "deadline": null,
     "rolling": true,
     "startDate": "2027-07-01",
-    "lastSeenAt": "2026-10-13",
+    "lastSeenAt": "2026-10-14",
     "url": "https://apply.interfolio.com/192536",
     "visaSponsorship": "not-stated",
     "summary": "Tenure-track Assistant Professor in Computer Science beginning July 1, 2027, with expertise in an applied area of systems, able to teach Computer Architecture. Teaching load 4 courses first year, 5 courses thereafter; base salary $118,125-$125,500; review begins October 1, 2026.",
@@ -9618,7 +9618,8 @@
     "summary": "Tenure-track Assistant Professor of Computer Science starting Fall 2027. Open research area. Teaching load is five course units a year (3-4 regular courses plus labs/thesis). Requires PhD in CS or closely related field by September 1, 2027.",
     "source": "crawl",
     "verified": true,
-    "country": "US"
+    "country": "US",
+    "closedAt": "2026-10-14"
   },
   {
     "id": "umd-quics-hartree-postdoc-2026",
@@ -13771,6 +13772,25 @@
     "visaSponsorship": "no",
     "url": "https://olemiss.wd12.myworkdayjobs.com/External__Faculty/job/University-MS/Visiting-Instructional-Assistant-Professor---Electrical-and-Computer-Engineering_JR102524",
     "summary": "One-year full-time visiting assistant professor position teaching undergraduate or graduate digital systems courses. The official listing says the anticipated start was August 2026 and applications are reviewed until filled; it also states that visa sponsorship is unavailable.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "los-medanos-assistant-prof-cs-2026",
+    "school": "Los Medanos College",
+    "department": "Computer Science",
+    "title": "Assistant Professor, Computer Science (Tenure-Track)",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [],
+    "state": "CA",
+    "deadline": "2026-11-13",
+    "rolling": false,
+    "lastSeenAt": "2026-10-14",
+    "url": "https://www.4cdcareers.net/postings/12363",
+    "visaSponsorship": "not-stated",
+    "summary": "Full-time tenure-track role teaching programming and foundational CS courses, including systems concepts, while contributing to curriculum development and student mentoring. Starts Fall 2027; applications close Nov 13, 2026.",
     "source": "crawl",
     "verified": true,
     "country": "US"

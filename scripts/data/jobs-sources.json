@@ -17799,12 +17799,16 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.hamilton.edu/offices/human-resources/employment/job-opportunities-list?Go=Go&action=display&category=Faculty",
     "state": "NY",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-14T12:00:00Z",
+    "outcome": "incomplete",
+    "summary": "The official HR faculty list and Interfolio posting still show the Assistant Professor of Computer Science search. The related-unit hiring scan remains incomplete.",
+    "checkedUrls": [
+      "https://www.hamilton.edu/academics/departments/Computer-Science",
+      "https://www.hamilton.edu/offices/human-resources/employment/job-opportunities-list?Go=Go&action=display&category=Faculty",
+      "https://apply.interfolio.com/192536"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null,
@@ -17816,12 +17820,17 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.haverford.edu/human-resources/jobs",
     "state": "PA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-14T12:00:00Z",
+    "outcome": "incomplete",
+    "summary": "The Computer Science announcement states an Oct 1, 2026 deadline; the search is no longer listed on the current HR jobs page, so the roster entry is archived. Related-unit hiring pages were not reviewed.",
+    "checkedUrls": [
+      "https://www.haverford.edu/computer-science",
+      "https://www.haverford.edu/human-resources/jobs",
+      "https://www.haverford.edu/provost/news/tenure-track-assistant-professor-computer-science",
+      "https://apply.interfolio.com/190236"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null,
@@ -17889,10 +17898,12 @@
     "region": "northamerica",
     "jobsUrl": "https://employment.davidson.edu/",
     "state": "NC",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-14T12:00:00Z",
+    "outcome": "incomplete",
+    "summary": "The official employment board currently lists an Assistant Professor of Computer Science search for a July 2027 start, open until filled. A job-specific official URL and related-unit review were not confirmed in this pass; revisit the board for the direct posting.",
+    "checkedUrls": [
+      "https://employment.davidson.edu/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null,
@@ -20618,5 +20629,26 @@
     "relatedCheckedAt": "2026-10-14T04:52:18Z",
     "deferredUntil": null,
     "csrankings": false
+  },
+  {
+    "school": "Los Medanos College",
+    "homepage": "https://www.losmedanos.edu/computerscience/",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://www.4cdcareers.net/postings/12363",
+    "state": "CA",
+    "lastCheckedAt": "2026-10-14T12:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Verified the live tenure-track Assistant Professor of Computer Science posting on the district careers site; applications close Nov 13, 2026, for a Fall 2027 start. Related-unit hiring pages were not reviewed in this pass.",
+    "checkedUrls": [
+      "https://www.losmedanos.edu/computerscience/",
+      "https://www.4cdcareers.net/postings/12363"
+    ],
+    "relatedUnits": [],
+    "relatedCheckedAt": null,
+    "deferredUntil": null,
+    "csrankings": false,
+    "kind": "community-college"
   }
 ]
