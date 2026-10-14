@@ -17706,14 +17706,29 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": "https://gvsu.wd1.myworkdayjobs.com/en-US/careers",
+    "jobsUrl": "https://www.gvsu.edu/computing/employment-opportunites-31",
     "state": "MI",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-14T04:20:00Z",
+    "outcome": "incomplete",
+    "summary": "Reviewed the official College of Computing current openings and its AI Research and Innovation Institute page. The College of Computing open-rank professor search remains current, and the founding AI institute director/full professor posting is open until filled; its official Workday page is not text-renderable. The listed Affiliate Faculty posting could not be reviewed, so the broader scan remains incomplete.",
+    "checkedUrls": [
+      "https://www.gvsu.edu/computing/employment-opportunites-31",
+      "https://gvsu.wd1.myworkdayjobs.com/en-US/careers/job/Assistant-Associate-Full-Professor---College-of-Computing_R105083",
+      "https://gvsu.wd1.myworkdayjobs.com/en-US/careers/job/Full-Professor---AI-Research-and-Innovation-Institute-Inaugural-Executive-Director---College-of-Computing_R104793",
+      "https://www.gvsu.edu/computing/airii-gvsu-and-van-andel-institute-293",
+      "https://www.gvsu.edu/catalog/college/college-of-computing.htm"
+    ],
+    "relatedUnits": [
+      {
+        "name": "College of Computing current job openings",
+        "url": "https://www.gvsu.edu/computing/employment-opportunites-31"
+      },
+      {
+        "name": "AI Research and Innovation Institute (AIRII)",
+        "url": "https://www.gvsu.edu/computing/airii-gvsu-and-van-andel-institute-293"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T04:20:00Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"

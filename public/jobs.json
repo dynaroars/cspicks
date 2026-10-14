@@ -9386,7 +9386,7 @@
     "deadline": null,
     "rolling": true,
     "startDate": "2027-08-15",
-    "lastSeenAt": "2026-10-13",
+    "lastSeenAt": "2026-10-14",
     "url": "https://gvsu.wd1.myworkdayjobs.com/en-US/careers/job/Assistant-Associate-Full-Professor---College-of-Computing_R105083",
     "visaSponsorship": "not-stated",
     "summary": "Tenured or tenure-track open rank faculty position in the College of Computing joining Winter or Fall 2027. Specializations preferred in AI, cybersecurity, software engineering, and human-centered design. Review begins October 19, 2026 until filled.",
@@ -12102,6 +12102,27 @@
     "url": "https://jobs.okstate.edu/jobs/open-rank-tenure-track-tenured-faculty-212552-stillwater-oklahoma-united-states",
     "visaSponsorship": "not-stated",
     "summary": "Open-rank tenure-track or tenured Computer Engineering faculty position. Focus areas include computer architecture, machine learning, neural networks, embedded systems, software engineering, edge computing, cybersecurity, quantum computing, IoT, and VLSI. A PhD in computer science is explicitly accepted.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "gvsu-airii-founding-director-full-professor-2026",
+    "school": "Grand Valley State University",
+    "department": "College of Computing",
+    "title": "Full Professor & AI Research and Innovation Institute Inaugural Executive Director",
+    "track": "leadership",
+    "level": "full",
+    "areas": [
+      "ai"
+    ],
+    "state": "MI",
+    "city": "Grand Rapids",
+    "rolling": true,
+    "lastSeenAt": "2026-10-14",
+    "url": "https://gvsu.wd1.myworkdayjobs.com/en-US/careers/job/Full-Professor---AI-Research-and-Innovation-Institute-Inaugural-Executive-Director---College-of-Computing_R104793",
+    "visaSponsorship": "not-stated",
+    "summary": "Founding scientific and strategic leader of the AI Research and Innovation Institute, housed in the College of Computing with an adjunct appointment at Van Andel Institute. Review is ongoing until filled; tenure may be offered at hire.",
     "source": "crawl",
     "verified": true,
     "country": "US"
