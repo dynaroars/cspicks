@@ -13794,5 +13794,49 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "westminster-cs-assistant-prof-ai-2026",
+    "school": "Westminster College",
+    "department": "Department of Mathematics and Computer Science",
+    "title": "Assistant Professor of Computer Science",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai"
+    ],
+    "state": "PA",
+    "city": "New Wilmington",
+    "deadline": "2026-10-16",
+    "rolling": true,
+    "lastSeenAt": "2026-10-14",
+    "visaSponsorship": "no",
+    "url": "https://www.westminster.edu/about/community/hr/pdf/Assistant%20Professor%20of%20Computer%20Science%20ad%208.2026%20-%20ac.pdf",
+    "summary": "Tenure-track Assistant Professor starting August 2027, teaching undergraduate computer science and expanding AI and machine learning offerings while maintaining a research program involving undergraduates. A PhD in Computer Science or Computer Engineering with AI or machine learning expertise is required; applications received by Oct 16 get full consideration and the search continues until filled.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "westminster-cs-visiting-assistant-prof-ai-2026",
+    "school": "Westminster College",
+    "department": "Department of Mathematics and Computer Science",
+    "title": "Visiting Assistant Professor of Computer Science",
+    "track": "visiting",
+    "level": "assistant",
+    "areas": [
+      "ai"
+    ],
+    "state": "PA",
+    "city": "New Wilmington",
+    "deadline": "2026-10-16",
+    "rolling": true,
+    "lastSeenAt": "2026-10-14",
+    "visaSponsorship": "no",
+    "url": "https://www.westminster.edu/about/community/hr/pdf/Visiting%20Assistant%20Professor%20of%20CS%208.2026%20-%20ac.pdf",
+    "summary": "Two-year visiting appointment starting August 2027, teaching undergraduate computer science and contributing to the curriculum and scholarship. A PhD in Computer Science or Computer Engineering with AI or machine learning expertise is required; applications received by Oct 16 get full consideration and the search continues until filled.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]

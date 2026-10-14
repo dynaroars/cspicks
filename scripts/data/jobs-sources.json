@@ -17801,7 +17801,7 @@
     "region": "northamerica",
     "jobsUrl": "https://www.hamilton.edu/offices/human-resources/employment/job-opportunities-list?Go=Go&action=display&category=Faculty",
     "state": "NY",
-    "lastCheckedAt": "2026-10-14T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T05:00:00Z",
     "outcome": "incomplete",
     "summary": "The official HR faculty list and Interfolio posting still show the Assistant Professor of Computer Science search. The related-unit hiring scan remains incomplete.",
     "checkedUrls": [
@@ -17822,7 +17822,7 @@
     "region": "northamerica",
     "jobsUrl": "https://www.haverford.edu/human-resources/jobs",
     "state": "PA",
-    "lastCheckedAt": "2026-10-14T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T05:00:00Z",
     "outcome": "incomplete",
     "summary": "The Computer Science announcement states an Oct 1, 2026 deadline; the search is no longer listed on the current HR jobs page, so the roster entry is archived. Related-unit hiring pages were not reviewed.",
     "checkedUrls": [
@@ -17898,7 +17898,7 @@
     "region": "northamerica",
     "jobsUrl": "https://employment.davidson.edu/",
     "state": "NC",
-    "lastCheckedAt": "2026-10-14T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T05:00:00Z",
     "outcome": "incomplete",
     "summary": "The official employment board currently lists an Assistant Professor of Computer Science search for a July 2027 start, open until filled. A job-specific official URL and related-unit review were not confirmed in this pass; revisit the board for the direct posting.",
     "checkedUrls": [
@@ -18041,12 +18041,23 @@
     "region": "northamerica",
     "jobsUrl": "https://www.westminster.edu/about/community/employment.cfm",
     "state": "PA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-14T05:04:32Z",
+    "outcome": "complete",
+    "summary": "The official employment list and both linked ads confirm live faculty searches for a tenure-track Assistant Professor and a two-year Visiting Assistant Professor of Computer Science; applications received by Oct 16, 2026 receive full consideration, with review continuing until filled. The academic directory places Computer Information Systems within Mathematics & Computer Science; no separate IST or ECE/ECEC department was identified.",
+    "checkedUrls": [
+      "https://www.westminster.edu/about/community/employment.cfm",
+      "https://www.westminster.edu/about/community/hr/pdf/Assistant%20Professor%20of%20Computer%20Science%20ad%208.2026%20-%20ac.pdf",
+      "https://www.westminster.edu/about/community/hr/pdf/Visiting%20Assistant%20Professor%20of%20CS%208.2026%20-%20ac.pdf",
+      "https://www.westminster.edu/academics/",
+      "https://www.westminster.edu/academics/schools/physical-mathematical/math-cs/majors.cfm"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Computer Information Systems (within Mathematics & Computer Science)",
+        "url": "https://www.westminster.edu/academics/schools/physical-mathematical/math-cs/majors.cfm"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T05:04:32Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "liberal-arts"
@@ -20638,7 +20649,7 @@
     "region": "northamerica",
     "jobsUrl": "https://www.4cdcareers.net/postings/12363",
     "state": "CA",
-    "lastCheckedAt": "2026-10-14T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T05:00:00Z",
     "outcome": "incomplete",
     "summary": "Verified the live tenure-track Assistant Professor of Computer Science posting on the district careers site; applications close Nov 13, 2026, for a Fall 2027 start. Related-unit hiring pages were not reviewed in this pass.",
     "checkedUrls": [
