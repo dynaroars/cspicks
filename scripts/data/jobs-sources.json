@@ -6214,23 +6214,28 @@
     "facultyCount": 6,
     "jobsUrl": "https://olemiss.wd12.myworkdayjobs.com/External__Faculty",
     "state": "MS",
-    "lastCheckedAt": "2026-10-14T03:22:37Z",
+    "lastCheckedAt": "2026-10-14T04:28:09Z",
     "outcome": "incomplete",
-    "summary": "Rechecked the official Workday faculty board and JR102524 details: the ECE visiting instructional assistant professor role is a one-year 2026 appointment, outside the CS target; no new CS faculty opening was verified.",
+    "summary": "Rechecked Ole Miss Workday and ECE. JR102524 is a one-year visiting instructional assistant professor role teaching digital systems; its official detail page appears in a stale crawl and specifies an August 2026 start, so current availability could not be confirmed and it was not added. Recheck the official board and ECE department page.",
     "checkedUrls": [
       "https://olemiss.edu/hr/um-careers/",
       "https://olemiss.wd12.myworkdayjobs.com/External__Faculty",
       "https://olemiss.wd12.myworkdayjobs.com/en-US/External__Faculty/job/University-MS/Assistant-Professor_JR103346",
-      "https://olemiss.wd12.myworkdayjobs.com/External__Faculty/job/University-MS/Visiting-Instructional-Assistant-Professor---Electrical-and-Computer-Engineering_JR102524"
+      "https://olemiss.wd12.myworkdayjobs.com/External__Faculty/job/University-MS/Visiting-Instructional-Assistant-Professor---Electrical-and-Computer-Engineering_JR102524",
+      "https://ece.olemiss.edu/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "UM Workday Faculty board",
         "url": "https://olemiss.wd12.myworkdayjobs.com/External__Faculty"
+      },
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://ece.olemiss.edu/"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T04:28:09Z",
     "country": "US",
     "region": "northamerica"
   },
