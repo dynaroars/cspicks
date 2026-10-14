@@ -4287,9 +4287,9 @@
     "facultyCount": 27,
     "jobsUrl": "https://careers.ua.edu/",
     "state": "AL",
-    "lastCheckedAt": "2026-10-11T15:00:00Z",
-    "outcome": "partial",
-    "summary": "Refreshed current CS hydrology/hydroinformatics assistant professor requisition 530733, closing Nov 7, 2026. It centers AI, HPC, cloud/edge computing and water data. Official faculty board lists six CS openings, including this requisition; Associate/Full rank water-research related requisitions still require individual review.",
+    "lastCheckedAt": "2026-10-14T04:54:00Z",
+    "outcome": "complete",
+    "summary": "Reviewed current CS faculty openings, the complete ECE faculty listing, and a live MIS assistant professor search centered on generative AI. Added four distinct ECE postings at assistant, associate, full, and teaching-assistant ranks plus the MIS AI search; official postings remain open.",
     "checkedUrls": [
       "https://cs.ua.edu",
       "https://careers.ua.edu/jobs/computer-science-assistant-professor-530199-tuscaloosa-alabama-united-states",
@@ -4303,7 +4303,11 @@
       "https://careers.ua.edu/jobs/electrical-and-computer-engineering-assistant-professor-530360-tuscaloosa-alabama-united-states",
       "https://careers.ua.edu/jobs/postdoctoral-fellow-530831-tuscaloosa-alabama-united-states",
       "https://careers.ua.edu/jobs/computer-science-hydrology-and-hydroinformatics-research-assistant-professor-530733-tuscaloosa-alabama-united-states",
-      "https://careers.ua.edu/jobs/search/facultyjobs"
+      "https://careers.ua.edu/jobs/search/facultyjobs",
+      "https://careers.ua.edu/jobs/electrical-and-computer-engineering-associate-professor-530361-tuscaloosa-alabama-united-states",
+      "https://careers.ua.edu/jobs/electrical-and-computer-engineering-full-professor-530362-tuscaloosa-alabama-united-states",
+      "https://careers.ua.edu/jobs/electrical-and-computer-engineering-renewable-contract-teaching-assistant-professor-530364-tuscaloosa-alabama-united-states",
+      "https://jobs.uasystem.edu/cw/en-us/job/530515/ccb-tenuretrack-assistant-professor-in-management-information-systems-mis-530515"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -4314,9 +4318,13 @@
       {
         "name": "UA Careers faculty jobs",
         "url": "https://careers.ua.edu/faculty"
+      },
+      {
+        "name": "Information Systems, Statistics, and Management Science (Culverhouse College of Business)",
+        "url": "https://jobs.uasystem.edu/cw/en-us/job/530515/ccb-tenuretrack-assistant-professor-in-management-information-systems-mis-530515"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T04:54:00Z",
     "country": "US",
     "region": "northamerica"
   },
