@@ -5042,12 +5042,13 @@
     "facultyCount": 20,
     "jobsUrl": "https://jobs.uri.edu/",
     "state": "RI",
-    "lastCheckedAt": "2026-10-11T20:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:00:00Z",
     "outcome": "complete",
-    "summary": "Current URI applicant portal results were checked against the CS and Statistics department faculty page. Current listings include non-CS positions such as Computer Systems Administrator (professional staff); the visible CS faculty page call is an October 2022 posting for a 2023 start and is stale. No current CS faculty opening surfaced.",
+    "summary": "Rechecked the official URI applicant portal and CS page, plus Electrical, Computer & Biomedical Engineering (ECEB). The cybersecurity postdoc remains open until filled and was refreshed. No new current CS faculty opening surfaced; the ECEB postdoc is already in the roster.",
     "checkedUrls": [
       "https://jobs.uri.edu/postings/search",
       "https://web.uri.edu/cs/tenure-track-faculty-position-in-computer-science/",
+      "https://jobs.uri.edu/postings/16786",
       "https://www.uri.edu/news/2026/01/update-on-state-fte-cap-and-uri-hiring/"
     ],
     "deferredUntil": null,
@@ -5055,9 +5056,13 @@
       {
         "name": "URI Human Resources job site",
         "url": "https://jobs.uri.edu/postings/search"
+      },
+      {
+        "name": "Electrical, Computer & Biomedical Engineering (ECEB)",
+        "url": "https://web.uri.edu/elecompbio/"
       }
     ],
-    "relatedCheckedAt": "2026-10-11T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T03:00:00Z",
     "country": "US",
     "region": "northamerica",
     "kind": "R1"
