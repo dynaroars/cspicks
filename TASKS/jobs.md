@@ -55,15 +55,16 @@ checked, work the `csrankings: false` rows next, then import new ones.
 ## International posting research
 
 For the ongoing international collection, check non-US CSRankings schools first; move to smaller
-universities after that list has been checked. Keep a durable record in the matching school's row in
+universities after that list has been checked. Work in batches of multiple verified postings and add them
+directly to `public/jobs.json`; do not create a GitHub Issue per posting (or issue batches) unless the user
+explicitly asks for that workflow. Keep a durable record in the matching school's row in
 `scripts/data/jobs-sources.json`: set `jobsUrl` to the official hiring page (and add official adjacent-unit
 pages to `relatedUnits`), record the pages actually reviewed in `checkedUrls`, and update
 `lastCheckedAt` / `outcome` / `summary`. Record official hiring pages even when they show no current CS
 opening, since early-season pages may add roles later; a future pass should revisit those URLs. Mark a
 school `incomplete` if only selected postings or units were reviewed. Keep blocked or unfindable pages
 explicitly identified rather than treating them as checked. Use official university sources for posting
-details. Group multiple verified leads into each GitHub Issue batch; do not open one issue per lead. Keep
-the university website record updated even when a school has no leads, so later passes can revisit it as
+details. Keep the university website record updated even when a school has no leads, so later passes can revisit it as
 its hiring page changes. Add each verified live international posting directly to `public/jobs.json`, following
 the schema below and using one record per official posting URL. For international jobs, `country` is the ISO
 country code, `city` is the posted location, and `state` may hold a province/region or an empty string when

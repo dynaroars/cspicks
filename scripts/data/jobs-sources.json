@@ -3625,9 +3625,9 @@
     "facultyCount": 35,
     "jobsUrl": "https://computing.unl.edu/employment-opportunities/",
     "state": "NE",
-    "lastCheckedAt": "2026-10-11T10:30:00Z",
+    "lastCheckedAt": "2026-10-13T16:00:00Z",
     "outcome": "incomplete",
-    "summary": "Current UNL job board has an active ECE tenure-line computer engineering role. School of Computing page also lists three Fall 2026 calls whose linked postings were unavailable, so CS-school sweep remains unresolved.",
+    "summary": "Checked the official UNL faculty portal and found a new School of Computing tenure-line robotics search, plus the existing ECE computer-engineering posting. The new official School of Computing ad is recorded; continue checking its CS and adjacent-unit pages on the next pass.",
     "checkedUrls": [
       "https://cse.unl.edu/",
       "https://jobs.nebraska.edu/UniversityNebraskaSystem/job/AssistantAssociate-Professor-Robotics/1856-en_US",
@@ -3641,16 +3641,25 @@
       "https://jobs.nebraska.edu/UniversityNebraskaSystem/search/?q=faculty",
       "https://employment.unl.edu/postings/102546",
       "https://computing.unl.edu/employment-opportunities/",
-      "https://employment.unl.edu/postings/search?sort=1262+desc"
+      "https://employment.unl.edu/postings/search?sort=1262+desc",
+      "https://employment.unl.edu/postings/102817"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "University of Nebraska Job Board",
         "url": "https://jobs.nebraska.edu/UniversityNebraskaSystem/"
+      },
+      {
+        "name": "School of Computing",
+        "url": "https://computing.unl.edu/employment-opportunities/"
+      },
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://engineering.unl.edu/ece/"
       }
     ],
-    "relatedCheckedAt": "2026-10-11T10:30:00Z",
+    "relatedCheckedAt": "2026-10-13T16:00:00Z",
     "country": "US",
     "region": "northamerica"
   },
@@ -18257,14 +18266,17 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.schooljobs.com/jobs/5513110-0/visiting-assistant-professor-of-computer-science",
     "state": "OH",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T16:00:00Z",
+    "outcome": "complete",
+    "summary": "Official current posting found for a visiting assistant professor in computer science; department website checked. No separate IST or ECE/ECEC hiring unit identified.",
+    "checkedUrls": [
+      "https://www.mountunion.edu/computer-science",
+      "https://www.schooljobs.com/jobs/5513110-0/visiting-assistant-professor-of-computer-science"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-13T16:00:00Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "liberal-arts"
@@ -20367,5 +20379,26 @@
     "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"
+  },
+  {
+    "school": "Stetson University",
+    "homepage": "https://www.stetson.edu/other/academics/programs.php",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://www.schooljobs.com/jobs/5487774-0/assistant-professor-of-computer-science",
+    "state": "FL",
+    "lastCheckedAt": "2026-10-13T16:00:00Z",
+    "outcome": "complete",
+    "summary": "Official Math & Computer Science hiring ad found for a tenure-track assistant professor focused on cybersecurity. Reviewed department/program information; no separate IST or ECE/ECEC hiring unit identified.",
+    "checkedUrls": [
+      "https://www.stetson.edu/other/academics/programs.php",
+      "https://www.schooljobs.com/jobs/5487774-0/assistant-professor-of-computer-science"
+    ],
+    "relatedUnits": [],
+    "relatedCheckedAt": "2026-10-13T16:00:00Z",
+    "deferredUntil": null,
+    "csrankings": false,
+    "kind": "liberal-arts"
   }
 ]
