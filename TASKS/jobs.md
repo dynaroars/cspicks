@@ -1,8 +1,6 @@
 # Academic CS jobs (`public/jobs.json`)
 
-> **`/goal TASKS/jobs.md`**: Work through `npm run maintain:jobs -- --limit 30`: crawl each school's official hiring pages, keep `lastSeenAt`/`closedAt` current, and record the crawl in `scripts/data/jobs-sources.json`. Work in bounded batches and open a PR on a
-> topic branch for each; never push to `main`. Scheduled runs stop at the cap in
-> [docs/AUTOMATION.md](../docs/AUTOMATION.md).
+> **`/goal TASKS/jobs.md`**: Work through `npm run maintain:jobs -- --limit 30`: crawl each school's official hiring pages, keep `lastSeenAt`/`closedAt` current, and record the crawl in `scripts/data/jobs-sources.json`. Work in bounded batches and add verified postings directly to the roster in `public/jobs.json`; do not create GitHub Issues for individual leads. For an interactive run explicitly requested by the user, commit and push each reviewed batch directly to `main` when authorized. Scheduled/unattended runs follow [docs/AUTOMATION.md](../docs/AUTOMATION.md): producers open PRs, never push to `main`, and stop at their batch cap.
 
 **Unknown beats wrong**: never fill a field from a prior year, a third-party tracker, or a guess.
 Validate every batch with `npm test && npm run typecheck && npm run build && git diff --check`.
