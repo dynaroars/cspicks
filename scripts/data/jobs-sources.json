@@ -18095,13 +18095,26 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": "https://jobs.calpoly.edu/",
+    "jobsUrl": "https://jobs.calpoly.edu/en-us/Search/?category=faculty+-+engineering&search-keyword=&subscribe=true&work-type=instructional+faculty+-+temporary%2Flecturer,instructional+faculty+%E2%80%93+tenured%2Ftenure-track",
     "state": "CA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-13T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Official Cal Poly faculty search and the Computer Science/Software Engineering and Computer Engineering postings reviewed; both live AY 2027–28 tenure-track assistant professor openings added. Other related academic-unit hiring pages were not fully reviewed.",
+    "checkedUrls": [
+      "https://jobs.calpoly.edu/en-us/Search/?category=faculty+-+engineering&search-keyword=&subscribe=true&work-type=instructional+faculty+-+temporary%2Flecturer,instructional+faculty+%E2%80%93+tenured%2Ftenure-track",
+      "https://jobs.calpoly.edu/en-us/job/559542/assistant-professor-computer-science-and-software-engineering-ay-2728",
+      "https://jobs.calpoly.edu/en-us/job/559571/assistant-professor-computer-engineering-ay-2728"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Computer Science and Software Engineering",
+        "url": "https://csc.calpoly.edu/"
+      },
+      {
+        "name": "Computer Engineering",
+        "url": "https://cpe.calpoly.edu/"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
@@ -18221,12 +18234,15 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://employment.angelo.edu/postings/search?sort=225+desc",
     "state": "TX",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Official employment search and Computer Science AI faculty posting F385P reviewed; one current tenure-track assistant professor opening added. Related academic units were not fully reviewed.",
+    "checkedUrls": [
+      "https://employment.angelo.edu/postings/search?sort=225+desc",
+      "https://employment.angelo.edu/postings/8179"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null,
@@ -18743,13 +18759,21 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://appstate.peopleadmin.com/postings/search?commit=Search&query_position_type_id%5B%5D=3",
     "state": "NC",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-13T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Official faculty job search and Lowe’s Tech distinguished cybersecurity professorship in Computer Information Systems reviewed; current associate/full-rank tenure-track opening added. Other computing-adjacent units were not fully reviewed.",
+    "checkedUrls": [
+      "https://appstate.peopleadmin.com/postings/search?commit=Search&query_position_type_id%5B%5D=3",
+      "https://appstate.peopleadmin.com/postings/55698"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Computer Information Systems",
+        "url": "https://cis.appstate.edu/"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
