@@ -5312,21 +5312,26 @@
     "facultyCount": 17,
     "jobsUrl": "https://jobs.okstate.edu/jobs/search/search-page-oklahoma-state",
     "state": "OK",
-    "lastCheckedAt": "2026-10-11T23:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:40:00Z",
     "outcome": "complete",
-    "summary": "Official CS posting AF9557 confirms an open-rank tenure-track CS position focused on cybersecurity, digital forensics, cyber investigations, reverse engineering, or malware analysis. August 2027 start; priority date Dec 1, 2026; accepted until filled. Refreshed existing record.",
+    "summary": "Official CS posting AF9557 confirms the existing open-rank tenure-track CS cybersecurity position. Also checked ECE and found open-rank tenure-track/tenured Computer Engineering position 212552, which explicitly accepts a CS PhD and covers architecture, ML, software engineering, cybersecurity, and related areas; no closing date stated.",
     "checkedUrls": [
       "https://jobs.okstate.edu/jobs/open-rank-professor-of-computer-science-af9557-stillwater-oklahoma-united-states",
-      "https://jobs.okstate.edu/jobs/search"
+      "https://jobs.okstate.edu/jobs/search",
+      "https://jobs.okstate.edu/jobs/open-rank-tenure-track-tenured-faculty-212552-stillwater-oklahoma-united-states"
     ],
     "deferredUntil": null,
     "relatedUnits": [
+      {
+        "name": "OSU School of Electrical and Computer Engineering",
+        "url": "https://ceat.okstate.edu/ece/employment-opportunities"
+      },
       {
         "name": "OSU HR portal faculty jobs",
         "url": "https://jobs.okstate.edu/jobs/search/search-page-oklahoma-state"
       }
     ],
-    "relatedCheckedAt": "2026-10-11T23:00:00Z",
+    "relatedCheckedAt": "2026-10-14T03:40:00Z",
     "country": "US",
     "region": "northamerica",
     "kind": "R1"

@@ -12082,5 +12082,28 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "okstate-ece-open-rank-computer-engineering-2026",
+    "school": "Oklahoma State University",
+    "department": "Electrical and Computer Engineering",
+    "title": "Open-Rank Tenure-Track/Tenured Faculty in Computer Engineering",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "arch",
+      "ai",
+      "sec",
+      "sys"
+    ],
+    "state": "OK",
+    "city": "Stillwater",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://jobs.okstate.edu/jobs/open-rank-tenure-track-tenured-faculty-212552-stillwater-oklahoma-united-states",
+    "visaSponsorship": "not-stated",
+    "summary": "Open-rank tenure-track or tenured Computer Engineering faculty position. Focus areas include computer architecture, machine learning, neural networks, embedded systems, software engineering, edge computing, cybersecurity, quantum computing, IoT, and VLSI. A PhD in computer science is explicitly accepted.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]
