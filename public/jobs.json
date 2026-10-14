@@ -13141,5 +13141,52 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "miami-ece-open-rank-faculty-2026",
+    "school": "University of Miami",
+    "department": "Electrical and Computer Engineering",
+    "title": "Open-Rank Faculty Positions in Electrical and Computer Engineering",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai",
+      "robotics",
+      "sec"
+    ],
+    "state": "FL",
+    "city": "Coral Gables",
+    "rolling": true,
+    "lastSeenAt": "2026-10-14",
+    "url": "https://umiami.wd1.myworkdayjobs.com/en-US/UMFaculty/job/Open-Rank-Faculty-Positions-in-Electrical-and-Computer-Engineering_R100091402",
+    "visaSponsorship": "not-stated",
+    "summary": "Three open-rank ECE tenure-track or tenured searches in AI systems, robotics, quantum technologies, cybersecurity, and cyber-physical systems; the posting explicitly invites Computer Science PhDs. The priority date was December 1, 2025, but the official page says review continues until all positions are filled.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "miami-ece-part-time-lecturer-ai-robotics-2026",
+    "school": "University of Miami",
+    "department": "Electrical and Computer Engineering",
+    "title": "Electrical and Computer Engineerint - Lecturer Part-Time",
+    "track": "teaching",
+    "level": null,
+    "areas": [
+      "ai",
+      "mlmining",
+      "robotics",
+      "bed"
+    ],
+    "state": "FL",
+    "city": "Coral Gables",
+    "rolling": true,
+    "lastSeenAt": "2026-10-14",
+    "url": "https://umiami.wd1.myworkdayjobs.com/umfaculty/job/Part-Time-Lecturer-ECE_R100092920",
+    "visaSponsorship": "not-stated",
+    "summary": "Part-time undergraduate and graduate teaching pool focused on robotics, autonomous systems, applied AI, machine learning, and embedded systems. Review continues until positions are filled; appointments are expected to begin in Fall 2026.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]

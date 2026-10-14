@@ -5716,24 +5716,40 @@
     "school": "University of Miami",
     "homepage": "https://www.cs.miami.edu",
     "facultyCount": 13,
-    "jobsUrl": "https://careers.miami.edu/",
+    "jobsUrl": "https://umiami.wd1.myworkdayjobs.com/UMFaculty",
     "state": "FL",
-    "lastCheckedAt": "2026-10-12T01:30:00Z",
+    "lastCheckedAt": "2026-10-14T04:21:00Z",
     "outcome": "partial",
-    "summary": "University of Miami Careers page provides the official Faculty & Physicians search, but keyword/search results for Computer Science did not expose a department-specific faculty requisition in this pass. CS department page fetch was blocked; no current CS posting verified.",
+    "summary": "Official Workday ECE pages list an open-rank tenure-track/tenured search (three positions; CS PhDs explicitly invited; review until filled) and an active part-time lecturer pool focused on AI and robotics. Checked the Frost Institute for Data Science and Computing careers page; its listed positions are stale (2023), so none were added. Broader university and related-unit review remains incomplete.",
     "checkedUrls": [
       "https://careers.miami.edu/us/en/search-results",
       "https://careers.miami.edu/us/en",
-      "https://www.cs.miami.edu/"
+      "https://www.cs.miami.edu/",
+      "https://umiami.wd1.myworkdayjobs.com/en-US/UMFaculty/job/Open-Rank-Faculty-Positions-in-Electrical-and-Computer-Engineering_R100091402",
+      "https://umiami.wd1.myworkdayjobs.com/umfaculty/job/Part-Time-Lecturer-ECE_R100092920",
+      "https://idsc.miami.edu/about/careers/",
+      "https://idsc.miami.edu/category/jobs/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "University of Miami Careers",
         "url": "https://careers.miami.edu/"
+      },
+      {
+        "name": "Electrical and Computer Engineering faculty hiring — open-rank search",
+        "url": "https://umiami.wd1.myworkdayjobs.com/en-US/UMFaculty/job/Open-Rank-Faculty-Positions-in-Electrical-and-Computer-Engineering_R100091402"
+      },
+      {
+        "name": "Electrical and Computer Engineering faculty hiring — part-time lecturer pool",
+        "url": "https://umiami.wd1.myworkdayjobs.com/umfaculty/job/Part-Time-Lecturer-ECE_R100092920"
+      },
+      {
+        "name": "Frost Institute for Data Science and Computing careers",
+        "url": "https://idsc.miami.edu/about/careers/"
       }
     ],
-    "relatedCheckedAt": "2026-10-12T01:30:00Z",
+    "relatedCheckedAt": "2026-10-14T04:21:00Z",
     "country": "US",
     "region": "northamerica"
   },
