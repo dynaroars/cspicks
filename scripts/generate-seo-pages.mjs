@@ -47,7 +47,7 @@ function renderHeader() {
       <a href="/simulator.html">☠️ Simulator</a>
       <a href="/csconfs.html">📅 CS Confs</a>
       <a href="/grants.html">💰 Awards &amp; Grants</a>
-      <a href="/jobs.html">🎓 US Jobs</a>
+      <a href="/jobs.html">🎓 CS Jobs</a>
       <a href="/nsf.html">🇺🇸 NSF Funding</a>
     </nav>
   </header>`;

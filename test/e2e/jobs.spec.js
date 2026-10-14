@@ -33,7 +33,7 @@ test.beforeEach(async ({ page }) => {
 
 test('US Jobs shows only active postings by default and reveals older ones on request', async ({ page }) => {
   await page.goto('jobs.html');
-  await expect(page.getByRole('link', { name: '🎓 US Jobs' })).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByRole('link', { name: '🎓 CS Jobs' })).toHaveAttribute('aria-current', 'page');
   await expect(page.locator('#jobs-search')).toBeEnabled();
   await expect(page.locator('.job-card')).toHaveCount(2);
   await expect(page.locator('.job-title').first()).toContainText('Software Engineering');

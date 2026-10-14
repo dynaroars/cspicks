@@ -100,7 +100,7 @@ test('starred postings export to Markdown with ranks, dates, and safe links', ()
     job({ reviewBegins: '2026-11-15', summary: 'Hiring in\n\nall of AI.' }),
     job({ id: 'bad', school: 'Evil U', title: 'Lecturer\n# injected', url: 'javascript:alert(1)', areas: [], anyArea: true, level: null })
   ], { ranks, now: NOW });
-  assert.match(md, /^# Starred US academic CS jobs\n/);
+  assert.match(md, /^# Starred academic CS jobs\n/);
   assert.match(md, /on 2026-11-01 · 2 positions\./);
   assert.match(md, /## 1\. Assistant Professor, AI — Georgia Institute of Technology/);
   assert.match(md, /- \*\*School:\*\* Georgia Institute of Technology \(#7 CSRankings\)/);
