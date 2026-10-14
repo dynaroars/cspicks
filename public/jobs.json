@@ -13009,5 +13009,34 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "lehigh-cse-ai-faculty-2027",
+    "school": "Lehigh University",
+    "department": "Computer Science and Engineering",
+    "title": "Tenure-Track Faculty in Computer Science & Engineering (CSE)",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai",
+      "vision",
+      "sec",
+      "chi",
+      "data"
+    ],
+    "state": "PA",
+    "city": "Bethlehem",
+    "deadline": "2026-12-01",
+    "rolling": true,
+    "reviewBegins": "2026-12-07",
+    "startDate": "2027-07-01",
+    "postedDate": "2026-10-12",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://facultyjobs.lehigh.edu/node/1356",
+    "visaSponsorship": "not-stated",
+    "summary": "Tenure-track CSE faculty search at assistant or associate professor without tenure rank, with emphasis on AI including computer vision, physical/embodied AI, AI security, human-centric AI, and AI data management. PhD in CS or a closely related field required. Applications encouraged by Dec 1, 2026; review begins Dec 7 and continues until filled.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]

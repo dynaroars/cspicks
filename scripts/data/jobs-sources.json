@@ -4387,9 +4387,9 @@
     "facultyCount": 26,
     "jobsUrl": "https://engineering.lehigh.edu/cse/contact/job-openings",
     "state": "PA",
-    "lastCheckedAt": "2026-10-11T16:00:00Z",
+    "lastCheckedAt": "2026-10-14T16:00:00Z",
     "outcome": "partial",
-    "summary": "Official research openings index lists joint CSE/ECE tenured Associate/Full robotics search as open until filled; CS degree accepted. Its preferred Dec 10, 2025 date and anticipated July 1, 2026 start have passed; direct application status not independently validated. Other fresh faculty openings reviewed do not target CS PhDs.",
+    "summary": "Rechecked CSE, ECE and central faculty/research listings. Added the new CSE AI tenure-track search (posted Oct 12; encouraged Dec 1, review begins Dec 7). The joint CSE/ECE senior robotics call remains listed but its preferred date and anticipated start have passed. Broader adjacent-unit and application-status review remains incomplete.",
     "checkedUrls": [
       "https://engineering.lehigh.edu/cse",
       "https://engineering.lehigh.edu/cse/contact/job-openings",
@@ -4398,16 +4398,21 @@
       "https://engineering.lehigh.edu/ece/about/ece-employment-opportunities",
       "https://engineering.lehigh.edu/cse/news/faculty-openings",
       "https://facultyjobs.lehigh.edu/research",
-      "https://facultyjobs.lehigh.edu/node/1220"
+      "https://facultyjobs.lehigh.edu/node/1220",
+      "https://facultyjobs.lehigh.edu/node/1356"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "Lehigh Faculty & Research Jobs",
         "url": "https://facultyjobs.lehigh.edu/faculty"
+      },
+      {
+        "name": "Electrical and Computer Engineering employment opportunities",
+        "url": "https://engineering.lehigh.edu/ece/about/ece-employment-opportunities"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T16:00:00Z",
     "country": "US",
     "region": "northamerica"
   },
