@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Queue and seed tooling for the US Jobs crawl (TASKS/jobs.md, docs/AUTOMATION.md `jobs`).
+ * Queue and seed tooling for the CS Jobs crawl (TASKS/jobs.md, docs/AUTOMATION.md `jobs`).
  * It does no research and edits no postings: the scheduled agent reads the queue, visits each
  * department's hiring page, and edits public/jobs.json and scripts/data/jobs-sources.json.
  *

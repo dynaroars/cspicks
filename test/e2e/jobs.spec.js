@@ -31,7 +31,7 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
-test('US Jobs shows only active postings by default and reveals older ones on request', async ({ page }) => {
+test('CS Jobs shows only active postings by default and reveals older ones on request', async ({ page }) => {
   await page.goto('jobs.html');
   await expect(page.getByRole('link', { name: '🎓 CS Jobs' })).toHaveAttribute('aria-current', 'page');
   await expect(page.locator('#jobs-search')).toBeEnabled();
@@ -161,7 +161,7 @@ test('favorites menu offers only export and appears with multiple starred postin
   await expect(actions).not.toHaveAttribute('open', '');
   expect(download.suggestedFilename()).toMatch(/^cspicks-starred-jobs-\d{4}-\d{2}-\d{2}\.md$/);
   const text = await (await download.createReadStream()).toArray().then(chunks => Buffer.concat(chunks).toString('utf8'));
-  expect(text).toContain('# Starred US academic CS jobs');
+  expect(text).toContain('# Starred academic CS jobs');
   expect(text).toContain('Teaching Professor — Univ. of Illinois at Urbana-Champaign');
   expect(text).toContain('Postdoctoral Fellow — George Mason University');
   expect(text).not.toContain('Software Engineering');
