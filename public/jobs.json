@@ -11986,5 +11986,20 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "kennesaw-cs-postdoc-2026",
+    "school": "Kennesaw State University",
+    "department": "Computer Science",
+    "title": "Postdoctoral Researcher, Computer Science",
+    "track": "postdoc",
+    "areas": [],
+    "state": "GA",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Action=U&FOCUS=Applicant&JobOpeningId=300281&Page=HRS_APP_JBPST_FL&PostingSeq=1&SiteId=43000",
+    "summary": "Full-time postdoctoral opening listed by the Computer Science Department. The linked PeopleSoft application requires sign-in and does not expose additional role details.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]

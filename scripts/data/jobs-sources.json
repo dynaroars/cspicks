@@ -6093,9 +6093,9 @@
     "facultyCount": 6,
     "jobsUrl": "https://olemiss.wd12.myworkdayjobs.com/External__Faculty",
     "state": "MS",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:22:37Z",
     "outcome": "incomplete",
-    "summary": "Found CS-adjacent ECE visiting faculty posting JR102524, but its current status and details need verification before adding or refreshing a record; partial.",
+    "summary": "Rechecked the official Workday faculty board and JR102524 details: the ECE visiting instructional assistant professor role is a one-year 2026 appointment, outside the CS target; no new CS faculty opening was verified.",
     "checkedUrls": [
       "https://olemiss.edu/hr/um-careers/",
       "https://olemiss.wd12.myworkdayjobs.com/External__Faculty",
@@ -6313,15 +6313,16 @@
     "facultyCount": 0,
     "jobsUrl": "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
     "state": "GA",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:22:37Z",
     "outcome": "incomplete",
-    "summary": "Multiple computing college openings confirmed; full requisition details and record updates remain, so partial.",
+    "summary": "The official CCSE page currently lists a full-time Computer Science postdoctoral researcher opening, added to the roster. Its linked PeopleSoft application requires sign-in, so role details remain incomplete; three previously recorded openings remain on file.",
     "checkedUrls": [
       "https://ccse.kennesaw.edu/",
       "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
       "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=301839&PostingSeq=1",
       "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=300281&PostingSeq=1",
-      "https://campus.kennesaw.edu/faculty-staff/academic-affairs/faculty-affairs/faculty-openings.php"
+      "https://campus.kennesaw.edu/faculty-staff/academic-affairs/faculty-affairs/faculty-openings.php",
+      "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Action=U&FOCUS=Applicant&JobOpeningId=300281&Page=HRS_APP_JBPST_FL&PostingSeq=1&SiteId=43000"
     ],
     "deferredUntil": null,
     "relatedUnits": [
