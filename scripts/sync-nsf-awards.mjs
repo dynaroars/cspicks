@@ -287,30 +287,50 @@ async function fetchAwardPage(url, attempts = 4) {
   }
 }
 
+// Roster names that open with an initial ("C. R. Ramakrishnan") often never match NSF's legal
+// name ("Coimbatore R Ramakrishnan") in a pdPIName search, so those faculty also get a last-name
+// search filtered by facultyNameMatches and institution. Bump when discovery changes so cached
+// faculty it affects are queried again.
+const DISCOVERY_VERSION = 2;
+const LAST_NAME_MAX_RESULTS = 500;
+
+function needsLastNameSearch(name) {
+  return nameWords(cleanRosterName(name)).length > 1 && /^[a-z]$/.test(nameWords(cleanRosterName(name))[0]);
+}
+
+async function queryAwards(queryName, faculty, maxResults) {
+  const awards = [];
+  let offset = 0;
+  do {
+    const url = new URL(API_URL);
+    url.searchParams.set('pdPIName', queryName);
+    url.searchParams.set('rpp', '25');
+    url.searchParams.set('offset', String(offset));
+    const response = await fetchAwardPage(url);
+    const page = response.award || [];
+    const total = Number(response.metadata?.totalCount) || 0;
+    // Too common a surname to filter safely within budget: skip rather than read thousands.
+    if (offset === 0 && total > maxResults) return awards;
+    awards.push(...page.filter(award =>
+      facultyNameMatches(faculty.name, award.pdPIName)
+      && institutionMatches(award.awardeeName || award.awardee, faculty.affiliation)
+    ));
+    // An empty page before the reported total is a short read, not the end:
+    // fail so this person is retried instead of recorded as checked.
+    if (!page.length && offset < Math.min(total, maxResults)) {
+      throw new Error(`Empty page at offset ${offset} of ${total} for ${queryName}`);
+    }
+    offset += page.length;
+    if (!page.length || offset >= total || offset >= maxResults) break;
+  } while (true);
+  return awards;
+}
+
 async function fetchAwardsForFaculty(faculty) {
   const awards = [];
-  for (const queryName of facultyQueryNames(faculty.name)) {
-    let offset = 0;
-    do {
-      const url = new URL(API_URL);
-      url.searchParams.set('pdPIName', queryName);
-      url.searchParams.set('rpp', '25');
-      url.searchParams.set('offset', String(offset));
-      const response = await fetchAwardPage(url);
-      const page = response.award || [];
-      awards.push(...page.filter(award =>
-        facultyNameMatches(faculty.name, award.pdPIName)
-        && institutionMatches(award.awardeeName || award.awardee, faculty.affiliation)
-      ));
-      const total = Number(response.metadata?.totalCount) || 0;
-      // An empty page before the reported total is a short read, not the end:
-      // fail so this person is retried instead of recorded as checked.
-      if (!page.length && offset < Math.min(total, 3000)) {
-        throw new Error(`Empty page at offset ${offset} of ${total} for ${queryName}`);
-      }
-      offset += page.length;
-      if (!page.length || offset >= total || offset >= 3000) break;
-    } while (true);
+  for (const queryName of facultyQueryNames(faculty.name)) awards.push(...await queryAwards(queryName, faculty, 3000));
+  if (needsLastNameSearch(faculty.name)) {
+    awards.push(...await queryAwards(nameWords(cleanRosterName(faculty.name)).at(-1), faculty, LAST_NAME_MAX_RESULTS));
   }
   return [...new Map(awards.map(award => [String(award.id), award])).values()];
 }
@@ -406,7 +426,8 @@ const queueCacheWrite = () => {
 const pending = cacheOnly ? [] : scopedFaculty.filter(faculty => {
   const key = `${fullNameKey(faculty.name)}|${institutionKey(faculty.affiliation)}`;
   const selected = !facultyFilter || fullNameKey(faculty.name).includes(fullNameKey(facultyFilter));
-  return selected && (!cache.checked[key] || Boolean(facultyFilter));
+  const stale = needsLastNameSearch(faculty.name) && cache.checked[key]?.discovery !== DISCOVERY_VERSION;
+  return selected && (!cache.checked[key] || stale || Boolean(facultyFilter));
 });
 process.stdout.write(`NSF sync${cacheOnly ? ' (cache only)' : ''}: ${scopedFaculty.length} faculty at ${new Set(scopedFaculty.map(row => row.affiliation)).size} institutions; ${pending.length} require API queries.\n`);
 
@@ -419,7 +440,7 @@ async function worker() {
     try {
       const awards = await fetchAwardsForFaculty(faculty);
       awards.forEach(raw => { cache.awards[String(raw.id)] = compactAward(raw); });
-      cache.checked[key] = { name: faculty.name, affiliation: faculty.affiliation, checkedAt: new Date().toISOString() };
+      cache.checked[key] = { name: faculty.name, affiliation: faculty.affiliation, checkedAt: new Date().toISOString(), discovery: DISCOVERY_VERSION };
     } catch (error) {
       failures++;
       process.stderr.write(`Failed ${faculty.name} (${faculty.affiliation}): ${error.message}\n`);
