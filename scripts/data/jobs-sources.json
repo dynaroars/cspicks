@@ -6174,18 +6174,30 @@
     "facultyCount": 4,
     "jobsUrl": "https://jobs.liu.edu/",
     "state": "NY",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Official faculty and jobs pages checked; current CS role listing remains unresolved in the dynamic careers search. Partial.",
+    "lastCheckedAt": "2026-10-14T03:24:28Z",
+    "outcome": "complete",
+    "summary": "Reviewed the official careers listing and both current Design & Digital Technology game design faculty postings. Added the full-time non-tenure-track Assistant Professor and the adjunct opening; both include game programming/computing and remain open. No additional current CS faculty opening was confirmed.",
     "checkedUrls": [
       "https://jobs.liu.edu/",
       "https://jobs.liu.edu/postings/search?query=computer",
       "https://liu.edu/post/academics/Faculty/Faculty",
-      "https://webapps.liu.edu/jobslegacy/index.html"
+      "https://webapps.liu.edu/jobslegacy/index.html",
+      "https://jobs.liu.edu/job_details/5005",
+      "https://jobs.liu.edu/job_details/4615",
+      "https://liu.edu/post/academics/school-of-computer-science-and-innovation"
     ],
     "deferredUntil": null,
-    "relatedUnits": [],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedUnits": [
+      {
+        "name": "Design & Digital Technology / Game Design and Development",
+        "url": "https://jobs.liu.edu/job_details/5005"
+      },
+      {
+        "name": "School of Engineering, Computer Science and Artificial Intelligence",
+        "url": "https://liu.edu/post/academics/school-of-computer-science-and-innovation"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T03:24:28Z",
     "country": "US",
     "region": "northamerica"
   },
