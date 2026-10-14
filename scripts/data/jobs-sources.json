@@ -3362,9 +3362,9 @@
     "facultyCount": 40,
     "jobsUrl": "https://www.uh.edu/nsm/computer-science/people/faculty-search/index.php",
     "state": "TX",
-    "lastCheckedAt": "2026-10-10T23:00:00Z",
+    "lastCheckedAt": "2026-10-14T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Added currently listed CS Adjunct Faculty job 496573; doctorate required and rolling until filled, but anticipated Sep 1 start date has passed. Broader adjacent units were not fully re-searched today.",
+    "summary": "Reviewed the current UH careers board and verified four live faculty openings: CS instructional faculty, open-rank Decision & Information Sciences (CS PhD explicitly eligible), IST Digital Media, and ISE AI/ML. The official board and posting pages are recorded for rechecks; the broader engineering and related-unit sweep remains incomplete.",
     "checkedUrls": [
       "https://www.uh.edu/nsm/computer-science/people/faculty-search/index.php",
       "https://careers.uh.edu/jobs/search?query=computer",
@@ -3379,7 +3379,11 @@
       "https://careers.uh.edu/jobs/search?query=professor",
       "https://careers.uh.edu/jobs/search?query=information",
       "https://careers.uh.edu/jobs/adjunct-faculty-computer-science-houston-texas-united-states",
-      "https://careers.uh.edu/jobs/search/uh-postings"
+      "https://careers.uh.edu/jobs/search/uh-postings",
+      "https://careers.uh.edu/jobs/assistant-associate-or-full-professor-decision-information-sciences-houston-texas-united-states",
+      "https://careers.uh.edu/jobs/assistant-professor-digital-media-houston-texas-united-states",
+      "https://careers.uh.edu/jobs/assistant-professor-ai-machine-learning-houston-texas-united-states",
+      "https://careers.uh.edu/jobs/instructional-assistant-professor-computer-science-houston-texas-united-states-c33a5a6a-82b2-47fd-992a-ce587307d874"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -3394,9 +3398,21 @@
       {
         "name": "UH Careers (careers.uh.edu)",
         "url": "https://careers.uh.edu/jobs/search"
+      },
+      {
+        "name": "Department of Decision & Information Sciences, C. T. Bauer College of Business",
+        "url": "https://www.bauer.uh.edu/departments/disc/"
+      },
+      {
+        "name": "Industrial & Systems Engineering",
+        "url": "https://www.uh.edu/industrial-engineering/"
+      },
+      {
+        "name": "UH Careers faculty postings",
+        "url": "https://careers.uh.edu/jobs/search/uh-postings"
       }
     ],
-    "relatedCheckedAt": "2026-10-10T23:00:00Z",
+    "relatedCheckedAt": "2026-10-14T00:00:00Z",
     "country": "US",
     "region": "northamerica"
   },
