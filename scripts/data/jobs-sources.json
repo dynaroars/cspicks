@@ -6556,22 +6556,27 @@
     "facultyCount": 0,
     "jobsUrl": "https://www.scu.edu/belonging/inclusive-hiring-and-recruitment/current-faculty-openings-tenure-track/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
-    "outcome": "complete",
-    "summary": "Current ECE Digital Systems and Robotics & AI postings re-confirmed; both existing records refreshed. Information Systems posting is CS-adjacent but remains outside the CS-specific count.",
+    "lastCheckedAt": "2026-10-14T04:01:00Z",
+    "outcome": "incomplete",
+    "summary": "Rechecked the official 2027–28 faculty openings page and verified the existing ECE Digital Systems and Robotics & AI roles plus a CS-eligible Information Systems and Analytics tenure-track search. Related ECE and ISA pages are recorded for future checks.",
     "checkedUrls": [
       "https://www.scu.edu/belonging/inclusive-hiring-and-recruitment/current-faculty-openings-tenure-track/",
       "https://wd1.myworkdaysite.com/en-US/recruiting/scu/scu/job/Electrical-and-Computer-Engineering-Assistant-Professor---Robotics---AI_R7815",
-      "https://wd1.myworkdaysite.com/en-US/recruiting/scu/scu/job/Electrical-and-Computer-Engineering-Assistant-Professor---Digital-Systems_R7814-1"
+      "https://wd1.myworkdaysite.com/en-US/recruiting/scu/scu/job/Electrical-and-Computer-Engineering-Assistant-Professor---Digital-Systems_R7814-1",
+      "https://wd1.myworkdaysite.com/en-US/recruiting/scu/scu/job/Tenure-Track-Assistant-Professor-in-Information-Systems_R7811"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "Faculty openings (tenure track)",
-        "url": "https://www.scu.edu/belonging/inclusive-hiring-and-recruitment/current-faculty-openings-tenure-track/"
+        "name": "Electrical and Computer Engineering",
+        "url": "https://www.scu.edu/engineering/academic-programs/department-of-electrical-and-computer-engineering/"
+      },
+      {
+        "name": "Information Systems and Analytics",
+        "url": "https://www.scu.edu/business/isa/"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T04:01:00Z",
     "country": "US",
     "region": "northamerica",
     "kind": "masters"
@@ -18852,18 +18857,22 @@
   },
   {
     "school": "Winthrop University",
-    "homepage": "https://www.winthrop.edu/cas/computer-science/",
+    "homepage": "https://www.winthrop.edu/cbt/computing-and-information-sciences/index.aspx",
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://winthrop.peopleadmin.com/postings/22904",
     "state": "SC",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-14T04:01:00Z",
+    "outcome": "complete",
+    "summary": "Official department and hiring portal checked; the Computer Science posting advertises two tenure-track assistant professor vacancies. No separate IST or ECE/ECEC hiring unit was identified.",
+    "checkedUrls": [
+      "https://www.winthrop.edu/cbt/computing-and-information-sciences/index.aspx",
+      "https://www.winthrop.edu/cbt/faculty/",
+      "https://winthrop.peopleadmin.com/postings/22904"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-14T04:01:00Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"
@@ -19426,20 +19435,21 @@
     "region": "northamerica",
     "jobsUrl": "https://csucareers.calstate.edu/en-us/job/557773/computer-science-parttime-lecturer-pool",
     "state": "CA",
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-10-14T04:01:00Z",
     "outcome": "incomplete",
-    "summary": "Verified active Computer Science part-time lecturer pool on the official CSU Careers portal. CS pool listing checked; ECE and other adjacent units require separate review.",
+    "summary": "Verified a current ECE tenure-track assistant professor opening from the College employment page and refreshed the CS part-time pool. ECE is recorded as a related unit for rechecks.",
     "checkedUrls": [
       "https://www.fullerton.edu/ecs/employment/",
-      "https://csucareers.calstate.edu/en-us/job/557773/computer-science-parttime-lecturer-pool"
+      "https://csucareers.calstate.edu/en-us/job/557773/computer-science-parttime-lecturer-pool",
+      "https://careers.csus.edu/cw/en-us/job/561368/assistant-professor-of-electrical-computer-engineering"
     ],
     "relatedUnits": [
       {
         "name": "Electrical and Computer Engineering",
-        "url": "https://www.fullerton.edu/ecs/electrical/"
+        "url": "https://www.fullerton.edu/ecs/employment/"
       }
     ],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-14T04:01:00Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"
@@ -19524,22 +19534,29 @@
     "region": "northamerica",
     "jobsUrl": "https://careers.csusm.edu/cw/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-10-14T04:01:00Z",
     "outcome": "incomplete",
-    "summary": "Verified active AY 2026/27 CSE lecturer pool and Cybersecurity lecturer pool. Computing units checked; broader adjacent-unit scan remains incomplete.",
+    "summary": "CS and related-unit review found an active Assistant Professor of Computer Information Systems search, existing cybersecurity and CSE pools, and a current ECE lecturer pool. ECE/Electrical Engineering pages were checked; continue the broader adjacent-unit scan next pass.",
     "checkedUrls": [
       "https://www.csusm.edu/cs/",
       "https://careers.csusm.edu/cw/en-us/listing/",
       "https://careers.csueastbay.edu/cw/en-us/job/558311/lecturer-pool-computer-science-and-engineering-ay-202627",
-      "https://careers.pageuppeople.com/873/sm/en-us/job/561490/lecturer-pool-computer-science-and-information-systems-cybersecurity-ay-202627"
+      "https://careers.pageuppeople.com/873/sm/en-us/job/561490/lecturer-pool-computer-science-and-information-systems-cybersecurity-ay-202627",
+      "https://careers.csus.edu/cw/en-us/job/562612/assistant-professor-of-computer-information-systems",
+      "https://careers.csusm.edu/en-us/job/558315/lecturer-pool-electrical-and-computer-engineering-ay-202627",
+      "https://www.csusm.edu/ece/facultyopportunities/index.html"
     ],
     "relatedUnits": [
       {
         "name": "Electrical Engineering",
         "url": "https://www.csusm.edu/engineering/"
+      },
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://www.csusm.edu/ece/facultyopportunities/index.html"
       }
     ],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-14T04:01:00Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"
