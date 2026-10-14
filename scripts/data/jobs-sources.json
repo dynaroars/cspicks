@@ -3500,9 +3500,9 @@
     "facultyCount": 37,
     "jobsUrl": "https://www.cs.fsu.edu/recruit/",
     "state": "FL",
-    "lastCheckedAt": "2026-10-11T10:00:00Z",
+    "lastCheckedAt": "2026-10-14T04:35:00Z",
     "outcome": "incomplete",
-    "summary": "Current department page lists chair and Teaching Faculty I searches (both expected starts have passed but remain listed open until filled); new Workday posting 63490 adds a 2027 TT Data Science & AI search. FAMU-FSU ECE Computer Engineering record carried forward from prior evidence; not fully rechecked today.",
+    "summary": "Rechecked the official CS recruitment page and FSU careers list. The department lists separate active tenure-track AI and Data Science searches: Assistant Professor job 63490 and Open Rank Professor job 63491, each beginning August 2027 with review starting Dec 15, 2026 and continuing until filled. Existing chair and Teaching Faculty I postings have start dates that passed; FAMU-FSU ECE was not rechecked today.",
     "checkedUrls": [
       "https://www.cs.fsu.edu/",
       "https://www.cs.fsu.edu/recruit/",
@@ -3512,7 +3512,8 @@
       "https://eng.famu.fsu.edu/node/16837",
       "https://news.cci.fsu.edu/category/cci-job-board/",
       "https://www.cs.fsu.edu/teaching-i-faculty-position/",
-      "https://jobs.omni.fsu.edu/psc/sprdhr_er/EMPLOYEE/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Action=U&FOCUS=Applicant&JobOpeningId=63490&Page=HRS_APP_JBPST_FL&PostingSeq=1&SiteId=1"
+      "https://jobs.omni.fsu.edu/psc/sprdhr_er/EMPLOYEE/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Action=U&FOCUS=Applicant&JobOpeningId=63490&Page=HRS_APP_JBPST_FL&PostingSeq=1&SiteId=1",
+      "https://jobs.omni.fsu.edu/psc/sprdhr_er/EMPLOYEE/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Action=U&FOCUS=Applicant&JobOpeningId=63491&Page=HRS_APP_JBPST_FL&PostingSeq=1&SiteId=1"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -3625,9 +3626,9 @@
     "facultyCount": 35,
     "jobsUrl": "https://computing.unl.edu/employment-opportunities/",
     "state": "NE",
-    "lastCheckedAt": "2026-10-13T16:00:00Z",
+    "lastCheckedAt": "2026-10-14T04:35:00Z",
     "outcome": "incomplete",
-    "summary": "Checked the official UNL faculty portal and found a new School of Computing tenure-line robotics search, plus the existing ECE computer-engineering posting. The new official School of Computing ad is recorded; continue checking its CS and adjacent-unit pages on the next pass.",
+    "summary": "Rechecked the official UNL portal and School of Computing pages. Added the open Assistant or Associate Professor Software Engineering search (F_260120), posted Oct 12 and focused on dependable, safe, and secure AI-enabled software. Also confirmed the current Robotics search (F_260121) and ECE computer-engineering search (F_260100); their records are already present. Continue the adjacent-unit review next pass.",
     "checkedUrls": [
       "https://cse.unl.edu/",
       "https://jobs.nebraska.edu/UniversityNebraskaSystem/job/AssistantAssociate-Professor-Robotics/1856-en_US",
@@ -3640,6 +3641,7 @@
       "https://jobs.nebraska.edu/UniversityNebraskaSystem/search/?q=data",
       "https://jobs.nebraska.edu/UniversityNebraskaSystem/search/?q=faculty",
       "https://employment.unl.edu/postings/102546",
+      "https://employment.unl.edu/postings/102801",
       "https://computing.unl.edu/employment-opportunities/",
       "https://employment.unl.edu/postings/search?sort=1262+desc",
       "https://employment.unl.edu/postings/102817"
