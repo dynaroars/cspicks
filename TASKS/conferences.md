@@ -31,7 +31,7 @@ populated, `year: 2026` placeholder) without researched dates — prioritize
 these in upcoming passes over re-verifying already-populated entries.
 
 **Other venues.** A small owner-curated set of standing conferences outside the CSRankings and CORE A/A*
-sets (currently VMCAI, CPP, FormaliSE, NFM — Issue #24) is tracked with `"other": true`, an empty
+sets (currently VMCAI, CPP, FormaliSE, NFM — Issue #24; MLSys, FAccT, COLM — Issue #27) is tracked with `"other": true`, an empty
 `venueKeys`, and a manual `area` (an `areaLabels` key such as `soft`, `plan`, `log`). They show an
 "Other venue" badge and appear only under the **All (Union)** conference set; every CSRankings/CORE set
 ignores them. They are audited by the same routine and workflows as every other series (the controller
