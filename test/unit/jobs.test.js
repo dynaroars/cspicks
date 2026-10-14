@@ -230,17 +230,26 @@ test('crawl queue prioritises never-checked, big schools, and open-posting schoo
 });
 
 test('shipped jobs dataset is valid, unique, and uses school names from jobs-sources.json', async () => {
-  const data = parseJobs(JSON.parse(await fs.readFile(new URL('../../public/jobs.json', import.meta.url), 'utf8')));
+  const { jobsFileProblems } = await import('../../scripts/jobs-validate.mjs');
+  const jobsData = JSON.parse(await fs.readFile(new URL('../../public/jobs.json', import.meta.url), 'utf8'));
   const sources = JSON.parse(await fs.readFile(new URL('../../scripts/data/jobs-sources.json', import.meta.url), 'utf8'));
-  const schools = new Set(sources.map(source => source.school));
   assert.ok(sources.length >= 150, 'sources are seeded from CSRankings');
-  assert.equal(new Set(data.map(entry => entry.id)).size, data.length, 'ids are unique');
-  assert.equal(new Set(data.map(entry => entry.url)).size, data.length, 'one record per posting URL');
-  data.forEach(entry => {
-    assert.ok(schools.has(entry.school), `${entry.id}: "${entry.school}" is not in jobs-sources.json (add it with maintain:jobs --add)`);
-    assert.match(entry.url, /^https:\/\//);
-    entry.areas.forEach(area => assert.ok(area, `${entry.id}: empty area`));
-  });
+  assert.deepEqual(jobsFileProblems(jobsData, sources), [], 'run npm run validate:jobs for details');
+});
+
+test('jobs validator names each bad record and field', async () => {
+  const { jobsFileProblems } = await import('../../scripts/jobs-validate.mjs');
+  const { lastSeenAt, ...unseen } = job({ id: 'unseen', url: 'https://a.edu/1' });
+  const { areas, ...noAreas } = job({ id: 'no-areas', url: 'https://a.edu/2' });
+  const sources = [{ school: job().school }];
+  assert.deepEqual(jobsFileProblems([unseen, noAreas, job({ id: 'unseen', url: 'https://a.edu/1', school: 'Nowhere U' })], sources), [
+    'unseen: lastSeenAt',
+    'no-areas: areas',
+    'unseen: duplicate id (also unseen)',
+    'unseen: duplicate url (also unseen)',
+    'unseen: school "Nowhere U" is not in jobs-sources.json (add it with maintain:jobs --add)'
+  ]);
+  assert.throws(() => parseJobs([unseen]), /unseen: lastSeenAt/);
 });
 
 test('render step keeps hiring links and drops student-career boilerplate', async () => {

@@ -1,9 +1,10 @@
 # Academic CS jobs (`public/jobs.json`)
 
-> **`/goal TASKS/jobs.md`**: Work through `npm run maintain:jobs -- --limit 30`: crawl each school's official hiring pages, keep `lastSeenAt`/`closedAt` current, and record the crawl in `scripts/data/jobs-sources.json`. Work in bounded batches and add verified postings directly to the roster in `public/jobs.json`; do not create GitHub Issues for individual leads. For an interactive run explicitly requested by the user, commit and push each reviewed batch directly to `main` when authorized. Scheduled/unattended runs follow [docs/AUTOMATION.md](../docs/AUTOMATION.md): producers open PRs, never push to `main`, and stop at their batch cap.
+> **`/goal TASKS/jobs.md`**: Work through `npm run maintain:jobs -- --limit 30`: crawl each school's official hiring pages, keep `lastSeenAt`/`closedAt` current, and record the crawl in `scripts/data/jobs-sources.json`. Work in bounded batches and add verified postings directly to the roster in `public/jobs.json`; do not create GitHub Issues for individual leads. For an interactive run explicitly requested by the user, commit and push each reviewed batch directly to `main` when authorized, and only after `npm run validate:jobs` passes (a direct push skips PR checks, and one bad record blocks every deploy). Scheduled/unattended runs follow [docs/AUTOMATION.md](../docs/AUTOMATION.md): producers open PRs, never push to `main`, and stop at their batch cap.
 
 **Unknown beats wrong**: never fill a field from a prior year, a third-party tracker, or a guess.
-Validate every batch with `npm test && npm run typecheck && npm run build && git diff --check`.
+Run `npm run validate:jobs` (about a second) before **every** commit; it names each bad record and field, e.g.
+`latech-…-2026: lastSeenAt`. Validate every batch with `npm test && npm run typecheck && npm run build && git diff --check`.
 
 ## Rules that matter most
 
@@ -152,7 +153,8 @@ setting `closedAt`.
 ## Verification
 
 ```bash
-npm test                                   # test/unit/jobs.test.js: schema, unique ids/URLs, school names in jobs-sources.json
+npm run validate:jobs                      # before every commit: schema, unique ids/URLs, school names in jobs-sources.json
+npm test                                   # test/unit/jobs.test.js runs the same check plus the filter/render tests
 npm run build
 npx playwright test test/e2e/jobs.spec.js
 ```

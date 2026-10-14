@@ -154,31 +154,48 @@ const TRACKS = Object.keys(TRACK_LABELS);
 const LEVELS = Object.keys(LEVEL_LABELS);
 const isoOrNull = (value: unknown) => value === undefined || value === null || (typeof value === 'string' && dayParts(value) !== null);
 
-function isJob(value: unknown): value is Job {
-  if (!value || typeof value !== 'object') return false;
+/** Names of the fields that make `value` an invalid Job; empty when it is valid. */
+export function jobProblems(value: unknown): string[] {
+  if (!value || typeof value !== 'object') return ['not an object'];
   const job = value as Record<string, unknown>;
   const country = typeof job.country === 'string' ? job.country.toUpperCase() : 'US';
   const isUS = country === 'US';
-  return typeof job.id === 'string'
-    && typeof job.school === 'string'
-    && typeof job.department === 'string'
-    && typeof job.title === 'string'
-    && typeof job.track === 'string' && TRACKS.includes(job.track)
-    && (job.level === undefined || job.level === null || (typeof job.level === 'string' && LEVELS.includes(job.level)))
-    && Array.isArray(job.areas) && job.areas.every(area => typeof area === 'string')
-    && (job.anyArea === undefined || typeof job.anyArea === 'boolean')
-    && (job.country === undefined || typeof job.country === 'string')
-    && typeof job.state === 'string' && (isUS ? job.state in US_STATES : true)
-    && typeof job.url === 'string'
-    && typeof job.lastSeenAt === 'string' && dayParts(job.lastSeenAt) !== null
-    && isoOrNull(job.deadline) && isoOrNull(job.closedAt) && isoOrNull(job.postedDate)
-    && (job.visaSponsorship === undefined || (typeof job.visaSponsorship === 'string' && job.visaSponsorship in VISA_LABELS))
-    && (job.source === 'crawl' || job.source === 'submission');
+  const checks: [string, boolean][] = [
+    ['id', typeof job.id === 'string'],
+    ['school', typeof job.school === 'string'],
+    ['department', typeof job.department === 'string'],
+    ['title', typeof job.title === 'string'],
+    ['track', typeof job.track === 'string' && TRACKS.includes(job.track)],
+    ['level', job.level === undefined || job.level === null || (typeof job.level === 'string' && LEVELS.includes(job.level))],
+    ['areas', Array.isArray(job.areas) && job.areas.every(area => typeof area === 'string')],
+    ['anyArea', job.anyArea === undefined || typeof job.anyArea === 'boolean'],
+    ['country', job.country === undefined || typeof job.country === 'string'],
+    ['state', typeof job.state === 'string' && (isUS ? job.state in US_STATES : true)],
+    ['url', typeof job.url === 'string'],
+    ['lastSeenAt', typeof job.lastSeenAt === 'string' && dayParts(job.lastSeenAt) !== null],
+    ['deadline', isoOrNull(job.deadline)],
+    ['closedAt', isoOrNull(job.closedAt)],
+    ['postedDate', isoOrNull(job.postedDate)],
+    ['visaSponsorship', job.visaSponsorship === undefined || (typeof job.visaSponsorship === 'string' && job.visaSponsorship in VISA_LABELS)],
+    ['source', job.source === 'crawl' || job.source === 'submission']
+  ];
+  return checks.filter(([, ok]) => !ok).map(([field]) => field);
+}
+
+/** One line per invalid record, e.g. `latech-ai-2026: lastSeenAt`. */
+export function jobsDatasetProblems(payload: unknown): string[] {
+  if (!Array.isArray(payload)) return ['dataset is not an array'];
+  return payload.flatMap((value, index) => {
+    const fields = jobProblems(value);
+    const id = (value as { id?: unknown } | null)?.id;
+    return fields.length ? [`${typeof id === 'string' ? id : `record #${index}`}: ${fields.join(', ')}`] : [];
+  });
 }
 
 export function parseJobs(payload: unknown): Job[] {
-  if (!Array.isArray(payload) || !payload.every(isJob)) throw new Error('Invalid jobs dataset');
-  return payload;
+  const problems = jobsDatasetProblems(payload);
+  if (problems.length) throw new Error(`Invalid jobs dataset (bad or missing fields):\n${problems.join('\n')}`);
+  return payload as Job[];
 }
 
 export async function loadJobsData(): Promise<Job[]> {

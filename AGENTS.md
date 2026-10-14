@@ -24,6 +24,7 @@ JSON files in `public/`, then processed in the browser.
 npm run dev       # vite dev server at http://localhost:5173/
 npm test          # run the Node.js unit tests (test/unit/*.test.js)
 npm run test:e2e  # Playwright e2e tests (test/e2e/); auto-starts the dev server on :4173
+npm run validate:jobs  # fast check of public/jobs.json; run before every jobs commit (names each bad record)
 npm run build      # production build to dist/ (multi-page: index, simulator, funding, csconfs, grants, jobs)
 npm run preview    # preview the production build
 ```
