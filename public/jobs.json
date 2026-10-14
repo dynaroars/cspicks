@@ -12126,5 +12126,51 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "hmc-segal-endowed-professor-ai-2026",
+    "school": "Harvey Mudd College",
+    "department": "Harvey Mudd College",
+    "title": "Jenna and Paul Segal Endowed Professorship of Artificial Intelligence",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "ai"
+    ],
+    "state": "CA",
+    "city": "Claremont",
+    "deadline": "2026-09-22",
+    "rolling": true,
+    "lastSeenAt": "2026-10-13",
+    "url": "https://www.hmc.edu/dean-of-faculty/2026/08/06/jenna-and-paul-segal-endowed-professorship-of-artificial-intelligence/",
+    "visaSponsorship": "not-stated",
+    "summary": "Interdisciplinary AI teacher-scholar search, anticipated at assistant professor level, with exceptional candidates at any rank encouraged. Priority consideration was Sept 22, 2026; the search remains open until filled.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "lafayette-ece-computer-architecture-2026",
+    "school": "Lafayette College",
+    "department": "Department of Electrical and Computer Engineering",
+    "title": "2027-28 Electrical and Computer Engineering, Assistant/Associate Professor",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "arch",
+      "robotics"
+    ],
+    "state": "PA",
+    "city": "Easton",
+    "rolling": true,
+    "reviewBegins": "2026-10-01",
+    "startDate": "2027-07-01",
+    "lastSeenAt": "2026-10-13",
+    "url": "https://provost.lafayette.edu/2027-28-ece-asst-prof/",
+    "visaSponsorship": "not-stated",
+    "summary": "Tenure-track ECE search seeking candidates able to teach computer architecture, cyber-physical systems, or embedded systems; robotics integration is also of interest. Review began Oct 1, 2026 and continues until filled; anticipated start is July 1, 2027.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]

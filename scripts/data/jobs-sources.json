@@ -17792,14 +17792,22 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": "https://academicjobsonline.org/ajo/jobs/32411",
+    "jobsUrl": "https://www.hmc.edu/dean-of-faculty/available-faculty-positions/",
     "state": "CA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-13T16:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Official faculty positions index and the Segal AI professorship announcement reviewed; the AI search remains open until filled (priority consideration Sept 22, 2026). CS/AI result added. Other adjacent computing units were not reviewed.",
+    "checkedUrls": [
+      "https://www.hmc.edu/dean-of-faculty/available-faculty-positions/",
+      "https://www.hmc.edu/dean-of-faculty/2026/08/06/jenna-and-paul-segal-endowed-professorship-of-artificial-intelligence/"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Artificial Intelligence at Harvey Mudd",
+        "url": "https://www.hmc.edu/ai/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-13T16:00:00Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "liberal-arts"
@@ -17812,12 +17820,19 @@
     "region": "northamerica",
     "jobsUrl": "https://provost.lafayette.edu/2027-28-ece-asst-prof/",
     "state": "PA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-13T16:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Official ECE tenure-track assistant/associate search reviewed; it includes computer architecture, cyber-physical systems, and embedded systems teaching and remains open. Posting added. No other adjacent computing units reviewed.",
+    "checkedUrls": [
+      "https://provost.lafayette.edu/2027-28-ece-asst-prof/"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Department of Electrical and Computer Engineering",
+        "url": "https://ece.lafayette.edu/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-13T16:00:00Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "liberal-arts"
