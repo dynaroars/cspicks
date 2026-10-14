@@ -11892,5 +11892,50 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "unm-data-science-asst-prof-2027",
+    "school": "University of New Mexico",
+    "department": "Mathematics and Statistics",
+    "title": "Assistant Professor in Data Science",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "mlmining"
+    ],
+    "state": "NM",
+    "city": "Albuquerque",
+    "deadline": "2026-10-19",
+    "rolling": false,
+    "postedDate": "2026-09-16",
+    "lastSeenAt": "2026-10-14",
+    "visaSponsorship": "not-stated",
+    "url": "https://math.unm.edu/people/job-listings/assistant-professor-data-science",
+    "summary": "Full-time tenure-track Data Science search for Fall 2027; a PhD in Computer Science, Statistics, Mathematics, or a related field is accepted. Applications received after October 19, 2026 will not be reviewed.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "msstate-cavs-assoc-research-prof-2026",
+    "school": "Mississippi State University",
+    "department": "Center for Advanced Vehicular Systems",
+    "title": "Assistant/Associate Research Professor",
+    "track": "research",
+    "level": "open",
+    "areas": [
+      "hpc",
+      "mlmining"
+    ],
+    "state": "MS",
+    "city": "Starkville",
+    "postedDate": "2026-07-01",
+    "lastSeenAt": "2026-10-14",
+    "visaSponsorship": "not-stated",
+    "url": "https://explore.msujobs.msstate.edu/jobs/assistant-associate-research-professor-main-campus-starkville-ms-mississippi-united-states",
+    "summary": "Full-time research faculty role in computational science and engineering, with a focus on systems engineering applications, big data, and high-performance computing. Responsibilities include research, sponsored project development, publications, and advising students.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]

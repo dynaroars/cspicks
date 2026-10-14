@@ -5238,21 +5238,27 @@
     "facultyCount": 18,
     "jobsUrl": "https://cs.unm.edu/news/2026/10/assistant-professor-position.html",
     "state": "NM",
-    "lastCheckedAt": "2026-10-11T23:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:15:00Z",
     "outcome": "complete",
-    "summary": "Official CS page confirms a new full-time tenure-track Assistant Professor search posted Oct 6, 2026, for all computing areas, especially quantum, theory/algorithms, and cybersecurity. Best-consideration deadline Dec 5, 2026; Req 38093. Refreshed the existing record.",
+    "summary": "Official Mathematics and Statistics hiring page checked (2026-10-14): active Data Science tenure-track Assistant Professor search accepts Computer Science PhDs; applications after Oct 19, 2026 will not be reviewed. Existing CS search was last confirmed Oct 11, 2026.",
     "checkedUrls": [
       "https://cs.unm.edu/news/2026/10/assistant-professor-position.html",
-      "https://unm.csod.com/"
+      "https://unm.csod.com/",
+      "https://math.unm.edu/people/job-listings/assistant-professor-data-science",
+      "https://unm.csod.com/ux/ats/careersite/18/home/requisition/37719"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "Electrical and Computer Engineering faculty jobs",
         "url": "http://ece.unm.edu/about/facultyjobs.html"
+      },
+      {
+        "name": "Department of Mathematics and Statistics faculty hiring",
+        "url": "https://math.unm.edu/people/job-listings/assistant-professor-data-science"
       }
     ],
-    "relatedCheckedAt": "2026-10-11T23:00:00Z",
+    "relatedCheckedAt": "2026-10-14T03:15:00Z",
     "country": "US",
     "region": "northamerica"
   },
@@ -5262,21 +5268,26 @@
     "facultyCount": 17,
     "jobsUrl": "https://explore.msujobs.msstate.edu/jobs/search",
     "state": "MS",
-    "lastCheckedAt": "2026-10-11T23:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:15:00Z",
     "outcome": "partial",
-    "summary": "Official HR confirms a full-time non-tenure-track CSE Instructor position (Req 511191) opening Sep 10, with Jan 1, 2027 anticipated start; refreshed existing record. A separate CS adjunct at the Mississippi School for Mathematics and Science closed Aug 15, 2026 and a future full-time school-teacher role was only mentioned, so not added. Broader adjacent-unit review remains partial.",
+    "summary": "Official HR pages checked (2026-10-14): CSE Instructor (Req 511191) remains live with Jan 1, 2027 anticipated start; added active CAVS Assistant/Associate Research Professor posting focused on computational science, big data, and HPC. Adjacent-unit review remains partial.",
     "checkedUrls": [
       "https://explore.msujobs.msstate.edu/jobs/instructor-i-ii-or-iii-main-campus-starkville-ms-mississippi-united-states-98228e8d-a74c-4619-80fc-8085a9612f25",
-      "https://www.career.msstate.edu/jobs/mississippi-school-for-mathematics-and-science-computer-science-adjunct-msms/"
+      "https://www.career.msstate.edu/jobs/mississippi-school-for-mathematics-and-science-computer-science-adjunct-msms/",
+      "https://explore.msujobs.msstate.edu/jobs/assistant-associate-research-professor-main-campus-starkville-ms-mississippi-united-states"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "Bagley College of Engineering / Electrical and Computer Engineering (via MSU university job portal)",
         "url": "https://explore.msujobs.msstate.edu/jobs/search?query=engineering"
+      },
+      {
+        "name": "Center for Advanced Vehicular Systems (CAVS)",
+        "url": "https://explore.msujobs.msstate.edu/jobs/assistant-associate-research-professor-main-campus-starkville-ms-mississippi-united-states"
       }
     ],
-    "relatedCheckedAt": "2026-10-11T23:00:00Z",
+    "relatedCheckedAt": "2026-10-14T03:15:00Z",
     "country": "US",
     "region": "northamerica"
   },
