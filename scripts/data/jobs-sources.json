@@ -18024,12 +18024,16 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": "https://www.schooljobs.com/careers/berea",
+    "jobsUrl": "https://www.schooljobs.com/careers/berea/jobs/5474364/assistant-professor-of-computer-science-tenure-track-or-3-yr-fixed-term-positio",
     "state": "KY",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Verified current CS faculty announcement covering two August 2027 appointments (tenure-track and three-year fixed-term). CS department and official careers posting reviewed; adjacent-unit scan remains incomplete.",
+    "checkedUrls": [
+      "https://www.berea.edu/csc/",
+      "https://www.schooljobs.com/careers/berea",
+      "https://www.schooljobs.com/careers/berea/jobs/5474364/assistant-professor-of-computer-science-tenure-track-or-3-yr-fixed-term-positio"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null,
@@ -19110,13 +19114,23 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.schooljobs.com/careers/bgsu/jobs/5503925-0/assistant-professor-of-business-analytics",
     "state": "OH",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "No current CS-department posting found; verified an active tenure-track Business Analytics faculty search requiring a doctorate in data science or a related field and focused on data visualization or AI in business. CS and adjacent business analytics hiring pages reviewed; broader related-unit scan remains incomplete.",
+    "checkedUrls": [
+      "https://www.bgsu.edu/technology-architecture-and-applied-engineering/",
+      "https://www.bgsu.edu/content/bgsu/en/arts-and-sciences/computer-science/faculty-and-staff.html",
+      "https://www.bgsu.edu/content/bgsu/en/human-resources/careers.html",
+      "https://www.schooljobs.com/jobs/5503925-0/assistant-professor-of-business-analytics"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Business Analytics, Economics and Information Systems",
+        "url": "https://www.bgsu.edu/business/departments-and-programs/economics.html"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
@@ -20301,6 +20315,54 @@
       "https://careers.humboldt.edu/hm/en-us/job/555378/lecturer-pool-in-department-of-computer-science-academic-year-2627"
     ],
     "relatedUnits": [],
+    "relatedCheckedAt": null,
+    "deferredUntil": null,
+    "csrankings": false,
+    "kind": "masters"
+  },
+  {
+    "school": "State College of Florida, Manatee-Sarasota",
+    "homepage": "https://www.scf.edu/academics/academic-departments/science-technology-engineering-and-mathematics-stem/",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://www.schooljobs.com/careers/scf/jobs/5055587/instructional-faculty-computer-science",
+    "state": "FL",
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Verified a continuously open full-time Computer Science instructional faculty position with networking and cybersecurity teaching requirements. STEM department and official career posting reviewed; adjacent-unit scan remains incomplete.",
+    "checkedUrls": [
+      "https://www.scf.edu/academics/academic-departments/",
+      "https://www.scf.edu/academics/academic-departments/science-technology-engineering-and-mathematics-stem/",
+      "https://www.schooljobs.com/careers/scf/jobs/5055587/instructional-faculty-computer-science"
+    ],
+    "relatedUnits": [],
+    "relatedCheckedAt": null,
+    "deferredUntil": null,
+    "csrankings": false,
+    "kind": "community-college"
+  },
+  {
+    "school": "SUNY Brockport",
+    "homepage": "https://www.brockport.edu/academics/computing-sciences/",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://www.schooljobs.com/careers/brockport/jobs/5468533-0/assistant-professor-computing-sciences",
+    "state": "NY",
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Verified an active full-time tenure-track Computing Sciences assistant professor search for August 2027. Department and official careers posting reviewed; adjacent-unit scan remains incomplete.",
+    "checkedUrls": [
+      "https://www.brockport.edu/academics/computing-sciences/",
+      "https://www.schooljobs.com/careers/brockport/jobs/5468533-0/assistant-professor-computing-sciences"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Information Technology Services",
+        "url": "https://www.brockport.edu/about/administrative-offices/information-technology-services/"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
