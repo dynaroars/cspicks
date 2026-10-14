@@ -3451,9 +3451,9 @@
     "facultyCount": 39,
     "jobsUrl": "https://www.cs.arizona.edu/currently-open-positions",
     "state": "AZ",
-    "lastCheckedAt": "2026-10-10T23:00:00Z",
+    "lastCheckedAt": "2026-10-14T12:00:00Z",
     "outcome": "incomplete",
-    "summary": "Current CS department page explicitly advertises active hiring in TT CS, Professor of Practice, and Lecturer tracks. Added three records; exact Cornerstone application details do not render, and no current non-CS adjacent roles verified today.",
+    "summary": "2026-10-14 (rendered in Chromium): Cornerstone requisitions 24254, 23987 and 23984 all show \"This job is not available\" (reported in #48), so the three records are closed. The CS open-positions page still advertises them with the Nov 15, 2025 review date, so it is stale; recheck it for a new cycle.",
     "checkedUrls": [
       "https://www.cs.arizona.edu/currently-open-positions",
       "https://ecse.engineering.arizona.edu/faculty-staff/open-positions",

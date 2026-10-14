@@ -15,7 +15,10 @@ Run `npm run validate:jobs` (about a second) before **every** commit; it names e
    CRA job announcements (https://cra.org/ads/), ACM Career Center (https://jobs.acm.org/), and IEEE Job Site
    (https://jobs.ieee.org/); the last three often block scripted fetches.
 2. **Never delete.** Closed postings are the archive; mark them with `closedAt`.
-3. **Keep `lastSeenAt` honest.** Set it to today only for postings you saw live this run.
+3. **Keep `lastSeenAt` honest.** Set it to today only for postings you saw live this run. Judge live vs. closed
+   from the page rendered in a real browser (`npm run render:jobs -- <url>`), never from a plain fetch, an HTTP
+   status, or an applicant-tracking backend API: Arizona's Cornerstone API still said `allowApply: true` while
+   the posting page showed "This job is not available" (#48).
 4. **Every US school is in scope**, CSRankings or not. `school` must match a row in `jobs-sources.json`; add a
    missing school with `npm run maintain:jobs -- --add` rather than rejecting the posting.
 5. **One record per posting URL**; `id`s stay stable and unique.
