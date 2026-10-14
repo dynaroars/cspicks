@@ -124,6 +124,17 @@
   color: var(--impact-neg-text);
 }
 
+/* Inline text-style buttons from the shared quick-entry form (src/submit-quick.ts). */
+.submit-link-button {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .submit-target {
   position: relative;
 }
