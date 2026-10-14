@@ -299,9 +299,9 @@
       "proposals": []
     },
     "WACV": {
-      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
       "outcome": "incomplete",
-      "summary": "wacv.thecvf.com shows only WACV 2027 (Disney Springs, Jan 4-8, 2027; decisions both rounds Oct 14, 2026), consistent with stored record. No WACV 2028 edition info found; WACV 2026 decision dates not available from the page. Records unchanged.",
+      "summary": "WACV 2027 site confirms Jan 4-8 2027 and Oct 14 2026 decisions; no WACV 2028 site yet (year menu lists 2027, 2026 only). WACV 2026 final-decision date not stated on the series page; no change.",
       "checkedUrls": [
         "https://wacv.thecvf.com/"
       ],
@@ -400,11 +400,12 @@
       "proposals": []
     },
     "IJCAI": {
-      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
       "outcome": "incomplete",
-      "summary": "IJCAI 2027 (Kyoto Aug 7-13; Hengqin Aug 15-17; abstract Jan 4, paper Jan 11, notification Apr 21 2027) matches the record. No IJCAI 2028 info published.",
+      "summary": "IJCAI future-conferences page confirms chairs for IJCAI-27..30 (already recorded); hosts/dates for 2028-2030 not announced; no change.",
       "checkedUrls": [
-        "https://2027.ijcai.org/"
+        "https://www.ijcai.org/",
+        "https://www.ijcai.org/future_conferences"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -617,12 +618,12 @@
       "proposals": []
     },
     "PODC": {
-      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
       "outcome": "incomplete",
-      "summary": "PODC 2027 (Reykjavik University, June 21-25, 2027) confirmed on the official edition site; the home and call-for-papers pages say only to watch for deadline information. No deadlines or notification dates published; record unchanged.",
+      "summary": "PODC 2027 (Reykjavik, June 21-25) confirmed; CFP page says \"watch this space\", deadlines unannounced; no change.",
       "checkedUrls": [
         "https://www.podc.org/podc2027/",
-        "https://www.podc.org/podc2027/call-for-papers/"
+        "https://www.podc.org/podc2027/call-for-papers"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -649,9 +650,9 @@
       "proposals": []
     },
     "KDD": {
-      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
       "outcome": "incomplete",
-      "summary": "KDD 2027 research-track CFP confirms cycle 1 dates already stored (abstract 2026-07-19, paper 2026-07-26, rebuttal Sep 29-Oct 13, notification 2026-11-14) and conference Aug 1-5, 2027 in San Jose. Cycle 2 only described as a February 2027 deadline for Resubmit papers with no exact dates; cycle 2 record stays TBD/estimated, unchanged.",
+      "summary": "KDD 2027 cycle 1 dates, date, place re-confirmed on official site; cycle 2 (Feb 2027) dates still unannounced; no change.",
       "checkedUrls": [
         "https://kdd2027.kdd.org/",
         "https://kdd2027.kdd.org/research-track-call-for-papers/"
@@ -660,15 +661,27 @@
       "proposals": []
     },
     "IROS": {
-      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
       "outcome": "incomplete",
-      "summary": "IEEE RAS venues page confirms IROS 2027 Florence, Sep 26-Oct 1, 2027, General Chair Eugenio Guglielmelli, Program Chair Sami Haddadin (matches record) but gives no website link and no 2028 venue/dates. The stored 2027 link www.iros2027.org does not resolve (DNS failure), so it could not be validated; no replacement official URL found. Record unchanged.",
+      "summary": "IROS 2027 site gives dates Sept 27-Oct 1 (corrected from Sept 26) and Florence venue; no paper deadline, notification or chairs published there, so the stored 2027-03-01 deadline could not be re-verified. IROS 2028 unchanged (no official edition site found).",
       "checkedUrls": [
-        "https://www.iros2027.org/",
-        "https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-past-and-future-venues/"
+        "https://2027.ieee-iros.org/",
+        "https://2027.ieee-iros.org/call-for-papers/"
       ],
       "deferredUntil": null,
-      "proposals": []
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "date",
+              "url": "https://2027.ieee-iros.org/",
+              "evidence": "Home page lists September 27 to October 1, 2027, Fortezza da Basso, Florence"
+            }
+          ]
+        }
+      ]
     },
     "ESOP": {
       "lastCheckedAt": "2026-10-11T20:15:21.686Z",
@@ -709,6 +722,140 @@
       ],
       "deferredUntil": "2026-11-01T20:15:21.687Z",
       "proposals": []
+    },
+    "ICRA": {
+      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "outcome": "incomplete",
+      "summary": "IEEE RAS event page for ICRA 2028 lists Rio de Janeiro (Riocentro), May 15-19 2028, paper deadline Sept 15 2027, but the edition site 2028.ieee-icra.org returned HTTP 503 and the record notes a prior conflict between sponsor listings; left unchanged pending the official edition site.",
+      "checkedUrls": [
+        "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+        "https://2028.ieee-icra.org"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "ISMB/ECCB": {
+      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "outcome": "not_found",
+      "summary": "No ISMB/ECCB edition after 2023 found; ISMB is held as ISMB 2024+ (tracked under ISMB). No record created.",
+      "checkedUrls": [
+        "https://www.iscb.org/ismbeccb2026"
+      ],
+      "deferredUntil": "2026-11-03T20:16:13.831Z",
+      "proposals": []
+    },
+    "WINE": {
+      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "outcome": "complete",
+      "summary": "WINE 2026 (Hong Kong, Dec 1-4) added from official site: deadline, rebuttal period, notification, chairs.",
+      "checkedUrls": [
+        "https://wine2026conf.github.io/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2026,
+          "sources": [
+            {
+              "field": "deadline",
+              "url": "https://wine2026conf.github.io/",
+              "evidence": "Paper deadline July 2, 2026 AoE; rebuttal Aug 17-20; notification Sept 10; PC chairs Branzei, Caragiannis, Chen; general chairs Huang, Li"
+            }
+          ]
+        }
+      ]
+    },
+    "HPDC": {
+      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "outcome": "incomplete",
+      "summary": "HPDC 2026 (Cleveland, OH, July 13-16) added with date/place only; deadlines and chairs not on fetched pages.",
+      "checkedUrls": [
+        "https://hpdc.sci.utah.edu/",
+        "https://hpdc.sci.utah.edu/2026/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2026,
+          "sources": [
+            {
+              "field": "date",
+              "url": "https://hpdc.sci.utah.edu/2026/",
+              "evidence": "July 13-16, 2026, Case Western Reserve University, Cleveland"
+            }
+          ]
+        }
+      ]
+    },
+    "ISMB": {
+      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "outcome": "incomplete",
+      "summary": "ISMB 2026 (Washington, DC, July 12-16) added with date/place only; proceedings deadlines and chairs not stated on fetched page.",
+      "checkedUrls": [
+        "https://www.iscb.org/ismb2026",
+        "https://www.iscb.org/ismb2026-program/conference-chairs"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2026,
+          "sources": [
+            {
+              "field": "date",
+              "url": "https://www.iscb.org/ismb2026",
+              "evidence": "July 12-16, 2026, Washington Hilton, Washington, D.C."
+            }
+          ]
+        }
+      ]
+    },
+    "RECOMB": {
+      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "outcome": "incomplete",
+      "summary": "RECOMB 2027 (Toronto, May 17-20) added with date/place only; deadlines and chairs not found on fetched pages.",
+      "checkedUrls": [
+        "https://recomb.org/",
+        "https://recomb.org/recomb2027"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "date",
+              "url": "https://recomb.org/recomb2027",
+              "evidence": "May 17-20, 2027 with satellites May 15-16, Toronto"
+            }
+          ]
+        }
+      ]
+    },
+    "RTAS": {
+      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "outcome": "complete",
+      "summary": "RTAS 2026 (Saint-Malo, May 12-14) added: deadline, author response, notification from official site; chairs not listed on fetched page.",
+      "checkedUrls": [
+        "https://2026.rtas.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2026,
+          "sources": [
+            {
+              "field": "deadline",
+              "url": "https://2026.rtas.org/",
+              "evidence": "Submission Nov 13, 2025; author response Jan 14-18, 2026; notification Jan 29, 2026"
+            }
+          ]
+        }
+      ]
     }
   }
 }
