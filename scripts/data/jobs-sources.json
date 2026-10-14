@@ -20513,5 +20513,50 @@
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false
+  },
+  {
+    "school": "Weber State University",
+    "homepage": "https://www.weber.edu/computing/",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://jobs.weber.edu/postings/search",
+    "state": "UT",
+    "lastCheckedAt": "2026-10-14T04:44:48Z",
+    "outcome": "incomplete",
+    "summary": "Official careers board and School of Computing, ECE, Microbiology, and Communication pages reviewed. Added two School of Computing tenure-track roles, Microbiology bioinformatics, Communication social media/data analytics, and the CS/NET/WEB adjunct pool. Related-unit coverage is preliminary; revisit the broader campus board and related departments on a later crawl.",
+    "checkedUrls": [
+      "https://jobs.weber.edu/postings/search",
+      "https://jobs.weber.edu/postings/29412",
+      "https://jobs.weber.edu/postings/29481",
+      "https://jobs.weber.edu/postings/29480",
+      "https://jobs.weber.edu/postings/29439",
+      "https://jobs.weber.edu/postings/27906",
+      "https://www.weber.edu/computing/",
+      "https://www.weber.edu/ece/",
+      "https://www.weber.edu/microbiology/",
+      "https://www.weber.edu/communication/"
+    ],
+    "relatedUnits": [
+      {
+        "name": "School of Computing",
+        "url": "https://www.weber.edu/computing/"
+      },
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://www.weber.edu/ece/"
+      },
+      {
+        "name": "Microbiology",
+        "url": "https://www.weber.edu/microbiology/"
+      },
+      {
+        "name": "Communication",
+        "url": "https://www.weber.edu/communication/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T04:44:48Z",
+    "deferredUntil": null,
+    "csrankings": false
   }
 ]

@@ -13379,5 +13379,111 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "weber-school-computing-assistant-prof-bioinformatics-2026-f00546",
+    "school": "Weber State University",
+    "department": "School of Computing",
+    "title": "Assistant Professor of Computing (Bioinformatics)",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "bio"
+    ],
+    "state": "UT",
+    "city": "Ogden",
+    "rolling": true,
+    "reviewBegins": "2026-10-22",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://jobs.weber.edu/postings/29412",
+    "visaSponsorship": "no",
+    "source": "crawl",
+    "verified": true,
+    "country": "US",
+    "summary": "Full-time tenure-track School of Computing faculty position beginning Fall 2027. PhD in Computer Science or a related field required; bioinformatics or computational research expertise preferred. Screening begins Oct 22, 2026 and continues until filled. Visa sponsorship is unavailable."
+  },
+  {
+    "id": "weber-school-computing-assistant-prof-cyber-ai-2026-f00553",
+    "school": "Weber State University",
+    "department": "School of Computing",
+    "title": "Assistant Professor of Computing (Cybersecurity and AI)",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "sec",
+      "ai"
+    ],
+    "state": "UT",
+    "city": "Ogden",
+    "rolling": true,
+    "reviewBegins": "2026-11-01",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://jobs.weber.edu/postings/29481",
+    "visaSponsorship": "no",
+    "source": "crawl",
+    "verified": true,
+    "country": "US",
+    "summary": "Full-time tenure-track School of Computing position beginning Spring 2027, with teaching in computer science, security, software development, and AI. A graduate degree in CS, cybersecurity, IT, or a closely related field is required by Jan 11, 2027; PhD preferred. Screening begins Nov 1, 2026 and continues until filled. Visa sponsorship is unavailable."
+  },
+  {
+    "id": "weber-microbiology-bioinformatics-assistant-prof-2026-f00552",
+    "school": "Weber State University",
+    "department": "Microbiology",
+    "title": "Assistant Professor of Bioinformatics",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "bio"
+    ],
+    "state": "UT",
+    "city": "Ogden",
+    "deadline": "2026-12-07",
+    "rolling": true,
+    "lastSeenAt": "2026-10-14",
+    "url": "https://jobs.weber.edu/postings/29480",
+    "visaSponsorship": "not-stated",
+    "source": "crawl",
+    "verified": true,
+    "country": "US",
+    "summary": "Tenure-track faculty position beginning Fall 2027 in Microbiology, with bioinformatics/computational biology, data analysis, and collaboration with computing and data science. Requires a PhD in Bioinformatics, Microbiology, or a closely related field with applicable research experience; programming is preferred. Dec 7, 2026 is the highest-priority review date; screening continues until filled."
+  },
+  {
+    "id": "weber-communication-social-data-analytics-assistant-prof-2026-f00551",
+    "school": "Weber State University",
+    "department": "Communication",
+    "title": "Assistant Professor of Social Media and Data Analytics",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "visualization"
+    ],
+    "state": "UT",
+    "city": "Ogden",
+    "rolling": true,
+    "reviewBegins": "2026-12-01",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://jobs.weber.edu/postings/29439",
+    "visaSponsorship": "not-stated",
+    "source": "crawl",
+    "verified": true,
+    "country": "US",
+    "summary": "Tenure-track Communication faculty position beginning Fall 2027 focused on social media and data analytics, including data visualization and large-scale data applications. Required doctorate is in Communication, a data field, or a related terminal field; data science is explicitly listed. Review begins Dec 1, 2026 and continues until filled."
+  },
+  {
+    "id": "weber-school-computing-cs-adjunct-pool-2026-a00084",
+    "school": "Weber State University",
+    "department": "School of Computing",
+    "title": "Adjunct CS, NET, WEB Instructor",
+    "track": "teaching",
+    "state": "UT",
+    "city": "Ogden",
+    "deadline": "2027-03-17",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://jobs.weber.edu/postings/27906",
+    "visaSponsorship": "not-stated",
+    "source": "crawl",
+    "verified": true,
+    "country": "US",
+    "summary": "Part-time pooled adjunct position to teach one or two School of Computing courses per semester, in person or online, as needed. Requires a bachelor’s degree and teaching experience; a master’s degree is preferred. Screening begins immediately; pool closes Mar 17, 2027."
   }
 ]
