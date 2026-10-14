@@ -36,7 +36,7 @@ recheck interval has elapsed. Fully read schools are season-aware: postings appe
 postings are rechecked every 7 days in season (14 off-season) and others every 21 days (60 off-season).
 Schools whose last crawl was unfinished come due much sooner: `incomplete` after 1 day, `not_found` after 10,
 `blocked` after 14.
-`npm run maintain:jobs -- --related N` lists schools whose non-CS units (IST, ECE, data science) have never
+`npm run maintain:jobs -- --related N` lists schools whose non-CS units (IST, ECE/ECEC, data science) have never
 been checked (no `relatedCheckedAt`); set `relatedCheckedAt` when you finish a school's other units. `--stats` shows coverage.
 
 ## The school record (`scripts/data/jobs-sources.json`) and rechecks
@@ -89,8 +89,10 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
    the department page both count as official. AcademicJobsOnline, HigherEdJobs, Indeed, LinkedIn, and
    social posts are leads only: follow them to the official posting, never copy facts from them. Record the
    page in `jobsUrl`.
-2. **Look beyond the CS department.** Many schools hire CS PhDs into other units: information schools (IST,
-   iSchool, Informatics), ECE/EECS/electrical & computer engineering, data science, cybersecurity, and
+2. **Look beyond the CS department.** Many schools hire CS PhDs into other units, so a CS department-only
+   search is incomplete. In particular, explicitly check Information Science and Technology (IST) units and
+   Electrical and Computer Engineering (ECE/ECEC) units; both often advertise faculty roles suitable for CS
+   researchers. Also check information schools (iSchool, Informatics), EECS, data science, cybersecurity, and
    college-of-computing or engineering-wide searches. After the CS page, find the school's other computing-adjacent
    units (from the university's college/department directory or the engineering/information school site), read
    their hiring pages, and list them in the sources row's `relatedUnits` (`[{ "name", "url" }]`) so later crawls

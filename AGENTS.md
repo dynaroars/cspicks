@@ -78,7 +78,9 @@ playbook before any data-refresh or web-research task.
   `scripts/data/jobs-extra-schools.json`). Update a school's row after every visit, even when nothing was posted yet, so the next run rechecks it
   (see TASKS/jobs.md, "The school record"). The same file is the durable website/revisit record for international
   vacancy research. Verified international postings belong in `public/jobs.json`; keep the school website/revisit record current in
-  `scripts/data/jobs-sources.json`. Do not create GitHub Issues for these postings unless the user asks for that workflow.
+  `scripts/data/jobs-sources.json`. Job research must also check related units, especially Electrical and Computer
+  Engineering (ECE/ECEC) and Information Science and Technology (IST), which often hire CS faculty; see TASKS/jobs.md.
+  Do not create GitHub Issues for these postings unless the user asks for that workflow.
 - `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
 - `stats.html` + `src/stats.ts` — site stats (roster, conferences, awards, jobs; never the large NSF snapshot) and repository activity from the GitHub API. Every page header links to it via the health icon, between the GitHub and
   ROARS Lab icons (all three share `.icon-link`; `test/unit/consistency.test.js` enforces the header on every page).
