@@ -19956,14 +19956,28 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://careers.aacc.edu/jobs/search",
     "state": "MD",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "complete",
+    "summary": "Verified open Computer Science, Computer Information Systems, and Cybersecurity/Networking/Digital Forensics part-time faculty pools on the official AACC Careers site; all three computing units were reviewed.",
+    "checkedUrls": [
+      "https://careers.aacc.edu/jobs/search",
+      "https://careers.aacc.edu/jobs/part-time-faculty-computer-science-arnold-main-campus-maryland-united-states",
+      "https://careers.aacc.edu/jobs/part-time-faculty-information-systems-arnold-main-campus-maryland-united-states",
+      "https://careers.aacc.edu/jobs/part-time-faculty-cybersecurity-networking-and-digital-forensics-arnold-main-campus-maryland-united-states"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Computer Information Systems",
+        "url": "https://careers.aacc.edu/jobs/part-time-faculty-information-systems-arnold-main-campus-maryland-united-states"
+      },
+      {
+        "name": "Cybersecurity, Networking and Digital Forensics",
+        "url": "https://careers.aacc.edu/jobs/part-time-faculty-cybersecurity-networking-and-digital-forensics-arnold-main-campus-maryland-united-states"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-13T00:00:00Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "community-college"

@@ -1,5 +1,73 @@
 [
   {
+    "id": "aacc-information-systems-part-time-faculty-pool",
+    "school": "Anne Arundel Community College",
+    "department": "Computer Information Systems",
+    "title": "Part-Time Faculty- Information Systems",
+    "track": "teaching",
+    "areas": [
+      "mod",
+      "soft",
+      "mlmining"
+    ],
+    "anyArea": true,
+    "state": "MD",
+    "city": "Arnold",
+    "lastSeenAt": "2026-10-13",
+    "url": "https://careers.aacc.edu/jobs/part-time-faculty-information-systems-arnold-main-campus-maryland-united-states",
+    "visaSponsorship": "no",
+    "summary": "Ongoing part-time faculty pool for Computer Information Systems courses. Requires a master’s degree in computer science or computer information systems and documented teaching experience; experience in software quality assurance, cloud platforms, or IT service management is relevant.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "aacc-cybersecurity-part-time-faculty-pool",
+    "school": "Anne Arundel Community College",
+    "department": "Cybersecurity, Networking and Digital Forensics",
+    "title": "Part-Time Faculty- Cybersecurity, Networking and Digital Forensics",
+    "track": "teaching",
+    "areas": [
+      "sec",
+      "comm"
+    ],
+    "anyArea": true,
+    "state": "MD",
+    "city": "Arnold",
+    "lastSeenAt": "2026-10-13",
+    "url": "https://careers.aacc.edu/jobs/part-time-faculty-cybersecurity-networking-and-digital-forensics-arnold-main-campus-maryland-united-states",
+    "visaSponsorship": "no",
+    "summary": "Ongoing part-time faculty pool for cybersecurity, networking, and digital forensics courses, including information assurance, penetration testing, ethical hacking, cloud computing, and Linux/Windows server networking. Requires a master’s degree in CS or cybersecurity and documented teaching experience.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "aacc-cs-part-time-faculty-pool",
+    "school": "Anne Arundel Community College",
+    "department": "Computer Science",
+    "title": "Part-Time Faculty- Computer Science",
+    "track": "teaching",
+    "areas": [
+      "ai",
+      "soft",
+      "ops",
+      "mod",
+      "mlmining",
+      "plan"
+    ],
+    "anyArea": true,
+    "state": "MD",
+    "city": "Arnold",
+    "lastSeenAt": "2026-10-13",
+    "url": "https://careers.aacc.edu/jobs/part-time-faculty-computer-science-arnold-main-campus-maryland-united-states",
+    "visaSponsorship": "no",
+    "summary": "Ongoing part-time faculty pool for Computer Science courses, including programming and software development, full-stack development, databases, business intelligence/data science, cognitive computing, and emerging technologies. Requires a master’s degree in CS and documented teaching experience; in-person presence is required for some assignments.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
     "id": "csuf-cs-part-time-lecturer-pool-2026",
     "school": "California State University, Fullerton",
     "department": "Department of Computer Science",
