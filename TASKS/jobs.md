@@ -91,7 +91,7 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
    page in `jobsUrl`.
 2. **Look beyond the CS department.** Many schools hire CS PhDs into other units, so a CS department-only
    search is incomplete. In particular, explicitly check Information Science and Technology (IST) units and
-   Electrical and Computer Engineering (ECE/ECEC) units; both often advertise faculty roles suitable for CS
+   Electrical and Computer Engineering (ECE/ECEC) units; these units often advertise faculty roles suitable for CS
    researchers. Also check information schools (iSchool, Informatics), EECS, data science, cybersecurity, and
    college-of-computing or engineering-wide searches. After the CS page, find the school's other computing-adjacent
    units (from the university's college/department directory or the engineering/information school site), read

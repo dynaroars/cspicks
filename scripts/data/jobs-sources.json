@@ -6513,15 +6513,16 @@
     "facultyCount": 0,
     "jobsUrl": "https://careers.sdsu.edu/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-12T12:52:47Z",
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Verified three active CS and computing-related faculty postings on the official PageUp careers portal. Computer Science and ECE/MIS listings checked; broader related-unit scan remains incomplete.",
+    "summary": "Verified three active tenure-track CS/computing searches and one active 2026/27 CS lecturer pool on the official CSU PageUp portal. CS, ECE, MIS and CS lecturer-pool listings checked; broader related-unit scan remains incomplete.",
     "checkedUrls": [
       "https://cs.sdsu.edu/",
       "https://careers.sdsu.edu/en-us/listing/",
       "https://careers.sdsu.edu/en-us/job/562107/assistant-professor-of-cybersecurity-ai",
       "https://careers.sdsu.edu/en-us/job/562196/assistant-professor-of-hardware-cybersecurity",
-      "https://careers.sdsu.edu/en-us/job/562473/assistant-professor-of-computer-science"
+      "https://careers.sdsu.edu/en-us/job/562473/assistant-professor-of-computer-science",
+      "https://careers.csueastbay.edu/cw/en-us/job/556211/department-of-computer-science-lecturer-pool-20262027"
     ],
     "relatedUnits": [
       {
@@ -18144,13 +18145,22 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": "https://csucareers.calstate.edu/en-us/filter/?category=faculty%20-%20computer%20science",
+    "jobsUrl": "https://careers.csusb.edu/sb/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Verified one active tenure-track CS assistant professor posting. CSE career listing checked; adjacent-unit hiring scan remains incomplete.",
+    "checkedUrls": [
+      "https://www.csusb.edu/computer-science-engineering",
+      "https://careers.csusb.edu/sb/en-us/listing/",
+      "https://careers.csusb.edu/sb/en-us/job/562948/school-of-computer-science-and-engineering-assistant-professor"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://www.csusb.edu/electrical-computer-engineering"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
@@ -19469,13 +19479,22 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://careers.csusm.edu/cw/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Verified active AY 2026/27 Computer Science and Engineering lecturer pool. CSE hiring page checked; adjacent-unit hiring scan remains incomplete.",
+    "checkedUrls": [
+      "https://www.csusm.edu/cs/",
+      "https://careers.csusm.edu/cw/en-us/listing/",
+      "https://careers.csueastbay.edu/cw/en-us/job/558311/lecturer-pool-computer-science-and-engineering-ay-202627"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Electrical Engineering",
+        "url": "https://www.csusm.edu/engineering/"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
