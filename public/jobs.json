@@ -711,7 +711,7 @@
     "url": "https://careers.hprod.onehcm.usg.edu/psc/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=301839&PostingSeq=1",
     "visaSponsorship": "not-stated",
     "summary": "Department chair search for the Department of Computer Science.",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-14",
     "source": "crawl",
     "verified": true,
     "country": "US"
@@ -727,7 +727,7 @@
     "city": "Kennesaw",
     "deadline": "2026-08-20",
     "rolling": true,
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-14",
     "url": "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=300368&PostingSeq=1",
     "visaSponsorship": "not-stated",
     "summary": "Teaching-track lecturer in data science and analytics; the full-consideration date has passed but review continues.",
@@ -748,7 +748,7 @@
     "url": "https://careers.hprod.onehcm.usg.edu/psc/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=300372&PostingSeq=1",
     "visaSponsorship": "not-stated",
     "summary": "Open-rank faculty position in data science and analytics.",
-    "lastSeenAt": "2026-10-08",
+    "lastSeenAt": "2026-10-14",
     "source": "crawl",
     "verified": true,
     "country": "US"
@@ -12058,6 +12058,27 @@
     "url": "https://uasys.wd5.myworkdayjobs.com/en-US/UASYS/job/Assistant-Professor---STEM---9-Month_R0087139",
     "visaSponsorship": "no",
     "summary": "Nine-month Assistant Professor in the Department of Computer Science, responsible for teaching, research, and service in the School of Computer and Information Sciences. Requires a PhD in Computer Science or related field and at least five years of academic experience. Sponsorship is unavailable.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "latech-asst-prof-coes-aiml-2026",
+    "school": "Louisiana Tech University",
+    "department": "College of Engineering and Science",
+    "title": "Assistant Professor, College of Engineering and Science",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "mlmining"
+    ],
+    "state": "LA",
+    "city": "Ruston",
+    "rolling": true,
+    "url": "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers/job/Assistant-Professor--College-of-Engineering-and-Science_R-1829",
+    "visaSponsorship": "not-stated",
+    "summary": "Tenure-track faculty search focused on model-based systems engineering or applied AI and machine learning. The posting calls for a doctorate in a relevant engineering or science field, with teaching in the candidate’s discipline. Applications are reviewed immediately until filled; start date is negotiable.",
     "source": "crawl",
     "verified": true,
     "country": "US"

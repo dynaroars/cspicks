@@ -6170,20 +6170,29 @@
     "school": "Louisiana Tech University",
     "homepage": "https://coes.latech.edu/undergraduate-programs/computer-science/",
     "facultyCount": 5,
-    "jobsUrl": "https://www.latech.edu/business/about/employment-opportunities.php",
+    "jobsUrl": "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers",
     "state": "LA",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T04:00:00Z",
     "outcome": "incomplete",
-    "summary": "Two CS-adjacent Computer Information Systems faculty roles are advertised, but full Workday details remain unchecked; partial.",
+    "summary": "Reviewed the official Workday faculty board and College of Business employment page. Added the open Assistant Professor, College of Engineering and Science search (R-1829), which seeks MBSE or applied AI/ML expertise, is open until filled, and has a negotiable start date. The Computer Science R-1559 listing remains visible but specifies a September 2025 start, so it was not treated as a current opening. Two Computer Information Systems postings for Fall 2026 need detailed eligibility/status review; their official pages were recorded for follow-up.",
     "checkedUrls": [
       "https://www.latech.edu/engineering-science/index.php/undergraduate-programs/computer-science/",
       "https://www.latech.edu/business/about/employment-opportunities.php",
       "https://www.latech.edu/employment/",
-      "https://ulsltu.wd1.myworkdayjobs.com/LATECHCareers"
+      "https://ulsltu.wd1.myworkdayjobs.com/LATECHCareers",
+      "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers/job/Assistant-Professor--College-of-Engineering-and-Science_R-1829",
+      "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers/job/Assistant-Professor--Computer-Science_R-1559",
+      "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers/details/CIS-Eminent-Scholar-Chair_R-1663",
+      "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers/details/Assistant-Professor--Computer-Information-Systems_R-1558"
     ],
     "deferredUntil": null,
-    "relatedUnits": [],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedUnits": [
+      {
+        "name": "College of Business — Computer Information Systems",
+        "url": "https://www.latech.edu/business/about/employment-opportunities.php"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T04:00:00Z",
     "country": "US",
     "region": "northamerica",
     "kind": "R2"
@@ -6378,25 +6387,38 @@
     "facultyCount": 0,
     "jobsUrl": "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
     "state": "GA",
-    "lastCheckedAt": "2026-10-14T03:22:37Z",
+    "lastCheckedAt": "2026-10-14T04:00:00Z",
     "outcome": "incomplete",
-    "summary": "The official CCSE page currently lists a full-time Computer Science postdoctoral researcher opening, added to the roster. Its linked PeopleSoft application requires sign-in, so role details remain incomplete; three previously recorded openings remain on file.",
+    "summary": "Rechecked the official CCSE hiring page. It currently lists the CS department chair, Data Science and Analytics lecturer and open-rank professor, plus the CS postdoctoral researcher; the four existing records were refreshed. The page says IT and Software Engineering/Game Development have no openings. Also checked the ECE faculty unit page; its separate current hiring status was not established, so the crawl remains incomplete. Linked PeopleSoft requisitions redirect to sign-in.",
     "checkedUrls": [
       "https://ccse.kennesaw.edu/",
       "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
       "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=301839&PostingSeq=1",
       "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=43000&JobOpeningId=300281&PostingSeq=1",
       "https://campus.kennesaw.edu/faculty-staff/academic-affairs/faculty-affairs/faculty-openings.php",
-      "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Action=U&FOCUS=Applicant&JobOpeningId=300281&Page=HRS_APP_JBPST_FL&PostingSeq=1&SiteId=43000"
+      "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Action=U&FOCUS=Applicant&JobOpeningId=300281&Page=HRS_APP_JBPST_FL&PostingSeq=1&SiteId=43000",
+      "https://campus.kennesaw.edu/colleges-departments/ccse/academics/information-technology/faculty-staff.php",
+      "https://campus.kennesaw.edu/colleges-departments/spceet/academics/electrical-computer-engineering/about/faculty-staff.php",
+      "https://careers.hprod.onehcm.usg.edu/psc/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Action=U&FOCUS=Applicant&JobOpeningId=301839&Page=HRS_APP_JBPST_FL&PostingSeq=1&SiteId=43000",
+      "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Action=U&FOCUS=Applicant&JobOpeningId=300368&Page=HRS_APP_JBPST_FL&PostingSeq=1&SiteId=43000",
+      "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Action=U&FOCUS=Applicant&JobOpeningId=300372&Page=HRS_APP_JBPST_FL&PostingSeq=1&SiteId=43000"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "CCSE job openings",
         "url": "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php"
+      },
+      {
+        "name": "Information Technology (CCSE)",
+        "url": "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php"
+      },
+      {
+        "name": "Electrical and Computer Engineering (SPCEET)",
+        "url": "https://campus.kennesaw.edu/colleges-departments/spceet/academics/electrical-computer-engineering/about/faculty-staff.php"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T04:00:00Z",
     "country": "US",
     "region": "northamerica",
     "kind": "R2"
