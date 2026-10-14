@@ -1249,11 +1249,11 @@
     "school": "University of Illinois at Chicago",
     "homepage": "https://www.cs.uic.edu",
     "facultyCount": 95,
-    "jobsUrl": "https://cs.uic.edu/faculty-staff/open-positions/",
+    "jobsUrl": "https://mscs.uic.edu/about/employment/",
     "state": "IL",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
-    "outcome": "incomplete",
-    "summary": "The CS open-positions URL now returns 404. MSCS employment page lists an Assistant/Associate/Full Professor search as Hiring (record confirmed seen); lecturer and research positions not hiring.",
+    "lastCheckedAt": "2026-10-14T05:12:38Z",
+    "outcome": "complete",
+    "summary": "Reconfirmed the live tenure-track Mathematical Computer Science Assistant Professor search on the current MSCS employment page. The old CS open-positions URL returns 404; the official ECE page was checked and reports no open faculty positions.",
     "checkedUrls": [
       "https://cs.uic.edu/faculty-staff/open-positions/",
       "https://ece.uic.edu/faculty-and-staff/open-positions/",
@@ -1267,7 +1267,7 @@
         "url": "https://ece.uic.edu/faculty-and-staff/open-positions/"
       }
     ],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-14T05:12:38Z",
     "country": "US",
     "region": "northamerica"
   },
@@ -17997,12 +17997,17 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.pugetsound.edu/employment",
     "state": "WA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-14T05:12:38Z",
+    "outcome": "incomplete",
+    "summary": "The official HR page links to the university employment portal, but the portal pages returned HTTP 405 in this visit. A third-party listing reports a tenure-track Computer Science search (job ID 8944), but official posting details and status could not be verified; do not add until the official portal can be checked.",
+    "checkedUrls": [
+      "https://www.pugetsound.edu/human-resources/work-puget-sound/employment-opportunities",
+      "https://www.pugetsound.edu/employment",
+      "https://www.pugetsound.edu/academics/academic-departments/math-computer-science",
+      "https://www.mathjobs.org/jobs/list/28781"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null,
@@ -18142,12 +18147,16 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": "https://academicjobsonline.org/ajo/jobs/32241",
+    "jobsUrl": "https://www.pomona.edu/administration/academic-dean/general/faculty-jobs",
     "state": "CA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-14T05:12:38Z",
+    "outcome": "incomplete",
+    "summary": "The official faculty board and CS page still describe the Assistant Professor of Computer Science search as continuing until filled, but the linked Academic Jobs Online application says it stopped accepting new applications after Oct 12, 2026. Status conflicts across the linked pages; adjacent-unit review remains incomplete.",
+    "checkedUrls": [
+      "https://www.pomona.edu/administration/academic-dean/general/faculty-jobs",
+      "https://www.pomona.edu/academics/departments/computer-science",
+      "https://academicjobsonline.org/ajo/jobs/32241"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null,
@@ -18218,13 +18227,21 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": "https://cooper.edu/work/employment-opportunities",
+    "jobsUrl": "https://cooper.edu/work/employment-opportunities/electrical-engineering-tenure-track-faculty-position-0",
     "state": "NY",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-14T05:12:38Z",
+    "outcome": "incomplete",
+    "summary": "Verified the current tenure-track Electrical Engineering faculty search focused on computer architecture, digital hardware, embedded computing, and AI. The official Computer Science department page did not load in this visit, so its review and the broader related-unit scan remain incomplete.",
+    "checkedUrls": [
+      "https://cooper.edu/engineering/academics/computer-science",
+      "https://cooper.edu/work/employment-opportunities/electrical-engineering-tenure-track-faculty-position-0"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Department of Electrical Engineering",
+        "url": "https://cooper.edu/work/employment-opportunities/electrical-engineering-tenure-track-faculty-position-0"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
