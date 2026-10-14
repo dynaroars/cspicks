@@ -5913,9 +5913,9 @@
     "facultyCount": 11,
     "jobsUrl": "https://cu.taleo.net/careersection/2/moresearch.ftl?lang=en",
     "state": "CO",
-    "lastCheckedAt": "2026-10-12T13:10:00Z",
+    "lastCheckedAt": "2026-10-14T05:21:36Z",
     "outcome": "incomplete",
-    "summary": "Verified CSE assistant professor posting #00636050 / requisition 41101 is active via the CU careers job-detail path; preference deadline Nov 27, 2026. Current Taleo detail fetch is inaccessible in browser, broader CSE refresh incomplete.",
+    "summary": "Added a currently listed CU Anschutz Department of Biomedical Informatics open-rank AI faculty search (requisition 41057; CS PhDs accepted; preference date December 1, 2026). Broader CU Denver/Anschutz hiring-page refresh remains incomplete.",
     "checkedUrls": [
       "https://cu.taleo.net/careersection/2/jobdetail.ftl?job=41101",
       "https://cu.taleo.net/careersection/2/jobdetail.ftl?job=39732",
@@ -5923,7 +5923,8 @@
       "https://cu.taleo.net/careersection/2/moresearch.ftl?lang=en&keyword=cyber",
       "https://cu.taleo.net/careersection/2/moresearch.ftl?lang=en&keyword=data",
       "https://cu.taleo.net/careersection/2/moresearch.ftl?lang=en",
-      "https://cu.taleo.net/careersection/2/jobdetail.ftl?source=JB-10400&job=41101"
+      "https://cu.taleo.net/careersection/2/jobdetail.ftl?source=JB-10400&job=41101",
+      "https://cu.taleo.net/careersection/2/jobdetail.ftl?job=41057"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -19249,14 +19250,22 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://bsu.wd12.myworkdayjobs.com/External",
     "state": "IN",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-14T05:21:36Z",
+    "outcome": "complete",
+    "summary": "Reviewed the official Workday external careers portal and the current Information Systems and Operations Management faculty search. Added the tenure-track assistant professor posting (R-03186), due October 28, 2026.",
+    "checkedUrls": [
+      "https://bsu.wd12.myworkdayjobs.com/External",
+      "https://bsu.wd12.myworkdayjobs.com/en-US/External/job/Assistant-Professor-of-Information-Systems-and-Operations-Management_R-03186"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Information Systems and Operations Management",
+        "url": "https://www.bsu.edu/academics/collegesanddepartments/miller/academic-departments/information-systems-and-operations-management"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "R2"
@@ -19547,14 +19556,36 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://careers.uwf.edu/jobs/search/hal-marcus-college-of-science-and-engineering",
     "state": "FL",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-14T05:21:36Z",
+    "outcome": "complete",
+    "summary": "Reviewed official Computer Science and related-unit hiring pages. Two current tenure-track CS searches (#105140 and #129540) and a tenure-earning computational biology/bioinformatics search (#128670; accepts CS PhDs) are live. Also checked Intelligent Systems and Robotics posting #125910 (preferred response date passed), Cybersecurity and Information Technology, and Electrical and Computer Engineering.",
+    "checkedUrls": [
+      "https://careers.uwf.edu/jobs/search/hal-marcus-college-of-science-and-engineering",
+      "https://careers.uwf.edu/jobs/assistant-professor-105140-pensacola-main-campus-florida-united-states-3bd304c9-f5e6-41b1-a857-0cafc1f25f1c",
+      "https://careers.uwf.edu/jobs/assistant-professor-129540-ft-walton-beach-florida-united-states-8cc7e8a6-5bb6-4bc5-b486-84f0dfce5611",
+      "https://careers.uwf.edu/jobs/assistant-professor-125910-pensacola-main-campus-florida-united-states",
+      "https://uwf.edu/hmcse/departments/computer-science/",
+      "https://uwf.edu/hmcse/departments/electrical-and-computer-engineering/",
+      "https://uwf.edu/hmcse/departments/cybersecurity-and-information-technology/",
+      "https://careers.uwf.edu/jobs/assistant-or-associate-professor-computational-biology-bioinformatics-128670-pensacola-main-campus-florida-united-states-30912854-bb79-46f3-bebd-ce7337e25d08"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Intelligent Systems and Robotics",
+        "url": "https://careers.uwf.edu/jobs/assistant-professor-125910-pensacola-main-campus-florida-united-states"
+      },
+      {
+        "name": "Cybersecurity and Information Technology",
+        "url": "https://uwf.edu/hmcse/departments/cybersecurity-and-information-technology/"
+      },
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://uwf.edu/hmcse/departments/electrical-and-computer-engineering/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"
@@ -19700,14 +19731,30 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://csucareers.calstate.edu/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-14T05:21:36Z",
+    "outcome": "complete",
+    "summary": "Reviewed CS and ECE departmental hiring pages and official CSU Careers listings. Added current tenure-track ECE searches in cyber-physical systems and integrated circuits/systems; also recorded the related Information Systems search. All remain open until filled.",
+    "checkedUrls": [
+      "https://csucareers.calstate.edu/en-us/listing/",
+      "https://www.csun.edu/engineering-computer-science/computer-science/faculty-staff/job-openings",
+      "https://www.csun.edu/engineering-computer-science/electrical-computer-engineering/faculty-staff/job-openings",
+      "https://csucareers.calstate.edu/cw/en-us/job/561285/assistant-professor-of-information-systems-department-of-systems-and-operations-management-2704",
+      "https://csucareers.calstate.edu/en-us/job/562806/assistant-professor-of-cyberphysical-systems-department-of-electrical-and-computer-engineering-2718",
+      "https://csucareers.calstate.edu/mob/cw/en-us/job/562808/assistant-professor-of-integrated-circuits-and-systems-department-of-electrical-and-computer-engineering-2719"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Electrical and Computer Engineering faculty openings",
+        "url": "https://www.csun.edu/engineering-computer-science/electrical-computer-engineering/faculty-staff/job-openings"
+      },
+      {
+        "name": "Systems and Operations Management",
+        "url": "https://www.csun.edu/business/som"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"
