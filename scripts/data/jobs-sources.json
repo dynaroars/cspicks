@@ -5004,26 +5004,45 @@
     "facultyCount": 21,
     "jobsUrl": "https://vcujobs.com/jobs/search",
     "state": "VA",
-    "lastCheckedAt": "2026-10-11T20:00:00Z",
-    "outcome": "partial",
-    "summary": "Current VCU Careers listing confirms a strategic senior engineering faculty search that can be appointed in Computer Science and targets AI, autonomous systems, and computing; review began Aug 1, 2026 and continues until filled. Other CS department openings were not fully established in this pass. Added this broad engineering role.",
+    "lastCheckedAt": "2026-10-14T04:47:36Z",
+    "outcome": "incomplete",
+    "summary": "Refreshed the College of Engineering senior faculty search and ECE AI/cybersecurity postdoc. Added two Biomedical AI/Computational Molecular Medicine assistant professor hires, a separate non-tenure-track Biomedical AI research assistant professor, an ECE department chair search, and a senior Information Systems AI/healthcare faculty search. CS and ECE hiring sources plus the listed related-unit postings were reviewed; broader campus-wide coverage remains incomplete.",
     "checkedUrls": [
       "https://careers.pageuppeople.com/1212/cw/en-us/job/45002098/associate-professorprofessor",
-      "https://egr.vcu.edu/careers/",
-      "https://careers.pageuppeople.com/1212/cw/en-us/Search/"
+      "https://careers.pageuppeople.com/1212/cw/en-us/job/45002257/postdoctoral-research-associate-ai-for-cybersecurity",
+      "https://careers.pageuppeople.com/1212/cw/en-us/job/45002432/assistant-professor-division-of-biomedical-ai-cellular-molecular-and-genetic-medicine",
+      "https://careers.pageuppeople.com/1212/cw/en-us/job/45002433/assistant-professor-biomedical-ai-spatial-multiomics-and-cancer-data-science-department-of-cellular-molecular-and-genetic-medicine",
+      "https://careers.pageuppeople.com/1212/cw/en-us/job/45002488/department-chair-electrical-and-computer-engineering",
+      "https://careers.pageuppeople.com/1212/cw/en-us/job/45002515/information-systems-faculty",
+      "https://careers.pageuppeople.com/1212/cw/en-us/Search/",
+      "https://egr.vcu.edu/departments/computer-science/",
+      "https://egr.vcu.edu/departments/electrical-computer-engineering/",
+      "https://business.vcu.edu/academics/departments/information-systems/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "College of Engineering (ECE)",
-        "url": "https://egr.vcu.edu/careers/"
+        "name": "Computer Science",
+        "url": "https://egr.vcu.edu/departments/computer-science/"
+      },
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://egr.vcu.edu/departments/electrical-computer-engineering/"
+      },
+      {
+        "name": "Information Systems",
+        "url": "https://careers.pageuppeople.com/1212/cw/en-us/job/45002515/information-systems-faculty"
+      },
+      {
+        "name": "Cellular, Molecular and Genetic Medicine - Biomedical AI",
+        "url": "https://careers.pageuppeople.com/1212/cw/en-us/job/45002432/assistant-professor-division-of-biomedical-ai-cellular-molecular-and-genetic-medicine"
       },
       {
         "name": "VCU Jobs faculty search",
         "url": "https://vcujobs.com/jobs/search/faculty"
       }
     ],
-    "relatedCheckedAt": "2026-10-11T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T04:47:36Z",
     "country": "US",
     "region": "northamerica"
   },
