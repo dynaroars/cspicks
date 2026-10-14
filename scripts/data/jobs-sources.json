@@ -18111,14 +18111,18 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": "https://apply.interfolio.com/191353",
+    "jobsUrl": "https://careers.hillsdale.edu/department/provost-faculty",
     "state": "MI",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-14T05:15:45Z",
+    "outcome": "complete",
+    "summary": "The official Provost/Faculty careers page reports no available faculty positions; checked the Computer Science department page. Hillsdale lists Information Technology Services as an administrative/staff unit, not an academic faculty department; no ECE/ECEC or academic IST hiring unit was identified. Recheck the careers page next season.",
+    "checkedUrls": [
+      "https://careers.hillsdale.edu/department/provost-faculty",
+      "https://careers.hillsdale.edu/departments",
+      "https://www.hillsdale.edu/academics/departments/computer-science/"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-14T05:15:45Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "liberal-arts"
@@ -18129,14 +18133,24 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": "https://employment.plu.edu/postings/8685",
+    "jobsUrl": "https://employment.plu.edu/",
     "state": "WA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-14T05:15:45Z",
+    "outcome": "complete",
+    "summary": "Reviewed PLU’s current employment portal and the Computer Science/Data Science unit pages; no live CS or related computing faculty vacancy is listed. An institutional planning document anticipates a future cybersecurity search, so recheck the portal as that search may be posted later.",
+    "checkedUrls": [
+      "https://employment.plu.edu/",
+      "https://www.plu.edu/computer-science/",
+      "https://www.plu.edu/computer-science/department/data-science/",
+      "https://www.plu.edu/academic-programs/program/data-science/"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Data Science",
+        "url": "https://www.plu.edu/computer-science/department/data-science/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T05:15:45Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"
@@ -18171,12 +18185,21 @@
     "region": "northamerica",
     "jobsUrl": "https://sites.allegheny.edu/human-resources/",
     "state": "PA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-14T05:15:45Z",
+    "outcome": "incomplete",
+    "summary": "Reviewed the official Computer and Information Science faculty/program page and academic department directory; these cover Computer Science, Data Science, Informatics, and Software Engineering. The HR page did not expose a current faculty vacancy list in this review, so no opening was added and the crawl remains incomplete.",
+    "checkedUrls": [
+      "https://sites.allegheny.edu/human-resources/",
+      "https://www.cis.allegheny.edu/about/faculty/",
+      "https://sites.allegheny.edu/academic-affairs/academic-departments-programs/"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Computer and Information Science (CS, Data Science, Informatics, Software Engineering)",
+        "url": "https://www.cis.allegheny.edu/about/faculty/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T05:15:45Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "liberal-arts"
@@ -18187,14 +18210,18 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.bard.edu/employment/employment/",
     "state": "NY",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-10-14T05:15:45Z",
+    "outcome": "complete",
+    "summary": "Bard’s official employment page lists current academic openings, with no CS faculty role; the faculty recruitment page states there are no tenure-track searches in 2026–27. Checked the CS program page; no separate ECE/ECEC or academic IST unit was identified, so revisit the same board next season.",
+    "checkedUrls": [
+      "https://www.bard.edu/employment/employment/",
+      "https://www.bard.edu/doc/recruitment/",
+      "https://www.bard.edu/cs/"
+    ],
     "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-14T05:15:45Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "liberal-arts"
@@ -18255,12 +18282,22 @@
     "region": "northamerica",
     "jobsUrl": "https://gettysburg.peopleadmin.com/postings/search",
     "state": "PA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-14T05:15:45Z",
+    "outcome": "complete",
+    "summary": "Reviewed the live PeopleAdmin listings and official academic department directory: no current CS or Data Science faculty opening. The visiting research/access services librarian role requires library/information science qualifications and is not a CS faculty search; recheck the same board next season.",
+    "checkedUrls": [
+      "https://gettysburg.peopleadmin.com/postings/search",
+      "https://www.gettysburg.edu/academics/departments",
+      "https://www.gettysburg.edu/academics/computer-science",
+      "https://www.gettysburg.edu/academic-programs/interdisciplinary-studies/programs/data-science"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Data Science",
+        "url": "https://www.gettysburg.edu/academic-programs/interdisciplinary-studies/programs/data-science"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T05:15:45Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "liberal-arts"
@@ -20713,6 +20750,38 @@
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
+    "deferredUntil": null,
+    "csrankings": false,
+    "kind": "community-college"
+  },
+  {
+    "school": "Frederick Community College",
+    "homepage": "https://fcc.frederick.edu/programs/technology/computer-science-as.html",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://jobs.frederick.edu/postings/7292/print_preview",
+    "state": "MD",
+    "lastCheckedAt": "2026-10-14T05:15:45Z",
+    "outcome": "complete",
+    "summary": "Added the live Adjunct, Introduction to Programming pool (TS737P), which remains active through May 31, 2027. Checked the official Computer Science program and Computing & Business Technology listings; an adjacent Information Technology/Cybersecurity adjunct pool closed May 31, 2026 and was not added.",
+    "checkedUrls": [
+      "https://jobs.frederick.edu/postings/7292/print_preview",
+      "https://jobs.frederick.edu/postings/search",
+      "https://fcc.frederick.edu/programs/technology/computer-science-as.html",
+      "https://jobs.frederick.edu/postings/6420"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Computer Science A.S.",
+        "url": "https://fcc.frederick.edu/programs/technology/computer-science-as.html"
+      },
+      {
+        "name": "Information Technology and Cybersecurity adjunct pool (expired 2026-05-31)",
+        "url": "https://jobs.frederick.edu/postings/6420"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T05:15:45Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "community-college"

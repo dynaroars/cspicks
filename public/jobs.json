@@ -13906,5 +13906,25 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "frederick-adjunct-introduction-programming-2027",
+    "school": "Frederick Community College",
+    "department": "Computing & Business Technology (CBT)",
+    "title": "Adjunct, Introduction to Programming",
+    "track": "teaching",
+    "level": null,
+    "areas": [],
+    "state": "MD",
+    "city": "Frederick",
+    "deadline": "2027-05-31",
+    "rolling": true,
+    "lastSeenAt": "2026-10-14",
+    "url": "https://jobs.frederick.edu/postings/7292/print_preview",
+    "visaSponsorship": "not-stated",
+    "summary": "Adjunct instructors teach programming courses as assigned based on disciplinary needs and qualifications. This pool remains active through May 31, 2027.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]
