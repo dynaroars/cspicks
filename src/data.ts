@@ -47,7 +47,7 @@ export function loadData(): Promise<RawData> {
 }
 
 async function loadDataFromSources(): Promise<RawData> {
-  const optionalCsv = <T>(url: string): Promise<T[]> => fetchCsv<T>(url).catch(error => {
+  const optionalCsv = <T>(url: string): Promise<T[]> => fetchCsv<T>(url, { dropMalformedRows: true }).catch(error => {
     console.warn(`Optional CSRankings metadata unavailable: ${url}`, error);
     return [] as T[];
   });
@@ -584,7 +584,13 @@ export function filterByYears(
   return { professors: filteredProfs, schools: filteredSchools };
 }
 
-export async function fetchCsv<T = Record<string, string>>(url: string): Promise<T[]> {
+// Required inputs reject on any parse error. Optional upstream metadata passes
+// dropMalformedRows so one stray quote (e.g. a quoted nickname in
+// dblp-aliases.csv) costs that row, not the whole file.
+export async function fetchCsv<T = Record<string, string>>(
+  url: string,
+  { dropMalformedRows = false }: { dropMalformedRows?: boolean } = {}
+): Promise<T[]> {
   const response = await fetchWithRetry(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch CSV (${response.status}) from ${url}`);
@@ -597,7 +603,13 @@ export async function fetchCsv<T = Record<string, string>>(url: string): Promise
       comments: "#",
       complete: (results) => {
         if (results.errors?.length) {
-          reject(new Error(`Failed to parse CSV from ${url}: ${results.errors[0]!.message}`));
+          if (!dropMalformedRows) {
+            reject(new Error(`Failed to parse CSV from ${url}: ${results.errors[0]!.message}`));
+            return;
+          }
+          const badRows = new Set(results.errors.map(error => error.row));
+          console.warn(`Dropped ${badRows.size} malformed row(s) from ${url}: ${results.errors[0]!.message}`);
+          resolve(results.data.filter((_, index) => !badRows.has(index)));
           return;
         }
         resolve(results.data);

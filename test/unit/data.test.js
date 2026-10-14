@@ -364,3 +364,23 @@ test('fetchCsv rejects HTTP failures', async () => {
     globalThis.fetch = originalFetch;
   }
 });
+
+test('fetchCsv can drop malformed rows instead of rejecting the whole file', async () => {
+  const originalFetch = globalThis.fetch;
+  const originalWarn = console.warn;
+  const csv = 'alias,name\nJohn "Skip" Doe,John Doe\nAda Byron,Ada Lovelace\n"Johann" Bach,Johann Bach\n';
+  globalThis.fetch = async () => new Response(csv);
+  console.warn = () => {};
+
+  try {
+    await assert.rejects(fetchCsv('https://example.invalid/a.csv'), /Failed to parse CSV/);
+    const rows = await fetchCsv('https://example.invalid/a.csv', { dropMalformedRows: true });
+    assert.deepEqual(rows, [
+      { alias: 'John "Skip" Doe', name: 'John Doe' },
+      { alias: 'Ada Byron', name: 'Ada Lovelace' }
+    ]);
+  } finally {
+    globalThis.fetch = originalFetch;
+    console.warn = originalWarn;
+  }
+});
