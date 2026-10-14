@@ -6392,14 +6392,26 @@
     "facultyCount": 0,
     "jobsUrl": "https://www.bates.edu/dof/welcome/hiring-and-personnel/current-faculty-job-postings/",
     "state": "ME",
-    "lastCheckedAt": "2026-10-12T12:57:26Z",
+    "lastCheckedAt": "2026-10-14T05:08:09Z",
     "outcome": "incomplete",
-    "summary": "Verified the open-rank Computer Science search R2372 on Bates’ official current faculty postings page and followed its Interfolio application link. Broader computing-adjacent scan remains incomplete.",
+    "summary": "The official current faculty page still lists the open-rank Computer Science search R2372. It also lists a joint Africana and Digital & Computational Studies data-sciences search (R2365); its official Interfolio detail page did not render, so CS eligibility could not be assessed and the related-unit scan remains incomplete.",
     "checkedUrls": [
       "https://www.bates.edu/dof/welcome/hiring-and-personnel/current-faculty-job-postings/",
-      "https://apply.interfolio.com/193312"
+      "https://apply.interfolio.com/193312",
+      "https://apply.interfolio.com/190456",
+      "https://www.bates.edu/digital-computational-studies/",
+      "https://www.bates.edu/africana/"
     ],
-    "relatedUnits": [],
+    "relatedUnits": [
+      {
+        "name": "Program in Digital and Computational Studies",
+        "url": "https://www.bates.edu/digital-computational-studies/"
+      },
+      {
+        "name": "Program in Africana",
+        "url": "https://www.bates.edu/africana/"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
@@ -17999,18 +18011,33 @@
   },
   {
     "school": "Seton Hall University",
-    "homepage": "https://www.shu.edu/arts-sciences/math-computer-science/",
+    "homepage": "https://www.shu.edu/math-compsci/",
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://jobs.shu.edu/cw/en-us/job/497488/assistant-professor-of-computer-science",
     "state": "NJ",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-14T05:08:09Z",
+    "outcome": "complete",
+    "summary": "Verified the full-time tenure-track Assistant Professor of Computer Science posting, advertised Sep 17, 2026, with an August 2027 start. The official faculty board currently shows this as its only open faculty search; the Computing and Decision Sciences department and the university’s Data Science and Engineering program were checked, and no separate ECE/ECEC unit was identified.",
+    "checkedUrls": [
+      "https://jobs.shu.edu/cw/en-us/job/497488/assistant-professor-of-computer-science",
+      "https://www.shu.edu/math-compsci/",
+      "https://www.shu.edu/academics/bs-computer-science-ms-data-science-engineering.html",
+      "https://www.shu.edu/computing/",
+      "https://www.shu.edu/arts-sciences/departments.html"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Data Science and Engineering (within Mathematics and Computer Science)",
+        "url": "https://www.shu.edu/academics/bs-computer-science-ms-data-science-engineering.html"
+      },
+      {
+        "name": "Department of Computing and Decision Sciences",
+        "url": "https://www.shu.edu/computing/"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T05:08:09Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"
@@ -18021,13 +18048,24 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://fa-ewur-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_3/job/2735/?mode=location",
     "state": "MN",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-14T05:08:09Z",
+    "outcome": "incomplete",
+    "summary": "Verified the live official Oracle posting for a tenure-track Assistant Professor of Computer Science beginning August 2027; review began Oct 1 and continues until filled. The official MSCS pages identify a Statistics and Data Science unit and an Oracle-hosted related search (job 2736), but that posting detail did not render for verification, so related-unit review remains incomplete.",
+    "checkedUrls": [
+      "https://fa-ewur-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_3/job/2735/?mode=location",
+      "https://fa-ewur-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_3/job/2736/?mode=location",
+      "https://wp.stolaf.edu/cs/",
+      "https://wp.stolaf.edu/mscs/",
+      "https://wp.stolaf.edu/statistics/"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Statistics and Data Science (Mathematics, Statistics, and Computer Science)",
+        "url": "https://wp.stolaf.edu/statistics/"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
