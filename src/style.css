@@ -736,6 +736,29 @@ option {
     flex-direction: column;
     gap: 0.1rem;
   }
+
+  /* Jobs and Awards: dropdowns sit in an even two-column grid (region spans the row) instead of ragged wrapping. */
+  .jobs-page .search-filters,
+  .grants-page .search-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .jobs-page .search-filters .filter-group:has(> [hidden]) {
+    display: none;
+  }
+
+  .jobs-page .search-filters .filter-group:first-child,
+  .jobs-page .search-filters .filter-group:first-child .field-select {
+    grid-column: 1 / -1;
+  }
+
+  .jobs-page .search-filters .field-select,
+  .grants-page .search-filters .field-select {
+    width: 100%;
+    field-sizing: fixed;
+  }
 }
 
 /* Dataset choices and supporting views are available without filling the landing page. */
