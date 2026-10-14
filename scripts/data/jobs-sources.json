@@ -4616,9 +4616,9 @@
     "facultyCount": 24,
     "jobsUrl": "https://www.pdx.edu/engineering/open-faculty-staff-positions",
     "state": "OR",
-    "lastCheckedAt": "2026-10-11T18:00:00Z",
-    "outcome": "partial",
-    "summary": "The current Maseeh College page lists two Computer Science Professor of Practice roles (Computer Architecture and Embedded Systems), but both official links now redirect to the generic postings page and the individual details are unavailable. The college-wide page also lists Power Systems; it is not treated as CS. Could not confirm current status or qualifications for the two CS-adjacent practice roles.",
+    "lastCheckedAt": "2026-10-14T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Verified a live two-position tenure-track ECE cluster search for AI and computing architecture. The Computer Science/ECE pages were reviewed; the broader adjacent-unit scan remains incomplete.",
     "checkedUrls": [
       [
         "https://www.pdx.edu/engineering/open-faculty-staff-positions",
@@ -4631,7 +4631,8 @@
       [
         "https://jobs.hrc.pdx.edu/postings/46038",
         "Embedded Systems posting redirects to generic postings search; individual details unavailable."
-      ]
+      ],
+      "https://jobs.hrc.pdx.edu/postings/50805"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -4644,7 +4645,7 @@
         "url": "https://www.pdx.edu/electrical-computer-engineering"
       }
     ],
-    "relatedCheckedAt": "2026-10-11T18:00:00Z",
+    "relatedCheckedAt": "2026-10-14T00:00:00Z",
     "country": "US",
     "region": "northamerica",
     "kind": "R2"
@@ -4789,21 +4790,31 @@
     "facultyCount": 22,
     "jobsUrl": "https://uasys.wd5.myworkdayjobs.com/UASYS",
     "state": "AR",
-    "lastCheckedAt": "2026-10-11T22:00:00Z",
-    "outcome": "partial",
-    "summary": "The University of Arkansas EECS Workday listing includes an active Fall 2027 Assistant Professor search focused on semiconductor electronics/photonics/materials, with AI, neuromorphic, quantum computing, and MEMS among additional interests. The full posting’s required degree discipline and fit for CS applicants need verification; recorded as a candidate related opening pending that check.",
+    "lastCheckedAt": "2026-10-14T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Reviewed the official Workday Information Systems assistant professor opening and current EECS ECE searches. Added the Information Systems opening; the separate EECS Assistant Professor ad requires an EE/materials/physics doctorate, so it was excluded from CS jobs. Other related-unit review remains incomplete.",
     "checkedUrls": [
       "https://uasys.wd5.myworkdayjobs.com/en-US/UAF_External_Career_Site/job/Fayetteville-AR/Assistant-Professor---Electrical-Engineering---9-MONTH_R0091048",
-      "https://hr.uark.edu/employee-resources/hiring.php"
+      "https://hr.uark.edu/employee-resources/hiring.php",
+      "https://uasys.wd5.myworkdayjobs.com/uasys/job/Assistant-Professor-of-Information-Systems_R0090950-1",
+      "https://engineering.uark.edu/electrical-engineering-computer-science/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "University of Arkansas System Workday careers (all campuses)",
         "url": "https://uasys.wd5.myworkdayjobs.com/UASYS"
+      },
+      {
+        "name": "Information Systems Department, Walton College",
+        "url": "https://walton.uark.edu/departments/information-systems/"
+      },
+      {
+        "name": "Electrical Engineering and Computer Science",
+        "url": "https://engineering.uark.edu/electrical-engineering-computer-science/"
       }
     ],
-    "relatedCheckedAt": "2026-10-11T22:00:00Z",
+    "relatedCheckedAt": "2026-10-14T00:00:00Z",
     "country": "US",
     "region": "northamerica"
   },

@@ -12966,5 +12966,48 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "portland-state-ece-ai-semiconductor-2027",
+    "school": "Portland State University",
+    "department": "Department of Electrical and Computer Engineering",
+    "title": "Assistant Professor",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "arch"
+    ],
+    "state": "OR",
+    "city": "Portland",
+    "rolling": true,
+    "startDate": "2027-09-16",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://jobs.hrc.pdx.edu/postings/50805",
+    "visaSponsorship": "not-stated",
+    "summary": "Two tenure-track assistant professor positions in a cluster search on co-design of semiconductor devices, circuits, and computing architectures with and for AI. Tenure homes may include Electrical and Computer Engineering; applications are considered until finalists are identified, with screening beginning Nov 1, 2026.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "arkansas-assistant-professor-information-systems-2027",
+    "school": "University of Arkansas",
+    "department": "Information Systems Department, Sam M. Walton College of Business",
+    "title": "Assistant Professor of Information Systems",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [],
+    "state": "AR",
+    "city": "Fayetteville",
+    "deadline": "2026-10-15",
+    "startDate": "2027-08-16",
+    "lastSeenAt": "2026-10-14",
+    "url": "https://uasys.wd5.myworkdayjobs.com/uasys/job/Assistant-Professor-of-Information-Systems_R0090950-1",
+    "visaSponsorship": "yes",
+    "summary": "Tenure-track faculty role focused on research and teaching in Information Systems, starting Aug 16, 2027. The posting requires a PhD in Information Systems or a closely related field and lists sponsorship as available; its exact instructions specify a 12:01 a.m. CT Oct 15 close.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]
