@@ -11937,5 +11937,54 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "msstate-gri-research-prof-2026",
+    "school": "Mississippi State University",
+    "department": "Geosystems Research Institute",
+    "title": "Assistant / Associate Research Professor",
+    "track": "research",
+    "level": "open",
+    "areas": [
+      "mlmining",
+      "hpc",
+      "bio"
+    ],
+    "state": "MS",
+    "city": "Starkville",
+    "postedDate": "2026-07-31",
+    "reviewBegins": "2026-09-15",
+    "rolling": true,
+    "lastSeenAt": "2026-10-14",
+    "visaSponsorship": "not-stated",
+    "url": "https://explore.msujobs.msstate.edu/jobs/assistant-associate-research-professor-main-campus-starkville-ms-mississippi-united-states-6f810365-7e7d-47c9-b2f3-92de82cb8067",
+    "summary": "Full-time research professor search for geospatial modeling, machine learning, and data analytics; a PhD in Computer Science or several related fields is accepted. Review began September 15, 2026 and continues until filled; work includes computational modeling, bioinformatics, and HPC workflows.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
+  },
+  {
+    "id": "msstate-nsparc-postdoc-ai-ml-2026",
+    "school": "Mississippi State University",
+    "department": "National Strategic Planning & Analysis Research Center (NSPARC)",
+    "title": "Postdoctoral Research Associate",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "ai",
+      "mlmining",
+      "vision",
+      "nlp"
+    ],
+    "state": "MS",
+    "city": "Starkville",
+    "postedDate": "2026-10-13",
+    "lastSeenAt": "2026-10-14",
+    "visaSponsorship": "not-stated",
+    "url": "https://explore.msujobs.msstate.edu/jobs/postdoctoral-research-associate-main-campus-starkville-ms-mississippi-united-states-30f96433-0f5b-4601-a4f7-20d00cb9a1ec",
+    "summary": "Full-time 12-month postdoctoral role developing AI and machine-learning methods for multimodal public-sector data, including computer vision, NLP, and data pipelines. A PhD in Computer Science, AI, ML, ECE, statistics, applied mathematics, or a related field is required.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]

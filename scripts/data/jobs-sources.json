@@ -5268,13 +5268,15 @@
     "facultyCount": 17,
     "jobsUrl": "https://explore.msujobs.msstate.edu/jobs/search",
     "state": "MS",
-    "lastCheckedAt": "2026-10-14T03:15:00Z",
+    "lastCheckedAt": "2026-10-14T03:19:00Z",
     "outcome": "partial",
-    "summary": "Official HR pages checked (2026-10-14): CSE Instructor (Req 511191) remains live with Jan 1, 2027 anticipated start; added active CAVS Assistant/Associate Research Professor posting focused on computational science, big data, and HPC. Adjacent-unit review remains partial.",
+    "summary": "Official HR and department pages checked (2026-10-14): confirmed active CSE Instructor (Req 511191), added new CAVS Assistant/Associate Research Professor, GRI Assistant/Associate Research Professor, and NSPARC Postdoctoral Research Associate (opened Oct 13). Adjacent-unit review remains partial.",
     "checkedUrls": [
       "https://explore.msujobs.msstate.edu/jobs/instructor-i-ii-or-iii-main-campus-starkville-ms-mississippi-united-states-98228e8d-a74c-4619-80fc-8085a9612f25",
       "https://www.career.msstate.edu/jobs/mississippi-school-for-mathematics-and-science-computer-science-adjunct-msms/",
-      "https://explore.msujobs.msstate.edu/jobs/assistant-associate-research-professor-main-campus-starkville-ms-mississippi-united-states"
+      "https://explore.msujobs.msstate.edu/jobs/assistant-associate-research-professor-main-campus-starkville-ms-mississippi-united-states",
+      "https://explore.msujobs.msstate.edu/jobs/assistant-associate-research-professor-main-campus-starkville-ms-mississippi-united-states-6f810365-7e7d-47c9-b2f3-92de82cb8067",
+      "https://explore.msujobs.msstate.edu/jobs/postdoctoral-research-associate-main-campus-starkville-ms-mississippi-united-states-30f96433-0f5b-4601-a4f7-20d00cb9a1ec"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -5285,9 +5287,17 @@
       {
         "name": "Center for Advanced Vehicular Systems (CAVS)",
         "url": "https://explore.msujobs.msstate.edu/jobs/assistant-associate-research-professor-main-campus-starkville-ms-mississippi-united-states"
+      },
+      {
+        "name": "Geosystems Research Institute (GRI)",
+        "url": "https://explore.msujobs.msstate.edu/jobs/assistant-associate-research-professor-main-campus-starkville-ms-mississippi-united-states-6f810365-7e7d-47c9-b2f3-92de82cb8067"
+      },
+      {
+        "name": "National Strategic Planning & Analysis Research Center (NSPARC)",
+        "url": "https://explore.msujobs.msstate.edu/jobs/postdoctoral-research-associate-main-campus-starkville-ms-mississippi-united-states-30f96433-0f5b-4601-a4f7-20d00cb9a1ec"
       }
     ],
-    "relatedCheckedAt": "2026-10-14T03:15:00Z",
+    "relatedCheckedAt": "2026-10-14T03:19:00Z",
     "country": "US",
     "region": "northamerica"
   },
@@ -6029,9 +6039,9 @@
     "facultyCount": 6,
     "jobsUrl": "https://www.ndsu.edu/employment/joblist",
     "state": "ND",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:22:00Z",
     "outcome": "incomplete",
-    "summary": "The official job board shows two Computer Science listings in its department facet; title and requisition details must be resolved before adding records. Partial.",
+    "summary": "Official NDSU Computer Science people page and NDUS employment portal checked (2026-10-14). The portal result could not be reliably narrowed to NDSU Computer Science requisitions; no additional posting was verified, so the school review remains incomplete.",
     "checkedUrls": [
       "https://www.ndsu.edu/computer-science",
       "https://www.ndsu.edu/employment",
