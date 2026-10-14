@@ -126,7 +126,6 @@ async function init() {
     hideComparison
   });
   setupSearch();
-  setupTooltips();
   initTooltipPositioning();
 
   try {
@@ -653,52 +652,6 @@ function setSearchQuery(query: string) {
   input.dispatchEvent(new Event('input', { bubbles: true }));
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-function setupTooltips() {
-  // Create global tooltip element
-  let tooltip = document.getElementById('global-tooltip');
-  if (!tooltip) {
-    tooltip = document.createElement('div');
-    tooltip.id = 'global-tooltip';
-    document.body.appendChild(tooltip);
-  }
-
-  // Use event delegation for dynamic elements
-  document.addEventListener('mouseover', (e) => {
-    const target = e.target instanceof Element ? e.target.closest('.year-column') : null;
-    if (target) {
-      const text = target.getAttribute('data-tooltip');
-      if (text) {
-        // Replace comma with newline for better readability
-        tooltip.textContent = text.replace(': ', ':\n');
-        tooltip.style.display = 'block';
-      }
-    }
-  });
-
-  document.addEventListener('mousemove', (e) => {
-    if (tooltip.style.display === 'block') {
-      // Position slightly offset from cursor
-      const x = e.clientX + 15;
-      const y = e.clientY + 15;
-
-      // Prevent going off screen
-      const rect = tooltip.getBoundingClientRect();
-      const maxX = window.innerWidth - rect.width - 20;
-      const maxY = window.innerHeight - rect.height - 20;
-
-      tooltip.style.left = `${Math.min(x, maxX)}px`;
-      tooltip.style.top = `${Math.min(y, maxY)}px`;
-    }
-  });
-
-  document.addEventListener('mouseout', (e) => {
-    const target = e.target instanceof Element ? e.target.closest('.year-column') : null;
-    if (target) {
-      tooltip.style.display = 'none';
-    }
-  });
-}
-
 init();
 
 // Search autocomplete: suggestion sources and grouping for the main search box.

@@ -31,8 +31,6 @@
   .schedule-tag-core-a { color: #b8c4ff; background: #25295c; }
 }
 .schedule-extra { margin: .28rem 0; color: var(--text-secondary); font-size: .84rem; }
-.schedule-series-link { display: inline-block; margin-top: .35rem; font-size: .82rem; color: var(--accent-color); }
-.schedule-series-link:hover { text-decoration: none; }
 .schedule-card-cycles { display: grid; align-content: start; gap: .75rem; }
 .schedule-cycle { position: relative; border-left: 3px solid var(--border-color); padding: .1rem 0 .1rem .9rem; }
 .schedule-cycle-label { display: block; margin-bottom: .35rem; color: var(--text-secondary); font-size: .75rem; }

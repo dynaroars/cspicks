@@ -216,17 +216,6 @@ footer button:hover {
 /* ==========================================================================
    Shared Typography, Badges & Utility Helpers
    ========================================================================== */
-.section-title {
-  font-family: var(--font-heading);
-  font-size: var(--text-sm);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin: 0.75rem 0 0;
-  padding: 0;
-  border: 0;
-  color: var(--text-primary);
-}
-
 .inline-link {
   color: inherit;
   background: none;
@@ -239,7 +228,6 @@ footer button:hover {
 /* ==========================================================================
    Standard Buttons
    ========================================================================== */
-.btn-primary,
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -253,21 +241,6 @@ footer button:hover {
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
-}
-
-.btn-primary {
-  color: var(--bg-color);
-  background: var(--primary-color);
-  border: 1px solid var(--primary-color);
-}
-
-.btn-primary:hover {
-  opacity: 0.9;
-}
-
-.btn-primary:focus-visible {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
 }
 
 .btn-secondary {
@@ -1538,7 +1511,7 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
 /* ==== Charts, tooltips, theme ==== */
 
 /* ==========================================================================
-   Chart Containers, Tooltips, Activity Sparklines, and Attribution Breakdown
+   Chart Containers, Tooltips, and Attribution Breakdown
    ========================================================================== */
 
 /* Chart Containers */
@@ -1549,28 +1522,6 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
 
 .analysis-tall-chart {
   height: 600px;
-}
-
-/* Tooltips */
-#global-tooltip {
-  position: fixed;
-  z-index: 10000;
-  display: none;
-  max-width: 300px;
-  padding: 0.45rem 0.7rem;
-  color: #ffffff;
-  background: #2d2d2d;
-  border-radius: 6px;
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 1.35;
-  letter-spacing: normal;
-  text-transform: none;
-  white-space: pre-wrap;
-  pointer-events: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .tooltip-trigger {
@@ -1626,66 +1577,6 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
 .tooltip-trigger:focus-within .tooltip-content {
   visibility: visible;
   opacity: 1;
-}
-
-/* Activity Sparkline Graph */
-.activity-graph {
-  margin: 1rem 0;
-  padding: 0.8rem;
-  background: var(--hover-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-}
-
-.activity-graph h4 {
-  margin: 0 0 0.8rem 0;
-  color: var(--text-secondary);
-  font-size: 0.85em;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.activity-bars {
-  display: grid;
-  align-items: flex-end;
-  height: 140px;
-  gap: 4px;
-  padding-bottom: 10px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: thin;
-}
-
-.year-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  height: 100%;
-  position: relative;
-  cursor: help;
-  min-width: 0;
-}
-
-.year-column .bar {
-  width: 100%;
-  max-width: 20px;
-  min-height: 2px;
-  background-color: var(--text-secondary);
-  border-radius: 3px 3px 0 0;
-  transition: height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
-}
-
-.year-column:hover .bar {
-  background-color: var(--accent-color);
-  opacity: 1;
-}
-
-.year-label {
-  margin-top: 4px;
-  color: var(--text-secondary);
-  font-size: 10px;
 }
 
 /* Attribution & Contribution Breakdown */
@@ -1810,15 +1701,6 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
   margin: 1.25rem auto 0;
   padding-top: 1.25rem;
   border-top: 1px solid var(--border-color);
-}
-
-.integrated-analysis .eyebrow {
-  margin-bottom: 0.25rem;
-  color: var(--text-secondary);
-  font-size: var(--text-xs);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .integrated-analysis .analysis-view-card {

@@ -182,33 +182,6 @@
   background: var(--hover-bg);
 }
 
-.submit-review-card {
-  margin-top: 1.5rem;
-  padding: 1.35rem 1.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  background: var(--bg-secondary);
-}
-
-.submit-review-card h3 {
-  margin: 0 0 0.5rem;
-  font-family: var(--font-heading);
-  font-size: 1.15rem;
-  color: var(--text-primary);
-}
-
-.submit-review-card pre {
-  margin: 0.75rem 0 1.25rem;
-  padding: 0.85rem 1rem;
-  border-radius: 8px;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  font-size: 0.82rem;
-  overflow-x: auto;
-  font-family: var(--font-mono);
-}
-
 .submit-actions {
   display: flex;
   flex-wrap: wrap;

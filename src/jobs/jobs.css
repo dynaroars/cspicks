@@ -80,12 +80,8 @@
   text-align: left; white-space: nowrap; cursor: pointer;
 }
 .jobs-favorites-menu button:hover { background: var(--hover-bg); }
-.job-chip-visa.is-yes { color: #17653a; background: #dff7e8; border-color: transparent; font-weight: 600; }
-.job-chip-visa.is-case-by-case { color: #8a5a00; background: #fff4d6; border-color: transparent; font-weight: 600; }
 .job-chip-visa.is-no { color: #9b1c1c; background: #fde8e8; border-color: transparent; font-weight: 600; }
 @media (prefers-color-scheme: dark) {
-  .job-chip-visa.is-yes { color: #86e3ad; background: #173e29; }
-  .job-chip-visa.is-case-by-case { color: #ffd66b; background: #3d3010; }
   .job-chip-visa.is-no { color: #fca5a5; background: #4a1818; }
 }
 .job-map-clear {
