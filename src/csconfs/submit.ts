@@ -14,7 +14,7 @@ const editionKey = (name: string, year: string | number) => `${name.trim().toLoc
 
 function renderForm() {
   root.innerHTML = `
-    <form id="conference-submit-form" class="conference-submit-form" novalidate>
+    <form id="conference-submit-form" class="submit-form" novalidate>
       <fieldset class="submit-section">
         <legend>What kind of submission is this?</legend>
         <label class="submit-choice"><input type="radio" name="kind" value="new" checked> Add a new conference edition</label>
@@ -25,10 +25,12 @@ function renderForm() {
 
       <div id="structured-fields" hidden>
 
-      <div class="submit-section submit-target" id="correction-target-row" hidden>
+      <div class="submit-section" id="correction-target-row" hidden>
         <label for="target">Existing conference entry *</label>
-        <input id="target" name="target" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="conference-correction-suggestions" aria-describedby="correction-target-help">
-        <div id="conference-correction-suggestions" class="conference-correction-suggestions" role="listbox" hidden></div>
+        <div class="submit-combobox">
+          <input id="target" name="target" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="conference-correction-suggestions" aria-describedby="correction-target-help">
+          <div id="conference-correction-suggestions" class="correction-suggestions" role="listbox" hidden></div>
+        </div>
         <p class="submit-help" id="correction-target-help">Start typing a conference name, year, or cycle. Selecting an entry fills its current values for editing.</p>
       </div>
 
@@ -71,7 +73,7 @@ function renderForm() {
         </div>
       </div>
 
-      <div class="submit-grid submit-grid-dates">
+      <div class="submit-grid">
         <div class="submit-section"><label for="abstractDeadline">Abstract deadline</label><input id="abstractDeadline" name="abstractDeadline" type="text" placeholder="YYYY-MM-DD or TBD" pattern="(?:\\d{4}-\\d{2}-\\d{2}|TBD)"></div>
         <div class="submit-section"><label for="deadline">Submission deadline</label><input id="deadline" name="deadline" type="text" placeholder="YYYY-MM-DD or TBD" pattern="(?:\\d{4}-\\d{2}-\\d{2}|TBD)"></div>
         <div class="submit-section"><label for="rebuttalDate">Rebuttal date</label><input id="rebuttalDate" name="rebuttalDate" type="text" placeholder="YYYY-MM-DD or TBD" pattern="(?:\\d{4}-\\d{2}-\\d{2}|TBD)"></div>
@@ -235,7 +237,7 @@ function setupForm() {
       return searchable.includes(query);
     }).slice(0, 8);
     if (!query || !matches.length) return hideSuggestions();
-    suggestions.innerHTML = matches.map((entry, index) => `<button class="conference-correction-suggestion" type="button" role="option" data-index="${index}"><strong>${escapeHtml(entryLabel(entry))}</strong><span>${escapeHtml(entry.description || '')}${entry.place ? ` · ${escapeHtml(entry.place)}` : ''}</span></button>`).join('');
+    suggestions.innerHTML = matches.map((entry, index) => `<button class="correction-suggestion" type="button" role="option" data-index="${index}"><strong>${escapeHtml(entryLabel(entry))}</strong><span>${escapeHtml(entry.description || '')}${entry.place ? ` · ${escapeHtml(entry.place)}` : ''}</span></button>`).join('');
     suggestions.hidden = false;
     target.setAttribute('aria-expanded', 'true');
   };

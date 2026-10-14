@@ -17,7 +17,7 @@ const options = (entries: Array<[string, string]>, empty: string) =>
 
 function renderForm() {
   root.innerHTML = `
-    <form id="jobs-submit-form" class="grants-submit-form" novalidate>
+    <form id="jobs-submit-form" class="submit-form" novalidate>
       <fieldset class="submit-section">
         <legend>What would you like to do?</legend>
         <label class="submit-choice"><input type="radio" name="kind" value="new" checked> Add a new job posting</label>
@@ -27,10 +27,12 @@ function renderForm() {
       ${QUICK_SECTION}
 
       <div id="structured-fields" hidden>
-      <div class="submit-section submit-target" id="correction-target-row" hidden>
+      <div class="submit-section" id="correction-target-row" hidden>
         <label for="target">Select existing posting</label>
-        <input id="target" name="target" type="text" autocomplete="off" placeholder="Type school or position title...">
-        <div id="job-correction-suggestions" class="grant-correction-suggestions" role="listbox" hidden></div>
+        <div class="submit-combobox">
+          <input id="target" name="target" type="text" autocomplete="off" placeholder="Type school or position title...">
+          <div id="job-correction-suggestions" class="correction-suggestions" role="listbox" hidden></div>
+        </div>
         <p class="submit-help">Selecting one fills in its current details so you can change them.</p>
       </div>
 
@@ -133,7 +135,7 @@ function selectCorrection() {
     const matches = query ? allJobs.filter(job => `${job.school} ${job.title} ${job.department}`.toLowerCase().includes(query)).slice(0, 8) : [];
     box.hidden = !query;
     box.innerHTML = matches.length
-      ? matches.map(job => `<button type="button" class="grant-correction-suggestion" data-job-id="${escapeHtml(job.id)}"><strong>${escapeHtml(job.title)}</strong><span>${escapeHtml(job.school)} • ${escapeHtml(job.department)}</span></button>`).join('')
+      ? matches.map(job => `<button type="button" class="correction-suggestion" data-job-id="${escapeHtml(job.id)}"><strong>${escapeHtml(job.title)}</strong><span>${escapeHtml(job.school)} • ${escapeHtml(job.department)}</span></button>`).join('')
       : '<div style="padding: 0.6rem 0.85rem; color: var(--text-secondary); font-size: 0.82rem;">No matching postings found</div>';
   });
   box.addEventListener('click', event => {

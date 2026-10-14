@@ -1,8 +1,10 @@
 /* ==========================================================================
-   Awards & Grants Submission / Edit Form Styles
+   Submission / correction forms (CS Confs, Awards & Grants, Jobs)
+   One stylesheet for every *-submit.html page, including the shared
+   quick-entry form in src/submit-quick.ts.
    ========================================================================== */
 
-.grants-submit-container {
+.submit-container {
   width: min(820px, calc(100% - 2rem));
   margin: 0 auto 4rem;
 }
@@ -34,7 +36,7 @@
   text-decoration: underline;
 }
 
-.grants-submit-form {
+.submit-form {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -42,6 +44,11 @@
   border: 1px solid var(--border-color);
   border-radius: 14px;
   background: var(--card-bg);
+}
+
+/* Form rows set display: flex/grid, which would otherwise override the hidden attribute. */
+[hidden] {
+  display: none !important;
 }
 
 .submit-section {
@@ -52,11 +59,6 @@
   border: 0;
   padding: 0;
   margin: 0;
-}
-
-.submit-section[hidden],
-[hidden] {
-  display: none !important;
 }
 
 .submit-section > label,
@@ -94,7 +96,7 @@
 
 .submit-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -124,7 +126,7 @@
   color: var(--impact-neg-text);
 }
 
-/* Inline text-style buttons from the shared quick-entry form (src/submit-quick.ts). */
+/* Inline text-style buttons ("Enter them directly", "Edit the existing entry instead"). */
 .submit-link-button {
   border: 0;
   padding: 0;
@@ -135,11 +137,19 @@
   cursor: pointer;
 }
 
-.submit-target {
+.submit-attestation {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--primary-light);
+}
+
+/* Correction picker: the suggestion list hangs directly under its input. */
+.submit-combobox {
   position: relative;
 }
 
-.grant-correction-suggestions {
+.correction-suggestions {
   position: absolute;
   z-index: 20;
   top: calc(100% + 4px);
@@ -153,7 +163,7 @@
   box-shadow: var(--shadow-dropdown);
 }
 
-.grant-correction-suggestion {
+.correction-suggestion {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -168,17 +178,17 @@
   cursor: pointer;
 }
 
-.grant-correction-suggestion:last-child {
+.correction-suggestion:last-child {
   border-bottom: 0;
 }
 
-.grant-correction-suggestion span {
+.correction-suggestion span {
   color: var(--text-secondary);
   font-size: var(--text-xs);
 }
 
-.grant-correction-suggestion:hover,
-.grant-correction-suggestion:focus-visible {
+.correction-suggestion:hover,
+.correction-suggestion:focus-visible {
   background: var(--hover-bg);
 }
 
@@ -209,6 +219,11 @@
   opacity: 0.9;
 }
 
+.submit-button:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
 .submit-button-secondary {
   background: transparent;
   color: var(--text-primary);
@@ -220,19 +235,23 @@
 }
 
 @media (max-width: 640px) {
-  .grants-submit-container {
+  .submit-container {
     width: min(100% - 1rem, 820px);
   }
-  .grants-submit-form {
+
+  .submit-form {
     padding: 1rem;
   }
+
   .submit-grid {
     grid-template-columns: 1fr;
   }
+
   .submit-actions {
     flex-direction: column;
     align-items: stretch;
   }
+
   .submit-button {
     justify-content: center;
   }

@@ -13,7 +13,7 @@ let grantsById = new Map<string, Grant>();
 
 function renderForm() {
   root.innerHTML = `
-    <form id="grants-submit-form" class="grants-submit-form" novalidate>
+    <form id="grants-submit-form" class="submit-form" novalidate>
       <fieldset class="submit-section">
         <legend>What would you like to do?</legend>
         <label class="submit-choice"><input type="radio" name="kind" value="new" checked> Add a new award / call for proposals</label>
@@ -24,10 +24,12 @@ function renderForm() {
 
       <div id="structured-fields" hidden>
 
-      <div class="submit-section submit-target" id="correction-target-row" hidden>
+      <div class="submit-section" id="correction-target-row" hidden>
         <label for="target">Select existing award to edit</label>
-        <input id="target" name="target" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="grant-correction-suggestions" placeholder="Type award name or sponsor...">
-        <div id="grant-correction-suggestions" class="grant-correction-suggestions" role="listbox" hidden></div>
+        <div class="submit-combobox">
+          <input id="target" name="target" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="grant-correction-suggestions" placeholder="Type award name or sponsor...">
+          <div id="grant-correction-suggestions" class="correction-suggestions" role="listbox" hidden></div>
+        </div>
         <p class="submit-help" id="correction-target-help">Start typing to search existing awards. Selecting one auto-fills its details for editing.</p>
       </div>
 
@@ -217,7 +219,7 @@ function setupEvents() {
     }
 
     suggestionsBox.innerHTML = matches.map(g => `
-      <button type="button" class="grant-correction-suggestion" data-grant-id="${escapeHtml(g.id)}">
+      <button type="button" class="correction-suggestion" data-grant-id="${escapeHtml(g.id)}">
         <strong>${escapeHtml(g.name)}</strong>
         <span>${escapeHtml(g.sponsor)} • ${escapeHtml(g.whoFor || '')}</span>
       </button>

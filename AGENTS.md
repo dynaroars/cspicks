@@ -100,7 +100,8 @@ playbook before any data-refresh or web-research task.
 - `src/charts.ts` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges
   shared defaults and destroys the previous chart; `onThemeChange(fn)` re-renders on light/dark switches.
 - `src/style.css` — the one shared stylesheet every page links (sections in cascade order); page-only CSS sits
-  beside its page module (`src/jobs/jobs.css`, `src/grants/*.css`, `src/csconfs/*.css`).
+  beside its page module (`src/jobs/jobs.css`, `src/grants/*.css`, `src/csconfs/*.css`). All three `*-submit.html`
+  forms share `src/submit.css` (generic `submit-*` / `correction-suggestion*` classes); don't add per-form copies.
 - `src/search-controls.ts` — shared search controller for Search/Discoveries, Funding, Jobs, Awards, and CS Confs:
   keyword-name/value completion, the clickable ⓘ help popup, input events, `/` shortcut, up to four examples,
   and URL updates. Pages supply their keyword specs, value sources, ordinary suggestion groups, and rendering
