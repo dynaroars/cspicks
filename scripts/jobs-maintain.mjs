@@ -141,9 +141,40 @@ export function buildRelatedQueue(sources) {
     .sort((a, b) => b.facultyCount - a.facultyCount || a.school.localeCompare(b.school));
 }
 
+/**
+ * Bulk-register schools from a JSON array of { school, state, homepage, jobsUrl?, kind? }. Existing rows keep their crawl state
+ * and only gain a missing homepage/jobsUrl/kind; new rows are marked `csrankings: false`. `kind` is a free label such as
+ * "R2", "R3", "liberal-arts", "teaching", "community-college", "masters".
+ */
+async function importSchools() {
+  const entries = JSON.parse(await fs.readFile(option('import', ''), 'utf8'));
+  const sources = await readJson(SOURCES, []);
+  const byName = new Map(sources.map(source => [source.school.toLowerCase(), source]));
+  let added = 0;
+  let updated = 0;
+  for (const entry of entries) {
+    if (!entry.school || !/^[A-Z]{2}$/.test(entry.state || '')) throw new Error(`Bad entry (school and USPS state required): ${JSON.stringify(entry)}`);
+    const existing = byName.get(entry.school.toLowerCase());
+    if (existing) {
+      for (const key of ['homepage', 'jobsUrl', 'kind']) if (!existing[key] && entry[key]) { existing[key] = entry[key]; updated += 1; }
+      if (!existing.state) existing.state = entry.state;
+      continue;
+    }
+    const row = { ...emptyRow(entry.school, entry.homepage || null, 0), state: entry.state, csrankings: false };
+    if (entry.jobsUrl) row.jobsUrl = entry.jobsUrl;
+    if (entry.kind) row.kind = entry.kind;
+    sources.push(row);
+    byName.set(entry.school.toLowerCase(), row);
+    added += 1;
+  }
+  await fs.writeFile(SOURCES, `${JSON.stringify(sources, null, 2)}\n`);
+  console.log(`Imported: ${added} added, ${updated} fields filled; ${sources.length} schools total.`);
+}
+
 async function main() {
   if (flag('seed')) return seed();
   if (flag('add')) return addSchool();
+  if (flag('import')) return importSchools();
   const sources = await readJson(SOURCES, []);
   const jobs = await readJson(JOBS, []);
   if (flag('related')) {
