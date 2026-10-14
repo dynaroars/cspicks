@@ -19783,14 +19783,27 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://careers.csus.edu/en-us/search/?search-keyword=computer+science",
     "state": "CA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-14T05:21:36Z",
+    "outcome": "complete",
+    "summary": "Reviewed the official Computer Science lecturer pool and adjacent Electrical & Electronic Engineering and Management, Information Systems & Business Analytics faculty pools. Added the CS lecturer pool, which is open-ended for 2026-27. The related EEE pool does not identify computing as a target, and the MISBA pool requires an MBA or equivalent (or JD for law courses), so neither is a clear target for CS PhDs.",
+    "checkedUrls": [
+      "https://careers.csus.edu/en-us/job/555484/202627-ay-lecturer-pool-computer-science",
+      "https://careers.csus.edu/en-us/job/555624/202627-ay-lecturer-pool-electrical-electronic-engineering",
+      "https://careers.csus.edu/en-us/job/553828/202627-ay-lecturer-pool-management-information-systems-business-analytics"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Electrical & Electronic Engineering",
+        "url": "https://careers.csus.edu/en-us/job/555624/202627-ay-lecturer-pool-electrical-electronic-engineering"
+      },
+      {
+        "name": "Management, Information Systems & Business Analytics",
+        "url": "https://careers.csus.edu/en-us/job/553828/202627-ay-lecturer-pool-management-information-systems-business-analytics"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"

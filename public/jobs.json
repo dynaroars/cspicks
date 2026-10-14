@@ -14168,5 +14168,25 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "sacramento-state-computer-science-lecturer-pool-2026-27",
+    "school": "California State University, Sacramento",
+    "department": "Computer Science",
+    "title": "2026-27 AY Lecturer Pool - Computer Science",
+    "track": "teaching",
+    "level": null,
+    "areas": [],
+    "state": "CA",
+    "city": "Sacramento",
+    "deadline": null,
+    "rolling": true,
+    "lastSeenAt": "2026-10-14",
+    "url": "https://careers.csus.edu/en-us/job/555484/202627-ay-lecturer-pool-computer-science",
+    "visaSponsorship": "no",
+    "summary": "Part-time lecturer pool for Computer Science courses during the 2026-27 academic year; hires are made as instructional needs arise and appointments are conditional on enrollment and budget. A master’s in Computer Science or a related field is required; doctoral degree preferred. The posting has no closing date.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]
