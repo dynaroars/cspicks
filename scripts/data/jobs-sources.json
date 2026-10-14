@@ -6035,54 +6035,68 @@
   },
   {
     "school": "North Dakota State University",
-    "homepage": "https://www.cs.ndsu.nodak.edu",
+    "homepage": "https://www.ndsu.edu/computer-science",
     "facultyCount": 6,
     "jobsUrl": "https://www.ndsu.edu/employment/joblist",
     "state": "ND",
-    "lastCheckedAt": "2026-10-14T03:22:00Z",
+    "lastCheckedAt": "2026-10-14T03:25:29Z",
     "outcome": "incomplete",
-    "summary": "Official NDSU Computer Science people page and NDUS employment portal checked (2026-10-14). The portal result could not be reliably narrowed to NDSU Computer Science requisitions; no additional posting was verified, so the school review remains incomplete.",
+    "summary": "Rechecked the current NDSU employment board and Computer Science pages, and checked the Electrical and Computer Engineering unit. The board lists current university positions, but its public rendering does not expose a reliable current CS/ECE requisition search; no additional CS-relevant faculty opening was verified.",
     "checkedUrls": [
       "https://www.ndsu.edu/computer-science",
       "https://www.ndsu.edu/employment",
       "https://www.ndsu.edu/employment/joblist",
-      "https://www.ndsu.edu/computer-science/people"
+      "https://www.ndsu.edu/computer-science/people",
+      "https://www.ndsu.edu/electrical-computer-engineering",
+      "https://www.ndsu.edu/ece/people/faculty/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
-        "name": "College of Engineering (ECE)",
-        "url": "https://www.ndsu.edu/engineering"
+        "name": "Electrical and Computer Engineering",
+        "url": "https://www.ndsu.edu/electrical-computer-engineering"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T03:25:29Z",
     "country": "US",
     "region": "northamerica"
   },
   {
     "school": "University of Maine",
-    "homepage": "https://umaine.edu/cs/",
+    "homepage": "https://umaine.edu/scis/",
     "facultyCount": 6,
     "jobsUrl": "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions?lastSelectedFacet=ORGANIZATIONS&mode=location&selectedOrganizationsFacet=300000014113612",
     "state": "ME",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:25:29Z",
     "outcome": "incomplete",
-    "summary": "Prior portal search found part-time CS/CIS adjunct roles and no full-time faculty postings; current requisition state could not be fully rechecked. Partial.",
+    "summary": "Rechecked the UMaine HR careers page, School of Computing and Information Science, and ECE pages. The Oracle careers portal still does not expose listings to the page reader; the only SCIS opening page found is for January 2025 and is stale. No current CS/ECE faculty role was verified.",
     "checkedUrls": [
       "https://umaine.edu/cs/",
       "https://umaine.edu/hr/career-opportunities/",
       "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=computer&mode=location",
       "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=professor&mode=location",
-      "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=electrical&mode=location"
+      "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=electrical&mode=location",
+      "https://umaine.edu/scis/",
+      "https://umaine.edu/scis/current-position-openings/",
+      "https://umaine.edu/mcec/electrical-computer-engineering/",
+      "https://umaine.edu/mcec/electrical-computer-engineering/faculty/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
+      {
+        "name": "School of Computing and Information Science",
+        "url": "https://umaine.edu/scis/current-position-openings/"
+      },
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://umaine.edu/mcec/electrical-computer-engineering/"
+      },
       {
         "name": "UMS Careers (Oracle) - UMaine",
         "url": "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T03:25:29Z",
     "country": "US",
     "region": "northamerica",
     "kind": "R1"
