@@ -5598,22 +5598,39 @@
     "facultyCount": 14,
     "jobsUrl": "https://jobs.du.edu/",
     "state": "CO",
-    "lastCheckedAt": "2026-10-12T01:00:00Z",
+    "lastCheckedAt": "2026-10-14T04:19:00Z",
     "outcome": "partial",
-    "summary": "Current Jobs@DU search identifies an active CS Department Adjunct Faculty, Data Science pool (Job 499044) for AY 2026–27, with applications accepted for future openings. The department-specific posting is an adjunct pool rather than an immediate course assignment. Other Ritchie School vacancy results were not fully enumerated in this pass; added the confirmed CS pool.",
+    "summary": "Rechecked the official Computer Science adjunct Data Science pool and the Electrical and Computer Engineering adjunct pools. Added ECE Computer Engineering and Systems Engineering teaching pools, which remain open for applications during AY 2026–27; the Systems Engineering pool requires U.S. citizenship or permanent residence. Broader Ritchie School and university-wide hiring review remains incomplete.",
     "checkedUrls": [
       "https://jobs.du.edu/en-us/job/499044/adjunct-faculty-data-science",
       "https://jobs.du.edu/en-us/listing/",
-      "https://jobs.du.edu/en-us/job/499048/adjunct-faculty-systems-engineering"
+      "https://jobs.du.edu/en-us/job/499048/adjunct-faculty-systems-engineering",
+      "https://jobs.du.edu/cw/en-us/job/499044/adjunct-faculty-data-science",
+      "https://jobs.du.edu/cw/en-us/job/499046/adjunct-faculty-department-of-electrical-and-computer-engineering",
+      "https://jobs.du.edu/mob/cw/en-us/job/499048/adjunct-faculty-systems-engineering",
+      "https://jobs.du.edu/cw/en-us/listing/",
+      "https://ritchieschool.du.edu/electrical-computer-engineering"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "Jobs@DU",
         "url": "https://jobs.du.edu/"
+      },
+      {
+        "name": "Electrical and Computer Engineering adjunct pool",
+        "url": "https://jobs.du.edu/cw/en-us/job/499046/adjunct-faculty-department-of-electrical-and-computer-engineering"
+      },
+      {
+        "name": "Electrical and Computer Engineering — Systems Engineering adjunct pool",
+        "url": "https://jobs.du.edu/mob/cw/en-us/job/499048/adjunct-faculty-systems-engineering"
+      },
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://ritchieschool.du.edu/electrical-computer-engineering"
       }
     ],
-    "relatedCheckedAt": "2026-10-12T01:00:00Z",
+    "relatedCheckedAt": "2026-10-14T04:19:00Z",
     "country": "US",
     "region": "northamerica"
   },
