@@ -5872,9 +5872,9 @@
     "facultyCount": 9,
     "jobsUrl": "https://soc.siu.edu/news/index.php",
     "state": "IL",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:29:19Z",
     "outcome": "incomplete",
-    "summary": "CS-specific openings are advertised, but the linked full notices must be reviewed before recording; remain partial.",
+    "summary": "Reviewed the School of Computing hiring notice and linked official NEOGOV postings. The Applied AI faculty roles closed January 5, 2026 and the cybersecurity role closed February 15, 2026; the department page still advertises them for an August 2026 start, so they are stale and were not added. Reviewed ECBE faculty directory; no ECBE opening verified. Recheck the official portal and both units for the next cycle.",
     "checkedUrls": [
       "https://www2.cs.siu.edu",
       "https://soc.siu.edu/news/index.php",
@@ -5884,16 +5884,24 @@
       "https://www.schooljobs.com/careers/siu",
       "https://www.schooljobs.com/careers/siu?keywords=faculty",
       "https://www.schooljobs.com/careers/siu?keywords=engineering",
-      "https://jobs.siu.edu/"
+      "https://jobs.siu.edu/",
+      "https://www.schooljobs.com/careers/siu/jobs/5123328-0/assistant-professor-in-applied-artificial-intelligence",
+      "https://www.schooljobs.com/careers/siu/jobs/5125532-0/assistant-lecturer-in-applied-artificial-intelligence",
+      "https://www.schooljobs.com/careers/siu/jobs/5166085/assistant-professor-in-cybersecurity-technology",
+      "https://ecbe.siu.edu/faculty-staff/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
+      {
+        "name": "School of Electrical, Computer and Biomedical Engineering (ECBE)",
+        "url": "https://ecbe.siu.edu/faculty-staff/"
+      },
       {
         "name": "SIU NEOGOV careers",
         "url": "https://www.schooljobs.com/careers/siu"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T03:29:19Z",
     "country": "US",
     "region": "northamerica"
   },
@@ -5945,9 +5953,9 @@
     "facultyCount": 8,
     "jobsUrl": "https://compsci.uncg.edu/tenure-track-assistant-professor-position-available-3/",
     "state": "NC",
-    "lastCheckedAt": "2026-10-14T03:26:45Z",
+    "lastCheckedAt": "2026-10-14T03:29:19Z",
     "outcome": "complete",
-    "summary": "Rechecked the active tenure-track Assistant Professor Computer Science posting and official department hiring page. The post remains open until filled with best consideration by October 31, 2026; no current related-unit faculty opening was found.",
+    "summary": "Verified the active tenure-track Assistant Professor opening in Computer Science (posting 36021), starting August 1, 2027. It is open until filled with best consideration by October 31, 2026. Reviewed the department hiring page and the official posting; no current related-unit faculty opening was found.",
     "checkedUrls": [
       "https://compsci.uncg.edu/",
       "https://spartantalent.uncg.edu/postings/36021",
@@ -5962,7 +5970,7 @@
         "url": "https://spartantalent.uncg.edu/postings/search"
       }
     ],
-    "relatedCheckedAt": "2026-10-14T03:26:45Z",
+    "relatedCheckedAt": "2026-10-14T03:29:19Z",
     "country": "US",
     "region": "northamerica"
   },
@@ -5999,25 +6007,37 @@
     "facultyCount": 7,
     "jobsUrl": "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs",
     "state": "WY",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:29:19Z",
     "outcome": "incomplete",
-    "summary": "Current university careers source identified, but current CS and adjacent listings were not fully resolved in the dynamic portal; partial.",
+    "summary": "Rechecked the AI initiative page and official Oracle careers portal. The portal lists an Assistant Professor opening shared by Botany and the School of Computing in plant/fungal genomics, but its individual posting could not be rendered for verification; no record added pending direct detail review. A separate School of Computing research-scientist link also did not expose details. Revisit both official requisitions.",
     "checkedUrls": [
       "https://www.uwyo.edu/president/initiatives/ai4wy/opportunities.html",
       "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=school%20of%20computing",
       "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=assistant%20professor",
       "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=engineering",
       "https://www.uwyo.edu/hr/prospective/index.html",
-      "https://www.uwyo.edu/soc/index.html"
+      "https://www.uwyo.edu/soc/index.html",
+      "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/262540",
+      "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/243604",
+      "https://www.uwyo.edu/soc/people/faculty/index.html",
+      "https://www.uwyo.edu/eecs/faculty-staff/index.html"
     ],
     "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "UW Candidate Experience (Oracle) - College of Engineering and Physical Sciences",
         "url": "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs"
+      },
+      {
+        "name": "School of Computing",
+        "url": "https://www.uwyo.edu/soc/people/faculty/index.html"
+      },
+      {
+        "name": "Electrical Engineering and Computer Science",
+        "url": "https://www.uwyo.edu/eecs/faculty-staff/index.html"
       }
     ],
-    "relatedCheckedAt": "2026-10-08T20:00:00Z",
+    "relatedCheckedAt": "2026-10-14T03:29:19Z",
     "country": "US",
     "region": "northamerica",
     "kind": "R2"
