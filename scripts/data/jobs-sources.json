@@ -6264,9 +6264,9 @@
     "facultyCount": 6,
     "jobsUrl": "https://olemiss.wd12.myworkdayjobs.com/External__Faculty",
     "state": "MS",
-    "lastCheckedAt": "2026-10-14T04:28:09Z",
+    "lastCheckedAt": "2026-10-14T04:55:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked Ole Miss Workday and ECE. JR102524 is a one-year visiting instructional assistant professor role teaching digital systems; its official detail page appears in a stale crawl and specifies an August 2026 start, so current availability could not be confirmed and it was not added. Recheck the official board and ECE department page.",
+    "summary": "The official Workday ECE listing for JR102524 currently reports posting age of three days and remains open until filled, despite an August 2026 anticipated start. Added the one-year visiting role and recorded the no-visa-sponsorship condition; the CS-side hiring review remains incomplete.",
     "checkedUrls": [
       "https://olemiss.edu/hr/um-careers/",
       "https://olemiss.wd12.myworkdayjobs.com/External__Faculty",
@@ -6285,7 +6285,7 @@
         "url": "https://ece.olemiss.edu/"
       }
     ],
-    "relatedCheckedAt": "2026-10-14T04:28:09Z",
+    "relatedCheckedAt": "2026-10-14T04:55:00Z",
     "country": "US",
     "region": "northamerica"
   },

@@ -13754,5 +13754,25 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "olemiss-ece-visiting-asst-prof-digital-systems-2026",
+    "school": "University of Mississippi",
+    "department": "Electrical and Computer Engineering",
+    "title": "Visiting Instructional Assistant Professor - Electrical and Computer Engineering",
+    "track": "visiting",
+    "level": "assistant",
+    "areas": [],
+    "state": "MS",
+    "city": "University",
+    "deadline": null,
+    "rolling": true,
+    "lastSeenAt": "2026-10-14",
+    "visaSponsorship": "no",
+    "url": "https://olemiss.wd12.myworkdayjobs.com/External__Faculty/job/University-MS/Visiting-Instructional-Assistant-Professor---Electrical-and-Computer-Engineering_JR102524",
+    "summary": "One-year full-time visiting assistant professor position teaching undergraduate or graduate digital systems courses. The official listing says the anticipated start was August 2026 and applications are reviewed until filled; it also states that visa sponsorship is unavailable.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]
