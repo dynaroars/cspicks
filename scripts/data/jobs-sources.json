@@ -20041,32 +20041,50 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.broward.edu/jobs/",
     "state": "FL",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-14T05:19:02Z",
+    "outcome": "blocked",
+    "summary": "Reviewed the official employment page and Information Technology & Engineering page. A previously indexed Assistant Professor, STEM Information Technology Workday posting begins in August 2026, but the live Workday detail returned no readable content in this pass, so its current status could not be confirmed and it was not added.",
+    "checkedUrls": [
+      "https://www.broward.edu/jobs/",
+      "https://www.broward.edu/iteng/",
+      "https://browardcollege.wd5.myworkdayjobs.com/en-US/FT/job/Assistant-Professor--STEM--Information-Technology--Multiple-Vacancies--Central-and-South_REQ-000046893-1"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Information Technology & Engineering",
+        "url": "https://www.broward.edu/iteng/"
+      }
+    ],
     "relatedCheckedAt": null,
-    "deferredUntil": null,
+    "deferredUntil": "2026-10-28",
     "csrankings": false,
     "kind": "community-college"
   },
   {
     "school": "Community College of Philadelphia",
-    "homepage": "https://www.ccp.edu/",
+    "homepage": "https://www.ccp.edu/college-catalog/academic-divisions",
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.governmentjobs.com/jobs/5403830-0/computer-technologies-part-time-faculty",
     "state": "PA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "lastCheckedAt": "2026-10-14T05:19:02Z",
+    "outcome": "complete",
+    "summary": "Added the live Computer Technologies part-time faculty posting for the 2026–27 academic year, covering Computer Science, CIS, cybersecurity, web/app development, and data science. The official academic divisions directory lists this as the college’s computing department; recheck the direct posting for future-year availability.",
+    "checkedUrls": [
+      "https://www.governmentjobs.com/jobs/5403830-0/computer-technologies-part-time-faculty",
+      "https://www.ccp.edu/about-ccp/news-events/career-opportunities",
+      "https://www.ccp.edu/college-catalog/academic-divisions"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Department of Computer Technologies",
+        "url": "https://www.ccp.edu/college-catalog/academic-divisions"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T05:19:02Z",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "community-college"
@@ -20077,13 +20095,22 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.bhcc.edu/hr/availablepositions/",
     "state": "MA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-14T05:19:02Z",
+    "outcome": "incomplete",
+    "summary": "Reviewed the official Available Positions and Human Resources pages plus the Computer Science program page. The current job-list details did not render in the accessible page, so no live CS or related posting could be confirmed; revisit the official vacancies page.",
+    "checkedUrls": [
+      "https://www.bhcc.edu/hr/availablepositions/",
+      "https://www.bhcc.edu/hr/",
+      "https://bhcc.edu/stem/computerscience/"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Computer Science",
+        "url": "https://bhcc.edu/stem/computerscience/"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
@@ -20131,13 +20158,31 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.cscc.edu/about/faculty-recruitment/",
     "state": "OH",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-14T05:19:02Z",
+    "outcome": "incomplete",
+    "summary": "The official faculty recruitment page currently lists instructor searches in Information Technology and Software Development, plus annually contracted Networking faculty. The linked job portal returned HTTP 502 for all three details, so dates and live status could not be verified and no roster records were added.",
+    "checkedUrls": [
+      "https://www.cscc.edu/about/faculty-recruitment/",
+      "https://cscc.csod.com/ux/ats/careersite/3/home/requisition/3498?c=cscc",
+      "https://cscc.csod.com/ux/ats/careersite/3/home/requisition/3497?c=cscc",
+      "https://cscc.csod.com/ux/ats/careersite/3/home/requisition/3502?c=cscc"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Information Technology instructor openings",
+        "url": "https://cscc.csod.com/ux/ats/careersite/3/home/requisition/3498?c=cscc"
+      },
+      {
+        "name": "Software Development instructor openings",
+        "url": "https://cscc.csod.com/ux/ats/careersite/3/home/requisition/3497?c=cscc"
+      },
+      {
+        "name": "Networking annually contracted faculty openings",
+        "url": "https://cscc.csod.com/ux/ats/careersite/3/home/requisition/3502?c=cscc"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
@@ -20785,5 +20830,34 @@
     "deferredUntil": null,
     "csrankings": false,
     "kind": "community-college"
+  },
+  {
+    "school": "Lawrence University",
+    "homepage": "https://www.lawrence.edu/academics/majors-programs/computer-science/",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://lawrence.peopleadmin.com/postings/2174/print_preview",
+    "state": "WI",
+    "lastCheckedAt": "2026-10-14T05:19:02Z",
+    "outcome": "complete",
+    "summary": "Added the live tenure-track Assistant Professor of Data Science and Statistics search in Mathematics & Computer Science, beginning September 1, 2027; review began October 2, 2026. Checked the official CS and Data Science/Statistics program pages; no separate academic IST or ECE/ECEC unit was identified in the academic directory.",
+    "checkedUrls": [
+      "https://lawrence.peopleadmin.com/postings/2174/print_preview",
+      "https://lawrence.peopleadmin.com/postings",
+      "https://www.lawrence.edu/academics/majors-programs/computer-science/",
+      "https://www.lawrence.edu/academics/college/data-science-and-statistics",
+      "https://www.lawrence.edu/mylu/a-z-directory/"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Data Science and Statistics",
+        "url": "https://www.lawrence.edu/academics/college/data-science-and-statistics"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-14T05:19:02Z",
+    "deferredUntil": null,
+    "csrankings": false,
+    "kind": "liberal-arts"
   }
 ]
