@@ -18403,23 +18403,44 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": "https://careers.csueastbay.edu/cw/en-us/listing/",
+    "jobsUrl": "https://jobs.sjsu.edu/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Verified active tenure-track CS assistant professor search in bioinformatics on the official CSU PageUp portal. CS listing checked; adjacent-unit hiring scan remains incomplete.",
+    "lastCheckedAt": "2026-10-14T05:21:36Z",
+    "outcome": "complete",
+    "summary": "Reviewed the official CS hiring page plus adjacent School of Information, Information Systems & Technology, Aviation and Technology, and Mathematics and Statistics pages/postings via official SJSU/CSU careers portals. Added four live tenure-track faculty searches explicitly accepting CS or closely related technical PhDs (#562672, #562131, #562256, #562269), alongside the previously recorded CS bioinformatics posting (#562389).",
     "checkedUrls": [
       "https://www.sjsu.edu/cs/",
       "https://careers.csueastbay.edu/cw/en-us/listing/",
-      "https://careers.csueastbay.edu/cw/en-us/job/562389/tenure-track-assistant-professor-in-computer-science-bioinformatics"
+      "https://careers.csueastbay.edu/cw/en-us/job/562389/tenure-track-assistant-professor-in-computer-science-bioinformatics",
+      "https://jobs.sjsu.edu/en-us/listing/",
+      "https://careers.csueastbay.edu/cw/en-us/job/562131/assistant-professor-school-of-information-systems-technology",
+      "https://jobs.sjsu.edu/en-us/job/562672/assistant-professor-school-of-information-cultural-heritage-informatics-aidigital-transformation-and-critical-technology-studies",
+      "https://jobs.sjsu.edu/en-us/job/562256/assistant-professor-technology-computer-network-system-management-cnsm",
+      "https://jobs.sjsu.edu/en-us/job/562269/assistant-professor-of-mathematics-statistics-or-data-science"
     ],
     "relatedUnits": [
       {
         "name": "Computer Engineering",
         "url": "https://www.sjsu.edu/cmpe/"
+      },
+      {
+        "name": "School of Information",
+        "url": "https://ischool.sjsu.edu/"
+      },
+      {
+        "name": "School of Information Systems & Technology",
+        "url": "https://www.sjsu.edu/sistech/"
+      },
+      {
+        "name": "Aviation and Technology - Computer Network System Management",
+        "url": "https://jobs.sjsu.edu/en-us/job/562256/assistant-professor-technology-computer-network-system-management-cnsm"
+      },
+      {
+        "name": "Mathematics and Statistics - Statistics/Data Science",
+        "url": "https://www.sjsu.edu/math/"
       }
     ],
-    "relatedCheckedAt": null,
+    "relatedCheckedAt": "2026-10-14",
     "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"
