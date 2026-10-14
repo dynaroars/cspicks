@@ -10,7 +10,10 @@ Run `npm run validate:jobs` (about a second) before **every** commit; it names e
 
 1. **Official pages only.** The department's hiring page, the university HR posting, or the department's
    announcement is the source. AcademicJobsOnline, HigherEdJobs, Indeed, LinkedIn, X, and mailing lists are leads:
-   follow them to the official posting. No official posting, no record.
+   follow them to the official posting. No official posting, no record. Lead boards worth scanning for schools
+   to add or re-check (Issue #47): CS jobs at primarily undergraduate institutions (https://cs-pui.github.io/),
+   CRA job announcements (https://cra.org/ads/), ACM Career Center (https://jobs.acm.org/), and IEEE Job Site
+   (https://jobs.ieee.org/); the last three often block scripted fetches.
 2. **Never delete.** Closed postings are the archive; mark them with `closedAt`.
 3. **Keep `lastSeenAt` honest.** Set it to today only for postings you saw live this run.
 4. **Every US school is in scope**, CSRankings or not. `school` must match a row in `jobs-sources.json`; add a
