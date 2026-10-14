@@ -5139,15 +5139,23 @@
     "facultyCount": 19,
     "jobsUrl": "https://www.umkc.edu/provost/about-us/career-opportunities.html",
     "state": "MO",
-    "lastCheckedAt": "2026-10-11T21:00:00Z",
-    "outcome": "partial",
-    "summary": "Official job-site search did not yield a verifiable current CS faculty posting in the available results. The UMKC computing employment page and current faculty portal require a fuller direct search before recording a negative finding; no records added.",
+    "lastCheckedAt": "2026-10-14T03:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Reviewed the official UMKC career-opportunities page and ECE department directory. A public job-board lead identifies a current tenure-eligible ECE search spanning quantum computing, wireless, robotics, and VLSI, but the official UM System application portal redirects to sign-in, so the posting could not be verified from an accessible official detail page and was not added; revisit before Oct 26, 2026.",
     "checkedUrls": [
       "https://www.umkc.edu/hr/careers/",
-      "https://www.umkc.edu/computing-engineering/"
+      "https://www.umkc.edu/computing-engineering/",
+      "https://www.umkc.edu/provost/about-us/career-opportunities.html",
+      "https://sse.umkc.edu/directories/electrical-and-computer-engineering-directory.html",
+      "https://erecruit.umsystem.edu/psc/tamext/KCITY/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?FOCUS=Applicant&SiteId=7"
     ],
     "deferredUntil": null,
-    "relatedUnits": [],
+    "relatedUnits": [
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://sse.umkc.edu/academics/programs/electrical-computer-engineering.html"
+      }
+    ],
     "relatedCheckedAt": "2026-10-11T21:00:00Z",
     "country": "US",
     "region": "northamerica"
@@ -5375,14 +5383,15 @@
     "facultyCount": 16,
     "jobsUrl": "https://www.cs.montana.edu/opportunities.html",
     "state": "MT",
-    "lastCheckedAt": "2026-10-12T00:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:00:00Z",
     "outcome": "complete",
-    "summary": "The current CS opportunities page and HR detail confirm two tenure-track Assistant Professor openings in all CS areas, with review starting Nov 16, 2026 and continuing until an adequate pool is established. Also confirmed an open part-time non-tenure-track computing instructor pool, rolling until filled. Refreshed TT record and added the pool.",
+    "summary": "The official CS opportunities page links to the active HR announcement for two tenure-track Assistant Professor positions across all CS areas; HR confirms review begins Nov 16, 2026 and applications remain open until an adequate pool is established. The linked posting is the existing record; no duplicate was added.",
     "checkedUrls": [
       "https://www.cs.montana.edu/opportunities.html",
       "https://jobs.montana.edu/postings/52706",
       "https://jobs.montana.edu/postings/50005",
-      "https://www.cs.montana.edu/jobs.html"
+      "https://www.cs.montana.edu/jobs.html",
+      "https://jobs.montana.edu/postings/53277"
     ],
     "deferredUntil": null,
     "relatedUnits": [
