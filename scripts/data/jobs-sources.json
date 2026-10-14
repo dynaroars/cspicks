@@ -18172,13 +18172,22 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": "https://jobs.sjsu.edu/",
+    "jobsUrl": "https://careers.csueastbay.edu/cw/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Verified active tenure-track CS assistant professor search in bioinformatics on the official CSU PageUp portal. CS listing checked; adjacent-unit hiring scan remains incomplete.",
+    "checkedUrls": [
+      "https://www.sjsu.edu/cs/",
+      "https://careers.csueastbay.edu/cw/en-us/listing/",
+      "https://careers.csueastbay.edu/cw/en-us/job/562389/tenure-track-assistant-professor-in-computer-science-bioinformatics"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Computer Engineering",
+        "url": "https://www.sjsu.edu/cmpe/"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
@@ -19389,13 +19398,21 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://csucareers.calstate.edu/en-us/job/557773/computer-science-parttime-lecturer-pool",
     "state": "CA",
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
-    "relatedUnits": [],
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Verified active Computer Science part-time lecturer pool on the official CSU Careers portal. CS pool listing checked; ECE and other adjacent units require separate review.",
+    "checkedUrls": [
+      "https://www.fullerton.edu/ecs/employment/",
+      "https://csucareers.calstate.edu/en-us/job/557773/computer-science-parttime-lecturer-pool"
+    ],
+    "relatedUnits": [
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://www.fullerton.edu/ecs/electrical/"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
@@ -19483,11 +19500,12 @@
     "state": "CA",
     "lastCheckedAt": "2026-10-13T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Verified active AY 2026/27 Computer Science and Engineering lecturer pool. CSE hiring page checked; adjacent-unit hiring scan remains incomplete.",
+    "summary": "Verified active AY 2026/27 CSE lecturer pool and Cybersecurity lecturer pool. Computing units checked; broader adjacent-unit scan remains incomplete.",
     "checkedUrls": [
       "https://www.csusm.edu/cs/",
       "https://careers.csusm.edu/cw/en-us/listing/",
-      "https://careers.csueastbay.edu/cw/en-us/job/558311/lecturer-pool-computer-science-and-engineering-ay-202627"
+      "https://careers.csueastbay.edu/cw/en-us/job/558311/lecturer-pool-computer-science-and-engineering-ay-202627",
+      "https://careers.pageuppeople.com/873/sm/en-us/job/561490/lecturer-pool-computer-science-and-information-systems-cybersecurity-ay-202627"
     ],
     "relatedUnits": [
       {
@@ -20251,5 +20269,27 @@
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false
+  },
+  {
+    "school": "Cal Poly Humboldt",
+    "homepage": "https://www.humboldt.edu/computer-science",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://careers.humboldt.edu/hm/en-us/listing/",
+    "state": "CA",
+    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Verified active AY 2026/27 Computer Science lecturer pool. CS hiring page checked; related-unit hiring scan remains incomplete.",
+    "checkedUrls": [
+      "https://www.humboldt.edu/computer-science",
+      "https://careers.humboldt.edu/hm/en-us/listing/",
+      "https://careers.humboldt.edu/hm/en-us/job/555378/lecturer-pool-in-department-of-computer-science-academic-year-2627"
+    ],
+    "relatedUnits": [],
+    "relatedCheckedAt": null,
+    "deferredUntil": null,
+    "csrankings": false,
+    "kind": "masters"
   }
 ]
