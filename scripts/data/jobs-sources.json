@@ -6320,16 +6320,34 @@
     "school": "California State Polytechnic University, Pomona",
     "homepage": "https://www.cpp.edu/cs/",
     "facultyCount": 0,
-    "jobsUrl": "https://careers.cpp.edu/po/en-us/job/559402/computer-science-assistant-professor",
+    "jobsUrl": "https://careers.cpp.edu/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-12T12:57:26Z",
+    "lastCheckedAt": "2026-10-14T03:49:04Z",
     "outcome": "incomplete",
-    "summary": "Verified the open Computer Science tenure-track assistant professor posting on Cal Poly Pomona’s official PageUp portal. Applications are reviewed from Oct 11, 2026 until filled; broader adjacent-unit scan remains incomplete.",
+    "summary": "Official Cal Poly Pomona careers listing and CS, CIS, and ECE postings reviewed. Added the open CIS AI tenure-track position, ECE tenure-track search (two hires), and CS/CIS lecturer pools; marked the CS assistant professor posting closed after its Oct 11 close date. Other computing-adjacent unit pages still need review.",
     "checkedUrls": [
-      "https://www.cpp.edu/cs/",
-      "https://careers.cpp.edu/po/en-us/job/559402/computer-science-assistant-professor"
+      "https://careers.cpp.edu/en-us/listing/",
+      "https://careers.cpp.edu/po/en-us/job/559402/computer-science-assistant-professor",
+      "https://careers.cpp.edu/po/en-us/job/558301/computer-information-systems-assistant-professor",
+      "https://careers.cpp.edu/po/en-us/job/560534/electrical-and-computer-engineering-assistant-professor",
+      "https://careers.cpp.edu/en-us/job/557522/lecturer-ay-computer-science",
+      "https://careers.cpp.edu/po/en-us/job/556918/lecturer-ay-computer-information-systems",
+      "https://www.cpp.edu/engineering/ece/index.shtml"
     ],
-    "relatedUnits": [],
+    "relatedUnits": [
+      {
+        "name": "Computer Science",
+        "url": "https://www.cpp.edu/cs/"
+      },
+      {
+        "name": "Computer Information Systems",
+        "url": "https://www.cpp.edu/cba/computer-information-systems/"
+      },
+      {
+        "name": "Electrical and Computer Engineering",
+        "url": "https://www.cpp.edu/engineering/ece/index.shtml"
+      }
+    ],
     "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
