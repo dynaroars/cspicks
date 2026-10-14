@@ -3865,11 +3865,13 @@
     "facultyCount": 31,
     "jobsUrl": "https://csds.gsu.edu/employment-opportunities/",
     "state": "GA",
-    "lastCheckedAt": "2026-10-11T12:00:00Z",
+    "lastCheckedAt": "2026-10-14T03:00:00Z",
     "outcome": "complete",
-    "summary": "Department employment page checked (2026-10-11): no individual open positions listed. Prior campus-wide CIS/Robinson review found only past-cycle postings and no current 2026-27 computing role.",
+    "summary": "Department and university faculty pages checked (2026-10-13): found an active Lecturer/Senior Lecturer in Computer Science search (F00567P), up to four vacancies, closing October 24, 2026.",
     "checkedUrls": [
       "https://csds.gsu.edu/employment-opportunities/",
+      "https://facultycareers.gsu.edu/postings/search?sort=434+asc",
+      "https://facultycareers.gsu.edu/postings/7406",
       "https://cis.robinson.gsu.edu/",
       "https://robinson.gsu.edu/careers/",
       "https://robinson.gsu.edu/faculty-staff/employment-opportunities/"

@@ -11862,5 +11862,35 @@
     "summary": "(Department of Telematics Engineering; postdoctoral research on communication protocols, vehicular networks and EV services using machine learning; applications open 2026-10-13 through 2026-10-19). The official listing is in Catalan; the English title here is a translation of the official posting",
     "source": "crawl",
     "verified": true
+  },
+  {
+    "id": "gsu-cs-lecturer-2027",
+    "school": "Georgia State University",
+    "department": "Computer Science",
+    "title": "Lecturer or Senior Lecturer - Computer Science",
+    "track": "teaching",
+    "level": null,
+    "areas": [
+      "act",
+      "mlmining",
+      "ops",
+      "comm",
+      "sec",
+      "soft"
+    ],
+    "state": "GA",
+    "city": "",
+    "deadline": "2026-10-24",
+    "rolling": false,
+    "reviewBegins": "2026-09-28",
+    "startDate": "2027-01-04",
+    "postedDate": "2026-09-14",
+    "lastSeenAt": "2026-10-13",
+    "visaSponsorship": "not-stated",
+    "url": "https://facultycareers.gsu.edu/postings/7406",
+    "summary": "Full-time teaching search for Spring 2027 with up to four vacancies; applications close October 24, 2026, with review beginning September 28. Preferred teaching areas include programming, algorithms, data science, systems, networks, cloud computing, security, and software engineering.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]
