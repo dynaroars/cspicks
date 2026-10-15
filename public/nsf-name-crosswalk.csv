@@ -1,5 +1,5 @@
 # Faculty whose CSRankings roster name differs from their publication-table name.
-# Generated 2026-09-26T22:53:42.635Z by scripts/sync-nsf-awards.mjs.
+# Generated 2026-10-14T11:48:41.701Z by scripts/sync-nsf-awards.mjs.
 faculty_name,roster_name,affiliation
 Aaron D. Striegel,Aaron Striegel,University of Notre Dame
 Abdou S. Youssef,Abdou Youssef,George Washington University
@@ -32,6 +32,7 @@ Brent Harrison,Brent E. Harrison,University of Kentucky
 Brent R. Waters,Brent Waters,University of Texas at Austin
 Brian L. Curless,Brian Curless,University of Washington
 Brian C. Keegan,Brian Keegan,University of Colorado Boulder
+Çagdas D. Önal,Cagdas D. Onal,Worcester Polytechnic Institute
 Calvin Newport,Calvin C. Newport,Georgetown University
 Charles R. Wallace,Charles Wallace 0001,Michigan Technological University
 Chase Q. Wu,Chase Qishi Wu,NJIT
@@ -244,4 +245,5 @@ Xavier M. Tricoche,Xavier Tricoche,Purdue University
 Xia Hu 0001,Xia Ben Hu,Rice University
 Xiao Chen 0001,Xiao Chen 0002,Texas State University
 Xiaolin Hu 0002,Xiaolin Hu 0001,Georgia State University
+Yingyan Celine Lin,Yingyan (Celine) Lin,Georgia Institute of Technology
 Zhijie Shi,Zhijie Jerry Shi,University of Connecticut
