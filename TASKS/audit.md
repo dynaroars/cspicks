@@ -16,21 +16,25 @@
      record deleted, `school` matches a row in `scripts/data/jobs-sources.json`. Any US school is in scope; add a
      missing one with `npm run maintain:jobs -- --add`, never reject a posting because the school isn't in CSRankings.
    - `public/nsf-name-crosswalk.csv`: [nsf.md](nsf.md). `public/manual_affiliations.csv`: [affiliations.md](affiliations.md).
-4. Clean and verified: `gh pr merge <n> --squash --delete-branch`. Otherwise comment naming each rejected item and
-   why; never merge a partial subset silently.
+4. Clean and verified: `gh pr merge <n> --squash --delete-branch`. A wrong `track`, `level`, deadline, or other field
+   on a posting that does exist is not a reason to reject: fix it on the PR branch, list the corrections in a PR
+   comment, and merge. Reject (comment naming each item and why) only postings or facts with no official support;
+   never merge a partial subset silently.
 
 ## Direct commits to `main`
 
 Local sessions commit data straight to `main`, so PR review alone misses them. The `audit-reviewed` tag marks the
-last `main` commit whose data changes were audited.
+last `main` commit whose data changes were audited. Do this after the PRs and Issues; it never holds up a merge, and it
+only corrects records (never deletes one or reverts a commit).
 
 1. `git fetch origin --tags && git log --reverse --format='%h %an %s' audit-reviewed..origin/main -- public/jobs.json public/grants.json public/labs.json csconfs/data/conferences.json public/manual_affiliations.csv public/nsf-name-crosswalk.csv`.
-   Skip squash merges of PRs you already audited (`(#n)` subjects) and model-free Action commits.
+   Skip squash merges of audited PRs (`(#n)` subjects), the auditor's own fix commits, and model-free Action commits.
 2. Oldest first, `git diff <sha>^ <sha> -- <file>` and re-verify the new or changed records exactly as for a PR
    (for jobs: every record's `track`, `level`, `deadline`, `closedAt`; a third of the other facts).
 3. Fix confirmed errors on `main` with a commit naming each corrected record and its official URL; validate, push.
 4. `git tag -f audit-reviewed <last fully audited sha> && git push -f origin audit-reviewed`. Never move the tag past
-   a commit you did not finish; the next run resumes there.
+   a commit you did not finish; the next run resumes there. If the tag push is refused, report the last audited sha in
+   the automation-health Issue and carry on.
 
 ## Issues
 

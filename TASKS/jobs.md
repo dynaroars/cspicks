@@ -128,7 +128,7 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
 | `id` | Stable kebab-case slug: `<school-short>-<role-slug>-<yyyy>`; never reused, never changed. |
 | `school` | The exact institution name in `jobs-sources.json` (the CSRankings name when CSRankings lists the school); a unit test enforces it. |
 | `department`, `title` | As on the posting. |
-| `track` | `tenure-track`, `teaching`, `research`, `postdoc`, `visiting`, `leadership`; lab postings also use `industry` and `internship` (see [labs.md](labs.md)). `tenure-track` only when the posting itself says tenure-track / tenured / tenure-line, or, outside the US, an explicitly permanent (open-ended) faculty post or a named tenure-track scheme. Fixed-term, contract, "specially appointed", professor of practice, clinical, and instructor roles are never `tenure-track`, whatever the title says; see "Non-US appointment terms" below. |
+| `track` | `tenure-track`, `teaching`, `research`, `postdoc`, `visiting`, `leadership`; lab postings also use `industry` and `internship` (see [labs.md](labs.md)). `tenure-track` when the posting says tenure-track / tenured / tenure-line, or is a US Assistant/Associate/Full Professor post whose title and terms carry no qualifier (the US convention); outside the US, only an explicitly permanent (open-ended) faculty post or a named tenure-track scheme. Fixed-term, contract, "specially appointed", professor of practice, clinical, and instructor roles are never `tenure-track`, whatever the title says; see "Non-US appointment terms" below. |
 | `lab` | Only for industry/national-lab postings: the `public/labs.json` id; `school` is then that lab's name. |
 | `level` | `assistant`, `associate`, `full`, `open`, or null when the posting has no rank (postdocs, lecturers). `open` whenever the posting accepts more than one rank ("Assistant or Associate", "all ranks", 准教授・講師・助教), not the lowest rank listed. |
 | `areas` | CSRankings area keys (`src/shared.ts` `areaLabels`: `ai`, `sec`, `plan`, …) for every area the posting specifically names ("security, systems, and AI" → `sec`, `ops`/`comm`/`arch` as named, `ai`). Empty when it names none; never infer an area from the department or the ad's tone. |
@@ -159,8 +159,9 @@ Titles abroad often look like US tenure-track ranks when they are not. Read the 
 | UK/Ireland/Australia: "permanent", "open-ended", "continuing" Lecturer / Senior Lecturer | permanent | `tenure-track` (`level` per rank) |
 | Netherlands: tenure track (TT) assistant professor | tenure-track | `tenure-track` |
 
-When the posting does not state the term, leave the record out or use the closest non-tenure track with the
-summary saying the term is unstated; never default to `tenure-track`. State a fixed term in the `summary`.
+When a non-US posting does not state the term, still add it: use the closest non-tenure track and say in the
+`summary` that the term is unstated; don't default to `tenure-track`. State a fixed term in the `summary`. These rules
+only choose field values; never skip or delay a posting because of them.
 
 ## How "active" works
 
