@@ -4,7 +4,7 @@
 
 .jobs-page .search-examples { margin-bottom: 0.85rem; }
 
-.jobs-results-container { width: min(1080px, calc(100% - 2rem)); margin: 0 auto 4rem; }
+.jobs-results-container { width: 100%; margin: 0 auto 4rem; }
 
 .jobs-status-bar {
   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
@@ -12,7 +12,7 @@
 }
 .jobs-count-highlight { font-weight: 600; color: var(--text-primary); }
 .jobs-results { display: grid; gap: 0; }
-.jobs-empty { padding: 3rem 1rem; text-align: center; color: var(--text-secondary); }
+/* The empty state itself is roars-ui's .empty-state. */
 .jobs-empty .btn-secondary { margin-top: 1rem; }
 
 /* State tile map */

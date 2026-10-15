@@ -83,7 +83,7 @@ function render() {
 
   const now = Date.now();
   if (!shown.length) {
-    results.innerHTML = `<div class="jobs-empty">
+    results.innerHTML = `<div class="empty-state jobs-empty">
       <h3>${favoritesOnly ? 'No starred positions match' : allJobs.length ? 'No matching positions' : 'No postings yet'}</h3>
       <p>${favoritesOnly ? 'Star a posting with the ☆ button to keep it here, or clear “favorites: only” from search.' : allJobs.length
         ? 'Try broadening your search, searching “status: all”, or clearing some filters.'
@@ -166,7 +166,7 @@ function buildSuggestions() {
   return createSearchControls({
     input,
     listbox: document.getElementById('universal-suggestions')!,
-    specs: JOBS_KEYWORD_SPECS, helpId: 'jobs-search-help', example: 'track: teaching loc: TX,VA level: assistant',
+    specs: JOBS_KEYWORD_SPECS, example: 'track: teaching loc: TX,VA level: assistant',
     examples: document.getElementById('jobs-examples'), onQuery: () => render(),
     getKeywordSources: () => {
       const items = jobsSuggestions(allJobs);

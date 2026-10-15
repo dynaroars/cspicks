@@ -190,7 +190,7 @@ test('keyword help opens on click and keyboard, and scoped suggestions preserve 
   await expect(input).toBeEnabled();
   await expect(page.locator('.search-filters select')).toHaveCount(3);
   const help = page.getByRole('button', { name: 'Search keywords and examples' });
-  const panel = page.locator('#jobs-search-help');
+  const panel = page.locator('#search-help-panel');
   await expect(panel).toBeHidden();
   await help.click();
   await expect(panel).toBeVisible();
@@ -261,4 +261,24 @@ test('keywords become VietProfs-style chips: colon starts one, Enter finishes it
   await input.press('Escape');
   await expect(page.locator('.search-keyword-chips .search-scope-chip')).toHaveCount(0);
   await expect(input).toHaveAttribute('data-query', '');
+});
+
+test('VietProfs keyboard shortcuts: / focuses search, ? opens help, j/k select results, f stars the selected one', async ({ page }) => {
+  await page.goto('jobs.html');
+  await expect(page.locator('.job-card')).toHaveCount(2);
+  await page.locator('#jobs-status').click();
+  await page.keyboard.press('?');
+  await expect(page.locator('#search-help-panel')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#search-help-panel')).toBeHidden();
+  await page.keyboard.press('j');
+  await expect(page.locator('.job-card').first()).toHaveClass(/card-keyboard-selected/);
+  await page.keyboard.press('j');
+  await expect(page.locator('.job-card').nth(1)).toHaveClass(/card-keyboard-selected/);
+  await page.keyboard.press('k');
+  await expect(page.locator('.job-card').first()).toHaveClass(/card-keyboard-selected/);
+  await page.keyboard.press('f');
+  await expect(page.locator('.job-card').first().locator('.favorite-toggle')).toHaveAttribute('aria-pressed', 'true');
+  await page.keyboard.press('/');
+  await expect(page.locator('#jobs-search')).toBeFocused();
 });

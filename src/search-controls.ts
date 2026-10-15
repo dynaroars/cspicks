@@ -5,6 +5,7 @@ import { keywordSuggestions, mountKeywordHelp } from './search-keywords.js';
 import type { KeywordSpec } from './search-keywords.js';
 import { initResultActions } from './result-actions.js';
 import { mountKeywordChips } from './keyword-chips.js';
+import { sample as sampleItems, setupKeyboardShortcuts } from './vietprofs/search-kit.js';
 import { escapeHtml } from './shared.js';
 
 type SuggestionOptions = Parameters<typeof createSuggestionBox>[0];
@@ -15,14 +16,39 @@ export function searchChoices(values: string[] | Record<string, string>, detail 
     : Object.entries(values).map(([value, label]) => ({ value, label, detail }));
 }
 
-/** A random `count` of `items` (Fisher–Yates), so every page's "Try" chips stay fresh on each load. */
-export function sample<T>(items: T[], count: number) {
-  const available = [...items];
-  for (let index = available.length - 1; index > 0; index--) {
-    const swapIndex = Math.floor(Math.random() * (index + 1));
-    [available[index], available[swapIndex]] = [available[swapIndex]!, available[index]!];
-  }
-  return available.slice(0, count);
+/** A random `count` of `items`, so every page's "Try" chips stay fresh on each load (VietProfs' search-kit). */
+export const sample = sampleItems;
+
+/** Result cards that j/k move through on every search page. */
+const RESULT_ITEMS = '.opportunity-card, .results-grid > .card, .schedule-card, .funding-card';
+
+/**
+ * VietProfs' keyboard shortcuts (search-kit's setupKeyboardShortcuts): `/` search, `?` help, j/k move through
+ * results, Enter opens the selected result's link, f stars it, r picks a random result.
+ */
+function wireResultShortcuts(input: HTMLInputElement) {
+  let selected = -1;
+  const items = () => [...document.querySelectorAll<HTMLElement>(RESULT_ITEMS)].filter(item => item.getClientRects().length);
+  const select = (index: number) => {
+    items().forEach(item => item.classList.remove('card-keyboard-selected'));
+    selected = index;
+    const item = items()[index];
+    item?.classList.add('card-keyboard-selected');
+    item?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  };
+  setupKeyboardShortcuts({
+    searchInputId: input.id,
+    selectedClass: 'card-keyboard-selected',
+    getItemElements: items,
+    getSelectedIndex: () => selected,
+    setSelectedIndex: index => { selected = index; },
+    onEnter: item => item.querySelector<HTMLAnchorElement>('h2 a[href], h3 a[href], .opportunity-title a[href], a[href]')?.click(),
+    onSecondary: item => item.querySelector<HTMLElement>('.favorite-toggle')?.click(),
+    onRandom: () => {
+      const count = items().length;
+      if (count) select(Math.floor(Math.random() * count));
+    }
+  });
 }
 
 /**
@@ -64,7 +90,6 @@ export function wireSearchInput(input: HTMLInputElement, onInput: (query: string
 
 export function createSearchControls(options: Omit<SuggestionOptions, 'onSelect'> & {
   specs: KeywordSpec[];
-  helpId: string;
   example: string;
   usage?: string;
   getKeywordSources: () => Record<string, SuggestionItem[]>;
@@ -75,7 +100,7 @@ export function createSearchControls(options: Omit<SuggestionOptions, 'onSelect'
 }) {
   initResultActions();
   const { input, specs, getKeywordSources, onQuery, onInput, examples } = options;
-  mountKeywordHelp(input, specs, options.helpId, options.example, options.usage);
+  mountKeywordHelp(input, specs, options.example, options.usage);
   const suggestions = createSuggestionBox({
     ...options,
     getGroups: (query, context) => {
@@ -108,10 +133,11 @@ export function createSearchControls(options: Omit<SuggestionOptions, 'onSelect'
     input.focus();
     suggestions.close();
   };
-  wireSearchInput(input, () => {
+  input.addEventListener('input', () => {
     suggestions.render(input.value);
     (onInput || onQuery)(input.value);
   });
+  wireResultShortcuts(input);
   examples?.addEventListener('click', event => {
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-search-example]') : null;
     if (button?.dataset.searchExample) setQuery(button.dataset.searchExample);

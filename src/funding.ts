@@ -217,7 +217,7 @@ function setupSuggestions(input: HTMLInputElement) {
   return createSearchControls({
     input,
     listbox: byId('universal-suggestions'),
-    specs: NSF_KEYWORD_SPECS, helpId: 'funding-search-help', example: 'institution: MIT program: CAREER',
+    specs: NSF_KEYWORD_SPECS, example: 'institution: MIT program: CAREER',
     examples: byId('funding-examples'), onQuery: query => render(query),
     getKeywordSources: () => ({ institution: suggestionItems?.schools || [], pi: suggestionItems?.faculty || [], program: suggestionItems?.programs || [] }),
     emptyText: 'No matching NSF funding record',

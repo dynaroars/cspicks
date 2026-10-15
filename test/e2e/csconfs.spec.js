@@ -156,7 +156,7 @@ test('CS Confs location and deadline keywords narrow schedules and survive reloa
 });
 
 test('csconfs.html uses the Jobs-style clickable search help', async ({ page }) => {
-  await checkSearchHelp(page, { path: 'csconfs.html', inputId: 'csconfs-search', panelId: 'csconfs-search-help', example: 'area: security loc: europe' });
+  await checkSearchHelp(page, { path: 'csconfs.html', inputId: 'csconfs-search', panelId: 'search-help-panel', example: 'area: security loc: europe' });
 });
 
 test('conference keywords complete values and the secondary menu prefills a correction', async ({ page }) => {

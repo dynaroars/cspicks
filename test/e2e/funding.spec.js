@@ -202,7 +202,7 @@ test('funding stays off search results but appears in the Discoveries cards', as
 });
 
 test('nsf.html uses the Jobs-style clickable search help', async ({ page }) => {
-  await checkSearchHelp(page, { path: 'nsf.html', inputId: 'funding-search', panelId: 'funding-search-help', example: 'institution: MIT program: CAREER' });
+  await checkSearchHelp(page, { path: 'nsf.html', inputId: 'funding-search', panelId: 'search-help-panel', example: 'institution: MIT program: CAREER' });
 });
 
 test('funding keywords autocomplete their values while preserving other filters', async ({ page }) => {

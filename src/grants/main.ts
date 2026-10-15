@@ -61,10 +61,10 @@ function render() {
 
   if (!filtered.length) {
     resultsContainer.innerHTML = `
-      <div class="universal-suggestion-empty" style="padding: 3rem 1rem; text-align: center; color: var(--text-secondary);">
+      <div class="empty-state grants-empty">
         <h3>${favoritesOnly ? 'No starred awards or grants match' : 'No matching awards or grants found'}</h3>
-        <p style="margin-top: 0.5rem;">${favoritesOnly ? 'Star an award with the ☆ button to keep it here, or clear “favorites: only” from search.' : 'Try broadening your search terms or clearing some filters.'}</p>
-        <button type="button" class="btn-secondary" id="reset-grants-filters" style="margin-top: 1rem;">Reset all filters</button>
+        <p>${favoritesOnly ? 'Star an award with the ☆ button to keep it here, or clear “favorites: only” from search.' : 'Try broadening your search terms or clearing some filters.'}</p>
+        <button type="button" class="btn-secondary" id="reset-grants-filters">Reset all filters</button>
       </div>
     `;
   } else if (filterState.view === 'sponsor') {
@@ -99,7 +99,7 @@ function buildSuggestions() {
   return createSearchControls({
     input,
     listbox: document.getElementById('universal-suggestions')!,
-    specs: GRANTS_KEYWORD_SPECS, helpId: 'grants-search-help', example: 'audience: phd category: industry topic: AI',
+    specs: GRANTS_KEYWORD_SPECS, example: 'audience: phd category: industry topic: AI',
     examples: document.getElementById('grants-examples'), onQuery: () => render(),
     getKeywordSources: () => {
       const items = grantsSuggestions(allGrants);

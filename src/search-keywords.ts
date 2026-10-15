@@ -103,16 +103,26 @@ export function keywordSuggestions(query: string, specs: KeywordSpec[], sources:
   }) }]] as Array<[string, typeof group]>;
 }
 
-/** Clickable, keyboard-accessible search help, following the VietProfs popup pattern. */
-export function mountKeywordHelp(input: HTMLInputElement, specs: KeywordSpec[], id: string, example: string, usage = 'Combine keywords to narrow your search. Quote values with spaces; commas mean either value.') {
+/**
+ * Clickable, keyboard-accessible search help, following the VietProfs popup pattern and its element ids
+ * (`search-help-btn` / `search-help-panel`, which search-kit's `?` and Escape shortcuts look up).
+ */
+export function mountKeywordHelp(input: HTMLInputElement, specs: KeywordSpec[], example: string, usage = 'Combine keywords to narrow your search. Quote values with spaces; commas mean either value.') {
+  const id = 'search-help-panel';
   const shell = input.closest<HTMLElement>('.search-input-shell')!;
-  shell.insertAdjacentHTML('beforeend', `<button type="button" class="search-help-btn" aria-label="Search keywords and examples" title="Search keywords and examples" aria-haspopup="dialog" aria-expanded="false" aria-controls="${id}"><span class="search-help-icon" aria-hidden="true">?</span></button>`);
+  shell.insertAdjacentHTML('beforeend', `<button type="button" id="search-help-btn" class="search-help-btn" aria-label="Search keywords and examples" title="Search keywords and examples" aria-haspopup="dialog" aria-expanded="false" aria-controls="${id}"><span class="search-help-icon" aria-hidden="true">?</span></button>`);
   shell.insertAdjacentHTML('afterend', `<div class="search-help-panel" id="${id}" role="dialog" aria-label="Search keywords and examples" hidden>
       <strong>Search keywords</strong>
       <p>${escapeHtml(usage)}</p>
       <p><code>${escapeHtml(example)}</code></p>
       <ul class="search-help-list">${specs.map(spec => `<li><code>${escapeHtml(spec.key)}:</code> ${escapeHtml(spec.description)}<br><span>e.g. <code>${escapeHtml(spec.example)}</code></span></li>`).join('')}</ul>
-      <p>Search without keywords for a general text search. <kbd>Esc</kbd> closes help.</p>
+      <p>Search without keywords for a general text search.</p>
+      <strong>Keyboard</strong>
+      <ul class="search-help-list">
+        <li><kbd>/</kbd> search · <kbd>?</kbd> this help · <kbd>Esc</kbd> close or clear the search</li>
+        <li>Type <code>keyword:</code> to start a filter chip; <kbd>Enter</kbd> finishes it; <kbd>Backspace</kbd> in an empty box removes the last chip</li>
+        <li><kbd>j</kbd>/<kbd>k</kbd> move through results · <kbd>Enter</kbd> open · <kbd>f</kbd> star · <kbd>r</kbd> random result</li>
+      </ul>
       <button type="button" class="search-help-close">Close help</button>
     </div>`);
   const button = shell.querySelector<HTMLButtonElement>('.search-help-btn')!;

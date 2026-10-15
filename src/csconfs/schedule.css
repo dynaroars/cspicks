@@ -1,6 +1,6 @@
 .csconfs-page .search-section { padding-bottom: 1.4rem; }
 .csconfs-page .search-examples { margin-bottom: 1rem; }
-.csconfs-results-container { width: min(1180px, calc(100% - 2rem)); margin: 0 auto 4rem; }
+.csconfs-results-container { width: 100%; margin: 0 auto 4rem; }
 .csconfs-status { min-height: 1.5rem; margin: 1.25rem 0 .8rem; color: var(--text-secondary); font-size: .92rem; }
 .csconfs-results { display: grid; gap: 1rem; }
 .schedule-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 38%); gap: 1.5rem; padding: 1.3rem 1.4rem; }
@@ -50,7 +50,6 @@
 .schedule-more-cycles .schedule-cycle + .schedule-cycle { margin-top: .75rem; }
 @media (max-width: 760px) {
   .schedule-card { grid-template-columns: 1fr; gap: 1rem; padding: 1rem; }
-  .csconfs-results-container { width: min(100% - 1rem, 1180px); }
 }
 
 /* Filter row: let the selects wrap. */

@@ -67,7 +67,7 @@ function buildSuggestions() {
   return createSearchControls({
     input,
     listbox: document.getElementById('universal-suggestions')!,
-    specs: CSCONFS_KEYWORD_SPECS, helpId: 'csconfs-search-help', example: 'area: security loc: europe',
+    specs: CSCONFS_KEYWORD_SPECS, example: 'area: security loc: europe',
     examples: document.getElementById('csconfs-examples'), onQuery: () => render(),
     getKeywordSources: () => {
       const places = conferences.map(conf => parsePlace(conf.place)).filter(place => place != null);

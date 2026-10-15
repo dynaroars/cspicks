@@ -370,7 +370,7 @@ function setupSearch() {
   createSearchSuggestionBox({
     input: mainSearch,
     listbox: document.getElementById('universal-suggestions')!,
-    specs: MAIN_KEYWORD_SPECS, helpId: 'main-search-help', example: 'school: MIT',
+    specs: MAIN_KEYWORD_SPECS, example: 'school: MIT',
     usage: 'Combine keywords to narrow universities, professors, and research areas. Quote values with spaces; commas mean either value.',
     examples: document.getElementById('search-example-items'),
     onQuery: query => {

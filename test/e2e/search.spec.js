@@ -505,11 +505,11 @@ test('region defaults are locale-aware and a user choice carries across every ta
 });
 
 test('index.html uses the Jobs-style clickable search help', async ({ page }) => {
-  await checkSearchHelp(page, { path: 'index.html', inputId: 'main-search', panelId: 'main-search-help', example: 'school: MIT' });
+  await checkSearchHelp(page, { path: 'index.html', inputId: 'main-search', panelId: 'search-help-panel', example: 'school: MIT' });
 });
 
 test('index.html?view=discoveries uses the Jobs-style clickable search help', async ({ page }) => {
-  await checkSearchHelp(page, { path: 'index.html?view=discoveries', inputId: 'main-search', panelId: 'main-search-help', example: 'school: MIT' });
+  await checkSearchHelp(page, { path: 'index.html?view=discoveries', inputId: 'main-search', panelId: 'search-help-panel', example: 'school: MIT' });
 });
 
 test('shared search completes keywords and combines constraints without opening secondary views', async ({ page }) => {

@@ -94,7 +94,7 @@ test('awards keyword help fits mobile and legacy filters become editable search 
 
   const help = page.getByRole('button', { name: 'Search keywords and examples' });
   await help.click();
-  const panel = page.locator('#grants-search-help');
+  const panel = page.locator('#search-help-panel');
   await expect(panel).toBeVisible();
   await expect(panel).toContainText('deadline: rolling');
   const bounds = await panel.boundingBox();
