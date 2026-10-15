@@ -11,12 +11,12 @@
   margin: 1.25rem 0 1rem; color: var(--text-secondary); font-size: 0.92rem;
 }
 .jobs-count-highlight { font-weight: 600; color: var(--text-primary); }
-.jobs-results { display: grid; gap: 0; }
+.jobs-results { display: grid; gap: 0.75rem; }
 /* The empty state itself is roars-ui's .empty-state. */
 .jobs-empty .btn-secondary { margin-top: 1rem; }
 
 /* State tile map */
-.job-map-details { margin-top: 1.25rem; border: 1px solid var(--border-color); border-radius: 10px; background: var(--bg-secondary); padding: 0.6rem 0.9rem; }
+.job-map-details { margin-top: 1.25rem; border: 1px solid var(--border-color); border-radius: 10px; background: var(--hover-bg); padding: 0.6rem 0.9rem; }
 .job-map-details > summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text-primary); }
 .job-map-details > summary span { font-weight: 400; color: var(--text-secondary); font-size: 0.8rem; }
 .job-map { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 4px; max-width: 640px; margin: 0.8rem auto 0.3rem; }
@@ -49,6 +49,8 @@
 
 /* By-school view (group card styles are shared in style.css) */
 .job-school-links { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 0.35rem 0 0.4rem; font-size: 0.84rem; }
+.job-school-links a { color: var(--accent-color); text-decoration: none; }
+.job-school-links a:hover { text-decoration: underline; }
 
 @media (max-width: 640px) {
   .job-map { gap: 3px; }
@@ -95,7 +97,7 @@
 .jobs-page .search-intro p { text-wrap: pretty; }
 
 /* Industry & national labs directory (src/jobs/labs.ts) */
-.labs-details { margin-top: 1.25rem; border: 1px solid var(--border-color); border-radius: 10px; background: var(--bg-secondary); padding: 0.6rem 0.9rem; }
+.labs-details { margin-top: 1.25rem; border: 1px solid var(--border-color); border-radius: 10px; background: var(--hover-bg); padding: 0.6rem 0.9rem; }
 .labs-details > summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text-primary); }
 .labs-details > summary span { font-weight: 400; color: var(--text-secondary); font-size: 0.8rem; }
 .labs-details[hidden] { display: none; }

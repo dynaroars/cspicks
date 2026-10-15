@@ -7,9 +7,6 @@
    ========================================================================== */
 :root {
   /* Shared tokens (colors, fonts, type scale, radii) come from vietprofs/roars-ui.css; these are cspicks-only. */
-  --bg-secondary: var(--hover-bg);
-  --text-color: var(--text-primary);
-  --primary-color: var(--accent);
   --primary-dark: #1e293b;
   --primary-light: #f1f5f9;
   --warning: #b45309;
@@ -59,7 +56,7 @@
 
 body {
   background-color: var(--bg-color);
-  color: var(--text-color);
+  color: var(--text-primary);
   font-family: var(--font-body);
   min-height: 100vh;
   line-height: 1.6;
@@ -403,7 +400,7 @@ footer button:hover {
 }
 
 .search-intro a {
-  color: var(--primary-color);
+  color: var(--accent);
   text-decoration: underline;
 }
 
@@ -426,7 +423,7 @@ footer button:hover {
 }
 
 .search-help-list code {
-  color: var(--primary-color);
+  color: var(--accent);
   font-family: var(--font-mono);
 }
 
@@ -588,7 +585,7 @@ option {
   height: 16px;
   margin: 0;
   cursor: pointer;
-  accent-color: var(--primary-color);
+  accent-color: var(--accent);
 }
 
 .search-filters .tooltip-content {
@@ -623,7 +620,7 @@ option {
   color: var(--text-secondary); font-size: var(--text-sm); cursor: pointer;
 }
 .search-options[open] > summary { color: var(--text-primary); }
-.search-options > summary:focus-visible { outline: 2px solid var(--primary-color); border-radius: 6px; }
+.search-options > summary:focus-visible { outline: 2px solid var(--accent); border-radius: 6px; }
 .result-actions { position: relative; display: inline-block; }
 .card:has(.result-actions[open]) { position: relative; z-index: 31; }
 .result-actions > summary {
@@ -873,7 +870,7 @@ button.card-header {
 
 .affiliation-history summary {
   display: inline;
-  color: var(--primary-color);
+  color: var(--accent);
   cursor: pointer;
 }
 
@@ -996,7 +993,7 @@ button.card-header {
 
 .profile-link:hover,
 .profile-link:focus-visible {
-  color: var(--primary-color);
+  color: var(--accent);
   background: var(--hover-bg);
 }
 
@@ -1167,7 +1164,7 @@ button.card-header {
   gap: 0.35rem;
   margin-top: 0.75rem;
   padding: 0.3rem 0.65rem;
-  color: var(--primary-color);
+  color: var(--accent);
   background: var(--hover-bg);
   border: 1px solid var(--border-color);
   border-radius: 6px;
@@ -1229,20 +1226,23 @@ button.card-header {
 
 /* Shared opportunity presentation for Awards & Grants and Jobs. */
 /* Grouped views (Jobs by school, Awards by sponsor): one bordered card per group. */
-.opportunity-group { border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.2rem 0.2rem; margin: 0 0 1rem; background: var(--bg-secondary); }
+.opportunity-group { border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.2rem 0.2rem; margin: 0 0 1rem; background: var(--hover-bg); }
 .opportunity-group-header h2 { margin: 0; font-size: 1.2rem; }
 .opportunity-group-header h2 button { background: none; border: 0; padding: 0; margin: 0; font: inherit; font-weight: 700; color: inherit; cursor: pointer; text-align: left; }
 .opportunity-group-header h2 button:hover { color: var(--accent-color); text-decoration: underline; }
 .opportunity-group-meta { margin: .25rem 0 .4rem; color: var(--text-secondary); font-size: .84rem; }
-.opportunity-group-items .opportunity-card:first-child { border-top: 0; }
-.opportunity-group-items .opportunity-card:hover { background: transparent; }
+.opportunity-group-items { display: grid; gap: 0.6rem; margin-bottom: 0.8rem; }
+.opportunity-group-items .opportunity-card { background: var(--card-bg); }
+.opportunity-group-items .opportunity-card:hover { background: var(--card-bg); }
 
+/* VietProfs' .entry card: hairline frame, rounded, spaced apart (the result lists set the gap). */
 .opportunity-card {
-  position: relative; padding: 1.4rem 0; border-top: 1px solid var(--border-color);
+  position: relative; padding: 1.1rem 1rem; border-radius: var(--radius-md);
+  box-shadow: 0 0 0 0.5px var(--border-color);
   background: transparent; transition: background-color .2s ease;
 }
 .opportunity-card:hover { background: color-mix(in srgb, var(--hover-bg) 42%, transparent); }
-.opportunity-card.is-highlighted { outline: 2px solid var(--primary-color); outline-offset: -2px; background: var(--hover-bg); }
+.opportunity-card.is-highlighted { outline: 2px solid var(--accent); outline-offset: -2px; background: var(--hover-bg); }
 .opportunity-card:has(.result-actions[open]) { z-index: 31; }
 .opportunity-title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: .75rem; }
 .opportunity-title { flex: 1; min-width: 0; margin: 0; font-family: var(--font-heading); font-size: 1.18rem; font-weight: 700; line-height: 1.3; }
@@ -1254,12 +1254,12 @@ button.card-header {
 .opportunity-filter-link:hover { color: var(--accent-color); text-decoration: underline; }
 .opportunity-tags, .opportunity-topics { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem; margin: .6rem 0; }
 .opportunity-chip {
-  display: inline-block; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-secondary);
+  display: inline-block; border: 1px solid var(--border-color); background: var(--hover-bg); color: var(--text-secondary);
   border-radius: 999px; padding: .15rem .55rem; font: inherit; font-size: .74rem; line-height: 1.4;
 }
 button.opportunity-chip { cursor: pointer; }
 button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--accent-color); }
-.opportunity-chip-type { color: var(--accent-color); background: color-mix(in srgb, var(--accent-color) 10%, var(--bg-secondary)); border-color: transparent; font-weight: 600; }
+.opportunity-chip-type { color: var(--accent-color); background: color-mix(in srgb, var(--accent-color) 10%, var(--hover-bg)); border-color: transparent; font-weight: 600; }
 .opportunity-label { color: var(--text-secondary); font-size: .72rem; font-weight: 600; line-height: 1.5; }
 .opportunity-deadline { display: grid; gap: .2rem; margin: .85rem 0; }
 .opportunity-deadline-value { color: var(--text-primary); font-size: .9rem; font-weight: 600; line-height: 1.5; }
@@ -1286,7 +1286,7 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
   .opportunity-deadline.is-estimated .opportunity-chip { color: #ffd66b; background: #3d3010; }
 }
 @media (max-width: 640px) {
-  .opportunity-card { padding: 1.1rem 0; }
+  .opportunity-card { padding: 0.9rem 0.75rem; }
   .opportunity-meta { grid-template-columns: 1fr; }
 }
 
@@ -1346,7 +1346,7 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
   display: block;
   width: 100%;
   min-height: 4px;
-  background: var(--primary-color);
+  background: var(--accent);
   border-radius: 4px 4px 0 0;
 }
 
@@ -1394,7 +1394,7 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
 }
 
 .funding-award b {
-  color: var(--primary-color);
+  color: var(--accent);
   font-size: var(--text-sm);
   white-space: nowrap;
 }
@@ -1584,7 +1584,7 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
 
 .contribution-bar {
   height: 100%;
-  background: var(--primary-color);
+  background: var(--accent);
   border-radius: 0 5px 5px 0;
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -1666,7 +1666,7 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
 }
 
 .analysis-nav-tabs .nav-tab.active {
-  color: var(--primary-color);
+  color: var(--accent);
   background: var(--primary-light);
 }
 
@@ -1698,7 +1698,7 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
   margin: 0 0 1rem;
   padding: 0.75rem 1rem;
   background: var(--hover-bg);
-  border-left: 3px solid var(--primary-color);
+  border-left: 3px solid var(--accent);
   border-radius: 0 8px 8px 0;
 }
 
@@ -2173,7 +2173,7 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
 
 .comparison-summary .summary-card .margin {
   margin-top: 0.25rem;
-  color: var(--primary-color);
+  color: var(--accent);
   font-size: 0.85rem;
 }
 
@@ -2472,7 +2472,7 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
 
 .discovery-school:hover,
 .discovery-school:focus-visible {
-  color: var(--primary-color);
+  color: var(--accent);
   text-decoration: underline;
 }
 
@@ -2588,7 +2588,7 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
 
 @keyframes discovery-highlight-pulse {
   0% {
-    box-shadow: 0 0 0 3px var(--primary-color);
+    box-shadow: 0 0 0 3px var(--accent);
   }
   100% {
     box-shadow: 0 0 0 3px transparent;
@@ -2795,8 +2795,8 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
   font-size: 1rem;
   font-weight: 700;
   color: var(--bg-color);
-  background: var(--primary-color);
-  border: 1px solid var(--primary-color);
+  background: var(--accent);
+  border: 1px solid var(--accent);
   border-radius: 12px;
   cursor: pointer;
   transition: opacity 0.15s ease, transform 0.1s ease;

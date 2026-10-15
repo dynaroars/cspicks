@@ -31,7 +31,7 @@
 .grants-results-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0;
+  gap: 0.75rem;
 }
 
 /* Award-only content; card hierarchy and colors live in opportunity-cards.css. */

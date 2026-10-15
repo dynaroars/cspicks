@@ -21,7 +21,7 @@
 .schedule-description { margin: .45rem 0 .65rem; color: var(--text-secondary); }
 .schedule-tags { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem; margin: .5rem 0; }
 .schedule-tag { border: 1px solid transparent; padding: .15rem .55rem; border-radius: 999px; font-size: .74rem; line-height: 1.4; font-weight: 600; }
-.schedule-tag-area { border-color: var(--border-color); background: var(--bg-secondary); color: var(--text-secondary); font-weight: 400; }
+.schedule-tag-area { border-color: var(--border-color); background: var(--hover-bg); color: var(--text-secondary); font-weight: 400; }
 .schedule-tag-csrankings { color: #17653a; background: #dff7e8; }
 .schedule-tag-core-astar { color: #8a1c4a; background: #ffe0ee; }
 .schedule-tag-core-a { color: #3b4fb8; background: #e4e8ff; }
@@ -45,7 +45,7 @@
 .schedule-dates dd { margin: 0; color: var(--text-primary); font-weight: 600; text-align: right; white-space: nowrap; }
 .schedule-dates div.is-passed { opacity: .6; text-decoration: line-through; text-decoration-thickness: 1px; }
 .schedule-tbd { margin: 0; color: var(--text-secondary); font-size: .8rem; }
-.schedule-more-cycles summary { cursor: pointer; color: var(--primary-color); font-size: .8rem; font-weight: 600; }
+.schedule-more-cycles summary { cursor: pointer; color: var(--accent); font-size: .8rem; font-weight: 600; }
 .schedule-more-cycles[open] summary { margin-bottom: .75rem; }
 .schedule-more-cycles .schedule-cycle + .schedule-cycle { margin-top: .75rem; }
 @media (max-width: 760px) {
