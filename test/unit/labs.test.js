@@ -46,3 +46,14 @@ test('renderLabs groups by kind and escapes text', () => {
   assert.ok(html.includes('A &lt;b&gt;'));
   assert.ok(html.includes('(Google Brain)'));
 });
+
+test('lab queue puts never-checked and least recently checked labs first', async () => {
+  const { buildLabQueue } = await import('../../scripts/labs-maintain.mjs');
+  const queue = buildLabQueue([
+    lab({ id: 'a', name: 'A', postingsCheckedAt: '2026-10-01' }),
+    lab({ id: 'b', name: 'B' }),
+    lab({ id: 'c', name: 'C', postingsCheckedAt: '2026-09-01' })
+  ], [{ lab: 'a', closedAt: undefined }], Date.UTC(2026, 9, 15));
+  assert.deepEqual(queue.map(item => item.lab.id), ['b', 'c', 'a']);
+  assert.equal(queue[2].open, 1);
+});

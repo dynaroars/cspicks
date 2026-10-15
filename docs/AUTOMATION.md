@@ -42,6 +42,8 @@ Check VietProfs' times before moving anything here.
 | `confs` | `trig_018AYNAaQfwJC2rx8JX2zZKo` | Sonnet 5.5 | `0 20 * * 0,2,4,6` | Sun, Tue, Thu, Sat 4 PM | [Conference audit](#conference-audit-confs) |
 | `grants` | `trig_01LuUf649h8NwKMEftjktkmS` | Sonnet 5.5 | `0 23 * * 3,6` | Wed and Sat 7 PM | [Grants audit](#grants-audit-grants) |
 | `jobs` | `trig_01PkBRvYwVSWTCqsCtsNZpPg` | Sonnet 5.5 | `0 22 * * 1,5` | Mon and Fri 6 PM | [US jobs crawl](#us-jobs-crawl-jobs) |
+| `jobs-intl` | `TBD` | Sonnet 5.5 | `0 23 * * 2` | Tue 7 PM | [International jobs crawl](#international-jobs-crawl-jobs-intl) |
+| `labs` | `TBD` | Sonnet 5.5 | `0 19 * * 3` | Wed 3 PM | [Industry & national-lab postings](#industry--national-lab-postings-labs) |
 | `data-sync` | `trig_014ksNYkkzyHVxS2Kub4LqsG` | Sonnet 5 | `30 0 3 * *` | 3rd of month, 8:30 PM (2nd) | [Mechanical data sync](#mechanical-data-sync-data-sync) |
 | `confs-discover` | `trig_01LZM6T6zVarUND6Uvh6HUTh` | Sonnet 5 | `0 1 8 * *` | 8th of month, 9 PM (7th) | [Discover conferences](#discover-conferences-confs-discover) |
 | `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5 | `0 1 22 * *` | 22nd of month, 9 PM (21st) | [Discover grants](#discover-grants-grants-discover) |
@@ -190,11 +192,41 @@ Monday and Friday, the two weekdays with no other routine.
    `Tenure-Track Faculty 2026-2027`. State the result in the PR description ("render step: works" or the exact
    error). If it fails, continue with WebFetch only and open one Issue titled `[scheduled:jobs] Render step
    unavailable` with the exact error (skip if one is already open).
-1. Pick the queue with `npm run maintain:jobs -- --limit 30` (run `--seed` first if CSRankings added US schools).
+1. Pick the queue with `npm run maintain:jobs -- --country US --limit 30` (run `--seed` first if CSRankings added US
+   schools). International schools and labs have their own routines below.
 2. Crawl each school per the playbook and record its result in `scripts/data/jobs-sources.json`. Open one PR
    even if only the sources file changed.
 3. Every new or changed deadline and every `closedAt` goes in the PR description with its official URL; the
    auditor re-verifies all of them.
+
+### International jobs crawl (`jobs-intl`)
+
+Playbook: `TASKS/jobs.md`, section "International posting research". Cap: 25 schools, worked sequentially (never
+spawn subagents). Runs Tuesday.
+
+0. Same browser check as `jobs` (step 0 above); reuse its Issue title if the render step fails.
+1. Pick the queue with `npm run maintain:jobs -- --country intl --limit 25`: non-US schools from
+   `scripts/data/jobs-sources.json` (CSRankings' non-US institutions plus any added with `--add ... --country XX`),
+   never-checked first.
+2. Crawl each school's official vacancy portal and CS/computing department pages, plus related units (ECE,
+   informatics, data science). Add verified postings with the international fields (`country` ISO code, `city`,
+   `state` as province/region or empty). Record every school's result in its sources row, including "no open CS
+   post on <date>". Read postings in the language they are published in; summarize in English.
+3. Open one PR, listing each new posting and every changed deadline or `closedAt` with its official URL.
+
+### Industry & national-lab postings (`labs`)
+
+Playbook: `TASKS/labs.md`. Cap: 12 labs, worked sequentially (never spawn subagents). Runs Wednesday.
+
+0. Same browser check as `jobs` (step 0 above).
+1. Pick the queue with `npm run maintain:labs -- --limit 12` (least recently checked labs first).
+2. For each lab, recheck its existing `lab` postings in `public/jobs.json` on the rendered page: set `lastSeenAt`
+   to today when live, `closedAt` when gone or closed. Then add new PhD-level postings from the lab's own careers
+   site or ATS until the lab has about four open ones, per the playbook's rules. Set the lab's
+   `postingsCheckedAt` to today in `public/labs.json`, even when nothing was found or the site was blocked (say
+   which in the PR).
+3. In February and August, also do the directory link refresh from `TASKS/labs.md` for the labs in this run.
+4. Open one PR listing each added posting, each `closedAt`, and blocked labs.
 
 ### Mechanical data sync (`data-sync`)
 

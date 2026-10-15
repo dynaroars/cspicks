@@ -310,3 +310,15 @@ test('continent filter groups postings by country and counts only continents tha
   assert.deepEqual(filterJobs(list, { continent: 'europe', now: NOW }).map(item => item.id), ['uk']);
   assert.equal(filterJobs(list, { continent: 'world', now: NOW }).length, 5);
 });
+
+test('crawl queue can be limited to US or to international schools', () => {
+  const sources = [
+    { school: 'US U', country: 'US', facultyCount: 5, lastCheckedAt: null },
+    { school: 'Uni Berlin', country: 'DE', facultyCount: 9, lastCheckedAt: null },
+    { school: 'Old U', facultyCount: 1, lastCheckedAt: null }
+  ];
+  const names = country => buildQueue(sources, [], NOW, country).map(item => item.source.school);
+  assert.deepEqual(names('intl'), ['Uni Berlin']);
+  assert.deepEqual(names('US'), ['US U', 'Old U']);
+  assert.deepEqual(names(null), ['US U', 'Old U', 'Uni Berlin']);
+});

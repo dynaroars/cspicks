@@ -26,6 +26,8 @@ export interface Lab {
   postdocsUrl?: string;
   /** ISO date the links were last opened and confirmed. */
   checkedAt: string;
+  /** ISO date the lab's careers pages were last searched for postings (`npm run maintain:labs` queue). */
+  postingsCheckedAt?: string;
 }
 
 export const LAB_KIND_LABELS: Record<LabKind, string> = {
@@ -69,7 +71,8 @@ export function labsDatasetProblems(payload: unknown): string[] {
       ['postdocsUrl', lab.postdocsUrl === undefined || isHttps(lab.postdocsUrl)],
       ['aka', lab.aka === undefined || isStringList(lab.aka)],
       ['broad', lab.broad === undefined || typeof lab.broad === 'boolean'],
-      ['checkedAt', isIsoDay(lab.checkedAt)]
+      ['checkedAt', isIsoDay(lab.checkedAt)],
+      ['postingsCheckedAt', lab.postingsCheckedAt === undefined || isIsoDay(lab.postingsCheckedAt)]
     ];
     checks.filter(([, ok]) => !ok).forEach(([field]) => problems.push(`${label}: ${field}`));
     if (typeof lab.id === 'string') {

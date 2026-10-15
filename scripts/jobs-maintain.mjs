@@ -114,11 +114,16 @@ export function intervalFor(source, now, hasOpenJobs) {
   return recheckDays(now, hasOpenJobs);
 }
 
+/** `country`: an ISO code, `intl` for every non-US school, or null for all (US first). */
 export function buildQueue(sources, jobs, now = Date.now(), country = null) {
+  const wanted = country?.toUpperCase();
   const openSchools = new Set(jobs.filter(job => !job.closedAt).map(job => job.school));
   return sources
     .filter(source => !source.deferredUntil || Date.parse(source.deferredUntil) <= now)
-    .filter(source => !country || (source.country || 'US').toUpperCase() === country.toUpperCase())
+    .filter(source => {
+      const code = (source.country || 'US').toUpperCase();
+      return !wanted || (wanted === 'INTL' ? code !== 'US' : code === wanted);
+    })
     .map(source => {
       const checked = source.lastCheckedAt ? Date.parse(source.lastCheckedAt) : null;
       const interval = intervalFor(source, now, openSchools.has(source.school));
@@ -194,7 +199,7 @@ async function main() {
   const queue = buildQueue(sources, jobs, Date.now(), country).slice(0, limit);
   if (!queue.length) return console.log('Nothing is due. Run with --seed if the sources file is empty.');
   queue.forEach(({ source, reason }, index) => console.log(
-    `${index + 1}. ${source.school}  [${reason}]  hiring page: ${source.jobsUrl || 'unknown'}  dept: ${source.homepage || 'unknown'}`));
+    `${index + 1}. ${source.school}${(source.country || 'US') === 'US' ? '' : ` (${source.country})`}  [${reason}]  hiring page: ${source.jobsUrl || 'unknown'}  dept: ${source.homepage || 'unknown'}`));
 }
 
 if (import.meta.url === new URL(process.argv[1], 'file://').href) await main();

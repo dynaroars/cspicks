@@ -27,7 +27,8 @@
     "careersUrl": "https://www.microsoft.com/en-us/research/careers/",
     "internshipsUrl": "https://www.microsoft.com/en-us/research/careers/open-positions/?facet%5Bdate%5D%5Bfixed%5D=any&facet%5Btax%5D%5Bmsr-job-opportunity-type%5D[]=234821&pg=1&sort_by=most-recent",
     "postdocsUrl": "https://www.microsoft.com/en-us/research/careers/open-positions/?facet%5Bdate%5D%5Bfixed%5D=any&facet%5Btax%5D%5Bmsr-job-opportunity-type%5D[]=234824&pg=1&sort_by=most-recent",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "google-research",
@@ -54,7 +55,8 @@
     "summary": "Google’s research organization, with US and international offices; hires research scientists and research engineers, plus PhD student researchers and interns.",
     "careersUrl": "https://research.google/careers/",
     "internshipsUrl": "https://research.google/programs-and-events/student-engagement/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "google-deepmind",
@@ -80,7 +82,8 @@
     "summary": "Google’s AI research lab, formed in 2023 by merging Google Brain and DeepMind; hires research scientists and engineers and runs a Student Researcher Program.",
     "careersUrl": "https://deepmind.google/careers/",
     "internshipsUrl": "https://deepmind.google/student-researcher-program/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "meta-ai",
@@ -105,7 +108,8 @@
     ],
     "summary": "Meta’s AI research organization, including Fundamental AI Research (FAIR); hires research scientists, engineers, and PhD research interns.",
     "careersUrl": "https://ai.meta.com/join-us/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "ibm-research",
@@ -128,7 +132,8 @@
     "summary": "IBM’s research division (AI, hybrid cloud, quantum computing, semiconductors, security); hires research scientists and runs internships.",
     "careersUrl": "https://www.ibm.com/careers/research",
     "internshipsUrl": "https://www.ibm.com/careers/internships",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "nvidia-research",
@@ -149,7 +154,8 @@
     ],
     "summary": "NVIDIA’s research group (graphics, computer vision, machine learning, robotics, architecture, VLSI, programming systems); hires research scientists and PhD research interns.",
     "careersUrl": "https://www.nvidia.com/en-us/about-nvidia/careers/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "amazon-science",
@@ -175,7 +181,8 @@
     "careersUrl": "https://www.amazon.science/careers",
     "internshipsUrl": "https://www.amazon.science/careers?q=&f0=internship&expandedFilters=Job%2520type%2CCountry%2520%2F%2520region%2CJob%2520category%2C",
     "postdocsUrl": "https://www.amazon.science/postdoctoral-science-program",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "apple-mlr",
@@ -196,7 +203,8 @@
     "summary": "Apple’s machine learning research group; hires researchers and ML/AI interns.",
     "careersUrl": "https://machinelearning.apple.com/work-with-us",
     "internshipsUrl": "https://www.apple.com/careers/us/work-at-apple/students.html",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "adobe-research",
@@ -218,7 +226,8 @@
     "summary": "Adobe’s research lab (graphics, vision, HCI, ML, documents); hires research scientists and runs a large PhD research internship program.",
     "careersUrl": "https://research.adobe.com/careers/",
     "internshipsUrl": "https://research.adobe.com/careers/internships/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "intel-labs",
@@ -237,7 +246,8 @@
     ],
     "summary": "Intel’s research organization (computer architecture, AI, security, quantum and neuromorphic computing).",
     "careersUrl": "https://www.intel.com/content/www/us/en/research/overview.html",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "samsung-research-america",
@@ -255,7 +265,8 @@
     ],
     "summary": "Samsung’s US research centers; hires researchers and interns in AI, mobile, and communications.",
     "careersUrl": "https://sra.samsung.com/careers/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "qualcomm-ai-research",
@@ -273,7 +284,8 @@
     ],
     "summary": "Qualcomm’s research arm (on-device AI, wireless, compute); hires through Qualcomm’s careers site.",
     "careersUrl": "https://www.qualcomm.com/company/careers",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "salesforce-ai-research",
@@ -290,7 +302,8 @@
     ],
     "summary": "Salesforce’s AI research group (language models, agents); hires research scientists and interns.",
     "careersUrl": "https://www.salesforce.com/company/careers/teams/ai-research/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "ai2",
@@ -312,7 +325,8 @@
     "summary": "Nonprofit AI research institute (open language models, NLP, vision); hires research scientists and engineers and runs research internships.",
     "careersUrl": "https://allenai.org/careers",
     "internshipsUrl": "https://allenai.org/internships",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "toyota-research-institute",
@@ -335,7 +349,8 @@
     "summary": "Toyota’s research institute (robotics, autonomous driving, human-centered AI); hires researchers, postdocs, and interns.",
     "careersUrl": "https://www.tri.global/careers",
     "internshipsUrl": "https://www.tri.global/tri-internship-program",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "openai",
@@ -352,7 +367,8 @@
     ],
     "summary": "AI research and deployment company; hires research scientists and engineers.",
     "careersUrl": "https://openai.com/careers/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "anthropic",
@@ -372,7 +388,8 @@
     ],
     "summary": "AI safety and research company; hires research scientists and engineers (alignment, interpretability, pretraining, security).",
     "careersUrl": "https://www.anthropic.com/careers",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "galois",
@@ -394,7 +411,8 @@
     "summary": "Research and development company (formal methods, programming languages, cryptography, security); a frequent employer of CS PhDs, with internships.",
     "careersUrl": "https://www.galois.com/careers",
     "internshipsUrl": "https://www.galois.com/roles/intern",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "grammatech",
@@ -412,7 +430,8 @@
     ],
     "summary": "Software analysis and cybersecurity research company (binary analysis, program analysis, software assurance).",
     "careersUrl": "https://www.grammatech.com/careers/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "trail-of-bits",
@@ -429,7 +448,8 @@
     ],
     "summary": "Security research and engineering firm (program analysis, cryptography, blockchain and AI security).",
     "careersUrl": "https://trailofbits.com/careers/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "two-six-technologies",
@@ -445,7 +465,8 @@
     ],
     "summary": "Research and engineering company for national security (cyber, AI/ML, information operations).",
     "careersUrl": "https://twosixtech.com/careers/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "charles-river-analytics",
@@ -462,7 +483,8 @@
     ],
     "summary": "Applied AI research company (probabilistic modeling, autonomy, human-machine teaming) funded largely by government research contracts.",
     "careersUrl": "https://cra.com/careers/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "str",
@@ -481,7 +503,8 @@
     ],
     "summary": "National-security research company (signal processing, machine learning, cyber).",
     "careersUrl": "https://str.us/careers/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "kitware",
@@ -500,7 +523,8 @@
     ],
     "summary": "Open-source R&D company (computer vision, scientific visualization, HPC, medical computing).",
     "careersUrl": "https://www.kitware.com/careers/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "sri",
@@ -524,7 +548,8 @@
     ],
     "summary": "Nonprofit research institute with long-running computer science, AI, and security laboratories.",
     "careersUrl": "https://www.sri.com/careers/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "draper",
@@ -543,7 +568,8 @@
     "summary": "Nonprofit engineering research lab (autonomy, embedded systems, cyber, guidance and navigation); runs student programs.",
     "careersUrl": "https://www.draper.com/careers",
     "internshipsUrl": "https://www.draper.com/education-programs/student-opportunities",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "llnl",
@@ -566,7 +592,8 @@
     "careersUrl": "https://www.llnl.gov/join-our-team/careers",
     "internshipsUrl": "https://www.llnl.gov/join-our-team/careers/student-internship-veteran-programs",
     "postdocsUrl": "https://www.llnl.gov/join-our-team/careers/llns-postdoc-fellowship-programs",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "sandia",
@@ -590,7 +617,8 @@
     "careersUrl": "https://www.sandia.gov/careers/",
     "internshipsUrl": "https://www.sandia.gov/careers/careers/students-and-postdocs/internships-co-ops/",
     "postdocsUrl": "https://www.sandia.gov/careers/careers/students-and-postdocs/internships-co-ops/postdoctoral-positions/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "lanl",
@@ -610,7 +638,8 @@
     ],
     "summary": "DOE/NNSA national lab (HPC, AI, scientific computing); hires staff scientists, postdocs, and student interns.",
     "careersUrl": "https://www.lanl.gov/careers",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "ornl",
@@ -631,7 +660,8 @@
     "summary": "DOE national lab and home of the Oak Ridge Leadership Computing Facility (HPC, AI, cyber); hires many postdocs.",
     "careersUrl": "https://www.ornl.gov/careers-at-ornl/",
     "postdocsUrl": "https://jobs.ornl.gov/go/Postdoctoral-Jobs/4537100/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "argonne",
@@ -651,7 +681,8 @@
     "summary": "DOE national lab and home of the Argonne Leadership Computing Facility (HPC, AI for science, mathematics and computer science).",
     "careersUrl": "https://www.anl.gov/careers",
     "postdocsUrl": "https://www.anl.gov/hr/postdoctoral-programs",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "berkeley-lab",
@@ -675,7 +706,8 @@
     "careersUrl": "https://cs.lbl.gov/work/",
     "internshipsUrl": "https://cs.lbl.gov/work/internship-visiting-faculty-employment/",
     "postdocsUrl": "https://cs.lbl.gov/work/fellowships/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "pnnl",
@@ -697,7 +729,8 @@
     ],
     "summary": "DOE national lab (HPC, AI, data science, computer architecture, cybersecurity).",
     "careersUrl": "https://careers.pnnl.gov/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "brookhaven",
@@ -717,7 +750,8 @@
     "summary": "DOE national lab (scientific computing, AI for science, quantum); offers named fellowships and student programs.",
     "careersUrl": "https://www.bnl.gov/careers/",
     "internshipsUrl": "https://www.bnl.gov/education/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "inl",
@@ -737,7 +771,8 @@
     ],
     "summary": "DOE national lab (nuclear energy, critical-infrastructure cybersecurity, HPC); hosts hundreds of interns each year.",
     "careersUrl": "https://inl.gov/careers/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "nlr",
@@ -759,7 +794,8 @@
     "careersUrl": "https://www.nlr.gov/careers",
     "internshipsUrl": "https://www.nlr.gov/careers/graduate-internships",
     "postdocsUrl": "https://www.nlr.gov/careers/post-docs",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "nist",
@@ -782,7 +818,8 @@
     "summary": "Federal lab whose Information Technology Laboratory works on cryptography, cybersecurity, AI measurement, and quantum; federal hiring is through USAJOBS.",
     "careersUrl": "https://www.nist.gov/careers",
     "internshipsUrl": "https://www.nist.gov/careers/student-opportunities",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "arl",
@@ -805,7 +842,8 @@
     "summary": "Army research lab (AI, autonomy, networks, cyber); hires civilian scientists and runs student and intern programs.",
     "careersUrl": "https://arl.devcom.army.mil/careers/",
     "internshipsUrl": "https://arl.devcom.army.mil/careers/students/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "mit-lincoln-lab",
@@ -825,7 +863,8 @@
     "summary": "DoD research and development center run by MIT (cyber, AI, communications, sensing); runs student programs including a summer research program.",
     "careersUrl": "https://www.ll.mit.edu/careers",
     "internshipsUrl": "https://www.ll.mit.edu/careers/student-opportunities",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "jhu-apl",
@@ -848,7 +887,8 @@
     "summary": "University-affiliated research center (AI, cyber, autonomy, space); hires new PhDs and runs internships.",
     "careersUrl": "https://www.jhuapl.edu/careers",
     "internshipsUrl": "https://www.jhuapl.edu/careers/internships",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "mitre",
@@ -868,7 +908,8 @@
     "summary": "Nonprofit that runs federally funded R&D centers (cybersecurity, AI, systems engineering); has student and recent-graduate programs.",
     "careersUrl": "https://careers.mitre.org/us/en/recent-graduates",
     "internshipsUrl": "https://careers.mitre.org/us/en/student-programs",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   },
   {
     "id": "cmu-sei",
@@ -890,6 +931,7 @@
     ],
     "summary": "DoD research center at Carnegie Mellon (software engineering, cybersecurity including CERT, AI engineering).",
     "careersUrl": "https://www.sei.cmu.edu/careers/",
-    "checkedAt": "2026-10-15"
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
   }
 ]
