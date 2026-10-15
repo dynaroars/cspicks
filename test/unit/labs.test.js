@@ -35,6 +35,9 @@ test('filterLabs follows area, location, aka, and free text; posting-only keywor
   assert.deepEqual(ids(filterLabs(labs, 'country: uk')), ['deepmind']);
   assert.deepEqual(ids(filterLabs(labs, 'country: us')), ['galois', 'deepmind', 'msr']);
   assert.deepEqual(filterLabs(labs, 'track: teaching'), []);
+  assert.deepEqual(filterLabs(labs, 'level: assistant'), []);
+  assert.deepEqual(ids(filterLabs(labs, 'track: internship')), ['galois', 'deepmind', 'msr']);
+  assert.deepEqual(ids(filterLabs(labs, 'dept: lab school: "microsoft research"')), ['msr']);
 });
 
 test('renderLabs groups by kind and escapes text', () => {

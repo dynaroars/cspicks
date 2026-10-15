@@ -35,7 +35,9 @@ export const LAB_KIND_LABELS: Record<LabKind, string> = {
 };
 
 /** Job-only keywords: a search using any of them is about postings, so the lab list stays out of the way. */
-const POSTING_ONLY_KEYWORDS = ['school', 'track', 'level', 'dept', 'visa', 'status', 'favorites'];
+const POSTING_ONLY_KEYWORDS = ['level', 'visa', 'status', 'favorites'];
+/** `track:` and `dept:` values that labs hire for; any other value hides the lab list. */
+const LAB_TRACKS = ['industry', 'internship', 'postdoc', 'lab'];
 
 let cachedLabs: Lab[] | null = null;
 
@@ -114,16 +116,19 @@ function locationMatches(lab: Lab, value: string) {
 }
 
 /**
- * Labs matching the Jobs search box. Uses the same `area:`, `loc:`, `country:`, and free-text terms as
- * postings; a search with a posting-only keyword (track, level, school, …) matches no labs.
+ * Labs matching the Jobs search box. Uses the same `school:`, `area:`, `loc:`, `country:`, and free-text terms as
+ * postings; a search for academic-only tracks or units, or a posting-only keyword (level, visa, …), matches no labs.
  */
 export function filterLabs(labs: Lab[], query = ''): Lab[] {
   const { filters: keywords, rest } = parseKeywordQuery(query, JOBS_KEYWORD_SPECS);
   if (POSTING_ONLY_KEYWORDS.some(key => keywords[key]?.length)) return [];
+  const labOnly = (values?: string[]) => (values || []).every(value => value.split(',').every(part => LAB_TRACKS.some(track => track.startsWith(part.trim()))));
+  if (!labOnly(keywords.track) || !labOnly(keywords.dept)) return [];
   const terms = rest.trim().toLowerCase().split(/\s+/).filter(Boolean);
   return labs.filter(lab => {
     if (keywords.area && !lab.broad && !matchesKeywordOptions(keywords.area, value =>
       lab.areas.some(key => `${key} ${areaLabels[key] || ''}`.toLowerCase().includes(value)))) return false;
+    if (!matchesKeywordOptions(keywords.school, value => [lab.name, ...(lab.aka || [])].some(name => name.toLowerCase().includes(value)))) return false;
     if (!matchesKeywordOptions(keywords.loc, value => locationMatches(lab, value))) return false;
     if (!matchesKeywordOptions(keywords.country, value => locationMatches(lab, value))) return false;
     if (!terms.length) return true;
@@ -136,7 +141,8 @@ function link(url: string | undefined, label: string) {
   return url ? `<a href="${escapeHtml(safeExternalUrl(url))}" target="_blank" rel="noopener noreferrer">${label}</a>` : '';
 }
 
-export function renderLabRow(lab: Lab) {
+/** `postings` is the lab's count of currently shown postings; a count links to them. */
+export function renderLabRow(lab: Lab, postings = 0) {
   const chips = [
     ...(lab.broad ? ['<span class="opportunity-chip job-chip" title="Hires across most areas of CS">Many areas</span>'] : []),
     ...lab.areas.map(area => `<button type="button" class="opportunity-chip job-chip job-chip-area" data-search-area="${escapeHtml(area)}">${escapeHtml(areaLabels[area] || area)}</button>`)
@@ -146,16 +152,19 @@ export function renderLabRow(lab: Lab) {
     <div class="lab-head"><a class="lab-name" href="${escapeHtml(safeExternalUrl(lab.careersUrl))}" target="_blank" rel="noopener noreferrer">${escapeHtml(lab.name)}</a>${aka}
       <span class="lab-org">${escapeHtml(lab.org)} · ${escapeHtml(lab.locations.join('; '))}</span></div>
     <p class="lab-summary">${escapeHtml(lab.summary)}</p>
-    <div class="lab-links">${[link(lab.careersUrl, 'Careers'), link(lab.internshipsUrl, 'Internships &amp; students'), link(lab.postdocsUrl, 'Postdocs')].filter(Boolean).join('')}</div>
+    <div class="lab-links">${[
+      postings ? `<button type="button" class="lab-postings" data-search-school="${escapeHtml(lab.name)}">${postings} listed posting${postings === 1 ? '' : 's'}</button>` : '',
+      link(lab.careersUrl, 'Careers'), link(lab.internshipsUrl, 'Internships &amp; students'), link(lab.postdocsUrl, 'Postdocs')
+    ].filter(Boolean).join('')}</div>
     <div class="opportunity-tags lab-chips">${chips}</div>
   </li>`;
 }
 
-/** Grouped by kind, alphabetical within a group. */
-export function renderLabs(labs: Lab[]) {
+/** Grouped by kind, alphabetical within a group; `postings` maps a lab id to its shown posting count. */
+export function renderLabs(labs: Lab[], postings: Map<string, number> = new Map()) {
   return (Object.keys(LAB_KIND_LABELS) as LabKind[]).map(kind => {
     const group = labs.filter(lab => lab.kind === kind).sort((a, b) => a.name.localeCompare(b.name));
     return group.length ? `<h3 class="lab-group-title">${LAB_KIND_LABELS[kind]} (${group.length})</h3>
-      <ul class="lab-list">${group.map(renderLabRow).join('')}</ul>` : '';
+      <ul class="lab-list">${group.map(lab => renderLabRow(lab, postings.get(lab.id))).join('')}</ul>` : '';
   }).join('');
 }

@@ -111,3 +111,5 @@
 .lab-summary { margin: 0.25rem 0; color: var(--text-secondary); font-size: 0.86rem; }
 .lab-links { display: flex; flex-wrap: wrap; gap: 0.9rem; font-size: 0.84rem; }
 .lab-chips { margin-top: 0.35rem; }
+.lab-postings { padding: 0; border: 0; background: none; font: inherit; font-weight: 600; color: var(--accent-color); cursor: pointer; }
+.lab-postings:hover { text-decoration: underline; }

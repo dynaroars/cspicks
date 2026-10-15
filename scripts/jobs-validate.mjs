@@ -14,11 +14,15 @@ const JOBS = new URL('../public/jobs.json', import.meta.url);
 const SOURCES = new URL('./data/jobs-sources.json', import.meta.url);
 const LABS = new URL('../public/labs.json', import.meta.url);
 
-/** Every problem in the shipped jobs dataset, one line each; empty when it is valid. */
-export function jobsFileProblems(jobs, sources) {
+/**
+ * Every problem in the shipped jobs dataset, one line each; empty when it is valid. A school posting's `school`
+ * must be a jobs-sources.json row; a lab posting's `lab` must be a labs.json id and `school` that lab's name.
+ */
+export function jobsFileProblems(jobs, sources, labs = []) {
   const problems = jobsDatasetProblems(jobs);
   if (!Array.isArray(jobs) || !Array.isArray(sources)) return problems;
   const schools = new Set(sources.map(source => source.school));
+  const labNames = new Map((Array.isArray(labs) ? labs : []).map(lab => [lab.id, lab.name]));
   const seen = { id: new Map(), url: new Map() };
   jobs.forEach((job, index) => {
     const label = typeof job?.id === 'string' ? job.id : `record #${index}`;
@@ -28,7 +32,10 @@ export function jobsFileProblems(jobs, sources) {
       if (seen[key].has(value)) problems.push(`${label}: duplicate ${key} (also ${seen[key].get(value)})`);
       else seen[key].set(value, label);
     }
-    if (typeof job?.school === 'string' && !schools.has(job.school)) {
+    if (typeof job?.lab === 'string') {
+      if (!labNames.has(job.lab)) problems.push(`${label}: lab "${job.lab}" is not in labs.json`);
+      else if (job.school !== labNames.get(job.lab)) problems.push(`${label}: school must be the lab name "${labNames.get(job.lab)}"`);
+    } else if (typeof job?.school === 'string' && !schools.has(job.school)) {
       problems.push(`${label}: school "${job.school}" is not in jobs-sources.json (add it with maintain:jobs --add)`);
     }
     if (typeof job?.url === 'string' && !job.url.startsWith('https://')) problems.push(`${label}: url is not https`);
@@ -39,7 +46,7 @@ export function jobsFileProblems(jobs, sources) {
 
 async function main() {
   const [jobs, sources, labs] = await Promise.all([JOBS, SOURCES, LABS].map(async url => JSON.parse(await fs.readFile(url, 'utf8'))));
-  const problems = jobsFileProblems(jobs, sources);
+  const problems = jobsFileProblems(jobs, sources, labs);
   const labProblems = labsDatasetProblems(labs);
   if (problems.length) console.error(`public/jobs.json has ${problems.length} problem(s):\n${problems.map(line => `  ${line}`).join('\n')}`);
   if (labProblems.length) console.error(`public/labs.json has ${labProblems.length} problem(s):\n${labProblems.map(line => `  ${line}`).join('\n')}`);

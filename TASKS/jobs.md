@@ -125,7 +125,8 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
 | `id` | Stable kebab-case slug: `<school-short>-<role-slug>-<yyyy>`; never reused, never changed. |
 | `school` | The exact institution name in `jobs-sources.json` (the CSRankings name when CSRankings lists the school); a unit test enforces it. |
 | `department`, `title` | As on the posting. |
-| `track` | `tenure-track`, `teaching`, `research`, `postdoc`, `visiting`, `leadership`. |
+| `track` | `tenure-track`, `teaching`, `research`, `postdoc`, `visiting`, `leadership`; lab postings also use `industry` and `internship` (see [labs.md](labs.md)). |
+| `lab` | Only for industry/national-lab postings: the `public/labs.json` id; `school` is then that lab's name. |
 | `level` | `assistant`, `associate`, `full`, `open`, or null when the posting has no rank (postdocs, lecturers). |
 | `areas` | CSRankings area keys (`src/shared.ts` `areaLabels`: `ai`, `sec`, `plan`, …) for every area the posting specifically names ("security, systems, and AI" → `sec`, `ops`/`comm`/`arch` as named, `ai`). Empty when it names none; never infer an area from the department or the ad's tone. |
 | `anyArea` | `true` only when the posting explicitly says it is open to all / any areas of computer science ("all areas", "open to any area", "applicants in any area of CS"). Omit otherwise. A posting can have both named `areas` (e.g. "all areas, with emphasis on AI") and `anyArea`. |

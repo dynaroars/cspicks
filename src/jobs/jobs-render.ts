@@ -1,7 +1,7 @@
 import { opportunityDeadline, opportunityHeader, opportunityMeta } from '../opportunity-card.js';
 import { resultActions } from '../result-actions.js';
 import { areaLabels, escapeHtml, safeExternalUrl } from '../shared.js';
-import { deadlineLabel, DEPARTMENT_LABELS, departmentKind, filterValues, formatDay, LEVEL_LABELS, TRACK_LABELS, US_STATES } from './jobs-data.js';
+import { deadlineLabel, DEPARTMENT_LABELS, jobUnitKind, filterValues, formatDay, LEVEL_LABELS, TRACK_LABELS, US_STATES } from './jobs-data.js';
 import type { Job } from '../types.js';
 import type { FilterChoice, SchoolJobs } from './jobs-data.js';
 
@@ -83,7 +83,7 @@ export function renderSchoolCard(group: SchoolJobs, ranks: RankLookup, isFavorit
       <p class="job-meta">${first.city ? `${escapeHtml(first.city)}, ` : ''}${escapeHtml(US_STATES[group.state] || group.state)}
         ${info?.rank ? `· <span class="opportunity-chip job-chip job-chip-rank" title="Overall CSRankings position (US, last 10 years)">#${info.rank} CSRankings</span>` : ''}
         · ${group.jobs.length} position${group.jobs.length === 1 ? '' : 's'}</p>
-      <p class="job-school-links">${schoolLinks(group.school)}</p>
+      ${first.lab ? '' : `<p class="job-school-links">${schoolLinks(group.school)}</p>`}
     </header>
     <div class="opportunity-group-items">${group.jobs.map(job => renderJobCard(job, ranks, isFavorite, now, false)).join('')}</div>
   </section>`;
@@ -137,8 +137,8 @@ export function jobsToMarkdown(jobs: Job[], { ranks = () => undefined, now = Dat
     ].filter(Boolean);
     const fields: Array<[string, string]> = [
       ['Status', deadlineLabel(job, now).text],
-      ['School', `${job.school}${info?.rank ? ` (#${info.rank} CSRankings)` : ''}`],
-      ['Department', `${job.department} (${DEPARTMENT_LABELS[departmentKind(job.department)]})`],
+      [job.lab ? 'Employer' : 'School', `${job.school}${info?.rank ? ` (#${info.rank} CSRankings)` : ''}`],
+      ['Department', `${job.department} (${DEPARTMENT_LABELS[jobUnitKind(job)]})`],
       ['Location', [job.city, US_STATES[job.state] || job.state].filter(Boolean).join(', ')],
       ['Position', [TRACK_LABELS[job.track], job.level ? LEVEL_LABELS[job.level] : ''].filter(Boolean).join(' · ')],
       ['Research areas', areas.join(', ') || 'Not specified'],

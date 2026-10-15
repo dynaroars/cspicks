@@ -203,7 +203,7 @@ test('suggestions list schools, areas, states, and position types', () => {
   assert.ok(items.schools.some(item => item.label === 'Rice University'));
   assert.ok(items.areas.some(item => item.label === 'Security'));
   assert.ok(items.states.some(item => item.label === 'Texas'));
-  assert.equal(items.tracks.length, 6);
+  assert.equal(items.tracks.length, 8);
 });
 
 test('crawl queue prioritises never-checked, big schools, and open-posting schools in season', () => {
@@ -233,8 +233,9 @@ test('shipped jobs dataset is valid, unique, and uses school names from jobs-sou
   const { jobsFileProblems } = await import('../../scripts/jobs-validate.mjs');
   const jobsData = JSON.parse(await fs.readFile(new URL('../../public/jobs.json', import.meta.url), 'utf8'));
   const sources = JSON.parse(await fs.readFile(new URL('../../scripts/data/jobs-sources.json', import.meta.url), 'utf8'));
+  const labs = JSON.parse(await fs.readFile(new URL('../../public/labs.json', import.meta.url), 'utf8'));
   assert.ok(sources.length >= 150, 'sources are seeded from CSRankings');
-  assert.deepEqual(jobsFileProblems(jobsData, sources), [], 'run npm run validate:jobs for details');
+  assert.deepEqual(jobsFileProblems(jobsData, sources, labs), [], 'run npm run validate:jobs for details');
 });
 
 test('jobs validator names each bad record and field', async () => {
@@ -248,6 +249,15 @@ test('jobs validator names each bad record and field', async () => {
     'unseen: duplicate id (also unseen)',
     'unseen: duplicate url (also unseen)',
     'unseen: school "Nowhere U" is not in jobs-sources.json (add it with maintain:jobs --add)'
+  ]);
+  const labs = [{ id: 'msr', name: 'Microsoft Research' }];
+  assert.deepEqual(jobsFileProblems([
+    job({ id: 'lab-ok', url: 'https://a.com/1', lab: 'msr', school: 'Microsoft Research', track: 'industry' }),
+    job({ id: 'lab-name', url: 'https://a.com/2', lab: 'msr', school: 'Microsoft' }),
+    job({ id: 'lab-missing', url: 'https://a.com/3', lab: 'nope', school: 'Nope' })
+  ], sources, labs), [
+    'lab-name: school must be the lab name "Microsoft Research"',
+    'lab-missing: lab "nope" is not in labs.json'
   ]);
   assert.throws(() => parseJobs([unseen]), /unseen: lastSeenAt/);
 });

@@ -20,7 +20,9 @@ export const TRACK_LABELS: Record<JobTrack, string> = {
   research: 'Research track',
   postdoc: 'Postdoc',
   visiting: 'Visiting',
-  leadership: 'Chair / Dean'
+  leadership: 'Chair / Dean',
+  industry: 'Industry / lab research',
+  internship: 'PhD internship'
 };
 
 export const LEVEL_LABELS: Record<JobLevel, string> = {
@@ -59,22 +61,28 @@ const VISA_KEYWORD_VALUES: Record<string, string[]> = {
 
 const visaKey = (job: Job) => job.visaSponsorship ?? 'unknown';
 
-type DepartmentKind = 'cs' | 'information' | 'ece' | 'data' | 'other';
+type DepartmentKind = 'cs' | 'information' | 'ece' | 'data' | 'lab' | 'other';
 
 export const DEPARTMENT_LABELS: Record<DepartmentKind, string> = {
   cs: 'Computer Science / Computing',
   information: 'Information school (IST, iSchool)',
   ece: 'Electrical & Computer Engineering',
   data: 'Data Science / Statistics',
+  lab: 'Industry / national lab',
   other: 'Other / college-wide'
 };
+
+/** A lab posting's unit is the lab itself; a school posting's comes from its department text. */
+export function jobUnitKind(job: Pick<Job, 'department' | 'lab'>): DepartmentKind {
+  return job.lab ? 'lab' : departmentKind(job.department);
+}
 
 /**
  * Classifies a posting's unit from its department text. Many non-CS units hire CS PhDs, so the page lets
  * people include or isolate them. EE-named units win first ("Electrical Engineering and Computer Science"
  * is ECE-style); CS/computing names win over "information" ("School of Computing and Information").
  */
-export function departmentKind(department: string): DepartmentKind {
+export function departmentKind(department: string): Exclude<DepartmentKind, 'lab'> {
   const text = department.toLowerCase();
   if (/electrical|\beecs\b|\bece\b|\becec\b/.test(text)) return 'ece';
   if (/computer (and information )?(science|engineering)|computing|\bcs\b|\bcse\b/.test(text)) return 'cs';
@@ -84,13 +92,13 @@ export function departmentKind(department: string): DepartmentKind {
 }
 
 export const JOBS_KEYWORD_SPECS: KeywordSpec[] = [
-  { key: 'school', aliases: ['university'], example: 'school: stanford', description: 'University the position is at' },
+  { key: 'school', aliases: ['university', 'employer', 'lab'], example: 'school: stanford', description: 'University or lab the position is at' },
   { key: 'area', aliases: ['topic'], example: 'area: security', description: 'CSRankings research area the position targets (postings open to all areas match any area)' },
   { key: 'loc', aliases: ['state', 'location'], example: 'loc: texas', description: 'City, province or region, or US state' },
   { key: 'country', aliases: ['nation'], example: 'country: us', description: 'Country (e.g. US, Canada, UK, Germany)' },
-  { key: 'track', example: 'track: teaching', description: 'tenure-track, teaching, research, postdoc, visiting, or leadership' },
+  { key: 'track', example: 'track: teaching', description: 'tenure-track, teaching, research, postdoc, visiting, leadership, industry, or internship' },
   { key: 'level', aliases: ['rank'], example: 'level: assistant', description: 'assistant, associate, full, or open rank' },
-  { key: 'dept', aliases: ['department', 'unit'], example: 'dept: information', description: 'Hiring unit: cs, information (IST/iSchool), ece, data, or other' },
+  { key: 'dept', aliases: ['department', 'unit'], example: 'dept: information', description: 'Hiring unit: cs, information (IST/iSchool), ece, data, lab (industry/national labs), or other' },
   { key: 'visa', aliases: ['sponsorship'], example: 'visa: possible', description: 'What the posting says about visa sponsorship: yes, case, no, not-stated, unknown (not checked yet), or possible (anything but no)' },
   { key: 'status', example: 'status: closed', description: '"active" (default), "closed" (older postings), or "all"' },
   FAVORITES_KEYWORD_SPEC
@@ -163,6 +171,7 @@ export function jobProblems(value: unknown): string[] {
   const checks: [string, boolean][] = [
     ['id', typeof job.id === 'string'],
     ['school', typeof job.school === 'string'],
+    ['lab', job.lab === undefined || (typeof job.lab === 'string' && job.lab.length > 0)],
     ['department', typeof job.department === 'string'],
     ['title', typeof job.title === 'string'],
     ['track', typeof job.track === 'string' && TRACKS.includes(job.track)],
@@ -301,9 +310,9 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
     }
     if (tracks.length && !tracks.includes(job.track)) return false;
     if (levels.length && !levels.includes(job.level ?? '')) return false;
-    if (depts.length && !depts.includes(departmentKind(job.department))) return false;
+    if (depts.length && !depts.includes(jobUnitKind(job))) return false;
     if (keywords.dept) {
-      const kind = departmentKind(job.department);
+      const kind = jobUnitKind(job);
       // Short values ("cs", "ece") match the unit kind only; longer ones also match the posting's department text.
       if (!matchesKeywordOptions(keywords.dept, value => value === kind || (value.length > 3 && `${DEPARTMENT_LABELS[kind]} ${job.department}`.toLowerCase().includes(value)))) return false;
     }

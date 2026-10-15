@@ -65,7 +65,7 @@ function updateUrl(current: ReturnType<typeof state>) {
     title: current.query ? `${current.query} - Academic CS Jobs - ${SITE_NAME}` : `${SITE_NAME} - Academic CS Jobs`,
     description: current.query
       ? `Academic computer science positions matching “${current.query}” worldwide.`
-      : 'Open computer science faculty, teaching, research, and postdoc positions worldwide by school, area, country, and continent.'
+      : 'Open computer science faculty, teaching, research, and postdoc positions worldwide, plus industry and national-lab research jobs and PhD internships, by school, lab, area, country, and continent.'
   });
 }
 
@@ -104,10 +104,12 @@ function render() {
 
   const status = parseKeywordQuery(current.query, JOBS_KEYWORD_SPECS).filters.status?.[0] || 'active';
   const label = status === 'active' ? 'active ' : status === 'closed' ? 'closed ' : '';
-  const schools = new Set(shown.map(job => job.school)).size;
-  statusText.textContent = `Showing ${shown.length} ${label}position${shown.length === 1 ? '' : 's'}${shown.length ? ` at ${schools} school${schools === 1 ? '' : 's'}` : ''} of ${allJobs.length} listed`;
+  const schools = new Set(shown.filter(job => !job.lab).map(job => job.school)).size;
+  const labs = new Set(shown.filter(job => job.lab).map(job => job.lab)).size;
+  const places = [schools ? `${schools} school${schools === 1 ? '' : 's'}` : '', labs ? `${labs} lab${labs === 1 ? '' : 's'}` : ''].filter(Boolean).join(' and ');
+  statusText.textContent = `Showing ${shown.length} ${label}position${shown.length === 1 ? '' : 's'}${places ? ` at ${places}` : ''} of ${allJobs.length} listed`;
   countElement.textContent = `${shown.length} position${shown.length === 1 ? '' : 's'}`;
-  renderLabsSection(current.query, shown.length);
+  renderLabsSection(current.query, shown);
   updateUrl(current);
   trackView(current.query ? 'search-results' : 'default', 'jobs');
 }
@@ -116,12 +118,14 @@ function render() {
  * The lab directory follows the search box; it hides when the search is about postings only (track, level, …)
  * and opens itself when a search finds labs but no postings (e.g. "galois").
  */
-function renderLabsSection(query: string, postings: number) {
+function renderLabsSection(query: string, shown: Job[]) {
   const labs = filterLabs(allLabs, query);
   labsDetails.hidden = !labs.length;
-  if (labs.length && !postings && query.trim()) labsDetails.open = true;
+  if (labs.length && !shown.length && query.trim()) labsDetails.open = true;
+  const postings = new Map<string, number>();
+  shown.forEach(job => { if (job.lab) postings.set(job.lab, (postings.get(job.lab) || 0) + 1); });
   labsCount.textContent = `(${labs.length}${labs.length === allLabs.length ? '' : ` of ${allLabs.length}`})`;
-  labsList.innerHTML = renderLabs(labs);
+  labsList.innerHTML = renderLabs(labs, postings);
 }
 
 /** Only continents with matching postings are offered (plus the current choice, so it never vanishes). */
@@ -223,7 +227,13 @@ function setupEvents() {
 
   mapClear.addEventListener('click', () => setFilter('loc', []));
   labsList.addEventListener('click', event => {
-    const area = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-search-area]') : null;
+    const target = event.target instanceof Element ? event.target : null;
+    const school = target?.closest<HTMLElement>('[data-search-school]');
+    if (school) {
+      setFilter('school', [school.dataset.searchSchool!]);
+      return window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    const area = target?.closest<HTMLElement>('[data-search-area]');
     if (area) setFilter('area', [area.dataset.searchArea!]);
   });
   exportButton.addEventListener('click', () => {

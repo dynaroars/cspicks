@@ -230,7 +230,7 @@ export interface Grant {
   locationLabel?: string;
 }
 
-export type JobTrack = 'tenure-track' | 'teaching' | 'research' | 'postdoc' | 'visiting' | 'leadership';
+export type JobTrack = 'tenure-track' | 'teaching' | 'research' | 'postdoc' | 'visiting' | 'leadership' | 'industry' | 'internship';
 export type JobLevel = 'assistant' | 'associate' | 'full' | 'open';
 /** `not-stated`: the posting was read and says nothing about sponsorship. */
 export type VisaSponsorship = 'yes' | 'no' | 'case-by-case' | 'not-stated';
@@ -238,8 +238,10 @@ export type VisaSponsorship = 'yes' | 'no' | 'case-by-case' | 'not-stated';
 /** One US or international academic job posting in `public/jobs.json`. Dates are ISO `YYYY-MM-DD`. */
 export interface Job {
   id: string;
-  /** CSRankings institution name, so cards can link back into Search. */
+  /** CSRankings institution name, so cards can link back into Search; for a lab posting, the lab's `name`. */
   school: string;
+  /** `public/labs.json` id when the employer is an industry, company, or national lab rather than a school. */
+  lab?: string;
   department: string;
   title: string;
   track: JobTrack;
