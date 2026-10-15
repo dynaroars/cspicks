@@ -42,8 +42,8 @@ Check VietProfs' times before moving anything here.
 | `confs` | `trig_018AYNAaQfwJC2rx8JX2zZKo` | Sonnet 5.5 | `0 20 * * 0,2,4,6` | Sun, Tue, Thu, Sat 4 PM | [Conference audit](#conference-audit-confs) |
 | `grants` | `trig_01LuUf649h8NwKMEftjktkmS` | Sonnet 5.5 | `0 23 * * 3,6` | Wed and Sat 7 PM | [Grants audit](#grants-audit-grants) |
 | `jobs` | `trig_01PkBRvYwVSWTCqsCtsNZpPg` | Sonnet 5.5 | `0 22 * * 1,5` | Mon and Fri 6 PM | [US jobs crawl](#us-jobs-crawl-jobs) |
-| `jobs-intl` | `TBD` | Sonnet 5.5 | `0 23 * * 2` | Tue 7 PM | [International jobs crawl](#international-jobs-crawl-jobs-intl) |
-| `labs` | `TBD` | Sonnet 5.5 | `0 19 * * 3` | Wed 3 PM | [Industry & national-lab postings](#industry--national-lab-postings-labs) |
+| `jobs-intl` | `trig_0185iQdCfKfusPAN8DjkjSke` | Sonnet 5.5 | `0 23 * * 2` | Tue 7 PM | [International jobs crawl](#international-jobs-crawl-jobs-intl) |
+| `labs` | `trig_01WxBbdGpCW3zoLamWKdXMHe` | Sonnet 5.5 | `0 19 * * 3` | Wed 3 PM | [Industry & national-lab postings](#industry--national-lab-postings-labs) |
 | `data-sync` | `trig_014ksNYkkzyHVxS2Kub4LqsG` | Sonnet 5 | `30 0 3 * *` | 3rd of month, 8:30 PM (2nd) | [Mechanical data sync](#mechanical-data-sync-data-sync) |
 | `confs-discover` | `trig_01LZM6T6zVarUND6Uvh6HUTh` | Sonnet 5 | `0 1 8 * *` | 8th of month, 9 PM (7th) | [Discover conferences](#discover-conferences-confs-discover) |
 | `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5 | `0 1 22 * *` | 22nd of month, 9 PM (21st) | [Discover grants](#discover-grants-grants-discover) |
