@@ -93,3 +93,21 @@
 
 /* Intro: the submit link sits on its own line, and wrapping avoids a lone last word. */
 .jobs-page .search-intro p { text-wrap: pretty; }
+
+/* Industry & national labs directory (src/jobs/labs.ts) */
+.labs-details { margin-top: 1.25rem; border: 1px solid var(--border-color); border-radius: 10px; background: var(--bg-secondary); padding: 0.6rem 0.9rem; }
+.labs-details > summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text-primary); }
+.labs-details > summary span { font-weight: 400; color: var(--text-secondary); font-size: 0.8rem; }
+.labs-details[hidden] { display: none; }
+.labs-intro { margin: 0.6rem 0 0.2rem; color: var(--text-secondary); font-size: 0.86rem; text-wrap: pretty; }
+.lab-group-title { margin: 1rem 0 0.4rem; font-size: 0.95rem; color: var(--text-primary); }
+.lab-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.lab-row { padding: 0.7rem 0; border-top: 1px solid var(--border-color); }
+.lab-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.6rem; }
+.lab-name { font-weight: 600; }
+.lab-row a { color: var(--accent-color); text-decoration: none; }
+.lab-row a:hover { text-decoration: underline; }
+.lab-aka, .lab-org { color: var(--text-secondary); font-size: 0.84rem; }
+.lab-summary { margin: 0.25rem 0; color: var(--text-secondary); font-size: 0.86rem; }
+.lab-links { display: flex; flex-wrap: wrap; gap: 0.9rem; font-size: 0.84rem; }
+.lab-chips { margin-top: 0.35rem; }

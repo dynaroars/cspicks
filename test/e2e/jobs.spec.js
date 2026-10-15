@@ -246,3 +246,13 @@ test('job card secondary actions share a compact menu and links reproduce the po
   await expect(page.locator('.job-card')).toHaveCount(1);
   await expect(page.locator('.job-card')).toContainText('Software Engineering');
 });
+
+test('industry & national labs directory follows the search', async ({ page }) => {
+  await page.goto('/jobs.html?q=galois');
+  const labs = page.locator('#labs-details');
+  await expect(labs).toHaveAttribute('open', '');
+  await expect(page.locator('.lab-row')).toHaveCount(1);
+  await expect(page.locator('.lab-name')).toHaveText('Galois');
+  await page.locator('#jobs-search').fill('track: teaching');
+  await expect(labs).toBeHidden();
+});

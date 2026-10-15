@@ -13,6 +13,7 @@ doesn't confirm a fact, leave it `null`/`TBD` and say so.
 | Every other day (scheduled) | CS Conference schedule | `npm run maintain:csconfs -- --dry-run --limit 12` lists what's due | [conferences.md](TASKS/conferences.md) |
 | Twice weekly (scheduled) | Grants & awards | audit entries by deadline; monthly discovery pass | [grants.md](TASKS/grants.md) |
 | Twice weekly (scheduled) | US jobs | `npm run maintain:jobs -- --limit 30` lists schools due | [jobs.md](TASKS/jobs.md) |
+| Twice yearly (Aug, Feb) | Industry & national labs directory | re-open every link in `public/labs.json`; `npm run validate:jobs` | [labs.md](TASKS/labs.md) |
 | Monthly (scheduled) | NSF name matching, CSRankings rules | `npm run sync:nsf:names`, `npm run sync:csrankings-rules` | [nsf.md](TASKS/nsf.md), [csrankings.md](TASKS/csrankings.md) |
 | Quarterly (GitHub Action) | NSF full resync | `.github/workflows/nsf-full-sync.yml` (`npm run sync:nsf:all`) | [nsf.md](TASKS/nsf.md) |
 | Quarterly (GitHub Action) | CORE A/A* extra publications | `.github/workflows/dblp-core-extra.yml` | [csrankings.md](TASKS/csrankings.md) |

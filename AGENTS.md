@@ -82,6 +82,9 @@ playbook before any data-refresh or web-research task.
   `scripts/data/jobs-sources.json`. Job research must also check related units, especially Electrical and Computer
   Engineering (ECE/ECEC) and Information Science and Technology (IST), which often hire CS faculty; see TASKS/jobs.md.
   Do not create GitHub Issues for these postings unless the user asks for that workflow.
+  A collapsible "Industry & national labs" section (`src/jobs/labs.ts` over `public/labs.json`) is a curated directory of
+  research labs, R&D companies, and national/federal labs that hire CS PhDs: links to their careers, internship, and
+  postdoc pages, not individual postings; it follows the same search box (TASKS/labs.md).
 - `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
 - `stats.html` + `src/stats.ts` — site stats (roster, conferences, awards, jobs; never the large NSF snapshot) and repository activity from the GitHub API. Every page header links to it via the health icon, between the GitHub and
   ROARS Lab icons (all three share `.icon-link`; `test/unit/consistency.test.js` enforces the header on every page).

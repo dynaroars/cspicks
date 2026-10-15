@@ -1,16 +1,18 @@
 #!/usr/bin/env node
 /**
- * Fast pre-commit check for the CS Jobs data (TASKS/jobs.md). Run it before every commit that
- * touches public/jobs.json or scripts/data/jobs-sources.json; it prints every bad record and
+ * Fast pre-commit check for the CS Jobs data (TASKS/jobs.md) and labs directory (TASKS/labs.md). Run it
+ * before every commit that touches public/jobs.json, public/labs.json, or scripts/data/jobs-sources.json; it prints every bad record and
  * exits 1, so one malformed posting can't reach main and block the Pages deploy.
  *
  *   npm run validate:jobs
  */
 import fs from 'node:fs/promises';
 import { jobsDatasetProblems } from '../src/jobs/jobs-data.ts';
+import { labsDatasetProblems } from '../src/jobs/labs.ts';
 
 const JOBS = new URL('../public/jobs.json', import.meta.url);
 const SOURCES = new URL('./data/jobs-sources.json', import.meta.url);
+const LABS = new URL('../public/labs.json', import.meta.url);
 
 /** Every problem in the shipped jobs dataset, one line each; empty when it is valid. */
 export function jobsFileProblems(jobs, sources) {
@@ -36,13 +38,14 @@ export function jobsFileProblems(jobs, sources) {
 }
 
 async function main() {
-  const [jobs, sources] = await Promise.all([JOBS, SOURCES].map(async url => JSON.parse(await fs.readFile(url, 'utf8'))));
+  const [jobs, sources, labs] = await Promise.all([JOBS, SOURCES, LABS].map(async url => JSON.parse(await fs.readFile(url, 'utf8'))));
   const problems = jobsFileProblems(jobs, sources);
-  if (problems.length) {
-    console.error(`public/jobs.json has ${problems.length} problem(s):\n${problems.map(line => `  ${line}`).join('\n')}`);
-    process.exit(1);
-  }
+  const labProblems = labsDatasetProblems(labs);
+  if (problems.length) console.error(`public/jobs.json has ${problems.length} problem(s):\n${problems.map(line => `  ${line}`).join('\n')}`);
+  if (labProblems.length) console.error(`public/labs.json has ${labProblems.length} problem(s):\n${labProblems.map(line => `  ${line}`).join('\n')}`);
+  if (problems.length || labProblems.length) process.exit(1);
   console.log(`public/jobs.json OK: ${jobs.length} postings, ${sources.length} schools.`);
+  console.log(`public/labs.json OK: ${labs.length} labs.`);
 }
 
 if (import.meta.url === new URL(process.argv[1], 'file://').href) await main();

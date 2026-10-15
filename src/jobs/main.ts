@@ -2,6 +2,8 @@
  * Academic Jobs page controller: search, filters, US state map, position/school views.
  */
 import { CONTINENT_LABELS, DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, STATE_TILE_ROWS, TRACK_LABELS, US_STATES, VISA_FILTER_LABELS, continentCounts, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, resolveState, stateCounts } from './jobs-data.js';
+import { filterLabs, loadLabsData, renderLabs } from './labs.js';
+import type { Lab } from './labs.js';
 import { exportFileName, jobsToMarkdown, renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
 import { rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
@@ -27,8 +29,12 @@ const select = (id: string) => document.getElementById(id) as HTMLSelectElement;
 const exportButton = document.querySelector<HTMLButtonElement>('#export-favorites')!;
 const favoritesActions = document.querySelector<HTMLDetailsElement>('#favorites-actions')!;
 const mapClear = document.querySelector<HTMLButtonElement>('#clear-map-states')!;
+const labsDetails = document.querySelector<HTMLDetailsElement>('#labs-details')!;
+const labsList = document.getElementById('labs-list')!;
+const labsCount = document.getElementById('labs-count')!;
 
 let allJobs: Job[] = [];
+let allLabs: Lab[] = [];
 let suggestions: ReturnType<typeof createSearchControls>;
 let schoolRanks = new Map<string, SchoolRank>();
 const ranks: RankLookup = school => schoolRanks.get(school);
@@ -101,8 +107,21 @@ function render() {
   const schools = new Set(shown.map(job => job.school)).size;
   statusText.textContent = `Showing ${shown.length} ${label}position${shown.length === 1 ? '' : 's'}${shown.length ? ` at ${schools} school${schools === 1 ? '' : 's'}` : ''} of ${allJobs.length} listed`;
   countElement.textContent = `${shown.length} position${shown.length === 1 ? '' : 's'}`;
+  renderLabsSection(current.query, shown.length);
   updateUrl(current);
   trackView(current.query ? 'search-results' : 'default', 'jobs');
+}
+
+/**
+ * The lab directory follows the search box; it hides when the search is about postings only (track, level, …)
+ * and opens itself when a search finds labs but no postings (e.g. "galois").
+ */
+function renderLabsSection(query: string, postings: number) {
+  const labs = filterLabs(allLabs, query);
+  labsDetails.hidden = !labs.length;
+  if (labs.length && !postings && query.trim()) labsDetails.open = true;
+  labsCount.textContent = `(${labs.length}${labs.length === allLabs.length ? '' : ` of ${allLabs.length}`})`;
+  labsList.innerHTML = renderLabs(labs);
 }
 
 /** Only continents with matching postings are offered (plus the current choice, so it never vanishes). */
@@ -203,6 +222,10 @@ function setupEvents() {
   });
 
   mapClear.addEventListener('click', () => setFilter('loc', []));
+  labsList.addEventListener('click', event => {
+    const area = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-search-area]') : null;
+    if (area) setFilter('area', [area.dataset.searchArea!]);
+  });
   exportButton.addEventListener('click', () => {
     exportFavorites();
     favoritesActions.open = false;
@@ -280,6 +303,8 @@ async function init() {
     render();
     focusSearchOnLoad(input);
     void loadSchoolRanks();
+    loadLabsData().then(labs => { allLabs = labs; render(); })
+      .catch(error => console.warn('Lab directory unavailable.', error));
   } catch (error) {
     console.error('Failed to load jobs data:', error);
     statusText.textContent = 'Jobs data could not be loaded. Please try again.';
