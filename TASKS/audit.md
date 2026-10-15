@@ -11,12 +11,26 @@
 3. Re-verify changed facts against the cited official URLs, using each domain's playbook:
    - `csconfs/data/conferences.json`: [conferences.md](conferences.md) (dates, place format, chairs, all cycles share metadata).
    - `public/grants.json`: [grants.md](grants.md) (schema, audience taxonomy, URL provenance).
-   - `public/jobs.json`: [jobs.md](jobs.md): every changed deadline and `closedAt` against the official posting, no
+   - `public/jobs.json`: [jobs.md](jobs.md): for **every** new or changed record, `track`, `level`, `deadline`, and
+     `closedAt` against the official posting (read the employment terms; see jobs.md "Non-US appointment terms"), no
      record deleted, `school` matches a row in `scripts/data/jobs-sources.json`. Any US school is in scope; add a
      missing one with `npm run maintain:jobs -- --add`, never reject a posting because the school isn't in CSRankings.
    - `public/nsf-name-crosswalk.csv`: [nsf.md](nsf.md). `public/manual_affiliations.csv`: [affiliations.md](affiliations.md).
 4. Clean and verified: `gh pr merge <n> --squash --delete-branch`. Otherwise comment naming each rejected item and
    why; never merge a partial subset silently.
+
+## Direct commits to `main`
+
+Local sessions commit data straight to `main`, so PR review alone misses them. The `audit-reviewed` tag marks the
+last `main` commit whose data changes were audited.
+
+1. `git fetch origin --tags && git log --reverse --format='%h %an %s' audit-reviewed..origin/main -- public/jobs.json public/grants.json public/labs.json csconfs/data/conferences.json public/manual_affiliations.csv public/nsf-name-crosswalk.csv`.
+   Skip squash merges of PRs you already audited (`(#n)` subjects) and model-free Action commits.
+2. Oldest first, `git diff <sha>^ <sha> -- <file>` and re-verify the new or changed records exactly as for a PR
+   (for jobs: every record's `track`, `level`, `deadline`, `closedAt`; a third of the other facts).
+3. Fix confirmed errors on `main` with a commit naming each corrected record and its official URL; validate, push.
+4. `git tag -f audit-reviewed <last fully audited sha> && git push -f origin audit-reviewed`. Never move the tag past
+   a commit you did not finish; the next run resumes there.
 
 ## Issues
 

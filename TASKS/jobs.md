@@ -24,6 +24,9 @@ Run `npm run validate:jobs` (about a second) before **every** commit; it names e
 5. **One record per posting URL**; `id`s stay stable and unique.
 6. In the PR description, list each changed deadline and each `closedAt` with its official URL, and the schools
    whose pages were blocked or unfindable.
+7. **Read the employment terms before setting `track` and `level`**, especially for non-English postings (see
+   "Non-US appointment terms"). `verified: true` means you read every field off the official posting, not that the
+   posting exists. Direct pushes to `main` are re-audited by the next scheduled audit (docs/AUTOMATION.md).
 
 `jobs.html` reads `public/jobs.json`: faculty, teaching-track, research, postdoc, visiting, and
 chair/dean openings at US schools and verified international postings. CSRankings only seeds the US crawl list;
@@ -125,9 +128,9 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
 | `id` | Stable kebab-case slug: `<school-short>-<role-slug>-<yyyy>`; never reused, never changed. |
 | `school` | The exact institution name in `jobs-sources.json` (the CSRankings name when CSRankings lists the school); a unit test enforces it. |
 | `department`, `title` | As on the posting. |
-| `track` | `tenure-track`, `teaching`, `research`, `postdoc`, `visiting`, `leadership`; lab postings also use `industry` and `internship` (see [labs.md](labs.md)). |
+| `track` | `tenure-track`, `teaching`, `research`, `postdoc`, `visiting`, `leadership`; lab postings also use `industry` and `internship` (see [labs.md](labs.md)). `tenure-track` only when the posting itself says tenure-track / tenured / tenure-line, or, outside the US, an explicitly permanent (open-ended) faculty post or a named tenure-track scheme. Fixed-term, contract, "specially appointed", professor of practice, clinical, and instructor roles are never `tenure-track`, whatever the title says; see "Non-US appointment terms" below. |
 | `lab` | Only for industry/national-lab postings: the `public/labs.json` id; `school` is then that lab's name. |
-| `level` | `assistant`, `associate`, `full`, `open`, or null when the posting has no rank (postdocs, lecturers). |
+| `level` | `assistant`, `associate`, `full`, `open`, or null when the posting has no rank (postdocs, lecturers). `open` whenever the posting accepts more than one rank ("Assistant or Associate", "all ranks", 准教授・講師・助教), not the lowest rank listed. |
 | `areas` | CSRankings area keys (`src/shared.ts` `areaLabels`: `ai`, `sec`, `plan`, …) for every area the posting specifically names ("security, systems, and AI" → `sec`, `ops`/`comm`/`arch` as named, `ai`). Empty when it names none; never infer an area from the department or the ad's tone. |
 | `anyArea` | `true` only when the posting explicitly says it is open to all / any areas of computer science ("all areas", "open to any area", "applicants in any area of CS"). Omit otherwise. A posting can have both named `areas` (e.g. "all areas, with emphasis on AI") and `anyArea`. |
 | `state`, `city` | USPS state code for US postings; province/region or empty when unspecified internationally. City as stated in the posting. |
@@ -141,6 +144,23 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
 | `summary` | At most two sentences, paraphrased; never paste a posting. |
 | `source` | `crawl` or `submission`. |
 | `verified` | `true` once checked against the official page. |
+
+## Non-US appointment terms
+
+Titles abroad often look like US tenure-track ranks when they are not. Read the employment terms, not the title:
+
+| Wording | Meaning | `track` |
+| --- | --- | --- |
+| Japan: 特任 (specially appointed), 特定有期雇用, 任期付き / 任期あり (fixed term), 寄付講座 / 社会連携講座 (endowed or sponsored chair) | fixed-term | `research` or `teaching` per duties; `postdoc` for 特任研究員 |
+| Japan: 任期なし (no fixed term); テニュアトラック | permanent; tenure-track | `tenure-track` |
+| Germany/Austria/Switzerland: befristet (fixed-term); W1 without tenure track | fixed-term | `research` / `postdoc` |
+| Germany/Austria/Switzerland: W1 mit Tenure Track, W2/W3 unbefristet | tenure-track / permanent | `tenure-track` |
+| UK/Ireland/Australia: "fixed-term", "temporary", "maternity cover" | fixed-term | `teaching` / `research` / `visiting` |
+| UK/Ireland/Australia: "permanent", "open-ended", "continuing" Lecturer / Senior Lecturer | permanent | `tenure-track` (`level` per rank) |
+| Netherlands: tenure track (TT) assistant professor | tenure-track | `tenure-track` |
+
+When the posting does not state the term, leave the record out or use the closest non-tenure track with the
+summary saying the term is unstated; never default to `tenure-track`. State a fixed term in the `summary`.
 
 ## How "active" works
 

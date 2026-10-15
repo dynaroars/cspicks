@@ -9,8 +9,8 @@ behavior is changed by editing this file, not the routine.
 
 - **Producers** are cloud routines that each do one bounded maintenance task from a `TASKS/` playbook, then open a PR (data edits) or an Issue (anything needing a decision).
 - **The auditor** is a separate cloud routine (Opus) that reviews those PRs and Issues after they
-  have sat for at least 12 hours, re-verifies them against live sources, and merges, fixes, or
-  closes them. A producer never reviews or merges its own work.
+  have sat for at least 12 hours, plus any data the owner's local sessions pushed straight to
+  `main`, re-verifies them against live sources, and merges, fixes, or closes them. A producer never reviews or merges its own work.
 - **Model-free jobs** (GitHub Actions and the owner's crontab) do mechanical work and raise alarms.
 - **The owner** is needed only for items an agent can't settle (see "Needs an owner decision") and
   for the watchdog Issue.
@@ -106,10 +106,11 @@ them share these rules:
 Follow `TASKS/audit.md`, with these rules taking precedence:
 
 - Scope: open PRs and Issues created at least 12 hours ago, oldest first, skipping anything this
-  session created. At most 5 PRs and 10 Issues per run.
+  session created. At most 5 PRs and 10 Issues per run. Then direct data commits to `main` since the
+  `audit-reviewed` tag (TASKS/audit.md, "Direct commits to `main`"), at most 60 records per run.
 - PRs: check out the PR, merge fresh `main` into it, and run the full validation from the
   conventions. Re-verify a sample of at least a third of the changed facts (and every changed
-  deadline) against the cited official URLs. Require green CI on the PR. Merge with
+  deadline, plus every new or changed job's `track` and `level`) against the cited official URLs. Require green CI on the PR. Merge with
   `gh pr merge <n> --squash --delete-branch`. If any fact is wrong or unsupported, request changes
   (or close) with a comment naming each rejected item and why; never merge a partial subset
   silently.
