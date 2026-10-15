@@ -9,7 +9,7 @@ import { loadGrantsData } from './grants/grants-data.js';
 import { isActive, loadJobsData } from './jobs/jobs-data.js';
 import { escapeHtml, formatRelativeTime } from './shared.js';
 import {
-  type BrowserStatsResponse, fetchTrafficStats, formatTimestamp, renderCategories, renderChart, renderCountries,
+  type BrowserStatsResponse, fetchTrafficStats, formatTimestamp, renderCategories, renderChart, renderCountries, renderTechnology,
   renderDailyTable, renderLoadError, renderMetrics, renderNotice,
 } from './vietprofs/traffic-view.js';
 import type { ConferenceRecord, Grant, Job, RawData } from './types.js';
@@ -137,6 +137,7 @@ export function renderTraffic(data: BrowserStatsResponse) {
     ${renderMetrics(data)}
     <h3>Daily browser traffic</h3>${renderChart(data.daily)}${renderDailyTable(data.daily)}
     <h3>Countries reached</h3>${renderCountries(data)}
+    ${renderTechnology(data) ? `<h3>Browsers and devices</h3>${renderTechnology(data)}` : ''}
     <h3>Page categories</h3>${renderCategories(data)}`;
 }
 

@@ -243,3 +243,10 @@
     overflow-x: hidden;
   }
 }
+
+/* Browser / operating system / device tables (renderTechnology), side by side when there is room. */
+.traffic-technology {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}

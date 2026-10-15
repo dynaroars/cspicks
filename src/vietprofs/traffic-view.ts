@@ -30,6 +30,9 @@ export interface BrowserStatsResponse {
   categories: Array<{ key: string; label: string; pageViews: number; pct: number }>;
   categoryTotal: number;
   categoryPeriod: { startDate: string; endDate: string; days: number };
+  browsers?: Array<{ name: string; pageViews: number; pct: number }>;
+  operatingSystems?: Array<{ name: string; pageViews: number; pct: number }>;
+  devices?: Array<{ name: string; pageViews: number; pct: number }>;
   historicalTransition: { newSeriesStartedAt: string | null; oldSeriesRetainedInternally: true };
   isDemo?: boolean;
 }
@@ -128,6 +131,17 @@ export function renderCountries(data: BrowserStatsResponse): string {
   if (!rows.length) return `${intro}<p class="no-data">No country-level browser data is available for this period.</p>`;
   return `${intro}<div class="stats-table-wrapper"><table class="stats-table"><thead><tr><th>Country</th><th class="num-col">Browser page views</th><th class="num-col">Share</th></tr></thead>
     <tbody>${rows.map(country => `<tr><td><span class="country-cell"><span class="flag-icon" aria-hidden="true">${escapeHtml(country.flag)}</span><span>${escapeHtml(country.name)}</span></span></td><td class="num-col">${formatNumber(country.pageViews)}</td><td class="num-col">${country.pct.toFixed(1)}%</td></tr>`).join('')}</tbody></table></div>`;
+}
+
+/** Browsers, operating systems, and device types side by side; empty when the Worker sent none. */
+export function renderTechnology(data: BrowserStatsResponse): string {
+  const groups: Array<[string, Array<{ name: string; pageViews: number; pct: number }> | undefined]> = [
+    ['Browser', data.browsers], ['Operating system', data.operatingSystems], ['Device', data.devices]];
+  const tables = groups.filter(([, rows]) => rows?.length).map(([label, rows]) => `<div class="stats-table-wrapper"><table class="stats-table"><thead><tr><th>${label}</th><th class="num-col">Page views</th><th class="num-col">Share</th></tr></thead>
+    <tbody>${rows!.slice(0, 10).map(row => `<tr><td>${escapeHtml(row.name)}</td><td class="num-col">${formatNumber(row.pageViews)}</td><td class="num-col">${row.pct.toFixed(1)}%</td></tr>`).join('')}</tbody></table></div>`);
+  if (!tables.length) return '';
+  return `<p class="stat-sub">Browser page views during the last ${days(data.last7Complete.days, 'complete UTC day')}, as reported by the browser's user agent.</p>
+    <div class="traffic-technology">${tables.join('')}</div>`;
 }
 
 export function renderCategories(data: BrowserStatsResponse): string {
