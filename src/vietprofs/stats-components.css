@@ -244,9 +244,31 @@
   }
 }
 
-/* Browser / operating system / device tables (renderTechnology), side by side when there is room. */
+/* Browser / operating system / device tables (renderTechnology), side by side when there is room. The three
+   tables share fixed column widths and never wrap, so their columns and rows line up. */
 .traffic-technology {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: 1rem;
+  align-items: start;
+}
+
+.traffic-technology .stats-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.traffic-technology .stats-table th,
+.traffic-technology .stats-table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.traffic-technology .stats-table th:first-child {
+  width: 50%;
+}
+
+.traffic-technology .stats-table th.num-col {
+  width: 25%;
 }

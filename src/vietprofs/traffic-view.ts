@@ -136,11 +136,11 @@ export function renderCountries(data: BrowserStatsResponse): string {
 /** Browsers, operating systems, and device types side by side; empty when the Worker sent none. */
 export function renderTechnology(data: BrowserStatsResponse): string {
   const groups: Array<[string, Array<{ name: string; pageViews: number; pct: number }> | undefined]> = [
-    ['Browser', data.browsers], ['Operating system', data.operatingSystems], ['Device', data.devices]];
-  const tables = groups.filter(([, rows]) => rows?.length).map(([label, rows]) => `<div class="stats-table-wrapper"><table class="stats-table"><thead><tr><th>${label}</th><th class="num-col">Page views</th><th class="num-col">Share</th></tr></thead>
-    <tbody>${rows!.slice(0, 10).map(row => `<tr><td>${escapeHtml(row.name)}</td><td class="num-col">${formatNumber(row.pageViews)}</td><td class="num-col">${row.pct.toFixed(1)}%</td></tr>`).join('')}</tbody></table></div>`);
+    ['Browser', data.browsers], ['OS', data.operatingSystems], ['Device', data.devices]];
+  const tables = groups.filter(([, rows]) => rows?.length).map(([label, rows]) => `<div class="stats-table-wrapper"><table class="stats-table"><thead><tr><th>${label}</th><th class="num-col">Views</th><th class="num-col">Share</th></tr></thead>
+    <tbody>${rows!.slice(0, 10).map(row => `<tr><td title="${escapeHtml(row.name)}">${escapeHtml(row.name)}</td><td class="num-col">${formatNumber(row.pageViews)}</td><td class="num-col">${row.pct.toFixed(1)}%</td></tr>`).join('')}</tbody></table></div>`);
   if (!tables.length) return '';
-  return `<p class="stat-sub">Browser page views during the last ${days(data.last7Complete.days, 'complete UTC day')}, as reported by the browser's user agent.</p>
+  return `<p class="stat-sub">Browser page views during the last ${days(data.last7Complete.days, 'complete UTC day')}, as reported by the browser's user agent (OS = operating system).</p>
     <div class="traffic-technology">${tables.join('')}</div>`;
 }
 
