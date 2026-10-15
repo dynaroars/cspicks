@@ -66,13 +66,13 @@ playbook before any data-refresh or web-research task.
   schedule explorer over `csconfs/data/conferences.json`.
 - `grants.html` + `src/grants/main.ts` — standalone CS research awards, fellowships, and grants explorer
   over the database in `public/grants.json` (industry gifts, NSF calls, DARPA, DOE, DoD, foundations, societies).
-- `jobs.html` + `src/jobs/main.ts` — US and international academic CS jobs explorer over `public/jobs.json`. It supports country and continent filtering; the state tile map and CSRankings rank chips are US-specific. Modeled on the grants page
+- `jobs.html` + `src/jobs/main.ts` — US and international academic CS jobs explorer over `public/jobs.json`. It supports country and continent filtering; the state tile map is US-specific. The page shows no CSRankings ranks. Modeled on the grants page
   (search box, card list) with keyword filters (`track:`, `dept:`, `level:`, `area:`, `loc:`, `visa:`, `status:`),
   comma-separated alternatives, and a clickable search-help popup in `src/search-keywords.ts`. Legacy filter URL
-  params restore as visible keywords. It has CSRankings rank sorts, a position/school view toggle,
+  params restore as visible keywords. It has deadline/posted/school sorts, a position/school view toggle,
   a US state tile map, and a Markdown export of ★ starred postings (in `src/jobs/jobs-render.ts`). `jobs-data.ts`
   owns loading, the active/closed definition (`isActive`: not closed, deadline not passed, or confirmed within 90 days),
-  filtering, and grouping; `jobs-render.ts` the cards and map; school rank chips load lazily from `loadData()`. Covers any US
+  filtering, and grouping; `jobs-render.ts` the cards and map. Covers any US
   school (CSRankings seeds the crawl list but is not a requirement), crawled by a scheduled routine (TASKS/jobs.md); queue/seed tooling is
   `scripts/jobs-maintain.mjs` with state in `scripts/data/jobs-sources.json` — the durable record of every school's department/hiring
   URL and last-crawl outcome (including R2/R3, liberal-arts, regional, and community-college schools seeded from

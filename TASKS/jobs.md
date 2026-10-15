@@ -26,8 +26,8 @@ Run `npm run validate:jobs` (about a second) before **every** commit; it names e
    whose pages were blocked or unfindable.
 
 `jobs.html` reads `public/jobs.json`: faculty, teaching-track, research, postdoc, visiting, and
-chair/dean openings at US schools and verified international postings. CSRankings only seeds the US crawl list
-and supplies optional rank chips; schools it does not list simply show no rank. **The main US source is crawling each school's own
+chair/dean openings at US schools and verified international postings. CSRankings only seeds the US crawl list;
+the page shows no ranks. **The main US source is crawling each school's own
 department hiring page**, not third-party boards. People can also submit postings through
 `jobs-submit.html`, but a submission is a lead, never a source.
 

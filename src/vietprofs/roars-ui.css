@@ -250,3 +250,55 @@
     right: 1.375rem;
   }
 }
+
+/* Search scope chips: a keyword shown as a removable pill inside .search-input-shell. */
+.search-scope-chip {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.45rem;
+  padding: 0.28rem 0.55rem;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.search-scope-chip:hover,
+.search-scope-chip:focus-visible {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.search-scope-chip:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.search-scope-chip[hidden] {
+  display: none;
+}
+
+.search-scope-chip-remove {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Empty results and the j/k keyboard-selected result (setupKeyboardShortcuts in search-kit.ts). */
+.empty-state {
+  padding: 3rem 0;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.entry-keyboard-selected,
+.card-keyboard-selected {
+  outline: 2px solid var(--bamboo-green);
+  outline-offset: -2px;
+}

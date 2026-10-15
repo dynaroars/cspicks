@@ -83,28 +83,17 @@ test('filters take several values: any value within a filter, every filter at on
   assert.equal((map.match(/aria-pressed="true"/g) || []).length, 2);
 });
 
-test('rank sorts order schools by CSRankings rank, unranked schools last both ways', () => {
-  const rank = { 'Georgia Institute of Technology': 7, 'University of Texas at Austin': 9 };
-  const rankOf = school => rank[school];
-  assert.deepEqual(ids(filterJobs(jobs, { sortBy: 'rank', rankOf, now: NOW })), ['gt-ai-2026', 'ut-sec', 'ucsd-roll']);
-  assert.deepEqual(ids(filterJobs(jobs, { sortBy: 'rank-desc', rankOf, now: NOW })), ['ut-sec', 'gt-ai-2026', 'ucsd-roll']);
-  // A school's own postings go by soonest deadline; without ranks loaded, schools stay grouped by name.
-  const gt = [job({ id: 'gt-late', deadline: '2027-01-30' }), job({ id: 'gt-soon', deadline: '2026-11-20' })];
-  assert.deepEqual(ids(filterJobs(gt, { sortBy: 'rank', rankOf, now: NOW })), ['gt-soon', 'gt-late']);
-  assert.deepEqual(ids(filterJobs(jobs, { sortBy: 'rank', now: NOW })), ['gt-ai-2026', 'ucsd-roll', 'ut-sec']);
-});
-
-test('starred postings export to Markdown with ranks, dates, and safe links', () => {
-  const ranks = school => school === 'Georgia Institute of Technology' ? { rank: 7, areaRanks: { ai: 3 } } : undefined;
+test('starred postings export to Markdown with dates and safe links, without ranks', () => {
   const md = jobsToMarkdown([
     job({ reviewBegins: '2026-11-15', summary: 'Hiring in\n\nall of AI.' }),
     job({ id: 'bad', school: 'Evil U', title: 'Lecturer\n# injected', url: 'javascript:alert(1)', areas: [], anyArea: true, level: null })
-  ], { ranks, now: NOW });
+  ], { now: NOW });
   assert.match(md, /^# Starred academic CS jobs\n/);
   assert.match(md, /on 2026-11-01 · 2 positions\./);
   assert.match(md, /## 1\. Assistant Professor, AI — Georgia Institute of Technology/);
-  assert.match(md, /- \*\*School:\*\* Georgia Institute of Technology \(#7 CSRankings\)/);
-  assert.match(md, /- \*\*Research areas:\*\* .+ \(#3 CSRankings\)/);
+  assert.match(md, /- \*\*School:\*\* Georgia Institute of Technology\n/);
+  assert.match(md, /- \*\*Research areas:\*\* AI\n/);
+  assert.ok(!md.includes('CSRankings'));
   assert.match(md, /- \*\*Status:\*\* Dec 15, 2026 · 45 days left/);
   assert.match(md, /- \*\*Review begins:\*\* Nov 15, 2026/);
   assert.match(md, /- \*\*Official posting:\*\* <https:\/\/example\.edu\/jobs\/1>/);
@@ -157,14 +146,14 @@ test('visa filter and keyword: stated policy, unchecked postings, and "possible"
   assert.deepEqual(sorted({ query: 'visa: bogus' }), []);
 });
 
-test('only an explicit residency restriction gets a tag, after the position and rank tags', () => {
-  const chip = (value, extra = {}) => renderJobCard(job({ visaSponsorship: value, ...extra }), () => undefined, () => false, NOW);
+test('only an explicit residency restriction gets a tag, after the position tags', () => {
+  const chip = (value, extra = {}) => renderJobCard(job({ visaSponsorship: value, ...extra }), () => false, NOW);
   assert.match(chip('no'), /job-chip-visa is-no[^>]*>US citizens or permanent residents</);
   assert.match(chip('no', { country: 'CA' }), />Citizens or permanent residents</);
   for (const value of ['yes', 'case-by-case', 'not-stated', undefined]) assert.ok(!chip(value).includes('job-chip-visa'), String(value));
-  const html = renderJobCard(job({ visaSponsorship: 'no' }), () => ({ rank: 7, areaRanks: { ai: 3 } }), () => false, NOW);
-  const order = ['job-chip-track', 'job-chip-rank', 'job-chip-visa', 'job-chip-area'].map(name => html.indexOf(name));
-  assert.deepEqual([...order].sort((a, b) => a - b), order, 'track, level, rank, visa, then areas');
+  const html = renderJobCard(job({ visaSponsorship: 'no' }), () => false, NOW);
+  const order = ['job-chip-track', 'job-chip-visa', 'job-chip-area'].map(name => html.indexOf(name));
+  assert.deepEqual([...order].sort((a, b) => a - b), order, 'track, level, visa, then areas');
   assert.deepEqual(ids(filterJobs([job({ visaSponsorship: 'no' }), job({ id: 'b', visaSponsorship: 'not-stated' })], { query: 'citizens', now: NOW })), ['gt-ai-2026']);
 
   const md = jobsToMarkdown([job({ visaSponsorship: 'no' }), job({ id: 'b', visaSponsorship: 'not-stated' }), job({ id: 'c' })], { now: NOW });
@@ -182,15 +171,14 @@ test('state tile map places every state exactly once', () => {
   assert.equal(resolveState('atlantis'), null);
 });
 
-test('rendering escapes content, links into Search and Simulator, and shows ranks', () => {
-  const ranks = school => (school === jobs[0].school ? { rank: 7, areaRanks: { ai: 3 } } : undefined);
+test('rendering escapes content, links into Search and Simulator, and shows no CSRankings ranks', () => {
   const hostile = job({ title: '<img src=x onerror=alert(1)>', url: 'javascript:alert(1)' });
-  const html = renderJobCard(hostile, ranks, () => false, NOW);
+  const html = renderJobCard(hostile, () => false, NOW);
   assert.ok(!html.includes('<img src=x'));
   assert.ok(!html.includes('javascript:'));
-  assert.match(renderJobCard(jobs[0], ranks, () => false, NOW), /#7 CSRankings/);
-  assert.match(renderJobCard(jobs[0], ranks, () => false, NOW), /#3 AI/);
-  const school = renderSchoolCard(groupBySchool([jobs[0]])[0], ranks, () => false, NOW);
+  assert.ok(!renderJobCard(jobs[0], () => false, NOW).includes('CSRankings'));
+  const school = renderSchoolCard(groupBySchool([jobs[0]])[0], () => false, NOW);
+  assert.ok(!school.includes('CSRankings'));
   assert.match(school, /index\.html\?q=Georgia/);
   assert.match(school, /simulator\.html\?univ=Georgia/);
   const map = renderStateMap(STATE_TILE_ROWS, { GA: 3 }, 'GA');

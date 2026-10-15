@@ -12,9 +12,7 @@ import { trackView } from '../analytics.js';
 import { areaLabels } from '../shared.js';
 import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { keywordValue, parseKeywordQuery, restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
-import { DEFAULT_END_YEAR, DEFAULT_START_YEAR, filterByYears, loadData } from '../data.js';
 import type { JobFilters, JobSort } from './jobs-data.js';
-import type { RankLookup, SchoolRank } from './jobs-render.js';
 import type { Job } from '../types.js';
 import { createSearchControls, focusSearchOnLoad, renderSearchExamples, sample, searchChoices, updateSearchUrl } from '../search-controls.js';
 
@@ -36,9 +34,6 @@ const labsCount = document.getElementById('labs-count')!;
 let allJobs: Job[] = [];
 let allLabs: Lab[] = [];
 let suggestions: ReturnType<typeof createSearchControls>;
-let schoolRanks = new Map<string, SchoolRank>();
-const ranks: RankLookup = school => schoolRanks.get(school);
-const rankOf = (school: string) => schoolRanks.get(school)?.rank;
 // The continent options are built from the data, so a ?continent= value waits here until they exist.
 let continent = 'world';
 
@@ -62,7 +57,7 @@ function updateUrl(current: ReturnType<typeof state>) {
   });
   updateSearchUrl(next, current.query);
   updatePageMeta({
-    title: current.query ? `${current.query} - Academic CS Jobs - ${SITE_NAME}` : `${SITE_NAME} - Academic CS Jobs`,
+    title: current.query ? `${current.query} - Jobs - ${SITE_NAME}` : `${SITE_NAME} - Jobs`,
     description: current.query
       ? `Academic computer science positions matching “${current.query}” worldwide.`
       : 'Open computer science faculty, teaching, research, and postdoc positions worldwide, plus industry and national-lab research jobs and PhD internships, by school, lab, area, country, and continent.'
@@ -72,7 +67,7 @@ function updateUrl(current: ReturnType<typeof state>) {
 function render() {
   if (!allJobs.length && !statusText.dataset.loaded) return;
   const current = state();
-  const filters: JobFilters = { ...current, rankOf, now: Date.now() };
+  const filters: JobFilters = { ...current, now: Date.now() };
   const favoritesOnly = wantsFavoritesOnly(current.query);
   // Starred postings lead the list; "favorites only" hides the rest.
   const byFavorites = (list: Job[]) => favoritesOnly ? onlyFavorites(list, job => job.id, favorites) : prioritizeFavorites(list, job => job.id, favorites);
@@ -97,9 +92,9 @@ function render() {
       ${allJobs.length ? '<button type="button" class="btn-secondary" id="reset-jobs-filters">Reset all filters</button>' : ''}
     </div>`;
   } else if (current.view === 'school') {
-    results.innerHTML = groupBySchool(shown).map(group => renderSchoolCard(group, ranks, favorites.isFavorite, now)).join('');
+    results.innerHTML = groupBySchool(shown).map(group => renderSchoolCard(group, favorites.isFavorite, now)).join('');
   } else {
-    results.innerHTML = shown.map(job => renderJobCard(job, ranks, favorites.isFavorite, now)).join('');
+    results.innerHTML = shown.map(job => renderJobCard(job, favorites.isFavorite, now)).join('');
   }
 
   const status = parseKeywordQuery(current.query, JOBS_KEYWORD_SPECS).filters.status?.[0] || 'active';
@@ -277,24 +272,13 @@ function exportFavorites() {
   const now = Date.now();
   const starred = onlyFavorites(allJobs, job => job.id, favorites);
   if (!starred.length) return;
-  const ordered = filterJobs(starred, { status: 'all', sortBy: state().sortBy, rankOf, now });
-  const url = URL.createObjectURL(new Blob([jobsToMarkdown(ordered, { ranks, now })], { type: 'text/markdown;charset=utf-8' }));
+  const ordered = filterJobs(starred, { status: 'all', sortBy: state().sortBy, now });
+  const url = URL.createObjectURL(new Blob([jobsToMarkdown(ordered, { now })], { type: 'text/markdown;charset=utf-8' }));
   const link = Object.assign(document.createElement('a'), { href: url, download: exportFileName(now) });
   document.body.append(link);
   link.click();
   link.remove();
   setTimeout(() => URL.revokeObjectURL(url), 0);
-}
-
-/** Progressive enhancement: add CSRankings rank chips once the (large) roster has loaded. */
-async function loadSchoolRanks() {
-  try {
-    const data = filterByYears(await loadData(), DEFAULT_START_YEAR, DEFAULT_END_YEAR, 'us');
-    schoolRanks = new Map(Object.values(data.schools).map(school => [school.name, { rank: school.rank ?? null, areaRanks: school.areaRanks || {} }]));
-    render();
-  } catch (error) {
-    console.warn('School rankings unavailable; showing postings without rank chips.', error);
-  }
 }
 
 async function init() {
@@ -312,7 +296,6 @@ async function init() {
     setupEvents();
     render();
     focusSearchOnLoad(input);
-    void loadSchoolRanks();
     loadLabsData().then(labs => { allLabs = labs; render(); })
       .catch(error => console.warn('Lab directory unavailable.', error));
   } catch (error) {

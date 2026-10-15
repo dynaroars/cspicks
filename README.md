@@ -8,7 +8,7 @@ researchers. Live at **[cspicks.roars.dev](https://cspicks.roars.dev)**.
 - **NSF Funding**: NSF awards for CSRankings faculty.
 - **CS Confs**: conference dates and submission deadlines.
 - **Awards & Grants**: fellowships, research awards, and funding calls.
-- **CS Jobs**: academic CS openings at universities worldwide.
+- **Jobs**: academic CS openings at universities worldwide, plus research jobs, postdocs, and PhD internships at industry and national labs.
 - **Stats**: what the site tracks and recent repository activity.
 
 Every view is a shareable URL. No backend: data comes from public sources and static JSON in `public/`.

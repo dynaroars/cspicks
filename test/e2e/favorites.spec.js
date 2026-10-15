@@ -8,7 +8,7 @@ const jobs = ['alpha', 'bravo', 'charlie'].map((name, index) => ({
   url: `https://example.edu/${name}`, source: 'crawl'
 }));
 
-test('CS Jobs lists favorites first and supports favorites-only keywords without a dropdown', async ({ page }) => {
+test('Jobs lists favorites first and supports favorites-only keywords without a dropdown', async ({ page }) => {
   await page.route('**/jobs.json', route => route.fulfill({ json: jobs }));
   await page.route('https://raw.githubusercontent.com/**', route => route.fulfill({ status: 404, body: '' }));
   await page.goto('jobs.html');

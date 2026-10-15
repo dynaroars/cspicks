@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Fast pre-commit check for the CS Jobs data (TASKS/jobs.md) and labs directory (TASKS/labs.md). Run it
+ * Fast pre-commit check for the Jobs data (TASKS/jobs.md) and labs directory (TASKS/labs.md). Run it
  * before every commit that touches public/jobs.json, public/labs.json, or scripts/data/jobs-sources.json; it prints every bad record and
  * exits 1, so one malformed posting can't reach main and block the Pages deploy.
  *

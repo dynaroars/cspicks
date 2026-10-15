@@ -1,5 +1,5 @@
 /**
- * Academic CS Jobs submission and correction form. Crawling department pages is the main source of
+ * Jobs submission and correction form. Crawling department pages is the main source of
  * postings; this is the lead channel for ones the crawl missed or got wrong.
  */
 import { areaLabels, escapeHtml } from '../shared.js';

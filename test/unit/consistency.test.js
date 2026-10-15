@@ -23,7 +23,7 @@ const EXPECTED_NAV_ITEMS = [
   '☠️ Simulator',
   '📅 CS Confs',
   '💰 Awards & Grants',
-  '🎓 CS Jobs',
+  '🎓 Jobs',
   '🇺🇸 NSF Funding'
 ];
 

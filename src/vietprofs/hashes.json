@@ -1,5 +1,7 @@
 {
-  "roars-ui.css": "eab3679776278d74b4c2a7bd2747eb0167d089d18363ca415d20a43feeff54ee",
+  "roars-ui.css": "479ac08636ce5f136470c843be8cf0d932de49d9fbb7987ae41d02d84548b8d2",
   "stats-components.css": "cc8c9f2673fccfb96e880055f2e7dd4f221cb915d38031bcfe296753abf60041",
-  "traffic-view.ts": "23c0d2dadbb6ba61f99b4a8dd3cac43807f2bf5baa0d73344a1330d1481fa37d"
+  "traffic-view.ts": "23c0d2dadbb6ba61f99b4a8dd3cac43807f2bf5baa0d73344a1330d1481fa37d",
+  "search-kit.ts": "56c76dbe3444918ac6631c16cca2194acf00ed5f6ff9bcd44776d1e559afb5fc",
+  "add-fab.ts": "b7dbd92ee68e6348a46022e27a13238ba65425010e34ba3e1bd329848828c6d8"
 }

@@ -31,9 +31,9 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
-test('CS Jobs shows only active postings by default and reveals older ones on request', async ({ page }) => {
+test('Jobs shows only active postings by default and reveals older ones on request', async ({ page }) => {
   await page.goto('jobs.html');
-  await expect(page.getByRole('link', { name: '🎓 CS Jobs' })).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByRole('link', { name: '🎓 Jobs' })).toHaveAttribute('aria-current', 'page');
   await expect(page.locator('#jobs-search')).toBeEnabled();
   await expect(page.locator('.job-card')).toHaveCount(2);
   await expect(page.locator('.job-title').first()).toContainText('Software Engineering');
@@ -123,23 +123,6 @@ test('several filter values restore from the URL, and older single-value links s
   await expect(page.locator('#jobs-search')).toHaveAttribute('data-query', 'loc: VA');
 });
 
-test('sorts by CSRankings rank in either direction', async ({ page }) => {
-  // George Mason publishes more, so it outranks Illinois in this fixture.
-  await page.route('**/generated-author-info.csv', route => route.fulfill({ contentType: 'text/csv', body: `name,area,year,count,adjustedcount
-Hai Duong,icse,${new Date().getFullYear()},9,6
-Alice Example,pldi,${new Date().getFullYear()},2,1
-` }));
-  await page.goto('jobs.html');
-  await expect(page.locator('.job-chip-rank').first()).toBeVisible();
-  await openDetails(page, '#research-settings');
-  await page.locator('#sort-select').selectOption('rank');
-  await expect(page.locator('.job-school strong').first()).toHaveText('George Mason University');
-  await expect(page).toHaveURL(/sort=rank/);
-  await openDetails(page, '#research-settings');
-  await page.locator('#sort-select').selectOption('rank-desc');
-  await expect(page.locator('.job-school strong').first()).toHaveText('Univ. of Illinois at Urbana-Champaign');
-});
-
 test('favorites menu offers only export and appears with multiple starred postings', async ({ page }) => {
   await page.goto('jobs.html');
   const actions = page.locator('#favorites-actions');
@@ -178,14 +161,15 @@ test('favorites menu offers only export and appears with multiple starred postin
   await expect(actions).toBeHidden();
 });
 
-test('by-school view groups postings and links into Search and Simulator, with rank chips', async ({ page }) => {
+test('by-school view groups postings and links into Search and Simulator, without CSRankings ranks', async ({ page }) => {
   await page.goto('jobs.html?view=school&status=all');
   await expect(page.locator('.job-school-card')).toHaveCount(2);
   const gmu = page.locator('.job-school-card', { hasText: 'George Mason University' });
   await expect(gmu).toContainText('2 positions');
-  await expect(gmu.getByRole('link', { name: /Faculty & rank in Search/ })).toHaveAttribute('href', /index\.html\?q=George/);
+  await expect(gmu.getByRole('link', { name: /Faculty in Search/ })).toHaveAttribute('href', /index\.html\?q=George/);
   await expect(gmu.getByRole('link', { name: /Simulate a hire/ })).toHaveAttribute('href', /simulator\.html\?univ=George/);
-  await expect(gmu.locator('.job-chip-rank').first()).toContainText('CSRankings');
+  await expect(page.locator('#jobs-results')).not.toContainText('CSRankings');
+  await expect(page.locator('#sort-select option[value="rank"]')).toHaveCount(0);
 });
 
 test('submit form is reachable and prefills a correction', async ({ page }) => {

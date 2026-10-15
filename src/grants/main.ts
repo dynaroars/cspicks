@@ -222,7 +222,7 @@ async function init() {
 
 init();
 
-/** By-sponsor view: one group card per sponsor, like CS Jobs' by-school view. */
+/** By-sponsor view: one group card per sponsor, like Jobs' by-school view. */
 function renderSponsorGroup(group: SponsorGrants, isFavorite: (id: string) => boolean) {
   const count = group.grants.length;
   return `<section class="opportunity-group grant-sponsor-group" aria-label="${escapeHtml(group.sponsor)}">
@@ -234,7 +234,7 @@ function renderSponsorGroup(group: SponsorGrants, isFavorite: (id: string) => bo
   </section>`;
 }
 
-/** CS Awards & Grants cards use the same hierarchy as CS Jobs. */
+/** CS Awards & Grants cards use the same hierarchy as Jobs. */
 function renderGrantCard(grant: Grant, isFavorite: (id: string) => boolean = () => false) {
   const eligibilityItems = (grant.eligibility || []).map(item => `<li>${escapeHtml(item)}</li>`).join('');
   const topicChips = (grant.topics || []).map(t => `<button type="button" class="opportunity-chip grant-topic-chip" data-search-topic="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('');

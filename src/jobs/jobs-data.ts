@@ -105,8 +105,8 @@ export const JOBS_KEYWORD_SPECS: KeywordSpec[] = [
 ];
 
 type StatusFilter = 'active' | 'closed' | 'all';
-export type JobSort = 'deadline' | 'posted' | 'school' | 'rank' | 'rank-desc';
-export const JOB_SORTS: JobSort[] = ['deadline', 'posted', 'school', 'rank', 'rank-desc'];
+export type JobSort = 'deadline' | 'posted' | 'school';
+export const JOB_SORTS: JobSort[] = ['deadline', 'posted', 'school'];
 
 function dayParts(value: unknown): [number, number, number] | null {
   const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(value ?? '').trim());
@@ -238,8 +238,6 @@ export interface JobFilters {
   visa?: FilterChoice;
   status?: StatusFilter;
   sortBy?: JobSort;
-  /** Overall CSRankings rank per school, for the rank sorts; schools it cannot rank sort last. */
-  rankOf?: (school: string) => number | null | undefined;
   now?: number;
 }
 
@@ -276,20 +274,9 @@ function sortKey(job: Job, sortBy: JobSort, now: number) {
   return -(dayStart(job.postedDate) ?? dayStart(job.lastSeenAt) ?? 0);
 }
 
-/** Best CSRankings rank first (`rank`) or last (`rank-desc`); unranked schools, or ranks not loaded yet, go last either way. */
-function rankOrder(a: Job, b: Job, rankOf: JobFilters['rankOf'], descending: boolean) {
-  const rank = (job: Job) => {
-    const value = rankOf?.(job.school);
-    return typeof value === 'number' && Number.isFinite(value) ? value : null;
-  };
-  const [first, second] = [rank(a), rank(b)];
-  if (first === null || second === null) return Number(first === null) - Number(second === null);
-  return descending ? second - first : first - second;
-}
-
 /** `ignoreState` lets the state map count jobs per state without the state filter hiding the others. */
 export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = false) {
-  const { query = '', status = 'active', sortBy = 'deadline', rankOf, now = Date.now() } = filters;
+  const { query = '', status = 'active', sortBy = 'deadline', now = Date.now() } = filters;
   const tracks = filterValues(filters.track);
   const depts = filterValues(filters.dept);
   const levels = filterValues(filters.level);
@@ -339,11 +326,6 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
   });
 
   if (sortBy === 'school') return results.sort((a, b) => a.school.localeCompare(b.school) || a.title.localeCompare(b.title));
-  if (sortBy === 'rank' || sortBy === 'rank-desc') {
-    // Schools sharing a rank (and the unranked ones) stay grouped; a school's own postings go by soonest deadline.
-    return results.sort((a, b) => rankOrder(a, b, rankOf, sortBy === 'rank-desc') || a.school.localeCompare(b.school)
-      || sortKey(a, 'deadline', now) - sortKey(b, 'deadline', now) || a.title.localeCompare(b.title));
-  }
   return results.sort((a, b) =>
     sortKey(a, sortBy, now) - sortKey(b, sortBy, now) || a.school.localeCompare(b.school) || a.title.localeCompare(b.title));
 }
@@ -392,7 +374,7 @@ export function stateCounts(jobs: Job[]) {
 
 export interface SchoolJobs { school: string; state: string; jobs: Job[] }
 
-/** Group an already sorted list by school, keeping schools in order of their best-ranked posting. */
+/** Group an already sorted list by school, keeping schools in order of their first posting. */
 export function groupBySchool(jobs: Job[]): SchoolJobs[] {
   const groups = new Map<string, SchoolJobs>();
   jobs.forEach(job => {

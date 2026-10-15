@@ -5,22 +5,9 @@ import { deadlineLabel, DEPARTMENT_LABELS, jobUnitKind, filterValues, formatDay,
 import type { Job } from '../types.js';
 import type { FilterChoice, SchoolJobs } from './jobs-data.js';
 
-export interface SchoolRank { rank: number | null; areaRanks: Record<string, number> }
-export type RankLookup = (school: string) => SchoolRank | undefined;
 type IsFavorite = (id: string) => boolean;
 
 
-function rankChips(job: Job, ranks: RankLookup) {
-  const info = ranks(job.school);
-  if (!info) return '';
-  const chips: string[] = [];
-  if (info.rank) chips.push(`<span class="opportunity-chip job-chip job-chip-rank" title="Overall CSRankings position (US, last 10 years)">#${info.rank} CSRankings</span>`);
-  job.areas.slice(0, 2).forEach(area => {
-    const areaRank = info.areaRanks[area];
-    if (areaRank) chips.push(`<span class="opportunity-chip job-chip job-chip-rank" title="CSRankings position in ${escapeHtml(areaLabels[area] || area)}">#${areaRank} ${escapeHtml(areaLabels[area] || area)}</span>`);
-  });
-  return chips.join('');
-}
 
 /** "US citizens or permanent residents" for a US posting; a posting elsewhere names no country. */
 function residencyLabel(job: Job) {
@@ -28,7 +15,7 @@ function residencyLabel(job: Job) {
 }
 
 /**
- * Sits with the position and rank tags. Only an explicit restriction gets a tag: sponsorship that is
+ * Sits with the position tags. Only an explicit restriction gets a tag: sponsorship that is
  * available, case by case, unstated, or unchecked is the usual case and would just add noise.
  */
 function visaChip(job: Job) {
@@ -38,11 +25,11 @@ function visaChip(job: Job) {
 
 function schoolLinks(school: string) {
   const name = encodeURIComponent(school);
-  return `<a href="index.html?q=${name}" title="Faculty and rankings for ${escapeHtml(school)}">Faculty &amp; rank in Search</a>
+  return `<a href="index.html?q=${name}" title="Faculty at ${escapeHtml(school)}">Faculty in Search</a>
     <a href="simulator.html?univ=${name}" title="Simulate adding a hire at ${escapeHtml(school)}">Simulate a hire</a>`;
 }
 
-export function renderJobCard(job: Job, ranks: RankLookup, isFavorite: IsFavorite = () => false, now = Date.now(), showSchool = true) {
+export function renderJobCard(job: Job, isFavorite: IsFavorite = () => false, now = Date.now(), showSchool = true) {
   const href = safeExternalUrl(job.url);
   const deadline = deadlineLabel(job, now);
   const place = [job.city, job.state].filter(Boolean).join(', ');
@@ -56,7 +43,7 @@ export function renderJobCard(job: Job, ranks: RankLookup, isFavorite: IsFavorit
     job.startDate ? `Start ${formatDay(job.startDate)}` : '',
     job.postedDate ? `Posted ${formatDay(job.postedDate)}` : ''
   ].filter(Boolean);
-  const annotationChips = `${showSchool ? rankChips(job, ranks) : ''}${visaChip(job)}`;
+  const annotationChips = visaChip(job);
 
   return `<article class="opportunity-card job-card" id="${escapeHtml(job.id)}" data-job-id="${escapeHtml(job.id)}">
     ${opportunityHeader({ id: job.id, title: job.title, url: href, kind: 'job', favorite: isFavorite(job.id),
@@ -74,18 +61,16 @@ export function renderJobCard(job: Job, ranks: RankLookup, isFavorite: IsFavorit
   </article>`;
 }
 
-export function renderSchoolCard(group: SchoolJobs, ranks: RankLookup, isFavorite: IsFavorite = () => false, now = Date.now()) {
-  const info = ranks(group.school);
+export function renderSchoolCard(group: SchoolJobs, isFavorite: IsFavorite = () => false, now = Date.now()) {
   const first = group.jobs[0]!;
   return `<section class="opportunity-group job-school-card" aria-label="${escapeHtml(group.school)}">
     <header class="opportunity-group-header">
       <h2><button type="button" class="job-school-btn" data-search-school="${escapeHtml(group.school)}">${escapeHtml(group.school)}</button></h2>
       <p class="job-meta">${first.city ? `${escapeHtml(first.city)}, ` : ''}${escapeHtml(US_STATES[group.state] || group.state)}
-        ${info?.rank ? `· <span class="opportunity-chip job-chip job-chip-rank" title="Overall CSRankings position (US, last 10 years)">#${info.rank} CSRankings</span>` : ''}
         · ${group.jobs.length} position${group.jobs.length === 1 ? '' : 's'}</p>
       ${first.lab ? '' : `<p class="job-school-links">${schoolLinks(group.school)}</p>`}
     </header>
-    <div class="opportunity-group-items">${group.jobs.map(job => renderJobCard(job, ranks, isFavorite, now, false)).join('')}</div>
+    <div class="opportunity-group-items">${group.jobs.map(job => renderJobCard(job, isFavorite, now, false)).join('')}</div>
   </section>`;
 }
 
@@ -116,28 +101,26 @@ export function exportFileName(now = Date.now()) {
   return `cspicks-starred-jobs-${new Date(now).toISOString().slice(0, 10)}.md`;
 }
 
-export function jobsToMarkdown(jobs: Job[], { ranks = () => undefined, now = Date.now() }: { ranks?: RankLookup; now?: number } = {}) {
+export function jobsToMarkdown(jobs: Job[], { now = Date.now() }: { now?: number } = {}) {
   const lines = [
     '# Starred academic CS jobs',
     '',
     `Exported from CS Picks (${SITE_URL}/jobs.html) on ${new Date(now).toISOString().slice(0, 10)} · ${jobs.length} position${jobs.length === 1 ? '' : 's'}.`,
-    'Details come from public hiring pages and community submissions and may be out of date; confirm everything on the official posting before applying. CSRankings ranks are US, last 10 years.',
+    'Details come from public hiring pages and community submissions and may be out of date; confirm everything on the official posting before applying.',
     ''
   ];
 
   jobs.forEach((job, index) => {
-    const info = ranks(job.school);
     const url = safeExternalUrl(job.url);
     const areas = [
       ...job.areas.map(area => {
-        const areaRank = info?.areaRanks[area];
-        return `${areaLabels[area] || area}${areaRank ? ` (#${areaRank} CSRankings)` : ''}`;
+        return areaLabels[area] || area;
       }),
       job.anyArea ? 'Open to all areas' : ''
     ].filter(Boolean);
     const fields: Array<[string, string]> = [
       ['Status', deadlineLabel(job, now).text],
-      [job.lab ? 'Employer' : 'School', `${job.school}${info?.rank ? ` (#${info.rank} CSRankings)` : ''}`],
+      [job.lab ? 'Employer' : 'School', job.school],
       ['Department', `${job.department} (${DEPARTMENT_LABELS[jobUnitKind(job)]})`],
       ['Location', [job.city, US_STATES[job.state] || job.state].filter(Boolean).join(', ')],
       ['Position', [TRACK_LABELS[job.track], job.level ? LEVEL_LABELS[job.level] : ''].filter(Boolean).join(' · ')],
