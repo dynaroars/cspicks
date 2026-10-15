@@ -12342,15 +12342,23 @@
     "region": "northamerica",
     "jobsUrl": "https://employment.cs.queensu.ca/",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
-    "outcome": "none_found",
-    "summary": "Reviewed the official School of Computing employment portal; it states there are no open positions. Its Assistant/Associate Professor Computational Intelligence call closed July 27, 2026.",
+    "lastCheckedAt": "2026-10-15T00:00:00Z",
+    "outcome": "leads_found",
+    "summary": "School of Computing portal still lists no open positions (2026-10-15). ECE (Smith Engineering) has a live search for two Tier 2 CRC / Mitchell tenure-track positions in supercomputing/HPC, deadline 2026-12-01. ECE also lists W27 per-course term-adjunct roles (not recorded). A user reports more computer-engineering searches opening soon; recheck the ECE page in November.",
     "checkedUrls": [
       "https://employment.cs.queensu.ca/",
-      "https://www.cs.queensu.ca/news/category/news/"
+      "https://www.cs.queensu.ca/news/category/news/",
+      "https://smithengineering.queensu.ca/ece/about/employment-opportunities.html",
+      "https://smithengineering.queensu.ca/ece/_files/CRC-Mitchell%20Posting_ECE_Supercomputing_092026.pdf",
+      "https://apply.ca1.interfolio.com/124076"
     ],
-    "relatedUnits": [],
-    "relatedCheckedAt": null,
+    "relatedUnits": [
+      {
+        "name": "Department of Electrical and Computer Engineering (Smith Engineering)",
+        "url": "https://smithengineering.queensu.ca/ece/about/employment-opportunities.html"
+      }
+    ],
+    "relatedCheckedAt": "2026-10-15T00:00:00Z",
     "deferredUntil": null
   },
   {

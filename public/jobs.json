@@ -10536,14 +10536,14 @@
     "department": "Department of Electrical and Computer Engineering",
     "title": "Assistant or Associate Professor in Computer Engineering",
     "track": "tenure-track",
-    "level": "associate",
+    "level": "open",
     "areas": [
       "arch",
       "sec",
       "bed",
       "comm"
     ],
-    "state": "",
+    "state": "BC",
     "city": "Vancouver",
     "country": "CA",
     "deadline": "2026-12-07",
@@ -14288,5 +14288,31 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "queensu-ece-crc-mitchell-supercomputing-hpc-2027",
+    "school": "Queen’s University",
+    "department": "Department of Electrical and Computer Engineering",
+    "title": "Tier 2 Canada Research Chair & Mitchell Funded Tenure-Track or Tenured Faculty Positions in Supercomputing/High Performance Computing",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "hpc",
+      "arch",
+      "comm"
+    ],
+    "country": "CA",
+    "state": "ON",
+    "city": "Kingston",
+    "deadline": "2026-12-01",
+    "rolling": false,
+    "startDate": "2027-09-01",
+    "postedDate": "2026-09-15",
+    "lastSeenAt": "2026-10-15",
+    "url": "https://apply.ca1.interfolio.com/124076",
+    "visaSponsorship": "case-by-case",
+    "summary": "Two tenure-track/tenured Assistant or Associate Professor positions (a Tier 2 Canada Research Chair and a Mitchell-funded chair) in supercomputing, HPC, and extreme-scale systems, including system design, filesystems, performance, middleware, and networking. Reduced teaching load; salary 150,000–180,000 CAD; Canadian engineering licensure or eligibility required.",
+    "source": "submission",
+    "verified": true
   }
 ]
