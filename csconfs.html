@@ -22,9 +22,9 @@
     <header>
       <div class="title-row">
         <a class="site-title-link" href="index.html" aria-label="Reset CS Picks"><h1>CS Picks</h1></a>
-        <a class="icon-link github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
-        <a class="icon-link health-link" href="stats.html" aria-label="Stats and data health" title="Stats &amp; data health"></a>
         <a class="icon-link roars-link" href="https://roars.dev" target="_blank" rel="noopener noreferrer" aria-label="ROARS Lab" title="ROARS Lab"></a>
+        <a class="icon-link health-link" href="stats.html" aria-label="Stats and data health" title="Stats &amp; data health"></a>
+        <a class="icon-link github-link" href="https://github.com/dynaroars/cspicks" target="_blank" rel="noopener noreferrer" aria-label="View CS Picks on GitHub" title="View source on GitHub"></a>
       </div>
       <nav class="top-nav" aria-label="Primary navigation">
         <a href="index.html">🔎 Search</a><a href="simulator.html">☠️ Simulator</a>
@@ -33,9 +33,9 @@
     </header>
     <section class="search-section">
       <div class="search-intro"><p>Find conference dates and submission timelines by venue or research area.</p></div>
-      <div class="search-container"><div class="universal-search">
+      <div class="search-box"><div class="search-fields">
         <div class="search-input-shell"><input type="search" class="search-input" role="combobox" id="csconfs-search" placeholder="Loading conference schedules…" disabled autofocus autocomplete="off" aria-autocomplete="list" aria-controls="universal-suggestions" aria-expanded="false"></div>
-        <div id="universal-suggestions" class="universal-suggestions" role="listbox" hidden></div>
+        <div id="universal-suggestions" class="search-suggestion-panel" role="listbox" hidden></div>
       </div></div>
       <div class="search-examples" aria-label="Try conference schedule searches"><span class="examples-label">Try:</span><span id="csconfs-examples" class="search-examples-row"></span></div>
       <details id="research-settings" class="search-options"><summary>Dataset settings</summary><div id="filter-bar"></div></details>

@@ -407,17 +407,9 @@ footer button:hover {
   text-decoration: underline;
 }
 
-/* Universal Search Container */
-.search-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
+/* Search box (roars-ui .search-box / .search-fields from VietProfs); only the spacing below it is ours. */
+.search-section .search-box {
   margin-bottom: 0.85rem;
-}
-
-.universal-search {
-  position: relative;
-  width: 100%;
 }
 
 .search-help-list {
@@ -438,28 +430,15 @@ footer button:hover {
   font-family: var(--font-mono);
 }
 
+/* roars-ui's .search-help-panel, plus room for CS Picks' longer keyword lists. */
 .search-help-panel {
-  position: absolute;
-  top: calc(100% + 0.4rem);
-  right: 0;
   z-index: 210;
-  box-sizing: border-box;
   width: min(460px, 100%);
   max-height: min(600px, 65vh);
   overflow-y: auto;
-  padding: 0.9rem 1rem;
-  color: var(--text-primary);
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  font-size: var(--text-sm);
   line-height: 1.5;
 }
-
-.search-help-panel[hidden] { display: none; }
-.search-help-panel p { margin: 0.5rem 0; }
-.search-help-panel code { color: var(--primary-color); overflow-wrap: anywhere; }
-.search-help-panel .search-help-list li { margin-bottom: 0.75rem; }
+.search-help-panel .search-help-list li { margin-bottom: 0.4rem; }
 .search-help-close {
   padding: 0.35rem 0.65rem;
   border: 1px solid var(--border-color);
@@ -470,78 +449,11 @@ footer button:hover {
   cursor: pointer;
 }
 
-/* Suggestions Dropdown */
-.universal-suggestions {
-  position: absolute;
-  top: calc(100% + 0.25rem);
-  right: 0;
-  left: 0;
+/* roars-ui's .search-suggestion-panel, scrollable and above result cards for CS Picks' grouped lists. */
+.search-suggestion-panel {
   z-index: 200;
   max-height: min(480px, 62vh);
   overflow-y: auto;
-  padding: 0.4rem;
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-}
-
-.universal-suggestions[hidden] {
-  display: none;
-}
-
-.universal-suggestion-group {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding: 0.65rem 0.85rem 0.3rem;
-  color: var(--text-secondary);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-.universal-suggestion-count {
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: none;
-}
-
-.universal-suggestion {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 100%;
-  padding: 0.7rem 0.85rem;
-  color: var(--text-primary);
-  background: transparent;
-  border: 0;
-  border-radius: 10px;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-}
-
-.universal-suggestion small {
-  overflow: hidden;
-  color: var(--text-secondary);
-  font-size: var(--text-xs);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.universal-suggestion:hover,
-.universal-suggestion.active {
-  background: var(--hover-bg);
-}
-
-.universal-suggestion-empty {
-  padding: 1rem;
-  color: var(--text-secondary);
-  text-align: center;
 }
 
 /* Example Searches */
@@ -701,12 +613,6 @@ option {
   .filter-sentence-prefix {
     width: 100%;
     text-align: center;
-  }
-
-  .universal-suggestion {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.1rem;
   }
 }
 

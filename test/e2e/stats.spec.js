@@ -127,13 +127,13 @@ test('unavailable visitor traffic shows a retry button in its own section only',
 });
 
 for (const file of PAGES) {
-  test(`${file} header shows GitHub, stats, and ROARS icons at one size`, async ({ page }) => {
+  test(`${file} header shows ROARS, stats, and GitHub icons at one size`, async ({ page }) => {
     await page.route('https://raw.githubusercontent.com/**', route => route.fulfill({ status: 404, body: '' }));
     await page.route('https://api.github.com/**', route => route.fulfill({ status: 404, body: '' }));
     await page.goto(file);
     const icons = page.locator('.title-row .icon-link');
     await expect(icons).toHaveCount(3);
-    expect(await icons.evaluateAll(els => els.map(el => el.classList[1]))).toEqual(['github-link', 'health-link', 'roars-link']);
+    expect(await icons.evaluateAll(els => els.map(el => el.classList[1]))).toEqual(['roars-link', 'health-link', 'github-link']);
     await expect(page.locator('.health-link')).toHaveAttribute('href', 'stats.html');
     const boxes = await icons.evaluateAll(els => els.map(el => {
       const box = el.getBoundingClientRect();

@@ -177,7 +177,7 @@ test('funding suggestions complete both sides of a vs query', async ({ page }) =
   // Comparing only accepts universities and people, so programs drop out.
   await page.locator('#funding-search').fill('George Mason University vs Illinois');
   await expect(listbox).not.toContainText('NSF programs');
-  const option = listbox.locator('.universal-suggestion', { hasText: 'Univ. of Illinois' }).first();
+  const option = listbox.locator('.search-suggestion', { hasText: 'Univ. of Illinois' }).first();
   await expect(option).toBeVisible();
   await option.click();
   await expect(page.locator('#funding-search')).toHaveAttribute('data-query', 'George Mason University vs Univ. of Illinois at Urbana-Champaign');
@@ -212,7 +212,7 @@ test('funding keywords autocomplete their values while preserving other filters'
   await input.fill('institution: "George Mason University" program: ');
   const option = page.getByRole('option').first();
   await expect(option).toBeVisible();
-  const label = await option.locator('span').textContent();
+  const label = await option.locator('.search-suggestion-label').textContent();
   await option.click();
   await expect(input).toHaveAttribute('data-query', new RegExp('^institution: "George Mason University" program: '));
   expect(await input.getAttribute('data-query')).toContain(label);

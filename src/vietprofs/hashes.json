@@ -1,7 +1,8 @@
 {
-  "roars-ui.css": "479ac08636ce5f136470c843be8cf0d932de49d9fbb7987ae41d02d84548b8d2",
+  "roars-ui.css": "9e6bc85709bdce9d2738f63d6e9c1f9be01ebfbe5e0036cab57c56f50ff897a0",
   "stats-components.css": "3ec07c64fc5a3157299e62ea736efa722e518c82bf7d9cdcc9bebca8606b3fc7",
   "traffic-view.ts": "d62d07fe9e962fd2df504ac58a92f467b2836b89d4df4b0d616e76f715ad40d5",
-  "search-kit.ts": "56c76dbe3444918ac6631c16cca2194acf00ed5f6ff9bcd44776d1e559afb5fc",
-  "add-fab.ts": "b7dbd92ee68e6348a46022e27a13238ba65425010e34ba3e1bd329848828c6d8"
+  "search-kit.ts": "469abeeb9f8e84167cbeb75a6debb361f6cd3d541e0e2bdd0c12cf076cdf4906",
+  "add-fab.ts": "b7dbd92ee68e6348a46022e27a13238ba65425010e34ba3e1bd329848828c6d8",
+  "back-to-top.ts": "34f72f640468ce4ad91ba1eafe16af657cbd463c4de1e69a4ea476dd69438c68"
 }

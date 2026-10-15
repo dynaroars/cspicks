@@ -87,8 +87,8 @@ playbook before any data-refresh or web-research task.
   postdoc pages; it follows the same search box. Individual lab postings sit in `public/jobs.json` with a `lab` id
   (tracks `industry`, `internship`, `postdoc`) instead of a jobs-sources school (TASKS/labs.md).
 - `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
-- `stats.html` + `src/stats.ts` — site stats (roster, conferences, awards, jobs; never the large NSF snapshot) and repository activity from the GitHub API. Every page header links to it via the health icon, between the GitHub and
-  ROARS Lab icons (all three share `.icon-link`; `test/unit/consistency.test.js` enforces the header on every page).
+- `stats.html` + `src/stats.ts` — site stats (roster, conferences, awards, jobs; never the large NSF snapshot) and repository activity from the GitHub API. Every page header links to it via the health icon, between the ROARS Lab and
+  GitHub icons (VietProfs' order; all three share `.icon-link`; `test/unit/consistency.test.js` enforces the header on every page).
 - `grants-submit.html` + `src/grants/submit.ts` — single unified submission/correction form for proposing
   new CS research awards or updating existing entries via GitHub Issue or email.
 - `README.md` — a deliberately brief overview (features, dev commands, data sources, license); keep it short.
@@ -100,8 +100,10 @@ playbook before any data-refresh or web-research task.
   with the right history maps; `filters.toParams()` writes the shared URL shape. Every page uses it, so
   the control ids (`#region-select`, `#start-year`, `#end-year`, `#conf-set`, `#historical-mode`) are the
   same everywhere.
-- `src/vietprofs/` — verbatim copies of VietProfs' shared UI (`roars-ui.css`: design tokens, search field,
-  floating "+"; plus the visitor-traffic view). VietProfs is the baseline look: edit these there, then run
+- `src/vietprofs/` — verbatim copies of VietProfs' shared UI: `roars-ui.css` (design tokens, header icons,
+  search box, suggestion list, scope chips, help popup, tags, tooltips, empty state, back-to-top, floating "+"),
+  `search-kit.ts` (suggestion controller, keyboard shortcuts, help, commands), `back-to-top.ts`, `add-fab.ts`,
+  and the visitor-traffic view. `src/suggestion-box.ts` is a thin adapter over search-kit's `createSearchController`. VietProfs is the baseline look: edit these there, then run
   `npm run sync:vietprofs-ui`; `test/unit/vietprofs-ui.test.js` fails on local edits. `style.css` `@import`s
   `roars-ui.css` first and holds only cspicks-specific rules on top.
 - `src/charts.ts` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges

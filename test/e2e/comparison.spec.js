@@ -159,10 +159,10 @@ test('suggestions list every match and complete the second side of a vs query', 
   await page.locator('#main-search').fill('Duong');
   const listbox = page.locator('#universal-suggestions');
   await expect(listbox).toBeVisible();
-  await expect(listbox.locator('.universal-suggestion')).toHaveCount(1);
+  await expect(listbox.locator('.search-suggestion')).toHaveCount(1);
 
   await page.locator('#main-search').fill('George Mason University vs Univ');
-  const option = listbox.locator('.universal-suggestion', { hasText: 'Univ. of Illinois' });
+  const option = listbox.locator('.search-suggestion', { hasText: 'Univ. of Illinois' });
   await expect(option).toBeVisible();
   await expect(page.locator('#comparison-results')).toBeVisible();
   await option.click();

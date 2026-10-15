@@ -6,6 +6,7 @@ import type { KeywordSpec } from './search-keywords.js';
 import { initResultActions } from './result-actions.js';
 import { mountKeywordChips } from './keyword-chips.js';
 import { sample as sampleItems, setupKeyboardShortcuts } from './vietprofs/search-kit.js';
+import { setupBackToTop } from './vietprofs/back-to-top.js';
 import { escapeHtml } from './shared.js';
 
 type SuggestionOptions = Parameters<typeof createSuggestionBox>[0];
@@ -88,6 +89,14 @@ export function wireSearchInput(input: HTMLInputElement, onInput: (query: string
   });
 }
 
+/** VietProfs' floating back-to-top button (roars-ui .back-to-top + back-to-top.ts) on every long results page. */
+function mountBackToTop() {
+  if (document.getElementById('back-to-top')) return;
+  document.body.insertAdjacentHTML('beforeend', `<button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg></button>`);
+  setupBackToTop(document.getElementById('back-to-top'));
+}
+
 export function createSearchControls(options: Omit<SuggestionOptions, 'onSelect'> & {
   specs: KeywordSpec[];
   example: string;
@@ -103,6 +112,7 @@ export function createSearchControls(options: Omit<SuggestionOptions, 'onSelect'
   mountKeywordHelp(input, specs, options.example, options.usage);
   const suggestions = createSuggestionBox({
     ...options,
+    onChange: () => (onInput || onQuery)(input.value),
     getGroups: (query, context) => {
       const scoped = context.comparing ? null : keywordSuggestions(input.value, specs, getKeywordSources());
       if (scoped) return scoped;
@@ -121,7 +131,7 @@ export function createSearchControls(options: Omit<SuggestionOptions, 'onSelect'
       if (item.query !== undefined) {
         input.value = item.query;
         onQuery(input.value);
-        if (/\:\s*$/.test(input.value)) suggestions.render(input.value);
+        if (/\:\s*$/.test(input.value)) suggestions.render();
       } else if (options.onSelect) options.onSelect(item, prefix);
       else { input.value = `${prefix}${item.value || item.label}`; onQuery(input.value); }
     }
@@ -133,11 +143,8 @@ export function createSearchControls(options: Omit<SuggestionOptions, 'onSelect'
     input.focus();
     suggestions.close();
   };
-  input.addEventListener('input', () => {
-    suggestions.render(input.value);
-    (onInput || onQuery)(input.value);
-  });
   wireResultShortcuts(input);
+  mountBackToTop();
   examples?.addEventListener('click', event => {
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-search-example]') : null;
     if (button?.dataset.searchExample) setQuery(button.dataset.searchExample);

@@ -38,12 +38,12 @@ describe('site-wide navigation and markup consistency', () => {
       // Check title-row branding
       assert.ok(content.includes('class="site-title-link"'), `${file} missing .site-title-link`);
       assert.ok(!content.includes('FAQ, methods and data'), `${file} still contains the removed README question-mark link`);
-      // GitHub, stats/health, and ROARS Lab icons, in that order, sharing the .icon-link style.
+      // ROARS Lab, stats/health, and GitHub icons (VietProfs' order: ROARS before GitHub), sharing the .icon-link style.
       const icons = Array.from(content.matchAll(/<a class="icon-link ([a-z-]+)" href="([^"]+)"/g)).map(m => [m[1], m[2]]);
       assert.deepEqual(icons, [
-        ['github-link', 'https://github.com/dynaroars/cspicks'],
+        ['roars-link', 'https://roars.dev'],
         ['health-link', 'stats.html'],
-        ['roars-link', 'https://roars.dev']
+        ['github-link', 'https://github.com/dynaroars/cspicks']
       ], `${file} header icons`);
       assert.ok(!/data-health|dataHealth/.test(content), `${file} still has the removed data-health popup`);
 
