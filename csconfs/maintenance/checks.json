@@ -299,11 +299,12 @@
       "proposals": []
     },
     "WACV": {
-      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
       "outcome": "incomplete",
-      "summary": "WACV 2027 site confirms Jan 4-8 2027 and Oct 14 2026 decisions; no WACV 2028 site yet (year menu lists 2027, 2026 only). WACV 2026 final-decision date not stated on the series page; no change.",
+      "summary": "WACV 2027 home re-confirms Jan 4-8 2027 and Oct 14 2026 decisions. No WACV 2028 page (Conferences/2028 is 404); 2028 stays unannounced. WACV 2026 records left as is (not edited).",
       "checkedUrls": [
-        "https://wacv.thecvf.com/"
+        "https://wacv.thecvf.com/",
+        "https://wacv.thecvf.com/Conferences/2028/"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -400,12 +401,11 @@
       "proposals": []
     },
     "IJCAI": {
-      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
       "outcome": "incomplete",
-      "summary": "IJCAI future-conferences page confirms chairs for IJCAI-27..30 (already recorded); hosts/dates for 2028-2030 not announced; no change.",
+      "summary": "ijcai.org lists only IJCAI-27 (Kyoto Aug 7-13; Hengqin Aug 15-17); no 2028-2030 dates or places published.",
       "checkedUrls": [
-        "https://www.ijcai.org/",
-        "https://www.ijcai.org/future_conferences"
+        "https://www.ijcai.org/"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -618,12 +618,12 @@
       "proposals": []
     },
     "PODC": {
-      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
       "outcome": "incomplete",
-      "summary": "PODC 2027 (Reykjavik, June 21-25) confirmed; CFP page says \"watch this space\", deadlines unannounced; no change.",
+      "summary": "PODC 2027 home/CFP pages confirm June 21-25 2027, Reykjavik University; CFP page still says to watch for deadlines. No deadline fields changed.",
       "checkedUrls": [
         "https://www.podc.org/podc2027/",
-        "https://www.podc.org/podc2027/call-for-papers"
+        "https://www.podc.org/podc2027/call-for-papers/"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -650,9 +650,9 @@
       "proposals": []
     },
     "KDD": {
-      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
       "outcome": "incomplete",
-      "summary": "KDD 2027 cycle 1 dates, date, place re-confirmed on official site; cycle 2 (Feb 2027) dates still unannounced; no change.",
+      "summary": "KDD 2027 cycle 1 dates (Jul 19/26, rebuttal Sep 29-Oct 13, notification Nov 14 2026) re-confirmed on the official research-track CFP. Cycle 2 dates still unannounced. No changes.",
       "checkedUrls": [
         "https://kdd2027.kdd.org/",
         "https://kdd2027.kdd.org/research-track-call-for-papers/"
@@ -661,27 +661,14 @@
       "proposals": []
     },
     "IROS": {
-      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
       "outcome": "incomplete",
-      "summary": "IROS 2027 site gives dates Sept 27-Oct 1 (corrected from Sept 26) and Florence venue; no paper deadline, notification or chairs published there, so the stored 2027-03-01 deadline could not be re-verified. IROS 2028 unchanged (no official edition site found).",
+      "summary": "Official IROS 2027 site (2027.ieee-iros.org) returned HTTP 503 on two attempts; nothing verified. IROS 2028 link is still a RAS minutes PDF; no edition page found.",
       "checkedUrls": [
-        "https://2027.ieee-iros.org/",
-        "https://2027.ieee-iros.org/call-for-papers/"
+        "https://2027.ieee-iros.org/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://2027.ieee-iros.org/",
-              "evidence": "Home page lists September 27 to October 1, 2027, Fortezza da Basso, Florence"
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "ESOP": {
       "lastCheckedAt": "2026-10-11T20:15:21.686Z",
@@ -724,12 +711,11 @@
       "proposals": []
     },
     "ICRA": {
-      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
       "outcome": "incomplete",
-      "summary": "IEEE RAS event page for ICRA 2028 lists Rio de Janeiro (Riocentro), May 15-19 2028, paper deadline Sept 15 2027, but the edition site 2028.ieee-icra.org returned HTTP 503 and the record notes a prior conflict between sponsor listings; left unchanged pending the official edition site.",
+      "summary": "ICRA 2027 site confirms May 24-28 2027, Seoul; submission closed, no new facts. No ICRA 2028 information on that site.",
       "checkedUrls": [
-        "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
-        "https://2028.ieee-icra.org"
+        "https://2027.ieee-icra.org/"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -767,73 +753,35 @@
       ]
     },
     "HPDC": {
-      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
-      "outcome": "incomplete",
-      "summary": "HPDC 2026 (Cleveland, OH, July 13-16) added with date/place only; deadlines and chairs not on fetched pages.",
+      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "outcome": "not_found",
+      "summary": "HPDC site lists only HPDC-35 (July 13-16 2026, Cleveland); no 2027 edition and no 2026 submission timeline or chairs on the site root.",
       "checkedUrls": [
-        "https://hpdc.sci.utah.edu/",
-        "https://hpdc.sci.utah.edu/2026/"
+        "https://hpdc.sci.utah.edu/"
       ],
-      "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "add",
-          "year": 2026,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://hpdc.sci.utah.edu/2026/",
-              "evidence": "July 13-16, 2026, Case Western Reserve University, Cleveland"
-            }
-          ]
-        }
-      ]
+      "deferredUntil": "2026-11-05T20:15:32.150Z",
+      "proposals": []
     },
     "ISMB": {
-      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
-      "outcome": "incomplete",
-      "summary": "ISMB 2026 (Washington, DC, July 12-16) added with date/place only; proceedings deadlines and chairs not stated on fetched page.",
+      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "outcome": "not_found",
+      "summary": "ISMB 2026 page confirms July 12-16 2026, Washington DC; no chairs or ISMB 2027 information found.",
       "checkedUrls": [
-        "https://www.iscb.org/ismb2026",
-        "https://www.iscb.org/ismb2026-program/conference-chairs"
+        "https://www.iscb.org/ismb2026"
       ],
-      "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "add",
-          "year": 2026,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://www.iscb.org/ismb2026",
-              "evidence": "July 12-16, 2026, Washington Hilton, Washington, D.C."
-            }
-          ]
-        }
-      ]
+      "deferredUntil": "2026-11-05T20:15:32.150Z",
+      "proposals": []
     },
     "RECOMB": {
-      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
       "outcome": "incomplete",
-      "summary": "RECOMB 2027 (Toronto, May 17-20) added with date/place only; deadlines and chairs not found on fetched pages.",
+      "summary": "RECOMB 2027 home confirms May 17-20 2027, Toronto; key-dates page (guessed URL) returned 404 and the home page text shows no deadlines. Unverified.",
       "checkedUrls": [
-        "https://recomb.org/",
-        "https://recomb.org/recomb2027"
+        "https://recomb.org/recomb2027",
+        "https://recomb.org/recomb2027/key-dates/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "add",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://recomb.org/recomb2027",
-              "evidence": "May 17-20, 2027 with satellites May 15-16, Toronto"
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "RTAS": {
       "lastCheckedAt": "2026-10-13T20:16:13.830Z",
@@ -856,6 +804,68 @@
           ]
         }
       ]
+    },
+    "MLSys": {
+      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "outcome": "complete",
+      "summary": "MLSys 2027 (Bellevue, June 21-25 2027): confirmed paper deadline Oct 30 2026, reviews/response/notification dates, and chairs from the official site. No abstract deadline listed.",
+      "checkedUrls": [
+        "https://mlsys.org/",
+        "https://mlsys.org/Conferences/2027/CallForResearchPapers"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "deadline",
+              "url": "https://mlsys.org/Conferences/2027/CallForResearchPapers",
+              "evidence": "Paper submission deadline Oct 30, 2026 20:00 UTC; author responses Jan 21, 2027; notifications Feb 28, 2027."
+            },
+            {
+              "field": "place/date/chairs",
+              "url": "https://mlsys.org/",
+              "evidence": "Bellevue, WA, June 21-25 2027; General Chair Joseph Gonzalez; Program Chairs Rashmi Vinayak and Song Han."
+            }
+          ]
+        }
+      ]
+    },
+    "FAccT": {
+      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "outcome": "incomplete",
+      "summary": "FAccT 2027: CFP confirms dates, deadlines, and program chairs. Venue (Porto, Portugal per home page banner) not tied to the year by any page, so place left unset; general chairs unlisted.",
+      "checkedUrls": [
+        "https://facctconference.org/",
+        "https://facctconference.org/2027/cfp.html"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "deadline",
+              "url": "https://facctconference.org/2027/cfp.html",
+              "evidence": "Abstract Oct 27, paper Nov 3, 2026 (AoE); rebuttal Jan 28, 2027; notification Mar 23, 2027; conference June 21-24, 2027; four program chairs listed."
+            }
+          ]
+        }
+      ]
+    },
+    "COLM": {
+      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "outcome": "not_found",
+      "summary": "COLM 2027 not announced; colm.cc lists only COLM 2026 (Oct 6-9, 2026, San Francisco) and past years.",
+      "checkedUrls": [
+        "https://colmweb.org/",
+        "https://colm.cc/"
+      ],
+      "deferredUntil": "2026-11-05T20:15:32.150Z",
+      "proposals": []
     }
   }
 }
