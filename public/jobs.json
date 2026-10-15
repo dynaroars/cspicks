@@ -12116,7 +12116,7 @@
     "school": "University of Tokyo",
     "department": "Graduate School of Information Science and Technology",
     "title": "Specially Appointed Associate Professor, Lecturer, or Assistant Professor, Generative AI Model Risk Evaluation Framework",
-    "track": "tenure-track",
+    "track": "research",
     "level": "assistant",
     "areas": [
       "ai"
@@ -12126,10 +12126,12 @@
     "country": "JP",
     "deadline": "2026-11-16",
     "rolling": false,
-    "lastSeenAt": "2026-10-13",
+    "lastSeenAt": "2026-10-15",
+    "startDate": "2027-04-01",
+    "visaSponsorship": "not-stated",
     "url": "https://www.i.u-tokyo.ac.jp/news/files/Jori_003_CS_202620261007_JPN_2.pdf",
-    "summary": "(research and education on risk evaluation for generative AI models and applications; deadline 2026-11-16; one position)",
-    "source": "crawl",
+    "summary": "(fixed-term, non-tenure-track position in an industry-sponsored chair on risk evaluation for generative AI models and applications; one-year contract from 2027-04-01, renewable up to twice and ending no later than 2029-11-30; requires a PhD and research in NLP/generative AI or software engineering, plus Japanese and English; deadline 2026-11-16)",
+    "source": "submission",
     "verified": true
   },
   {
