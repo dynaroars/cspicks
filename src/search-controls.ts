@@ -4,6 +4,7 @@ import type { SuggestionItem } from './suggestion-box.js';
 import { keywordSuggestions, mountKeywordHelp } from './search-keywords.js';
 import type { KeywordSpec } from './search-keywords.js';
 import { initResultActions } from './result-actions.js';
+import { mountKeywordChips } from './keyword-chips.js';
 import { escapeHtml } from './shared.js';
 
 type SuggestionOptions = Parameters<typeof createSuggestionBox>[0];
@@ -100,6 +101,7 @@ export function createSearchControls(options: Omit<SuggestionOptions, 'onSelect'
       else { input.value = `${prefix}${item.value || item.label}`; onQuery(input.value); }
     }
   });
+  mountKeywordChips(input, specs, () => suggestions.close());
   const setQuery = (query: string) => {
     input.value = query;
     onQuery(query);

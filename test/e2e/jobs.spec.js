@@ -55,14 +55,14 @@ test('search, filters, and the state map narrow the list', async ({ page }) => {
   await page.goto('jobs.html');
   await page.locator('#jobs-search').fill('teaching');
   await expect(page.locator('.job-card')).toHaveCount(1);
-  await page.locator('#jobs-search').fill('');
+  await page.locator('#jobs-search').press('Escape');
 
   await page.locator('#jobs-search').fill('track: tenure-track');
   await expect(page.locator('.job-card')).toHaveCount(1);
   // Comma-separated alternatives preserve the old multi-choice filters.
   await page.locator('#jobs-search').fill('track: tenure-track,teaching');
   await expect(page.locator('.job-card')).toHaveCount(2);
-  await page.locator('#jobs-search').fill('');
+  await page.locator('#jobs-search').press('Escape');
   await page.locator('#jobs-status').click();
 
   // States are picked on the map only; there is no state dropdown.
@@ -74,7 +74,7 @@ test('search, filters, and the state map narrow the list', async ({ page }) => {
   await expect(virginia).toHaveAttribute('aria-label', 'Virginia: 1 position');
   await virginia.click();
   await expect(clearStates).toHaveText('Clear Virginia');
-  await expect(page.locator('#jobs-search')).toHaveValue('loc: VA');
+  await expect(page.locator('#jobs-search')).toHaveAttribute('data-query', 'loc: VA');
   await expect(page.locator('.job-card')).toHaveCount(1);
   await expect(page).toHaveURL(/q=loc/);
   // Other states keep their counts while one is selected, and clicking another adds it.
@@ -83,7 +83,7 @@ test('search, filters, and the state map narrow the list', async ({ page }) => {
   await page.locator('.job-map-tile[data-state="IL"]').click();
   await expect(page.locator('.job-card')).toHaveCount(2);
   await expect(clearStates).toHaveText('Clear 2 states');
-  await expect(page.locator('#jobs-search')).toHaveValue(/loc: VA,IL/);
+  await expect(page.locator('#jobs-search')).toHaveAttribute('data-query', /loc: VA,IL/);
   await expect(page.locator('.job-map-tile[aria-pressed="true"]')).toHaveCount(2);
   await openDetails(page, '.job-map-details');
   await page.locator('.job-map-tile[data-state="VA"]').click();
@@ -113,14 +113,14 @@ test('several filter values restore from the URL, and older single-value links s
   await page.goto('jobs.html?state=VA,IL&track=teaching');
   await expect(page.locator('.job-card')).toHaveCount(1);
   await expect(page.locator('.job-card')).toContainText('Teaching Professor');
-  await expect(page.locator('#jobs-search')).toHaveValue(/loc: VA,IL/);
-  await expect(page.locator('#jobs-search')).toHaveValue('track: teaching loc: VA,IL');
+  await expect(page.locator('#jobs-search')).toHaveAttribute('data-query', /loc: VA,IL/);
+  await expect(page.locator('#jobs-search')).toHaveAttribute('data-query', 'track: teaching loc: VA,IL');
   await page.reload();
   await expect(page.locator('.job-card')).toHaveCount(1);
 
   await page.goto('jobs.html?state=VA');
   await expect(page.locator('.job-card')).toHaveCount(1);
-  await expect(page.locator('#jobs-search')).toHaveValue('loc: VA');
+  await expect(page.locator('#jobs-search')).toHaveAttribute('data-query', 'loc: VA');
 });
 
 test('sorts by CSRankings rank in either direction', async ({ page }) => {
@@ -223,11 +223,11 @@ test('keyword help opens on click and keyboard, and scoped suggestions preserve 
   await input.fill('loc: IL track: tea');
   await expect(page.getByRole('option', { name: /Teaching track/ })).toBeVisible();
   await page.getByRole('option', { name: /Teaching track/ }).click();
-  await expect(input).toHaveValue('loc: IL track: teaching');
+  await expect(input).toHaveAttribute('data-query', 'loc: IL track: teaching');
   await expect(page.locator('.job-card')).toHaveCount(1);
 
   await page.goto('jobs.html?status=all');
-  await expect(input).toHaveValue('status: all');
+  await expect(input).toHaveAttribute('data-query', 'status: all');
   await expect(page.locator('.job-card')).toHaveCount(3);
 });
 
@@ -255,4 +255,26 @@ test('industry & national labs directory follows the search', async ({ page }) =
   await expect(page.locator('.lab-name')).toHaveText('Galois');
   await page.locator('#jobs-search').fill('track: teaching');
   await expect(labs).toBeHidden();
+});
+
+test('keywords become VietProfs-style chips: colon starts one, Enter finishes it, × and Escape clear', async ({ page }) => {
+  await page.goto('jobs.html');
+  const input = page.locator('#jobs-search');
+  await expect(input).toBeEnabled();
+  await input.click();
+  await input.pressSequentially('track:');
+  await expect(page.locator('.search-keyword-chips .search-scope-chip')).toHaveText(['Track×']);
+  await expect(input).toHaveValue('');
+  await input.pressSequentially(' teaching');
+  await input.press('Enter');
+  await expect(page.locator('.search-keyword-chips .search-scope-chip')).toHaveText(['Track: teaching×']);
+  await expect(input).toHaveAttribute('data-query', 'track: teaching');
+  await expect(page.locator('.job-card')).toHaveCount(1);
+  await page.locator('.search-keyword-chips .search-scope-chip').click();
+  await expect(input).toHaveAttribute('data-query', '');
+  await expect(page.locator('.job-card')).toHaveCount(2);
+  await input.pressSequentially('loc: VA');
+  await input.press('Escape');
+  await expect(page.locator('.search-keyword-chips .search-scope-chip')).toHaveCount(0);
+  await expect(input).toHaveAttribute('data-query', '');
 });

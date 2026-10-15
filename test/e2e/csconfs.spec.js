@@ -150,9 +150,9 @@ test('CS Confs location and deadline keywords narrow schedules and survive reloa
   await page.locator('#csconfs-search').fill('loc: europe deadline: passed');
   await expect(page).toHaveURL(/q=loc/);
   await page.reload();
-  await expect(page.locator('#csconfs-search')).toHaveValue('loc: europe deadline: passed');
+  await expect(page.locator('#csconfs-search')).toHaveAttribute('data-query', 'loc: europe deadline: passed');
   await page.goto('csconfs.html?loc=europe&deadline=all&favorites=only');
-  await expect(page.locator('#csconfs-search')).toHaveValue('loc: europe deadline: all favorites: only');
+  await expect(page.locator('#csconfs-search')).toHaveAttribute('data-query', 'loc: europe deadline: all favorites: only');
 });
 
 test('csconfs.html uses the Jobs-style clickable search help', async ({ page }) => {
@@ -165,8 +165,8 @@ test('conference keywords complete values and the secondary menu prefills a corr
   await expect(input).toBeEnabled();
   await input.fill('loc: europe area: sec');
   await page.getByRole('option', { name: /Security/ }).click();
-  await expect(input).toHaveValue('loc: europe area: sec');
-  await input.fill('');
+  await expect(input).toHaveAttribute('data-query', 'loc: europe area: sec');
+  await input.press('Escape');
   await input.blur();
   const card = page.locator('.schedule-card').first();
   const label = await card.locator('h2').textContent();

@@ -18,8 +18,9 @@ interface ParsedKeywordQuery {
   rest: string;
 }
 
-// Whitespace after the colon is allowed ("loc: usa"), matching the help text's own examples.
-const TOKEN_RE = /(^|\s)([a-z][a-z0-9_-]{0,20}):[ \t]*("[^"]*"|'[^']*'|\S+)/gi;
+// Whitespace after the colon is allowed ("loc: usa"), matching the help text's own examples. A quote still
+// open at the end of the query (a value being typed, e.g. `loc: "new yo`) counts as the value so far.
+const TOKEN_RE = /(^|\s)([a-z][a-z0-9_-]{0,20}):[ \t]*("[^"]*(?:"|$)|'[^']*(?:'|$)|\S+)/gi;
 
 export function parseKeywordQuery(raw: string, specs: KeywordSpec[]): ParsedKeywordQuery {
   const keyByAlias = new Map<string, string>();
@@ -33,14 +34,12 @@ export function parseKeywordQuery(raw: string, specs: KeywordSpec[]): ParsedKeyw
     .replace(TOKEN_RE, (match, lead: string, typedKey: string, rawValue: string) => {
       const canonical = keyByAlias.get(typedKey.toLowerCase());
       if (!canonical) return match;
-      let value = rawValue;
-      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
-        value = value.slice(1, -1);
-      }
-      value = value.trim().toLowerCase();
+      const value = rawValue.replace(/^(["'])([^]*?)\1?$/, '$2').trim().toLowerCase();
       if (value) (filters[canonical] ||= []).push(value);
       return lead;
     })
+    // A keyword still waiting for its value ("area:") is not search text.
+    .replace(/(^|\s)([a-z][a-z0-9_-]{0,20}):\s*$/i, (match, lead: string, typedKey: string) => keyByAlias.has(typedKey.toLowerCase()) ? lead : match)
     .replace(/\s+/g, ' ')
     .trim();
 

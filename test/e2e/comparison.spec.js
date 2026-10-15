@@ -166,6 +166,6 @@ test('suggestions list every match and complete the second side of a vs query', 
   await expect(option).toBeVisible();
   await expect(page.locator('#comparison-results')).toBeVisible();
   await option.click();
-  await expect(page.locator('#main-search')).toHaveValue('George Mason University vs Univ. of Illinois at Urbana-Champaign');
+  await expect(page.locator('#main-search')).toHaveAttribute('data-query', 'George Mason University vs Univ. of Illinois at Urbana-Champaign');
   await expect(page.locator('#comparison-chart-container')).toBeVisible();
 });

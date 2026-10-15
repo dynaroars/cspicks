@@ -27,11 +27,11 @@ test('CS Jobs lists favorites first and supports favorites-only keywords without
   await expect(page.locator('.job-card')).toHaveCount(0);
   await expect(page.locator('.jobs-empty')).toContainText('No starred');
 
-  await page.locator('#jobs-search').fill('');
+  await page.locator('#jobs-search').press('Escape');
   await expect(page.locator('.job-card')).toHaveCount(3);
   await page.locator('.job-card', { hasText: 'bravo' }).locator('.favorite-toggle').click();
   await page.goto('jobs.html?favorites=only');
-  await expect(page.locator('#jobs-search')).toHaveValue('favorites: only');
+  await expect(page.locator('#jobs-search')).toHaveAttribute('data-query', 'favorites: only');
   await expect(page.locator('.job-card')).toHaveCount(1);
   await expect(page.locator('.job-card')).toContainText('bravo');
 });
@@ -44,7 +44,7 @@ test('Awards & Grants and CS Confs have the favorites filter and the keyword', a
   await page.locator('#grants-search').fill('favorites: only');
   await expect(page.locator('.grant-card')).toHaveCount(1);
   await openDetails(page, '#research-settings');
-  await page.locator('#grants-search').fill('');
+  await page.locator('#grants-search').press('Escape');
   await page.locator('#grants-search').fill('favorites: only');
   await expect(page.locator('.grant-card')).toHaveCount(1);
 

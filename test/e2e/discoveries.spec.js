@@ -100,7 +100,7 @@ test('the Discoveries view shows insight cards without a separate nav link', asy
   await expect(page.locator('#school-results')).toContainText('George Mason University');
   await expect(page.locator('#discovery-stats')).toBeHidden();
 
-  await page.locator('#main-search').fill('');
+  await page.locator('#main-search').press('Escape');
   await expect(page.locator('#discovery-stats')).toBeVisible();
   await openDetails(page, '#research-settings');
   await page.locator('#region-select').selectOption('europe');

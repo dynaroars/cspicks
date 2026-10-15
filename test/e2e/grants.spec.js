@@ -43,7 +43,7 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   await expect(suggestionsBox).toContainText('Google');
 
   // Clear search
-  await input.fill('');
+  await input.press('Escape');
 
   // Historical programs are clearly labeled and independently filterable.
   await input.fill('status: historical');
@@ -65,7 +65,7 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   await page.keyboard.press('Escape');
   const exampleBtn = page.locator('#grants-examples button').first();
   await exampleBtn.click();
-  expect(await input.inputValue()).not.toBe('');
+  expect(await input.getAttribute('data-query')).not.toBe('');
 
   // Test Empty State and Reset All Filters Button
   await input.fill('nonexistentawardxyz12345');
@@ -73,7 +73,7 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   const resetBtn = page.locator('#reset-grants-filters');
   await expect(resetBtn).toBeVisible();
   await resetBtn.click();
-  await expect(input).toHaveValue('');
+  await expect(input).toHaveAttribute('data-query', '');
   await expect(page.locator('.grant-card')).toHaveCount(initialCount);
 
   // Test Keyboard Shortcut '/' to focus search input
@@ -86,11 +86,11 @@ test('awards keyword help fits mobile and legacy filters become editable search 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('grants.html?audience=phd&sponsor=industry');
   const input = page.locator('#grants-search');
-  await expect(input).toHaveValue('audience: phd category: industry');
+  await expect(input).toHaveAttribute('data-query', 'audience: phd category: industry');
   await expect(page.locator('.grant-card').first()).toBeVisible();
   await expect(page.locator('.search-filters select')).toHaveCount(2);
   await page.reload();
-  await expect(input).toHaveValue('audience: phd category: industry');
+  await expect(input).toHaveAttribute('data-query', 'audience: phd category: industry');
 
   const help = page.getByRole('button', { name: 'Search keywords and examples' });
   await help.click();
@@ -105,9 +105,9 @@ test('awards keyword help fits mobile and legacy filters become editable search 
 
   await input.fill('audience: phd sponsor: Goo');
   await page.getByRole('option', { name: /Google/ }).first().click();
-  await expect(input).toHaveValue('audience: phd sponsor: Google');
+  await expect(input).toHaveAttribute('data-query', 'audience: phd sponsor: Google');
   await expect(page.locator('.grant-card').first()).toBeVisible();
-  await input.fill('');
+  await input.press('Escape');
   await expect(page.locator('.grant-card').nth(40)).toBeVisible();
 });
 
@@ -141,7 +141,7 @@ test('Grants view select groups awards by sponsor, like Jobs by school', async (
 
   // The sponsor heading narrows the search to that sponsor.
   await acm.locator('h2 button').click();
-  await expect(page.locator('#grants-search')).toHaveValue(/sponsor: .*ACM/);
+  await expect(page.locator('#grants-search')).toHaveAttribute('data-query', /sponsor: .*ACM/);
   await expect(page.locator('.grant-sponsor-group')).toHaveCount(1);
 
   // The view survives a reload through the URL.

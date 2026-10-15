@@ -93,7 +93,7 @@ export function departmentKind(department: string): Exclude<DepartmentKind, 'lab
 
 export const JOBS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'school', aliases: ['university', 'employer', 'lab'], example: 'school: stanford', description: 'University or lab the position is at' },
-  { key: 'area', aliases: ['topic'], example: 'area: security', description: 'CSRankings research area the position targets (postings open to all areas match any area)' },
+  { key: 'area', aliases: ['topic'], example: 'area: security', description: 'Research area the position targets (postings open to all areas match any area)' },
   { key: 'loc', aliases: ['state', 'location'], example: 'loc: texas', description: 'City, province or region, or US state' },
   { key: 'country', aliases: ['nation'], example: 'country: us', description: 'Country (e.g. US, Canada, UK, Germany)' },
   { key: 'track', example: 'track: teaching', description: 'tenure-track, teaching, research, postdoc, visiting, leadership, industry, or internship' },

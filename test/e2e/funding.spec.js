@@ -180,7 +180,7 @@ test('funding suggestions complete both sides of a vs query', async ({ page }) =
   const option = listbox.locator('.universal-suggestion', { hasText: 'Univ. of Illinois' }).first();
   await expect(option).toBeVisible();
   await option.click();
-  await expect(page.locator('#funding-search')).toHaveValue('George Mason University vs Univ. of Illinois at Urbana-Champaign');
+  await expect(page.locator('#funding-search')).toHaveAttribute('data-query', 'George Mason University vs Univ. of Illinois at Urbana-Champaign');
   await expect(page.locator('#funding-comparison .comparison-scoreboard')).toContainText('CS faculty with awards');
   await expect(listbox).toBeHidden();
 });
@@ -214,9 +214,9 @@ test('funding keywords autocomplete their values while preserving other filters'
   await expect(option).toBeVisible();
   const label = await option.locator('span').textContent();
   await option.click();
-  await expect(input).toHaveValue(new RegExp('^institution: "George Mason University" program: '));
-  expect(await input.inputValue()).toContain(label);
+  await expect(input).toHaveAttribute('data-query', new RegExp('^institution: "George Mason University" program: '));
+  expect(await input.getAttribute('data-query')).toContain(label);
   await page.reload();
   await expect(input).toBeEnabled(); // the query is restored once the NSF data has loaded
-  expect(await input.inputValue()).toContain(label);
+  expect(await input.getAttribute('data-query')).toContain(label);
 });

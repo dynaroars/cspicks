@@ -3137,3 +3137,16 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
 .stats-commits small { color: var(--text-secondary); }
 .stats-section .stats-body > h3 { margin-top: 1.25rem; font-size: 1rem; }
 @media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Keyword chips in search boxes (src/keyword-chips.ts); same look as VietProfs' .search-scope-chip. */
+.search-keyword-chips { display: inline-flex; flex-wrap: wrap; gap: 0.3rem; margin-left: 0.45rem; }
+.search-keyword-chips[hidden] { display: none; }
+.search-scope-chip {
+  flex-shrink: 0; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.28rem 0.55rem;
+  border: 0; border-radius: var(--radius-full); background: var(--tag-bg); color: var(--tag-text);
+  font-family: var(--font-body); font-size: var(--text-xs); font-weight: 600; white-space: nowrap; cursor: pointer;
+}
+.search-scope-chip:hover, .search-scope-chip:focus-visible { background: var(--hover-bg); color: var(--text-primary); }
+.search-scope-chip:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 1px; }
+.search-scope-chip-remove { font-size: 1rem; line-height: 1; }
+.search-input-shell .search-input { flex: 1; min-width: 8rem; }
