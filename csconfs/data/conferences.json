@@ -39248,6 +39248,29 @@
     "venueKeys": [
       "ease"
     ],
+    "year": 2027,
+    "description": "International Conference on Evaluation and Assessment in Software Engineering",
+    "link": "https://conf.researchr.org/home/ease-2027",
+    "seriesLink": "https://conf.researchr.org/series/ease",
+    "date": "June 15-18, 2027",
+    "place": "Hanoi, Vietnam",
+    "abstractDeadline": "2027-01-15",
+    "deadline": "2027-01-22",
+    "rebuttalDate": null,
+    "notificationDate": "2027-03-12",
+    "note": "Research Papers track; deadlines AoE.",
+    "generalChair": "Quyet Thang Huynh, Hongyu Zhang",
+    "programChair": "Carolyn Seaman, Norbert Seyff",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true
+  },
+  {
+    "name": "EASE",
+    "venueKeys": [
+      "ease"
+    ],
     "year": 2025,
     "description": "International Conference on Evaluation and Assessment in Software Engineering",
     "link": null,
