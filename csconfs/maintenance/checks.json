@@ -299,12 +299,12 @@
       "proposals": []
     },
     "WACV": {
-      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
       "outcome": "incomplete",
-      "summary": "WACV 2027 home re-confirms Jan 4-8 2027 and Oct 14 2026 decisions. No WACV 2028 page (Conferences/2028 is 404); 2028 stays unannounced. WACV 2026 records left as is (not edited).",
+      "summary": "WACV 2027 dates, venue, and Oct 14 2026 final decisions confirmed on the edition page; round deadlines not listed there, existing values left. WACV 2026 Dates page lists round deadlines matching the record; final-decision date conflict (CFP Nov 5 vs Dates page Nov 6 UTC) remains unresolved. No WACV 2028 site found.",
       "checkedUrls": [
-        "https://wacv.thecvf.com/",
-        "https://wacv.thecvf.com/Conferences/2028/"
+        "https://wacv.thecvf.com/Conferences/2027/index.html",
+        "https://wacv.thecvf.com/Conferences/2026/Dates"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -401,11 +401,12 @@
       "proposals": []
     },
     "IJCAI": {
-      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
       "outcome": "incomplete",
-      "summary": "ijcai.org lists only IJCAI-27 (Kyoto Aug 7-13; Hengqin Aug 15-17); no 2028-2030 dates or places published.",
+      "summary": "ijcai.org Future Conferences page confirms chairs for IJCAI-28/29/30 as recorded; hosts, dates and timelines for 2028-2030 are not announced (to be named at the preceding conference).",
       "checkedUrls": [
-        "https://www.ijcai.org/"
+        "https://www.ijcai.org/",
+        "https://www.ijcai.org/future_conferences"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -618,12 +619,12 @@
       "proposals": []
     },
     "PODC": {
-      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
       "outcome": "incomplete",
-      "summary": "PODC 2027 home/CFP pages confirm June 21-25 2027, Reykjavik University; CFP page still says to watch for deadlines. No deadline fields changed.",
+      "summary": "PODC 2027 (June 21-25, Reykjavik University) confirmed; CFP page says deadlines will follow (\"Watch this space\"). No deadlines or notification date published.",
       "checkedUrls": [
         "https://www.podc.org/podc2027/",
-        "https://www.podc.org/podc2027/call-for-papers/"
+        "https://www.podc.org/podc2027/call-for-papers"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -650,9 +651,9 @@
       "proposals": []
     },
     "KDD": {
-      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
       "outcome": "incomplete",
-      "summary": "KDD 2027 cycle 1 dates (Jul 19/26, rebuttal Sep 29-Oct 13, notification Nov 14 2026) re-confirmed on the official research-track CFP. Cycle 2 dates still unannounced. No changes.",
+      "summary": "KDD 2027 dates and San Jose venue re-confirmed; cycle 1 dates match. Cycle 2 (February 2027) abstract, submission, rebuttal and notification dates are not published on the research-track CFP; cycle 2 record left TBD.",
       "checkedUrls": [
         "https://kdd2027.kdd.org/",
         "https://kdd2027.kdd.org/research-track-call-for-papers/"
@@ -661,11 +662,12 @@
       "proposals": []
     },
     "IROS": {
-      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
       "outcome": "incomplete",
-      "summary": "Official IROS 2027 site (2027.ieee-iros.org) returned HTTP 503 on two attempts; nothing verified. IROS 2028 link is still a RAS minutes PDF; no edition page found.",
+      "summary": "IROS 2027 dates and Florence venue confirmed; the home page lists no paper deadline or notification date (existing 2027-03-01 deadline not re-verified on the edition site). IROS 2028 (Sydney) has no edition site; no change.",
       "checkedUrls": [
-        "https://2027.ieee-iros.org/"
+        "https://2027.ieee-iros.org/",
+        "https://2027.ieee-iros.org/call-for-papers/"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -711,14 +713,22 @@
       "proposals": []
     },
     "ICRA": {
-      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
-      "outcome": "incomplete",
-      "summary": "ICRA 2027 site confirms May 24-28 2027, Seoul; submission closed, no new facts. No ICRA 2028 information on that site.",
+      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
+      "outcome": "complete",
+      "summary": "ICRA 2028 (May 15-19, 2028): IEEE RAS event page lists Riocentro, Rio de Janeiro, Brazil and paper submission deadline Sep 15, 2027; record updated, kept estimated because no edition site exists yet.",
       "checkedUrls": [
-        "https://2027.ieee-icra.org/"
+        "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/"
       ],
       "deferredUntil": null,
-      "proposals": []
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2028,
+          "sources": [
+            "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/"
+          ]
+        }
+      ]
     },
     "ISMB/ECCB": {
       "lastCheckedAt": "2026-10-13T20:16:13.830Z",
@@ -773,12 +783,12 @@
       "proposals": []
     },
     "RECOMB": {
-      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
       "outcome": "incomplete",
-      "summary": "RECOMB 2027 home confirms May 17-20 2027, Toronto; key-dates page (guessed URL) returned 404 and the home page text shows no deadlines. Unverified.",
+      "summary": "RECOMB 2027 dates (May 17-20, satellites May 15-16) and Toronto confirmed on the edition home page; key-dates and committee pages were not retrievable (404 on guessed URL), so no deadlines or chairs recorded.",
       "checkedUrls": [
         "https://recomb.org/recomb2027",
-        "https://recomb.org/recomb2027/key-dates/"
+        "https://recomb.org/recomb2027/key-dates-deadlines"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -865,6 +875,56 @@
         "https://colm.cc/"
       ],
       "deferredUntil": "2026-11-05T20:15:32.150Z",
+      "proposals": []
+    },
+    "ACSAC": {
+      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
+      "outcome": "not_found",
+      "summary": "ACSAC 2027 is not announced on the official series site; no record created.",
+      "checkedUrls": [
+        "https://www.acsac.org/"
+      ],
+      "deferredUntil": "2026-11-07T20:15:27.759Z",
+      "proposals": []
+    },
+    "AIED": {
+      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
+      "outcome": "not_found",
+      "summary": "AIED 2027 is not announced on the official series site; no record created.",
+      "checkedUrls": [
+        "https://iaied.org/"
+      ],
+      "deferredUntil": "2026-11-07T20:15:27.759Z",
+      "proposals": []
+    },
+    "ASIACRYPT": {
+      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
+      "outcome": "not_found",
+      "summary": "ASIACRYPT 2027 is not announced on the official series site; no record created.",
+      "checkedUrls": [
+        "https://iacr.org/meetings/asiacrypt/"
+      ],
+      "deferredUntil": "2026-11-07T20:15:27.759Z",
+      "proposals": []
+    },
+    "ASSETS": {
+      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
+      "outcome": "not_found",
+      "summary": "ASSETS 2027 is not announced on the official series site; no record created.",
+      "checkedUrls": [
+        "https://www.sigaccess.org/"
+      ],
+      "deferredUntil": "2026-11-07T20:15:27.759Z",
+      "proposals": []
+    },
+    "BMVC": {
+      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
+      "outcome": "not_found",
+      "summary": "BMVC 2027 is not announced on the official series site; no record created.",
+      "checkedUrls": [
+        "https://www.bmva.org/bmvc"
+      ],
+      "deferredUntil": "2026-11-07T20:15:27.759Z",
       "proposals": []
     }
   }
