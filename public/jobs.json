@@ -16550,5 +16550,26 @@
     "summary": "Graduate student researcher investigating uncertainty quantification and reliability of LLM-based science assistants. Eligibility tiers include enrolled master's and PhD students; remote-site option listed.",
     "source": "crawl",
     "verified": true
+  },
+  {
+    "id": "grinnell-cs-tenure-track-2027",
+    "school": "Grinnell College",
+    "department": "Department of Computer Science",
+    "title": "Department of Computer Science (Tenure Track, Start Fall 2027)",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [],
+    "state": "IA",
+    "city": "Grinnell",
+    "deadline": null,
+    "postedDate": "2026-08-12",
+    "startDate": "2027-08",
+    "lastSeenAt": "2026-10-16",
+    "url": "https://apply.interfolio.com/191271",
+    "visaSponsorship": "not-stated",
+    "summary": "Tenure-track computer science appointment at a selective liberal arts college, Assistant Professor (Ph.D.) preferred, Instructor (ABD) or Associate possible; five-course teaching load. Materials requested by October 2, 2026 for full consideration; the posting was still open on 2026-10-16.",
+    "source": "crawl",
+    "verified": true,
+    "country": "US"
   }
 ]
