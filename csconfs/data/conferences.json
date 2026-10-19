@@ -35407,6 +35407,29 @@
     "venueKeys": [
       "bpm"
     ],
+    "year": 2027,
+    "description": "International Conference on Business Process Management",
+    "link": "https://bpm2027leuven.org/",
+    "seriesLink": "https://bpm-conference.org/",
+    "date": "September 5–10, 2027",
+    "place": "Leuven, Belgium",
+    "abstractDeadline": null,
+    "deadline": "2027-03-18",
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": "Research-paper deadline from the official site; abstract and notification dates not yet published.",
+    "generalChair": "Johannes De Smedt, Jochen De Weerdt",
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true
+  },
+  {
+    "name": "BPM",
+    "venueKeys": [
+      "bpm"
+    ],
     "year": 2026,
     "description": "International Conference on Business Process Management",
     "link": "https://www.yorku.ca/events/bpm2026/",
@@ -35746,6 +35769,29 @@
     "estimated": false,
     "verified": true,
     "generalChair": null
+  },
+  {
+    "name": "CAiSE",
+    "venueKeys": [
+      "caise"
+    ],
+    "year": 2027,
+    "description": "International Conference on Advanced Information Systems Engineering",
+    "link": "https://www.caise2027seville.org/",
+    "seriesLink": "https://caise-conference.diag.uniroma1.it/",
+    "date": "June 7–11, 2027",
+    "place": "Seville, Spain",
+    "abstractDeadline": "2026-11-04",
+    "deadline": "2026-11-15",
+    "rebuttalDate": null,
+    "notificationDate": "2027-02-10",
+    "note": null,
+    "generalChair": "Cristina Cabanillas, Antonio Ruiz Cortés",
+    "programChair": "Massimo Mecella, Maribel Yasmina Santos",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true
   },
   {
     "name": "CAiSE",
