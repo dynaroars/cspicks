@@ -16196,12 +16196,15 @@
     "facultyCount": 12,
     "country": "MT",
     "region": "europe",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://www.um.edu.mt/services/jobsinmalta",
+    "state": "incomplete",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "CS dept page links only to the university 'Jobs in Malta' page, which rendered no vacancy list; the UM staff recruitment portal was not located. No CS post verified; recheck.",
+    "checkedUrls": [
+      "https://www.um.edu.mt/ict/cs/",
+      "https://www.um.edu.mt/services/jobsinmalta"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16386,12 +16389,15 @@
     "facultyCount": 10,
     "country": "IN",
     "region": "asia",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://www.imsc.res.in/facultyrecruitment",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "complete",
+    "summary": "Faculty recruitment page (Fellow-E and Reader-F, areas incl. theoretical computer science) live; deadline 15 Nov 2026. One record added (imsc-tcs-faculty-fellow-reader-2026).",
+    "checkedUrls": [
+      "https://www.imsc.res.in/facultyrecruitment",
+      "https://www.imsc.res.in/opportunities"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16402,12 +16408,15 @@
     "facultyCount": 10,
     "country": "CN",
     "region": "asia",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://cs.shanghai.nyu.edu/join-us",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "complete",
+    "summary": "Join Us page lists tenure-track CS/DS/CE search (open 20 Oct 2025, review Dec 15 2025; Interfolio 176211 now 'unavailable'), a Spring 2026 part-time teaching associate and an undated postdoc call; none verified live for the current cycle. No record added; recheck for the 2026-27 ad.",
+    "checkedUrls": [
+      "https://cs.shanghai.nyu.edu/join-us",
+      "https://apply.interfolio.com/176211"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16418,12 +16427,16 @@
     "facultyCount": 10,
     "country": "LV",
     "region": "europe",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://www.lu.lv/en/about-us/vacancies/",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "complete",
+    "summary": "Vacancies page (21 Oct 2026 to 15 Nov 2026 closings) lists academic positions only in economics, education, humanities, physics and chemistry; no computing post on 2026-10-20. Recheck in 21 days.",
+    "checkedUrls": [
+      "https://www.lu.lv/en/about-us/vacancies/",
+      "https://www.lu.lv/en/about-us/vacancies/faculty-of-science-and-technology-academic-staff-positions-07/10/2026-07/11/2026/",
+      "https://www.lu.lv/en/about-us/vacancies/faculty-of-of-science-and-technology-academic-staff-position-15/10/2026-15/11/2026/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16434,12 +16447,14 @@
     "facultyCount": 10,
     "country": "DE",
     "region": "europe",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://www.uni-mannheim.de/en/about/working-at-the-university/job-vacancies/",
+    "state": "incomplete",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "WIM news lists only a W1 AI-methods junior professorship dated 24 Jan 2025 (stale, no deadline); university job-vacancies page not read. No record added.",
+    "checkedUrls": [
+      "https://www.wim.uni-mannheim.de/en/news/open-position-junior-professorship-w1-ai-methods/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16451,14 +16466,16 @@
     "country": "LK",
     "region": "asia",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "not_found",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "not_found",
+    "summary": "Site returned HTTP 502 through the crawler on 2026-10-20; no hiring page found.",
+    "checkedUrls": [
+      "https://www.cse.mrt.ac.lk/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "University of Peradeniya",
@@ -16467,14 +16484,16 @@
     "country": "LK",
     "region": "asia",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "not_found",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "not_found",
+    "summary": "Site returned HTTP 502 through the crawler on 2026-10-20; no hiring page found.",
+    "checkedUrls": [
+      "https://sci.pdn.ac.lk"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "University of Trier",
@@ -16482,12 +16501,14 @@
     "facultyCount": 10,
     "country": "DE",
     "region": "europe",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://www.uni-trier.de/universitaet/verwaltung/abteilung-iii-personal/jobs",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "complete",
+    "summary": "Official jobs page lists no professorship (points to Berufungsmonitor, not read) and no computer-science post; only digital-humanities, psychology and administrative posts. No record added.",
+    "checkedUrls": [
+      "https://www.uni-trier.de/universitaet/verwaltung/abteilung-iii-personal/jobs"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16499,14 +16520,16 @@
     "country": "IN",
     "region": "asia",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "checked",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "blocked",
+    "summary": "Department page returned HTTP 403 to the browser fetch; not bypassed.",
+    "checkedUrls": [
+      "https://www.ashoka.edu.in/department/department-of-cs/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-03"
   },
   {
     "school": "Kempelen Institute - KInIT",
@@ -16514,12 +16537,15 @@
     "facultyCount": 9,
     "country": "SK",
     "region": "europe",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://kinit.nalgoo-jobs.com/",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "complete",
+    "summary": "Careers page (nalgoo portal) lists AI Ethics researcher, engineer and project-management posts only; no faculty/postdoc CS post verified. PhD/MSCA/ERC calls are not postings.",
+    "checkedUrls": [
+      "https://kinit.sk/careers/",
+      "https://kinit.nalgoo-jobs.com/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16530,12 +16556,15 @@
     "facultyCount": 9,
     "country": "TH",
     "region": "asia",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://tggs.kmutnb.ac.th/category/work-with-us",
+    "state": "incomplete",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Graduate-school site (tggs.kmutnb.ac.th) lists engineer and administrator posts only; CS faculty vacancies are on other KMUTNB units not read.",
+    "checkedUrls": [
+      "https://tggs.kmutnb.ac.th/category/work-with-us",
+      "https://tggs.kmutnb.ac.th/hr-procurement-notice"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16547,14 +16576,16 @@
     "country": "ZA",
     "region": "africa",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "not_found",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "not_found",
+    "summary": "Department site returned HTTP 502 through the crawler on 2026-10-20.",
+    "checkedUrls": [
+      "https://www.cs.sun.ac.za"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "University of Basel",
@@ -16563,11 +16594,13 @@
     "country": "CH",
     "region": "europe",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "incomplete",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "DMI homepage shows only a faculty-appointment news item (Theoretical Quantum Computing, not a vacancy); no hiring page found.",
+    "checkedUrls": [
+      "https://dmi.unibas.ch/de/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16579,14 +16612,16 @@
     "country": "IN",
     "region": "asia",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "not_found",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "not_found",
+    "summary": "Site returned HTTP 502 through the crawler on 2026-10-20.",
+    "checkedUrls": [
+      "https://www.niser.ac.in"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "Scuola Superiore Sant'Anna",
@@ -16594,12 +16629,14 @@
     "facultyCount": 8,
     "country": "IT",
     "region": "europe",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://retis.santannapisa.it/open-positions/",
+    "state": "incomplete",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "ReTiS Open Positions page is generic (positions opened constantly, none itemised); the university-wide vacancies portal was not read.",
+    "checkedUrls": [
+      "https://retis.santannapisa.it/open-positions/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16610,12 +16647,14 @@
     "facultyCount": 8,
     "country": "IN",
     "region": "asia",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://sau.int/recruitment/job-announcements/",
+    "state": "incomplete",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Job Announcements page shows only a rolling advertisement for professors for new initiatives (no computer science named); the linked notice was not read. No record added.",
+    "checkedUrls": [
+      "http://sau.int/recruitment/job-announcements/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16627,11 +16666,13 @@
     "country": "ES",
     "region": "europe",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "incomplete",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Department homepage exposes no hiring link to the crawler; university staff-recruitment portal not read.",
+    "checkedUrls": [
+      "https://diis.unizar.es/es"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16643,11 +16684,13 @@
     "country": "DE",
     "region": "europe",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "incomplete",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Computer science homepage exposes no hiring page; university vacancies portal not read.",
+    "checkedUrls": [
+      "https://www.informatik.uni-halle.de/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16659,11 +16702,13 @@
     "country": "CN",
     "region": "asia",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "incomplete",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Lab homepage loaded but no hiring page found.",
+    "checkedUrls": [
+      "https://cilab.ujn.edu.cn/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16675,11 +16720,13 @@
     "country": "DE",
     "region": "europe",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "incomplete",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Informatics homepage exposes no hiring page; university vacancies portal not read.",
+    "checkedUrls": [
+      "https://www.informatik.uni-mainz.de/en/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16691,14 +16738,16 @@
     "country": "IT",
     "region": "europe",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "not_found",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "not_found",
+    "summary": "Site returned HTTP 502 through the crawler on 2026-10-20.",
+    "checkedUrls": [
+      "https://docenti.unimol.it"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-10"
   },
   {
     "school": "Babeș-Bolyai University",
@@ -16707,11 +16756,13 @@
     "country": "RO",
     "region": "europe",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "incomplete",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Faculty homepage exposes no hiring page to the crawler; university competitions page not read.",
+    "checkedUrls": [
+      "https://www.cs.ubbcluj.ro/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16722,12 +16773,15 @@
     "facultyCount": 7,
     "country": "DE",
     "region": "europe",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://constructoruniversity.wd103.myworkdayjobs.com/en-US/Careers",
+    "state": "checked",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "complete",
+    "summary": "Official Workday portal (Constructor University) shows 11 jobs: chemistry professorships, PhD positions and staff; no CS faculty, postdoc or lecturer post on 2026-10-20 (PhD student posts are out of scope).",
+    "checkedUrls": [
+      "https://constructor.university/jobs",
+      "https://constructoruniversity.wd103.myworkdayjobs.com/en-US/Careers"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16739,14 +16793,16 @@
     "country": "IR",
     "region": "asia",
     "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "state": "checked",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "blocked",
+    "summary": "Connection failed (ERR_TUNNEL_CONNECTION_FAILED) through the proxy; not bypassed.",
+    "checkedUrls": [
+      "https://facultymembers.sbu.ac.ir"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-03"
   },
   {
     "school": "University of Bern",
@@ -16754,12 +16810,14 @@
     "facultyCount": 7,
     "country": "CH",
     "region": "europe",
-    "jobsUrl": null,
-    "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "jobsUrl": "https://karriere.unibe.ch/offene_stellen/index_ger.html",
+    "state": "incomplete",
+    "lastCheckedAt": "2026-10-20T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "University job portal (karriere.unibe.ch) loads but its listing is an external widget that did not render; no CS posting verified.",
+    "checkedUrls": [
+      "https://karriere.unibe.ch/offene_stellen/index_ger.html"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
