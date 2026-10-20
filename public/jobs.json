@@ -16571,5 +16571,73 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "msudenver-assistant-professor-computer-sciences-2027",
+    "school": "Metropolitan State University of Denver",
+    "department": "Department of Computer Sciences",
+    "title": "Assistant Professor of Computer Sciences",
+    "track": "tenure-track",
+    "level": "assistant",
+    "visaSponsorship": "not-stated",
+    "lastSeenAt": "2026-10-19",
+    "source": "crawl",
+    "verified": true,
+    "country": "US",
+    "areas": [
+      "ai",
+      "sec"
+    ],
+    "state": "CO",
+    "city": "Denver",
+    "deadline": null,
+    "rolling": true,
+    "startDate": "2027-08",
+    "url": "https://msudenver.wd1.myworkdayjobs.com/en-US/MSUDenver/job/Denver-Colorado/Assistant-Professor-of-Computer-Sciences_JR105817",
+    "summary": "Tenure-track Assistant Professor at an undergraduate-focused department with an ABET-accredited CS program; 12-hour semester teaching load including AI/ML and/or cybersecurity courses. Priority given to applications by October 15, 2026; accepted until filled."
+  },
+  {
+    "id": "nku-cybersecurity-it-assistant-professor-2027",
+    "school": "Northern Kentucky University",
+    "department": "School of Computing and Analytics",
+    "title": "Cybersecurity and Information Technology Assistant Professor",
+    "track": "tenure-track",
+    "level": "assistant",
+    "visaSponsorship": "not-stated",
+    "lastSeenAt": "2026-10-19",
+    "source": "crawl",
+    "verified": true,
+    "country": "US",
+    "areas": [
+      "sec"
+    ],
+    "state": "KY",
+    "city": "Highland Heights",
+    "deadline": null,
+    "rolling": true,
+    "startDate": "2027-08",
+    "url": "https://nku.wd108.myworkdayjobs.com/en-US/NKU_External/job/Highland-Heights-Ky/Cybersecurity-and-Information-Technology-Assistant-Professor_JR100406",
+    "summary": "Tenure-track Assistant Professor in cybersecurity and IT, including AI for cybersecurity and software security; Ph.D. in cybersecurity, CS, IT or a related field. Priority given to applications by November 1, 2026; accepted until filled."
+  },
+  {
+    "id": "nku-information-systems-analytics-assistant-professors-2027",
+    "school": "Northern Kentucky University",
+    "department": "School of Computing and Analytics",
+    "title": "Two Tenure-Track Assistant Professor Positions in Information Systems & Analytics",
+    "track": "tenure-track",
+    "level": "assistant",
+    "visaSponsorship": "not-stated",
+    "lastSeenAt": "2026-10-19",
+    "source": "crawl",
+    "verified": true,
+    "country": "US",
+    "areas": [],
+    "state": "KY",
+    "city": "Highland Heights",
+    "deadline": null,
+    "rolling": true,
+    "startDate": "2027-08",
+    "url": "https://nku.wd108.myworkdayjobs.com/en-US/NKU_External/job/Highland-Heights-Ky/Two-Tenure-Track-Assistant-Professor-Positions-in-Information-Systems---Analytics_JR100430",
+    "summary": "Two tenure-track Assistant Professor posts in information systems, analytics, health informatics and AI in healthcare; Ph.D. in Information Systems or a related field. Priority given to applications by November 1, 2026; accepted until filled."
   }
 ]
