@@ -6,7 +6,7 @@ import { getConferenceAreaMap, loadData, publicationMatchesConferenceSet, school
 import { createFilterBar } from './filters.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
 import { renderProfessorCard as renderProfessorCardView, renderSchoolCard as renderSchoolCardView } from './search-cards.js';
-import { createSearchControls, focusSearchOnLoad, renderSearchExamples as renderExampleChips, sample, updateSearchUrl } from './search-controls.js';
+import { createSearchControls, focusSearchOnLoad, renderSearchExamples as renderExampleChips, sample, searchHistoryIndex, updateSearchUrl } from './search-controls.js';
 import { parseKeywordQuery } from './search-keywords.js';
 import { clearSearchSections, createDblpAuthorSearch, filterSearchRecords, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
@@ -38,6 +38,13 @@ let conferenceSchedule: ConferenceRecord[] = [];
 // page was actually reached via the Discoveries nav link, not statically
 // imported here.
 let discoveriesApi: typeof import('./discoveries.js') | null = null;
+let searchDebounce: ReturnType<typeof setTimeout> | undefined;
+let applyingHistory = false;
+
+function clearSearchDebounce() {
+  if (searchDebounce) clearTimeout(searchDebounce);
+  searchDebounce = undefined;
+}
 
 interface SearchExample {
   label: string;
@@ -159,32 +166,9 @@ async function init() {
     searchInput.placeholder = "Search professors, universities, areas (e.g., graphics), or conferences (e.g., PLDI)";
     searchInput.disabled = false;
 
-    if (params.has('q')) {
-      const initialQuery = params.get('q') || '';
-      searchInput.value = initialQuery;
-      document.body.classList.add('has-search-query');
-      const comparing = runQuery(initialQuery);
-      const linkedTargetName = params.get('target');
-      const linkedTargetType = params.get('targetType');
-      const linkedTargetExists = Boolean(linkedTargetName) && (linkedTargetType === 'school'
-        ? Boolean(rawData.schools[linkedTargetName!])
-        : linkedTargetType === 'researcher' && Boolean(rawData.professors[linkedTargetName!]));
-      if (linkedTargetExists && !comparing && linkedTargetName) {
-        if (linkedTargetType === 'school' || linkedTargetType === 'researcher') {
-          displayIntegratedAnalysis({ type: linkedTargetType, name: linkedTargetName });
-        }
-      }
-      // A shared link's title/description have to be right on first paint,
-      // not only after the next interaction - updateURL() is what normally
-      // triggers this, but nothing here calls it (the URL is already correct).
-      updateSeoForCurrentView(initialQuery);
-    } else {
-      showLandingState();
-      // Only meaningful right after the initial render - a card's #fragment
-      // link should land on that card once, not re-scroll on every later
-      // filter change that re-renders the grid.
-      if (isDiscoveries) discoveriesApi?.scrollToHashDiscovery();
-    }
+    applyQueryFromLocation();
+    syncSearchBack();
+    if (!new URLSearchParams(location.search).has('q') && isDiscoveries) discoveriesApi?.scrollToHashDiscovery();
 
     focusSearchOnLoad(searchInput);
   } catch (err) {
@@ -245,7 +229,8 @@ function restoreExpandedCards(expandedCards: Set<string>) {
   });
 }
 
-function updateURL() {
+function updateURL(options?: { push?: boolean }) {
+  if (options?.push) clearSearchDebounce();
   const params = filters.toParams();
 
   if (isDiscoveries) params.set('view', 'discoveries');
@@ -256,8 +241,38 @@ function updateURL() {
     params.set('targetType', selectedAnalysisTarget.type);
   }
 
-  updateSearchUrl(params, q);
+  updateSearchUrl(params, q, { push: Boolean(options?.push) && !applyingHistory });
   updateSeoForCurrentView(q);
+  syncSearchBack();
+}
+
+function syncSearchBack() {
+  const button = document.getElementById('search-back');
+  if (button) button.hidden = searchHistoryIndex() === 0;
+}
+
+function applyQueryFromLocation() {
+  if (!rawData) return;
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get('q') || '';
+  const input = document.querySelector<HTMLInputElement>('#main-search')!;
+  input.value = query;
+  document.body.classList.toggle('has-search-query', Boolean(query.trim()));
+  if (!query.trim()) {
+    showLandingState();
+    updateSeoForCurrentView('');
+    return;
+  }
+  const comparing = runQuery(query);
+  const linkedTargetName = searchParams.get('target');
+  const linkedTargetType = searchParams.get('targetType');
+  const linkedTargetExists = Boolean(linkedTargetName) && (linkedTargetType === 'school'
+    ? Boolean(rawData.schools[linkedTargetName!])
+    : linkedTargetType === 'researcher' && Boolean(rawData.professors[linkedTargetName!]));
+  if (linkedTargetExists && !comparing && linkedTargetName && (linkedTargetType === 'school' || linkedTargetType === 'researcher')) {
+    displayIntegratedAnalysis({ type: linkedTargetType, name: linkedTargetName });
+  }
+  updateSeoForCurrentView(query);
 }
 
 // Keeps <title>/description/canonical honest about what's on screen, so a
@@ -366,7 +381,6 @@ function updatePriorData() {
 function setupSearch() {
   const mainSearch = document.querySelector<HTMLInputElement>('#main-search')!;
 
-  let debounceTimer: ReturnType<typeof setTimeout> | undefined;
   createSearchSuggestionBox({
     input: mainSearch,
     listbox: document.getElementById('universal-suggestions')!,
@@ -374,28 +388,29 @@ function setupSearch() {
     usage: 'Combine keywords to narrow universities, professors, and research areas. Quote values with spaces; commas mean either value.',
     examples: document.getElementById('search-example-items'),
     onQuery: query => {
-      if (debounceTimer) clearTimeout(debounceTimer);
+      clearSearchDebounce();
       document.body.classList.toggle('has-search-query', Boolean(query.trim()));
       displayIntegratedAnalysis(null);
       if (query.trim()) runQuery(query); else showLandingState();
-      updateURL();
+      updateURL({ push: true });
     },
     onInput: rawQuery => {
-      if (debounceTimer) clearTimeout(debounceTimer);
+      clearSearchDebounce();
       displayIntegratedAnalysis(null);
       updateURL();
       document.body.classList.toggle('has-search-query', Boolean(rawQuery.trim()));
       if (rawQuery.length < 2) { showLandingState(); return; }
-      debounceTimer = setTimeout(() => { runQuery(rawQuery); updateURL(); }, 300);
+      searchDebounce = setTimeout(() => { runQuery(rawQuery); updateURL(); }, 300);
     },
     getContext: () => ({ appData: rawData ? appData : null, confSet: filters.confSet }),
     onSelect: (item, comparePrefix) => {
+      clearSearchDebounce();
       mainSearch.value = `${comparePrefix}${item.label}`;
 
       if (comparePrefix) {
         document.body.classList.add('has-search-query');
         runQuery(mainSearch.value, { includeDblp: false });
-        updateURL();
+        updateURL({ push: true });
         return;
       }
 
@@ -406,7 +421,20 @@ function setupSearch() {
       searchAreaPeople(query);
       document.getElementById('dblp-results')!.innerHTML = '';
       displayIntegratedAnalysis(item.target || null);
+      updateURL({ push: true });
+    }
+  });
+
+  document.getElementById('search-back')?.addEventListener('click', () => history.back());
+  window.addEventListener('popstate', () => {
+    if (!rawData) return;
+    clearSearchDebounce();
+    applyingHistory = true;
+    try {
+      applyQueryFromLocation();
       updateURL();
+    } finally {
+      applyingHistory = false;
     }
   });
 
@@ -642,14 +670,18 @@ function showIntegratedAnalysis(type: AnalysisTarget['type'], name: string) {
   searchAreaPeople(query);
   document.getElementById('dblp-results')!.innerHTML = '';
   displayIntegratedAnalysis({ type, name });
-  updateURL();
+  updateURL({ push: true });
 }
 
 
 function setSearchQuery(query: string) {
   const input = document.querySelector<HTMLInputElement>('#main-search')!;
   input.value = query;
-  input.dispatchEvent(new Event('input', { bubbles: true }));
+  clearSearchDebounce();
+  document.body.classList.toggle('has-search-query', Boolean(query.trim()));
+  displayIntegratedAnalysis(null);
+  if (query.trim()) runQuery(query); else showLandingState();
+  updateURL({ push: true });
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 init();

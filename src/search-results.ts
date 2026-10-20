@@ -19,7 +19,7 @@ interface SearchResultsContext {
   renderSchoolCard: (school: FilteredSchool, filterArea: string | null, overrides?: Partial<CardContext>) => string;
   hideComparison: () => void;
   displayIntegratedAnalysis: (target: AnalysisTarget | null) => void;
-  updateURL: () => void;
+  updateURL: (options?: { push?: boolean }) => void;
 }
 
 interface InfiniteColumn {
@@ -233,7 +233,7 @@ export function searchProfessorByAffiliation(name: string, affiliation: string) 
   ctx.displayIntegratedAnalysis(selectedProfessor
     ? { type: 'researcher', name: selectedProfessor.name }
     : null);
-  ctx.updateURL();
+  ctx.updateURL({ push: true });
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }

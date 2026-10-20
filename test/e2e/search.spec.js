@@ -231,6 +231,79 @@ test('choosing faculty from a university switches analysis to that professor', a
   await expect(page.getByRole('tab', { name: /Faculty Diversity/ })).toBeHidden();
 });
 
+test('back and forward move between the university list, its faculty, and a professor', async ({ page }) => {
+  await page.goto('./?percapita=false');
+  const school = page.locator('#school-results .card[data-name="George Mason University"]');
+  await expect(school).toBeVisible();
+  await expect(page.locator('#search-back')).toBeHidden();
+
+  await school.locator('.card-header').click();
+  await expect(page).toHaveURL(/targetType=school/);
+  await expect(page.locator('#main-search')).toHaveAttribute('data-query', 'George Mason University');
+  await expect(page.locator('#school-results .school-faculty-roster')).toContainText('Hai Duong');
+  await expect(page.locator('#search-back')).toBeVisible();
+
+  await page.locator('#school-results .school-faculty-roster .faculty-tag', { hasText: 'Hai Duong' }).click();
+  await expect(page).toHaveURL(/targetType=researcher/);
+  await expect(page.locator('#prof-results')).toContainText('Hai Duong');
+  expect(new URL(page.url()).searchParams.get('target')).toBe('Hai Duong 0001');
+
+  const historyLength = await page.evaluate(() => history.length);
+  await page.goBack();
+  await expect(page).toHaveURL(/targetType=school/);
+  await expect(page.locator('#main-search')).toHaveAttribute('data-query', 'George Mason University');
+  await expect(page.locator('#school-results .school-faculty-roster')).toContainText('Hai Duong');
+  await expect(page.locator('#school-results')).toContainText('George Mason University');
+
+  await page.goForward();
+  await expect(page).toHaveURL(/targetType=researcher/);
+  await expect(page.locator('#prof-results')).toContainText('Hai Duong');
+  await expect(page.locator('#school-results .school-faculty-roster')).toHaveCount(0);
+
+  await page.locator('#search-back').click();
+  await expect(page).toHaveURL(/targetType=school/);
+  await expect(page.locator('#school-results .school-faculty-roster')).toContainText('Hai Duong');
+  await page.goForward();
+  await expect(page).toHaveURL(/targetType=researcher/);
+  expect(await page.evaluate(() => history.length)).toBe(historyLength);
+
+  await page.goBack();
+  await page.goBack();
+  await expect(page).not.toHaveURL(/[?&]q=/);
+  await expect(page.locator('#school-results')).toContainText('GMU');
+  await expect(page.locator('#search-back')).toBeHidden();
+
+  await page.goForward();
+  await expect(page).toHaveURL(/targetType=school/);
+  await expect(page.locator('#school-results .school-faculty-roster')).toContainText('Hai Duong');
+  await page.goForward();
+  await expect(page).toHaveURL(/targetType=researcher/);
+
+  await page.reload();
+  await expect(page.locator('#prof-results')).toContainText('Hai Duong');
+  await expect(page).toHaveURL(/targetType=researcher/);
+  await page.goBack();
+  await expect(page).toHaveURL(/targetType=school/);
+  await expect(page.locator('#school-results .school-faculty-roster')).toContainText('Hai Duong');
+});
+
+test('typing a university does not add a history entry per character', async ({ page }) => {
+  await page.goto('./?percapita=false');
+  await expect(page.locator('#main-search')).toBeEnabled();
+  await page.locator('#main-search').pressSequentially('George Mason University');
+  await expect(page).toHaveURL(/targetType=school/);
+  await page.locator('#school-results .school-faculty-roster .faculty-tag', { hasText: 'Hai Duong' }).click();
+  await expect(page).toHaveURL(/targetType=researcher/);
+
+  await page.goBack();
+  await expect(page).toHaveURL(/targetType=school/);
+  await expect(page.locator('#main-search')).toHaveAttribute('data-query', 'George Mason University');
+  await expect(page.locator('#school-results .school-faculty-roster')).toContainText('Hai Duong');
+
+  await page.goBack();
+  await expect(page).toHaveURL('about:blank');
+});
+
 test('per-capita ordering is off by default and can be turned on', async ({ page }) => {
   await page.goto('./');
   // The default view reproduces CSRankings, which ranks by departmental total.

@@ -72,10 +72,23 @@ export function renderSearchExamples(container: HTMLElement, examples: Array<str
   }).join('');
 }
 
-export function updateSearchUrl(params: URLSearchParams, query: string) {
+export function searchHistoryIndex() {
+  const state = history.state as { cspicksSearch?: unknown } | null;
+  return state && typeof state.cspicksSearch === 'number' ? state.cspicksSearch : 0;
+}
+
+export function updateSearchUrl(params: URLSearchParams, query: string, options?: { push?: boolean }) {
   if (query.trim()) params.set('q', query.trim()); else params.delete('q');
   const suffix = params.toString();
-  history.replaceState({}, '', `${location.pathname}${suffix ? `?${suffix}` : ''}${location.hash}`);
+  const nextUrl = `${location.pathname}${suffix ? `?${suffix}` : ''}${location.hash}`;
+  const currentUrl = `${location.pathname}${location.search}${location.hash}`;
+  const index = searchHistoryIndex();
+  if (options?.push && nextUrl !== currentUrl) {
+    history.pushState({ cspicksSearch: index + 1 }, '', nextUrl);
+    return;
+  }
+  if (nextUrl === currentUrl && history.state && typeof (history.state as { cspicksSearch?: unknown }).cspicksSearch === 'number') return;
+  history.replaceState({ cspicksSearch: index }, '', nextUrl);
 }
 
 /** Specialized search workflows can reuse input and shortcut behavior without an autocomplete menu. */
