@@ -66,33 +66,34 @@
       "proposals": []
     },
     "COLT": {
-      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
-      "outcome": "not_found",
-      "summary": "COLT 2027 (Tokyo, Jun 28-Jul 2 2027) official site lists submission deadline and all review-timeline milestones as \"Date TBD\", and program chairs as TBD; matches existing record. No new official facts to add.",
+      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "outcome": "incomplete",
+      "summary": "COLT 2027 page confirms June 28-July 2, 2027, Tokyo; deadline, notification and chairs still listed TBD. No change.",
       "checkedUrls": [
         "https://learningtheory.org/colt2027/"
       ],
-      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "deferredUntil": null,
       "proposals": []
     },
     "EMNLP": {
-      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
       "outcome": "not_found",
-      "summary": "EMNLP 2027 official site (emnlp.org) has no 2027-specific content yet (redirects to SIGDAT with no dates/location/chairs beyond the existing region/timing note). No new official facts to add.",
+      "summary": "emnlp.org redirects to sigdat.org, which has no EMNLP 2027 information (no dates, city, deadlines, chairs). Record unchanged.",
       "checkedUrls": [
-        "https://emnlp.org/"
+        "https://emnlp.org/",
+        "https://sigdat.org"
       ],
-      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "deferredUntil": "2026-11-10T20:05:31.409Z",
       "proposals": []
     },
     "FOGA": {
-      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
-      "outcome": "not_found",
-      "summary": "FOGA 2027 official site (foga2027.dei.uc.pt) currently shows only the event name and host city (Coimbra, Portugal), matching the existing record; no dates, deadlines, or chairs published yet.",
+      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "outcome": "incomplete",
+      "summary": "FOGA 2027 site confirms Coimbra, Portugal; dates, deadline, chairs not published on the page. No change.",
       "checkedUrls": [
         "https://foga2027.dei.uc.pt/"
       ],
-      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "deferredUntil": null,
       "proposals": []
     },
     "HotOS": {
@@ -123,25 +124,48 @@
       ]
     },
     "ICCV": {
-      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
-      "outcome": "not_found",
-      "summary": "ICCV 2027 (Hong Kong Convention and Expo Center, Oct 2-8 2027) reconfirmed dates and location match the existing verified record on both the homepage and the /Conferences/2027 page; no submission deadline or chair names published yet beyond what is already recorded.",
+      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "outcome": "incomplete",
+      "summary": "ICCV 2027 site gives Hong Kong (HKCEC); header says October 3-7, 2027 but Venue section says October 2-8, 2027, so date left unchanged; no deadlines or chairs listed. 2031 not researched beyond series page.",
       "checkedUrls": [
-        "https://iccv.thecvf.com/",
         "https://iccv.thecvf.com/Conferences/2027"
       ],
-      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "deferredUntil": null,
       "proposals": []
     },
     "ICME": {
-      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
-      "outcome": "not_found",
-      "summary": "ICME 2027 (Xiamen, China, mid-2027) location and general chair already match official/steering-committee sources; the only official document found (IEEE SPS call for host proposals) is the 2025-dated bid process that selected Xiamen, not a call for papers. No author-facing deadlines published yet.",
+      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "outcome": "complete",
+      "summary": "ICME 2027 site states July 13-17, 2027 Xiamen; regular paper deadline 2026-12-30, notification 2027-03-24, general and TPC chairs. Abstract deadline not listed.",
       "checkedUrls": [
-        "https://signalprocessingsociety.org/events/call-proposals-ieee-icme-2027"
+        "https://2027.ieeeicme.org/",
+        "https://2027.ieeeicme.org/about/important-dates",
+        "https://2027.ieeeicme.org/about/organizing-committee"
       ],
-      "deferredUntil": "2026-10-19T08:10:31.732Z",
-      "proposals": []
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "deadline",
+              "url": "https://2027.ieeeicme.org/about/important-dates",
+              "evidence": "Regular Paper Submission Deadline Dec 30, 2026; Regular Paper Acceptance Notification Mar 24, 2027."
+            },
+            {
+              "field": "generalChair",
+              "url": "https://2027.ieeeicme.org/about/organizing-committee",
+              "evidence": "General Chairs Nicu Sebe and Rongrong Ji; TPC chairs Chia-Wen Lin, Guoying Zhao, Liujuan Cao, William Puech, Tian Gan, Shu Hu, Yue Gao."
+            },
+            {
+              "field": "date",
+              "url": "https://2027.ieeeicme.org/",
+              "evidence": "July 13-17, 2027, Xiamen, China."
+            }
+          ]
+        }
+      ]
     },
     "ICS": {
       "lastCheckedAt": "2026-10-03T20:09:18.954Z",
@@ -154,13 +178,13 @@
       "proposals": []
     },
     "IPSN": {
-      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
-      "outcome": "not_found",
-      "summary": "Reconfirmed via the official SenSys 2027 site that IPSN has no standalone edition from 2026 onward (merged into SenSys/CPS-IoT Week with IoTDI); IPSN's own record is unchanged. The SenSys 2027 page lists \"May 17–20, 2027, Boulder, CO, USA\" but immediately follows it with an editor's placeholder (\"FIXME: IS IT?\"), so the SenSys 2027 record was left unconfirmed (auditor, 2026-10-01).",
+      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "outcome": "complete",
+      "summary": "SenSys 2027 page states IPSN merged into SenSys 2027 (Boulder, May 17-20, 2027); no standalone IPSN edition. Existing note already says so. No change.",
       "checkedUrls": [
         "https://sensys.acm.org/2027/"
       ],
-      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "deferredUntil": null,
       "proposals": []
     },
     "LAK": {
@@ -299,16 +323,13 @@
       "proposals": []
     },
     "WACV": {
-      "lastCheckedAt": "2026-10-18T20:05:44.310Z",
-      "outcome": "incomplete",
-      "summary": "WACV 2027 dates, venue, and Oct 14 2026 final decisions confirmed on the edition page; round deadlines not listed there, existing values left. WACV 2026 Dates page lists round deadlines matching the record; final-decision date conflict (CFP Nov 5 vs Dates page Nov 6 UTC) remains unresolved. No WACV 2028 site found. Re-checked 2026-10-18: no new official information.",
+      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "outcome": "not_found",
+      "summary": "wacv.thecvf.com/Conferences/2028 returned 404; no official 2028 schedule. No change.",
       "checkedUrls": [
-        "https://wacv.thecvf.com/",
-        "https://wacv.thecvf.com/Conferences/2026/Dates",
-        "https://wacv.thecvf.com/Conferences/2027/index.html",
-        "https://wacv.thecvf.com/Conferences/2028/"
+        "https://wacv.thecvf.com/Conferences/2028"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-10T20:05:31.409Z",
       "proposals": []
     },
     "AAAI": {
@@ -403,14 +424,13 @@
       "proposals": []
     },
     "IJCAI": {
-      "lastCheckedAt": "2026-10-18T20:05:44.310Z",
-      "outcome": "incomplete",
-      "summary": "ijcai.org Future Conferences page confirms chairs for IJCAI-28/29/30 as recorded; hosts, dates and timelines for 2028-2030 are not announced (to be named at the preceding conference). Re-checked 2026-10-18: no new official information.",
+      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "outcome": "not_found",
+      "summary": "ijcai.org lists only IJCAI-27 (Kyoto Aug 7-13 and Hengqin Aug 15-17, 2027); later editions announced at the preceding conference. 2028-2030 unchanged.",
       "checkedUrls": [
-        "https://www.ijcai.org/",
-        "https://www.ijcai.org/future_conferences"
+        "https://www.ijcai.org/"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-10T20:05:31.409Z",
       "proposals": []
     },
     "ISSTA": {
@@ -621,13 +641,13 @@
       "proposals": []
     },
     "PODC": {
-      "lastCheckedAt": "2026-10-18T20:05:44.310Z",
+      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
       "outcome": "incomplete",
-      "summary": "PODC 2027 (June 21-25, Reykjavik University) confirmed; CFP page says deadlines will follow (\"Watch this space\"). No deadlines or notification date published. Re-checked 2026-10-18: no new official information.",
+      "summary": "PODC 2027 pages confirm June 21-25, 2027, Reykjavik; CFP says watch this space, no deadlines or chairs listed on the pages read. No change.",
       "checkedUrls": [
         "https://www.podc.org/podc2027/",
-        "https://www.podc.org/podc2027/call-for-papers",
-        "https://www.podc.org/podc2027/call-for-papers/"
+        "https://www.podc.org/podc2027/call-for-papers/",
+        "https://www.podc.org/podc2027/program-committee/"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -654,9 +674,9 @@
       "proposals": []
     },
     "KDD": {
-      "lastCheckedAt": "2026-10-18T20:05:44.310Z",
+      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
       "outcome": "incomplete",
-      "summary": "KDD 2027 dates and San Jose venue re-confirmed; cycle 1 dates match. Cycle 2 (February 2027) abstract, submission, rebuttal and notification dates are not published on the research-track CFP; cycle 2 record left TBD. Re-checked 2026-10-18: no new official information.",
+      "summary": "KDD 2027 cycle 1 dates match the CFP (abstract 2026-07-19, paper 2026-07-26, rebuttal from 2026-09-29, notification 2026-11-14); cycle 2 dates still unlisted. No change.",
       "checkedUrls": [
         "https://kdd2027.kdd.org/",
         "https://kdd2027.kdd.org/research-track-call-for-papers/"
@@ -665,12 +685,11 @@
       "proposals": []
     },
     "IROS": {
-      "lastCheckedAt": "2026-10-18T20:05:44.310Z",
+      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
       "outcome": "incomplete",
-      "summary": "IROS 2027 dates and Florence venue confirmed; the home page lists no paper deadline or notification date (existing 2027-03-01 deadline not re-verified on the edition site). IROS 2028 (Sydney) has no edition site; no change. Re-checked 2026-10-18: no new official information.",
+      "summary": "IROS 2027 site confirms Florence, Sept 27-Oct 1, 2027; no paper deadline or chairs listed on the page. 2028 edition link still points to an IEEE RAS minutes PDF; no 2028 official site found. No change.",
       "checkedUrls": [
-        "https://2027.ieee-iros.org/",
-        "https://2027.ieee-iros.org/call-for-papers/"
+        "https://2027.ieee-iros.org/"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -788,13 +807,12 @@
       "proposals": []
     },
     "RECOMB": {
-      "lastCheckedAt": "2026-10-18T20:05:44.310Z",
+      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
       "outcome": "incomplete",
-      "summary": "RECOMB 2027 dates (May 17-20, satellites May 15-16) and Toronto confirmed on the edition home page; key-dates and committee pages were not retrievable (404 on guessed URL), so no deadlines or chairs recorded. Re-checked 2026-10-18: no new official information.",
+      "summary": "RECOMB 2027 page confirms Toronto, May 17-20, 2027 (satellites May 15-16); key-dates and committees contents not retrievable (key-dates URL guess returned 404). Unverified, retry later.",
       "checkedUrls": [
-        "https://recomb.org/",
         "https://recomb.org/recomb2027",
-        "https://recomb.org/recomb2027/key-dates-deadlines"
+        "https://recomb.org/"
       ],
       "deferredUntil": null,
       "proposals": []
