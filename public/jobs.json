@@ -16639,5 +16639,28 @@
     "startDate": "2027-08",
     "url": "https://nku.wd108.myworkdayjobs.com/en-US/NKU_External/job/Highland-Heights-Ky/Two-Tenure-Track-Assistant-Professor-Positions-in-Information-Systems---Analytics_JR100430",
     "summary": "Two tenure-track Assistant Professor posts in information systems, analytics, health informatics and AI in healthcare; Ph.D. in Information Systems or a related field. Priority given to applications by November 1, 2026; accepted until filled."
+  },
+  {
+    "id": "imsc-tcs-faculty-fellow-reader-2026",
+    "school": "IMSc",
+    "department": "Theoretical Computer Science (The Institute of Mathematical Sciences)",
+    "title": "Faculty positions: Fellow-E and Reader-F (Theoretical Computer Science and other groups)",
+    "track": "research",
+    "level": "open",
+    "areas": [
+      "act",
+      "crypt"
+    ],
+    "country": "IN",
+    "state": "Tamil Nadu",
+    "city": "Chennai",
+    "rolling": false,
+    "lastSeenAt": "2026-10-20",
+    "url": "https://www.imsc.res.in/facultyrecruitment",
+    "visaSponsorship": "not-stated",
+    "summary": "Regular faculty posts at Fellow-E (PhD + 2 years postdoc) and Reader-F (PhD + 5 years) grades, including theoretical computer science with theory of cryptography. Appointment term is not stated on the page; applications close 15 November 2026 18:00.",
+    "source": "crawl",
+    "deadline": "2026-11-15",
+    "verified": true
   }
 ]
