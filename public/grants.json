@@ -170,8 +170,8 @@
       "Faculty"
     ],
     "whoFor": "Tenure-track faculty, faculty within three years of tenure, or eligible nonprofit research institution investigators",
-    "deadline": "Executive summary: October 15, 2025 at 4:00 PM ET; full proposal: January 20, 2026 at 4:00 PM ET (Annual program; YFA2026; DARPARA2502 Amendment 5; next cycle not yet confirmed)",
-    "deadlineMonth": 1,
+    "deadline": "Executive summary: November 5, 2026; full proposal: January 13, 2027 (Annual program; YFA 2027; DARPARA2701 published October 20, 2026; questions close January 5, 2027)",
+    "deadlineMonth": 11,
     "amount": "Up to $500,000 for 24-month base + $500,000 for 12-month Director’s Fellowship option; optional U.S.-person graduate-student support up to $350,000",
     "summary": "Identifies and engages rising stars in junior faculty positions across US academia to expose them to DoD needs and DARPA's high-risk, high-payoff research model in computer science, quantum, autonomy, and microelectronics.",
     "eligibility": [
@@ -1398,7 +1398,7 @@
       "Master's Students"
     ],
     "whoFor": "MS and PhD students in autonomous systems, cybersecurity, microelectronics, and AI",
-    "deadline": "February 1, 2026 (scholar applications; 2026 cycle closed)",
+    "deadline": "February 1, 2027 (scholar applications; application opens November 15, 2026)",
     "deadlineMonth": 2,
     "amount": "Scholar award; amount not stated on the official program page",
     "summary": "Draper Scholars combine graduate thesis research with hands-on work addressing national security challenges. The 2026 cycle is closed; applications were due February 1, 2026, and awards require enrollment in a thesis-bearing degree program at a partner university.",
@@ -2788,7 +2788,7 @@
       "PhD Students"
     ],
     "whoFor": "Women, gender-nonconforming, and underrepresented undergraduate and graduate students in computing",
-    "deadline": "November 18, 2025 at 8:00 PM ET (2026 award preliminary round; finalist round due January 27, 2026)",
+    "deadline": "November 18, 2025 at 8:00 PM ET (2026 award preliminary round; finalist round due January 27, 2026); official page says the award is not currently being offered and lists no 2027 dates",
     "deadlineMonth": 11,
     "amount": "$7,500 cash per Award Winner; $2,500 cash per Honorable Mention (finalists receive a certificate, no cash) + national recognition",
     "summary": "Honors undergraduate and graduate students identifying as women, gender-queer, or non-binary for their technical contributions to projects in computer science, software design, and engineering.",
