@@ -6230,5 +6230,63 @@
     ],
     "url": "https://antigravity.google/use-cases/science",
     "featured": false
+  },
+  {
+    "id": "anthropic-external-researcher-access",
+    "name": "Anthropic External Researcher Access Program",
+    "shortName": "External Researcher Access",
+    "sponsor": "Anthropic",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Postdocs"
+    ],
+    "whoFor": "Researchers (academic or independent) working on AI safety and alignment topics Anthropic considers high priority",
+    "deadline": "Rolling applications; reviewed on the first Monday of each month",
+    "deadlineMonth": 0,
+    "amount": "Typically $1,000 in Claude API credits (rare exceptions may receive more); API use only, not the Claude.ai web app",
+    "summary": "Anthropic gives free Claude API credits to researchers studying AI safety and alignment, evaluated monthly. Only safety/alignment research qualifies; credits cover standard public models for API use only, and participants get no Usage Policy exemption (Anthropic points jailbreaking research to its Model Safety Bug Bounty instead).",
+    "eligibility": [
+      "Research must focus on AI safety or alignment; other research fields don't receive free credits under this program",
+      "No access to nonpublic/non-standard models or API finetuning; normal Usage Policy enforcement applies",
+      "API access only available in countries where Claude is officially offered; apply via the linked Anthropic application form"
+    ],
+    "topics": [
+      "AI/ML",
+      "AI Safety & Ethics"
+    ],
+    "url": "https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program",
+    "featured": false
+  },
+  {
+    "id": "nebius-research-grants",
+    "name": "Nebius Research Grants Program",
+    "shortName": "Nebius Research Grants",
+    "sponsor": "Nebius",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "PhD Students",
+      "Master's Students",
+      "Postdocs"
+    ],
+    "whoFor": "Postgraduate students, PhD students, postdoctoral researchers, and faculty leading computational or data-intensive AI/ML/HPC research at an accredited academic or non-profit research institution",
+    "deadline": "No fixed deadline stated; accepting applications for the 2026-2027 academic year (reviewed throughout summer 2026; notifications late Q3 to early Q4 2026)",
+    "deadlineMonth": 0,
+    "amount": "GPU cloud credits, Token Factory inference tokens, and Tavily search-API credits; exact amount determined individually per proposal, no fixed figure published",
+    "summary": "Nebius gives academic and non-profit researchers free GPU cloud compute, inference tokens, and agentic-search API access for computational or data-intensive AI, ML, data-analytics, or HPC projects, with award size set per proposal.",
+    "eligibility": [
+      "Postgraduate (MS/PhD) student, postdoctoral researcher, or faculty leading a computational/data-intensive project at an accredited academic or non-profit research institution",
+      "Only one person per research project may apply, and only once per project (a declined applicant may reapply with a different project)",
+      "Recipients must agree to publicly acknowledge Nebius support (e.g., case studies on Nebius.Science)"
+    ],
+    "topics": [
+      "AI/ML",
+      "High-Performance Computing",
+      "Cloud Computing"
+    ],
+    "url": "https://nebius.com/nebius-research-grants",
+    "featured": false
   }
 ]
