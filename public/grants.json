@@ -6201,5 +6201,34 @@
     ],
     "url": "https://www.anthropic.com/news/expanding-support-for-scientists",
     "featured": false
+  },
+  {
+    "id": "google-antigravity-scientists",
+    "name": "Google Antigravity Free Access for Scientists",
+    "shortName": "Antigravity for Scientists",
+    "sponsor": "Google",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Scientists doing non-commercial research with an active affiliation at a university, degree-granting institution, non-profit research institute, or national laboratory",
+    "deadline": "No application deadline published; interest-form applications are reviewed and onboarded in weekly cohorts as capacity allows",
+    "deadlineMonth": 0,
+    "amount": "Six months of free access to the highest Google Antigravity usage tier and the Gemini 4 Argon model; no cash or cloud credits",
+    "summary": "Google is giving 10,000 scientists free access to its highest Google Antigravity usage tier and Gemini 4 Argon. Applicants submit an interest form; submission does not guarantee selection, and Google reports more than 20,000 applications for the first cohort.",
+    "eligibility": [
+      "Non-commercial scientific research",
+      "Active affiliation with a university, degree-granting institution, non-profit research institute, or national laboratory",
+      "Interest form asks for an ORCID iD or Google Scholar profile, an institutional email, and a public lab or group URL",
+      "Access is to the individual Google Antigravity service under its individual Terms of Service"
+    ],
+    "topics": [
+      "AI for Science",
+      "Scientific Research"
+    ],
+    "url": "https://antigravity.google/use-cases/science",
+    "featured": false
   }
 ]
