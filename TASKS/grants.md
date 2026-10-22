@@ -52,6 +52,13 @@ Practical cadence:
   - Frontier AI Labs: `"OpenAI Researcher Access Program academic"`, `"OpenAI academic frontier model grants"`, `"Anthropic researcher access program"`
   - Other Industry: `"<Company> Research Award OR Faculty Fellowship computer science"` (Adobe, Qualcomm, IBM, Sony Research Award, Samsung GRO, Bloomberg, Cisco, Snap, Broadcom)
 
+- **AI Tool Access & Compute Credits for Scientists** (searched every discovery run, not rotated; these launch on
+  product pages and blogs, not grant listings, and a fixed program-name query misses new ones):
+  - `"free access for scientists" AI`, `"AI for Science" program researchers apply`, `"academic researchers" free AI access`
+  - Per vendor: `"<vendor> free access researchers OR scientists"` for Google (Gemini, Antigravity, DeepMind), OpenAI
+    (ChatGPT, Codex), Anthropic (Claude), Microsoft (Copilot, Azure AI), Meta, NVIDIA, Mistral, xAI
+  - Credits: `"API credits" researchers program`, `"compute credits" academic research AI`, `"TPU Research Cloud"`
+
 - **Prestigious Foundations & Non-Profits**:
   - `"Alfred P. Sloan Research Fellowships Computer Science"`, `"David and Lucile Packard Fellowships Science Engineering"`, `"Simons Investigators Theoretical Computer Science"`, `"Schmidt Sciences AI2050 Fellowships"`, `"Burroughs Wellcome Fund Career Awards at the Scientific Interface CASI"`
 
@@ -134,6 +141,7 @@ npx playwright test test/e2e/grants.spec.js test/e2e/grants-submit.spec.js  # Ru
 
 ## Discovering new programs
 
-Rotate through the query categories above, starting with the one least represented in recent PRs. Dedup against
+Run the "AI Tool Access & Compute Credits for Scientists" queries every time, then rotate through the other query
+categories above, starting with the one least represented in recent PRs. Dedup against
 every `id`, `name`, and `url` in `grants.json` and open PRs. Each entry needs an official call page; skip programs
 known only from third-party lists.

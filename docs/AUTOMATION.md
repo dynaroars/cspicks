@@ -253,8 +253,9 @@ honestly and leave unknown fields `null`.
 
 ### Discover grants (`grants-discover`)
 
-Playbook: `TASKS/grants.md` ("Discovering new programs"). Rotate: start with the query
-category least represented in recent `[scheduled:grants-discover]` PRs. Cap: 5 new entries. Dedup
+Playbook: `TASKS/grants.md` ("Discovering new programs"). Always run the "AI Tool Access &
+Compute Credits for Scientists" queries, then rotate: start with the query category least
+represented in recent `[scheduled:grants-discover]` PRs. Cap: 5 new entries. Dedup
 against every `id`, `name`, and `url` in `public/grants.json` and against open PRs. Each entry
 needs an official call page; skip programs known only from third-party lists.
 
