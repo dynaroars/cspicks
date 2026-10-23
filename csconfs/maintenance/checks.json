@@ -66,9 +66,9 @@
       "proposals": []
     },
     "COLT": {
-      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
       "outcome": "incomplete",
-      "summary": "COLT 2027 page confirms June 28-July 2, 2027, Tokyo; deadline, notification and chairs still listed TBD. No change.",
+      "summary": "COLT 2027 official page confirms June 28 - July 2, 2027 in Tokyo; submission and notification dates and program chairs are listed as TBD. No change.",
       "checkedUrls": [
         "https://learningtheory.org/colt2027/"
       ],
@@ -87,9 +87,9 @@
       "proposals": []
     },
     "FOGA": {
-      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
       "outcome": "incomplete",
-      "summary": "FOGA 2027 site confirms Coimbra, Portugal; dates, deadline, chairs not published on the page. No change.",
+      "summary": "FOGA 2027 site only shows title and Coimbra, Portugal; dates and deadlines not published on the fetched page. No change.",
       "checkedUrls": [
         "https://foga2027.dei.uc.pt/"
       ],
@@ -124,14 +124,27 @@
       ]
     },
     "ICCV": {
-      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
       "outcome": "incomplete",
-      "summary": "ICCV 2027 site gives Hong Kong (HKCEC); header says October 3-7, 2027 but Venue section says October 2-8, 2027, so date left unchanged; no deadlines or chairs listed. 2031 not researched beyond series page.",
+      "summary": "ICCV 2027 Dates page states October 3-7, 2027 (workshops Oct 3-4, main Oct 5-7); record said Oct 2-8, updated. Hong Kong confirmed. Paper deadlines and chairs not stated on the fetched pages. 2031 not researched beyond the series (no official edition site).",
       "checkedUrls": [
-        "https://iccv.thecvf.com/Conferences/2027"
+        "https://iccv.thecvf.com/Conferences/2027",
+        "https://iccv.thecvf.com/Conferences/2027/Dates"
       ],
       "deferredUntil": null,
-      "proposals": []
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "date",
+              "url": "https://iccv.thecvf.com/Conferences/2027/Dates",
+              "evidence": "Conference dates October 3-7, 2027 (Sunday through Thursday)."
+            }
+          ]
+        }
+      ]
     },
     "ICME": {
       "lastCheckedAt": "2026-10-20T20:05:31.409Z",
@@ -178,9 +191,9 @@
       "proposals": []
     },
     "IPSN": {
-      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
       "outcome": "complete",
-      "summary": "SenSys 2027 page states IPSN merged into SenSys 2027 (Boulder, May 17-20, 2027); no standalone IPSN edition. Existing note already says so. No change.",
+      "summary": "Official SenSys 2027 site confirms SenSys, IPSN and IoTDI merged into SenSys 2027 (May 17-20, 2027, Boulder, CO); no standalone IPSN edition. Existing note is correct; no change.",
       "checkedUrls": [
         "https://sensys.acm.org/2027/"
       ],
@@ -641,13 +654,11 @@
       "proposals": []
     },
     "PODC": {
-      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
       "outcome": "incomplete",
-      "summary": "PODC 2027 pages confirm June 21-25, 2027, Reykjavik; CFP says watch this space, no deadlines or chairs listed on the pages read. No change.",
+      "summary": "PODC 2027 home page confirms June 21-25, 2027 at Reykjavik University; deadlines not published, chairs not named on the fetched page. No change.",
       "checkedUrls": [
-        "https://www.podc.org/podc2027/",
-        "https://www.podc.org/podc2027/call-for-papers/",
-        "https://www.podc.org/podc2027/program-committee/"
+        "https://www.podc.org/podc2027/"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -674,9 +685,9 @@
       "proposals": []
     },
     "KDD": {
-      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
       "outcome": "incomplete",
-      "summary": "KDD 2027 cycle 1 dates match the CFP (abstract 2026-07-19, paper 2026-07-26, rebuttal from 2026-09-29, notification 2026-11-14); cycle 2 dates still unlisted. No change.",
+      "summary": "KDD 2027 research track cycle 1 dates (abstract Jul 19, paper Jul 26, rebuttal Sep 29-Oct 13, notification Nov 14, 2026) match the record. Cycle 2 dates remain unpublished. Site names no chairs on the fetched pages; existing chairs left unchanged. No change.",
       "checkedUrls": [
         "https://kdd2027.kdd.org/",
         "https://kdd2027.kdd.org/research-track-call-for-papers/"
@@ -685,11 +696,12 @@
       "proposals": []
     },
     "IROS": {
-      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
       "outcome": "incomplete",
-      "summary": "IROS 2027 site confirms Florence, Sept 27-Oct 1, 2027; no paper deadline or chairs listed on the page. 2028 edition link still points to an IEEE RAS minutes PDF; no 2028 official site found. No change.",
+      "summary": "IROS 2027 (Florence, Sep 27-Oct 1, 2027) matches. Home page states no submission deadline or chairs; existing 2027-03-01 deadline not re-confirmed (call-for-papers URL guess returned 404). 2028 record link is an IEEE RAS minutes PDF; no 2028 edition site found. No change.",
       "checkedUrls": [
-        "https://2027.ieee-iros.org/"
+        "https://2027.ieee-iros.org/",
+        "https://2027.ieee-iros.org/call-for-papers/"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -735,24 +747,14 @@
       "proposals": []
     },
     "ICRA": {
-      "lastCheckedAt": "2026-10-18T20:05:44.310Z",
-      "outcome": "complete",
-      "summary": "ICRA 2028 (May 15-19, 2028): IEEE RAS event page lists Riocentro, Rio de Janeiro, Brazil and paper submission deadline Sep 15, 2027; record updated, kept estimated because no edition site exists yet. Re-checked 2026-10-18: no new official information; ICRA 2028 listed site 2028.ieee-icra.org returned HTTP 503 (link not changed).",
+      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "outcome": "incomplete",
+      "summary": "ICRA 2027 site confirms May 24-28, 2027, Coex Seoul, paper submission closed. Nothing on the 2028 Rio edition on the 2027 site; 2028 record unchanged.",
       "checkedUrls": [
-        "https://2027.ieee-icra.org/",
-        "https://2028.ieee-icra.org",
-        "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/"
+        "https://2027.ieee-icra.org/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2028,
-          "sources": [
-            "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/"
-          ]
-        }
-      ]
+      "proposals": []
     },
     "ISMB/ECCB": {
       "lastCheckedAt": "2026-10-13T20:16:13.830Z",
@@ -807,12 +809,12 @@
       "proposals": []
     },
     "RECOMB": {
-      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
       "outcome": "incomplete",
-      "summary": "RECOMB 2027 page confirms Toronto, May 17-20, 2027 (satellites May 15-16); key-dates and committees contents not retrievable (key-dates URL guess returned 404). Unverified, retry later.",
+      "summary": "RECOMB 2027 home page confirms May 17-20, 2027 (satellites May 15-16), Toronto; key-dates page returned 404 via the guessed URL and the home page lists no dates. Deadlines unverified.",
       "checkedUrls": [
         "https://recomb.org/recomb2027",
-        "https://recomb.org/"
+        "https://recomb.org/recomb2027/key-dates"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -1021,13 +1023,14 @@
       ]
     },
     "CIKM": {
-      "lastCheckedAt": "2026-10-18T20:05:44.310Z",
-      "outcome": "incomplete",
-      "summary": "cikmconference.org returned HTTP 503; CIKM 2027 could not be checked. Retry next run.",
+      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "outcome": "not_found",
+      "summary": "CIKM series site returned 503 and the CIKM 2026 site mentions no 2027 edition; next edition not announced.",
       "checkedUrls": [
-        "https://www.cikmconference.org/"
+        "https://www.cikmconference.org/",
+        "https://cikm2026.diag.uniroma1.it/"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-12T20:05:21.574Z",
       "proposals": []
     },
     "CP": {
@@ -1048,6 +1051,44 @@
         "https://www.iacr.org/meetings/crypto/"
       ],
       "deferredUntil": "2026-11-08T20:05:44.000Z",
+      "proposals": []
+    },
+    "CSCW": {
+      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "outcome": "incomplete",
+      "summary": "CSCW 2027 site confirms Oct 16-20, 2027, Philadelphia, PA; added a 2027 record. No fixed deadlines or chairs published (rolling PACM HCI review, chairs only via contact address).",
+      "checkedUrls": [
+        "https://cscw.acm.org/",
+        "https://cscw.acm.org/2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "date",
+              "url": "https://cscw.acm.org/2027/",
+              "evidence": "October 16-20, 2027, Philadelphia, USA."
+            },
+            {
+              "field": "place",
+              "url": "https://cscw.acm.org/2027/",
+              "evidence": "Philadelphia, USA."
+            }
+          ]
+        }
+      ]
+    },
+    "DIS": {
+      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "outcome": "not_found",
+      "summary": "DIS series page lists only DIS 2026 (Singapore); no DIS 2027 announcement.",
+      "checkedUrls": [
+        "https://dis.acm.org/"
+      ],
+      "deferredUntil": "2026-11-12T20:05:21.574Z",
       "proposals": []
     }
   }

@@ -9231,7 +9231,7 @@
     "description": "International Conference on Computer Vision",
     "link": "https://iccv.thecvf.com/Conferences/2027",
     "seriesLink": "https://iccv.thecvf.com/",
-    "date": "October 2–8, 2027",
+    "date": "October 3–7, 2027",
     "place": "Hong Kong",
     "abstractDeadline": null,
     "deadline": null,
@@ -37816,6 +37816,29 @@
     "estimated": false,
     "verified": true,
     "generalChair": null
+  },
+  {
+    "name": "CSCW",
+    "venueKeys": [
+      "cscw"
+    ],
+    "year": 2027,
+    "description": "ACM Conference on Computer-Supported Cooperative Work and Social Computing",
+    "link": "https://cscw.acm.org/2027/",
+    "seriesLink": "https://cscw.acm.org/",
+    "date": "October 16-20, 2027",
+    "place": "Philadelphia, PA, US",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": "CSCW uses PACM HCI rolling review; the 2027 site lists no fixed deadlines yet.",
+    "generalChair": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": true,
+    "verified": false
   },
   {
     "name": "CSCW",
