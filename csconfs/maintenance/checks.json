@@ -2,13 +2,11 @@
   "version": 1,
   "series": {
     "DISC": {
-      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
-      "outcome": "complete",
-      "summary": "DISC 2026 (Rome, Nov 9-13 2026): confirmed submission deadline, registration/abstract deadline, rebuttal window, notification date, PC chair, and organizing co-chairs from the official 2026 edition site; record previously had these fields null. DISC 2027 has not yet been announced (no next-edition link, CFP, or dates on the series site); no record created.",
+      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
+      "outcome": "incomplete",
+      "summary": "DISC series site shows only DISC 2026 (Rome, Nov 9-13, 2026); DISC 2027 not announced. No record created.",
       "checkedUrls": [
-        "https://www.disc-conference.org/wp/",
-        "https://www.disc-conference.org/wp/disc2026/",
-        "https://www.disc-conference.org/wp/disc2026/committee/"
+        "https://www.disc-conference.org/wp/"
       ],
       "deferredUntil": null,
       "proposals": [
@@ -66,9 +64,9 @@
       "proposals": []
     },
     "COLT": {
-      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
       "outcome": "incomplete",
-      "summary": "COLT 2027 official page confirms June 28 - July 2, 2027 in Tokyo; submission and notification dates and program chairs are listed as TBD. No change.",
+      "summary": "COLT 2027 site confirms June 28-July 2, 2027, Tokyo; submission and notification dates listed as TBD, chairs TBD. No change.",
       "checkedUrls": [
         "https://learningtheory.org/colt2027/"
       ],
@@ -87,9 +85,9 @@
       "proposals": []
     },
     "FOGA": {
-      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
       "outcome": "incomplete",
-      "summary": "FOGA 2027 site only shows title and Coimbra, Portugal; dates and deadlines not published on the fetched page. No change.",
+      "summary": "FOGA 2027 site confirms Coimbra, Portugal; dates, deadlines, chairs not published. No change.",
       "checkedUrls": [
         "https://foga2027.dei.uc.pt/"
       ],
@@ -124,27 +122,15 @@
       ]
     },
     "ICCV": {
-      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
       "outcome": "incomplete",
-      "summary": "ICCV 2027 Dates page states October 3-7, 2027 (workshops Oct 3-4, main Oct 5-7); record said Oct 2-8, updated. Hong Kong confirmed. Paper deadlines and chairs not stated on the fetched pages. 2031 not researched beyond the series (no official edition site).",
+      "summary": "ICCV 2027 Dates page confirms Oct 3-7, 2027 (workshops Oct 3-4, main Oct 5-7); Hong Kong; the venue section says Oct 2-8; no paper deadlines or chairs published. 2031 not checked on an official edition site. No change.",
       "checkedUrls": [
         "https://iccv.thecvf.com/Conferences/2027",
         "https://iccv.thecvf.com/Conferences/2027/Dates"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://iccv.thecvf.com/Conferences/2027/Dates",
-              "evidence": "Conference dates October 3-7, 2027 (Sunday through Thursday)."
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "ICME": {
       "lastCheckedAt": "2026-10-20T20:05:31.409Z",
@@ -191,13 +177,13 @@
       "proposals": []
     },
     "IPSN": {
-      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
-      "outcome": "complete",
-      "summary": "Official SenSys 2027 site confirms SenSys, IPSN and IoTDI merged into SenSys 2027 (May 17-20, 2027, Boulder, CO); no standalone IPSN edition. Existing note is correct; no change.",
+      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
+      "outcome": "not_found",
+      "summary": "Existing record notes the IPSN/SenSys merge; sensys.acm.org/2027 returned only a bot-verification page, so nothing verified. No change.",
       "checkedUrls": [
         "https://sensys.acm.org/2027/"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-14T20:05:22.181Z",
       "proposals": []
     },
     "LAK": {
@@ -654,9 +640,9 @@
       "proposals": []
     },
     "PODC": {
-      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
       "outcome": "incomplete",
-      "summary": "PODC 2027 home page confirms June 21-25, 2027 at Reykjavik University; deadlines not published, chairs not named on the fetched page. No change.",
+      "summary": "PODC 2027 home page confirms June 21-25, 2027, Reykjavik; the page names no deadlines or chairs (committee pages not checked). No change.",
       "checkedUrls": [
         "https://www.podc.org/podc2027/"
       ],
@@ -685,9 +671,9 @@
       "proposals": []
     },
     "KDD": {
-      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
       "outcome": "incomplete",
-      "summary": "KDD 2027 research track cycle 1 dates (abstract Jul 19, paper Jul 26, rebuttal Sep 29-Oct 13, notification Nov 14, 2026) match the record. Cycle 2 dates remain unpublished. Site names no chairs on the fetched pages; existing chairs left unchanged. No change.",
+      "summary": "KDD 2027 research-track CFP confirms cycle 1 dates already recorded (abstract 2026-07-19, paper 2026-07-26, rebuttal Sep 29-Oct 13, notification 2026-11-14) and Aug 1-5, 2027, San Jose; cycle 2 dates still unpublished. No change.",
       "checkedUrls": [
         "https://kdd2027.kdd.org/",
         "https://kdd2027.kdd.org/research-track-call-for-papers/"
@@ -696,9 +682,9 @@
       "proposals": []
     },
     "IROS": {
-      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
       "outcome": "incomplete",
-      "summary": "IROS 2027 (Florence, Sep 27-Oct 1, 2027) matches. Home page states no submission deadline or chairs; existing 2027-03-01 deadline not re-confirmed (call-for-papers URL guess returned 404). 2028 record link is an IEEE RAS minutes PDF; no 2028 edition site found. No change.",
+      "summary": "IROS 2027 home page confirms Sep 27-Oct 1, 2027, Florence; it shows no submission deadline, so the recorded 2027-03-01 could not be re-confirmed; CFP page 404. 2028 edition has no official site. No change.",
       "checkedUrls": [
         "https://2027.ieee-iros.org/",
         "https://2027.ieee-iros.org/call-for-papers/"
@@ -809,15 +795,44 @@
       "proposals": []
     },
     "RECOMB": {
-      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
-      "outcome": "incomplete",
-      "summary": "RECOMB 2027 home page confirms May 17-20, 2027 (satellites May 15-16), Toronto; key-dates page returned 404 via the guessed URL and the home page lists no dates. Deadlines unverified.",
+      "lastCheckedAt": "2026-10-25T16:30:00.000Z",
+      "outcome": "complete",
+      "summary": "Auditor: RECOMB 2027 key-dates page and CFP state abstract deadline Oct 28, 2026, full paper Nov 4, 2026 (AoE), notification Dec 22, 2026; committees page names Rohit Singh (Duke) as Program Chair. Toronto, May 17-20, 2027 confirmed.",
       "checkedUrls": [
         "https://recomb.org/recomb2027",
-        "https://recomb.org/recomb2027/key-dates"
+        "https://recomb.org/recomb2027/keydates_and_deadlines",
+        "https://recomb.org/recomb2027/call_for_papers",
+        "https://recomb.org/recomb2027/committees"
       ],
       "deferredUntil": null,
-      "proposals": []
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "abstractDeadline",
+              "url": "https://recomb.org/recomb2027/keydates_and_deadlines",
+              "evidence": "Abstract submission deadline: October 28th, 2026, 23:59 AoE"
+            },
+            {
+              "field": "deadline",
+              "url": "https://recomb.org/recomb2027/keydates_and_deadlines",
+              "evidence": "Full paper submission deadline: November 4th, 2026, 23:59 AoE"
+            },
+            {
+              "field": "notificationDate",
+              "url": "https://recomb.org/recomb2027/keydates_and_deadlines",
+              "evidence": "Author notification: December 22nd, 2026"
+            },
+            {
+              "field": "programChair",
+              "url": "https://recomb.org/recomb2027/committees",
+              "evidence": "Program Chair Rohit Singh, Duke University"
+            }
+          ]
+        }
+      ]
     },
     "RTAS": {
       "lastCheckedAt": "2026-10-13T20:16:13.830Z",
@@ -1054,32 +1069,14 @@
       "proposals": []
     },
     "CSCW": {
-      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "lastCheckedAt": "2026-10-25T16:30:00.000Z",
       "outcome": "incomplete",
-      "summary": "CSCW 2027 site confirms Oct 16-20, 2027, Philadelphia, PA; added a 2027 record. No fixed deadlines or chairs published (rolling PACM HCI review, chairs only via contact address).",
+      "summary": "Auditor: cscw.acm.org/2027/ loads and confirms Oct 16-20, 2027, Philadelphia; PACM HCI rolling submissions are open (\"no secret deadline\"); chairs only via chairs2027@cscw.acm.org. Record already matches. No change.",
       "checkedUrls": [
-        "https://cscw.acm.org/",
         "https://cscw.acm.org/2027/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "add",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://cscw.acm.org/2027/",
-              "evidence": "October 16-20, 2027, Philadelphia, USA."
-            },
-            {
-              "field": "place",
-              "url": "https://cscw.acm.org/2027/",
-              "evidence": "Philadelphia, USA."
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "DIS": {
       "lastCheckedAt": "2026-10-22T20:05:21.574Z",
@@ -1089,6 +1086,16 @@
         "https://dis.acm.org/"
       ],
       "deferredUntil": "2026-11-12T20:05:21.574Z",
+      "proposals": []
+    },
+    "EC": {
+      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
+      "outcome": "not_found",
+      "summary": "ec.sigecom.org did not resolve (DNS failure through the proxy); EC 2027 not verified. No change.",
+      "checkedUrls": [
+        "https://ec.sigecom.org/"
+      ],
+      "deferredUntil": "2026-11-14T20:05:22.181Z",
       "proposals": []
     }
   }
