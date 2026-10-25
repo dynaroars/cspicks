@@ -795,14 +795,44 @@
       "proposals": []
     },
     "RECOMB": {
-      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
-      "outcome": "incomplete",
-      "summary": "RECOMB 2027 home page confirms May 17-20, 2027 (satellites May 15-16), Toronto; deadlines/committees not visible in fetched content. No change.",
+      "lastCheckedAt": "2026-10-25T16:30:00.000Z",
+      "outcome": "complete",
+      "summary": "Auditor: RECOMB 2027 key-dates page and CFP state abstract deadline Oct 28, 2026, full paper Nov 4, 2026 (AoE), notification Dec 22, 2026; committees page names Rohit Singh (Duke) as Program Chair. Toronto, May 17-20, 2027 confirmed.",
       "checkedUrls": [
-        "https://recomb.org/recomb2027"
+        "https://recomb.org/recomb2027",
+        "https://recomb.org/recomb2027/keydates_and_deadlines",
+        "https://recomb.org/recomb2027/call_for_papers",
+        "https://recomb.org/recomb2027/committees"
       ],
       "deferredUntil": null,
-      "proposals": []
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "abstractDeadline",
+              "url": "https://recomb.org/recomb2027/keydates_and_deadlines",
+              "evidence": "Abstract submission deadline: October 28th, 2026, 23:59 AoE"
+            },
+            {
+              "field": "deadline",
+              "url": "https://recomb.org/recomb2027/keydates_and_deadlines",
+              "evidence": "Full paper submission deadline: November 4th, 2026, 23:59 AoE"
+            },
+            {
+              "field": "notificationDate",
+              "url": "https://recomb.org/recomb2027/keydates_and_deadlines",
+              "evidence": "Author notification: December 22nd, 2026"
+            },
+            {
+              "field": "programChair",
+              "url": "https://recomb.org/recomb2027/committees",
+              "evidence": "Program Chair Rohit Singh, Duke University"
+            }
+          ]
+        }
+      ]
     },
     "RTAS": {
       "lastCheckedAt": "2026-10-13T20:16:13.830Z",
@@ -1039,13 +1069,13 @@
       "proposals": []
     },
     "CSCW": {
-      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
-      "outcome": "not_found",
-      "summary": "cscw.acm.org/2027 returned only a bot-verification page; nothing verifiable. No change.",
+      "lastCheckedAt": "2026-10-25T16:30:00.000Z",
+      "outcome": "incomplete",
+      "summary": "Auditor: cscw.acm.org/2027/ loads and confirms Oct 16-20, 2027, Philadelphia; PACM HCI rolling submissions are open (\"no secret deadline\"); chairs only via chairs2027@cscw.acm.org. Record already matches. No change.",
       "checkedUrls": [
         "https://cscw.acm.org/2027/"
       ],
-      "deferredUntil": "2026-11-14T20:05:22.181Z",
+      "deferredUntil": null,
       "proposals": []
     },
     "DIS": {
