@@ -339,26 +339,13 @@
     "facultyCount": 147,
     "jobsUrl": "https://www.cs.umd.edu/about/employment/all",
     "state": "MD",
-    "lastCheckedAt": "2026-10-10T18:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Rechecked official CS and Workday postings. Confirmed JR103397, added the still-open CS tenure-track search JR102789, current AIM BS/BA AI lecturer searches, two UMIACS computing postdocs, ARLIS AI-security postdoc, and the still-open quantum cluster search. Completed targeted unit checks for CS, AIM, UMIACS, ARLIS and ECE; broader university-wide posting discovery remains incomplete, so revisit in 7 days.",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department hiring page (https://www.cs.umd.edu/about/employment/all) returned HTTP 502 \"upstream request failed\" from the run's egress proxy on two attempts (a network policy denial, not the site); nothing read. Existing postings left untouched; retry from an environment that can reach the site.",
     "checkedUrls": [
-      "https://www.cs.umd.edu/hiring",
-      "https://www.cs.umd.edu/node/27482",
-      "https://ece.umd.edu/careers",
-      "https://info.umd.edu/about/jobs/",
-      "https://www.umiacs.umd.edu/careers",
-      "https://aim.umd.edu/",
-      "https://www.cs.umd.edu/about/employment/all",
-      "https://umd.wd1.myworkdayjobs.com/en-US/UMCP/job/Assistant-Professor--Associate-Professor--Professor_JR102789",
-      "https://umd.wd1.myworkdayjobs.com/en-us/umcp/job/lecturer_jr104676",
-      "https://umd.wd1.myworkdayjobs.com/en-US/UMCP/job/University-of-Maryland-College-Park/Lecturer_JR104430",
-      "https://umd.wd1.myworkdayjobs.com/en-US/UMCP/job/University-of-Maryland-College-Park/Postdoctoral-Associate---AI-Security_JR104051-1",
-      "https://umd.wd1.myworkdayjobs.com/en-US/UMCP/job/Post-Doctoral-associate_JR100715",
-      "https://umd.wd1.myworkdayjobs.com/en-US/UMCP/job/Post-Doctoral-Associate_JR100737",
-      "https://umd.wd1.myworkdayjobs.com/en-US/UMCP/job/Open-Rank-Faculty-Position--Quantum_JR101284"
+      "https://www.cs.umd.edu/about/employment/all"
     ],
-    "deferredUntil": "2026-10-17",
+    "deferredUntil": "2026-11-16",
     "relatedUnits": [
       {
         "name": "Electrical and Computer Engineering careers",
@@ -993,12 +980,11 @@
     "facultyCount": 110,
     "jobsUrl": "https://www.colorado.edu/cs/jobs",
     "state": "CO",
-    "lastCheckedAt": "2026-10-10T17:00:00Z",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked the official CS hiring page: three faculty searches remain listed and the recurring semester-by-semester temporary teaching appointments are active; recorded the teaching pathway and refreshed three faculty records. CU Jobs blocks direct retrieval (406) during this pass, so the ECEE search and GEM Lab postdoc previously surfaced via official board links could not be independently reconfirmed; Information Science hiring was also not found. Follow up on the blocked university board and verify adjacent-unit status.",
+    "summary": "CS jobs page read 2026-10-26: three tenure-track searches (AI, architecture/systems, quantum) still listed. ECEE record not rechecked.",
     "checkedUrls": [
-      "https://www.colorado.edu/cs/jobs",
-      "https://jobs.colorado.edu/jobs/SearchJobs/"
+      "https://www.colorado.edu/cs/jobs"
     ],
     "deferredUntil": "2026-10-11",
     "relatedUnits": [
@@ -1025,13 +1011,11 @@
     "facultyCount": 109,
     "jobsUrl": "https://www.mccormick.northwestern.edu/computer-science/careers",
     "state": "IL",
-    "lastCheckedAt": "2026-10-10T17:00:00Z",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked the official CS careers page and linked faculty recruiting details. Both CS-wide assistant/associate search (AI/ML plus compilers/programming languages, full consideration Nov 6) and joint CS/ECE quantum search (full consideration Dec 1) remain live; refreshed both CS records. Previously identified adjacent-unit opportunities still need a live check, and a separate current job-board lead remains to classify.",
+    "summary": "CS careers page read 2026-10-26: CS (AI/ML, PL) and quantum computing searches still listed. Other units not rechecked.",
     "checkedUrls": [
-      "https://www.mccormick.northwestern.edu/computer-science/careers/",
-      "https://facultyrecruiting.northwestern.edu/apply/MjYzMw==",
-      "https://facultyrecruiting.northwestern.edu/apply/MjY0NQ=="
+      "https://www.mccormick.northwestern.edu/computer-science/careers/"
     ],
     "deferredUntil": "2026-10-11",
     "relatedUnits": [
@@ -1058,16 +1042,13 @@
     "facultyCount": 103,
     "jobsUrl": "https://csc.ncsu.edu/employment/",
     "state": "NC",
-    "lastCheckedAt": "2026-10-10T18:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Rechecked the current CS employment page and university listings. The CS department now lists a Secure Software Supply Chain Center postdoc absent from jobs.json; added it. Its application link and another lab link resolve only to the JavaScript job-board shell, so dates and full qualifications could not be read; broader ECE/AI institute review remains.",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department hiring page (https://csc.ncsu.edu/employment/) returned HTTP 502 \"upstream request failed\" from the run's egress proxy on two attempts (a network policy denial, not the site); nothing read. Existing postings left untouched; retry from an environment that can reach the site.",
     "checkedUrls": [
-      "https://csc.ncsu.edu/employment/",
-      "https://jobs.ncsu.edu/postings/210860",
-      "https://jobs.ncsu.edu/postings/221991",
-      "https://jobs.ncsu.edu/postings/search?commit=Search&page=2&query_organizational_tier_2_id=any&query_organizational_tier_3_id=any&query_position_type_id=2&sort=2131+asc&utf8=%E2%9C%93"
+      "https://csc.ncsu.edu/employment/"
     ],
-    "deferredUntil": "2026-10-11",
+    "deferredUntil": "2026-11-16",
     "relatedUnits": [
       {
         "name": "Electrical & Computer Engineering employment",
@@ -2284,19 +2265,13 @@
     "facultyCount": 64,
     "jobsUrl": "https://www.uta.edu/academics/schools-colleges/engineering/academics/departments/cse/about/faculty-hiring",
     "state": "TX",
-    "lastCheckedAt": "2026-10-10T00:00:00Z",
-    "outcome": "incomplete",
-    "summary": "The only linked posting (peopleadmin 32798) renders 'This posting is not available'. Non-CS units (2026-10-08): Read all 42 open UTA postings. EE hires power electronics and semiconductor/emerging computing hardware, and the EE/Bioengineering/UTARI postdocs name no computing area, so none qualified. Current pass (2026-10-10): No job added because the public department page conflicts with its Fall 2026 start date and the application portal no longer exposes the referenced posting. Needs recheck with the department or portal.",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department hiring page (https://www.uta.edu/academics/schools-colleges/engineering/academics/departments/cse/about/faculty-hiring) returned HTTP 502 \"upstream request failed\" from the run's egress proxy on two attempts (a network policy denial, not the site); nothing read. Existing postings left untouched; retry from an environment that can reach the site.",
     "checkedUrls": [
-      "https://www.uta.edu/academics/schools-colleges/engineering/academics/departments/cse/about/faculty-hiring",
-      "https://uta.peopleadmin.com/postings/32798",
-      "https://uta.peopleadmin.com/postings/search",
-      "https://uta.peopleadmin.com/postings/34734",
-      "https://uta.peopleadmin.com/postings/34733",
-      "https://uta.peopleadmin.com/postings/34661",
-      "https://uta.peopleadmin.com/postings/34756"
+      "https://www.uta.edu/academics/schools-colleges/engineering/academics/departments/cse/about/faculty-hiring"
     ],
-    "deferredUntil": null,
+    "deferredUntil": "2026-11-16",
     "relatedUnits": [
       {
         "name": "UTA PeopleAdmin faculty postings (all colleges)",
@@ -2379,17 +2354,11 @@
     "facultyCount": 61,
     "jobsUrl": "https://engineering.tufts.edu/cs/about/job-opportunities",
     "state": "MA",
-    "lastCheckedAt": "2026-10-10T00:00:00Z",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Department job page lists the TIAI director search, adjunct lecturers, and a cybersecurity postdoc. Non-CS units (2026-10-08): School of Engineering page lists an ECE computer-engineering teaching professor search and the TIAI director search; ME sensors/embedded systems search needs an engineering doctorate in electromechanics and was left out. Current pass (2026-10-10): Refreshed the current TIAI Director, adjunct lecturer, and cybersecurity postdoc records from the CS department listing.",
+    "summary": "CS employment page read 2026-10-26: TIAI director/Stern professor search live (Dec 15 review date matches record). ECE and School of Engineering pages not rechecked this run.",
     "checkedUrls": [
-      "https://engineering.tufts.edu/cs/about/job-opportunities",
-      "https://engineering.tufts.edu/about/employment-opportunities",
-      "https://engineering.tufts.edu/ece/about/employment-opportunities",
-      "https://apply.interfolio.com/189281",
-      "https://apply.interfolio.com/191126",
-      "https://engineering.tufts.edu/cs/about/employment-opportunities",
-      "https://apply.interfolio.com/193535"
+      "https://engineering.tufts.edu/cs/about/employment-opportunities"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -2413,17 +2382,13 @@
     "facultyCount": 60,
     "jobsUrl": "https://engineering.nd.edu/about-the-college/open-faculty-positions/",
     "state": "IN",
-    "lastCheckedAt": "2026-10-10T00:00:00Z",
-    "outcome": "incomplete",
-    "summary": "College page lists a CSE any-rank search (all areas, vision/robotics systems/quantum encouraged) with no apply link, deadline, or posting URL, so it was not recorded; the linked Interfolio postings are all other departments. Non-CS units (2026-10-08): College of Engineering page lists AME, CBE, CEEES, EE and bioengineering searches; only the EE all-areas search (Interfolio) was added. The AME robotics/AI-with-physics searches require aerospace/mechanical backgrounds and were skipped. Current pass (2026-10-10): Added the CSE any-rank tenure-track search using a stable text-fragment link to the official college posting page because its application link destination was not exposed. Existing EE posting not refreshed.",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department hiring page (https://engineering.nd.edu/about-the-college/open-faculty-positions/) returned HTTP 502 \"upstream request failed\" from the run's egress proxy on two attempts (a network policy denial, not the site); nothing read. Existing postings left untouched; retry from an environment that can reach the site.",
     "checkedUrls": [
-      "https://engineering.nd.edu/about-the-college/open-faculty-positions/",
-      "https://cse.nd.edu/",
-      "https://apply.interfolio.com/192927",
-      "https://ee.nd.edu/about-ee/open-faculty-positions/",
-      "https://apply.interfolio.com/191754"
+      "https://engineering.nd.edu/about-the-college/open-faculty-positions/"
     ],
-    "deferredUntil": null,
+    "deferredUntil": "2026-11-16",
     "relatedUnits": [
       {
         "name": "Electrical Engineering",
@@ -2444,16 +2409,13 @@
     "facultyCount": 59,
     "jobsUrl": "https://www.cis.fiu.edu/about/faculty-positions/",
     "state": "FL",
-    "lastCheckedAt": "2026-10-10T00:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Two open searches (open-rank professor, teaching professor), accepted until filled. Non-CS units (2026-10-08): FIU careers board lists no engineering or computing faculty postings from the current cycle (newest faculty entry is June 2026; the ECE assistant professor posting seen is from the prior cycle). Current pass (2026-10-10): Refreshed the existing open-rank tenured and teaching professor records; both remain listed as accepting applications until filled.",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department hiring page (https://www.cis.fiu.edu/about/faculty-positions/) returned HTTP 502 \"upstream request failed\" from the run's egress proxy on two attempts (a network policy denial, not the site); nothing read. Existing postings left untouched; retry from an environment that can reach the site.",
     "checkedUrls": [
-      "https://www.cis.fiu.edu/about/faculty-positions/",
-      "https://search.careers.fiu.edu/?sort=newest&q=professor",
-      "https://ece.fiu.edu/",
-      "https://cec.fiu.edu/faculty-staff-resources/index.html"
+      "https://www.cis.fiu.edu/about/faculty-positions/"
     ],
-    "deferredUntil": null,
+    "deferredUntil": "2026-11-16",
     "relatedUnits": [
       {
         "name": "Electrical and Computer Engineering",
@@ -2474,18 +2436,11 @@
     "facultyCount": 59,
     "jobsUrl": "https://academicpositions.harvard.edu/postings/search?query=computer+science",
     "state": "MA",
-    "lastCheckedAt": "2026-10-10T00:00:00Z",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Five open SEAS CS postings found on Harvard's official academic positions board (one tenure-track, four postdocs); a postdoc with a March 2026 apply-by date was omitted. Non-CS units (2026-10-08): Scanned the official board for AI/computing postings outside SEAS CS: added a Kennedy School technology and policy search, an FAS life science and AI search, a DFCI/HSPH data science search, and AI/ML postdocs at SEAS ECE, HSPH and HMS. Kempner AI postdocs (apply-by June 2026) and an AI-for-Science applied math/statistics search were skipped. Current pass (2026-10-10): Refreshed the current CS tenure-track Professor record. Other previously tracked CS and related Harvard records remain unreviewed.",
+    "summary": "Harvard academic positions board (22 postings, query computer science) read 2026-10-26: SEAS CS tenure-track search live. Other postdoc records not individually rechecked.",
     "checkedUrls": [
-      "https://seas.harvard.edu/computer-science",
-      "https://seas.harvard.edu/about-us/employment-jobs",
-      "https://academicpositions.harvard.edu/postings/search?query=computer+science",
-      "https://academicpositions.harvard.edu/postings/search",
-      "https://academicpositions.harvard.edu/postings/search?query=data",
-      "https://academicpositions.harvard.edu/postings/search?query=engineering",
-      "https://academicpositions.harvard.edu/postings/16840/print_preview",
-      "https://academicpositions.harvard.edu/postings/search?388%5B0%5D=8&commit=Search&page=2&sort=375+desc&utf8=%E2%9C%93"
+      "https://academicpositions.harvard.edu/postings/search?query=computer+science"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -2548,21 +2503,13 @@
     "facultyCount": 56,
     "jobsUrl": "https://computing.engineering.uconn.edu/about/job-opportunities/",
     "state": "CT",
-    "lastCheckedAt": "2026-10-10T00:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Job Opportunities page states there are currently no open faculty, staff or student positions. Non-CS units (2026-10-08): ece.uconn.edu, engineering.uconn.edu, jobs.uconn.edu and hr.uconn.edu all refused connections or timed out, and the UConn Workday site showed a service outage; no non-CS units could be read. Non-CS units, 2nd pass (2026-10-08): uconn.edu hosts (ece, computing.engineering) refused connections from this environment; web search showed only prior-cycle UConn postings. Current pass (2026-10-10): Recorded one UConn Hartford adjunct CSE 1010 opening for Fall 2026, with possible Spring 2027 availability, via the official HR page. Updated existing record if present.",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department hiring page (https://computing.engineering.uconn.edu/about/job-opportunities/) returned HTTP 502 \"upstream request failed\" from the run's egress proxy on two attempts (a network policy denial, not the site); nothing read. Existing postings left untouched; retry from an environment that can reach the site.",
     "checkedUrls": [
-      "https://computing.engineering.uconn.edu/",
-      "https://computing.engineering.uconn.edu/about/job-opportunities/",
-      "https://ece.uconn.edu/about/employment/",
-      "https://engineering.uconn.edu/",
-      "https://jobs.uconn.edu/",
-      "https://hr.uconn.edu/jobs/",
-      "https://uconn.wd1.myworkdayjobs.com/UConn",
-      "https://computing.engineering.uconn.edu/about/job-opportunities",
-      "https://hr.uconn.edu/jobs/adjunct-faculty-opportunities-2/"
+      "https://computing.engineering.uconn.edu/about/job-opportunities/"
     ],
-    "deferredUntil": null,
+    "deferredUntil": "2026-11-16",
     "relatedUnits": [
       {
         "name": "Electrical and Computer Engineering",
@@ -2583,17 +2530,13 @@
     "facultyCount": 56,
     "jobsUrl": "https://www.wpi.edu/academics/departments/computer-science/hiring",
     "state": "MA",
-    "lastCheckedAt": "2026-10-10T00:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Only a part-time adjunct pool posting listed; omitted as not a substantive faculty opening. Non-CS units (2026-10-08): WPI Workday lists 79 jobs; the only computing-adjacent faculty posting is an MME assistant professor of AI in mechatronics and controls, which requires a mechatronics/controls background and was skipped. No ECE, data science, or robotics faculty postings. Current pass (2026-10-10): Added WPI Computer Science part-time adjunct applicant pool, filled as needed, and active until its posting closes.",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department hiring page (https://www.wpi.edu/academics/departments/computer-science/hiring) returned HTTP 502 \"upstream request failed\" from the run's egress proxy on two attempts (a network policy denial, not the site); nothing read. Existing postings left untouched; retry from an environment that can reach the site.",
     "checkedUrls": [
-      "https://www.wpi.edu/academics/departments/computer-science/hiring",
-      "https://wpi.wd5.myworkdayjobs.com/WPI_External_Career_Site",
-      "https://wpi.wd5.myworkdayjobs.com/en-US/WPI_External_Career_Site/job/Worcester/Assistant-Professor_R0003517",
-      "https://www.wpi.edu/academics/departments/electrical-computer-engineering",
-      "https://www.wpi.wd5.myworkdayjobs.com/External"
+      "https://www.wpi.edu/academics/departments/computer-science/hiring"
     ],
-    "deferredUntil": null,
+    "deferredUntil": "2026-11-16",
     "relatedUnits": [
       {
         "name": "WPI Workday careers",
@@ -2615,13 +2558,11 @@
     "facultyCount": 55,
     "jobsUrl": "https://cdm.depaul.edu/about/jobs",
     "state": "IL",
-    "lastCheckedAt": "2026-10-10T00:00:00Z",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "CDM jobs page states there are currently no open full-time faculty positions. Non-CS units (2026-10-08): CDM (Jarvis College of Computing and Digital Media) jobs page lists no open full-time faculty positions; no separate information school or ECE unit found to check. Current pass (2026-10-10): Added seven current part-time School of Computing adjunct applicant pools: AI, Computer Science, Cybersecurity, Data Science, Database, Game Programming, and HCI. Individual position-detail URLs identify distinct job IDs; detail pages expose generic pool instructions only.",
+    "summary": "CDM jobs page loaded 2026-10-26 but its Full-Time and Adjunct lists are collapsed accordions, not read. Existing records untouched.",
     "checkedUrls": [
-      "https://cdm.depaul.edu/about/jobs",
-      "https://academics.depaul.edu/faculty-jobs/Pages/part-time.aspx",
-      "https://academics.depaul.edu/faculty-jobs/Pages/full-time.aspx"
+      "https://cdm.depaul.edu/about/jobs"
     ],
     "deferredUntil": null,
     "relatedUnits": [],
@@ -2730,15 +2671,12 @@
     "facultyCount": 54,
     "jobsUrl": "https://engineering.yale.edu/research-and-faculty/faculty-openings",
     "state": "CT",
-    "lastCheckedAt": "2026-10-10T00:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Faculty openings page lists no computer science positions (only applied math, environmental, materials). Non-CS units (2026-10-08): 2026-27 Yale Engineering openings are applied and computational mathematics, environmental engineering, and materials science; none is a computing or ECE search a CS PhD plainly targets. Statistics and Data Science faculty-search page returned 404. Current pass (2026-10-10): Added Assistant Professor, Human-Computer Interaction (CS), listed in Yale’s official academic openings on Oct 9, 2026; direct Interfolio posting linked from the current index.",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "outcome": "complete",
+    "summary": "Yale Engineering faculty openings read 2026-10-26: CS HCI assistant search still live; added CS quantum computing theory search (Interfolio 194878, deadline 2026-12-01). Applied math and environmental engineering searches are outside computing.",
     "checkedUrls": [
-      "https://engineering.yale.edu/computer-science/employment",
       "https://engineering.yale.edu/research-and-faculty/faculty-openings",
-      "https://statistics.yale.edu/faculty-search",
-      "https://academicpositions.yale.edu/",
-      "https://apply.interfolio.com/194718"
+      "https://apply.interfolio.com/194878"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -2757,14 +2695,11 @@
     "facultyCount": 53,
     "jobsUrl": "https://cs.brown.edu/about/positions/",
     "state": "RI",
-    "lastCheckedAt": "2026-10-10T00:00:00Z",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Positions page lists two open faculty searches (AI professors of the practice, computational biology tenure-track); Interfolio pages did not render, so details come from the department page. Non-CS units (2026-10-08): Both existing CS records are still live on cs.brown.edu positions page and Interfolio (AI professors of the practice, open Sep 21 2026; computational biology, DOF Data Science Institute, open Aug 1 2026). No additional non-CS postings found. Current pass (2026-10-10): Refreshed two Professor of the Practice AI faculty roles (assistant and associate rank; one Interfolio posting) and the assistant professor computational biology tenure-track role. AI roles are open until filled with Nov 1 full-consideration date; computational biology accepts until filled with Oct 15 full-consideration date.",
+    "summary": "CS positions page read 2026-10-26: AI professor-of-practice searches live (full consideration Nov 1; no H-1B sponsorship stated). Compbio posting not rechecked.",
     "checkedUrls": [
-      "https://cs.brown.edu/",
-      "https://cs.brown.edu/about/positions/",
-      "https://apply.interfolio.com/192839",
-      "https://apply.interfolio.com/189906"
+      "https://cs.brown.edu/about/positions/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -2822,13 +2757,11 @@
     "facultyCount": 52,
     "jobsUrl": "https://employment.ku.edu/jobs/faculty",
     "state": "KS",
-    "lastCheckedAt": "2026-10-10T00:00:00Z",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "All 27 faculty/lecturer postings on KU Employment read; none are EECS or computing. Non-CS units (2026-10-08): Page 1 of the KU faculty listing (25 of 27 entries) shows no computing, EECS, data science or information postings (Aerospace, Mechanical, Architectural Engineering etc. are non-computing); page 2 was not opened and the earlier crawl read all 27 with none relevant. Non-CS units, 2nd pass (2026-10-08): Rendered the full 27-entry KU faculty listing with deadlines; all are Aerospace, Mechanical, Civil/Architectural Engineering or non-computing units, none CS-targeted. Current pass (2026-10-10): Added Assistant Professor in Computer Science/AI (33947BR), a current tenure-track search in AI/ML, expected Aug 18, 2027. Official page conflicts on the review date: narrative says Nov 16, 2026, while metadata and the live listing show Nov 16, 2027; date omitted from record pending clarification.",
+    "summary": "KU faculty postings list read 2026-10-26: Assistant Professor in Computer Science/AI (33947BR, review begins 2026-11-16) still listed. Wireless communications EECS posting not added.",
     "checkedUrls": [
-      "https://employment.ku.edu/jobs/faculty",
-      "https://eecs.ku.edu/",
-      "https://employment.ku.edu/jobs/faculty/assistant-professor-in-computer-science-ai/33947br"
+      "https://employment.ku.edu/jobs/faculty"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -2912,20 +2845,11 @@
     "facultyCount": 48,
     "jobsUrl": "https://cs.engr.uky.edu/about-4/jobs",
     "state": "KY",
-    "lastCheckedAt": "2026-10-10T00:00:00Z",
+    "lastCheckedAt": "2026-10-26T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "One open tenure-track assistant professor posting, open until filled. Non-CS units (2026-10-08): Searched UKJobs for electrical, computer, data, informatics, information science, cyber, artificial, machine learning and postdoc. Only the Surgery data scientist posting is a plausible CS PhD fit; Statistics requires a statistics PhD, no ECE or information-school computing posting is open. Current pass (2026-10-10): Refreshed Assistant Professor in Computer Science/Engineering (FE05056), tenure-track, open until filled; Aug 2027 start; AI/ML, AI security, and systems for AI needs.",
+    "summary": "CS jobs page read 2026-10-26: assistant professor search (start Aug 2027) still listed. UKJobs not rechecked.",
     "checkedUrls": [
-      "https://cs.engr.uky.edu/about-4/jobs",
-      "https://ukjobs.uky.edu/postings/650924",
-      "https://ukjobs.uky.edu/postings/search?query=electrical",
-      "https://ukjobs.uky.edu/postings/search?query=computer",
-      "https://ukjobs.uky.edu/postings/search?query=data",
-      "https://ukjobs.uky.edu/postings/search?query=informatics",
-      "https://ukjobs.uky.edu/postings/search?query=artificial",
-      "https://ukjobs.uky.edu/postings/search?query=cyber",
-      "https://ukjobs.uky.edu/postings/650939",
-      "https://ukjobs.uky.edu/postings/649307"
+      "https://cs.engr.uky.edu/about-4/jobs"
     ],
     "deferredUntil": null,
     "relatedUnits": [
