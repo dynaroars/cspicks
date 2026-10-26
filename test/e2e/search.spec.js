@@ -235,13 +235,11 @@ test('back and forward move between the university list, its faculty, and a prof
   await page.goto('./?percapita=false');
   const school = page.locator('#school-results .card[data-name="George Mason University"]');
   await expect(school).toBeVisible();
-  await expect(page.locator('#search-back')).toBeHidden();
 
   await school.locator('.card-header').click();
   await expect(page).toHaveURL(/targetType=school/);
   await expect(page.locator('#main-search')).toHaveAttribute('data-query', 'George Mason University');
   await expect(page.locator('#school-results .school-faculty-roster')).toContainText('Hai Duong');
-  await expect(page.locator('#search-back')).toBeVisible();
 
   await page.locator('#school-results .school-faculty-roster .faculty-tag', { hasText: 'Hai Duong' }).click();
   await expect(page).toHaveURL(/targetType=researcher/);
@@ -260,7 +258,7 @@ test('back and forward move between the university list, its faculty, and a prof
   await expect(page.locator('#prof-results')).toContainText('Hai Duong');
   await expect(page.locator('#school-results .school-faculty-roster')).toHaveCount(0);
 
-  await page.locator('#search-back').click();
+  await page.goBack();
   await expect(page).toHaveURL(/targetType=school/);
   await expect(page.locator('#school-results .school-faculty-roster')).toContainText('Hai Duong');
   await page.goForward();
@@ -271,7 +269,6 @@ test('back and forward move between the university list, its faculty, and a prof
   await page.goBack();
   await expect(page).not.toHaveURL(/[?&]q=/);
   await expect(page.locator('#school-results')).toContainText('GMU');
-  await expect(page.locator('#search-back')).toBeHidden();
 
   await page.goForward();
   await expect(page).toHaveURL(/targetType=school/);

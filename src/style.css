@@ -409,27 +409,6 @@ footer button:hover {
   margin-bottom: 0.85rem;
 }
 
-.search-back {
-  flex: none;
-  align-self: center;
-  margin: 0;
-  padding: 0.45rem 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  background: var(--card-bg);
-  color: var(--text-primary);
-  font: inherit;
-  font-size: var(--text-sm);
-  cursor: pointer;
-}
-.search-back:hover,
-.search-back:focus-visible {
-  background: var(--hover-bg);
-}
-.search-back[hidden] {
-  display: none;
-}
-
 .search-help-list {
   margin: 0.35rem 0;
   padding-left: 1.1rem;

@@ -6,7 +6,7 @@ import { getConferenceAreaMap, loadData, publicationMatchesConferenceSet, school
 import { createFilterBar } from './filters.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
 import { renderProfessorCard as renderProfessorCardView, renderSchoolCard as renderSchoolCardView } from './search-cards.js';
-import { createSearchControls, focusSearchOnLoad, renderSearchExamples as renderExampleChips, sample, searchHistoryIndex, updateSearchUrl } from './search-controls.js';
+import { createSearchControls, focusSearchOnLoad, renderSearchExamples as renderExampleChips, sample, updateSearchUrl } from './search-controls.js';
 import { parseKeywordQuery } from './search-keywords.js';
 import { clearSearchSections, createDblpAuthorSearch, filterSearchRecords, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
@@ -167,7 +167,6 @@ async function init() {
     searchInput.disabled = false;
 
     applyQueryFromLocation();
-    syncSearchBack();
     if (!new URLSearchParams(location.search).has('q') && isDiscoveries) discoveriesApi?.scrollToHashDiscovery();
 
     focusSearchOnLoad(searchInput);
@@ -243,12 +242,6 @@ function updateURL(options?: { push?: boolean }) {
 
   updateSearchUrl(params, q, { push: Boolean(options?.push) && !applyingHistory });
   updateSeoForCurrentView(q);
-  syncSearchBack();
-}
-
-function syncSearchBack() {
-  const button = document.getElementById('search-back');
-  if (button) button.hidden = searchHistoryIndex() === 0;
 }
 
 function applyQueryFromLocation() {
@@ -425,7 +418,6 @@ function setupSearch() {
     }
   });
 
-  document.getElementById('search-back')?.addEventListener('click', () => history.back());
   window.addEventListener('popstate', () => {
     if (!rawData) return;
     clearSearchDebounce();

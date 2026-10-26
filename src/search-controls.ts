@@ -72,7 +72,7 @@ export function renderSearchExamples(container: HTMLElement, examples: Array<str
   }).join('');
 }
 
-export function searchHistoryIndex() {
+function searchHistoryIndex() {
   const state = history.state as { cspicksSearch?: unknown } | null;
   return state && typeof state.cspicksSearch === 'number' ? state.cspicksSearch : 0;
 }
