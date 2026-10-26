@@ -64,13 +64,14 @@
       "proposals": []
     },
     "COLT": {
-      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
-      "outcome": "incomplete",
-      "summary": "COLT 2027 site confirms June 28-July 2, 2027, Tokyo; submission and notification dates listed as TBD, chairs TBD. No change.",
+      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "outcome": "not_found",
+      "summary": "COLT 2027 page confirms June 28-July 2, Tokyo; submission/notification dates, chairs all TBD. No change.",
       "checkedUrls": [
-        "https://learningtheory.org/colt2027/"
+        "https://learningtheory.org/colt2027/",
+        "https://learningtheory.org/colt2027/cfp.html"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-15T20:05:38.844Z",
       "proposals": []
     },
     "EMNLP": {
@@ -85,13 +86,13 @@
       "proposals": []
     },
     "FOGA": {
-      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
-      "outcome": "incomplete",
-      "summary": "FOGA 2027 site confirms Coimbra, Portugal; dates, deadlines, chairs not published. No change.",
+      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "outcome": "not_found",
+      "summary": "FOGA 2027 site shows only the title (Coimbra, Portugal); dates, deadlines, chairs not stated. No change.",
       "checkedUrls": [
         "https://foga2027.dei.uc.pt/"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-15T20:05:38.844Z",
       "proposals": []
     },
     "HotOS": {
@@ -122,12 +123,11 @@
       ]
     },
     "ICCV": {
-      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
+      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
       "outcome": "incomplete",
-      "summary": "ICCV 2027 Dates page confirms Oct 3-7, 2027 (workshops Oct 3-4, main Oct 5-7); Hong Kong; the venue section says Oct 2-8; no paper deadlines or chairs published. 2031 not checked on an official edition site. No change.",
+      "summary": "ICCV 2027 page: Hong Kong HKCEC, but header says Oct 3-7 and Venue section says Oct 2-8 (internal conflict; record keeps Oct 3-7). No deadlines or chairs listed. 2031 not researched beyond this.",
       "checkedUrls": [
-        "https://iccv.thecvf.com/Conferences/2027",
-        "https://iccv.thecvf.com/Conferences/2027/Dates"
+        "https://iccv.thecvf.com/Conferences/2027"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -167,13 +167,13 @@
       ]
     },
     "ICS": {
-      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
       "outcome": "not_found",
-      "summary": "ICS 2027 page says Atlanta as part of FCRC; dates and organizing committee still \"to be announced\". No submission deadlines.",
+      "summary": "ICS site says Atlanta (FCRC 2027); dates and committee to be announced. No change.",
       "checkedUrls": [
         "https://www.ics-conference.org/"
       ],
-      "deferredUntil": "2026-10-24T20:09:18.954Z",
+      "deferredUntil": "2026-11-15T20:05:38.844Z",
       "proposals": []
     },
     "IPSN": {
@@ -257,14 +257,13 @@
       "proposals": []
     },
     "SIGGRAPH Asia": {
-      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
       "outcome": "not_found",
-      "summary": "asia.siggraph.org/2027/ returns 404; the series site links a SIGGRAPH Asia 2027 entry but its content was not retrievable. Dates and papers deadline unverified.",
+      "summary": "Could not verify 2027 deadlines: asia.siggraph.org/2027/ did not return usable content to the fetch tool. No change; retry later.",
       "checkedUrls": [
-        "https://asia.siggraph.org/",
-        "https://asia.siggraph.org/2027/ (404)"
+        "https://asia.siggraph.org/2027/"
       ],
-      "deferredUntil": "2026-10-24T20:09:18.954Z",
+      "deferredUntil": "2026-11-15T20:05:38.844Z",
       "proposals": []
     },
     "SIGIR": {
@@ -300,26 +299,38 @@
       ]
     },
     "UIST": {
-      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
       "outcome": "not_found",
-      "summary": "uist.acm.org/2027/ returns 404 and the series site only shows UIST 2026; no 2027 announcement. Record link still names 2026 and a 2027 abstract deadline contradicts its note; left for a later run.",
+      "summary": "uist.acm.org only covers UIST 2026; no 2027 edition announced. No change.",
       "checkedUrls": [
-        "https://uist.acm.org/",
-        "https://uist.acm.org/2027/ (404)"
+        "https://uist.acm.org/"
       ],
-      "deferredUntil": "2026-10-24T20:09:18.954Z",
+      "deferredUntil": "2026-11-15T20:05:38.844Z",
       "proposals": []
     },
     "USENIX ATC": {
-      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
       "outcome": "not_found",
-      "summary": "usenix.org/conference/atc27 returns 404 and the USENIX conferences list shows no ATC 2027 entry; the existing record could not be verified.",
+      "summary": "No ATC 2026/2027 listed on USENIX upcoming conferences or atc26 page; latest is ATC 25. Fixed typo in ATC 2025 notificationDate (20205-04-25 -> 2025-04-25) per official CFP.",
       "checkedUrls": [
-        "https://www.usenix.org/conference/atc27 (404)",
-        "https://www.usenix.org/conferences"
+        "https://www.usenix.org/conferences/upcoming",
+        "https://www.usenix.org/conference/atc26",
+        "https://www.usenix.org/conference/atc25/call-for-papers"
       ],
-      "deferredUntil": "2026-10-24T20:09:18.954Z",
-      "proposals": []
+      "deferredUntil": "2026-11-15T20:05:38.844Z",
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2025,
+          "sources": [
+            {
+              "field": "notificationDate",
+              "url": "https://www.usenix.org/conference/atc25/call-for-papers",
+              "evidence": "Notification to authors: Friday, April 25, 2025."
+            }
+          ]
+        }
+      ]
     },
     "WACV": {
       "lastCheckedAt": "2026-10-20T20:05:31.409Z",
@@ -640,13 +651,14 @@
       "proposals": []
     },
     "PODC": {
-      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
-      "outcome": "incomplete",
-      "summary": "PODC 2027 home page confirms June 21-25, 2027, Reykjavik; the page names no deadlines or chairs (committee pages not checked). No change.",
+      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "outcome": "not_found",
+      "summary": "PODC 2027 page confirms June 21-25, Reykjavik; CFP says details to follow, no deadline. No change.",
       "checkedUrls": [
-        "https://www.podc.org/podc2027/"
+        "https://www.podc.org/podc2027/",
+        "https://www.podc.org/podc2027/call-for-papers/"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-15T20:05:38.844Z",
       "proposals": []
     },
     "ACM MM": {
@@ -671,9 +683,9 @@
       "proposals": []
     },
     "KDD": {
-      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
+      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
       "outcome": "incomplete",
-      "summary": "KDD 2027 research-track CFP confirms cycle 1 dates already recorded (abstract 2026-07-19, paper 2026-07-26, rebuttal Sep 29-Oct 13, notification 2026-11-14) and Aug 1-5, 2027, San Jose; cycle 2 dates still unpublished. No change.",
+      "summary": "Cycle 1 dates (Jul 19/26 2026, rebuttal Sep 29-Oct 13, notification Nov 14) match the record. Cycle 2 dates not published; Cycle 2 record remains estimated/unverified by design.",
       "checkedUrls": [
         "https://kdd2027.kdd.org/",
         "https://kdd2027.kdd.org/research-track-call-for-papers/"
@@ -682,14 +694,13 @@
       "proposals": []
     },
     "IROS": {
-      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
-      "outcome": "incomplete",
-      "summary": "IROS 2027 home page confirms Sep 27-Oct 1, 2027, Florence; it shows no submission deadline, so the recorded 2027-03-01 could not be re-confirmed; CFP page 404. 2028 edition has no official site. No change.",
+      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "outcome": "not_found",
+      "summary": "2028 record (Sydney) not re-verified: edition site does not exist yet; link points to IEEE RAS minutes PDF. No change.",
       "checkedUrls": [
-        "https://2027.ieee-iros.org/",
-        "https://2027.ieee-iros.org/call-for-papers/"
+        "https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-past-and-future-venues/"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-15T20:05:38.844Z",
       "proposals": []
     },
     "ESOP": {
@@ -733,11 +744,12 @@
       "proposals": []
     },
     "ICRA": {
-      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
       "outcome": "incomplete",
-      "summary": "ICRA 2027 site confirms May 24-28, 2027, Coex Seoul, paper submission closed. Nothing on the 2028 Rio edition on the 2027 site; 2028 record unchanged.",
+      "summary": "2027 page confirms Seoul, May 24-28, 2027, CFP closed. 2028 IEEE RAS event page confirms Rio de Janeiro, May 15-19, 2028 and Sept 15, 2027 paper deadline (matches record); no edition website yet so estimated stays true.",
       "checkedUrls": [
-        "https://2027.ieee-icra.org/"
+        "https://2027.ieee-icra.org/",
+        "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -1069,13 +1081,13 @@
       "proposals": []
     },
     "CSCW": {
-      "lastCheckedAt": "2026-10-25T16:30:00.000Z",
-      "outcome": "incomplete",
-      "summary": "Auditor: cscw.acm.org/2027/ loads and confirms Oct 16-20, 2027, Philadelphia; PACM HCI rolling submissions are open (\"no secret deadline\"); chairs only via chairs2027@cscw.acm.org. Record already matches. No change.",
+      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "outcome": "not_found",
+      "summary": "2027 site (Coming Soon) confirms Philadelphia, Oct 16-20, 2027; rolling PACM HCI review, no deadlines or chairs named. No change.",
       "checkedUrls": [
         "https://cscw.acm.org/2027/"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-15T20:05:38.844Z",
       "proposals": []
     },
     "DIS": {
