@@ -16823,11 +16823,13 @@
     "region": "europe",
     "jobsUrl": "https://taltech.ee/en/open-positions",
     "state": "checked",
-    "lastCheckedAt": "2026-10-27T23:30:00Z",
-    "outcome": "no_current_leads",
-    "summary": "Official Open Positions page lists one academic post in the School of Information Technologies: Associate Professor of Control Engineering (Department of Computer Systems, deadline 15.11.2026). Not added: control engineering is not plainly a computing target and the full posting text was not read. Revisit to confirm.",
+    "lastCheckedAt": "2026-10-28T16:30:00Z",
+    "outcome": "complete",
+    "summary": "Open Positions page (rendered) lists two School of IT posts in the Department of Computer Systems: Postdoctoral Researcher in RISC-V Hardware Design and AI Accelerators (added; list says deadline 27.11.2026, posting says 15 Dec 2026, so deadline left null) and Associate Professor of Control Engineering on the teaching track (not added: control systems, requires advanced Estonian). Audit check 2026-10-28.",
     "checkedUrls": [
-      "https://taltech.ee/en/open-positions"
+      "https://taltech.ee/en/open-positions",
+      "https://taltech.teamdash.com/p/job/MvVrgOTE/postdoctoral-researcher-in-risc-v-hardware-design-and-ai-accelerators/en",
+      "https://taltech.teamdash.com/p/job/T4a7YWNg/automaatjuhtimise-kaasprofessor/en"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
