@@ -44,23 +44,23 @@
       "proposals": []
     },
     "CCC": {
-      "lastCheckedAt": "2026-10-04T20:14:58.622Z",
-      "outcome": "not_found",
-      "summary": "CCC 2027 site confirms July 19-22, 2027, Seattle. No CFP, deadline, or notification published yet; the page says only \"The chair of CCC 2027 will be Swastik Kopparty\" without naming the role, so the existing generalChair value is left unchanged.",
+      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "outcome": "incomplete",
+      "summary": "CCC 2027 page confirms July 19-22, 2027, Seattle; no submission or notification dates posted yet.",
       "checkedUrls": [
         "https://computationalcomplexity.org/"
       ],
-      "deferredUntil": "2026-10-25T20:14:58.622Z",
+      "deferredUntil": null,
       "proposals": []
     },
     "CHES": {
-      "lastCheckedAt": "2026-10-04T20:14:58.622Z",
-      "outcome": "not_found",
-      "summary": "CHES 2027 site confirms dates, place and four TCHES rounds (2026-07-15, 2026-10-15, 2027-01-15, 2027-04-15 AoE); matches the existing note. No single conference-wide deadline exists, so deadline stays null.",
+      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "outcome": "complete",
+      "summary": "CHES 2027 page confirms Sept 6-9, 2027, Cancun and four TCHES rounds; no single conference deadline by design, record unchanged.",
       "checkedUrls": [
         "https://ches.iacr.org/2027/"
       ],
-      "deferredUntil": "2026-10-25T20:14:58.622Z",
+      "deferredUntil": null,
       "proposals": []
     },
     "COLT": {
@@ -187,26 +187,65 @@
       "proposals": []
     },
     "LAK": {
-      "lastCheckedAt": "2026-10-04T20:14:58.622Z",
-      "outcome": "not_found",
-      "summary": "LAK27 home page confirms Recife, Brazil but gives no dates or deadlines; the call-for-papers URL guessed returned 404. Existing abstractDeadline not re-verifiable this run.",
+      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "outcome": "complete",
+      "summary": "LAK27 General Call lists research-track deadline and notification.",
       "checkedUrls": [
         "https://www.solaresearch.org/events/lak/lak27/",
-        "https://www.solaresearch.org/events/lak/lak27/call-for-papers/ (404)"
+        "https://www.solaresearch.org/events/lak/lak27/general-call/"
       ],
-      "deferredUntil": "2026-10-25T20:14:58.622Z",
-      "proposals": []
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "deadline",
+              "url": "https://www.solaresearch.org/events/lak/lak27/general-call/",
+              "evidence": "Full/short paper submission deadline 28 Sept 2026 (AoE)."
+            },
+            {
+              "field": "notificationDate",
+              "url": "https://www.solaresearch.org/events/lak/lak27/general-call/",
+              "evidence": "Notification of acceptance 24 Nov 2026."
+            }
+          ]
+        }
+      ]
     },
     "LICS": {
-      "lastCheckedAt": "2026-10-04T20:14:58.622Z",
-      "outcome": "not_found",
-      "summary": "LICS 2027 site confirms June 21-24, 2027, Montreal, programme chairs Pablo Barcelo and Alexandra Silva. No deadlines published; estimated/verified flags unchanged.",
+      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "outcome": "complete",
+      "summary": "LICS 2027 CFP lists abstract, full paper and notification dates.",
       "checkedUrls": [
         "https://lics.siglog.org/lics27/",
-        "https://lics.siglog.org/lics27/cfp.php (404)"
+        "https://lics.siglog.org/lics27/cfp.php"
       ],
-      "deferredUntil": "2026-10-25T20:14:58.622Z",
-      "proposals": []
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "abstractDeadline",
+              "url": "https://lics.siglog.org/lics27/cfp.php",
+              "evidence": "Title and short abstract due 14 January 2027 (AoE)."
+            },
+            {
+              "field": "deadline",
+              "url": "https://lics.siglog.org/lics27/cfp.php",
+              "evidence": "Full paper due 21 January 2027."
+            },
+            {
+              "field": "notificationDate",
+              "url": "https://lics.siglog.org/lics27/cfp.php",
+              "evidence": "Author notification 15 April 2027."
+            }
+          ]
+        }
+      ]
     },
     "MobiSys": {
       "lastCheckedAt": "2026-10-03T20:09:18.954Z",
@@ -246,15 +285,28 @@
       ]
     },
     "SIGCOMM": {
-      "lastCheckedAt": "2026-10-04T20:14:58.622Z",
-      "outcome": "not_found",
-      "summary": "SIGCOMM 2027 site confirms Aug 8-12, 2027, Bangkok; submission deadlines and notification are marked TBA. The /cfp/ page still shows 2026 content.",
+      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "outcome": "incomplete",
+      "summary": "Submission page states hard deadline Feb 2, 2027; paper registration and notification dates not posted.",
       "checkedUrls": [
         "https://conferences.sigcomm.org/sigcomm/2027/",
-        "https://conferences.sigcomm.org/sigcomm/2027/cfp/"
+        "https://conferences.sigcomm.org/sigcomm/2027/cfp/",
+        "https://conferences.sigcomm.org/sigcomm/2027/submission/"
       ],
-      "deferredUntil": "2026-10-25T20:14:58.622Z",
-      "proposals": []
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "deadline",
+              "url": "https://conferences.sigcomm.org/sigcomm/2027/submission/",
+              "evidence": "You must submit your paper by February 2, 2027 (hard deadline)."
+            }
+          ]
+        }
+      ]
     },
     "SIGGRAPH Asia": {
       "lastCheckedAt": "2026-10-25T20:05:38.844Z",
@@ -343,63 +395,65 @@
       "proposals": []
     },
     "AAAI": {
-      "lastCheckedAt": "2026-10-04T20:14:58.622Z",
+      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "Series page shows no AAAI-28 dates, location, or deadlines. AAAI-27 record unchanged.",
+      "summary": "AAAI-28 not announced on the series page; only AAAI-27 listed.",
       "checkedUrls": [
         "https://aaai.org/conference/aaai/"
       ],
-      "deferredUntil": "2026-10-25T20:14:58.622Z",
+      "deferredUntil": "2026-11-17T20:30:00.000Z",
       "proposals": []
     },
     "ASPLOS": {
-      "lastCheckedAt": "2026-10-04T20:14:58.622Z",
+      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "Series site shows ASPLOS 2027 (Heraklion, April 11-15, 2027) but nothing for 2028. No deadline changes confirmed.",
+      "summary": "ASPLOS 2028 not announced on the series page; only ASPLOS 2027 listed.",
       "checkedUrls": [
         "https://www.asplos-conference.org/"
       ],
-      "deferredUntil": "2026-10-25T20:14:58.622Z",
+      "deferredUntil": "2026-11-17T20:30:00.000Z",
       "proposals": []
     },
     "CAV": {
-      "lastCheckedAt": "2026-10-04T20:14:58.622Z",
+      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "CAV 2027 site matches the existing record (Jul 19-23, 2027, Amsterdam; submission 2027-01-20; response Apr 5-8; notification 2027-04-23). No CAV 2028 information.",
+      "summary": "CAV 2028 not mentioned on the 2027 edition site; series site redirects to a non-official-looking CloudFront host so not used.",
       "checkedUrls": [
-        "https://conferences.i-cav.org/2027/"
+        "https://conferences.i-cav.org/2027/",
+        "https://i-cav.org/"
       ],
-      "deferredUntil": "2026-10-25T20:14:58.622Z",
+      "deferredUntil": "2026-11-17T20:30:00.000Z",
       "proposals": []
     },
     "CCS": {
-      "lastCheckedAt": "2026-10-04T20:14:58.622Z",
+      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "CCS 2027 page confirms Oct 11-15, 2027, Atlanta, with deadlines, chairs and notification still Coming Soon. No CCS 2028 information found.",
+      "summary": "CCS 2027 page blocked by bot check and CCS 2028 not found; unverified, retry later.",
       "checkedUrls": [
         "https://www.sigsac.org/ccs/CCS2027/"
       ],
-      "deferredUntil": "2026-10-25T20:14:58.622Z",
+      "deferredUntil": "2026-11-17T20:30:00.000Z",
       "proposals": []
     },
     "CHI": {
-      "lastCheckedAt": "2026-10-04T20:14:58.622Z",
+      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "chi.acm.org returned HTTP 403 to the fetcher; nothing verified for CHI 2028.",
+      "summary": "CHI 2028 not announced on the CHI 2027 site; CHI 2027 paper deadline and notification match existing record. chi.acm.org returned 403.",
       "checkedUrls": [
-        "https://chi.acm.org/ (403)"
+        "https://chi2027.acm.org/",
+        "https://chi.acm.org/"
       ],
-      "deferredUntil": "2026-10-25T20:14:58.622Z",
+      "deferredUntil": "2026-11-17T20:30:00.000Z",
       "proposals": []
     },
     "CVPR": {
-      "lastCheckedAt": "2026-10-04T20:14:58.622Z",
+      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "cvpr.thecvf.com confirms CVPR 2027 June 20-25, Seattle and shows the paper submission period opened Sep 3; no CVPR 2028 information and no deadline dates read on the home page.",
+      "summary": "CVPR site lists editions only through 2027; no 2028 or 2029 details published.",
       "checkedUrls": [
         "https://cvpr.thecvf.com/"
       ],
-      "deferredUntil": "2026-10-25T20:14:58.622Z",
+      "deferredUntil": "2026-11-17T20:30:00.000Z",
       "proposals": []
     },
     "EuroSys": {
@@ -683,9 +737,9 @@
       "proposals": []
     },
     "KDD": {
-      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
       "outcome": "incomplete",
-      "summary": "Cycle 1 dates (Jul 19/26 2026, rebuttal Sep 29-Oct 13, notification Nov 14) match the record. Cycle 2 dates not published; Cycle 2 record remains estimated/unverified by design.",
+      "summary": "Cycle 1 dates match the research-track CFP; cycle 2 only states a February 2027 deadline with no exact dates, left TBD.",
       "checkedUrls": [
         "https://kdd2027.kdd.org/",
         "https://kdd2027.kdd.org/research-track-call-for-papers/"
