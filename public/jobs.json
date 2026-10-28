@@ -16685,5 +16685,27 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "taltech-postdoc-risc-v-hardware-ai-accelerators-2026",
+    "school": "Tallinn University of Technology",
+    "department": "Department of Computer Systems, Centre for Dependable Computing Systems",
+    "title": "Postdoctoral Researcher in RISC-V Hardware Design and AI Accelerators",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "arch"
+    ],
+    "state": "Harjumaa",
+    "city": "Tallinn",
+    "country": "EE",
+    "deadline": null,
+    "rolling": false,
+    "lastSeenAt": "2026-10-28",
+    "url": "https://taltech.teamdash.com/p/job/MvVrgOTE/postdoctoral-researcher-in-risc-v-hardware-design-and-ai-accelerators/en",
+    "visaSponsorship": "not-stated",
+    "summary": "Two-year (extendable) postdoc leading RISC-V ISA-extension and AI-accelerator hardware design, from RTL to tape-out, in two national projects including one on fault-tolerant quantum computing. Requires a PhD in computer or electrical engineering focused on hardware design. Deadline left unset: the open-positions list says 27.11.2026, the posting says 15 Dec 2026.",
+    "source": "crawl",
+    "verified": true
   }
 ]
