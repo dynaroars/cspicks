@@ -118,6 +118,10 @@ elsewhere. Check every field independently:
 - chair names come from the correct role, without confusing general chairs,
   program chairs, track chairs, or proceedings editors;
 - `estimated` remains true unless the submission timeline is confirmed;
+- a deadline no official page states (e.g. only third-party trackers, or carried
+  from a prior year) stays in place but the record is set to `estimated: true`,
+  `verified: false` until the CFP confirms it (owner rule, #42); don't null it
+  or ask the owner;
 - `verified` is true only when the important schedule facts have official
   support;
 - all submission cycles for the same conference year share the same event,

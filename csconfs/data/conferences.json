@@ -13934,8 +13934,8 @@
     "programChair": "Sami Haddadin",
     "acceptanceRate": null,
     "submissions": null,
-    "estimated": false,
-    "verified": true
+    "estimated": true,
+    "verified": false
   },
   {
     "name": "IROS",
