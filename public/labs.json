@@ -133,7 +133,7 @@
     "careersUrl": "https://www.ibm.com/careers/research",
     "internshipsUrl": "https://www.ibm.com/careers/internships",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-10-28"
   },
   {
     "id": "nvidia-research",
@@ -182,7 +182,7 @@
     "internshipsUrl": "https://www.amazon.science/careers?q=&f0=internship&expandedFilters=Job%2520type%2CCountry%2520%2F%2520region%2CJob%2520category%2C",
     "postdocsUrl": "https://www.amazon.science/postdoctoral-science-program",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-10-28"
   },
   {
     "id": "apple-mlr",
@@ -204,7 +204,7 @@
     "careersUrl": "https://machinelearning.apple.com/work-with-us",
     "internshipsUrl": "https://www.apple.com/careers/us/work-at-apple/students.html",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-10-28"
   },
   {
     "id": "adobe-research",
@@ -227,7 +227,7 @@
     "careersUrl": "https://research.adobe.com/careers/",
     "internshipsUrl": "https://research.adobe.com/careers/internships/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-10-28"
   },
   {
     "id": "intel-labs",
@@ -285,7 +285,7 @@
     "summary": "Qualcomm’s research arm (on-device AI, wireless, compute); hires through Qualcomm’s careers site.",
     "careersUrl": "https://www.qualcomm.com/company/careers",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-10-28"
   },
   {
     "id": "salesforce-ai-research",
@@ -303,7 +303,7 @@
     "summary": "Salesforce’s AI research group (language models, agents); hires research scientists and interns.",
     "careersUrl": "https://www.salesforce.com/company/careers/teams/ai-research/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-10-28"
   },
   {
     "id": "ai2",
@@ -326,7 +326,7 @@
     "careersUrl": "https://allenai.org/careers",
     "internshipsUrl": "https://allenai.org/internships",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-10-28"
   },
   {
     "id": "toyota-research-institute",
@@ -389,7 +389,7 @@
     "summary": "AI safety and research company; hires research scientists and engineers (alignment, interpretability, pretraining, security).",
     "careersUrl": "https://www.anthropic.com/careers",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-10-28"
   },
   {
     "id": "galois",
@@ -412,7 +412,7 @@
     "careersUrl": "https://www.galois.com/careers",
     "internshipsUrl": "https://www.galois.com/roles/intern",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-10-28"
   },
   {
     "id": "grammatech",
@@ -466,7 +466,7 @@
     "summary": "Research and engineering company for national security (cyber, AI/ML, information operations).",
     "careersUrl": "https://twosixtech.com/careers/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-10-28"
   },
   {
     "id": "charles-river-analytics",
@@ -569,7 +569,7 @@
     "careersUrl": "https://www.draper.com/careers",
     "internshipsUrl": "https://www.draper.com/education-programs/student-opportunities",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-10-28"
   },
   {
     "id": "llnl",
@@ -932,6 +932,6 @@
     "summary": "DoD research center at Carnegie Mellon (software engineering, cybersecurity including CERT, AI engineering).",
     "careersUrl": "https://www.sei.cmu.edu/careers/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-10-28"
   }
 ]
