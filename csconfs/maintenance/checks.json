@@ -2,36 +2,14 @@
   "version": 1,
   "series": {
     "DISC": {
-      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
-      "outcome": "incomplete",
-      "summary": "DISC series site shows only DISC 2026 (Rome, Nov 9-13, 2026); DISC 2027 not announced. No record created.",
+      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "outcome": "not_found",
+      "summary": "DISC next edition (2027) not announced on official site; no record created.",
       "checkedUrls": [
         "https://www.disc-conference.org/wp/"
       ],
-      "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2026,
-          "sources": [
-            {
-              "field": "deadline",
-              "url": "https://www.disc-conference.org/wp/disc2026/",
-              "evidence": "Important Dates: Submission deadline June 1, 2026 (23:59 AoE); Paper registration May 27, 2026; Rebuttal phase July 21-25, 2026; Notification August 5, 2026."
-            },
-            {
-              "field": "programChair",
-              "url": "https://www.disc-conference.org/wp/disc2026/committee/",
-              "evidence": "Program Committee Chair listed as Keren Censor-Hillel, Technion, Israel."
-            },
-            {
-              "field": "generalChair",
-              "url": "https://www.disc-conference.org/wp/disc2026/committee/",
-              "evidence": "Organizing Committee co-chairs listed as Ioannis Chatzigiannakis and Andrea Vitaletti, Sapienza University Italy."
-            }
-          ]
-        }
-      ]
+      "deferredUntil": "2026-11-19T20:06:37.000Z",
+      "proposals": []
     },
     "ACL": {
       "lastCheckedAt": "2026-09-28T08:10:31.732Z",
@@ -44,9 +22,9 @@
       "proposals": []
     },
     "CCC": {
-      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
       "outcome": "incomplete",
-      "summary": "CCC 2027 page confirms July 19-22, 2027, Seattle; no submission or notification dates posted yet.",
+      "summary": "CCC 2027 (Seattle, July 19-22) confirmed; submission/notification deadlines not announced; chair role ambiguous, left unchanged.",
       "checkedUrls": [
         "https://computationalcomplexity.org/"
       ],
@@ -54,9 +32,9 @@
       "proposals": []
     },
     "CHES": {
-      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
       "outcome": "complete",
-      "summary": "CHES 2027 page confirms Sept 6-9, 2027, Cancun and four TCHES rounds; no single conference deadline by design, record unchanged.",
+      "summary": "CHES 2027 site confirms place/dates and four TCHES rounds already in the record note; no single conference deadline, so deadline stays null.",
       "checkedUrls": [
         "https://ches.iacr.org/2027/"
       ],
@@ -123,11 +101,12 @@
       ]
     },
     "ICCV": {
-      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
       "outcome": "incomplete",
-      "summary": "ICCV 2027 page: Hong Kong HKCEC, but header says Oct 3-7 and Venue section says Oct 2-8 (internal conflict; record keeps Oct 3-7). No deadlines or chairs listed. 2031 not researched beyond this.",
+      "summary": "ICCV 2027 dates Oct 3-7 confirmed on Dates page; submission deadlines not published; ICCV 2031 not checked beyond site.",
       "checkedUrls": [
-        "https://iccv.thecvf.com/Conferences/2027"
+        "https://iccv.thecvf.com/Conferences/2027",
+        "https://iccv.thecvf.com/Conferences/2027/Dates"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -529,15 +508,27 @@
       "proposals": []
     },
     "SOSP": {
-      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
-      "outcome": "not_found",
-      "summary": "sosp.org lists SOSP only through 2026; the sigops.org 2027 page has no SOSP 2027 dates, deadlines or chairs, and nothing for 2028. Unchanged.",
+      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "outcome": "incomplete",
+      "summary": "SOSP 2027 dates Nov 30-Dec 3, 2027 added; deadlines not announced; SOSP 2028 not announced.",
       "checkedUrls": [
         "https://sosp.org/",
         "https://sigops.org/s/conferences/sosp/2027/"
       ],
-      "deferredUntil": "2026-10-27T20:16:29.176Z",
-      "proposals": []
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "date",
+              "url": "https://sosp.org/",
+              "evidence": "SOSP 2027 listed for November 30 to December 3, 2027, Vancouver."
+            }
+          ]
+        }
+      ]
     },
     "ICDE": {
       "lastCheckedAt": "2026-10-06T20:16:29.176Z",
@@ -737,9 +728,9 @@
       "proposals": []
     },
     "KDD": {
-      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
       "outcome": "incomplete",
-      "summary": "Cycle 1 dates match the research-track CFP; cycle 2 only states a February 2027 deadline with no exact dates, left TBD.",
+      "summary": "KDD 2027 cycle 1 deadlines match the research-track CFP; cycle 2 dates not announced, left estimated/unverified.",
       "checkedUrls": [
         "https://kdd2027.kdd.org/",
         "https://kdd2027.kdd.org/research-track-call-for-papers/"
@@ -798,15 +789,26 @@
       "proposals": []
     },
     "ICRA": {
-      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
-      "outcome": "incomplete",
-      "summary": "2027 page confirms Seoul, May 24-28, 2027, CFP closed. 2028 IEEE RAS event page confirms Rio de Janeiro, May 15-19, 2028 and Sept 15, 2027 paper deadline (matches record); no edition website yet so estimated stays true.",
+      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "outcome": "complete",
+      "summary": "ICRA 2028 (Rio de Janeiro, May 15-19, 2028) and paper deadline Sept 15, 2027 stated on IEEE RAS event page.",
       "checkedUrls": [
-        "https://2027.ieee-icra.org/",
         "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/"
       ],
       "deferredUntil": null,
-      "proposals": []
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2028,
+          "sources": [
+            {
+              "field": "deadline",
+              "url": "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
+              "evidence": "Paper submission deadline September 15, 2027."
+            }
+          ]
+        }
+      ]
     },
     "ISMB/ECCB": {
       "lastCheckedAt": "2026-10-13T20:16:13.830Z",
@@ -1162,6 +1164,56 @@
         "https://ec.sigecom.org/"
       ],
       "deferredUntil": "2026-11-14T20:05:22.181Z",
+      "proposals": []
+    },
+    "ECCV": {
+      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "outcome": "not_found",
+      "summary": "ECCV next edition (2027) not announced on official site; no record created.",
+      "checkedUrls": [
+        "https://eccv.ecva.net/"
+      ],
+      "deferredUntil": "2026-11-19T20:06:37.000Z",
+      "proposals": []
+    },
+    "EMSOFT": {
+      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "outcome": "not_found",
+      "summary": "EMSOFT next edition (2027) not announced on official site; no record created.",
+      "checkedUrls": [
+        "https://esweek.org/emsoft/"
+      ],
+      "deferredUntil": "2026-11-19T20:06:37.000Z",
+      "proposals": []
+    },
+    "ER": {
+      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "outcome": "not_found",
+      "summary": "ER next edition (2027) not announced on official site; no record created.",
+      "checkedUrls": [
+        "https://er2026.org/"
+      ],
+      "deferredUntil": "2026-11-19T20:06:37.000Z",
+      "proposals": []
+    },
+    "ESA": {
+      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "outcome": "not_found",
+      "summary": "ESA next edition (2027) not announced on official site; no record created.",
+      "checkedUrls": [
+        "https://algo-conference.org/2026"
+      ],
+      "deferredUntil": "2026-11-19T20:06:37.000Z",
+      "proposals": []
+    },
+    "ESEM": {
+      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "outcome": "not_found",
+      "summary": "ESEM next edition (2027) not announced on official site; no record created.",
+      "checkedUrls": [
+        "https://www.esem-conferences.org/"
+      ],
+      "deferredUntil": "2026-11-19T20:06:37.000Z",
       "proposals": []
     }
   }
