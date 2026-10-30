@@ -45,8 +45,10 @@ test('grants dataset contains required schema fields and is non-empty', async ()
   }
 });
 
+// Behavior tests read a frozen snapshot (test/fixtures/grants.json) so routine data edits can't break them;
+// the schema test above is the one that checks the live file.
 test('grants filtering separates current and historical programs', async () => {
-  const fileContent = await fs.readFile(new URL('../../public/grants.json', import.meta.url), 'utf8');
+  const fileContent = await fs.readFile(new URL('../fixtures/grants.json', import.meta.url), 'utf8');
   const grants = JSON.parse(fileContent);
 
   const historical = filterGrants(grants, { status: 'historical' });
@@ -63,7 +65,7 @@ test('grants filtering separates current and historical programs', async () => {
 });
 
 test('annual past deadlines project to the next cycle and retain a sortable deadline month', async () => {
-  const fileContent = await fs.readFile(new URL('../../public/grants.json', import.meta.url), 'utf8');
+  const fileContent = await fs.readFile(new URL('../fixtures/grants.json', import.meta.url), 'utf8');
   const grants = JSON.parse(fileContent);
   const cnrFellows = grants.find(g => g.id === 'onr-cnr-fellows');
 
@@ -77,7 +79,7 @@ test('annual past deadlines project to the next cycle and retain a sortable dead
 });
 
 test('grants filtering filters by audience and sponsor category', async () => {
-  const fileContent = await fs.readFile(new URL('../../public/grants.json', import.meta.url), 'utf8');
+  const fileContent = await fs.readFile(new URL('../fixtures/grants.json', import.meta.url), 'utf8');
   const grants = JSON.parse(fileContent);
 
   // Filter by Faculty
@@ -102,7 +104,7 @@ test('grants filtering filters by audience and sponsor category', async () => {
 });
 
 test('grants filtering performs text query search across name, sponsor, topics and summary', async () => {
-  const fileContent = await fs.readFile(new URL('../../public/grants.json', import.meta.url), 'utf8');
+  const fileContent = await fs.readFile(new URL('../fixtures/grants.json', import.meta.url), 'utf8');
   const grants = JSON.parse(fileContent);
 
   const nsfMatches = filterGrants(grants, { query: 'NSF' });
@@ -130,7 +132,7 @@ test('grants filtering performs text query search across name, sponsor, topics a
 });
 
 test('grants suggestions extract awards, sponsors, topics, and audiences', async () => {
-  const fileContent = await fs.readFile(new URL('../../public/grants.json', import.meta.url), 'utf8');
+  const fileContent = await fs.readFile(new URL('../fixtures/grants.json', import.meta.url), 'utf8');
   const grants = JSON.parse(fileContent);
 
   const suggestions = grantsSuggestions(grants);
@@ -143,7 +145,7 @@ test('grants suggestions extract awards, sponsors, topics, and audiences', async
 });
 
 test('keywords replace audience, category, topic, deadline, and status dropdowns', async () => {
-  const grants = JSON.parse(await fs.readFile(new URL('../../public/grants.json', import.meta.url), 'utf8'));
+  const grants = JSON.parse(await fs.readFile(new URL('../fixtures/grants.json', import.meta.url), 'utf8'));
   const ids = list => list.map(grant => grant.id);
   for (const [query, filters] of [
     ['audience: students', { audience: 'students' }],

@@ -1,0 +1,161 @@
+[
+  {
+    "id": "microsoft-research",
+    "name": "Microsoft Research",
+    "aka": [
+      "MSR"
+    ],
+    "org": "Microsoft",
+    "kind": "industry",
+    "areas": [
+      "ai",
+      "mlmining",
+      "sec",
+      "ops",
+      "plan",
+      "act",
+      "chi"
+    ],
+    "broad": true,
+    "locations": [
+      "Redmond, WA",
+      "Cambridge, MA",
+      "New York, NY",
+      "Montréal, QC"
+    ],
+    "summary": "Microsoft’s research organization, with labs in Redmond, New England, New York City, Montréal, and abroad; hires researchers, postdocs, and PhD research interns.",
+    "careersUrl": "https://www.microsoft.com/en-us/research/careers/",
+    "internshipsUrl": "https://www.microsoft.com/en-us/research/careers/open-positions/?facet%5Bdate%5D%5Bfixed%5D=any&facet%5Btax%5D%5Bmsr-job-opportunity-type%5D[]=234821&pg=1&sort_by=most-recent",
+    "postdocsUrl": "https://www.microsoft.com/en-us/research/careers/open-positions/?facet%5Bdate%5D%5Bfixed%5D=any&facet%5Btax%5D%5Bmsr-job-opportunity-type%5D[]=234824&pg=1&sort_by=most-recent",
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
+  },
+  {
+    "id": "google-research",
+    "name": "Google Research",
+    "org": "Google",
+    "kind": "industry",
+    "areas": [
+      "ai",
+      "mlmining",
+      "nlp",
+      "vision",
+      "act",
+      "chi"
+    ],
+    "broad": true,
+    "locations": [
+      "Mountain View, CA",
+      "New York, NY",
+      "Cambridge, MA",
+      "Seattle, WA",
+      "Pittsburgh, PA",
+      "Atlanta, GA"
+    ],
+    "summary": "Google’s research organization, with US and international offices; hires research scientists and research engineers, plus PhD student researchers and interns.",
+    "careersUrl": "https://research.google/careers/",
+    "internshipsUrl": "https://research.google/programs-and-events/student-engagement/",
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
+  },
+  {
+    "id": "google-deepmind",
+    "name": "Google DeepMind",
+    "aka": [
+      "Google Brain",
+      "DeepMind"
+    ],
+    "org": "Google",
+    "kind": "industry",
+    "areas": [
+      "ai",
+      "mlmining",
+      "nlp",
+      "vision",
+      "robotics"
+    ],
+    "locations": [
+      "London, UK",
+      "Mountain View, CA",
+      "New York, NY"
+    ],
+    "summary": "Google’s AI research lab, formed in 2023 by merging Google Brain and DeepMind; hires research scientists and engineers and runs a Student Researcher Program.",
+    "careersUrl": "https://deepmind.google/careers/",
+    "internshipsUrl": "https://deepmind.google/student-researcher-program/",
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
+  },
+  {
+    "id": "meta-ai",
+    "name": "Meta AI (FAIR)",
+    "aka": [
+      "FAIR",
+      "Facebook AI Research"
+    ],
+    "org": "Meta",
+    "kind": "industry",
+    "areas": [
+      "ai",
+      "mlmining",
+      "nlp",
+      "vision",
+      "robotics"
+    ],
+    "locations": [
+      "Menlo Park, CA",
+      "New York, NY",
+      "Seattle, WA"
+    ],
+    "summary": "Meta’s AI research organization, including Fundamental AI Research (FAIR); hires research scientists, engineers, and PhD research interns.",
+    "careersUrl": "https://ai.meta.com/join-us/",
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-15"
+  },
+  {
+    "id": "ibm-research",
+    "name": "IBM Research",
+    "org": "IBM",
+    "kind": "industry",
+    "areas": [
+      "ai",
+      "sec",
+      "mod",
+      "arch",
+      "ops"
+    ],
+    "broad": true,
+    "locations": [
+      "Yorktown Heights, NY",
+      "San Jose, CA",
+      "Cambridge, MA"
+    ],
+    "summary": "IBM’s research division (AI, hybrid cloud, quantum computing, semiconductors, security); hires research scientists and runs internships.",
+    "careersUrl": "https://www.ibm.com/careers/research",
+    "internshipsUrl": "https://www.ibm.com/careers/internships",
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-28"
+  },
+  {
+    "id": "galois",
+    "name": "Galois",
+    "org": "Galois, Inc.",
+    "kind": "company",
+    "areas": [
+      "plan",
+      "log",
+      "sec",
+      "crypt",
+      "soft"
+    ],
+    "locations": [
+      "Portland, OR",
+      "Arlington, VA",
+      "Dayton, OH"
+    ],
+    "summary": "Research and development company (formal methods, programming languages, cryptography, security); a frequent employer of CS PhDs, with internships.",
+    "careersUrl": "https://www.galois.com/careers",
+    "internshipsUrl": "https://www.galois.com/roles/intern",
+    "checkedAt": "2026-10-15",
+    "postingsCheckedAt": "2026-10-28"
+  }
+]
