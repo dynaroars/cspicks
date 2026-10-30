@@ -20,6 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history for the Stats page's growth chart (scripts/build-stats-history.mjs).
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22

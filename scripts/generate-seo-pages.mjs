@@ -462,6 +462,8 @@ export async function generateSeoPages() {
   }
   console.log(`Generated ${areaPageCount} research area SEO pages.`);
 
+  // The Stats page's generated-pages inventory reads these counts.
+  await fs.writeFile(path.join(outDir, 'seo-pages.json'), `${JSON.stringify({ schools: schoolPageCount, areas: areaPageCount })}\n`);
   return { schoolPageCount, areaPageCount };
 }
 

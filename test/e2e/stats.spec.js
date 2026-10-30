@@ -45,6 +45,16 @@ async function mockData(page) {
   await page.route('**/conferences.json', route => route.fulfill({ json: conferences }));
   // The stats page must never download the large NSF snapshot.
   await page.route('**/nsf-awards.json', route => { nsfRequested = true; return route.fulfill({ json: { awards: [] } }); });
+  await page.route('**/stats-history.json', route => route.fulfill({ json: {
+    generatedAt: '2026-10-11T00:00:00Z',
+    crawl: { schools: 10, withHiringUrl: 8, checked7: 3, checked30: 6, checked90: 9 },
+    history: [
+      { date: '2026-09-01', activeJobs: null, grants: 1, conferences: 1, crawledSchools: null, codeLines: 100 },
+      { date: '2026-10-01', activeJobs: 2, grants: 2, conferences: 2, crawledSchools: 5, codeLines: 150 },
+      { date: '2026-10-11', activeJobs: 1, grants: 2, conferences: 2, crawledSchools: 9, codeLines: 160 }
+    ]
+  } }));
+  await page.route('**/seo-pages.json', route => route.fulfill({ json: { schools: 300, areas: 27 } }));
   await page.route('https://api.github.com/**', route => {
     const url = new URL(route.request().url());
     const last = (n) => ({ Link: `<${url.origin}${url.pathname}?per_page=1&page=${n}>; rel="last"`, 'Access-Control-Expose-Headers': 'Link' });
@@ -81,6 +91,35 @@ test('stats page lists what CS Picks tracks and recent repository activity', asy
   await expect(repo.locator('.stats-commits li').first()).toContainText('stats: add <b>page</b>');
   await expect(repo.locator('.stats-commits b')).toHaveCount(0);
   expect(nsfRequested).toBe(false);
+});
+
+test('data health shows completeness, recent updates, the page inventory, and switchable growth history', async ({ page }) => {
+  await mockData(page);
+  await page.goto('stats.html');
+  const health = page.locator('#stats-health');
+  await expect(health.locator('.completeness-card')).toHaveCount(13);
+  await expect(health.locator('.completeness-card', { hasText: 'Upcoming editions verified' })).toContainText('100%');
+  await expect(health.locator('.completeness-card', { hasText: 'Hiring pages on file' })).toContainText('8 of 10 records');
+  await expect(health.locator('.recent-updates-badge')).toContainText('3 schools crawled this week');
+  await expect(health.locator('.html-inventory-total')).toHaveText('337 pages');
+  await expect(health.locator('.growth-metric-btn')).toHaveCount(5);
+  await expect(health.locator('.growth-metric-btn.is-active')).toContainText('Active jobs');
+  await expect(health.locator('#growth-chart')).toBeVisible();
+  await health.locator('.growth-metric-btn', { hasText: 'Crawled schools' }).click();
+  await expect(health.locator('.growth-metric-btn.is-active')).toContainText('Crawled schools');
+  await expect(health.locator('.health-caption')).toContainText('2026-10-01 to 2026-10-11');
+  await expect(health.locator('#growth-chart')).toBeVisible();
+});
+
+test('data health without build-time files still shows completeness from the loaded data', async ({ page }) => {
+  await mockData(page);
+  await page.route('**/stats-history.json', route => route.fulfill({ status: 404, body: '' }));
+  await page.route('**/seo-pages.json', route => route.fulfill({ status: 404, body: '' }));
+  await page.goto('stats.html');
+  const health = page.locator('#stats-health');
+  await expect(health.locator('.completeness-card')).toHaveCount(11);
+  await expect(health.locator('.html-inventory-total')).toHaveText('10 pages');
+  await expect(health.locator('.health-growth-section')).toHaveCount(0);
 });
 
 test('a failed source shows an error in its own section only', async ({ page }) => {

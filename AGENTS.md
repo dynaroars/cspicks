@@ -90,7 +90,11 @@ playbook before any data-refresh or web-research task.
   postdoc pages; it follows the same search box. Individual lab postings sit in `public/jobs.json` with a `lab` id
   (tracks `industry`, `internship`, `postdoc`) instead of a jobs-sources school (TASKS/labs.md).
 - `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
-- `stats.html` + `src/stats.ts` — site stats (roster, conferences, awards, jobs; never the large NSF snapshot) and repository activity from the GitHub API. Every page header links to it via the health icon, between the ROARS Lab and
+- `stats.html` + `src/stats.ts` — site stats (roster, conferences, awards, jobs; never the large NSF snapshot), a data health & completeness
+  section modeled on VietProfs' `?view=health` (field-completeness bars, recent-confirmation badge, generated-page inventory, growth
+  chart), and repository activity from the GitHub API. Its build-time inputs are gitignored: `public/stats-history.json` (daily dataset
+  counts walked from git history plus jobs-crawl freshness, by `scripts/build-stats-history.mjs` on predev/prebuild; deploy checks out
+  full history for it) and `seo-pages.json` (page counts from `scripts/generate-seo-pages.mjs`); either missing just drops its card. Every page header links to it via the health icon, between the ROARS Lab and
   GitHub icons (VietProfs' order; all three share `.icon-link`; `test/unit/consistency.test.js` enforces the header on every page).
 - `grants-submit.html` + `src/grants/submit.ts` — single unified submission/correction form for proposing
   new CS research awards or updating existing entries via GitHub Issue or email.
