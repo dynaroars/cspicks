@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {
-  continentCounts, deadlineLabel, filterJobs, groupBySchool, isActive, jobsSuggestions, parseJobs, stateCounts
+  continentCounts, deadlineLabel, filterJobs, formatDay, groupBySchool, isActive, jobProblems, jobsSuggestions, parseJobs, stateCounts
 } from '../../src/jobs/jobs-data.js';
 import { exportFileName, jobsToMarkdown, renderJobCard, renderSchoolCard, renderStateMap } from '../../src/jobs/jobs-render.js';
 import { STATE_TILE_ROWS, US_STATES, resolveState } from '../../src/jobs/jobs-data.js';
@@ -129,6 +129,18 @@ test('parser rejects malformed data', () => {
   assert.throws(() => parseJobs([job({ visaSponsorship: 'maybe' })]), /Invalid jobs dataset/);
   assert.equal(parseJobs([job()]).length, 1);
   assert.equal(parseJobs([job({ visaSponsorship: 'case-by-case' })]).length, 1);
+});
+
+test('validator rejects impossible dates and unknown fields, and accepts start dates at posting precision', () => {
+  assert.deepEqual(jobProblems(job({ deadline: '2026-13-45' })), ['deadline']);
+  assert.deepEqual(jobProblems(job({ reviewBegins: 'soon' })), ['reviewBegins']);
+  assert.deepEqual(jobProblems(job({ areasAny: true })), ['unknown field areasAny']);
+  for (const startDate of ['2027', '2027-08', '2027-08-16', null]) assert.deepEqual(jobProblems(job({ startDate })), [], startDate);
+  assert.deepEqual(jobProblems(job({ startDate: '2027-8' })), ['startDate']);
+  assert.equal(formatDay('2027-08-16'), 'Aug 16, 2027');
+  assert.equal(formatDay('2027-08'), 'Aug 2027');
+  assert.equal(formatDay('2027'), '2027');
+  assert.equal(formatDay('Fall 2027'), '');
 });
 
 test('visa filter and keyword: stated policy, unchecked postings, and "possible"', () => {

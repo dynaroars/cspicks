@@ -23,6 +23,7 @@
     "maintain:labs": "node scripts/labs-maintain.mjs",
     "render:jobs": "node scripts/jobs-render.mjs",
     "validate:jobs": "node --import tsx scripts/jobs-validate.mjs",
+    "lint:data": "node scripts/data-checks.mjs",
     "sync:nsf:rebuild": "node scripts/sync-nsf-awards.mjs --all-us --cache-only",
     "og:image": "node scripts/generate-og-image.mjs",
     "sitemap": "node --import tsx scripts/generate-sitemap.mjs",

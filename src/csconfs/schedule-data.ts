@@ -50,7 +50,10 @@ export function conferenceStart(value: unknown, fallbackYear: number) {
   return Date.UTC(Number(yearMatch?.[1] || fallbackYear), month, Number(dayMatch?.[1] || 1));
 }
 
-export function formatCalendarDate(value: unknown) {
+export function formatCalendarDate(value: unknown): string {
+  // A rebuttal period is stored as "YYYY-MM-DD–YYYY-MM-DD" (en dash).
+  const range = /^(\d{4}-\d{2}-\d{2})–(\d{4}-\d{2}-\d{2})$/.exec(String(value ?? '').trim());
+  if (range) return `${formatCalendarDate(range[1])} – ${formatCalendarDate(range[2])}`;
   const parts = calendarParts(value);
   if (!parts) return value && String(value).toUpperCase() !== 'TBD' ? String(value) : '';
   return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })

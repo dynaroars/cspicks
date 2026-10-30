@@ -259,6 +259,7 @@ export interface Job {
   /** Reviews applications until filled; `deadline` is then a priority date or null. */
   rolling?: boolean;
   reviewBegins?: string | null;
+  /** YYYY-MM-DD, or YYYY-MM / YYYY when the posting gives only a month or year. */
   startDate?: string | null;
   postedDate?: string | null;
   /** Last time a crawl or submission confirmed the posting was live. */

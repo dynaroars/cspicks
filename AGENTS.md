@@ -27,6 +27,7 @@ npm run dev       # vite dev server at http://localhost:5173/
 npm test          # run the Node.js unit tests (test/unit/*.test.js)
 npm run test:e2e  # Playwright e2e tests (test/e2e/); auto-starts the dev server on :4173
 npm run validate:jobs  # fast check of public/jobs.json; run before every jobs commit (names each bad record)
+npm run lint:data      # data warnings for the auditor (wrong-school links, duplicate postings, stale grants); never fails CI
 npm run build      # production build to dist/ (multi-page: index, simulator, funding, csconfs, grants, jobs)
 npm run preview    # preview the production build
 ```
@@ -207,5 +208,11 @@ only methodology note most readers see.
 
 ## Testing notes
 
-- `test/unit/*.test.js` uses Node's native test runner (`node --test`).
+- `test/unit/*.test.js` uses Node's native test runner (`node --test`). `test/unit/data-files.test.js` runs the hard data
+  checks in `scripts/data-checks.mjs` on the live conferences, grants, jobs-sources, and manual-affiliations files
+  (jobs and labs have `jobs-validate.mjs`); fix the data, not the test.
+- Behavior tests that need routine-edited data read frozen snapshots in `test/fixtures/` (grants, conferences, labs),
+  so routine data edits can't break them; rebuild a fixture only when a test needs a record it lacks. e2e specs share
+  `test/e2e/helpers/upstream-mocks.js` (CSRankings/DBLP stand-ins, pinned clock) and `helpers/data-fixtures.js`. CI
+  runs unit, typecheck, build, and e2e.
 - `test/e2e/*.spec.js` uses Playwright to test all pages (`index.html`, `simulator.html`, `csconfs.html`, `csconfs-submit.html`, `grants.html`, `grants-submit.html`, `jobs.html`, `jobs-submit.html`, `nsf.html`).

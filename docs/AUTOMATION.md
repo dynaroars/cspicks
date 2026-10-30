@@ -85,8 +85,11 @@ them share these rules:
 4. **Boundaries.** Producers never merge PRs and never push to `main`. Unknown beats wrong: never
    fill a field from a prior year, a third-party tracker, or a guess.
 5. **Validate.** Before opening a PR: `npm test && npm run typecheck && npm run build &&
-   git diff --check`. If it fails for a reason you can't fix inside the batch, don't open the PR;
-   open an Issue with the failure instead.
+   git diff --check`. The data checks in `npm test` name each bad record and field (e.g.
+   `Foo U: outcome (null or one of complete | incomplete | blocked | not_found)`); fix those records
+   in your batch and re-run. If it fails for a reason you can't fix inside the batch, don't open the
+   PR; open an Issue with the failure instead. CI also runs the e2e suite, which reads frozen fixtures
+   (`test/fixtures/`), so data edits can't break it.
 6. **Evidence.** Every changed fact in a PR lists the official URL it came from. If a site is
    blocked by the egress proxy or a bot check, don't accept the fact; list it in the PR as
    unverified so a later run retries it.
@@ -138,6 +141,7 @@ Follow `TASKS/audit.md`, with these rules taking precedence:
   2. Each routine in the Schedule table: no `[scheduled:<key>]` PR, Issue, or commit within two
      of its cron cycles means it has likely stopped.
   3. Issues left open for an owner decision for more than 21 days.
+  4. Data warnings: `npm run lint:data` (TASKS/audit.md, "Data warnings"), at most 10 per run.
 
   Fix what you can within the caps. Report the rest in one open Issue titled
   `[scheduled:audit] Automation health`: comment when something is wrong, close it when a check

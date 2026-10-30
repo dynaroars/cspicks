@@ -37,6 +37,18 @@ only corrects records (never deletes one or reverts a commit).
    `[scheduled:audit] Data audited through <short sha>`, and push. Never move the marker past a commit you did not
    finish; the next run resumes there. The marker commit touches no data file, so the next run's log skips it.
 
+## Data warnings
+
+`npm run lint:data` prints suspects that a script can flag but not settle: a jobs page on another country's domain
+(wrong school?), two open postings with the same department, title, and deadline, dates out of order in an upcoming
+conference edition, an `http://` link, a grant whose newest date is years old or whose text says it is not offered.
+Hard errors (malformed dates, unknown fields, bad enums, duplicates) are not here: `npm test` already rejects them.
+
+Take up to 10 warnings per run, oldest-looking first. For each, open the official page and either fix the record on
+`main` (commit naming the record and its official URL), or, if the page doesn't settle it, file one
+`[scheduled:audit] Data warning: <record>` Issue with what you checked (deduplicate against open Issues). A warning
+that turns out fine stays as it is; note it in the automation-health comment so the next run skips it.
+
 ## Issues
 
 - Data errors and side findings: verify live; if confirmed, fix, validate, push, and close with what changed and
