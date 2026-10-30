@@ -928,30 +928,6 @@
   },
   {
     "school": "Indiana University",
-    "department": "Luddy School of Informatics, Computing, and Engineering (Department of Computer Science)",
-    "title": "Tenured/Tenure-Track Assistant or Associate Professor in Quantum Computer Science",
-    "track": "tenure-track",
-    "level": "assistant",
-    "areas": [
-      "act",
-      "sec"
-    ],
-    "state": "IN",
-    "city": "Bloomington",
-    "rolling": true,
-    "reviewBegins": "2026-11-01",
-    "startDate": "2027-08-01",
-    "lastSeenAt": "2026-10-10",
-    "summary": "Faculty 100 search in quantum computer science covering theory, software systems, security, and applications. Full consideration by Nov 1, 2026; open until filled.",
-    "source": "crawl",
-    "verified": true,
-    "id": "indiana-quantum-cs-2026",
-    "url": "https://indiana.peopleadmin.com/postings/34409",
-    "visaSponsorship": "not-stated",
-    "country": "US"
-  },
-  {
-    "school": "Indiana University",
     "department": "Luddy School of Informatics, Computing, and Engineering",
     "title": "Open Rank, Tenured/Tenure-Track Faculty Position in Robotics",
     "track": "tenure-track",
@@ -1844,7 +1820,6 @@
     "source": "crawl",
     "verified": true,
     "id": "alabama-cs-cyber-hub-director-2026",
-    "areasAny": true,
     "url": "https://careers.ua.edu/jobs/computer-science-director-of-cyber-innovation-hub-associate-or-full-professor-530324-tuscaloosa-alabama-united-states",
     "visaSponsorship": "not-stated",
     "country": "US"
@@ -3130,7 +3105,7 @@
     "visaSponsorship": "not-stated",
     "summary": "Tenure-track assistant professor open to all areas of CS, with emphasis on AI/ML, cybersecurity and quantum computing. Screening begins Nov 30, 2026 and continues until the search is concluded; Fall 2027 start.",
     "source": "crawl",
-    "postedDate": "2026-09-28",
+    "postedDate": "2026-10-01",
     "verified": true,
     "country": "US"
   },
@@ -3605,8 +3580,13 @@
     "department": "Computer Science",
     "title": "Tenure-Track Faculty Position in Computer Science",
     "track": "tenure-track",
-    "level": "open",
-    "areas": [],
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "mlmining",
+      "nlp",
+      "chi"
+    ],
     "state": "VA",
     "city": "Blacksburg",
     "rolling": true,
@@ -3617,25 +3597,8 @@
     "summary": "Open-rank tenure-track faculty search in the Department of Computer Science (College of Engineering), requiring a PhD in CS or a closely related field. Review date 11/15/2026, open until filled; no specific research area named.",
     "source": "crawl",
     "verified": true,
-    "country": "US"
-  },
-  {
-    "id": "vt-tenure-track-cs-2026",
-    "school": "Virginia Tech",
-    "department": "Department of Computer Science",
-    "title": "Tenure-track faculty position in computer science",
-    "track": "tenure-track",
-    "areas": [],
-    "state": "VA",
-    "city": "Blacksburg",
-    "rolling": true,
-    "lastSeenAt": "2026-10-10",
-    "url": "https://website.cs.vt.edu/About/faculty-search/2026-tenure-track-position.html",
-    "visaSponsorship": "not-stated",
-    "summary": "Full-time tenure-track appointment building an externally funded research program and teaching and mentoring students. Rank and areas are not stated on the department page.",
-    "source": "crawl",
-    "verified": true,
-    "country": "US"
+    "country": "US",
+    "anyArea": true
   },
   {
     "id": "wayne-cs-ai-health-2026",
@@ -9009,30 +8972,6 @@
     "source": "crawl",
     "deadline": "2027-07-28",
     "postedDate": "2026-07-28",
-    "verified": true,
-    "country": "US"
-  },
-  {
-    "id": "memphis-cs-assistant-professor-2027",
-    "school": "University of Memphis",
-    "department": "Computer Science",
-    "title": "Assistant Professor of Computer Science",
-    "track": "tenure-track",
-    "level": "assistant",
-    "areas": [
-      "ai",
-      "sec"
-    ],
-    "state": "TN",
-    "city": "Memphis",
-    "rolling": true,
-    "lastSeenAt": "2026-10-11",
-    "url": "https://www.memphis.edu/cs/hiring/",
-    "visaSponsorship": "not-stated",
-    "summary": "Tenure-track CS Assistant Professor beginning Fall 2027; all CS areas welcome, with AI/ML, cybersecurity, and quantum computing particularly encouraged. Screening begins Nov 30, 2026 and continues until search conclusion.",
-    "source": "crawl",
-    "deadline": null,
-    "postedDate": null,
     "verified": true,
     "country": "US"
   },
@@ -16567,7 +16506,7 @@
     "city": "Grinnell",
     "deadline": null,
     "postedDate": "2026-08-12",
-    "startDate": "2027-08",
+    "startDate": "2027",
     "lastSeenAt": "2026-10-16",
     "url": "https://apply.interfolio.com/191271",
     "visaSponsorship": "not-stated",
@@ -16596,7 +16535,7 @@
     "city": "Denver",
     "deadline": null,
     "rolling": true,
-    "startDate": "2027-08",
+    "startDate": "2027",
     "url": "https://msudenver.wd1.myworkdayjobs.com/en-US/MSUDenver/job/Denver-Colorado/Assistant-Professor-of-Computer-Sciences_JR105817",
     "summary": "Tenure-track Assistant Professor at an undergraduate-focused department with an ABET-accredited CS program; 12-hour semester teaching load including AI/ML and/or cybersecurity courses. Priority given to applications by October 15, 2026; accepted until filled."
   },

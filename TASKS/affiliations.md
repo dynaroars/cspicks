@@ -26,6 +26,7 @@ the generated JSON.
 
 ## Re-verifying manual corrections
 
-`public/manual_affiliations.csv` columns: `author_name,start_year,end_year,institution_name`. Check each row
+`public/manual_affiliations.csv` columns: `name,school,start,end` (blank `end` = current position, through the
+current year; never write this year as `end` for someone still there). Check each row
 against official appointment pages, press releases, or CVs. Correct only what an official source contradicts, and
 cite the source per row in the PR. Rows you can't confirm stay as they are and are listed in the PR description.
