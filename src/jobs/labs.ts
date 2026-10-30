@@ -91,9 +91,7 @@ export function parseLabs(payload: unknown): Lab[] {
 
 export async function loadLabsData(): Promise<Lab[]> {
   if (cachedLabs) return cachedLabs;
-  const url = new URL('../../public/labs.json', import.meta.url).href;
-  let response = await fetch(url).catch(() => fetch('./labs.json'));
-  if (!response.ok) response = await fetch('./labs.json');
+  const response = await fetch('/labs.json');
   if (!response.ok) throw new Error(`Failed to load labs data (${response.status})`);
   cachedLabs = parseLabs(await response.json());
   return cachedLabs;

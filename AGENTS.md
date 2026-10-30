@@ -33,9 +33,8 @@ npm run preview    # preview the production build
 
 Run a single Node unit test with `node --import tsx --test --test-name-pattern="<substring>" test/unit/<file>.test.js` (it's plain
 `node:test`, not a runner with its own CLI). The suite covers core data filtering, ranking, CSV errors,
-NSF attribution, and rendering safety; no linter is configured. `postbuild` strips large data files
-(`professor_history_openalex.json`, `school-aliases.json`, `core-extra-author-info.csv`, `data/`) from `dist/`
-since those are fetched from raw GitHub at runtime rather than bundled.
+NSF attribution, and rendering safety; no linter is configured. `postbuild` strips `public/data/` (local,
+gitignored inputs to the OpenAlex build) from `dist/`.
 
 Every data-refresh workflow (conferences, grants, jobs, NSF, affiliations, CSRankings-derived data) has one
 playbook in `TASKS/`; [**MAINTENANCE.md**](MAINTENANCE.md) is the index with cadences. Read the relevant
@@ -140,16 +139,17 @@ playbook before any data-refresh or web-research task.
   sync with the on-screen view.
 - `src/csrankings-rules.ts` (+ generated `src/csrankings-rules.generated.js`) — the area/venue taxonomy
   (venue aliases, CORE tier membership) mirrors upstream CSRankings' own Python source rather than being
-  hand-maintained; `npm run sync:csrankings-rules` re-derives the generated file, which is the fallback
-  used until/unless a client-side sync overrides it.
+  hand-maintained; `npm run sync:csrankings-rules` re-derives the generated file, which is the only source the
+  site uses (there is no runtime download).
 
 Pages have independent filtered state and use plain `<a href>` navigation. `loadData()` memoizes its promise,
 so modules loaded together on Search share one download and parse of the canonical CSRankings inputs.
 
 **Data pipeline (`src/data.ts` is the core of the app):**
-1. `loadData()` fetches three CSVs directly from `raw.githubusercontent.com/emeryberger/CSrankings` at
-   runtime (csrankings.csv, generated-author-info.csv, institutions.csv) and joins them into
-   `{ professors, schools }` keyed by name.
+1. `loadData()` fetches CSRankings' CSVs directly from `raw.githubusercontent.com/emeryberger/CSrankings` at
+   runtime — three required (csrankings.csv, generated-author-info.csv, institutions.csv; a missing column fails
+   the load loudly) and five optional (turing, acm-fellows, countries, dblp-aliases, name-changes) — and joins them
+   into `{ professors, schools }` keyed by name.
 2. `filterByYears(data, startYear, endYear, region, historyMap, aliasMap, confSet)` is the main
    query/aggregation function, built as a three-stage pipeline (`collectFilteredData` → `scoreSchools` →
    `rankSchools`) — filters publications by year range and conference set (CSRankings default /
@@ -159,8 +159,8 @@ so modules loaded together on Search share one download and parse of the canonic
    `scripts/build-openalex-history.mjs`) maps professors to their affiliation at time of publication, sourced
    from OpenAlex rather than current CSRankings affiliation. `public/school-aliases.json` bridges OpenAlex
    institution names to CSRankings' abbreviated names. `public/manual_affiliations.csv` holds community
-   corrections to bad OpenAlex data, merged in via `mergeAffiliationHistory()`. These assets are loaded only
-   when the user enables Historical Mode.
+   corrections to bad OpenAlex data, merged in via `mergeAffiliationHistory()`. These assets ship with the site
+   (same origin, so data and decoder always match) and are loaded only when the user enables Historical Mode.
 4. **CORE A/A* extra publications**: `public/core-extra-author-info.csv` (generated offline by
    `scripts/build-core-extra-pubs.mjs` from a bulk DBLP dump — see `TASKS/csrankings.md`) covers publications in
    CORE A/A* venues CSRankings' own `generated-author-info.csv` doesn't track, for the existing roster only. Its
@@ -187,7 +187,7 @@ so modules loaded together on Search share one download and parse of the canonic
 
 **No build-time data fetching** — CSRankings data is fetched at page load, while OpenAlex data and the
 CORE A/A* extra-publications CSV are each fetched on demand (Historical Mode / CORE A/A* conference-set
-selection, respectively). `postbuild` deliberately excludes the large local copies from `dist/`.
+selection, respectively) from the site's own copies in `public/`.
 
 ## Adding a new Discovery
 

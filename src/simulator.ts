@@ -1,5 +1,4 @@
-import { syncCsrankingsRules } from './csrankings-rules.js';
-import { DEFAULT_END_YEAR, getConferenceAreaMap, loadData, publicationMatchesConferenceSet } from './data.js';
+import { getConferenceAreaMap, loadData, publicationMatchesConferenceSet } from './data.js';
 import { fetchAuthorStats, parseDblpProfileUrl, searchAuthor } from './dblp.js';
 import { createFilterBar } from './filters.js';
 import { calculatePerCapita } from './metrics.js';
@@ -348,7 +347,7 @@ function setupFilters() {
   filters = createFilterBar('#filter-bar', {
     label: 'Simulator filters',
     fields: ['region', 'years', 'history', 'percapita', 'confSet'],
-    years: { min: 1970, max: DEFAULT_END_YEAR },
+    years: { min: 1970, max: new Date().getFullYear() },
     className: 'simulator-filters',
     onChange: () => {
       appData = filters.apply(rawData);
@@ -404,7 +403,7 @@ function restoreFromUrl() {
 async function init() {
   initTooltipPositioning();
   try {
-    [rawData] = await Promise.all([loadData(), syncCsrankingsRules()]);
+    rawData = await loadData();
     setupFilters();
     // History mode may already be on from a shared link or a stored choice,
     // and its affiliation data has to be in place before the first apply().

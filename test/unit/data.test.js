@@ -357,6 +357,17 @@ test('fetchCsv rejects HTTP failures', async () => {
   }
 });
 
+test('fetchCsv rejects a file missing a required column instead of returning empty rows', async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => new Response('name,institution\nAda Lovelace,Example U\n');
+  try {
+    await assert.rejects(fetchCsv('https://example.invalid/a.csv', { requiredColumns: ['name', 'affiliation'] }), /missing column\(s\): affiliation/);
+    assert.equal((await fetchCsv('https://example.invalid/a.csv', { requiredColumns: ['name'] })).length, 1);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test('fetchCsv can drop malformed rows instead of rejecting the whole file', async () => {
   const originalFetch = globalThis.fetch;
   const originalWarn = console.warn;

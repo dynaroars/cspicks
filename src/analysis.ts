@@ -1,7 +1,6 @@
 import { isPubAtSchool, renderAreaTrends, renderConferenceFilters, renderConferenceTrends, renderFacultyTrends, renderSchoolTrends, renderSubfieldEffort, setupConferenceFilterButtons } from './analysis-trends.js';
 import { onThemeChange } from './charts.js';
 import bundledRules from './csrankings-rules.generated.js';
-import { syncCsrankingsRules } from './csrankings-rules.js';
 import { filterByYears, getConferenceAreaMap } from './data.js';
 import { fetchFrequentCoauthors } from './dblp.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateAreaMomentum, calculateFragility, calculateResearcherPatterns, calculateSchoolMetrics, collectVariantRanks, rankStabilityVariants, summarizeRankStability } from './metrics.js';
@@ -99,8 +98,6 @@ export async function initAnalysis(data: RawData, filterBar: FilterController) {
     state.rawData = data;
     state.filters = filterBar;
     try {
-        state.activeVenueRules = await syncCsrankingsRules();
-
         renderConferenceFilters();
         setupTabs();
         document.getElementById('integrated-analysis')?.addEventListener('toggle', () => {

@@ -206,9 +206,8 @@ async function init() {
     render();
     focusSearchOnLoad(input);
 
-    if (window.location.hash) {
-      window.setTimeout(handleHashScroll, 300);
-    }
+    // render() is synchronous, so the cards already exist.
+    handleHashScroll();
   } catch (error) {
     console.error('Failed to load grants data:', error);
     if (statusText) {

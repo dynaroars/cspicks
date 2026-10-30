@@ -93,14 +93,8 @@ export function parseGrants(payload: unknown): Grant[] {
 /** @returns {Promise<Grant[]>} */
 export async function loadGrantsData(): Promise<Grant[]> {
   if (cachedGrants) return cachedGrants;
-  const url = new URL('../../public/grants.json', import.meta.url).href;
-  const response = await fetch(url).catch(() => fetch('./grants.json'));
-  if (!response.ok) {
-    const fallback = await fetch('./grants.json');
-    if (!fallback.ok) throw new Error(`Failed to load grants data (${response.status})`);
-    cachedGrants = parseGrants(await fallback.json());
-    return cachedGrants;
-  }
+  const response = await fetch('/grants.json');
+  if (!response.ok) throw new Error(`Failed to load grants data (${response.status})`);
   cachedGrants = parseGrants(await response.json());
   return cachedGrants;
 }
@@ -139,8 +133,9 @@ export function filterGrants(grants: Grant[], {
   status = 'all',
   topic = 'all',
   deadlineFilter = 'all',
-  sortBy = 'featured'
-}: { query?: string, audience?: string, sponsorCategory?: string, status?: string, topic?: string, deadlineFilter?: string, sortBy?: string } = {}) {
+  sortBy = 'featured',
+  now = new Date()
+}: { query?: string, audience?: string, sponsorCategory?: string, status?: string, topic?: string, deadlineFilter?: string, sortBy?: string, now?: Date } = {}) {
   const { filters: keywordFilters, rest } = parseKeywordQuery(String(query || ''), GRANTS_KEYWORD_SPECS);
   const q = rest.trim().toLowerCase();
 
@@ -188,7 +183,7 @@ export function filterGrants(grants: Grant[], {
   });
 
   // Sorting
-  const currentMonth = new Date().getMonth() + 1; // 1-12
+  const currentMonth = now.getMonth() + 1; // 1-12
 
   results.sort((a, b) => {
     if (sortBy === 'featured') {

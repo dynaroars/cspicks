@@ -209,14 +209,8 @@ export function parseJobs(payload: unknown): Job[] {
 
 export async function loadJobsData(): Promise<Job[]> {
   if (cachedJobs) return cachedJobs;
-  const url = new URL('../../public/jobs.json', import.meta.url).href;
-  const response = await fetch(url).catch(() => fetch('./jobs.json'));
-  if (!response.ok) {
-    const fallback = await fetch('./jobs.json');
-    if (!fallback.ok) throw new Error(`Failed to load jobs data (${response.status})`);
-    cachedJobs = parseJobs(await fallback.json());
-    return cachedJobs;
-  }
+  const response = await fetch('/jobs.json');
+  if (!response.ok) throw new Error(`Failed to load jobs data (${response.status})`);
   cachedJobs = parseJobs(await response.json());
   return cachedJobs;
 }

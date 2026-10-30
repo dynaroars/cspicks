@@ -27,7 +27,7 @@
     "og:image": "node scripts/generate-og-image.mjs",
     "sitemap": "node --import tsx scripts/generate-sitemap.mjs",
     "build": "vite build && node --import tsx scripts/generate-seo-pages.mjs",
-    "postbuild": "rm -f dist/professor_history_openalex.json dist/school-aliases.json dist/core-extra-author-info.csv && rm -rf dist/data",
+    "postbuild": "rm -rf dist/data",
     "preview": "vite preview"
   },
   "devDependencies": {
