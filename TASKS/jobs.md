@@ -55,8 +55,8 @@ set for schools outside CSRankings), `lastCheckedAt`, `outcome`, `summary`, `che
 between runs, so **always write a row back after visiting a school, including when nothing was open.** Many departments post late (hiring
 season runs August to January), so a zero-posting school is "not yet", not "never": set `outcome: complete`, and put "no open CS
 search on <date>; recheck <month>" in `summary`. The queue (`--limit N`) brings it back automatically (21 days in season).
-`scripts/data/jobs-extra-schools.json` is the seed list of non-CSRankings schools (liberal arts, R2/R3, regional/teaching,
-community colleges); register more with `npm run maintain:jobs -- --import <file.json>` (array of
+Non-CSRankings schools (liberal arts, R2/R3, regional/teaching, community colleges) are the `csrankings: false` rows;
+register more with `npm run maintain:jobs -- --import <file.json>` (array of
 `{ school, state, homepage, jobsUrl?, kind? }`; existing rows keep their crawl state). After CSRankings schools are all
 checked, work the `csrankings: false` rows next, then import new ones.
 

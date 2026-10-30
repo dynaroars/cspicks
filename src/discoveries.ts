@@ -3,15 +3,11 @@ import { applyPerCapitaRanks, buildPriorPeriodData, calculateCorpusDiagnostics, 
 import { buildFundingIndex, calculateFundingDiscoveries, formatFunding, parseNsfDataset } from './nsf.js';
 import { SITE_NAME } from './seo.js';
 import { shareUrl } from './result-actions.js';
-import { areaLabels, escapeHtml, getInstitutionShortName } from './shared.js';
+import { areaLabels, escapeHtml, getInstitutionShortName, slugify } from './shared.js';
 import type { FilterController } from './filters.js';
 import type { NsfDataset, RawData } from './types.js';
 
 const shareIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
-
-function slugify(title: string) {
-  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-}
 
 const regionLabels: Record<string, string> = {
   world: 'worldwide',

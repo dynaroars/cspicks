@@ -202,8 +202,6 @@ export interface FundingSchool {
 export interface FundingIndex {
   awards: NsfAward[];
   faculty: FundingFaculty[];
-  facultyByName: Map<string, FundingFaculty>;
-  facultyByNormalizedName: Map<string, FundingFaculty | null>;
   schools: FundingSchool[];
 }
 

@@ -77,8 +77,8 @@ playbook before any data-refresh or web-research task.
   filtering, and grouping; `jobs-render.ts` the cards and map. Covers any US
   school (CSRankings seeds the crawl list but is not a requirement), crawled by a scheduled routine (TASKS/jobs.md); queue/seed tooling is
   `scripts/jobs-maintain.mjs` with state in `scripts/data/jobs-sources.json` — the durable record of every school's department/hiring
-  URL and last-crawl outcome (including R2/R3, liberal-arts, regional, and community-college schools seeded from
-  `scripts/data/jobs-extra-schools.json`). Update a school's row after every visit, even when nothing was posted yet, so the next run rechecks it
+  URL and last-crawl outcome (including R2/R3, liberal-arts, regional, and community-college schools, the
+  `csrankings: false` rows). Update a school's row after every visit, even when nothing was posted yet, so the next run rechecks it
   (see TASKS/jobs.md, "The school record"). The same file is the durable website/revisit record for international
   vacancy research. Verified international postings belong in `public/jobs.json`; keep the school website/revisit record current in
   `scripts/data/jobs-sources.json`. Job research must also check related units, especially Electrical and Computer
@@ -104,7 +104,7 @@ playbook before any data-refresh or web-research task.
   same everywhere.
 - `src/vietprofs/` — verbatim copies of VietProfs' shared UI: `roars-ui.css` (design tokens, header icons,
   search box, suggestion list, scope chips, help popup, tags, tooltips, empty state, back-to-top, floating "+"),
-  `search-kit.ts` (suggestion controller, keyboard shortcuts, help, commands), `back-to-top.ts`, and `add-fab.ts`. `src/suggestion-box.ts` is a thin adapter over search-kit's `createSearchController`. VietProfs is the baseline look: edit these there, then run
+  `search-kit.ts` (suggestion controller, keyboard shortcuts, help, commands), and `back-to-top.ts` (pages hardcode the floating "+" markup that `roars-ui.css` styles). `src/suggestion-box.ts` is a thin adapter over search-kit's `createSearchController`. VietProfs is the baseline look: edit these there, then run
   `npm run sync:vietprofs-ui`; `test/unit/vietprofs-ui.test.js` fails on local edits. `style.css` `@import`s
   `roars-ui.css` first and holds only cspicks-specific rules on top.
 - `src/charts.ts` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges

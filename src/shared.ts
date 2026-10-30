@@ -323,12 +323,6 @@ export function escapeHtml(value: unknown) {
     .replace(/'/g, '&#39;');
 }
 
-// Produces a value that is safe inside a quoted inline-handler argument.
-// decodeURIComponent() must be used by the handler before consuming it.
-export function encodeInlineValue(value: unknown) {
-  return encodeURIComponent(String(value ?? '')).replace(/'/g, '%27');
-}
-
 export function safeExternalUrl(value: unknown) {
   try {
     const url = new URL(String(value ?? ''));

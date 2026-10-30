@@ -99,12 +99,7 @@ async function main() {
     process.exitCode = 2;
     return;
   }
-  let chromium;
-  try {
-    ({ chromium } = await import('playwright-core'));
-  } catch {
-    ({ chromium } = await import('@playwright/test'));
-  }
+  const { chromium } = await import('@playwright/test');
   const browser = await chromium.launch().catch(error => {
     console.error(`Could not start Chromium (${error.message.split('\n')[0]}). Run: npx playwright install --with-deps chromium`);
     process.exit(1);

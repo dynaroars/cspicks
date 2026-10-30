@@ -4,15 +4,8 @@ import test from 'node:test';
 import Papa from 'papaparse';
 
 import { coreAMap, coreAStarMap, fetchCsv, filterByYears, getConferenceAreaMap, getPublicationSchools, nextTier, parentMap, publicationMatchesConferenceSet } from '../../src/data.js';
-import { areaLabels, detectRegionFromLocales, encodeInlineValue, escapeHtml, formatRelativeTime, getInstitutionShortName, safeExternalUrl, scoreSuggestionMatch } from '../../src/shared.js';
-import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../../src/simulation.js';
-import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl, topCoauthorsInWindow } from '../../src/dblp.js';
-import { parseCsrankingsRules } from '../../src/csrankings-rules.js';
+import { areaLabels, escapeHtml, formatRelativeTime, getInstitutionShortName, safeExternalUrl, scoreSuggestionMatch } from '../../src/shared.js';
 import { renderSchoolCard } from '../../src/search-cards.js';
-import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../../src/metrics.js';
-import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../../src/nsf.js';
-import { aoeDeadline, conferenceStart, deadlineStatus, filterSchedule, formatCalendarDate, groupConferences, scheduleSuggestions } from '../../src/csconfs/schedule-data.js';
-import { renderScheduleCard } from '../../src/csconfs/schedule-render.js';
 import { decodeAffiliationHistory, encodeAffiliationHistory } from '../../src/affiliation-history-format.js';
 function professor(name, affiliation, count, adjustedcount) {
   return {
@@ -298,7 +291,6 @@ test('suggestion ranking tolerates middle initials without losing precedence', (
 
 test('rendering helpers neutralize markup and unsafe URLs', () => {
   assert.equal(escapeHtml('<img src=x onerror="alert(1)">'), '&lt;img src=x onerror=&quot;alert(1)&quot;&gt;');
-  assert.equal(decodeURIComponent(encodeInlineValue("O'Brien </script>")), "O'Brien </script>");
   assert.equal(safeExternalUrl('javascript:alert(1)'), '#');
   assert.equal(safeExternalUrl('https://example.com/profile'), 'https://example.com/profile');
   assert.equal(getInstitutionShortName('Carnegie Mellon University'), 'CMU');

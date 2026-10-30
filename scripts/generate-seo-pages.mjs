@@ -16,7 +16,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadData, filterByYears, DEFAULT_START_YEAR, DEFAULT_END_YEAR } from '../src/data.ts';
-import { areaLabels, escapeHtml } from '../src/shared.ts';
+import { areaLabels, escapeHtml, slugify } from '../src/shared.ts';
 import { parentMap } from '../src/data/conference-sets.ts';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -26,13 +26,6 @@ const root = path.resolve(__dirname, '..');
 const isDev = process.argv.includes('--dev');
 const outDir = path.resolve(root, isDev ? 'public' : 'dist');
 const ORIGIN = 'https://cspicks.roars.dev';
-
-export function slugify(name) {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
 
 function renderHeader() {
   return `<header>

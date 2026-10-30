@@ -520,56 +520,6 @@ export function explainRankGap(schoolA: FilteredSchool | null, schoolB: Filtered
   }).sort((x, y) => Math.abs(y.logGap) - Math.abs(x.logGap));
 }
 
-/**
- * `modes` carries the settings that change the ranking away from the official
- * CSRankings one. Venue set is not the only one: per-capita reorders the whole
- * list, and History reattributes publications to past affiliations, so a
- * "matches CSRankings" claim has to account for all three.
- */
-export function calculateParityReport(rawData: RawData, filteredData: FilteredData, confSet = 'csrankings-default', modes: { perCapita?: boolean, historical?: boolean } = {}) {
-  const schools = Object.values(filteredData.schools || {});
-  const professors = Object.values(filteredData.professors || {});
-  const totalMismatches = schools.filter(school => {
-    const areaTotal = Object.values(school.areas || {}).reduce((sum, area) => sum + area.adjusted, 0);
-    return Math.abs(areaTotal - school.totalAdjusted) > 1e-6;
-  }).length;
-  const sorted = [...schools].sort((a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity) || a.name.localeCompare(b.name));
-  const rankOrderIssues = sorted.filter((school, index) => index > 0
-    && (school.score || 0) > (sorted[index - 1]?.score || 0)).length;
-  const institutionCoverage = percent(
-    schools.filter(school => school.country || school.region).length,
-    schools.length
-  );
-  const profileCoverage = percent(
-    professors.filter(prof => hasProfileValue(prof.homepage) || hasProfileValue(prof.scholarid)).length,
-    professors.length
-  );
-
-  const officialVenueMode = confSet === 'csrankings-default';
-  // Each entry names a setting that makes this view intentionally differ from
-  // csrankings.org, so the panel can say *why* rather than only that it does.
-  const divergences = [
-    !officialVenueMode && 'a non-default venue set',
-    modes.perCapita && 'per-capita ranking',
-    modes.historical && 'historical affiliations'
-  ].filter(Boolean);
-  const matchesCsrankings = divergences.length === 0
-    && totalMismatches === 0
-    && rankOrderIssues === 0;
-
-  return {
-    sourceFaculty: Object.keys(rawData.professors || {}).length,
-    rankedSchools: schools.length,
-    totalMismatches,
-    rankOrderIssues,
-    institutionCoverage,
-    profileCoverage,
-    officialVenueMode,
-    divergences,
-    matchesCsrankings
-  };
-}
-
 export function calculateCorpusDiagnostics(rawData: RawData, filteredData: FilteredData) {
   const activeProfs = Object.values(filteredData.professors || {}).filter(p => (p.totalAdjusted || 0) > 0);
   const areaTotals: Record<string, number> = {};

@@ -2,16 +2,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
 
-import { coreAMap, fetchCsv, filterByYears, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet } from '../../src/data.js';
-import { areaLabels, detectRegionFromLocales, encodeInlineValue, escapeHtml, getInstitutionShortName, safeExternalUrl, scoreSuggestionMatch } from '../../src/shared.js';
-import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../../src/simulation.js';
-import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl, topCoauthorsInWindow } from '../../src/dblp.js';
-import { parseCsrankingsRules } from '../../src/csrankings-rules.js';
-import { renderSchoolCard } from '../../src/search-cards.js';
-import { applyPerCapitaRanks, calculateAreaMomentum, calculateCorpusDiagnostics, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../../src/metrics.js';
-import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, renderFundingFacultyCard } from '../../src/nsf.js';
-import { aoeDeadline, conferenceStart, deadlineStatus, filterSchedule, formatCalendarDate, groupConferences, scheduleSuggestions } from '../../src/csconfs/schedule-data.js';
-import { renderScheduleCard } from '../../src/csconfs/schedule-render.js';
+import { filterByYears } from '../../src/data.js';
+import { topCoauthorsInWindow } from '../../src/dblp.js';
+import { applyPerCapitaRanks, calculateAreaMomentum, calculateCorpusDiagnostics, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../../src/metrics.js';
 test('school metrics report movement, momentum, concentration, breadth, and collaboration proxy', () => {
   const current = {
     professors: {
@@ -272,39 +265,6 @@ test('rank gap explanation uses geometric-mean log contributions', () => {
   assert.equal(gaps[0].area, 'ai');
   assert.equal(gaps[0].leader, 'a');
   assert.ok(gaps[0].logGap > 0);
-});
-
-test('parity audit validates ranked data', () => {
-  const raw = { professors: { Alice: {} } };
-  const filtered = {
-    professors: { Alice: { homepage: 'https://a.example' } },
-    schools: {
-      A: { name: 'A', rank: 1, score: 2, country: 'us', totalCount: 2, totalAdjusted: 1, areas: { ai: { adjusted: 1 } } }
-    }
-  };
-  const report = calculateParityReport(raw, filtered);
-  assert.equal(report.totalMismatches, 0);
-  assert.equal(report.rankOrderIssues, 0);
-  assert.equal(report.officialVenueMode, true);
-  // Defaults (official venue set, no per-capita, no History) reproduce CSRankings.
-  assert.equal(report.matchesCsrankings, true);
-  assert.deepEqual(report.divergences, []);
-
-  // Each mode that reorders or reattributes output is reported as a divergence.
-  const perCapita = calculateParityReport(raw, filtered, 'csrankings-default', { perCapita: true });
-  assert.equal(perCapita.matchesCsrankings, false);
-  assert.deepEqual(perCapita.divergences, ['per-capita ranking']);
-
-  const everything = calculateParityReport(raw, filtered, 'core', { perCapita: true, historical: true });
-  assert.equal(everything.matchesCsrankings, false);
-  assert.equal(everything.divergences.length, 3);
-
-  const inconsistent = calculateParityReport(raw, {
-    ...filtered,
-    schools: { A: { ...filtered.schools.A, totalAdjusted: 99 } }
-  });
-  assert.equal(inconsistent.matchesCsrankings, false);
-  assert.equal(inconsistent.totalMismatches, 1);
 });
 
 test('corpus diagnostics compute Shannon entropy, HHI, Gini, and graph metrics', () => {
