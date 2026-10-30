@@ -1,10 +1,8 @@
 // Generic search-box / command-line UI kit shared across vietprofs consumers
 // (vietprofs itself, the GMU CS "people" directory at github.com/RealGMUCS/people, and
 // CS Picks, which vendors this file verbatim via its `npm run sync:vietprofs-ui`).
-// Kept free of any site-specific data/DOM assumptions (ids, elements, and site behavior are
-// passed in as options; matching styles live in roars-ui.css) so it can be
-// built standalone and fetched at runtime from https://vietprofs.roars.dev/search-kit.js
-// the same way profile.css is shared today (see scripts/sync-profile-css.ts).
+// Kept free of any site-specific data/DOM assumptions: ids, elements, and site behavior are
+// passed in as options, and the matching styles live in roars-ui.css.
 
 export type KeywordMeta = { label: string; icon?: string };
 
@@ -509,14 +507,7 @@ export interface CommandHandlerOptions {
   getSearch?: () => { resetScope: () => void } | null;
   resetDirectory?: () => void;
   onUpdate?: () => void;
-  onRandom?: () => void;
   getQueryPlan?: () => string;
-  getStats?: () => string;
-  facts?: readonly string[];
-  // Site name shown by `whoami`/`about` and `uname -a`; also keys the `theme crt` preference
-  // in localStorage as `<site_name>:crt`.
-  siteName: string;
-  aboutText: string;
   // The search box cleared after a command; `input` wins over `searchInputId`.
   input?: HTMLInputElement | null;
   searchInputId?: string;
@@ -525,23 +516,12 @@ export interface CommandHandlerOptions {
   help?: Pick<SearchHelp, 'show'> | null;
   searchHelpPanel?: HTMLElement | null;
   searchHelpBtn?: HTMLElement | null;
-  buildCommit?: string;
-  buildLabel?: string;
-  // Full `uname -a` output, replacing the default `<site> static-web build <commit> browser/...`.
-  unameText?: () => string;
-  // Built-in command words this site doesn't want (they fall through to a normal search).
-  disabledCommands?: string[];
-  // Extra, site-specific commands layered on top of the shared base set
-  // (e.g. vietprofs' "sudo vietprofs"). They take precedence over built-ins.
-  extraCommands?: Record<string, () => void>;
 }
 
-// The base `help` / `fortune` / `whoami` / `uname -a` / `stats` / `theme crt` / `clear`
-// command-line easter eggs, identical across every consumer's search box. Site-specific
-// extras (vietprofs' "sudo vietprofs", people's none-yet) go in `extraCommands`.
+// The few words the search box treats as commands rather than searches: `help`, `query plan`,
+// and `clear`. Every other input is an ordinary search.
 export function createCommandHandler(opts: CommandHandlerOptions) {
-  const { commandOutputEl, searchHelpPanel, searchHelpBtn, extraCommands } = opts;
-  const disabled = new Set(opts.disabledCommands ?? []);
+  const { commandOutputEl, searchHelpPanel, searchHelpBtn } = opts;
 
   function completeCommand(msg: string) {
     const input = opts.input ?? (opts.searchInputId ? document.getElementById(opts.searchInputId) as HTMLInputElement | null : null);
@@ -554,15 +534,6 @@ export function createCommandHandler(opts: CommandHandlerOptions) {
 
   return function runCommand(raw: string): boolean {
     const cmd = raw.trim().toLowerCase().replace(/^:/, '');
-    if (!cmd) return false;
-
-    const extra = extraCommands && Object.hasOwn(extraCommands, cmd) ? extraCommands[cmd] : undefined;
-    if (extra) {
-      extra();
-      return true;
-    }
-    if (disabled.has(cmd)) return false;
-
     if (cmd === 'help') {
       if (opts.help) {
         opts.help.show();
@@ -577,59 +548,13 @@ export function createCommandHandler(opts: CommandHandlerOptions) {
       completeCommand(`query plan: ${opts.getQueryPlan ? opts.getQueryPlan() : ''}`);
       return true;
     }
-    if (cmd === 'whoami' || cmd === 'about') {
-      completeCommand(opts.aboutText);
-      return true;
-    }
-    if (cmd === 'uname -a' || cmd === 'build' || cmd === 'built' || cmd === 'build it' || cmd === 'version') {
-      if (opts.unameText) {
-        completeCommand(opts.unameText());
-        return true;
-      }
-      const commit = opts.buildCommit ?? 'dev';
-      const label = opts.buildLabel ?? '';
-      completeCommand(`${opts.siteName} static-web build ${commit}${label ? ` (${label})` : ''} browser/${navigator.platform || 'unknown'}`);
-      return true;
-    }
-    if (cmd === 'stats' || cmd === 'status') {
-      completeCommand(`stats: ${opts.getStats ? opts.getStats() : ''}`);
-      return true;
-    }
-    if (cmd === 'sudo find professor' || cmd === 'sudo find faculty' || cmd === 'sudo find student') {
-      completeCommand('Permission granted. Academic credentials still require independent verification.');
-      return true;
-    }
-    if (cmd === 'fortune') {
-      const list = opts.facts && opts.facts.length ? opts.facts : [`${opts.siteName} is an open, community-maintained academic directory.`];
-      completeCommand(`fortune: ${list[Math.floor(Math.random() * list.length)] ?? ''}`);
-      return true;
-    }
-    if (cmd === '/dev/random' || cmd === 'random') {
-      if (opts.onRandom) opts.onRandom();
-      return true;
-    }
-    if (cmd === 'theme crt') {
-      const enabled = document.documentElement.classList.toggle('crt-mode');
-      localStorage.setItem(crtStorageKey(opts.siteName), enabled ? '1' : '0');
-      completeCommand(`crt theme ${enabled ? 'enabled' : 'disabled'}; reduced-motion preferences are respected`);
-      return true;
-    }
-    if (cmd === 'clear' || cmd === 'reset') {
+    if (cmd === 'clear') {
       hideCommandOutput(commandOutputEl);
       if (opts.resetDirectory) opts.resetDirectory();
       return true;
     }
     return false;
   };
-}
-
-function crtStorageKey(siteName: string): string {
-  return `${siteName.toLowerCase().replace(/\s+/g, '_')}:crt`;
-}
-
-// Re-apply a `theme crt` choice saved by createCommandHandler on an earlier visit.
-export function restoreCrtTheme(siteName: string) {
-  if (localStorage.getItem(crtStorageKey(siteName)) === '1') document.documentElement.classList.add('crt-mode');
 }
 
 export interface KeyboardShortcutOptions {

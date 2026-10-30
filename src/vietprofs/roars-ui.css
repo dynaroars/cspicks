@@ -546,23 +546,6 @@
   transform: translateX(-50%) translateY(0);
 }
 
-.term {
-  cursor: help;
-  text-decoration: underline dotted var(--text-muted);
-  text-underline-offset: 2px;
-}
-
-.term::after {
-  left: 0;
-  transform: translateY(2px);
-}
-
-.term:hover::after,
-.term:focus::after,
-.term:focus-visible::after {
-  transform: translateY(0);
-}
-
 /* Floating back-to-top button (setupBackToTop in back-to-top.ts). */
 .back-to-top {
   position: fixed;
