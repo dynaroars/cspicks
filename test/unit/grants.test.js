@@ -39,6 +39,9 @@ test('grants dataset contains required schema fields and is non-empty', async ()
     if (grant.status !== undefined) {
       assert.equal(grant.status, 'historical', `Grant ${grant.id} has unsupported status`);
     }
+    if (grant.lastVerifiedAt !== undefined) {
+      assert.match(grant.lastVerifiedAt, /^\d{4}-\d{2}-\d{2}$/, `Grant ${grant.id} lastVerifiedAt should be YYYY-MM-DD`);
+    }
   }
 });
 

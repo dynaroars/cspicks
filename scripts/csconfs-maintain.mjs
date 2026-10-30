@@ -42,6 +42,9 @@ const SCHEMA_FILE = join(STATE_DIR, 'research-schema.json');
 const DEFAULT_LIMIT = 6;
 const DEFAULT_STALE_DAYS = 30;
 const DEFAULT_DEFER_DAYS = 21;
+// An incomplete check (conflicting or unreadable official evidence) rarely resolves within days, so retrying it
+// every run starved never-checked series; wait a week instead.
+const INCOMPLETE_DEFER_DAYS = 7;
 const DEFAULT_TIMEOUT_MINUTES = 45;
 const MAX_CAPTURE_CHARS = 2_000_000;
 const MAINTAINED_PATHS = new Set([
@@ -390,8 +393,11 @@ export function analyzeSeries(name, entries, check, { now = Date.now(), staleDay
     reasons.push(check?.lastCheckedAt ? `last checked ${check.lastCheckedAt}` : 'never checked by the maintenance controller');
     priority = Math.min(priority, 30);
   }
-  const deferred = Date.parse(check?.deferredUntil) > now;
-  return { name, priority, reasons, stale, deferred, latestYear };
+  // Older incomplete checks were written with deferredUntil: null, so derive their deferral from lastCheckedAt.
+  const deferred = Date.parse(check?.deferredUntil) > now
+    || (check?.outcome === 'incomplete' && checkedAt > now - INCOMPLETE_DEFER_DAYS * 86_400_000);
+  const neverChecked = !check?.lastCheckedAt;
+  return { name, priority, reasons, stale, deferred, neverChecked, latestYear };
 }
 
 function normalizedTokens(value) {
@@ -422,12 +428,17 @@ export function selectDueSeries(conferences, checks, {
     return [analyzeSeries(match, series.get(match), checks?.series?.[match], { now, staleDays })];
   }
   const excluded = new Set(exclude);
-  return names
+  const due = names
     .filter((name) => !excluded.has(name))
     .map((name) => analyzeSeries(name, series.get(name), checks?.series?.[name], { now, staleDays }))
     .filter((item) => all || (!item.deferred && (item.priority < 30 || item.stale)))
-    .sort((left, right) => left.priority - right.priority || left.latestYear - right.latestYear || left.name.localeCompare(right.name))
-    .slice(0, limit);
+    .sort((left, right) => left.priority - right.priority || left.latestYear - right.latestYear || left.name.localeCompare(right.name));
+  if (all) return due.slice(0, limit);
+  // Reserve half of the batch for never-checked series; otherwise re-checks of gap series take every slot.
+  const reserved = new Set(due.filter((item) => item.neverChecked).slice(0, Math.ceil(limit / 2)));
+  const rest = due.filter((item) => !reserved.has(item)).slice(0, limit - reserved.size);
+  const picked = new Set([...reserved, ...rest]);
+  return due.filter((item) => picked.has(item));
 }
 
 function researchSchema() {
@@ -696,8 +707,9 @@ export function applyResearchResults(conferences, checks, results, checkedAt = n
       if (indices.length) insertion = Math.min(insertion, nextConferences.length);
       nextConferences.splice(insertion, 0, ...structuredClone(proposal.records));
     }
-    const deferredUntil = research.status === 'not_found'
-      ? new Date(Date.parse(checkedAt) + DEFAULT_DEFER_DAYS * 86_400_000).toISOString()
+    const deferDays = { not_found: DEFAULT_DEFER_DAYS, incomplete: INCOMPLETE_DEFER_DAYS }[research.status];
+    const deferredUntil = deferDays
+      ? new Date(Date.parse(checkedAt) + deferDays * 86_400_000).toISOString()
       : null;
     nextChecks.series[item.name] = {
       lastCheckedAt: checkedAt,

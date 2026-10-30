@@ -5,7 +5,7 @@ This file provides guidance to AI coding agents (Claude Code, Codex, Cursor, Aid
 ## Repository workflow
 
 - Commit directly to `main` by default. Data pushed this way skips PR review; the scheduled auditor re-checks it
-  afterwards (the `audit-reviewed` tag; see `TASKS/audit.md`), so verify every field against the official source
+  afterwards (`scripts/data/audit-reviewed.txt`; see `TASKS/audit.md`), so verify every field against the official source
   before pushing.
 - Do not create a feature branch unless the user explicitly requests one.
 - Never commit crawl/audit evidence or ledger files (e.g. `docs/data-sweep-*`). Put evidence in the commit message

@@ -228,6 +228,8 @@ export interface Grant {
   status?: 'historical' | string;
   locations?: string[];
   locationLabel?: string;
+  /** YYYY-MM-DD the grants routine last confirmed this entry against its official page; drives the audit queue. */
+  lastVerifiedAt?: string;
 }
 
 export type JobTrack = 'tenure-track' | 'teaching' | 'research' | 'postdoc' | 'visiting' | 'leadership' | 'industry' | 'internship';

@@ -49,12 +49,13 @@ Check VietProfs' times before moving anything here.
 | `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5 | `0 1 22 * *` | 22nd of month, 9 PM (21st) | [Discover grants](#discover-grants-grants-discover) |
 | `affiliations` | `trig_01Q8yhHMcPqZZJspxcr4iw7n` | Sonnet 5 | `30 1 10 1,4,7,10 *` | 10th of Jan/Apr/Jul/Oct, 9:30 PM (9th) | [Manual affiliations](#manual-affiliations-affiliations) |
 
-One-time: `review` (`trig_01GJP3xjZBugMSfyEHkN5EBC`, Opus 5.5) runs once on 2026-10-26 at 20:00 UTC (4 PM ET), after the schedule
-changed on 2026-10-02 (nightly audit, confs every other day, grants twice weekly). It changes
-nothing and files one `[scheduled:review] Automation setup review (2026-10-26)` Issue with
+One-time (done): `review` (`trig_01GJP3xjZBugMSfyEHkN5EBC`, Opus 5.5) ran once on 2026-10-26 at 20:00 UTC (4 PM ET), after the schedule
+changed on 2026-10-02 (nightly audit, confs every other day, grants twice weekly); its findings are
+[#70](https://github.com/dynaroars/cspicks/issues/70). It changed
+nothing and filed one `[scheduled:review] Automation setup review (2026-10-26)` Issue with
 per-routine results (PRs opened, facts changed, merge rate, `not_found` share, blocked sources,
 backlog size from `npm run maintain:csconfs -- --dry-run --limit 400`) and a recommendation to
-raise, keep, or lower each frequency. Until then, leave the setup alone unless something is broken.
+raise, keep, or lower each frequency.
 
 Each routine attaches only the
 `Claude_Docs` connector. Don't add `Claude_Code_Remote`: with it, a run that opens a PR schedules
@@ -79,7 +80,8 @@ them share these rules:
 2. **Caps.** Stay within the section's cap, then stop. Before starting, list open PRs and Issues
    titled `[scheduled:<key>]` and skip items they already touch.
 3. **Titles and branches.** Every PR and Issue title starts with `[scheduled:<key>]`. Branches are
-   `task/<key>-<YYYY-MM-DD>`.
+   `task/<key>-<YYYY-MM-DD>`, unless the session assigns its own branch (e.g. `claude/<name>`); then use that one,
+   since the title already identifies the routine.
 4. **Boundaries.** Producers never merge PRs and never push to `main`. Unknown beats wrong: never
    fill a field from a prior year, a third-party tracker, or a guess.
 5. **Validate.** Before opening a PR: `npm test && npm run typecheck && npm run build &&
@@ -107,7 +109,7 @@ Follow `TASKS/audit.md`, with these rules taking precedence:
 
 - Scope: open PRs and Issues created at least 12 hours ago, oldest first, skipping anything this
   session created. At most 5 PRs and 10 Issues per run. Then direct data commits to `main` since the
-  `audit-reviewed` tag (TASKS/audit.md, "Direct commits to `main`"), at most 60 records per run.
+  sha in `scripts/data/audit-reviewed.txt` (TASKS/audit.md, "Direct commits to `main`"), at most 60 records per run.
 - PRs: check out the PR, merge fresh `main` into it, and run the full validation from the
   conventions. Re-verify a sample of at least a third of the changed facts (and every changed
   deadline, plus every new or changed job's `track` and `level`) against the cited official URLs. Require green CI on the PR. Merge with
@@ -147,14 +149,14 @@ Follow `TASKS/audit.md`, with these rules taking precedence:
 Playbook: `TASKS/conferences.md`. Cap: 12 conference series.
 
 1. Pick the queue with `npm run maintain:csconfs -- --dry-run --limit 12`. It orders series by
-   near-term deadlines and gaps, skips recently checked and deferred ones, and prints why each is
-   due. Don't run the controller without `--dry-run`; this routine is the researcher.
+   near-term deadlines and gaps, skips recently checked and deferred ones, reserves half the batch for
+   never-checked series, and prints why each is due. Don't run the controller without `--dry-run`; this routine is the researcher.
 2. Research each series on its official site (Workflows A/B in the playbook). Update
    `csconfs/data/conferences.json` only with facts an official page states.
 3. For every series you researched, record the result in `csconfs/maintenance/checks.json` under
    `series.<name>`, in the controller's format: `lastCheckedAt` (ISO time), `outcome`
    (`complete`, `incomplete`, or `not_found`), `summary`, `checkedUrls`, `deferredUntil`
-   (`lastCheckedAt` + 21 days when `not_found`, otherwise `null`), and `proposals` (a list of
+   (`lastCheckedAt` + 21 days when `not_found`, + 7 days when `incomplete`, `null` when `complete`), and `proposals` (a list of
    `{ action, year, sources }` for the edits you made). This is what keeps the next run from
    repeating the same series.
 4. Open one PR even if only `checks.json` changed.
@@ -167,21 +169,18 @@ exactly as they are.
 
 Playbook: `TASKS/grants.md`. Cap: 20 entries in `public/grants.json`.
 
-First, fix corrupted `amount` strings (Issue #13: a past automated edit stripped `$` plus the digit
-after it, leaving text like `Small (00,000), Medium (,200,000)`). List them with
-`node -e "for (const e of require('./public/grants.json')) if (/(^|[ (+])(,\d{3}|\d{2},\d{3})/.test(e.amount||'') && !/[$€£]/.test(e.amount)) console.log(e.id, e.amount)"`
-(The pattern is a heuristic: also eyeball every `amount` that starts with a bare number or comma.)
-and re-derive each amount from the official solicitation or call page (the entry's landing page often
-omits dollar figures; follow it to the solicitation). Never guess the lost digit. If no official page
-states the amount, set `amount` to `Amount varies; see the official call page` and list the entry in
-the PR. Take these before anything else, up to the cap, until none remain.
-
-Then pick entries in this order: deadline already passed (the next cycle may be posted), then deadline
-within the next 90 days, then entries with no concrete date in `deadline`. Break ties by rotating
+Skip every entry whose `lastVerifiedAt` is within the last 30 days. Among the rest, pick entries in this
+order: deadline already passed (the next cycle may be posted), then deadline within the next 90 days,
+then entries with no concrete date in `deadline`. Within each group, entries with no `lastVerifiedAt`
+come first. Break ties by rotating
 `sponsorCategory`, taking the category that appears least among the last few `[scheduled:grants]`
 PRs. For each entry, confirm the official page, update the deadline/amount/eligibility, keep
 concrete historical dates as the playbook describes, and set `"status": "historical"` for discontinued
-programs rather than deleting them. Keep `id`s stable.
+programs rather than deleting them. Keep `id`s stable. Set `lastVerifiedAt` (today, `YYYY-MM-DD`) on
+every entry you confirmed against its official page, including ones where nothing changed; an entry you
+couldn't verify (blocked site, missing page) keeps its old value so a later run retries it. If an `amount`
+looks corrupted (a bare number or leading comma with no currency sign, as in Issue #13), re-derive it from
+the official call page or set it to `Amount varies; see the official call page`; never guess.
 
 ### US jobs crawl (`jobs`)
 

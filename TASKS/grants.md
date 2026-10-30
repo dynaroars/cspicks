@@ -13,11 +13,15 @@ update funding opportunities using this standardized workflow.
 
 Practical cadence:
 
-- **Monthly**, run a subset of the query categories below (rotate through
-  federal agencies, industry programs, fellowships, and foundations over a
-  few months rather than all at once) looking for: newly opened call cycles,
-  changed deadlines/amounts on existing entries, and programs that have
-  quietly closed or gone dormant.
+- **Twice weekly** (the scheduled `grants` routine), re-verify up to 20
+  existing entries, skipping any whose `lastVerifiedAt` is under 30 days old,
+  for newly opened call cycles, changed deadlines/amounts, and programs that
+  have quietly closed or gone dormant. Set `lastVerifiedAt` (YYYY-MM-DD) on
+  each entry confirmed against its official page, even when nothing changed.
+- **Monthly** (the `grants-discover` routine), run a subset of the query
+  categories below (rotate through federal agencies, industry programs,
+  fellowships, and foundations over a few months rather than all at once)
+  looking for new programs.
 - **On submission**, review `grants-submit.html` output: verify the cited
   official URL before writing anything to `public/grants.json`. A submission
   is a lead, not a source — confirm the program actually exists and the
