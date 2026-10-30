@@ -104,8 +104,7 @@ playbook before any data-refresh or web-research task.
   same everywhere.
 - `src/vietprofs/` — verbatim copies of VietProfs' shared UI: `roars-ui.css` (design tokens, header icons,
   search box, suggestion list, scope chips, help popup, tags, tooltips, empty state, back-to-top, floating "+"),
-  `search-kit.ts` (suggestion controller, keyboard shortcuts, help, commands), `back-to-top.ts`, `add-fab.ts`,
-  and the visitor-traffic view. `src/suggestion-box.ts` is a thin adapter over search-kit's `createSearchController`. VietProfs is the baseline look: edit these there, then run
+  `search-kit.ts` (suggestion controller, keyboard shortcuts, help, commands), `back-to-top.ts`, and `add-fab.ts`. `src/suggestion-box.ts` is a thin adapter over search-kit's `createSearchController`. VietProfs is the baseline look: edit these there, then run
   `npm run sync:vietprofs-ui`; `test/unit/vietprofs-ui.test.js` fails on local edits. `style.css` `@import`s
   `roars-ui.css` first and holds only cspicks-specific rules on top.
 - `src/charts.ts` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges

@@ -532,13 +532,13 @@ export interface CommandHandlerOptions {
   // Built-in command words this site doesn't want (they fall through to a normal search).
   disabledCommands?: string[];
   // Extra, site-specific commands layered on top of the shared base set
-  // (e.g. vietprofs' "visitor stats" / "sudo vietprofs"). They take precedence over built-ins.
+  // (e.g. vietprofs' "sudo vietprofs"). They take precedence over built-ins.
   extraCommands?: Record<string, () => void>;
 }
 
 // The base `help` / `fortune` / `whoami` / `uname -a` / `stats` / `theme crt` / `clear`
 // command-line easter eggs, identical across every consumer's search box. Site-specific
-// extras (vietprofs' "visitor stats", people's none-yet) go in `extraCommands`.
+// extras (vietprofs' "sudo vietprofs", people's none-yet) go in `extraCommands`.
 export function createCommandHandler(opts: CommandHandlerOptions) {
   const { commandOutputEl, searchHelpPanel, searchHelpBtn, extraCommands } = opts;
   const disabled = new Set(opts.disabledCommands ?? []);

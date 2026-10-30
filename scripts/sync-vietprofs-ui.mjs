@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '..');
 const source = resolve(process.env.VIETPROFS_DIR || resolve(root, '../vietprofs'), 'src');
 const target = resolve(root, 'src/vietprofs');
-const SHARED_FILES = ['roars-ui.css', 'stats-components.css', 'traffic-view.ts', 'search-kit.ts', 'add-fab.ts', 'back-to-top.ts'];
+const SHARED_FILES = ['roars-ui.css', 'search-kit.ts', 'add-fab.ts', 'back-to-top.ts'];
 
 const hashes = {};
 for (const file of SHARED_FILES) {
