@@ -4,7 +4,7 @@ import { hideComparison, initComparison, isComparing, renderComparison, resolveC
 import { getConferenceAreaMap, loadData, publicationMatchesConferenceSet, schoolAliases } from './data.js';
 import { createFilterBar } from './filters.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
-import { renderProfessorCard as renderProfessorCardView, renderSchoolCard as renderSchoolCardView } from './search-cards.js';
+import { renderDeferredContent, renderProfessorCard as renderProfessorCardView, renderSchoolCard as renderSchoolCardView } from './search-cards.js';
 import { createSearchControls, focusSearchOnLoad, renderSearchExamples as renderExampleChips, sample, updateSearchUrl } from './search-controls.js';
 import { parseKeywordQuery } from './search-keywords.js';
 import { clearSearchSections, createDblpAuthorSearch, filterSearchRecords, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
@@ -184,6 +184,11 @@ async function init() {
   }
 }
 
+function toggleCard(card: Element | null) {
+  renderDeferredContent(card);
+  card?.classList.toggle('collapsed');
+}
+
 function saveExpandedCards() {
   const expandedCards = new Set<string>();
   document.querySelectorAll('.card:not(.collapsed)').forEach(card => {
@@ -219,6 +224,7 @@ function restoreExpandedCards(expandedCards: Set<string>) {
     }
 
     if (shouldExpand) {
+      renderDeferredContent(card);
       card.classList.add('no-transition');
       card.classList.remove('collapsed');
       card.offsetHeight;
@@ -435,14 +441,14 @@ function setupSearch() {
     }
     const cardAction = target.closest<HTMLElement>('[data-action="open-target"]');
     if (cardAction) {
-      cardAction.closest('.card')?.classList.toggle('collapsed');
+      toggleCard(cardAction.closest('.card'));
       const { targetType, targetName } = cardAction.dataset;
       if ((targetType === 'school' || targetType === 'researcher') && targetName) {
         showIntegratedAnalysis(targetType, targetName);
       }
     }
     const toggleAction = target.closest<HTMLElement>('[data-action="toggle-card"]');
-    if (toggleAction) toggleAction.closest('.card')?.classList.toggle('collapsed');
+    if (toggleAction) toggleCard(toggleAction.closest('.card'));
     const papersAction = target.closest<HTMLElement>('[data-action="toggle-papers"]');
     if (papersAction) {
       const list = papersAction.nextElementSibling;

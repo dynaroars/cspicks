@@ -269,7 +269,9 @@ test('a school card ranks its faculty roster and scopes subfield counts to the s
   assert.deepEqual(school.areas.mlmining.facultyStats.Alice, { count: 4, adjusted: 2 });
   assert.equal(school.facultyCounts.Alice, 6);
 
-  const html = renderSchoolCard(school, null, { appData: result, currentQuery: '', showRankings: true });
+  // An exact-name match renders expanded; collapsed cards defer their body until opened.
+  assert.match(renderSchoolCard(school, null, { appData: result, currentQuery: '', showRankings: true }), /data-deferred="\d+"><\/div>/);
+  const html = renderSchoolCard(school, null, { appData: result, currentQuery: 'example university', showRankings: true });
   // Equal adjusted counts share a rank, and the next distinct value follows it.
   assert.match(html, /faculty-tag-rank">1\.<\/span> <span>Bob<\/span> <small class="faculty-tag-stats">3 papers \(3\.0 adjusted\)/);
   assert.match(html, /faculty-tag-rank">1\.<\/span> <span>Carol<\/span>/);

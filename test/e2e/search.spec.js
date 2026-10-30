@@ -55,6 +55,19 @@ test('default view ranks universities and people side by side, and clears stale 
   await expect(page).not.toHaveURL(/target=/);
 });
 
+test('collapsed ranking cards render their body only when first opened', async ({ page }) => {
+  await page.goto('./?percapita=false');
+  const firstProfessor = page.locator('#prof-results .card').first();
+  await expect(firstProfessor.locator('.card-stats')).toHaveCount(0);
+  await firstProfessor.locator('.card-header').click();
+  await expect(firstProfessor.locator('.card-stats')).toBeVisible();
+  await page.goto('./?percapita=false');
+  const firstSchool = page.locator('#school-results .card').first();
+  await expect(firstSchool.locator('.faculty-tag')).toHaveCount(0);
+  await firstSchool.locator('.card-header').click();
+  await expect(firstSchool.locator('.school-faculty-roster .faculty-tag', { hasText: 'Hai Duong' })).toBeVisible();
+});
+
 test('malformed shared filter parameters fall back to valid controls', async ({ page }) => {
   await page.goto('./?region=unknown&start=not-a-year&end=99999&percapita=false');
   await expect(page.locator('#region-select')).toHaveValue('us');
