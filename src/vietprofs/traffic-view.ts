@@ -9,6 +9,8 @@ export interface DailyBrowserStat {
   pageViews: number | null;
   visits: number | null;
   status: 'complete' | 'partial' | 'missing';
+  /** Likely an automated burst: shown, but left out of the summary numbers and 7-day breakdowns. */
+  suspected?: true;
 }
 
 export interface BrowserStatsResponse {
@@ -23,7 +25,10 @@ export interface BrowserStatsResponse {
   measurementStartedAt: string | null;
   coverage: { firstDate: string | null; lastCompleteDate: string; completeDays7: number; availableDays30: number };
   today: { date: string; pageViews: number | null; visits: number | null; complete: false; collected: boolean };
-  last7Complete: { pageViews: number; visits: number; days: number; avgPageViews: number | null; avgVisits: number | null };
+  last7Complete: {
+    pageViews: number; visits: number; days: number; avgPageViews: number | null; avgVisits: number | null;
+    medianPageViews?: number | null; excludedDays?: string[];
+  };
   last30Available: { pageViews: number; visits: number; days: number };
   daily: DailyBrowserStat[];
   countries: Array<{ code: string; name: string; flag: string; pageViews: number; pct: number }>;
@@ -62,11 +67,23 @@ function days(count: number, noun = 'complete day'): string {
   return `${count} ${noun}${count === 1 ? '' : 's'}`;
 }
 
+function todayDetail(data: BrowserStatsResponse): string {
+  if (!data.today.collected) return '';
+  const suspected = data.daily.find(row => row.date === data.today.date)?.suspected;
+  return `${formatNumber(data.today.pageViews)} today so far${suspected ? ' (suspected automated)' : ''}`;
+}
+
 export function renderMetrics(data: BrowserStatsResponse): string {
   const countries = data.countries.filter(country => country.pageViews > 0).length;
+  const excluded = data.last7Complete.excludedDays?.length || 0;
+  const period = `${days(data.last7Complete.days)}${excluded ? `; ${days(excluded, 'suspected automated day')} left out` : ''}`;
+  // Older Worker responses carry only the average.
+  const hasMedian = data.last7Complete.medianPageViews !== undefined;
   const cards: Array<[label: string, value: string, detail: string]> = [
-    ['Average daily page views', formatNumber(data.last7Complete.avgPageViews), data.today.collected ? `${formatNumber(data.today.pageViews)} today so far` : ''],
-    ['Countries reached', formatNumber(countries), days(data.last7Complete.days)],
+    [hasMedian ? 'Typical daily page views' : 'Average daily page views',
+      formatNumber(hasMedian ? data.last7Complete.medianPageViews ?? null : data.last7Complete.avgPageViews),
+      [todayDetail(data), excluded ? `${hasMedian ? 'median' : 'average'} of ${period}` : ''].filter(Boolean).join(' · ')],
+    ['Countries reached', formatNumber(countries), period],
   ];
   return `<div class="browser-metric-grid">${cards.map(([label, value, detail]) => `<article class="browser-metric-card">
     <p class="browser-metric-label">${escapeHtml(label)}</p>
@@ -100,6 +117,12 @@ export function renderChart(daily: DailyBrowserStat[]): string {
     active.push(`${active.length ? 'L' : 'M'} ${x.toFixed(1)} ${y.toFixed(1)}`);
   });
   if (active.length) segments.push(active.join(' '));
+  const markers = daily.map((row, index) => {
+    if (!row.suspected || row.pageViews === null) return '';
+    const x = left + index / Math.max(1, daily.length - 1) * chartWidth;
+    const y = top + chartHeight - row.pageViews / maximum * chartHeight;
+    return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" class="point-suspected"><title>${escapeHtml(formatDate(row.date))}: suspected automated traffic</title></circle>`;
+  }).join('');
   const grid = [0, 0.25, 0.5, 0.75, 1].map(fraction => {
     const y = top + chartHeight - fraction * chartHeight;
     return `<line x1="${left}" y1="${y}" x2="${width - right}" y2="${y}" stroke="currentColor" stroke-opacity="0.1" stroke-dasharray="3 3"/><text x="${left - 8}" y="${y + 4}" text-anchor="end" font-size="11" fill="currentColor" opacity="0.65">${Math.round(maximum * fraction)}</text>`;
@@ -112,8 +135,8 @@ export function renderChart(daily: DailyBrowserStat[]): string {
     return `<text x="${x}" y="${height - 12}" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.65">${escapeHtml(formatDate(row.date, false) + suffix)}</text>`;
   }).join('');
   return `<div class="stats-chart-container">
-    <p class="chart-legend"><span class="legend-item"><span class="legend-dot dot-views"></span> Browser page views</span></p>
-    <div class="svg-wrap"><svg viewBox="0 0 ${width} ${height}" class="stats-svg" role="img" aria-label="Daily browser page views" preserveAspectRatio="xMidYMid meet">${grid}${segments.map(path => `<path d="${path}" class="path-views" fill="none" stroke-width="2.5"/>`).join('')}${labels}</svg></div>
+    <p class="chart-legend"><span class="legend-item"><span class="legend-dot dot-views"></span> Browser page views</span>${markers ? '<span class="legend-item"><span class="legend-dot dot-suspected"></span> Suspected automated day</span>' : ''}</p>
+    <div class="svg-wrap"><svg viewBox="0 0 ${width} ${height}" class="stats-svg" role="img" aria-label="Daily browser page views" preserveAspectRatio="xMidYMid meet">${grid}${segments.map(path => `<path d="${path}" class="path-views" fill="none" stroke-width="2.5"/>`).join('')}${markers}${labels}</svg></div>
   </div>`;
 }
 
@@ -121,7 +144,7 @@ export function renderDailyTable(daily: DailyBrowserStat[]): string {
   return `<details class="stats-secondary-details"><summary><strong>View day-by-day browser traffic</strong></summary>
     <div class="stats-table-wrapper"><table class="stats-table"><thead><tr><th>Date (UTC)</th><th class="num-col">Page views</th><th class="num-col">Browser visits</th></tr></thead>
     <tbody>${[...daily].reverse().map(row => `<tr class="${row.status === 'partial' ? 'partial-row' : ''}">
-      <td><strong>${escapeHtml(formatDate(row.date, true, true))}</strong>${row.status === 'partial' ? ' (In progress)' : ''}</td><td class="num-col">${formatNumber(row.pageViews)}</td><td class="num-col">${formatNumber(row.visits)}</td></tr>`).join('')}</tbody></table></div>
+      <td><strong>${escapeHtml(formatDate(row.date, true, true))}</strong>${row.status === 'partial' ? ' (In progress)' : ''}${row.suspected ? ' (Suspected automated)' : ''}</td><td class="num-col">${formatNumber(row.pageViews)}</td><td class="num-col">${formatNumber(row.visits)}</td></tr>`).join('')}</tbody></table></div>
   </details>`;
 }
 
@@ -160,7 +183,7 @@ export function renderNotice(data: BrowserStatsResponse): string {
 /** `seriesNote` is trusted HTML appended to the paragraph, for anything about this site's own history. */
 export function renderMethodology(seriesNote = ''): string {
   return `<div class="privacy-note">
-    <p>These statistics come from privacy-preserving Cloudflare Web Analytics browser beacons, not raw server logs — no cookies, IPs, or individual visitor records are collected. Crawlers Cloudflare recognizes are excluded, and readers who block JavaScript go uncounted. A "page view" is a browser load; a "visit" is a page view that arrived from another site or directly rather than from another page here, so it is not a unique-visitor count. Since Oct 2, 2026, an automated crawler posing as mobile Chrome has been loading pages directly, so mobile-Chrome page loads count only when another site linked to them; real visitors who reach the site directly on mobile Chrome are not counted. Dates use complete UTC days only.${seriesNote ? ` ${seriesNote}` : ''}</p>
+    <p>These statistics come from privacy-preserving Cloudflare Web Analytics browser beacons, not raw server logs — no cookies, IPs, or individual visitor records are collected. Crawlers Cloudflare recognizes are excluded, and readers who block JavaScript go uncounted. A "page view" is a browser load; a "visit" is a page view that arrived from another site or directly rather than from another page here, so it is not a unique-visitor count. Since Oct 2, 2026, an automated crawler posing as mobile Chrome has been loading pages directly, so mobile-Chrome page loads count only when another site linked to them; real visitors who reach the site directly on mobile Chrome are not counted. A day with several times the usual page views in which nearly every page view is its own visit is marked as suspected automated traffic: it stays in the daily chart and table but is left out of the summary numbers, countries, page categories, and browser breakdowns. Dates use complete UTC days only.${seriesNote ? ` ${seriesNote}` : ''}</p>
   </div>`;
 }
 

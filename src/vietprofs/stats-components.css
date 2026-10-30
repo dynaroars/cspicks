@@ -107,6 +107,12 @@
   background: var(--accent-dim, #60a5fa);
 }
 
+.legend-dot.dot-suspected {
+  background: transparent;
+  border: 2px solid #d97706;
+  border-radius: 50%;
+}
+
 .stats-svg {
   width: 100%;
   height: auto;
@@ -115,6 +121,12 @@
 
 .stats-svg .path-views {
   stroke: var(--accent-dim, #60a5fa);
+}
+
+.stats-svg .point-suspected {
+  fill: none;
+  stroke: #d97706;
+  stroke-width: 2;
 }
 
 .stats-table-wrapper {
