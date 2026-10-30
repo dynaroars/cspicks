@@ -8,7 +8,10 @@ export type KeywordMeta = { label: string; icon?: string };
 
 // Case/diacritic-insensitive compare, e.g. so "Nguyen" also matches "Nguyễn".
 export function normalizeText(value: string): string {
-  return value.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  return value
+    .toLocaleLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
 }
 
 // "Keyword: value" prefix parsing shared by every consumer's search box, e.g.
@@ -25,7 +28,10 @@ export function parseKeywordQuery(
   const key = resolveKey(typed);
   if (!key) return null;
   let query = (match[2] ?? '').trim();
-  if ((query.startsWith('"') && query.endsWith('"')) || (query.startsWith("'") && query.endsWith("'"))) {
+  if (
+    (query.startsWith('"') && query.endsWith('"')) ||
+    (query.startsWith("'") && query.endsWith("'"))
+  ) {
     query = query.slice(1, -1).trim();
   }
   return { key, query };
@@ -154,7 +160,7 @@ function debounce(fn: () => void, delayMs: number): () => void {
 function rankMatches(values: readonly string[], rawQuery: string, limit: number): string[] {
   const query = normalizeText(rawQuery);
   return values
-    .filter(v => normalizeText(v).includes(query))
+    .filter((v) => normalizeText(v).includes(query))
     .sort((a, b) => {
       const aStarts = normalizeText(a).startsWith(query);
       const bStarts = normalizeText(b).startsWith(query);
@@ -194,7 +200,10 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
   function renderChip() {
     if (!scopeChip) return;
     (scopeChip as any).hidden = !activeScope;
-    if (!activeScope) { if (scopeChipLabel) scopeChipLabel.textContent = ''; return; }
+    if (!activeScope) {
+      if (scopeChipLabel) scopeChipLabel.textContent = '';
+      return;
+    }
     const meta = metaFor(activeScope);
     if (scopeChipLabel) scopeChipLabel.textContent = `${meta.icon ?? '🔎'} ${meta.label}`;
     scopeChip.setAttribute('aria-label', `Remove ${meta.label} search scope`);
@@ -205,7 +214,9 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
     const raw = input.value;
     if (activeScope) return { scope: activeScope, query: raw.trim(), raw };
     const parsed = parseKeywordQuery(raw, resolveKey);
-    return parsed ? { scope: parsed.key, query: parsed.query, raw } : { scope: null, query: raw.trim(), raw };
+    return parsed
+      ? { scope: parsed.key, query: parsed.query, raw }
+      : { scope: null, query: raw.trim(), raw };
   }
 
   function setActive(index: number) {
@@ -245,7 +256,11 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
     input.focus();
   }
 
-  function optionButton(item: SuggestionItem, index: number, context: SuggestionContext): HTMLElement {
+  function optionButton(
+    item: SuggestionItem,
+    index: number,
+    context: SuggestionContext,
+  ): HTMLElement {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'search-suggestion';
@@ -266,7 +281,7 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
     }
     // Keep focus on the input until the click lands — otherwise blur can hide
     // the list before the click event arrives.
-    btn.addEventListener('mousedown', e => e.preventDefault());
+    btn.addEventListener('mousedown', (e) => e.preventDefault());
     btn.addEventListener('click', () => select(item, context));
     return btn;
   }
@@ -275,9 +290,12 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
     if (!opts.getSuggestions) return [];
     const scoped = context.scope;
     const values = opts.getSuggestions(scoped ?? opts.unscopedKey ?? 'name') || [];
-    const showAll = Boolean(scoped) && !context.query && values.length <= (opts.showAllWhenEmpty ?? 0);
+    const showAll =
+      Boolean(scoped) && !context.query && values.length <= (opts.showAllWhenEmpty ?? 0);
     if (!context.query && !showAll) return [];
-    return [{ items: rankMatches(values, context.query, maxSuggestions).map(label => ({ label })) }];
+    return [
+      { items: rankMatches(values, context.query, maxSuggestions).map((label) => ({ label })) },
+    ];
   }
 
   function showSuggestions() {
@@ -375,9 +393,11 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
     debouncedChange();
   });
   // A focus given via focusQuietly() (page-load autofocus) doesn't open the list.
-  input.addEventListener('focus', () => { if (!input.dataset.quietFocus) showSuggestions(); });
+  input.addEventListener('focus', () => {
+    if (!input.dataset.quietFocus) showSuggestions();
+  });
   input.addEventListener('blur', () => window.setTimeout(hideSuggestions, opts.blurDelayMs ?? 150));
-  input.addEventListener('keydown', e => {
+  input.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       hideSuggestions();
       if (input.value || activeScope) {
@@ -413,7 +433,11 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
       return;
     }
     const count = optionEls.length;
-    setActive(e.key === 'ArrowDown' ? (activeSuggestion + 1) % count : (activeSuggestion - 1 + count) % count);
+    setActive(
+      e.key === 'ArrowDown'
+        ? (activeSuggestion + 1) % count
+        : (activeSuggestion - 1 + count) % count,
+    );
     e.preventDefault();
   });
   if (scopeChip) {
@@ -459,11 +483,20 @@ const helpClosingEscapes = new WeakSet<Event>();
 // Open/close behavior for the "(?)" search-syntax popover, plus optionally filling
 // its keyword list from `entries`. Shared by every consumer; some (vietprofs) render
 // the panel body directly in their own shell template and only need the open/close half.
-export function setupSearchHelp({ btn, panel, list, entries, onBeforeToggle }: SearchHelpOptions): SearchHelp {
+export function setupSearchHelp({
+  btn,
+  panel,
+  list,
+  entries,
+  onBeforeToggle,
+}: SearchHelpOptions): SearchHelp {
   if (list && entries) {
-    list.innerHTML = entries.map(e =>
-      `<li><code>${escapeHtml(e.code)}</code> ${escapeHtml(e.example)}${e.scope ? ` <span class="search-help-scope">(${escapeHtml(e.scope)})</span>` : ''}</li>`
-    ).join('');
+    list.innerHTML = entries
+      .map(
+        (e) =>
+          `<li><code>${escapeHtml(e.code)}</code> ${escapeHtml(e.example)}${e.scope ? ` <span class="search-help-scope">(${escapeHtml(e.scope)})</span>` : ''}</li>`,
+      )
+      .join('');
   }
 
   const isOpen = () => !(panel as any).hidden;
@@ -478,14 +511,14 @@ export function setupSearchHelp({ btn, panel, list, entries, onBeforeToggle }: S
     if (onBeforeToggle) onBeforeToggle();
     setOpen(willShow);
   }
-  btn.addEventListener('click', e => {
+  btn.addEventListener('click', (e) => {
     e.stopPropagation();
     toggle();
   });
-  document.addEventListener('click', e => {
+  document.addEventListener('click', (e) => {
     if (isOpen() && !panel.contains(e.target as Node) && e.target !== btn) hide();
   });
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && isOpen()) {
       hide();
       helpClosingEscapes.add(e);
@@ -524,7 +557,11 @@ export function createCommandHandler(opts: CommandHandlerOptions) {
   const { commandOutputEl, searchHelpPanel, searchHelpBtn } = opts;
 
   function completeCommand(msg: string) {
-    const input = opts.input ?? (opts.searchInputId ? document.getElementById(opts.searchInputId) as HTMLInputElement | null : null);
+    const input =
+      opts.input ??
+      (opts.searchInputId
+        ? (document.getElementById(opts.searchInputId) as HTMLInputElement | null)
+        : null);
     if (input) input.value = '';
     const search = opts.getSearch ? opts.getSearch() : null;
     if (search) search.resetScope();
@@ -593,16 +630,26 @@ export interface KeyboardShortcutOptions {
 export function setupKeyboardShortcuts(opts: KeyboardShortcutOptions) {
   const nextKeys = opts.nextKeys ?? ['j'];
   const prevKeys = opts.prevKeys ?? ['k'];
-  const searchInput = () => opts.input ?? document.getElementById(opts.searchInputId ?? 'main-search') as HTMLInputElement | null;
+  const searchInput = () =>
+    opts.input ??
+    (document.getElementById(opts.searchInputId ?? 'main-search') as HTMLInputElement | null);
   const fallbackHelp = (): SearchHelp | null => {
     const panel = document.getElementById('search-help-panel');
     const btn = document.getElementById('search-help-btn');
     if (!panel) return null;
     return {
       isOpen: () => !(panel as any).hidden,
-      hide: () => { (panel as any).hidden = true; btn?.setAttribute('aria-expanded', 'false'); },
-      show: () => { (panel as any).hidden = false; btn?.setAttribute('aria-expanded', 'true'); },
-      toggle: () => { btn?.click(); },
+      hide: () => {
+        (panel as any).hidden = true;
+        btn?.setAttribute('aria-expanded', 'false');
+      },
+      show: () => {
+        (panel as any).hidden = false;
+        btn?.setAttribute('aria-expanded', 'true');
+      },
+      toggle: () => {
+        btn?.click();
+      },
     };
   };
 
@@ -625,7 +672,7 @@ export function setupKeyboardShortcuts(opts: KeyboardShortcutOptions) {
     }
   }
 
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') handleEscape(e);
 
     const target = e.target as HTMLElement;
@@ -647,7 +694,9 @@ export function setupKeyboardShortcuts(opts: KeyboardShortcutOptions) {
 
     const items = opts.getItemElements ? opts.getItemElements() : [];
     let currIdx = opts.getSelectedIndex ? opts.getSelectedIndex() : -1;
-    const selectedClass = opts.selectedClass ?? (items[0]?.classList.contains('card') ? 'card-keyboard-selected' : 'entry-keyboard-selected');
+    const selectedClass =
+      opts.selectedClass ??
+      (items[0]?.classList.contains('card') ? 'card-keyboard-selected' : 'entry-keyboard-selected');
     const isNext = nextKeys.includes(e.key);
     const isPrev = prevKeys.includes(e.key);
 
@@ -655,7 +704,10 @@ export function setupKeyboardShortcuts(opts: KeyboardShortcutOptions) {
       e.preventDefault();
       items[currIdx]?.classList.remove(selectedClass);
       if (!items.length) currIdx = -1;
-      else currIdx = isNext ? (currIdx + 1) % items.length : (currIdx - 1 + items.length) % items.length;
+      else
+        currIdx = isNext
+          ? (currIdx + 1) % items.length
+          : (currIdx - 1 + items.length) % items.length;
       if (opts.setSelectedIndex) opts.setSelectedIndex(currIdx);
       const selected = items[currIdx];
       if (selected) {

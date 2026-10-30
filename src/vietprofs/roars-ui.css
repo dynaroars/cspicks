@@ -177,7 +177,10 @@
   font-family: var(--font-body);
   font-size: var(--text-sm);
   cursor: pointer;
-  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .field-select.is-active {
@@ -331,7 +334,9 @@
   height: 2rem;
   color: var(--text-secondary);
   border-radius: 50%;
-  transition: color 0.2s ease, background-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .icon-link svg {
@@ -533,7 +538,9 @@
   border-radius: var(--radius-sm);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.12s ease, transform 0.12s ease;
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease;
   z-index: 10;
   pointer-events: none;
 }
@@ -562,7 +569,10 @@
   justify-content: center;
   cursor: pointer;
   z-index: 100;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .back-to-top[hidden] {
