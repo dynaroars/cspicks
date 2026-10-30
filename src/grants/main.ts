@@ -1,7 +1,6 @@
 /**
  * CS Awards & Grants Main Controller
  */
-import { trackView } from '../analytics.js';
 import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { awardDeadlineTone, opportunityDeadline, opportunityHeader, opportunityMeta } from '../opportunity-card.js';
 import { resultActions } from '../result-actions.js';
@@ -81,7 +80,6 @@ function render() {
   }
 
   updateUrl(filterState);
-  trackView(filterState.query ? 'search-results' : 'default', 'grants');
 }
 
 function handleHashScroll() {

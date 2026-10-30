@@ -1,7 +1,6 @@
 import { aoeDeadline, filterSchedule, formatCalendarDate } from './csconfs/schedule-data.js';
 import { initAnalysis, refreshAnalysis, setAnalysisTarget } from './analysis.js';
-import { trackComparison, trackView } from './analytics.js';
-import { activeComparisonType, hideComparison, initComparison, isComparing, renderComparison, resolveComparison } from './comparison.js';
+import { hideComparison, initComparison, isComparing, renderComparison, resolveComparison } from './comparison.js';
 import { getConferenceAreaMap, loadData, publicationMatchesConferenceSet, schoolAliases } from './data.js';
 import { createFilterBar } from './filters.js';
 import { applyPerCapitaRanks, buildPriorPeriodData, calculateDiscoveryInsights, calculateSubfieldDiscoveries } from './metrics.js';
@@ -272,7 +271,6 @@ function applyQueryFromLocation() {
 // copied link previews the actual view rather than the generic homepage -
 // every call site that reproduces the URL (updateURL) reproduces the title too.
 function updateSeoForCurrentView(query: string | null | undefined) {
-  const page = isDiscoveries ? 'discoveries' : 'search';
   const trimmed = (query || '').trim();
   if (!trimmed) {
     // The filter bar isn't disabled during the initial load, so this can in
@@ -280,7 +278,6 @@ function updateSeoForCurrentView(query: string | null | undefined) {
     // skip the meta update rather than reading off a still-null module.
     if (isDiscoveries && discoveriesApi) updatePageMeta(discoveriesApi.getDiscoveriesMeta(filters));
     else if (!isDiscoveries) updatePageMeta({ title: `${SITE_NAME} - Find the Right CS PhD Program and Advisor` });
-    trackView('default', page);
     return;
   }
   if (isComparing()) {
@@ -288,7 +285,6 @@ function updateSeoForCurrentView(query: string | null | undefined) {
       title: `${trimmed} - ${SITE_NAME}`,
       description: `Head-to-head comparison: ${trimmed}. Publication trends, research strengths, and rank breakdowns on CS Picks.`
     });
-    trackComparison(activeComparisonType() || 'unknown', page);
     return;
   }
   if (selectedAnalysisTarget) {
@@ -298,14 +294,12 @@ function updateSeoForCurrentView(query: string | null | undefined) {
       title: `${name} - ${SITE_NAME}`,
       description: `${name} ${kind} on CS Picks: publication trends, research strengths, and rankings from open academic data.`
     });
-    trackView(selectedAnalysisTarget.type, page);
     return;
   }
   updatePageMeta({
     title: `${trimmed} - ${SITE_NAME}`,
     description: `CS Picks results for "${trimmed}": universities, professors, and research areas from open academic data.`
   });
-  trackView('search-results', page);
 }
 
 // Search's empty-query landing browses every university and professor;

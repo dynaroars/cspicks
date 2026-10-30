@@ -9,7 +9,6 @@ import { initTooltipPositioning } from './tooltip-position.js';
 import { matchesKeyword, parseKeywordQuery } from './search-keywords.js';
 import { createSearchControls, focusSearchOnLoad, renderSearchExamples as renderExampleChips, sample, updateSearchUrl } from './search-controls.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
-import { trackComparison, trackView } from './analytics.js';
 import type { FilterController } from './filters.js';
 import type { SuggestionGroups, SuggestionItem } from './suggestion-box.js';
 import type { FundingFaculty, FundingIndex, FundingSchool, NsfDataset } from './types.js';
@@ -51,11 +50,9 @@ function updateUrl() {
 function updateSeoForCurrentView(query: string) {
   if (!query) {
     updatePageMeta({ title: `${SITE_NAME} - NSF Funding Explorer` });
-    trackView('default', 'funding');
     return;
   }
   const isComparison = Boolean(parseComparisonQuery(query));
-  if (isComparison) trackComparison('funding', 'funding'); else trackView('search-results', 'funding');
   updatePageMeta({
     title: `${query} - NSF Funding - ${SITE_NAME}`,
     description: isComparison

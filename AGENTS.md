@@ -136,9 +136,8 @@ playbook before any data-refresh or web-research task.
   into that keyword. No favorites dropdowns. Jobs offers Markdown export in its ⋯ menu with two or more
   stars. Dataset settings, maps, analysis, score breakdowns, and methodology are closed by default and
   available on demand; dataset-setting summaries show the active region/year/venue choices.
-- `src/seo.ts` / `src/analytics.ts` — growth/discoverability infra used by every page:
-  `seo.ts` keeps `<title>`/description/canonical/OpenGraph tags in sync with the on-screen view, and `analytics.ts` fires opt-in, no-op-by-default usage
-  events (see README's Analytics section — nothing here talks to a network without a configured provider).
+- `src/seo.ts` — discoverability infra used by every page: keeps `<title>`/description/canonical/OpenGraph tags in
+  sync with the on-screen view.
 - `src/csrankings-rules.ts` (+ generated `src/csrankings-rules.generated.js`) — the area/venue taxonomy
   (venue aliases, CORE tier membership) mirrors upstream CSRankings' own Python source rather than being
   hand-maintained; `npm run sync:csrankings-rules` re-derives the generated file, which is the fallback

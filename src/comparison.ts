@@ -39,12 +39,6 @@ export function isComparing() {
   return Boolean(activeComparison);
 }
 
-// 'school' | 'researcher' | 'area' | null - for analytics only, so callers
-// don't need to keep a second copy of the active comparison's shape.
-export function activeComparisonType() {
-  return activeComparison?.a?.type || null;
-}
-
 onThemeChange(() => {
   if (activeComparison) renderComparison(activeComparison);
 });

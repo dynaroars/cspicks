@@ -2,7 +2,6 @@ import { createFilterBar } from '../filters.js';
 import { rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
-import { trackView } from '../analytics.js';
 import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { keywordValue, parseKeywordQuery, restoreKeywordQuery } from '../search-keywords.js';
 import { createSearchControls, focusSearchOnLoad, renderSearchExamples as renderExampleChips, sample, searchChoices, updateSearchUrl } from '../search-controls.js';
@@ -60,7 +59,6 @@ function render() {
     : favoritesOnly ? 'No starred conferences match. Star a conference with the ☆ button, or clear “favorites: only” from search.' : `No conferences match these years, venue set, and search terms.`;
   document.getElementById('csconfs-count')!.textContent = `${groups.length} conferences during`;
   updateUrl();
-  trackView(input.value.trim() ? 'search-results' : 'default', 'csconfs');
 }
 
 function buildSuggestions() {

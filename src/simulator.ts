@@ -1,4 +1,3 @@
-import { trackView } from './analytics.js';
 import { syncCsrankingsRules } from './csrankings-rules.js';
 import { DEFAULT_END_YEAR, getConferenceAreaMap, loadData, publicationMatchesConferenceSet } from './data.js';
 import { fetchAuthorStats, parseDblpProfileUrl, searchAuthor } from './dblp.js';
@@ -343,7 +342,6 @@ function updateSimulatorUrl() {
       ? `Model how adding, removing, or transferring faculty would change ${selectedUniv.name}'s ranking, overall and by research area.`
       : undefined
   });
-  trackView(selectedUniv ? 'school' : 'default', 'simulator');
 }
 
 function setupFilters() {

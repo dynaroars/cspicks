@@ -22,7 +22,6 @@ npm test && npm run test:e2e && npm run build
 ```
 
 Data refresh workflows are in [MAINTENANCE.md](MAINTENANCE.md). Architecture notes are in [AGENTS.md](AGENTS.md).
-Analytics: `src/analytics.ts` does nothing until you enable a provider (e.g. uncomment the Plausible tag in each page's `<head>`).
 
 ## Data
 
