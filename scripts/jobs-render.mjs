@@ -67,14 +67,14 @@ async function renderOne(browser, url, { links, maxChars, wait, expand }) {
       // Open accordions and collapsed sections (never links, never site navigation).
       await page.evaluate(() => {
         document.querySelectorAll('details:not([open])').forEach(d => d.setAttribute('open', ''));
-        document.querySelectorAll('[aria-expanded="false"], .accordion-header, .accordion-button, .elementor-tab-title, .et_pb_toggle_title')
+        /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('[aria-expanded="false"], .accordion-header, .accordion-button, .elementor-tab-title, .et_pb_toggle_title'))
           .forEach(el => { if (el.tagName !== 'A' && !el.closest('nav, header, a')) el.click(); });
       });
       await page.waitForTimeout(1200);
     }
     const status = response ? response.status() : 0;
     if (links) {
-      const anchors = await page.evaluate(() => [...document.querySelectorAll('a[href]')]
+      const anchors = await page.evaluate(() => [.../** @type {NodeListOf<HTMLAnchorElement>} */ (document.querySelectorAll('a[href]'))]
         .map(a => [(a.innerText || a.getAttribute('aria-label') || '').trim(), a.href]));
       return `URL: ${page.url()} (HTTP ${status})\n${pickHiringLinks(anchors).map(([t, h]) => `${t}\t${h}`).join('\n')}`;
     }

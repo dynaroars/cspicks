@@ -803,10 +803,8 @@ function renderCandidateResults(candidates: CandidateResult[]) {
       })
       .sort(([, a], [, b]) => {
         const getVal = (x: AreaDelta) => {
-          if (typeof x === 'number') return Math.abs(x);
-          if (x && (x.dropped || x.entered)) return 1000;
-          if (x && x.delta !== undefined) return Math.abs(x.delta);
-          return 0;
+          if (x.dropped || x.entered) return 1000;
+          return Math.abs(x.delta ?? 0);
         };
         return getVal(b) - getVal(a);
       });
@@ -815,15 +813,15 @@ function renderCandidateResults(candidates: CandidateResult[]) {
       <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px;">
         ${areaDeltaEntries.map(([area, d]) => {
       const label = escapeHtml(areaLabels[area] || area);
-      if (typeof d !== 'number' && d.dropped) {
+      if (d.dropped) {
         return `<span class="area-pill negative">↓ ${label} (Unranked - was #${d.wasRank})</span>`;
       }
-      if (typeof d !== 'number' && d.entered) {
+      if (d.entered) {
         return `<span class="area-pill positive">↑ ${label} +New (→ #${d.nowRank})</span>`;
       }
 
-      const deltaVal = typeof d === 'number' ? d : (d.delta || 0);
-      const nowRank = typeof d === 'number' ? null : (d.nowRank ?? null);
+      const deltaVal = d.delta || 0;
+      const nowRank = d.nowRank ?? null;
 
       if (deltaVal === 0) {
         return `<span class="area-pill neutral">${label} ±0${nowRank ? ` (#${nowRank})` : ''}</span>`;

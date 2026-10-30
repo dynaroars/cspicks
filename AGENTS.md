@@ -34,7 +34,8 @@ npm run preview    # preview the production build
 
 Run a single Node unit test with `node --import tsx --test --test-name-pattern="<substring>" test/unit/<file>.test.js` (it's plain
 `node:test`, not a runner with its own CLI). The suite covers core data filtering, ranking, CSV errors,
-NSF attribution, and rendering safety; no linter is configured. `postbuild` strips `public/data/` (local,
+NSF attribution, and rendering safety; no linter is configured. `npm run typecheck` checks `src/` strictly and the
+Node `scripts/` loosely (`tsconfig.scripts.json`); tests are not type-checked, since their fixtures are deliberately partial. `postbuild` strips `public/data/` (local,
 gitignored inputs to the OpenAlex build) from `dist/`.
 
 Every data-refresh workflow (conferences, grants, jobs, NSF, affiliations, CSRankings-derived data) has one

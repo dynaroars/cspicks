@@ -305,10 +305,11 @@ out.perCapita.sideBySide = Array.from({ length: 15 }, (_, i) => {
     csPerCapitaRank: cs ? (pcByName.get(cs.name)?.rank ?? null) : null
   };
 });
-out.perCapita.top10.forEach(row => { row.short = short(row.name); });
-out.perCapita.biggestGains.forEach(row => { row.short = short(row.name); });
-out.stability.examples.forEach(row => { row.short = short(row.name); });
-out.fragility.examples.forEach(row => { row.short = short(row.name); });
+const withShort = rows => rows.map(row => ({ ...row, short: short(row.name) }));
+out.perCapita.top10 = withShort(out.perCapita.top10);
+out.perCapita.biggestGains = withShort(out.perCapita.biggestGains);
+out.stability.examples = withShort(out.stability.examples);
+out.fragility.examples = withShort(out.fragility.examples);
 
 // --- 9. Researchers ---------------------------------------------------------
 const areaLabelOf = area => areaLabels[area] || area;

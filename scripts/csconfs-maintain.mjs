@@ -335,9 +335,10 @@ function parseIsoDate(value) {
 }
 
 function suspiciousEdition(entries) {
+  /** @type {string[]} */
   const reasons = [];
   const main = entries[0];
-  const linkYears = String(main.link || '').match(/20\d{2}/g) || [];
+  const linkYears = [...(String(main.link || '').match(/20\d{2}/g) ?? [])];
   if (linkYears.length && !linkYears.includes(String(main.year))) {
     reasons.push(`edition link names ${[...new Set(linkYears)].join(', ')} instead of ${main.year}`);
   }

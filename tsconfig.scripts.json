@@ -1,0 +1,17 @@
+{
+  // Type-checks the Node scripts (plain .mjs) that write the site's data. Looser than tsconfig.json on purpose:
+  // no strict null checks or `any` bans for untyped JSON, but wrong properties, typos, and bad calls still fail.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2024", "DOM", "DOM.Iterable"],
+    "checkJs": true,
+    "strict": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noUncheckedIndexedAccess": false,
+    "useUnknownInCatchVariables": false,
+    "allowImportingTsExtensions": true,
+    "types": ["node"]
+  },
+  "include": ["scripts/**/*.mjs", "src/**/*.ts"]
+}

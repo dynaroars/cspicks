@@ -8,7 +8,7 @@
     "dev": "vite",
     "test": "node --import tsx --test test/unit/*.test.js",
     "test:e2e": "playwright test",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.scripts.json",
     "check:size": "node scripts/check-project-size.mjs",
     "sync:csrankings-rules": "node --import tsx scripts/sync-csrankings-rules.mjs",
     "sync:vietprofs-ui": "node scripts/sync-vietprofs-ui.mjs",

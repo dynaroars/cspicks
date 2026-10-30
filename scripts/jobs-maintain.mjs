@@ -174,9 +174,10 @@ async function importSchools() {
       if (!existing.state) existing.state = entry.state;
       continue;
     }
-    const row = { ...emptyRow(entry.school, entry.homepage || null, 0), state: entry.state, csrankings: false };
-    if (entry.jobsUrl) row.jobsUrl = entry.jobsUrl;
-    if (entry.kind) row.kind = entry.kind;
+    const row = {
+      ...emptyRow(entry.school, entry.homepage || null, 0), state: entry.state, csrankings: false,
+      ...(entry.jobsUrl ? { jobsUrl: entry.jobsUrl } : {}), ...(entry.kind ? { kind: entry.kind } : {}),
+    };
     sources.push(row);
     byName.set(entry.school.toLowerCase(), row);
     added += 1;

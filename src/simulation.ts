@@ -13,9 +13,7 @@ interface SimulationOperation {
   facultyKey?: string;
 }
 
-export type SimulationAreaDelta =
-  | number
-  | { delta?: number, dropped?: boolean, entered?: boolean, wasRank?: number, nowRank?: number };
+export type SimulationAreaDelta = { delta?: number, dropped?: boolean, entered?: boolean, wasRank?: number, nowRank?: number };
 
 interface SimulationImpact {
   overall: number | null;

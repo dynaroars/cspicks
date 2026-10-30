@@ -9,6 +9,7 @@ import { STATE_TILE_ROWS, US_STATES, resolveState } from '../../src/jobs/jobs-da
 import { buildQueue, recheckDays } from '../../scripts/jobs-maintain.mjs';
 
 const NOW = Date.UTC(2026, 10, 1, 12); // Nov 1, 2026
+/** @returns {import('../../src/types').Job} */
 const job = (overrides = {}) => ({
   id: 'gt-ai-2026', school: 'Georgia Institute of Technology', department: 'School of Computer Science',
   title: 'Assistant Professor, AI', track: 'tenure-track', level: 'assistant', areas: ['ai'], state: 'GA', city: 'Atlanta',
@@ -48,8 +49,8 @@ test('filters by track, area, state, rank, and free text', () => {
   const open = job({ id: 'open-any', areas: [], anyArea: true });
   assert.deepEqual(ids(filterJobs([...jobs, open], { area: 'sec', now: NOW })).sort(), ['open-any', 'ut-sec']);
   assert.deepEqual(ids(filterJobs([open], { query: 'area: robotics', now: NOW })), ['open-any']);
-  assert.match(renderJobCard(open, () => undefined, () => false, NOW), /All areas/);
-  assert.ok(!/All areas|Any area/.test(renderJobCard(job({ areas: [] }), () => undefined, () => false, NOW)));
+  assert.match(renderJobCard(open, () => false, NOW), /All areas/);
+  assert.ok(!/All areas|Any area/.test(renderJobCard(job({ areas: [] }), () => false, NOW)));
   assert.deepEqual(ids(filterJobs(jobs, { state: 'GA', now: NOW })), ['gt-ai-2026']);
   assert.deepEqual(ids(filterJobs(jobs, { level: 'assistant', now: NOW })), ['gt-ai-2026']);
   assert.deepEqual(ids(filterJobs(jobs, { query: 'atlanta', now: NOW })), ['gt-ai-2026']);

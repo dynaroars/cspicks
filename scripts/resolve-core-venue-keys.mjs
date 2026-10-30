@@ -145,7 +145,7 @@ async function main() {
       continue;
     }
 
-    if (!resolution?.dblpKey) {
+    if (!resolution || !('dblpKey' in resolution) || !resolution.dblpKey) {
       unresolved.push({ acronym, reason: 'no-wikidata-signal' });
       continue;
     }
