@@ -392,11 +392,17 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
     showSuggestions();
     debouncedChange();
   });
+  // The blur delay lets a click on a suggestion land; refocusing cancels it, or a blur-then-refocus within the delay
+  // (e.g. closing the help panel, then typing) would close the list the user just opened.
+  let blurTimer: ReturnType<typeof setTimeout> | undefined;
   // A focus given via focusQuietly() (page-load autofocus) doesn't open the list.
   input.addEventListener('focus', () => {
+    clearTimeout(blurTimer);
     if (!input.dataset.quietFocus) showSuggestions();
   });
-  input.addEventListener('blur', () => window.setTimeout(hideSuggestions, opts.blurDelayMs ?? 150));
+  input.addEventListener('blur', () => {
+    blurTimer = setTimeout(hideSuggestions, opts.blurDelayMs ?? 150);
+  });
   input.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       hideSuggestions();
