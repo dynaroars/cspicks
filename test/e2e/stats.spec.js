@@ -29,24 +29,6 @@ const conferences = [
 ];
 const commit = (n, message) => ({ sha: `${n}`.repeat(40).slice(0, 40), html_url: `https://github.com/dynaroars/cspicks/commit/${n}`, commit: { message, author: { name: 'Tester', date: new Date(Date.now() - 3600000).toISOString() }, committer: { date: new Date(Date.now() - 3600000).toISOString() } } });
 
-const traffic = {
-  schemaVersion: 3, source: 'cloudflare-rum', generatedAt: '2026-10-13T12:00:00.000Z', timezone: 'UTC', status: 'ok', stale: false,
-  measurementStartedAt: '2026-10-06',
-  coverage: { firstDate: '2026-10-06', lastCompleteDate: '2026-10-12', completeDays7: 7, availableDays30: 7 },
-  today: { date: '2026-10-13', pageViews: 12, visits: 4, complete: false, collected: true },
-  last7Complete: { pageViews: 700, visits: 210, days: 7, avgPageViews: 100, avgVisits: 30 },
-  last30Available: { pageViews: 700, visits: 210, days: 7 },
-  daily: [
-    { date: '2026-10-12', pageViews: 100, visits: 30, status: 'complete' },
-    { date: '2026-10-13', pageViews: 12, visits: 4, status: 'partial' }
-  ],
-  countries: [{ code: 'US', name: 'United States', flag: '🇺🇸', pageViews: 700, pct: 100 }],
-  categories: [{ key: 'search', label: 'Search', pageViews: 500, pct: 71.4 }, { key: 'other', label: 'Other', pageViews: 200, pct: 28.6 }],
-  categoryTotal: 700,
-  categoryPeriod: { startDate: '2026-10-06', endDate: '2026-10-12', days: 7 },
-  historicalTransition: { newSeriesStartedAt: '2026-10-06', oldSeriesRetainedInternally: true }
-};
-
 let nsfRequested = false;
 
 async function mockData(page) {
@@ -61,9 +43,18 @@ async function mockData(page) {
   await page.route('**/jobs.json', route => route.fulfill({ json: jobs }));
   await page.route('**/grants.json', route => route.fulfill({ json: grants }));
   await page.route('**/conferences.json', route => route.fulfill({ json: conferences }));
-  await page.route('**/api/stats*', route => route.fulfill({ json: traffic }));
   // The stats page must never download the large NSF snapshot.
   await page.route('**/nsf-awards.json', route => { nsfRequested = true; return route.fulfill({ json: { awards: [] } }); });
+  await page.route('**/stats-history.json', route => route.fulfill({ json: {
+    generatedAt: '2026-10-11T00:00:00Z',
+    crawl: { schools: 10, withHiringUrl: 8, checked7: 3, checked30: 6, checked90: 9 },
+    history: [
+      { date: '2026-09-01', activeJobs: null, grants: 1, conferences: 1, crawledSchools: null, codeLines: 100 },
+      { date: '2026-10-01', activeJobs: 2, grants: 2, conferences: 2, crawledSchools: 5, codeLines: 150 },
+      { date: '2026-10-11', activeJobs: 1, grants: 2, conferences: 2, crawledSchools: 9, codeLines: 160 }
+    ]
+  } }));
+  await page.route('**/seo-pages.json', route => route.fulfill({ json: { schools: 300, areas: 27 } }));
   await page.route('https://api.github.com/**', route => {
     const url = new URL(route.request().url());
     const last = (n) => ({ Link: `<${url.origin}${url.pathname}?per_page=1&page=${n}>; rel="last"`, 'Access-Control-Expose-Headers': 'Link' });
@@ -100,14 +91,35 @@ test('stats page lists what CS Picks tracks and recent repository activity', asy
   await expect(repo.locator('.stats-commits li').first()).toContainText('stats: add <b>page</b>');
   await expect(repo.locator('.stats-commits b')).toHaveCount(0);
   expect(nsfRequested).toBe(false);
+});
 
-  const visitors = page.locator('#stats-traffic');
-  await expect(visitors.locator('.browser-metric-card')).toHaveCount(2);
-  await expect(visitors.locator('.browser-metric-card').first()).toContainText('12 today so far');
-  await expect(visitors.locator('.browser-metric-card').nth(1)).toContainText('Countries reached');
-  await expect(visitors).toContainText('Search');
-  await expect(visitors.locator('.privacy-note')).toHaveCount(0);
-  await expect(visitors.locator('#refresh-stats-btn')).toBeVisible();
+test('data health shows completeness, recent updates, the page inventory, and switchable growth history', async ({ page }) => {
+  await mockData(page);
+  await page.goto('stats.html');
+  const health = page.locator('#stats-health');
+  await expect(health.locator('.completeness-card')).toHaveCount(13);
+  await expect(health.locator('.completeness-card', { hasText: 'Upcoming editions verified' })).toContainText('100%');
+  await expect(health.locator('.completeness-card', { hasText: 'Hiring pages on file' })).toContainText('8 of 10 records');
+  await expect(health.locator('.recent-updates-badge')).toContainText('3 schools crawled this week');
+  await expect(health.locator('.html-inventory-total')).toHaveText('337 pages');
+  await expect(health.locator('.growth-metric-btn')).toHaveCount(5);
+  await expect(health.locator('.growth-metric-btn.is-active')).toContainText('Active jobs');
+  await expect(health.locator('#growth-chart')).toBeVisible();
+  await health.locator('.growth-metric-btn', { hasText: 'Crawled schools' }).click();
+  await expect(health.locator('.growth-metric-btn.is-active')).toContainText('Crawled schools');
+  await expect(health.locator('.health-caption')).toContainText('2026-10-01 to 2026-10-11');
+  await expect(health.locator('#growth-chart')).toBeVisible();
+});
+
+test('data health without build-time files still shows completeness from the loaded data', async ({ page }) => {
+  await mockData(page);
+  await page.route('**/stats-history.json', route => route.fulfill({ status: 404, body: '' }));
+  await page.route('**/seo-pages.json', route => route.fulfill({ status: 404, body: '' }));
+  await page.goto('stats.html');
+  const health = page.locator('#stats-health');
+  await expect(health.locator('.completeness-card')).toHaveCount(11);
+  await expect(health.locator('.html-inventory-total')).toHaveText('10 pages');
+  await expect(health.locator('.health-growth-section')).toHaveCount(0);
 });
 
 test('a failed source shows an error in its own section only', async ({ page }) => {
@@ -116,14 +128,6 @@ test('a failed source shows an error in its own section only', async ({ page }) 
   await page.goto('stats.html');
   await expect(page.locator('#stats-repo .load-error')).toBeVisible();
   await expect(page.locator('#stats-grants')).toContainText('Awards & grants2');
-});
-
-test('unavailable visitor traffic shows a retry button in its own section only', async ({ page }) => {
-  await mockData(page);
-  await page.route('**/api/stats*', route => route.fulfill({ status: 503, json: { error: 'Browser statistics are temporarily unavailable.' } }));
-  await page.goto('stats.html');
-  await expect(page.locator('#stats-traffic .retry-btn')).toBeVisible();
-  await expect(page.locator('#stats-jobs')).toContainText('Active job postings1');
 });
 
 for (const file of PAGES) {

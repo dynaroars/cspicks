@@ -26,6 +26,9 @@ dist-ssr
 public/data/*.csv
 public/schools/
 public/areas/
+# Build-time artifacts for the Stats page (scripts/build-stats-history.mjs, scripts/generate-seo-pages.mjs)
+public/stats-history.json
+public/seo-pages.json
 remote_history.json
 debug_gmu_history.js
 .nsf-sync-cache.json

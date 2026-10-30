@@ -1,4 +1,11 @@
 import { expect, test } from '@playwright/test';
+import { useDataFixtures } from './helpers/data-fixtures.js';
+
+test.beforeEach(async ({ page }) => {
+  // Annual deadlines roll forward from "today", so pin it.
+  await page.clock.setFixedTime(new Date('2026-10-29T12:00:00Z'));
+  await useDataFixtures(page, ['grants']);
+});
 
 test('Grants page loads, displays awards, and provides search and filters', async ({ page }) => {
   await page.goto('grants.html');

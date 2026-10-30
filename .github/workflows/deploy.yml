@@ -20,6 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history for the Stats page's growth chart (scripts/build-stats-history.mjs).
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -27,8 +30,11 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run typecheck
+      # npm runs postbuild after build.
       - run: npm run build
-      - run: npm run postbuild
+      # e2e serves fixtures for the data files routines edit (test/fixtures/), so data PRs can't break it.
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
       - if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:

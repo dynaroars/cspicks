@@ -50,16 +50,25 @@ const emptyRow = (school, homepage, facultyCount, country = 'US', region = 'nort
   deferredUntil: null
 });
 
+/** Homepage without scheme, `www.`, or trailing slash, so two spellings of one school's site compare equal. */
+export function homepageKey(url) {
+  return url ? String(url).toLowerCase().replace(/^https?:\/\/(www\.)?/, '').replace(/\/+$/, '') : '';
+}
+
 async function seed() {
   const [institutions, roster] = await Promise.all([fetchCsv('institutions.csv'), fetchCsv('csrankings.csv')]);
   const faculty = new Map();
   roster.forEach(row => faculty.set(row.affiliation, (faculty.get(row.affiliation) || 0) + 1));
   const sources = await readJson(SOURCES, []);
   const known = new Map(sources.map(source => [source.school, source]));
+  const homepages = new Set(sources.map(source => homepageKey(source.homepage)).filter(Boolean));
   let added = 0;
   for (const row of institutions) {
     const country = (row.countryabbrv || 'us').toUpperCase();
     const region = row.region || 'northamerica';
+    // CSRankings lists a few schools twice (e.g. "NAIST" and "Nara Inst. of Science and Tech."); the zero-faculty
+    // alias shares the real row's homepage, and adding it would crawl the same school twice.
+    if (!known.has(row.institution) && !faculty.get(row.institution) && homepages.has(homepageKey(row.homepage))) continue;
     if (!known.has(row.institution)) {
       sources.push(emptyRow(row.institution, row.homepage || null, faculty.get(row.institution) || 0, country, region));
       added += 1;
@@ -165,9 +174,10 @@ async function importSchools() {
       if (!existing.state) existing.state = entry.state;
       continue;
     }
-    const row = { ...emptyRow(entry.school, entry.homepage || null, 0), state: entry.state, csrankings: false };
-    if (entry.jobsUrl) row.jobsUrl = entry.jobsUrl;
-    if (entry.kind) row.kind = entry.kind;
+    const row = {
+      ...emptyRow(entry.school, entry.homepage || null, 0), state: entry.state, csrankings: false,
+      ...(entry.jobsUrl ? { jobsUrl: entry.jobsUrl } : {}), ...(entry.kind ? { kind: entry.kind } : {}),
+    };
     sources.push(row);
     byName.set(entry.school.toLowerCase(), row);
     added += 1;

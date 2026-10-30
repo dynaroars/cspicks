@@ -1,6 +1,4 @@
-import { trackView } from './analytics.js';
-import { syncCsrankingsRules } from './csrankings-rules.js';
-import { DEFAULT_END_YEAR, getConferenceAreaMap, loadData, publicationMatchesConferenceSet } from './data.js';
+import { getConferenceAreaMap, loadData, publicationMatchesConferenceSet } from './data.js';
 import { fetchAuthorStats, parseDblpProfileUrl, searchAuthor } from './dblp.js';
 import { createFilterBar } from './filters.js';
 import { calculatePerCapita } from './metrics.js';
@@ -343,14 +341,13 @@ function updateSimulatorUrl() {
       ? `Model how adding, removing, or transferring faculty would change ${selectedUniv.name}'s ranking, overall and by research area.`
       : undefined
   });
-  trackView(selectedUniv ? 'school' : 'default', 'simulator');
 }
 
 function setupFilters() {
   filters = createFilterBar('#filter-bar', {
     label: 'Simulator filters',
     fields: ['region', 'years', 'history', 'percapita', 'confSet'],
-    years: { min: 1970, max: DEFAULT_END_YEAR },
+    years: { min: 1970, max: new Date().getFullYear() },
     className: 'simulator-filters',
     onChange: () => {
       appData = filters.apply(rawData);
@@ -406,7 +403,7 @@ function restoreFromUrl() {
 async function init() {
   initTooltipPositioning();
   try {
-    [rawData] = await Promise.all([loadData(), syncCsrankingsRules()]);
+    rawData = await loadData();
     setupFilters();
     // History mode may already be on from a shared link or a stored choice,
     // and its affiliation data has to be in place before the first apply().
@@ -806,10 +803,8 @@ function renderCandidateResults(candidates: CandidateResult[]) {
       })
       .sort(([, a], [, b]) => {
         const getVal = (x: AreaDelta) => {
-          if (typeof x === 'number') return Math.abs(x);
-          if (x && (x.dropped || x.entered)) return 1000;
-          if (x && x.delta !== undefined) return Math.abs(x.delta);
-          return 0;
+          if (x.dropped || x.entered) return 1000;
+          return Math.abs(x.delta ?? 0);
         };
         return getVal(b) - getVal(a);
       });
@@ -818,15 +813,15 @@ function renderCandidateResults(candidates: CandidateResult[]) {
       <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px;">
         ${areaDeltaEntries.map(([area, d]) => {
       const label = escapeHtml(areaLabels[area] || area);
-      if (typeof d !== 'number' && d.dropped) {
+      if (d.dropped) {
         return `<span class="area-pill negative">↓ ${label} (Unranked - was #${d.wasRank})</span>`;
       }
-      if (typeof d !== 'number' && d.entered) {
+      if (d.entered) {
         return `<span class="area-pill positive">↑ ${label} +New (→ #${d.nowRank})</span>`;
       }
 
-      const deltaVal = typeof d === 'number' ? d : (d.delta || 0);
-      const nowRank = typeof d === 'number' ? null : (d.nowRank ?? null);
+      const deltaVal = d.delta || 0;
+      const nowRank = d.nowRank ?? null;
 
       if (deltaVal === 0) {
         return `<span class="area-pill neutral">${label} ±0${nowRank ? ` (#${nowRank})` : ''}</span>`;

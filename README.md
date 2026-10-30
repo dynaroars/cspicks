@@ -9,7 +9,7 @@ researchers. Live at **[cspicks.roars.dev](https://cspicks.roars.dev)**.
 - **CS Confs**: conference dates and submission deadlines.
 - **Awards & Grants**: fellowships, research awards, and funding calls.
 - **Jobs**: academic CS openings at universities worldwide, plus research jobs, postdocs, and PhD internships at industry and national labs.
-- **Stats**: what the site tracks and recent repository activity.
+- **Stats**: what the site tracks, data health and completeness, and recent repository activity.
 
 Every view is a shareable URL. No backend: data comes from public sources and static JSON in `public/`.
 
@@ -22,7 +22,6 @@ npm test && npm run test:e2e && npm run build
 ```
 
 Data refresh workflows are in [MAINTENANCE.md](MAINTENANCE.md). Architecture notes are in [AGENTS.md](AGENTS.md).
-Analytics: `src/analytics.ts` does nothing until you enable a provider (e.g. uncomment the Plausible tag in each page's `<head>`).
 
 ## Data
 

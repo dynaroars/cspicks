@@ -1,7 +1,6 @@
 /**
  * CS Awards & Grants Main Controller
  */
-import { trackView } from '../analytics.js';
 import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { awardDeadlineTone, opportunityDeadline, opportunityHeader, opportunityMeta } from '../opportunity-card.js';
 import { resultActions } from '../result-actions.js';
@@ -81,7 +80,6 @@ function render() {
   }
 
   updateUrl(filterState);
-  trackView(filterState.query ? 'search-results' : 'default', 'grants');
 }
 
 function handleHashScroll() {
@@ -208,9 +206,8 @@ async function init() {
     render();
     focusSearchOnLoad(input);
 
-    if (window.location.hash) {
-      window.setTimeout(handleHashScroll, 300);
-    }
+    // render() is synchronous, so the cards already exist.
+    handleHashScroll();
   } catch (error) {
     console.error('Failed to load grants data:', error);
     if (statusText) {

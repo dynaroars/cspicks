@@ -13,9 +13,6 @@ export interface CsrankingsRules {
 export const CSRANKINGS_RULES_URL =
   'https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/util/csrankings.py';
 
-let activeRules: CsrankingsRules = fallbackRules;
-let syncPromise: Promise<CsrankingsRules> | null = null;
-
 function extractDictionary(source: string, name: string) {
   const marker = `${name} = {`;
   const start = source.indexOf(marker);
@@ -77,29 +74,8 @@ export function parseCsrankingsRules(source: string): CsrankingsRules {
   };
 }
 
-export function getCsrankingsRules() {
-  return activeRules;
-}
-
-export function syncCsrankingsRules() {
-  if (!syncPromise) {
-    syncPromise = fetch(CSRANKINGS_RULES_URL, { cache: 'no-cache' })
-      .then(response => {
-        if (!response.ok) throw new Error(`CSRankings returned ${response.status}`);
-        return Promise.all([
-          response.text(),
-          response.headers.get('etag') || response.headers.get('last-modified') || 'upstream-current'
-        ]);
-      })
-      .then(([source, sourceVersion]) => {
-        activeRules = parseCsrankingsRules(source);
-        activeRules.sourceVersion = sourceVersion;
-        return activeRules;
-      })
-      .catch(error => {
-        console.warn('Using bundled CSRankings venue rules:', error);
-        return activeRules;
-      });
-  }
-  return syncPromise;
+// The committed generated file is the single source of venue rules; `npm run sync:csrankings-rules` refreshes it
+// from upstream monthly (TASKS/csrankings.md). Parsing upstream Python at page load could silently go wrong.
+export function getCsrankingsRules(): CsrankingsRules {
+  return fallbackRules;
 }

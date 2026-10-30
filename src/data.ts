@@ -26,11 +26,11 @@ import type {
 export { conferenceAliases, schoolAliases } from './data/institution-aliases.js';
 export { CONFERENCE_SET_IDS, coreAMap, coreAStarMap, getConferenceAreaMap, nextTier, normalizeConferenceSet, parentMap, publicationMatchesConferenceSet } from './data/conference-sets.js';
 
-const currentYear = new Date().getFullYear();
-export const DEFAULT_END_YEAR = currentYear;
+// Default to the last complete publication year: the current year is only partly indexed, so including it made
+// every growth/momentum comparison against full prior years look like a decline. Users can still select it.
+export const DEFAULT_END_YEAR = new Date().getFullYear() - 1;
 export const DEFAULT_START_YEAR = DEFAULT_END_YEAR - 10;
 
-const GITHUB_RAW = 'https://raw.githubusercontent.com/dynaroars/cspicks/main/public';
 let affiliationDataPromise: Promise<{historyMap: AffiliationHistory, aliasMap: SchoolAliasMap}> | null = null;
 
 
@@ -52,9 +52,9 @@ async function loadDataFromSources(): Promise<RawData> {
     return [] as T[];
   });
   const [csrankings, authorInfo, institutions, turingWinners, acmFellows, countries, dblpAliases, nameChanges] = await Promise.all([
-    fetchCsv<CsrankingsFacultyRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv'),
-    fetchCsv<PublicationRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/generated-author-info.csv'),
-    fetchCsv<InstitutionRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/institutions.csv'),
+    fetchCsv<CsrankingsFacultyRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv', { requiredColumns: ['name', 'affiliation'] }),
+    fetchCsv<PublicationRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/generated-author-info.csv', { requiredColumns: ['name', 'area', 'year', 'count', 'adjustedcount'] }),
+    fetchCsv<InstitutionRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/institutions.csv', { requiredColumns: ['institution', 'region', 'countryabbrv'] }),
     optionalCsv<HonorRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/turing.csv'),
     optionalCsv<HonorRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/acm-fellows.csv'),
     optionalCsv<CountryRow>('https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/countries.csv'),
@@ -236,12 +236,13 @@ function parseSchoolAliasMap(value: unknown): SchoolAliasMap {
   return value as SchoolAliasMap;
 }
 
+// Historical Mode and CORE A/A* files ship with the site (public/), so they always match the deployed decoder.
 export function loadAffiliationData() {
   if (!affiliationDataPromise) {
     affiliationDataPromise = Promise.all([
-      fetchJson(`${GITHUB_RAW}/professor_history_openalex.json`),
-      fetchJson(`${GITHUB_RAW}/school-aliases.json`),
-      fetchCsv<ManualAffiliationRow>(`${GITHUB_RAW}/manual_affiliations.csv`)
+      fetchJson('/professor_history_openalex.json'),
+      fetchJson('/school-aliases.json'),
+      fetchCsv<ManualAffiliationRow>('/manual_affiliations.csv')
     ])
       .then(([history, aliases, manual]) => ({
         historyMap: mergeAffiliationHistory(decodeAffiliationHistory(history), manual),
@@ -267,7 +268,7 @@ let coreExtraPubsPromise: Promise<Map<string, Publication[]>> | null = null;
  */
 export function loadCoreExtraPubs(): Promise<Map<string, Publication[]>> {
   if (!coreExtraPubsPromise) {
-    coreExtraPubsPromise = fetchCsv<PublicationRow>(`${GITHUB_RAW}/core-extra-author-info.csv`)
+    coreExtraPubsPromise = fetchCsv<PublicationRow>('/core-extra-author-info.csv')
       .then(rows => {
         const byName = new Map<string, Publication[]>();
         let invalidRows = 0;
@@ -589,7 +590,7 @@ export function filterByYears(
 // dblp-aliases.csv) costs that row, not the whole file.
 export async function fetchCsv<T = Record<string, string>>(
   url: string,
-  { dropMalformedRows = false }: { dropMalformedRows?: boolean } = {}
+  { dropMalformedRows = false, requiredColumns = [] }: { dropMalformedRows?: boolean, requiredColumns?: string[] } = {}
 ): Promise<T[]> {
   const response = await fetchWithRetry(url);
   if (!response.ok) {
@@ -602,6 +603,12 @@ export async function fetchCsv<T = Record<string, string>>(
       skipEmptyLines: true,
       comments: "#",
       complete: (results) => {
+        // A renamed upstream column would otherwise drop every row silently and leave the page empty.
+        const missing = requiredColumns.filter(column => !results.meta.fields?.includes(column));
+        if (missing.length) {
+          reject(new Error(`CSV from ${url} is missing column(s): ${missing.join(', ')}`));
+          return;
+        }
         if (results.errors?.length) {
           if (!dropMalformedRows) {
             reject(new Error(`Failed to parse CSV from ${url}: ${results.errors[0]!.message}`));
@@ -664,7 +671,7 @@ function mergeAffiliationHistory(
     manualGroups[name].push({
       school: item.school.trim(),
       start: parseInt(item.start || '') || 1970,
-      end: parseInt(item.end || '') || currentYear
+      end: parseInt(item.end || '') || new Date().getFullYear()
     });
   });
 

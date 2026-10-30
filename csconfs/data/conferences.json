@@ -4822,7 +4822,7 @@
     "rebuttalDate": null,
     "notificationDate": "2025-05-17",
     "note": null,
-    "programChair": "Itai Ashlagi,  Aaron Roth",
+    "programChair": "Itai Ashlagi, Aaron Roth",
     "acceptanceRate": null,
     "submissions": null,
     "estimated": false,
@@ -13997,7 +13997,7 @@
     "abstractDeadline": null,
     "deadline": "2024-03-15",
     "rebuttalDate": null,
-    "notificationDate": "2024-06-31",
+    "notificationDate": null,
     "note": null,
     "programChair": "Arif Sultan Al Hammadi, Lakmal Serneviratne, Satoshi Tadokoro, Anthony A. Maciejewski, Kostas J. Kyriakopoulos",
     "acceptanceRate": 47.46,
@@ -17055,7 +17055,7 @@
     "place": "Austin, TX, USA",
     "abstractDeadline": "2025-08-27",
     "deadline": "2025-09-03",
-    "rebuttalDate": "2025-11-11 to 2025-11-14",
+    "rebuttalDate": "2025-11-11–2025-11-14",
     "notificationDate": "2025-11-24",
     "note": "Cycle 1/2 (Summer)",
     "programChair": "Mahesh Marina, Fan Bai",
@@ -17078,7 +17078,7 @@
     "place": "Austin, TX, USA",
     "abstractDeadline": "2026-03-06",
     "deadline": "2026-03-13",
-    "rebuttalDate": "2026-06-04 to 2026-06-09",
+    "rebuttalDate": "2026-06-04–2026-06-09",
     "notificationDate": "2026-06-29",
     "note": "Cycle 2/2 (Winter)",
     "programChair": "Mahesh Marina, Fan Bai",
@@ -18275,7 +18275,7 @@
     "abstractDeadline": null,
     "deadline": "2027-08-06",
     "rebuttalDate": null,
-    "notificationDate": "10-22-2027",
+    "notificationDate": "2027-10-22",
     "note": null,
     "programChair": null,
     "acceptanceRate": null,
@@ -20919,8 +20919,8 @@
     "place": null,
     "abstractDeadline": null,
     "deadline": "2027-11-13",
-    "rebuttalDate": "February 21, 2028",
-    "notificationDate": "March 5, 2028",
+    "rebuttalDate": "2028-02-21",
+    "notificationDate": "2028-03-05",
     "note": null,
     "programChair": null,
     "acceptanceRate": null,
@@ -27022,7 +27022,7 @@
     "submissions": null,
     "estimated": false,
     "verified": true,
-    "generalChair": "Jayant R. Haritsa,  S. Sudarshan"
+    "generalChair": "Jayant R. Haritsa, S. Sudarshan"
   },
   {
     "name": "SIGMOD",
@@ -27045,7 +27045,7 @@
     "submissions": null,
     "estimated": false,
     "verified": true,
-    "generalChair": "Jayant R. Haritsa,  S. Sudarshan"
+    "generalChair": "Jayant R. Haritsa, S. Sudarshan"
   },
   {
     "name": "SIGMOD",
@@ -27068,7 +27068,7 @@
     "submissions": null,
     "estimated": false,
     "verified": true,
-    "generalChair": "Jayant R. Haritsa,  S. Sudarshan"
+    "generalChair": "Jayant R. Haritsa, S. Sudarshan"
   },
   {
     "name": "SIGMOD",
@@ -27091,7 +27091,7 @@
     "submissions": null,
     "estimated": false,
     "verified": true,
-    "generalChair": "Jayant R. Haritsa,  S. Sudarshan"
+    "generalChair": "Jayant R. Haritsa, S. Sudarshan"
   },
   {
     "name": "SIGMOD",
@@ -32249,7 +32249,7 @@
     "submissions": null,
     "estimated": false,
     "verified": false,
-    "generalChair": "Sabine Coquillart, Bernd Fröhlich, Daniel Keefe,  Susumu Tachi"
+    "generalChair": "Sabine Coquillart, Bernd Fröhlich, Daniel Keefe, Susumu Tachi"
   },
   {
     "name": "VR",
@@ -33115,7 +33115,7 @@
     "place": "JW Marriott Hanoi, Hanoi, Vietnam",
     "abstractDeadline": "2026-10-01",
     "deadline": "2026-10-08",
-    "rebuttalDate": "2026-11-20 to 2026-11-24",
+    "rebuttalDate": "2026-11-20–2026-11-24",
     "notificationDate": "2026-12-21",
     "note": null,
     "generalChair": null,
@@ -43258,7 +43258,7 @@
     "place": "Columbia, SC, USA",
     "abstractDeadline": "2026-12-07",
     "deadline": "2026-12-14",
-    "rebuttalDate": "2027-02-01 to 2027-02-04",
+    "rebuttalDate": "2027-02-01–2027-02-04",
     "notificationDate": "2027-02-26",
     "note": null,
     "generalChair": null,
@@ -46386,7 +46386,7 @@
     "place": "ISCTE - Instituto Universitário de Lisboa, Lisbon, Portugal",
     "abstractDeadline": "2026-02-06",
     "deadline": "2026-02-13",
-    "rebuttalDate": "2026-03-30 to 2026-03-31",
+    "rebuttalDate": "2026-03-30–2026-03-31",
     "notificationDate": "2026-04-14",
     "note": null,
     "generalChair": null,
@@ -52067,7 +52067,7 @@
     "place": "Minneapolis, MN, USA",
     "abstractDeadline": "2026-04-14",
     "deadline": "2026-04-21",
-    "rebuttalDate": "2026-06-04 to 2026-06-09",
+    "rebuttalDate": "2026-06-04–2026-06-09",
     "notificationDate": "2026-07-09",
     "note": null,
     "generalChair": null,

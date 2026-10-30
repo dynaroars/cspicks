@@ -108,9 +108,13 @@ type StatusFilter = 'active' | 'closed' | 'all';
 export type JobSort = 'deadline' | 'posted' | 'school';
 export const JOB_SORTS: JobSort[] = ['deadline', 'posted', 'school'];
 
+/** [year, month, day] for a real calendar date written YYYY-MM-DD; null otherwise (so 2026-13-45 is rejected). */
 function dayParts(value: unknown): [number, number, number] | null {
-  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(value ?? '').trim());
-  return match ? [Number(match[1]), Number(match[2]), Number(match[3])] : null;
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value ?? '').trim());
+  if (!match) return null;
+  const parts: [number, number, number] = [Number(match[1]), Number(match[2]), Number(match[3])];
+  const date = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2]));
+  return date.getUTCMonth() === parts[1] - 1 && date.getUTCDate() === parts[2] ? parts : null;
 }
 
 /** End of the deadline day, Anywhere on Earth. */
@@ -124,12 +128,18 @@ function dayStart(value: unknown) {
   return parts ? Date.UTC(parts[0], parts[1] - 1, parts[2]) : null;
 }
 
+/** "Aug 17, 2027"; a start date given only to the month or year (as many postings state it) prints as "Aug 2027" / "2027". */
 export function formatDay(value: unknown) {
   const parts = dayParts(value);
-  return parts
-    ? new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
-      .format(new Date(Date.UTC(parts[0], parts[1] - 1, parts[2])))
-    : '';
+  if (parts) {
+    return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+      .format(new Date(Date.UTC(parts[0], parts[1] - 1, parts[2])));
+  }
+  const partial = /^(\d{4})(?:-(\d{2}))?$/.exec(String(value ?? '').trim());
+  if (!partial) return '';
+  if (!partial[2]) return partial[1]!;
+  return new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' })
+    .format(new Date(Date.UTC(Number(partial[1]), Number(partial[2]) - 1, 1)));
 }
 
 /**
@@ -161,6 +171,13 @@ export function deadlineLabel(job: Job, now = Date.now()) {
 const TRACKS = Object.keys(TRACK_LABELS);
 const LEVELS = Object.keys(LEVEL_LABELS);
 const isoOrNull = (value: unknown) => value === undefined || value === null || (typeof value === 'string' && dayParts(value) !== null);
+/** Start dates may be as precise as the posting: YYYY, YYYY-MM, or YYYY-MM-DD. */
+const startOrNull = (value: unknown) => isoOrNull(value)
+  || (typeof value === 'string' && /^\d{4}(-(0[1-9]|1[0-2]))?$/.test(value));
+/** Every field a posting may carry (src/types.d.ts Job); anything else is a typo, e.g. `areasAny` for `anyArea`. */
+const JOB_FIELDS = new Set(['id', 'school', 'lab', 'department', 'title', 'track', 'level', 'areas', 'anyArea', 'country', 'state',
+  'city', 'deadline', 'rolling', 'reviewBegins', 'startDate', 'postedDate', 'lastSeenAt', 'closedAt', 'visaSponsorship', 'url',
+  'summary', 'source', 'verified']);
 
 /** Names of the fields that make `value` an invalid Job; empty when it is valid. */
 export function jobProblems(value: unknown): string[] {
@@ -185,10 +202,13 @@ export function jobProblems(value: unknown): string[] {
     ['deadline', isoOrNull(job.deadline)],
     ['closedAt', isoOrNull(job.closedAt)],
     ['postedDate', isoOrNull(job.postedDate)],
+    ['reviewBegins', isoOrNull(job.reviewBegins)],
+    ['startDate', startOrNull(job.startDate)],
     ['visaSponsorship', job.visaSponsorship === undefined || (typeof job.visaSponsorship === 'string' && job.visaSponsorship in VISA_LABELS)],
     ['source', job.source === 'crawl' || job.source === 'submission']
   ];
-  return checks.filter(([, ok]) => !ok).map(([field]) => field);
+  const unknown = Object.keys(job).filter(key => !JOB_FIELDS.has(key)).map(key => `unknown field ${key}`);
+  return [...checks.filter(([, ok]) => !ok).map(([field]) => field), ...unknown];
 }
 
 /** One line per invalid record, e.g. `latech-ai-2026: lastSeenAt`. */
@@ -209,14 +229,8 @@ export function parseJobs(payload: unknown): Job[] {
 
 export async function loadJobsData(): Promise<Job[]> {
   if (cachedJobs) return cachedJobs;
-  const url = new URL('../../public/jobs.json', import.meta.url).href;
-  const response = await fetch(url).catch(() => fetch('./jobs.json'));
-  if (!response.ok) {
-    const fallback = await fetch('./jobs.json');
-    if (!fallback.ok) throw new Error(`Failed to load jobs data (${response.status})`);
-    cachedJobs = parseJobs(await fallback.json());
-    return cachedJobs;
-  }
+  const response = await fetch('/jobs.json');
+  if (!response.ok) throw new Error(`Failed to load jobs data (${response.status})`);
   cachedJobs = parseJobs(await response.json());
   return cachedJobs;
 }

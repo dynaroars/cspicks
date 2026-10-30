@@ -8,7 +8,6 @@ import { exportFileName, jobsToMarkdown, renderJobCard, renderSchoolCard, render
 import { rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
-import { trackView } from '../analytics.js';
 import { areaLabels } from '../shared.js';
 import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
 import { keywordValue, parseKeywordQuery, restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
@@ -106,7 +105,6 @@ function render() {
   countElement.textContent = `${shown.length} position${shown.length === 1 ? '' : 's'}`;
   renderLabsSection(current.query, shown);
   updateUrl(current);
-  trackView(current.query ? 'search-results' : 'default', 'jobs');
 }
 
 /**

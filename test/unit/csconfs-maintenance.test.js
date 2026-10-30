@@ -96,6 +96,30 @@ test('weekly selection honors NOT FOUND deferrals but --all overrides them', () 
   assert.deepEqual(all.map((item) => item.name).sort(), ['PLDI', 'POPL']);
 });
 
+test('selection waits a week after an incomplete check, even when deferredUntil is null', () => {
+  const conferences = [record({ verified: false })];
+  const checks = { version: 1, series: { PLDI: { lastCheckedAt: '2026-08-28T00:00:00Z', outcome: 'incomplete', deferredUntil: null } } };
+  assert.deepEqual(selectDueSeries(conferences, checks, { now: Date.parse('2026-09-01T00:00:00Z') }).map((item) => item.name), []);
+  assert.deepEqual(selectDueSeries(conferences, checks, { now: Date.parse('2026-09-05T00:00:00Z') }).map((item) => item.name), ['PLDI']);
+});
+
+test('selection reserves half the batch for never-checked series', () => {
+  const names = ['A1', 'A2', 'A3', 'A4', 'N1', 'N2', 'N3'];
+  // A* series were checked recently but still have unverified editions (priority 10); N* were never checked
+  // and are otherwise fine (priority 30), so plain priority order would pick only A* series.
+  const conferences = names.map((name) => record({ name, venueKeys: [name.toLowerCase()], description: name, verified: !name.startsWith('A') }));
+  const checks = { version: 1, series: Object.fromEntries(names.filter((name) => name.startsWith('A'))
+    .map((name) => [name, { lastCheckedAt: '2026-08-31T00:00:00Z', outcome: 'complete', deferredUntil: null }])) };
+  const picked = selectDueSeries(conferences, checks, { now: Date.parse('2026-09-01T00:00:00Z'), limit: 4 });
+  assert.deepEqual(picked.map((item) => item.name), ['A1', 'A2', 'N1', 'N2']);
+});
+
+test('an incomplete research result is deferred for 7 days', () => {
+  const research = { status: 'incomplete', summary: 'conflicting dates', checkedUrls: [], proposals: [] };
+  const { checks } = applyResearchResults([record()], { version: 1, series: {} }, [{ name: 'PLDI', research }], '2026-09-01T12:00:00.000Z');
+  assert.equal(checks.series.PLDI.deferredUntil, '2026-09-08T12:00:00.000Z');
+});
+
 test('proposal validation accepts a sourced complete-edition deadline correction', () => {
   const before = [record()];
   const after = [record({ deadline: '2026-11-13' })];

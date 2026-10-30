@@ -6,13 +6,15 @@
 # 
 # Example:
 # "John Smith","Carnegie Mellon University",2010,2018
-# "John Smith","Stanford University",2019,2026
+# "John Smith","Stanford University",2019,
+#
+# Leave `end` blank for a current position; it then runs through the current year.
 
 name,school,start,end
 "Greg Durrett","University of Texas at Austin",2017,2025
-"Greg Durrett","New York University",2026,2026
-"Anh Nguyen 0002","Auburn University",2017,2026
+"Greg Durrett","New York University",2026,
+"Anh Nguyen 0002","Auburn University",2017,
 "ThanhVu Nguyen","University of New Mexico",2009,2014
 "ThanhVu Nguyen","University of Maryland, College Park",2015,2016
 "ThanhVu Nguyen","University of Nebraska–Lincoln",2017,2020
-"ThanhVu Nguyen","George Mason University",2021,2026
+"ThanhVu Nguyen","George Mason University",2021,

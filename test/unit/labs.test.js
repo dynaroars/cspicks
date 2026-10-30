@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { filterLabs, labsDatasetProblems, renderLabs } from '../../src/jobs/labs.js';
 
+/** @returns {import('../../src/jobs/labs').Lab} */
 const lab = (overrides = {}) => ({
   id: 'galois', name: 'Galois', org: 'Galois, Inc.', kind: 'company', areas: ['plan', 'sec'],
   locations: ['Portland, OR', 'Arlington, VA'], summary: 'Formal methods R&D.', careersUrl: 'https://www.galois.com/careers',

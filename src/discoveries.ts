@@ -3,16 +3,11 @@ import { applyPerCapitaRanks, buildPriorPeriodData, calculateCorpusDiagnostics, 
 import { buildFundingIndex, calculateFundingDiscoveries, formatFunding, parseNsfDataset } from './nsf.js';
 import { SITE_NAME } from './seo.js';
 import { shareUrl } from './result-actions.js';
-import { trackDiscoveryShare } from './analytics.js';
-import { areaLabels, escapeHtml, getInstitutionShortName } from './shared.js';
+import { areaLabels, escapeHtml, getInstitutionShortName, slugify } from './shared.js';
 import type { FilterController } from './filters.js';
 import type { NsfDataset, RawData } from './types.js';
 
 const shareIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
-
-function slugify(title: string) {
-  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-}
 
 const regionLabels: Record<string, string> = {
   world: 'worldwide',
@@ -58,14 +53,18 @@ export async function fetchDiscoveriesNsfData() {
 const flashTimers = new WeakMap<HTMLElement, ReturnType<typeof setTimeout>>();
 
 function flashShareButton(button: HTMLElement, message: string) {
-  const original = button.getAttribute('title');
+  // The status span is what screen readers announce; a title change alone is silent.
+  const status = button.querySelector('[role="status"]');
+  if (status) status.textContent = message;
+  if (!flashTimers.has(button)) button.dataset.title = button.getAttribute('title') ?? '';
   button.setAttribute('title', message);
   button.classList.add('is-flashed');
   clearTimeout(flashTimers.get(button));
   flashTimers.set(button, setTimeout(() => {
-    if (original === null) button.removeAttribute('title');
-    else button.setAttribute('title', original);
+    button.setAttribute('title', button.dataset.title ?? '');
+    if (status) status.textContent = '';
     button.classList.remove('is-flashed');
+    flashTimers.delete(button);
   }, 1800));
 }
 
@@ -132,7 +131,7 @@ export function renderDiscoveries(rawData: RawData, filters: FilterController, n
     return `
     <section class="discovery-card ${className}" id="${id}">
       <h3>${escapeHtml(title)} <span class="tooltip-trigger discovery-info" tabindex="0" aria-label="About ${escapeHtml(title)}">ⓘ<span class="tooltip-content">${escapeHtml(help)}</span></span>
-        <button type="button" class="share-button discovery-share" data-share-id="${id}" data-share-title="${escapeHtml(title)}" aria-label="Copy link to ${escapeHtml(title)}" title="Copy link">${shareIcon}</button>
+        <button type="button" class="share-button discovery-share" data-share-id="${id}" data-share-title="${escapeHtml(title)}" aria-label="Copy link to ${escapeHtml(title)}" title="Copy link">${shareIcon}<span class="visually-hidden" role="status"></span></button>
       </h3>
       ${body}
     </section>`;
@@ -268,6 +267,5 @@ export function setupCardSharing(filters: FilterController) {
     });
     if (outcome === 'copied') flashShareButton(button, 'Copied!');
     else if (outcome === 'failed') flashShareButton(button, 'Copy failed');
-    trackDiscoveryShare(shareId);
   });
 }

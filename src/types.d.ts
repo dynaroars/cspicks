@@ -202,8 +202,6 @@ export interface FundingSchool {
 export interface FundingIndex {
   awards: NsfAward[];
   faculty: FundingFaculty[];
-  facultyByName: Map<string, FundingFaculty>;
-  facultyByNormalizedName: Map<string, FundingFaculty | null>;
   schools: FundingSchool[];
 }
 
@@ -228,6 +226,8 @@ export interface Grant {
   status?: 'historical' | string;
   locations?: string[];
   locationLabel?: string;
+  /** YYYY-MM-DD the grants routine last confirmed this entry against its official page; drives the audit queue. */
+  lastVerifiedAt?: string;
 }
 
 export type JobTrack = 'tenure-track' | 'teaching' | 'research' | 'postdoc' | 'visiting' | 'leadership' | 'industry' | 'internship';
@@ -259,6 +259,7 @@ export interface Job {
   /** Reviews applications until filled; `deadline` is then a priority date or null. */
   rolling?: boolean;
   reviewBegins?: string | null;
+  /** YYYY-MM-DD, or YYYY-MM / YYYY when the posting gives only a month or year. */
   startDate?: string | null;
   postedDate?: string | null;
   /** Last time a crawl or submission confirmed the posting was live. */

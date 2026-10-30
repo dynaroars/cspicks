@@ -1,4 +1,4 @@
-import { getCsrankingsRules, syncCsrankingsRules } from './csrankings-rules.js';
+import { getCsrankingsRules } from './csrankings-rules.js';
 import { getConferenceAreaMap, parentMap, publicationMatchesConferenceSet } from './data.js';
 import type { AreaStats } from './types.js';
 
@@ -256,7 +256,6 @@ export async function fetchAuthorStats(pid: string, startYear = 2015, endYear = 
     const url = `https://dblp.org/pid/${pid}.xml`;
 
     try {
-        await syncCsrankingsRules();
         const res = await fetch(url);
         if (!res.ok) throw new Error(`DBLP returned ${res.status}`);
 

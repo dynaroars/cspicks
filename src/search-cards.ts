@@ -18,6 +18,35 @@ export interface CardContext {
   compactNames?: boolean;
 }
 
+// A collapsed card keeps its body unrendered until first opened: the default
+// ranking alone would otherwise build ~9,000 hidden faculty buttons (several
+// MB of HTML) that nobody has asked to see. Ids no longer on the page are
+// pruned so a long session doesn't pin every superseded result set.
+const deferredBodies = new Map<string, () => string>();
+let nextDeferredId = 0;
+
+function cardContent(collapsed: boolean, render: () => string) {
+  if (!collapsed) return `<div class="card-content">${render()}</div>`;
+  if (deferredBodies.size > 500 && typeof document !== 'undefined') {
+    for (const id of deferredBodies.keys()) {
+      if (!document.querySelector(`[data-deferred="${id}"]`)) deferredBodies.delete(id);
+    }
+  }
+  const id = String(nextDeferredId++);
+  deferredBodies.set(id, render);
+  return `<div class="card-content" data-deferred="${id}"></div>`;
+}
+
+// Renders a collapsed card's body; call before expanding the card.
+export function renderDeferredContent(card: Element | null) {
+  const content = card?.querySelector<HTMLElement>(':scope > .card-content[data-deferred]');
+  if (!content) return;
+  const id = content.dataset.deferred!;
+  content.removeAttribute('data-deferred');
+  content.innerHTML = deferredBodies.get(id)?.() ?? '';
+  deferredBodies.delete(id);
+}
+
 function actionAttributes(action: string, values: Record<string, unknown> = {}) {
   return Object.entries({ action, ...values })
     .map(([key, value]) => `data-${key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}="${escapeHtml(value)}"`)
@@ -145,7 +174,7 @@ export function renderProfessorCard(prof: FilteredProfessor, context: CardContex
         </${headerTag}>
         ${renderProfileLinks(prof)}
       </div>
-      <div class="card-content">
+      ${cardContent(!exact, () => `
         ${historicalAffiliations ? `<div class="card-subtitle">${historicalAffiliations}</div>` : ''}
         <div class="card-stats"><strong>${prof.totalPapers}</strong> papers (<strong>${prof.totalAdjusted.toFixed(1)}</strong> adjusted)</div>
         ${prof.unitNotes?.length ? `<div class="faculty-unit-notes">Unit: ${prof.unitNotes.map(escapeHtml).join(', ')}</div>` : ''}
@@ -154,7 +183,7 @@ export function renderProfessorCard(prof: FilteredProfessor, context: CardContex
           return `<div class="stat-item"><button type="button" class="inline-link stat-label" ${actionAttributes('search-query', { query: areaLabels[area] || area })}>${escapeHtml(areaLabels[area] || area)}</button><span class="stat-count">${paperCount} ${paperCount === 1 ? 'paper' : 'papers'} (${stats.adjusted.toFixed(1)} adjusted)</span></div>`;
         }).join('')}</div>
         ${papers.length ? `<button type="button" class="papers-toggle" data-action="toggle-papers">▶ Show Papers</button><div class="papers-list">${papers.map(pub => `<div class="paper-item"><span class="paper-venue">${escapeHtml(getConferenceLabel(pub.area))}</span> <span class="paper-year">${pub.year}</span>: ${pub.count} paper(s), ${pub.adjustedcount.toFixed(2)} adjusted</div>`).join('')}</div>` : ''}
-      </div>
+      `)}
     </div>`;
 }
 
@@ -258,7 +287,7 @@ export function renderSchoolCard(school: FilteredSchool, filterArea: string | nu
 
   return `<div class="card${exact ? '' : ' collapsed'}" data-name="${escapeHtml(school.name)}">
     <${headerTag} class="card-header" ${headerAttributes}><h2>${rankPrefix}${countryFlag(school.country, school.countryName)}${escapeHtml(context.compactNames ? getInstitutionShortName(school.name) : school.name)}${badges}</h2></${headerTag}>
-    <div class="card-content">${institutionMetadata || departmentHomepage !== '#' ? `<div class="school-metadata">${institutionMetadata ? `<span>${escapeHtml(institutionMetadata)}</span>` : ''}${departmentHomepage !== '#' ? `<a href="${escapeHtml(departmentHomepage)}" target="_blank" rel="noopener noreferrer">Department website</a>` : ''}<a href="/schools/${slugify(school.name)}/">Overview page</a></div>` : `<div class="school-metadata"><a href="/schools/${slugify(school.name)}/">Overview page</a></div>`}${filterArea ? '' : renderFacultyRoster(school, context)}<div class="stats-list">${sortedAreas.map(([area, data]) => {
+    ${cardContent(!exact, () => `${institutionMetadata || departmentHomepage !== '#' ? `<div class="school-metadata">${institutionMetadata ? `<span>${escapeHtml(institutionMetadata)}</span>` : ''}${departmentHomepage !== '#' ? `<a href="${escapeHtml(departmentHomepage)}" target="_blank" rel="noopener noreferrer">Department website</a>` : ''}<a href="/schools/${slugify(school.name)}/">Overview page</a></div>` : `<div class="school-metadata"><a href="/schools/${slugify(school.name)}/">Overview page</a></div>`}${filterArea ? '' : renderFacultyRoster(school, context)}<div class="stats-list">${sortedAreas.map(([area, data]) => {
       const prefix = filterArea || !context.showRankings ? '' : (school.areaRanks?.[area] ? `${school.areaRanks[area]}. ` : '');
       const label = areaLabels[area] || getConferenceLabel(area);
       // Each name carries what that person published *in this area*, not their
@@ -271,5 +300,5 @@ export function renderSchoolCard(school: FilteredSchool, filterArea: string | nu
       const paperCount = Math.ceil(data.count);
       const areaOverviewLink = areaLabels[area] ? ` <a href="/areas/${slugify(label)}/" class="area-overview-link" title="${escapeHtml(label)} overview page">Overview</a>` : '';
       return `<div class="school-area-section"><div class="school-area-header"><span class="school-area-title"><button type="button" class="inline-link" ${actionAttributes('search-query', { query: areaLabels[area] || area })}>${escapeHtml(prefix + label)}</button>${areaOverviewLink}</span><span>${paperCount} ${paperCount === 1 ? 'paper' : 'papers'} (${data.adjusted.toFixed(1)} adjusted)</span></div><div class="faculty-list">${facultyHtml}</div></div>`;
-    }).join('')}</div>${renderSubfieldContributions(school)}</div></div>`;
+    }).join('')}</div>${renderSubfieldContributions(school)}`)}</div>`;
 }

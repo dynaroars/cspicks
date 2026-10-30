@@ -7,7 +7,7 @@
 // reconcile the tables in paper/main.tex against the regenerated JSON.
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { CONFERENCE_SET_IDS, DEFAULT_END_YEAR, coreAMap, coreAStarMap, filterByYears, getConferenceAreaMap, loadData, nextTier, parentMap } from '../src/data.js';
-import { buildPriorPeriodData, calculateFragility, calculatePerCapita, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../src/metrics.js';
+import { buildPriorPeriodData, calculateFragility, median, calculatePerCapita, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../src/metrics.js';
 import { buildFundingIndex, calculateFundingDiscoveries } from '../src/nsf.js';
 import { areaLabels, cleanName, getInstitutionShortName } from '../src/shared.js';
 
@@ -82,12 +82,6 @@ function kendallTau(pairs) {
   }
   const n0 = concordant + discordant;
   return (concordant - discordant) / Math.sqrt((n0 + tiedA) * (n0 + tiedB));
-}
-function median(v) {
-  if (!v.length) return 0;
-  const s = [...v].sort((a, b) => a - b);
-  const m = Math.floor(s.length / 2);
-  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
 }
 
 const atTen = confSet => samples.find(s => s.variant.span === 10 && s.variant.confSet === confSet).ranks;
@@ -311,10 +305,11 @@ out.perCapita.sideBySide = Array.from({ length: 15 }, (_, i) => {
     csPerCapitaRank: cs ? (pcByName.get(cs.name)?.rank ?? null) : null
   };
 });
-out.perCapita.top10.forEach(row => { row.short = short(row.name); });
-out.perCapita.biggestGains.forEach(row => { row.short = short(row.name); });
-out.stability.examples.forEach(row => { row.short = short(row.name); });
-out.fragility.examples.forEach(row => { row.short = short(row.name); });
+const withShort = rows => rows.map(row => ({ ...row, short: short(row.name) }));
+out.perCapita.top10 = withShort(out.perCapita.top10);
+out.perCapita.biggestGains = withShort(out.perCapita.biggestGains);
+out.stability.examples = withShort(out.stability.examples);
+out.fragility.examples = withShort(out.fragility.examples);
 
 // --- 9. Researchers ---------------------------------------------------------
 const areaLabelOf = area => areaLabels[area] || area;

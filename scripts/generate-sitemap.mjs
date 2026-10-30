@@ -10,18 +10,11 @@
  */
 import fs from 'node:fs/promises';
 import Papa from 'papaparse';
-import { areaLabels } from '../src/shared.ts';
+import { areaLabels, slugify } from '../src/shared.ts';
 
 const ORIGIN = 'https://cspicks.roars.dev';
 const ROSTER_URL = 'https://raw.githubusercontent.com/emeryberger/CSrankings/gh-pages/csrankings.csv';
 const OUTPUT = new URL('../public/sitemap.xml', import.meta.url);
-
-function slugify(name) {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
 
 const response = await fetch(ROSTER_URL);
 if (!response.ok) throw new Error(`${response.status} from ${ROSTER_URL}`);

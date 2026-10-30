@@ -5,7 +5,7 @@ This file provides guidance to AI coding agents (Claude Code, Codex, Cursor, Aid
 ## Repository workflow
 
 - Commit directly to `main` by default. Data pushed this way skips PR review; the scheduled auditor re-checks it
-  afterwards (the `audit-reviewed` tag; see `TASKS/audit.md`), so verify every field against the official source
+  afterwards (`scripts/data/audit-reviewed.txt`; see `TASKS/audit.md`), so verify every field against the official source
   before pushing.
 - Do not create a feature branch unless the user explicitly requests one.
 - Never commit crawl/audit evidence or ledger files (e.g. `docs/data-sweep-*`). Put evidence in the commit message
@@ -27,15 +27,16 @@ npm run dev       # vite dev server at http://localhost:5173/
 npm test          # run the Node.js unit tests (test/unit/*.test.js)
 npm run test:e2e  # Playwright e2e tests (test/e2e/); auto-starts the dev server on :4173
 npm run validate:jobs  # fast check of public/jobs.json; run before every jobs commit (names each bad record)
+npm run lint:data      # data warnings for the auditor (wrong-school links, duplicate postings, stale grants); never fails CI
 npm run build      # production build to dist/ (multi-page: index, simulator, funding, csconfs, grants, jobs)
 npm run preview    # preview the production build
 ```
 
 Run a single Node unit test with `node --import tsx --test --test-name-pattern="<substring>" test/unit/<file>.test.js` (it's plain
 `node:test`, not a runner with its own CLI). The suite covers core data filtering, ranking, CSV errors,
-NSF attribution, and rendering safety; no linter is configured. `postbuild` strips large data files
-(`professor_history_openalex.json`, `school-aliases.json`, `core-extra-author-info.csv`, `data/`) from `dist/`
-since those are fetched from raw GitHub at runtime rather than bundled.
+NSF attribution, and rendering safety; no linter is configured. `npm run typecheck` checks `src/` strictly and the
+Node `scripts/` loosely (`tsconfig.scripts.json`); tests are not type-checked, since their fixtures are deliberately partial. `postbuild` strips `public/data/` (local,
+gitignored inputs to the OpenAlex build) from `dist/`.
 
 Every data-refresh workflow (conferences, grants, jobs, NSF, affiliations, CSRankings-derived data) has one
 playbook in `TASKS/`; [**MAINTENANCE.md**](MAINTENANCE.md) is the index with cadences. Read the relevant
@@ -77,8 +78,8 @@ playbook before any data-refresh or web-research task.
   filtering, and grouping; `jobs-render.ts` the cards and map. Covers any US
   school (CSRankings seeds the crawl list but is not a requirement), crawled by a scheduled routine (TASKS/jobs.md); queue/seed tooling is
   `scripts/jobs-maintain.mjs` with state in `scripts/data/jobs-sources.json` — the durable record of every school's department/hiring
-  URL and last-crawl outcome (including R2/R3, liberal-arts, regional, and community-college schools seeded from
-  `scripts/data/jobs-extra-schools.json`). Update a school's row after every visit, even when nothing was posted yet, so the next run rechecks it
+  URL and last-crawl outcome (including R2/R3, liberal-arts, regional, and community-college schools, the
+  `csrankings: false` rows). Update a school's row after every visit, even when nothing was posted yet, so the next run rechecks it
   (see TASKS/jobs.md, "The school record"). The same file is the durable website/revisit record for international
   vacancy research. Verified international postings belong in `public/jobs.json`; keep the school website/revisit record current in
   `scripts/data/jobs-sources.json`. Job research must also check related units, especially Electrical and Computer
@@ -89,7 +90,11 @@ playbook before any data-refresh or web-research task.
   postdoc pages; it follows the same search box. Individual lab postings sit in `public/jobs.json` with a `lab` id
   (tracks `industry`, `internship`, `postdoc`) instead of a jobs-sources school (TASKS/labs.md).
 - `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
-- `stats.html` + `src/stats.ts` — site stats (roster, conferences, awards, jobs; never the large NSF snapshot) and repository activity from the GitHub API. Every page header links to it via the health icon, between the ROARS Lab and
+- `stats.html` + `src/stats.ts` — site stats (roster, conferences, awards, jobs; never the large NSF snapshot), a data health & completeness
+  section modeled on VietProfs' `?view=health` (field-completeness bars, recent-confirmation badge, generated-page inventory, growth
+  chart), and repository activity from the GitHub API. Its build-time inputs are gitignored: `public/stats-history.json` (daily dataset
+  counts walked from git history plus jobs-crawl freshness, by `scripts/build-stats-history.mjs` on predev/prebuild; deploy checks out
+  full history for it) and `seo-pages.json` (page counts from `scripts/generate-seo-pages.mjs`); either missing just drops its card. Every page header links to it via the health icon, between the ROARS Lab and
   GitHub icons (VietProfs' order; all three share `.icon-link`; `test/unit/consistency.test.js` enforces the header on every page).
 - `grants-submit.html` + `src/grants/submit.ts` — single unified submission/correction form for proposing
   new CS research awards or updating existing entries via GitHub Issue or email.
@@ -104,8 +109,7 @@ playbook before any data-refresh or web-research task.
   same everywhere.
 - `src/vietprofs/` — verbatim copies of VietProfs' shared UI: `roars-ui.css` (design tokens, header icons,
   search box, suggestion list, scope chips, help popup, tags, tooltips, empty state, back-to-top, floating "+"),
-  `search-kit.ts` (suggestion controller, keyboard shortcuts, help, commands), `back-to-top.ts`, `add-fab.ts`,
-  and the visitor-traffic view. `src/suggestion-box.ts` is a thin adapter over search-kit's `createSearchController`. VietProfs is the baseline look: edit these there, then run
+  `search-kit.ts` (suggestion controller, keyboard shortcuts, help, commands), and `back-to-top.ts` (pages hardcode the floating "+" markup that `roars-ui.css` styles). `src/suggestion-box.ts` is a thin adapter over search-kit's `createSearchController`. VietProfs is the baseline look: edit these there, then run
   `npm run sync:vietprofs-ui`; `test/unit/vietprofs-ui.test.js` fails on local edits. `style.css` `@import`s
   `roars-ui.css` first and holds only cspicks-specific rules on top.
 - `src/charts.ts` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges
@@ -137,21 +141,21 @@ playbook before any data-refresh or web-research task.
   into that keyword. No favorites dropdowns. Jobs offers Markdown export in its ⋯ menu with two or more
   stars. Dataset settings, maps, analysis, score breakdowns, and methodology are closed by default and
   available on demand; dataset-setting summaries show the active region/year/venue choices.
-- `src/seo.ts` / `src/analytics.ts` — growth/discoverability infra used by every page:
-  `seo.ts` keeps `<title>`/description/canonical/OpenGraph tags in sync with the on-screen view, and `analytics.ts` fires opt-in, no-op-by-default usage
-  events (see README's Analytics section — nothing here talks to a network without a configured provider).
+- `src/seo.ts` — discoverability infra used by every page: keeps `<title>`/description/canonical/OpenGraph tags in
+  sync with the on-screen view.
 - `src/csrankings-rules.ts` (+ generated `src/csrankings-rules.generated.js`) — the area/venue taxonomy
   (venue aliases, CORE tier membership) mirrors upstream CSRankings' own Python source rather than being
-  hand-maintained; `npm run sync:csrankings-rules` re-derives the generated file, which is the fallback
-  used until/unless a client-side sync overrides it.
+  hand-maintained; `npm run sync:csrankings-rules` re-derives the generated file, which is the only source the
+  site uses (there is no runtime download).
 
 Pages have independent filtered state and use plain `<a href>` navigation. `loadData()` memoizes its promise,
 so modules loaded together on Search share one download and parse of the canonical CSRankings inputs.
 
 **Data pipeline (`src/data.ts` is the core of the app):**
-1. `loadData()` fetches three CSVs directly from `raw.githubusercontent.com/emeryberger/CSrankings` at
-   runtime (csrankings.csv, generated-author-info.csv, institutions.csv) and joins them into
-   `{ professors, schools }` keyed by name.
+1. `loadData()` fetches CSRankings' CSVs directly from `raw.githubusercontent.com/emeryberger/CSrankings` at
+   runtime — three required (csrankings.csv, generated-author-info.csv, institutions.csv; a missing column fails
+   the load loudly) and five optional (turing, acm-fellows, countries, dblp-aliases, name-changes) — and joins them
+   into `{ professors, schools }` keyed by name.
 2. `filterByYears(data, startYear, endYear, region, historyMap, aliasMap, confSet)` is the main
    query/aggregation function, built as a three-stage pipeline (`collectFilteredData` → `scoreSchools` →
    `rankSchools`) — filters publications by year range and conference set (CSRankings default /
@@ -161,8 +165,8 @@ so modules loaded together on Search share one download and parse of the canonic
    `scripts/build-openalex-history.mjs`) maps professors to their affiliation at time of publication, sourced
    from OpenAlex rather than current CSRankings affiliation. `public/school-aliases.json` bridges OpenAlex
    institution names to CSRankings' abbreviated names. `public/manual_affiliations.csv` holds community
-   corrections to bad OpenAlex data, merged in via `mergeAffiliationHistory()`. These assets are loaded only
-   when the user enables Historical Mode.
+   corrections to bad OpenAlex data, merged in via `mergeAffiliationHistory()`. These assets ship with the site
+   (same origin, so data and decoder always match) and are loaded only when the user enables Historical Mode.
 4. **CORE A/A* extra publications**: `public/core-extra-author-info.csv` (generated offline by
    `scripts/build-core-extra-pubs.mjs` from a bulk DBLP dump — see `TASKS/csrankings.md`) covers publications in
    CORE A/A* venues CSRankings' own `generated-author-info.csv` doesn't track, for the existing roster only. Its
@@ -189,7 +193,7 @@ so modules loaded together on Search share one download and parse of the canonic
 
 **No build-time data fetching** — CSRankings data is fetched at page load, while OpenAlex data and the
 CORE A/A* extra-publications CSV are each fetched on demand (Historical Mode / CORE A/A* conference-set
-selection, respectively). `postbuild` deliberately excludes the large local copies from `dist/`.
+selection, respectively) from the site's own copies in `public/`.
 
 ## Adding a new Discovery
 
@@ -209,5 +213,11 @@ only methodology note most readers see.
 
 ## Testing notes
 
-- `test/unit/*.test.js` uses Node's native test runner (`node --test`).
+- `test/unit/*.test.js` uses Node's native test runner (`node --test`). `test/unit/data-files.test.js` runs the hard data
+  checks in `scripts/data-checks.mjs` on the live conferences, grants, jobs-sources, and manual-affiliations files
+  (jobs and labs have `jobs-validate.mjs`); fix the data, not the test.
+- Behavior tests that need routine-edited data read frozen snapshots in `test/fixtures/` (grants, conferences, labs),
+  so routine data edits can't break them; rebuild a fixture only when a test needs a record it lacks. e2e specs share
+  `test/e2e/helpers/upstream-mocks.js` (CSRankings/DBLP stand-ins, pinned clock) and `helpers/data-fixtures.js`. CI
+  runs unit, typecheck, build, and e2e.
 - `test/e2e/*.spec.js` uses Playwright to test all pages (`index.html`, `simulator.html`, `csconfs.html`, `csconfs-submit.html`, `grants.html`, `grants-submit.html`, `jobs.html`, `jobs-submit.html`, `nsf.html`).

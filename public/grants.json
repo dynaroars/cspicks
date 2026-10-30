@@ -2805,7 +2805,8 @@
       "Robotics"
     ],
     "url": "https://www.aspirations.org/award-programs/aic-collegiate-award",
-    "featured": false
+    "featured": false,
+    "status": "historical"
   },
   {
     "id": "acm-senior-member",

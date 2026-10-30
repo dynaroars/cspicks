@@ -2,13 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {
-  continentCounts, deadlineLabel, filterJobs, groupBySchool, isActive, jobsSuggestions, parseJobs, stateCounts
+  continentCounts, deadlineLabel, filterJobs, formatDay, groupBySchool, isActive, jobProblems, jobsSuggestions, parseJobs, stateCounts
 } from '../../src/jobs/jobs-data.js';
 import { exportFileName, jobsToMarkdown, renderJobCard, renderSchoolCard, renderStateMap } from '../../src/jobs/jobs-render.js';
 import { STATE_TILE_ROWS, US_STATES, resolveState } from '../../src/jobs/jobs-data.js';
 import { buildQueue, recheckDays } from '../../scripts/jobs-maintain.mjs';
 
 const NOW = Date.UTC(2026, 10, 1, 12); // Nov 1, 2026
+/** @returns {import('../../src/types').Job} */
 const job = (overrides = {}) => ({
   id: 'gt-ai-2026', school: 'Georgia Institute of Technology', department: 'School of Computer Science',
   title: 'Assistant Professor, AI', track: 'tenure-track', level: 'assistant', areas: ['ai'], state: 'GA', city: 'Atlanta',
@@ -48,8 +49,8 @@ test('filters by track, area, state, rank, and free text', () => {
   const open = job({ id: 'open-any', areas: [], anyArea: true });
   assert.deepEqual(ids(filterJobs([...jobs, open], { area: 'sec', now: NOW })).sort(), ['open-any', 'ut-sec']);
   assert.deepEqual(ids(filterJobs([open], { query: 'area: robotics', now: NOW })), ['open-any']);
-  assert.match(renderJobCard(open, () => undefined, () => false, NOW), /All areas/);
-  assert.ok(!/All areas|Any area/.test(renderJobCard(job({ areas: [] }), () => undefined, () => false, NOW)));
+  assert.match(renderJobCard(open, () => false, NOW), /All areas/);
+  assert.ok(!/All areas|Any area/.test(renderJobCard(job({ areas: [] }), () => false, NOW)));
   assert.deepEqual(ids(filterJobs(jobs, { state: 'GA', now: NOW })), ['gt-ai-2026']);
   assert.deepEqual(ids(filterJobs(jobs, { level: 'assistant', now: NOW })), ['gt-ai-2026']);
   assert.deepEqual(ids(filterJobs(jobs, { query: 'atlanta', now: NOW })), ['gt-ai-2026']);
@@ -129,6 +130,18 @@ test('parser rejects malformed data', () => {
   assert.throws(() => parseJobs([job({ visaSponsorship: 'maybe' })]), /Invalid jobs dataset/);
   assert.equal(parseJobs([job()]).length, 1);
   assert.equal(parseJobs([job({ visaSponsorship: 'case-by-case' })]).length, 1);
+});
+
+test('validator rejects impossible dates and unknown fields, and accepts start dates at posting precision', () => {
+  assert.deepEqual(jobProblems(job({ deadline: '2026-13-45' })), ['deadline']);
+  assert.deepEqual(jobProblems(job({ reviewBegins: 'soon' })), ['reviewBegins']);
+  assert.deepEqual(jobProblems(job({ areasAny: true })), ['unknown field areasAny']);
+  for (const startDate of ['2027', '2027-08', '2027-08-16', null]) assert.deepEqual(jobProblems(job({ startDate })), [], startDate);
+  assert.deepEqual(jobProblems(job({ startDate: '2027-8' })), ['startDate']);
+  assert.equal(formatDay('2027-08-16'), 'Aug 16, 2027');
+  assert.equal(formatDay('2027-08'), 'Aug 2027');
+  assert.equal(formatDay('2027'), '2027');
+  assert.equal(formatDay('Fall 2027'), '');
 });
 
 test('visa filter and keyword: stated policy, unchecked postings, and "possible"', () => {

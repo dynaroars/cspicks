@@ -2,16 +2,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
 
-import { coreAMap, fetchCsv, filterByYears, getConferenceAreaMap, getPublicationSchools, publicationMatchesConferenceSet } from '../../src/data.js';
-import { areaLabels, detectRegionFromLocales, encodeInlineValue, escapeHtml, getInstitutionShortName, safeExternalUrl, scoreSuggestionMatch } from '../../src/shared.js';
-import { calculateRankImpact, fuzzyMatch, parseCandidateNames } from '../../src/simulation.js';
-import { hasEligiblePageRange, normalizeDblpVenue, parseDblpProfileUrl, topCoauthorsInWindow } from '../../src/dblp.js';
-import { parseCsrankingsRules } from '../../src/csrankings-rules.js';
-import { renderSchoolCard } from '../../src/search-cards.js';
-import { calculateAreaMomentum, calculateDiscoveryInsights, calculateFragility, calculatePerCapita, calculateParityReport, calculatePublishingEffort, calculateResearcherPatterns, calculateSchoolMetrics, calculateSubfieldDiscoveries, collectVariantRanks, compareAreas, describeVerdict, explainRankGap, rankStabilityVariants, summarizeRankStability } from '../../src/metrics.js';
-import { awardYear, buildFundingIndex, calculateFundingDiscoveries, findFundingFaculty, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, normalizeFundingName, parseNsfDataset, renderFundingFacultyCard } from '../../src/nsf.js';
-import { aoeDeadline, conferenceStart, deadlineStatus, filterSchedule, formatCalendarDate, groupConferences, scheduleSuggestions } from '../../src/csconfs/schedule-data.js';
-import { renderScheduleCard } from '../../src/csconfs/schedule-render.js';
+import { detectRegionFromLocales } from '../../src/shared.js';
+import { awardYear, buildFundingIndex, calculateFundingDiscoveries, formatAwardPeriod, fundingFacultyNameMatches, fundingMatches, fundingSchoolNameMatches, parseNsfDataset, renderFundingFacultyCard } from '../../src/nsf.js';
 
 test('NSF parser rejects malformed external data', () => {
   assert.throws(() => parseNsfDataset(null), /Invalid NSF dataset/);
@@ -27,39 +19,6 @@ test('browser locales map to supported regions and unknown locales fall back to 
   assert.equal(detectRegionFromLocales(['en']), 'us');
   assert.equal(detectRegionFromLocales(['de']), 'europe');
   assert.equal(detectRegionFromLocales(['not_a_locale']), 'world');
-});
-
-test('NSF funding resolves faculty listed under a middle-initial variant', () => {
-  // CSRankings lists some people twice (e.g. "ThanhVu H. Nguyen" in the roster
-  // but "ThanhVu Nguyen" in the publication table); the NSF snapshot records
-  // whichever variant the sync matched, so lookups must tolerate both.
-  const dataset = {
-    awards: [{
-      id: '1', title: 'Verification', awardee: 'Example University', awardDate: '09/01/2024',
-      estimatedAmount: 400000,
-      investigators: [{ name: 'A', role: 'PI', facultyName: 'ThanhVu H. Nguyen', rosterName: 'ThanhVu H. Nguyen', affiliation: 'Example University' }]
-    }, {
-      id: '2', title: 'Ambiguous', awardee: 'Other University', awardDate: '09/01/2024',
-      estimatedAmount: 200000,
-      investigators: [{ name: 'B', role: 'PI', facultyName: 'Michael T. Goodrich', rosterName: 'Michael T. Goodrich', affiliation: 'Other University' }]
-    }]
-  };
-  const index = buildFundingIndex(dataset, 2020, 2025);
-
-  assert.equal(normalizeFundingName('ThanhVu H. Nguyen'), 'thanhvu nguyen');
-  assert.equal(normalizeFundingName('J. Smith'), 'j smith');
-  // The CSRankings disambiguation number identifies the person and is kept.
-  assert.equal(normalizeFundingName('Adam D. Smith 0001'), 'adam smith 0001');
-  assert.notEqual(normalizeFundingName('Adam D. Smith 0001'), normalizeFundingName('Adam Smith 0006'));
-
-  assert.equal(findFundingFaculty(index, 'ThanhVu H. Nguyen').attributedAmount, 400000);
-  assert.equal(findFundingFaculty(index, 'ThanhVu Nguyen', 'Example University').attributedAmount, 400000);
-  assert.equal(findFundingFaculty(index, 'Unrelated Person', 'Example University'), null);
-  // Same-name-different-person: middle initials differ and so do institutions.
-  assert.equal(findFundingFaculty(index, 'Michael A. Goodrich', 'Brigham Young University'), null);
-  assert.equal(findFundingFaculty(index, 'Michael Goodrich', 'Other University').attributedAmount, 200000);
-  // Without an institution to confirm it, a normalized match is not assumed.
-  assert.equal(findFundingFaculty(index, 'ThanhVu Nguyen'), null);
 });
 
 test('NSF funding keys on the resolved publication-table name', () => {
@@ -79,7 +38,7 @@ test('NSF funding keys on the resolved publication-table name', () => {
   };
   const index = buildFundingIndex(dataset, 2020, 2025);
   assert.equal(index.faculty[0].name, 'ThanhVu Nguyen');
-  assert.equal(findFundingFaculty(index, 'ThanhVu Nguyen').attributedAmount, 300000);
+  assert.equal(index.faculty[0].attributedAmount, 300000);
   assert.deepEqual(index.schools[0].faculty, ['ThanhVu Nguyen']);
 });
 

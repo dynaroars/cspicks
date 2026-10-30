@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { slugify } from '../../scripts/generate-seo-pages.mjs';
+import { slugify } from '../../src/shared.js';
 
 const ROOT_DIR = path.resolve(import.meta.dirname, '../..');
 

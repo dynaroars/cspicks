@@ -56,40 +56,6 @@ export function parseNsfDataset(payload: unknown): NsfDataset {
 // exceed current obligations for ordinary continuing grants as well.
 const confirmedTransferAwards = new Set(['2304748']);
 
-// CSRankings sometimes lists a person under more than one spelling (e.g. with
-// and without a middle initial), and the NSF snapshot records whichever variant
-// the sync matched. Compare on a form that ignores middle initials but KEEPS
-// CSRankings' trailing disambiguation number, which is what separates distinct
-// people who share a name ("Adam Smith 0001" is not "Adam Smith 0006").
-export function normalizeFundingName(name: unknown) {
-  const tokens = String(name || '')
-    .toLowerCase()
-    .replace(/\./g, ' ')
-    .split(/\s+/)
-    .filter(Boolean);
-  return tokens
-    .filter((token, index) => token.length > 1 || index === 0 || index === tokens.length - 1)
-    .join(' ');
-}
-
-/**
- * Exact name first — which is the normal path, since the sync stores the
- * publication-table spelling. The normalized fallback covers people hired
- * since the snapshot was taken, and is accepted only when the professor's
- * current institution also matches: CSRankings has
- * distinct people whose names differ solely by middle initial — "Michael A.
- * Goodrich" (BYU) and "Michael T. Goodrich" (UC Irvine) — and attributing one
- * person's grants to another is worse than showing none.
- */
-export function findFundingFaculty(index: FundingIndex | null, name: string, affiliation: string | null = null) {
-  if (!index || !name) return null;
-  const exact = index.facultyByName?.get(name);
-  if (exact) return exact;
-  if (!affiliation) return null;
-  const candidate = index.facultyByNormalizedName?.get(normalizeFundingName(name));
-  return candidate && candidate.affiliation === affiliation ? candidate : null;
-}
-
 export function awardYear(award: Pick<NsfAward, 'awardDate' | 'startDate'>) {
   const match = String(award.awardDate || award.startDate || '').match(/(\d{4})/);
   return match ? Number(match[1]) : null;
@@ -187,19 +153,9 @@ export function buildFundingIndex(dataset: NsfDataset, startYear: number, endYea
   const facultyList = [...faculty.values()]
     .sort((a, b) => b.attributedAmount - a.attributedAmount || a.name.localeCompare(b.name));
 
-  // Ambiguous normalized names (two different people who normalize alike) are
-  // recorded as misses rather than guessed at.
-  const facultyByNormalizedName = new Map<string, FundingFaculty | null>();
-  facultyList.forEach(record => {
-    const key = normalizeFundingName(record.name);
-    facultyByNormalizedName.set(key, facultyByNormalizedName.has(key) ? null : record);
-  });
-
   return {
     awards,
     faculty: facultyList,
-    facultyByName: new Map(facultyList.map(record => [record.name, record])),
-    facultyByNormalizedName,
     schools: [...schools.values()].map(school => ({
       ...school, awards: [...school.awards.values()], faculty: [...school.faculty]
     })).sort((a, b) => b.attributedAmount - a.attributedAmount || a.name.localeCompare(b.name))

@@ -25,4 +25,6 @@ test('store degrades to empty without localStorage', () => {
   const store = createFavoritesStore('test:none');
   assert.deepEqual(store.all(), []);
   assert.equal(store.isFavorite('x'), false);
+  // A star that can't be saved must say so rather than flip as if it had been.
+  assert.throws(() => store.toggle('x'), /storage is unavailable/);
 });

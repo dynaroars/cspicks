@@ -1,16 +1,17 @@
 // Generic search-box / command-line UI kit shared across vietprofs consumers
 // (vietprofs itself, the GMU CS "people" directory at github.com/RealGMUCS/people, and
 // CS Picks, which vendors this file verbatim via its `npm run sync:vietprofs-ui`).
-// Kept free of any site-specific data/DOM assumptions (ids, elements, and site behavior are
-// passed in as options; matching styles live in roars-ui.css) so it can be
-// built standalone and fetched at runtime from https://vietprofs.roars.dev/search-kit.js
-// the same way profile.css is shared today (see scripts/sync-profile-css.ts).
+// Kept free of any site-specific data/DOM assumptions: ids, elements, and site behavior are
+// passed in as options, and the matching styles live in roars-ui.css.
 
 export type KeywordMeta = { label: string; icon?: string };
 
 // Case/diacritic-insensitive compare, e.g. so "Nguyen" also matches "Nguyễn".
 export function normalizeText(value: string): string {
-  return value.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  return value
+    .toLocaleLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
 }
 
 // "Keyword: value" prefix parsing shared by every consumer's search box, e.g.
@@ -27,7 +28,10 @@ export function parseKeywordQuery(
   const key = resolveKey(typed);
   if (!key) return null;
   let query = (match[2] ?? '').trim();
-  if ((query.startsWith('"') && query.endsWith('"')) || (query.startsWith("'") && query.endsWith("'"))) {
+  if (
+    (query.startsWith('"') && query.endsWith('"')) ||
+    (query.startsWith("'") && query.endsWith("'"))
+  ) {
     query = query.slice(1, -1).trim();
   }
   return { key, query };
@@ -156,7 +160,7 @@ function debounce(fn: () => void, delayMs: number): () => void {
 function rankMatches(values: readonly string[], rawQuery: string, limit: number): string[] {
   const query = normalizeText(rawQuery);
   return values
-    .filter(v => normalizeText(v).includes(query))
+    .filter((v) => normalizeText(v).includes(query))
     .sort((a, b) => {
       const aStarts = normalizeText(a).startsWith(query);
       const bStarts = normalizeText(b).startsWith(query);
@@ -196,7 +200,10 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
   function renderChip() {
     if (!scopeChip) return;
     (scopeChip as any).hidden = !activeScope;
-    if (!activeScope) { if (scopeChipLabel) scopeChipLabel.textContent = ''; return; }
+    if (!activeScope) {
+      if (scopeChipLabel) scopeChipLabel.textContent = '';
+      return;
+    }
     const meta = metaFor(activeScope);
     if (scopeChipLabel) scopeChipLabel.textContent = `${meta.icon ?? '🔎'} ${meta.label}`;
     scopeChip.setAttribute('aria-label', `Remove ${meta.label} search scope`);
@@ -207,7 +214,9 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
     const raw = input.value;
     if (activeScope) return { scope: activeScope, query: raw.trim(), raw };
     const parsed = parseKeywordQuery(raw, resolveKey);
-    return parsed ? { scope: parsed.key, query: parsed.query, raw } : { scope: null, query: raw.trim(), raw };
+    return parsed
+      ? { scope: parsed.key, query: parsed.query, raw }
+      : { scope: null, query: raw.trim(), raw };
   }
 
   function setActive(index: number) {
@@ -247,7 +256,11 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
     input.focus();
   }
 
-  function optionButton(item: SuggestionItem, index: number, context: SuggestionContext): HTMLElement {
+  function optionButton(
+    item: SuggestionItem,
+    index: number,
+    context: SuggestionContext,
+  ): HTMLElement {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'search-suggestion';
@@ -268,7 +281,7 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
     }
     // Keep focus on the input until the click lands — otherwise blur can hide
     // the list before the click event arrives.
-    btn.addEventListener('mousedown', e => e.preventDefault());
+    btn.addEventListener('mousedown', (e) => e.preventDefault());
     btn.addEventListener('click', () => select(item, context));
     return btn;
   }
@@ -277,9 +290,12 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
     if (!opts.getSuggestions) return [];
     const scoped = context.scope;
     const values = opts.getSuggestions(scoped ?? opts.unscopedKey ?? 'name') || [];
-    const showAll = Boolean(scoped) && !context.query && values.length <= (opts.showAllWhenEmpty ?? 0);
+    const showAll =
+      Boolean(scoped) && !context.query && values.length <= (opts.showAllWhenEmpty ?? 0);
     if (!context.query && !showAll) return [];
-    return [{ items: rankMatches(values, context.query, maxSuggestions).map(label => ({ label })) }];
+    return [
+      { items: rankMatches(values, context.query, maxSuggestions).map((label) => ({ label })) },
+    ];
   }
 
   function showSuggestions() {
@@ -376,10 +392,18 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
     showSuggestions();
     debouncedChange();
   });
+  // The blur delay lets a click on a suggestion land; refocusing cancels it, or a blur-then-refocus within the delay
+  // (e.g. closing the help panel, then typing) would close the list the user just opened.
+  let blurTimer: ReturnType<typeof setTimeout> | undefined;
   // A focus given via focusQuietly() (page-load autofocus) doesn't open the list.
-  input.addEventListener('focus', () => { if (!input.dataset.quietFocus) showSuggestions(); });
-  input.addEventListener('blur', () => window.setTimeout(hideSuggestions, opts.blurDelayMs ?? 150));
-  input.addEventListener('keydown', e => {
+  input.addEventListener('focus', () => {
+    clearTimeout(blurTimer);
+    if (!input.dataset.quietFocus) showSuggestions();
+  });
+  input.addEventListener('blur', () => {
+    blurTimer = setTimeout(hideSuggestions, opts.blurDelayMs ?? 150);
+  });
+  input.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       hideSuggestions();
       if (input.value || activeScope) {
@@ -415,7 +439,11 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
       return;
     }
     const count = optionEls.length;
-    setActive(e.key === 'ArrowDown' ? (activeSuggestion + 1) % count : (activeSuggestion - 1 + count) % count);
+    setActive(
+      e.key === 'ArrowDown'
+        ? (activeSuggestion + 1) % count
+        : (activeSuggestion - 1 + count) % count,
+    );
     e.preventDefault();
   });
   if (scopeChip) {
@@ -461,11 +489,20 @@ const helpClosingEscapes = new WeakSet<Event>();
 // Open/close behavior for the "(?)" search-syntax popover, plus optionally filling
 // its keyword list from `entries`. Shared by every consumer; some (vietprofs) render
 // the panel body directly in their own shell template and only need the open/close half.
-export function setupSearchHelp({ btn, panel, list, entries, onBeforeToggle }: SearchHelpOptions): SearchHelp {
+export function setupSearchHelp({
+  btn,
+  panel,
+  list,
+  entries,
+  onBeforeToggle,
+}: SearchHelpOptions): SearchHelp {
   if (list && entries) {
-    list.innerHTML = entries.map(e =>
-      `<li><code>${escapeHtml(e.code)}</code> ${escapeHtml(e.example)}${e.scope ? ` <span class="search-help-scope">(${escapeHtml(e.scope)})</span>` : ''}</li>`
-    ).join('');
+    list.innerHTML = entries
+      .map(
+        (e) =>
+          `<li><code>${escapeHtml(e.code)}</code> ${escapeHtml(e.example)}${e.scope ? ` <span class="search-help-scope">(${escapeHtml(e.scope)})</span>` : ''}</li>`,
+      )
+      .join('');
   }
 
   const isOpen = () => !(panel as any).hidden;
@@ -480,14 +517,14 @@ export function setupSearchHelp({ btn, panel, list, entries, onBeforeToggle }: S
     if (onBeforeToggle) onBeforeToggle();
     setOpen(willShow);
   }
-  btn.addEventListener('click', e => {
+  btn.addEventListener('click', (e) => {
     e.stopPropagation();
     toggle();
   });
-  document.addEventListener('click', e => {
+  document.addEventListener('click', (e) => {
     if (isOpen() && !panel.contains(e.target as Node) && e.target !== btn) hide();
   });
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && isOpen()) {
       hide();
       helpClosingEscapes.add(e);
@@ -509,14 +546,7 @@ export interface CommandHandlerOptions {
   getSearch?: () => { resetScope: () => void } | null;
   resetDirectory?: () => void;
   onUpdate?: () => void;
-  onRandom?: () => void;
   getQueryPlan?: () => string;
-  getStats?: () => string;
-  facts?: readonly string[];
-  // Site name shown by `whoami`/`about` and `uname -a`; also keys the `theme crt` preference
-  // in localStorage as `<site_name>:crt`.
-  siteName: string;
-  aboutText: string;
   // The search box cleared after a command; `input` wins over `searchInputId`.
   input?: HTMLInputElement | null;
   searchInputId?: string;
@@ -525,26 +555,19 @@ export interface CommandHandlerOptions {
   help?: Pick<SearchHelp, 'show'> | null;
   searchHelpPanel?: HTMLElement | null;
   searchHelpBtn?: HTMLElement | null;
-  buildCommit?: string;
-  buildLabel?: string;
-  // Full `uname -a` output, replacing the default `<site> static-web build <commit> browser/...`.
-  unameText?: () => string;
-  // Built-in command words this site doesn't want (they fall through to a normal search).
-  disabledCommands?: string[];
-  // Extra, site-specific commands layered on top of the shared base set
-  // (e.g. vietprofs' "visitor stats" / "sudo vietprofs"). They take precedence over built-ins.
-  extraCommands?: Record<string, () => void>;
 }
 
-// The base `help` / `fortune` / `whoami` / `uname -a` / `stats` / `theme crt` / `clear`
-// command-line easter eggs, identical across every consumer's search box. Site-specific
-// extras (vietprofs' "visitor stats", people's none-yet) go in `extraCommands`.
+// The few words the search box treats as commands rather than searches: `help`, `query plan`,
+// and `clear`. Every other input is an ordinary search.
 export function createCommandHandler(opts: CommandHandlerOptions) {
-  const { commandOutputEl, searchHelpPanel, searchHelpBtn, extraCommands } = opts;
-  const disabled = new Set(opts.disabledCommands ?? []);
+  const { commandOutputEl, searchHelpPanel, searchHelpBtn } = opts;
 
   function completeCommand(msg: string) {
-    const input = opts.input ?? (opts.searchInputId ? document.getElementById(opts.searchInputId) as HTMLInputElement | null : null);
+    const input =
+      opts.input ??
+      (opts.searchInputId
+        ? (document.getElementById(opts.searchInputId) as HTMLInputElement | null)
+        : null);
     if (input) input.value = '';
     const search = opts.getSearch ? opts.getSearch() : null;
     if (search) search.resetScope();
@@ -554,15 +577,6 @@ export function createCommandHandler(opts: CommandHandlerOptions) {
 
   return function runCommand(raw: string): boolean {
     const cmd = raw.trim().toLowerCase().replace(/^:/, '');
-    if (!cmd) return false;
-
-    const extra = extraCommands && Object.hasOwn(extraCommands, cmd) ? extraCommands[cmd] : undefined;
-    if (extra) {
-      extra();
-      return true;
-    }
-    if (disabled.has(cmd)) return false;
-
     if (cmd === 'help') {
       if (opts.help) {
         opts.help.show();
@@ -577,59 +591,13 @@ export function createCommandHandler(opts: CommandHandlerOptions) {
       completeCommand(`query plan: ${opts.getQueryPlan ? opts.getQueryPlan() : ''}`);
       return true;
     }
-    if (cmd === 'whoami' || cmd === 'about') {
-      completeCommand(opts.aboutText);
-      return true;
-    }
-    if (cmd === 'uname -a' || cmd === 'build' || cmd === 'built' || cmd === 'build it' || cmd === 'version') {
-      if (opts.unameText) {
-        completeCommand(opts.unameText());
-        return true;
-      }
-      const commit = opts.buildCommit ?? 'dev';
-      const label = opts.buildLabel ?? '';
-      completeCommand(`${opts.siteName} static-web build ${commit}${label ? ` (${label})` : ''} browser/${navigator.platform || 'unknown'}`);
-      return true;
-    }
-    if (cmd === 'stats' || cmd === 'status') {
-      completeCommand(`stats: ${opts.getStats ? opts.getStats() : ''}`);
-      return true;
-    }
-    if (cmd === 'sudo find professor' || cmd === 'sudo find faculty' || cmd === 'sudo find student') {
-      completeCommand('Permission granted. Academic credentials still require independent verification.');
-      return true;
-    }
-    if (cmd === 'fortune') {
-      const list = opts.facts && opts.facts.length ? opts.facts : [`${opts.siteName} is an open, community-maintained academic directory.`];
-      completeCommand(`fortune: ${list[Math.floor(Math.random() * list.length)] ?? ''}`);
-      return true;
-    }
-    if (cmd === '/dev/random' || cmd === 'random') {
-      if (opts.onRandom) opts.onRandom();
-      return true;
-    }
-    if (cmd === 'theme crt') {
-      const enabled = document.documentElement.classList.toggle('crt-mode');
-      localStorage.setItem(crtStorageKey(opts.siteName), enabled ? '1' : '0');
-      completeCommand(`crt theme ${enabled ? 'enabled' : 'disabled'}; reduced-motion preferences are respected`);
-      return true;
-    }
-    if (cmd === 'clear' || cmd === 'reset') {
+    if (cmd === 'clear') {
       hideCommandOutput(commandOutputEl);
       if (opts.resetDirectory) opts.resetDirectory();
       return true;
     }
     return false;
   };
-}
-
-function crtStorageKey(siteName: string): string {
-  return `${siteName.toLowerCase().replace(/\s+/g, '_')}:crt`;
-}
-
-// Re-apply a `theme crt` choice saved by createCommandHandler on an earlier visit.
-export function restoreCrtTheme(siteName: string) {
-  if (localStorage.getItem(crtStorageKey(siteName)) === '1') document.documentElement.classList.add('crt-mode');
 }
 
 export interface KeyboardShortcutOptions {
@@ -668,16 +636,26 @@ export interface KeyboardShortcutOptions {
 export function setupKeyboardShortcuts(opts: KeyboardShortcutOptions) {
   const nextKeys = opts.nextKeys ?? ['j'];
   const prevKeys = opts.prevKeys ?? ['k'];
-  const searchInput = () => opts.input ?? document.getElementById(opts.searchInputId ?? 'main-search') as HTMLInputElement | null;
+  const searchInput = () =>
+    opts.input ??
+    (document.getElementById(opts.searchInputId ?? 'main-search') as HTMLInputElement | null);
   const fallbackHelp = (): SearchHelp | null => {
     const panel = document.getElementById('search-help-panel');
     const btn = document.getElementById('search-help-btn');
     if (!panel) return null;
     return {
       isOpen: () => !(panel as any).hidden,
-      hide: () => { (panel as any).hidden = true; btn?.setAttribute('aria-expanded', 'false'); },
-      show: () => { (panel as any).hidden = false; btn?.setAttribute('aria-expanded', 'true'); },
-      toggle: () => { btn?.click(); },
+      hide: () => {
+        (panel as any).hidden = true;
+        btn?.setAttribute('aria-expanded', 'false');
+      },
+      show: () => {
+        (panel as any).hidden = false;
+        btn?.setAttribute('aria-expanded', 'true');
+      },
+      toggle: () => {
+        btn?.click();
+      },
     };
   };
 
@@ -700,7 +678,7 @@ export function setupKeyboardShortcuts(opts: KeyboardShortcutOptions) {
     }
   }
 
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') handleEscape(e);
 
     const target = e.target as HTMLElement;
@@ -722,7 +700,9 @@ export function setupKeyboardShortcuts(opts: KeyboardShortcutOptions) {
 
     const items = opts.getItemElements ? opts.getItemElements() : [];
     let currIdx = opts.getSelectedIndex ? opts.getSelectedIndex() : -1;
-    const selectedClass = opts.selectedClass ?? (items[0]?.classList.contains('card') ? 'card-keyboard-selected' : 'entry-keyboard-selected');
+    const selectedClass =
+      opts.selectedClass ??
+      (items[0]?.classList.contains('card') ? 'card-keyboard-selected' : 'entry-keyboard-selected');
     const isNext = nextKeys.includes(e.key);
     const isPrev = prevKeys.includes(e.key);
 
@@ -730,7 +710,10 @@ export function setupKeyboardShortcuts(opts: KeyboardShortcutOptions) {
       e.preventDefault();
       items[currIdx]?.classList.remove(selectedClass);
       if (!items.length) currIdx = -1;
-      else currIdx = isNext ? (currIdx + 1) % items.length : (currIdx - 1 + items.length) % items.length;
+      else
+        currIdx = isNext
+          ? (currIdx + 1) % items.length
+          : (currIdx - 1 + items.length) % items.length;
       if (opts.setSelectedIndex) opts.setSelectedIndex(currIdx);
       const selected = items[currIdx];
       if (selected) {

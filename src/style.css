@@ -3049,6 +3049,61 @@ button.opportunity-chip:hover { color: var(--accent-color); border-color: var(--
 .stats-section .stats-body > h3 { margin-top: 1.25rem; font-size: 1rem; }
 @media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
+/* Data health & completeness (VietProfs' ?view=health): pulse badge, completeness bars, page inventory, growth chart. */
+.recent-updates-badge {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem; padding: 0.75rem 1rem; margin-bottom: 1rem;
+  background: color-mix(in srgb, var(--accent-color) 8%, var(--bg-surface));
+  border: 1px solid color-mix(in srgb, var(--accent-color) 25%, transparent);
+  border-radius: var(--radius-md); font-size: var(--text-sm); color: var(--text-primary);
+}
+.pulse-dot { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: #10b981; animation: pulse-ring 1.8s infinite; }
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .pulse-dot { animation: none; } }
+.recent-updates-link { margin-left: auto; color: var(--accent-color); font-size: var(--text-xs); font-weight: 600; text-decoration: none; white-space: nowrap; }
+.recent-updates-link:hover { text-decoration: underline; }
+.completeness-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 0.85rem; }
+.completeness-card { display: flex; flex-direction: column; gap: 0.4rem; padding: 0.85rem 1rem; background: var(--tag-bg); border-radius: var(--radius-sm); }
+.completeness-header { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+.completeness-label { font-size: var(--text-sm); font-weight: 600; color: var(--text-primary); }
+.completeness-pct { font-family: var(--font-mono); font-size: 1.15rem; font-weight: 700; color: var(--accent-color); }
+.progress-bar-bg { width: 100%; height: 8px; overflow: hidden; background: var(--border-subtle); border-radius: 4px; }
+.progress-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--accent-color), color-mix(in srgb, var(--accent-color) 70%, #10b981)); transition: width 0.4s ease; }
+.completeness-meta { display: flex; flex-direction: column; gap: 0.15rem; font-size: var(--text-xs); color: var(--text-secondary); }
+.completeness-desc { color: var(--text-muted); line-height: 1.35; }
+.html-inventory-card { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1rem; padding: 1rem; background: var(--tag-bg); border-radius: var(--radius-sm); }
+.html-inventory-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.html-inventory-title { margin: 0; font-size: var(--text-base); color: var(--text-primary); }
+.html-inventory-desc { margin: 0.2rem 0 0; font-size: var(--text-xs); color: var(--text-muted); }
+.html-inventory-total { font-family: var(--font-mono); font-size: var(--text-lg); color: var(--accent-color); white-space: nowrap; }
+.html-inventory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 0.65rem; }
+.html-inventory-item { display: flex; flex-direction: column; gap: 0.15rem; padding: 0.65rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); }
+.html-inventory-item strong { font-family: var(--font-mono); font-size: var(--text-lg); color: var(--text-primary); }
+.html-inventory-item span, .html-standalone-links { font-size: var(--text-xs); color: var(--text-muted); }
+.html-standalone-links { display: flex; flex-wrap: wrap; gap: 0.35rem 0.7rem; }
+.html-standalone-links a { color: var(--accent-color); text-underline-offset: 2px; }
+@media (max-width: 700px) { .html-inventory-header { flex-direction: column; } }
+.health-growth-section { margin-top: 1.25rem; }
+.health-growth-section h4 { margin: 0 0 0.25rem; font-family: var(--font-heading); font-size: 1rem; color: var(--text-primary); }
+.health-caption { margin: 0 0 0.75rem; font-size: var(--text-xs); color: var(--text-muted); }
+.growth-metrics-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.85rem; }
+.growth-metric-btn {
+  display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.4rem 0.75rem; cursor: pointer;
+  border: 1px solid var(--border-color); border-radius: var(--radius-full); background: var(--card-bg);
+  color: var(--text-secondary); font-family: var(--font-body); font-size: var(--text-xs); transition: all 0.15s ease;
+}
+.growth-metric-btn:hover { background: var(--hover-bg); color: var(--text-primary); }
+.growth-metric-btn.is-active {
+  background: color-mix(in srgb, var(--bamboo-green) 12%, var(--card-bg)); border-color: var(--bamboo-green);
+  box-shadow: 0 0 0 1px var(--bamboo-green); color: var(--text-primary); font-weight: 600;
+}
+.growth-metric-val { font-weight: 700; color: var(--text-primary); }
+.growth-metric-badge { padding: 0.05rem 0.35rem; border-radius: var(--radius-full); background: var(--tag-bg); color: var(--bamboo-green); font-size: 0.7rem; font-weight: 700; }
+.growth-chart-wrap { position: relative; height: 220px; }
+
 /* Keyword chips in search boxes (src/keyword-chips.ts); the chip itself is .search-scope-chip from roars-ui.css. */
 .search-keyword-chips { display: inline-flex; flex-wrap: wrap; row-gap: 0.3rem; }
 .search-keyword-chips[hidden] { display: none; }

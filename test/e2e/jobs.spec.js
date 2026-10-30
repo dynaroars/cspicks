@@ -1,5 +1,6 @@
 import { openDetails } from './helpers/disclosures.js';
 import { expect, test } from '@playwright/test';
+import { useDataFixtures } from './helpers/data-fixtures.js';
 
 const day = offset => new Date(Date.now() + offset * 86400000).toISOString().slice(0, 10);
 const jobs = [
@@ -12,8 +13,8 @@ Hai Duong,George Mason University,https://example.test/hai,hai,0000-0001-2345-67
 Alice Example,Univ. of Illinois at Urbana-Champaign,https://example.test/alice,alice,0000-0000-0000-0000
 `;
 const authorInfo = `name,area,year,count,adjustedcount
-Hai Duong,icse,${new Date().getFullYear()},2,1
-Alice Example,pldi,${new Date().getFullYear()},2,1
+Hai Duong,icse,${new Date().getFullYear() - 1},2,1
+Alice Example,pldi,${new Date().getFullYear() - 1},2,1
 `;
 const institutions = `institution,region,countryabbrv,homepage
 George Mason University,northamerica,us,https://cs.gmu.test/
@@ -22,6 +23,7 @@ Univ. of Illinois at Urbana-Champaign,northamerica,us,https://cs.illinois.test/
 
 test.beforeEach(async ({ page }) => {
   await page.route('**/jobs.json', route => route.fulfill({ json: jobs }));
+  await useDataFixtures(page, ['labs']);
   await page.route('https://raw.githubusercontent.com/**', route => {
     const url = route.request().url();
     if (url.endsWith('/csrankings.csv')) return route.fulfill({ body: csrankings, contentType: 'text/csv' });

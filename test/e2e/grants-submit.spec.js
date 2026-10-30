@@ -1,4 +1,9 @@
 import { expect, test } from '@playwright/test';
+import { useDataFixtures } from './helpers/data-fixtures.js';
+
+test.beforeEach(async ({ page }) => {
+  await useDataFixtures(page, ['grants']);
+});
 
 test('Grants submit page supports both new award submission and existing award editing', async ({ page }) => {
   await page.goto('grants-submit.html');

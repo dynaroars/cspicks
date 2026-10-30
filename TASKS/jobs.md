@@ -55,8 +55,8 @@ set for schools outside CSRankings), `lastCheckedAt`, `outcome`, `summary`, `che
 between runs, so **always write a row back after visiting a school, including when nothing was open.** Many departments post late (hiring
 season runs August to January), so a zero-posting school is "not yet", not "never": set `outcome: complete`, and put "no open CS
 search on <date>; recheck <month>" in `summary`. The queue (`--limit N`) brings it back automatically (21 days in season).
-`scripts/data/jobs-extra-schools.json` is the seed list of non-CSRankings schools (liberal arts, R2/R3, regional/teaching,
-community colleges); register more with `npm run maintain:jobs -- --import <file.json>` (array of
+Non-CSRankings schools (liberal arts, R2/R3, regional/teaching, community colleges) are the `csrankings: false` rows;
+register more with `npm run maintain:jobs -- --import <file.json>` (array of
 `{ school, state, homepage, jobsUrl?, kind? }`; existing rows keep their crawl state). After CSRankings schools are all
 checked, work the `csrankings: false` rows next, then import new ones.
 
@@ -116,8 +116,9 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
 4. For records already in `jobs.json` for this school: if the posting is still listed, set `lastSeenAt` to today
    and refresh changed facts (and set `visaSponsorship` if the record has none yet); if it is gone or marked filled/closed on the official page, set `closedAt` to today.
    **Never delete records**: closed postings are the "older postings" archive.
-5. Record the result in the school's sources row (`lastCheckedAt`, `outcome` = `complete` | `incomplete` |
-   `blocked` | `not_found`, `summary`, `checkedUrls`, `relatedUnits`). If no hiring page can be found or the site blocks the
+5. Record the result in the school's sources row (`lastCheckedAt`, `outcome`, `summary`, `checkedUrls`, `relatedUnits`).
+   `outcome` is one of `complete` | `incomplete` | `blocked` | `not_found`; `npm test` rejects anything else. Leads
+   you found but haven't added to `jobs.json` yet make it `incomplete`. If no hiring page can be found or the site blocks the
    crawler, set `outcome` and `deferredUntil` (+21 days) and add no postings. **Unknown beats wrong**: never guess a
    deadline, rank, or area.
 
@@ -136,7 +137,7 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
 | `state`, `city` | USPS state code for US postings; province/region or empty when unspecified internationally. City as stated in the posting. |
 | `deadline` | ISO `YYYY-MM-DD`, or null when none is stated. Interpreted as Anywhere on Earth. |
 | `rolling` | `true` when the posting reviews until filled; `deadline` is then a priority date or null. |
-| `reviewBegins`, `startDate`, `postedDate` | ISO dates, only when the posting states them. |
+| `reviewBegins`, `startDate`, `postedDate` | ISO dates, only when the posting states them. `startDate` may be `YYYY-MM` or `YYYY` when the posting gives only a month or year; "Fall 2027" is `2027` (a season is not a month). Fields not in this table are rejected by `npm test`. |
 | `lastSeenAt` | ISO date the posting was last confirmed live. Required. |
 | `closedAt` | ISO date the posting was seen closed/filled; omit while open. |
 | `visaSponsorship` | What the official posting itself says about visa / work-authorization sponsorship for international candidates: `yes` (it will sponsor, e.g. "H-1B sponsorship available"), `no` ("no visa sponsorship", "must be authorized to work in the US without sponsorship"), `case-by-case` ("may be considered", "eligible for sponsorship"), or `not-stated` (read it; it says nothing). Omit until someone has read the posting for it. Never infer from a university-wide HR policy, the school's reputation, or a third-party board; "sponsored research" is not visa sponsorship. |

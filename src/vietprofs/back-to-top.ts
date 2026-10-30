@@ -3,7 +3,7 @@
 export function setupBackToTop(button: HTMLElement | null, threshold = 300) {
   if (!button) return;
   const sync = () => {
-    (button as any).hidden = window.scrollY <= threshold;
+    button.hidden = window.scrollY <= threshold;
   };
   window.addEventListener('scroll', sync, { passive: true });
   button.addEventListener('click', () => {
