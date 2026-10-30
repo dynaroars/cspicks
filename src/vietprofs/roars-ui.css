@@ -2,8 +2,9 @@
  * Shared roars.dev UI baseline: design tokens, the search field and its suggestion list / help
  * popover / command output (search-kit.ts), header icon links, tags, tooltips, and the floating
  * "+" and back-to-top buttons.
- * VietProfs is the source of truth; cspicks vendors this file verbatim (src/vietprofs/, via npm run sync:vietprofs-ui there).
- * Keep it free of site-specific selectors so both sites can use it unchanged.
+ * VietProfs is the source of truth; cspicks and the GMU CS people directory vendor this file
+ * verbatim (src/vietprofs/, via npm run sync:vietprofs-ui in each).
+ * Keep it free of site-specific selectors so every consumer can use it unchanged.
  */
 :root {
   color-scheme: light dark;
