@@ -258,7 +258,14 @@ function setupForm() {
   }));
 
   target.addEventListener('input', () => showSuggestions(target.value.trim().toLocaleLowerCase()));
-  target.addEventListener('blur', () => window.setTimeout(hideSuggestions, 150));
+  // Pressing a suggestion keeps focus in the input, so blur means focus really left (Tab into the list is fine).
+  suggestions.addEventListener('mousedown', event => event.preventDefault());
+  target.addEventListener('blur', event => {
+    if (!(event.relatedTarget instanceof Node && suggestions.contains(event.relatedTarget))) hideSuggestions();
+  });
+  suggestions.addEventListener('focusout', event => {
+    if (!(event.relatedTarget instanceof Node && (suggestions.contains(event.relatedTarget) || event.relatedTarget === target))) hideSuggestions();
+  });
   suggestions.addEventListener('click', event => {
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-index]') : null;
     const entry = button ? matches[Number(button.dataset.index)] : undefined;

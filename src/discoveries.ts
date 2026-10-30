@@ -53,14 +53,18 @@ export async function fetchDiscoveriesNsfData() {
 const flashTimers = new WeakMap<HTMLElement, ReturnType<typeof setTimeout>>();
 
 function flashShareButton(button: HTMLElement, message: string) {
-  const original = button.getAttribute('title');
+  // The status span is what screen readers announce; a title change alone is silent.
+  const status = button.querySelector('[role="status"]');
+  if (status) status.textContent = message;
+  if (!flashTimers.has(button)) button.dataset.title = button.getAttribute('title') ?? '';
   button.setAttribute('title', message);
   button.classList.add('is-flashed');
   clearTimeout(flashTimers.get(button));
   flashTimers.set(button, setTimeout(() => {
-    if (original === null) button.removeAttribute('title');
-    else button.setAttribute('title', original);
+    button.setAttribute('title', button.dataset.title ?? '');
+    if (status) status.textContent = '';
     button.classList.remove('is-flashed');
+    flashTimers.delete(button);
   }, 1800));
 }
 
@@ -127,7 +131,7 @@ export function renderDiscoveries(rawData: RawData, filters: FilterController, n
     return `
     <section class="discovery-card ${className}" id="${id}">
       <h3>${escapeHtml(title)} <span class="tooltip-trigger discovery-info" tabindex="0" aria-label="About ${escapeHtml(title)}">ⓘ<span class="tooltip-content">${escapeHtml(help)}</span></span>
-        <button type="button" class="share-button discovery-share" data-share-id="${id}" data-share-title="${escapeHtml(title)}" aria-label="Copy link to ${escapeHtml(title)}" title="Copy link">${shareIcon}</button>
+        <button type="button" class="share-button discovery-share" data-share-id="${id}" data-share-title="${escapeHtml(title)}" aria-label="Copy link to ${escapeHtml(title)}" title="Copy link">${shareIcon}<span class="visually-hidden" role="status"></span></button>
       </h3>
       ${body}
     </section>`;

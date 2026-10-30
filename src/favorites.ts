@@ -29,8 +29,11 @@ export function createFavoritesStore(storageKey: string): FavoritesStore {
     }
   }
 
+  // Throws when storage is blocked or full, so the star never claims a save that didn't happen.
   function save(ids: Set<string>) {
-    storage()?.setItem(storageKey, JSON.stringify([...ids]));
+    const local = storage();
+    if (!local) throw new Error('Browser storage is unavailable');
+    local.setItem(storageKey, JSON.stringify([...ids]));
   }
 
   function isFavorite(id: string) {
@@ -71,7 +74,13 @@ export function wireFavoriteToggles(container: HTMLElement, store: FavoritesStor
     if (!button) return;
     const id = button.dataset.favoriteId;
     if (!id) return;
-    applyFavoriteToggle(button, store.toggle(id));
+    try {
+      applyFavoriteToggle(button, store.toggle(id));
+    } catch {
+      const message = 'Could not save the star: this browser is blocking site storage';
+      button.setAttribute('title', message);
+      button.setAttribute('aria-label', message);
+    }
   });
 }
 
