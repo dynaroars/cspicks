@@ -33,8 +33,10 @@ inside those windows.
 Spread rule (token budget): the owner's other routines (VietProfs: audit 03:00, links 05:00, discover
 08:00, portraits/honors 11:00, relationships 14:00 UTC, Mon-Sat) share the same usage limit that resets
 every ~5 hours. So the CS Picks routines sit in the otherwise idle 16:00-02:00 UTC stretch: no more than
-two routines of the two repos start within any 3 hours, and the two Opus audits are 13 hours apart.
-Check VietProfs' times before moving anything here.
+two routines of the three repos start within any 3 hours, and the two Opus audits are 13 hours apart.
+The GMU CS directory (`../people`, TASKS/AUTOMATION.md) runs weekly in slots both repos leave free:
+producers Sunday 05:00, 08:00, 11:00, 14:00 and an Opus audit Monday 10:30 UTC.
+Check VietProfs' and People's times before moving anything here.
 
 | Key | Routine id | Model | Cron (UTC) | ET | Section |
 | :-- | :-- | :-- | :-- | :-- | :-- |
