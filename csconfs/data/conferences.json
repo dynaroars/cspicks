@@ -27815,7 +27815,7 @@
     "description": "ACM Symposium on Operating Systems Principles",
     "link": "https://sigops.org/s/conferences/sosp/2027/",
     "seriesLink": "https://sosp.org/",
-    "date": null,
+    "date": "November 30 – December 3, 2027",
     "place": "Vancouver, Canada",
     "abstractDeadline": null,
     "deadline": null,
@@ -57788,7 +57788,7 @@
     "deadline": "2027-09-15",
     "rebuttalDate": null,
     "notificationDate": null,
-    "note": "Venue (Riocentro) and paper deadline taken from the IEEE RAS event page; no edition website yet, so the timeline stays unconfirmed.",
+    "note": "Venue (Riocentro) and paper deadline taken from the IEEE RAS event page (the sponsor's official listing); no edition website yet.",
     "generalChair": null,
     "programChair": null,
     "acceptanceRate": null,
@@ -57801,8 +57801,8 @@
     "description": "IEEE International Conference on Robotics and Automation",
     "link": "https://www.ieee-ras.org/event/2028-ieee-international-conference-on-robotics-and-automation-icra-74101/",
     "seriesLink": null,
-    "estimated": true,
-    "verified": false
+    "estimated": false,
+    "verified": true
   },
   {
     "date": "May 7–12, 2029",
