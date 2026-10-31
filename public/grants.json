@@ -1041,7 +1041,8 @@
       "Robotics"
     ],
     "url": "https://www.hertzfoundation.org/hertz-fellowship/apply/",
-    "featured": true
+    "featured": true,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "qualcomm-innovation-fellowship",
@@ -1486,7 +1487,7 @@
     "whoFor": "Undergraduate students in North American universities showing outstanding CS research potential",
     "deadline": "October 14, 2026 at 9:00 PM ET (Annual mid-October; department nomination limit applies)",
     "deadlineMonth": 10,
-    "amount": "National recognition, financial award for winners, and travel support to major CS research conferences",
+    "amount": "Up to $1,500 per recipient to attend a research conference of choice, plus national recognition (runners-up, finalists, honorable mentions also named)",
     "summary": "Celebrates North American undergraduate students who show exceptional potential in computer science research. Nominated by their department chair, winners frequently author publications at top peer-reviewed conferences.",
     "eligibility": [
       "Enrolled as an undergraduate at a North American university",
@@ -1502,8 +1503,9 @@
       "HCI",
       "Graphics"
     ],
-    "url": "https://cra.org/cra-awards/undergraduate-researcher-award/",
-    "featured": true
+    "url": "https://cra.org/crae/awards/cra-outstanding-undergraduate-researchers/",
+    "featured": true,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "cra-wp-grad-fellowship",
@@ -3004,7 +3006,8 @@
       "Service"
     ],
     "url": "https://aaai.org/about-aaai/aaai-awards/aaai-senior-member-status/",
-    "featured": true
+    "featured": true,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "aaai-fellow",
@@ -3032,7 +3035,8 @@
       "Service"
     ],
     "url": "https://aaai.org/about-aaai/aaai-awards/the-aaai-fellows-program/aaai-fellows-nomination-letter/",
-    "featured": true
+    "featured": true,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "siam-fellow",
@@ -3121,7 +3125,8 @@
       "Multi-Agent Systems"
     ],
     "url": "https://aaai.org/about-aaai/aaai-awards/aaai-acm-sigai-doctoral-dissertation-award/aaai-acm-sigai-doctoral-dissertation-award-call/",
-    "featured": true
+    "featured": true,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "acm-sigcomm-dissertation",
@@ -3208,7 +3213,8 @@
       "Program Analysis"
     ],
     "url": "https://www2.sigsoft.org/awards/dissertation/",
-    "featured": false
+    "featured": false,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "acm-sigmod-jim-gray-dissertation",
@@ -3297,7 +3303,8 @@
       "Cyber-Physical Systems"
     ],
     "url": "https://www.sigmetrics.org/awards.shtml",
-    "featured": false
+    "featured": false,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "acm-w-rising-star",
@@ -3355,7 +3362,8 @@
       "Early Career"
     ],
     "url": "https://sigsac.hosting.acm.org/award/early-career-award.html",
-    "featured": false
+    "featured": false,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "acm-sigmetrics-rising-star",
@@ -3441,7 +3449,8 @@
       "Research Innovation"
     ],
     "url": "https://sigops.org/awards/mw/",
-    "featured": false
+    "featured": false,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "acm-ieee-george-michael-hpc-fellowship",
@@ -3868,7 +3877,8 @@
       "Professional Recognition"
     ],
     "url": "https://www.computer.org/volunteering/awards/technical-achievement/",
-    "featured": false
+    "featured": false,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "ieee-cs-mcdowell-award",
@@ -3896,7 +3906,8 @@
       "Computing Education"
     ],
     "url": "https://www.computer.org/volunteering/awards/mcdowell",
-    "featured": false
+    "featured": false,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "ieee-cs-harry-goode-award",
@@ -3924,7 +3935,8 @@
       "Professional Recognition"
     ],
     "url": "https://www.computer.org/volunteering/awards/goode",
-    "featured": false
+    "featured": false,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "ieee-cs-mary-keller-education-award",
@@ -3952,7 +3964,8 @@
       "Professional Recognition"
     ],
     "url": "https://www.computer.org/volunteering/awards/cse-undergrad-teaching",
-    "featured": false
+    "featured": false,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "ieee-tchpc-early-career-award",
@@ -4023,7 +4036,7 @@
       "Postdocs"
     ],
     "whoFor": "Early post-PhD researchers making exceptional contributions to software engineering",
-    "deadline": "October 6 registration; October 20 nomination (2026 award cycle)",
+    "deadline": "2026 award cycle (presented at ICSE 2026): registration October 6, 2025; nomination October 20, 2025 (the official page still lists these 2025 dates; next call not yet posted)",
     "deadlineMonth": 10,
     "amount": "Plaque and presentation at the IEEE/ACM International Conference on Software Engineering",
     "summary": "Recognizes unusually strong contributions to software engineering or software development early in a post-PhD career.",
@@ -4039,7 +4052,8 @@
       "Research Impact"
     ],
     "url": "https://tc.computer.org/tcse/2026-tcse-awards-call-for-nominations/",
-    "featured": false
+    "featured": false,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "acm-sigir-early-career-researcher",
@@ -5898,7 +5912,8 @@
       "Systems"
     ],
     "url": "https://www.gf.org",
-    "featured": true
+    "featured": true,
+    "lastVerifiedAt": "2026-10-31"
   },
   {
     "id": "macarthur-fellowship",
