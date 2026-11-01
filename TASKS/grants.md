@@ -149,3 +149,16 @@ Run the "AI Tool Access & Compute Credits for Scientists" queries every time, th
 categories above, starting with the one least represented in recent PRs. Dedup against
 every `id`, `name`, and `url` in `grants.json` and open PRs. Each entry needs an official call page; skip programs
 known only from third-party lists.
+
+Name queries for flagship programs mostly return entries we already have. Each run, also take **one specialist
+inventory**, list its programs, and research only the ones missing from `grants.json` (a set comparison, not a copy
+of the list). Rotate among:
+- University external-fellowship pages, e.g. [Georgia Tech](https://grad.gatech.edu/graduate-student-fellowships-and-funding)
+  (found DOE SCGSR). They mix internal awards and other disciplines; confirm CS relevance on the sponsor's page.
+- [ComputeFinder](https://computefinder.net/free-compute) and providers' own research-program catalogs for compute
+  access (TPU Research Cloud, AWS research credits, NAIRR). Credits, allocated hardware, and cash are different terms.
+- Scientific-software and society program pages (BSSw, Institute for Research Software, ACM SIGs, SIGHPC).
+
+A dated deadline outranks a generic banner: BSSw's page kept saying applications were open after its stated firm
+deadline. Record the dated cycle as past; never invent an extension or next-cycle date, and don't mark the program
+discontinued.

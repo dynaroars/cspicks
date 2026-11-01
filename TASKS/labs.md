@@ -62,6 +62,17 @@ Individual openings at these labs go in the jobs roster with the [jobs.md](jobs.
 2. Watch for renames and mergers (Google Brain → Google DeepMind in 2023; NREL → National Laboratory of the
    Rockies in December 2025) and keep the old name in `aka`.
 3. Set `checkedAt` on every lab you confirmed.
+4. Add up to two missing labs (see "Discovering new labs").
+
+## Discovering new labs
+
+The directory started from the largest AI vendors and national labs. Gaps are mostly established, publication-oriented
+industrial labs one tier down, e.g. Mitsubishi Electric Research Laboratories (MERL), NEC Laboratories America, and Honda
+Research Institute USA. Check a candidate against every `id`, `name`, `aka`, and careers domain in `labs.json`, and keep
+regional arms distinct (NEC Laboratories America is not NEC Laboratories Europe). Confirm the careers pages hire
+researchers, not only product engineers. A postdoc-program description or an internship index is not an open job:
+add a posting to `jobs.json` only from its own requisition page, and check that a graduate internship targets PhD
+students, not "advanced degree" students in general (which includes master's).
 
 Sites that block scripted browsers (a 403 or challenge page) as of 2026-10-15: OpenAI, Argonne, Idaho National
 Laboratory, PNNL, Salesforce. Their URLs were confirmed by plain `curl` or by search results; check them by

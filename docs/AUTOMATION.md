@@ -231,7 +231,8 @@ Playbook: `TASKS/labs.md`. Cap: 12 labs, worked sequentially (never spawn subage
    site or ATS until the lab has about four open ones, per the playbook's rules. Set the lab's
    `postingsCheckedAt` to today in `public/labs.json`, even when nothing was found or the site was blocked (say
    which in the PR).
-3. In February and August, also do the directory link refresh from `TASKS/labs.md` for the labs in this run.
+3. In February and August, also do the directory link refresh from `TASKS/labs.md` for the labs in this run,
+   and add up to two missing labs per its "Discovering new labs" section.
 4. Open one PR listing each added posting, each `closedAt`, and blocked labs.
 
 ### Mechanical data sync (`data-sync`)
@@ -260,7 +261,8 @@ honestly and leave unknown fields `null`.
 
 Playbook: `TASKS/grants.md` ("Discovering new programs"). Always run the "AI Tool Access &
 Compute Credits for Scientists" queries, then rotate: start with the query category least
-represented in recent `[scheduled:grants-discover]` PRs. Cap: 5 new entries. Dedup
+represented in recent `[scheduled:grants-discover]` PRs. Also compare one specialist inventory against the roster,
+per the playbook. Cap: 5 new entries. Dedup
 against every `id`, `name`, and `url` in `public/grants.json` and against open PRs. Each entry
 needs an official call page; skip programs known only from third-party lists.
 
