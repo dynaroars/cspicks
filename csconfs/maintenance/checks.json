@@ -32,9 +32,9 @@
       "proposals": []
     },
     "CHES": {
-      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
       "outcome": "complete",
-      "summary": "CHES 2027 (Cancún, Sep 6-9) re-confirmed; four TCHES rounds, no single conference deadline; chairs not listed. No change.",
+      "summary": "CHES 2027 (Cancún, Sep 6-9 2027) page lists only per-volume TCHES deadlines, no conference-wide deadline; existing record already matches. No change.",
       "checkedUrls": [
         "https://ches.iacr.org/2027/"
       ],
@@ -436,34 +436,43 @@
       "proposals": []
     },
     "EuroSys": {
-      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
       "outcome": "not_found",
-      "summary": "EuroSys 2028 not announced on 2027 site or series pages. EuroSys 2027 (Rabat, Apr 19-23 2027; cycle 2 abstract Sep 17, paper Sep 24 2026) matches the record; no edits.",
+      "summary": "EuroSys 2028 not announced on eurosys.org (lists only 2026 and 2027); skeleton left estimated/unverified.",
       "checkedUrls": [
-        "https://2027.eurosys.org/",
         "https://www.eurosys.org/"
       ],
-      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "deferredUntil": "2026-11-22T20:00:00.000Z",
       "proposals": []
     },
     "FAST": {
-      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
-      "outcome": "not_found",
-      "summary": "FAST 2028 page lists no dates, location, or deadlines yet; record left unchanged.",
+      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "outcome": "incomplete",
+      "summary": "FAST 2028 official page confirms Feb 28-Mar 1 2028 and Grand Hyatt Seattle; no deadlines or chairs yet. Note updated.",
       "checkedUrls": [
         "https://www.usenix.org/conference/fast28"
       ],
-      "deferredUntil": "2026-10-31T20:14:51.448Z",
-      "proposals": []
+      "deferredUntil": "2026-11-08T20:00:00.000Z",
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2028,
+          "sources": [
+            "https://www.usenix.org/conference/fast28"
+          ]
+        }
+      ]
     },
     "ICML": {
-      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
       "outcome": "not_found",
-      "summary": "Official FutureMeetings page lists only South America (2027) and Eastern United States (2028); no dates or deadlines. Existing 2027 deadlines remain estimated.",
+      "summary": "icml.cc Future Meetings lists only region (2027 South America, 2028 Eastern US); no dates, city or deadlines; icml.cc/Conferences/2027 returns 404. Records unchanged.",
       "checkedUrls": [
-        "https://icml.cc/Conferences/FutureMeetings"
+        "https://icml.cc/",
+        "https://icml.cc/Conferences/FutureMeetings",
+        "https://icml.cc/Conferences/2027"
       ],
-      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "deferredUntil": "2026-11-22T20:00:00.000Z",
       "proposals": []
     },
     "IJCAI": {
@@ -488,24 +497,34 @@
       "proposals": []
     },
     "NeurIPS": {
-      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
       "outcome": "not_found",
-      "summary": "FutureMeetings lists only Europe (2027) and Western United States (2028); no dates or cities. No edits.",
+      "summary": "neurips.cc Future Meetings lists only Europe (2027) and Western US (2028); no dates or deadlines; /Conferences/2027/Dates is 404. Records unchanged.",
       "checkedUrls": [
-        "https://neurips.cc/Conferences/FutureMeetings"
+        "https://neurips.cc/Conferences/FutureMeetings",
+        "https://neurips.cc/Conferences/2027/Dates"
       ],
-      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "deferredUntil": "2026-11-22T20:00:00.000Z",
       "proposals": []
     },
     "SIGMOD": {
-      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
-      "outcome": "not_found",
-      "summary": "sigmod.org gives no SIGMOD 2028 location, dates, or site; only the 2027 CFP link. No edits.",
+      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "outcome": "incomplete",
+      "summary": "SIGMOD 2028 not mentioned on sigmod.org or 2027.sigmod.org. SIGMOD 2027 official page states June 13-18, 2027 (record said 13-19); corrected.",
       "checkedUrls": [
-        "https://sigmod.org/"
+        "https://sigmod.org/",
+        "https://2027.sigmod.org/"
       ],
-      "deferredUntil": "2026-10-31T20:14:51.448Z",
-      "proposals": []
+      "deferredUntil": "2026-11-08T20:00:00.000Z",
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            "https://2027.sigmod.org/"
+          ]
+        }
+      ]
     },
     "SOSP": {
       "lastCheckedAt": "2026-10-29T20:06:37.000Z",
@@ -1312,6 +1331,78 @@
         "https://icsoc.org/"
       ],
       "deferredUntil": "2026-11-21T20:05:29.000Z",
+      "proposals": []
+    },
+    "ICWS": {
+      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "servicessociety.org/icws lists only the 2026 edition; 2027 not announced. (Page shows 2026 as Aug 22-25 Kuala Lumpur vs local record July 13-18 Sydney: flagged in summary, not edited.)",
+      "checkedUrls": [
+        "https://www.servicessociety.org/icws"
+      ],
+      "deferredUntil": "2026-11-22T20:00:00.000Z",
+      "proposals": []
+    },
+    "IJCAR": {
+      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "ijcar.org lists only IJCAR 2026 Lisbon; no later edition announced.",
+      "checkedUrls": [
+        "https://ijcar.org/"
+      ],
+      "deferredUntil": "2026-11-22T20:00:00.000Z",
+      "proposals": []
+    },
+    "IMC": {
+      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "outcome": "complete",
+      "summary": "IMC 2027 found: Atlanta, Oct 25-29 2027, two cycles with deadlines, general and program chairs from committees page. Two records added.",
+      "checkedUrls": [
+        "https://conferences.sigcomm.org/imc/2027/",
+        "https://conferences.sigcomm.org/imc/2027/cfp/",
+        "https://conferences.sigcomm.org/imc/2027/committees/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://conferences.sigcomm.org/imc/2027/",
+            "https://conferences.sigcomm.org/imc/2027/committees/"
+          ]
+        }
+      ]
+    },
+    "ISLPED": {
+      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "islped.org returned only a bot-check page; could not verify a 2027 edition. Retry later.",
+      "checkedUrls": [
+        "https://islped.org/"
+      ],
+      "deferredUntil": "2026-11-22T20:00:00.000Z",
+      "proposals": []
+    },
+    "ISMAR": {
+      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "ismar.net lists only ISMAR 2026 Bari; 2027 not announced.",
+      "checkedUrls": [
+        "https://www.ismar.net/"
+      ],
+      "deferredUntil": "2026-11-22T20:00:00.000Z",
+      "proposals": []
+    },
+    "ISSRE": {
+      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "issre.net redirects to issre.github.io, which showed no 2027 information.",
+      "checkedUrls": [
+        "https://www.issre.net/",
+        "http://issre.github.io/"
+      ],
+      "deferredUntil": "2026-11-22T20:00:00.000Z",
       "proposals": []
     }
   }
