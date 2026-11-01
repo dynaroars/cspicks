@@ -104,7 +104,7 @@ export interface SearchControllerOptions {
   resolveKey?: (typed: string) => string | null | undefined;
   // Flat suggestion source: candidate values for the active scope, or for `unscopedKey`
   // ('name' by default) when no scope is active. Matched case/diacritic-insensitively,
-  // prefix matches first, capped at maxSuggestions (8).
+  // best matches first (see rankMatches), capped at maxSuggestions (8) with a count of the rest.
   getSuggestions?: (key: string) => string[];
   unscopedKey?: string;
   maxSuggestions?: number;
@@ -157,16 +157,21 @@ function debounce(fn: () => void, delayMs: number): () => void {
   };
 }
 
-function rankMatches(values: readonly string[], rawQuery: string, limit: number): string[] {
+// Every value containing the query, best first: values that start with it, then values with a
+// word that starts with it (words split on spaces and hyphens, so "phung" ranks "Tuan Phung-Duc"
+// with "Dinh Phung"), then other substring matches; alphabetical within each tier.
+export function rankMatches(values: readonly string[], rawQuery: string): string[] {
   const query = normalizeText(rawQuery);
+  const tier = (value: string) => {
+    const text = normalizeText(value);
+    if (text.startsWith(query)) return 0;
+    return text.split(/[^\p{L}\p{N}]+/u).some((word) => word.startsWith(query)) ? 1 : 2;
+  };
   return values
     .filter((v) => normalizeText(v).includes(query))
-    .sort((a, b) => {
-      const aStarts = normalizeText(a).startsWith(query);
-      const bStarts = normalizeText(b).startsWith(query);
-      return Number(bStarts) - Number(aStarts) || a.localeCompare(b);
-    })
-    .slice(0, limit);
+    .map((value) => ({ value, tier: tier(value) }))
+    .sort((a, b) => a.tier - b.tier || a.value.localeCompare(b.value))
+    .map(({ value }) => value);
 }
 
 // Focus the search box without opening its suggestion list (e.g. autofocus on page load).
@@ -293,8 +298,12 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
     const showAll =
       Boolean(scoped) && !context.query && values.length <= (opts.showAllWhenEmpty ?? 0);
     if (!context.query && !showAll) return [];
+    const matches = rankMatches(values, context.query);
     return [
-      { items: rankMatches(values, context.query, maxSuggestions).map((label) => ({ label })) },
+      {
+        items: matches.slice(0, maxSuggestions).map((label) => ({ label })),
+        total: matches.length,
+      },
     ];
   }
 
@@ -324,6 +333,14 @@ export function createSearchController(opts: SearchControllerOptions): SearchCon
         const btn = optionButton(item, nextOptions.length, context);
         nextOptions.push(btn);
         children.push(btn);
+      }
+      // An unlabeled list has no header to carry the count, so say below it that more exist.
+      if (!group.label && group.total !== undefined && group.total > group.items.length) {
+        const more = document.createElement('div');
+        more.className = 'search-suggestion search-suggestion-empty search-suggestion-more';
+        more.setAttribute('role', 'presentation');
+        more.textContent = `${group.items.length} of ${group.total} matches shown · keep typing to narrow`;
+        children.push(more);
       }
     }
     if (!nextOptions.length) {
