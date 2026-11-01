@@ -32,9 +32,9 @@
       "proposals": []
     },
     "CHES": {
-      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
       "outcome": "complete",
-      "summary": "CHES 2027 site confirms place/dates and four TCHES rounds already in the record note; no single conference deadline, so deadline stays null.",
+      "summary": "CHES 2027 (Cancún, Sep 6-9) re-confirmed; four TCHES rounds, no single conference deadline; chairs not listed. No change.",
       "checkedUrls": [
         "https://ches.iacr.org/2027/"
       ],
@@ -585,35 +585,44 @@
       "proposals": []
     },
     "ASE": {
-      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
+      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
       "outcome": "not_found",
-      "summary": "ase-conferences.org and the ASE 2026 site list nothing about ASE 2027 (dates, place, deadlines). No change.",
+      "summary": "ASE 2027 researchr page (ase-2027) returns 404; series site has no edition info reachable. Record left estimated/unverified.",
       "checkedUrls": [
-        "https://www.ase-conferences.org/",
-        "https://conf.researchr.org/home/ase-2026"
+        "https://conf.researchr.org/home/ase-2027",
+        "https://www.ase-conferences.org/"
       ],
-      "deferredUntil": "2026-10-29T20:16:09.646Z",
+      "deferredUntil": "2026-11-21T20:05:29.000Z",
       "proposals": []
     },
     "ICWSM": {
-      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
-      "outcome": "not_found",
-      "summary": "icwsm.org/2027 confirms Edinburgh, Scotland but states no dates or deadlines on the pages read (\"More information coming soon\"). No change.",
+      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "outcome": "incomplete",
+      "summary": "ICWSM 2027 submit page confirms deadlines 2026-05-15, 2026-09-15, 2027-01-15 and notifications; conference dates and chairs not published.",
       "checkedUrls": [
         "https://www.icwsm.org/2027/",
-        "https://www.icwsm.org/2027/schedule/"
+        "https://www.icwsm.org/2027/submit/"
       ],
-      "deferredUntil": "2026-10-29T20:16:09.646Z",
-      "proposals": []
+      "deferredUntil": "2026-11-07T20:05:29.000Z",
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            "https://www.icwsm.org/2027/submit/"
+          ]
+        }
+      ]
     },
     "MICRO": {
-      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
+      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
       "outcome": "not_found",
-      "summary": "microarch.org shows MICRO 2026 (Athens, Oct 31-Nov 4 2026) but nothing on MICRO 2027. No change.",
+      "summary": "micro.org has no 2027 content; micro60 page on microarch.org 404. Record left estimated/unverified.",
       "checkedUrls": [
-        "https://www.microarch.org/"
+        "https://micro.org/",
+        "https://www.microarch.org/micro60/"
       ],
-      "deferredUntil": "2026-10-29T20:16:09.646Z",
+      "deferredUntil": "2026-11-21T20:05:29.000Z",
       "proposals": []
     },
     "SenSys": {
@@ -1214,6 +1223,95 @@
         "https://www.esem-conferences.org/"
       ],
       "deferredUntil": "2026-11-19T20:06:37.000Z",
+      "proposals": []
+    },
+    "ESORICS": {
+      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "outcome": "incomplete",
+      "summary": "ESORICS 2027 announced: Vienna, Sep 13-17, 2027 (main Sep 13-15). Deadlines and chairs not published.",
+      "checkedUrls": [
+        "https://conf.laas.fr/esorics/",
+        "https://www.esorics2027.org"
+      ],
+      "deferredUntil": "2026-11-07T20:05:29.000Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://www.esorics2027.org"
+          ]
+        }
+      ]
+    },
+    "FOCS": {
+      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "outcome": "not_found",
+      "summary": "ieee-focs.org lists only FOCS 2026; no 2027 edition announced.",
+      "checkedUrls": [
+        "https://ieee-focs.org/"
+      ],
+      "deferredUntil": "2026-11-21T20:05:29.000Z",
+      "proposals": []
+    },
+    "GD": {
+      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "outcome": "not_found",
+      "summary": "graphdrawing.github.io returned 404; GD 2027 not verifiable.",
+      "checkedUrls": [
+        "https://graphdrawing.github.io/"
+      ],
+      "deferredUntil": "2026-11-21T20:05:29.000Z",
+      "proposals": []
+    },
+    "ICCAD": {
+      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "outcome": "not_found",
+      "summary": "iccad.com/2027 returned 404; no 2027 edition found.",
+      "checkedUrls": [
+        "https://iccad.com/2027"
+      ],
+      "deferredUntil": "2026-11-21T20:05:29.000Z",
+      "proposals": []
+    },
+    "ICDCS": {
+      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "outcome": "not_found",
+      "summary": "icdcs.org returned 503; could not check, retry later.",
+      "checkedUrls": [
+        "https://icdcs.org/"
+      ],
+      "deferredUntil": "2026-11-21T20:05:29.000Z",
+      "proposals": []
+    },
+    "ICDM": {
+      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "outcome": "not_found",
+      "summary": "ICDM 2026 site confirms Nov 12-15 2026 Shenyang; no 2027 edition mentioned.",
+      "checkedUrls": [
+        "https://icdm2026.neu.edu.cn/main.htm"
+      ],
+      "deferredUntil": "2026-11-21T20:05:29.000Z",
+      "proposals": []
+    },
+    "ICER": {
+      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "outcome": "not_found",
+      "summary": "icer.acm.org redirects to the 2026 site; 2027 edition not checked beyond redirect, not announced there.",
+      "checkedUrls": [
+        "https://icer.acm.org/"
+      ],
+      "deferredUntil": "2026-11-21T20:05:29.000Z",
+      "proposals": []
+    },
+    "ICSOC": {
+      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "outcome": "not_found",
+      "summary": "icsoc.org redirects to the 2026 site; no 2027 edition found.",
+      "checkedUrls": [
+        "https://icsoc.org/"
+      ],
+      "deferredUntil": "2026-11-21T20:05:29.000Z",
       "proposals": []
     }
   }
