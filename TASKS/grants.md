@@ -124,6 +124,28 @@ retained for archival research; clearly state the historical date range in
 month, or `0` for rolling/year-round/open calls (used for chronological
 sorting).
 
+### Multi-stage deadlines (whitepapers, abstracts, pre-proposals)
+
+DoD, DARPA, DOE, IARPA, the service labs (ONR, AFOSR, ARO), and many NSF/foundation calls gate
+the full proposal behind an earlier stage: a **whitepaper**, **executive summary**, **abstract**,
+**letter of intent**, **pre-proposal**, or **concept paper**. That earlier date is often the real
+deadline: a team that misses it can't submit a full proposal. So, for every entry you add or
+re-verify:
+
+- Read the solicitation itself (the BAA/FOA/NOFO/CFP document on SAM.gov or Grants.gov, or the
+  call PDF), not just the program landing page, which often lists only the final date. Also scan
+  amendments and the FAQ, which frequently move these dates.
+- Record every stage with its date in `deadline`, earliest first, e.g.
+  `Whitepaper: December 3, 2026; full proposal: February 18, 2027 (BAA HR0011-27-S-0001)`.
+  Say whether the early stage is required, encouraged, or optional, and whether full proposals are
+  by invitation only.
+- Set `deadlineMonth` to the month of the **earliest required** stage, so sorting and deadline
+  filters surface the call while it is still actionable.
+- For rolling BAAs with "whitepapers accepted any time" plus dated proposal windows, say so
+  explicitly instead of just "Rolling".
+- If the solicitation can't be reached, say the stages are unverified; never assume a call has
+  no whitepaper stage.
+
 ## Reviewing user submissions (`grants-submit.html`)
 
 When a submission arrives:
