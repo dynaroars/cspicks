@@ -31,7 +31,8 @@
       "Networks"
     ],
     "url": "https://new.nsf.gov/funding/opportunities/faculty-early-career-development-program-career",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "nsf-crii",
@@ -62,7 +63,8 @@
     ],
     "status": "historical",
     "url": "https://www.nsf.gov/funding/opportunities/crii-computer-information-science-engineering-research-initiation/504952",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "nsf-future-core",
@@ -93,7 +95,18 @@
       "Cyberinfrastructure"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Target date",
+        "date": "2027-02-04"
+      },
+      {
+        "stage": "Target date",
+        "date": "2027-09-09"
+      }
+    ]
   },
   {
     "id": "nsf-csgrad4us",
@@ -124,7 +137,9 @@
       "HCI"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/dcl-computer-information-science-engineering-graduate",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "nsf-grfp",
@@ -158,7 +173,19 @@
       "HCI"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Reference letters",
+        "date": "2026-10-16"
+      },
+      {
+        "stage": "Application (CISE)",
+        "date": "2026-10-20"
+      }
+    ],
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "darpa-yfa",
@@ -188,7 +215,18 @@
       "RF & Photonics"
     ],
     "url": "https://www.darpa.mil/work-with-us/communities/academia/young-faculty-award",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Executive summary",
+        "date": "2026-11-05"
+      },
+      {
+        "stage": "Full proposal",
+        "date": "2027-01-13"
+      }
+    ]
   },
   {
     "id": "darpa-open-baa",
@@ -217,7 +255,8 @@
       "Quantum"
     ],
     "url": "https://www.darpa.mil/work-with-us/opportunities",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "doe-early-career",
@@ -246,7 +285,18 @@
       "Exascale Systems"
     ],
     "url": "https://science.osti.gov/early-career",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Pre-application",
+        "date": "2026-03-24"
+      },
+      {
+        "stage": "Full proposal",
+        "date": "2026-06-02"
+      }
+    ]
   },
   {
     "id": "doe-csgf",
@@ -276,7 +326,9 @@
       "Algorithms"
     ],
     "url": "https://www.krellinst.org/csgf/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "doe-visiting-faculty-program",
@@ -305,7 +357,9 @@
       "STEM Education"
     ],
     "url": "https://science.osti.gov/wdts/vfp",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-14",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "onr-yip",
@@ -336,7 +390,9 @@
       "Cyber-Physical Systems"
     ],
     "url": "https://www.onr.navy.mil/assets/2026-08/FY27-YIP-NOFO-N0001426SF004.pdf",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "onr-cnr-fellows",
@@ -367,7 +423,9 @@
       "Defense Research"
     ],
     "url": "https://www.onr.navy.mil/education-outreach/sponsored-research/cnr-fellows-program",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-14",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "afosr-yip",
@@ -380,7 +438,7 @@
     ],
     "whoFor": "Early-career scientists and engineers at eligible academic, industry, or nonprofit research organizations",
     "deadline": "Required white paper: October 9, 2026 at 11:59 PM ET; Full proposal: December 4, 2026 at 11:59 PM ET (Annual program; FY2027; FA955026S0003)",
-    "deadlineMonth": 12,
+    "deadlineMonth": 10,
     "amount": "Up to $450,000 over 3 years ($150,000/year)",
     "summary": "Fosters creative basic research in science and engineering, enhances early-career development of outstanding young investigators, and increases engagement with Air Force and Space Force mission challenges. White papers are required before full proposals.",
     "eligibility": [
@@ -398,7 +456,20 @@
       "Computational Science"
     ],
     "url": "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "White paper",
+        "date": "2026-10-09",
+        "required": true
+      },
+      {
+        "stage": "Full proposal",
+        "date": "2026-12-04"
+      }
+    ],
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "aro-early-career",
@@ -426,7 +497,9 @@
       "Quantum Information"
     ],
     "url": "https://www.arl.army.mil/who-we-are/directorates/aro/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "ndseg-fellowship",
@@ -458,7 +531,9 @@
       "Computer Vision"
     ],
     "url": "https://ndseg.sysplus.com/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen"
   },
   {
     "id": "dod-smart-scholarship",
@@ -491,7 +566,9 @@
       "Robotics"
     ],
     "url": "https://www.smartscholarship.org/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "citizenship": "other"
   },
   {
     "id": "nih-r01-r21-cs",
@@ -520,7 +597,8 @@
       "Algorithms for Genomics"
     ],
     "url": "https://grants.nih.gov/grants/how-to-apply-application-guide.html",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "nasa-nstgro",
@@ -552,7 +630,19 @@
       "Embedded Systems"
     ],
     "url": "https://www.nasa.gov/nasa-space-technology-graduate-research-opportunities-nstgro/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Application",
+        "date": "2026-01-29"
+      },
+      {
+        "stage": "Recommendation letters",
+        "date": "2026-02-03"
+      }
+    ],
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "nasa-esi-ecf",
@@ -579,7 +669,18 @@
       "Radiation-Tolerant Architectures"
     ],
     "url": "https://www.nasa.gov/early-career-faculty-ecf/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Notice of intent",
+        "date": "2025-06-10"
+      },
+      {
+        "stage": "Full proposal",
+        "date": "2025-07-10"
+      }
+    ]
   },
   {
     "id": "google-phd-fellowship",
@@ -611,7 +712,8 @@
       "HCI"
     ],
     "url": "https://research.google/programs-and-events/phd-fellowship/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "google-research-scholar",
@@ -643,7 +745,8 @@
     ],
     "url": "https://research.google/programs-and-events/frequently-asked-questions/",
     "featured": false,
-    "status": "historical"
+    "status": "historical",
+    "addedAt": "2026-08-26"
   },
   {
     "id": "amazon-research-awards",
@@ -675,7 +778,8 @@
       "Multilingual AI"
     ],
     "url": "https://www.amazon.science/research-awards/call-for-proposals",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "amazon-phd-fellowship",
@@ -705,7 +809,8 @@
       "Computer Vision"
     ],
     "url": "https://www.amazon.science/research-awards/fellowships",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "meta-phd-fellowship",
@@ -737,7 +842,9 @@
     ],
     "url": "https://research.facebook.com/fellows/",
     "featured": false,
-    "status": "historical"
+    "status": "historical",
+    "addedAt": "2026-08-26",
+    "citizenship": "open"
   },
   {
     "id": "meta-research-awards",
@@ -767,7 +874,8 @@
     ],
     "url": "https://research.facebook.com/research-awards/",
     "status": "historical",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "microsoft-phd-fellowship",
@@ -797,7 +905,8 @@
     ],
     "url": "https://www.microsoft.com/en-us/research/academic-program/phd-fellowship/",
     "featured": false,
-    "status": "historical"
+    "status": "historical",
+    "addedAt": "2026-08-26"
   },
   {
     "id": "microsoft-faculty-fellowship",
@@ -829,7 +938,8 @@
     ],
     "url": "https://www.microsoft.com/en-us/research/academic-program/faculty-fellowship/",
     "status": "historical",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "apple-phd-fellowship",
@@ -858,7 +968,8 @@
       "Robotics"
     ],
     "url": "https://machinelearning.apple.com/work-with-us",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "nvidia-graduate-fellowship",
@@ -890,7 +1001,9 @@
       "High Performance Computing"
     ],
     "url": "https://research.nvidia.com/graduate-fellowships",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "citizenship": "open"
   },
   {
     "id": "nvidia-hardware-grant",
@@ -916,7 +1029,8 @@
       "Scientific Computing"
     ],
     "url": "https://www.nvidia.com/en-us/industries/higher-education-research/academic-grant-program/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "sloan-research-fellowship",
@@ -946,7 +1060,8 @@
       "Graphics & Vision"
     ],
     "url": "https://sloan.org/fellowships",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "packard-fellowship",
@@ -977,7 +1092,18 @@
       "Applied Mathematics"
     ],
     "url": "https://www.packard.org/approach/fellowships-for-science-engineering/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Institutional nomination",
+        "date": "2026-03-15"
+      },
+      {
+        "stage": "Application and letters",
+        "date": "2026-04-20"
+      }
+    ]
   },
   {
     "id": "simons-investigators-cs",
@@ -1008,7 +1134,8 @@
     ],
     "url": "https://www.simonsfoundation.org/grant/simons-investigators/",
     "featured": false,
-    "status": "historical"
+    "status": "historical",
+    "addedAt": "2026-08-26"
   },
   {
     "id": "hertz-fellowship",
@@ -1042,7 +1169,19 @@
     ],
     "url": "https://www.hertzfoundation.org/hertz-fellowship/apply/",
     "featured": true,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Application",
+        "date": "2026-10-30"
+      },
+      {
+        "stage": "Recommender evaluations",
+        "date": "2026-11-02"
+      }
+    ],
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "qualcomm-innovation-fellowship",
@@ -1072,7 +1211,19 @@
       "Security"
     ],
     "url": "https://www.qualcomm.com/research/university-relations/innovation-fellowship/2027-north-america",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Application / abstract",
+        "date": "2026-10-19"
+      },
+      {
+        "stage": "Full proposal",
+        "date": "2026-12-01",
+        "note": "Selected teams only"
+      }
+    ]
   },
   {
     "id": "ibm-phd-fellowship",
@@ -1103,7 +1254,8 @@
       "Semiconductors"
     ],
     "url": "https://research.ibm.com/labs/yorktown-heights/ibm-academic-awards-program",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "sony-research-award",
@@ -1133,7 +1285,8 @@
       "Human-Computer Interaction"
     ],
     "url": "https://www.sony.com/en/SonyInfo/research-award-program/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "adobe-research-fellowship",
@@ -1164,7 +1317,8 @@
       "Databases and Systems Research"
     ],
     "url": "https://research.adobe.com/india-ai-research-fellowship/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "adobe-data-science-awards",
@@ -1192,7 +1346,8 @@
       "Information Visualization"
     ],
     "url": "https://research.adobe.com/data-science-research-awards/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "adobe-women-in-tech",
@@ -1220,7 +1375,8 @@
       "Data Science"
     ],
     "url": "https://research.adobe.com/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "bloomberg-ds-fellowship",
@@ -1249,7 +1405,8 @@
       "Knowledge Graphs"
     ],
     "url": "https://www.bloomberg.com/company/values/tech-at-bloomberg/data-science/academic-engagement-programs/data-science-ph-d-fellowship/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "cisco-research-rfps",
@@ -1277,7 +1434,8 @@
       "Conference Sponsorships"
     ],
     "url": "https://research.cisco.com/open-rfps",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "bell-labs-prize",
@@ -1305,7 +1463,8 @@
       "Robotics & Automation"
     ],
     "url": "https://www.bell-labs.com/collaboration-opportunities/prize/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "jpmorgan-ai-awards",
@@ -1333,7 +1492,8 @@
       "Cryptography"
     ],
     "url": "https://www.jpmorgan.com/US/en/technology/artificial-intelligence",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "intel-faculty-awards",
@@ -1357,7 +1517,8 @@
       "Academic Research"
     ],
     "url": "https://www.intel.com/content/www/us/en/research/academic-collaborations.html",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "samsung-gro",
@@ -1386,7 +1547,8 @@
       "Semiconductor Processes"
     ],
     "url": "https://semiconductor.samsung.com/sait/event/global-research-outreach/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "draper-scholar-program",
@@ -1417,7 +1579,9 @@
       "Space Technology"
     ],
     "url": "https://www.draper.com/education-programs/draper-scholars-program",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen"
   },
   {
     "id": "snap-research-fellowship",
@@ -1445,7 +1609,8 @@
       "Computational Photography"
     ],
     "url": "https://research.snap.com/fellowships.html",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "symantec-norton-fellowship",
@@ -1473,7 +1638,8 @@
       "Applied Cryptography"
     ],
     "url": "https://www.gendigital.com/us/en/careers/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "cra-undergrad-award",
@@ -1505,7 +1671,8 @@
     ],
     "url": "https://cra.org/crae/awards/cra-outstanding-undergraduate-researchers/",
     "featured": true,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-26"
   },
   {
     "id": "cra-wp-grad-fellowship",
@@ -1533,7 +1700,8 @@
       "Computer Engineering"
     ],
     "url": "https://cra.org/cra-wp/cra-graduate-fellowship/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "acm-doctoral-dissertation",
@@ -1564,7 +1732,8 @@
       "Computer Graphics"
     ],
     "url": "https://awards.acm.org/doctoral-dissertation",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "gem-fellowship",
@@ -1595,7 +1764,9 @@
       "Cybersecurity"
     ],
     "url": "https://www.gemfellowship.org/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "ford-foundation-fellowship",
@@ -1625,7 +1796,9 @@
     ],
     "url": "https://sites.nationalacademies.org/pga/fordfellowships/",
     "featured": false,
-    "status": "historical"
+    "status": "historical",
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "aaas-stpf",
@@ -1656,7 +1829,9 @@
       "National Security"
     ],
     "url": "https://www.aaas.org/programs/science-technology-policy-fellowships",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen"
   },
   {
     "id": "schlumberger-faculty-future",
@@ -1686,7 +1861,9 @@
       "Environmental CS"
     ],
     "url": "https://www.fftf.slb.com/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "citizenship": "other"
   },
   {
     "id": "mozilla-technology-fund",
@@ -1716,7 +1893,8 @@
       "Web Standards"
     ],
     "url": "https://foundation.mozilla.org/en/what-we-fund/awards/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "latticex-foundation-grants",
@@ -1745,7 +1923,8 @@
       "Decentralized Systems"
     ],
     "url": "https://latticex.foundation/grants",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "netapp-faculty-grants",
@@ -1773,7 +1952,8 @@
       "Cloud Infrastructure"
     ],
     "url": "https://www.netapp.com/atg/research-grants/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "qualcomm-faculty-awards",
@@ -1800,7 +1980,8 @@
       "Edge Computing"
     ],
     "url": "https://www.qualcomm.com/research/university-relations",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "vmware-academic-program",
@@ -1827,7 +2008,8 @@
       "Formal Verification"
     ],
     "url": "https://www.vmware.com/company/research/faculty-programs.html",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "consumer-reports-digital-lab",
@@ -1857,7 +2039,8 @@
       "Digital Rights"
     ],
     "url": "https://digital-lab.consumerreports.org",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "comcast-innovative-research",
@@ -1885,7 +2068,8 @@
       "Network Telemetry"
     ],
     "url": "https://tech.comcast.com",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "att-labs-fellowship",
@@ -1916,7 +2100,9 @@
       "Cybersecurity"
     ],
     "url": "https://www.research.att.com/programs/fellowships",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "huawei-research-fellowship",
@@ -1945,7 +2131,9 @@
       "Distributed AI"
     ],
     "url": "https://www.huawei.com/en/industry-insights/industry/huawei-research-fellowship-program",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "citizenship": "open"
   },
   {
     "id": "xerox-technical-minority",
@@ -1975,7 +2163,9 @@
       "Data Analytics"
     ],
     "url": "https://www.xerox.com/en-us/jobs/minority-scholarships",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "schmidt-sciences-ai2050",
@@ -2004,7 +2194,8 @@
       "Interdisciplinary"
     ],
     "url": "https://www.schmidtsciences.org/ai2050/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "openai-academic-researcher-grants",
@@ -2039,7 +2230,8 @@
       "Multimodal Measurement"
     ],
     "url": "https://openai.com/form/researcher-access-program/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "openai-chatgpt-academic-researchers",
@@ -2066,7 +2258,8 @@
       "Systems"
     ],
     "url": "https://openai.com/index/chatgpt-for-academic-researchers/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "anthropic-ai-for-science",
@@ -2094,7 +2287,8 @@
       "AI for Science"
     ],
     "url": "https://www.anthropic.com/news/expanding-support-for-scientists",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "anthropic-fellows-program",
@@ -2124,7 +2318,9 @@
       "Systems"
     ],
     "url": "https://job-boards.greenhouse.io/anthropic/jobs/5183044008",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "citizenship": "other"
   },
   {
     "id": "bwf-casi-award",
@@ -2154,7 +2350,20 @@
       "Theory"
     ],
     "url": "https://www.bwfund.org/funding-opportunities/interfaces-in-science/career-awards-at-the-scientific-interface/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Letter of intent",
+        "date": "2026-08-14"
+      },
+      {
+        "stage": "Full proposal",
+        "date": "2027-01-11",
+        "note": "By invitation only"
+      }
+    ],
+    "citizenship": "other"
   },
   {
     "id": "nsf-satc",
@@ -2185,7 +2394,8 @@
       "HCI"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/nsf-satc-us-national-science-foundation-security-privacy-trust/nsf25-515/solicitation",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "nsf-ai-institutes",
@@ -2215,7 +2425,8 @@
       "Interdisciplinary"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/national-artificial-intelligence-research-institutes",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "nsf-robotics-frr",
@@ -2245,7 +2456,8 @@
       "HCI"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/frr-foundational-research-robotics",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "nsf-shf",
@@ -2274,7 +2486,20 @@
       "Logic & Verification"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing/nsf25-543/solicitation",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Target date",
+        "date": "2027-02-04",
+        "note": "Projected from NSF 25-543"
+      },
+      {
+        "stage": "Target date",
+        "date": "2027-09-09",
+        "note": "Projected from NSF 25-543"
+      }
+    ]
   },
   {
     "id": "nsf-algorithmic-foundations",
@@ -2303,7 +2528,8 @@
       "Econ & Computation"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "nsf-cyber-physical-systems",
@@ -2333,7 +2559,8 @@
       "Security"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "nsf-pose",
@@ -2362,7 +2589,18 @@
       "Interdisciplinary"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/pesose-pathways-enable-secure-open-source-ecosystems/nsf26-506/solicitation",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Track 1 proposal",
+        "date": "2027-03-02"
+      },
+      {
+        "stage": "Tracks 2 and 3 proposal",
+        "date": "2027-09-07"
+      }
+    ]
   },
   {
     "id": "nsf-reu-sites",
@@ -2391,7 +2629,9 @@
       "Theory"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/reu-research-experiences-undergraduates",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "darpa-i2o-open-baa",
@@ -2421,7 +2661,8 @@
       "Theory"
     ],
     "url": "https://www.darpa.mil/about/offices/ipto",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "darpa-disruptioneering",
@@ -2450,7 +2691,8 @@
       "Systems"
     ],
     "url": "https://www.darpa.mil/work-with-us/opportunities",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "darpa-mto-open-baa",
@@ -2479,7 +2721,8 @@
       "Embedded & Real-Time"
     ],
     "url": "https://www.darpa.mil/about/offices/mxo",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "darpa-nsf-ai-forge",
@@ -2504,7 +2747,8 @@
       "Cybersecurity"
     ],
     "url": "https://www.darpa.mil/research/programs/ai-forge",
-    "lastVerifiedAt": "2026-11-02"
+    "lastVerifiedAt": "2026-11-02",
+    "addedAt": "2026-11-02"
   },
   {
     "id": "doe-ascr-open-foa",
@@ -2534,7 +2778,8 @@
       "Algorithms"
     ],
     "url": "https://science.osti.gov/ascr/Funding-Opportunities",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "doe-scidac",
@@ -2564,7 +2809,8 @@
       "Software Engineering"
     ],
     "url": "https://www.scidac.gov/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "doe-qis-centers",
@@ -2592,7 +2838,8 @@
       "Algorithms"
     ],
     "url": "https://science.osti.gov/Initiatives/QIS",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "doe-arpa-e-open",
@@ -2622,7 +2869,8 @@
       "Optimization"
     ],
     "url": "https://arpa-e.energy.gov/funding-opportunities",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "nsf-cybercorps-sfs",
@@ -2654,7 +2902,9 @@
       "Operating Systems"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/cyberai-sfs-cyberaicorps-scholarship-service/nsf26-503/solicitation",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "doe-nnsa-ssgf",
@@ -2684,7 +2934,9 @@
       "Parallel Systems"
     ],
     "url": "https://www.krellinst.org/ssgf/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "doe-nnsa-lrgf",
@@ -2712,7 +2964,9 @@
       "AI for Science"
     ],
     "url": "https://www.krellinst.org/lrgf/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "msr-ada-lovelace-fellowship",
@@ -2743,7 +2997,8 @@
     ],
     "url": "https://www.microsoft.com/en-us/research/academic-program/ada-lovelace-fellowship/",
     "featured": true,
-    "status": "historical"
+    "status": "historical",
+    "addedAt": "2026-08-26"
   },
   {
     "id": "two-sigma-phd-fellowship",
@@ -2772,7 +3027,18 @@
       "Optimization"
     ],
     "url": "https://www.twosigma.com/graduate-students/phd-fellowships/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26",
+    "deadlines": [
+      {
+        "stage": "Application",
+        "date": "2026-09-25"
+      },
+      {
+        "stage": "Reference letters",
+        "date": "2026-11-02"
+      }
+    ]
   },
   {
     "id": "jane-street-phd-fellowship",
@@ -2801,7 +3067,8 @@
       "Compilers"
     ],
     "url": "https://www.janestreet.com/join-jane-street/programs-and-events/graduate-research-fellowship/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-26"
   },
   {
     "id": "ncwit-collegiate-award",
@@ -2833,7 +3100,9 @@
     ],
     "url": "https://www.aspirations.org/award-programs/aic-collegiate-award",
     "featured": false,
-    "status": "historical"
+    "status": "historical",
+    "addedAt": "2026-08-26",
+    "citizenship": "other"
   },
   {
     "id": "acm-senior-member",
@@ -2861,7 +3130,8 @@
       "Research Leadership"
     ],
     "url": "https://awards.acm.org/senior-members/nominations",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-distinguished-member",
@@ -2889,7 +3159,8 @@
       "Service"
     ],
     "url": "https://awards.acm.org/distinguished-members/nominations",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-fellow",
@@ -2917,7 +3188,8 @@
       "Service"
     ],
     "url": "https://awards.acm.org/fellows/nominations",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "ieee-senior-member",
@@ -2946,7 +3218,8 @@
       "Research Leadership"
     ],
     "url": "https://www.ieee.org/membership/senior/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "ieee-fellow",
@@ -2974,7 +3247,8 @@
       "Research Leadership"
     ],
     "url": "https://www.computer.org/volunteering/awards/fellows",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "ieee-cs-distinguished-contributor",
@@ -3002,7 +3276,8 @@
       "Service"
     ],
     "url": "https://www.computer.org/membership/distinguished-contributors",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "aaai-senior-member",
@@ -3032,7 +3307,8 @@
     ],
     "url": "https://aaai.org/about-aaai/aaai-awards/aaai-senior-member-status/",
     "featured": true,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-31"
   },
   {
     "id": "aaai-fellow",
@@ -3061,7 +3337,8 @@
     ],
     "url": "https://aaai.org/about-aaai/aaai-awards/the-aaai-fellows-program/aaai-fellows-nomination-letter/",
     "featured": true,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-31"
   },
   {
     "id": "siam-fellow",
@@ -3090,7 +3367,8 @@
       "Professional Recognition"
     ],
     "url": "https://www.siam.org/programs-initiatives/prizes-awards/fellows-program/eligibility/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "informs-senior-member",
@@ -3120,7 +3398,8 @@
       "Professional Recognition"
     ],
     "url": "https://www.informs.org/Recognizing-Excellence/Senior-Membership",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "aaai-acm-sigai-dissertation",
@@ -3151,7 +3430,8 @@
     ],
     "url": "https://aaai.org/about-aaai/aaai-awards/aaai-acm-sigai-doctoral-dissertation-award/aaai-acm-sigai-doctoral-dissertation-award-call/",
     "featured": true,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigcomm-dissertation",
@@ -3180,7 +3460,8 @@
       "Wireless & Mobile Computing"
     ],
     "url": "https://www.sigcomm.org/awards/doctoral-dissertation-award-nominations",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigsac-dissertation",
@@ -3209,7 +3490,8 @@
       "Trustworthy Computing"
     ],
     "url": "https://www.sigsac.org/award/diss-awards.html",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigsoft-dissertation",
@@ -3239,7 +3521,8 @@
     ],
     "url": "https://www2.sigsoft.org/awards/dissertation/",
     "featured": false,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigmod-jim-gray-dissertation",
@@ -3268,7 +3551,8 @@
       "Machine Learning Systems"
     ],
     "url": "https://sigmod.org/sigmod-awards/doctoral-dissertation-award/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigplan-reynolds-dissertation",
@@ -3298,7 +3582,8 @@
       "Software Engineering"
     ],
     "url": "https://www.sigplan.org/Awards/Dissertation/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigmetrics-dissertation",
@@ -3329,7 +3614,8 @@
     ],
     "url": "https://www.sigmetrics.org/awards.shtml",
     "featured": false,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-w-rising-star",
@@ -3358,7 +3644,8 @@
       "Research Impact"
     ],
     "url": "https://women.acm.org/awards/rising-star-award/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigsac-early-career",
@@ -3388,7 +3675,8 @@
     ],
     "url": "https://sigsac.hosting.acm.org/award/early-career-award.html",
     "featured": false,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigmetrics-rising-star",
@@ -3417,7 +3705,8 @@
       "Early Career"
     ],
     "url": "https://www.sigmetrics.org/awards.shtml",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigcomm-rising-star",
@@ -3446,7 +3735,8 @@
       "Early Career"
     ],
     "url": "https://www.sigcomm.org/awards",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigops-mark-weiser",
@@ -3475,7 +3765,8 @@
     ],
     "url": "https://sigops.org/awards/mw/",
     "featured": false,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-ieee-george-michael-hpc-fellowship",
@@ -3504,7 +3795,8 @@
       "Data Science"
     ],
     "url": "https://prod-awards.acm.bloomreach.cloud/hpc-fellows/nominations",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigkdd-doctoral-dissertation",
@@ -3533,7 +3825,8 @@
       "Artificial Intelligence"
     ],
     "url": "https://kdd2026.kdd.org/call-for-nominations-2026-sigkdd-dissertation-award/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigchi-doctoral-dissertation",
@@ -3562,7 +3855,8 @@
       "Social Computing"
     ],
     "url": "https://sigchi.org/people/sigchi-awards/dissertation-award/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-siggraph-doctoral-dissertation",
@@ -3591,7 +3885,8 @@
       "Computer Vision"
     ],
     "url": "https://www.siggraph.org/awards/outstanding-doctoral-dissertation-award/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigmobile-doctoral-dissertation",
@@ -3620,7 +3915,8 @@
       "Ubiquitous Computing"
     ],
     "url": "https://www.sigmobile.org/grav/news/article-8",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigarch-ieee-tcca-dissertation",
@@ -3649,7 +3945,8 @@
       "Systems"
     ],
     "url": "https://www.sigarch.org/benefit/awards/acm-sigarch-ieee-cs-tcca-outstanding-dissertation-award/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-prize-in-computing",
@@ -3677,7 +3974,8 @@
       "Professional Recognition"
     ],
     "url": "https://prod-awards.acm.bloomreach.cloud/acm-prize/nominations",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-grace-murray-hopper-award",
@@ -3706,7 +4004,8 @@
       "Professional Recognition"
     ],
     "url": "https://prod-awards.acm.bloomreach.cloud/hopper/nominations",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-athena-lecturer-award",
@@ -3734,7 +4033,8 @@
       "Professional Recognition"
     ],
     "url": "https://prod-awards.acm.bloomreach.cloud/athena/nominations",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-kanellakis-theory-practice-award",
@@ -3762,7 +4062,8 @@
       "Technology Transfer"
     ],
     "url": "https://prod-awards.acm.bloomreach.cloud/kanellakis/nominations",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-karlstrom-educator-award",
@@ -3790,7 +4091,8 @@
       "Professional Recognition"
     ],
     "url": "https://prod-awards.acm.bloomreach.cloud/karlstrom/nominations",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-aaai-allen-newell-award",
@@ -3818,7 +4120,8 @@
       "Research Impact"
     ],
     "url": "https://prod-awards.acm.bloomreach.cloud/newell/nominations",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-thacker-breakthrough-award",
@@ -3846,7 +4149,8 @@
       "Professional Recognition"
     ],
     "url": "https://prod-awards.acm.bloomreach.cloud/thacker/nominations",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-ieee-ken-kennedy-award",
@@ -3874,7 +4178,8 @@
       "Mentoring"
     ],
     "url": "https://www.computer.org/volunteering/awards/kennedy",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "ieee-cs-mccluskey-technical-achievement",
@@ -3903,7 +4208,8 @@
     ],
     "url": "https://www.computer.org/volunteering/awards/technical-achievement/",
     "featured": false,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-31"
   },
   {
     "id": "ieee-cs-mcdowell-award",
@@ -3932,7 +4238,8 @@
     ],
     "url": "https://www.computer.org/volunteering/awards/mcdowell",
     "featured": false,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-31"
   },
   {
     "id": "ieee-cs-harry-goode-award",
@@ -3961,7 +4268,8 @@
     ],
     "url": "https://www.computer.org/volunteering/awards/goode",
     "featured": false,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-31"
   },
   {
     "id": "ieee-cs-mary-keller-education-award",
@@ -3990,7 +4298,8 @@
     ],
     "url": "https://www.computer.org/volunteering/awards/cse-undergrad-teaching",
     "featured": false,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-31"
   },
   {
     "id": "ieee-tchpc-early-career-award",
@@ -4019,7 +4328,8 @@
       "Early Career"
     ],
     "url": "https://www.computer.org/ieee-cs-tchpc-early-career-researchers-award-for-excellence-in-high-performance-computing-2026",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "ieee-tcde-rising-star-award",
@@ -4048,7 +4358,8 @@
       "Early Career"
     ],
     "url": "https://tc.computer.org/tcde/awards/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "ieee-tcse-rising-star-award",
@@ -4078,7 +4389,18 @@
     ],
     "url": "https://tc.computer.org/tcse/2026-tcse-awards-call-for-nominations/",
     "featured": false,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-08-31",
+    "deadlines": [
+      {
+        "stage": "Registration",
+        "date": "2025-10-06"
+      },
+      {
+        "stage": "Nomination",
+        "date": "2025-10-20"
+      }
+    ]
   },
   {
     "id": "acm-sigir-early-career-researcher",
@@ -4107,7 +4429,8 @@
       "Early Career"
     ],
     "url": "https://sigir.org/awards/sigir-ecr-awards/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "acm-sigmobile-rockstar-award",
@@ -4136,7 +4459,8 @@
       "Early Career"
     ],
     "url": "https://www.sigmobile.org/grav/awards/rockstar-award",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-08-31"
   },
   {
     "id": "cci-tech-transfer-support-fund",
@@ -4165,7 +4489,8 @@
       "Virginia"
     ],
     "url": "https://cyberinitiative.org/proposals/ongoing-calls/cci-tech-transfer-support-fund.html",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "cci-cyber-as-a-service",
@@ -4194,7 +4519,8 @@
       "Virginia"
     ],
     "url": "https://cyberinitiative.org/proposals/ongoing-calls/cfp-cyber-as-a-service.html",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "cci-catapult-ascend",
@@ -4224,7 +4550,8 @@
       "Virginia"
     ],
     "url": "https://cyberinitiative.org/proposals/2026-calls/2026-cci-a-funds.html",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "cci-experiential-learning",
@@ -4253,7 +4580,8 @@
       "Virginia"
     ],
     "url": "https://cyberinitiative.org/proposals/2026-calls/2026-experiential-learning-program.html",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "cci-nova-critical-infrastructure",
@@ -4283,7 +4611,8 @@
       "Virginia"
     ],
     "url": "https://cyberinitiative.org/about/regional-structure/northern-virginia-node/nova-node-research/call-for-proposals--cybersecurity-and-critical-infrastructure--w.html",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "vipc-higher-education-proof-of-concept",
@@ -4317,7 +4646,8 @@
       "Virginia"
     ],
     "url": "https://www.virginiaipc.org/funding/he-poc/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "nasa-space-grant-consortia",
@@ -4408,7 +4738,8 @@
     ],
     "locationLabel": "All 50 states, DC, and Puerto Rico",
     "url": "https://www.nasa.gov/learning-resources/national-space-grant-college-and-fellowship-project/consortium-directors/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "nsf-epscor-jurisdiction-opportunities",
@@ -4474,7 +4805,8 @@
     ],
     "locationLabel": "28 NSF EPSCoR jurisdictions",
     "url": "https://www.nsf.gov/funding/initiatives/epscor/state-websites",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "nsf-epscor-graduate-fellowship",
@@ -4537,7 +4869,8 @@
       "Wyoming"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/egfp-nsf-epscor-graduate-fellowship-program",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "nsf-epscor-research-fellows",
@@ -4599,7 +4932,8 @@
       "Wyoming"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/epscor-research-infrastructure-improvement-epscor-research",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "nsf-epscor-focused-collaborations",
@@ -4660,7 +4994,18 @@
       "Wyoming"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/epscor-research-infrastructure-improvement-program-focused",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09",
+    "deadlines": [
+      {
+        "stage": "Letter of intent",
+        "date": "2026-12-15"
+      },
+      {
+        "stage": "Full proposal",
+        "date": "2027-01-26"
+      }
+    ]
   },
   {
     "id": "nsf-epscor-e-rise",
@@ -4721,7 +5066,8 @@
       "Wyoming"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/e-rise-epscor-research-infrastructure-improvement-program-epscor",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "nsf-epscor-e-core",
@@ -4781,7 +5127,8 @@
       "Wyoming"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/e-core-epscor-research-infrastructure-improvement-program-epscor",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "nasa-epscor-research-r3",
@@ -4847,7 +5194,8 @@
       "Wyoming"
     ],
     "url": "https://www.nasa.gov/learning-resources/established-program-to-stimulate-competitive-research/epscor-award-announcements/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "dod-depscor-research-collaboration-2026",
@@ -4920,7 +5268,8 @@
       "Wyoming"
     ],
     "url": "https://simpler.grants.gov/opportunity/b1489614-88c5-4534-a1ef-ffafdd1ba9d0",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "dod-depscor-capacity-building-2026",
@@ -4990,7 +5339,8 @@
       "Wyoming"
     ],
     "url": "https://simpler.grants.gov/opportunity/86ea6263-7d76-4576-961b-68f7388bf810",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "doe-epscor-state-lab-partnerships",
@@ -5054,7 +5404,8 @@
       "Wyoming"
     ],
     "url": "https://science.osti.gov/bes/epscor/How-to-Apply",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "usda-afri-fase-epscor",
@@ -5113,7 +5464,8 @@
       "Wyoming"
     ],
     "url": "https://www.nifa.usda.gov/grants/programs/agriculture-food-research-initiative/afri-fase-epscor-program",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "nih-idea-inbre",
@@ -5174,7 +5526,8 @@
       "Wyoming"
     ],
     "url": "https://nigms.nih.gov/Research/DRCB/IDeA/Pages/INBRE",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "nih-idea-cobre",
@@ -5232,7 +5585,18 @@
       "Wyoming"
     ],
     "url": "https://nigms.nih.gov/Research/DRCB/IDeA/Pages/COBRE",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09",
+    "deadlines": [
+      {
+        "stage": "COBRE-D application",
+        "date": "2026-09-25"
+      },
+      {
+        "stage": "COBRE-D application",
+        "date": "2027-01-25"
+      }
+    ]
   },
   {
     "id": "dod-durip-2027",
@@ -5264,7 +5628,8 @@
       "National Security"
     ],
     "url": "https://simpler.grants.gov/opportunity/84c7f111-baf9-4729-8daf-eb09376a6d45",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "dod-hbcu-tcu-equipment-2027",
@@ -5297,7 +5662,8 @@
       "Tribal Colleges"
     ],
     "url": "https://simpler.grants.gov/opportunity/21fbbec4-85d7-43b9-b481-86bbf46b845b",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "google-faculty-research-awards",
@@ -5330,7 +5696,8 @@
     ],
     "url": "https://research.google/programs-and-events/past-programs/faculty-research-awards/",
     "status": "historical",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "yahoo-frep",
@@ -5363,7 +5730,8 @@
     ],
     "url": "https://yahooresearch.tumblr.com/post/187608558221/congratulations-2019-faculty-and-research",
     "status": "historical",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "hp-labs-innovation-research-program",
@@ -5396,7 +5764,8 @@
     ],
     "url": "https://shiftleft.com/mirrors/www.hpl.hp.com/news/2012/jan-mar/pdf/HPL_AR_2011_web.pdf",
     "status": "historical",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "microsoft-dissertation-grant",
@@ -5427,7 +5796,8 @@
     ],
     "url": "https://www.microsoft.com/en-us/research/blog/announcing-the-2019-microsoft-research-dissertation-grant-recipients/",
     "status": "historical",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "facebook-emerging-scholar-award",
@@ -5458,7 +5828,8 @@
     ],
     "url": "https://research.facebook.com/fellowship/",
     "status": "historical",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "acm-turing-award",
@@ -5486,7 +5857,8 @@
       "Research Honors"
     ],
     "url": "https://awards.acm.org/turing",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "acm-software-system-award",
@@ -5515,7 +5887,8 @@
       "Research Honors"
     ],
     "url": "https://awards.acm.org/software-system",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "acm-gordon-bell-prize",
@@ -5545,7 +5918,8 @@
       "Research Honors"
     ],
     "url": "https://awards.acm.org/bell",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "acm-ieee-eckert-mauchly-award",
@@ -5574,7 +5948,8 @@
       "Research Honors"
     ],
     "url": "https://awards.acm.org/eckert-mauchly",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "knuth-prize",
@@ -5602,7 +5977,8 @@
       "Research Honors"
     ],
     "url": "https://www.sigact.org/prizes/knuth.html",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "godel-prize",
@@ -5632,7 +6008,8 @@
       "Research Honors"
     ],
     "url": "https://sigact.sigact.hosting.acm.org/prizes/g%C3%B6del.html",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "imu-abacus-medal",
@@ -5662,7 +6039,8 @@
       "Research Honors"
     ],
     "url": "https://www.mathunion.org/imu-awards/imu-abacus-medal",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "ieee-john-von-neumann-medal",
@@ -5691,7 +6069,8 @@
       "Research Honors"
     ],
     "url": "https://corporate-awards.ieee.org/award/ieee-john-von-neumann-medal/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-09"
   },
   {
     "id": "google-academic-research-awards",
@@ -5716,7 +6095,8 @@
       "Quantum Computing Security"
     ],
     "url": "https://research.google/programs-and-events/google-academic-research-awards/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-14"
   },
   {
     "id": "microsoft-accelerating-foundation-models",
@@ -5746,7 +6126,8 @@
       "Interdisciplinary"
     ],
     "url": "https://www.microsoft.com/en-us/research/academic-program/accelerating-foundation-models-research/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-14"
   },
   {
     "id": "dod-muri",
@@ -5775,7 +6156,8 @@
       "Defense Research"
     ],
     "url": "https://www.onr.navy.mil/education-outreach/sponsored-research/university-research-initiatives/muri",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-22"
   },
   {
     "id": "nsf-mri",
@@ -5803,7 +6185,8 @@
       "General CS"
     ],
     "url": "https://www.nsf.gov/funding/opportunities/mri-major-research-instrumentation-program",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-22"
   },
   {
     "id": "sigbed-early-career",
@@ -5830,7 +6213,8 @@
       "Systems"
     ],
     "url": "https://sigbed.org/awards/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-22"
   },
   {
     "id": "sigbed-paul-caspi-dissertation",
@@ -5856,7 +6240,8 @@
       "Systems"
     ],
     "url": "https://sigbed.org/awards/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-22"
   },
   {
     "id": "sigcse-early-career",
@@ -5881,7 +6266,18 @@
       "General CS"
     ],
     "url": "https://sigcse.org/programs/awards/early-career.html",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-22",
+    "deadlines": [
+      {
+        "stage": "Nomination intent",
+        "date": "2026-08-15"
+      },
+      {
+        "stage": "Nomination",
+        "date": "2026-09-01"
+      }
+    ]
   },
   {
     "id": "cohere-labs-catalyst-grants",
@@ -5909,7 +6305,8 @@
       "Foundation Models"
     ],
     "url": "https://cohere.com/research/grants",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-22"
   },
   {
     "id": "guggenheim-fellowship-cs",
@@ -5938,7 +6335,9 @@
     ],
     "url": "https://www.gf.org",
     "featured": true,
-    "lastVerifiedAt": "2026-10-31"
+    "lastVerifiedAt": "2026-10-31",
+    "addedAt": "2026-09-23",
+    "citizenship": "other"
   },
   {
     "id": "macarthur-fellowship",
@@ -5968,7 +6367,9 @@
       "Systems"
     ],
     "url": "https://www.macfound.org/programs/fellows/",
-    "featured": true
+    "featured": true,
+    "addedAt": "2026-09-23",
+    "citizenship": "other"
   },
   {
     "id": "lbnl-alvarez-hopper-fellowship",
@@ -5996,7 +6397,8 @@
       "Scientific Computing"
     ],
     "url": "https://jobs.lbl.gov",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-23"
   },
   {
     "id": "llnl-lawrence-fellowship",
@@ -6024,7 +6426,9 @@
       "General CS"
     ],
     "url": "https://st.llnl.gov/opportunities/postdocs/postdoc-program/lawrence-fellowship/learn-more-and-apply",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-23",
+    "citizenship": "open"
   },
   {
     "id": "ieee-cs-fernbach-award",
@@ -6050,7 +6454,8 @@
       "Scientific Computing"
     ],
     "url": "https://www.computer.org/volunteering/awards/fernbach",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-23"
   },
   {
     "id": "ieee-cs-seymour-cray-award",
@@ -6076,7 +6481,8 @@
       "Architecture"
     ],
     "url": "https://www.computer.org/volunteering/awards/cray",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-09-23"
   },
   {
     "id": "amazon-ai-phd-fellowship",
@@ -6104,7 +6510,8 @@
       "Automated Reasoning"
     ],
     "url": "https://www.amazon.science/news/amazon-launches-68-million-ai-phd-fellowship-program",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-10-10"
   },
   {
     "id": "nasa-early-stage-innovations",
@@ -6117,7 +6524,7 @@
     ],
     "whoFor": "Tenured or tenure-track faculty at U.S. institutions of higher education",
     "deadline": "Mandatory preliminary proposal: August 13, 2026 at 5:00 PM ET; invited full proposal: December 16, 2026 at 5:00 PM ET (ESI26; full proposals by invitation only)",
-    "deadlineMonth": 12,
+    "deadlineMonth": 8,
     "amount": "Up to $750,000 over 3 years, no more than $250,000/year",
     "summary": "Supports early-stage space technology research, including scientific machine learning, autonomous manufacturing, spacecraft navigation and robotic construction for lunar/Martian power systems. ESI26 uses mandatory preliminary proposals and invited full proposals.",
     "eligibility": [
@@ -6133,7 +6540,20 @@
       "Spacecraft Navigation"
     ],
     "url": "https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH26ZTR001N-26ESI_B2",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-10-10",
+    "deadlines": [
+      {
+        "stage": "Preliminary proposal",
+        "date": "2026-08-13",
+        "required": true
+      },
+      {
+        "stage": "Full proposal",
+        "date": "2026-12-16",
+        "note": "By invitation only"
+      }
+    ]
   },
   {
     "id": "microsoft-research-fellowship",
@@ -6162,7 +6582,8 @@
       "Research Collaboration"
     ],
     "url": "https://www.microsoft.com/en-us/research/academic-program/2026-microsoft-research-fellowship/",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-10-10"
   },
   {
     "id": "adobe-global-research-fellowship-historical",
@@ -6186,7 +6607,8 @@
     ],
     "url": "https://research.adobe.com/news/nurturing-the-next-generation-of-computer-scientists-the-adobe-research-fellowship/",
     "featured": false,
-    "status": "historical"
+    "status": "historical",
+    "addedAt": "2026-10-10"
   },
   {
     "id": "google-cloud-research-credits",
@@ -6214,7 +6636,8 @@
       "AI/ML"
     ],
     "url": "https://cloud.google.com/edu/researchers",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-10-10"
   },
   {
     "id": "anthropic-claude-scientists-plan",
@@ -6241,7 +6664,8 @@
       "Scientific Research"
     ],
     "url": "https://www.anthropic.com/news/expanding-support-for-scientists",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-10-10"
   },
   {
     "id": "google-antigravity-scientists",
@@ -6270,7 +6694,8 @@
       "Scientific Research"
     ],
     "url": "https://antigravity.google/use-cases/science",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-10-21"
   },
   {
     "id": "anthropic-external-researcher-access",
@@ -6298,7 +6723,8 @@
       "AI Safety & Ethics"
     ],
     "url": "https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-10-22"
   },
   {
     "id": "nebius-research-grants",
@@ -6328,7 +6754,8 @@
       "Cloud Computing"
     ],
     "url": "https://nebius.com/nebius-research-grants",
-    "featured": false
+    "featured": false,
+    "addedAt": "2026-10-22"
   },
   {
     "id": "doe-scgsr",
@@ -6357,7 +6784,9 @@
     ],
     "url": "https://science.osti.gov/wdts/scgsr",
     "featured": false,
-    "lastVerifiedAt": "2026-11-02"
+    "lastVerifiedAt": "2026-11-02",
+    "addedAt": "2026-11-02",
+    "citizenship": "us-citizen-or-pr"
   },
   {
     "id": "acm-sighpc-computational-data-science-fellowships",
@@ -6386,7 +6815,8 @@
     ],
     "url": "https://www.sighpc.org/opportunities/fellowships",
     "featured": false,
-    "lastVerifiedAt": "2026-11-02"
+    "lastVerifiedAt": "2026-11-02",
+    "addedAt": "2026-11-02"
   },
   {
     "id": "bssw-fellowship",
@@ -6416,7 +6846,8 @@
     ],
     "url": "https://bssw.io/pages/bssw-fellowship-program",
     "featured": false,
-    "lastVerifiedAt": "2026-11-02"
+    "lastVerifiedAt": "2026-11-02",
+    "addedAt": "2026-11-02"
   },
   {
     "id": "institute-for-research-software-fellowship",
@@ -6450,7 +6881,9 @@
     ],
     "url": "https://www.software.ac.uk/programmes/fellowship-programme",
     "featured": false,
-    "lastVerifiedAt": "2026-11-02"
+    "lastVerifiedAt": "2026-11-02",
+    "addedAt": "2026-11-02",
+    "citizenship": "other"
   },
   {
     "id": "aws-cloud-credit-for-research",
@@ -6481,7 +6914,8 @@
     ],
     "url": "https://aws.amazon.com/government-education/research-and-technical-computing/cloud-credit-for-research/",
     "featured": false,
-    "lastVerifiedAt": "2026-11-02"
+    "lastVerifiedAt": "2026-11-02",
+    "addedAt": "2026-11-02"
   },
   {
     "id": "google-tpu-research-cloud",
@@ -6511,7 +6945,8 @@
     ],
     "url": "https://sites.research.google/trc/about/",
     "featured": false,
-    "lastVerifiedAt": "2026-11-02"
+    "lastVerifiedAt": "2026-11-02",
+    "addedAt": "2026-11-02"
   },
   {
     "id": "nsf-nairr-resource-access",
@@ -6542,6 +6977,7 @@
     ],
     "url": "https://nairrpilot.org/",
     "featured": false,
-    "lastVerifiedAt": "2026-11-02"
+    "lastVerifiedAt": "2026-11-02",
+    "addedAt": "2026-11-02"
   }
 ]
