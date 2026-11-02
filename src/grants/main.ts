@@ -24,12 +24,14 @@ const favorites = createFavoritesStore('cspicks:grants-favorites');
 let allGrants: Grant[] = [];
 const selectById = (id: string) => document.getElementById(id) as HTMLSelectElement | null;
 
+const DEFAULT_SORT = 'deadline';
+
 const DEFAULT_EXAMPLES = ['NSF CAREER', 'Google PhD Fellowship', 'audience: phd', 'category: industry', 'sponsor: NSF audience: faculty', 'loc: California', 'deadline: rolling', 'status: historical'];
 
 function getFilterState() {
   return {
     query: input ? input.value.trim() : '',
-    sortBy: selectById('sort-select')?.value || 'featured',
+    sortBy: selectById('sort-select')?.value || DEFAULT_SORT,
     view: selectById('view-select')?.value || 'award'
   };
 }
@@ -37,7 +39,7 @@ function getFilterState() {
 function updateUrl(filterState: ReturnType<typeof getFilterState>) {
   const next = new URLSearchParams();
   if (filterState.query) next.set('q', filterState.query);
-  if (filterState.sortBy !== 'featured') next.set('sort', filterState.sortBy);
+  if (filterState.sortBy !== DEFAULT_SORT) next.set('sort', filterState.sortBy);
   if (filterState.view !== 'award') next.set('view', filterState.view);
 
   updateSearchUrl(next, filterState.query);
@@ -144,7 +146,7 @@ function setupDelegatedListeners() {
     const resetBtn = target.closest('#reset-grants-filters');
     if (resetBtn) {
       input.value = '';
-      selectById('sort-select')!.value = 'featured';
+      selectById('sort-select')!.value = DEFAULT_SORT;
       selectById('view-select')!.value = 'award';
       render();
       input.focus();
