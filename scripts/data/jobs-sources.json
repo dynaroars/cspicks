@@ -18122,14 +18122,11 @@
     "region": "northamerica",
     "jobsUrl": "https://employment.plu.edu/",
     "state": "WA",
-    "lastCheckedAt": "2026-10-14T05:15:45Z",
-    "outcome": "complete",
-    "summary": "Reviewed PLU’s current employment portal and the Computer Science/Data Science unit pages; no live CS or related computing faculty vacancy is listed. An institutional planning document anticipates a future cybersecurity search, so recheck the portal as that search may be posted later.",
+    "lastCheckedAt": "2026-11-02T16:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Targeted audit of lead Issue #84 on 2026-11-02: the anticipated cybersecurity search has posted (Open Rank Professor and Director of the M.S. in Cybersecurity, posting 0603152) and was added. Only this posting was reviewed this time, not the full portal or related units.",
     "checkedUrls": [
-      "https://employment.plu.edu/",
-      "https://www.plu.edu/computer-science/",
-      "https://www.plu.edu/computer-science/department/data-science/",
-      "https://www.plu.edu/academic-programs/program/data-science/"
+      "https://employment.plu.edu/postings/8955"
     ],
     "relatedUnits": [
       {
@@ -18170,15 +18167,14 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": "https://sites.allegheny.edu/human-resources/",
+    "jobsUrl": "https://alleghenycollege-ibwwjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1",
     "state": "PA",
-    "lastCheckedAt": "2026-10-14T05:15:45Z",
+    "lastCheckedAt": "2026-11-02T16:30:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed the official Computer and Information Science faculty/program page and academic department directory; these cover Computer Science, Data Science, Informatics, and Software Engineering. The HR page did not expose a current faculty vacancy list in this review, so no opening was added and the crawl remains incomplete.",
+    "summary": "Targeted audit of lead Issue #85 on 2026-11-02: added two tenure-track Assistant Professor of Computer and Information Science searches from the Oracle careers site (job 333, AI/security; job 332, systems). Only these postings were reviewed, not the full Oracle list.",
     "checkedUrls": [
-      "https://sites.allegheny.edu/human-resources/",
-      "https://www.cis.allegheny.edu/about/faculty/",
-      "https://sites.allegheny.edu/academic-affairs/academic-departments-programs/"
+      "https://alleghenycollege-ibwwjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/333",
+      "https://alleghenycollege-ibwwjb.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/332"
     ],
     "relatedUnits": [
       {
@@ -21062,6 +21058,110 @@
       }
     ],
     "relatedCheckedAt": "2026-10-14T05:19:02Z",
+    "deferredUntil": null,
+    "csrankings": false,
+    "kind": "liberal-arts"
+  },
+  {
+    "school": "Barnard College",
+    "homepage": "https://barnard.edu/computerscience",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://barnard.wd1.myworkdayjobs.com/en-US/Faculty",
+    "state": "NY",
+    "lastCheckedAt": "2026-11-02T16:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Targeted audit of lead Issue #84 on 2026-11-02: added the tenure-track Assistant Professor of Cognitive Science and Computer Science search (Workday JR2026316). Only this posting was reviewed, not a full crawl of the Workday faculty list or related units.",
+    "checkedUrls": [
+      "https://barnard.wd1.myworkdayjobs.com/en-US/Faculty/job/Assistant-Professor-of-Cognitive-Science-and-Computer-Science_JR2026316",
+      "https://barnard.edu/computerscience"
+    ],
+    "relatedUnits": [],
+    "relatedCheckedAt": null,
+    "deferredUntil": null,
+    "csrankings": false,
+    "kind": "liberal-arts"
+  },
+  {
+    "school": "Hampden-Sydney College",
+    "homepage": "https://www.hsc.edu/",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://www.hsc.edu/faculty-and-staff/dean-of-faculty/faculty-positions-available",
+    "state": "VA",
+    "lastCheckedAt": "2026-11-02T16:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Targeted audit of lead Issue #84 on 2026-11-02: added the tenure-track Computer Science search (Interfolio 195895). hsc.edu failed TLS verification through the crawler proxy, so the college's faculty-positions page was not read; recheck it.",
+    "checkedUrls": [
+      "https://apply.interfolio.com/195895"
+    ],
+    "relatedUnits": [],
+    "relatedCheckedAt": null,
+    "deferredUntil": null,
+    "csrankings": false,
+    "kind": "liberal-arts"
+  },
+  {
+    "school": "Susquehanna University",
+    "homepage": "https://www.susqu.edu/",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://www.schooljobs.com/careers/susqu",
+    "state": "PA",
+    "lastCheckedAt": "2026-11-02T16:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Targeted audit of lead Issue #84 on 2026-11-02: added the tenure-track Assistant Professor of Computer Science search (NEOGOV job 0000311). susqu.edu shows a bot check; the full NEOGOV list and related units were not reviewed.",
+    "checkedUrls": [
+      "https://www.schooljobs.com/careers/susqu/jobs/5527323/assistant-professor-of-computer-science"
+    ],
+    "relatedUnits": [],
+    "relatedCheckedAt": null,
+    "deferredUntil": null,
+    "csrankings": false,
+    "kind": "liberal-arts"
+  },
+  {
+    "school": "University of Lynchburg",
+    "homepage": "https://www.lynchburg.edu/academics/majors-and-minors/computer-science/",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://www.lynchburg.edu/about/human-resources/",
+    "state": "VA",
+    "lastCheckedAt": "2026-11-02T16:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Targeted audit of lead Issue #85 on 2026-11-02: added the Department Chair and Associate or Full Professor of Computer Science search (Paycom 310112). Only this posting was reviewed, not the full Paycom list or related units.",
+    "checkedUrls": [
+      "https://paycomonline.net/v4/ats/web.php/portal/06E60EB4A3425A1B8B2E3A5F3F1E2A6F/jobs/310112",
+      "https://www.lynchburg.edu/about/human-resources/"
+    ],
+    "relatedUnits": [],
+    "relatedCheckedAt": null,
+    "deferredUntil": null,
+    "csrankings": false,
+    "kind": "masters"
+  },
+  {
+    "school": "Kenyon College",
+    "homepage": "https://www.kenyon.edu/academics/departments-and-majors/computing/",
+    "facultyCount": 0,
+    "country": "US",
+    "region": "northamerica",
+    "jobsUrl": "https://www.kenyon.edu/offices-and-services/office-of-human-resources/job-opportunities/",
+    "state": "OH",
+    "lastCheckedAt": "2026-11-02T16:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Lead (Issue #85): a recruiter page (DSG, https://www.dsgco.com/search/23528-kenyon-computing-director/, dated 2026-10-20) advertises a Director of the Interdisciplinary Program in Computing search (likely tenured full professor). On 2026-11-02 Kenyon's official PageUp faculty list (via HR Job Opportunities) showed no computing search, and the Program in Computing page does not mention hiring, so no record was added; recheck for an official posting.",
+    "checkedUrls": [
+      "https://www.kenyon.edu/academics/departments-and-majors/computing/",
+      "https://www.kenyon.edu/offices-and-services/office-of-human-resources/job-opportunities/",
+      "https://careers.pageuppeople.com/695/cw/en-us/filter/?search-keyword=&work-type=faculty&job-mail-subscribe-privacy=agree"
+    ],
+    "relatedUnits": [],
+    "relatedCheckedAt": null,
     "deferredUntil": null,
     "csrankings": false,
     "kind": "liberal-arts"
