@@ -155,8 +155,11 @@ Follow `TASKS/audit.md`, with these rules taking precedence:
 Playbook: `TASKS/conferences.md`. Cap: 12 conference series.
 
 1. Pick the queue with `npm run maintain:csconfs -- --dry-run --limit 12`. It orders series by
-   near-term deadlines and gaps, skips recently checked and deferred ones, reserves half the batch for
-   never-checked series, and prints why each is due. Don't run the controller without `--dry-run`; this routine is the researcher.
+   near-term deadlines and gaps, skips recently checked and deferred ones (a `complete` check also waits
+   10 days), reserves half the batch for never-checked series, and prints why each is due. Series with no
+   next edition whose previous call closed around this time of year come first (their next call is likely
+   open now), and gaps whose call is still months away (a 2028 placeholder) wait. Those projections only
+   order the queue; never write a projected date into the data. Don't run the controller without `--dry-run`; this routine is the researcher.
 2. Research each series on its official site (Workflows A/B in the playbook). Update
    `csconfs/data/conferences.json` only with facts an official page states.
 3. For every series you researched, record the result in `csconfs/maintenance/checks.json` under

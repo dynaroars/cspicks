@@ -45,6 +45,20 @@ const DEFAULT_DEFER_DAYS = 21;
 // An incomplete check (conflicting or unreadable official evidence) rarely resolves within days, so retrying it
 // every run starved never-checked series; wait a week instead.
 const INCOMPLETE_DEFER_DAYS = 7;
+// A complete check waits this long before the series is due again (not_found and incomplete have their own
+// deferrals above). Without it a gap the official
+// site cannot fill yet (a TBD deadline, CHES's per-volume TCHES deadlines) re-queued the same series every run while
+// never-checked series waited.
+const MIN_RECHECK_DAYS = 10;
+// A series without a next edition whose previous call closed around this time of year is likely posting its next
+// call now: rank it first. The window is [-LOOKBACK, +LOOKAHEAD] days around the projected date. One whose projected
+// call closed up to RECENT_DAYS ago (SIGCSE TS: August deadline, February conference) probably has an announced,
+// still-upcoming edition: rank it just after unverified upcoming editions.
+const EXPECTED_LOOKBACK_DAYS = 45;
+const EXPECTED_LOOKAHEAD_DAYS = 75;
+const RECENT_DAYS = 200;
+// A missing deadline whose projected date is further out than this ranks below gaps that matter sooner.
+const FAR_DEADLINE_DAYS = 120;
 const DEFAULT_TIMEOUT_MINUTES = 45;
 const MAX_CAPTURE_CHARS = 2_000_000;
 const MAINTAINED_PATHS = new Set([
@@ -362,31 +376,78 @@ function suspiciousEdition(entries) {
   return [...new Set(reasons)];
 }
 
+/**
+ * Where the next call's deadline probably falls, from the latest edition with a dated deadline moved forward a year at
+ * a time. Queue ordering only: it is never written to the data, which takes only officially announced dates.
+ */
+export function projectedNextDeadline(entries, now = Date.now()) {
+  const dated = entries.filter((entry) => /^\d{4}-\d{2}-\d{2}$/.test(String(entry.deadline || '')))
+    .sort((a, b) => String(b.deadline).localeCompare(String(a.deadline)));
+  const latest = dated[0];
+  if (!latest) return null;
+  const [y, m, d] = latest.deadline.split('-').map(Number);
+  let year = y;
+  while (Date.UTC(year, m - 1, d) < now - RECENT_DAYS * 86_400_000) year += 1;
+  if (year === y) return null;
+  return { from: latest.deadline, date: new Date(Date.UTC(year, m - 1, d)).toISOString().slice(0, 10) };
+}
+
+/** The deadline an edition would have if it kept the latest dated edition's offset from its conference year. */
+export function projectedEditionDeadline(entries, year) {
+  const dated = entries.filter((entry) => entry.year < year && /^\d{4}-\d{2}-\d{2}$/.test(String(entry.deadline || '')))
+    .sort((a, b) => b.year - a.year || String(b.deadline).localeCompare(String(a.deadline)));
+  const latest = dated[0];
+  if (!latest) return null;
+  const [y, m, d] = latest.deadline.split('-').map(Number);
+  return new Date(Date.UTC(y + (year - latest.year), m - 1, d)).toISOString().slice(0, 10);
+}
+
 export function analyzeSeries(name, entries, check, { now = Date.now(), staleDays = DEFAULT_STALE_DAYS } = {}) {
   const currentYear = new Date(now).getUTCFullYear();
   const editions = [...groupByEdition(entries).entries()].sort((a, b) => a[0] - b[0]);
   const relevant = editions.filter(([year]) => year >= currentYear);
   const reasons = [];
   let priority = 50;
+  const farYears = new Set();
   for (const [year, records] of relevant) {
+    // How far off this edition's call is: its own (possibly estimated) earliest deadline, else the series' rhythm.
+    // A call months away (ESOP/TACAS 2028, CoNEXT 2027) can wait behind gaps that matter sooner.
+    const own = records.map((entry) => entry.deadline).filter((value) => /^\d{4}-\d{2}-\d{2}$/.test(String(value || ''))).sort()[0];
+    const expected = own || projectedEditionDeadline(entries, year);
+    const far = Boolean(expected) && Date.parse(`${expected}T00:00:00Z`) > now + FAR_DEADLINE_DAYS * 86_400_000;
+    if (far) farYears.add(year);
     if (records.some((entry) => !entry.deadline || entry.deadline === 'TBD')) {
-      reasons.push(`${year}: missing or TBD deadline`);
-      priority = Math.min(priority, 0);
+      reasons.push(`${year}: missing or TBD deadline${far ? ` (previous cycles suggest about ${expected}; not urgent)` : ''}`);
+      priority = Math.min(priority, far ? 20 : 0);
     }
     if (records.some((entry) => entry.estimated || !entry.verified)) {
-      reasons.push(`${year}: estimated or unverified`);
-      priority = Math.min(priority, 10);
+      reasons.push(`${year}: estimated or unverified${far && own ? ` (deadline ${own}; not urgent)` : ''}`);
+      // An estimated placeholder is expected while the call is months away.
+      priority = Math.min(priority, far ? 20 : 10);
     }
-    const suspicious = suspiciousEdition(records);
+    // A verified edition whose call isn't due for months is expected to lack a deadline; that alone isn't suspicious.
+    const suspicious = suspiciousEdition(records).filter((reason) => !(farYears.has(year) && /missing deadline/.test(reason)));
     if (suspicious.length) {
       reasons.push(...suspicious.map((reason) => `${year}: ${reason}`));
       priority = Math.min(priority, 5);
     }
   }
   const latestYear = Math.max(...entries.map((entry) => entry.year));
+  let expectedAt = Infinity;
   if (latestYear <= currentYear) {
     reasons.push(`latest local edition is ${latestYear}; discover the next announced edition`);
     priority = Math.min(priority, 15);
+    const projected = projectedNextDeadline(entries, now);
+    const at = projected ? Date.parse(`${projected.date}T00:00:00Z`) : NaN;
+    if (projected && at >= now - EXPECTED_LOOKBACK_DAYS * 86_400_000 && at <= now + EXPECTED_LOOKAHEAD_DAYS * 86_400_000) {
+      reasons.push(`previous deadline ${projected.from} suggests the next call closes around ${projected.date}`);
+      priority = Math.min(priority, -5);
+      expectedAt = at;
+    } else if (projected && at < now) {
+      reasons.push(`previous deadline ${projected.from} suggests the next call closed around ${projected.date}; add the announced edition`);
+      priority = Math.min(priority, 12);
+      expectedAt = at;
+    }
   }
   const checkedAt = Date.parse(check?.lastCheckedAt);
   const stale = Number.isNaN(checkedAt) || checkedAt <= now - staleDays * 86_400_000;
@@ -396,9 +457,10 @@ export function analyzeSeries(name, entries, check, { now = Date.now(), staleDay
   }
   // Older incomplete checks were written with deferredUntil: null, so derive their deferral from lastCheckedAt.
   const deferred = Date.parse(check?.deferredUntil) > now
-    || (check?.outcome === 'incomplete' && checkedAt > now - INCOMPLETE_DEFER_DAYS * 86_400_000);
+    || (check?.outcome === 'incomplete' && checkedAt > now - INCOMPLETE_DEFER_DAYS * 86_400_000)
+    || (check?.outcome === 'complete' && checkedAt > now - MIN_RECHECK_DAYS * 86_400_000);
   const neverChecked = !check?.lastCheckedAt;
-  return { name, priority, reasons, stale, deferred, neverChecked, latestYear };
+  return { name, priority, reasons, stale, deferred, neverChecked, latestYear, expectedAt };
 }
 
 function normalizedTokens(value) {
@@ -433,7 +495,8 @@ export function selectDueSeries(conferences, checks, {
     .filter((name) => !excluded.has(name))
     .map((name) => analyzeSeries(name, series.get(name), checks?.series?.[name], { now, staleDays }))
     .filter((item) => all || (!item.deferred && (item.priority < 30 || item.stale)))
-    .sort((left, right) => left.priority - right.priority || left.latestYear - right.latestYear || left.name.localeCompare(right.name));
+    .sort((left, right) => left.priority - right.priority || left.expectedAt - right.expectedAt
+      || left.latestYear - right.latestYear || left.name.localeCompare(right.name));
   if (all) return due.slice(0, limit);
   // Reserve half of the batch for never-checked series; otherwise re-checks of gap series take every slot.
   const reserved = new Set(due.filter((item) => item.neverChecked).slice(0, Math.ceil(limit / 2)));
