@@ -933,5 +933,78 @@
     "careersUrl": "https://www.sei.cmu.edu/careers/",
     "checkedAt": "2026-10-15",
     "postingsCheckedAt": "2026-10-28"
+  },
+  {
+    "id": "merl",
+    "name": "Mitsubishi Electric Research Laboratories (MERL)",
+    "aka": [
+      "MERL"
+    ],
+    "org": "Mitsubishi Electric",
+    "kind": "industry",
+    "areas": [
+      "ai",
+      "vision",
+      "mlmining",
+      "robotics"
+    ],
+    "locations": [
+      "Cambridge, MA"
+    ],
+    "summary": "Mitsubishi Electric's publication-oriented North American research lab in Kendall Square, working on AI (computer vision, data analytics, speech and audio), cyber-physical systems, and algorithms; hires research scientists, postdoctoral research fellows, and research interns.",
+    "careersUrl": "https://www.merl.com/employment/",
+    "internshipsUrl": "https://www.merl.com/employment/internship-openings",
+    "postdocsUrl": "https://www.merl.com/employment/postdoctoral-research",
+    "checkedAt": "2026-11-02"
+  },
+  {
+    "id": "nec-labs-america",
+    "name": "NEC Laboratories America",
+    "aka": [
+      "NEC Labs America",
+      "NECLA"
+    ],
+    "org": "NEC Corporation",
+    "kind": "industry",
+    "areas": [
+      "ai",
+      "mlmining",
+      "sec",
+      "vision",
+      "comm"
+    ],
+    "locations": [
+      "Princeton, NJ",
+      "San Jose, CA"
+    ],
+    "summary": "NEC's U.S. research lab (distinct from NEC Laboratories Europe), with research groups in machine learning, data science and system security, integrated systems, media analytics, and optical networking; hires full-time researchers and graduate research interns.",
+    "careersUrl": "https://www.nec-labs.com/careers/",
+    "internshipsUrl": "https://www.nec-labs.com/careers/intern-program/",
+    "checkedAt": "2026-11-02"
+  },
+  {
+    "id": "honda-research-institute-usa",
+    "name": "Honda Research Institute USA",
+    "aka": [
+      "HRI-US",
+      "HRI USA"
+    ],
+    "org": "Honda",
+    "kind": "industry",
+    "areas": [
+      "robotics",
+      "vision",
+      "ai",
+      "chi"
+    ],
+    "locations": [
+      "San Jose, CA",
+      "Mountain View, CA",
+      "Columbus, OH"
+    ],
+    "summary": "Honda's U.S. research institute, working on robotics, autonomous driving, computer vision, human–AI interaction, and materials science; hires associate and contract researchers and many PhD research interns.",
+    "careersUrl": "https://usa.honda-ri.com/careers",
+    "internshipsUrl": "https://usa.honda-ri.com/intern-positions",
+    "checkedAt": "2026-11-02"
   }
 ]
