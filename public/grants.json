@@ -344,6 +344,48 @@
     "lastVerifiedAt": "2026-11-02"
   },
   {
+    "id": "doe-genesis-mission-graduate-fellowship-pilot",
+    "name": "DOE Genesis Mission Graduate Fellowship Pilot",
+    "shortName": "Genesis Fellowship Pilot",
+    "sponsor": "Department of Energy (DOE) Office of Science",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Faculty-led teams at U.S. doctoral-granting universities proposing an accelerated four-year PhD fellowship program combining AI and a science discipline",
+    "deadline": "Letter of intent: November 9, 2026 at 5:00 PM ET (required); application: January 12, 2027 at 11:59 PM ET (DE-FOA-0003673)",
+    "deadlineMonth": 11,
+    "deadlines": [
+      {
+        "stage": "Letter of intent",
+        "date": "2026-11-09",
+        "required": true
+      },
+      {
+        "stage": "Application",
+        "date": "2027-01-12"
+      }
+    ],
+    "amount": "4–8 institutional awards of about $12–25 million each over five years ($100 million total; about $20 million per year); funds Fellows' stipends, full tuition, health insurance, and research travel",
+    "summary": "Funds universities to pilot accelerated four-year PhD pathways that build dual competency in AI (\"super intelligence\") and a scientific discipline, with each Fellow completing two research experiences of ten weeks or more, one at a DOE National Laboratory or SC user facility and one in industry; the pilots aim to produce about 100 Genesis Mission Graduate Fellows.",
+    "eligibility": [
+      "Lead applicant must be a U.S. institution of higher education or domestic doctoral-granting institution; one letter of intent or application per lead institution",
+      "A letter of intent is required; applications without one may be declined",
+      "DOE/NNSA National Laboratories cannot apply but may be subrecipients; subawards to universities, industry, and SC user facilities are allowed",
+      "All Fellows supported by a pilot must be U.S. citizens or lawful permanent residents; no such restriction applies to PIs, mentors, or collaborators"
+    ],
+    "topics": [
+      "AI/ML",
+      "AI for Science",
+      "Scientific Computing",
+      "HPC"
+    ],
+    "url": "https://science.osti.gov/ascr/Funding-Opportunities",
+    "featured": false,
+    "addedAt": "2026-11-02",
+    "lastVerifiedAt": "2026-11-02"
+  },
+  {
     "id": "doe-visiting-faculty-program",
     "name": "Department of Energy Visiting Faculty Program (VFP)",
     "shortName": "DOE Visiting Faculty Program",
