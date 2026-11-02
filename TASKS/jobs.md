@@ -140,7 +140,8 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
 | `deadline` | ISO `YYYY-MM-DD`, or null when none is stated. Interpreted as Anywhere on Earth. |
 | `rolling` | `true` when the posting reviews until filled; `deadline` is then a priority date or null. |
 | `reviewBegins`, `startDate`, `postedDate` | ISO dates, only when the posting states them. `startDate` may be `YYYY-MM` or `YYYY` when the posting gives only a month or year; "Fall 2027" is `2027` (a season is not a month). Fields not in this table are rejected by `npm test`. |
-| `lastSeenAt` | ISO date the posting was last confirmed live. Required. |
+| `lastSeenAt` | ISO date the posting was last confirmed live. Required. Cards show it, with a visible warning once it is more than 30 days old. |
+| `addedAt` | ISO date the record was first added to `jobs.json`. Set it on every new record and never change it afterwards; it drives the "New" badge, `added:` search, Recently Added sort, and the Atom feed. |
 | `closedAt` | ISO date the posting was seen closed/filled; omit while open. |
 | `visaSponsorship` | What the official posting itself says about visa / work-authorization sponsorship for international candidates: `yes` (it will sponsor, e.g. "H-1B sponsorship available"), `no` ("no visa sponsorship", "must be authorized to work in the US without sponsorship"), `case-by-case` ("may be considered", "eligible for sponsorship", or sponsorship only for applicants already in lawful US status; say which in `summary`), or `not-stated` (read it; it says nothing). Omit until someone has read the posting for it. Never infer from a university-wide HR policy, the school's reputation, or a third-party board; "sponsored research" is not visa sponsorship. |
 | `url` | The official posting URL (https). One record per URL. |
@@ -189,3 +190,7 @@ npm test                                   # test/unit/jobs.test.js runs the sam
 npm run build
 npx playwright test test/e2e/jobs.spec.js
 ```
+
+`npm run check:links -- --jobs` lists active postings whose links are broken, moved, redirected, or blocked to
+scripts; recheck those schools first. Hiring sites often answer scripts differently from browsers, so a status code
+is a lead: confirm on the rendered page (`npm run render:jobs`) before closing a posting.

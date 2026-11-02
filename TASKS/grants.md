@@ -101,9 +101,28 @@ Every entry MUST adhere to this structure:
   "locationLabel": "Optional concise display label such as 28 EPSCoR jurisdictions",
   "status": "historical",
   "url": "https://official-program-or-rfp-url.org",
-  "featured": true
+  "featured": true,
+  "addedAt": "2026-11-02",
+  "lastVerifiedAt": "2026-11-02",
+  "deadlines": [
+    { "stage": "White paper", "date": "2026-12-03", "required": true },
+    { "stage": "Full proposal", "date": "2027-02-18", "note": "By invitation only" }
+  ],
+  "citizenship": "us-citizen-or-pr"
 }
 ```
+
+`addedAt` is the day you add the entry (YYYY-MM-DD); set it on every new entry and never change it afterwards. It
+drives the page's "New" badge, `added:` search, Recently Added sort, and the Atom feed of new awards.
+`lastVerifiedAt` is the day you last confirmed the entry against its official page; cards show it, and show a
+visible warning when it is missing or older than 90 days, so keep it honest.
+
+`citizenship` records what the official page says, using exactly one of: `us-citizen` (US citizens/nationals only),
+`us-citizen-or-pr` (citizens or permanent residents), `open` (the page says international applicants are
+eligible), `other` (another nationality or residency rule; explain it in `eligibility`). Omit it when the page says
+nothing or you haven't read it for that: an omitted value means "not checked", which the `citizenship: international`
+search keeps, so a guess would hide or mislabel the award for international students. Restate the rule in
+`eligibility` too.
 
 `locations`, `locationLabel`, `estimated`, and `status` are optional. Add the geographic
 fields when eligibility is limited by state, territory, commonwealth, or
@@ -139,6 +158,12 @@ re-verify:
   `Whitepaper: December 3, 2026; full proposal: February 18, 2027 (BAA HR0011-27-S-0001)`.
   Say whether the early stage is required, encouraged, or optional, and whether full proposals are
   by invitation only.
+- Also record the stages as structured data in `deadlines` (earliest first; see the schema above):
+  `stage` is the sponsor's own label, `date` is `YYYY-MM-DD`, `required` is `true`/`false` only when
+  the solicitation says so, and `note` carries "By invitation only" or "Selected teams only". The
+  page lists the stages, highlights the next one, sorts by it, and exports each to calendars. Single-date
+  calls don't need `deadlines`; the date in `deadline` text is enough. `npm run lint:data` flags a dated
+  multi-stage `deadline` with no `deadlines` list.
 - Set `deadlineMonth` to the month of the **earliest required** stage, so sorting and deadline
   filters surface the call while it is still actionable.
 - For rolling BAAs with "whitepapers accepted any time" plus dated proposal windows, say so
@@ -164,6 +189,11 @@ npm test                                            # Runs test/unit/*.test.js (
 npm run build                                       # Verifies Vite multi-page bundle compilation
 npx playwright test test/e2e/grants.spec.js test/e2e/grants-submit.spec.js  # Runs Playwright E2E verification
 ```
+
+Before a re-verification batch, run `npm run check:links -- --grants --changes`: it lists official links that are
+broken, moved to another site, redirected (store the final URL), or blocked to scripts, and, from the second run on
+the same machine, pages whose visible text changed since the previous run. Re-verify those first. Its results are
+leads; confirm each on the rendered page before editing.
 
 ## Discovering new programs
 

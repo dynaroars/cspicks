@@ -3,6 +3,8 @@
  * per-school grouping, and autocomplete indexing.
  */
 import { FAVORITES_KEYWORD_SPEC } from '../favorites.js';
+import { addedWindowDays, daysSince } from '../opportunity-card.js';
+import type { CalendarEvent } from '../calendar.js';
 import { matchesKeywordOptions, parseKeywordQuery } from '../search-keywords.js';
 import { areaLabels } from '../shared.js';
 import type { KeywordSpec } from '../search-keywords.js';
@@ -101,12 +103,48 @@ export const JOBS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'dept', aliases: ['department', 'unit'], example: 'dept: information', description: 'Hiring unit: cs, information (IST/iSchool), ece, data, lab (industry/national labs), or other' },
   { key: 'visa', aliases: ['sponsorship'], example: 'visa: possible', description: 'What the posting says about visa sponsorship: yes, case, no, not-stated, unknown (not checked yet), or possible (anything but no)' },
   { key: 'status', example: 'status: closed', description: '"active" (default), "closed" (older postings), or "all"' },
+  { key: 'deadline', aliases: ['closing'], example: 'deadline: soon', description: 'soon (next 30 days), week (next 7 days), rolling, or none (no deadline listed)' },
+  { key: 'added', aliases: ['new'], example: 'added: week', description: 'Added to CS Picks recently: week, month, or a number of days' },
+  { key: 'progress', aliases: ['applied', 'application'], example: 'progress: applied', description: 'Your own application status on starred postings (kept in this browser): any, none, preparing, applied, interviewing, offer, or declined' },
   FAVORITES_KEYWORD_SPEC
 ];
 
+/** Days until the posting's deadline (end of day AoE), or null when it has none. */
+export function daysUntilDeadline(job: Job, now = Date.now()) {
+  const deadline = deadlineInstant(job.deadline);
+  return deadline === null ? null : Math.ceil((deadline - now) / DAY);
+}
+
+function deadlineKeywordMatches(job: Job, value: string, now: number) {
+  if (value === 'rolling') return Boolean(job.rolling);
+  if (value === 'none') return !job.deadline;
+  if (value === 'soon' || value === 'week') {
+    const days = daysUntilDeadline(job, now);
+    return !job.rolling && days !== null && days >= 0 && days <= (value === 'week' ? 7 : 30);
+  }
+  return true;
+}
+
+/** Calendar events for a posting: its deadline (or priority date) and when review begins, if still ahead. */
+export function jobCalendarEvents(job: Job, now = Date.now()): CalendarEvent[] {
+  const page = `https://cspicks.roars.dev/jobs.html?q=${encodeURIComponent(job.id)}&status=all#${encodeURIComponent(job.id)}`;
+  const description = [`${job.title}, ${job.department}, ${job.school}`, `Official posting: ${job.url}`, `CS Picks: ${page}`,
+    'Deadlines are end of day Anywhere on Earth. Confirm on the official posting.'].join('\n');
+  const today = Date.UTC(new Date(now).getUTCFullYear(), new Date(now).getUTCMonth(), new Date(now).getUTCDate());
+  const upcoming = (day: unknown) => { const start = dayStart(day); return start !== null && start >= today; };
+  const events: CalendarEvent[] = [];
+  if (job.reviewBegins && upcoming(job.reviewBegins) && job.reviewBegins !== job.deadline) {
+    events.push({ uid: `job-${job.id}-review`, date: job.reviewBegins, title: `Review begins: ${job.title} (${job.school})`, description, url: job.url });
+  }
+  if (job.deadline && upcoming(job.deadline)) {
+    events.push({ uid: `job-${job.id}-deadline`, date: job.deadline, title: `${job.rolling ? 'Priority date' : 'Deadline'}: ${job.title} (${job.school})`, description, url: job.url });
+  }
+  return events;
+}
+
 type StatusFilter = 'active' | 'closed' | 'all';
-export type JobSort = 'deadline' | 'posted' | 'school';
-export const JOB_SORTS: JobSort[] = ['deadline', 'posted', 'school'];
+export type JobSort = 'deadline' | 'posted' | 'added' | 'school';
+export const JOB_SORTS: JobSort[] = ['deadline', 'posted', 'added', 'school'];
 
 /** [year, month, day] for a real calendar date written YYYY-MM-DD; null otherwise (so 2026-13-45 is rejected). */
 function dayParts(value: unknown): [number, number, number] | null {
@@ -177,7 +215,7 @@ const startOrNull = (value: unknown) => isoOrNull(value)
 /** Every field a posting may carry (src/types.d.ts Job); anything else is a typo, e.g. `areasAny` for `anyArea`. */
 const JOB_FIELDS = new Set(['id', 'school', 'lab', 'department', 'title', 'track', 'level', 'areas', 'anyArea', 'country', 'state',
   'city', 'deadline', 'rolling', 'reviewBegins', 'startDate', 'postedDate', 'lastSeenAt', 'closedAt', 'visaSponsorship', 'url',
-  'summary', 'source', 'verified']);
+  'summary', 'source', 'verified', 'addedAt']);
 
 /** Names of the fields that make `value` an invalid Job; empty when it is valid. */
 export function jobProblems(value: unknown): string[] {
@@ -202,6 +240,7 @@ export function jobProblems(value: unknown): string[] {
     ['deadline', isoOrNull(job.deadline)],
     ['closedAt', isoOrNull(job.closedAt)],
     ['postedDate', isoOrNull(job.postedDate)],
+    ['addedAt', isoOrNull(job.addedAt)],
     ['reviewBegins', isoOrNull(job.reviewBegins)],
     ['startDate', startOrNull(job.startDate)],
     ['visaSponsorship', job.visaSponsorship === undefined || (typeof job.visaSponsorship === 'string' && job.visaSponsorship in VISA_LABELS)],
@@ -284,8 +323,9 @@ function sortKey(job: Job, sortBy: JobSort, now: number) {
     const deadline = deadlineInstant(job.deadline);
     return deadline !== null && !job.rolling ? deadline : 1e15 + (deadline ?? 0);
   }
-  // Newest first.
-  return -(dayStart(job.postedDate) ?? dayStart(job.lastSeenAt) ?? 0);
+  if (sortBy === 'added') return -(dayStart(job.addedAt) ?? 0);
+  // Newest first; a posting without a posted date counts from when CS Picks first listed it.
+  return -(dayStart(job.postedDate) ?? dayStart(job.addedAt) ?? dayStart(job.lastSeenAt) ?? 0);
 }
 
 /** `ignoreState` lets the state map count jobs per state without the state filter hiding the others. */
@@ -333,6 +373,12 @@ export function filterJobs(jobs: Job[], filters: JobFilters = {}, ignoreState = 
       const c = (job.country || 'US').toLowerCase();
       const v = value.toLowerCase();
       return c === v || (v === 'usa' && c === 'us') || (v === 'united states' && c === 'us');
+    })) return false;
+    if (keywords.deadline && !matchesKeywordOptions(keywords.deadline, value => deadlineKeywordMatches(job, value, now))) return false;
+    if (keywords.added && !matchesKeywordOptions(keywords.added, value => {
+      const window = addedWindowDays(value);
+      const age = daysSince(job.addedAt, now);
+      return window !== null && age !== null && age <= window;
     })) return false;
     if (!terms.length) return true;
     const text = searchText(job);

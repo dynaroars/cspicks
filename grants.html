@@ -7,6 +7,7 @@
   <title>CS Picks - CS Research Awards, Fellowships &amp; Grants</title>
   <meta name="description" content="Search computer science research grants, fellowships, and awards for faculty and students across NSF, DARPA, DOE, DoD, tech industry (Google, Amazon, Meta, Microsoft, Apple, NVIDIA), and non-profits." />
   <link rel="canonical" href="https://cspicks.roars.dev/grants.html" />
+  <link rel="alternate" type="application/atom+xml" title="New CS awards and grants (CS Picks)" href="/feeds/grants.xml" />
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CS Picks">
   <meta property="og:title" content="CS Picks - CS Research Awards, Fellowships &amp; Grants">
@@ -66,10 +67,19 @@
         <div class="filter-group">
           <select id="sort-select" class="field-select" aria-label="Sort awards">
             <option value="deadline" selected>Soonest Deadline</option>
+            <option value="added">Recently Added</option>
             <option value="featured">Featured First</option>
             <option value="name">Name</option>
             <option value="sponsor">Sponsor</option>
           </select>
+        </div>
+        <div class="filter-group">
+          <details id="favorites-actions" class="favorites-actions" hidden>
+            <summary aria-label="Starred awards actions" title="Starred awards actions">⋯</summary>
+            <div class="favorites-menu">
+              <button type="button" id="export-favorites-calendar">Add starred deadlines to calendar</button>
+            </div>
+          </details>
         </div>
         <div class="filter-group">
           <select id="view-select" class="field-select" aria-label="Group awards">
@@ -84,6 +94,7 @@
       <div class="grants-status-bar">
         <div id="grants-status" role="status" aria-live="polite">Loading awards and grants…</div>
         <div id="grants-count" class="grants-count-highlight"></div>
+        <a class="feed-link" href="/feeds/grants.xml" title="Subscribe to newly added awards and grants (Atom feed)">RSS: new awards</a>
       </div>
 
       <aside class="context-note" role="note" aria-label="About these awards and grants"><strong>Verify before applying.</strong> Funding amounts, eligibility, and deadlines change; always confirm the current solicitation or RFP on the official sponsor page. Programs labeled “Historical” are kept for grant-history and CV research.</aside>
