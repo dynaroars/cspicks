@@ -6304,5 +6304,219 @@
     ],
     "url": "https://nebius.com/nebius-research-grants",
     "featured": false
+  },
+  {
+    "id": "doe-scgsr",
+    "name": "DOE Office of Science Graduate Student Research (SCGSR) Program",
+    "shortName": "DOE SCGSR",
+    "sponsor": "Department of Energy (DOE) Office of Science / WDTS",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "PhD Students"
+    ],
+    "whoFor": "PhD candidates (candidacy reached, thesis project and advisor established) in computer/computational sciences and other Office of Science fields who want to do part of their thesis research at a DOE national laboratory",
+    "deadline": "November 4, 2026 at 5:00 PM ET (2026 Solicitation 2; twice yearly, next tentatively May 2027)",
+    "deadlineMonth": 11,
+    "amount": "Monthly living stipend of up to $3,600 while at the host DOE laboratory + up to $3,000 inbound/outbound travel reimbursement (host lab more than 50 miles away)",
+    "summary": "Supplemental awards for U.S. graduate students to carry out part of their PhD thesis research at a DOE National Laboratory or user facility for 3 to 12 consecutive months, in collaboration with a DOE laboratory scientist. It is separate from DOE CSGF, NNSA SSGF/LRGF, and the Visiting Faculty Program.",
+    "eligibility": [
+      "U.S. citizens or lawful permanent residents, at least 18 years old at the time of application",
+      "Full-time enrollment in a qualified PhD program, with PhD candidacy obtained and a defined thesis project and advisor at the time of application",
+      "Research aligned with an Office of Science priority research area and a collaborating DOE laboratory scientist identified in the application"
+    ],
+    "topics": [
+      "Computational Science",
+      "HPC",
+      "AI for Science",
+      "Research Collaboration"
+    ],
+    "url": "https://science.osti.gov/wdts/scgsr",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-02"
+  },
+  {
+    "id": "acm-sighpc-computational-data-science-fellowships",
+    "name": "ACM SIGHPC Computational & Data Science Fellowships",
+    "shortName": "SIGHPC CDS Fellowships",
+    "sponsor": "ACM SIGHPC",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "PhD Students",
+      "Master's Students"
+    ],
+    "whoFor": "Women and students from racial/ethnic backgrounds that have not traditionally participated in computing, pursuing computational-science or data-science graduate degrees anywhere in the world (preference for backgrounds outside computer science)",
+    "deadline": "Nominations open March 15, 2027 and close April 30, 2027; notifications by July 31, 2027",
+    "deadlineMonth": 4,
+    "amount": "US$20,000 annual stipend (adjusted by the country where the degree is earned), up to 4 years for PhD and 2 years for MS recipients, plus travel support to the SC conference awards session",
+    "summary": "Increases the diversity of students pursuing graduate degrees in computational science and data science. The stipend augments, rather than replaces, institutional support; computational science is defined as research using modeling and simulation, typically in a field other than computer science.",
+    "eligibility": [
+      "Women or students from racial/ethnic backgrounds that have not traditionally participated in computing, at institutions anywhere in the world",
+      "Nominated by the student's advisor (or soon-to-be advisor), with the student's CV and statement and a brief endorsement",
+      "Preference for candidates whose background is from disciplines other than computer science"
+    ],
+    "topics": [
+      "HPC",
+      "Data Science",
+      "Computational Science"
+    ],
+    "url": "https://www.sighpc.org/opportunities/fellowships",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-02"
+  },
+  {
+    "id": "bssw-fellowship",
+    "name": "Better Scientific Software (BSSw) Fellowship Program",
+    "shortName": "BSSw Fellowship",
+    "sponsor": "U.S. Department of Energy and National Science Foundation (BSSw)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "People at any career stage (students through senior professionals) at U.S.-based institutions able to receive federal funding, who want to promote better scientific-software practice",
+    "deadline": "October 30, 2026, before midnight PDT (2027 cycle; firm deadline, closed); 2027 Fellows announced January 2027",
+    "deadlineMonth": 10,
+    "amount": "Up to $25,000 per Fellow for one year (2027 period of performance: April 1, 2027 – April 30, 2028), paid through the Fellow's institution",
+    "summary": "Recognizes and funds advocates of high-quality scientific software. Each Fellow proposes a funded activity, such as a workshop, tutorial, or community content, that produces a publicly available artifact improving developer productivity or software sustainability. At least three Fellows are selected each year.",
+    "eligibility": [
+      "Must be affiliated with a U.S.-based institution able to receive federal funding (e.g. U.S. universities, government labs, U.S.-based corporations)",
+      "Open to all career stages, from students to senior professionals",
+      "Application includes a short CV, a proposed activity, and a one-page supervisor letter"
+    ],
+    "topics": [
+      "Software Engineering",
+      "Scientific Computing",
+      "HPC"
+    ],
+    "url": "https://bssw.io/pages/bssw-fellowship-program",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-02"
+  },
+  {
+    "id": "institute-for-research-software-fellowship",
+    "name": "Institute for Research Software Fellowship Programme (formerly Software Sustainability Institute, SSI)",
+    "shortName": "IRS (SSI) Fellowship",
+    "sponsor": "Institute for Research Software (formerly Software Sustainability Institute)",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Researchers and research-software staff at any career stage (PhD candidates to professors and research-computing directors), mainly UK-based, with up to three places for international applicants",
+    "deadline": "October 5, 2026 (2027 round; closed). Shortlist November 3 and online selection day November 12, 2026; announcement December 9, 2026",
+    "deadlineMonth": 10,
+    "amount": "£4,000 budget per Fellow to organise or attend activities promoting good software practice (not a salary or stipend), plus mentoring and cohort activities; Fellowship runs January 1, 2027 – March 31, 2028",
+    "summary": "Each year the Institute for Research Software, formerly the Software Sustainability Institute, selects around 20 Fellows who improve and promote good computational practice across research disciplines, through funded activities, mentoring, community calls, and the annual Collaborations Workshop.",
+    "eligibility": [
+      "Open to applicants at any career stage and background, including those without a formal software background",
+      "Up to three places for international applicants, who must show how their plans foster international collaboration or benefit UK research culture",
+      "Application form plus a six-minute screencast video; shortlisted applicants attend an online selection day"
+    ],
+    "locations": [
+      "United Kingdom"
+    ],
+    "locationLabel": "Mainly UK (up to 3 international Fellows)",
+    "topics": [
+      "Software Engineering",
+      "Scientific Computing",
+      "Research Collaboration"
+    ],
+    "url": "https://www.software.ac.uk/programmes/fellowship-programme",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-02"
+  },
+  {
+    "id": "aws-cloud-credit-for-research",
+    "name": "AWS Public Sector Cloud Credit for Research Program",
+    "shortName": "AWS Cloud Credit for Research",
+    "sponsor": "Amazon Web Services (AWS) Public Sector",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students",
+      "Master's Students"
+    ],
+    "whoFor": "Full-time faculty and research staff, and graduate, postgraduate, or PhD students, at accredited research institutions",
+    "deadline": "Rolling (proposals evaluated throughout the year; typical review 90–120 days, no expedited reviews)",
+    "deadlineMonth": 0,
+    "amount": "AWS Promotional Credit (not cash): student awards up to $5,000; faculty and staff awards not capped; amount depends on the proposal and documented usage",
+    "summary": "AWS promotional credits for researchers building cloud-hosted, publicly available science-as-a-service tools, running proof-of-concept or benchmark tests of moving research workloads or open datasets to the cloud, or training their community on cloud research workflows. Separate from the Amazon Research Awards.",
+    "eligibility": [
+      "Full-time faculty or research staff at an accredited research institution",
+      "Graduate, postgraduate, or PhD students enrolled at an accredited research institution (student awards capped at $5,000)",
+      "EC2 usage under the credits is limited to on-demand and spot instances"
+    ],
+    "topics": [
+      "Cloud Computing",
+      "Scientific Computing",
+      "Research Infrastructure"
+    ],
+    "url": "https://aws.amazon.com/government-education/research-and-technical-computing/cloud-credit-for-research/",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-02"
+  },
+  {
+    "id": "google-tpu-research-cloud",
+    "name": "Google TPU Research Cloud (TRC)",
+    "shortName": "TPU Research Cloud",
+    "sponsor": "Google",
+    "sponsorCategory": "Industry",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Machine-learning researchers who express interest and are approved; the official pages state no specific career-stage or country restriction",
+    "deadline": "Rolling (express interest anytime; invitations sent to approved applicants on a rolling basis)",
+    "deadlineMonth": 0,
+    "amount": "Free Cloud TPU quota (in-kind, temporary) from a pool of more than 1,000 Cloud TPU devices; other Google Cloud services such as driver VMs and storage are not covered",
+    "summary": "Gives accepted researchers no-cost access to Cloud TPUs, usable with TensorFlow, PyTorch, Julia, and JAX, for open ML research. Separate from Google Cloud Research Credits. Participants are expected to share TRC-supported research publicly and give Google feedback on the program.",
+    "eligibility": [
+      "Apply through the program's 'Express interest' form; invitations go to approved applicants",
+      "Participants must share TRC-supported research publicly (publications, open-source code, blog posts, or similar) and follow the Google AI Principles",
+      "Accept Google's Terms and Conditions; non-TPU Google Cloud costs are the participant's responsibility"
+    ],
+    "topics": [
+      "AI/ML",
+      "Cloud Computing",
+      "Research Infrastructure"
+    ],
+    "url": "https://sites.research.google/trc/about/",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-02"
+  },
+  {
+    "id": "nsf-nairr-resource-access",
+    "name": "National Artificial Intelligence Research Resource (NAIRR) Pilot Resource Access",
+    "shortName": "NAIRR Resource Access",
+    "sponsor": "U.S. National Science Foundation (NSF) with federal and private-sector partners",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "U.S.-based researchers and educators at U.S.-based institutions (graduate students need a faculty advisor's support letter); individual resources may have their own eligibility rules",
+    "deadline": "Rolling (research-resource and start-up calls open until the end of the NAIRR Pilot or until resources are committed; start-up requests accepted when capacity is available)",
+    "deadlineMonth": 0,
+    "amount": "In-kind access to computing, cloud, model, data, and educational resources (not cash): research projects up to 12 months; start-up projects 3 months on one resource (e.g. up to 2,000 GPU-hours)",
+    "summary": "The NSF-led NAIRR connects U.S. researchers and educators to AI computing, software, data, models, and training resources through nairrpilot.org, with routes for research allocations, start-up projects, deep partnerships with providers, and classroom resources. Project results must be open and publishable. NSF awarded a NAIRR Operations Center on September 1, 2026, and existing opportunities remain open on nairrpilot.org.",
+    "eligibility": [
+      "U.S.-based researchers and educators from U.S.-based institutions, including academic institutions, non-profits, federal agencies and FFRDCs, state/local/tribal agencies, and startups or small businesses with federal grants",
+      "Graduate students may apply with a support letter from a faculty advisor; an institutional email address is required",
+      "Individual resources may have their own eligibility rules; results must be open and publishable"
+    ],
+    "topics": [
+      "AI/ML",
+      "HPC",
+      "Cloud Computing",
+      "Research Infrastructure"
+    ],
+    "url": "https://nairrpilot.org/",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-02"
   }
 ]
