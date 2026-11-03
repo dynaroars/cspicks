@@ -2877,8 +2877,8 @@
   },
   {
     "id": "darpa-nsf-ai-forge",
-    "name": "AI Forge: Critical AI Challenges for National Security (DARPA–NSF)",
-    "shortName": "AI Forge",
+    "name": "SI Forge (formerly AI Forge): Critical AI Challenges for National Security (DARPA–NSF)",
+    "shortName": "SI Forge",
     "sponsor": "DARPA & National Science Foundation (NSF)",
     "sponsorCategory": "Government",
     "targetAudience": [
@@ -2888,7 +2888,7 @@
     "deadline": "No proposal call announced yet; capabilities RFI (DARPA-SN-26-80) responses were due June 22, 2026. Research challenges are revisited every six months (Cycle 2 report released October 2026)",
     "deadlineMonth": 0,
     "amount": "Not yet announced; projects to be funded and managed through a nonprofit-administered AI Forge forum, with access to frontier-scale compute and models",
-    "summary": "Joint DARPA–NSF program, with NIST's AI standards center, that will fund fast-paced, high-risk/high-reward university-led Project Ventures on AI interpretability, AI control, adversarial robustness, and (from Cycle 2) AI assurance, guided by its Critical AI Challenges for National Security reports.",
+    "summary": "Joint DARPA–NSF program (DARPA now calls it SI Forge, for super intelligence; NSF's page still says AI Forge), with NIST's standards center, that will fund fast-paced, high-risk/high-reward university-led Project Ventures on AI interpretability, AI control, adversarial robustness, and (from Cycle 2) AI assurance, guided by its Critical AI Challenges for National Security reports.",
     "eligibility": [
       "U.S. universities; research projects are university-led",
       "The June 2026 RFI built a repository of U.S. universities interested in the program; funding-call eligibility not yet published"
@@ -2897,7 +2897,7 @@
       "AI/ML",
       "Cybersecurity"
     ],
-    "url": "https://www.darpa.mil/research/programs/ai-forge",
+    "url": "https://www.darpa.mil/research/programs/si-forge",
     "lastVerifiedAt": "2026-11-02",
     "addedAt": "2026-11-02"
   },
