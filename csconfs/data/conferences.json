@@ -3776,6 +3776,28 @@
     "venueKeys": [
       "crypto"
     ],
+    "year": 2027,
+    "description": "International Cryptology Conference",
+    "link": "https://crypto.iacr.org/2027/",
+    "seriesLink": "https://www.iacr.org/meetings/crypto/",
+    "date": null,
+    "place": "Santa Barbara, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": true,
+    "verified": false,
+    "generalChair": null
+  },
+  {
+    "name": "Crypto",
+    "venueKeys": [
+      "crypto"
+    ],
     "year": 2026,
     "description": "International Cryptology Conference",
     "link": "https://crypto.iacr.org/2026/",
@@ -15046,6 +15068,29 @@
     "venueKeys": [
       "ismb"
     ],
+    "year": 2027,
+    "description": "Intelligent Systems for Molecular Biology / European Conference on Computational Biology",
+    "link": "https://www.iscb.org/ismbeccb2027",
+    "seriesLink": null,
+    "date": "July 18-22, 2027",
+    "place": "Copenhagen, Denmark",
+    "abstractDeadline": null,
+    "deadline": "2027-01-14",
+    "rebuttalDate": null,
+    "notificationDate": "2027-03-02",
+    "note": "Proceedings track (Bioinformatics). Conditional acceptance 2027-03-02; revisions due 2027-03-18; final acceptance 2027-03-30.",
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ISMB/ECCB",
+    "venueKeys": [
+      "ismb"
+    ],
     "year": 2023,
     "description": "Intelligent Systems for Molecular Biology / European Conference on Computational Biology",
     "link": "https://www.iscb.org/ismbeccb2023",
@@ -22843,6 +22888,29 @@
     "venueKeys": [
       "rss"
     ],
+    "year": 2027,
+    "description": "Robotics: Science and Systems Conference",
+    "link": "https://roboticsconference.org/",
+    "seriesLink": null,
+    "date": "July 6-11, 2027",
+    "place": "Athens, Greece",
+    "abstractDeadline": null,
+    "deadline": "2026-12-04",
+    "rebuttalDate": "2027-02-12",
+    "notificationDate": "2027-04-30",
+    "note": "New two-stage shepherding process: extended abstract due December 4, 2026 (AoE); Stage-1 decision Feb 5; rebuttal due Feb 12; Stage-2 decision Feb 26; final paper due April 16; acceptance notification April 30, 2027.",
+    "programChair": "Amanda Prorok",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Matei Ciocarlie"
+  },
+  {
+    "name": "RSS",
+    "venueKeys": [
+      "rss"
+    ],
     "year": 2026,
     "description": "Robotics: Science and Systems Conference",
     "link": "https://roboticsconference.org/",
@@ -23228,6 +23296,29 @@
     "submissions": null,
     "estimated": false,
     "verified": true
+  },
+  {
+    "name": "RTAS",
+    "venueKeys": [
+      "rtas"
+    ],
+    "year": 2027,
+    "description": "IEEE Real-Time and Embedded Technology and Applications Symposium",
+    "link": "https://2027.rtas.org/",
+    "seriesLink": null,
+    "date": "May 17-20, 2027",
+    "place": "Boulder, CO, US",
+    "abstractDeadline": null,
+    "deadline": "2026-11-05",
+    "rebuttalDate": "2027-01-11–2027-01-15",
+    "notificationDate": "2027-01-28",
+    "note": "Part of CPS-IoT Week. Notification date is tentative.",
+    "programChair": "Linh Thi Xuan Phan (University of Pennsylvania)",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Claire Pagetti (ONERA)"
   },
   {
     "name": "RTAS",
@@ -24401,6 +24492,29 @@
     "submissions": null,
     "estimated": false,
     "verified": true
+  },
+  {
+    "name": "SIGCSE TS",
+    "venueKeys": [
+      "sigcse"
+    ],
+    "year": 2027,
+    "description": "ACM Technical Symposium on Computer Science Education",
+    "link": "https://2027.sigcse-ts.acm.org/",
+    "seriesLink": null,
+    "date": "February 17-20, 2027",
+    "place": "Sacramento, CA, US",
+    "abstractDeadline": "2026-06-26",
+    "deadline": "2026-07-03",
+    "rebuttalDate": null,
+    "notificationDate": "2026-09-14",
+    "note": "Papers track; notification date marked tentative on the CFP.",
+    "programChair": "Natalie Kiesler, Ryan Dougherty, Bedour Alshaigy",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Deepti Joshi, Zack Butler"
   },
   {
     "name": "SIGCSE TS",
@@ -28173,6 +28287,29 @@
     "submissions": null,
     "estimated": false,
     "verified": true
+  },
+  {
+    "name": "UbiComp / ISWC",
+    "venueKeys": [
+      "ubicomp",
+      "iswc"
+    ],
+    "year": 2027,
+    "description": "ACM International Joint Conference on Pervasive and Ubiquitous Computing and International Symposium on Wearable Computers",
+    "link": null,
+    "seriesLink": null,
+    "date": "October 3-7, 2027",
+    "place": "Seoul, South Korea",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": true,
+    "verified": false,
+    "generalChair": null
   },
   {
     "name": "UbiComp / ISWC",
@@ -35016,6 +35153,28 @@
     "venueKeys": [
       "assets"
     ],
+    "year": 2027,
+    "description": "ACM SIGACCESS Conference on Computers and Accessibility",
+    "link": "https://assets27.sigaccess.org/",
+    "seriesLink": "https://www.sigaccess.org/",
+    "date": "October 24-27, 2027",
+    "place": "Tokyo, Japan",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": true,
+    "verified": false,
+    "generalChair": null
+  },
+  {
+    "name": "ASSETS",
+    "venueKeys": [
+      "assets"
+    ],
     "year": 2026,
     "description": "ACM SIGACCESS Conference on Computers and Accessibility",
     "link": "https://assets26.sigaccess.org/",
@@ -36833,6 +36992,28 @@
     "venueKeys": [
       "cikm"
     ],
+    "year": 2027,
+    "description": "ACM International Conference on Information and Knowledge Management",
+    "link": null,
+    "seriesLink": "https://www.cikmconference.org/",
+    "date": null,
+    "place": "Sydney, Australia",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": true,
+    "verified": false,
+    "generalChair": null
+  },
+  {
+    "name": "CIKM",
+    "venueKeys": [
+      "cikm"
+    ],
     "year": 2026,
     "description": "ACM International Conference on Information and Knowledge Management",
     "link": "https://cikm2026.diag.uniroma1.it/",
@@ -38414,6 +38595,28 @@
     "estimated": false,
     "verified": true,
     "generalChair": null
+  },
+  {
+    "name": "DIS",
+    "venueKeys": [
+      "dis"
+    ],
+    "year": 2027,
+    "description": "ACM Conference on Designing Interactive Systems",
+    "link": "https://dis.acm.org/2027/",
+    "seriesLink": "https://dis.acm.org/",
+    "date": "June 28 - July 2, 2027",
+    "place": "Stockholm, Sweden",
+    "abstractDeadline": "2027-01-11",
+    "deadline": "2027-01-18",
+    "rebuttalDate": null,
+    "notificationDate": "2027-03-19",
+    "programChair": "Chris Le Dantec, Paul Tennent, Laia Turmo Vidal",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Kia Höök, Madeline Balaam (KTH Royal Institute of Technology)"
   },
   {
     "name": "DIS",
@@ -42606,6 +42809,28 @@
     "venueKeys": [
       "gd"
     ],
+    "year": 2027,
+    "description": "International Symposium on Graph Drawing and Network Visualization",
+    "link": "https://graphdrawing.github.io/gd2027/",
+    "seriesLink": "https://graphdrawing.github.io/",
+    "date": "September 15-17, 2027 (PhD school Sep 13-14)",
+    "place": "Budapest, Hungary",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": true,
+    "verified": false,
+    "generalChair": null
+  },
+  {
+    "name": "GD",
+    "venueKeys": [
+      "gd"
+    ],
     "year": 2026,
     "description": "International Symposium on Graph Drawing and Network Visualization",
     "link": "https://graphdrawing.github.io/gd2026/",
@@ -43772,6 +43997,28 @@
     "submissions": null,
     "estimated": false,
     "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "ICDCS",
+    "venueKeys": [
+      "icdcs"
+    ],
+    "year": 2027,
+    "description": "IEEE International Conference on Distributed Computing Systems",
+    "link": "https://icdcs2027.icdcs.org/",
+    "seriesLink": "https://icdcs.org/",
+    "date": "July 5-8, 2027",
+    "place": "Melbourne, Australia",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": true,
+    "verified": false,
     "generalChair": null
   },
   {
@@ -47965,6 +48212,28 @@
     "venueKeys": [
       "ismar"
     ],
+    "year": 2027,
+    "description": "IEEE International Symposium on Mixed and Augmented Reality",
+    "link": "https://www.ieeeismar.net/2027/",
+    "seriesLink": "https://www.ismar.net/",
+    "date": null,
+    "place": "Kobe, Japan",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": true,
+    "verified": false,
+    "generalChair": null
+  },
+  {
+    "name": "ISMAR",
+    "venueKeys": [
+      "ismar"
+    ],
     "year": 2026,
     "description": "IEEE International Symposium on Mixed and Augmented Reality",
     "link": "https://www.ieeeismar.net/2026/",
@@ -48212,6 +48481,29 @@
     "estimated": false,
     "verified": true,
     "generalChair": null
+  },
+  {
+    "name": "ISSRE",
+    "venueKeys": [
+      "issre"
+    ],
+    "year": 2027,
+    "description": "IEEE International Symposium on Software Reliability Engineering",
+    "link": "https://conf.researchr.org/home/issre-2027",
+    "seriesLink": "https://www.issre.net/",
+    "date": "October 19-22, 2027",
+    "place": "Macau, China",
+    "abstractDeadline": "2027-04-09",
+    "deadline": "2027-04-16",
+    "rebuttalDate": "2027-06-07–2027-06-11",
+    "notificationDate": "2027-07-09",
+    "note": "Research track. Early decisions June 15, 2027; author revision period June 16–July 2, 2027.",
+    "programChair": "Naghmeh Ivaki (University of Coimbra), Weiyi Shang (University of Waterloo)",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Barbara Gallina (Mälardalen University), Tao Zhang (Macau University of Science and Technology)"
   },
   {
     "name": "ISSRE",
@@ -48488,6 +48780,28 @@
     "estimated": false,
     "verified": true,
     "generalChair": null
+  },
+  {
+    "name": "ITC",
+    "venueKeys": [
+      "itc"
+    ],
+    "year": 2027,
+    "description": "IEEE International Test Conference",
+    "link": "https://www.itctestweek.org/",
+    "seriesLink": "https://www.itctestweek.org/",
+    "date": "October 10-15, 2027",
+    "place": "Grand Hyatt River Walk, San Antonio, TX, USA",
+    "abstractDeadline": "2027-03-05",
+    "deadline": "2027-04-09",
+    "rebuttalDate": null,
+    "notificationDate": "2027-06-01",
+    "programChair": "Hung-Pin (Charles) Wen",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Sandeep Kumar Goel"
   },
   {
     "name": "ITC",
@@ -49322,6 +49636,28 @@
     "venueKeys": [
       "kr"
     ],
+    "year": 2027,
+    "description": "International Conference on Principles of Knowledge Representation and Reasoning",
+    "link": "https://kr.org/KR2027/",
+    "seriesLink": "https://kr.org/",
+    "date": "September 21-24, 2027 (workshops September 18-20)",
+    "place": "Buenos Aires, Argentina",
+    "abstractDeadline": "2027-04-23",
+    "deadline": "2027-04-28",
+    "rebuttalDate": "2027-06-15–2027-06-18",
+    "notificationDate": "2027-06-30",
+    "programChair": "Eduardo Fermé (University of Madeira), Maria Vanina Martinez (IIIA-CSIC)",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Marie-Laure Mugnier (University of Montpellier)"
+  },
+  {
+    "name": "KR",
+    "venueKeys": [
+      "kr"
+    ],
     "year": 2026,
     "description": "International Conference on Principles of Knowledge Representation and Reasoning",
     "link": "https://kr.org/KR2026/",
@@ -50081,6 +50417,52 @@
     "venueKeys": [
       "middleware"
     ],
+    "year": 2027,
+    "description": "ACM/IFIP International Middleware Conference",
+    "link": "https://middleware-conf.github.io/2027/",
+    "seriesLink": "https://middleware-conf.github.io/",
+    "date": "December 13-17, 2027",
+    "place": "Kyoto, Japan",
+    "abstractDeadline": "2026-11-27",
+    "deadline": "2026-12-04",
+    "rebuttalDate": "2027-03-03–2027-03-07",
+    "notificationDate": "2027-03-29",
+    "note": "Cycle 1/2 (Winter). Abstract registration November 27; early rejection February 2; author rebuttal March 3–7; notification March 29. Firm deadline.",
+    "programChair": "Klara Nahrstedt, Etienne Rivière",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Kazuyuki Shudo"
+  },
+  {
+    "name": "Middleware",
+    "venueKeys": [
+      "middleware"
+    ],
+    "year": 2027,
+    "description": "ACM/IFIP International Middleware Conference",
+    "link": "https://middleware-conf.github.io/2027/",
+    "seriesLink": "https://middleware-conf.github.io/",
+    "date": "December 13-17, 2027",
+    "place": "Kyoto, Japan",
+    "abstractDeadline": "2027-05-28",
+    "deadline": "2027-06-04",
+    "rebuttalDate": "2027-08-18–2027-08-22",
+    "notificationDate": "2027-09-13",
+    "note": "Cycle 2/2 (Summer). Abstract registration May 28; early rejection July 13; author rebuttal August 18–22; notification September 13. Firm deadline.",
+    "programChair": "Klara Nahrstedt, Etienne Rivière",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Kazuyuki Shudo"
+  },
+  {
+    "name": "Middleware",
+    "venueKeys": [
+      "middleware"
+    ],
     "year": 2026,
     "description": "ACM/IFIP International Middleware Conference",
     "link": "https://middleware-conf.github.io/2026/",
@@ -50627,6 +51009,29 @@
     "estimated": false,
     "verified": true,
     "generalChair": null
+  },
+  {
+    "name": "MSR",
+    "venueKeys": [
+      "msr"
+    ],
+    "year": 2027,
+    "description": "IEEE/ACM International Conference on Mining Software Repositories",
+    "link": "https://2027.msrconf.org/",
+    "seriesLink": "https://2026.msrconf.org/series/msr",
+    "date": "April 26-27, 2027 (co-located with ICSE 2027)",
+    "place": "Dublin, Ireland",
+    "abstractDeadline": "2026-10-20",
+    "deadline": "2026-10-23",
+    "rebuttalDate": "2026-12-04–2026-12-08",
+    "notificationDate": "2027-01-08",
+    "note": "Technical Papers track. Early-reject notification December 3, 2026.",
+    "programChair": "Preetha Chatterjee (Drexel University), Gregorio Robles (Universidad Rey Juan Carlos)",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Shane McIntosh"
   },
   {
     "name": "MSR",
@@ -51852,6 +52257,28 @@
     "venueKeys": [
       "re"
     ],
+    "year": 2027,
+    "description": "IEEE International Requirements Engineering Conference",
+    "link": "https://conf.researchr.org/home/RE-2027",
+    "seriesLink": "https://conf.researchr.org/series/re",
+    "date": "August 23-27, 2027",
+    "place": "Milan, Italy",
+    "abstractDeadline": "2027-02-22",
+    "deadline": "2027-03-01",
+    "rebuttalDate": null,
+    "notificationDate": "2027-05-14",
+    "programChair": "Anne Hess (TH Würzburg-Schweinfurt), Mehrdad Sabetzadeh (University of Ottawa)",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Luciano Baresi"
+  },
+  {
+    "name": "RE",
+    "venueKeys": [
+      "re"
+    ],
     "year": 2026,
     "description": "IEEE International Requirements Engineering Conference",
     "link": "https://conf.researchr.org/home/RE-2026",
@@ -52128,6 +52555,28 @@
     "venueKeys": [
       "recsys"
     ],
+    "year": 2027,
+    "description": "ACM Conference on Recommender Systems",
+    "link": "https://recsys.acm.org/recsys27/",
+    "seriesLink": "https://recsys.acm.org/",
+    "date": "August 23-27, 2027",
+    "place": "Honolulu, HI, USA",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": true,
+    "verified": false,
+    "generalChair": "Christine Bauer, Joeran Beel, Bamshad Mobasher"
+  },
+  {
+    "name": "RecSys",
+    "venueKeys": [
+      "recsys"
+    ],
     "year": 2026,
     "description": "ACM Conference on Recommender Systems",
     "link": "https://recsys.acm.org/recsys26/",
@@ -52397,6 +52846,28 @@
     "submissions": null,
     "estimated": false,
     "verified": true,
+    "generalChair": null
+  },
+  {
+    "name": "SAT",
+    "venueKeys": [
+      "sat"
+    ],
+    "year": 2027,
+    "description": "International Conference on Theory and Applications of Satisfiability Testing",
+    "link": "https://satisfiability.org/SAT27/",
+    "seriesLink": "https://satisfiability.org/",
+    "date": "July 5-9, 2027",
+    "place": "Barcelona, Spain",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": true,
+    "verified": false,
     "generalChair": null
   },
   {
@@ -52950,6 +53421,29 @@
     "estimated": false,
     "verified": true,
     "generalChair": null
+  },
+  {
+    "name": "SEAMS",
+    "venueKeys": [
+      "seams"
+    ],
+    "year": 2027,
+    "description": "International Symposium on Software Engineering for Adaptive and Self-Managing Systems",
+    "link": "https://conf.researchr.org/home/seams-2027",
+    "seriesLink": "https://conf.researchr.org/series/seams",
+    "date": "April 26-27, 2027 (co-located with ICSE 2027)",
+    "place": "Dublin, Ireland",
+    "abstractDeadline": null,
+    "deadline": "2026-10-23",
+    "rebuttalDate": null,
+    "notificationDate": "2026-12-03",
+    "note": "Single-round submission with a revision option: revisions due 2027-01-05, decision on revisions 2027-01-15.",
+    "programChair": "Alessandro Vittorio Papadopoulos (DTU), Genaina Rodrigues (University of Brasilia)",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true,
+    "generalChair": "Ivana Dusparic (Trinity College Dublin)"
   },
   {
     "name": "SEAMS",
