@@ -5,6 +5,7 @@ import { CONTINENT_LABELS, DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEV
 import { filterLabs, loadLabsData, renderLabs } from './labs.js';
 import type { Lab } from './labs.js';
 import { exportFileName, jobsToMarkdown, renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
+import { downloadMarkdown, scrollToHashCard, wireFavoritesActions } from '../opportunity-card.js';
 import { rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
@@ -14,7 +15,7 @@ import { keywordValue, parseKeywordQuery, restoreKeywordQuery, setQueryKeyword }
 import type { JobFilters, JobSort } from './jobs-data.js';
 import type { Job } from '../types.js';
 import { downloadCalendar } from '../calendar.js';
-import { createProgressStore, PROGRESS_LABELS, progressMatches } from './progress.js';
+import { createProgressStore, filterByProgress, PROGRESS_SEARCH_CHOICES, wireProgressPickers } from '../progress.js';
 import { createSearchControls, focusSearchOnLoad, renderSearchExamples, sample, searchChoices, updateSearchUrl } from '../search-controls.js';
 
 const params = new URLSearchParams(window.location.search);
@@ -25,10 +26,7 @@ const countElement = document.getElementById('jobs-count')!;
 const mapElement = document.getElementById('jobs-map')!;
 const favorites = createFavoritesStore('cspicks:jobs-favorites');
 const progress = createProgressStore('cspicks:jobs-progress');
-const calendarButton = document.querySelector<HTMLButtonElement>('#export-favorites-calendar')!;
 const select = (id: string) => document.getElementById(id) as HTMLSelectElement;
-const exportButton = document.querySelector<HTMLButtonElement>('#export-favorites')!;
-const favoritesActions = document.querySelector<HTMLDetailsElement>('#favorites-actions')!;
 const mapClear = document.querySelector<HTMLButtonElement>('#clear-map-states')!;
 const labsDetails = document.querySelector<HTMLDetailsElement>('#labs-details')!;
 const labsList = document.getElementById('labs-list')!;
@@ -73,9 +71,7 @@ function render() {
   const filters: JobFilters = { ...current, now: Date.now() };
   const favoritesOnly = wantsFavoritesOnly(current.query);
   // Starred postings lead the list; "favorites only" hides the rest.
-  const progressValues = parseKeywordQuery(current.query, JOBS_KEYWORD_SPECS).filters.progress;
-  const byProgress = (list: Job[]) => progressValues?.length ? list.filter(job => progressValues.some(value => progressMatches(progress.get(job.id), value))) : list;
-  const byFavorites = (list: Job[]) => byProgress(favoritesOnly ? onlyFavorites(list, job => job.id, favorites) : prioritizeFavorites(list, job => job.id, favorites));
+  const byFavorites = (list: Job[]) => filterByProgress(favoritesOnly ? onlyFavorites(list, job => job.id, favorites) : prioritizeFavorites(list, job => job.id, favorites), current.query, JOBS_KEYWORD_SPECS, job => job.id, progress);
   const shown = byFavorites(filterJobs(allJobs, filters));
   renderContinentOptions(byFavorites(filterJobs(allJobs, { ...filters, continent: 'world' })));
   // The map ignores its own state filter so every state keeps a count.
@@ -181,7 +177,7 @@ function buildSuggestions() {
         favorites: searchChoices({ only: 'Starred postings only' }),
         deadline: searchChoices({ soon: 'Deadline in the next 30 days', week: 'Deadline in the next 7 days', rolling: 'Rolling review', none: 'No deadline listed' }),
         added: searchChoices({ week: 'Added in the last 7 days', month: 'Added in the last month' }),
-        progress: searchChoices({ any: 'Any status set', ...PROGRESS_LABELS, none: 'No status yet' })
+        progress: searchChoices(PROGRESS_SEARCH_CHOICES)
       };
     },
     emptyText: 'No matching school, area, or state',
@@ -238,28 +234,7 @@ function setupEvents() {
     const area = target?.closest<HTMLElement>('[data-search-area]');
     if (area) setFilter('area', [area.dataset.searchArea!]);
   });
-  results.addEventListener('change', event => {
-    const picker = event.target instanceof HTMLSelectElement && event.target.dataset.progressId ? event.target : null;
-    if (!picker) return;
-    try {
-      progress.set(picker.dataset.progressId!, picker.value);
-      picker.closest('.opportunity-progress')?.classList.toggle('has-status', Boolean(picker.value));
-    } catch {
-      picker.title = 'Could not save: this browser is blocking site storage';
-    }
-  });
-  calendarButton.addEventListener('click', () => {
-    const events = onlyFavorites(allJobs, job => job.id, favorites).flatMap(job => jobCalendarEvents(job));
-    if (events.length) downloadCalendar('cspicks-starred-job-deadlines.ics', events, 'CS Picks: starred job deadlines');
-    favoritesActions.open = false;
-  });
-  exportButton.addEventListener('click', () => {
-    exportFavorites();
-    favoritesActions.open = false;
-  });
-  document.addEventListener('click', event => {
-    if (!favoritesActions.contains(event.target as Node)) favoritesActions.open = false;
-  });
+  wireProgressPickers(results, progress);
 
   results.addEventListener('click', event => {
     const target = event.target instanceof Element ? event.target : null;
@@ -283,34 +258,6 @@ function setupEvents() {
   });
 
   renderSearchExamples(document.getElementById('jobs-examples')!, jobExamples());
-
-}
-
-function updateExportButton() {
-  const count = favorites.all().length;
-  const dated = onlyFavorites(allJobs, job => job.id, favorites).filter(job => jobCalendarEvents(job).length).length;
-  calendarButton.hidden = dated === 0;
-  calendarButton.textContent = `Add ${dated} starred deadline${dated === 1 ? '' : 's'} to calendar`;
-  calendarButton.title = 'Download an .ics file for Google Calendar, Outlook, or Apple Calendar, with reminders a week and a day ahead';
-  favoritesActions.hidden = count < 2 && dated === 0;
-  if (favoritesActions.hidden) favoritesActions.open = false;
-  exportButton.hidden = count < 2;
-  exportButton.textContent = `Export ${count} favorites`;
-  exportButton.title = `Download your ${count} starred positions as a Markdown file`;
-}
-
-/** Every starred posting (closed ones too, whatever the filters), in the current sort order. */
-function exportFavorites() {
-  const now = Date.now();
-  const starred = onlyFavorites(allJobs, job => job.id, favorites);
-  if (!starred.length) return;
-  const ordered = filterJobs(starred, { status: 'all', sortBy: state().sortBy, now });
-  const url = URL.createObjectURL(new Blob([jobsToMarkdown(ordered, { now, getProgress: progress.get })], { type: 'text/markdown;charset=utf-8' }));
-  const link = Object.assign(document.createElement('a'), { href: url, download: exportFileName(now) });
-  document.body.append(link);
-  link.click();
-  link.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 0);
 }
 
 async function init() {
@@ -321,13 +268,28 @@ async function init() {
     suggestions = buildSuggestions();
     input.disabled = false;
     input.placeholder = 'Search jobs or use keywords: track: teaching loc: texas';
+    const favoritesMenu = wireFavoritesActions({
+      getItems: () => allJobs,
+      getId: job => job.id,
+      favorites,
+      calendarEvents: job => jobCalendarEvents(job),
+      calendarFileName: 'cspicks-starred-job-deadlines.ics',
+      calendarTitle: 'CS Picks: starred job deadlines',
+      exportNoun: 'positions',
+      onExportMarkdown: starred => {
+        const now = Date.now();
+        const ordered = filterJobs(starred, { status: 'all', sortBy: state().sortBy, now });
+        downloadMarkdown(exportFileName(now), jobsToMarkdown(ordered, { now, getProgress: progress.get }));
+      }
+    });
     wireFavoriteToggles(results, favorites);
-    onFavoriteChange(results, () => { updateExportButton(); render(); });
-    updateExportButton();
+    onFavoriteChange(results, () => { favoritesMenu.update(); render(); });
+    favoritesMenu.update();
     initTooltipPositioning();
     setupEvents();
     render();
     focusSearchOnLoad(input);
+    scrollToHashCard();
     loadLabsData().then(labs => { allLabs = labs; render(); })
       .catch(error => console.warn('Lab directory unavailable.', error));
   } catch (error) {

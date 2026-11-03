@@ -1,5 +1,10 @@
 import { escapeHtml, safeExternalUrl } from './shared.js';
-import { favoriteToggleButton } from './favorites.js';
+import { createFavoritesStore, favoriteToggleButton, onlyFavorites } from './favorites.js';
+import { downloadCalendar } from './calendar.js';
+import type { CalendarEvent } from './calendar.js';
+import { PROGRESS_LABELS } from './progress.js';
+import type { ProgressStatus } from './progress.js';
+import { resultActions } from './result-actions.js';
 
 /** Color a primary dated award deadline; vague cycles and multiple labeled stages stay neutral. */
 export function awardDeadlineTone(text: string, estimated: boolean, historical: boolean, now = new Date()) {
@@ -126,4 +131,112 @@ export function opportunityStages(stages: StageView[], estimated = false) {
     return `<li class="opportunity-stage ${tone}${stage.state === 'next' ? ' is-next' : ''}"><span class="opportunity-stage-name">${escapeHtml(stage.stage)}</span> <span class="opportunity-stage-date">${escapeHtml(formatIsoDay(stage.date))}${estimated ? ' (est.)' : ''} · ${left}</span>${tags}</li>`;
   }).join('');
   return `<ol class="opportunity-stages" aria-label="Deadline stages">${items}</ol>`;
+}
+
+/** Application-status picker, shown only on starred items (the shortlist someone is actually applying to). */
+export function opportunityProgressPicker(id: string, targetLabel: string, status: ProgressStatus | undefined) {
+  const options = [['', 'Not started'], ...Object.entries(PROGRESS_LABELS)]
+    .map(([value, label]) => `<option value="${value}"${(status ?? '') === value ? ' selected' : ''}>${escapeHtml(label)}</option>`).join('');
+  return `<label class="opportunity-progress${status ? ' has-status' : ''}">My status <select data-progress-id="${escapeHtml(id)}" aria-label="My application status for ${escapeHtml(targetLabel)}">${options}</select></label>`;
+}
+
+/** Shared topic / research-area chip row at the bottom of an opportunity card. */
+export function opportunityTopics(chipsHtml: string, className = '') {
+  if (!chipsHtml) return '';
+  return `<div class="opportunity-topics${className ? ` ${className}` : ''}"><span class="opportunity-label">Topics</span>${chipsHtml}</div>`;
+}
+
+/** Shared card footer combining optional left-side controls (status picker, school links) with the ⋯ actions menu. */
+export function opportunityFooter(options: {
+  kind: 'grant' | 'job'; title: string; startHtml?: string; actionsHtml: string; pageLink: string;
+}) {
+  const left = options.startHtml ? `<div class="opportunity-footer-start">${options.startHtml}</div>` : '';
+  return `<div class="${options.kind}-card-footer result-card-footer">${left}${resultActions(options.title, options.actionsHtml, options.pageLink)}</div>`;
+}
+
+/** Shared grouped-view shell (by school on Jobs, by sponsor on Awards & Grants). */
+export function opportunityGroup(options: {
+  label: string; className: string; headingButtonHtml: string; metaHtml: string; extraHeaderHtml?: string; itemsHtml: string;
+}) {
+  return `<section class="opportunity-group ${options.className}" aria-label="${escapeHtml(options.label)}">
+    <header class="opportunity-group-header">
+      <h2>${options.headingButtonHtml}</h2>
+      ${options.metaHtml}
+      ${options.extraHeaderHtml || ''}
+    </header>
+    <div class="opportunity-group-items">${options.itemsHtml}</div>
+  </section>`;
+}
+
+/** Scroll to and highlight the `#id` card from the URL hash, if present. */
+export function scrollToHashCard() {
+  const hash = window.location.hash.slice(1);
+  if (!hash) return;
+  let id = hash;
+  try { id = decodeURIComponent(hash); } catch { /* keep raw */ }
+  const targetElement = document.getElementById(id) || document.getElementById(hash);
+  if (targetElement) {
+    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    targetElement.classList.add('is-highlighted');
+    window.setTimeout(() => targetElement.classList.remove('is-highlighted'), 2400);
+  }
+}
+
+/** Trigger a browser download of a Markdown file. */
+export function downloadMarkdown(filename: string, content: string) {
+  const url = URL.createObjectURL(new Blob([content], { type: 'text/markdown;charset=utf-8' }));
+  const link = Object.assign(document.createElement('a'), { href: url, download: filename });
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
+/** Wire the `#favorites-actions` ⋯ menu (calendar `.ics` export + Markdown shortlist export). */
+export function wireFavoritesActions<T>(options: {
+  getItems: () => T[];
+  getId: (item: T) => string;
+  favorites: ReturnType<typeof createFavoritesStore>;
+  calendarEvents: (item: T) => CalendarEvent[];
+  calendarFileName: string;
+  calendarTitle: string;
+  exportNoun: string;
+  onExportMarkdown: (starred: T[]) => void;
+}) {
+  const menu = document.querySelector<HTMLDetailsElement>('#favorites-actions');
+  const calendarButton = document.querySelector<HTMLButtonElement>('#export-favorites-calendar');
+  const exportButton = document.querySelector<HTMLButtonElement>('#export-favorites');
+
+  const update = () => {
+    if (!menu) return;
+    const count = options.favorites.all().length;
+    const starred = onlyFavorites(options.getItems(), options.getId, options.favorites);
+    const dated = starred.filter(item => options.calendarEvents(item).length).length;
+    if (calendarButton) {
+      calendarButton.hidden = dated === 0;
+      calendarButton.textContent = `Add ${dated} starred deadline${dated === 1 ? '' : 's'} to calendar`;
+      calendarButton.title = 'Download an .ics file for Google Calendar, Outlook, or Apple Calendar, with reminders a week and a day ahead';
+    }
+    if (exportButton) {
+      exportButton.hidden = count < 2;
+      exportButton.textContent = `Export ${count} favorites`;
+      exportButton.title = `Download your ${count} starred ${options.exportNoun} as a Markdown file`;
+    }
+    menu.hidden = count < 2 && dated === 0;
+    if (menu.hidden) menu.open = false;
+  };
+
+  calendarButton?.addEventListener('click', () => {
+    const events = onlyFavorites(options.getItems(), options.getId, options.favorites).flatMap(item => options.calendarEvents(item));
+    if (events.length) downloadCalendar(options.calendarFileName, events, options.calendarTitle);
+    if (menu) menu.open = false;
+  });
+
+  exportButton?.addEventListener('click', () => {
+    const starred = onlyFavorites(options.getItems(), options.getId, options.favorites);
+    if (starred.length) options.onExportMarkdown(starred);
+    if (menu) menu.open = false;
+  });
+
+  return { update };
 }

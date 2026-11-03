@@ -1,7 +1,6 @@
-import { newBadge, opportunityDeadline, opportunityFreshness, opportunityHeader, opportunityMeta } from '../opportunity-card.js';
-import { PROGRESS_LABELS } from './progress.js';
-import type { ProgressStatus } from './progress.js';
-import { resultActions } from '../result-actions.js';
+import { newBadge, opportunityDeadline, opportunityFooter, opportunityFreshness, opportunityGroup, opportunityHeader, opportunityMeta, opportunityProgressPicker, opportunityTopics } from '../opportunity-card.js';
+import { PROGRESS_LABELS } from '../progress.js';
+import type { ProgressStatus } from '../progress.js';
 import { areaLabels, escapeHtml, safeExternalUrl } from '../shared.js';
 import { deadlineLabel, DEPARTMENT_LABELS, isActive, jobCalendarEvents, jobUnitKind, filterValues, formatDay, LEVEL_LABELS, TRACK_LABELS, US_STATES } from './jobs-data.js';
 import type { Job } from '../types.js';
@@ -12,13 +11,6 @@ type GetProgress = (id: string) => ProgressStatus | undefined;
 
 /** Active postings not confirmed live by a crawl or submission within this many days get a visible warning. */
 export const JOB_STALE_AFTER_DAYS = 30;
-
-/** Application-status picker, shown only on starred postings (the shortlist someone is actually applying to). */
-function progressPicker(job: Job, status: ProgressStatus | undefined) {
-  const options = [['', 'Not started'], ...Object.entries(PROGRESS_LABELS)]
-    .map(([value, label]) => `<option value="${value}"${(status ?? '') === value ? ' selected' : ''}>${escapeHtml(label)}</option>`).join('');
-  return `<label class="opportunity-progress${status ? ' has-status' : ''}">My status <select data-progress-id="${escapeHtml(job.id)}" aria-label="My application status for ${escapeHtml(job.title)} at ${escapeHtml(job.school)}">${options}</select></label>`;
-}
 
 
 
@@ -45,10 +37,9 @@ function schoolLinks(school: string) {
 export function renderJobCard(job: Job, isFavorite: IsFavorite = () => false, now = Date.now(), showSchool = true, getProgress: GetProgress = () => undefined) {
   const favorite = isFavorite(job.id);
   const footerParts = [
-    favorite ? progressPicker(job, getProgress(job.id)) : '',
+    favorite ? opportunityProgressPicker(job.id, `${job.title} at ${job.school}`, getProgress(job.id)) : '',
     showSchool && !job.lab ? `<span class="opportunity-card-links job-school-links">${schoolLinks(job.school)}</span>` : ''
   ].join('');
-  const footerLeft = footerParts ? `<div class="opportunity-footer-start">${footerParts}</div>` : '';
   const calendarAction = jobCalendarEvents(job, now).length ? `<button type="button" data-calendar-job="${escapeHtml(job.id)}">Add dates to calendar</button>` : '';
   const href = safeExternalUrl(job.url);
   const deadline = deadlineLabel(job, now);
@@ -76,23 +67,24 @@ export function renderJobCard(job: Job, isFavorite: IsFavorite = () => false, no
     ])}
     ${annotationChips ? `<div class="opportunity-tags job-chips">${annotationChips}</div>` : ''}
     ${job.summary ? `<p class="opportunity-summary job-summary">${escapeHtml(job.summary)}</p>` : ''}
-    ${areaChips ? `<div class="opportunity-topics"><span class="opportunity-label">Topics</span>${areaChips}</div>` : ''}
+    ${opportunityTopics(areaChips)}
     ${isActive(job, now) ? opportunityFreshness({ checkedAt: job.lastSeenAt, checkedLabel: 'Confirmed live on the official page', staleAfterDays: JOB_STALE_AFTER_DAYS, addedAt: job.addedAt, now }) : ''}
-    <div class="job-card-footer result-card-footer">${footerLeft}${resultActions(job.title, `${calendarAction}<a class="job-edit" href="jobs-submit.html?id=${encodeURIComponent(job.id)}">Suggest update</a>`, `jobs.html?q=${encodeURIComponent(job.id)}&status=all#${encodeURIComponent(job.id)}`)}</div>
+    ${opportunityFooter({ kind: 'job', title: job.title, startHtml: footerParts,
+      actionsHtml: `${calendarAction}<a class="job-edit" href="jobs-submit.html?id=${encodeURIComponent(job.id)}">Suggest update</a>`,
+      pageLink: `jobs.html?q=${encodeURIComponent(job.id)}&status=all#${encodeURIComponent(job.id)}` })}
   </article>`;
 }
 
 export function renderSchoolCard(group: SchoolJobs, isFavorite: IsFavorite = () => false, now = Date.now(), getProgress: GetProgress = () => undefined) {
   const first = group.jobs[0]!;
-  return `<section class="opportunity-group job-school-card" aria-label="${escapeHtml(group.school)}">
-    <header class="opportunity-group-header">
-      <h2><button type="button" class="job-school-btn" data-search-school="${escapeHtml(group.school)}">${escapeHtml(group.school)}</button></h2>
-      <p class="job-meta">${first.city ? `${escapeHtml(first.city)}, ` : ''}${escapeHtml(US_STATES[group.state] || group.state)}
-        · ${group.jobs.length} position${group.jobs.length === 1 ? '' : 's'}</p>
-      ${first.lab ? '' : `<p class="job-school-links">${schoolLinks(group.school)}</p>`}
-    </header>
-    <div class="opportunity-group-items">${group.jobs.map(job => renderJobCard(job, isFavorite, now, false, getProgress)).join('')}</div>
-  </section>`;
+  return opportunityGroup({
+    label: group.school,
+    className: 'job-school-card',
+    headingButtonHtml: `<button type="button" class="job-school-btn" data-search-school="${escapeHtml(group.school)}">${escapeHtml(group.school)}</button>`,
+    metaHtml: `<p class="job-meta">${first.city ? `${escapeHtml(first.city)}, ` : ''}${escapeHtml(US_STATES[group.state] || group.state)} · ${group.jobs.length} position${group.jobs.length === 1 ? '' : 's'}</p>`,
+    extraHeaderHtml: first.lab ? '' : `<p class="job-school-links">${schoolLinks(group.school)}</p>`,
+    itemsHtml: group.jobs.map(job => renderJobCard(job, isFavorite, now, false, getProgress)).join('')
+  });
 }
 
 /** The US tile map: one button per state, shaded by posting count. `selected` is USPS codes, one code, or 'all'. */

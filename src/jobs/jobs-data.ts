@@ -3,6 +3,7 @@
  * per-school grouping, and autocomplete indexing.
  */
 import { FAVORITES_KEYWORD_SPEC } from '../favorites.js';
+import { PROGRESS_KEYWORD_SPEC } from '../progress.js';
 import { addedWindowDays, daysSince } from '../opportunity-card.js';
 import type { CalendarEvent } from '../calendar.js';
 import { matchesKeywordOptions, parseKeywordQuery } from '../search-keywords.js';
@@ -105,7 +106,7 @@ export const JOBS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'status', example: 'status: closed', description: '"active" (default), "closed" (older postings), or "all"' },
   { key: 'deadline', aliases: ['closing'], example: 'deadline: soon', description: 'soon (next 30 days), week (next 7 days), rolling, or none (no deadline listed)' },
   { key: 'added', aliases: ['new'], example: 'added: week', description: 'Added to CS Picks recently: week, month, or a number of days' },
-  { key: 'progress', aliases: ['applied', 'application'], example: 'progress: applied', description: 'Your own application status on starred postings (kept in this browser): any, none, preparing, applied, interviewing, offer, or declined' },
+  PROGRESS_KEYWORD_SPEC,
   FAVORITES_KEYWORD_SPEC
 ];
 

@@ -4,13 +4,11 @@
  */
 import { areaLabels, escapeHtml } from '../shared.js';
 import { LEVEL_LABELS, TRACK_LABELS, VISA_LABELS, loadJobsData } from './jobs-data.js';
-import { buildSubmissionContent, jobSubmission } from '../submission.js';
-import { DELIVERY_BUTTONS, QUICK_SECTION, deliver, quickLabel, quickPayload, setupQuickMode } from '../submit-quick.js';
+import { jobSubmission } from '../submission.js';
+import { DELIVERY_BUTTONS, QUICK_SECTION, wireSubmissionForm } from '../submit-quick.js';
 import type { Job } from '../types.js';
 
 const root = document.getElementById('submission-form-root')!;
-let jobsById = new Map<string, Job>();
-let allJobs: Job[] = [];
 
 const options = (entries: Array<[string, string]>, empty: string) =>
   `<option value="">${escapeHtml(empty)}</option>${entries.map(([value, label]) => `<option value="${escapeHtml(value)}">${escapeHtml(label)}</option>`).join('')}`;
@@ -103,7 +101,9 @@ function getFormData() {
   for (const [key, entry] of Object.entries(submission)) {
     if (entry === '' || entry === null || (Array.isArray(entry) && !entry.length)) delete submission[key];
   }
-  return { url: String(submission.officialUrl || ''), title: String(submission.title || submission.university || ''), submission };
+  const url = String(submission.officialUrl || '');
+  const title = String(submission.title || submission.university || '');
+  return { label: title ? `${title} (${url})` : url, submission };
 }
 
 function prefill(job: Job) {
@@ -126,70 +126,28 @@ function prefill(job: Job) {
   if (rolling) rolling.checked = Boolean(job.rolling);
 }
 
-function selectCorrection() {
-  const form = document.getElementById('jobs-submit-form') as HTMLFormElement;
-  const targetInput = form.querySelector<HTMLInputElement>('#target')!;
-  const box = document.getElementById('job-correction-suggestions')!;
-  targetInput.addEventListener('input', () => {
-    const query = targetInput.value.trim().toLowerCase();
-    const matches = query ? allJobs.filter(job => `${job.school} ${job.title} ${job.department}`.toLowerCase().includes(query)).slice(0, 8) : [];
-    box.hidden = !query;
-    box.innerHTML = matches.length
-      ? matches.map(job => `<button type="button" class="correction-suggestion" data-job-id="${escapeHtml(job.id)}"><strong>${escapeHtml(job.title)}</strong><span>${escapeHtml(job.school)} • ${escapeHtml(job.department)}</span></button>`).join('')
-      : '<div style="padding: 0.6rem 0.85rem; color: var(--text-secondary); font-size: 0.82rem;">No matching postings found</div>';
-  });
-  box.addEventListener('click', event => {
-    const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-job-id]') : null;
-    const job = button?.dataset.jobId ? jobsById.get(button.dataset.jobId) : undefined;
-    if (!job) return;
-    targetInput.value = `${job.title} — ${job.school}`;
-    box.hidden = true;
-    prefill(job);
-  });
-}
-
-function setupEvents() {
-  const form = document.getElementById('jobs-submit-form') as HTMLFormElement;
-  const targetRow = document.getElementById('correction-target-row')!;
-  const quick = setupQuickMode(form);
-  quick.apply();
-  selectCorrection();
-  form.querySelectorAll<HTMLInputElement>('input[name="kind"]').forEach(radio => radio.addEventListener('change', () => {
-    quick.apply();
-    targetRow.hidden = radio.value !== 'correction';
-  }));
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
-    const builders = { github: jobSubmission.buildGithubIssueUrl, email: jobSubmission.buildEmailUrl };
-    if (!form.reportValidity()) return;
-    if (quick.isQuick()) {
-      deliver(submitter, quickLabel(form), buildSubmissionContent(quickPayload(form)), builders);
-      return;
-    }
-    const { url, title, submission } = getFormData();
-    deliver(submitter, title ? `${title} (${url})` : url, buildSubmissionContent(submission), builders);
-  });
-}
-
 async function init() {
   renderForm();
+  let allJobs: Job[] = [];
   try {
     allJobs = await loadJobsData();
-    jobsById = new Map(allJobs.map(job => [job.id, job]));
   } catch (error) {
     console.error('Failed to load jobs data for the submit form:', error);
   }
-  setupEvents();
-  const id = new URLSearchParams(window.location.search).get('id');
-  const job = id ? jobsById.get(id) : undefined;
-  if (job) {
-    const radio = document.querySelector<HTMLInputElement>('input[name="kind"][value="correction"]')!;
-    radio.checked = true;
-    radio.dispatchEvent(new Event('change'));
-    document.querySelector<HTMLInputElement>('#target')!.value = `${job.title} — ${job.school}`;
-    prefill(job);
-  }
+  wireSubmissionForm({
+    form: document.getElementById('jobs-submit-form') as HTMLFormElement,
+    suggestionsBox: document.getElementById('job-correction-suggestions')!,
+    items: allJobs,
+    getId: job => job.id,
+    matches: (job, query) => `${job.school} ${job.title} ${job.department}`.toLowerCase().includes(query),
+    suggestionTitle: job => job.title,
+    suggestionDetail: job => `${job.school} • ${job.department}`,
+    targetInputValue: job => `${job.title} — ${job.school}`,
+    emptyText: 'No matching postings found',
+    prefill,
+    getStructured: getFormData,
+    builders: { github: jobSubmission.buildGithubIssueUrl, email: jobSubmission.buildEmailUrl }
+  });
 }
 
 init();

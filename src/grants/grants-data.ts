@@ -6,6 +6,7 @@
 import { matchesKeywordOptions, parseKeywordQuery } from '../search-keywords.js';
 import type { KeywordSpec } from '../search-keywords.js';
 import { FAVORITES_KEYWORD_SPEC } from '../favorites.js';
+import { PROGRESS_KEYWORD_SPEC } from '../progress.js';
 import { addedWindowDays, dayValue, daysSince } from '../opportunity-card.js';
 import type { StageView } from '../opportunity-card.js';
 import type { CalendarEvent } from '../calendar.js';
@@ -23,6 +24,7 @@ export const GRANTS_KEYWORD_SPECS: KeywordSpec[] = [
   { key: 'citizenship', aliases: ['citizen', 'eligible'], example: 'citizenship: international', description: 'international (not limited to US citizens/residents), open (stated open to all), pr (US permanent residents eligible), or us-only' },
   { key: 'added', aliases: ['new'], example: 'added: week', description: 'Added to CS Picks recently: week, month, or a number of days' },
   { key: 'status', example: 'status: historical', description: '"all" (default), "current", or "historical" (discontinued) awards' },
+  PROGRESS_KEYWORD_SPEC,
   FAVORITES_KEYWORD_SPEC
 ];
 

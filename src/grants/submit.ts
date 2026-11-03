@@ -1,15 +1,12 @@
 /**
  * CS Awards & Grants Submission and Edit Controller
  */
-import { escapeHtml } from '../shared.js';
 import { loadGrantsData } from './grants-data.js';
-import { buildSubmissionContent, grantSubmission } from '../submission.js';
-import { DELIVERY_BUTTONS, QUICK_SECTION, deliver, quickLabel, quickPayload, setupQuickMode } from '../submit-quick.js';
+import { grantSubmission } from '../submission.js';
+import { DELIVERY_BUTTONS, QUICK_SECTION, wireSubmissionForm } from '../submit-quick.js';
 import type { Grant } from '../types.js';
 
 const root = document.getElementById('submission-form-root')!;
-let allGrants: Grant[] = [];
-let grantsById = new Map<string, Grant>();
 
 function renderForm() {
   root.innerHTML = `
@@ -105,19 +102,17 @@ function renderForm() {
 }
 
 function getFormData() {
-  const form = document.getElementById('grants-submit-form');
-  if (!form) return null;
-
+  const form = document.getElementById('grants-submit-form')!;
   const kind = form.querySelector<HTMLInputElement>('input[name="kind"]:checked')?.value || 'new';
-  const url = form.querySelector<HTMLInputElement>('#url')?.value.trim();
-  const name = form.querySelector<HTMLInputElement>('#name')?.value.trim();
-  const sponsor = form.querySelector<HTMLInputElement>('#sponsor')?.value.trim();
-  const sponsorCategory = form.querySelector<HTMLSelectElement>('#sponsorCategory')?.value;
-  const deadline = form.querySelector<HTMLInputElement>('#deadline')?.value.trim();
-  const amount = form.querySelector<HTMLInputElement>('#amount')?.value.trim();
-  const summary = form.querySelector<HTMLTextAreaElement>('#summary')?.value.trim();
-  const comments = form.querySelector<HTMLTextAreaElement>('#comments')?.value.trim();
-  const topicsRaw = form.querySelector<HTMLInputElement>('#topics')?.value.trim();
+  const url = form.querySelector<HTMLInputElement>('#url')?.value.trim() || '';
+  const name = form.querySelector<HTMLInputElement>('#name')?.value.trim() || '';
+  const sponsor = form.querySelector<HTMLInputElement>('#sponsor')?.value.trim() || '';
+  const sponsorCategory = form.querySelector<HTMLSelectElement>('#sponsorCategory')?.value || '';
+  const deadline = form.querySelector<HTMLInputElement>('#deadline')?.value.trim() || '';
+  const amount = form.querySelector<HTMLInputElement>('#amount')?.value.trim() || '';
+  const summary = form.querySelector<HTMLTextAreaElement>('#summary')?.value.trim() || '';
+  const comments = form.querySelector<HTMLTextAreaElement>('#comments')?.value.trim() || '';
+  const topicsRaw = form.querySelector<HTMLInputElement>('#topics')?.value.trim() || '';
 
   const targetAudience = [];
   if (form.querySelector<HTMLInputElement>('input[name="audience_faculty"]')?.checked) targetAudience.push('Faculty');
@@ -127,7 +122,7 @@ function getFormData() {
 
   const topics = topicsRaw ? topicsRaw.split(',').map(t => t.trim()).filter(Boolean) : [];
 
-  const submission: Record<string, string | string[] | null> = {
+  const submission: Record<string, unknown> = {
     submissionType: kind === 'correction' ? 'edit_existing_award' : 'new_award_proposal',
     officialUrl: url || null,
     awardName: name || null,
@@ -141,19 +136,18 @@ function getFormData() {
     additionalNotes: comments || null
   };
 
-  // Clean empty fields
   for (const [k, v] of Object.entries(submission)) {
     if (v === null || (Array.isArray(v) && v.length === 0)) {
       delete submission[k];
     }
   }
 
-  return { kind, url, name, submission };
+  return { label: name ? `${name} (${url})` : url, submission };
 }
 
-function prefillFromGrant(grant: Grant | undefined) {
+function prefillFromGrant(grant: Grant) {
   const form = document.getElementById('grants-submit-form');
-  if (!form || !grant) return;
+  if (!form) return;
 
   if (grant.url) form.querySelector<HTMLInputElement>('#url')!.value = grant.url;
   if (grant.name) form.querySelector<HTMLInputElement>('#name')!.value = grant.name;
@@ -174,116 +168,33 @@ function prefillFromGrant(grant: Grant | undefined) {
   if (phdEl) phdEl.checked = auds.some(a => a.includes('phd') || a.includes('doctoral') || a.includes('student'));
   if (undEl) undEl.checked = auds.some(a => a.includes('undergrad'));
   if (postEl) postEl.checked = auds.some(a => a.includes('postdoc'));
-
-}
-
-function setupEvents() {
-  const form = document.getElementById('grants-submit-form')!;
-  const targetRow = document.getElementById('correction-target-row')!;
-  const targetInput = document.querySelector<HTMLInputElement>('#target')!;
-  const suggestionsBox = document.getElementById('grant-correction-suggestions')!;
-  const quick = setupQuickMode(form as HTMLFormElement);
-  quick.apply();
-
-  // Mode radio change
-  form.querySelectorAll<HTMLInputElement>('input[name="kind"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      quick.apply();
-      if (radio.value === 'correction') {
-        targetRow.hidden = false;
-        targetInput.focus();
-      } else {
-        targetRow.hidden = true;
-      }
-    });
-  });
-
-  // Autocomplete for existing awards
-  targetInput.addEventListener('input', () => {
-    const q = targetInput.value.trim().toLowerCase();
-    if (!q) {
-      suggestionsBox.hidden = true;
-      return;
-    }
-
-    const matches = allGrants.filter(g =>
-      g.name.toLowerCase().includes(q) ||
-      g.sponsor.toLowerCase().includes(q) ||
-      (g.shortName && g.shortName.toLowerCase().includes(q))
-    ).slice(0, 8);
-
-    if (!matches.length) {
-      suggestionsBox.innerHTML = '<div style="padding: 0.6rem 0.85rem; color: var(--text-secondary); font-size: 0.82rem;">No matching awards found</div>';
-      suggestionsBox.hidden = false;
-      return;
-    }
-
-    suggestionsBox.innerHTML = matches.map(g => `
-      <button type="button" class="correction-suggestion" data-grant-id="${escapeHtml(g.id)}">
-        <strong>${escapeHtml(g.name)}</strong>
-        <span>${escapeHtml(g.sponsor)} • ${escapeHtml(g.whoFor || '')}</span>
-      </button>
-    `).join('');
-    suggestionsBox.hidden = false;
-  });
-
-  suggestionsBox.addEventListener('click', event => {
-    const btn = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-grant-id]') : null;
-    if (!btn) return;
-    const grantId = btn.dataset.grantId;
-    const grant = grantId ? grantsById.get(grantId) : undefined;
-    if (grant) {
-      targetInput.value = grant.name;
-      suggestionsBox.hidden = true;
-      prefillFromGrant(grant);
-    }
-  });
-
-  document.addEventListener('click', e => {
-    const target = e.target instanceof Node ? e.target : null;
-    if (target && !targetInput.contains(target) && !suggestionsBox.contains(target)) {
-      suggestionsBox.hidden = true;
-    }
-  });
-
-  // Form submit
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
-    const builders = { github: grantSubmission.buildGithubIssueUrl, email: grantSubmission.buildEmailUrl };
-    if (!(form as HTMLFormElement).reportValidity()) return;
-    if (quick.isQuick()) {
-      deliver(submitter, quickLabel(form as HTMLFormElement), buildSubmissionContent(quickPayload(form as HTMLFormElement)), builders);
-      return;
-    }
-    const { url, name, submission } = getFormData()!;
-    deliver(submitter, name ? `${name} (${url})` : url!, buildSubmissionContent(submission), builders);
-  });
 }
 
 async function init() {
   renderForm();
+  let allGrants: Grant[] = [];
   try {
     allGrants = await loadGrantsData();
-    grantsById = new Map(allGrants.map(g => [g.id, g]));
-
-    setupEvents();
-
-    // Check query params for prefill (e.g. grants-submit.html?id=nsf-career)
-    const params = new URLSearchParams(window.location.search);
-    const grantId = params.get('id') || params.get('edit');
-    if (grantId && grantsById.has(grantId)) {
-      const correctionRadio = document.querySelector<HTMLInputElement>('input[name="kind"][value="correction"]');
-      if (correctionRadio) {
-        correctionRadio.checked = true;
-        correctionRadio.dispatchEvent(new Event('change'));
-        document.querySelector<HTMLInputElement>('#target')!.value = grantsById.get(grantId)!.name;
-      }
-      prefillFromGrant(grantsById.get(grantId));
-    }
   } catch (error) {
     console.error('Failed to initialize grants submit form:', error);
   }
+  wireSubmissionForm({
+    form: document.getElementById('grants-submit-form') as HTMLFormElement,
+    suggestionsBox: document.getElementById('grant-correction-suggestions')!,
+    items: allGrants,
+    getId: grant => grant.id,
+    matches: (grant, query) =>
+      grant.name.toLowerCase().includes(query) ||
+      grant.sponsor.toLowerCase().includes(query) ||
+      Boolean(grant.shortName && grant.shortName.toLowerCase().includes(query)),
+    suggestionTitle: grant => grant.name,
+    suggestionDetail: grant => `${grant.sponsor} • ${grant.whoFor || ''}`,
+    targetInputValue: grant => grant.name,
+    emptyText: 'No matching awards found',
+    prefill: prefillFromGrant,
+    getStructured: getFormData,
+    builders: { github: grantSubmission.buildGithubIssueUrl, email: grantSubmission.buildEmailUrl }
+  });
 }
 
 init();

@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { buildCalendar } from '../../src/calendar.js';
-import { filterGrants, grantCalendarEvents, grantDeadlinePresentation, grantStages, nextGrantDeadline } from '../../src/grants/grants-data.js';
+import { filterGrants, grantCalendarEvents, grantDeadlinePresentation, GRANTS_KEYWORD_SPECS, grantStages, nextGrantDeadline } from '../../src/grants/grants-data.js';
+import { grantsExportFileName, grantsToMarkdown, renderGrantCard, renderSponsorGroup } from '../../src/grants/grants-render.js';
 import { daysUntilDeadline, filterJobs, jobCalendarEvents } from '../../src/jobs/jobs-data.js';
 import { jobsToMarkdown, renderJobCard } from '../../src/jobs/jobs-render.js';
-import { createProgressStore, progressMatches } from '../../src/jobs/progress.js';
+import { createProgressStore, filterByProgress, progressMatches } from '../../src/progress.js';
 import { isRecentlyAdded, opportunityFreshness, opportunityStages } from '../../src/opportunity-card.js';
 import { grantProblems, dataWarnings } from '../../scripts/data-checks.mjs';
 import { atomFeed, newestEntries } from '../../scripts/build-feeds.mjs';
@@ -138,6 +139,33 @@ test('job cards show New, freshness, faculty links, and the status picker only o
   assert.match(jobsToMarkdown([job()], { now, getProgress: () => 'interviewing' }), /\*\*My application status:\*\* Interviewing/);
 });
 
+test('grant cards and sponsor groups share status picker and Markdown export with Jobs', () => {
+  const unstarred = renderGrantCard(grant({ addedAt: '2026-11-01', lastVerifiedAt: '2026-10-30', deadline: 'December 1, 2026', deadlineMonth: 12 }), () => false, NOW);
+  assert.match(unstarred, /opportunity-new-badge/);
+  assert.match(unstarred, /Verified against the official page Oct 30, 2026/);
+  assert.doesNotMatch(unstarred, /data-progress-id/);
+  assert.match(unstarred, /data-calendar-grant="g"/);
+
+  const starred = renderGrantCard(grant({ id: 'nsf-career', name: 'NSF CAREER', lastVerifiedAt: '2026-05-01' }), () => true, NOW, () => 'preparing');
+  assert.match(starred, /is-stale/);
+  assert.match(starred, /data-progress-id="nsf-career"/);
+  assert.match(starred, /<option value="preparing" selected>/);
+
+  const groupHtml = renderSponsorGroup({ sponsor: 'NSF', category: 'Government', grants: [grant({ id: 'nsf-career' })] }, () => true, NOW, () => 'applied');
+  assert.match(groupHtml, /grant-sponsor-group/);
+  assert.match(groupHtml, /<option value="applied" selected>/);
+
+  const md = grantsToMarkdown([
+    grant({ id: 'nsf-career', name: 'NSF CAREER', citizenship: 'open', lastVerifiedAt: '2026-10-20', summary: 'Early-career\n\naward.' })
+  ], { now: NOW, getProgress: () => 'applied' });
+  assert.match(md, /^# Starred CS awards & grants\n/);
+  assert.match(md, /## 1\. NSF CAREER — NSF/);
+  assert.match(md, /- \*\*My application status:\*\* Applied/);
+  assert.match(md, /- \*\*Eligibility:\*\* Open to international applicants/);
+  assert.match(md, /> Early-career award\./);
+  assert.equal(grantsExportFileName(NOW.getTime()), 'cspicks-starred-awards-2026-11-02.md');
+});
+
 test('freshness line warns when an award was never re-verified or is stale', () => {
   const now = NOW.getTime();
   assert.match(opportunityFreshness({ checkedLabel: 'Verified', staleAfterDays: 90, addedAt: '2026-08-26', now }), /⚠ Not re-verified since it was added Aug 26, 2026/);
@@ -155,6 +183,9 @@ test('application progress store keeps one known status per posting', () => {
     store.set('a', 'applied');
     store.set('b', 'bogus');
     assert.deepEqual(store.all(), { a: 'applied' });
+    const items = [grant({ id: 'a' }), grant({ id: 'b' })];
+    assert.deepEqual(filterByProgress(items, 'progress: applied', GRANTS_KEYWORD_SPECS, item => item.id, store).map(item => item.id), ['a']);
+    assert.deepEqual(filterByProgress(items, 'progress: none', GRANTS_KEYWORD_SPECS, item => item.id, store).map(item => item.id), ['b']);
     store.set('a', '');
     assert.deepEqual(store.all(), {});
   } finally {
