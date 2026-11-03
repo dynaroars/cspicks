@@ -1,10 +1,12 @@
 /**
- * Shared submission-form plumbing for CS Confs and Awards & Grants, modeled on VietProfs: "Add new"
+ * Shared submission-form plumbing for CS Confs, Jobs, and Awards & Grants, modeled on VietProfs: "Add new"
  * starts as one free-text box (a link, a name, notes — anything), with an "Enter details directly"
  * toggle revealing the structured fields. "Edit existing" always uses the structured fields.
  * Each form wraps its structured fields in `#structured-fields` and renders `QUICK_SECTION` plus
- * `DELIVERY_BUTTONS`; this module owns the mode toggle, the quick payload and the delivery step.
+ * `DELIVERY_BUTTONS`; this module owns the mode toggle, correction autocomplete, quick payload, and delivery step.
  */
+import { escapeHtml } from './shared.js';
+import { buildSubmissionContent } from './submission.js';
 export const QUICK_SECTION = `
   <div class="submit-section" id="quick-section">
     <label for="quick">Links, names, or notes *</label>
@@ -66,5 +68,95 @@ export function deliver(submitter: HTMLButtonElement | null, label: string, cont
     window.open(builders.github(label, content), '_blank', 'noopener,noreferrer');
   } else {
     window.location.href = builders.email(label, content);
+  }
+}
+
+export interface SubmissionFormOptions<T> {
+  form: HTMLFormElement;
+  suggestionsBox: HTMLElement;
+  items: T[];
+  getId: (item: T) => string;
+  matches: (item: T, query: string) => boolean;
+  suggestionTitle: (item: T) => string;
+  suggestionDetail: (item: T) => string;
+  targetInputValue: (item: T) => string;
+  emptyText: string;
+  prefill: (item: T) => void;
+  getStructured: () => { label: string; submission: Record<string, unknown> };
+  builders: { github: Builder; email: Builder };
+}
+
+/**
+ * Shared controller for Jobs and Awards & Grants submission forms: wires the quick/detailed mode toggle,
+ * correction-target autocomplete, outside-click dismissal, `?id=` / `?edit=` URL prefill, and form delivery.
+ */
+export function wireSubmissionForm<T>(options: SubmissionFormOptions<T>) {
+  const { form, suggestionsBox } = options;
+  const byId = new Map(options.items.map(item => [options.getId(item), item]));
+  const targetRow = form.querySelector<HTMLElement>('#correction-target-row')!;
+  const targetInput = form.querySelector<HTMLInputElement>('#target')!;
+  const quick = setupQuickMode(form);
+  quick.apply();
+
+  form.querySelectorAll<HTMLInputElement>('input[name="kind"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      quick.apply();
+      targetRow.hidden = radio.value !== 'correction';
+      if (radio.value === 'correction') targetInput.focus();
+    });
+  });
+
+  targetInput.addEventListener('input', () => {
+    const query = targetInput.value.trim().toLowerCase();
+    if (!query) {
+      suggestionsBox.hidden = true;
+      return;
+    }
+    const matches = options.items.filter(item => options.matches(item, query)).slice(0, 8);
+    suggestionsBox.innerHTML = matches.length
+      ? matches.map(item => `<button type="button" class="correction-suggestion" data-target-id="${escapeHtml(options.getId(item))}"><strong>${escapeHtml(options.suggestionTitle(item))}</strong><span>${escapeHtml(options.suggestionDetail(item))}</span></button>`).join('')
+      : `<div style="padding: 0.6rem 0.85rem; color: var(--text-secondary); font-size: 0.82rem;">${escapeHtml(options.emptyText)}</div>`;
+    suggestionsBox.hidden = false;
+  });
+
+  suggestionsBox.addEventListener('click', event => {
+    const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-target-id]') : null;
+    const item = button?.dataset.targetId ? byId.get(button.dataset.targetId) : undefined;
+    if (!item) return;
+    targetInput.value = options.targetInputValue(item);
+    suggestionsBox.hidden = true;
+    options.prefill(item);
+  });
+
+  document.addEventListener('click', event => {
+    const target = event.target instanceof Node ? event.target : null;
+    if (target && !targetInput.contains(target) && !suggestionsBox.contains(target)) {
+      suggestionsBox.hidden = true;
+    }
+  });
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
+    if (!form.reportValidity()) return;
+    if (quick.isQuick()) {
+      deliver(submitter, quickLabel(form), buildSubmissionContent(quickPayload(form)), options.builders);
+      return;
+    }
+    const { label, submission } = options.getStructured();
+    deliver(submitter, label, buildSubmissionContent(submission), options.builders);
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id') || params.get('edit');
+  const initial = id ? byId.get(id) : undefined;
+  if (initial) {
+    const radio = form.querySelector<HTMLInputElement>('input[name="kind"][value="correction"]');
+    if (radio) {
+      radio.checked = true;
+      radio.dispatchEvent(new Event('change'));
+    }
+    targetInput.value = options.targetInputValue(initial);
+    options.prefill(initial);
   }
 }

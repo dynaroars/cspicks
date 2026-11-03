@@ -1,11 +1,16 @@
-import { opportunityDeadline, opportunityHeader, opportunityMeta } from '../opportunity-card.js';
-import { resultActions } from '../result-actions.js';
+import { newBadge, opportunityDeadline, opportunityFooter, opportunityFreshness, opportunityGroup, opportunityHeader, opportunityMeta, opportunityProgressPicker, opportunityTopics } from '../opportunity-card.js';
+import { PROGRESS_LABELS } from '../progress.js';
+import type { ProgressStatus } from '../progress.js';
 import { areaLabels, escapeHtml, safeExternalUrl } from '../shared.js';
-import { deadlineLabel, DEPARTMENT_LABELS, jobUnitKind, filterValues, formatDay, LEVEL_LABELS, TRACK_LABELS, US_STATES } from './jobs-data.js';
+import { deadlineLabel, DEPARTMENT_LABELS, isActive, jobCalendarEvents, jobUnitKind, filterValues, formatDay, LEVEL_LABELS, TRACK_LABELS, US_STATES } from './jobs-data.js';
 import type { Job } from '../types.js';
 import type { FilterChoice, SchoolJobs } from './jobs-data.js';
 
 type IsFavorite = (id: string) => boolean;
+type GetProgress = (id: string) => ProgressStatus | undefined;
+
+/** Active postings not confirmed live by a crawl or submission within this many days get a visible warning. */
+export const JOB_STALE_AFTER_DAYS = 30;
 
 
 
@@ -29,7 +34,13 @@ function schoolLinks(school: string) {
     <a href="simulator.html?univ=${name}" title="Simulate adding a hire at ${escapeHtml(school)}">Simulate a hire</a>`;
 }
 
-export function renderJobCard(job: Job, isFavorite: IsFavorite = () => false, now = Date.now(), showSchool = true) {
+export function renderJobCard(job: Job, isFavorite: IsFavorite = () => false, now = Date.now(), showSchool = true, getProgress: GetProgress = () => undefined) {
+  const favorite = isFavorite(job.id);
+  const footerParts = [
+    favorite ? opportunityProgressPicker(job.id, `${job.title} at ${job.school}`, getProgress(job.id)) : '',
+    showSchool && !job.lab ? `<span class="opportunity-card-links job-school-links">${schoolLinks(job.school)}</span>` : ''
+  ].join('');
+  const calendarAction = jobCalendarEvents(job, now).length ? `<button type="button" data-calendar-job="${escapeHtml(job.id)}">Add dates to calendar</button>` : '';
   const href = safeExternalUrl(job.url);
   const deadline = deadlineLabel(job, now);
   const place = [job.city, job.state].filter(Boolean).join(', ');
@@ -46,9 +57,9 @@ export function renderJobCard(job: Job, isFavorite: IsFavorite = () => false, no
   const annotationChips = visaChip(job);
 
   return `<article class="opportunity-card job-card" id="${escapeHtml(job.id)}" data-job-id="${escapeHtml(job.id)}">
-    ${opportunityHeader({ id: job.id, title: job.title, url: href, kind: 'job', favorite: isFavorite(job.id),
+    ${opportunityHeader({ id: job.id, title: job.title, url: href, kind: 'job', favorite,
       organizationHtml: showSchool ? `<button type="button" class="opportunity-filter-link job-school-btn" data-search-school="${escapeHtml(job.school)}"><strong>${escapeHtml(job.school)}</strong></button> · ${escapeHtml(job.department)}` : escapeHtml(job.department),
-      tagsHtml: `<span class="opportunity-chip opportunity-chip-type job-chip-track">${escapeHtml(TRACK_LABELS[job.track])}</span>${job.level ? `<span class="opportunity-chip">${escapeHtml(LEVEL_LABELS[job.level])}</span>` : ''}` })}
+      tagsHtml: `${newBadge(job.addedAt, now)}<span class="opportunity-chip opportunity-chip-type job-chip-track">${escapeHtml(TRACK_LABELS[job.track])}</span>${job.level ? `<span class="opportunity-chip">${escapeHtml(LEVEL_LABELS[job.level])}</span>` : ''}` })}
     ${opportunityDeadline(deadline.text, { className: deadline.className || (!job.deadline || job.rolling ? '' : 'is-confirmed'), valueClass: 'job-deadline' })}
     ${opportunityMeta([
       { label: 'Location', html: `<button type="button" class="opportunity-filter-link job-state-btn" data-location="${escapeHtml(locationFilter)}" title="Show ${escapeHtml(locationFilter)} only">${escapeHtml(place)}</button>` },
@@ -56,22 +67,24 @@ export function renderJobCard(job: Job, isFavorite: IsFavorite = () => false, no
     ])}
     ${annotationChips ? `<div class="opportunity-tags job-chips">${annotationChips}</div>` : ''}
     ${job.summary ? `<p class="opportunity-summary job-summary">${escapeHtml(job.summary)}</p>` : ''}
-    ${areaChips ? `<div class="opportunity-topics"><span class="opportunity-label">Topics</span>${areaChips}</div>` : ''}
-    <div class="job-card-footer result-card-footer">${resultActions(job.title, `<a class="job-edit" href="jobs-submit.html?id=${encodeURIComponent(job.id)}">Suggest update</a>`, `jobs.html?q=${encodeURIComponent(job.id)}&status=all#${encodeURIComponent(job.id)}`)}</div>
+    ${opportunityTopics(areaChips)}
+    ${isActive(job, now) ? opportunityFreshness({ checkedAt: job.lastSeenAt, checkedLabel: 'Confirmed live on the official page', staleAfterDays: JOB_STALE_AFTER_DAYS, addedAt: job.addedAt, now }) : ''}
+    ${opportunityFooter({ kind: 'job', title: job.title, startHtml: footerParts,
+      actionsHtml: `${calendarAction}<a class="job-edit" href="jobs-submit.html?id=${encodeURIComponent(job.id)}">Suggest update</a>`,
+      pageLink: `jobs.html?q=${encodeURIComponent(job.id)}&status=all#${encodeURIComponent(job.id)}` })}
   </article>`;
 }
 
-export function renderSchoolCard(group: SchoolJobs, isFavorite: IsFavorite = () => false, now = Date.now()) {
+export function renderSchoolCard(group: SchoolJobs, isFavorite: IsFavorite = () => false, now = Date.now(), getProgress: GetProgress = () => undefined) {
   const first = group.jobs[0]!;
-  return `<section class="opportunity-group job-school-card" aria-label="${escapeHtml(group.school)}">
-    <header class="opportunity-group-header">
-      <h2><button type="button" class="job-school-btn" data-search-school="${escapeHtml(group.school)}">${escapeHtml(group.school)}</button></h2>
-      <p class="job-meta">${first.city ? `${escapeHtml(first.city)}, ` : ''}${escapeHtml(US_STATES[group.state] || group.state)}
-        · ${group.jobs.length} position${group.jobs.length === 1 ? '' : 's'}</p>
-      ${first.lab ? '' : `<p class="job-school-links">${schoolLinks(group.school)}</p>`}
-    </header>
-    <div class="opportunity-group-items">${group.jobs.map(job => renderJobCard(job, isFavorite, now, false)).join('')}</div>
-  </section>`;
+  return opportunityGroup({
+    label: group.school,
+    className: 'job-school-card',
+    headingButtonHtml: `<button type="button" class="job-school-btn" data-search-school="${escapeHtml(group.school)}">${escapeHtml(group.school)}</button>`,
+    metaHtml: `<p class="job-meta">${first.city ? `${escapeHtml(first.city)}, ` : ''}${escapeHtml(US_STATES[group.state] || group.state)} · ${group.jobs.length} position${group.jobs.length === 1 ? '' : 's'}</p>`,
+    extraHeaderHtml: first.lab ? '' : `<p class="job-school-links">${schoolLinks(group.school)}</p>`,
+    itemsHtml: group.jobs.map(job => renderJobCard(job, isFavorite, now, false, getProgress)).join('')
+  });
 }
 
 /** The US tile map: one button per state, shaded by posting count. `selected` is USPS codes, one code, or 'all'. */
@@ -101,7 +114,7 @@ export function exportFileName(now = Date.now()) {
   return `cspicks-starred-jobs-${new Date(now).toISOString().slice(0, 10)}.md`;
 }
 
-export function jobsToMarkdown(jobs: Job[], { now = Date.now() }: { now?: number } = {}) {
+export function jobsToMarkdown(jobs: Job[], { now = Date.now(), getProgress = () => undefined }: { now?: number; getProgress?: GetProgress } = {}) {
   const lines = [
     '# Starred academic CS jobs',
     '',
@@ -120,6 +133,7 @@ export function jobsToMarkdown(jobs: Job[], { now = Date.now() }: { now?: number
     ].filter(Boolean);
     const fields: Array<[string, string]> = [
       ['Status', deadlineLabel(job, now).text],
+      ['My application status', PROGRESS_LABELS[getProgress(job.id) as ProgressStatus] ?? ''],
       [job.lab ? 'Employer' : 'School', job.school],
       ['Department', `${job.department} (${DEPARTMENT_LABELS[jobUnitKind(job)]})`],
       ['Location', [job.city, US_STATES[job.state] || job.state].filter(Boolean).join(', ')],

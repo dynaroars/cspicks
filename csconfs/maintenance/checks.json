@@ -2,13 +2,13 @@
   "version": 1,
   "series": {
     "DISC": {
-      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "DISC next edition (2027) not announced on official site; no record created.",
+      "summary": "Not yet announced.",
       "checkedUrls": [
         "https://www.disc-conference.org/wp/"
       ],
-      "deferredUntil": "2026-11-19T20:06:37.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ACL": {
@@ -340,28 +340,14 @@
       "proposals": []
     },
     "USENIX ATC": {
-      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "No ATC 2026/2027 listed on USENIX upcoming conferences or atc26 page; latest is ATC 25. Fixed typo in ATC 2025 notificationDate (20205-04-25 -> 2025-04-25) per official CFP.",
+      "summary": "USENIX sunset ATC after ATC '25; the series continues as ACM SIGOPS ATC (ATC 2026: Hong Kong, Nov 16-18, 2026, deadline June 10, 2026, per https://atc.sigops.org/2026/cfp.html as surfaced by search — not separately verified here). No 2027 page yet. Coordinator may want a 2026 record and a rename/seriesLink update to atc.sigops.org.",
       "checkedUrls": [
-        "https://www.usenix.org/conferences/upcoming",
-        "https://www.usenix.org/conference/atc26",
-        "https://www.usenix.org/conference/atc25/call-for-papers"
+        "https://atc.sigops.org/"
       ],
-      "deferredUntil": "2026-11-15T20:05:38.844Z",
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2025,
-          "sources": [
-            {
-              "field": "notificationDate",
-              "url": "https://www.usenix.org/conference/atc25/call-for-papers",
-              "evidence": "Notification to authors: Friday, April 25, 2025."
-            }
-          ]
-        }
-      ]
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": []
     },
     "WACV": {
       "lastCheckedAt": "2026-10-20T20:05:31.409Z",
@@ -839,55 +825,59 @@
       ]
     },
     "ISMB/ECCB": {
-      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
-      "outcome": "not_found",
-      "summary": "No ISMB/ECCB edition after 2023 found; ISMB is held as ISMB 2024+ (tracked under ISMB). No record created.",
-      "checkedUrls": [
-        "https://www.iscb.org/ismbeccb2026"
-      ],
-      "deferredUntil": "2026-11-03T20:16:13.831Z",
-      "proposals": []
-    },
-    "WINE": {
-      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "complete",
-      "summary": "WINE 2026 (Hong Kong, Dec 1-4) added from official site: deadline, rebuttal period, notification, chairs.",
+      "summary": "Latest DB record is 2023 (deadline 2023-05-04 likely not the proceedings track); 2027 record uses the proceedings track deadline. Conference chairs page did not render; chairs left null.",
       "checkedUrls": [
-        "https://wine2026conf.github.io/"
+        "https://www.iscb.org/ismbeccb2027/home",
+        "https://www.iscb.org/ismbeccb2027/call-for-submissions/proceedings",
+        "https://transition.iscb.org/cms_addon/conferences/ismbeccb2027/schedule/proceedings?keydate"
       ],
       "deferredUntil": null,
       "proposals": [
         {
           "action": "add",
-          "year": 2026,
+          "year": 2027,
           "sources": [
-            {
-              "field": "deadline",
-              "url": "https://wine2026conf.github.io/",
-              "evidence": "Paper deadline July 2, 2026 AoE; rebuttal Aug 17-20; notification Sept 10; PC chairs Branzei, Caragiannis, Chen; general chairs Huang, Li"
-            }
+            "https://www.iscb.org/ismbeccb2027/home — ISMB/ECCB 2027 (35th ISMB, 26th ECCB), July 18–22 in Copenhagen, Denmark",
+            "https://www.iscb.org/ismbeccb2027/call-for-submissions/proceedings — papers due January 14, 2027 11:59 PM AoE, no extension",
+            "https://transition.iscb.org/cms_addon/conferences/ismbeccb2027/schedule/proceedings?keydate (iframe on official key-dates page) — Jan 14, 2027 submission; Mar 2 conditional acceptance; Mar 18 revisions; Mar 30 final acceptance"
           ]
         }
       ]
     },
-    "HPDC": {
-      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+    "WINE": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "HPDC site lists only HPDC-35 (July 13-16 2026, Cleveland); no 2027 edition and no 2026 submission timeline or chairs on the site root.",
+      "summary": "not_found",
       "checkedUrls": [
+        "https://wine2027conf.github.io/",
+        "https://wine2026conf.github.io/"
+      ],
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": []
+    },
+    "HPDC": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "not_found",
+      "summary": "Not yet announced.",
+      "checkedUrls": [
+        "https://hpdc.sci.utah.edu/2027/",
         "https://hpdc.sci.utah.edu/"
       ],
-      "deferredUntil": "2026-11-05T20:15:32.150Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ISMB": {
-      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ISMB 2026 page confirms July 12-16 2026, Washington DC; no chairs or ISMB 2027 information found.",
+      "summary": "2027 is the joint ISMB/ECCB conference (Copenhagen), tracked under the ISMB/ECCB series; standalone ISMB returns in even years (next 2028), not yet announced.",
       "checkedUrls": [
-        "https://www.iscb.org/ismb2026"
+        "https://www.iscb.org/ismbeccb2027/home",
+        "https://www.iscb.org/ismbeccb2027/call-for-submissions/proceedings",
+        "https://www.iscb.org/ismbeccb2027/key-dates"
       ],
-      "deferredUntil": "2026-11-05T20:15:32.150Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "RECOMB": {
@@ -931,23 +921,23 @@
       ]
     },
     "RTAS": {
-      "lastCheckedAt": "2026-10-13T20:16:13.830Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "complete",
-      "summary": "RTAS 2026 (Saint-Malo, May 12-14) added: deadline, author response, notification from official site; chairs not listed on fetched page.",
+      "summary": "Deadline 2026-11-05 is 3 days from today. Page lists AE deadline 'Feb 18, 2026' in summary (typo; table says 2027).",
       "checkedUrls": [
-        "https://2026.rtas.org/"
+        "https://2027.rtas.org/",
+        "https://2027.rtas.org/cfp/",
+        "https://2027.rtas.org/committee/"
       ],
       "deferredUntil": null,
       "proposals": [
         {
           "action": "add",
-          "year": 2026,
+          "year": 2027,
           "sources": [
-            {
-              "field": "deadline",
-              "url": "https://2026.rtas.org/",
-              "evidence": "Submission Nov 13, 2025; author response Jan 14-18, 2026; notification Jan 29, 2026"
-            }
+            "https://2027.rtas.org/ — Submission deadline (Firm) Thursday Nov 5, 2026; author response Jan 11–15, 2027; notification (tentative) Jan 28, 2027; conference May 17–20, 2027",
+            "https://2027.rtas.org/cfp/ — 'A part of CPS-IoT Week | Boulder, Colorado | May 17-20, 2027'",
+            "https://2027.rtas.org/committee/ — General Chair Claire Pagetti (ONERA); Program Chair Linh Thi Xuan Phan (UPenn); Program Vice Chair Dionisio de Niz"
           ]
         }
       ]
@@ -1015,53 +1005,64 @@
       "proposals": []
     },
     "ACSAC": {
-      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ACSAC 2027 is not announced on the official series site; no record created.",
+      "summary": "ACSAC 2026 is Dec 7-11, 2026; 2027 not announced.",
       "checkedUrls": [
+        "https://www.acsac.org/2027/",
         "https://www.acsac.org/"
       ],
-      "deferredUntil": "2026-11-07T20:15:27.759Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "AIED": {
-      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "AIED 2027 is not announced on the official series site; no record created.",
+      "summary": "not_found",
       "checkedUrls": [
-        "https://iaied.org/"
+        "https://www.aied-conference.org/2027",
+        "https://iaied.org/conferences"
       ],
-      "deferredUntil": "2026-11-07T20:15:27.759Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ASIACRYPT": {
-      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ASIACRYPT 2027 is not announced on the official series site; no record created.",
+      "summary": "Asiacrypt 2026 (Dec 7-11) not yet held; 2027 not announced.",
       "checkedUrls": [
+        "https://asiacrypt.iacr.org/2027/",
         "https://iacr.org/meetings/asiacrypt/"
       ],
-      "deferredUntil": "2026-11-07T20:15:27.759Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ASSETS": {
-      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ASSETS 2027 is not announced on the official series site; no record created.",
+      "summary": "No CFP or chairs yet.",
       "checkedUrls": [
-        "https://www.sigaccess.org/"
+        "https://assets27.sigaccess.org/"
       ],
-      "deferredUntil": "2026-11-07T20:15:27.759Z",
-      "proposals": []
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://assets27.sigaccess.org/ — ASSETS 2027, 29th conference, Tokyo, Japan, October 24-27, 2027; CFP 'To be announced'"
+          ]
+        }
+      ]
     },
     "BMVC": {
-      "lastCheckedAt": "2026-10-17T20:15:27.758Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "BMVC 2027 is not announced on the official series site; no record created.",
+      "summary": "not_found",
       "checkedUrls": [
         "https://www.bmva.org/bmvc"
       ],
-      "deferredUntil": "2026-11-07T20:15:27.759Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "BPM": {
@@ -1134,35 +1135,51 @@
       ]
     },
     "CIKM": {
-      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "CIKM series site returned 503 and the CIKM 2026 site mentions no 2027 edition; next edition not announced.",
+      "summary": "No edition website or dates yet (cikm2027.org does not resolve). Only place officially stated.",
       "checkedUrls": [
-        "https://www.cikmconference.org/",
-        "https://cikm2026.diag.uniroma1.it/"
+        "http://www.cikmconference.org/"
       ],
-      "deferredUntil": "2026-11-12T20:05:21.574Z",
-      "proposals": []
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "http://www.cikmconference.org/ — series site: 'CIKM 2027 will be held in Sydney, Australia'"
+          ]
+        }
+      ]
     },
     "CP": {
-      "lastCheckedAt": "2026-10-18T20:05:44.310Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "CP 2027 is not announced on the official ACP series page (which still lists CP2025 as latest); no record created.",
+      "summary": "No official CP 2027 information.",
       "checkedUrls": [
+        "https://cp2027.a4cp.org/",
         "https://www.a4cp.org/events/cp-conference-series"
       ],
-      "deferredUntil": "2026-11-08T20:05:44.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "Crypto": {
-      "lastCheckedAt": "2026-10-18T20:05:44.310Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "Crypto 2027 is not announced on the IACR Crypto page (list ends at Crypto 2026); no record created.",
+      "summary": "Page HTML contains a commented-out template date block (11 Feb 2027 submission etc.) and placeholder metadata.json values (city TBD) — NOT used as evidence. Date null.",
       "checkedUrls": [
-        "https://www.iacr.org/meetings/crypto/"
+        "https://crypto.iacr.org/2027/"
       ],
-      "deferredUntil": "2026-11-08T20:05:44.000Z",
-      "proposals": []
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://crypto.iacr.org/2027/ — 'Crypto 2027 will take place at the University of California Santa Barbara campus... exact dates will be announced shortly'; Important dates 'to be announced soon'"
+          ]
+        }
+      ]
     },
     "CSCW": {
       "lastCheckedAt": "2026-10-25T20:05:38.844Z",
@@ -1175,73 +1192,89 @@
       "proposals": []
     },
     "DIS": {
-      "lastCheckedAt": "2026-10-22T20:05:21.574Z",
-      "outcome": "not_found",
-      "summary": "DIS series page lists only DIS 2026 (Singapore); no DIS 2027 announcement.",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "complete",
+      "summary": "Online presentations June 21-25, 2027 (hybrid). Organisers page lists a 4-person 'Technical Programme Committee' (adds Linda Hirsch); used the CFP's 'Paper Chairs' list.",
       "checkedUrls": [
-        "https://dis.acm.org/"
+        "https://dis.acm.org/2027/call-for-papers/",
+        "https://dis.acm.org/2027/",
+        "https://dis.acm.org/2027/organisers/"
       ],
-      "deferredUntil": "2026-11-12T20:05:21.574Z",
-      "proposals": []
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://dis.acm.org/2027/call-for-papers/ — Title and Abstract 11 January 2027; Paper and Pictorial Submission 18 January 2027; Acceptance Notification 19 March 2027; conference 28 June – 2 July 2027 (AoE); Paper Chairs Chris Le Dantec, Paul Tennent, Laia Turmo Vidal",
+            "https://dis.acm.org/2027/ — Stockholm, Sweden, June 28th – July 2nd 2027 (hosted by KTH)",
+            "https://dis.acm.org/2027/organisers/ — General Chairs Kia Höök, Madeline Balaam"
+          ]
+        }
+      ]
     },
     "EC": {
-      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ec.sigecom.org did not resolve (DNS failure through the proxy); EC 2027 not verified. No change.",
+      "summary": "Note: existing EC 2026 link https://ec.sigecom.org/ no longer resolves; ec26.sigecom.org does.",
       "checkedUrls": [
-        "https://ec.sigecom.org/"
+        "https://www.sigecom.org/events.html"
       ],
-      "deferredUntil": "2026-11-14T20:05:22.181Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ECCV": {
-      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ECCV next edition (2027) not announced on official site; no record created.",
+      "summary": "ECCV is biennial (even years); next is ECCV 2028, not yet announced.",
       "checkedUrls": [
-        "https://eccv.ecva.net/"
+        "https://eccv.ecva.net/Conferences/FutureMeetings",
+        "https://eccv.ecva.net/Conferences/2028"
       ],
-      "deferredUntil": "2026-11-19T20:06:37.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "EMSOFT": {
-      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "EMSOFT next edition (2027) not announced on official site; no record created.",
+      "summary": "ESWEEK 2027 not announced.",
       "checkedUrls": [
-        "https://esweek.org/emsoft/"
+        "https://esweek.org/",
+        "https://2027.esweek.org/"
       ],
-      "deferredUntil": "2026-11-19T20:06:37.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ER": {
-      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ER next edition (2027) not announced on official site; no record created.",
+      "summary": "not_found",
       "checkedUrls": [
         "https://er2026.org/"
       ],
-      "deferredUntil": "2026-11-19T20:06:37.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ESA": {
-      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ESA next edition (2027) not announced on official site; no record created.",
+      "summary": "ALGO/ESA 2027 not announced.",
       "checkedUrls": [
-        "https://algo-conference.org/2026"
+        "https://algo-conference.org/2027/esa/",
+        "https://algo-conference.org/esa/esa-symposia/"
       ],
-      "deferredUntil": "2026-11-19T20:06:37.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ESEM": {
-      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ESEM next edition (2027) not announced on official site; no record created.",
+      "summary": "Not yet announced.",
       "checkedUrls": [
+        "https://conf.researchr.org/home/eseiw-2027",
         "https://www.esem-conferences.org/"
       ],
-      "deferredUntil": "2026-11-19T20:06:37.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ESORICS": {
@@ -1264,93 +1297,113 @@
       ]
     },
     "FOCS": {
-      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ieee-focs.org lists only FOCS 2026; no 2027 edition announced.",
+      "summary": "FOCS 2026 is Nov 8-11; 2027 not yet announced.",
       "checkedUrls": [
+        "https://focs.computer.org/2027/",
         "https://ieee-focs.org/"
       ],
-      "deferredUntil": "2026-11-21T20:05:29.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "GD": {
-      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "graphdrawing.github.io returned 404; GD 2027 not verifiable.",
+      "summary": "Series link graphdrawing.github.io root 404s; edition URL follows gdYYYY pattern.",
       "checkedUrls": [
-        "https://graphdrawing.github.io/"
+        "https://graphdrawing.github.io/gd2027/"
       ],
-      "deferredUntil": "2026-11-21T20:05:29.000Z",
-      "proposals": []
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://graphdrawing.github.io/gd2027/ — 35th GD at Rényi Institute, Budapest, Hungary, September 15-17, 2027; PhD school September 13-14, 2027; no CFP/deadlines yet"
+          ]
+        }
+      ]
     },
     "ICCAD": {
-      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "iccad.com/2027 returned 404; no 2027 edition found.",
+      "summary": "not_found",
       "checkedUrls": [
         "https://iccad.com/2027"
       ],
-      "deferredUntil": "2026-11-21T20:05:29.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ICDCS": {
-      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "icdcs.org returned 503; could not check, retry later.",
+      "summary": "Site returns 406 to plain curl UA; loaded with a browser UA.",
       "checkedUrls": [
-        "https://icdcs.org/"
+        "https://icdcs2027.icdcs.org/"
       ],
-      "deferredUntil": "2026-11-21T20:05:29.000Z",
-      "proposals": []
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://icdcs2027.icdcs.org/ — 47th IEEE ICDCS 2027, Monday 5 July – Thursday 8 July 2027, Melbourne, Australia; all important dates TBD"
+          ]
+        }
+      ]
     },
     "ICDM": {
-      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ICDM 2026 site confirms Nov 12-15 2026 Shenyang; no 2027 edition mentioned.",
+      "summary": "Lead only (third-party trackers): Brisbane, Australia, Nov 15-18, 2027; no official site found.",
       "checkedUrls": [
         "https://icdm2026.neu.edu.cn/main.htm"
       ],
-      "deferredUntil": "2026-11-21T20:05:29.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ICER": {
-      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "icer.acm.org redirects to the 2026 site; 2027 edition not checked beyond redirect, not announced there.",
+      "summary": "researchr site placeholder exists but not public; recheck.",
       "checkedUrls": [
-        "https://icer.acm.org/"
+        "https://2027.icer.acm.org/",
+        "https://sigcse.org/events/icer/"
       ],
-      "deferredUntil": "2026-11-21T20:05:29.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ICSOC": {
-      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "icsoc.org redirects to the 2026 site; no 2027 edition found.",
+      "summary": "Only aggregator (WASET/conferenceindex) spam listings for 2027 — ignored. ICSOC 2026 not yet held.",
       "checkedUrls": [
         "https://icsoc.org/"
       ],
-      "deferredUntil": "2026-11-21T20:05:29.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ICWS": {
-      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "servicessociety.org/icws lists only the 2026 edition; 2027 not announced. (Page shows 2026 as Aug 22-25 Kuala Lumpur vs local record July 13-18 Sydney: flagged in summary, not edited.)",
+      "summary": "Lead only (aggregator): IEEE SERVICES 2027 Jul 5-9, 2027, Abu Dhabi; unverified.",
       "checkedUrls": [
+        "https://services.conferences.computer.org/2027/",
+        "https://services.conferences.computer.org/2027/icws/",
         "https://www.servicessociety.org/icws"
       ],
-      "deferredUntil": "2026-11-22T20:00:00.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "IJCAR": {
-      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ijcar.org lists only IJCAR 2026 Lisbon; no later edition announced.",
+      "summary": "IJCAR is held in even years (CADE in odd years); next is likely 2028.",
       "checkedUrls": [
         "https://ijcar.org/"
       ],
-      "deferredUntil": "2026-11-22T20:00:00.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "IMC": {
@@ -1375,34 +1428,383 @@
       ]
     },
     "ISLPED": {
-      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "islped.org returned only a bot-check page; could not verify a 2027 edition. Retry later.",
+      "summary": "The /2027/ path is a placeholder clone of 2026; not evidence.",
       "checkedUrls": [
+        "https://www.islped.org/2027/",
         "https://islped.org/"
       ],
-      "deferredUntil": "2026-11-22T20:00:00.000Z",
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
       "proposals": []
     },
     "ISMAR": {
-      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
       "outcome": "not_found",
-      "summary": "ismar.net lists only ISMAR 2026 Bari; 2027 not announced.",
+      "summary": "Conference dates not announced; date left null.",
       "checkedUrls": [
-        "https://www.ismar.net/"
+        "https://www.ieeeismar.net/2027/"
       ],
-      "deferredUntil": "2026-11-22T20:00:00.000Z",
-      "proposals": []
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://www.ieeeismar.net/2027/ — IEEE ISMAR 2027, Kobe, Japan; 'Conference dates to be announced'; paper deadline 'To be announced'"
+          ]
+        }
+      ]
     },
     "ISSRE": {
-      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
-      "outcome": "not_found",
-      "summary": "issre.net redirects to issre.github.io, which showed no 2027 information.",
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "complete",
+      "summary": "Edition hosted on conf.researchr.org rather than issre.net (issre.net returned 406 to curl; series page on researchr lists it). Kept seriesLink as existing.",
       "checkedUrls": [
-        "https://www.issre.net/",
-        "http://issre.github.io/"
+        "https://conf.researchr.org/series/issre",
+        "https://conf.researchr.org/home/issre-2027",
+        "https://conf.researchr.org/track/issre-2027/issre-2027-papers",
+        "https://conf.researchr.org/committee/issre-2027/issre-2027-organizing-committee"
       ],
-      "deferredUntil": "2026-11-22T20:00:00.000Z",
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://conf.researchr.org/series/issre — ISSRE series page links ISSRE 2027",
+            "https://conf.researchr.org/home/issre-2027 — 38th ISSRE, Oct 19-22, 2027, Galaxy Macau, Taipa, Macao SAR",
+            "https://conf.researchr.org/track/issre-2027/issre-2027-papers — abstract Apr 9 2027, paper Apr 16 2027, rebuttal Jun 7-11, early notification Jun 15, revision Jun 16-Jul 2, notification Jul 9 2027"
+          ]
+        }
+      ]
+    },
+    "MSR": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "complete",
+      "summary": "Deadline already passed (Oct 23, 2026). Other tracks (Data & Tool Showcase Nov 10, Registered Reports Nov 20, Mining Challenge Dec 18) still open but not main-track.",
+      "checkedUrls": [
+        "https://2027.msrconf.org/",
+        "https://2027.msrconf.org/track/msr-2027-technical-papers",
+        "https://2027.msrconf.org/committee/msr-2027-organizing-committee"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://2027.msrconf.org/ — MSR 2027, April 26-27, 2027, Dublin, Ireland, co-located with ICSE 2027",
+            "https://2027.msrconf.org/track/msr-2027-technical-papers — abstract Oct 20 2026, paper Oct 23 2026, early reject Dec 3, author response Dec 4-8 2026, notification Jan 8 2027; PC co-chairs Chatterjee, Robles",
+            "https://2027.msrconf.org/committee/msr-2027-organizing-committee — General Chair Shane McIntosh"
+          ]
+        }
+      ]
+    },
+    "RE": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "complete",
+      "summary": "No rebuttal period listed.",
+      "checkedUrls": [
+        "https://conf.researchr.org/home/RE-2027",
+        "https://conf.researchr.org/track/RE-2027/RE-2027-papers",
+        "https://conf.researchr.org/committee/RE-2027/RE-2027-organizing-committee"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://conf.researchr.org/home/RE-2027 — 35th IEEE RE, Politecnico di Milano, Milan, August 23-27, 2027",
+            "https://conf.researchr.org/track/RE-2027/RE-2027-papers — Research Papers: abstract Feb 22 2027, full paper Mar 1 2027, notification May 14 2027, camera-ready Jun 14 2027; Program Chairs Anne Hess, Mehrdad Sabetzadeh",
+            "https://conf.researchr.org/committee/RE-2027/RE-2027-organizing-committee — General Chair Luciano Baresi"
+          ]
+        }
+      ]
+    },
+    "SIGCSE TS": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "complete",
+      "summary": "All paper deadlines passed. Homepage also lists a 'Round Two' (due Sep 30 2026, notification Nov 9 2026) which applies to other tracks, not Papers, so not recorded as a paper cycle. Old seriesLink was null; kept. Note old site sigcse.sigcse.org no longer resolves.",
+      "checkedUrls": [
+        "https://sigcse.org/",
+        "https://2027.sigcse-ts.acm.org/",
+        "https://2027.sigcse-ts.acm.org/track/sigcse-ts-2027-Papers-1",
+        "https://2027.sigcse-ts.acm.org/committee/sigcse-ts-2027-Papers-1-program-chairs",
+        "https://2027.sigcse-ts.acm.org/committee/sigcse-ts-2027-organizing-committee"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://sigcse.org/ — Upcoming: Technical Symposium 2027, Feb 17-20, 2027, linking sigcse-ts.acm.org/2027/",
+            "https://2027.sigcse-ts.acm.org/ — SIGCSE TS 2027, Feb 17-20, 2027, SAFE Credit Union Convention Center, Sacramento, CA",
+            "https://2027.sigcse-ts.acm.org/track/sigcse-ts-2027-Papers-1 — abstract Jun 26 2026, paper Jul 3 2026, notification Sep 14 2026 (tentative); no rebuttal"
+          ]
+        }
+      ]
+    },
+    "RTSS": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "not_found",
+      "summary": "Not yet announced.",
+      "checkedUrls": [
+        "https://2027.rtss.org/",
+        "https://rtss.org/"
+      ],
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": []
+    },
+    "SC": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "not_found",
+      "summary": "Leads (not official edition evidence): LLNL news says Kathryn Mohror named SC27 General Chair; trackers list Denver, Nov 14-19, 2027.",
+      "checkedUrls": [
+        "https://supercomputing.org/",
+        "https://sc27.supercomputing.org/"
+      ],
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": []
+    },
+    "UAI": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "not_found",
+      "summary": "Not yet announced.",
+      "checkedUrls": [
+        "https://www.auai.org/uai2027/",
+        "https://www.auai.org/"
+      ],
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": []
+    },
+    "VIS": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "not_found",
+      "summary": "Lead only (third-party): Chicago, Nov 2027; unverified.",
+      "checkedUrls": [
+        "https://ieeevis.org/year/2027/welcome",
+        "https://ieeevis.org/"
+      ],
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": []
+    },
+    "Middleware": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "complete",
+      "summary": "Site says 'under construction' but CFP with full schedule is published.",
+      "checkedUrls": [
+        "https://middleware-conf.github.io/2027/",
+        "https://middleware-conf.github.io/2027/call-for-papers/",
+        "https://middleware-conf.github.io/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://middleware-conf.github.io/2027/ — 28th Middleware, Kyoto, Japan, December 13–17, 2027; GC Kazuyuki Shudo; PC co-chairs Klara Nahrstedt, Etienne Rivière; two cycles (abstract Nov 27 2026 / paper Dec 4 2026; abstract May 28 2027 / paper Jun 4 2027)",
+            "https://middleware-conf.github.io/2027/call-for-papers/ — per-cycle early rejection, rebuttal (Mar 3-7 / Aug 18-22, 2027), notification (Mar 29 / Sep 13, 2027)",
+            "https://middleware-conf.github.io/ — series site links Middleware 2027 Kyoto"
+          ]
+        },
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://middleware-conf.github.io/2027/ — 28th Middleware, Kyoto, Japan, December 13–17, 2027; GC Kazuyuki Shudo; PC co-chairs Klara Nahrstedt, Etienne Rivière; two cycles (abstract Nov 27 2026 / paper Dec 4 2026; abstract May 28 2027 / paper Jun 4 2027)",
+            "https://middleware-conf.github.io/2027/call-for-papers/ — per-cycle early rejection, rebuttal (Mar 3-7 / Aug 18-22, 2027), notification (Mar 29 / Sep 13, 2027)",
+            "https://middleware-conf.github.io/ — series site links Middleware 2027 Kyoto"
+          ]
+        }
+      ]
+    },
+    "RSS": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "complete",
+      "summary": "deadline = extended-abstract submission (the entry point); full final paper due 2027-04-16 only for invited papers. Existing records have seriesLink null; kept.",
+      "checkedUrls": [
+        "https://roboticsconference.org/",
+        "https://roboticsconference.org/information/cfp/",
+        "https://roboticsconference.org/committees/organizers/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://roboticsconference.org/ — RSS 2027 (23rd), Athens, Greece, July 6–11, 2027; extended abstract deadline Dec 4, 2026 AoE; rebuttal Feb 12, 2027; acceptance notification Apr 30, 2027",
+            "https://roboticsconference.org/information/cfp/ — same timeline; two-stage shepherding replaces traditional review",
+            "https://roboticsconference.org/committees/organizers/ — Program Chair Amanda Prorok; General Chair Matei Ciocarlie"
+          ]
+        }
+      ]
+    },
+    "ITC": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "complete",
+      "summary": "Page fetched via headless render (curl got 403).",
+      "checkedUrls": [
+        "https://www.itctestweek.org/",
+        "https://www.itctestweek.org/wp-content/uploads/2026/10/ITC_2027_CFP_v2026Oct10.pdf"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://www.itctestweek.org/ — ITC October 10–15, 2027, Grand Hyatt River Walk, San Antonio TX; title/abstract due March 5, 2027",
+            "https://www.itctestweek.org/wp-content/uploads/2026/10/ITC_2027_CFP_v2026Oct10.pdf — 2027 CFP: title/abstract Mar 5, final paper PDF Apr 9, notification Jun 1, 2027; General Chair Sandeep Kumar Goel (TSMC), Program Chair Hung-Pin (Charles) Wen (NYCU)"
+          ]
+        }
+      ]
+    },
+    "RecSys": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "not_found",
+      "summary": "No CFP/deadlines yet (recsys27 CFP pages 404). Note RecSys moves earlier (August vs Sep/Oct in 2026), so deadline likely earlier than 2026's April 21.",
+      "checkedUrls": [
+        "https://recsys.acm.org/recsys27/",
+        "https://recsys.acm.org/"
+      ],
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://recsys.acm.org/recsys27/ — 21st ACM RecSys, Honolulu, O‘ahu, Hawaii, August 23–27, 2027, Hilton Hawaiian Village; General Co-Chairs Christine Bauer, Joeran Beel, Bamshad Mobasher",
+            "https://recsys.acm.org/ — 'RecSys 2027 will take place in Hawaii from August 23 to August 27, 2027'"
+          ]
+        }
+      ]
+    },
+    "SIGSPATIAL": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "not_found",
+      "summary": "not_found",
+      "checkedUrls": [
+        "https://www.sigspatial.org/"
+      ],
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": []
+    },
+    "SDM": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "incomplete",
+      "summary": "siam.org blocks automated access; domain-restricted search found no SDM27 page. Needs manual check.",
+      "checkedUrls": [
+        "https://www.siam.org/conferences-events/siam-conferences/sdm27/"
+      ],
+      "deferredUntil": "2026-11-10T02:14:09.000Z",
+      "proposals": []
+    },
+    "SEAMS": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "complete",
+      "summary": "Submission deadline already passed (2026-10-23).",
+      "checkedUrls": [
+        "https://conf.researchr.org/track/seams-2027/seams-2027-research-track",
+        "https://conf.researchr.org/home/seams-2027",
+        "https://conf.researchr.org/committee/seams-2027/seams-2027-organizing-committee-seams-2027"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://conf.researchr.org/track/seams-2027/seams-2027-research-track — Important dates AoE: Submission Deadline Fri 23 Oct 2026; Notifications Thu 3 Dec 2026; Revisions Tue 5 Jan 2027; Decision on Revisions Fri 15 Jan 2027",
+            "https://conf.researchr.org/home/seams-2027 — Mon 26 - Tue 27 April 2027, Dublin, Ireland, co-located with ICSE 2027 (Convention Centre Dublin)",
+            "https://conf.researchr.org/committee/seams-2027/seams-2027-organizing-committee-seams-2027 — General Chair Ivana Dusparic; Program Co-Chairs Papadopoulos, Rodrigues"
+          ]
+        }
+      ]
+    },
+    "KR": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "complete",
+      "summary": "Index page contains commented-out leftover 2026 text (FLoC keynotes) — ignored; only live (uncommented) content used. No CFP page live yet (call_main_track.html 404), but dates.html is linked in the live menu.",
+      "checkedUrls": [
+        "https://kr.org/KR2027/",
+        "https://kr.org/KR2027/dates.html",
+        "https://kr.org/KR2027/organization.html"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://kr.org/KR2027/ — KR 2027, 24th conference, September 21-24, 2027, Buenos Aires, Argentina; workshops Sept 18-20; homepage launched Oct 2, 2026",
+            "https://kr.org/KR2027/dates.html — Main track: title/abstract April 23, 2027; paper April 28, 2027; author response June 15-18, 2027; notification June 30, 2027 (AoE)",
+            "https://kr.org/KR2027/organization.html — General Chair Marie-Laure Mugnier; Program Chairs Eduardo Fermé, Maria Vanina Martinez"
+          ]
+        }
+      ]
+    },
+    "UbiComp / ISWC": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "not_found",
+      "summary": "ubicomp.org has no 2027 edition page yet (/ubicomp-iswc-2027/ returns HTTP 500). Papers go through IMWUT quarterly deadlines; no 2027 cycle deadlines announced on an edition page.",
+      "checkedUrls": [
+        "https://sigchi.org/events/ubicomp-2027/"
+      ],
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://sigchi.org/events/ubicomp-2027/ — ACM SIGCHI (sponsoring society) event page: UbiComp 2027, Sun Oct 3 – Thu Oct 7, 2027, Seoul Dragon City, Seoul, Republic of Korea; event link points to https://www.ubicomp.org/"
+          ]
+        }
+      ]
+    },
+    "SAT": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "not_found",
+      "summary": "No deadlines or chairs yet.",
+      "checkedUrls": [
+        "https://satisfiability.org/SAT27/",
+        "https://satisfiability.org/SAT27/pages/dates.html,"
+      ],
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://satisfiability.org/SAT27/ — SAT 2027 (30th), July 5-9, 2027, Barcelona, Spain",
+            "https://satisfiability.org/SAT27/pages/dates.html, /cfp.html, /committees.html — 'Details will be announced as soon as possible'"
+          ]
+        }
+      ]
+    },
+    "SOUPS": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "not_found",
+      "summary": "USENIX page blocked; could not confirm whether a 2027 page exists. Series site has no 2027 info.",
+      "checkedUrls": [
+        "https://soups.page/",
+        "https://www.usenix.org/conference/soups2027"
+      ],
+      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "proposals": []
+    },
+    "PPSN": {
+      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "outcome": "incomplete",
+      "summary": "PPSN is biennial (even years); next would be 2028. Series site unreachable; no official 2028 info found via search.",
+      "checkedUrls": [
+        "https://ppsn-conference.org/"
+      ],
+      "deferredUntil": "2026-11-10T02:14:09.000Z",
       "proposals": []
     }
   }

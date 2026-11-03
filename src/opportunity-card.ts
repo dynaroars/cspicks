@@ -1,5 +1,10 @@
 import { escapeHtml, safeExternalUrl } from './shared.js';
-import { favoriteToggleButton } from './favorites.js';
+import { createFavoritesStore, favoriteToggleButton, onlyFavorites } from './favorites.js';
+import { downloadCalendar } from './calendar.js';
+import type { CalendarEvent } from './calendar.js';
+import { PROGRESS_LABELS } from './progress.js';
+import type { ProgressStatus } from './progress.js';
+import { resultActions } from './result-actions.js';
 
 /** Color a primary dated award deadline; vague cycles and multiple labeled stages stay neutral. */
 export function awardDeadlineTone(text: string, estimated: boolean, historical: boolean, now = new Date()) {
@@ -39,4 +44,199 @@ export function opportunityDeadline(text: string, options: { className?: string;
 
 export function opportunityMeta(items: Array<{ label: string; value?: string; html?: string }>) {
   return `<div class="opportunity-meta">${items.map(item => `<div class="opportunity-meta-item"><span class="opportunity-label">${escapeHtml(item.label)}</span><span class="opportunity-meta-value">${item.html ?? escapeHtml(item.value || '')}</span></div>`).join('')}</div>`;
+}
+
+const DAY_MS = 86400000;
+const ISO_DAY = /^(\d{4})-(\d{2})-(\d{2})$/;
+
+/** UTC midnight of a YYYY-MM-DD day, or null. */
+export function dayValue(day: unknown) {
+  const match = ISO_DAY.exec(String(day ?? ''));
+  return match ? Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])) : null;
+}
+
+/** Whole days from `day` to today (UTC); null for a missing or malformed day. */
+export function daysSince(day: unknown, now = Date.now()) {
+  const value = dayValue(day);
+  if (value === null) return null;
+  const today = Date.UTC(new Date(now).getUTCFullYear(), new Date(now).getUTCMonth(), new Date(now).getUTCDate());
+  return Math.round((today - value) / DAY_MS);
+}
+
+export const NEW_FOR_DAYS = 7;
+
+/** True when the record was added to the dataset within the last `days` days. */
+export function isRecentlyAdded(addedAt: unknown, now = Date.now(), days = NEW_FOR_DAYS) {
+  const age = daysSince(addedAt, now);
+  return age !== null && age >= 0 && age <= days;
+}
+
+/** `added:` keyword value → a day window: week, month, or a number of days. */
+export function addedWindowDays(value: string) {
+  if (value === 'week' || value === 'new') return 7;
+  if (value === 'month') return 31;
+  const days = Number(value);
+  return Number.isFinite(days) && days > 0 ? days : null;
+}
+
+export function newBadge(addedAt: unknown, now = Date.now()) {
+  if (!isRecentlyAdded(addedAt, now)) return '';
+  return `<span class="opportunity-chip opportunity-new-badge" title="Added to CS Picks ${escapeHtml(formatIsoDay(addedAt))}">New</span>`;
+}
+
+export function formatIsoDay(day: unknown) {
+  const value = dayValue(day);
+  if (value === null) return '';
+  return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(value));
+}
+
+function ago(days: number) {
+  if (days <= 0) return 'today';
+  if (days === 1) return 'yesterday';
+  return `${days} days ago`;
+}
+
+/**
+ * Always-visible line saying when the entry was last checked against its official page, and a warning chip when
+ * that check is older than `staleAfterDays` or never happened. Readers should see staleness without opening a menu.
+ */
+export function opportunityFreshness(options: {
+  checkedAt?: string | null; checkedLabel: string; staleAfterDays: number; addedAt?: string | null; now?: number;
+}) {
+  const now = options.now ?? Date.now();
+  const age = daysSince(options.checkedAt, now);
+  if (age === null) {
+    const added = formatIsoDay(options.addedAt);
+    return `<p class="opportunity-freshness is-stale"><span class="opportunity-freshness-warning">⚠ Not re-verified${added ? ` since it was added ${escapeHtml(added)}` : ''}</span> · confirm on the official page</p>`;
+  }
+  const when = `${escapeHtml(formatIsoDay(options.checkedAt))} (${ago(age)})`;
+  if (age > options.staleAfterDays) {
+    return `<p class="opportunity-freshness is-stale"><span class="opportunity-freshness-warning">⚠ ${escapeHtml(options.checkedLabel)} ${when}</span> · may be out of date</p>`;
+  }
+  return `<p class="opportunity-freshness">✓ ${escapeHtml(options.checkedLabel)} ${when}</p>`;
+}
+
+export interface StageView { stage: string; date: string; required?: boolean; note?: string; state: 'passed' | 'next' | 'later'; daysLeft: number }
+
+/** Dated stages (whitepaper → full proposal, application → letters) with the next one highlighted. */
+export function opportunityStages(stages: StageView[], estimated = false) {
+  if (!stages.length) return '';
+  const items = stages.map(stage => {
+    const left = stage.state === 'passed' ? 'passed' : stage.daysLeft === 0 ? 'today' : `${stage.daysLeft} day${stage.daysLeft === 1 ? '' : 's'} left`;
+    const tone = stage.state === 'passed' ? 'is-passed' : stage.daysLeft <= 7 ? 'is-urgent' : stage.daysLeft <= 30 ? 'is-soon' : '';
+    const tags = [
+      stage.required === true ? 'required' : stage.required === false ? 'optional' : '',
+      stage.note || ''
+    ].filter(Boolean).map(text => `<span class="opportunity-stage-tag">${escapeHtml(text)}</span>`).join('');
+    return `<li class="opportunity-stage ${tone}${stage.state === 'next' ? ' is-next' : ''}"><span class="opportunity-stage-name">${escapeHtml(stage.stage)}</span> <span class="opportunity-stage-date">${escapeHtml(formatIsoDay(stage.date))}${estimated ? ' (est.)' : ''} · ${left}</span>${tags}</li>`;
+  }).join('');
+  return `<ol class="opportunity-stages" aria-label="Deadline stages">${items}</ol>`;
+}
+
+/** Application-status picker, shown only on starred items (the shortlist someone is actually applying to). */
+export function opportunityProgressPicker(id: string, targetLabel: string, status: ProgressStatus | undefined) {
+  const options = [['', 'Not started'], ...Object.entries(PROGRESS_LABELS)]
+    .map(([value, label]) => `<option value="${value}"${(status ?? '') === value ? ' selected' : ''}>${escapeHtml(label)}</option>`).join('');
+  return `<label class="opportunity-progress${status ? ' has-status' : ''}">My status <select data-progress-id="${escapeHtml(id)}" aria-label="My application status for ${escapeHtml(targetLabel)}">${options}</select></label>`;
+}
+
+/** Shared topic / research-area chip row at the bottom of an opportunity card. */
+export function opportunityTopics(chipsHtml: string, className = '') {
+  if (!chipsHtml) return '';
+  return `<div class="opportunity-topics${className ? ` ${className}` : ''}"><span class="opportunity-label">Topics</span>${chipsHtml}</div>`;
+}
+
+/** Shared card footer combining optional left-side controls (status picker, school links) with the ⋯ actions menu. */
+export function opportunityFooter(options: {
+  kind: 'grant' | 'job'; title: string; startHtml?: string; actionsHtml: string; pageLink: string;
+}) {
+  const left = options.startHtml ? `<div class="opportunity-footer-start">${options.startHtml}</div>` : '';
+  return `<div class="${options.kind}-card-footer result-card-footer">${left}${resultActions(options.title, options.actionsHtml, options.pageLink)}</div>`;
+}
+
+/** Shared grouped-view shell (by school on Jobs, by sponsor on Awards & Grants). */
+export function opportunityGroup(options: {
+  label: string; className: string; headingButtonHtml: string; metaHtml: string; extraHeaderHtml?: string; itemsHtml: string;
+}) {
+  return `<section class="opportunity-group ${options.className}" aria-label="${escapeHtml(options.label)}">
+    <header class="opportunity-group-header">
+      <h2>${options.headingButtonHtml}</h2>
+      ${options.metaHtml}
+      ${options.extraHeaderHtml || ''}
+    </header>
+    <div class="opportunity-group-items">${options.itemsHtml}</div>
+  </section>`;
+}
+
+/** Scroll to and highlight the `#id` card from the URL hash, if present. */
+export function scrollToHashCard() {
+  const hash = window.location.hash.slice(1);
+  if (!hash) return;
+  let id = hash;
+  try { id = decodeURIComponent(hash); } catch { /* keep raw */ }
+  const targetElement = document.getElementById(id) || document.getElementById(hash);
+  if (targetElement) {
+    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    targetElement.classList.add('is-highlighted');
+    window.setTimeout(() => targetElement.classList.remove('is-highlighted'), 2400);
+  }
+}
+
+/** Trigger a browser download of a Markdown file. */
+export function downloadMarkdown(filename: string, content: string) {
+  const url = URL.createObjectURL(new Blob([content], { type: 'text/markdown;charset=utf-8' }));
+  const link = Object.assign(document.createElement('a'), { href: url, download: filename });
+  document.body.append(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
+/** Wire the `#favorites-actions` ⋯ menu (calendar `.ics` export + Markdown shortlist export). */
+export function wireFavoritesActions<T>(options: {
+  getItems: () => T[];
+  getId: (item: T) => string;
+  favorites: ReturnType<typeof createFavoritesStore>;
+  calendarEvents: (item: T) => CalendarEvent[];
+  calendarFileName: string;
+  calendarTitle: string;
+  exportNoun: string;
+  onExportMarkdown: (starred: T[]) => void;
+}) {
+  const menu = document.querySelector<HTMLDetailsElement>('#favorites-actions');
+  const calendarButton = document.querySelector<HTMLButtonElement>('#export-favorites-calendar');
+  const exportButton = document.querySelector<HTMLButtonElement>('#export-favorites');
+
+  const update = () => {
+    if (!menu) return;
+    const count = options.favorites.all().length;
+    const starred = onlyFavorites(options.getItems(), options.getId, options.favorites);
+    const dated = starred.filter(item => options.calendarEvents(item).length).length;
+    if (calendarButton) {
+      calendarButton.hidden = dated === 0;
+      calendarButton.textContent = `Add ${dated} starred deadline${dated === 1 ? '' : 's'} to calendar`;
+      calendarButton.title = 'Download an .ics file for Google Calendar, Outlook, or Apple Calendar, with reminders a week and a day ahead';
+    }
+    if (exportButton) {
+      exportButton.hidden = count < 2;
+      exportButton.textContent = `Export ${count} favorites`;
+      exportButton.title = `Download your ${count} starred ${options.exportNoun} as a Markdown file`;
+    }
+    menu.hidden = count < 2 && dated === 0;
+    if (menu.hidden) menu.open = false;
+  };
+
+  calendarButton?.addEventListener('click', () => {
+    const events = onlyFavorites(options.getItems(), options.getId, options.favorites).flatMap(item => options.calendarEvents(item));
+    if (events.length) downloadCalendar(options.calendarFileName, events, options.calendarTitle);
+    if (menu) menu.open = false;
+  });
+
+  exportButton?.addEventListener('click', () => {
+    const starred = onlyFavorites(options.getItems(), options.getId, options.favorites);
+    if (starred.length) options.onExportMarkdown(starred);
+    if (menu) menu.open = false;
+  });
+
+  return { update };
 }

@@ -28,6 +28,8 @@ npm test          # run the Node.js unit tests (test/unit/*.test.js)
 npm run test:e2e  # Playwright e2e tests (test/e2e/); auto-starts the dev server on :4173
 npm run validate:jobs  # fast check of public/jobs.json; run before every jobs commit (names each bad record)
 npm run lint:data      # data warnings for the auditor (wrong-school links, duplicate postings, stale grants); never fails CI
+npm run check:links    # broken/moved/redirected official links in grants, active jobs, labs (--changes: pages whose text changed)
+npm run feeds          # Atom feeds of newly added jobs/awards into public/feeds/ (gitignored; runs on predev/prebuild)
 npm run build      # production build to dist/ (multi-page: index, simulator, funding, csconfs, grants, jobs)
 npm run preview    # preview the production build
 ```
@@ -68,7 +70,8 @@ playbook before any data-refresh or web-research task.
 - `csconfs.html` + `src/csconfs/main.ts` (and `csconfs-submit.html` + `src/csconfs/submit.ts`) — CS conference
   schedule explorer over `csconfs/data/conferences.json`.
 - `grants.html` + `src/grants/main.ts` — standalone CS research awards, fellowships, and grants explorer
-  over the database in `public/grants.json` (industry gifts, NSF calls, DARPA, DOE, DoD, foundations, societies).
+  over the database in `public/grants.json` (industry gifts, NSF calls, DARPA, DOE, DoD, foundations, societies),
+  with loading/filtering/grouping in `src/grants/grants-data.ts` and card/sponsor-group/Markdown rendering in `src/grants/grants-render.ts`.
 - `jobs.html` + `src/jobs/main.ts` — US and international academic CS jobs explorer over `public/jobs.json`. It supports country and continent filtering; the state tile map is US-specific. The page shows no CSRankings ranks. Modeled on the grants page
   (search box, card list) with keyword filters (`track:`, `dept:`, `level:`, `area:`, `loc:`, `visa:`, `status:`),
   comma-separated alternatives, and a clickable search-help popup in `src/search-keywords.ts`. Legacy filter URL
@@ -136,9 +139,16 @@ playbook before any data-refresh or web-research task.
   (`calculateDiscoveryInsights`, `calculateSubfieldDiscoveries`, `buildPriorPeriodData`). Consumed by
   `analysis.ts`/`analysis-trends.ts`, `discoveries.ts`, and `scripts/paper-stats.mjs` alike, so it's the one
   place derived-metric logic should live rather than being duplicated per page.
+- `src/calendar.ts` — .ics export (all-day events, week/day reminders) behind Jobs' and Awards' per-card "Add to
+  calendar" action and the starred-items ⋯ menu. Awards export each upcoming structured stage (`deadlines`:
+  whitepaper, LOI, full proposal…); Jobs export the deadline and review-begins dates. `src/progress.ts` keeps
+  browser-local application status for starred postings and awards (`progress:` keyword, Markdown export).
+- Cards on both explorers show a "New" badge (`addedAt` within 7 days) and an always-visible freshness line from
+  `lastVerifiedAt` (awards; warning when missing or >90 days) or `lastSeenAt` (jobs; warning >30 days), via
+  `opportunityFreshness()` in `src/opportunity-card.ts`. Never hide data caveats in a collapsed disclosure.
 - `src/favorites.ts` — browser-local ★ favorites used by CS Confs, Awards, and Jobs: stars reorder results
   immediately, `favorites: only` narrows through the search box, and legacy `favorites=only` links migrate
-  into that keyword. No favorites dropdowns. Jobs offers Markdown export in its ⋯ menu with two or more
+  into that keyword. No favorites dropdowns. Jobs and Awards offer Markdown export in their ⋯ menu with two or more
   stars. Dataset settings, maps, analysis, score breakdowns, and methodology are closed by default and
   available on demand; dataset-setting summaries show the active region/year/venue choices.
 - `src/seo.ts` — discoverability infra used by every page: keeps `<title>`/description/canonical/OpenGraph tags in

@@ -228,7 +228,33 @@ export interface Grant {
   locationLabel?: string;
   /** YYYY-MM-DD the grants routine last confirmed this entry against its official page; drives the audit queue. */
   lastVerifiedAt?: string;
+  /** YYYY-MM-DD the entry first appeared in grants.json; drives "New" badges, the Recently added sort, and the feed. */
+  addedAt?: string;
+  /**
+   * Every dated stage of the current (or latest published) cycle, earliest first: whitepaper, executive summary,
+   * letter of intent, pre-proposal, full proposal, reference letters... `deadline` stays the human-readable summary.
+   */
+  deadlines?: GrantDeadlineStage[];
+  /** What the official page says about citizenship; omitted until someone has read it for that. */
+  citizenship?: GrantCitizenship;
 }
+
+export interface GrantDeadlineStage {
+  /** Short label as the sponsor names it, e.g. "White paper", "Full proposal", "Reference letters". */
+  stage: string;
+  /** YYYY-MM-DD. */
+  date: string;
+  /** true when the sponsor says this stage is required to continue; false when encouraged/optional; omitted if unstated. */
+  required?: boolean;
+  /** e.g. "By invitation only". */
+  note?: string;
+}
+
+/**
+ * `us-citizen`: US citizens (or nationals) only; `us-citizen-or-pr`: citizens or permanent residents;
+ * `open`: open regardless of citizenship; `other`: some other nationality/residency rule (see eligibility).
+ */
+export type GrantCitizenship = 'us-citizen' | 'us-citizen-or-pr' | 'open' | 'other';
 
 export type JobTrack = 'tenure-track' | 'teaching' | 'research' | 'postdoc' | 'visiting' | 'leadership' | 'industry' | 'internship';
 export type JobLevel = 'assistant' | 'associate' | 'full' | 'open';
@@ -272,6 +298,8 @@ export interface Job {
   summary?: string | null;
   source: 'crawl' | 'submission';
   verified?: boolean;
+  /** YYYY-MM-DD the posting first appeared in jobs.json; drives "New" badges, the Recently added sort, and the feed. */
+  addedAt?: string;
 }
 
 // CS Confs schedule records (csconfs/data/conferences.json)

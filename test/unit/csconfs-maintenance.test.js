@@ -12,6 +12,8 @@ import {
   parseChangedPaths,
   parseOptions,
   proposalValidationError,
+  projectedEditionDeadline,
+  projectedNextDeadline,
   selectDueSeries,
 } from '../../scripts/csconfs-maintain.mjs';
 
@@ -105,11 +107,11 @@ test('selection waits a week after an incomplete check, even when deferredUntil 
 
 test('selection reserves half the batch for never-checked series', () => {
   const names = ['A1', 'A2', 'A3', 'A4', 'N1', 'N2', 'N3'];
-  // A* series were checked recently but still have unverified editions (priority 10); N* were never checked
+  // A* series were checked 17 days ago (past the recheck interval) but still have unverified editions (priority 10); N* were never checked
   // and are otherwise fine (priority 30), so plain priority order would pick only A* series.
   const conferences = names.map((name) => record({ name, venueKeys: [name.toLowerCase()], description: name, verified: !name.startsWith('A') }));
   const checks = { version: 1, series: Object.fromEntries(names.filter((name) => name.startsWith('A'))
-    .map((name) => [name, { lastCheckedAt: '2026-08-31T00:00:00Z', outcome: 'complete', deferredUntil: null }])) };
+    .map((name) => [name, { lastCheckedAt: '2026-08-15T00:00:00Z', outcome: 'complete', deferredUntil: null }])) };
   const picked = selectDueSeries(conferences, checks, { now: Date.parse('2026-09-01T00:00:00Z'), limit: 4 });
   assert.deepEqual(picked.map((item) => item.name), ['A1', 'A2', 'N1', 'N2']);
 });
@@ -213,4 +215,44 @@ test('proposal validation accepts other venues with empty venueKeys and keeps th
   assert.match(proposalValidationError(result([other({ area: 'plan' })], { series: 'NFM' }), 'NFM', before, { currentYear: 2026 }), /other-venue marking changed/);
   assert.match(proposalValidationError(result([record({ venueKeys: [] })]), 'PLDI', [record()], { currentYear: 2026 }), /needs venueKeys/);
   assert.match(proposalValidationError(result([other({ area: undefined })], { series: 'NFM' }), 'NFM', before, { currentYear: 2026 }), /need an area/);
+});
+
+test('a complete check still waits the minimum recheck interval when its gap persists', () => {
+  // CHES-style: the edition is verified but has no conference-wide deadline, so it always looks like a gap.
+  const conferences = [record({ deadline: null, abstractDeadline: null })];
+  const checks = { version: 1, series: { PLDI: { lastCheckedAt: '2026-08-28T00:00:00Z', outcome: 'complete', deferredUntil: null } } };
+  assert.deepEqual(selectDueSeries(conferences, checks, { now: Date.parse('2026-09-01T00:00:00Z') }).map((item) => item.name), []);
+  assert.deepEqual(selectDueSeries(conferences, checks, { now: Date.parse('2026-09-08T00:00:00Z') }).map((item) => item.name), ['PLDI']);
+});
+
+test('series whose previous call closed around now rank first, ahead of other discovery gaps', () => {
+  const now = Date.parse('2026-11-02T00:00:00Z');
+  const conferences = [
+    // MSR-like: last deadline late October 2025, no 2027 edition yet: its next call is likely open now.
+    record({ name: 'MSR', venueKeys: ['msr'], description: 'MSR', year: 2026, abstractDeadline: null, deadline: '2025-10-30', notificationDate: null }),
+    // FOCS-like: last deadline in April: discovery gap, but not urgent.
+    record({ name: 'FOCS', venueKeys: ['focs'], description: 'FOCS', year: 2026, abstractDeadline: null, deadline: '2026-04-03', notificationDate: null }),
+    record({ name: 'ALENEX', venueKeys: ['alenex'], description: 'ALENEX', year: 2026, abstractDeadline: null, deadline: '2025-08-01', notificationDate: null })
+  ];
+  assert.deepEqual(projectedNextDeadline([conferences[0]], now), { from: '2025-10-30', date: '2026-10-30' });
+  const picked = selectDueSeries(conferences, { version: 1, series: {} }, { now, limit: 3 });
+  assert.deepEqual(picked.map((item) => item.name), ['MSR', 'ALENEX', 'FOCS']);
+  assert.match(picked[0].reasons.join('; '), /suggests the next call closes around 2026-10-30/);
+});
+
+test('a missing deadline that previous cycles put months away is not urgent', () => {
+  const now = Date.parse('2026-11-02T00:00:00Z');
+  const tacas = [
+    record({ name: 'TACAS', venueKeys: ['tacas'], description: 'TACAS', year: 2027, abstractDeadline: null, deadline: '2026-10-16', notificationDate: null }),
+    record({ name: 'TACAS', venueKeys: ['tacas'], description: 'TACAS', year: 2028, abstractDeadline: null, deadline: null, notificationDate: null, verified: false, estimated: true })
+  ];
+  assert.equal(projectedEditionDeadline(tacas, 2028), '2027-10-16');
+  const soon = [
+    record({ name: 'ATC', venueKeys: ['atc'], description: 'ATC', year: 2026, abstractDeadline: null, deadline: '2026-01-13', notificationDate: null }),
+    record({ name: 'ATC', venueKeys: ['atc'], description: 'ATC', year: 2027, abstractDeadline: null, deadline: null, notificationDate: null, verified: false, estimated: true })
+  ];
+  const picked = selectDueSeries([...tacas, ...soon], { version: 1, series: {} }, { now, limit: 2 });
+  assert.deepEqual(picked.map((item) => item.name), ['ATC', 'TACAS']);
+  assert.ok(picked[0].priority < picked[1].priority);
+  assert.match(picked[1].reasons.join('; '), /about 2027-10-16; not urgent/);
 });

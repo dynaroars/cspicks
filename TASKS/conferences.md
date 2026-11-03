@@ -17,8 +17,11 @@ centrally, following the process below.
 Cadence in practice: the scheduled `confs` routine audits 12 series every
 other day from `npm run maintain:csconfs -- --dry-run --limit 12`, which puts
 near-term deadlines and gaps first and reserves half of each batch for
-never-checked series. A `not_found` check defers the series 21 days and an
-`incomplete` one 7 days. Once every series has been checked, twice weekly is
+never-checked series. A series with no next edition whose previous call closed
+around this time of year ranks first, since its next call is probably open; a gap
+whose call is months away by the series' own rhythm ranks last. A `not_found`
+check defers the series 21 days, an `incomplete` one 7 days, and a `complete`
+one 10 days. Once every series has been checked, twice weekly is
 enough.
 
 ## Scope

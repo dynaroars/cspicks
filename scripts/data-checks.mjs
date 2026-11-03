@@ -76,7 +76,26 @@ export function conferenceProblems(conferences) {
 
 const GRANT_FIELDS = new Set(['id', 'name', 'shortName', 'sponsor', 'sponsorCategory', 'targetAudience', 'whoFor', 'deadline',
   'deadlineMonth', 'amount', 'summary', 'eligibility', 'topics', 'url', 'featured', 'estimated', 'status', 'locations',
-  'locationLabel', 'lastVerifiedAt']);
+  'locationLabel', 'lastVerifiedAt', 'addedAt', 'deadlines', 'citizenship']);
+export const CITIZENSHIP = ['us-citizen', 'us-citizen-or-pr', 'open', 'other'];
+const STAGE_FIELDS = new Set(['stage', 'date', 'required', 'note']);
+/** `deadlines`: earliest-first dated stages, each {stage, date, required?, note?}. */
+function stageProblems(stages) {
+  if (stages === undefined) return [];
+  if (!Array.isArray(stages) || !stages.length) return ['deadlines (non-empty array of {stage, date})'];
+  const problems = [];
+  stages.forEach((stage, index) => {
+    const at = `deadlines[${index}]`;
+    if (!stage || typeof stage !== 'object') return problems.push(at);
+    Object.keys(stage).filter(key => !STAGE_FIELDS.has(key)).forEach(key => problems.push(`${at}: unknown field ${key}`));
+    if (!nonEmpty(stage.stage)) problems.push(`${at}.stage`);
+    if (!isIsoDay(stage.date)) problems.push(`${at}.date (YYYY-MM-DD)`);
+    if (stage.required !== undefined && typeof stage.required !== 'boolean') problems.push(`${at}.required (boolean)`);
+    if (stage.note !== undefined && !nonEmpty(stage.note)) problems.push(`${at}.note`);
+    if (index && isIsoDay(stage.date) && isIsoDay(stages[index - 1]?.date) && stage.date < stages[index - 1].date) problems.push(`${at}: dates must be earliest first`);
+  });
+  return problems;
+}
 export const SPONSOR_CATEGORIES = ['Government', 'Industry', 'Non-Profit / Foundation', 'Professional Society'];
 export const AUDIENCES = ['Faculty', 'PhD Students', "Master's Students", 'Undergraduate Students', 'Postdocs'];
 const nonEmpty = value => typeof value === 'string' && value.length > 0;
@@ -102,7 +121,9 @@ export function grantProblems(grants) {
       ['status (omit, or "historical")', grant?.status === undefined || grant.status === 'historical'],
       ['locations', grant?.locations === undefined || stringList(grant.locations)],
       ['lastVerifiedAt (YYYY-MM-DD)', grant?.lastVerifiedAt === undefined || isIsoDay(grant.lastVerifiedAt)],
-    ])];
+      ['addedAt (YYYY-MM-DD)', grant?.addedAt === undefined || isIsoDay(grant.addedAt)],
+      [`citizenship (omit, or one of ${CITIZENSHIP.join(' | ')})`, grant?.citizenship === undefined || CITIZENSHIP.includes(grant.citizenship)],
+    ]), ...stageProblems(grant?.deadlines).map(problem => `${label}: ${problem}`)];
   });
 }
 
@@ -183,7 +204,11 @@ export function dataWarnings({ conferences = [], grants = [], sources = [], jobs
   }
 
   for (const grant of grants) {
+    if (!grant.addedAt) warnings.push(`grants.json ${grant.id}: no addedAt (set it to the day the entry was added, YYYY-MM-DD)`);
     if (grant.status === 'historical') continue;
+    if (!grant.deadlines && /\b20\d{2}\b/.test(grant.deadline) && /white ?paper|executive summary|letter of intent|\bLOI\b|pre-?proposal|pre-?application|preliminary proposal|concept paper|notice of intent/i.test(grant.deadline)) {
+      warnings.push(`grants.json ${grant.id}: deadline text names a multi-stage call but there is no deadlines[] list (TASKS/grants.md, Multi-stage deadlines)`);
+    }
     const years = (grant.deadline.match(/\b20\d{2}\b/g) || []).map(Number);
     if (years.length && Math.max(...years) < year - 1) warnings.push(`grants.json ${grant.id}: newest date in deadline is ${Math.max(...years)}; check whether the program still runs (else status: historical)`);
     if (/not (currently )?(being )?offered|discontinued|no longer (offered|accepting)|program (has )?ended/i.test(`${grant.deadline} ${grant.summary}`)) warnings.push(`grants.json ${grant.id}: text says the program is not offered; mark status: historical if the official page agrees`);
@@ -204,6 +229,8 @@ export function dataWarnings({ conferences = [], grants = [], sources = [], jobs
     }
     if (/github\.io|sites\.google\.com|linkedin\.com/.test(String(source.homepage))) warnings.push(`${label}: homepage looks personal, not the department`);
   }
+
+  for (const job of jobs) if (!job.addedAt) warnings.push(`jobs.json ${job.id}: no addedAt (set it to the day the posting was added, YYYY-MM-DD)`);
 
   const open = jobs.filter(job => !job.closedAt);
   for (let i = 0; i < open.length; i++) {

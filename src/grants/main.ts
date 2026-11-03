@@ -2,16 +2,16 @@
  * CS Awards & Grants Main Controller
  */
 import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavorites, wantsFavoritesOnly, wireFavoriteToggles } from '../favorites.js';
-import { awardDeadlineTone, opportunityDeadline, opportunityHeader, opportunityMeta } from '../opportunity-card.js';
-import { resultActions } from '../result-actions.js';
+import { downloadMarkdown, scrollToHashCard, wireFavoritesActions } from '../opportunity-card.js';
+import { downloadCalendar } from '../calendar.js';
+import { createProgressStore, filterByProgress, PROGRESS_SEARCH_CHOICES, wireProgressPickers } from '../progress.js';
 import { createSearchControls, focusSearchOnLoad, renderSearchExamples, sample, searchChoices, updateSearchUrl } from '../search-controls.js';
 import { restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
-import { escapeHtml } from '../shared.js';
 import { rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
-import { filterGrants, grantDeadlinePresentation, GRANTS_KEYWORD_SPECS, grantsSuggestions, groupBySponsor, loadGrantsData } from './grants-data.js';
-import type { SponsorGrants } from './grants-data.js';
+import { filterGrants, grantCalendarEvents, GRANTS_KEYWORD_SPECS, grantsSuggestions, groupBySponsor, loadGrantsData } from './grants-data.js';
+import { grantsExportFileName, grantsToMarkdown, renderGrantCard, renderSponsorGroup } from './grants-render.js';
 import type { Grant } from '../types.js';
 
 const params = new URLSearchParams(window.location.search);
@@ -20,13 +20,14 @@ const resultsContainer = document.getElementById('grants-results')!;
 const statusText = document.getElementById('grants-status');
 const countElement = document.getElementById('grants-count');
 const favorites = createFavoritesStore('cspicks:grants-favorites');
+const progress = createProgressStore('cspicks:grants-progress');
 
 let allGrants: Grant[] = [];
 const selectById = (id: string) => document.getElementById(id) as HTMLSelectElement | null;
 
 const DEFAULT_SORT = 'deadline';
 
-const DEFAULT_EXAMPLES = ['NSF CAREER', 'Google PhD Fellowship', 'audience: phd', 'category: industry', 'sponsor: NSF audience: faculty', 'loc: California', 'deadline: rolling', 'status: historical'];
+const DEFAULT_EXAMPLES = ['NSF CAREER', 'Google PhD Fellowship', 'audience: phd', 'category: industry', 'sponsor: NSF audience: faculty', 'loc: California', 'deadline: soon', 'citizenship: international', 'added: month', 'status: historical'];
 
 function getFilterState() {
   return {
@@ -58,7 +59,14 @@ function render() {
   const filterState = getFilterState();
   const favoritesOnly = wantsFavoritesOnly(filterState.query);
   const matched = filterGrants(allGrants, filterState);
-  const filtered = favoritesOnly ? onlyFavorites(matched, grant => grant.id, favorites) : prioritizeFavorites(matched, grant => grant.id, favorites);
+  const filtered = filterByProgress(
+    favoritesOnly ? onlyFavorites(matched, grant => grant.id, favorites) : prioritizeFavorites(matched, grant => grant.id, favorites),
+    filterState.query,
+    GRANTS_KEYWORD_SPECS,
+    grant => grant.id,
+    progress
+  );
+  const now = new Date();
 
   if (!filtered.length) {
     resultsContainer.innerHTML = `
@@ -69,9 +77,9 @@ function render() {
       </div>
     `;
   } else if (filterState.view === 'sponsor') {
-    resultsContainer.innerHTML = groupBySponsor(filtered).map(group => renderSponsorGroup(group, favorites.isFavorite)).join('');
+    resultsContainer.innerHTML = groupBySponsor(filtered).map(group => renderSponsorGroup(group, favorites.isFavorite, now, progress.get)).join('');
   } else {
-    resultsContainer.innerHTML = filtered.map(grant => renderGrantCard(grant, favorites.isFavorite)).join('');
+    resultsContainer.innerHTML = filtered.map(grant => renderGrantCard(grant, favorites.isFavorite, now, progress.get)).join('');
   }
 
   const countStr = `${filtered.length} award${filtered.length === 1 ? '' : 's'} &amp; grant${filtered.length === 1 ? '' : 's'}`;
@@ -82,17 +90,6 @@ function render() {
   }
 
   updateUrl(filterState);
-}
-
-function handleHashScroll() {
-  const hash = window.location.hash.slice(1);
-  if (!hash) return;
-  const targetElement = document.getElementById(hash);
-  if (targetElement) {
-    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    targetElement.classList.add('is-highlighted');
-    window.setTimeout(() => targetElement.classList.remove('is-highlighted'), 2400);
-  }
 }
 
 function buildSuggestions() {
@@ -106,8 +103,12 @@ function buildSuggestions() {
       return {
         sponsor: items.sponsors, audience: searchChoices(['faculty', 'students', 'phd', 'undergrad', 'postdoc']), topic: items.topics,
         category: searchChoices(['government', 'industry', 'foundation', 'society']),
-        deadline: searchChoices(['rolling', 'fixed']), status: searchChoices(['all', 'current', 'historical']),
-        loc: searchChoices([...new Set(allGrants.flatMap(grant => grant.locations || []))]), favorites: searchChoices(['only'])
+        deadline: searchChoices({ soon: 'Next 30 days', week: 'Next 7 days', rolling: 'Rolling / open', fixed: 'Fixed dates' }), status: searchChoices(['all', 'current', 'historical']),
+        citizenship: searchChoices({ international: 'Not limited to US citizens or residents', open: 'Stated open to international applicants', pr: 'US permanent residents eligible', 'us-only': 'US citizens only' }),
+        added: searchChoices({ week: 'Added in the last 7 days', month: 'Added in the last month' }),
+        loc: searchChoices([...new Set(allGrants.flatMap(grant => grant.locations || []))]),
+        progress: searchChoices(PROGRESS_SEARCH_CHOICES),
+        favorites: searchChoices(['only'])
       };
     },
     emptyText: 'No matching grant, sponsor, or topic',
@@ -125,7 +126,7 @@ function buildSuggestions() {
         input.value = item.value || item.label;
         render();
         window.location.hash = item.grantId;
-        handleHashScroll();
+        scrollToHashCard();
       } else {
         input.value = item.value || item.label;
         render();
@@ -139,6 +140,8 @@ function setupExamples() {
 }
 
 function setupDelegatedListeners() {
+  wireProgressPickers(resultsContainer, progress);
+
   // Topic clicks, sponsor clicks, and reset on cards
   resultsContainer.addEventListener('click', event => {
     const target = event.target instanceof Element ? event.target : null;
@@ -150,6 +153,13 @@ function setupDelegatedListeners() {
       selectById('view-select')!.value = 'award';
       render();
       input.focus();
+      return;
+    }
+
+    const calendar = target.closest<HTMLElement>('[data-calendar-grant]');
+    if (calendar) {
+      const grant = allGrants.find(item => item.id === calendar.dataset.calendarGrant);
+      if (grant) downloadCalendar(`${grant.id}-deadlines.ics`, grantCalendarEvents(grant), `${grant.shortName || grant.name} deadlines`);
       return;
     }
 
@@ -168,8 +178,6 @@ function setupDelegatedListeners() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-
-
   });
 
   // Filter change listeners
@@ -178,9 +186,6 @@ function setupDelegatedListeners() {
       render();
     });
   });
-
-  // Slash key to focus search
-
 }
 
 function restoreFilters() {
@@ -199,8 +204,23 @@ async function init() {
 
     input.disabled = false;
     input.placeholder = 'Search awards or use keywords: sponsor: NSF audience: phd';
+    const favoritesMenu = wireFavoritesActions({
+      getItems: () => allGrants,
+      getId: grant => grant.id,
+      favorites,
+      calendarEvents: grant => grantCalendarEvents(grant),
+      calendarFileName: 'cspicks-starred-award-deadlines.ics',
+      calendarTitle: 'CS Picks: starred award deadlines',
+      exportNoun: 'awards',
+      onExportMarkdown: starred => {
+        const now = new Date();
+        const ordered = filterGrants(starred, { status: 'all', sortBy: getFilterState().sortBy, now });
+        downloadMarkdown(grantsExportFileName(now.getTime()), grantsToMarkdown(ordered, { now, getProgress: progress.get }));
+      }
+    });
     wireFavoriteToggles(resultsContainer, favorites);
-    onFavoriteChange(resultsContainer, render);
+    onFavoriteChange(resultsContainer, () => { favoritesMenu.update(); render(); });
+    favoritesMenu.update();
     initTooltipPositioning();
 
     setupExamples();
@@ -209,7 +229,7 @@ async function init() {
     focusSearchOnLoad(input);
 
     // render() is synchronous, so the cards already exist.
-    handleHashScroll();
+    scrollToHashCard();
   } catch (error) {
     console.error('Failed to load grants data:', error);
     if (statusText) {
@@ -220,46 +240,3 @@ async function init() {
 }
 
 init();
-
-/** By-sponsor view: one group card per sponsor, like Jobs' by-school view. */
-function renderSponsorGroup(group: SponsorGrants, isFavorite: (id: string) => boolean) {
-  const count = group.grants.length;
-  return `<section class="opportunity-group grant-sponsor-group" aria-label="${escapeHtml(group.sponsor)}">
-    <header class="opportunity-group-header">
-      <h2><button type="button" data-search-sponsor="${escapeHtml(group.sponsor)}">${escapeHtml(group.sponsor)}</button></h2>
-      <p class="opportunity-group-meta">${escapeHtml(group.category)} · ${count} award${count === 1 ? '' : 's'}</p>
-    </header>
-    <div class="opportunity-group-items">${group.grants.map(grant => renderGrantCard(grant, isFavorite)).join('')}</div>
-  </section>`;
-}
-
-/** CS Awards & Grants cards use the same hierarchy as Jobs. */
-function renderGrantCard(grant: Grant, isFavorite: (id: string) => boolean = () => false) {
-  const eligibilityItems = (grant.eligibility || []).map(item => `<li>${escapeHtml(item)}</li>`).join('');
-  const topicChips = (grant.topics || []).map(t => `<button type="button" class="opportunity-chip grant-topic-chip" data-search-topic="${escapeHtml(t)}">${escapeHtml(t)}</button>`).join('');
-  const locationText = grant.locationLabel || (
-    grant.locations?.length === 1 ? grant.locations[0] :
-      grant.locations?.length ? `${grant.locations.length} eligible jurisdictions` : ''
-  );
-  const deadline = grantDeadlinePresentation(grant);
-  const historical = grant.status === 'historical';
-  const notes = [
-    historical ? '<span class="opportunity-chip grant-status-badge">Historical</span>' : '',
-    deadline.estimated ? '<span class="opportunity-chip grant-estimated-badge" title="Projected from the latest published cycle; confirm on the official program page">Estimated</span>' : ''
-  ].join('');
-  return `<article class="opportunity-card grant-card ${historical ? 'is-historical' : ''}" id="${escapeHtml(grant.id)}" data-grant-id="${escapeHtml(grant.id)}">
-    ${opportunityHeader({ id: grant.id, title: grant.name, url: grant.url, kind: 'grant', favorite: isFavorite(grant.id),
-      organizationHtml: `<button type="button" class="opportunity-filter-link grant-sponsor-btn" data-search-sponsor="${escapeHtml(grant.sponsor)}"><strong>${escapeHtml(grant.sponsor)}</strong></button>`,
-      tagsHtml: `<span class="opportunity-chip opportunity-chip-type grant-cat-badge">${escapeHtml(grant.sponsorCategory)}</span>` })}
-    ${opportunityDeadline(deadline.text, { className: awardDeadlineTone(deadline.text, deadline.estimated, historical), valueClass: 'grant-meta-val', notesHtml: notes })}
-    ${opportunityMeta([
-      { label: 'Who for', value: grant.whoFor },
-      { label: 'Funding & perks', value: grant.amount },
-      ...(locationText ? [{ label: 'Geographic eligibility', value: locationText }] : [])
-    ])}
-    ${grant.summary ? `<p class="opportunity-summary grant-summary">${escapeHtml(grant.summary)}</p>` : ''}
-    ${eligibilityItems ? `<details class="opportunity-details grant-eligibility-accordion"><summary>Eligibility requirements (${grant.eligibility.length})</summary><ul class="grant-eligibility-list">${eligibilityItems}</ul></details>` : ''}
-    ${topicChips ? `<div class="opportunity-topics grant-topics"><span class="opportunity-label">Topics</span>${topicChips}</div>` : ''}
-    <div class="grant-card-footer result-card-footer">${resultActions(grant.name, `<a href="grants-submit.html?id=${encodeURIComponent(grant.id)}">Suggest update</a>`, `grants.html?q=${encodeURIComponent(grant.id)}#${encodeURIComponent(grant.id)}`)}</div>
-  </article>`;
-}

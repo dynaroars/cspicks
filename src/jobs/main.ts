@@ -1,10 +1,11 @@
 /**
  * Academic Jobs page controller: search, filters, US state map, position/school views.
  */
-import { CONTINENT_LABELS, DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, STATE_TILE_ROWS, TRACK_LABELS, US_STATES, VISA_FILTER_LABELS, continentCounts, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, resolveState, stateCounts } from './jobs-data.js';
+import { CONTINENT_LABELS, DEPARTMENT_LABELS, JOBS_KEYWORD_SPECS, JOB_SORTS, LEVEL_LABELS, jobCalendarEvents, STATE_TILE_ROWS, TRACK_LABELS, US_STATES, VISA_FILTER_LABELS, continentCounts, filterJobs, groupBySchool, jobsSuggestions, loadJobsData, resolveState, stateCounts } from './jobs-data.js';
 import { filterLabs, loadLabsData, renderLabs } from './labs.js';
 import type { Lab } from './labs.js';
 import { exportFileName, jobsToMarkdown, renderJobCard, renderSchoolCard, renderStateMap } from './jobs-render.js';
+import { downloadMarkdown, scrollToHashCard, wireFavoritesActions } from '../opportunity-card.js';
 import { rankSuggestions } from '../suggestion-box.js';
 import { initTooltipPositioning } from '../tooltip-position.js';
 import { SITE_NAME, updatePageMeta } from '../seo.js';
@@ -13,6 +14,8 @@ import { createFavoritesStore, onFavoriteChange, onlyFavorites, prioritizeFavori
 import { keywordValue, parseKeywordQuery, restoreKeywordQuery, setQueryKeyword } from '../search-keywords.js';
 import type { JobFilters, JobSort } from './jobs-data.js';
 import type { Job } from '../types.js';
+import { downloadCalendar } from '../calendar.js';
+import { createProgressStore, filterByProgress, PROGRESS_SEARCH_CHOICES, wireProgressPickers } from '../progress.js';
 import { createSearchControls, focusSearchOnLoad, renderSearchExamples, sample, searchChoices, updateSearchUrl } from '../search-controls.js';
 
 const params = new URLSearchParams(window.location.search);
@@ -22,9 +25,8 @@ const statusText = document.getElementById('jobs-status')!;
 const countElement = document.getElementById('jobs-count')!;
 const mapElement = document.getElementById('jobs-map')!;
 const favorites = createFavoritesStore('cspicks:jobs-favorites');
+const progress = createProgressStore('cspicks:jobs-progress');
 const select = (id: string) => document.getElementById(id) as HTMLSelectElement;
-const exportButton = document.querySelector<HTMLButtonElement>('#export-favorites')!;
-const favoritesActions = document.querySelector<HTMLDetailsElement>('#favorites-actions')!;
 const mapClear = document.querySelector<HTMLButtonElement>('#clear-map-states')!;
 const labsDetails = document.querySelector<HTMLDetailsElement>('#labs-details')!;
 const labsList = document.getElementById('labs-list')!;
@@ -69,7 +71,7 @@ function render() {
   const filters: JobFilters = { ...current, now: Date.now() };
   const favoritesOnly = wantsFavoritesOnly(current.query);
   // Starred postings lead the list; "favorites only" hides the rest.
-  const byFavorites = (list: Job[]) => favoritesOnly ? onlyFavorites(list, job => job.id, favorites) : prioritizeFavorites(list, job => job.id, favorites);
+  const byFavorites = (list: Job[]) => filterByProgress(favoritesOnly ? onlyFavorites(list, job => job.id, favorites) : prioritizeFavorites(list, job => job.id, favorites), current.query, JOBS_KEYWORD_SPECS, job => job.id, progress);
   const shown = byFavorites(filterJobs(allJobs, filters));
   renderContinentOptions(byFavorites(filterJobs(allJobs, { ...filters, continent: 'world' })));
   // The map ignores its own state filter so every state keeps a count.
@@ -91,9 +93,9 @@ function render() {
       ${allJobs.length ? '<button type="button" class="btn-secondary" id="reset-jobs-filters">Reset all filters</button>' : ''}
     </div>`;
   } else if (current.view === 'school') {
-    results.innerHTML = groupBySchool(shown).map(group => renderSchoolCard(group, favorites.isFavorite, now)).join('');
+    results.innerHTML = groupBySchool(shown).map(group => renderSchoolCard(group, favorites.isFavorite, now, progress.get)).join('');
   } else {
-    results.innerHTML = shown.map(job => renderJobCard(job, favorites.isFavorite, now)).join('');
+    results.innerHTML = shown.map(job => renderJobCard(job, favorites.isFavorite, now, true, progress.get)).join('');
   }
 
   const status = parseKeywordQuery(current.query, JOBS_KEYWORD_SPECS).filters.status?.[0] || 'active';
@@ -172,7 +174,10 @@ function buildSuggestions() {
         school: items.schools, area: Object.entries(areaLabels).map(([value, label]) => ({ value, label, detail: 'Research area' })),
         loc: items.states, track: searchChoices(TRACK_LABELS), level: searchChoices(LEVEL_LABELS), dept: searchChoices(DEPARTMENT_LABELS), visa: searchChoices({ ...VISA_FILTER_LABELS, possible: 'Anything but no sponsorship' }),
         status: searchChoices({ active: 'Active postings', closed: 'Closed postings', all: 'All postings' }),
-        favorites: searchChoices({ only: 'Starred postings only' })
+        favorites: searchChoices({ only: 'Starred postings only' }),
+        deadline: searchChoices({ soon: 'Deadline in the next 30 days', week: 'Deadline in the next 7 days', rolling: 'Rolling review', none: 'No deadline listed' }),
+        added: searchChoices({ week: 'Added in the last 7 days', month: 'Added in the last month' }),
+        progress: searchChoices(PROGRESS_SEARCH_CHOICES)
       };
     },
     emptyText: 'No matching school, area, or state',
@@ -229,18 +234,18 @@ function setupEvents() {
     const area = target?.closest<HTMLElement>('[data-search-area]');
     if (area) setFilter('area', [area.dataset.searchArea!]);
   });
-  exportButton.addEventListener('click', () => {
-    exportFavorites();
-    favoritesActions.open = false;
-  });
-  document.addEventListener('click', event => {
-    if (!favoritesActions.contains(event.target as Node)) favoritesActions.open = false;
-  });
+  wireProgressPickers(results, progress);
 
   results.addEventListener('click', event => {
     const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
     if (target.closest('#reset-jobs-filters')) return resetFilters();
+    const calendar = target.closest<HTMLElement>('[data-calendar-job]');
+    if (calendar) {
+      const job = allJobs.find(item => item.id === calendar.dataset.calendarJob);
+      if (job) downloadCalendar(`${job.id}.ics`, jobCalendarEvents(job), `${job.title} (${job.school})`);
+      return;
+    }
     const school = target.closest<HTMLElement>('[data-search-school]');
     if (school) {
       setFilter('school', [school.dataset.searchSchool!]);
@@ -253,30 +258,6 @@ function setupEvents() {
   });
 
   renderSearchExamples(document.getElementById('jobs-examples')!, jobExamples());
-
-}
-
-function updateExportButton() {
-  const count = favorites.all().length;
-  favoritesActions.hidden = count < 2;
-  if (favoritesActions.hidden) favoritesActions.open = false;
-  exportButton.hidden = count < 2;
-  exportButton.textContent = `Export ${count} favorites`;
-  exportButton.title = `Download your ${count} starred positions as a Markdown file`;
-}
-
-/** Every starred posting (closed ones too, whatever the filters), in the current sort order. */
-function exportFavorites() {
-  const now = Date.now();
-  const starred = onlyFavorites(allJobs, job => job.id, favorites);
-  if (!starred.length) return;
-  const ordered = filterJobs(starred, { status: 'all', sortBy: state().sortBy, now });
-  const url = URL.createObjectURL(new Blob([jobsToMarkdown(ordered, { now })], { type: 'text/markdown;charset=utf-8' }));
-  const link = Object.assign(document.createElement('a'), { href: url, download: exportFileName(now) });
-  document.body.append(link);
-  link.click();
-  link.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 0);
 }
 
 async function init() {
@@ -287,13 +268,28 @@ async function init() {
     suggestions = buildSuggestions();
     input.disabled = false;
     input.placeholder = 'Search jobs or use keywords: track: teaching loc: texas';
+    const favoritesMenu = wireFavoritesActions({
+      getItems: () => allJobs,
+      getId: job => job.id,
+      favorites,
+      calendarEvents: job => jobCalendarEvents(job),
+      calendarFileName: 'cspicks-starred-job-deadlines.ics',
+      calendarTitle: 'CS Picks: starred job deadlines',
+      exportNoun: 'positions',
+      onExportMarkdown: starred => {
+        const now = Date.now();
+        const ordered = filterJobs(starred, { status: 'all', sortBy: state().sortBy, now });
+        downloadMarkdown(exportFileName(now), jobsToMarkdown(ordered, { now, getProgress: progress.get }));
+      }
+    });
     wireFavoriteToggles(results, favorites);
-    onFavoriteChange(results, () => { updateExportButton(); render(); });
-    updateExportButton();
+    onFavoriteChange(results, () => { favoritesMenu.update(); render(); });
+    favoritesMenu.update();
     initTooltipPositioning();
     setupEvents();
     render();
     focusSearchOnLoad(input);
+    scrollToHashCard();
     loadLabsData().then(labs => { allLabs = labs; render(); })
       .catch(error => console.warn('Lab directory unavailable.', error));
   } catch (error) {

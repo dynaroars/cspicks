@@ -7,6 +7,7 @@
   <title>CS Picks - Jobs</title>
   <meta name="description" content="Search computer science faculty, teaching, research, and postdoc positions worldwide by school, research area, country, and continent." />
   <link rel="canonical" href="https://cspicks.roars.dev/jobs.html" />
+  <link rel="alternate" type="application/atom+xml" title="New academic CS jobs (CS Picks)" href="/feeds/jobs.xml" />
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CS Picks">
   <meta property="og:title" content="CS Picks - Jobs">
@@ -71,14 +72,16 @@
           <select id="sort-select" class="field-select" aria-label="Sort postings">
             <option value="deadline">Soonest Deadline</option>
             <option value="posted">Recently Posted</option>
+            <option value="added">Recently Added</option>
             <option value="school">School Name</option>
           </select>
         </div>
         <div class="filter-group">
-          <details id="favorites-actions" class="jobs-favorites-actions" hidden>
+          <details id="favorites-actions" class="favorites-actions" hidden>
             <summary aria-label="Favorites actions" title="Favorites actions">⋯</summary>
-            <div class="jobs-favorites-menu">
+            <div class="favorites-menu">
               <button type="button" id="export-favorites" hidden>Export favorites</button>
+              <button type="button" id="export-favorites-calendar">Add starred deadlines to calendar</button>
             </div>
           </details>
         </div>
@@ -101,20 +104,16 @@
       <div class="jobs-status-bar">
         <div id="jobs-status" role="status" aria-live="polite">Loading jobs…</div>
         <div id="jobs-count" class="jobs-count-highlight"></div>
+        <a class="feed-link" href="/feeds/jobs.xml" title="Subscribe to newly added postings (Atom feed)">RSS: new jobs</a>
       </div>
 
+      <aside class="context-note" role="note" aria-label="About these job listings"><strong>Confirm on the official posting.</strong> Postings come from public hiring pages and community submissions, then are reviewed. A posting stays active until its deadline passes (or, with no deadline, until it goes 90 days unconfirmed); search <code>status: closed</code> for earlier ones. Deadlines are Anywhere on Earth.</aside>
       <section id="jobs-results" class="jobs-results" aria-label="Academic CS jobs worldwide"></section>
 
       <details id="labs-details" class="labs-details">
         <summary>Industry &amp; national labs <span id="labs-count"></span></summary>
         <p class="labs-intro">Research labs and companies that regularly hire CS PhDs as researchers, postdocs, and PhD interns. These link to each lab’s own careers pages rather than individual postings, which rarely close; your search’s area, location, and keywords filter this list too. Many national-lab and defense roles require US citizenship or a security clearance.</p>
         <div id="labs-list"></div>
-      </details>
-
-      <details class="search-options context-details"><summary>About these job listings</summary>
-      <p class="context-note">
-        Postings are collected from public department and university hiring pages and community submissions, then reviewed. A posting stays listed as active until its deadline passes (or, with no deadline, until it has not been confirmed for 90 days); search <code>status: closed</code> to browse earlier ones. Deadlines are interpreted as Anywhere on Earth. Always confirm details and apply on the official page.
-      </p>
       </details>
     </main>
   </div>

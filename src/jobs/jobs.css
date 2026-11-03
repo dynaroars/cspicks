@@ -64,24 +64,6 @@
   max-width: 1080px;
 }
 
-.jobs-favorites-actions { position: relative; }
-.jobs-favorites-actions summary {
-  display: flex; align-items: center; justify-content: center; width: 34px; height: 34px;
-  border-radius: 8px; color: var(--text-secondary); font-size: 1.35rem; cursor: pointer; list-style: none;
-}
-.jobs-favorites-actions summary::-webkit-details-marker { display: none; }
-.jobs-favorites-actions summary:hover, .jobs-favorites-actions[open] summary { background: var(--hover-bg); }
-.jobs-favorites-menu {
-  position: absolute; top: calc(100% + 4px); right: 0; z-index: 30; min-width: 180px;
-  padding: 0.35rem; border: 1px solid var(--border-color); border-radius: 10px;
-  background: var(--card-bg); box-shadow: var(--shadow-dropdown);
-}
-.jobs-favorites-menu button {
-  width: 100%; padding: 0.6rem 0.75rem; border: 0; border-radius: 6px;
-  color: var(--text-primary); background: transparent; font: inherit; font-size: var(--text-sm);
-  text-align: left; white-space: nowrap; cursor: pointer;
-}
-.jobs-favorites-menu button:hover { background: var(--hover-bg); }
 .job-chip-visa.is-no { color: #9b1c1c; background: #fde8e8; border-color: transparent; font-weight: 600; }
 @media (prefers-color-scheme: dark) {
   .job-chip-visa.is-no { color: #fca5a5; background: #4a1818; }

@@ -41,7 +41,8 @@ only corrects records (never deletes one or reverts a commit).
 
 `npm run lint:data` prints suspects that a script can flag but not settle: a jobs page on another country's domain
 (wrong school?), two open postings with the same department, title, and deadline, dates out of order in an upcoming
-conference edition, an `http://` link, a grant whose newest date is years old or whose text says it is not offered.
+conference edition, an `http://` link, a grant whose newest date is years old or whose text says it is not offered,
+a record without `addedAt`, or a dated multi-stage grant deadline with no structured `deadlines` list.
 Hard errors (malformed dates, unknown fields, bad enums, duplicates) are not here: `npm test` already rejects them.
 
 Take up to 10 warnings per run, oldest-looking first. For each, open the official page and either fix the record on

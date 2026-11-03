@@ -29,6 +29,10 @@ public/areas/
 # Build-time artifacts for the Stats page (scripts/build-stats-history.mjs, scripts/generate-seo-pages.mjs)
 public/stats-history.json
 public/seo-pages.json
+# Atom feeds of new jobs/awards (scripts/build-feeds.mjs), rebuilt on predev/prebuild
+public/feeds/
+# Local cache for scripts/check-links.mjs --changes
+.link-check-cache.json
 remote_history.json
 debug_gmu_history.js
 .nsf-sync-cache.json

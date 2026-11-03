@@ -103,7 +103,8 @@ test('awards keyword help fits mobile and legacy filters become editable search 
   await help.click();
   const panel = page.locator('#search-help-panel');
   await expect(panel).toBeVisible();
-  await expect(panel).toContainText('deadline: rolling');
+  await expect(panel).toContainText('deadline: soon');
+  await expect(panel).toContainText('citizenship: international');
   const bounds = await panel.boundingBox();
   expect(bounds.x).toBeGreaterThanOrEqual(0);
   expect(bounds.x + bounds.width).toBeLessThanOrEqual(390);
