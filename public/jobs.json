@@ -17637,5 +17637,26 @@
     "verified": true,
     "country": "US",
     "addedAt": "2026-11-02"
+  },
+  {
+    "id": "simula-uib-postdoc-quantum-information-theory-2026",
+    "school": "Simula UiB",
+    "department": "Department of Information Theory",
+    "title": "Postdoctoral Fellow in Quantum Information Theory and Fault-Tolerant Quantum Computation",
+    "track": "postdoc",
+    "level": null,
+    "areas": [],
+    "state": "",
+    "city": "Bergen",
+    "country": "NO",
+    "deadline": "2026-11-25",
+    "rolling": false,
+    "startDate": "2027-04",
+    "lastSeenAt": "2026-11-03",
+    "url": "https://www.simula.no/careers/job-openings/postdoctoral-fellow-in-quantum-information-theory-and-fault-tolerant-quantum-computation",
+    "summary": "Three-year postdoc (1 April 2027 to 31 March 2030) on fault-tolerant logical operations for qLDPC codes. Accepts PhDs in electrical engineering, computer science, mathematics or quantum information science.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-03"
   }
 ]

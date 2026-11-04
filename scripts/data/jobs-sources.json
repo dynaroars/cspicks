@@ -11856,13 +11856,15 @@
     "region": "asia",
     "jobsUrl": "https://jazb.iust.ac.ir/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "blocked",
+    "summary": "Jazb recruitment portal (jazb.iust.ac.ir) returned HTTP 502 through the crawl egress on 2026-11-03; no posting read. Recheck.",
+    "checkedUrls": [
+      "https://jazb.iust.ac.ir/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "JKU Linz",
@@ -16742,10 +16744,13 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "DISIM homepage and university homepage read; no faculty recruitment page located (only a Career Day news item). Italian concorsi portal not found; recheck.",
+    "checkedUrls": [
+      "https://www.disim.univaq.it/",
+      "https://www.univaq.it/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16777,10 +16782,13 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Central careers portal rczpw.suat-sz.edu.cn read: lists a general 2026 postdoc call and non-CS (life science/medical) roles; no CS-specific post read. Faculty of Computer Science page not checked in depth.",
+    "checkedUrls": [
+      "https://suat-sz.edu.cn/en/",
+      "https://rczpw.suat-sz.edu.cn/index.htm"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16813,13 +16821,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "not_found",
+    "summary": "Homepage rendered with no visible hiring page or links on 2026-11-03.",
+    "checkedUrls": [
+      "https://teias.institute"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "The Catholic University of Korea",
@@ -16829,13 +16839,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "not_found",
+    "summary": "Department homepage rendered; no recruitment link found on 2026-11-03. Korean recruitment board not located.",
+    "checkedUrls": [
+      "https://csie.catholic.ac.kr/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "TU Freiberg",
@@ -16845,10 +16857,12 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "University job portal https://tu-freiberg.de/en/job%20offers located (professors / research staff subpages); subpages not read, so no CS post confirmed.",
+    "checkedUrls": [
+      "https://tu-freiberg.de/en/job%20offers"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16861,13 +16875,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "not_found",
+    "summary": "English department homepage shows only faculty lists; no recruitment page found on 2026-11-03.",
+    "checkedUrls": [
+      "https://cse.cau.ac.kr/eng/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "Ecole Normale Superieure de Rennes",
@@ -16913,10 +16929,13 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "IST postdoc page (supervised by Poramate Manoonpong / Sarana Nutanong) renders with no dates, deadline or description in extracted text, so no record added. Recheck.",
+    "checkedUrls": [
+      "https://vistec.ist",
+      "https://vistec.ac.th/postdoctoral-researcher-ist-"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16929,10 +16948,13 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Careers > Faculty Positions page located; the advertisement is a linked document that was not read, so no post confirmed.",
+    "checkedUrls": [
+      "https://www.juit.ac.in/careers",
+      "https://www.juit.ac.in/careers/FacultyPositions"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16945,13 +16967,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "not_found",
+    "summary": "FIT homepage rendered with no recruitment link found on 2026-11-03.",
+    "checkedUrls": [
+      "https://www.fit.uet.vnu.edu.vn/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "IIT Bhubaneswar",
@@ -16961,10 +16985,12 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "School homepage has no hiring link; institute jobs page https://new.iitbbs.ac.in/index.php/home/jobs/ located but not read.",
+    "checkedUrls": [
+      "https://secs.iitbbs.ac.in/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -16977,13 +17003,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "blocked",
+    "summary": "cs.ipm.ac.ir returned HTTP 502 through the crawl egress on 2026-11-03. Recheck.",
+    "checkedUrls": [
+      "https://cs.ipm.ac.ir"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "Ravenshaw University",
@@ -16993,10 +17021,12 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Homepage lists faculty recruitment notices (Professor posts in non-CS subjects); no computing post found; \"New Jobs\" listing not read.",
+    "checkedUrls": [
+      "https://ravenshawuniversity.ac.in"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -17009,10 +17039,12 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Job-offers page URL from site menu (/en/universitaet/karriere-weiterbildung/stellenangebote/) returned 404; the current Stellenangebote page was not found. Recheck.",
+    "checkedUrls": [
+      "https://www.uni-hildesheim.de/en/universitaet/karriere-weiterbildung/stellenangebote/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -17025,13 +17057,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "not_found",
+    "summary": "College of Computer Science homepage rendered with no recruitment link found on 2026-11-03.",
+    "checkedUrls": [
+      "https://computer.hdu.edu.cn/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "Simula UiB",
@@ -17041,10 +17075,13 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "complete",
+    "summary": "Simula careers listing read (https://www.simula.no/careers/job-openings, filter Bergen). One Simula UiB post: Postdoctoral Fellow in quantum information theory and fault-tolerant quantum computation (deadline 2026-11-25), added. Other listings are Oslo.",
+    "checkedUrls": [
+      "https://www.simula.no/careers/job-openings",
+      "https://www.simula.no/careers/job-openings/postdoctoral-fellow-in-quantum-information-theory-and-fault-tolerant-quantum-computation"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -17057,13 +17094,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "not_found",
+    "summary": "School of Future Technology homepage rendered with no recruitment link found on 2026-11-03.",
+    "checkedUrls": [
+      "https://www2.scut.edu.cn/ft/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "National Chung Cheng University",
@@ -17073,13 +17112,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "not_found",
+    "summary": "CS department homepage rendered with no recruitment link found on 2026-11-03.",
+    "checkedUrls": [
+      "https://cs.ccu.edu.tw/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "University of Patras",
@@ -17089,10 +17130,12 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "CEID homepage render timed out; nothing read. Recheck.",
+    "checkedUrls": [
+      "https://www.ceid.upatras.gr/en/home/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -17105,13 +17148,15 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "not_found",
+    "summary": "DMIF English homepage rendered with no recruitment link found on 2026-11-03.",
+    "checkedUrls": [
+      "https://dmif.uniud.it/en/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "Amirkabir University of Technology",
@@ -17121,13 +17166,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "blocked",
+    "summary": "ce.aut.ac.ir returned HTTP 502 through the crawl egress on 2026-11-03. Recheck.",
+    "checkedUrls": [
+      "https://ce.aut.ac.ir/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "Bangladesh Univ. of Professionals",
@@ -17137,10 +17184,13 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "University Career page https://bup.edu.bd/career read: only Bengali notices about the 61st recruitment (written test notice 2026-10-06, circular 2026-08-18) as downloads; not opened, subject unknown, no CS post confirmed.",
+    "checkedUrls": [
+      "https://bup.edu.bd/department_home/8",
+      "https://bup.edu.bd/career"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -17153,10 +17203,12 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "incomplete",
+    "summary": "CST homepage links to career.bnbu.edu.cn/en/; that portal was not read.",
+    "checkedUrls": [
+      "https://fst.bnbu.edu.cn/cst_en/index.htm"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -17169,13 +17221,15 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "blocked",
+    "summary": "www.cs.bme.hu returned HTTP 502 through the crawl egress on 2026-11-03. Recheck.",
+    "checkedUrls": [
+      "https://www.cs.bme.hu/english/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "Chittagong Univ. of Eng. & Technology",
@@ -17185,13 +17239,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-03T20:00:00Z",
+    "outcome": "not_found",
+    "summary": "CSE department page rendered with no recruitment link found on 2026-11-03.",
+    "checkedUrls": [
+      "https://cuet.ac.bd/department/cse"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "CNRS",
