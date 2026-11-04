@@ -580,14 +580,30 @@
       "proposals": []
     },
     "USENIX Security": {
-      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
-      "outcome": "not_found",
-      "summary": "usenixsecurity28 page exists but carries no dates, place or deadlines; stored Aug 16-18, 2028 Seattle could not be re-confirmed on it. The 2026 cycle-place disagreement (Baltimore, MD, USA vs US) is only a format difference. Record unchanged.",
+      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
+      "outcome": "complete",
+      "summary": "USENIX Security 2027 CFP confirms Denver Aug 11-13, both cycles, chairs and dates match; normalized place format USA->US on 2026/2027 records. 2028 page has no announced dates/deadlines.",
       "checkedUrls": [
+        "https://www.usenix.org/conference/usenixsecurity27/call-for-papers",
         "https://www.usenix.org/conference/usenixsecurity28"
       ],
-      "deferredUntil": "2026-11-01T20:15:21.687Z",
-      "proposals": []
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update-place",
+          "year": 2027,
+          "sources": [
+            "https://www.usenix.org/conference/usenixsecurity27/call-for-papers"
+          ]
+        },
+        {
+          "action": "update-place",
+          "year": 2026,
+          "sources": [
+            "https://www.usenix.org/conference/usenixsecurity26"
+          ]
+        }
+      ]
     },
     "ASE": {
       "lastCheckedAt": "2026-10-31T20:05:29.000Z",
@@ -658,14 +674,13 @@
       ]
     },
     "FSE": {
-      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
       "outcome": "not_found",
-      "summary": "FSE 2027 dates, Shenzhen, rebuttal window, and notification match the record; submission deadline not listed on the page. conf.researchr.org/home/fse-2028 returned 404 (not announced).",
+      "summary": "FSE researchr series page lists no FSE 2028 edition site; Milan/deadlines remain unconfirmed from an edition page. Record unchanged.",
       "checkedUrls": [
-        "https://conf.researchr.org/home/fse-2027",
-        "https://conf.researchr.org/home/fse-2028"
+        "https://conf.researchr.org/series/fse"
       ],
-      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "deferredUntil": "2026-11-24T20:05:47.751Z",
       "proposals": []
     },
     "ICSE": {
@@ -721,24 +736,24 @@
       "proposals": []
     },
     "ACM MM": {
-      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
       "outcome": "not_found",
-      "summary": "ACM MM 2027 official site confirms Hong Kong with dates to be announced; no deadlines or chairs published. Record already matches; unchanged.",
+      "summary": "Official 2027 site confirms Hong Kong; dates and submission schedule still not announced.",
       "checkedUrls": [
         "https://acmmm.hosting2.acm.org/"
       ],
-      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "deferredUntil": "2026-11-24T20:05:47.751Z",
       "proposals": []
     },
     "CoNEXT": {
-      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
-      "outcome": "not_found",
-      "summary": "SIGCOMM series page lists CoNEXT 2027 in Rio de Janeiro, 6-9 December 2027, still marked to be confirmed, and links an edition site (conferences.sigcomm.org/co-next/2027/) that returned no content to the fetcher. No deadlines found; record unchanged.",
+      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
+      "outcome": "incomplete",
+      "summary": "SIGCOMM series page lists CoNEXT 2027 Rio de Janeiro Dec 6-9 (to be confirmed); edition site conferences.sigcomm.org/co-next/2027/ is JavaScript-rendered and could not be read, so deadlines unverified.",
       "checkedUrls": [
         "https://www.sigcomm.org/events/conext-conference",
         "https://conferences.sigcomm.org/co-next/2027/"
       ],
-      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "deferredUntil": "2026-11-10T20:05:47.751Z",
       "proposals": []
     },
     "KDD": {
@@ -763,13 +778,13 @@
       "proposals": []
     },
     "ESOP": {
-      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
       "outcome": "not_found",
-      "summary": "ETAPS 2028 placeholder page confirms April 2-7, 2028 in Karlsruhe (KIT) but lists no ESOP deadlines or chairs. Record unchanged.",
+      "summary": "ETAPS 2028 page (Karlsruhe, Apr 2-7 2028) is a placeholder with no ESOP deadlines or chair; existing record unchanged.",
       "checkedUrls": [
         "https://etaps.org/2028/"
       ],
-      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "deferredUntil": "2026-11-24T20:05:47.751Z",
       "proposals": []
     },
     "TACAS": {
@@ -793,13 +808,13 @@
       "proposals": []
     },
     "ACM ATC": {
-      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
       "outcome": "not_found",
-      "summary": "sigops.org/s/conferences/atc/2027/ returns 404; no ACM ATC 2027 announcement found. Record unchanged.",
+      "summary": "No ACM ATC 2027 announcement on sigops.org; record unchanged.",
       "checkedUrls": [
-        "https://www.sigops.org/s/conferences/atc/2027/"
+        "https://www.sigops.org/"
       ],
-      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "deferredUntil": "2026-11-24T20:05:47.751Z",
       "proposals": []
     },
     "ICRA": {
@@ -1805,6 +1820,85 @@
         "https://ppsn-conference.org/"
       ],
       "deferredUntil": "2026-11-10T02:14:09.000Z",
+      "proposals": []
+    },
+    "AAMAS": {
+      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
+      "outcome": "complete",
+      "summary": "AAMAS 2027 official site matches stored dates, Hanoi venue, abstract/paper deadlines, rebuttal and notification.",
+      "checkedUrls": [
+        "https://warwick.ac.uk/fac/sci/dcs/aamas2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "AISTATS": {
+      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
+      "outcome": "complete",
+      "summary": "AISTATS 2027 official site matches stored dates, location, deadlines, chairs.",
+      "checkedUrls": [
+        "https://virtual.aistats.org/Conferences/2027"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "ALENEX": {
+      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
+      "outcome": "incomplete",
+      "summary": "siam.org blocked automated access (403/Cloudflare); could not verify.",
+      "checkedUrls": [
+        "https://www.siam.org/conferences-events/siam-conferences/alenex27/"
+      ],
+      "deferredUntil": "2026-11-10T20:05:47.751Z",
+      "proposals": []
+    },
+    "CADE": {
+      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
+      "outcome": "complete",
+      "summary": "CADE-31 official page confirms dates, deadlines and notification; added author response date 2027-04-30.",
+      "checkedUrls": [
+        "https://fscd-cade.science.ru.nl/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add-rebuttalDate",
+          "year": 2027,
+          "sources": [
+            "https://fscd-cade.science.ru.nl/"
+          ]
+        }
+      ]
+    },
+    "CGO": {
+      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
+      "outcome": "complete",
+      "summary": "CGO 2027 dates page: round 2 rebuttal Oct 27-29 and notification Nov 9, 2026 (stored values were wrong); submission Sep 10 and venue confirmed.",
+      "checkedUrls": [
+        "https://2027.cgo.org/dates",
+        "https://conf.researchr.org/track/cgo-2027/cgo-2027-papers",
+        "https://conf.researchr.org/home/cgo-2027"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "fix-dates",
+          "year": 2027,
+          "sources": [
+            "https://2027.cgo.org/dates"
+          ]
+        }
+      ]
+    },
+    "CIDR": {
+      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
+      "outcome": "complete",
+      "summary": "CIDR 2027 site confirms Amsterdam Jan 24-27 2027, submission Aug 4 2026, notification Oct 6 2026; matches record.",
+      "checkedUrls": [
+        "https://www.cidrdb.org/cidr2027/",
+        "https://www.cidrdb.org/cidr2027/cfp.html"
+      ],
+      "deferredUntil": null,
       "proposals": []
     }
   }
