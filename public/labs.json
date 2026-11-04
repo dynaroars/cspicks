@@ -56,7 +56,7 @@
     "careersUrl": "https://research.google/careers/",
     "internshipsUrl": "https://research.google/programs-and-events/student-engagement/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-11-04"
   },
   {
     "id": "google-deepmind",
@@ -83,7 +83,7 @@
     "careersUrl": "https://deepmind.google/careers/",
     "internshipsUrl": "https://deepmind.google/student-researcher-program/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-11-04"
   },
   {
     "id": "meta-ai",
@@ -155,7 +155,7 @@
     "summary": "NVIDIA’s research group (graphics, computer vision, machine learning, robotics, architecture, VLSI, programming systems); hires research scientists and PhD research interns.",
     "careersUrl": "https://www.nvidia.com/en-us/about-nvidia/careers/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-11-04"
   },
   {
     "id": "amazon-science",
@@ -266,7 +266,7 @@
     "summary": "Samsung’s US research centers; hires researchers and interns in AI, mobile, and communications.",
     "careersUrl": "https://sra.samsung.com/careers/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-11-04"
   },
   {
     "id": "qualcomm-ai-research",
@@ -368,7 +368,7 @@
     "summary": "AI research and deployment company; hires research scientists and engineers.",
     "careersUrl": "https://openai.com/careers/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-11-04"
   },
   {
     "id": "anthropic",
@@ -524,7 +524,7 @@
     "summary": "Open-source R&D company (computer vision, scientific visualization, HPC, medical computing).",
     "careersUrl": "https://www.kitware.com/careers/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-11-04"
   },
   {
     "id": "sri",
@@ -682,7 +682,7 @@
     "careersUrl": "https://www.anl.gov/careers",
     "postdocsUrl": "https://www.anl.gov/hr/postdoctoral-programs",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-11-04"
   },
   {
     "id": "berkeley-lab",
@@ -751,7 +751,7 @@
     "careersUrl": "https://www.bnl.gov/careers/",
     "internshipsUrl": "https://www.bnl.gov/education/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-11-04"
   },
   {
     "id": "inl",
@@ -795,7 +795,7 @@
     "internshipsUrl": "https://www.nlr.gov/careers/graduate-internships",
     "postdocsUrl": "https://www.nlr.gov/careers/post-docs",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-15"
+    "postingsCheckedAt": "2026-11-04"
   },
   {
     "id": "nist",
@@ -955,7 +955,8 @@
     "careersUrl": "https://www.merl.com/employment/",
     "internshipsUrl": "https://www.merl.com/employment/internship-openings",
     "postdocsUrl": "https://www.merl.com/employment/postdoctoral-research",
-    "checkedAt": "2026-11-02"
+    "checkedAt": "2026-11-02",
+    "postingsCheckedAt": "2026-11-04"
   },
   {
     "id": "nec-labs-america",
@@ -980,7 +981,8 @@
     "summary": "NEC's U.S. research lab (distinct from NEC Laboratories Europe), with research groups in machine learning, data science and system security, integrated systems, media analytics, and optical networking; hires full-time researchers and graduate research interns.",
     "careersUrl": "https://www.nec-labs.com/careers/",
     "internshipsUrl": "https://www.nec-labs.com/careers/intern-program/",
-    "checkedAt": "2026-11-02"
+    "checkedAt": "2026-11-02",
+    "postingsCheckedAt": "2026-11-04"
   },
   {
     "id": "honda-research-institute-usa",
@@ -1005,6 +1007,7 @@
     "summary": "Honda's U.S. research institute, working on robotics, autonomous driving, computer vision, human–AI interaction, and materials science; hires associate and contract researchers and many PhD research interns.",
     "careersUrl": "https://usa.honda-ri.com/careers",
     "internshipsUrl": "https://usa.honda-ri.com/intern-positions",
-    "checkedAt": "2026-11-02"
+    "checkedAt": "2026-11-02",
+    "postingsCheckedAt": "2026-11-04"
   }
 ]
