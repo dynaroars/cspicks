@@ -9,6 +9,10 @@
   margin: 0 auto 4rem;
 }
 
+.submit-type-picker {
+  margin-bottom: 1.25rem;
+}
+
 .submit-intro {
   margin-bottom: 2rem;
 }

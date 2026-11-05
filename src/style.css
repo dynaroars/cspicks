@@ -74,7 +74,7 @@ body {
 
 /* Single-column pages use VietProfs' page width; Search (two-column results) and Simulator keep the wider one. */
 .stats-page #app, .jobs-page #app, .grants-page #app, .csconfs-page #app, .funding-page #app,
-.jobs-submit-page #app, .grants-submit-page #app, .csconfs-submit-page #app {
+.submit-page #app, .jobs-submit-page #app, .grants-submit-page #app, .csconfs-submit-page #app {
   max-width: 880px;
   padding: 2rem 1.5rem 4rem;
 }

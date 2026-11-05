@@ -70,7 +70,7 @@ export function renderJobCard(job: Job, isFavorite: IsFavorite = () => false, no
     ${opportunityTopics(areaChips)}
     ${isActive(job, now) ? opportunityFreshness({ checkedAt: job.lastSeenAt, checkedLabel: 'Confirmed live on the official page', staleAfterDays: JOB_STALE_AFTER_DAYS, addedAt: job.addedAt, now }) : ''}
     ${opportunityFooter({ kind: 'job', title: job.title, startHtml: footerParts,
-      actionsHtml: `${calendarAction}<a class="job-edit" href="jobs-submit.html?id=${encodeURIComponent(job.id)}">Suggest update</a>`,
+      actionsHtml: `${calendarAction}<a class="job-edit" href="submit.html?type=job&id=${encodeURIComponent(job.id)}">Suggest update</a>`,
       pageLink: `jobs.html?q=${encodeURIComponent(job.id)}&status=all#${encodeURIComponent(job.id)}` })}
   </article>`;
 }

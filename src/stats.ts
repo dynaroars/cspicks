@@ -142,12 +142,14 @@ export function renderRecentUpdates(jobs: Job[] | null, crawl: CrawlFreshness | 
 /** Standalone pages (one per vite.config.js input) plus the static SEO pages scripts/generate-seo-pages.mjs writes. */
 export const STANDALONE_PAGES: [string, string][] = [
   ['index.html', 'Search'], ['simulator.html', 'Simulator'], ['csconfs.html', 'CS Confs'], ['grants.html', 'Awards & Grants'],
-  ['jobs.html', 'Jobs'], ['nsf.html', 'NSF Funding'], ['stats.html', 'Stats'], ['csconfs-submit.html', 'Conference form'],
-  ['grants-submit.html', 'Award form'], ['jobs-submit.html', 'Job form']
+  ['jobs.html', 'Jobs'], ['nsf.html', 'NSF Funding'], ['stats.html', 'Stats'], ['submit.html', 'Submission form'],
+  ['jobs-submit.html', 'Legacy job redirect'], ['grants-submit.html', 'Legacy award redirect'], ['csconfs-submit.html', 'Legacy conference redirect']
 ];
 
 export function renderInventory(seo: SeoPages | null) {
-  const items: [number, string][] = [[STANDALONE_PAGES.length, 'Interactive pages']];
+  const interactive = STANDALONE_PAGES.filter(([href]) => !href.endsWith('-submit.html'));
+  const redirects = STANDALONE_PAGES.length - interactive.length;
+  const items: [number, string][] = [[interactive.length, 'Interactive pages'], [redirects, 'Legacy redirects']];
   if (seo) items.push([seo.schools, 'University pages'], [seo.areas, 'Research-area pages']);
   const total = items.reduce((sum, [n]) => sum + n, 0);
   return `<div class="html-inventory-card">
@@ -156,7 +158,7 @@ export function renderInventory(seo: SeoPages | null) {
       <strong class="html-inventory-total">${count(total)} pages</strong>
     </div>
     <div class="html-inventory-grid">${items.map(([n, label]) => `<div class="html-inventory-item"><strong>${count(n)}</strong><span>${escapeHtml(label)}</span></div>`).join('')}</div>
-    <nav class="html-standalone-links" aria-label="Interactive pages"><span>${STANDALONE_PAGES.length} interactive:</span>${STANDALONE_PAGES.map(([href, label]) => `<a href="${href}">${escapeHtml(label)}</a>`).join('')}</nav>
+    <nav class="html-standalone-links" aria-label="Interactive pages"><span>${interactive.length} interactive:</span>${interactive.map(([href, label]) => `<a href="${href}">${escapeHtml(label)}</a>`).join('')}</nav>
   </div>`;
 }
 

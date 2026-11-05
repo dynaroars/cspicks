@@ -177,7 +177,7 @@ test('by-school view groups postings and links into Search and Simulator, withou
 test('submit form is reachable and prefills a correction', async ({ page }) => {
   await page.goto('jobs.html');
   await page.getByRole('link', { name: 'Add or update info' }).click();
-  await expect(page).toHaveURL(/jobs-submit\.html/);
+  await expect(page).toHaveURL(/submit\.html\?type=job/);
   await expect(page.locator('#quick')).toBeVisible();
 
   await page.goto('jobs-submit.html?id=gmu-soft');

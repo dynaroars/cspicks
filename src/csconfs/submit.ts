@@ -213,7 +213,7 @@ function buildSubmission(form: ConferenceForm) {
       note: form.dataset.targetNote || null,
     } : null,
     sourceUrl: value('sourceUrl').trim(),
-    notes: value('notes').trim(),
+    notes: [kind === 'correction' ? value('quick').trim() : '', value('notes').trim()].filter(Boolean).join('\n\n'),
     entry,
   };
 }

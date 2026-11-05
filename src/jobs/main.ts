@@ -89,7 +89,7 @@ function render() {
       <p>${favoritesOnly ? 'Star a posting with the ☆ button to keep it here, or clear “favorites: only” from search.' : allJobs.length
         ? 'Try broadening your search, searching “status: all”, or clearing some filters.'
         : 'Postings are added as department hiring pages are crawled and as people submit them.'}
-        You can also <a href="jobs-submit.html">submit a posting</a>.</p>
+        You can also <a href="submit.html?type=job">submit a posting</a>.</p>
       ${allJobs.length ? '<button type="button" class="btn-secondary" id="reset-jobs-filters">Reset all filters</button>' : ''}
     </div>`;
   } else if (current.view === 'school') {

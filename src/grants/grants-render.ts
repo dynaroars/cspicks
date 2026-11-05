@@ -55,7 +55,7 @@ export function renderGrantCard(
     ${opportunityTopics(topicChips, 'grant-topics')}
     ${opportunityFreshness({ checkedAt: grant.lastVerifiedAt, checkedLabel: 'Verified against the official page', staleAfterDays: GRANT_STALE_AFTER_DAYS, addedAt: grant.addedAt, now: now.getTime() })}
     ${opportunityFooter({ kind: 'grant', title: grant.name, startHtml,
-      actionsHtml: `${calendarAction}<a href="grants-submit.html?id=${encodeURIComponent(grant.id)}">Suggest update</a>`,
+      actionsHtml: `${calendarAction}<a href="submit.html?type=grant&id=${encodeURIComponent(grant.id)}">Suggest update</a>`,
       pageLink: `grants.html?q=${encodeURIComponent(grant.id)}#${encodeURIComponent(grant.id)}` })}
   </article>`;
 }

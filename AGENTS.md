@@ -67,7 +67,7 @@ playbook before any data-refresh or web-research task.
 - `nsf.html` + `src/funding.ts` — standalone NSF funding search over the synchronized snapshot in
   `public/nsf-awards.json`. Attribution and card rendering live in `src/nsf.ts`; Discoveries also reads it
   for its funding sections. Search itself carries no NSF data and never loads the snapshot.
-- `csconfs.html` + `src/csconfs/main.ts` (and `csconfs-submit.html` + `src/csconfs/submit.ts`) — CS conference
+- `csconfs.html` + `src/csconfs/main.ts` (with conference submissions rendered by `src/csconfs/submit.ts` on `submit.html`) — CS conference
   schedule explorer over `csconfs/data/conferences.json`.
 - `grants.html` + `src/grants/main.ts` — standalone CS research awards, fellowships, and grants explorer
   over the database in `public/grants.json` (industry gifts, NSF calls, DARPA, DOE, DoD, foundations, societies),
@@ -92,15 +92,14 @@ playbook before any data-refresh or web-research task.
   research labs, R&D companies, and national/federal labs that hire CS PhDs: links to their careers, internship, and
   postdoc pages; it follows the same search box. Individual lab postings sit in `public/jobs.json` with a `lab` id
   (tracks `industry`, `internship`, `postdoc`) instead of a jobs-sources school (TASKS/labs.md).
-- `jobs-submit.html` + `src/jobs/submit.ts` — job submission/correction form (a lead channel; crawling is the main source).
+- `submit.html` + `src/submit.ts` — shared submission/correction page with a Job / Award or grant / Conference selector, a free-text entry box, and optional domain-specific fields. `src/jobs/submit.ts`, `src/grants/submit.ts`, and `src/csconfs/submit.ts` render the selected form. Legacy `jobs-submit.html`, `grants-submit.html`, and `csconfs-submit.html` links redirect here with their type and edit context preserved. Job submissions are a lead channel; crawling is the main source.
 - `stats.html` + `src/stats.ts` — site stats (roster, conferences, awards, jobs; never the large NSF snapshot), a data health & completeness
   section modeled on VietProfs' `?view=health` (field-completeness bars, recent-confirmation badge, generated-page inventory, growth
   chart), and repository activity from the GitHub API. Its build-time inputs are gitignored: `public/stats-history.json` (daily dataset
   counts walked from git history plus jobs-crawl freshness, by `scripts/build-stats-history.mjs` on predev/prebuild; deploy checks out
   full history for it) and `seo-pages.json` (page counts from `scripts/generate-seo-pages.mjs`); either missing just drops its card. Every page header links to it via the health icon, between the ROARS Lab and
   GitHub icons (VietProfs' order; all three share `.icon-link`; `test/unit/consistency.test.js` enforces the header on every page).
-- `grants-submit.html` + `src/grants/submit.ts` — single unified submission/correction form for proposing
-  new CS research awards or updating existing entries via GitHub Issue or email.
+- Award submissions on `submit.html?type=grant` propose new CS research awards or updates via GitHub Issue or email.
 - `README.md` — a deliberately brief overview (features, dev commands, data sources, license); keep it short.
 
 **Shared page infrastructure** — prefer these over per-page copies:
@@ -118,8 +117,7 @@ playbook before any data-refresh or web-research task.
 - `src/charts.ts` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges
   shared defaults and destroys the previous chart; `onThemeChange(fn)` re-renders on light/dark switches.
 - `src/style.css` — the one shared stylesheet every page links (sections in cascade order); page-only CSS sits
-  beside its page module (`src/jobs/jobs.css`, `src/grants/*.css`, `src/csconfs/*.css`). All three `*-submit.html`
-  forms share `src/submit.css` (generic `submit-*` / `correction-suggestion*` classes); don't add per-form copies.
+  beside its page module (`src/jobs/jobs.css`, `src/grants/*.css`, `src/csconfs/*.css`). The shared submission page uses `src/submit.css` (generic `submit-*` / `correction-suggestion*` classes); don't add per-form copies.
 - `src/search-controls.ts` — shared search controller for Search/Discoveries, Funding, Jobs, Awards, and CS Confs:
   keyword-name/value completion, the clickable ⓘ help popup, input events, `/` shortcut, up to four examples,
   and URL updates. Pages supply their keyword specs, value sources, ordinary suggestion groups, and rendering

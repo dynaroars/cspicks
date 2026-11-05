@@ -39,7 +39,7 @@ for (const colorScheme of ['light', 'dark']) {
         const update = card.getByRole('link', { name: 'Suggest update' });
         await expect(update).toBeVisible();
         await update.click();
-        await expect(page).toHaveURL(new RegExp(`${kind}-submit.html\\?id=shared-`));
+        await expect(page).toHaveURL(new RegExp(`submit.html\\?type=${kind === 'grants' ? 'grant' : 'job'}&id=shared-`));
       }
       expect(styles[0]).toEqual(styles[1]);
     });

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-const PAGES = ['index.html', 'simulator.html', 'csconfs.html', 'csconfs-submit.html', 'grants.html', 'grants-submit.html', 'jobs.html', 'jobs-submit.html', 'nsf.html', 'stats.html'];
+const PAGES = ['submit.html', 'index.html', 'simulator.html', 'csconfs.html', 'csconfs-submit.html', 'grants.html', 'grants-submit.html', 'jobs.html', 'jobs-submit.html', 'nsf.html', 'stats.html'];
 
 const csrankings = `name,affiliation,homepage,scholarid,orcid
 Alice Example,George Mason University,https://example.test/alice,alice,0000-0000-0000-0001
@@ -101,7 +101,7 @@ test('data health shows completeness, recent updates, the page inventory, and sw
   await expect(health.locator('.completeness-card', { hasText: 'Upcoming editions verified' })).toContainText('100%');
   await expect(health.locator('.completeness-card', { hasText: 'Hiring pages on file' })).toContainText('8 of 10 records');
   await expect(health.locator('.recent-updates-badge')).toContainText('3 schools crawled this week');
-  await expect(health.locator('.html-inventory-total')).toHaveText('337 pages');
+  await expect(health.locator('.html-inventory-total')).toHaveText('338 pages');
   await expect(health.locator('.growth-metric-btn')).toHaveCount(5);
   await expect(health.locator('.growth-metric-btn.is-active')).toContainText('Active jobs');
   await expect(health.locator('#growth-chart')).toBeVisible();
@@ -118,7 +118,7 @@ test('data health without build-time files still shows completeness from the loa
   await page.goto('stats.html');
   const health = page.locator('#stats-health');
   await expect(health.locator('.completeness-card')).toHaveCount(11);
-  await expect(health.locator('.html-inventory-total')).toHaveText('10 pages');
+  await expect(health.locator('.html-inventory-total')).toHaveText('11 pages');
   await expect(health.locator('.health-growth-section')).toHaveCount(0);
 });
 
@@ -161,7 +161,7 @@ test('the stats icon navigates to the stats page', async ({ page }) => {
   await expect(page.locator('.search-intro h2')).toHaveText('CS Picks by the numbers');
 });
 
-for (const [file, target] of [['csconfs.html', 'csconfs-submit.html'], ['grants.html', 'grants-submit.html'], ['jobs.html', 'jobs-submit.html']]) {
+for (const [file, target] of [['csconfs.html', 'submit.html?type=conference'], ['grants.html', 'submit.html?type=grant'], ['jobs.html', 'submit.html?type=job']]) {
   test(`${file} has one floating "Add or update info" button linking to its form`, async ({ page }) => {
     await page.route('https://raw.githubusercontent.com/**', route => route.fulfill({ status: 404, body: '' }));
     await page.goto(file);

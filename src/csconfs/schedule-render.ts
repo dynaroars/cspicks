@@ -85,7 +85,7 @@ export function renderScheduleCard(group: ConferenceGroup, now = Date.now(), isF
     <div class="schedule-card-cycles">${renderedCycles}</div>
     <div class="result-card-footer">${resultActions(favoriteId, `
         ${main.seriesLink && safeExternalUrl(main.seriesLink) !== href ? `<a href="${escapeHtml(safeExternalUrl(main.seriesLink))}" target="_blank" rel="noopener noreferrer">Conference series</a>` : ''}
-        <a href="csconfs-submit.html?name=${encodeURIComponent(main.name)}&year=${main.year}">Suggest update</a>
+        <a href="submit.html?type=conference&name=${encodeURIComponent(main.name)}&year=${main.year}">Suggest update</a>
       `, `csconfs.html?q=${encodeURIComponent(main.name)}&start=${main.year}&end=${main.year}&deadline=all`)}</div>
   </article>`;
 }

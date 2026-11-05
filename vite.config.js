@@ -9,6 +9,7 @@ export default defineConfig({
                 main: resolve(__dirname, 'index.html'),
                 simulator: resolve(__dirname, 'simulator.html'),
                 csconfs: resolve(__dirname, 'csconfs.html'),
+                submit: resolve(__dirname, 'submit.html'),
                 csconfsSubmit: resolve(__dirname, 'csconfs-submit.html'),
                 nsf: resolve(__dirname, 'nsf.html'),
                 grants: resolve(__dirname, 'grants.html'),

@@ -36,6 +36,7 @@ const staticPages = [
   url(`${ORIGIN}/?view=discoveries`, { changefreq: 'daily', priority: '0.9' }),
   url(`${ORIGIN}/simulator.html`, { changefreq: 'weekly', priority: '0.6' }),
   url(`${ORIGIN}/csconfs.html`, { changefreq: 'daily', priority: '0.8' }),
+  url(`${ORIGIN}/submit.html`, { changefreq: 'monthly', priority: '0.3' }),
   url(`${ORIGIN}/csconfs-submit.html`, { changefreq: 'monthly', priority: '0.3' }),
   url(`${ORIGIN}/nsf.html`, { changefreq: 'weekly', priority: '0.7' }),
   url(`${ORIGIN}/grants.html`, { changefreq: 'weekly', priority: '0.7' }),

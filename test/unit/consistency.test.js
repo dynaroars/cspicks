@@ -7,6 +7,7 @@ const ROOT_DIR = path.resolve(import.meta.dirname, '../..');
 
 const HTML_PAGES = [
   'index.html',
+  'submit.html',
   'simulator.html',
   'csconfs.html',
   'csconfs-submit.html',

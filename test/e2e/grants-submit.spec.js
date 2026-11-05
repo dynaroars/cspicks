@@ -9,7 +9,7 @@ test('Grants submit page supports both new award submission and existing award e
   await page.goto('grants-submit.html');
 
   // Verify elements
-  await expect(page.locator('h2')).toContainText('Submit or update an award / grant');
+  await expect(page.locator('h2')).toContainText('Submit or update an entry');
   const form = page.locator('#grants-submit-form');
   await expect(form).toBeVisible();
 
@@ -31,13 +31,16 @@ test('Grants submit page supports both new award submission and existing award e
   await expect(page.locator('#sponsor')).toHaveValue(/NSF/);
   await expect(page.locator('#url')).toHaveValue(/nsf\.gov/);
 
-  // Edit mode shows the structured fields and delivers straight to a GitHub draft
+  // Edit mode supports free-text suggestions alongside the current fields.
   await expect(page.locator('#structured-fields')).toBeVisible();
+  await expect(page.locator('#quick')).toBeVisible();
+  await page.locator('#quick').fill('Please clarify whether international applicants can apply.');
   await page.evaluate(() => { window.open = (u) => { window.__opened = String(u); return null; }; });
   await page.getByRole('button', { name: 'Submit as a GitHub issue' }).click();
   const url = new URL(await page.evaluate(() => window.__opened));
   expect(url.href).toMatch(/github\.com\/dynaroars\/cspicks\/issues\/new/);
   expect(url.searchParams.get('body')).toContain('nsf.gov');
+  expect(url.searchParams.get('body')).toContain('Please clarify whether international applicants can apply.');
 });
 
 test('grants new submission is a single free-text box, with optional detailed fields', async ({ page }) => {

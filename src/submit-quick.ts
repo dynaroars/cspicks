@@ -1,7 +1,7 @@
 /**
  * Shared submission-form plumbing for CS Confs, Jobs, and Awards & Grants, modeled on VietProfs: "Add new"
  * starts as one free-text box (a link, a name, notes — anything), with an "Enter details directly"
- * toggle revealing the structured fields. "Edit existing" always uses the structured fields.
+ * toggle revealing the structured fields. "Edit existing" shows both the free-text box and structured fields.
  * Each form wraps its structured fields in `#structured-fields` and renders `QUICK_SECTION` plus
  * `DELIVERY_BUTTONS`; this module owns the mode toggle, correction autocomplete, quick payload, and delivery step.
  */
@@ -9,9 +9,9 @@ import { escapeHtml } from './shared.js';
 import { buildSubmissionContent } from './submission.js';
 export const QUICK_SECTION = `
   <div class="submit-section" id="quick-section">
-    <label for="quick">Links, names, or notes *</label>
+    <label for="quick" id="quick-label">Links, names, or notes *</label>
     <textarea id="quick" name="quick" rows="6" required placeholder="Paste a link to the official page, a name, or just describe what you'd like to add or suggest. One item per line or free text is fine."></textarea>
-    <p class="submit-help">Anything that helps us verify it. Have the full details instead? <button type="button" class="submit-link-button" id="quick-details-toggle">Enter them directly</button>.</p>
+    <p class="submit-help" id="quick-help">Anything that helps us verify it. Have the full details instead? <button type="button" class="submit-link-button" id="quick-details-toggle">Enter them directly</button>.</p>
   </div>
   <p class="submit-help" id="quick-back" hidden><button type="button" class="submit-link-button" id="quick-back-button">← Back to quick entry (just a link or note)</button></p>`;
 
@@ -34,14 +34,20 @@ export function setupQuickMode(form: HTMLFormElement) {
 
   const apply = () => {
     const quick = isQuick();
+    const correction = selectedKind(form) === 'correction';
     const structured = form.querySelector<HTMLElement>('#structured-fields')!;
     structured.hidden = quick;
     // Disabled controls are skipped by form validation, so hidden required fields can't block submit.
     structured.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('input, textarea, select').forEach(el => { el.disabled = quick; });
-    form.querySelector<HTMLElement>('#quick-section')!.hidden = !quick;
+    form.querySelector<HTMLElement>('#quick-section')!.hidden = !quick && !correction;
+    form.querySelector<HTMLElement>('#quick-label')!.textContent = correction ? 'Describe your changes or suggestions' : 'Links, names, or notes *';
+    form.querySelector<HTMLElement>('#quick-help')!.hidden = correction;
     const box = form.querySelector<HTMLTextAreaElement>('#quick')!;
-    box.disabled = !quick;
+    box.disabled = !quick && !correction;
     box.required = quick;
+    box.placeholder = correction
+      ? 'Tell us what should change, paste supporting links, or share anything else you want us to know.'
+      : "Paste a link to the official page, a name, or just describe what you'd like to add or suggest. One item per line or free text is fine.";
     form.querySelector<HTMLElement>('#quick-back')!.hidden = quick || selectedKind(form) !== 'new';
     return quick;
   };
@@ -144,7 +150,8 @@ export function wireSubmissionForm<T>(options: SubmissionFormOptions<T>) {
       return;
     }
     const { label, submission } = options.getStructured();
-    deliver(submitter, label, buildSubmissionContent(submission), options.builders);
+    const userNotes = form.querySelector<HTMLTextAreaElement>('#quick')!.value.trim();
+    deliver(submitter, label, buildSubmissionContent({ ...submission, ...(selectedKind(form) === 'correction' && userNotes ? { userNotes } : {}) }), options.builders);
   });
 
   const params = new URLSearchParams(window.location.search);
