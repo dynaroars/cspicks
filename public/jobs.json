@@ -17759,30 +17759,6 @@
     "addedAt": "2026-11-04"
   },
   {
-    "id": "honda-research-institute-usa-research-intern-end-to-end-autonomous-driving-2026",
-    "school": "Honda Research Institute USA",
-    "lab": "honda-research-institute-usa",
-    "department": "Mobility Research team",
-    "title": "Research Intern: End-to-End Autonomous Driving (P25INT-54)",
-    "track": "internship",
-    "level": null,
-    "areas": [
-      "robotics",
-      "ai"
-    ],
-    "state": "CA",
-    "city": "Mountain View",
-    "deadline": null,
-    "rolling": false,
-    "lastSeenAt": "2026-11-04",
-    "url": "https://usa.honda-ri.com/-/research-intern-end-to-end-autonomous-driving",
-    "visaSponsorship": "not-stated",
-    "summary": "Research internship developing efficient generative models for end-to-end autonomous driving; the posting asks for a Ph.D. candidate in robotics, ECE, machine learning, or a related field.",
-    "source": "crawl",
-    "verified": true,
-    "addedAt": "2026-11-04"
-  },
-  {
     "id": "brookhaven-postdoctoral-research-associate-robotics-and-embodied-a-2026",
     "school": "Brookhaven National Laboratory",
     "lab": "brookhaven",
