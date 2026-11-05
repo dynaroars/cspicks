@@ -2372,7 +2372,7 @@
       "Postdocs"
     ],
     "whoFor": "Researchers pursuing high-impact scientific research",
-    "deadline": "Rolling; no fixed deadline (applications evaluated monthly)",
+    "deadline": "Rolling; no fixed deadline published",
     "deadlineMonth": 0,
     "amount": "Up to $50,000 in Claude credits per project",
     "summary": "Anthropic's AI for Science program provides Claude credits for high-impact research. Its August 2026 expansion broadened the program beyond biological sciences and says any researcher may apply; specialized calls may have separate scope and deadlines.",
@@ -2388,7 +2388,7 @@
     "url": "https://www.anthropic.com/news/expanding-support-for-scientists",
     "featured": false,
     "addedAt": "2026-08-26",
-    "lastVerifiedAt": "2026-11-02"
+    "lastVerifiedAt": "2026-11-05"
   },
   {
     "id": "anthropic-fellows-program",
@@ -4564,7 +4564,7 @@
       "Postdocs"
     ],
     "whoFor": "Database and data-engineering researchers in the first five years after the PhD",
-    "deadline": "February 20, 2026 at midnight PT (extended from February 7, 2026; Annual cycle)",
+    "deadline": "February 6, 2027 (2027 award cycle; Annual)",
     "deadlineMonth": 2,
     "amount": "Recognition plaque",
     "summary": "Recognizes an outstanding whole body of early-career work in database systems and data engineering.",
@@ -4582,7 +4582,7 @@
     "url": "https://tc.computer.org/tcde/awards/",
     "featured": false,
     "addedAt": "2026-08-31",
-    "lastVerifiedAt": "2026-11-02"
+    "lastVerifiedAt": "2026-11-05"
   },
   {
     "id": "ieee-tcse-rising-star-award",
