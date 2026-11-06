@@ -7345,5 +7345,122 @@
     "featured": false,
     "lastVerifiedAt": "2026-11-02",
     "addedAt": "2026-11-02"
+  },
+  {
+    "id": "sigaccess-sigchi-hanson-early-career-award",
+    "name": "SIGACCESS/SIGCHI Vicki L. Hanson Early Career Research Award in Computing Accessibility",
+    "shortName": "Vicki L. Hanson Award",
+    "sponsor": "ACM SIGACCESS and ACM SIGCHI",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
+    "whoFor": "Early-career researchers (terminal degree within 7 years of the nomination deadline) with significant contributions to computing accessibility; nomination by others",
+    "deadline": "November 14, 2026 at 11:59 PM AoE (nominations for the inaugural 2027 award)",
+    "deadlineMonth": 11,
+    "amount": "Not stated in the call for nominations",
+    "summary": "New award honoring early-career researchers who have made significant contributions to the accessibility of computing systems. Nominations include the nominee's CV, a 1-2 page nominator letter, and two to four support letters.",
+    "eligibility": [
+      "Terminal degree awarded no more than 7 years before the nomination deadline; exceptions may apply for career disruption",
+      "Current ACM membership required",
+      "Self-nominations are not accepted"
+    ],
+    "topics": [
+      "HCI",
+      "Accessibility",
+      "Early Career"
+    ],
+    "url": "https://sigchi.submittable.com/submit/366181/call-for-nominations-for-2027-sigaccess-sigchi-vicki-l-hanson-award",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-06",
+    "addedAt": "2026-11-06"
+  },
+  {
+    "id": "shaw-prize-computer-science",
+    "name": "Shaw Prize in Computer Science",
+    "shortName": "Shaw Prize (CS)",
+    "sponsor": "The Shaw Prize Foundation",
+    "sponsorCategory": "Non-Profit / Foundation",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Currently active researchers with recent distinguished advances in computer science; nomination by invited nominators only",
+    "deadline": "November 30, 2026 (annual nomination period runs from early September to the last day of November; the 2027 Computer Science selection committee is listed)",
+    "deadlineMonth": 11,
+    "amount": "Not stated on the nomination page; see the official Shaw Prize site",
+    "summary": "International prize, now including a Computer Science category, honoring individuals who are currently active and have recently achieved distinguished and significant advances. Nominations are confidential, in English, and submitted only by invited nominators; others may contact the Shaw Prize Secretariat.",
+    "eligibility": [
+      "Nomination by invited nominators only; self-nominations, uninvited nominations, and nominations by immediate family are not considered",
+      "Open regardless of race, nationality, gender, or religious belief",
+      "Deceased persons cannot be nominated"
+    ],
+    "topics": [
+      "Professional Recognition",
+      "General CS",
+      "Research Honors"
+    ],
+    "url": "https://www.shawprize.org/en/nomination",
+    "featured": false,
+    "citizenship": "open",
+    "lastVerifiedAt": "2026-11-06",
+    "addedAt": "2026-11-06"
+  },
+  {
+    "id": "acm-sigai-autonomous-agents-research-award",
+    "name": "ACM/SIGAI Autonomous Agents Research Award",
+    "shortName": "SIGAI Autonomous Agents Award",
+    "sponsor": "ACM Special Interest Group on Artificial Intelligence (SIGAI)",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Researchers in autonomous agents whose current work is an important influence on the field; nomination by others",
+    "deadline": "December 5, 2026 (2027 award; winner announced February 1, 2027)",
+    "deadlineMonth": 12,
+    "amount": "Monetary prize (amount not stated), certificate, and invited plenary talk at AAMAS 2027",
+    "summary": "Official ACM award recognizing researchers in autonomous agents whose current work strongly influences the field. Nominations are a short (under one page) statement submitted through the sponsor's form.",
+    "eligibility": [
+      "Anyone may nominate; self-nomination is not allowed",
+      "Candidates are considered only if explicitly nominated"
+    ],
+    "topics": [
+      "AI/ML",
+      "Multi-Agent Systems",
+      "Professional Recognition"
+    ],
+    "url": "https://sigai.acm.org/main/autonomous-agents-research-award/",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-06",
+    "addedAt": "2026-11-06"
+  },
+  {
+    "id": "royal-society-milner-award",
+    "name": "Royal Society Milner Award and Lecture",
+    "shortName": "Milner Award",
+    "sponsor": "The Royal Society (supported by Microsoft Research)",
+    "sponsorCategory": "Professional Society",
+    "targetAudience": [
+      "Faculty"
+    ],
+    "whoFor": "Outstanding achievement in computer science by European citizens or researchers resident in Europe for at least 12 months; nomination by others",
+    "deadline": "Nominations reopen November 30, 2026; closing date not yet announced (previous cycle: December 1, 2025 to February 20, 2026)",
+    "deadlineMonth": 0,
+    "amount": "Bronze medal and a gift of £5,000",
+    "summary": "Awarded for outstanding achievement in computer science by a European researcher, with a lecture. The 2027 award has already been made; the next nomination round reopens November 30, 2026.",
+    "eligibility": [
+      "European citizens, or residents of Europe for at least 12 months",
+      "Nominees cannot be employed by Microsoft or its subsidiaries (full- or part-time); see the official page for full eligibility"
+    ],
+    "topics": [
+      "Professional Recognition",
+      "General CS",
+      "Research Honors"
+    ],
+    "url": "https://royalsociety.org/medals-and-prizes/milner-award/",
+    "featured": false,
+    "citizenship": "other",
+    "lastVerifiedAt": "2026-11-06",
+    "addedAt": "2026-11-06"
   }
 ]
