@@ -472,14 +472,13 @@
       "proposals": []
     },
     "ISSTA": {
-      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "lastCheckedAt": "2026-11-05T20:00:00.000Z",
       "outcome": "not_found",
-      "summary": "conf.researchr.org/home/issta-2028 returns 404; issta.org lists ISSTA 2028 in Shanghai without dates or a link. No deadlines found; record unchanged.",
+      "summary": "ISSTA 2028 official page (conf.researchr.org/home/issta-2028) returned 404; no official dates/deadlines found. Record unchanged.",
       "checkedUrls": [
-        "https://conf.researchr.org/home/issta-2028",
-        "https://www.issta.org/"
+        "https://conf.researchr.org/home/issta-2028"
       ],
-      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "deferredUntil": "2026-11-26T20:00:00.000Z",
       "proposals": []
     },
     "NeurIPS": {
@@ -695,33 +694,33 @@
       "proposals": []
     },
     "NDSS": {
-      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "lastCheckedAt": "2026-11-05T20:00:00.000Z",
       "outcome": "not_found",
-      "summary": "NDSS 2028 not announced. NDSS 2027 Seoul, Mar 22-26 2027 matches the record; deadlines not stated on the home page.",
+      "summary": "NDSS 2028 page (ndss-symposium.org/ndss2028/) returned 404; nothing official to confirm. Record stays estimated/unverified.",
       "checkedUrls": [
-        "https://www.ndss-symposium.org/"
+        "https://www.ndss-symposium.org/ndss2028/"
       ],
-      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "deferredUntil": "2026-11-26T20:00:00.000Z",
       "proposals": []
     },
     "PLDI": {
-      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "lastCheckedAt": "2026-11-05T20:00:00.000Z",
       "outcome": "not_found",
-      "summary": "PLDI 2028 not announced. PLDI 2027 (Atlanta, Jun 5-11 2027; paper deadline Nov 12 2026; notification Mar 4 2027) matches the record.",
+      "summary": "sigplan.org PLDI page only served a bot-verification wall; PLDI 2028 facts unverified, record unchanged.",
       "checkedUrls": [
-        "https://pldi27.sigplan.org/"
+        "https://sigplan.org/Conferences/PLDI/"
       ],
-      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "deferredUntil": "2026-11-26T20:00:00.000Z",
       "proposals": []
     },
     "POPL": {
-      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
+      "lastCheckedAt": "2026-11-05T20:00:00.000Z",
       "outcome": "not_found",
-      "summary": "POPL 2028 not announced. POPL 2027 (Mexico City, Jan 10-16 2027) matches the record.",
+      "summary": "sigplan.org POPL page only served a bot-verification wall; POPL 2028 facts unverified, record unchanged.",
       "checkedUrls": [
-        "https://popl27.sigplan.org/"
+        "https://sigplan.org/Conferences/POPL/"
       ],
-      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "deferredUntil": "2026-11-26T20:00:00.000Z",
       "proposals": []
     },
     "PODC": {
@@ -788,23 +787,23 @@
       "proposals": []
     },
     "TACAS": {
-      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "lastCheckedAt": "2026-11-05T20:00:00.000Z",
       "outcome": "not_found",
-      "summary": "ETAPS 2028 placeholder page confirms April 2-7, 2028 in Karlsruhe but lists no TACAS deadlines or chairs. Record unchanged.",
+      "summary": "ETAPS 2028 (Karlsruhe, Apr 2-7 2028) confirmed; TACAS-specific dates, chairs and deadlines not announced. Record unchanged.",
       "checkedUrls": [
         "https://etaps.org/2028/"
       ],
-      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "deferredUntil": "2026-11-26T20:00:00.000Z",
       "proposals": []
     },
     "WWW": {
-      "lastCheckedAt": "2026-10-11T20:15:21.686Z",
+      "lastCheckedAt": "2026-11-05T20:00:00.000Z",
       "outcome": "not_found",
-      "summary": "thewebconf.org lists The Web Conference 2028 in Edmonton with date TBD; no deadlines or chairs. Record unchanged.",
+      "summary": "thewebconf.org lists Edmonton, date TBD for 2028; no deadlines or chairs. Record already matches.",
       "checkedUrls": [
         "https://thewebconf.org/"
       ],
-      "deferredUntil": "2026-11-01T20:15:21.687Z",
+      "deferredUntil": "2026-11-26T20:00:00.000Z",
       "proposals": []
     },
     "ACM ATC": {
@@ -1899,6 +1898,77 @@
         "https://www.cidrdb.org/cidr2027/cfp.html"
       ],
       "deferredUntil": null,
+      "proposals": []
+    },
+    "CPP": {
+      "lastCheckedAt": "2026-11-05T20:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "CPP series page lists editions only through 2027 (Jan 11-12, Mexico City); no 2028 info. 2027 record unchanged.",
+      "checkedUrls": [
+        "https://conf.researchr.org/series/CPP"
+      ],
+      "deferredUntil": "2026-11-26T20:00:00.000Z",
+      "proposals": []
+    },
+    "CSF": {
+      "lastCheckedAt": "2026-11-05T20:00:00.000Z",
+      "outcome": "complete",
+      "summary": "CSF 2027 (Tokyo, Sep 13-17 2027) and three cycle deadlines confirmed; record matches. Chair roles not stated on page; unchanged.",
+      "checkedUrls": [
+        "https://csf2027.ieee-security.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "DAC": {
+      "lastCheckedAt": "2026-11-05T20:00:00.000Z",
+      "outcome": "complete",
+      "summary": "DAC 2027 (San Jose, Jul 11-14 2027), abstract Nov 11 / paper Nov 18 2026 and notification Mar 8 2027 confirmed; record matches.",
+      "checkedUrls": [
+        "https://dac.com/2027",
+        "https://dac.com/2027/program/research-manuscript-submissions"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "DSN": {
+      "lastCheckedAt": "2026-11-05T20:00:00.000Z",
+      "outcome": "complete",
+      "summary": "DSN 2027 dates/place and research-track deadlines confirmed; added author rebuttal period Feb 12-26, 2027.",
+      "checkedUrls": [
+        "https://dsn2027-berlin.github.io/",
+        "https://dsn2027-berlin.github.io/important-dates/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            "https://dsn2027-berlin.github.io/",
+            "https://dsn2027-berlin.github.io/important-dates/"
+          ]
+        }
+      ]
+    },
+    "EACL": {
+      "lastCheckedAt": "2026-11-05T20:00:00.000Z",
+      "outcome": "incomplete",
+      "summary": "EACL 2027 dates, place, ARR deadline Aug 3 2026 confirmed on home page; notification and chairs not visible on fetched page, existing values unchanged.",
+      "checkedUrls": [
+        "https://2027.eacl.org/"
+      ],
+      "deferredUntil": "2026-11-12T20:00:00.000Z",
+      "proposals": []
+    },
+    "EASE": {
+      "lastCheckedAt": "2026-11-05T20:00:00.000Z",
+      "outcome": "incomplete",
+      "summary": "EASE 2027 (Hanoi, Jun 15-18 2027), abstract Jan 15 / paper Jan 22 2027 confirmed; page shows no research-paper notification date or chair names, existing values unchanged.",
+      "checkedUrls": [
+        "https://conf.researchr.org/home/ease-2027"
+      ],
+      "deferredUntil": "2026-11-12T20:00:00.000Z",
       "proposals": []
     }
   }
