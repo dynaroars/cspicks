@@ -66,17 +66,12 @@
     "facultyCount": 240,
     "jobsUrl": "https://www.cc.gatech.edu/faculty-position-opportunities",
     "state": "GA",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Computing hiring index lists only staff and 2024-25 requisitions (\"new positions posted soon\"). ECE all-areas posting 277846 confirmed live. Other computing units not re-read this run.",
+    "summary": "College of Computing page lists only temp/staff requisitions dated 2025; ECE faculty-openings page and the recorded ECE posting returned 502 via proxy, not verified.",
     "checkedUrls": [
-      "https://ece.gatech.edu/people/resources/faculty-openings",
-      "https://careers.hprod.onehcm.usg.edu/psp/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=03000&JobOpeningId=277846&PostingSeq=1",
-      "https://www.cse.gatech.edu/content/faculty-hiring",
-      "https://ic.gatech.edu/faculty-hiring",
-      "https://www.cc.gatech.edu/faculty-hiring",
-      "https://careers.hprod.onehcm.usg.edu/psc/careers/CAREERS/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&FOCUS=Applicant&SiteId=03000&JobOpeningId=277846&PostingSeq=1&",
-      "https://www.cc.gatech.edu/faculty-position-opportunities"
+      "https://www.cc.gatech.edu/faculty-position-opportunities",
+      "https://ece.gatech.edu/people/resources/faculty-openings"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -451,21 +446,13 @@
     "facultyCount": 138,
     "jobsUrl": "https://eecs.berkeley.edu/connect/faculty-jobs/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-12T12:55:56Z",
-    "outcome": "incomplete",
-    "summary": "Rechecked prior EECS, CDSS, and AP Recruit postings; verified the active School of Information HCI tenure-track search (JPF05482, Nov 2 final date) and added it. The wider School of Information recruitment scan remains incomplete.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "EECS faculty-jobs page lists 5 live recruitments; added EECS open-rank (JPF05591); refreshed 5 recorded; HCI (JPF05482) and Engineering+AI (JPF05144) now closed. CDSS page not rechecked this run.",
     "checkedUrls": [
       "https://eecs.berkeley.edu/connect/faculty-jobs/",
-      "https://aprecruit.berkeley.edu/JPF05560",
-      "https://cdss.berkeley.edu/about/job-opportunities",
-      "https://aprecruit.berkeley.edu/JPF05568",
-      "https://aprecruit.berkeley.edu/JPF05569",
-      "https://aprecruit.berkeley.edu/JPF05584",
-      "https://aprecruit.berkeley.edu/JPF04955",
-      "https://aprecruit.berkeley.edu/JPF05567",
-      "https://www.ischool.berkeley.edu/careers",
-      "https://aprecruit.berkeley.edu/JPF05482",
-      "https://aprecruit.berkeley.edu/apply"
+      "https://aprecruit.berkeley.edu/JPF05591",
+      "https://aprecruit.berkeley.edu/JPF05482"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -622,27 +609,14 @@
     "facultyCount": 130,
     "jobsUrl": "https://www.cs.wisc.edu/people/faculty-staff-recruitment/",
     "state": "WI",
-    "lastCheckedAt": "2026-10-12T12:58:19Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked CS recruitment and reviewed the official UW–Madison postdoc vacancy list for the supplied CRA lead. Verified the active ICU Data Science Lab postdoc (CS PhD accepted; Oct 30 deadline; rolling review) and added it; remaining central faculty and postdoc listings still need review.",
+    "summary": "Added CS tenure-track search (JR10016108, full consideration Dec 15, 2026). ICU causal-ML postdoc no longer on HR postdoc listing (closedAt). CAI iSchool/Statistics/ECE related units not rechecked.",
     "checkedUrls": [
       "https://www.cs.wisc.edu/people/faculty-staff-recruitment/",
-      "https://jobs.wisc.edu/jobs/assistant-professor-of-computer-sciences-natural-language-processing-rise-ai-madison-wisconsin-united-states",
-      "https://jobs.wisc.edu/jobs/assistant-professor-of-computer-sciences-rise-thrive-madison-wisconsin-united-states",
-      "https://ischool.wisc.edu/about-us/jobs-at-the-ischool/",
-      "https://jobs.wisc.edu/jobs/search?category=Faculty",
-      "https://jobs.wisc.edu/jobs/search?category=Faculty&page=2",
-      "https://jobs.wisc.edu/jobs/search?query=computer",
-      "https://jobs.wisc.edu/jobs/search?query=data",
-      "https://jobs.wisc.edu/jobs/search?query=postdoctoral",
-      "https://engineering.wisc.edu/departments/electrical-computer-engineering/",
-      "https://jobs.wisc.edu/jobs/assistant-associate-full-professor-in-electrical-and-computer-engineering-quantum-engineering-notice-of-filing-madison-wisconsin-united-states",
-      "https://jobs.wisc.edu/jobs/assistant-associate-or-full-professor-of-learning-sciences-rise-ai-artificial-intelligence-madison-wisconsin-united-states",
-      "https://jobs.wisc.edu/jobs/machine-learning-research-computing-facilitator-madison-wisconsin-united-states",
-      "https://hr.wisc.edu/postdoc-and-research-intern-vacancies/",
-      "https://icudatascience.medicine.wisc.edu/#/"
+      "https://hr.wisc.edu/postdoc-and-research-intern-vacancies/"
     ],
-    "deferredUntil": "2026-10-17",
+    "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "iSchool (College of Computing & Artificial Intelligence)",
@@ -1256,16 +1230,10 @@
     "facultyCount": 95,
     "jobsUrl": "https://www.cs.usc.edu/about/open-faculty-positions/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "CS open faculty positions page still shows no postings (last updated June 16, 2025). No change.",
+    "summary": "CS open-faculty page rendered with no listings (last updated June 2025); ECE and Viterbi related pages not checked.",
     "checkedUrls": [
-      "https://minghsiehece.usc.edu/about/open-positions/",
-      "https://minghsiehece.usc.edu/jobs/",
-      "https://usccareers.usc.edu/job/los-angeles/open-rank-assistant-associate-full-professor-of-electrical-and-computer-engineering/1209/71640611472",
-      "https://usccareers.usc.edu/business/custom_fields.division/usc%2520viterbi%2520school%2520of%2520engineering/1728-1209/5",
-      "https://usccareers.usc.edu/job/los-angeles/open-rank-assistant-associate-or-full-professor-of-computer-science/1209/60632249392",
-      "https://usccareers.usc.edu/business/job_status/thomas%2520lord%2520department%2520of%2520computer%2520science/1728-1209/5",
       "https://www.cs.usc.edu/about/open-faculty-positions/"
     ],
     "deferredUntil": null,
@@ -1289,15 +1257,12 @@
     "facultyCount": 94,
     "jobsUrl": "https://www.csee.umbc.edu/about/jobs/",
     "state": "MD",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "CSEE Prospective Faculty page lists no openings and points to the UMBC job listings site; no CS faculty posting found.",
+    "summary": "CSEE jobs page and UMBC faculty listing (5 faculty jobs, none CS/ECE visible in rendered excerpt) read; excerpt truncated, so recheck.",
     "checkedUrls": [
       "https://www.csee.umbc.edu/about/jobs/",
-      "https://listings.umbc.edu/cw/en-us/listing/",
-      "https://apply.interfolio.com/179391",
-      "https://facultyjobs.umbc.edu/en-us/listing/",
-      "https://coeit.umbc.edu/faculty-job-openings/"
+      "https://facultyjobs.umbc.edu/en-us/listing/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -1316,16 +1281,11 @@
     "facultyCount": 94,
     "jobsUrl": "https://apply.interfolio.com/175958",
     "state": "TN",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
-    "outcome": "incomplete",
-    "summary": "Not re-crawled this run; previous pass found no advertised CS vacancy.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "College of Connected Computing assistant professor Interfolio 175958 shows 'This position is closed'; no open CS search found.",
     "checkedUrls": [
-      "https://engineering.vanderbilt.edu/",
-      "https://www.vanderbilt.edu/connected-computing/",
-      "https://engineering.vanderbilt.edu/faculty-staff/",
-      "https://engineering.vanderbilt.edu/people/computer-science/",
-      "https://www.vanderbilt.edu/postdoc/prospective-postdocs/current-opportunities/",
-      "https://lab.vanderbilt.edu/rasr-lab/join-our-team/"
+      "https://apply.interfolio.com/175958"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -1344,14 +1304,12 @@
     "facultyCount": 93,
     "jobsUrl": "https://www.cics.umass.edu/about/employment/faculty-positions",
     "state": "MA",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "CICS faculty positions page and HR posting still list two teaching-faculty lecturer positions (robotics; AI); record confirmed seen. Other units not re-read.",
+    "summary": "Teaching-faculty Robotics/AI posting live; CICS faculty-positions page returned 502 via proxy, not verified.",
     "checkedUrls": [
-      "https://www.cics.umass.edu/about/employment",
-      "https://www.cics.umass.edu/about/employment/faculty-positions",
       "https://careers.umass.edu/jobs/teaching-faculty-lecturer-sr-lecturer-robotics-ai-amherst-massachusetts-united-states",
-      "https://www.umass.edu/engineering/about/open-faculty-positions"
+      "https://www.cics.umass.edu/about/employment/faculty-positions"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -1370,17 +1328,12 @@
     "facultyCount": 92,
     "jobsUrl": "https://jobs.utdallas.edu/postings/search?query_organizational_tier_3_id%5B%5D=222",
     "state": "TX",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Lecturer posting 32722 confirmed live (closes 2027-07-31). Department job search list not re-read.",
+    "summary": "Added CS open-rank search (posting 33021, closes Feb 26, 2027); part-time lecturer live. ECE careers page not rechecked.",
     "checkedUrls": [
-      "https://ece.utdallas.edu/about/careers/",
-      "https://jobs.utdallas.edu/postings/search?query=professor",
-      "https://jobs.utdallas.edu/postings/32899",
-      "https://jobs.utdallas.edu/postings/32801",
-      "https://jobs.utdallas.edu/postings/32238",
-      "https://jobs.utdallas.edu/postings/32786",
-      "https://jobs.utdallas.edu/postings/32722"
+      "https://jobs.utdallas.edu/postings/search?query_organizational_tier_3_id%5B%5D=222",
+      "https://jobs.utdallas.edu/postings/33021"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -1403,17 +1356,14 @@
     "facultyCount": 89,
     "jobsUrl": "https://www.cs.utexas.edu/faculty/recruiting",
     "state": "TX",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Recruiting page lists the same three CS searches (open-rank CS, joint Neuroscience/CS, instructional); all six UT records confirmed live. Other units not re-read.",
+    "summary": "CS search deadline now May 31, 2027 (review Dec 1); iSchool, ECE, SDS, neuroscience postings live. CS recruiting page 502 and Interfolio 19446 redirected to login: not verified.",
     "checkedUrls": [
-      "https://ece.utexas.edu/people/faculty/openings",
+      "https://apply.interfolio.com/194129",
+      "https://faculty.utexas.edu/career/191973",
       "https://apply.interfolio.com/194456",
-      "https://stat.utexas.edu/about-us/open-positions",
-      "https://apply.interfolio.com/193420",
-      "https://apply.interfolio.com/193948",
-      "https://apply.interfolio.com/188046",
-      "https://www.cs.utexas.edu/faculty/recruiting"
+      "https://apply.interfolio.com/193420"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -1469,16 +1419,11 @@
     "facultyCount": 86,
     "jobsUrl": "https://www.engr.psu.edu/academic-positions/index.aspx",
     "state": "PA",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "All seven Workday postings still live. Engineering hiring page not re-read.",
+    "summary": "IST open-positions page and 4 recorded Workday postings live; two Quantum Frontiers postdocs gone (closedAt). New IST AI tenure-line (REQ_0000083172), foundational/health AI co-hires and teaching postings listed but not yet added.",
     "checkedUrls": [
-      "https://www.eecs.psu.edu/",
-      "https://www.engr.psu.edu/academic-positions/index.aspx",
-      "https://engr.psu.edu/academic-positions/details.aspx?Job_Req=REQ_0000074193",
-      "https://ist.psu.edu/about/open-positions",
-      "https://www.engr.psu.edu/academic-positions/details.aspx?Job_Req=REQ_0000082629",
-      "https://psu.wd1.myworkdayjobs.com/en-US/PSU_Academic/job/Open-Rank-Tenure-Line-Position-in-Computer-Science--College-of-Engineering---Huck-Institute-of-Life-Sciences_REQ_0000074193-1"
+      "https://ist.psu.edu/about/open-positions"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -1505,17 +1450,11 @@
     "facultyCount": 85,
     "jobsUrl": null,
     "state": "VA",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "CS homepage reachable but carries no hiring link or faculty listing; no hiring page found.",
+    "summary": "GMU listings page showed only a C5I research scientist; cs.gmu.edu returned 502 via proxy.",
     "checkedUrls": [
-      "https://ece.gmu.edu",
-      "https://ist.gmu.edu",
-      "https://jobs.gmu.edu/",
-      "https://listings.jobs.gmu.edu/jobs/search",
-      "https://cs.gmu.edu/people",
-      "https://listings.jobs.gmu.edu/jobs/search?department_uids%5B%5D=25880868dc85e73439cade13efde344e&page=1&query=",
-      "https://cs.gmu.edu/"
+      "https://listings.jobs.gmu.edu/jobs/search"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -1583,15 +1522,12 @@
     "facultyCount": 84,
     "jobsUrl": "https://facultypositions.stanford.edu/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
-    "outcome": "incomplete",
-    "summary": "CS careers page lists the junior tenure-track position; the full description link was not confirmed this run.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "Faculty positions portal lists CS junior-level tenure-track search (and MS&E); recorded CS record remains live via department page.",
     "checkedUrls": [
-      "https://www.cs.stanford.edu/about/careers-work-us",
-      "https://facultypositions.stanford.edu/en-us/job/494927/computer-science-assistant-or-untenured-associate-professor",
-      "https://ee.stanford.edu/job-openings",
       "https://facultypositions.stanford.edu/en-us/listing/",
-      "https://hai.stanford.edu/careers"
+      "https://www.cs.stanford.edu/about/careers-work-us"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -1651,16 +1587,11 @@
     "facultyCount": 84,
     "jobsUrl": "https://recruit.ucdavis.edu/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "recruit.ucdavis.edu is a login portal with no listing; CS postings could not be verified.",
+    "summary": "Genome Center postdoc JPF07830 closed (410). Department recruitment not searched this run.",
     "checkedUrls": [
-      "https://recruit.ucdavis.edu/",
-      "https://cs.ucdavis.edu/",
-      "https://www.cs.ucdavis.edu/blog/open-faculty-positions-in-computer-science/",
-      "https://recruit.ucdavis.edu/apply",
-      "https://recruit.ucdavis.edu/JPF07822",
-      "https://cs.ucdavis.edu/job-opportunities"
+      "https://recruit.ucdavis.edu/JPF07830"
     ],
     "deferredUntil": null,
     "relatedUnits": [],
@@ -1674,16 +1605,10 @@
     "facultyCount": 81,
     "jobsUrl": "https://jobs.oregonstate.edu/postings/177641",
     "state": "OR",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "EECS E-Campus instructor pool posting 177641 confirmed live (closes 2026-12-15).",
+    "summary": "EECS Ecampus instructor pool still shown; no other CS search checked.",
     "checkedUrls": [
-      "https://jobs.oregonstate.edu/postings/search?query=computer",
-      "https://jobs.oregonstate.edu/postings/search?query=data+science",
-      "https://jobs.oregonstate.edu/postings/search?query=engineering",
-      "https://jobs.oregonstate.edu/postings/search?query=artificial+intelligence",
-      "https://jobs.oregonstate.edu/postings/172089",
-      "https://engineering.oregonstate.edu/EECS/about/eecs-job-openings/online-cs-faculty-positions",
       "https://jobs.oregonstate.edu/postings/177641"
     ],
     "deferredUntil": null,
@@ -1707,15 +1632,12 @@
     "facultyCount": 80,
     "jobsUrl": "https://cse.umn.edu/cs/faculty-recruiting",
     "state": "MN",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
-    "outcome": "incomplete",
-    "summary": "CS&E recruiting page says the department is not hiring for the current cycle. ECE posting 194224 confirmed live.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "CS&E states it is not hiring this cycle; ECE open-rank posting 194224 live.",
     "checkedUrls": [
-      "https://cse.umn.edu/cs/employment-opportunities",
       "https://cse.umn.edu/cs/faculty-recruiting",
-      "https://cse.umn.edu/ece/faculty-search",
-      "https://apply.interfolio.com/194224",
-      "https://gopher.cs.umn.edu/opportunities.php"
+      "https://apply.interfolio.com/194224"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -1898,16 +1820,12 @@
     "facultyCount": 73,
     "jobsUrl": "https://www.cs.columbia.edu/open-positions/",
     "state": "NY",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
-    "outcome": "incomplete",
-    "summary": "CS Open Positions page still shows a July 2026-start junior search; Interfolio recruitment 176021 was closed on the previous check, so it is not added.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "Added CS open-rank search (Interfolio 196554, review begins Dec 1, 2026); postdoc 195067 live.",
     "checkedUrls": [
-      "https://datascience.columbia.edu/about/careers/",
       "https://www.cs.columbia.edu/open-positions/",
-      "https://apply.interfolio.com/176021",
-      "https://www.ee.columbia.edu/faculty-positions",
-      "https://datascience.columbia.edu/careers/",
-      "https://www.ieor.columbia.edu/"
+      "https://apply.interfolio.com/196554"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -1926,18 +1844,13 @@
     "facultyCount": 72,
     "jobsUrl": "https://jobs.usf.edu/hcmUI/CandidateExperience/en/sites/USF/jobs",
     "state": "FL",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
-    "outcome": "incomplete",
-    "summary": "Both USF Oracle postings (38406, 38144) now say \"This job is no longer available\"; closedAt set. Hiring hub not re-read.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "blocked",
+    "summary": "Both recorded USF postings show 'no longer available'; jobs portal returned 502 via proxy.",
     "checkedUrls": [
-      "https://jobs.usf.edu/hcmUI/CandidateExperience/en/sites/USF/jobs?keyword=information",
-      "https://jobs.usf.edu/hcmUI/CandidateExperience/en/sites/USF/jobs?keyword=data%20science",
-      "https://jobs.usf.edu/hcmUI/CandidateExperience/en/sites/USF/jobs?keyword=engineering",
-      "https://www.usf.edu/ai-cybersecurity-computing/centers/cita/hiring/openings.aspx",
-      "https://fa-ewkd-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/USF/job/38406",
-      "https://fa-ewkd-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/USF/job/38144"
+      "https://jobs.usf.edu/hcmUI/CandidateExperience/en/sites/USF/jobs"
     ],
-    "deferredUntil": null,
+    "deferredUntil": "2026-11-27",
     "relatedUnits": [
       {
         "name": "Electrical Engineering (College of Engineering)",
@@ -2019,17 +1932,12 @@
     "facultyCount": 70,
     "jobsUrl": "https://computerscience.uchicago.edu/about/job-openings/",
     "state": "IL",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "CS and DSI job index read; six records confirmed live. Other units not re-read.",
+    "summary": "CS page lists Assistant Professor (live) plus MPCS adjunct/lecturer roles not added; DSI postings live; MS-CAPP posting closed. TTIC not rechecked.",
     "checkedUrls": [
-      "https://www.ttic.edu/postdoc-hiring",
-      "https://cs.uchicago.edu/about/job-openings/",
-      "https://apply.interfolio.com/168136",
-      "https://apply.interfolio.com/168138",
-      "https://apply.interfolio.com/153889",
-      "https://apply.interfolio.com/153888",
-      "https://computerscience.uchicago.edu/about/job-openings/"
+      "https://computerscience.uchicago.edu/about/job-openings/",
+      "https://apply.interfolio.com/193574"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -2052,15 +1960,12 @@
     "facultyCount": 68,
     "jobsUrl": "https://www.clemson.edu/human-resources/careers/search-jobs/faculty-positions.html",
     "state": "SC",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
-    "outcome": "incomplete",
-    "summary": "ECE Interfolio posting 193821 confirmed live (review begins Dec 1, 2026). Central faculty search page not readable.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "ECE open-rank posting live; safe-RL postdoc 195235 gone (closedAt).",
     "checkedUrls": [
       "https://www.clemson.edu/human-resources/careers/search-jobs/faculty-positions.html",
-      "https://apply.interfolio.com/193821",
-      "https://apply.interfolio.com/194510",
-      "https://apply.interfolio.com/185276",
-      "https://www.clemson.edu/human-resources/careers/search-jobs/"
+      "https://apply.interfolio.com/193821"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -2083,16 +1988,11 @@
     "facultyCount": 68,
     "jobsUrl": "https://explore.jobs.ufl.edu/en-us/search/?search-keyword=CISE",
     "state": "FL",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Five UF postings confirmed live (the ISOM lecturer deadline is 2026-10-12). Search page not re-read.",
+    "summary": "Recorded postings checked (lecturer 541095 gone, closedAt); ISOM posting page shows no end date, deadline cleared. CISE keyword search not fully reviewed.",
     "checkedUrls": [
-      "https://explore.jobs.ufl.edu/en-us/job/541319",
-      "https://explore.jobs.ufl.edu/en-us/job/540688",
-      "https://explore.jobs.ufl.edu/cw/en-us/job/540807/ast-prof",
-      "https://explore.jobs.ufl.edu/cw/en-us/job/541386/assistant-professor-in-statistics",
-      "https://explore.jobs.ufl.edu/en-us/job/537282/assistantassociatefull-professor-electrical-computer-engineering",
-      "https://explore.jobs.ufl.edu/en-us/listing/"
+      "https://explore.jobs.ufl.edu/en-us/search/?search-keyword=CISE"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -2144,16 +2044,10 @@
     "facultyCount": 66,
     "jobsUrl": "https://engineering.buffalo.edu/computer-science-engineering/news-and-events/employment-opportunities.html",
     "state": "NY",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "CSE page lists the AI and Quantum Empire Innovation professorships; quantum posting 59623, IAD lecturer and HCI faculty postings confirmed live. The AI & Society chair posting URL redirected to the postings index, so its lastSeenAt was left unchanged.",
+    "summary": "CSE employment page lists Empire Innovation Professor roles (AI, quantum); posting 59623 gone (closedAt). EIP AI postings not added.",
     "checkedUrls": [
-      "https://www.ubjobs.buffalo.edu/postings/64857",
-      "https://engineering.buffalo.edu/content/engineering/computer-science-engineering/news-and-events/employment-opportunities.html",
-      "https://www.ubjobs.buffalo.edu/postings/60486",
-      "https://engineering.buffalo.edu/ai-society/about-us/employment-opportunities.html",
-      "https://www.ubjobs.buffalo.edu/postings/60961/print_preview",
-      "https://www.ubjobs.buffalo.edu/postings/62915",
       "https://engineering.buffalo.edu/computer-science-engineering/news-and-events/employment-opportunities.html"
     ],
     "deferredUntil": null,
@@ -2967,16 +2861,12 @@
     "facultyCount": 45,
     "jobsUrl": null,
     "state": "TX",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Not re-crawled this run beyond the prior pass; no hiring page found.",
+    "summary": "CS site moved to caicc.utsa.edu; Computer Engineering faculty-opportunities page lists assistant professor openings (architecture, VLSI/quantum) not yet added. CS page not read.",
     "checkedUrls": [
-      "https://www.cs.utsa.edu/",
-      "https://caicc.utsa.edu/computer-science/",
       "https://caicc.utsa.edu/computer-engineering/academic-positions.html",
-      "https://caicc.utsa.edu/",
-      "https://www.utsa.edu/people-excellence/careers/faculty-positions.html",
-      "https://zahr-prd-candidate-ada.utshare.utsystem.edu/ (JobOpeningId 14275,14276,14338,14340,14343)"
+      "https://www.cs.utsa.edu"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -4527,16 +4417,10 @@
     "facultyCount": 24,
     "jobsUrl": "https://iit.hrmdirect.com/employment/job-openings.php",
     "state": "IL",
-    "lastCheckedAt": "2026-10-12T22:30:00Z",
-    "outcome": "incomplete",
-    "summary": "HR portal (hrmdirect) lists 16 jobs, none faculty; department hiring page still not found.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "HRM Direct lists 19 openings, none faculty/CS on the rendered page.",
     "checkedUrls": [
-      "https://iit.clearcompany.com/careers/portal",
-      "https://www.iit.edu/ece/jobs",
-      "https://www.iit.edu/computer-science/employment/tenuredtenure-track-faculty",
-      "https://www.iit.edu/computer-science/employment/teaching-faculty",
-      "https://www.iit.edu/school-computing",
-      "https://www.iit.edu/engineering/about/open-positions",
       "https://iit.hrmdirect.com/employment/job-openings.php"
     ],
     "deferredUntil": null,
@@ -6324,13 +6208,13 @@
     "facultyCount": 0,
     "jobsUrl": "https://careers.bowdoin.edu/postings/search",
     "state": "ME",
-    "lastCheckedAt": "2026-10-12T13:10:00Z",
-    "outcome": "incomplete",
-    "summary": "Verified active CS tenure-track AI assistant professor and lecturer postings; checked for related CS positions, broader unit scan incomplete.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "Both recorded CS postings (tenure-track AI, lecturer) live on careers.bowdoin.edu; search page lists Computer Science.",
     "checkedUrls": [
+      "https://careers.bowdoin.edu/postings/search",
       "https://careers.bowdoin.edu/postings/18104/print_preview",
-      "https://careers.bowdoin.edu/postings/18298/print_preview",
-      "https://careers.bowdoin.edu/postings/search"
+      "https://careers.bowdoin.edu/postings/18298/print_preview"
     ],
     "relatedUnits": [
       {
@@ -6389,9 +6273,9 @@
     "facultyCount": 0,
     "jobsUrl": "https://www.fordham.edu/academics/departments/computer-and-information-science/faculty-and-administration/tenure-track-faculty-positions/",
     "state": "NY",
-    "lastCheckedAt": "2026-10-12T13:10:00Z",
-    "outcome": "incomplete",
-    "summary": "Verified current Bepler Chair search in CIS; wider university scan incomplete.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "Bepler Chair posting live on Interfolio; department page lists no other open CIS search.",
     "checkedUrls": [
       "https://www.fordham.edu/academics/departments/computer-and-information-science/faculty-and-administration/tenure-track-faculty-positions/",
       "https://apply.interfolio.com/193408"
@@ -6414,11 +6298,10 @@
     "facultyCount": 0,
     "jobsUrl": "https://franklincollege.edu/about/key-offices/office-of-human-resources/employment-opportunities/",
     "state": "IN",
-    "lastCheckedAt": "2026-10-12T13:10:00Z",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Verified current tenure-track assistant professor of computing posting; broader college scan incomplete.",
+    "summary": "Recorded posting is a PDF only (Oct 15 deadline passed); HR employment page not re-rendered, so lastSeenAt not refreshed.",
     "checkedUrls": [
-      "https://franklincollege.edu/about/key-offices/office-of-human-resources/employment-opportunities/",
       "https://franklincollege.edu/wp-content/uploads/2026/09/Assistant-Professor-of-Computing-Tenure-Track-2026-FINAL-1.pdf"
     ],
     "relatedUnits": [
@@ -6481,12 +6364,11 @@
     "facultyCount": 0,
     "jobsUrl": "https://careers.marist.edu/cw/en-us/job/494040/assistant-professor-of-computing-technology-cybersecurity-and-it-infrastructure",
     "state": "NY",
-    "lastCheckedAt": "2026-10-12T12:54:36Z",
-    "outcome": "incomplete",
-    "summary": "Verified the supplied Computing Technology faculty posting on Marist’s official careers portal. The wider school and related-unit scan remains incomplete.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "Assistant Professor of Computing Technology (Cybersecurity) posting rendered live; review begins Nov 1, 2026, open until filled.",
     "checkedUrls": [
-      "https://www.marist.edu/computer-science-math",
-      "https://careers.marist.edu/cw/en-us/job/494040/assistant-professor-of-computing-technology-cybersecurity-and-it-infrastructure"
+      "https://careers.marist.edu/jobs/assistant-professor-of-computing-technology-cybersecurity-and-it-infrastructure-poughkeepsie-ny-new-york-united-states"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
@@ -6523,11 +6405,10 @@
     "facultyCount": 0,
     "jobsUrl": "https://www.reed.edu/computer-science/faculty-search.html",
     "state": "OR",
-    "lastCheckedAt": "2026-10-12T12:56:43Z",
-    "outcome": "incomplete",
-    "summary": "Verified the active Computer Science tenure-stream position in computer systems on Reed’s official page. Full consideration deadline is Oct 12, 2026; wider computing-adjacent scan remains incomplete.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "Computer systems search page still live; Oct 12 full-consideration date passed, review continues until filled.",
     "checkedUrls": [
-      "https://www.reed.edu/dean_of_faculty/facsearch/positions/assistant-professor-tenure-stream-faculty-position-in-computer-systems.html",
       "https://www.reed.edu/computer-science/faculty-search.html"
     ],
     "relatedUnits": [],
@@ -6609,9 +6490,9 @@
     "facultyCount": 0,
     "jobsUrl": "https://www.troyuniversityjobs.com/postings/search",
     "state": "AL",
-    "lastCheckedAt": "2026-10-12T12:54:36Z",
-    "outcome": "incomplete",
-    "summary": "Verified the Computer Science assistant professor posting on Troy’s official employment site, posting 48513. The wider computing-adjacent unit scan remains incomplete.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "Troy postings search listed CS positions in Troy/Dothan/Global/Montgomery; recorded Assistant Professor posting 48513 rendered live (no closing date, not open until filled).",
     "checkedUrls": [
       "https://www.troyuniversityjobs.com/postings/search",
       "https://www.troyuniversityjobs.com/postings/48513"
@@ -18342,12 +18223,10 @@
     "region": "northamerica",
     "jobsUrl": "https://www.schooljobs.com/careers/berea/jobs/5474364/assistant-professor-of-computer-science-tenure-track-or-3-yr-fixed-term-positio",
     "state": "KY",
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Verified current CS faculty announcement covering two August 2027 appointments (tenure-track and three-year fixed-term). CS department and official careers posting reviewed; adjacent-unit scan remains incomplete.",
+    "lastCheckedAt": "2026-11-06T22:30:00Z",
+    "outcome": "complete",
+    "summary": "Tenure-track / 3-year fixed-term CS posting live on schooljobs.",
     "checkedUrls": [
-      "https://www.berea.edu/csc/",
-      "https://www.schooljobs.com/careers/berea",
       "https://www.schooljobs.com/careers/berea/jobs/5474364/assistant-professor-of-computer-science-tenure-track-or-3-yr-fixed-term-positio"
     ],
     "relatedUnits": [],
