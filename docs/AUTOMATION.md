@@ -46,10 +46,10 @@ Check VietProfs' and People's times before moving anything here.
 | `jobs` | `trig_01PkBRvYwVSWTCqsCtsNZpPg` | Sonnet 5.5 | `0 22 * * 1,5` | Mon and Fri 6 PM | [US jobs crawl](#us-jobs-crawl-jobs) |
 | `jobs-intl` | `trig_0185iQdCfKfusPAN8DjkjSke` | Sonnet 5.5 | `0 23 * * 2` | Tue 7 PM | [International jobs crawl](#international-jobs-crawl-jobs-intl) |
 | `labs` | `trig_01WxBbdGpCW3zoLamWKdXMHe` | Sonnet 5.5 | `0 19 * * 3` | Wed 3 PM | [Industry & national-lab postings](#industry--national-lab-postings-labs) |
-| `data-sync` | `trig_014ksNYkkzyHVxS2Kub4LqsG` | Sonnet 5 | `30 0 3 * *` | 3rd of month, 8:30 PM (2nd) | [Mechanical data sync](#mechanical-data-sync-data-sync) |
-| `confs-discover` | `trig_01LZM6T6zVarUND6Uvh6HUTh` | Sonnet 5 | `0 1 8 * *` | 8th of month, 9 PM (7th) | [Discover conferences](#discover-conferences-confs-discover) |
-| `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5 | `0 1 22 * *` | 22nd of month, 9 PM (21st) | [Discover grants](#discover-grants-grants-discover) |
-| `affiliations` | `trig_01Q8yhHMcPqZZJspxcr4iw7n` | Sonnet 5 | `30 1 10 1,4,7,10 *` | 10th of Jan/Apr/Jul/Oct, 9:30 PM (9th) | [Manual affiliations](#manual-affiliations-affiliations) |
+| `data-sync` | `trig_014ksNYkkzyHVxS2Kub4LqsG` | Sonnet 5.5 | `30 0 3 * *` | 3rd of month, 8:30 PM (2nd) | [Mechanical data sync](#mechanical-data-sync-data-sync) |
+| `confs-discover` | `trig_01LZM6T6zVarUND6Uvh6HUTh` | Sonnet 5.5 | `0 1 8 * *` | 8th of month, 9 PM (7th) | [Discover conferences](#discover-conferences-confs-discover) |
+| `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5.5 | `0 1 22 * *` | 22nd of month, 9 PM (21st) | [Discover grants](#discover-grants-grants-discover) |
+| `affiliations` | `trig_01Q8yhHMcPqZZJspxcr4iw7n` | Sonnet 5.5 | `30 1 10 1,4,7,10 *` | 10th of Jan/Apr/Jul/Oct, 9:30 PM (9th) | [Manual affiliations](#manual-affiliations-affiliations) |
 
 One-time (done): `review` (`trig_01GJP3xjZBugMSfyEHkN5EBC`, Opus 5.5) ran once on 2026-10-26 at 20:00 UTC (4 PM ET), after the schedule
 changed on 2026-10-02 (nightly audit, confs every other day, grants twice weekly); its findings are
@@ -176,9 +176,10 @@ exactly as they are.
 
 ### Grants audit (`grants`)
 
-Playbook: `TASKS/grants.md`. Cap: 20 entries in `public/grants.json`.
+Playbook: `TASKS/grants.md`. Cap: 20 entries verified, and at most 40 attempted, in `public/grants.json`.
 
-Skip every entry whose `lastVerifiedAt` is within the last 30 days. Among the rest, pick entries in this
+Skip every entry whose `lastVerifiedAt` is within the last 30 days, and every entry whose
+`scripts/data/grants-checks.json` record has a `deferredUntil` still in the future. Among the rest, pick entries in this
 order: deadline already passed (the next cycle may be posted), then deadline within the next 90 days,
 then entries with no concrete date in `deadline`. Within each group, entries with no `lastVerifiedAt`
 come first. Break ties by rotating
@@ -187,7 +188,16 @@ PRs. For each entry, confirm the official page, update the deadline/amount/eligi
 concrete historical dates as the playbook describes, and set `"status": "historical"` for discontinued
 programs rather than deleting them. Keep `id`s stable. Set `lastVerifiedAt` (today, `YYYY-MM-DD`) on
 every entry you confirmed against its official page, including ones where nothing changed; an entry you
-couldn't verify (blocked site, missing page) keeps its old value so a later run retries it. If an `amount`
+couldn't verify (blocked site, missing page) keeps its old value.
+
+Many sponsor sites (ACM, SIAM, Sloan, Bloomberg, Sony) block both WebFetch and headless Chromium with a bot
+check, so don't stop when one blocks you: try `npm run render:jobs -- <url>` once (install Chromium as the jobs
+section describes), then move to the next entry in the order and keep going until 20 entries are verified or 40
+have been attempted. Record every attempted entry in `scripts/data/grants-checks.json` under `grants.<id>`:
+`lastCheckedAt` (ISO time), `outcome` (`verified`, `blocked`, or `not_found`), a one-line `summary`,
+`checkedUrls`, and `deferredUntil` (`lastCheckedAt` + 60 days for `blocked`, + 30 days for `not_found`, `null`
+for `verified`). That is what keeps the next run from retrying the same blocked sites. Open one PR even when only
+`grants-checks.json` changed. A blocked page is not evidence a program ended: never mark it historical for that. If an `amount`
 looks corrupted (a bare number or leading comma with no currency sign, as in Issue #13), re-derive it from
 the official call page or set it to `Amount varies; see the official call page`; never guess.
 

@@ -127,6 +127,28 @@ export function grantProblems(grants) {
   });
 }
 
+// ---- scripts/data/grants-checks.json (the grants audit's per-entry attempt log) ----
+
+const GRANT_CHECK_FIELDS = new Set(['lastCheckedAt', 'outcome', 'summary', 'checkedUrls', 'deferredUntil']);
+export const GRANT_CHECK_OUTCOMES = ['verified', 'blocked', 'not_found'];
+
+export function grantCheckProblems(checks, grantIds) {
+  if (!checks || checks.version !== 1 || typeof checks.grants !== 'object' || Array.isArray(checks.grants)) {
+    return ['grants-checks.json must be {"version": 1, "grants": {<id>: {...}}}'];
+  }
+  const ids = new Set(grantIds);
+  return Object.entries(checks.grants).flatMap(([id, check]) => [
+    ...(ids.has(id) ? [] : [`${id}: no grant with this id in public/grants.json`]),
+    ...recordProblems(id, check ?? {}, GRANT_CHECK_FIELDS, [
+      ['lastCheckedAt (ISO time)', ISO_INSTANT.test(check?.lastCheckedAt ?? '') && isIsoDay(check.lastCheckedAt.slice(0, 10))],
+      [`outcome (one of ${GRANT_CHECK_OUTCOMES.join(' | ')})`, GRANT_CHECK_OUTCOMES.includes(check?.outcome)],
+      ['summary', nonEmpty(check?.summary)],
+      ['checkedUrls (non-empty list of URLs)', Array.isArray(check?.checkedUrls) && check.checkedUrls.length > 0 && check.checkedUrls.every(isUrl)],
+      ['deferredUntil (ISO time or null)', check?.deferredUntil === null || (ISO_INSTANT.test(check?.deferredUntil ?? '') && isIsoDay(check.deferredUntil.slice(0, 10)))],
+    ]),
+  ]);
+}
+
 // ---- scripts/data/jobs-sources.json ----
 
 const SOURCE_FIELDS = new Set(['school', 'homepage', 'facultyCount', 'jobsUrl', 'state', 'lastCheckedAt', 'outcome', 'summary',

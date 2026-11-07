@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import test from 'node:test';
 
 import {
-  conferenceProblems, dataWarnings, grantProblems, manualAffiliationProblems, sourceProblems
+  conferenceProblems, dataWarnings, grantCheckProblems, grantProblems, manualAffiliationProblems, sourceProblems
 } from '../../scripts/data-checks.mjs';
 import { homepageKey } from '../../scripts/jobs-maintain.mjs';
 
@@ -16,6 +16,20 @@ test('csconfs/data/conferences.json passes the data checks', async () => {
 
 test('public/grants.json passes the data checks', async () => {
   assert.deepEqual(grantProblems(await readJson('public/grants.json')), []);
+});
+
+test('scripts/data/grants-checks.json passes the data checks', async () => {
+  const ids = (await readJson('public/grants.json')).map(grant => grant.id);
+  assert.deepEqual(grantCheckProblems(await readJson('scripts/data/grants-checks.json'), ids), []);
+});
+
+test('grants check log rejects unknown ids, outcomes, and malformed times', () => {
+  const ok = { lastCheckedAt: '2026-11-04T23:02:51.000Z', outcome: 'blocked', summary: 'HTTP 403', checkedUrls: ['https://sloan.org/fellowships'], deferredUntil: '2027-01-03T23:02:51.000Z' };
+  assert.deepEqual(grantCheckProblems({ version: 1, grants: { sloan: ok } }, ['sloan']), []);
+  assert.deepEqual(grantCheckProblems({ version: 1, grants: { gone: ok } }, ['sloan']), ['gone: no grant with this id in public/grants.json']);
+  assert.match(grantCheckProblems({ version: 1, grants: { sloan: { ...ok, outcome: 'failed' } } }, ['sloan'])[0], /outcome/);
+  assert.match(grantCheckProblems({ version: 1, grants: { sloan: { ...ok, deferredUntil: '2027-01-03' } } }, ['sloan'])[0], /deferredUntil/);
+  assert.equal(grantCheckProblems({ grants: {} }, []).length, 1);
 });
 
 test('scripts/data/jobs-sources.json passes the data checks', async () => {
