@@ -22,13 +22,13 @@
       "proposals": []
     },
     "CCC": {
-      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
       "outcome": "incomplete",
-      "summary": "CCC 2027 (Seattle, July 19-22) confirmed; submission/notification deadlines not announced; chair role ambiguous, left unchanged.",
+      "summary": "CCC 2027 page confirms Seattle, July 19-22 and Swastik Kopparty; no submission or notification dates announced. No change.",
       "checkedUrls": [
         "https://computationalcomplexity.org/"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-14T20:00:00.000Z",
       "proposals": []
     },
     "CHES": {
@@ -101,14 +101,14 @@
       ]
     },
     "ICCV": {
-      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
       "outcome": "incomplete",
-      "summary": "ICCV 2027 dates Oct 3-7 confirmed on Dates page; submission deadlines not published; ICCV 2031 not checked beyond site.",
+      "summary": "ICCV 2027 page confirms Hong Kong, Oct 3-7 (venue section says Oct 2-8); Dates page lists only workshop/conference days, no paper deadlines. No change.",
       "checkedUrls": [
         "https://iccv.thecvf.com/Conferences/2027",
         "https://iccv.thecvf.com/Conferences/2027/Dates"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-14T20:00:00.000Z",
       "proposals": []
     },
     "ICME": {
@@ -512,27 +512,15 @@
       ]
     },
     "SOSP": {
-      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
       "outcome": "incomplete",
-      "summary": "SOSP 2027 dates Nov 30-Dec 3, 2027 added; deadlines not announced; SOSP 2028 not announced.",
+      "summary": "sosp.org confirms SOSP 2027 Vancouver, Nov 30-Dec 3 2027; no submission deadlines; nothing on 2028. The sigops.org 2027 URL returned an archived 2017 page. No change.",
       "checkedUrls": [
         "https://sosp.org/",
         "https://sigops.org/s/conferences/sosp/2027/"
       ],
-      "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://sosp.org/",
-              "evidence": "SOSP 2027 listed for November 30 to December 3, 2027, Vancouver."
-            }
-          ]
-        }
-      ]
+      "deferredUntil": "2026-11-14T20:00:00.000Z",
+      "proposals": []
     },
     "ICDE": {
       "lastCheckedAt": "2026-10-06T20:16:29.176Z",
@@ -683,14 +671,14 @@
       "proposals": []
     },
     "ICSE": {
-      "lastCheckedAt": "2026-10-10T20:14:51.448Z",
-      "outcome": "not_found",
-      "summary": "ICSE 2028 not listed on the series page. ICSE 2027 (Dublin, Apr 25-May 1 2027) and chairs match the record; deadlines not on the page.",
+      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
+      "outcome": "incomplete",
+      "summary": "icse-conferences.org confirms ICSE 2028 April, Hawaii and 2029 April, Tokyo; no deadlines. conf.researchr.org ICSE 2028 page requires login. No change.",
       "checkedUrls": [
-        "https://conf.researchr.org/series/icse",
-        "https://conf.researchr.org/home/icse-2027"
+        "https://www.icse-conferences.org/",
+        "https://conf.researchr.org/home/icse-2028"
       ],
-      "deferredUntil": "2026-10-31T20:14:51.448Z",
+      "deferredUntil": "2026-11-14T20:00:00.000Z",
       "proposals": []
     },
     "NDSS": {
@@ -756,14 +744,14 @@
       "proposals": []
     },
     "KDD": {
-      "lastCheckedAt": "2026-10-29T20:06:37.000Z",
+      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
       "outcome": "incomplete",
-      "summary": "KDD 2027 cycle 1 deadlines match the research-track CFP; cycle 2 dates not announced, left estimated/unverified.",
+      "summary": "KDD 2027 cycle 1 dates (Jul 19/26, rebuttal Sep 29-Oct 13, notification Nov 14 2026) and San Jose Aug 1-5 2027 match the record; cycle 2 dates not announced. No change.",
       "checkedUrls": [
         "https://kdd2027.kdd.org/",
         "https://kdd2027.kdd.org/research-track-call-for-papers/"
       ],
-      "deferredUntil": null,
+      "deferredUntil": "2026-11-14T20:00:00.000Z",
       "proposals": []
     },
     "IROS": {
@@ -1008,14 +996,14 @@
       ]
     },
     "COLM": {
-      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
       "outcome": "not_found",
-      "summary": "COLM 2027 not announced; colm.cc lists only COLM 2026 (Oct 6-9, 2026, San Francisco) and past years.",
+      "summary": "colmweb.org redirects to colm.cc, which covers only COLM 2026 (San Francisco, Oct 6-9, 2026); no 2027 information published.",
       "checkedUrls": [
         "https://colmweb.org/",
         "https://colm.cc/"
       ],
-      "deferredUntil": "2026-11-05T20:15:32.150Z",
+      "deferredUntil": "2026-11-28T20:00:00.000Z",
       "proposals": []
     },
     "ACSAC": {
@@ -1970,6 +1958,76 @@
       ],
       "deferredUntil": "2026-11-12T20:00:00.000Z",
       "proposals": []
+    },
+    "ECAI": {
+      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
+      "outcome": "complete",
+      "summary": "ECAI 2027 Athens, Oct 2-7 2027, full paper deadline 14 Apr 2027 and author notification 15 Jul 2027 match the record.",
+      "checkedUrls": [
+        "https://ecai2027.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "ECIR": {
+      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
+      "outcome": "complete",
+      "summary": "ECIR 2027 dates, venue, full-paper deadline 5 Oct 2026 (abstract 21 Sep) and notification 7 Dec 2026 match the record; general chair role not labeled on page, unchanged.",
+      "checkedUrls": [
+        "https://www.ecir2027.co.uk/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "ECOOP": {
+      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
+      "outcome": "complete",
+      "summary": "ECOOP 2027 Turin, Jun 28-Jul 2; round 1 (Nov 19 2026, response Jan 11-15, notification Jan 28) and round 2 (Feb 11, response Mar 22-26, notification Apr 8) match the record.",
+      "checkedUrls": [
+        "https://2027.ecoop.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "Eurocrypt": {
+      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
+      "outcome": "complete",
+      "summary": "Eurocrypt 2027 Eindhoven, Apr 11-15; deadline Sep 17 2026, rebuttal Nov 30-Dec 5, notification Jan 18 2027 match the record.",
+      "checkedUrls": [
+        "https://eurocrypt.iacr.org/2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "Eurographics": {
+      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "Official site eg.github.io returned 404 and eg2027.github.io returned 404; record left unchanged and unverified this run.",
+      "checkedUrls": [
+        "https://eg.github.io/",
+        "https://eg2027.github.io/"
+      ],
+      "deferredUntil": "2026-11-28T20:00:00.000Z",
+      "proposals": []
+    },
+    "FC": {
+      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
+      "outcome": "complete",
+      "summary": "FC 2027 home page states Feb 8-12 2027, Barbados, with program and general chairs; added chairs. CFP shows deadline Sep 24 2026 (matches); notification shows both Nov 5 and Nov 12 2026, ambiguous so left at Nov 5.",
+      "checkedUrls": [
+        "https://fc27.ifca.ai/",
+        "https://fc27.ifca.ai/cfp.html"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            "https://fc27.ifca.ai/"
+          ]
+        }
+      ]
     }
   }
 }
