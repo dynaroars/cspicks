@@ -273,6 +273,14 @@ export default {
       "2024": [
         43,
         2
+      ],
+      "2025": [
+        44,
+        2
+      ],
+      "2026": [
+        45,
+        2
       ]
     },
     "tvcg": {
@@ -452,6 +460,6 @@ export default {
       ]
     }
   },
-  "sourceVersion": "W/\"fd9421113e60a15f833cbad24cec070ced273e3d9f83bbeed61581dc48ce1c3c\"",
-  "syncedAt": "2026-09-23T05:21:03.904Z"
+  "sourceVersion": "W/\"09be14e7d577838564d391684531752e27fc30c3685a53b97c0f39217ff0b149\"",
+  "syncedAt": "2026-11-07T05:15:29.365Z"
 };

@@ -1,5 +1,6 @@
 # Faculty whose CSRankings roster name differs from their publication-table name.
-# Generated 2026-10-14T11:48:41.701Z by scripts/sync-nsf-awards.mjs.
+# Generated 2026-11-07T05:15:01.449Z by scripts/sync-nsf-roster-names.mjs.
+# The publication-table name is what the site matches on; edit a row to correct a resolution.
 faculty_name,roster_name,affiliation
 Aaron D. Striegel,Aaron Striegel,University of Notre Dame
 Abdou S. Youssef,Abdou Youssef,George Washington University
@@ -9,7 +10,7 @@ Alberto E. Cerpa,Alberto Cerpa,Univ. of California - Merced
 Alex Pang,Alex T. Pang,Univ. of California - Santa Cruz
 Alexander H. Nelson 0001,Alexander Nelson 0001,University of Arkansas
 Alexander C. Russell,Alexander Russell,University of Connecticut
-Amy Zhang,Amy X. Zhang,University of Texas at Austin
+Alvaro A. Cárdenas,Alvaro A. Cardenas,Univ. of California - Santa Cruz
 Anand Tripathi,Anand R. Tripathi,University of Minnesota
 Andrew Robb,Andrew C. Robb,Clemson University
 Anil Kumar S. Vullikanti,Anil Vullikanti,University of Virginia
@@ -30,6 +31,7 @@ Brendan A. Juba,Brendan Juba,Washington University in St. Louis
 Brenna Argall,Brenna D. Argall,Northwestern University
 Brent Harrison,Brent E. Harrison,University of Kentucky
 Brent R. Waters,Brent Waters,University of Texas at Austin
+Brian A. Smith,Brian A. Smith 0001,Columbia University
 Brian L. Curless,Brian Curless,University of Washington
 Brian C. Keegan,Brian Keegan,University of Colorado Boulder
 Çagdas D. Önal,Cagdas D. Onal,Worcester Polytechnic Institute
@@ -58,6 +60,7 @@ Daniel Lopresti,Daniel P. Lopresti,Lehigh University
 Daniel R. Sheldon,Daniel Sheldon,Univ. of Massachusetts Amherst
 Danielle Szafir,Danielle Albers Szafir,University of North Carolina
 Danny Z. Chen,Danny Ziyi Chen,University of Notre Dame
+David Andrews,David Andrews 0001,University of Arkansas
 David Leake,David B. Leake,Indiana University
 David S. Bindel,David Bindel,Cornell University
 David M. Brooks,David Brooks 0001,Harvard University
@@ -73,30 +76,38 @@ Dinesh P. Mehta,Dinesh Mehta,Colorado School of Mines
 Douglas E. Comer,Douglas Comer,Purdue University
 Drew V. McDermott,Drew McDermott,Yale University
 Eliane S. Wiese,Eliane Wiese,University of Utah
+Elizabeth M. Belding,Elizabeth Belding,Univ. of California - Santa Barbara
 Elizabeth M. Gerber,Elizabeth Gerber,Northwestern University
 Ellen W. Zegura,Ellen Zegura,Georgia Institute of Technology
 Emad M. Boctor,Emad Boctor,Johns Hopkins University
 Emily M. Hand,Emily Morgan Hand,University of Nevada
 Emily Prud'hommeaux,Emily Tucker Prud'hommeaux,Boston College
 Emmanuel O. Agu,Emmanuel Agu,Worcester Polytechnic Institute
+Eric Patterson,Eric K. Patterson,Clemson University
 Eric V. Mazumdar,Eric Mazumdar,California Inst. of Technology
 Eric G. Mercer,Eric Mercer,Brigham Young University
 Eric K. Torng,Eric Torng,Michigan State University
 Erin Solovey,Erin Treacy Solovey,Worcester Polytechnic Institute
 Fei-Fei Li 0001,Fei Li 0001,Stanford University
 Feng Zhu 0010,Feng Zhu 0006,University of Alabama - Huntsville
+Fengjun Li,Fengjun Li 0001,University of Kansas
 Fernando D. Diaz,Fernando Diaz 0001,Carnegie Mellon University
 George K. Atia,George Atia,University of Central Florida
 Gita Sukthankar,Gita Reese Sukthankar,University of Central Florida
+Gordon L. Kindlmann,Gordon Kindlmann,University of Chicago
 Gursimran S. Walia,Gursimran Singh Walia,Augusta University
+Haiyan Hu,Haiyan Hu 0003,University of Central Florida
 Héctor Muñoz-Avila,Hector Muñoz-Avila,Lehigh University
 Hung M. La,Hung Manh La,University of Nevada
 Ibrahim Baggili,Ibrahim M. Baggili,Louisiana State University
 Igor Fabio Steinmacher,Igor Steinmacher,Northern Arizona University
+Irfan Ahmed,Irfan Ahmed 0001,Virginia Commonwealth University
 Isaac Kim 0001,Isaac H. Kim,Univ. of California - Davis
 Ivan I. Garibay,Ivan Garibay,University of Central Florida
 Jaijeet Roychowdhury,Jaijeet S. Roychowdhury,Univ. of California - Berkeley
+Jaime Ruiz,Jaime Ruiz 0002,University of Florida
 James J. Martin,James H. Martin,Clemson University
+James Caldwell,James L. Caldwell,University of Wyoming
 James M. Tuck,James Tuck 0001,North Carolina State University
 James Y. Zou,James Zou 0001,Stanford University
 Jana Kosecká,Jana Kosecka,George Mason University
@@ -107,6 +118,8 @@ Jiaqi Ma 0001,Jiaqi W. Ma,Univ. of Illinois at Urbana-Champaign
 Jin-yi Cai,Jin-Yi Cai,University of Wisconsin - Madison
 Jinyuan Stella Sun,Jinyuan Sun,University of Tennessee
 Joanna Cecilia da Silva Santos,Joanna C. S. Santos,University of Notre Dame
+John C. Mitchell,John C. Mitchell 0001,Stanford University
+John Doyle,John Doyle 0001,California Inst. of Technology
 John M. Edwards 0002,John Edwards 0002,Utah State University
 John M. Gauch,John Gauch,University of Arkansas
 John D. Kubiatowicz,John Kubiatowicz,Univ. of California - Berkeley
@@ -116,10 +129,11 @@ Jonathan Ullman,Jonathan R. Ullman,Northeastern University
 Joshua E. Siegel,Joshua Siegel,Michigan State University
 Ju-yeon Jo,Ju-Yeon Jo,University of Nevada Las Vegas
 Jugal Kalita,Jugal K. Kalita,UCCS
+Justin Bradley,Justin M. Bradley,University of Nebraska
 Justin M. Solomon,Justin Solomon 0001,Massachusetts Inst. of Technology
-Justin Z. Zhan,Justin Zhijun Zhan,University of Cincinnati
 Karen A. Panetta,Karen Panetta,Tufts University
 Karthik R. Narasimhan,Karthik Narasimhan,Princeton University
+Kevin Sullivan,Kevin J. Sullivan,University of Virginia
 Kevin Shuai Xu,Kevin S. Xu 0001,Case Western Reserve University
 Kirstin H. Petersen,Kirstin Petersen,Cornell University
 Krishna Kumar Venkatasubramanian,Krishna K. Venkatasubramanian,University of Rhode Island
@@ -137,12 +151,14 @@ Mahdi Nasrullah Al-Ameen,Mahdi N. Al-Ameen,Utah State University
 Maja Mataric,Maja J. Mataric,University of Southern California
 Mani B. Srivastava,Mani Srivastava 0001,Univ. of California - Los Angeles
 Mark A. Horowitz,Mark Horowitz,Stanford University
+Mark Liberman,Mark Y. Liberman,University of Pennsylvania
 Marti Hearst,Marti A. Hearst,Univ. of California - Berkeley
 Martín Farach-Colton,Martin Farach-Colton,New York University
 Martin J. Strauss,Martin Strauss 0001,University of Michigan
 Marty A. Humphrey,Marty Humphrey,University of Virginia
 Matthew Gombolay,Matthew C. Gombolay,Georgia Institute of Technology
 Matthew C. Caesar,Matthew Caesar 0001,Univ. of Illinois at Urbana-Champaign
+Matthew Rutherford,Matthew J. Rutherford,University of Denver
 Matthew Guthaus,Matthew R. Guthaus,Univ. of California - Santa Cruz
 Maya Çakmak,Maya Cakmak,University of Washington
 Mehmet C. Vuran,Mehmet Can Vuran,University of Nebraska
@@ -157,7 +173,9 @@ Michael Jantz,Michael R. Jantz,University of Tennessee
 Michael Horn 0001,Michael S. Horn,Northwestern University
 Michael T. Tolley,Michael Thomas Tolley,Univ. of California - San Diego
 Michelle A. Borkin,Michelle Borkin,Northeastern University
+Milos Gligoric,Milos Gligoric 0001,University of Texas at Austin
 Ming-Deh Huang,Ming-Deh A. Huang,University of Southern California
+Minje Kim,Minje Kim 0006,Indiana University
 Mohammad T. Hajiaghayi,Mohammad Hajiaghayi,Univ. of Maryland - College Park
 Nam Wook Kim,Nam Sung Kim,Boston College
 Narain Gehani,Narain H. Gehani,NJIT
@@ -172,6 +190,7 @@ Nikolaos P. Papanikolopoulos,Nikolaos Papanikolopoulos,University of Minnesota
 Nikolay A. Atanasov,Nikolay Atanasov 0001,Univ. of California - San Diego
 Nikos P. Chrisochoides,Nikos Chrisochoides,Old Dominion University
 Oliver A. Kennedy,Oliver Kennedy,University at Buffalo
+Pan He,Pan He 0004,Auburn University
 Parth Pathak 0001,Parth H. Pathak,George Mason University
 Patrick H. Winston,Patrick Henry Winston,Massachusetts Inst. of Technology
 Pavan K. Turaga,Pavan Turaga,Arizona State University
@@ -181,18 +200,21 @@ Prabhanjan Ananth,Prabhanjan Vijendra Ananth,Univ. of California - Santa Barbara
 Pravesh K. Kothari,Pravesh Kothari,Princeton University
 Purushotham Bangalore,Purushotham V. Bangalore,University of Alabama - Birmingham
 Qi Rose Yu,Qi Yu 0001,Univ. of California - San Diego
+Qiben Yan,Qiben Yan 0001,Michigan State University
 R. C. Sekar 0001,R. Sekar 0001,Stony Brook University
 Rada Y. Chirkova,Rada Chirkova,North Carolina State University
 Raj K. Bhatnagar,Raj Bhatnagar,University of Cincinnati
 Rakesh B. Bobba,Rakesh Bobba,Oregon State University
 Rebecca M. Willett,Rebecca Willett,University of Chicago
 Rhongho Jang,RhongHo Jang,Wayne State University
+Richard Chapman,Richard Chapman 0001,Auburn University
 Robert Kleinberg,Robert D. Kleinberg,Cornell University
 Rogelio E. Cardona-Rivera,Rogelio Enrique Cardona-Rivera,University of Utah
 Roger A. Crawfis,Roger Crawfis,Ohio State University
 Ron K. Cytron,Ron Cytron,Washington University in St. Louis
 Roshan L. Peiris,Roshan Lalintha Peiris,Rochester Inst. of Technology
 Ruben A. Gamboa,Ruben Gamboa,University of Wyoming
+Saman A. Zonouz,Saman Zonouz,Georgia Institute of Technology
 Samir R. Das,Samir Ranjan Das,Stony Brook University
 Sang-Woo Jun,Sang Woo Jun,Univ. of California - Irvine
 Sanjay Rajopadhye,Sanjay V. Rajopadhye,Colorado State University
@@ -219,9 +241,11 @@ Swamit Tannu,Swamit S. Tannu,University of Wisconsin - Madison
 Szymon M. Rusinkiewicz,Szymon Rusinkiewicz,Princeton University
 Tajana S. Rosing,Tajana Rosing,Univ. of California - San Diego
 Tamara R. Sumner,Tamara Sumner,University of Colorado Boulder
+Tandy J. Warnow,Tandy Warnow,Univ. of Illinois at Urbana-Champaign
 ThanhVu H. Nguyen,ThanhVu Nguyen,George Mason University
 Theophilus A. Benson,Theophilus Benson,Carnegie Mellon University
 Tiffany M. Barnes,Tiffany Barnes,North Carolina State University
+Travis D. Breaux,Travis Breaux,Carnegie Mellon University
 Truong X. Nghiem,Truong Nghiem,Northern Arizona University
 Ulugbek S. Kamilov,Ulugbek Kamilov,Washington University in St. Louis
 Vaibhav Vasant Unhelkar,Vaibhav V. Unhelkar,Rice University
@@ -236,6 +260,7 @@ Virginia de Sa,Virginia R. de Sa,Univ. of California - San Diego
 Vishnu Boddeti,Vishnu Naresh Boddeti,Michigan State University
 Vladimir I. Zadorozhny,Vladimir Zadorozhny,University of Pittsburgh
 Weijie Su 0001,Weijie J. Su,University of Pennsylvania
+Wenqian Dong,Wenqian Dong 0001,Oregon State University
 William D. Gropp,William Gropp,Univ. of Illinois at Urbana-Champaign
 William Gasarch,William I. Gasarch,Univ. of Maryland - College Park
 William Robertson 0002,William K. Robertson,Northeastern University
@@ -245,5 +270,7 @@ Xavier M. Tricoche,Xavier Tricoche,Purdue University
 Xia Hu 0001,Xia Ben Hu,Rice University
 Xiao Chen 0001,Xiao Chen 0002,Texas State University
 Xiaolin Hu 0002,Xiaolin Hu 0001,Georgia State University
+Xiuwen Liu,Xiuwen Liu 0001,Florida State University
 Yingyan Celine Lin,Yingyan (Celine) Lin,Georgia Institute of Technology
+Yixin Sun,Yixin Sun 0004,University of Virginia
 Zhijie Shi,Zhijie Jerry Shi,University of Connecticut
