@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "grants": {
+    "sloan-research-fellowship": {
+      "lastCheckedAt": "2026-11-04T23:02:51.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch and curl.",
+      "checkedUrls": [
+        "https://sloan.org/fellowships"
+      ],
+      "deferredUntil": "2027-01-03T23:02:51.000Z"
+    },
+    "bloomberg-ds-fellowship": {
+      "lastCheckedAt": "2026-11-04T23:02:51.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch and curl.",
+      "checkedUrls": [
+        "https://www.bloomberg.com/company/values/tech-at-bloomberg/data-science/academic-engagement-programs/data-science-ph-d-fellowship/"
+      ],
+      "deferredUntil": "2027-01-03T23:02:51.000Z"
+    },
+    "acm-doctoral-dissertation": {
+      "lastCheckedAt": "2026-11-04T23:02:51.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch and curl.",
+      "checkedUrls": [
+        "https://awards.acm.org/doctoral-dissertation"
+      ],
+      "deferredUntil": "2027-01-03T23:02:51.000Z"
+    },
+    "acm-fellow": {
+      "lastCheckedAt": "2026-11-04T23:02:51.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch and curl.",
+      "checkedUrls": [
+        "https://awards.acm.org/fellows/nominations"
+      ],
+      "deferredUntil": "2027-01-03T23:02:51.000Z"
+    },
+    "siam-fellow": {
+      "lastCheckedAt": "2026-11-04T23:02:51.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch and curl.",
+      "checkedUrls": [
+        "https://www.siam.org/programs-initiatives/prizes-awards/fellows-program/eligibility/"
+      ],
+      "deferredUntil": "2027-01-03T23:02:51.000Z"
+    },
+    "acm-gordon-bell-prize": {
+      "lastCheckedAt": "2026-11-04T23:02:51.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch and curl.",
+      "checkedUrls": [
+        "https://awards.acm.org/bell"
+      ],
+      "deferredUntil": "2027-01-03T23:02:51.000Z"
+    },
+    "netapp-faculty-grants": {
+      "lastCheckedAt": "2026-11-04T23:02:51.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch and curl.",
+      "checkedUrls": [
+        "https://www.netapp.com/atg/research-grants/"
+      ],
+      "deferredUntil": "2027-01-03T23:02:51.000Z"
+    },
+    "sony-research-award": {
+      "lastCheckedAt": "2026-11-04T23:02:51.000Z",
+      "outcome": "blocked",
+      "summary": "WebFetch refuses www.sony.com.",
+      "checkedUrls": [
+        "https://www.sony.com/en/SonyInfo/research-award-program/"
+      ],
+      "deferredUntil": "2027-01-03T23:02:51.000Z"
+    },
+    "att-labs-fellowship": {
+      "lastCheckedAt": "2026-11-04T23:02:51.000Z",
+      "outcome": "blocked",
+      "summary": "Old URL 301s to about.att.com/programs/fellowships, which returns 403 to scripts (Issue #113).",
+      "checkedUrls": [
+        "https://www.research.att.com/programs/fellowships",
+        "https://about.att.com/programs/fellowships"
+      ],
+      "deferredUntil": "2027-01-03T23:02:51.000Z"
+    },
+    "acm-senior-member": {
+      "lastCheckedAt": "2026-11-07T05:30:00.000Z",
+      "outcome": "blocked",
+      "summary": "awards.acm.org blocks scripts and headless Chromium (Cloudflare 403), checked with npm run render:jobs.",
+      "checkedUrls": [
+        "https://awards.acm.org/senior-members/nominations"
+      ],
+      "deferredUntil": "2027-01-06T05:30:00.000Z"
+    },
+    "acm-distinguished-member": {
+      "lastCheckedAt": "2026-11-07T05:30:00.000Z",
+      "outcome": "blocked",
+      "summary": "awards.acm.org blocks scripts and headless Chromium (Cloudflare 403), checked with npm run render:jobs.",
+      "checkedUrls": [
+        "https://awards.acm.org/distinguished-members/nominations"
+      ],
+      "deferredUntil": "2027-01-06T05:30:00.000Z"
+    },
+    "acm-prize-in-computing": {
+      "lastCheckedAt": "2026-11-07T05:30:00.000Z",
+      "outcome": "blocked",
+      "summary": "awards.acm.org blocks scripts and headless Chromium (Cloudflare 403), checked with npm run render:jobs.",
+      "checkedUrls": [
+        "https://awards.acm.org/acm-prize/nominations"
+      ],
+      "deferredUntil": "2027-01-06T05:30:00.000Z"
+    },
+    "acm-grace-murray-hopper-award": {
+      "lastCheckedAt": "2026-11-07T05:30:00.000Z",
+      "outcome": "blocked",
+      "summary": "awards.acm.org blocks scripts and headless Chromium (Cloudflare 403), checked with npm run render:jobs.",
+      "checkedUrls": [
+        "https://awards.acm.org/hopper/nominations"
+      ],
+      "deferredUntil": "2027-01-06T05:30:00.000Z"
+    },
+    "acm-athena-lecturer-award": {
+      "lastCheckedAt": "2026-11-07T05:30:00.000Z",
+      "outcome": "blocked",
+      "summary": "awards.acm.org blocks scripts and headless Chromium (Cloudflare 403), checked with npm run render:jobs.",
+      "checkedUrls": [
+        "https://awards.acm.org/athena/nominations"
+      ],
+      "deferredUntil": "2027-01-06T05:30:00.000Z"
+    },
+    "acm-turing-award": {
+      "lastCheckedAt": "2026-11-07T05:30:00.000Z",
+      "outcome": "blocked",
+      "summary": "awards.acm.org blocks scripts and headless Chromium (Cloudflare 403), checked with npm run render:jobs.",
+      "checkedUrls": [
+        "https://awards.acm.org/turing"
+      ],
+      "deferredUntil": "2027-01-06T05:30:00.000Z"
+    },
+    "acm-software-system-award": {
+      "lastCheckedAt": "2026-11-07T05:30:00.000Z",
+      "outcome": "blocked",
+      "summary": "awards.acm.org blocks scripts and headless Chromium (Cloudflare 403), checked with npm run render:jobs.",
+      "checkedUrls": [
+        "https://awards.acm.org/software-system"
+      ],
+      "deferredUntil": "2027-01-06T05:30:00.000Z"
+    }
+  }
+}

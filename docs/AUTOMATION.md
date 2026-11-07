@@ -176,9 +176,10 @@ exactly as they are.
 
 ### Grants audit (`grants`)
 
-Playbook: `TASKS/grants.md`. Cap: 20 entries in `public/grants.json`.
+Playbook: `TASKS/grants.md`. Cap: 20 entries verified, and at most 40 attempted, in `public/grants.json`.
 
-Skip every entry whose `lastVerifiedAt` is within the last 30 days. Among the rest, pick entries in this
+Skip every entry whose `lastVerifiedAt` is within the last 30 days, and every entry whose
+`scripts/data/grants-checks.json` record has a `deferredUntil` still in the future. Among the rest, pick entries in this
 order: deadline already passed (the next cycle may be posted), then deadline within the next 90 days,
 then entries with no concrete date in `deadline`. Within each group, entries with no `lastVerifiedAt`
 come first. Break ties by rotating
@@ -187,7 +188,16 @@ PRs. For each entry, confirm the official page, update the deadline/amount/eligi
 concrete historical dates as the playbook describes, and set `"status": "historical"` for discontinued
 programs rather than deleting them. Keep `id`s stable. Set `lastVerifiedAt` (today, `YYYY-MM-DD`) on
 every entry you confirmed against its official page, including ones where nothing changed; an entry you
-couldn't verify (blocked site, missing page) keeps its old value so a later run retries it. If an `amount`
+couldn't verify (blocked site, missing page) keeps its old value.
+
+Many sponsor sites (ACM, SIAM, Sloan, Bloomberg, Sony) block both WebFetch and headless Chromium with a bot
+check, so don't stop when one blocks you: try `npm run render:jobs -- <url>` once (install Chromium as the jobs
+section describes), then move to the next entry in the order and keep going until 20 entries are verified or 40
+have been attempted. Record every attempted entry in `scripts/data/grants-checks.json` under `grants.<id>`:
+`lastCheckedAt` (ISO time), `outcome` (`verified`, `blocked`, or `not_found`), a one-line `summary`,
+`checkedUrls`, and `deferredUntil` (`lastCheckedAt` + 60 days for `blocked`, + 30 days for `not_found`, `null`
+for `verified`). That is what keeps the next run from retrying the same blocked sites. Open one PR even when only
+`grants-checks.json` changed. A blocked page is not evidence a program ended: never mark it historical for that. If an `amount`
 looks corrupted (a bare number or leading comma with no currency sign, as in Issue #13), re-derive it from
 the official call page or set it to `Amount varies; see the official call page`; never guess.
 

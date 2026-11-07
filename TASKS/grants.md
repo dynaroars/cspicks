@@ -18,6 +18,9 @@ Practical cadence:
   for newly opened call cycles, changed deadlines/amounts, and programs that
   have quietly closed or gone dormant. Set `lastVerifiedAt` (YYYY-MM-DD) on
   each entry confirmed against its official page, even when nothing changed.
+  Log every attempt, including blocked and missing pages, in
+  `scripts/data/grants-checks.json` so blocked sites wait 60 days before the
+  next try (docs/AUTOMATION.md, "Grants audit").
 - **Monthly** (the `grants-discover` routine), run a subset of the query
   categories below (rotate through federal agencies, industry programs,
   fellowships, and foundations over a few months rather than all at once)
