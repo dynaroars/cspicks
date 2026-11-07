@@ -46,10 +46,10 @@ Check VietProfs' and People's times before moving anything here.
 | `jobs` | `trig_01PkBRvYwVSWTCqsCtsNZpPg` | Sonnet 5.5 | `0 22 * * 1,5` | Mon and Fri 6 PM | [US jobs crawl](#us-jobs-crawl-jobs) |
 | `jobs-intl` | `trig_0185iQdCfKfusPAN8DjkjSke` | Sonnet 5.5 | `0 23 * * 2` | Tue 7 PM | [International jobs crawl](#international-jobs-crawl-jobs-intl) |
 | `labs` | `trig_01WxBbdGpCW3zoLamWKdXMHe` | Sonnet 5.5 | `0 19 * * 3` | Wed 3 PM | [Industry & national-lab postings](#industry--national-lab-postings-labs) |
-| `data-sync` | `trig_014ksNYkkzyHVxS2Kub4LqsG` | Sonnet 5 | `30 0 3 * *` | 3rd of month, 8:30 PM (2nd) | [Mechanical data sync](#mechanical-data-sync-data-sync) |
-| `confs-discover` | `trig_01LZM6T6zVarUND6Uvh6HUTh` | Sonnet 5 | `0 1 8 * *` | 8th of month, 9 PM (7th) | [Discover conferences](#discover-conferences-confs-discover) |
-| `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5 | `0 1 22 * *` | 22nd of month, 9 PM (21st) | [Discover grants](#discover-grants-grants-discover) |
-| `affiliations` | `trig_01Q8yhHMcPqZZJspxcr4iw7n` | Sonnet 5 | `30 1 10 1,4,7,10 *` | 10th of Jan/Apr/Jul/Oct, 9:30 PM (9th) | [Manual affiliations](#manual-affiliations-affiliations) |
+| `data-sync` | `trig_014ksNYkkzyHVxS2Kub4LqsG` | Sonnet 5.5 | `30 0 3 * *` | 3rd of month, 8:30 PM (2nd) | [Mechanical data sync](#mechanical-data-sync-data-sync) |
+| `confs-discover` | `trig_01LZM6T6zVarUND6Uvh6HUTh` | Sonnet 5.5 | `0 1 8 * *` | 8th of month, 9 PM (7th) | [Discover conferences](#discover-conferences-confs-discover) |
+| `grants-discover` | `trig_01MKACYJ3eAKPAEWNJukaKJh` | Sonnet 5.5 | `0 1 22 * *` | 22nd of month, 9 PM (21st) | [Discover grants](#discover-grants-grants-discover) |
+| `affiliations` | `trig_01Q8yhHMcPqZZJspxcr4iw7n` | Sonnet 5.5 | `30 1 10 1,4,7,10 *` | 10th of Jan/Apr/Jul/Oct, 9:30 PM (9th) | [Manual affiliations](#manual-affiliations-affiliations) |
 
 One-time (done): `review` (`trig_01GJP3xjZBugMSfyEHkN5EBC`, Opus 5.5) ran once on 2026-10-26 at 20:00 UTC (4 PM ET), after the schedule
 changed on 2026-10-02 (nightly audit, confs every other day, grants twice weekly); its findings are
