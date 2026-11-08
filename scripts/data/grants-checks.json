@@ -145,6 +145,114 @@
         "https://awards.acm.org/software-system"
       ],
       "deferredUntil": "2027-01-06T05:30:00.000Z"
+    },
+    "openai-academic-researcher-grants": {
+      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch; Chromium unavailable in this environment.",
+      "checkedUrls": [
+        "https://openai.com/form/researcher-access-program/"
+      ],
+      "deferredUntil": "2027-01-06T12:00:00.000Z"
+    },
+    "openai-chatgpt-academic-researchers": {
+      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch; Chromium unavailable in this environment.",
+      "checkedUrls": [
+        "https://openai.com/index/chatgpt-for-academic-researchers/"
+      ],
+      "deferredUntil": "2027-01-06T12:00:00.000Z"
+    },
+    "acm-ieee-george-michael-hpc-fellowship": {
+      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch; Chromium unavailable in this environment.",
+      "checkedUrls": [
+        "https://awards.acm.org/hpc-fellows/nominations"
+      ],
+      "deferredUntil": "2027-01-06T12:00:00.000Z"
+    },
+    "acm-kanellakis-theory-practice-award": {
+      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch; Chromium unavailable in this environment.",
+      "checkedUrls": [
+        "https://awards.acm.org/kanellakis/nominations"
+      ],
+      "deferredUntil": "2027-01-06T12:00:00.000Z"
+    },
+    "acm-karlstrom-educator-award": {
+      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch; Chromium unavailable in this environment.",
+      "checkedUrls": [
+        "https://awards.acm.org/karlstrom/nominations"
+      ],
+      "deferredUntil": "2027-01-06T12:00:00.000Z"
+    },
+    "acm-aaai-allen-newell-award": {
+      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch; Chromium unavailable in this environment.",
+      "checkedUrls": [
+        "https://awards.acm.org/newell/nominations"
+      ],
+      "deferredUntil": "2027-01-06T12:00:00.000Z"
+    },
+    "acm-thacker-breakthrough-award": {
+      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
+      "outcome": "blocked",
+      "summary": "HTTP 403 bot check for WebFetch; Chromium unavailable in this environment.",
+      "checkedUrls": [
+        "https://awards.acm.org/thacker/nominations"
+      ],
+      "deferredUntil": "2027-01-06T12:00:00.000Z"
+    },
+    "ieee-senior-member": {
+      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
+      "outcome": "blocked",
+      "summary": "Page returned empty content to WebFetch.",
+      "checkedUrls": [
+        "https://www.ieee.org/membership/senior/"
+      ],
+      "deferredUntil": "2027-01-06T12:00:00.000Z"
+    },
+    "huawei-research-fellowship": {
+      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "HTTP 404 for the stored URL; replacement official page not found.",
+      "checkedUrls": [
+        "https://www.huawei.com/en/industry-insights/industry/huawei-research-fellowship-program"
+      ],
+      "deferredUntil": "2026-12-07T12:00:00.000Z"
+    },
+    "xerox-technical-minority": {
+      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "HTTP 404 (already in Issue #112).",
+      "checkedUrls": [
+        "https://www.xerox.com/en-us/jobs/minority-scholarships"
+      ],
+      "deferredUntil": "2026-12-07T12:00:00.000Z"
+    },
+    "jpmorgan-ai-awards": {
+      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "AI Research page lists no faculty award program, deadline, or amount.",
+      "checkedUrls": [
+        "https://www.jpmorgan.com/US/en/technology/artificial-intelligence"
+      ],
+      "deferredUntil": "2026-12-07T12:00:00.000Z"
+    },
+    "lbnl-alvarez-hopper-fellowship": {
+      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
+      "outcome": "verified",
+      "summary": "Page (edited 2026-09-03) matches entry: no deadline stated, competitive salary, 2-year term, PhD within 3 years.",
+      "checkedUrls": [
+        "https://cs.lbl.gov/work/fellowships/alvarez-fellowship/"
+      ],
+      "deferredUntil": null
     }
   }
 }
