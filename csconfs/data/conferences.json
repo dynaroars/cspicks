@@ -42537,7 +42537,7 @@
     "description": "ACM/SIGDA International Symposium on Field-Programmable Gate Arrays",
     "link": "https://fpga27.hotcrp.com/",
     "seriesLink": "https://www.isfpga.org/",
-    "date": "March 14, 2027 (35th edition)",
+    "date": "March 14–16, 2027 (35th edition)",
     "place": "Seaside, CA, USA",
     "abstractDeadline": "2026-10-01",
     "deadline": "2026-10-08",
@@ -43825,7 +43825,7 @@
     "link": "https://icdar2027.org/",
     "seriesLink": "https://icdar2027.org/",
     "date": "August 18-22, 2027",
-    "place": null,
+    "place": "Kuala Lumpur, Malaysia",
     "abstractDeadline": null,
     "deadline": "2027-02-28",
     "rebuttalDate": null,
@@ -43835,8 +43835,8 @@
     "programChair": null,
     "acceptanceRate": null,
     "submissions": null,
-    "estimated": false,
-    "verified": true
+    "estimated": true,
+    "verified": false
   },
   {
     "name": "ICDAR",
