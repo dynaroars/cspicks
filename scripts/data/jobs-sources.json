@@ -3174,9 +3174,9 @@
     "facultyCount": 40,
     "jobsUrl": "https://www.uh.edu/nsm/computer-science/people/faculty-search/index.php",
     "state": "TX",
-    "lastCheckedAt": "2026-10-14T00:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed the current UH careers board and verified four live faculty openings: CS instructional faculty, open-rank Decision & Information Sciences (CS PhD explicitly eligible), IST Digital Media, and ISE AI/ML. The official board and posting pages are recorded for rechecks; the broader engineering and related-unit sweep remains incomplete.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 11 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Reviewed the current UH careers board and verified four live faculty openings: CS instructional faculty, open-rank Decision & Information Sciences (CS PhD explicitly eligible), IST Digital Media, and ISE AI/ML. The official board and posting pages are recorded for rechecks; the broader engineering and related-unit sweep remains incomplete.",
     "checkedUrls": [
       "https://www.uh.edu/nsm/computer-science/people/faculty-search/index.php",
       "https://careers.uh.edu/jobs/search?query=computer",
@@ -4444,9 +4444,9 @@
     "facultyCount": 24,
     "jobsUrl": "https://www.pdx.edu/engineering/open-faculty-staff-positions",
     "state": "OR",
-    "lastCheckedAt": "2026-10-14T00:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Verified a live two-position tenure-track ECE cluster search for AI and computing architecture. The Computer Science/ECE pages were reviewed; the broader adjacent-unit scan remains incomplete.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Verified a live two-position tenure-track ECE cluster search for AI and computing architecture. The Computer Science/ECE pages were reviewed; the broader adjacent-unit scan remains incomplete.",
     "checkedUrls": [
       [
         "https://www.pdx.edu/engineering/open-faculty-staff-positions",
@@ -4617,14 +4617,15 @@
     "facultyCount": 22,
     "jobsUrl": "https://uasys.wd5.myworkdayjobs.com/UASYS",
     "state": "AR",
-    "lastCheckedAt": "2026-10-14T00:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed the official Workday Information Systems assistant professor opening and current EECS ECE searches. Added the Information Systems opening; the separate EECS Assistant Professor ad requires an EE/materials/physics doctorate, so it was excluded from CS jobs. Other related-unit review remains incomplete.",
+    "summary": "2026-11-09 recheck: the Information Systems posting R0090950-1 now shows \"page doesn’t exist\" and is marked closed; the Workday UASYS board was rendered but no new CS/ECE faculty listing was identified. Earlier notes: Reviewed the official Workday Information Systems assistant professor opening and current EECS ECE searches. Added the Information Systems opening; the separate EECS Assistant Professor ad requires an EE/materials/physics doctorate, so it was excluded from CS jobs. Other related-unit review remains incomplete.",
     "checkedUrls": [
       "https://uasys.wd5.myworkdayjobs.com/en-US/UAF_External_Career_Site/job/Fayetteville-AR/Assistant-Professor---Electrical-Engineering---9-MONTH_R0091048",
       "https://hr.uark.edu/employee-resources/hiring.php",
       "https://uasys.wd5.myworkdayjobs.com/uasys/job/Assistant-Professor-of-Information-Systems_R0090950-1",
-      "https://engineering.uark.edu/electrical-engineering-computer-science/"
+      "https://engineering.uark.edu/electrical-engineering-computer-science/",
+      "https://uasys.wd5.myworkdayjobs.com/UASYS"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -5007,9 +5008,9 @@
     "facultyCount": 19,
     "jobsUrl": "https://www.umkc.edu/provost/about-us/career-opportunities.html",
     "state": "MO",
-    "lastCheckedAt": "2026-10-14T03:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed the official UMKC career-opportunities page and ECE department directory. A public job-board lead identifies a current tenure-eligible ECE search spanning quantum computing, wireless, robotics, and VLSI, but the official UM System application portal redirects to sign-in, so the posting could not be verified from an accessible official detail page and was not added; revisit before Oct 26, 2026.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 0 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Reviewed the official UMKC career-opportunities page and ECE department directory. A public job-board lead identifies a current tenure-eligible ECE search spanning quantum computing, wireless, robotics, and VLSI, but the official UM System application portal redirects to sign-in, so the posting could not be verified from an accessible official detail page and was not added; revisit before Oct 26, 2026.",
     "checkedUrls": [
       "https://www.umkc.edu/hr/careers/",
       "https://www.umkc.edu/computing-engineering/",
@@ -5132,15 +5133,16 @@
     "facultyCount": 17,
     "jobsUrl": "https://explore.msujobs.msstate.edu/jobs/search",
     "state": "MS",
-    "lastCheckedAt": "2026-10-14T03:19:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Official HR and department pages checked (2026-10-14): confirmed active CSE Instructor (Req 511191), added new CAVS Assistant/Associate Research Professor, GRI Assistant/Associate Research Professor, and NSPARC Postdoctoral Research Associate (opened Oct 13). Adjacent-unit review remains partial.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 4 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Official HR and department pages checked (2026-10-14): confirmed active CSE Instructor (Req 511191), added new CAVS Assistant/Associate Research Professor, GRI Assistant/Associate Research Professor, and NSPARC Postdoctoral Research Associate (opened Oct 13). Adjacent-unit review remains partial.",
     "checkedUrls": [
       "https://explore.msujobs.msstate.edu/jobs/instructor-i-ii-or-iii-main-campus-starkville-ms-mississippi-united-states-98228e8d-a74c-4619-80fc-8085a9612f25",
       "https://www.career.msstate.edu/jobs/mississippi-school-for-mathematics-and-science-computer-science-adjunct-msms/",
       "https://explore.msujobs.msstate.edu/jobs/assistant-associate-research-professor-main-campus-starkville-ms-mississippi-united-states",
       "https://explore.msujobs.msstate.edu/jobs/assistant-associate-research-professor-main-campus-starkville-ms-mississippi-united-states-6f810365-7e7d-47c9-b2f3-92de82cb8067",
-      "https://explore.msujobs.msstate.edu/jobs/postdoctoral-research-associate-main-campus-starkville-ms-mississippi-united-states-30f96433-0f5b-4601-a4f7-20d00cb9a1ec"
+      "https://explore.msujobs.msstate.edu/jobs/postdoctoral-research-associate-main-campus-starkville-ms-mississippi-united-states-30f96433-0f5b-4601-a4f7-20d00cb9a1ec",
+      "https://explore.msujobs.msstate.edu/jobs/search"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -5433,9 +5435,9 @@
     "facultyCount": 14,
     "jobsUrl": "https://jobs.du.edu/",
     "state": "CO",
-    "lastCheckedAt": "2026-10-14T04:19:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked the official Computer Science adjunct Data Science pool and the Electrical and Computer Engineering adjunct pools. Added ECE Computer Engineering and Systems Engineering teaching pools, which remain open for applications during AY 2026–27; the Systems Engineering pool requires U.S. citizenship or permanent residence. Broader Ritchie School and university-wide hiring review remains incomplete.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 3 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Rechecked the official Computer Science adjunct Data Science pool and the Electrical and Computer Engineering adjunct pools. Added ECE Computer Engineering and Systems Engineering teaching pools, which remain open for applications during AY 2026–27; the Systems Engineering pool requires U.S. citizenship or permanent residence. Broader Ritchie School and university-wide hiring review remains incomplete.",
     "checkedUrls": [
       "https://jobs.du.edu/en-us/job/499044/adjunct-faculty-data-science",
       "https://jobs.du.edu/en-us/listing/",
@@ -5444,7 +5446,8 @@
       "https://jobs.du.edu/cw/en-us/job/499046/adjunct-faculty-department-of-electrical-and-computer-engineering",
       "https://jobs.du.edu/mob/cw/en-us/job/499048/adjunct-faculty-systems-engineering",
       "https://jobs.du.edu/cw/en-us/listing/",
-      "https://ritchieschool.du.edu/electrical-computer-engineering"
+      "https://ritchieschool.du.edu/electrical-computer-engineering",
+      "https://jobs.du.edu/"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -5773,9 +5776,9 @@
     "facultyCount": 9,
     "jobsUrl": "https://soc.siu.edu/news/index.php",
     "state": "IL",
-    "lastCheckedAt": "2026-10-14T03:29:19Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed the School of Computing hiring notice and linked official NEOGOV postings. The Applied AI faculty roles closed January 5, 2026 and the cybersecurity role closed February 15, 2026; the department page still advertises them for an August 2026 start, so they are stale and were not added. Reviewed ECBE faculty directory; no ECBE opening verified. Recheck the official portal and both units for the next cycle.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 0 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Reviewed the School of Computing hiring notice and linked official NEOGOV postings. The Applied AI faculty roles closed January 5, 2026 and the cybersecurity role closed February 15, 2026; the department page still advertises them for an August 2026 start, so they are stale and were not added. Reviewed ECBE faculty directory; no ECBE opening verified. Recheck the official portal and both units for the next cycle.",
     "checkedUrls": [
       "https://www2.cs.siu.edu",
       "https://soc.siu.edu/news/index.php",
@@ -5886,9 +5889,9 @@
     "facultyCount": 7,
     "jobsUrl": "https://ualr.edu/humanresources/jobs/",
     "state": "AR",
-    "lastCheckedAt": "2026-10-14T03:26:45Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed the official UA Little Rock employment page, Workday posting R0087139, the School of Computer and Information Sciences pages, and ECE faculty information. Added the current nine-month Computer Science Assistant Professor opening. No current ECE faculty requisition was confirmed; the external Workday board still limits broader related-unit review.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Reviewed the official UA Little Rock employment page, Workday posting R0087139, the School of Computer and Information Sciences pages, and ECE faculty information. Added the current nine-month Computer Science Assistant Professor opening. No current ECE faculty requisition was confirmed; the external Workday board still limits broader related-unit review.",
     "checkedUrls": [
       "https://ualr.edu/computerinformationsciences/",
       "https://uasys.wd5.myworkdayjobs.com/UASYS?hiringCompany=720b21cbdf2401e26b5b1759c4019006&q=professor",
@@ -5913,9 +5916,9 @@
     "facultyCount": 7,
     "jobsUrl": "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs",
     "state": "WY",
-    "lastCheckedAt": "2026-10-14T03:29:19Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked the AI initiative page and official Oracle careers portal. The portal lists an Assistant Professor opening shared by Botany and the School of Computing in plant/fungal genomics, but its individual posting could not be rendered for verification; no record added pending direct detail review. A separate School of Computing research-scientist link also did not expose details. Revisit both official requisitions.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 0 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Rechecked the AI initiative page and official Oracle careers portal. The portal lists an Assistant Professor opening shared by Botany and the School of Computing in plant/fungal genomics, but its individual posting could not be rendered for verification; no record added pending direct detail review. A separate School of Computing research-scientist link also did not expose details. Revisit both official requisitions.",
     "checkedUrls": [
       "https://www.uwyo.edu/president/initiatives/ai4wy/opportunities.html",
       "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?keyword=school%20of%20computing",
@@ -5926,7 +5929,8 @@
       "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/262540",
       "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/243604",
       "https://www.uwyo.edu/soc/people/faculty/index.html",
-      "https://www.uwyo.edu/eecs/faculty-staff/index.html"
+      "https://www.uwyo.edu/eecs/faculty-staff/index.html",
+      "https://eeik.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -5979,9 +5983,9 @@
     "facultyCount": 6,
     "jobsUrl": "https://www.ndsu.edu/employment/joblist",
     "state": "ND",
-    "lastCheckedAt": "2026-10-14T03:25:29Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked the current NDSU employment board and Computer Science pages, and checked the Electrical and Computer Engineering unit. The board lists current university positions, but its public rendering does not expose a reliable current CS/ECE requisition search; no additional CS-relevant faculty opening was verified.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 0 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Rechecked the current NDSU employment board and Computer Science pages, and checked the Electrical and Computer Engineering unit. The board lists current university positions, but its public rendering does not expose a reliable current CS/ECE requisition search; no additional CS-relevant faculty opening was verified.",
     "checkedUrls": [
       "https://www.ndsu.edu/computer-science",
       "https://www.ndsu.edu/employment",
@@ -6007,9 +6011,9 @@
     "facultyCount": 6,
     "jobsUrl": "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions?lastSelectedFacet=ORGANIZATIONS&mode=location&selectedOrganizationsFacet=300000014113612",
     "state": "ME",
-    "lastCheckedAt": "2026-10-14T03:25:29Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked the UMaine HR careers page, School of Computing and Information Science, and ECE pages. The Oracle careers portal still does not expose listings to the page reader; the only SCIS opening page found is for January 2025 and is stale. No current CS/ECE faculty role was verified.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 0 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Rechecked the UMaine HR careers page, School of Computing and Information Science, and ECE pages. The Oracle careers portal still does not expose listings to the page reader; the only SCIS opening page found is for January 2025 and is stale. No current CS/ECE faculty role was verified.",
     "checkedUrls": [
       "https://umaine.edu/cs/",
       "https://umaine.edu/hr/career-opportunities/",
@@ -6019,7 +6023,8 @@
       "https://umaine.edu/scis/",
       "https://umaine.edu/scis/current-position-openings/",
       "https://umaine.edu/mcec/electrical-computer-engineering/",
-      "https://umaine.edu/mcec/electrical-computer-engineering/faculty/"
+      "https://umaine.edu/mcec/electrical-computer-engineering/faculty/",
+      "https://fa-ewca-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions?lastSelectedFacet=ORGANIZATIONS&mode=location&selectedOrganizationsFacet=300000014113612"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -6078,9 +6083,9 @@
     "facultyCount": 5,
     "jobsUrl": "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers",
     "state": "LA",
-    "lastCheckedAt": "2026-10-14T04:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed the official Workday faculty board and College of Business employment page. Added the open Assistant Professor, College of Engineering and Science search (R-1829), which seeks MBSE or applied AI/ML expertise, is open until filled, and has a negotiable start date. The Computer Science R-1559 listing remains visible but specifies a September 2025 start, so it was not treated as a current opening. Two Computer Information Systems postings for Fall 2026 need detailed eligibility/status review; their official pages were recorded for follow-up.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Reviewed the official Workday faculty board and College of Business employment page. Added the open Assistant Professor, College of Engineering and Science search (R-1829), which seeks MBSE or applied AI/ML expertise, is open until filled, and has a negotiable start date. The Computer Science R-1559 listing remains visible but specifies a September 2025 start, so it was not treated as a current opening. Two Computer Information Systems postings for Fall 2026 need detailed eligibility/status review; their official pages were recorded for follow-up.",
     "checkedUrls": [
       "https://www.latech.edu/engineering-science/index.php/undergraduate-programs/computer-science/",
       "https://www.latech.edu/business/about/employment-opportunities.php",
@@ -6089,7 +6094,8 @@
       "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers/job/Assistant-Professor--College-of-Engineering-and-Science_R-1829",
       "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers/job/Assistant-Professor--Computer-Science_R-1559",
       "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers/details/CIS-Eminent-Scholar-Chair_R-1663",
-      "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers/details/Assistant-Professor--Computer-Information-Systems_R-1558"
+      "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers/details/Assistant-Professor--Computer-Information-Systems_R-1558",
+      "https://ulsltu.wd503.myworkdayjobs.com/en-US/LATECHCareers"
     ],
     "deferredUntil": null,
     "relatedUnits": [
@@ -6235,9 +6241,9 @@
     "facultyCount": 0,
     "jobsUrl": "https://careers.cpp.edu/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-14T03:49:04Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Official Cal Poly Pomona careers listing and CS, CIS, and ECE postings reviewed. Added the open CIS AI tenure-track position, ECE tenure-track search (two hires), and CS/CIS lecturer pools; marked the CS assistant professor posting closed after its Oct 11 close date. Other computing-adjacent unit pages still need review.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 4 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Official Cal Poly Pomona careers listing and CS, CIS, and ECE postings reviewed. Added the open CIS AI tenure-track position, ECE tenure-track search (two hires), and CS/CIS lecturer pools; marked the CS assistant professor posting closed after its Oct 11 close date. Other computing-adjacent unit pages still need review.",
     "checkedUrls": [
       "https://careers.cpp.edu/en-us/listing/",
       "https://careers.cpp.edu/po/en-us/job/559402/computer-science-assistant-professor",
@@ -6322,9 +6328,9 @@
     "facultyCount": 0,
     "jobsUrl": "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
     "state": "GA",
-    "lastCheckedAt": "2026-10-14T04:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked the official CCSE hiring page. It currently lists the CS department chair, Data Science and Analytics lecturer and open-rank professor, plus the CS postdoctoral researcher; the four existing records were refreshed. The page says IT and Software Engineering/Game Development have no openings. Also checked the ECE faculty unit page; its separate current hiring status was not established, so the crawl remains incomplete. Linked PeopleSoft requisitions redirect to sign-in.",
+    "summary": "2026-11-09 recheck: the CCSE jobs page and the four Kennesaw PeopleSoft postings returned HTTP 502 (upstream failure), so none could be confirmed live; lastSeenAt left unchanged. Retry soon. Earlier notes: Rechecked the official CCSE hiring page. It currently lists the CS department chair, Data Science and Analytics lecturer and open-rank professor, plus the CS postdoctoral researcher; the four existing records were refreshed. The page says IT and Software Engineering/Game Development have no openings. Also checked the ECE faculty unit page; its separate current hiring status was not established, so the crawl remains incomplete. Linked PeopleSoft requisitions redirect to sign-in.",
     "checkedUrls": [
       "https://ccse.kennesaw.edu/",
       "https://campus.kennesaw.edu/colleges-departments/ccse/about/jobs.php",
@@ -6425,9 +6431,9 @@
     "facultyCount": 0,
     "jobsUrl": "https://careers.sdsu.edu/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Verified three active tenure-track CS/computing searches and one active 2026/27 CS lecturer pool on the official CSU PageUp portal. CS, ECE, MIS and CS lecturer-pool listings checked; broader related-unit scan remains incomplete.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 4 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Verified three active tenure-track CS/computing searches and one active 2026/27 CS lecturer pool on the official CSU PageUp portal. CS, ECE, MIS and CS lecturer-pool listings checked; broader related-unit scan remains incomplete.",
     "checkedUrls": [
       "https://cs.sdsu.edu/",
       "https://careers.sdsu.edu/en-us/listing/",
@@ -6459,9 +6465,9 @@
     "facultyCount": 0,
     "jobsUrl": "https://www.scu.edu/belonging/inclusive-hiring-and-recruitment/current-faculty-openings-tenure-track/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-14T04:01:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked the official 2027–28 faculty openings page and verified the existing ECE Digital Systems and Robotics & AI roles plus a CS-eligible Information Systems and Analytics tenure-track search. Related ECE and ISA pages are recorded for future checks.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 3 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Rechecked the official 2027–28 faculty openings page and verified the existing ECE Digital Systems and Robotics & AI roles plus a CS-eligible Information Systems and Analytics tenure-track search. Related ECE and ISA pages are recorded for future checks.",
     "checkedUrls": [
       "https://www.scu.edu/belonging/inclusive-hiring-and-recruitment/current-faculty-openings-tenure-track/",
       "https://wd1.myworkdaysite.com/en-US/recruiting/scu/scu/job/Electrical-and-Computer-Engineering-Assistant-Professor---Robotics---AI_R7815",
@@ -17847,9 +17853,9 @@
     "region": "northamerica",
     "jobsUrl": "https://www.gvsu.edu/computing/employment-opportunites-31",
     "state": "MI",
-    "lastCheckedAt": "2026-10-14T04:20:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed the official College of Computing current openings and its AI Research and Innovation Institute page. The College of Computing open-rank professor search remains current, and the founding AI institute director/full professor posting is open until filled; its official Workday page is not text-renderable. The listed Affiliate Faculty posting could not be reviewed, so the broader scan remains incomplete.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 2 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Reviewed the official College of Computing current openings and its AI Research and Innovation Institute page. The College of Computing open-rank professor search remains current, and the founding AI institute director/full professor posting is open until filled; its official Workday page is not text-renderable. The listed Affiliate Faculty posting could not be reviewed, so the broader scan remains incomplete.",
     "checkedUrls": [
       "https://www.gvsu.edu/computing/employment-opportunites-31",
       "https://gvsu.wd1.myworkdayjobs.com/en-US/careers/job/Assistant-Associate-Full-Professor---College-of-Computing_R105083",
@@ -17941,9 +17947,9 @@
     "region": "northamerica",
     "jobsUrl": "https://www.hmc.edu/dean-of-faculty/available-faculty-positions/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-13T16:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Official faculty positions index and the Segal AI professorship announcement reviewed; the AI search remains open until filled (priority consideration Sept 22, 2026). CS/AI result added. Other adjacent computing units were not reviewed.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Official faculty positions index and the Segal AI professorship announcement reviewed; the AI search remains open until filled (priority consideration Sept 22, 2026). CS/AI result added. Other adjacent computing units were not reviewed.",
     "checkedUrls": [
       "https://www.hmc.edu/dean-of-faculty/available-faculty-positions/",
       "https://www.hmc.edu/dean-of-faculty/2026/08/06/jenna-and-paul-segal-endowed-professorship-of-artificial-intelligence/"
@@ -17967,9 +17973,9 @@
     "region": "northamerica",
     "jobsUrl": "https://provost.lafayette.edu/2027-28-ece-asst-prof/",
     "state": "PA",
-    "lastCheckedAt": "2026-10-13T16:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Official ECE tenure-track assistant/associate search reviewed; it includes computer architecture, cyber-physical systems, and embedded systems teaching and remains open. Posting added. No other adjacent computing units reviewed.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Official ECE tenure-track assistant/associate search reviewed; it includes computer architecture, cyber-physical systems, and embedded systems teaching and remains open. Posting added. No other adjacent computing units reviewed.",
     "checkedUrls": [
       "https://provost.lafayette.edu/2027-28-ece-asst-prof/"
     ],
@@ -18338,9 +18344,9 @@
     "region": "northamerica",
     "jobsUrl": "https://jobs.calpoly.edu/en-us/Search/?category=faculty+-+engineering&search-keyword=&subscribe=true&work-type=instructional+faculty+-+temporary%2Flecturer,instructional+faculty+%E2%80%93+tenured%2Ftenure-track",
     "state": "CA",
-    "lastCheckedAt": "2026-10-13T20:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Official Cal Poly faculty search and the Computer Science/Software Engineering and Computer Engineering postings reviewed; both live AY 2027–28 tenure-track assistant professor openings added. Other related academic-unit hiring pages were not fully reviewed.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 2 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Official Cal Poly faculty search and the Computer Science/Software Engineering and Computer Engineering postings reviewed; both live AY 2027–28 tenure-track assistant professor openings added. Other related academic-unit hiring pages were not fully reviewed.",
     "checkedUrls": [
       "https://jobs.calpoly.edu/en-us/Search/?category=faculty+-+engineering&search-keyword=&subscribe=true&work-type=instructional+faculty+-+temporary%2Flecturer,instructional+faculty+%E2%80%93+tenured%2Ftenure-track",
       "https://jobs.calpoly.edu/en-us/job/559542/assistant-professor-computer-science-and-software-engineering-ay-2728",
@@ -18369,9 +18375,9 @@
     "region": "northamerica",
     "jobsUrl": "https://careers.csusb.edu/sb/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Verified one active tenure-track CS assistant professor posting. CSE career listing checked; adjacent-unit hiring scan remains incomplete.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Verified one active tenure-track CS assistant professor posting. CSE career listing checked; adjacent-unit hiring scan remains incomplete.",
     "checkedUrls": [
       "https://www.csusb.edu/computer-science-engineering",
       "https://careers.csusb.edu/sb/en-us/listing/",
@@ -18534,9 +18540,9 @@
     "region": "northamerica",
     "jobsUrl": "https://employment.angelo.edu/postings/search?sort=225+desc",
     "state": "TX",
-    "lastCheckedAt": "2026-10-13T20:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Official employment search and Computer Science AI faculty posting F385P reviewed; one current tenure-track assistant professor opening added. Related academic units were not fully reviewed.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Official employment search and Computer Science AI faculty posting F385P reviewed; one current tenure-track assistant professor opening added. Related academic units were not fully reviewed.",
     "checkedUrls": [
       "https://employment.angelo.edu/postings/search?sort=225+desc",
       "https://employment.angelo.edu/postings/8179"
@@ -19121,9 +19127,9 @@
     "region": "northamerica",
     "jobsUrl": "https://appstate.peopleadmin.com/postings/search?commit=Search&query_position_type_id%5B%5D=3",
     "state": "NC",
-    "lastCheckedAt": "2026-10-13T20:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Official faculty job search and Lowe’s Tech distinguished cybersecurity professorship in Computer Information Systems reviewed; current associate/full-rank tenure-track opening added. Other computing-adjacent units were not fully reviewed.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Official faculty job search and Lowe’s Tech distinguished cybersecurity professorship in Computer Information Systems reviewed; current associate/full-rank tenure-track opening added. Other computing-adjacent units were not fully reviewed.",
     "checkedUrls": [
       "https://appstate.peopleadmin.com/postings/search?commit=Search&query_position_type_id%5B%5D=3",
       "https://appstate.peopleadmin.com/postings/55698"
@@ -19436,14 +19442,15 @@
     "region": "northamerica",
     "jobsUrl": "https://www.schooljobs.com/careers/bgsu/jobs/5503925-0/assistant-professor-of-business-analytics",
     "state": "OH",
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "No current CS-department posting found; verified an active tenure-track Business Analytics faculty search requiring a doctorate in data science or a related field and focused on data visualization or AI in business. CS and adjacent business analytics hiring pages reviewed; broader related-unit scan remains incomplete.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: No current CS-department posting found; verified an active tenure-track Business Analytics faculty search requiring a doctorate in data science or a related field and focused on data visualization or AI in business. CS and adjacent business analytics hiring pages reviewed; broader related-unit scan remains incomplete.",
     "checkedUrls": [
       "https://www.bgsu.edu/technology-architecture-and-applied-engineering/",
       "https://www.bgsu.edu/content/bgsu/en/arts-and-sciences/computer-science/faculty-and-staff.html",
       "https://www.bgsu.edu/content/bgsu/en/human-resources/careers.html",
-      "https://www.schooljobs.com/jobs/5503925-0/assistant-professor-of-business-analytics"
+      "https://www.schooljobs.com/jobs/5503925-0/assistant-professor-of-business-analytics",
+      "https://www.schooljobs.com/careers/bgsu/jobs/5503925-0/assistant-professor-of-business-analytics"
     ],
     "relatedUnits": [
       {
@@ -19770,9 +19777,9 @@
     "region": "northamerica",
     "jobsUrl": "https://csucareers.calstate.edu/en-us/job/557773/computer-science-parttime-lecturer-pool",
     "state": "CA",
-    "lastCheckedAt": "2026-10-14T04:01:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Verified a current ECE tenure-track assistant professor opening from the College employment page and refreshed the CS part-time pool. ECE is recorded as a related unit for rechecks.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 2 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Verified a current ECE tenure-track assistant professor opening from the College employment page and refreshed the CS part-time pool. ECE is recorded as a related unit for rechecks.",
     "checkedUrls": [
       "https://www.fullerton.edu/ecs/employment/",
       "https://csucareers.calstate.edu/en-us/job/557773/computer-science-parttime-lecturer-pool",
@@ -19904,9 +19911,9 @@
     "region": "northamerica",
     "jobsUrl": "https://careers.csusm.edu/cw/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-14T04:01:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "CS and related-unit review found an active Assistant Professor of Computer Information Systems search, existing cybersecurity and CSE pools, and a current ECE lecturer pool. ECE/Electrical Engineering pages were checked; continue the broader adjacent-unit scan next pass.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 4 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: CS and related-unit review found an active Assistant Professor of Computer Information Systems search, existing cybersecurity and CSE pools, and a current ECE lecturer pool. ECE/Electrical Engineering pages were checked; continue the broader adjacent-unit scan next pass.",
     "checkedUrls": [
       "https://www.csusm.edu/cs/",
       "https://careers.csusm.edu/cw/en-us/listing/",
@@ -20808,9 +20815,9 @@
     "region": "northamerica",
     "jobsUrl": "https://careers.humboldt.edu/hm/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Verified active AY 2026/27 Computer Science lecturer pool. CS hiring page checked; related-unit hiring scan remains incomplete.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Verified active AY 2026/27 Computer Science lecturer pool. CS hiring page checked; related-unit hiring scan remains incomplete.",
     "checkedUrls": [
       "https://www.humboldt.edu/computer-science",
       "https://careers.humboldt.edu/hm/en-us/listing/",
@@ -20830,9 +20837,9 @@
     "region": "northamerica",
     "jobsUrl": "https://www.schooljobs.com/careers/scf/jobs/5055587/instructional-faculty-computer-science",
     "state": "FL",
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Verified a continuously open full-time Computer Science instructional faculty position with networking and cybersecurity teaching requirements. STEM department and official career posting reviewed; adjacent-unit scan remains incomplete.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Verified a continuously open full-time Computer Science instructional faculty position with networking and cybersecurity teaching requirements. STEM department and official career posting reviewed; adjacent-unit scan remains incomplete.",
     "checkedUrls": [
       "https://www.scf.edu/academics/academic-departments/",
       "https://www.scf.edu/academics/academic-departments/science-technology-engineering-and-mathematics-stem/",
@@ -20852,9 +20859,9 @@
     "region": "northamerica",
     "jobsUrl": "https://www.schooljobs.com/careers/brockport/jobs/5468533-0/assistant-professor-computing-sciences",
     "state": "NY",
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Verified an active full-time tenure-track Computing Sciences assistant professor search for August 2027. Department and official careers posting reviewed; adjacent-unit scan remains incomplete.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Verified an active full-time tenure-track Computing Sciences assistant professor search for August 2027. Department and official careers posting reviewed; adjacent-unit scan remains incomplete.",
     "checkedUrls": [
       "https://www.brockport.edu/academics/computing-sciences/",
       "https://www.schooljobs.com/careers/brockport/jobs/5468533-0/assistant-professor-computing-sciences"
@@ -20899,9 +20906,9 @@
     "region": "northamerica",
     "jobsUrl": "https://jobs.concord.edu/postings/3418",
     "state": "WV",
-    "lastCheckedAt": "2026-10-14T00:00:00Z",
+    "lastCheckedAt": "2026-11-09T22:00:00Z",
     "outcome": "incomplete",
-    "summary": "Verified the live Computer Science faculty posting; related-unit scan remains incomplete.",
+    "summary": "2026-11-09 recheck: hiring page rendered; 1 existing posting(s) confirmed live (lastSeenAt updated); no new CS-relevant posting identified on the main hiring page. Related-unit scan not repeated this run. Earlier notes: Verified the live Computer Science faculty posting; related-unit scan remains incomplete.",
     "checkedUrls": [
       "https://www.concord.edu/academics/college-of-science-mathematics-and-health/department-of-mathematics-and-computer-science",
       "https://jobs.concord.edu/postings/3418"
