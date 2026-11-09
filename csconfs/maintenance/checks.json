@@ -12,13 +12,13 @@
       "proposals": []
     },
     "ACL": {
-      "lastCheckedAt": "2026-09-28T08:10:31.732Z",
+      "lastCheckedAt": "2026-11-08T20:04:52.954Z",
       "outcome": "not_found",
-      "summary": "ACL 2027 (Kyoto, Aug 17-22 2027) Important Dates section shows ARR submission deadline, commitment deadline, notification, and camera-ready all as TBA; matches the existing TBD deadline value. No new official facts to add.",
+      "summary": "ACL 2027 site confirms Kyoto, Aug 17-22 2027 and ARR deadline Jan 4 2027 (AoE); commitment and notification TBA. No change.",
       "checkedUrls": [
         "https://2027.aclweb.org/"
       ],
-      "deferredUntil": "2026-10-19T08:10:31.732Z",
+      "deferredUntil": "2026-11-29T20:04:52.954Z",
       "proposals": []
     },
     "CCC": {
@@ -74,31 +74,14 @@
       "proposals": []
     },
     "HotOS": {
-      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "lastCheckedAt": "2026-11-08T20:04:52.954Z",
       "outcome": "complete",
-      "summary": "HotOS XXI (May 24-26, 2027, Burghausen) confirmed; added paper submission deadline and author notification. No separate abstract deadline stated.",
+      "summary": "HotOS 2027 page confirms May 24-26 2027, Burghausen, deadline 2027-02-01 and notification 2027-04-09. No change; chairs not named on page.",
       "checkedUrls": [
         "https://sigops.org/s/conferences/hotos/2027/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "deadline",
-              "url": "https://sigops.org/s/conferences/hotos/2027/",
-              "evidence": "Paper/Panel Proposal Submission: February 1, 2027."
-            },
-            {
-              "field": "notificationDate",
-              "url": "https://sigops.org/s/conferences/hotos/2027/",
-              "evidence": "Author Notifications: April 9, 2027."
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "ICCV": {
       "lastCheckedAt": "2026-11-07T20:00:00.000Z",
@@ -432,22 +415,14 @@
       "proposals": []
     },
     "FAST": {
-      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
-      "outcome": "incomplete",
-      "summary": "FAST 2028 official page confirms Feb 28-Mar 1 2028 and Grand Hyatt Seattle; no deadlines or chairs yet. Note updated.",
+      "lastCheckedAt": "2026-11-08T20:04:52.954Z",
+      "outcome": "not_found",
+      "summary": "FAST 28 page confirms Feb 28-Mar 1 2028 and Grand Hyatt Seattle; no CFP, deadlines or chairs yet.",
       "checkedUrls": [
         "https://www.usenix.org/conference/fast28"
       ],
-      "deferredUntil": "2026-11-08T20:00:00.000Z",
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2028,
-          "sources": [
-            "https://www.usenix.org/conference/fast28"
-          ]
-        }
-      ]
+      "deferredUntil": "2026-11-29T20:04:52.954Z",
+      "proposals": []
     },
     "ICML": {
       "lastCheckedAt": "2026-11-01T20:00:00.000Z",
@@ -493,23 +468,14 @@
       "proposals": []
     },
     "SIGMOD": {
-      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
-      "outcome": "incomplete",
-      "summary": "SIGMOD 2028 not mentioned on sigmod.org or 2027.sigmod.org. SIGMOD 2027 official page states June 13-18, 2027 (record said 13-19); corrected.",
+      "lastCheckedAt": "2026-11-08T20:04:52.954Z",
+      "outcome": "not_found",
+      "summary": "sigmod.org lists SIGMOD/PODS 2027 as latest; no SIGMOD 2028 information published.",
       "checkedUrls": [
-        "https://sigmod.org/",
-        "https://2027.sigmod.org/"
+        "https://sigmod.org/"
       ],
-      "deferredUntil": "2026-11-08T20:00:00.000Z",
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            "https://2027.sigmod.org/"
-          ]
-        }
-      ]
+      "deferredUntil": "2026-11-29T20:04:52.954Z",
+      "proposals": []
     },
     "SOSP": {
       "lastCheckedAt": "2026-11-07T20:00:00.000Z",
@@ -604,23 +570,14 @@
       "proposals": []
     },
     "ICWSM": {
-      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
-      "outcome": "incomplete",
-      "summary": "ICWSM 2027 submit page confirms deadlines 2026-05-15, 2026-09-15, 2027-01-15 and notifications; conference dates and chairs not published.",
+      "lastCheckedAt": "2026-11-08T20:04:52.954Z",
+      "outcome": "not_found",
+      "summary": "ICWSM 2027 site names Edinburgh, Scotland; conference dates, deadlines and chairs not published there. Stored deadlines remain unverified by the page.",
       "checkedUrls": [
-        "https://www.icwsm.org/2027/",
-        "https://www.icwsm.org/2027/submit/"
+        "https://www.icwsm.org/2027/"
       ],
-      "deferredUntil": "2026-11-07T20:05:29.000Z",
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            "https://www.icwsm.org/2027/submit/"
-          ]
-        }
-      ]
+      "deferredUntil": "2026-11-29T20:04:52.954Z",
+      "proposals": []
     },
     "MICRO": {
       "lastCheckedAt": "2026-10-31T20:05:29.000Z",
@@ -1280,23 +1237,14 @@
       "proposals": []
     },
     "ESORICS": {
-      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
-      "outcome": "incomplete",
-      "summary": "ESORICS 2027 announced: Vienna, Sep 13-17, 2027 (main Sep 13-15). Deadlines and chairs not published.",
+      "lastCheckedAt": "2026-11-08T20:04:52.954Z",
+      "outcome": "not_found",
+      "summary": "ESORICS 2027 site confirms Sep 13-17 2027 (main Sep 13-15) at University of Vienna; no deadlines, notifications or chairs published. Record stays estimated/unverified.",
       "checkedUrls": [
-        "https://conf.laas.fr/esorics/",
         "https://www.esorics2027.org"
       ],
-      "deferredUntil": "2026-11-07T20:05:29.000Z",
-      "proposals": [
-        {
-          "action": "add",
-          "year": 2027,
-          "sources": [
-            "https://www.esorics2027.org"
-          ]
-        }
-      ]
+      "deferredUntil": "2026-11-29T20:04:52.954Z",
+      "proposals": []
     },
     "FOCS": {
       "lastCheckedAt": "2026-11-03T02:14:09.000Z",
@@ -2025,6 +1973,100 @@
           "year": 2027,
           "sources": [
             "https://fc27.ifca.ai/"
+          ]
+        }
+      ]
+    },
+    "FormaliSE": {
+      "lastCheckedAt": "2026-11-08T20:04:52.954Z",
+      "outcome": "incomplete",
+      "summary": "FormaliSE 2027: dates, Dublin, research paper deadline 2026-11-06 and notification 2027-01-11 confirmed. Abstract deadline 2026-10-30 not stated on the page; chair names not shown (emails only). No change.",
+      "checkedUrls": [
+        "https://2027.formalise.org/"
+      ],
+      "deferredUntil": "2026-11-15T20:04:52.954Z",
+      "proposals": []
+    },
+    "FPGA": {
+      "lastCheckedAt": "2026-11-08T20:04:52.954Z",
+      "outcome": "incomplete",
+      "summary": "FPGA 2027 page: March 14-16 2027, abstracts Oct 1, papers Oct 8 confirmed; page lists two sets of rebuttal/notification dates (original and apparently revised) without saying which is current, so those were left unchanged. Chairs match.",
+      "checkedUrls": [
+        "https://www.isfpga.org/"
+      ],
+      "deferredUntil": "2026-11-15T20:04:52.954Z",
+      "proposals": [
+        {
+          "action": "update-date",
+          "year": 2027,
+          "sources": [
+            "https://www.isfpga.org/"
+          ]
+        }
+      ]
+    },
+    "GECCO": {
+      "lastCheckedAt": "2026-11-08T20:04:52.954Z",
+      "outcome": "incomplete",
+      "summary": "Official GECCO 2027 site returned only a bot-verification page; nothing verified.",
+      "checkedUrls": [
+        "https://gecco-2027.sigevo.org/HomePage",
+        "https://gecco-2027.sigevo.org/"
+      ],
+      "deferredUntil": "2026-11-15T20:04:52.954Z",
+      "proposals": []
+    },
+    "HPCA": {
+      "lastCheckedAt": "2026-11-08T20:04:52.954Z",
+      "outcome": "incomplete",
+      "summary": "Official HPCA 2027 pages returned empty content to the fetcher; nothing verified.",
+      "checkedUrls": [
+        "https://hpca-conf.org/2027/",
+        "https://hpca-conf.org/2027/main-program/"
+      ],
+      "deferredUntil": "2026-11-15T20:04:52.954Z",
+      "proposals": []
+    },
+    "ICAPS": {
+      "lastCheckedAt": "2026-11-08T20:04:52.954Z",
+      "outcome": "incomplete",
+      "summary": "ICAPS 2027 page confirms Columbia SC, Jun 27-Jul 2 2027, abstract 2026-12-07, paper 2026-12-14, notification 2027-02-26. Rebuttal dates and chairs not shown on the page; stored rebuttal unverified.",
+      "checkedUrls": [
+        "https://icaps27.icaps-conference.org/"
+      ],
+      "deferredUntil": "2026-11-15T20:04:52.954Z",
+      "proposals": []
+    },
+    "ICDAR": {
+      "lastCheckedAt": "2026-11-09T16:30:00.000Z",
+      "outcome": "complete",
+      "summary": "ICDAR 2027 (Aug 18-22 2027, Kuala Lumpur, Malaysia). Auditor: official Important Dates page gives abstract 2027-02-26, full paper 2027-03-05, rebuttal deadline 2027-04-27, notification 2027-05-15; program chairs from the Call for Papers. Record verified.",
+      "checkedUrls": [
+        "https://icdar2027.org/",
+        "https://icdar2027.org/important-dates",
+        "https://icdar2027.org/call-for-papers"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update-place",
+          "year": 2027,
+          "sources": [
+            "https://icdar2027.org/"
+          ]
+        },
+        {
+          "action": "update-dates",
+          "year": 2027,
+          "sources": [
+            "https://icdar2027.org/important-dates"
+          ]
+        },
+        {
+          "action": "update-chairs",
+          "year": 2027,
+          "sources": [
+            "https://icdar2027.org/call-for-papers"
           ]
         }
       ]
