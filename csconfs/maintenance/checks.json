@@ -2038,14 +2038,15 @@
       "proposals": []
     },
     "ICDAR": {
-      "lastCheckedAt": "2026-11-08T20:04:52.954Z",
-      "outcome": "incomplete",
-      "summary": "ICDAR 2027 site states Aug 18-22 2027 in Kuala Lumpur, Malaysia (place added). Submission deadline and notification not on the site, so the record is set estimated/unverified.",
+      "lastCheckedAt": "2026-11-09T16:30:00.000Z",
+      "outcome": "complete",
+      "summary": "ICDAR 2027 (Aug 18-22 2027, Kuala Lumpur, Malaysia). Auditor: official Important Dates page gives abstract 2027-02-26, full paper 2027-03-05, rebuttal deadline 2027-04-27, notification 2027-05-15; program chairs from the Call for Papers. Record verified.",
       "checkedUrls": [
         "https://icdar2027.org/",
-        "https://icdar2027.org/important-dates/"
+        "https://icdar2027.org/important-dates",
+        "https://icdar2027.org/call-for-papers"
       ],
-      "deferredUntil": "2026-11-15T20:04:52.954Z",
+      "deferredUntil": null,
       "proposals": [
         {
           "action": "update-place",
@@ -2055,10 +2056,17 @@
           ]
         },
         {
-          "action": "mark-estimated",
+          "action": "update-dates",
           "year": 2027,
           "sources": [
-            "https://icdar2027.org/"
+            "https://icdar2027.org/important-dates"
+          ]
+        },
+        {
+          "action": "update-chairs",
+          "year": 2027,
+          "sources": [
+            "https://icdar2027.org/call-for-papers"
           ]
         }
       ]

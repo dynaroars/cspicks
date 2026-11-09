@@ -43826,17 +43826,17 @@
     "seriesLink": "https://icdar2027.org/",
     "date": "August 18-22, 2027",
     "place": "Kuala Lumpur, Malaysia",
-    "abstractDeadline": null,
-    "deadline": "2027-02-28",
-    "rebuttalDate": null,
+    "abstractDeadline": "2027-02-26",
+    "deadline": "2027-03-05",
+    "rebuttalDate": "2027-04-27",
     "notificationDate": "2027-05-15",
     "note": null,
     "generalChair": null,
-    "programChair": null,
+    "programChair": "Shivakumara Palaiahnakote, Jean-Christophe Burie, Lianwen Jin",
     "acceptanceRate": null,
     "submissions": null,
-    "estimated": true,
-    "verified": false
+    "estimated": false,
+    "verified": true
   },
   {
     "name": "ICDAR",
