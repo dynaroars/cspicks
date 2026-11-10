@@ -9,7 +9,7 @@ import { createSearchControls, focusSearchOnLoad, renderSearchExamples as render
 import { parseKeywordQuery } from './search-keywords.js';
 import { clearSearchSections, createDblpAuthorSearch, filterSearchRecords, initSearchResults, searchAreaPeople, searchProfessorByAffiliation, searchProfessors, searchSchools, showDefaultRankings } from './search-results.js';
 import { SITE_NAME, updatePageMeta } from './seo.js';
-import { areaLabels, cleanName, countryFlag, escapeHtml, getConferenceLabel, getInstitutionShortName } from './shared.js';
+import { areaLabels, cleanName, countryFlagEmoji, escapeHtml, getConferenceLabel, getInstitutionShortName } from './shared.js';
 import { rankSuggestions } from './suggestion-box.js';
 import { initTooltipPositioning } from './tooltip-position.js';
 import type { AnalysisTarget } from './analysis.js';
@@ -686,7 +686,7 @@ function searchSources({ appData, confSet }: Context): Record<string, Suggestion
   Object.entries(schoolAliases).forEach(([alias, school]) => aliases.set(school, [...(aliases.get(school) || []), alias]));
   return {
     school: Object.values(appData.schools).map(school => ({
-      kind: 'school', label: school.name, value: school.name, flag: countryFlag(school.country, school.countryName),
+      kind: 'school', label: school.name, value: school.name, flag: countryFlagEmoji(school.country),
       detail: Number.isFinite(school.rank) ? `University · #${school.rank}` : 'University',
       searchTerms: (aliases.get(school.name) || []).join(' '), target: { type: 'school', name: school.name }
     })),

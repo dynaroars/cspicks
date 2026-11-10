@@ -89,6 +89,9 @@ test('suggestions list every match and complete the second side of a vs query', 
   await page.locator('#main-search').fill('George Mason University vs Univ');
   const option = listbox.locator('.search-suggestion', { hasText: 'Univ. of Illinois' });
   await expect(option).toBeVisible();
+  // Suggestion rows render as text: the flag is an emoji, never raw <img> markup.
+  await expect(option).toContainText('🇺🇸 Univ. of Illinois');
+  await expect(listbox).not.toContainText('<img');
   await expect(page.locator('#comparison-results')).toBeVisible();
   await option.click();
   await expect(page.locator('#main-search')).toHaveAttribute('data-query', 'George Mason University vs Univ. of Illinois at Urbana-Champaign');

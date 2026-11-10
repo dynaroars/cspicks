@@ -291,6 +291,13 @@ export function countryFlag(countryCode: unknown, countryName = '') {
   return `<img class="country-flag" src="${CSRANKINGS_FLAGS}/${code}.png" alt="${label}" title="${label}" width="16" height="11" loading="lazy" decoding="async">`;
 }
 
+/** Plain-text emoji flag (regional indicators) for places that render text only, e.g. suggestion rows. */
+export function countryFlagEmoji(countryCode: unknown) {
+  const code = String(countryCode || '').toUpperCase();
+  if (!/^[A-Z]{2}$/.test(code)) return '';
+  return String.fromCodePoint(...[...code].map(c => 0x1F1E6 + c.charCodeAt(0) - 65));
+}
+
 /**
  * A display-only friendly name. The CSRankings spelling remains the key for
  * every lookup, join, and URL; this is only what a reader sees.

@@ -11,6 +11,7 @@ export interface SuggestionItem {
   query?: string;
   detail: string;
   searchTerms?: string;
+  /** Plain-text prefix (an emoji flag); the shared kit renders labels as text, never HTML. */
   flag?: string;
   target?: { type: 'school' | 'researcher', name: string };
   type?: string;
@@ -68,7 +69,7 @@ export function createSuggestionBox({ input, listbox, getGroups, onSelect, onCha
         label,
         total: group.total,
         items: group.items.map(item => {
-          const shared = { label: `${item.flag || ''}${item.label}`, detail: item.detail };
+          const shared = { label: item.flag ? `${item.flag} ${item.label}` : item.label, detail: item.detail };
           originals.set(shared, item);
           return shared;
         })
