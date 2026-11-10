@@ -10102,14 +10102,15 @@
     "deadline": null,
     "rolling": true,
     "startDate": "2027-08-15",
-    "lastSeenAt": "2026-11-09",
+    "lastSeenAt": "2026-10-14",
     "url": "https://gvsu.wd1.myworkdayjobs.com/en-US/careers/job/Assistant-Associate-Full-Professor---College-of-Computing_R105083",
     "visaSponsorship": "not-stated",
     "summary": "Tenured or tenure-track open rank faculty position in the College of Computing joining Winter or Fall 2027. Specializations preferred in AI, cybersecurity, software engineering, and human-centered design. Review begins October 19, 2026 until filled.",
     "source": "crawl",
     "verified": true,
     "country": "US",
-    "addedAt": "2026-10-13"
+    "addedAt": "2026-10-13",
+    "closedAt": "2026-11-10"
   },
   {
     "id": "tamiu-cs-assistant-prof-ai-2027",
