@@ -489,26 +489,15 @@
       "proposals": []
     },
     "ICDE": {
-      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
       "outcome": "complete",
-      "summary": "ICDE 2027 official site: Copenhagen, May 17-21 2027; round 1 deadline Jun 11 2026. Cycle 1 record had the wrong link (icde.github.io) and date 2027-05-04; corrected to match cycle 2.",
+      "summary": "ICDE 2027 official pages confirm Copenhagen May 17-21 2027; round 2 deadline Nov 11 2026, notification Feb 10 2027 (approximate). Matches data.",
       "checkedUrls": [
-        "https://icde2027.github.io/"
+        "https://icde2027.github.io/",
+        "https://icde2027.github.io/important-dates.html"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://icde2027.github.io/",
-              "evidence": "43rd ICDE, Copenhagen, Denmark, May 17-21, 2027."
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "NSDI": {
       "lastCheckedAt": "2026-10-06T20:16:29.176Z",
@@ -1645,13 +1634,13 @@
       "proposals": []
     },
     "SDM": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
       "outcome": "incomplete",
-      "summary": "siam.org blocks automated access; domain-restricted search found no SDM27 page. Needs manual check.",
+      "summary": "siam.org returned HTTP 403 for the SDM 2027 page; nothing verified. No change.",
       "checkedUrls": [
         "https://www.siam.org/conferences-events/siam-conferences/sdm27/"
       ],
-      "deferredUntil": "2026-11-10T02:14:09.000Z",
+      "deferredUntil": "2026-11-17T20:05:19.265Z",
       "proposals": []
     },
     "SEAMS": {
@@ -1748,13 +1737,13 @@
       "proposals": []
     },
     "PPSN": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "incomplete",
-      "summary": "PPSN is biennial (even years); next would be 2028. Series site unreachable; no official 2028 info found via search.",
+      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
+      "outcome": "not_found",
+      "summary": "ppsn-conference.org not reachable from the session network (host does not resolve); no next edition confirmed. No change.",
       "checkedUrls": [
         "https://ppsn-conference.org/"
       ],
-      "deferredUntil": "2026-11-10T02:14:09.000Z",
+      "deferredUntil": "2026-12-01T20:05:19.265Z",
       "proposals": []
     },
     "AAMAS": {
@@ -2070,6 +2059,110 @@
           ]
         }
       ]
+    },
+    "ICDT": {
+      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
+      "outcome": "complete",
+      "summary": "ICDT 2027 page confirms Lille, Apr 6-9 2027 and both cycles (abstract/paper/notification). Matches data.",
+      "checkedUrls": [
+        "https://databasetheory.org/node/154"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "ICFP": {
+      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
+      "outcome": "complete",
+      "summary": "ICFP 2027 site confirms Nijmegen, Sep 26-Oct 1 2027, deadline Feb 25 2027, final notification Jun 11 2027. Matches data.",
+      "checkedUrls": [
+        "https://icfp27.sigplan.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "ICLR": {
+      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
+      "outcome": "complete",
+      "summary": "ICLR 2027 site confirms Apr 26-30 2027, San Francisco, abstract Sep 18, paper Sep 25, decisions Dec 16 2026. Matches data.",
+      "checkedUrls": [
+        "https://iclr.cc/Conferences/2027"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "ICSA": {
+      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
+      "outcome": "complete",
+      "summary": "ICSA 2027 pages confirm Sydney, Mar 8-12 2027, abstract Oct 30, paper Nov 4, notification Dec 15 2026. Matches data.",
+      "checkedUrls": [
+        "https://conf.researchr.org/home/icsa-2027",
+        "https://conf.researchr.org/dates/icsa-2027"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "IEEE S&P": {
+      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
+      "outcome": "complete",
+      "summary": "S&P 2027 CFP confirms Montreal, May 17-20 2027 and both cycles. Matches data.",
+      "checkedUrls": [
+        "https://sp2027.ieee-security.org/cfpapers.html"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "INFOCOM": {
+      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
+      "outcome": "incomplete",
+      "summary": "infocom2027.ieee-infocom.org returned HTTP 503 on two pages; nothing verified. No change.",
+      "checkedUrls": [
+        "https://infocom2027.ieee-infocom.org/",
+        "https://infocom2027.ieee-infocom.org/authors/call-papers"
+      ],
+      "deferredUntil": "2026-11-17T20:05:19.265Z",
+      "proposals": []
+    },
+    "Interspeech": {
+      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
+      "outcome": "complete",
+      "summary": "Interspeech 2027 site confirms São Paulo, Aug 29-Sep 2 2027, paper deadline Feb 9 2027, notification Jun 2 2027. Matches data (venue name not stated on the page).",
+      "checkedUrls": [
+        "https://interspeech2027.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "IPDPS": {
+      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
+      "outcome": "incomplete",
+      "summary": "IPDPS 2027 site confirms Jun 1-5 2027, Seattle, abstract Oct 1, paper Oct 8 2026; notification date not stated. Place trimmed to city per playbook.",
+      "checkedUrls": [
+        "https://www.ipdps.org/"
+      ],
+      "deferredUntil": "2026-11-17T20:05:19.265Z",
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            {
+              "field": "place",
+              "url": "https://www.ipdps.org/",
+              "evidence": "Seattle, USA; venue hotel Hyatt Regency Bellevue (venue name removed from place field)."
+            }
+          ]
+        }
+      ]
+    },
+    "ISCA": {
+      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
+      "outcome": "complete",
+      "summary": "ISCA 2027 site confirms Atlanta, Jun 5-9 2027, abstract Nov 9, paper Nov 16 2026, rebuttal Feb 16-Mar 8, notification Mar 26 2027. Matches data.",
+      "checkedUrls": [
+        "https://iscaconf.org/isca2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
     }
   }
 }
