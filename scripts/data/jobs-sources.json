@@ -17268,13 +17268,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department site returned HTTP 502 through the egress proxy on 2026-11-10; no hiring page read. Retry later.",
+    "checkedUrls": [
+      "https://jsj.gzhu.edu.cn/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "HEC Montreal",
@@ -17284,10 +17286,13 @@
     "region": "northamerica",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Found official jobs hub https://www.hec.ca/emplois-jobopenings/index.html (faculty listing link not read this run); no IT-department posting verified. Next run: read the faculty openings list.",
+    "checkedUrls": [
+      "https://www.hec.ca/en/it/",
+      "https://www.hec.ca/emplois-jobopenings/index.html"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -17300,13 +17305,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "blocked",
+    "summary": "School page returned HTTP 503 on 2026-11-10; no hiring page read.",
+    "checkedUrls": [
+      "http://iacs.res.in/School-of-Mathematical-Computational-Sciences"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "IIT (ISM) Dhanbad",
@@ -17316,13 +17323,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "blocked",
+    "summary": "Site unreachable through the proxy (tunnel connection failed) on 2026-11-10.",
+    "checkedUrls": [
+      "https://cse.iitism.ac.in/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Inner Mongolia University",
@@ -17332,13 +17341,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "not_found",
+    "summary": "Department homepage loaded but no hiring/recruitment link was found by the link scan on 2026-11-10; retry with the university HR site.",
+    "checkedUrls": [
+      "https://ccs.imu.edu.cn/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Institut Polytechnique de Paris",
@@ -17348,13 +17359,15 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "not_found",
+    "summary": "cs.ip-paris.fr loaded but no hiring page link found on 2026-11-10; check IP Paris recruitment pages next time.",
+    "checkedUrls": [
+      "https://cs.ip-paris.fr/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Islamic University of Technology",
@@ -17364,13 +17377,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "not_found",
+    "summary": "Department homepage loaded; no hiring page found on 2026-11-10 (only an events link).",
+    "checkedUrls": [
+      "https://cse.iutoic-dhaka.edu/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Istanbul University-Cerrahpaşa",
@@ -17380,13 +17395,15 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "not_found",
+    "summary": "Department page loaded; no hiring link found on 2026-11-10.",
+    "checkedUrls": [
+      "https://bilgisayarmuhendislik.iuc.edu.tr/en"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Jagiellonian University",
@@ -17396,13 +17413,15 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "not_found",
+    "summary": "Faculty homepage loaded; no hiring link found on 2026-11-10; try the university job-offers pages.",
+    "checkedUrls": [
+      "https://ii.uj.edu.pl/en_GB/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Jahangirnagar University",
@@ -17410,12 +17429,16 @@
     "facultyCount": 0,
     "country": "BD",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://jobs.juniv.edu/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "complete",
+    "summary": "Official portal https://jobs.juniv.edu/ read on 2026-11-10: 13 open posts (lecturers in Geological Sciences, Physics, Government and Politics, Geography, English, Archaeology, school/college posts); no CSE or computing post; recheck in 3 weeks.",
+    "checkedUrls": [
+      "https://juniv.edu/department/cse",
+      "https://jobs.juniv.edu/",
+      "https://jobs.juniv.edu/jobs"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -17428,13 +17451,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department site returned HTTP 502 on 2026-11-10; nothing read.",
+    "checkedUrls": [
+      "https://kuet.ac.bd/department/CSE/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Nagoya University",
@@ -17461,12 +17486,18 @@
     "facultyCount": 0,
     "country": "GB",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://jobs.ncl.ac.uk/",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "complete",
+    "summary": "Read jobs.ncl.ac.uk searches for \"computing\", \"School of Computing\" and \"lecturer\" on 2026-11-10: no computer science or computing faculty post open (only unrelated health/data-science research and clinical posts); recheck in 3 weeks.",
+    "checkedUrls": [
+      "https://www.ncl.ac.uk/computing/",
+      "https://www.ncl.ac.uk/vacancies/",
+      "https://jobs.ncl.ac.uk/search/?q=computing",
+      "https://jobs.ncl.ac.uk/search/?q=School+of+Computing",
+      "https://jobs.ncl.ac.uk/search/?q=lecturer"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -17479,13 +17510,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "not_found",
+    "summary": "Department page loaded (departments.nitj.ac.in) but no hiring link found on 2026-11-10.",
+    "checkedUrls": [
+      "https://www.nitj.ac.in/cse/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Open University NL",
@@ -17495,13 +17528,15 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "not_found",
+    "summary": "Research-area page loaded; no faculty vacancy page found on 2026-11-10.",
+    "checkedUrls": [
+      "https://www.ou.nl/en/onderzoeksgebied-informatica-promoveren"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Pabna Univ. of Science and Technology",
@@ -17509,12 +17544,15 @@
     "facultyCount": 0,
     "country": "BD",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://pust.ac.bd/notices/job",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Official job-notice list https://pust.ac.bd/notices/job shows a Teacher Recruitment Circular dated 2026-09-01 (PDF, not read; unknown whether CSE is included). No post added.",
+    "checkedUrls": [
+      "https://pust.ac.bd/academic/departments/dept_teachers/D01",
+      "https://pust.ac.bd/notices/job"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -17527,13 +17565,15 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "not_found",
+    "summary": "DAUIN homepage loaded with no hiring link; the guessed recruitment URL returned 404 on 2026-11-10.",
+    "checkedUrls": [
+      "https://www.dauin.polito.it/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Rajshahi Univ. of Eng. & Technology",
@@ -17543,13 +17583,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department site returned HTTP 502 on 2026-11-10; nothing read.",
+    "checkedUrls": [
+      "https://www.cse.ruet.ac.bd/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Southwest University",
@@ -17559,13 +17601,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "not_found",
+    "summary": "Department homepage loaded; no hiring link found on 2026-11-10.",
+    "checkedUrls": [
+      "http://cis.swu.edu.cn/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "SRM Inst. of Science and Tech.",
@@ -17575,13 +17619,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "blocked",
+    "summary": "Site returned HTTP 403 on 2026-11-10; marked blocked, no workaround attempted.",
+    "checkedUrls": [
+      "https://www.srmist.edu.in/department/department-of-computational-intelligence/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Swinburne University of Technology",
@@ -17589,12 +17635,15 @@
     "facultyCount": 0,
     "country": "AU",
     "region": "australasia",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.swinburne.edu.au/careers-at-swinburne",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Department URL in the row 404s; official https://www.swinburne.edu.au/careers-at-swinburne found (job search not read; site reports intermittent outages). No post added.",
+    "checkedUrls": [
+      "https://www.swinburne.edu.au/engineering/departments/computing-technologies/",
+      "https://www.swinburne.edu.au/careers-at-swinburne"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -17607,13 +17656,15 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "not_found",
+    "summary": "Department homepage loaded; no hiring link found on 2026-11-10.",
+    "checkedUrls": [
+      "https://ccst.tyut.edu.cn/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "TU Crete",
@@ -17623,13 +17674,15 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "not_found",
+    "summary": "ECE homepage loaded with no hiring link; guessed recruitment URL not confirmed on 2026-11-10.",
+    "checkedUrls": [
+      "https://www.ece.tuc.gr/en/home"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "UFC",
@@ -17639,13 +17692,15 @@
     "region": "southamerica",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department site returned HTTP 502 on 2026-11-10; nothing read.",
+    "checkedUrls": [
+      "https://dc.ufc.br/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Université de Mons",
@@ -17655,13 +17710,15 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department site returned HTTP 502 on 2026-11-10; nothing read.",
+    "checkedUrls": [
+      "https://web.umons.ac.be/fs-informatique/en/home/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Université Paris Cité",
@@ -17671,13 +17728,15 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-10T23:30:00Z",
+    "outcome": "blocked",
+    "summary": "Department site returned HTTP 503 on 2026-11-10; nothing read.",
+    "checkedUrls": [
+      "https://math-info.u-paris.fr/en/homepage/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "University of Chittagong",
