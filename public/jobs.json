@@ -14934,7 +14934,8 @@
     "summary": "Two-year postdoc researching memory, reasoning/control, and tool-integrated computation for reliable long-horizon AI agents. Requires a PhD (completed or near completion) in ML, CS, math, statistics or related field.",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-15"
+    "addedAt": "2026-10-15",
+    "closedAt": "2026-11-11"
   },
   {
     "id": "microsoft-research-research-intern-security-research-group-microsoft-2026",
@@ -14953,7 +14954,7 @@
     "deadline": null,
     "rolling": true,
     "postedDate": "2026-10-01",
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://apply.careers.microsoft.com/careers/job/1970393557022480",
     "visaSponsorship": "not-stated",
     "summary": "12-week research internship on secure and trustworthy systems (confidential computing, formal verification, zero-knowledge proofs, agentic security). Requires current enrollment in a doctoral program in CS/STEM plus two reference letters.",
@@ -14977,7 +14978,7 @@
     "deadline": null,
     "rolling": false,
     "postedDate": "2026-09-25",
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://apply.careers.microsoft.com/careers/job/1970393557008574",
     "visaSponsorship": "not-stated",
     "summary": "12-week research internship on cloud data platforms, query processing/optimization, data lakes, and AI-agent interaction with data systems. Requires being accepted to or enrolled in a CS/STEM PhD program; two reference letters.",
@@ -15009,7 +15010,8 @@
     "summary": "Full-time researcher building scalable program/systems verification and automated reasoning tools (e.g., SMT solvers) integrated with AI coding agents. Requires a doctorate (or Master's/Bachelor's plus research experience); PhD in SE/PL/automated reasoning preferred.",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-15"
+    "addedAt": "2026-10-15",
+    "closedAt": "2026-11-11"
   },
   {
     "id": "google-research-staff-research-scientist-google-research-2026",
@@ -15191,7 +15193,7 @@
     "country": "FR",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://www.metacareers.com/profile/job_details/1705253033983509",
     "visaSponsorship": "not-stated",
     "summary": "FAIR postdoc on fundamental generative-model research (data efficiency, continual learning) for large language models. Requires holding or pursuing a PhD in CS/math or similar and hands-on foundation-model training experience.",
@@ -15215,7 +15217,7 @@
     "city": "Menlo Park",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://www.metacareers.com/profile/job_details/1647169276484472",
     "visaSponsorship": "not-stated",
     "summary": "Research scientist on video generation and post-training of large multimodal models within FAIR. Requires a PhD (or equivalent) in CS/EE and a publication record; Menlo Park, Seattle, or New York.",
@@ -15239,7 +15241,7 @@
     "city": "Menlo Park",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://www.metacareers.com/profile/job_details/2709819839377555",
     "visaSponsorship": "not-stated",
     "summary": "Designs and builds evaluations and benchmarks for frontier AI models in Meta Superintelligence Labs. Requires a PhD in CS/ML or related and 3+ years of ML engineering or research.",
@@ -15264,7 +15266,7 @@
     "city": "Menlo Park",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://www.metacareers.com/profile/job_details/1062032900196411",
     "visaSponsorship": "not-stated",
     "summary": "12-24 week research internship on software/hardware co-design and optimization of datacenter-scale AI training and inference. Requires a PhD (in progress or completed) in CS or related STEM field; must return to degree program afterwards.",
@@ -15867,7 +15869,7 @@
     "city": "Cambridge",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://jobs.lever.co/tri/7766f9bc-b7fe-4a38-86b0-bd823f7ef6db",
     "visaSponsorship": "not-stated",
     "summary": "Year-long postdoc/fellowship on ML for human-robot interaction and collaboration with robot foundation models, aimed at publications (ICRA, CVPR, NeurIPS, HRI); suits those heading to faculty roles or faculty on sabbatical. PhD in ML/AI, robotics, human-centric AI, or CV by the end date.",
@@ -15897,7 +15899,8 @@
     "summary": "Postdoc developing post-training, RL, and continual-adaptation methods for pretrained generative robot policies, validated in simulation and on real robots. PhD in robotics, ML, CS or related field completed by start of appointment; pay $136,800-$196,650 (MA).",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-15"
+    "addedAt": "2026-10-15",
+    "closedAt": "2026-11-11"
   },
   {
     "id": "toyota-research-institute-human-centered-ai-research-intern-causal-reasoning-2026",
@@ -15916,7 +15919,7 @@
     "city": "Los Altos",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://jobs.lever.co/tri/6433edb6-76be-409f-9a73-9b9d9c207f9f",
     "visaSponsorship": "not-stated",
     "summary": "Paid 12-week Winter 2027 hybrid PhD research internship studying and improving causal reasoning in LLMs, targeting venues like NeurIPS/ICML/ICLR/ACL. Must be a PhD student in AI/ML, CS, data science, statistics or related field with causal-inference research experience.",
@@ -15941,7 +15944,7 @@
     "city": "Los Altos",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://jobs.lever.co/tri/68c7cb5b-c6ce-4cc0-b43b-b262253b0915",
     "visaSponsorship": "not-stated",
     "summary": "Senior researcher building end-to-end, pixels-to-action automated-driving models using diffusion policy and large behavior models, with a TRI/Woven by Toyota collaboration. PhD or equivalent experience in a robotics/embodied-AI field.",
@@ -16302,7 +16305,7 @@
     "city": "Woburn",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://job-boards.greenhouse.io/systemstechnologyresearch/jobs/4679177006",
     "visaSponsorship": "no",
     "summary": "Lead development of AI/ML algorithms for signals exploitation, tracking, and resource management, and lead project teams. Requires a PhD with 5+ years of experience or an MS with 8+ years; must be able to obtain a security clearance (U.S. citizenship needed); onsite in Woburn MA.",
@@ -16326,7 +16329,7 @@
     "city": "Woburn",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://job-boards.greenhouse.io/systemstechnologyresearch/jobs/4679820006",
     "visaSponsorship": "no",
     "summary": "Develop deep-learning algorithms for signals exploitation, time-series, and geospatial data, and participate on project teams. Requires a PhD, an MS with 3 years, or a BS with 5 years of experience in a scientific field; must be able to obtain a security clearance (U.S. citizenship needed); onsite in Woburn MA.",
@@ -16356,7 +16359,8 @@
     "summary": "Lead research teams applying state-of-the-art machine learning to networking and communications problems, from edge to network core. Requires a PhD with 5+ years, an MS with 10+, or a BS with 12+ years of experience; must be able to obtain a security clearance (U.S. citizenship needed).",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-15"
+    "addedAt": "2026-10-15",
+    "closedAt": "2026-11-11"
   },
   {
     "id": "str-summer-2027-internship-opportunities-resume-inform-2026",
@@ -16371,7 +16375,7 @@
     "city": "Woburn",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://job-boards.greenhouse.io/systemstechnologyresearch/jobs/4710964006",
     "visaSponsorship": "no",
     "summary": "General Summer 2027 internship intake across the Sensors, Intelligence, Cyber, Analytics & C2, and Systems teams, open to BS, MS, and Ph.D. students with an interest in research. Sites are Woburn MA, Arlington VA, Melbourne FL, San Diego CA, and Dayton OH; interns must be able to obtain a security clearance (U.S. citizenship).",
@@ -16569,7 +16573,8 @@
     "summary": "Named fellowship for one postdoc conducting independent research in computational mathematics, scientific computing, computer science, data science, or AI for science. Requires a PhD in applied/computational math, CS, data science, or related field; up to two years.",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-15"
+    "addedAt": "2026-10-15",
+    "closedAt": "2026-11-11"
   },
   {
     "id": "llnl-machine-learning-postdoctoral-researcher-2026",
@@ -16593,7 +16598,8 @@
     "summary": "Postdoc doing fundamental ML and statistical-methods R&D for AI safety and security, scientific foundation models, and uncertainty quantification for deep learning. Requires a recent PhD in ML, optimization, CS, math, or related field.",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-15"
+    "addedAt": "2026-10-15",
+    "closedAt": "2026-11-11"
   },
   {
     "id": "llnl-computing-graduate-student-intern-summer-2027-2026",
@@ -16611,7 +16617,7 @@
     "deadline": "2027-01-15",
     "rolling": false,
     "startDate": "2027-05-17",
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://www.llnl.gov/join-our-team/careers/find-your-job/all/all/3743990014982439",
     "visaSponsorship": "not-stated",
     "summary": "Summer 2027 graduate research internships in computational science, cyber defense, computer science, numerical methods, and math with LLNL staff. Must be enrolled in a graduate program (CS, math, data science, ML, cybersecurity, or related) by Fall 2027.",
@@ -16635,7 +16641,7 @@
     "city": "Livermore",
     "deadline": "2027-01-15",
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://www.llnl.gov/join-our-team/careers/find-your-job/all/all/3743990015737586",
     "visaSponsorship": "not-stated",
     "summary": "Summer 2027 Data Science Summer Institute internship providing research support to LLNL data science/ML projects. Must be enrolled in a graduate program in CS, math, data science, ML, cybersecurity, or related STEM field by Fall 2027.",
@@ -16665,7 +16671,8 @@
     "summary": "Technical leader for emerging-computing testbeds, institutional AI infrastructure, and applied-AI projects (accelerators, secure AI services, LLM inference). Minimum is an MS plus 6+ years; PhD in CS or related field listed among qualifications; Q clearance required.",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-15"
+    "addedAt": "2026-10-15",
+    "closedAt": "2026-11-11"
   },
   {
     "id": "lanl-postdoctoral-researchers-in-neural-symbolic-method-2026",
@@ -16683,7 +16690,7 @@
     "city": "Los Alamos",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://lanl.jobs/search/jobdetails/postdoctoral-researchers-in-neural-symbolic-methods-for-scientific-computing/a22542fb-6e3d-44bd-9a1f-25a2fcd07915",
     "visaSponsorship": "not-stated",
     "summary": "Postdocs developing neural-symbolic methods (generative program synthesis plus verification) that construct and adapt numerical PDE solvers. Requires a PhD in applied/computational math, CS, computational physics, or related field within the last 5 years.",
@@ -16707,7 +16714,7 @@
     "city": "Los Alamos",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://lanl.jobs/search/jobdetails/postdoctoral-research-associate-for-ai-and-computer-vision/87bf7020-6028-4958-a083-e02b2f2e7044",
     "visaSponsorship": "no",
     "summary": "Postdoc developing AI and computer vision methods for microscopy, overhead imagery, video, and multimodal data fusion for national security applications. Requires a PhD within the last 5 years; Q clearance required.",
@@ -16728,7 +16735,7 @@
     "city": "Los Alamos",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://lanl.jobs/search/jobdetails/computing--artificial-intelligence-cai-division-graduate-intern/29f14c06-4803-49ea-93b4-4097cfd00b11",
     "visaSponsorship": "not-stated",
     "summary": "Mentored graduate internship on a computing/AI research project in the CAI Division. Must be enrolled in an accredited graduate program in CS, math, or related discipline.",
@@ -16751,7 +16758,7 @@
     "city": "Albuquerque",
     "deadline": "2026-11-18",
     "rolling": true,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://cg.sandia.gov/psc/applicant/EMPLOYEE/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?FOCUS=Applicant&Page=HRS_APP_JBPST&Action=U&FOCUS=Applicant&SiteID=1&JobOpeningId=699129&PostingSeq=1",
     "visaSponsorship": "no",
     "summary": "Prestigious named postdoc in computational science for self-directed research in applied/computational math, HPC, graph algorithms, data science, and related areas. Requires a PhD in applied/computational math, CS, engineering, or statistics conferred Jan 2023-Aug 2027; US persons only. Based in Albuquerque, NM or Livermore, CA.",
@@ -16774,7 +16781,7 @@
     "city": "Albuquerque",
     "deadline": "2026-11-30",
     "rolling": true,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://cg.sandia.gov/psc/applicant/EMPLOYEE/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?FOCUS=Applicant&Page=HRS_APP_JBPST&Action=U&FOCUS=Applicant&SiteID=1&JobOpeningId=698738&PostingSeq=1",
     "visaSponsorship": "no",
     "summary": "Named two-year data science postdoctoral fellowship emphasizing foundational data science methods research tied to national security. Requires a PhD in a data-science-related area within the last three years and ability to obtain a DOE clearance (US citizenship). Based in Albuquerque, NM or Livermore, CA.",
@@ -16803,7 +16810,8 @@
     "summary": "Postdoc developing trustworthy scientific ML surrogates and data-driven analysis with VVUQ, robustness, and explainability studies. Requires a PhD (within 5 years) in applied math, CS, statistics, engineering, or related field and ability to obtain a DOE Q clearance.",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-15"
+    "addedAt": "2026-10-15",
+    "closedAt": "2026-11-11"
   },
   {
     "id": "sandia-intern-rd-graduate-summer-computer-science-researc-2026",
@@ -16822,7 +16830,7 @@
     "city": "Albuquerque",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://cg.sandia.gov/psc/applicant/EMPLOYEE/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?FOCUS=Applicant&Page=HRS_APP_JBPST&Action=U&FOCUS=Applicant&SiteID=1&JobOpeningId=698939&PostingSeq=1",
     "visaSponsorship": "no",
     "summary": "Summer graduate research internships at CSRI spanning CS, applied/discrete math, AI, HPC, computer architectures, and systems software. Requires enrollment in a science/engineering/math graduate program and a 3.0 GPA; US citizens, permanent residents, asylees, or refugees only.",
@@ -17022,7 +17030,8 @@
     "summary": "Technical staff researcher designing ML methods for speech, NLP, multimedia, cyber and graph analytics, publishing at premier venues. Ph.D. in EE/CS or related (or MS + 5 yrs); Top Secret clearance eligibility and U.S. citizenship required.",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-15"
+    "addedAt": "2026-10-15",
+    "closedAt": "2026-11-11"
   },
   {
     "id": "mit-lincoln-lab-ai-researcherprototyping-engineer-2026",
@@ -17048,7 +17057,8 @@
     "summary": "Researches and prototypes AI/ML systems (NLP, graph analytics, adversarial AI, LLM/agentic AI) for national-security missions. PhD in EE/CS or related preferred (or Master's + 5 yrs); TS/SCI eligibility and U.S. citizenship required.",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-15"
+    "addedAt": "2026-10-15",
+    "closedAt": "2026-11-11"
   },
   {
     "id": "mit-lincoln-lab-summer-research-program-intern-2027-ai-machine-lea-2026",
@@ -17067,7 +17077,7 @@
     "city": "Lexington",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://careers.ll.mit.edu/job/Lexington-Summer-Research-Program-Intern-2027%2C-AI-&-Machine-Learning-Researcher-%28Group-05-52%29-MA-02420/1438250000/",
     "visaSponsorship": "no",
     "summary": "Summer 2027 research internship on state-of-the-art AI/ML algorithms (signal processing, NLP, computer vision, adversarial ML); open to BS/MS/Ph.D. students in CS, ECE, statistics or math. Secret clearance eligibility and U.S. citizenship required.",
@@ -17093,7 +17103,7 @@
     "city": "Lexington",
     "deadline": null,
     "rolling": false,
-    "lastSeenAt": "2026-10-15",
+    "lastSeenAt": "2026-11-11",
     "url": "https://careers.ll.mit.edu/job/Lexington-Summer-Research-Program-Intern-2027%2C-Secure-Resilient-Systems-and-Technology-%28Group-05-53%29-MA-02420/1437449200/",
     "visaSponsorship": "no",
     "summary": "Summer 2027 cybersecurity R&D internship applying software analysis, formal methods, applied cryptography and AI techniques to mission-critical systems. Open to current BS, MS, or PhD students in CS/CE/cybersecurity; U.S. citizenship required.",
@@ -19718,5 +19728,53 @@
     "source": "crawl",
     "verified": true,
     "country": "US"
+  },
+  {
+    "id": "toyota-research-institute-postdoctoral-ai-fellow-post-training-materials-2026",
+    "school": "Toyota Research Institute",
+    "lab": "toyota-research-institute",
+    "department": "Accelerated Materials Design & Discovery",
+    "title": "Postdoctoral AI Fellow, Post-Training for Materials Discovery",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "ai",
+      "mlmining"
+    ],
+    "state": "CA",
+    "city": "Los Altos",
+    "deadline": null,
+    "rolling": false,
+    "lastSeenAt": "2026-11-11",
+    "url": "https://jobs.lever.co/tri/70d2acf0-f013-447d-bdaa-26ae1118bc98",
+    "visaSponsorship": "not-stated",
+    "summary": "One-year postdoctoral fellowship (extendable by a year) defining an original research direction in model post-training, using materials discovery as a testbed. Requires a PhD in machine learning, CS, statistics, or a related field obtained within the past three years.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-11"
+  },
+  {
+    "id": "llnl-physics-informed-machine-learning-postdoctoral-researcher-2026",
+    "school": "Lawrence Livermore National Laboratory",
+    "lab": "llnl",
+    "department": "Physical and Life Sciences",
+    "title": "Physics-Informed Machine Learning - Postdoctoral Researcher",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "mlmining",
+      "hpc"
+    ],
+    "state": "CA",
+    "city": "Livermore",
+    "deadline": null,
+    "rolling": false,
+    "lastSeenAt": "2026-11-11",
+    "url": "https://www.llnl.gov/join-our-team/careers/find-your-job/all/all/3743990016793416",
+    "visaSponsorship": "no",
+    "summary": "Postdoc developing physics-informed machine-learning, surrogate, and reduced-order models for computational mechanics and scientific simulation. Requires an anticipated DOE Q clearance (U.S. citizenship).",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-11"
   }
 ]
