@@ -265,22 +265,13 @@ test('keywords become VietProfs-style chips: colon starts one, Enter finishes it
   await expect(input).toHaveAttribute('data-query', '');
 });
 
-test('VietProfs keyboard shortcuts: / focuses search, ? opens help, j/k select results, f stars the selected one', async ({ page }) => {
+test('no page-wide keyboard shortcuts, matching VietProfs: ?, j, f, and / leave results and focus alone', async ({ page }) => {
   await page.goto('jobs.html');
   await expect(page.locator('.job-card')).toHaveCount(2);
   await page.locator('#jobs-status').click();
-  await page.keyboard.press('?');
-  await expect(page.locator('#search-help-panel')).toBeVisible();
-  await page.keyboard.press('Escape');
+  for (const key of ['?', 'j', 'f', '/']) await page.keyboard.press(key);
   await expect(page.locator('#search-help-panel')).toBeHidden();
-  await page.keyboard.press('j');
-  await expect(page.locator('.job-card').first()).toHaveClass(/card-keyboard-selected/);
-  await page.keyboard.press('j');
-  await expect(page.locator('.job-card').nth(1)).toHaveClass(/card-keyboard-selected/);
-  await page.keyboard.press('k');
-  await expect(page.locator('.job-card').first()).toHaveClass(/card-keyboard-selected/);
-  await page.keyboard.press('f');
-  await expect(page.locator('.job-card').first().locator('.favorite-toggle')).toHaveAttribute('aria-pressed', 'true');
-  await page.keyboard.press('/');
-  await expect(page.locator('#jobs-search')).toBeFocused();
+  await expect(page.locator('.card-keyboard-selected')).toHaveCount(0);
+  await expect(page.locator('.job-card').first().locator('.favorite-toggle')).toHaveAttribute('aria-pressed', 'false');
+  await expect(page.locator('#jobs-search')).not.toBeFocused();
 });

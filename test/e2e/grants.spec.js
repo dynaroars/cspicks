@@ -82,11 +82,6 @@ test('Grants page loads, displays awards, and provides search and filters', asyn
   await resetBtn.click();
   await expect(input).toHaveAttribute('data-query', '');
   await expect(page.locator('.grant-card')).toHaveCount(initialCount);
-
-  // Test Keyboard Shortcut '/' to focus search input
-  await page.locator('.search-intro').click();
-  await page.keyboard.press('/');
-  await expect(input).toBeFocused();
 });
 
 test('awards keyword help fits mobile and legacy filters become editable search text', async ({ page }) => {

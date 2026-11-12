@@ -5,7 +5,7 @@ import { keywordSuggestions, mountKeywordHelp } from './search-keywords.js';
 import type { KeywordSpec } from './search-keywords.js';
 import { initResultActions } from './result-actions.js';
 import { mountKeywordChips } from './keyword-chips.js';
-import { sample as sampleItems, setupKeyboardShortcuts } from './vietprofs/search-kit.js';
+import { sample as sampleItems } from './vietprofs/search-kit.js';
 import { setupBackToTop } from './vietprofs/back-to-top.js';
 import { escapeHtml } from './shared.js';
 
@@ -19,38 +19,6 @@ export function searchChoices(values: string[] | Record<string, string>, detail 
 
 /** A random `count` of `items`, so every page's "Try" chips stay fresh on each load (VietProfs' search-kit). */
 export const sample = sampleItems;
-
-/** Result cards that j/k move through on every search page. */
-const RESULT_ITEMS = '.opportunity-card, .results-grid > .card, .schedule-card, .funding-card';
-
-/**
- * VietProfs' keyboard shortcuts (search-kit's setupKeyboardShortcuts): `/` search, `?` help, j/k move through
- * results, Enter opens the selected result's link, f stars it, r picks a random result.
- */
-function wireResultShortcuts(input: HTMLInputElement) {
-  let selected = -1;
-  const items = () => [...document.querySelectorAll<HTMLElement>(RESULT_ITEMS)].filter(item => item.getClientRects().length);
-  const select = (index: number) => {
-    items().forEach(item => item.classList.remove('card-keyboard-selected'));
-    selected = index;
-    const item = items()[index];
-    item?.classList.add('card-keyboard-selected');
-    item?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  };
-  setupKeyboardShortcuts({
-    searchInputId: input.id,
-    selectedClass: 'card-keyboard-selected',
-    getItemElements: items,
-    getSelectedIndex: () => selected,
-    setSelectedIndex: index => { selected = index; },
-    onEnter: item => item.querySelector<HTMLAnchorElement>('h2 a[href], h3 a[href], .opportunity-title a[href], a[href]')?.click(),
-    onSecondary: item => item.querySelector<HTMLElement>('.favorite-toggle')?.click(),
-    onRandom: () => {
-      const count = items().length;
-      if (count) select(Math.floor(Math.random() * count));
-    }
-  });
-}
 
 /**
  * Every search page loads with its box disabled until data arrives, which defeats `autofocus`; call this
@@ -91,15 +59,9 @@ export function updateSearchUrl(params: URLSearchParams, query: string, options?
   history.replaceState({ cspicksSearch: index }, '', nextUrl);
 }
 
-/** Specialized search workflows can reuse input and shortcut behavior without an autocomplete menu. */
+/** Specialized search workflows can reuse input behavior without an autocomplete menu. */
 export function wireSearchInput(input: HTMLInputElement, onInput: (query: string) => void) {
   input.addEventListener('input', () => onInput(input.value));
-  document.addEventListener('keydown', event => {
-    const active = document.activeElement;
-    if (event.key === '/' && input.getClientRects().length && !['INPUT', 'TEXTAREA', 'SELECT'].includes(active?.tagName || '') && !(active instanceof HTMLElement && active.isContentEditable)) {
-      event.preventDefault(); input.focus(); input.select();
-    }
-  });
 }
 
 /** VietProfs' floating back-to-top button (roars-ui .back-to-top + back-to-top.ts) on every long results page. */
@@ -156,7 +118,6 @@ export function createSearchControls(options: Omit<SuggestionOptions, 'onSelect'
     input.focus();
     suggestions.close();
   };
-  wireResultShortcuts(input);
   mountBackToTop();
   examples?.addEventListener('click', event => {
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-search-example]') : null;

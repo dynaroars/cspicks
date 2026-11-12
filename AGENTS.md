@@ -111,7 +111,7 @@ playbook before any data-refresh or web-research task.
   same everywhere.
 - `src/vietprofs/` — verbatim copies of VietProfs' shared UI: `roars-ui.css` (design tokens, header icons,
   search box, suggestion list, scope chips, help popup, tags, tooltips, empty state, back-to-top, floating "+"),
-  `search-kit.ts` (suggestion controller, keyboard shortcuts, help, commands), and `back-to-top.ts` (pages hardcode the floating "+" markup that `roars-ui.css` styles). `src/suggestion-box.ts` is a thin adapter over search-kit's `createSearchController`. VietProfs is the baseline look: edit these there, then run
+  `search-kit.ts` (suggestion controller, help, commands; its `setupKeyboardShortcuts` is unused — like VietProfs, no page-wide shortcuts), and `back-to-top.ts` (pages hardcode the floating "+" markup that `roars-ui.css` styles). `src/suggestion-box.ts` is a thin adapter over search-kit's `createSearchController`. VietProfs is the baseline look: edit these there, then run
   `npm run sync:vietprofs-ui`; `test/unit/vietprofs-ui.test.js` fails on local edits. `style.css` `@import`s
   `roars-ui.css` first and holds only cspicks-specific rules on top.
 - `src/charts.ts` — the only module that imports Chart.js. `drawChart(canvas, previous, config)` merges
@@ -119,7 +119,7 @@ playbook before any data-refresh or web-research task.
 - `src/style.css` — the one shared stylesheet every page links (sections in cascade order); page-only CSS sits
   beside its page module (`src/jobs/jobs.css`, `src/grants/*.css`, `src/csconfs/*.css`). The shared submission page uses `src/submit.css` (generic `submit-*` / `correction-suggestion*` classes); don't add per-form copies.
 - `src/search-controls.ts` — shared search controller for Search/Discoveries, Funding, Jobs, Awards, and CS Confs:
-  keyword-name/value completion, the clickable ⓘ help popup, input events, `/` shortcut, up to four examples,
+  keyword-name/value completion, the clickable ⓘ help popup, input events, up to four examples,
   and URL updates. Pages supply their keyword specs, value sources, ordinary suggestion groups, and rendering
   callbacks. `wireSearchInput` also serves the specialized Simulator workflow.
 - `src/opportunity-card.ts` + the opportunity-cards section of `src/style.css` — shared Awards/Jobs card

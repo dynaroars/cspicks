@@ -105,7 +105,7 @@ export function keywordSuggestions(query: string, specs: KeywordSpec[], sources:
 
 /**
  * Clickable, keyboard-accessible search help, following the VietProfs popup pattern and its element ids
- * (`search-help-btn` / `search-help-panel`, which search-kit's `?` and Escape shortcuts look up).
+ * (`search-help-btn` / `search-help-panel`). Like VietProfs, there are no page-wide shortcuts; Escape closes it.
  */
 export function mountKeywordHelp(input: HTMLInputElement, specs: KeywordSpec[], example: string, usage = 'Combine keywords to narrow your search. Quote values with spaces; commas mean either value.') {
   const id = 'search-help-panel';
@@ -117,12 +117,7 @@ export function mountKeywordHelp(input: HTMLInputElement, specs: KeywordSpec[], 
       <p><code>${escapeHtml(example)}</code></p>
       <ul class="search-help-list">${specs.map(spec => `<li><code>${escapeHtml(spec.key)}:</code> ${escapeHtml(spec.description)}<br><span>e.g. <code>${escapeHtml(spec.example)}</code></span></li>`).join('')}</ul>
       <p>Search without keywords for a general text search.</p>
-      <strong>Keyboard</strong>
-      <ul class="search-help-list">
-        <li><kbd>/</kbd> search · <kbd>?</kbd> this help · <kbd>Esc</kbd> close or clear the search</li>
-        <li>Type <code>keyword:</code> to start a filter chip; <kbd>Enter</kbd> finishes it; <kbd>Backspace</kbd> in an empty box removes the last chip</li>
-        <li><kbd>j</kbd>/<kbd>k</kbd> move through results · <kbd>Enter</kbd> open · <kbd>f</kbd> star · <kbd>r</kbd> random result</li>
-      </ul>
+      <p>Type <code>keyword:</code> to start a filter chip; <kbd>Enter</kbd> finishes it; <kbd>Backspace</kbd> in an empty box removes the last chip.</p>
       <button type="button" class="search-help-close">Close help</button>
     </div>`);
   const button = shell.querySelector<HTMLButtonElement>('.search-help-btn')!;
