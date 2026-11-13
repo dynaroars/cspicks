@@ -32,9 +32,9 @@
       "proposals": []
     },
     "CHES": {
-      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
       "outcome": "complete",
-      "summary": "CHES 2027 (Cancún, Sep 6-9 2027) page lists only per-volume TCHES deadlines, no conference-wide deadline; existing record already matches. No change.",
+      "summary": "CHES 2027 page confirms Cancún Sep 6-9 2027 and four TCHES 2027 rounds (Jul 15, Oct 15 2026, Jan 15, Apr 15 2027); matches existing note. No change.",
       "checkedUrls": [
         "https://ches.iacr.org/2027/"
       ],
@@ -53,14 +53,14 @@
       "proposals": []
     },
     "EMNLP": {
-      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
       "outcome": "not_found",
-      "summary": "emnlp.org redirects to sigdat.org, which has no EMNLP 2027 information (no dates, city, deadlines, chairs). Record unchanged.",
+      "summary": "emnlp.org and sigdat.org only point to EMNLP 2026; no 2027 dates or deadlines. No change.",
       "checkedUrls": [
         "https://emnlp.org/",
         "https://sigdat.org"
       ],
-      "deferredUntil": "2026-11-10T20:05:31.409Z",
+      "deferredUntil": "2026-12-03T20:10:00.000Z",
       "proposals": []
     },
     "FOGA": {
@@ -210,41 +210,14 @@
       ]
     },
     "MobiSys": {
-      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
       "outcome": "complete",
-      "summary": "MobiSys 2027 (Ho Chi Minh City, June 21-25, 2027): added conference dates, abstract/paper deadlines, and notification from the official edition page.",
+      "summary": "MobiSys 2027 page confirms Ho Chi Minh City Jun 21-25 2027, abstract Nov 27, paper Dec 4 2026, notification Mar 6 2027. Matches data.",
       "checkedUrls": [
         "https://www.sigmobile.org/mobisys/2027/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://www.sigmobile.org/mobisys/2027/",
-              "evidence": "June 21-25, 2027."
-            },
-            {
-              "field": "abstractDeadline",
-              "url": "https://www.sigmobile.org/mobisys/2027/",
-              "evidence": "Abstract registration: November 27, 2026."
-            },
-            {
-              "field": "deadline",
-              "url": "https://www.sigmobile.org/mobisys/2027/",
-              "evidence": "Paper submission: December 4, 2026."
-            },
-            {
-              "field": "notificationDate",
-              "url": "https://www.sigmobile.org/mobisys/2027/",
-              "evidence": "Final decisions: March 6, 2027."
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "SIGCOMM": {
       "lastCheckedAt": "2026-10-27T20:30:00.000Z",
@@ -333,13 +306,13 @@
       "proposals": []
     },
     "WACV": {
-      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
       "outcome": "not_found",
-      "summary": "wacv.thecvf.com/Conferences/2028 returned 404; no official 2028 schedule. No change.",
+      "summary": "WACV 2028 edition page (404) and series site give no dates or deadlines. No change.",
       "checkedUrls": [
-        "https://wacv.thecvf.com/Conferences/2028"
+        "https://wacv.thecvf.com/Conferences/2028/"
       ],
-      "deferredUntil": "2026-11-10T20:05:31.409Z",
+      "deferredUntil": "2026-12-03T20:10:00.000Z",
       "proposals": []
     },
     "AAAI": {
@@ -437,13 +410,13 @@
       "proposals": []
     },
     "IJCAI": {
-      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
       "outcome": "not_found",
-      "summary": "ijcai.org lists only IJCAI-27 (Kyoto Aug 7-13 and Hengqin Aug 15-17, 2027); later editions announced at the preceding conference. 2028-2030 unchanged.",
+      "summary": "ijcai.org confirms 2027 Kyoto/Hengqin dates; no host, dates or deadlines for 2028-2030. 2027 submission deadlines not stated on series page. No change.",
       "checkedUrls": [
         "https://www.ijcai.org/"
       ],
-      "deferredUntil": "2026-11-10T20:05:31.409Z",
+      "deferredUntil": "2026-12-03T20:10:00.000Z",
       "proposals": []
     },
     "ISSTA": {
@@ -679,14 +652,13 @@
       "proposals": []
     },
     "CoNEXT": {
-      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
-      "outcome": "incomplete",
-      "summary": "SIGCOMM series page lists CoNEXT 2027 Rio de Janeiro Dec 6-9 (to be confirmed); edition site conferences.sigcomm.org/co-next/2027/ is JavaScript-rendered and could not be read, so deadlines unverified.",
+      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
+      "outcome": "not_found",
+      "summary": "SIGCOMM series page still lists CoNEXT 2027 as tentative (Dec 6-9, Rio de Janeiro, to be confirmed); no deadlines. No change.",
       "checkedUrls": [
-        "https://www.sigcomm.org/events/conext-conference",
-        "https://conferences.sigcomm.org/co-next/2027/"
+        "https://www.sigcomm.org/events/conext-conference"
       ],
-      "deferredUntil": "2026-11-10T20:05:47.751Z",
+      "deferredUntil": "2026-12-03T20:10:00.000Z",
       "proposals": []
     },
     "KDD": {
@@ -2160,6 +2132,75 @@
       "summary": "ISCA 2027 site confirms Atlanta, Jun 5-9 2027, abstract Nov 9, paper Nov 16 2026, rebuttal Feb 16-Mar 8, notification Mar 26 2027. Matches data.",
       "checkedUrls": [
         "https://iscaconf.org/isca2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "ITCS": {
+      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
+      "outcome": "complete",
+      "summary": "ITCS 2027 site confirms Berkeley, Jan 12-15 2027, abstract Sep 2, paper Sep 4, notification Nov 6 2026. Matches data. No ITCS 2028 info.",
+      "checkedUrls": [
+        "https://itcs-conf.org/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "IUI": {
+      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
+      "outcome": "incomplete",
+      "summary": "IUI 2027 site confirms Helsinki, Feb 8-11 2027, abstract Aug 13, paper Aug 20 2026. Page does not state the paper notification date (data has 2026-11-23); left unchanged.",
+      "checkedUrls": [
+        "https://iui.acm.org/2027/"
+      ],
+      "deferredUntil": "2026-11-19T20:10:00.000Z",
+      "proposals": []
+    },
+    "MICCAI": {
+      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
+      "outcome": "incomplete",
+      "summary": "miccai.org home has no MICCAI 2027 details; existing announcement-based record (Auckland) left unchanged, deadline 2027-02-26 not re-confirmed.",
+      "checkedUrls": [
+        "https://miccai.org/"
+      ],
+      "deferredUntil": "2026-11-19T20:10:00.000Z",
+      "proposals": []
+    },
+    "MMSys": {
+      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
+      "outcome": "complete",
+      "summary": "MMSys 2027 deadlines page confirms Ghent Mar 30-Apr 2 2027; round 2 registration/paper Nov 19, notification Dec 22 2026. Matches data.",
+      "checkedUrls": [
+        "https://2027.acmmmsys.org/",
+        "https://2027.acmmmsys.org/deadlines.html"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "MobiCom": {
+      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
+      "outcome": "complete",
+      "summary": "MobiCom 2027 page confirms Athens, Greece, Oct 18-22 2027; summer cycle abstract Aug 26, paper Sep 2, notification Nov 19 2026; winter cycle TBD. Filled missing place.",
+      "checkedUrls": [
+        "https://www.sigmobile.org/mobicom/2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            "https://www.sigmobile.org/mobicom/2027/"
+          ]
+        }
+      ]
+    },
+    "NAACL": {
+      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
+      "outcome": "complete",
+      "summary": "NAACL 2027 site confirms San Francisco Jun 1-5 2027, ARR deadline Oct 12 2026, commitment Dec 23, notification Feb 10 2027. Matches data.",
+      "checkedUrls": [
+        "https://2027.naacl.org/"
       ],
       "deferredUntil": null,
       "proposals": []
