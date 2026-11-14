@@ -22,13 +22,13 @@
       "proposals": []
     },
     "CCC": {
-      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
+      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
       "outcome": "incomplete",
-      "summary": "CCC 2027 page confirms Seattle, July 19-22 and Swastik Kopparty; no submission or notification dates announced. No change.",
+      "summary": "CCC 2027 site confirms July 19-22 2027, Seattle; no deadlines announced. No change.",
       "checkedUrls": [
         "https://computationalcomplexity.org/"
       ],
-      "deferredUntil": "2026-11-14T20:00:00.000Z",
+      "deferredUntil": "2026-11-21T21:00:00.000Z",
       "proposals": []
     },
     "CHES": {
@@ -84,14 +84,14 @@
       "proposals": []
     },
     "ICCV": {
-      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
-      "outcome": "incomplete",
-      "summary": "ICCV 2027 page confirms Hong Kong, Oct 3-7 (venue section says Oct 2-8); Dates page lists only workshop/conference days, no paper deadlines. No change.",
+      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "ICCV 2027 dates page confirms Oct 3-7 2027 Hong Kong; no paper deadlines yet. Home page venue text says Oct 2-8 (inconsistent). No change.",
       "checkedUrls": [
         "https://iccv.thecvf.com/Conferences/2027",
         "https://iccv.thecvf.com/Conferences/2027/Dates"
       ],
-      "deferredUntil": "2026-11-14T20:00:00.000Z",
+      "deferredUntil": "2026-12-05T21:00:00.000Z",
       "proposals": []
     },
     "ICME": {
@@ -451,14 +451,13 @@
       "proposals": []
     },
     "SOSP": {
-      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
-      "outcome": "incomplete",
-      "summary": "sosp.org confirms SOSP 2027 Vancouver, Nov 30-Dec 3 2027; no submission deadlines; nothing on 2028. The sigops.org 2027 URL returned an archived 2017 page. No change.",
+      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "Official series page has no SOSP 2027/2028 info. No change.",
       "checkedUrls": [
-        "https://sosp.org/",
         "https://sigops.org/s/conferences/sosp/2027/"
       ],
-      "deferredUntil": "2026-11-14T20:00:00.000Z",
+      "deferredUntil": "2026-12-05T21:00:00.000Z",
       "proposals": []
     },
     "ICDE": {
@@ -495,30 +494,14 @@
       "proposals": []
     },
     "USENIX Security": {
-      "lastCheckedAt": "2026-11-03T20:05:47.751Z",
-      "outcome": "complete",
-      "summary": "USENIX Security 2027 CFP confirms Denver Aug 11-13, both cycles, chairs and dates match; normalized place format USA->US on 2026/2027 records. 2028 page has no announced dates/deadlines.",
+      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "usenixsecurity28 page has no dates or deadlines yet. No change.",
       "checkedUrls": [
-        "https://www.usenix.org/conference/usenixsecurity27/call-for-papers",
         "https://www.usenix.org/conference/usenixsecurity28"
       ],
-      "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update-place",
-          "year": 2027,
-          "sources": [
-            "https://www.usenix.org/conference/usenixsecurity27/call-for-papers"
-          ]
-        },
-        {
-          "action": "update-place",
-          "year": 2026,
-          "sources": [
-            "https://www.usenix.org/conference/usenixsecurity26"
-          ]
-        }
-      ]
+      "deferredUntil": "2026-12-05T21:00:00.000Z",
+      "proposals": []
     },
     "ASE": {
       "lastCheckedAt": "2026-10-31T20:05:29.000Z",
@@ -590,15 +573,23 @@
       "proposals": []
     },
     "ICSE": {
-      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
+      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
       "outcome": "incomplete",
-      "summary": "icse-conferences.org confirms ICSE 2028 April, Hawaii and 2029 April, Tokyo; no deadlines. conf.researchr.org ICSE 2028 page requires login. No change.",
+      "summary": "ICSE 2028 site: events Apr 29-May 7 2028 (main May 3-5), Waikoloa HI; research-track deadlines not published (track page 404). Updated date/place; deadlines remain estimated.",
       "checkedUrls": [
-        "https://www.icse-conferences.org/",
-        "https://conf.researchr.org/home/icse-2028"
+        "https://conf.researchr.org/home/icse-2028",
+        "https://conf.researchr.org/track/icse-2028/icse-2028-research-track"
       ],
-      "deferredUntil": "2026-11-14T20:00:00.000Z",
-      "proposals": []
+      "deferredUntil": "2026-11-21T21:00:00.000Z",
+      "proposals": [
+        {
+          "action": "update-date-place",
+          "year": 2028,
+          "sources": [
+            "https://conf.researchr.org/home/icse-2028"
+          ]
+        }
+      ]
     },
     "NDSS": {
       "lastCheckedAt": "2026-11-05T20:00:00.000Z",
@@ -662,14 +653,14 @@
       "proposals": []
     },
     "KDD": {
-      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
-      "outcome": "incomplete",
-      "summary": "KDD 2027 cycle 1 dates (Jul 19/26, rebuttal Sep 29-Oct 13, notification Nov 14 2026) and San Jose Aug 1-5 2027 match the record; cycle 2 dates not announced. No change.",
+      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
+      "outcome": "not_found",
+      "summary": "kdd2027 site confirms Aug 1-5 2027 San Jose; CFP deadlines not on the home page (CFP subpage 404). No change.",
       "checkedUrls": [
         "https://kdd2027.kdd.org/",
-        "https://kdd2027.kdd.org/research-track-call-for-papers/"
+        "https://kdd2027.kdd.org/call-for-research-papers/"
       ],
-      "deferredUntil": "2026-11-14T20:00:00.000Z",
+      "deferredUntil": "2026-12-05T21:00:00.000Z",
       "proposals": []
     },
     "IROS": {
@@ -2203,6 +2194,86 @@
         "https://2027.naacl.org/"
       ],
       "deferredUntil": null,
+      "proposals": []
+    },
+    "NFM": {
+      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
+      "outcome": "complete",
+      "summary": "NFM 2027 site confirms dates, Houston, abstract Jan 4, paper Jan 11, notification Feb 26 2027. No change.",
+      "checkedUrls": [
+        "https://conf.researchr.org/home/nfm-2027"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "OSDI": {
+      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
+      "outcome": "complete",
+      "summary": "OSDI 2027 CFP confirms all dates; normalized place format.",
+      "checkedUrls": [
+        "https://www.usenix.org/conference/osdi27",
+        "https://www.usenix.org/conference/osdi27/call-for-papers"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update-place",
+          "year": 2027,
+          "sources": [
+            "https://www.usenix.org/conference/osdi27"
+          ]
+        }
+      ]
+    },
+    "PerCom": {
+      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
+      "outcome": "complete",
+      "summary": "PerCom 2027 dates page: paper registration Sep 11, full paper Sep 18, rebuttal Nov 27, notification Dec 18 2026. Added abstract and rebuttal dates.",
+      "checkedUrls": [
+        "https://percom.org/",
+        "https://percom.org/dates/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update-deadlines",
+          "year": 2027,
+          "sources": [
+            "https://percom.org/dates/"
+          ]
+        }
+      ]
+    },
+    "PETS": {
+      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
+      "outcome": "incomplete",
+      "summary": "PETS 2027 home confirms July 19-24 Delft; CFP page (cfp27.php) 404, deadlines unverified. No change.",
+      "checkedUrls": [
+        "https://crysp.petsymposium.org/2027/",
+        "https://crysp.petsymposium.org/2027/cfp27.php"
+      ],
+      "deferredUntil": "2026-11-21T21:00:00.000Z",
+      "proposals": []
+    },
+    "PODS": {
+      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
+      "outcome": "incomplete",
+      "summary": "2027.sigmod.org home lists PODS June 13-18 2027 (record has 13-19; unresolved); dates page 404 so deadlines unverified. No change.",
+      "checkedUrls": [
+        "https://2027.sigmod.org/",
+        "https://2027.sigmod.org/pods_dates.shtml"
+      ],
+      "deferredUntil": "2026-11-21T21:00:00.000Z",
+      "proposals": []
+    },
+    "SIGGRAPH": {
+      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
+      "outcome": "incomplete",
+      "summary": "s2027.siggraph.org confirms Aug 8-12 2027 Anaheim; papers deadline not listed (\"submissions open soon\"). No change.",
+      "checkedUrls": [
+        "https://s2027.siggraph.org/"
+      ],
+      "deferredUntil": "2026-11-21T21:00:00.000Z",
       "proposals": []
     }
   }
