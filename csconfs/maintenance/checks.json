@@ -139,13 +139,13 @@
       "proposals": []
     },
     "IPSN": {
-      "lastCheckedAt": "2026-10-24T20:05:22.181Z",
-      "outcome": "not_found",
-      "summary": "Existing record notes the IPSN/SenSys merge; sensys.acm.org/2027 returned only a bot-verification page, so nothing verified. No change.",
+      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
+      "outcome": "complete",
+      "summary": "No standalone IPSN edition: SenSys 2027 CFP states SenSys, IPSN and IoTDI merged in 2026. Record note already says so; no change.",
       "checkedUrls": [
-        "https://sensys.acm.org/2027/"
+        "https://sensys.acm.org/2027/cfp.html"
       ],
-      "deferredUntil": "2026-11-14T20:05:22.181Z",
+      "deferredUntil": null,
       "proposals": []
     },
     "LAK": {
@@ -472,25 +472,23 @@
       "proposals": []
     },
     "NSDI": {
-      "lastCheckedAt": "2026-10-06T20:16:29.176Z",
+      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
       "outcome": "complete",
-      "summary": "NSDI 2027 and 2026 records match the official CFPs; only the NSDI 2026 date dash format was normalized.",
+      "summary": "NSDI '27 CFP confirms May 11-13 2027 Providence and both cycles' deadlines and notifications. No change.",
       "checkedUrls": [
-        "https://www.usenix.org/conference/nsdi27/call-for-papers",
-        "https://www.usenix.org/conference/nsdi26/call-for-papers"
+        "https://www.usenix.org/conference/nsdi27/call-for-papers"
       ],
       "deferredUntil": null,
       "proposals": []
     },
     "OOPSLA": {
-      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
-      "outcome": "not_found",
-      "summary": "splashcon.org/2027 and 2026.splashcon.org OOPSLA track pages returned 404, so no fact could be verified. Round 1 2026 rebuttalDate (2026-05-18) precedes nothing sensible vs notification 2025-12-17 and looks copied from round 2; left for a later run.",
+      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
+      "outcome": "incomplete",
+      "summary": "SPLASH 2027 site confirms Oct 10-15 2027 but has no OOPSLA CFP page yet (404); round deadlines, chairs unverifiable. Left as is.",
       "checkedUrls": [
-        "https://splashcon.org/2027",
-        "https://2026.splashcon.org/track/splash-2026-oopsla"
+        "https://2027.splashcon.org/"
       ],
-      "deferredUntil": "2026-10-29T20:16:09.646Z",
+      "deferredUntil": "2026-11-22T20:05:57.000Z",
       "proposals": []
     },
     "USENIX Security": {
@@ -536,31 +534,15 @@
       "proposals": []
     },
     "SenSys": {
-      "lastCheckedAt": "2026-10-08T20:16:09.646Z",
+      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
       "outcome": "complete",
-      "summary": "SenSys 2027 official site: May 17-20 2027, Boulder CO; round 2 abstract Oct 29 / paper Nov 5 2026, notification Jan 28 2027 (matched record). Set date and place; marked verified. Chairs not on page read.",
+      "summary": "SenSys 2027 CFP and organization pages confirm second-round deadlines (Oct 29/Nov 5 2026, notification Jan 28 2027), dates, place, chairs. No change.",
       "checkedUrls": [
-        "https://sensys.acm.org/2027/"
+        "https://sensys.acm.org/2027/cfp.html",
+        "https://sensys.acm.org/2027/organization.html"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://sensys.acm.org/2027/",
-              "evidence": "May 17-20, 2027"
-            },
-            {
-              "field": "place",
-              "url": "https://sensys.acm.org/2027/",
-              "evidence": "Boulder, CO, USA"
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "FSE": {
       "lastCheckedAt": "2026-11-03T20:05:47.751Z",
@@ -854,12 +836,11 @@
       ]
     },
     "MLSys": {
-      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
+      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
       "outcome": "complete",
-      "summary": "MLSys 2027 (Bellevue, June 21-25 2027): confirmed paper deadline Oct 30 2026, reviews/response/notification dates, and chairs from the official site. No abstract deadline listed.",
+      "summary": "MLSys 2027 page lists program chairs Rashmi Vinayak, Bilge Acun, Yawen Wang (Song Han no longer listed); dates, venue, deadlines confirmed.",
       "checkedUrls": [
-        "https://mlsys.org/",
-        "https://mlsys.org/Conferences/2027/CallForResearchPapers"
+        "https://mlsys.org/Conferences/2027"
       ],
       "deferredUntil": null,
       "proposals": [
@@ -867,42 +848,20 @@
           "action": "update",
           "year": 2027,
           "sources": [
-            {
-              "field": "deadline",
-              "url": "https://mlsys.org/Conferences/2027/CallForResearchPapers",
-              "evidence": "Paper submission deadline Oct 30, 2026 20:00 UTC; author responses Jan 21, 2027; notifications Feb 28, 2027."
-            },
-            {
-              "field": "place/date/chairs",
-              "url": "https://mlsys.org/",
-              "evidence": "Bellevue, WA, June 21-25 2027; General Chair Joseph Gonzalez; Program Chairs Rashmi Vinayak and Song Han."
-            }
+            "https://mlsys.org/Conferences/2027"
           ]
         }
       ]
     },
     "FAccT": {
-      "lastCheckedAt": "2026-10-15T20:15:32.150Z",
-      "outcome": "incomplete",
-      "summary": "FAccT 2027: CFP confirms dates, deadlines, and program chairs. Venue (Porto, Portugal per home page banner) not tied to the year by any page, so place left unset; general chairs unlisted.",
+      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
+      "outcome": "complete",
+      "summary": "FAccT 2027 CFP confirms dates, deadlines, rebuttal, notification and program chairs; venue and general chair not stated. No change.",
       "checkedUrls": [
-        "https://facctconference.org/",
         "https://facctconference.org/2027/cfp.html"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "deadline",
-              "url": "https://facctconference.org/2027/cfp.html",
-              "evidence": "Abstract Oct 27, paper Nov 3, 2026 (AoE); rebuttal Jan 28, 2027; notification Mar 23, 2027; conference June 21-24, 2027; four program chairs listed."
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "COLM": {
       "lastCheckedAt": "2026-11-07T20:00:00.000Z",
@@ -2274,6 +2233,84 @@
         "https://s2027.siggraph.org/"
       ],
       "deferredUntil": "2026-11-21T21:00:00.000Z",
+      "proposals": []
+    },
+    "SIGMETRICS": {
+      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
+      "outcome": "complete",
+      "summary": "SIGMETRICS 2027 site states June 7-10 2027 (record said 7-11); three cycles' deadlines and notifications match.",
+      "checkedUrls": [
+        "https://www.sigmetrics.org/sigmetrics2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            "https://www.sigmetrics.org/sigmetrics2027/"
+          ]
+        }
+      ]
+    },
+    "SODA": {
+      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
+      "outcome": "incomplete",
+      "summary": "siam.org returned 403 to scripts; SODA 2027 record could not be re-verified.",
+      "checkedUrls": [
+        "https://www.siam.org/conferences-events/siam-conferences/soda27/"
+      ],
+      "deferredUntil": "2026-11-22T20:05:57.000Z",
+      "proposals": []
+    },
+    "STACS": {
+      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
+      "outcome": "complete",
+      "summary": "STACS 2027 event page: submission deadline Oct 11 (AoE), rebuttal Nov 30-Dec 2, notification Dec 22; record had 2026-09-11, corrected. No abstract deadline stated.",
+      "checkedUrls": [
+        "https://events.gwdg.de/e/stacs2027",
+        "https://events.gwdg.de/event/1460/page/476-submissions"
+      ],
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            "https://events.gwdg.de/event/1460/"
+          ]
+        }
+      ]
+    },
+    "STOC": {
+      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
+      "outcome": "complete",
+      "summary": "STOC 2027 page confirms dates, Nov 2 2026 deadline, Feb 1 2027 notification, PC chair Shachar Lovett. No change.",
+      "checkedUrls": [
+        "https://acm-stoc.org/stoc2027/"
+      ],
+      "deferredUntil": null,
+      "proposals": []
+    },
+    "VLDB": {
+      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
+      "outcome": "incomplete",
+      "summary": "vldb.org returned 403 to scripts; VLDB 2027 cycles could not be re-verified.",
+      "checkedUrls": [
+        "https://vldb.org/2027/"
+      ],
+      "deferredUntil": "2026-11-22T20:05:57.000Z",
+      "proposals": []
+    },
+    "VMCAI": {
+      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
+      "outcome": "incomplete",
+      "summary": "VMCAI 2027 page confirms Jan 11-12 2027 Mexico City and paper deadline Sep 25/30 2026; program chairs not found on fetched pages.",
+      "checkedUrls": [
+        "https://conf.researchr.org/home/VMCAI-2027",
+        "https://conf.researchr.org/track/VMCAI-2027/VMCAI-2027-papers"
+      ],
+      "deferredUntil": "2026-11-22T20:05:57.000Z",
       "proposals": []
     }
   }
