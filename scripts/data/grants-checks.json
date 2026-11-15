@@ -253,6 +253,24 @@
         "https://cs.lbl.gov/work/fellowships/alvarez-fellowship/"
       ],
       "deferredUntil": null
+    },
+    "yahoo-frep": {
+      "lastCheckedAt": "2026-11-14T23:00:00Z",
+      "outcome": "verified",
+      "summary": "Official 2019 FREP recipients post still loads and confirms awards through 2019; no later call found; entry stays historical.",
+      "checkedUrls": [
+        "https://yahooresearch.tumblr.com/post/187608558221/congratulations-2019-faculty-and-research"
+      ],
+      "deferredUntil": null
+    },
+    "mozilla-technology-fund": {
+      "lastCheckedAt": "2026-11-14T23:00:00Z",
+      "outcome": "blocked",
+      "summary": "mozillafoundation.org returns a Cloudflare bot check (403) to WebFetch/curl and headless Chromium; historical status left as is.",
+      "checkedUrls": [
+        "https://www.mozillafoundation.org/en/what-we-do/grantmaking/"
+      ],
+      "deferredUntil": "2027-01-13T23:00:00Z"
     }
   }
 }
