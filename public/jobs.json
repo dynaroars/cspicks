@@ -6305,7 +6305,7 @@
     "city": "Rolla",
     "deadline": null,
     "rolling": true,
-    "lastSeenAt": "2026-11-16",
+    "lastSeenAt": "2026-10-10",
     "source": "crawl",
     "verified": true,
     "url": "https://erecruit.umsystem.edu/psp/tamext/ROLLA/HRMS/c/HRS_HRAM_FL.HRS_CG_SEARCH_FL.GBL?Page=HRS_APP_JBPST_FL&Action=U&SiteId=10&FOCUS=Applicant&SiteId=10&JobOpeningId=60984&PostingSeq=1",
@@ -19831,14 +19831,14 @@
     ],
     "state": "AL",
     "city": "Auburn",
-    "rolling": false,
+    "rolling": true,
     "url": "https://eng.auburn.edu/csse/hiring/",
-    "summary": "Multiple tenure-track positions emphasizing AI (NLP, reinforcement learning, foundation models, XAI, secure AI, vision, AI+X); Assistant level preferred, senior candidates considered. The department page states no deadline.",
+    "summary": "Multiple tenure-track positions emphasizing AI (NLP, reinforcement learning, foundation models, XAI, secure AI, vision, AI+X); Assistant level preferred, senior candidates considered. No application deadline; applications received by January 31, 2027 receive full consideration.",
     "lastSeenAt": "2026-11-16",
     "source": "crawl",
     "verified": true,
     "country": "US",
     "addedAt": "2026-11-16",
-    "deadline": null
+    "deadline": "2027-01-31"
   }
 ]
