@@ -6718,16 +6718,15 @@
     "region": "asia",
     "jobsUrl": "https://www.cs.zju.edu.cn/csen/",
     "state": null,
-    "lastCheckedAt": "2026-10-13",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Rechecked the official School of Computer Science site and searched its faculty recruitment pages. Search returned department material but no verifiable live CS vacancy; the official page is not fully indexed by search. Revisit the Chinese-language recruitment section directly.",
+    "summary": "Official CS site returned HTTP 502 on 2026-11-17; nothing re-verified. Earlier crawl notes stand.",
     "checkedUrls": [
-      "https://www.cs.zju.edu.cn/csen/",
-      "https://www.cs.zju.edu.cn/_upload/article/files/d4/45/e46a2ca6469693738d84d1fffc3f/642ea7c2-932e-4023-b1bb-ce1618ee6c27.pdf"
+      "https://www.cs.zju.edu.cn/csen/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-10-21"
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "Nanyang Technological University",
@@ -6830,22 +6829,15 @@
     "region": "australasia",
     "jobsUrl": "https://about.unimelb.edu.au/careers",
     "state": null,
-    "lastCheckedAt": "2026-10-13",
-    "outcome": "incomplete",
-    "summary": "Reviewed the university careers hub and School of Computing and Information Systems join-us page. Current opportunities are in a dynamic careers portal and no live CS role could be verified from the accessible official pages. Recheck the portal with department filters.",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
+    "outcome": "blocked",
+    "summary": "about.unimelb.edu.au/careers showed a Cloudflare bot check (HTTP 403) on 2026-11-17; not bypassed.",
     "checkedUrls": [
-      "https://about.unimelb.edu.au/careers/apply-with-us",
-      "https://unimelb.wd105.myworkdayjobs.com/en-US/UoM_External_Career",
-      "https://unimelb.wd105.myworkdayjobs.com/en-US/UoM_External_Career/job/Research-Fellow-in-Human-Robot-Interaction_JR-013619",
-      "https://unimelb.wd105.myworkdayjobs.com/en-US/UOM_External_Career/job/Postdoctoral-Research-Fellow---Research-Fellow---Senior-Research-Fellow_JR-018549",
-      "https://unimelb.wd105.myworkdayjobs.com/uom_external_career/job/parkville-victoria/research-software-engineer_jr-018676",
-      "https://about.unimelb.edu.au/careers",
-      "https://www.cis.unimelb.edu.au/about/join-cis",
-      "https://jobs.staff.unimelb.edu.au/"
+      "https://about.unimelb.edu.au/careers"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-10-20"
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "University of Toronto",
@@ -6939,17 +6931,15 @@
     "region": "asia",
     "jobsUrl": "https://csse.szu.edu.cn/pages/recruitment/talents",
     "state": null,
-    "lastCheckedAt": "2026-10-13",
-    "outcome": "incomplete",
-    "summary": "Reviewed the official CSSE recruitment page: it lists a February 2026 young-talent program and older general faculty calls, but the detail/eligibility status of the 2026 program could not be confirmed. No live role counted; revisit the Chinese-language page.",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
+    "outcome": "blocked",
+    "summary": "CSSE recruitment page returned HTTP 412 (blocked) on 2026-11-17; not bypassed.",
     "checkedUrls": [
-      "https://csse.szu.edu.cn/pages/recruitment/talents",
-      "https://csse.szu.edu.cn/pages/recruitment/details?id=3816",
-      "https://csse.szu.edu.cn/pages/recruitment/index?bsort=1&info=3"
+      "https://csse.szu.edu.cn/pages/recruitment/talents"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "CRIStAL",
@@ -7002,17 +6992,15 @@
     "region": "europe",
     "jobsUrl": "https://faculty-opening.cswp.cs.technion.ac.il/",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Official Computer Science faculty-opening page invites tenure-track applications across fields and encourages submission by October 31, usually about one year ahead of appointment. Other Technion units and specific departmental calls not fully reviewed.",
+    "summary": "Faculty-opening site returned HTTP 502 on 2026-11-17, so the existing posting was not re-confirmed (lastSeenAt unchanged).",
     "checkedUrls": [
-      "https://faculty-opening.cswp.cs.technion.ac.il/",
-      "https://hr.technion.ac.il/positions/",
-      "https://welcome2.technion.ac.il/en/join-technion/"
+      "https://faculty-opening.cswp.cs.technion.ac.il/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "Wuhan University",
@@ -7022,16 +7010,16 @@
     "region": "asia",
     "jobsUrl": "https://en.whu.edu.cn/Community/Recruitment.htm",
     "state": null,
-    "lastCheckedAt": "2026-10-13",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed official recruitment index and 2024 high-level talent notice. The notice includes School of Computer Science, School of Cyber Science and Engineering, and Wuhan Institute for Mathematics and AI faculty openings with no closing date shown; current availability is uncertain, so revisit before import.",
+    "summary": "Recruitment index and the high-level talent notice (2024-12-27, computer science and cyber science schools named) were still live on 2026-11-17; the notice has no deadline. Department-level pages not reviewed.",
     "checkedUrls": [
       "https://en.whu.edu.cn/Community/Recruitment.htm",
       "https://en.whu.edu.cn/info/5101/51671.htm"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-10"
+    "deferredUntil": null
   },
   {
     "school": "Seoul National University",
@@ -7061,13 +7049,11 @@
     "region": "europe",
     "jobsUrl": "https://informatics.tuwien.ac.at/jobs/",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Official Informatics jobs index currently states no open positions. Search found a Software Engineering assistant professorship closed 2026-06-25 and two pre-/post-doc listings posted in February with current status unclear; none counted. Revisit.",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
+    "outcome": "complete",
+    "summary": "TU Wien Informatics jobs page states no open positions on 2026-11-17. Recheck periodically.",
     "checkedUrls": [
-      "https://informatics.tuwien.ac.at/jobs/",
-      "https://informatics.tuwien.ac.at/news/3158",
-      "https://informatics.tuwien.ac.at/news/3098"
+      "https://informatics.tuwien.ac.at/jobs/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
@@ -7081,17 +7067,15 @@
     "region": "asia",
     "jobsUrl": "https://cs.korea.edu/en_cs/board/course.do",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Official CS board shows a non-tenure adjunct faculty recruitment for a graduate course with application window 2026-06-08 to 2026-06-14, now closed. Current career board postings are external employer ads, not university jobs; no current CS vacancy verified.",
+    "summary": "CS board page did not load (upstream failure) on 2026-11-17; nothing re-verified.",
     "checkedUrls": [
-      "https://cs.korea.edu/en_cs/board/course.do",
-      "https://cs.korea.edu/en_cs/board/course.do?article.offset=90&articleLimit=10&articleNo=810937&mode=view",
-      "https://cs.korea.edu/en_cs/index.do"
+      "https://cs.korea.edu/en_cs/board/course.do"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "University College London",
@@ -7152,13 +7136,11 @@
     "region": "asia",
     "jobsUrl": "https://ai.hit.edu.cn/12792/list.htm",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Official AI Research Institute page states it recruits faculty and full-time researchers year-round, including faculty, researchers, and postdocs, across AI, NLP, vision, HCI, and systems. Other HIT computing units and campuses not fully reviewed.",
+    "summary": "AI Research Institute recruitment page (Chinese) still live on 2026-11-17: year-round calls for chief scientists, young scientists, tenure-track and postdocs, no deadline. Other HIT units not reviewed.",
     "checkedUrls": [
-      "https://ai.hit.edu.cn/12792/list.htm",
-      "https://computing.hit.edu.cn/_s227/11271/list.psp",
-      "https://www.hit.edu.cn/11573/list.htm"
+      "https://ai.hit.edu.cn/12792/list.htm"
     ],
     "relatedUnits": [
       {
@@ -7257,13 +7239,12 @@
     "region": "europe",
     "jobsUrl": "https://www.chalmers.se/en/departments/cse/work-at-cse/",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Official joint CSE careers page links to Chalmers and University of Gothenburg vacancy boards. Chalmers vacancy page did not expose any CSE-specific openings during this check; Gothenburg listings not reviewed. Revisit.",
+    "summary": "CSE work page links to Chalmers and Gothenburg vacancy boards; the Chalmers vacancy list rendered without any CSE faculty post on 2026-11-17, but the department-filtered board and the GU board were not read.",
     "checkedUrls": [
       "https://www.chalmers.se/en/departments/cse/work-at-cse/",
-      "https://www.chalmers.se/en/about-chalmers/work-with-us/vacancies/",
-      "https://www.chalmers.se/en/departments/cse/our-research/doctoral-studies/"
+      "https://www.chalmers.se/en/about-chalmers/work-with-us/vacancies/"
     ],
     "relatedUnits": [
       {
@@ -7272,7 +7253,7 @@
       }
     ],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "University of A Coruña",
@@ -7282,17 +7263,15 @@
     "region": "europe",
     "jobsUrl": "https://pdi.udc.es/",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed the official PDI recruitment portal and UDC PDI information pages, including recent Faculty of Informatics calls. The identified research and contract calls had expired short application windows; no live CS academic opening was verified. Revisit the portal because new short-window calls may appear.",
+    "summary": "pdi.udc.es is only a staff-profile directory, not a vacancy board; no UDC recruitment page reviewed on 2026-11-17. Revisit with the university convocatorias page.",
     "checkedUrls": [
-      "https://pdi.udc.es/",
-      "https://www.udc.gal/en/pdi/",
-      "https://www.udc.gal/pdi/?language=gl"
+      "https://pdi.udc.es/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "Manipal Academy of Higher Education",
@@ -7323,21 +7302,15 @@
     "region": "europe",
     "jobsUrl": "https://www.qub.ac.uk/sites/QUBJobVacancies/",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Reviewed the university vacancy portal and School of Electronics, Electrical Engineering and Computer Science work-with-us page. Verified current AI Engineer, Research Fellow in post-quantum cryptographic architectures, and FortranFuture Ecosystem Lead research roles; other EEECS listings included a power-converter research post, excluded as outside computing. Revisit official pages after the October deadlines.",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
+    "outcome": "blocked",
+    "summary": "University vacancy portal returned HTTP 403 on 2026-11-17; existing postings (all past deadline) not re-confirmed.",
     "checkedUrls": [
-      "https://www.qub.ac.uk/sites/QUBJobVacancies/",
-      "https://www.qub.ac.uk/sites/QUBJobVacancies/ResearchJobs/",
-      "https://www.qub.ac.uk/sites/QUBJobVacancies/ProfessionalSupportJobs/",
-      "https://www.qub.ac.uk/schools/eeecs/About/WorkWithUs/",
-      "https://hrwebapp.qub.ac.uk/tlive_webrecruitment/wrd/run/ETREC107GF.open?LANG=USA&VACANCY_ID=494426XS2K&WVID=6273090Lgx",
-      "https://hrwebapp.qub.ac.uk/tlive_webrecruitment/wrd/run/ETREC107GF.open?LANG=USA&VACANCY_ID=480186XqCu&WVID=6273090Lgx",
-      "https://hrwebapp.qub.ac.uk/tlive_webrecruitment/wrd/run/ETREC107GF.open?LANG=USA&VACANCY_ID=989877Xq4s&WVID=6273090Lgx"
+      "https://www.qub.ac.uk/sites/QUBJobVacancies/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Chinese Academy of Sciences",
@@ -7347,16 +7320,16 @@
     "region": "asia",
     "jobsUrl": "https://ict.cas.cn/rczp/",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed the Institute of Computing Technology recruitment index and current 2026 annual recruitment notice. The notice covers assistant researcher/special research assistant and engineer roles in computer science, systems, networks, big data, AI, and related fields; it directs applicants to the institute recruitment portal and states that the recruitment website remains open year-round. Revisit the portal for specific openings and status.",
+    "summary": "ICT recruitment pages returned HTTP 502 on 2026-11-17; existing posting not re-confirmed (lastSeenAt unchanged).",
     "checkedUrls": [
-      "https://ict.cas.cn/rczp/",
+      "https://www.ict.cas.cn/rczp/",
       "https://www.ict.cas.cn/rczp/202510/t20251015_7989499.html"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "National University of Singapore",
@@ -7437,17 +7410,15 @@
     "region": "europe",
     "jobsUrl": "https://www.jobs.gla.ac.uk/",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed the official university jobs portal and School of Computing Science GTA/demonstrator listing. Found an Assistant Demonstrator role restricted to current University of Glasgow students with a vacancy number; not a general external opening. Revisit the portal for later academic and research vacancies.",
+    "summary": "University jobs portal rendered on 2026-11-17 but the unfiltered listing showed no School of Computing Science academic post; department-filtered search was not completed.",
     "checkedUrls": [
-      "https://www.jobs.gla.ac.uk/",
-      "https://www.jobs.gla.ac.uk/disciplines/gta-demonstrator-application-form",
-      "https://www.jobs.gla.ac.uk/job/assistant-demonstrator-school-of-computing-science-6007597"
+      "https://www.jobs.gla.ac.uk/jobs/?q=computing"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-11-24"
   },
   {
     "school": "DTU",
@@ -7457,20 +7428,16 @@
     "region": "europe",
     "jobsUrl": "https://www.dtu.dk/english/about/job-and-career/vacant-positions",
     "state": null,
-    "lastCheckedAt": "2026-10-13",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed DTU’s official careers portal and DTU Compute postings. Current CS/AI-relevant openings include postdocs in cybersecurity and cyber-deception (Nov 20), LLM/agentic AI for pathogen analysis (Oct 21), software systems integration for datacenter fleets (Oct 31), and a DTU Compute statistics professorship (Nov 1).",
+    "summary": "Cyber-deception postdoc re-confirmed live (deadline 2026-11-20). DTU vacancy list returned HTTP 403, so other roles were not re-checked.",
     "checkedUrls": [
-      "https://www.dtu.dk/english/about/job-and-career/vacant-positions",
-      "https://www.compute.dtu.dk/about-us",
       "https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001/job/8336",
-      "https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001/job/8318/",
-      "https://efzu.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001/job/8372",
-      "https://euraxess.ec.europa.eu/jobs/461998"
+      "https://www.dtu.dk/english/about/job-and-career/vacant-positions"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-10"
+    "deferredUntil": null
   },
   {
     "school": "University of Oxford",
@@ -7561,15 +7528,15 @@
     "region": "europe",
     "jobsUrl": "https://www.imperial.ac.uk/computing/about/job-vacancies/",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
-    "outcome": "incomplete",
-    "summary": "Official Department of Computing vacancies page located, but direct access returned an access error; no current posting could be verified. Revisit.",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
+    "outcome": "blocked",
+    "summary": "Department of Computing vacancies page returned HTTP 403 on 2026-11-17; not bypassed.",
     "checkedUrls": [
       "https://www.imperial.ac.uk/computing/about/job-vacancies/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-01"
   },
   {
     "school": "Fudan University",
@@ -7579,15 +7546,11 @@
     "region": "asia",
     "jobsUrl": "https://hr.fudan.edu.cn/_t261/main.htm",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "Reviewed official Fudan HR recruitment and postdoc listings. Verified current full-time postdoc calls in embodied intelligence and cross-media/medical AI (both long-term), plus engineer and senior engineer roles in generative AI/brain-computer interaction (deadline 2026-10-20). Only the main HR and postdoctoral listings and selected postings were reviewed; revisit for new openings.",
+    "summary": "HR site re-read on 2026-11-17: two existing CS-related postdoc calls still live (one open-ended). New postdoc notices from other units (complex-systems lab 2026-11-02) not reviewed for CS fit.",
     "checkedUrls": [
       "https://hr.fudan.edu.cn/_t261/main.htm",
-      "https://hr.fudan.edu.cn/zrgw/list.htm",
-      "https://hr.fudan.edu.cn/4834/list.htm",
-      "https://hr.fudan.edu.cn/13/a6/c44442a791462/page.htm",
-      "https://hr.fudan.edu.cn/13/a5/c44442a791461/page.htm",
       "https://hr.fudan.edu.cn/1c/71/c4947a793713/page.htm",
       "https://hr.fudan.edu.cn/_t261/02/93/c4841a787091/page.htm"
     ],
@@ -7675,14 +7638,11 @@
     "region": "europe",
     "jobsUrl": "https://www.epfl.ch/about/working/fr/faculty-positions-in-computer-communication-sciences-2/",
     "state": null,
-    "lastCheckedAt": "2026-10-13T00:00:00Z",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
     "outcome": "incomplete",
-    "summary": "International research pass: verified official all-fields Computer & Communication Sciences faculty search and focused Security & Privacy search; both have 2026-11-01 deadlines. Other university units not reviewed.",
+    "summary": "IC faculty-search page still lists both Computer & Communication Sciences searches (deadline 2026-11-01, now past) on 2026-11-17; other EPFL units not reviewed.",
     "checkedUrls": [
-      "https://www.epfl.ch/about/working/fr/faculty-positions-in-computer-communication-sciences-2/",
-      "https://facultyrecruiting.epfl.ch/position/65863683",
-      "https://www.epfl.ch/about/working/fr/faculty-positions-in-computer-communication-sciences-security-and-privacy-2/",
-      "https://facultyrecruiting.epfl.ch/position/65863684"
+      "https://www.epfl.ch/about/working/fr/faculty-positions-in-computer-communication-sciences-2/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
@@ -7738,18 +7698,15 @@
     "region": "europe",
     "jobsUrl": "https://en.itu.dk/About-ITU/Vacancies",
     "state": null,
-    "lastCheckedAt": "2026-10-13",
-    "outcome": "incomplete",
-    "summary": "Official vacancies board reviewed. Current computing-related roles include a teaching assistant professorship supporting robotics prototyping in the REAL Lab (deadline 2026-10-26) and a computational social science postdoc using multimodal LLMs (deadline 2026-10-30). The board also links to ITU PhD vacancies, which are posted as available; no current open CS PhD found in this check.",
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
+    "outcome": "complete",
+    "summary": "Vacancies board read on 2026-11-17: one postdoc (Secure and Verifiable Computation for Internet Voting, deadline 2026-12-05) added; other open roles are PhD, student-assistant and ambassador posts (not tracked).",
     "checkedUrls": [
-      "https://en.itu.dk/About-ITU/Vacancies",
-      "https://candidate.hr-manager.net/ApplicationInit.aspx?DepartmentId=3439&MediaId=5&ProjectId=181915&cid=119",
-      "https://candidate.hr-manager.net/ApplicationInit.aspx?DepartmentId=3439&MediaId=5&ProjectId=181914&cid=119",
-      "https://en.itu.dk/Research/PhD-Programme/PhD-Positions"
+      "https://en.itu.dk/About-ITU/Vacancies"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-10"
+    "deferredUntil": null
   },
   {
     "school": "University of British Columbia",
@@ -17746,13 +17703,16 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
+    "outcome": "not_found",
+    "summary": "No faculty-recruitment page found on the CSE department site (cu.ac.bd/cse) or at /recruitment (404) on 2026-11-17; the university notice board was not searched. Revisit.",
+    "checkedUrls": [
+      "https://cu.ac.bd/cse/",
+      "https://cu.ac.bd/recruitment"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-08"
   },
   {
     "school": "University of Geneva",
@@ -17762,13 +17722,15 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
+    "outcome": "blocked",
+    "summary": "unige.ch returned \"Access Denied\" (security-system block, HTTP 403) for the Computer Science department page on 2026-11-17; not bypassed.",
+    "checkedUrls": [
+      "https://www.unige.ch/dinfo/en/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-08"
   },
   {
     "school": "University of Rajshahi",
@@ -17778,13 +17740,16 @@
     "region": "asia",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
+    "outcome": "not_found",
+    "summary": "CSE department homepage has no vacancy section and /recruitment returned 404 on 2026-11-17. The university homepage links a \"Recruitment at RU\" page that was not opened. Revisit.",
+    "checkedUrls": [
+      "https://www.ru.ac.bd/cse/",
+      "https://www.ru.ac.bd/recruitment/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-08"
   },
   {
     "school": "University of Salento",
@@ -17794,13 +17759,15 @@
     "region": "europe",
     "jobsUrl": null,
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
+    "outcome": "not_found",
+    "summary": "Department of Mathematics and Physics site (matfis.unisalento.it) home page showed no hiring/concorsi link on 2026-11-17; the university-wide concorsi portal was not reviewed. Revisit.",
+    "checkedUrls": [
+      "https://www.matfis.unisalento.it/"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null
+    "deferredUntil": "2026-12-08"
   },
   {
     "school": "University of Verona",
@@ -17808,12 +17775,14 @@
     "facultyCount": 0,
     "country": "IT",
     "region": "europe",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.di.univr.it/?ent=concorsoaol&lang=en",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
+    "outcome": "complete",
+    "summary": "Department of Computer Science \"Job and Research opportunities\" page lists only post-lauream research scholarships and short occasional-contract calls (Italian); no faculty or postdoctoral (assegno) call open on 2026-11-17. Recheck periodically.",
+    "checkedUrls": [
+      "https://www.di.univr.it/?ent=concorsoaol&lang=en"
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
@@ -17851,12 +17820,15 @@
     "facultyCount": 0,
     "country": "MY",
     "region": "asia",
-    "jobsUrl": null,
+    "jobsUrl": "https://www.xmu.edu.my/career",
     "state": null,
-    "lastCheckedAt": null,
-    "outcome": null,
-    "summary": null,
-    "checkedUrls": [],
+    "lastCheckedAt": "2026-11-17T00:00:00Z",
+    "outcome": "complete",
+    "summary": "Career portal lists one standing School of Computing and Data Science call (Professor to Lecturer, 10 positions, published 2025-08-26, still Open on 2026-11-17, no deadline, apply by email). Added. School of AI and Robotics filter not separately reviewed.",
+    "checkedUrls": [
+      "https://www.xmu.edu.my/career",
+      "https://www.xmu.edu.my/career?field_job_v_department_target_id=100&keys="
+    ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
     "deferredUntil": null
