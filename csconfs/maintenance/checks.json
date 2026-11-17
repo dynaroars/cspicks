@@ -42,14 +42,13 @@
       "proposals": []
     },
     "COLT": {
-      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
-      "outcome": "not_found",
-      "summary": "COLT 2027 page confirms June 28-July 2, Tokyo; submission/notification dates, chairs all TBD. No change.",
+      "lastCheckedAt": "2026-11-17T20:05:07.864Z",
+      "outcome": "incomplete",
+      "summary": "COLT 2027 page: submission deadline Jan 29 2027 AoE, notification May 3 2027, PCs Ruth Urner and Wouter Koolen. General chair not listed.",
       "checkedUrls": [
-        "https://learningtheory.org/colt2027/",
-        "https://learningtheory.org/colt2027/cfp.html"
+        "https://learningtheory.org/colt2027/"
       ],
-      "deferredUntil": "2026-11-15T20:05:38.844Z",
+      "deferredUntil": "2026-11-24T20:05:07.865Z",
       "proposals": []
     },
     "EMNLP": {
@@ -64,13 +63,13 @@
       "proposals": []
     },
     "FOGA": {
-      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "lastCheckedAt": "2026-11-17T20:05:07.864Z",
       "outcome": "not_found",
-      "summary": "FOGA 2027 site shows only the title (Coimbra, Portugal); dates, deadlines, chairs not stated. No change.",
+      "summary": "FOGA 2027 site only shows Coimbra, Portugal; no dates or deadlines. No change.",
       "checkedUrls": [
         "https://foga2027.dei.uc.pt/"
       ],
-      "deferredUntil": "2026-11-15T20:05:38.844Z",
+      "deferredUntil": "2026-12-08T20:05:07.865Z",
       "proposals": []
     },
     "HotOS": {
@@ -129,13 +128,14 @@
       ]
     },
     "ICS": {
-      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
-      "outcome": "not_found",
-      "summary": "ICS site says Atlanta (FCRC 2027); dates and committee to be announced. No change.",
+      "lastCheckedAt": "2026-11-17T20:05:07.864Z",
+      "outcome": "incomplete",
+      "summary": "ICS 2027 (FCRC, Atlanta) site: conference June 5-11 2027, abstract Dec 1 2026, paper Dec 7 2026, final notification Mar 12 2027; chairs unlisted.",
       "checkedUrls": [
-        "https://www.ics-conference.org/"
+        "https://www.ics-conference.org/",
+        "https://klab-ai3.github.io/ics2027/"
       ],
-      "deferredUntil": "2026-11-15T20:05:38.844Z",
+      "deferredUntil": "2026-11-24T20:05:07.865Z",
       "proposals": []
     },
     "IPSN": {
@@ -244,55 +244,33 @@
       ]
     },
     "SIGGRAPH Asia": {
-      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "lastCheckedAt": "2026-11-17T20:05:07.864Z",
       "outcome": "not_found",
-      "summary": "Could not verify 2027 deadlines: asia.siggraph.org/2027/ did not return usable content to the fetch tool. No change; retry later.",
+      "summary": "SIGGRAPH Asia 2027 page: Nov 30-Dec 3 Tokyo, chair Takahito Tejima; technical papers deadlines not announced. No change.",
       "checkedUrls": [
         "https://asia.siggraph.org/2027/"
       ],
-      "deferredUntil": "2026-11-15T20:05:38.844Z",
+      "deferredUntil": "2026-12-08T20:05:07.865Z",
       "proposals": []
     },
     "SIGIR": {
-      "lastCheckedAt": "2026-10-03T20:09:18.954Z",
+      "lastCheckedAt": "2026-11-17T20:05:07.864Z",
       "outcome": "complete",
-      "summary": "SIGIR 2027 (San Jose, July 18-24, 2027): added abstract and full-paper deadlines and notification from the official site.",
+      "summary": "SIGIR 2027 site confirms deadlines (Jan 14/21, notification Apr 5); conference dates corrected to July 19-24, San Jose.",
       "checkedUrls": [
         "https://sigir2027.org/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "update",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "abstractDeadline",
-              "url": "https://sigir2027.org/",
-              "evidence": "Abstract deadline: January 14, 2027."
-            },
-            {
-              "field": "deadline",
-              "url": "https://sigir2027.org/",
-              "evidence": "Full paper submission: January 21, 2027."
-            },
-            {
-              "field": "notificationDate",
-              "url": "https://sigir2027.org/",
-              "evidence": "Notification of acceptance: April 5, 2027."
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "UIST": {
-      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
-      "outcome": "not_found",
-      "summary": "uist.acm.org only covers UIST 2026; no 2027 edition announced. No change.",
+      "lastCheckedAt": "2026-11-17T20:05:07.864Z",
+      "outcome": "incomplete",
+      "summary": "UIST 2027 site: Oct 26-29 2027 Vienna, abstracts Mar 31, papers Apr 7 2027; chairs not on page, notification not listed.",
       "checkedUrls": [
-        "https://uist.acm.org/"
+        "https://uist.acm.org/2027/"
       ],
-      "deferredUntil": "2026-11-15T20:05:38.844Z",
+      "deferredUntil": "2026-11-24T20:05:07.865Z",
       "proposals": []
     },
     "USENIX ATC": {
@@ -604,14 +582,14 @@
       "proposals": []
     },
     "PODC": {
-      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "lastCheckedAt": "2026-11-17T20:05:07.864Z",
       "outcome": "not_found",
-      "summary": "PODC 2027 page confirms June 21-25, Reykjavik; CFP says details to follow, no deadline. No change.",
+      "summary": "PODC 2027 site confirms June 21-25 Reykjavik; CFP says watch this space, no deadlines. No change.",
       "checkedUrls": [
         "https://www.podc.org/podc2027/",
         "https://www.podc.org/podc2027/call-for-papers/"
       ],
-      "deferredUntil": "2026-11-15T20:05:38.844Z",
+      "deferredUntil": "2026-12-08T20:05:07.865Z",
       "proposals": []
     },
     "ACM MM": {
@@ -646,13 +624,13 @@
       "proposals": []
     },
     "IROS": {
-      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "lastCheckedAt": "2026-11-17T20:05:07.864Z",
       "outcome": "not_found",
-      "summary": "2028 record (Sydney) not re-verified: edition site does not exist yet; link points to IEEE RAS minutes PDF. No change.",
+      "summary": "IROS 2027 site confirms Sep 27-Oct 1 Florence; no paper deadline or chairs on page. Record deadline remains an estimate. No change.",
       "checkedUrls": [
-        "https://www.ieee-ras.org/conferences-workshops/financially-co-sponsored/iros/iros-past-and-future-venues/"
+        "https://2027.ieee-iros.org/"
       ],
-      "deferredUntil": "2026-11-15T20:05:38.844Z",
+      "deferredUntil": "2026-12-08T20:05:07.865Z",
       "proposals": []
     },
     "ESOP": {
@@ -1052,13 +1030,13 @@
       ]
     },
     "CSCW": {
-      "lastCheckedAt": "2026-10-25T20:05:38.844Z",
+      "lastCheckedAt": "2026-11-17T20:05:07.864Z",
       "outcome": "not_found",
-      "summary": "2027 site (Coming Soon) confirms Philadelphia, Oct 16-20, 2027; rolling PACM HCI review, no deadlines or chairs named. No change.",
+      "summary": "CSCW 2027 site confirms Oct 16-20 Philadelphia; no fixed deadlines or chair names on page. No change.",
       "checkedUrls": [
         "https://cscw.acm.org/2027/"
       ],
-      "deferredUntil": "2026-11-15T20:05:38.844Z",
+      "deferredUntil": "2026-12-08T20:05:07.865Z",
       "proposals": []
     },
     "DIS": {
@@ -2311,6 +2289,26 @@
         "https://conf.researchr.org/track/VMCAI-2027/VMCAI-2027-papers"
       ],
       "deferredUntil": "2026-11-22T20:05:57.000Z",
+      "proposals": []
+    },
+    "VR": {
+      "lastCheckedAt": "2026-11-17T20:05:07.864Z",
+      "outcome": "incomplete",
+      "summary": "IEEE VR 2027 site confirms Feb 27-Mar 3 Melbourne; deadlines/chairs not on fetched page, existing values left unchanged.",
+      "checkedUrls": [
+        "https://ieeevr.org/2027/"
+      ],
+      "deferredUntil": "2026-11-24T20:05:07.865Z",
+      "proposals": []
+    },
+    "WSDM": {
+      "lastCheckedAt": "2026-11-17T20:05:07.864Z",
+      "outcome": "complete",
+      "summary": "WSDM 2027 site confirms Feb 15-19 Hong Kong and chairs; page lists only short-paper/WSDM Day deadlines, existing full-paper values unchanged.",
+      "checkedUrls": [
+        "https://www.wsdm-conference.org/2027/"
+      ],
+      "deferredUntil": null,
       "proposals": []
     }
   }
