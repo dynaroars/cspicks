@@ -133,7 +133,7 @@
     "careersUrl": "https://www.ibm.com/careers/research",
     "internshipsUrl": "https://www.ibm.com/careers/internships",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-28"
+    "postingsCheckedAt": "2026-11-18"
   },
   {
     "id": "nvidia-research",
@@ -247,7 +247,7 @@
     "summary": "Intel’s research organization (computer architecture, AI, security, quantum and neuromorphic computing).",
     "careersUrl": "https://www.intel.com/content/www/us/en/research/overview.html",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-21"
+    "postingsCheckedAt": "2026-11-18"
   },
   {
     "id": "samsung-research-america",
@@ -449,7 +449,7 @@
     "summary": "Security research and engineering firm (program analysis, cryptography, blockchain and AI security).",
     "careersUrl": "https://trailofbits.com/careers/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-21"
+    "postingsCheckedAt": "2026-11-18"
   },
   {
     "id": "two-six-technologies",
@@ -466,7 +466,7 @@
     "summary": "Research and engineering company for national security (cyber, AI/ML, information operations).",
     "careersUrl": "https://twosixtech.com/careers/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-28"
+    "postingsCheckedAt": "2026-11-18"
   },
   {
     "id": "charles-river-analytics",
@@ -484,7 +484,7 @@
     "summary": "Applied AI research company (probabilistic modeling, autonomy, human-machine teaming) funded largely by government research contracts.",
     "careersUrl": "https://cra.com/careers/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-21"
+    "postingsCheckedAt": "2026-11-18"
   },
   {
     "id": "str",
@@ -549,7 +549,7 @@
     "summary": "Nonprofit research institute with long-running computer science, AI, and security laboratories.",
     "careersUrl": "https://www.sri.com/careers/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-21"
+    "postingsCheckedAt": "2026-11-18"
   },
   {
     "id": "draper",
@@ -569,7 +569,7 @@
     "careersUrl": "https://www.draper.com/careers",
     "internshipsUrl": "https://www.draper.com/education-programs/student-opportunities",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-28"
+    "postingsCheckedAt": "2026-11-18"
   },
   {
     "id": "llnl",
@@ -707,7 +707,7 @@
     "internshipsUrl": "https://cs.lbl.gov/work/internship-visiting-faculty-employment/",
     "postdocsUrl": "https://cs.lbl.gov/work/fellowships/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-21"
+    "postingsCheckedAt": "2026-11-18"
   },
   {
     "id": "pnnl",
@@ -730,7 +730,7 @@
     "summary": "DOE national lab (HPC, AI, data science, computer architecture, cybersecurity).",
     "careersUrl": "https://careers.pnnl.gov/",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-21"
+    "postingsCheckedAt": "2026-11-18"
   },
   {
     "id": "brookhaven",
@@ -819,7 +819,7 @@
     "careersUrl": "https://www.nist.gov/careers",
     "internshipsUrl": "https://www.nist.gov/careers/student-opportunities",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-21"
+    "postingsCheckedAt": "2026-11-18"
   },
   {
     "id": "arl",
@@ -888,7 +888,7 @@
     "careersUrl": "https://www.jhuapl.edu/careers",
     "internshipsUrl": "https://www.jhuapl.edu/careers/internships",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-21"
+    "postingsCheckedAt": "2026-11-18"
   },
   {
     "id": "mitre",
@@ -909,7 +909,7 @@
     "careersUrl": "https://careers.mitre.org/us/en/recent-graduates",
     "internshipsUrl": "https://careers.mitre.org/us/en/student-programs",
     "checkedAt": "2026-10-15",
-    "postingsCheckedAt": "2026-10-21"
+    "postingsCheckedAt": "2026-11-18"
   },
   {
     "id": "cmu-sei",
