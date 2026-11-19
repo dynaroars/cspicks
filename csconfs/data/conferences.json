@@ -3344,7 +3344,7 @@
     "link": null,
     "seriesLink": "https://chi.acm.org/",
     "date": null,
-    "place": null,
+    "place": "Cape Town, South Africa",
     "abstractDeadline": null,
     "deadline": null,
     "rebuttalDate": null,
@@ -3355,7 +3355,7 @@
     "submissions": null,
     "estimated": true,
     "verified": false,
-    "generalChair": null
+    "generalChair": "Anicia Peters, Melissa Densmore, Ian Oakley"
   },
   {
     "name": "CHI",
