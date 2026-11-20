@@ -2545,7 +2545,7 @@
       "PhD Students"
     ],
     "whoFor": "Researchers developing foundational capabilities for robots or classes of robots",
-    "deadline": "Full proposals accepted anytime (PD 20-144Y; since August 1, 2020); no target date",
+    "deadline": "Full proposals accepted anytime (solicitation NSF 27-501, published November 19, 2026); no target date",
     "deadlineMonth": 0,
     "amount": "Amount varies; see the official program page and current NSF guidance.",
     "summary": "NSF’s Foundational Research in Robotics program supports research on robotic systems combining substantial computational capability and physical complexity. Responsive proposals should focus on a robot or class of robots, aim to add or significantly improve useful capabilities, and address a fundamental gap in robotics.",
@@ -2563,7 +2563,7 @@
     "url": "https://www.nsf.gov/funding/opportunities/frr-foundational-research-robotics",
     "featured": false,
     "addedAt": "2026-08-26",
-    "lastVerifiedAt": "2026-11-02"
+    "lastVerifiedAt": "2026-11-20"
   },
   {
     "id": "nsf-shf",
