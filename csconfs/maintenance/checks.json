@@ -294,65 +294,85 @@
       "proposals": []
     },
     "AAAI": {
-      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "lastCheckedAt": "2026-11-19T20:05:00.000Z",
       "outcome": "not_found",
-      "summary": "AAAI-28 not announced on the series page; only AAAI-27 listed.",
+      "summary": "Official series page lists only AAAI-27 (Montreal, Feb 16-23, 2027); AAAI-28 not announced. 2028 placeholder unchanged.",
       "checkedUrls": [
         "https://aaai.org/conference/aaai/"
       ],
-      "deferredUntil": "2026-11-17T20:30:00.000Z",
+      "deferredUntil": "2026-12-10T20:05:00.000Z",
       "proposals": []
     },
     "ASPLOS": {
-      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "lastCheckedAt": "2026-11-19T20:05:00.000Z",
       "outcome": "not_found",
-      "summary": "ASPLOS 2028 not announced on the series page; only ASPLOS 2027 listed.",
+      "summary": "ASPLOS 2027 CFP confirms existing cycle deadlines/author response/notification; ASPLOS 2028 not announced. No change.",
       "checkedUrls": [
-        "https://www.asplos-conference.org/"
+        "https://www.asplos-conference.org/",
+        "https://www.asplos-conference.org/asplos2027/",
+        "https://www.asplos-conference.org/asplos2027/cfp/"
       ],
-      "deferredUntil": "2026-11-17T20:30:00.000Z",
+      "deferredUntil": "2026-12-10T20:05:00.000Z",
       "proposals": []
     },
     "CAV": {
-      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "lastCheckedAt": "2026-11-19T20:05:00.000Z",
       "outcome": "not_found",
-      "summary": "CAV 2028 not mentioned on the 2027 edition site; series site redirects to a non-official-looking CloudFront host so not used.",
+      "summary": "CAV 2027 page confirms July 19-23, Amsterdam, deadline 2027-01-20, response Apr 5-8, notification Apr 23; CAV 2028 not announced. No change. i-cav.org redirected to an unverified cloudfront host, not followed.",
       "checkedUrls": [
-        "https://conferences.i-cav.org/2027/",
-        "https://i-cav.org/"
+        "https://conferences.i-cav.org/2027/"
       ],
-      "deferredUntil": "2026-11-17T20:30:00.000Z",
+      "deferredUntil": "2026-12-10T20:05:00.000Z",
       "proposals": []
     },
     "CCS": {
-      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "lastCheckedAt": "2026-11-19T20:05:00.000Z",
       "outcome": "not_found",
-      "summary": "CCS 2027 page blocked by bot check and CCS 2028 not found; unverified, retry later.",
+      "summary": "CCS 2027 page (Atlanta, Oct 11-15, 2027) says Coming Soon; no deadlines published. CFP URL guess returned 404. CCS 2028 not announced. No change.",
       "checkedUrls": [
         "https://www.sigsac.org/ccs/CCS2027/"
       ],
-      "deferredUntil": "2026-11-17T20:30:00.000Z",
+      "deferredUntil": "2026-12-10T20:05:00.000Z",
       "proposals": []
     },
     "CHI": {
-      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
-      "outcome": "not_found",
-      "summary": "CHI 2028 not announced on the CHI 2027 site; CHI 2027 paper deadline and notification match existing record. chi.acm.org returned 403.",
+      "lastCheckedAt": "2026-11-19T20:05:00.000Z",
+      "outcome": "incomplete",
+      "summary": "CHI 2028 location (Cape Town, South Africa) and general chairs announced by SIGCHI; dates, website and deadlines not published. CHI 2027 dates/place/deadline/notification confirmed (resubmission deadline 2026-12-03 not modelled).",
       "checkedUrls": [
         "https://chi2027.acm.org/",
-        "https://chi.acm.org/"
+        "https://sigchi.org/conferences/upcoming/",
+        "https://sigchi.org/news/announcements/?a=%22CHI+28+Leadership+Team+and+Open+Call%22"
       ],
-      "deferredUntil": "2026-11-17T20:30:00.000Z",
-      "proposals": []
+      "deferredUntil": "2026-11-26T20:05:00.000Z",
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2028,
+          "sources": [
+            {
+              "field": "place",
+              "url": "https://sigchi.org/news/announcements/?a=%22CHI+28+Leadership+Team+and+Open+Call%22",
+              "evidence": "CHI 2028 in Cape Town, South Africa"
+            },
+            {
+              "field": "generalChair",
+              "url": "https://sigchi.org/news/announcements/?a=%22CHI+28+Leadership+Team+and+Open+Call%22",
+              "evidence": "General chairs Anicia Peters, Melissa Densmore, Ian Oakley"
+            }
+          ]
+        }
+      ]
     },
     "CVPR": {
-      "lastCheckedAt": "2026-10-27T20:30:00.000Z",
+      "lastCheckedAt": "2026-11-19T20:05:00.000Z",
       "outcome": "not_found",
-      "summary": "CVPR site lists editions only through 2027; no 2028 or 2029 details published.",
+      "summary": "CVPR 2027 dates page confirms registration Nov 10, paper Nov 16, rebuttal Feb 1, decisions Feb 25, 2027; Seattle Jun 20-25. CVPR 2028/2029 edition sites not announced. No change.",
       "checkedUrls": [
-        "https://cvpr.thecvf.com/"
+        "https://cvpr.thecvf.com/Conferences/2027",
+        "https://cvpr.thecvf.com/Conferences/2027/Dates"
       ],
-      "deferredUntil": "2026-11-17T20:30:00.000Z",
+      "deferredUntil": "2026-12-10T20:05:00.000Z",
       "proposals": []
     },
     "EuroSys": {
@@ -914,73 +934,24 @@
       "proposals": []
     },
     "BPM": {
-      "lastCheckedAt": "2026-10-18T20:05:44.310Z",
+      "lastCheckedAt": "2026-11-19T20:05:00.000Z",
       "outcome": "complete",
-      "summary": "BPM 2027 announced (Leuven, Sep 5-10 2027); added new record with research-paper deadline Mar 18 2027 and general chairs. Abstract/notification dates and program chair roles (track chairs, not a single PC chair) left null.",
+      "summary": "BPM 2027 re-confirmed: Sep 5-10 Leuven, research paper deadline Mar 18, 2027; no abstract/notification dates published. No change.",
       "checkedUrls": [
-        "https://bpm-conference.org/",
-        "https://bpm2027leuven.org/",
-        "https://bpm2027leuven.org/conference-chairs/"
+        "https://bpm2027leuven.org/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "create",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "date",
-              "url": "https://bpm2027leuven.org/",
-              "evidence": "5-10 September 2027, Leuven, Belgium"
-            },
-            {
-              "field": "deadline",
-              "url": "https://bpm2027leuven.org/",
-              "evidence": "Research papers: 18 March 2027"
-            },
-            {
-              "field": "generalChair",
-              "url": "https://bpm2027leuven.org/",
-              "evidence": "General Chairs Johannes De Smedt and Jochen De Weerdt"
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "CAiSE": {
-      "lastCheckedAt": "2026-10-18T20:05:44.310Z",
+      "lastCheckedAt": "2026-11-19T20:05:00.000Z",
       "outcome": "complete",
-      "summary": "CAiSE 2027 announced (Seville, Jun 7-11 2027); added new record with abstract Nov 4 2026, paper Nov 15 2026, notification Feb 10 2027, general and program chairs from official site.",
+      "summary": "CAiSE 2027 dates re-confirmed (abstract Nov 4, paper Nov 15 2026, notification Feb 10 2027). No change.",
       "checkedUrls": [
-        "https://caise-conference.diag.uniroma1.it/",
-        "https://www.caise2027seville.org/",
-        "https://www.caise2027seville.org/calls/dates/",
-        "https://www.caise2027seville.org/conference/chairs/"
+        "https://www.caise2027seville.org/calls/dates/"
       ],
       "deferredUntil": null,
-      "proposals": [
-        {
-          "action": "create",
-          "year": 2027,
-          "sources": [
-            {
-              "field": "deadline",
-              "url": "https://www.caise2027seville.org/calls/dates/",
-              "evidence": "Abstract 4 Nov 2026, paper 15 Nov 2026, notification 10 Feb 2027 (AoE)"
-            },
-            {
-              "field": "generalChair",
-              "url": "https://www.caise2027seville.org/conference/chairs/",
-              "evidence": "General chairs Cabanillas and Ruiz Cortés"
-            },
-            {
-              "field": "programChair",
-              "url": "https://www.caise2027seville.org/conference/chairs/",
-              "evidence": "Program chairs Mecella and Santos"
-            }
-          ]
-        }
-      ]
+      "proposals": []
     },
     "CIKM": {
       "lastCheckedAt": "2026-11-03T02:14:09.000Z",
@@ -1534,13 +1505,13 @@
       "proposals": []
     },
     "SDM": {
-      "lastCheckedAt": "2026-11-10T20:05:19.265Z",
-      "outcome": "incomplete",
-      "summary": "siam.org returned HTTP 403 for the SDM 2027 page; nothing verified. No change.",
+      "lastCheckedAt": "2026-11-19T20:05:00.000Z",
+      "outcome": "not_found",
+      "summary": "SIAM SDM page blocked (HTTP 403); site search shows only SDM26 (Nov 19-20, 2026, Salt Lake City). No SDM27 page found; no change.",
       "checkedUrls": [
-        "https://www.siam.org/conferences-events/siam-conferences/sdm27/"
+        "https://www.siam.org/conferences-events/siam-conferences/sdm26/"
       ],
-      "deferredUntil": "2026-11-17T20:05:19.265Z",
+      "deferredUntil": "2026-12-10T20:05:00.000Z",
       "proposals": []
     },
     "SEAMS": {
