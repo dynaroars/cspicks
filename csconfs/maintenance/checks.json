@@ -94,13 +94,12 @@
       "proposals": []
     },
     "ICME": {
-      "lastCheckedAt": "2026-10-20T20:05:31.409Z",
+      "lastCheckedAt": "2026-11-21T20:04:39.142Z",
       "outcome": "complete",
-      "summary": "ICME 2027 site states July 13-17, 2027 Xiamen; regular paper deadline 2026-12-30, notification 2027-03-24, general and TPC chairs. Abstract deadline not listed.",
+      "summary": "ICME 2027 re-audited: dates, Xiamen, regular deadline 2026-12-30, notification 2027-03-24 confirmed; added author rebuttal window Feb 26-Mar 4, 2027. Abstract deadline not listed.",
       "checkedUrls": [
         "https://2027.ieeeicme.org/",
-        "https://2027.ieeeicme.org/about/important-dates",
-        "https://2027.ieeeicme.org/about/organizing-committee"
+        "https://2027.ieeeicme.org/about/important-dates"
       ],
       "deferredUntil": null,
       "proposals": [
@@ -109,19 +108,9 @@
           "year": 2027,
           "sources": [
             {
-              "field": "deadline",
+              "field": "rebuttalDate",
               "url": "https://2027.ieeeicme.org/about/important-dates",
-              "evidence": "Regular Paper Submission Deadline Dec 30, 2026; Regular Paper Acceptance Notification Mar 24, 2027."
-            },
-            {
-              "field": "generalChair",
-              "url": "https://2027.ieeeicme.org/about/organizing-committee",
-              "evidence": "General Chairs Nicu Sebe and Rongrong Ji; TPC chairs Chia-Wen Lin, Guoying Zhao, Liujuan Cao, William Puech, Tian Gan, Shu Hu, Yue Gao."
-            },
-            {
-              "field": "date",
-              "url": "https://2027.ieeeicme.org/",
-              "evidence": "July 13-17, 2027, Xiamen, China."
+              "evidence": "Author Rebuttal: Feb 26 – Mar 04, 2027."
             }
           ]
         }
