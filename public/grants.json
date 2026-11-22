@@ -7464,5 +7464,135 @@
     "citizenship": "other",
     "lastVerifiedAt": "2026-11-06",
     "addedAt": "2026-11-06"
+  },
+  {
+    "id": "nsf-access-explore",
+    "name": "NSF ACCESS Explore Allocation",
+    "shortName": "ACCESS Explore",
+    "sponsor": "NSF ACCESS (Advanced Cyberinfrastructure Coordination Ecosystem)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students",
+      "Master's Students"
+    ],
+    "whoFor": "Researchers and educators with an institutional affiliation who need a first allocation of national HPC, cloud, and AI resources; graduate-student leads need an advisor letter",
+    "deadline": "Rolling (Explore requests usually decided by the next business day; credit exchange review can take up to a week)",
+    "deadlineMonth": 0,
+    "amount": "ACCESS Credits exchangeable for resource time (not cash); amount not stated on the get-started page, see the Exchange Calculator",
+    "summary": "Entry-level route to NSF ACCESS-allocated computing: request an Explore project, then exchange ACCESS Credits for time on national supercomputers and cloud systems. Also used to try resources before larger allocation requests.",
+    "eligibility": [
+      "An ACCESS account whose institutional email matches your listed affiliation (gmail.com and yahoo.com domains are prohibited)",
+      "Graduate student project leads need a signed advisor letter (an NSF GRFP recipient or honorable mention may submit the NSF letter instead)",
+      "Project lead and co-leads each upload a CV or resume of up to 3 pages (PDF); classroom projects need a syllabus"
+    ],
+    "topics": [
+      "HPC",
+      "Cloud Computing",
+      "Research Infrastructure"
+    ],
+    "url": "https://allocations.access-ci.org/get-your-first-project",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-22",
+    "addedAt": "2026-11-22"
+  },
+  {
+    "id": "doe-nersc-exploratory-allocation",
+    "name": "DOE NERSC Exploratory Allocation (ERCAP)",
+    "shortName": "NERSC Exploratory",
+    "sponsor": "Department of Energy (DOE) Office of Science, NERSC",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Principal investigators evaluating NERSC or porting/developing codes for open research aligned with DOE Office of Science programs",
+    "deadline": "Rolling (initial requests accepted at any time; annual renewals required for approved projects)",
+    "deadlineMonth": 0,
+    "amount": "In-kind compute (not cash): Exploratory awards up to 250 node hours and 1 TB of HPSS archival storage; default 20 TB CFS project storage",
+    "summary": "Exploratory class of NERSC's ERCAP allocation process, for PIs who want to evaluate NERSC for a new project or port and develop new codes on DOE Office of Science supercomputers, including GPU systems.",
+    "eligibility": [
+      "PI needs a NERSC account to log in to ERCAP (otherwise request a PI ERCAP access account through Iris)",
+      "Research must be open and intended for publication; purely proprietary work is not allowed",
+      "Classified, export-controlled/ITAR, personally identifiable, and protected health information are not allowed",
+      "The request names the DOE Office of Science program that funds or will oversee the research"
+    ],
+    "topics": [
+      "HPC",
+      "Scientific Computing",
+      "Research Infrastructure"
+    ],
+    "url": "https://docs.nersc.gov/allocations/ercap_form/",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-22",
+    "addedAt": "2026-11-22"
+  },
+  {
+    "id": "eurohpc-ai-for-science-access",
+    "name": "EuroHPC JU AI for Science and Collaborative EU Projects Access Call",
+    "shortName": "EuroHPC AI for Science",
+    "sponsor": "European High Performance Computing Joint Undertaking (EuroHPC JU)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs",
+      "PhD Students"
+    ],
+    "whoFor": "Scientific users (with or without national or European funding) and public-sector users doing AI-based science; industry only within EU-funded R&I projects",
+    "deadline": "Cut-offs (10:00 CET): October 30, 2026; December 11, 2026; December 31, 2033 (earlier 2026 cut-offs passed); access begins within one month after the cut-off",
+    "deadlineMonth": 12,
+    "amount": "Six-month allocations of node hours on EuroHPC systems (LUMI, Leonardo, MareNostrum5, MeluXina); size not stated in page text",
+    "summary": "Rolling-cut-off EuroHPC access mode giving AI-for-science projects compute on the EU's AI-capable supercomputers.",
+    "eligibility": [
+      "Scientific users funded or not by national/European programmes, and public sector users",
+      "Industrial users only within EU-funded R&I projects such as Horizon Europe or Digital Europe; other industry should use the AI for Industrial Innovation access modes",
+      "Page does not state country eligibility; check the call text and fee terms"
+    ],
+    "topics": [
+      "AI/ML",
+      "HPC",
+      "Research Infrastructure"
+    ],
+    "url": "https://www.eurohpc-ju.europa.eu/eurohpc-ju-call-proposals-ai-science-and-collaborative-eu-projects_en",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-22",
+    "addedAt": "2026-11-22"
+  },
+  {
+    "id": "ukri-airr-gateway-route",
+    "name": "UKRI Access to Isambard-AI and Zenith AIRR Supercomputers: Gateway Route",
+    "shortName": "UKRI AIRR Gateway",
+    "sponsor": "UK Research and Innovation (UKRI) / AI Research Resource (AIRR)",
+    "sponsorCategory": "Government",
+    "targetAudience": [
+      "Faculty",
+      "Postdocs"
+    ],
+    "whoFor": "UK-based researchers (academia, industry, charities, not-for-profits) making first use of AI supercomputing; project leads need a contract longer than the project",
+    "deadline": "Open, no closing date",
+    "deadlineMonth": 0,
+    "amount": "Compute only, no funding: up to 10,000 GPU hours on Isambard-AI or Zenith, used within 3 months of project start (possible 50% top-up after 90% use)",
+    "summary": "Entry route to the UK AIRR supercomputers for first-time AI supercomputing use, testing algorithms or workflows, and benchmarking before larger AIRR calls.",
+    "eligibility": [
+      "UK-registered businesses (Companies House number), UKRI-eligible research organisations, charities, and not-for-profits",
+      "Project lead contract with their organisation must outlast the project; research software engineers can lead or co-lead",
+      "Businesses must fund a share of eligible costs and receive capped compute; academic organisations are exempt",
+      "Awards comply with the Subsidy Control Act 2022"
+    ],
+    "topics": [
+      "AI/ML",
+      "HPC",
+      "Research Infrastructure"
+    ],
+    "locations": [
+      "United Kingdom"
+    ],
+    "locationLabel": "UK-based applicants",
+    "url": "https://www.ukri.org/opportunity/access-to-isambard-ai-and-zenith-airr-supercomputers-gateway-route/",
+    "featured": false,
+    "lastVerifiedAt": "2026-11-22",
+    "addedAt": "2026-11-22"
   }
 ]
