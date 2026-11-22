@@ -7541,7 +7541,7 @@
       "PhD Students"
     ],
     "whoFor": "Scientific users (with or without national or European funding) and public-sector users doing AI-based science; industry only within EU-funded R&I projects",
-    "deadline": "Cut-offs (10:00 CET): October 30, 2026; December 11, 2026; December 31, 2033 (earlier 2026 cut-offs passed); access begins within one month after the cut-off",
+    "deadline": "Cut-offs (10:00 CET): December 11, 2026; December 31, 2033 (earlier 2026 cut-offs, the latest on October 30, have passed); access begins within one month after the cut-off",
     "deadlineMonth": 12,
     "amount": "Six-month allocations of node hours on EuroHPC systems (LUMI, Leonardo, MareNostrum5, MeluXina); size not stated in page text",
     "summary": "Rolling-cut-off EuroHPC access mode giving AI-for-science projects compute on the EU's AI-capable supercomputers.",
