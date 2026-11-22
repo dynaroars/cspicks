@@ -22,13 +22,13 @@
       "proposals": []
     },
     "CCC": {
-      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
+      "lastCheckedAt": "2026-11-22T20:05:09.000Z",
       "outcome": "incomplete",
       "summary": "CCC 2027 site confirms July 19-22 2027, Seattle; no deadlines announced. No change.",
       "checkedUrls": [
         "https://computationalcomplexity.org/"
       ],
-      "deferredUntil": "2026-11-21T21:00:00.000Z",
+      "deferredUntil": "2026-11-29T20:05:09.000Z",
       "proposals": []
     },
     "CHES": {
@@ -365,13 +365,13 @@
       "proposals": []
     },
     "EuroSys": {
-      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "lastCheckedAt": "2026-11-22T20:05:09.000Z",
       "outcome": "not_found",
-      "summary": "EuroSys 2028 not announced on eurosys.org (lists only 2026 and 2027); skeleton left estimated/unverified.",
+      "summary": "eurosys.org lists only 2027 (Rabat); 2028 not announced. 2028.eurosys.org does not resolve from the session.",
       "checkedUrls": [
         "https://www.eurosys.org/"
       ],
-      "deferredUntil": "2026-11-22T20:00:00.000Z",
+      "deferredUntil": "2026-12-13T20:05:09.000Z",
       "proposals": []
     },
     "FAST": {
@@ -385,16 +385,23 @@
       "proposals": []
     },
     "ICML": {
-      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
-      "outcome": "not_found",
-      "summary": "icml.cc Future Meetings lists only region (2027 South America, 2028 Eastern US); no dates, city or deadlines; icml.cc/Conferences/2027 returns 404. Records unchanged.",
+      "lastCheckedAt": "2026-11-22T20:05:09.000Z",
+      "outcome": "incomplete",
+      "summary": "ICML 2027 key dates confirm Rio de Janeiro, Jul 31-Aug 6, abstract Jan 14, paper Jan 22, notification May 3; chairs and rebuttal dates not listed. 2028 not announced.",
       "checkedUrls": [
-        "https://icml.cc/",
-        "https://icml.cc/Conferences/FutureMeetings",
-        "https://icml.cc/Conferences/2027"
+        "https://icml.cc/Conferences/2027",
+        "https://icml.cc/Conferences/2027/Dates"
       ],
-      "deferredUntil": "2026-11-22T20:00:00.000Z",
-      "proposals": []
+      "deferredUntil": "2026-11-29T20:05:09.000Z",
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            "https://icml.cc/Conferences/2027/Dates"
+          ]
+        }
+      ]
     },
     "IJCAI": {
       "lastCheckedAt": "2026-11-12T20:10:00.000Z",
@@ -417,14 +424,13 @@
       "proposals": []
     },
     "NeurIPS": {
-      "lastCheckedAt": "2026-11-01T20:00:00.000Z",
+      "lastCheckedAt": "2026-11-22T20:05:09.000Z",
       "outcome": "not_found",
-      "summary": "neurips.cc Future Meetings lists only Europe (2027) and Western US (2028); no dates or deadlines; /Conferences/2027/Dates is 404. Records unchanged.",
+      "summary": "FutureMeetings lists 2027 Europe and 2028 Western US only; no city, dates or deadlines. neurips.cc/Conferences/2027 returned 404.",
       "checkedUrls": [
-        "https://neurips.cc/Conferences/FutureMeetings",
-        "https://neurips.cc/Conferences/2027/Dates"
+        "https://neurips.cc/Conferences/FutureMeetings"
       ],
-      "deferredUntil": "2026-11-22T20:00:00.000Z",
+      "deferredUntil": "2026-12-13T20:05:09.000Z",
       "proposals": []
     },
     "SIGMOD": {
@@ -489,15 +495,24 @@
       "proposals": []
     },
     "ASE": {
-      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
-      "outcome": "not_found",
-      "summary": "ASE 2027 researchr page (ase-2027) returns 404; series site has no edition info reachable. Record left estimated/unverified.",
+      "lastCheckedAt": "2026-11-22T20:05:09.000Z",
+      "outcome": "incomplete",
+      "summary": "ASE 2027 confirms El Paso Oct 24-28, paper submission Mar 10, notifications, chairs. Abstract deadline and timezone not stated.",
       "checkedUrls": [
         "https://conf.researchr.org/home/ase-2027",
-        "https://www.ase-conferences.org/"
+        "https://conf.researchr.org/committee/ase-2027/ase-2027-organizing-committee"
       ],
-      "deferredUntil": "2026-11-21T20:05:29.000Z",
-      "proposals": []
+      "deferredUntil": "2026-11-29T20:05:09.000Z",
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            "https://conf.researchr.org/home/ase-2027",
+            "https://conf.researchr.org/committee/ase-2027/ase-2027-organizing-committee"
+          ]
+        }
+      ]
     },
     "ICWSM": {
       "lastCheckedAt": "2026-11-08T20:04:52.954Z",
@@ -510,15 +525,23 @@
       "proposals": []
     },
     "MICRO": {
-      "lastCheckedAt": "2026-10-31T20:05:29.000Z",
+      "lastCheckedAt": "2026-11-22T20:05:09.000Z",
       "outcome": "not_found",
-      "summary": "micro.org has no 2027 content; micro60 page on microarch.org 404. Record left estimated/unverified.",
+      "summary": "micro.org/microarch.org list only MICRO-59 (Athens, Oct 31-Nov 4 2026); MICRO 2027 unannounced. Removed date that duplicated the 2026 edition.",
       "checkedUrls": [
         "https://micro.org/",
-        "https://www.microarch.org/micro60/"
+        "https://www.microarch.org/"
       ],
-      "deferredUntil": "2026-11-21T20:05:29.000Z",
-      "proposals": []
+      "deferredUntil": "2026-12-13T20:05:09.000Z",
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2027,
+          "sources": [
+            "https://www.microarch.org/"
+          ]
+        }
+      ]
     },
     "SenSys": {
       "lastCheckedAt": "2026-11-15T20:05:57.000Z",
@@ -542,23 +565,14 @@
       "proposals": []
     },
     "ICSE": {
-      "lastCheckedAt": "2026-11-14T21:00:00.000Z",
-      "outcome": "incomplete",
-      "summary": "ICSE 2028 site: events Apr 29-May 7 2028 (main May 3-5), Waikoloa HI; research-track deadlines not published (track page 404). Updated date/place; deadlines remain estimated.",
+      "lastCheckedAt": "2026-11-22T20:05:09.000Z",
+      "outcome": "not_found",
+      "summary": "2028 edition page confirms Apr 29-May 7 2028, Waikoloa; research-track dates and chairs not found (track page 404). 2029 not checked beyond existing record.",
       "checkedUrls": [
-        "https://conf.researchr.org/home/icse-2028",
-        "https://conf.researchr.org/track/icse-2028/icse-2028-research-track"
+        "https://conf.researchr.org/home/icse-2028"
       ],
-      "deferredUntil": "2026-11-21T21:00:00.000Z",
-      "proposals": [
-        {
-          "action": "update-date-place",
-          "year": 2028,
-          "sources": [
-            "https://conf.researchr.org/home/icse-2028"
-          ]
-        }
-      ]
+      "deferredUntil": "2026-12-13T20:05:09.000Z",
+      "proposals": []
     },
     "NDSS": {
       "lastCheckedAt": "2026-11-05T20:00:00.000Z",
