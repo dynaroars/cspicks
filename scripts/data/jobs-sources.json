@@ -1204,9 +1204,9 @@
     "facultyCount": 95,
     "jobsUrl": "https://mscs.uic.edu/about/employment/",
     "state": "IL",
-    "lastCheckedAt": "2026-10-14T05:12:38Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Reconfirmed the live tenure-track Mathematical Computer Science Assistant Professor search on the current MSCS employment page. The old CS open-positions URL returns 404; the official ECE page was checked and reports no open faculty positions.",
+    "summary": "Checked 2026-11-23: MSCS employment page still shows Assistant/Associate/Full Professor as hiring (the existing theory record's Nov 9 deadline has passed, lastSeenAt not refreshed); ECE open-positions page shows no listing text.",
     "checkedUrls": [
       "https://cs.uic.edu/faculty-staff/open-positions/",
       "https://ece.uic.edu/faculty-and-staff/open-positions/",
@@ -2077,9 +2077,9 @@
     "facultyCount": 65,
     "jobsUrl": "https://www.augusta.edu/ccs/faculty-positions.php",
     "state": "GA",
-    "lastCheckedAt": "2026-10-23T22:30:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "2026-10-23: SCCS Faculty Positions page still carries its standing tenure-track invitation (lastSeenAt refreshed). HRMS careers portal and the AI & Health posting not re-read this pass; keeps prior lastSeenAt.",
+    "summary": "Checked 2026-11-23: School of Computer and Cyber Sciences page still invites tenure-track and tenured applicants (existing record refreshed). The AI & Health open-rank PeopleSoft posting could not be verified (token/login error); left unchanged.",
     "checkedUrls": [
       "https://www.augusta.edu/ccs/",
       "https://www.augusta.edu/ccs/faculty-positions.php",
@@ -2087,7 +2087,7 @@
       "https://www.augusta.edu/jobs/external",
       "https://www.augusta.edu/hr/jobs/index.php"
     ],
-    "deferredUntil": null,
+    "deferredUntil": "2026-12-07",
     "relatedUnits": [
       {
         "name": "Department of Artificial Intelligence & Health, Medical College of Georgia",
@@ -2104,9 +2104,9 @@
     "facultyCount": 65,
     "jobsUrl": "https://cse.osu.edu/department/tenuredtenure-track-faculty-positions",
     "state": "OH",
-    "lastCheckedAt": "2026-10-23T22:30:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "2026-10-23: six Interfolio postings (CSE and ECE/BME AI, PLSE) still render live (lastSeenAt refreshed). OSU CSE hiring page and other units not re-read this pass.",
+    "summary": "Checked 2026-11-23: four Interfolio postings (AI World Models, Responsible AI and Cybersecurity, Foundational AI, Timashev PL/SE) still live; the two ECE postings 194543 and 195059 say the application deadline has passed (closedAt set). CSE, ECE and College of Engineering faculty pages are behind a Cloudflare bot check; not bypassed, so new postings there are unchecked.",
     "checkedUrls": [
       "https://cse.osu.edu/department/tenuredtenure-track-faculty-positions",
       "https://apply.interfolio.com/193969",
@@ -2119,7 +2119,7 @@
       "https://apply.interfolio.com/194543",
       "https://apply.interfolio.com/195059"
     ],
-    "deferredUntil": null,
+    "deferredUntil": "2026-12-07",
     "relatedUnits": [
       {
         "name": "College of Engineering faculty careers (incl. ECE)",
@@ -3712,9 +3712,9 @@
     "facultyCount": 31,
     "jobsUrl": "https://csds.gsu.edu/employment-opportunities/",
     "state": "GA",
-    "lastCheckedAt": "2026-10-14T03:00:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Department and university faculty pages checked (2026-10-13): found an active Lecturer/Senior Lecturer in Computer Science search (F00567P), up to four vacancies, closing October 24, 2026.",
+    "summary": "Checked 2026-11-23: Lecturer/Senior Lecturer posting 7406 now shows 'This posting is not available' (closedAt set); CS employment page lists no other open posting. Related units not rechecked this run.",
     "checkedUrls": [
       "https://csds.gsu.edu/employment-opportunities/",
       "https://facultycareers.gsu.edu/postings/search?sort=434+asc",
@@ -4104,9 +4104,9 @@
     "facultyCount": 27,
     "jobsUrl": "https://careers.ua.edu/",
     "state": "AL",
-    "lastCheckedAt": "2026-10-14T04:54:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Reviewed current CS faculty openings, the complete ECE faculty listing, and a live MIS assistant professor search centered on generative AI. Added four distinct ECE postings at assistant, associate, full, and teaching-assistant ranks plus the MIS AI search; official postings remain open.",
+    "summary": "Checked 2026-11-23: CS (assistant, associate, full, cyber hub director, teaching), ECE (four) and MIS generative-AI postings still render live on careers.ua.edu / jobs.uasystem.edu. The CS hydroinformatics research assistant professor posting (530733) now returns 404 (closedAt set).",
     "checkedUrls": [
       "https://cs.ua.edu",
       "https://careers.ua.edu/jobs/computer-science-assistant-professor-530199-tuscaloosa-alabama-united-states",
@@ -4911,9 +4911,9 @@
     "facultyCount": 20,
     "jobsUrl": "https://jobs.uri.edu/",
     "state": "RI",
-    "lastCheckedAt": "2026-10-14T03:00:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Rechecked the official URI applicant portal and CS page, plus Electrical, Computer & Biomedical Engineering (ECEB). The cybersecurity postdoc remains open until filled and was refreshed. No new current CS faculty opening surfaced; the ECEB postdoc is already in the roster.",
+    "summary": "Checked 2026-11-23: cybersecurity postdoc (SF02158) still live on the rendered posting page; no new CS faculty opening on the URI HR portal front page. Related units not rechecked this run.",
     "checkedUrls": [
       "https://jobs.uri.edu/postings/search",
       "https://web.uri.edu/cs/tenure-track-faculty-position-in-computer-science/",
@@ -5110,9 +5110,9 @@
     "facultyCount": 18,
     "jobsUrl": "https://cs.unm.edu/news/2026/10/assistant-professor-position.html",
     "state": "NM",
-    "lastCheckedAt": "2026-10-14T03:15:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Official Mathematics and Statistics hiring page checked (2026-10-14): active Data Science tenure-track Assistant Professor search accepts Computer Science PhDs; applications after Oct 19, 2026 will not be reviewed. Existing CS search was last confirmed Oct 11, 2026.",
+    "summary": "Checked 2026-11-23: CS Assistant Professor req38093 live (best consideration Dec 5, 2026). Math/Stats data-science search page still up but its Oct 19 date has passed, so not refreshed. ECE faculty jobs page shows a tenure-track ECE listing; not added this run.",
     "checkedUrls": [
       "https://cs.unm.edu/news/2026/10/assistant-professor-position.html",
       "https://unm.csod.com/",
@@ -5180,16 +5180,16 @@
     "facultyCount": 17,
     "jobsUrl": "https://jobs.okstate.edu/jobs/search/search-page-oklahoma-state",
     "state": "OK",
-    "lastCheckedAt": "2026-10-14T04:52:18Z",
-    "outcome": "complete",
-    "summary": "Checked official CS and ECE hiring pages and the Spears School of Business MSIS faculty posting. The MSIS role prioritizes cybersecurity and data science and is open to PhDs in MIS or a related area; the official posting says screening continues until filled.",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Checked 2026-11-23: CS open-rank cybersecurity, ECE open-rank, and MSIS assistant professor postings all still live on jobs.okstate.edu. ECE employment page (ceat.okstate.edu) blocked by a Cloudflare bot check; recheck later.",
     "checkedUrls": [
       "https://jobs.okstate.edu/jobs/open-rank-professor-of-computer-science-af9557-stillwater-oklahoma-united-states",
       "https://jobs.okstate.edu/jobs/search",
       "https://jobs.okstate.edu/jobs/open-rank-tenure-track-tenured-faculty-212552-stillwater-oklahoma-united-states",
       "https://jobs.okstate.edu/jobs/assistant-professor-management-science-information-systems-stillwater-oklahoma-united-states"
     ],
-    "deferredUntil": null,
+    "deferredUntil": "2026-12-07",
     "relatedUnits": [
       {
         "name": "OSU School of Electrical and Computer Engineering",
@@ -5287,9 +5287,9 @@
     "facultyCount": 16,
     "jobsUrl": "https://www.cs.montana.edu/opportunities.html",
     "state": "MT",
-    "lastCheckedAt": "2026-10-14T03:00:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "The official CS opportunities page links to the active HR announcement for two tenure-track Assistant Professor positions across all CS areas; HR confirms review begins Nov 16, 2026 and applications remain open until an adequate pool is established. The linked posting is the existing record; no duplicate was added.",
+    "summary": "Checked 2026-11-23: CS opportunities page lists tenure-track Assistant Professors (start Fall 2027); HR posting 52706 live, screening began Nov 16, open until adequate pool. Non-tenure-track instructor pool 50005 also live.",
     "checkedUrls": [
       "https://www.cs.montana.edu/opportunities.html",
       "https://jobs.montana.edu/postings/52706",
@@ -5869,9 +5869,9 @@
     "facultyCount": 8,
     "jobsUrl": "https://compsci.uncg.edu/tenure-track-assistant-professor-position-available-3/",
     "state": "NC",
-    "lastCheckedAt": "2026-10-14T03:29:19Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Verified the active tenure-track Assistant Professor opening in Computer Science (posting 36021), starting August 1, 2027. It is open until filled with best consideration by October 31, 2026. Reviewed the department hiring page and the official posting; no current related-unit faculty opening was found.",
+    "summary": "Checked 2026-11-23: Assistant Professor posting 36021 live, open until filled, best consideration Oct 31, 2026.",
     "checkedUrls": [
       "https://compsci.uncg.edu/",
       "https://spartantalent.uncg.edu/postings/36021",
@@ -6155,9 +6155,9 @@
     "facultyCount": 4,
     "jobsUrl": "https://jobs.liu.edu/",
     "state": "NY",
-    "lastCheckedAt": "2026-10-14T03:24:28Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Reviewed the official careers listing and both current Design & Digital Technology game design faculty postings. Added the full-time non-tenure-track Assistant Professor and the adjunct opening; both include game programming/computing and remain open. No additional current CS faculty opening was confirmed.",
+    "summary": "Checked 2026-11-23: NTTA Assistant Professor, Game Design and Development (5005) live, closes Dec 1, 2026; adjunct posting 4615 shows expired (closedAt set). School of CS page returned HTTP 502 this run.",
     "checkedUrls": [
       "https://jobs.liu.edu/",
       "https://jobs.liu.edu/postings/search?query=computer",
@@ -17965,9 +17965,9 @@
     "region": "northamerica",
     "jobsUrl": "https://apply.interfolio.com/191271",
     "state": "IA",
-    "lastCheckedAt": "2026-10-16T21:00:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "CS tenure-track posting (Interfolio 191271) live on 2026-10-16 and added; full-consideration date Oct 2, 2026 already passed.",
+    "summary": "Checked 2026-11-23: Interfolio posting 191271 (tenure-track CS, start Fall 2027) still live, opened Aug 12, 2026.",
     "checkedUrls": [
       "https://apply.interfolio.com/191271"
     ],
@@ -18059,9 +18059,9 @@
     "region": "northamerica",
     "jobsUrl": "https://jobs.shu.edu/cw/en-us/job/497488/assistant-professor-of-computer-science",
     "state": "NJ",
-    "lastCheckedAt": "2026-10-14T05:08:09Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Verified the full-time tenure-track Assistant Professor of Computer Science posting, advertised Sep 17, 2026, with an August 2027 start. The official faculty board currently shows this as its only open faculty search; the Computing and Decision Sciences department and the university’s Data Science and Engineering program were checked, and no separate ECE/ECEC unit was identified.",
+    "summary": "Checked 2026-11-23: tenure-track Assistant Professor of CS (497488, Aug 2027 start) still live on jobs.shu.edu.",
     "checkedUrls": [
       "https://jobs.shu.edu/cw/en-us/job/497488/assistant-professor-of-computer-science",
       "https://www.shu.edu/math-compsci/",
@@ -18121,9 +18121,9 @@
     "region": "northamerica",
     "jobsUrl": "https://www.westminster.edu/about/community/employment.cfm",
     "state": "PA",
-    "lastCheckedAt": "2026-10-14T05:04:32Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "The official employment list and both linked ads confirm live faculty searches for a tenure-track Assistant Professor and a two-year Visiting Assistant Professor of Computer Science; applications received by Oct 16, 2026 receive full consideration, with review continuing until filled. The academic directory places Computer Information Systems within Mathematics & Computer Science; no separate IST or ECE/ECEC department was identified.",
+    "summary": "Checked 2026-11-23: employment page lists faculty openings in broadcasting, criminal justice and mathematics only; the CS Assistant and Visiting Assistant Professor posts are no longer listed (closedAt set).",
     "checkedUrls": [
       "https://www.westminster.edu/about/community/employment.cfm",
       "https://www.westminster.edu/about/community/hr/pdf/Assistant%20Professor%20of%20Computer%20Science%20ad%208.2026%20-%20ac.pdf",
@@ -18440,9 +18440,9 @@
     "region": "northamerica",
     "jobsUrl": "https://jobs.sjsu.edu/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-14T05:21:36Z",
-    "outcome": "complete",
-    "summary": "Reviewed the official CS hiring page plus adjacent School of Information, Information Systems & Technology, Aviation and Technology, and Mathematics and Statistics pages/postings via official SJSU/CSU careers portals. Added four live tenure-track faculty searches explicitly accepting CS or closely related technical PhDs (#562672, #562131, #562256, #562269), alongside the previously recorded CS bioinformatics posting (#562389).",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
+    "outcome": "incomplete",
+    "summary": "Checked 2026-11-23: five tracked postings still render with 'applications accepted until filled or closed' (deadlines in the record kept as posted, several passed); jobs.sjsu.edu lists 2 Computer Science faculty postings that were not individually reviewed; sistech page 404.",
     "checkedUrls": [
       "https://www.sjsu.edu/cs/",
       "https://careers.csueastbay.edu/cw/en-us/listing/",
@@ -18476,7 +18476,7 @@
       }
     ],
     "relatedCheckedAt": "2026-10-14",
-    "deferredUntil": null,
+    "deferredUntil": "2026-11-30",
     "csrankings": false,
     "kind": "masters"
   },
@@ -19218,9 +19218,9 @@
     "region": "northamerica",
     "jobsUrl": "https://winthrop.peopleadmin.com/postings/22904",
     "state": "SC",
-    "lastCheckedAt": "2026-10-14T04:01:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Official department and hiring portal checked; the Computer Science posting advertises two tenure-track assistant professor vacancies. No separate IST or ECE/ECEC hiring unit was identified.",
+    "summary": "Checked 2026-11-23: two tenure-track CS Assistant Professor posts (22904) live; review began Nov 1, 2026, later materials may be considered.",
     "checkedUrls": [
       "https://www.winthrop.edu/cbt/computing-and-information-sciences/index.aspx",
       "https://www.winthrop.edu/cbt/faculty/",
@@ -19404,9 +19404,9 @@
     "region": "northamerica",
     "jobsUrl": "https://bsu.wd12.myworkdayjobs.com/External",
     "state": "IN",
-    "lastCheckedAt": "2026-10-14T05:21:36Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Reviewed the official Workday external careers portal and the current Information Systems and Operations Management faculty search. Added the tenure-track assistant professor posting (R-03186), due October 28, 2026.",
+    "summary": "Checked 2026-11-23: Workday posting R-03186 (Information Systems and Operations Management) now 'page you are looking for doesn't exist' (closedAt set; deadline was Oct 28). First page of the external listing showed no CS/IS faculty posting; department page URL returned not found.",
     "checkedUrls": [
       "https://bsu.wd12.myworkdayjobs.com/External",
       "https://bsu.wd12.myworkdayjobs.com/en-US/External/job/Assistant-Professor-of-Information-Systems-and-Operations-Management_R-03186"
@@ -19521,16 +19521,16 @@
     "region": "northamerica",
     "jobsUrl": "https://jobs.siu.edu/",
     "state": "IL",
-    "lastCheckedAt": "2026-10-23T22:30:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "University jobs portal found (https://jobs.siu.edu/); its position list was not searched for CS faculty this pass. Recheck.",
+    "summary": "2026-11-23: jobs.siu.edu landing page rendered with no listings text; no CS posting seen; faculty search not run.",
     "checkedUrls": [
       "https://cs.siu.edu/",
       "https://jobs.siu.edu/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null,
+    "deferredUntil": "2026-12-07",
     "csrankings": false,
     "kind": "R2"
   },
@@ -19687,9 +19687,9 @@
     "region": "northamerica",
     "jobsUrl": "https://careers.uwf.edu/jobs/search/hal-marcus-college-of-science-and-engineering",
     "state": "FL",
-    "lastCheckedAt": "2026-10-14T05:21:36Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Reviewed official Computer Science and related-unit hiring pages. Two current tenure-track CS searches (#105140 and #129540) and a tenure-earning computational biology/bioinformatics search (#128670; accepts CS PhDs) are live. Also checked Intelligent Systems and Robotics posting #125910 (preferred response date passed), Cybersecurity and Information Technology, and Electrical and Computer Engineering.",
+    "summary": "Checked 2026-11-23: Assistant Professor CS postings 105140 and 129540 and Comp Bio 128670 still live; added AI Assistant Professor 129550 (Intelligent Systems and Robotics). CEDB Professor/Director posting 110640 (not CS-specific) not added; cybersecurity department page 404.",
     "checkedUrls": [
       "https://careers.uwf.edu/jobs/search/hal-marcus-college-of-science-and-engineering",
       "https://careers.uwf.edu/jobs/assistant-professor-105140-pensacola-main-campus-florida-united-states-3bd304c9-f5e6-41b1-a857-0cafc1f25f1c",
@@ -19727,16 +19727,16 @@
     "region": "northamerica",
     "jobsUrl": "https://www.valdosta.edu/administration/finance-admin/human-resources/employment-opportunities.php",
     "state": "GA",
-    "lastCheckedAt": "2026-10-23T22:30:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "HR employment page found (https://www.valdosta.edu/administration/finance-admin/human-resources/employment-opportunities.php); a 2026-10-22 LCA notice for an Assistant Professor (Research) was seen but is not a posting. Portal not searched for CS. Recheck.",
+    "summary": "2026-11-23: HR employment-opportunities page lists no computing faculty posting in its rendered text; the linked applicant portal was not searched.",
     "checkedUrls": [
       "https://www.valdosta.edu/colleges/",
       "https://www.valdosta.edu/administration/finance-admin/human-resources/employment-opportunities.php"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null,
+    "deferredUntil": "2026-12-07",
     "csrankings": false,
     "kind": "masters"
   },
@@ -19879,9 +19879,9 @@
     "region": "northamerica",
     "jobsUrl": "https://csucareers.calstate.edu/en-us/listing/",
     "state": "CA",
-    "lastCheckedAt": "2026-10-14T05:21:36Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Reviewed CS and ECE departmental hiring pages and official CSU Careers listings. Added current tenure-track ECE searches in cyber-physical systems and integrated circuits/systems; also recorded the related Information Systems search. All remain open until filled.",
+    "summary": "Checked 2026-11-23: three tenure-track Assistant Professor postings (Information Systems, Cyber-Physical Systems, Integrated Circuits and Systems) render live on csucareers.calstate.edu; no CS department posting seen. School of Management page returned 404.",
     "checkedUrls": [
       "https://csucareers.calstate.edu/en-us/listing/",
       "https://www.csun.edu/engineering-computer-science/computer-science/faculty-staff/job-openings",
@@ -19934,9 +19934,9 @@
     "region": "northamerica",
     "jobsUrl": "https://careers.csus.edu/en-us/search/?search-keyword=computer+science",
     "state": "CA",
-    "lastCheckedAt": "2026-10-14T05:21:36Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Reviewed the official Computer Science lecturer pool and adjacent Electrical & Electronic Engineering and Management, Information Systems & Business Analytics faculty pools. Added the CS lecturer pool, which is open-ended for 2026-27. The related EEE pool does not identify computing as a target, and the MISBA pool requires an MBA or equivalent (or JD for law courses), so neither is a clear target for CS PhDs.",
+    "summary": "Checked 2026-11-23: CS part-time lecturer pool posting still live (open until filled); search for 'computer science' shows no tenure-track CS posting.",
     "checkedUrls": [
       "https://careers.csus.edu/en-us/job/555484/202627-ay-lecturer-pool-computer-science",
       "https://careers.csus.edu/en-us/job/555624/202627-ay-lecturer-pool-electrical-electronic-engineering",
@@ -20062,16 +20062,16 @@
     "region": "northamerica",
     "jobsUrl": "https://www.wku.edu/hr/careers/index.php",
     "state": "KY",
-    "lastCheckedAt": "2026-10-23T22:30:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "WKU careers portal found (https://www.wku.edu/hr/careers/index.php); faculty list not filtered for CS. Recheck.",
+    "summary": "2026-11-23: HR careers page rendered with no computing faculty listing text; applicant portal not searched.",
     "checkedUrls": [
       "https://www.wku.edu/hr/careers/",
       "https://www.wku.edu/hr/careers/index.php"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null,
+    "deferredUntil": "2026-12-07",
     "csrankings": false,
     "kind": "masters"
   },
@@ -20268,16 +20268,16 @@
     "region": "northamerica",
     "jobsUrl": "https://valenciacollege.edu/employees/employment-at-valencia/",
     "state": "FL",
-    "lastCheckedAt": "2026-10-23T22:30:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Employment page read (https://valenciacollege.edu/employees/employment-at-valencia/); job search not run for CS faculty. Recheck.",
+    "summary": "2026-11-23: employment-at-valencia page rendered but no computing faculty posting visible; applicant portal not searched.",
     "checkedUrls": [
       "https://valenciacollege.edu/",
       "https://valenciacollege.edu/employees/employment-at-valencia/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null,
+    "deferredUntil": "2026-12-07",
     "csrankings": false,
     "kind": "community-college"
   },
@@ -20316,9 +20316,9 @@
     "region": "northamerica",
     "jobsUrl": "https://www.governmentjobs.com/jobs/5403830-0/computer-technologies-part-time-faculty",
     "state": "PA",
-    "lastCheckedAt": "2026-10-14T05:19:02Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Added the live Computer Technologies part-time faculty posting for the 2026–27 academic year, covering Computer Science, CIS, cybersecurity, web/app development, and data science. The official academic divisions directory lists this as the college’s computing department; recheck the direct posting for future-year availability.",
+    "summary": "Checked 2026-11-23: Computer Technologies part-time faculty posting still live on governmentjobs.com; academic-divisions page rendered no hiring information.",
     "checkedUrls": [
       "https://www.governmentjobs.com/jobs/5403830-0/computer-technologies-part-time-faculty",
       "https://www.ccp.edu/about-ccp/news-events/career-opportunities",
@@ -20390,16 +20390,16 @@
     "region": "northamerica",
     "jobsUrl": "https://www.schooljobs.com/careers/waketechedu",
     "state": "NC",
-    "lastCheckedAt": "2026-10-23T22:30:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Full-time openings are on NEOGOV (https://www.schooljobs.com/careers/waketechedu); listing not read for CS this pass. Recheck.",
+    "summary": "2026-11-23: schooljobs.com careers page rendered without any computing faculty listing in its text; filtered search not run.",
     "checkedUrls": [
       "https://www.waketech.edu/about-wake-tech/employment",
       "https://www.schooljobs.com/careers/waketechedu"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null,
+    "deferredUntil": "2026-12-07",
     "csrankings": false,
     "kind": "community-college"
   },
@@ -20560,16 +20560,16 @@
     "region": "northamerica",
     "jobsUrl": "https://www.seattlecolleges.edu/careers-seattle-colleges",
     "state": "WA",
-    "lastCheckedAt": "2026-10-23T22:30:00Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "incomplete",
-    "summary": "Homepage links to Seattle Colleges careers (https://www.seattlecolleges.edu/careers-seattle-colleges); the district ctcLink/NEOGOV open-faculty list was not searched this pass, so no CS opening confirmed. Recheck.",
+    "summary": "2026-11-23: only the Seattle Colleges careers landing page was rendered (links to an open-positions search); no computing faculty posting seen; search not run.",
     "checkedUrls": [
       "https://seattlecentral.edu/",
       "https://www.seattlecolleges.edu/careers-seattle-colleges"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null,
+    "deferredUntil": "2026-12-07",
     "csrankings": false,
     "kind": "community-college"
   },
@@ -21029,9 +21029,9 @@
     "region": "northamerica",
     "jobsUrl": "https://www.talladega.edu/careers/",
     "state": "AL",
-    "lastCheckedAt": "2026-10-14T04:52:18Z",
-    "outcome": "complete",
-    "summary": "Checked the official CS department site, the complete employment listings, both live CS faculty searches, and the Information Technology department page. No additional IT faculty opening was listed; revisit the saved pages next run.",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
+    "outcome": "blocked",
+    "summary": "2026-11-23: talladega.edu careers and posting pages return a 'verifying your request' bot challenge in headless Chromium; not bypassed. Existing postings left unchanged and unverified.",
     "checkedUrls": [
       "https://www.talladega.edu/computer-science/",
       "https://www.talladega.edu/careers/",
@@ -21046,7 +21046,7 @@
       }
     ],
     "relatedCheckedAt": "2026-10-14T04:52:18Z",
-    "deferredUntil": null,
+    "deferredUntil": "2026-12-07",
     "csrankings": false
   },
   {
@@ -21078,9 +21078,9 @@
     "region": "northamerica",
     "jobsUrl": "https://jobs.frederick.edu/postings/7292/print_preview",
     "state": "MD",
-    "lastCheckedAt": "2026-10-14T05:15:45Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Added the live Adjunct, Introduction to Programming pool (TS737P), which remains active through May 31, 2027. Checked the official Computer Science program and Computing & Business Technology listings; an adjacent Information Technology/Cybersecurity adjunct pool closed May 31, 2026 and was not added.",
+    "summary": "Checked 2026-11-23: adjunct Introduction to Programming posting 7292 still live on jobs.frederick.edu; no full-time CS faculty opening seen.",
     "checkedUrls": [
       "https://jobs.frederick.edu/postings/7292/print_preview",
       "https://jobs.frederick.edu/postings/search",
@@ -21110,9 +21110,9 @@
     "region": "northamerica",
     "jobsUrl": "https://lawrence.peopleadmin.com/postings/2174/print_preview",
     "state": "WI",
-    "lastCheckedAt": "2026-10-14T05:19:02Z",
+    "lastCheckedAt": "2026-11-23T22:30:00Z",
     "outcome": "complete",
-    "summary": "Added the live tenure-track Assistant Professor of Data Science and Statistics search in Mathematics & Computer Science, beginning September 1, 2027; review began October 2, 2026. Checked the official CS and Data Science/Statistics program pages; no separate academic IST or ECE/ECEC unit was identified in the academic directory.",
+    "summary": "Checked 2026-11-23: PeopleAdmin posting 2174 (Data Science and Statistics) says 'This posting is not available' (closedAt set).",
     "checkedUrls": [
       "https://lawrence.peopleadmin.com/postings/2174/print_preview",
       "https://lawrence.peopleadmin.com/postings",
