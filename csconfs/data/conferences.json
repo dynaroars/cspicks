@@ -34118,6 +34118,29 @@
     "venueKeys": [
       "aied"
     ],
+    "year": 2027,
+    "description": "International Conference on Artificial Intelligence in Education",
+    "link": "https://www.aied-conference.org/2027",
+    "seriesLink": "https://iaied.org/",
+    "date": "July 18-23, 2027",
+    "place": "Adelaide, Australia",
+    "abstractDeadline": "2027-01-22",
+    "deadline": "2027-02-01",
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "generalChair": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true
+  },
+  {
+    "name": "AIED",
+    "venueKeys": [
+      "aied"
+    ],
     "year": 2026,
     "description": "International Conference on Artificial Intelligence in Education",
     "link": "https://www.aied-conference.org/2026",
@@ -44010,15 +44033,15 @@
     "seriesLink": "https://icdcs.org/",
     "date": "July 5-8, 2027",
     "place": "Melbourne, Australia",
-    "abstractDeadline": null,
-    "deadline": null,
+    "abstractDeadline": "2027-01-06",
+    "deadline": "2027-01-13",
     "rebuttalDate": null,
-    "notificationDate": null,
+    "notificationDate": "2027-04-18",
     "programChair": null,
     "acceptanceRate": null,
     "submissions": null,
-    "estimated": true,
-    "verified": false,
+    "estimated": false,
+    "verified": true,
     "generalChair": null
   },
   {
