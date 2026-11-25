@@ -10457,7 +10457,8 @@
     "deadline": "2026-10-15",
     "postedDate": "2026-09-10",
     "verified": true,
-    "addedAt": "2026-10-13"
+    "addedAt": "2026-10-13",
+    "closedAt": "2026-11-24"
   },
   {
     "id": "utoronto-stats-cs-assistant-prof-data-science-computation-2027",
@@ -10570,7 +10571,7 @@
     "country": "HK",
     "deadline": null,
     "rolling": true,
-    "lastSeenAt": "2026-10-13",
+    "lastSeenAt": "2026-11-24",
     "url": "https://www.cityu.edu.hk/hro/en/job/current/academic.asp?ref=uac-r31025",
     "summary": "(Professor/Associate/Assistant Professor; applications considered until filled). The official e-recruitment index lists this active opening; its detail page was inaccessible during review",
     "source": "crawl",
@@ -10786,7 +10787,8 @@
     "summary": "(permanent, full-time). Deadline 2026-10-22",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-13"
+    "addedAt": "2026-10-13",
+    "closedAt": "2026-11-24"
   },
   {
     "id": "university-of-edinburgh-lecturer-in-artificial-intelligence-2026-10-20-b66fa8e",
@@ -11024,7 +11026,7 @@
     "country": "AU",
     "deadline": "2026-11-30",
     "rolling": false,
-    "lastSeenAt": "2026-10-13",
+    "lastSeenAt": "2026-11-24",
     "url": "https://usyd.wd105.myworkdayjobs.com/en-GB/USYD_EXTERNAL_CAREER_SITE/job/Multiple-Continuing--Tenure-Track--Academic-Positions---Faculty-of-Engineering--The-University-of-Sydney_0157992-1",
     "summary": "(Lecturer through Associate Professor; AI-focused; includes School of Computer Science and Electrical and Computer Engineering). Deadline 2026-11-30",
     "source": "crawl",
@@ -12146,7 +12148,8 @@
     "summary": "(digital-twin dashboard; deadline 2026-10-14)",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-13"
+    "addedAt": "2026-10-13",
+    "closedAt": "2026-11-24"
   },
   {
     "id": "kth-royal-inst-of-technology-postdoc-in-computational-methods-for-games-and-m-2026-10-15-f666c57",
@@ -12168,7 +12171,8 @@
     "summary": "(optimization algorithms and computational tools; deadline 2026-10-15)",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-13"
+    "addedAt": "2026-10-13",
+    "closedAt": "2026-11-24"
   },
   {
     "id": "kth-royal-inst-of-technology-research-engineer-in-robotics-perception-and-lea-2026-10-18-8664555",
@@ -12190,7 +12194,8 @@
     "summary": "(robotics experiments, prototyping and Python; deadline 2026-10-18)",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-13"
+    "addedAt": "2026-10-13",
+    "closedAt": "2026-11-24"
   },
   {
     "id": "kth-royal-inst-of-technology-postdoc-in-computational-neuroscience-and-brain-2026-10-18-ee37a85",
@@ -12214,7 +12219,8 @@
     "summary": "(neural networks, machine learning and computational modeling; deadline 2026-10-18)",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-13"
+    "addedAt": "2026-10-13",
+    "closedAt": "2026-11-24"
   },
   {
     "id": "kth-royal-inst-of-technology-postdoc-in-large-language-model-inferencing-2026-10-21-cede3ed",
@@ -12232,9 +12238,9 @@
     "state": "",
     "city": "Stockholm",
     "country": "SE",
-    "deadline": "2026-10-21",
+    "deadline": "2026-11-27",
     "rolling": false,
-    "lastSeenAt": "2026-10-13",
+    "lastSeenAt": "2026-11-24",
     "url": "https://www.kth.se/lediga-jobb/972326?l=en",
     "summary": "(distributed systems and networks for efficient ML inference; deadline 2026-10-21)",
     "source": "crawl",
@@ -12261,7 +12267,8 @@
     "summary": "(AI, software, data modeling, and power systems; deadline 2026-10-31)",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-13"
+    "addedAt": "2026-10-13",
+    "closedAt": "2026-11-24"
   },
   {
     "id": "kth-royal-inst-of-technology-postdoc-in-robot-learning-for-manipulation-2026-11-01-e3252be",
@@ -12285,7 +12292,8 @@
     "summary": "(vision-language-action models, robotics and machine learning; deadline 2026-11-01)",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-13"
+    "addedAt": "2026-10-13",
+    "closedAt": "2026-11-24"
   },
   {
     "id": "kth-royal-inst-of-technology-postdoc-in-sustainable-generative-ai-for-media-2026-11-05-e62fa41",
@@ -12307,7 +12315,8 @@
     "summary": "(human-centered AI and resource-efficient generative models; deadline 2026-11-05)",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-13"
+    "addedAt": "2026-10-13",
+    "closedAt": "2026-11-24"
   },
   {
     "id": "university-of-alberta-postdoctoral-fellow-in-multimodal-models-and-mac-2026-03f760c",
@@ -12352,7 +12361,8 @@
     "summary": "(AI agents and formal verification of Ethereum consensus; deadline 2026-10-15)",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-13"
+    "addedAt": "2026-10-13",
+    "closedAt": "2026-11-24"
   },
   {
     "id": "university-of-manchester-research-associate-in-neuromorphic-vision-system-2026-10-20-839f457",
@@ -12374,7 +12384,8 @@
     "summary": "(computer vision and neuromorphic systems; two-year contract; deadline 2026-10-20)",
     "source": "crawl",
     "verified": true,
-    "addedAt": "2026-10-13"
+    "addedAt": "2026-10-13",
+    "closedAt": "2026-11-24"
   },
   {
     "id": "uppsala-university-assistant-professor-in-computer-science-speciali-2026-12-04-a716bb3",
@@ -12391,7 +12402,7 @@
     "country": "SE",
     "deadline": "2026-12-04",
     "rolling": false,
-    "lastSeenAt": "2026-10-13",
+    "lastSeenAt": "2026-11-24",
     "url": "https://www.uu.se/en/about-uu/join-us/jobs-and-vacancies/job-details?query=971105",
     "summary": "(tenure-track; deadline 2026-12-04)",
     "source": "crawl",
@@ -12590,7 +12601,7 @@
     "country": "CN",
     "deadline": null,
     "rolling": true,
-    "lastSeenAt": "2026-10-13",
+    "lastSeenAt": "2026-11-24",
     "url": "https://ccst.jlu.edu.cn/info/1229/21177.htm",
     "summary": "(AI, computational education, human-computer interaction; one position; open until filled)",
     "source": "crawl",
@@ -20104,5 +20115,444 @@
     "verified": true,
     "country": "US",
     "addedAt": "2026-11-23"
+  },
+  {
+    "id": "kth-royal-inst-of-technology-postdoc-in-cyber-physical-security-for-sm-2026-11-30-63818b2",
+    "school": "KTH Royal Inst. of Technology",
+    "department": "School of Electrical Engineering and Computer Science",
+    "title": "Postdoc in cyber-physical security for smart grids",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "sec"
+    ],
+    "state": "",
+    "city": "Stockholm",
+    "country": "SE",
+    "deadline": "2026-11-30",
+    "rolling": false,
+    "postedDate": "2026-11-05",
+    "lastSeenAt": "2026-11-24",
+    "url": "https://www.kth.se/lediga-jobb/987716?l=en",
+    "summary": "Temporary postdoctoral position at KTH EECS on cyber-physical security for smart grids. PhD obtained within the last three years required.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "kth-royal-inst-of-technology-postdoctoral-researcher-in-software-techn-2026-12-02-fc7afe1",
+    "school": "KTH Royal Inst. of Technology",
+    "department": "School of Electrical Engineering and Computer Science",
+    "title": "Postdoctoral researcher in software technology",
+    "track": "postdoc",
+    "level": null,
+    "areas": [],
+    "state": "",
+    "city": "Stockholm",
+    "country": "SE",
+    "deadline": "2026-12-02",
+    "rolling": false,
+    "postedDate": "2026-11-11",
+    "lastSeenAt": "2026-11-24",
+    "url": "https://www.kth.se/lediga-jobb/989170?l=en",
+    "summary": "Temporary postdoctoral position in software technology at KTH EECS. PhD within the last three years required.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "kth-royal-inst-of-technology-postdoc-in-generative-ai-for-humanoid-ass-2026-12-09-792d384",
+    "school": "KTH Royal Inst. of Technology",
+    "department": "School of Electrical Engineering and Computer Science (Speech, Music and Hearing)",
+    "title": "Postdoc in Generative AI for humanoid assistive robots",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "ai",
+      "nlp"
+    ],
+    "state": "",
+    "city": "Stockholm",
+    "country": "SE",
+    "deadline": "2026-12-09",
+    "rolling": false,
+    "postedDate": "2026-11-10",
+    "lastSeenAt": "2026-11-24",
+    "url": "https://www.kth.se/lediga-jobb/988874?l=en",
+    "summary": "Temporary postdoc in generative AI, ML, NLP and human-robot interaction for assistive humanoid robots; PhD in CS, ML, computational linguistics, robotics or HCI.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "university-of-british-columbia-assistant-professor-research-up-to-2-po-2026-12-07-157f898",
+    "school": "University of British Columbia",
+    "department": "Department of Computer Science",
+    "title": "Assistant Professor Research (up to 2 positions)",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ops",
+      "arch",
+      "comm",
+      "bed",
+      "sec",
+      "mod",
+      "mlmining"
+    ],
+    "state": "BC",
+    "city": "Vancouver",
+    "country": "CA",
+    "deadline": "2026-12-07",
+    "rolling": false,
+    "startDate": "2027-07-01",
+    "lastSeenAt": "2026-11-24",
+    "url": "https://www.cs.ubc.ca/our-department/employment/assistant-professor-research-2-positions",
+    "summary": "Up to two tenure-track Assistant Professor posts in systems, data management and data mining; PhD required. Applications via Academic Jobs Online; deadline may be extended.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "university-of-british-columbia-associate-professor-with-tenure-researc-2026-12-07-2764e15",
+    "school": "University of British Columbia",
+    "department": "Department of Computer Science",
+    "title": "Associate Professor with Tenure (Research)",
+    "track": "tenure-track",
+    "level": "associate",
+    "areas": [
+      "ops",
+      "arch",
+      "comm",
+      "bed",
+      "sec",
+      "mod",
+      "mlmining"
+    ],
+    "state": "BC",
+    "city": "Vancouver",
+    "country": "CA",
+    "deadline": "2026-12-07",
+    "rolling": false,
+    "startDate": "2027-07-01",
+    "lastSeenAt": "2026-11-24",
+    "url": "https://www.cs.ubc.ca/our-department/employment/associate-professor-tenure-research",
+    "summary": "Tenured Associate Professor post in systems, data management and data mining; PhD and sustained research record required. Applications via Academic Jobs Online.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "university-of-sydney-postdoctoral-research-associate-in-trustworthines-2026-11-29-680d585",
+    "school": "University of Sydney",
+    "department": "School of Computer Science",
+    "title": "Postdoctoral Research Associate in Trustworthiness and Efficiency of Foundation Models",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "mlmining"
+    ],
+    "state": "",
+    "city": "Sydney",
+    "country": "AU",
+    "deadline": "2026-11-29",
+    "rolling": false,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://usyd.wd105.myworkdayjobs.com/en-GB/USYD_EXTERNAL_CAREER_SITE/job/Darlington-Campus/Postdoctoral-Research-Associate-in-Trustworthiness-and-Efficiency-of-Foundation-Models_0158410-1",
+    "summary": "Two-year fixed-term postdoc working with A/Prof Tongliang Liu on trustworthy and efficient foundation models; PhD in CS or related.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24",
+    "visaSponsorship": "no"
+  },
+  {
+    "id": "university-of-sydney-postdoctoral-researcher-in-theoretical-computer-s-2026-12-04-c85192d",
+    "school": "University of Sydney",
+    "department": "Faculty of Engineering (Sydney Algorithms and Computing Theory group)",
+    "title": "Postdoctoral Researcher in Theoretical Computer Science/Algorithms",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "act"
+    ],
+    "state": "",
+    "city": "Sydney",
+    "country": "AU",
+    "deadline": "2026-12-04",
+    "rolling": false,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://usyd.wd105.myworkdayjobs.com/en-GB/USYD_EXTERNAL_CAREER_SITE/job/Darlington-Campus/Postdoctoral-Researcher-in-Theoretical-Computer-Science-Algorithms_0159121-1",
+    "summary": "Fixed-term postdoc (to June 2027) on differentially private distributed statistical inference algorithms with Dr Clement Canonne.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "university-of-sydney-associate-lecturer-lecturer-education-focused-mas-2026-9dd7a8b",
+    "school": "University of Sydney",
+    "department": "School of Computer Science",
+    "title": "Associate Lecturer/Lecturer (Education Focused), Master of Computer Science",
+    "track": "teaching",
+    "level": null,
+    "areas": [],
+    "state": "",
+    "city": "Sydney",
+    "country": "AU",
+    "deadline": "2026-12-10",
+    "rolling": false,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://usyd.wd105.myworkdayjobs.com/en-GB/USYD_EXTERNAL_CAREER_SITE/job/Darlington-Campus/Associate-Lecturer-Lecturer--Education-Focused----Master-of-Computer-Science_0159228-1",
+    "summary": "Three full-time fixed-term (to 31 Dec 2027) teaching-focused Level A/B posts delivering the Master of Computer Science; PhD or equivalent experience.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "uppsala-university-associate-professor-in-computer-science-specialisin-2026-12-01-8593e6b",
+    "school": "Uppsala University",
+    "department": "Department of Information Technology",
+    "title": "Associate Professor in Computer Science specialising in Cybersecurity",
+    "track": "tenure-track",
+    "level": "associate",
+    "areas": [
+      "sec",
+      "crypt",
+      "comm"
+    ],
+    "state": "",
+    "city": "Uppsala",
+    "country": "SE",
+    "deadline": "2026-12-04",
+    "rolling": false,
+    "postedDate": "2026-10-07",
+    "lastSeenAt": "2026-11-24",
+    "url": "https://www.uu.se/en/about-uu/join-us/jobs-and-vacancies/job-details?query=971098",
+    "summary": "Permanent (open-ended) Associate Professor post to build a cybersecurity research group at Uppsala IT, starting 15 August 2027 or as agreed; PhD in CS required.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "university-of-liverpool-postdoctoral-research-associate-in-edgeai-2026-12-11-6381712",
+    "school": "University of Liverpool",
+    "department": "Artificial Intelligence",
+    "title": "Postdoctoral Research Associate in EdgeAI",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "mlmining",
+      "bed"
+    ],
+    "state": "",
+    "city": "Liverpool",
+    "country": "GB",
+    "deadline": "2026-12-11",
+    "rolling": false,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://my.corehr.com/pls/ulivrecruit/erq_jobspec_version_4.display_form?p_company=1&p_internal_external=E&p_display_in_irish=N&p_process_type=&p_applicant_no=&p_form_profile_detail=&p_display_apply_ind=Y&p_refresh_search=Y&p_recruitment_id=118973",
+    "summary": "Fixed-term (up to 2 years) postdoc developing deep-learning and Edge AI models for real-time sEMG wearable sensing.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "university-of-liverpool-postdoctoral-research-associate-in-cybersecuri-2026-12-10-42f1aed",
+    "school": "University of Liverpool",
+    "department": "Trustworthy Computing",
+    "title": "Postdoctoral Research Associate in Cybersecurity",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "sec"
+    ],
+    "state": "",
+    "city": "Liverpool",
+    "country": "GB",
+    "deadline": "2026-12-10",
+    "rolling": false,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://my.corehr.com/pls/ulivrecruit/erq_jobspec_version_4.display_form?p_company=1&p_internal_external=E&p_display_in_irish=N&p_process_type=&p_applicant_no=&p_form_profile_detail=&p_display_apply_ind=Y&p_refresh_search=Y&p_recruitment_id=119453",
+    "summary": "Postdoctoral Research Associate in cybersecurity (Grade 7); contract length not read.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "simon-fraser-university-lecturer-full-time-continuing-2026-12-15-8729bf9",
+    "school": "Simon Fraser University",
+    "department": "School of Computing Science",
+    "title": "Lecturer (full-time continuing)",
+    "track": "teaching",
+    "level": null,
+    "areas": [],
+    "state": "BC",
+    "city": "Burnaby",
+    "country": "CA",
+    "deadline": "2026-12-15",
+    "rolling": true,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://www.sfu.ca/fas/computing/about/job-opportunities/lecturer.html",
+    "summary": "Full-time continuing teaching-track Lecturer (software engineering, systems programming, testing, data structures, AI in curriculum); PhD or Master's. Preference to applications by 2026-12-15, then until filled.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "cispa-helmholtz-center-tenure-track-faculty-in-information-security-2026-eb7aa41",
+    "school": "CISPA Helmholtz Center",
+    "department": "CISPA Helmholtz Center for Information Security",
+    "title": "Tenure-Track Faculty in Information Security",
+    "track": "tenure-track",
+    "level": null,
+    "areas": [
+      "sec"
+    ],
+    "state": "",
+    "city": "Saarbrücken",
+    "country": "DE",
+    "deadline": "2027-01-03",
+    "rolling": false,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://career.cispa.de/jobs/tenure-track-faculty-in-information-security-f-m-d-2026-2027-147",
+    "summary": "Five-year tenure track towards the equivalent of an endowed full professorship, with three funded research staff positions; all areas of information security. Interviews start February 2027.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "cispa-helmholtz-center-tenure-track-faculty-in-trustworthy-ai-2026-80ab207",
+    "school": "CISPA Helmholtz Center",
+    "department": "CISPA Helmholtz Center for Information Security",
+    "title": "Tenure-Track Faculty in Trustworthy AI",
+    "track": "tenure-track",
+    "level": null,
+    "areas": [
+      "ai"
+    ],
+    "state": "",
+    "city": "Saarbrücken",
+    "country": "DE",
+    "deadline": "2027-01-03",
+    "rolling": false,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://career.cispa.de/jobs/tenure-track-faculty-in-trustworthy-ai-f-m-d-2026-2027-148",
+    "summary": "Five-year tenure track towards the equivalent of an endowed full professorship, with three funded research staff positions; all areas of trustworthy AI. Interviews start February 2027.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "cispa-helmholtz-center-postdoctoral-researcher-open-application-2026-3fb82f7",
+    "school": "CISPA Helmholtz Center",
+    "department": "CISPA Helmholtz Center for Information Security",
+    "title": "Postdoctoral Researcher (open application)",
+    "track": "postdoc",
+    "level": null,
+    "areas": [
+      "sec",
+      "crypt",
+      "ai"
+    ],
+    "state": "",
+    "city": "Saarbrücken",
+    "country": "DE",
+    "deadline": null,
+    "rolling": true,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://career.cispa.de/jobs/postdoc-8",
+    "summary": "Applications accepted year-round for strong postdocs in security, privacy, cryptography, AI and ML; E13 pay scale; PhD required.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "utrecht-university-assistant-professor-in-interaction-technology-2027-01-03-89e1d49",
+    "school": "Utrecht University",
+    "department": "Department of Information and Computing Sciences",
+    "title": "Assistant Professor in Interaction Technology",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "chi"
+    ],
+    "state": "",
+    "city": "Utrecht",
+    "country": "NL",
+    "deadline": "2027-01-03",
+    "rolling": false,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://www.uu.nl/en/organisation/working-at-utrecht-university/jobs/assistant-professor-in-interaction-technology",
+    "summary": "Assistant Professor (0.2-1.0 FTE) for 18 months, converted to a permanent contract after positive evaluation; HCI, game technology, information science teaching; PhD in CS/AI/HCI or related.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "rmit-university-associate-professor-professor-cloud-systems-security-2026-9d4447d",
+    "school": "RMIT University",
+    "department": "School of Computing Technologies",
+    "title": "Associate Professor/Professor, Cloud Systems Security",
+    "track": "tenure-track",
+    "level": "open",
+    "areas": [
+      "sec",
+      "comm"
+    ],
+    "state": "",
+    "city": "Melbourne",
+    "country": "AU",
+    "deadline": "2027-01-10",
+    "rolling": false,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://rmit.wd3.myworkdayjobs.com/en-US/RMIT_Careers/job/Melbourne/Associate-Professor-Professor--Cloud-Systems-Security_JR51762",
+    "summary": "Full-time continuing Associate Professor (Level D) or Professor (Level E) post in cloud systems security; PhD required.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "rmit-university-research-fellow-industrial-decision-support-systems-2026-12-06-d4ea7eb",
+    "school": "RMIT University",
+    "department": "School of Computing Technologies",
+    "title": "Research Fellow, Industrial Decision Support Systems",
+    "track": "research",
+    "level": null,
+    "areas": [
+      "ai"
+    ],
+    "state": "",
+    "city": "Melbourne",
+    "country": "AU",
+    "deadline": "2026-12-06",
+    "rolling": false,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://rmit.wd3.myworkdayjobs.com/en-US/RMIT_Careers/job/Melbourne/Research-Fellow---Industrial-Decision-Support-Systems_JR51509",
+    "summary": "Fixed-term (one year, renewable subject to funding) Level B research fellow, agentic AI for industrial decision support; unrestricted Australian work rights required.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
+  },
+  {
+    "id": "university-of-sheffield-lecturer-in-artificial-intelligence-and-softwa-2026-11-29-6f48e24",
+    "school": "University of Sheffield",
+    "department": "School of Computer Science",
+    "title": "Lecturer in Artificial Intelligence and Software Engineering",
+    "track": "tenure-track",
+    "level": "assistant",
+    "areas": [
+      "ai",
+      "soft"
+    ],
+    "state": "",
+    "city": "Sheffield",
+    "country": "GB",
+    "deadline": "2026-11-29",
+    "rolling": false,
+    "lastSeenAt": "2026-11-24",
+    "url": "https://jobsite.sheffield.ac.uk/job/Lecturer-in-Artificial-Intelligence-and-Software-Engineering/3350-en_GB/",
+    "summary": "Permanent Lecturer in the AI x Software Engineering & Testing group, building an independent funded research programme.",
+    "source": "crawl",
+    "verified": true,
+    "addedAt": "2026-11-24"
   }
 ]
