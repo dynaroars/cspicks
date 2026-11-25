@@ -136,6 +136,8 @@ test('validator rejects impossible dates and unknown fields, and accepts start d
   assert.deepEqual(jobProblems(job({ deadline: '2026-13-45' })), ['deadline']);
   assert.deepEqual(jobProblems(job({ reviewBegins: 'soon' })), ['reviewBegins']);
   assert.deepEqual(jobProblems(job({ areasAny: true })), ['unknown field areasAny']);
+  assert.deepEqual(jobProblems(job({ sourcePost: 'https://bsky.app/profile/a/post/b' })), []);
+  assert.deepEqual(jobProblems(job({ sourcePost: 'bsky post' })), ['sourcePost']);
   for (const startDate of ['2027', '2027-08', '2027-08-16', null]) assert.deepEqual(jobProblems(job({ startDate })), [], startDate);
   assert.deepEqual(jobProblems(job({ startDate: '2027-8' })), ['startDate']);
   assert.equal(formatDay('2027-08-16'), 'Aug 16, 2027');

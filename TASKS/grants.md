@@ -111,7 +111,8 @@ Every entry MUST adhere to this structure:
     { "stage": "White paper", "date": "2026-12-03", "required": true },
     { "stage": "Full proposal", "date": "2027-02-18", "note": "By invitation only" }
   ],
-  "citizenship": "us-citizen-or-pr"
+  "citizenship": "us-citizen-or-pr",
+  "sourcePost": "https://bsky.app/profile/did:plc:…/post/… (optional: the social post that led us here)"
 }
 ```
 
@@ -199,6 +200,16 @@ the same machine, pages whose visible text changed since the previous run. Re-ve
 leads; confirm each on the rendered page before editing.
 
 ## Discovering new programs
+
+Start each discovery run with `npm run leads:social -- --kind awards --days 35`. It reads recent public Bluesky posts
+from sponsor accounts (Simons, Sloan, Schmidt Sciences, Amazon Science, ACM, IEEE CS, CRA, and others) plus
+award-call searches, all listed in `scripts/data/social-sources.json`. It keeps posts that ask readers to apply or nominate,
+drops winner announcements and paper calls, expands short links, and skips programs whose page is already in
+`grants.json`. "maybe already in grants.json: <id>" means the post names an existing program: re-verify that entry
+instead of adding a new one. Each lead is only a pointer. Read the sponsor's official call page for every field. When
+you add or update an entry because of a lead, set `sourcePost` to the printed post URL; the card credits it as
+"Spotted in a Bluesky post ↗". Recognition-only prizes and editor searches are out of scope unless they fund
+research or people.
 
 Run the "AI Tool Access & Compute Credits for Scientists" queries every time, then rotate through the other query
 categories above, starting with the one least represented in recent PRs. Dedup against

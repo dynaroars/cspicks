@@ -230,6 +230,8 @@ export interface Grant {
   lastVerifiedAt?: string;
   /** YYYY-MM-DD the entry first appeared in grants.json; drives "New" badges, the Recently added sort, and the feed. */
   addedAt?: string;
+  /** Public social-media post that led us to the program; credited on the card. Never the fact source. */
+  sourcePost?: string;
   /**
    * Every dated stage of the current (or latest published) cycle, earliest first: whitepaper, executive summary,
    * letter of intent, pre-proposal, full proposal, reference letters... `deadline` stays the human-readable summary.
@@ -297,6 +299,8 @@ export interface Job {
   url: string;
   summary?: string | null;
   source: 'crawl' | 'submission';
+  /** Public social-media post (Bluesky, Mastodon, X, LinkedIn) that led us to the posting; credited on the card. Never the fact source. */
+  sourcePost?: string;
   verified?: boolean;
   /** YYYY-MM-DD the posting first appeared in jobs.json; drives "New" badges, the Recently added sort, and the feed. */
   addedAt?: string;

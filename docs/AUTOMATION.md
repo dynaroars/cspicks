@@ -117,7 +117,9 @@ Follow `TASKS/audit.md`, with these rules taking precedence:
   sha in `scripts/data/audit-reviewed.txt` (TASKS/audit.md, "Direct commits to `main`"), at most 60 records per run.
 - PRs: check out the PR, merge fresh `main` into it, and run the full validation from the
   conventions. Re-verify a sample of at least a third of the changed facts (and every changed
-  deadline, plus every new or changed job's `track` and `level`) against the cited official URLs. Require green CI on the PR. Merge with
+  deadline, plus every new or changed job's `track` and `level`) against the cited official URLs. A record with a new
+  `sourcePost` must link a public post about that same position or program; drop the field if it doesn't, and never
+  accept a fact that appears only in the post. Require green CI on the PR. Merge with
   `gh pr merge <n> --squash --delete-branch`. If any fact is wrong or unsupported, request changes
   (or close) with a comment naming each rejected item and why; never merge a partial subset
   silently.
@@ -213,6 +215,12 @@ Monday and Friday, the two weekdays with no other routine.
    unavailable` with the exact error (skip if one is already open).
 1. Pick the queue with `npm run maintain:jobs -- --country US --limit 30` (run `--seed` first if CSRankings added US
    schools). International schools and labs have their own routines below.
+1b. **Social leads.** Run `npm run leads:social -- --kind jobs --country US --days 14` (TASKS/jobs.md, "Social-media
+   leads"). Take up to 5 schools from its leads, computing faculty ads first, skipping ones the queue already holds.
+   Swap them in for the last queue schools so the run stays at 30. Crawl each like any other school, then add the
+   posting the lead pointed to, plus anything else open, with `sourcePost` on the record that came from the post.
+   List the leads you used and the ones you skipped (with the reason) in the PR. If the script can't reach Bluesky,
+   say so in the PR and continue.
 2. Crawl each school per the playbook and record its result in `scripts/data/jobs-sources.json`. Open one PR
    even if only the sources file changed.
 3. Every new or changed deadline and every `closedAt` goes in the PR description with its official URL; the
@@ -226,7 +234,8 @@ spawn subagents). Runs Tuesday.
 0. Same browser check as `jobs` (step 0 above); reuse its Issue title if the render step fails.
 1. Pick the queue with `npm run maintain:jobs -- --country intl --limit 25`: non-US schools from
    `scripts/data/jobs-sources.json` (CSRankings' non-US institutions plus any added with `--add ... --country XX`),
-   never-checked first.
+   never-checked first. Then run `npm run leads:social -- --kind jobs --country intl --days 14` and swap up to 5 lead
+   schools in for the last queue schools, exactly as `jobs` step 1b does.
 2. Crawl each school's official vacancy portal and CS/computing department pages, plus related units (ECE,
    informatics, data science). Add verified postings with the international fields (`country` ISO code, `city`,
    `state` as province/region or empty). Record every school's result in its sources row, including "no open CS
@@ -275,7 +284,9 @@ honestly and leave unknown fields `null`.
 Playbook: `TASKS/grants.md` ("Discovering new programs"). Always run the "AI Tool Access &
 Compute Credits for Scientists" queries, then rotate: start with the query category least
 represented in recent `[scheduled:grants-discover]` PRs. Also compare one specialist inventory against the roster,
-per the playbook. Cap: 5 new entries. Dedup
+per the playbook. Before the queries, run `npm run leads:social -- --kind awards --days 35` (TASKS/grants.md,
+"Discovering new programs"): research its leads first, set `sourcePost` on entries they produce, and list the leads
+used and skipped in the PR. Cap: 5 new entries. Dedup
 against every `id`, `name`, and `url` in `public/grants.json` and against open PRs. Each entry
 needs an official call page; skip programs known only from third-party lists.
 

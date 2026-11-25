@@ -76,7 +76,7 @@ export function conferenceProblems(conferences) {
 
 const GRANT_FIELDS = new Set(['id', 'name', 'shortName', 'sponsor', 'sponsorCategory', 'targetAudience', 'whoFor', 'deadline',
   'deadlineMonth', 'amount', 'summary', 'eligibility', 'topics', 'url', 'featured', 'estimated', 'status', 'locations',
-  'locationLabel', 'lastVerifiedAt', 'addedAt', 'deadlines', 'citizenship']);
+  'locationLabel', 'lastVerifiedAt', 'addedAt', 'deadlines', 'citizenship', 'sourcePost']);
 export const CITIZENSHIP = ['us-citizen', 'us-citizen-or-pr', 'open', 'other'];
 const STAGE_FIELDS = new Set(['stage', 'date', 'required', 'note']);
 /** `deadlines`: earliest-first dated stages, each {stage, date, required?, note?}. */
@@ -123,6 +123,7 @@ export function grantProblems(grants) {
       ['lastVerifiedAt (YYYY-MM-DD)', grant?.lastVerifiedAt === undefined || isIsoDay(grant.lastVerifiedAt)],
       ['addedAt (YYYY-MM-DD)', grant?.addedAt === undefined || isIsoDay(grant.addedAt)],
       [`citizenship (omit, or one of ${CITIZENSHIP.join(' | ')})`, grant?.citizenship === undefined || CITIZENSHIP.includes(grant.citizenship)],
+      ['sourcePost (https link to the social post)', grant?.sourcePost === undefined || (typeof grant.sourcePost === 'string' && grant.sourcePost.startsWith('https://') && isUrl(grant.sourcePost))],
     ]), ...stageProblems(grant?.deadlines).map(problem => `${label}: ${problem}`)];
   });
 }

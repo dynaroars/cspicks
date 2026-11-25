@@ -102,7 +102,28 @@ function ago(days: number) {
  */
 export function opportunityFreshness(options: {
   checkedAt?: string | null; checkedLabel: string; staleAfterDays: number; addedAt?: string | null; now?: number;
+  /** Social post that led us to the record, credited at the end of the line. */
+  sourcePost?: string | null;
 }) {
+  const line = freshnessLine(options);
+  const credit = sourcePostCredit(options.sourcePost);
+  return credit ? line.replace(/<\/p>$/, ` · ${credit}</p>`) : line;
+}
+
+const SOCIAL_HOSTS: Array<[RegExp, string]> = [
+  [/(^|\.)bsky\.app$/, 'Bluesky'], [/(^|\.)(x|twitter)\.com$/, 'X'], [/(^|\.)linkedin\.com$/, 'LinkedIn'], [/(^|\.)threads\.(net|com)$/, 'Threads']
+];
+
+/** "Spotted in a Bluesky post ↗": the network is named from the host; a Mastodon or other host reads "social post". */
+export function sourcePostCredit(sourcePost: unknown) {
+  const href = safeExternalUrl(sourcePost);
+  if (href === '#') return '';
+  const host = new URL(href).hostname.replace(/^www\./, '');
+  const network = SOCIAL_HOSTS.find(([pattern]) => pattern.test(host))?.[1] ?? 'social';
+  return `<a class="opportunity-source-post" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" title="The post that pointed us to this; details come from the official page">Spotted in a ${network} post ↗</a>`;
+}
+
+function freshnessLine(options: { checkedAt?: string | null; checkedLabel: string; staleAfterDays: number; addedAt?: string | null; now?: number }) {
   const now = options.now ?? Date.now();
   const age = daysSince(options.checkedAt, now);
   if (age === null) {

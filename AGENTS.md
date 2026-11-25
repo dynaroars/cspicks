@@ -28,6 +28,7 @@ npm test          # run the Node.js unit tests (test/unit/*.test.js)
 npm run test:e2e  # Playwright e2e tests (test/e2e/); auto-starts the dev server on :4173
 npm run validate:jobs  # fast check of public/jobs.json; run before every jobs commit (names each bad record)
 npm run lint:data      # data warnings for the auditor (wrong-school links, duplicate postings, stale grants); never fails CI
+npm run leads:social   # job/award leads from public Bluesky posts (--kind jobs|awards); records found this way carry `sourcePost`
 npm run check:links    # broken/moved/redirected official links in grants, active jobs, labs (--changes: pages whose text changed)
 npm run feeds          # Atom feeds of newly added jobs/awards into public/feeds/ (gitignored; runs on predev/prebuild)
 npm run build      # production build to dist/ (multi-page: index, simulator, funding, csconfs, grants, jobs)

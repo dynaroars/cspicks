@@ -32,9 +32,9 @@
       "proposals": []
     },
     "CHES": {
-      "lastCheckedAt": "2026-11-12T20:10:00.000Z",
+      "lastCheckedAt": "2026-11-24T20:30:00.000Z",
       "outcome": "complete",
-      "summary": "CHES 2027 page confirms Cancún Sep 6-9 2027 and four TCHES 2027 rounds (Jul 15, Oct 15 2026, Jan 15, Apr 15 2027); matches existing note. No change.",
+      "summary": "CHES 2027 site confirms Cancún Sep 6-9 2027 and four tentative TCHES rounds (next: Jan 15 2027); record's existing facts match. No change.",
       "checkedUrls": [
         "https://ches.iacr.org/2027/"
       ],
@@ -263,13 +263,14 @@
       "proposals": []
     },
     "USENIX ATC": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-24T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "USENIX sunset ATC after ATC '25; the series continues as ACM SIGOPS ATC (ATC 2026: Hong Kong, Nov 16-18, 2026, deadline June 10, 2026, per https://atc.sigops.org/2026/cfp.html as surfaced by search — not separately verified here). No 2027 page yet. Coordinator may want a 2026 record and a rename/seriesLink update to atc.sigops.org.",
+      "summary": "USENIX upcoming list has no ATC 2026/2027 entry (earlier check: series continues as ACM SIGOPS ATC at atc.sigops.org; not verified this run). No change.",
       "checkedUrls": [
+        "https://www.usenix.org/conferences/upcoming",
         "https://atc.sigops.org/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-15T20:30:00.000Z",
       "proposals": []
     },
     "WACV": {
@@ -752,26 +753,23 @@
       "proposals": []
     },
     "HPDC": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-24T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "Not yet announced.",
+      "summary": "HPDC 2026 page confirms July 13-16, Cleveland; no deadlines listed on the page and no HPDC 2027 announced. No change.",
       "checkedUrls": [
-        "https://hpdc.sci.utah.edu/2027/",
-        "https://hpdc.sci.utah.edu/"
+        "https://hpdc.sci.utah.edu/2026/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-15T20:30:00.000Z",
       "proposals": []
     },
     "ISMB": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-24T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "2027 is the joint ISMB/ECCB conference (Copenhagen), tracked under the ISMB/ECCB series; standalone ISMB returns in even years (next 2028), not yet announced.",
+      "summary": "ISMB 2026 page confirms July 12-16 Washington DC; proceedings deadlines not on page; no ISMB 2027 info. No change.",
       "checkedUrls": [
-        "https://www.iscb.org/ismbeccb2027/home",
-        "https://www.iscb.org/ismbeccb2027/call-for-submissions/proceedings",
-        "https://www.iscb.org/ismbeccb2027/key-dates"
+        "https://www.iscb.org/ismb2026"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-15T20:30:00.000Z",
       "proposals": []
     },
     "RECOMB": {
@@ -876,36 +874,43 @@
       "proposals": []
     },
     "ACSAC": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-24T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "ACSAC 2026 is Dec 7-11, 2026; 2027 not announced.",
+      "summary": "acsac.org shows only 2026 (Dec 7-11, Los Angeles); no 2027 information.",
       "checkedUrls": [
-        "https://www.acsac.org/2027/",
         "https://www.acsac.org/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-15T20:30:00.000Z",
       "proposals": []
     },
     "AIED": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "not_found",
+      "lastCheckedAt": "2026-11-24T20:30:00.000Z",
+      "outcome": "complete",
+      "summary": "AIED 2027 site: Adelaide, July 18-23 2027; main-track abstracts Jan 22 and full papers Feb 1 2027 (AoE). Notification not stated.",
       "checkedUrls": [
         "https://www.aied-conference.org/2027",
-        "https://iaied.org/conferences"
+        "https://www.aied-conference.org/2027/important-dates"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
-      "proposals": []
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://www.aied-conference.org/2027/important-dates"
+          ]
+        }
+      ]
     },
     "ASIACRYPT": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "Asiacrypt 2026 (Dec 7-11) not yet held; 2027 not announced.",
+      "lastCheckedAt": "2026-11-24T20:30:00.000Z",
+      "outcome": "incomplete",
+      "summary": "IACR meetings page lists Asiacrypt 2027 in Nagoya, Japan; asiacrypt.iacr.org/2027 returned 404 so no dates or deadline verified. Not added.",
       "checkedUrls": [
-        "https://asiacrypt.iacr.org/2027/",
-        "https://iacr.org/meetings/asiacrypt/"
+        "https://iacr.org/meetings/asiacrypt/",
+        "https://asiacrypt.iacr.org/2027"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-01T20:30:00.000Z",
       "proposals": []
     },
     "ASSETS": {
@@ -986,22 +991,14 @@
       "proposals": []
     },
     "Crypto": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-24T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "Page HTML contains a commented-out template date block (11 Feb 2027 submission etc.) and placeholder metadata.json values (city TBD) — NOT used as evidence. Date null.",
+      "summary": "Crypto 2027 site: Santa Barbara; dates and deadline 'to be announced'. No change.",
       "checkedUrls": [
         "https://crypto.iacr.org/2027/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
-      "proposals": [
-        {
-          "action": "add",
-          "year": 2027,
-          "sources": [
-            "https://crypto.iacr.org/2027/ — 'Crypto 2027 will take place at the University of California Santa Barbara campus... exact dates will be announced shortly'; Important dates 'to be announced soon'"
-          ]
-        }
-      ]
+      "deferredUntil": "2026-12-15T20:30:00.000Z",
+      "proposals": []
     },
     "CSCW": {
       "lastCheckedAt": "2026-11-17T20:05:07.864Z",
@@ -1149,19 +1146,20 @@
       "proposals": []
     },
     "ICDCS": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "Site returns 406 to plain curl UA; loaded with a browser UA.",
+      "lastCheckedAt": "2026-11-24T20:30:00.000Z",
+      "outcome": "complete",
+      "summary": "ICDCS 2027 CFP: abstract Jan 6, paper Jan 13, acceptance Apr 18 2027 (AoE).",
       "checkedUrls": [
-        "https://icdcs2027.icdcs.org/"
+        "https://icdcs2027.icdcs.org/",
+        "https://icdcs2027.icdcs.org/call-for-research-papers/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": null,
       "proposals": [
         {
-          "action": "add",
+          "action": "update",
           "year": 2027,
           "sources": [
-            "https://icdcs2027.icdcs.org/ — 47th IEEE ICDCS 2027, Monday 5 July – Thursday 8 July 2027, Melbourne, Australia; all important dates TBD"
+            "https://icdcs2027.icdcs.org/call-for-research-papers/"
           ]
         }
       ]
@@ -1252,22 +1250,14 @@
       "proposals": []
     },
     "ISMAR": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-24T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "Conference dates not announced; date left null.",
+      "summary": "ISMAR 2027 site: Kobe; dates and paper deadlines to be announced. No change.",
       "checkedUrls": [
         "https://www.ieeeismar.net/2027/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
-      "proposals": [
-        {
-          "action": "add",
-          "year": 2027,
-          "sources": [
-            "https://www.ieeeismar.net/2027/ — IEEE ISMAR 2027, Kobe, Japan; 'Conference dates to be announced'; paper deadline 'To be announced'"
-          ]
-        }
-      ]
+      "deferredUntil": "2026-12-15T20:30:00.000Z",
+      "proposals": []
     },
     "ISSRE": {
       "lastCheckedAt": "2026-11-03T02:14:09.000Z",
@@ -1562,42 +1552,25 @@
       ]
     },
     "UbiComp / ISWC": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-24T20:30:00.000Z",
       "outcome": "not_found",
-      "summary": "ubicomp.org has no 2027 edition page yet (/ubicomp-iswc-2027/ returns HTTP 500). Papers go through IMWUT quarterly deadlines; no 2027 cycle deadlines announced on an edition page.",
+      "summary": "ubicomp.org shows only the 2026 edition; no 2027 information. No change.",
       "checkedUrls": [
-        "https://sigchi.org/events/ubicomp-2027/"
+        "https://www.ubicomp.org/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
-      "proposals": [
-        {
-          "action": "add",
-          "year": 2027,
-          "sources": [
-            "https://sigchi.org/events/ubicomp-2027/ — ACM SIGCHI (sponsoring society) event page: UbiComp 2027, Sun Oct 3 – Thu Oct 7, 2027, Seoul Dragon City, Seoul, Republic of Korea; event link points to https://www.ubicomp.org/"
-          ]
-        }
-      ]
+      "deferredUntil": "2026-12-15T20:30:00.000Z",
+      "proposals": []
     },
     "SAT": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "No deadlines or chairs yet.",
+      "lastCheckedAt": "2026-11-24T20:30:00.000Z",
+      "outcome": "incomplete",
+      "summary": "SAT 2027 site confirms July 5-9 Barcelona; CFP page not reachable (404 at guessed URL), deadlines unverified. No change.",
       "checkedUrls": [
         "https://satisfiability.org/SAT27/",
-        "https://satisfiability.org/SAT27/pages/dates.html,"
+        "https://satisfiability.org/SAT27/cfp.html"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
-      "proposals": [
-        {
-          "action": "add",
-          "year": 2027,
-          "sources": [
-            "https://satisfiability.org/SAT27/ — SAT 2027 (30th), July 5-9, 2027, Barcelona, Spain",
-            "https://satisfiability.org/SAT27/pages/dates.html, /cfp.html, /committees.html — 'Details will be announced as soon as possible'"
-          ]
-        }
-      ]
+      "deferredUntil": "2026-12-01T20:30:00.000Z",
+      "proposals": []
     },
     "SOUPS": {
       "lastCheckedAt": "2026-11-03T02:14:09.000Z",

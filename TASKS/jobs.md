@@ -81,6 +81,28 @@ country code, `city` is the posted location, and `state` may hold a province/reg
 the posting does not specify one. Set `lastSeenAt` only after confirming the official posting is live. Do not
 create a GitHub Issue for these entries unless the user asks for that workflow.
 
+## Social-media leads (`npm run leads:social`)
+
+Many departments, chairs, and the `tenuretracker.bsky.social` bot announce searches on Bluesky before (or instead
+of) the job boards. `npm run leads:social -- --kind jobs --days 14` searches public Bluesky posts (no login) with the
+queries and accounts in `scripts/data/social-sources.json`. It keeps computing faculty, lecturer, research, and postdoc ads, and
+drops PhD-student recruiting, staff roles, and posts whose links are already in `jobs.json`. It follows the bot's
+tenuretracker.info links to the official ad and lists computing faculty ads first. Each lead shows its `sourcePost`, the
+matching `jobs-sources.json` school (or the name the post uses), and the links. Add `--country US` or `--country intl`
+to match your routine; leads naming no known school appear in both.
+
+- A post is a lead, never a source. Open the official posting and take every field from it, exactly as for a crawl;
+  a post with no official posting behind it adds nothing.
+- Check `jobs.json` for the same position under another URL before adding it. A hint saying the school already has
+  postings means "look", not "skip".
+- When you add a record because of a lead, set `sourcePost` to the printed URL. The card then shows "Spotted in a
+  Bluesky post ↗" next to the freshness line, crediting the post without replacing the official link. Keep `source:
+  "crawl"`. Don't add `sourcePost` to a record you found by crawling.
+- A school that's missing from `jobs-sources.json` gets a row (`npm run maintain:jobs -- --add`), and then a normal
+  crawl, since a posted search often means more openings in related units.
+- If the script exits with "Bluesky API unreachable" (exit 2), the network blocks it: say so in the PR and carry on.
+- To add an account or search, edit `scripts/data/social-sources.json` after reading the account's profile.
+
 ## Reading JavaScript pages (`npm run render:jobs`)
 
 Plain fetch tools return only the app shell for Interfolio, Workday, PeopleAdmin, PeopleSoft, NEOGOV and many department sites. `scripts/jobs-render.mjs` renders a page in headless Chromium (Playwright, already a devDependency; install the browser once with `npx playwright install --with-deps chromium`):
@@ -147,6 +169,7 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
 | `url` | The official posting URL (https). One record per URL. |
 | `summary` | At most two sentences, paraphrased; never paste a posting. |
 | `source` | `crawl` or `submission`. |
+| `sourcePost` | Optional https link to the public social post that led us to the posting (see "Social-media leads"); the card credits it. Never the source of any field. |
 | `verified` | `true` once checked against the official page. |
 
 ## Non-US appointment terms
