@@ -137,7 +137,9 @@ export function nextGrantDeadline(grant: Grant, now = new Date()): NextDeadline 
   if (textDate && (dayValue(textDate) ?? 0) >= today) return { date: textDate, estimated: presentation.estimated, approximate: false, passed: false };
   if (grant.deadlineMonth >= 1 && grant.deadlineMonth <= 12) {
     const current = now.getUTCMonth() + 1;
-    const year = now.getUTCFullYear() + (grant.deadlineMonth < current ? 1 : 0);
+    let year = now.getUTCFullYear() + (grant.deadlineMonth < current ? 1 : 0);
+    // A stated exact date that already passed closes this cycle; estimate the next one, never the passed month.
+    if (textDate && Date.UTC(year, grant.deadlineMonth - 1, 1) <= (dayValue(textDate) ?? 0)) year += 1;
     return { date: iso(Date.UTC(year, grant.deadlineMonth - 1, 1)), estimated: true, approximate: true, passed: false };
   }
   return { date: null, estimated: false, approximate: false, passed: Boolean(textDate) || stages.length > 0 };

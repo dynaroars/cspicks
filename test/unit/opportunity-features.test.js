@@ -84,6 +84,14 @@ test('soonest-deadline sort uses real dates, then month-only cycles, then rollin
   assert.deepEqual(filterGrants(grants, { query: 'deadline: soon', sortBy: 'deadline', now: NOW }).map(item => item.id), ['staged', 'exact-soon', 'exact-later']);
 });
 
+test('a passed exact date in its own deadline month projects to the next cycle, not the top of the list', () => {
+  const later = new Date('2026-11-25T12:00:00Z');
+  const passed = grant({ id: 'passed', name: 'A passed', deadline: 'November 11, 2026 (Fall cycle)', deadlineMonth: 11 });
+  const upcoming = grant({ id: 'upcoming', name: 'B upcoming', deadline: 'Annual (mid-December)', deadlineMonth: 12 });
+  assert.deepEqual(nextGrantDeadline(passed, later), { date: '2027-11-01', estimated: true, approximate: true, passed: false });
+  assert.deepEqual(filterGrants([passed, upcoming], { sortBy: 'deadline', now: later }).map(item => item.id), ['upcoming', 'passed']);
+});
+
 test('citizenship and added keywords filter grants', () => {
   const grants = [
     grant({ id: 'us', citizenship: 'us-citizen', addedAt: '2026-08-26' }),
