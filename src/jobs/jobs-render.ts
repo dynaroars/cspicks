@@ -68,7 +68,7 @@ export function renderJobCard(job: Job, isFavorite: IsFavorite = () => false, no
     ${annotationChips ? `<div class="opportunity-tags job-chips">${annotationChips}</div>` : ''}
     ${job.summary ? `<p class="opportunity-summary job-summary">${escapeHtml(job.summary)}</p>` : ''}
     ${opportunityTopics(areaChips)}
-    ${isActive(job, now) ? opportunityFreshness({ checkedAt: job.lastSeenAt, checkedLabel: 'Confirmed live on the official page', staleAfterDays: JOB_STALE_AFTER_DAYS, addedAt: job.addedAt, now }) : ''}
+    ${isActive(job, now) ? opportunityFreshness({ checkedAt: job.lastSeenAt, checkedLabel: 'Confirmed live on the official page', staleAfterDays: JOB_STALE_AFTER_DAYS, addedAt: job.addedAt, sourcePost: job.sourcePost, now }) : ''}
     ${opportunityFooter({ kind: 'job', title: job.title, startHtml: footerParts,
       actionsHtml: `${calendarAction}<a class="job-edit" href="submit.html?type=job&id=${encodeURIComponent(job.id)}">Suggest update</a>`,
       pageLink: `jobs.html?q=${encodeURIComponent(job.id)}&status=all#${encodeURIComponent(job.id)}` })}
@@ -145,6 +145,7 @@ export function jobsToMarkdown(jobs: Job[], { now = Date.now(), getProgress = ()
       ['Posted', formatDay(job.postedDate)],
       ['Last confirmed live', formatDay(job.lastSeenAt)],
       ['Official posting', url === '#' ? '' : `<${url}>`],
+      ['Spotted in', job.sourcePost && safeExternalUrl(job.sourcePost) !== '#' ? `<${safeExternalUrl(job.sourcePost)}>` : ''],
       ['CS Picks', `<${SITE_URL}/jobs.html?q=${encodeURIComponent(`school: "${job.school}"`)}&status=all>`],
       ['CS Picks ID', `\`${job.id}\``]
     ];

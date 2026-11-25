@@ -1,0 +1,53 @@
+{
+  "_comment": "Bluesky accounts and searches that scripts/social-leads.mjs scans for job and award leads (TASKS/jobs.md and TASKS/grants.md, 'Social-media leads'). Posts are leads only: every record needs its official page. Add an account only after reading its profile; an impostor account wastes a run but cannot put facts in the data.",
+  "jobs": {
+    "queries": [
+      "\"tenure-track\" \"computer science\"",
+      "\"faculty position\" \"computer science\"",
+      "\"faculty positions\" computing",
+      "\"assistant professor\" \"computer science\" hiring",
+      "\"we are hiring\" faculty \"computer science\"",
+      "\"open rank\" \"computer science\"",
+      "\"teaching professor\" \"computer science\"",
+      "\"lecturer\" \"computer science\" hiring",
+      "postdoc \"computer science\" hiring",
+      "\"faculty search\" CS",
+      "\"faculty hiring\" ECE",
+      "\"faculty positions\" \"information science\"",
+      "#academicjobs \"computer science\"",
+      "#facultyjobs computing"
+    ],
+    "accounts": [
+      { "handle": "tenuretracker.bsky.social", "note": "Bot that reposts university job ads: 'X is hiring: <title>', with a tenuretracker.info link to follow to the official ad.", "queries": ["\"computer science\"", "computing", "\"software engineering\"", "\"data science\"", "informatics", "\"artificial intelligence\"", "cybersecurity", "\"electrical and computer engineering\""] }
+    ]
+  },
+  "awards": {
+    "queries": [
+      "fellowship \"computer science\" deadline",
+      "\"call for proposals\" computing research",
+      "\"research awards\" computing",
+      "\"faculty award\" applications",
+      "\"applications are open\" fellowship computing",
+      "\"accepting applications\" fellowship PhD computing",
+      "\"compute credits\" researchers",
+      "\"research grants\" AI researchers apply"
+    ],
+    "accounts": [
+      { "handle": "simonsfoundation.org" },
+      { "handle": "simonsinstitute.bsky.social" },
+      { "handle": "sloanfoundation.bsky.social" },
+      { "handle": "schmidtsciences.bsky.social" },
+      { "handle": "moorefound.bsky.social" },
+      { "handle": "openphilanthropy.bsky.social" },
+      { "handle": "googleresearch.bsky.social" },
+      { "handle": "msftresearch.bsky.social" },
+      { "handle": "amazon.science" },
+      { "handle": "darpa.mil" },
+      { "handle": "acm.org" },
+      { "handle": "computer.org" },
+      { "handle": "cra-hq.bsky.social" },
+      { "handle": "sigplan.bsky.social" },
+      { "handle": "mozillafoundation.bsky.social" }
+    ]
+  }
+}

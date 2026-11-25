@@ -208,6 +208,11 @@ export function deadlineLabel(job: Job, now = Date.now()) {
 }
 
 const TRACKS = Object.keys(TRACK_LABELS);
+/** `sourcePost`: an https link to the social post that led us to the record. */
+export function isSourcePostUrl(value: unknown) {
+  if (typeof value !== 'string' || !value.startsWith('https://')) return false;
+  try { new URL(value); return true; } catch { return false; }
+}
 const LEVELS = Object.keys(LEVEL_LABELS);
 const isoOrNull = (value: unknown) => value === undefined || value === null || (typeof value === 'string' && dayParts(value) !== null);
 /** Start dates may be as precise as the posting: YYYY, YYYY-MM, or YYYY-MM-DD. */
@@ -216,7 +221,7 @@ const startOrNull = (value: unknown) => isoOrNull(value)
 /** Every field a posting may carry (src/types.d.ts Job); anything else is a typo, e.g. `areasAny` for `anyArea`. */
 const JOB_FIELDS = new Set(['id', 'school', 'lab', 'department', 'title', 'track', 'level', 'areas', 'anyArea', 'country', 'state',
   'city', 'deadline', 'rolling', 'reviewBegins', 'startDate', 'postedDate', 'lastSeenAt', 'closedAt', 'visaSponsorship', 'url',
-  'summary', 'source', 'verified', 'addedAt']);
+  'summary', 'source', 'sourcePost', 'verified', 'addedAt']);
 
 /** Names of the fields that make `value` an invalid Job; empty when it is valid. */
 export function jobProblems(value: unknown): string[] {
@@ -245,7 +250,8 @@ export function jobProblems(value: unknown): string[] {
     ['reviewBegins', isoOrNull(job.reviewBegins)],
     ['startDate', startOrNull(job.startDate)],
     ['visaSponsorship', job.visaSponsorship === undefined || (typeof job.visaSponsorship === 'string' && job.visaSponsorship in VISA_LABELS)],
-    ['source', job.source === 'crawl' || job.source === 'submission']
+    ['source', job.source === 'crawl' || job.source === 'submission'],
+    ['sourcePost', job.sourcePost === undefined || isSourcePostUrl(job.sourcePost)]
   ];
   const unknown = Object.keys(job).filter(key => !JOB_FIELDS.has(key)).map(key => `unknown field ${key}`);
   return [...checks.filter(([, ok]) => !ok).map(([field]) => field), ...unknown];

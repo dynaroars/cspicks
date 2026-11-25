@@ -175,6 +175,19 @@ test('freshness line warns when an award was never re-verified or is stale', () 
   assert.equal(isRecentlyAdded('2026-10-25', now), false);
 });
 
+test('cards credit the social post that led us to a record, without replacing the official link', () => {
+  const now = NOW.getTime();
+  const post = 'https://bsky.app/profile/tenuretracker.bsky.social/post/3n2se2qxml32z';
+  const jobCard = renderJobCard(job({ addedAt: '2026-10-30', sourcePost: post }), () => false, now);
+  assert.match(jobCard, /href="https:\/\/example\.edu\/j"/);
+  assert.match(jobCard, /<a class="opportunity-source-post" href="https:\/\/bsky\.app\/profile\/tenuretracker\.bsky\.social\/post\/3n2se2qxml32z"[^>]*>Spotted in a Bluesky post ↗<\/a><\/p>/);
+  assert.match(renderGrantCard(grant({ lastVerifiedAt: '2026-10-31', sourcePost: 'https://mastodon.social/@x/1' }), () => false, NOW), /Spotted in a social post ↗/);
+  assert.doesNotMatch(renderJobCard(job({ sourcePost: 'javascript:alert(1)' }), () => false, now), /opportunity-source-post/);
+  assert.match(jobsToMarkdown([job({ sourcePost: post })], { now }), /\*\*Spotted in:\*\* <https:\/\/bsky\.app\//);
+  assert.deepEqual(grantProblems([grant({ sourcePost: 'http://bsky.app/x' })]).length, 1);
+  assert.deepEqual(grantProblems([grant({ sourcePost: post })]), []);
+});
+
 test('application progress store keeps one known status per posting', () => {
   const values = new Map();
   globalThis.localStorage = { getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value) };

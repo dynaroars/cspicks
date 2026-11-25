@@ -53,7 +53,7 @@ export function renderGrantCard(
     ${grant.summary ? `<p class="opportunity-summary grant-summary">${escapeHtml(grant.summary)}</p>` : ''}
     ${eligibilityItems ? `<details class="opportunity-details grant-eligibility-accordion"><summary>Eligibility requirements (${grant.eligibility.length})</summary><ul class="grant-eligibility-list">${eligibilityItems}</ul></details>` : ''}
     ${opportunityTopics(topicChips, 'grant-topics')}
-    ${opportunityFreshness({ checkedAt: grant.lastVerifiedAt, checkedLabel: 'Verified against the official page', staleAfterDays: GRANT_STALE_AFTER_DAYS, addedAt: grant.addedAt, now: now.getTime() })}
+    ${opportunityFreshness({ checkedAt: grant.lastVerifiedAt, checkedLabel: 'Verified against the official page', staleAfterDays: GRANT_STALE_AFTER_DAYS, addedAt: grant.addedAt, sourcePost: grant.sourcePost, now: now.getTime() })}
     ${opportunityFooter({ kind: 'grant', title: grant.name, startHtml,
       actionsHtml: `${calendarAction}<a href="submit.html?type=grant&id=${encodeURIComponent(grant.id)}">Suggest update</a>`,
       pageLink: `grants.html?q=${encodeURIComponent(grant.id)}#${encodeURIComponent(grant.id)}` })}
@@ -107,6 +107,7 @@ export function grantsToMarkdown(
       ['Topics', (grant.topics || []).join(', ')],
       ['Last verified', formatIsoDay(grant.lastVerifiedAt)],
       ['Official page', url === '#' ? '' : `<${url}>`],
+      ['Spotted in', grant.sourcePost && safeExternalUrl(grant.sourcePost) !== '#' ? `<${safeExternalUrl(grant.sourcePost)}>` : ''],
       ['CS Picks', `<${SITE_URL}/grants.html?q=${encodeURIComponent(grant.id)}#${encodeURIComponent(grant.id)}>`],
       ['CS Picks ID', `\`${grant.id}\``]
     ];
