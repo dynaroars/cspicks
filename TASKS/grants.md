@@ -208,7 +208,10 @@ drops winner announcements and paper calls, expands short links, and skips progr
 `grants.json`. "maybe already in grants.json: <id>" means the post names an existing program: re-verify that entry
 instead of adding a new one. Each lead is only a pointer. Read the sponsor's official call page for every field. When
 you add or update an entry because of a lead, set `sourcePost` to the printed post URL; the card credits it as
-"Spotted in a Bluesky post ↗". Recognition-only prizes and editor searches are out of scope unless they fund
+"Spotted in a Bluesky post ↗" (or "an X post"). Sponsors that post mainly on X are found by web search: run the
+queries under `awards.x.searches` in `scripts/data/social-sources.json` restricted to `x.com` and `twitter.com`, save
+the result URLs to a file, and add `--x FILE` to the command (TASKS/jobs.md, "Social-media leads", has the details).
+Recognition-only prizes and editor searches are out of scope unless they fund
 research or people.
 
 Run the "AI Tool Access & Compute Credits for Scientists" queries every time, then rotate through the other query

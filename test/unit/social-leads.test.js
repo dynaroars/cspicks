@@ -46,3 +46,31 @@ test('links: mirrors yield the official ad, tracking is ignored, and one page is
   ]);
   assert.deepEqual(similarGrants('Last call: Amazon Research Awards proposals are due', [{ id: 'ara', shortName: 'Amazon Research Awards', name: 'Amazon Research Awards (ARA)' }, { id: 'x', shortName: 'CAREER', name: 'NSF CAREER' }]), ['ara']);
 });
+
+test('X post URLs are read from free text, and both X embed formats become leads with the post date and real links', async () => {
+  const { tweetIds, tweetFromSyndication, tweetFromOembed } = await import('../../scripts/social-leads.mjs');
+  assert.deepEqual(tweetIds('see https://x.com/TTIC_Connect/status/1980343485019611146?s=20 and https://twitter.com/i/web/status/123456789,'
+    + ' https://mobile.twitter.com/a_b/statuses/123456789 https://x.com/TTIC_Connect'), ['1980343485019611146', '123456789']);
+
+  const syndicated = tweetFromSyndication({
+    id_str: '1980343485019611146', created_at: '2025-10-20T18:40:54.000Z', user: { screen_name: 'TTIC_Connect' },
+    text: 'TTIC is hiring tenure-track faculty! Apply by Dec 1: https://t.co/a https://t.co/b',
+    entities: { urls: [{ expanded_url: 'https://buff.ly/wv1sA0i' }, { expanded_url: 'https://x.com/TTIC_Connect/status/1980343485019611146/photo/1' }] }
+  });
+  assert.equal(syndicated?.sourcePost, 'https://x.com/TTIC_Connect/status/1980343485019611146');
+  assert.equal(syndicated?.date, '2025-10-20');
+  assert.deepEqual(syndicated?.links, ['https://buff.ly/wv1sA0i']);
+
+  const embedded = tweetFromOembed({
+    url: 'https://x.com/AlexanderSpangh/status/2125326336483070174',
+    html: '<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I&#39;m hiring &amp; recruiting<br><br>'
+      + '<a href="https://x.com/hashtag/CS?src=hash">#CS</a> <a href="https://t.co/9xBMOJmFbP">https://t.co/9xBMOJmFbP</a> '
+      + '<a href="https://t.co/pic">pic.twitter.com/pic</a></p>&mdash; Alex Spangher (@AlexanderSpangh) '
+      + '<a href="https://x.com/AlexanderSpangh/status/2125326336483070174?ref_src=twsrc%5Etfw">November 24, 2026</a></blockquote>'
+  });
+  assert.equal(embedded?.date, '2026-11-24');
+  assert.equal(embedded?.author, 'AlexanderSpangh');
+  assert.match(embedded?.text ?? '', /^I'm hiring & recruiting\n\n#CS https:\/\/t\.co\/9xBMOJmFbP/);
+  assert.deepEqual(embedded?.links, ['https://t.co/9xBMOJmFbP']);
+  assert.equal(tweetFromOembed({ html: '<p>no url</p>' }), null);
+});

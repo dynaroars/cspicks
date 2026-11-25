@@ -1,5 +1,5 @@
 {
-  "_comment": "Bluesky accounts and searches that scripts/social-leads.mjs scans for job and award leads (TASKS/jobs.md and TASKS/grants.md, 'Social-media leads'). Posts are leads only: every record needs its official page. Add an account only after reading its profile; an impostor account wastes a run but cannot put facts in the data.",
+  "_comment": "Bluesky accounts and searches that scripts/social-leads.mjs scans, and the web searches (x) that find X posts for its --x option, for job and award leads (TASKS/jobs.md and TASKS/grants.md, 'Social-media leads'). Posts are leads only: every record needs its official page. Add an account only after reading its profile; an impostor account wastes a run but cannot put facts in the data.",
   "jobs": {
     "queries": [
       "\"tenure-track\" \"computer science\"",
@@ -17,6 +17,19 @@
       "#academicjobs \"computer science\"",
       "#facultyjobs computing"
     ],
+    "x": {
+      "_comment": "Web searches (restrict results to x.com and twitter.com) whose status URLs the routine passes with --x. Results mix in old posts; the script drops those outside --days.",
+      "searches": [
+        "\"tenure-track\" \"computer science\" hiring",
+        "\"we're hiring\" faculty \"computer science\"",
+        "\"faculty positions\" computing \"apply by\"",
+        "\"assistant professor\" \"computer science\" \"is hiring\"",
+        "\"teaching faculty\" OR \"teaching professor\" \"computer science\" hiring",
+        "postdoc position \"computer science\" apply",
+        "#FacultyHiring computer science",
+        "#CSJobs faculty"
+      ]
+    },
     "accounts": [
       { "handle": "tenuretracker.bsky.social", "note": "Bot that reposts university job ads: 'X is hiring: <title>', with a tenuretracker.info link to follow to the official ad.", "queries": ["\"computer science\"", "computing", "\"software engineering\"", "\"data science\"", "informatics", "\"artificial intelligence\"", "cybersecurity", "\"electrical and computer engineering\""] }
     ]
@@ -32,6 +45,17 @@
       "\"compute credits\" researchers",
       "\"research grants\" AI researchers apply"
     ],
+    "x": {
+      "_comment": "Web searches (restrict results to x.com and twitter.com) whose status URLs the routine passes with --x.",
+      "searches": [
+        "\"call for proposals\" research awards computing",
+        "fellowship \"computer science\" \"applications are open\"",
+        "\"PhD fellowship\" applications open AI",
+        "\"research awards\" faculty \"now open\"",
+        "\"compute credits\" researchers apply",
+        "nominations open award computing"
+      ]
+    },
     "accounts": [
       { "handle": "simonsfoundation.org" },
       { "handle": "simonsinstitute.bsky.social" },

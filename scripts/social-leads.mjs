@@ -1,11 +1,17 @@
 #!/usr/bin/env node
 /**
  * Social-media leads for the jobs and awards routines: searches public Bluesky posts (no login) for job ads and award
- * calls, drops posts we already have, and prints what is left with a school/sponsor hint and the links to follow.
+ * calls, reads X posts the caller found, drops posts we already have, and prints what is left with a school/sponsor
+ * hint and the links to follow.
  *
  *   npm run leads:social -- --kind jobs --days 14              # job leads from the last two weeks
  *   npm run leads:social -- --kind jobs --country US           # only US schools (+ leads naming no known school)
  *   npm run leads:social -- --kind awards --days 35 --json     # award leads, machine-readable
+ *   npm run leads:social -- --kind jobs --x x-urls.txt         # also X posts (URLs from a web search; '-' reads stdin)
+ *
+ * X has no free search, so X posts come in as URLs: the routine runs the `x.searches` in social-sources.json with its
+ * web-search tool and passes the x.com/twitter.com status URLs it gets. Each one is read without login through X's
+ * public embed endpoints (syndication, then oEmbed) and goes through the same filters as a Bluesky post.
  *
  * A post is a lead, never a source: follow it to the official page and take every fact from there. When a record is
  * added because of a lead, store the printed `sourcePost` URL on it so the card credits the post. Searches and accounts
@@ -36,7 +42,7 @@ const AWARD_NOISE = /congratulat|happy birthday|\bHBD\b|recipients?\b(?! will)|i
 const PAPER_CALL = /call for (papers|talks|posters|workshops|tutorials)|submit (your )?(paper|abstract|talk)/i;
 
 function parseArgs(argv) {
-  const options = { kind: 'jobs', days: 14, since: null, country: null, limit: 40, json: false, all: false };
+  const options = { kind: 'jobs', days: 14, since: null, country: null, limit: 40, json: false, all: false, x: [], bluesky: true };
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     const next = () => argv[++i];
@@ -47,8 +53,12 @@ function parseArgs(argv) {
     else if (arg === '--limit') options.limit = Number(next());
     else if (arg === '--json') options.json = true;
     else if (arg === '--all') options.all = true;
-    else if (arg === '--help' || arg === '-h') { console.log(`Usage: npm run leads:social -- [--kind jobs|awards] [--days N | --since YYYY-MM-DD] [--country US|intl] [--limit N] [--all] [--json]
-  --all   also list posts whose links or post are already in jobs.json / grants.json`); process.exit(0); }
+    else if (arg === '--x') options.x.push(next());
+    else if (arg === '--no-bluesky') options.bluesky = false;
+    else if (arg === '--help' || arg === '-h') { console.log(`Usage: npm run leads:social -- [--kind jobs|awards] [--days N | --since YYYY-MM-DD] [--country US|intl] [--limit N] [--all] [--json] [--x FILE|-] [--no-bluesky]
+  --all         also list posts whose links or post are already in jobs.json / grants.json
+  --x FILE|-    also read the X post URLs in FILE (or stdin); find them with the x.searches in social-sources.json
+  --no-bluesky  skip the Bluesky searches (X posts only)`); process.exit(0); }
     else throw new Error(`Unknown option ${arg}`);
   }
   if (!['jobs', 'awards'].includes(options.kind)) throw new Error('--kind must be jobs or awards');
@@ -105,7 +115,7 @@ async function authorFeed(actor, since, pages = 3) {
   return posts;
 }
 
-const rkey = uri => String(uri).split('/').pop();
+const rkey = uri => String(uri).split('/').pop()?.split('?')[0] ?? '';
 export const postUrl = post => `https://bsky.app/profile/${post.author.did}/post/${rkey(post.uri)}`;
 
 /** Links a post carries: rich-text link facets and an external link card. */
@@ -116,6 +126,82 @@ export function postLinks(post) {
     post.embed?.external?.uri
   ].filter(link => typeof link === 'string' && /^https?:\/\//.test(link));
   return [...new Set(links)];
+}
+
+const X_STATUS = /https?:\/\/(?:www\.|mobile\.)?(?:x|twitter)\.com\/(?:[A-Za-z0-9_]{1,15}|i(?:\/web)?)\/status(?:es)?\/(\d{5,25})/g;
+
+/** Status ids of the X/Twitter post links in free text (search results, a URL list), first-seen order, no repeats. */
+export function tweetIds(text) {
+  return [...new Set([...String(text).matchAll(X_STATUS)].map(match => match[1]))];
+}
+
+const ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", mdash: '—', ndash: '–', hellip: '…', nbsp: ' ' };
+const decode = html => html.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (whole, name) => name[0] === '#'
+  ? String.fromCodePoint(name[1].toLowerCase() === 'x' ? parseInt(name.slice(2), 16) : Number(name.slice(1)))
+  : ENTITIES[name.toLowerCase()] ?? whole);
+
+/** A post's link to the poster's own photo/video, a hashtag, or a profile: not a page to follow. */
+const X_INTERNAL = /^https?:\/\/(?:www\.)?(?:x|twitter)\.com\/(?:hashtag\/|[^/]+\/?(?:\?|$)|[^/]+\/status\/\d+\/(?:photo|video))|^https?:\/\/pic\.(?:x|twitter)\.com\//;
+
+/** Lead entry from X's syndication JSON (cdn.syndication.twimg.com/tweet-result): full timestamp and expanded links. */
+export function tweetFromSyndication(data) {
+  if (!data?.id_str || !data.user?.screen_name) return null;
+  const links = (data.entities?.urls ?? []).map(url => url.expanded_url).filter(link => link && !X_INTERNAL.test(link));
+  return {
+    id: data.id_str,
+    author: data.user.screen_name,
+    date: String(data.created_at ?? '').slice(0, 10),
+    sourcePost: `https://x.com/${data.user.screen_name}/status/${data.id_str}`,
+    text: data.text ?? '',
+    links: [...new Set(links)]
+  };
+}
+
+const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+/**
+ * Lead entry from X's oEmbed JSON (publish.twitter.com/oembed): the post's paragraph, its links (t.co, followed later),
+ * and the "— Name (@handle) Month D, YYYY" byline date.
+ */
+export function tweetFromOembed(embed) {
+  const html = String(embed?.html ?? '');
+  const status = String(embed?.url ?? '').match(/\/([A-Za-z0-9_]{1,15})\/status\/(\d+)/);
+  if (!status) return null;
+  const paragraph = html.match(/<p[^>]*>([\s\S]*?)<\/p>/)?.[1] ?? '';
+  const links = [...paragraph.matchAll(/<a href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)]
+    .filter(([, , label]) => !/^pic\.(x|twitter)\.com\//.test(decode(label)))
+    .map(([, href]) => decode(href)).filter(link => !X_INTERNAL.test(link));
+  const byline = html.match(/>\s*([A-Z][a-z]+) (\d{1,2}), (\d{4})\s*<\/a>\s*<\/blockquote>/);
+  const month = byline ? MONTHS.indexOf(byline[1].toLowerCase()) : -1;
+  return {
+    id: status[2],
+    author: status[1],
+    date: month < 0 ? '' : new Date(Date.UTC(Number(byline[3]), month, Number(byline[2]))).toISOString().slice(0, 10),
+    sourcePost: `https://x.com/${status[1]}/status/${status[2]}`,
+    text: decode(paragraph.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '')).trim(),
+    links: [...new Set(links)]
+  };
+}
+
+/** The token X's own embed widget sends with a syndication request. */
+const syndicationToken = id => ((Number(id) / 1e15) * Math.PI).toString(36).replace(/(0+|\.)/g, '');
+
+let xFailures = 0;
+/** One X post by id, read without login: syndication first (exact date, expanded links), then the documented oEmbed. */
+async function fetchTweet(id) {
+  const tries = [
+    { url: `https://cdn.syndication.twimg.com/tweet-result?id=${id}&token=${syndicationToken(id)}`, parse: tweetFromSyndication },
+    { url: `https://publish.twitter.com/oembed?${new URLSearchParams({ url: `https://x.com/i/status/${id}`, omit_script: '1', dnt: '1' })}`, parse: tweetFromOembed }
+  ];
+  for (const { url, parse } of tries) {
+    try {
+      const response = await fetch(url, { headers: { accept: 'application/json', 'user-agent': 'Mozilla/5.0 (compatible; cspicks-leads)' }, signal: AbortSignal.timeout(15_000) });
+      const entry = response.ok ? parse(await response.json()) : null;
+      if (entry) return entry;
+    } catch { /* try the next endpoint */ }
+  }
+  xFailures++;
+  console.error(`! X post ${id}: unreadable (deleted, protected, or the embed endpoints are blocked)`);
+  return null;
 }
 
 /** Comparable form of a URL: no scheme, www, tracking params, hash, or trailing slash. */
@@ -220,6 +306,12 @@ export function isLead(kind, text, fromAccount) {
   return fromAccount || COMPUTING.test(text);
 }
 
+async function readStdin() {
+  let text = '';
+  for await (const chunk of process.stdin) text += chunk;
+  return text;
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const config = await read('./data/social-sources.json');
@@ -228,21 +320,31 @@ async function main() {
   const grants = await read('../public/grants.json');
   const section = config[options.kind];
 
+  // X post URLs found by the caller's web search, read now so an unreachable Bluesky doesn't lose them.
+  const xIds = [];
+  for (const file of options.x) xIds.push(...tweetIds(file === '-' ? await readStdin() : await fs.readFile(file, 'utf8')));
+  const tweets = [];
+  for (const id of [...new Set(xIds)]) {
+    const tweet = await fetchTweet(id);
+    if (tweet && (!tweet.date || tweet.date >= options.sinceIso.slice(0, 10))) tweets.push(tweet);
+  }
+
   // Fetch: keyword searches, then each account (its own queries, or its whole feed).
   const found = new Map();
   const add = (posts, fromAccount) => posts.forEach(post => {
     const prior = found.get(post.uri);
     found.set(post.uri, { post, fromAccount: fromAccount || prior?.fromAccount || false });
   });
-  for (const q of section.queries) add(await search(q, options.sinceIso), false);
-  for (const account of section.accounts) {
+  if (options.bluesky) for (const q of section.queries) add(await search(q, options.sinceIso), false);
+  if (options.bluesky) for (const account of section.accounts) {
     if (account.queries) for (const q of account.queries) add(await search(q, options.sinceIso, account.handle), true);
     else add(await authorFeed(account.handle, options.sinceIso), true);
   }
-  if (requests && failures === requests) {
+  if (requests && failures === requests && !tweets.length) {
     console.error(`Bluesky API unreachable (${failures} failed requests). Record "social leads: unavailable" and continue without them.`);
     process.exit(2);
   }
+  if (requests && failures === requests) console.error(`! Bluesky API unreachable (${failures} failed requests); listing X leads only.`);
 
   // A reply can match a search when the post that started its thread did not (the bot puts the link up top): fetch those.
   const missing = [...new Set([...found.values()].map(entry => entry.post.record?.reply?.root?.uri).filter(uri => uri && !found.has(uri)))];
@@ -253,7 +355,15 @@ async function main() {
 
   // Fold a thread's replies (the bot's "Extract:" follow-ups) into the post that started it.
   const entries = [...found.values()];
-  const roots = new Map(entries.map(entry => [entry.post.uri, { ...entry, text: entry.post.record?.text ?? '', links: postLinks(entry.post) }]));
+  const roots = new Map(entries.map(entry => [entry.post.uri, {
+    fromAccount: entry.fromAccount,
+    id: rkey(entry.post.uri),
+    author: entry.post.author.handle,
+    date: (entry.post.record?.createdAt ?? '').slice(0, 10),
+    sourcePost: postUrl(entry.post),
+    text: entry.post.record?.text ?? '',
+    links: postLinks(entry.post)
+  }]));
   for (const entry of entries) {
     const root = entry.post.record?.reply?.root?.uri;
     if (root && root !== entry.post.uri && roots.has(root)) {
@@ -271,16 +381,17 @@ async function main() {
   const postingsBySchool = new Map();
   jobs.forEach(job => postingsBySchool.set(job.school, (postingsBySchool.get(job.school) ?? 0) + 1));
 
-  const candidates = [...roots.values()].filter(entry => isLead(options.kind, entry.text, entry.fromAccount));
+  const candidates = [...roots.values(), ...tweets.map(tweet => ({ ...tweet, fromAccount: false }))]
+    .filter(entry => isLead(options.kind, entry.text, entry.fromAccount));
   await resolveMirrors(candidates);
   const leads = candidates
     .map(entry => {
-      const known = knownPosts.has(rkey(entry.post.uri)) || entry.links.some(link => knownUrls.has(normalizeUrl(link)));
+      const known = knownPosts.has(entry.id) || entry.links.some(link => knownUrls.has(normalizeUrl(link)));
       const match = options.kind === 'jobs' ? matchSchool(entry.text, schools) : { school: null, named: null };
       return {
-        date: (entry.post.record?.createdAt ?? '').slice(0, 10),
-        author: entry.post.author.handle,
-        sourcePost: postUrl(entry.post),
+        date: entry.date,
+        author: entry.author,
+        sourcePost: entry.sourcePost,
         school: match.school?.name ?? null,
         country: match.school?.country ?? null,
         postingsInJobsJson: match.school ? postingsBySchool.get(match.school.name) ?? 0 : null,
@@ -301,7 +412,9 @@ async function main() {
     console.log(JSON.stringify(ranked, null, 2));
     return;
   }
-  console.log(`${ranked.length} ${options.kind} lead(s) from Bluesky since ${options.sinceIso.slice(0, 10)} (${found.size} posts scanned, ${requests} requests${failures ? `, ${failures} failed` : ''}).`);
+  const xNote = options.x.length ? `; X: ${tweets.length} of ${new Set(xIds).size} post(s) in range${xFailures ? `, ${xFailures} unreadable` : ''}`
+    : '; X: not read, pass --x with the URLs from the x.searches in social-sources.json';
+  console.log(`${ranked.length} ${options.kind} lead(s) since ${options.sinceIso.slice(0, 10)} (Bluesky: ${options.bluesky ? `${found.size} posts scanned, ${requests} requests${failures ? `, ${failures} failed` : ''}` : 'skipped'}${xNote}).`);
   console.log('Leads only: confirm each on the official page; store sourcePost on records you add from one.\n');
   for (const lead of ranked) {
     const where = options.kind !== 'jobs' ? ''

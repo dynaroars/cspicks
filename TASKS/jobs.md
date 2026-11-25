@@ -84,7 +84,7 @@ create a GitHub Issue for these entries unless the user asks for that workflow.
 ## Social-media leads (`npm run leads:social`)
 
 Many departments, chairs, and the `tenuretracker.bsky.social` bot announce searches on Bluesky before (or instead
-of) the job boards. `npm run leads:social -- --kind jobs --days 14` searches public Bluesky posts (no login) with the
+of) the job boards, and many still post on X. `npm run leads:social -- --kind jobs --days 14` searches public Bluesky posts (no login) with the
 queries and accounts in `scripts/data/social-sources.json`. It keeps computing faculty, lecturer, research, and postdoc ads, and
 drops PhD-student recruiting, staff roles, and posts whose links are already in `jobs.json`. It follows the bot's
 tenuretracker.info links to the official ad and lists computing faculty ads first. Each lead shows its `sourcePost`, the
@@ -101,6 +101,13 @@ to match your routine; leads naming no known school appear in both.
 - A school that's missing from `jobs-sources.json` gets a row (`npm run maintain:jobs -- --add`), and then a normal
   crawl, since a posted search often means more openings in related units.
 - If the script exits with "Bluesky API unreachable" (exit 2), the network blocks it: say so in the PR and carry on.
+- **X posts.** X has no free search, so find them with web search: run each query under `jobs.x.searches` in
+  `scripts/data/social-sources.json`, restricted to `x.com` and `twitter.com`. Save the result URLs to a file (one per
+  line, or paste the results as they are; the script keeps only status links) and pass it with
+  `--x FILE` (`--x -` reads stdin). The script reads each post without login through X's public embed endpoints, drops
+  posts older than `--days` (search results mix in years-old posts), and runs the same filters. X leads print an
+  `x.com/<handle>/status/<id>` `sourcePost`, credited as "Spotted in an X post ↗". A long post is cut off in the
+  embed; open it if the lead's text stops before the link.
 - To add an account or search, edit `scripts/data/social-sources.json` after reading the account's profile.
 
 ## Reading JavaScript pages (`npm run render:jobs`)
