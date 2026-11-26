@@ -2203,37 +2203,6 @@
     "citizenship": "us-citizen-or-pr"
   },
   {
-    "id": "huawei-research-fellowship",
-    "name": "Huawei Research Fellowship Program",
-    "shortName": "Huawei Research Fellowship",
-    "sponsor": "Huawei Technologies",
-    "sponsorCategory": "Industry",
-    "targetAudience": [
-      "PhD Students",
-      "Postdocs"
-    ],
-    "whoFor": "PhD researchers and postdocs in communication algorithms, optics, and systems architecture",
-    "deadline": "Rolling / Annual cycles",
-    "deadlineMonth": 0,
-    "amount": "Comprehensive research funding and international lab collaboration support",
-    "summary": "Supports exceptional doctoral and postdoctoral researchers addressing fundamental theoretical and engineering problems in 5G/6G wireless communications, distributed operating systems, and optical computing.",
-    "eligibility": [
-      "PhD student or Postdoc in CS, EE, or applied physics",
-      "International research proposals welcome"
-    ],
-    "topics": [
-      "Wireless Communications",
-      "Operating Systems",
-      "Algorithms",
-      "Optical Computing",
-      "Distributed AI"
-    ],
-    "url": "https://www.huawei.com/en/industry-insights/industry/huawei-research-fellowship-program",
-    "featured": false,
-    "addedAt": "2026-08-26",
-    "citizenship": "open"
-  },
-  {
     "id": "xerox-technical-minority",
     "name": "Xerox Technical Minority Scholarship Program",
     "shortName": "Xerox Minority Scholarship",
@@ -2244,11 +2213,11 @@
       "Master's Students",
       "PhD Students"
     ],
-    "whoFor": "Minority undergraduate and graduate students in technical computing and engineering fields",
-    "deadline": "Late September (Annual)",
-    "deadlineMonth": 9,
-    "amount": "$1,000–$10,000 scholarship awards",
-    "summary": "Provides financial assistance to undergraduate and graduate minority students studying computer science, software engineering, imaging science, and related technical disciplines.",
+    "whoFor": "Minority undergraduate and graduate students in technical computing and engineering fields — program appears discontinued",
+    "deadline": "Historical (annual, late September). Xerox's official program page was last archived live in June 2016; by 2019 it redirected to Xerox's general jobs page, and the current URL returns 404 (checked November 26, 2026). No current Xerox page announces a new cycle.",
+    "deadlineMonth": 0,
+    "amount": "$1,000–$10,000 scholarship awards (while active)",
+    "summary": "Provides financial assistance to undergraduate and graduate minority students studying computer science, software engineering, imaging science, and related technical disciplines. Retained for reference; Xerox no longer publishes a program page.",
     "eligibility": [
       "US Citizen or Permanent Resident",
       "Minority background (African American, Hispanic, Asian, Native American, Pacific Islander)",
@@ -2263,7 +2232,9 @@
     "url": "https://www.xerox.com/en-us/jobs/minority-scholarships",
     "featured": false,
     "addedAt": "2026-08-26",
-    "citizenship": "us-citizen-or-pr"
+    "citizenship": "us-citizen-or-pr",
+    "status": "historical",
+    "lastVerifiedAt": "2026-11-26"
   },
   {
     "id": "schmidt-sciences-ai2050",

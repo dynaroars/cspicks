@@ -218,23 +218,15 @@
       ],
       "deferredUntil": "2027-01-06T12:00:00.000Z"
     },
-    "huawei-research-fellowship": {
-      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
-      "outcome": "not_found",
-      "summary": "HTTP 404 for the stored URL; replacement official page not found.",
-      "checkedUrls": [
-        "https://www.huawei.com/en/industry-insights/industry/huawei-research-fellowship-program"
-      ],
-      "deferredUntil": "2026-12-07T12:00:00.000Z"
-    },
     "xerox-technical-minority": {
-      "lastCheckedAt": "2026-11-07T12:00:00.000Z",
-      "outcome": "not_found",
-      "summary": "HTTP 404 (already in Issue #112).",
+      "lastCheckedAt": "2026-11-26T12:00:00.000Z",
+      "outcome": "verified",
+      "summary": "Headless-browser render: HTTP 404. Wayback: official page (xerox.com/jobs/minority-scholarships/enus.html) last 200 in June 2016, 301 to /en-us/jobs from 2019, 404 by 2025. Marked historical (Issue #112).",
       "checkedUrls": [
-        "https://www.xerox.com/en-us/jobs/minority-scholarships"
+        "https://www.xerox.com/en-us/jobs/minority-scholarships",
+        "https://www.xerox.com/jobs/minority-scholarships/enus.html"
       ],
-      "deferredUntil": "2026-12-07T12:00:00.000Z"
+      "deferredUntil": null
     },
     "jpmorgan-ai-awards": {
       "lastCheckedAt": "2026-11-07T12:00:00.000Z",
