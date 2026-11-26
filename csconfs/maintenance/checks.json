@@ -2,13 +2,13 @@
   "version": 1,
   "series": {
     "DISC": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-26T20:05:00.239Z",
       "outcome": "not_found",
-      "summary": "Not yet announced.",
+      "summary": "disc-conference.org shows only DISC 2026 (Rome, Nov 9-13); no 2027 info.",
       "checkedUrls": [
         "https://www.disc-conference.org/wp/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-17T20:05:00.239Z",
       "proposals": []
     },
     "ACL": {
@@ -117,22 +117,21 @@
       ]
     },
     "ICS": {
-      "lastCheckedAt": "2026-11-17T20:05:07.864Z",
+      "lastCheckedAt": "2026-11-26T20:05:00.239Z",
       "outcome": "incomplete",
-      "summary": "ICS 2027 (FCRC, Atlanta) site: conference June 5-11 2027, abstract Dec 1 2026, paper Dec 7 2026, final notification Mar 12 2027; chairs unlisted.",
+      "summary": "ics-conference.org still says only Atlanta (FCRC 2027); dates and committee \"will be announced\". Existing deadlines not re-confirmed on an official page this run, record left as is.",
       "checkedUrls": [
-        "https://www.ics-conference.org/",
-        "https://klab-ai3.github.io/ics2027/"
+        "https://www.ics-conference.org/"
       ],
-      "deferredUntil": "2026-11-24T20:05:07.865Z",
+      "deferredUntil": "2026-12-03T20:05:00.239Z",
       "proposals": []
     },
     "IPSN": {
-      "lastCheckedAt": "2026-11-15T20:05:57.000Z",
+      "lastCheckedAt": "2026-11-26T20:05:00.239Z",
       "outcome": "complete",
-      "summary": "No standalone IPSN edition: SenSys 2027 CFP states SenSys, IPSN and IoTDI merged in 2026. Record note already says so; no change.",
+      "summary": "Unchanged: merged into SenSys from 2026; prior check on sensys.acm.org/2027/cfp.html stands. Record note already says so.",
       "checkedUrls": [
-        "https://sensys.acm.org/2027/cfp.html"
+        "https://sensys.acm.org/2027/"
       ],
       "deferredUntil": null,
       "proposals": []
@@ -932,13 +931,13 @@
       ]
     },
     "BMVC": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "not_found",
+      "lastCheckedAt": "2026-11-26T20:05:00.239Z",
+      "outcome": "incomplete",
+      "summary": "bmvc2027.bmva.org does not resolve from this environment (egress); no official 2027 info retrievable. Retry later.",
       "checkedUrls": [
-        "https://www.bmva.org/bmvc"
+        "https://bmvc2027.bmva.org/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-03T20:05:00.239Z",
       "proposals": []
     },
     "BPM": {
@@ -980,14 +979,13 @@
       ]
     },
     "CP": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "No official CP 2027 information.",
+      "lastCheckedAt": "2026-11-26T20:05:00.239Z",
+      "outcome": "incomplete",
+      "summary": "cp2027.a4cp.org does not resolve from this environment (egress); no official 2027 info retrievable. Retry later.",
       "checkedUrls": [
-        "https://cp2027.a4cp.org/",
-        "https://www.a4cp.org/events/cp-conference-series"
+        "https://cp2027.a4cp.org/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-03T20:05:00.239Z",
       "proposals": []
     },
     "Crypto": {
@@ -1033,67 +1031,87 @@
       ]
     },
     "EC": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "Note: existing EC 2026 link https://ec.sigecom.org/ no longer resolves; ec26.sigecom.org does.",
+      "lastCheckedAt": "2026-11-26T20:05:00.239Z",
+      "outcome": "complete",
+      "summary": "EC 2027 site: Chicago, July 12-16, 2027; combined paper+summary deadline Feb 4 2027 AoE; decisions May 3 2027; chairs TBA. Added record.",
       "checkedUrls": [
-        "https://www.sigecom.org/events.html"
+        "https://ec27.sigecom.org/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
-      "proposals": []
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://ec27.sigecom.org/"
+          ]
+        }
+      ]
     },
     "ECCV": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-26T20:05:00.239Z",
       "outcome": "not_found",
-      "summary": "ECCV is biennial (even years); next is ECCV 2028, not yet announced.",
+      "summary": "eccv.ecva.net/Conferences/2028 returns 404; biennial, 2028 not announced.",
       "checkedUrls": [
-        "https://eccv.ecva.net/Conferences/FutureMeetings",
         "https://eccv.ecva.net/Conferences/2028"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-17T20:05:00.239Z",
       "proposals": []
     },
     "EMSOFT": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "ESWEEK 2027 not announced.",
+      "lastCheckedAt": "2026-11-26T20:05:00.239Z",
+      "outcome": "incomplete",
+      "summary": "esweek.org/emsoft states ESWeek 2027 Oct 10-15, Long Beach, CA; EMSOFT 2027 deadlines/chairs not announced. Added estimated record with date and place only.",
       "checkedUrls": [
-        "https://esweek.org/",
-        "https://2027.esweek.org/"
+        "https://esweek.org/emsoft/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
-      "proposals": []
+      "deferredUntil": "2026-12-03T20:05:00.239Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://esweek.org/emsoft/"
+          ]
+        }
+      ]
     },
     "ER": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "not_found",
+      "lastCheckedAt": "2026-11-26T20:05:00.239Z",
+      "outcome": "incomplete",
+      "summary": "er2026.org confirms ER 2026 is 5-8 Oct 2026, St. John's; corrected date. No ER 2027 info; abstract deadline not on fetched page.",
       "checkedUrls": [
         "https://er2026.org/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
-      "proposals": []
+      "deferredUntil": "2026-12-03T20:05:00.239Z",
+      "proposals": [
+        {
+          "action": "update",
+          "year": 2026,
+          "sources": [
+            "https://er2026.org/"
+          ]
+        }
+      ]
     },
     "ESA": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-26T20:05:00.239Z",
       "outcome": "not_found",
-      "summary": "ALGO/ESA 2027 not announced.",
+      "summary": "algo-conference.org/2027/esa/ exists but is a placeholder blog with no dates, place, or deadlines.",
       "checkedUrls": [
-        "https://algo-conference.org/2027/esa/",
-        "https://algo-conference.org/esa/esa-symposia/"
+        "https://algo-conference.org/2027/esa/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-17T20:05:00.239Z",
       "proposals": []
     },
     "ESEM": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "Not yet announced.",
+      "lastCheckedAt": "2026-11-26T20:05:00.239Z",
+      "outcome": "incomplete",
+      "summary": "conf.researchr.org/home/eseiw-2027 returns access denied (not public yet); no 2027 info.",
       "checkedUrls": [
-        "https://conf.researchr.org/home/eseiw-2027",
-        "https://www.esem-conferences.org/"
+        "https://conf.researchr.org/home/eseiw-2027"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-03T20:05:00.239Z",
       "proposals": []
     },
     "ESORICS": {
@@ -1107,14 +1125,13 @@
       "proposals": []
     },
     "FOCS": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-26T20:05:00.239Z",
       "outcome": "not_found",
-      "summary": "FOCS 2026 is Nov 8-11; 2027 not yet announced.",
+      "summary": "focs.computer.org/2027/ returns 404; 2027 not announced.",
       "checkedUrls": [
-        "https://focs.computer.org/2027/",
-        "https://ieee-focs.org/"
+        "https://focs.computer.org/2027/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-17T20:05:00.239Z",
       "proposals": []
     },
     "GD": {
