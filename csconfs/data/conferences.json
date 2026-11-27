@@ -40605,7 +40605,7 @@
     "description": "International Conference on Conceptual Modeling",
     "link": "https://er2026.org/",
     "seriesLink": "https://er2026.org/",
-    "date": "October 5, 2026 (start date; multi-day)",
+    "date": "October 5-8, 2026",
     "place": "St. John's, Canada",
     "abstractDeadline": null,
     "deadline": "2026-05-05",
@@ -58734,5 +58734,51 @@
     "submissions": null,
     "estimated": false,
     "verified": true
+  },
+  {
+    "description": "ACM Conference on Economics and Computation",
+    "link": "https://ec27.sigecom.org/",
+    "seriesLink": null,
+    "date": "July 12-16, 2027",
+    "place": "Chicago, IL, US",
+    "abstractDeadline": null,
+    "deadline": "2027-02-04",
+    "rebuttalDate": null,
+    "notificationDate": "2027-05-03",
+    "note": "Official page lists one combined \"paper and two-page summary\" submission deadline (Feb 4, 2027, 11:59 pm AoE); no separate abstract deadline. Chairs not yet named.",
+    "generalChair": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": false,
+    "name": "EC",
+    "venueKeys": [
+      "ec"
+    ],
+    "year": 2027
+  },
+  {
+    "description": "International Conference on Embedded Software",
+    "link": "https://esweek.org/emsoft/",
+    "seriesLink": null,
+    "date": "October 10-15, 2027 (part of ESWeek 2027)",
+    "place": "Long Beach, CA, US",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": "Dates and place are ESWeek 2027 as stated on esweek.org; EMSOFT submission deadlines not yet announced.",
+    "generalChair": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": true,
+    "verified": false,
+    "name": "EMSOFT",
+    "venueKeys": [
+      "emsoft"
+    ],
+    "year": 2027
   }
 ]
