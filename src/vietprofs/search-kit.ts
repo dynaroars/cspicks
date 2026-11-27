@@ -157,19 +157,40 @@ function debounce(fn: () => void, delayMs: number): () => void {
   };
 }
 
+// True when each term matches a later word than the previous term (in order), either exactly or
+// as a word prefix.
+function termsInOrder(words: readonly string[], terms: readonly string[], exact: boolean): boolean {
+  let i = 0;
+  for (const term of terms) {
+    const matches = (word: string) => (exact ? word === term : word.startsWith(term));
+    while (i < words.length && !matches(words[i] ?? '')) i++;
+    if (i === words.length) return false;
+    i++;
+  }
+  return true;
+}
+
 // Every value containing the query, best first: values that start with it, then values with a
 // word that starts with it (words split on spaces and hyphens, so "phung" ranks "Tuan Phung-Duc"
-// with "Dinh Phung"), then other substring matches; alphabetical within each tier.
+// with "Dinh Phung"), then other substring matches; alphabetical within each tier. A multi-word
+// query also matches words that are not adjacent ("minh ta" finds "Minh Cao Ta"): values whose
+// words equal the query words in order rank first, and in-order word-prefix matches come last.
 export function rankMatches(values: readonly string[], rawQuery: string): string[] {
   const query = normalizeText(rawQuery);
-  const tier = (value: string) => {
+  const terms = query.split(/\s+/).filter(Boolean);
+  const multi = terms.length > 1;
+  const tier = (value: string): number | null => {
     const text = normalizeText(value);
-    if (text.startsWith(query)) return 0;
-    return text.split(/[^\p{L}\p{N}]+/u).some((word) => word.startsWith(query)) ? 1 : 2;
+    const words = text.split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+    if (multi && termsInOrder(words, terms, true)) return 0;
+    if (text.startsWith(query)) return 1;
+    if (words.some((word) => word.startsWith(query))) return 2;
+    if (text.includes(query)) return 3;
+    return multi && termsInOrder(words, terms, false) ? 4 : null;
   };
   return values
-    .filter((v) => normalizeText(v).includes(query))
     .map((value) => ({ value, tier: tier(value) }))
+    .filter((m): m is { value: string; tier: number } => m.tier !== null)
     .sort((a, b) => a.tier - b.tier || a.value.localeCompare(b.value))
     .map(({ value }) => value);
 }

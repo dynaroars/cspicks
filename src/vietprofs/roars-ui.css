@@ -319,6 +319,13 @@
   gap: 0.5rem;
 }
 
+/* "Updated <date>" under the site title: the build stamps the latest commit date (vite.config). */
+.site-updated {
+  margin-top: 0.15rem;
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
 .header-icons {
   display: flex;
   align-items: center;
