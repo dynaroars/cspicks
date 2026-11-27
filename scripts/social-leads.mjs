@@ -258,7 +258,7 @@ export function mergeSameLink(leads) {
   return merged;
 }
 
-const fold = text => text.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/[^a-z0-9]+/g, ' ')
+export const fold = text => text.normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/[^a-z0-9]+/g, ' ')
   .replace(/\buniv\b/g, 'university').replace(/\b(the|of|at|de|di|degli|studi)\b/g, ' ').replace(/\s+/g, ' ').trim();
 
 /** Longest jobs-sources school whose name appears in the text; the "<X> is hiring:" bot line wins when it names one. */

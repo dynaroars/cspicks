@@ -12,8 +12,10 @@ Run `npm run validate:jobs` (about a second) before **every** commit; it names e
    announcement is the source. AcademicJobsOnline, HigherEdJobs, Indeed, LinkedIn, X, and mailing lists are leads:
    follow them to the official posting. No official posting, no record. Lead boards worth scanning for schools
    to add or re-check (Issue #47): CS jobs at primarily undergraduate institutions (https://cs-pui.github.io/),
-   CRA job announcements (https://cra.org/ads/), ACM Career Center (https://jobs.acm.org/), and IEEE Job Site
-   (https://jobs.ieee.org/); the last three often block scripted fetches.
+   CS tenure-track jobs (https://dliu18.github.io/csjobs/, read by `npm run leads:boards`), the CRA Career Center
+   (https://careercenter.cra.org/jobs/, formerly cra.org/ads), AcademicJobsOnline's CS list
+   (https://academicjobsonline.org/ajo/cs), ACM Career Center (https://jobs.acm.org/), and IEEE Job Site
+   (https://jobs.ieee.org/); CRA, ACM, and IEEE block scripted fetches.
 2. **Never delete.** Closed postings are the archive; mark them with `closedAt`.
 3. **Keep `lastSeenAt` honest.** Set it to today only for postings you saw live this run. Judge live vs. closed
    from the page rendered in a real browser (`npm run render:jobs -- <url>`), never from a plain fetch, an HTTP
@@ -110,6 +112,48 @@ to match your routine; leads naming no known school appear in both.
   embed; open it if the lead's text stops before the link.
 - To add an account or search, edit `scripts/data/social-sources.json` after reading the account's profile.
 
+## Job-board leads (`npm run leads:boards`)
+
+`npm run leads:boards -- --country US --days 21` lists open postings from two aggregators that we may be missing,
+grouped by priority: schools not in `jobs-sources.json`, then matched schools with no active record in `jobs.json`, then
+postings newer than the school's last crawl, then the rest (compare titles with the school's active records). Each lead
+shows the school's last crawl date, its active-record count, and every link the boards give (the AJO ad, the school's
+own apply link when AJO has one, the Workday/Interfolio page an AJO ad redirects to). `--source csjobs|ajo` reads one
+board, `--json` prints the leads as data, `--all` includes known and lapsed ones.
+
+- **csjobs** (https://dliu18.github.io/csjobs/) republishes its whole list daily as JSON on GitHub. It merges
+  AcademicJobsOnline, the CRA Career Center (Cloudflare blocks scripts, so this is our only scripted view of it), and a
+  sweep of university-wide faculty portals. It covers junior (assistant / open-rank) tenure-track postings in North
+  America and Europe only, so it never replaces a crawl for teaching, research, postdoc, or senior roles.
+- **AJO's computer-science list** (https://academicjobsonline.org/ajo/cs) has every open AJO posting in the CS
+  discipline, international ones and postdocs included.
+- Treat a lead exactly like a social lead: open the official posting and take every field from it. CRA and AJO ads
+  are not official sources even when the school's own page is thin; an AJO ad is official only when the school's
+  own site sends applicants to AJO to apply, and then the record's `url` is the AJO ad. Don't set `sourcePost` for
+  board leads (it is for social posts).
+- A board school that isn't in `jobs-sources.json` usually exists under a CSRankings spelling ("Univ. of California -
+  Berkeley", "Massachusetts Inst. of Technology", "Missouri S&T"): search the file before `--add`. Add stubborn
+  spellings to `ALIASES` in `scripts/board-leads.mjs`.
+- A lead marked "non-CS unit" is the related-unit gap at that school: crawl the unit, and add its page (or the
+  university-wide portal) to the row's `relatedUnits`.
+
+### How csjobs finds postings (and what we copy)
+
+1. **Daily scrape of the two big boards, then an LLM extracts the fields** (title, unit, deadline wording, materials).
+   Its records keep the deadline phrasing ("review begins", "full consideration; open until filled"): the reason we
+   keep `reviewBegins`, `deadline`, and `rolling` apart.
+2. **A deliberately broad filter.** Any AJO ad containing the word "computer" is kept, whatever the department.
+   That surfaces CS-PhD searches in statistics, operations research, business information systems, information
+   schools, public policy ("AI and data science for public policy"), biostatistics ("ML and AI"), and engineering
+   institutes, which a CS-department crawl never sees.
+3. **A school-by-school sweep of the university-wide faculty portal**, not the department page. Its "University
+   faculty search" batches go one university at a time and take every computing-relevant ad from the central
+   system: Interfolio (`apply.interfolio.com/<id>`), PeopleAdmin (`<school>.peopleadmin.com/postings/<id>`,
+   `jobs.<school>.edu/postings/<id>`), Workday (`<tenant>.wd1.myworkdayjobs.com/<FacultySite>`), UC AP Recruit
+   (`recruit.ap.ucsb.edu`, `recruit.apo.ucla.edu`, `apol-recruit.ucsd.edu`, `recruit.ap.uci.edu`,
+   `aprecruit.ucmerced.edu`, `aprecruit.berkeley.edu`, …), MIT's `faculty-searches.mit.edu`, Cornerstone (`*.csod.com`),
+   PageUp, and Interview Exchange. We do the same in "Crawling a school", step 2.
+
 ## Reading JavaScript pages (`npm run render:jobs`)
 
 Plain fetch tools return only the app shell for Interfolio, Workday, PeopleAdmin, PeopleSoft, NEOGOV and many department sites. `scripts/jobs-render.mjs` renders a page in headless Chromium (Playwright, already a devDependency; install the browser once with `npx playwright install --with-deps chromium`):
@@ -142,6 +186,13 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
    data, security, networks, systems, or software, or it is an open or cluster search a CS PhD would apply to.
    Skip positions plainly outside computing. Record the unit in `department` as it appears on the posting
    (e.g. "College of Information Sciences and Technology"); `school` stays the name in the sources row.
+   **Search the university-wide faculty portal too**, not only department pages: most schools post every faculty
+   search in one system (Interfolio, PeopleAdmin, Workday, UC AP Recruit, `faculty-searches.mit.edu`; see "How csjobs
+   finds postings"). Search it for computer, computing, AI, machine learning, data science, cyber, informatics, and
+   software, and read each hit's unit: statistics, operations research, business information systems, public policy,
+   biostatistics, and engineering institutes regularly run searches aimed at CS PhDs. Record the portal in
+   `relatedUnits` as `{ "name": "University faculty portal (all departments)", "url": … }`. A department page saying
+   "no vacancies" does not make the school `complete` until the portal has been searched.
 3. For every CS-relevant opening in the CS department itself (computer science, computer engineering, AI, data
    science, cybersecurity, or school/college-of-computing units), add or update one record.
 4. For records already in `jobs.json` for this school: if the posting is still listed, set `lastSeenAt` to today

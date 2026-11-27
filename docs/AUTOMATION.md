@@ -223,6 +223,11 @@ Monday and Friday, the two weekdays with no other routine.
    posting the lead pointed to, plus anything else open, with `sourcePost` on the record that came from the post.
    List the leads you used and the ones you skipped (with the reason) in the PR. If the script can't reach Bluesky,
    say so in the PR and continue; X leads still print. If web search is unavailable, run without `--x` and say so.
+1c. **Board leads.** Run `npm run leads:boards -- --country US --days 21` (TASKS/jobs.md, "Job-board leads"). Take up
+   to 5 more schools from its first two groups (schools missing from `jobs-sources.json`, then schools with no active
+   record), skipping ones already in the queue, and swap them in for the last queue schools so the run stays at 30.
+   For a school that is due anyway, check its board leads while you crawl it. List the leads you used and skipped in
+   the PR. If a board is unreachable the script says so; note it in the PR and continue.
 2. Crawl each school per the playbook and record its result in `scripts/data/jobs-sources.json`. Open one PR
    even if only the sources file changed.
 3. Every new or changed deadline and every `closedAt` goes in the PR description with its official URL; the
@@ -237,7 +242,8 @@ spawn subagents). Runs Tuesday.
 1. Pick the queue with `npm run maintain:jobs -- --country intl --limit 25`: non-US schools from
    `scripts/data/jobs-sources.json` (CSRankings' non-US institutions plus any added with `--add ... --country XX`),
    never-checked first. Then gather X URLs and run `npm run leads:social -- --kind jobs --country intl --days 14 --x /tmp/x-leads.txt`
-   exactly as `jobs` step 1b does, and swap up to 5 lead schools in for the last queue schools.
+   exactly as `jobs` step 1b does, and swap up to 5 lead schools in for the last queue schools. Then run
+   `npm run leads:boards -- --country intl --days 21` as `jobs` step 1c does and swap in up to 5 more.
 2. Crawl each school's official vacancy portal and CS/computing department pages, plus related units (ECE,
    informatics, data science). Add verified postings with the international fields (`country` ISO code, `city`,
    `state` as province/region or empty). Record every school's result in its sources row, including "no open CS
