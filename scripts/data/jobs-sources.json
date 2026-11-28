@@ -372,22 +372,15 @@
     "facultyCount": 145,
     "jobsUrl": null,
     "state": "MI",
-    "lastCheckedAt": "2026-10-12T12:55:56Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "blocked",
-    "summary": "The official CSE faculty-hiring page is returning 403 to direct page access, although its indexed official page and CRA lead describe current tenure-track searches. Per crawl rules, no record was added until the official posting can be read. UMSI, EECS/ECE, and MIDAS also returned 403 on the previous scan.",
+    "summary": "cse.engin.umich.edu answered HTTP 403 (Cloudflare check) on 2026-11-27; not bypassed. Robotics HCAI posting and Robotics chair page still live and rechecked.",
     "checkedUrls": [
-      "https://cse.engin.umich.edu/about/faculty-hiring/",
-      "https://www.si.umich.edu/about-umsi/careers",
-      "https://eecs.engin.umich.edu/about/careers/",
-      "https://ece.engin.umich.edu/about/employment/",
-      "https://midas.umich.edu/jobs/",
-      "https://careers.umich.edu/search-jobs",
-      "https://careers.umich.edu/browse-jobs/career_interests/230",
-      "https://careers.umich.edu/job_detail/283509",
-      "https://careers.umich.edu/job_detail/280385/asst-professor",
-      "https://cse.engin.umich.edu/people/faculty-hiring/"
+      "https://cse.engin.umich.edu/about/employment",
+      "https://careers.umich.edu/job_detail/283509/professor-associate-professor-human-centered-embodied-artificial-intelligence",
+      "https://robotics.umich.edu/about/jobs/"
     ],
-    "deferredUntil": "2026-11-02",
+    "deferredUntil": "2026-12-11",
     "relatedUnits": [
       {
         "name": "Robotics Department (College of Engineering)",
@@ -446,15 +439,17 @@
     "facultyCount": 138,
     "jobsUrl": "https://eecs.berkeley.edu/connect/faculty-jobs/",
     "state": "CA",
-    "lastCheckedAt": "2026-11-06T22:30:00Z",
-    "outcome": "complete",
-    "summary": "EECS faculty-jobs page lists 5 live recruitments; added EECS open-rank (JPF05591); refreshed 5 recorded; HCI (JPF05482) and Engineering+AI (JPF05144) now closed. CDSS page not rechecked this run.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Rechecked 7 existing postings on 2026-11-27: 3 closed (HTTP 410 \"no longer accepting applications\"), 4 live; added CDSS lecturer pool (JPF05633) from a Bluesky lead. Other units not read.",
     "checkedUrls": [
-      "https://eecs.berkeley.edu/connect/faculty-jobs/",
-      "https://aprecruit.berkeley.edu/JPF05591",
-      "https://aprecruit.berkeley.edu/JPF05482"
+      "https://aprecruit.berkeley.edu/JPF05633",
+      "https://aprecruit.berkeley.edu/JPF05560",
+      "https://aprecruit.berkeley.edu/JPF05568",
+      "https://aprecruit.berkeley.edu/JPF05569",
+      "https://aprecruit.berkeley.edu/JPF05584",
+      "https://aprecruit.berkeley.edu/JPF05591"
     ],
-    "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "College of Computing, Data Science, and Society job opportunities",
@@ -524,24 +519,12 @@
     "facultyCount": 136,
     "jobsUrl": "https://bowers.cornell.edu/careers",
     "state": "NY",
-    "lastCheckedAt": "2026-10-30T00:00:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "incomplete",
-    "summary": "2026-10-30: Bowers page now lists new CS, Information Science and ECE tenure-track searches; CS and IS postings not yet added (no posting URL read); Cornell Tech lists no 2026-27 openings. Prior notes: Rechecked Bowers CS and Cornell Tech listings; refreshed the live Cornell Tech lecturer and added current ECE computer-engineering teaching and tenure-track searches from official pages and application records. Cornell CS hiring page returns 403 and wider computing-adjacent discovery remains incomplete; revisit by 2026-10-17.",
+    "summary": "Added the Center for Data Science research professor/postdoc posting from a Bluesky lead; other Cornell units and existing records not rechecked this run.",
     "checkedUrls": [
-      "https://bowers.cornell.edu/careers",
-      "https://tech.cornell.edu/jobs/",
-      "https://www.cs.cornell.edu/information/jobpostings",
-      "https://infosci.cornell.edu/",
-      "https://stat.cornell.edu/",
-      "https://www.ece.cornell.edu/",
-      "https://hr.cornell.edu/jobs",
-      "https://www.cs.cornell.edu/jobs",
-      "https://www.duffield.cornell.edu/ece/about/employment",
-      "https://www.duffield.cornell.edu/ece/open-faculty-and-staff-searches/",
-      "https://academicjobsonline.org/ajo/jobs/32961",
-      "https://academicjobsonline.org/ajo/jobs/32962"
+      "https://apps.hr.cornell.edu/recruiting/facultyview.cfm?posting_id=_JOB_POSTING-3-112843"
     ],
-    "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "Cornell Bowers careers (CS, Information Science, Statistics and Data Science)",
@@ -1002,13 +985,13 @@
     "facultyCount": 110,
     "jobsUrl": "https://www.colorado.edu/cs/jobs",
     "state": "CO",
-    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "incomplete",
-    "summary": "CS jobs page read 2026-10-26: three tenure-track searches (AI, architecture/systems, quantum) still listed. ECEE record not rechecked.",
+    "summary": "CS jobs page read 2026-11-27: three tenure-track searches listed (architecture/systems, quantum, AI). Quantum posting live; the AI, architecture/systems, and ECEE postings now return \"Page not found\" and were closed. Other units not rechecked.",
     "checkedUrls": [
-      "https://www.colorado.edu/cs/jobs"
+      "https://www.colorado.edu/cs/jobs",
+      "https://jobs.colorado.edu/jobs/JobDetail/Tenure-Track-Faculty-in-Quantum-Computation/74741"
     ],
-    "deferredUntil": "2026-10-11",
     "relatedUnits": [
       {
         "name": "Electrical, Computer & Energy Engineering (CU Boulder Jobs)",
@@ -1033,13 +1016,16 @@
     "facultyCount": 109,
     "jobsUrl": "https://www.mccormick.northwestern.edu/computer-science/careers",
     "state": "IL",
-    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "incomplete",
-    "summary": "CS careers page read 2026-10-26: CS (AI/ML, PL) and quantum computing searches still listed. Other units not rechecked.",
+    "summary": "CS careers page read 2026-11-27: CS and quantum computing searches still listed and their application forms live; Statistics & Data Science page says its application period has closed. Other units not rechecked.",
     "checkedUrls": [
-      "https://www.mccormick.northwestern.edu/computer-science/careers/"
+      "https://www.mccormick.northwestern.edu/computer-science/careers",
+      "https://facultyrecruiting.northwestern.edu/apply/MjYzMw==",
+      "https://facultyrecruiting.northwestern.edu/apply/MjY0NQ==",
+      "https://statistics.northwestern.edu/about/faculty-search-.html",
+      "https://niinstitute.kellogg.northwestern.edu/job-postings/open-rank-faculty-position-ai-innovation"
     ],
-    "deferredUntil": "2026-10-11",
     "relatedUnits": [
       {
         "name": "Industrial Engineering & Management Sciences: Open Positions",
@@ -1576,19 +1562,16 @@
     "facultyCount": 84,
     "jobsUrl": "https://www.cs.rutgers.edu/about/employment",
     "state": "NJ",
-    "lastCheckedAt": "2026-11-20T12:00:00Z",
-    "outcome": "complete",
-    "summary": "CS employment page still lists the Lecturers pool; jobs.rutgers.edu posting 277355 live.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Added CS tenure-track (283232) and DIMACS postdoc (284683) from Bluesky leads; CS lecturers pool (277355) still live. ECE (284325) and Robotics (284335, Mechanical & Aerospace) tenure-track posts seen but not added: they do not name computing areas. Other units not read.",
     "checkedUrls": [
-      "https://www.cs.rutgers.edu/about/employment",
+      "https://jobs.rutgers.edu/postings/283232",
+      "https://jobs.rutgers.edu/postings/284683",
       "https://jobs.rutgers.edu/postings/277355",
-      "https://ece.rutgers.edu/about/faculty-hiring",
-      "https://jobs.rutgers.edu/postings/275804",
-      "https://jobs.rutgers.edu/postings/277279",
-      "https://sci.rutgers.edu/about/employment-opportunities",
-      "https://jobs.rutgers.edu/postings/search?query=Electrical"
+      "https://jobs.rutgers.edu/postings/284325",
+      "https://jobs.rutgers.edu/postings/284335"
     ],
-    "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "Electrical and Computer Engineering faculty hiring",
@@ -1748,21 +1731,15 @@
     "facultyCount": 78,
     "jobsUrl": "https://cs.unc.edu/about/faculty-hiring/",
     "state": "NC",
-    "lastCheckedAt": "2026-11-20T12:00:00Z",
-    "outcome": "complete",
-    "summary": "CS faculty-hiring page and posting 326195 live (screening begins Dec 1, 2026). 326792 is gone (closedAt set). 325086 and 325091 still render after their Nov 16 deadlines; left unchanged.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Existing CS posting 326195 live; two School of Data Science and Society postings closed (\"This posting is not available\"). Leads 328880/328881 rendered only the generic listing page and were not added.",
     "checkedUrls": [
-      "https://cs.unc.edu/about/faculty-hiring/",
       "https://unc.peopleadmin.com/postings/326195",
-      "https://unc.peopleadmin.com/postings/326792",
       "https://unc.peopleadmin.com/postings/325086",
       "https://unc.peopleadmin.com/postings/325091",
-      "https://unc.peopleadmin.com/postings/325088",
-      "https://sils.unc.edu/",
-      "https://unc.peopleadmin.com/postings/search",
-      "https://unc.peopleadmin.com/postings/325947"
+      "https://unc.peopleadmin.com/postings/328880"
     ],
-    "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "School of Data and Information Sciences (Division of Data Science and Society)",
@@ -2436,13 +2413,15 @@
     "facultyCount": 61,
     "jobsUrl": "https://engineering.tufts.edu/cs/about/job-opportunities",
     "state": "MA",
-    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "incomplete",
-    "summary": "CS employment page read 2026-10-26: TIAI director/Stern professor search live (Dec 15 review date matches record). ECE and School of Engineering pages not rechecked this run.",
+    "summary": "CS employment page and Interfolio posts read 2026-11-27: TIAI director, adjunct lecturer, and ECE teaching posts live; the cybersecurity postdoc is no longer listed and was closed. ECE and School of Engineering pages not rechecked.",
     "checkedUrls": [
-      "https://engineering.tufts.edu/cs/about/employment-opportunities"
+      "https://engineering.tufts.edu/cs/about/employment-opportunities",
+      "https://apply.interfolio.com/193535",
+      "https://apply.interfolio.com/186087",
+      "https://apply.interfolio.com/189281"
     ],
-    "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "School of Engineering employment opportunities",
@@ -2464,13 +2443,12 @@
     "facultyCount": 60,
     "jobsUrl": "https://engineering.nd.edu/about-the-college/open-faculty-positions/",
     "state": "IN",
-    "lastCheckedAt": "2026-10-26T22:30:00Z",
-    "outcome": "blocked",
-    "summary": "Department hiring page (https://engineering.nd.edu/about-the-college/open-faculty-positions/) returned HTTP 502 \"upstream request failed\" from the run's egress proxy on two attempts (a network policy denial, not the site); nothing read. Existing postings left untouched; retry from an environment that can reach the site.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Added the CSE ethics-and-computing tenure-track Interfolio posting (195819) from a Bluesky lead. The engineering open-positions page was not reread, so the earlier open-rank CSE record is unconfirmed and may be the same search.",
     "checkedUrls": [
-      "https://engineering.nd.edu/about-the-college/open-faculty-positions/"
+      "https://apply.interfolio.com/195819"
     ],
-    "deferredUntil": "2026-11-16",
     "relatedUnits": [
       {
         "name": "Electrical Engineering",
@@ -2518,13 +2496,14 @@
     "facultyCount": 59,
     "jobsUrl": "https://academicpositions.harvard.edu/postings/search?query=computer+science",
     "state": "MA",
-    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "incomplete",
-    "summary": "Harvard academic positions board (22 postings, query computer science) read 2026-10-26: SEAS CS tenure-track search live. Other postdoc records not individually rechecked.",
+    "summary": "Rechecked 14 existing Harvard postings individually on 2026-11-27: 2 closed (\"This posting is not available\"), the rest live. Board search for new CS postings not rerun; leads for new HBS/HMS/HSPH postdocs (postings 17126, 17109, 17075) not added.",
     "checkedUrls": [
-      "https://academicpositions.harvard.edu/postings/search?query=computer+science"
+      "https://academicpositions.harvard.edu/postings/16840",
+      "https://academicpositions.harvard.edu/postings/16775",
+      "https://academicpositions.harvard.edu/postings/16748"
     ],
-    "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "Harvard Academic Positions board",
@@ -2640,13 +2619,12 @@
     "facultyCount": 55,
     "jobsUrl": "https://cdm.depaul.edu/about/jobs",
     "state": "IL",
-    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "incomplete",
-    "summary": "CDM jobs page loaded 2026-10-26 but its Full-Time and Adjunct lists are collapsed accordions, not read. Existing records untouched.",
+    "summary": "CDM jobs page loaded 2026-11-27 but its Full-Time and Adjunct lists are still collapsed accordions not exposed in the rendered text. Existing records untouched.",
     "checkedUrls": [
       "https://cdm.depaul.edu/about/jobs"
     ],
-    "deferredUntil": null,
     "relatedUnits": [],
     "relatedCheckedAt": "2026-10-08T20:00:00Z",
     "country": "US",
@@ -2777,13 +2755,14 @@
     "facultyCount": 53,
     "jobsUrl": "https://cs.brown.edu/about/positions/",
     "state": "RI",
-    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "incomplete",
-    "summary": "CS positions page read 2026-10-26: AI professor-of-practice searches live (full consideration Nov 1; no H-1B sponsorship stated). Compbio posting not rechecked.",
+    "summary": "CS positions page and both Interfolio posts read 2026-11-27: AI Professor of the Practice and computational biology tenure-track searches still live (compbio deadline on record already passed).",
     "checkedUrls": [
-      "https://cs.brown.edu/about/positions/"
+      "https://cs.brown.edu/about/positions/",
+      "https://apply.interfolio.com/189906",
+      "https://apply.interfolio.com/192839"
     ],
-    "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "Data Science Institute / CCMB (joint computational biology search)",
@@ -2839,13 +2818,12 @@
     "facultyCount": 52,
     "jobsUrl": "https://employment.ku.edu/jobs/faculty",
     "state": "KS",
-    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "incomplete",
-    "summary": "KU faculty postings list read 2026-10-26: Assistant Professor in Computer Science/AI (33947BR, review begins 2026-11-16) still listed. Wireless communications EECS posting not added.",
+    "summary": "Posting 33947BR (Assistant Professor in Computer Science/AI) still live 2026-11-27; the full faculty list was not reread.",
     "checkedUrls": [
-      "https://employment.ku.edu/jobs/faculty"
+      "https://employment.ku.edu/jobs/faculty/assistant-professor-in-computer-science-ai/33947br"
     ],
-    "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "KU Employment faculty postings",
@@ -2927,13 +2905,12 @@
     "facultyCount": 48,
     "jobsUrl": "https://cs.engr.uky.edu/about-4/jobs",
     "state": "KY",
-    "lastCheckedAt": "2026-10-26T22:30:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "incomplete",
-    "summary": "CS jobs page read 2026-10-26: assistant professor search (start Aug 2027) still listed. UKJobs not rechecked.",
+    "summary": "UKJobs posting 650924 (Assistant Professor in CS, open until filled) still live 2026-11-27; department jobs page and UKJobs search not reread.",
     "checkedUrls": [
-      "https://cs.engr.uky.edu/about-4/jobs"
+      "https://ukjobs.uky.edu/postings/650924"
     ],
-    "deferredUntil": null,
     "relatedUnits": [
       {
         "name": "UKJobs (university-wide postings)",
@@ -18870,16 +18847,15 @@
     "region": "northamerica",
     "jobsUrl": "https://msudenver.wd1.myworkdayjobs.com/en-US/MSUDenver",
     "state": "CO",
-    "lastCheckedAt": "2026-10-19",
-    "outcome": "complete",
-    "summary": "1 open CS tenure-track search (Assistant Professor of Computer Sciences, priority date 2026-10-15, open until filled). Other CS/cyber/math listings are affiliate (adjunct) instructor posts, not added. Related units not checked.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Workday listing page read (138 jobs, first 20 shown, no CS posting among them); the CS Assistant Professor posting JR105817 is still live. Related units not checked.",
     "checkedUrls": [
-      "https://msudenver.wd1.myworkdayjobs.com/en-US/MSUDenver?q=computer",
-      "https://www.msudenver.edu/careers/"
+      "https://msudenver.wd1.myworkdayjobs.com/en-US/MSUDenver",
+      "https://msudenver.wd1.myworkdayjobs.com/en-US/MSUDenver/job/Denver-Colorado/Assistant-Professor-of-Computer-Sciences_JR105817"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null,
     "csrankings": false,
     "kind": "teaching"
   },
@@ -19084,15 +19060,15 @@
     "region": "northamerica",
     "jobsUrl": null,
     "state": "ME",
-    "lastCheckedAt": "2026-10-16T21:00:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "blocked",
-    "summary": "Department page answered HTTP 403; not bypassed.",
+    "summary": "colby.edu/human-resources answered HTTP 403 (Cloudflare) on 2026-11-27; not bypassed.",
     "checkedUrls": [
-      "https://www.colby.edu/academics/computer-science/"
+      "https://www.colby.edu/human-resources/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-06",
+    "deferredUntil": "2026-12-18",
     "csrankings": false,
     "kind": "liberal-arts"
   },
@@ -19228,16 +19204,14 @@
     "region": "northamerica",
     "jobsUrl": "https://www.whitman.edu/provost/faculty-employment-opportunities",
     "state": "WA",
-    "lastCheckedAt": "2026-10-23T22:30:00Z",
-    "outcome": "incomplete",
-    "summary": "Faculty employment page found (https://www.whitman.edu/provost/faculty-employment-opportunities); CS listing not confirmed. Recheck.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "complete",
+    "summary": "Faculty employment page read 2026-11-27: Art, Biology, Geology, Mathematics, Molecular Genetics, Physics, Politics searches listed; no open CS search. Recheck in January.",
     "checkedUrls": [
-      "https://www.whitman.edu/human-resources",
       "https://www.whitman.edu/provost/faculty-employment-opportunities"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null,
     "csrankings": false,
     "kind": "liberal-arts"
   },
@@ -19541,15 +19515,15 @@
     "region": "northamerica",
     "jobsUrl": null,
     "state": "GA",
-    "lastCheckedAt": "2026-10-16T21:00:00Z",
-    "outcome": "blocked",
-    "summary": "Department site and PeopleAdmin unreachable from the crawler (tunnel connection failed / 502).",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "HR careers page rendered with no job list on 2026-11-27 (job system not exposed); nothing read.",
     "checkedUrls": [
-      "https://cit.georgiasouthern.edu/cs/"
+      "https://www.georgiasouthern.edu/offices/human-resources/careers"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-06",
+    "deferredUntil": "2026-12-18",
     "csrankings": false,
     "kind": "R2"
   },
@@ -19993,15 +19967,15 @@
     "region": "northamerica",
     "jobsUrl": null,
     "state": "NY",
-    "lastCheckedAt": "2026-10-16T21:00:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "not_found",
-    "summary": "CS department URL in the row returns 404; HR page found but no faculty hiring list located.",
+    "summary": "Guessed employment URL returned 404 on 2026-11-27; no faculty hiring page found.",
     "checkedUrls": [
-      "https://www.clarkson.edu/human-resources"
+      "https://www.clarkson.edu/about/employment"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-06",
+    "deferredUntil": "2026-12-18",
     "csrankings": false,
     "kind": "R2"
   },
@@ -20013,15 +19987,15 @@
     "region": "northamerica",
     "jobsUrl": null,
     "state": "NJ",
-    "lastCheckedAt": "2026-10-16T21:00:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "not_found",
-    "summary": "No hiring page found; guessed employment URL returned 404.",
+    "summary": "Guessed employment URL returned 404 on 2026-11-27; no faculty hiring page found.",
     "checkedUrls": [
-      "https://www.fdu.edu/academics/colleges-schools/"
+      "https://www.fdu.edu/about-fdu/employment/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-06",
+    "deferredUntil": "2026-12-18",
     "csrankings": false,
     "kind": "masters"
   },
@@ -20033,15 +20007,15 @@
     "region": "northamerica",
     "jobsUrl": null,
     "state": "DC",
-    "lastCheckedAt": "2026-10-16T21:00:00Z",
-    "outcome": "blocked",
-    "summary": "Department site unreachable from the crawler (tunnel connection failed); careers URL guessed 404.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "not_found",
+    "summary": "howard.edu/careers returned 404 on 2026-11-27; no faculty hiring page found.",
     "checkedUrls": [
-      "https://eng.howard.edu/computer-science"
+      "https://www.howard.edu/careers"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-06",
+    "deferredUntil": "2026-12-18",
     "csrankings": false,
     "kind": "R1"
   },
@@ -20072,17 +20046,18 @@
     "facultyCount": 0,
     "country": "US",
     "region": "northamerica",
-    "jobsUrl": null,
+    "jobsUrl": "https://home.hamptonu.edu/hr/faculty-opportunities/",
     "state": "VA",
-    "lastCheckedAt": "2026-10-16T21:00:00Z",
-    "outcome": "not_found",
-    "summary": "CS department URL returns 404; no hiring page found.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "complete",
+    "summary": "Faculty opportunities page read 2026-11-27: CS tenure-track Assistant/Associate Professor post (listed since Dec 2025, start stated as Jan/Fall 2026) added. Three Research Assistant Professor posts in engineering (ML and control, autonomy, software engineering) are dated July 2025 and were not added; adjunct CS instructor posts skipped.",
     "checkedUrls": [
-      "https://home.hamptonu.edu/science/compsci"
+      "https://home.hamptonu.edu/hr/faculty-opportunities/",
+      "https://home.hamptonu.edu/hr/2025/12/04/assistant-associate-professor-tenure-track-computer-science-school-of-science/",
+      "https://www.schooljobs.com/careers/hamptonu/promotionaljobs"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-06",
     "csrankings": false,
     "kind": "R2"
   },
@@ -20344,16 +20319,15 @@
     "region": "northamerica",
     "jobsUrl": null,
     "state": "CA",
-    "lastCheckedAt": "2026-10-16T21:00:00Z",
-    "outcome": "blocked",
-    "summary": "Careers page found but its job system (csod) was unreachable from the crawler (tunnel connection failed); no faculty list read.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "not_found",
+    "summary": "csueastbay.edu/employment returned 404 on 2026-11-27; no faculty list found.",
     "checkedUrls": [
-      "https://www.csueastbay.edu/about/career-opportunities.html",
-      "https://csueb.csod.com/"
+      "https://www.csueastbay.edu/employment/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-06",
+    "deferredUntil": "2026-12-18",
     "csrankings": false,
     "kind": "masters"
   },
@@ -20473,15 +20447,16 @@
     "region": "northamerica",
     "jobsUrl": "https://nku.wd108.myworkdayjobs.com/NKU_External",
     "state": "KY",
-    "lastCheckedAt": "2026-10-19",
-    "outcome": "complete",
-    "summary": "2 open tenure-track searches in the School of Computing and Analytics (Cybersecurity & IT; Information Systems & Analytics), priority 2026-11-01. Searched Workday for \"computer\" only; other units not checked.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Workday listing page read (91 jobs, first 20 shown; an Engineering Technology tenure-track post is listed but outside computing); both School of Computing and Analytics searches (JR100406, JR100430) still live. Other units not checked.",
     "checkedUrls": [
-      "https://nku.wd108.myworkdayjobs.com/NKU_External?q=computer"
+      "https://nku.wd108.myworkdayjobs.com/NKU_External",
+      "https://nku.wd108.myworkdayjobs.com/en-US/NKU_External/job/Highland-Heights-Ky/Cybersecurity-and-Information-Technology-Assistant-Professor_JR100406",
+      "https://nku.wd108.myworkdayjobs.com/en-US/NKU_External/job/Highland-Heights-Ky/Two-Tenure-Track-Assistant-Professor-Positions-in-Information-Systems---Analytics_JR100430"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": null,
     "csrankings": false,
     "kind": "masters"
   },
@@ -20554,16 +20529,15 @@
     "region": "northamerica",
     "jobsUrl": null,
     "state": "TX",
-    "lastCheckedAt": "2026-10-16T21:00:00Z",
-    "outcome": "blocked",
-    "summary": "Job site (hccs.referrals.selectminds.com) answered HTTP 403; not bypassed.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Careers page rendered with no faculty job list on 2026-11-27; nothing read.",
     "checkedUrls": [
-      "https://www.hccs.edu/careers/",
-      "https://hccs.referrals.selectminds.com/"
+      "https://www.hccs.edu/careers/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-06",
+    "deferredUntil": "2026-12-18",
     "csrankings": false,
     "kind": "community-college"
   },
@@ -20616,16 +20590,15 @@
     "region": "northamerica",
     "jobsUrl": null,
     "state": "CA",
-    "lastCheckedAt": "2026-10-16T21:00:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "blocked",
-    "summary": "Homepage answered HTTP 403; not bypassed. District jobs page (fhda.edu/jobs) rendered no list.",
+    "summary": "deanza.edu answered HTTP 403 (Cloudflare) on 2026-11-27; not bypassed.",
     "checkedUrls": [
-      "https://www.deanza.edu/",
-      "https://www.fhda.edu/jobs/"
+      "https://www.deanza.edu/"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-06",
+    "deferredUntil": "2026-12-18",
     "csrankings": false,
     "kind": "community-college"
   },
@@ -20720,13 +20693,11 @@
     "region": "northamerica",
     "jobsUrl": "https://www.broward.edu/jobs/",
     "state": "FL",
-    "lastCheckedAt": "2026-10-14T05:19:02Z",
-    "outcome": "blocked",
-    "summary": "Reviewed the official employment page and Information Technology & Engineering page. A previously indexed Assistant Professor, STEM Information Technology Workday posting begins in August 2026, but the live Workday detail returned no readable content in this pass, so its current status could not be confirmed and it was not added.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Official jobs page rendered with no job list (2026-11-27); nothing read, Workday posting status still unverified.",
     "checkedUrls": [
-      "https://www.broward.edu/jobs/",
-      "https://www.broward.edu/iteng/",
-      "https://browardcollege.wd5.myworkdayjobs.com/en-US/FT/job/Assistant-Professor--STEM--Information-Technology--Multiple-Vacancies--Central-and-South_REQ-000046893-1"
+      "https://www.broward.edu/jobs/"
     ],
     "relatedUnits": [
       {
@@ -20735,7 +20706,7 @@
       }
     ],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-10-28",
+    "deferredUntil": "2026-12-18",
     "csrankings": false,
     "kind": "community-college"
   },
@@ -20801,15 +20772,15 @@
     "region": "northamerica",
     "jobsUrl": null,
     "state": "OH",
-    "lastCheckedAt": "2026-10-16T21:00:00Z",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
     "outcome": "not_found",
-    "summary": "HR careers page rendered without a job-list link; no faculty openings page found.",
+    "summary": "HR careers page (2026-11-27) lists no faculty job list or link to one; no CS openings found.",
     "checkedUrls": [
       "https://www.tri-c.edu/administrative-departments/human-resources/careers.html"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-06",
+    "deferredUntil": "2026-12-18",
     "csrankings": false,
     "kind": "community-college"
   },
@@ -20898,15 +20869,16 @@
     "region": "northamerica",
     "jobsUrl": null,
     "state": "TX",
-    "lastCheckedAt": "2026-10-16T21:00:00Z",
-    "outcome": "not_found",
-    "summary": "Only a marketing careers page found; no faculty job list located.",
+    "lastCheckedAt": "2026-11-27T23:00:00Z",
+    "outcome": "incomplete",
+    "summary": "Employment page links to hcm.lonestar.edu job search, which rendered no job list in the headless browser on 2026-11-27; nothing read.",
     "checkedUrls": [
-      "http://wwwapps.lonestar.edu/DigitalMarketing/HTML/Careers.html"
+      "https://www.lonestar.edu/employment/",
+      "https://hcm.lonestar.edu/hcmjob.jsp"
     ],
     "relatedUnits": [],
     "relatedCheckedAt": null,
-    "deferredUntil": "2026-11-06",
+    "deferredUntil": "2026-12-18",
     "csrankings": false,
     "kind": "community-college"
   },
