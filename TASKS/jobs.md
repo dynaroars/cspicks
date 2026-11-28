@@ -134,7 +134,8 @@ board, `--json` prints the leads as data, `--all` includes known and lapsed ones
 - A board school that isn't in `jobs-sources.json` usually exists under a CSRankings spelling ("Univ. of California -
   Berkeley", "Massachusetts Inst. of Technology", "Missouri S&T"): search the file before `--add`. Add stubborn
   spellings to `ALIASES` in `scripts/board-leads.mjs`.
-- A lead marked "non-CS unit" is the related-unit gap at that school: crawl the unit, and add its page (or the
+- A lead marked "non-CS unit" is in scope when it hires CS (step 2 of "Crawling a school"), and it is the
+  related-unit gap at that school: crawl the unit, and add its page (or the
   university-wide portal) to the row's `relatedUnits`.
 
 ### How csjobs finds postings (and what we copy)
@@ -181,10 +182,14 @@ It is an ordinary browser session with no user-agent spoofing. A 403 or challeng
    college-of-computing or engineering-wide searches. After the CS page, find the school's other computing-adjacent
    units (from the university's college/department directory or the engineering/information school site), read
    their hiring pages, and list each official department/hiring page in the sources row's `relatedUnits`
-   (`[{ "name", "url" }]`) even when no position is open, so later crawls revisit those exact pages. Include a
-   posting from such a unit when a CS PhD is plainly a target: it names computing, AI, ML,
-   data, security, networks, systems, or software, or it is an open or cluster search a CS PhD would apply to.
-   Skip positions plainly outside computing. Record the unit in `department` as it appears on the posting
+   (`[{ "name", "url" }]`) even when no position is open, so later crawls revisit those exact pages.
+   **The hiring unit doesn't matter; whether it hires CS does.** Include a posting from any unit (medicine,
+   business, psychology, mechanical engineering, policy, physics…) when a CS PhD is eligible and the work is
+   computing: the posting names computer science (or computing/informatics) among the accepted degrees, or the
+   role itself is AI, ML, data science, robotics, security, HCI, networks, systems, or software, or it is an open or
+   cluster search a CS PhD would apply to. Skip it only when the posting requires a non-CS degree (e.g. "PhD in
+   civil engineering", "PhD in sociology") or the work is not computing (power systems, photonics, materials,
+   pure statistics). Adjunct pools and per-course part-time roles are not searches. Record the unit in `department` as it appears on the posting
    (e.g. "College of Information Sciences and Technology"); `school` stays the name in the sources row.
    **Search the university-wide faculty portal too**, not only department pages: most schools post every faculty
    search in one system (Interfolio, PeopleAdmin, Workday, UC AP Recruit, `faculty-searches.mit.edu`; see "How csjobs

@@ -204,7 +204,7 @@ async function main() {
   for (const lead of leads) {
     if (rank(lead) !== group) { group = rank(lead); console.log(`== ${labels[group]}`); }
     console.log(`- ${lead.matched ?? `"${lead.school}"`} (${lead.country}${lead.lastCheckedAt ? `, crawled ${lead.lastCheckedAt}` : ''}, ${lead.active.length} active) [${lead.board}]`
-      + `\n    ${lead.title} — ${lead.department}${lead.relatedUnit ? '  ← non-CS unit: add to relatedUnits' : ''}`
+      + `\n    ${lead.title} — ${lead.department}${lead.relatedUnit ? '  ← non-CS unit: in scope if it hires CS; add to relatedUnits' : ''}`
       + `\n    posted ${lead.posted ?? '?'}; deadline ${lead.deadline || '?'}${lead.type ? `; ${lead.type}` : ''}\n    ${lead.links.join(' ')}`);
   }
 }
