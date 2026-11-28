@@ -24061,6 +24061,29 @@
     "venueKeys": [
       "sc"
     ],
+    "year": 2027,
+    "description": "International Conference for High Performance Computing, Networking, Storage, and Analysis",
+    "link": "https://sc27.supercomputing.org/",
+    "seriesLink": "https://supercomputing.org/",
+    "date": "November 14–19, 2027",
+    "place": "Denver, CO, USA (Colorado Convention Center)",
+    "abstractDeadline": "2027-03-25",
+    "deadline": "2027-04-01",
+    "rebuttalDate": "2027-05-31–2027-06-03",
+    "notificationDate": "2027-07-01",
+    "note": "Paper submissions open 2027-02-25; paper deadline has no extensions.",
+    "generalChair": "Kathryn Mohror",
+    "programChair": "Devesh Tiwari, Miwako Tsuji",
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true
+  },
+  {
+    "name": "SC",
+    "venueKeys": [
+      "sc"
+    ],
     "year": 2026,
     "description": "International Conference for High Performance Computing, Networking, Storage, and Analysis",
     "link": "https://sc26.supercomputing.org/",
@@ -44854,6 +44877,29 @@
     "venueKeys": [
       "icer"
     ],
+    "year": 2027,
+    "description": "ACM Conference on International Computing Education Research",
+    "link": "https://2027.icer.acm.org/",
+    "seriesLink": "https://icer2026.acm.org/series/icer",
+    "date": "August 2-5, 2027",
+    "place": "Sacramento, California, United States",
+    "abstractDeadline": "2027-04-02",
+    "deadline": "2027-04-09",
+    "rebuttalDate": null,
+    "notificationDate": "2027-05-28",
+    "note": "Conditional-accept revisions due 2027-06-11; final versions due 2027-07-02. Deadlines are 23:59 AoE.",
+    "generalChair": null,
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": true
+  },
+  {
+    "name": "ICER",
+    "venueKeys": [
+      "icer"
+    ],
     "year": 2026,
     "description": "ACM Conference on International Computing Education Research",
     "link": "https://2026.icer.acm.org/",
@@ -46711,6 +46757,29 @@
     "estimated": false,
     "verified": true,
     "generalChair": null
+  },
+  {
+    "name": "IJCAR",
+    "venueKeys": [
+      "ijcar"
+    ],
+    "year": 2028,
+    "description": "International Joint Conference on Automated Reasoning",
+    "link": null,
+    "seriesLink": "https://ijcar.org/",
+    "date": "July 2028 (exact dates TBA)",
+    "place": "Montpellier, France",
+    "abstractDeadline": null,
+    "deadline": null,
+    "rebuttalDate": null,
+    "notificationDate": null,
+    "note": null,
+    "generalChair": "David Delahaye, Simon Robillard",
+    "programChair": null,
+    "acceptanceRate": null,
+    "submissions": null,
+    "estimated": false,
+    "verified": false
   },
   {
     "name": "IJCAR",
