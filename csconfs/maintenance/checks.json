@@ -862,14 +862,14 @@
       "proposals": []
     },
     "COLM": {
-      "lastCheckedAt": "2026-11-07T20:00:00.000Z",
+      "lastCheckedAt": "2026-11-28T20:05:57.505Z",
       "outcome": "not_found",
-      "summary": "colmweb.org redirects to colm.cc, which covers only COLM 2026 (San Francisco, Oct 6-9, 2026); no 2027 information published.",
+      "summary": "colmweb.org redirects to colm.cc, which still shows only COLM 2026 (San Francisco, Oct 6-9); no COLM 2027 page (colm.cc/2027 is 404).",
       "checkedUrls": [
         "https://colmweb.org/",
         "https://colm.cc/"
       ],
-      "deferredUntil": "2026-11-28T20:00:00.000Z",
+      "deferredUntil": "2026-12-19T20:05:57.505Z",
       "proposals": []
     },
     "ACSAC": {
@@ -1153,13 +1153,14 @@
       ]
     },
     "ICCAD": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-28T20:05:57.505Z",
       "outcome": "not_found",
-      "summary": "not_found",
+      "summary": "iccad.com shows ICCAD 2026 (Nov 8-12, San Jose) with 'see you next year' but no 2027 edition page (iccad.com/2027 is 404).",
       "checkedUrls": [
+        "https://iccad.com/",
         "https://iccad.com/2027"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-19T20:05:57.505Z",
       "proposals": []
     },
     "ICDCS": {
@@ -1182,57 +1183,74 @@
       ]
     },
     "ICDM": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-28T20:05:57.505Z",
       "outcome": "not_found",
-      "summary": "Lead only (third-party trackers): Brisbane, Australia, Nov 15-18, 2027; no official site found.",
+      "summary": "No official ICDM 2027 site reachable: icdm.org is an unrelated drum-manufacturers site, icdm2027.org and the IEEE ICDM site (www3.cs.stonybrook.edu/~icdm) returned unreachable/403. Existing 2026 record unchanged.",
       "checkedUrls": [
+        "https://www3.cs.stonybrook.edu/~icdm/",
         "https://icdm2026.neu.edu.cn/main.htm"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-19T20:05:57.505Z",
       "proposals": []
     },
     "ICER": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "researchr site placeholder exists but not public; recheck.",
+      "lastCheckedAt": "2026-11-28T20:05:57.505Z",
+      "outcome": "complete",
+      "summary": "ICER 2027 site confirms Aug 2-5 2027, Sacramento; abstracts Apr 2, papers Apr 9, decisions May 28 (AoE). Added 2027 record; chairs not checked.",
       "checkedUrls": [
-        "https://2027.icer.acm.org/",
-        "https://sigcse.org/events/icer/"
+        "https://2027.icer.acm.org/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
-      "proposals": []
+      "deferredUntil": null,
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://2027.icer.acm.org/"
+          ]
+        }
+      ]
     },
     "ICSOC": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-28T20:05:57.505Z",
       "outcome": "not_found",
-      "summary": "Only aggregator (WASET/conferenceindex) spam listings for 2027 — ignored. ICSOC 2026 not yet held.",
+      "summary": "icsoc.org redirects to the ICSOC 2026 site (Lodz); no 2027 information.",
       "checkedUrls": [
-        "https://icsoc.org/"
+        "https://icsoc.org/",
+        "https://icsoc2026.it.p.lodz.pl/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-19T20:05:57.505Z",
       "proposals": []
     },
     "ICWS": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-28T20:05:57.505Z",
       "outcome": "not_found",
-      "summary": "Lead only (aggregator): IEEE SERVICES 2027 Jul 5-9, 2027, Abu Dhabi; unverified.",
+      "summary": "services.conferences.computer.org/2027/icws/ loads but says 'Our site is coming soon'; no dates. servicessociety.org/icws shows no 2027 edition.",
       "checkedUrls": [
-        "https://services.conferences.computer.org/2027/",
         "https://services.conferences.computer.org/2027/icws/",
         "https://www.servicessociety.org/icws"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-19T20:05:57.505Z",
       "proposals": []
     },
     "IJCAR": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "IJCAR is held in even years (CADE in odd years); next is likely 2028.",
+      "lastCheckedAt": "2026-11-28T20:05:57.505Z",
+      "outcome": "incomplete",
+      "summary": "ijcar.org lists next IJCAR 2028 in Montpellier, France, July 2028 (dates TBA), conference chairs David Delahaye and Simon Robillard; program chairs, site and deadlines TBA. Added unverified 2028 record.",
       "checkedUrls": [
-        "https://ijcar.org/"
+        "https://ijcar.org/",
+        "https://ijcar.org/conferences"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
-      "proposals": []
+      "deferredUntil": "2026-12-05T20:05:57.505Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2028,
+          "sources": [
+            "https://ijcar.org/conferences"
+          ]
+        }
+      ]
     },
     "IMC": {
       "lastCheckedAt": "2026-11-01T20:00:00.000Z",
@@ -1256,14 +1274,14 @@
       ]
     },
     "ISLPED": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-28T20:05:57.505Z",
       "outcome": "not_found",
-      "summary": "The /2027/ path is a placeholder clone of 2026; not evidence.",
+      "summary": "islped.org redirects to the ISLPED 2026 page; no 2027 edition announced.",
       "checkedUrls": [
-        "https://www.islped.org/2027/",
-        "https://islped.org/"
+        "https://islped.org/",
+        "https://www.islped.org/2026/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-19T20:05:57.505Z",
       "proposals": []
     },
     "ISMAR": {
@@ -1368,26 +1386,36 @@
       ]
     },
     "RTSS": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-28T20:05:57.505Z",
       "outcome": "not_found",
-      "summary": "Not yet announced.",
+      "summary": "2027.rtss.org does not resolve and www.rtss.org shows the 2026 site; no 2027 edition announced.",
       "checkedUrls": [
         "https://2027.rtss.org/",
-        "https://rtss.org/"
+        "https://2026.rtss.org/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-19T20:05:57.505Z",
       "proposals": []
     },
     "SC": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
-      "outcome": "not_found",
-      "summary": "Leads (not official edition evidence): LLNL news says Kathryn Mohror named SC27 General Chair; trackers list Denver, Nov 14-19, 2027.",
+      "lastCheckedAt": "2026-11-28T20:05:57.505Z",
+      "outcome": "incomplete",
+      "summary": "SC27 site confirms Denver, Nov 14-19 2027 (Colorado Convention Center), papers abstract Mar 25 / paper Apr 1 / rebuttal May 31-Jun 3 / notification Jul 1 2027, conference chair and technical program co-chairs. Added 2027 record; the paper schedule was read from the Papers page.",
       "checkedUrls": [
-        "https://supercomputing.org/",
-        "https://sc27.supercomputing.org/"
+        "https://sc27.supercomputing.org/",
+        "https://sc27.supercomputing.org/program/papers/",
+        "https://sc27.supercomputing.org/all-dates-deadlines/",
+        "https://sc27.supercomputing.org/community-engagement/planning-committee/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
-      "proposals": []
+      "deferredUntil": "2026-12-05T20:05:57.505Z",
+      "proposals": [
+        {
+          "action": "add",
+          "year": 2027,
+          "sources": [
+            "https://sc27.supercomputing.org/program/papers/"
+          ]
+        }
+      ]
     },
     "UAI": {
       "lastCheckedAt": "2026-11-03T02:14:09.000Z",
@@ -1505,13 +1533,14 @@
       ]
     },
     "SIGSPATIAL": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-28T20:05:57.505Z",
       "outcome": "not_found",
-      "summary": "not_found",
+      "summary": "sigspatial.org front page shows only SIGSPATIAL 2026 (Riverside); no 2027 site found.",
       "checkedUrls": [
-        "https://www.sigspatial.org/"
+        "https://www.sigspatial.org/",
+        "https://sigspatial2027.sigspatial.org/"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-19T20:05:57.505Z",
       "proposals": []
     },
     "SDM": {
@@ -1590,14 +1619,14 @@
       "proposals": []
     },
     "SOUPS": {
-      "lastCheckedAt": "2026-11-03T02:14:09.000Z",
+      "lastCheckedAt": "2026-11-28T20:05:57.505Z",
       "outcome": "not_found",
-      "summary": "USENIX page blocked; could not confirm whether a 2027 page exists. Series site has no 2027 info.",
+      "summary": "soups.page shows SOUPS 2026 (Hannover); usenix.org/conference/soups2027 exists but is an empty placeholder with no dates.",
       "checkedUrls": [
         "https://soups.page/",
         "https://www.usenix.org/conference/soups2027"
       ],
-      "deferredUntil": "2026-11-24T02:14:09.000Z",
+      "deferredUntil": "2026-12-19T20:05:57.505Z",
       "proposals": []
     },
     "PPSN": {
